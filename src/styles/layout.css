@@ -1,0 +1,212 @@
+/* Header */
+.site-header {
+  background: var(--color-surface);
+  border-block-end: 1px solid var(--color-line);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  padding-block: var(--space-2);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--color-ink);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--color-accent);
+}
+
+.brand__logo {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--color-accent);
+}
+
+.site-nav {
+  order: 3;
+  flex-basis: 100%;
+}
+
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  list-style: none;
+}
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-3);
+  color: var(--color-ink);
+  text-decoration: none;
+  border-block-end: 3px solid transparent;
+}
+
+.site-nav a:hover {
+  color: var(--color-accent);
+}
+
+.site-nav a[aria-current='page'] {
+  border-block-end-color: var(--color-accent);
+  font-weight: 600;
+}
+
+.site-header__tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Empty placeholder for the family-mode toggle (stage 5). */
+.family-slot:empty {
+  display: none;
+}
+
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.lang-switch a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: var(--space-3);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.lang-switch a[aria-current='true'] {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.lang-switch a:focus-visible {
+  outline-offset: -3px;
+}
+
+@media (min-width: 40rem) {
+  .site-header__inner {
+    flex-wrap: nowrap;
+  }
+
+  .site-nav {
+    order: 0;
+    flex-basis: auto;
+    margin-inline-end: auto;
+    margin-inline-start: var(--space-5);
+  }
+}
+
+/* Footer */
+.site-footer {
+  margin-block-start: var(--space-8);
+  padding-block: var(--space-6);
+  background: var(--color-surface);
+  border-block-start: 1px solid var(--color-line);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-5);
+  margin-block-end: var(--space-3);
+  list-style: none;
+}
+
+.site-footer__links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.site-footer p + p {
+  margin-block-start: var(--space-1);
+}
+
+/* Page content */
+.page {
+  padding-block: var(--space-6) 0;
+}
+
+.page > * + * {
+  margin-block-start: var(--space-5);
+}
+
+.notice {
+  max-width: var(--measure);
+  padding: var(--space-3) var(--space-4);
+  border: var(--epoch-frame);
+  border-inline-start: 4px solid var(--epoch-accent);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink-muted);
+}
+
+.hero__tagline {
+  margin-block-start: var(--space-2);
+  color: var(--color-accent);
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-style: italic;
+}
+
+/* Root language chooser */
+.lang-chooser {
+  display: grid;
+  place-content: center;
+  gap: var(--space-5);
+  min-height: 100dvh;
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+}
+
+.lang-chooser__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  list-style: none;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding-inline: var(--space-5);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--transition);
+}
+
+.button:hover {
+  background: var(--color-accent-strong);
+  color: var(--color-on-accent);
+}

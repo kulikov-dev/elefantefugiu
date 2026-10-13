@@ -1,0 +1,69 @@
+{
+  "site": {
+    "name": "O Elefante Fugiu",
+    "tagline": "Foi aqui",
+    "description": "Short interactive stories from Portuguese history, tied to the map and to time."
+  },
+  "a11y": {
+    "skip_to_content": "Skip to content",
+    "home": "O Elefante Fugiu, home page",
+    "main_nav": "Main navigation",
+    "footer_nav": "Footer links",
+    "language": "Language"
+  },
+  "nav": {
+    "epochs": "Eras",
+    "map": "Map",
+    "about": "About"
+  },
+  "pages": {
+    "about": { "title": "About the project" },
+    "method": { "title": "Method and sources" },
+    "report": { "title": "Found a mistake?" },
+    "legal": { "title": "Legal information" },
+    "map": { "title": "Map" }
+  },
+  "footer": {
+    "about": "About the project",
+    "method": "Method and sources",
+    "report": "Found a mistake?",
+    "legal": "Legal information",
+    "licenses": "Code under the MIT license. Texts under CC BY-SA 4.0.",
+    "privacy": "No trackers, no ads."
+  },
+  "home": {
+    "epochs_heading": "Eras",
+    "placeholder": "Temporary home page. Content arrives in later stages."
+  },
+  "stub": {
+    "notice": "This page is a placeholder and will be filled in later."
+  },
+  "notfound": {
+    "title": "Page not found",
+    "text": "This address does not exist or has moved.",
+    "home": "Go to the home page"
+  },
+  "ui": {
+    "read_more": "Read ▾",
+    "more": "More →",
+    "bridge": "Bridge to today",
+    "label_documented": "Documented",
+    "label_legend": "Legend",
+    "label_debated": "Debated",
+    "heavy_topic": "Heavy topic",
+    "family_mode": "Family mode",
+    "age_all": "All ages",
+    "share": "Share",
+    "report_error": "Found a mistake?",
+    "nearby": "Nearby",
+    "open_on_map": "Open on map",
+    "surprise": "Surprise me",
+    "soon": "Coming soon",
+    "show_more": "Show more",
+    "view_list": "List",
+    "view_timeline": "Timeline",
+    "view_grid": "Grid",
+    "sources": "Sources",
+    "checked_on": "Checked on"
+  }
+}

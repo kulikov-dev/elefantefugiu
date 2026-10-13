@@ -1,0 +1,41 @@
+---
+import '../styles/global.css';
+import { pagePath, withBase } from '../i18n/routes';
+
+const ptHref = pagePath('pt', 'home');
+const enHref = pagePath('en', 'home');
+---
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>O Elefante Fugiu</title>
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <link rel="alternate" hreflang="pt" href={ptHref} />
+    <link rel="alternate" hreflang="en" href={enHref} />
+    <script is:inline define:vars={{ ptHref, enHref }}>
+      // Saved choice first, then the browser language (en* -> English, anything else -> Portuguese).
+      (function () {
+        var lang = null;
+        try {
+          lang = localStorage.getItem('lang');
+        } catch (error) {}
+        if (lang !== 'pt' && lang !== 'en') {
+          var browser = (navigator.language || '').toLowerCase();
+          lang = browser.indexOf('en') === 0 ? 'en' : 'pt';
+        }
+        location.replace(lang === 'en' ? enHref : ptHref);
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="lang-chooser">
+      <h1>O Elefante Fugiu</h1>
+      <ul class="lang-chooser__links">
+        <li><a class="button" href={ptHref} lang="pt" hreflang="pt">Português</a></li>
+        <li><a class="button" href={enHref} lang="en" hreflang="en">English</a></li>
+      </ul>
+    </main>
+  </body>
+</html>

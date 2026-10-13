@@ -1,0 +1,50 @@
+:root {
+  /* Colour: cool chalk surface, ink text, azulejo-blue accent. */
+  --color-bg: #f6f8fa;
+  --color-surface: #ffffff;
+  --color-ink: #15202b;
+  --color-ink-muted: #47535f;
+  --color-line: #d3dbe3;
+  --color-accent: #1f4e8c;
+  --color-accent-strong: #163a69;
+  --color-on-accent: #ffffff;
+  --color-focus: #0a58ca;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+
+  /* Typography: system fonts only. */
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-heading: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --text-sm: 0.875rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 1.6rem + 3vw, 3.75rem);
+  --leading-body: 1.6;
+  --leading-heading: 1.2;
+  --measure: 65ch;
+  --container: 72rem;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --transition: 150ms ease;
+
+  /* Epoch theme placeholders (real values come in stage 6). */
+  --epoch-bg: var(--color-bg);
+  --epoch-accent: var(--color-accent);
+  --epoch-heading-font: var(--font-heading);
+  --epoch-frame: 1px solid var(--color-line);
+}

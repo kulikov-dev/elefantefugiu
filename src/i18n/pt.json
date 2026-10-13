@@ -1,0 +1,69 @@
+{
+  "site": {
+    "name": "O Elefante Fugiu",
+    "tagline": "Foi aqui",
+    "description": "Pequenas histórias interativas da história de Portugal, ligadas ao mapa e ao tempo."
+  },
+  "a11y": {
+    "skip_to_content": "Saltar para o conteúdo",
+    "home": "O Elefante Fugiu, página inicial",
+    "main_nav": "Navegação principal",
+    "footer_nav": "Ligações do rodapé",
+    "language": "Idioma"
+  },
+  "nav": {
+    "epochs": "Épocas",
+    "map": "Mapa",
+    "about": "Sobre o projeto"
+  },
+  "pages": {
+    "about": { "title": "Sobre o projeto" },
+    "method": { "title": "Método e fontes" },
+    "report": { "title": "Encontrou um erro?" },
+    "legal": { "title": "Informação legal" },
+    "map": { "title": "Mapa" }
+  },
+  "footer": {
+    "about": "Sobre o projeto",
+    "method": "Método e fontes",
+    "report": "Encontrou um erro?",
+    "legal": "Informação legal",
+    "licenses": "Código sob licença MIT. Textos sob licença CC BY-SA 4.0.",
+    "privacy": "Sem rastreadores nem publicidade."
+  },
+  "home": {
+    "epochs_heading": "Épocas",
+    "placeholder": "Página inicial provisória. O conteúdo chega nas próximas etapas."
+  },
+  "stub": {
+    "notice": "Esta página é provisória e será preenchida mais tarde."
+  },
+  "notfound": {
+    "title": "Página não encontrada",
+    "text": "O endereço não existe ou mudou.",
+    "home": "Ir para a página inicial"
+  },
+  "ui": {
+    "read_more": "Ler mais ▾",
+    "more": "Saber mais →",
+    "bridge": "Ponte para hoje",
+    "label_documented": "Documentado",
+    "label_legend": "Lenda",
+    "label_debated": "Em debate",
+    "heavy_topic": "Tema difícil",
+    "family_mode": "Modo família",
+    "age_all": "Para todos",
+    "share": "Partilhar",
+    "report_error": "Encontrou um erro?",
+    "nearby": "Mais perto",
+    "open_on_map": "Ver no mapa",
+    "surprise": "Surpreende-me",
+    "soon": "Em breve",
+    "show_more": "Mostrar mais",
+    "view_list": "Lista",
+    "view_timeline": "Cronologia",
+    "view_grid": "Grelha",
+    "sources": "Fontes",
+    "checked_on": "Verificado em"
+  }
+}

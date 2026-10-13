@@ -1,0 +1,45 @@
+---
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
+import { t } from '../../i18n';
+
+export const getStaticPaths = (() => {
+  const keys = Object.keys(ROUTES) as PageKey[];
+  return LANGS.flatMap((lang) =>
+    keys.map((pageKey) => ({
+      // An empty slug becomes undefined so the home page lands on /pt/ and /en/.
+      params: { lang, page: ROUTES[pageKey][lang] || undefined },
+      props: { lang: lang as Lang, pageKey },
+    })),
+  );
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { lang, pageKey } = Astro.props as Props;
+
+const isHome = pageKey === 'home';
+const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
+---
+<BaseLayout lang={lang} pageKey={pageKey} title={title}>
+  {
+    isHome ? (
+      <>
+        <section class="hero">
+          <h1>{t(lang, 'site.name')}</h1>
+          <p class="hero__tagline">{t(lang, 'site.tagline')}</p>
+        </section>
+        <p class="notice">{t(lang, 'home.placeholder')}</p>
+        <section id="epocas" aria-labelledby="epocas-title">
+          <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
+          <p>{t(lang, 'ui.soon')}</p>
+        </section>
+      </>
+    ) : (
+      <>
+        <h1>{title}</h1>
+        <p class="notice">{t(lang, 'stub.notice')}</p>
+      </>
+    )
+  }
+</BaseLayout>

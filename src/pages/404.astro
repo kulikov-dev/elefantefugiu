@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { LANGS, pagePath } from '../i18n/routes';
+import { t } from '../i18n';
+---
+<!-- GitHub Pages serves one root 404.html, so both languages are shown here. -->
+<BaseLayout lang="pt" title={t('pt', 'notfound.title')} noindex>
+  {
+    LANGS.map((lang) => (
+      <section lang={lang} aria-labelledby={`notfound-${lang}`}>
+        <h1 id={`notfound-${lang}`}>{t(lang, 'notfound.title')}</h1>
+        <p>{t(lang, 'notfound.text')}</p>
+        <p>
+          <a class="button" href={pagePath(lang, 'home')}>{t(lang, 'notfound.home')}</a>
+        </p>
+      </section>
+    ))
+  }
+</BaseLayout>

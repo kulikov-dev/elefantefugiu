@@ -1,0 +1,28 @@
+---
+import { pagePath, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const links = [
+  { label: t(lang, 'footer.about'), href: pagePath(lang, 'about') },
+  { label: t(lang, 'footer.method'), href: pagePath(lang, 'method') },
+  { label: t(lang, 'footer.report'), href: pagePath(lang, 'report') },
+  { label: t(lang, 'footer.legal'), href: pagePath(lang, 'legal') },
+];
+---
+<footer class="site-footer">
+  <div class="container">
+    <nav aria-label={t(lang, 'a11y.footer_nav')}>
+      <ul class="site-footer__links">
+        {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      </ul>
+    </nav>
+    <p>{t(lang, 'footer.licenses')}</p>
+    <p>{t(lang, 'footer.privacy')}</p>
+  </div>
+</footer>

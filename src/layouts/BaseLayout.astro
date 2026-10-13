@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { LANGS, pagePath, withBase, type Lang, type PageKey } from '../i18n/routes';
+import { t } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title: string;
+  /** Page key keeps the language switch on the same page; omit for pages without a pair (404). */
+  pageKey?: PageKey;
+  noindex?: boolean;
+}
+
+const { lang, title, pageKey, noindex = false } = Astro.props;
+const siteName = t(lang, 'site.name');
+const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
+const description = t(lang, 'site.description');
+const canonical = pageKey ? new URL(pagePath(lang, pageKey), Astro.site) : undefined;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1f4e8c" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    {canonical && <link rel="canonical" href={canonical.href} />}
+    {
+      pageKey &&
+        LANGS.map((target) => (
+          <link rel="alternate" hreflang={target} href={new URL(pagePath(target, pageKey), Astro.site).href} />
+        ))
+    }
+    {pageKey && <link rel="alternate" hreflang="x-default" href={new URL(pagePath('pt', pageKey), Astro.site).href} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t(lang, 'a11y.skip_to_content')}</a>
+    <SiteHeader lang={lang} pageKey={pageKey} />
+    <main id="main" tabindex="-1">
+      <div class="container page">
+        <slot />
+      </div>
+    </main>
+    <SiteFooter lang={lang} />
+    <script is:inline>
+      // Remember the chosen language for the root redirect. Storage may be unavailable.
+      document.addEventListener('click', function (event) {
+        var link = event.target instanceof Element ? event.target.closest('a[data-set-lang]') : null;
+        if (!link) return;
+        try {
+          localStorage.setItem('lang', link.getAttribute('data-set-lang'));
+        } catch (error) {}
+      });
+    </script>
+  </body>
+</html>

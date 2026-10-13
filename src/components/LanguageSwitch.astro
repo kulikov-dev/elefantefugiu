@@ -1,0 +1,28 @@
+---
+import { LANGS, LANG_NAMES, pagePath, type Lang, type PageKey } from '../i18n/routes';
+import { t } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Page to keep when switching; without it the switch leads to the language home. */
+  pageKey?: PageKey;
+}
+
+const { lang, pageKey = 'home' } = Astro.props;
+---
+<div class="lang-switch" role="group" aria-label={t(lang, 'a11y.language')}>
+  {
+    LANGS.map((target) => (
+      <a
+        href={pagePath(target, pageKey)}
+        lang={target}
+        hreflang={target}
+        aria-label={`${target.toUpperCase()}, ${LANG_NAMES[target]}`}
+        aria-current={target === lang ? 'true' : undefined}
+        data-set-lang={target}
+      >
+        {target.toUpperCase()}
+      </a>
+    ))
+  }
+</div>
