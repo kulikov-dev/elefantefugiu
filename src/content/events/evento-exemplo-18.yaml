@@ -1,0 +1,91 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-18
+slug:
+  pt: evento-exemplo-18
+  en: example-event-18
+title:
+  pt: Evento de exemplo 18
+  en: Example event 18
+epoch: estado-novo-e-25-de-abril
+level: frame
+year: 1935
+place:
+  name: "Peniche"
+  lat: 39.3558
+  lon: -9.3811
+bridge:
+  name: Local de exemplo 18
+  address: Rua de exemplo 18
+  lat: 39.3578
+  lon: -9.3791
+  url: https://example.com/local-18
+threads:
+  - poder-e-revolta
+  - gente-como-nos
+importance: 3
+label: debated
+min_age: "all"
+sensitive: false
+hook:
+  pt: Occaecat cupidatat non proident sunt in culpa.
+  en: Occaecat cupidatat non proident sunt in culpa.
+story:
+  pt: >-
+    Ad minim veniam quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit.
+  en: >-
+    Ad minim veniam quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit.
+more:
+  pt: >-
+    Proident sunt in culpa qui officia deserunt mollit anim id est
+    laborum lorem ipsum dolor sit amet consectetur adipiscing elit sed
+    do eiusmod tempor incididunt ut labore et dolore magna aliqua ut
+    enim ad minim veniam quis nostrud exercitation ullamco laboris nisi
+    ut aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris.
+  en: >-
+    Proident sunt in culpa qui officia deserunt mollit anim id est
+    laborum lorem ipsum dolor sit amet consectetur adipiscing elit sed
+    do eiusmod tempor incididunt ut labore et dolore magna aliqua ut
+    enim ad minim veniam quis nostrud exercitation ullamco laboris nisi
+    ut aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris.
+sources:
+  - title: Fonte de exemplo 18-1
+    url: https://example.com/fonte-18-1
+    type: article
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 18-2
+    url: https://example.com/fonte-18-2
+    type: website
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-c.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo C.
+    en: Placeholder illustration for example era C.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

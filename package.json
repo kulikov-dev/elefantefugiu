@@ -9,10 +9,11 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-i18n.mjs && astro build",
+    "build": "node scripts/check-i18n.mjs && tsx scripts/check-data.ts && astro build",
     "postbuild": "node scripts/check-links.mjs",
     "preview": "astro preview",
     "check": "astro check",
+    "check:data": "tsx scripts/check-data.ts",
     "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
@@ -21,6 +22,8 @@
     "typescript": "^6.0.3"
   },
   "devDependencies": {
-    "@types/node": "^22.20.5"
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "yaml": "^2.9.1"
   }
 }

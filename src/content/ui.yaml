@@ -1,0 +1,64 @@
+# UI strings from docs/spec.md, Appendix. Must match the "ui" section of src/i18n/pt.json and en.json (checked by check:data).
+- id: read_more
+  pt: "Ler mais ▾"
+  en: "Read ▾"
+- id: more
+  pt: "Saber mais →"
+  en: "More →"
+- id: bridge
+  pt: "Ponte para hoje"
+  en: "Bridge to today"
+- id: label_documented
+  pt: "Documentado"
+  en: "Documented"
+- id: label_legend
+  pt: "Lenda"
+  en: "Legend"
+- id: label_debated
+  pt: "Em debate"
+  en: "Debated"
+- id: heavy_topic
+  pt: "Tema difícil"
+  en: "Heavy topic"
+- id: family_mode
+  pt: "Modo família"
+  en: "Family mode"
+- id: age_all
+  pt: "Para todos"
+  en: "All ages"
+- id: share
+  pt: "Partilhar"
+  en: "Share"
+- id: report_error
+  pt: "Encontrou um erro?"
+  en: "Found a mistake?"
+- id: nearby
+  pt: "Mais perto"
+  en: "Nearby"
+- id: open_on_map
+  pt: "Ver no mapa"
+  en: "Open on map"
+- id: surprise
+  pt: "Surpreende-me"
+  en: "Surprise me"
+- id: soon
+  pt: "Em breve"
+  en: "Coming soon"
+- id: show_more
+  pt: "Mostrar mais"
+  en: "Show more"
+- id: view_list
+  pt: "Lista"
+  en: "List"
+- id: view_timeline
+  pt: "Cronologia"
+  en: "Timeline"
+- id: view_grid
+  pt: "Grelha"
+  en: "Grid"
+- id: sources
+  pt: "Fontes"
+  en: "Sources"
+- id: checked_on
+  pt: "Verificado em"
+  en: "Checked on"

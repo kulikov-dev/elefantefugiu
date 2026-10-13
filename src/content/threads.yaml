@@ -1,0 +1,56 @@
+# PLACEHOLDER threads: descriptions, colours and icon names are provisional.
+- id: mar
+  name:
+    pt: "Mar"
+    en: "Sea"
+  description:
+    pt: Descrição de exemplo do fio Mar.
+    en: Example description of the thread Sea.
+  color: "#1f6f8b"
+  icon: wave
+  mvp: true
+  placeholder: true
+- id: comida-e-vinho
+  name:
+    pt: "Comida e vinho"
+    en: "Food and wine"
+  description:
+    pt: Descrição de exemplo do fio Comida e vinho.
+    en: Example description of the thread Food and wine.
+  color: "#8a3b5c"
+  icon: cup
+  mvp: true
+  placeholder: true
+- id: poder-e-revolta
+  name:
+    pt: "Poder e revolta"
+    en: "Power and revolt"
+  description:
+    pt: Descrição de exemplo do fio Poder e revolta.
+    en: Example description of the thread Power and revolt.
+  color: "#8a2b2b"
+  icon: crown
+  mvp: true
+  placeholder: true
+- id: gente-como-nos
+  name:
+    pt: "Gente como nós"
+    en: "People like us"
+  description:
+    pt: Descrição de exemplo do fio Gente como nós.
+    en: Example description of the thread People like us.
+  color: "#3d6b3a"
+  icon: people
+  mvp: true
+  placeholder: true
+- id: natureza
+  name:
+    pt: "Natureza"
+    en: "Nature"
+  description:
+    pt: Descrição de exemplo do fio Natureza.
+    en: Example description of the thread Nature.
+  color: "#4f7a2a"
+  icon: leaf
+  mvp: true
+  placeholder: true

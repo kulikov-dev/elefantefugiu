@@ -1,0 +1,79 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-07
+slug:
+  pt: evento-exemplo-07
+  en: example-event-07
+title:
+  pt: Evento de exemplo 07
+  en: Example event 07
+epoch: avis-e-descobrimentos
+level: story
+year: 1543
+place:
+  name: "Porto"
+  lat: 41.1496
+  lon: -8.611
+bridge:
+  name: Local de exemplo 07
+  address: Rua de exemplo 7
+  lat: 41.1516
+  lon: -8.609
+  url: https://example.com/local-07
+threads:
+  - comida-e-vinho
+importance: 2
+label: documented
+min_age: "all"
+sensitive: false
+hook:
+  pt: Ad minim veniam quis nostrud exercitation ullamco.
+  en: Ad minim veniam quis nostrud exercitation ullamco.
+story:
+  pt: >-
+    Consequat duis aute irure dolor in reprehenderit in voluptate velit
+    esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna.
+  en: >-
+    Consequat duis aute irure dolor in reprehenderit in voluptate velit
+    esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna.
+more:
+  pt: >-
+    Fugiat nulla pariatur excepteur sint occaecat cupidatat non proident
+    sunt in culpa qui officia deserunt mollit anim id est laborum lorem
+    ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua ut enim ad minim
+    veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim.
+  en: >-
+    Fugiat nulla pariatur excepteur sint occaecat cupidatat non proident
+    sunt in culpa qui officia deserunt mollit anim id est laborum lorem
+    ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua ut enim ad minim
+    veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim.
+sources:
+  - title: Fonte de exemplo 07-1
+    url: https://example.com/fonte-07-1
+    type: website
+    accessed: 2026-10-13
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

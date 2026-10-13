@@ -1,0 +1,93 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-09
+slug:
+  pt: evento-exemplo-09
+  en: example-event-09
+title:
+  pt: Evento de exemplo 09
+  en: Example event 09
+epoch: pombal-e-terramoto
+level: frame
+year: 1759
+place:
+  name: "Lisboa (Baixa)"
+  lat: 38.711
+  lon: -9.139
+bridge:
+  name: Local de exemplo 09
+  address: Rua de exemplo 9
+  lat: 38.713
+  lon: -9.137
+  url: https://example.com/local-09
+threads:
+  - poder-e-revolta
+importance: 3
+label: debated
+min_age: "all"
+sensitive: false
+hook:
+  pt: Ullamco laboris nisi ut aliquip ex ea.
+  en: Ullamco laboris nisi ut aliquip ex ea.
+story:
+  pt: >-
+    Esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco.
+  en: >-
+    Esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco.
+more:
+  pt: >-
+    Deserunt mollit anim id est laborum lorem ipsum dolor sit amet
+    consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo.
+  en: >-
+    Deserunt mollit anim id est laborum lorem ipsum dolor sit amet
+    consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo.
+sources:
+  - title: Fonte de exemplo 09-1
+    url: https://example.com/fonte-09-1
+    type: article
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 09-2
+    url: https://example.com/fonte-09-2
+    type: website
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-b.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo B.
+    en: Placeholder illustration for example era B.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+related:
+  - evento-exemplo-10
+  - evento-exemplo-11
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

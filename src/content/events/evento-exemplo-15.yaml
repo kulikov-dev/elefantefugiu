@@ -1,0 +1,86 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-15
+slug:
+  pt: evento-exemplo-15
+  en: example-event-15
+title:
+  pt: Evento de exemplo 15
+  en: Example event 15
+epoch: pombal-e-terramoto
+level: story
+year: 1808
+place:
+  name: "Lagos"
+  lat: 37.1028
+  lon: -8.673
+bridge:
+  name: Local de exemplo 15
+  address: Rua de exemplo 15
+  lat: 37.1048
+  lon: -8.671
+  url: https://example.com/local-15
+threads:
+  - mar
+importance: 2
+label: debated
+min_age: "all"
+sensitive: false
+hook:
+  pt: Esse cillum dolore eu fugiat nulla pariatur.
+  en: Esse cillum dolore eu fugiat nulla pariatur.
+story:
+  pt: >-
+    Adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur excepteur sint occaecat cupidatat non
+    proident.
+  en: >-
+    Adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur excepteur sint occaecat cupidatat non
+    proident.
+more:
+  pt: >-
+    Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur excepteur sint occaecat cupidatat non
+    proident sunt in culpa qui officia deserunt mollit anim id est
+    laborum lorem ipsum dolor sit amet consectetur adipiscing elit.
+  en: >-
+    Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur excepteur sint occaecat cupidatat non
+    proident sunt in culpa qui officia deserunt mollit anim id est
+    laborum lorem ipsum dolor sit amet consectetur adipiscing elit.
+sources:
+  - title: Fonte de exemplo 15-1
+    url: https://example.com/fonte-15-1
+    type: article
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-b.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo B.
+    en: Placeholder illustration for example era B.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

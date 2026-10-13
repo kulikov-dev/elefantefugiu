@@ -1,0 +1,86 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-23
+slug:
+  pt: evento-exemplo-23
+  en: example-event-23
+title:
+  pt: Evento de exemplo 23
+  en: Example event 23
+epoch: estado-novo-e-25-de-abril
+level: story
+year: 1965
+place:
+  name: "Faro"
+  lat: 37.0194
+  lon: -7.9304
+bridge:
+  name: Local de exemplo 23
+  address: Rua de exemplo 23
+  lat: 37.0214
+  lon: -7.9284
+  url: https://example.com/local-23
+threads:
+  - comida-e-vinho
+importance: 2
+label: legend
+min_age: "12"
+sensitive: false
+hook:
+  pt: Lorem ipsum dolor sit amet consectetur adipiscing.
+  en: Lorem ipsum dolor sit amet consectetur adipiscing.
+story:
+  pt: >-
+    Cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris.
+  en: >-
+    Cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris.
+more:
+  pt: >-
+    Veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt.
+  en: >-
+    Veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt.
+sources:
+  - title: Fonte de exemplo 23-1
+    url: https://example.com/fonte-23-1
+    type: book
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-c.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo C.
+    en: Placeholder illustration for example era C.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

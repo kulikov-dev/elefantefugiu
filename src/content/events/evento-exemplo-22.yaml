@@ -1,0 +1,88 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-22
+slug:
+  pt: evento-exemplo-22
+  en: example-event-22
+title:
+  pt: Evento de exemplo 22
+  en: Example event 22
+epoch: estado-novo-e-25-de-abril
+level: story
+year: 1959
+place:
+  name: "Guimarães"
+  lat: 41.4425
+  lon: -8.2918
+bridge:
+  name: Local de exemplo 22
+  address: Rua de exemplo 22
+  lat: 41.4445
+  lon: -8.2898
+  url: https://example.com/local-22
+threads:
+  - natureza
+importance: 1
+label: documented
+min_age: "all"
+sensitive: false
+hook:
+  pt: Id est laborum lorem ipsum dolor sit.
+  en: Id est laborum lorem ipsum dolor sit.
+story:
+  pt: >-
+    Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.
+  en: >-
+    Reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.
+more:
+  pt: >-
+    Dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur excepteur sint occaecat cupidatat non.
+  en: >-
+    Dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua ut enim ad minim veniam quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute
+    irure dolor in reprehenderit in voluptate velit esse cillum dolore
+    eu fugiat nulla pariatur excepteur sint occaecat cupidatat non.
+sources:
+  - title: Fonte de exemplo 22-1
+    url: https://example.com/fonte-22-1
+    type: website
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 22-2
+    url: https://example.com/fonte-22-2
+    type: book
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-c.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo C.
+    en: Placeholder illustration for example era C.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

@@ -1,0 +1,84 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-16
+slug:
+  pt: evento-exemplo-16
+  en: example-event-16
+title:
+  pt: Evento de exemplo 16
+  en: Example event 16
+epoch: pombal-e-terramoto
+level: story
+year: 1816
+place:
+  name: "Lisboa (Chiado)"
+  lat: 38.7105
+  lon: -9.142
+bridge:
+  name: Local de exemplo 16
+  address: Rua de exemplo 16
+  lat: 38.7125
+  lon: -9.14
+  url: https://example.com/local-16
+threads:
+  - gente-como-nos
+  - comida-e-vinho
+importance: 1
+label: documented
+min_age: "all"
+sensitive: false
+hook:
+  pt: Eu fugiat nulla pariatur excepteur sint occaecat.
+  en: Eu fugiat nulla pariatur excepteur sint occaecat.
+story:
+  pt: >-
+    Tempor incididunt ut labore et dolore magna aliqua ut enim ad minim
+    veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia.
+  en: >-
+    Tempor incididunt ut labore et dolore magna aliqua ut enim ad minim
+    veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia.
+more:
+  pt: >-
+    Voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore.
+  en: >-
+    Voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore.
+sources:
+  - title: Fonte de exemplo 16-1
+    url: https://example.com/fonte-16-1
+    type: website
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 16-2
+    url: https://example.com/fonte-16-2
+    type: book
+    accessed: 2026-10-13
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

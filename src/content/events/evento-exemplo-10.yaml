@@ -1,0 +1,88 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-10
+slug:
+  pt: evento-exemplo-10
+  en: example-event-10
+title:
+  pt: Evento de exemplo 10
+  en: Example event 10
+epoch: pombal-e-terramoto
+level: frame
+year: 1767
+place:
+  name: "Lisboa (Ajuda)"
+  lat: 38.7066
+  lon: -9.198
+bridge:
+  name: Local de exemplo 10
+  address: Rua de exemplo 10
+  lat: 38.7086
+  lon: -9.196
+  url: https://example.com/local-10
+threads:
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: "all"
+sensitive: false
+hook:
+  pt: Ut aliquip ex ea commodo consequat duis.
+  en: Ut aliquip ex ea commodo consequat duis.
+story:
+  pt: >-
+    Nulla pariatur excepteur sint occaecat cupidatat non proident sunt
+    in culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+  en: >-
+    Nulla pariatur excepteur sint occaecat cupidatat non proident sunt
+    in culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex.
+more:
+  pt: >-
+    Ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua ut enim ad minim
+    veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit.
+  en: >-
+    Ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua ut enim ad minim
+    veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+    ea commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum dolor sit
+    amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit.
+sources:
+  - title: Fonte de exemplo 10-1
+    url: https://example.com/fonte-10-1
+    type: website
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 10-2
+    url: https://example.com/fonte-10-2
+    type: book
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-b.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo B.
+    en: Placeholder illustration for example era B.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

@@ -1,0 +1,96 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-03
+slug:
+  pt: evento-exemplo-03
+  en: example-event-03
+title:
+  pt: Evento de exemplo 03
+  en: Example event 03
+epoch: avis-e-descobrimentos
+level: frame
+year: 1446
+place:
+  name: "Sagres"
+  lat: 37.0086
+  lon: -8.9467
+bridge:
+  name: Local de exemplo 03
+  address: Rua de exemplo 3
+  lat: 37.0106
+  lon: -8.9447
+  url: https://example.com/local-03
+threads:
+  - mar
+importance: 3
+label: debated
+min_age: "all"
+sensitive: false
+hook:
+  pt: Do eiusmod tempor incididunt ut labore et.
+  en: Do eiusmod tempor incididunt ut labore et.
+story:
+  pt: >-
+    Et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id.
+  en: >-
+    Et dolore magna aliqua ut enim ad minim veniam quis nostrud
+    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
+    duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id.
+more:
+  pt: >-
+    Ad minim veniam quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui.
+  en: >-
+    Ad minim veniam quis nostrud exercitation ullamco laboris nisi ut
+    aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui.
+sources:
+  - title: Fonte de exemplo 03-1
+    url: https://example.com/fonte-03-1
+    type: article
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 03-2
+    url: https://example.com/fonte-03-2
+    type: website
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-a.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo A.
+    en: Placeholder illustration for example era A.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+interactive:
+  type: ship_scale
+  data:
+    # PLACEHOLDER numbers, not historical data
+    historic: { name: { pt: Navio de exemplo, en: Example ship }, length_m: 25 }
+    modern: { name: { pt: Navio moderno de exemplo, en: Example modern ship }, length_m: 200 }
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

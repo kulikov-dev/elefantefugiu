@@ -1,0 +1,89 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-24
+slug:
+  pt: evento-exemplo-24
+  en: example-event-24
+title:
+  pt: Evento de exemplo 24
+  en: Example event 24
+epoch: estado-novo-e-25-de-abril
+level: story
+year: 1971
+place:
+  name: "Lisboa (Parque das Nações)"
+  lat: 38.768
+  lon: -9.094
+bridge:
+  name: Local de exemplo 24
+  address: Rua de exemplo 24
+  lat: 38.77
+  lon: -9.092
+  url: https://example.com/local-24
+threads:
+  - natureza
+  - mar
+importance: 1
+label: debated
+min_age: "all"
+sensitive: false
+hook:
+  pt: Sit amet consectetur adipiscing elit sed do.
+  en: Sit amet consectetur adipiscing elit sed do.
+story:
+  pt: >-
+    Pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.
+  en: >-
+    Pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.
+more:
+  pt: >-
+    Ut aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum.
+  en: >-
+    Ut aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat nulla pariatur
+    excepteur sint occaecat cupidatat non proident sunt in culpa qui
+    officia deserunt mollit anim id est laborum lorem ipsum.
+sources:
+  - title: Fonte de exemplo 24-1
+    url: https://example.com/fonte-24-1
+    type: article
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 24-2
+    url: https://example.com/fonte-24-2
+    type: website
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-c.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo C.
+    en: Placeholder illustration for example era C.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true

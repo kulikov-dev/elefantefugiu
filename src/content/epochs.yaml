@@ -1,0 +1,55 @@
+# PLACEHOLDER epochs: names, theme phrases and style values are provisional.
+- id: avis-e-descobrimentos
+  order: 1
+  name:
+    pt: "Avis e Descobrimentos"
+    en: "Avis and the Discoveries"
+  years:
+    from: 1385
+    to: 1580
+  theme:
+    pt: "Descobertas: o mundo no mapa"
+    en: "Discoveries: the world on the map"
+  style:
+    bg: "#eaf1fb"
+    accent: "#1f4e8c"
+    heading_font: var(--font-heading)
+    frame: 1px solid var(--color-line)
+  mvp: true
+  placeholder: true
+- id: pombal-e-terramoto
+  order: 2
+  name:
+    pt: "Pombal e o Terramoto"
+    en: "Pombal and the Earthquake"
+  years:
+    from: 1755
+    to: 1820
+  theme:
+    pt: "Terramoto e reconstrução"
+    en: "Earthquake and rebuilding"
+  style:
+    bg: "#fbf0e6"
+    accent: "#9a4a1c"
+    heading_font: var(--font-heading)
+    frame: 1px solid var(--color-line)
+  mvp: true
+  placeholder: true
+- id: estado-novo-e-25-de-abril
+  order: 3
+  name:
+    pt: "Estado Novo e 25 de Abril"
+    en: "Estado Novo and 25 April"
+  years:
+    from: 1926
+    to: 1974
+  theme:
+    pt: "Do regime à revolução"
+    en: "From regime to revolution"
+  style:
+    bg: "#fdeeee"
+    accent: "#b3202a"
+    heading_font: var(--font-heading)
+    frame: 1px solid var(--color-line)
+  mvp: true
+  placeholder: true

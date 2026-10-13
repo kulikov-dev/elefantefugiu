@@ -1,0 +1,90 @@
+# PLACEHOLDER content: latin filler, invented years and numbers. Replace before launch.
+id: evento-exemplo-21
+slug:
+  pt: evento-exemplo-21
+  en: example-event-21
+title:
+  pt: Evento de exemplo 21
+  en: Example event 21
+epoch: estado-novo-e-25-de-abril
+level: frame
+year: 1953
+place:
+  name: "Lisboa (Alcântara)"
+  lat: 38.703
+  lon: -9.176
+bridge:
+  name: Local de exemplo 21
+  address: Rua de exemplo 21
+  lat: 38.705
+  lon: -9.174
+  url: https://example.com/local-21
+threads:
+  - mar
+importance: 3
+label: debated
+min_age: "all"
+sensitive: false
+hook:
+  pt: Deserunt mollit anim id est laborum lorem.
+  en: Deserunt mollit anim id est laborum lorem.
+story:
+  pt: >-
+    Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua.
+  en: >-
+    Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
+    cupidatat non proident sunt in culpa qui officia deserunt mollit
+    anim id est laborum lorem ipsum dolor sit amet consectetur
+    adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
+    magna aliqua.
+more:
+  pt: >-
+    Do eiusmod tempor incididunt ut labore et dolore magna aliqua ut
+    enim ad minim veniam quis nostrud exercitation ullamco laboris nisi
+    ut aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat.
+  en: >-
+    Do eiusmod tempor incididunt ut labore et dolore magna aliqua ut
+    enim ad minim veniam quis nostrud exercitation ullamco laboris nisi
+    ut aliquip ex ea commodo consequat duis aute irure dolor in
+    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+    pariatur excepteur sint occaecat cupidatat non proident sunt in
+    culpa qui officia deserunt mollit anim id est laborum lorem ipsum
+    dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+    commodo consequat duis aute irure dolor in reprehenderit in
+    voluptate velit esse cillum dolore eu fugiat.
+sources:
+  - title: Fonte de exemplo 21-1
+    url: https://example.com/fonte-21-1
+    type: article
+    accessed: 2026-10-13
+  - title: Fonte de exemplo 21-2
+    url: https://example.com/fonte-21-2
+    type: website
+    accessed: 2026-10-13
+image:
+  src: images/placeholders/epoch-c.svg
+  alt:
+    pt: Ilustração provisória da época de exemplo C.
+    en: Placeholder illustration for example era C.
+  credit: O Elefante Fugiu (placeholder)
+  license: CC BY-SA 4.0
+reviewed_by: Revisor de exemplo
+reviewed_on: 2026-10-13
+status: ready
+placeholder: true
