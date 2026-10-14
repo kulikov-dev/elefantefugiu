@@ -1,7 +1,8 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import HomeView from '../../views/HomeView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { EPOCHS_ANCHOR, LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
+import { LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
 import { t } from '../../i18n';
 
 export const getStaticPaths = (() => {
@@ -21,25 +22,13 @@ const { lang, pageKey } = Astro.props as Props;
 const isHome = pageKey === 'home';
 const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
 ---
-<BaseLayout lang={lang} pageKey={pageKey} title={title}>
-  {
-    isHome ? (
-      <>
-        <section class="hero">
-          <h1>{t(lang, 'site.name')}</h1>
-          <p class="hero__tagline">{t(lang, 'site.tagline')}</p>
-        </section>
-        <p class="notice">{t(lang, 'home.placeholder')}</p>
-        <section id={EPOCHS_ANCHOR} aria-labelledby="epocas-title">
-          <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
-          <p>{t(lang, 'ui.soon')}</p>
-        </section>
-      </>
-    ) : (
-      <>
-        <h1>{title}</h1>
-        <p class="notice">{t(lang, 'stub.notice')}</p>
-      </>
-    )
-  }
-</BaseLayout>
+{
+  isHome ? (
+    <HomeView lang={lang} />
+  ) : (
+    <BaseLayout lang={lang} pageKey={pageKey} title={title}>
+      <h1>{title}</h1>
+      <p class="notice">{t(lang, 'stub.notice')}</p>
+    </BaseLayout>
+  )
+}

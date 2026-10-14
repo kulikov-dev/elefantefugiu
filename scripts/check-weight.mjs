@@ -19,6 +19,7 @@ for (const seg of [['pt', 'historia'], ['en', 'story'], ['pt', 'epoca'], ['en', 
   if (!existsSync(dir)) continue;
   for (const slug of readdirSync(dir)) pages.push(join(dir, slug, 'index.html'));
 }
+for (const lang of ['pt', 'en']) pages.push(join(dist, lang, 'index.html'));
 if (pages.length === 0) {
   console.error('No card pages in dist/. Run npm run build first.');
   process.exit(1);
@@ -49,7 +50,7 @@ const rows = pages.map((file) => {
 
 const max = rows.reduce((a, b) => (b.raw > a.raw ? b : a));
 const avg = (key) => rows.reduce((s, r) => s + r[key], 0) / rows.length;
-console.log(`Pages checked: ${rows.length} cards, epochs and threads (HTML + CSS + JS, without images)`);
+console.log(`Pages checked: ${rows.length} cards, epochs, threads and home pages (HTML + CSS + JS, without images)`);
 console.log(`  average: ${kb(avg('raw'))} raw, ${kb(avg('gzip'))} gzip, ${kb(avg('brotli'))} brotli`);
 console.log(`  heaviest: ${max.file}: ${kb(max.raw)} raw, ${kb(max.gzip)} gzip, ${kb(max.brotli)} brotli`);
 console.log(`  images are not counted (largest on a page: ${kb(Math.max(...rows.map((r) => r.images)))})`);

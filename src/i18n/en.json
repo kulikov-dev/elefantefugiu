@@ -43,7 +43,18 @@
   },
   "home": {
     "epochs_heading": "Eras",
-    "placeholder": "Temporary home page. Content arrives in later stages."
+    "start": "Start",
+    "open_map": "Open the map",
+    "showcase_heading": "Featured stories",
+    "threads_heading": "Threads",
+    "threads_intro": "Pick a theme and follow it through the centuries.",
+    "how_heading": "How it works",
+    "step_hook": "Hook",
+    "step_hook_text": "One short line to catch your curiosity.",
+    "step_story": "Story",
+    "step_story_text": "The story in a few lines, a one-minute read.",
+    "step_more": "More",
+    "step_more_text": "Context, sources and the bridge to today."
   },
   "stub": {
     "notice": "This page is a placeholder and will be filled in later."
@@ -101,7 +112,12 @@
     "timeline_label": "Timeline of this era",
     "neighbours_label": "Neighbouring eras",
     "back_to": "Back to",
-    "go_to": "Continue to"
+    "go_to": "Continue to",
+    "switcher_label": "All eras",
+    "filter_all": "All",
+    "view_label": "View",
+    "empty": "There are no stories in this thread in this era yet.",
+    "show_all": "Show all"
   },
   "thread": {
     "eras_label": "Eras in this thread"

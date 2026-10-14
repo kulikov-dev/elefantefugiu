@@ -70,3 +70,23 @@ export function epochYearsText(epoch: Pick<EpochData, 'years' | 'years_label'>, 
   if (!epoch.years) return '';
   return epoch.years.from === epoch.years.to ? String(epoch.years.from) : `${epoch.years.from}\u2013${epoch.years.to}`;
 }
+
+export interface SwitcherItem<E> {
+  epoch: E;
+  /** current: the page itself; link: another epoch with a page; soon: no page yet ("Coming soon"). */
+  state: 'current' | 'link' | 'soon';
+}
+
+/** All epochs in `order` for the switcher on an epoch page. An epoch is a link only when it really has a page. */
+export function epochSwitcherItems<E extends Pick<EpochData, 'id' | 'order' | 'mvp'>>(
+  current: Pick<EpochData, 'id'>,
+  epochs: readonly E[],
+  events: readonly EventData[],
+): SwitcherItem<E>[] {
+  return [...epochs]
+    .sort((a, b) => a.order - b.order)
+    .map((epoch) => ({
+      epoch,
+      state: epoch.id === current.id ? 'current' : epochHasContent(epoch, events) ? 'link' : 'soon',
+    }));
+}

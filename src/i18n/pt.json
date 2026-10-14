@@ -43,7 +43,18 @@
   },
   "home": {
     "epochs_heading": "Épocas",
-    "placeholder": "Página inicial provisória. O conteúdo chega nas próximas etapas."
+    "start": "Começar",
+    "open_map": "Abrir o mapa",
+    "showcase_heading": "Histórias em destaque",
+    "threads_heading": "Fios",
+    "threads_intro": "Escolha um tema e siga-o ao longo dos séculos.",
+    "how_heading": "Como funciona",
+    "step_hook": "Gancho",
+    "step_hook_text": "Uma frase curta para despertar a curiosidade.",
+    "step_story": "História",
+    "step_story_text": "A história em poucas linhas, para ler num minuto.",
+    "step_more": "Saber mais",
+    "step_more_text": "Contexto, fontes e a ponte para hoje."
   },
   "stub": {
     "notice": "Esta página é provisória e será preenchida mais tarde."
@@ -101,7 +112,12 @@
     "timeline_label": "Cronologia da época",
     "neighbours_label": "Épocas vizinhas",
     "back_to": "Voltar a",
-    "go_to": "Seguir para"
+    "go_to": "Seguir para",
+    "switcher_label": "Todas as épocas",
+    "filter_all": "Todos",
+    "view_label": "Modo de visualização",
+    "empty": "Nesta época ainda não há histórias neste fio.",
+    "show_all": "Mostrar todas"
   },
   "thread": {
     "eras_label": "Épocas deste fio"

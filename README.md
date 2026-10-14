@@ -96,13 +96,14 @@ override both with repository variables (Settings, Secrets and variables, Action
 ## Project structure
 
 ```
-src/pages        routes: / (language chooser), /[lang]/[...page] (stubs), /[lang]/[segment]/[slug] (cards, epochs, threads), 404
-src/views        page bodies: StoryView, EpochView, ThreadView
+src/pages        routes: / (language chooser), /[lang]/[...page] (home and stubs), /[lang]/[segment]/[slug] (cards, epochs, threads), 404
+src/views        page bodies: StoryView, EpochView, ThreadView, HomeView
+src/scripts      client code: epoch-filter (thread filter, timeline/grid), surprise ("Surprise me")
 src/layouts      BaseLayout (head, meta tags, header, footer)
-src/components   header, footer, language switch, card components (CardLayers, TagLabel, ...), list components (EventCard, ThreadChip, PagerNav)
+src/components   header, footer, language switch, card components (CardLayers, TagLabel, ...), list components (EventCard, ThreadChip, PagerNav, EpochSwitcher)
 src/content      YAML content: events/, epochs, threads, featured
 src/data         Zod schemas
-src/lib          pure helpers (card logic, thread visibility), covered by tests/
+src/lib          pure helpers (card logic, thread visibility, home tiles, filter state), covered by tests/
 src/i18n         pt.json, en.json, route map, t() helper
 src/styles       tokens, reset, base, layout
 tests            unit tests

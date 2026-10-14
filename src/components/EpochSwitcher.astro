@@ -1,0 +1,81 @@
+---
+// Links to all epochs with a page; the current one is marked; the rest show "Coming soon" without a link.
+import { t } from '../i18n';
+import { epochHref, type Lang } from '../i18n/routes';
+import type { EpochData, SwitcherItem } from '../lib/epochs';
+
+interface Props {
+  lang: Lang;
+  items: SwitcherItem<EpochData>[];
+}
+
+const { lang, items } = Astro.props;
+---
+<nav class="epoch-switch" aria-label={t(lang, 'epoch.switcher_label')}>
+  <ol class="epoch-switch__list">
+    {
+      items.map(({ epoch, state }) => (
+        <li>
+          {state === 'link' ? (
+            <a class="epoch-switch__item" href={epochHref(lang, epoch.slug[lang])}>
+              {epoch.name[lang]}
+            </a>
+          ) : state === 'current' ? (
+            <span class="epoch-switch__item epoch-switch__item--current" aria-current="page">
+              {epoch.name[lang]}
+            </span>
+          ) : (
+            <span class="epoch-switch__item epoch-switch__item--soon">
+              {epoch.name[lang]} <span class="epoch-switch__note">({t(lang, 'ui.soon')})</span>
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+
+<style>
+  .epoch-switch__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .epoch-switch__item {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.15rem 0.85rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a.epoch-switch__item:hover {
+    border-color: var(--color-accent);
+  }
+
+  .epoch-switch__item--current {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-surface);
+  }
+
+  .epoch-switch__item--soon {
+    border-style: dashed;
+    color: var(--color-ink-muted);
+    font-weight: 400;
+  }
+
+  .epoch-switch__note {
+    margin-inline-start: 0.3em;
+  }
+</style>

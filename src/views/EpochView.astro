@@ -4,6 +4,7 @@
 // The map, the grid switch and the thread filter come later.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
+import EpochSwitcher from '../components/EpochSwitcher.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { epochHref, threadHref, type Lang } from '../i18n/routes';
@@ -11,6 +12,7 @@ import { t } from '../i18n';
 import {
   epochFeed,
   epochSectionId,
+  epochSwitcherItems,
   epochYearsText,
   neighbourEpochs,
   threadCountsInEpoch,
@@ -32,6 +34,7 @@ const counts = threadCountsInEpoch(epoch, site.events);
 // Only threads that have a page, and only those with cards in this epoch, so every counter is a real count.
 const chips = site.visibleThreads.filter((th) => (counts.get(th.id) ?? 0) > 0);
 
+const switcherItems = epochSwitcherItems(epoch, site.epochs, site.events);
 const { prev, next } = neighbourEpochs(epoch, site.epochs, site.events);
 const neighbour = (n: NeighbourEpoch<EpochData> | null, dir: string, rel: 'prev' | 'next') =>
   n
@@ -59,37 +62,85 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
     </header>
 
-    {
-      chips.length > 0 && (
-        <nav aria-label={t(lang, 'epoch.chips_label')}>
-          <ul class="chips">
-            {chips.map((thread) => (
-              <li>
-                <ThreadChip
-                  lang={lang}
-                  name={thread.name}
-                  color={thread.color}
-                  href={`${threadHref(lang, thread.slug[lang])}#${epochSectionId(epoch.slug[lang])}`}
-                  count={counts.get(thread.id) ?? 0}
-                />
-              </li>
-            ))}
-          </ul>
-        </nav>
-      )
-    }
+    <EpochSwitcher lang={lang} items={switcherItems} />
+
+    <div class="tools" data-epoch-tools data-threads={site.threads.map((th) => th.id).join(',')}>
+      {
+        chips.length > 0 && (
+          <noscript>
+            <nav aria-label={t(lang, 'epoch.chips_label')}>
+              <ul class="chips">
+                {chips.map((thread) => (
+                  <li>
+                    <ThreadChip
+                      lang={lang}
+                      name={thread.name}
+                      color={thread.color}
+                      href={`${threadHref(lang, thread.slug[lang])}#${epochSectionId(epoch.slug[lang])}`}
+                      count={counts.get(thread.id) ?? 0}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </noscript>
+        )
+      }
+
+      <!-- Filter and view switch need JavaScript: hidden until the script shows them. Counters are fixed at build time. -->
+      <div class="tools__js" data-js-only hidden>
+        {
+          chips.length > 0 && (
+            <div role="group" aria-label={t(lang, 'epoch.chips_label')}>
+              <ul class="chips">
+                <li>
+                  <ThreadChip
+                    lang={lang}
+                    name={{ pt: t('pt', 'epoch.filter_all'), en: t('en', 'epoch.filter_all') }}
+                    color="var(--color-ink-muted)"
+                    count={feed.length}
+                    filter=""
+                  />
+                </li>
+                {chips.map((thread) => (
+                  <li>
+                    <ThreadChip lang={lang} name={thread.name} color={thread.color} count={counts.get(thread.id) ?? 0} filter={thread.id} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+        <div role="group" aria-label={t(lang, 'epoch.view_label')} class="view-switch">
+          <button type="button" data-view="timeline" aria-pressed="true">{t(lang, 'ui.view_timeline')}</button>
+          <button type="button" data-view="grid" aria-pressed="false">{t(lang, 'ui.view_grid')}</button>
+        </div>
+        <p
+          class="visually-hidden"
+          role="status"
+          data-status
+          data-one={t(lang, 'plural.stories_one')}
+          data-other={t(lang, 'plural.stories_other')}
+        >
+        </p>
+      </div>
+    </div>
 
     <section aria-labelledby="timeline-title">
       <h2 id="timeline-title" class="visually-hidden">{t(lang, 'epoch.timeline_label')}</h2>
-      <ol class="feed">
+      <ol class="feed" data-view="timeline">
         {
           feed.map((event) => (
-            <li class:list={['feed__item', `feed__item--${event.level}`]}>
+            <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')}>
               <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} />
             </li>
           ))
         }
       </ol>
+      <div class="feed-empty" data-empty hidden>
+        <p>{t(lang, 'epoch.empty')}</p>
+        <button type="button" class="button button--secondary">{t(lang, 'epoch.show_all')}</button>
+      </div>
     </section>
 
     <PagerNav
@@ -99,6 +150,10 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     />
   </div>
 </BaseLayout>
+
+<script>
+  import '../scripts/epoch-filter';
+</script>
 
 <style>
   .epoch > :global(* + *) {
@@ -123,6 +178,84 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     font-family: var(--epoch-heading-font);
     font-size: var(--text-xl);
     font-style: italic;
+  }
+
+  .tools {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .tools__js {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .view-switch {
+    display: inline-flex;
+    align-self: flex-start;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .view-switch button {
+    min-height: 2.75rem;
+    padding-inline: var(--space-4);
+    border: 0;
+    background: transparent;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .view-switch button[aria-pressed='true'] {
+    background: var(--color-ink);
+    color: var(--color-surface);
+  }
+
+  .feed-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px dashed var(--color-line);
+    border-radius: var(--radius-md);
+  }
+
+  /* Grid view: the same cards as tiles. One column on a narrow phone. */
+  .feed[data-view='grid'] {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: var(--space-4);
+    padding: 0;
+    border: 0;
+  }
+
+  .feed[data-view='grid'] .feed__item + .feed__item {
+    margin-block-start: 0;
+  }
+
+  .feed[data-view='grid'] .feed__item::before {
+    display: none;
+  }
+
+  .feed[data-view='grid'] .feed__item > :global(.ecard) {
+    height: 100%;
+  }
+
+  .feed[data-view='grid'] :global(.ecard__head) {
+    flex-direction: column;
+  }
+
+  .feed[data-view='grid'] :global(.ecard__thumb) {
+    width: 100%;
+    aspect-ratio: 1200 / 630;
   }
 
   .chips {

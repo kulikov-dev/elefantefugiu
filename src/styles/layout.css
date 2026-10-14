@@ -228,3 +228,8 @@
 .button[hidden] {
   display: none;
 }
+
+/* Elements shown by script only start with the hidden attribute; it must win over any display rule. */
+[hidden] {
+  display: none !important;
+}

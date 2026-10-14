@@ -131,6 +131,47 @@ for (const lang of ['pt', 'en']) {
       if (chip[4] !== `e-${epoch.slug[lang]}`) fail(`chip of "${th.id}" leads to #${chip[4]}, not to this epoch's section`);
     }
 
+    // client controls: same counters as the link chips, filter buttons for the script, data for the filter on every card
+    const tools = html.match(/<div class="tools"[\s\S]*?<section aria-labelledby="timeline-title"/)?.[0] ?? '';
+    if (!/data-epoch-tools/.test(tools) || !/data-js-only hidden/.test(tools)) fail('filter controls are missing or not hidden until the script runs');
+    const noscriptChips = tools.match(/<noscript>[\s\S]*?<\/noscript>/)?.[0] ?? '';
+    if (wantChips.length > 0 && !/<a [^>]*thread--link/.test(noscriptChips)) fail('without JavaScript the chips must be links (inside <noscript>)');
+    const jsPart = tools.replace(noscriptChips, '');
+    const buttons = [...jsPart.matchAll(/<button\b[^>]*data-fio(?:="([^"]*)")?[^>]*>([\s\S]*?)<\/button>/g)];
+    if (wantChips.length > 0) {
+      const all = buttons.find((b) => (b[1] ?? '') === '');
+      if (!all || Number(all[2].match(/thread__count"[^>]*>(\d+)</)?.[1]) !== feed.length) fail('"All" filter button is missing or its counter differs from the feed size');
+      for (const { th, n } of wantChips) {
+        const b = buttons.find((x) => x[1] === th.id);
+        if (!b) fail(`no filter button for thread "${th.id}"`);
+        else if (Number(b[2].match(/thread__count"[^>]*>(\d+)</)?.[1]) !== n) fail(`filter button of "${th.id}" shows a counter different from ${n}`);
+      }
+      if (buttons.length !== wantChips.length + 1) fail(`expected ${wantChips.length + 1} filter buttons, found ${buttons.length}`);
+    }
+    if ((jsPart.match(/<button\b[^>]*data-view="(timeline|grid)"/g) ?? []).length !== 2) fail('timeline/grid switch needs two buttons');
+    for (const e of feed) {
+      const li = feedHtml.match(new RegExp(`<li [^>]*data-threads="([^"]*)"[^>]*>\\s*<article [^>]*id="c-${e.id}"`));
+      if (!li || li[1].split(' ').sort().join(' ') !== [...e.threads].sort().join(' ')) fail(`card ${e.id}: data-threads does not match its threads`);
+    }
+    if (!/data-empty hidden/.test(html) || !/data-status/.test(html)) fail('empty-thread message or status line is missing');
+
+    // epoch switcher: every epoch once, in order; the current one marked, epochs with a page linked, the rest "coming soon"
+    const switcher = html.match(/<nav class="epoch-switch"[\s\S]*?<\/nav>/)?.[0] ?? '';
+    const switchItems = [...switcher.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)].map((m) => m[1]);
+    if (switchItems.length !== epochs.length) fail(`epoch switcher has ${switchItems.length} items, expected ${epochs.length}`);
+    epochs.forEach((other, i) => {
+      const item = switchItems[i] ?? '';
+      if (!item.includes(other.name[lang])) fail(`epoch switcher item ${i + 1} is not \"${other.name[lang]}\"`);
+      const isLink = /<a\b/.test(item);
+      if (other.id === epoch.id) {
+        if (isLink || !/aria-current="page"/.test(item)) fail('current epoch must be marked with aria-current and not be a link');
+      } else if (hasPage(other)) {
+        if (!new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${other.slug[lang]}/"`).test(item)) fail(`switcher: epoch "${other.id}" has a page and must be a link`);
+      } else if (isLink || !/epoch-switch__item--soon/.test(item) || !/\((Em breve|Coming soon)\)/.test(item)) {
+        fail(`switcher: epoch "${other.id}" has no page and must show "coming soon" without a link`);
+      }
+    });
+
     // neighbouring epochs: link when the neighbour has a page, otherwise "coming soon" as plain text
     const idx = epochs.findIndex((e) => e.id === epoch.id);
     const pager = html.match(/<nav class="pager"[\s\S]*?<\/nav>/)?.[0] ?? '';
@@ -190,6 +231,82 @@ for (const lang of ['pt', 'en']) {
   }
 }
 
+// ---------- home pages ----------
+const featuredIds = load('featured.yaml').map((f) => f.id);
+const pluralWord = (lang, n) => `${n} ${lang === 'pt' ? (n === 1 ? 'hist\u00f3ria' : 'hist\u00f3rias') : n === 1 ? 'story' : 'stories'}`;
+const SITE_NAME = 'O Elefante Fugiu';
+for (const lang of ['pt', 'en']) {
+  const where = `${lang}/ (home)`;
+  const fail = (m) => errors.push(`${where}: ${m}`);
+  const path = join(dist, lang, 'index.html');
+  const html = read(path);
+  if (!html) {
+    fail('page was not built');
+    continue;
+  }
+  pages += 1;
+  const raw = readFileSync(path, 'utf8');
+  const tiles = epochs.map((epoch) => ({ epoch, page: hasPage(epoch), count: inEpoch(epoch).length }));
+  const first = epochs.find(hasPage);
+  const placeholder = featuredIds.some((id) => events.find((e) => e.id === id)?.placeholder) || tiles.some((t) => t.page && t.epoch.placeholder);
+  commonChecks(html, where, lang, { placeholder, expectedH1: SITE_NAME });
+
+  // hero: tagline, "Start" leads to the first epoch with a page, "Open the map" leads to the map page
+  const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)?.[0] ?? '';
+  if (!hero.includes('Foi aqui')) fail('tagline is missing');
+  const hrefs = [...hero.matchAll(/<a [^>]*href="([^"]*)"/g)].map((m) => m[1]);
+  if (first && !hrefs.some((h) => h.endsWith(`/${lang}/${SEG[lang].epoch}/${first.slug[lang]}/`))) fail('"Start" must lead to the first epoch with a page');
+  if (!hrefs.some((h) => h.endsWith(lang === 'pt' ? '/pt/mapa/' : '/en/map/'))) fail('"Open the map" link is missing');
+
+  // showcase: exactly the featured cards, in the order of featured.yaml
+  const showcase = html.match(/<section aria-labelledby="showcase-title"[\s\S]*?<\/section>/)?.[0] ?? '';
+  const shown = cardSlugsIn(showcase, lang);
+  const expected = featuredIds.map((id) => slugOf(events.find((e) => e.id === id), lang));
+  if (JSON.stringify(shown) !== JSON.stringify(expected)) fail(`showcase differs from featured.yaml.\n    expected: ${expected.join(', ')}\n    found:    ${shown.join(', ')}`);
+
+  // "Surprise me": button hidden until the script runs; embedded list = published, all ages, not heavy; links are real card pages
+  if (!/data-surprise hidden/.test(showcase)) fail('"Surprise me" button must be hidden without JavaScript');
+  const list = JSON.parse(raw.match(/<script type="application\/json" id="surprise-data">([\s\S]*?)<\/script>/)?.[1] ?? '[]');
+  const wantList = events.filter((e) => !e.sensitive && String(e.min_age) === 'all');
+  if (JSON.stringify(list.map((x) => x.id)) !== JSON.stringify(wantList.map((e) => e.id))) fail('surprise list differs from the eligible cards in the data');
+  for (const item of list) {
+    const ev = events.find((e) => e.id === item.id);
+    if (!ev || !item.href.endsWith(`/${lang}/${SEG[lang].story}/${slugOf(ev, lang)}/`)) fail(`surprise link of ${item.id} is not its card page`);
+  }
+
+  // epoch tiles: all epochs by order; pages with link, count and theme; the rest "coming soon" without link
+  const section = html.match(/<section id="epocas"[\s\S]*?<\/section>/)?.[0] ?? '';
+  const items = [...section.matchAll(/<li class="tile ([^"]*)"[^>]*>([\s\S]*?)<\/li>/g)];
+  if (items.length !== epochs.length) fail(`expected ${epochs.length} epoch tiles, found ${items.length}`);
+  tiles.forEach(({ epoch, page, count }, i) => {
+    const [, cls = '', body = ''] = items[i] ?? [];
+    if (!body.includes(epoch.name[lang])) fail(`tile ${i + 1} is not "${epoch.name[lang]}"`);
+    if (page) {
+      if (!cls.includes('tile--link') || !new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${epoch.slug[lang]}/"`).test(body)) fail(`tile "${epoch.id}" must link to its page`);
+      if (!text(body).includes(pluralWord(lang, count))) fail(`tile "${epoch.id}" must show "${pluralWord(lang, count)}"`);
+      if (!body.includes(epoch.theme[lang])) fail(`tile "${epoch.id}" misses the theme phrase`);
+      if (!body.includes(`${epoch.years.from}\u2013${epoch.years.to}`)) fail(`tile "${epoch.id}" misses the years`);
+    } else {
+      if (!cls.includes('tile--soon') || /<a\b/.test(body)) fail(`tile "${epoch.id}" has no page: "coming soon" without a link expected`);
+      if (!body.includes(epoch.years_label[lang])) fail(`tile "${epoch.id}" misses years_label`);
+      if (!/(Em breve|Coming soon)/.test(body)) fail(`tile "${epoch.id}" misses the "coming soon" label`);
+    }
+  });
+
+  // thread buttons: exactly the visible threads, each a link to its page with the total from the data
+  const threadsSection = html.match(/<section aria-labelledby="threads-title"[\s\S]*?<\/section>/)?.[0] ?? '';
+  const links = [...threadsSection.matchAll(/<a [^>]*href="[^"]*\/(?:fio|thread)\/([^"/]+)\/"[^>]*>([\s\S]*?)<\/a>/g)];
+  if (links.length !== visibleThreads.length) fail(`expected ${visibleThreads.length} thread buttons, found ${links.length}`);
+  for (const th of visibleThreads) {
+    const l = links.find((m) => m[1] === th.slug[lang]);
+    if (!l) fail(`no button for thread "${th.id}"`);
+    else if (Number(l[2].match(/thread__count"[^>]*>(\d+)</)?.[1]) !== inThread(th).length) fail(`counter of thread "${th.id}" differs from the data (${inThread(th).length})`);
+  }
+
+  // how it works: three steps
+  if ((html.match(/<li class="step"/g) ?? []).length !== 3) fail('"How it works" needs exactly three steps');
+}
+
 // ---------- reachability: every published card from a feed, and from a thread page when it has a visible thread ----------
 for (const lang of ['pt', 'en']) {
   for (const e of events) {
@@ -204,4 +321,4 @@ if (errors.length > 0) {
   console.error(`Listing check failed:\n- ${errors.join('\n- ')}`);
   process.exit(1);
 }
-console.log(`Listing check passed (${pages} epoch and thread pages: feed order, counters, sections, neighbours, reachability).`);
+console.log(`Listing check passed (${pages} pages: home, epochs, threads: feed order, tiles, counters, sections, neighbours, reachability).`);

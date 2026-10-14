@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { EventData } from '../src/lib/events';
-import { epochFeed, epochHasContent, neighbourEpochs, threadCountsInEpoch, threadSections } from '../src/lib/epochs';
+import { epochFeed, epochHasContent, epochSwitcherItems, neighbourEpochs, threadCountsInEpoch, threadSections } from '../src/lib/epochs';
 
 // Synthetic data: only the fields the helpers read.
 const ev = (id: string, epoch: string, year: number, threads: string[], status: 'ready' | 'draft' = 'ready') =>
@@ -96,4 +96,12 @@ test('neighbours in the real data: epoch 4 has "coming soon" on the left, 6 has 
   assert.equal(neighbourEpochs(byOrder(4), realEpochs, none).prev?.available, false);
   assert.equal(neighbourEpochs(byOrder(6), realEpochs, none).next?.epoch.order, 7);
   assert.equal(neighbourEpochs(byOrder(6), realEpochs, none).next?.available, false);
+});
+
+test('epochSwitcherItems: all epochs by order, current marked, link only with a page, rest "soon"', () => {
+  const items = epochSwitcherItems(ep('e2', 2), epochs, events);
+  assert.deepEqual(items.map((i) => [i.epoch.id, i.state]), [['e1', 'link'], ['e2', 'current'], ['e3', 'soon']]);
+  // an MVP epoch without a published card has no page, so it is not a link
+  const empty = epochSwitcherItems(ep('e1', 1), [ep('e1', 1), ep('e9', 9)], events);
+  assert.deepEqual(empty.map((i) => i.state), ['current', 'soon']);
 });

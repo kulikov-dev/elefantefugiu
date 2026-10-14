@@ -15,6 +15,7 @@ npm ci                             # once
 npm run serve &                    # serves dist/ on http://localhost:4400 (base path "/")
 npm run behave                     # card page: PASS / FAIL list, exit code 1 on failure
 npm run listings                   # epoch and thread pages: PASS / FAIL list, exit code 1 on failure
+npm run controls                   # stage 4b: epoch switcher, filter, grid, home, Surprise me
 npm run shots                      # screenshots to scripts/qa/out/ (git-ignored)
 ```
 
@@ -40,3 +41,16 @@ If you build with `BASE_PATH`, serve it under that path yourself and set `BASE_U
 6. Neighbouring epochs link both ways; on a card page the epoch crumb and thread chips lead to the real pages.
 7. Language switch keeps epoch and thread pages.
 8. Keyboard: thread chips come before the feed in tab order, every stop has a visible outline, Enter and Space open and close a card.
+
+## What `controls` checks (stage 4b)
+
+1. Epoch switcher: nine epochs, current marked, two other MVP epochs linked, six "coming soon" without links.
+2. Without JavaScript: thread chips are links, filter and view buttons are not shown, address parameters are ignored.
+3. Filter and view: `?fio=` and `?vista=grelha` in the address, exactly the matching cards (primary or second thread), counters unchanged, one column at 360 px and several on a wide screen, state survives a reload.
+4. Unknown parameters are ignored; empty thread message and "Show all" (the empty case is simulated, the test data has none).
+5. Back from a card keeps address, visible cards and scroll position, in timeline and in grid.
+6. Keyboard on the controls.
+7. Home without JavaScript: hero buttons, three featured cards, nine tiles (three links, six "coming soon"), thread buttons, three steps.
+8. Tile counts equal the cards on the epoch pages; Start, tiles and thread buttons lead to the right pages.
+9. "Surprise me" in pt and en: eight clicks without an immediate repeat, never the heavy-topic card, last card remembered, works with blocked `localStorage`.
+10. Home: language switch, keyboard focus outlines.

@@ -1,0 +1,268 @@
+---
+// Home page: /pt/, /en/ (docs/spec.md section 5.1). Everything is built from the data; works without JavaScript
+// (only the "Surprise me" button needs a script and stays hidden without it).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import ThreadChip from '../components/ThreadChip.astro';
+import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
+import { plural, t } from '../i18n';
+import { epochYearsText } from '../lib/epochs';
+import { epochTiles, firstMvpEpoch, surpriseCandidates } from '../lib/home';
+import { countCardsByThread } from '../lib/threads';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const site = await loadSite();
+
+const start = firstMvpEpoch(site.epochs, site.events);
+const tiles = epochTiles(site.epochs, site.events);
+const threadCounts = countCardsByThread(site.events);
+const surprise = surpriseCandidates(site.events).map((e) => ({ id: e.id, href: storyPath(lang, e.slug[lang]) }));
+
+// Test text must stay out of search results until it is real.
+const noindex = site.featured.some((e) => e.placeholder) || tiles.some((tile) => tile.available && tile.epoch.placeholder);
+
+const steps = [
+  { key: 'hook', n: 1 },
+  { key: 'story', n: 2 },
+  { key: 'more', n: 3 },
+] as const;
+---
+<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex}>
+  <div class="home">
+    <section class="hero" aria-labelledby="home-title">
+      <h1 id="home-title">{t(lang, 'site.name')}</h1>
+      <p class="hero__tagline">{t(lang, 'site.tagline')}</p>
+      <p class="hero__intro">{t(lang, 'site.description')}</p>
+      <p class="hero__actions">
+        {start && <a class="button" href={epochHref(lang, start.slug[lang])}>{t(lang, 'home.start')}</a>}
+        <a class="button button--secondary" href={pagePath(lang, 'map')}>{t(lang, 'home.open_map')}</a>
+      </p>
+    </section>
+
+    {
+      site.featured.length > 0 && (
+        <section aria-labelledby="showcase-title" data-showcase>
+          <h2 id="showcase-title">{t(lang, 'home.showcase_heading')}</h2>
+          <ul class="showcase">
+            {site.featured.map((event) => (
+              <li>
+                <EventCard lang={lang} event={event} variant="grid" threads={site.threads} visibleThreadIds={site.visibleThreadIds} showThreads={false} />
+              </li>
+            ))}
+          </ul>
+          <button type="button" class="button button--secondary showcase__surprise" data-surprise hidden>
+            {t(lang, 'ui.surprise')}
+          </button>
+          <script type="application/json" id="surprise-data" set:html={JSON.stringify(surprise)} />
+        </section>
+      )
+    }
+
+    <section id={EPOCHS_ANCHOR} aria-labelledby="epocas-title">
+      <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
+      <ol class="tiles">
+        {
+          tiles.map(({ epoch, available, count }) =>
+            available ? (
+              <li class="tile tile--link">
+                <h3 class="tile__name">
+                  <a href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
+                </h3>
+                <p class="tile__years">{epochYearsText(epoch, lang)}</p>
+                {epoch.theme && <p class="tile__theme">{epoch.theme[lang]}</p>}
+                <p class="tile__count">{plural(lang, 'plural.stories', count)}</p>
+              </li>
+            ) : (
+              <li class="tile tile--soon">
+                <h3 class="tile__name">{epoch.name[lang]}</h3>
+                <p class="tile__years">{epochYearsText(epoch, lang)}</p>
+                <p class="tile__soon">{t(lang, 'ui.soon')}</p>
+              </li>
+            ),
+          )
+        }
+      </ol>
+    </section>
+
+    {
+      site.visibleThreads.length > 0 && (
+        <section aria-labelledby="threads-title">
+          <h2 id="threads-title">{t(lang, 'home.threads_heading')}</h2>
+          <p>{t(lang, 'home.threads_intro')}</p>
+          <ul class="chips">
+            {site.visibleThreads.map((thread) => (
+              <li>
+                <ThreadChip lang={lang} name={thread.name} color={thread.color} href={threadHref(lang, thread.slug[lang])} count={threadCounts.get(thread.id) ?? 0} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section aria-labelledby="how-title">
+      <h2 id="how-title">{t(lang, 'home.how_heading')}</h2>
+      <ol class="steps">
+        {
+          steps.map(({ key, n }) => (
+            <li class="step">
+              <span class="step__n" aria-hidden="true">{n}</span>
+              <h3 class="step__name">{t(lang, `home.step_${key}`)}</h3>
+              <p>{t(lang, `home.step_${key}_text`)}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  import '../scripts/surprise';
+</script>
+
+<style>
+  .home > :global(* + *) {
+    margin-block-start: var(--space-6);
+  }
+
+  .home :global(h2) {
+    margin-block-end: var(--space-3);
+  }
+
+  .hero__intro {
+    max-width: var(--measure);
+    margin-block-start: var(--space-3);
+    font-size: var(--text-lg);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-block-start: var(--space-4);
+  }
+
+  .showcase,
+  .tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .showcase__surprise {
+    margin-block-start: var(--space-4);
+  }
+
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .tile__name {
+    font-size: var(--text-lg);
+    line-height: 1.25;
+  }
+
+  .tile__years,
+  .tile__count {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .tile__theme {
+    font-family: var(--font-heading);
+    font-style: italic;
+  }
+
+  /* The whole tile is the link target (the link is the heading text, stretched over the tile). */
+  .tile--link .tile__name a {
+    text-decoration: none;
+  }
+
+  .tile--link .tile__name a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .tile--link:hover {
+    border-color: var(--color-accent);
+  }
+
+  .tile--link:focus-within {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .tile--soon {
+    border-style: dashed;
+    color: var(--color-ink-muted);
+  }
+
+  .tile__soon {
+    margin-block-start: auto;
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-1) var(--space-3);
+    align-items: center;
+  }
+
+  .step > p {
+    grid-column: 1 / -1;
+    color: var(--color-ink-muted);
+  }
+
+  .step__n {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-weight: 700;
+  }
+
+  .step__name {
+    font-size: var(--text-lg);
+  }
+</style>

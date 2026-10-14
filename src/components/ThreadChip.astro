@@ -11,12 +11,22 @@ interface Props {
   /** Address of the thread page; leave out for threads that are hidden (too few cards). */
   href?: string;
   count?: number;
+  /** Renders a filter button (script only) instead of a link; the value is the thread id, empty for "all". */
+  filter?: string;
 }
 
-const { lang, name, color, href, count } = Astro.props;
-const Tag = href ? 'a' : 'span';
+const { lang, name, color, href, count, filter } = Astro.props;
+const isButton = filter !== undefined;
+const Tag = isButton ? 'button' : href ? 'a' : 'span';
 ---
-<Tag class:list={['thread', { 'thread--link': Boolean(href) }]} style={`--thread-color: ${color}`} href={href}>
+<Tag
+  class:list={['thread', { 'thread--link': Boolean(href) || isButton, 'thread--button': isButton }]}
+  style={`--thread-color: ${color}`}
+  href={isButton ? undefined : href}
+  type={isButton ? 'button' : undefined}
+  aria-pressed={isButton ? 'false' : undefined}
+  data-fio={isButton ? filter : undefined}
+>
   <span class="thread__dot" aria-hidden="true"></span>
   {name[lang]}
   {
@@ -54,6 +64,22 @@ const Tag = href ? 'a' : 'span';
   .thread--link:hover {
     border-color: var(--thread-color);
     background: #f1f5f9;
+  }
+
+  .thread--button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  .thread--button[aria-pressed='true'] {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-surface);
+  }
+
+  .thread--button[aria-pressed='true'] .thread__count {
+    background: var(--color-surface);
+    color: var(--color-ink);
   }
 
   .thread__dot {

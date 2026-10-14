@@ -92,9 +92,10 @@ const newPage = async () => {
   await page.close();
 }
 
-// 4. Counters and links: epoch page -> thread page
+// 4. Counters and links: epoch page -> thread page (without JavaScript the chips are links; with it they are filter buttons)
 {
   const page = await newPage();
+  await page.setJavaScriptEnabled(false);
   await page.goto(EPOCH, { waitUntil: 'networkidle0' });
   const chips = await page.$$eval('.chips a.thread--link', (as) =>
     as.map((a) => ({ href: a.getAttribute('href'), count: Number(a.querySelector('.thread__count')?.textContent), label: a.textContent.replace(/\s+/g, ' ').trim() })),
@@ -146,11 +147,12 @@ const newPage = async () => {
   const page = await newPage();
   await page.goto(EPOCH, { waitUntil: 'networkidle0' });
   const hasPrev = await page.$('nav.pager a[rel="prev"]');
-  ok('first epoch has no "back" link', hasPrev === null);
-  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('nav.pager a[rel="next"]')]);
-  ok('"next" leads to the next epoch page', page.url() === NEXT_EPOCH);
-  const prevHref = await page.$eval('nav.pager a[rel="prev"]', (a) => a.getAttribute('href'));
-  ok('the next epoch links back', prevHref === '/pt/epoca/avis-e-descobrimentos/');
+  const hasNext = await page.$('nav.pager a[rel="next"]');
+  ok('neighbours of the first MVP epoch are "coming soon" (no links)', hasPrev === null && hasNext === null);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('nav.epoch-switch a[href$="/pt/epoca/pombal-e-terramoto/"]')]);
+  ok('the epoch switcher leads to the next MVP epoch page', page.url() === NEXT_EPOCH);
+  const backHref = await page.$eval('nav.epoch-switch a[href$="/pt/epoca/avis-e-descobrimentos/"]', (a) => a.getAttribute('href'));
+  ok('the next epoch links back through the switcher', backHref === '/pt/epoca/avis-e-descobrimentos/');
   await page.goto(`${base}/pt/historia/evento-exemplo-02/`, { waitUntil: 'networkidle0' });
   const links = await page.evaluate(() => ({
     crumb: document.querySelector('.crumbs a')?.getAttribute('href'),
@@ -199,9 +201,9 @@ const newPage = async () => {
     if (info.h === 0 || info.w === 0) bad.push(`${info.tag} "${info.name}": hidden element has focus`);
     if (seen.length > 1 && seen.at(-1).name === seen[0].name && seen.at(-1).tag === seen[0].tag) break;
   }
-  const firstThreadChip = seen.findIndex((s) => s.tag === 'a' && /\d/.test(s.name));
+  const firstThreadChip = seen.findIndex((s) => s.tag === 'button' && /\d/.test(s.name));
   const firstSummary = seen.findIndex((s) => s.tag === 'summary');
-  ok('keyboard: thread chips come before the feed in tab order', firstThreadChip >= 0 && firstSummary > firstThreadChip);
+  ok('keyboard: filter buttons come before the feed in tab order', firstThreadChip >= 0 && firstSummary > firstThreadChip);
   ok('keyboard: every stop has a visible outline and is visible', bad.length === 0, bad.join('; '));
   await page.focus('details[data-ecard="evento-exemplo-01"] > summary');
   await page.keyboard.press('Enter');
