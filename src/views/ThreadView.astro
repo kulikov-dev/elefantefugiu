@@ -1,0 +1,173 @@
+---
+// Thread page: /pt/fio/{slug}, /en/thread/{slug} (docs/spec.md section 5.5).
+// Stage 4a: name, description, links to the epoch sections, a grid of cards per epoch.
+// The client-side epoch filter and the mini map come later.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import { epochHref, threadHref, type Lang } from '../i18n/routes';
+import { plural, t } from '../i18n';
+import { epochSectionId, threadSections, type ThreadData } from '../lib/epochs';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+  thread: ThreadData;
+}
+
+const { lang, thread } = Astro.props;
+const site = await loadSite();
+
+const sections = threadSections(thread, site.epochs, site.events);
+const total = sections.reduce((sum, section) => sum + section.events.length, 0);
+const alternates = { pt: threadHref('pt', thread.slug.pt), en: threadHref('en', thread.slug.en) };
+const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => e.placeholder));
+---
+<BaseLayout lang={lang} title={thread.name[lang]} alternates={alternates} description={thread.description[lang]} noindex={noindex}>
+  <div class="thread-page" style={`--thread-color: ${thread.color}`}>
+    <header class="thread-page__header">
+      <h1>
+        <span class="thread-page__dot" aria-hidden="true"></span>
+        {thread.name[lang]}
+      </h1>
+      <p class="thread-page__description">{thread.description[lang]}</p>
+      <p class="thread-page__count">{plural(lang, 'plural.stories', total)}</p>
+    </header>
+
+    <nav aria-label={t(lang, 'thread.eras_label')}>
+      <ul class="chips">
+        {
+          sections.map(({ epoch, events }) => (
+            <li>
+              <a class="chip" href={`#${epochSectionId(epoch.slug[lang])}`}>
+                {epoch.name[lang]}
+                <span class="chip__count" aria-hidden="true">{events.length}</span>
+                <span class="visually-hidden">: {plural(lang, 'plural.stories', events.length)}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    {
+      sections.map(({ epoch, events }) => (
+        <section id={epochSectionId(epoch.slug[lang])} class="section" aria-labelledby={`h-${epoch.id}`}>
+          <h2 id={`h-${epoch.id}`}>
+            <a href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
+            <span class="section__count">{plural(lang, 'plural.stories', events.length)}</span>
+          </h2>
+          <ul class="grid">
+            {events.map((event) => (
+              <li>
+                <EventCard
+                  lang={lang}
+                  event={event}
+                  variant="grid"
+                  threads={site.threads}
+                  visibleThreadIds={site.visibleThreadIds}
+                  showThreads={false}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .thread-page > :global(* + *) {
+    margin-block-start: var(--space-5);
+  }
+
+  .thread-page__header > * + * {
+    margin-block-start: var(--space-2);
+  }
+
+  .thread-page__header h1 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-2xl);
+  }
+
+  .thread-page__dot {
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: var(--thread-color);
+  }
+
+  .thread-page__description {
+    max-width: var(--measure);
+    font-size: var(--text-lg);
+  }
+
+  .thread-page__count {
+    color: var(--color-ink-muted);
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 2.75rem;
+    padding: 0.15rem 0.85rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .chip:hover {
+    border-color: var(--thread-color);
+    background: #f1f5f9;
+  }
+
+  .chip__count {
+    min-width: 1.4rem;
+    padding: 0 0.4rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-surface);
+    text-align: center;
+  }
+
+  .section {
+    scroll-margin-block-start: var(--space-4);
+  }
+
+  .section h2 {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 var(--space-3);
+    font-size: var(--text-xl);
+  }
+
+  .section__count {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    font-weight: 400;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    gap: var(--space-4);
+    margin-block-start: var(--space-3);
+    list-style: none;
+  }
+</style>

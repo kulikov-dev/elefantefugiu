@@ -1,7 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
-import { pagePath, type Lang, type PageKey } from '../i18n/routes';
+import { EPOCHS_ANCHOR, pagePath, type Lang, type PageKey } from '../i18n/routes';
 import { t } from '../i18n';
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 const { lang, pageKey, alternates } = Astro.props;
 
 const items = [
-  { label: t(lang, 'nav.epochs'), href: `${pagePath(lang, 'home')}#epocas`, key: undefined },
+  { label: t(lang, 'nav.epochs'), href: `${pagePath(lang, 'home')}#${EPOCHS_ANCHOR}`, key: undefined },
   { label: t(lang, 'nav.map'), href: pagePath(lang, 'map'), key: 'map' },
   { label: t(lang, 'nav.about'), href: pagePath(lang, 'about'), key: 'about' },
 ];

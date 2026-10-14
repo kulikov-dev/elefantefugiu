@@ -95,5 +95,22 @@
     "view_grid": "Grelha",
     "sources": "Fontes",
     "checked_on": "Verificado em"
+  },
+  "epoch": {
+    "chips_label": "Fios desta época",
+    "timeline_label": "Cronologia da época",
+    "neighbours_label": "Épocas vizinhas",
+    "back_to": "Voltar a",
+    "go_to": "Seguir para"
+  },
+  "thread": {
+    "eras_label": "Épocas deste fio"
+  },
+  "feed": {
+    "expand_story": "Ler a história"
+  },
+  "plural": {
+    "stories_one": "{n} história",
+    "stories_other": "{n} histórias"
   }
 }

@@ -1,19 +1,33 @@
 ---
-// A thread (theme) name with its colour dot. Plain text for now: thread pages arrive in a later stage.
+// A thread (theme) name with its colour dot. A link when the thread has a page, otherwise plain text.
+// With `count` it shows the number of stories (the number is hidden from screen readers; they get the words).
+import { plural } from '../i18n';
 import type { Lang } from '../i18n/routes';
 
 interface Props {
   lang: Lang;
   name: { pt: string; en: string };
   color: string;
+  /** Address of the thread page; leave out for threads that are hidden (too few cards). */
+  href?: string;
+  count?: number;
 }
 
-const { lang, name, color } = Astro.props;
+const { lang, name, color, href, count } = Astro.props;
+const Tag = href ? 'a' : 'span';
 ---
-<span class="thread" style={`--thread-color: ${color}`}>
+<Tag class:list={['thread', { 'thread--link': Boolean(href) }]} style={`--thread-color: ${color}`} href={href}>
   <span class="thread__dot" aria-hidden="true"></span>
   {name[lang]}
-</span>
+  {
+    count !== undefined && (
+      <>
+        <span class="thread__count" aria-hidden="true">{count}</span>
+        <span class="visually-hidden">: {plural(lang, 'plural.stories', count)}</span>
+      </>
+    )
+  }
+</Tag>
 
 <style>
   .thread {
@@ -28,6 +42,18 @@ const { lang, name, color } = Astro.props;
     font-size: var(--text-sm);
     font-weight: 600;
     line-height: 1.5;
+    text-decoration: none;
+  }
+
+  /* Links get a full-size touch target. */
+  .thread--link {
+    min-height: 2.75rem;
+    padding-inline: 0.85rem;
+  }
+
+  .thread--link:hover {
+    border-color: var(--thread-color);
+    background: #f1f5f9;
   }
 
   .thread__dot {
@@ -35,5 +61,15 @@ const { lang, name, color } = Astro.props;
     height: 0.65rem;
     border-radius: 50%;
     background: var(--thread-color);
+  }
+
+  .thread__count {
+    min-width: 1.4rem;
+    padding: 0 0.4rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-ink);
+    color: var(--color-surface);
+    font-size: var(--text-sm);
+    text-align: center;
   }
 </style>

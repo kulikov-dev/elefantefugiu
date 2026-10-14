@@ -1,0 +1,268 @@
+---
+// A card in a list. Two variants:
+//   feed: the story layer opens in place (<details>, works without JavaScript), a link leads to the card page;
+//   grid: a tile that links to the card page (thread pages).
+import { t } from '../i18n';
+import { storyPath, withBase, threadHref, type Lang } from '../i18n/routes';
+import { formatYear, type EventData } from '../lib/events';
+import type { ThreadData } from '../lib/epochs';
+import AgeBadge from './AgeBadge.astro';
+import TagLabel from './TagLabel.astro';
+import ThreadChip from './ThreadChip.astro';
+
+interface Props {
+  lang: Lang;
+  event: EventData;
+  variant: 'feed' | 'grid';
+  threads: readonly ThreadData[];
+  /** Only these threads have a page, so only they become links. */
+  visibleThreadIds: ReadonlySet<string>;
+  /** Thread chips are left out where the page itself is about one thread. */
+  showThreads?: boolean;
+}
+
+const { lang, event, variant, threads, visibleThreadIds, showThreads = true } = Astro.props;
+const href = storyPath(lang, event.slug[lang]);
+const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) => th.id === id)).filter((th) => th !== undefined) : [];
+// Placeholder text is Latin filler: mark it so screen readers do not read it as Portuguese.
+const textLang = event.placeholder ? 'la' : undefined;
+---
+<article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`}>
+  <div class="ecard__head">
+    {
+      event.image && (
+        <img
+          class="ecard__thumb"
+          src={withBase(event.image.src)}
+          alt={event.image.alt[lang]}
+          width="1200"
+          height="630"
+          loading="lazy"
+          decoding="async"
+        />
+      )
+    }
+    <div class="ecard__titles">
+      <p class="ecard__meta">{formatYear(event, lang)} &middot; {event.place.name}</p>
+      <h3 class="ecard__title"><a href={href}>{event.title[lang]}</a></h3>
+    </div>
+  </div>
+
+  <ul class="ecard__tags">
+    {
+      eventThreads.map((thread) => (
+        <li>
+          <ThreadChip
+            lang={lang}
+            name={thread.name}
+            color={thread.color}
+            href={visibleThreadIds.has(thread.id) ? threadHref(lang, thread.slug[lang]) : undefined}
+          />
+        </li>
+      ))
+    }
+    <li><TagLabel lang={lang} label={event.label} /></li>
+    <li><AgeBadge lang={lang} age={event.min_age} /></li>
+    {
+      event.sensitive && (
+        <li>
+          <span class="ecard__heavy">
+            <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+              <path d="M10 2.5l8 14H2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+              <path d="M10 8v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              <circle cx="10" cy="14.2" r="1" fill="currentColor" />
+            </svg>
+            {t(lang, 'ui.heavy_topic')}
+          </span>
+        </li>
+      )
+    }
+  </ul>
+
+  {
+    variant === 'feed' ? (
+      <details class="ecard__layer" data-ecard={event.id}>
+        <summary>
+          <span class="ecard__hook" lang={textLang}>{event.hook[lang]}</span>
+          <span class="visually-hidden"> ({t(lang, 'feed.expand_story')})</span>
+          <svg class="ecard__chevron" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+            <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </summary>
+        <div class="ecard__story">
+          <p lang={textLang}>{event.story[lang]}</p>
+          <a class="button button--secondary" href={href}>{t(lang, 'ui.more')}</a>
+        </div>
+      </details>
+    ) : (
+      <p class="ecard__hook ecard__hook--plain" lang={textLang}>{event.hook[lang]}</p>
+    )
+  }
+</article>
+
+<style>
+  .ecard {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    scroll-margin-block-start: var(--space-4);
+  }
+
+  .ecard__head {
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .ecard__thumb {
+    flex: none;
+    width: 5.5rem;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    background: var(--color-line);
+  }
+
+  .ecard__titles {
+    min-width: 0;
+  }
+
+  .ecard__meta {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .ecard__title {
+    font-size: var(--text-lg);
+    line-height: 1.25;
+  }
+
+  /* Key events of the frame are a step more prominent than the stories between them. */
+  .ecard--frame {
+    border-inline-start: 4px solid var(--epoch-accent);
+  }
+
+  .ecard--frame .ecard__title {
+    font-size: var(--text-xl);
+  }
+
+  .ecard__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+
+  .ecard__heavy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 0.15rem 0.6rem;
+    border: 1px solid #7a2e0e;
+    border-radius: var(--radius-pill);
+    background: #fdeee6;
+    color: #5e2108;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .ecard__hook {
+    font-family: var(--epoch-heading-font);
+    font-style: italic;
+    font-size: var(--text-lg);
+    line-height: 1.35;
+  }
+
+  .ecard__hook--plain {
+    max-width: var(--measure);
+  }
+
+  /* The hook is the opener of the story layer. */
+  summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 48px;
+    padding-block: var(--space-1);
+    cursor: pointer;
+  }
+
+  summary:focus-visible {
+    outline-offset: 4px;
+  }
+
+  .ecard__chevron {
+    flex: none;
+    margin-block-start: 0.35rem;
+    color: var(--color-accent);
+    transition: transform var(--transition);
+  }
+
+  details[open] .ecard__chevron {
+    transform: rotate(180deg);
+  }
+
+  .ecard__story {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    max-width: var(--measure);
+    padding-block-start: var(--space-2);
+    border-block-start: 1px solid var(--color-line);
+  }
+
+  /* Grid tiles: picture on top, full width. */
+  .ecard--grid {
+    height: 100%;
+  }
+
+  .ecard--grid .ecard__head {
+    flex-direction: column;
+  }
+
+  .ecard--grid .ecard__thumb {
+    width: 100%;
+    aspect-ratio: 1200 / 630;
+  }
+</style>
+
+<script>
+  // Opening a card in the feed puts #c-<id> in the address (replaceState: no extra history entries),
+  // and a link with that hash opens the card. Without JavaScript the <details> still works.
+  const cards = document.querySelectorAll<HTMLDetailsElement>('details[data-ecard]');
+
+  if (cards.length > 0) {
+    const openFromHash = () => {
+      const match = location.hash.match(/^#c-(.+)$/);
+      if (!match) return;
+      const card = [...cards].find((d) => d.dataset.ecard === decodeURIComponent(match[1]!));
+      if (card) card.open = true;
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener('toggle', () => {
+        const hash = `#c-${card.dataset.ecard}`;
+        let next = location.hash;
+        if (card.open) next = hash;
+        else if (location.hash === hash) next = '';
+        if (next === location.hash) return;
+        try {
+          history.replaceState(history.state, '', location.pathname + location.search + next);
+        } catch {
+          // Some contexts forbid it; the card still opens.
+        }
+      });
+    });
+
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
+  }
+</script>

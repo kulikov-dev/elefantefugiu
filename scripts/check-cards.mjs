@@ -92,10 +92,16 @@ for (const ev of events) {
     if (!has(new RegExp(`<h1[^>]*>${ev.title[lang]}</h1>`))) fail('h1 does not contain the event title');
     if (!has(new RegExp(`<span class="tag tag--${ev.label}"`))) fail(`credibility label "${ev.label}" is missing`);
     if (!has(new RegExp(`<span class="age age--${ev.min_age}"`))) fail(`age badge "${ev.min_age}" is missing`);
-    ev.threads.forEach((id) => {
-      if (!has(/class="thread"/)) fail(`thread chip for "${id}" is missing`);
-    });
-    if ((html.match(/class="thread"/g) ?? []).length !== ev.threads.length) fail('number of thread chips differs from the data');
+    // Thread chips: one per thread; a link to the thread page (/fio/ or /thread/) for every thread of the data
+    // (all test threads have enough cards to have a page).
+    const chips = [...html.matchAll(/<(a|span)\b[^>]*\bclass="thread(?: [^"]*)?"[^>]*>/g)];
+    if (chips.length !== ev.threads.length) fail(`expected ${ev.threads.length} thread chips, found ${chips.length}`);
+    for (const chip of chips) {
+      if (chip[1] !== 'a' || !/href="[^"]*\/(fio|thread)\/[^"]+\/"/.test(chip[0])) fail('thread chip is not a link to a thread page');
+    }
+    // Epoch crumb leads to the epoch page, not to the home page.
+    const crumb = html.match(/<nav class="crumbs"[\s\S]*?<\/nav>/)?.[0] ?? '';
+    if (!/<a href="[^"]*\/(epoca|era)\/[^"]+\/"/.test(crumb)) fail('epoch crumb is not a link to an epoch page');
     if (has(/class="heavy"/) !== Boolean(ev.sensitive)) fail(`heavy topic banner should ${ev.sensitive ? '' : 'not '}be shown`);
     if (has(/<meta name="robots" content="noindex"/) !== Boolean(ev.placeholder)) fail('noindex must be set exactly for placeholder cards');
     if (has(/class="placeholder-notice"/) !== Boolean(ev.placeholder)) fail('test-text notice does not match the placeholder flag');

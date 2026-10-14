@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "node serve.mjs",
     "shots": "node shots.mjs",
-    "behave": "node behave.mjs"
+    "behave": "node behave.mjs",
+    "listings": "node listings.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "131.0.1",

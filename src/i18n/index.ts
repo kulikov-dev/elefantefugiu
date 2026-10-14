@@ -15,3 +15,14 @@ export function t(lang: Lang, key: string): string {
   }
   return node;
 }
+
+const pluralRules: Record<Lang, Intl.PluralRules> = {
+  pt: new Intl.PluralRules('pt-PT'),
+  en: new Intl.PluralRules('en'),
+};
+
+/** Plural string: looks up `${key}_one` or `${key}_other` and replaces {n} with the number. */
+export function plural(lang: Lang, key: string, n: number): string {
+  const form = pluralRules[lang].select(n) === 'one' ? 'one' : 'other';
+  return t(lang, `${key}_${form}`).replace('{n}', String(n));
+}

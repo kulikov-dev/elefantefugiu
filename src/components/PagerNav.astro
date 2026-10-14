@@ -1,0 +1,85 @@
+---
+// Previous / next links (cards in an epoch, neighbouring epochs). An item without href is a
+// "coming soon" placeholder: plain text, not focusable.
+interface Item {
+  /** Small line above the title, with the arrow. */
+  dir: string;
+  title: string;
+  href?: string;
+  /** Extra line for items that are not available yet. */
+  note?: string;
+  rel?: 'prev' | 'next';
+}
+
+interface Props {
+  label: string;
+  prev?: Item | null;
+  next?: Item | null;
+}
+
+const { label, prev, next } = Astro.props;
+---
+{
+  (prev || next) && (
+    <nav class="pager" aria-label={label}>
+      {[prev, next].map((item, i) =>
+        item ? (
+          item.href ? (
+            <a class:list={['pager__link', { 'pager__link--next': i === 1 }]} href={item.href} rel={item.rel}>
+              <span class="pager__dir">{item.dir}</span>
+              <span class="pager__title">{item.title}</span>
+            </a>
+          ) : (
+            <p class:list={['pager__link', 'pager__link--soon', { 'pager__link--next': i === 1 }]}>
+              <span class="pager__dir">{item.dir}</span>
+              <span class="pager__title">{item.title}</span>
+              {item.note && <span class="pager__note">{item.note}</span>}
+            </p>
+          )
+        ) : (
+          <span />
+        ),
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--color-line);
+  }
+
+  .pager__link {
+    display: flex;
+    flex-direction: column;
+    min-height: 48px;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    text-decoration: none;
+  }
+
+  .pager__link--next {
+    text-align: end;
+  }
+
+  .pager__link--soon {
+    border-style: dashed;
+    color: var(--color-ink-muted);
+  }
+
+  .pager__dir,
+  .pager__note {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .pager__title {
+    font-weight: 600;
+  }
+</style>

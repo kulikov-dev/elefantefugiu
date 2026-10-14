@@ -28,7 +28,7 @@ export function compareChronological(a: EventData, b: EventData): number {
 }
 
 /** Previous and next published card in the same epoch (null at the ends). */
-export function epochNeighbours(event: EventData, all: readonly EventData[]): { prev: EventData | null; next: EventData | null } {
+export function cardNeighbours(event: EventData, all: readonly EventData[]): { prev: EventData | null; next: EventData | null } {
   const inEpoch = all.filter((e) => isPublished(e) && e.epoch === event.epoch).sort(compareChronological);
   const index = inEpoch.findIndex((e) => e.id === event.id);
   if (index < 0) return { prev: null, next: null };

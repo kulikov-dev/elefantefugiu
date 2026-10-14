@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   compareChronological,
   distanceKm,
-  epochNeighbours,
+  cardNeighbours,
   firstSentence,
   formatDate,
   formatYear,
@@ -35,7 +35,7 @@ test('chronological order uses start year, end year, then id', () => {
   assert.deepEqual(list.sort(compareChronological).map((e) => e.id), ['a', 'b', 'c', 'd']);
 });
 
-test('epochNeighbours: ends are null, other epochs and drafts are skipped', () => {
+test('cardNeighbours: ends are null, other epochs and drafts are skipped', () => {
   const all = [
     ev('a', { year: 1400 }),
     ev('b', { year: 1410 }),
@@ -43,11 +43,11 @@ test('epochNeighbours: ends are null, other epochs and drafts are skipped', () =
     ev('draft', { year: 1420, status: 'draft' }),
     ev('c', { year: 1430 }),
   ];
-  assert.deepEqual(epochNeighbours(all[0]!, all), { prev: null, next: all[1] });
-  assert.equal(epochNeighbours(all[1]!, all).prev?.id, 'a');
-  assert.equal(epochNeighbours(all[1]!, all).next?.id, 'c');
-  assert.equal(epochNeighbours(all[4]!, all).next, null);
-  assert.deepEqual(epochNeighbours(ev('ghost'), all), { prev: null, next: null });
+  assert.deepEqual(cardNeighbours(all[0]!, all), { prev: null, next: all[1] });
+  assert.equal(cardNeighbours(all[1]!, all).prev?.id, 'a');
+  assert.equal(cardNeighbours(all[1]!, all).next?.id, 'c');
+  assert.equal(cardNeighbours(all[4]!, all).next, null);
+  assert.deepEqual(cardNeighbours(ev('ghost'), all), { prev: null, next: null });
 });
 
 test('distanceKm: Lisbon to Porto is about 274 km', () => {

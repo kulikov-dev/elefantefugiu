@@ -95,5 +95,22 @@
     "view_grid": "Grid",
     "sources": "Sources",
     "checked_on": "Checked on"
+  },
+  "epoch": {
+    "chips_label": "Threads in this era",
+    "timeline_label": "Timeline of this era",
+    "neighbours_label": "Neighbouring eras",
+    "back_to": "Back to",
+    "go_to": "Continue to"
+  },
+  "thread": {
+    "eras_label": "Eras in this thread"
+  },
+  "feed": {
+    "expand_story": "Read the story"
+  },
+  "plural": {
+    "stories_one": "{n} story",
+    "stories_other": "{n} stories"
   }
 }

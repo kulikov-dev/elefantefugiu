@@ -1,6 +1,13 @@
-# PLACEHOLDER epochs: names, theme phrases and style values are provisional.
+# MVP epochs (4, 6, 8): names, theme phrases and style values are placeholders (placeholder: true).
+# Epochs outside the MVP (1, 2, 3, 5, 7, 9) come from docs/design.md section 4.1. They have no page yet:
+# they only feed the "Coming soon" tiles on the home page and the "Em breve" neighbours.
+# Names, slugs and years_label of those six are real data (placeholder: false), but the Portuguese
+# and English wording is still to be checked by a native speaker.
 - id: avis-e-descobrimentos
-  order: 1
+  slug:
+    pt: avis-e-descobrimentos
+    en: avis-and-the-discoveries
+  order: 4
   name:
     pt: "Avis e Descobrimentos"
     en: "Avis and the Discoveries"
@@ -19,7 +26,10 @@
   fallback_image: images/placeholders/epoch-a.svg
   placeholder: true
 - id: pombal-e-terramoto
-  order: 2
+  slug:
+    pt: pombal-e-terramoto
+    en: pombal-and-the-earthquake
+  order: 6
   name:
     pt: "Pombal e o Terramoto"
     en: "Pombal and the Earthquake"
@@ -38,7 +48,10 @@
   fallback_image: images/placeholders/epoch-b.svg
   placeholder: true
 - id: estado-novo-e-25-de-abril
-  order: 3
+  slug:
+    pt: estado-novo-e-25-de-abril
+    en: estado-novo-and-25-april
+  order: 8
   name:
     pt: "Estado Novo e 25 de Abril"
     en: "Estado Novo and 25 April"
@@ -56,3 +69,81 @@
   mvp: true
   fallback_image: images/placeholders/epoch-c.svg
   placeholder: true
+- id: lusitania-e-roma
+  slug:
+    pt: lusitania-e-roma
+    en: lusitania-and-rome
+  order: 1
+  name:
+    pt: "Lusitânia e Roma"
+    en: "Lusitania and Rome"
+  years_label:
+    pt: "até ao séc. V"
+    en: "until the 5th century"
+  mvp: false
+  placeholder: false
+- id: suevos-visigodos-e-mouros
+  slug:
+    pt: suevos-visigodos-e-mouros
+    en: suebi-visigoths-and-moors
+  order: 2
+  name:
+    pt: "Suevos, visigodos e mouros"
+    en: "Suebi, Visigoths and Moors"
+  years_label:
+    pt: "séc. V–XII"
+    en: "5th–12th centuries"
+  mvp: false
+  placeholder: false
+- id: nascimento-do-reino-e-reconquista
+  slug:
+    pt: nascimento-do-reino-e-reconquista
+    en: birth-of-the-kingdom-and-reconquista
+  order: 3
+  name:
+    pt: "Nascimento do reino e Reconquista"
+    en: "Birth of the Kingdom and the Reconquista"
+  years_label:
+    pt: "1139–1249"
+    en: "1139–1249"
+  mvp: false
+  placeholder: false
+- id: uniao-restauracao-e-ouro-do-brasil
+  slug:
+    pt: uniao-restauracao-e-ouro-do-brasil
+    en: union-restoration-and-brazilian-gold
+  order: 5
+  name:
+    pt: "União, Restauração e ouro do Brasil"
+    en: "Union, Restoration and Brazilian Gold"
+  years_label:
+    pt: "1580–1750"
+    en: "1580–1750"
+  mvp: false
+  placeholder: false
+- id: monarquia-e-republica
+  slug:
+    pt: monarquia-e-republica
+    en: monarchy-and-republic
+  order: 7
+  name:
+    pt: "Monarquia e República"
+    en: "Monarchy and Republic"
+  years_label:
+    pt: "1820–1926"
+    en: "1820–1926"
+  mvp: false
+  placeholder: false
+- id: atualidade-ue-e-emigracao
+  slug:
+    pt: atualidade-ue-e-emigracao
+    en: present-day-eu-and-emigration
+  order: 9
+  name:
+    pt: "Atualidade: UE e emigração"
+    en: "The present day: the EU and emigration"
+  years_label:
+    pt: "1974 – hoje"
+    en: "1974 – today"
+  mvp: false
+  placeholder: false

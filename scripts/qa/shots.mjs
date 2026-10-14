@@ -11,6 +11,9 @@ const shots = [
   ['pt/historia/evento-exemplo-02', 'card02-pt-open', { hash: '#detalhes' }],
   ['en/story/example-event-19', 'card19-en', {}],
   ['pt/historia/evento-exemplo-07', 'card07-pt-noimg', {}],
+  ['pt/epoca/avis-e-descobrimentos', 'epoch-avis-pt', {}],
+  ['pt/epoca/avis-e-descobrimentos', 'epoch-avis-pt-open', { hash: '#c-evento-exemplo-02' }],
+  ['en/thread/sea', 'thread-sea-en', {}],
 ];
 for (const [path, name, opt] of shots) {
   const page = await browser.newPage();

@@ -1,4 +1,4 @@
-// Page weight of the built card pages: HTML + linked CSS + linked JS, images NOT counted.
+// Page weight of the built card, epoch and thread pages: HTML + linked CSS + linked JS, images NOT counted.
 // Budget: about 500 KB per card page without interactives (docs/spec.md section 9).
 // Usage: node scripts/check-weight.mjs   (after npm run build)
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
@@ -14,7 +14,7 @@ const base = raw && raw !== '/' ? `/${raw.replace(/^\/+|\/+$/g, '')}/` : '/';
 const fromDist = (url) => join(dist, url.slice(base.length).split(/[?#]/)[0]);
 
 const pages = [];
-for (const seg of [['pt', 'historia'], ['en', 'story']]) {
+for (const seg of [['pt', 'historia'], ['en', 'story'], ['pt', 'epoca'], ['en', 'era'], ['pt', 'fio'], ['en', 'thread']]) {
   const dir = join(dist, seg[0], seg[1]);
   if (!existsSync(dir)) continue;
   for (const slug of readdirSync(dir)) pages.push(join(dir, slug, 'index.html'));
@@ -49,7 +49,7 @@ const rows = pages.map((file) => {
 
 const max = rows.reduce((a, b) => (b.raw > a.raw ? b : a));
 const avg = (key) => rows.reduce((s, r) => s + r[key], 0) / rows.length;
-console.log(`Card pages checked: ${rows.length} (HTML + CSS + JS, without images)`);
+console.log(`Pages checked: ${rows.length} cards, epochs and threads (HTML + CSS + JS, without images)`);
 console.log(`  average: ${kb(avg('raw'))} raw, ${kb(avg('gzip'))} gzip, ${kb(avg('brotli'))} brotli`);
 console.log(`  heaviest: ${max.file}: ${kb(max.raw)} raw, ${kb(max.gzip)} gzip, ${kb(max.brotli)} brotli`);
 console.log(`  images are not counted (largest on a page: ${kb(Math.max(...rows.map((r) => r.images)))})`);

@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/check-i18n.mjs && npm test && tsx scripts/check-data.ts && astro build",
-    "postbuild": "node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-weight.mjs",
+    "postbuild": "node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "check:data": "tsx scripts/check-data.ts",
@@ -18,7 +18,8 @@
     "export:ui-table": "node scripts/export-ui-table.mjs",
     "test": "node --import tsx --test \"tests/**/*.test.ts\"",
     "check:cards": "node scripts/check-cards.mjs",
-    "check:weight": "node scripts/check-weight.mjs"
+    "check:weight": "node scripts/check-weight.mjs",
+    "check:listings": "node scripts/check-listings.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

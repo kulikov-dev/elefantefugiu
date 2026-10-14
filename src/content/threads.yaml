@@ -1,5 +1,8 @@
 # PLACEHOLDER threads: descriptions, colours and icon names are provisional.
 - id: mar
+  slug:
+    pt: mar
+    en: sea
   name:
     pt: "Mar"
     en: "Sea"
@@ -11,6 +14,9 @@
   mvp: true
   placeholder: true
 - id: comida-e-vinho
+  slug:
+    pt: comida-e-vinho
+    en: food-and-wine
   name:
     pt: "Comida e vinho"
     en: "Food and wine"
@@ -22,6 +28,9 @@
   mvp: true
   placeholder: true
 - id: poder-e-revolta
+  slug:
+    pt: poder-e-revolta
+    en: power-and-revolt
   name:
     pt: "Poder e revolta"
     en: "Power and revolt"
@@ -33,6 +42,9 @@
   mvp: true
   placeholder: true
 - id: gente-como-nos
+  slug:
+    pt: gente-como-nos
+    en: people-like-us
   name:
     pt: "Gente como nós"
     en: "People like us"
@@ -44,6 +56,9 @@
   mvp: true
   placeholder: true
 - id: natureza
+  slug:
+    pt: natureza
+    en: nature
   name:
     pt: "Natureza"
     en: "Nature"

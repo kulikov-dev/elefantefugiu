@@ -118,6 +118,15 @@ function dupes(label: string, entries: { id: string; file: string }[]) {
   }
 }
 dupes('epoch id', epochs.map((e) => ({ id: e.item.id, file: e.file })));
+{
+  // Neighbour epochs and the home tiles follow `order`, so it must be unique.
+  const byOrder = new Map<number, string>();
+  for (const { item, file } of epochs) {
+    const first = byOrder.get(item.order);
+    if (first) report('error', file, `duplicate epoch order ${item.order} (also in ${first})`, 'order');
+    else byOrder.set(item.order, file);
+  }
+}
 dupes('thread id', threads.map((e) => ({ id: e.item.id, file: e.file })));
 dupes('event id', events.map((e) => ({ id: e.item.id, file: e.file })));
 
@@ -127,12 +136,31 @@ const eventIds = new Set(events.map((e) => e.item.id));
 const epochById = new Map(epochs.map((e) => [e.item.id, e.item]));
 const slugOwner: Record<'pt' | 'en', Map<string, string>> = { pt: new Map(), en: new Map() };
 
+// Epoch and thread slugs: valid characters, unique per language inside their own kind
+// (they live under different address segments, so an epoch and a thread may share a slug).
+for (const [kind, list] of [['epoch', epochs], ['thread', threads]] as const) {
+  const used: Record<'pt' | 'en', Map<string, string>> = { pt: new Map(), en: new Map() };
+  for (const { item, file } of list) {
+    for (const lang of ['pt', 'en'] as const) {
+      const value = item.slug[lang];
+      if (!SLUG.test(value)) report('error', file, `${kind} slug "${value}" must use lowercase Latin letters, digits and hyphens`, 'slug', lang);
+      const owner = used[lang].get(value);
+      if (owner) report('error', file, `${kind} slug "${value}" is already used by "${owner}"`, 'slug', lang);
+      else used[lang].set(value, item.id);
+    }
+  }
+}
+
 for (const { item: ev, file, stem } of events) {
   const ready = ev.status === 'ready';
   const lenLevel: Level = ev.placeholder ? 'warn' : 'error';
 
   if (ev.id !== stem) report('error', file, `id "${ev.id}" must match the file name "${stem}"`, 'id');
   if (!epochIds.has(ev.epoch)) report('error', file, `unknown epoch "${ev.epoch}" (not in epochs.yaml)`, 'epoch');
+  // Only MVP epochs get a page and a feed; a published card in another epoch could not be reached from anywhere.
+  if (ready && epochById.get(ev.epoch)?.mvp === false) {
+    report('error', file, `epoch "${ev.epoch}" is not part of the MVP (mvp: false) and has no page, so this published card has no feed`, 'epoch');
+  }
 
   // slugs
   for (const lang of ['pt', 'en'] as const) {
@@ -209,7 +237,8 @@ for (const { item: ev, file, stem } of events) {
   // year inside the epoch range (warning only)
   const epoch = epochById.get(ev.epoch);
   const [from, to] = typeof ev.year === 'number' ? [ev.year, ev.year] : [ev.year.from, ev.year.to];
-  if (epoch && (from < epoch.years.from || to > epoch.years.to)) {
+  // Epochs outside the MVP may have no numeric range; then there is nothing to compare with.
+  if (epoch?.years && (from < epoch.years.from || to > epoch.years.to)) {
     report('warn', file, `year ${from === to ? from : `${from}-${to}`} is outside the epoch range ${epoch.years.from}-${epoch.years.to}`, 'year');
   }
 

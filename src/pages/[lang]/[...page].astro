@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
+import { EPOCHS_ANCHOR, LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
 import { t } from '../../i18n';
 
 export const getStaticPaths = (() => {
@@ -30,7 +30,7 @@ const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
           <p class="hero__tagline">{t(lang, 'site.tagline')}</p>
         </section>
         <p class="notice">{t(lang, 'home.placeholder')}</p>
-        <section id="epocas" aria-labelledby="epocas-title">
+        <section id={EPOCHS_ANCHOR} aria-labelledby="epocas-title">
           <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
           <p>{t(lang, 'ui.soon')}</p>
         </section>

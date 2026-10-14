@@ -84,26 +84,50 @@ export const eventSchema = z.strictObject({
   placeholder: z.boolean().default(false),
 });
 
-export const epochSchema = z.strictObject({
-  id: z.string(),
-  order: z.number().int(),
-  name: text,
-  years: yearRange,
-  theme: text,
-  style: z.strictObject({
-    bg: z.string(),
-    accent: z.string(),
-    heading_font: z.string(),
-    frame: z.string(),
-  }),
-  mvp: z.boolean(),
-  /** Preview image (Open Graph) for cards of this epoch that have no image of their own. Path inside public/. */
-  fallback_image: z.string().optional(),
-  placeholder: z.boolean().default(false),
+const epochStyle = z.strictObject({
+  bg: z.string(),
+  accent: z.string(),
+  heading_font: z.string(),
+  frame: z.string(),
 });
+
+export const epochSchema = z
+  .strictObject({
+    id: z.string(),
+    /** Address part per language: /pt/epoca/{slug}, /en/era/{slug}. */
+    slug: z.strictObject({ pt: slug, en: slug }),
+    order: z.number().int(),
+    name: text,
+    /** Numeric range. Required for MVP epochs (the page and the card year check use it); optional otherwise. */
+    years: yearRange.optional(),
+    /** Display text for the years, for example "1580\u20131750". Required when mvp is false (tiles and "Coming soon" neighbours). */
+    years_label: text.optional(),
+    /** Theme phrase. Required for MVP epochs; epochs without a page do not need one. */
+    theme: text.optional(),
+    /** Epoch look (stage 6). Required for MVP epochs. */
+    style: epochStyle.optional(),
+    mvp: z.boolean(),
+    /** Preview image (Open Graph) for cards of this epoch that have no image of their own. Path inside public/. */
+    fallback_image: z.string().optional(),
+    placeholder: z.boolean().default(false),
+  })
+  .superRefine((epoch, ctx) => {
+    const need = (ok: boolean, field: string, why: string) => {
+      if (!ok) ctx.addIssue({ code: 'custom', path: [field], message: `${field} is required when ${why}` });
+    };
+    if (epoch.mvp) {
+      need(epoch.years !== undefined, 'years', 'mvp is true');
+      need(epoch.theme !== undefined, 'theme', 'mvp is true');
+      need(epoch.style !== undefined, 'style', 'mvp is true');
+    } else {
+      need(epoch.years_label !== undefined, 'years_label', 'mvp is false');
+    }
+  });
 
 export const threadSchema = z.strictObject({
   id: z.string(),
+  /** Address part per language: /pt/fio/{slug}, /en/thread/{slug}. */
+  slug: z.strictObject({ pt: slug, en: slug }),
   name: text,
   description: text,
   color: z.string(),

@@ -1,0 +1,171 @@
+---
+// Epoch page: /pt/epoca/{slug}, /en/era/{slug} (docs/spec.md section 5.2).
+// Stage 4a: heading, thread links with counters, the feed, neighbouring epochs.
+// The map, the grid switch and the thread filter come later.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventCard from '../components/EventCard.astro';
+import PagerNav from '../components/PagerNav.astro';
+import ThreadChip from '../components/ThreadChip.astro';
+import { epochHref, threadHref, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import {
+  epochFeed,
+  epochSectionId,
+  epochYearsText,
+  neighbourEpochs,
+  threadCountsInEpoch,
+  type EpochData,
+  type NeighbourEpoch,
+} from '../lib/epochs';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+  epoch: EpochData;
+}
+
+const { lang, epoch } = Astro.props;
+const site = await loadSite();
+
+const feed = epochFeed(epoch, site.events);
+const counts = threadCountsInEpoch(epoch, site.events);
+// Only threads that have a page, and only those with cards in this epoch, so every counter is a real count.
+const chips = site.visibleThreads.filter((th) => (counts.get(th.id) ?? 0) > 0);
+
+const { prev, next } = neighbourEpochs(epoch, site.epochs, site.events);
+const neighbour = (n: NeighbourEpoch<EpochData> | null, dir: string, rel: 'prev' | 'next') =>
+  n
+    ? n.available
+      ? { dir, title: n.epoch.name[lang], href: epochHref(lang, n.epoch.slug[lang]), rel }
+      : { dir, title: n.epoch.name[lang], note: t(lang, 'ui.soon') }
+    : null;
+
+const alternates = { pt: epochHref('pt', epoch.slug.pt), en: epochHref('en', epoch.slug.en) };
+// Pages that show test text stay out of search results until the text is real.
+const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
+---
+<BaseLayout
+  lang={lang}
+  title={epoch.name[lang]}
+  alternates={alternates}
+  description={epoch.theme?.[lang]}
+  preview={{ title: epoch.name[lang], image: epoch.fallback_image }}
+  noindex={noindex}
+>
+  <div class="epoch">
+    <header class="epoch__header">
+      <h1>{epoch.name[lang]}</h1>
+      <p class="epoch__years">{epochYearsText(epoch, lang)}</p>
+      {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
+    </header>
+
+    {
+      chips.length > 0 && (
+        <nav aria-label={t(lang, 'epoch.chips_label')}>
+          <ul class="chips">
+            {chips.map((thread) => (
+              <li>
+                <ThreadChip
+                  lang={lang}
+                  name={thread.name}
+                  color={thread.color}
+                  href={`${threadHref(lang, thread.slug[lang])}#${epochSectionId(epoch.slug[lang])}`}
+                  count={counts.get(thread.id) ?? 0}
+                />
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <section aria-labelledby="timeline-title">
+      <h2 id="timeline-title" class="visually-hidden">{t(lang, 'epoch.timeline_label')}</h2>
+      <ol class="feed">
+        {
+          feed.map((event) => (
+            <li class:list={['feed__item', `feed__item--${event.level}`]}>
+              <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} />
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <PagerNav
+      label={t(lang, 'epoch.neighbours_label')}
+      prev={neighbour(prev, `\u2190 ${t(lang, 'epoch.back_to')}`, 'prev')}
+      next={neighbour(next, `${t(lang, 'epoch.go_to')} \u2192`, 'next')}
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .epoch > :global(* + *) {
+    margin-block-start: var(--space-5);
+  }
+
+  .epoch__header > * + * {
+    margin-block-start: var(--space-2);
+  }
+
+  .epoch__header h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .epoch__years {
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+
+  .epoch__theme {
+    max-width: var(--measure);
+    font-family: var(--epoch-heading-font);
+    font-size: var(--text-xl);
+    font-style: italic;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+
+  /* The feed is a timeline: a line on the left and a dot at every entry. */
+  .feed {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 var(--space-5);
+    list-style: none;
+    border-inline-start: 2px solid var(--color-line);
+  }
+
+  .feed__item {
+    position: relative;
+  }
+
+  .feed__item + .feed__item {
+    margin-block-start: var(--space-4);
+  }
+
+  .feed__item::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: calc(-1 * var(--space-5) - 7px);
+    inset-block-start: 1.4rem;
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--color-surface);
+    border-radius: 50%;
+    background: var(--epoch-accent);
+  }
+
+  /* Stories between the key events: smaller dot, lighter card. */
+  .feed__item--story::before {
+    inset-inline-start: calc(-1 * var(--space-5) - 5px);
+    width: 8px;
+    height: 8px;
+    background: var(--color-ink-muted);
+  }
+</style>

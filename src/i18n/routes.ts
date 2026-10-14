@@ -17,6 +17,9 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   map: { pt: 'mapa', en: 'map' },
 };
 
+/** Id of the epochs section on the home page; the "Épocas" menu item links to it. */
+export const EPOCHS_ANCHOR = 'epocas';
+
 /** Prefix a site-internal path with the configured base path. */
 export function withBase(path = ''): string {
   const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
@@ -37,10 +40,16 @@ export function storyPath(lang: Lang, slug: string): string {
   return withBase(`${lang}/${STORY_SEGMENT[lang]}/${slug}/`);
 }
 
-/**
- * Where the "epoch" breadcrumb leads. The epoch page (/pt/epoca/{slug}) does not exist yet,
- * so for now it points to the epochs section of the home page. Change only this function in stage 6.
- */
-export function epochHref(lang: Lang, _epochId: string): string {
-  return `${pagePath(lang, 'home')}#epocas`;
+/** Address segments of epoch and thread pages (docs/spec.md section 2). */
+export const EPOCH_SEGMENT: Record<Lang, string> = { pt: 'epoca', en: 'era' };
+export const THREAD_SEGMENT: Record<Lang, string> = { pt: 'fio', en: 'thread' };
+
+/** Base-aware URL of an epoch page; `slug` is the epoch slug for that language. */
+export function epochHref(lang: Lang, slug: string): string {
+  return withBase(`${lang}/${EPOCH_SEGMENT[lang]}/${slug}/`);
+}
+
+/** Base-aware URL of a thread page; `slug` is the thread slug for that language. */
+export function threadHref(lang: Lang, slug: string): string {
+  return withBase(`${lang}/${THREAD_SEGMENT[lang]}/${slug}/`);
 }

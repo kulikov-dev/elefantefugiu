@@ -26,17 +26,18 @@ The dev server runs at http://localhost:4321/. Open `/pt/` or `/en/`.
 | ------ | ------------ |
 | `npm run dev` | Astro dev server at http://localhost:4321/ |
 | `npm run build` | Full build: i18n key check, unit tests, data check, Astro build, then `postbuild` |
-| `npm run postbuild` | Runs by itself after `build`: internal links, card pages, page weight |
+| `npm run postbuild` | Runs by itself after `build`: internal links and anchors, card pages, epoch and thread pages, page weight |
 | `npm run preview` | Serves `dist/` locally |
 | `npm run check` | `astro check` (types, Astro files) |
 | `npm run check:data` | Validates `src/content/*.yaml` and prints a data summary (errors fail, warnings do not) |
-| `npm run check:links` | Every internal link in `dist/` starts with the base path and points to an existing file |
+| `npm run check:links` | Every internal link in `dist/` starts with the base path and points to an existing file; every `#fragment` matches an id on the target page |
+| `npm run check:listings` | Built epoch and thread pages against the data: feed order, counters, sections, neighbouring epochs, every card reachable from a feed |
 | `npm run check:cards` | Built card pages: one `h1`, heading order, alt text, labels, sources, bridge, meta tags, hreflang, `noindex` only on placeholder cards |
-| `npm run check:weight` | Weight of card pages without images (HTML + CSS + JS, raw, gzip, brotli) against the 500 KB budget |
+| `npm run check:weight` | Weight of card, epoch and thread pages without images (HTML + CSS + JS, raw, gzip, brotli) against the 500 KB budget |
 | `npm test` | Unit tests (`tests/`, `node:test` with `tsx`): thread visibility, `min_age`, card helpers |
 | `npm run export:ui-table` | Prints a key / PT / EN table of all interface strings for review by a native speaker (`-- --format csv`, `-- --out file`) |
 
-`check:links`, `check:cards` and `check:weight` need a finished build (`dist/`).
+`check:links`, `check:cards`, `check:listings` and `check:weight` need a finished build (`dist/`).
 Browser checks (Chromium) are separate and not part of the build: see `scripts/qa/README.md`.
 
 To test a project-site build with a base path:
@@ -95,9 +96,10 @@ override both with repository variables (Settings, Secrets and variables, Action
 ## Project structure
 
 ```
-src/pages        routes: / (language chooser), /[lang]/[...page] (stubs), /[lang]/[segment]/[slug] (card page), 404
+src/pages        routes: / (language chooser), /[lang]/[...page] (stubs), /[lang]/[segment]/[slug] (cards, epochs, threads), 404
+src/views        page bodies: StoryView, EpochView, ThreadView
 src/layouts      BaseLayout (head, meta tags, header, footer)
-src/components   header, footer, language switch, and the card components (CardLayers, TagLabel, AgeBadge, ...)
+src/components   header, footer, language switch, card components (CardLayers, TagLabel, ...), list components (EventCard, ThreadChip, PagerNav)
 src/content      YAML content: events/, epochs, threads, featured
 src/data         Zod schemas
 src/lib          pure helpers (card logic, thread visibility), covered by tests/
