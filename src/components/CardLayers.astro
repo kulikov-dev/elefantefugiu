@@ -1,0 +1,116 @@
+---
+// The three layers of a card: 1 hook, 2 story, 3 "More" (a <details>, works without JavaScript).
+// A small script mirrors the layer state in the address hash: #historia, #detalhes.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  hook: string;
+  /** Language tag of the texts when it differs from the page (placeholder filler is Latin). */
+  textLang?: string;
+}
+
+const { lang, hook, textLang } = Astro.props;
+---
+<div class="layers" data-card-layers>
+  <p class="hook" lang={textLang}>{hook}</p>
+
+  <section id="historia" class="story" aria-labelledby="historia-title">
+    <h2 id="historia-title">{t(lang, 'card.story_heading')}</h2>
+    <div class="prose" lang={textLang}>
+      <slot name="story" />
+    </div>
+  </section>
+
+  <details id="detalhes" class="more">
+    <summary>{t(lang, 'ui.more')}</summary>
+    <div class="more__body">
+      <slot name="more" />
+    </div>
+  </details>
+</div>
+
+<style>
+  .layers > :global(* + *) {
+    margin-block-start: var(--space-5);
+  }
+
+  .hook {
+    max-width: var(--measure);
+    padding-inline-start: var(--space-4);
+    border-inline-start: 4px solid var(--epoch-accent);
+    font-family: var(--epoch-heading-font);
+    font-size: var(--text-xl);
+    font-style: italic;
+    line-height: 1.35;
+  }
+
+  .story h2 {
+    margin-block-end: var(--space-2);
+    font-size: var(--text-xl);
+  }
+
+  .more {
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: var(--space-2) var(--space-4);
+    color: var(--color-accent);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  summary:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .more[open] > summary {
+    border-block-end: 1px solid var(--color-line);
+  }
+
+  .more__body {
+    padding: var(--space-4);
+  }
+
+  /* Slotted content carries the page's scope, not this component's, hence :global. */
+  .more__body > :global(* + *) {
+    margin-block-start: var(--space-5);
+  }
+</style>
+
+<script>
+  // Layer state lives in the hash so a link can open a layer:
+  //   #detalhes  -> "More" is open;   #historia (or no hash) -> only the story is shown.
+  // The story is always open on a card page, so #historia is also a plain anchor to it.
+  const more = document.getElementById('detalhes') as HTMLDetailsElement | null;
+
+  if (more) {
+    const apply = () => {
+      if (location.hash === '#detalhes') more.open = true;
+      else if (location.hash === '#historia') more.open = false;
+    };
+
+    // Keep the address in step with the layer; replaceState so the Back button is not filled with toggles.
+    more.addEventListener('toggle', () => {
+      let hash = location.hash;
+      if (more.open) hash = '#detalhes';
+      else if (hash === '#detalhes') hash = '';
+      if (hash === location.hash) return;
+      try {
+        history.replaceState(history.state, '', location.pathname + location.search + hash);
+      } catch {
+        // Some contexts (for example file://) forbid it; the layer still works.
+      }
+    });
+
+    window.addEventListener('hashchange', apply);
+    apply();
+  }
+</script>

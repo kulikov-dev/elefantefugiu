@@ -9,12 +9,16 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-i18n.mjs && tsx scripts/check-data.ts && astro build",
-    "postbuild": "node scripts/check-links.mjs",
+    "build": "node scripts/check-i18n.mjs && npm test && tsx scripts/check-data.ts && astro build",
+    "postbuild": "node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-weight.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "check:data": "tsx scripts/check-data.ts",
-    "check:links": "node scripts/check-links.mjs"
+    "check:links": "node scripts/check-links.mjs",
+    "export:ui-table": "node scripts/export-ui-table.mjs",
+    "test": "node --import tsx --test \"tests/**/*.test.ts\"",
+    "check:cards": "node scripts/check-cards.mjs",
+    "check:weight": "node scripts/check-weight.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
@@ -23,7 +27,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.20.5",
-    "tsx": "^4.23.15",
-    "yaml": "^2.9.1"
+    "tsx": "4.23.15",
+    "yaml": "2.9.1"
   }
 }

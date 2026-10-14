@@ -1,0 +1,53 @@
+---
+// Sources of a card: title (a link when the address is http/https) and the date of access.
+import { t } from '../i18n';
+import { formatDate } from '../lib/events';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  sources: { title: string; url: string; type: string; accessed: Date }[];
+}
+
+const { lang, sources } = Astro.props;
+---
+<section class="sources" aria-labelledby="sources-title">
+  <h2 id="sources-title">{t(lang, 'ui.sources')}</h2>
+  <ol>
+    {
+      sources.map((source) => (
+        <li>
+          {/^https?:\/\/\S+$/.test(source.url) ? (
+            <a href={source.url} rel="noopener">{source.title}</a>
+          ) : (
+            <span>{source.title}</span>
+          )}
+          <span class="sources__date">
+            {t(lang, 'card.accessed')} <time datetime={source.accessed.toISOString().slice(0, 10)}>{formatDate(source.accessed, lang)}</time>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  h2 {
+    font-size: var(--text-xl);
+  }
+
+  ol {
+    margin-block-start: var(--space-2);
+    padding-inline-start: var(--space-5);
+  }
+
+  li + li {
+    margin-block-start: var(--space-2);
+  }
+
+  .sources__date {
+    display: block;
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+</style>

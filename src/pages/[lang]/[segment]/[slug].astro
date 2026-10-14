@@ -1,0 +1,302 @@
+---
+// Card page (event or story): /pt/historia/{slug} and /en/story/{slug} (docs/spec.md sections 2 and 5.3).
+// One file serves both languages; the segment and the slug per language come from the route map and the data.
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import AgeBadge from '../../../components/AgeBadge.astro';
+import BridgeBlock from '../../../components/BridgeBlock.astro';
+import CardLayers from '../../../components/CardLayers.astro';
+import HeavyTopicBanner from '../../../components/HeavyTopicBanner.astro';
+import PlaceholderNotice from '../../../components/PlaceholderNotice.astro';
+import RelatedList from '../../../components/RelatedList.astro';
+import ReportLink from '../../../components/ReportLink.astro';
+import ShareButton from '../../../components/ShareButton.astro';
+import SourceList from '../../../components/SourceList.astro';
+import TagLabel from '../../../components/TagLabel.astro';
+import ThreadChip from '../../../components/ThreadChip.astro';
+import { LANGS, STORY_SEGMENT, epochHref, storyPath, withBase, type Lang } from '../../../i18n/routes';
+import { t } from '../../../i18n';
+import { epochNeighbours, firstSentence, formatDate, formatYear, isPublished, relatedCards } from '../../../lib/events';
+
+export const getStaticPaths = (async () => {
+  const events = (await getCollection('events')).map((entry) => entry.data).filter(isPublished);
+  return LANGS.flatMap((lang) =>
+    events.map((event) => ({
+      params: { lang, segment: STORY_SEGMENT[lang], slug: event.slug[lang] },
+      props: { event },
+    })),
+  );
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { event } = Astro.props as Props;
+const lang = Astro.params.lang as Lang;
+
+const all = (await getCollection('events')).map((entry) => entry.data).filter(isPublished);
+const epoch = (await getCollection('epochs')).map((entry) => entry.data).find((e) => e.id === event.epoch);
+const threads = (await getCollection('threads')).map((entry) => entry.data);
+if (!epoch) throw new Error(`Event "${event.id}" has an unknown epoch "${event.epoch}"`);
+
+const title = event.title[lang];
+const alternates = { pt: storyPath('pt', event.slug.pt), en: storyPath('en', event.slug.en) };
+const cardUrl = new URL(alternates[lang], Astro.site).href;
+const description = firstSentence(event.story[lang]);
+
+// Preview picture: own image, else the epoch fallback. Sensitive cards never use their own image in previews.
+const useOwnImage = Boolean(event.image) && !event.sensitive;
+const previewImage = useOwnImage ? event.image!.src : epoch.fallback_image;
+const previewImageAlt = useOwnImage ? event.image!.alt[lang] : undefined;
+
+const { prev, next } = epochNeighbours(event, all);
+const related = relatedCards(event, all).map((e) => ({
+  title: e.title[lang],
+  href: storyPath(lang, e.slug[lang]),
+  meta: `${formatYear(e, lang)} \u00b7 ${e.place.name}`,
+}));
+
+const eventThreads = event.threads.map((id) => threads.find((th) => th.id === id)).filter((th) => th !== undefined);
+// Placeholder text is Latin filler: mark it, so screen readers do not read it as Portuguese.
+const textLang = event.placeholder ? 'la' : undefined;
+---
+<BaseLayout
+  lang={lang}
+  title={title}
+  alternates={alternates}
+  description={description}
+  preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageAlt: previewImageAlt }}
+  noindex={event.placeholder}
+>
+  <article class="card">
+    <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
+      <ol>
+        <li><a href={epochHref(lang, epoch.id)}>{epoch.name[lang]}</a></li>
+        <li aria-current="page">{title}</li>
+      </ol>
+    </nav>
+
+    {event.placeholder && <PlaceholderNotice lang={lang} />}
+
+    <header class="card__header">
+      <h1>{title}</h1>
+      <p class="card__meta">
+        <span>{formatYear(event, lang)}</span>
+        <span aria-hidden="true"> &middot; </span>
+        <span>{event.place.name}</span>
+      </p>
+      <ul class="tags" aria-label={t(lang, 'card.tags')}>
+        {eventThreads.map((thread) => <li><ThreadChip lang={lang} name={thread.name} color={thread.color} /></li>)}
+        <li><TagLabel lang={lang} label={event.label} /></li>
+        <li><AgeBadge lang={lang} age={event.min_age} /></li>
+      </ul>
+      {event.sensitive && <HeavyTopicBanner lang={lang} />}
+    </header>
+
+    {
+      event.image && (
+        <figure class="figure">
+          <img
+            src={withBase(event.image.src)}
+            alt={event.image.alt[lang]}
+            width="1200"
+            height="630"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            {event.image.caption && <span class="figure__caption">{event.image.caption[lang]}</span>}
+            <span class="figure__credit">
+              {t(lang, 'card.image_credit')}: {event.image.credit} &middot; {t(lang, 'card.image_license')}: {event.image.license}
+            </span>
+          </figcaption>
+        </figure>
+      )
+    }
+
+    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang}>
+      <p slot="story">{event.story[lang]}</p>
+      <Fragment slot="more">
+        <section aria-labelledby="context-title">
+          <h2 id="context-title">{t(lang, 'card.context')}</h2>
+          <div class="prose" lang={textLang}>
+            <p>{event.more[lang]}</p>
+          </div>
+        </section>
+        {event.interactive && <p class="notice" data-interactive={event.interactive.type}>{t(lang, 'card.interactive_soon')}</p>}
+        <BridgeBlock lang={lang} bridge={event.bridge} />
+        {event.sources.length > 0 && <SourceList lang={lang} sources={event.sources} />}
+        {
+          event.reviewed_on && (
+            <p class="checked">
+              {t(lang, 'ui.checked_on')}{' '}
+              <time datetime={event.reviewed_on.toISOString().slice(0, 10)}>{formatDate(event.reviewed_on, lang)}</time>
+            </p>
+          )
+        }
+      </Fragment>
+    </CardLayers>
+
+    <RelatedList lang={lang} items={related} />
+
+    <div class="actions">
+      <ShareButton lang={lang} url={cardUrl} title={title} />
+      <ReportLink lang={lang} cardUrl={cardUrl} />
+    </div>
+
+    {
+      (prev || next) && (
+        <nav class="pager" aria-label={t(lang, 'card.epoch_nav')}>
+          {
+            prev ? (
+              <a class="pager__link" href={storyPath(lang, prev.slug[lang])} rel="prev">
+                <span class="pager__dir">&larr; {t(lang, 'card.prev')}</span>
+                <span class="pager__title">{prev.title[lang]}</span>
+              </a>
+            ) : (
+              <span />
+            )
+          }
+          {
+            next ? (
+              <a class="pager__link pager__link--next" href={storyPath(lang, next.slug[lang])} rel="next">
+                <span class="pager__dir">{t(lang, 'card.next')} &rarr;</span>
+                <span class="pager__title">{next.title[lang]}</span>
+              </a>
+            ) : (
+              <span />
+            )
+          }
+        </nav>
+      )
+    }
+  </article>
+</BaseLayout>
+
+<style>
+  /* :global because the children include roots of other components, which do not carry this page's scope. */
+  .card > :global(* + *) {
+    margin-block-start: var(--space-5);
+  }
+
+  .crumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--space-2);
+    list-style: none;
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .crumbs li + li::before {
+    content: '\203a' / '';
+    margin-inline-end: var(--space-2);
+  }
+
+  .crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .crumbs [aria-current='page'] {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .card__header > :global(* + *) {
+    margin-block-start: var(--space-3);
+  }
+
+  .card__header h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .card__meta {
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    list-style: none;
+  }
+
+  .figure {
+    max-width: 48rem;
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    overflow: hidden;
+  }
+
+  .figure img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    background: var(--color-line);
+  }
+
+  .figure figcaption {
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .figure__caption {
+    display: block;
+    color: var(--color-ink);
+    font-size: var(--text-base);
+  }
+
+  .figure__credit {
+    display: block;
+  }
+
+  .checked {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--color-line);
+  }
+
+  .pager__link {
+    display: flex;
+    flex-direction: column;
+    min-height: 48px;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    text-decoration: none;
+  }
+
+  .pager__link--next {
+    text-align: end;
+  }
+
+  .pager__dir {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .pager__title {
+    font-weight: 600;
+  }
+</style>

@@ -17,11 +17,21 @@
     "about": "Sobre o projeto"
   },
   "pages": {
-    "about": { "title": "Sobre o projeto" },
-    "method": { "title": "Método e fontes" },
-    "report": { "title": "Encontrou um erro?" },
-    "legal": { "title": "Informação legal" },
-    "map": { "title": "Mapa" }
+    "about": {
+      "title": "Sobre o projeto"
+    },
+    "method": {
+      "title": "Método e fontes"
+    },
+    "report": {
+      "title": "Encontrou um erro?"
+    },
+    "legal": {
+      "title": "Informação legal"
+    },
+    "map": {
+      "title": "Mapa"
+    }
   },
   "footer": {
     "about": "Sobre o projeto",
@@ -37,6 +47,26 @@
   },
   "stub": {
     "notice": "Esta página é provisória e será preenchida mais tarde."
+  },
+  "card": {
+    "breadcrumb": "Caminho de navegação",
+    "tags": "Etiquetas da história",
+    "age_prefix": "Idade mínima:",
+    "heavy_topic_note": "Esta história aborda um tema difícil.",
+    "placeholder_title": "Texto de teste",
+    "placeholder_note": "Este conteúdo é provisório e serve apenas para testar o site. Não é história verificada.",
+    "image_credit": "Imagem",
+    "image_license": "Licença",
+    "story_heading": "A história",
+    "context": "Contexto",
+    "official_site": "Sítio oficial",
+    "accessed": "Consultado em",
+    "interactive_soon": "Aqui ficará um elemento interativo. Em breve.",
+    "share_copied": "Ligação copiada.",
+    "share_failed": "Não foi possível copiar. Ligação:",
+    "epoch_nav": "Navegação dentro da época",
+    "prev": "Anterior",
+    "next": "Seguinte"
   },
   "notfound": {
     "title": "Página não encontrada",

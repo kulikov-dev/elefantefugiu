@@ -82,6 +82,9 @@ image:
   alt:
     pt: Ilustração provisória da época de exemplo A.
     en: Placeholder illustration for example era A.
+  caption:
+    pt: Legenda de teste da ilustração.
+    en: Test caption for the illustration.
   credit: O Elefante Fugiu (placeholder)
   license: CC BY-SA 4.0
 interactive:

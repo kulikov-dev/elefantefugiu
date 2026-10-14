@@ -28,3 +28,19 @@ export function pagePath(lang: Lang, key: PageKey): string {
   const slug = ROUTES[key][lang];
   return withBase(slug ? `${lang}/${slug}/` : `${lang}/`);
 }
+
+/** Address segment of a card page: /pt/historia/{slug}, /en/story/{slug} (docs/spec.md section 2). */
+export const STORY_SEGMENT: Record<Lang, string> = { pt: 'historia', en: 'story' };
+
+/** Base-aware URL of a card page; the slug comes from the event data for that language. */
+export function storyPath(lang: Lang, slug: string): string {
+  return withBase(`${lang}/${STORY_SEGMENT[lang]}/${slug}/`);
+}
+
+/**
+ * Where the "epoch" breadcrumb leads. The epoch page (/pt/epoca/{slug}) does not exist yet,
+ * so for now it points to the epochs section of the home page. Change only this function in stage 6.
+ */
+export function epochHref(lang: Lang, _epochId: string): string {
+  return `${pagePath(lang, 'home')}#epocas`;
+}

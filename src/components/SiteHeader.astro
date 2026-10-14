@@ -7,9 +7,11 @@ import { t } from '../i18n';
 interface Props {
   lang: Lang;
   pageKey?: PageKey;
+  /** Base-aware path of the current page in each language (cards). Overrides pageKey for the language switch. */
+  alternates?: Record<Lang, string>;
 }
 
-const { lang, pageKey } = Astro.props;
+const { lang, pageKey, alternates } = Astro.props;
 
 const items = [
   { label: t(lang, 'nav.epochs'), href: `${pagePath(lang, 'home')}#epocas`, key: undefined },
@@ -37,7 +39,7 @@ const items = [
       </ul>
     </nav>
     <div class="site-header__tools">
-      <LanguageSwitch lang={lang} pageKey={pageKey} />
+      <LanguageSwitch lang={lang} pageKey={pageKey} alternates={alternates} />
       <!-- Reserved for the family-mode toggle (stage 5). -->
       <div class="family-slot" data-slot="family"></div>
     </div>

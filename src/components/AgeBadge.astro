@@ -1,0 +1,49 @@
+---
+// Age label: all / 12 / 16.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  age: 'all' | '12' | '16';
+}
+
+const { lang, age } = Astro.props;
+---
+<span class={`age age--${age}`}>
+  {
+    age === 'all' ? (
+      t(lang, 'ui.age_all')
+    ) : (
+      <>
+        <span class="visually-hidden">{t(lang, 'card.age_prefix')} </span>
+        {age}+
+      </>
+    )
+  }
+</span>
+
+<style>
+  .age {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--color-ink-muted);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  /* 12+ and 16+ get a heavier frame, so the difference is not only the number. */
+  .age--12 {
+    border-width: 2px;
+  }
+
+  .age--16 {
+    border-style: double;
+    border-width: 4px;
+  }
+</style>

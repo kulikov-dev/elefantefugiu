@@ -5,3 +5,7 @@ dist/
 .env.*
 !.env.example
 .DS_Store
+
+# browser QA scripts (not part of the build)
+scripts/qa/node_modules/
+scripts/qa/out/

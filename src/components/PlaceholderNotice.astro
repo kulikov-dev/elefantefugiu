@@ -1,0 +1,25 @@
+---
+// Prominent mark for cards with `placeholder: true` ("Test text").
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+<p class="placeholder-notice" role="note">
+  <strong>{t(lang, 'card.placeholder_title')}.</strong>{' '}{t(lang, 'card.placeholder_note')}
+</p>
+
+<style>
+  .placeholder-notice {
+    max-width: var(--measure);
+    padding: var(--space-3) var(--space-4);
+    border: 2px dashed #6b5200;
+    border-radius: var(--radius-md);
+    background: #fff4c2;
+    color: #3d2f00;
+  }
+</style>

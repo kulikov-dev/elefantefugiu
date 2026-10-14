@@ -6,15 +6,17 @@ interface Props {
   lang: Lang;
   /** Page to keep when switching; without it the switch leads to the language home. */
   pageKey?: PageKey;
+  /** Explicit path of the same page in each language (cards); wins over pageKey. */
+  alternates?: Record<Lang, string>;
 }
 
-const { lang, pageKey = 'home' } = Astro.props;
+const { lang, pageKey = 'home', alternates } = Astro.props;
 ---
 <div class="lang-switch" role="group" aria-label={t(lang, 'a11y.language')}>
   {
     LANGS.map((target) => (
       <a
-        href={pagePath(target, pageKey)}
+        href={alternates ? alternates[target] : pagePath(target, pageKey)}
         lang={target}
         hreflang={target}
         aria-label={`${target.toUpperCase()}, ${LANG_NAMES[target]}`}

@@ -8,7 +8,9 @@ title:
   en: Example event 06
 epoch: avis-e-descobrimentos
 level: story
-year: 1519
+year:
+  from: 1519
+  to: 1522
 place:
   name: "Lisboa (Terreiro do Paço)"
   lat: 38.7075

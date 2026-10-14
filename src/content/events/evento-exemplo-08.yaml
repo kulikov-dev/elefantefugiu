@@ -9,6 +9,9 @@ title:
 epoch: avis-e-descobrimentos
 level: story
 year: 1568
+year_label:
+  pt: por volta de 1568
+  en: around 1568
 place:
   name: "Peniche"
   lat: 39.3558

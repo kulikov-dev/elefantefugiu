@@ -20,14 +20,24 @@ npm run dev
 
 The dev server runs at http://localhost:4321/. Open `/pt/` or `/en/`.
 
-## Build and check
+## npm scripts
 
-```sh
-npm run build      # i18n key check, data check, Astro build, internal link check
-npm run preview    # serve dist/ locally
-npm run check      # astro check (types)
-npm run check:data # validate src/content/*.yaml and print a data summary
-```
+| Script | What it does |
+| ------ | ------------ |
+| `npm run dev` | Astro dev server at http://localhost:4321/ |
+| `npm run build` | Full build: i18n key check, unit tests, data check, Astro build, then `postbuild` |
+| `npm run postbuild` | Runs by itself after `build`: internal links, card pages, page weight |
+| `npm run preview` | Serves `dist/` locally |
+| `npm run check` | `astro check` (types, Astro files) |
+| `npm run check:data` | Validates `src/content/*.yaml` and prints a data summary (errors fail, warnings do not) |
+| `npm run check:links` | Every internal link in `dist/` starts with the base path and points to an existing file |
+| `npm run check:cards` | Built card pages: one `h1`, heading order, alt text, labels, sources, bridge, meta tags, hreflang, `noindex` only on placeholder cards |
+| `npm run check:weight` | Weight of card pages without images (HTML + CSS + JS, raw, gzip, brotli) against the 500 KB budget |
+| `npm test` | Unit tests (`tests/`, `node:test` with `tsx`): thread visibility, `min_age`, card helpers |
+| `npm run export:ui-table` | Prints a key / PT / EN table of all interface strings for review by a native speaker (`-- --format csv`, `-- --out file`) |
+
+`check:links`, `check:cards` and `check:weight` need a finished build (`dist/`).
+Browser checks (Chromium) are separate and not part of the build: see `scripts/qa/README.md`.
 
 To test a project-site build with a base path:
 
@@ -53,8 +63,11 @@ Content lives in `src/content/` as YAML (schemas in `src/data/schemas.ts`):
 
 ```
 events/<id>.yaml   one file per event; the file name equals the id
-epochs.yaml  threads.yaml  featured.yaml  ui.yaml
+epochs.yaml  threads.yaml  featured.yaml
 ```
+
+Interface strings are not content data: they live in `src/i18n/pt.json` and
+`src/i18n/en.json` (the build checks that both have the same keys).
 
 `npm run check:data` reports problems as `file [field, language]: message`
 and prints a summary. Length limits for entries with `placeholder: true` are
@@ -82,14 +95,16 @@ override both with repository variables (Settings, Secrets and variables, Action
 ## Project structure
 
 ```
-src/pages        routes: / (language chooser), /[lang]/[...page] (stubs), 404
-src/layouts      BaseLayout (head, header, footer)
-src/components   Logo, SiteHeader, SiteFooter, LanguageSwitch
-src/content      YAML content: events/, epochs, threads, featured, ui
+src/pages        routes: / (language chooser), /[lang]/[...page] (stubs), /[lang]/[segment]/[slug] (card page), 404
+src/layouts      BaseLayout (head, meta tags, header, footer)
+src/components   header, footer, language switch, and the card components (CardLayers, TagLabel, AgeBadge, ...)
+src/content      YAML content: events/, epochs, threads, featured
 src/data         Zod schemas
+src/lib          pure helpers (card logic, thread visibility), covered by tests/
 src/i18n         pt.json, en.json, route map, t() helper
 src/styles       tokens, reset, base, layout
-scripts          build-time checks (i18n keys, data, internal links)
+tests            unit tests
+scripts          build-time checks and tools; scripts/qa = browser checks (own dependencies)
 docs             design.md, spec.md, STATE.md
 ```
 

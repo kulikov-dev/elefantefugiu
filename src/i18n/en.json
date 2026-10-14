@@ -17,11 +17,21 @@
     "about": "About"
   },
   "pages": {
-    "about": { "title": "About the project" },
-    "method": { "title": "Method and sources" },
-    "report": { "title": "Found a mistake?" },
-    "legal": { "title": "Legal information" },
-    "map": { "title": "Map" }
+    "about": {
+      "title": "About the project"
+    },
+    "method": {
+      "title": "Method and sources"
+    },
+    "report": {
+      "title": "Found a mistake?"
+    },
+    "legal": {
+      "title": "Legal information"
+    },
+    "map": {
+      "title": "Map"
+    }
   },
   "footer": {
     "about": "About the project",
@@ -37,6 +47,26 @@
   },
   "stub": {
     "notice": "This page is a placeholder and will be filled in later."
+  },
+  "card": {
+    "breadcrumb": "Breadcrumb",
+    "tags": "Story tags",
+    "age_prefix": "Minimum age:",
+    "heavy_topic_note": "This story deals with a heavy topic.",
+    "placeholder_title": "Test text",
+    "placeholder_note": "This content is provisional and only used to test the site. It is not verified history.",
+    "image_credit": "Image",
+    "image_license": "Licence",
+    "story_heading": "The story",
+    "context": "Context",
+    "official_site": "Official website",
+    "accessed": "Accessed on",
+    "interactive_soon": "An interactive element will go here. Coming soon.",
+    "share_copied": "Link copied.",
+    "share_failed": "Could not copy. Link:",
+    "epoch_nav": "Navigation within the epoch",
+    "prev": "Previous",
+    "next": "Next"
   },
   "notfound": {
     "title": "Page not found",

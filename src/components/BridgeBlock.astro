@@ -1,0 +1,64 @@
+---
+// "Bridge to today": the place that can be visited now, with links to the map and the official site.
+import { t } from '../i18n';
+import { pagePath, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  bridge: { name: string; address: string; lat: number; lon: number; url: string };
+}
+
+const { lang, bridge } = Astro.props;
+const external = /^https?:\/\/\S+$/.test(bridge.url);
+// The map arrives in stage 4; for now the link leads to the /mapa stub (without coordinates yet).
+const mapHref = pagePath(lang, 'map');
+---
+<section class="bridge" aria-labelledby="bridge-title">
+  <h2 id="bridge-title">{t(lang, 'ui.bridge')}</h2>
+  <p class="bridge__name">{bridge.name}</p>
+  <address class="bridge__address">{bridge.address}</address>
+  <ul class="bridge__links">
+    <li><a class="button button--secondary" href={mapHref}>{t(lang, 'ui.open_on_map')}</a></li>
+    {
+      external && (
+        <li>
+          <a class="button button--secondary" href={bridge.url} rel="noopener">
+            {t(lang, 'card.official_site')}
+          </a>
+        </li>
+      )
+    }
+  </ul>
+</section>
+
+<style>
+  .bridge {
+    padding: var(--space-4);
+    border: var(--epoch-frame);
+    border-inline-start: 4px solid var(--epoch-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+  }
+
+  .bridge__name {
+    margin-block-start: var(--space-2);
+    font-weight: 600;
+  }
+
+  .bridge__address {
+    font-style: normal;
+    color: var(--color-ink-muted);
+  }
+
+  .bridge__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    margin-block-start: var(--space-3);
+    list-style: none;
+  }
+</style>

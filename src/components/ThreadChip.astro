@@ -1,0 +1,39 @@
+---
+// A thread (theme) name with its colour dot. Plain text for now: thread pages arrive in a later stage.
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  name: { pt: string; en: string };
+  color: string;
+}
+
+const { lang, name, color } = Astro.props;
+---
+<span class="thread" style={`--thread-color: ${color}`}>
+  <span class="thread__dot" aria-hidden="true"></span>
+  {name[lang]}
+</span>
+
+<style>
+  .thread {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0.15rem 0.7rem 0.15rem 0.55rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .thread__dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--thread-color);
+  }
+</style>

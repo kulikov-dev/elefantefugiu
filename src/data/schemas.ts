@@ -8,8 +8,9 @@ export const text = z.strictObject({ pt: z.string(), en: z.string() });
 const slug = z.string();
 const yearRange = z.strictObject({ from: z.number().int(), to: z.number().int() });
 
-// YAML reads an unquoted 12 as a number, so accept both 12 and "12".
-const minAge = z.preprocess((v) => (typeof v === 'number' ? String(v) : v), z.enum(['all', '12', '16']));
+// YAML reads an unquoted 12 as a number, so accept 12 and "12" and always output a string:
+// "all", "12" or "16" (decision after stage 2).
+export const minAge = z.preprocess((v) => (typeof v === 'number' ? String(v) : v), z.enum(['all', '12', '16']));
 
 const source = z.strictObject({
   title: z.string(),
@@ -22,6 +23,8 @@ const image = z.strictObject({
   /** Path inside public/, for example images/placeholders/epoch-a.svg */
   src: z.string(),
   alt: text,
+  /** Visible caption under the picture; optional. Credit and licence are always shown as well. */
+  caption: text.optional(),
   credit: z.string(),
   license: z.string(),
 });
@@ -94,6 +97,8 @@ export const epochSchema = z.strictObject({
     frame: z.string(),
   }),
   mvp: z.boolean(),
+  /** Preview image (Open Graph) for cards of this epoch that have no image of their own. Path inside public/. */
+  fallback_image: z.string().optional(),
   placeholder: z.boolean().default(false),
 });
 
@@ -109,6 +114,3 @@ export const threadSchema = z.strictObject({
 
 /** One showcase entry; `id` is the id of an event. Order in the file is the display order. */
 export const featuredSchema = z.strictObject({ id: z.string() });
-
-/** One UI string; `id` is the key, same keys as the "ui" section of src/i18n/*.json. */
-export const uiSchema = z.strictObject({ id: z.string(), pt: z.string(), en: z.string() });

@@ -10,14 +10,33 @@ interface Props {
   title: string;
   /** Page key keeps the language switch on the same page; omit for pages without a pair (404). */
   pageKey?: PageKey;
+  /** Base-aware path of this page in each language. For pages that are not in ROUTES (cards). Overrides pageKey. */
+  alternates?: Record<Lang, string>;
+  /** Meta description; defaults to the site description. */
+  description?: string;
+  /** Open Graph / Twitter preview. Without `title` the page title is used. */
+  preview?: {
+    title?: string;
+    type?: 'website' | 'article';
+    /** Path inside public/ (no base). */
+    image?: string;
+    imageAlt?: string;
+  };
   noindex?: boolean;
 }
 
-const { lang, title, pageKey, noindex = false } = Astro.props;
+const { lang, title, pageKey, alternates: alternatesProp, description: descriptionProp, preview, noindex = false } = Astro.props;
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
-const description = t(lang, 'site.description');
-const canonical = pageKey ? new URL(pagePath(lang, pageKey), Astro.site) : undefined;
+const description = descriptionProp ?? t(lang, 'site.description');
+
+const paths: Record<Lang, string> | undefined =
+  alternatesProp ?? (pageKey ? { pt: pagePath('pt', pageKey), en: pagePath('en', pageKey) } : undefined);
+const absolute = (path: string) => new URL(path, Astro.site).href;
+const canonical = paths ? absolute(paths[lang]) : undefined;
+const image = preview?.image ? absolute(withBase(preview.image)) : undefined;
+const OG_LOCALE: Record<Lang, string> = { pt: 'pt_PT', en: 'en_GB' };
+const otherLang = LANGS.find((l) => l !== lang)!;
 ---
 <!doctype html>
 <html lang={lang}>
@@ -29,18 +48,27 @@ const canonical = pageKey ? new URL(pagePath(lang, pageKey), Astro.site) : undef
     <meta name="theme-color" content="#1f4e8c" />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
-    {canonical && <link rel="canonical" href={canonical.href} />}
-    {
-      pageKey &&
-        LANGS.map((target) => (
-          <link rel="alternate" hreflang={target} href={new URL(pagePath(target, pageKey), Astro.site).href} />
-        ))
-    }
-    {pageKey && <link rel="alternate" hreflang="x-default" href={new URL(pagePath('pt', pageKey), Astro.site).href} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    {paths && LANGS.map((target) => <link rel="alternate" hreflang={target} href={absolute(paths[target])} />)}
+    {paths && <link rel="alternate" hreflang="x-default" href={absolute(paths.pt)} />}
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:type" content={preview?.type ?? 'website'} />
+    <meta property="og:title" content={preview?.title ?? fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    {paths && <meta property="og:locale:alternate" content={OG_LOCALE[otherLang]} />}
+    {image && <meta property="og:image" content={image} />}
+    {image && preview?.imageAlt && <meta property="og:image:alt" content={preview.imageAlt} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={preview?.title ?? fullTitle} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={image} />}
+    {image && preview?.imageAlt && <meta name="twitter:image:alt" content={preview.imageAlt} />}
   </head>
   <body>
     <a class="skip-link" href="#main">{t(lang, 'a11y.skip_to_content')}</a>
-    <SiteHeader lang={lang} pageKey={pageKey} />
+    <SiteHeader lang={lang} pageKey={pageKey} alternates={alternatesProp} />
     <main id="main" tabindex="-1">
       <div class="container page">
         <slot />

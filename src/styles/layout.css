@@ -198,15 +198,33 @@
   justify-content: center;
   min-height: 48px;
   padding-inline: var(--space-5);
+  border: 2px solid var(--color-accent);
   background: var(--color-accent);
   color: var(--color-on-accent);
   border-radius: var(--radius-md);
   font-weight: 600;
   text-decoration: none;
+  cursor: pointer;
   transition: background var(--transition);
 }
 
 .button:hover {
   background: var(--color-accent-strong);
   color: var(--color-on-accent);
+}
+
+/* Outlined variant for secondary actions. */
+.button--secondary {
+  background: var(--color-surface);
+  color: var(--color-accent);
+}
+
+.button--secondary:hover {
+  background: #e8eff8;
+  color: var(--color-accent-strong);
+}
+
+/* The hidden attribute must win over display: inline-flex. */
+.button[hidden] {
+  display: none;
 }

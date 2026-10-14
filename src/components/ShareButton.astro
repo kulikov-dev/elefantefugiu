@@ -1,0 +1,81 @@
+---
+// Share: Web Share API if available, otherwise copy the link and confirm.
+// Without JavaScript the plain link stays (it leads to the card itself).
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  /** Absolute address of the card, used by the link without JavaScript. */
+  url: string;
+  title: string;
+}
+
+const { lang, url, title } = Astro.props;
+---
+<span class="share" data-share data-title={title} data-copied={t(lang, 'card.share_copied')} data-failed={t(lang, 'card.share_failed')}>
+  <a class="button button--secondary" href={url} data-share-link>{t(lang, 'ui.share')}</a>
+  <button class="button button--secondary" type="button" data-share-button hidden>{t(lang, 'ui.share')}</button>
+  <span class="share__status" role="status" data-share-status></span>
+</span>
+
+<style>
+  .share {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+  }
+
+  .share__status {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    overflow-wrap: anywhere;
+  }
+</style>
+
+<script>
+  // Enhance every share widget: swap the link for a button and wire up sharing.
+  // navigator.clipboard needs a secure context (https, localhost). If it is missing or refused,
+  // the message shows the link so it can be copied by hand.
+  async function copyText(text: string): Promise<boolean> {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-share]').forEach((root) => {
+    const link = root.querySelector<HTMLAnchorElement>('[data-share-link]');
+    const button = root.querySelector<HTMLButtonElement>('[data-share-button]');
+    const status = root.querySelector<HTMLElement>('[data-share-status]');
+    if (!link || !button || !status) return;
+
+    link.hidden = true;
+    button.hidden = false;
+
+    let timer: number | undefined;
+    const say = (message: string) => {
+      status.textContent = message;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => (status.textContent = ''), 6000);
+    };
+
+    button.addEventListener('click', async () => {
+      // Current address, so an open layer (#detalhes) is part of the shared link.
+      const url = location.href;
+      const title = root.dataset.title ?? document.title;
+      if (typeof navigator.share === 'function') {
+        try {
+          await navigator.share({ title, url });
+          return;
+        } catch (error) {
+          if (error instanceof DOMException && error.name === 'AbortError') return; // the person closed the dialog
+        }
+      }
+      say((await copyText(url)) ? (root.dataset.copied ?? '') : `${root.dataset.failed ?? ''} ${url}`);
+    });
+  });
+</script>

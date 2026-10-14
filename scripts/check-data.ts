@@ -4,7 +4,8 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { parseDocument } from 'yaml';
 import type { ZodType } from 'astro/zod';
-import { epochSchema, eventSchema, featuredSchema, threadSchema, uiSchema } from '../src/data/schemas';
+import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
+import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
 
 const root = new URL('..', import.meta.url).pathname;
 const content = join(root, 'src/content');
@@ -74,7 +75,6 @@ function loadList<T>(name: string, schema: ZodType<T>): { item: T; file: string 
 const epochs = loadList('epochs', epochSchema);
 const threads = loadList('threads', threadSchema);
 const featured = loadList('featured', featuredSchema);
-const ui = loadList('ui', uiSchema);
 
 type Event = ReturnType<typeof eventSchema.parse>;
 const events: { item: Event; file: string; stem: string }[] = [];
@@ -89,6 +89,12 @@ for (const name of existsSync(eventsDir) ? readdirSync(eventsDir).sort() : []) {
 }
 
 // ---------- rules ----------
+for (const { item, file } of epochs) {
+  if (item.fallback_image && !existsSync(join(root, 'public', item.fallback_image))) {
+    report('error', file, `file "public/${item.fallback_image}" does not exist`, 'fallback_image');
+  }
+}
+
 const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
 const isTodo = (s: string) => s.trim() === '' || /^TODO\b/i.test(s.trim());
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -183,6 +189,11 @@ for (const { item: ev, file, stem } of events) {
     for (const lang of ['pt', 'en'] as const) {
       if (ev.image.alt[lang].trim() === '') report('error', file, 'alt text is empty', 'image.alt', lang);
     }
+    if (ev.image.caption) {
+      for (const lang of ['pt', 'en'] as const) {
+        if (ev.image.caption[lang].trim() === '') report('error', file, 'caption is empty (give both languages or remove the field)', 'image.caption', lang);
+      }
+    }
     if (ev.image.license.trim() === '') report('error', file, 'license is empty', 'image.license');
     if (!existsSync(join(root, 'public', ev.image.src))) {
       report('error', file, `file "public/${ev.image.src}" does not exist`, 'image.src');
@@ -229,23 +240,6 @@ featured.forEach(({ item, file }) => {
 dupes('featured id', featured.map((f) => ({ id: f.item.id, file: f.file })));
 if (featured.length !== 3) report('error', 'src/content/featured.yaml', `${featured.length} entries, the home page needs exactly 3 (spec 5.1)`);
 
-// ui keys must match src/i18n/*.json
-{
-  const uiById = new Map(ui.map((u) => [u.item.id, u]));
-  dupes('ui key', ui.map((u) => ({ id: u.item.id, file: u.file })));
-  for (const lang of ['pt', 'en'] as const) {
-    const json = JSON.parse(readFileSync(join(root, `src/i18n/${lang}.json`), 'utf8')).ui as Record<string, string>;
-    for (const [key, value] of Object.entries(json)) {
-      const entry = uiById.get(key);
-      if (!entry) report('error', 'src/content/ui.yaml', `key "${key}" is in src/i18n/${lang}.json but missing here`, 'id', lang);
-      else if (entry.item[lang] !== value) report('error', entry.file, `differs from src/i18n/${lang}.json ("${value}")`, key, lang);
-    }
-    for (const key of uiById.keys()) {
-      if (!(key in json)) report('error', 'src/content/ui.yaml', `key "${key}" is not in src/i18n/${lang}.json`, 'id', lang);
-    }
-  }
-}
-
 // ALLOW_PLACEHOLDER gate
 const allowRaw = (process.env.ALLOW_PLACEHOLDER ?? 'true').trim().toLowerCase();
 if (allowRaw !== 'true' && allowRaw !== 'false') {
@@ -261,10 +255,13 @@ if (allowRaw === 'false' && placeholders.length > 0) {
   report('error', 'environment', `ALLOW_PLACEHOLDER=false but ${placeholders.length} entries have placeholder: true (${shown}${placeholders.length > 5 ? ', ...' : ''})`);
 }
 
-// threads with few cards (spec 5.5: reference is 5-6)
+// threads with few cards are hidden from filters and menus (decision after stage 2)
+const cardCounts = countCardsByThread(events.map((e) => e.item));
 for (const t of threads) {
-  const n = events.filter((e) => e.item.threads.includes(t.item.id)).length;
-  if (n < 5) report('warn', t.file, `thread "${t.item.id}" has ${n} cards, reference is 5 or more`);
+  const n = cardCounts.get(t.item.id) ?? 0;
+  if (n < MIN_CARDS_PER_THREAD) {
+    report('warn', t.file, `thread "${t.item.id}" has ${n} cards, it is hidden from filters and menus (needs ${MIN_CARDS_PER_THREAD})`);
+  }
 }
 
 // ---------- output ----------
@@ -291,7 +288,7 @@ const near = evs.filter((e) => km(e.place.lat, e.place.lon) <= 10);
 const far = evs.filter((e) => km(e.place.lat, e.place.lon) > 10);
 
 console.log('\nData summary');
-console.log(`  epochs: ${epochs.length}, threads: ${threads.length}, ui strings: ${ui.length}, featured: ${featured.map((f) => f.item.id).join(', ') || '-'}`);
+console.log(`  epochs: ${epochs.length}, threads: ${threads.length}, featured: ${featured.map((f) => f.item.id).join(', ') || '-'}`);
 console.log(`  events: ${evs.length} (${evs.filter((e) => e.level === 'frame').length} frame, ${evs.filter((e) => e.level === 'story').length} story)`);
 console.log('  by epoch:');
 for (const ep of epochs.map((e) => e.item).sort((a, b) => a.order - b.order)) {

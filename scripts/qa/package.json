@@ -1,0 +1,15 @@
+{
+  "name": "elefante-fugiu-qa",
+  "private": true,
+  "type": "module",
+  "description": "Browser checks for the built site. Separate from the site: not part of npm run build.",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "shots": "node shots.mjs",
+    "behave": "node behave.mjs"
+  },
+  "dependencies": {
+    "@sparticuz/chromium": "131.0.1",
+    "puppeteer-core": "23.11.1"
+  }
+}
