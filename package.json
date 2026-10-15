@@ -10,25 +10,30 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/check-i18n.mjs && npm test && tsx scripts/check-data.ts && astro build",
-    "postbuild": "node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs",
+    "postbuild": "node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs && node scripts/check-tokens.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "check:data": "tsx scripts/check-data.ts",
     "check:links": "node scripts/check-links.mjs",
     "export:ui-table": "node scripts/export-ui-table.mjs",
-    "test": "node --import tsx --test \"tests/**/*.test.ts\"",
+    "test": "node --import tsx --test \"tests/**/*.test.ts\" && vitest run",
     "check:cards": "node scripts/check-cards.mjs",
     "check:weight": "node scripts/check-weight.mjs",
-    "check:listings": "node scripts/check-listings.mjs"
+    "check:listings": "node scripts/check-listings.mjs",
+    "test:unit": "vitest run",
+    "check:tokens": "node scripts/check-tokens.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "astro": "^7.3.8",
+    "leaflet": "1.9.4",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
+    "@types/leaflet": "1.9.21",
     "@types/node": "^22.20.5",
     "tsx": "4.23.15",
+    "vitest": "5.0.4",
     "yaml": "2.9.1"
   }
 }

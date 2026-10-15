@@ -1,0 +1,94 @@
+---
+// The map block: map, marker preview, "In this area" list. Shared by the map page and (later) epoch pages.
+// Without JavaScript the block stays hidden; the page then shows its plain list of cards.
+// Leaflet and its styles are loaded by an island script only when the block scrolls into view.
+import '../styles/map.css';
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import type { Bounds } from '../lib/markers';
+import { safeJson, type MapCardInfo } from '../lib/map-cards';
+import type { TileConfig } from '../lib/tiles';
+
+interface Props {
+  lang: Lang;
+  cards: MapCardInfo[];
+  /** Thread id to name and colour, for the preview. */
+  threads: Record<string, { name: string; color: string }>;
+  /** Known filter values (used to read the address). */
+  known: { threads: string[]; epochs: string[] };
+  maxBounds: Bounds;
+  view: Bounds;
+  tile: TileConfig;
+  /** 'page': the block owns ?fio= ?epoca= ?id= in the address. 'embedded': a parent page drives it with events. */
+  mode?: 'page' | 'embedded';
+}
+
+const { lang, cards, threads, known, maxBounds, view, tile, mode = 'page' } = Astro.props;
+
+const config = {
+  mode,
+  cards,
+  threads,
+  known,
+  maxBounds,
+  view,
+  tile: { url: tile.url, attribution: tile.attribution },
+  strings: {
+    frame: t(lang, 'map.marker_frame'),
+    story: t(lang, 'map.marker_story'),
+    cluster_one: t(lang, 'map.cluster_one'),
+    cluster_other: t(lang, 'map.cluster_other'),
+    in_area_one: t(lang, 'map.in_area_one'),
+    in_area_other: t(lang, 'map.in_area_other'),
+    zoom_in: t(lang, 'map.zoom_in'),
+    zoom_out: t(lang, 'map.zoom_out'),
+    list_open: t(lang, 'map.list_open'),
+    list_close: t(lang, 'map.list_close'),
+    thread_label: t(lang, 'card.tags'),
+  },
+};
+---
+<section class="map" data-map data-mode={mode} data-sheet="closed" aria-label={t(lang, 'map.map_label')} hidden>
+  <script type="application/json" data-map-config set:html={safeJson(config)} />
+
+  <div class="map__stage">
+    <div class="map__canvas" data-map-canvas></div>
+    <p class="map__loading" data-map-loading>{t(lang, 'map.loading')}</p>
+    <p class="map__unavailable" data-map-unavailable hidden role="status">{t(lang, 'map.unavailable')}</p>
+
+    <button type="button" class="button button--secondary map__more" data-more hidden>{t(lang, 'ui.show_more')}</button>
+
+    <div class="map__preview" data-map-preview role="region" aria-labelledby="map-preview-title" tabindex="-1" hidden>
+      <button type="button" class="map__preview-close" data-preview-close aria-label={t(lang, 'map.preview_close')}>
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <p class="map__preview-meta" data-preview-meta></p>
+      <h2 class="map__preview-title" id="map-preview-title" data-preview-title></h2>
+      <ul class="map__preview-threads" data-preview-threads aria-label={t(lang, 'card.tags')}></ul>
+      <p class="map__preview-hook" data-preview-hook></p>
+      <a class="button" data-preview-open href="#">{t(lang, 'map.preview_open')}</a>
+    </div>
+  </div>
+
+  <aside class="map__list" data-map-list aria-labelledby="map-list-title">
+    <div class="map__list-head">
+      <h2 class="map__list-title" id="map-list-title" tabindex="-1">
+        {t(lang, 'map.list_title')}
+        <span class="map__list-count" data-list-count aria-hidden="true"></span>
+      </h2>
+      <button type="button" class="map__sheet-toggle" data-sheet-toggle aria-expanded="false" aria-controls="map-list-body">
+        {t(lang, 'map.list_open')}
+      </button>
+    </div>
+    <div class="map__list-body" id="map-list-body" data-list-body>
+      <ol class="map__items" data-list-items></ol>
+      <p class="map__empty" data-list-empty hidden>{t(lang, 'map.list_empty')}</p>
+    </div>
+  </aside>
+
+  <p class="visually-hidden" role="status" data-map-status></p>
+</section>
+
+<script>
+  import '../scripts/map-loader';
+</script>

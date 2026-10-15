@@ -39,7 +39,7 @@ const { lang, hook, textLang } = Astro.props;
   .hook {
     max-width: var(--measure);
     padding-inline-start: var(--space-4);
-    border-inline-start: 4px solid var(--epoch-accent);
+    border-inline-start: var(--epoch-accent-bar);
     font-family: var(--epoch-heading-font);
     font-size: var(--text-xl);
     font-style: italic;
@@ -60,7 +60,7 @@ const { lang, hook, textLang } = Astro.props;
   summary {
     display: flex;
     align-items: center;
-    min-height: 48px;
+    min-height: var(--touch-target-large);
     padding: var(--space-2) var(--space-4);
     color: var(--color-accent);
     font-weight: 700;
@@ -68,7 +68,7 @@ const { lang, hook, textLang } = Astro.props;
   }
 
   summary:focus-visible {
-    outline-offset: -3px;
+    outline-offset: calc(var(--ring-width) * -1);
   }
 
   .more[open] > summary {

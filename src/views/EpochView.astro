@@ -1,13 +1,15 @@
 ---
 // Epoch page: /pt/epoca/{slug}, /en/era/{slug} (docs/spec.md section 5.2).
-// Stage 4a: heading, thread links with counters, the feed, neighbouring epochs.
-// The map, the grid switch and the thread filter come later.
+// Heading, thread filter with counters, timeline/grid switch, the feed, the map, neighbouring epochs.
+// Wide screen: feed on the left, the map stays on screen on the right. Phone: a switch "Timeline | Map".
+// The map needs JavaScript: without it the page is the plain feed (everything map-related starts hidden).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
 import EpochSwitcher from '../components/EpochSwitcher.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { epochHref, threadHref, type Lang } from '../i18n/routes';
+import MapBlock from '../components/MapBlock.astro';
+import { epochHref, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import {
   epochFeed,
@@ -19,6 +21,9 @@ import {
   type EpochData,
   type NeighbourEpoch,
 } from '../lib/epochs';
+import { toMapCards } from '../lib/map-cards';
+import { cardsView, mapMaxBounds } from '../lib/map-data';
+import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
 
 interface Props {
@@ -33,6 +38,10 @@ const feed = epochFeed(epoch, site.events);
 const counts = threadCountsInEpoch(epoch, site.events);
 // Only threads that have a page, and only those with cards in this epoch, so every counter is a real count.
 const chips = site.visibleThreads.filter((th) => (counts.get(th.id) ?? 0) > 0);
+
+// The map shows the cards of this epoch; its thread follows the filter above (?fio=).
+const mapCards = toMapCards(feed, lang, (e) => storyPath(lang, e.slug[lang]));
+const mapThreads = Object.fromEntries(site.threads.map((th) => [th.id, { name: th.name[lang], color: th.color }]));
 
 const switcherItems = epochSwitcherItems(epoch, site.epochs, site.events);
 const { prev, next } = neighbourEpochs(epoch, site.epochs, site.events);
@@ -55,7 +64,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   preview={{ title: epoch.name[lang], image: epoch.fallback_image }}
   noindex={noindex}
 >
-  <div class="epoch">
+  <div class="epoch" data-epoch data-pane="feed">
     <header class="epoch__header">
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">{epochYearsText(epoch, lang)}</p>
@@ -126,22 +135,45 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
       </div>
     </div>
 
-    <section aria-labelledby="timeline-title">
-      <h2 id="timeline-title" class="visually-hidden">{t(lang, 'epoch.timeline_label')}</h2>
-      <ol class="feed" data-view="timeline">
-        {
-          feed.map((event) => (
-            <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')}>
-              <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} />
-            </li>
-          ))
-        }
-      </ol>
-      <div class="feed-empty" data-empty hidden>
-        <p>{t(lang, 'epoch.empty')}</p>
-        <button type="button" class="button button--secondary">{t(lang, 'epoch.show_all')}</button>
+    <div class="epoch__body">
+      <!-- Phone only, script only: choose between the timeline and the map. -->
+      <div class="panes" data-map-js hidden>
+        <div role="group" aria-label={t(lang, 'epoch.pane_label')} class="pane-switch">
+          <button type="button" data-pane-btn="feed" aria-pressed="true">{t(lang, 'ui.view_timeline')}</button>
+          <button type="button" data-pane-btn="map" aria-pressed="false">{t(lang, 'epoch.map_pane')}</button>
+        </div>
       </div>
-    </section>
+
+      <section class="epoch__feed" aria-labelledby="timeline-title">
+        <h2 id="timeline-title" class="visually-hidden">{t(lang, 'epoch.timeline_label')}</h2>
+        <ol class="feed" data-view="timeline">
+          {
+            feed.map((event) => (
+              <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')}>
+                <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} />
+              </li>
+            ))
+          }
+        </ol>
+        <div class="feed-empty" data-empty hidden>
+          <p>{t(lang, 'epoch.empty')}</p>
+          <button type="button" class="button button--secondary">{t(lang, 'epoch.show_all')}</button>
+        </div>
+      </section>
+
+      <aside class="epoch__aside" data-epoch-aside data-map-js hidden>
+        <MapBlock
+          lang={lang}
+          mode="embedded"
+          cards={mapCards}
+          threads={mapThreads}
+          known={{ threads: site.threads.map((th) => th.id), epochs: [] }}
+          maxBounds={mapMaxBounds(mapCards)}
+          view={cardsView(mapCards)}
+          tile={tileConfig(process.env)}
+        />
+      </aside>
+    </div>
 
     <PagerNav
       label={t(lang, 'epoch.neighbours_label')}
@@ -153,6 +185,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
 <script>
   import '../scripts/epoch-filter';
+  import '../scripts/epoch-map';
 </script>
 
 <style>
@@ -202,7 +235,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   }
 
   .view-switch button {
-    min-height: 2.75rem;
+    min-height: var(--touch-target);
     padding-inline: var(--space-4);
     border: 0;
     background: transparent;
@@ -231,7 +264,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   /* Grid view: the same cards as tiles. One column on a narrow phone. */
   .feed[data-view='grid'] {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-tile-min)), 1fr));
     gap: var(--space-4);
     padding: 0;
     border: 0;
@@ -258,6 +291,76 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     aspect-ratio: 1200 / 630;
   }
 
+  /* ---- feed and map ---- */
+
+  .panes {
+    margin-block-end: var(--space-3);
+  }
+
+  .pane-switch {
+    display: inline-flex;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+
+  .pane-switch button {
+    min-height: var(--touch-target);
+    padding-inline: var(--space-4);
+    border: 0;
+    background: transparent;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .pane-switch button[aria-pressed='true'] {
+    background: var(--color-ink);
+    color: var(--color-surface);
+  }
+
+  /* The feed record whose marker was chosen on the map (and the reverse): a thick outline, not only a colour. */
+  .feed__item[data-active] > :global(.ecard) {
+    outline: var(--ring-width) solid var(--color-accent);
+    outline-offset: var(--space-1);
+  }
+
+  /* Phone: one pane at a time. The grid/timeline switch belongs to the feed. */
+  @media (max-width: 59.99rem) {
+    .epoch[data-pane='map'] .epoch__feed,
+    .epoch[data-pane='map'] .view-switch,
+    .epoch[data-pane='feed'] .epoch__aside {
+      display: none;
+    }
+  }
+
+  /* Wide screen: feed on the left, the map stays on screen while the feed scrolls. */
+  @media (min-width: 60rem) {
+    .panes {
+      display: none;
+    }
+
+    .epoch__body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--epoch-map-width);
+      gap: var(--space-5);
+      align-items: start;
+    }
+
+    .epoch__aside {
+      position: sticky;
+      inset-block-start: var(--space-4);
+    }
+
+    /* No map (tiles did not load): the feed takes the whole width again. */
+    .epoch[data-map='unavailable'] .epoch__body {
+      display: block;
+    }
+  }
+
   .chips {
     display: flex;
     flex-wrap: wrap;
@@ -271,7 +374,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     margin: 0;
     padding: 0 0 0 var(--space-5);
     list-style: none;
-    border-inline-start: 2px solid var(--color-line);
+    border-inline-start: var(--timeline-line) solid var(--color-line);
   }
 
   .feed__item {
@@ -285,20 +388,20 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   .feed__item::before {
     content: '';
     position: absolute;
-    inset-inline-start: calc(-1 * var(--space-5) - 7px);
-    inset-block-start: 1.4rem;
-    width: 12px;
-    height: 12px;
-    border: 2px solid var(--color-surface);
+    inset-inline-start: calc(-1 * var(--space-5) - var(--timeline-dot) / 2 - var(--timeline-line) / 2);
+    inset-block-start: var(--timeline-dot-top);
+    width: var(--timeline-dot);
+    height: var(--timeline-dot);
+    border: var(--border-medium) solid var(--color-surface);
     border-radius: 50%;
     background: var(--epoch-accent);
   }
 
   /* Stories between the key events: smaller dot, lighter card. */
   .feed__item--story::before {
-    inset-inline-start: calc(-1 * var(--space-5) - 5px);
-    width: 8px;
-    height: 8px;
+    inset-inline-start: calc(-1 * var(--space-5) - var(--timeline-dot-small) / 2 - var(--timeline-line) / 2);
+    width: var(--timeline-dot-small);
+    height: var(--timeline-dot-small);
     background: var(--color-ink-muted);
   }
 </style>

@@ -9,6 +9,24 @@
   --color-accent-strong: #163a69;
   --color-on-accent: #ffffff;
   --color-focus: #0a58ca;
+  --color-overlay: rgb(255 255 255 / 0.96);
+  --color-surface-hover: #f1f5f9;
+  --color-accent-tint: #e8eff8;
+  /* Heavy-topic marker (frame, text on tint above 7:1). */
+  --color-heavy-border: #7a2e0e;
+  --color-heavy-bg: #fdeee6;
+  --color-heavy-ink: #5e2108;
+  /* Card labels: text on tinted background, contrast above 7:1 for each pair. */
+  --color-label-documented-bg: #e6f4ea;
+  --color-label-documented-ink: #14532d;
+  --color-label-legend-bg: #fdf0d5;
+  --color-label-legend-ink: #5c3b00;
+  --color-label-debated-bg: #f1e6f6;
+  --color-label-debated-ink: #522463;
+  /* "Test text" notice. */
+  --color-notice-border: #6b5200;
+  --color-notice-bg: #fff4c2;
+  --color-notice-ink: #3d2f00;
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -38,6 +56,61 @@
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-pill: 999px;
+
+  /* Elevation and layers */
+  --shadow-raised: 0 1px 4px rgb(21 32 43 / 0.3);
+  --z-map-overlay: 1100; /* above Leaflet's own controls (1000) */
+
+  /* Touch targets */
+  --touch-target: 2.75rem;
+  --touch-target-large: 3rem;
+
+  /* Lines and focus */
+  --border-medium: 2px;
+  --border-heavy: 4px;
+  --epoch-accent-bar: var(--border-heavy) solid var(--epoch-accent);
+  --ring-width: 3px;
+  --ring-offset: 4px;
+  --ring-offset-tight: 2px;
+  --underline-offset: 0.2em;
+
+  /* Chips, labels, counters, dots */
+  --pad-chip-y: 0.15rem;
+  --pad-chip-x: 0.6rem;
+  --pad-chip-x-wide: 0.85rem;
+  --pad-count: 0.4rem;
+  --count-min-width: 1.4rem;
+  --size-dot: 0.65rem;
+  --size-dot-lg: 1rem;
+  --size-step: 2rem;
+  --size-logo: 2.25rem;
+  --size-thumb: 5.5rem;
+
+  /* Timeline */
+  --timeline-line: 2px;
+  --timeline-dot: 12px;
+  --timeline-dot-small: 8px;
+  --timeline-dot-top: 1.4rem;
+
+  /* Grids and widths */
+  --grid-tile-min: 17rem;
+  --grid-home-tile-min: 16rem;
+  --grid-step-min: 14rem;
+  --container-story: 48rem;
+
+  /* Map: sizes of the block and of the markers (frame: large diamond, story: small circle, cluster: square with a number). */
+  --map-height: clamp(20rem, 62svh, 40rem);
+  --map-list-width: 22rem;
+  --map-preview-width: 24rem;
+  --map-sheet-peek: 3.5rem;
+  --map-sheet-open: 70%;
+  --map-marker-frame: 1.75rem;
+  --map-marker-story: 1.125rem;
+  --map-marker-cluster: 2.5rem;
+  --map-marker-border: 2px;
+  --map-marker-selected-scale: 1.25;
+  --map-hit-area: 0.5rem;
+  --epoch-map-width: clamp(20rem, 38%, 30rem);
 
   /* Motion */
   --transition: 150ms ease;

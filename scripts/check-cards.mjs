@@ -114,7 +114,11 @@ for (const ev of events) {
     if (!has(/<details id="detalhes"/)) fail('layer 3 (<details id="detalhes">) is missing');
     if (/<details id="detalhes"[^>]*\bopen\b/.test(html)) fail('layer 3 must be closed by default');
     if (!has(/<section class="bridge"/) || !has(/<address class="bridge__address"/)) fail('"Bridge to today" is missing');
-    if (!has(/href="[^"]*\/(mapa|map)\/"/)) fail('"Open on map" link is missing');
+    // "Open on the map" leads to the map page with this card's id (the map centres on it and opens the preview).
+    const bridgeBlock = html.match(/<section class="bridge"[\s\S]*?<\/section>/)?.[0] ?? '';
+    const mapLink = bridgeBlock.match(/href="([^"]*\/(?:mapa|map)\/[^"]*)"/)?.[1];
+    if (!mapLink) fail('"Open on map" link is missing');
+    else if (!new RegExp(`/${lang === 'pt' ? 'mapa' : 'map'}/\\?id=${ev.id}$`).test(mapLink)) fail(`"Open on map" link should end with /?id=${ev.id}, got ${mapLink}`);
     const sources = html.match(/<section class="sources"[\s\S]*?<\/section>/)?.[0] ?? '';
     if ((sources.match(/<li\b/g) ?? []).length !== ev.sources.length) fail(`expected ${ev.sources.length} sources in the list`);
     if (!has(/<p class="checked"/)) fail('check date is missing');

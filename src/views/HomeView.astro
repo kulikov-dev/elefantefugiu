@@ -151,7 +151,7 @@ const steps = [
   .showcase,
   .tiles {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-home-tile-min)), 1fr));
     gap: var(--space-4);
     margin: 0;
     padding: 0;
@@ -205,8 +205,8 @@ const steps = [
   }
 
   .tile--link:focus-within {
-    outline: 3px solid var(--color-accent);
-    outline-offset: 2px;
+    outline: var(--ring-width) solid var(--color-accent);
+    outline-offset: var(--ring-offset-tight);
   }
 
   .tile--soon {
@@ -231,7 +231,7 @@ const steps = [
 
   .steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-step-min)), 1fr));
     gap: var(--space-4);
     margin: 0;
     padding: 0;
@@ -254,8 +254,8 @@ const steps = [
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    width: var(--size-step);
+    height: var(--size-step);
     border-radius: 50%;
     background: var(--color-accent);
     color: var(--color-on-accent);

@@ -1,0 +1,548 @@
+/* Map block, filters, markers and the plain list. Values come from tokens.css. Loaded only on pages with a map. */
+
+.map [hidden],
+.map-page [hidden] {
+  display: none !important;
+}
+
+.map-page > * + * {
+  margin-block-start: var(--space-4);
+}
+
+.map-page h1 {
+  font-size: var(--text-2xl);
+}
+
+/* ---- filters ---- */
+
+.map-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.map-chips {
+  display: flex;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0 0 var(--space-1);
+  list-style: none;
+  /* A phone shows one swipeable row per group so the map stays near the top. */
+  overflow-x: auto;
+}
+
+.map-chips > li {
+  flex: none;
+}
+
+@media (min-width: 40rem) {
+  .map-chips {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+.map-chip {
+  min-height: var(--touch-target);
+  padding-inline: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.map-chip[aria-pressed='true'] {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+
+/* ---- the block ---- */
+
+.map {
+  position: relative;
+}
+
+.map__stage {
+  position: relative;
+  height: var(--map-height);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.map__canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.map__loading,
+.map__unavailable {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  margin: 0;
+  padding: var(--space-4);
+  color: var(--color-ink-muted);
+  text-align: center;
+}
+
+.map[data-state='ready'] .map__loading,
+.map[data-state='unavailable'] .map__loading {
+  display: none;
+}
+
+.map__unavailable {
+  position: static;
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.map[data-state='unavailable'] .map__stage {
+  height: auto;
+  border-style: dashed;
+}
+
+.map[data-state='unavailable'] .map__canvas,
+.map[data-state='unavailable'] .map__preview {
+  display: none;
+}
+
+/* Phone: the sheet covers the bottom of the map, so Leaflet's bottom corner (attribution) sits above it.
+   --map-sheet-height is set by the map script from the real height of the sheet (open or closed). */
+@media (max-width: 59.99rem) {
+  .map .leaflet-bottom {
+    bottom: var(--map-sheet-height, var(--map-sheet-peek));
+  }
+}
+
+/* Zoom buttons: a comfortable touch size. */
+.map .leaflet-touch .leaflet-bar a {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  line-height: var(--touch-target);
+}
+
+/* ---- preview of a marker ---- */
+
+.map__preview {
+  position: absolute;
+  inset-inline: var(--space-3);
+  inset-block-end: calc(var(--map-sheet-peek) + var(--space-3));
+  z-index: var(--z-map-overlay);
+  max-width: var(--map-preview-width);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-raised);
+}
+
+.map__preview > * + * {
+  margin-block-start: var(--space-2);
+}
+
+.map__preview-meta {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.map__preview-title {
+  padding-inline-end: var(--touch-target);
+  font-size: var(--text-lg);
+}
+
+.map__preview-threads {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-inline: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map__thread {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.map__thread::before {
+  content: '';
+  width: var(--space-3);
+  height: var(--space-3);
+  border-radius: 50%;
+  background: var(--thread-color);
+}
+
+.map__preview-close {
+  position: absolute;
+  inset-block-start: var(--space-1);
+  inset-inline-end: var(--space-1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-xl);
+  cursor: pointer;
+}
+
+/* ---- "In this area": a sheet at the bottom on a phone, a column on a wide screen ---- */
+
+.map__list {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: var(--z-map-overlay);
+  display: flex;
+  flex-direction: column;
+  max-height: var(--map-sheet-open);
+  border-start-start-radius: var(--radius-md);
+  border-start-end-radius: var(--radius-md);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-raised);
+}
+
+.map__list-head {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  min-height: var(--map-sheet-peek);
+  padding: var(--space-2) var(--space-4);
+}
+
+.map__list-title {
+  margin-inline-end: auto;
+  font-size: var(--text-lg);
+}
+
+.map__list-count {
+  margin-inline-start: var(--space-2);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+}
+
+.map__sheet-toggle {
+  min-height: var(--touch-target);
+  padding-inline: var(--space-3);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.map__list-body {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* "Show more" floats over the map, top right, so it is visible whether or not the list is open. */
+.map__more {
+  position: absolute;
+  inset-block-start: var(--space-3);
+  inset-inline-end: var(--space-3);
+  z-index: var(--z-map-overlay);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-raised);
+}
+
+.map[data-sheet='closed'] .map__list-body {
+  display: none;
+}
+
+.map__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map__item {
+  display: grid;
+  grid-template-columns: var(--map-marker-cluster) 1fr;
+  align-items: center;
+  border-block-start: 1px solid var(--color-line);
+}
+
+.map__item-mark {
+  justify-self: center;
+  width: var(--map-marker-story);
+  height: var(--map-marker-story);
+  border: var(--map-marker-border) solid var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+
+.map__item--frame .map__item-mark {
+  width: var(--map-marker-frame);
+  height: var(--map-marker-frame);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  rotate: 45deg;
+  scale: 0.7;
+}
+
+.map__item a {
+  display: block;
+  min-height: var(--touch-target);
+  padding-block: var(--space-2);
+  padding-inline-end: var(--space-4);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.map__item a:hover .map__item-title {
+  text-decoration: underline;
+}
+
+.map__item-title {
+  display: block;
+  font-weight: 600;
+}
+
+.map__item--frame .map__item-title {
+  font-weight: 700;
+}
+
+.map__item-meta {
+  display: block;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.map__item--selected {
+  background: var(--color-bg);
+}
+
+.map__empty {
+  margin: 0;
+  padding: var(--space-4);
+  color: var(--color-ink-muted);
+}
+
+/* The list is the working alternative when the map cannot be shown: a plain block under the message. */
+.map[data-state='unavailable'] .map__list {
+  position: static;
+  max-height: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.map[data-state='unavailable'] .map__list-body {
+  display: block;
+}
+
+.map[data-state='unavailable'] .map__sheet-toggle {
+  display: none;
+}
+
+@media (min-width: 60rem) {
+  .map {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--map-list-width);
+    gap: var(--space-4);
+    align-items: start;
+  }
+
+  .map__preview {
+    inset-inline-end: auto;
+    inset-block-end: var(--space-3);
+    width: var(--map-preview-width);
+  }
+
+  .map__list {
+    position: static;
+    height: var(--map-height);
+    max-height: none;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    overflow: hidden;
+  }
+
+  .map__list-body,
+  .map[data-sheet='closed'] .map__list-body {
+    display: block;
+    flex: 1;
+  }
+
+  .map__sheet-toggle {
+    display: none;
+  }
+
+  .map[data-state='unavailable'] {
+    display: block;
+  }
+
+  .map[data-state='unavailable'] .map__list {
+    height: auto;
+    margin-block-start: var(--space-4);
+  }
+}
+
+/* ---- embedded in an epoch page: no list (the feed is the list), no sheet ---- */
+
+.map[data-mode='embedded'] {
+  display: block;
+}
+
+.map[data-mode='embedded'] .map__list {
+  display: none;
+}
+
+.map[data-mode='embedded'] .map__stage {
+  height: min(var(--map-height), calc(100svh - 2 * var(--space-4)));
+}
+
+.map[data-mode='embedded'] .map__preview {
+  inset-block-end: var(--space-3);
+}
+
+/* ---- markers (frame: large diamond, story: small circle, cluster: square with a number) ---- */
+
+.mk {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--mk-size);
+  height: var(--mk-size);
+  margin-block-start: calc(var(--mk-size) / -2);
+  margin-inline-start: calc(var(--mk-size) / -2);
+  cursor: pointer;
+}
+
+.mk--frame {
+  --mk-size: var(--map-marker-frame);
+}
+
+.mk--story {
+  --mk-size: var(--map-marker-story);
+}
+
+.mk--cluster {
+  --mk-size: var(--map-marker-cluster);
+}
+
+/* Invisible margin around the shape so a small marker is still easy to hit. */
+.mk::after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--map-hit-area) * -1);
+}
+
+.mk__shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  border: var(--map-marker-border) solid var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  transition: scale var(--transition);
+}
+
+.mk--frame .mk__shape {
+  background: var(--color-accent);
+  border-radius: var(--radius-sm);
+  rotate: 45deg;
+}
+
+.mk--story .mk__shape {
+  border-color: var(--color-accent);
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+
+.mk--cluster .mk__shape {
+  background: var(--color-ink);
+  border-radius: var(--radius-md);
+  color: var(--color-surface);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.mk--selected .mk__shape {
+  scale: var(--map-marker-selected-scale);
+  outline: var(--map-marker-border) solid var(--color-ink);
+  outline-offset: var(--map-marker-border);
+}
+
+.mk:focus {
+  outline: none;
+}
+
+.mk:focus-visible .mk__shape {
+  outline: var(--map-marker-border) solid var(--color-focus);
+  outline-offset: var(--map-marker-border);
+}
+
+/* ---- the plain list (no JavaScript, or the map is unavailable) ---- */
+
+.map-static > * + * {
+  margin-block-start: var(--space-4);
+}
+
+.map-static h2 {
+  font-size: var(--text-xl);
+}
+
+.map-static h3 {
+  font-size: var(--text-lg);
+}
+
+.map-static__years {
+  color: var(--color-ink-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+
+.map-static__list {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map-static__list li {
+  display: grid;
+  gap: var(--space-1);
+  max-width: var(--measure);
+}
+
+.map-static__list a {
+  font-weight: 600;
+}
+
+.map-static__meta {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}

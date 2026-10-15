@@ -17,7 +17,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  min-height: 44px;
+  min-height: var(--touch-target);
   color: var(--color-ink);
   font-family: var(--font-heading);
   font-size: var(--text-lg);
@@ -30,8 +30,8 @@
 }
 
 .brand__logo {
-  width: 2.25rem;
-  height: 2.25rem;
+  width: var(--size-logo);
+  height: var(--size-logo);
   color: var(--color-accent);
 }
 
@@ -50,11 +50,11 @@
 .site-nav a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: var(--touch-target);
   padding-inline: var(--space-3);
   color: var(--color-ink);
   text-decoration: none;
-  border-block-end: 3px solid transparent;
+  border-block-end: var(--ring-width) solid transparent;
 }
 
 .site-nav a:hover {
@@ -88,8 +88,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
   padding-inline: var(--space-3);
   color: var(--color-ink);
   font-size: var(--text-sm);
@@ -103,7 +103,7 @@
 }
 
 .lang-switch a:focus-visible {
-  outline-offset: -3px;
+  outline-offset: calc(var(--ring-width) * -1);
 }
 
 @media (min-width: 40rem) {
@@ -140,7 +140,7 @@
 .site-footer__links a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: var(--touch-target);
 }
 
 .site-footer p + p {
@@ -160,7 +160,7 @@
   max-width: var(--measure);
   padding: var(--space-3) var(--space-4);
   border: var(--epoch-frame);
-  border-inline-start: 4px solid var(--epoch-accent);
+  border-inline-start: var(--epoch-accent-bar);
   border-radius: var(--radius-md);
   background: var(--color-surface);
   color: var(--color-ink-muted);
@@ -196,9 +196,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
+  min-height: var(--touch-target-large);
   padding-inline: var(--space-5);
-  border: 2px solid var(--color-accent);
+  border: var(--border-medium) solid var(--color-accent);
   background: var(--color-accent);
   color: var(--color-on-accent);
   border-radius: var(--radius-md);
@@ -220,7 +220,7 @@
 }
 
 .button--secondary:hover {
-  background: #e8eff8;
+  background: var(--color-accent-tint);
   color: var(--color-accent-strong);
 }
 

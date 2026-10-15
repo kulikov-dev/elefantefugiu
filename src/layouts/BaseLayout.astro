@@ -1,4 +1,5 @@
 ---
+import { THEME_COLOR } from '../lib/theme';
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -45,7 +46,7 @@ const otherLang = LANGS.find((l) => l !== lang)!;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#1f4e8c" />
+    <meta name="theme-color" content={THEME_COLOR} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
     {canonical && <link rel="canonical" href={canonical} />}

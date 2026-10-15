@@ -21,6 +21,9 @@ env:
   BASE_PATH: ${{ vars.BASE_PATH || (vars.SITE_URL && '/' || format('/{0}', github.event.repository.name)) }}
   # Set the repository variable ALLOW_PLACEHOLDER to false before launch: the build then fails on placeholder entries.
   ALLOW_PLACEHOLDER: ${{ vars.ALLOW_PLACEHOLDER || 'true' }}
+  # Map tiles: leave unset for development (public OpenStreetMap server); set both before launch (see README).
+  TILE_URL: ${{ vars.TILE_URL }}
+  TILE_ATTRIBUTION: ${{ vars.TILE_ATTRIBUTION }}
 
 jobs:
   build:

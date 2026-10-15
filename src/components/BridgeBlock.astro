@@ -2,16 +2,19 @@
 // "Bridge to today": the place that can be visited now, with links to the map and the official site.
 import { t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
+import { mapLinkFor } from '../lib/map-data';
 
 interface Props {
   lang: Lang;
   bridge: { name: string; address: string; lat: number; lon: number; url: string };
+  /** Id of the card: "Open on the map" centres the map on it and opens its preview. */
+  cardId: string;
 }
 
-const { lang, bridge } = Astro.props;
+const { lang, bridge, cardId } = Astro.props;
 const external = /^https?:\/\/\S+$/.test(bridge.url);
-// The map arrives in stage 4; for now the link leads to the /mapa stub (without coordinates yet).
-const mapHref = pagePath(lang, 'map');
+// The map page reads ?id= : it centres on that card and opens its preview.
+const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
 ---
 <section class="bridge" aria-labelledby="bridge-title">
   <h2 id="bridge-title">{t(lang, 'ui.bridge')}</h2>
@@ -35,7 +38,7 @@ const mapHref = pagePath(lang, 'map');
   .bridge {
     padding: var(--space-4);
     border: var(--epoch-frame);
-    border-inline-start: 4px solid var(--epoch-accent);
+    border-inline-start: var(--epoch-accent-bar);
     border-radius: var(--radius-md);
     background: var(--color-surface);
   }

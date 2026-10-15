@@ -1,0 +1,106 @@
+---
+// Map page: /pt/mapa/, /en/map/ (docs/spec.md section 5.4).
+// Without JavaScript only the plain list of all cards by epoch is shown; the map block and the filters need the script.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MapBlock from '../components/MapBlock.astro';
+import ThreadChip from '../components/ThreadChip.astro';
+import { storyPath, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import { epochHasContent, epochYearsText } from '../lib/epochs';
+import { groupByEpoch, toMapCards } from '../lib/map-cards';
+import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
+import { tileConfig } from '../lib/tiles';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const site = await loadSite();
+
+const epochs = site.epochs.filter((e) => epochHasContent(e, site.events));
+const inEpochs = new Set(epochs.map((e) => e.id));
+const events = site.events.filter((e) => inEpochs.has(e.epoch));
+const cards = toMapCards(events, lang, (e) => storyPath(lang, e.slug[lang]));
+const groups = groupByEpoch(cards, epochs);
+
+const threads = Object.fromEntries(site.threads.map((th) => [th.id, { name: th.name[lang], color: th.color }]));
+const known = { threads: site.visibleThreads.map((th) => th.id), epochs: epochs.map((e) => e.id) };
+const tile = tileConfig(process.env);
+const noindex = events.some((e) => e.placeholder);
+---
+<BaseLayout lang={lang} title={t(lang, 'pages.map.title')} pageKey="map" noindex={noindex}>
+  <div class="map-page">
+    <h1>{t(lang, 'pages.map.title')}</h1>
+
+    <!-- Filters need JavaScript: hidden until the loader shows them. -->
+    <div class="map-filters" data-map-js hidden>
+      <div role="group" aria-label={t(lang, 'map.threads_label')} class="map-filters__group">
+        <ul class="map-chips">
+          <li>
+            <ThreadChip
+              lang={lang}
+              name={{ pt: t('pt', 'epoch.filter_all'), en: t('en', 'epoch.filter_all') }}
+              color="var(--color-ink-muted)"
+              filter=""
+            />
+          </li>
+          {
+            site.visibleThreads.map((thread) => (
+              <li>
+                <ThreadChip lang={lang} name={thread.name} color={thread.color} filter={thread.id} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div role="group" aria-label={t(lang, 'map.epochs_label')} class="map-filters__group">
+        <ul class="map-chips">
+          <li><button type="button" class="map-chip" data-epoca="" aria-pressed="true">{t(lang, 'map.all_epochs')}</button></li>
+          {
+            epochs.map((epoch) => (
+              <li>
+                <button type="button" class="map-chip" data-epoca={epoch.id} aria-pressed="false">
+                  {epoch.name[lang]}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <MapBlock
+      lang={lang}
+      cards={cards}
+      threads={threads}
+      known={known}
+      maxBounds={mapMaxBounds(cards)}
+      view={MAINLAND_VIEW}
+      tile={tile}
+    />
+
+    <section class="map-static" data-map-static aria-labelledby="map-static-title">
+      <h2 id="map-static-title">{t(lang, 'map.static_title')}</h2>
+      {
+        groups.map((group) => (
+          <section class="map-static__epoch" aria-labelledby={`map-static-${group.epoch.id}`}>
+            <h3 id={`map-static-${group.epoch.id}`}>
+              {group.epoch.name[lang]} <span class="map-static__years">{epochYearsText(group.epoch, lang)}</span>
+            </h3>
+            <ol class="map-static__list">
+              {group.cards.map((card) => (
+                <li>
+                  <a href={card.href}>{card.title}</a>
+                  <span class="map-static__meta">{card.meta}</span>
+                  <span class="map-static__hook">{card.hook}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))
+      }
+    </section>
+  </div>
+</BaseLayout>

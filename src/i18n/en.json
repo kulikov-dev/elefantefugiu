@@ -117,7 +117,9 @@
     "filter_all": "All",
     "view_label": "View",
     "empty": "There are no stories in this thread in this era yet.",
-    "show_all": "Show all"
+    "show_all": "Show all",
+    "pane_label": "Show timeline or map",
+    "map_pane": "Map"
   },
   "thread": {
     "eras_label": "Eras in this thread"
@@ -128,5 +130,28 @@
   "plural": {
     "stories_one": "{n} story",
     "stories_other": "{n} stories"
+  },
+  "map": {
+    "map_label": "Map of the stories",
+    "threads_label": "Filter by thread",
+    "epochs_label": "Filter by era",
+    "all_epochs": "All eras",
+    "static_title": "All stories, by era",
+    "marker_frame": "main event",
+    "marker_story": "story",
+    "cluster_one": "{n} story here",
+    "cluster_other": "{n} stories here, zoom in to see them",
+    "in_area_one": "{n} story in this area",
+    "in_area_other": "{n} stories in this area",
+    "zoom_in": "Zoom in",
+    "zoom_out": "Zoom out",
+    "list_title": "In this area",
+    "list_open": "Show list",
+    "list_close": "Hide list",
+    "list_empty": "No stories in this area. Zoom out or change the filters.",
+    "loading": "Loading the map…",
+    "unavailable": "The map is not available, here is the list.",
+    "preview_open": "Open",
+    "preview_close": "Close preview"
   }
 }

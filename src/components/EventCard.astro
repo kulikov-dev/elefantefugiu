@@ -120,7 +120,7 @@ const textLang = event.placeholder ? 'la' : undefined;
 
   .ecard__thumb {
     flex: none;
-    width: 5.5rem;
+    width: var(--size-thumb);
     height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
@@ -144,7 +144,7 @@ const textLang = event.placeholder ? 'la' : undefined;
 
   /* Key events of the frame are a step more prominent than the stories between them. */
   .ecard--frame {
-    border-inline-start: 4px solid var(--epoch-accent);
+    border-inline-start: var(--epoch-accent-bar);
   }
 
   .ecard--frame .ecard__title {
@@ -162,11 +162,11 @@ const textLang = event.placeholder ? 'la' : undefined;
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    padding: 0.15rem 0.6rem;
-    border: 1px solid #7a2e0e;
+    padding: var(--pad-chip-y) var(--pad-chip-x);
+    border: 1px solid var(--color-heavy-border);
     border-radius: var(--radius-pill);
-    background: #fdeee6;
-    color: #5e2108;
+    background: var(--color-heavy-bg);
+    color: var(--color-heavy-ink);
     font-size: var(--text-sm);
     font-weight: 600;
     line-height: 1.5;
@@ -189,18 +189,18 @@ const textLang = event.placeholder ? 'la' : undefined;
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-3);
-    min-height: 48px;
+    min-height: var(--touch-target-large);
     padding-block: var(--space-1);
     cursor: pointer;
   }
 
   summary:focus-visible {
-    outline-offset: 4px;
+    outline-offset: var(--ring-offset);
   }
 
   .ecard__chevron {
     flex: none;
-    margin-block-start: 0.35rem;
+    margin-block-start: var(--space-1);
     color: var(--color-accent);
     transition: transform var(--transition);
   }

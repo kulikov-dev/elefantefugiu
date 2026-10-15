@@ -1,0 +1,17 @@
+---
+// Map page: /pt/mapa/, /en/map/. Own route file so that map code and styles reach only this page
+// (the other pages of the language share [...page].astro and must not get them).
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
+import MapView from '../../views/MapView.astro';
+import { LANGS, ROUTES, type Lang } from '../../i18n/routes';
+
+export const getStaticPaths = (() =>
+  LANGS.map((lang) => ({
+    params: { lang, map: ROUTES.map[lang] },
+    props: { lang: lang as Lang },
+  }))) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { lang } = Astro.props as Props;
+---
+<MapView lang={lang} />

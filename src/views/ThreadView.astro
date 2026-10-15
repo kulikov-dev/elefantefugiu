@@ -94,8 +94,8 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
 
   .thread-page__dot {
     flex: none;
-    width: 1rem;
-    height: 1rem;
+    width: var(--size-dot-lg);
+    height: var(--size-dot-lg);
     border-radius: 50%;
     background: var(--thread-color);
   }
@@ -120,8 +120,8 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    min-height: 2.75rem;
-    padding: 0.15rem 0.85rem;
+    min-height: var(--touch-target);
+    padding: var(--pad-chip-y) var(--pad-chip-x-wide);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-pill);
     background: var(--color-surface);
@@ -133,12 +133,12 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
 
   .chip:hover {
     border-color: var(--thread-color);
-    background: #f1f5f9;
+    background: var(--color-surface-hover);
   }
 
   .chip__count {
-    min-width: 1.4rem;
-    padding: 0 0.4rem;
+    min-width: var(--count-min-width);
+    padding: 0 var(--pad-count);
     border-radius: var(--radius-pill);
     background: var(--color-ink);
     color: var(--color-surface);
@@ -165,7 +165,7 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-tile-min)), 1fr));
     gap: var(--space-4);
     margin-block-start: var(--space-3);
     list-style: none;

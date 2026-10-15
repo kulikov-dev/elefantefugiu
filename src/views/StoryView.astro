@@ -130,7 +130,7 @@ const textLang = event.placeholder ? 'la' : undefined;
           </div>
         </section>
         {event.interactive && <p class="notice" data-interactive={event.interactive.type}>{t(lang, 'card.interactive_soon')}</p>}
-        <BridgeBlock lang={lang} bridge={event.bridge} />
+        <BridgeBlock lang={lang} bridge={event.bridge} cardId={event.id} />
         {event.sources.length > 0 && <SourceList lang={lang} sources={event.sources} />}
         {
           event.reviewed_on && (
@@ -181,14 +181,14 @@ const textLang = event.placeholder ? 'la' : undefined;
   .crumbs a {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
+    min-height: var(--touch-target);
   }
 
   .crumbs [aria-current='page'],
   .crumbs__text {
     display: inline-flex;
     align-items: center;
-    min-height: 44px;
+    min-height: var(--touch-target);
   }
 
   .card__header > :global(* + *) {
@@ -212,7 +212,7 @@ const textLang = event.placeholder ? 'la' : undefined;
   }
 
   .figure {
-    max-width: 48rem;
+    max-width: var(--container-story);
     border: var(--epoch-frame);
     border-radius: var(--radius-md);
     background: var(--color-surface);

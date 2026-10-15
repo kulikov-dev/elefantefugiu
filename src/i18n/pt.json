@@ -117,7 +117,9 @@
     "filter_all": "Todos",
     "view_label": "Modo de visualização",
     "empty": "Nesta época ainda não há histórias neste fio.",
-    "show_all": "Mostrar todas"
+    "show_all": "Mostrar todas",
+    "pane_label": "Mostrar cronologia ou mapa",
+    "map_pane": "Mapa"
   },
   "thread": {
     "eras_label": "Épocas deste fio"
@@ -128,5 +130,28 @@
   "plural": {
     "stories_one": "{n} história",
     "stories_other": "{n} histórias"
+  },
+  "map": {
+    "map_label": "Mapa das histórias",
+    "threads_label": "Filtrar por fio",
+    "epochs_label": "Filtrar por época",
+    "all_epochs": "Todas as épocas",
+    "static_title": "Todas as histórias, por época",
+    "marker_frame": "acontecimento principal",
+    "marker_story": "história",
+    "cluster_one": "{n} história aqui",
+    "cluster_other": "{n} histórias aqui, aproxime o mapa para as ver",
+    "in_area_one": "{n} história nesta área",
+    "in_area_other": "{n} histórias nesta área",
+    "zoom_in": "Aproximar",
+    "zoom_out": "Afastar",
+    "list_title": "Nesta área",
+    "list_open": "Ver lista",
+    "list_close": "Fechar lista",
+    "list_empty": "Não há histórias nesta área. Afaste o mapa ou mude os filtros.",
+    "loading": "A carregar o mapa…",
+    "unavailable": "Mapa indisponível, aqui está a lista.",
+    "preview_open": "Abrir",
+    "preview_close": "Fechar pré-visualização"
   }
 }

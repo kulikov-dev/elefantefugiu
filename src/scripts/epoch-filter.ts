@@ -51,9 +51,12 @@ if (root && feed) {
   };
 
   const set = (next: FilterState) => {
+    const threadChanged = next.fio !== state.fio;
     state = next;
     render();
     write();
+    // The map on this page (if any) shows the same thread.
+    if (threadChanged) document.dispatchEvent(new CustomEvent('map:filter', { detail: { fio: state.fio } }));
   };
 
   for (const b of fioButtons) b.addEventListener('click', () => set({ ...state, fio: b.dataset.fio || null }));

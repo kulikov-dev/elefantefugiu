@@ -37,7 +37,7 @@ const { lang, label } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    padding: 0.15rem 0.6rem;
+    padding: var(--pad-chip-y) var(--pad-chip-x);
     border: 1px solid currentColor;
     border-radius: var(--radius-pill);
     font-size: var(--text-sm);
@@ -49,19 +49,19 @@ const { lang, label } = Astro.props;
     flex: none;
   }
 
-  /* Text on tinted background: contrast above 7:1 for each pair. */
+  /* Colours come from tokens.css (text on tint, contrast above 7:1 for each pair). */
   .tag--documented {
-    background: #e6f4ea;
-    color: #14532d;
+    background: var(--color-label-documented-bg);
+    color: var(--color-label-documented-ink);
   }
 
   .tag--legend {
-    background: #fdf0d5;
-    color: #5c3b00;
+    background: var(--color-label-legend-bg);
+    color: var(--color-label-legend-ink);
   }
 
   .tag--debated {
-    background: #f1e6f6;
-    color: #522463;
+    background: var(--color-label-debated-bg);
+    color: var(--color-label-debated-ink);
   }
 </style>

@@ -28,7 +28,7 @@ h2 {
 
 a {
   color: var(--color-accent);
-  text-underline-offset: 0.2em;
+  text-underline-offset: var(--underline-offset);
 }
 
 a:hover {
@@ -36,8 +36,8 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
   border-radius: var(--radius-sm);
 }
 
