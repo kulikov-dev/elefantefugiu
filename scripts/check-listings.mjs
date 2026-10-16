@@ -29,6 +29,37 @@ const inThread = (thread, list = events) => list.filter((e) => e.threads.include
 const visibleThreads = threads.filter((th) => inThread(th).length >= MIN_CARDS);
 const hasPage = (epoch) => epoch.mvp && inEpoch(epoch).length > 0;
 
+// Family mode (docs/spec.md 3.6), written out here on purpose, independent of src/lib/family.ts:
+//   off: everything; all: min_age all and not heavy; 12: min_age all or 12 and not heavy.
+const MODES = ['off', 'all', '12'];
+const shownIn = (e, mode) => mode === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (mode === '12' && String(e.min_age) === '12')));
+const modeCounts = (list) => Object.fromEntries(MODES.map((m) => [m, list.filter((e) => shownIn(e, m)).length]));
+const zeroIn = (counts) => MODES.filter((m) => counts[m] === 0);
+
+/**
+ * The counters of one fragment, by mode: the markup holds one <span class="fv" data-modes="..."> per distinct number;
+ * `number` extracts the number from the text of a variant. Returns null when a mode has no variant or two variants.
+ */
+function countsByMode(fragment, number) {
+  const found = {};
+  const parts = [...fragment.matchAll(/<span class="fv"[^>]*?data-modes="([^"]*)"[^>]*>([\s\S]*?)(?=<span class="fv"|$)/g)];
+  for (const [, modes, body] of parts) {
+    const n = number(body);
+    if (n === undefined || Number.isNaN(n)) return null;
+    for (const mode of modes.split(' ')) {
+      if (mode in found) return null;
+      found[mode] = n;
+    }
+  }
+  return MODES.every((m) => m in found) ? found : null;
+}
+/** Value of an attribute in the text of a tag's attributes; empty string when absent. */
+const attr = (attrs, name) => attrs?.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`))?.[1] ?? '';
+const sameCounts = (a, b) => a !== null && MODES.every((m) => a[m] === b[m]);
+const showCounts = (c) => (c ? `off ${c.off}, all ${c.all}, 12 ${c['12']}` : 'missing or ambiguous');
+const countNode = (cls) => (body) => Number(body.match(new RegExp(`${cls}"[^>]*>(\\d+)<`))?.[1]);
+const wordCount = (body) => Number(text(body).match(/(\d+)\s+(?:hist\u00f3rias?|stor(?:y|ies))/)?.[1]);
+
 const strip = (html) => html.replace(/<style[\s\S]*?<\/style>/g, '').replace(/<script[\s\S]*?<\/script>/g, '');
 const text = (html) => html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim();
 const read = (path) => (existsSync(path) ? strip(readFileSync(path, 'utf8')) : null);
@@ -140,19 +171,34 @@ for (const lang of ['pt', 'en']) {
     const buttons = [...jsPart.matchAll(/<button\b[^>]*data-fio(?:="([^"]*)")?[^>]*>([\s\S]*?)<\/button>/g)];
     if (wantChips.length > 0) {
       const all = buttons.find((b) => (b[1] ?? '') === '');
-      if (!all || Number(all[2].match(/thread__count"[^>]*>(\d+)</)?.[1]) !== feed.length) fail('"All" filter button is missing or its counter differs from the feed size');
-      for (const { th, n } of wantChips) {
+      if (!all || !sameCounts(countsByMode(all[2], countNode('thread__count')), modeCounts(feed))) {
+        fail(`"All" filter button counters differ from the feed (want ${showCounts(modeCounts(feed))}; found ${showCounts(all && countsByMode(all[2], countNode('thread__count')))})`);
+      }
+      for (const { th } of wantChips) {
         const b = buttons.find((x) => x[1] === th.id);
+        const want = modeCounts(inThread(th, feed));
         if (!b) fail(`no filter button for thread "${th.id}"`);
-        else if (Number(b[2].match(/thread__count"[^>]*>(\d+)</)?.[1]) !== n) fail(`filter button of "${th.id}" shows a counter different from ${n}`);
+        else if (!sameCounts(countsByMode(b[2], countNode('thread__count')), want)) {
+          fail(`filter button of "${th.id}": counters differ (want ${showCounts(want)}; found ${showCounts(countsByMode(b[2], countNode('thread__count')))})`);
+        }
+        // a chip whose counter is zero in a mode is hidden in that mode (the <li> carries data-hide-in)
+        const li = jsPart.match(new RegExp(`<li\\b([^>]*)>\\s*<button[^>]*data-fio="${th.id}"`));
+        const hideWant = zeroIn(want).join(' ');
+        if (attr(li?.[1], 'data-hide-in') !== hideWant) fail(`filter chip "${th.id}": data-hide-in is "${attr(li?.[1], 'data-hide-in')}", expected "${hideWant}"`);
       }
       if (buttons.length !== wantChips.length + 1) fail(`expected ${wantChips.length + 1} filter buttons, found ${buttons.length}`);
     }
     if ((jsPart.match(/<button\b[^>]*data-view="(timeline|grid)"/g) ?? []).length !== 2) fail('timeline/grid switch needs two buttons');
     for (const e of feed) {
-      const li = feedHtml.match(new RegExp(`<li [^>]*data-threads="([^"]*)"[^>]*>\\s*<article [^>]*id="c-${e.id}"`));
-      if (!li || li[1].split(' ').sort().join(' ') !== [...e.threads].sort().join(' ')) fail(`card ${e.id}: data-threads does not match its threads`);
+      const li = feedHtml.match(new RegExp(`<li ([^>]*data-threads="([^"]*)"[^>]*)>\\s*<article [^>]*id="c-${e.id}"`));
+      if (!li || li[2].split(' ').sort().join(' ') !== [...e.threads].sort().join(' ')) fail(`card ${e.id}: data-threads does not match its threads`);
+      else if (!li[1].includes(`data-min-age="${e.min_age}"`) || !li[1].includes(`data-sensitive="${e.sensitive}"`)) fail(`card ${e.id}: the feed item must carry data-min-age="${e.min_age}" and data-sensitive="${e.sensitive}"`);
     }
+    // family mode: the message for a mode that leaves the feed empty exists exactly when the data says so
+    const emptyWant = zeroIn(modeCounts(feed)).join(' ');
+    const emptyGot = html.match(/<div class="family-empty fv fv--block" data-modes="([^"]*)"/)?.[1] ?? '';
+    if (emptyGot !== emptyWant) fail(`family-empty message modes are "${emptyGot}", expected "${emptyWant}"`);
+    if (!/<style[^>]*>[\s\S]*?<\/style>/.test(readFileSync(join(dir, 'index.html'), 'utf8').match(/<head>[\s\S]*?<\/head>/)?.[0] ?? '')) fail('the prepaint thread filter <style> is missing in <head>');
     if (!/data-empty hidden/.test(html) || !/data-status/.test(html)) fail('empty-thread message or status line is missing');
 
     // epoch switcher: every epoch once, in order; the current one marked, epochs with a page linked, the rest "coming soon"
@@ -204,8 +250,11 @@ for (const lang of ['pt', 'en']) {
     const all = inThread(thread);
     commonChecks(html, where, lang, { placeholder: thread.placeholder || all.some((e) => e.placeholder), expectedH1: thread.name[lang] });
     if (!html.includes(thread.description[lang])) fail('description is missing');
-    const word = lang === 'pt' ? (all.length === 1 ? 'hist\u00f3ria' : 'hist\u00f3rias') : all.length === 1 ? 'story' : 'stories';
-    if (!html.includes(`${all.length} ${word}`)) fail(`total "${all.length} ${word}" is not shown`);
+    const header = html.match(/<p class="thread-page__count"[^>]*>[\s\S]*?<\/p>/)?.[0] ?? '';
+    if (!sameCounts(countsByMode(header, wordCount), modeCounts(all))) fail(`total counters differ (want ${showCounts(modeCounts(all))}; found ${showCounts(countsByMode(header, wordCount))})`);
+    const emptyWant = zeroIn(modeCounts(all)).join(' ');
+    const emptyGot = html.match(/<div class="family-empty fv fv--block" data-modes="([^"]*)"/)?.[1] ?? '';
+    if (emptyGot !== emptyWant) fail(`family-empty message modes are "${emptyGot}", expected "${emptyWant}"`);
 
     const sections = epochs.map((epoch) => ({ epoch, list: inThread(thread, inEpoch(epoch)) })).filter((s) => s.list.length > 0);
     const gotSections = [...html.matchAll(/<section id="(e-[^"]+)"[\s\S]*?<\/section>/g)];
@@ -223,8 +272,16 @@ for (const lang of ['pt', 'en']) {
       if (/<details|ecard--feed/.test(section[0])) fail('thread page must show grid tiles, not expandable feed cards');
       // the epoch chip counter equals the section size
       const chip = html.match(new RegExp(`<a class="chip" href="#e-${epoch.slug[lang]}"[\\s\\S]*?</a>`))?.[0] ?? '';
-      const n = Number(chip.match(/chip__count"[^>]*>(\d+)</)?.[1]);
-      if (n !== list.length) fail(`epoch chip "${epoch.id}" shows ${n}, data says ${list.length}`);
+      if (!sameCounts(countsByMode(chip, countNode('chip__count')), modeCounts(list))) fail(`epoch chip "${epoch.id}": counters differ (want ${showCounts(modeCounts(list))})`);
+      const head = section[0].match(/<h2[\s\S]*?<\/h2>/)?.[0] ?? '';
+      if (!sameCounts(countsByMode(head, wordCount), modeCounts(list))) fail(`section "${epoch.id}": counters differ (want ${showCounts(modeCounts(list))})`);
+      const hideAttr = attr(section[0].match(/^<section\b([^>]*)>/)?.[1], 'data-hide-in');
+      if (hideAttr !== zeroIn(modeCounts(list)).join(' ')) fail(`section "${epoch.id}": data-hide-in is "${hideAttr}", expected "${zeroIn(modeCounts(list)).join(' ')}"`);
+      const gridHtml = section[0].match(/<ul class="grid"[^>]*>[\s\S]*<\/ul>/)?.[0] ?? '';
+      for (const e of list) {
+        const li = gridHtml.match(new RegExp(`<li ([^>]*)>\\s*<article [^>]*id="c-${e.id}"`));
+        if (!li || !li[1].includes(`data-min-age="${e.min_age}"`) || !li[1].includes(`data-sensitive="${e.sensitive}"`)) fail(`tile ${e.id}: the item must carry data-min-age="${e.min_age}" and data-sensitive="${e.sensitive}"`);
+      }
     }
     // thread chips on tiles are left out (the page is about this thread)
     if (/class="thread[ "]/.test(html.match(/<main[\s\S]*<\/main>/)?.[0].replace(/<header class="thread-page__header"[\s\S]*?<\/header>/, '') ?? '')) fail('tiles must not repeat thread chips');
@@ -233,7 +290,7 @@ for (const lang of ['pt', 'en']) {
 
 // ---------- home pages ----------
 const featuredIds = load('featured.yaml').map((f) => f.id);
-const pluralWord = (lang, n) => `${n} ${lang === 'pt' ? (n === 1 ? 'hist\u00f3ria' : 'hist\u00f3rias') : n === 1 ? 'story' : 'stories'}`;
+
 const SITE_NAME = 'O Elefante Fugiu';
 for (const lang of ['pt', 'en']) {
   const where = `${lang}/ (home)`;
@@ -267,11 +324,18 @@ for (const lang of ['pt', 'en']) {
   // "Surprise me": button hidden until the script runs; embedded list = published, all ages, not heavy; links are real card pages
   if (!/data-surprise hidden/.test(showcase)) fail('"Surprise me" button must be hidden without JavaScript');
   const list = JSON.parse(raw.match(/<script type="application\/json" id="surprise-data">([\s\S]*?)<\/script>/)?.[1] ?? '[]');
-  const wantList = events.filter((e) => !e.sensitive && String(e.min_age) === 'all');
-  if (JSON.stringify(list.map((x) => x.id)) !== JSON.stringify(wantList.map((e) => e.id))) fail('surprise list differs from the eligible cards in the data');
+  const wantList = events.filter((e) => !e.sensitive);
+  if (JSON.stringify(list.map((x) => x.id)) !== JSON.stringify(wantList.map((e) => e.id))) fail('surprise list differs from the eligible cards in the data (never a heavy topic, any age)');
   for (const item of list) {
     const ev = events.find((e) => e.id === item.id);
     if (!ev || !item.href.endsWith(`/${lang}/${SEG[lang].story}/${slugOf(ev, lang)}/`)) fail(`surprise link of ${item.id} is not its card page`);
+    else if (item.minAge !== String(ev.min_age) || item.sensitive !== Boolean(ev.sensitive)) fail(`surprise item ${item.id} carries a wrong age label or heavy-topic flag`);
+  }
+  // showcase items carry the data the CSS hides them by
+  for (const id of featuredIds) {
+    const ev = events.find((e) => e.id === id);
+    const li = showcase.match(new RegExp(`<li ([^>]*)>\\s*<article [^>]*id="c-${id}"`));
+    if (!li || !li[1].includes(`data-min-age="${ev.min_age}"`) || !li[1].includes(`data-sensitive="${ev.sensitive}"`)) fail(`showcase item ${id} must carry data-min-age="${ev.min_age}" and data-sensitive="${ev.sensitive}"`);
   }
 
   // epoch tiles: all epochs by order; pages with link, count and theme; the rest "coming soon" without link
@@ -283,7 +347,9 @@ for (const lang of ['pt', 'en']) {
     if (!body.includes(epoch.name[lang])) fail(`tile ${i + 1} is not "${epoch.name[lang]}"`);
     if (page) {
       if (!cls.includes('tile--link') || !new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${epoch.slug[lang]}/"`).test(body)) fail(`tile "${epoch.id}" must link to its page`);
-      if (!text(body).includes(pluralWord(lang, count))) fail(`tile "${epoch.id}" must show "${pluralWord(lang, count)}"`);
+      const want = modeCounts(inEpoch(epoch));
+      const got = countsByMode(body.match(/<p class="tile__count"[^>]*>[\s\S]*?<\/p>/)?.[0] ?? '', wordCount);
+      if (!sameCounts(got, want)) fail(`tile "${epoch.id}": counters differ (want ${showCounts(want)}; found ${showCounts(got)})`);
       if (!body.includes(epoch.theme[lang])) fail(`tile "${epoch.id}" misses the theme phrase`);
       if (!body.includes(`${epoch.years.from}\u2013${epoch.years.to}`)) fail(`tile "${epoch.id}" misses the years`);
     } else {
@@ -300,7 +366,13 @@ for (const lang of ['pt', 'en']) {
   for (const th of visibleThreads) {
     const l = links.find((m) => m[1] === th.slug[lang]);
     if (!l) fail(`no button for thread "${th.id}"`);
-    else if (Number(l[2].match(/thread__count"[^>]*>(\d+)</)?.[1]) !== inThread(th).length) fail(`counter of thread "${th.id}" differs from the data (${inThread(th).length})`);
+    else {
+      const want = modeCounts(inThread(th));
+      const got = countsByMode(l[2], countNode('thread__count'));
+      if (!sameCounts(got, want)) fail(`counters of thread "${th.id}" differ (want ${showCounts(want)}; found ${showCounts(got)})`);
+      const li = threadsSection.match(new RegExp(`<li\\b([^>]*)>\\s*<a [^>]*href="[^"]*/${th.slug[lang]}/"`));
+      if (attr(li?.[1], 'data-hide-in') !== zeroIn(want).join(' ')) fail(`thread chip "${th.id}": data-hide-in is "${attr(li?.[1], 'data-hide-in')}", expected "${zeroIn(want).join(' ')}"`);
+    }
   }
 
   // how it works: three steps

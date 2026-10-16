@@ -9,7 +9,8 @@
     "behave": "node behave.mjs",
     "listings": "node listings.mjs",
     "controls": "node controls.mjs",
-    "map": "node map.mjs"
+    "map": "node map.mjs",
+    "family": "node family.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "131.0.1",

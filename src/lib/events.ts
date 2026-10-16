@@ -28,8 +28,13 @@ export function compareChronological(a: EventData, b: EventData): number {
 }
 
 /** Previous and next published card in the same epoch (null at the ends). */
-export function cardNeighbours(event: EventData, all: readonly EventData[]): { prev: EventData | null; next: EventData | null } {
-  const inEpoch = all.filter((e) => isPublished(e) && e.epoch === event.epoch).sort(compareChronological);
+export function cardNeighbours(
+  event: EventData,
+  all: readonly EventData[],
+  allowed: (e: EventData) => boolean = () => true,
+): { prev: EventData | null; next: EventData | null } {
+  // The card itself always stays in the list (it may be one the mode hides, opened once); other cards must be allowed.
+  const inEpoch = all.filter((e) => isPublished(e) && e.epoch === event.epoch && (e.id === event.id || allowed(e))).sort(compareChronological);
   const index = inEpoch.findIndex((e) => e.id === event.id);
   if (index < 0) return { prev: null, next: null };
   return { prev: inEpoch[index - 1] ?? null, next: inEpoch[index + 1] ?? null };
@@ -50,7 +55,7 @@ export const MAX_RELATED = 7;
  * "Mais perto" (docs/spec.md section 8, simple version):
  * 1. manual `related` links in the order of the data,
  * 2. then the nearest cards by distance (same epoch first when the distance is equal),
- * up to `max` cards. `allowed` is the hook for family mode (stage 5): it hides cards by age.
+ * up to `max` cards. `allowed` hides cards (family mode: by age and heavy topic).
  */
 export function relatedCards(
   event: EventData,

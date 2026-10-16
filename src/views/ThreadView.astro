@@ -7,6 +7,7 @@ import EventCard from '../components/EventCard.astro';
 import { epochHref, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { epochSectionId, threadSections, type ThreadData } from '../lib/epochs';
+import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 
 interface Props {
@@ -18,7 +19,11 @@ const { lang, thread } = Astro.props;
 const site = await loadSite();
 
 const sections = threadSections(thread, site.epochs, site.events);
-const total = sections.reduce((sum, section) => sum + section.events.length, 0);
+// Family mode: every counter carries three numbers (off, all, 12); a section with no visible card is hidden in that mode.
+const sectionCounts = new Map(sections.map((s) => [s.epoch.id, countByMode(s.events.map(ageInfoOf))]));
+const totalCounts = countByMode(sections.flatMap((s) => s.events).map(ageInfoOf));
+const emptyModes = zeroModes(totalCounts);
+const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
 const alternates = { pt: threadHref('pt', thread.slug.pt), en: threadHref('en', thread.slug.en) };
 const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => e.placeholder));
 ---
@@ -30,18 +35,33 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
         {thread.name[lang]}
       </h1>
       <p class="thread-page__description">{thread.description[lang]}</p>
-      <p class="thread-page__count">{plural(lang, 'plural.stories', total)}</p>
+      <p class="thread-page__count">
+        {countVariants(totalCounts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+      </p>
     </header>
+
+    {
+      emptyModes.length > 0 && (
+        <div class="family-empty fv fv--block" data-modes={emptyModes.join(' ')} data-family-empty>
+          <p>{t(lang, 'family.empty')}</p>
+          <button type="button" class="linklike" data-family-set="off">{t(lang, 'family.show_all')}</button>
+        </div>
+      )
+    }
 
     <nav aria-label={t(lang, 'thread.eras_label')}>
       <ul class="chips">
         {
-          sections.map(({ epoch, events }) => (
-            <li>
+          sections.map(({ epoch }) => (
+            <li data-hide-in={hideIn(zeroModes(sectionCounts.get(epoch.id)!))}>
               <a class="chip" href={`#${epochSectionId(epoch.slug[lang])}`}>
                 {epoch.name[lang]}
-                <span class="chip__count" aria-hidden="true">{events.length}</span>
-                <span class="visually-hidden">: {plural(lang, 'plural.stories', events.length)}</span>
+                {countVariants(sectionCounts.get(epoch.id)!).map((v) => (
+                  <span class="fv" data-modes={v.modes.join(' ')}>
+                    <span class="chip__count" aria-hidden="true">{v.value}</span>
+                    <span class="visually-hidden">: {plural(lang, 'plural.stories', v.value)}</span>
+                  </span>
+                ))}
               </a>
             </li>
           ))
@@ -51,14 +71,21 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
 
     {
       sections.map(({ epoch, events }) => (
-        <section id={epochSectionId(epoch.slug[lang])} class="section" aria-labelledby={`h-${epoch.id}`}>
+        <section
+          id={epochSectionId(epoch.slug[lang])}
+          class="section"
+          aria-labelledby={`h-${epoch.id}`}
+          data-hide-in={hideIn(zeroModes(sectionCounts.get(epoch.id)!))}
+        >
           <h2 id={`h-${epoch.id}`}>
             <a href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
-            <span class="section__count">{plural(lang, 'plural.stories', events.length)}</span>
+            <span class="section__count">
+              {countVariants(sectionCounts.get(epoch.id)!).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+            </span>
           </h2>
           <ul class="grid">
             {events.map((event) => (
-              <li>
+              <li {...familyAttrs(event)}>
                 <EventCard
                   lang={lang}
                   event={event}

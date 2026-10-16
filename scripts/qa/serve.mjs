@@ -3,7 +3,8 @@ import { createServer } from 'node:http';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 
-const root = new URL('../../dist/', import.meta.url).pathname;
+// DIST=/some/dist serves another build (the family-mode variant build, see prepare-variant.mjs).
+const root = (process.env.DIST ? process.env.DIST.replace(/\/?$/, '/') : new URL('../../dist/', import.meta.url).pathname);
 const port = Number(process.argv[2] || process.env.PORT || 4400);
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.json': 'application/json', '.txt': 'text/plain' };
 

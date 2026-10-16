@@ -1,0 +1,169 @@
+/*
+ * Family mode (docs/spec.md 3.6). The inline script in <head> sets data-family on <html> before the first paint
+ * ("off", "all" or "12"; nothing at all when JavaScript is off, which means "off"). Everything below only reads it,
+ * so changing the mode redraws nothing: the browser re-applies these rules.
+ */
+
+/* Items that stand for one card (feed, grid, tiles, showcase, "Nearby", lists on the map page) carry
+   data-min-age and data-sensitive. The rules mirror isVisibleInMode in src/lib/family.ts. */
+html[data-family='all'] [data-min-age='12'],
+html[data-family='all'] [data-min-age='16'],
+html[data-family='all'] [data-sensitive='true'],
+html[data-family='12'] [data-min-age='16'],
+html[data-family='12'] [data-sensitive='true'] {
+  display: none !important;
+}
+
+/* A block that is empty or pointless in some modes (a section without visible cards, a chip with a zero counter). */
+html[data-family='all'] [data-hide-in~='all'],
+html[data-family='12'] [data-hide-in~='12'] {
+  display: none !important;
+}
+
+/* Variants: the same place in the markup holds one block per distinct result of the three modes
+   (counters, "Nearby", previous / next); data-modes lists the modes a block is for. */
+/* Inline by default (counters); .fv--block is for whole blocks, which need a box for margins. */
+.fv {
+  display: contents;
+}
+
+.fv--block {
+  --fv-display: block;
+}
+
+.fv:not([data-modes~='off']),
+html[data-family='all'] .fv,
+html[data-family='12'] .fv {
+  display: none;
+}
+
+html[data-family='all'] .fv[data-modes~='all'],
+html[data-family='12'] .fv[data-modes~='12'] {
+  display: var(--fv-display, contents);
+}
+
+.fv--block[data-modes~='off'] {
+  display: var(--fv-display);
+}
+
+/* Parts that need JavaScript are shown only when it runs; the hint for the other case is the opposite. */
+html[data-js] .no-js-only {
+  display: none;
+}
+
+/* ---- the toggle in the header ---- */
+
+.family-toggle {
+  display: none;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+html[data-js] .family-toggle {
+  display: inline-flex;
+}
+
+.family-toggle__option {
+  position: relative;
+  display: inline-flex;
+}
+
+/* The real radio covers its label: a tap anywhere on the segment is a click on the radio. */
+.family-toggle__option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.family-toggle__option span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-target);
+  padding-inline: var(--space-3);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* The chosen segment follows data-family, not :checked, so it is right from the first paint. */
+html[data-family='off'] .family-toggle__option[data-value='off'] span,
+html[data-family='all'] .family-toggle__option[data-value='all'] span,
+html[data-family='12'] .family-toggle__option[data-value='12'] span {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.family-toggle__option input:focus-visible + span {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: calc(var(--ring-width) * -1);
+}
+
+/* ---- empty in this mode ---- */
+
+.family-empty {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: var(--measure);
+}
+
+.linklike {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-accent);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: var(--underline-offset);
+  cursor: pointer;
+}
+
+.linklike:hover {
+  color: var(--color-accent-strong);
+}
+
+/* ---- the card page: intermediate screen for a card the mode hides (spec 3.6, 5.3) ----
+   The card stays in the HTML. data-gate-modes on the article lists the modes that hide it
+   (computed at build time from isVisibleInMode); "Open" sets data-gate-open for this visit only. */
+
+.gate {
+  display: none;
+}
+
+html[data-family='all'] [data-gate-modes~='all']:not([data-gate-open]) .gate,
+html[data-family='12'] [data-gate-modes~='12']:not([data-gate-open]) .gate {
+  display: block;
+}
+
+html[data-family='all'] [data-gate-modes~='all']:not([data-gate-open]) .gated,
+html[data-family='12'] [data-gate-modes~='12']:not([data-gate-open]) .gated {
+  display: none !important;
+}
+
+.gate {
+  max-width: var(--measure);
+  padding: var(--space-4);
+  border: var(--epoch-frame);
+  border-inline-start: var(--epoch-accent-bar);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.gate__text {
+  font-size: var(--text-lg);
+}
+
+.gate__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-block-start: var(--space-4);
+}

@@ -17,6 +17,7 @@ npm run behave                     # card page: PASS / FAIL list, exit code 1 on
 npm run listings                   # epoch and thread pages: PASS / FAIL list, exit code 1 on failure
 npm run controls                   # stage 4b: epoch switcher, filter, grid, home, Surprise me
 npm run map                        # stage 5: map page, links to it, map on epoch pages (several minutes; sections: node map.mjs nojs tiles limit filters preview layout link epoch weight)
+npm run family                     # stage 6: family mode (sections: node family.mjs toggle lists recount nearby gate surprise map flash blocked)
 npm run shots                      # screenshots to scripts/qa/out/ (git-ignored)
 ```
 
@@ -69,3 +70,17 @@ Tiles are answered with a grey picture; nothing leaves the machine. With another
 7. `link`: "Open on the map" centres every card (24 of 24, dx and dy within 3 px) and opens its preview; English on a phone; filters that would hide the card are cleared; unknown id ignored; preview -> card -> Back returns to the same address, preview, filters and place on the screen.
 8. `epoch`: epoch page: no JS (plain feed); desktop: feed left, map right and sticky; phone: Timeline | Map switch, map code not requested before the Map pane; marker <-> feed record highlight both ways (click, keyboard, scroll); thread filter drives the map (every thread: same cards in feed and map, at most 7); `?fio=` at load; tiles fail: feed gets the width; feed and grid at 900 to 1440 px without overflow.
 9. `weight`: home, card, thread and about pages never request map code; on the map page the code waits until the block is near the screen.
+
+## Family mode (`family.mjs`, stage 6)
+
+Run against `dist/` served on port 4400. The sections `variant` needs a second build in which a whole epoch is 16+ and
+therefore empty in the modes `all` and `12` (the test data has neither):
+
+```sh
+node prepare-variant.mjs                                   # builds /tmp/elefante-variant (real data untouched)
+DIST=/tmp/elefante-variant/dist node serve.mjs 4401 &
+VARIANT_URL=http://localhost:4401 node family.mjs variant
+```
+
+`FAMILY=all node map.mjs limit` (or `FAMILY=12`) runs the map suite in a family mode. The `map` suite is long: run it in
+sections. Expected values come from `src/content/*.yaml` with the age rules written out in the script, independent of `src/lib/family.ts`.

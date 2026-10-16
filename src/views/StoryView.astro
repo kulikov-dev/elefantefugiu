@@ -14,10 +14,11 @@ import ShareButton from '../components/ShareButton.astro';
 import SourceList from '../components/SourceList.astro';
 import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { epochHref, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
+import { epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { cardNeighbours, firstSentence, formatDate, formatYear, relatedCards, type EventData } from '../lib/events';
 import { epochHasContent } from '../lib/epochs';
+import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 
 interface Props {
@@ -44,12 +45,37 @@ const useOwnImage = Boolean(event.image) && !event.sensitive;
 const previewImage = useOwnImage ? event.image!.src : epoch.fallback_image;
 const previewImageAlt = useOwnImage ? event.image!.alt[lang] : undefined;
 
-const { prev, next } = cardNeighbours(event, all);
-const related = relatedCards(event, all).map((e) => ({
-  title: e.title[lang],
-  href: storyPath(lang, e.slug[lang]),
-  meta: `${formatYear(e, lang)} \u00b7 ${e.place.name}`,
-}));
+// Family mode: "Nearby" and previous / next never lead to a card the mode hides, so each is computed for the three
+// modes and the markup holds one block per distinct result (CSS shows the block of the current mode).
+const allowedIn = (mode: Parameters<typeof isVisibleInMode>[1]) => (e: EventData) => isVisibleInMode(ageInfoOf(e), mode);
+const relatedVariants = groupVariants(
+  (mode) =>
+    relatedCards(event, all, { allowed: allowedIn(mode) }).map((e) => ({
+      id: e.id,
+      title: e.title[lang],
+      href: storyPath(lang, e.slug[lang]),
+      meta: `${formatYear(e, lang)} \u00b7 ${e.place.name}`,
+      minAge: familyAttrs(e)['data-min-age'],
+      sensitive: familyAttrs(e)['data-sensitive'] === 'true',
+    })),
+  (items) => items.map((i) => i.id).join('|'),
+);
+const pagerVariants = groupVariants(
+  (mode) => cardNeighbours(event, all, allowedIn(mode)),
+  ({ prev, next }) => `${prev?.id ?? ''}|${next?.id ?? ''}`,
+);
+
+// Intermediate screen: the modes that hide this card, and the text of each (age and/or heavy topic).
+const gateModes = hiddenModes(ageInfoOf(event));
+const gateVariants = groupVariants(
+  (mode) => {
+    const reason = gateReason(ageInfoOf(event), mode);
+    const parts = [reason.age === '12' ? t(lang, 'gate.age_12') : reason.age === '16' ? t(lang, 'gate.age_16') : '', reason.heavy ? t(lang, 'gate.heavy') : ''];
+    return parts.some(Boolean) ? `${parts.filter(Boolean).join(' ')} ${t(lang, 'gate.question')}` : '';
+  },
+  (text) => text,
+).filter((v) => v.value !== '');
+const backHref = epochLink ?? pagePath(lang, 'home');
 
 const eventThreads = event.threads.map((id) => site.threads.find((th) => th.id === id)).filter((th) => th !== undefined);
 // Placeholder text is Latin filler: mark it, so screen readers do not read it as Portuguese.
@@ -63,7 +89,7 @@ const textLang = event.placeholder ? 'la' : undefined;
   preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageAlt: previewImageAlt }}
   noindex={event.placeholder}
 >
-  <article class="card">
+  <article class="card" data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
     <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
       <ol>
         <li>{epochLink ? <a href={epochLink}>{epoch.name[lang]}</a> : <span class="crumbs__text">{epoch.name[lang]}</span>}</li>
@@ -80,7 +106,7 @@ const textLang = event.placeholder ? 'la' : undefined;
         <span aria-hidden="true"> &middot; </span>
         <span>{event.place.name}</span>
       </p>
-      <ul class="tags" aria-label={t(lang, 'card.tags')}>
+      <ul class="tags gated" aria-label={t(lang, 'card.tags')}>
         {
           eventThreads.map((thread) => (
             <li>
@@ -96,8 +122,24 @@ const textLang = event.placeholder ? 'la' : undefined;
         <li><TagLabel lang={lang} label={event.label} /></li>
         <li><AgeBadge lang={lang} age={event.min_age} /></li>
       </ul>
-      {event.sensitive && <HeavyTopicBanner lang={lang} />}
+      {event.sensitive && <div class="gated"><HeavyTopicBanner lang={lang} /></div>}
     </header>
+
+    {
+      gateVariants.length > 0 && (
+        <section class="gate" aria-labelledby="gate-text" data-gate>
+          <p class="gate__text" id="gate-text">
+            {gateVariants.map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{v.value}</span>)}
+          </p>
+          <div class="gate__actions">
+            <button type="button" class="button" data-gate-open>{t(lang, 'gate.open')}</button>
+            <a class="button button--secondary" href={backHref} data-gate-back>{t(lang, 'gate.back')}</a>
+          </div>
+        </section>
+      )
+    }
+
+    <div class="gated card__rest">
 
     {
       event.image && (
@@ -143,24 +185,42 @@ const textLang = event.placeholder ? 'la' : undefined;
       </Fragment>
     </CardLayers>
 
-    <RelatedList lang={lang} items={related} />
+    {
+      relatedVariants.map((variant, i) => (
+        <div class="fv fv--block" data-modes={variant.modes.join(' ')}>
+          <RelatedList lang={lang} items={variant.value} headingId={`related-title-${i + 1}`} />
+        </div>
+      ))
+    }
 
     <div class="actions">
       <ShareButton lang={lang} url={cardUrl} title={title} />
       <ReportLink lang={lang} cardUrl={cardUrl} />
     </div>
 
-    <PagerNav
-      label={t(lang, 'card.epoch_nav')}
-      prev={prev ? { dir: `\u2190 ${t(lang, 'card.prev')}`, title: prev.title[lang], href: storyPath(lang, prev.slug[lang]), rel: 'prev' } : null}
-      next={next ? { dir: `${t(lang, 'card.next')} \u2192`, title: next.title[lang], href: storyPath(lang, next.slug[lang]), rel: 'next' } : null}
-    />
+    {
+      pagerVariants.map(({ modes, value: { prev, next } }) => (
+        <div class="fv fv--block" data-modes={modes.join(' ')}>
+          <PagerNav
+            label={t(lang, 'card.epoch_nav')}
+            prev={prev ? { dir: `\u2190 ${t(lang, 'card.prev')}`, title: prev.title[lang], href: storyPath(lang, prev.slug[lang]), rel: 'prev' } : null}
+            next={next ? { dir: `${t(lang, 'card.next')} \u2192`, title: next.title[lang], href: storyPath(lang, next.slug[lang]), rel: 'next' } : null}
+          />
+        </div>
+      ))
+    }
+    </div>
   </article>
 </BaseLayout>
 
+<script>
+  import '../scripts/gate';
+</script>
+
 <style>
   /* :global because the children include roots of other components, which do not carry this page's scope. */
-  .card > :global(* + *) {
+  .card > :global(* + *),
+  .card__rest > :global(* + *) {
     margin-block-start: var(--space-5);
   }
 

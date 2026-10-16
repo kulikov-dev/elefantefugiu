@@ -7,6 +7,14 @@ const base = process.env.BASE_URL || 'http://localhost:4400';
 const MAP = { pt: `${base}/pt/mapa/`, en: `${base}/en/map/` };
 const THREADS = ['mar', 'comida-e-vinho', 'poder-e-revolta', 'gente-como-nos', 'natureza'];
 const EPOCHS = ['avis-e-descobrimentos', 'pombal-e-terramoto', 'estado-novo-e-25-de-abril'];
+// Cards the family mode (FAMILY=all|12, default off) leaves on the map: counted from the data with the rules written out here.
+import { createRequire } from 'node:module';
+import { readFileSync, readdirSync } from 'node:fs';
+const { parse } = createRequire(import.meta.url)('../../node_modules/yaml');
+const dataDir = new URL('../../src/content/events/', import.meta.url).pathname;
+const cards = readdirSync(dataDir).map((n) => parse(readFileSync(dataDir + n, 'utf8'), { schema: 'core', customTags: ['timestamp'] })).filter((e) => e.status === 'ready');
+const MODE = process.env.FAMILY || 'off';
+const TOTAL = cards.filter((e) => MODE === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (MODE === '12' && String(e.min_age) === '12')))).length;
 const LIMIT = 7;
 const STEP = 5;
 const ONLY = process.argv.slice(2); // optional section names: node map.mjs page nojs ...
@@ -28,6 +36,8 @@ const newPage = async ({ js = true, width = 360, height = 740, tiles = 'ok' } = 
   const page = await browser.newPage();
   await page.setViewport({ width, height, isMobile: width < 700, hasTouch: width < 700 });
   if (!js) await page.setJavaScriptEnabled(false);
+  // FAMILY=all|12 runs the whole suite in a family mode (the limit of 7 must hold in every mode).
+  if (process.env.FAMILY) await page.evaluateOnNewDocument((m) => localStorage.setItem('family', m), process.env.FAMILY);
   const requests = [];
   page.requests = requests;
   page.errors = [];
@@ -105,7 +115,7 @@ if (want('tiles')) {
     };
   });
   ok('tiles fail: state "unavailable" and the message is shown', s.state === 'unavailable' && s.messageVisible && /indispon/i.test(s.message), s.message);
-  ok('tiles fail: the plain list of all cards is shown', s.staticVisible && s.staticLinks === 24, `links=${s.staticLinks}`);
+  ok('tiles fail: the plain list of all cards is shown', s.staticVisible && s.staticLinks === TOTAL, `links=${s.staticLinks}`);
   await page.close();
 }
 
@@ -120,7 +130,7 @@ if (want('limit')) {
   ok('map: whole country at first, at most 7 markers and clusters', s.total >= 1 && s.total <= LIMIT, `total=${s.total}`);
   ok('map: markers and clusters together cover exactly the cards of the list "In this area"', same(s.covered, s.list), `covered=${s.covered.length} list=${s.list.length}`);
   ok('map: the list counter equals the list', Number(s.listCount) === s.list.length, `counter=${s.listCount}`);
-  ok('map: at first the list holds all 24 cards', s.list.length === 24, `n=${s.list.length}`);
+  ok(`map: at first the list holds all ${TOTAL} cards the mode shows`, s.list.length === TOTAL, `n=${s.list.length}`);
 
   const attributionState = (p) =>
     p.evaluate(() => {
@@ -235,7 +245,7 @@ if (want('limit')) {
     await wait(250);
   }
   const done = await snapshot(page);
-  ok('show more: enough presses draw every card as a single marker', !done.moreVisible && done.clusters.length === 0 && done.singles.length === 24, `presses=${presses} singles=${done.singles.length}`);
+  ok('show more: enough presses draw every card as a single marker', !done.moreVisible && done.clusters.length === 0 && done.singles.length === TOTAL, `presses=${presses} singles=${done.singles.length}`);
 
   // a pan with the keyboard does not break the limit
   await page.goto(MAP.pt, { waitUntil: 'networkidle0' });
@@ -266,7 +276,7 @@ if (want('filters')) {
   }));
   ok('filters: ?fio= and ?epoca= are read, unknown parameters are dropped from the address', s.pressed.includes('comida-e-vinho') && s.pressed.includes('pombal-e-terramoto') && s.search === '?fio=comida-e-vinho&epoca=pombal-e-terramoto', `${s.pressed} ${s.search}`);
   let snap = await snapshot(page);
-  ok('filters: the list holds only the cards of that thread and epoch', snap.list.length > 0 && snap.list.length < 24, `n=${snap.list.length}`);
+  ok('filters: the list holds only the cards of that thread and epoch', snap.list.length > 0 && snap.list.length < TOTAL, `n=${snap.list.length}`);
   await page.reload({ waitUntil: 'networkidle0' });
   await ready(page);
   s = await page.evaluate(() => location.search);
@@ -277,7 +287,7 @@ if (want('filters')) {
   await wait(500);
   s = await page.evaluate(() => location.search);
   snap = await snapshot(page);
-  ok('filters: "all" clears the address and the list shows 24 cards again', s === '' && snap.list.length === 24, `${s} ${snap.list.length}`);
+  ok('filters: "all" clears the address and the list shows 24 cards again', s === '' && snap.list.length === TOTAL, `${s} ${snap.list.length}`);
   const hist = await page.evaluate(() => history.length);
   await page.click('.map-filters button[data-fio="mar"]');
   await page.click('.map-filters button[data-epoca="avis-e-descobrimentos"]');

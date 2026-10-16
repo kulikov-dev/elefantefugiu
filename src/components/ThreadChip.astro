@@ -3,6 +3,7 @@
 // With `count` it shows the number of stories (the number is hidden from screen readers; they get the words).
 import { plural } from '../i18n';
 import type { Lang } from '../i18n/routes';
+import { countVariants, type FamilyMode } from '../lib/family';
 
 interface Props {
   lang: Lang;
@@ -10,7 +11,8 @@ interface Props {
   color: string;
   /** Address of the thread page; leave out for threads that are hidden (too few cards). */
   href?: string;
-  count?: number;
+  /** A number, or the three numbers of family mode (off, all, 12); the markup then carries one variant per distinct number. */
+  count?: number | Record<FamilyMode, number>;
   /** Renders a filter button (script only) instead of a link; the value is the thread id, empty for "all". */
   filter?: string;
 }
@@ -18,6 +20,7 @@ interface Props {
 const { lang, name, color, href, count, filter } = Astro.props;
 const isButton = filter !== undefined;
 const Tag = isButton ? 'button' : href ? 'a' : 'span';
+const variants = count === undefined ? [] : typeof count === 'number' ? [{ modes: ['off', 'all', '12'], value: count }] : countVariants(count);
 ---
 <Tag
   class:list={['thread', { 'thread--link': Boolean(href) || isButton, 'thread--button': isButton }]}
@@ -30,12 +33,12 @@ const Tag = isButton ? 'button' : href ? 'a' : 'span';
   <span class="thread__dot" aria-hidden="true"></span>
   {name[lang]}
   {
-    count !== undefined && (
-      <>
-        <span class="thread__count" aria-hidden="true">{count}</span>
-        <span class="visually-hidden">: {plural(lang, 'plural.stories', count)}</span>
-      </>
-    )
+    variants.map((variant) => (
+      <span class="fv" data-modes={variant.modes.join(' ')}>
+        <span class="thread__count" aria-hidden="true">{variant.value}</span>
+        <span class="visually-hidden">: {plural(lang, 'plural.stories', variant.value)}</span>
+      </span>
+    ))
   }
 </Tag>
 

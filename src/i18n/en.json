@@ -132,6 +132,7 @@
     "stories_other": "{n} stories"
   },
   "map": {
+    "home": "All of Portugal",
     "map_label": "Map of the stories",
     "threads_label": "Filter by thread",
     "epochs_label": "Filter by era",
@@ -153,5 +154,22 @@
     "unavailable": "The map is not available, here is the list.",
     "preview_open": "Open",
     "preview_close": "Close preview"
+  },
+  "family": {
+    "off": "Everything",
+    "all": "All ages",
+    "twelve": "Up to 12+",
+    "status": "Family mode: {mode}.",
+    "footer_hint": "Family mode needs JavaScript. Without it, every story stays visible.",
+    "empty": "No stories here yet in this mode.",
+    "show_all": "Show all modes"
+  },
+  "gate": {
+    "age_12": "This story is for teenagers 12+.",
+    "age_16": "This story is for readers aged 16 and over.",
+    "heavy": "This story deals with a difficult topic.",
+    "question": "Open?",
+    "open": "Open",
+    "back": "Go back"
   }
 }

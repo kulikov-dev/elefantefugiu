@@ -19,6 +19,12 @@ const events = readdirSync(eventsDir)
 const strip = (html) => html.replace(/<style[\s\S]*?<\/style>/g, '').replace(/<script[\s\S]*?<\/script>/g, '');
 const text = (html) => html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim();
 
+// Family mode (docs/spec.md 3.6), rules written out here independently of src/lib/family.ts.
+const MODES = ['off', 'all', '12'];
+const shownIn = (e, mode) => mode === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (mode === '12' && String(e.min_age) === '12')));
+const idOfHref = (href, lang) => events.find((e) => href.includes(`/${SEGMENT[lang]}/${e.slug[lang]}/`))?.id;
+const attrsOf = (tag) => (name) => tag.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`))?.[1];
+
 for (const ev of events) {
   for (const lang of ['pt', 'en']) {
     const where = `${lang}/${SEGMENT[lang]}/${ev.slug[lang]}`;
@@ -32,6 +38,50 @@ for (const ev of events) {
     const full = readFileSync(file, 'utf8');
     const html = strip(full);
     const has = (re) => re.test(html);
+
+    // ----- family mode: head script, gate, Nearby and previous / next per mode -----
+    const head = full.match(/<head>[\s\S]*?<\/head>/)?.[0] ?? '';
+    if (!/<script>\(function\(\)\{var e=document\.documentElement[\s\S]*?data-family[\s\S]*?<\/script>/.test(head)) fail('the head script that sets data-family is missing from <head>');
+    if (head.indexOf('data-family') > head.indexOf('rel="stylesheet"') && head.includes('rel="stylesheet"')) fail('the head script must come before the stylesheets (no flash)');
+    if (!/role="radiogroup"[^>]*aria-label="[^"]+"/.test(html) || (html.match(/<input type="radio" name="family"/g) ?? []).length !== 3) fail('family toggle: a radio group with an aria-label and three radios is expected');
+    const article = html.match(/<article class="card"([^>]*)>/)?.[1] ?? '';
+    const gateModes = (attrsOf(article)('data-gate-modes') ?? '').split(' ').filter(Boolean);
+    const hiddenIn = MODES.filter((m) => !shownIn(ev, m));
+    if (gateModes.join(' ') !== hiddenIn.join(' ')) fail(`data-gate-modes is "${gateModes.join(' ')}", the data says the card is hidden in "${hiddenIn.join(' ')}"`);
+    const gateBlock = html.match(/<section class="gate"[\s\S]*?<\/section>/)?.[0] ?? '';
+    if (hiddenIn.length > 0) {
+      if (!gateBlock) fail('a card some mode hides needs the intermediate screen');
+      if (!/data-gate-open/.test(gateBlock) || !/data-gate-back/.test(gateBlock)) fail('the screen needs the "Open" button and the "Back" link');
+      const variants = [...gateBlock.matchAll(/<span class="fv"[^>]*?data-modes="([^"]*)"[^>]*>([^<]*)<\/span>/g)];
+      for (const m of hiddenIn) {
+        const v = variants.find((x) => x[1].split(' ').includes(m));
+        if (!v) { fail(`no screen text for mode ${m}`); continue; }
+        const age = String(ev.min_age);
+        const ageHides = m === 'all' ? age !== 'all' : age === '16';
+        const wantAge = ageHides ? (age === '12' ? /12\+/ : /16/) : null;
+        if (wantAge && !wantAge.test(v[2])) fail(`mode ${m}: the screen text should name the age ${age}: "${v[2]}"`);
+        if (!ageHides && /12\+|16/.test(v[2])) fail(`mode ${m}: the age is not why this card is hidden, but the text names it: "${v[2]}"`);
+        const heavy = lang === 'pt' ? /tema difícil/ : /difficult topic/;
+        if (ev.sensitive !== heavy.test(v[2])) fail(`mode ${m}: the screen text must mention the heavy topic exactly when the card is sensitive: "${v[2]}"`);
+      }
+      // the card stays in the HTML
+      if (!html.includes('id="historia"') || !html.includes('id="detalhes"') || !/class="gated card__rest"/.test(html)) fail('the card content must stay in the HTML under the screen');
+    } else if (gateBlock) fail('a card no mode hides must not have the screen');
+    // Nearby and previous / next: for each mode the variant shown holds only cards the mode shows
+    const blocks = (cls) => [...html.matchAll(new RegExp(`<div class="fv fv--block"[^>]*?data-modes="([^"]*)"[^>]*>([\\s\\S]*?)(?=<div class="fv fv--block"|<div class="actions"|</div></article>|$)`, 'g'))].filter((b) => b[2].includes(cls));
+    for (const [cls, label] of [['class="related"', 'Nearby'], ['class="pager"', 'previous / next']]) {
+      const list = blocks(cls);
+      const covered = list.flatMap((b) => b[1].split(' '));
+      if (MODES.some((m) => covered.filter((x) => x === m).length !== 1)) fail(`${label}: every mode needs exactly one variant (found ${covered.join(' ')})`);
+      for (const b of list) {
+        const links = [...b[2].matchAll(/<a [^>]*href="([^"]*)"/g)].map((x) => idOfHref(x[1], lang)).filter(Boolean);
+        for (const m of b[1].split(' ')) {
+          const wrong = links.filter((id) => !shownIn(events.find((e) => e.id === id), m));
+          if (wrong.length) fail(`${label}, mode ${m}: leads to hidden card(s) ${wrong.join(', ')}`);
+          if (label === 'Nearby' && links.length > 7) fail(`Nearby, mode ${m}: ${links.length} cards, at most 7`);
+        }
+      }
+    }
 
     // ----- head -----
     if (!has(new RegExp(`<html lang="${lang}"`))) fail(`<html lang="${lang}"> is missing`);

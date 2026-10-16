@@ -8,7 +8,7 @@ import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } 
 import { plural, t } from '../i18n';
 import { epochYearsText } from '../lib/epochs';
 import { epochTiles, firstMvpEpoch, surpriseCandidates } from '../lib/home';
-import { countCardsByThread } from '../lib/threads';
+import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 
 interface Props {
@@ -20,8 +20,16 @@ const site = await loadSite();
 
 const start = firstMvpEpoch(site.epochs, site.events);
 const tiles = epochTiles(site.epochs, site.events);
-const threadCounts = countCardsByThread(site.events);
-const surprise = surpriseCandidates(site.events).map((e) => ({ id: e.id, href: storyPath(lang, e.slug[lang]) }));
+// Family mode: counters carry three numbers (off, all, 12) and a chip with a zero counter is hidden in that mode.
+const threadCounts = new Map(site.visibleThreads.map((th) => [th.id, countByMode(site.events.filter((e) => e.threads.includes(th.id)).map(ageInfoOf))]));
+const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
+// "Surprise me": every candidate with its age label; the script picks by the current mode.
+const surprise = surpriseCandidates(site.events).map((e) => ({
+  id: e.id,
+  href: storyPath(lang, e.slug[lang]),
+  minAge: familyAttrs(e)['data-min-age'],
+  sensitive: familyAttrs(e)['data-sensitive'] === 'true',
+}));
 
 // Test text must stay out of search results until it is real.
 const noindex = site.featured.some((e) => e.placeholder) || tiles.some((tile) => tile.available && tile.epoch.placeholder);
@@ -50,7 +58,7 @@ const steps = [
           <h2 id="showcase-title">{t(lang, 'home.showcase_heading')}</h2>
           <ul class="showcase">
             {site.featured.map((event) => (
-              <li>
+              <li {...familyAttrs(event)}>
                 <EventCard lang={lang} event={event} variant="grid" threads={site.threads} visibleThreadIds={site.visibleThreadIds} showThreads={false} />
               </li>
             ))}
@@ -67,7 +75,7 @@ const steps = [
       <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
       <ol class="tiles">
         {
-          tiles.map(({ epoch, available, count }) =>
+          tiles.map(({ epoch, available, counts }) =>
             available ? (
               <li class="tile tile--link">
                 <h3 class="tile__name">
@@ -75,7 +83,9 @@ const steps = [
                 </h3>
                 <p class="tile__years">{epochYearsText(epoch, lang)}</p>
                 {epoch.theme && <p class="tile__theme">{epoch.theme[lang]}</p>}
-                <p class="tile__count">{plural(lang, 'plural.stories', count)}</p>
+                <p class="tile__count">
+                  {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+                </p>
               </li>
             ) : (
               <li class="tile tile--soon">
@@ -96,8 +106,8 @@ const steps = [
           <p>{t(lang, 'home.threads_intro')}</p>
           <ul class="chips">
             {site.visibleThreads.map((thread) => (
-              <li>
-                <ThreadChip lang={lang} name={thread.name} color={thread.color} href={threadHref(lang, thread.slug[lang])} count={threadCounts.get(thread.id) ?? 0} />
+              <li data-hide-in={hideIn(zeroModes(threadCounts.get(thread.id)!))}>
+                <ThreadChip lang={lang} name={thread.name} color={thread.color} href={threadHref(lang, thread.slug[lang])} count={threadCounts.get(thread.id)!} />
               </li>
             ))}
           </ul>

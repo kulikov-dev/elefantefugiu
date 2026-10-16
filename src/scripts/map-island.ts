@@ -4,9 +4,13 @@ import * as L from 'leaflet';
 // ?url: the file is emitted but NOT linked into pages; it is added below, only when the map starts.
 import leafletCss from 'leaflet/dist/leaflet.css?url';
 import { parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
+import { isVisibleInMode } from '../lib/family';
 import { boundsAround, inBounds, selectMarkers, type Bounds, type MapCard } from '../lib/markers';
+import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 interface CardInfo extends MapCard {
+  minAge: string;
+  sensitive: boolean;
   title: string;
   meta: string;
   hook: string;
@@ -20,6 +24,7 @@ interface Config {
   known: { threads: string[]; epochs: string[] };
   maxBounds: Bounds;
   view: Bounds;
+  home: Bounds;
   tile: { url: string; attribution: string };
   strings: Record<string, string>;
 }
@@ -67,19 +72,23 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const listCount = $('[data-list-count]');
   const listTitle = $('[data-map-list] h2');
   const moreButton = $<HTMLButtonElement>('[data-more]');
+  const homeButton = $<HTMLButtonElement>('[data-map-home]');
   const sheetToggle = $<HTMLButtonElement>('[data-sheet-toggle]');
   const sheet = $('[data-map-list]');
   const status = $('[data-map-status]');
   const pageMode = cfg.mode === 'page';
   const byId = new Map(cfg.cards.map((c) => [c.id, c]));
+  // Family mode: cards the mode hides take no part in anything below (markers, the limit of 7, "In this area", filters).
+  // The list is recomputed when the mode changes.
+  let cards = cfg.cards.filter((c) => isVisibleInMode(c, currentFamilyMode()));
 
   // Map page: the address holds thread, epoch and card. Embedded (epoch page): only the thread, written by the page's own filter.
   const embeddedSearch = new URLSearchParams(location.search);
   embeddedSearch.delete('id');
   embeddedSearch.delete('epoca');
   let state: MapState = pageMode
-    ? parseMapState(location.search, { ...cfg.known, cards: cfg.cards })
-    : parseMapState(`?${embeddedSearch}`, { ...cfg.known, cards: cfg.cards });
+    ? parseMapState(location.search, { ...cfg.known, cards })
+    : parseMapState(`?${embeddedSearch}`, { ...cfg.known, cards });
   let more = 0;
   let lastAreaKey = '';
   let lastListKey = '';
@@ -157,7 +166,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     if (size.x === 0 || size.y === 0) return;
     const c = map.getCenter();
     const result = selectMarkers({
-      cards: cfg.cards,
+      cards,
       bounds: fromLatLngBounds(map.getBounds()),
       center: { lat: c.lat, lon: c.lng },
       activeThread: state.fio,
@@ -314,6 +323,12 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     refreshMarkers();
   });
 
+  // "All of Portugal": resets the view only; filters and the open preview stay as they are.
+  homeButton.addEventListener('click', () => {
+    more = 0;
+    map.fitBounds(toLatLngBounds(cfg.home), { animate });
+  });
+
   sheetToggle.addEventListener('click', () => {
     const open = root.dataset.sheet !== 'open';
     root.dataset.sheet = open ? 'open' : 'closed';
@@ -340,7 +355,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   // ---- filters -------------------------------------------------------------------------------------------------
 
   const fitToFilter = () => {
-    const list = cfg.cards.filter((c) => passesFilters(c, state));
+    const list = cards.filter((c) => passesFilters(c, state));
     if (list.length === 0) map.fitBounds(toLatLngBounds(cfg.view), { animate: false });
     else if (list.length === 1) map.setView([list[0]!.lat, list[0]!.lon], BEHAVIOUR.fitMaxZoom);
     else
@@ -381,7 +396,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   document.addEventListener('map:focus', (e) => {
     const id = (e as CustomEvent<{ id: string | null }>).detail?.id ?? null;
     state = { ...state, id };
-    if (id && byId.has(id)) {
+    if (id && cards.some((c) => c.id === id)) {
       const card = byId.get(id)!;
       if (!inBounds(card, fromLatLngBounds(map.getBounds()))) map.panTo([card.lat, card.lon]);
       // Map page: the preview opens. Epoch page: the marker is only highlighted, the feed already shows the card.
@@ -389,6 +404,21 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       else preview.hidden = true;
     } else preview.hidden = true;
     lastListKey = '';
+    refreshMarkers();
+  });
+
+  // The reader changed the family mode: the map keeps its view and filters, but the set of cards changes.
+  onFamilyChange((mode) => {
+    cards = cfg.cards.filter((c) => isVisibleInMode(c, mode));
+    more = 0;
+    lastListKey = '';
+    if (state.id && !cards.some((c) => c.id === state.id)) {
+      // The open card is now hidden: close its preview.
+      state = { ...state, id: null };
+      preview.hidden = true;
+      writeUrl();
+      root.dispatchEvent(new CustomEvent('map:select', { bubbles: true, detail: { id: null } }));
+    }
     refreshMarkers();
   });
 

@@ -31,8 +31,8 @@ The dev server runs at http://localhost:4321/. Open `/pt/` or `/en/`.
 | `npm run check` | `astro check` (types, Astro files) |
 | `npm run check:data` | Validates `src/content/*.yaml` and prints a data summary (errors fail, warnings do not) |
 | `npm run check:links` | Every internal link in `dist/` starts with the base path and points to an existing file; every `#fragment` matches an id on the target page |
-| `npm run check:listings` | Built epoch and thread pages against the data: feed order, counters, sections, neighbouring epochs, every card reachable from a feed |
-| `npm run check:cards` | Built card pages: one `h1`, heading order, alt text, labels, sources, bridge, meta tags, hreflang, `noindex` only on placeholder cards |
+| `npm run check:listings` | Built epoch and thread pages against the data: feed order, counters (all three family-mode numbers), sections, neighbouring epochs, every card reachable from a feed |
+| `npm run check:cards` | Built card pages: one `h1`, heading order, alt text, labels, sources, bridge, meta tags, hreflang, `noindex` only on placeholder cards; family mode: head script, toggle, intermediate screen, "Nearby" and previous / next per mode |
 | `npm run check:weight` | Weight of card, epoch and thread pages without images (HTML + CSS + JS, raw, gzip, brotli) against the 500 KB budget; also prints the size of the map code, which is counted apart |
 | `npm run check:tokens` | Colours, fonts and sizes must come from `src/styles/tokens.css`: fails on values written directly in components or stylesheets (1px hairlines and media queries are allowed) |
 | `npm test` | Unit tests: `tests/*.test.ts` (`node:test` with `tsx`: thread visibility, `min_age`, card helpers, filters, address parameters) and `tests/vitest/*.spec.ts` (Vitest: marker selection, map address state, tile settings) |
@@ -47,6 +47,10 @@ To test a project-site build with a base path:
 ```sh
 SITE_URL=https://USER.github.io BASE_PATH=/REPO npm run build
 ```
+
+## Family mode
+
+A three-way switch in the header (everything / all ages / up to 12+). The choice is kept in `localStorage` (key `family`); without JavaScript the switch is not shown and every story is visible. The rules are in `src/lib/family.ts`; the cards are hidden by CSS (`src/styles/family.css`) from `data-family` on `<html>`, which a small inline script in `<head>` sets before the first paint. A card that the current mode hides still opens, after an intermediate screen ("Open" is for one visit). Browser checks: `scripts/qa/family.mjs`.
 
 ## Configuration
 

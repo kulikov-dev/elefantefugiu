@@ -15,6 +15,8 @@ const event = (over: Record<string, unknown>) =>
     bridge: { name: 'x', address: 'y', lat: 1, lon: 2, url: 'https://x.y' },
     threads: ['mar', 'natureza'],
     importance: 3,
+    min_age: 'all',
+    sensitive: false,
     hook: { pt: 'Gancho', en: 'Hook' },
     ...over,
   }) as unknown as EventData;
@@ -33,7 +35,14 @@ describe('toMapCards', () => {
       meta: '1498 · Lisboa',
       hook: 'Hook',
       href: '/en/story/e-one/',
+      minAge: 'all',
+      sensitive: false,
     });
+  });
+
+  it('carries the age label and the heavy-topic flag, normalised', () => {
+    const [c] = toMapCards([event({ min_age: 12, sensitive: true })], 'pt', () => '/x/');
+    expect([c!.minAge, c!.sensitive]).toEqual(['12', true]);
   });
 });
 

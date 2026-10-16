@@ -5,19 +5,21 @@ import type { Lang } from '../i18n/routes';
 
 interface Props {
   lang: Lang;
-  items: { title: string; href: string; meta: string }[];
+  /** Heading id; must differ between the variants of one page. */
+  headingId?: string;
+  items: { title: string; href: string; meta: string; minAge: string; sensitive: boolean }[];
 }
 
-const { lang, items } = Astro.props;
+const { lang, items, headingId = 'related-title' } = Astro.props;
 ---
 {
   items.length > 0 && (
-    <section class="related" aria-labelledby="related-title">
-      <h2 id="related-title">{t(lang, 'ui.nearby')}</h2>
+    <section class="related" aria-labelledby={headingId}>
+      <h2 id={headingId}>{t(lang, 'ui.nearby')}</h2>
       <ul>
         {
           items.map((item) => (
-            <li>
+            <li data-min-age={item.minAge} data-sensitive={String(item.sensitive)}>
               <a href={item.href}>{item.title}</a>
               <span class="related__meta">{item.meta}</span>
             </li>

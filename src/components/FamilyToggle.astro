@@ -1,0 +1,32 @@
+---
+// Family mode switch for the header (docs/spec.md 3.6): three values, a radio group.
+// Shown only when JavaScript runs (CSS on html[data-js]); the choice is kept in localStorage by src/scripts/family.ts.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const options = [
+  { value: 'off', label: t(lang, 'family.off') },
+  { value: 'all', label: t(lang, 'family.all') },
+  { value: '12', label: t(lang, 'family.twelve') },
+] as const;
+---
+<div class="family-toggle" role="radiogroup" aria-label={t(lang, 'ui.family_mode')} data-family-toggle>
+  {
+    options.map((option) => (
+      <label class="family-toggle__option" data-value={option.value}>
+        <input type="radio" name="family" value={option.value} checked={option.value === 'off'} />
+        <span>{option.label}</span>
+      </label>
+    ))
+  }
+  <span class="visually-hidden" role="status" data-family-status data-template={t(lang, 'family.status')}></span>
+</div>
+
+<script>
+  import '../scripts/family';
+</script>

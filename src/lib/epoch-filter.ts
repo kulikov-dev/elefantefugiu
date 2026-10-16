@@ -35,3 +35,15 @@ export function serializeState(state: FilterState): string {
 export function matchesThread(cardThreads: readonly string[], fio: string | null): boolean {
   return fio === null || cardThreads.includes(fio);
 }
+
+/**
+ * CSS that applies ?fio= before the first paint: the head script puts the thread on <html data-fio>,
+ * these rules hide the feed items of other threads. One rule per known thread id (a CSS rule cannot compare
+ * two attribute values), so the list comes from the data at build time. The page script does the same later.
+ */
+export function feedFilterCss(threadIds: readonly string[]): string {
+  return threadIds
+    .filter((id) => /^[A-Za-z0-9_-]+$/.test(id))
+    .map((id) => `html[data-fio="${id}"] .feed__item:not([data-threads~="${id}"]){display:none}`)
+    .join('\n');
+}

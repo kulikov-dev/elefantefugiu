@@ -2,6 +2,8 @@
 // without this script the page is the plain timeline and the thread chips are links to thread pages.
 // State lives in the address (?fio=mar&vista=grelha) and is written with replaceState (no extra history entries).
 import { matchesThread, parseState, serializeState, type FilterState } from '../lib/epoch-filter';
+import { isVisibleInMode } from '../lib/family';
+import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 const root = document.querySelector<HTMLElement>('[data-epoch-tools]');
 const feed = document.querySelector<HTMLElement>('ol.feed');
@@ -32,16 +34,29 @@ if (root && feed) {
     }
   };
 
+  // Family mode hides items with CSS (data-min-age, data-sensitive); the counts here follow the same rule.
+  const allowedByMode = (item: HTMLElement) =>
+    isVisibleInMode({ minAge: item.dataset.minAge, sensitive: item.dataset.sensitive }, currentFamilyMode());
+
   const render = () => {
     let shown = 0;
+    let shownByMode = 0;
     for (const item of items) {
       const visible = matchesThread((item.dataset.threads ?? '').split(' '), state.fio);
       item.hidden = !visible;
-      if (visible) shown += 1;
+      if (allowedByMode(item)) shownByMode += 1;
+      if (visible && allowedByMode(item)) shown += 1;
     }
     feed.dataset.view = state.grid ? 'grid' : 'timeline';
+    // The grid view is driven by <html data-vista>, which the head script already set from the address.
+    if (state.grid) document.documentElement.dataset.vista = 'grelha';
+    else delete document.documentElement.dataset.vista;
+    // Same for the thread: the prepaint CSS keys on <html data-fio>, so it must follow every change of the filter.
+    if (state.fio) document.documentElement.dataset.fio = state.fio;
+    else delete document.documentElement.dataset.fio;
     feed.hidden = shown === 0;
-    if (empty) empty.hidden = shown !== 0;
+    // "No stories of this thread here" only when the mode leaves something to filter; an empty mode has its own message.
+    if (empty) empty.hidden = !(shown === 0 && shownByMode > 0);
     for (const b of fioButtons) b.setAttribute('aria-pressed', String((b.dataset.fio || null) === state.fio));
     for (const b of viewButtons) b.setAttribute('aria-pressed', String((b.dataset.view === 'grid') === state.grid));
     if (status) {
@@ -65,6 +80,8 @@ if (root && feed) {
 
   if (controls) controls.hidden = false;
   render();
+  // The mode changed (toggle, another tab, "Show all modes"): recount the status line and the empty message.
+  onFamilyChange(render);
   // Clean up an address with unknown values (the state above already ignored them).
   if (serializeState(state) !== location.search) write();
 }

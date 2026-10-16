@@ -2,6 +2,7 @@
 import type { Lang } from '../i18n/routes';
 import { formatYear, type EventData } from './events';
 import type { EpochData } from './epochs';
+import { normalizeMinAge, normalizeSensitive, type MinAge } from './family';
 
 export interface MapCardInfo {
   id: string;
@@ -16,6 +17,9 @@ export interface MapCardInfo {
   meta: string;
   hook: string;
   href: string;
+  /** Age label and heavy-topic flag: the map hides the cards the family mode hides. */
+  minAge: MinAge;
+  sensitive: boolean;
 }
 
 /** Cards for the map in one language; `hrefOf` builds the (base-aware) card address from the event. */
@@ -31,6 +35,8 @@ export function toMapCards(events: readonly EventData[], lang: Lang, hrefOf: (ev
     meta: `${formatYear(e, lang)} · ${e.place.name}`,
     hook: e.hook[lang],
     href: hrefOf(e),
+    minAge: normalizeMinAge(e.min_age),
+    sensitive: normalizeSensitive(e.sensitive),
   }));
 }
 

@@ -10,6 +10,8 @@ import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import MapBlock from '../components/MapBlock.astro';
 import { epochHref, storyPath, threadHref, type Lang } from '../i18n/routes';
+import { ageInfoOf, countByMode, familyAttrs, zeroModes } from '../lib/family';
+import { feedFilterCss } from '../lib/epoch-filter';
 import { t } from '../i18n';
 import {
   epochFeed,
@@ -38,6 +40,11 @@ const feed = epochFeed(epoch, site.events);
 const counts = threadCountsInEpoch(epoch, site.events);
 // Only threads that have a page, and only those with cards in this epoch, so every counter is a real count.
 const chips = site.visibleThreads.filter((th) => (counts.get(th.id) ?? 0) > 0);
+// Family mode: the counters carry three numbers (off, all, 12), counted here from the data.
+const feedCounts = countByMode(feed.map(ageInfoOf));
+const chipCounts = new Map(chips.map((th) => [th.id, countByMode(feed.filter((e) => e.threads.includes(th.id)).map(ageInfoOf))]));
+const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
+const emptyModes = zeroModes(feedCounts);
 
 // The map shows the cards of this epoch; its thread follows the filter above (?fio=).
 const mapCards = toMapCards(feed, lang, (e) => storyPath(lang, e.slug[lang]));
@@ -64,6 +71,8 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   preview={{ title: epoch.name[lang], image: epoch.fallback_image }}
   noindex={noindex}
 >
+  <!-- ?fio= applied before the first paint (the head script sets data-fio on <html>). -->
+  <style slot="head" is:inline set:html={feedFilterCss(site.threads.map((th) => th.id))} />
   <div class="epoch" data-epoch data-pane="feed">
     <header class="epoch__header">
       <h1>{epoch.name[lang]}</h1>
@@ -107,13 +116,13 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
                     lang={lang}
                     name={{ pt: t('pt', 'epoch.filter_all'), en: t('en', 'epoch.filter_all') }}
                     color="var(--color-ink-muted)"
-                    count={feed.length}
+                    count={feedCounts}
                     filter=""
                   />
                 </li>
                 {chips.map((thread) => (
-                  <li>
-                    <ThreadChip lang={lang} name={thread.name} color={thread.color} count={counts.get(thread.id) ?? 0} filter={thread.id} />
+                  <li data-hide-in={hideIn(zeroModes(chipCounts.get(thread.id)!))}>
+                    <ThreadChip lang={lang} name={thread.name} color={thread.color} count={chipCounts.get(thread.id)!} filter={thread.id} />
                   </li>
                 ))}
               </ul>
@@ -149,7 +158,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
         <ol class="feed" data-view="timeline">
           {
             feed.map((event) => (
-              <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')}>
+              <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
                 <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} />
               </li>
             ))
@@ -159,6 +168,14 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
           <p>{t(lang, 'epoch.empty')}</p>
           <button type="button" class="button button--secondary">{t(lang, 'epoch.show_all')}</button>
         </div>
+        {
+          emptyModes.length > 0 && (
+            <div class="family-empty fv fv--block" data-modes={emptyModes.join(' ')} data-family-empty>
+              <p>{t(lang, 'family.empty')}</p>
+              <button type="button" class="linklike" data-family-set="off">{t(lang, 'family.show_all')}</button>
+            </div>
+          )
+        }
       </section>
 
       <aside class="epoch__aside" data-epoch-aside data-map-js hidden>
@@ -262,7 +279,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   }
 
   /* Grid view: the same cards as tiles. One column on a narrow phone. */
-  .feed[data-view='grid'] {
+  :global(html[data-vista='grelha']) .feed {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-tile-min)), 1fr));
     gap: var(--space-4);
@@ -270,23 +287,23 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     border: 0;
   }
 
-  .feed[data-view='grid'] .feed__item + .feed__item {
+  :global(html[data-vista='grelha']) .feed .feed__item + .feed__item {
     margin-block-start: 0;
   }
 
-  .feed[data-view='grid'] .feed__item::before {
+  :global(html[data-vista='grelha']) .feed .feed__item::before {
     display: none;
   }
 
-  .feed[data-view='grid'] .feed__item > :global(.ecard) {
+  :global(html[data-vista='grelha']) .feed .feed__item > :global(.ecard) {
     height: 100%;
   }
 
-  .feed[data-view='grid'] :global(.ecard__head) {
+  :global(html[data-vista='grelha']) .feed :global(.ecard__head) {
     flex-direction: column;
   }
 
-  .feed[data-view='grid'] :global(.ecard__thumb) {
+  :global(html[data-vista='grelha']) .feed :global(.ecard__thumb) {
     width: 100%;
     aspect-ratio: 1200 / 630;
   }

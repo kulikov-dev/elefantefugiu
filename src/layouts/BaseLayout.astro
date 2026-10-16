@@ -5,6 +5,8 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { LANGS, pagePath, withBase, type Lang, type PageKey } from '../i18n/routes';
 import { t } from '../i18n';
+import { headScript } from '../lib/head-script';
+import { loadSite } from '../lib/site-data';
 
 interface Props {
   lang: Lang;
@@ -36,6 +38,8 @@ const paths: Record<Lang, string> | undefined =
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = paths ? absolute(paths[lang]) : undefined;
 const image = preview?.image ? absolute(withBase(preview.image)) : undefined;
+// Thread ids the head script may put on <html data-fio> (the epoch page filter reads them before the first paint).
+const { threads: allThreads } = await loadSite();
 const OG_LOCALE: Record<Lang, string> = { pt: 'pt_PT', en: 'en_GB' };
 const otherLang = LANGS.find((l) => l !== lang)!;
 ---
@@ -44,6 +48,8 @@ const otherLang = LANGS.find((l) => l !== lang)!;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Before the first paint: data-js, data-family, data-vista, data-fio on <html> (no flash of the wrong state). -->
+    <script is:inline set:html={headScript(allThreads.map((th) => th.id))} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content={THEME_COLOR} />
@@ -66,6 +72,7 @@ const otherLang = LANGS.find((l) => l !== lang)!;
     <meta name="twitter:description" content={description} />
     {image && <meta name="twitter:image" content={image} />}
     {image && preview?.imageAlt && <meta name="twitter:image:alt" content={preview.imageAlt} />}
+    <slot name="head" />
   </head>
   <body>
     <a class="skip-link" href="#main">{t(lang, 'a11y.skip_to_content')}</a>

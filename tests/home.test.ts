@@ -26,8 +26,16 @@ test('pickFeatured: list order, unpublished and unknown ids skipped', () => {
   assert.deepEqual(pickFeatured(['draft'], events.filter((e) => e.status === 'ready')), []);
 });
 
-test('surpriseCandidates: published, all ages, not a heavy topic', () => {
-  assert.deepEqual(surpriseCandidates(events).map((e) => e.id), ['a', 'b', 'e']);
+test('surpriseCandidates: published, never a heavy topic, any age (the mode filters the age in the browser)', () => {
+  assert.deepEqual(surpriseCandidates(events).map((e) => e.id), ['a', 'b', 'd', 'e']);
+});
+
+test('epochTiles: the three counters (off, all, 12) follow the age labels and the heavy topic', () => {
+  const tiles = epochTiles(epochs, events.filter((e) => e.status === 'ready'));
+  const e6 = tiles.find((t) => t.epoch.id === 'e6')!;
+  // e6 holds c (heavy), d (12+) and e (all ages)
+  assert.deepEqual(e6.counts, { off: 3, all: 1, '12': 2 });
+  assert.equal(e6.count, e6.counts.off);
 });
 
 test('pickSurprise: never the last card, many draws; handles one card and none', () => {

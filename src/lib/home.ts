@@ -1,6 +1,7 @@
 // Pure helpers for the home page. No Astro imports, so they run in plain unit tests.
 import { epochFeed, epochHasContent, type EpochData } from './epochs';
 import type { EventData } from './events';
+import { ageInfoOf, countByMode, type FamilyMode } from './family';
 
 /** The first epoch (by `order`) that has a page: the target of the "Start" button. */
 export function firstMvpEpoch<E extends Pick<EpochData, 'id' | 'order' | 'mvp'>>(epochs: readonly E[], events: readonly EventData[]): E | null {
@@ -13,13 +14,18 @@ export interface EpochTile<E> {
   available: boolean;
   /** Published stories of the epoch; counted from the data at build time. */
   count: number;
+  /** The same count for each family mode (off, all, 12). */
+  counts: Record<FamilyMode, number>;
 }
 
 /** One tile per epoch, in `order`. */
 export function epochTiles<E extends Pick<EpochData, 'id' | 'order' | 'mvp'>>(epochs: readonly E[], events: readonly EventData[]): EpochTile<E>[] {
   return [...epochs]
     .sort((a, b) => a.order - b.order)
-    .map((epoch) => ({ epoch, available: epochHasContent(epoch, events), count: epochFeed(epoch, events).length }));
+    .map((epoch) => {
+      const feed = epochFeed(epoch, events);
+      return { epoch, available: epochHasContent(epoch, events), count: feed.length, counts: countByMode(feed.map(ageInfoOf)) };
+    });
 }
 
 /** Featured cards in the order of the featured list; ids that are not published are skipped. */
@@ -28,11 +34,11 @@ export function pickFeatured(ids: readonly string[], events: readonly EventData[
 }
 
 /**
- * Cards "Surprise me" may open: published, for all ages, not a heavy topic.
- * (There is no family mode yet; a surprise must not land on a heavy or age-restricted card.)
+ * Cards "Surprise me" may open: published and never a heavy topic. The age is checked in the browser against
+ * the family mode (isSurpriseAllowed): in "off" any age is fine, in the other modes only what the mode shows.
  */
 export function surpriseCandidates(events: readonly EventData[]): EventData[] {
-  return events.filter((e) => e.status === 'ready' && !e.sensitive && e.min_age === 'all');
+  return events.filter((e) => e.status === 'ready' && !e.sensitive);
 }
 
 export const SURPRISE_KEY = 'lastSurprise';

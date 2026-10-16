@@ -132,6 +132,7 @@
     "stories_other": "{n} histórias"
   },
   "map": {
+    "home": "Todo o Portugal",
     "map_label": "Mapa das histórias",
     "threads_label": "Filtrar por fio",
     "epochs_label": "Filtrar por época",
@@ -153,5 +154,22 @@
     "unavailable": "Mapa indisponível, aqui está a lista.",
     "preview_open": "Abrir",
     "preview_close": "Fechar pré-visualização"
+  },
+  "family": {
+    "off": "Tudo",
+    "all": "Para todos",
+    "twelve": "Até 12+",
+    "status": "Modo família: {mode}.",
+    "footer_hint": "O modo família precisa de JavaScript. Sem ele, todas as histórias ficam visíveis.",
+    "empty": "Neste modo ainda não há histórias aqui.",
+    "show_all": "Mostrar todos os modos"
+  },
+  "gate": {
+    "age_12": "Esta história é para adolescentes 12+.",
+    "age_16": "Esta história é para maiores de 16 anos.",
+    "heavy": "Esta história aborda um tema difícil.",
+    "question": "Abrir?",
+    "open": "Abrir",
+    "back": "Voltar"
   }
 }

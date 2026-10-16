@@ -7,6 +7,7 @@ import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 import type { Bounds } from '../lib/markers';
 import { safeJson, type MapCardInfo } from '../lib/map-cards';
+import { MAINLAND_VIEW } from '../lib/map-data';
 import type { TileConfig } from '../lib/tiles';
 
 interface Props {
@@ -18,12 +19,14 @@ interface Props {
   known: { threads: string[]; epochs: string[] };
   maxBounds: Bounds;
   view: Bounds;
+  /** The whole country: the target of the "All of Portugal" button (a reset of the view). */
+  home?: Bounds;
   tile: TileConfig;
   /** 'page': the block owns ?fio= ?epoca= ?id= in the address. 'embedded': a parent page drives it with events. */
   mode?: 'page' | 'embedded';
 }
 
-const { lang, cards, threads, known, maxBounds, view, tile, mode = 'page' } = Astro.props;
+const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page' } = Astro.props;
 
 const config = {
   mode,
@@ -32,6 +35,7 @@ const config = {
   known,
   maxBounds,
   view,
+  home,
   tile: { url: tile.url, attribution: tile.attribution },
   strings: {
     frame: t(lang, 'map.marker_frame'),
@@ -56,7 +60,10 @@ const config = {
     <p class="map__loading" data-map-loading>{t(lang, 'map.loading')}</p>
     <p class="map__unavailable" data-map-unavailable hidden role="status">{t(lang, 'map.unavailable')}</p>
 
-    <button type="button" class="button button--secondary map__more" data-more hidden>{t(lang, 'ui.show_more')}</button>
+    <div class="map__actions">
+      <button type="button" class="button button--secondary map__home" data-map-home>{t(lang, 'map.home')}</button>
+      <button type="button" class="button button--secondary map__more" data-more hidden>{t(lang, 'ui.show_more')}</button>
+    </div>
 
     <div class="map__preview" data-map-preview role="region" aria-labelledby="map-preview-title" tabindex="-1" hidden>
       <button type="button" class="map__preview-close" data-preview-close aria-label={t(lang, 'map.preview_close')}>
