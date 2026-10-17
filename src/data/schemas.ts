@@ -29,25 +29,59 @@ const image = z.strictObject({
   license: z.string(),
 });
 
+/** Keys of the interactive colour tokens: --viz-tone-<key> in src/styles/tokens.css. */
+export const vizTones = ['blue', 'red', 'green', 'ochre', 'grey'] as const;
+const tone = z.enum(vizTones);
+
+/** "1 against 5": groups of dots in one scale; one dot is unit_per_dot people, the estimate is a range, not one number. */
+export const armyDotsData = z.strictObject({
+  groups: z
+    .array(
+      z.strictObject({
+        id: z.string(),
+        label: text,
+        /** Low and high estimates (a range, never one number). */
+        min: z.number().nonnegative(),
+        max: z.number().nonnegative(),
+        /** People per dot; the same for every group (one scale). */
+        unit_per_dot: z.number().positive(),
+        tone,
+        note: text,
+      }),
+    )
+    .min(2),
+  caption: text,
+  /** The "according to historians' estimates" line shown under the dots. */
+  estimate_note: text,
+  /** True while the numbers are invented test numbers; shown on the card. */
+  placeholder: z.boolean().optional(),
+});
+
+/** "Size of the nau": silhouettes in one scale, sizes in metres. */
+export const shipScaleData = z.strictObject({
+  items: z
+    .array(
+      z.strictObject({
+        id: z.string(),
+        label: text,
+        length_m: z.number().positive(),
+        /** Height (keel to top of the tallest mast) in metres; optional. */
+        height_m: z.number().positive().optional(),
+        tone,
+      }),
+    )
+    .min(2),
+  caption: text,
+  placeholder: z.boolean().optional(),
+});
+
 const interactive = z.discriminatedUnion('type', [
-  z.strictObject({
-    type: z.literal('army_dots'),
-    data: z.strictObject({
-      /** People represented by one dot. */
-      people_per_dot: z.number().positive(),
-      groups: z
-        .array(z.strictObject({ name: text, min: z.number().nonnegative(), max: z.number().nonnegative() }))
-        .min(2),
-    }),
-  }),
-  z.strictObject({
-    type: z.literal('ship_scale'),
-    data: z.strictObject({
-      historic: z.strictObject({ name: text, length_m: z.number().positive() }),
-      modern: z.strictObject({ name: text, length_m: z.number().positive() }),
-    }),
-  }),
+  z.strictObject({ type: z.literal('army_dots'), data: armyDotsData }),
+  z.strictObject({ type: z.literal('ship_scale'), data: shipScaleData }),
 ]);
+
+export type ArmyDotsData = z.infer<typeof armyDotsData>;
+export type ShipScaleData = z.infer<typeof shipScaleData>;
 
 export const eventSchema = z.strictObject({
   id: z.string(),

@@ -1,0 +1,103 @@
+---
+// "One against five" (docs/spec.md section 6): groups of dots in one scale, one dot is `unit_per_dot` people.
+// The estimate is a range: filled dots for the lowest estimate, empty dots for the rest of the range, and the line
+// "according to historians' estimates" comes from the data. The same numbers are in a table beside the drawing.
+// Without JavaScript the full drawing and the table are shown; the script only adds "Show one by one".
+import { t } from '../i18n';
+import baseCss from '../styles/viz-base.css?inline';
+import ownCss from '../styles/viz-dots.css?inline';
+import type { Lang } from '../i18n/routes';
+import type { ArmyDotsData } from '../data/schemas';
+import { dotCounts, fill, formatNumber, groupRatio, layoutDots, ratioNumber, DOT_RADIUS } from '../lib/viz';
+
+interface Props {
+  lang: Lang;
+  data: ArmyDotsData;
+  /** Language tag of the texts from the data when it differs from the page (placeholder filler is Latin). */
+  textLang?: string | undefined;
+}
+
+const { lang, data, textLang } = Astro.props;
+const layout = layoutDots(data.groups);
+const unit = data.groups[0]!.unit_per_dot;
+const range = (g: (typeof data.groups)[number]) => fill(t(lang, 'viz.people_range'), { min: formatNumber(g.min, lang), max: formatNumber(g.max, lang) });
+const { big, small, ratio } = groupRatio(data.groups);
+const ratioText = fill(t(lang, 'viz.army_ratio'), { big: big.label[lang], small: small.label[lang], x: ratioNumber(ratio, lang) });
+const scaleText = fill(t(lang, 'viz.army_scale'), { n: formatNumber(unit, lang) });
+const title = t(lang, 'viz.army_title');
+// The description read by screen readers: scale, every group with its range, and the ratio in words.
+const desc = [scaleText, ...data.groups.map((g) => `${g.label[lang]}: ${range(g)}.`), ratioText, data.estimate_note[lang]].join(' ');
+---
+<section class="viz" aria-labelledby="viz-title" data-interactive="army_dots">
+  <!-- Styles travel with the component: only pages that render it get them (a <style> block of a component would join the stylesheet of every card page). -->
+  <style is:inline set:html={baseCss + ownCss}></style>
+  <h2 id="viz-title">{title}</h2>
+  {data.placeholder && <p class="notice viz__test">{t(lang, 'viz.test_numbers')}</p>}
+  <figure class="viz__figure" data-viz-dots>
+    <svg
+      class="viz__svg"
+      viewBox={`0 0 ${layout.width} ${layout.height}`}
+      role="img"
+      aria-labelledby="viz-svg-title viz-svg-desc"
+      focusable="false"
+    >
+      <title id="viz-svg-title">{`${title}: ${data.caption[lang]}`}</title>
+      <desc id="viz-svg-desc">{desc}</desc>
+      {
+        layout.groups.map((group, g) => (
+          <g class={`tone-${data.groups[g]!.tone}`} data-group={group.id}>
+            {group.dots.map((dot) => (
+              <circle class={`dot dot--${dot.kind}`} cx={dot.x} cy={dot.y} r={DOT_RADIUS} />
+            ))}
+          </g>
+        ))
+      }
+    </svg>
+    <figcaption lang={textLang}>{data.caption[lang]}</figcaption>
+  </figure>
+
+  <ul class="viz__legend" aria-hidden="true">
+    <li><span class="viz__swatch viz__swatch--solid"></span>{t(lang, 'viz.legend_low')}</li>
+    <li><span class="viz__swatch viz__swatch--range"></span>{t(lang, 'viz.legend_range')}</li>
+  </ul>
+  <p class="viz__scale">{scaleText}</p>
+  <p class="viz__estimate" lang={textLang}>{data.estimate_note[lang]}</p>
+
+  <div class="viz__table-wrap">
+    <table class="viz__table">
+      <caption class="visually-hidden">{`${title}: ${data.caption[lang]}`}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, 'viz.table_group')}</th>
+          <th scope="col">{t(lang, 'viz.table_estimate')}</th>
+          <th scope="col">{t(lang, 'viz.table_note')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          data.groups.map((g) => {
+            const counts = dotCounts(g);
+            return (
+              <tr data-group={g.id} data-min={g.min} data-max={g.max} data-dots={counts.total}>
+                <th scope="row" lang={textLang}>
+                  <span class={`viz__swatch viz__swatch--solid tone-${g.tone}`} aria-hidden="true"></span>
+                  {g.label[lang]}
+                </th>
+                <td>{range(g)}</td>
+                <td lang={textLang}>{g.note[lang]}</td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+  <p class="viz__ratio">{ratioText}</p>
+
+  <!-- Only with JavaScript, and not with "reduce motion": the script shows the button. -->
+  <button type="button" class="button button--secondary viz__play" data-viz-play data-playing={t(lang, 'viz.army_playing')} hidden>{t(lang, 'viz.army_play')}</button>
+</section>
+
+<script>
+  import '../scripts/army-dots';
+</script>

@@ -72,7 +72,6 @@
     "context": "Contexto",
     "official_site": "Sítio oficial",
     "accessed": "Consultado em",
-    "interactive_soon": "Aqui ficará um elemento interativo. Em breve.",
     "share_copied": "Ligação copiada.",
     "share_failed": "Não foi possível copiar. Ligação:",
     "epoch_nav": "Navegação dentro da época",
@@ -158,7 +157,7 @@
   "family": {
     "off": "Tudo",
     "all": "Para todos",
-    "twelve": "Até 12+",
+    "twelve": "Para todos e 12+",
     "status": "Modo família: {mode}.",
     "footer_hint": "O modo família precisa de JavaScript. Sem ele, todas as histórias ficam visíveis.",
     "empty": "Neste modo ainda não há histórias aqui.",
@@ -171,5 +170,31 @@
     "question": "Abrir?",
     "open": "Abrir",
     "back": "Voltar"
+  },
+  "viz": {
+    "army_title": "Um contra cinco",
+    "ship_title": "O tamanho da nau",
+    "test_numbers": "Números de teste, inventados. Não são dados históricos.",
+    "army_scale": "Cada ponto representa {n} pessoas. Os pontos cheios mostram a estimativa mais baixa; os pontos vazios, o resto do intervalo até à estimativa mais alta.",
+    "army_play": "Mostrar um a um",
+    "army_playing": "A mostrar…",
+    "army_ratio": "O grupo «{big}» tem cerca de {x} vezes mais pessoas do que o grupo «{small}» (comparando o meio das estimativas).",
+    "people_range": "de {min} a {max} pessoas",
+    "dots_title": "{title}: {caption}",
+    "table_group": "Grupo",
+    "table_estimate": "Estimativa",
+    "table_note": "Nota",
+    "table_length": "Comprimento (m)",
+    "table_height": "Altura (m)",
+    "table_item": "Navio",
+    "ship_view": "Vista",
+    "ship_stack": "Lado a lado",
+    "ship_overlay": "Sobrepostos",
+    "ship_scale": "Todos os navios estão à mesma escala. Medidas em metros.",
+    "ship_size": "{length} m de comprimento",
+    "ship_size_height": "{length} m de comprimento, {height} m de altura",
+    "ship_ratio": "«{big}» é cerca de {x} vezes mais comprido do que «{small}».",
+    "legend_low": "estimativa mais baixa",
+    "legend_range": "resto do intervalo"
   }
 }

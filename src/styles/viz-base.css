@@ -1,0 +1,49 @@
+/* Shared by the two interactives (stage 7a). Inlined into the pages that show an interactive, see ArmyDots.astro and ShipScale.astro. */
+.viz {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--viz-max-width);
+}
+
+.viz h2 {
+  font-size: var(--text-xl);
+}
+
+.viz__figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+figcaption {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.tone-blue { --tone: var(--viz-tone-blue); }
+
+.tone-red { --tone: var(--viz-tone-red); }
+
+.tone-green { --tone: var(--viz-tone-green); }
+
+.tone-ochre { --tone: var(--viz-tone-ochre); }
+
+.tone-grey { --tone: var(--viz-tone-grey); }
+
+.viz__table-wrap {
+  overflow-x: auto;
+}
+
+.viz__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.viz__table th,
+.viz__table td {
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--color-line);
+  text-align: start;
+  vertical-align: top;
+}

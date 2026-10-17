@@ -162,8 +162,20 @@ if (want('toggle')) {
   await page.goto(`${base}/en/`, { waitUntil: 'load' });
   ok('toggle: the mode is the same on the other language', (await page.evaluate(() => document.documentElement.dataset.family)) === 'all');
   const en = await text(page, '.family-toggle__option span');
-  ok('toggle: labels from en.json', same(en, ['Everything', 'All ages', 'Up to 12+']), en.join(' | '));
+  ok('toggle: labels from en.json', same(en, ['Everything', 'All ages', 'All ages and 12+']), en.join(' | '));
   await page.close();
+  for (const lang of ['pt', 'en']) {
+    for (const width of [360, 320]) {
+      const p = await newPage({ width });
+      await p.goto(`${base}/${lang}/`, { waitUntil: 'load' });
+      const fit = await p.evaluate(() => {
+        const r = document.querySelector('[data-family-toggle]').getBoundingClientRect();
+        return { right: Math.round(r.right), vw: document.documentElement.clientWidth, sw: document.documentElement.scrollWidth, heights: [...document.querySelectorAll('.family-toggle__option span')].map((s) => Math.round(s.getBoundingClientRect().height)) };
+      });
+      ok(`toggle (${lang}, ${width} px): inside the screen, the page does not scroll sideways, targets 44 px`, fit.right <= fit.vw && fit.sw <= fit.vw && fit.heights.every((h) => h >= 44), JSON.stringify(fit));
+      await p.close();
+    }
+  }
 
   const nojs = await newPage({ js: false });
   await nojs.goto(`${base}/pt/`, { waitUntil: 'load' });
@@ -385,6 +397,28 @@ if (want('gate')) {
   await direct.waitForFunction(() => location.pathname.includes('/epoca/'), { timeout: 5000 }).catch(() => {});
   ok('"Back": the link works', /\/epoca\//.test(direct.url()), direct.url());
   await direct.close();
+  // No source address (a link with rel=noreferrer, a strict referrer policy): "Back" leads to the epoch page of the card,
+  // even though the browser has a history.
+  for (const [lang, seg, ep] of [['pt', 'historia', epochSlug('estado-novo-e-25-de-abril', 'pt')], ['en', 'story', epochSlug('estado-novo-e-25-de-abril', 'en')]]) {
+    const hidden = byId('evento-exemplo-19');
+    const quiet = await newPage({ mode: 'all' });
+    await quiet.goto(`${base}/${lang}/`, { waitUntil: 'load' });
+    await Promise.all([
+      quiet.waitForNavigation({ waitUntil: 'load' }),
+      quiet.evaluate((href) => {
+        const a = document.createElement('a');
+        a.rel = 'noreferrer';
+        a.href = href;
+        document.body.append(a);
+        a.click();
+      }, `/${lang}/${seg}/${hidden.slug[lang]}/`),
+    ]);
+    const ref = await quiet.evaluate(() => [document.referrer, history.length]);
+    await quiet.click('[data-gate-back]');
+    await quiet.waitForFunction(() => location.pathname.includes('/epoca/') || location.pathname.includes('/era/'), { timeout: 5000 }).catch(() => {});
+    ok(`"Back" with no source address (${lang}, history ${ref[1]}, referrer "${ref[0]}") leads to the epoch page of the card`, quiet.url().endsWith(`/${lang}/${lang === 'pt' ? 'epoca' : 'era'}/${ep}/`), quiet.url());
+    await quiet.close();
+  }
   const viaSite = await newPage({ mode: 'all' });
   await viaSite.goto(`${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/`, { waitUntil: 'load' });
   await viaSite.goto(`${base}/pt/historia/evento-exemplo-19/`, { waitUntil: 'load', referer: `${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/` });
@@ -557,7 +591,7 @@ if (want('blocked')) {
 // ---------- 10. Variant build: a 16+ epoch ----------
 if (want('variant')) {
   const E = 'estado-novo-e-25-de-abril';
-  const vEvents = events.map((e) => (e.epoch === E ? { ...e, min_age: '16' } : e));
+  const vEvents = events.map((e) => (e.epoch === E ? { ...e, min_age: '16' } : ['evento-exemplo-02', 'evento-exemplo-03'].includes(e.id) ? { ...e, min_age: '12' } : e));
   const vShown = (e, mode) => shownIn(e, mode);
   const page = await newPage({ mode: 'all' });
   await page.goto(`${variantBase}/pt/epoca/${epochSlug(E)}/`, { waitUntil: 'load' });

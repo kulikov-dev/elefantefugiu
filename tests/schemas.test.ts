@@ -49,3 +49,37 @@ test('epochSchema: a typo in a field name is an error (strict)', () => {
   const bad = epochSchema.safeParse({ ...baseEpoch, mvp: false, years_label: { pt: 'a', en: 'a' }, year_label: 'x' });
   assert.equal(bad.success, false);
 });
+
+// ---- interactives (stage 7a) ----
+import { armyDotsData, shipScaleData } from '../src/data/schemas';
+
+const tx = { pt: 'a', en: 'b' };
+const dotsGroup = { id: 'g', label: tx, min: 1, max: 2, unit_per_dot: 1, tone: 'blue', note: tx };
+const dots = { groups: [dotsGroup, { ...dotsGroup, id: 'h', tone: 'red' }], caption: tx, estimate_note: tx };
+
+test('army_dots: a valid record, with the optional test-numbers mark', () => {
+  assert.equal(armyDotsData.safeParse(dots).success, true);
+  assert.equal(armyDotsData.safeParse({ ...dots, placeholder: true }).success, true);
+});
+
+test('army_dots: needs two groups, a known tone, both languages and the estimate note', () => {
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup] }).success, false);
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...dotsGroup, id: 'h', tone: 'pink' }] }).success, false);
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...dotsGroup, id: 'h', label: { pt: 'a' } }] }).success, false);
+  const { estimate_note: _drop, ...noNote } = dots;
+  assert.equal(armyDotsData.safeParse(noNote).success, false);
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...dotsGroup, id: 'h', unit_per_dot: 0 }] }).success, false);
+});
+
+test('army_dots: a typo in a field name is an error (strict)', () => {
+  assert.equal(armyDotsData.safeParse({ ...dots, captoin: tx }).success, false);
+});
+
+const items = [{ id: 'a', label: tx, length_m: 25, tone: 'ochre' }, { id: 'b', label: tx, length_m: 200, height_m: 50, tone: 'grey' }];
+
+test('ship_scale: a valid record; height is optional; two items at least', () => {
+  assert.equal(shipScaleData.safeParse({ items, caption: tx }).success, true);
+  assert.equal(shipScaleData.safeParse({ items: [items[0]], caption: tx }).success, false);
+  assert.equal(shipScaleData.safeParse({ items: [{ ...items[0], length_m: -1 }, items[1]], caption: tx }).success, false);
+  assert.equal(shipScaleData.safeParse({ items, caption: tx, extra: 1 }).success, false);
+});

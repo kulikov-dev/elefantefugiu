@@ -10,7 +10,8 @@
     "listings": "node listings.mjs",
     "controls": "node controls.mjs",
     "map": "node map.mjs",
-    "family": "node family.mjs"
+    "family": "node family.mjs",
+    "interactives": "node interactives.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "131.0.1",

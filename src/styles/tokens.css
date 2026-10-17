@@ -112,6 +112,17 @@
   --map-hit-area: 0.5rem;
   --epoch-map-width: clamp(20rem, 38%, 30rem);
 
+  /* Interactives (stage 7a): group colours (the `tone` key of the data), outline width, widest drawing, reveal */
+  --viz-tone-blue: #1f4e8c;
+  --viz-tone-red: #a1360f;
+  --viz-tone-green: #2d6a3e;
+  --viz-tone-ochre: #8a5a00;
+  --viz-tone-grey: #4b5864;
+  --viz-stroke: 2px;
+  --viz-max-width: 40rem;
+  --viz-water: var(--color-accent-tint);
+  --viz-label-size: var(--text-base);
+
   /* Motion */
   --transition: 150ms ease;
 

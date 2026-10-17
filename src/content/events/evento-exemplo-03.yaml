@@ -87,9 +87,22 @@ image:
 interactive:
   type: ship_scale
   data:
-    # PLACEHOLDER numbers, not historical data
-    historic: { name: { pt: Navio de exemplo, en: Example ship }, length_m: 25 }
-    modern: { name: { pt: Navio moderno de exemplo, en: Example modern ship }, length_m: 200 }
+    # PLACEHOLDER numbers, invented, not historical data. Text is latin filler.
+    placeholder: true
+    caption:
+      pt: Navis piscium, legenda de teste.
+      en: Ship of fish, test caption.
+    items:
+      - id: old-ship
+        label: { pt: Navis antiqua, en: Old ship }
+        length_m: 25
+        height_m: 20
+        tone: ochre
+      - id: modern-ship
+        label: { pt: Navis nova, en: New ship }
+        length_m: 200
+        height_m: 50
+        tone: grey
 reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready

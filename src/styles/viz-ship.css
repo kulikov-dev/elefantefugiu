@@ -1,0 +1,110 @@
+/* ShipScale. */
+.viz__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: var(--epoch-frame);
+  border-radius: var(--radius-md);
+  background: var(--viz-water);
+}
+
+/* One drawing at a time; the script sets data-mode on the figure. */
+.viz__figure[data-mode='stack'] .viz__svg--overlay,
+.viz__figure[data-mode='overlay'] .viz__svg--stack {
+  display: none;
+}
+
+.ship__hull {
+  fill: var(--tone);
+}
+
+.ship__mast {
+  fill: none;
+  stroke: var(--tone);
+  stroke-width: var(--viz-stroke);
+}
+
+.ship__sail {
+  fill: var(--color-surface);
+  stroke: var(--tone);
+  stroke-width: var(--viz-stroke);
+}
+
+/* Overlaid ships are outlines, so the smaller one stays visible on top of the larger one. */
+.ship--overlaid .ship__hull {
+  fill: none;
+  stroke: var(--tone);
+  stroke-width: var(--viz-stroke);
+}
+
+.ship--overlaid .ship__sail {
+  fill: none;
+}
+
+.ship__label {
+  fill: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--viz-label-size);
+}
+
+.viz__switch {
+  justify-self: start;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.viz__switch:not([hidden]) {
+  display: inline-flex;
+}
+
+.viz__option {
+  position: relative;
+  display: inline-flex;
+}
+
+.viz__option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.viz__option span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-target-large);
+  padding-inline: var(--space-4);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.viz__option input:checked + span {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.viz__option input:focus-visible + span {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: calc(var(--ring-width) * -1);
+}
+
+.viz__swatch {
+  display: inline-block;
+  width: var(--space-3);
+  height: var(--space-3);
+  margin-inline-end: var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--tone, var(--color-ink));
+  vertical-align: middle;
+}
+
+.viz__scale,
+.viz__ratio {
+  margin: 0;
+  max-width: var(--measure);
+}

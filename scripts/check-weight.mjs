@@ -70,6 +70,46 @@ if (mapFiles.length) {
   console.log(`  map code (only on map and epoch pages, the Leaflet chunk only when the block is in view): ${kb(sum('raw'))} raw, ${kb(sum('gzip'))} gzip`);
   for (const r of rowsMap) console.log(`    ${r.f.replace(/\.[A-Za-z0-9_-]{8}\./, '.*.')}: ${kb(r.raw)} raw, ${kb(r.gzip)} gzip`);
 }
+// Interactives (ArmyDots, ShipScale): their script and styles are emitted into the pages that show them and nowhere else.
+// Measured here: the code (inline <script> using data-viz-*, <style> blocks with .viz) of one page per type, gzip, summed over the two
+// components (a page never carries both). A page without an interactive must not carry any of it. The aim is at most 5 KB gzip for both.
+const VIZ_BUDGET = 5 * 1024;
+const vizCode = (text) => {
+  const scripts = [...text.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]).filter((c) => /data-viz-/.test(c));
+  const styles = [...text.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).filter((c) => /\.viz\b|\.viz__/.test(c));
+  return Buffer.from([...scripts, ...styles].join('\n'));
+};
+const vizByType = new Map();
+const vizLeaks = [];
+for (const file of pages) {
+  const text = readFileSync(file, 'utf8');
+  const type = text.match(/data-interactive="([a-z_]+)"/)?.[1];
+  const code = vizCode(text);
+  // Linked stylesheets and scripts count too: a shared stylesheet that holds the interactive rules would reach every card page.
+  const linked = [...text.matchAll(/<(?:link rel="stylesheet" href|script[^>]*\ssrc)="([^"]+)"/g)]
+    .map((m) => m[1])
+    .filter((url) => url.startsWith(base) && existsSync(fromDist(url)))
+    .map((url) => readFileSync(fromDist(url), 'utf8'));
+  const linkedLeak = linked.some((c) => /\.viz__|data-viz-/.test(c));
+  if (!type && (code.length > 0 || linkedLeak)) vizLeaks.push(file.replace(dist, ''));
+  if (type && linkedLeak) vizLeaks.push(`${file.replace(dist, '')} (interactive code in a shared file, not inline)`);
+  if (type && !vizByType.has(type)) vizByType.set(type, { page: file.replace(dist, ''), raw: code.length, gzip: gzipSync(code).length });
+}
+if (vizByType.size) {
+  const total = [...vizByType.values()].reduce((t, v) => t + v.gzip, 0);
+  console.log(`  interactives (code and styles inline in the pages that show them): ${kb([...vizByType.values()].reduce((t, v) => t + v.raw, 0))} raw, ${kb(total)} gzip for both`);
+  for (const [type, v] of vizByType) console.log(`    ${type}: ${kb(v.raw)} raw, ${kb(v.gzip)} gzip (${v.page})`);
+  const plain = rows.find((r) => r.file.includes('historia/evento-exemplo-01/'));
+  for (const [, v] of vizByType) {
+    const row = rows.find((r) => r.file === v.page);
+    if (plain && row) console.log(`    page with it ${v.page}: ${kb(row.raw)} raw, ${kb(row.gzip)} gzip; without ${plain.file}: ${kb(plain.raw)} raw, ${kb(plain.gzip)} gzip`);
+  }
+  if (total > VIZ_BUDGET) console.log(`  WARNING: interactive code is over the aim of ${kb(VIZ_BUDGET)} gzip for both components`);
+}
+if (vizLeaks.length) {
+  console.error(`Interactive code found on pages without an interactive: ${vizLeaks.slice(0, 5).join(', ')}`);
+  process.exit(1);
+}
 if (max.raw > BUDGET) {
   console.error('Over budget.');
   process.exit(1);

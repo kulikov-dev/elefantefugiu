@@ -1,0 +1,112 @@
+---
+// "Size of the nau" (docs/spec.md section 6): simple silhouettes in one scale, sizes in metres.
+// A two-way switch compares them side by side or overlaid. Without JavaScript the side-by-side drawing and the table are shown.
+import { t } from '../i18n';
+import baseCss from '../styles/viz-base.css?inline';
+import ownCss from '../styles/viz-ship.css?inline';
+import type { Lang } from '../i18n/routes';
+import type { ShipScaleData } from '../data/schemas';
+import { fill, formatNumber, ratioNumber, shipRatio, shipShapes, SHIP_PAD, SHIP_WIDTH } from '../lib/viz';
+
+interface Props {
+  lang: Lang;
+  data: ShipScaleData;
+  textLang?: string | undefined;
+}
+
+const { lang, data, textLang } = Astro.props;
+const { ships, rowHeight } = shipShapes(data.items);
+const title = t(lang, 'viz.ship_title');
+const m = (n: number) => formatNumber(n, lang);
+const size = (item: (typeof data.items)[number]) =>
+  item.height_m === undefined
+    ? fill(t(lang, 'viz.ship_size'), { length: m(item.length_m) })
+    : fill(t(lang, 'viz.ship_size_height'), { length: m(item.length_m), height: m(item.height_m) });
+const { big, small, ratio } = shipRatio(data.items);
+const ratioText = fill(t(lang, 'viz.ship_ratio'), { big: big.label[lang], small: small.label[lang], x: ratioNumber(ratio, lang) });
+const desc = [t(lang, 'viz.ship_scale'), ...data.items.map((it) => `${it.label[lang]}: ${size(it)}.`), ratioText].join(' ');
+// Overlaid: one row, every ship on the same baseline; side by side: one row each.
+const stackHeight = rowHeight * ships.length;
+const text = `${title}: ${data.caption[lang]}`;
+---
+<section class="viz" aria-labelledby="viz-title" data-interactive="ship_scale">
+  <!-- Styles travel with the component: only pages that render it get them (a <style> block of a component would join the stylesheet of every card page). -->
+  <style is:inline set:html={baseCss + ownCss}></style>
+  <h2 id="viz-title">{title}</h2>
+  {data.placeholder && <p class="notice viz__test">{t(lang, 'viz.test_numbers')}</p>}
+  <figure class="viz__figure" data-viz-ships data-mode="stack">
+    <svg class="viz__svg viz__svg--stack" viewBox={`0 0 ${SHIP_WIDTH} ${stackHeight}`} role="img" aria-labelledby="viz-stack-title viz-stack-desc" focusable="false">
+      <title id="viz-stack-title">{text}</title>
+      <desc id="viz-stack-desc">{desc}</desc>
+      {
+        ships.map((ship, i) => (
+          <g class={`ship tone-${data.items[i]!.tone}`} data-ship={ship.id} transform={`translate(${SHIP_PAD} ${rowHeight * (i + 1) - 6})`}>
+            <path class="ship__hull" d={ship.hull} />
+            <path class="ship__mast" d={ship.mast} />
+            <path class="ship__sail" d={ship.sail} />
+            <text class="ship__label" x="0" y={-Math.ceil(ship.height) - 6}>{`${data.items[i]!.label[lang]}, ${m(data.items[i]!.length_m)} m`}</text>
+          </g>
+        ))
+      }
+    </svg>
+    <svg class="viz__svg viz__svg--overlay" viewBox={`0 0 ${SHIP_WIDTH} ${rowHeight + 24}`} role="img" aria-labelledby="viz-overlay-title viz-overlay-desc" focusable="false">
+      <title id="viz-overlay-title">{text}</title>
+      <desc id="viz-overlay-desc">{desc}</desc>
+      {
+        ships.map((ship, i) => (
+          <g class={`ship ship--overlaid tone-${data.items[i]!.tone}`} data-ship={ship.id} transform={`translate(${SHIP_PAD} ${rowHeight + 12})`}>
+            <path class="ship__hull" d={ship.hull} />
+            <path class="ship__mast" d={ship.mast} />
+            <path class="ship__sail" d={ship.sail} />
+          </g>
+        ))
+      }
+    </svg>
+    <figcaption lang={textLang}>{data.caption[lang]}</figcaption>
+  </figure>
+
+  <!-- Only with JavaScript. A radio group: arrow keys, one tab stop, large touch targets. -->
+  <div class="viz__switch" role="radiogroup" aria-label={t(lang, 'viz.ship_view')} data-viz-switch hidden>
+    <label class="viz__option">
+      <input type="radio" name="viz-ship-view" value="stack" checked />
+      <span>{t(lang, 'viz.ship_stack')}</span>
+    </label>
+    <label class="viz__option">
+      <input type="radio" name="viz-ship-view" value="overlay" />
+      <span>{t(lang, 'viz.ship_overlay')}</span>
+    </label>
+  </div>
+
+  <p class="viz__scale">{t(lang, 'viz.ship_scale')}</p>
+  <div class="viz__table-wrap">
+    <table class="viz__table">
+      <caption class="visually-hidden">{text}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, 'viz.table_item')}</th>
+          <th scope="col">{t(lang, 'viz.table_length')}</th>
+          <th scope="col">{t(lang, 'viz.table_height')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          data.items.map((it) => (
+            <tr data-item={it.id} data-length={it.length_m} data-height={it.height_m ?? ''}>
+              <th scope="row" lang={textLang}>
+                <span class={`viz__swatch viz__swatch--solid tone-${it.tone}`} aria-hidden="true"></span>
+                {it.label[lang]}
+              </th>
+              <td>{m(it.length_m)}</td>
+              <td>{it.height_m === undefined ? '' : m(it.height_m)}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+  <p class="viz__ratio">{ratioText}</p>
+</section>
+
+<script>
+  import '../scripts/ship-scale';
+</script>

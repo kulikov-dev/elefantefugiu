@@ -90,15 +90,29 @@ image:
 interactive:
   type: army_dots
   data:
-    # PLACEHOLDER numbers, not historical data
-    people_per_dot: 100
+    # PLACEHOLDER numbers, invented, not historical data. Text is latin filler.
+    placeholder: true
+    caption:
+      pt: Pisces in aqua, legenda de teste.
+      en: Pisces in aqua, test caption.
+    estimate_note:
+      pt: Numeri fabulosi, secundum aestimationes.
+      en: Fabulous numbers, according to estimates.
     groups:
-      - name: { pt: Grupo de exemplo A, en: Example group A }
+      - id: group-a
+        label: { pt: Piscis parvus, en: Little fish }
         min: 1000
         max: 1500
-      - name: { pt: Grupo de exemplo B, en: Example group B }
+        unit_per_dot: 100
+        tone: blue
+        note: { pt: Nota de teste sobre os peixes pequenos., en: Test note about the little fish. }
+      - id: group-b
+        label: { pt: Piscis magnus, en: Big fish }
         min: 5000
         max: 7000
+        unit_per_dot: 100
+        tone: red
+        note: { pt: Nota de teste sobre os peixes grandes., en: Test note about the big fish. }
 reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready

@@ -131,7 +131,8 @@ for (const ev of events) {
     const dup = ids.filter((id, i) => ids.indexOf(id) !== i);
     if (dup.length) fail(`duplicate ids: ${[...new Set(dup)].join(', ')}`);
     for (const m of html.matchAll(/aria-labelledby="([^"]+)"/g)) {
-      if (!ids.includes(m[1])) fail(`aria-labelledby points to missing id "${m[1]}"`);
+      // aria-labelledby may name several ids separated by spaces
+      for (const id of m[1].split(/\s+/)) if (!ids.includes(id)) fail(`aria-labelledby points to missing id "${id}"`);
     }
     for (const m of html.matchAll(/<a\b[^>]*href="(https?:\/\/[^"]+)"[^>]*>/g)) {
       if (!/rel="[^"]*noopener/.test(m[0]) && !/href="https?:\/\/(localhost|[^"]*\.github\.io)/.test(m[0])) fail(`external link without rel="noopener": ${m[1]}`);

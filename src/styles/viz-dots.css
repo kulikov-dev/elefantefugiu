@@ -1,0 +1,81 @@
+/* ArmyDots. */
+.viz__svg {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: auto;
+  padding: var(--space-2);
+  border: var(--epoch-frame);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.dot--solid {
+  fill: var(--tone);
+}
+
+.dot--range {
+  fill: none;
+  stroke: var(--tone);
+  stroke-width: var(--viz-stroke);
+}
+
+.dot {
+  transition: opacity var(--transition);
+}
+
+/* While "Show one by one" runs, dots that have not appeared yet. */
+.dot--waiting {
+  opacity: 0;
+}
+
+.viz__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.viz__swatch {
+  display: inline-block;
+  width: var(--space-3);
+  height: var(--space-3);
+  margin-inline-end: var(--space-2);
+  border: var(--viz-stroke) solid var(--tone, var(--color-ink));
+  border-radius: var(--radius-pill);
+  vertical-align: middle;
+}
+
+.viz__swatch--solid {
+  background: var(--tone, var(--color-ink));
+}
+
+.viz__scale,
+.viz__estimate,
+.viz__ratio {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+.viz__estimate {
+  font-weight: 600;
+}
+
+.viz__play {
+  justify-self: start;
+  min-height: var(--touch-target-large);
+}
+
+/* Reduced motion: no animation at all, so no button either (the script also hides it). */
+@media (prefers-reduced-motion: reduce) {
+  .viz__play {
+    display: none;
+  }
+
+  .dot {
+    transition: none;
+  }
+}

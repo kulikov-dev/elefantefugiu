@@ -48,6 +48,10 @@ To test a project-site build with a base path:
 SITE_URL=https://USER.github.io BASE_PATH=/REPO npm run build
 ```
 
+## Interactives
+
+Two interactives live in the "More" layer of a card, driven by `interactive: {type, data}` in the event file (`army_dots`: "One against five", `ship_scale`: "Size of the nau"; schemas in `src/data/schemas.ts`). They are SVG and CSS without libraries, have a text and table alternative, and a static version without JavaScript. Their script and styles are inlined only into pages that show them (`npm run check:weight` prints their size and fails if the code reaches any other page). Browser checks: `scripts/qa/interactives.mjs`.
+
 ## Family mode
 
 A three-way switch in the header (everything / all ages / up to 12+). The choice is kept in `localStorage` (key `family`); without JavaScript the switch is not shown and every story is visible. The rules are in `src/lib/family.ts`; the cards are hidden by CSS (`src/styles/family.css`) from `data-family` on `<html>`, which a small inline script in `<head>` sets before the first paint. A card that the current mode hides still opens, after an intermediate screen ("Open" is for one visit). Browser checks: `scripts/qa/family.mjs`.

@@ -72,7 +72,6 @@
     "context": "Context",
     "official_site": "Official website",
     "accessed": "Accessed on",
-    "interactive_soon": "An interactive element will go here. Coming soon.",
     "share_copied": "Link copied.",
     "share_failed": "Could not copy. Link:",
     "epoch_nav": "Navigation within the epoch",
@@ -158,7 +157,7 @@
   "family": {
     "off": "Everything",
     "all": "All ages",
-    "twelve": "Up to 12+",
+    "twelve": "All ages and 12+",
     "status": "Family mode: {mode}.",
     "footer_hint": "Family mode needs JavaScript. Without it, every story stays visible.",
     "empty": "No stories here yet in this mode.",
@@ -171,5 +170,31 @@
     "question": "Open?",
     "open": "Open",
     "back": "Go back"
+  },
+  "viz": {
+    "army_title": "One against five",
+    "ship_title": "The size of the nau",
+    "test_numbers": "Test numbers, invented. Not historical data.",
+    "army_scale": "Each dot stands for {n} people. Filled dots show the lowest estimate; empty dots, the rest of the range up to the highest estimate.",
+    "army_play": "Show one by one",
+    "army_playing": "Showing…",
+    "army_ratio": "The group “{big}” has about {x} times as many people as the group “{small}” (comparing the middle of the estimates).",
+    "people_range": "from {min} to {max} people",
+    "dots_title": "{title}: {caption}",
+    "table_group": "Group",
+    "table_estimate": "Estimate",
+    "table_note": "Note",
+    "table_length": "Length (m)",
+    "table_height": "Height (m)",
+    "table_item": "Ship",
+    "ship_view": "View",
+    "ship_stack": "Side by side",
+    "ship_overlay": "Overlaid",
+    "ship_scale": "All ships are drawn to the same scale. Sizes in metres.",
+    "ship_size": "{length} m long",
+    "ship_size_height": "{length} m long, {height} m high",
+    "ship_ratio": "“{big}” is about {x} times as long as “{small}”.",
+    "legend_low": "lowest estimate",
+    "legend_range": "rest of the range"
   }
 }

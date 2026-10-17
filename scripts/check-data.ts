@@ -187,6 +187,42 @@ for (const { item: ev, file, stem } of events) {
   });
   if (new Set(ev.threads).size !== ev.threads.length) report('error', file, 'the same thread is listed twice', 'threads');
 
+  // interactive (stage 7a): both languages everywhere, one scale, sane numbers, test numbers marked
+  if (ev.interactive) {
+    const data = ev.interactive.data;
+    const at = (path: string) => `interactive.data.${path}`;
+    const both = (value: { pt: string; en: string }, path: string) => {
+      for (const lang of ['pt', 'en'] as const) {
+        if (isTodo(value[lang])) report('error', file, `text is empty or TODO (the interactive needs both languages)`, at(path), lang);
+      }
+    };
+    both(data.caption, 'caption');
+    if (ev.interactive.type === 'army_dots') {
+      both(ev.interactive.data.estimate_note, 'estimate_note');
+      const unit = ev.interactive.data.groups[0]?.unit_per_dot;
+      ev.interactive.data.groups.forEach((g, i) => {
+        both(g.label, `groups[${i}].label`);
+        both(g.note, `groups[${i}].note`);
+        if (g.max < g.min) report('error', file, `group "${g.id}": max (${g.max}) is below min (${g.min})`, at(`groups[${i}].max`));
+        if (g.unit_per_dot !== unit) report('error', file, `group "${g.id}": unit_per_dot ${g.unit_per_dot} differs from the first group (${unit}); the groups must share one scale`, at(`groups[${i}].unit_per_dot`));
+        if (Math.ceil(g.max / g.unit_per_dot) > 400) report('error', file, `group "${g.id}": ${Math.ceil(g.max / g.unit_per_dot)} dots is too many to draw (at most 400); raise unit_per_dot`, at(`groups[${i}].unit_per_dot`));
+        if (g.max / g.unit_per_dot < 1) report('error', file, `group "${g.id}": less than one dot; lower unit_per_dot`, at(`groups[${i}].unit_per_dot`));
+      });
+      if (new Set(ev.interactive.data.groups.map((g) => g.id)).size !== ev.interactive.data.groups.length) report('error', file, 'two groups share an id', at('groups'));
+    } else {
+      ev.interactive.data.items.forEach((it, i) => {
+        both(it.label, `items[${i}].label`);
+        if (it.height_m !== undefined && it.height_m > it.length_m) report('warn', file, `item "${it.id}": height ${it.height_m} m is more than its length ${it.length_m} m, check the numbers`, at(`items[${i}].height_m`));
+      });
+      if (new Set(ev.interactive.data.items.map((it) => it.id)).size !== ev.interactive.data.items.length) report('error', file, 'two items share an id', at('items'));
+      const lengths = ev.interactive.data.items.map((it) => it.length_m);
+      if (Math.max(...lengths) / Math.min(...lengths) > 60) report('error', file, 'the smallest item would be less than 1/60 of the largest in one scale and could not be drawn', at('items'));
+    }
+    // Numbers on a placeholder card are test numbers and must say so; a real card must not carry that mark.
+    if (ev.placeholder && data.placeholder !== true) report('error', file, 'the card is a placeholder, so the interactive must be marked "placeholder: true" (its numbers are test numbers)', at('placeholder'));
+    if (!ev.placeholder && data.placeholder === true) report('error', file, 'the interactive is marked as test numbers but the card is not a placeholder', at('placeholder'));
+  }
+
   // text length
   const limits = { hook: [0, 12], story: [40, 70], more: [0, 150] } as const;
   for (const field of ['hook', 'story', 'more'] as const) {
@@ -275,7 +311,7 @@ if (allowRaw !== 'true' && allowRaw !== 'false') {
   report('error', 'environment', `ALLOW_PLACEHOLDER must be "true" or "false", got "${process.env.ALLOW_PLACEHOLDER}"`);
 }
 const placeholders = [
-  ...events.filter((e) => e.item.placeholder).map((e) => e.file),
+  ...events.filter((e) => e.item.placeholder || e.item.interactive?.data.placeholder).map((e) => e.file),
   ...epochs.filter((e) => e.item.placeholder).map((e) => e.file),
   ...threads.filter((e) => e.item.placeholder).map((e) => e.file),
 ];

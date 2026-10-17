@@ -55,6 +55,7 @@ html[data-js] .no-js-only {
 
 .family-toggle {
   display: none;
+  max-width: 100%;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-pill);
   overflow: hidden;
@@ -67,6 +68,8 @@ html[data-js] .family-toggle {
 .family-toggle__option {
   position: relative;
   display: inline-flex;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 /* The real radio covers its label: a tap anywhere on the segment is a click on the radio. */
@@ -85,11 +88,20 @@ html[data-js] .family-toggle {
   align-items: center;
   justify-content: center;
   min-height: var(--touch-target);
-  padding-inline: var(--space-3);
+  padding-inline: var(--space-2);
   color: var(--color-ink);
   font-size: var(--text-sm);
   font-weight: 600;
-  white-space: nowrap;
+  line-height: 1.2;
+  text-align: center;
+}
+
+/* Wide enough: one line per label. On a narrow phone the longer labels wrap instead of pushing the page sideways. */
+@media (min-width: 30rem) {
+  .family-toggle__option span {
+    padding-inline: var(--space-3);
+    white-space: nowrap;
+  }
 }
 
 /* The chosen segment follows data-family, not :checked, so it is right from the first paint. */

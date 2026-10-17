@@ -1,5 +1,5 @@
 // Builds a variant of the site for family.mjs in /tmp/elefante-variant (the real data is not touched):
-// every card of the epoch estado-novo-e-25-de-abril gets min_age 16. The test data has no 16+ card and no epoch
+// every card of the epoch estado-novo-e-25-de-abril gets min_age 16, and the two cards with an interactive (02, 03) get min_age 12. The test data has no 16+ card and no epoch
 // that a mode leaves empty; this build has both, so the 16+ text of the gate, the empty-mode message and the
 // hidden sections can be checked in a browser.  Usage: node prepare-variant.mjs   (then DIST=/tmp/elefante-variant/dist node serve.mjs 4401)
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs';
@@ -18,6 +18,12 @@ let changed = 0;
 for (const name of readdirSync(dir)) {
   const file = join(dir, name);
   const text = readFileSync(file, 'utf8');
+  // The two cards with an interactive are 12+ here, so family mode "all" hides them (interactives.mjs checks the screen).
+  if (/^id: evento-exemplo-0[23]\s*$/m.test(text)) {
+    writeFileSync(file, text.replace(/^min_age:.*$/m, "min_age: '12'"));
+    changed += 1;
+    continue;
+  }
   if (!/^epoch: estado-novo-e-25-de-abril\s*$/m.test(text)) continue;
   writeFileSync(file, text.replace(/^min_age:.*$/m, "min_age: '16'"));
   changed += 1;

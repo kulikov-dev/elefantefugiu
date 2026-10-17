@@ -4,7 +4,9 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AgeBadge from '../components/AgeBadge.astro';
 import BridgeBlock from '../components/BridgeBlock.astro';
+import ArmyDots from '../components/ArmyDots.astro';
 import CardLayers from '../components/CardLayers.astro';
+import ShipScale from '../components/ShipScale.astro';
 import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
 import PagerNav from '../components/PagerNav.astro';
 import PlaceholderNotice from '../components/PlaceholderNotice.astro';
@@ -171,7 +173,8 @@ const textLang = event.placeholder ? 'la' : undefined;
             <p>{event.more[lang]}</p>
           </div>
         </section>
-        {event.interactive && <p class="notice" data-interactive={event.interactive.type}>{t(lang, 'card.interactive_soon')}</p>}
+        {event.interactive?.type === 'army_dots' && <ArmyDots lang={lang} data={event.interactive.data} textLang={textLang} />}
+        {event.interactive?.type === 'ship_scale' && <ShipScale lang={lang} data={event.interactive.data} textLang={textLang} />}
         <BridgeBlock lang={lang} bridge={event.bridge} cardId={event.id} />
         {event.sources.length > 0 && <SourceList lang={lang} sources={event.sources} />}
         {
