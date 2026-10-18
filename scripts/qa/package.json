@@ -11,7 +11,8 @@
     "controls": "node controls.mjs",
     "map": "node map.mjs",
     "family": "node family.mjs",
-    "interactives": "node interactives.mjs"
+    "interactives": "node interactives.mjs",
+    "theme": "node theme.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "131.0.1",

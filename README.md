@@ -34,6 +34,7 @@ The dev server runs at http://localhost:4321/. Open `/pt/` or `/en/`.
 | `npm run check:listings` | Built epoch and thread pages against the data: feed order, counters (all three family-mode numbers), sections, neighbouring epochs, every card reachable from a feed |
 | `npm run check:cards` | Built card pages: one `h1`, heading order, alt text, labels, sources, bridge, meta tags, hreflang, `noindex` only on placeholder cards; family mode: head script, toggle, intermediate screen, "Nearby" and previous / next per mode |
 | `npm run check:weight` | Weight of card, epoch and thread pages without images (HTML + CSS + JS, raw, gzip, brotli) against the 500 KB budget; also prints the size of the map code, which is counted apart |
+| `npm run check:contrast` | WCAG contrast of every colour pair in both themes and all epoch palettes (part of `npm run build`) |
 | `npm run check:tokens` | Colours, fonts and sizes must come from `src/styles/tokens.css`: fails on values written directly in components or stylesheets (1px hairlines and media queries are allowed) |
 | `npm test` | Unit tests: `tests/*.test.ts` (`node:test` with `tsx`: thread visibility, `min_age`, card helpers, filters, address parameters) and `tests/vitest/*.spec.ts` (Vitest: marker selection, map address state, tile settings) |
 | `npm run test:unit` | Only the Vitest tests |
@@ -47,6 +48,10 @@ To test a project-site build with a base path:
 ```sh
 SITE_URL=https://USER.github.io BASE_PATH=/REPO npm run build
 ```
+
+## Themes and fonts
+
+Light and dark themes and three epoch palettes (`docs/visual-direction.md`) are CSS tokens in `src/styles/tokens.css`, each colour a `light-dark()` pair; `<html data-theme>` (system, light, dark: header icon and footer radio group, key `theme` in `localStorage`) and `<html data-epoch>` select them, set before the first paint by the one inline script in `<head>`. Fonts (Playfair Display, Source Serif 4, Oswald) are self-hosted from Fontsource packages, Latin subset only, with metric-matched fallback faces (`src/styles/fonts.css`, `node scripts/font-fallbacks.mjs`); `docs/STATE.md` says how to add Cyrillic for `/ru/`. Browser checks: `scripts/qa/theme.mjs`.
 
 ## Interactives
 

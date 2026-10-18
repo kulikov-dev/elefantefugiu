@@ -90,6 +90,7 @@ const textLang = event.placeholder ? 'la' : undefined;
   description={description}
   preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageAlt: previewImageAlt }}
   noindex={event.placeholder}
+  epoch={epoch.id}
 >
   <article class="card" data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
     <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>

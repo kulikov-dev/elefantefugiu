@@ -79,3 +79,10 @@
     transition: none;
   }
 }
+
+/* The name of a group is drawn above its dots, so groups are told apart by words and position, not by colour alone. */
+.dots__label {
+  fill: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: var(--weight-strong);
+}

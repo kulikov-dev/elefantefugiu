@@ -1,0 +1,36 @@
+/*
+ * Label typography (docs/visual-direction.md section 5): Oswald for labels, menu, dates and numbers, upper case with a
+ * little letter spacing. One list here instead of a font rule in every component (the interactives carry their own, so their code stays out of the pages without them). The fonts themselves are in fonts.css,
+ * the family tokens in tokens.css.
+ */
+
+.site-nav a,
+.lang-switch,
+.family-toggle__option span,
+.theme-choice__label,
+.theme-choice__option span,
+.button,
+.thread,
+.chip,
+.tag,
+.age,
+.epoch-switch__item,
+.pager__dir,
+.view-switch button,
+.pane-switch button,
+.map-chip,
+.map__thread,
+.map__list-count,
+.map__sheet-toggle,
+.ecard__meta,
+.epoch__years,
+.map__preview-meta,
+.tile__count,
+.section__count,
+.crumbs,
+.site-footer__links a {
+  font-family: var(--font-label);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}

@@ -182,6 +182,43 @@ if (want('text')) {
   }
 }
 
+// ---------- 2b. Not told apart by colour alone ----------
+if (want('color')) {
+  for (const lang of ['pt', 'en']) {
+    const d = dotsCard.interactive.data;
+    const page = await newPage();
+    await page.goto(url(base, lang, dotsCard), { waitUntil: 'load' });
+    const g = await page.evaluate(() => ({
+      groups: [...document.querySelectorAll('.viz__svg g[data-group]')].map((el) => {
+        const ys = [...el.querySelectorAll('.dot')].map((c) => Number(c.getAttribute('cy')));
+        return { id: el.dataset.group, label: el.querySelector('.dots__label')?.textContent ?? '', labelY: Number(el.querySelector('.dots__label')?.getAttribute('y')), from: Math.min(...ys), to: Math.max(...ys) };
+      }),
+      solid: (() => { const c = getComputedStyle(document.querySelector('.dot--solid')); return { fill: c.fill, stroke: c.stroke }; })(),
+      range: (() => { const c = getComputedStyle(document.querySelector('.dot--range')); return { fill: c.fill, stroke: c.stroke, width: c.strokeWidth }; })(),
+    }));
+    const nfx = (n) => new Intl.NumberFormat(lang === 'pt' ? 'pt-PT' : 'en', { maximumFractionDigits: 1, useGrouping: true }).format(n);
+    ok(`dots (${lang}): every group is named inside the drawing, with its range`, d.groups.every((grp, i) => norm(g.groups[i].label).includes(norm(grp.label[lang])) && norm(g.groups[i].label).includes(norm(nfx(grp.min))) && norm(g.groups[i].label).includes(norm(nfx(grp.max)))), g.groups.map((x) => x.label).join(' | '));
+    ok(`dots (${lang}): the groups sit in separate bands, each under its own name (position, not colour, tells them apart)`, g.groups.every((x, i) => x.labelY < x.from && (i === 0 || g.groups[i - 1].to < x.labelY)), JSON.stringify(g.groups.map((x) => [x.labelY, x.from, x.to])));
+    ok(`dots (${lang}): filled and empty dots differ in form (fill versus outline only)`, g.solid.fill !== 'none' && g.solid.stroke === 'none' && g.range.fill === 'none' && g.range.stroke !== 'none' && parseFloat(g.range.width) >= 1, JSON.stringify([g.solid, g.range]));
+    // greyscale: take colour away and the text and position still carry the meaning
+    await page.addStyleTag({ content: 'html { filter: grayscale(1); }' });
+    ok(`dots (${lang}): in greyscale the labels are still there`, await page.evaluate(() => document.querySelectorAll('.dots__label').length === 2));
+    await page.close();
+
+    const s = shipCard.interactive.data;
+    const ship = await newPage();
+    await ship.goto(url(base, lang, shipCard), { waitUntil: 'load' });
+    await tap(ship, '.viz__option:nth-child(2)');
+    const o = await ship.evaluate(() => ({
+      keys: [...document.querySelectorAll('.viz__svg--overlay .ship__key')].map((k) => ({ text: k.querySelector('text').textContent, dash: k.querySelector('line').getAttribute('stroke-dasharray') ?? 'solid' })),
+      hulls: [...document.querySelectorAll('.viz__svg--overlay .ship__hull')].map((h) => h.getAttribute('stroke-dasharray') ?? 'solid'),
+    }));
+    ok(`ships (${lang}): the overlaid view has a legend with every ship and its length in metres`, s.items.every((it, i) => o.keys[i]?.text === `${it.label[lang]}, ${nf(it.length_m, lang)} m`), JSON.stringify(o.keys));
+    ok(`ships (${lang}): overlaid outlines differ by line pattern, and the legend repeats each pattern`, new Set(o.hulls).size === o.hulls.length && o.hulls.every((h, i) => h === o.keys[i].dash), JSON.stringify(o.hulls));
+    await ship.close();
+  }
+}
+
 // ---------- 3. Reduced motion ----------
 if (want('motion')) {
   const calm = await newPage({ reduce: true });

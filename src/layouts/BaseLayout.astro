@@ -1,5 +1,5 @@
 ---
-import { THEME_COLOR } from '../lib/theme';
+import { THEME_COLORS } from '../lib/theme';
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -26,9 +26,11 @@ interface Props {
     imageAlt?: string;
   };
   noindex?: boolean;
+  /** Epoch id: puts <html data-epoch> so the palette of that epoch applies (epoch pages and the cards of the epoch). */
+  epoch?: string;
 }
 
-const { lang, title, pageKey, alternates: alternatesProp, description: descriptionProp, preview, noindex = false } = Astro.props;
+const { lang, title, pageKey, alternates: alternatesProp, description: descriptionProp, preview, noindex = false, epoch } = Astro.props;
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
 const description = descriptionProp ?? t(lang, 'site.description');
@@ -44,15 +46,18 @@ const OG_LOCALE: Record<Lang, string> = { pt: 'pt_PT', en: 'en_GB' };
 const otherLang = LANGS.find((l) => l !== lang)!;
 ---
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-epoch={epoch}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Before the first paint: data-js, data-family, data-vista, data-fio on <html> (no flash of the wrong state). -->
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content={THEME_COLORS.light} media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content={THEME_COLORS.dark} media="(prefers-color-scheme: dark)" />
+    <!-- Before the first paint: data-js, data-family, data-theme, data-vista, data-fio on <html> (no flash of the wrong state).
+         After the theme-color tags: with an explicit theme it sets them. -->
     <script is:inline set:html={headScript(allThreads.map((th) => th.id))} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content={THEME_COLOR} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
     {canonical && <link rel="canonical" href={canonical} />}

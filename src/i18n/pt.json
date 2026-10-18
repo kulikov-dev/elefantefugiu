@@ -196,5 +196,13 @@
     "ship_ratio": "«{big}» é cerca de {x} vezes mais comprido do que «{small}».",
     "legend_low": "estimativa mais baixa",
     "legend_range": "resto do intervalo"
+  },
+  "theme": {
+    "label": "Tema",
+    "system": "Sistema",
+    "light": "Claro",
+    "dark": "Escuro",
+    "button": "Tema: {value}. Mudar de tema.",
+    "status": "Tema: {value}."
   }
 }

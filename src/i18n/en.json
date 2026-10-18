@@ -196,5 +196,13 @@
     "ship_ratio": "“{big}” is about {x} times as long as “{small}”.",
     "legend_low": "lowest estimate",
     "legend_range": "rest of the range"
+  },
+  "theme": {
+    "label": "Theme",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark",
+    "button": "Theme: {value}. Change theme.",
+    "status": "Theme: {value}."
   }
 }

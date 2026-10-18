@@ -1,32 +1,56 @@
 :root {
-  /* Colour: cool chalk surface, ink text, azulejo-blue accent. */
-  --color-bg: #f6f8fa;
-  --color-surface: #ffffff;
-  --color-ink: #15202b;
-  --color-ink-muted: #47535f;
-  --color-line: #d3dbe3;
-  --color-accent: #1f4e8c;
-  --color-accent-strong: #163a69;
-  --color-on-accent: #ffffff;
-  --color-focus: #0a58ca;
-  --color-overlay: rgb(255 255 255 / 0.96);
-  --color-surface-hover: #f1f5f9;
-  --color-accent-tint: #e8eff8;
-  /* Heavy-topic marker (frame, text on tint above 7:1). */
-  --color-heavy-border: #7a2e0e;
-  --color-heavy-bg: #fdeee6;
-  --color-heavy-ink: #5e2108;
-  /* Card labels: text on tinted background, contrast above 7:1 for each pair. */
-  --color-label-documented-bg: #e6f4ea;
-  --color-label-documented-ink: #14532d;
-  --color-label-legend-bg: #fdf0d5;
-  --color-label-legend-ink: #5c3b00;
-  --color-label-debated-bg: #f1e6f6;
-  --color-label-debated-ink: #522463;
+  /* Colour (docs/visual-direction.md sections 2 and 3). Every colour is light-dark(light, dark): one list, both themes.
+     <html data-theme> holds the reader's choice (light, dark, system; the head script sets it before the first paint);
+     color-scheme below decides which side of light-dark() applies, so "system" follows the device with no script at all. */
+  color-scheme: light dark;
+
+  /* Theme: paper and ink (section 2 table, values as given). */
+  --color-bg: light-dark(#f6f1e7, #14110e);
+  --color-surface: light-dark(#fbf8f1, #1d1914);
+  --color-text: light-dark(#1f1b16, #f1e9da);
+  --color-muted: light-dark(#5b5348, #b9ad9a);
+  --color-border: light-dark(#ddd3c2, #3a332b); /* a divider, not a control edge */
+  /* The edge of a control (button, chip, switch): at least 3:1 on every background. */
+  --color-border-strong: light-dark(#80766a, #8f8474);
+  /* The names used by the components before the design pass. */
+  --color-ink: var(--color-text);
+  --color-ink-muted: var(--color-muted);
+  --color-line: var(--color-border);
+
+  /* Accent of the pages outside an epoch (home, map, about); epoch pages and cards take their own below. */
+  --color-accent: light-dark(#9a3f22, #e58a68);
+  --color-accent-strong: light-dark(#7a2f17, #f2a98c);
+  --color-on-accent: light-dark(#ffffff, #14110e);
+  --color-focus: light-dark(#0a58ca, #8fb8ff);
+  --color-overlay: light-dark(rgb(251 248 241 / 0.96), rgb(29 25 20 / 0.96));
+  --color-surface-hover: light-dark(#f1eadb, #26211b);
+  /* A neutral wash for blocks inside an epoch (the same under every epoch palette). */
+  --color-accent-tint: light-dark(#efe7d6, #221d17);
+
+  /* Heavy-topic marker (frame, text on tint). */
+  --color-heavy-border: light-dark(#7a2e0e, #e58a68);
+  --color-heavy-bg: light-dark(#fdeee6, #2e1a12);
+  --color-heavy-ink: light-dark(#5e2108, #f6cdbb);
+  /* Card labels: text on tinted background. */
+  --color-label-documented-bg: light-dark(#e6f4ea, #14281c);
+  --color-label-documented-ink: light-dark(#14532d, #bfe6cb);
+  --color-label-legend-bg: light-dark(#fdf0d5, #2e2410);
+  --color-label-legend-ink: light-dark(#5c3b00, #f2d9a0);
+  --color-label-debated-bg: light-dark(#f1e6f6, #261a2d);
+  --color-label-debated-ink: light-dark(#522463, #ddc4ea);
   /* "Test text" notice. */
-  --color-notice-border: #6b5200;
-  --color-notice-bg: #fff4c2;
-  --color-notice-ink: #3d2f00;
+  --color-notice-border: light-dark(#6b5200, #e0b24a);
+  --color-notice-bg: light-dark(#fff4c2, #2b2410);
+  --color-notice-ink: light-dark(#3d2f00, #f5e3a3);
+
+  /* Epoch palette (section 3). On a page outside an epoch these point at the base colours; a rule at the end of
+     this file sets them for each epoch (<html data-epoch>). Names: primary, accent, alt, tint (background tone). */
+  --epoch-primary: var(--color-accent);
+  --epoch-primary-strong: var(--color-accent-strong);
+  --epoch-accent: var(--color-accent);
+  --epoch-alt: var(--color-muted);
+  --epoch-tint: var(--color-bg);
+  --epoch-bg: var(--epoch-tint);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -38,9 +62,13 @@
   --space-7: 3rem;
   --space-8: 4.5rem;
 
-  /* Typography: system fonts only. */
-  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-heading: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  /* Typography (docs/visual-direction.md section 5): Source Serif 4 for text, Playfair Display for headings from 24 px,
+     Oswald for labels. Each web family is followed by its metric-matched fallback face (fonts.css) and system fonts. */
+  --font-body: 'Source Serif 4', 'Source Serif 4 Fallback', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Playfair Display', 'Playfair Display Fallback', Georgia, 'Times New Roman', serif;
+  --font-label: 'Oswald', 'Oswald Fallback', 'Arial Narrow', Arial, sans-serif;
+  --letter-label: 0.06em;
+  --weight-strong: 600;
   --text-sm: 0.875rem;
   --text-base: 1.0625rem;
   --text-lg: 1.25rem;
@@ -58,7 +86,7 @@
   --radius-pill: 999px;
 
   /* Elevation and layers */
-  --shadow-raised: 0 1px 4px rgb(21 32 43 / 0.3);
+  --shadow-raised: light-dark(0 1px 4px rgb(31 27 22 / 0.3), 0 1px 4px rgb(0 0 0 / 0.6));
   --z-map-overlay: 1100; /* above Leaflet's own controls (1000) */
 
   /* Touch targets */
@@ -84,6 +112,7 @@
   --size-dot-lg: 1rem;
   --size-step: 2rem;
   --size-logo: 2.25rem;
+  --size-icon: 1.5rem;
   --size-thumb: 5.5rem;
 
   /* Timeline */
@@ -113,11 +142,13 @@
   --epoch-map-width: clamp(20rem, 38%, 30rem);
 
   /* Interactives (stage 7a): group colours (the `tone` key of the data), outline width, widest drawing, reveal */
-  --viz-tone-blue: #1f4e8c;
-  --viz-tone-red: #a1360f;
-  --viz-tone-green: #2d6a3e;
-  --viz-tone-ochre: #8a5a00;
-  --viz-tone-grey: #4b5864;
+  /* Group colours of the interactives: the five hues of the epoch palettes (section 3), fixed by name so that "blue"
+     stays blue on every epoch page. Graphics, at least 3:1 on the surface and on the water wash. */
+  --viz-tone-blue: light-dark(#2b5f9e, #7fa9e0);
+  --viz-tone-red: light-dark(#a4262c, #e06a6f);
+  --viz-tone-green: light-dark(#2f6f3e, #6fbf86);
+  --viz-tone-ochre: light-dark(#7f5b0e, #e0b24a);
+  --viz-tone-grey: light-dark(#4a4a48, #b8b6b0);
   --viz-stroke: 2px;
   --viz-max-width: 40rem;
   --viz-water: var(--color-accent-tint);
@@ -126,9 +157,53 @@
   /* Motion */
   --transition: 150ms ease;
 
-  /* Epoch theme placeholders (real values come in stage 6). */
-  --epoch-bg: var(--color-bg);
-  --epoch-accent: var(--color-accent);
+  /* Epoch decoration: heading face, weight and the frame of a card. */
   --epoch-heading-font: var(--font-heading);
-  --epoch-frame: 1px solid var(--color-line);
+  --epoch-heading-weight: 700;
+  --epoch-frame: 1px solid var(--color-border);
+}
+
+/* ---- Epoch palettes (docs/visual-direction.md section 3). Set on <html data-epoch="..."> of the epoch page and of the
+   cards of that epoch. Link and button colour follow the epoch's primary. Values of the table, except where the
+   contrast check (npm run check:contrast) asked for a darker accent: marked "adjusted". ---- */
+
+:root[data-epoch='avis-e-descobrimentos'] {
+  --epoch-primary: light-dark(#0f5c73, #5fb3c9);
+  --epoch-primary-strong: light-dark(#0a4254, #8fd0e2);
+  --epoch-accent: light-dark(#7f5b0e, #e0b24a); /* adjusted: #8a6410 gave 4.4:1 on the tint */
+  --epoch-alt: light-dark(#a4262c, #e06a6f);
+  --epoch-tint: light-dark(#efe9da, #0e2430);
+  --epoch-heading-weight: 600;
+}
+
+:root[data-epoch='pombal-e-terramoto'] {
+  --epoch-primary: light-dark(#a9482a, #e58a68);
+  --epoch-primary-strong: light-dark(#85361d, #f2a98c);
+  --epoch-accent: light-dark(#85590f, #e8b84f); /* adjusted: #8f6111 gave 4.4:1 on the tint */
+  --epoch-alt: light-dark(#2b5f9e, #7fa9e0);
+  --epoch-tint: light-dark(#f3e6d3, #241a14);
+  --epoch-heading-weight: 800;
+}
+
+:root[data-epoch='estado-novo-e-25-de-abril'] {
+  --epoch-primary: light-dark(#c41e3a, #ff6b81);
+  --epoch-primary-strong: light-dark(#9b1730, #ff9aab);
+  --epoch-accent: light-dark(#2f6f3e, #6fbf86);
+  --epoch-alt: light-dark(#4a4a48, #b8b6b0);
+  --epoch-tint: light-dark(#ece9e3, #181817);
+  --epoch-heading-weight: 700;
+}
+
+:root[data-epoch] {
+  --color-accent: var(--epoch-primary);
+  --color-accent-strong: var(--epoch-primary-strong);
+}
+
+/* The choice of theme: "system" (or no script) follows the device; light and dark force one side. */
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }

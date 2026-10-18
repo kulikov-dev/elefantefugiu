@@ -47,3 +47,9 @@ figcaption {
   text-align: start;
   vertical-align: top;
 }
+
+.viz__table th {
+  font-family: var(--font-label);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}

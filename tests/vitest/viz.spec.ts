@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DOT_CELL, DOT_COLUMNS, dotCounts, fill, formatNumber, groupRatio, layoutDots, ratioNumber, shipRatio, shipShapes, silhouette, SHIP_WIDTH } from '../../src/lib/viz';
+import { DOT_CELL, DOT_COLUMNS, DOT_LABEL_ROW, dotCounts, fill, formatNumber, groupRatio, layoutDots, ratioNumber, shipRatio, shipShapes, silhouette, SHIP_WIDTH } from '../../src/lib/viz';
 
 const a = { id: 'a', min: 1000, max: 1500, unit_per_dot: 100 };
 const b = { id: 'b', min: 5000, max: 7000, unit_per_dot: 100 };
@@ -32,10 +32,12 @@ describe('dot layout', () => {
     expect(new Set(all.map((d) => `${d.x},${d.y}`)).size).toBe(all.length);
     expect(layout.width).toBe(DOT_COLUMNS * DOT_CELL);
   });
-  it('leaves an empty row between groups', () => {
+  it('leaves an empty row and a row for the name between groups, and the name sits above its own dots', () => {
     const lastOfA = Math.max(...layout.groups[0]!.dots.map((d) => d.y));
     const firstOfB = Math.min(...layout.groups[1]!.dots.map((d) => d.y));
-    expect(firstOfB - lastOfA).toBe(2 * DOT_CELL);
+    expect(firstOfB - lastOfA).toBe(2 * DOT_CELL + DOT_LABEL_ROW);
+    for (const g of layout.groups) expect(g.labelY).toBeLessThan(Math.min(...g.dots.map((d) => d.y)));
+    expect(layout.groups[0]!.labelY).toBeGreaterThan(0);
   });
   it('compares groups by the middle of the estimates', () => {
     const { big, small, ratio } = groupRatio([a, b]);

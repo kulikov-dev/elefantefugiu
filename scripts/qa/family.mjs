@@ -162,7 +162,8 @@ if (want('toggle')) {
   await page.goto(`${base}/en/`, { waitUntil: 'load' });
   ok('toggle: the mode is the same on the other language', (await page.evaluate(() => document.documentElement.dataset.family)) === 'all');
   const en = await text(page, '.family-toggle__option span');
-  ok('toggle: labels from en.json', same(en, ['Everything', 'All ages', 'All ages and 12+']), en.join(' | '));
+  // The labels are drawn in upper case (typography.css), so innerText is upper case: compare ignoring case.
+  ok('toggle: labels from en.json', same(en.map((x) => x.toLowerCase()), ['everything', 'all ages', 'all ages and 12+']), en.join(' | '));
   await page.close();
   for (const lang of ['pt', 'en']) {
     for (const width of [360, 320]) {

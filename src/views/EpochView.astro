@@ -70,10 +70,11 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   description={epoch.theme?.[lang]}
   preview={{ title: epoch.name[lang], image: epoch.fallback_image }}
   noindex={noindex}
+  epoch={epoch.id}
 >
   <!-- ?fio= applied before the first paint (the head script sets data-fio on <html>). -->
   <style slot="head" is:inline set:html={feedFilterCss(site.threads.map((th) => th.id))} />
-  <div class="epoch" data-epoch data-pane="feed">
+  <div class="epoch" data-epoch-page data-pane="feed">
     <header class="epoch__header">
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">{epochYearsText(epoch, lang)}</p>
@@ -225,7 +226,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
   .epoch__theme {
     max-width: var(--measure);
-    font-family: var(--epoch-heading-font);
+    font-family: var(--font-body);
     font-size: var(--text-xl);
     font-style: italic;
   }
@@ -245,7 +246,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   .view-switch {
     display: inline-flex;
     align-self: flex-start;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-pill);
     overflow: hidden;
     background: var(--color-surface);
@@ -316,7 +317,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
   .pane-switch {
     display: inline-flex;
-    border: 1px solid var(--color-line);
+    border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-pill);
     overflow: hidden;
     background: var(--color-surface);

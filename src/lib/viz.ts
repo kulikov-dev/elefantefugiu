@@ -50,27 +50,36 @@ export interface PlacedDot {
 export interface DotLayout {
   width: number;
   height: number;
-  groups: { id: string; dots: PlacedDot[] }[];
+  groups: { id: string; /** Baseline of the group's name drawn above its dots. */ labelY: number; dots: PlacedDot[] }[];
 }
 
-/** Rows of dots, group under group, one empty row between groups; every group has the same dot size and columns (one scale). */
+/** Height reserved above each group for its name, in viewBox units. */
+export const DOT_LABEL_ROW = 16;
+
+/**
+ * Group under group: a row for the group's name, then rows of dots, one empty row between groups. Every group has the same
+ * dot size and number of columns (one scale). The name is part of the drawing, so the groups differ by position and
+ * words, not by colour alone.
+ */
 export function layoutDots(groups: readonly DotGroupInput[], columns = DOT_COLUMNS): DotLayout {
-  let row = 0;
+  let top = 0;
   const placed = groups.map((group, index) => {
-    if (index > 0) row += 1;
+    if (index > 0) top += DOT_CELL;
+    const labelY = top + DOT_LABEL_ROW - 4;
+    top += DOT_LABEL_ROW;
     const { solid, total } = dotCounts(group);
     const dots: PlacedDot[] = [];
     for (let i = 0; i < total; i += 1) {
       dots.push({
         x: (i % columns) * DOT_CELL + DOT_CELL / 2,
-        y: (row + Math.floor(i / columns)) * DOT_CELL + DOT_CELL / 2,
+        y: top + Math.floor(i / columns) * DOT_CELL + DOT_CELL / 2,
         kind: i < solid ? 'solid' : 'range',
       });
     }
-    row += Math.ceil(total / columns);
-    return { id: group.id, dots };
+    top += Math.ceil(total / columns) * DOT_CELL;
+    return { id: group.id, labelY, dots };
   });
-  return { width: columns * DOT_CELL, height: row * DOT_CELL, groups: placed };
+  return { width: columns * DOT_CELL, height: top, groups: placed };
 }
 
 /** Largest and smallest group by the middle of their estimates, and how many times the first holds the second. */

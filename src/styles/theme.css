@@ -1,0 +1,106 @@
+/*
+ * Theme choice (docs/visual-direction.md section 2). <html data-theme> is set before the first paint ("system", "light",
+ * "dark"); tokens.css turns it into color-scheme. The header button and the footer radio group only exist with JavaScript.
+ */
+
+/* ---- header button: one icon per theme, chosen by data-theme ---- */
+
+.theme-button {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+html[data-js] .theme-button {
+  display: inline-flex;
+}
+
+.theme-button:hover {
+  background: var(--color-surface-hover);
+}
+
+.theme-button__icon {
+  display: none;
+  width: var(--size-icon);
+  height: var(--size-icon);
+}
+
+.theme-button__icon--system,
+html[data-theme='system'] .theme-button__icon--system,
+html[data-theme='light'] .theme-button__icon--light,
+html[data-theme='dark'] .theme-button__icon--dark {
+  display: block;
+}
+
+html[data-theme='light'] .theme-button__icon--system,
+html[data-theme='dark'] .theme-button__icon--system {
+  display: none;
+}
+
+/* ---- footer radio group ---- */
+
+.theme-choice {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin-block: var(--space-3);
+}
+
+html[data-js] .theme-choice {
+  display: flex;
+}
+
+.theme-choice__options {
+  display: inline-flex;
+  max-width: 100%;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.theme-choice__option {
+  position: relative;
+  display: inline-flex;
+  flex: 1 1 auto;
+}
+
+.theme-choice__option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.theme-choice__option span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-target);
+  padding-inline: var(--space-4);
+  font-weight: 600;
+}
+
+/* The chosen segment follows data-theme (right from the first paint), not :checked. */
+html[data-theme='system'] .theme-choice__option[data-value='system'] span,
+html[data-theme='light'] .theme-choice__option[data-value='light'] span,
+html[data-theme='dark'] .theme-choice__option[data-value='dark'] span {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.theme-choice__option input:focus-visible + span {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: calc(var(--ring-width) * -1);
+}

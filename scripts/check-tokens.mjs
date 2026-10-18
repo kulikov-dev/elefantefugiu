@@ -28,7 +28,8 @@ function cssParts(file, text) {
 }
 
 for (const file of walk(src)) {
-  if (!/\.(css|astro)$/.test(file) || file.endsWith('tokens.css')) continue;
+  // fonts.css holds the @font-face rules: it is where the font families are named (like tokens.css for colours and sizes).
+  if (!/\.(css|astro)$/.test(file) || file.endsWith('tokens.css') || file.endsWith('fonts.css')) continue;
   const text = readFileSync(file, 'utf8');
   for (const { css, offset } of cssParts(file, text)) {
     css.split('\n').forEach((raw, i) => {

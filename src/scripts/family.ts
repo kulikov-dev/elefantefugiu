@@ -1,28 +1,14 @@
 // Family mode toggle. The mode is a value on <html data-family> ("off", "all", "12"); the CSS does the hiding.
-// The choice is kept in localStorage ("family"), every read and write inside try/catch: with the storage blocked
-// the toggle still works on this page, it is just not remembered.
+// The choice is kept in localStorage ("family", see pref.ts): with the storage blocked the toggle still works on this page, it is just not remembered.
 import { FAMILY_KEY, normalizeFamilyMode, type FamilyMode } from '../lib/family';
 import { currentFamilyMode } from './family-mode';
+import { readPref, writePref } from './pref';
 
 const html = document.documentElement;
 const inputs = [...document.querySelectorAll<HTMLInputElement>('[data-family-toggle] input[type="radio"]')];
 const status = document.querySelector<HTMLElement>('[data-family-status]');
 
-const readStored = (): FamilyMode => {
-  try {
-    return normalizeFamilyMode(localStorage.getItem(FAMILY_KEY));
-  } catch {
-    return 'off';
-  }
-};
-
-const writeStored = (mode: FamilyMode) => {
-  try {
-    localStorage.setItem(FAMILY_KEY, mode);
-  } catch {
-    // Storage blocked: the mode lasts until the page is left.
-  }
-};
+const readStored = (): FamilyMode => normalizeFamilyMode(readPref(FAMILY_KEY));
 
 const syncInputs = (mode: FamilyMode) => {
   for (const input of inputs) input.checked = input.value === mode;
@@ -38,7 +24,7 @@ function apply(mode: FamilyMode, options: { persist: boolean; announce: boolean 
   const changed = mode !== currentFamilyMode();
   html.dataset.family = mode;
   syncInputs(mode);
-  if (options.persist) writeStored(mode);
+  if (options.persist) writePref(FAMILY_KEY, mode);
   if (options.announce) announce(mode);
   if (changed) document.dispatchEvent(new CustomEvent('family:change', { detail: { mode } }));
 }

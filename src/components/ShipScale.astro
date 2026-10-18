@@ -27,6 +27,10 @@ const ratioText = fill(t(lang, 'viz.ship_ratio'), { big: big.label[lang], small:
 const desc = [t(lang, 'viz.ship_scale'), ...data.items.map((it) => `${it.label[lang]}: ${size(it)}.`), ratioText].join(' ');
 // Overlaid: one row, every ship on the same baseline; side by side: one row each.
 const stackHeight = rowHeight * ships.length;
+// Overlaid outlines differ by line pattern as well as colour; the legend names each pattern.
+const DASH = [undefined, '6 4', '2 3', '10 3 2 3'];
+const LEGEND_ROW = 18;
+const legendHeight = LEGEND_ROW * ships.length + 8;
 const text = `${title}: ${data.caption[lang]}`;
 ---
 <section class="viz" aria-labelledby="viz-title" data-interactive="ship_scale">
@@ -49,13 +53,21 @@ const text = `${title}: ${data.caption[lang]}`;
         ))
       }
     </svg>
-    <svg class="viz__svg viz__svg--overlay" viewBox={`0 0 ${SHIP_WIDTH} ${rowHeight + 24}`} role="img" aria-labelledby="viz-overlay-title viz-overlay-desc" focusable="false">
+    <svg class="viz__svg viz__svg--overlay" viewBox={`0 0 ${SHIP_WIDTH} ${legendHeight + rowHeight + 24}`} role="img" aria-labelledby="viz-overlay-title viz-overlay-desc" focusable="false">
       <title id="viz-overlay-title">{text}</title>
       <desc id="viz-overlay-desc">{desc}</desc>
       {
+        data.items.map((item, i) => (
+          <g class={`ship__key tone-${item.tone}`} transform={`translate(${SHIP_PAD} ${LEGEND_ROW * (i + 1)})`}>
+            <line x1="0" x2="26" y1="-4" y2="-4" stroke-dasharray={DASH[i % DASH.length]} />
+            <text x="34" y="0" lang={textLang}>{`${item.label[lang]}, ${m(item.length_m)} m`}</text>
+          </g>
+        ))
+      }
+      {
         ships.map((ship, i) => (
-          <g class={`ship ship--overlaid tone-${data.items[i]!.tone}`} data-ship={ship.id} transform={`translate(${SHIP_PAD} ${rowHeight + 12})`}>
-            <path class="ship__hull" d={ship.hull} />
+          <g class={`ship ship--overlaid tone-${data.items[i]!.tone}`} data-ship={ship.id} transform={`translate(${SHIP_PAD} ${legendHeight + rowHeight + 12})`}>
+            <path class="ship__hull" d={ship.hull} stroke-dasharray={DASH[i % DASH.length]} />
             <path class="ship__mast" d={ship.mast} />
             <path class="ship__sail" d={ship.sail} />
           </g>

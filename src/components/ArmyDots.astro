@@ -46,6 +46,7 @@ const desc = [scaleText, ...data.groups.map((g) => `${g.label[lang]}: ${range(g)
       {
         layout.groups.map((group, g) => (
           <g class={`tone-${data.groups[g]!.tone}`} data-group={group.id}>
+            <text class="dots__label" x="0" y={group.labelY} font-size="10" lang={textLang}>{`${data.groups[g]!.label[lang]}: ${range(data.groups[g]!)}`}</text>
             {group.dots.map((dot) => (
               <circle class={`dot dot--${dot.kind}`} cx={dot.x} cy={dot.y} r={DOT_RADIUS} />
             ))}

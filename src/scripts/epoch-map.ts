@@ -6,7 +6,7 @@
 //   map:ready, map:unavailable  (from the map)
 // Without JavaScript none of this runs and the page is the plain feed.
 
-const page = document.querySelector<HTMLElement>('[data-epoch]');
+const page = document.querySelector<HTMLElement>('[data-epoch-page]');
 const feed = document.querySelector<HTMLElement>('ol.feed');
 const aside = document.querySelector<HTMLElement>('[data-epoch-aside]');
 const mapRoot = document.querySelector<HTMLElement>('[data-map]');

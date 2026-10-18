@@ -41,7 +41,13 @@ for (const ev of events) {
 
     // ----- family mode: head script, gate, Nearby and previous / next per mode -----
     const head = full.match(/<head>[\s\S]*?<\/head>/)?.[0] ?? '';
-    if (!/<script>\(function\(\)\{var e=document\.documentElement[\s\S]*?data-family[\s\S]*?<\/script>/.test(head)) fail('the head script that sets data-family is missing from <head>');
+    if (!/<script>\(function\(\)\{[\s\S]*?data-family[\s\S]*?data-theme[\s\S]*?<\/script>/.test(head)) fail('the head script that sets data-family and data-theme is missing from <head>');
+    if (!/<meta name="color-scheme" content="light dark"/.test(head)) fail('<meta name="color-scheme" content="light dark"> is missing');
+    const themeColors = [...head.matchAll(/<meta name="theme-color" content="(#[0-9a-f]{6})" media="\(prefers-color-scheme: (light|dark)\)"/g)].map((m) => m[2]).sort().join(',');
+    if (themeColors !== 'dark,light') fail('two theme-color tags with media (light and dark) are expected');
+    if (head.indexOf('name="theme-color"') > head.indexOf('data-family')) fail('the theme-color tags must come before the head script (it sets them for an explicit theme)');
+    if (!/data-theme-toggle/.test(html) || !/role="radiogroup"[^>]*data-theme-choice/.test(html)) fail('theme: the header button and the footer radio group are expected');
+    if (!/<html[^>]*lang="[a-z]{2}"[^>]*data-epoch="[a-z0-9-]+"/.test(full)) fail('the card page needs <html data-epoch="...">');
     if (head.indexOf('data-family') > head.indexOf('rel="stylesheet"') && head.includes('rel="stylesheet"')) fail('the head script must come before the stylesheets (no flash)');
     if (!/role="radiogroup"[^>]*aria-label="[^"]+"/.test(html) || (html.match(/<input type="radio" name="family"/g) ?? []).length !== 3) fail('family toggle: a radio group with an aria-label and three radios is expected');
     const article = html.match(/<article class="card"([^>]*)>/)?.[1] ?? '';

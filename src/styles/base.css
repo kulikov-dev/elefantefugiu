@@ -13,9 +13,22 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--epoch-heading-font);
+  font-family: var(--font-body);
+  font-weight: var(--weight-strong);
   line-height: var(--leading-heading);
   text-wrap: balance;
+}
+
+/* Playfair Display only for headings from 24 px (its thin strokes get lost below that): h1 and h2 are always larger. */
+h1,
+h2 {
+  font-family: var(--epoch-heading-font);
+  font-weight: var(--epoch-heading-weight);
+}
+
+strong,
+b {
+  font-weight: var(--weight-strong);
 }
 
 h1 {

@@ -49,7 +49,7 @@
 
 .viz__switch {
   justify-self: start;
-  border: 1px solid var(--color-line);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -74,6 +74,9 @@
 }
 
 .viz__option span {
+  font-family: var(--font-label);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -107,4 +110,16 @@
 .viz__ratio {
   margin: 0;
   max-width: var(--measure);
+}
+
+/* Legend of the overlaid view: a sample of the line pattern and the name with its length in metres. */
+.ship__key line {
+  stroke: var(--tone);
+  stroke-width: var(--viz-stroke);
+}
+
+.ship__key text {
+  fill: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--viz-label-size);
 }

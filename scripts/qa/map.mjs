@@ -645,8 +645,8 @@ if (want('epoch')) {
   {
     const p = await newPage({ width: 1280, height: 900, tiles: 'fail' });
     await p.goto(EPOCH, { waitUntil: 'networkidle0' });
-    await p.waitForFunction(() => document.querySelector('[data-epoch]')?.dataset.map === 'unavailable', { timeout: 20000 }).catch(() => {});
-    const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('.panes').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li').length }));
+    await p.waitForFunction(() => document.querySelector('[data-epoch-page]')?.dataset.map === 'unavailable', { timeout: 20000 }).catch(() => {});
+    const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch-page]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('.panes').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li').length }));
     ok('epoch, tiles fail: the map and the pane switch go away, the feed stays and gets the width', s.map === 'unavailable' && !s.aside && !s.panes && s.cards === 8 && s.feed > s.container * 0.9, JSON.stringify(s));
     await p.close();
   }
