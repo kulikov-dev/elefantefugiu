@@ -16,9 +16,12 @@ place:
 bridge:
   name: Local de exemplo 12
   address: Rua de exemplo 12
-  lat: 40.2053
-  lon: -8.4083
+  lat: 40.2078
+  lon: -8.4262
   url: https://example.com/local-12
+  note:
+    pt: Piscis in aqua natat, nota de teste do local 12.
+    en: Piscis in aqua natat, test note of place 12.
 threads:
   - poder-e-revolta
 importance: 3

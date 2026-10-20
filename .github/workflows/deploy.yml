@@ -31,7 +31,20 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v7
-      - name: Install, build, and upload your site output
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Type check (astro check)
+        run: npx astro check
+      - name: Unit tests (Vitest)
+        run: npx vitest run
+      # The action installs again and runs npm run build: i18n, contrast, node:test, data checks, the build and the
+      # link, card, listing, weight and token checks. The browser suites (npm run qa) are run by hand, they need Chromium.
+      - name: Build and upload your site output
         uses: withastro/action@v6
 
   deploy:

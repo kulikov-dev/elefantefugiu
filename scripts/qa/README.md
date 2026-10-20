@@ -17,6 +17,8 @@ npm run behave                     # card page: PASS / FAIL list, exit code 1 on
 npm run listings                   # epoch and thread pages: PASS / FAIL list, exit code 1 on failure
 npm run controls                   # stage 4b: epoch switcher, filter, grid, home, Surprise me
 npm run map                        # stage 5: map page, links to it, map on epoch pages (several minutes; sections: node map.mjs nojs tiles limit filters preview layout link epoch weight)
+npm run all                        # every suite and one table (from the project root: npm run qa)
+npm run bridge                     # stage 5c: marker preview, bridge caption, Como chegar, bridge block
 npm run theme                      # stage 7b-1: theme, palettes, fonts, header (sections: flash keyboard blocked palette fonts header)
 npm run interactives                # stage 7a: the two interactives (sections: keyboard text motion nojs code modes; family needs the variant build)
 npm run family                     # stage 6: family mode (sections: node family.mjs toggle lists recount nearby gate surprise map flash blocked)

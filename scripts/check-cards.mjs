@@ -47,6 +47,8 @@ for (const ev of events) {
     if (themeColors !== 'dark,light') fail('two theme-color tags with media (light and dark) are expected');
     if (head.indexOf('name="theme-color"') > head.indexOf('data-family')) fail('the theme-color tags must come before the head script (it sets them for an explicit theme)');
     if (!/data-theme-toggle/.test(html) || !/role="radiogroup"[^>]*data-theme-choice/.test(html)) fail('theme: the header button and the footer radio group are expected');
+    // Fonts are not preloaded (decision after 7b-1: first paint first; font-display swap and the fallback faces do the rest).
+    if (/<link[^>]*rel="preload"[^>]*as="font"/.test(head)) fail('no font preload is expected');
     if (!/<html[^>]*lang="[a-z]{2}"[^>]*data-epoch="[a-z0-9-]+"/.test(full)) fail('the card page needs <html data-epoch="...">');
     if (head.indexOf('data-family') > head.indexOf('rel="stylesheet"') && head.includes('rel="stylesheet"')) fail('the head script must come before the stylesheets (no flash)');
     if (!/role="radiogroup"[^>]*aria-label="[^"]+"/.test(html) || (html.match(/<input type="radio" name="family"/g) ?? []).length !== 3) fail('family toggle: a radio group with an aria-label and three radios is expected');
@@ -176,6 +178,25 @@ for (const ev of events) {
     const mapLink = bridgeBlock.match(/href="([^"]*\/(?:mapa|map)\/[^"]*)"/)?.[1];
     if (!mapLink) fail('"Open on map" link is missing');
     else if (!new RegExp(`/${lang === 'pt' ? 'mapa' : 'map'}/\\?id=${ev.id}$`).test(mapLink)) fail(`"Open on map" link should end with /?id=${ev.id}, got ${mapLink}`);
+    // The bridge block: name, address, the note of the language, and three links.
+    const plain = (x) => x.replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
+    const bridgeText = plain(bridgeBlock);
+    for (const [what, want] of [['name', ev.bridge.name], ['address', ev.bridge.address], ['note', ev.bridge.note[lang]]]) if (!bridgeText.includes(want)) fail(`bridge ${what} "${want}" is not in the bridge block`);
+    const labels = { pt: { map: 'Ver no mapa', how: 'Como chegar', site: 'Sítio oficial' }, en: { map: 'Open on map', how: 'Get directions', site: 'Official website' } }[lang];
+    const links = [...bridgeBlock.matchAll(/<a ([^>]*)>([\s\S]*?)<\/a>/g)].map((m) => ({ attrs: m[1], text: plain(m[2]) }));
+    const how = links.find((l) => l.text === labels.how);
+    const r5 = (n) => Number(n.toFixed(5));
+    const wantOsm = `https://www.openstreetmap.org/?mlat=${r5(ev.bridge.lat)}&mlon=${r5(ev.bridge.lon)}#map=17/${r5(ev.bridge.lat)}/${r5(ev.bridge.lon)}`;
+    if (!links.some((l) => l.text === labels.map)) fail(`the "${labels.map}" button is missing`);
+    if (!how) fail(`the "${labels.how}" button is missing`);
+    else {
+      if (!how.attrs.includes(`href="${wantOsm.replace(/&/g, '&amp;')}"`)) fail(`"${labels.how}" should link to ${wantOsm}`);
+      if (!/rel="noopener"/.test(how.attrs)) fail(`"${labels.how}" needs rel="noopener"`);
+      if (!/data-directions/.test(how.attrs) || !how.attrs.includes(`data-lat="${ev.bridge.lat}"`) || !how.attrs.includes(`data-lon="${ev.bridge.lon}"`)) fail(`"${labels.how}" must carry data-directions, data-lat and data-lon of the bridge`);
+    }
+    const site = links.find((l) => l.text === labels.site);
+    if (!site || !site.attrs.includes(`href="${ev.bridge.url}"`) || !/rel="noopener"/.test(site.attrs)) fail(`the "${labels.site}" link to ${ev.bridge.url} with rel="noopener" is missing`);
+    if (/google\.|maps\.apple|bing\.com\/maps|waze|geo:/i.test(bridgeBlock)) fail('the bridge block must not name Google or another service, and the geo: link is made by the script on Android only');
     const sources = html.match(/<section class="sources"[\s\S]*?<\/section>/)?.[0] ?? '';
     if ((sources.match(/<li\b/g) ?? []).length !== ev.sources.length) fail(`expected ${ev.sources.length} sources in the list`);
     if (!has(/<p class="checked"/)) fail('check date is missing');

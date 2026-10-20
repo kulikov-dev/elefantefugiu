@@ -146,9 +146,29 @@
   margin-block-start: var(--space-2);
 }
 
-.map__preview-meta {
+.map__preview-today {
   color: var(--color-ink-muted);
   font-size: var(--text-sm);
+  font-family: var(--font-label);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
+.map__preview-bridge {
+  padding-inline-end: var(--touch-target);
+  font-weight: var(--weight-strong);
+}
+
+.map__preview-address {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.map__preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
 }
 
 .map__preview-title {
@@ -499,6 +519,29 @@
   scale: var(--map-marker-selected-scale);
   outline: var(--map-marker-border) solid var(--color-ink);
   outline-offset: var(--map-marker-border);
+}
+
+/* The name of the bridge, next to the selected marker only. */
+.mk__caption {
+  position: absolute;
+  inset-inline-start: 100%;
+  inset-block-start: 50%;
+  translate: var(--space-2) -50%;
+  max-width: var(--map-caption-width);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-strong);
+  line-height: 1.25;
+  white-space: normal;
+  pointer-events: none;
+}
+
+.mk__caption:empty {
+  display: none;
 }
 
 .mk:focus {

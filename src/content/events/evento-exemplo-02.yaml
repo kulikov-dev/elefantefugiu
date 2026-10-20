@@ -19,6 +19,9 @@ bridge:
   lat: 39.6597
   lon: -8.823
   url: https://example.com/local-02
+  note:
+    pt: Piscis in aqua natat, nota de teste do local 02.
+    en: Piscis in aqua natat, test note of place 02.
 threads:
   - poder-e-revolta
 importance: 3

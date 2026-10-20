@@ -1,27 +1,39 @@
 ---
-// "Bridge to today": the place that can be visited now, with links to the map and the official site.
+// "Bridge to today": the place that can be visited now: name, address, a one-sentence note, links to the map, to
+// directions and to the official site. "Como chegar" is an OpenStreetMap link for everyone; the script of this block
+// swaps it for a geo: link on Android only (src/lib/directions.ts; the inline script is src/lib/directions-script.ts).
 import { t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
+import { osmLink } from '../lib/directions';
+import { directionsScript } from '../lib/directions-script';
 import { mapLinkFor } from '../lib/map-data';
 
 interface Props {
   lang: Lang;
-  bridge: { name: string; address: string; lat: number; lon: number; url: string };
-  /** Id of the card: "Open on the map" centres the map on it and opens its preview. */
+  bridge: { name: string; address: string; lat: number; lon: number; url: string; note: { pt: string; en: string } };
+  /** Id of the card: "See on the map" centres the map on it and opens its preview. */
   cardId: string;
+  /** Language tag of the note when it differs from the page (placeholder filler is Latin). */
+  textLang?: string | undefined;
 }
 
-const { lang, bridge, cardId } = Astro.props;
+const { lang, bridge, cardId, textLang } = Astro.props;
 const external = /^https?:\/\/\S+$/.test(bridge.url);
 // The map page reads ?id= : it centres on that card and opens its preview.
 const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
 ---
-<section class="bridge" aria-labelledby="bridge-title">
+<section class="bridge" aria-labelledby="bridge-title" data-bridge>
   <h2 id="bridge-title">{t(lang, 'ui.bridge')}</h2>
   <p class="bridge__name">{bridge.name}</p>
   <address class="bridge__address">{bridge.address}</address>
+  <p class="bridge__note" lang={textLang}>{bridge.note[lang]}</p>
   <ul class="bridge__links">
     <li><a class="button button--secondary" href={mapHref}>{t(lang, 'ui.open_on_map')}</a></li>
+    <li>
+      <a class="button button--secondary" href={osmLink(bridge.lat, bridge.lon)} rel="noopener" data-directions data-lat={bridge.lat} data-lon={bridge.lon} data-label={bridge.name}>
+        {t(lang, 'ui.directions')}
+      </a>
+    </li>
     {
       external && (
         <li>
@@ -33,6 +45,8 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
     }
   </ul>
 </section>
+
+<script is:inline set:html={directionsScript()} />
 
 <style>
   .bridge {
@@ -49,12 +63,17 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
 
   .bridge__name {
     margin-block-start: var(--space-2);
-    font-weight: 600;
+    font-weight: var(--weight-strong);
   }
 
   .bridge__address {
     font-style: normal;
     color: var(--color-ink-muted);
+  }
+
+  .bridge__note {
+    margin-block-start: var(--space-2);
+    max-width: var(--measure);
   }
 
   .bridge__links {

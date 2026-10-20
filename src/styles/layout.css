@@ -4,13 +4,36 @@
   border-block-end: 1px solid var(--color-line);
 }
 
+/* Phone: three short rows, logo with the language switch, the family-mode toggle, the menu (about 140 px; the theme
+   button lives in the footer). On wide screens (logo, menu, language and family mode need about 1000 px) everything sits in one row. */
 .site-header__inner {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'brand lang'
+    'family family'
+    'nav nav';
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-1) var(--space-4);
-  padding-block: var(--space-2);
+  gap: 0 var(--space-2);
+  padding-block: var(--space-1);
+}
+
+.site-header__inner > .brand {
+  grid-area: brand;
+}
+
+.site-header__tools {
+  display: contents;
+}
+
+.site-header__inner .lang-switch {
+  grid-area: lang;
+  justify-self: end;
+}
+
+.site-header__inner .family-toggle {
+  grid-area: family;
+  justify-self: start;
 }
 
 .brand {
@@ -19,9 +42,11 @@
   gap: var(--space-2);
   min-height: var(--touch-target);
   color: var(--color-ink);
+  /* The wordmark, not a heading: Playfair is allowed here below 24 px because it is bold and short. */
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
+  font-size: var(--text-brand);
   font-weight: 700;
+  white-space: nowrap;
   text-decoration: none;
 }
 
@@ -36,8 +61,7 @@
 }
 
 .site-nav {
-  order: 3;
-  flex-basis: 100%;
+  grid-area: nav;
 }
 
 .site-nav ul {
@@ -51,7 +75,8 @@
   display: inline-flex;
   align-items: center;
   min-height: var(--touch-target);
-  padding-inline: var(--space-3);
+  padding-inline: var(--space-2);
+  font-size: var(--text-sm);
   color: var(--color-ink);
   text-decoration: none;
   border-block-end: var(--ring-width) solid transparent;
@@ -64,13 +89,6 @@
 .site-nav a[aria-current='page'] {
   border-block-end-color: var(--color-accent);
   font-weight: 600;
-}
-
-.site-header__tools {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-2) var(--space-3);
 }
 
 .lang-switch {
@@ -102,14 +120,28 @@
   outline-offset: calc(var(--ring-width) * -1);
 }
 
-@media (min-width: 40rem) {
+@media (min-width: 64rem) {
   .site-header__inner {
+    display: flex;
     flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-2);
+  }
+
+  .site-header__tools {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .site-nav a {
+    padding-inline: var(--space-3);
+    font-size: var(--text-base);
   }
 
   .site-nav {
     order: 0;
-    flex-basis: auto;
     margin-inline-end: auto;
     margin-inline-start: var(--space-5);
   }

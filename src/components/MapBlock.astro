@@ -69,11 +69,16 @@ const config = {
       <button type="button" class="map__preview-close" data-preview-close aria-label={t(lang, 'map.preview_close')}>
         <span aria-hidden="true">&times;</span>
       </button>
-      <p class="map__preview-meta" data-preview-meta></p>
+      <p class="map__preview-today">{t(lang, 'map.today_here')}</p>
+      <p class="map__preview-bridge" data-preview-bridge-name></p>
+      <p class="map__preview-address" data-preview-bridge-address></p>
       <h2 class="map__preview-title" id="map-preview-title" data-preview-title></h2>
       <ul class="map__preview-threads" data-preview-threads aria-label={t(lang, 'card.tags')}></ul>
       <p class="map__preview-hook" data-preview-hook></p>
-      <a class="button" data-preview-open href="#">{t(lang, 'map.preview_open')}</a>
+      <div class="map__preview-actions">
+        <a class="button" data-preview-open href="#">{t(lang, 'map.preview_open')}</a>
+        <a class="button button--secondary" data-preview-directions href="#" rel="noopener">{t(lang, 'ui.directions')}</a>
+      </div>
     </div>
   </div>
 

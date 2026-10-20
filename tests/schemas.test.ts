@@ -83,3 +83,25 @@ test('ship_scale: a valid record; height is optional; two items at least', () =>
   assert.equal(shipScaleData.safeParse({ items: [{ ...items[0], length_m: -1 }, items[1]], caption: tx }).success, false);
   assert.equal(shipScaleData.safeParse({ items, caption: tx, extra: 1 }).success, false);
 });
+
+// ---- place and bridge (stage 5c) ----
+import { eventSchema } from '../src/data/schemas';
+import { readFileSync as readFile } from 'node:fs';
+import { parse as parseYaml } from 'yaml';
+
+const sample = () => parseYaml(readFile(new URL('../src/content/events/evento-exemplo-05.yaml', import.meta.url), 'utf8'), { schema: 'core', customTags: ['timestamp'] });
+
+test('place: any coordinates in the world are accepted (Goa), only impossible values are not', () => {
+  const ok = sample();
+  assert.equal(eventSchema.safeParse(ok).success, true);
+  assert.equal(eventSchema.safeParse({ ...ok, place: { name: 'Pólo', lat: -90, lon: 180 } }).success, true);
+  assert.equal(eventSchema.safeParse({ ...ok, place: { name: 'x', lat: 91, lon: 0 } }).success, false);
+  assert.equal(eventSchema.safeParse({ ...ok, place: { name: 'x', lat: 0, lon: 181 } }).success, false);
+});
+
+test('bridge: needs a note in both languages', () => {
+  const ok = sample();
+  assert.equal(eventSchema.safeParse({ ...ok, bridge: { ...ok.bridge, note: undefined } }).success, false);
+  assert.equal(eventSchema.safeParse({ ...ok, bridge: { ...ok.bridge, note: { pt: 'a' } } }).success, false);
+  assert.equal(eventSchema.safeParse({ ...ok, bridge: { ...ok.bridge, extra: 1 } }).success, false);
+});

@@ -16,9 +16,12 @@ place:
 bridge:
   name: Local de exemplo 03
   address: Rua de exemplo 3
-  lat: 37.0106
-  lon: -8.9447
+  lat: 37.0233
+  lon: -8.9969
   url: https://example.com/local-03
+  note:
+    pt: Piscis in aqua natat, nota de teste do local 03.
+    en: Piscis in aqua natat, test note of place 03.
 threads:
   - mar
 importance: 3

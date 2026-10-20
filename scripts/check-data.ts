@@ -241,11 +241,22 @@ for (const { item: ev, file, stem } of events) {
     }
   }
 
-  // coordinates
-  for (const [field, p] of [['place', ev.place], ['bridge', ev.bridge]] as const) {
-    if (!inPortugal(p.lat, p.lon)) {
-      report('error', file, `lat/lon (${p.lat}, ${p.lon}) is outside Portugal and nearby islands`, field);
+  // coordinates: the place may be anywhere in the world (the schema checks the ranges), the bridge only in Portugal and the islands
+  if (!inPortugal(ev.bridge.lat, ev.bridge.lon)) {
+    report('error', file, `lat/lon (${ev.bridge.lat}, ${ev.bridge.lon}) is outside Portugal and nearby islands (the bridge is a place to visit)`, 'bridge');
+  }
+
+  // bridge.note: one sentence, up to 20 words, both languages
+  for (const lang of ['pt', 'en'] as const) {
+    const note = ev.bridge.note[lang];
+    if (isTodo(note)) {
+      report('error', file, 'is empty or TODO (both languages are needed)', 'bridge.note', lang);
+      continue;
     }
+    const words = note.trim().split(/\s+/).length;
+    if (words > 20) report('error', file, `${words} words, at most 20`, 'bridge.note', lang);
+    // one sentence: no full stop, question or exclamation mark followed by more text
+    if (/[.!?…]\s+\S/.test(note.trim())) report('error', file, 'more than one sentence', 'bridge.note', lang);
   }
 
   // image
@@ -349,8 +360,9 @@ const km = (lat: number, lon: number) => {
   const a = Math.sin(r(lat - LISBON.lat) / 2) ** 2 + Math.cos(r(LISBON.lat)) * Math.cos(r(lat)) * Math.sin(r(lon - LISBON.lon) / 2) ** 2;
   return 12742 * Math.asin(Math.sqrt(a));
 };
-const near = evs.filter((e) => km(e.place.lat, e.place.lon) <= 10);
-const far = evs.filter((e) => km(e.place.lat, e.place.lon) > 10);
+// The map marks the bridge, so the spread of the markers is counted by the bridge.
+const near = evs.filter((e) => km(e.bridge.lat, e.bridge.lon) <= 10);
+const far = evs.filter((e) => km(e.bridge.lat, e.bridge.lon) > 10);
 
 console.log('\nData summary');
 console.log(`  epochs: ${epochs.length}, threads: ${threads.length}, featured: ${featured.map((f) => f.item.id).join(', ') || '-'}`);
@@ -370,7 +382,7 @@ const labels = count(evs.map((e) => e.label));
 console.log(`  by label: documented ${labels.get('documented') ?? 0}, legend ${labels.get('legend') ?? 0}, debated ${labels.get('debated') ?? 0}`);
 const inter = count(evs.flatMap((e) => (e.interactive ? [e.interactive.type] : [])));
 console.log(`  images: ${evs.filter((e) => e.image).length} with, ${evs.filter((e) => !e.image).length} without; interactives: army_dots ${inter.get('army_dots') ?? 0}, ship_scale ${inter.get('ship_scale') ?? 0}`);
-console.log(`  within 10 km of Lisbon: ${near.length}; elsewhere: ${far.length} (${[...new Set(far.map((e) => e.place.name))].join(', ')})`);
+console.log(`  within 10 km of Lisbon: ${near.length}; elsewhere: ${far.length} (${[...new Set(far.map((e) => e.place.name))].join(', ')}); place outside Portugal: ${evs.filter((e) => !inPortugal(e.place.lat, e.place.lon)).map((e) => e.place.name).join(', ') || 'none'}`);
 console.log(`  placeholder entries: ${placeholders.length} (ALLOW_PLACEHOLDER=${allowRaw})`);
 console.log(`\n${errors.length} error(s), ${warnings.length} warning(s)`);
 if (errors.length > 0) process.exit(1);

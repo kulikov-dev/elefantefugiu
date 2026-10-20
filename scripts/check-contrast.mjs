@@ -5,8 +5,17 @@
 // --color-border is a divider, not the edge of a control, so it is listed for information only (no threshold);
 // controls use --color-border-strong.
 import { readFileSync } from 'node:fs';
+import { withBlock } from './sync-token-fallbacks.mjs';
 
-const css = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
+const source = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
+// The generated @supports-not block (light values for browsers without light-dark()) must match the light-dark() colours.
+if (withBlock(source) !== source) {
+  console.error('FAIL  the light-dark() fallback block in src/styles/tokens.css is out of date: run  node scripts/sync-token-fallbacks.mjs');
+  process.exit(1);
+}
+// The block holds the light values only; it is not a theme of its own, so it is left out of the contrast table.
+const fallbackAt = source.indexOf('/* BEGIN generated');
+const css = (fallbackAt < 0 ? source : source.slice(0, fallbackAt)).replace(/\/\*[\s\S]*?\*\//g, '');
 
 // ---- parse the rules ----
 const rules = [...css.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(([, selector, body]) => ({

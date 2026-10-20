@@ -4,11 +4,14 @@ import * as L from 'leaflet';
 // ?url: the file is emitted but NOT linked into pages; it is added below, only when the map starts.
 import leafletCss from 'leaflet/dist/leaflet.css?url';
 import { parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
+import { directionsHref } from '../lib/directions';
 import { isVisibleInMode } from '../lib/family';
 import { boundsAround, inBounds, selectMarkers, type Bounds, type MapCard } from '../lib/markers';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 interface CardInfo extends MapCard {
+  bridgeName: string;
+  bridgeAddress: string;
   minAge: string;
   sensitive: boolean;
   title: string;
@@ -140,7 +143,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     L.divIcon({
       className: `mk ${cls}`,
       iconSize: null as unknown as L.PointExpression,
-      html: `<span class="mk__shape" aria-hidden="true">${text}</span><span class="visually-hidden"></span>`,
+      html: `<span class="mk__shape" aria-hidden="true">${text}</span><span class="mk__caption" aria-hidden="true"></span><span class="visually-hidden"></span>`,
     });
 
   const addLayer = (key: string, lat: number, lon: number, cls: string, label: string, text: string, onActivate: () => void) => {
@@ -199,7 +202,12 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         marker.remove();
         layers.delete(key);
       } else {
-        marker.getElement()?.classList.toggle('mk--selected', key === state.id);
+        const el = marker.getElement();
+        const selected = key === state.id;
+        el?.classList.toggle('mk--selected', selected);
+        // The bridge's name is written next to the selected marker only (clusters have none).
+        const caption = el?.querySelector('.mk__caption');
+        if (caption) caption.textContent = selected ? (byId.get(key)?.bridgeName ?? '') : '';
       }
     }
     // A removed marker would drop keyboard focus to the page; keep it on the map instead.
@@ -257,10 +265,13 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   // ---- preview -----------------------------------------------------------------------------------------------
 
   const openPreview = (card: CardInfo, moveFocus: boolean) => {
-    $('[data-preview-meta]').textContent = card.meta;
+    $('[data-preview-bridge-name]').textContent = card.bridgeName;
+    $('[data-preview-bridge-address]').textContent = card.bridgeAddress;
     $('[data-preview-title]').textContent = card.title;
     $('[data-preview-hook]').textContent = card.hook;
     $<HTMLAnchorElement>('[data-preview-open]').href = card.href;
+    // "How to get there": OpenStreetMap for everyone, a geo: link on Android only (src/lib/directions.ts).
+    $<HTMLAnchorElement>('[data-preview-directions]').href = directionsHref(card.lat, card.lon, card.bridgeName, navigator.userAgent);
     const threadList = $('[data-preview-threads]');
     threadList.replaceChildren(
       ...card.threads

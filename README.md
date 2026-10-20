@@ -49,6 +49,10 @@ To test a project-site build with a base path:
 SITE_URL=https://USER.github.io BASE_PATH=/REPO npm run build
 ```
 
+## Browser checks
+
+`npm run qa` runs every browser suite (Chromium, `scripts/qa`) against the finished build and prints one table (suite, checks, result); `npm run qa -- --list` shows the suites, `npm run qa -- <suite>` runs one, `--resume` continues an interrupted run, `BASE_PATH=/elefante npm run qa` runs against a build made with that base path. See `scripts/qa/README.md`.
+
 ## Themes and fonts
 
 Light and dark themes and three epoch palettes (`docs/visual-direction.md`) are CSS tokens in `src/styles/tokens.css`, each colour a `light-dark()` pair; `<html data-theme>` (system, light, dark: header icon and footer radio group, key `theme` in `localStorage`) and `<html data-epoch>` select them, set before the first paint by the one inline script in `<head>`. Fonts (Playfair Display, Source Serif 4, Oswald) are self-hosted from Fontsource packages, Latin subset only, with metric-matched fallback faces (`src/styles/fonts.css`, `node scripts/font-fallbacks.mjs`); `docs/STATE.md` says how to add Cyrillic for `/ru/`. Browser checks: `scripts/qa/theme.mjs`.

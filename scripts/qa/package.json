@@ -12,7 +12,9 @@
     "map": "node map.mjs",
     "family": "node family.mjs",
     "interactives": "node interactives.mjs",
-    "theme": "node theme.mjs"
+    "theme": "node theme.mjs",
+    "bridge": "node bridge.mjs",
+    "all": "node run.mjs"
   },
   "dependencies": {
     "@sparticuz/chromium": "131.0.1",

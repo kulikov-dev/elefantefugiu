@@ -104,3 +104,20 @@ html[data-theme='dark'] .theme-choice__option[data-value='dark'] span {
   outline: var(--ring-width) solid var(--color-focus);
   outline-offset: calc(var(--ring-width) * -1);
 }
+
+/* Footer: the header icon and the radio group side by side. */
+.footer-theme {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block: var(--space-3);
+}
+
+html[data-js] .footer-theme {
+  display: flex;
+}
+
+.footer-theme .theme-choice {
+  margin-block: 0;
+}

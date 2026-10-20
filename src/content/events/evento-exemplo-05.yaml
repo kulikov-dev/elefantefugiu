@@ -10,15 +10,18 @@ epoch: avis-e-descobrimentos
 level: frame
 year: 1495
 place:
-  name: "Lisboa (Belém)"
-  lat: 38.6979
-  lon: -9.206
+  name: "Goa (Velha Goa)"
+  lat: 15.5009
+  lon: 73.9116
 bridge:
   name: Local de exemplo 05
   address: Rua de exemplo 5
   lat: 38.6999
   lon: -9.204
   url: https://example.com/local-05
+  note:
+    pt: Piscis in aqua natat, nota de teste do local 05.
+    en: Piscis in aqua natat, test note of place 05.
 threads:
   - mar
   - comida-e-vinho

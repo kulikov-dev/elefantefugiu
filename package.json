@@ -22,7 +22,8 @@
     "check:listings": "node scripts/check-listings.mjs",
     "test:unit": "vitest run",
     "check:tokens": "node scripts/check-tokens.mjs",
-    "check:contrast": "node scripts/check-contrast.mjs"
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "qa": "node scripts/qa/run.mjs"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

@@ -104,7 +104,8 @@
     "view_timeline": "Cronologia",
     "view_grid": "Grelha",
     "sources": "Fontes",
-    "checked_on": "Verificado em"
+    "checked_on": "Verificado em",
+    "directions": "Como chegar"
   },
   "epoch": {
     "chips_label": "Fios desta época",
@@ -152,7 +153,8 @@
     "loading": "A carregar o mapa…",
     "unavailable": "Mapa indisponível, aqui está a lista.",
     "preview_open": "Abrir",
-    "preview_close": "Fechar pré-visualização"
+    "preview_close": "Fechar pré-visualização",
+    "today_here": "Hoje, aqui"
   },
   "family": {
     "off": "Tudo",

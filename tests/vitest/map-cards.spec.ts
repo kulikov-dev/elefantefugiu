@@ -12,7 +12,7 @@ const event = (over: Record<string, unknown>) =>
     level: 'frame',
     year: 1498,
     place: { name: 'Lisboa', lat: 38.7, lon: -9.1 },
-    bridge: { name: 'x', address: 'y', lat: 1, lon: 2, url: 'https://x.y' },
+    bridge: { name: 'Mosteiro', address: 'Praça do Império', lat: 38.69, lon: -9.2, url: 'https://x.y', note: { pt: 'n', en: 'n' } },
     threads: ['mar', 'natureza'],
     importance: 3,
     min_age: 'all',
@@ -22,12 +22,14 @@ const event = (over: Record<string, unknown>) =>
   }) as unknown as EventData;
 
 describe('toMapCards', () => {
-  it('takes coordinates from place, not from the bridge, and text in the page language', () => {
+  it('takes coordinates from the bridge, not from the place, and text in the page language', () => {
     const [c] = toMapCards([event({})], 'en', (e) => `/en/story/${e.slug.en}/`);
     expect(c).toEqual({
       id: 'e1',
-      lat: 38.7,
-      lon: -9.1,
+      lat: 38.69,
+      lon: -9.2,
+      bridgeName: 'Mosteiro',
+      bridgeAddress: 'Praça do Império',
       importance: 3,
       threads: ['mar', 'natureza'],
       epoch: 'a',
@@ -38,6 +40,18 @@ describe('toMapCards', () => {
       minAge: 'all',
       sensitive: false,
     });
+  });
+
+  it('puts the marker at the bridge in Portugal when the place is abroad (Goa)', () => {
+    const goa = event({ place: { name: 'Goa', lat: 15.5009, lon: 73.9116 } });
+    const [c] = toMapCards([goa], 'pt', () => '/x/');
+    expect([c!.lat, c!.lon]).toEqual([38.69, -9.2]);
+    expect(c!.meta).toBe('1498 · Goa');
+  });
+
+  it('never reads the place coordinates (they may be anywhere in the world)', () => {
+    const [near, far] = toMapCards([event({ place: { name: 'a', lat: 38.7, lon: -9.1 } }), event({ id: 'e2', place: { name: 'b', lat: -33.9, lon: 151.2 } })], 'pt', () => '/x/');
+    expect([near!.lat, near!.lon]).toEqual([far!.lat, far!.lon]);
   });
 
   it('carries the age label and the heavy-topic flag, normalised', () => {

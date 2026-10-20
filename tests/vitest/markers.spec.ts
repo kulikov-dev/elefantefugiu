@@ -365,8 +365,8 @@ function realCards(): MapCard[] {
     .filter((e) => e.status === 'ready')
     .map((e) => ({
       id: e.id as string,
-      lat: e.place.lat as number,
-      lon: e.place.lon as number,
+      lat: e.bridge.lat as number,
+      lon: e.bridge.lon as number,
       importance: e.importance as 1 | 2 | 3,
       threads: e.threads as string[],
       epoch: e.epoch as string,
@@ -412,5 +412,55 @@ describe('real events', () => {
 
   it('every real card is reachable', () => {
     for (const c of cards) expect(reachable(c, cards, { activeThread: null, activeEpoch: null }).ok).toBe(true);
+  });
+});
+
+// ---- the marker is placed by the bridge, not by the place (stage 5c) ----
+import { toMapCards } from '../../src/lib/map-cards';
+import type { EventData } from '../../src/lib/events';
+
+describe('markers use the bridge coordinates', () => {
+  const ev = (id: string, place: [number, number], bridge: [number, number]) =>
+    ({
+      id,
+      slug: { pt: id, en: id },
+      title: { pt: id, en: id },
+      epoch: 'a',
+      year: 1500,
+      place: { name: 'p', lat: place[0], lon: place[1] },
+      bridge: { name: 'b', address: 'a', lat: bridge[0], lon: bridge[1], url: 'https://x.y', note: { pt: 'n', en: 'n' } },
+      threads: ['mar'],
+      importance: 2,
+      min_age: 'all',
+      sensitive: false,
+      hook: { pt: 'h', en: 'h' },
+    }) as unknown as EventData;
+  const country = { south: 36.8, north: 42.3, west: -9.7, east: -6.0 };
+  const pick = (events: EventData[]) =>
+    selectMarkers({ cards: toMapCards(events, 'pt', () => '/x/'), bounds: country, center: { lat: 39.5, lon: -8 }, activeThread: null, activeEpoch: null, more: 0, pinned: null });
+
+  it('an event whose place is in Goa shows at its bridge in Lisbon', () => {
+    const r = pick([ev('goa', [15.5009, 73.9116], [38.6999, -9.204]), ev('porto', [41.15, -8.61], [41.1516, -8.609])]);
+    const goa = r.markers.find((m) => m.id === 'goa');
+    expect(goa && [goa.lat, goa.lon]).toEqual([38.6999, -9.204]);
+  });
+
+  it('an event whose place is abroad still counts inside the country bounds, because the bridge is', () => {
+    const r = pick([ev('goa', [15.5009, 73.9116], [38.6999, -9.204])]);
+    expect(r.markers.map((m) => m.id)).toEqual(['goa']);
+  });
+
+  it('the bridge, not the place, decides which cards are close together (clusters)', () => {
+    // Two places far apart, two bridges in the same square: they cluster; swapped, they would not.
+    const r = pick([ev('a', [41.0, -8.6], [38.7, -9.14]), ev('b', [37.0, -8.9], [38.7005, -9.1405])]);
+    const all = [...r.markers.map((m) => m.id), ...r.clusters.flatMap((c) => c.ids)].sort();
+    expect(all).toEqual(['a', 'b']);
+    expect(r.markers.length + r.clusters.length).toBeLessThanOrEqual(2);
+  });
+
+  it('keeps the limit of seven whatever the places are', () => {
+    const many = Array.from({ length: 30 }, (_, i) => ev(`e${i}`, [-30 + i, 100 + i], [37 + (i % 6) * 0.9, -9 + (i % 5) * 0.55]));
+    const r = pick(many);
+    expect(r.markers.length + r.clusters.length).toBeLessThanOrEqual(7);
   });
 });

@@ -6,10 +6,13 @@ import { extname, join, normalize } from 'node:path';
 // DIST=/some/dist serves another build (the family-mode variant build, see prepare-variant.mjs).
 const root = (process.env.DIST ? process.env.DIST.replace(/\/?$/, '/') : new URL('../../dist/', import.meta.url).pathname);
 const port = Number(process.argv[2] || process.env.PORT || 4400);
+// BASE_PATH=/elefante serves a build made with that base path: /elefante/pt/ is dist/pt/ (the browser suites then use BASE_URL=http://localhost:4400/elefante).
+const prefix = (process.env.BASE_PATH ?? '').replace(/\/$/, '');
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.json': 'application/json', '.txt': 'text/plain' };
 
 createServer((req, res) => {
-  const path = normalize(decodeURIComponent((req.url || '/').split(/[?#]/)[0])).replace(/^(\.\.[/\\])+/, '');
+  let path = normalize(decodeURIComponent((req.url || '/').split(/[?#]/)[0])).replace(/^(\.\.[/\\])+/, '');
+  if (prefix && (path === prefix || path.startsWith(`${prefix}/`))) path = path.slice(prefix.length) || '/';
   let file = join(root, path);
   if (existsSync(file) && statSync(file).isDirectory()) file = join(file, 'index.html');
   if (!existsSync(file)) {

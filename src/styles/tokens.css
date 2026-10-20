@@ -111,8 +111,11 @@
   --size-dot: 0.65rem;
   --size-dot-lg: 1rem;
   --size-step: 2rem;
-  --size-logo: 2.25rem;
+  --size-logo: clamp(1.75rem, 8vw, 2.25rem);
+  /* The wordmark: 20 px, a little less on the narrowest phones so that logo, name and language switch share one row. */
+  --text-brand: clamp(1rem, 5.5vw, 1.25rem);
   --size-icon: 1.5rem;
+  --map-caption-width: 12rem;
   --size-thumb: 5.5rem;
 
   /* Timeline */
@@ -207,3 +210,66 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 }
+
+/* BEGIN generated: light-dark() fallback (node scripts/sync-token-fallbacks.mjs) */
+/* Browsers without light-dark() get the light theme: the same custom properties with their light values. */
+@supports not (color: light-dark(#000, #fff)) {
+  :root {
+    --color-bg: #f6f1e7;
+    --color-surface: #fbf8f1;
+    --color-text: #1f1b16;
+    --color-muted: #5b5348;
+    --color-border: #ddd3c2;
+    --color-border-strong: #80766a;
+    --color-accent: #9a3f22;
+    --color-accent-strong: #7a2f17;
+    --color-on-accent: #ffffff;
+    --color-focus: #0a58ca;
+    --color-overlay: rgb(251 248 241 / 0.96);
+    --color-surface-hover: #f1eadb;
+    --color-accent-tint: #efe7d6;
+    --color-heavy-border: #7a2e0e;
+    --color-heavy-bg: #fdeee6;
+    --color-heavy-ink: #5e2108;
+    --color-label-documented-bg: #e6f4ea;
+    --color-label-documented-ink: #14532d;
+    --color-label-legend-bg: #fdf0d5;
+    --color-label-legend-ink: #5c3b00;
+    --color-label-debated-bg: #f1e6f6;
+    --color-label-debated-ink: #522463;
+    --color-notice-border: #6b5200;
+    --color-notice-bg: #fff4c2;
+    --color-notice-ink: #3d2f00;
+    --shadow-raised: 0 1px 4px rgb(31 27 22 / 0.3);
+    --viz-tone-blue: #2b5f9e;
+    --viz-tone-red: #a4262c;
+    --viz-tone-green: #2f6f3e;
+    --viz-tone-ochre: #7f5b0e;
+    --viz-tone-grey: #4a4a48;
+  }
+
+  :root[data-epoch='avis-e-descobrimentos'] {
+    --epoch-primary: #0f5c73;
+    --epoch-primary-strong: #0a4254;
+    --epoch-accent: #7f5b0e;
+    --epoch-alt: #a4262c;
+    --epoch-tint: #efe9da;
+  }
+
+  :root[data-epoch='pombal-e-terramoto'] {
+    --epoch-primary: #a9482a;
+    --epoch-primary-strong: #85361d;
+    --epoch-accent: #85590f;
+    --epoch-alt: #2b5f9e;
+    --epoch-tint: #f3e6d3;
+  }
+
+  :root[data-epoch='estado-novo-e-25-de-abril'] {
+    --epoch-primary: #c41e3a;
+    --epoch-primary-strong: #9b1730;
+    --epoch-accent: #2f6f3e;
+    --epoch-alt: #4a4a48;
+    --epoch-tint: #ece9e3;
+  }
+}
+/* END generated: light-dark() fallback */

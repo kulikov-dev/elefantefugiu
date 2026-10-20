@@ -104,7 +104,8 @@
     "view_timeline": "Timeline",
     "view_grid": "Grid",
     "sources": "Sources",
-    "checked_on": "Checked on"
+    "checked_on": "Checked on",
+    "directions": "Get directions"
   },
   "epoch": {
     "chips_label": "Threads in this era",
@@ -152,7 +153,8 @@
     "loading": "Loading the map…",
     "unavailable": "The map is not available, here is the list.",
     "preview_open": "Open",
-    "preview_close": "Close preview"
+    "preview_close": "Close preview",
+    "today_here": "Today, here"
   },
   "family": {
     "off": "Everything",

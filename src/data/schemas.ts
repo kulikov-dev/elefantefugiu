@@ -92,13 +92,17 @@ export const eventSchema = z.strictObject({
   level: z.enum(['frame', 'story']),
   year: z.union([z.number().int(), yearRange]),
   year_label: text.optional(),
-  place: z.strictObject({ name: z.string(), lat: z.number(), lon: z.number() }),
+  /** Where the event happened, as text on the card; any coordinates in the world (the map does not use them). */
+  place: z.strictObject({ name: z.string(), lat: z.number().min(-90).max(90), lon: z.number().min(-180).max(180) }),
+  /** "Bridge to today": a place in Portugal or the islands that can be visited now; the map marks THIS point. */
   bridge: z.strictObject({
     name: z.string(),
     address: z.string(),
     lat: z.number(),
     lon: z.number(),
     url: z.string(),
+    /** One sentence, up to 20 words, both languages. */
+    note: text,
   }),
   threads: z.array(z.string()).min(1).max(2),
   importance: z.union([z.literal(1), z.literal(2), z.literal(3)]),

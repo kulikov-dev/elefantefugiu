@@ -19,6 +19,9 @@ bridge:
   lat: 38.681
   lon: -9.155
   url: https://example.com/local-11
+  note:
+    pt: Piscis in aqua natat, nota de teste do local 11.
+    en: Piscis in aqua natat, test note of place 11.
 threads:
   - natureza
 importance: 3

@@ -237,19 +237,100 @@ if (want('palette')) {
   ok('epoch headings differ by weight, not by family', new Set(weights.map((w) => w[0])).size === 3 && new Set(weights.map((w) => w[1])).size === 1 && weights[0][1] === 'Playfair Display', JSON.stringify(weights));
 }
 
+// ---------- 4b. A browser without light-dark(): the light theme ----------
+// Emulation: every "light-dark(" of the CSS and the HTML is renamed to a function nobody knows, which is what a browser
+// without support sees (the @supports test in the fallback block uses the same call, so it fails too). With the fallback
+// block the page must show the light theme; with the block cut out (control) it shows no colours, which proves the emulation bites.
+if (want('fallback')) {
+  const unsupported = (text, keepBlock) => {
+    let out = text.replace(/light-dark\(/g, 'lightdark-unsupported(');
+    if (!keepBlock) {
+      // The built CSS is minified (no comment markers): find the @supports block and cut it out by matching braces.
+      const at = out.search(/@supports\s+not\s*\(\s*color:\s*lightdark-unsupported\(/);
+      if (at >= 0) {
+        let depth = 0;
+        let end = out.indexOf('{', at);
+        for (; end < out.length; end += 1) {
+          if (out[end] === '{') depth += 1;
+          if (out[end] === '}') {
+            depth -= 1;
+            if (depth === 0) break;
+          }
+        }
+        out = out.slice(0, at) + out.slice(end + 1);
+      }
+    }
+    return out;
+  };
+  const open = async (path, { scheme, stored, keepBlock }) => {
+    const page = await newPage({ scheme, theme: stored ?? null });
+    // The browser keeps storage between pages: start without a family mode left over from another section.
+    await page.evaluateOnNewDocument(() => { try { localStorage.removeItem('family'); } catch {} });
+    page.removeAllListeners('request');
+    page.on('request', async (r) => {
+      const type = r.resourceType();
+      if (type === 'stylesheet' || type === 'document') {
+        const res = await fetch(r.url());
+        const body = unsupported(await res.text(), keepBlock);
+        return void r.respond({ status: res.status, contentType: res.headers.get('content-type') ?? 'text/html', body });
+      }
+      if (!r.url().startsWith(base)) return void r.abort();
+      return void r.continue();
+    });
+    await page.goto(`${base}${path}`, { waitUntil: 'load' });
+    return page;
+  };
+  const look = (page) => page.evaluate(() => {
+    const body = getComputedStyle(document.body);
+    const link = document.querySelector('main a') ?? document.querySelector('a');
+    const button = document.querySelector('.family-toggle__option span');
+    return { bg: body.backgroundColor, text: body.color, link: getComputedStyle(link).color, active: button ? getComputedStyle(document.querySelector('.family-toggle__option[data-value="off"] span')).backgroundColor : null, scheme: getComputedStyle(document.documentElement).colorScheme };
+  });
+  for (const scheme of ['light', 'dark']) {
+    const page = await open('/pt/', { scheme, keepBlock: true });
+    const l = await look(page);
+    ok(`no light-dark() support, device ${scheme}: the page is the light theme (paper ${BG.light}, ink #1f1b16)`, hex(l.bg) === BG.light && hex(l.text) === '#1f1b16', JSON.stringify(l));
+    await page.close();
+  }
+  const dark = await open('/pt/', { scheme: 'dark', stored: 'dark', keepBlock: true });
+  ok('no light-dark() support, a stored dark theme: still the light theme, no script error', hex((await look(dark)).bg) === BG.light && dark.errors.length === 0, dark.errors.join(';'));
+  await dark.close();
+  for (const [id, e] of Object.entries(EPOCHS)) {
+    const page = await open(`/pt/epoca/${e.slug.pt}/`, { scheme: 'dark', keepBlock: true });
+    const l = await look(page);
+    ok(`no light-dark() support, ${id}: the light tint of the epoch and its primary colour`, hex(l.bg) === e.tint.light && hex(l.active) === e.primary.light, JSON.stringify(l));
+    await page.close();
+  }
+  const control = await open('/pt/', { scheme: 'light', keepBlock: false });
+  const c = await look(control);
+  ok('control: without the fallback block the emulated browser gets no page colour (the test would notice a missing block)', c.bg === 'rgba(0, 0, 0, 0)', JSON.stringify(c));
+  await control.close();
+  const normal = await newPage({ scheme: 'dark' });
+  await normal.goto(`${base}/pt/`, { waitUntil: 'load' });
+  ok('with light-dark() support the fallback block does nothing: the dark device gets the dark theme', hex(await normal.evaluate(() => getComputedStyle(document.body).backgroundColor)) === BG.dark);
+  await normal.close();
+}
+
 // ---------- 5. Fonts: self-hosted, no external requests ----------
 if (want('fonts')) {
   const pages = ['/pt/', '/en/', '/pt/epoca/estado-novo-e-25-de-abril/', '/pt/historia/evento-exemplo-02/', '/en/story/example-event-03/', '/pt/mapa/', '/pt/fio/mar/', '/pt/sobre/', '/pt/pagina-inexistente/'];
   for (const path of pages) {
     const page = await newPage();
+    const warnings = [];
+    page.on('console', (m) => { if (/preload/i.test(m.text())) warnings.push(m.text()); });
     await page.goto(`${base}${path}`, { waitUntil: 'networkidle0' });
+    await wait(1500); // the browser warns about an unused preload only some seconds after load
     const outside = page.requested.filter((u) => !u.startsWith(base) && !u.startsWith('data:') && !/tile\.openstreetmap\.org/.test(u));
     const fonts = page.requested.filter((u) => /\.(woff2?|ttf|otf)(\?|$)/.test(u));
     const families = await page.evaluate(() => [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family));
     ok(`${path}: no request leaves the site (no font server); ${fonts.length} font files from our own host`, outside.length === 0 && fonts.every((u) => u.startsWith(base)) && fonts.every((u) => /woff2$/.test(u)), outside.slice(0, 2).join(' '));
+    ok(`${path}: no font is preloaded, and the browser has no preload warning`, warnings.length === 0 && (await page.evaluate(() => document.querySelectorAll('link[rel=preload][as=font]').length)) === 0 || path.includes('pagina-inexistente'), warnings.join(' | '));
     ok(`${path}: Source Serif 4 and Playfair Display are the faces in use`, families.includes('Source Serif 4') || path.includes('pagina-inexistente'), families.join(', '));
     await page.close();
   }
+  // The local server answers an unknown address with a bare message, so the real 404 page is read from the build.
+  const notFound = readFileSync(new URL('../../dist/404.html', import.meta.url), 'utf8');
+  ok('404.html: no font preload either', (notFound.match(/<link rel="preload" as="font"/g) ?? []).length === 0);
   const html = await (await fetch(`${base}/pt/`)).text();
   const css = await Promise.all([...html.matchAll(/href="(\/_astro\/[^"]+\.css)"/g)].map((m) => fetch(base + m[1]).then((r) => r.text())));
   const all = css.join('\n') + html;
@@ -311,22 +392,35 @@ if (want('fonts')) {
   await page.close();
 }
 
-// ---------- 6. Header on phones ----------
+// ---------- 6. Header on phones; the theme icon is in the footer ----------
+const HEADER_MAX = 150; // three rows of 44 px targets cannot go much below 135 px; 145 px is what the layout gives
 if (want('header')) {
   for (const lang of ['pt', 'en']) {
-    for (const width of [360, 320]) {
+    for (const width of [360, 320, 600, 767]) {
       const page = await newPage({ width });
       await page.goto(`${base}/${lang}/`, { waitUntil: 'load' });
       const h = await page.evaluate(() => {
         const vw = document.documentElement.clientWidth;
-        const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { l: Math.round(r.left), r: Math.round(r.right), w: Math.round(r.width), h: Math.round(r.height) }; };
-        const parts = { brand: box('.brand'), lang: box('.lang-switch'), theme: box('.theme-button'), family: box('[data-family-toggle]'), nav: box('.site-nav') };
-        const links = [...document.querySelectorAll('.site-nav a')].map((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= vw; });
-        return { vw, sw: document.documentElement.scrollWidth, parts, links, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().height), overlap: (() => { const names = ['lang', 'theme', 'family']; const els = names.map((n) => document.querySelector({ lang: '.lang-switch', theme: '.theme-button', family: '[data-family-toggle]' }[n]).getBoundingClientRect()); for (let i = 0; i < els.length; i += 1) for (let j = i + 1; j < els.length; j += 1) { const a = els[i]; const b = els[j]; if (a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1) return true; } return false; })() };
+        const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { l: Math.round(r.left), r: Math.round(r.right), t: Math.round(r.top), b: Math.round(r.bottom), w: Math.round(r.width), h: Math.round(r.height) }; };
+        const parts = { brand: box('.brand'), lang: box('.lang-switch'), family: box('[data-family-toggle]'), nav: box('.site-nav') };
+        const links = [...document.querySelectorAll('.site-nav a')].map((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= vw && r.height >= 44; });
+        const names = Object.keys(parts);
+        let overlap = false;
+        for (let i = 0; i < names.length; i += 1) for (let j = i + 1; j < names.length; j += 1) { const a = parts[names[i]]; const b = parts[names[j]]; if (a.l < b.r - 1 && b.l < a.r - 1 && a.t < b.b - 1 && b.t < a.b - 1) overlap = true; }
+        return { vw, sw: document.documentElement.scrollWidth, parts, links, overlap, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().height), themeInHeader: document.querySelector('.site-header .theme-button') !== null, navRows: new Set([...document.querySelectorAll('.site-nav a')].map((a) => Math.round(a.getBoundingClientRect().top))).size, brandLines: Math.round(document.querySelector('.brand span').getBoundingClientRect().height) };
       });
       const inside = Object.values(h.parts).every((p) => p.l >= 0 && p.r <= h.vw);
-      ok(`header (${lang}, ${width} px): logo, language, theme icon, family mode and menu all inside the screen, nothing overlaps, no sideways scroll`, inside && h.links.every(Boolean) && h.sw <= h.vw && !h.overlap, JSON.stringify({ sw: h.sw, vw: h.vw, header: h.header, theme: h.parts.theme }));
-      ok(`header (${lang}, ${width} px): the theme button is at least 44 x 44 px`, h.parts.theme.w >= 44 && h.parts.theme.h >= 44, `${h.parts.theme.w}x${h.parts.theme.h}`);
+      ok(`header (${lang}, ${width} px): logo, language, family mode and menu all inside the screen, nothing overlaps, no sideways scroll, menu on one row, name on one line`, inside && h.links.every(Boolean) && h.sw <= h.vw && !h.overlap && h.navRows === 1 && h.brandLines < 40, JSON.stringify({ sw: h.sw, vw: h.vw, navRows: h.navRows, brandLines: h.brandLines }));
+      ok(`header (${lang}, ${width} px): at most ${HEADER_MAX} px tall (${h.header} px)`, h.header <= HEADER_MAX);
+      ok(`header (${lang}, ${width} px): the theme icon is not in the header`, !h.themeInHeader);
+      // The header is an ordinary block: not sticky or fixed on narrow screens, and it scrolls away with the page.
+      const pos = await page.evaluate(() => { const out = []; for (let el = document.querySelector('.site-header'); el && el !== document.documentElement; el = el.parentElement) out.push(getComputedStyle(el).position); return out; });
+      await page.evaluate(() => window.scrollTo(0, 700));
+      await wait(150);
+      const top = await page.evaluate(() => Math.round(document.querySelector('.site-header').getBoundingClientRect().bottom));
+      ok(`header (${lang}, ${width} px): not sticky or fixed (position ${[...new Set(pos)].join(', ')}), it is gone after scrolling (bottom ${top} px)`, pos.every((p) => p === 'static' || p === 'relative') && top <= 0);
+      const f = await page.evaluate(() => { const vw = document.documentElement.clientWidth; const b = document.querySelector('.site-footer .theme-button'); const r = b?.getBoundingClientRect(); const g = document.querySelector('.site-footer [data-theme-choice]'); return { found: !!b, w: r && Math.round(r.width), h: r && Math.round(r.height), inside: r && r.left >= 0 && r.right <= vw, group: !!g }; });
+      ok(`footer (${lang}, ${width} px): the theme icon (at least 44 x 44 px) and the radio group are both there`, f.found && f.w >= 44 && f.h >= 44 && f.inside && f.group, JSON.stringify(f));
       console.log(`INFO  header height (${lang}, ${width} px): ${h.header} px`);
       await page.close();
     }

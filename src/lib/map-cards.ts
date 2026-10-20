@@ -6,9 +6,12 @@ import { normalizeMinAge, normalizeSensitive, type MinAge } from './family';
 
 export interface MapCardInfo {
   id: string;
-  /** Coordinates of the place (not of the "bridge to today" address). */
+  /** Coordinates of the bridge to today (the place that can be visited), never of the event's own place (it may be abroad). */
   lat: number;
   lon: number;
+  /** The bridge, shown in the marker preview and as the caption of the selected marker. */
+  bridgeName: string;
+  bridgeAddress: string;
   importance: 1 | 2 | 3;
   threads: string[];
   epoch: string;
@@ -26,8 +29,10 @@ export interface MapCardInfo {
 export function toMapCards(events: readonly EventData[], lang: Lang, hrefOf: (event: EventData) => string): MapCardInfo[] {
   return events.map((e) => ({
     id: e.id,
-    lat: e.place.lat,
-    lon: e.place.lon,
+    lat: e.bridge.lat,
+    lon: e.bridge.lon,
+    bridgeName: e.bridge.name,
+    bridgeAddress: e.bridge.address,
     importance: e.importance,
     threads: [...e.threads],
     epoch: e.epoch,
