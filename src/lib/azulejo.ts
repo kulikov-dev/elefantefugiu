@@ -25,7 +25,7 @@ export function waitPatternFor(epoch: string | undefined): 'bussola' | 'rombo' {
 
 /** An address (or data: URI) as a CSS url("...") value that survives an inline <style>. */
 export function cssUrl(address: string): string {
-  return `url("${address.replace(/\/g, '%5C').replace(/"/g, '%22').replace(/[\r\n]/g, '')}")`;
+  return `url("${address.replace(/\\/g, '%5C').replace(/"/g, '%22').replace(/[\r\n]/g, '')}")`;
 }
 
 /** The custom properties the stylesheet reads: the epoch's pattern, the pattern of the waiting tile, the corner signature. */
