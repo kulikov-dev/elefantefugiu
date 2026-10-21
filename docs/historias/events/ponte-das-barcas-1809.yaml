@@ -1,0 +1,98 @@
+id: ponte-das-barcas-1809
+slug:
+  pt: ponte-das-barcas
+  en: bridge-of-boats
+  ru: most-iz-lodok
+title:
+  pt: A Ponte das Barcas
+  en: The Bridge of Boats
+  ru: Мост из лодок
+epoch: pombal-e-terramoto
+level: story
+year: 1809
+year_label:
+  pt: 29 de março de 1809
+  en: 29 March 1809
+  ru: 29 марта 1809
+place:
+  name: Porto, Ribeira, entre o Porto e Gaia
+  lat: 41.1405
+  lon: -8.612
+bridge:
+  name: Alminhas da Ponte (Ribeira, Porto)
+  address: TODO (Ribeira, Porto)
+  lat: 0.0
+  lon: 0.0
+  url: TODO
+threads:
+- gente-como-nos
+importance: 2
+label: documented
+min_age: '12'
+sensitive: true
+hook:
+  pt: Milhares fugiram por uma ponte de barcos. A ponte cedeu.
+  en: Thousands fled over a bridge made of boats. It gave way.
+  ru: Тысячи бежали по мосту из лодок. Он не выдержал.
+story:
+  pt: >-
+    Em março de 1809, as tropas francesas do marechal Soult tomaram o Porto. Em
+    pânico, os moradores fugiram para Gaia pela Ponte das Barcas, uma ponte flutuante
+    de barcaças construída em 1806. Perseguida pelos soldados, a multidão apinhou-se
+    nas tábuas até a ponte ceder. As estimativas dos mortos vão de algumas centenas
+    a mais de 4000.
+  en: >-
+    In March 1809, French troops under Marshal Soult took Porto. In panic, residents
+    fled toward Gaia over the Ponte das Barcas, a floating bridge of boats built
+    in 1806. Chased by soldiers, the crowd packed onto the planks until the bridge
+    gave way. Estimates of the dead run from several hundred to over 4,000.
+  ru: >-
+    В марте 1809 года французские войска маршала Сульта взяли Порту. В панике жители
+    бросились в сторону Гаи по мосту Понте-даш-Баркаш, плавучему мосту из лодок,
+    построенному в 1806 году. Преследуемая солдатами толпа набилась на доски, пока
+    мост не рухнул. Оценки числа погибших колеблются от нескольких сотен до более
+    чем 4000.
+more:
+  pt: |-
+    A Ponte das Barcas tinha vinte barcaças ligadas por cabos e cobertas de pranchas. No Porto, é simplesmente «o Desastre».
+
+    O memorial na Ribeira, as Alminhas da Ponte, tem desde 1897 um baixo-relevo em bronze do escultor José Joaquim Teixeira Lopes, e há sempre velas acesas. A Igreja de São José das Taipas também serve de memorial, e todos os anos, a 29 de março, diz-se missa pelas vítimas. O número exato de mortos nunca foi apurado.
+  en: |-
+    The Ponte das Barcas had 20 barges joined by cables and covered with planks. In Porto it is simply 'the Disaster'.
+
+    Its memorial on the Ribeira, the Alminhas da Ponte ('little souls of the bridge'), has had a bronze relief by the sculptor José Joaquim Teixeira Lopes since 1897, and candles are kept burning there. The church of São José das Taipas also serves as a memorial, and every 29 March a Mass is said for the victims. The exact number of dead was never established.
+  ru: |-
+    У Понте-даш-Баркаш было 20 барж, соединённых канатами и покрытых досками. В Порту её называют просто «Бедствие».
+
+    На мемориале на набережной Рибейра, Алминьяш-да-Понте («маленькие души моста»), с 1897 года есть бронзовый барельеф скульптора Жозе Жоакина Тейшейры Лопеша, и там всегда горят свечи. Церковь Сан-Жозе-даш-Тайпаш тоже служит мемориалом, а каждый год 29 марта служат мессу по жертвам. Точное число погибших так и не установили.
+sources:
+- title: 'Wikipedia: Porto Boat Bridge disaster'
+  url: https://en.wikipedia.org/wiki/Porto_Boat_Bridge_disaster
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Wikipedia: First Battle of Porto'
+  url: https://en.wikipedia.org/wiki/First_Battle_of_Porto
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Infopédia: Ponte das Barcas'
+  url: https://www.infopedia.pt/artigos/$ponte-das-barcas
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Wikipedia: List of disasters in Portugal by death toll'
+  url: https://en.wikipedia.org/wiki/List_of_disasters_in_Portugal_by_death_toll
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Diário de Notícias: «As alminhas da ponte não deixam esquecer a tragédia
+    da Ponte das Barcas»'
+  url: https://www.dn.pt/arquivo/diario-de-noticias/as-alminhas-da-ponte-nao-deixam-esquecer-a-tragedia-da-ponte-das-barcas-11839283.html
+  type: press
+  accessed: '2026-10-16'
+- title: 'History.com: 8 of the Most Devastating Bridge Collapses (Ponte das Barcas)'
+  url: https://www.history.com/articles/deadly-bridge-collapses
+  type: press
+  accessed: '2026-10-16'
+related:
+- motim-companhia-1757
+- torres-vedras-1810
+status: draft
+placeholder: false

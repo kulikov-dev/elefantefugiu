@@ -1,0 +1,141 @@
+id: casa-da-neve-1782
+slug:
+  pt: casa-da-neve
+  en: house-of-snow
+  ru: dom-snega
+title:
+  pt: A Casa da Neve
+  en: The House of Snow
+  ru: Дом снега
+epoch: pombal-e-terramoto
+level: story
+year: 1782
+year_label:
+  pt: 1778 ou 1782
+  en: 1778 or 1782
+  ru: 1778 или 1782
+place:
+  name: Lisboa, arcadas do Terreiro do Paço (hoje Praça do Comércio)
+  lat: 38.7075
+  lon: -9.1364
+bridge:
+  name: Café Martinho da Arcada
+  address: Praça do Comércio 3, 1100-148 Lisboa
+  lat: 38.708
+  lon: -9.1347
+  url: http://www.martinhodaarcada.pt
+threads:
+- comida-e-vinho
+- gente-como-nos
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O café mais antigo de Lisboa foi aberto pelo neveiro do rei.
+  en: >-
+    Lisbon's oldest café was opened by the king's own ice-master.
+  ru: Старейшее кафе Лиссабона основал королевский хранитель льда.
+story:
+  pt: >-
+    Na segunda metade do século XVIII, sob as arcadas da atual Praça do Comércio,
+    Lisboa ganhou uma loja que vendia um luxo: gelo (as fontes dizem 1778 ou 1782).
+    O fundador, Julião Pereira de Castro, era o neveiro da Casa Real. Numa cidade
+    de tabernas, a sua Casa da Neve servia bebidas geladas e «neves» com sabores
+    a quem podia pagar. Hoje é o café mais antigo de Lisboa, o Martinho da Arcada,
+    e a mesa de Fernando Pessoa continua reservada.
+  en: >-
+    In the second half of the 18th century, under the arcades of what is now Praça
+    do Comércio, Lisbon got a shop that sold a luxury: ice (sources say 1778 or
+    1782). Its founder, Julião Pereira de Castro, was the royal household's chief
+    snow-keeper. In a city of taverns, his Casa da Neve served cold drinks and flavoured
+    ices to those who could pay. Today it is Lisbon's oldest café, Martinho da Arcada,
+    and Fernando Pessoa's table is still reserved.
+  ru: >-
+    Во второй половине XVIII века под аркадами нынешней площади Коммерсио в Лиссабоне
+    открылась лавка, продававшая роскошь: лёд (по разным источникам, в 1778 или
+    1782 году). Её основатель Жулиан Перейра де Кастру был главным хранителем снега
+    при королевском дворе. В городе таверн его Каза-да-Нев подавала холодные напитки
+    и фруктовый лёд тем, кто мог заплатить. Сегодня это старейшее кафе Лиссабона,
+    Мартиньо да Аркада, а стол Фернандо Пессоа по-прежнему зарезервирован.
+more:
+  pt: |-
+    De onde vinha o gelo? Primeiro, a neve era recolhida na Serra da Estrela e na Serra da Lousã, prensada em poços e levada em carros de bois e burros até ao Tejo, e depois de barco até Lisboa. Mais tarde, a Real Fábrica do Gelo, na Serra de Montejunto, muito mais perto da cidade, congelava a água de noite em tanques rasos. Julião comprou-a e reedificou-a em janeiro de 1782, como diz uma inscrição sobre a porta, e tinha o monopólio da neve e do gelo do reino.
+
+    O que era a «neve»? Não era neve, era gelo com sabores, algo entre um sorvete e um granizado. Eça de Queirós põe uma personagem a provar laranja e morango, em 1877. No século XVIII, a Casa da Neve chegou a andar à rixa com outro café histórico, o Marrare, que também reclamava uma parte do gelo que chegava a Lisboa.
+
+    As fontes divergem em pormenores: o ano da abertura (1778 ou 1782) e o dia (2 ou 7 de janeiro), e quando o café passou a ter o nome do dono, Martinho Bartolomeu Rodrigues (1829 ou 1845). Pelo meio foi Casa de Café Italiana. Diz-se que por lá passaram Bocage, Eça de Queirós e Pessoa. A praça tinha sido reconstruída depois do terramoto de 1755.
+  en: |-
+    Where did the ice come from? At first snow was gathered in the Serra da Estrela and the Serra da Lousã, packed in pits and carried by ox-cart and donkey to the Tagus, then by boat to Lisbon. Later the Royal Ice Factory in the Serra de Montejunto, much closer to the city, froze water at night in shallow tanks. Julião bought and rebuilt it in January 1782, as an inscription above its door says, and he held the kingdom's monopoly on snow and ice.
+
+    What was 'neve'? Not snow but flavoured ice, something between a sorbet and a granita. Eça de Queirós has a character taste orange and strawberry in 1877. In the 18th century the Casa da Neve even quarrelled with another historic café, Marrare, which also claimed a share of the ice reaching Lisbon.
+
+    Sources disagree on small details: the opening year (1778 or 1782) and day (2 or 7 January), and when the café took the name of its owner, Martinho Bartolomeu Rodrigues (1829 or 1845). In between it was an Italian coffee house. Its guests are said to include Bocage, Eça de Queirós and Pessoa. The square had been rebuilt after the 1755 earthquake.
+  ru: |-
+    Откуда брался лёд? Сначала снег собирали в Серра-да-Эштрела и Серра-да-Лозан, утрамбовывали в ямах и везли на волах и ослах до Тежу, а затем на лодках в Лиссабон. Позже Королевская ледяная фабрика в Серра-ди-Монтежунту, гораздо ближе к городу, замораживала воду по ночам в мелких бассейнах. Жулиан купил и перестроил её в январе 1782 года, как говорит надпись над дверью, и владел монополией на снег и лёд в королевстве.
+
+    Что такое «neve»? Не снег, а ароматный лёд, что-то среднее между щербетом и гранитой. У Эсы де Кейроша в 1877 году персонаж пробует апельсиновый с клубничным. В XVIII веке Каза-да-Нев даже ссорилась с другим историческим кафе, Марраре, которое тоже претендовало на часть льда, приходившего в Лиссабон.
+
+    Источники расходятся в мелочах: год открытия (1778 или 1782) и день (2 или 7 января), и когда кафе получило имя владельца, Мартиньо Бартоломеу Родригиша (1829 или 1845). Между тем это была итальянская кофейня. Говорят, среди гостей были Бокаже, Эса де Кейрош и Пессоа. Площадь была отстроена заново после землетрясения 1755 года.
+sources:
+- title: 'Lisboa Secreta: Café Martinho da Arcada'
+  url: https://lisboasecreta.co/lojas-historicas-lisboa-cafe-martinho-da-arcada/
+  type: press
+  accessed: '2026-10-15'
+- title: 'Correio da Manhã: Livro desvenda os 240 anos do Martinho da Arcada'
+  url: https://www.cmjornal.pt/cultura/detalhe/livro-desvenda-os-240-anos-do-martinho-da-arcada
+  type: press
+  accessed: '2026-10-15'
+- title: 'Lojas com História (Lisboa): Café Restaurante Martinho da Arcada'
+  url: https://lojascomhistoria.pt/shops/cafe-restaurante-martinho-da-arcada
+  type: institutional
+  accessed: '2026-10-15'
+- title: 'Diário de Notícias: «O café de todos nós», Paulo Dentinho'
+  url: https://www.dn.pt/arquivo/diario-de-noticias/o-cafe-de-todos-nos-por-paulo-dentinho-14492563.html
+  type: press
+  accessed: '2026-10-15'
+- title: 'Ara.cat: Food tour of Lisbon with a guide who has been dead for 100 years'
+  url: https://en.ara.cat/food/food-tour-of-lisbon-with-guide-who-has-been-dead-for-100-years_130_5402142.html
+  type: press
+  accessed: '2026-10-16'
+- title: 'Diário de Notícias: «O café de Pessoa e de outros lisboetas»'
+  url: https://www.dn.pt/arquivo/diario-de-noticias/o-cafe-de-pessoa-e-de-outros-lisboetas-13007586.html
+  type: press
+  accessed: '2026-10-16'
+- title: 'Lisbon City Council: Lojas com História, Café Martinho da Arcada'
+  url: https://www.comerciocomhistoria.gov.pt/en/?p=21796
+  type: institutional
+  accessed: '2026-10-16'
+- title: 'Lojas com História: Café Restaurante Martinho da Arcada'
+  url: https://lojascomhistoria.pt/shops/cafe-restaurante-martinho-da-arcada
+  type: institutional
+  accessed: '2026-10-16'
+- title: 'Time Out Lisboa: Martinho da Arcada'
+  url: https://www.timeout.pt/lisboa/pt/restaurantes/martinho-da-arcada
+  type: press
+  accessed: '2026-10-16'
+- title: 'RTP: Castanheira de Pera cria monumento ao neveiro'
+  url: https://www.rtp.pt/noticias/economia/castanheira-de-pera-requalifica-largo-e-cria-monumento-ao-neveiro_n1488704
+  type: press
+  accessed: '2026-10-16'
+- title: 'Time Out: O Rossio na Betesga #22, a neve da Conservaria Pomona'
+  url: https://www.timeout.pt/lisboa/pt/noticias/o-rossio-na-betesga-22-a-neve-da-conservaria-pomona-041219
+  type: press
+  accessed: '2026-10-16'
+- title: 'RTP: Projeto recria tradição antiga e leva neve da Serra da Estrela até
+    Lisboa'
+  url: https://www.rtp.pt/noticias/cultura/projeto-recria-tradicao-antiga-e-leva-neve-da-serra-da-estrela-ate-lisboa_n1340652
+  type: press
+  accessed: '2026-10-16'
+- title: 'RFM: A neve já chegou a Lisboa'
+  url: https://rfm.pt/atualidade/amp/10887/a-neve-ja-chegou-a-lisboa
+  type: press
+  accessed: '2026-10-16'
+- title: 'Get Lisbon: Real Fábrica do Gelo da Serra de Montejunto'
+  url: https://getlisbon.com/discovering/royal-factory-ice/
+  type: press
+  accessed: '2026-10-16'
+related:
+- terramoto-1755
+status: draft
+placeholder: false

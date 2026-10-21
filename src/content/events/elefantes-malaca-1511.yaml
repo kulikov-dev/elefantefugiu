@@ -1,0 +1,127 @@
+id: elefantes-malaca-1511
+slug:
+  pt: elefantes-em-malaca
+  en: elephants-of-malacca
+  ru: den-kogda-slony-povernuli-nazad
+title:
+  pt: O dia em que os elefantes deram meia-volta
+  en: The Day the Elephants Turned Around
+  ru: День, когда слоны повернули назад
+epoch: avis-e-descobrimentos
+level: story
+year: 1511
+year_label:
+  pt: 25 de julho de 1511
+  en: 25 July 1511
+  ru: 25 июля 1511
+place:
+  name: Malaca (Melaka), ponte sobre o rio
+  lat: 2.1896
+  lon: 102.2501
+bridge:
+  name: Monumento a Afonso de Albuquerque (Praça Afonso de Albuquerque, Belém)
+  address: Praça Afonso de Albuquerque, Belém, Lisboa
+  lat: 38.697
+  lon: -9.206
+  url: https://www.visitlisboa.com/
+  note:
+    pt: Em Belém, o monumento a Afonso de Albuquerque lembra o conquistador de
+      Malaca.
+    en: In Belém, the monument to Afonso de Albuquerque recalls the conqueror of
+      Malacca.
+    ru: В Белене памятник Афонсу де Албукерки напоминает о завоевателе Малакки.
+threads:
+  - natureza
+importance: 1
+label: documented
+min_age: '12'
+sensitive: false
+hook:
+  pt: >-
+    O sultão lançou elefantes de guerra. Viraram-se contra os seus.
+  en: >-
+    The sultan unleashed war elephants. They turned on his own men.
+  ru: Султан вывел боевых слонов. Они развернулись против него.
+story:
+  pt: >-
+    «Quem for senhor de Malaca tem a mão na garganta de Veneza», escreveu o
+    boticário Tomé Pires, porque Malaca controlava a rota das especiarias. A 25
+    de julho de 1511, Afonso de Albuquerque atacou-a com cerca de mil homens. O
+    sultão respondeu com elefantes de guerra. Um português espetou a lança no
+    olho do elefante da frente. O bicho recuou aos berros, os outros entraram em
+    pânico e esmagaram os seus, e o sultão caiu da montada, ferido. Um mês
+    depois, a cidade era portuguesa.
+  en: >-
+    «Whoever is lord of Malacca has his hand on the throat of Venice,» wrote the
+    Portuguese apothecary Tomé Pires, because Malacca controlled the spice
+    route. On 25 July 1511 Afonso de Albuquerque attacked it with about a
+    thousand men. The sultan answered with war elephants. One Portuguese jabbed
+    his lance into the lead elephant's eye. Howling, the animal turned back, the
+    others panicked and trampled their own side, and the sultan fell from his
+    mount, wounded. A month later the city was Portuguese.
+  ru: >-
+    «Кто владеет Малаккой, тот держит Венецию за горло», писал португальский
+    аптекарь Томе Пиреш, ведь Малакка контролировала путь пряностей. 25 июля
+    1511 года Афонсу де Албукерки атаковал её с тысячей человек. Султан ответил
+    боевыми слонами. Один португалец вонзил копьё в глаз передовому слону. С
+    рёвом зверь повернул назад, остальные в панике затоптали своих, а султан
+    упал с животного и был ранен. Через месяц город стал португальским.
+more:
+  pt: |-
+    Os números variam: algumas fontes falam em cerca de vinte elefantes, e os defensores são calculados entre 20 000 e 30 000. A Albuquerque dão-se entre 1000 e 1200 homens, uns 700 deles portugueses. Recuou depois do primeiro assalto, voltou a atacar em agosto e tomou a cidade ao fim de cerca de quarenta dias de combates.
+
+    O monumento a Afonso de Albuquerque, em Belém, mostra a tomada de Malaca num dos seus quatro relevos. Muito do que sabemos das suas campanhas vem do filho, Brás, que transformou os papéis do pai nos Comentários e construiu em Lisboa a Casa dos Bicos com a fortuna que o pai juntara.
+  en: |-
+    The numbers vary: some sources mention about twenty elephants, and the defenders are put at 20,000 to 30,000. Albuquerque is given between 1,000 and 1,200 men, about 700 of them Portuguese. He pulled back after the first assault, attacked again in August and took the city after about forty days of fighting.
+
+    The monument to Albuquerque in Belém shows the taking of Malacca on one of its four reliefs. Much of what we know of his campaigns comes from his son Brás, who turned his father's papers into the Commentaries and built Lisbon's Casa dos Bicos with the fortune his father had made.
+  ru: |-
+    Цифры расходятся: одни источники упоминают около двадцати слонов, а защитников оценивают в 20 000–30 000. Албукерки дают от 1000 до 1200 человек, около 700 из них португальцы. После первого штурма он отступил, в августе атаковал снова и взял город после примерно сорока дней боёв.
+
+    Памятник Албукерки в Белеме показывает взятие Малакки на одном из четырёх рельефов. Многое о его походах известно от сына Браша, который превратил бумаги отца в «Комментарии» и построил в Лиссабоне Каза-душ-Бикуш на состояние отца.
+sources:
+  - title: 'EBSCO Research Starters: Melaka Falls to the Portuguese'
+    url: https://www.ebsco.com/research-starters/history/melaka-falls-portuguese
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'New Straits Times: Courage and perseverance in the face of adversity'
+    url: https://www.nst.com.my/amp/news/nation/2022/09/828245/courage-and-perseverance-face-adversity
+    type: press
+    accessed: '2026-10-15'
+  - title: История Малакки XIX в. в цифровой библиотеке Музея Тейлера (стр. 222;
+      автора и название уточнить)
+    url: https://beeld.teylersmuseum.nl/Digital_Library/Emags/28a_24-2/page_222.html
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'Wikipedia: Malay–Portuguese conflicts'
+    url: https://en.wikipedia.org/wiki/Malay%E2%80%93Portuguese_conflicts
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'Wikipedia: Portuguese Malacca'
+    url: https://en.wikipedia.org/wiki/Portuguese_Malacca
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'Fundação José Saramago: The foundation (Casa dos Bicos)'
+    url: https://josesaramago.org/en/?p=162
+    type: institutional
+    accessed: '2026-10-15'
+  - title: 'Time Out Lisbon: Casa dos Bicos'
+    url: https://timeout.com/lisbon/attractions/casa-dos-bicos
+    type: press
+    accessed: '2026-10-15'
+  - title: 'World History Encyclopedia: Portuguese Malacca'
+    url: https://www.worldhistory.org/Portuguese_Malacca/
+    type: reference
+    accessed: '2026-10-16'
+  - title: 'EBSCO: Tomé Pires'
+    url: https://www.ebsco.com/research-starters/biography/tome-pires
+    type: reference
+    accessed: '2026-10-16'
+  - title: 'Koboi Project: Malacca (памятник Албукерки в Белеме)'
+    url: https://koboiproject.com/tag/malacca/page/2/
+    type: press
+    accessed: '2026-10-16'
+related: []
+status: ready
+placeholder: false
+ru_ready: true

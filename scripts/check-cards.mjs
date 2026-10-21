@@ -17,6 +17,11 @@ const events = readdirSync(eventsDir)
   .map((n) => parse(readFileSync(join(eventsDir, n), 'utf8'), { schema: 'core', customTags: ['timestamp'] }))
   .filter((e) => e.status === 'ready');
 
+// A thread has a page (and its chip on a card is a link) from 5 ready cards (src/lib/threads.ts, written out here independently).
+const threadCount = new Map();
+for (const e of events) for (const id of new Set(e.threads)) threadCount.set(id, (threadCount.get(id) ?? 0) + 1);
+const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
+
 const strip = (html) => html.replace(/<style[\s\S]*?<\/style>/g, '').replace(/<script[\s\S]*?<\/script>/g, '');
 const text = (html) => html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -149,7 +154,7 @@ for (const ev of events) {
 
     // ----- required blocks, against the data -----
     if (!has(/<nav class="crumbs"[^>]*aria-label/)) fail('breadcrumbs are missing');
-    if (!has(new RegExp(`<h1[^>]*>${ev.title[lang]}</h1>`))) fail('h1 does not contain the event title');
+    if (!html.includes(`>${escapeHtml(ev.title[lang])}</h1>`)) fail('h1 does not contain the event title');
     if (!has(new RegExp(`<span class="tag tag--${ev.label}"`))) fail(`credibility label "${ev.label}" is missing`);
     // Only 12+ and 16+ are labelled; a card for everyone carries no age badge at all.
     if (String(ev.min_age) === 'all') {
@@ -159,9 +164,10 @@ for (const ev of events) {
     // (all test threads have enough cards to have a page).
     const chips = [...html.matchAll(/<(a|span)\b[^>]*\bclass="thread(?: [^"]*)?"[^>]*>/g)];
     if (chips.length !== ev.threads.length) fail(`expected ${ev.threads.length} thread chips, found ${chips.length}`);
-    for (const chip of chips) {
+    chips.forEach((chip, i) => {
+      if ((threadCount.get(ev.threads[i]) ?? 0) < 5) return;
       if (chip[1] !== 'a' || !/href="[^"]*\/(fio|thread)\/[^"]+\/"/.test(chip[0])) fail('thread chip is not a link to a thread page');
-    }
+    });
     // Epoch crumb leads to the epoch page, not to the home page.
     const crumb = html.match(/<nav class="crumbs"[\s\S]*?<\/nav>/)?.[0] ?? '';
     if (!/<a href="[^"]*\/(epoca|era)\/[^"]+\/"/.test(crumb)) fail('epoch crumb is not a link to an epoch page');
@@ -203,7 +209,9 @@ for (const ev of events) {
     if (/google\.|maps\.apple|bing\.com\/maps|waze|geo:/i.test(bridgeBlock)) fail('the bridge block must not name Google or another service, and the geo: link is made by the script on Android only');
     const sources = html.match(/<section class="sources"[\s\S]*?<\/section>/)?.[0] ?? '';
     if ((sources.match(/<li\b/g) ?? []).length !== ev.sources.length) fail(`expected ${ev.sources.length} sources in the list`);
-    if (!has(/<p class="checked"/)) fail('check date is missing');
+    // The check date appears once the card has been reviewed (reviewed_on); an unreviewed card shows none.
+    if (ev.reviewed_on && !has(/<p class="checked"/)) fail('check date is missing');
+    if (!ev.reviewed_on && has(/<p class="checked"/)) fail('check date shown for a card that is not reviewed');
     if (Boolean(ev.interactive) !== has(/data-interactive=/)) fail('interactive placeholder does not match the data');
     if (!has(/data-share-link/) || !has(/data-share-button/)) fail('share widget is missing');
     if (!has(/(corrigir|report)\/\?url=/)) fail('"Found a mistake?" link with the card address is missing');

@@ -1,0 +1,130 @@
+id: torres-vedras-1810
+slug:
+  pt: linhas-de-torres-vedras
+  en: lines-of-torres-vedras
+  ru: linii-torrish-vedrash
+title:
+  pt: As Linhas de Torres Vedras
+  en: The Lines of Torres Vedras
+  ru: Линии Торриш-Ведраш
+epoch: pombal-e-terramoto
+level: frame
+year: 1810
+year_label:
+  pt: 11 de outubro de 1810
+  en: 11 October 1810
+  ru: 11 октября 1810
+place:
+  name: Sobral de Monte Agraço (primeira linha)
+  lat: 39.017
+  lon: -9.15
+bridge:
+  name: Centro de Interpretação das Linhas de Torres Vedras (Forte de São Vicente)
+  address: Forte de São Vicente, 2560-629 Torres Vedras
+  lat: 0.0
+  lon: 0.0
+  url: https://www.rhlt.pt/?p=2685
+threads:
+- poder-e-revolta
+- gente-como-nos
+importance: 3
+label: documented
+min_age: '12'
+sensitive: true
+hook:
+  pt: >-
+    Um ano a construir fortes que os franceses mal sabiam que existiam.
+  en: >-
+    Portugal spent a year building forts the French barely knew existed.
+  ru: >-
+    Целый год строили линию фортов, о которой французы почти не знали.
+story:
+  pt: >-
+    Em outubro de 1809, Wellington mandou fortificar as colinas a norte de Lisboa.
+    Trabalhadores portugueses ergueram fortes e redutos em segredo. Em setembro
+    de 1810, o marechal Masséna avançou para Lisboa com cerca de 60 000 homens,
+    por uma terra sem comida, que os próprios camponeses tinham destruído. A 11
+    de outubro chegou às Linhas de Torres Vedras. Um mês depois, com fome, voltou
+    para trás.
+  en: >-
+    In October 1809, Wellington ordered fortifications built on the hills north
+    of Lisbon. Portuguese workers raised forts and redoubts in secret. In September
+    1810, Marshal Masséna marched on Lisbon with about 60,000 men, through a land
+    stripped of food by its own farmers. On 11 October he reached the Lines of Torres
+    Vedras. A month later, hungry, he turned back.
+  ru: >-
+    В октябре 1809 года Веллингтон приказал построить укрепления на холмах севернее
+    Лиссабона. Португальские рабочие втайне возводили форты и редуты. В сентябре
+    1810 года маршал Массена двинулся на Лиссабон примерно с 60 тысячами человек
+    через землю, где крестьяне сами уничтожили всю еду. 11 октября он дошёл до линий
+    Торриш-Ведраш. Через месяц, голодный, он повернул назад.
+more:
+  pt: >-
+    O sistema tinha três linhas de fortes e redutos entre o Tejo e o Atlântico,
+    desenhadas pelo engenheiro-chefe de Wellington, o coronel Richard Fletcher.
+    O maior forte, o de São Vicente, em Torres Vedras, tinha uma guarnição de cerca
+    de 2000 homens e espaço para uns 4000. Os camponeses portugueses abandonaram
+    as terras e destruíram a comida que não podiam levar, e o exército francês passou
+    fome. Os franceses testaram as linhas em Sobral, a 13 e 14 de outubro, e acamparam
+    diante delas até meados de novembro. As fontes divergem quanto ao número de
+    fortes e situam o exército de Masséna junto às linhas entre pouco mais de 50
+    000 e 61 000 homens. A campanha foi também um desastre para os civis: algumas
+    estimativas apontam para dezenas de milhares de mortos portugueses por fome
+    e doença.
+  en: >-
+    The system had three lines of forts and redoubts between the Tagus and the Atlantic,
+    designed by Wellington's chief engineer, Colonel Richard Fletcher. The biggest
+    fort, São Vicente at Torres Vedras, had a garrison of about 2,000 men and room
+    for around 4,000. Portuguese farmers left their land and destroyed the food
+    they could not carry, so the French army went hungry. The French probed the
+    lines at Sobral on 13 and 14 October, then camped in front of them until mid-November.
+    Sources differ on the number of forts, and put Masséna's army at the lines between
+    just over 50,000 and 61,000 men. The campaign was also a disaster for civilians:
+    some estimates speak of tens of thousands of Portuguese dead from hunger and
+    disease.
+  ru: >-
+    Система состояла из трёх линий фортов и редутов между Тежу и Атлантикой, спроектированных
+    главным инженером Веллингтона полковником Ричардом Флетчером. Крупнейший форт,
+    Сан-Висенте в Торриш-Ведраш, имел гарнизон около 2000 человек и место примерно
+    для 4000. Португальские крестьяне покидали земли и уничтожали еду, которую не
+    могли унести, поэтому французская армия голодала. Французы прощупали линии у
+    Собрала 13 и 14 октября, а затем стояли перед ними до середины ноября. Источники
+    расходятся в числе фортов и оценивают армию Массена у линий от чуть более 50
+    000 до 61 000 человек. Кампания стала катастрофой и для гражданских: по некоторым
+    оценкам, десятки тысяч португальцев умерли от голода и болезней.
+sources:
+- title: 'Wikipedia: Battle of Sobral'
+  url: https://en.wikipedia.org/wiki/Battle_of_Sobral
+  type: reference
+  accessed: '2026-10-15'
+- title: 'History of War: Lines of Torres Vedras'
+  url: https://www.historyofwar.org/articles/lines_of_torres_vedras.html
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Military Wiki / Wikipedia: Lines of Torres Vedras'
+  url: https://military-history.fandom.com/wiki/Lines_of_Torres_Vedras
+  type: reference
+  accessed: '2026-10-15'
+- title: Chartrand, Fuentes de Oñoro 1811 (Osprey, описание книги)
+  url: https://betterread.com.au/book/fuentes-de-onoro-1811.do
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Rota Histórica das Linhas de Torres Vedras: Centro de Interpretação (Capela
+    do Forte de S. Vicente)'
+  url: https://www.rhlt.pt/?p=2685
+  type: institutional
+  accessed: '2026-10-16'
+- title: 'Portugal Film Commission: Fort of São Vicente'
+  url: https://portugalfilmcommission.com/en/location/fort-of-sao-vicente/
+  type: institutional
+  accessed: '2026-10-16'
+- title: 'British Historical Society of Portugal: Wellington took refuge behind
+    the Lines of Torres Vedras'
+  url: https://www.bhsportugal.org/anglo-portuguese-timeline/wellington-took-refuge-behind-the-lines-of-torres-vedras
+  type: institutional
+  accessed: '2026-10-16'
+related:
+- legiao-portuguesa-1812
+- ponte-das-barcas-1809
+status: draft
+placeholder: false

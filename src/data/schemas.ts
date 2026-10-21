@@ -188,4 +188,4 @@ export const threadSchema = z.strictObject({
 });
 
 /** One showcase entry; `id` is the id of an event. Order in the file is the display order. */
-export const featuredSchema = z.strictObject({ id: z.string() });
+export const featuredSchema = z.strictObject({ id: z.string(), /** Position in featured.yaml; added by the loader (src/content.config.ts), not written in the file. */ position: z.number().int().optional() });

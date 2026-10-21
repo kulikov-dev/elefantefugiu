@@ -1,0 +1,123 @@
+id: guerra-laranjas-1801
+slug:
+  pt: guerra-das-laranjas
+  en: war-of-the-oranges
+  ru: apelsinovaya-voyna
+title:
+  pt: A Guerra das Laranjas
+  en: The War of the Oranges
+  ru: Апельсиновая война
+epoch: pombal-e-terramoto
+level: story
+year: 1801
+year_label:
+  pt: maio–junho de 1801
+  en: May–June 1801
+  ru: Май–июнь 1801
+place:
+  name: 'Alto Alentejo: Elvas, Campo Maior, Olivença'
+  lat: 38.6918
+  lon: -7.1006
+bridge:
+  name: Elvas, a praça-forte que travou Godoy (Património Mundial)
+  address: Praça da República, Elvas
+  lat: 38.8811
+  lon: -7.1631
+  url: https://www.cm-elvas.pt/
+  note:
+    pt: Elvas, a praça-forte que travou o exército de Godoy, é Património Mundial.
+    en: Elvas, the fortress town that held back Godoy's army, is a World Heritage
+      Site.
+    ru: Эльваш, крепость, остановившая армию Годоя, входит в список Всемирного
+      наследия.
+threads:
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: >-
+    A guerra batizada por um ramo de laranjeira enviado à rainha.
+  en: The war named after a sprig of oranges sent to a queen.
+  ru: Война, названная в честь апельсиновой ветки для королевы.
+story:
+  pt: >-
+    Em maio de 1801, a Espanha, empurrada pela França de Napoleão, invadiu
+    Portugal. O exército era comandado por Manuel Godoy, o primeiro-ministro e,
+    diziam, amante da rainha. Não conseguiu tomar a fortaleza de Elvas, mas
+    tomou Olivença e algumas vilas da fronteira. Diante de Elvas, conta a
+    tradição, Godoy colheu um ramo de laranjas e enviou-o à rainha Maria Luísa
+    como sinal de vitória. Os inimigos transformaram-no em anedota, e a guerra
+    ficou a ser a Guerra das Laranjas.
+  en: >-
+    In May 1801 Spain, pushed by Napoleon's France, invaded Portugal. The army
+    was led by Manuel Godoy, the prime minister and, people said, the queen's
+    lover. He could not take the fortress of Elvas, but he took Olivença and a
+    few border towns. Outside Elvas, says the tradition, Godoy picked a branch
+    of oranges and sent it to Queen María Luisa as a token of victory. His
+    enemies turned it into a joke, and the war became the War of the Oranges.
+  ru: >-
+    В мае 1801 года Испания, подталкиваемая наполеоновской Францией, вторглась в
+    Португалию. Армией командовал Мануэль Годой, первый министр и, как говорили,
+    любовник королевы. Крепость Элваш он взять не смог, зато взял Оливенсу и
+    несколько приграничных городков. Под Элвашем, гласит предание, Годой сорвал
+    ветку апельсинов и отправил королеве Марии Луизе как знак победы. Его враги
+    превратили это в шутку, и война осталась в истории «Апельсиновой».
+more:
+  pt: |-
+    A guerra durou cerca de dezoito dias, de 20 de maio ao Tratado de Badajoz, a 6 de junho de 1801. Elvas, sob o comando do general Francisco de Noronha, resistiu. A Espanha devolveu a maioria das praças que tinha tomado, mas ficou com Olivença, e Portugal teve de fechar os portos aos navios britânicos.
+
+    Em 1815, o Congresso de Viena reconheceu o direito de Portugal a Olivença, e a Espanha ratificou a ata final em 1817, mas a vila nunca foi devolvida. Hoje, Olivença, a 23 km de Elvas, tem cerca de 12 000 habitantes e é administrada pela Espanha. Se deve voltar a Portugal continua em discussão.
+
+    O episódio das laranjas é tradição, não um facto documentado. As fontes portuguesas falam de um ramo de flores de laranjeira, as espanholas e inglesas de laranjas, e diz-se que foram os adversários de Godoy a fazer dele uma anedota.
+  en: |-
+    The war lasted about eighteen days, from 20 May to the Treaty of Badajoz on 6 June 1801. Elvas, under General Francisco de Noronha, held out. Spain gave back most of the towns it had taken but kept Olivença, and Portugal had to close its ports to British ships.
+
+    In 1815 the Congress of Vienna recognised Portugal's right to Olivença, and Spain ratified the final act in 1817, yet the town was never returned. Today Olivença, 23 km from Elvas, has about 12,000 inhabitants and is administered by Spain. Whether it should return to Portugal is still argued.
+
+    The orange episode is tradition, not a documented fact. Portuguese sources speak of a branch of orange blossom, Spanish and English ones of oranges, and it is the opponents of Godoy who are said to have turned it into a joke.
+  ru: |-
+    Война длилась около восемнадцати дней, с 20 мая до Бадахосского договора 6 июня 1801 года. Элваш под командованием генерала Франсишку де Норонья устоял. Испания вернула большинство захваченных городов, но оставила Оливенсу, а Португалия должна была закрыть порты для британских кораблей.
+
+    В 1815 году Венский конгресс признал право Португалии на Оливенсу, а Испания ратифицировала заключительный акт в 1817 году, но город так и не вернули. Сегодня Оливенса, в 23 км от Элваша, насчитывает около 12 000 жителей и управляется Испанией. Должна ли она вернуться в Португалию, по-прежнему спорят.
+
+    Эпизод с апельсинами это предание, а не документированный факт. Португальские источники пишут о ветке апельсинового цвета, испанские и английские об апельсинах, а превратили это в шутку, как говорят, противники Годоя.
+sources:
+  - title: 'Wikipedia: War of the Oranges'
+    url: https://en.wikipedia.org/wiki/War_of_the_Oranges
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'Diário de Notícias: «Da Guerra das Laranjas à Guerra das Rosas»'
+    url: https://www.dn.pt/opiniao-dn/opiniao/da-guerra-das-laranjas-guerra-das-rosas
+    type: press
+    accessed: '2026-10-15'
+  - title: 'Observador: Olivença (спор, Венский конгресс, 1817, 12 тыс. жителей)'
+    url: https://observador.pt/?p=6905419
+    type: press
+    accessed: '2026-10-15'
+  - title: 'Dialnet: «Olivença, filha da Espanha e neta de Portugal»'
+    url: https://dialnet.unirioja.es/descarga/articulo/5396891.pdf
+    type: academic
+    accessed: '2026-10-15'
+  - title: Tratado de Badajoz, 6.06.1801 (описание редкого издания, Castro e Silva)
+    url: https://www.castroesilva.com/store/sku/2312SB006/optForgotPasswordForm.asp
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'Wikipedia: War of the Oranges'
+    url: https://en.wikipedia.org/wiki/War_of_the_Oranges
+    type: reference
+    accessed: '2026-10-16'
+  - title: 'Diário de Notícias (opinião): Da Guerra das Laranjas à Guerra das Rosas'
+    url: https://www.dn.pt/opiniao-dn/opiniao/da-guerra-das-laranjas-guerra-das-rosas
+    type: press
+    accessed: '2026-10-16'
+  - title: 'Muy Interesante: ¿Qué fue la guerra de las Naranjas?'
+    url: https://muyinteresante.okdiario.com/historia/34542.html
+    type: press
+    accessed: '2026-10-16'
+related:
+  - torres-vedras-1810
+status: ready
+placeholder: false
+ru_ready: true

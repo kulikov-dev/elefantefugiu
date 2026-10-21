@@ -1,0 +1,99 @@
+id: douro-1756
+slug:
+  pt: vinho-do-douro-1756
+  en: douro-wine-1756
+  ru: vino-douro-1756
+title:
+  pt: Pedras para guardar o vinho
+  en: Stones to Guard the Wine
+  ru: Камни, которыми огородили портвейн
+epoch: pombal-e-terramoto
+level: story
+year: 1756
+place:
+  name: Vale do Douro (Alto Douro)
+  lat: 41.16
+  lon: -7.79
+bridge:
+  name: 17•56 Museu & Enoteca da Real Companhia Velha (Cais de Gaia)
+  address: Alameda da Rua Serpa Pinto 44B, Vila Nova de Gaia
+  lat: 41.1389
+  lon: -8.6153
+  url: https://realcompanhiavelha.pt/en/caves/
+threads:
+- comida-e-vinho
+- poder-e-revolta
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: >-
+    Para salvar o vinho do Porto, Pombal mandou arrancar os sabugueiros.
+  en: To save port, Pombal had the Douro's elder trees uprooted.
+  ru: >-
+    Чтобы спасти портвейн, Помбал велел вырвать бузину в долине Дору.
+story:
+  pt: >-
+    Nos anos 1750, o comércio do vinho do Porto estava em crise: vinho a mais, falsificações
+    a mais, e a maior parte vendida por comerciantes britânicos no Porto. Em 1756,
+    Sebastião José de Carvalho e Melo, o futuro marquês de Pombal, criou uma companhia
+    com o monopólio do comércio com Inglaterra e o Brasil, e arrancaram-se os sabugueiros.
+    Dois anos depois foi erguido o primeiro dos 335 marcos de granito que delimitam
+    a região, muitas vezes apontada como a primeira região vinhateira demarcada
+    do mundo.
+  en: >-
+    By the 1750s the port wine trade was in crisis: too much wine, too many fakes,
+    and most of it sold by British merchants in Porto. In 1756 Sebastião José de
+    Carvalho e Melo, the future Marquis of Pombal, created a company with a monopoly
+    on the trade with England and Brazil, and the elder trees were uprooted. Two
+    years later the first of 335 granite pillars went up to mark the region's borders,
+    often called the world's first demarcated wine region.
+  ru: >-
+    К 1750-м торговля портвейном была в кризисе: вина слишком много, подделок слишком
+    много, а продавали его в основном британские купцы в Порту. В 1756 году Себастьян
+    Жозе де Карвалью-и-Мелу, будущий маркиз Помбал, создал компанию с монополией
+    на торговлю с Англией и Бразилией, и бузину вырвали. Через два года поставили
+    первый из 335 гранитных столбов, отмечавших границы региона, который часто называют
+    первым в мире демаркированным винным регионом.
+more:
+  pt: |-
+    Os marcos tinham gravado «Feitoria» e um ano, os primeiros de 1758, e cerca de cem dos 335 ainda estão de pé nas vinhas. Chamam-se marcos pombalinos.
+
+    A companhia fundada em 1756 continua viva: hoje é a Real Companhia Velha, e as suas caves e um pequeno museu, o 17•56, ficam à beira do Douro, em Vila Nova de Gaia.
+
+    Nem todos receberam bem as novas regras. Em fevereiro de 1757, os taberneiros do Porto revoltaram-se contra a Companhia; essa história tem cartão próprio.
+  en: |-
+    The stones were carved with 'Feitoria' and a year, the first in 1758, and about a hundred of the 335 still stand in the vineyards. In Portuguese they are the marcos pombalinos.
+
+    The company founded in 1756 is still alive: today it is the Real Companhia Velha, and its cellars and a small museum, 17•56, stand on the banks of the Douro in Vila Nova de Gaia.
+
+    Not everyone welcomed the new rules. In February 1757 Porto's tavern-keepers rose against the Company; that story has its own card.
+  ru: |-
+    На камнях вырезали «Feitoria» и год, первые в 1758-м, и около сотни из 335 до сих пор стоят среди виноградников. По-португальски они называются marcos pombalinos.
+
+    Компания, основанная в 1756 году, существует до сих пор: сегодня это Real Companhia Velha, а её погреба и небольшой музей 17•56 стоят на берегу Дору в Вила-Нова-ди-Гая.
+
+    Не все приняли новые правила. В феврале 1757 года хозяева таверн Порту восстали против Компании: эта история в отдельной карточке.
+sources:
+- title: 'Taylor''s Port: The Marquis of Pombal'
+  url: https://www.taylor.pt/en/what-is-port-wine/history-of-port/the-marquis-of-pombal
+  type: institutional
+  accessed: '2026-10-16'
+- title: 'Wine Anorak: Feitoria, demarcating the Douro'
+  url: https://www.wineanorak.com/wineblog/portugal/feitoria-demarcating-the-douro
+  type: press
+  accessed: '2026-10-16'
+- title: Álvaro Moreira da Fonseca, As Demarcações Pombalinas no Douro Vinhateiro
+    (1949), по тексту Univ. do Porto
+  url: https://ler.letras.up.pt/uploads/ficheiros/18513.pdf
+  type: academic
+  accessed: '2026-10-16'
+- title: 'Real Companhia Velha: Gaia Cellars (официальный сайт)'
+  url: https://realcompanhiavelha.pt/en/caves/
+  type: institutional
+  accessed: '2026-10-16'
+related:
+- motim-companhia-1757
+status: draft
+placeholder: false

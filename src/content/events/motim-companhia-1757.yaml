@@ -1,0 +1,115 @@
+id: motim-companhia-1757
+slug:
+  pt: morra-a-companhia
+  en: death-to-the-company
+  ru: smert-kompanii
+title:
+  pt: Morra a Companhia!
+  en: Death to the Company!
+  ru: Смерть Компании!
+epoch: pombal-e-terramoto
+level: story
+year: 1757
+year_label:
+  pt: 23 de fevereiro de 1757
+  en: 23 February 1757
+  ru: 23 февраля 1757
+place:
+  name: Porto
+  lat: 41.1496
+  lon: -8.611
+bridge:
+  name: 17•56 Museu & Enoteca da Real Companhia Velha (Cais de Gaia)
+  address: Alameda da Rua Serpa Pinto 44B, Vila Nova de Gaia
+  lat: 41.1389
+  lon: -8.6153
+  url: https://realcompanhiavelha.pt/en/caves/
+  note:
+    pt: Em Gaia, o museu da Real Companhia Velha guarda a memória da companhia que o
+      motim atacou.
+    en: In Gaia, the Real Companhia Velha museum keeps the memory of the company the
+      riot attacked.
+    ru: В Гайе музей Реал-Компаньи-Велья хранит память о компании, на которую
+      обрушился мятеж.
+threads:
+  - comida-e-vinho
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: '12'
+sensitive: true
+hook:
+  pt: >-
+    O Porto revoltou-se contra o ministro do rei, a gritar «Viva el-Rei!»
+  en: >-
+    Porto rose against the king's minister, shouting 'Long live the king!'
+  ru: >-
+    Порту восстал против министра, крича «Да здравствует король!»
+story:
+  pt: >-
+    Na quarta-feira de cinzas, 23 de fevereiro de 1757, a multidão encheu as
+    ruas do Porto a gritar pelo rei e contra a nova Companhia do vinho. Os
+    taberneiros só viam um monopólio. Agrediram um juiz e destruíram bens.
+    Pombal respondeu com tropas e julgamentos. Em outubro, entre 14 e 17 pessoas
+    foram executadas.
+  en: >-
+    On Ash Wednesday, 23 February 1757, crowds filled the streets of Porto,
+    shouting for the king and against the new Wine Company. Tavern-keepers saw
+    only a monopoly. People roughed up a judge and wrecked property. Pombal
+    answered with troops and trials. By October, between 14 and 17 people were
+    put to death.
+  ru: >-
+    В пепельную среду, 23 февраля 1757 года, толпы заполнили улицы Порту с
+    криками в защиту короля и против новой Винной компании. Хозяева таверн
+    видели в ней только монополию. Избили судью и разгромили имущество. Помбал
+    ответил войсками и судами. К октябрю от 14 до 17 человек были казнены.
+more:
+  pt: |-
+    Em Portugal, a revolta chama-se Motim da Companhia. Seguiram-se tropas e lei marcial. As contagens dos executados variam, de 14 a 17 nas fontes que encontrámos; uma indica 13 homens e quatro mulheres, a 14 de outubro de 1757.
+
+    Por trás da raiva estavam preços e controlo: a Companhia decidia quem comprava e vendia vinho do Douro, e ingleses, lavradores do Douro e taberneiros do Porto tinham queixas. A Companhia sobreviveu muito a Pombal: o nome e a marca ainda se usam hoje. Como tudo começou, e os marcos que lhe delimitaram a região, contam-se noutro cartão.
+  en: |-
+    In Portuguese the riot is the Motim da Companhia. Troops and martial law followed. Counts of the executed differ, from 14 to 17 in the sources we found; one lists 13 men and four women on 14 October 1757.
+
+    Behind the anger lay prices and control: the Company decided who could buy and sell Douro wine, and English traders, Douro growers and Porto's tavern-keepers all had grievances. The Company outlived Pombal by far: its name and trademark are still in use today. How it began, and the stones that marked its borders, are told on another card.
+  ru: |-
+    По-португальски бунт называется Motim da Companhia. Затем пришли войска и военное положение. Число казнённых расходится: от 14 до 17 в найденных нами источниках, один перечисляет 13 мужчин и четырёх женщин 14 октября 1757 года.
+
+    За гневом стояли цены и контроль: Компания решала, кто может покупать и продавать вино Дору, и англичане, виноделы Дору и хозяева таверн Порту имели претензии. Компания пережила Помбала намного: её название и торговая марка в ходу до сих пор. Как всё началось и какие камни отметили её границы, рассказано в другой карточке.
+sources:
+  - title: 'Executed Today: «1757: The Tipplers Revolt leaders»'
+    url: https://www.executedtoday.com/2013/page/9/
+    type: press
+    accessed: '2026-10-15'
+  - title: Fernando de Sousa, «Morra a Companhia!» (O lado sombrio da instituição
+      pombalina), Revista População e Sociedade
+    url: https://repositorio-aberto.up.pt/bitstream/10216/20418/2/revpopsoc162008frsilva000085287.pdf
+    type: academic
+    accessed: '2026-10-15'
+  - title: Fernando de Sousa, A Companhia Geral da Agricultura das Vinhas do Alto
+      Douro (1756–1978), CEPESE 2003 (аннотация)
+    url: https://repositorio-aberto.up.pt/handle/10216/20325
+    type: academic
+    accessed: '2026-10-15'
+  - title: 'Letras UP: статья об архитектуре Порту XVIII в. (сноска о 23.02.1757,
+      Quarta-feira de cinzas)'
+    url: https://ler.letras.up.pt/uploads/ficheiros/4947.pdf
+    type: academic
+    accessed: '2026-10-15'
+  - title: 'Real Companhia Velha: Gaia Cellars (официальный сайт)'
+    url: https://realcompanhiavelha.pt/en/caves/
+    type: institutional
+    accessed: '2026-10-16'
+  - title: 'Agroportal: открытие 17•56 Museu & Enoteca da Real Companhia Velha (2018)'
+    url: https://bo.agroportal.pt/?p=689450
+    type: press
+    accessed: '2026-10-16'
+  - title: 'R. McCaa (UMN): Pombal, the paradox (слайд)'
+    url: https://users.pop.umn.edu/~rmccaa/colonial/brazilc3/tsld014.htm
+    type: reference
+    accessed: '2026-10-16'
+related:
+  - douro-1756
+status: ready
+placeholder: false
+ru_ready: true

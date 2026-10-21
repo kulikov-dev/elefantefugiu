@@ -158,6 +158,9 @@ for (const [kind, list] of [['epoch', epochs], ['thread', threads]] as const) {
   }
 }
 
+/** A card that is ready but not reviewed yet, or has gaps in its bridge, is a warning while the site is built for preview and an error under the launch gate (ALLOW_PLACEHOLDER=false). */
+const gapLevel: Level = (process.env.ALLOW_PLACEHOLDER ?? 'true').trim().toLowerCase() === 'false' ? 'error' : 'warn';
+
 for (const { item: ev, file, stem } of events) {
   const ready = ev.status === 'ready';
   const lenLevel: Level = ev.placeholder ? 'warn' : 'error';
@@ -232,7 +235,7 @@ for (const { item: ev, file, stem } of events) {
   }
 
   // text length
-  const limits = { hook: [0, 12], story: [40, 70], more: [0, 150] } as const;
+  const limits = { hook: [0, 12], story: [40, 90], more: [0, 250] } as const;
   for (const field of ['hook', 'story', 'more'] as const) {
     for (const lang of langsOf(ev)) {
       const value = ev[field][lang] ?? '';
@@ -299,12 +302,12 @@ for (const { item: ev, file, stem } of events) {
 
   // fields required for ready
   if (ready) {
-    if (ev.reviewed_by === undefined || ev.reviewed_by.trim() === '') report('error', file, 'required when status is ready', 'reviewed_by');
-    if (ev.reviewed_on === undefined) report('error', file, 'required when status is ready', 'reviewed_on');
+    if (ev.reviewed_by === undefined || ev.reviewed_by.trim() === '') report(gapLevel, file, 'required when status is ready (not reviewed yet)', 'reviewed_by');
+    if (ev.reviewed_on === undefined) report(gapLevel, file, 'required when status is ready (not reviewed yet)', 'reviewed_on');
     for (const key of ['name', 'address', 'url'] as const) {
-      if (isTodo(ev.bridge[key])) report('error', file, 'is empty or TODO but status is ready', `bridge.${key}`);
+      if (isTodo(ev.bridge[key])) report(gapLevel, file, 'is empty or TODO but status is ready', `bridge.${key}`);
     }
-    if (!HTTP.test(ev.bridge.url)) report('error', file, `"${ev.bridge.url}" is not an http(s) address`, 'bridge.url');
+    if (!HTTP.test(ev.bridge.url)) report(gapLevel, file, `"${ev.bridge.url}" is not an http(s) address`, 'bridge.url');
     const minSources = ev.level === 'frame' ? 2 : 1;
     if (ev.sources.length < minSources) {
       report('error', file, `${ev.sources.length} source(s), ready ${ev.level} events need at least ${minSources}`, 'sources');

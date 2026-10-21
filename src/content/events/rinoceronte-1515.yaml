@@ -1,0 +1,124 @@
+id: rinoceronte-1515
+slug:
+  pt: rinoceronte-e-elefante
+  en: rhino-and-elephant
+  ru: nosorog-i-slon
+title:
+  pt: O rinoceronte e o elefante
+  en: The Rhino and the Elephant
+  ru: Носорог и слон
+epoch: avis-e-descobrimentos
+level: story
+year: 1515
+place:
+  name: Lisboa, Paço da Ribeira (hoje Praça do Comércio)
+  lat: 38.7075
+  lon: -9.1364
+bridge:
+  name: Torre de Belém (guarita com o rinoceronte)
+  address: Av. Brasília, Lisboa
+  lat: 38.6916
+  lon: -9.216
+  url: https://www.museusemonumentos.pt/
+  note:
+    pt: Na Torre de Belém, uma guarita tem esculpida a cabeça de um rinoceronte.
+    en: On the Tower of Belém, a sentry box carries a carved rhinoceros head.
+    ru: На Беленской башне одна из сторожевых башенок украшена резной головой
+      носорога.
+threads:
+  - natureza
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: >-
+    O rei pôs um rinoceronte contra um elefante. O elefante fugiu.
+  en: >-
+    The king pitted a rhino against an elephant. The elephant fled.
+  ru: Король стравил носорога со слоном. Слон убежал.
+story:
+  pt: >-
+    Em maio de 1515 chegou a Lisboa um rinoceronte vindo da Índia, o primeiro
+    vivo que a Europa via desde os romanos. A 3 de junho, D. Manuel I quis ver
+    se era verdade o que Plínio escrevera: que elefantes e rinocerontes são
+    inimigos de morte. Trouxeram um elefante novo perante a multidão. O bicho
+    assustou-se com o barulho e fugiu antes de a luta começar.
+  en: >-
+    In May 1515 a rhinoceros arrived in Lisbon from India, the first live one in
+    Europe since Roman times. On 3 June King Manuel I decided to test Pliny's
+    claim that elephants and rhinos are bitter enemies. A young elephant was
+    brought out before a crowd. It panicked at the noisy crowd and fled before a
+    single blow was struck.
+  ru: >-
+    В мае 1515 года в Лиссабон из Индии привезли носорога, первого живого
+    носорога в Европе со времён римлян. 3 июня король Мануэл I решил проверить
+    слова Плиния о том, что слоны и носороги смертельные враги. К носорогу
+    вывели молодого слона перед толпой. Слон испугался шума и убежал, не
+    дождавшись первого удара.
+more:
+  pt: |-
+    O rinoceronte foi uma oferta do sultão Muzaffar de Cambaia (Guzerate) ao governador Afonso de Albuquerque, que o enviou a D. Manuel depois de quatro meses de viagem. Viveu na Europa de 20 de maio de 1515 a janeiro de 1516.
+
+    Um ano antes, D. Manuel tinha enviado ao Papa Leão X um elefante, Hanão, e em dezembro de 1515 decidiu enviar também o rinoceronte. O navio afundou-se numa tempestade ao largo de La Spezia, no fim de janeiro de 1516, e o animal morreu afogado. Os relatos sobre o corpo divergem: a maioria diz que deu à costa, foi empalhado e seguiu para o Papa, outros que a pele voltou primeiro a Lisboa. Não encontrámos rasto de nenhum rinoceronte empalhado que exista hoje.
+
+    Albrecht Dürer nunca o viu: baseou-se no esboço e na descrição de um mercador, mas a sua gravura, com um corno a mais no ombro, passou séculos a ser o rinoceronte da Europa.
+
+    Em Lisboa, diz-se que há um rinoceronte de pedra numa guarita da Torre de Belém, construída por essa altura.
+  en: |-
+    The rhino was a gift from Sultan Muzaffar of Cambay (Gujarat) to the governor Afonso de Albuquerque, who sent it on to Manuel after a four-month voyage. It lived in Europe from 20 May 1515 to January 1516.
+
+    A year earlier Manuel had sent Pope Leo X an elephant, Hanno, and in December 1515 he decided to send the rhino too. The ship sank in a storm off La Spezia at the end of January 1516, and the animal drowned. Accounts of the body differ: most say it washed ashore and was stuffed and sent on to the Pope, others that the skin went back to Lisbon first. We found no trace of a stuffed rhino today.
+
+    Albrecht Dürer never saw it: he worked from a sketch and a description from Lisbon, but his woodcut, with its extra horn on the shoulder, became Europe's standard rhinoceros for centuries.
+
+    In Lisbon, a stone rhinoceros is thought to look out from a corner turret of Belém Tower, built in those same years.
+  ru: |-
+    Носорог был подарком султана Музаффара Камбейского (Гуджарат) губернатору Афонсу де Албукерки, который переслал его Мануэлу после четырёхмесячного плавания. Он прожил в Европе с 20 мая 1515 года по январь 1516-го.
+
+    Годом раньше Мануэл отправил папе Льву X слона по имени Ханно, а в декабре 1515 года решил послать и носорога. Корабль затонул в шторм у Специи в конце января 1516 года, и животное утонуло. О судьбе тела рассказывают по-разному: чаще пишут, что его выбросило на берег, из него сделали чучело и отправили папе, но есть версия, что шкуру сначала вернули в Лиссабон. Следов сохранившегося чучела мы не нашли.
+
+    Альбрехт Дюрер его никогда не видел: он работал по наброску и описанию купца, но его гравюра с лишним рогом на плече на века стала в Европе образцом носорога.
+
+    В Лиссабоне, как считают, каменный носорог выглядывает с угловой башенки Белемской башни, построенной в те же годы.
+sources:
+  - title: Early depictions of the first Lisbon rhinoceros in the 16th century
+      (Pachyderm, DOI 10.69649/pachyderm.v65i.1312)
+    url: https://pachydermjournal.org/index.php/pachyderm/article/view/1312
+    type: academic
+    accessed: '2026-10-14'
+  - title: 'University of Warwick, press release on Giorgio Riello''s research on
+      Ganda: «How the Pope''s rhino drowned»'
+    url: https://warwick.ac.uk/news/pressreleases/how_the_popes/
+    type: institutional
+    accessed: '2026-10-14'
+  - title: 'Google Arts & Culture / DGPC: Bartizan depicting a rhinoceros, Tower of
+      Belém (формулировка «possibly»)'
+    url: https://artsandculture.google.com/story/the-lisbon-rhinoceros-tower-of-belém/fAWhMvHAdydLLw?hl=en-GB
+    type: institutional
+    accessed: '2026-10-14'
+  - title: 'Times Higher Education: «How Leo lionised a jumbo pet» (о книге Бедини)'
+    url: https://www.timeshighereducation.com/node/87270
+    type: press
+    accessed: '2026-10-16'
+  - title: 'International Rhino Foundation: A Gift fit for a King… and Also a Pope!'
+    url: https://rhinos.org/?p=3956
+    type: press
+    accessed: '2026-10-16'
+  - title: 'L. C. Rookmaaker: Captive rhinoceroses in Europe from 1500 until 1810
+      (Bijdragen tot de Dierkunde 43, 1973)'
+    url: https://rhinoresourcecenter.com/wp-content/uploads/2006/12/1175862823.pdf
+    type: academic
+    accessed: '2026-10-16'
+  - title: 'Dorotheum: описание лота по данным Альбертины (Вена)'
+    url: https://dorotheum.com/cz/l/2184101
+    type: reference
+    accessed: '2026-10-16'
+  - title: 'Qalam: «Носорог Альбрехта Дюрера»'
+    url: https://qalam.global/en/articles/nosorog-albrexta-diurera-ru-72
+    type: press
+    accessed: '2026-10-16'
+related: []
+status: ready
+placeholder: false
+ru_ready: true

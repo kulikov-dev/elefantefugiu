@@ -1,0 +1,113 @@
+id: legiao-portuguesa-1812
+slug:
+  pt: legiao-portuguesa
+  en: portuguese-legion
+  ru: portugaltsy-v-armii-napoleona
+title:
+  pt: Portugueses no exército de Napoleão
+  en: Portuguese in Napoleon's Army
+  ru: Португальцы в армии Наполеона
+epoch: pombal-e-terramoto
+level: story
+year: 1812
+year_label:
+  pt: '1812'
+  en: '1812'
+  ru: '1812'
+place:
+  name: Borodino, Rússia
+  lat: 55.5216
+  lon: 35.8183
+bridge:
+  name: TODO
+  address: TODO
+  lat: 0.0
+  lon: 0.0
+  url: TODO
+threads:
+- gente-como-nos
+- poder-e-revolta
+importance: 2
+label: documented
+min_age: '12'
+sensitive: false
+hook:
+  pt: >-
+    Depois da Rússia, restavam uns cem homens da Legião de Napoleão.
+  en: >-
+    After Russia, about a hundred of Napoleon's Portuguese Legion were left.
+  ru: >-
+    Из португальского легиона Наполеона после России осталась примерно сотня.
+story:
+  pt: >-
+    Em 1808, os ocupantes franceses dissolveram o exército português e formaram
+    uma legião com as suas unidades. Cerca de 9000 homens, comandados pelo marquês
+    de Alorna, partiram para França como Legião Portuguesa. Combateram em Wagram,
+    em 1809, e em 1812 foram para a Rússia, a Smolensk e a Borodino. Em 1813, restavam
+    apenas uns cem.
+  en: >-
+    In 1808 the French occupiers disbanded Portugal's army, then built a legion
+    from its units. About 9,000 men, led by the Marquis of Alorna, marched off to
+    France as the Portuguese Legion. They fought at Wagram in 1809 and in 1812 went
+    to Russia, to Smolensk and Borodino. By 1813 only about a hundred were left.
+  ru: >-
+    В 1808 году французские оккупанты распустили португальскую армию, а затем набрали
+    из её частей легион. Около 9000 человек под командованием маркиза д’Алорна отправились
+    во Францию как Португальский легион. Они сражались при Ваграме в 1809 году,
+    а в 1812 году ушли в Россию, под Смоленск и Бородино. К 1813 году в строю осталось
+    около ста человек.
+more:
+  pt: >-
+    A Legião foi organizada a partir de fevereiro de 1808 e partiu para Espanha
+    em abril; um decreto de 5 de maio tornou-a oficial. Em 1810, sessenta dos seus
+    homens receberam a Legião de Honra. O segundo-comandante, Gomes Freire de Andrade,
+    servira antes no exército russo de Catarina II. Depois da Rússia, os sobreviventes
+    combateram em Lützen e Bautzen, e quando Napoleão dissolveu os exércitos «estrangeiros»,
+    em novembro de 1813, os restantes foram integrados em corpos de sapadores franceses.
+    As fontes dão à Legião entre 8000 e 12 000 homens e divergem quanto às perdas
+    e à vontade com que os homens serviram. O comandante, o marquês de Alorna, morreu
+    em Königsberg.
+  en: >-
+    The Legion was organised from February 1808 and left for Spain in April; a decree
+    of 5 May made it official. In 1810 sixty of its men received the Legion of Honour.
+    Its second-in-command, Gomes Freire de Andrade, had earlier served in Catherine
+    II's Russian army. After Russia the survivors fought at Lützen and Bautzen,
+    and when Napoleon dissolved the 'foreign' armies in November 1813, the rest
+    joined French engineer units. Sources put the Legion's size at 8,000 to 12,000,
+    and differ on its losses and on how willingly its men served. Its commander,
+    the Marquis of Alorna, died at Königsberg.
+  ru: >-
+    Легион был организован с февраля 1808 года и выступил в Испанию в апреле; декрет
+    от 5 мая сделал его официальным. В 1810 году шестьдесят его солдат получили
+    орден Почётного легиона. Его заместитель, Гомеш Фрейре де Андраде, раньше служил
+    в русской армии Екатерины II. После России уцелевшие сражались при Лютцене и
+    Баутцене, а когда Наполеон в ноябре 1813 года распустил «иностранные» армии,
+    остальные влились во французские сапёрные части. Источники оценивают размер
+    Легиона от 8000 до 12 000 человек и расходятся в оценке потерь и в том, насколько
+    охотно служили его люди. Его командир, маркиз д’Алорна, умер в Кёнигсберге.
+sources:
+- title: 'Wikipedia: Portuguese Legion (Napoleonic Wars)'
+  url: https://en.wikipedia.org/wiki/Portuguese_Legion_(Napoleonic_Wars)
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Infopédia: Legião Portuguesa (1808)'
+  url: https://www.infopedia.pt/artigos/$legiao-portuguesa-(1808)
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Wikipedia: Pedro de Almeida Portugal, 3rd Marquis of Alorna'
+  url: https://en.wikipedia.org/wiki/Pedro_de_Almeida_Portugal,_3rd_Marquis_of_Alorna
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Nuno Lemos Pires: El Ejército Portugués y el nuevo Ejército Anglo-portugués
+    en 1808 (Madrid, 2004)'
+  url: https://www.centotredicesimo.org/wp-content/uploads/2015/11/Nuno-Lemos-Pires-Ejercito-portugues-y-anglo-portugues-1808-libre.pdf
+  type: academic
+  accessed: '2026-10-16'
+- title: 'Observador: «A Santa Aliança e a exceção portuguesa»'
+  url: https://observador.pt/opiniao/a-santa-alianca-e-a-excepcao-portuguesa/
+  type: press
+  accessed: '2026-10-16'
+related:
+- torres-vedras-1810
+status: draft
+placeholder: false

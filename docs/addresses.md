@@ -29,22 +29,11 @@
 
 | Event | English address | Russian address | Russian text |
 | --- | --- | --- | --- |
-| evento-exemplo-01 | `/en/story/example-event-01/` | `/ru/istoriya/testovoe-sobytie-01/` | yes |
-| evento-exemplo-02 | `/en/story/example-event-02/` | `/ru/istoriya/testovoe-sobytie-02/` | yes |
-| evento-exemplo-03 | `/en/story/example-event-03/` | `/ru/istoriya/testovoe-sobytie-03/` | yes |
-| evento-exemplo-04 | `/en/story/example-event-04/` | `/ru/istoriya/testovoe-sobytie-04/` | yes |
-| evento-exemplo-05 | `/en/story/example-event-05/` | `/ru/istoriya/testovoe-sobytie-05/` | yes |
-| evento-exemplo-06 | `/en/story/example-event-06/` | `/ru/istoriya/testovoe-sobytie-06/` | yes |
-| evento-exemplo-07 | `/en/story/example-event-07/` | `/ru/istoriya/testovoe-sobytie-07/` | yes |
-| evento-exemplo-08 | `/en/story/example-event-08/` | `/ru/istoriya/testovoe-sobytie-08/` | yes |
-| evento-exemplo-09 | `/en/story/example-event-09/` | `/ru/istoriya/example-event-09/` | no (English text, banner) |
-| evento-exemplo-10 | `/en/story/example-event-10/` | `/ru/istoriya/example-event-10/` | no (English text, banner) |
-| evento-exemplo-11 | `/en/story/example-event-11/` | `/ru/istoriya/example-event-11/` | no (English text, banner) |
-| evento-exemplo-12 | `/en/story/example-event-12/` | `/ru/istoriya/example-event-12/` | no (English text, banner) |
-| evento-exemplo-13 | `/en/story/example-event-13/` | `/ru/istoriya/example-event-13/` | no (English text, banner) |
-| evento-exemplo-14 | `/en/story/example-event-14/` | `/ru/istoriya/example-event-14/` | no (English text, banner) |
-| evento-exemplo-15 | `/en/story/example-event-15/` | `/ru/istoriya/example-event-15/` | no (English text, banner) |
-| evento-exemplo-16 | `/en/story/example-event-16/` | `/ru/istoriya/example-event-16/` | no (English text, banner) |
+| aljubarrota-1385 | `/en/story/battle-of-aljubarrota/` | `/ru/istoriya/bitva-pri-alzhubarrote/` | yes |
+| cantino-1502 | `/en/story/cantino-map/` | `/ru/istoriya/karta-za-12-dukatov/` | yes |
+| casa-da-neve-1782 | `/en/story/house-of-snow/` | `/ru/istoriya/dom-snega/` | yes |
+| douro-1756 | `/en/story/douro-wine-1756/` | `/ru/istoriya/vino-douro-1756/` | yes |
+| elefantes-malaca-1511 | `/en/story/elephants-of-malacca/` | `/ru/istoriya/den-kogda-slony-povernuli-nazad/` | yes |
 | evento-exemplo-17 | `/en/story/example-event-17/` | `/ru/istoriya/example-event-17/` | no (English text, banner) |
 | evento-exemplo-18 | `/en/story/example-event-18/` | `/ru/istoriya/example-event-18/` | no (English text, banner) |
 | evento-exemplo-19 | `/en/story/example-event-19/` | `/ru/istoriya/example-event-19/` | no (English text, banner) |
@@ -53,5 +42,13 @@
 | evento-exemplo-22 | `/en/story/example-event-22/` | `/ru/istoriya/example-event-22/` | no (English text, banner) |
 | evento-exemplo-23 | `/en/story/example-event-23/` | `/ru/istoriya/example-event-23/` | no (English text, banner) |
 | evento-exemplo-24 | `/en/story/example-event-24/` | `/ru/istoriya/example-event-24/` | no (English text, banner) |
+| guerra-laranjas-1801 | `/en/story/war-of-the-oranges/` | `/ru/istoriya/apelsinovaya-voyna/` | yes |
+| legiao-portuguesa-1812 | `/en/story/portuguese-legion/` | `/ru/istoriya/portugaltsy-v-armii-napoleona/` | yes |
+| motim-companhia-1757 | `/en/story/death-to-the-company/` | `/ru/istoriya/smert-kompanii/` | yes |
+| ponte-das-barcas-1809 | `/en/story/bridge-of-boats/` | `/ru/istoriya/most-iz-lodok/` | yes |
+| rinoceronte-1515 | `/en/story/rhino-and-elephant/` | `/ru/istoriya/nosorog-i-slon/` | yes |
+| terramoto-1755 | `/en/story/lisbon-earthquake/` | `/ru/istoriya/lissabonskoe-zemletryasenie/` | yes |
+| torres-vedras-1810 | `/en/story/lines-of-torres-vedras/` | `/ru/istoriya/linii-torrish-vedrash/` | yes |
+| tripeiros-1415 | `/en/story/tripe-eaters-of-porto/` | `/ru/istoriya/lyubiteli-potrohov-iz-portu/` | yes |
 
-QR address of a card: `/p/{event id}/` (for example `/p/evento-exemplo-01/`).
+QR address of a card: `/p/{event id}/` (for example `/p/aljubarrota-1385/`).

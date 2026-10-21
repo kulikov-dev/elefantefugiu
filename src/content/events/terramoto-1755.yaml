@@ -1,0 +1,137 @@
+id: terramoto-1755
+slug:
+  pt: terramoto-de-lisboa
+  en: lisbon-earthquake
+  ru: lissabonskoe-zemletryasenie
+title:
+  pt: O terramoto de 1755
+  en: The Lisbon Earthquake
+  ru: Лиссабонское землетрясение
+epoch: pombal-e-terramoto
+level: frame
+year: 1755
+year_label:
+  pt: 1 de novembro de 1755
+  en: 1 November 1755
+  ru: 1 ноября 1755
+place:
+  name: Lisboa
+  lat: 38.7223
+  lon: -9.1393
+bridge:
+  name: Museu Arqueológico do Carmo (ruínas do Convento do Carmo)
+  address: Largo do Carmo, 1200-092 Lisboa
+  lat: 38.7123
+  lon: -9.1406
+  url: https://museuarqueologicodocarmo.pt/
+  note:
+    pt: Em Lisboa, as ruínas do Convento do Carmo estão abertas ao céu desde 1755.
+    en: In Lisbon, the ruins of the Carmo Convent have stood open to the sky since
+      1755.
+    ru: В Лиссабоне руины монастыря Кармо стоят открытыми небу с 1755 года.
+threads:
+  - natureza
+importance: 3
+label: documented
+min_age: '12'
+sensitive: true
+hook:
+  pt: O rei saiu de Lisboa nessa manhã porque uma filha quis.
+  en: >-
+    The king left Lisbon that morning because his daughter asked.
+  ru: >-
+    Король уехал из Лиссабона в то утро, потому что дочь попросила.
+story:
+  pt: >-
+    A 1 de novembro de 1755, Dia de Todos os Santos, D. José I ouviu missa logo
+    de manhã e saiu de Lisboa, porque uma filha queria passar o feriado fora. Às
+    9h40, o terramoto; as igrejas estavam cheias. Seguiram-se o tsunami e dias
+    de fogo, e morreram dezenas de milhares. O rei escapou, mas ficou com medo
+    de paredes, e a corte mudou-se para tendas na Ajuda.
+  en: >-
+    On 1 November 1755, All Saints' Day, King José I heard Mass at sunrise and
+    left Lisbon, because a daughter wanted to spend the holiday outside the
+    city. At 9:40 the earthquake hit; the churches were full. A tsunami and days
+    of fire followed; tens of thousands died. The king lived, but afterwards
+    feared living within walls, and the court moved into tents on the hills of
+    Ajuda.
+  ru: >-
+    1 ноября 1755 года, в День всех святых, король Жозе I выслушал мессу на
+    рассвете и уехал из Лиссабона: одна из дочерей хотела провести праздник за
+    городом. В 9:40 началось землетрясение, церкви были полны. Затем пришли
+    цунами и несколько дней пожаров, погибли десятки тысяч человек. Король
+    остался жив, но с тех пор боялся жить в стенах, и двор переехал в палатки на
+    холмах Ажуды.
+more:
+  pt: >-
+    Os números são incertos. O historiador de economia Álvaro Pereira estima
+    entre 30 000 e 40 000 mortos em Lisboa e entre 40 000 e 50 000 em Portugal,
+    Espanha e Marrocos; outras estimativas vão dos 10 000 aos 100 000. Também as
+    alturas das ondas são discutidas: um estudo feito a partir de documentos da
+    época diz que valores muito repetidos, como os 14 a 16 metros em Tânger,
+    devem ser postos de parte. Pombal, o ministro do rei, terá dito: enterrar os
+    mortos e tratar dos vivos. Os registos mostram que mandou retirar os corpos
+    logo no dia seguinte, para evitar a peste. O rei escreveu ao cunhado, em
+    Espanha, que ficara sem casa, sem criados, sem súbditos, sem dinheiro e sem
+    pão. Hoje, a nave sem telhado do Convento do Carmo, fundado pelo vencedor de
+    Aljubarrota, é o memorial do terramoto.
+  en: >-
+    Numbers are uncertain. Economic historian Álvaro Pereira estimates
+    30,000–40,000 deaths in Lisbon and 40,000–50,000 across Portugal, Spain and
+    Morocco; other estimates range from 10,000 to 100,000. Wave heights are
+    disputed too: a study of primary documents says long-repeated figures, such
+    as 14–16 m at Tangier, should be abandoned. Pombal, the king's chief
+    minister, reportedly said: bury the dead and heal the living. Records show
+    he ordered the bodies removed the very next day, to prevent plague. The king
+    wrote to his brother-in-law in Spain that he had no house, no servants, no
+    subjects, no money, no bread. Today the roofless nave of the Carmo convent,
+    founded by Nuno Álvares Pereira of Aljubarrota fame, serves as the memorial.
+  ru: >-
+    Цифры неточны. Историк экономики Альваро Перейра оценивает число погибших в
+    30 000–40 000 в Лиссабоне и 40 000–50 000 в Португалии, Испании и Марокко;
+    другие оценки колеблются от 10 000 до 100 000. Высоты волн тоже
+    оспариваются: исследование по документам эпохи говорит, что давно
+    повторяемые цифры, например 14–16 м в Танжере, нужно отбросить. Помбал,
+    главный министр короля, якобы сказал: хоронить мёртвых и лечить живых.
+    Записи показывают, что уже на следующий день он приказал убрать тела, чтобы
+    предотвратить чуму. Король написал шурину в Испанию, что у него нет ни дома,
+    ни слуг, ни подданных, ни денег, ни хлеба. Сегодня неф монастыря Кармо без
+    крыши, основанного победителем при Алжубарроте Нуну Алваришем Перейрой,
+    служит мемориалом.
+sources:
+  - title: 'The Atlantic Tsunami on November 1st, 1755: World Range and Amplitude
+      According to Primary Documentary Sources (InTech)'
+    url: https://cdn.intechopen.com/pdfs/13093/InTech-The_atlantic_tsunami_on_november_1st_1755_world_range_and_amplitude_according_to_primary_documentary_sources.pdf
+    type: academic
+    accessed: '2026-10-14'
+  - title: 'Museu Arqueológico do Carmo, folheto (EN): história do edifício e do
+      terramoto'
+    url: https://museuarqueologicodocarmo.pt/mac/folhetoMAC_EN.pdf
+    type: institutional
+    accessed: '2026-10-14'
+  - title: Wikipedia, 1755 Lisbon earthquake (⚠ só como ponteiro para Pereira, 40
+      min até ao tsunami, 09:40; substituir)
+    url: https://en.wikipedia.org/wiki/1755_Lisbon_earthquake
+    type: reference
+    accessed: '2026-10-14'
+  - title: 'Harvard ReVista (DRCLAS): «Bury the dead and feed the living»'
+    url: https://revista.drclas.harvard.edu/?p=31402
+    type: institutional
+    accessed: '2026-10-15'
+  - title: 'Wikipedia (зеркало 2007 г.): 1755 Lisbon earthquake'
+    url: https://wikipedia2007.classicistranieri.com/1/7/5/1755_Lisbon_earthquake_8243.html
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'The New Criterion: Lisbon''s narrow fate'
+    url: https://newcriterion.com/article/lisbons-narrow-fate/
+    type: press
+    accessed: '2026-10-15'
+  - title: Рецензия на книгу Molesky «This Gulf of Fire» (Dialnet)
+    url: https://dialnet.unirioja.es/descarga/articulo/6269265.pdf
+    type: academic
+    accessed: '2026-10-15'
+related:
+  - aljubarrota-1385
+status: ready
+placeholder: false
+ru_ready: true

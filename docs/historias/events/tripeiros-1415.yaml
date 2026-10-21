@@ -1,0 +1,121 @@
+id: tripeiros-1415
+slug:
+  pt: tripeiros
+  en: tripe-eaters-of-porto
+  ru: lyubiteli-potrohov-iz-portu
+title:
+  pt: Os tripeiros
+  en: The Tripe-Eaters of Porto
+  ru: Любители потрохов из Порту
+epoch: avis-e-descobrimentos
+level: story
+year: 1415
+place:
+  name: Porto, estaleiros do Douro
+  lat: 41.1496
+  lon: -8.611
+bridge:
+  name: Monumento de Lagoa Henriques (1960) junto aos antigos estaleiros do Ouro
+  address: TODO (junto aos antigos estaleiros do Ouro, Porto)
+  lat: 0.0
+  lon: 0.0
+  url: https://porto.pt/en/news/let_s_talk_about_food_
+threads:
+- comida-e-vinho
+- gente-como-nos
+importance: 1
+label: legend
+min_age: all
+sensitive: false
+hook:
+  pt: O Porto deu a carne, ficou com as tripas, ganhou alcunha.
+  en: >-
+    Porto gave away its meat, kept the tripe, and got a nickname.
+  ru: Порту отдал мясо, оставил потроха и получил прозвище.
+story:
+  pt: >-
+    Diz a lenda que, em 1415, os estaleiros do Porto construíam em segredo uma armada
+    para Ceuta. O infante D. Henrique, nascido na cidade, apareceu sem avisar e
+    contou ao mestre Vaz o verdadeiro destino. Vaz prometeu toda a carne da cidade
+    aos navios; o povo ficava com as tripas. O infante disse que a alcunha de «tripeiros»
+    era uma honra. O Porto nunca mais a largou.
+  en: >-
+    According to legend, in 1415 Porto's shipyards were secretly building a fleet
+    for Ceuta. Prince Henry, born in the city, turned up unannounced and told the
+    foreman, Master Vaz, the real target. Vaz promised the ships all the city's
+    meat; the people would keep the tripe. Henry called the nickname 'tripe-eaters'
+    an honour. Porto has worn it ever since.
+  ru: >-
+    Согласно легенде, в 1415 году верфи Порту втайне строили флот для похода на
+    Сеуту. Инфант Энрике (Генрих Мореплаватель), родившийся в этом городе, нагрянул
+    без предупреждения и открыл настоящую цель мастеру верфи по имени Ваш. Ваш пообещал
+    кораблям всё мясо города, а людям остались потроха. Энрике назвал прозвище «tripeiros»,
+    то есть любители потрохов, почётным. Порту носит его до сих пор.
+more:
+  pt: >-
+    Não encontrámos nenhuma crónica da época com esta história, e as versões variam:
+    numa delas, a alcunha já tinha trinta anos, vinda de uma guerra com Castela.
+    O prato, esse, existe mesmo: tripas à moda do Porto, tripas guisadas com feijão,
+    enchidos e carnes de porco, frango e vitela. Em 1960, foi colocado um monumento
+    de bronze de Lagoa Henriques junto aos antigos estaleiros, em agradecimento
+    ao povo do Porto que equipou a armada. Na inscrição lê-se «À Grei».
+  en: >-
+    We found no chronicle of the time that tells this story, and versions differ:
+    in one, the nickname is already thirty years old, from a war with Castile. The
+    dish, however, is real: tripas à moda do Porto, tripe stewed with beans, sausages
+    and cuts of pork, chicken and veal. In 1960 a bronze monument by Lagoa Henriques
+    was placed beside the old yards, thanking the people of Porto who equipped the
+    fleet. Its inscription says À Grei, 'to the people'.
+  ru: >-
+    Мы не нашли хроники того времени с этой историей, и версии расходятся: в одной
+    прозвищу уже тридцать лет, оно пришло из войны с Кастилией. Зато блюдо настоящее:
+    tripas à moda do Porto, рубец, тушёный с фасолью, колбасами и кусками свинины,
+    курицы и телятины. В 1960 году у старых верфей поставили бронзовый памятник
+    работы Лагоа Энрикеша в благодарность жителям Порту, снарядившим флот. На нём
+    надпись À Grei, «народу».
+sources:
+- title: 'Infopédia: Lenda dos Tripeiros'
+  url: https://www.infopedia.pt/artigos/$lenda-dos-tripeiros
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Living Tours: Tales & Traditions, The Origin of the Nickname «Tripeiro»'
+  url: https://www.livingtours.com/en/blog/origen-apodo-tripeiro-oporto.html
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Câmara Municipal do Porto (porto.pt): Let''s talk about food!'
+  url: https://porto.pt/en/news/let_s_talk_about_food_
+  type: institutional
+  accessed: '2026-10-15'
+- title: 'Wikipedia: Tripas à moda do Porto'
+  url: https://en.wikipedia.org/wiki/Tripas_%C3%A0_moda_do_Porto
+  type: reference
+  accessed: '2026-10-15'
+- title: 'Postal: Tripas à moda do Porto, um prato tradicional com alma portuense'
+  url: https://postal.pt/nacional/tripas-a-moda-do-porto-um-prato-tradicional-com-alma-portuense/
+  type: press
+  accessed: '2026-10-15'
+image:
+  src: /img/tripeiros-1415.webp
+  alt:
+    pt: 'Ilustração ao estilo do azulejo azul e branco: gente do Porto leva presuntos
+      e enchidos para um navio, enquanto uma mulher segura um tacho de tripas com
+      feijão para a família.'
+    en: 'Blue-and-white azulejo-style illustration: townspeople of Porto carry hams
+      and sausages to a ship, while a woman holds a pot of tripe and beans for her
+      family.'
+    ru: 'Иллюстрация в духе сине-белого азулежу: жители Порту несут окорока и колбасы
+      на корабль, а женщина держит горшок с рубцом и фасолью для своей семьи.'
+  credit: ИИ (Gemini), 2026
+  license: AI-generated, terms TBD
+  caption:
+    pt: >-
+      Ilustração criada por IA, a partir da lenda dos tripeiros. Não é uma imagem
+      histórica.
+    en: >-
+      AI-generated illustration based on the tripeiros legend. Not a historical
+      image.
+    ru: >-
+      Иллюстрация, созданная ИИ по легенде о трипейруш. Не историческое изображение.
+related: []
+status: draft
+placeholder: false

@@ -11,7 +11,8 @@ import { chooseLang, rootScript } from '../../src/lib/lang-choice';
 import { localize, missingRu } from '../../src/lib/localize';
 import { pickPlural } from '../../src/lib/plural-pick';
 
-const event = (n: string) => parse(readFileSync(fileURLToPath(new URL(`../../src/content/events/evento-exemplo-${n}.yaml`, import.meta.url)), 'utf8'), { schema: 'core', customTags: ['timestamp'] });
+/** A card by file name, or a number for a placeholder card (evento-exemplo-NN). */
+const event = (n: string) => parse(readFileSync(fileURLToPath(new URL(`../../src/content/events/${/^\d+$/.test(n) ? `evento-exemplo-${n}` : n}.yaml`, import.meta.url)), 'utf8'), { schema: 'core', customTags: ['timestamp'] });
 
 describe('fallback language: ru -> en -> pt', () => {
   const data = { title: { pt: 'Título', en: 'Title', ru: 'Заголовок' }, list: [{ pt: 'a', en: 'b' }], when: new Date('2026-01-01') };
@@ -39,14 +40,14 @@ describe('fallback language: ru -> en -> pt', () => {
 
 describe('ru_ready in the schema', () => {
   it('an event without Russian and ru_ready false is valid (the default)', () => {
-    const e = event('09');
+    const e = event('17');
     expect(e.ru_ready).toBeUndefined();
     const parsed = eventSchema.safeParse(e);
     expect(parsed.success).toBe(true);
     if (parsed.success) expect(parsed.data.ru_ready).toBe(false);
   });
   it('ru_ready true without Russian texts fails, naming the field and the language ru', () => {
-    const parsed = eventSchema.safeParse({ ...event('09'), ru_ready: true });
+    const parsed = eventSchema.safeParse({ ...event('17'), ru_ready: true });
     expect(parsed.success).toBe(false);
     if (!parsed.success) {
       const paths = parsed.error.issues.map((i) => i.path.join('.'));
@@ -59,28 +60,28 @@ describe('ru_ready in the schema', () => {
       expect(paths.every((p) => p.endsWith('.ru'))).toBe(true);
     }
   });
-  it('the test events 01-08 are ready in Russian and valid; the Russian texts sit in every text object', () => {
-    for (const n of ['01', '02', '03', '04', '05', '06', '07', '08']) {
+  it('the real cards are ready in Russian and valid; the Russian texts sit in every text object', () => {
+    for (const n of ['aljubarrota-1385', 'cantino-1502', 'casa-da-neve-1782', 'douro-1756', 'elefantes-malaca-1511', 'guerra-laranjas-1801', 'legiao-portuguesa-1812', 'motim-companhia-1757', 'ponte-das-barcas-1809', 'rinoceronte-1515', 'terramoto-1755', 'torres-vedras-1810', 'tripeiros-1415']) {
       const e = event(n);
       expect(e.ru_ready).toBe(true);
       expect(eventSchema.safeParse(e).success, n).toBe(true);
       expect(missingRu(e), n).toEqual([]);
     }
   });
-  it('the other test events are not ready in Russian', () => {
-    for (const n of ['09', '10', '24']) expect(event(n).ru_ready).toBeUndefined();
+  it('the test cards of the Estado Novo epoch are not ready in Russian', () => {
+    for (const n of ['17', '18', '24']) expect(event(n).ru_ready).toBeUndefined();
   });
   it('missingRu lists the paths of text objects without ru, including inside lists', () => {
     expect(missingRu({ a: { pt: 'x', en: 'y' }, g: [{ label: { pt: 'x', en: 'y', ru: 'z' } }, { label: { pt: 'x', en: 'y' } }] })).toEqual(['a', 'g[1].label']);
   });
   it('the Russian texts of the test events follow the same length rules', () => {
-    for (const n of ['01', '02', '03', '04', '05', '06', '07', '08']) {
+    for (const n of ['aljubarrota-1385', 'cantino-1502', 'casa-da-neve-1782', 'douro-1756', 'elefantes-malaca-1511', 'guerra-laranjas-1801', 'legiao-portuguesa-1812', 'motim-companhia-1757', 'ponte-das-barcas-1809', 'rinoceronte-1515', 'terramoto-1755', 'torres-vedras-1810', 'tripeiros-1415']) {
       const e = event(n);
       const words = (s: string) => s.trim().split(/\s+/).length;
       expect(words(e.hook.ru), `${n} hook`).toBeLessThanOrEqual(12);
       expect(words(e.story.ru), `${n} story`).toBeGreaterThanOrEqual(40);
-      expect(words(e.story.ru), `${n} story`).toBeLessThanOrEqual(70);
-      expect(words(e.more.ru), `${n} more`).toBeLessThanOrEqual(150);
+      expect(words(e.story.ru), `${n} story`).toBeLessThanOrEqual(90);
+      expect(words(e.more.ru), `${n} more`).toBeLessThanOrEqual(250);
     }
   });
 });

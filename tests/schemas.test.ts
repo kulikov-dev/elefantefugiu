@@ -89,7 +89,7 @@ import { eventSchema } from '../src/data/schemas';
 import { readFileSync as readFile } from 'node:fs';
 import { parse as parseYaml } from 'yaml';
 
-const sample = () => parseYaml(readFile(new URL('../src/content/events/evento-exemplo-05.yaml', import.meta.url), 'utf8'), { schema: 'core', customTags: ['timestamp'] });
+const sample = () => parseYaml(readFile(new URL('../src/content/events/cantino-1502.yaml', import.meta.url), 'utf8'), { schema: 'core', customTags: ['timestamp'] });
 
 test('place: any coordinates in the world are accepted (Goa), only impossible values are not', () => {
   const ok = sample();

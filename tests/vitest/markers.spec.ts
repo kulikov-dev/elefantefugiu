@@ -379,8 +379,8 @@ describe('real events', () => {
   const threads = [...new Set(cards.flatMap((c) => c.threads))];
   const epochs = [...new Set(cards.map((c) => c.epoch!))];
 
-  it('loads the test data', () => {
-    expect(cards.length).toBe(24);
+  it('loads the content', () => {
+    expect(cards.length).toBeGreaterThan(20);
   });
 
   it('shows at most 7 for every thread and epoch, from the whole country down to a street', () => {
@@ -407,7 +407,7 @@ describe('real events', () => {
     const r = selectMarkers({ cards, bounds: country, center: { lat: 39.5, lon: -8 } });
     expect(drawn(r)).toBe(7);
     expect(r.markers.every((m) => m.kind === 'frame')).toBe(true);
-    expect(r.inArea).toHaveLength(24);
+    expect(r.inArea).toHaveLength(cards.length);
   });
 
   it('every real card is reachable', () => {

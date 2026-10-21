@@ -27,6 +27,6 @@ export async function loadSite(): Promise<SiteData> {
   const epochs = (await getCollection('epochs')).map((e) => localize(e.data, true) as EpochData).sort((a, b) => a.order - b.order);
   const threads = (await getCollection('threads')).map((e) => localize(e.data, true) as ThreadData);
   const visible = visibleThreads(threads, events);
-  const featuredIds = (await getCollection('featured')).map((e) => e.data.id);
+  const featuredIds = (await getCollection('featured')).sort((a, b) => (a.data.position ?? 0) - (b.data.position ?? 0)).map((e) => e.data.id);
   return { events, epochs, threads, featured: pickFeatured(featuredIds, events), visibleThreads: visible, visibleThreadIds: new Set(visible.map((t) => t.id)) };
 }

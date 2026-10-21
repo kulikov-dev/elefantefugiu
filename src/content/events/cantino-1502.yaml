@@ -1,0 +1,123 @@
+id: cantino-1502
+slug:
+  pt: mapa-de-cantino
+  en: cantino-map
+  ru: karta-za-12-dukatov
+title:
+  pt: Um mapa por 12 ducados
+  en: A Map Worth 12 Ducats
+  ru: Карта за 12 дукатов
+epoch: avis-e-descobrimentos
+level: story
+year: 1502
+place:
+  name: Lisboa
+  lat: 38.7223
+  lon: -9.1393
+bridge:
+  name: Museu de Marinha (cópia do mapa de Cantino)
+  address: Praça do Império, Belém, Lisboa
+  lat: 38.6975
+  lon: -9.2066
+  url: https://cultura.marinha.pt/en/museumarinha_web/colecoes_web/pecasemdestaque_web/Pages/mapa-cantino.aspx
+  note:
+    pt: No Museu de Marinha vê-se uma cópia do mapa de Cantino.
+    en: The Museu de Marinha shows a copy of the Cantino map.
+    ru: В Морском музее показывают копию карты Кантино.
+threads:
+  - mar
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Veio negociar cavalos. Levou o mundo.
+  en: He came to trade horses. He left with the world.
+  ru: Он приехал торговать лошадьми. Увёз целый мир.
+story:
+  pt: >-
+    Em 1501, Alberto Cantino chegou a Lisboa a dizer que vinha tratar de
+    cavalos. Era espião do duque de Ferrara e queria saber o que os capitães
+    andavam a descobrir. Os mapas das novas rotas eram segredo de Estado, mas
+    por 12 ducados de ouro alguém em Lisboa desenhou-lhe uma cópia do mundo: o
+    Brasil, África, o caminho para a Índia. Em 1502 levou-a às escondidas. Em
+    Génova copiaram-na, e as suas costas chegaram ao mapa de Waldseemüller, de
+    1507, o que deu nome à América.
+  en: >-
+    Alberto Cantino arrived in Lisbon in 1501 as a horse dealer. He was really a
+    spy for the Duke of Ferrara, sent to learn what Portuguese captains found.
+    Maps of the new routes were state secrets, yet for 12 gold ducats someone in
+    Lisbon drew him a copy of the world: Brazil, Africa, the way to India. In
+    1502 he slipped it out of Portugal. In Genoa a mapmaker copied it, and from
+    there its coastlines reached Waldseemüller's 1507 map, the one that gave
+    America its name.
+  ru: >-
+    Альберто Кантино приехал в Лиссабон в 1501 году под видом торговца лошадьми.
+    На самом деле он был шпионом герцога Феррарского и выяснял, что находят
+    португальские капитаны. Карты новых маршрутов были государственной тайной,
+    но за 12 золотых дукатов кто-то в Лиссабоне нарисовал ему копию мира:
+    Бразилию, Африку, дорогу в Индию. В 1502 году он тайно вывез её. В Генуе
+    карту скопировал картограф, и оттуда её берега попали на карту
+    Вальдземюллера 1507 года, ту самую, что дала имя Америке.
+more:
+  pt: |-
+    As cartas de Cantino sobrevivem. Numa delas, de 1501, diz que ouviu Gaspar Corte-Real fazer ao rei D. Manuel o relato da sua viagem à Terra Nova. Como obteve o mapa é discutido: suborno a um funcionário português, compra, ou as duas coisas. O preço, segundo as cartas, foi de 12 ducados de ouro.
+
+    O mapa é enorme, com mais de dois metros de largura, desenhado em seis folhas de pergaminho. Já mostra a linha de Tordesilhas, a costa do Brasil e o forte português da Mina, e é a mais antiga carta que se conserva a colocar partes de África, do Brasil e da Índia por latitude.
+
+    O segredo não durou. Em 1504, D. Manuel proibiu os cartógrafos de desenhar a costa africana para lá de São Tomé, mas as cópias já circulavam, e o próprio mapa de Cantino envelheceu depressa: os mapas de Caverio e de Waldseemüller depressa o ultrapassaram. Ficou na biblioteca de Ferrara e depois em Módena. Em 1859, uma revolta saqueou o palácio, e o diretor da biblioteca encontrou-o num talho, colado num biombo.
+
+    Hoje está na Biblioteca Estense, em Módena. Há uma cópia no Museu de Marinha, em Belém.
+  en: |-
+    Cantino's letters survive. In one, from 1501, he says he overheard Gaspar Corte-Real report to King Manuel on his voyage to Newfoundland. How he got the map is debated: a bribe to a Portuguese official, a purchase, or both. His price, according to the letters, was 12 gold ducats.
+
+    The map is huge, over two metres wide, drawn on six sheets of parchment. It already shows the Tordesillas line, the coast of Brazil and the Portuguese fort of Elmina, and it is the earliest surviving chart to place parts of Africa, Brazil and India by latitude.
+
+    The secret did not last. In 1504 King Manuel banned mapmakers from drawing the African coast beyond São Tomé, but copies were already travelling, and the Cantino map itself aged fast: Caverio's and Waldseemüller's maps soon overtook it. It sat in the library of Ferrara, then Modena. In 1859 a revolt ransacked the palace, and the library director found it in a pork butcher's shop, pasted on a screen.
+
+    Today it is in Modena's Biblioteca Estense. A copy is kept in Lisbon's Museu de Marinha, in Belém.
+  ru: |-
+    Письма Кантино сохранились. В одном из них, 1501 года, он пишет, что подслушал, как Гашпар Кортиреал докладывал королю Мануэлу о плавании к Ньюфаундленду. Как он получил карту, спорят: подкуп португальского чиновника, покупка или и то и другое. Цена, по письмам, 12 золотых дукатов.
+
+    Карта огромна, свыше двух метров в ширину, нарисована на шести листах пергамента. На ней уже есть линия Тордесильяса, побережье Бразилии и португальская крепость Эльмина, и это древнейшая сохранившаяся карта, где части Африки, Бразилии и Индии размещены по широте.
+
+    Секрет не продержался. В 1504 году король Мануэл запретил картографам рисовать побережье Африки дальше Сан-Томе, но копии уже разошлись, а сама карта быстро устарела: карты Каверио и Вальдземюллера скоро её превзошли. Она лежала в библиотеке Феррары, потом Модены. В 1859 году мятеж разграбил дворец, и директор библиотеки нашёл её в мясной лавке, наклеенной на ширму.
+
+    Сегодня она хранится в библиотеке Эстенсе в Модене. Копия лежит в Морском музее Лиссабона, в Белеме.
+sources:
+  - title: 'Wikipedia: Cantino planisphere'
+    url: https://en.wikipedia.org/wiki/Cantino_planisphere
+    type: reference
+    accessed: '2026-10-15'
+  - title: 'National Geographic History: The Cantino Planisphere'
+    url: https://www.nationalgeographic.com/history/history-magazine/article/cantino-planisphere-map-new-world-portugal
+    type: press
+    accessed: '2026-10-15'
+  - title: 'Museu de Marinha: Planisfério de Cantino (cópia)'
+    url: https://cultura.marinha.pt/en/museumarinha_web/colecoes_web/pecasemdestaque_web/Pages/mapa-cantino.aspx
+    type: institutional
+    accessed: '2026-10-15'
+  - title: 'Gregory C. McIntosh: The Cantino Planisphere of 1502 (MEDEA)'
+    url: https://www.medea-chart.org/single-post/2018/02/21/The-Cantino-Planisphere-of-1502-by-Gregory-C-McIntosh
+    type: academic
+    accessed: '2026-10-15'
+  - title: 'Biblioteca Estense / Historylab: Cantino planisphere'
+    url: https://historylab.es/cantino-planisphere/
+    type: institutional
+    accessed: '2026-10-15'
+  - title: 'BnF: Le planisphère de Caverio (dossier pédagogique)'
+    url: https://classes.bnf.fr/pdf/caverio.pdf
+    type: institutional
+    accessed: '2026-10-16'
+  - title: 'Wagner (Ohio State): 1502 / Cantino Planisphere'
+    url: https://u.osu.edu/wagner.19/?p=806
+    type: reference
+    accessed: '2026-10-16'
+  - title: 'Northwest Cartographic: The Cantino Planisphere'
+    url: https://nwcartographic.com/blogs/essays-articles/the-cantino-planisphere
+    type: press
+    accessed: '2026-10-16'
+related: []
+status: ready
+placeholder: false
+ru_ready: true

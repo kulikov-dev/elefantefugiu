@@ -39,5 +39,5 @@ for (const n of readdirSync(dir).sort()) {
   const ev = yaml(`src/content/events/${n}`);
   out.push(`| ${ev.id} | \`${path('en', S.en, ev.slug.en)}\` | \`${path('ru', S.ru, ev.ru_ready ? ev.slug.ru : ev.slug.en)}\` | ${ev.ru_ready ? 'yes' : 'no (English text, banner)'} |`);
 }
-out.push('', `QR address of a card: \`/p/{event id}/\` (for example \`/p/${yaml('src/content/events/evento-exemplo-01.yaml').id}/\`).`);
+out.push('', `QR address of a card: \`/p/{event id}/\` (for example \`/p/${yaml(`src/content/events/${readdirSync(dir).sort()[0]}`).id}/\`).`);
 console.log(out.join('\n'));

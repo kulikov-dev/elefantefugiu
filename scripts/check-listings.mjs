@@ -327,7 +327,7 @@ for (const lang of ['pt', 'en']) {
   // "Surprise me": button hidden until the script runs; embedded list = published, all ages, not heavy; links are real card pages
   if (!/data-surprise hidden/.test(showcase)) fail('"Surprise me" button must be hidden without JavaScript');
   const list = JSON.parse(raw.match(/<script type="application\/json" id="surprise-data">([\s\S]*?)<\/script>/)?.[1] ?? '[]');
-  const wantList = events.filter((e) => !e.sensitive);
+  const wantList = events.filter((e) => !e.sensitive).sort(chrono);
   if (JSON.stringify(list.map((x) => x.id)) !== JSON.stringify(wantList.map((e) => e.id))) fail('surprise list differs from the eligible cards in the data (never a heavy topic, any age)');
   for (const item of list) {
     const ev = events.find((e) => e.id === item.id);
