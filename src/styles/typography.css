@@ -1,6 +1,7 @@
 /*
  * Label typography (docs/visual-direction.md section 5): Oswald for labels, menu, dates and numbers, upper case with a
- * little letter spacing. One list here instead of a font rule in every component (the interactives carry their own, so their code stays out of the pages without them). The fonts themselves are in fonts.css,
+ * little letter spacing, but upper case only for short labels and buttons (two words at most). Names that can be long
+ * (eras, threads, places, the title in the breadcrumb) keep Oswald in ordinary case: second rule below. One list here instead of a font rule in every component (the interactives carry their own, so their code stays out of the pages without them). The fonts themselves are in fonts.css,
  * the family tokens in tokens.css.
  */
 
@@ -10,27 +11,46 @@
 .theme-choice__label,
 .theme-choice__option span,
 .button,
-.thread,
-.chip,
 .tag,
 .age,
-.epoch-switch__item,
 .pager__dir,
 .view-switch button,
 .pane-switch button,
-.map-chip,
-.map__thread,
 .map__list-count,
 .map__sheet-toggle,
-.ecard__meta,
 .epoch__years,
-.map__preview-meta,
 .tile__count,
 .section__count,
-.crumbs,
 .site-footer__links a {
   font-family: var(--font-label);
   font-weight: var(--weight-strong);
   letter-spacing: var(--letter-label);
   text-transform: uppercase;
+}
+
+/* Long or free-form names: the label face without capitals. */
+.thread,
+.chip,
+.epoch-switch__item,
+.map-chip,
+.map__thread,
+.ecard__meta,
+.map__preview-meta,
+.crumbs {
+  font-family: var(--font-label);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--letter-label);
+  text-transform: none;
+}
+
+/* Years and other numbers in headings and labels are lining figures (Playfair's default is old-style). */
+h1,
+h2,
+h3,
+.ecard__meta,
+.epoch__years,
+.map__preview-meta,
+.crumbs,
+.card__meta {
+  font-variant-numeric: lining-nums;
 }

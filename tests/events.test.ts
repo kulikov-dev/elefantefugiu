@@ -7,6 +7,7 @@ import {
   firstSentence,
   formatDate,
   formatYear,
+  isFlashMoment,
   relatedCards,
   type EventData,
 } from '../src/lib/events';
@@ -106,4 +107,13 @@ test('formatDate: stored day does not shift, language-specific', () => {
   const day = new Date('2026-10-13');
   assert.match(formatDate(day, 'en'), /13 October 2026/);
   assert.match(formatDate(day, 'pt'), /13 de outubro de 2026/);
+});
+
+test('isFlashMoment: only the Estado Novo cards that begin in 1974', () => {
+  const E = 'estado-novo-e-25-de-abril';
+  assert.equal(isFlashMoment({ epoch: E, year: 1974 }), true);
+  assert.equal(isFlashMoment({ epoch: E, year: { from: 1974, to: 1975 } }), true);
+  assert.equal(isFlashMoment({ epoch: E, year: { from: 1933, to: 1974 } }), false);
+  assert.equal(isFlashMoment({ epoch: E, year: 1961 }), false);
+  assert.equal(isFlashMoment({ epoch: 'avis-e-descobrimentos', year: 1974 }), false);
 });

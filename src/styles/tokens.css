@@ -51,6 +51,11 @@
   --epoch-alt: var(--color-muted);
   --epoch-tint: var(--color-bg);
   --epoch-bg: var(--epoch-tint);
+  /* Surface of cards and blocks inside an epoch (the same as --color-surface outside epochs; tinted per epoch in the dark theme). */
+  --epoch-surface: var(--color-surface);
+  /* The carnation red: the accent of the moments around 25 April 1974 (<... data-flash>); equal to the primary where an epoch has no flash. */
+  --epoch-flash: var(--epoch-primary);
+  --epoch-flash-strong: var(--epoch-primary-strong);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -129,6 +134,7 @@
   --grid-home-tile-min: 16rem;
   --grid-step-min: 14rem;
   --container-story: 48rem;
+  --card-aside-width: 19rem;
 
   /* Map: sizes of the block and of the markers (frame: large diamond, story: small circle, cluster: square with a number). */
   --map-height: clamp(20rem, 62svh, 40rem);
@@ -157,6 +163,20 @@
   --viz-water: var(--color-accent-tint);
   --viz-label-size: var(--text-base);
 
+  /* Azulejo patterns (docs/visual-direction.md section 4): tile size, and the opacity of the pattern layer only
+     (5-10% under text, up to 50% on frames and dividers; never on text). */
+  --azulejo-size: 80px;
+  --azulejo-opacity: 0.08;
+  --azulejo-opacity-text: 0.1;
+  --azulejo-opacity-frame: 0.4;
+  --azulejo-corner-size: 5.5rem;
+
+  /* Waiting states: the breathing tile of the map (transform and opacity only) and the reserved place of a picture. */
+  --wait-delay: 300ms;
+  --wait-duration: 1800ms;
+  --wait-tile-size: 4.5rem;
+  --image-filter: none;
+
   /* Motion */
   --transition: 150ms ease;
 
@@ -175,7 +195,8 @@
   --epoch-primary-strong: light-dark(#0a4254, #8fd0e2);
   --epoch-accent: light-dark(#7f5b0e, #e0b24a); /* adjusted: #8a6410 gave 4.4:1 on the tint */
   --epoch-alt: light-dark(#a4262c, #e06a6f);
-  --epoch-tint: light-dark(#efe9da, #0e2430);
+  --epoch-tint: light-dark(#e3e8dc, #0e2430); /* light: stronger than the table's #efe9da (stage 7b-2) */
+  --epoch-surface: light-dark(#fbf8f1, #15303e);
   --epoch-heading-weight: 600;
 }
 
@@ -184,22 +205,39 @@
   --epoch-primary-strong: light-dark(#85361d, #f2a98c);
   --epoch-accent: light-dark(#85590f, #e8b84f); /* adjusted: #8f6111 gave 4.4:1 on the tint */
   --epoch-alt: light-dark(#2b5f9e, #7fa9e0);
-  --epoch-tint: light-dark(#f3e6d3, #241a14);
+  --epoch-tint: light-dark(#f3e2cb, #241a14); /* light: stronger than the table's #f3e6d3 (stage 7b-2) */
+  --epoch-surface: light-dark(#fbf8f1, #30231b);
   --epoch-heading-weight: 800;
 }
 
 :root[data-epoch='estado-novo-e-25-de-abril'] {
-  --epoch-primary: light-dark(#c41e3a, #ff6b81);
-  --epoch-primary-strong: light-dark(#9b1730, #ff9aab);
+  /* Grey is the colour of the interface; the carnation red is kept for the moments around 25 April (--epoch-flash,
+     put on an element by data-flash). */
+  --epoch-primary: light-dark(#4a4a48, #b8b6b0);
+  --epoch-primary-strong: light-dark(#2e2e2c, #d8d6d0);
+  --epoch-flash: light-dark(#c41e3a, #ff6b81);
+  --epoch-flash-strong: light-dark(#9b1730, #ff9aab);
   --epoch-accent: light-dark(#2f6f3e, #6fbf86);
   --epoch-alt: light-dark(#4a4a48, #b8b6b0);
   --epoch-tint: light-dark(#ece9e3, #181817);
+  --epoch-surface: light-dark(#fbf8f1, #242422);
   --epoch-heading-weight: 700;
 }
 
-:root[data-epoch] {
+/* The epoch colours reach the content only: the header and the footer (language, theme, family mode) keep the base
+   colours on every page. */
+:root[data-epoch] main {
   --color-accent: var(--epoch-primary);
   --color-accent-strong: var(--epoch-primary-strong);
+}
+
+/* A moment of the flash (Estado Novo: the cards of 1974): the carnation red replaces the epoch's primary on the element. */
+[data-flash] {
+  --epoch-primary: var(--epoch-flash);
+  --epoch-primary-strong: var(--epoch-flash-strong);
+  --color-accent: var(--epoch-flash);
+  --color-accent-strong: var(--epoch-flash-strong);
+  --epoch-accent-bar: var(--border-heavy) solid var(--epoch-flash);
 }
 
 /* The choice of theme: "system" (or no script) follows the device; light and dark force one side. */
@@ -253,7 +291,8 @@
     --epoch-primary-strong: #0a4254;
     --epoch-accent: #7f5b0e;
     --epoch-alt: #a4262c;
-    --epoch-tint: #efe9da;
+    --epoch-tint: #e3e8dc;
+    --epoch-surface: #fbf8f1;
   }
 
   :root[data-epoch='pombal-e-terramoto'] {
@@ -261,15 +300,19 @@
     --epoch-primary-strong: #85361d;
     --epoch-accent: #85590f;
     --epoch-alt: #2b5f9e;
-    --epoch-tint: #f3e6d3;
+    --epoch-tint: #f3e2cb;
+    --epoch-surface: #fbf8f1;
   }
 
   :root[data-epoch='estado-novo-e-25-de-abril'] {
-    --epoch-primary: #c41e3a;
-    --epoch-primary-strong: #9b1730;
+    --epoch-primary: #4a4a48;
+    --epoch-primary-strong: #2e2e2c;
+    --epoch-flash: #c41e3a;
+    --epoch-flash-strong: #9b1730;
     --epoch-accent: #2f6f3e;
     --epoch-alt: #4a4a48;
     --epoch-tint: #ece9e3;
+    --epoch-surface: #fbf8f1;
   }
 }
 /* END generated: light-dark() fallback */

@@ -151,7 +151,7 @@
 .site-footer {
   margin-block-start: var(--space-8);
   padding-block: var(--space-6);
-  background: var(--color-surface);
+  background: var(--epoch-surface);
   border-block-start: 1px solid var(--color-line);
   color: var(--color-ink-muted);
   font-size: var(--text-sm);
@@ -190,7 +190,7 @@
   border: var(--epoch-frame);
   border-inline-start: var(--epoch-accent-bar);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: var(--epoch-surface);
   color: var(--color-ink-muted);
 }
 

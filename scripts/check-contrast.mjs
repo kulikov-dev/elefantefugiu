@@ -29,7 +29,7 @@ function propsFor(scope) {
   const out = {};
   for (const rule of rules) {
     const sel = rule.selector;
-    const applies = sel === ':root' || (scope.epoch && (sel === ':root[data-epoch]' || sel === `:root[data-epoch='${scope.epoch}']`));
+    const applies = sel === ':root' || (scope.epoch && (sel === ':root[data-epoch]' || sel === ':root[data-epoch] main' || sel === `:root[data-epoch='${scope.epoch}']`));
     if (applies) Object.assign(out, rule.props);
   }
   return out;
@@ -122,6 +122,16 @@ const PAIRS = [
   ['epoch accent text on surface', 'epoch-accent', 'surface', T],
   ['epoch alt text on page', 'epoch-alt', 'epoch-tint', T],
   ['epoch alt text on surface', 'epoch-alt', 'surface', T],
+  ['text on epoch surface', 'text', 'epoch-surface', T],
+  ['muted on epoch surface', 'muted', 'epoch-surface', T],
+  ['link on epoch surface', 'accent', 'epoch-surface', T],
+  ['link hover on epoch surface', 'accent-strong', 'epoch-surface', T],
+  ['flash text on page', 'epoch-flash', 'epoch-tint', T],
+  ['flash text on epoch surface', 'epoch-flash', 'epoch-surface', T],
+  ['flash hover text on epoch surface', 'epoch-flash-strong', 'epoch-surface', T],
+  ['button text on flash', 'on-accent', 'epoch-flash', T],
+  ['control edge on epoch surface', 'border-strong', 'epoch-surface', G],
+  ['focus ring on epoch surface', 'focus', 'epoch-surface', G],
   ['heavy-topic text', 'heavy-ink', 'heavy-bg', T],
   ['label documented', 'label-documented-ink', 'label-documented-bg', T],
   ['label legend', 'label-legend-ink', 'label-legend-bg', T],

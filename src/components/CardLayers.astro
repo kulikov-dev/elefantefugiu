@@ -24,7 +24,12 @@ const { lang, hook, textLang } = Astro.props;
   </section>
 
   <details id="detalhes" class="more">
-    <summary>{t(lang, 'ui.more')}</summary>
+    <summary>
+      <span>{t(lang, 'ui.more')}</span>
+      <svg class="more__chevron" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+        <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </summary>
     <div class="more__body">
       <slot name="more" />
     </div>
@@ -48,18 +53,19 @@ const { lang, hook, textLang } = Astro.props;
 
   .story h2 {
     margin-block-end: var(--space-2);
-    font-size: var(--text-xl);
   }
 
   .more {
     border: var(--epoch-frame);
     border-radius: var(--radius-md);
-    background: var(--color-surface);
+    background: var(--epoch-surface);
   }
 
   summary {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
     min-height: var(--touch-target-large);
     padding: var(--space-2) var(--space-4);
     color: var(--color-accent);
@@ -69,6 +75,16 @@ const { lang, hook, textLang } = Astro.props;
 
   summary:focus-visible {
     outline-offset: calc(var(--ring-width) * -1);
+  }
+
+  /* The state of the layer: the chevron turns up while "More" is open. */
+  .more__chevron {
+    flex: none;
+    transition: transform var(--transition);
+  }
+
+  .more[open] .more__chevron {
+    transform: rotate(180deg);
   }
 
   .more[open] > summary {
@@ -82,6 +98,28 @@ const { lang, hook, textLang } = Astro.props;
   /* Slotted content carries the page's scope, not this component's, hence :global. */
   .more__body > :global(* + *) {
     margin-block-start: var(--space-5);
+  }
+
+  /* Wide screens (from about 1100 px): "Bridge to today" moves to a side column of the open layer. */
+  @media (min-width: 68.75rem) {
+    .more__body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--card-aside-width);
+      column-gap: var(--space-5);
+      align-items: start;
+    }
+
+    .more__body > :global(*) {
+      grid-column: 1;
+    }
+
+    .more__body > :global(.bridge) {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+      margin-block-start: 0;
+      position: sticky;
+      inset-block-start: var(--space-4);
+    }
   }
 </style>
 

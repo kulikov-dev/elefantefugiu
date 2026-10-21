@@ -8,6 +8,8 @@
 // `@supports not (color: light-dark(#000, #fff))` that sets the same custom properties to their LIGHT values: the browsers
 // that lack the function get the light theme, the others never see the block. The block is generated, never edited by hand.
 import { readFileSync, writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 
 const file = new URL('../src/styles/tokens.css', import.meta.url);
 const BEGIN = '/* BEGIN generated: light-dark() fallback (node scripts/sync-token-fallbacks.mjs) */';
@@ -63,7 +65,7 @@ export function withBlock(css) {
   return `${base.replace(/\s+$/, '')}\n\n${buildBlock(css)}\n`;
 }
 
-if (process.argv[1] && new URL(import.meta.url).pathname === process.argv[1]) {
+if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const css = readFileSync(file, 'utf8');
   const next = withBlock(css);
   if (process.argv.includes('--check')) {

@@ -121,3 +121,19 @@ html[data-js] .footer-theme {
 .footer-theme .theme-choice {
   margin-block: 0;
 }
+
+/* ---- dark theme: pictures are a little dimmer so they do not glare on a dark page ---- */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --image-filter: brightness(0.82);
+  }
+}
+
+:root[data-theme='dark'] {
+  --image-filter: brightness(0.82);
+}
+
+img {
+  filter: var(--image-filter);
+}

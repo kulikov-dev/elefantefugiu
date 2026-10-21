@@ -150,7 +150,10 @@ for (const ev of events) {
     if (!has(/<nav class="crumbs"[^>]*aria-label/)) fail('breadcrumbs are missing');
     if (!has(new RegExp(`<h1[^>]*>${ev.title[lang]}</h1>`))) fail('h1 does not contain the event title');
     if (!has(new RegExp(`<span class="tag tag--${ev.label}"`))) fail(`credibility label "${ev.label}" is missing`);
-    if (!has(new RegExp(`<span class="age age--${ev.min_age}"`))) fail(`age badge "${ev.min_age}" is missing`);
+    // Only 12+ and 16+ are labelled; a card for everyone carries no age badge at all.
+    if (String(ev.min_age) === 'all') {
+      if (has(/<span class="age /) || /Para todos|All ages/.test(html.match(/<header class="card__header"[\s\S]*?<\/header>/)?.[0] ?? '')) fail('a card for everyone must not show an age badge');
+    } else if (!has(new RegExp(`<span class="age age--${ev.min_age}"`))) fail(`age badge "${ev.min_age}" is missing`);
     // Thread chips: one per thread; a link to the thread page (/fio/ or /thread/) for every thread of the data
     // (all test threads have enough cards to have a page).
     const chips = [...html.matchAll(/<(a|span)\b[^>]*\bclass="thread(?: [^"]*)?"[^>]*>/g)];

@@ -24,7 +24,7 @@ import {
   type NeighbourEpoch,
 } from '../lib/epochs';
 import { toMapCards } from '../lib/map-cards';
-import { cardsView, mapMaxBounds } from '../lib/map-data';
+import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
 
@@ -187,7 +187,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
           threads={mapThreads}
           known={{ threads: site.threads.map((th) => th.id), epochs: [] }}
           maxBounds={mapMaxBounds(mapCards)}
-          view={cardsView(mapCards)}
+          view={MAINLAND_VIEW}
           tile={tileConfig(process.env)}
         />
       </aside>
@@ -249,7 +249,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-pill);
     overflow: hidden;
-    background: var(--color-surface);
+    background: var(--epoch-surface);
   }
 
   .view-switch button {
@@ -320,7 +320,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     border: 1px solid var(--color-border-strong);
     border-radius: var(--radius-pill);
     overflow: hidden;
-    background: var(--color-surface);
+    background: var(--epoch-surface);
   }
 
   .pane-switch button {

@@ -1,49 +1,32 @@
 ---
-// Age label: all / 12 / 16.
+// Age label: 12+ or 16+. Cards for everyone carry no label (the data keeps min_age: all; callers skip the badge).
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 
 interface Props {
   lang: Lang;
-  age: 'all' | '12' | '16';
+  age: '12' | '16';
 }
 
 const { lang, age } = Astro.props;
 ---
 <span class={`age age--${age}`}>
-  {
-    age === 'all' ? (
-      t(lang, 'ui.age_all')
-    ) : (
-      <>
-        <span class="visually-hidden">{t(lang, 'card.age_prefix')} </span>
-        {age}+
-      </>
-    )
-  }
+  <span class="visually-hidden">{t(lang, 'card.age_prefix')} </span>
+  {age}+
 </span>
 
 <style>
+  /* The same shape as the credibility label (TagLabel): a pill with a thin frame; the number carries the difference. */
   .age {
     display: inline-flex;
     align-items: center;
     padding: var(--pad-chip-y) var(--pad-chip-x);
     border: 1px solid var(--color-ink-muted);
-    border-radius: var(--radius-sm);
-    background: var(--color-surface);
+    border-radius: var(--radius-pill);
+    background: var(--epoch-surface);
     color: var(--color-ink);
     font-size: var(--text-sm);
     font-weight: 600;
     line-height: 1.5;
-  }
-
-  /* 12+ and 16+ get a heavier frame, so the difference is not only the number. */
-  .age--12 {
-    border-width: var(--border-medium);
-  }
-
-  .age--16 {
-    border-style: double;
-    border-width: var(--border-heavy);
   }
 </style>

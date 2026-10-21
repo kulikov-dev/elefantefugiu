@@ -18,7 +18,7 @@ import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
-import { cardNeighbours, firstSentence, formatDate, formatYear, relatedCards, type EventData } from '../lib/events';
+import { cardNeighbours, firstSentence, formatDate, formatYear, isFlashMoment, relatedCards, type EventData } from '../lib/events';
 import { epochHasContent } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
@@ -92,7 +92,7 @@ const textLang = event.placeholder ? 'la' : undefined;
   noindex={event.placeholder}
   epoch={epoch.id}
 >
-  <article class="card" data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
+  <article class="card" data-flash={isFlashMoment(event) ? '' : undefined} data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
     <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
       <ol>
         <li>{epochLink ? <a href={epochLink}>{epoch.name[lang]}</a> : <span class="crumbs__text">{epoch.name[lang]}</span>}</li>
@@ -123,7 +123,7 @@ const textLang = event.placeholder ? 'la' : undefined;
           ))
         }
         <li><TagLabel lang={lang} label={event.label} /></li>
-        <li><AgeBadge lang={lang} age={event.min_age} /></li>
+        {event.min_age !== 'all' && <li><AgeBadge lang={lang} age={event.min_age} /></li>}
       </ul>
       {event.sensitive && <div class="gated"><HeavyTopicBanner lang={lang} /></div>}
     </header>
@@ -259,6 +259,11 @@ const textLang = event.placeholder ? 'la' : undefined;
     margin-block-start: var(--space-3);
   }
 
+  /* One scale for the headings inside the card (story, context, the interactive, bridge, sources, nearby). */
+  .card :global(h2) {
+    font-size: var(--text-xl);
+  }
+
   .card__header h1 {
     font-size: var(--text-2xl);
   }
@@ -279,7 +284,7 @@ const textLang = event.placeholder ? 'la' : undefined;
     max-width: var(--container-story);
     border: var(--epoch-frame);
     border-radius: var(--radius-md);
-    background: var(--color-surface);
+    background: var(--epoch-surface);
     overflow: hidden;
   }
 

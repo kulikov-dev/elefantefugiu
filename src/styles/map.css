@@ -293,8 +293,17 @@
 }
 
 .map__actions .button {
+  min-height: var(--touch-target);
+  padding-inline: var(--space-3);
+  border-width: 1px;
   background: var(--color-overlay);
   box-shadow: var(--shadow-raised);
+  font-size: var(--text-sm);
+}
+
+/* "Show more" only exists while the area holds more cards than the map shows. */
+.map__actions .button[hidden] {
+  display: none;
 }
 
 .map[data-sheet='closed'] .map__list-body {

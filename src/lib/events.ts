@@ -20,6 +20,15 @@ export function formatYear(event: Pick<EventData, 'year' | 'year_label'>, lang: 
   return from === to ? String(from) : `${from}\u2013${to}`;
 }
 
+/** The epoch whose colour is grey; the carnation red is kept for the cards that begin in 1974 (data-flash). */
+export const FLASH_EPOCH = 'estado-novo-e-25-de-abril';
+export const FLASH_YEAR = 1974;
+
+/** A moment of the carnation red: a card of the Estado Novo epoch that begins in 1974. */
+export function isFlashMoment(event: Pick<EventData, 'epoch' | 'year'>): boolean {
+  return event.epoch === FLASH_EPOCH && yearRange(event)[0] === FLASH_YEAR;
+}
+
 /** Chronological order inside an epoch: start year, end year, then id for a stable result. */
 export function compareChronological(a: EventData, b: EventData): number {
   const [aFrom, aTo] = yearRange(a);
