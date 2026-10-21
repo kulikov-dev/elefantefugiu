@@ -1,6 +1,7 @@
 // Browser checks for stage 7b-1: theme, epoch palettes, fonts, header on phones.
 // Run against dist/ served by serve.mjs (base path "/"):   node theme.mjs [flash keyboard blocked fonts header palette]
-// Expected colours are the values of docs/visual-direction.md sections 2 and 3 (written out here, independent of tokens.css).
+// Expected colours are the values of docs/visual-direction.md sections 2 and 3 (written out here, independent of tokens.css);
+// stage 7b-2 changed two light tints (Avis, Pombal) and made grey the primary colour of Estado Novo (the red is --epoch-flash).
 import chromium from '@sparticuz/chromium';
 import puppeteer from 'puppeteer-core';
 import { readFileSync } from 'node:fs';
@@ -12,9 +13,9 @@ const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const BG = { light: '#f6f1e7', dark: '#14110e' };
 const hex = (rgb) => '#' + (rgb.match(/\d+/g) ?? []).slice(0, 3).map((n) => Number(n).toString(16).padStart(2, '0')).join('');
 const EPOCHS = {
-  'avis-e-descobrimentos': { slug: { pt: 'avis-e-descobrimentos', en: 'avis-and-discoveries' }, tint: { light: '#efe9da', dark: '#0e2430' }, primary: { light: '#0f5c73', dark: '#5fb3c9' } },
-  'pombal-e-terramoto': { slug: { pt: 'pombal-e-terramoto' }, tint: { light: '#f3e6d3', dark: '#241a14' }, primary: { light: '#a9482a', dark: '#e58a68' } },
-  'estado-novo-e-25-de-abril': { slug: { pt: 'estado-novo-e-25-de-abril' }, tint: { light: '#ece9e3', dark: '#181817' }, primary: { light: '#c41e3a', dark: '#ff6b81' } },
+  'avis-e-descobrimentos': { slug: { pt: 'avis-e-descobrimentos', en: 'avis-and-discoveries' }, tint: { light: '#e3e8dc', dark: '#0e2430' }, primary: { light: '#0f5c73', dark: '#5fb3c9' } },
+  'pombal-e-terramoto': { slug: { pt: 'pombal-e-terramoto' }, tint: { light: '#f3e2cb', dark: '#241a14' }, primary: { light: '#a9482a', dark: '#e58a68' } },
+  'estado-novo-e-25-de-abril': { slug: { pt: 'estado-novo-e-25-de-abril' }, tint: { light: '#ece9e3', dark: '#181817' }, primary: { light: '#4a4a48', dark: '#b8b6b0' } },
 };
 
 let failed = 0;

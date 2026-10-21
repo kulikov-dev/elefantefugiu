@@ -18,12 +18,17 @@ export function patternFor(epoch: string | undefined): Exclude<AzulejoName, 'can
   return (epoch && EPOCH_PATTERN[epoch]) || DEFAULT_PATTERN;
 }
 
+/** The tile of the map waiting state is the compass or the rhombus (docs/visual-direction.md section 8); the rose never. */
+export function waitPatternFor(epoch: string | undefined): 'bussola' | 'rombo' {
+  return patternFor(epoch) === 'rombo' ? 'rombo' : 'bussola';
+}
+
 /** An address (or data: URI) as a CSS url("...") value that survives an inline <style>. */
 export function cssUrl(address: string): string {
   return `url("${address.replace(/\/g, '%5C').replace(/"/g, '%22').replace(/[\r\n]/g, '')}")`;
 }
 
-/** The custom properties the stylesheet reads: the epoch's pattern and the corner signature. */
+/** The custom properties the stylesheet reads: the epoch's pattern, the pattern of the waiting tile, the corner signature. */
 export function azulejoRule(files: Record<AzulejoName, string>, epoch: string | undefined): string {
-  return `:root{--azulejo-url:${cssUrl(files[patternFor(epoch)])};--azulejo-corner-url:${cssUrl(files.canto)}}`;
+  return `:root{--azulejo-url:${cssUrl(files[patternFor(epoch)])};--azulejo-wait-url:${cssUrl(files[waitPatternFor(epoch)])};--azulejo-corner-url:${cssUrl(files.canto)}}`;
 }

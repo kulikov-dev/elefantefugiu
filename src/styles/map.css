@@ -81,7 +81,6 @@
   inset: 0;
 }
 
-.map__loading,
 .map__unavailable {
   position: absolute;
   inset-inline: 0;
@@ -90,6 +89,62 @@
   padding: var(--space-4);
   color: var(--color-ink-muted);
   text-align: center;
+}
+
+/* Waiting state: the "breathing tile" (docs/visual-direction.md section 8). Hidden until --wait-delay has passed, so it
+   never flashes on a fast connection; only transform and opacity move; a ring (pseudo-element), not a growing shadow. */
+.map__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin: 0;
+  color: var(--color-ink-muted);
+  opacity: 0;
+  animation: map-wait-in 1ms linear var(--wait-delay) forwards;
+}
+
+.map__wait-tile {
+  position: relative;
+  width: var(--wait-tile-size);
+  height: var(--wait-tile-size);
+  background-color: var(--epoch-primary);
+  -webkit-mask: var(--azulejo-wait-url) 0 0 / 100% 100% no-repeat;
+  mask: var(--azulejo-wait-url) 0 0 / 100% 100% no-repeat;
+  animation: map-wait-breathe var(--wait-duration) ease-in-out infinite;
+}
+
+.map__wait-text {
+  font-weight: var(--weight-strong);
+}
+
+@keyframes map-wait-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes map-wait-breathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: the tile stands still (the text still appears after the delay). */
+@media (prefers-reduced-motion: reduce) {
+  .map__wait-tile {
+    animation: none;
+  }
 }
 
 .map[data-state='ready'] .map__loading,

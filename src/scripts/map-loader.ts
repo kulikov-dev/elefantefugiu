@@ -7,6 +7,7 @@ const roots = [...document.querySelectorAll<HTMLElement>('[data-map]')];
 /** The map cannot be shown (chunk not loaded, tiles not loaded): say so and fall back to the list. */
 function showUnavailable(root: HTMLElement) {
   root.dataset.state = 'unavailable';
+  root.removeAttribute('aria-busy');
   root.querySelector<HTMLElement>('[data-map-unavailable]')?.removeAttribute('hidden');
   // Map page: the plain list of all cards takes over; otherwise the "In this area" list shows everything.
   const plain = document.querySelector<HTMLElement>('[data-map-static]');
@@ -20,6 +21,7 @@ function showUnavailable(root: HTMLElement) {
 for (const root of roots) {
   root.hidden = false;
   root.dataset.state = 'loading';
+  root.setAttribute('aria-busy', 'true');
   for (const el of document.querySelectorAll<HTMLElement>('[data-map-js]')) el.hidden = false;
   const plain = document.querySelector<HTMLElement>('[data-map-static]');
   if (plain) plain.hidden = true;

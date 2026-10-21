@@ -57,7 +57,12 @@ const config = {
 
   <div class="map__stage">
     <div class="map__canvas" data-map-canvas></div>
-    <p class="map__loading" data-map-loading>{t(lang, 'map.loading')}</p>
+    <!-- The waiting state: a breathing tile of the epoch's pattern. It shows only when the map is still not ready after
+         --wait-delay (CSS), so a fast connection never sees it. -->
+    <div class="map__loading" data-map-loading role="status">
+      <span class="map__wait-tile" aria-hidden="true"></span>
+      <span class="map__wait-text">{t(lang, 'map.loading')}</span>
+    </div>
     <p class="map__unavailable" data-map-unavailable hidden role="status">{t(lang, 'map.unavailable')}</p>
 
     <div class="map__actions">

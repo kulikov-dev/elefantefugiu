@@ -451,6 +451,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     if (target) openPreview(target, false);
     syncChips();
     root.dataset.state = 'ready';
+    root.removeAttribute('aria-busy');
     refreshMarkers();
     // The page around the map (epoch page) can now send it a selection.
     root.dispatchEvent(new CustomEvent('map:ready', { bubbles: true }));

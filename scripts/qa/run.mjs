@@ -36,6 +36,7 @@ const SUITES = [
   { name: 'family-map', script: 'family.mjs', args: ['map'], about: 'the map in every family mode' },
   { name: 'interactives', script: 'interactives.mjs', about: 'dots and ships: keyboard, text, motion, no JS, code, colour' },
   { name: 'theme', script: 'theme.mjs', about: 'theme, palettes, fonts, header, light-dark() fallback' },
+  { name: 'azulejo', script: 'azulejo.mjs', about: 'azulejo patterns in both themes, map waiting tile, reduced motion, layout shifts, neutral header' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant'], variant: true, about: '16+ epoch and an empty mode' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['family'], variant: true, about: 'interactives behind the age screen' },
 ];

@@ -54,6 +54,8 @@
   /* Surface of cards and blocks inside an epoch (the same as --color-surface outside epochs; tinted per epoch in the dark theme). */
   --epoch-surface: var(--color-surface);
   /* The carnation red: the accent of the moments around 25 April 1974 (<... data-flash>); equal to the primary where an epoch has no flash. */
+  /* Dividers and frames of the blocks inside an epoch (docs/visual-direction.md section 3). */
+  --epoch-line: var(--color-border);
   --epoch-flash: var(--epoch-primary);
   --epoch-flash-strong: var(--epoch-primary-strong);
 
@@ -184,7 +186,7 @@
   /* Epoch decoration: heading face, weight and the frame of a card. */
   --epoch-heading-font: var(--font-heading);
   --epoch-heading-weight: 700;
-  --epoch-frame: 1px solid var(--color-border);
+  --epoch-frame: 1px solid var(--epoch-line);
 }
 
 /* ---- Epoch palettes (docs/visual-direction.md section 3). Set on <html data-epoch="..."> of the epoch page and of the
@@ -198,6 +200,7 @@
   --epoch-alt: light-dark(#a4262c, #e06a6f);
   --epoch-tint: light-dark(#e3e8dc, #0e2430); /* light: stronger than the table's #efe9da (stage 7b-2) */
   --epoch-surface: light-dark(#fbf8f1, #15303e);
+  --epoch-line: light-dark(#c3ccb8, #27475a);
   --epoch-heading-weight: 600;
 }
 
@@ -208,6 +211,7 @@
   --epoch-alt: light-dark(#2b5f9e, #7fa9e0);
   --epoch-tint: light-dark(#f3e2cb, #241a14); /* light: stronger than the table's #f3e6d3 (stage 7b-2) */
   --epoch-surface: light-dark(#fbf8f1, #30231b);
+  --epoch-line: light-dark(#dcc3a0, #54402f);
   --epoch-heading-weight: 800;
 }
 
@@ -222,6 +226,7 @@
   --epoch-alt: light-dark(#4a4a48, #b8b6b0);
   --epoch-tint: light-dark(#ece9e3, #181817);
   --epoch-surface: light-dark(#fbf8f1, #242422);
+  --epoch-line: light-dark(#cdc9bf, #3d3d3a);
   --epoch-heading-weight: 700;
 }
 
@@ -294,6 +299,7 @@
     --epoch-alt: #a4262c;
     --epoch-tint: #e3e8dc;
     --epoch-surface: #fbf8f1;
+    --epoch-line: #c3ccb8;
   }
 
   :root[data-epoch='pombal-e-terramoto'] {
@@ -303,6 +309,7 @@
     --epoch-alt: #2b5f9e;
     --epoch-tint: #f3e2cb;
     --epoch-surface: #fbf8f1;
+    --epoch-line: #dcc3a0;
   }
 
   :root[data-epoch='estado-novo-e-25-de-abril'] {
@@ -314,6 +321,7 @@
     --epoch-alt: #4a4a48;
     --epoch-tint: #ece9e3;
     --epoch-surface: #fbf8f1;
+    --epoch-line: #cdc9bf;
   }
 }
 /* END generated: light-dark() fallback */
