@@ -1,6 +1,6 @@
 # O Elefante Fugiu
 
-Static bilingual (pt / en) site with short interactive stories from Portuguese
+Static trilingual (pt / en / ru) site with short interactive stories from Portuguese
 history, tied to a map and to time. Built with Astro and TypeScript, published
 to GitHub Pages. No server, no accounts, no cookies, no third-party trackers.
 
@@ -32,6 +32,7 @@ The dev server runs at http://localhost:4321/. Open `/pt/` or `/en/`.
 | `npm run check:data` | Validates `src/content/*.yaml` and prints a data summary (errors fail, warnings do not) |
 | `npm run check:links` | Every internal link in `dist/` starts with the base path and points to an existing file; every `#fragment` matches an id on the target page |
 | `npm run check:listings` | Built epoch and thread pages against the data: feed order, counters (all three family-mode numbers), sections, neighbouring epochs, every card reachable from a feed |
+| `npm run check:ru` | Built Russian pages against the data: `lang`, `og:locale`, own or stand-in text, the "not translated" banner, `noindex`, `hreflang` (also on the Portuguese and English pages of the same cards); part of `postbuild` |
 | `npm run check:cards` | Built card pages: one `h1`, heading order, alt text, labels, sources, bridge, meta tags, hreflang, `noindex` only on placeholder cards; family mode: head script, toggle, intermediate screen, "Nearby" and previous / next per mode |
 | `npm run check:weight` | Weight of card, epoch and thread pages without images (HTML + CSS + JS, raw, gzip, brotli) against the 500 KB budget; also prints the size of the map code, which is counted apart |
 | `npm run check:contrast` | WCAG contrast of every colour pair in both themes and all epoch palettes (part of `npm run build`) |
@@ -91,6 +92,14 @@ or our own tiles are needed**; then set the repository variables `TILE_URL` and 
 workflow passes them to the build). The map shows the attribution, visible and clickable, whatever the source.
 If tiles do not load, the map page and the epoch page fall back to the list of cards.
 
+## Languages
+
+`pt` (default), `en` and `ru`. Addresses are `/{lang}/...`; the table of all addresses is in `docs/spec.md` section 2 (Russian ones are Latin transliterations such as `/ru/istoriya/{slug}`). The root `/` goes to the saved language (`localStorage` key `lang`), then to the browser language (`ru*` to `/ru/`, `en*` to `/en/`, anything else to `/pt/`). The header switch is a small `<details>` menu (three segments do not fit next to the name on a 320 px phone).
+
+Data: every localized field is `{pt, en, ru?}`. An event has `ru_ready` (default `false`). While it is `false`, `/ru/` shows the English text (fallback chain ru, en, pt) at the English address, with a banner, `noindex` and no `hreflang`; with `ru_ready: true` every localized field needs its `ru` text and the same length rules apply (`check:data` and the schema say which field is missing). Interface strings: `src/i18n/ru.json` (Russian plurals need `_one`, `_few`, `_many`, `_other`; `npm run check:i18n` checks all three files). `npm run export:ui-table` prints the PT / EN / RU table for a native speaker.
+
+Fonts: the Cyrillic subsets of the three fonts are declared in `src/styles/fonts.css` with their own `unicode-range`, so only pages that draw Cyrillic letters fetch them (no preload). Cyrillic fallback faces: `node scripts/font-fallbacks-cyrillic.mjs`.
+
 ## Content data
 
 Content lives in `src/content/` as YAML (schemas in `src/data/schemas.ts`):
@@ -100,8 +109,8 @@ events/<id>.yaml   one file per event; the file name equals the id
 epochs.yaml  threads.yaml  featured.yaml
 ```
 
-Interface strings are not content data: they live in `src/i18n/pt.json` and
-`src/i18n/en.json` (the build checks that both have the same keys).
+Interface strings are not content data: they live in `src/i18n/pt.json`,
+`en.json` and `ru.json` (the build checks that they have the same keys).
 
 `npm run check:data` reports problems as `file [field, language]: message`
 and prints a summary. Length limits for entries with `placeholder: true` are

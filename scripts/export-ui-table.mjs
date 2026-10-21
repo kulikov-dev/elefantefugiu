@@ -1,6 +1,6 @@
-// Prints a PT / EN table of all interface strings for review by a native speaker.
+// Prints a PT / EN / RU table of all interface strings for review by a native speaker.
 // Usage: npm run export:ui-table [-- --format csv] [-- --out ui-table.md]
-// Source of truth: src/i18n/pt.json and src/i18n/en.json (keys are checked by check-i18n.mjs).
+// Source of truth: src/i18n/pt.json, en.json and ru.json (keys are checked by check-i18n.mjs).
 import { readFileSync, writeFileSync } from 'node:fs';
 
 function flatten(obj, prefix = '') {
@@ -24,7 +24,8 @@ if (!['md', 'csv'].includes(format)) {
 
 const pt = load('pt');
 const en = load('en');
-const keys = [...new Set([...pt.keys(), ...en.keys()])];
+const ru = load('ru');
+const keys = [...new Set([...pt.keys(), ...en.keys(), ...ru.keys()])];
 
 const mdCell = (s = '') => String(s).replace(/\|/g, '\\|').replace(/\n/g, ' ');
 const csvCell = (s = '') => `"${String(s).replace(/"/g, '""')}"`;
@@ -32,11 +33,11 @@ const csvCell = (s = '') => `"${String(s).replace(/"/g, '""')}"`;
 const lines =
   format === 'md'
     ? [
-        '| Key | PT (European Portuguese) | EN |',
-        '| --- | --- | --- |',
-        ...keys.map((k) => `| \`${k}\` | ${mdCell(pt.get(k))} | ${mdCell(en.get(k))} |`),
+        '| Key | PT (European Portuguese) | EN | RU |',
+        '| --- | --- | --- | --- |',
+        ...keys.map((k) => `| \`${k}\` | ${mdCell(pt.get(k))} | ${mdCell(en.get(k))} | ${mdCell(ru.get(k))} |`),
       ]
-    : ['key,pt,en', ...keys.map((k) => [k, pt.get(k), en.get(k)].map(csvCell).join(','))];
+    : ['key,pt,en,ru', ...keys.map((k) => [k, pt.get(k), en.get(k), ru.get(k)].map(csvCell).join(','))];
 
 const text = `${lines.join('\n')}\n`;
 if (out) {
