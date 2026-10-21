@@ -1,5 +1,5 @@
-// Map "island" loader. Small on purpose: it only decides WHEN to load the map.
-// Leaflet, its styles and the map code are a separate chunk, fetched when the block scrolls into view.
+// Map "island" loader. Small on purpose: it only decides WHEN to draw the map.
+// Leaflet, its styles and the map code are a separate chunk, fetched as soon as the page has loaded (pages with a map only).
 // Without JavaScript none of this runs: the block and the filters stay hidden and the plain list is shown.
 
 const roots = [...document.querySelectorAll<HTMLElement>('[data-map]')];
@@ -26,11 +26,14 @@ for (const root of roots) {
   const plain = document.querySelector<HTMLElement>('[data-map-static]');
   if (plain) plain.hidden = true;
 
+  // The map code is fetched as soon as the page has loaded (about 46 KB gzip), wherever the block is. Drawing the map waits
+  // until the block can be seen: a hidden block (the phone's "Map" pane while the timeline shows) has no size yet, and
+  // the tiles are only worth fetching for a map that is on the way into view (one screen of margin).
+  const code = import('./map-island');
   const start = () => {
-    import('./map-island')
-      .then((island) => island.mount(root, () => showUnavailable(root)))
-      .catch(() => showUnavailable(root));
+    code.then((island) => island.mount(root, () => showUnavailable(root))).catch(() => showUnavailable(root));
   };
+  code.catch(() => showUnavailable(root));
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
@@ -40,7 +43,7 @@ for (const root of roots) {
           start();
         }
       },
-      { rootMargin: '200px' },
+      { rootMargin: '100%' },
     );
     observer.observe(root);
   } else {

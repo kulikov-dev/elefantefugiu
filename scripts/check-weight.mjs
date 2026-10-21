@@ -57,7 +57,7 @@ console.log(`  heaviest: ${max.file}: ${kb(max.raw)} raw, ${kb(max.gzip)} gzip, 
 console.log(`  images are not counted (largest on a page: ${kb(Math.max(...rows.map((r) => r.images)))})`);
 console.log(`  budget: ${kb(BUDGET)} (raw, without images)`);
 
-// The map: its code is loaded only by pages with a map, and only when the block comes into view.
+// The map: its code is loaded only by pages with a map, and fetched at once on those pages.
 // Counted apart from the page budget; a page without a map never requests these files.
 const astroDir = join(dist, '_astro');
 const mapFiles = existsSync(astroDir) ? readdirSync(astroDir).filter((f) => /^(map-island|MapBlock).*\.js$|^leaflet.*\.css$/.test(f) || (f.endsWith('.css') && readFileSync(join(astroDir, f), 'utf8').includes('.map__stage'))) : [];
@@ -68,7 +68,7 @@ if (mapFiles.length) {
   };
   const rowsMap = mapFiles.map((f) => ({ f, ...size(f) }));
   const sum = (key) => rowsMap.reduce((t, r) => t + r[key], 0);
-  console.log(`  map code (only on map and epoch pages, the Leaflet chunk only when the block is in view): ${kb(sum('raw'))} raw, ${kb(sum('gzip'))} gzip`);
+  console.log(`  map code (only on map and epoch pages, the Leaflet chunk is fetched as soon as the page has loaded): ${kb(sum('raw'))} raw, ${kb(sum('gzip'))} gzip`);
   for (const r of rowsMap) console.log(`    ${r.f.replace(/\.[A-Za-z0-9_-]{8}\./, '.*.')}: ${kb(r.raw)} raw, ${kb(r.gzip)} gzip`);
 }
 // Interactives (ArmyDots, ShipScale): their script and styles are emitted into the pages that show them and nowhere else.

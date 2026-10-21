@@ -687,14 +687,11 @@ if (want('weight')) {
     ok(`weight: ${name} does not load map code`, found.length === 0, found.join(' '));
     await page.close();
   }
-  // lazy: on a very short screen the block is further than the 200px margin of the observer, nothing is fetched until it comes near
+  // The map code is fetched as soon as the page has loaded, even when the block is far below the screen (a very short one).
   const page = await newPage({ width: 360, height: 100 });
   await page.goto(MAP.pt, { waitUntil: 'networkidle0' });
   await wait(500);
-  ok('weight: on the map page the map code waits until the block is near the screen', page.requests.filter((u) => heavy.test(u)).length === 0);
-  await page.evaluate(() => document.querySelector('[data-map]').scrollIntoView());
-  await wait(1500);
-  ok('weight: ...and loads when the block comes into view', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /leaflet.*\.css/.test(u)));
+  ok('weight: on the map page the map code and its styles are fetched at once, not when the block comes into view', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /leaflet.*\.css/.test(u)));
   await page.close();
 }
 
