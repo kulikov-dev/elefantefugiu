@@ -9,10 +9,10 @@ import EpochSwitcher from '../components/EpochSwitcher.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import MapBlock from '../components/MapBlock.astro';
-import { altPaths, epochHref, storyPath, threadHref, type Lang } from '../i18n/routes';
+import { LOCALES, altPaths, epochHref, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { ageInfoOf, countByMode, familyAttrs, zeroModes } from '../lib/family';
 import { feedFilterCss } from '../lib/epoch-filter';
-import { t, tAll } from '../i18n';
+import { pluralForms, t, tAll } from '../i18n';
 import {
   epochFeed,
   epochSectionId,
@@ -140,8 +140,8 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
           class="visually-hidden"
           role="status"
           data-status
-          data-one={t(lang, 'plural.stories_one')}
-          data-other={t(lang, 'plural.stories_other')}
+          data-locale={LOCALES[lang]}
+          {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.stories')).map(([k, v]) => [`data-${k}`, v]))}
         >
         </p>
       </div>

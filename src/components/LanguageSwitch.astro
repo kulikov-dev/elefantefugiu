@@ -12,22 +12,31 @@ interface Props {
 
 const { lang, pageKey = 'home', alternates } = Astro.props;
 ---
-<div class="lang-switch" role="group" aria-label={t(lang, 'a11y.language')}>
-  {
-    LANGS.map((target) => (
-      <a
-        href={alternates ? alternates[target] : pagePath(target, pageKey)}
-        lang={target}
-        hreflang={target}
-        aria-label={`${target.toUpperCase()}, ${LANG_NAMES[target]}`}
-        aria-current={target === lang ? 'true' : undefined}
-        data-set-lang={target}
-      >
-        {target.toUpperCase()}
-      </a>
-    ))
-  }
-</div>
+<details class="lang-switch" data-lang-switch>
+  <summary class="lang-switch__current" aria-label={`${t(lang, 'a11y.language')}: ${LANG_NAMES[lang]}`}>
+    <span aria-hidden="true">{lang.toUpperCase()}</span>
+    <svg class="lang-switch__chevron" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+      <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </summary>
+  <ul class="lang-switch__list">
+    {
+      LANGS.map((target) => (
+        <li>
+          <a
+            href={alternates ? alternates[target] : pagePath(target, pageKey)}
+            lang={target}
+            hreflang={target}
+            aria-current={target === lang ? 'true' : undefined}
+            data-set-lang={target}
+          >
+            {LANG_NAMES[target]}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</details>
 
 <script>
   import '../scripts/lang-carry';

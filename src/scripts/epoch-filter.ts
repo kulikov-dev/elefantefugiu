@@ -1,6 +1,7 @@
 // Epoch page controls: thread filter and timeline/grid switch. Everything is optional:
 // without this script the page is the plain timeline and the thread chips are links to thread pages.
 // State lives in the address (?fio=mar&vista=grelha) and is written with replaceState (no extra history entries).
+import { pickPlural } from '../lib/plural-pick';
 import { matchesThread, parseState, serializeState, type FilterState } from '../lib/epoch-filter';
 import { isVisibleInMode } from '../lib/family';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
@@ -60,8 +61,8 @@ if (root && feed) {
     for (const b of fioButtons) b.setAttribute('aria-pressed', String((b.dataset.fio || null) === state.fio));
     for (const b of viewButtons) b.setAttribute('aria-pressed', String((b.dataset.view === 'grid') === state.grid));
     if (status) {
-      const template = shown === 1 ? status.dataset.one : status.dataset.other;
-      status.textContent = (template ?? '').replace('{n}', String(shown));
+      const forms = status.dataset as Record<string, string>;
+      status.textContent = pickPlural({ stories_one: forms.one ?? '', ...(forms.few ? { stories_few: forms.few } : {}), ...(forms.many ? { stories_many: forms.many } : {}), stories_other: forms.other ?? '' }, 'stories', shown, status.dataset.locale ?? 'en').replace('{n}', String(shown));
     }
   };
 

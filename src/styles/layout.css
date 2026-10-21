@@ -92,32 +92,80 @@
 }
 
 .lang-switch {
-  display: inline-flex;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-pill);
-  overflow: hidden;
+  position: relative;
+  display: inline-block;
 }
 
-.lang-switch a {
+/* Three languages do not fit as segments next to the name on a 320 px phone, so the switch is one compact button
+   (the current language) that opens a short list. A <details>: it works without JavaScript. */
+.lang-switch__current {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: var(--space-1);
   min-width: var(--touch-target);
   min-height: var(--touch-target);
   padding-inline: var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
   color: var(--color-ink);
   font-size: var(--text-sm);
   font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.lang-switch__current::-webkit-details-marker {
+  display: none;
+}
+
+.lang-switch__chevron {
+  flex: none;
+  transition: transform var(--transition);
+}
+
+.lang-switch[open] .lang-switch__chevron {
+  transform: rotate(180deg);
+}
+
+.lang-switch__list {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-end: 0;
+  z-index: 20;
+  min-width: 100%;
+  margin: var(--space-1) 0 0;
+  padding: var(--space-1);
+  list-style: none;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  /* Names of the languages are proper names, not labels: ordinary case. */
+  font-family: var(--font-body);
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.lang-switch a {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+  font-size: var(--text-base);
   text-decoration: none;
+  white-space: nowrap;
+}
+
+.lang-switch a:hover {
+  background: var(--color-surface-hover);
 }
 
 .lang-switch a[aria-current='true'] {
   background: var(--color-accent);
   color: var(--color-on-accent);
-}
-
-.lang-switch a:focus-visible {
-  outline-offset: calc(var(--ring-width) * -1);
+  font-weight: 600;
 }
 
 @media (min-width: 64rem) {

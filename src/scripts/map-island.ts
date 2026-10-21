@@ -1,5 +1,6 @@
 // The map itself (Leaflet). Loaded only on pages with a map, and only when the block is in view.
 // Which markers are drawn is decided by src/lib/markers.ts (no marker-cluster plugin).
+import { pickPlural } from '../lib/plural-pick';
 import * as L from 'leaflet';
 // ?url: the file is emitted but NOT linked into pages; it is added below, only when the map starts.
 import leafletCss from 'leaflet/dist/leaflet.css?url';
@@ -30,6 +31,8 @@ interface Config {
   home: Bounds;
   tile: { url: string; attribution: string };
   strings: Record<string, string>;
+  /** BCP 47 tag for plural rules (Russian counts with four forms). */
+  pluralLocale: string;
 }
 
 /** Behaviour of the map (not styling; sizes and colours live in tokens.css and map.css). */
@@ -190,7 +193,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     for (const cl of result.clusters) {
       wanted.add(cl.id);
       if (!layers.has(cl.id)) {
-        const label = fill(cl.count === 1 ? cfg.strings.cluster_one : cfg.strings.cluster_other, cl.count);
+        const label = fill(pickPlural(cfg.strings, 'cluster', cl.count, cfg.pluralLocale), cl.count);
         addLayer(cl.id, cl.lat, cl.lon, 'mk--cluster', label, String(cl.count), () => openCluster(cl.ids));
       }
     }
@@ -258,7 +261,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const announce = (n: number) => {
     window.clearTimeout(statusTimer);
     statusTimer = window.setTimeout(() => {
-      status.textContent = fill(n === 1 ? cfg.strings.in_area_one : cfg.strings.in_area_other, n);
+      status.textContent = fill(pickPlural(cfg.strings, 'in_area', n, cfg.pluralLocale), n);
     }, BEHAVIOUR.statusDelayMs);
   };
 

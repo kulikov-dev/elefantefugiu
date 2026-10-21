@@ -3,8 +3,8 @@
 // Without JavaScript the block stays hidden; the page then shows its plain list of cards.
 // Leaflet and its styles are loaded by an island script only when the block scrolls into view.
 import '../styles/map.css';
-import { t } from '../i18n';
-import type { Lang } from '../i18n/routes';
+import { pluralForms, t } from '../i18n';
+import { LOCALES, type Lang } from '../i18n/routes';
 import type { Bounds } from '../lib/markers';
 import { safeJson, type MapCardInfo } from '../lib/map-cards';
 import { MAINLAND_VIEW } from '../lib/map-data';
@@ -28,6 +28,9 @@ interface Props {
 
 const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page' } = Astro.props;
 
+/** {one, few, other} of a plural key as `cluster_one`, `cluster_few`, ... */
+const prefixed = (base: string, forms: Record<string, string>) => Object.fromEntries(Object.entries(forms).map(([k, v]) => [`${base}_${k}`, v]));
+
 const config = {
   mode,
   cards,
@@ -37,13 +40,12 @@ const config = {
   view,
   home,
   tile: { url: tile.url, attribution: tile.attribution },
+  pluralLocale: LOCALES[lang],
   strings: {
     frame: t(lang, 'map.marker_frame'),
     story: t(lang, 'map.marker_story'),
-    cluster_one: t(lang, 'map.cluster_one'),
-    cluster_other: t(lang, 'map.cluster_other'),
-    in_area_one: t(lang, 'map.in_area_one'),
-    in_area_other: t(lang, 'map.in_area_other'),
+    ...prefixed('cluster', pluralForms(lang, 'map.cluster')),
+    ...prefixed('in_area', pluralForms(lang, 'map.in_area')),
     zoom_in: t(lang, 'map.zoom_in'),
     zoom_out: t(lang, 'map.zoom_out'),
     list_open: t(lang, 'map.list_open'),
