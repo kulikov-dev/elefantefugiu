@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import FaviconLinks from '../components/FaviconLinks.astro';
 import { LANGS, LANG_NAMES, pagePath, withBase, type Lang } from '../i18n/routes';
 import { rootScript } from '../lib/lang-choice';
 
@@ -11,7 +12,7 @@ const hrefs = Object.fromEntries(LANGS.map((lang) => [lang, pagePath(lang, 'home
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>O Elefante Fugiu</title>
-    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <FaviconLinks />
     {LANGS.map((lang) => <link rel="alternate" hreflang={lang} href={hrefs[lang]} />)}
     <!-- Saved choice first, then the browser language (ru* -> Russian, en* -> English, anything else -> Portuguese). -->
     <script is:inline set:html={rootScript(hrefs)} />

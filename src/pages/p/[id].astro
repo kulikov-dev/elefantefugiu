@@ -5,6 +5,7 @@
 // server redirects, so a small page does it. Not indexed.
 import type { GetStaticPaths } from 'astro';
 import '../../styles/global.css';
+import FaviconLinks from '../../components/FaviconLinks.astro';
 import { LANGS, LANG_NAMES, storyPath, withBase, type Lang } from '../../i18n/routes';
 import { rootScript } from '../../lib/lang-choice';
 import { loadSite } from '../../lib/site-data';
@@ -25,7 +26,7 @@ const hrefs = Object.fromEntries(LANGS.map((lang) => [lang, `${storyPath(lang, e
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>O Elefante Fugiu</title>
-    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <FaviconLinks />
     <script is:inline set:html={rootScript(hrefs)} />
   </head>
   <body>

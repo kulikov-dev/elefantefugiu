@@ -1,6 +1,7 @@
 ---
 import { THEME_COLORS } from '../lib/theme';
 import '../styles/global.css';
+import FaviconLinks from '../components/FaviconLinks.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { LANGS, LOCALES, altPaths, pagePath, withBase, type Lang, type PageKey } from '../i18n/routes';
@@ -71,7 +72,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <FaviconLinks />
     {canonical && <link rel="canonical" href={canonical} />}
     {paths && hreflangs.map((target) => <link rel="alternate" hreflang={target} href={absolute(paths[target])} />)}
     {paths && hreflangs.length > 0 && <link rel="alternate" hreflang="x-default" href={absolute(paths.pt)} />}

@@ -1,0 +1,10 @@
+---
+// Icons of the site (made with realfavicongenerator.net, files in public/): PNG and ICO for the tab, SVG for browsers that take it,
+// the touch icon for iOS and the web manifest. Every address goes through withBase, so a base path (GitHub Pages) works.
+import { withBase } from '../i18n/routes';
+---
+<link rel="icon" type="image/png" href={withBase('favicon-96x96.png')} sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+<link rel="shortcut icon" href={withBase('favicon.ico')} />
+<link rel="apple-touch-icon" sizes="180x180" href={withBase('apple-touch-icon.png')} />
+<link rel="manifest" href={withBase('site.webmanifest')} />
