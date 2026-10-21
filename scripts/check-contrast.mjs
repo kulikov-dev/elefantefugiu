@@ -132,6 +132,12 @@ const PAIRS = [
   ['button text on flash', 'on-accent', 'epoch-flash', T],
   ['control edge on epoch surface', 'border-strong', 'epoch-surface', G],
   ['focus ring on epoch surface', 'focus', 'epoch-surface', G],
+  ['label documented on epoch surface', 'label-documented-ink', 'epoch-surface', T],
+  ['label legend on epoch surface', 'label-legend-ink', 'epoch-surface', T],
+  ['label debated on epoch surface', 'label-debated-ink', 'epoch-surface', T],
+  ['text on pattern, highest opacity (page)', 'text', 'pattern@azulejo-opacity-frame>epoch-tint', T],
+  ['text on pattern, highest opacity (surface)', 'text', 'pattern@azulejo-opacity-frame>epoch-surface', T],
+  ['muted on pattern, under-text opacity (page)', 'muted', 'pattern@azulejo-opacity>epoch-tint', T],
   ['heavy-topic text', 'heavy-ink', 'heavy-bg', T],
   ['label documented', 'label-documented-ink', 'label-documented-bg', T],
   ['label legend', 'label-legend-ink', 'label-legend-bg', T],
@@ -162,6 +168,14 @@ const PAIRS = [
 ];
 
 function colorOf(spec, props, theme) {
+  // "pattern@<opacity token>>base": the pattern layer (the epoch's primary colour at that opacity) lying on a base colour.
+  // Text is never drawn over a pattern by design; this is the worst case, a solid pattern pixel at the highest opacity.
+  const layer = spec.match(/^pattern@([\w-]+)>(.+)$/);
+  if (layer) {
+    const alpha = Number(resolveText(`var(--${layer[1]})`, props, theme));
+    const pixel = { ...colorOf('epoch-primary', props, theme), a: alpha };
+    return over(pixel, colorOf(layer[2], props, theme));
+  }
   const [top, back] = spec.split('>');
   const get = (name) => parseColor(resolveText(`var(--${name === 'epoch-tint' || name.startsWith('epoch-') || name.startsWith('viz-') ? name : `color-${name}`})`, props, theme));
   const color = get(top);

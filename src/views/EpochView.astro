@@ -76,10 +76,12 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   <style slot="head" is:inline set:html={feedFilterCss(site.threads.map((th) => th.id))} />
   <div class="epoch" data-epoch-page data-pane="feed">
     <header class="epoch__header">
+      <span class="azulejo-corner azulejo-corner--mirror epoch__corner" aria-hidden="true"></span>
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">{epochYearsText(epoch, lang)}</p>
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
     </header>
+    <div class="azulejo-rule" aria-hidden="true"></div>
 
     <EpochSwitcher lang={lang} items={switcherItems} />
 
@@ -213,6 +215,23 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
   .epoch__header > * + * {
     margin-block-start: var(--space-2);
+  }
+
+  /* The corner signature sits at the top right, outside the lines of text (the heading leaves room for it). */
+  .epoch__header {
+    position: relative;
+  }
+
+  .epoch__corner {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    margin: 0;
+  }
+
+  .epoch__header h1,
+  .epoch__years {
+    padding-inline-end: var(--azulejo-corner-size);
   }
 
   .epoch__header h1 {
@@ -361,6 +380,11 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
       display: none;
     }
 
+    /* The feed column is narrower beside the map: smaller tiles keep two columns in the grid view. */
+    .epoch__feed {
+      --grid-tile-min: var(--grid-tile-min-beside-map);
+    }
+
     .epoch__body {
       display: grid;
       grid-template-columns: minmax(0, 1fr) var(--epoch-map-width);
@@ -393,6 +417,20 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     padding: 0 0 0 var(--space-5);
     list-style: none;
     border-inline-start: var(--timeline-line) solid var(--color-line);
+  }
+
+  /* A strip of the epoch's pattern along the timeline line (behind the dots; the grid view has no timeline). */
+  :global(html:not([data-vista='grelha'])) .feed::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc(-0.5 * (var(--timeline-line) + var(--azulejo-band-height)));
+    width: var(--azulejo-band-height);
+    background-color: var(--epoch-primary);
+    opacity: var(--azulejo-opacity-frame);
+    pointer-events: none;
+    -webkit-mask: var(--azulejo-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-y;
+    mask: var(--azulejo-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-y;
   }
 
   .feed__item {

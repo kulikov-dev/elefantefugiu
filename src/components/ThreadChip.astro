@@ -15,15 +15,17 @@ interface Props {
   count?: number | Record<FamilyMode, number>;
   /** Renders a filter button (script only) instead of a link; the value is the thread id, empty for "all". */
   filter?: string;
+  /** Without the pill: the dot and the name only (cards in a list, where pills would pile up). */
+  quiet?: boolean;
 }
 
-const { lang, name, color, href, count, filter } = Astro.props;
+const { lang, name, color, href, count, filter, quiet = false } = Astro.props;
 const isButton = filter !== undefined;
 const Tag = isButton ? 'button' : href ? 'a' : 'span';
 const variants = count === undefined ? [] : typeof count === 'number' ? [{ modes: ['off', 'all', '12'], value: count }] : countVariants(count);
 ---
 <Tag
-  class:list={['thread', { 'thread--link': Boolean(href) || isButton, 'thread--button': isButton }]}
+  class:list={['thread', { 'thread--link': Boolean(href) || isButton, 'thread--button': isButton, 'thread--quiet': quiet }]}
   style={`--thread-color: ${color}`}
   href={isButton ? undefined : href}
   type={isButton ? 'button' : undefined}
@@ -67,6 +69,18 @@ const variants = count === undefined ? [] : typeof count === 'number' ? [{ modes
   .thread--link:hover {
     border-color: var(--thread-color);
     background: var(--color-surface-hover);
+  }
+
+  .thread--quiet,
+  .thread--quiet:hover {
+    padding-inline: 0;
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .thread--quiet:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--underline-offset);
   }
 
   .thread--button {

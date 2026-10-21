@@ -1,0 +1,43 @@
+/*
+ * Azulejo patterns (docs/visual-direction.md section 4). A pattern is a decorative layer: an empty element
+ * (aria-hidden) whose background is the epoch's primary colour, cut into the shape of the SVG by a CSS mask. Only the
+ * layer is transparent (--azulejo-opacity-*), never the text. BaseLayout sets --azulejo-url (the pattern of the epoch)
+ * and --azulejo-corner-url (the corner signature) on :root. Patterns do not lie under long text and cover far less than
+ * a tenth of a page: bands of one tile, one strip along the timeline, one corner.
+ */
+
+.azulejo-rule,
+.azulejo-corner {
+  display: block;
+  flex: none;
+  pointer-events: none;
+  background-color: var(--epoch-primary);
+  opacity: var(--azulejo-opacity-frame);
+}
+
+/* A band (divider, top edge of a key card): one tile high, repeated along. */
+.azulejo-rule {
+  height: var(--azulejo-band-height);
+  -webkit-mask: var(--azulejo-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-x;
+  mask: var(--azulejo-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-x;
+}
+
+/* The corner signature (a single element, not a repeat); --mirror flips it for the right-hand corner. */
+.azulejo-corner {
+  width: var(--azulejo-corner-size);
+  height: var(--azulejo-corner-size);
+  -webkit-mask: var(--azulejo-corner-url) 0 0 / 100% 100% no-repeat;
+  mask: var(--azulejo-corner-url) 0 0 / 100% 100% no-repeat;
+}
+
+.azulejo-corner--mirror {
+  transform: scaleX(-1);
+}
+
+/* Nothing is drawn for a browser without masks: the layer would be a solid block. */
+@supports not ((mask: url('x') 0 0 / 1px 1px repeat) or (-webkit-mask: url('x') 0 0 / 1px 1px repeat)) {
+  .azulejo-rule,
+  .azulejo-corner {
+    display: none;
+  }
+}

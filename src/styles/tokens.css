@@ -120,6 +120,7 @@
   /* The wordmark: 20 px, a little less on the narrowest phones so that logo, name and language switch share one row. */
   --text-brand: clamp(1rem, 5.5vw, 1.25rem);
   --size-icon: 1.5rem;
+  --size-caret: 0.35em;
   --map-caption-width: 12rem;
   --size-thumb: 5.5rem;
 
@@ -132,6 +133,7 @@
   /* Grids and widths */
   --grid-tile-min: 17rem;
   --grid-home-tile-min: 16rem;
+  --grid-tile-min-beside-map: 13rem;
   --grid-step-min: 14rem;
   --container-story: 48rem;
   --card-aside-width: 19rem;
@@ -165,10 +167,9 @@
 
   /* Azulejo patterns (docs/visual-direction.md section 4): tile size, and the opacity of the pattern layer only
      (5-10% under text, up to 50% on frames and dividers; never on text). */
-  --azulejo-size: 80px;
-  --azulejo-opacity: 0.08;
-  --azulejo-opacity-text: 0.1;
-  --azulejo-opacity-frame: 0.4;
+  --azulejo-opacity: 0.08; /* under text: 5-10% */
+  --azulejo-opacity-frame: 0.4; /* bands, strips and the corner: up to 50% */
+  --azulejo-band-height: 1.25rem;
   --azulejo-corner-size: 5.5rem;
 
   /* Waiting states: the breathing tile of the map (transform and opacity only) and the reserved place of a picture. */

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60">
+  <!-- Azulejo pattern "bussola": seamless 60x60 tile, compass-like circle with rays -->
+  <circle cx="30" cy="30" r="14" fill="none" stroke="#000" stroke-width="2.5"/>
+  <circle cx="30" cy="30" r="5" fill="#000"/>
+  <path d="M30 0 V16 M30 44 V60 M0 30 H16 M44 30 H60" stroke="#000" stroke-width="2.5" fill="none"/>
+  <path d="M0 0 L14 14 M60 0 L46 14 M0 60 L14 46 M60 60 L46 46" stroke="#000" stroke-opacity="0.5" stroke-width="1.5" fill="none"/>
+</svg>

@@ -28,6 +28,7 @@ const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) =
 const textLang = event.placeholder ? 'la' : undefined;
 ---
 <article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-flash={isFlashMoment(event) ? '' : undefined}>
+  {event.level === 'frame' && <span class="azulejo-rule ecard__band" aria-hidden="true" />}
   <div class="ecard__head">
     {
       event.image && (
@@ -57,6 +58,7 @@ const textLang = event.placeholder ? 'la' : undefined;
             name={thread.name}
             color={thread.color}
             href={visibleThreadIds.has(thread.id) ? threadHref(lang, thread.slug[lang]) : undefined}
+            quiet
           />
         </li>
       ))
@@ -142,22 +144,61 @@ const textLang = event.placeholder ? 'la' : undefined;
     line-height: 1.25;
   }
 
-  /* Key events of the frame are a step more prominent than the stories between them. */
+  /* A story between the key events: small title, no heavy frame, no fill, a smaller picture. */
+  .ecard--story {
+    padding: var(--space-3) var(--space-4);
+    background: transparent;
+  }
+
+  .ecard--story .ecard__title {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: var(--weight-strong);
+    line-height: 1.3;
+  }
+
+  .ecard--story .ecard__hook {
+    font-size: var(--text-base);
+  }
+
+  .ecard--story .ecard__thumb {
+    width: calc(var(--size-thumb) * 0.75);
+  }
+
+  /* A key event of the frame: larger padding, the epoch's own heading face, a thick bar and a band of the pattern on top. */
   .ecard--frame {
+    gap: var(--space-4);
+    padding: var(--space-5);
     border-inline-start: var(--epoch-accent-bar);
   }
 
   .ecard--frame .ecard__title {
     font-family: var(--epoch-heading-font);
     font-weight: var(--epoch-heading-weight);
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
+    line-height: 1.15;
   }
 
+  .ecard__band {
+    margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) 0;
+    border-start-start-radius: var(--radius-md);
+    border-start-end-radius: var(--radius-md);
+  }
+
+  /* Few pills: thread names are plain text with a dot; the credibility label and the age lose their fill and frame. */
   .ecard__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2);
+    align-items: center;
+    gap: 0 var(--space-4);
     list-style: none;
+  }
+
+  .ecard__tags :global(.tag),
+  .ecard__tags :global(.age) {
+    padding-inline: 0;
+    border-color: transparent;
+    background: transparent;
   }
 
   .ecard__heavy {
