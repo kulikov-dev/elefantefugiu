@@ -52,12 +52,17 @@ const feedState = (page) =>
       link: li.querySelector('a')?.getAttribute('href') ?? null,
       current: Boolean(li.querySelector('[aria-current="page"]')),
     }));
-    return { items, overflow: document.scrollingElement.scrollWidth - innerWidth };
+    const more = document.querySelector('.epoch-switch__more');
+    const dashed = [...document.querySelectorAll('.epoch-switch__list .epoch-switch__item')].filter((el) => getComputedStyle(el).borderStyle.includes('dashed')).length;
+    return { items, more: more?.querySelector('summary').textContent.trim(), moreOpen: more?.open, dashed, overflow: document.scrollingElement.scrollWidth - innerWidth };
   });
+  // Tabs first (the three MVP epochs), then the rest under one "More eras soon" disclosure.
   ok('switcher: nine epochs', s.items.length === 9, `n=${s.items.length}`);
-  ok('switcher: current epoch marked, not a link', s.items.filter((i) => i.current).length === 1 && s.items[3].current && s.items[3].link === null);
-  ok('switcher: the two other MVP epochs are links', s.items[5].link === '/pt/epoca/pombal-e-terramoto/' && s.items[7].link === '/pt/epoca/estado-novo-e-25-de-abril/');
-  ok('switcher: the six epochs outside the MVP are "coming soon" without a link', [0, 1, 2, 4, 6, 8].every((i) => s.items[i].link === null && /Em breve/.test(s.items[i].text)));
+  ok('switcher: current epoch marked, not a link', s.items.filter((i) => i.current).length === 1 && s.items[0].current && s.items[0].link === null);
+  ok('switcher: the two other MVP epochs are links', s.items[1].link === '/pt/epoca/pombal-e-terramoto/' && s.items[2].link === '/pt/epoca/estado-novo-e-25-de-abril/');
+  ok('switcher: the six epochs outside the MVP are plain text', s.items.slice(3).every((i) => i.link === null));
+  ok('switcher: one disclosure "Mais épocas em breve", closed at first', s.more === 'Mais épocas em breve' && s.moreOpen === false, JSON.stringify([s.more, s.moreOpen]));
+  ok('switcher: no dashed chips in the main row', s.dashed === 0);
   ok('switcher: no horizontal overflow at 360px', s.overflow <= 0, `overflow=${s.overflow}`);
   await page.close();
 }

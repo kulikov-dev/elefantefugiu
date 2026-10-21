@@ -201,11 +201,13 @@ for (const lang of ['pt', 'en']) {
     if (!/<style[^>]*>[\s\S]*?<\/style>/.test(readFileSync(join(dir, 'index.html'), 'utf8').match(/<head>[\s\S]*?<\/head>/)?.[0] ?? '')) fail('the prepaint thread filter <style> is missing in <head>');
     if (!/data-empty hidden/.test(html) || !/data-status/.test(html)) fail('empty-thread message or status line is missing');
 
-    // epoch switcher: every epoch once, in order; the current one marked, epochs with a page linked, the rest "coming soon"
+    // epoch switcher: the MVP epochs as tabs, then the others under one "more eras soon" disclosure; every epoch once;
+    // the current one marked, epochs with a page linked, the rest plain text marked --soon
     const switcher = html.match(/<nav class="epoch-switch"[\s\S]*?<\/nav>/)?.[0] ?? '';
     const switchItems = [...switcher.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)].map((m) => m[1]);
     if (switchItems.length !== epochs.length) fail(`epoch switcher has ${switchItems.length} items, expected ${epochs.length}`);
-    epochs.forEach((other, i) => {
+    if (!/<details class="epoch-switch__more"/.test(switcher)) fail('epoch switcher: the "more eras soon" disclosure is missing');
+    [...epochs.filter((e) => e.mvp), ...epochs.filter((e) => !e.mvp)].forEach((other, i) => {
       const item = switchItems[i] ?? '';
       if (!item.includes(other.name[lang])) fail(`epoch switcher item ${i + 1} is not \"${other.name[lang]}\"`);
       const isLink = /<a\b/.test(item);
@@ -213,7 +215,7 @@ for (const lang of ['pt', 'en']) {
         if (isLink || !/aria-current="page"/.test(item)) fail('current epoch must be marked with aria-current and not be a link');
       } else if (hasPage(other)) {
         if (!new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${other.slug[lang]}/"`).test(item)) fail(`switcher: epoch "${other.id}" has a page and must be a link`);
-      } else if (isLink || !/epoch-switch__item--soon/.test(item) || !/\((Em breve|Coming soon)\)/.test(item)) {
+      } else if (isLink || !/epoch-switch__item--soon/.test(item)) {
         fail(`switcher: epoch "${other.id}" has no page and must show "coming soon" without a link`);
       }
     });

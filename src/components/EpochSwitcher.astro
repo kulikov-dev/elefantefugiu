@@ -1,5 +1,5 @@
 ---
-// Links to all epochs with a page; the current one is marked; the rest show "Coming soon" without a link.
+// The MVP epochs are tabs (the current one marked); every other epoch sits under one "More eras soon" disclosure.
 import { t } from '../i18n';
 import { epochHref, type Lang } from '../i18n/routes';
 import type { EpochData, SwitcherItem } from '../lib/epochs';
@@ -10,32 +10,59 @@ interface Props {
 }
 
 const { lang, items } = Astro.props;
+const tabs = items.filter((i) => i.epoch.mvp);
+const rest = items.filter((i) => !i.epoch.mvp);
 ---
 <nav class="epoch-switch" aria-label={t(lang, 'epoch.switcher_label')}>
   <ol class="epoch-switch__list">
     {
-      items.map(({ epoch, state }) => (
+      tabs.map(({ epoch, state }) => (
         <li>
-          {state === 'link' ? (
-            <a class="epoch-switch__item" href={epochHref(lang, epoch.slug[lang])}>
-              {epoch.name[lang]}
-            </a>
-          ) : state === 'current' ? (
+          {state === 'current' ? (
             <span class="epoch-switch__item epoch-switch__item--current" aria-current="page">
               {epoch.name[lang]}
             </span>
+          ) : state === 'link' ? (
+            <a class="epoch-switch__item" href={epochHref(lang, epoch.slug[lang])}>
+              {epoch.name[lang]}
+            </a>
           ) : (
-            <span class="epoch-switch__item epoch-switch__item--soon">
-              {epoch.name[lang]} <span class="epoch-switch__note">({t(lang, 'ui.soon')})</span>
-            </span>
+            <span class="epoch-switch__item epoch-switch__item--soon">{epoch.name[lang]}</span>
           )}
         </li>
       ))
     }
   </ol>
+  {
+    rest.length > 0 && (
+      <details class="epoch-switch__more">
+        <summary class="epoch-switch__item epoch-switch__summary">{t(lang, 'epoch.more_soon')}</summary>
+        <ul class="epoch-switch__rest">
+          {
+            rest.map(({ epoch, state }) => (
+              <li>
+                {state === 'link' ? (
+                  <a class="epoch-switch__rest-item" href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
+                ) : (
+                  <span class="epoch-switch__rest-item epoch-switch__item--soon">{epoch.name[lang]}</span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+    )
+  }
 </nav>
 
 <style>
+  .epoch-switch {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
   .epoch-switch__list {
     display: flex;
     flex-wrap: wrap;
@@ -63,19 +90,61 @@ const { lang, items } = Astro.props;
     border-color: var(--color-accent);
   }
 
+  /* The current tab: the epoch's own colour, so the reader sees where they are. */
   .epoch-switch__item--current {
-    border-color: var(--color-ink);
-    background: var(--color-ink);
-    color: var(--color-surface);
+    border-color: var(--epoch-primary);
+    background: var(--epoch-primary);
+    color: var(--color-on-accent);
   }
 
-  .epoch-switch__item--soon {
-    border-style: dashed;
+  .epoch-switch__summary {
+    cursor: pointer;
     color: var(--color-ink-muted);
-    font-weight: 400;
+    list-style: none;
   }
 
-  .epoch-switch__note {
-    margin-inline-start: var(--space-1);
+  .epoch-switch__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .epoch-switch__summary::after {
+    content: '';
+    margin-inline-start: var(--space-2);
+    border-inline: 0.3em solid transparent;
+    border-block-start: 0.4em solid currentColor;
+    transition: transform var(--transition);
+  }
+
+  .epoch-switch__more[open] .epoch-switch__summary::after {
+    transform: rotate(180deg);
+  }
+
+  .epoch-switch__rest {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin: var(--space-2) 0 0;
+    padding: var(--space-2);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    list-style: none;
+  }
+
+  .epoch-switch__rest-item {
+    display: flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    padding-inline: var(--space-2);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  a.epoch-switch__rest-item:hover {
+    color: var(--color-accent);
+  }
+
+  span.epoch-switch__rest-item {
+    color: var(--color-ink-muted);
   }
 </style>
