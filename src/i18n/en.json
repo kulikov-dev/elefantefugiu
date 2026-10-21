@@ -44,6 +44,7 @@
   "home": {
     "epochs_heading": "Eras",
     "start": "Start",
+    "continue": "Continue: {name}",
     "open_map": "Open the map",
     "showcase_heading": "Featured stories",
     "threads_heading": "Threads",
@@ -83,6 +84,25 @@
     "title": "Page not found",
     "text": "This address does not exist or has moved.",
     "home": "Go to the home page"
+  },
+  "report": {
+    "lead": "Thank you for helping us get it right. Tell us what is wrong and, if you know it, the correct version.",
+    "url_label": "Page with the mistake",
+    "url_hint": "Filled in if you came from a story; you can change it or paste another link.",
+    "what_label": "What is wrong?",
+    "what_hint": "For example: a date, a name, a place, a translation.",
+    "fix_label": "What is the correct version? (optional)",
+    "source_label": "A source or link that confirms it (optional)",
+    "email_label": "Your email (optional)",
+    "email_hint": "Only if you want a reply.",
+    "submit": "Send",
+    "sending": "Sending…",
+    "privacy": "When you send, the message goes to the team by email through the FormSubmit service. We keep nothing else. More at",
+    "direct": "Prefer to write directly? Use",
+    "sent_title": "Message sent",
+    "sent_text": "Thank you! We will check it and correct it if needed.",
+    "failed": "Could not send right now. Try again or write to us directly at",
+    "too_short": "Describe the mistake in a few words."
   },
   "ui": {
     "read_more": "Read ▾",

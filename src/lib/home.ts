@@ -49,3 +49,12 @@ export function pickSurprise(ids: readonly string[], last: string | null, random
   const pool = ids.length > 1 ? ids.filter((id) => id !== last) : [...ids];
   return pool[Math.min(pool.length - 1, Math.floor(random() * pool.length))] ?? null;
 }
+
+/** localStorage key of the last epoch the reader visited (the id, so it works in every language). */
+export const LAST_EPOCH_KEY = 'lastEpoch';
+
+/** The saved epoch id if it is one of the epochs with a page (`known`), otherwise null: a stale or foreign value is ignored. */
+export function pickLastEpoch(saved: string | null | undefined, known: readonly string[]): string | null {
+  const id = String(saved ?? '').trim();
+  return id !== '' && known.includes(id) ? id : null;
+}

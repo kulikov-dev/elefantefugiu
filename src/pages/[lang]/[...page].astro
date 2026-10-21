@@ -1,6 +1,8 @@
 ---
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import HomeView from '../../views/HomeView.astro';
+import ReportView from '../../views/ReportView.astro';
+import StaticView from '../../views/StaticView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
 import { t } from '../../i18n';
@@ -26,6 +28,10 @@ const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
 {
   isHome ? (
     <HomeView lang={lang} />
+  ) : pageKey === 'report' ? (
+    <ReportView lang={lang} />
+  ) : pageKey === 'about' || pageKey === 'method' || pageKey === 'legal' ? (
+    <StaticView lang={lang} pageKey={pageKey} />
   ) : (
     <BaseLayout lang={lang} pageKey={pageKey} title={title}>
       <h1>{title}</h1>

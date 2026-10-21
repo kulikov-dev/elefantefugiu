@@ -44,6 +44,7 @@
   "home": {
     "epochs_heading": "Épocas",
     "start": "Começar",
+    "continue": "Continuar: {name}",
     "open_map": "Abrir o mapa",
     "showcase_heading": "Histórias em destaque",
     "threads_heading": "Fios",
@@ -83,6 +84,25 @@
     "title": "Página não encontrada",
     "text": "O endereço não existe ou mudou.",
     "home": "Ir para a página inicial"
+  },
+  "report": {
+    "lead": "Obrigado por nos ajudar a acertar. Diga-nos o que está errado e, se souber, qual é a versão correta.",
+    "url_label": "Página com o erro",
+    "url_hint": "Preenchida se veio de uma história; pode alterar ou colar outra ligação.",
+    "what_label": "O que está errado?",
+    "what_hint": "Por exemplo: uma data, um nome, um local, uma tradução.",
+    "fix_label": "Qual é a versão correta? (opcional)",
+    "source_label": "Fonte ou ligação que o confirma (opcional)",
+    "email_label": "O seu e-mail (opcional)",
+    "email_hint": "Só se quiser que lhe respondamos.",
+    "submit": "Enviar",
+    "sending": "A enviar…",
+    "privacy": "Ao enviar, a mensagem segue por e-mail para a equipa através do serviço FormSubmit. Não guardamos mais nada. Mais em",
+    "direct": "Prefere escrever diretamente? Use",
+    "sent_title": "Mensagem enviada",
+    "sent_text": "Obrigado! Vamos verificar e corrigir, se for caso disso.",
+    "failed": "Não foi possível enviar agora. Tente de novo ou escreva-nos diretamente para",
+    "too_short": "Descreva o erro com algumas palavras."
   },
   "ui": {
     "read_more": "Ler mais ▾",

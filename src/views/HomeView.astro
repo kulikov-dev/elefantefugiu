@@ -34,6 +34,9 @@ const surprise = surpriseCandidates(site.events).map((e) => ({
 // Test text must stay out of search results until it is real.
 const noindex = site.featured.some((e) => e.placeholder) || tiles.some((tile) => tile.available && tile.epoch.placeholder);
 
+// "Continue": the epochs with a page, by id, for the script that knows the last epoch of the reader.
+const continueTargets = Object.fromEntries(tiles.filter((tile) => tile.available).map((tile) => [tile.epoch.id, { href: epochHref(lang, tile.epoch.slug[lang]), name: tile.epoch.name[lang] }]));
+
 const steps = [
   { key: 'hook', n: 1 },
   { key: 'story', n: 2 },
@@ -48,6 +51,14 @@ const steps = [
       <p class="hero__intro">{t(lang, 'site.description')}</p>
       <p class="hero__actions">
         {start && <a class="button" href={epochHref(lang, start.slug[lang])}>{t(lang, 'home.start')}</a>}
+        <a
+          class="button button--secondary"
+          href={start ? epochHref(lang, start.slug[lang]) : '#'}
+          data-continue
+          data-template={t(lang, 'home.continue')}
+          data-targets={JSON.stringify(continueTargets)}
+          hidden
+        >{t(lang, 'home.continue').replace('{name}', start?.name[lang] ?? '')}</a>
         <a class="button button--secondary" href={pagePath(lang, 'map')}>{t(lang, 'home.open_map')}</a>
       </p>
     </section>
@@ -134,6 +145,7 @@ const steps = [
 
 <script>
   import '../scripts/surprise';
+  import '../scripts/last-epoch';
 </script>
 
 <style>

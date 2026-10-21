@@ -1,0 +1,39 @@
+---
+// QR address of a place: /p/{id} (docs/spec.md section 2). It is printed on plaques, so it never changes: the id of the
+// event does not change either. The page sends the reader to the card in the saved or browser language with ?src=qr
+// (same choice as the root, src/lib/lang-choice.ts). Without JavaScript it shows the three links. Static hosting has no
+// server redirects, so a small page does it. Not indexed.
+import type { GetStaticPaths } from 'astro';
+import '../../styles/global.css';
+import { LANGS, LANG_NAMES, storyPath, withBase, type Lang } from '../../i18n/routes';
+import { rootScript } from '../../lib/lang-choice';
+import { loadSite } from '../../lib/site-data';
+import type { EventData } from '../../lib/events';
+
+export const getStaticPaths = (async () => {
+  const site = await loadSite();
+  return site.events.map((event) => ({ params: { id: event.id }, props: { event } }));
+}) satisfies GetStaticPaths;
+
+const { event } = Astro.props as { event: EventData };
+const hrefs = Object.fromEntries(LANGS.map((lang) => [lang, `${storyPath(lang, event.slug[lang])}?src=qr`])) as Record<Lang, string>;
+---
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>O Elefante Fugiu</title>
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+    <script is:inline set:html={rootScript(hrefs)} />
+  </head>
+  <body>
+    <main class="lang-chooser">
+      <h1>O Elefante Fugiu</h1>
+      <ul class="lang-chooser__links">
+        {LANGS.map((lang) => <li><a class="button" href={hrefs[lang]} lang={lang} hreflang={lang}>{LANG_NAMES[lang]}</a></li>)}
+      </ul>
+    </main>
+  </body>
+</html>
