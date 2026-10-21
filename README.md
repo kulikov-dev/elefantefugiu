@@ -92,6 +92,10 @@ or our own tiles are needed**; then set the repository variables `TILE_URL` and 
 workflow passes them to the build). The map shows the attribution, visible and clickable, whatever the source.
 If tiles do not load, the map page and the epoch page fall back to the list of cards.
 
+## Mistake reports, static pages, sitemap
+
+The "Found a mistake?" form posts to the FormSubmit service, which forwards it to the project address (`CONTACT_EMAIL` in `src/data/static-pages.ts`); the first message must be confirmed once by the owner (see `docs/STATE.md`). Texts of the About, Method and Legal pages are in `src/data/static-pages.ts` (three languages, same sections). `npm run build` also writes `dist/sitemap.xml` and `dist/robots.txt` from the built pages (only pages without `noindex`; `robots.txt` counts at the root of a domain). `/p/{event id}/` is the QR address of a card (redirects to the card in the reader's language with `?src=qr`). `npm run make:og` makes PNG previews of the SVG pictures. `node scripts/export-addresses.mjs` prints the table of all addresses. Node 22 is pinned in `.nvmrc` and the workflow.
+
 ## Languages
 
 `pt` (default), `en` and `ru`. Addresses are `/{lang}/...`; the table of all addresses is in `docs/spec.md` section 2 (Russian ones are Latin transliterations such as `/ru/istoriya/{slug}`). The root `/` goes to the saved language (`localStorage` key `lang`), then to the browser language (`ru*` to `/ru/`, `en*` to `/en/`, anything else to `/pt/`). The header switch is a small `<details>` menu (three segments do not fit next to the name on a 320 px phone).
