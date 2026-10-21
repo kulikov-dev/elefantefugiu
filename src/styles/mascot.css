@@ -1,0 +1,62 @@
+/*
+ * The elephant mascot (docs/visual-direction.md section 6). Decorative picture; never clickable, never follows the cursor.
+ * Only transform and opacity move, and only once; under prefers-reduced-motion nothing moves (reset.css shortens every animation).
+ */
+
+.mascot {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  /* On a dark page the dark outline would vanish: a faint light halo (a token that is empty on the light theme). */
+  filter: drop-shadow(0 0 1px var(--mascot-halo)) drop-shadow(0 0 1px var(--mascot-halo));
+}
+
+.mascot--normal {
+  width: var(--size-mascot);
+}
+
+.mascot--small {
+  width: var(--size-mascot-small);
+}
+
+/* The head in the header: as tall as the old logo, as wide as the picture needs. */
+.mascot--logo {
+  width: auto;
+  height: var(--size-logo);
+}
+
+@keyframes mascot-in {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--mascot-shift) * -1));
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Walks in when it scrolls into view; a browser without scroll-driven animation shows it standing in place. */
+@supports (animation-timeline: view()) {
+  .mascot--enter {
+    animation: mascot-in linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 90%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot--enter {
+    animation: none;
+  }
+}
+
+/* In an empty state the elephant sits above the text, in the middle. */
+.feed-empty .mascot,
+.family-empty .mascot {
+  margin-inline: auto;
+  margin-block-end: var(--space-2);
+}

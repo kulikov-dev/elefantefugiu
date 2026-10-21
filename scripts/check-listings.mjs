@@ -90,7 +90,8 @@ function commonChecks(html, where, lang, { placeholder, expectedH1 }) {
   });
   const h1 = text(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] ?? '');
   if (h1 !== expectedH1) fail(`h1 is "${h1}", expected "${expectedH1}"`);
-  for (const img of html.matchAll(/<img\b[^>]*>/g)) {
+  // The mascot pictures are decorative (empty alt on purpose) and are checked by check-mascot.mjs.
+  for (const img of html.matchAll(/<img\b(?![^>]*\bclass="mascot)[^>]*>/g)) {
     const alt = img[0].match(/\balt="([^"]*)"/);
     if (!alt || alt[1].trim() === '') fail('img without alt text');
   }

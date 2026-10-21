@@ -4,6 +4,7 @@
 // The client-side epoch filter and the mini map come later.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
+import Mascot from '../components/Mascot.astro';
 import { altPaths, epochHref, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { epochSectionId, threadSections, type ThreadData } from '../lib/epochs';
@@ -43,6 +44,7 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
     {
       emptyModes.length > 0 && (
         <div class="family-empty fv fv--block" data-modes={emptyModes.join(' ')} data-family-empty>
+          <Mascot pose="think" size="small" />
           <p>{t(lang, 'family.empty')}</p>
           <button type="button" class="linklike" data-family-set="off">{t(lang, 'family.show_all')}</button>
         </div>

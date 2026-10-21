@@ -119,6 +119,12 @@
   --size-dot-lg: 1rem;
   --size-step: 2rem;
   --size-logo: clamp(1.75rem, 8vw, 2.25rem);
+  /* The elephant mascot: a figure beside text, a smaller one in empty states; it walks in from --mascot-shift to the side. */
+  --size-mascot: clamp(9rem, 40vw, 13rem);
+  --size-mascot-small: clamp(5rem, 28vw, 7rem);
+  --mascot-shift: 1.5rem;
+  /* A faint halo round the dark outline of the mascot; none on the light theme. */
+  --mascot-halo: light-dark(transparent, rgb(244 236 220 / 0.7));
   /* The wordmark: 20 px, a little less on the narrowest phones so that logo, name and language switch share one row. */
   --text-brand: clamp(1rem, 5.5vw, 1.25rem);
   --size-icon: 1.5rem;
@@ -285,6 +291,7 @@
     --color-notice-bg: #fff4c2;
     --color-notice-ink: #3d2f00;
     --shadow-raised: 0 1px 4px rgb(31 27 22 / 0.3);
+    --mascot-halo: transparent;
     --viz-tone-blue: #2b5f9e;
     --viz-tone-red: #a4262c;
     --viz-tone-green: #2f6f3e;

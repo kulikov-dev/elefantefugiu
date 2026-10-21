@@ -130,7 +130,8 @@ for (const ev of events) {
     });
 
     // ----- images, links, buttons, ids -----
-    for (const img of html.matchAll(/<img\b[^>]*>/g)) {
+    // The mascot pictures are decorative (empty alt on purpose) and are checked by check-mascot.mjs.
+    for (const img of html.matchAll(/<img\b(?![^>]*\bclass="mascot)[^>]*>/g)) {
       const alt = img[0].match(/\balt="([^"]*)"/);
       if (!alt || alt[1].trim() === '') fail(`img without alt text: ${img[0].slice(0, 80)}`);
     }
@@ -220,7 +221,7 @@ for (const ev of events) {
     const n = (nearby.match(/<li\b/g) ?? []).length;
     if (n < 3 || n > 7) fail(`"Nearby" has ${n} cards, expected 3-7`);
     if (has(/<script[^>]+src="https?:/)) fail('external script');
-    if (/<img[^>]*\bsrc="[^"]*"[^>]*>/.test(html) && !/loading="lazy"/.test(html)) fail('illustration is not lazy-loaded');
+    if (/<img\b(?![^>]*\bclass="mascot)[^>]*\bsrc="[^"]*"[^>]*>/.test(html) && !/loading="lazy"/.test(html)) fail('illustration is not lazy-loaded');
     if (!full.includes('type="module"')) fail('layer-state script is missing');
   }
 }

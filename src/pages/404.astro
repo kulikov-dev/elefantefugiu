@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Mascot from '../components/Mascot.astro';
 import { LANGS, pagePath } from '../i18n/routes';
 import { t } from '../i18n';
 ---
 <!-- GitHub Pages serves one root 404.html, so both languages are shown here. -->
 <BaseLayout lang="pt" title={t('pt', 'notfound.title')} noindex>
   <div class="notfound">
+    <Mascot pose="sad" size="normal" />
     <span class="azulejo-corner azulejo-corner--mirror notfound__corner" aria-hidden="true"></span>
   </div>
   {
@@ -25,7 +27,8 @@ import { t } from '../i18n';
   /* The corner signature of the page: top right, in the free space above the headings. */
   .notfound {
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
+    justify-content: space-between;
   }
 
   .notfound__corner {

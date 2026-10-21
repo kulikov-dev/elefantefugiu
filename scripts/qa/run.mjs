@@ -39,6 +39,7 @@ const SUITES = [
   { name: 'azulejo', script: 'azulejo.mjs', about: 'azulejo patterns in both themes, map waiting tile, reduced motion, layout shifts, neutral header' },
   { name: 'ru', script: 'ru.mjs', about: 'language menu on 320/360 px, root choice, banner and noindex on untranslated cards, Cyrillic fonts only on /ru/, plurals' },
   { name: 'pages', script: 'pages.mjs', about: 'static pages, mistake report form (answered by the test), Continue, QR address' },
+  { name: 'mascot', script: 'mascot.mjs', about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant'], variant: true, about: '16+ epoch and an empty mode' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['family'], variant: true, about: 'interactives behind the age screen' },
 ];

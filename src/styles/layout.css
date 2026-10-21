@@ -54,11 +54,6 @@
   color: var(--color-accent);
 }
 
-.brand__logo {
-  width: var(--size-logo);
-  height: var(--size-logo);
-  color: var(--color-accent);
-}
 
 .site-nav {
   grid-area: nav;

@@ -1,6 +1,8 @@
 ---
 // Previous / next links (cards in an epoch, neighbouring epochs). An item without href is a
-// "coming soon" placeholder: plain text, not focusable.
+// "coming soon" placeholder: plain text, not focusable. Between epochs the elephant may walk along the "next" link (mascot).
+import Mascot from './Mascot.astro';
+import type { Pose } from '../lib/mascot';
 interface Item {
   /** Small line above the title, with the arrow. */
   dir: string;
@@ -15,17 +17,20 @@ interface Props {
   label: string;
   prev?: Item | null;
   next?: Item | null;
+  /** A pose of the elephant that walks in above the "next" link; the page decides whether the mascot is allowed there. */
+  mascot?: Pose | undefined;
 }
 
-const { label, prev, next } = Astro.props;
+const { label, prev, next, mascot } = Astro.props;
 ---
 {
   (prev || next) && (
-    <nav class="pager" aria-label={label}>
+    <nav class:list={['pager', { 'pager--mascot': Boolean(mascot && next?.href) }]} aria-label={label}>
       {[prev, next].map((item, i) =>
         item ? (
           item.href ? (
             <a class:list={['pager__link', { 'pager__link--next': i === 1 }]} href={item.href} rel={item.rel}>
+              {i === 1 && mascot && <Mascot pose={mascot} size="small" enter />}
               <span class="pager__dir">{item.dir}</span>
               <span class="pager__title">{item.title}</span>
             </a>
@@ -65,7 +70,19 @@ const { label, prev, next } = Astro.props;
   }
 
   .pager__link--next {
+    position: relative;
     text-align: end;
+  }
+
+  /* The elephant stands on the top edge of the "next" link; the nav leaves it room above. */
+  .pager--mascot {
+    padding-block-start: calc(var(--size-mascot-small) + var(--space-2));
+  }
+
+  .pager__link--next :global(.mascot) {
+    position: absolute;
+    inset-block-end: 100%;
+    inset-inline-end: var(--space-3);
   }
 
   .pager__link--soon {

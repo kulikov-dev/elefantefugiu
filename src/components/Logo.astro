@@ -1,19 +1,5 @@
 ---
-// Placeholder elephant logo. Decorative: the brand name sits next to it as text.
+// The logo: the head of the elephant. Decorative: the brand name sits next to it as text.
+import Mascot from './Mascot.astro';
 ---
-<svg class="brand__logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
-  <g fill="currentColor">
-    <ellipse cx="27" cy="27" rx="14" ry="10" />
-    <circle cx="13" cy="23" r="8" />
-    <rect x="17" y="33" width="5" height="11" rx="2" />
-    <rect x="32" y="33" width="5" height="11" rx="2" />
-  </g>
-  <path
-    d="M7 26c-4 4-3 12 2 14M41 25c4 2 4 7 3 10"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="4"
-    stroke-linecap="round"
-  />
-  <circle cx="12" cy="21" r="1.4" style="fill: var(--color-surface)" />
-</svg>
+<Mascot pose="head" size="logo" />
