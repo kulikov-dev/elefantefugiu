@@ -57,6 +57,10 @@ SITE_URL=https://USER.github.io BASE_PATH=/REPO npm run build
 
 Light and dark themes and three epoch palettes (`docs/visual-direction.md`) are CSS tokens in `src/styles/tokens.css`, each colour a `light-dark()` pair; `<html data-theme>` (system, light, dark: header icon and footer radio group, key `theme` in `localStorage`) and `<html data-epoch>` select them, set before the first paint by the one inline script in `<head>`. Fonts (Playfair Display, Source Serif 4, Oswald) are self-hosted from Fontsource packages, Latin subset only, with metric-matched fallback faces (`src/styles/fonts.css`, `node scripts/font-fallbacks.mjs`); `docs/STATE.md` says how to add Cyrillic for `/ru/`. Browser checks: `scripts/qa/theme.mjs`.
 
+## Azulejo patterns
+
+Four one-colour SVG patterns in `src/assets/azulejo/` (compass for Avis and the Discoveries, rhombus for Pombal and 1755, rose for the Estado Novo and 25 April, and a single corner signature) are drawn as CSS masks (`src/styles/azulejo.css`) in the epoch's primary colour. `BaseLayout` imports them with `?url` (so the paths keep `BASE_PATH`) and puts the addresses in `:root` (`src/lib/azulejo.ts`). Decorative layers only, `aria-hidden`: a band under the epoch header and on the card page, a band on the key events of the feed, a strip along the timeline, the corner on epoch pages and on the 404 page. Opacity belongs to the layer (`--azulejo-opacity-frame`), never to text; `npm run check:contrast` checks text over the pattern at the highest opacity. The compass or the rhombus is also the "breathing tile" of the map while it loads (shown only after 300 ms, still with `prefers-reduced-motion`). Browser checks: `scripts/qa/azulejo.mjs`.
+
 ## Interactives
 
 Two interactives live in the "More" layer of a card, driven by `interactive: {type, data}` in the event file (`army_dots`: "One against five", `ship_scale`: "Size of the nau"; schemas in `src/data/schemas.ts`). They are SVG and CSS without libraries, have a text and table alternative, and a static version without JavaScript. Their script and styles are inlined only into pages that show them (`npm run check:weight` prints their size and fails if the code reaches any other page). Browser checks: `scripts/qa/interactives.mjs`.
@@ -134,7 +138,8 @@ src/content      YAML content: events/, epochs, threads, featured
 src/data         Zod schemas
 src/lib          pure helpers (card logic, thread visibility, home tiles, filter state, marker selection, map state, tile settings), covered by tests/
 src/i18n         pt.json, en.json, route map, t() helper
-src/styles       tokens (all colours, fonts, sizes), reset, base, layout, map (loaded only with the map)
+src/styles       tokens (all colours, fonts, sizes), reset, base, layout, azulejo, theme, typography, map (loaded only with the map)
+src/assets       azulejo/ (SVG patterns used as masks)
 tests            unit tests
 scripts          build-time checks and tools; scripts/qa = browser checks (own dependencies)
 docs             design.md, spec.md, STATE.md
