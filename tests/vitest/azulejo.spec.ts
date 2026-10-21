@@ -24,7 +24,7 @@ describe('azulejo patterns', () => {
 
   it('cssUrl keeps quotes and backslashes from breaking the inline style', () => {
     expect(cssUrl('/a/b.svg')).toBe('url("/a/b.svg")');
-    expect(cssUrl('data:image/svg+xml,a"b\c')).toBe('url("data:image/svg+xml,a%22b%5Cc")');
+    expect(cssUrl('data:image/svg+xml,a"b\\c')).toBe('url("data:image/svg+xml,a%22b%5Cc")');
   });
 
   it('azulejoRule names the pattern of the epoch and the corner', () => {
