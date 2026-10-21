@@ -74,7 +74,7 @@ if (want('patterns')) {
   // The 404 page carries the corner signature.
   const p404 = await newPage();
   await p404.goto(`${base}/404.html`, { waitUntil: 'networkidle0' });
-  ok('404: the corner signature is drawn', await p404.evaluate(() => { const c = document.querySelector('.azulejo-corner'); const s = c && getComputedStyle(c); return Boolean(s) && (s.maskImage !== 'none' || s.webkitMaskImage !== 'none') && c.getBoundingClientRect().width > 0; }));
+  ok('404: the corner signature is drawn', await p404.evaluate(() => { const c = document.querySelector('.azulejo-corner'); const s = c && getComputedStyle(c); return Boolean(s) && s.maskImage !== 'none' && c.getBoundingClientRect().width > 0; }));
   await p404.close();
   // A key card of the feed has the band, a story card has none.
   const feed = await newPage();
@@ -111,7 +111,7 @@ if (want('waiting')) {
     for (const sheet of document.styleSheets) {
       let rules = [];
       try { rules = [...sheet.cssRules]; } catch (e) { continue; }
-      for (const r of rules) if (r.type === CSSRule.KEYFRAMES_RULE && r.name.startsWith('map-wait')) for (const k of r.cssRules) for (const p of k.style) names.add(p);
+      for (const r of rules) if (r instanceof CSSKeyframesRule && r.name.startsWith('map-wait')) for (const k of r.cssRules) for (const p of k.style) names.add(p);
     }
     return [...names];
   });
