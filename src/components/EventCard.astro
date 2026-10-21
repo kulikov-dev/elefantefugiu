@@ -4,7 +4,7 @@
 //   grid: a tile that links to the card page (thread pages).
 import { t } from '../i18n';
 import { storyPath, withBase, threadHref, type Lang } from '../i18n/routes';
-import { formatYear, isFlashMoment, type EventData } from '../lib/events';
+import { formatYear, isFlashMoment, textLangOf, type EventData } from '../lib/events';
 import type { ThreadData } from '../lib/epochs';
 import AgeBadge from './AgeBadge.astro';
 import TagLabel from './TagLabel.astro';
@@ -25,7 +25,7 @@ const { lang, event, variant, threads, visibleThreadIds, showThreads = true } = 
 const href = storyPath(lang, event.slug[lang]);
 const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) => th.id === id)).filter((th) => th !== undefined) : [];
 // Placeholder text is Latin filler: mark it so screen readers do not read it as Portuguese.
-const textLang = event.placeholder ? 'la' : undefined;
+const textLang = textLangOf(event, lang);
 ---
 <article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-flash={isFlashMoment(event) ? '' : undefined}>
   {event.level === 'frame' && <span class="azulejo-rule ecard__band" aria-hidden="true" />}

@@ -6,7 +6,8 @@ import { join } from 'node:path';
 
 const raw = (process.env.BASE_PATH || '').trim();
 const base = raw && raw !== '/' ? `/${raw.replace(/^\/+|\/+$/g, '')}/` : '/';
-const dist = new URL('../dist/', import.meta.url).pathname;
+import { fileURLToPath } from 'node:url';
+const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 
 function htmlFiles(dir) {
   return readdirSync(dir).flatMap((name) => {

@@ -3,15 +3,18 @@ id: evento-exemplo-08
 slug:
   pt: evento-exemplo-08
   en: example-event-08
+  ru: testovoe-sobytie-08
 title:
   pt: Evento de exemplo 08
   en: Example event 08
+  ru: Тестовое событие 08
 epoch: avis-e-descobrimentos
 level: story
 year: 1568
 year_label:
   pt: por volta de 1568
   en: around 1568
+  ru: Ид эст.
 place:
   name: "Peniche"
   lat: 39.3558
@@ -25,6 +28,7 @@ bridge:
   note:
     pt: Piscis in aqua natat, nota de teste do local 08.
     en: Piscis in aqua natat, test note of place 08.
+    ru: Амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт.
 threads:
   - mar
   - gente-como-nos
@@ -35,6 +39,7 @@ sensitive: false
 hook:
   pt: Quis nostrud exercitation ullamco laboris nisi ut.
   en: Quis nostrud exercitation ullamco laboris nisi ut.
+  ru: Темпор инцидидунт ут лаборе эт долоре магна.
 story:
   pt: >-
     In reprehenderit in voluptate velit esse cillum dolore eu fugiat
@@ -48,6 +53,12 @@ story:
     in culpa qui officia deserunt mollit anim id est laborum lorem ipsum
     dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
     incididunt ut labore et dolore magna aliqua ut enim ad minim.
+  ru: >-
+    Аликва ут энйм ад миним вениам квис ноструд экзерцитацион уллямко
+    лаборис нисии ут аликвип экс эа коммодо консеквят дуис ауте ируре ин
+    репрехендерит ин волуптате велит эссе циллум фугиат нулла париатур
+    экцептеур синт оккаекат купидатат нон пройдент сунт ин кульпа куи
+    оффиция дезерунт моллит аним ид эст лаборум лорем ипсум долор сит.
 more:
   pt: >-
     Non proident sunt in culpa qui officia deserunt mollit anim id est
@@ -73,6 +84,19 @@ more:
     dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
     incididunt ut labore et dolore magna aliqua ut enim ad minim veniam
     quis nostrud exercitation ullamco.
+  ru: >-
+    Ноструд экзерцитацион уллямко лаборис нисии ут аликвип экс эа
+    коммодо консеквят дуис ауте ируре ин репрехендерит ин волуптате
+    велит эссе циллум фугиат нулла париатур экцептеур синт оккаекат
+    купидатат нон пройдент сунт ин кульпа куи оффиция дезерунт моллит
+    аним ид эст лаборум лорем ипсум долор сит амет консектетур
+    адиписцинг элит сед до эйусмод темпор инцидидунт ут лаборе эт долоре
+    магна аликва ут энйм ад миним вениам квис ноструд экзерцитацион
+    уллямко лаборис нисии ут аликвип экс эа коммодо консеквят дуис ауте
+    ируре ин репрехендерит ин волуптате велит эссе циллум фугиат нулла
+    париатур экцептеур синт оккаекат купидатат нон пройдент сунт ин
+    кульпа куи оффиция дезерунт моллит аним ид эст лаборум лорем ипсум
+    долор.
 sources:
   - title: Fonte de exemplo 08-1
     url: https://example.com/fonte-08-1
@@ -87,9 +111,11 @@ image:
   alt:
     pt: Ilustração provisória da época de exemplo A.
     en: Placeholder illustration for example era A.
+    ru: Экс эа коммодо консеквят дуис ауте.
   credit: O Elefante Fugiu (placeholder)
   license: CC BY-SA 4.0
 reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready
 placeholder: true
+ru_ready: true

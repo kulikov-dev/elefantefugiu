@@ -2,15 +2,17 @@
 // so they are unit-tested. Every number here is a coordinate in the SVG's own viewBox, not a CSS size; colours and
 // CSS sizes live in tokens.css.
 
+import { LOCALES, type Lang } from '../i18n/routes';
+
 /** Replaces {name} placeholders in an interface string. */
 export const fill = (template: string, values: Record<string, string | number>): string =>
   template.replace(/\{(\w+)\}/g, (whole, key: string) => (key in values ? String(values[key]) : whole));
 
 /** A number in the reader's language: 5 000 in Portuguese, 5,000 in English. */
-export const formatNumber = (n: number, lang: 'pt' | 'en'): string => new Intl.NumberFormat(lang === 'pt' ? 'pt-PT' : 'en', { maximumFractionDigits: 1, useGrouping: true }).format(n);
+export const formatNumber = (n: number, lang: Lang): string => new Intl.NumberFormat(LOCALES[lang], { maximumFractionDigits: 1, useGrouping: true }).format(n);
 
 /** "8" or "1.5": a ratio for a sentence (whole number from 10 up, one decimal below). */
-export const ratioNumber = (ratio: number, lang: 'pt' | 'en'): string => formatNumber(ratio >= 10 ? Math.round(ratio) : Math.round(ratio * 10) / 10, lang);
+export const ratioNumber = (ratio: number, lang: Lang): string => formatNumber(ratio >= 10 ? Math.round(ratio) : Math.round(ratio * 10) / 10, lang);
 
 // ---------------------------------------------------------------- ArmyDots
 

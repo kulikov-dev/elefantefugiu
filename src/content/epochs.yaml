@@ -7,16 +7,19 @@
   slug:
     pt: avis-e-descobrimentos
     en: avis-and-the-discoveries
+    ru: avis-i-velikie-otkrytiya
   order: 4
   name:
     pt: "Avis e Descobrimentos"
     en: "Avis and the Discoveries"
+    ru: "Авис и Великие открытия"
   years:
     from: 1385
     to: 1580
   theme:
     pt: "Descobertas: o mundo no mapa"
     en: "Discoveries: the world on the map"
+    ru: "Открытия: мир на карте"
   style:
     bg: "#eaf1fb"
     accent: "#1f4e8c"
@@ -29,16 +32,19 @@
   slug:
     pt: pombal-e-terramoto
     en: pombal-and-the-earthquake
+    ru: pombal-zemletryasenie-begstvo-dvora
   order: 6
   name:
     pt: "Pombal e o Terramoto"
     en: "Pombal and the Earthquake"
+    ru: "Помбал, землетрясение, бегство двора"
   years:
     from: 1755
     to: 1820
   theme:
     pt: "Terramoto e reconstrução"
     en: "Earthquake and rebuilding"
+    ru: "Землетрясение и перестройка"
   style:
     bg: "#fbf0e6"
     accent: "#9a4a1c"
@@ -51,16 +57,19 @@
   slug:
     pt: estado-novo-e-25-de-abril
     en: estado-novo-and-25-april
+    ru: eshtadu-novu-i-revolyuciya-gvozdik
   order: 8
   name:
     pt: "Estado Novo e 25 de Abril"
     en: "Estado Novo and 25 April"
+    ru: "Эштаду Нову и Революция гвоздик"
   years:
     from: 1926
     to: 1974
   theme:
     pt: "Do regime à revolução"
     en: "From regime to revolution"
+    ru: "От режима к революции"
   style:
     bg: "#fdeeee"
     accent: "#b3202a"
@@ -73,77 +82,95 @@
   slug:
     pt: lusitania-e-roma
     en: lusitania-and-rome
+    ru: luzitaniya-i-rim
   order: 1
   name:
     pt: "Lusitânia e Roma"
     en: "Lusitania and Rome"
+    ru: "Лузитания и Рим"
   years_label:
     pt: "até ao séc. V"
     en: "until the 5th century"
+    ru: "до V в."
   mvp: false
   placeholder: false
 - id: suevos-visigodos-e-mouros
   slug:
     pt: suevos-visigodos-e-mouros
     en: suebi-visigoths-and-moors
+    ru: sveby-vestgoty-i-mavry
   order: 2
   name:
     pt: "Suevos, visigodos e mouros"
     en: "Suebi, Visigoths and Moors"
+    ru: "Свевы, вестготы и мавры"
   years_label:
     pt: "séc. V–XII"
     en: "5th–12th centuries"
+    ru: "V–XII вв."
   mvp: false
   placeholder: false
 - id: nascimento-do-reino-e-reconquista
   slug:
     pt: nascimento-do-reino-e-reconquista
     en: birth-of-the-kingdom-and-reconquista
+    ru: rozhdenie-korolevstva-i-rekonkista
   order: 3
   name:
     pt: "Nascimento do reino e Reconquista"
     en: "Birth of the Kingdom and the Reconquista"
+    ru: "Рождение королевства и Реконкиста"
   years_label:
     pt: "1139–1249"
     en: "1139–1249"
+    ru: "1139–1249"
   mvp: false
   placeholder: false
 - id: uniao-restauracao-e-ouro-do-brasil
   slug:
     pt: uniao-restauracao-e-ouro-do-brasil
     en: union-restoration-and-brazilian-gold
+    ru: uniya-restavraciya-i-zoloto-brazilii
   order: 5
   name:
     pt: "União, Restauração e ouro do Brasil"
     en: "Union, Restoration and Brazilian Gold"
+    ru: "Уния, Реставрация и золото Бразилии"
   years_label:
     pt: "1580–1750"
     en: "1580–1750"
+    ru: "1580–1750"
   mvp: false
   placeholder: false
 - id: monarquia-e-republica
   slug:
     pt: monarquia-e-republica
     en: monarchy-and-republic
+    ru: monarhiya-i-respublika
   order: 7
   name:
     pt: "Monarquia e República"
     en: "Monarchy and Republic"
+    ru: "Монархия и Республика"
   years_label:
     pt: "1820–1926"
     en: "1820–1926"
+    ru: "1820–1926"
   mvp: false
   placeholder: false
 - id: atualidade-ue-e-emigracao
   slug:
     pt: atualidade-ue-e-emigracao
     en: present-day-eu-and-emigration
+    ru: sovremennost-es-i-emigraciya
   order: 9
   name:
     pt: "Atualidade: UE e emigração"
     en: "The present day: the EU and emigration"
+    ru: "Современность: ЕС и эмиграция"
   years_label:
     pt: "1974 – hoje"
     en: "1974 – today"
+    ru: "1974 – наши дни"
   mvp: false
   placeholder: false

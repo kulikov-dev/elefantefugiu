@@ -5,7 +5,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import MapBlock from '../components/MapBlock.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { storyPath, type Lang } from '../i18n/routes';
-import { t } from '../i18n';
+import { t, tAll } from '../i18n';
 import { epochHasContent, epochYearsText } from '../lib/epochs';
 import { groupByEpoch, toMapCards } from '../lib/map-cards';
 import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
@@ -42,7 +42,7 @@ const noindex = events.some((e) => e.placeholder);
           <li>
             <ThreadChip
               lang={lang}
-              name={{ pt: t('pt', 'epoch.filter_all'), en: t('en', 'epoch.filter_all') }}
+              name={tAll('epoch.filter_all')}
               color="var(--color-ink-muted)"
               filter=""
             />

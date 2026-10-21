@@ -3,12 +3,15 @@
   slug:
     pt: mar
     en: sea
+    ru: more
   name:
     pt: "Mar"
     en: "Sea"
+    ru: "Море"
   description:
     pt: Descrição de exemplo do fio Mar.
     en: Example description of the thread Sea.
+    ru: Пример описания нити «Море».
   color: "#1f6f8b"
   icon: wave
   mvp: true
@@ -17,12 +20,15 @@
   slug:
     pt: comida-e-vinho
     en: food-and-wine
+    ru: eda-i-vino
   name:
     pt: "Comida e vinho"
     en: "Food and wine"
+    ru: "Еда и вино"
   description:
     pt: Descrição de exemplo do fio Comida e vinho.
     en: Example description of the thread Food and wine.
+    ru: Пример описания нити «Еда и вино».
   color: "#8a3b5c"
   icon: cup
   mvp: true
@@ -31,12 +37,15 @@
   slug:
     pt: poder-e-revolta
     en: power-and-revolt
+    ru: vlast-i-bunt
   name:
     pt: "Poder e revolta"
     en: "Power and revolt"
+    ru: "Власть и бунт"
   description:
     pt: Descrição de exemplo do fio Poder e revolta.
     en: Example description of the thread Power and revolt.
+    ru: Пример описания нити «Власть и бунт».
   color: "#8a2b2b"
   icon: crown
   mvp: true
@@ -45,12 +54,15 @@
   slug:
     pt: gente-como-nos
     en: people-like-us
+    ru: lyudi-kak-my
   name:
     pt: "Gente como nós"
     en: "People like us"
+    ru: "Люди как мы"
   description:
     pt: Descrição de exemplo do fio Gente como nós.
     en: Example description of the thread People like us.
+    ru: Пример описания нити «Люди как мы».
   color: "#3d6b3a"
   icon: people
   mvp: true
@@ -59,12 +71,15 @@
   slug:
     pt: natureza
     en: nature
+    ru: priroda
   name:
     pt: "Natureza"
     en: "Nature"
+    ru: "Природа"
   description:
     pt: Descrição de exemplo do fio Natureza.
     en: Example description of the thread Nature.
+    ru: Пример описания нити «Природа».
   color: "#4f7a2a"
   icon: leaf
   mvp: true

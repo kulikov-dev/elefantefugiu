@@ -6,11 +6,12 @@ import baseCss from '../styles/viz-base.css?inline';
 import ownCss from '../styles/viz-ship.css?inline';
 import type { Lang } from '../i18n/routes';
 import type { ShipScaleData } from '../data/schemas';
+import type { Localized } from '../lib/localize';
 import { fill, formatNumber, ratioNumber, shipRatio, shipShapes, SHIP_PAD, SHIP_WIDTH } from '../lib/viz';
 
 interface Props {
   lang: Lang;
-  data: ShipScaleData;
+  data: Localized<ShipScaleData>;
   textLang?: string | undefined;
 }
 

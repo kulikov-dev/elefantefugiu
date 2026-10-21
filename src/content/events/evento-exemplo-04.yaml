@@ -3,9 +3,11 @@ id: evento-exemplo-04
 slug:
   pt: evento-exemplo-04
   en: example-event-04
+  ru: testovoe-sobytie-04
 title:
   pt: Evento de exemplo 04
   en: Example event 04
+  ru: Тестовое событие 04
 epoch: avis-e-descobrimentos
 level: frame
 year: 1470
@@ -22,6 +24,7 @@ bridge:
   note:
     pt: Piscis in aqua natat, nota de teste do local 04.
     en: Piscis in aqua natat, test note of place 04.
+    ru: Консеквят дуис ауте ируре ин репрехендерит ин волуптате велит.
 threads:
   - mar
   - natureza
@@ -32,6 +35,7 @@ sensitive: false
 hook:
   pt: Incididunt ut labore et dolore magna aliqua.
   en: Incididunt ut labore et dolore magna aliqua.
+  ru: Волуптате велит эссе циллум фугиат нулла париатур.
 story:
   pt: >-
     Enim ad minim veniam quis nostrud exercitation ullamco laboris nisi
@@ -47,6 +51,12 @@ story:
     pariatur excepteur sint occaecat cupidatat non proident sunt in
     culpa qui officia deserunt mollit anim id est laborum lorem ipsum
     dolor.
+  ru: >-
+    Экцептеур синт оккаекат купидатат нон пройдент сунт ин кульпа куи
+    оффиция дезерунт моллит аним ид эст лаборум лорем ипсум долор сит
+    амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт ут
+    лаборе эт долоре магна аликва ут энйм ад миним вениам квис ноструд
+    экзерцитацион уллямко лаборис нисии ут аликвип экс эа коммодо.
 more:
   pt: >-
     Laboris nisi ut aliquip ex ea commodo consequat duis aute irure
@@ -72,6 +82,18 @@ more:
     voluptate velit esse cillum dolore eu fugiat nulla pariatur
     excepteur sint occaecat cupidatat non proident sunt in culpa qui
     officia deserunt mollit anim id est laborum.
+  ru: >-
+    Ин кульпа куи оффиция дезерунт моллит аним ид эст лаборум лорем
+    ипсум долор сит амет консектетур адиписцинг элит сед до эйусмод
+    темпор инцидидунт ут лаборе эт долоре магна аликва ут энйм ад миним
+    вениам квис ноструд экзерцитацион уллямко лаборис нисии ут аликвип
+    экс эа коммодо консеквят дуис ауте ируре ин репрехендерит ин
+    волуптате велит эссе циллум фугиат нулла париатур экцептеур синт
+    оккаекат купидатат нон пройдент сунт ин кульпа куи оффиция дезерунт
+    моллит аним ид эст лаборум лорем ипсум долор сит амет консектетур
+    адиписцинг элит сед до эйусмод темпор инцидидунт ут лаборе эт долоре
+    магна аликва ут энйм ад миним вениам квис ноструд экзерцитацион
+    уллямко лаборис нисии ут аликвип экс эа.
 sources:
   - title: Fonte de exemplo 04-1
     url: https://example.com/fonte-04-1
@@ -86,9 +108,11 @@ image:
   alt:
     pt: Ilustração provisória da época de exemplo A.
     en: Placeholder illustration for example era A.
+    ru: Ид эст лаборум лорем ипсум долор.
   credit: O Elefante Fugiu (placeholder)
   license: CC BY-SA 4.0
 reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready
 placeholder: true
+ru_ready: true

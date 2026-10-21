@@ -21,14 +21,14 @@ function ev(id: string, patch: Partial<EventData> = {}): EventData {
     status: 'ready',
     place: { name: 'Somewhere', lat: 38.7, lon: -9.1 },
     ...patch,
-  } as EventData;
+  } as unknown as EventData;
 }
 
 test('formatYear: label, single year, range', () => {
   assert.equal(formatYear({ year: 1385 }, 'pt'), '1385');
   assert.equal(formatYear({ year: { from: 1385, to: 1390 } }, 'en'), '1385\u20131390');
   assert.equal(formatYear({ year: { from: 1500, to: 1500 } }, 'en'), '1500');
-  assert.equal(formatYear({ year: 1500, year_label: { pt: 'por volta de 1500', en: 'around 1500' } }, 'en'), 'around 1500');
+  assert.equal(formatYear({ year: 1500, year_label: { pt: 'por volta de 1500', en: 'around 1500', ru: 'около 1500' } }, 'en'), 'around 1500');
 });
 
 test('chronological order uses start year, end year, then id', () => {

@@ -3,9 +3,11 @@ id: evento-exemplo-06
 slug:
   pt: evento-exemplo-06
   en: example-event-06
+  ru: testovoe-sobytie-06
 title:
   pt: Evento de exemplo 06
   en: Example event 06
+  ru: Тестовое событие 06
 epoch: avis-e-descobrimentos
 level: story
 year:
@@ -24,6 +26,7 @@ bridge:
   note:
     pt: Piscis in aqua natat, nota de teste do local 06.
     en: Piscis in aqua natat, test note of place 06.
+    ru: Экцептеур синт оккаекат купидатат нон пройдент сунт ин кульпа.
 threads:
   - natureza
   - gente-como-nos
@@ -34,6 +37,7 @@ sensitive: false
 hook:
   pt: Aliqua ut enim ad minim veniam quis.
   en: Aliqua ut enim ad minim veniam quis.
+  ru: Ин кульпа куи оффиция дезерунт моллит аним.
 story:
   pt: >-
     Ut aliquip ex ea commodo consequat duis aute irure dolor in
@@ -49,6 +53,12 @@ story:
     culpa qui officia deserunt mollit anim id est laborum lorem ipsum
     dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
     incididunt.
+  ru: >-
+    Ид эст лаборум лорем ипсум долор сит амет консектетур адиписцинг
+    элит сед до эйусмод темпор инцидидунт ут лаборе эт долоре магна
+    аликва ут энйм ад миним вениам квис ноструд экзерцитацион уллямко
+    лаборис нисии ут аликвип экс эа коммодо консеквят дуис ауте ируре ин
+    репрехендерит ин волуптате велит эссе циллум фугиат нулла париатур.
 more:
   pt: >-
     In voluptate velit esse cillum dolore eu fugiat nulla pariatur
@@ -74,6 +84,18 @@ more:
     cupidatat non proident sunt in culpa qui officia deserunt mollit
     anim id est laborum lorem ipsum dolor sit amet consectetur
     adipiscing elit sed do eiusmod tempor incididunt ut.
+  ru: >-
+    Амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт ут
+    лаборе эт долоре магна аликва ут энйм ад миним вениам квис ноструд
+    экзерцитацион уллямко лаборис нисии ут аликвип экс эа коммодо
+    консеквят дуис ауте ируре ин репрехендерит ин волуптате велит эссе
+    циллум фугиат нулла париатур экцептеур синт оккаекат купидатат нон
+    пройдент сунт ин кульпа куи оффиция дезерунт моллит аним ид эст
+    лаборум лорем ипсум долор сит амет консектетур адиписцинг элит сед
+    до эйусмод темпор инцидидунт ут лаборе эт долоре магна аликва ут
+    энйм ад миним вениам квис ноструд экзерцитацион уллямко лаборис
+    нисии ут аликвип экс эа коммодо консеквят дуис ауте ируре ин
+    репрехендерит ин волуптате велит эссе циллум фугиат нулла.
 sources:
   - title: Fonte de exemplo 06-1
     url: https://example.com/fonte-06-1
@@ -88,9 +110,11 @@ image:
   alt:
     pt: Ilustração provisória da época de exemplo A.
     en: Placeholder illustration for example era A.
+    ru: Темпор инцидидунт ут лаборе эт долоре.
   credit: O Elefante Fugiu (placeholder)
   license: CC BY-SA 4.0
 reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready
 placeholder: true
+ru_ready: true

@@ -3,9 +3,11 @@ id: evento-exemplo-07
 slug:
   pt: evento-exemplo-07
   en: example-event-07
+  ru: testovoe-sobytie-07
 title:
   pt: Evento de exemplo 07
   en: Example event 07
+  ru: Тестовое событие 07
 epoch: avis-e-descobrimentos
 level: story
 year: 1543
@@ -22,6 +24,7 @@ bridge:
   note:
     pt: Piscis in aqua natat, nota de teste do local 07.
     en: Piscis in aqua natat, test note of place 07.
+    ru: Ин кульпа куи оффиция дезерунт моллит аним ид эст.
 threads:
   - comida-e-vinho
 importance: 2
@@ -31,6 +34,7 @@ sensitive: false
 hook:
   pt: Ad minim veniam quis nostrud exercitation ullamco.
   en: Ad minim veniam quis nostrud exercitation ullamco.
+  ru: Ид эст лаборум лорем ипсум долор сит.
 story:
   pt: >-
     Consequat duis aute irure dolor in reprehenderit in voluptate velit
@@ -46,6 +50,13 @@ story:
     anim id est laborum lorem ipsum dolor sit amet consectetur
     adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore
     magna.
+  ru: >-
+    Амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт ут
+    лаборе эт долоре магна аликва ут энйм ад миним вениам квис ноструд
+    экзерцитацион уллямко лаборис нисии ут аликвип экс эа коммодо
+    консеквят дуис ауте ируре ин репрехендерит ин волуптате велит эссе
+    циллум фугиат нулла париатур экцептеур синт оккаекат купидатат нон
+    пройдент сунт.
 more:
   pt: >-
     Fugiat nulla pariatur excepteur sint occaecat cupidatat non proident
@@ -71,6 +82,18 @@ more:
     officia deserunt mollit anim id est laborum lorem ipsum dolor sit
     amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut
     labore et dolore magna aliqua ut enim.
+  ru: >-
+    Темпор инцидидунт ут лаборе эт долоре магна аликва ут энйм ад миним
+    вениам квис ноструд экзерцитацион уллямко лаборис нисии ут аликвип
+    экс эа коммодо консеквят дуис ауте ируре ин репрехендерит ин
+    волуптате велит эссе циллум фугиат нулла париатур экцептеур синт
+    оккаекат купидатат нон пройдент сунт ин кульпа куи оффиция дезерунт
+    моллит аним ид эст лаборум лорем ипсум долор сит амет консектетур
+    адиписцинг элит сед до эйусмод темпор инцидидунт ут лаборе эт долоре
+    магна аликва ут энйм ад миним вениам квис ноструд экзерцитацион
+    уллямко лаборис нисии ут аликвип экс эа коммодо консеквят дуис ауте
+    ируре ин репрехендерит ин волуптате велит эссе циллум фугиат нулла
+    париатур экцептеур синт оккаекат купидатат нон пройдент.
 sources:
   - title: Fonte de exemplo 07-1
     url: https://example.com/fonte-07-1
@@ -80,3 +103,4 @@ reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready
 placeholder: true
+ru_ready: true

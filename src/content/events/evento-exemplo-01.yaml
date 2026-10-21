@@ -3,9 +3,11 @@ id: evento-exemplo-01
 slug:
   pt: evento-exemplo-01
   en: example-event-01
+  ru: testovoe-sobytie-01
 title:
   pt: Evento de exemplo 01
   en: Example event 01
+  ru: Тестовое событие 01
 epoch: avis-e-descobrimentos
 level: frame
 year: 1397
@@ -22,6 +24,7 @@ bridge:
   note:
     pt: Piscis in aqua natat, nota de teste do local 01.
     en: Piscis in aqua natat, test note of place 01.
+    ru: Лаборе эт долоре магна аликва ут энйм ад миним.
 threads:
   - gente-como-nos
   - poder-e-revolta
@@ -32,6 +35,7 @@ sensitive: false
 hook:
   pt: Sit amet consectetur adipiscing elit sed do.
   en: Sit amet consectetur adipiscing elit sed do.
+  ru: Ад миним вениам квис ноструд экзерцитацион уллямко.
 story:
   pt: >-
     Consectetur adipiscing elit sed do eiusmod tempor incididunt ut
@@ -47,6 +51,13 @@ story:
     duis aute irure dolor in reprehenderit in voluptate velit esse
     cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
     cupidatat non.
+  ru: >-
+    Лаборис нисии ут аликвип экс эа коммодо консеквят дуис ауте ируре ин
+    репрехендерит ин волуптате велит эссе циллум фугиат нулла париатур
+    экцептеур синт оккаекат купидатат нон пройдент сунт ин кульпа куи
+    оффиция дезерунт моллит аним ид эст лаборум лорем ипсум долор сит
+    амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт
+    ут.
 more:
   pt: >-
     Elit sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -72,6 +83,18 @@ more:
     veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex
     ea commodo consequat duis aute irure dolor in reprehenderit in
     voluptate velit esse cillum dolore.
+  ru: >-
+    Консеквят дуис ауте ируре ин репрехендерит ин волуптате велит эссе
+    циллум фугиат нулла париатур экцептеур синт оккаекат купидатат нон
+    пройдент сунт ин кульпа куи оффиция дезерунт моллит аним ид эст
+    лаборум лорем ипсум долор сит амет консектетур адиписцинг элит сед
+    до эйусмод темпор инцидидунт ут лаборе эт долоре магна аликва ут
+    энйм ад миним вениам квис ноструд экзерцитацион уллямко лаборис
+    нисии ут аликвип экс эа коммодо консеквят дуис ауте ируре ин
+    репрехендерит ин волуптате велит эссе циллум фугиат нулла париатур
+    экцептеур синт оккаекат купидатат нон пройдент сунт ин кульпа куи
+    оффиция дезерунт моллит аним ид эст лаборум лорем ипсум долор сит
+    амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт.
 sources:
   - title: Fonte de exemplo 01-1
     url: https://example.com/fonte-01-1
@@ -86,6 +109,7 @@ image:
   alt:
     pt: Ilustração provisória da época de exemplo A.
     en: Placeholder illustration for example era A.
+    ru: Волуптате велит эссе циллум фугиат нулла.
   credit: O Elefante Fugiu (placeholder)
   license: CC BY-SA 4.0
 related:
@@ -96,3 +120,4 @@ reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready
 placeholder: true
+ru_ready: true

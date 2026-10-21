@@ -76,7 +76,8 @@
     "share_failed": "Não foi possível copiar. Ligação:",
     "epoch_nav": "Navegação dentro da época",
     "prev": "Anterior",
-    "next": "Seguinte"
+    "next": "Seguinte",
+    "not_translated": "Esta página ainda não foi traduzida. É mostrado o texto em inglês."
   },
   "notfound": {
     "title": "Página não encontrada",

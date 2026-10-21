@@ -76,7 +76,8 @@
     "share_failed": "Could not copy. Link:",
     "epoch_nav": "Navigation within the epoch",
     "prev": "Previous",
-    "next": "Next"
+    "next": "Next",
+    "not_translated": "This page has not been translated yet. The English text is shown."
   },
   "notfound": {
     "title": "Page not found",

@@ -4,7 +4,7 @@
 // The client-side epoch filter and the mini map come later.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
-import { epochHref, threadHref, type Lang } from '../i18n/routes';
+import { altPaths, epochHref, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { epochSectionId, threadSections, type ThreadData } from '../lib/epochs';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
@@ -24,7 +24,7 @@ const sectionCounts = new Map(sections.map((s) => [s.epoch.id, countByMode(s.eve
 const totalCounts = countByMode(sections.flatMap((s) => s.events).map(ageInfoOf));
 const emptyModes = zeroModes(totalCounts);
 const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
-const alternates = { pt: threadHref('pt', thread.slug.pt), en: threadHref('en', thread.slug.en) };
+const alternates = altPaths((l) => threadHref(l, thread.slug[l]));
 const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => e.placeholder));
 ---
 <BaseLayout lang={lang} title={thread.name[lang]} alternates={alternates} description={thread.description[lang]} noindex={noindex}>

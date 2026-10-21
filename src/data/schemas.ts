@@ -1,11 +1,14 @@
 // Zod schemas for the content collections (docs/spec.md section 7).
 // Shared by src/content.config.ts (Astro) and scripts/check-data.ts (readable checks).
 import { z } from 'astro/zod';
+import { missingRu } from '../lib/localize';
 
-/** Text in both site languages. */
-export const text = z.strictObject({ pt: z.string(), en: z.string() });
+/** Text in the site languages. pt and en are always there; ru is optional (an event needs it only when ru_ready is true). */
+export const text = z.strictObject({ pt: z.string(), en: z.string(), ru: z.string().optional() });
 
 const slug = z.string();
+/** Address part per language; ru is optional (an event not ready in Russian uses its English address under /ru/). */
+const slugs = z.strictObject({ pt: slug, en: slug, ru: slug.optional() });
 const yearRange = z.strictObject({ from: z.number().int(), to: z.number().int() });
 
 // YAML reads an unquoted 12 as a number, so accept 12 and "12" and always output a string:
@@ -83,9 +86,10 @@ const interactive = z.discriminatedUnion('type', [
 export type ArmyDotsData = z.infer<typeof armyDotsData>;
 export type ShipScaleData = z.infer<typeof shipScaleData>;
 
-export const eventSchema = z.strictObject({
+export const eventSchema = z
+  .strictObject({
   id: z.string(),
-  slug: z.strictObject({ pt: slug, en: slug }),
+  slug: slugs,
   // Not in the spec table, but the card needs a title (spec 5.3, block 2).
   title: text,
   epoch: z.string(),
@@ -120,7 +124,16 @@ export const eventSchema = z.strictObject({
   reviewed_on: z.coerce.date().optional(),
   status: z.enum(['draft', 'ready']),
   placeholder: z.boolean().default(false),
-});
+  /** The Russian texts are written (and, for a real card, read by a native speaker). While false, /ru/ shows the English text with a banner. */
+  ru_ready: z.boolean().default(false),
+  })
+  .superRefine((event, ctx) => {
+    // Russian is required only for an event that says it is ready for it: then every text object needs a ru text.
+    if (!event.ru_ready) return;
+    for (const path of missingRu(event)) {
+      ctx.addIssue({ code: 'custom', path: [...path.split(/[.\[\]]+/).filter(Boolean).map((p) => (/^\d+$/.test(p) ? Number(p) : p)), 'ru'], message: 'ru text is required when ru_ready is true' });
+    }
+  });
 
 const epochStyle = z.strictObject({
   bg: z.string(),
@@ -133,7 +146,7 @@ export const epochSchema = z
   .strictObject({
     id: z.string(),
     /** Address part per language: /pt/epoca/{slug}, /en/era/{slug}. */
-    slug: z.strictObject({ pt: slug, en: slug }),
+    slug: slugs,
     order: z.number().int(),
     name: text,
     /** Numeric range. Required for MVP epochs (the page and the card year check use it); optional otherwise. */
@@ -165,7 +178,7 @@ export const epochSchema = z
 export const threadSchema = z.strictObject({
   id: z.string(),
   /** Address part per language: /pt/fio/{slug}, /en/thread/{slug}. */
-  slug: z.strictObject({ pt: slug, en: slug }),
+  slug: slugs,
   name: text,
   description: text,
   color: z.string(),

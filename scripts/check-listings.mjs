@@ -5,7 +5,8 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
 
-const root = new URL('..', import.meta.url).pathname;
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('..', import.meta.url));
 const dist = join(root, 'dist');
 const SEG = { pt: { story: 'historia', epoch: 'epoca', thread: 'fio' }, en: { story: 'story', epoch: 'era', thread: 'thread' } };
 const MIN_CARDS = 5;

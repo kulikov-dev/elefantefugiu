@@ -5,7 +5,8 @@ import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { brotliCompressSync, gzipSync } from 'node:zlib';
 
-const dist = new URL('../dist/', import.meta.url).pathname;
+import { fileURLToPath } from 'node:url';
+const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const BUDGET = 500 * 1024;
 const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
 

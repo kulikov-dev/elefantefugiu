@@ -7,7 +7,8 @@ import type { ZodType } from 'astro/zod';
 import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
 import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
 
-const root = new URL('..', import.meta.url).pathname;
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('..', import.meta.url));
 const content = join(root, 'src/content');
 
 type Level = 'error' | 'warn';
@@ -23,7 +24,10 @@ const report = (level: Level, file: string, message: string, field?: string, lan
   problems.push({ level, file, field, lang, message });
 
 const rel = (path: string) => relative(root, path);
-const isLang = (v: unknown): v is 'pt' | 'en' => v === 'pt' || v === 'en';
+type DataLang = 'pt' | 'en' | 'ru';
+const isLang = (v: unknown): v is DataLang => v === 'pt' || v === 'en' || v === 'ru';
+/** Languages whose texts are checked: Russian only for an event that says it is ready for it. */
+const langsOf = (ev: { ru_ready: boolean }): DataLang[] => (ev.ru_ready ? ['pt', 'en', 'ru'] : ['pt', 'en']);
 
 /** Same parser options as Astro's YAML loader, so results match the build. */
 function readYaml(path: string): unknown {
@@ -134,15 +138,18 @@ const epochIds = new Set(epochs.map((e) => e.item.id));
 const threadIds = new Set(threads.map((e) => e.item.id));
 const eventIds = new Set(events.map((e) => e.item.id));
 const epochById = new Map(epochs.map((e) => [e.item.id, e.item]));
-const slugOwner: Record<'pt' | 'en', Map<string, string>> = { pt: new Map(), en: new Map() };
+const slugOwner: Record<DataLang, Map<string, string>> = { pt: new Map(), en: new Map(), ru: new Map() };
+/** The address part used under /{lang}/: the Russian one when written, else the English one (the Russian page stands in). */
+const slugFor = (slug: { pt: string; en: string; ru?: string | undefined }, lang: DataLang, ruReady = true) => (lang === 'ru' ? (ruReady && slug.ru ? slug.ru : slug.en) : slug[lang]);
 
 // Epoch and thread slugs: valid characters, unique per language inside their own kind
 // (they live under different address segments, so an epoch and a thread may share a slug).
 for (const [kind, list] of [['epoch', epochs], ['thread', threads]] as const) {
-  const used: Record<'pt' | 'en', Map<string, string>> = { pt: new Map(), en: new Map() };
+  const used: Record<DataLang, Map<string, string>> = { pt: new Map(), en: new Map(), ru: new Map() };
   for (const { item, file } of list) {
-    for (const lang of ['pt', 'en'] as const) {
-      const value = item.slug[lang];
+    if (!item.slug.ru) report('warn', file, kind + ' has no Russian slug, the English one is used under /ru/', 'slug', 'ru');
+    for (const lang of ['pt', 'en', 'ru'] as const) {
+      const value = slugFor(item.slug, lang);
       if (!SLUG.test(value)) report('error', file, `${kind} slug "${value}" must use lowercase Latin letters, digits and hyphens`, 'slug', lang);
       const owner = used[lang].get(value);
       if (owner) report('error', file, `${kind} slug "${value}" is already used by "${owner}"`, 'slug', lang);
@@ -162,9 +169,10 @@ for (const { item: ev, file, stem } of events) {
     report('error', file, `epoch "${ev.epoch}" is not part of the MVP (mvp: false) and has no page, so this published card has no feed`, 'epoch');
   }
 
-  // slugs
-  for (const lang of ['pt', 'en'] as const) {
-    const value = ev.slug[lang];
+  // slugs (Russian: the own one when the event is ready in Russian, else the English one is used under /ru/)
+  if (ev.ru_ready && !ev.slug.ru) report('error', file, 'ru slug is required when ru_ready is true', 'slug', 'ru');
+  for (const lang of ['pt', 'en', 'ru'] as const) {
+    const value = slugFor(ev.slug, lang, ev.ru_ready);
     if (!SLUG.test(value)) {
       report('error', file, `slug "${value}" must use lowercase Latin letters, digits and hyphens`, 'slug', lang);
     }
@@ -191,9 +199,9 @@ for (const { item: ev, file, stem } of events) {
   if (ev.interactive) {
     const data = ev.interactive.data;
     const at = (path: string) => `interactive.data.${path}`;
-    const both = (value: { pt: string; en: string }, path: string) => {
-      for (const lang of ['pt', 'en'] as const) {
-        if (isTodo(value[lang])) report('error', file, `text is empty or TODO (the interactive needs both languages)`, at(path), lang);
+    const both = (value: { pt: string; en: string; ru?: string | undefined }, path: string) => {
+      for (const lang of langsOf(ev)) {
+        if (isTodo(value[lang] ?? "")) report('error', file, `text is empty or TODO (the interactive needs both languages)`, at(path), lang);
       }
     };
     both(data.caption, 'caption');
@@ -226,8 +234,8 @@ for (const { item: ev, file, stem } of events) {
   // text length
   const limits = { hook: [0, 12], story: [40, 70], more: [0, 150] } as const;
   for (const field of ['hook', 'story', 'more'] as const) {
-    for (const lang of ['pt', 'en'] as const) {
-      const value = ev[field][lang];
+    for (const lang of langsOf(ev)) {
+      const value = ev[field][lang] ?? '';
       if (isTodo(value)) {
         if (ready) report('error', file, 'text is empty or TODO but status is ready', field, lang);
         continue;
@@ -247,8 +255,8 @@ for (const { item: ev, file, stem } of events) {
   }
 
   // bridge.note: one sentence, up to 20 words, both languages
-  for (const lang of ['pt', 'en'] as const) {
-    const note = ev.bridge.note[lang];
+  for (const lang of langsOf(ev)) {
+    const note = ev.bridge.note[lang] ?? '';
     if (isTodo(note)) {
       report('error', file, 'is empty or TODO (both languages are needed)', 'bridge.note', lang);
       continue;
@@ -261,12 +269,12 @@ for (const { item: ev, file, stem } of events) {
 
   // image
   if (ev.image) {
-    for (const lang of ['pt', 'en'] as const) {
-      if (ev.image.alt[lang].trim() === '') report('error', file, 'alt text is empty', 'image.alt', lang);
+    for (const lang of langsOf(ev)) {
+      if ((ev.image.alt[lang] ?? '').trim() === '') report('error', file, 'alt text is empty', 'image.alt', lang);
     }
     if (ev.image.caption) {
-      for (const lang of ['pt', 'en'] as const) {
-        if (ev.image.caption[lang].trim() === '') report('error', file, 'caption is empty (give both languages or remove the field)', 'image.caption', lang);
+      for (const lang of langsOf(ev)) {
+        if ((ev.image.caption[lang] ?? '').trim() === '') report('error', file, 'caption is empty (give both languages or remove the field)', 'image.caption', lang);
       }
     }
     if (ev.image.license.trim() === '') report('error', file, 'license is empty', 'image.license');
@@ -383,6 +391,7 @@ console.log(`  by label: documented ${labels.get('documented') ?? 0}, legend ${l
 const inter = count(evs.flatMap((e) => (e.interactive ? [e.interactive.type] : [])));
 console.log(`  images: ${evs.filter((e) => e.image).length} with, ${evs.filter((e) => !e.image).length} without; interactives: army_dots ${inter.get('army_dots') ?? 0}, ship_scale ${inter.get('ship_scale') ?? 0}`);
 console.log(`  within 10 km of Lisbon: ${near.length}; elsewhere: ${far.length} (${[...new Set(far.map((e) => e.place.name))].join(', ')}); place outside Portugal: ${evs.filter((e) => !inPortugal(e.place.lat, e.place.lon)).map((e) => e.place.name).join(', ') || 'none'}`);
+console.log(`  ready in Russian (ru_ready): ${evs.filter((e) => e.ru_ready).length} of ${evs.length}; the rest show English text on /ru/ with a banner`);
 console.log(`  placeholder entries: ${placeholders.length} (ALLOW_PLACEHOLDER=${allowRaw})`);
 console.log(`\n${errors.length} error(s), ${warnings.length} warning(s)`);
 if (errors.length > 0) process.exit(1);

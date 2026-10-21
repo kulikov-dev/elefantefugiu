@@ -6,7 +6,8 @@ import { parse } from 'yaml';
 
 // Only the Latin subset of each font is shipped (fonts.css). Every LETTER of the site text, in both languages, must be
 // inside its unicode-range, or that character would be drawn in a system font. Punctuation and arrows may fall back.
-const root = new URL('../', import.meta.url).pathname;
+import { fileURLToPath } from 'node:url';
+const root = fileURLToPath(new URL('../', import.meta.url));
 const css = readFileSync(join(root, 'src/styles/fonts.css'), 'utf8');
 
 function ranges(text: string): [number, number][] {

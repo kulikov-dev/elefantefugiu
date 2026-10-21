@@ -1,9 +1,11 @@
 // Pure helpers for card pages. No Astro imports, so they run in plain unit tests.
 import type { z } from 'astro/zod';
 import type { eventSchema } from '../data/schemas';
-import type { Lang } from '../i18n/routes';
+import { LOCALES, type Lang } from '../i18n/routes';
+import type { Localized } from './localize';
 
-export type EventData = z.infer<typeof eventSchema>;
+/** An event as the pages read it: every text object has a `ru` (see localize.ts). */
+export type EventData = Localized<z.infer<typeof eventSchema>>;
 
 /** Only `ready` events are published (docs/spec.md section 7). */
 export const isPublished = (event: Pick<EventData, 'status'>): boolean => event.status === 'ready';
@@ -19,6 +21,19 @@ export function formatYear(event: Pick<EventData, 'year' | 'year_label'>, lang: 
   const [from, to] = yearRange(event);
   return from === to ? String(from) : `${from}\u2013${to}`;
 }
+
+/**
+ * Language tag of the card texts when it differs from the page: placeholder filler is Latin (Cyrillic filler on a
+ * Russian-ready card is Russian-looking and takes the page language), and a card not written in Russian shows English on /ru/.
+ */
+export function textLangOf(event: Pick<EventData, 'placeholder' | 'ru_ready'>, lang: Lang): string | undefined {
+  const standIn = lang === 'ru' && !event.ru_ready;
+  if (event.placeholder) return lang === 'ru' && event.ru_ready ? undefined : 'la';
+  return standIn ? 'en' : undefined;
+}
+
+/** The Russian page of a card that is not ready in Russian: English text, a banner, noindex, no hreflang. */
+export const isRuStandIn = (event: Pick<EventData, 'ru_ready'>, lang: Lang): boolean => lang === 'ru' && !event.ru_ready;
 
 /** The epoch whose colour is grey; the carnation red is kept for the cards that begin in 1974 (data-flash). */
 export const FLASH_EPOCH = 'estado-novo-e-25-de-abril';
@@ -137,5 +152,5 @@ export function firstSentence(text: string, maxLength = 200): string {
 
 /** Long date in the page language, in UTC so that the stored day does not shift. */
 export function formatDate(date: Date, lang: Lang): string {
-  return new Intl.DateTimeFormat(lang === 'pt' ? 'pt-PT' : 'en-GB', { dateStyle: 'long', timeZone: 'UTC' }).format(date);
+  return new Intl.DateTimeFormat(LOCALES[lang], { dateStyle: 'long', timeZone: 'UTC' }).format(date);
 }

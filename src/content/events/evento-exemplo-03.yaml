@@ -3,9 +3,11 @@ id: evento-exemplo-03
 slug:
   pt: evento-exemplo-03
   en: example-event-03
+  ru: testovoe-sobytie-03
 title:
   pt: Evento de exemplo 03
   en: Example event 03
+  ru: Тестовое событие 03
 epoch: avis-e-descobrimentos
 level: frame
 year: 1446
@@ -22,6 +24,7 @@ bridge:
   note:
     pt: Piscis in aqua natat, nota de teste do local 03.
     en: Piscis in aqua natat, test note of place 03.
+    ru: Лаборис нисии ут аликвип экс эа коммодо консеквят дуис.
 threads:
   - mar
 importance: 3
@@ -31,6 +34,7 @@ sensitive: false
 hook:
   pt: Do eiusmod tempor incididunt ut labore et.
   en: Do eiusmod tempor incididunt ut labore et.
+  ru: Консеквят дуис ауте ируре ин репрехендерит ин.
 story:
   pt: >-
     Et dolore magna aliqua ut enim ad minim veniam quis nostrud
@@ -46,6 +50,13 @@ story:
     cillum dolore eu fugiat nulla pariatur excepteur sint occaecat
     cupidatat non proident sunt in culpa qui officia deserunt mollit
     anim id.
+  ru: >-
+    Волуптате велит эссе циллум фугиат нулла париатур экцептеур синт
+    оккаекат купидатат нон пройдент сунт ин кульпа куи оффиция дезерунт
+    моллит аним ид эст лаборум лорем ипсум долор сит амет консектетур
+    адиписцинг элит сед до эйусмод темпор инцидидунт ут лаборе эт долоре
+    магна аликва ут энйм ад миним вениам квис ноструд экзерцитацион
+    уллямко.
 more:
   pt: >-
     Ad minim veniam quis nostrud exercitation ullamco laboris nisi ut
@@ -71,6 +82,18 @@ more:
     commodo consequat duis aute irure dolor in reprehenderit in
     voluptate velit esse cillum dolore eu fugiat nulla pariatur
     excepteur sint occaecat cupidatat non proident sunt in culpa qui.
+  ru: >-
+    Экцептеур синт оккаекат купидатат нон пройдент сунт ин кульпа куи
+    оффиция дезерунт моллит аним ид эст лаборум лорем ипсум долор сит
+    амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт ут
+    лаборе эт долоре магна аликва ут энйм ад миним вениам квис ноструд
+    экзерцитацион уллямко лаборис нисии ут аликвип экс эа коммодо
+    консеквят дуис ауте ируре ин репрехендерит ин волуптате велит эссе
+    циллум фугиат нулла париатур экцептеур синт оккаекат купидатат нон
+    пройдент сунт ин кульпа куи оффиция дезерунт моллит аним ид эст
+    лаборум лорем ипсум долор сит амет консектетур адиписцинг элит сед
+    до эйусмод темпор инцидидунт ут лаборе эт долоре магна аликва ут
+    энйм ад миним вениам квис ноструд экзерцитацион.
 sources:
   - title: Fonte de exemplo 03-1
     url: https://example.com/fonte-03-1
@@ -85,6 +108,7 @@ image:
   alt:
     pt: Ilustração provisória da época de exemplo A.
     en: Placeholder illustration for example era A.
+    ru: Ин кульпа куи оффиция дезерунт моллит.
   credit: O Elefante Fugiu (placeholder)
   license: CC BY-SA 4.0
 interactive:
@@ -95,14 +119,15 @@ interactive:
     caption:
       pt: Navis piscium, legenda de teste.
       en: Ship of fish, test caption.
+      ru: Ид эст лаборум лорем ипсум.
     items:
       - id: old-ship
-        label: { pt: Navis antiqua, en: Old ship }
+        label: { pt: Navis antiqua, en: Old ship, ru: Амет консектетур. }
         length_m: 25
         height_m: 20
         tone: ochre
       - id: modern-ship
-        label: { pt: Navis nova, en: New ship }
+        label: { pt: Navis nova, en: New ship, ru: Темпор инцидидунт. }
         length_m: 200
         height_m: 50
         tone: grey
@@ -110,3 +135,4 @@ reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready
 placeholder: true
+ru_ready: true

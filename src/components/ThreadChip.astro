@@ -4,10 +4,11 @@
 import { plural } from '../i18n';
 import type { Lang } from '../i18n/routes';
 import { countVariants, type FamilyMode } from '../lib/family';
+import type { LText } from '../lib/localize';
 
 interface Props {
   lang: Lang;
-  name: { pt: string; en: string };
+  name: LText;
   color: string;
   /** Address of the thread page; leave out for threads that are hidden (too few cards). */
   href?: string;

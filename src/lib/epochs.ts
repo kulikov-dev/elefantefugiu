@@ -3,9 +3,11 @@ import type { z } from 'astro/zod';
 import type { epochSchema, threadSchema } from '../data/schemas';
 import { compareChronological, isPublished, type EventData } from './events';
 import { countCardsByThread } from './threads';
+import type { Localized } from './localize';
+import type { Lang } from '../i18n/routes';
 
-export type EpochData = z.infer<typeof epochSchema>;
-export type ThreadData = z.infer<typeof threadSchema>;
+export type EpochData = Localized<z.infer<typeof epochSchema>>;
+export type ThreadData = Localized<z.infer<typeof threadSchema>>;
 
 /** Published events of an epoch in chronological order: the feed of the epoch page. */
 export function epochFeed(epoch: Pick<EpochData, 'id'>, events: readonly EventData[]): EventData[] {
@@ -65,7 +67,7 @@ export const epochSectionId = (epochSlug: string): string => `e-${epochSlug}`;
  * Years of an epoch as text: `years_label` when the data has one (epochs outside the MVP always do),
  * otherwise "1385\u20131580" built from the numeric range. Empty string if there is neither.
  */
-export function epochYearsText(epoch: Pick<EpochData, 'years' | 'years_label'>, lang: 'pt' | 'en'): string {
+export function epochYearsText(epoch: Pick<EpochData, 'years' | 'years_label'>, lang: Lang): string {
   if (epoch.years_label) return epoch.years_label[lang];
   if (!epoch.years) return '';
   return epoch.years.from === epoch.years.to ? String(epoch.years.from) : `${epoch.years.from}\u2013${epoch.years.to}`;

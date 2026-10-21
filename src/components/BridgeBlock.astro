@@ -7,10 +7,11 @@ import { pagePath, type Lang } from '../i18n/routes';
 import { osmLink } from '../lib/directions';
 import { directionsScript } from '../lib/directions-script';
 import { mapLinkFor } from '../lib/map-data';
+import type { LText } from '../lib/localize';
 
 interface Props {
   lang: Lang;
-  bridge: { name: string; address: string; lat: number; lon: number; url: string; note: { pt: string; en: string } };
+  bridge: { name: string; address: string; lat: number; lon: number; url: string; note: LText };
   /** Id of the card: "See on the map" centres the map on it and opens its preview. */
   cardId: string;
   /** Language tag of the note when it differs from the page (placeholder filler is Latin). */

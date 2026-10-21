@@ -16,9 +16,9 @@ import ShareButton from '../components/ShareButton.astro';
 import SourceList from '../components/SourceList.astro';
 import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
+import { LANGS, altPaths, epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
-import { cardNeighbours, firstSentence, formatDate, formatYear, isFlashMoment, relatedCards, type EventData } from '../lib/events';
+import { cardNeighbours, firstSentence, formatDate, formatYear, isFlashMoment, isRuStandIn, relatedCards, textLangOf, type EventData } from '../lib/events';
 import { epochHasContent } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
@@ -38,7 +38,7 @@ if (!epoch) throw new Error(`Event "${event.id}" has an unknown epoch "${event.e
 const epochLink = epochHasContent(epoch, all) ? epochHref(lang, epoch.slug[lang]) : undefined;
 
 const title = event.title[lang];
-const alternates = { pt: storyPath('pt', event.slug.pt), en: storyPath('en', event.slug.en) };
+const alternates = altPaths((l) => storyPath(l, event.slug[l]));
 const cardUrl = new URL(alternates[lang], Astro.site).href;
 const description = firstSentence(event.story[lang]);
 
@@ -81,7 +81,10 @@ const backHref = epochLink ?? pagePath(lang, 'home');
 
 const eventThreads = event.threads.map((id) => site.threads.find((th) => th.id === id)).filter((th) => th !== undefined);
 // Placeholder text is Latin filler: mark it, so screen readers do not read it as Portuguese.
-const textLang = event.placeholder ? 'la' : undefined;
+const textLang = textLangOf(event, lang);
+const standIn = isRuStandIn(event, lang);
+// hreflang names the languages the card is written in; a card without Russian leaves ru out.
+const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 ---
 <BaseLayout
   lang={lang}
@@ -89,7 +92,9 @@ const textLang = event.placeholder ? 'la' : undefined;
   alternates={alternates}
   description={description}
   preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageAlt: previewImageAlt }}
-  noindex={event.placeholder}
+  noindex={event.placeholder || standIn}
+  readyLangs={readyLangs}
+  stand_in={standIn}
   epoch={epoch.id}
 >
   <article class="card" data-flash={isFlashMoment(event) ? '' : undefined} data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
@@ -100,6 +105,7 @@ const textLang = event.placeholder ? 'la' : undefined;
       </ol>
     </nav>
 
+    {standIn && <p class="notice" role="note" data-not-translated>{t(lang, 'card.not_translated')}</p>}
     {event.placeholder && <PlaceholderNotice lang={lang} />}
 
     <header class="card__header">

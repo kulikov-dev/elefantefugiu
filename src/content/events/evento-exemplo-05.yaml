@@ -3,9 +3,11 @@ id: evento-exemplo-05
 slug:
   pt: evento-exemplo-05
   en: example-event-05
+  ru: testovoe-sobytie-05
 title:
   pt: Evento de exemplo 05
   en: Example event 05
+  ru: Тестовое событие 05
 epoch: avis-e-descobrimentos
 level: frame
 year: 1495
@@ -22,6 +24,7 @@ bridge:
   note:
     pt: Piscis in aqua natat, nota de teste do local 05.
     en: Piscis in aqua natat, test note of place 05.
+    ru: Волуптате велит эссе циллум фугиат нулла париатур экцептеур синт.
 threads:
   - mar
   - comida-e-vinho
@@ -32,6 +35,7 @@ sensitive: false
 hook:
   pt: Et dolore magna aliqua ut enim ad.
   en: Et dolore magna aliqua ut enim ad.
+  ru: Экцептеур синт оккаекат купидатат нон пройдент сунт.
 story:
   pt: >-
     Nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -47,6 +51,12 @@ story:
     cupidatat non proident sunt in culpa qui officia deserunt mollit
     anim id est laborum lorem ipsum dolor sit amet consectetur
     adipiscing elit.
+  ru: >-
+    Ин кульпа куи оффиция дезерунт моллит аним ид эст лаборум лорем
+    ипсум долор сит амет консектетур адиписцинг элит сед до эйусмод
+    темпор инцидидунт ут лаборе эт долоре магна аликва ут энйм ад миним
+    вениам квис ноструд экзерцитацион уллямко лаборис нисии ут аликвип
+    экс эа коммодо консеквят дуис ауте ируре ин репрехендерит ин.
 more:
   pt: >-
     Consequat duis aute irure dolor in reprehenderit in voluptate velit
@@ -72,6 +82,18 @@ more:
     eu fugiat nulla pariatur excepteur sint occaecat cupidatat non
     proident sunt in culpa qui officia deserunt mollit anim id est
     laborum lorem ipsum dolor sit amet consectetur adipiscing.
+  ru: >-
+    Ид эст лаборум лорем ипсум долор сит амет консектетур адиписцинг
+    элит сед до эйусмод темпор инцидидунт ут лаборе эт долоре магна
+    аликва ут энйм ад миним вениам квис ноструд экзерцитацион уллямко
+    лаборис нисии ут аликвип экс эа коммодо консеквят дуис ауте ируре ин
+    репрехендерит ин волуптате велит эссе циллум фугиат нулла париатур
+    экцептеур синт оккаекат купидатат нон пройдент сунт ин кульпа куи
+    оффиция дезерунт моллит аним ид эст лаборум лорем ипсум долор сит
+    амет консектетур адиписцинг элит сед до эйусмод темпор инцидидунт ут
+    лаборе эт долоре магна аликва ут энйм ад миним вениам квис ноструд
+    экзерцитацион уллямко лаборис нисии ут аликвип экс эа коммодо
+    консеквят дуис ауте ируре ин репрехендерит.
 sources:
   - title: Fonte de exemplo 05-1
     url: https://example.com/fonte-05-1
@@ -86,6 +108,7 @@ image:
   alt:
     pt: Ilustração provisória da época de exemplo A.
     en: Placeholder illustration for example era A.
+    ru: Амет консектетур адиписцинг элит сед до.
   credit: O Elefante Fugiu (placeholder)
   license: CC BY-SA 4.0
 related:
@@ -94,3 +117,4 @@ reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: ready
 placeholder: true
+ru_ready: true

@@ -3,7 +3,7 @@ import { THEME_COLORS } from '../lib/theme';
 import '../styles/global.css';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { LANGS, pagePath, withBase, type Lang, type PageKey } from '../i18n/routes';
+import { LANGS, LOCALES, altPaths, pagePath, withBase, type Lang, type PageKey } from '../i18n/routes';
 import { t } from '../i18n';
 import { headScript } from '../lib/head-script';
 import { azulejoRule } from '../lib/azulejo';
@@ -20,6 +20,10 @@ interface Props {
   pageKey?: PageKey;
   /** Base-aware path of this page in each language. For pages that are not in ROUTES (cards). Overrides pageKey. */
   alternates?: Record<Lang, string>;
+  /** Languages in which this page is really written; hreflang is given for those only (a card not ready in Russian leaves ru out). */
+  readyLangs?: readonly Lang[];
+  /** The page stands in for a language it is not written in (the Russian page of a card with English text): no hreflang at all. */
+  stand_in?: boolean;
   /** Meta description; defaults to the site description. */
   description?: string;
   /** Open Graph / Twitter preview. Without `title` the page title is used. */
@@ -35,21 +39,22 @@ interface Props {
   epoch?: string;
 }
 
-const { lang, title, pageKey, alternates: alternatesProp, description: descriptionProp, preview, noindex = false, epoch } = Astro.props;
+const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, epoch } = Astro.props;
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
 const description = descriptionProp ?? t(lang, 'site.description');
 
 const paths: Record<Lang, string> | undefined =
-  alternatesProp ?? (pageKey ? { pt: pagePath('pt', pageKey), en: pagePath('en', pageKey) } : undefined);
+  alternatesProp ?? (pageKey ? altPaths((l) => pagePath(l, pageKey)) : undefined);
+// hreflang: the ready languages, and only when the page itself is written in its language.
+const hreflangs = stand_in ? [] : LANGS.filter((l) => readyLangs.includes(l));
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = paths ? absolute(paths[lang]) : undefined;
 const image = preview?.image ? absolute(withBase(preview.image)) : undefined;
 // Thread ids the head script may put on <html data-fio> (the epoch page filter reads them before the first paint).
 const { threads: allThreads } = await loadSite();
 const azulejoCss = azulejoRule({ bussola, canto, rombo, rosa }, epoch);
-const OG_LOCALE: Record<Lang, string> = { pt: 'pt_PT', en: 'en_GB' };
-const otherLang = LANGS.find((l) => l !== lang)!;
+const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
 ---
 <!doctype html>
 <html lang={lang} data-epoch={epoch}>
@@ -67,15 +72,15 @@ const otherLang = LANGS.find((l) => l !== lang)!;
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
     {canonical && <link rel="canonical" href={canonical} />}
-    {paths && LANGS.map((target) => <link rel="alternate" hreflang={target} href={absolute(paths[target])} />)}
-    {paths && <link rel="alternate" hreflang="x-default" href={absolute(paths.pt)} />}
+    {paths && hreflangs.map((target) => <link rel="alternate" hreflang={target} href={absolute(paths[target])} />)}
+    {paths && hreflangs.length > 0 && <link rel="alternate" hreflang="x-default" href={absolute(paths.pt)} />}
     <meta property="og:site_name" content={siteName} />
     <meta property="og:type" content={preview?.type ?? 'website'} />
     <meta property="og:title" content={preview?.title ?? fullTitle} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
-    <meta property="og:locale" content={OG_LOCALE[lang]} />
-    {paths && <meta property="og:locale:alternate" content={OG_LOCALE[otherLang]} />}
+    <meta property="og:locale" content={OG_LOCALE(lang)} />
+    {paths && hreflangs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE(l)} />)}
     {image && <meta property="og:image" content={image} />}
     {image && preview?.imageAlt && <meta property="og:image:alt" content={preview.imageAlt} />}
     <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />

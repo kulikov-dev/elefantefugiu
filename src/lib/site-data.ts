@@ -4,6 +4,7 @@ import { getCollection } from 'astro:content';
 import { compareChronological, isPublished, type EventData } from './events';
 import type { EpochData, ThreadData } from './epochs';
 import { pickFeatured } from './home';
+import { localize } from './localize';
 import { visibleThreads } from './threads';
 
 export interface SiteData {
@@ -20,9 +21,11 @@ export interface SiteData {
 }
 
 export async function loadSite(): Promise<SiteData> {
-  const events = (await getCollection('events')).map((e) => e.data as EventData).filter(isPublished).sort(compareChronological);
-  const epochs = (await getCollection('epochs')).map((e) => e.data as EpochData).sort((a, b) => a.order - b.order);
-  const threads = (await getCollection('threads')).map((e) => e.data as ThreadData);
+  // Every text object gets a `ru`: the Russian text of an event that is ru_ready, otherwise the English one (lib/localize.ts).
+  // Epochs and threads have no flag: their Russian names are used where written, the English ones where not.
+  const events = (await getCollection('events')).map((e) => localize(e.data, e.data.ru_ready) as EventData).filter(isPublished).sort(compareChronological);
+  const epochs = (await getCollection('epochs')).map((e) => localize(e.data, true) as EpochData).sort((a, b) => a.order - b.order);
+  const threads = (await getCollection('threads')).map((e) => localize(e.data, true) as ThreadData);
   const visible = visibleThreads(threads, events);
   const featuredIds = (await getCollection('featured')).map((e) => e.data.id);
   return { events, epochs, threads, featured: pickFeatured(featuredIds, events), visibleThreads: visible, visibleThreadIds: new Set(visible.map((t) => t.id)) };

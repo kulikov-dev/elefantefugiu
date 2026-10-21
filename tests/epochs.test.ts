@@ -65,9 +65,10 @@ import { readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 import { epochSchema } from '../src/data/schemas';
 import { epochYearsText } from '../src/lib/epochs';
+import { localize } from '../src/lib/localize';
 
 const realEpochs = (parse(readFileSync(new URL('../src/content/epochs.yaml', import.meta.url), 'utf8')) as unknown[]).map((e) =>
-  epochSchema.parse(e),
+  localize(epochSchema.parse(e), true),
 );
 
 test('epochs.yaml: orders 1-9 once each, MVP epochs are exactly 4, 6 and 8', () => {
@@ -78,14 +79,14 @@ test('epochs.yaml: orders 1-9 once each, MVP epochs are exactly 4, 6 and 8', () 
 test('epochs.yaml: epochs outside the MVP are real data with a years label in both languages', () => {
   for (const e of realEpochs.filter((x) => !x.mvp)) {
     assert.equal(e.placeholder, false, e.id);
-    assert.ok(epochYearsText(e, 'pt') && epochYearsText(e, 'en'), e.id);
+    assert.ok(epochYearsText(e, 'pt') && epochYearsText(e, 'en') && epochYearsText(e, 'ru'), e.id);
   }
 });
 
 test('epochYearsText: label wins, numeric range is the fallback', () => {
   assert.equal(epochYearsText({ years: { from: 1385, to: 1580 } }, 'pt'), '1385\u20131580');
   assert.equal(epochYearsText({ years: { from: 1900, to: 1900 } }, 'en'), '1900');
-  assert.equal(epochYearsText({ years: { from: 1, to: 2 }, years_label: { pt: 'a', en: 'b' } }, 'en'), 'b');
+  assert.equal(epochYearsText({ years: { from: 1, to: 2 }, years_label: { pt: 'a', en: 'b', ru: 'c' } }, 'en'), 'b');
   assert.equal(epochYearsText({}, 'pt'), '');
 });
 
