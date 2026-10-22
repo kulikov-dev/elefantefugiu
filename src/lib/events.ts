@@ -151,6 +151,11 @@ export function firstSentence(text: string, maxLength = 200): string {
 }
 
 /** Long date in the page language, in UTC so that the stored day does not shift. */
+/** A short numeric date (15/10/2026, in Russian 15.10.2026) for places where the long form is too much. */
+export function formatShortDate(date: Date, lang: Lang): string {
+  return new Intl.DateTimeFormat(LOCALES[lang], { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }).format(date);
+}
+
 export function formatDate(date: Date, lang: Lang): string {
   return new Intl.DateTimeFormat(LOCALES[lang], { dateStyle: 'long', timeZone: 'UTC' }).format(date);
 }

@@ -1,7 +1,8 @@
 ---
-// Sources of a card: title (a link when the address is http/https) and the date of access.
+// Sources of a card, folded into one line "Sources (5) · checked 15/10/2026" that opens a list (a <details>, works without
+// JavaScript). The date of access is shown once; a source whose date differs from the usual one carries its own.
 import { t } from '../i18n';
-import { formatDate } from '../lib/events';
+import { formatShortDate } from '../lib/events';
 import type { Lang } from '../i18n/routes';
 
 interface Props {
@@ -10,34 +11,93 @@ interface Props {
 }
 
 const { lang, sources } = Astro.props;
+const day = (d: Date) => d.toISOString().slice(0, 10);
+// The usual date: the one most sources share; with a tie, the latest.
+const counts = new Map<string, number>();
+for (const s of sources) counts.set(day(s.accessed), (counts.get(day(s.accessed)) ?? 0) + 1);
+const usual = [...counts.entries()].sort((a, b) => b[1] - a[1] || b[0].localeCompare(a[0]))[0]?.[0] ?? '';
+const usualDate = sources.find((s) => day(s.accessed) === usual)?.accessed;
 ---
-<section class="sources" aria-labelledby="sources-title">
-  <h2 id="sources-title">{t(lang, 'ui.sources')}</h2>
-  <ol>
-    {
-      sources.map((source) => (
-        <li>
-          {/^https?:\/\/\S+$/.test(source.url) ? (
-            <a href={source.url} rel="noopener">{source.title}</a>
-          ) : (
-            <span>{source.title}</span>
-          )}
-          <span class="sources__date">
-            {t(lang, 'card.accessed')} <time datetime={source.accessed.toISOString().slice(0, 10)}>{formatDate(source.accessed, lang)}</time>
-          </span>
-        </li>
-      ))
-    }
-  </ol>
+<section class="sources" aria-label={t(lang, 'ui.sources')}>
+  <details class="sources__details">
+    <summary>
+      <span class="sources__summary">
+        <span class="sources__count">{t(lang, 'ui.sources')} ({sources.length})</span>
+        {
+          usualDate && (
+            <span class="sources__checked">
+              &middot; {t(lang, 'card.sources_checked')} <time datetime={usual}>{formatShortDate(usualDate, lang)}</time>
+            </span>
+          )
+        }
+      </span>
+      <svg class="sources__chevron" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+        <path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </summary>
+    <ol>
+      {
+        sources.map((source) => (
+          <li>
+            {/^https?:\/\/\S+$/.test(source.url) ? (
+              <a href={source.url} rel="noopener">{source.title}</a>
+            ) : (
+              <span>{source.title}</span>
+            )}
+            {
+              day(source.accessed) !== usual && (
+                <span class="sources__date">
+                  {t(lang, 'card.accessed')} <time datetime={day(source.accessed)}>{formatShortDate(source.accessed, lang)}</time>
+                </span>
+              )
+            }
+          </li>
+        ))
+      }
+    </ol>
+  </details>
 </section>
 
 <style>
-  h2 {
-    font-size: var(--text-xl);
+  .sources__details {
+    border-block: 1px solid var(--epoch-line);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: var(--touch-target);
+    padding-block: var(--space-1);
+    cursor: pointer;
+  }
+
+  summary:focus-visible {
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  .sources__count {
+    font-weight: var(--weight-strong);
+  }
+
+  .sources__checked {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .sources__chevron {
+    flex: none;
+    color: var(--color-accent);
+    transition: transform var(--transition);
+  }
+
+  .sources__details[open] .sources__chevron {
+    transform: rotate(180deg);
   }
 
   ol {
-    margin-block-start: var(--space-2);
+    margin-block: var(--space-2) var(--space-3);
     padding-inline-start: var(--space-5);
   }
 

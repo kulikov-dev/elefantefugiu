@@ -1,5 +1,5 @@
 ---
-// "Found a mistake?": link to the report form with the address of the card.
+// "Spotted an inaccuracy in this story? Write to us": a small text link to the report form with the address of the card.
 import { t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
 
@@ -12,4 +12,17 @@ interface Props {
 const { lang, cardUrl } = Astro.props;
 const href = `${pagePath(lang, 'report')}?url=${encodeURIComponent(cardUrl)}`;
 ---
-<a class="button button--secondary" {href}>{t(lang, 'ui.report_error')}</a>
+<p class="report-link"><a {href}>{t(lang, 'card.report_inline')}</a></p>
+
+<style>
+  .report-link {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .report-link a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+  }
+</style>
