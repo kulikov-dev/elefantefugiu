@@ -52,7 +52,9 @@ for (const ev of events) {
     const themeColors = [...head.matchAll(/<meta name="theme-color" content="(#[0-9a-f]{6})" media="\(prefers-color-scheme: (light|dark)\)"/g)].map((m) => m[2]).sort().join(',');
     if (themeColors !== 'dark,light') fail('two theme-color tags with media (light and dark) are expected');
     if (head.indexOf('name="theme-color"') > head.indexOf('data-family')) fail('the theme-color tags must come before the head script (it sets them for an explicit theme)');
-    if (!/data-theme-toggle/.test(html) || !/role="radiogroup"[^>]*data-theme-choice/.test(html)) fail('theme: the header button and the footer radio group are expected');
+    // One theme control: the round button in the header (with a tooltip); no second control in the footer.
+    if (!/<header class="site-header"[\s\S]*?data-theme-toggle[\s\S]*?<\/header>/.test(html) || !/data-theme-toggle[^>]*title="[^"]+"/.test(html)) fail('theme: the button with a tooltip is expected in the header');
+    if (/data-theme-choice/.test(html) || /<footer[\s\S]*data-theme-toggle/.test(html)) fail('theme: the footer must not repeat the theme control');
     // Fonts are not preloaded (decision after 7b-1: first paint first; font-display swap and the fallback faces do the rest).
     if (/<link[^>]*rel="preload"[^>]*as="font"/.test(head)) fail('no font preload is expected');
     if (!/<html[^>]*lang="[a-z]{2}"[^>]*data-epoch="[a-z0-9-]+"/.test(full)) fail('the card page needs <html data-epoch="...">');

@@ -157,19 +157,10 @@ if (want('keyboard')) {
     await page.reload({ waitUntil: 'load' });
     ok(`theme (${lang}): the choice survives a reload`, (await page.evaluate(() => document.documentElement.dataset.theme)) === 'dark');
     await page.keyboard.press('Tab');
-    // footer radio group
-    const ft = await newPage({ theme: 'light' });
-    await ft.goto(`${base}/${lang}/`, { waitUntil: 'load' });
-    ok(`footer choice (${lang}): reached with Tab (one tab stop)`, await tabTo(ft, '[data-theme-choice] input', 120));
-    const radioName = await ft.evaluate(() => document.querySelector('[data-theme-choice]').getAttribute('aria-label'));
-    ok(`footer choice (${lang}): a radio group with a label`, radioName === (lang === 'pt' ? 'Tema' : 'Theme'));
-    await ft.keyboard.press('ArrowRight');
-    await wait(80);
-    const afterArrow = await ft.evaluate(() => ({ theme: document.documentElement.dataset.theme, stored: localStorage.getItem('theme'), button: document.querySelector('[data-theme-toggle]').getAttribute('aria-label') }));
-    ok(`footer choice (${lang}): the arrow key switches to dark, stores it, the header button label follows`, afterArrow.theme === 'dark' && afterArrow.stored === 'dark' && /Escuro|Dark/.test(afterArrow.button), JSON.stringify(afterArrow));
-    const ring = await ft.evaluate(() => { const c = getComputedStyle(document.activeElement.nextElementSibling); return { style: c.outlineStyle, width: parseFloat(c.outlineWidth) }; });
-    ok(`footer choice (${lang}): visible focus ring`, ring.style !== 'none' && ring.width >= 2, JSON.stringify(ring));
-    await ft.close();
+    // the button carries the current mode as its tooltip too, and follows the cycle
+    const tip = await page.evaluate(() => { const b = document.querySelector('[data-theme-toggle]'); return { title: b.title, label: b.getAttribute('aria-label') }; });
+    ok(`theme button (${lang}): the tooltip (title) names the current mode, the same text as the label for screen readers`, tip.title === tip.label && /Escuro|Dark/.test(tip.title), JSON.stringify(tip));
+    ok(`theme (${lang}): the footer has no second theme control`, (await page.$('.site-footer [data-theme-choice], .site-footer [data-theme-toggle]')) === null);
     ok(`theme (${lang}): no script errors`, page.errors.length === 0, page.errors.join('; '));
     await page.close();
   }
@@ -393,7 +384,7 @@ if (want('fonts')) {
   await page.close();
 }
 
-// ---------- 6. Header on phones; the theme icon is in the footer ----------
+// ---------- 6. Header on phones; the theme icon sits next to the language switch ----------
 const HEADER_MAX = 150; // three rows of 44 px targets cannot go much below 135 px; 145 px is what the layout gives
 if (want('header')) {
   for (const lang of ['pt', 'en']) {
@@ -403,25 +394,24 @@ if (want('header')) {
       const h = await page.evaluate(() => {
         const vw = document.documentElement.clientWidth;
         const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { l: Math.round(r.left), r: Math.round(r.right), t: Math.round(r.top), b: Math.round(r.bottom), w: Math.round(r.width), h: Math.round(r.height) }; };
-        const parts = { brand: box('.brand'), lang: box('.lang-switch'), family: box('[data-family-toggle]'), nav: box('.site-nav') };
+        const parts = { brand: box('.brand'), lang: box('.lang-switch'), theme: box('.site-header .theme-button'), family: box('[data-family-toggle]'), nav: box('.site-nav') };
         const links = [...document.querySelectorAll('.site-nav a')].map((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= vw && r.height >= 44; });
         const names = Object.keys(parts);
         let overlap = false;
         for (let i = 0; i < names.length; i += 1) for (let j = i + 1; j < names.length; j += 1) { const a = parts[names[i]]; const b = parts[names[j]]; if (a.l < b.r - 1 && b.l < a.r - 1 && a.t < b.b - 1 && b.t < a.b - 1) overlap = true; }
-        return { vw, sw: document.documentElement.scrollWidth, parts, links, overlap, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().height), themeInHeader: document.querySelector('.site-header .theme-button') !== null, navRows: new Set([...document.querySelectorAll('.site-nav a')].map((a) => Math.round(a.getBoundingClientRect().top))).size, brandLines: Math.round(document.querySelector('.brand span').getBoundingClientRect().height) };
+        return { vw, sw: document.documentElement.scrollWidth, parts, links, overlap, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().height), themeInHeader: document.querySelector('.site-header .theme-button') !== null, themeSize: box('.site-header .theme-button'), navRows: new Set([...document.querySelectorAll('.site-nav a')].map((a) => Math.round(a.getBoundingClientRect().top))).size, brandLines: Math.round(document.querySelector('.brand span').getBoundingClientRect().height) };
       });
       const inside = Object.values(h.parts).every((p) => p.l >= 0 && p.r <= h.vw);
       ok(`header (${lang}, ${width} px): logo, language, family mode and menu all inside the screen, nothing overlaps, no sideways scroll, menu on one row, name on one line`, inside && h.links.every(Boolean) && h.sw <= h.vw && !h.overlap && h.navRows === 1 && h.brandLines < 40, JSON.stringify({ sw: h.sw, vw: h.vw, navRows: h.navRows, brandLines: h.brandLines }));
       ok(`header (${lang}, ${width} px): at most ${HEADER_MAX} px tall (${h.header} px)`, h.header <= HEADER_MAX);
-      ok(`header (${lang}, ${width} px): the theme icon is not in the header`, !h.themeInHeader);
+      ok(`header (${lang}, ${width} px): the round theme icon is in the header (at least 44 x 44 px)`, h.themeInHeader && h.themeSize.w >= 44 && h.themeSize.h >= 44, JSON.stringify(h.themeSize));
       // The header is an ordinary block: not sticky or fixed on narrow screens, and it scrolls away with the page.
       const pos = await page.evaluate(() => { const out = []; for (let el = document.querySelector('.site-header'); el && el !== document.documentElement; el = el.parentElement) out.push(getComputedStyle(el).position); return out; });
       await page.evaluate(() => window.scrollTo(0, 700));
       await wait(150);
       const top = await page.evaluate(() => Math.round(document.querySelector('.site-header').getBoundingClientRect().bottom));
       ok(`header (${lang}, ${width} px): not sticky or fixed (position ${[...new Set(pos)].join(', ')}), it is gone after scrolling (bottom ${top} px)`, pos.every((p) => p === 'static' || p === 'relative') && top <= 0);
-      const f = await page.evaluate(() => { const vw = document.documentElement.clientWidth; const b = document.querySelector('.site-footer .theme-button'); const r = b?.getBoundingClientRect(); const g = document.querySelector('.site-footer [data-theme-choice]'); return { found: !!b, w: r && Math.round(r.width), h: r && Math.round(r.height), inside: r && r.left >= 0 && r.right <= vw, group: !!g }; });
-      ok(`footer (${lang}, ${width} px): the theme icon (at least 44 x 44 px) and the radio group are both there`, f.found && f.w >= 44 && f.h >= 44 && f.inside && f.group, JSON.stringify(f));
+      ok(`footer (${lang}, ${width} px): no theme control in the footer`, (await page.$('.site-footer .theme-button, .site-footer [data-theme-choice]')) === null);
       console.log(`INFO  header height (${lang}, ${width} px): ${h.header} px`);
       await page.close();
     }

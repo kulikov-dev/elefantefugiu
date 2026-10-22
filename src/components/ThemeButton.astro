@@ -1,5 +1,6 @@
 ---
-// Header button that cycles the theme: system, light, dark (docs/visual-direction.md section 2).
+// Header button that cycles the theme: system, light, dark (docs/visual-direction.md section 2). The only theme control: the label
+// for screen readers and the tooltip (title) both name the current mode.
 // Shown only with JavaScript (CSS on html[data-js]); the icon follows html[data-theme], set before the first paint.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
@@ -10,7 +11,7 @@ interface Props {
 
 const { lang } = Astro.props;
 ---
-<button type="button" class="theme-button" data-theme-toggle data-template={t(lang, 'theme.button')} aria-label={t(lang, 'theme.button').replace('{value}', t(lang, 'theme.system'))}>
+<button type="button" class="theme-button" data-theme-toggle data-template={t(lang, 'theme.button')} aria-label={t(lang, 'theme.button').replace('{value}', t(lang, 'theme.system'))} title={t(lang, 'theme.button').replace('{value}', t(lang, 'theme.system'))}>
   <svg class="theme-button__icon theme-button__icon--system" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
     <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" />
     <path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" />

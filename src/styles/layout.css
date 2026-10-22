@@ -4,15 +4,15 @@
   border-block-end: 1px solid var(--color-line);
 }
 
-/* Phone: three short rows, logo with the language switch, the family-mode toggle, the menu (about 140 px; the theme
-   button lives in the footer). On wide screens (logo, menu, language and family mode need about 1000 px) everything sits in one row. */
+/* Phone: three short rows, logo with the language switch and the theme button, the family-mode toggle, the menu (about 140 px).
+   On wide screens (logo, menu, language and family mode need about 1000 px) everything sits in one row. */
 .site-header__inner {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   grid-template-areas:
-    'brand lang'
-    'family family'
-    'nav nav';
+    'brand lang theme'
+    'family family family'
+    'nav nav nav';
   align-items: center;
   gap: 0 var(--space-2);
   padding-block: var(--space-1);
@@ -28,6 +28,12 @@
 
 .site-header__inner .lang-switch {
   grid-area: lang;
+  justify-self: end;
+}
+
+/* The theme button is the round one, next to the language switch. */
+.site-header__inner .theme-button {
+  grid-area: theme;
   justify-self: end;
 }
 

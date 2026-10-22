@@ -1,8 +1,6 @@
 ---
 import { pagePath, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
-import ThemeButton from './ThemeButton.astro';
-import ThemeChoice from './ThemeChoice.astro';
 
 interface Props {
   lang: Lang;
@@ -24,10 +22,6 @@ const links = [
         {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
       </ul>
     </nav>
-    <div class="footer-theme">
-      <ThemeButton lang={lang} />
-      <ThemeChoice lang={lang} />
-    </div>
     <p>{t(lang, 'footer.licenses')}</p>
     <p>{t(lang, 'footer.privacy')}</p>
     <p class="no-js-only">{t(lang, 'family.footer_hint')}</p>
