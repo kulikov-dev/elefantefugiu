@@ -51,70 +51,146 @@ html[data-js] .no-js-only {
   display: none;
 }
 
-/* ---- the toggle in the header ---- */
+/* ---- the button and its menu in the header ---- */
 
-.family-toggle {
-  display: none;
-  max-width: 100%;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-pill);
-  overflow: hidden;
-}
-
-html[data-js] .family-toggle {
-  display: inline-flex;
-}
-
-.family-toggle__option {
+.family-menu {
   position: relative;
-  display: inline-flex;
-  flex: 1 1 auto;
-  min-width: 0;
+  display: none;
 }
 
-/* The real radio covers its label: a tap anywhere on the segment is a click on the radio. */
-.family-toggle__option input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
+html[data-js] .family-menu {
+  display: inline-block;
 }
 
-.family-toggle__option span {
+/* The button: a pill like the language switch; accent-filled while a mode is on. */
+.family-button {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: var(--space-2);
+  min-width: var(--touch-target);
   min-height: var(--touch-target);
-  padding-inline: var(--space-2);
+  padding-inline: var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
   color: var(--color-ink);
   font-size: var(--text-sm);
   font-weight: 600;
-  line-height: 1.2;
-  text-align: center;
+  list-style: none;
+  cursor: pointer;
 }
 
-/* Wide enough: one line per label. On a narrow phone the longer labels wrap instead of pushing the page sideways. */
-@media (min-width: 30rem) {
-  .family-toggle__option span {
-    padding-inline: var(--space-3);
-    white-space: nowrap;
-  }
+.family-button::-webkit-details-marker {
+  display: none;
 }
 
-/* The chosen segment follows data-family, not :checked, so it is right from the first paint. */
-html[data-family='off'] .family-toggle__option[data-value='off'] span,
-html[data-family='all'] .family-toggle__option[data-value='all'] span,
-html[data-family='12'] .family-toggle__option[data-value='12'] span {
+.family-button:hover {
+  background: var(--color-surface-hover);
+}
+
+html[data-family='all'] .family-button,
+html[data-family='12'] .family-button {
+  border-color: var(--color-accent);
   background: var(--color-accent);
   color: var(--color-on-accent);
 }
 
-.family-toggle__option input:focus-visible + span {
+.family-button__icon {
+  flex: none;
+  width: var(--size-icon);
+  height: var(--size-icon);
+}
+
+/* The text follows data-family, not :checked, so it is right from the first paint. */
+[data-mode-text] {
+  display: none;
+}
+
+html:not([data-family='all']):not([data-family='12']) [data-mode-text='off'],
+html[data-family='all'] [data-mode-text='all'],
+html[data-family='12'] [data-mode-text='12'] {
+  display: inline;
+}
+
+/* A phone: the icon alone, and beside it the short state ("under 12", "12+") while a mode is on. Wide: the whole label. */
+.family-button__label {
+  display: none;
+}
+
+@media (min-width: 48rem) {
+  .family-button__label {
+    display: inline;
+    white-space: nowrap;
+  }
+
+  .family-button__short {
+    display: none;
+  }
+}
+
+.family-menu__panel {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  z-index: 20;
+  width: var(--family-menu-width);
+  margin-block-start: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+.family-menu__question {
+  font-weight: 600;
+}
+
+.family-menu__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--touch-target);
+  cursor: pointer;
+}
+
+.family-menu__option input {
+  flex: none;
+  width: var(--size-icon);
+  height: var(--size-icon);
+  margin: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.family-menu__option:has(input:focus-visible) {
   outline: var(--ring-width) solid var(--color-focus);
-  outline-offset: calc(var(--ring-width) * -1);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.family-menu__note {
+  margin-block-start: var(--space-2);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+/* Wide header: the button sits at the right end, so the menu opens to the left. */
+@media (min-width: 64rem) {
+  .family-menu__panel {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+}
+
+/* ---- "Hidden stories: N. Show all" above a list that the mode has shortened ---- */
+
+.family-note {
+  max-width: var(--measure);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--epoch-surface);
+  color: var(--color-ink);
+  font-size: var(--text-sm);
 }
 
 /* ---- empty in this mode ---- */

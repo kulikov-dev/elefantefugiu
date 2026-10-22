@@ -1,5 +1,7 @@
 ---
-// Age label: 12+ or 16+. Cards for everyone carry no label (the data keeps min_age: all; callers skip the badge).
+// Age label: 12+ (or 16+, kept for the data). Cards for everyone carry no label (the data keeps min_age: all; callers skip the badge).
+// 12+ has a tooltip and a hidden sentence with the reason; the data has no field for a reason, so it is the same sentence for every
+// card (a card-specific reason would be added to the event schema).
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 
@@ -9,10 +11,12 @@ interface Props {
 }
 
 const { lang, age } = Astro.props;
+const reason = age === '12' ? t(lang, 'card.age_reason_12') : undefined;
 ---
-<span class={`age age--${age}`}>
+<span class={`age age--${age}`} title={reason}>
   <span class="visually-hidden">{t(lang, 'card.age_prefix')} </span>
   {age}+
+  {reason && <span class="visually-hidden"> ({reason})</span>}
 </span>
 
 <style>

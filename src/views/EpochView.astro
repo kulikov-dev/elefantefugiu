@@ -6,6 +6,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
 import EpochSwitcher from '../components/EpochSwitcher.astro';
+import FamilyNote from '../components/FamilyNote.astro';
 import Mascot from '../components/Mascot.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
@@ -156,6 +157,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
       <section class="epoch__feed" aria-labelledby="timeline-title">
         <h2 id="timeline-title" class="visually-hidden">{t(lang, 'epoch.timeline_label')}</h2>
+        <FamilyNote lang={lang} cards={feed.map(ageInfoOf)} />
         <ol class="feed" data-view="timeline">
           {
             feed.map((event) => (

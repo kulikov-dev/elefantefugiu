@@ -1,0 +1,25 @@
+---
+// "Hidden stories: N. Show all": shown above a list that the family mode has made shorter, so that nobody takes a filtered list
+// for all there is. One block per distinct number (the mode is chosen in the browser, the counts are computed here); the CSS
+// (family.css, .fv) shows the block of the current mode and nothing when the mode hides nothing. The button turns the mode off.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import { hiddenByMode, type AgeInfo } from '../lib/family';
+
+interface Props {
+  lang: Lang;
+  /** The cards of the list (age label and heavy-topic flag are read from each). */
+  cards: readonly AgeInfo[];
+}
+
+const { lang, cards } = Astro.props;
+const variants = hiddenByMode(cards);
+---
+{
+  variants.map((variant) => (
+    <p class="family-note fv fv--block" data-modes={variant.modes.join(' ')} data-family-note>
+      {t(lang, 'family.hidden').replace('{n}', String(variant.value))}{' '}
+      <button type="button" class="linklike" data-family-set="off">{t(lang, 'family.show_hidden')}</button>
+    </p>
+  ))
+}

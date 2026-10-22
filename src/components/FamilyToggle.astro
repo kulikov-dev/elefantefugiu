@@ -1,6 +1,9 @@
 ---
-// Family mode switch for the header (docs/spec.md 3.6): three values, a radio group.
-// Shown only when JavaScript runs (CSS on html[data-js]); the choice is kept in localStorage by src/scripts/family.ts.
+// Family mode in the header (docs/spec.md 3.6): one button "With kids" that opens a small menu with the question
+// "How old is the youngest reader?" and three answers (a radio group): under 12 -> "all", 12 and over -> "12", show everything -> "off".
+// A <details>, closed by Escape, a click elsewhere and by choosing an answer (src/scripts/family.ts). Shown only when JavaScript
+// runs (CSS on html[data-js]); the choice is kept in localStorage by src/scripts/family.ts. The button looks "on" and says which
+// mode from the first paint (CSS on <html data-family>).
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 
@@ -10,22 +13,62 @@ interface Props {
 
 const { lang } = Astro.props;
 const options = [
-  { value: 'off', label: t(lang, 'family.off') },
-  { value: 'all', label: t(lang, 'family.all') },
-  { value: '12', label: t(lang, 'family.twelve') },
+  { value: 'all', label: t(lang, 'family.opt_all') },
+  { value: '12', label: t(lang, 'family.opt_12') },
+  { value: 'off', label: t(lang, 'family.opt_off') },
 ] as const;
+// The part after the colon is the short state shown beside the icon on a phone ("under 12", "12+").
+const shortOf = (text: string) => text.split(': ')[1] ?? text;
 ---
-<div class="family-toggle" role="radiogroup" aria-label={t(lang, 'ui.family_mode')} data-family-toggle>
-  {
-    options.map((option) => (
-      <label class="family-toggle__option" data-value={option.value}>
-        <input type="radio" name="family" value={option.value} checked={option.value === 'off'} />
-        <span>{option.label}</span>
-      </label>
-    ))
-  }
-  <span class="visually-hidden" role="status" data-family-status data-template={t(lang, 'family.status')}></span>
-</div>
+<details class="family-menu" data-family-menu>
+  <summary
+    class="family-button"
+    aria-label={t(lang, 'family.button')}
+    data-label-off={t(lang, 'family.button')}
+    data-label-all={t(lang, 'family.button_all')}
+    data-label-twelve={t(lang, 'family.button_12')}
+  >
+    <svg class="family-button__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="6.5" cy="6.5" r="2.3" fill="currentColor" />
+      <path d="M2.5 18.5v-4.2a4 4 0 0 1 8 0v4.2z" fill="currentColor" />
+      <circle cx="17.5" cy="6.5" r="2.3" fill="currentColor" />
+      <path d="M13.5 18.5v-4.2a4 4 0 0 1 8 0v4.2z" fill="currentColor" />
+      <circle cx="12" cy="12.8" r="1.9" fill="currentColor" stroke="var(--color-surface)" stroke-width="1" />
+      <path d="M8.8 21v-2.6a3.2 3.2 0 0 1 6.4 0V21z" fill="currentColor" stroke="var(--color-surface)" stroke-width="1" />
+    </svg>
+    <span class="family-button__label" aria-hidden="true">
+      <span data-mode-text="off">{t(lang, 'family.button')}</span>
+      <span data-mode-text="all">{t(lang, 'family.button_all')}</span>
+      <span data-mode-text="12">{t(lang, 'family.button_12')}</span>
+    </span>
+    <span class="family-button__short" aria-hidden="true">
+      <span data-mode-text="all">{shortOf(t(lang, 'family.button_all'))}</span>
+      <span data-mode-text="12">{shortOf(t(lang, 'family.button_12'))}</span>
+    </span>
+  </summary>
+  <div class="family-menu__panel">
+    <p class="family-menu__question" id="family-question">{t(lang, 'family.question')}</p>
+    <div role="radiogroup" aria-labelledby="family-question" data-family-toggle>
+      {
+        options.map((option) => (
+          <label class="family-menu__option" data-value={option.value}>
+            <input type="radio" name="family" value={option.value} checked={option.value === 'off'} />
+            <span>{option.label}</span>
+          </label>
+        ))
+      }
+    </div>
+    <p class="family-menu__note">{t(lang, 'family.note')}</p>
+    <span
+      class="visually-hidden"
+      role="status"
+      data-family-status
+      data-status-off={t(lang, 'family.status_off')}
+      data-status-all={t(lang, 'family.status_all')}
+      data-status-twelve={t(lang, 'family.status_12')}
+    ></span>
+  </div>
+</details>
 
 <script>
   import '../scripts/family';

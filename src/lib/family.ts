@@ -133,5 +133,14 @@ export function groupVariants<T>(compute: (mode: FamilyMode) => T, key: (value: 
 /** Counters in three variants: [{modes: [off, all, 12], value: 8}] when all three numbers are equal. */
 export const countVariants = (counts: Record<FamilyMode, number>): FamilyVariant<number>[] => groupVariants((mode) => counts[mode], String);
 
+/**
+ * How many cards of a list each mode hides, merged by number: only the modes that hide something are listed.
+ * Behind the "Hidden stories: N. Show all" line above a shortened list.
+ */
+export function hiddenByMode(cards: readonly AgeInfo[]): FamilyVariant<number>[] {
+  const counts = countByMode(cards);
+  return groupVariants((mode) => counts.off - counts[mode], String).filter((variant) => variant.value > 0);
+}
+
 /** Modes in which a counter is zero (the element it belongs to is then hidden or replaced by a message). */
 export const zeroModes = (counts: Record<FamilyMode, number>): FamilyMode[] => FAMILY_MODES.filter((mode) => counts[mode] === 0);

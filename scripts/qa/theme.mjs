@@ -394,7 +394,7 @@ if (want('header')) {
       const h = await page.evaluate(() => {
         const vw = document.documentElement.clientWidth;
         const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { l: Math.round(r.left), r: Math.round(r.right), t: Math.round(r.top), b: Math.round(r.bottom), w: Math.round(r.width), h: Math.round(r.height) }; };
-        const parts = { brand: box('.brand'), lang: box('.lang-switch'), theme: box('.site-header .theme-button'), family: box('[data-family-toggle]'), nav: box('.site-nav') };
+        const parts = { brand: box('.brand'), lang: box('.lang-switch'), theme: box('.site-header .theme-button'), family: box('.family-menu'), nav: box('.site-nav') };
         const links = [...document.querySelectorAll('.site-nav a')].map((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= vw && r.height >= 44; });
         const names = Object.keys(parts);
         let overlap = false;

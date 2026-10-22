@@ -59,7 +59,9 @@ for (const ev of events) {
     if (/<link[^>]*rel="preload"[^>]*as="font"/.test(head)) fail('no font preload is expected');
     if (!/<html[^>]*lang="[a-z]{2}"[^>]*data-epoch="[a-z0-9-]+"/.test(full)) fail('the card page needs <html data-epoch="...">');
     if (head.indexOf('data-family') > head.indexOf('rel="stylesheet"') && head.includes('rel="stylesheet"')) fail('the head script must come before the stylesheets (no flash)');
-    if (!/role="radiogroup"[^>]*aria-label="[^"]+"/.test(html) || (html.match(/<input type="radio" name="family"/g) ?? []).length !== 3) fail('family toggle: a radio group with an aria-label and three radios is expected');
+    // Family mode: one button in the header (details with a summary) that opens a labelled radio group of three answers; no card page repeats it.
+    if (!/<details class="family-menu"[^>]*>[\s\S]*?<summary[^>]*aria-label="[^"]+"[\s\S]*?role="radiogroup"[^>]*aria-labelledby="family-question"[\s\S]*?<\/details>/.test(html) || (html.match(/<input type="radio" name="family"/g) ?? []).length !== 3) fail('family mode: a button with a menu holding a radio group with a label and three radios is expected');
+    if (/data-family-note/.test(html)) fail('a card page must not carry the "hidden stories" line (it belongs to lists)');
     const article = html.match(/<article class="card"([^>]*)>/)?.[1] ?? '';
     const gateModes = (attrsOf(article)('data-gate-modes') ?? '').split(' ').filter(Boolean);
     const hiddenIn = MODES.filter((m) => !shownIn(ev, m));

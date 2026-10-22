@@ -37,7 +37,7 @@
   justify-self: end;
 }
 
-.site-header__inner .family-toggle {
+.site-header__inner .family-menu {
   grid-area: family;
   justify-self: start;
 }

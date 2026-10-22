@@ -123,6 +123,8 @@
   --size-step: 2rem;
   --size-logo: clamp(1.5rem, 7vw, 2.25rem);
   /* The elephant mascot: a figure beside text, a smaller one in empty states; it walks in from --mascot-shift to the side. */
+  /* The family-mode menu under its button: the question and three answers; never wider than the screen. */
+  --family-menu-width: min(20rem, calc(100vw - 2 * var(--space-4)));
   --size-mascot: clamp(9rem, 40vw, 13rem);
   --size-mascot-small: clamp(5rem, 28vw, 7rem);
   --mascot-shift: 1.5rem;

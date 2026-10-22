@@ -167,7 +167,7 @@ describe('reason for the intermediate screen', () => {
   });
 });
 
-import { countVariants, familyAttrs, groupVariants, zeroModes } from '../../src/lib/family';
+import { countVariants, familyAttrs, groupVariants, hiddenByMode, zeroModes } from '../../src/lib/family';
 
 describe('markup helpers', () => {
   it('builds the data attributes of a list item from event data', () => {
@@ -216,5 +216,22 @@ describe('feed filter before the first paint', () => {
     expect(css.split('\n')).toHaveLength(2);
     expect(css).toContain('html[data-fio="mar"] .feed__item:not([data-threads~="mar"]){display:none}');
     expect(css).not.toContain('bad');
+  });
+});
+
+describe('hiddenByMode: the "Hidden stories: N" line', () => {
+  const card = (minAge: string, sensitive = false) => ({ minAge, sensitive });
+  it('nothing hidden in "off"; "all" hides every labelled and heavy card; "12" hides heavy and 16+ only', () => {
+    const cards = [card('all'), card('12'), card('12', true), card('16'), card('all', true)];
+    // off: 0; all: 12, 12 heavy, 16, all heavy = 4; 12: heavy 12, 16, heavy all = 3
+    expect(hiddenByMode(cards)).toEqual([
+      { modes: ['all'], value: 4 },
+      { modes: ['12'], value: 3 },
+    ]);
+  });
+  it('modes with the same number share one entry; a list that no mode shortens has no entry', () => {
+    expect(hiddenByMode([card('all'), card('all')])).toEqual([]);
+    expect(hiddenByMode([card('all'), card('16')])).toEqual([{ modes: ['all', '12'], value: 1 }]);
+    expect(hiddenByMode([])).toEqual([]);
   });
 });

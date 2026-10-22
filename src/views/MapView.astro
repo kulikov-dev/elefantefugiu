@@ -2,6 +2,7 @@
 // Map page: /pt/mapa/, /en/map/ (docs/spec.md section 5.4).
 // Without JavaScript only the plain list of all cards by epoch is shown; the map block and the filters need the script.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import FamilyNote from '../components/FamilyNote.astro';
 import MapBlock from '../components/MapBlock.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { storyPath, type Lang } from '../i18n/routes';
@@ -10,7 +11,7 @@ import { epochHasContent, epochYearsText } from '../lib/epochs';
 import { groupByEpoch, toMapCards } from '../lib/map-cards';
 import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
-import { countByMode, zeroModes } from '../lib/family';
+import { ageInfoOf, countByMode, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 
 interface Props {
@@ -34,6 +35,7 @@ const noindex = events.some((e) => e.placeholder);
 <BaseLayout lang={lang} title={t(lang, 'pages.map.title')} pageKey="map" noindex={noindex}>
   <div class="map-page">
     <h1>{t(lang, 'pages.map.title')}</h1>
+    <FamilyNote lang={lang} cards={events.map(ageInfoOf)} />
 
     <!-- Filters need JavaScript: hidden until the loader shows them. -->
     <div class="map-filters" data-map-js hidden>

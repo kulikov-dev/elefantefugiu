@@ -115,7 +115,9 @@ const text = (page, selector) =>
 /** Number from the visible text of an element ("6 histórias", "6"). */
 const num = (s) => Number(String(s ?? '').match(/\d+/)?.[0]);
 const setMode = async (page, mode) => {
-  await page.click(`.family-toggle__option[data-value="${mode}"]`);
+  // The family mode is chosen in the menu under the header button: open it, press the answer (a click closes the menu).
+  if (!(await page.$eval('[data-family-menu]', (d) => d.open))) await page.click('[data-family-menu] summary');
+  await page.click(`.family-menu__option[data-value="${mode}"]`);
   await page.waitForFunction((m) => document.documentElement.dataset.family === m, {}, mode);
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
