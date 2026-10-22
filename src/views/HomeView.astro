@@ -70,7 +70,7 @@ const steps = [
           <ul class="showcase">
             {site.featured.map((event) => (
               <li {...familyAttrs(event)}>
-                <EventCard lang={lang} event={event} variant="grid" threads={site.threads} visibleThreadIds={site.visibleThreadIds} showThreads={false} />
+                <EventCard lang={lang} event={event} variant="grid" threads={site.threads} visibleThreadIds={site.visibleThreadIds} showThreads={false} uniform />
               </li>
             ))}
           </ul>

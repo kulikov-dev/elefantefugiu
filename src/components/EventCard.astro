@@ -14,6 +14,8 @@ interface Props {
   lang: Lang;
   event: EventData;
   variant: 'feed' | 'grid';
+  /** The same look for every card whatever its level (the home showcase): no frame band, no larger title for key events. */
+  uniform?: boolean;
   threads: readonly ThreadData[];
   /** Only these threads have a page, so only they become links. */
   visibleThreadIds: ReadonlySet<string>;
@@ -21,14 +23,14 @@ interface Props {
   showThreads?: boolean;
 }
 
-const { lang, event, variant, threads, visibleThreadIds, showThreads = true } = Astro.props;
+const { lang, event, variant, threads, visibleThreadIds, showThreads = true, uniform = false } = Astro.props;
 const href = storyPath(lang, event.slug[lang]);
 const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) => th.id === id)).filter((th) => th !== undefined) : [];
 // Placeholder text is Latin filler: mark it so screen readers do not read it as Portuguese.
 const textLang = textLangOf(event, lang);
 ---
-<article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-flash={isFlashMoment(event) ? '' : undefined}>
-  {event.level === 'frame' && <span class="azulejo-rule ecard__band" aria-hidden="true" />}
+<article class:list={['ecard', `ecard--${variant}`, uniform ? 'ecard--uniform' : `ecard--${event.level}`]} id={`c-${event.id}`} data-flash={isFlashMoment(event) ? '' : undefined}>
+  {event.level === 'frame' && !uniform && <span class="azulejo-rule ecard__band" aria-hidden="true" />}
   <div class="ecard__head">
     {
       event.image && (
@@ -139,9 +141,11 @@ const textLang = textLangOf(event, lang);
     font-size: var(--text-sm);
   }
 
+  /* A long title wraps inside the card instead of running out of it. */
   .ecard__title {
-    font-size: var(--text-lg);
+    font-size: var(--text-card-title);
     line-height: 1.25;
+    overflow-wrap: anywhere;
   }
 
   /* A story between the key events: small title, no heavy frame, no fill, a smaller picture. */
@@ -175,7 +179,7 @@ const textLang = textLangOf(event, lang);
   .ecard--frame .ecard__title {
     font-family: var(--epoch-heading-font);
     font-weight: var(--epoch-heading-weight);
-    font-size: var(--text-2xl);
+    font-size: var(--text-card-title-frame);
     line-height: 1.15;
   }
 
