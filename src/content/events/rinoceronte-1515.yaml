@@ -12,10 +12,18 @@ level: story
 year: 1515
 place:
   name: Lisboa, Paço da Ribeira (hoje Praça do Comércio)
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
   lat: 38.7075
   lon: -9.1364
 bridge:
   name: Torre de Belém (guarita com o rinoceronte)
+  title:
+    pt: Torre de Belém (guarita com o rinoceronte)
+    en: Belém Tower
+    ru: Беленская башня
   address: Av. Brasília, Lisboa
   lat: 38.6916
   lon: -9.216

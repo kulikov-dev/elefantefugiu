@@ -16,10 +16,18 @@ year_label:
   ru: 29 марта 1809
 place:
   name: Porto, Ribeira, entre o Porto e Gaia
+  short:
+    pt: Porto
+    en: Porto
+    ru: Порту
   lat: 41.1405
   lon: -8.612
 bridge:
   name: Alminhas da Ponte (Ribeira, Porto)
+  title:
+    pt: Alminhas da Ponte (Ribeira, Porto)
+    en: Alminhas da Ponte shrine
+    ru: Часовня Алминьяш-да-Понте
   address: Cais da Ribeira, Porto
   lat: 41.1403
   lon: -8.6112

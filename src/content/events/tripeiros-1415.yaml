@@ -12,10 +12,18 @@ level: story
 year: 1415
 place:
   name: Porto, estaleiros do Douro
+  short:
+    pt: Porto
+    en: Porto
+    ru: Порту
   lat: 41.1496
   lon: -8.611
 bridge:
   name: Monumento de Lagoa Henriques (1960) junto aos antigos estaleiros do Ouro
+  title:
+    pt: Monumento de Lagoa Henriques (1960) junto aos antigos estaleiros do Ouro
+    en: Monument by Lagoa Henriques (1960) near the old Ouro shipyards
+    ru: Памятник работы Лагоа Энрикиша (1960) у бывших верфей Оуру
   address: Ribeira, Porto
   lat: 41.1409
   lon: -8.6134

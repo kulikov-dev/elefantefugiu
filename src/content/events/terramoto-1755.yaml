@@ -16,10 +16,18 @@ year_label:
   ru: 1 ноября 1755
 place:
   name: Lisboa
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
   lat: 38.7223
   lon: -9.1393
 bridge:
   name: Museu Arqueológico do Carmo (ruínas do Convento do Carmo)
+  title:
+    pt: Museu Arqueológico do Carmo (ruínas do Convento do Carmo)
+    en: Carmo Archaeological Museum
+    ru: Археологический музей Кармо
   address: Largo do Carmo, 1200-092 Lisboa
   lat: 38.7123
   lon: -9.1406

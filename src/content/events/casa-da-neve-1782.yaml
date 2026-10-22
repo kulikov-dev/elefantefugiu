@@ -16,10 +16,18 @@ year_label:
   ru: 1778 или 1782
 place:
   name: Lisboa, arcadas do Terreiro do Paço (hoje Praça do Comércio)
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
   lat: 38.7075
   lon: -9.1364
 bridge:
   name: Café Martinho da Arcada
+  title:
+    pt: Café Martinho da Arcada
+    en: Café Martinho da Arcada
+    ru: Кафе «Мартиньо да Аркада»
   address: Praça do Comércio 3, 1100-148 Lisboa
   lat: 38.708
   lon: -9.1347

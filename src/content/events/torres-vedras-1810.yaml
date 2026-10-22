@@ -16,10 +16,18 @@ year_label:
   ru: 11 октября 1810
 place:
   name: Sobral de Monte Agraço (primeira linha)
+  short:
+    pt: Sobral de Monte Agraço
+    en: Sobral de Monte Agraço
+    ru: Собраль-де-Монте-Аграсу
   lat: 39.017
   lon: -9.15
 bridge:
   name: Centro de Interpretação das Linhas de Torres Vedras (Forte de São Vicente)
+  title:
+    pt: Centro de Interpretação das Linhas de Torres Vedras (Forte de São Vicente)
+    en: Lines of Torres Vedras Interpretation Centre (São Vicente Fort)
+    ru: Форт Сан-Висенте
   address: Forte de São Vicente, 2560-629 Torres Vedras
   lat: 39.0958
   lon: -9.26

@@ -16,10 +16,18 @@ year_label:
   ru: '1812'
 place:
   name: Borodino, Rússia
+  short:
+    pt: Borodino
+    en: Borodino
+    ru: Бородино
   lat: 55.5216
   lon: 35.8183
 bridge:
   name: Museu Militar de Lisboa
+  title:
+    pt: Museu Militar de Lisboa
+    en: Lisbon Military Museum
+    ru: Лиссабонский военный музей
   address: Largo do Museu da Artilharia, Lisboa
   lat: 38.7143
   lon: -9.1206

@@ -16,10 +16,18 @@ year_label:
   ru: Май–июнь 1801
 place:
   name: 'Alto Alentejo: Elvas, Campo Maior, Olivença'
+  short:
+    pt: Alto Alentejo
+    en: Upper Alentejo
+    ru: Алту-Алентежу
   lat: 38.6918
   lon: -7.1006
 bridge:
   name: Elvas, a praça-forte que travou Godoy (Património Mundial)
+  title:
+    pt: Elvas, a praça-forte que travou Godoy (Património Mundial)
+    en: Elvas, the fortress town that stopped Godoy
+    ru: Эльваш, крепость, остановившая Годоя
   address: Praça da República, Elvas
   lat: 38.8811
   lon: -7.1631

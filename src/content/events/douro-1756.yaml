@@ -12,10 +12,18 @@ level: story
 year: 1756
 place:
   name: Vale do Douro (Alto Douro)
+  short:
+    pt: Vale do Douro
+    en: Douro Valley
+    ru: Долина Дору
   lat: 41.16
   lon: -7.79
 bridge:
   name: 17•56 Museu & Enoteca da Real Companhia Velha (Cais de Gaia)
+  title:
+    pt: 17•56 Museu & Enoteca da Real Companhia Velha (Cais de Gaia)
+    en: 17•56 Museum and Wine Library of the Real Companhia Velha
+    ru: Музей и энотека «17•56» компании Реал-Компанья-Велья
   address: Alameda da Rua Serpa Pinto 44B, Vila Nova de Gaia
   lat: 41.1389
   lon: -8.6153

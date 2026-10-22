@@ -12,10 +12,18 @@ level: story
 year: 1502
 place:
   name: Lisboa
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
   lat: 38.7223
   lon: -9.1393
 bridge:
   name: Museu de Marinha (cópia do mapa de Cantino)
+  title:
+    pt: Museu de Marinha (cópia do mapa de Cantino)
+    en: Maritime Museum
+    ru: Морской музей
   address: Praça do Império, Belém, Lisboa
   lat: 38.6975
   lon: -9.2066

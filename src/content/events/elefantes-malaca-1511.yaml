@@ -16,10 +16,18 @@ year_label:
   ru: 25 июля 1511
 place:
   name: Malaca (Melaka), ponte sobre o rio
+  short:
+    pt: Malaca
+    en: Malacca
+    ru: Малакка
   lat: 2.1896
   lon: 102.2501
 bridge:
   name: Monumento a Afonso de Albuquerque (Praça Afonso de Albuquerque, Belém)
+  title:
+    pt: Monumento a Afonso de Albuquerque (Praça Afonso de Albuquerque, Belém)
+    en: Monument to Afonso de Albuquerque
+    ru: Памятник Афонсу де Албукерки
   address: Praça Afonso de Albuquerque, Belém, Lisboa
   lat: 38.697
   lon: -9.206

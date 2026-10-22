@@ -29,21 +29,21 @@ bridge:
 
 ## Предлагаемые значения для 13 карточек
 
-| Карточка | `place.short` (pt / en / ru) | `bridge.title` en | `bridge.title` ru |
-| --- | --- | --- | --- |
-| aljubarrota-1385 | Aljubarrota / Aljubarrota / Алжубарроту | Aljubarrota Battle Interpretation Centre (CIBA) | Центр интерпретации битвы при Алжубарроте (CIBA) |
-| tripeiros-1415 | Porto / Porto / Порту | Monument by Lagoa Henriques (1960) near the old Ouro shipyards | Памятник работы Лагоа Энрикиша (1960) у бывших верфей Оуру |
-| cantino-1502 | Lisboa / Lisbon / Лиссабон | Maritime Museum (copy of the Cantino map) | Морской музей (копия карты Кантино) |
-| elefantes-malaca-1511 | Malaca / Malacca / Малакка | Monument to Afonso de Albuquerque (Belém) | Памятник Афонсу де Албукерки (Белен) |
-| rinoceronte-1515 | Lisboa / Lisbon / Лиссабон | Belém Tower (the sentry box with the rhinoceros) | Беленская башня (башенка с носорогом) |
-| terramoto-1755 | Lisboa / Lisbon / Лиссабон | Carmo Archaeological Museum (ruins of the Carmo Convent) | Археологический музей Кармо (руины монастыря Кармо) |
-| douro-1756 | Vale do Douro / Douro Valley / Долина Дору | 17•56 Museum and Wine Library of the Real Companhia Velha (Gaia quay) | Музей и энотека «17•56» компании Реал-Компанья-Велья (набережная Гайи) |
-| motim-companhia-1757 | Porto / Porto / Порту | то же, что у douro-1756 | то же, что у douro-1756 |
-| casa-da-neve-1782 | Lisboa / Lisbon / Лиссабон | Café Martinho da Arcada | Кафе «Мартиньо да Аркада» |
-| guerra-laranjas-1801 | Alto Alentejo / Upper Alentejo / Алту-Алентежу | Elvas, the fortress town that stopped Godoy (World Heritage Site) | Эльваш, крепость, остановившая Годоя (Всемирное наследие) |
-| ponte-das-barcas-1809 | Porto / Porto / Порту | Alminhas da Ponte shrine (Ribeira, Porto) | Часовня Алминьяш-да-Понте (Рибейра, Порту) |
-| torres-vedras-1810 | Sobral de Monte Agraço / Sobral de Monte Agraço / Собраль-де-Монте-Аграсу | Lines of Torres Vedras Interpretation Centre (São Vicente Fort) | Центр интерпретации линий Торриш-Ведраш (форт Сан-Висенте) |
-| legiao-portuguesa-1812 | Borodino / Borodino / Бородино | Lisbon Military Museum | Лиссабонский военный музей |
+| Карточка               | `place.short` (pt / en / ru)                                              | `bridge.title` en                                               | `bridge.title` ru                                          |
+| ---------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------- |
+| aljubarrota-1385       | Aljubarrota / Aljubarrota / Алжубаррота                                   | Aljubarrota Battle Interpretation Centre                        | Центр битвы при Алжубарроте                                |
+| tripeiros-1415         | Porto / Porto / Порту                                                     | Monument by Lagoa Henriques (1960) near the old Ouro shipyards  | Памятник работы Лагоа Энрикиша (1960) у бывших верфей Оуру |
+| cantino-1502           | Lisboa / Lisbon / Лиссабон                                                | Maritime Museum                                                 | Морской музей                                              |
+| elefantes-malaca-1511  | Malaca / Malacca / Малакка                                                | Monument to Afonso de Albuquerque                               | Памятник Афонсу де Албукерки                               |
+| rinoceronte-1515       | Lisboa / Lisbon / Лиссабон                                                | Belém Tower                                                     | Беленская башня                                            |
+| terramoto-1755         | Lisboa / Lisbon / Лиссабон                                                | Carmo Archaeological Museum                                     | Археологический музей Кармо                                |
+| douro-1756             | Vale do Douro / Douro Valley / Долина Дору                                | 17•56 Museum and Wine Library of the Real Companhia Velha       | Музей и энотека «17•56» компании Реал-Компанья-Велья       |
+| motim-companhia-1757   | Porto / Porto / Порту                                                     | то же, что у douro-1756                                         | то же, что у douro-1756                                    |
+| casa-da-neve-1782      | Lisboa / Lisbon / Лиссабон                                                | Café Martinho da Arcada                                         | Кафе «Мартиньо да Аркада»                                  |
+| guerra-laranjas-1801   | Alto Alentejo / Upper Alentejo / Алту-Алентежу                            | Elvas, the fortress town that stopped Godoy                     | Эльваш, крепость, остановившая Годоя                       |
+| ponte-das-barcas-1809  | Porto / Porto / Порту                                                     | Alminhas da Ponte shrine                                        | Часовня Алминьяш-да-Понте                                  |
+| torres-vedras-1810     | Sobral de Monte Agraço / Sobral de Monte Agraço / Собраль-де-Монте-Аграсу | Lines of Torres Vedras Interpretation Centre (São Vicente Fort) | Форт Сан-Висенте                                           |
+| legiao-portuguesa-1812 | Borodino / Borodino / Бородино                                            | Lisbon Military Museum                                          | Лиссабонский военный музей                                 |
 
 В колонке `bridge.title` для pt берётся текущее `bridge.name` без изменений. Русские названия — мои предложения, их нужно вычитать (особенно транскрипции: Алжубарроту, Алминьяш-да-Понте, Собраль-де-Монте-Аграсу, Торриш-Ведраш).
 

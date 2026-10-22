@@ -16,10 +16,18 @@ year_label:
   ru: 23 февраля 1757
 place:
   name: Porto
+  short:
+    pt: Porto
+    en: Porto
+    ru: Порту
   lat: 41.1496
   lon: -8.611
 bridge:
   name: 17•56 Museu & Enoteca da Real Companhia Velha (Cais de Gaia)
+  title:
+    pt: 17•56 Museu & Enoteca da Real Companhia Velha (Cais de Gaia)
+    en: 17•56 Museum and Wine Library of the Real Companhia Velha
+    ru: Музей и энотека «17•56» компании Реал-Компанья-Велья
   address: Alameda da Rua Serpa Pinto 44B, Vila Nova de Gaia
   lat: 41.1389
   lon: -8.6153

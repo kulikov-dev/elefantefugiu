@@ -16,10 +16,18 @@ year_label:
   ru: 14 августа 1385
 place:
   name: Planalto de São Jorge, Aljubarrota
+  short:
+    pt: Aljubarrota
+    en: Aljubarrota
+    ru: Алжубаррота
   lat: 39.5833
   lon: -8.9167
 bridge:
   name: Centro de Interpretação da Batalha de Aljubarrota (CIBA)
+  title:
+    pt: Centro de Interpretação da Batalha de Aljubarrota (CIBA)
+    en: Aljubarrota Battle Interpretation Centre
+    ru: Центр битвы при Алжубарроте
   address: Calvaria de Cima, Porto de Mós
   lat: 39.5886
   lon: -8.9293
