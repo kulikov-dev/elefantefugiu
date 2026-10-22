@@ -23,6 +23,8 @@ const { lang, hook, textLang } = Astro.props;
     </div>
   </section>
 
+  <slot name="after" />
+
   <details id="detalhes" class="more">
     <summary>
       <span>{t(lang, 'card.more_toggle')}</span>

@@ -80,7 +80,8 @@
     "prev": "Anterior",
     "next": "Seguinte",
     "not_translated": "Esta página ainda não foi traduzida. É mostrado o texto em inglês.",
-    "more_toggle": "Saber mais"
+    "more_toggle": "Saber mais",
+    "next_story": "A seguir"
   },
   "notfound": {
     "title": "Página não encontrada",

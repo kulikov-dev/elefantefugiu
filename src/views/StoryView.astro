@@ -8,6 +8,7 @@ import ArmyDots from '../components/ArmyDots.astro';
 import CardLayers from '../components/CardLayers.astro';
 import ShipScale from '../components/ShipScale.astro';
 import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
+import NextStory from '../components/NextStory.astro';
 import PagerNav from '../components/PagerNav.astro';
 import PlaceholderNotice from '../components/PlaceholderNotice.astro';
 import RelatedList from '../components/RelatedList.astro';
@@ -175,6 +176,17 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
     <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang}>
       <p slot="story">{event.story[lang]}</p>
+      <Fragment slot="after">
+        {
+          pagerVariants
+            .filter((variant) => variant.value.next)
+            .map(({ modes, value: { next } }) => (
+              <div class="fv fv--block" data-modes={modes.join(' ')}>
+                <NextStory lang={lang} href={storyPath(lang, next!.slug[lang])} hook={next!.hook[lang]} title={next!.title[lang]} textLang={textLangOf(next!, lang)} />
+              </div>
+            ))
+        }
+      </Fragment>
       <Fragment slot="more">
         <section aria-labelledby="context-title">
           <h2 id="context-title">{t(lang, 'card.context')}</h2>
