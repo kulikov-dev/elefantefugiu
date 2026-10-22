@@ -75,7 +75,6 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
   <style slot="head" is:inline set:html={feedFilterCss(site.threads.map((th) => th.id))} />
   <div class="epoch" data-epoch-page data-pane="feed">
     <header class="epoch__header">
-      <span class="azulejo-corner azulejo-corner--mirror epoch__corner" aria-hidden="true"></span>
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">{epochYearsText(epoch, lang)}</p>
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
@@ -217,23 +216,6 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
   .epoch__header > * + * {
     margin-block-start: var(--space-2);
-  }
-
-  /* The corner signature sits at the top right, outside the lines of text (the heading leaves room for it). */
-  .epoch__header {
-    position: relative;
-  }
-
-  .epoch__corner {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 0;
-    margin: 0;
-  }
-
-  .epoch__header h1,
-  .epoch__years {
-    padding-inline-end: var(--azulejo-corner-size);
   }
 
   .epoch__header h1 {

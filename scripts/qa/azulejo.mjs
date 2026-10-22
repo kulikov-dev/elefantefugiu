@@ -51,7 +51,7 @@ if (want('patterns')) {
         const loads = (u) => new Promise((res) => { const i = new Image(); i.onload = () => res(i.naturalWidth > 0); i.onerror = () => res(false); i.src = u; });
         const feed = document.querySelector('.feed');
         const strip = css(feed, '::before');
-        const layers = [document.querySelector('.azulejo-rule'), document.querySelector('.azulejo-corner')].map((el) => {
+        const layers = [document.querySelector('.azulejo-rule')].map((el) => {
           const c = css(el);
           const r = el.getBoundingClientRect();
           return { url: urlOf(mask(c)), mask: mask(c), bg: c.backgroundColor, opacity: Number(c.opacity), w: r.width, h: r.height, children: el.childNodes.length, hidden: el.getAttribute('aria-hidden') };
@@ -59,9 +59,9 @@ if (want('patterns')) {
         const stripUrl = urlOf(mask(strip));
         const doc = document.documentElement;
         const area = layers.reduce((a, l) => a + l.w * l.h, 0) + parseFloat(strip.width) * feed.getBoundingClientRect().height;
-        return { layers, stripUrl, stripOpacity: Number(strip.opacity), loads: await Promise.all([layers[0].url, layers[1].url, stripUrl].map(loads)), share: area / (doc.scrollWidth * doc.scrollHeight) };
+        return { layers, stripUrl, stripOpacity: Number(strip.opacity), loads: await Promise.all([layers[0].url, stripUrl].map(loads)), share: area / (doc.scrollWidth * doc.scrollHeight) };
       });
-      ok(`patterns (${id}, ${scheme}): the rule, the corner and the timeline strip are masks that load`, s.layers.every((l) => l.mask && l.mask !== 'none' && l.url) && Boolean(s.stripUrl) && s.loads.every(Boolean), JSON.stringify(s.loads));
+      ok(`patterns (${id}, ${scheme}): the rule and the timeline strip are masks that load (the epoch page has no corner: it looked like a button)`, s.layers.every((l) => l.mask && l.mask !== 'none' && l.url) && Boolean(s.stripUrl) && s.loads.every(Boolean), JSON.stringify(s.loads));
       ok(`patterns (${id}, ${scheme}): each layer is empty, aria-hidden, visible and at most 50% opaque`, s.layers.every((l) => l.children === 0 && l.hidden === 'true' && l.opacity > 0 && l.opacity <= 0.5 && l.w > 0 && l.h > 0) && s.stripOpacity > 0 && s.stripOpacity <= 0.5, JSON.stringify(s.layers.map((l) => [l.bg, l.opacity])));
       ok(`patterns (${id}, ${scheme}): together less than 10% of the page`, s.share < 0.1, s.share.toFixed(3));
       (masks[id] ??= []).push(s.layers[0].url);
@@ -71,7 +71,7 @@ if (want('patterns')) {
   }
   const distinct = new Set(EPOCHS.map((id) => masks[id][0]));
   ok(`patterns: three epochs, three different patterns (${EPOCHS.map((id) => FILE[id]).join(', ')})`, distinct.size === 3);
-  // The 404 page carries the corner signature.
+  // The 404 page carries the corner signature; the epoch page does not (it looked like a button that does nothing).
   const p404 = await newPage();
   await p404.goto(`${base}/404.html`, { waitUntil: 'networkidle0' });
   ok('404: the corner signature is drawn', await p404.evaluate(() => { const c = document.querySelector('.azulejo-corner'); const s = c && getComputedStyle(c); return Boolean(s) && s.maskImage !== 'none' && c.getBoundingClientRect().width > 0; }));
