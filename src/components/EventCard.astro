@@ -52,6 +52,7 @@ const textLang = textLangOf(event, lang);
   </div>
 
   <ul class="ecard__tags">
+    <li><TagLabel lang={lang} label={event.label} /></li>
     {
       eventThreads.map((thread) => (
         <li>
@@ -65,7 +66,6 @@ const textLang = textLangOf(event, lang);
         </li>
       ))
     }
-    <li><TagLabel lang={lang} label={event.label} /></li>
     {event.min_age !== 'all' && <li><AgeBadge lang={lang} age={event.min_age} /></li>}
     {
       event.sensitive && (

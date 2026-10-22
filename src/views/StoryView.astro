@@ -116,6 +116,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         <span>{event.place.name}</span>
       </p>
       <ul class="tags gated" aria-label={t(lang, 'card.tags')}>
+        <li><TagLabel lang={lang} label={event.label} /></li>
         {
           eventThreads.map((thread) => (
             <li>
@@ -128,7 +129,6 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
             </li>
           ))
         }
-        <li><TagLabel lang={lang} label={event.label} /></li>
         {event.min_age !== 'all' && <li><AgeBadge lang={lang} age={event.min_age} /></li>}
       </ul>
       {event.sensitive && <div class="gated"><HeavyTopicBanner lang={lang} /></div>}
@@ -281,11 +281,25 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     font-size: var(--text-lg);
   }
 
+  /* One row: the credibility label first, then the age and the thread chips, all on one centre line and as tall as a touch target. */
   .tags {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: var(--space-2);
     list-style: none;
+  }
+
+  .tags :global(.thread),
+  .tags :global(.tag),
+  .tags :global(.age) {
+    min-height: var(--touch-target);
+  }
+
+  /* The label is a square-cornered stamp with its own tint; the thread chips are outlined pills. */
+  .tags :global(.tag) {
+    padding-inline: var(--pad-chip-x-wide);
+    border-radius: var(--radius-sm);
   }
 
   .figure {
