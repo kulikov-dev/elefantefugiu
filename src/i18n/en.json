@@ -83,7 +83,10 @@
     "more_toggle": "More",
     "next_story": "Next",
     "sources_checked": "checked",
-    "report_inline": "Spotted an inaccuracy in this story? Write to us"
+    "report_inline": "Spotted an inaccuracy in this story? Write to us",
+    "nearby_m": "{n} m away",
+    "nearby_km": "{n} km away",
+    "nearby_same": "at the same place"
   },
   "notfound": {
     "title": "Page not found",

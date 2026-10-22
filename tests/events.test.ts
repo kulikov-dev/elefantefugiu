@@ -8,7 +8,9 @@ import {
   formatDate,
   formatYear,
   isFlashMoment,
-  relatedCards,
+  nearbyCards,
+  NEARBY_RADIUS_KM,
+  MAX_NEARBY,
   type EventData,
 } from '../src/lib/events';
 
@@ -57,35 +59,39 @@ test('distanceKm: Lisbon to Porto is about 274 km', () => {
   assert.equal(distanceKm({ lat: 1, lon: 1 }, { lat: 1, lon: 1 }), 0);
 });
 
-test('relatedCards: manual links first, then nearest, never itself, at most 7', () => {
-  const near = (id: string, dLat: number, patch: Partial<EventData> = {}) =>
-    ev(id, { place: { name: id, lat: 38.7 + dLat, lon: -9.1 }, ...patch });
-  const me = near('me', 0, { related: ['far', 'missing', 'draft', 'far'] });
+const at = (id: string, dLat: number, patch: Partial<EventData> = {}) =>
+  ev(id, { bridge: { name: id, address: '', url: '', lat: 38.7 + dLat, lon: -9.1, note: { pt: '', en: '', ru: '' } }, ...patch });
+
+test('nearbyCards: only within the radius, nearest first, at most 3, never itself, drafts left out', () => {
+  const me = at('me', 0);
   const all = [
     me,
-    near('far', 2),
-    near('n1', 0.01),
-    near('n2', 0.02),
-    near('n3', 0.03),
-    near('n4', 0.04),
-    near('n5', 0.05),
-    near('n6', 0.06),
-    near('n7', 0.07),
-    near('draft', 0.001, { status: 'draft' }),
+    at('far', 2), // 220 km away
+    at('n3', 0.03), // about 3.3 km
+    at('n1', 0.01), // about 1.1 km
+    at('n2', 0.02), // about 2.2 km
+    at('n4', 0.04), // about 4.4 km
+    at('draft', 0.001, { status: 'draft' }),
   ];
-  const result = relatedCards(me, all).map((e) => e.id);
-  assert.deepEqual(result, ['far', 'n1', 'n2', 'n3', 'n4', 'n5', 'n6']);
-  assert.equal(result.length, 7);
-  assert.ok(!result.includes('me') && !result.includes('draft') && !result.includes('missing'));
+  const result = nearbyCards(me, all);
+  assert.deepEqual(result.map((c) => c.event.id), ['n1', 'n2', 'n3']);
+  assert.ok(result[0]!.km > 1 && result[0]!.km < 1.2, `got ${result[0]!.km}`);
+  assert.ok(NEARBY_RADIUS_KM === 5 && MAX_NEARBY === 3);
 });
 
-test('relatedCards: equal distance prefers the same epoch; allowed() filters (family mode hook)', () => {
-  const me = ev('me');
-  const other = ev('other', { epoch: 'e2', year: 1400 });
-  const same = ev('same', { epoch: 'e1', year: 1600 });
-  assert.deepEqual(relatedCards(me, [me, other, same]).map((e) => e.id), ['same', 'other']);
-  assert.deepEqual(relatedCards(me, [me, other, same], { allowed: (e) => e.id !== 'same' }).map((e) => e.id), ['other']);
-  assert.deepEqual(relatedCards(me, [me]), []);
+test('nearbyCards: the edge of the radius, nothing around, a point far from everything', () => {
+  const me = at('me', 0);
+  assert.deepEqual(nearbyCards(me, [me, at('edge', 0.044), at('out', 0.046)]).map((c) => c.event.id), ['edge']);
+  assert.deepEqual(nearbyCards(me, [me]), []);
+  assert.deepEqual(nearbyCards(me, [me, at('porto', 2.4)]), []);
+});
+
+test('nearbyCards: equal distance prefers the same epoch; allowed() filters (family mode hook)', () => {
+  const me = at('me', 0);
+  const other = at('other', 0.01, { epoch: 'e2', year: 1400 });
+  const same = at('same', 0.01, { epoch: 'e1', year: 1600 });
+  assert.deepEqual(nearbyCards(me, [me, other, same]).map((c) => c.event.id), ['same', 'other']);
+  assert.deepEqual(nearbyCards(me, [me, other, same], { allowed: (e) => e.id !== 'same' }).map((c) => c.event.id), ['other']);
 });
 
 test('firstSentence: plain, punctuation, abbreviations, long text', () => {

@@ -22,6 +22,8 @@ const threadCount = new Map();
 for (const e of events) for (const id of new Set(e.threads)) threadCount.set(id, (threadCount.get(id) ?? 0) + 1);
 const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
 
+const startYear = (e) => (typeof e.year === 'number' ? e.year : e.year.from);
+const endYear = (e) => (typeof e.year === 'number' ? e.year : e.year.to);
 const strip = (html) => html.replace(/<style[\s\S]*?<\/style>/g, '').replace(/<script[\s\S]*?<\/script>/g, '');
 const text = (html) => html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -85,19 +87,50 @@ for (const ev of events) {
       // the card stays in the HTML
       if (!html.includes('id="historia"') || !html.includes('id="detalhes"') || !/class="gated card__rest"/.test(html)) fail('the card content must stay in the HTML under the screen');
     } else if (gateBlock) fail('a card no mode hides must not have the screen');
-    // Nearby and previous / next: for each mode the variant shown holds only cards the mode shows
+    // Nearby, "Next" and previous / next: for each mode the variant shown holds only cards the mode shows
     const blocks = (cls) => [...html.matchAll(new RegExp(`<div class="fv fv--block"[^>]*?data-modes="([^"]*)"[^>]*>([\\s\\S]*?)(?=<div class="fv fv--block"|<div class="actions"|</div></article>|$)`, 'g'))].filter((b) => b[2].includes(cls));
-    for (const [cls, label] of [['class="related"', 'Nearby'], ['class="pager"', 'previous / next']]) {
-      const list = blocks(cls);
-      const covered = list.flatMap((b) => b[1].split(' '));
-      if (MODES.some((m) => covered.filter((x) => x === m).length !== 1)) fail(`${label}: every mode needs exactly one variant (found ${covered.join(' ')})`);
-      for (const b of list) {
-        const links = [...b[2].matchAll(/<a [^>]*href="([^"]*)"/g)].map((x) => idOfHref(x[1], lang)).filter(Boolean);
-        for (const m of b[1].split(' ')) {
-          const wrong = links.filter((id) => !shownIn(events.find((e) => e.id === id), m));
-          if (wrong.length) fail(`${label}, mode ${m}: leads to hidden card(s) ${wrong.join(', ')}`);
-          if (label === 'Nearby' && links.length > 7) fail(`Nearby, mode ${m}: ${links.length} cards, at most 7`);
-        }
+    const pagerBlocks = blocks('class="pager"');
+    const pagerCovered = pagerBlocks.flatMap((b) => b[1].split(' '));
+    if (MODES.some((m) => pagerCovered.filter((x) => x === m).length !== 1)) fail(`previous / next: every mode needs exactly one variant (found ${pagerCovered.join(' ')})`);
+    // The block of one mode among the blocks of a kind: null when no block covers the mode.
+    const blockFor = (list, m) => list.find((b) => b[1].split(' ').includes(m)) ?? null;
+    const linkIds = (b) => (b ? [...b[2].matchAll(/<a [^>]*href="([^"]*)"/g)].map((x) => idOfHref(x[1], lang)).filter(Boolean) : []);
+    for (const b of pagerBlocks) {
+      for (const m of b[1].split(' ')) {
+        const wrong = linkIds(b).filter((id) => !shownIn(events.find((e) => e.id === id), m));
+        if (wrong.length) fail(`previous / next, mode ${m}: leads to hidden card(s) ${wrong.join(', ')}`);
+      }
+    }
+    // "Next": the next story of the epoch that the mode shows (the card itself counts as present), none at the end of the epoch.
+    const chrono = (a, b) => startYear(a) - startYear(b) || endYear(a) - endYear(b) || a.id.localeCompare(b.id);
+    const nextBlocks = blocks('class="next-story"');
+    for (const m of MODES) {
+      const inEpoch = events.filter((e) => e.epoch === ev.epoch && (e.id === ev.id || shownIn(e, m))).sort(chrono);
+      const want = inEpoch[inEpoch.findIndex((e) => e.id === ev.id) + 1]?.id ?? null;
+      const got = linkIds(blockFor(nextBlocks, m));
+      if ((want ? [want] : []).join() !== got.join()) fail(`"Next", mode ${m}: expected ${want ?? 'nothing'}, found ${got.join(', ') || 'nothing'}`);
+    }
+    // "Nearby": other stories within 5 km of this story's bridge, nearest first, at most 3, each with its distance; no block when there are none.
+    const km = (a, b) => {
+      const rad = (d) => (d * Math.PI) / 180;
+      const h = Math.sin(rad(b.lat - a.lat) / 2) ** 2 + Math.cos(rad(a.lat)) * Math.cos(rad(b.lat)) * Math.sin(rad(b.lon - a.lon) / 2) ** 2;
+      return 12742 * Math.asin(Math.min(1, Math.sqrt(h)));
+    };
+    const relatedBlocks = blocks('class="related"');
+    for (const m of MODES) {
+      const want = events
+        .filter((e) => e.id !== ev.id && shownIn(e, m))
+        .map((e) => ({ e, d: km(ev.bridge, e.bridge) }))
+        .filter((c) => c.d <= 5)
+        .sort((a, b) => a.d - b.d || (a.e.epoch === ev.epoch ? 0 : 1) - (b.e.epoch === ev.epoch ? 0 : 1) || chrono(a.e, b.e))
+        .slice(0, 3)
+        .map((c) => c.e.id);
+      const block = blockFor(relatedBlocks, m);
+      const got = linkIds(block);
+      if (want.join() !== got.join()) fail(`Nearby, mode ${m}: expected ${want.join(', ') || 'no block'}, found ${got.join(', ') || 'no block'}`);
+      if (block) {
+        const metas = [...block[2].matchAll(/class="related__meta"[^>]*>([^<]*)</g)].map((x) => x[1]);
+        if (metas.length !== got.length || !metas.every((t) => /\d+(,\d)?\s?(m|km|м|км)|mesmo local|same place|том же месте/.test(t))) fail(`Nearby, mode ${m}: every story needs its distance (found "${metas.join('" | "')}")`);
       }
     }
 
@@ -221,9 +254,6 @@ for (const ev of events) {
     if (!has(/data-share-link/) || !has(/data-share-button/)) fail('share widget is missing');
     if (!has(/(corrigir|report)\/\?url=/)) fail('"Found a mistake?" link with the card address is missing');
     if (!has(/rel="(prev|next)"/) && events.filter((e) => e.epoch === ev.epoch).length > 1) fail('previous/next links are missing');
-    const nearby = html.match(/<section class="related"[\s\S]*?<\/section>/)?.[0] ?? '';
-    const n = (nearby.match(/<li\b/g) ?? []).length;
-    if (n < 3 || n > 7) fail(`"Nearby" has ${n} cards, expected 3-7`);
     if (has(/<script[^>]+src="https?:/)) fail('external script');
     if (/<img\b(?![^>]*\bclass="mascot)[^>]*\bsrc="[^"]*"[^>]*>/.test(html) && !/loading="lazy"/.test(html)) fail('illustration is not lazy-loaded');
     if (!full.includes('type="module"')) fail('layer-state script is missing');

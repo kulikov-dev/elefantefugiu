@@ -73,46 +73,36 @@ export function distanceKm(a: { lat: number; lon: number }, b: { lat: number; lo
   return 12742 * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
-export const MAX_RELATED = 7;
+/** "Nearby" shows stories whose point is at most this far from the point of the current story (kilometres). */
+export const NEARBY_RADIUS_KM = 5;
+export const MAX_NEARBY = 3;
+
+export interface NearbyCard {
+  event: EventData;
+  /** Distance between the two points, in kilometres. */
+  km: number;
+}
 
 /**
- * "Mais perto" (docs/spec.md section 8, simple version):
- * 1. manual `related` links in the order of the data,
- * 2. then the nearest cards by distance (same epoch first when the distance is equal),
- * up to `max` cards. `allowed` hides cards (family mode: by age and heavy topic).
+ * "Nearby": up to MAX_NEARBY other stories within NEARBY_RADIUS_KM of this story, nearest first. The point of a story is
+ * its bridge to today (the place that can be visited, the one the map marks), not the place where the event happened,
+ * which may be anywhere in the world. Equal distance: the same epoch first, then chronological. `allowed` hides cards
+ * (family mode: by age and heavy topic). An empty list means the block is not shown at all.
  */
-export function relatedCards(
-  event: EventData,
-  all: readonly EventData[],
-  options: { max?: number; allowed?: (e: EventData) => boolean } = {},
-): EventData[] {
-  const max = options.max ?? MAX_RELATED;
+export function nearbyCards(event: EventData, all: readonly EventData[], options: { allowed?: (e: EventData) => boolean } = {}): NearbyCard[] {
   const allowed = options.allowed ?? (() => true);
-  const pool = all.filter((e) => e.id !== event.id && isPublished(e) && allowed(e));
-  const byId = new Map(pool.map((e) => [e.id, e]));
-
-  const picked: EventData[] = [];
-  const seen = new Set<string>();
-  for (const id of event.related ?? []) {
-    const found = byId.get(id);
-    if (found && !seen.has(id)) {
-      picked.push(found);
-      seen.add(id);
-    }
-  }
-
-  const rest = pool
-    .filter((e) => !seen.has(e.id))
-    .map((e) => ({ e, km: distanceKm(event.place, e.place) }))
+  return all
+    .filter((e) => e.id !== event.id && isPublished(e) && allowed(e))
+    .map((e) => ({ event: e, km: distanceKm(event.bridge, e.bridge) }))
+    .filter((c) => c.km <= NEARBY_RADIUS_KM)
     .sort((a, b) => {
       const byDistance = a.km - b.km;
       if (Math.abs(byDistance) > 1e-9) return byDistance;
-      const aSame = a.e.epoch === event.epoch ? 0 : 1;
-      const bSame = b.e.epoch === event.epoch ? 0 : 1;
-      return aSame - bSame || compareChronological(a.e, b.e);
-    });
-
-  return [...picked, ...rest.map((r) => r.e)].slice(0, max);
+      const aSame = a.event.epoch === event.epoch ? 0 : 1;
+      const bSame = b.event.epoch === event.epoch ? 0 : 1;
+      return aSame - bSame || compareChronological(a.event, b.event);
+    })
+    .slice(0, MAX_NEARBY);
 }
 
 // Words after which a full stop does not end a sentence (European Portuguese and English).
