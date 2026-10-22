@@ -97,10 +97,19 @@ export const eventSchema = z
   year: z.union([z.number().int(), yearRange]),
   year_label: text.optional(),
   /** Where the event happened, as text on the card; any coordinates in the world (the map does not use them). */
-  place: z.strictObject({ name: z.string(), lat: z.number().min(-90).max(90), lon: z.number().min(-180).max(180) }),
+  place: z.strictObject({
+    name: z.string(),
+    /** A short name of the place (a city or a region) in each language, for cards and lists: "1515 · Lisbon". Optional: without it the part of `name` before the first comma or bracket is used. */
+    short: text.optional(),
+    lat: z.number().min(-90).max(90),
+    lon: z.number().min(-180).max(180),
+  }),
   /** "Bridge to today": a place in Portugal or the islands that can be visited now; the map marks THIS point. */
   bridge: z.strictObject({
+    /** The name of the place as it is written there (Portuguese): what a visitor looks for on a sign. */
     name: z.string(),
+    /** The name in each language of the site, shown first (bold); `name` then goes beneath it. Optional: without it `name` is the title. */
+    title: text.optional(),
     address: z.string(),
     lat: z.number(),
     lon: z.number(),

@@ -11,7 +11,7 @@ import type { LText } from '../lib/localize';
 
 interface Props {
   lang: Lang;
-  bridge: { name: string; address: string; lat: number; lon: number; url: string; note: LText };
+  bridge: { name: string; title?: LText | undefined; address: string; lat: number; lon: number; url: string; note: LText };
   /** Id of the card: "See on the map" centres the map on it and opens its preview. */
   cardId: string;
   /** Language tag of the note when it differs from the page (placeholder filler is Latin). */
@@ -20,30 +20,26 @@ interface Props {
 
 const { lang, bridge, cardId, textLang } = Astro.props;
 const external = /^https?:\/\/\S+$/.test(bridge.url);
+// Bold: the name in the language of the page (when the data has it); beneath it, small, the name as written on the spot.
+const title = bridge.title?.[lang]?.trim() || bridge.name;
+const portugueseName = title !== bridge.name ? bridge.name : undefined;
 // The map page reads ?id= : it centres on that card and opens its preview.
 const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
 ---
 <section class="bridge" aria-labelledby="bridge-title" data-bridge>
   <h2 id="bridge-title">{t(lang, 'ui.bridge')}</h2>
-  <p class="bridge__name">{bridge.name}</p>
-  <address class="bridge__address">{bridge.address}</address>
+  <p class="bridge__name">{title}</p>
+  {portugueseName && <p class="bridge__local" lang="pt">{portugueseName}</p>}
   <p class="bridge__note" lang={textLang}>{bridge.note[lang]}</p>
+  <address class="bridge__address">{bridge.address}</address>
+  <p class="bridge__go">
+    <a class="button" href={osmLink(bridge.lat, bridge.lon)} rel="noopener" data-directions data-lat={bridge.lat} data-lon={bridge.lon} data-label={bridge.name}>
+      {t(lang, 'ui.directions')}
+    </a>
+  </p>
   <ul class="bridge__links">
-    <li><a class="button button--secondary" href={mapHref}>{t(lang, 'ui.open_on_map')}</a></li>
-    <li>
-      <a class="button button--secondary" href={osmLink(bridge.lat, bridge.lon)} rel="noopener" data-directions data-lat={bridge.lat} data-lon={bridge.lon} data-label={bridge.name}>
-        {t(lang, 'ui.directions')}
-      </a>
-    </li>
-    {
-      external && (
-        <li>
-          <a class="button button--secondary" href={bridge.url} rel="noopener">
-            {t(lang, 'card.official_site')}
-          </a>
-        </li>
-      )
-    }
+    <li><a href={mapHref}>{t(lang, 'ui.open_on_map')}</a></li>
+    {external && <li><a href={bridge.url} rel="noopener">{t(lang, 'card.official_site')}</a></li>}
   </ul>
 </section>
 
@@ -67,9 +63,17 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
     font-weight: var(--weight-strong);
   }
 
+  /* The Portuguese name: small, so that the place can be found by its sign. */
+  .bridge__local {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
   .bridge__address {
+    margin-block-start: var(--space-2);
     font-style: normal;
     color: var(--color-ink-muted);
+    font-size: var(--text-sm);
   }
 
   .bridge__note {
@@ -77,11 +81,21 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
     max-width: var(--measure);
   }
 
+  /* One main action, "How to get there"; the map and the official site are plain links. */
+  .bridge__go {
+    margin-block-start: var(--space-3);
+  }
+
   .bridge__links {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-2) var(--space-3);
-    margin-block-start: var(--space-3);
+    gap: 0 var(--space-4);
     list-style: none;
+  }
+
+  .bridge__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
   }
 </style>

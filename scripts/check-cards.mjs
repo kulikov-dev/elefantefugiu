@@ -230,6 +230,9 @@ for (const ev of events) {
     const plain = (x) => x.replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/\s+/g, ' ').trim();
     const bridgeText = plain(bridgeBlock);
     for (const [what, want] of [['name', ev.bridge.name], ['address', ev.bridge.address], ['note', ev.bridge.note[lang]]]) if (!bridgeText.includes(want)) fail(`bridge ${what} "${want}" is not in the bridge block`);
+    // One main button ("How to get there"); the map and the official site are plain links. With a title in the data it comes first, the Portuguese name beneath it.
+    if ((bridgeBlock.match(/class="button"/g) ?? []).length !== 1) fail('the bridge block must have one main button; the other links are plain text links');
+    if (ev.bridge.title?.[lang] && (bridgeBlock.indexOf(ev.bridge.title[lang]) < 0 || (ev.bridge.title[lang] !== ev.bridge.name && bridgeBlock.indexOf(ev.bridge.name) < bridgeBlock.indexOf(ev.bridge.title[lang])))) fail('bridge: the title in the language of the page comes first, the Portuguese name beneath it');
     const labels = { pt: { map: 'Ver no mapa', how: 'Como chegar', site: 'Sítio oficial' }, en: { map: 'Open on map', how: 'Get directions', site: 'Official website' } }[lang];
     const links = [...bridgeBlock.matchAll(/<a ([^>]*)>([\s\S]*?)<\/a>/g)].map((m) => ({ attrs: m[1], text: plain(m[2]) }));
     const how = links.find((l) => l.text === labels.how);
