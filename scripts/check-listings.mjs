@@ -358,7 +358,9 @@ for (const lang of ['pt', 'en']) {
       if (!body.includes(`${epoch.years.from}\u2013${epoch.years.to}`)) fail(`tile "${epoch.id}" misses the years`);
     } else {
       if (!cls.includes('tile--soon') || /<a\b/.test(body)) fail(`tile "${epoch.id}" has no page: "coming soon" without a link expected`);
-      if (!body.includes(epoch.years_label[lang])) fail(`tile "${epoch.id}" misses years_label`);
+      // An MVP epoch that has no published card yet has numeric years only; the others have years_label.
+      const yearsText = epoch.years_label ? epoch.years_label[lang] : `${epoch.years.from}–${epoch.years.to}`;
+      if (!body.includes(yearsText)) fail(`tile "${epoch.id}" misses its years`);
       if (!/(Em breve|Coming soon)/.test(body)) fail(`tile "${epoch.id}" misses the "coming soon" label`);
     }
   });

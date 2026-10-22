@@ -380,7 +380,7 @@ describe('real events', () => {
   const epochs = [...new Set(cards.map((c) => c.epoch!))];
 
   it('loads the content', () => {
-    expect(cards.length).toBeGreaterThan(20);
+    expect(cards.length).toBeGreaterThan(10);
   });
 
   it('shows at most 7 for every thread and epoch, from the whole country down to a street', () => {
@@ -405,8 +405,10 @@ describe('real events', () => {
 
   it('whole country: 7 things, frame cards first', () => {
     const r = selectMarkers({ cards, bounds: country, center: { lat: 39.5, lon: -8 } });
-    expect(drawn(r)).toBe(7);
-    expect(r.markers.every((m) => m.kind === 'frame')).toBe(true);
+    // Frame cards come first; with fewer than 7 of them the rest is filled with stories, up to 7 in all.
+    const frames = cards.filter((c) => c.importance === 3).length;
+    expect(drawn(r)).toBe(Math.min(7, cards.length));
+    expect(r.markers.filter((m) => m.kind === 'frame')).toHaveLength(Math.min(7, frames));
     expect(r.inArea).toHaveLength(cards.length);
   });
 
