@@ -79,7 +79,8 @@
     "epoch_nav": "Navegação dentro da época",
     "prev": "Anterior",
     "next": "Seguinte",
-    "not_translated": "Esta página ainda não foi traduzida. É mostrado o texto em inglês."
+    "not_translated": "Esta página ainda não foi traduzida. É mostrado o texto em inglês.",
+    "more_toggle": "Saber mais"
   },
   "notfound": {
     "title": "Página não encontrada",

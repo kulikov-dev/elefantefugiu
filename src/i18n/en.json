@@ -79,7 +79,8 @@
     "epoch_nav": "Navigation within the epoch",
     "prev": "Previous",
     "next": "Next",
-    "not_translated": "This page has not been translated yet. The English text is shown."
+    "not_translated": "This page has not been translated yet. The English text is shown.",
+    "more_toggle": "More"
   },
   "notfound": {
     "title": "Page not found",
