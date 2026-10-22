@@ -29,16 +29,26 @@ test('epochHasContent: needs mvp and a published event', () => {
   assert.equal(epochHasContent(ep('e4', 4), [ev('x', 'e4', 1900, ['sea'], 'draft')]), false);
 });
 
-test('neighbourEpochs: by order, "coming soon" when the neighbour has no content', () => {
+test('neighbourEpochs: the nearest epoch with content on each side; epochs without content are skipped, none means no link', () => {
   const first = neighbourEpochs(ep('e1', 1), epochs, events);
   assert.equal(first.prev, null);
-  assert.deepEqual([first.next?.epoch.id, first.next?.available], ['e2', true]);
+  assert.equal(first.next?.id, 'e2');
   const middle = neighbourEpochs(ep('e2', 2), epochs, events);
-  assert.deepEqual([middle.prev?.epoch.id, middle.prev?.available], ['e1', true]);
-  assert.deepEqual([middle.next?.epoch.id, middle.next?.available], ['e3', false]); // exists, no content: "Em breve"
+  assert.equal(middle.prev?.id, 'e1');
+  assert.equal(middle.next, null); // e3 exists but has no content: no dead end, no link
   const last = neighbourEpochs(ep('e3', 3, false), epochs, events);
   assert.equal(last.next, null);
+  assert.equal(last.prev?.id, 'e2');
   assert.deepEqual(neighbourEpochs(ep('ghost', 9), epochs, events), { prev: null, next: null });
+});
+
+test('neighbourEpochs jumps over a "coming soon" epoch to the next one that has a page', () => {
+  const four = [ep('a', 1), ep('b', 2, false), ep('c', 3, false), ep('d', 4)];
+  const evs = [ev('x', 'a', 1900, ['sea']), ev('y', 'd', 1950, ['sea'])];
+  assert.equal(neighbourEpochs(four[0]!, four, evs).next?.id, 'd');
+  assert.equal(neighbourEpochs(four[3]!, four, evs).prev?.id, 'a');
+  assert.equal(neighbourEpochs(four[1]!, four, evs).prev?.id, 'a');
+  assert.equal(neighbourEpochs(four[1]!, four, evs).next?.id, 'd');
 });
 
 test('threadCountsInEpoch counts primary and second thread, published only', () => {
@@ -90,13 +100,14 @@ test('epochYearsText: label wins, numeric range is the fallback', () => {
   assert.equal(epochYearsText({}, 'pt'), '');
 });
 
-test('neighbours in the real data: epoch 4 has "coming soon" on the left, 6 has "coming soon" on the right', () => {
-  const byOrder = (n: number) => realEpochs.find((e) => e.order === n)!;
+test('neighbours in the real data: with no content there is none; with content in two MVP epochs they find each other over the epochs in between', () => {
   const none: EventData[] = [];
-  assert.equal(neighbourEpochs(byOrder(4), realEpochs, none).prev?.epoch.order, 3);
-  assert.equal(neighbourEpochs(byOrder(4), realEpochs, none).prev?.available, false);
-  assert.equal(neighbourEpochs(byOrder(6), realEpochs, none).next?.epoch.order, 7);
-  assert.equal(neighbourEpochs(byOrder(6), realEpochs, none).next?.available, false);
+  const [a, b] = realEpochs.filter((e) => e.mvp).sort((x, y) => x.order - y.order);
+  assert.deepEqual(neighbourEpochs(a!, realEpochs, none), { prev: null, next: null });
+  const some = [ev('p', a!.id, 1400, ['sea']), ev('q', b!.id, 1760, ['sea'])];
+  assert.equal(neighbourEpochs(a!, realEpochs, some).next?.id, b!.id);
+  assert.equal(neighbourEpochs(b!, realEpochs, some).prev?.id, a!.id);
+  assert.equal(neighbourEpochs(b!, realEpochs, some).next, null);
 });
 
 test('epochSwitcherItems: all epochs by order, current marked, link only with a page, rest "soon"', () => {

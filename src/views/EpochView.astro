@@ -22,7 +22,6 @@ import {
   neighbourEpochs,
   threadCountsInEpoch,
   type EpochData,
-  type NeighbourEpoch,
 } from '../lib/epochs';
 import { mascotAllowed } from '../lib/mascot';
 import { toMapCards } from '../lib/map-cards';
@@ -54,15 +53,10 @@ const mapThreads = Object.fromEntries(site.threads.map((th) => [th.id, { name: t
 
 const switcherItems = epochSwitcherItems(epoch, site.epochs, site.events);
 const { prev, next } = neighbourEpochs(epoch, site.epochs, site.events);
-const neighbour = (n: NeighbourEpoch<EpochData> | null, dir: string, rel: 'prev' | 'next') =>
-  n
-    ? n.available
-      ? { dir, title: n.epoch.name[lang], href: epochHref(lang, n.epoch.slug[lang]), rel }
-      : { dir, title: n.epoch.name[lang], note: t(lang, 'ui.soon') }
-    : null;
+const neighbour = (n: EpochData | null, dir: string, rel: 'prev' | 'next') => (n ? { dir, title: n.name[lang], href: epochHref(lang, n.slug[lang]), rel } : null);
 
 // The elephant walks to the next epoch, unless that page (or this one) is about the regime.
-const walkingAllowed = Boolean(next?.available) && mascotAllowed({ epoch: epoch.id }) && mascotAllowed({ epoch: next?.epoch.id });
+const walkingAllowed = Boolean(next) && mascotAllowed({ epoch: epoch.id }) && mascotAllowed({ epoch: next?.id });
 
 const alternates = altPaths((l) => epochHref(l, epoch.slug[l]));
 // Pages that show test text stay out of search results until the text is real.
@@ -204,8 +198,8 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
     <PagerNav
       label={t(lang, 'epoch.neighbours_label')}
-      prev={neighbour(prev, `\u2190 ${t(lang, 'epoch.back_to')}`, 'prev')}
-      next={neighbour(next, `${t(lang, 'epoch.go_to')} \u2192`, 'next')}
+      prev={neighbour(prev, `\u2190 ${t(lang, 'epoch.prev')}`, 'prev')}
+      next={neighbour(next, `${t(lang, 'epoch.next')} \u2192`, 'next')}
       mascot={walkingAllowed ? 'walk' : undefined}
     />
   </div>

@@ -19,23 +19,23 @@ export function epochHasContent(epoch: Pick<EpochData, 'id' | 'mvp'>, events: re
   return epoch.mvp && epochFeed(epoch, events).length > 0;
 }
 
-export interface NeighbourEpoch<E> {
-  epoch: E;
-  /** False means "Coming soon": the epoch exists in the data but has no content yet. */
-  available: boolean;
-}
-
-/** The epochs next to this one in `order`; an unavailable neighbour is shown as "Coming soon". */
+/**
+ * The nearest epoch with a page on each side of this one, in `order`; epochs without content ("Coming soon") are skipped, so a
+ * link never leads to a dead end. `null` when there is none in that direction: the page then shows no link there.
+ */
 export function neighbourEpochs<E extends Pick<EpochData, 'id' | 'order' | 'mvp'>>(
   epoch: E,
   epochs: readonly E[],
   events: readonly EventData[],
-): { prev: NeighbourEpoch<E> | null; next: NeighbourEpoch<E> | null } {
+): { prev: E | null; next: E | null } {
   const sorted = [...epochs].sort((a, b) => a.order - b.order);
   const index = sorted.findIndex((e) => e.id === epoch.id);
-  const wrap = (e: E | undefined): NeighbourEpoch<E> | null => (e ? { epoch: e, available: epochHasContent(e, events) } : null);
   if (index < 0) return { prev: null, next: null };
-  return { prev: wrap(sorted[index - 1]), next: wrap(sorted[index + 1]) };
+  const available = (e: E) => epochHasContent(e, events);
+  return {
+    prev: sorted.slice(0, index).reverse().find(available) ?? null,
+    next: sorted.slice(index + 1).find(available) ?? null,
+  };
 }
 
 /** Cards per thread inside one epoch (a card counts for its primary and its second thread). */

@@ -222,17 +222,19 @@ for (const lang of ['pt', 'en']) {
       }
     });
 
-    // neighbouring epochs: link when the neighbour has a page, otherwise "coming soon" as plain text
+    // neighbouring epochs: the nearest epoch with a page on each side; none on a side means no link there (never "coming soon")
     const idx = epochs.findIndex((e) => e.id === epoch.id);
-    const pager = html.match(/<nav class="pager"[\s\S]*?<\/nav>/)?.[0] ?? '';
-    for (const [offset, rel] of [[-1, 'prev'], [1, 'next']]) {
-      const nb = epochs[idx + offset];
-      if (!nb) continue;
-      if (hasPage(nb)) {
-        if (!new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${nb.slug[lang]}/"[^>]*rel="${rel}"|<a [^>]*rel="${rel}"[^>]*href="[^"]*/${SEG[lang].epoch}/${nb.slug[lang]}/"`).test(pager)) fail(`${rel} epoch "${nb.id}" is not linked`);
-      } else if (!pager.includes('pager__link--soon') || !pager.includes(nb.name[lang])) {
-        fail(`${rel} epoch "${nb.id}" has no content and must show "coming soon"`);
+    const pager = html.match(/<nav class="pager[^"]*"[\s\S]*?<\/nav>/)?.[0] ?? '';
+    const labels = { pt: ['Época anterior', 'Época seguinte'], en: ['Previous era', 'Next era'], ru: ['Предыдущая эпоха', 'Следующая эпоха'] }[lang];
+    if (pager.includes('pager__link--soon')) fail('the epoch pager must not show "coming soon" items');
+    for (const [rel, list, label] of [['prev', epochs.slice(0, idx).reverse(), labels[0]], ['next', epochs.slice(idx + 1), labels[1]]]) {
+      const nb = list.find(hasPage);
+      const links = [...pager.matchAll(new RegExp(`<a [^>]*rel="${rel}"[^>]*>[^]*?</a>`, 'g'))].map((m) => m[0]);
+      if (!nb) {
+        if (links.length > 0) fail(`no ${rel} epoch with a page, but the pager has a ${rel} link`);
+        continue;
       }
+      if (links.length !== 1 || !links[0].includes(`/${SEG[lang].epoch}/${nb.slug[lang]}/"`) || !links[0].includes(label) || !links[0].includes(nb.name[lang])) fail(`${rel} link must lead to "${nb.id}" and say "${label}"`);
     }
   }
 
