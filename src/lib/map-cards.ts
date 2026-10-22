@@ -1,6 +1,6 @@
 // Data the map page needs about each card, in one language. Pure helpers (no Astro imports).
 import type { Lang } from '../i18n/routes';
-import { formatYear, type EventData } from './events';
+import { formatYear, placeShort, type EventData } from './events';
 import type { EpochData } from './epochs';
 import { normalizeMinAge, normalizeSensitive, type MinAge } from './family';
 
@@ -31,13 +31,13 @@ export function toMapCards(events: readonly EventData[], lang: Lang, hrefOf: (ev
     id: e.id,
     lat: e.bridge.lat,
     lon: e.bridge.lon,
-    bridgeName: e.bridge.name,
+    bridgeName: e.bridge.title?.[lang]?.trim() || e.bridge.name,
     bridgeAddress: e.bridge.address,
     importance: e.importance,
     threads: [...e.threads],
     epoch: e.epoch,
     title: e.title[lang],
-    meta: `${formatYear(e, lang)} · ${e.place.name}`,
+    meta: `${formatYear(e, lang)} · ${placeShort(e.place, lang)}`,
     hook: e.hook[lang],
     href: hrefOf(e),
     minAge: normalizeMinAge(e.min_age),

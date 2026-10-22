@@ -9,6 +9,7 @@ import {
   formatYear,
   isFlashMoment,
   nearbyCards,
+  placeShort,
   NEARBY_RADIUS_KM,
   MAX_NEARBY,
   type EventData,
@@ -122,4 +123,16 @@ test('isFlashMoment: only the Estado Novo cards that begin in 1974', () => {
   assert.equal(isFlashMoment({ epoch: E, year: { from: 1933, to: 1974 } }), false);
   assert.equal(isFlashMoment({ epoch: E, year: 1961 }), false);
   assert.equal(isFlashMoment({ epoch: 'avis-e-descobrimentos', year: 1974 }), false);
+});
+
+test('placeShort: the short name of the data in the language of the page, else the part before the first comma or bracket', () => {
+  const place = { name: 'Lisboa, Paço da Ribeira (hoje Praça do Comércio)' };
+  assert.equal(placeShort(place, 'pt'), 'Lisboa');
+  assert.equal(placeShort(place, 'ru'), 'Lisboa');
+  assert.equal(placeShort({ name: 'Malaca (Melaka), ponte sobre o rio' }, 'en'), 'Malaca');
+  assert.equal(placeShort({ name: 'Vale do Douro (Alto Douro)' }, 'pt'), 'Vale do Douro');
+  const withShort = { ...place, short: { pt: 'Lisboa', en: 'Lisbon', ru: 'Лиссабон' } };
+  assert.equal(placeShort(withShort, 'ru'), 'Лиссабон');
+  assert.equal(placeShort(withShort, 'en'), 'Lisbon');
+  assert.equal(placeShort({ name: 'Porto' }, 'ru'), 'Porto');
 });

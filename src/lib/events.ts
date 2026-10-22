@@ -141,6 +141,17 @@ export function firstSentence(text: string, maxLength = 200): string {
 }
 
 /** Long date in the page language, in UTC so that the stored day does not shift. */
+/**
+ * The short name of a place for cards and lists: "Lisbon". The data's `place.short` in the language of the page when there is
+ * one; otherwise the part of the full name before the first comma or bracket ("Lisboa, Paço da Ribeira (hoje Praça do Comércio)"
+ * gives "Lisboa"). The full name stays on the page of the story itself.
+ */
+export function placeShort(place: { name: string; short?: { pt: string; en: string; ru: string } | undefined }, lang: Lang): string {
+  const own = place.short?.[lang]?.trim();
+  if (own) return own;
+  return place.name.split(/[,(]/)[0]!.trim() || place.name;
+}
+
 /** A short numeric date (15/10/2026, in Russian 15.10.2026) for places where the long form is too much. */
 export function formatShortDate(date: Date, lang: Lang): string {
   return new Intl.DateTimeFormat(LOCALES[lang], { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }).format(date);

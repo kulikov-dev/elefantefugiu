@@ -4,7 +4,7 @@
 //   grid: a tile that links to the card page (thread pages).
 import { t } from '../i18n';
 import { storyPath, withBase, threadHref, type Lang } from '../i18n/routes';
-import { formatYear, isFlashMoment, textLangOf, type EventData } from '../lib/events';
+import { formatYear, isFlashMoment, placeShort, textLangOf, type EventData } from '../lib/events';
 import type { ThreadData } from '../lib/epochs';
 import AgeBadge from './AgeBadge.astro';
 import TagLabel from './TagLabel.astro';
@@ -46,7 +46,7 @@ const textLang = textLangOf(event, lang);
       )
     }
     <div class="ecard__titles">
-      <p class="ecard__meta">{formatYear(event, lang)} &middot; {event.place.name}</p>
+      <p class="ecard__meta">{formatYear(event, lang)} &middot; {placeShort(event.place, lang)}</p>
       <h3 class="ecard__title"><a href={href}>{event.title[lang]}</a></h3>
     </div>
   </div>
