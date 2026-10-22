@@ -2,7 +2,9 @@
 // A thread is shown when it has at least MIN_CARDS_PER_THREAD ready cards,
 // counting a card for both its primary and its second thread.
 
-export const MIN_CARDS_PER_THREAD = 5;
+// 1: every thread that has a published card is in the filters (decision of the owner after the first real cards; it was 5
+// while there were only test cards). Raise it to hide threads that are still thin.
+export const MIN_CARDS_PER_THREAD = 1;
 
 export interface ThreadedCard {
   threads: readonly string[];
