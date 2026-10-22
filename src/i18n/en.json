@@ -220,6 +220,7 @@
     "army_play": "Show one by one",
     "army_playing": "Showing…",
     "army_ratio": "The group “{big}” has about {x} times as many people as the group “{small}” (comparing the middle of the estimates).",
+    "people_exact": "{n} people",
     "people_range": "from {min} to {max} people",
     "dots_title": "{title}: {caption}",
     "table_group": "Group",

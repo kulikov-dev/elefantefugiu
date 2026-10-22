@@ -168,7 +168,7 @@ for (const ev of events) {
 
     // ----- images, links, buttons, ids -----
     // The mascot pictures are decorative (empty alt on purpose) and are checked by check-mascot.mjs.
-    for (const img of html.matchAll(/<img\b(?![^>]*\bclass="mascot)[^>]*>/g)) {
+    for (const img of html.matchAll(/<img\b(?![^>]*\bclass="(?:mascot|minimap))[^>]*>/g)) {
       const alt = img[0].match(/\balt="([^"]*)"/);
       if (!alt || alt[1].trim() === '') fail(`img without alt text: ${img[0].slice(0, 80)}`);
     }
@@ -258,7 +258,7 @@ for (const ev of events) {
     if (!has(/(corrigir|report)\/\?url=/)) fail('"Found a mistake?" link with the card address is missing');
     if (!has(/rel="(prev|next)"/) && events.filter((e) => e.epoch === ev.epoch).length > 1) fail('previous/next links are missing');
     if (has(/<script[^>]+src="https?:/)) fail('external script');
-    if (/<img\b(?![^>]*\bclass="mascot)[^>]*\bsrc="[^"]*"[^>]*>/.test(html) && !/loading="lazy"/.test(html)) fail('illustration is not lazy-loaded');
+    if (/<img\b(?![^>]*\bclass="(?:mascot|minimap))[^>]*\bsrc="[^"]*"[^>]*>/.test(html) && !/loading="lazy"/.test(html)) fail('illustration is not lazy-loaded');
     if (!full.includes('type="module"')) fail('layer-state script is missing');
   }
 }

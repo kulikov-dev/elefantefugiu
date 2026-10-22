@@ -1,0 +1,90 @@
+---
+// A small map of the story's point (its bridge to today) on a card page, from 64rem up. A few map tiles laid side by side as
+// ordinary pictures with a marker in the middle (src/lib/minimap.ts): no script, no Leaflet. The whole picture is a link to the
+// map page centred on the story. Hidden on narrower screens; its pictures are lazy, so a phone does not load them.
+import { t } from '../i18n';
+import { pagePath, type Lang } from '../i18n/routes';
+import { mapLinkFor } from '../lib/map-data';
+import { minimapLayout } from '../lib/minimap';
+import { tileConfig } from '../lib/tiles';
+
+interface Props {
+  lang: Lang;
+  cardId: string;
+  point: { lat: number; lon: number };
+  /** Name of the place, for the label of the link. */
+  name: string;
+}
+
+const { lang, cardId, point, name } = Astro.props;
+const tile = tileConfig(process.env);
+const layout = minimapLayout(point.lat, point.lon, tile.url);
+const cell = 100 / 3;
+---
+<figure class="minimap">
+  <a class="minimap__frame" href={mapLinkFor(pagePath(lang, 'map'), cardId)} aria-label={`${t(lang, 'ui.open_on_map')}: ${name}`}>
+    <span class="minimap__grid" style={`width:${layout.inner.widthPct}%;left:${layout.inner.leftPct}%;top:${layout.inner.topPct}%`}>
+      {layout.tiles.map((tileImg) => <img class="minimap__tile" src={tileImg.url} alt="" width="256" height="256" loading="lazy" decoding="async" style={`left:${tileImg.col * cell}%;top:${tileImg.row * cell}%`} />)}
+    </span>
+    <span class="minimap__marker" aria-hidden="true"></span>
+  </a>
+  <figcaption class="minimap__credit" set:html={tile.attribution} />
+</figure>
+
+<style>
+  .minimap {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .minimap {
+      display: block;
+    }
+  }
+
+  .minimap__frame {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--epoch-line);
+  }
+
+  .minimap__frame:focus-visible {
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  /* The grid of tiles is square and wider than the frame; its place is set per card so that the point is in the middle. */
+  .minimap__grid {
+    position: absolute;
+    aspect-ratio: 1;
+    filter: var(--image-filter);
+  }
+
+  .minimap__tile {
+    position: absolute;
+    width: 33.3334%;
+    height: 33.3334%;
+  }
+
+  .minimap__marker {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    width: var(--size-dot-lg);
+    height: var(--size-dot-lg);
+    transform: translate(-50%, -50%);
+    border: var(--border-medium) solid var(--color-surface);
+    border-radius: 50%;
+    background: var(--epoch-primary);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .minimap__credit {
+    margin-block-start: var(--space-1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+</style>

@@ -9,21 +9,38 @@ interface Props {
   hook: string;
   /** Language tag of the texts when it differs from the page (placeholder filler is Latin). */
   textLang?: string;
+  /** The side column holds only the mini-map, which exists from 1024 px: on a phone the column is not there at all. */
+  asideWideOnly?: boolean;
 }
 
-const { lang, hook, textLang } = Astro.props;
+const { lang, hook, textLang, asideWideOnly = false } = Astro.props;
+// The side column (a picture of the story, or the mini-map) exists only when something is put into it.
+const hasAside = Astro.slots.has('aside');
 ---
 <div class="layers" data-card-layers>
-  <p class="hook" lang={textLang}>{hook}</p>
+  <div class:list={['layers__top', { 'layers__top--aside': hasAside }]}>
+    <div class="layers__main">
+      <p class="hook" lang={textLang}>{hook}</p>
 
-  <section id="historia" class="story" aria-labelledby="historia-title">
-    <h2 id="historia-title">{t(lang, 'card.story_heading')}</h2>
-    <div class="prose" lang={textLang}>
-      <slot name="story" />
+      <section id="historia" class="story" aria-labelledby="historia-title">
+        <h2 id="historia-title">{t(lang, 'card.story_heading')}</h2>
+        <div class="prose" lang={textLang}>
+          <slot name="story" />
+        </div>
+      </section>
+
+      <slot name="after" />
     </div>
-  </section>
+    {
+      hasAside && (
+        <aside class:list={['layers__aside', { 'layers__aside--wide-only': asideWideOnly }]}>
+          <slot name="aside" />
+        </aside>
+      )
+    }
+  </div>
 
-  <slot name="after" />
+  <slot name="below" />
 
   <details id="detalhes" class="more">
     <summary>
@@ -39,8 +56,45 @@ const { lang, hook, textLang } = Astro.props;
 </div>
 
 <style>
-  .layers > :global(* + *) {
+  .layers > :global(* + *),
+  .layers__main > :global(* + *) {
     margin-block-start: var(--space-5);
+  }
+
+  /* From 1024 px a side column to the right of the hook and the story, instead of an empty half of the page. On a phone the
+     column (a picture) comes first, as the picture of a story always did. */
+  .layers__top--aside {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .layers__aside {
+    grid-row: 1;
+  }
+
+  .layers__aside--wide-only {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .layers__top--aside {
+      grid-template-columns: minmax(0, 1fr) var(--card-aside-width);
+      align-items: start;
+    }
+
+    .layers__aside--wide-only {
+      display: block;
+    }
+
+    .layers__aside {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .layers__main {
+      grid-column: 1;
+      grid-row: 1;
+    }
   }
 
   .hook {

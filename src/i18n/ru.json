@@ -226,6 +226,7 @@
     "army_play": "Показать по одной",
     "army_playing": "Показываем…",
     "army_ratio": "Численность группы «{big}» относится к численности группы «{small}» примерно как {x} к 1 (сравниваем середины оценок).",
+    "people_exact": "{n} человек",
     "people_range": "от {min} до {max} человек",
     "dots_title": "{title}: {caption}",
     "table_group": "Группа",

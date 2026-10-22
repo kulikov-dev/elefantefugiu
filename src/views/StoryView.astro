@@ -8,6 +8,7 @@ import ArmyDots from '../components/ArmyDots.astro';
 import CardLayers from '../components/CardLayers.astro';
 import ShipScale from '../components/ShipScale.astro';
 import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
+import MiniMap from '../components/MiniMap.astro';
 import NextStory from '../components/NextStory.astro';
 import PagerNav from '../components/PagerNav.astro';
 import PlaceholderNotice from '../components/PlaceholderNotice.astro';
@@ -160,28 +161,34 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
     <div class="gated card__rest">
 
-    {
-      event.image && (
-        <figure class="figure">
-          <img
-            src={withBase(event.image.src)}
-            alt={event.image.alt[lang]}
-            width="1200"
-            height="630"
-            loading="lazy"
-            decoding="async"
-          />
-          <figcaption>
-            {event.image.caption && <span class="figure__caption">{event.image.caption[lang]}</span>}
-            <span class="figure__credit">
-              {t(lang, 'card.image_credit')}: {event.image.credit} &middot; {t(lang, 'card.image_license')}: {event.image.license}
-            </span>
-          </figcaption>
-        </figure>
-      )
-    }
-
-    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang}>
+    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} asideWideOnly={!event.image}>
+      <Fragment slot="aside">
+        {
+          event.image ? (
+            <figure class="figure">
+              <img
+                src={withBase(event.image.src)}
+                alt={event.image.alt[lang]}
+                width="1200"
+                height="630"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                {event.image.caption && <span class="figure__caption">{event.image.caption[lang]}</span>}
+                <span class="figure__credit">
+                  {t(lang, 'card.image_credit')}: {event.image.credit} &middot; {t(lang, 'card.image_license')}: {event.image.license}
+                </span>
+              </figcaption>
+            </figure>
+          ) : (
+            <MiniMap lang={lang} cardId={event.id} point={event.bridge} name={event.bridge.title?.[lang]?.trim() || event.bridge.name} />
+          )
+        }
+      </Fragment>
+      <Fragment slot="below">
+        {event.image && <MiniMap lang={lang} cardId={event.id} point={event.bridge} name={event.bridge.title?.[lang]?.trim() || event.bridge.name} />}
+      </Fragment>
       <p slot="story">{event.story[lang]}</p>
       <Fragment slot="after">
         {
