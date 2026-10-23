@@ -22,11 +22,13 @@ interface Props {
   /** The whole country: the target of the "All of Portugal" button (a reset of the view). */
   home?: Bounds;
   tile: TileConfig;
+  /** The map page also shows a place for the epoch timeline: a named slot under the map (the legend comes first). */
   /** 'page': the block owns ?fio= ?epoca= ?id= in the address. 'embedded': a parent page drives it with events. */
   mode?: 'page' | 'embedded';
 }
 
 const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page' } = Astro.props;
+const hasOverseas = cards.some((c) => c.overseas);
 
 /** {one, few, other} of a plural key as `cluster_one`, `cluster_few`, ... */
 const prefixed = (base: string, forms: Record<string, string>) => Object.fromEntries(Object.entries(forms).map(([k, v]) => [`${base}_${k}`, v]));
@@ -46,8 +48,22 @@ const config = {
     story: t(lang, 'map.marker_story'),
     ...prefixed('cluster', pluralForms(lang, 'map.cluster')),
     ...prefixed('in_area', pluralForms(lang, 'map.in_area')),
+    ...prefixed('overseas', pluralForms(lang, 'map.overseas')),
     zoom_in: t(lang, 'map.zoom_in'),
     zoom_out: t(lang, 'map.zoom_out'),
+    locate: t(lang, 'map.locate'),
+    locating: t(lang, 'map.locating'),
+    geo_denied: t(lang, 'map.geo_denied'),
+    geo_unavailable: t(lang, 'map.geo_unavailable'),
+    geo_unsupported: t(lang, 'map.geo_unsupported'),
+    geo_far: t(lang, 'map.geo_far'),
+    here: t(lang, 'map.here'),
+    home: t(lang, 'map.home'),
+    world: t(lang, 'map.world'),
+    tools_label: t(lang, 'map.tools_label'),
+    dist_m: t(lang, 'map.dist_m'),
+    dist_km: t(lang, 'map.dist_km'),
+    dist_here: t(lang, 'map.dist_here'),
     list_open: t(lang, 'map.list_open'),
     list_close: t(lang, 'map.list_close'),
     thread_label: t(lang, 'card.tags'),
@@ -68,9 +84,11 @@ const config = {
     <p class="map__unavailable" data-map-unavailable hidden role="status">{t(lang, 'map.unavailable')}</p>
 
     <div class="map__actions">
-      <button type="button" class="button button--secondary map__home" data-map-home>{t(lang, 'map.home')}</button>
       <button type="button" class="button button--secondary map__more" data-more hidden>{t(lang, 'ui.show_more')}</button>
     </div>
+
+    <button type="button" class="button button--secondary map__overseas" data-overseas hidden></button>
+    <p class="map__message" data-map-message role="status" hidden></p>
 
     <div class="map__preview" data-map-preview role="region" aria-labelledby="map-preview-title" tabindex="-1" hidden>
       <button type="button" class="map__preview-close" data-preview-close aria-label={t(lang, 'map.preview_close')}>
@@ -88,6 +106,7 @@ const config = {
       </div>
     </div>
   </div>
+
 
   <aside class="map__list" data-map-list aria-labelledby="map-list-title">
     <div class="map__list-head">
@@ -107,6 +126,19 @@ const config = {
 
   <p class="visually-hidden" role="status" data-map-status></p>
 </section>
+
+<!-- Under the map, outside the block (the list sheet of a phone sits over the bottom of the block): the legend and, on the map page, the epoch timeline. -->
+<div class="map-under" data-map-js hidden>
+  <ul class="map__legend" aria-label={t(lang, 'map.legend_label')}>
+    <li><span class="legend__mark legend__mark--frame" aria-hidden="true"></span>{t(lang, 'map.legend_frame')}</li>
+    <li><span class="legend__mark legend__mark--story" aria-hidden="true"></span>{t(lang, 'map.legend_story')}</li>
+    <li><span class="legend__mark legend__mark--cluster" aria-hidden="true"><span>3</span></span>{t(lang, 'map.legend_cluster')}</li>
+    {hasOverseas && <li><span class="legend__mark legend__mark--place" aria-hidden="true"></span>{t(lang, 'map.legend_place')}</li>}
+    <li data-legend-here hidden><span class="legend__mark legend__mark--here" aria-hidden="true"></span>{t(lang, 'map.legend_here')}</li>
+  </ul>
+
+  <slot name="under" />
+</div>
 
 <script>
   import '../scripts/map-loader';

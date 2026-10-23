@@ -76,6 +76,7 @@
   --font-label: 'Oswald', 'Oswald Fallback', 'Arial Narrow', Arial, sans-serif;
   --letter-label: 0.06em;
   --weight-strong: 600;
+  --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
   --text-base: 1.0625rem;
   --text-lg: 1.25rem;
@@ -169,7 +170,10 @@
   --map-sheet-open: 70%;
   --map-marker-frame: 1.75rem;
   --map-marker-story: 1.125rem;
-  --map-marker-cluster: 2.5rem;
+  --map-marker-cluster: 2.25rem;
+  --map-marker-me: 1.125rem;
+  /* The samples in the legend under the map. */
+  --legend-mark: 1.25rem;
   --map-marker-border: 2px;
   --map-marker-selected-scale: 1.25;
   --map-hit-area: 0.5rem;

@@ -6,6 +6,8 @@ import * as L from 'leaflet';
 import leafletCss from 'leaflet/dist/leaflet.css?url';
 import { parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
 import { directionsHref } from '../lib/directions';
+import { distanceParts } from '../lib/distance';
+import { distanceKm } from '../lib/events';
 import { isVisibleInMode } from '../lib/family';
 import { boundsAround, inBounds, selectMarkers, type Bounds, type MapCard } from '../lib/markers';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
@@ -19,6 +21,8 @@ interface CardInfo extends MapCard {
   meta: string;
   hook: string;
   href: string;
+  /** Where the story happened, when outside Portugal (marked in the "whole world" view). */
+  overseas?: { lat: number; lon: number; name: string };
 }
 
 interface Config {
@@ -48,6 +52,21 @@ const BEHAVIOUR = {
   /** Failed tiles before any loaded one that count as "no tiles". */
   tileErrorsBeforeGivingUp: 4,
   statusDelayMs: 400,
+  /** "Near me": the zoom the map goes to, how long to wait for a position, how old a remembered position may be. */
+  locateZoom: 13,
+  locateTimeoutMs: 12000,
+  locateMaxAgeMs: 60000,
+  /** "Whole world": the lowest zoom and how long a message stays. */
+  worldMinZoom: 2,
+  worldMaxZoom: 5,
+  messageMs: 9000,
+};
+
+/** Icons of the map tools (a 24 px grid, stroke drawn with currentColor). */
+const ICONS = {
+  locate: '<circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  home: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.3" fill="currentColor"/>',
+  world: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c3 3.2 3 14.8 0 18M12 3c-3 3.2-3 14.8 0 18" fill="none" stroke="currentColor" stroke-width="2"/>',
 };
 
 const toLatLngBounds = (b: Bounds) => L.latLngBounds([b.south, b.west], [b.north, b.east]);
@@ -78,7 +97,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const listCount = $('[data-list-count]');
   const listTitle = $('[data-map-list] h2');
   const moreButton = $<HTMLButtonElement>('[data-more]');
-  const homeButton = $<HTMLButtonElement>('[data-map-home]');
+  const overseasButton = $<HTMLButtonElement>('[data-overseas]');
+  const message = $('[data-map-message]');
+  const legendHere = document.querySelector<HTMLElement>('[data-legend-here]');
   const sheetToggle = $<HTMLButtonElement>('[data-sheet-toggle]');
   const sheet = $('[data-map-list]');
   const status = $('[data-map-status]');
@@ -96,6 +117,12 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     ? parseMapState(location.search, { ...cfg.known, cards })
     : parseMapState(`?${embeddedSearch}`, { ...cfg.known, cards });
   let more = 0;
+  /** "Whole world" view: the map may show everything, the places of stories abroad are marked. */
+  let world = false;
+  /** The reader's position after "Near me". Kept in memory only: never sent anywhere, never stored. */
+  let me: { lat: number; lon: number } | null = null;
+  let meMarker: L.Marker | null = null;
+  let messageTimer: number | undefined;
   let lastAreaKey = '';
   let lastListKey = '';
   let failed = false;
@@ -146,7 +173,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     L.divIcon({
       className: `mk ${cls}`,
       iconSize: null as unknown as L.PointExpression,
-      html: `<span class="mk__shape" aria-hidden="true">${text}</span><span class="mk__caption" aria-hidden="true"></span><span class="visually-hidden"></span>`,
+      html: `<span class="mk__shape" aria-hidden="true">${text ? `<span class="mk__num">${text}</span>` : ''}</span><span class="mk__caption" aria-hidden="true"></span><span class="visually-hidden"></span>`,
     });
 
   const addLayer = (key: string, lat: number, lon: number, cls: string, label: string, text: string, onActivate: () => void) => {
@@ -216,6 +243,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     // A removed marker would drop keyboard focus to the page; keep it on the map instead.
     if (focusedKey && !layers.has(focusedKey)) canvas.focus();
 
+    drawPlaces();
+    updateOverseas();
     // The list and its announcement belong to the map page; on an epoch page the feed is the list.
     if (pageMode) {
       renderList(result.inArea);
@@ -227,8 +256,22 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
 
   // ---- list "In this area" -----------------------------------------------------------------------------------
 
-  const renderList = (ids: string[]) => {
-    const key = ids.join('|') + '#' + (state.id ?? '');
+  const numberFormat = new Intl.NumberFormat(cfg.pluralLocale, { maximumFractionDigits: 1 });
+  /** "in 350 m", "in 2.1 km" (src/lib/distance.ts decides what is said; the phrases come from the strings of the page). */
+  const distanceText = (km: number): string => {
+    const d = distanceParts(km);
+    if (d.kind === 'here') return cfg.strings.dist_here!;
+    return (d.kind === 'm' ? cfg.strings.dist_m! : cfg.strings.dist_km!).replace('{n}', numberFormat.format(d.n));
+  };
+  const kmFromMe = (id: string): number => {
+    const c = byId.get(id)!;
+    return me ? distanceKm(me, c) : 0;
+  };
+
+  const renderList = (areaIds: string[]) => {
+    // After "Near me" the list is ordered by distance from the reader, nearest first.
+    const ids = me ? [...areaIds].sort((a, b) => kmFromMe(a) - kmFromMe(b)) : areaIds;
+    const key = ids.join('|') + '#' + (state.id ?? '') + (me ? `@${me.lat},${me.lon}` : '');
     if (key === lastListKey) return;
     lastListKey = key;
     listItems.replaceChildren(
@@ -246,10 +289,13 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         const title = document.createElement('span');
         title.className = 'map__item-title';
         title.textContent = card.title;
+        const hook = document.createElement('span');
+        hook.className = 'map__item-hook';
+        hook.textContent = card.hook;
         const meta = document.createElement('span');
         meta.className = 'map__item-meta';
-        meta.textContent = card.meta;
-        a.append(title, meta);
+        meta.textContent = me ? `${card.meta} · ${distanceText(kmFromMe(id))}` : card.meta;
+        a.append(title, hook, meta);
         li.append(mark, a);
         return li;
       }),
@@ -337,11 +383,181 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     refreshMarkers();
   });
 
-  // "All of Portugal": resets the view only; filters and the open preview stay as they are.
-  homeButton.addEventListener('click', () => {
+  // ---- places abroad, the "whole world" view ---------------------------------------------------------------------
+
+  const placeLayers = new Map<string, L.Marker>();
+  const overseasCards = () => cards.filter((c) => c.overseas && passesFilters(c, state));
+
+  /** The place where a story happened, for a story abroad: a hollow diamond, only in the "whole world" view. */
+  const drawPlaces = () => {
+    const wanted = new Set(world ? overseasCards().map((c) => c.id) : []);
+    for (const [id, marker] of placeLayers) {
+      if (!wanted.has(id)) {
+        marker.remove();
+        placeLayers.delete(id);
+      }
+    }
+    for (const id of wanted) {
+      if (placeLayers.has(id)) continue;
+      const card = byId.get(id)!;
+      const o = card.overseas!;
+      const marker = L.marker([o.lat, o.lon], { icon: makeIcon('mk--place', ''), keyboard: true, title: '' });
+      marker.on('click', () => select(id, true));
+      marker.addTo(map);
+      const el = marker.getElement()!;
+      el.querySelector('.visually-hidden')!.textContent = `${card.title}, ${o.name}`;
+      el.querySelector('.mk__caption')!.textContent = o.name;
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          select(id, true);
+        }
+      });
+      placeLayers.set(id, marker);
+    }
+  };
+
+  /** The plate at the edge of the map: how many stories of the current filter lie abroad. Only in the Portugal view. */
+  const updateOverseas = () => {
+    const n = world ? 0 : overseasCards().length;
+    overseasButton.hidden = n === 0;
+    if (n > 0) overseasButton.textContent = fill(pickPlural(cfg.strings, 'overseas', n, cfg.pluralLocale), n);
+  };
+
+  const worldBounds = (): L.LatLngBounds => {
+    const points = overseasCards().map((c) => [c.overseas!.lat, c.overseas!.lon] as L.LatLngTuple);
+    const box = toLatLngBounds(cfg.home);
+    return points.length > 0 ? box.extend(L.latLngBounds(points)) : L.latLngBounds([-55, -170], [75, 170]);
+  };
+
+  const setWorld = (on: boolean) => {
+    world = on;
     more = 0;
-    map.fitBounds(toLatLngBounds(cfg.home), { animate });
+    if (on) {
+      map.setMaxBounds(L.latLngBounds([-85, -180], [85, 180]));
+      map.setMinZoom(BEHAVIOUR.worldMinZoom);
+      map.fitBounds(worldBounds(), { padding: [BEHAVIOUR.fitPadding, BEHAVIOUR.fitPadding], maxZoom: BEHAVIOUR.worldMaxZoom, animate });
+    } else {
+      map.setMaxBounds(maxBounds);
+      setMinZoom();
+      map.fitBounds(toLatLngBounds(cfg.home), { animate });
+    }
+    refreshMarkers();
+  };
+
+  overseasButton.addEventListener('click', () => setWorld(true));
+
+  // ---- "Near me" -------------------------------------------------------------------------------------------------
+
+  const say = (text: string) => {
+    window.clearTimeout(messageTimer);
+    message.textContent = text;
+    message.hidden = text === '';
+    if (text) messageTimer = window.setTimeout(() => say(''), BEHAVIOUR.messageMs);
+  };
+
+  const setMe = (pos: { lat: number; lon: number } | null) => {
+    me = pos;
+    meMarker?.remove();
+    meMarker = null;
+    if (legendHere) legendHere.hidden = !pos;
+    if (pos && inBounds(pos, fromLatLngBounds(maxBounds_()))) {
+      meMarker = L.marker([pos.lat, pos.lon], {
+        icon: L.divIcon({ className: 'mk mk--me', iconSize: null as unknown as L.PointExpression, html: `<span class="mk__shape" aria-hidden="true"></span><span class="visually-hidden">${cfg.strings.here}</span>` }),
+        keyboard: false,
+        interactive: false,
+        zIndexOffset: 1000,
+      }).addTo(map);
+    }
+    lastListKey = '';
+  };
+  const maxBounds_ = () => (world ? L.latLngBounds([-85, -180], [85, 180]) : maxBounds);
+
+  /** Asks the browser for the position once. Nothing is sent or stored: the position lives in this page only. */
+  const locate = (button: HTMLElement) => {
+    if (me) {
+      // A second press switches it off: the list goes back to the order of the map.
+      setMe(null);
+      button.setAttribute('aria-pressed', 'false');
+      say('');
+      refreshMarkers();
+      return;
+    }
+    if (!('geolocation' in navigator)) {
+      say(cfg.strings.geo_unsupported!);
+      return;
+    }
+    say(cfg.strings.locating!);
+    button.setAttribute('aria-busy', 'true');
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        button.removeAttribute('aria-busy');
+        const pos = { lat: position.coords.latitude, lon: position.coords.longitude };
+        const near = inBounds(pos, fromLatLngBounds(maxBounds));
+        setMe(pos);
+        button.setAttribute('aria-pressed', 'true');
+        if (near) {
+          if (world) setWorld(false);
+          map.setView([pos.lat, pos.lon], BEHAVIOUR.locateZoom, { animate });
+          say('');
+        } else say(cfg.strings.geo_far!);
+        refreshMarkers();
+      },
+      (error) => {
+        button.removeAttribute('aria-busy');
+        say(error.code === 1 ? cfg.strings.geo_denied! : cfg.strings.geo_unavailable!);
+      },
+      { enableHighAccuracy: false, timeout: BEHAVIOUR.locateTimeoutMs, maximumAge: BEHAVIOUR.locateMaxAgeMs },
+    );
+  };
+
+  // ---- the tools under the zoom buttons ---------------------------------------------------------------------------
+
+  const toolButton = (icon: keyof typeof ICONS, title: string, onClick: (button: HTMLAnchorElement) => void, pressed = false): HTMLAnchorElement => {
+    const a = L.DomUtil.create('a', 'map__tool') as HTMLAnchorElement;
+    a.href = '#';
+    a.title = title;
+    a.setAttribute('role', 'button');
+    a.setAttribute('aria-label', title);
+    if (pressed) a.setAttribute('aria-pressed', 'false');
+    a.innerHTML = `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">${ICONS[icon]}</svg>`;
+    L.DomEvent.on(a, 'click', (e) => {
+      L.DomEvent.preventDefault(e);
+      L.DomEvent.stopPropagation(e);
+      onClick(a);
+    });
+    // Space also presses a button (a link answers Enter only).
+    a.addEventListener('keydown', (e) => {
+      if (e.key === ' ') {
+        e.preventDefault();
+        onClick(a);
+      }
+    });
+    return a;
+  };
+
+  const Tools = L.Control.extend({
+    options: { position: 'topleft' },
+    onAdd() {
+      const bar = L.DomUtil.create('div', 'leaflet-bar leaflet-control map__tools');
+      bar.setAttribute('role', 'group');
+      bar.setAttribute('aria-label', cfg.strings.tools_label!);
+      L.DomEvent.disableClickPropagation(bar);
+      if (pageMode) bar.append(toolButton('locate', cfg.strings.locate!, locate, true));
+      bar.append(
+        toolButton('home', cfg.strings.home!, () => {
+          if (world) setWorld(false);
+          else {
+            more = 0;
+            map.fitBounds(toLatLngBounds(cfg.home), { animate });
+          }
+        }),
+        toolButton('world', cfg.strings.world!, () => setWorld(true)),
+      );
+      return bar;
+    },
   });
+  new Tools().addTo(map);
 
   sheetToggle.addEventListener('click', () => {
     const open = root.dataset.sheet !== 'open';
@@ -394,7 +610,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   };
 
   const fioChips = [...document.querySelectorAll<HTMLButtonElement>('[data-map-filters] button[data-fio], .map-filters button[data-fio]')];
-  const epocaChips = [...document.querySelectorAll<HTMLButtonElement>('.map-filters button[data-epoca]')];
+  const epocaChips = [...document.querySelectorAll<HTMLButtonElement>('button[data-epoca]')];
   function syncChips() {
     for (const b of fioChips) b.setAttribute('aria-pressed', String((b.dataset.fio || null) === state.fio));
     for (const b of epocaChips) b.setAttribute('aria-pressed', String((b.dataset.epoca || null) === state.epoca));
@@ -441,7 +657,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
 
   // ---- start ----------------------------------------------------------------------------------------------------
 
-  const setMinZoom = () => map.setMinZoom(map.getBoundsZoom(maxBounds, false));
+  const setMinZoom = () => map.setMinZoom(world ? BEHAVIOUR.worldMinZoom : map.getBoundsZoom(maxBounds, false));
 
   const firstView = () => {
     setMinZoom();

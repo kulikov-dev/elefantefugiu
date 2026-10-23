@@ -83,3 +83,18 @@ describe('safeJson', () => {
     expect(JSON.parse(s)).toEqual({ t: '</script><b>' });
   });
 });
+
+describe('toMapCards: stories overseas', () => {
+  it('a story whose place is outside Portugal carries it as `overseas`; one at home does not', () => {
+    const [home] = toMapCards([event({})], 'pt', () => '/x/');
+    expect(home!.overseas).toBeUndefined();
+    const [far] = toMapCards([event({ place: { name: 'Malaca (Melaka), ponte', short: { pt: 'Malaca', en: 'Malacca', ru: 'Малакка' }, lat: 2.19, lon: 102.25 } })], 'en', () => '/x/');
+    expect(far!.overseas).toEqual({ lat: 2.19, lon: 102.25, name: 'Malacca' });
+    // the marker itself stays at the bridge
+    expect([far!.lat, far!.lon]).toEqual([38.69, -9.2]);
+  });
+  it('the islands count as Portugal', () => {
+    const [madeira] = toMapCards([event({ place: { name: 'Funchal', lat: 32.65, lon: -16.9 } })], 'pt', () => '/x/');
+    expect(madeira!.overseas).toBeUndefined();
+  });
+});

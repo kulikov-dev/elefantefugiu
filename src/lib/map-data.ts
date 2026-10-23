@@ -11,6 +11,9 @@ const REGIONS: Bounds[] = [
   { south: 36.8, north: 39.9, west: -31.4, east: -24.9 }, // Azores
 ];
 
+/** Is this point in Portugal (the mainland, Madeira or the Azores)? A story whose place is not is "overseas" for the map. */
+export const isInPortugal = (lat: number, lon: number): boolean => REGIONS.some((r) => lat >= r.south && lat <= r.north && lon >= r.west && lon <= r.east);
+
 /** Extra room around the allowed area, in degrees, so the edge cards are not pinned to the border. */
 export const MAX_BOUNDS_MARGIN = 1;
 

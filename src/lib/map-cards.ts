@@ -3,6 +3,7 @@ import type { Lang } from '../i18n/routes';
 import { formatYear, placeShort, type EventData } from './events';
 import type { EpochData } from './epochs';
 import { normalizeMinAge, normalizeSensitive, type MinAge } from './family';
+import { isInPortugal } from './map-data';
 
 export interface MapCardInfo {
   id: string;
@@ -23,6 +24,8 @@ export interface MapCardInfo {
   /** Age label and heavy-topic flag: the map hides the cards the family mode hides. */
   minAge: MinAge;
   sensitive: boolean;
+  /** Where the story happened, when that is outside Portugal (the map's "whole world" view marks it); absent for stories at home. */
+  overseas?: { lat: number; lon: number; name: string };
 }
 
 /** Cards for the map in one language; `hrefOf` builds the (base-aware) card address from the event. */
@@ -42,6 +45,7 @@ export function toMapCards(events: readonly EventData[], lang: Lang, hrefOf: (ev
     href: hrefOf(e),
     minAge: normalizeMinAge(e.min_age),
     sensitive: normalizeSensitive(e.sensitive),
+    ...(isInPortugal(e.place.lat, e.place.lon) ? {} : { overseas: { lat: e.place.lat, lon: e.place.lon, name: placeShort(e.place, lang) } }),
   }));
 }
 

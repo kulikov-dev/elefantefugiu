@@ -21,6 +21,7 @@ import ThreadChip from '../components/ThreadChip.astro';
 import { LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { cardNeighbours, firstSentence, formatDate, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
+import { distanceParts } from '../lib/distance';
 import { epochHasContent } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
@@ -55,9 +56,9 @@ const allowedIn = (mode: Parameters<typeof isVisibleInMode>[1]) => (e: EventData
 // "Nearby": distance to each story, "800 m" under a kilometre (to 10 m), else kilometres with one decimal.
 const numberFormat = new Intl.NumberFormat(LOCALES[lang], { maximumFractionDigits: 1 });
 const distanceText = (km: number): string => {
-  if (km < 0.05) return t(lang, 'card.nearby_same');
-  if (km < 1) return t(lang, 'card.nearby_m').replace('{n}', numberFormat.format(Math.round(km * 100) * 10));
-  return t(lang, 'card.nearby_km').replace('{n}', numberFormat.format(Math.round(km * 10) / 10));
+  const d = distanceParts(km);
+  if (d.kind === 'here') return t(lang, 'card.nearby_same');
+  return t(lang, d.kind === 'm' ? 'card.nearby_m' : 'card.nearby_km').replace('{n}', numberFormat.format(d.n));
 };
 const relatedVariants = groupVariants(
   (mode) =>
