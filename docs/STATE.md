@@ -433,8 +433,8 @@ Vitest `tests/vitest/pages.spec.ts` (11 тестов: разделы и теги
 
 - Название источника теперь только название (как дал автор). Пояснение вынесено в необязательное поле `note: {pt, en, ru}` (любой язык можно не писать: на этом языке ничего не выводится, подстановки нет, `localize()` поле не трогает) и показывается мелко после ссылки. Источник на русском языке помечается `lang: ru`: на страницах pt и en после названия «(em russo)» / «(in Russian)», кириллица в названии разрешена. 22 источника у 8 карточек переписаны так.
 - `check-data`: у источника без `lang: ru` кириллицы в названии быть не должно; в `note.pt` и `note.en` тоже.
-- Настоящие названия по ссылкам: Vatican — «Nuno De Santa Maria Álvares Pereira (1360-1431) - Biography» (по-английски, vatican.va); Letras UP — Lélia Paula Teixeira Ribeiro, «Os arquitectos do Quartel do Segundo Regimento de Infantaria e da Real Casa Pia…», Revista da Faculdade de Letras, Ciências e Técnicas do Património (Porto), I série, vol. IV, 2005, pp. 281–292 (сноска 1 про 23.02.1757 подтверждена); Dialnet — рецензия Jânia Ferreira Furtado на книгу Molesky «This Gulf of Fire» (Knopf, 2015), по-английски, журнал по файлу не определяется.
-- **Не удалось установить по ссылке (названия не придуманы):** Qalam, «Носорог Альбрехта Дюрера» (ссылка отвечает 404; оставлено как написал автор данных, `lang: ru`); Teylers Museum, стр. 222 (страница электронной библиотеки без текста: автора и название по ссылке не видно; пока записано как адрес: «Teylers Museum, biblioteca digital (Emags 28a_24-2), p. 222»).
+- Настоящие названия по ссылкам: Vatican — «Nuno De Santa Maria Álvares Pereira (1360-1431) - Biography» (по-английски, vatican.va); Letras UP — Lélia Paula Teixeira Ribeiro, «Os arquitectos do Quartel do Segundo Regimento de Infantaria e da Real Casa Pia…», Revista da Faculdade de Letras, Ciências e Técnicas do Património (Porto), I série, vol. IV, 2005, pp. 281–292 (сноска 1 про 23.02.1757 подтверждена); Dialnet (запись статьи) — Junia Furtado, рецензия на книгу Mark C. Molesky «This Gulf of Fire…» (New York, 2015), e-Journal of Portuguese History (ISSN-e 1645-6432), vol. 15, no. 2, 2017, по-английски (в самом PDF автор записана как Jânia Ferreira Furtado; взято написание Dialnet).
+- **Не удалось установить по ссылке (названия не придуманы):** Teylers Museum, стр. 222 (страница электронной библиотеки без текста: автора и название по ссылке не видно; пока записано как адрес: «Teylers Museum, biblioteca digital (Emags 28a_24-2), p. 222»).
 
 ### Источники на замену (на сайт не выводятся)
 
@@ -443,6 +443,7 @@ Vitest `tests/vitest/pages.spec.ts` (11 тестов: разделы и теги
 | aljubarrota-1385 | WarHistory.org, «The Battle of Aljubarrota 1385 AD» | цифра ~18 000 | популярный сайт, нужна научная работа |
 | terramoto-1755 | Wikipedia, 1755 Lisbon earthquake | указатель на Pereira; 40 минут до цунами, 09:40 | заменить первоисточником (Pereira) |
 | terramoto-1755 | Wikipedia (зеркало 2007 г.), 1755 Lisbon earthquake | в данных не записано | зеркало Википедии не годится как источник |
+| rinoceronte-1515 | Qalam, «Носорог Альбрехта Дюрера» (`lang: ru`) | в данных не записано | ссылка отвечает 404; снимка в web.archive.org найти не удалось (архив недоступен: 429 и «Temporarily Offline»), автора и название страницы подтвердить нечем |
 | elefantes-malaca-1511 | Teylers Museum, стр. 222 | в данных не записано | уточнить автора и название издания |
 
 ## `reviewed_by` / `reviewed_on` больше не нужны
