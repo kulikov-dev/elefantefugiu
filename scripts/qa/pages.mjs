@@ -1,8 +1,8 @@
 // Browser checks for the static pages, the mistake report form, "Continue" on the home page and the QR address.
 // Run against dist/ served by serve.mjs (base path "/"):   node pages.mjs [static form continue qr]
 // No request ever leaves for formsubmit.co: the form is answered by the test itself.
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { launchBrowser } from './browser.mjs';
+import { epochPath, epochs, en, pt, published, readyEpochs, HOME_START_ID } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -20,7 +20,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** `answer(request)`: what happens to a request to formsubmit.co (default: success). */
@@ -64,8 +64,10 @@ if (want('static')) {
             links,
           };
         });
-        ok(`static (${key}, ${lang}, ${width} px): one h1, sections with ids, a lead, no sideways scroll, no leftover {{token}}`, s.h1 === 1 && s.h2.length >= 4 && s.lead > 40 && s.overflow <= 0 && !s.raw, JSON.stringify({ h2: s.h2.length, lead: s.lead, overflow: s.overflow }));
-        ok(`static (${key}, ${lang}, ${width} px): indexable, hreflang pt, en, ru and x-default, the contact address is a link`, s.robots === null && s.alternates === 'en,pt,ru,x-default' && s.email >= 1, JSON.stringify([s.robots, s.alternates, s.email]));
+        // The legal page opens with its summary section, not with a lead paragraph (docs/texts-*.md).
+        ok(`static (${key}, ${lang}, ${width} px): one h1, sections with ids${key === 'legal' ? '' : ', a lead'}, no sideways scroll, no leftover {{token}}`, s.h1 === 1 && s.h2.length >= 4 && (key === 'legal' || s.lead > 40) && s.overflow <= 0 && !s.raw, JSON.stringify({ h2: s.h2.length, lead: s.lead, overflow: s.overflow }));
+        // The contact address ("Write to us: ...") is on About and Legal; the Method page has no contact line of its own.
+        ok(`static (${key}, ${lang}, ${width} px): indexable, hreflang pt, en, ru and x-default${key === 'method' ? '' : ', the contact address is a link'}`, s.robots === null && s.alternates === 'en,pt,ru,x-default' && (key === 'method' || s.email >= 1), JSON.stringify([s.robots, s.alternates, s.email]));
         if (width === 1280) {
           const bad = [];
           for (const l of s.links.filter((x) => x.href.startsWith('/'))) {
@@ -96,8 +98,8 @@ if (want('form')) {
       overflow: document.documentElement.scrollWidth - innerWidth,
       robots: document.querySelector('meta[name=robots]')?.content ?? null,
     }));
-    ok(`form (${lang}): posts to FormSubmit for ${EMAIL}, with a subject, no captcha page, and a way back to this page`, f.action === `https://formsubmit.co/${EMAIL}` && f.method === 'post' && /\(${lang}\)/.test(f.hidden._subject) === true && f.hidden._captcha === 'false' && /\/${PAGES.report[lang]}\/#sent$/.test(f.hidden._next), JSON.stringify(f.hidden));
-    ok(`form (${lang}): the address of the card from ?url= fills the first field; every field has a label; the honeypot is out of reach`, f.url === card && f.labels && f.honey.tab === -1 && f.honey.hidden === 'true' && f.honey.w <= 1, JSON.stringify([f.url, f.honey]));
+    ok(`form (${lang}): posts to FormSubmit for ${EMAIL}, with a subject, no captcha page, and a way back to this page`, f.action === `https://formsubmit.co/${EMAIL}` && f.method === 'post' && new RegExp(`\\(${lang}\\)`).test(f.hidden._subject) && f.hidden._captcha === 'false' && new RegExp(`/${PAGES.report[lang]}/(\\?[^#]*)?#sent$`).test(f.hidden._next), JSON.stringify(f.hidden));
+    ok(`form (${lang}): the address of the card from ?url= fills the first field; every field has a label; the honeypot is out of reach`, f.url === card && f.labels && f.honey.tab === -1 && f.honey.hidden === 'true' && f.honey.w <= 4, JSON.stringify([f.url, f.honey]));
     ok(`form (${lang}): no sideways scroll at 360 px, the page is not indexed`, f.overflow <= 0 && f.robots === 'noindex');
     // a javascript: address in ?url= is not put into the field
     await page.goto(`${base}/${lang}/${PAGES.report[lang]}/?url=${encodeURIComponent('javascript:alert(1)')}`, { waitUntil: 'load' });
@@ -138,32 +140,41 @@ if (want('form')) {
   await back.close();
   // the link from a card leads here with the address of the card
   const cardPage = await newPage();
-  await cardPage.goto(`${base}/pt/historia/evento-exemplo-01/`, { waitUntil: 'load' });
-  const href = await cardPage.$eval('a[href*="/corrigir/"]', (a) => a.getAttribute('href'));
-  ok('form: "Encontrou um erro?" on a card carries the address of the card', /\/pt\/corrigir\/\?url=http/.test(href), href);
+  const reported = published.find((c) => c.id === HOME_START_ID) ?? published[0];
+  await cardPage.goto(`${base}${pt(reported)}`, { waitUntil: 'load' });
+  const href = await cardPage.$eval('.actions a[href*="/corrigir/"]', (a) => a.getAttribute('href'));
+  ok('form: the small link "Reparou numa imprecisão..." under Share carries the address and the title of the story', /\/pt\/corrigir\/\?url=http/.test(href) && decodeURIComponent(href).includes(`/pt/historia/${reported.slug.pt}/`) && href.includes('&title='), href);
+  const plain = await cardPage.$$eval('footer a[href$="/corrigir/"]', (as) => as.length);
+  ok('form: the "Encontrou um erro?" link of the footer is the plain address of the form', plain === 1, String(plain));
   await cardPage.close();
 }
 
 // ---------- 3. "Continue" on the home page ----------
 if (want('continue')) {
   const fresh = await newPage();
+  // The browser profile is shared by the suite: forget what the earlier sections visited, as a new reader would have nothing.
   await fresh.goto(`${base}/pt/`, { waitUntil: 'load' });
+  await fresh.evaluate(() => localStorage.clear());
+  await fresh.reload({ waitUntil: 'load' });
   ok('continue: a new reader sees no "Continue" button', await fresh.$eval('[data-continue]', (a) => a.hidden));
   await fresh.close();
 
   const visit = await newPage();
-  await visit.goto(`${base}/pt/epoca/pombal-e-terramoto/`, { waitUntil: 'load' });
-  ok('continue: visiting an epoch page remembers the epoch id', (await visit.evaluate(() => localStorage.getItem('lastEpoch'))) === 'pombal-e-terramoto');
-  await visit.goto(`${base}/pt/historia/rinoceronte-e-elefante/`, { waitUntil: 'load' });
-  ok('continue: a card remembers the epoch of the card', (await visit.evaluate(() => localStorage.getItem('lastEpoch'))) === 'avis-e-descobrimentos');
-  for (const [lang, word, slug] of [['pt', 'Continuar onde parou', 'avis-e-descobrimentos'], ['en', 'Continue where you left off', 'avis-and-the-discoveries'], ['ru', 'Вы остановились', 'avis-i-velikie-otkrytiya']]) {
+  const [first, second] = readyEpochs;
+  const cardOfFirst = published.find((c) => c.epoch === first.id);
+  await visit.goto(`${base}${epochPath(second)}`, { waitUntil: 'load' });
+  ok('continue: visiting an epoch page remembers the epoch id', (await visit.evaluate(() => localStorage.getItem('lastEpoch'))) === second.id);
+  await visit.goto(`${base}${pt(cardOfFirst)}`, { waitUntil: 'load' });
+  ok('continue: a card remembers the epoch of the card', (await visit.evaluate(() => localStorage.getItem('lastEpoch'))) === first.id);
+  for (const [lang, word] of [['pt', 'Continuar onde parou'], ['en', 'Continue where you left off'], ['ru', 'Вы остановились']]) {
+    const slug = first.slug[lang];
     await visit.goto(`${base}/${lang}/`, { waitUntil: 'load' });
     const b = await visit.$eval('[data-continue]', (a) => ({ hidden: a.hidden, text: a.textContent.trim(), href: a.getAttribute('href') }));
     ok(`continue (${lang}): the band shows with the name of the epoch and leads to it`, !b.hidden && b.text.startsWith(word) && b.href.endsWith(`/${slug}/`), JSON.stringify(b));
   }
   await visit.close();
 
-  const stale = await newPage({ saved: { lastEpoch: 'lusitania-e-roma' } });
+  const stale = await newPage({ saved: { lastEpoch: epochs.find((m) => !readyEpochs.includes(m)).id } });
   await stale.goto(`${base}/pt/`, { waitUntil: 'load' });
   ok('continue: an epoch without a page, or a foreign value, shows nothing', await stale.$eval('[data-continue]', (a) => a.hidden));
   await stale.close();
@@ -180,17 +191,19 @@ if (want('continue')) {
 
 // ---------- 4. The QR address ----------
 if (want('qr')) {
-  for (const [language, saved, expect] of [['pt-PT', null, '/pt/historia/evento-exemplo-01/'], ['en-GB', null, '/en/story/example-event-01/'], ['ru-RU', null, '/ru/istoriya/testovoe-sobytie-01/'], ['ru-RU', 'en', '/en/story/example-event-01/']]) {
+  const qrCard = published.find((c) => c.id === HOME_START_ID) ?? published[0];
+  const QR = `/p/${qrCard.id}/`;
+  for (const [language, saved, expect] of [['pt-PT', null, pt(qrCard)], ['en-GB', null, en(qrCard)], ['ru-RU', null, `/ru/istoriya/${qrCard.slug.ru ?? qrCard.slug.en}/`], ['ru-RU', 'en', en(qrCard)]]) {
     const page = await browser.newPage();
     await page.evaluateOnNewDocument((l, s) => { Object.defineProperty(navigator, 'language', { get: () => l }); if (s) localStorage.setItem('lang', s); }, language, saved);
-    await page.goto(`${base}/p/evento-exemplo-01/`, { waitUntil: 'load' });
+    await page.goto(`${base}${QR}`, { waitUntil: 'load' });
     await page.waitForFunction(() => !location.pathname.startsWith('/p/'), { timeout: 5000 }).catch(() => {});
     const url = new URL(page.url());
-    ok(`qr: /p/evento-exemplo-01/ with browser ${language}${saved ? ` and saved ${saved}` : ''} leads to the card with ?src=qr`, url.pathname === expect && url.searchParams.get('src') === 'qr', page.url());
+    ok(`qr: ${QR} with browser ${language}${saved ? ` and saved ${saved}` : ''} leads to the card with ?src=qr`, url.pathname === expect && url.searchParams.get('src') === 'qr', page.url());
     await page.close();
   }
   const nojs = await newPage({ js: false });
-  await nojs.goto(`${base}/p/evento-exemplo-01/`, { waitUntil: 'load' });
+  await nojs.goto(`${base}${QR}`, { waitUntil: 'load' });
   const links = await nojs.$$eval('.lang-chooser__links a', (as) => as.map((a) => a.getAttribute('href')));
   ok('qr without JavaScript: three links to the card, each with ?src=qr; the page is noindex', links.length === 3 && links.every((h) => h.endsWith('?src=qr')) && (await nojs.$eval('meta[name=robots]', (m) => m.content)) === 'noindex', links.join(' '));
   await nojs.close();

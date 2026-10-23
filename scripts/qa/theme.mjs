@@ -2,8 +2,7 @@
 // Run against dist/ served by serve.mjs (base path "/"):   node theme.mjs [flash keyboard blocked fonts header palette]
 // Expected colours are the values of docs/visual-direction.md sections 2 and 3 (written out here, independent of tokens.css);
 // stage 7b-2 changed two light tints (Avis, Pombal) and made grey the primary colour of Estado Novo (the red is --epoch-flash).
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 import { readFileSync } from 'node:fs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
@@ -23,7 +22,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const external = [];
 

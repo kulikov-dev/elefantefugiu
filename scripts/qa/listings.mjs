@@ -1,13 +1,22 @@
 // Browser checks for epoch and thread pages (stage 4a): feed, in-place expansion, Back button,
 // thread links and counters, neighbouring epochs, keyboard, no-JS. Run against `dist/` served by serve.mjs.
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { launchBrowser } from './browser.mjs';
+import { epochPath, epochs, epochsOfThread, feedOf, need, pt, readyEpochs, threadPath, threads, threadsIn } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
-const EPOCH = `${base}/pt/epoca/avis-e-descobrimentos/`;
-const NEXT_EPOCH = `${base}/pt/epoca/pombal-e-terramoto/`;
-const THREAD = `${base}/pt/fio/mar/`;
-const FEED_IDS = ['01', '02', '03', '04', '05', '06', '07', '08'].map((n) => `evento-exemplo-${n}`);
+// The first ready epoch and its cards come from the content files; nothing here depends on how many stories there are.
+const epoch = readyEpochs[0];
+const nextEpoch = readyEpochs[1];
+const feed = feedOf(epoch.id);
+if (feed.length < 5 || !nextEpoch) throw new Error('listings needs a ready epoch with at least 5 cards and one more ready epoch');
+const [first, second, third, , fifth] = feed.map((e) => e.id);
+// A thread that has cards in two epochs (to jump between sections), and the thread chips the epoch page must show.
+const thread = need('a thread with cards in two epochs', () => threads.find((t) => epochsOfThread(t.id).length >= 2));
+const epochThreads = threadsIn(epoch.id);
+const EPOCH = `${base}${epochPath(epoch)}`;
+const NEXT_EPOCH = `${base}${epochPath(nextEpoch)}`;
+const THREAD = `${base}${threadPath(thread)}`;
+const plainCard = feed[0];
 
 let failed = 0;
 const ok = (name, cond, extra = '') => {
@@ -15,7 +24,7 @@ const ok = (name, cond, extra = '') => {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const newPage = async () => {
   const page = await browser.newPage();
   await page.setViewport({ width: 360, height: 800 });
@@ -42,12 +51,12 @@ const newPage = async () => {
       open: document.querySelector('details[data-ecard]').open,
     };
   });
-  ok('no JS, no images: all 8 feed cards with hook and title visible', s.cards === 8 && s.hooksVisible && s.titlesVisible, `cards=${s.cards}`);
-  ok('no JS: thread chips are links', s.chips === 5, `chips=${s.chips}`);
+  ok('no JS, no images: all feed cards with hook and title visible', s.cards === feed.length && s.hooksVisible && s.titlesVisible, `cards=${s.cards}`);
+  ok('no JS: thread chips are links', s.chips === epochThreads.length, `chips=${s.chips}`);
   ok('no JS: no horizontal overflow at 360px', s.overflow <= 0, `overflow=${s.overflow}`);
   ok('no JS: story layer closed by default (not rendered)', !s.story && !s.open);
-  await page.click('details[data-ecard="evento-exemplo-02"] > summary');
-  const openNoJs = await page.evaluate(() => document.querySelector('details[data-ecard="evento-exemplo-02"] .ecard__story').checkVisibility({ contentVisibilityAuto: true, visibilityProperty: true }));
+  await page.click(`details[data-ecard="${second}"] > summary`);
+  const openNoJs = await page.evaluate((id) => document.querySelector(`details[data-ecard="${id}"] .ecard__story`).checkVisibility({ contentVisibilityAuto: true, visibilityProperty: true }), second);
   ok('no JS: native <details> opens the story in place', openNoJs);
   await page.close();
 }
@@ -58,35 +67,35 @@ const newPage = async () => {
   await page.goto(EPOCH, { waitUntil: 'networkidle0' });
   const isOpen = (id) => page.evaluate((i) => document.querySelector(`details[data-ecard="${i}"]`).open, id);
   const path0 = await page.evaluate(() => location.pathname);
-  await page.click('details[data-ecard="evento-exemplo-02"] > summary');
+  await page.click(`details[data-ecard="${second}"] > summary`);
   await wait(100);
-  ok('click opens the story in place (same page)', (await isOpen('evento-exemplo-02')) && (await page.evaluate(() => location.pathname)) === path0);
-  ok('open card puts #c-<id> in the address', (await page.evaluate(() => location.hash)) === '#c-evento-exemplo-02');
+  ok('click opens the story in place (same page)', (await isOpen(second)) && (await page.evaluate(() => location.pathname)) === path0);
+  ok('open card puts #c-<id> in the address', (await page.evaluate(() => location.hash)) === `#c-${second}`);
   const hist = await page.evaluate(() => history.length);
-  await page.click('details[data-ecard="evento-exemplo-03"] > summary');
+  await page.click(`details[data-ecard="${third}"] > summary`);
   await wait(100);
   ok('opening another card does not add history entries', (await page.evaluate(() => history.length)) === hist);
-  await page.click('details[data-ecard="evento-exemplo-03"] > summary');
+  await page.click(`details[data-ecard="${third}"] > summary`);
   await wait(100);
   ok('closing the card removes its hash', (await page.evaluate(() => location.hash)) === '');
-  await page.goto(`${EPOCH}#c-evento-exemplo-05`, { waitUntil: 'networkidle0' });
-  ok('a link with #c-<id> opens that card on load', (await isOpen('evento-exemplo-05')) && !(await isOpen('evento-exemplo-04')));
+  await page.goto(`${EPOCH}#c-${fifth}`, { waitUntil: 'networkidle0' });
+  ok('a link with #c-<id> opens that card on load', (await isOpen(fifth)) && !(await isOpen(feed[3].id)));
   await page.close();
 }
 
 // 3. Back button returns to the same place in the feed
 {
   const page = await newPage();
-  await page.goto(`${EPOCH}#c-evento-exemplo-05`, { waitUntil: 'networkidle0' });
+  await page.goto(`${EPOCH}#c-${fifth}`, { waitUntil: 'networkidle0' });
   await page.evaluate(() => window.scrollBy(0, 150));
   await wait(200);
   const before = await page.evaluate(() => Math.round(scrollY));
-  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.$eval('#c-evento-exemplo-05 .ecard__title a', (a) => a.click())]);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.$eval(`#c-${fifth} .ecard__title a`, (a) => a.click())]);
   ok('card title link opens the card page', (await page.evaluate(() => location.pathname)).includes('/historia/'));
   await page.goBack({ waitUntil: 'load' });
   await wait(500);
   const after = await page.evaluate(() => Math.round(scrollY));
-  const stillOpen = await page.evaluate(() => document.querySelector('details[data-ecard="evento-exemplo-05"]').open);
+  const stillOpen = await page.evaluate((id) => document.querySelector(`details[data-ecard="${id}"]`).open, fifth);
   ok('Back returns to the same scroll position', Math.abs(after - before) <= 8 && before > 300, `before=${before} after=${after}`);
   ok('Back keeps the opened card open', stillOpen);
   await page.close();
@@ -100,7 +109,7 @@ const newPage = async () => {
   const chips = await page.$$eval('.chips a.thread--link', (as) =>
     as.map((a) => ({ href: a.getAttribute('href'), count: Number(a.querySelector('.thread__count')?.textContent), label: a.textContent.replace(/\s+/g, ' ').trim() })),
   );
-  const target = chips.find((c) => c.href.includes('/fio/mar/'));
+  const target = chips.find((c) => c.href.includes(`/fio/${thread.slug.pt}/`));
   await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click(`.chips a.thread--link[href="${target.href}"]`)]);
   await wait(300);
   const landed = await page.evaluate(() => {
@@ -108,7 +117,7 @@ const newPage = async () => {
     const top = section?.getBoundingClientRect().top;
     return { path: location.pathname, hash: location.hash, tiles: section?.querySelectorAll('.ecard').length, top, vh: innerHeight };
   });
-  ok('chip leads to the thread page at this epoch\'s section', landed.path === '/pt/fio/mar/' && landed.hash === '#e-avis-e-descobrimentos');
+  ok('chip leads to the thread page at this epoch\'s section', landed.path === threadPath(thread) && landed.hash === `#e-${epoch.id}`);
   ok('chip counter equals the number of tiles in that section', landed.tiles === target.count, `counter=${target.count} tiles=${landed.tiles}`);
   ok('the section is in view after the jump', landed.top >= -2 && landed.top < landed.vh / 2, `top=${Math.round(landed.top)}`);
   await page.close();
@@ -120,14 +129,14 @@ const newPage = async () => {
   await page.goto(THREAD, { waitUntil: 'networkidle0' });
   const s = await page.evaluate(() => ({
     h1: document.querySelector('h1').textContent.trim(),
-    details: document.querySelectorAll('details').length,
+    details: document.querySelectorAll('details[data-ecard]').length,
     sections: document.querySelectorAll('section.section').length,
     chips: [...document.querySelectorAll('a.chip')].map((a) => ({ n: Number(a.querySelector('.chip__count').textContent), id: a.getAttribute('href').slice(1) })),
     overflow: document.scrollingElement.scrollWidth - innerWidth,
     columnsAt360: getComputedStyle(document.querySelector('.grid')).gridTemplateColumns.split(' ').length,
   }));
-  ok('thread page: name, no expandable feed cards, no horizontal overflow', s.h1 === 'Mar' && s.details === 0 && s.overflow <= 0);
-  ok('thread page: one section per epoch with cards', s.sections === s.chips.length && s.sections === 3, `sections=${s.sections}`);
+  ok('thread page: name, no expandable feed cards, no horizontal overflow', s.h1 === thread.name.pt && s.details === 0 && s.overflow <= 0);
+  ok('thread page: one section per epoch with cards', s.sections === s.chips.length && s.sections === epochsOfThread(thread.id).length, `sections=${s.sections}`);
   ok('thread page: one column of tiles at 360px', s.columnsAt360 === 1);
   const second = s.chips[1];
   await page.click(`a.chip[href="#${second.id}"]`);
@@ -146,19 +155,24 @@ const newPage = async () => {
 {
   const page = await newPage();
   await page.goto(EPOCH, { waitUntil: 'networkidle0' });
-  const hasPrev = await page.$('nav.pager a[rel="prev"]');
-  const hasNext = await page.$('nav.pager a[rel="next"]');
-  ok('neighbours of the first MVP epoch are "coming soon" (no links)', hasPrev === null && hasNext === null);
-  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('nav.epoch-switch a[href$="/pt/epoca/pombal-e-terramoto/"]')]);
-  ok('the epoch switcher leads to the next MVP epoch page', page.url() === NEXT_EPOCH);
-  const backHref = await page.$eval('nav.epoch-switch a[href$="/pt/epoca/avis-e-descobrimentos/"]', (a) => a.getAttribute('href'));
-  ok('the next epoch links back through the switcher', backHref === '/pt/epoca/avis-e-descobrimentos/');
-  await page.goto(`${base}/pt/historia/evento-exemplo-02/`, { waitUntil: 'networkidle0' });
+  // The pager links only to a neighbour that has stories; a neighbour "coming soon" gets no link.
+  const index = epochs.findIndex((e) => e.id === epoch.id);
+  const readyIds = new Set(readyEpochs.map((e) => e.id));
+  // (the pager skips the epochs that are not ready: the neighbour is the previous and the next READY epoch.)
+  const prevReady = epochs.slice(0, index).reverse().find((e) => readyIds.has(e.id));
+  const nextReady = epochs.slice(index + 1).find((e) => readyIds.has(e.id));
+  const pagerHref = (rel) => page.$eval(`nav.pager a[rel="${rel}"]`, (a) => a.getAttribute('href')).catch(() => null);
+  ok('the pager links to the previous and the next ready epoch (none for an epoch that has no ready neighbour)', (await pagerHref('prev')) === (prevReady ? epochPath(prevReady) : null) && (await pagerHref('next')) === (nextReady ? epochPath(nextReady) : null), `${await pagerHref('prev')} ${await pagerHref('next')}`);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click(`nav.epoch-switch a[href$="${epochPath(nextEpoch)}"]`)]);
+  ok('the epoch switcher leads to the next ready epoch page', page.url() === NEXT_EPOCH);
+  const backHref = await page.$eval(`nav.epoch-switch a[href$="${epochPath(epoch)}"]`, (a) => a.getAttribute('href'));
+  ok('the next epoch links back through the switcher', backHref === epochPath(epoch));
+  await page.goto(`${base}${pt(plainCard)}`, { waitUntil: 'networkidle0' });
   const links = await page.evaluate(() => ({
     crumb: document.querySelector('.crumbs a')?.getAttribute('href'),
     threads: [...document.querySelectorAll('a.thread--link')].map((a) => a.getAttribute('href')),
   }));
-  ok('card page: epoch crumb leads to the epoch page', links.crumb === '/pt/epoca/avis-e-descobrimentos/', links.crumb);
+  ok('card page: epoch crumb leads to the epoch page', links.crumb === epochPath(epoch), links.crumb);
   ok('card page: thread chips lead to thread pages', links.threads.length >= 1 && links.threads.every((h) => /^\/pt\/fio\/[^/]+\/$/.test(h)), links.threads.join(' '));
   await page.close();
 }
@@ -166,7 +180,7 @@ const newPage = async () => {
 // 7. Language switch keeps epoch and thread pages
 {
   const page = await newPage();
-  for (const [url, expected] of [[EPOCH, '/en/era/avis-and-the-discoveries/'], [THREAD, '/en/thread/sea/']]) {
+  for (const [url, expected] of [[EPOCH, epochPath(epoch, 'en')], [THREAD, threadPath(thread, 'en')]]) {
     await page.goto(url, { waitUntil: 'networkidle0' });
     const href = await page.$eval('.lang-switch a[hreflang="en"]', (a) => a.getAttribute('href'));
     ok(`language switch on ${new URL(url).pathname} leads to ${expected}`, href === expected, href);
@@ -191,6 +205,7 @@ const newPage = async () => {
         tag: el.tagName.toLowerCase(),
         name: (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 30),
         outline: cs.outlineStyle !== 'none' && parseFloat(cs.outlineWidth) >= 2,
+        card: !!el.closest('details[data-ecard]'),
         w: r.width,
         h: r.height,
       };
@@ -202,14 +217,14 @@ const newPage = async () => {
     if (seen.length > 1 && seen.at(-1).name === seen[0].name && seen.at(-1).tag === seen[0].tag) break;
   }
   const firstThreadChip = seen.findIndex((s) => s.tag === 'button' && /\d/.test(s.name));
-  const firstSummary = seen.findIndex((s) => s.tag === 'summary');
+  const firstSummary = seen.findIndex((s) => s.tag === 'summary' && s.card);
   ok('keyboard: filter buttons come before the feed in tab order', firstThreadChip >= 0 && firstSummary > firstThreadChip);
   ok('keyboard: every stop has a visible outline and is visible', bad.length === 0, bad.join('; '));
-  await page.focus('details[data-ecard="evento-exemplo-01"] > summary');
+  await page.focus(`details[data-ecard="${first}"] > summary`);
   await page.keyboard.press('Enter');
-  const afterEnter = await page.evaluate(() => document.querySelector('details[data-ecard="evento-exemplo-01"]').open);
+  const afterEnter = await page.evaluate((id) => document.querySelector(`details[data-ecard="${id}"]`).open, first);
   await page.keyboard.press('Space');
-  const afterSpace = await page.evaluate(() => document.querySelector('details[data-ecard="evento-exemplo-01"]').open);
+  const afterSpace = await page.evaluate((id) => document.querySelector(`details[data-ecard="${id}"]`).open, first);
   ok('keyboard: Enter opens and Space closes a card in the feed', afterEnter === true && afterSpace === false);
   await page.close();
 }

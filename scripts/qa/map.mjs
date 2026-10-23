@@ -1,7 +1,6 @@
 // Browser checks for stage 5: the map page (and, as the stage goes on, links to it and the map on epoch pages).
 // Run against `dist/` served by serve.mjs (base path "/"). Tiles are answered with a grey picture, nothing leaves the machine.
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const MAP = { pt: `${base}/pt/mapa/`, en: `${base}/en/map/` };
@@ -11,7 +10,7 @@ const EPOCHS = ['avis-e-descobrimentos', 'pombal-e-terramoto', 'estado-novo-e-25
 import { createRequire } from 'node:module';
 import { readFileSync, readdirSync } from 'node:fs';
 const { parse } = createRequire(import.meta.url)('../../node_modules/yaml');
-const dataDir = new URL('../../src/content/events/', import.meta.url).pathname;
+const dataDir = fsPath(new URL('../../src/content/events/', import.meta.url));
 const cards = readdirSync(dataDir).map((n) => parse(readFileSync(dataDir + n, 'utf8'), { schema: 'core', customTags: ['timestamp'] })).filter((e) => e.status === 'ready');
 const MODE = process.env.FAMILY || 'off';
 const TOTAL = cards.filter((e) => MODE === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (MODE === '12' && String(e.min_age) === '12')))).length;
@@ -29,7 +28,7 @@ const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
 // 1x1 grey PNG
 const TILE = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mO8/58BAAMCAQDvVTZlAAAAAElFTkSuQmCC', 'base64');
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 
 /** Opens a page. `tiles`: 'ok' answers with a picture, 'fail' makes every tile request fail. */
 const newPage = async ({ js = true, width = 360, height = 740, tiles = 'ok' } = {}) => {

@@ -2,9 +2,10 @@
 import { createServer } from 'node:http';
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 // DIST=/some/dist serves another build (the family-mode variant build, see prepare-variant.mjs).
-const root = (process.env.DIST ? process.env.DIST.replace(/\/?$/, '/') : new URL('../../dist/', import.meta.url).pathname);
+const root = (process.env.DIST ? process.env.DIST.replace(/\/?$/, '/') : fileURLToPath(new URL('../../dist/', import.meta.url)));
 const port = Number(process.argv[2] || process.env.PORT || 4400);
 // BASE_PATH=/elefante serves a build made with that base path: /elefante/pt/ is dist/pt/ (the browser suites then use BASE_URL=http://localhost:4400/elefante).
 const prefix = (process.env.BASE_PATH ?? '').replace(/\/$/, '');

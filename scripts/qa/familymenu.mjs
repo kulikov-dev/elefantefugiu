@@ -1,7 +1,6 @@
 // Browser checks for the family-mode button and its menu, the "Hidden stories: N" line and the 12+ tooltip.
 // Run against dist/ served by serve.mjs (base path "/"):   node familymenu.mjs [button menu note badge]
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -17,7 +16,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const open = async (path, { width = 1280, stored = null } = {}) => {
   // A fresh browser context per page: the saved mode of one check must not leak into the next.

@@ -4,15 +4,14 @@
 //   VARIANT_URL=http://localhost:4401 node family.mjs variant     the variant sections
 // Expected values come from src/content/*.yaml, with the rules written out here, independent of src/lib/family.ts:
 //   off: everything;  all: min_age all and not heavy;  12: min_age all or 12 and not heavy.
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 import { createRequire } from 'node:module';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const require = createRequire(import.meta.url);
 const { parse } = require('../../node_modules/yaml');
-const root = new URL('../../', import.meta.url).pathname;
+const root = fsPath(new URL('../../', import.meta.url));
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const variantBase = process.env.VARIANT_URL || 'http://localhost:4401';
 const ONLY = process.argv.slice(2);
@@ -39,7 +38,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const TILE = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mO8/58BAAMCAQDvVTZlAAAAAElFTkSuQmCC', 'base64');
 
 /**

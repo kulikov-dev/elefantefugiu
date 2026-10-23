@@ -2,13 +2,12 @@
 // Two builds are served: 4401 with both fonts preloaded, 4400 without (the current dist/), e.g.
 //   DIST=/tmp/dist-before node serve.mjs 4401 &   node serve.mjs 4400 &   node preload-time.mjs
 // Numbers are medians of 5 runs on an emulated slow 4G connection.
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 const RUNS = 5;
 const variants = { 'with preload': 'http://localhost:4401', 'no preload': 'http://localhost:4400' };
 const pages = ['/pt/historia/evento-exemplo-01/', '/pt/'];
 const median = (a) => [...a].sort((x, y) => x - y)[Math.floor(a.length / 2)];
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 for (const path of pages) {
   const out = {};
   for (const [name, base] of Object.entries(variants)) {

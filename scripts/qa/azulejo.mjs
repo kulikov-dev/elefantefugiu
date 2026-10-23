@@ -1,7 +1,6 @@
 // Browser checks for stage 7b-2: azulejo patterns, the waiting tile of the map, layout shifts, a neutral header.
 // Run against dist/ served by serve.mjs (base path "/"):   node azulejo.mjs [patterns waiting motion shifts header]
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -14,7 +13,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** `intercept(request)` decides what happens to every request (it must call continue, respond or abort). */

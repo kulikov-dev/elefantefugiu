@@ -1,7 +1,6 @@
 // Browser checks for stage 5c: the map marks the bridge (not the place), the marker preview, "Como chegar", the bridge block.
 // Run against dist/ served by serve.mjs:   node bridge.mjs [preview caption directions block weight]
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 import { createRequire } from 'node:module';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -9,7 +8,7 @@ import { gzipSync } from 'node:zlib';
 
 const require = createRequire(import.meta.url);
 const { parse } = require('../../node_modules/yaml');
-const root = new URL('../../', import.meta.url).pathname;
+const root = fsPath(new URL('../../', import.meta.url));
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
@@ -36,7 +35,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const TILE = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVR42mO8/58BAAMCAQDvVTZlAAAAAElFTkSuQmCC', 'base64');
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const newPage = async ({ ua, width = 390, js = true } = {}) => {

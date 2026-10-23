@@ -1,9 +1,8 @@
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+import { fsPath, launchBrowser } from './browser.mjs';
+const browser = await launchBrowser();
 import { mkdirSync } from 'node:fs';
 const base = process.env.BASE_URL || 'http://localhost:4400';
-const out = new URL('./out/', import.meta.url).pathname;
+const out = fsPath(new URL('./out/', import.meta.url));
 mkdirSync(out, { recursive: true });
 // Card pages to photograph at 360px: with image + interactive, layer 3 open, sensitive (en), without image.
 const shots = [

@@ -1,8 +1,10 @@
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+import { launchBrowser } from './browser.mjs';
+import { en, need, pt } from './data.mjs';
+const browser = await launchBrowser();
 const base = process.env.BASE_URL || 'http://localhost:4400';
-const url = `${base}/pt/historia/evento-exemplo-02/`;
+// A plain published card: all ages, no interactive, not a heavy topic.
+const card = need('a story for all ages without an interactive', (list) => list.find((e) => e.min_age === 'all' && !e.interactive && !e.sensitive));
+const url = `${base}${pt(card)}`;
 let failed = 0;
 const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
@@ -24,7 +26,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     return {
       hook: vis(document.querySelector('.hook')),
       story: vis(document.getElementById('historia')),
-      caption: vis(document.querySelector('figcaption')),
+      miniMap: vis(document.querySelector('.minimap')),
       shareLink: vis(document.querySelector('[data-share-link]')),
       shareButton: vis(document.querySelector('[data-share-button]')),
       detailsOpen: d.open,
@@ -33,7 +35,8 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   });
   ok('no JS + no images: hook visible', s.hook);
   ok('no JS + no images: story visible', s.story);
-  ok('no JS + no images: caption/frame still visible', s.caption);
+  // The small map (a card without a picture) is for wide screens only: at 360 px neither the tiles nor their credit take any room.
+  ok('no JS + no images: the small map is left out on a narrow screen, with no gap', !s.miniMap);
   ok('no JS: share is a plain link, button hidden', s.shareLink && !s.shareButton);
   ok('no JS: layer 3 closed by default', !s.detailsOpen);
   await page.click('#detalhes > summary');
@@ -136,7 +139,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   await page.click('[data-share-button]');
   await wait(100);
   const shared = await page.evaluate(() => window.__shared);
-  ok('Web Share API used when available (title + current url incl. #detalhes)', shared && shared.url === url + '#detalhes' && shared.title === 'Evento de exemplo 02');
+  ok('Web Share API used when available (title + current url incl. #detalhes)', shared && shared.url === url + '#detalhes' && shared.title === card.title.pt);
   await page.evaluate(() => { Object.defineProperty(navigator, 'share', { value: async () => { throw new DOMException('x', 'AbortError'); }, configurable: true }); document.querySelector('[data-share-status]').textContent = ''; });
   await page.click('[data-share-button]');
   await wait(150);
@@ -160,8 +163,8 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     en: document.querySelector('.lang-switch a[hreflang="en"]').getAttribute('href'),
     report: [...document.querySelectorAll('a')].find((a) => a.href.includes('/corrigir/?url=')).getAttribute('href'),
   }));
-  ok('language switch leads to the same card in EN', hrefs.en === '/en/story/example-event-02/', hrefs.en);
-  ok('report link carries the card address', decodeURIComponent(hrefs.report).includes('/pt/historia/evento-exemplo-02/'), hrefs.report);
+  ok('language switch leads to the same card in EN', hrefs.en === en(card), hrefs.en);
+  ok('report link carries the card address', decodeURIComponent(hrefs.report).includes(pt(card)), hrefs.report);
   await page.close();
 }
 await browser.close();

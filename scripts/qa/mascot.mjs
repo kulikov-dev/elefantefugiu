@@ -1,21 +1,22 @@
 // Browser checks for the elephant mascot (docs/visual-direction.md section 6).
 // Run against dist/ served by serve.mjs (base path "/"):   node mascot.mjs [logo notfound pager empty dark motion]
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const AVIS = '/pt/epoca/avis-e-descobrimentos/';
+// The regime epoch has no published card on the real site: its page exists only in the fixture build (variant-plan.mjs).
 const ESTADO = '/pt/epoca/estado-novo-e-25-de-abril/';
+const variantBase = process.env.VARIANT_URL || 'http://localhost:4401';
 
 let failed = 0;
 const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
-const open = async (path, { width = 360, scheme = 'light', reduce = false, js = true } = {}) => {
+const browser = await launchBrowser();
+const open = async (path, { width = 360, scheme = 'light', reduce = false, js = true, from = base } = {}) => {
   const page = await browser.newPage();
   await page.setViewport({ width, height: 800, isMobile: width < 700, hasTouch: width < 700 });
   await page.emulateMediaFeatures([
@@ -23,7 +24,7 @@ const open = async (path, { width = 360, scheme = 'light', reduce = false, js = 
     { name: 'prefers-reduced-motion', value: reduce ? 'reduce' : 'no-preference' },
   ]);
   if (!js) await page.setJavaScriptEnabled(false);
-  await page.goto(`${base}${path}`, { waitUntil: 'networkidle0' });
+  await page.goto(`${from}${path}`, { waitUntil: 'networkidle0' });
   return page;
 };
 /** Mascot pictures that are drawn (size above zero) and inside the screen right now, the logo not counted. */
@@ -56,7 +57,7 @@ if (want('notfound')) {
     const page = await open('/404.html', { width });
     const n = await visibleFigures(page);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
-    ok(`404 ${width}px: one sad elephant, no horizontal scroll`, n === 1 && !overflow && (await page.$eval('img.mascot--normal', (i) => i.dataset.mascot)) === 'sad', `figures ${n}`);
+    ok(`404 ${width}px: one thinking elephant, no horizontal scroll`, n === 1 && !overflow && (await page.$eval('img.mascot--normal', (i) => i.dataset.mascot)) === 'think', `figures ${n}`);
     await page.close();
   }
 }
@@ -77,12 +78,18 @@ if (want('pager')) {
   ok('pager: the elephant stands on the top edge of the "next epoch" link, no clicks, fully visible', m && m.standsOnLink && m.insideLinkRight && m.pointer === 'none' && Number(m.opacity) === 1, JSON.stringify(m));
   ok('pager: one elephant on the screen', (await visibleFigures(page)) === 1);
   await page.close();
-  const regime = await open(ESTADO, { width: 1280 });
-  ok('the regime epoch page has no elephant at all', (await regime.$$('img.mascot:not(.mascot--logo)')).length === 0);
-  await regime.close();
   const card = await open('/pt/historia/terramoto-de-lisboa/', { width: 360 });
   ok('a heavy card has no elephant (only the logo)', (await card.$$('img.mascot:not(.mascot--logo)')).length === 0);
   await card.close();
+}
+
+// ---------- 3b. The regime epoch (fixture build only) ----------
+if (want('regime')) {
+  for (const width of [360, 1280]) {
+    const regime = await open(ESTADO, { width, from: variantBase });
+    ok(`the regime epoch page (${width}px) has no elephant at all, not even in the pager`, (await regime.$$('img.mascot:not(.mascot--logo)')).length === 0);
+    await regime.close();
+  }
 }
 
 // ---------- 4. Empty states ----------

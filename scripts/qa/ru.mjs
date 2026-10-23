@@ -1,8 +1,7 @@
 // Browser checks for the Russian stage: the language menu on 320 and 360 px, the root choice, the banner on a card that is
 // not translated, noindex and hreflang, Cyrillic fonts only on the Russian pages, plural forms.
 // Run against dist/ served by serve.mjs (base path "/"):   node ru.mjs [menu root banner fonts plural]
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -14,7 +13,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** `language`: what navigator.language says; `saved`: localStorage "lang" before the page starts. */

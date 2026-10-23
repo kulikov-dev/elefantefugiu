@@ -12,9 +12,14 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createConnection } from 'node:net';
+import { tmpdir } from 'node:os';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const here = new URL('./', import.meta.url).pathname;
-const root = new URL('../../', import.meta.url).pathname;
+const here = fileURLToPath(new URL('./', import.meta.url));
+const root = fileURLToPath(new URL('../../', import.meta.url));
+// The fixture build (prepare-variant.mjs) lives outside the repository.
+const VARIANT_DIR = join(process.env.QA_VARIANT_DIR || tmpdir(), 'elefante-variant');
 const out = `${here}out/`;
 const resultsFile = `${out}qa-results.json`;
 const BASE_PATH = (process.env.BASE_PATH ?? '').replace(/\/$/, '');
@@ -25,6 +30,7 @@ const SUITES = [
   { name: 'behave', script: 'behave.mjs', about: 'tab order, skip link, focus, no horizontal scroll' },
   { name: 'listings', script: 'listings.mjs', about: 'home, epoch and thread pages in a browser' },
   { name: 'controls', script: 'controls.mjs', about: 'epoch filters, view and pane switches, Surprise me' },
+  { name: 'controls-variant', script: 'controls.mjs', args: ['variant'], variant: true, about: 'the same on the fixture build: an epoch with more than 8 cards, so the Timeline / Grid switch appears' },
   { name: 'map-basic', script: 'map.mjs', args: ['nojs', 'tiles', 'filters', 'preview', 'layout'], about: 'map without JS, tiles failing, filters, preview, layout' },
   { name: 'map-more', script: 'map.mjs', args: ['link', 'epoch', 'weight'], about: 'map links, the epoch page map, weight' },
   { name: 'map-limit', script: 'map.mjs', args: ['limit'], about: 'at most 7 markers over a sweep of views' },
@@ -43,7 +49,8 @@ const SUITES = [
   { name: 'epoch-page', script: 'epochpage.mjs', about: 'epoch page: years on the scale, equal compact cards, view switch from 9 stories, active card, more eras list' },
   { name: 'map-tools', script: 'mapnear.mjs', about: 'map page: Near me, list with hooks and distances, Whole world and the overseas plate, markers and legend, epoch scale' },
   { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), 404 in every language' },
-  { name: 'mascot', script: 'mascot.mjs', about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
+  { name: 'mascot', script: 'mascot.mjs', args: ['logo', 'notfound', 'pager', 'empty', 'dark', 'motion'], about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
+  { name: 'mascot-variant', script: 'mascot.mjs', args: ['regime'], variant: true, about: 'no elephant on the pages of the regime epoch (fixture build)' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant'], variant: true, about: '16+ epoch and an empty mode' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['family'], variant: true, about: 'interactives behind the age screen' },
 ];
@@ -98,7 +105,7 @@ if (!existsSync(`${root}dist/index.html`)) {
 }
 if (!existsSync(`${here}node_modules/puppeteer-core`)) {
   console.log('Installing the browser check tools (scripts/qa, one time)...');
-  const r = spawnSync('npm', ['ci'], { cwd: here, stdio: 'inherit' });
+  const r = spawnSync('npm', ['ci'], { cwd: here, stdio: 'inherit', shell: true });
   if (r.status !== 0) process.exit(1);
 }
 
@@ -128,15 +135,15 @@ await serve(MAIN);
 const todo = wanted.filter((s) => !(flag('resume') && data.results[s.name]));
 if (todo.some((s) => s.variant)) {
   // A fresh run builds the variant from the current sources; --resume reuses the one already there.
-  if (!flag('resume') || !existsSync('/tmp/elefante-variant/dist/index.html')) {
+  if (!flag('resume') || !existsSync(join(VARIANT_DIR, 'dist/index.html'))) {
     console.log('Building the variant site (prepare-variant.mjs)...');
-    const r = spawnSync('node', ['prepare-variant.mjs'], { cwd: here, stdio: 'ignore' });
+    const r = spawnSync('node', ['prepare-variant.mjs'], { cwd: here, stdio: 'inherit', env: { ...process.env, QA_VARIANT_DIR: dirname(VARIANT_DIR) } });
     if (r.status !== 0) {
       console.error('The variant build failed.');
       process.exit(1);
     }
   }
-  await serve(VARIANT, { DIST: '/tmp/elefante-variant/dist' });
+  await serve(VARIANT, { DIST: join(VARIANT_DIR, 'dist') });
 }
 
 const started = Date.now();

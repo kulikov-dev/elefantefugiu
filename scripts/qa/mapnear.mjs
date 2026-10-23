@@ -1,8 +1,7 @@
 // Browser checks for the map page tools: "Near me" (a fake position, a denied one), the list with hooks and distances, "Whole world"
 // and the plate for stories overseas, the marker style and legend, the epoch scale under the map.
 // Run against dist/ served by serve.mjs (base path "/"):   node mapnear.mjs [tools near list world markers scale]
-import chromium from '@sparticuz/chromium';
-import puppeteer from 'puppeteer-core';
+import { fsPath, launchBrowser } from './browser.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -16,7 +15,7 @@ const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
-const browser = await puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
+const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const open = async (path, { width = 1280, height = 900, position = null, denied = false } = {}) => {
   const context = await browser.createBrowserContext();
