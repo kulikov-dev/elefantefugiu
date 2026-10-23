@@ -55,7 +55,8 @@ const SUITES = [
   { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), 404 in every language' },
   { name: 'mascot', script: 'mascot.mjs', args: ['logo', 'notfound', 'pager', 'empty', 'dark', 'motion'], about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'mascot-variant', script: 'mascot.mjs', args: ['regime'], variant: true, about: 'no elephant on the pages of the regime epoch (fixture build)' },
-  { name: 'family-variant', script: 'family.mjs', args: ['variant'], variant: true, about: '16+ epoch and an empty mode' },
+  { name: 'family-controls-variant', script: 'family.mjs', args: ['variant', 'toggle', 'lists', 'recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'map'], variant: true, about: 'the family checks on the fixture build (more cards, a long epoch with the grid, markers over the limit)' },
+  { name: 'family-variant', script: 'family.mjs', args: ['variant', 'variant-epoch'], variant: true, about: 'a 16+ epoch that every mode leaves empty (fixture build)' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['variant'], variant: true, about: 'the same for the dots plus the ship scale (a fixture card): the real site has no ship card' },
 ];
 

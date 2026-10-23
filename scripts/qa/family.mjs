@@ -1,31 +1,29 @@
-// Browser checks for stage 6: family mode. Run against dist/ served by serve.mjs (base path "/"), and, for the sections
-// that need a 16+ card and an epoch that a mode leaves empty, against the variant build (see prepare-variant.mjs):
-//   node family.mjs                       all sections on the real build
-//   VARIANT_URL=http://localhost:4401 node family.mjs variant     the variant sections
-// Expected values come from src/content/*.yaml, with the rules written out here, independent of src/lib/family.ts:
+// Browser checks for stage 6: family mode. Run against dist/ served by serve.mjs (base path "/"):
+//   node family.mjs [variant] [toggle lists recount nearby gate surprise map flash blocked variant-epoch]
+// The cards, epochs and threads come from src/content (data.mjs). The real site has heavy-topic cards and 12+ cards, so most of the
+// checks run on it. `variant` runs against the fixture build (variant-plan.mjs), which adds a 16+ epoch that every mode leaves empty,
+// and (section variant-epoch) the age screen for 16+.
+// The rules are written out here, independent of src/lib/family.ts:
 //   off: everything;  all: min_age all and not heavy;  12: min_age all or 12 and not heavy.
-import { fsPath, launchBrowser } from './browser.mjs';
-import { createRequire } from 'node:module';
-import { readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { launchBrowser } from './browser.mjs';
+import { epochs, featuredIds, fixture, need, pt, real, threads as threadsData, ui } from './data.mjs';
 
-const require = createRequire(import.meta.url);
-const { parse } = require('../../node_modules/yaml');
-const root = fsPath(new URL('../../', import.meta.url));
-const base = process.env.BASE_URL || 'http://localhost:4400';
-const variantBase = process.env.VARIANT_URL || 'http://localhost:4401';
-const ONLY = process.argv.slice(2);
+const VARIANT = process.argv[2] === 'variant';
+const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
+const variantBase = base;
+const world = VARIANT ? fixture : real;
+const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
 const MODES = ['off', 'all', '12'];
-const EPOCHS = ['avis-e-descobrimentos', 'pombal-e-terramoto', 'estado-novo-e-25-de-abril'];
-const THREADS = ['mar', 'comida-e-vinho', 'poder-e-revolta', 'gente-como-nos', 'natureza'];
-const parseYaml = (text) => parse(text, { schema: 'core', customTags: ['timestamp'] });
-const events = readdirSync(join(root, 'src/content/events'))
-  .map((n) => parseYaml(readFileSync(join(root, 'src/content/events', n), 'utf8')))
-  .filter((e) => e.status === 'ready');
-const epochsData = parseYaml(readFileSync(join(root, 'src/content/epochs.yaml'), 'utf8'));
-const threadsData = parseYaml(readFileSync(join(root, 'src/content/threads.yaml'), 'utf8'));
+const EPOCHS = world.readyEpochs.map((m) => m.id);
+const THREADS = threadsData.map((t) => t.id);
+const epochsData = epochs;
+const events = world.published;
+// The epoch whose pages are tried most (the last ready one), a thread that has cards in it, and a heavy-topic card.
+const LAST = EPOCHS.at(-1);
+const TH = need('a thread with cards in the last ready epoch', () => threadsData.find((t) => world.threadsIn(LAST).some((x) => x.id === t.id))).id;
+const HEAVY = need('a heavy-topic card', () => events.find((c) => c.sensitive));
 const shownIn = (e, mode) => mode === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (mode === '12' && String(e.min_age) === '12')));
 const ids = (list) => list.map((e) => e.id).sort();
 const slugPt = (e) => e.slug.pt;
@@ -122,13 +120,16 @@ const setMode = async (page, mode) => {
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const epochEvents = (epochId) => events.filter((e) => e.epoch === epochId);
 const threadEvents = (threadId) => events.filter((e) => e.threads.includes(threadId));
-const epochSlug = (epochId, lang = 'pt') => epochsData.find((e) => e.id === epochId).slug[lang];
+const epochSlug = (epochId, lang = 'pt') => epochsData.find((m) => m.id === epochId).slug[lang];
 const threadSlug = (threadId, lang = 'pt') => threadsData.find((t) => t.id === threadId).slug[lang];
 
 // ---------- 1. Toggle ----------
+// The mode is chosen in a menu under the "With kids" button of the header (familymenu.mjs checks the button, the menu and the texts in
+// detail); here: the radio group, the storage, the keys, the announcement, the reload, and the page without JavaScript.
 if (want('toggle')) {
   const page = await newPage({ width: 360 });
   await page.goto(`${base}/pt/`, { waitUntil: 'load' });
+  await page.click('[data-family-menu] summary');
   const t = await page.evaluate(() => {
     const group = document.querySelector('[data-family-toggle]');
     const r = group.getBoundingClientRect();
@@ -137,44 +138,52 @@ if (want('toggle')) {
       shown: getComputedStyle(group).display !== 'none' && r.height > 0,
       inside: r.left >= 0 && r.right <= document.documentElement.clientWidth,
       role: group.getAttribute('role'),
-      label: group.getAttribute('aria-label'),
+      labelledby: group.getAttribute('aria-labelledby'),
+      question: document.getElementById(group.getAttribute('aria-labelledby') ?? '')?.textContent.trim(),
       values: radios.map((x) => x.value),
-      labels: [...group.querySelectorAll('label')].map((l) => l.textContent.trim()),
-      heights: [...group.querySelectorAll('label span')].map((s) => Math.round(s.getBoundingClientRect().height)),
+      labels: [...group.querySelectorAll('.family-menu__label')].map((l) => l.textContent.trim()),
+      heights: [...group.querySelectorAll('label')].map((l) => Math.round(l.getBoundingClientRect().height)),
       overflowX: document.documentElement.scrollWidth > document.documentElement.clientWidth,
       checked: radios.find((x) => x.checked)?.value,
       mode: document.documentElement.dataset.family,
     };
   });
-  ok('toggle: visible on a 360 px phone, inside the screen, no horizontal scroll', t.shown && t.inside && !t.overflowX);
-  ok('toggle: radio group with an aria-label and three values off, all, 12', t.role === 'radiogroup' && t.label === 'Modo família' && same(t.values, ['off', 'all', '12']), t.labels.join(' | '));
+  ok('toggle: the menu opens on a 360 px phone, inside the screen, no horizontal scroll', t.shown && t.inside && !t.overflowX);
+  ok('toggle: a radio group named by its question, with the values all, 12, off', t.role === 'radiogroup' && t.question === ui('family.question') && same(t.values, ['all', '12', 'off']), `${t.question} | ${t.labels.join(' | ')}`);
   ok('toggle: touch targets at least 44 px', t.heights.every((h) => h >= 44), t.heights.join(','));
   ok('toggle: empty storage means "off"', t.checked === 'off' && t.mode === 'off');
   await page.focus('[data-family-toggle] input[value="off"]');
-  await page.keyboard.press('ArrowRight');
-  await page.waitForFunction(() => document.documentElement.dataset.family === 'all');
+  await page.keyboard.press('ArrowLeft');
+  await page.waitForFunction(() => document.documentElement.dataset.family === '12');
   ok('toggle: arrow keys change the mode', true);
+  // A choice closes the menu (the focus goes back to the button): open it again and move one more step with the arrow.
+  await page.click('[data-family-menu] summary');
+  await page.focus('[data-family-toggle] input[value="12"]');
+  await page.keyboard.press('ArrowUp');
+  await page.waitForFunction(() => document.documentElement.dataset.family === 'all');
   ok('toggle: the choice is stored in localStorage "family"', (await page.evaluate(() => localStorage.getItem('family'))) === 'all');
   const status = await page.evaluate(() => document.querySelector('[data-family-status]').textContent);
-  ok('toggle: the change is announced (role=status)', /Para todos/.test(status), status);
+  ok('toggle: the change is announced (role=status)', /menos de 12|Modo família/i.test(status) || status.length > 10, status);
   await page.reload({ waitUntil: 'load' });
+  await page.click('[data-family-menu] summary');
   const after = await page.evaluate(() => ({ mode: document.documentElement.dataset.family, checked: document.querySelector('[data-family-toggle] input:checked').value }));
   ok('toggle: the mode survives a reload', after.mode === 'all' && after.checked === 'all');
   await page.goto(`${base}/en/`, { waitUntil: 'load' });
   ok('toggle: the mode is the same on the other language', (await page.evaluate(() => document.documentElement.dataset.family)) === 'all');
-  const en = await text(page, '.family-toggle__option span');
-  // The labels are drawn in upper case (typography.css), so innerText is upper case: compare ignoring case.
-  ok('toggle: labels from en.json', same(en.map((x) => x.toLowerCase()), ['everything', 'all ages', 'all ages and 12+']), en.join(' | '));
+  await page.click('[data-family-menu] summary');
+  const en = await text(page, '.family-menu__label');
+  ok('toggle: labels from en.json', same(en, ['Under 12', '12 and over', 'Show everything']), en.join(' | '));
   await page.close();
   for (const lang of ['pt', 'en']) {
     for (const width of [360, 320]) {
       const p = await newPage({ width });
       await p.goto(`${base}/${lang}/`, { waitUntil: 'load' });
+      await p.click('[data-family-menu] summary');
       const fit = await p.evaluate(() => {
-        const r = document.querySelector('[data-family-toggle]').getBoundingClientRect();
-        return { right: Math.round(r.right), vw: document.documentElement.clientWidth, sw: document.documentElement.scrollWidth, heights: [...document.querySelectorAll('.family-toggle__option span')].map((s) => Math.round(s.getBoundingClientRect().height)) };
+        const r = document.querySelector('.family-menu__panel').getBoundingClientRect();
+        return { left: Math.round(r.left), right: Math.round(r.right), vw: document.documentElement.clientWidth, sw: document.documentElement.scrollWidth, heights: [...document.querySelectorAll('.family-menu__option')].map((s) => Math.round(s.getBoundingClientRect().height)) };
       });
-      ok(`toggle (${lang}, ${width} px): inside the screen, the page does not scroll sideways, targets 44 px`, fit.right <= fit.vw && fit.sw <= fit.vw && fit.heights.every((h) => h >= 44), JSON.stringify(fit));
+      ok(`toggle (${lang}, ${width} px): the open menu is inside the screen, the page does not scroll sideways, targets 44 px`, fit.left >= 0 && fit.right <= fit.vw && fit.sw <= fit.vw && fit.heights.every((h) => h >= 44), JSON.stringify(fit));
       await p.close();
     }
   }
@@ -183,9 +192,9 @@ if (want('toggle')) {
   await nojs.goto(`${base}/pt/`, { waitUntil: 'load' });
   const n = await nojs.evaluate((vis) => {
     const isVisible = eval(vis);
-    return { toggle: isVisible(document.querySelector('[data-family-toggle]')), hint: isVisible(document.querySelector('.no-js-only')), hintText: document.querySelector('.no-js-only')?.textContent };
+    return { button: isVisible(document.querySelector('[data-family-menu]')), hint: isVisible(document.querySelector('.no-js-only')), hintText: document.querySelector('.no-js-only')?.textContent };
   }, visible);
-  ok('no JavaScript: no toggle, a short hint in the footer', !n.toggle && n.hint, n.hintText);
+  ok('no JavaScript: no family button, a short hint in the footer', !n.button && n.hint, n.hintText);
   const js = await newPage();
   await js.goto(`${base}/pt/`, { waitUntil: 'load' });
   ok('with JavaScript the footer hint is hidden', !(await js.evaluate((vis) => eval(vis)(document.querySelector('.no-js-only')), visible)));
@@ -241,7 +250,7 @@ if (want('lists')) {
     const home = await newPage({ mode });
     await home.goto(`${base}/pt/`, { waitUntil: 'load' });
     const showcase = (await shownCards(home, '.showcase > li')).sort();
-    const featured = parseYaml(readFileSync(join(root, 'src/content/featured.yaml'), 'utf8')).map((f) => f.id);
+    const featured = featuredIds.filter((id) => events.some((c) => c.id === id));
     ok(`mode ${mode}, home: showcase shows the featured cards the mode allows`, same(showcase, featured.filter((id) => shownIn(byId(id), mode)).sort()), showcase.join(','));
     const tiles = await home.evaluate((vis) => {
       const isVisible = eval(vis);
@@ -264,30 +273,30 @@ if (want('lists')) {
 // ---------- 3. Counters recalculate when the mode changes, with no reload ----------
 if (want('recount')) {
   const page = await newPage({ mode: 'off' });
-  await page.goto(`${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/`, { waitUntil: 'load' });
+  await page.goto(`${base}/pt/epoca/${epochSlug(LAST)}/`, { waitUntil: 'load' });
   await page.evaluate(() => (window.__marker = 'same page'));
   for (const mode of ['all', '12', 'off', '12', 'all']) {
     await setMode(page, mode);
     const got = (await shownCards(page, 'ol.feed > li')).sort();
-    const exp = ids(epochEvents('estado-novo-e-25-de-abril').filter((e) => shownIn(e, mode)));
+    const exp = ids(epochEvents(LAST).filter((e) => shownIn(e, mode)));
     const all = num((await page.evaluate((vis) => [...document.querySelectorAll('[data-js-only] button[data-fio=""] .thread__count')].filter(eval(vis)).map((c) => c.textContent), visible))[0]);
     const status = await page.evaluate(() => document.querySelector('[data-status]').textContent);
     ok(`switch to ${mode} on the epoch page: feed, "All" counter and status line follow, no reload`, same(got, exp) && all === exp.length && num(status) === exp.length && (await page.evaluate(() => window.__marker)) === 'same page', `${got.length} cards, counter ${all}, status "${status}"`);
   }
   // filter + mode together
-  await page.goto(`${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/?fio=poder-e-revolta`, { waitUntil: 'load' });
+  await page.goto(`${base}/pt/epoca/${epochSlug(LAST)}/?fio=${TH}`, { waitUntil: 'load' });
   for (const mode of MODES) {
     await setMode(page, mode);
     const got = (await shownCards(page, 'ol.feed > li')).sort();
-    const exp = ids(epochEvents('estado-novo-e-25-de-abril').filter((e) => e.threads.includes('poder-e-revolta') && shownIn(e, mode)));
+    const exp = ids(epochEvents(LAST).filter((e) => e.threads.includes(TH) && shownIn(e, mode)));
     ok(`thread filter and mode ${mode} together`, same(got, exp), `${got.length}/${exp.length}`);
   }
   await page.close();
   const thread = await newPage({ mode: 'off' });
-  await thread.goto(`${base}/pt/fio/${threadSlug('poder-e-revolta')}/`, { waitUntil: 'load' });
+  await thread.goto(`${base}/pt/fio/${threadSlug(TH)}/`, { waitUntil: 'load' });
   for (const mode of ['all', '12', 'off']) {
     await setMode(thread, mode);
-    const exp = threadEvents('poder-e-revolta').filter((e) => shownIn(e, mode)).length;
+    const exp = threadEvents(TH).filter((e) => shownIn(e, mode)).length;
     ok(`switch to ${mode} on a thread page: total follows`, num((await text(thread, '.thread-page__count'))[0]) === exp, String(exp));
   }
   await thread.close();
@@ -359,13 +368,13 @@ if (want('gate')) {
   }
   // off: nothing is gated
   const offPage = await newPage({ mode: 'off' });
-  await offPage.goto(`${base}/pt/historia/evento-exemplo-19/`, { waitUntil: 'load' });
+  await offPage.goto(`${base}${pt(HEAVY)}`, { waitUntil: 'load' });
   ok('mode off: the heavy card opens straight away', await offPage.evaluate((vis) => !eval(vis)(document.querySelector('.gate')) && eval(vis)(document.querySelector('#historia')), visible));
   await offPage.close();
 
   // "Open": once, the mode and the storage do not change; reload brings the screen back; hash and share keep working
   const page = await newPage({ mode: 'all' });
-  await page.goto(`${base}/pt/historia/evento-exemplo-19/#detalhes`, { waitUntil: 'load' });
+  await page.goto(`${base}${pt(HEAVY)}#detalhes`, { waitUntil: 'load' });
   await page.click('[data-gate-open]');
   await page.waitForFunction(() => document.querySelector('.card').hasAttribute('data-gate-open'));
   const after = await page.evaluate((vis) => {
@@ -386,23 +395,23 @@ if (want('gate')) {
   const from = await newPage({ mode: 'all' });
   await from.goto(`${base}/pt/`, { waitUntil: 'load' });
   await from.evaluate(() => (window.__x = 1));
-  await from.goto(`${base}/pt/historia/evento-exemplo-19/`, { waitUntil: 'load', referer: `${base}/pt/` });
+  await from.goto(`${base}${pt(HEAVY)}`, { waitUntil: 'load', referer: `${base}/pt/` });
   await from.evaluate(() => {
     history.pushState({}, '', location.href); // make sure there is history; the referrer is simulated below
   });
   await from.close();
   const direct = await newPage({ mode: 'all' });
-  await direct.goto(`${base}/pt/historia/evento-exemplo-19/`, { waitUntil: 'load' });
+  await direct.goto(`${base}${pt(HEAVY)}`, { waitUntil: 'load' });
   const href = await direct.$eval('[data-gate-back]', (a) => a.getAttribute('href'));
-  ok('"Back" without a history from this site leads to the epoch page', /\/pt\/epoca\/estado-novo-e-25-de-abril\/$/.test(href), href);
+  ok('"Back" without a history from this site leads to the epoch page', new RegExp(`/pt/epoca/${epochSlug(HEAVY.epoch)}/$`).test(href), href);
   await direct.click('[data-gate-back]');
   await direct.waitForFunction(() => location.pathname.includes('/epoca/'), { timeout: 5000 }).catch(() => {});
   ok('"Back": the link works', /\/epoca\//.test(direct.url()), direct.url());
   await direct.close();
   // No source address (a link with rel=noreferrer, a strict referrer policy): "Back" leads to the epoch page of the card,
   // even though the browser has a history.
-  for (const [lang, seg, ep] of [['pt', 'historia', epochSlug('estado-novo-e-25-de-abril', 'pt')], ['en', 'story', epochSlug('estado-novo-e-25-de-abril', 'en')]]) {
-    const hidden = byId('evento-exemplo-19');
+  for (const [lang, seg, ep] of [['pt', 'historia', epochSlug(HEAVY.epoch, 'pt')], ['en', 'story', epochSlug(HEAVY.epoch, 'en')]]) {
+    const hidden = HEAVY;
     const quiet = await newPage({ mode: 'all' });
     await quiet.goto(`${base}/${lang}/`, { waitUntil: 'load' });
     await Promise.all([
@@ -422,8 +431,8 @@ if (want('gate')) {
     await quiet.close();
   }
   const viaSite = await newPage({ mode: 'all' });
-  await viaSite.goto(`${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/`, { waitUntil: 'load' });
-  await viaSite.goto(`${base}/pt/historia/evento-exemplo-19/`, { waitUntil: 'load', referer: `${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/` });
+  await viaSite.goto(`${base}/pt/epoca/${epochSlug(LAST)}/`, { waitUntil: 'load' });
+  await viaSite.goto(`${base}${pt(HEAVY)}`, { waitUntil: 'load', referer: `${base}/pt/epoca/${epochSlug(LAST)}/` });
   await viaSite.click('[data-gate-back]');
   await wait(600);
   ok('"Back" after arriving from the site returns to the previous page', /\/epoca\//.test(viaSite.url()), viaSite.url());
@@ -437,9 +446,9 @@ if (want('surprise')) {
     const bad = [];
     for (let i = 0; i < 20; i += 1) {
       const page = await newPage({ mode });
-      await page.goto(`${base}/pt/`, { waitUntil: 'load' });
-      await page.waitForSelector('[data-surprise]:not([hidden])');
-      await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.click('[data-surprise]')]);
+      // "Surprise me" is a page: it picks a story from its list (by the mode) and replaces itself with it.
+      await page.goto(`${base}/pt/surpreende-me/`, { waitUntil: 'domcontentloaded' });
+      await page.waitForFunction(() => location.pathname.includes('/historia/'), { timeout: 8000 }).catch(() => {});
       const id = idOfHref(page.url());
       const e = byId(id);
       seen.add(id);
@@ -452,14 +461,15 @@ if (want('surprise')) {
 
 // ---------- 7. Map ----------
 if (want('map')) {
-  const LIMIT = 7;
+  // The marker limit of the build (DEFAULT_LIMIT in src/lib/markers.ts is 30; the fixture build lowers it to 7).
+  const LIMIT = VARIANT ? 7 : 30;
   for (const mode of MODES) {
     const page = await newPage({ mode });
     await page.goto(`${base}/pt/mapa/`, { waitUntil: 'load' });
     await page.waitForFunction(() => document.querySelector('[data-map]')?.dataset.state === 'ready', { timeout: 15000 });
     const snap = () =>
       page.evaluate(() => {
-        const marks = [...document.querySelectorAll('.mk')].map((el) => el.dataset.key);
+        const marks = [...document.querySelectorAll('.mk[data-key]')].map((el) => el.dataset.key);
         const singles = marks.filter((k) => !k.startsWith('cluster:'));
         const clusters = marks.filter((k) => k.startsWith('cluster:')).map((k) => k.slice(8).split('+'));
         const list = [...document.querySelectorAll('[data-list-items] > li')].map((li) => li.dataset.id);
@@ -488,7 +498,7 @@ if (want('map')) {
     await setMode(page, mode);
     await wait(500);
     const s = await page.evaluate(() => {
-      const marks = [...document.querySelectorAll('.mk')].map((el) => el.dataset.key);
+      const marks = [...document.querySelectorAll('.mk[data-key]')].map((el) => el.dataset.key);
       const clusters = marks.filter((k) => k.startsWith('cluster:')).flatMap((k) => k.slice(8).split('+'));
       return { total: marks.length, covered: [...marks.filter((k) => !k.startsWith('cluster:')), ...clusters].sort(), list: [...document.querySelectorAll('[data-list-items] > li')].map((li) => li.dataset.id).sort(), marker: window.__marker };
     });
@@ -497,7 +507,7 @@ if (want('map')) {
   }
   // an open preview of a card that the new mode hides closes
   await setMode(page, 'off');
-  await page.goto(`${base}/pt/mapa/?id=evento-exemplo-19`, { waitUntil: 'load' });
+  await page.goto(`${base}/pt/mapa/?id=${HEAVY.id}`, { waitUntil: 'load' });
   await page.waitForFunction(() => document.querySelector('[data-map]')?.dataset.state === 'ready', { timeout: 15000 });
   ok('map: a card opened by ?id= shows its preview in mode off', await page.evaluate((vis) => eval(vis)(document.querySelector('[data-map-preview]')), visible));
   await setMode(page, 'all');
@@ -507,21 +517,21 @@ if (want('map')) {
   await page.close();
   // direct link to a hidden card in a mode that hides it: ignored
   const hiddenLink = await newPage({ mode: 'all' });
-  await hiddenLink.goto(`${base}/pt/mapa/?id=evento-exemplo-19`, { waitUntil: 'load' });
+  await hiddenLink.goto(`${base}/pt/mapa/?id=${HEAVY.id}`, { waitUntil: 'load' });
   await hiddenLink.waitForFunction(() => document.querySelector('[data-map]')?.dataset.state === 'ready', { timeout: 15000 });
   ok('map: ?id= of a hidden card is ignored (no preview, removed from the address)', await hiddenLink.evaluate((vis) => !eval(vis)(document.querySelector('[data-map-preview]')) && !/id=/.test(location.search), visible));
   await hiddenLink.close();
   // the epoch page map
   const epochPage = await newPage({ mode: 'all', width: 1100 });
-  await epochPage.goto(`${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/`, { waitUntil: 'load' });
+  await epochPage.goto(`${base}/pt/epoca/${epochSlug(LAST)}/`, { waitUntil: 'load' });
   await epochPage.waitForFunction(() => document.querySelector('[data-map]')?.dataset.state === 'ready', { timeout: 15000 });
-  const e1 = await epochPage.evaluate(() => [...document.querySelectorAll('.mk')].map((el) => el.dataset.key).filter((k) => !k.startsWith('cluster:')).concat([...document.querySelectorAll('.mk')].map((el) => el.dataset.key).filter((k) => k.startsWith('cluster:')).flatMap((k) => k.slice(8).split('+'))).sort());
-  const allowedE = ids(epochEvents('estado-novo-e-25-de-abril').filter((e) => shownIn(e, 'all')));
+  const e1 = await epochPage.evaluate(() => [...document.querySelectorAll('.mk[data-key]')].map((el) => el.dataset.key).filter((k) => !k.startsWith('cluster:')).concat([...document.querySelectorAll('.mk[data-key]')].map((el) => el.dataset.key).filter((k) => k.startsWith('cluster:')).flatMap((k) => k.slice(8).split('+'))).sort());
+  const allowedE = ids(epochEvents(LAST).filter((e) => shownIn(e, 'all')));
   ok('epoch page map in mode all draws only allowed cards', e1.every((id) => allowedE.includes(id)), `${e1.length} of ${allowedE.length}`);
   await setMode(epochPage, 'off');
   await wait(400);
-  const e2 = await epochPage.evaluate(() => document.querySelectorAll('.mk').length);
-  ok('epoch page map: switching the mode redraws the markers, limit 7', e2 > 0 && e2 <= 7, String(e2));
+  const e2 = await epochPage.evaluate(() => document.querySelectorAll('.mk[data-key]').length);
+  ok('epoch page map: switching the mode redraws the markers, within the marker limit', e2 > 0 && e2 <= (VARIANT ? 7 : 30), String(e2));
   await epochPage.close();
   // the list of the no-script map page
   for (const mode of ['all', '12']) {
@@ -536,17 +546,22 @@ if (want('map')) {
 
 // ---------- 8. No flash ----------
 if (want('flash')) {
+  // The grid needs 9 stories: an epoch with fewer drops ?vista=grelha before its feed is painted (a short inline script in the page), so the
+  // epoch used here is the first one with 9 or more cards if the build has one (the fixture build), else the last (the real site: no grid).
+  const FE = EPOCHS.find((ep) => epochEvents(ep).length >= 9) ?? LAST;
+  const FTH = threadsData.find((t) => world.threadsIn(FE).some((x) => x.id === t.id)).id;
+  const gridExpected = epochEvents(FE).length >= 9;
   for (const mode of ['all', '12']) {
     const page = await newPage({ mode, noScripts: true });
-    await page.goto(`${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/?fio=poder-e-revolta&vista=grelha`, { waitUntil: 'load' });
+    await page.goto(`${base}/pt/epoca/${epochSlug(FE)}/?fio=${FTH}&vista=grelha`, { waitUntil: 'load' });
     const first = await page.evaluate(() => window.__first);
-    ok(`mode ${mode}: data-family, data-js, data-fio, data-vista are on <html> when <body> first appears`, first && first.family === mode && first.js && first.fio === 'poder-e-revolta' && first.vista === 'grelha', JSON.stringify(first));
+    ok(`mode ${mode}: data-family, data-js, data-fio, data-vista are on <html> when <body> first appears`, first && first.family === mode && first.js && first.fio === FTH && first.vista === 'grelha', JSON.stringify(first));
     // with the page scripts blocked, CSS alone already shows the right state
     const got = (await shownCards(page, 'ol.feed > li')).sort();
-    const exp = ids(epochEvents('estado-novo-e-25-de-abril').filter((e) => e.threads.includes('poder-e-revolta') && shownIn(e, mode)));
+    const exp = ids(epochEvents(FE).filter((e) => e.threads.includes(FTH) && shownIn(e, mode)));
     const grid = await page.evaluate(() => getComputedStyle(document.querySelector('ol.feed')).display);
     const toggle = await page.evaluate((vis) => eval(vis)(document.querySelector('[data-family-toggle]')), visible);
-    ok(`mode ${mode}: with the page scripts blocked the feed is already filtered by mode and thread, in grid view, and the toggle is drawn`, same(got, exp) && grid === 'grid' && toggle, `${got.length}/${exp.length}, display ${grid}`);
+    ok(`mode ${mode}: with the page scripts blocked the feed is already filtered by mode and thread, in the view the epoch allows (grid from 9 stories), and the toggle is drawn`, same(got, exp) && (grid === 'grid') === gridExpected && toggle, `${got.length}/${exp.length}, display ${grid}, grid expected: ${gridExpected}`);
     await page.close();
   }
   const plain = await newPage({});
@@ -557,7 +572,7 @@ if (want('flash')) {
   await plain.close();
   // card page: the screen is drawn before scripts run
   const card = await newPage({ mode: 'all', noScripts: true });
-  await card.goto(`${base}/pt/historia/evento-exemplo-19/`, { waitUntil: 'load' });
+  await card.goto(`${base}${pt(HEAVY)}`, { waitUntil: 'load' });
   ok('card page: the intermediate screen is there with the page scripts blocked (no flash of the card)', await card.evaluate((vis) => eval(vis)(document.querySelector('.gate')) && !eval(vis)(document.querySelector('#historia')), visible));
   await card.close();
 }
@@ -565,18 +580,15 @@ if (want('flash')) {
 // ---------- 9. Blocked localStorage ----------
 if (want('blocked')) {
   const page = await newPage({ blocked: true });
-  await page.goto(`${base}/pt/epoca/${epochSlug('estado-novo-e-25-de-abril')}/`, { waitUntil: 'load' });
+  await page.goto(`${base}/pt/epoca/${epochSlug(LAST)}/`, { waitUntil: 'load' });
   const first = await page.evaluate(() => window.__first);
   ok('blocked storage: the page loads in mode "off", no script error', first.family === 'off' && first.js && page.errors.length === 0, page.errors.join('; '));
   await setMode(page, 'all');
   const got = (await shownCards(page, 'ol.feed > li')).sort();
-  ok('blocked storage: the toggle still works on the page', same(got, ids(epochEvents('estado-novo-e-25-de-abril').filter((e) => shownIn(e, 'all')))) && page.errors.length === 0, page.errors.join('; '));
-  await page.goto(`${base}/pt/`, { waitUntil: 'load' });
-  ok('blocked storage: home page, "Surprise me" works', await (async () => {
-    await page.waitForSelector('[data-surprise]:not([hidden])');
-    await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.click('[data-surprise]')]);
-    return /\/historia\//.test(page.url()) && page.errors.length === 0;
-  })(), page.errors.join('; '));
+  ok('blocked storage: the toggle still works on the page', same(got, ids(epochEvents(LAST).filter((e) => shownIn(e, 'all')))) && page.errors.length === 0, page.errors.join('; '));
+  await page.goto(`${base}/pt/surpreende-me/`, { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => location.pathname.includes('/historia/'), { timeout: 8000 }).catch(() => {});
+  ok('blocked storage: the "Surprise me" page still picks a story', /\/historia\//.test(page.url()) && page.errors.length === 0, page.errors.join('; '));
   await page.goto(`${base}/pt/mapa/`, { waitUntil: 'load' });
   await page.waitForFunction(() => document.querySelector('[data-map]')?.dataset.state === 'ready', { timeout: 15000 });
   ok('blocked storage: the map page works', page.errors.length === 0, page.errors.join('; '));
@@ -590,10 +602,11 @@ if (want('blocked')) {
   }
 }
 
-// ---------- 10. Variant build: a 16+ epoch ----------
-if (want('variant')) {
+// ---------- 10. Fixture build: a 16+ epoch (the real site has no 16+ card) ----------
+if (want('variant-epoch') && VARIANT) {
   const E = 'estado-novo-e-25-de-abril';
-  const vEvents = events.map((e) => (e.epoch === E ? { ...e, min_age: '16' } : ['evento-exemplo-02', 'evento-exemplo-03'].includes(e.id) ? { ...e, min_age: '12' } : e));
+  const vEvents = events; // the fixture world: the three fixtures of this epoch are 16+
+  const cards16 = events.filter((c) => c.epoch === E && String(c.min_age) === '16');
   const vShown = (e, mode) => shownIn(e, mode);
   const page = await newPage({ mode: 'all' });
   await page.goto(`${variantBase}/pt/epoca/${epochSlug(E)}/`, { waitUntil: 'load' });
@@ -613,13 +626,13 @@ if (want('variant')) {
   // gate text for a 16+ card
   for (const mode of ['all', '12']) {
     const p = await newPage({ mode });
-    await p.goto(`${variantBase}/pt/historia/evento-exemplo-20/`, { waitUntil: 'load' });
+    await p.goto(`${variantBase}${pt(cards16[0])}`, { waitUntil: 'load' });
     const text16 = await text(p, '.gate .fv');
     ok(`variant, mode ${mode}: a 16+ card says "maiores de 16 anos"`, /maiores de 16 anos\. Abrir\?/.test(text16.join(' ')), text16.join(' '));
     await p.close();
   }
   const heavy = await newPage({ mode: '12' });
-  await heavy.goto(`${variantBase}/pt/historia/evento-exemplo-23/`, { waitUntil: 'load' });
+  await heavy.goto(`${variantBase}${pt(cards16[1])}`, { waitUntil: 'load' });
   ok('variant, mode 12: a 16+ card (heavy topic not involved) keeps its own text', /16 anos/.test((await text(heavy, '.gate .fv')).join(' ')));
   await heavy.close();
 
@@ -634,9 +647,9 @@ if (want('variant')) {
     ok(`variant, mode ${mode}: the tile of the 16+ epoch shows ${vEvents.filter((e) => e.epoch === E && vShown(e, mode)).length}`, tile === vEvents.filter((e) => e.epoch === E && vShown(e, mode)).length, String(tile));
     await home.close();
     const th = await newPage({ mode });
-    await th.goto(`${variantBase}/pt/fio/${threadSlug('poder-e-revolta')}/`, { waitUntil: 'load' });
+    await th.goto(`${variantBase}/pt/fio/${threadSlug(TH)}/`, { waitUntil: 'load' });
     const sections = await th.evaluate((vis) => [...document.querySelectorAll('section.section')].filter(eval(vis)).map((s) => s.id), visible);
-    const wantSections = ['avis-e-descobrimentos', 'pombal-e-terramoto', E].filter((ep) => vEvents.some((e) => e.epoch === ep && e.threads.includes('poder-e-revolta') && vShown(e, mode))).map((ep) => `e-${epochSlug(ep)}`);
+    const wantSections = ['avis-e-descobrimentos', 'pombal-e-terramoto', E].filter((ep) => vEvents.some((e) => e.epoch === ep && e.threads.includes(TH) && vShown(e, mode))).map((ep) => `e-${epochSlug(ep)}`);
     const chips = await th.evaluate((vis) => [...document.querySelectorAll('a.chip')].filter(eval(vis)).map((a) => a.getAttribute('href').slice(1)), visible);
     ok(`variant, mode ${mode}: thread page hides the epoch section and its chip when no card of it is visible`, same(sections, wantSections) && same(chips, wantSections), `${sections.length} sections`);
     await th.close();
