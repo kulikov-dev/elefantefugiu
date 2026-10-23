@@ -251,9 +251,8 @@ for (const ev of events) {
     if (/google\.|maps\.apple|bing\.com\/maps|waze|geo:/i.test(bridgeBlock)) fail('the bridge block must not name Google or another service, and the geo: link is made by the script on Android only');
     const sources = html.match(/<section class="sources"[\s\S]*?<\/section>/)?.[0] ?? '';
     if ((sources.match(/<li\b/g) ?? []).length !== ev.sources.length) fail(`expected ${ev.sources.length} sources in the list`);
-    // The check date appears once the card has been reviewed (reviewed_on); an unreviewed card shows none.
-    if (ev.reviewed_on && !has(/<p class="checked"/)) fail('check date is missing');
-    if (!ev.reviewed_on && has(/<p class="checked"/)) fail('check date shown for a card that is not reviewed');
+    // Who reviewed a card and when (reviewed_by, reviewed_on) is not shown: the project has no separate reviewer. The date of the sources is.
+    if (has(/<p class="checked"/)) fail('a card page must not show who or when reviewed it');
     if (Boolean(ev.interactive) !== has(/data-interactive=/)) fail('interactive placeholder does not match the data');
     if (!has(/data-share-link/) || !has(/data-share-button/)) fail('share widget is missing');
     if (!has(/(corrigir|report)\/\?url=/)) fail('"Found a mistake?" link with the card address is missing');

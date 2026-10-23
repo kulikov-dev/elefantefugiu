@@ -20,7 +20,7 @@ import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
-import { cardNeighbours, firstSentence, formatDate, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
+import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
 import { distanceParts } from '../lib/distance';
 import { epochHasContent } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
@@ -213,14 +213,6 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         {event.interactive?.type === 'ship_scale' && <ShipScale lang={lang} data={event.interactive.data} textLang={textLang} />}
         <BridgeBlock lang={lang} bridge={event.bridge} cardId={event.id} textLang={textLang} />
         {event.sources.length > 0 && <SourceList lang={lang} sources={event.sources} />}
-        {
-          event.reviewed_on && (
-            <p class="checked">
-              {t(lang, 'ui.checked_on')}{' '}
-              <time datetime={event.reviewed_on.toISOString().slice(0, 10)}>{formatDate(event.reviewed_on, lang)}</time>
-            </p>
-          )
-        }
       </Fragment>
     </CardLayers>
 
@@ -361,11 +353,6 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
   .figure__credit {
     display: block;
-  }
-
-  .checked {
-    color: var(--color-ink-muted);
-    font-size: var(--text-sm);
   }
 
   /* "Share" and, under it, the small link "Spotted an inaccuracy?", both always in view (not inside "More"). */

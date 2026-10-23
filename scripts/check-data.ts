@@ -169,7 +169,7 @@ for (const [kind, list] of [['epoch', epochs], ['thread', threads]] as const) {
   }
 }
 
-/** A card that is ready but not reviewed yet, or has gaps in its bridge, is a warning while the site is built for preview and an error under the launch gate (ALLOW_PLACEHOLDER=false). */
+/** A card that is ready and has gaps in its bridge, is a warning while the site is built for preview and an error under the launch gate (ALLOW_PLACEHOLDER=false). */
 const gapLevel: Level = (process.env.ALLOW_PLACEHOLDER ?? 'true').trim().toLowerCase() === 'false' ? 'error' : 'warn';
 
 for (const { item: ev, file, stem } of events) {
@@ -313,8 +313,6 @@ for (const { item: ev, file, stem } of events) {
 
   // fields required for ready
   if (ready) {
-    if (ev.reviewed_by === undefined || ev.reviewed_by.trim() === '') report(gapLevel, file, 'required when status is ready (not reviewed yet)', 'reviewed_by');
-    if (ev.reviewed_on === undefined) report(gapLevel, file, 'required when status is ready (not reviewed yet)', 'reviewed_on');
     for (const key of ['name', 'address', 'url'] as const) {
       if (isTodo(ev.bridge[key])) report(gapLevel, file, 'is empty or TODO but status is ready', `bridge.${key}`);
     }

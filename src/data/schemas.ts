@@ -135,6 +135,7 @@ export const eventSchema = z
   image: image.optional(),
   related: z.array(z.string()).optional(),
   interactive: interactive.optional(),
+  /** Optional and not shown anywhere: the project has one editor and no separate reviewer. */
   reviewed_by: z.string().optional(),
   reviewed_on: z.coerce.date().optional(),
   status: z.enum(['draft', 'ready']),
