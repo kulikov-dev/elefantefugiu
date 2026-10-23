@@ -1,7 +1,7 @@
 // Which map markers are visible (docs/design.md section 4.3). Pure functions: no Leaflet, no DOM, no Astro.
 //
 // Rules:
-// - At most `limit` things are drawn at once (default 7), counting single markers AND clusters together.
+// - At most `limit` things are drawn at once (default 30, DEFAULT_LIMIT), counting single markers AND clusters together.
 // - Priority: the pinned card (if any), then frame cards (importance 3), then cards of the active thread (primary or second),
 //   then the rest by distance to the map centre. Ties break by id, so the result is stable.
 // - Cards that do not fit are grouped into clusters ("+12"), each with at least two cards.
@@ -78,7 +78,8 @@ export interface MarkerResult {
   canShowMore: boolean;
 }
 
-export const DEFAULT_LIMIT = 7;
+/** How many markers (singles and clusters together) are drawn at once before "Show more". Above the number of stories on the site, so the button stays hidden until the catalogue outgrows it. */
+export const DEFAULT_LIMIT = 30;
 export const SHOW_MORE_STEP = 5;
 export const DEFAULT_MAX_CLUSTERS = 3;
 

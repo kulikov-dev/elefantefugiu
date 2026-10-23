@@ -105,7 +105,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const status = $('[data-map-status]');
   const pageMode = cfg.mode === 'page';
   const byId = new Map(cfg.cards.map((c) => [c.id, c]));
-  // Family mode: cards the mode hides take no part in anything below (markers, the limit of 7, "In this area", filters).
+  // Family mode: cards the mode hides take no part in anything below (markers, the marker limit, "In this area", filters).
   // The list is recomputed when the mode changes.
   let cards = cfg.cards.filter((c) => isVisibleInMode(c, currentFamilyMode()));
 

@@ -101,7 +101,7 @@ describe('limit', () => {
 
   it('is at most 7 whenever "Show more" has not been pressed', () => {
     for (const s of scenarios(3000, 2)) {
-      expect(drawn(selectMarkers({ ...s, more: 0 }))).toBeLessThanOrEqual(7);
+      expect(drawn(selectMarkers({ ...s, more: 0 }))).toBeLessThanOrEqual(DEFAULT_LIMIT);
     }
   });
 
@@ -276,8 +276,9 @@ describe('"Show more" and zooming in', () => {
       importance: 1,
       threads: ['mar'],
     }));
-    const base = { cards, bounds: PORTUGAL, center: { lat: 38.7, lon: -9.1 } };
-    expect(DEFAULT_LIMIT).toBe(7);
+    // The step is checked from a small limit of 7 (the default is 30, so the button stays hidden at the present number of stories).
+    const base = { cards, bounds: PORTUGAL, center: { lat: 38.7, lon: -9.1 }, limit: 7 };
+    expect(DEFAULT_LIMIT).toBe(30);
     expect(SHOW_MORE_STEP).toBe(5);
     expect(drawn(selectMarkers(base))).toBe(7);
     expect(drawn(selectMarkers({ ...base, more: 1 }))).toBe(12);
@@ -340,18 +341,18 @@ describe('reachability', () => {
     for (const c of cards) expect(reachable(c, cards, { activeThread: null, activeEpoch: null })).toEqual({ ok: true, more: 0 });
   });
 
-  it('twenty cards on one spot are reached by "Show more" in steps of five', () => {
-    const cards: MapCard[] = Array.from({ length: 20 }, (_, i) => ({
+  it('forty cards on one spot are reached by "Show more" in steps of five', () => {
+    const cards: MapCard[] = Array.from({ length: 40 }, (_, i) => ({
       id: `p${String(i).padStart(2, '0')}`,
       lat: 38.7,
       lon: -9.1,
       importance: 1,
       threads: ['mar'],
     }));
-    const last = cards[19]!;
+    const last = cards[39]!;
     const r = reachable(last, cards, { activeThread: null, activeEpoch: null });
     expect(r.ok).toBe(true);
-    expect(r.more).toBe(Math.ceil((20 - DEFAULT_LIMIT) / SHOW_MORE_STEP));
+    expect(r.more).toBe(Math.ceil((40 - DEFAULT_LIMIT) / SHOW_MORE_STEP));
   });
 });
 
@@ -396,19 +397,19 @@ describe('real events', () => {
               east: focus.lon + z * 2,
             };
             const r = selectMarkers({ cards, bounds: b, center: focus, activeThread, activeEpoch });
-            expect(drawn(r)).toBeLessThanOrEqual(7);
+            expect(drawn(r)).toBeLessThanOrEqual(DEFAULT_LIMIT);
           }
         }
       }
     }
   });
 
-  it('whole country: 7 things, frame cards first', () => {
+  it('whole country: up to the limit, frame cards first', () => {
     const r = selectMarkers({ cards, bounds: country, center: { lat: 39.5, lon: -8 } });
-    // Frame cards come first; with fewer than 7 of them the rest is filled with stories, up to 7 in all.
+    // Frame cards come first; with fewer than the limit of them the rest is filled with stories.
     const frames = cards.filter((c) => c.importance === 3).length;
-    expect(drawn(r)).toBe(Math.min(7, cards.length));
-    expect(r.markers.filter((m) => m.kind === 'frame')).toHaveLength(Math.min(7, frames));
+    expect(drawn(r)).toBe(Math.min(DEFAULT_LIMIT, cards.length));
+    expect(r.markers.filter((m) => m.kind === 'frame')).toHaveLength(Math.min(DEFAULT_LIMIT, frames));
     expect(r.inArea).toHaveLength(cards.length);
   });
 
@@ -463,6 +464,6 @@ describe('markers use the bridge coordinates', () => {
   it('keeps the limit of seven whatever the places are', () => {
     const many = Array.from({ length: 30 }, (_, i) => ev(`e${i}`, [-30 + i, 100 + i], [37 + (i % 6) * 0.9, -9 + (i % 5) * 0.55]));
     const r = pick(many);
-    expect(r.markers.length + r.clusters.length).toBeLessThanOrEqual(7);
+    expect(r.markers.length + r.clusters.length).toBeLessThanOrEqual(DEFAULT_LIMIT);
   });
 });
