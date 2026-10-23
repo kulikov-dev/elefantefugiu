@@ -5,7 +5,7 @@ import { join, relative } from 'node:path';
 import { parseDocument } from 'yaml';
 import type { ZodType } from 'astro/zod';
 import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
-import { needsAttribution, type PictureData } from '../src/lib/pictures';
+import { needsAttribution } from '../src/lib/pictures';
 import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
 
 import { fileURLToPath } from 'node:url';
@@ -107,7 +107,8 @@ for (const { item, file } of epochs) {
 
 // A picture (image, detail_image, fallback_image) of a card or an epoch. Every picture that is in the data is on the site, so every one
 // must have its file and its texts: alt and caption in each language the page is written in, the author, the licence, and the source.
-type PictureInData = Pick<PictureData, 'file' | 'alt' | 'caption' | 'author' | 'license' | 'ai'> & { license_url?: string | undefined; source_url?: string | undefined };
+type Texts = Partial<Record<DataLang, string | undefined>>;
+type PictureInData = { file: string; alt: Texts; caption: Texts; author: string | Texts; license: string; ai: boolean; license_url?: string | undefined; source_url?: string | undefined };
 const ALLOWED_LICENSES = /^(Public domain|CC0|CC BY \d\.\d|CC BY-SA \d\.\d|AI-generated)$/;
 const ALT_BANNED_WORDS = /(?<!\p{L})(imagem|image|picture|изображение|картинка)(?!\p{L})/iu;
 const HTTP = /^https?:\/\/\S+$/;
@@ -119,7 +120,8 @@ function checkPicture(file: string, field: string, pic: PictureInData, langs: Da
     else if (ALT_BANNED_WORDS.test(alt)) report('warn', file, 'alt text says "image" / "picture": describe what is shown instead', `${field}.alt`, lang);
     if ((pic.caption[lang] ?? '').trim() === '') report('error', file, 'caption is empty', `${field}.caption`, lang);
   }
-  const author = typeof pic.author === 'string' ? [pic.author] : langs.map((l) => pic.author[l] ?? '');
+  const by = pic.author;
+  const author = typeof by === 'string' ? [by] : langs.map((l) => by[l] ?? '');
   if (author.some((a) => a.trim() === '')) report('error', file, 'author is empty', `${field}.author`);
   const license = pic.license.trim();
   if (license === '') report('error', file, 'license is empty', `${field}.license`);
