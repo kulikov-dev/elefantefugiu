@@ -125,6 +125,23 @@ sources:
     url: https://nwcartographic.com/blogs/essays-articles/the-cantino-planisphere
     type: press
     accessed: '2026-10-16'
+image:
+  file: cantino-1502.webp
+  alt:
+    pt: "Planisfério de Cantino, 1502: mapa-múndi português com a linha de Tordesilhas e a costa do Brasil."
+    en: "Cantino planisphere, 1502: Portuguese world map showing the Tordesillas line and the coast of Brazil."
+    ru: "Планисфера Кантино, 1502: португальская карта мира с линией Тордесильяса и побережьем Бразилии."
+  caption:
+    pt: "Planisfério de Cantino, 1502. Cartógrafo português anónimo. Biblioteca Estense Universitária, Módena."
+    en: "Cantino planisphere, 1502. Anonymous Portuguese cartographer. Biblioteca Estense Universitaria, Modena."
+    ru: "Планисфера Кантино, 1502. Неизвестный португальский картограф. Университетская библиотека Эстенсе, Модена."
+  author:
+    pt: "Autor desconhecido"
+    en: "Unknown author"
+    ru: "Автор неизвестен"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Cantino_planisphere_(1502).jpg"
+  focus: "20% 55%"
 related: []
 status: ready
 placeholder: false

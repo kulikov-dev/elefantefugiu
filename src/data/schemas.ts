@@ -28,14 +28,29 @@ const source = z.strictObject({
   accessed: z.coerce.date(),
 });
 
-const image = z.strictObject({
-  /** Path inside public/, for example images/placeholders/epoch-a.svg */
-  src: z.string(),
+/** A picture: the file is in src/assets/stories/ (Astro makes the sizes), the rest is what the page shows under it. */
+export const picture = z.strictObject({
+  /** File name inside src/assets/stories/, for example cantino-1502.webp. */
+  file: z.string(),
+  /** What the picture shows, one sentence, for every language the card is written in. */
   alt: text,
-  /** Visible caption under the picture; optional. Credit and licence are always shown as well. */
-  caption: text.optional(),
-  credit: z.string(),
+  /** The visible caption: who, what, when, where it is kept. For an AI picture it says so. */
+  caption: text,
+  /** A name (the same in every language) or a text per language ("Unknown author"). */
+  author: z.union([z.string(), text]),
+  /** "Public domain", "CC0", "CC BY 4.0", "CC BY-SA 4.0", "AI-generated". */
   license: z.string(),
+  /** The licence text; required for CC BY and CC BY-SA (check-data). */
+  license_url: z.string().optional(),
+  /** The page of the picture (Commons). Not needed for an AI picture and never shown for one. */
+  source_url: z.string().optional(),
+  /** Made by an AI: the caption already says so, no extra badge; the page shows the caption only. */
+  ai: z.boolean().default(false),
+  /** object-position of the crop on cards ("20% 55%"); without it the centre. */
+  focus: z
+    .string()
+    .regex(/^\d{1,3}% \d{1,3}%$/, 'focus is "x% y%", for example "50% 30%"')
+    .optional(),
 });
 
 /** Keys of the interactive colour tokens: --viz-tone-<key> in src/styles/tokens.css. */
@@ -132,7 +147,9 @@ export const eventSchema = z
   story: text,
   more: text,
   sources: z.array(source),
-  image: image.optional(),
+  image: picture.optional(),
+  /** A second picture (a document, a map, a portrait) shown inside "More", whole, never cropped. */
+  detail_image: picture.optional(),
   related: z.array(z.string()).optional(),
   interactive: interactive.optional(),
   /** Optional and not shown anywhere: the project has one editor and no separate reviewer. */
@@ -182,8 +199,11 @@ export const epochSchema = z
      * missing one is never replaced by another: the page shows the block only in a language that has the text.
      */
     intro: z.strictObject({ pt: z.string().optional(), en: z.string().optional(), ru: z.string().optional() }).optional(),
-    /** Preview image (Open Graph) for cards of this epoch that have no image of their own. Path inside public/. */
-    fallback_image: z.string().optional(),
+    /**
+     * The picture of cards of this epoch that have no image of their own (cards, "Next", previews). A path inside public/ (a string)
+     * is a provisional picture that only serves the preview (Estado Novo); a real picture is an object.
+     */
+    fallback_image: z.union([picture, z.string()]).optional(),
     /** Which fields are still provisional. `fallback_image` (a picture to be made) does not make the page test text; any other field does. */
     placeholder: z.array(z.enum(EPOCH_PLACEHOLDER_FIELDS)).default([]),
   })

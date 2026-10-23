@@ -75,6 +75,8 @@
     "placeholder_note": "This content is provisional and only used to test the site. It is not verified history.",
     "image_credit": "Image",
     "image_license": "Licence",
+    "image_source": "Source",
+    "license_public_domain": "Public domain",
     "story_heading": "The story",
     "context": "Context",
     "official_site": "Official website",

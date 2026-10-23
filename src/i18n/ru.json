@@ -75,6 +75,8 @@
     "placeholder_note": "Этот текст временный и нужен только для проверки сайта. Это не проверенная история.",
     "image_credit": "Изображение",
     "image_license": "Лицензия",
+    "image_source": "Источник",
+    "license_public_domain": "Общественное достояние",
     "story_heading": "История",
     "context": "Контекст",
     "official_site": "Официальный сайт",

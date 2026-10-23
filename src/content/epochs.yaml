@@ -27,8 +27,20 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: true
-  fallback_image: images/placeholders/epoch-a.svg
-  placeholder: [fallback_image]
+  fallback_image:
+    file: epoca-avis-e-descobrimentos.webp
+    alt:
+      pt: "Ilustração ao estilo do azulejo azul e branco: naus com a cruz da Ordem de Cristo nas velas partem para o mar, e na praia as pessoas acenam-lhes em despedida."
+      en: "Blue-and-white azulejo-style illustration: ships with the Cross of the Order of Christ on their sails head out to sea while people on the beach wave goodbye."
+      ru: "Иллюстрация в духе сине-белого азулежу: корабли с крестом ордена Христа на парусах уходят в море, а люди на берегу машут им вслед."
+    caption:
+      pt: "Ilustração criada por IA (Gemini) a partir da época de Avis e dos Descobrimentos. Não é uma imagem histórica."
+      en: "AI-generated illustration (Gemini) based on the age of Avis and the Discoveries. Not a historical image."
+      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Ависов и Великих открытий. Не историческое изображение."
+    author: Gemini (AI)
+    license: AI-generated
+    ai: true
+  placeholder: []
   intro:
     pt: Uma nova dinastia defendeu o país em Aljubarrota e virou-se para o mar. Em
       século e meio, o pequeno Portugal chegou a África, à Índia, ao Brasil e ao
@@ -62,8 +74,20 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: true
-  fallback_image: images/placeholders/epoch-b.svg
-  placeholder: [fallback_image]
+  fallback_image:
+    file: epoca-pombal-e-terramoto.webp
+    alt:
+      pt: "Ilustração ao estilo do azulejo azul e branco: Lisboa a ser reconstruída depois do terramoto: a nova Praça do Comércio à beira do Tejo e, em primeiro plano, pedreiros e arquitetos com uma planta."
+      en: "Blue-and-white azulejo-style illustration: Lisbon being rebuilt after the earthquake: the new Praça do Comércio by the Tagus, with stonemasons and architects holding a plan in the foreground."
+      ru: "Иллюстрация в духе сине-белого азулежу: Лиссабон отстраивают после землетрясения: новая площадь Коммерсиу у Тежу, на переднем плане каменщики и архитекторы с чертежом."
+    caption:
+      pt: "Ilustração criada por IA (Gemini) a partir da época de Pombal. Não é uma imagem histórica."
+      en: "AI-generated illustration (Gemini) based on the age of Pombal. Not a historical image."
+      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Помбала. Не историческое изображение."
+    author: Gemini (AI)
+    license: AI-generated
+    ai: true
+  placeholder: []
   intro:
     pt: A 1 de novembro de 1755, o terramoto, o tsunami e o incêndio destruíram o
       centro de Lisboa. O Marquês de Pombal reconstruiu a cidade a régua e

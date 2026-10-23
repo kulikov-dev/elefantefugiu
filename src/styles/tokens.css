@@ -163,6 +163,8 @@
   --grid-step-min: 14rem;
   --container-story: 48rem;
   --card-aside-width: 19rem;
+  /* The second picture of a story (a document, a map, a portrait) is shown whole; a tall one stops at this height. */
+  --detail-image-max-height: 36rem;
 
   /* Map: sizes of the block and of the markers (frame: large diamond, story: small circle, cluster: square with a number). */
   --map-height: clamp(20rem, 62svh, 40rem);

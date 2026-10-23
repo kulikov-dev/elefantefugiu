@@ -168,9 +168,19 @@ for (const ev of events) {
 
     // ----- images, links, buttons, ids -----
     // The mascot pictures are decorative (empty alt on purpose) and are checked by check-mascot.mjs.
+    // A picture inside the "Next" link is decorative (the link has its name): empty alt. Every picture has width and height; all are lazy
+    // except the main picture of the story (first screen), which is eager.
     for (const img of html.matchAll(/<img\b(?![^>]*\bclass="(?:mascot|minimap))[^>]*>/g)) {
       const alt = img[0].match(/\balt="([^"]*)"/);
-      if (!alt || alt[1].trim() === '') fail(`img without alt text: ${img[0].slice(0, 80)}`);
+      const decorative = /\bclass="[^"]*\bnext-story__image\b/.test(img[0]);
+      if (!decorative && (!alt || alt[1].trim() === '')) fail(`img without alt text: ${img[0].slice(0, 80)}`);
+      if (!/\bwidth="\d+"/.test(img[0]) || !/\bheight="\d+"/.test(img[0])) fail(`img without width and height: ${img[0].slice(0, 80)}`);
+      const before = html.slice(0, img.index);
+      const openFigure = before.lastIndexOf('<figure class="figure figure--main"');
+      const main = openFigure >= 0 && before.indexOf('</figure>', openFigure) < 0;
+      const want = main ? 'eager' : 'lazy';
+      if (!new RegExp(`\\bloading="${want}"`).test(img[0])) fail(`img should be loading="${want}": ${img[0].slice(0, 80)}`);
+      if (!/\bsrcset="[^"]+"/.test(img[0])) fail(`img without srcset (Astro sizes): ${img[0].slice(0, 80)}`);
     }
     for (const m of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)) {
       if (text(m[2]) === '' && !/aria-label="[^"]+"/.test(m[1])) fail(`link without accessible name: ${m[0].slice(0, 80)}`);
@@ -212,10 +222,38 @@ for (const ev of events) {
     if (has(/class="heavy"/) !== Boolean(ev.sensitive)) fail(`heavy topic banner should ${ev.sensitive ? '' : 'not '}be shown`);
     if (has(/<meta name="robots" content="noindex"/) !== Boolean(ev.placeholder)) fail('noindex must be set exactly for placeholder cards');
     if (has(/class="placeholder-notice"/) !== Boolean(ev.placeholder)) fail('test-text notice does not match the placeholder flag');
-    if (has(/<figure class="figure"/) !== Boolean(ev.image)) fail('illustration block does not match the data (no image means no figure)');
-    if (ev.image && text(html.match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/)?.[1] ?? '') === '') fail('figcaption is empty');
-    if (ev.image?.caption && !html.includes(ev.image.caption[lang])) fail('image caption is not shown');
-    if (ev.image && !/Imagem|Image/.test(html.match(/<figcaption[\s\S]*?<\/figcaption>/)?.[0] ?? '')) fail('credit and licence are not shown');
+    // The pictures: the main one (right column / above the hook) and the second one (inside "More", after the text, before the sources).
+    for (const [key, kind] of [['image', 'main'], ['detail_image', 'detail']]) {
+      const pic = ev[key];
+      const figure = html.match(new RegExp(`<figure class="figure figure--${kind}"[^>]*>[\\s\\S]*?</figure>`))?.[0];
+      if (Boolean(figure) !== Boolean(pic)) fail(`${key}: the figure does not match the data (no ${key} means no figure)`);
+      if (!pic || !figure) continue;
+      const caption = pic.caption[lang] ?? pic.caption.en;
+      if (!figure.includes(escapeHtml(caption))) fail(`${key}: the caption is not shown`);
+      const credit = figure.match(/<span class="figure__credit"[^>]*>([\s\S]*?)<\/span>\s*<\/figcaption>/)?.[1];
+      if (pic.ai) {
+        if (credit) fail(`${key}: a picture made by an AI shows the caption only (the caption says so), no credit line`);
+      } else {
+        if (!credit) fail(`${key}: credit, licence and source are not shown`);
+        else {
+          const author = typeof pic.author === 'string' ? pic.author : (pic.author[lang] ?? pic.author.en);
+          if (!credit.includes(escapeHtml(author))) fail(`${key}: the author "${author}" is not in the credit line`);
+          const licenseShown = pic.license === 'Public domain' ? { pt: 'Domínio público', en: 'Public domain', ru: 'Общественное достояние' }[lang] : pic.license;
+          if (!credit.includes(escapeHtml(licenseShown))) fail(`${key}: the licence "${pic.license}" is not in the credit line`);
+          if (pic.license_url && !credit.includes(`<a href="${pic.license_url}"`)) fail(`${key}: the licence is not a link to ${pic.license_url}`);
+          if (pic.source_url && !credit.includes(escapeHtml(pic.source_url))) fail(`${key}: the link to the source is missing`);
+        }
+      }
+    }
+    // The second picture is inside "More", after the text and before the sources.
+    if (ev.detail_image) {
+      const more = html.match(/<details id="detalhes"[\s\S]*?<\/details>/)?.[0] ?? '';
+      const at = more.indexOf('figure--detail');
+      const sources = more.indexOf('class="sources"');
+      const context = more.indexOf('id="context-title"');
+      if (at < 0) fail('the second picture is not inside "More"');
+      else if (!(context < at && (sources < 0 || at < sources))) fail('the second picture must come after the text and before the sources');
+    }
     if (!has(/<p class="hook"/)) fail('layer 1 (hook) is missing');
     if (!has(/<section id="historia"/)) fail('layer 2 (story, #historia) is missing');
     if (!has(/<details id="detalhes"/)) fail('layer 3 (<details id="detalhes">) is missing');

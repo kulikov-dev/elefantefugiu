@@ -122,6 +122,19 @@ sources:
     url: https://observador.pt/opiniao/a-santa-alianca-e-a-excepcao-portuguesa/
     type: press
     accessed: '2026-10-16'
+image:
+  file: legiao-portuguesa-1812.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa planície coberta de neve, um pequeno grupo de soldados agasalhados caminha com uma bandeira, e ao lado ficam na neve uma carroça avariada, um tambor e uma espingarda."
+    en: "Blue-and-white azulejo-style illustration: on a snow-covered plain, a small group of soldiers in heavy coats walks with a flag, with a broken cart, a drum and a rifle lying in the snow beside them."
+    ru: "Иллюстрация в духе сине-белого азулежу: по заснеженной равнине идёт небольшая группа солдат в тёплых шинелях со знаменем, рядом в снегу лежат сломанная повозка, барабан и ружьё."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da história da Legião Portuguesa. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the story of the Portuguese Legion. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по истории Португальского легиона. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
 related:
   - torres-vedras-1810
 status: ready

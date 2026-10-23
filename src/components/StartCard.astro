@@ -1,24 +1,35 @@
 ---
 // A card of "Where to start" on the home page: the hook is the large line (it is stronger than the title), beneath it the small
 // title, "year · city" and the credibility label. A picture, when the story has one, goes on top; without one the card
-// is simply shorter (nothing is reserved). The whole card is the link (the title, stretched).
+// is simply shorter (nothing is reserved; the picture of the epoch fills in for a story without one). The whole card is the link (the title, stretched).
 import TagLabel from './TagLabel.astro';
+import Pic from './Pic.astro';
+import type { PictureData } from '../lib/pictures';
 import { t } from '../i18n';
-import { storyPath, withBase, type Lang } from '../i18n/routes';
+import { storyPath, type Lang } from '../i18n/routes';
 import { formatYear, placeShort, textLangOf, type EventData } from '../lib/events';
 
 interface Props {
   lang: Lang;
   event: EventData;
+  /** The picture on top: the story's own, or the epoch's when it has none or is a heavy topic (decided by the page: previewPicture). */
+  picture?: PictureData | undefined;
 }
 
-const { lang, event } = Astro.props;
+const { lang, event, picture } = Astro.props;
 const href = storyPath(lang, event.slug[lang]);
 ---
 <article class="start-card" id={`c-${event.id}`}>
   {
-    event.image && !event.sensitive && (
-      <img class="start-card__image" src={withBase(event.image.src)} alt={event.image.alt[lang]} width="1200" height="630" loading="lazy" decoding="async" />
+    picture && (
+      <Pic
+        picture={picture}
+        lang={lang}
+        class="start-card__image"
+        widths={[320, 480, 640, 960]}
+        sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
+        crop
+      />
     )
   }
   <div class="start-card__body">
@@ -53,7 +64,7 @@ const href = storyPath(lang, event.slug[lang]);
     outline-offset: var(--ring-offset-tight);
   }
 
-  .start-card__image {
+  .start-card :global(.start-card__image) {
     width: 100%;
     height: auto;
     aspect-ratio: 1200 / 630;

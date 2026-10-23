@@ -9,7 +9,7 @@ const root = (process.env.DIST ? process.env.DIST.replace(/\/?$/, '/') : fileURL
 const port = Number(process.argv[2] || process.env.PORT || 4400);
 // BASE_PATH=/elefante serves a build made with that base path: /elefante/pt/ is dist/pt/ (the browser suites then use BASE_URL=http://localhost:4400/elefante).
 const prefix = (process.env.BASE_PATH ?? '').replace(/\/$/, '');
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.json': 'application/json', '.txt': 'text/plain', '.webp': 'image/webp', '.png': 'image/png', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.json': 'application/json', '.txt': 'text/plain', '.webp': 'image/webp', '.jpeg': 'image/jpeg', '.jpg': 'image/jpeg', '.png': 'image/png', '.ico': 'image/x-icon', '.webmanifest': 'application/manifest+json' };
 
 createServer((req, res) => {
   let path = normalize(decodeURIComponent((req.url || '/').split(/[?#]/)[0])).replace(/^(\.\.[/\\])+/, '');

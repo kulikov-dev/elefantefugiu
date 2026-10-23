@@ -32,8 +32,10 @@ interface Props {
   preview?: {
     title?: string;
     type?: 'website' | 'article';
-    /** Path inside public/ (no base). */
+    /** Path inside public/ (no base): a provisional picture of an epoch that has no real one yet. */
     image?: string;
+    /** Address of a picture made by Astro (src/lib/picture-assets.ts previewImageUrl), with the base path already in it. */
+    imageUrl?: string;
     imageAlt?: string;
   };
   noindex?: boolean;
@@ -52,7 +54,7 @@ const paths: Record<Lang, string> | undefined =
 const hreflangs = stand_in ? [] : LANGS.filter((l) => readyLangs.includes(l));
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = paths ? absolute(paths[lang]) : undefined;
-const image = preview?.image ? absolute(withBase(ogImagePath(preview.image))) : undefined;
+const image = preview?.imageUrl ? absolute(preview.imageUrl) : preview?.image ? absolute(withBase(ogImagePath(preview.image))) : undefined;
 // Thread ids the head script may put on <html data-fio> (the epoch page filter reads them before the first paint).
 const { threads: allThreads } = await loadSite();
 const azulejoCss = azulejoRule({ bussola, canto, rombo, rosa }, epoch);

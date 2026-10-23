@@ -108,6 +108,21 @@ sources:
     url: https://www.history.com/articles/deadly-bridge-collapses
     type: press
     accessed: '2026-10-16'
+image:
+  file: ponte-das-barcas-1809.webp
+  alt:
+    pt: "Relevo de bronze das Alminhas da Ponte, na Ribeira do Porto: soldados perseguem a multidão em fuga, que cai ao rio junto à ponte das barcas, e no céu a figura de Deus entre anjos."
+    en: "Bronze relief of the Alminhas da Ponte in Porto’s Ribeira: soldiers chase a fleeing crowd that falls into the river by the bridge of boats, with God among angels in the sky."
+    ru: "Бронзовый рельеф Alminhas da Ponte в Рибейре (Порту): солдаты преследуют бегущую толпу, падающую в реку у моста из лодок, в небе Бог среди ангелов."
+  caption:
+    pt: "Alminhas da Ponte, baixo-relevo de bronze de Teixeira Lopes (pai), 1897. Ribeira, Porto."
+    en: "Alminhas da Ponte, bronze bas-relief by Teixeira Lopes (the elder), 1897. Ribeira, Porto."
+    ru: "Alminhas da Ponte, бронзовый барельеф Тейшейры Лопеша (отца), 1897. Рибейра, Порту."
+  author: "Vitor Oliveira"
+  license: "CC BY-SA 2.0"
+  license_url: https://creativecommons.org/licenses/by-sa/2.0/
+  source_url: "https://commons.wikimedia.org/wiki/File:Alminhas_da_Ponte_-_Porto_-_Portugal_(53283088343).jpg"
+  focus: "45% 65%"
 related:
   - motim-companhia-1757
   - torres-vedras-1810

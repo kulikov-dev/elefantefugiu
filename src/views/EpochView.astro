@@ -31,6 +31,8 @@ import { toMapCards } from '../lib/map-cards';
 import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
+import { previewImageUrl } from '../lib/picture-assets';
+import { epochPicture } from '../lib/pictures';
 
 interface Props {
   lang: Lang;
@@ -65,6 +67,9 @@ const walkingAllowed = Boolean(next) && mascotAllowed({ epoch: epoch.id }) && ma
 const intro = epoch.intro?.[lang]?.trim() || undefined;
 
 const alternates = altPaths((l) => epochHref(l, epoch.slug[l]));
+// The picture of the epoch: for the cards without a picture of their own and for the link preview of the page.
+const epochPic = epochPicture(epoch);
+const previewUrl = epochPic ? await previewImageUrl(epochPic) : undefined;
 // Pages that show test text stay out of search results until the text is real.
 const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
 ---
@@ -73,7 +78,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
   title={epoch.name[lang]}
   alternates={alternates}
   description={epoch.theme?.[lang]}
-  preview={{ title: epoch.name[lang], image: epoch.fallback_image }}
+  preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl }}
   noindex={noindex}
   epoch={epoch.id}
 >
@@ -175,7 +180,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
             feed.map((event) => (
               <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
                 <span class="feed__year">{yearRange(event)[0]}</span>
-                <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear />
+                <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear fallback={epochPic} tiles={gridAvailable(feed.length)} />
               </li>
             ))
           }
@@ -339,6 +344,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
   :global(html[data-vista='grelha']) .feed :global(.ecard__thumb) {
     order: -2;
     width: calc(100% + 2 * var(--space-4));
+    height: auto;
     max-width: none;
     margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-4)) var(--space-1);
     border-radius: 0;

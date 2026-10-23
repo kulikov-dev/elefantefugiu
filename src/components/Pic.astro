@@ -1,0 +1,39 @@
+---
+// One picture of a card or an epoch, made by Astro: WebP in several widths (srcset), explicit width and height (those of the
+// source: a small picture is never stretched), lazy unless the page says it is on the first screen. The crop of a card
+// (object-position) comes from the data; the CSS of the place decides how the picture fills its box.
+import { Image } from 'astro:assets';
+import { pictureSource } from '../lib/picture-assets';
+import type { Lang } from '../i18n/routes';
+import type { PictureData } from '../lib/pictures';
+
+interface Props {
+  picture: PictureData;
+  lang: Lang;
+  widths: number[];
+  sizes: string;
+  /** "eager" only for the picture of the first screen (the story page). */
+  loading?: 'lazy' | 'eager';
+  class?: string;
+  /** A picture inside a link that already has a name is decorative: its alt is empty. */
+  decorative?: boolean;
+  /** Use the crop point of the data (object-position). */
+  crop?: boolean;
+}
+
+const { picture, lang, widths, sizes, loading = 'lazy', class: className, decorative = false, crop = false } = Astro.props;
+const source = pictureSource(picture.file);
+---
+<Image
+  src={source}
+  alt={decorative ? '' : picture.alt[lang]}
+  widths={widths}
+  sizes={sizes}
+  format="webp"
+  quality={80}
+  loading={loading}
+  decoding="async"
+  fetchpriority={loading === 'eager' ? 'high' : undefined}
+  class={className}
+  style={crop && picture.focus ? `object-position: ${picture.focus}` : undefined}
+/>

@@ -152,6 +152,33 @@ sources:
     url: https://getlisbon.com/discovering/royal-factory-ice/
     type: press
     accessed: '2026-10-16'
+image:
+  file: casa-da-neve-1782.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: sob as arcadas junto ao Tejo, um homem descarrega de um burro blocos de gelo embrulhados em palha e os clientes do café provam gelados."
+    en: "Blue-and-white azulejo-style illustration: under the arcades by the Tagus, a man unloads straw-wrapped blocks of ice from a donkey while café guests taste ices."
+    ru: "Иллюстрация в духе сине-белого азулежу: под аркадами у Тежу человек снимает с осла блоки льда в соломе, а посетители кафе пробуют мороженое."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da história da Casa da Neve. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the story of the Casa da Neve. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по истории Дома снега. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: casa-da-neve-1782-detalhe.webp
+  alt:
+    pt: "A fachada do café Martinho da Arcada, sob as arcadas da Praça do Comércio, à noite."
+    en: "The front of the Martinho da Arcada café under the arcades of Praça do Comércio at night."
+    ru: "Фасад кафе Martinho da Arcada под аркадами площади Коммерсиу ночью."
+  caption:
+    pt: "Café Martinho da Arcada, Lisboa. Foto de 2019."
+    en: "Café Martinho da Arcada, Lisbon. Photo, 2019."
+    ru: "Кафе Martinho da Arcada, Лиссабон. Фото 2019 года."
+  author: "Patricia Santos"
+  license: "CC BY-SA 4.0"
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: "https://commons.wikimedia.org/wiki/File:Caf%C3%A9_Restaurante_Martinho_da_Arcada,_vista_do_exterior_%C3%A0_noite_fotoPatriciaSantos.jpg"
 related:
   - terramoto-1755
 status: ready

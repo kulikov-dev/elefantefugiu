@@ -3,6 +3,8 @@
 // wants the following one. The hook of the next story is the invitation (large), its title is small beneath it.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
+import Pic from './Pic.astro';
+import type { PictureData } from '../lib/pictures';
 
 interface Props {
   lang: Lang;
@@ -11,29 +13,53 @@ interface Props {
   title: string;
   /** Language tag of the hook when it differs from the page (placeholder filler is Latin). */
   textLang?: string | undefined;
+  /** The picture of the next story (or of its epoch): a reserved strip on top, cropped to its focus point. */
+  picture?: PictureData | undefined;
 }
 
-const { lang, href, hook, title, textLang } = Astro.props;
+const { lang, href, hook, title, textLang, picture } = Astro.props;
 ---
 <a class="next-story" {href} rel="next">
-  <span class="next-story__label">{t(lang, 'card.next_story')} <span aria-hidden="true">&rarr;</span></span>
-  <span class="next-story__hook" lang={textLang}>{hook}</span>
-  <span class="next-story__title">&mdash; {title}</span>
+  {
+    picture && (
+      <Pic picture={picture} lang={lang} class="next-story__image" widths={[320, 480, 640, 960]} sizes="(min-width: 768px) 640px, 100vw" decorative crop />
+    )
+  }
+  <span class="next-story__body">
+    <span class="next-story__label">{t(lang, 'card.next_story')} <span aria-hidden="true">&rarr;</span></span>
+    <span class="next-story__hook" lang={textLang}>{hook}</span>
+    <span class="next-story__title">&mdash; {title}</span>
+  </span>
 </a>
 
 <style>
   .next-story {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
     max-width: var(--measure);
-    padding: var(--space-4);
+    overflow: hidden;
     border: var(--epoch-frame);
     border-inline-start: var(--epoch-accent-bar);
     border-radius: var(--radius-md);
     background: var(--epoch-surface);
     color: var(--color-ink);
     text-decoration: none;
+  }
+
+  .next-story__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .next-story :global(.next-story__image) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 420;
+    object-fit: cover;
+    background: var(--epoch-line);
+    filter: var(--image-filter);
   }
 
   .next-story:hover {

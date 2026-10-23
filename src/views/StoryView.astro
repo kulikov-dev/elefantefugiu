@@ -6,6 +6,7 @@ import AgeBadge from '../components/AgeBadge.astro';
 import BridgeBlock from '../components/BridgeBlock.astro';
 import ArmyDots from '../components/ArmyDots.astro';
 import CardLayers from '../components/CardLayers.astro';
+import Figure from '../components/Figure.astro';
 import ShipScale from '../components/ShipScale.astro';
 import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
 import MiniMap from '../components/MiniMap.astro';
@@ -18,13 +19,15 @@ import ShareButton from '../components/ShareButton.astro';
 import SourceList from '../components/SourceList.astro';
 import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
+import { LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
 import { distanceParts } from '../lib/distance';
 import { epochHasContent } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
+import { previewImageUrl } from '../lib/picture-assets';
+import { cardPicture, previewPicture } from '../lib/pictures';
 
 interface Props {
   lang: Lang;
@@ -45,10 +48,12 @@ const alternates = altPaths((l) => storyPath(l, event.slug[l]));
 const cardUrl = new URL(alternates[lang], Astro.site).href;
 const description = firstSentence(event.story[lang]);
 
-// Preview picture: own image, else the epoch fallback. Sensitive cards never use their own image in previews.
-const useOwnImage = Boolean(event.image) && !event.sensitive;
-const previewImage = useOwnImage ? event.image!.src : epoch.fallback_image;
-const previewImageAlt = useOwnImage ? event.image!.alt[lang] : undefined;
+// Preview picture (link previews): the main picture of the story, else the picture of the epoch. A heavy topic never puts its own picture
+// into a preview (the epoch's goes there). An epoch that has only a provisional picture (a path inside public/) gives that.
+const previewPic = previewPicture(event, epoch);
+const previewUrl = previewPic ? await previewImageUrl(previewPic) : undefined;
+const previewImage = previewPic ? undefined : typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined;
+const previewImageAlt = previewPic && previewPic === event.image ? previewPic.alt[lang] : undefined;
 
 // Family mode: "Nearby" and previous / next never lead to a card the mode hides, so each is computed for the three
 // modes and the markup holds one block per distinct result (CSS shows the block of the current mode).
@@ -101,7 +106,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
   title={title}
   alternates={alternates}
   description={description}
-  preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageAlt: previewImageAlt }}
+  preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageUrl: previewUrl, imageAlt: previewImageAlt }}
   noindex={event.placeholder || standIn}
   readyLangs={readyLangs}
   stand_in={standIn}
@@ -166,22 +171,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       <Fragment slot="aside">
         {
           event.image ? (
-            <figure class="figure">
-              <img
-                src={withBase(event.image.src)}
-                alt={event.image.alt[lang]}
-                width="1200"
-                height="630"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>
-                {event.image.caption && <span class="figure__caption">{event.image.caption[lang]}</span>}
-                <span class="figure__credit">
-                  {t(lang, 'card.image_credit')}: {event.image.credit} &middot; {t(lang, 'card.image_license')}: {event.image.license}
-                </span>
-              </figcaption>
-            </figure>
+            <Figure lang={lang} picture={event.image} kind="main" />
           ) : (
             <MiniMap lang={lang} cardId={event.id} point={event.bridge} name={event.bridge.title?.[lang]?.trim() || event.bridge.name} />
           )
@@ -197,7 +187,14 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
             .filter((variant) => variant.value.next)
             .map(({ modes, value: { next } }) => (
               <div class="fv fv--block" data-modes={modes.join(' ')}>
-                <NextStory lang={lang} href={storyPath(lang, next!.slug[lang])} hook={next!.hook[lang]} title={next!.title[lang]} textLang={textLangOf(next!, lang)} />
+                <NextStory
+                  lang={lang}
+                  href={storyPath(lang, next!.slug[lang])}
+                  hook={next!.hook[lang]}
+                  title={next!.title[lang]}
+                  textLang={textLangOf(next!, lang)}
+                  picture={cardPicture(next!, site.epochs.find((ep) => ep.id === next!.epoch) ?? epoch)}
+                />
               </div>
             ))
         }
@@ -209,6 +206,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
             <p>{event.more[lang]}</p>
           </div>
         </section>
+        {event.detail_image && <Figure lang={lang} picture={event.detail_image} kind="detail" />}
         {event.interactive?.type === 'army_dots' && <ArmyDots lang={lang} data={event.interactive.data} textLang={textLang} />}
         {event.interactive?.type === 'ship_scale' && <ShipScale lang={lang} data={event.interactive.data} textLang={textLang} />}
         <BridgeBlock lang={lang} bridge={event.bridge} cardId={event.id} textLang={textLang} />
@@ -321,38 +319,6 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
   .tags :global(.tag) {
     padding-inline: var(--pad-chip-x-wide);
     border-radius: var(--radius-sm);
-  }
-
-  .figure {
-    max-width: var(--container-story);
-    border: var(--epoch-frame);
-    border-radius: var(--radius-md);
-    background: var(--epoch-surface);
-    overflow: hidden;
-  }
-
-  .figure img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1200 / 630;
-    object-fit: cover;
-    background: var(--epoch-line);
-  }
-
-  .figure figcaption {
-    padding: var(--space-2) var(--space-3);
-    color: var(--color-ink-muted);
-    font-size: var(--text-sm);
-  }
-
-  .figure__caption {
-    display: block;
-    color: var(--color-ink);
-    font-size: var(--text-base);
-  }
-
-  .figure__credit {
-    display: block;
   }
 
   /* "Share" and, under it, the small link "Spotted an inaccuracy?", both always in view (not inside "More"). */

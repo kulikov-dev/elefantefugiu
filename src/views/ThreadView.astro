@@ -11,6 +11,7 @@ import { plural, t } from '../i18n';
 import { epochSectionId, threadSections, type ThreadData } from '../lib/epochs';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
+import { epochPicture } from '../lib/pictures';
 
 interface Props {
   lang: Lang;
@@ -98,6 +99,7 @@ const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => 
                   threads={site.threads}
                   visibleThreadIds={site.visibleThreadIds}
                   showThreads={false}
+                  fallback={epochPicture(epoch)}
                 />
               </li>
             ))}

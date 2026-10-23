@@ -144,6 +144,32 @@ sources:
     url: https://www.bhsportugal.org/anglo-portuguese-timeline/wellington-took-refuge-behind-the-lines-of-torres-vedras
     type: institutional
     accessed: '2026-10-16'
+image:
+  file: torres-vedras-1810.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: camponeses cavam trincheiras e enchem cestos de terra numa colina, oficiais estudam um mapa, bois puxam um canhão; atrás, um mastro de sinais e um moinho."
+    en: "Blue-and-white azulejo-style illustration: peasants dig trenches and fill earth baskets on a hill, officers study a map and oxen haul a cannon, with a signal mast and a windmill behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: крестьяне роют рвы и набивают землёй корзины на холме, офицеры смотрят карту, волы тянут пушку; позади сигнальная мачта и мельница."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da história das Linhas de Torres Vedras. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the story of the Lines of Torres Vedras. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по истории о линиях Торриш-Ведраш. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: torres-vedras-1810-detalhe.webp
+  alt:
+    pt: "Mapa antigo da região a norte de Lisboa com as Linhas de Torres Vedras assinaladas a cores: a primeira a amarelo, a segunda a magenta e a linha de embarque em São Julião a vermelho."
+    en: "Old map of the area north of Lisbon with the Lines of Torres Vedras marked in colour: the first line in yellow, the second in magenta and the embarkation line at São Julião in red."
+    ru: "Старая карта местности к северу от Лиссабона, линии Торриш-Ведраш выделены цветом: первая жёлтым, вторая пурпурным, линия посадки у Сан-Жулиана красным."
+  caption:
+    pt: "Mapa das Linhas de Torres Vedras, de Simão José da Luz Soriano, 1874 (recorte). Linhas a cores acrescentadas na versão do Commons."
+    en: "Map of the Lines of Torres Vedras by Simão José da Luz Soriano, 1874 (cropped). Coloured lines added in the Commons version."
+    ru: "Карта линий Торриш-Ведраш из книги Симона Жозе да Лус Сориано, 1874 (фрагмент). Цветные линии добавлены в версии на Commons."
+  author: "Simão José da Luz Soriano"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Mapa_linhas_de_torres_vedras_cropped.png"
 related:
   - legiao-portuguesa-1812
   - ponte-das-barcas-1809

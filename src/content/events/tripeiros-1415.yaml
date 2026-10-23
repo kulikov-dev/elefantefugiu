@@ -111,6 +111,33 @@ sources:
     url: https://postal.pt/nacional/tripas-a-moda-do-porto-um-prato-tradicional-com-alma-portuense/
     type: press
     accessed: '2026-10-15'
+image:
+  file: tripeiros-1415.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no estaleiro do Douro, gente do Porto leva cestos para os navios, enquanto uma mulher segura um tacho de tripas e dois homens conversam."
+    en: "Blue-and-white azulejo-style illustration: at the Douro shipyard, the people of Porto carry baskets onto the ships while a woman holds a pot of tripe and two men talk."
+    ru: "Иллюстрация в духе сине-белого азулежу: на верфи у Дору жители Порту несут корзины на корабли, женщина держит горшок с потрохами, а двое мужчин беседуют."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da lenda dos tripeiros. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the tripeiros legend. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по легенде о трипейруш. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: tripeiros-1415-detalhe.webp
+  alt:
+    pt: "Monumento «Pela Grei» no Porto, dedicado a quem equipou a frota de 1415: um jovem construtor naval de pé e outro agachado a trabalhar, diante da proa curva de um barco."
+    en: "The “Pela Grei” monument in Porto, to those who equipped the 1415 fleet: a young shipbuilder standing and another crouching at work, in front of the curved prow of a boat."
+    ru: "Памятник «Pela Grei» в Порту тем, кто снаряжал флот 1415 года: молодой корабельщик стоит, другой сидит за работой на фоне изогнутого носа лодки."
+  caption:
+    pt: "«Pela Grei» (Monumento aos Tripeiros), de Lagoa Henriques, 1960. Bronze. Largo de António Calém, Porto."
+    en: "“Pela Grei” (Monument to the Tripeiros) by Lagoa Henriques, 1960. Bronze. Largo de António Calém, Porto."
+    ru: "«Pela Grei» (Памятник трипейруш), скульптор Лагоа Энрикеш, 1960. Бронза. Ларгу де Антониу Калем, Порту."
+  author: "Joseolgon"
+  license: "CC BY 4.0"
+  license_url: https://creativecommons.org/licenses/by/4.0/
+  source_url: "https://commons.wikimedia.org/wiki/File:Boat_Builders_(1).jpg"
 related: []
 status: ready
 placeholder: false

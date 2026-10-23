@@ -152,6 +152,20 @@ sources:
     url: https://resolve.cambridge.org/core/journals/antiquity/article/battle-of-aljubarrota/849391E3737AD96B5A81A35A8C619B51
     type: academic
     accessed: '2026-10-16'
+image:
+  file: aljubarrota-1385.webp
+  alt:
+    pt: "Iluminura do século XV: cavaleiros em armadura combatem diante de uma cidade amuralhada, com os estandartes de Portugal e de Castela."
+    en: "15th-century miniature: armoured knights fight before a walled town, under the banners of Portugal and Castile."
+    ru: "Миниатюра XV века: рыцари в доспехах сражаются у стен города под знамёнами Португалии и Кастилии."
+  caption:
+    pt: "A Batalha de Aljubarrota numa iluminura da «Chronique d’Angleterre» de Jean de Wavrin (manuscrito de c. 1479–1480). British Library, Royal MS 14 E IV, f. 204r."
+    en: "The Battle of Aljubarrota in a miniature from Jean de Wavrin’s “Chronique d’Angleterre” (manuscript of c. 1479–1480). British Library, Royal MS 14 E IV, f. 204r."
+    ru: "Битва при Алжубарроте на миниатюре из «Английской хроники» Жана де Ваврена (рукопись ок. 1479–1480). Британская библиотека, Royal MS 14 E IV, л. 204."
+  author: "Jean de Wavrin"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Batalha_de_Aljubarrota_02.jpg"
+  focus: "65% 50%"
 related:
   - terramoto-1755
 interactive:

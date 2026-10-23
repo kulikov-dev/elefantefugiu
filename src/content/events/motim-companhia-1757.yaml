@@ -134,6 +134,32 @@ sources:
     url: https://users.pop.umn.edu/~rmccaa/colonial/brazilc3/tsld014.htm
     type: reference
     accessed: '2026-10-16'
+image:
+  file: motim-companhia-1757.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: uma multidão enche uma rua estreita do Porto e protesta de braços erguidos."
+    en: "Blue-and-white azulejo-style illustration: a crowd fills a narrow street in Porto, protesting with raised arms."
+    ru: "Иллюстрация в духе сине-белого азулежу: толпа заполняет узкую улицу Порту и протестует, подняв руки."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da história do motim de 1757. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the story of the 1757 riot. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по истории о бунте 1757 года. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: motim-companhia-1757-detalhe.webp
+  alt:
+    pt: "O Marquês de Pombal sentado, com planos sobre a mesa, aponta para os navios no Tejo."
+    en: "The Marquis of Pombal, seated with plans on the table, points to ships on the Tagus."
+    ru: "Маркиз де Помбал сидит с чертежами на столе и указывает на корабли на Тежу."
+  caption:
+    pt: "Louis-Michel van Loo e Joseph Vernet, Marquês de Pombal, 1766 (pormenor). Óleo sobre tela. Museu de Lisboa."
+    en: "Louis-Michel van Loo and Joseph Vernet, Marquis of Pombal, 1766 (detail). Oil on canvas. Museum of Lisbon."
+    ru: "Луи-Мишель ван Лоо и Жозеф Верне, «Маркиз де Помбал», 1766 (фрагмент). Масло, холст. Музей Лиссабона."
+  author: "Louis-Michel van Loo, Joseph Vernet"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Marques_de_Pombal.jpg"
 related:
   - douro-1756
 status: ready

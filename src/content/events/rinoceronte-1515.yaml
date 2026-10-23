@@ -138,6 +138,33 @@ sources:
     url: https://qalam.global/en/articles/nosorog-albrexta-diurera-ru-72
     type: press
     accessed: '2026-10-16'
+image:
+  file: rinoceronte-1515.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: num pátio junto ao Tejo, um rinoceronte mantém-se firme enquanto um jovem elefante foge em pânico e a corte observa de uma varanda."
+    en: "Blue-and-white azulejo-style illustration: in a courtyard by the Tagus, a rhinoceros stands its ground while a young elephant flees in panic and the court watches from a balcony."
+    ru: "Иллюстрация в духе сине-белого азулежу: во дворе у Тежу носорог стоит на месте, а молодой слон в панике убегает; придворные смотрят с балкона."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da história do combate de 1515. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the story of the 1515 fight. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по истории о поединке 1515 года. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: rinoceronte-1515-detalhe.webp
+  alt:
+    pt: "Xilogravura de Albrecht Dürer, 1515: um rinoceronte de perfil, coberto de placas, com um corno a mais no ombro."
+    en: "Albrecht Dürer's 1515 woodcut: a rhinoceros in profile, covered in plates, with an extra small horn on its shoulder."
+    ru: "Гравюра на дереве Альбрехта Дюрера, 1515: носорог в профиль, покрытый пластинами, с маленьким лишним рогом на плече."
+  caption:
+    pt: "Albrecht Dürer, Rinoceronte, 1515. Xilogravura. National Gallery of Art, Washington (Coleção Rosenwald)."
+    en: "Albrecht Dürer, Rhinoceros, 1515. Woodcut. National Gallery of Art, Washington (Rosenwald Collection)."
+    ru: "Альбрехт Дюрер, «Носорог», 1515. Ксилография. Национальная галерея искусства, Вашингтон (коллекция Розенвальда)."
+  author: "Albrecht Dürer"
+  license: "CC0"
+  license_url: https://creativecommons.org/publicdomain/zero/1.0/
+  source_url: "https://commons.wikimedia.org/wiki/File:Albrecht_D%C3%BCrer,_The_Rhinoceros,_1515,_NGA_47903.jpg"
 related: []
 status: ready
 placeholder: false

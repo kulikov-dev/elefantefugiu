@@ -5,6 +5,7 @@ import { join, relative } from 'node:path';
 import { parseDocument } from 'yaml';
 import type { ZodType } from 'astro/zod';
 import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
+import { needsAttribution, type PictureData } from '../src/lib/pictures';
 import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
 
 import { fileURLToPath } from 'node:url';
@@ -104,16 +105,48 @@ for (const { item, file } of epochs) {
   }
 }
 
+// A picture (image, detail_image, fallback_image) of a card or an epoch. Every picture that is in the data is on the site, so every one
+// must have its file and its texts: alt and caption in each language the page is written in, the author, the licence, and the source.
+type PictureInData = Pick<PictureData, 'file' | 'alt' | 'caption' | 'author' | 'license' | 'ai'> & { license_url?: string | undefined; source_url?: string | undefined };
+const ALLOWED_LICENSES = /^(Public domain|CC0|CC BY \d\.\d|CC BY-SA \d\.\d|AI-generated)$/;
+const ALT_BANNED_WORDS = /(?<!\p{L})(imagem|image|picture|изображение|картинка)(?!\p{L})/iu;
+const HTTP = /^https?:\/\/\S+$/;
+function checkPicture(file: string, field: string, pic: PictureInData, langs: DataLang[]) {
+  if (!existsSync(join(root, 'src/assets/stories', pic.file))) report('error', file, `file "src/assets/stories/${pic.file}" does not exist`, `${field}.file`);
+  for (const lang of langs) {
+    const alt = (pic.alt[lang] ?? '').trim();
+    if (alt === '') report('error', file, 'alt text is empty', `${field}.alt`, lang);
+    else if (ALT_BANNED_WORDS.test(alt)) report('warn', file, 'alt text says "image" / "picture": describe what is shown instead', `${field}.alt`, lang);
+    if ((pic.caption[lang] ?? '').trim() === '') report('error', file, 'caption is empty', `${field}.caption`, lang);
+  }
+  const author = typeof pic.author === 'string' ? [pic.author] : langs.map((l) => pic.author[l] ?? '');
+  if (author.some((a) => a.trim() === '')) report('error', file, 'author is empty', `${field}.author`);
+  const license = pic.license.trim();
+  if (license === '') report('error', file, 'license is empty', `${field}.license`);
+  else if (!ALLOWED_LICENSES.test(license)) report('error', file, `license "${license}" is not one of Public domain, CC0, CC BY x.y, CC BY-SA x.y, AI-generated`, `${field}.license`);
+  if (needsAttribution(license) && !(pic.license_url ?? '').trim()) report('error', file, `${license} needs license_url (the page links the licence text)`, `${field}.license_url`);
+  if (pic.license_url && !HTTP.test(pic.license_url)) report('error', file, 'license_url is not an address', `${field}.license_url`);
+  if (pic.ai) {
+    if (license !== 'AI-generated') report('error', file, 'a picture with ai: true has the licence "AI-generated"', `${field}.license`);
+  } else {
+    if (license === 'AI-generated') report('error', file, 'the licence "AI-generated" needs ai: true', `${field}.ai`);
+    if (!(pic.source_url ?? '').trim()) report('error', file, 'source_url is empty (the page of the picture is shown under it)', `${field}.source_url`);
+    else if (!HTTP.test(pic.source_url!)) report('error', file, 'source_url is not an address', `${field}.source_url`);
+  }
+}
+
 for (const { item, file } of epochs) {
-  if (item.fallback_image && !existsSync(join(root, 'public', item.fallback_image))) {
-    report('error', file, `file "public/${item.fallback_image}" does not exist`, 'fallback_image');
+  const pic = item.fallback_image;
+  if (typeof pic === 'string') {
+    if (!existsSync(join(root, 'public', pic))) report('error', file, `file "public/${pic}" does not exist`, 'fallback_image');
+  } else if (pic) {
+    checkPicture(file, 'fallback_image', pic, ['pt', 'en', 'ru']);
   }
 }
 
 const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
 const isTodo = (s: string) => s.trim() === '' || /^TODO\b/i.test(s.trim());
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-const HTTP = /^https?:\/\/\S+$/;
 
 // Portugal mainland and the nearest islands (Madeira, Azores).
 const AREAS = [
@@ -281,21 +314,10 @@ for (const { item: ev, file, stem } of events) {
     if (/[.!?…]\s+\S/.test(note.trim())) report('error', file, 'more than one sentence', 'bridge.note', lang);
   }
 
-  // image
-  if (ev.image) {
-    for (const lang of langsOf(ev)) {
-      if ((ev.image.alt[lang] ?? '').trim() === '') report('error', file, 'alt text is empty', 'image.alt', lang);
-    }
-    if (ev.image.caption) {
-      for (const lang of langsOf(ev)) {
-        if ((ev.image.caption[lang] ?? '').trim() === '') report('error', file, 'caption is empty (give both languages or remove the field)', 'image.caption', lang);
-      }
-    }
-    if (ev.image.license.trim() === '') report('error', file, 'license is empty', 'image.license');
-    if (!existsSync(join(root, 'public', ev.image.src))) {
-      report('error', file, `file "public/${ev.image.src}" does not exist`, 'image.src');
-    }
-  }
+  // pictures: the main picture of the story and the second one for "More"
+  if (ev.image) checkPicture(file, 'image', ev.image, langsOf(ev));
+  if (ev.detail_image) checkPicture(file, 'detail_image', ev.detail_image, langsOf(ev));
+  if (ev.detail_image && !ev.image) report('error', file, 'detail_image without image: the card needs its main picture first', 'detail_image');
 
   // related
   for (const id of ev.related ?? []) {
@@ -416,7 +438,7 @@ console.log(`  by age: all ${ages.get('all') ?? 0}, 12+ ${ages.get('12') ?? 0}, 
 const labels = count(evs.map((e) => e.label));
 console.log(`  by label: documented ${labels.get('documented') ?? 0}, legend ${labels.get('legend') ?? 0}, debated ${labels.get('debated') ?? 0}`);
 const inter = count(evs.flatMap((e) => (e.interactive ? [e.interactive.type] : [])));
-console.log(`  images: ${evs.filter((e) => e.image).length} with, ${evs.filter((e) => !e.image).length} without; interactives: army_dots ${inter.get('army_dots') ?? 0}, ship_scale ${inter.get('ship_scale') ?? 0}`);
+console.log(`  images: ${evs.filter((e) => e.image).length} with, ${evs.filter((e) => !e.image).length} without, ${evs.filter((e) => e.detail_image).length} with a second one; interactives: army_dots ${inter.get('army_dots') ?? 0}, ship_scale ${inter.get('ship_scale') ?? 0}`);
 console.log(`  within 10 km of Lisbon: ${near.length}; elsewhere: ${far.length} (${[...new Set(far.map((e) => e.place.name))].join(', ')}); place outside Portugal: ${evs.filter((e) => !inPortugal(e.place.lat, e.place.lon)).map((e) => e.place.name).join(', ') || 'none'}`);
 console.log(`  ready in Russian (ru_ready): ${evs.filter((e) => e.ru_ready).length} of ${evs.length}; the rest show English text on /ru/ with a banner`);
 console.log(`  placeholder entries: ${placeholders.length} (ALLOW_PLACEHOLDER=${allowRaw})`);

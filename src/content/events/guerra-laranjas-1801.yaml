@@ -132,6 +132,32 @@ sources:
     url: https://muyinteresante.okdiario.com/historia/34542.html
     type: press
     accessed: '2026-10-16'
+image:
+  file: guerra-laranjas-1801.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um comandante espanhol segura um ramo de laranjeira diante dos soldados; ao fundo, a fortaleza abaluartada de Elvas."
+    en: "Blue-and-white azulejo-style illustration: a Spanish commander holds up an orange branch in front of his soldiers, with the bastioned fortress of Elvas behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: испанский командующий держит апельсиновую ветку перед солдатами; позади бастионы крепости Элваш."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da tradição da «Guerra das Laranjas». Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the 'War of the Oranges' tradition. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по преданию об «Апельсиновой войне». Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: guerra-laranjas-1801-detalhe.webp
+  alt:
+    pt: "Manuel Godoy em uniforme de general, recostado no campo de batalha, com uma bandeira portuguesa capturada à esquerda."
+    en: "Manuel Godoy in general’s uniform, reclining on the battlefield, with a captured Portuguese flag on the left."
+    ru: "Мануэль Годой в генеральском мундире полулежит на поле боя, слева трофейное португальское знамя."
+  caption:
+    pt: "Francisco de Goya, Manuel Godoy, 1801. Óleo sobre tela. Real Academia de Belas-Artes de San Fernando, Madrid. A bandeira à esquerda é um troféu da Guerra das Laranjas."
+    en: "Francisco de Goya, Manuel Godoy, 1801. Oil on canvas. Royal Academy of Fine Arts of San Fernando, Madrid. The flag on the left is a trophy of the War of the Oranges."
+    ru: "Франсиско Гойя, «Мануэль Годой», 1801. Масло, холст. Королевская академия изящных искусств Сан-Фернандо, Мадрид. Знамя слева — трофей Апельсиновой войны."
+  author: "Francisco de Goya"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Portrait_of_Manuel_Godoy_by_Goya.jpg"
 related:
   - torres-vedras-1810
 status: ready

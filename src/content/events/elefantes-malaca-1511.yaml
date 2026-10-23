@@ -132,6 +132,35 @@ sources:
     url: https://koboiproject.com/tag/malacca/page/2/
     type: press
     accessed: '2026-10-16'
+image:
+  file: elefantes-malaca-1511.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: elefantes de guerra avançam para uma ponte de madeira, onde soldados portugueses de lanças em punho os aguardam, e guerreiros malaios correm ao lado."
+    en: "Blue-and-white azulejo-style illustration: war elephants advance toward a wooden bridge where Portuguese soldiers wait with spears at the ready, while Malay warriors run alongside."
+    ru: "Иллюстрация в духе сине-белого азулежу: боевые слоны идут к деревянному мосту, где их ждут португальские солдаты с копьями наготове, рядом бегут малайские воины."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da história da tomada de Malaca. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the story of the taking of Malacca. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по истории о взятии Малакки. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: elefantes-malaca-1511-detalhe.webp
+  alt:
+    pt: "Afonso de Albuquerque de barrete preto e longa barba branca, com um bastão de comando na mão."
+    en: "Afonso de Albuquerque in a black cap with a long white beard, holding a commander’s baton."
+    ru: "Афонсу де Албукерки в чёрном берете, с длинной седой бородой и командирским жезлом в руке."
+  caption:
+    pt: "Retrato de Afonso de Albuquerque, autor desconhecido, depois de 1545."
+    en: "Portrait of Afonso de Albuquerque, unknown artist, after 1545."
+    ru: "Портрет Афонсу де Албукерки, неизвестный художник, после 1545 года."
+  author:
+    pt: "Autor desconhecido"
+    en: "Unknown author"
+    ru: "Автор неизвестен"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Retrato_de_Afonso_de_Albuquerque_(ap%C3%B3s_1545)_-_Autor_desconhecido-cortado.png"
 related: []
 status: ready
 placeholder: false

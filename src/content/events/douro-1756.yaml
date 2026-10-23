@@ -117,6 +117,19 @@ sources:
     url: https://realcompanhiavelha.pt/en/caves/
     type: institutional
     accessed: '2026-10-16'
+image:
+  file: douro-1756.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: nos socalcos do Douro, trabalhadores erguem um marco de granito, um funcionário de tricórnio aponta o limite e outro homem arranca arbustos de sabugueiro."
+    en: "Blue-and-white azulejo-style illustration: on the Douro terraces, workers set up a granite boundary marker, an official in a tricorne points out the boundary and another man pulls up elder bushes."
+    ru: "Иллюстрация в духе сине-белого азулежу: на террасах долины Дору рабочие ставят гранитный межевой столб, чиновник в треуголке указывает границу, а ещё один человек вырывает кусты бузины."
+  caption:
+    pt: "Ilustração criada por IA (Gemini) a partir da história da demarcação do Douro. Não é uma imagem histórica."
+    en: "AI-generated illustration (Gemini) based on the story of the Douro demarcation. Not a historical image."
+    ru: "Иллюстрация создана ИИ (Gemini) по истории о границах Дору. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
 related:
   - motim-companhia-1757
 status: ready

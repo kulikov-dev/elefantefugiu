@@ -79,13 +79,6 @@ sources:
     url: https://example.com/fonte-24-2
     type: website
     accessed: 2026-10-13
-image:
-  src: images/placeholders/epoch-c.svg
-  alt:
-    pt: Ilustração provisória da época de exemplo C.
-    en: Placeholder illustration for example era C.
-  credit: O Elefante Fugiu (placeholder)
-  license: CC BY-SA 4.0
 reviewed_by: Revisor de exemplo
 reviewed_on: 2026-10-13
 status: draft

@@ -3,12 +3,14 @@
 //   feed: the story layer opens in place (<details>, works without JavaScript), a link leads to the card page;
 //   grid: a tile that links to the card page (thread pages).
 import { t } from '../i18n';
-import { storyPath, withBase, threadHref, type Lang } from '../i18n/routes';
+import { storyPath, threadHref, type Lang } from '../i18n/routes';
 import { formatYear, isFlashMoment, placeShort, textLangOf, yearRange, type EventData } from '../lib/events';
 import type { ThreadData } from '../lib/epochs';
 import AgeBadge from './AgeBadge.astro';
 import TagLabel from './TagLabel.astro';
 import ThreadChip from './ThreadChip.astro';
+import Pic from './Pic.astro';
+import type { PictureData } from '../lib/pictures';
 
 interface Props {
   lang: Lang;
@@ -21,9 +23,16 @@ interface Props {
   showThreads?: boolean;
   /** The year stands on the timeline scale beside the card (epoch page): the line then shows a full date only, and a bare year only in the grid view, which has no scale. */
   scaleYear?: boolean;
+  /** The picture of the epoch, for a card that has no picture of its own. */
+  fallback?: PictureData | undefined;
+  /** The page can show the cards as tiles (the grid view): the picture is then made wide enough for a tile, not only for the small thumbnail. */
+  tiles?: boolean;
 }
 
-const { lang, event, variant, threads, visibleThreadIds, showThreads = true, scaleYear = false } = Astro.props;
+const { lang, event, variant, threads, visibleThreadIds, showThreads = true, scaleYear = false, fallback, tiles = false } = Astro.props;
+const picture = event.image ?? fallback;
+// A thumbnail is 5.5 rem wide; a tile of the grid is as wide as its column.
+const wide = variant === 'grid' || tiles;
 // A full date ("14 August 1385") is more exact than the year; it stays on the line of the card whatever the layout.
 const label = event.year_label?.[lang]?.trim();
 const fullDate = label && label !== String(yearRange(event)[0]) ? label : undefined;
@@ -36,15 +45,14 @@ const textLang = textLangOf(event, lang);
 <article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-flash={isFlashMoment(event) ? '' : undefined}>
   <div class="ecard__head">
     {
-      event.image && (
-        <img
+      picture && (
+        <Pic
+          picture={picture}
+          lang={lang}
           class="ecard__thumb"
-          src={withBase(event.image.src)}
-          alt={event.image.alt[lang]}
-          width="1200"
-          height="630"
-          loading="lazy"
-          decoding="async"
+          widths={wide ? [320, 480, 640, 960] : [176, 264, 352]}
+          sizes={wide ? '(min-width: 768px) 400px, 100vw' : '88px'}
+          crop
         />
       )
     }
@@ -127,7 +135,7 @@ const textLang = textLangOf(event, lang);
     align-items: flex-start;
   }
 
-  .ecard__thumb {
+  .ecard :global(.ecard__thumb) {
     flex: none;
     width: var(--size-thumb);
     height: auto;
@@ -251,7 +259,7 @@ const textLang = textLangOf(event, lang);
     flex-direction: column;
   }
 
-  .ecard--grid .ecard__thumb {
+  .ecard--grid :global(.ecard__thumb) {
     width: 100%;
     aspect-ratio: 1200 / 630;
   }

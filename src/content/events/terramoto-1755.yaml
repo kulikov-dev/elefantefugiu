@@ -141,6 +141,23 @@ sources:
     url: https://dialnet.unirioja.es/descarga/articulo/6269265.pdf
     type: academic
     accessed: '2026-10-15'
+image:
+  file: terramoto-1755.webp
+  alt:
+    pt: "Gravura em cobre de 1755: Lisboa em ruínas e em chamas, com o tsunami a atingir o cais e navios em perigo no porto."
+    en: "Copper engraving of 1755: Lisbon in ruins and flames, with the tsunami striking the quay and ships in distress in the harbour."
+    ru: "Медная гравюра 1755 года: Лиссабон в руинах и пламени, цунами бьёт по набережной, корабли в бедственном положении в гавани."
+  caption:
+    pt: "Gravura de 1755, autor desconhecido. Original no Museu de Lisboa."
+    en: "1755 engraving, artist unknown. Original in the Museum of Lisbon."
+    ru: "Гравюра 1755 года, автор неизвестен. Оригинал в Музее Лиссабона."
+  author:
+    pt: "Autor desconhecido"
+    en: "Unknown author"
+    ru: "Автор неизвестен"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:1755_Lisbon_earthquake.jpg"
+  focus: "50% 45%"
 related:
   - aljubarrota-1385
 status: ready

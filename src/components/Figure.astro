@@ -1,0 +1,87 @@
+---
+// A picture with its caption, on a card page. Two kinds:
+//   main:   the picture of the story (right column from 1024 px, above the hook on a phone); whole, never wider than its own size;
+//   detail: the second picture inside "More" (a document, a map, a portrait): the width of the text column, never cropped.
+// The caption is in the language of the page; below it the author, the licence (a link for CC BY and CC BY-SA) and the source.
+// A picture made by an AI says so in its caption, so only the caption is shown, no extra badge.
+import Pic from './Pic.astro';
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import { authorText, sourceName, type PictureData } from '../lib/pictures';
+
+interface Props {
+  lang: Lang;
+  picture: PictureData;
+  kind: 'main' | 'detail';
+}
+
+const { lang, picture, kind } = Astro.props;
+// The main picture sits in a 19 rem column from 1024 px and fills the width of the page below it; the detail picture fills the text column.
+const widths = kind === 'main' ? [320, 480, 640, 960] : [480, 720, 1080, 1440];
+// "Public domain" is said in the language of the page; the Creative Commons names are the same everywhere.
+const license = picture.license === 'Public domain' ? t(lang, 'card.license_public_domain') : picture.license;
+const sizes = kind === 'main' ? '(min-width: 1024px) 304px, 100vw' : '(min-width: 768px) 720px, 100vw';
+---
+<figure class={`figure figure--${kind}`}>
+  <Pic picture={picture} lang={lang} widths={widths} sizes={sizes} loading={kind === 'main' ? 'eager' : 'lazy'} class="figure__img" />
+  <figcaption>
+    <span class="figure__caption">{picture.caption[lang]}</span>
+    {
+      !picture.ai && (
+        <span class="figure__credit">
+          {t(lang, 'card.image_credit')}: {authorText(picture, lang)} &middot; {t(lang, 'card.image_license')}:{' '}
+          {picture.license_url ? <a href={picture.license_url} rel="license noopener">{license}</a> : license}
+          {picture.source_url && (
+            <>
+              {' '}&middot; {t(lang, 'card.image_source')}: <a href={picture.source_url} rel="noopener">{sourceName(picture.source_url)}</a>
+            </>
+          )}
+        </span>
+      )
+    }
+  </figcaption>
+</figure>
+
+<style>
+  .figure {
+    max-width: var(--container-story);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+    overflow: hidden;
+  }
+
+  .figure :global(.figure__img) {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    background: var(--epoch-line);
+  }
+
+  /* The detail picture is a document, a map or a portrait: it is shown whole and centred, as tall as the token allows. */
+  .figure--detail :global(.figure__img) {
+    max-height: var(--detail-image-max-height);
+    margin-inline: auto;
+    object-fit: contain;
+  }
+
+  .figure figcaption {
+    padding: var(--space-2) var(--space-3);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .figure__caption {
+    display: block;
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+  }
+
+  .figure__credit {
+    display: block;
+    margin-block-start: var(--space-1);
+    font-size: var(--text-xs);
+    overflow-wrap: anywhere;
+  }
+</style>
