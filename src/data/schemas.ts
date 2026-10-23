@@ -16,7 +16,13 @@ const yearRange = z.strictObject({ from: z.number().int(), to: z.number().int() 
 export const minAge = z.preprocess((v) => (typeof v === 'number' ? String(v) : v), z.enum(['all', '12', '16']));
 
 const source = z.strictObject({
+  /** The title as the author gave it (in the language of the original). No Cyrillic unless `lang` is 'ru' (a source written in Russian). */
   title: z.string(),
+  /** A remark on the source (what it is used for, "official website", "slide"), shown small after the link. Any language may be left out:
+   *  where it is missing nothing is shown, and no other language takes its place (localize() leaves it alone). */
+  note: z.strictObject({ pt: z.string().optional(), en: z.string().optional(), ru: z.string().optional() }).optional(),
+  /** The language of the source when it is Russian: pt and en pages mark it "(in Russian)" and may show its Cyrillic title. */
+  lang: z.literal('ru').optional(),
   url: z.string(),
   type: z.string(),
   accessed: z.coerce.date(),

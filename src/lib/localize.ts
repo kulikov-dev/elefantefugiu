@@ -33,7 +33,9 @@ export function localize<T>(value: T, ruReady: boolean): Localized<T> {
     }
     if (Array.isArray(v)) return v.map(walk);
     if (v instanceof Date || typeof v !== 'object' || v === null) return v;
-    return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, walk(x)]));
+    // The remark of a source (a `note` next to `url`) may miss a language on purpose: it is not filled from another one.
+    const isSource = 'url' in v && 'accessed' in v;
+    return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, isSource && k === 'note' ? x : walk(x)]));
   };
   return walk(value) as Localized<T>;
 }

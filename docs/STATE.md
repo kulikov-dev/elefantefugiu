@@ -429,6 +429,22 @@ Vitest `tests/vitest/pages.spec.ts` (11 тестов: разделы и теги
 - **Остаются `placeholder: true`:** три эпохи MVP (Avis, Pombal, Estado Novo): заглушкой помечена вся запись (фраза `theme`, стиль, `fallback_image`), текстов «de exemplo» в них нет; `theme` видна на плитках главной и в шапке страницы эпохи. Восемь черновиков `evento-exemplo-17…24` не публикуются и на сайте не видны.
 - **Сборка с `ALLOW_PLACEHOLDER=false` не проходит** (останавливается на `check:data`, до `astro build`): 27 ошибок. 26 из них: у всех 13 опубликованных карточек нет `reviewed_by` и `reviewed_on` (обязательны для `status: ready`); одна: 11 записей с `placeholder: true` (8 черновиков и 3 эпохи).
 
+## Источники: пометки в названиях, `note`, `lang`
+
+- Название источника теперь только название (как дал автор). Пояснение вынесено в необязательное поле `note: {pt, en, ru}` (любой язык можно не писать: на этом языке ничего не выводится, подстановки нет, `localize()` поле не трогает) и показывается мелко после ссылки. Источник на русском языке помечается `lang: ru`: на страницах pt и en после названия «(em russo)» / «(in Russian)», кириллица в названии разрешена. 19 источников у 8 карточек перенесены так.
+- `check-data`: у источника без `lang: ru` кириллицы в названии быть не должно; в `note.pt` и `note.en` тоже.
+- Настоящие названия по ссылкам: Vatican — «Nuno De Santa Maria Álvares Pereira (1360-1431) - Biography» (по-английски, vatican.va); Letras UP — Lélia Paula Teixeira Ribeiro, «Os arquitectos do Quartel do Segundo Regimento de Infantaria e da Real Casa Pia…», Revista da Faculdade de Letras, Ciências e Técnicas do Património (Porto), I série, vol. IV, 2005, pp. 281–292 (сноска 1 про 23.02.1757 подтверждена); Dialnet — рецензия Jânia Ferreira Furtado на книгу Molesky «This Gulf of Fire» (Knopf, 2015), по-английски, журнал по файлу не определяется.
+- **Не удалось установить по ссылке (названия не придуманы):** Qalam, «Носорог Альбрехта Дюрера» (ссылка отвечает 404; оставлено как написал автор данных, `lang: ru`); Teylers Museum, стр. 222 (страница электронной библиотеки без текста: автора и название по ссылке не видно; пока записано как адрес: «Teylers Museum, biblioteca digital (Emags 28a_24-2), p. 222»).
+
+### Источники на замену (на сайт не выводятся)
+
+| карточка | источник | что взято из источника | почему заменить |
+|---|---|---|---|
+| aljubarrota-1385 | WarHistory.org, «The Battle of Aljubarrota 1385 AD» | цифра ~18 000 | популярный сайт, нужна научная работа |
+| terramoto-1755 | Wikipedia, 1755 Lisbon earthquake | указатель на Pereira; 40 минут до цунами, 09:40 | заменить первоисточником (Pereira) |
+| terramoto-1755 | Wikipedia (зеркало 2007 г.), 1755 Lisbon earthquake | в данных не записано | зеркало Википедии не годится как источник |
+| elefantes-malaca-1511 | Teylers Museum, стр. 222 | в данных не записано | уточнить автора и название издания |
+
 ## Браузерные наборы scripts/qa снова рабочие
 
 Подробно (таблица наборов, запуск, фикстуры): `scripts/qa/README.md`. Коротко:

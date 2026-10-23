@@ -101,12 +101,19 @@ sources:
     url: https://www.wineanorak.com/wineblog/portugal/feitoria-demarcating-the-douro
     type: press
     accessed: '2026-10-16'
-  - title: Álvaro Moreira da Fonseca, As Demarcações Pombalinas no Douro Vinhateiro
-      (1949), по тексту Univ. do Porto
+  - title: 'Álvaro Moreira da Fonseca, As Demarcações Pombalinas no Douro Vinhateiro (1949)'
+    note:
+      pt: 'segundo o texto da Univ. do Porto'
+      en: 'after the text of Univ. do Porto'
+      ru: 'по тексту Univ. do Porto'
     url: https://ler.letras.up.pt/uploads/ficheiros/18513.pdf
     type: academic
     accessed: '2026-10-16'
-  - title: 'Real Companhia Velha: Gaia Cellars (официальный сайт)'
+  - title: 'Real Companhia Velha: Gaia Cellars'
+    note:
+      pt: 'sítio oficial'
+      en: 'official website'
+      ru: 'официальный сайт'
     url: https://realcompanhiavelha.pt/en/caves/
     type: institutional
     accessed: '2026-10-16'

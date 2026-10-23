@@ -117,8 +117,7 @@ sources:
     url: https://museuarqueologicodocarmo.pt/mac/folhetoMAC_EN.pdf
     type: institutional
     accessed: '2026-10-14'
-  - title: Wikipedia, 1755 Lisbon earthquake (⚠ só como ponteiro para Pereira, 40
-      min até ao tsunami, 09:40; substituir)
+  - title: 'Wikipedia, 1755 Lisbon earthquake'
     url: https://en.wikipedia.org/wiki/1755_Lisbon_earthquake
     type: reference
     accessed: '2026-10-14'
@@ -126,7 +125,11 @@ sources:
     url: https://revista.drclas.harvard.edu/?p=31402
     type: institutional
     accessed: '2026-10-15'
-  - title: 'Wikipedia (зеркало 2007 г.): 1755 Lisbon earthquake'
+  - title: 'Wikipedia: 1755 Lisbon earthquake'
+    note:
+      pt: 'espelho de 2007'
+      en: '2007 mirror'
+      ru: 'зеркало 2007 г.'
     url: https://wikipedia2007.classicistranieri.com/1/7/5/1755_Lisbon_earthquake_8243.html
     type: reference
     accessed: '2026-10-15'
@@ -134,7 +137,7 @@ sources:
     url: https://newcriterion.com/article/lisbons-narrow-fate/
     type: press
     accessed: '2026-10-15'
-  - title: Рецензия на книгу Molesky «This Gulf of Fire» (Dialnet)
+  - title: 'Jânia Ferreira Furtado, review of Mark Molesky, «This Gulf of Fire» (Knopf, 2015), Dialnet'
     url: https://dialnet.unirioja.es/descarga/articulo/6269265.pdf
     type: academic
     accessed: '2026-10-15'

@@ -7,7 +7,7 @@ import type { Lang } from '../i18n/routes';
 
 interface Props {
   lang: Lang;
-  sources: { title: string; url: string; type: string; accessed: Date }[];
+  sources: { title: string; url: string; type: string; accessed: Date; note?: { pt?: string; en?: string; ru?: string } | undefined; lang?: 'ru' | undefined }[];
 }
 
 const { lang, sources } = Astro.props;
@@ -44,6 +44,8 @@ const usualDate = sources.find((s) => day(s.accessed) === usual)?.accessed;
             ) : (
               <span>{source.title}</span>
             )}
+            {source.lang === 'ru' && lang !== 'ru' && <span class="sources__note"> ({t(lang, 'card.source_in_russian')})</span>}
+            {source.note?.[lang]?.trim() && <span class="sources__note"> &middot; {source.note[lang]}</span>}
             {
               day(source.accessed) !== usual && (
                 <span class="sources__date">
@@ -75,6 +77,11 @@ const usualDate = sources.find((s) => day(s.accessed) === usual)?.accessed;
 
   summary:focus-visible {
     outline-offset: var(--ring-offset-tight);
+  }
+
+  .sources__note {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
   }
 
   .sources__count {

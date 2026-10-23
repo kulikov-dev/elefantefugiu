@@ -94,25 +94,43 @@ sources:
     url: https://repositorio-aberto.up.pt/bitstream/10216/20418/2/revpopsoc162008frsilva000085287.pdf
     type: academic
     accessed: '2026-10-15'
-  - title: Fernando de Sousa, A Companhia Geral da Agricultura das Vinhas do Alto
-      Douro (1756–1978), CEPESE 2003 (аннотация)
+  - title: 'Fernando de Sousa, A Companhia Geral da Agricultura das Vinhas do Alto Douro (1756–1978), CEPESE 2003'
+    note:
+      pt: 'resumo'
+      en: 'abstract'
+      ru: 'аннотация'
     url: https://repositorio-aberto.up.pt/handle/10216/20325
     type: academic
     accessed: '2026-10-15'
-  - title: 'Letras UP: статья об архитектуре Порту XVIII в. (сноска о 23.02.1757,
-      Quarta-feira de cinzas)'
+  - title: 'Lélia Paula Teixeira Ribeiro, Os arquitectos do Quartel do Segundo Regimento de Infantaria e da Real Casa Pia de Correcção e Educação e Aquartelamento das Partidas Avulsas, Revista da Faculdade de Letras, Ciências e Técnicas do Património (Porto), I série, vol. IV, 2005, pp. 281-292'
+    note:
+      pt: 'nota 1, sobre 23.02.1757 (quarta-feira de cinzas)'
+      en: 'footnote 1, on 23.02.1757 (Ash Wednesday)'
+      ru: 'сноска 1 о 23.02.1757 (Quarta-feira de cinzas)'
     url: https://ler.letras.up.pt/uploads/ficheiros/4947.pdf
     type: academic
     accessed: '2026-10-15'
-  - title: 'Real Companhia Velha: Gaia Cellars (официальный сайт)'
+  - title: 'Real Companhia Velha: Gaia Cellars'
+    note:
+      pt: 'sítio oficial'
+      en: 'official website'
+      ru: 'официальный сайт'
     url: https://realcompanhiavelha.pt/en/caves/
     type: institutional
     accessed: '2026-10-16'
-  - title: 'Agroportal: открытие 17•56 Museu & Enoteca da Real Companhia Velha (2018)'
+  - title: 'Agroportal: 17•56 Museu & Enoteca da Real Companhia Velha (2018)'
+    note:
+      pt: 'inauguração'
+      en: 'opening'
+      ru: 'открытие'
     url: https://bo.agroportal.pt/?p=689450
     type: press
     accessed: '2026-10-16'
-  - title: 'R. McCaa (UMN): Pombal, the paradox (слайд)'
+  - title: 'R. McCaa (UMN): Pombal, the paradox'
+    note:
+      pt: 'diapositivo'
+      en: 'slide'
+      ru: 'слайд'
     url: https://users.pop.umn.edu/~rmccaa/colonial/brazilc3/tsld014.htm
     type: reference
     accessed: '2026-10-16'

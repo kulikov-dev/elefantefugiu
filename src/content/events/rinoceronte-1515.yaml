@@ -100,12 +100,19 @@ sources:
     url: https://warwick.ac.uk/news/pressreleases/how_the_popes/
     type: institutional
     accessed: '2026-10-14'
-  - title: 'Google Arts & Culture / DGPC: Bartizan depicting a rhinoceros, Tower of
-      Belém (формулировка «possibly»)'
+  - title: 'Google Arts & Culture / DGPC: Bartizan depicting a rhinoceros, Tower of Belém'
+    note:
+      pt: 'formulação «possibly»'
+      en: 'wording “possibly”'
+      ru: 'формулировка «possibly»'
     url: https://artsandculture.google.com/story/the-lisbon-rhinoceros-tower-of-belém/fAWhMvHAdydLLw?hl=en-GB
     type: institutional
     accessed: '2026-10-14'
-  - title: 'Times Higher Education: «How Leo lionised a jumbo pet» (о книге Бедини)'
+  - title: 'Times Higher Education: «How Leo lionised a jumbo pet»'
+    note:
+      pt: 'sobre o livro de Bedini'
+      en: 'on Bedini’s book'
+      ru: 'о книге Бедини'
     url: https://www.timeshighereducation.com/node/87270
     type: press
     accessed: '2026-10-16'
@@ -118,11 +125,16 @@ sources:
     url: https://rhinoresourcecenter.com/wp-content/uploads/2006/12/1175862823.pdf
     type: academic
     accessed: '2026-10-16'
-  - title: 'Dorotheum: описание лота по данным Альбертины (Вена)'
+  - title: 'Dorotheum'
+    note:
+      pt: 'descrição do lote segundo a Albertina (Viena)'
+      en: 'lot description based on the Albertina data (Vienna)'
+      ru: 'описание лота по данным Альбертины (Вена)'
     url: https://dorotheum.com/cz/l/2184101
     type: reference
     accessed: '2026-10-16'
   - title: 'Qalam: «Носорог Альбрехта Дюрера»'
+    lang: ru
     url: https://qalam.global/en/articles/nosorog-albrexta-diurera-ru-72
     type: press
     accessed: '2026-10-16'

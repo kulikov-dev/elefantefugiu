@@ -116,17 +116,19 @@ sources:
     url: https://fundacao-aljubarrota.pt/panel-d/
     type: institutional
     accessed: '2026-10-14'
-  - title: 'Diário de Notícias: «Vitória em Aljubarrota não é graças ao quadrado que
-      não existe» (sobre o livro «Aljubarrota», Desassossego)'
+  - title: 'Diário de Notícias: «Vitória em Aljubarrota não é graças ao quadrado que não existe»'
+    note:
+      pt: 'sobre o livro «Aljubarrota», Desassossego'
+      en: 'on the book “Aljubarrota”, Desassossego'
+      ru: 'о книге «Aljubarrota», Desassossego'
     url: https://www.dn.pt/edicao-impressa/vitória-em-aljubarrota-não-é-graças-ao-quadrado-que-não-existe-nem-seria-necessário
     type: press
     accessed: '2026-10-14'
-  - title: WarHistory.org, «The Battle of Aljubarrota 1385 AD» (⚠ divulgação, só
-      para a cifra ~18 000; substituir por obra académica)
+  - title: 'WarHistory.org, «The Battle of Aljubarrota 1385 AD»'
     url: https://warhistory.org/%40msw/article/the-battle-of-aljubarrota-1385-ad
     type: reference
     accessed: '2026-10-14'
-  - title: 'Ватикан: биография св. Нуну де Санта Мария Алвариш Перейра'
+  - title: 'The Holy See (vatican.va): Nuno De Santa Maria Álvares Pereira (1360-1431) - Biography'
     url: https://www.vatican.va/news_services/liturgy/saints/2009/ns_lit_doc_20090426_nuno_en.html
     type: institutional
     accessed: '2026-10-15'

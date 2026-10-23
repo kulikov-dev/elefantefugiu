@@ -96,8 +96,7 @@ sources:
     url: https://www.nst.com.my/amp/news/nation/2022/09/828245/courage-and-perseverance-face-adversity
     type: press
     accessed: '2026-10-15'
-  - title: История Малакки XIX в. в цифровой библиотеке Музея Тейлера (стр. 222;
-      автора и название уточнить)
+  - title: 'Teylers Museum, biblioteca digital (Emags 28a_24-2), p. 222'
     url: https://beeld.teylersmuseum.nl/Digital_Library/Emags/28a_24-2/page_222.html
     type: reference
     accessed: '2026-10-15'
@@ -125,7 +124,11 @@ sources:
     url: https://www.ebsco.com/research-starters/biography/tome-pires
     type: reference
     accessed: '2026-10-16'
-  - title: 'Koboi Project: Malacca (памятник Албукерки в Белеме)'
+  - title: 'Koboi Project: Malacca'
+    note:
+      pt: 'monumento a Albuquerque em Belém'
+      en: 'monument to Albuquerque in Belém'
+      ru: 'памятник Албукерки в Белеме'
     url: https://koboiproject.com/tag/malacca/page/2/
     type: press
     accessed: '2026-10-16'

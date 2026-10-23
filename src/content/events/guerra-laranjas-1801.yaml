@@ -100,7 +100,11 @@ sources:
     url: https://www.dn.pt/opiniao-dn/opiniao/da-guerra-das-laranjas-guerra-das-rosas
     type: press
     accessed: '2026-10-15'
-  - title: 'Observador: Olivença (спор, Венский конгресс, 1817, 12 тыс. жителей)'
+  - title: 'Observador: Olivença'
+    note:
+      pt: 'a disputa, o Congresso de Viena, 1817, 12 mil habitantes'
+      en: 'the dispute, the Congress of Vienna, 1817, 12,000 inhabitants'
+      ru: 'спор, Венский конгресс, 1817, 12 тыс. жителей'
     url: https://observador.pt/?p=6905419
     type: press
     accessed: '2026-10-15'
@@ -108,7 +112,11 @@ sources:
     url: https://dialnet.unirioja.es/descarga/articulo/5396891.pdf
     type: academic
     accessed: '2026-10-15'
-  - title: Tratado de Badajoz, 6.06.1801 (описание редкого издания, Castro e Silva)
+  - title: 'Tratado de Badajoz, 6.06.1801'
+    note:
+      pt: 'descrição de uma edição rara, Castro e Silva'
+      en: 'description of a rare edition, Castro e Silva'
+      ru: 'описание редкого издания, Castro e Silva'
     url: https://www.castroesilva.com/store/sku/2312SB006/optForgotPasswordForm.asp
     type: reference
     accessed: '2026-10-15'

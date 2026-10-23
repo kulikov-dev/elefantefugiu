@@ -122,7 +122,11 @@ sources:
     url: https://military-history.fandom.com/wiki/Lines_of_Torres_Vedras
     type: reference
     accessed: '2026-10-15'
-  - title: Chartrand, Fuentes de Oñoro 1811 (Osprey, описание книги)
+  - title: 'Chartrand, Fuentes de Oñoro 1811 (Osprey)'
+    note:
+      pt: 'descrição do livro'
+      en: 'book description'
+      ru: 'описание книги'
     url: https://betterread.com.au/book/fuentes-de-onoro-1811.do
     type: reference
     accessed: '2026-10-15'
