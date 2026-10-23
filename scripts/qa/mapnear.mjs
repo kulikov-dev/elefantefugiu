@@ -46,6 +46,7 @@ if (want('tools')) {
       return [...document.querySelectorAll('.map__tools a')].map((a) => ({ title: a.title, label: a.getAttribute('aria-label'), top: a.getBoundingClientRect().top >= zoom.bottom, w: a.getBoundingClientRect().width, h: a.getBoundingClientRect().height }));
     });
     ok(`tools (${lang}): three icon buttons under the zoom, each with a title and the same name for screen readers, at least 44 px`, t.length === 3 && t.every((b) => b.top && b.w >= 44 && b.h >= 44 && b.title && b.title === b.label), JSON.stringify(t.map((b) => b.title)));
+    if (lang === 'pt') ok('tools (pt): the titles are Perto de mim / Portugal inteiro / O mundo todo', t.map((b) => b.title).join('|') === 'Perto de mim|Portugal inteiro|O mundo todo', t.map((b) => b.title).join(' | '));
     if (lang === 'en') ok('tools (en): the titles are Near me / All of Portugal / Whole world', t.map((b) => b.title).join('|') === 'Near me|All of Portugal|Whole world', t.map((b) => b.title).join(' | '));
     if (lang === 'ru') ok('tools (ru): the titles are Рядом со мной / Вся Португалия / Весь мир', t.map((b) => b.title).join('|') === 'Рядом со мной|Вся Португалия|Весь мир', t.map((b) => b.title).join(' | '));
     ok(`tools (${lang}): the old text button "All of Portugal" is gone`, (await page.$('[data-map-home]')) === null);

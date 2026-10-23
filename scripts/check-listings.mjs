@@ -344,7 +344,7 @@ for (const lang of ['pt', 'en']) {
   if (!heroLinks.some((l) => l.href.endsWith(lang === 'pt' ? '/pt/surpreende-me/' : '/en/surprise-me/'))) fail('"Surprise me" link is missing from the hero');
   if (!heroLinks.some((l) => l.href.endsWith(lang === 'pt' ? '/pt/mapa/' : '/en/map/'))) fail('"Open the map" link is missing from the hero');
   if (!/<img class="mascot mascot--hero"/.test(hero)) fail('the elephant picture is missing from the hero');
-  // the band "You left off in the era ..." is a hidden link above the first screen (a script shows it)
+  // the band "Continue where you left off: ..." is a hidden link above the first screen (a script shows it)
   if (!/<a class="continue-band"[^>]*data-continue[^>]*hidden/.test(html)) fail('the "left off" band must exist and stay hidden without JavaScript');
   if (/class="button[^"]*"[^>]*data-continue/.test(html)) fail('"Continue" must not be a button in the row any more');
 

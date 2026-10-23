@@ -49,7 +49,7 @@
     "hook_title": "Em 1515, o rei pôs um rinoceronte contra um elefante. O elefante fugiu.",
     "intro": "Daí o nosso nome: O Elefante Fugiu, «o elefante fugiu». Histórias do passado de Portugal: cada uma lê-se num minuto e está ligada a um lugar que pode visitar.",
     "cta_read": "Ler num minuto",
-    "continue": "Parou na época «{name}» →",
+    "continue": "Continuar onde parou: {name} →",
     "open_map": "Abrir o mapa",
     "showcase_heading": "Por onde começar",
     "map_label": "Mapa com todas as histórias",
@@ -173,7 +173,7 @@
     "epochs_more_other": "Mais {n} épocas em preparação"
   },
   "map": {
-    "home": "Todo o Portugal",
+    "home": "Portugal inteiro",
     "map_label": "Mapa das histórias",
     "threads_label": "Filtrar por fio",
     "epochs_label": "Filtrar por época",

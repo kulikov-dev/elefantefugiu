@@ -468,6 +468,7 @@ Vitest `tests/vitest/pages.spec.ts` (11 тестов: разделы и теги
 | `viz.army_scale` | other | Cada ponto representa {n} pessoas. … | Each dot stands for {n} people. … | Каждая точка — {n} человека. … |
 
 Не склоняются по смыслу и оставлены: «Скрыто историй: {n}» (после двоеточия), «в {n} м», «в {n} км» (единицы), «от {min} до {max} человек» (диапазон).
+7. **Переводы.** pt «Todo o Portugal» (кнопка карты) → «Portugal inteiro»; плашка «Вы остановились…»: pt «Continuar onde parou: {name} →», en «Continue where you left off: {name} →», русский без изменений (`home.continue`).
 
 ## Служебные страницы: новые тексты, маскот на «Нашли ошибку?», «Спасибо» и 404
 
