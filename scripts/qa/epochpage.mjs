@@ -66,7 +66,9 @@ if (want('cards')) {
     const titles = [...document.querySelectorAll('ol.feed .ecard__title')].map((t) => getComputedStyle(t).fontSize);
     const cards = [...document.querySelectorAll('ol.feed .ecard')].map((e) => e.getBoundingClientRect());
     const paddings = [...document.querySelectorAll('ol.feed .ecard')].map((e) => getComputedStyle(e).paddingTop + getComputedStyle(e).paddingLeft);
-    const withoutHeavy = [...document.querySelectorAll('ol.feed > li')].filter((li) => !li.querySelector('.ecard__heavy')).map((li) => li.querySelector('.ecard').getBoundingClientRect().height);
+    // "One line of hook": the hook is as tall as one line (a hook that wraps makes its card taller, whatever else is in it).
+    const oneLine = (hook) => hook.getBoundingClientRect().height < parseFloat(getComputedStyle(hook).lineHeight) * 1.6;
+    const withoutHeavy = [...document.querySelectorAll('ol.feed > li')].filter((li) => !li.querySelector('.ecard__heavy') && oneLine(li.querySelector('.ecard__hook'))).map((li) => li.querySelector('.ecard').getBoundingClientRect().height);
     return { titles: [...new Set(titles)], paddings: [...new Set(paddings)], maxPlain: Math.max(...withoutHeavy) };
   });
   ok('cards: every title has the same size', c.titles.length === 1, c.titles.join(' '));
