@@ -7,10 +7,12 @@ interface Props {
   lang: Lang;
   /** Absolute address of the card being reported. */
   cardUrl: string;
+  /** The title of the story: the form shows it instead of the long address. */
+  title?: string;
 }
 
-const { lang, cardUrl } = Astro.props;
-const href = `${pagePath(lang, 'report')}?url=${encodeURIComponent(cardUrl)}`;
+const { lang, cardUrl, title } = Astro.props;
+const href = `${pagePath(lang, 'report')}?url=${encodeURIComponent(cardUrl)}${title ? `&title=${encodeURIComponent(title)}` : ''}`;
 ---
 <p class="report-link"><a {href}>{t(lang, 'card.report_inline')}</a></p>
 

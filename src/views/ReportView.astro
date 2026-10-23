@@ -2,13 +2,16 @@
 // "Found a mistake?": /pt/corrigir/, /en/report/, /ru/oshibka/ (docs/spec.md 4 flow 5 and 5.6).
 // A plain HTML form that posts to the FormSubmit service, which forwards it by email to CONTACT_EMAIL; it works without
 // JavaScript (the service then sends the reader on to this page, #sent). With JavaScript the same data is sent with fetch
-// and the confirmation appears in place (src/scripts/report-form.ts). The address of the card arrives as ?url= and fills the
-// first field. No cookies, nothing is kept by the site itself. Not indexed: a form is no answer to a search.
+// and the confirmation appears in place (src/scripts/report-form.ts). A reader who comes from a story (?url= and ?title=) sees the
+// title of the story with a "change" link instead of the long address; the address goes in a hidden field. No cookies, nothing
+// is kept by the site itself. Not indexed: a form is no answer to a search.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Mascot from '../components/Mascot.astro';
 import { pagePath, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { CONTACT_EMAIL } from '../data/static-pages';
 import { formsubmitEndpoint, reportSubject } from '../lib/report';
+import { renderInline } from '../lib/static-text';
 
 interface Props {
   lang: Lang;
@@ -18,16 +21,40 @@ const { lang } = Astro.props;
 const title = t(lang, 'pages.report.title');
 const action = formsubmitEndpoint(CONTACT_EMAIL, false);
 const ajax = formsubmitEndpoint(CONTACT_EMAIL, true);
-const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
+const reportPage = new URL(pagePath(lang, 'report'), Astro.site).href;
+const next = `${reportPage}#sent`;
+// The note under the button names a place of the site and the address, so it carries {{tokens}}; the form service is named in the
+// section "Who else is involved" of the Legal page.
+const note = renderInline(
+  t(lang, 'report.note'),
+  (key) => (key === 'legal' ? { href: `${pagePath(lang, 'legal')}#s-terceiros`, label: t(lang, 'pages.legal.title') } : undefined),
+  CONTACT_EMAIL,
+);
 ---
 <BaseLayout lang={lang} pageKey="report" title={title} noindex>
   <article class="report">
-    <h1>{title}</h1>
-    <p class="report__lead">{t(lang, 'report.lead')}</p>
+    <header class="report__head">
+      <div class="report__intro">
+        <h1>{title}</h1>
+        <p class="report__lead">{t(lang, 'report.lead')}</p>
+      </div>
+      <div class="report__mascot">
+        <Mascot pose="peek" size="report" lang={lang} />
+      </div>
+    </header>
 
     <section id="sent" class="report__sent" tabindex="-1" aria-labelledby="sent-title" role="status" hidden>
-      <h2 id="sent-title">{t(lang, 'report.sent_title')}</h2>
-      <p>{t(lang, 'report.sent_text')}</p>
+      <div class="report__sent-mascot">
+        <Mascot pose="run" size="report" lang={lang} />
+      </div>
+      <div class="report__sent-text">
+        <h2 id="sent-title">{t(lang, 'report.sent_title')}</h2>
+        <p>{t(lang, 'report.sent_text')}</p>
+        <p class="report__sent-actions">
+          <a class="button" href="#" data-report-back hidden>{t(lang, 'report.back_to_story')}</a>
+          <a class="button button--secondary" href={pagePath(lang, 'surprise')}>{t(lang, 'report.random_story')}</a>
+        </p>
+      </div>
     </section>
 
     <form
@@ -36,6 +63,7 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
       action={action}
       data-report-form
       data-ajax={ajax}
+      data-report-page={reportPage}
       data-sending={t(lang, 'report.sending')}
       data-submit={t(lang, 'report.submit')}
       data-too-short={t(lang, 'report.too_short')}
@@ -44,15 +72,23 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
       <input type="hidden" name="_subject" value={reportSubject(lang)} />
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_next" value={next} />
+      <input type="hidden" name="_next" value={next} data-report-next />
       <input type="hidden" name="language" value={lang} />
       <!-- Honeypot: people never see it; a robot fills it and the service drops the message. -->
       <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
-      <div class="field">
+      <!-- The page the mistake is on. A reader who came from a story sees its title and "change"; the address travels in the
+           hidden field. Everyone else (and anyone without JavaScript) gets a plain field for a link or a title. -->
+      <div class="field" data-report-story hidden>
+        <span class="field__label" id="f-story-label">{t(lang, 'report.page_label')}</span>
+        <p class="report__story">
+          <strong data-report-story-title></strong>
+          <button type="button" class="linklike" data-report-change aria-describedby="f-story-label">{t(lang, 'report.page_change')}</button>
+        </p>
+      </div>
+      <div class="field" data-report-free>
         <label for="f-url">{t(lang, 'report.url_label')}</label>
-        <input id="f-url" name="page" type="text" inputmode="url" autocomplete="off" aria-describedby="f-url-hint" data-report-url />
-        <p id="f-url-hint" class="field__hint">{t(lang, 'report.url_hint')}</p>
+        <input id="f-url" name="page" type="text" inputmode="url" autocomplete="off" maxlength="500" data-report-url />
       </div>
 
       <div class="field">
@@ -69,13 +105,13 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
 
       <div class="field">
         <label for="f-source">{t(lang, 'report.source_label')}</label>
-        <input id="f-source" name="source" type="text" inputmode="url" autocomplete="off" maxlength="500" />
+        <input id="f-source" name="source" type="text" inputmode="url" autocomplete="off" maxlength="500" aria-describedby="f-source-hint" />
+        <p id="f-source-hint" class="field__hint">{t(lang, 'report.source_hint')}</p>
       </div>
 
       <div class="field">
         <label for="f-email">{t(lang, 'report.email_label')}</label>
-        <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" aria-describedby="f-email-hint" />
-        <p id="f-email-hint" class="field__hint">{t(lang, 'report.email_hint')}</p>
+        <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" />
       </div>
 
       <p class="report__failed" role="alert" data-report-failed hidden>
@@ -85,10 +121,7 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
       <button type="submit" class="button" data-report-submit>{t(lang, 'report.submit')}</button>
     </form>
 
-    <p class="report__note">
-      {t(lang, 'report.privacy')} <a href={`${pagePath(lang, 'legal')}#s-privacidade`}>{t(lang, 'pages.legal.title')}</a>.
-    </p>
-    <p class="report__note">{t(lang, 'report.direct')} <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    <p class="report__note" set:html={note} />
   </article>
 </BaseLayout>
 
@@ -101,9 +134,30 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
     margin-block-start: var(--space-4);
   }
 
+  /* The title and the lead on the left, the elephant on the right (above the title on a phone, smaller). */
+  .report__head {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .report__intro > * + * {
+    margin-block-start: var(--space-3);
+  }
+
   .report__lead {
     max-width: var(--measure);
     font-size: var(--text-lg);
+  }
+
+  @media (min-width: 40rem) {
+    .report__head {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-5);
+    }
   }
 
   .report__form {
@@ -117,7 +171,8 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
     gap: var(--space-1);
   }
 
-  .field label {
+  .field label,
+  .field__label {
     font-weight: var(--weight-strong);
   }
 
@@ -131,6 +186,18 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
     background: var(--epoch-surface);
     color: var(--color-ink);
     font: inherit;
+  }
+
+  .field[hidden],
+  [data-report-back][hidden] {
+    display: none;
+  }
+
+  .report__story {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
   }
 
   .field__hint {
@@ -159,6 +226,10 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
 
   /* The confirmation: shown when the page opens at #sent (the service sends the reader here) or by the script. */
   .report__sent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
     padding: var(--space-4);
     border: var(--epoch-frame);
     border-inline-start: var(--epoch-accent-bar);
@@ -166,7 +237,29 @@ const next = `${new URL(pagePath(lang, 'report'), Astro.site).href}#sent`;
     background: var(--epoch-surface);
   }
 
+  .report__sent[hidden] {
+    display: none;
+  }
+
+  .report__sent-text > * + * {
+    margin-block-start: var(--space-2);
+  }
+
+  .report__sent-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-block-start: var(--space-4);
+  }
+
+  @media (min-width: 40rem) {
+    .report__sent {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
   .report__sent:target {
-    display: block !important;
+    display: flex !important;
   }
 </style>

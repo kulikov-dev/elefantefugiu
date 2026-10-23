@@ -1,10 +1,12 @@
 // Texts of the static pages: About, Method and sources, Legal information (docs/spec.md 5.6), in the three languages.
-// The Portuguese and Russian wording is written for a native speaker to read through; the facts it states are those of the
-// project as it is built (labels, age marks, sources, licences, what the browser stores). Items marked in docs/STATE.md
-// ("Páginas estáticas: o que o dono do projeto deve confirmar") are statements only the owner can confirm.
+// Source: docs/texts-ru.md, docs/texts-pt.md, docs/texts-en.md (sections 2, 3 and 4). Names of things on the site (labels, eras,
+// threads, buttons) are written as the site itself names them; the differences from the files are listed in docs/STATE.md.
+// What stood in square brackets in the files (a name of the owner, the controller of the data, the reminder to show the legal
+// text to a GDPR expert) is NOT published here; see docs/STATE.md for the list.
 //
-// Inline markup: {{about}} {{method}} {{report}} {{legal}} {{map}} link to a page of the site (the link text is the
-// title of that page); {{email}} is the contact address as a link. Everything else is plain text.
+// Inline markup: {{about}} {{method}} {{report}} {{legal}} {{map}} link to a page of the site (the link text is the title of that
+// page; {{method|text}} gives the link another text, for a case ending); {{email}} is the contact address as a link; {{stories}} is
+// the number of published stories with its noun ("13 stories"), counted from the data; **text** is bold. Everything else is plain text.
 import type { Lang } from '../i18n/routes';
 
 export const CONTACT_EMAIL = 'elefantefugiu@gmail.com';
@@ -16,11 +18,15 @@ export interface Section {
   paragraphs: string[];
   /** A list after the paragraphs. */
   items?: string[];
+  /** Paragraphs after the list. */
+  after?: string[];
 }
 
 export interface StaticPage {
-  /** The opening paragraph, shown larger. */
-  lead: string;
+  /** The opening paragraph, shown larger (a page may start straight with its first section). */
+  lead?: string;
+  /** More opening paragraphs, in ordinary size. */
+  more?: string[];
   sections: Section[];
 }
 
@@ -29,489 +35,414 @@ export type StaticKey = 'about' | 'method' | 'legal';
 export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
   about: {
     pt: {
-      lead: 'O Elefante Fugiu conta a história de Portugal em pequenas histórias interativas, ligadas ao mapa e ao tempo. Cada uma cabe num minuto de leitura e diz-lhe onde pode ir ver o lugar hoje.',
+      lead: 'Em 1515, o rei D. Manuel I decidiu pôr à prova se o elefante e o rinoceronte eram mesmo inimigos mortais. Os animais foram soltos no pátio de um palácio de Lisboa, diante de uma multidão. O elefante olhou para o adversário e fugiu.',
+      more: ['Daí o nosso nome: **O Elefante Fugiu**. Reunimos histórias assim do passado de Portugal: curtas, verificadas e ligadas a um lugar que se pode visitar hoje. Cada uma lê-se num minuto.'],
       sections: [
         {
-          id: 'o-que-e',
-          heading: 'O que é',
-          paragraphs: [
-            'Escolhe uma época, segue um fio (o mar, a comida e o vinho, o poder e a revolta, a gente como nós, a natureza) ou abre o mapa. Cada história tem três camadas, e só abre as que quiser:',
-          ],
-          items: [
-            'Gancho: uma frase para espicaçar a curiosidade.',
-            'História: o essencial em poucas linhas, para ler num minuto.',
-            'Mais: contexto, fontes e a ponte para hoje, o lugar que pode visitar.',
-          ],
+          id: 'foi-aqui',
+          heading: 'Foi aqui',
+          paragraphs: ['Uma história fica melhor na memória quando estamos no sítio exato. Por isso, cada história tem um ponto no mapa e uma «ponte para hoje»: uma igreja, uma praça, um museu ou um monumento onde ficou um vestígio dela.'],
+        },
+        {
+          id: 'como-ler',
+          heading: 'Como ler',
+          paragraphs: ['Cada história tem três camadas. Pare em qualquer uma.'],
+          items: ['**Gancho.** Uma frase: «O rei pôs um rinoceronte contra um elefante. O elefante fugiu.»', '**História.** Como aconteceu, em poucas linhas.', '**Saber mais.** O contexto, como sabemos e onde ir.'],
+          after: ['Pode ler por épocas, por fios (o mar, comida e vinho, poder e revolta, gente como nós, natureza) ou simplesmente no mapa.'],
         },
         {
           id: 'para-quem',
-          heading: 'Para quem é',
-          paragraphs: [
-            'Para quem gosta de história mas não tem tempo para um manual, para famílias que passeiam com crianças e para quem viaja por Portugal e quer saber o que aconteceu naquele sítio. O modo família esconde as histórias com idade mínima ou temas pesados; está no cabeçalho de todas as páginas.',
-          ],
+          heading: 'Para quem',
+          paragraphs: [],
+          items: ['Para quem gosta de história, mas não de manuais.', 'Para quem viaja e quer saber o que aconteceu exatamente onde está.', 'Para famílias. O botão «Com crianças» no topo esconde as histórias sobre guerra, execuções e repressão.'],
         },
         {
-          id: 'foi-aqui',
-          heading: '«Foi aqui»',
-          paragraphs: [
-            'Cada história aponta para um lugar real que pode visitar hoje: uma igreja, um miradouro, um museu, uma rua. É a «ponte para hoje». O mapa mostra esses lugares, e a ligação «Como chegar» abre-os num mapa aberto (OpenStreetMap), sem recorrer a serviços comerciais.',
-          ],
+          id: 'confianca',
+          heading: 'Pode confiar nisto?',
+          paragraphs: ['Não fazemos passar lendas por factos. Cada história tem uma etiqueta: «Documentado», «Lenda» ou «Em debate», e no fim a lista de fontes. Explicamos como trabalhamos em {{method|Método e fontes}}.'],
         },
         {
           id: 'estado',
-          heading: 'Em que ponto está',
-          paragraphs: [
-            'O projeto está em construção. Três épocas estão preparadas (Avis e os Descobrimentos, Pombal e o Terramoto, o Estado Novo e o 25 de Abril); as restantes aparecem como «Em breve». Os textos que ainda são de ensaio vêm marcados como «Texto de teste» e não são história verificada.',
-          ],
+          heading: 'O que já existe',
+          paragraphs: ['O projeto está a crescer. Estão prontas três épocas: «Avis e Descobrimentos», «Pombal e o Terramoto» e «Estado Novo e 25 de Abril», com {{stories}} no total. Outras seis épocas, da Lusitânia romana aos nossos dias, estão a caminho.'],
         },
         {
           id: 'quem-faz',
-          heading: 'Quem faz',
-          paragraphs: [
-            'É um projeto independente, gratuito e sem publicidade. Os textos são escritos pela equipa do projeto, e cada história regista quem a reviu e quando. Se tem formação em história, arqueologia ou património e quer rever uma época, escreva-nos.',
-          ],
+          heading: 'Quem somos',
+          paragraphs: ['O Elefante Fugiu é um projeto independente: gratuito, sem publicidade e sem rastreio. Procuramos historiadores, arqueólogos e guias dispostos a verificar uma época inteira. Se for o seu caso, escreva-nos.'],
         },
         {
           id: 'ajudar',
           heading: 'Como ajudar',
-          paragraphs: [
-            'Encontrou um erro, uma data duvidosa ou um lugar que mudou? Diga-nos em {{report}}. Também pode partilhar uma história com quem lhe pareça interessar, ou sugerir uma que falte: escreva para {{email}}.',
-          ],
-        },
-        {
-          id: 'contacto',
-          heading: 'Contacto',
-          paragraphs: ['{{email}}. Mais sobre o método em {{method}} e sobre licenças e privacidade em {{legal}}.'],
+          paragraphs: [],
+          items: ['Encontrou uma imprecisão? Diga-nos em {{report}}.', 'Conhece uma história que falta aqui? Envie-a para {{email}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
+          after: ['Escreva-nos: {{email}}'],
         },
       ],
     },
     en: {
-      lead: 'O Elefante Fugiu tells the history of Portugal in short interactive stories tied to the map and to time. Each takes about a minute to read and tells you where you can go and see the place today.',
+      lead: 'In 1515 King Manuel I decided to test whether the elephant and the rhinoceros really were sworn enemies. The animals were let into the courtyard of a Lisbon palace in front of a crowd. The elephant took one look at its opponent and ran away.',
+      more: ['Hence our name: **O Elefante Fugiu**, “The elephant ran away”. We collect stories like this from Portugal’s past: short, checked, and tied to a place you can visit today. Each one takes a minute to read.'],
       sections: [
         {
-          id: 'o-que-e',
-          heading: 'What it is',
-          paragraphs: [
-            'Pick an era, follow a thread (the sea, food and wine, power and revolt, people like us, nature) or open the map. Each story has three layers, and you open only the ones you want:',
-          ],
-          items: [
-            'Hook: one line to catch your curiosity.',
-            'Story: the essentials in a few lines, a one-minute read.',
-            'More: context, sources and the bridge to today, a place you can visit.',
-          ],
+          id: 'foi-aqui',
+          heading: 'Foi aqui. It happened here',
+          paragraphs: ['A story sticks better when you’re standing on the very spot. That’s why every story has a point on the map and a “bridge to today”: a church, a square, a museum or a monument where it left a trace.'],
+        },
+        {
+          id: 'como-ler',
+          heading: 'How to read',
+          paragraphs: ['Every story has three layers. Stop at any of them.'],
+          items: ['**Hook.** One line: “The king set a rhino against an elephant. The elephant ran away.”', '**Story.** How it happened, in a few lines.', '**More.** What was going on around it, how we know, and where to go.'],
+          after: ['You can read by era, by thread (the sea, food and wine, power and revolt, people like us, nature) or simply on the map.'],
         },
         {
           id: 'para-quem',
-          heading: 'Who it is for',
-          paragraphs: [
-            'For people who like history but have no time for a textbook, for families walking with children, and for anyone travelling in Portugal who wants to know what happened in that very spot. Family mode hides stories with a minimum age or a heavy topic; it sits in the header of every page.',
-          ],
+          heading: 'Who it’s for',
+          paragraphs: [],
+          items: ['For people who love history but not textbooks.', 'For travellers who want to know what happened right where they’re standing.', 'For families. The “With kids” button in the header hides stories about war, executions and repression.'],
         },
         {
-          id: 'foi-aqui',
-          heading: '“Foi aqui” (it happened here)',
-          paragraphs: [
-            'Every story points to a real place you can visit today: a church, a viewpoint, a museum, a street. That is the “bridge to today”. The map shows these places, and the “Get directions” link opens them in an open map (OpenStreetMap), without commercial services.',
-          ],
+          id: 'confianca',
+          heading: 'Can you trust it',
+          paragraphs: ['We don’t pass legends off as facts. Every story carries a label: “Documented”, “Legend” or “Debated”, and a list of sources at the bottom. How we work is explained in {{method|Method and sources}}.'],
         },
         {
           id: 'estado',
-          heading: 'Where the project stands',
-          paragraphs: [
-            'The project is under construction. Three eras are prepared (Avis and the Discoveries, Pombal and the Earthquake, the Estado Novo and 25 April); the others show as “Coming soon”. Texts that are still drafts are marked “Test text” and are not verified history.',
-          ],
+          heading: 'What’s here so far',
+          paragraphs: ['The project is growing. Three eras are ready: “Avis and the Discoveries”, “Pombal and the Earthquake” and “Estado Novo and 25 April”, {{stories}} in all. Six more eras, from Roman Lusitania to the present day, are in the works.'],
         },
         {
           id: 'quem-faz',
-          heading: 'Who makes it',
-          paragraphs: [
-            'It is an independent project, free and without advertising. The texts are written by the project team, and each story records who reviewed it and when. If you have a background in history, archaeology or heritage and would like to review an era, write to us.',
-          ],
+          heading: 'Who we are',
+          paragraphs: ['O Elefante Fugiu is an independent project: free, ad-free and tracking-free. We’re looking for historians, archaeologists and guides willing to check a whole era. If that’s you, get in touch.'],
         },
         {
           id: 'ajudar',
           heading: 'How to help',
-          paragraphs: [
-            'Found a mistake, a doubtful date or a place that has changed? Tell us at {{report}}. You can also share a story with someone who might like it, or suggest one that is missing: write to {{email}}.',
-          ],
-        },
-        {
-          id: 'contacto',
-          heading: 'Contact',
-          paragraphs: ['{{email}}. More about the method at {{method}} and about licences and privacy at {{legal}}.'],
+          paragraphs: [],
+          items: ['Spotted a mistake? Tell us via {{report}}.', 'Know a story that’s missing here? Send it to {{email}}.', 'Enjoyed it? Share a story with someone heading to Portugal. That’s the best help of all.'],
+          after: ['Write to us: {{email}}'],
         },
       ],
     },
     ru: {
-      lead: 'O Elefante Fugiu рассказывает историю Португалии короткими интерактивными историями, привязанными к карте и ко времени. На каждую уходит около минуты, и в конце сказано, куда сходить и увидеть это место сегодня.',
+      lead: 'В 1515 году король Мануэл I решил проверить, правда ли слон и носорог заклятые враги. Зверей выпустили во двор лиссабонского дворца при толпе зрителей. Слон посмотрел на противника и сбежал.',
+      more: ['Отсюда наше название: **O Elefante Fugiu**, «Слон сбежал». Мы собираем такие истории из прошлого Португалии: короткие, проверенные и привязанные к месту, куда можно прийти сегодня. Одна история читается за минуту.'],
       sections: [
         {
-          id: 'o-que-e',
-          heading: 'Что это',
-          paragraphs: [
-            'Выберите эпоху, пойдите по нити (море, еда и вино, власть и бунт, люди как мы, природа) или откройте карту. У каждой истории три слоя, раскрывайте только те, что нужны:',
-          ],
-          items: [
-            'Крючок: одна фраза, чтобы разжечь любопытство.',
-            'История: самое важное в нескольких строках, читать минуту.',
-            'Подробнее: контекст, источники и мост в сегодня, место, которое можно посетить.',
-          ],
+          id: 'foi-aqui',
+          heading: 'Foi aqui. Это было здесь',
+          paragraphs: ['История запоминается лучше, когда стоишь на том самом месте. Поэтому у каждой истории есть точка на карте и «мост в сегодня»: церковь, площадь, музей или памятник, где от неё остался след.'],
+        },
+        {
+          id: 'como-ler',
+          heading: 'Как читать',
+          paragraphs: ['У каждой истории три слоя. Остановитесь на любом.'],
+          items: ['**Крючок.** Одна фраза: «Король стравил носорога со слоном. Слон убежал».', '**История.** Как это было, в нескольких строках.', '**Подробнее.** Что вокруг, откуда мы это знаем и куда сходить.'],
+          after: ['Истории можно читать по эпохам, по нитям (море, еда и вино, власть и бунт, люди как мы, природа) или просто на карте.'],
         },
         {
           id: 'para-quem',
           heading: 'Для кого',
-          paragraphs: [
-            'Для тех, кто любит историю, но не хочет учебника; для семей, которые гуляют с детьми; для путешественников по Португалии, которым интересно, что происходило именно здесь. Семейный режим скрывает истории с возрастным ограничением и тяжёлыми темами; он в шапке каждой страницы.',
-          ],
+          paragraphs: [],
+          items: ['Для тех, кто любит историю, но не учебники.', 'Для путешественников, которым интересно, что случилось именно там, где они стоят.', 'Для семей. Кнопка «С детьми» в шапке скрывает истории о войне, казнях и репрессиях.'],
         },
         {
-          id: 'foi-aqui',
-          heading: '«Foi aqui» («это было здесь»)',
-          paragraphs: [
-            'Каждая история указывает на настоящее место, которое можно посетить сегодня: церковь, смотровую площадку, музей, улицу. Это «мост в сегодня». На карте видны эти места, а ссылка «Как добраться» открывает их в открытой карте (OpenStreetMap), без коммерческих сервисов.',
-          ],
+          id: 'confianca',
+          heading: 'Можно ли этому верить',
+          paragraphs: ['Мы не выдаём легенды за факты. У каждой истории есть метка: «Документально», «Легенда» или «Спорно», а внизу список источников. Как мы работаем, рассказано в {{method|«Методе и источниках»}}.'],
         },
         {
           id: 'estado',
-          heading: 'На каком этапе проект',
-          paragraphs: [
-            'Проект в разработке. Готовы три эпохи (Авис и Великие открытия, Помбал и землетрясение, Эштаду Нову и 25 апреля), остальные пока помечены «Скоро». Тексты, которые ещё черновые, помечены «Тестовый текст» и не являются проверенной историей.',
-          ],
+          heading: 'Что уже есть',
+          paragraphs: ['Проект растёт. Готовы три эпохи: «Авис и Великие открытия», «Помбал, землетрясение, бегство двора» и «Эштаду Нову и Революция гвоздик», всего {{stories}}. Шесть эпох, от римской Лузитании до наших дней, в работе.'],
         },
         {
           id: 'quem-faz',
-          heading: 'Кто делает',
-          paragraphs: [
-            'Это независимый бесплатный проект без рекламы. Тексты пишет команда проекта, а у каждой истории указано, кто её проверил и когда. Если вы историк, археолог или специалист по наследию и готовы проверить эпоху, напишите нам.',
-          ],
+          heading: 'Кто мы',
+          paragraphs: ['O Elefante Fugiu независимый проект: бесплатно, без рекламы и без слежки. Мы ищем историков, археологов и гидов, которые готовы взять на проверку целую эпоху. Напишите, если это вы.'],
         },
         {
           id: 'ajudar',
           heading: 'Как помочь',
-          paragraphs: [
-            'Нашли ошибку, сомнительную дату или место, которое изменилось? Сообщите на странице «{{report}}». Можно также поделиться историей с тем, кому она может быть интересна, или предложить ту, которой не хватает: напишите на {{email}}.',
-          ],
-        },
-        {
-          id: 'contacto',
-          heading: 'Контакты',
-          paragraphs: ['{{email}}. О методе подробнее на странице «{{method}}», о лицензиях и приватности на странице «{{legal}}».'],
+          paragraphs: [],
+          items: ['Нашли неточность? Напишите нам через {{report}}.', 'Знаете историю, которой тут не хватает? Пришлите её на {{email}}.', 'Понравилось? Поделитесь историей с тем, кто собирается в Португалию. Это лучшая помощь.'],
+          after: ['Пишите: {{email}}'],
         },
       ],
     },
   },
-
   method: {
     pt: {
-      lead: 'Esta página explica como as histórias são escolhidas, verificadas e etiquetadas, para que saiba o quanto confiar em cada uma.',
+      lead: 'A história está cheia de invenções bonitas, e nós também gostamos delas. Por isso dizemos sempre com clareza o que está provado e o que não está.',
       sections: [
         {
           id: 'etiquetas',
-          heading: 'Documentado, lenda ou discutido',
-          paragraphs: ['Cada história traz uma etiqueta de credibilidade. A etiqueta tem sempre texto e símbolo, nunca apenas cor.'],
-          items: [
-            'Documentado: o facto assenta em fontes da época ou em estudos que os historiadores aceitam. As fontes estão listadas na história.',
-            'Lenda: uma tradição contada há muito tempo, que pode não ter prova. Contamo-la como lenda, sem a apresentar como facto.',
-            'Discutido: os historiadores discordam, ou as fontes são contraditórias. Dizemos o que se sabe e onde está a dúvida.',
-          ],
+          heading: 'Três etiquetas',
+          paragraphs: [],
+          items: ['**Documentado.** O acontecimento é confirmado por documentos da época ou por trabalhos de historiadores.', '**Lenda.** A história conta-se há séculos, mas não há provas. Recontamo-la e explicamos o que nela é verdade.', '**Em debate.** Os historiadores não concordam ou as fontes contradizem-se. Dizemos exatamente onde está a divergência.'],
         },
         {
           id: 'datas-fontes',
-          heading: 'Datas e fontes',
-          paragraphs: [
-            'Cada acontecimento principal indica pelo menos duas fontes, e cada história pelo menos uma. Prefere-se fontes primárias, estudos académicos, arquivos e sítios oficiais de museus e monumentos. Quando as fontes divergem na data, indicamos o intervalo ou escrevemos «cerca de».',
-            'Cada história mostra a data em que foi verificada pela última vez.',
-          ],
+          heading: 'De onde vêm os factos',
+          paragraphs: ['Antes de mais, de documentos da época, trabalhos académicos, arquivos e sites oficiais de museus. Cada história tem pelo menos uma fonte; os grandes acontecimentos têm pelo menos duas. Estão todas no fim da história, junto à data da última verificação.'],
         },
         {
           id: 'numeros',
-          heading: 'Números e estimativas',
-          paragraphs: [
-            'Quando os números são estimativas (por exemplo, o tamanho de um exército), mostramos um intervalo e dizemo-lo, nunca um valor único com falsa precisão. Os números de ensaio estão marcados como inventados.',
-          ],
+          heading: 'Datas e números',
+          paragraphs: ['Quando as fontes divergem, damos as duas versões ou escrevemos «cerca de»: «1778 ou 1782». O tamanho dos exércitos e o número de vítimas são quase sempre estimativas, por isso damos um intervalo em vez de um número redondo.'],
         },
         {
           id: 'idades',
-          heading: 'Idade mínima e temas pesados',
-          paragraphs: [
-            'As histórias para todas as idades não têm etiqueta de idade. As etiquetas 12+ e 16+ indicam a idade a partir da qual recomendamos a leitura. Uma história sobre um tema difícil (violência, perseguição, morte) leva o aviso «Tema pesado» e, antes de abrir, um ecrã que pergunta se quer continuar.',
-            'O modo família, no cabeçalho, tem três posições: tudo; só histórias para todas as idades; histórias para todas as idades e 12+. Os temas pesados ficam fora das duas últimas. Sem JavaScript, o modo não existe e todas as histórias ficam visíveis.',
-          ],
-        },
-        {
-          id: 'revisao',
-          heading: 'Revisão',
-          paragraphs: [
-            'Cada história publicada regista quem a reviu e em que data. Os textos têm limites de tamanho (o gancho até 12 palavras, a história entre 40 e 70, o contexto até 150) e são verificados automaticamente antes de cada publicação, tal como as ligações, as etiquetas e as imagens.',
-          ],
+          heading: 'Crianças e temas difíceis',
+          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Com crianças» no topo esconde-as por completo.'],
         },
         {
           id: 'imagens',
           heading: 'Imagens',
-          paragraphs: [
-            'Cada imagem indica o autor e a licença. Se uma ilustração for criada com ajuda de inteligência artificial, a legenda di-lo.',
-          ],
+          paragraphs: ['Cada ilustração indica o autor e a licença. Se uma imagem foi criada com inteligência artificial, a legenda di-lo, para que ninguém a confunda com um documento da época.'],
         },
         {
           id: 'correcoes',
-          heading: 'Correções',
-          paragraphs: [
-            'Se encontrar um erro, use {{report}}. Corrigimos o texto e atualizamos a data de verificação. Os endereços das histórias não mudam.',
-          ],
+          heading: 'Erros',
+          paragraphs: ['Acontecem. Se encontrar um, diga-nos em {{report}}. Corrigimos o texto e atualizamos a data da verificação. A ligação da história não muda, por isso pode continuar a partilhá-la.'],
         },
         {
           id: 'idiomas',
-          heading: 'Idiomas',
-          paragraphs: [
-            'O original é em português de Portugal; há versões em inglês e em russo. Uma história ainda não traduzida para russo aparece em inglês, com um aviso. Mais sobre licenças em {{legal}}.',
-          ],
+          heading: 'Línguas',
+          paragraphs: ['As histórias são escritas em português e traduzidas para inglês e russo.'],
         },
       ],
     },
     en: {
-      lead: 'This page explains how stories are chosen, checked and labelled, so that you know how far to trust each one.',
+      lead: 'History is full of beautiful inventions, and we love them too. That’s why we always say plainly what has been proven and what hasn’t.',
       sections: [
         {
           id: 'etiquetas',
-          heading: 'Documented, legend or debated',
-          paragraphs: ['Every story carries a credibility label. The label always has a word and a symbol, never colour alone.'],
-          items: [
-            'Documented: the fact rests on sources from the time or on studies that historians accept. The sources are listed in the story.',
-            'Legend: a tradition told for a long time that may have no proof. We tell it as a legend and do not present it as fact.',
-            'Debated: historians disagree, or the sources contradict each other. We say what is known and where the doubt lies.',
-          ],
+          heading: 'Three labels',
+          paragraphs: [],
+          items: ['**Documented.** The event is confirmed by documents of the time or by historians’ work.', '**Legend.** The story has been told for centuries, but there’s no proof. We retell it and explain what’s true in it.', '**Debated.** Historians disagree or the sources contradict each other. We say exactly what the dispute is about.'],
         },
         {
           id: 'datas-fontes',
-          heading: 'Dates and sources',
-          paragraphs: [
-            'Every key event names at least two sources, and every story at least one. We prefer primary sources, academic studies, archives and the official sites of museums and monuments. When the sources disagree on a date we give the range or write “around”.',
-            'Every story shows the date it was last checked.',
-          ],
+          heading: 'Where our facts come from',
+          paragraphs: ['First of all from period documents, academic work, archives and the official websites of museums. Every story has at least one source, and major events have at least two. They are all listed at the bottom of the story, next to the date it was last checked.'],
         },
         {
           id: 'numeros',
-          heading: 'Numbers and estimates',
-          paragraphs: [
-            'When numbers are estimates (for example the size of an army) we show a range and say so, never a single value with false precision. Test numbers are marked as invented.',
-          ],
+          heading: 'Dates and numbers',
+          paragraphs: ['When sources disagree, we give both versions or say “about”: “1778 or 1782”. Army sizes and death tolls are almost always estimates, so we give a range instead of one neat number.'],
         },
         {
           id: 'idades',
-          heading: 'Minimum age and heavy topics',
-          paragraphs: [
-            'Stories for all ages carry no age label. The 12+ and 16+ labels give the age from which we recommend reading. A story about a difficult topic (violence, persecution, death) carries the “Heavy topic” notice and, before it opens, a screen asking whether you want to continue.',
-            'Family mode, in the header, has three positions: everything; only stories for all ages; stories for all ages and 12+. Heavy topics stay out of the last two. Without JavaScript the mode does not exist and every story is visible.',
-          ],
-        },
-        {
-          id: 'revisao',
-          heading: 'Review',
-          paragraphs: [
-            'Every published story records who reviewed it and on what date. Texts have size limits (the hook up to 12 words, the story 40 to 70, the context up to 150) and are checked automatically before each release, together with links, labels and images.',
-          ],
+          heading: 'Children and difficult topics',
+          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “With kids” button in the header hides them altogether.'],
         },
         {
           id: 'imagens',
           heading: 'Images',
-          paragraphs: ['Every image names its author and licence. If an illustration is made with the help of artificial intelligence, the caption says so.'],
+          paragraphs: ['Every illustration is credited with its author and licence. If an image was made with AI, the caption says so, so that nobody mistakes it for a period document.'],
         },
         {
           id: 'correcoes',
-          heading: 'Corrections',
-          paragraphs: ['If you find a mistake, use {{report}}. We correct the text and update the check date. The addresses of stories do not change.'],
+          heading: 'Mistakes',
+          paragraphs: ['They happen. If you find one, tell us via {{report}}. We’ll fix the text and update the date it was checked. The story’s link doesn’t change, so you can keep sharing it.'],
         },
         {
           id: 'idiomas',
           heading: 'Languages',
-          paragraphs: [
-            'The original is in European Portuguese; there are versions in English and Russian. A story not yet translated into Russian appears in English, with a notice. More about licences at {{legal}}.',
-          ],
+          paragraphs: ['Stories are written in Portuguese and translated into English and Russian. If a translation isn’t ready yet, we show the English or Portuguese text and say so.'],
         },
       ],
     },
     ru: {
-      lead: 'Здесь объяснено, как мы выбираем, проверяем и помечаем истории, чтобы вы понимали, насколько каждой можно доверять.',
+      lead: 'История полна красивых выдумок, и мы их тоже любим. Поэтому всегда говорим прямо, что из этого доказано, а что нет.',
       sections: [
         {
           id: 'etiquetas',
-          heading: 'Документально, легенда или спорно',
-          paragraphs: ['У каждой истории есть метка достоверности. Метка всегда состоит из слова и значка, а не только из цвета.'],
-          items: [
-            'Документально: факт опирается на источники эпохи или на исследования, которые признают историки. Источники перечислены в истории.',
-            'Легенда: предание, которое рассказывают давно и которое может не иметь доказательств. Мы рассказываем его как легенду и не выдаём за факт.',
-            'Спорно: историки расходятся во мнениях, или источники противоречат друг другу. Мы пишем, что известно и где сомнение.',
-          ],
+          heading: 'Три метки',
+          paragraphs: [],
+          items: ['**Документально.** Событие подтверждают документы того времени или работы историков.', '**Легенда.** Историю рассказывают веками, но доказательств нет. Мы пересказываем её и объясняем, что в ней правда.', '**Спорно.** Историки не сходятся или источники противоречат друг другу. Пишем, в чём именно спор.'],
         },
         {
           id: 'datas-fontes',
-          heading: 'Даты и источники',
-          paragraphs: [
-            'У каждого главного события не меньше двух источников, у каждой истории не меньше одного. Мы предпочитаем первоисточники, научные работы, архивы и официальные сайты музеев и памятников. Если источники расходятся в дате, мы пишем диапазон или «около».',
-            'У каждой истории указана дата последней проверки.',
-          ],
+          heading: 'Откуда мы берём факты',
+          paragraphs: ['В первую очередь из документов эпохи, научных работ, архивов и официальных сайтов музеев. У каждой истории есть хотя бы один источник, у крупных событий не меньше двух. Все они перечислены внизу истории, рядом дата последней проверки.'],
         },
         {
           id: 'numeros',
-          heading: 'Числа и оценки',
-          paragraphs: [
-            'Если числа это оценки (например, численность армии), мы показываем диапазон и говорим об этом, а не одно число с ложной точностью. Тестовые числа помечены как выдуманные.',
-          ],
+          heading: 'Даты и числа',
+          paragraphs: ['Если источники расходятся, пишем оба варианта или «около»: «1778 или 1782». Численность армий и число жертв почти всегда оценка, поэтому даём диапазон вместо одной красивой цифры.'],
         },
         {
           id: 'idades',
-          heading: 'Возраст и тяжёлые темы',
-          paragraphs: [
-            'У историй для всех возрастов нет возрастной метки. Метки 12+ и 16+ показывают, с какого возраста мы рекомендуем читать. История на трудную тему (насилие, преследования, смерть) получает пометку «Тяжёлая тема» и, перед тем как открыться, экран с вопросом, хотите ли вы продолжить.',
-            'Семейный режим в шапке имеет три положения: всё; только истории для всех возрастов; истории для всех возрастов и 12+. Тяжёлые темы не попадают в два последних. Без JavaScript режима нет, и все истории видны.',
-          ],
-        },
-        {
-          id: 'revisao',
-          heading: 'Проверка',
-          paragraphs: [
-            'У каждой опубликованной истории записано, кто её проверил и когда. У текстов есть ограничения по длине (крючок до 12 слов, история 40-70 слов, контекст до 150), и перед каждой публикацией они проверяются автоматически, как и ссылки, метки и изображения.',
-          ],
+          heading: 'Дети и тяжёлые темы',
+          paragraphs: ['Большинство историй подходят для любого возраста и не имеют метки. Метка 12+ стоит там, где есть сражения или жестокость. Перед историями о репрессиях, преследованиях и смерти мы предупреждаем и спрашиваем, хотите ли вы продолжить. В таких историях нет шуток и слона. Кнопка «С детьми» в шапке скрывает их совсем.'],
         },
         {
           id: 'imagens',
-          heading: 'Изображения',
-          paragraphs: ['У каждого изображения указаны автор и лицензия. Если иллюстрация создана с помощью искусственного интеллекта, в подписи об этом сказано.'],
+          heading: 'Картинки',
+          paragraphs: ['У каждой иллюстрации подписаны автор и лицензия. Если картинка сделана нейросетью, мы пишем об этом в подписи, чтобы её не приняли за документ эпохи.'],
         },
         {
           id: 'correcoes',
-          heading: 'Исправления',
-          paragraphs: ['Если вы нашли ошибку, воспользуйтесь страницей «{{report}}». Мы исправим текст и обновим дату проверки. Адреса историй не меняются.'],
+          heading: 'Ошибки',
+          paragraphs: ['Они случаются. Если вы нашли ошибку, напишите через {{report}}. Мы поправим текст и обновим дату проверки. Ссылка на историю при этом не меняется, так что ею можно спокойно делиться.'],
         },
         {
           id: 'idiomas',
           heading: 'Языки',
-          paragraphs: [
-            'Оригинал написан на европейском португальском; есть версии на английском и русском. История, ещё не переведённая на русский, показывается по-английски с пометкой. О лицензиях подробнее на странице «{{legal}}».',
-          ],
+          paragraphs: ['Истории пишутся на португальском и переводятся на английский и русский. Если русского перевода ещё нет, покажем английский и предупредим об этом.'],
         },
       ],
     },
   },
-
   legal: {
     pt: {
-      lead: 'Em resumo: o código e os textos são livres, não usamos cookies nem rastreadores, e só guardamos no seu navegador as suas preferências.',
       sections: [
         {
+          id: 'resumo',
+          heading: 'Em resumo',
+          paragraphs: [],
+          items: ['Pode usar os nossos textos livremente, com uma ligação para nós.', 'Não temos contas, cookies, publicidade nem contadores de visitas.', 'O seu navegador guarda apenas as suas preferências, e nós não as vemos.'],
+        },
+        {
           id: 'licencas',
-          heading: 'Licenças',
-          paragraphs: ['Cada parte do projeto tem a sua licença:'],
+          heading: 'O que pode fazer com os nossos materiais',
+          paragraphs: [],
           items: [
-            'Código: licença MIT.',
-            'Textos (histórias, descrições, textos da interface): Creative Commons Atribuição-CompartilhaIgual 4.0 (CC BY-SA 4.0). Pode copiar e adaptar, desde que indique «O Elefante Fugiu» com uma ligação e partilhe a obra derivada com a mesma licença.',
-            'Imagens: cada imagem indica o autor e a licença junto a si. Mantêm a sua própria licença.',
-            'O nome do projeto, o logótipo e a mascote (o elefante) não estão cobertos pela licença MIT nem pela CC BY-SA.',
+            '**Textos** (histórias, descrições, textos da interface) estão sob a licença CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.pt). Pode copiá-los, traduzi-los e adaptá-los, incluindo para visitas guiadas e aulas. Duas condições: indique «O Elefante Fugiu» com uma ligação e partilhe a sua versão nas mesmas condições.',
+            '**O código do site** é aberto, sob a licença MIT.',
+            '**As ilustrações** pertencem aos seus autores. O autor e a licença estão indicados por baixo de cada uma.',
+            '**O nome «O Elefante Fugiu», o logótipo e a mascote (o elefante)** não estão abrangidos pelas licenças livres. Para os usar, escreva-nos.',
           ],
         },
         {
           id: 'privacidade',
-          heading: 'Privacidade',
+          heading: 'O que fica guardado no seu navegador',
           paragraphs: [
-            'Não há contas, cookies, rastreadores nem publicidade. Não recolhemos dados pessoais ao ler o site.',
-            'O que fica no seu navegador (armazenamento local, nunca enviado para lado nenhum): o idioma escolhido, o tema claro ou escuro, o modo família, a última época visitada e a última história de «Surpreende-me». Pode apagá-lo a qualquer momento nas definições do navegador. Sem eles, o site funciona na mesma. Se carregar em «Perto de mim», o navegador pede autorização para a localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
-            'Quem aloja: as páginas são servidas pelo GitHub Pages (GitHub, Inc.), que pode registar o endereço IP dos pedidos, conforme a sua própria política de privacidade.',
-            'Mapa: nas páginas com mapa, o seu navegador pede os mosaicos do mapa a um servidor de mapas (OpenStreetMap ou o fornecedor indicado na atribuição do mapa), que recebe o seu endereço IP. «Como chegar» abre openstreetmap.org só se clicar.',
-            'Aviso de erro: se enviar o formulário de {{report}}, a sua mensagem e, se a indicar, a sua morada de e-mail seguem por e-mail para a equipa através do serviço FormSubmit (formsubmit.co), que a encaminha. Usamo-la só para corrigir o erro e responder-lhe. Se preferir, escreva diretamente para {{email}}.',
-            'Ligações externas (sítios oficiais de museus e monumentos, fontes) abrem outros sítios, com as suas próprias políticas.',
+            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, o modo «Com crianças», a última época aberta e a última história de «Surpreende-me». Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para a localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
           ],
+        },
+        {
+          id: 'terceiros',
+          heading: 'Quem mais participa quando lê o site',
+          paragraphs: ['O site não recolhe nada sobre si, mas não funciona no vácuo. Estes serviços veem o seu endereço IP:'],
+          items: [
+            '**GitHub Pages** (GitHub, Inc.) serve as páginas do site e pode registar endereços IP segundo as suas próprias regras.',
+            '**O servidor de mapas** (OpenStreetMap ou o fornecedor indicado no canto do mapa) recebe pedidos quando vê o mapa.',
+            '**FormSubmit** (formsubmit.co) reencaminha-nos a sua mensagem se enviar o formulário «Encontrou um erro?», juntamente com o email, se o indicar. Usamo-la apenas para corrigir o erro e responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
+          ],
+          after: ['As ligações «Como chegar», as fontes e os sites dos museus levam a outros sites, com regras próprias.'],
         },
         {
           id: 'aviso',
           heading: 'Aviso',
-          paragraphs: [
-            'Fazemos o possível por verificar cada história, mas a história é um assunto em debate e pode haver erros. O conteúdo é informativo e não substitui a consulta de fontes e especialistas. Os textos marcados como «Texto de teste» são provisórios e não são história verificada. Informações práticas sobre locais (horários, acessos) podem mudar: confirme-as no sítio oficial antes de visitar.',
-          ],
+          paragraphs: ['Verificamos cada história, mas a história é um campo de debate e os erros são possíveis. Este site não substitui as fontes académicas. Os horários e preços dos museus mudam: confirme-os no site oficial antes de ir.'],
         },
         {
           id: 'contacto',
-          heading: 'Contacto',
-          paragraphs: ['Dúvidas sobre licenças, privacidade ou pedidos de remoção de conteúdo: {{email}}.'],
+          heading: 'Contactos',
+          paragraphs: ['Questões sobre licenças e dados, pedidos de remoção de material: {{email}}.'],
         },
       ],
     },
     en: {
-      lead: 'In short: the code and the texts are free, we use no cookies or trackers, and the only thing stored in your browser is your preferences.',
       sections: [
         {
+          id: 'resumo',
+          heading: 'In short',
+          paragraphs: [],
+          items: ['You’re free to use our texts with a link back to us.', 'We have no accounts, cookies, ads or analytics counters.', 'Your browser stores only your own settings, and we can’t see them.'],
+        },
+        {
           id: 'licencas',
-          heading: 'Licences',
-          paragraphs: ['Each part of the project has its own licence:'],
+          heading: 'What you can do with our material',
+          paragraphs: [],
           items: [
-            'Code: MIT licence.',
-            'Texts (stories, descriptions, interface texts): Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0). You may copy and adapt them, as long as you credit “O Elefante Fugiu” with a link and share the derived work under the same licence.',
-            'Images: each image names its author and licence next to it. They keep their own licence.',
-            'The project name, the logo and the mascot (the elephant) are not covered by the MIT licence or by CC BY-SA.',
+            '**Texts** (stories, descriptions, interface text) are published under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). You may copy, translate and adapt them, including for tours and lessons. Two conditions: credit “O Elefante Fugiu” with a link, and share your version under the same terms.',
+            '**The site’s code** is open under the MIT licence.',
+            '**Illustrations** belong to their authors. The author and licence are given under each one.',
+            '**The name “O Elefante Fugiu”, the logo and the elephant mascot** are not covered by the open licences. To use them, write to us.',
           ],
         },
         {
           id: 'privacidade',
-          heading: 'Privacy',
+          heading: 'What’s stored in your browser',
           paragraphs: [
-            'There are no accounts, cookies, trackers or advertising. We collect no personal data when you read the site.',
-            'What stays in your browser (local storage, never sent anywhere): the language you chose, the light or dark theme, family mode, the last era you visited and the last “Surprise me” story. You can delete it at any time in your browser settings. Without it the site works just the same. If you press “Near me”, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
-            'Hosting: the pages are served by GitHub Pages (GitHub, Inc.), which may log the IP address of requests under its own privacy policy.',
-            'Map: on pages with a map your browser requests map tiles from a map server (OpenStreetMap or the provider named in the map attribution), which receives your IP address. “Get directions” opens openstreetmap.org only if you click it.',
-            'Mistake reports: if you send the {{report}} form, your message and, if you give one, your email address travel by email to the team through the FormSubmit service (formsubmit.co), which forwards it. We use it only to correct the mistake and to reply to you. If you prefer, write directly to {{email}}.',
-            'External links (official sites of museums and monuments, sources) open other sites, with their own policies.',
+            'So that the site remembers your choices, your browser saves: language, colour theme, “With kids” mode, the last era you opened and the last story from “Surprise me”. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me”, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
+        },
+        {
+          id: 'terceiros',
+          heading: 'Who else is involved when you read the site',
+          paragraphs: ['The site itself collects nothing about you, but it doesn’t run in a vacuum. These services see your IP address:'],
+          items: [
+            '**GitHub Pages** (GitHub, Inc.) serves the site’s pages and may log IP addresses under its own policy.',
+            '**The map server** (OpenStreetMap or the provider named in the map’s corner) receives requests when you view the map.',
+            '**FormSubmit** (formsubmit.co) forwards your message to us if you send the “Found a mistake?” form, together with your email if you gave it. We use it only to fix the mistake and reply to you. Prefer not to use the service? Write directly to {{email}}.',
+          ],
+          after: ['Links to “Get directions”, sources and museum websites lead to other sites with their own rules.'],
         },
         {
           id: 'aviso',
           heading: 'Disclaimer',
-          paragraphs: [
-            'We do our best to check each story, but history is a matter of debate and there may be mistakes. The content is informative and does not replace consulting sources and specialists. Texts marked “Test text” are provisional and are not verified history. Practical information about places (opening hours, access) can change: confirm it on the official site before you visit.',
-          ],
+          paragraphs: ['We check every story, but history is a field of debate, and mistakes are possible. This site does not replace scholarly sources. Museum opening hours and prices change: check them on the official website before you go.'],
         },
         {
           id: 'contacto',
           heading: 'Contact',
-          paragraphs: ['Questions about licences or privacy, or requests to remove content: {{email}}.'],
+          paragraphs: ['Questions about licences and data, requests to remove material: {{email}}.'],
         },
       ],
     },
     ru: {
-      lead: 'Коротко: код и тексты свободные, мы не используем куки и трекеры, а в вашем браузере хранятся только ваши настройки.',
       sections: [
         {
+          id: 'resumo',
+          heading: 'Если коротко',
+          paragraphs: [],
+          items: ['Тексты можно свободно использовать со ссылкой на нас.', 'У нас нет аккаунтов, куки, рекламы и счётчиков.', 'В вашем браузере хранятся только ваши настройки, и мы их не видим.'],
+        },
+        {
           id: 'licencas',
-          heading: 'Лицензии',
-          paragraphs: ['У каждой части проекта своя лицензия:'],
+          heading: 'Что можно делать с нашими материалами',
+          paragraphs: [],
           items: [
-            'Код: лицензия MIT.',
-            'Тексты (истории, описания, тексты интерфейса): Creative Commons Attribution-ShareAlike 4.0 (CC BY-SA 4.0). Их можно копировать и изменять, если указать «O Elefante Fugiu» со ссылкой и распространять производную работу на тех же условиях.',
-            'Изображения: рядом с каждым указаны автор и лицензия. У них своя лицензия.',
-            'Название проекта, логотип и талисман (слон) не покрываются ни лицензией MIT, ни CC BY-SA.',
+            '**Тексты** (истории, описания, надписи на сайте) распространяются по лицензии CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.ru). Их можно копировать, переводить и переделывать, в том числе для экскурсий и уроков. Условия два: укажите «O Elefante Fugiu» со ссылкой и распространяйте свою версию на тех же условиях.',
+            '**Код сайта** открыт по лицензии MIT.',
+            '**Иллюстрации** принадлежат своим авторам. Автор и лицензия указаны под каждой.',
+            '**Название «O Elefante Fugiu», логотип и слон-талисман** в свободные лицензии не входят. Чтобы использовать их, напишите нам.',
           ],
         },
         {
           id: 'privacidade',
-          heading: 'Приватность',
+          heading: 'Что хранится у вас в браузере',
           paragraphs: [
-            'У нас нет аккаунтов, куки, трекеров и рекламы. Мы не собираем личные данные, когда вы читаете сайт.',
-            'В вашем браузере (локальное хранилище, оно никуда не отправляется) остаются: выбранный язык, светлая или тёмная тема, семейный режим, последняя посещённая эпоха и последняя история из «Удиви меня». Это можно удалить в любой момент в настройках браузера. Без них сайт работает так же. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
-            'Хостинг: страницы отдаёт GitHub Pages (GitHub, Inc.), который может записывать IP-адреса запросов согласно собственной политике приватности.',
-            'Карта: на страницах с картой браузер запрашивает плитки карты у сервера карт (OpenStreetMap или поставщика, названного в подписи карты), и этот сервер получает ваш IP-адрес. Ссылка «Как добраться» открывает openstreetmap.org, только если вы по ней перейдёте.',
-            'Сообщение об ошибке: если вы отправите форму на странице «{{report}}», ваше сообщение и, если вы его укажете, адрес вашей почты уйдут команде по электронной почте через сервис FormSubmit (formsubmit.co), который перешлёт их. Мы используем их только чтобы исправить ошибку и ответить вам. Если хотите, пишите прямо на {{email}}.',
-            'Внешние ссылки (официальные сайты музеев и памятников, источники) открывают другие сайты с их собственными правилами.',
+            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, режим «С детьми», последнюю открытую эпоху и последнюю историю из «Удиви меня». Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
           ],
         },
         {
-          id: 'aviso',
-          heading: 'Предупреждение',
-          paragraphs: [
-            'Мы стараемся проверять каждую историю, но история это предмет споров, и ошибки возможны. Содержимое носит информационный характер и не заменяет источники и специалистов. Тексты с пометкой «Тестовый текст» временные и не являются проверенной историей. Практические сведения о местах (часы работы, проезд) могут меняться: перед визитом проверьте их на официальном сайте.',
+          id: 'terceiros',
+          heading: 'Кто ещё участвует, когда вы читаете сайт',
+          paragraphs: ['Сайт сам ничего о вас не собирает, но он работает не в вакууме. Вот сервисы, которые видят ваш IP-адрес:'],
+          items: [
+            '**GitHub Pages** (GitHub, Inc.) отдаёт страницы сайта и может записывать IP-адреса по своим правилам.',
+            '**Сервер карт** (OpenStreetMap или поставщик, указанный в углу карты) получает запросы, когда вы смотрите карту.',
+            '**FormSubmit** (formsubmit.co) пересылает нам сообщение, если вы отправите форму «Нашли ошибку?», вместе с почтой, если вы её указали. Мы используем письмо только чтобы исправить ошибку и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
           ],
+          after: ['Ссылки «Как добраться», на источники и сайты музеев ведут на чужие сайты со своими правилами.'],
+        },
+        {
+          id: 'aviso',
+          heading: 'Оговорка',
+          paragraphs: ['Мы проверяем каждую историю, но история наука спорная, и ошибки возможны. Сайт не заменяет научные источники. Часы работы и цены музеев меняются: перед поездкой проверьте их на официальном сайте.'],
         },
         {
           id: 'contacto',
           heading: 'Контакты',
-          paragraphs: ['Вопросы о лицензиях и приватности, просьбы убрать материал: {{email}}.'],
+          paragraphs: ['Вопросы о лицензиях и данных, просьбы убрать материал: {{email}}.'],
         },
       ],
     },

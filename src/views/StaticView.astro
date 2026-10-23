@@ -2,9 +2,10 @@
 // A static text page: About, Method and sources, Legal information (docs/spec.md 5.6). Texts: src/data/static-pages.ts.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { pagePath, type Lang } from '../i18n/routes';
-import { t } from '../i18n';
+import { plural, t } from '../i18n';
 import { CONTACT_EMAIL, STATIC_PAGES, type StaticKey } from '../data/static-pages';
 import { renderInline } from '../lib/static-text';
+import { loadSite } from '../lib/site-data';
 
 interface Props {
   lang: Lang;
@@ -17,12 +18,16 @@ const title = t(lang, `pages.${pageKey}.title`);
 const LINKS = ['about', 'method', 'report', 'legal', 'map'] as const;
 const link = (key: string) =>
   (LINKS as readonly string[]).includes(key) ? { href: pagePath(lang, key as (typeof LINKS)[number]), label: t(lang, `pages.${key}.title`) } : undefined;
-const html = (text: string) => renderInline(text, link, CONTACT_EMAIL);
+// {{stories}}: how many stories are published, counted from the data (with its noun in the language of the page).
+const site = await loadSite();
+const values = { stories: plural(lang, 'plural.stories', site.events.length) };
+const html = (text: string) => renderInline(text, link, CONTACT_EMAIL, values);
 ---
 <BaseLayout lang={lang} pageKey={pageKey} title={title}>
   <article class="static">
     <h1>{title}</h1>
-    <p class="static__lead" set:html={html(page.lead)} />
+    {page.lead && <p class="static__lead" set:html={html(page.lead)} />}
+    {page.more?.map((p) => <p set:html={html(p)} />)}
     {
       page.sections.map((section) => (
         <section class="static__section" aria-labelledby={`s-${section.id}`}>
@@ -30,6 +35,7 @@ const html = (text: string) => renderInline(text, link, CONTACT_EMAIL);
           <div class="prose">
             {section.paragraphs.map((p) => <p set:html={html(p)} />)}
             {section.items && <ul>{section.items.map((item) => <li set:html={html(item)} />)}</ul>}
+            {section.after?.map((p) => <p set:html={html(p)} />)}
           </div>
         </section>
       ))
@@ -40,6 +46,10 @@ const html = (text: string) => renderInline(text, link, CONTACT_EMAIL);
 <style>
   .static > * + * {
     margin-block-start: var(--space-5);
+  }
+
+  .static > p {
+    max-width: var(--measure);
   }
 
   .static__lead {
@@ -55,6 +65,12 @@ const html = (text: string) => renderInline(text, link, CONTACT_EMAIL);
 
   .prose ul {
     padding-inline-start: var(--space-5);
+  }
+
+  /* A long address (the licence link) must not push the page sideways on a phone. */
+  .static :global(p),
+  .static :global(li) {
+    overflow-wrap: anywhere;
   }
 
   .prose li + li {

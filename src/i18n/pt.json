@@ -94,28 +94,30 @@
     "nearby_same": "no mesmo local"
   },
   "notfound": {
-    "title": "Página não encontrada",
-    "text": "O endereço não existe ou mudou.",
-    "home": "Ir para a página inicial"
+    "title": "O elefante fugiu outra vez. Esta página não está aqui.",
+    "page_title": "Página não encontrada",
+    "home": "Início"
   },
   "report": {
-    "lead": "Obrigado por nos ajudar a acertar. Diga-nos o que está errado e, se souber, qual é a versão correta.",
-    "url_label": "Página com o erro",
-    "url_hint": "Preenchida se veio de uma história; pode alterar ou colar outra ligação.",
+    "lead": "Até os elefantes às vezes se enganam no caminho. Se numa história há uma data, um nome, um lugar ou uma tradução errada, diga-nos. Vamos verificar, corrigir o texto e atualizar a data da última verificação.",
+    "page_label": "De que história se trata",
+    "page_change": "alterar",
+    "url_label": "Ligação ou título da história",
     "what_label": "O que está errado?",
-    "what_hint": "Por exemplo: uma data, um nome, um local, uma tradução.",
-    "fix_label": "Qual é a versão correta? (opcional)",
-    "source_label": "Fonte ou ligação que o confirma (opcional)",
-    "email_label": "O seu e-mail (opcional)",
-    "email_hint": "Só se quiser que lhe respondamos.",
+    "what_hint": "Por exemplo: a batalha foi a 14 de agosto, não a 15",
+    "fix_label": "Qual é a versão correta? (se souber)",
+    "source_label": "Onde se pode confirmar? (se souber)",
+    "source_hint": "Uma ligação, um livro, uma placa num museu",
+    "email_label": "O seu email (se quiser resposta)",
     "submit": "Enviar",
     "sending": "A enviar…",
-    "privacy": "Ao enviar, a mensagem segue por e-mail para a equipa através do serviço FormSubmit. Não guardamos mais nada. Mais em",
-    "direct": "Prefere escrever diretamente? Use",
-    "sent_title": "Mensagem enviada",
-    "sent_text": "Obrigado! Vamos verificar e corrigir, se for caso disso.",
+    "note": "A mensagem chega ao nosso email através do serviço FormSubmit. Não guardamos nada no site (mais em {{legal|Informação legal}}). Também pode escrever-nos diretamente: {{email}}.",
+    "sent_title": "Obrigado! O elefante já foi a correr verificar.",
+    "sent_text": "Se deixou o seu email, escrevemos-lhe quando tivermos analisado.",
+    "back_to_story": "Voltar à história",
+    "random_story": "História ao acaso",
     "failed": "Não foi possível enviar agora. Tente de novo ou escreva-nos diretamente para",
-    "too_short": "Descreva o erro com algumas palavras."
+    "too_short": "Descreva o erro em poucas palavras."
   },
   "ui": {
     "read_more": "Ler mais ▾",
@@ -276,5 +278,16 @@
     "dark": "Escuro",
     "button": "Tema: {value}. Mudar de tema.",
     "status": "Tema: {value}."
+  },
+  "mascot": {
+    "walk": "O elefante da mascote a passear",
+    "run": "O elefante da mascote a correr, com uma nuvem de pó",
+    "peek": "O elefante da mascote a examinar algo com uma lupa",
+    "map": "O elefante da mascote sentado com um mapa antigo",
+    "bow": "O elefante da mascote a fazer uma vénia",
+    "think": "O elefante da mascote pensativo, com a mão na testa",
+    "stay": "O elefante da mascote de pé, apoiado na bengala",
+    "sad": "O elefante da mascote triste, de cabeça baixa",
+    "head": "A cabeça do elefante da mascote"
   }
 }

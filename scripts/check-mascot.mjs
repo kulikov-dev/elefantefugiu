@@ -1,6 +1,6 @@
 // Checks where the elephant mascot appears in the built pages (dist/), docs/visual-direction.md section 6.
 // Part of postbuild. Rules:
-//  - the picture exists, has an empty alt and its width and height (no layout jump, decorative);
+//  - the picture exists, has an alt (empty for the logo and the home page, a description on the service pages) and its width and height;
 //  - the mascot is not on a card page at all (cards can be heavy, 16+, or about the regime), nor on the pages of the Estado Novo epoch;
 //  - on the other pages there are at most 3 pictures besides the logo (the walking one by the pager, and two empty states of which
 //    only one is ever shown at a time);
@@ -34,7 +34,11 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
   if (/<header class="site-header"/.test(html) && logos.length !== 1) errors.push(`${rel}: expected one logo, found ${logos.length}`);
   for (const tag of imgs) {
     const src = attr(tag, 'src') ?? '';
-    if (attr(tag, 'alt') !== '') errors.push(`${rel}: a mascot picture must have an empty alt (decorative)`);
+    // The logo is decorative (the name stands beside it); a figure has an empty alt (home) or a description in the language of its page.
+    // An empty alt may be written as alt="" or as a bare alt (both mean the same).
+    const alt = /\salt(?=[\s>/])/.test(tag) ? '' : attr(tag, 'alt');
+    if (alt === undefined) errors.push(`${rel}: a mascot picture needs an alt attribute`);
+    if (/mascot--logo/.test(tag) && alt !== '') errors.push(`${rel}: the logo must have an empty alt (decorative)`);
     if (!attr(tag, 'width') || !attr(tag, 'height')) errors.push(`${rel}: a mascot picture needs width and height`);
     const name = src.split('/').pop();
     if (!name || !existsSync(join(dist, 'mascot', name))) errors.push(`${rel}: ${src} is not in dist/mascot`);

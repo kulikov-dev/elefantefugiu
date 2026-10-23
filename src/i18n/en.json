@@ -94,26 +94,28 @@
     "nearby_same": "at the same place"
   },
   "notfound": {
-    "title": "Page not found",
-    "text": "This address does not exist or has moved.",
-    "home": "Go to the home page"
+    "title": "The elephant ran away again. This page isn't here.",
+    "page_title": "Page not found",
+    "home": "Home"
   },
   "report": {
-    "lead": "Thank you for helping us get it right. Tell us what is wrong and, if you know it, the correct version.",
-    "url_label": "Page with the mistake",
-    "url_hint": "Filled in if you came from a story; you can change it or paste another link.",
-    "what_label": "What is wrong?",
-    "what_hint": "For example: a date, a name, a place, a translation.",
-    "fix_label": "What is the correct version? (optional)",
-    "source_label": "A source or link that confirms it (optional)",
-    "email_label": "Your email (optional)",
-    "email_hint": "Only if you want a reply.",
+    "lead": "Even elephants sometimes lose their way. If a story has a wrong date, name, place or translation, let us know. We'll check it, fix the text and update the date it was last checked.",
+    "page_label": "Which story is it about",
+    "page_change": "change",
+    "url_label": "Story link or title",
+    "what_label": "What's wrong?",
+    "what_hint": "For example: the battle was on 14 August, not the 15th",
+    "fix_label": "What's correct? (if you know)",
+    "source_label": "Where can we check this? (if you know)",
+    "source_hint": "A link, a book, a museum label",
+    "email_label": "Your email (if you'd like a reply)",
     "submit": "Send",
     "sending": "Sending…",
-    "privacy": "When you send, the message goes to the team by email through the FormSubmit service. We keep nothing else. More at",
-    "direct": "Prefer to write directly? Use",
-    "sent_title": "Message sent",
-    "sent_text": "Thank you! We will check it and correct it if needed.",
+    "note": "Your message reaches our inbox through the FormSubmit service. We don't store anything on the site (more in {{legal|Legal information}}). You can also write to us directly: {{email}}.",
+    "sent_title": "Thank you! The elephant is already running to check.",
+    "sent_text": "If you left your email, we'll write back once we've looked into it.",
+    "back_to_story": "Back to the story",
+    "random_story": "Random story",
     "failed": "Could not send right now. Try again or write to us directly at",
     "too_short": "Describe the mistake in a few words."
   },
@@ -276,5 +278,16 @@
     "dark": "Dark",
     "button": "Theme: {value}. Change theme.",
     "status": "Theme: {value}."
+  },
+  "mascot": {
+    "walk": "The elephant mascot out for a walk",
+    "run": "The elephant mascot running, with a cloud of dust",
+    "peek": "The elephant mascot examining something through a magnifying glass",
+    "map": "The elephant mascot sitting with an old map",
+    "bow": "The elephant mascot taking a bow",
+    "think": "The elephant mascot puzzled, a hand on its forehead",
+    "stay": "The elephant mascot standing, leaning on a cane",
+    "sad": "The elephant mascot looking sad, head bowed",
+    "head": "The head of the elephant mascot"
   }
 }

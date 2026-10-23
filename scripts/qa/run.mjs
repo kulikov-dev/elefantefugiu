@@ -42,6 +42,7 @@ const SUITES = [
   { name: 'family-menu', script: 'familymenu.mjs', about: 'family-mode button and menu, the hidden-stories line, the 12+ tooltip' },
   { name: 'epoch-page', script: 'epochpage.mjs', about: 'epoch page: years on the scale, equal compact cards, view switch from 9 stories, active card, more eras list' },
   { name: 'map-tools', script: 'mapnear.mjs', about: 'map page: Near me, list with hooks and distances, Whole world and the overseas plate, markers and legend, epoch scale' },
+  { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), 404 in every language' },
   { name: 'mascot', script: 'mascot.mjs', about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant'], variant: true, about: '16+ epoch and an empty mode' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['family'], variant: true, about: 'interactives behind the age screen' },

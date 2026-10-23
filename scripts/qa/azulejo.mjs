@@ -71,10 +71,10 @@ if (want('patterns')) {
   }
   const distinct = new Set(EPOCHS.map((id) => masks[id][0]));
   ok(`patterns: three epochs, three different patterns (${EPOCHS.map((id) => FILE[id]).join(', ')})`, distinct.size === 3);
-  // The 404 page carries the corner signature; the epoch page does not (it looked like a button that does nothing).
+  // Neither the epoch page nor the 404 page has the corner (it looked like a button that does nothing); the 404 page has the elephant.
   const p404 = await newPage();
   await p404.goto(`${base}/404.html`, { waitUntil: 'networkidle0' });
-  ok('404: the corner signature is drawn', await p404.evaluate(() => { const c = document.querySelector('.azulejo-corner'); const s = c && getComputedStyle(c); return Boolean(s) && s.maskImage !== 'none' && c.getBoundingClientRect().width > 0; }));
+  ok('404: no corner signature', (await p404.$('.azulejo-corner')) === null);
   await p404.close();
   // A key card of the feed has the band, a story card has none.
   const feed = await newPage();

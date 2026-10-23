@@ -2,24 +2,28 @@
 // The elephant mascot: a decorative picture (the page never depends on it, hence the empty alt). Pictures lie in
 // public/mascot/ (scripts/make-mascot.mjs); see src/lib/mascot.ts for the poses and where the mascot may appear.
 // Not for card pages, heavy topics or the regime epoch: use mascotAllowed() when the place depends on the data.
-import { withBase } from '../i18n/routes';
+import { t } from '../i18n';
+import { withBase, type Lang } from '../i18n/routes';
 import { POSE_SIZE, poseFile, type Pose } from '../lib/mascot';
 
 interface Props {
   pose: Pose;
   /** normal: a figure beside the text; small: in an empty state; logo: the head in the header. */
-  size?: 'normal' | 'small' | 'logo' | 'hero';
+  size?: 'normal' | 'small' | 'logo' | 'hero' | 'report';
   /** Appears by itself when it scrolls into view (walk), where the browser supports scroll-driven animation. */
   enter?: boolean;
+  /** Give the language of the page to describe the picture (the alt text of the pose, in that language); without it the picture is decorative (empty alt). */
+  lang?: Lang;
 }
 
-const { pose, size = 'normal', enter = false } = Astro.props;
+const { pose, size = 'normal', enter = false, lang } = Astro.props;
+const alt = lang ? t(lang, `mascot.${pose}`) : '';
 const { width, height } = POSE_SIZE[pose];
 ---
 <img
   class:list={['mascot', `mascot--${size}`, { 'mascot--enter': enter }]}
   src={withBase(poseFile(pose))}
-  alt=""
+  alt={alt}
   width={width}
   height={height}
   loading={size === 'logo' || size === 'hero' ? 'eager' : 'lazy'}

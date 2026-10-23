@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { CONTACT_EMAIL, STATIC_PAGES, type StaticKey } from '../../src/data/static-pages';
 import { LANGS } from '../../src/i18n/routes';
 import { LAST_EPOCH_KEY, pickLastEpoch } from '../../src/lib/home';
-import { MIN_REPORT_LENGTH, formsubmitEndpoint, hasEnoughText, pageFromQuery, reportSubject } from '../../src/lib/report';
+import { MIN_REPORT_LENGTH, formsubmitEndpoint, hasEnoughText, pageFromQuery, reportSubject, sameSiteUrl, titleFromQuery } from '../../src/lib/report';
 import { escapeHtml, renderInline } from '../../src/lib/static-text';
 
 const KEYS = ['about', 'method', 'legal'] as StaticKey[];
@@ -21,7 +21,7 @@ describe('static pages', () => {
       expect(new Set(shape).size, key).toBe(1);
       for (const lang of LANGS) {
         const page = STATIC_PAGES[key][lang];
-        expect(page.lead.trim().length, `${key} ${lang} lead`).toBeGreaterThan(40);
+        if (page.lead !== undefined) expect(page.lead.trim().length, `${key} ${lang} lead`).toBeGreaterThan(40);
         for (const s of page.sections) {
           expect(s.heading.trim(), `${key} ${lang} ${s.id}`).not.toBe('');
           for (const p of [...s.paragraphs, ...(s.items ?? [])]) expect(p.trim(), `${key} ${lang} ${s.id}`).not.toBe('');
@@ -33,14 +33,14 @@ describe('static pages', () => {
     for (const key of KEYS) {
       const tokens = (lang: (typeof LANGS)[number]) => {
         const page = STATIC_PAGES[key][lang];
-        const text = [page.lead, ...page.sections.flatMap((s) => [...s.paragraphs, ...(s.items ?? [])])].join(' ');
-        return [...text.matchAll(/\{\{(\w+)\}\}/g)].map((m) => m[1]).sort().join(',');
+        const text = [page.lead ?? '', ...(page.more ?? []), ...page.sections.flatMap((s) => [...s.paragraphs, ...(s.items ?? []), ...(s.after ?? [])])].join(' ');
+        return [...text.matchAll(/\{\{(\w+)(?:\|[^}]+)?\}\}/g)].map((m) => m[1]).sort().join(',');
       };
       expect(new Set(LANGS.map(tokens)).size, key).toBe(1);
       for (const lang of LANGS) {
         const page = STATIC_PAGES[key][lang];
-        for (const s of page.sections) for (const p of [...s.paragraphs, ...(s.items ?? [])]) expect(() => renderInline(p, link, CONTACT_EMAIL)).not.toThrow();
-        expect(() => renderInline(page.lead, link, CONTACT_EMAIL)).not.toThrow();
+        for (const s of page.sections) for (const p of [...s.paragraphs, ...(s.items ?? []), ...(s.after ?? [])]) expect(() => renderInline(p, link, CONTACT_EMAIL, { stories: '13 stories' })).not.toThrow();
+        for (const p of [page.lead ?? 'x', ...(page.more ?? [])]) expect(() => renderInline(p, link, CONTACT_EMAIL, { stories: '13 stories' })).not.toThrow();
       }
     }
   });
@@ -62,6 +62,12 @@ describe('inline markup', () => {
     expect(renderInline('a <b> & {{report}}', link, 'x@y.z')).toBe('a &lt;b&gt; &amp; <a href="/x/report/">T-report</a>');
     expect(renderInline('{{email}}', link, 'x@y.z')).toBe('<a href="mailto:x@y.z">x@y.z</a>');
     expect(escapeHtml(`"'`)).toBe('&quot;&#39;');
+  });
+  it('bold, a link with its own text, and a value computed by the page', () => {
+    expect(renderInline('**Hook.** a', link, 'x@y.z')).toBe('<strong>Hook.</strong> a');
+    expect(renderInline('в {{method|«Методе»}}', link, 'x@y.z')).toBe('в <a href="/x/method/">«Методе»</a>');
+    expect(renderInline('всего {{stories}}.', link, 'x@y.z', { stories: '13 историй' })).toBe('всего 13 историй.');
+    expect(renderInline('{{stories}}', link, 'x@y.z', { stories: '<b>' })).toBe('&lt;b&gt;');
   });
   it('fails on an unknown token', () => {
     expect(() => renderInline('{{nope}}', link, 'x@y.z')).toThrow(/nope/);
@@ -100,5 +106,44 @@ describe('"Continue" on the home page', () => {
     expect(pickLastEpoch(null, known)).toBeNull();
     expect(pickLastEpoch('constructor', known)).toBeNull();
     expect(LAST_EPOCH_KEY).toBe('lastEpoch');
+  });
+});
+
+describe('the text of the service pages follows the names on the site', () => {
+  const everything = (lang: (typeof LANGS)[number]) =>
+    KEYS.flatMap((key) => {
+      const page = STATIC_PAGES[key][lang];
+      return [page.lead ?? '', ...(page.more ?? []), ...page.sections.flatMap((s) => [s.heading, ...s.paragraphs, ...(s.items ?? []), ...(s.after ?? [])])];
+    }).join(' ');
+  it('uses the names of the labels, the buttons and the eras as the site writes them', () => {
+    const pt = everything('pt');
+    expect(pt).toContain('Em debate');
+    expect(pt).toContain('Surpreende-me');
+    expect(pt).toContain('Estado Novo e 25 de Abril');
+    expect(pt).not.toMatch(/Surpreenda-me|fuga da corte|Revolução dos Cravos»/);
+    const en = everything('en');
+    expect(en).toContain('Debated');
+    expect(en).toContain('Get directions');
+    expect(en).toContain('Estado Novo and 25 April');
+    expect(en).not.toMatch(/Disputed|How to get there|Age of Discovery|Carnation Revolution/);
+  });
+  it('leaves out what stood in square brackets in the source files (placeholders and notes)', () => {
+    for (const lang of LANGS) expect(everything(lang), lang).not.toMatch(/\[[^\]]+\]/);
+  });
+});
+
+describe('the form arrives from a story', () => {
+  it('takes the title from ?title=, as plain text of limited length', () => {
+    expect(titleFromQuery('?title=Os%20tripeiros')).toBe('Os tripeiros');
+    expect(titleFromQuery('?title=a%0A%09b%20%20c')).toBe('a b c');
+    expect(titleFromQuery('')).toBe('');
+    expect(titleFromQuery(`?title=${'x'.repeat(500)}`).length).toBe(200);
+    expect(titleFromQuery('?title=%3Cb%3Ex%3C%2Fb%3E')).toBe('<b>x</b>'); // text only: the page puts it in with textContent
+  });
+  it('offers the way back only to an address of this site', () => {
+    expect(sameSiteUrl('https://a.pt/pt/historia/x/', 'https://a.pt')).toBe(true);
+    expect(sameSiteUrl('https://evil.example/', 'https://a.pt')).toBe(false);
+    expect(sameSiteUrl('not a url', 'https://a.pt')).toBe(false);
+    expect(sameSiteUrl('https://a.pt.evil.example/', 'https://a.pt')).toBe(false);
   });
 });

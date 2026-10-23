@@ -17,6 +17,10 @@
   width: var(--size-mascot);
 }
 
+.mascot--report {
+  width: var(--size-mascot-report);
+}
+
 .mascot--hero {
   width: var(--size-mascot-hero);
 }

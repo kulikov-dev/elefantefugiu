@@ -213,7 +213,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         {event.interactive?.type === 'ship_scale' && <ShipScale lang={lang} data={event.interactive.data} textLang={textLang} />}
         <BridgeBlock lang={lang} bridge={event.bridge} cardId={event.id} textLang={textLang} />
         {event.sources.length > 0 && <SourceList lang={lang} sources={event.sources} />}
-        <ReportLink lang={lang} cardUrl={cardUrl} />
+        <ReportLink lang={lang} cardUrl={cardUrl} title={title} />
         {
           event.reviewed_on && (
             <p class="checked">

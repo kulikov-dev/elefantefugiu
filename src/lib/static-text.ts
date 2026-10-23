@@ -1,6 +1,10 @@
-// Inline markup of the static page texts (src/data/static-pages.ts): {{about}} {{method}} {{report}} {{legal}} {{map}} become
-// links to those pages (the link text is the title of the page), {{email}} the contact address. Everything else is escaped.
-// Pure function, covered by tests.
+// Inline markup of the static page texts (src/data/static-pages.ts):
+//   {{about}} {{method}} {{report}} {{legal}} {{map}}  a link to that page of the site (the link text is the title of the page);
+//   {{method|text}}                                     the same link with another text (for a case ending in Russian);
+//   {{email}}                                           the contact address as a link;
+//   {{stories}}                                         a value computed at build time, here the number of stories with its noun;
+//   **text**                                            bold.
+// Everything else is escaped. An unknown token is an error (a typo must not reach the page). Pure function, covered by tests.
 
 const ESCAPES: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const escapeHtml = (s: string): string => s.replace(/[&<>"']/g, (c) => ESCAPES[c]!);
@@ -10,12 +14,19 @@ export interface PageLink {
   label: string;
 }
 
-/** HTML of a text: escaped, with the {{tokens}} replaced. An unknown token is an error (a typo must not reach the page). */
-export function renderInline(text: string, link: (key: string) => PageLink | undefined, email: string): string {
-  return escapeHtml(text).replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
-    if (key === 'email') return `<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`;
-    const target = link(key);
-    if (!target) throw new Error(`Unknown token {{${key}}} in a static page text`);
-    return `<a href="${escapeHtml(target.href)}">${escapeHtml(target.label)}</a>`;
-  });
+/** Values the page computes (a number with its noun, for example); each is escaped. */
+export type InlineValues = Record<string, string>;
+
+/** HTML of a text: escaped, with the tokens and the bold marks replaced. */
+export function renderInline(text: string, link: (key: string) => PageLink | undefined, email: string, values: InlineValues = {}): string {
+  return escapeHtml(text)
+    .replace(/\{\{(\w+)(?:\|([^}]+))?\}\}/g, (_, key: string, label: string | undefined) => {
+      if (key === 'email') return `<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`;
+      if (key in values) return escapeHtml(values[key]!);
+      const target = link(key);
+      if (!target) throw new Error(`Unknown token {{${key}}} in a static page text`);
+      // The label was escaped together with the text above (it is inside the braces), so it is used as it is.
+      return `<a href="${escapeHtml(target.href)}">${label ?? escapeHtml(target.label)}</a>`;
+    })
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }

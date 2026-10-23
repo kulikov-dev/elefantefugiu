@@ -18,6 +18,21 @@ export function reportSubject(lang: Lang): string {
 export const MIN_REPORT_LENGTH = 5;
 export const hasEnoughText = (what: string): boolean => what.trim().length >= MIN_REPORT_LENGTH;
 
+/** The title of the story from ?title= (shown in place of the long address): plain text, at most 200 characters. */
+export function titleFromQuery(search: string): string {
+  const raw = new URLSearchParams(search).get('title') ?? '';
+  return raw.replace(/\p{Cc}/gu, ' ').replace(/\s+/g, ' ').trim().slice(0, 200);
+}
+
+/** The way back to the story is offered only to an address of this very site (a link in the address bar must not send readers elsewhere). */
+export function sameSiteUrl(url: string, origin: string): boolean {
+  try {
+    return new URL(url).origin === origin;
+  } catch {
+    return false;
+  }
+}
+
 /** The page address from ?url=, only when it is an http(s) address (nothing else is put into the field). */
 export function pageFromQuery(search: string): string {
   const raw = new URLSearchParams(search).get('url') ?? '';

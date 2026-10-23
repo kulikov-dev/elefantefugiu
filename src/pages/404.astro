@@ -1,37 +1,82 @@
 ---
+// GitHub Pages serves one 404.html for the whole site, so it cannot know the language by itself. All three texts are in the page;
+// without JavaScript the Portuguese one shows (the other two are hidden) and a row of links leads to the home page of every
+// language. With JavaScript the language comes from the start of the address (/pt/, /en/, /ru/), else from the saved choice or
+// the browser language (src/scripts/notfound.ts).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Mascot from '../components/Mascot.astro';
-import { LANGS, pagePath } from '../i18n/routes';
+import { DEFAULT_LANG, LANGS, LANG_NAMES, pagePath } from '../i18n/routes';
 import { t } from '../i18n';
 ---
-<!-- GitHub Pages serves one root 404.html, so both languages are shown here. -->
-<BaseLayout lang="pt" title={t('pt', 'notfound.title')} noindex>
-  <div class="notfound">
-    <Mascot pose="sad" size="normal" />
-    <span class="azulejo-corner azulejo-corner--mirror notfound__corner" aria-hidden="true"></span>
-  </div>
+<BaseLayout lang={DEFAULT_LANG} title={t(DEFAULT_LANG, 'notfound.page_title')} noindex>
   {
     LANGS.map((lang) => (
-      <section lang={lang} aria-labelledby={`notfound-${lang}`}>
-        <h1 id={`notfound-${lang}`}>{t(lang, 'notfound.title')}</h1>
-        <p>{t(lang, 'notfound.text')}</p>
-        <p>
-          <a class="button" href={pagePath(lang, 'home')}>{t(lang, 'notfound.home')}</a>
-        </p>
+      <section class="notfound__text" lang={lang} aria-labelledby={`notfound-${lang}`} data-notfound-lang={lang} data-title={t(lang, 'notfound.page_title')} hidden={lang !== DEFAULT_LANG}>
+        <div class="notfound__mascot">
+          <Mascot pose="think" size="normal" lang={lang} />
+        </div>
+        <div class="notfound__body">
+          <h1 id={`notfound-${lang}`}>{t(lang, 'notfound.title')}</h1>
+          <p class="notfound__actions">
+            <a class="button" href={pagePath(lang, 'home')}>{t(lang, 'notfound.home')}</a>
+            <a class="button button--secondary" href={pagePath(lang, 'surprise')}>{t(lang, 'ui.surprise')}</a>
+          </p>
+        </div>
       </section>
     ))
   }
+  <nav class="notfound__languages" aria-label="Português, English, Русский">
+    <ul>
+      {LANGS.map((lang) => <li><a href={pagePath(lang, 'home')} lang={lang} hreflang={lang}>{LANG_NAMES[lang]}</a></li>)}
+    </ul>
+  </nav>
 </BaseLayout>
 
+<script>
+  import '../scripts/notfound';
+</script>
+
 <style>
-  /* The corner signature of the page: top right, in the free space above the headings. */
-  .notfound {
+  .notfound__text {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
   }
 
-  .notfound__corner {
-    margin: 0;
+  .notfound__text[hidden] {
+    display: none;
+  }
+
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-block-start: var(--space-4);
+  }
+
+  @media (min-width: 40rem) {
+    .notfound__text {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-6);
+    }
+  }
+
+  .notfound__languages {
+    margin-block-start: var(--space-6);
+  }
+
+  .notfound__languages ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+    list-style: none;
+  }
+
+  .notfound__languages a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
   }
 </style>
