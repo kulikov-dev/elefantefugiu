@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { matchesThread, parseState, serializeState } from '../src/lib/epoch-filter';
+import { GRID_MIN_STORIES, gridAvailable, matchesThread, parseState, serializeState } from '../src/lib/epoch-filter';
 
 const known = ['mar', 'natureza'];
 
@@ -29,4 +29,12 @@ test('matchesThread: primary or second thread, everything when the filter is off
   assert.equal(matchesThread(['mar', 'natureza'], 'natureza'), true);
   assert.equal(matchesThread(['mar'], 'natureza'), false);
   assert.equal(matchesThread(['mar'], null), true);
+});
+
+test('gridAvailable: the cards view is offered from GRID_MIN_STORIES stories (9)', () => {
+  assert.equal(GRID_MIN_STORIES, 9);
+  assert.equal(gridAvailable(0), false);
+  assert.equal(gridAvailable(8), false);
+  assert.equal(gridAvailable(9), true);
+  assert.equal(gridAvailable(40), true);
 });

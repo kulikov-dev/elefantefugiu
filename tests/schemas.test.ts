@@ -105,3 +105,11 @@ test('bridge: needs a note in both languages', () => {
   assert.equal(eventSchema.safeParse({ ...ok, bridge: { ...ok.bridge, note: { pt: 'a' } } }).success, false);
   assert.equal(eventSchema.safeParse({ ...ok, bridge: { ...ok.bridge, extra: 1 } }).success, false);
 });
+
+test('epochSchema: intro is optional, any language may be left out, a typo in a language key is an error', () => {
+  const base = { ...baseEpoch, mvp: false, years_label: { pt: 'séc. V', en: '5th century' } };
+  assert.equal(epochSchema.safeParse(base).success, true);
+  assert.equal(epochSchema.safeParse({ ...base, intro: { ru: 'Только по-русски.' } }).success, true);
+  assert.equal(epochSchema.safeParse({ ...base, intro: { pt: 'a', en: 'b', ru: 'c' } }).success, true);
+  assert.equal(epochSchema.safeParse({ ...base, intro: { pt: 'a', fr: 'b' } }).success, false);
+});

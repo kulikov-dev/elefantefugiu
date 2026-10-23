@@ -25,6 +25,7 @@ import {
   type EpochData,
 } from '../lib/epochs';
 import { mascotAllowed } from '../lib/mascot';
+import { yearRange } from '../lib/events';
 import { toMapCards } from '../lib/map-cards';
 import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
@@ -59,6 +60,9 @@ const neighbour = (n: EpochData | null, dir: string, rel: 'prev' | 'next') => (n
 // The elephant walks to the next epoch, unless that page (or this one) is about the regime.
 const walkingAllowed = Boolean(next) && mascotAllowed({ epoch: epoch.id }) && mascotAllowed({ epoch: next?.id });
 
+// The introduction in the language of the page, if the data has it; no other language stands in for it.
+const intro = epoch.intro?.[lang]?.trim() || undefined;
+
 const alternates = altPaths((l) => epochHref(l, epoch.slug[l]));
 // Pages that show test text stay out of search results until the text is real.
 const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
@@ -79,6 +83,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">{epochYearsText(epoch, lang)}</p>
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
+      {intro && <p class="epoch__intro">{intro}</p>}
     </header>
     <div class="azulejo-rule" aria-hidden="true"></div>
 
@@ -131,7 +136,7 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
             </div>
           )
         }
-        <div role="group" aria-label={t(lang, 'epoch.view_label')} class="view-switch">
+        <div role="group" aria-label={t(lang, 'epoch.view_label')} class="view-switch" data-view-switch>
           <button type="button" data-view="timeline" aria-pressed="true">{t(lang, 'ui.view_timeline')}</button>
           <button type="button" data-view="grid" aria-pressed="false">{t(lang, 'ui.view_grid')}</button>
         </div>
@@ -162,7 +167,8 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
           {
             feed.map((event) => (
               <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
-                <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} />
+                <span class="feed__year">{yearRange(event)[0]}</span>
+                <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear />
               </li>
             ))
           }
@@ -236,6 +242,13 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     font-style: italic;
   }
 
+  /* The introduction for readers who do not know the epoch: plain text, a comfortable line length. */
+  .epoch__intro {
+    max-width: var(--measure);
+    margin-block-start: var(--space-3);
+    font-size: var(--text-base);
+  }
+
   .tools {
     display: flex;
     flex-direction: column;
@@ -305,13 +318,32 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     height: 100%;
   }
 
+  /* A card of the grid: the picture on top when the story has one (it fills the top edge; without one nothing is reserved), then
+     the credibility label first, then the date and the title, then the hook. The thread chips are left out: the filter above does
+     their job and a narrow tile has no room for them. */
+  :global(html[data-vista='grelha']) .feed :global(.ecard) {
+    overflow: hidden;
+  }
+
   :global(html[data-vista='grelha']) .feed :global(.ecard__head) {
-    flex-direction: column;
+    display: contents;
   }
 
   :global(html[data-vista='grelha']) .feed :global(.ecard__thumb) {
-    width: 100%;
+    order: -2;
+    width: calc(100% + 2 * var(--space-4));
+    max-width: none;
+    margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-4)) var(--space-1);
+    border-radius: 0;
     aspect-ratio: 1200 / 630;
+  }
+
+  :global(html[data-vista='grelha']) .feed :global(.ecard__tags) {
+    order: -1;
+  }
+
+  :global(html[data-vista='grelha']) .feed :global(.ecard__tags li:has(.thread)) {
+    display: none;
   }
 
   /* ---- feed and map ---- */
@@ -345,10 +377,10 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
     color: var(--color-surface);
   }
 
-  /* The feed record whose marker was chosen on the map (and the reverse): a thick outline, not only a colour. */
+  /* The card whose marker was chosen on the map (and the reverse): a coloured bar on its left edge; the marker on the map is
+     highlighted too, so the state is not a colour alone. All the cards are otherwise alike. */
   .feed__item[data-active] > :global(.ecard) {
-    outline: var(--ring-width) solid var(--color-accent);
-    outline-offset: var(--space-1);
+    box-shadow: inset var(--border-heavy) 0 0 var(--epoch-primary);
   }
 
   /* Phone: one pane at a time. The grid/timeline switch belongs to the feed. */
@@ -421,6 +453,37 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
 
   .feed__item {
     position: relative;
+  }
+
+  /* The year of the story, large and dark, on the scale beside the card. On a phone it stands above the card, on the line. */
+  .feed__year {
+    display: block;
+    margin-block-end: var(--space-1);
+    color: var(--color-ink);
+    font-family: var(--font-label);
+    font-size: var(--text-lg);
+    font-variant-numeric: lining-nums;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  :global(html[data-vista='grelha']) .feed .feed__year {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    :global(html:not([data-vista='grelha'])) .feed {
+      margin-inline-start: calc(var(--timeline-year-width) + var(--space-2));
+    }
+
+    :global(html:not([data-vista='grelha'])) .feed__year {
+      position: absolute;
+      inset-block-start: var(--timeline-year-top);
+      inset-inline-end: calc(100% + var(--space-5) + var(--space-2));
+      width: var(--timeline-year-width);
+      margin: 0;
+      text-align: end;
+    }
   }
 
   .feed__item + .feed__item {

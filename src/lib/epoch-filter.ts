@@ -8,6 +8,15 @@ export interface FilterState {
   grid: boolean;
 }
 
+/**
+ * The switch between the timeline and the cards (grid) is shown only when the current filter leaves at least this many stories;
+ * with fewer, the timeline is the only view. A grid of three or four cards adds nothing.
+ */
+export const GRID_MIN_STORIES = 9;
+
+/** Is there enough to offer the grid view? */
+export const gridAvailable = (shown: number): boolean => shown >= GRID_MIN_STORIES;
+
 export const PARAM_THREAD = 'fio';
 export const PARAM_VIEW = 'vista';
 export const VIEW_GRID = 'grelha';

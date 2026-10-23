@@ -167,6 +167,11 @@ export const epochSchema = z
     /** Epoch look (stage 6). Required for MVP epochs. */
     style: epochStyle.optional(),
     mvp: z.boolean(),
+    /**
+     * A short introduction for readers who do not know the epoch (2 or 3 sentences), per language. Every language is optional and a
+     * missing one is never replaced by another: the page shows the block only in a language that has the text.
+     */
+    intro: z.strictObject({ pt: z.string().optional(), en: z.string().optional(), ru: z.string().optional() }).optional(),
     /** Preview image (Open Graph) for cards of this epoch that have no image of their own. Path inside public/. */
     fallback_image: z.string().optional(),
     placeholder: z.boolean().default(false),

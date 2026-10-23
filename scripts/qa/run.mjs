@@ -40,6 +40,7 @@ const SUITES = [
   { name: 'ru', script: 'ru.mjs', about: 'language menu on 320/360 px, root choice, banner and noindex on untranslated cards, Cyrillic fonts only on /ru/, plurals' },
   { name: 'pages', script: 'pages.mjs', about: 'static pages, mistake report form (answered by the test), Continue, QR address' },
   { name: 'family-menu', script: 'familymenu.mjs', about: 'family-mode button and menu, the hidden-stories line, the 12+ tooltip' },
+  { name: 'epoch-page', script: 'epochpage.mjs', about: 'epoch page: years on the scale, equal compact cards, view switch from 9 stories, active card, more eras list' },
   { name: 'mascot', script: 'mascot.mjs', about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant'], variant: true, about: '16+ epoch and an empty mode' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['family'], variant: true, about: 'interactives behind the age screen' },

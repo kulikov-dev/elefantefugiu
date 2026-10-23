@@ -24,7 +24,9 @@ export async function loadSite(): Promise<SiteData> {
   // Every text object gets a `ru`: the Russian text of an event that is ru_ready, otherwise the English one (lib/localize.ts).
   // Epochs and threads have no flag: their Russian names are used where written, the English ones where not.
   const events = (await getCollection('events')).map((e) => localize(e.data, e.data.ru_ready) as EventData).filter(isPublished).sort(compareChronological);
-  const epochs = (await getCollection('epochs')).map((e) => localize(e.data, true) as EpochData).sort((a, b) => a.order - b.order);
+  // `intro` is kept as written: localize() would fill a missing Russian text with the English one, and an introduction in another
+  // language than the page is worse than none.
+  const epochs = (await getCollection('epochs')).map((e) => ({ ...(localize({ ...e.data, intro: undefined }, true) as EpochData), intro: e.data.intro })).sort((a, b) => a.order - b.order);
   const threads = (await getCollection('threads')).map((e) => localize(e.data, true) as ThreadData);
   const visible = visibleThreads(threads, events);
   const featuredIds = (await getCollection('featured')).sort((a, b) => (a.data.position ?? 0) - (b.data.position ?? 0)).map((e) => e.data.id);

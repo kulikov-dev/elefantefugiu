@@ -44,7 +44,10 @@ const rest = items.filter((i) => !i.epoch.mvp);
                 {state === 'link' ? (
                   <a class="epoch-switch__rest-item" href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
                 ) : (
-                  <span class="epoch-switch__rest-item epoch-switch__item--soon">{epoch.name[lang]}</span>
+                  <span class="epoch-switch__rest-item epoch-switch__rest-item--soon epoch-switch__item--soon">
+                    <span class="epoch-switch__rest-name">{epoch.name[lang]} <span class="epoch-switch__rest-soon">&middot; {t(lang, 'ui.soon')}</span></span>
+                    {epoch.intro?.[lang]?.trim() && <span class="epoch-switch__rest-intro">{epoch.intro[lang]}</span>}
+                  </span>
                 )}
               </li>
             ))
@@ -146,5 +149,29 @@ const rest = items.filter((i) => !i.epoch.mvp);
 
   span.epoch-switch__rest-item {
     color: var(--color-ink-muted);
+  }
+
+  /* An epoch that is not ready: its name, "soon", and the introduction (when the data has one) in small type. Plain text, not a link. */
+  .epoch-switch__rest-item--soon {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--space-1);
+    padding-block: var(--space-2);
+  }
+
+  .epoch-switch__rest-name {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+
+  .epoch-switch__rest-soon {
+    color: var(--color-ink-muted);
+    font-weight: 400;
+  }
+
+  .epoch-switch__rest-intro {
+    max-width: var(--measure);
+    font-size: var(--text-sm);
   }
 </style>

@@ -54,8 +54,8 @@
   pt: "Cronologia"
   en: "Timeline"
 - id: view_grid
-  pt: "Grelha"
-  en: "Grid"
+  pt: "Cartões"
+  en: "Cards"
 - id: sources
   pt: "Fontes"
   en: "Sources"

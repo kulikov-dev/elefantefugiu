@@ -4,7 +4,7 @@
 //   grid: a tile that links to the card page (thread pages).
 import { t } from '../i18n';
 import { storyPath, withBase, threadHref, type Lang } from '../i18n/routes';
-import { formatYear, isFlashMoment, placeShort, textLangOf, type EventData } from '../lib/events';
+import { formatYear, isFlashMoment, placeShort, textLangOf, yearRange, type EventData } from '../lib/events';
 import type { ThreadData } from '../lib/epochs';
 import AgeBadge from './AgeBadge.astro';
 import TagLabel from './TagLabel.astro';
@@ -19,16 +19,21 @@ interface Props {
   visibleThreadIds: ReadonlySet<string>;
   /** Thread chips are left out where the page itself is about one thread. */
   showThreads?: boolean;
+  /** The year stands on the timeline scale beside the card (epoch page): the line then shows a full date only, and a bare year only in the grid view, which has no scale. */
+  scaleYear?: boolean;
 }
 
-const { lang, event, variant, threads, visibleThreadIds, showThreads = true } = Astro.props;
+const { lang, event, variant, threads, visibleThreadIds, showThreads = true, scaleYear = false } = Astro.props;
+// A full date ("14 August 1385") is more exact than the year; it stays on the line of the card whatever the layout.
+const label = event.year_label?.[lang]?.trim();
+const fullDate = label && label !== String(yearRange(event)[0]) ? label : undefined;
+const yearText = formatYear(event, lang);
 const href = storyPath(lang, event.slug[lang]);
 const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) => th.id === id)).filter((th) => th !== undefined) : [];
 // Placeholder text is Latin filler: mark it so screen readers do not read it as Portuguese.
 const textLang = textLangOf(event, lang);
 ---
 <article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-flash={isFlashMoment(event) ? '' : undefined}>
-  {event.level === 'frame' && <span class="azulejo-rule ecard__band" aria-hidden="true" />}
   <div class="ecard__head">
     {
       event.image && (
@@ -44,7 +49,9 @@ const textLang = textLangOf(event, lang);
       )
     }
     <div class="ecard__titles">
-      <p class="ecard__meta">{formatYear(event, lang)} &middot; {placeShort(event.place, lang)}</p>
+      <p class="ecard__meta">
+        {scaleYear && !fullDate ? <span class="ecard__year-only">{yearText} &middot; </span> : <span>{yearText} &middot; </span>}{placeShort(event.place, lang)}
+      </p>
       <h3 class="ecard__title"><a href={href}>{event.title[lang]}</a></h3>
     </div>
   </div>
@@ -106,8 +113,8 @@ const textLang = textLangOf(event, lang);
   .ecard {
     display: flex;
     flex-direction: column;
-    gap: var(--space-3);
-    padding: var(--space-4);
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-4);
     border: var(--epoch-frame);
     border-radius: var(--radius-md);
     background: var(--epoch-surface);
@@ -146,47 +153,6 @@ const textLang = textLangOf(event, lang);
     overflow-wrap: anywhere;
   }
 
-  /* A story between the key events: small title, no heavy frame, no fill, a smaller picture. */
-  .ecard--story {
-    padding: var(--space-3) var(--space-4);
-    background: transparent;
-  }
-
-  .ecard--story .ecard__title {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    font-weight: var(--weight-strong);
-    line-height: 1.3;
-  }
-
-  .ecard--story .ecard__hook {
-    font-size: var(--text-base);
-  }
-
-  .ecard--story .ecard__thumb {
-    width: calc(var(--size-thumb) * 0.75);
-  }
-
-  /* A key event of the frame: larger padding, the epoch's own heading face, a thick bar and a band of the pattern on top. */
-  .ecard--frame {
-    gap: var(--space-4);
-    padding: var(--space-5);
-    border-inline-start: var(--epoch-accent-bar);
-  }
-
-  .ecard--frame .ecard__title {
-    font-family: var(--epoch-heading-font);
-    font-weight: var(--epoch-heading-weight);
-    font-size: var(--text-card-title-frame);
-    line-height: 1.15;
-  }
-
-  .ecard__band {
-    margin: calc(-1 * var(--space-5)) calc(-1 * var(--space-5)) 0;
-    border-start-start-radius: var(--radius-md);
-    border-start-end-radius: var(--radius-md);
-  }
-
   /* Few pills: thread names are plain text with a dot; the credibility label and the age lose their fill and frame. */
   .ecard__tags {
     display: flex;
@@ -194,6 +160,18 @@ const textLang = textLangOf(event, lang);
     align-items: center;
     gap: 0 var(--space-4);
     list-style: none;
+  }
+
+  /* A bare year before the place only where there is no scale of years beside the card (the grid view). */
+  :global(html:not([data-vista='grelha'])) .ecard__year-only {
+    display: none;
+  }
+
+  /* Compact: the chips of a card are as tall as a small target, not a full touch target (the card itself is the large one). */
+  .ecard__tags :global(.thread.thread--quiet),
+  .ecard__tags :global(.tag),
+  .ecard__tags :global(.age) {
+    min-height: var(--chip-height-compact);
   }
 
   .ecard__tags :global(.tag),
@@ -220,7 +198,7 @@ const textLang = textLangOf(event, lang);
   .ecard__hook {
     font-family: var(--font-body);
     font-style: italic;
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     line-height: 1.35;
   }
 
@@ -234,8 +212,8 @@ const textLang = textLangOf(event, lang);
     align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-3);
-    min-height: var(--touch-target-large);
-    padding-block: var(--space-1);
+    min-height: var(--chip-height-compact);
+    padding-block: 0;
     cursor: pointer;
   }
 

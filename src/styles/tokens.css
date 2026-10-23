@@ -82,8 +82,7 @@
   --text-xl: 1.5rem;
   --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
   /* Titles of cards: one clamped size so that a long name does not break the grid; the key events of the frame get the larger one. */
-  --text-card-title: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
-  --text-card-title-frame: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+  --text-card-title: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
   --text-3xl: clamp(2.25rem, 1.6rem + 3vw, 3.75rem);
   --leading-body: 1.6;
   --leading-heading: 1.2;
@@ -144,6 +143,12 @@
 
   /* Timeline */
   --timeline-line: 2px;
+  /* Chips inside a feed card: a small target (24 px is the WCAG minimum, 32 px is comfortable). */
+  --chip-height-compact: 1.75rem;
+  /* The column of years on the timeline of an epoch page. */
+  --timeline-year-width: 3.5rem;
+  /* The year is lifted so that its middle is level with the dot of its card. */
+  --timeline-year-top: calc(var(--timeline-dot-top) - 0.7em);
   --timeline-dot: 12px;
   --timeline-dot-small: 8px;
   --timeline-dot-top: 1.4rem;

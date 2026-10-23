@@ -93,6 +93,17 @@ for (const name of existsSync(eventsDir) ? readdirSync(eventsDir).sort() : []) {
 }
 
 // ---------- rules ----------
+// The introduction of an epoch: 2 or 3 sentences, per language; a language may be missing (the page then shows no block).
+for (const { item, file } of epochs) {
+  for (const lang of ['pt', 'en', 'ru'] as const) {
+    const text = item.intro?.[lang];
+    if (text === undefined) continue;
+    const n = text.trim().split(/\s+/).filter(Boolean).length;
+    if (text.trim() === '') report('error', file, 'is empty (leave the language out instead)', 'intro', lang);
+    else if (n > 70) report('warn', file, `${n} words, an introduction is 2-3 sentences (about 60 words at most)`, 'intro', lang);
+  }
+}
+
 for (const { item, file } of epochs) {
   if (item.fallback_image && !existsSync(join(root, 'public', item.fallback_image))) {
     report('error', file, `file "public/${item.fallback_image}" does not exist`, 'fallback_image');

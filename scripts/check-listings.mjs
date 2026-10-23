@@ -192,7 +192,7 @@ for (const lang of ['pt', 'en']) {
     }
     if ((jsPart.match(/<button\b[^>]*data-view="(timeline|grid)"/g) ?? []).length !== 2) fail('timeline/grid switch needs two buttons');
     for (const e of feed) {
-      const li = feedHtml.match(new RegExp(`<li ([^>]*data-threads="([^"]*)"[^>]*)>\\s*<article [^>]*id="c-${e.id}"`));
+      const li = feedHtml.match(new RegExp(`<li ([^>]*data-threads="([^"]*)"[^>]*)>\\s*(?:<span class="feed__year"[^>]*>\\d+</span>\\s*)?<article [^>]*id="c-${e.id}"`));
       if (!li || li[2].split(' ').sort().join(' ') !== [...e.threads].sort().join(' ')) fail(`card ${e.id}: data-threads does not match its threads`);
       else if (!li[1].includes(`data-min-age="${e.min_age}"`) || !li[1].includes(`data-sensitive="${e.sensitive}"`)) fail(`card ${e.id}: the feed item must carry data-min-age="${e.min_age}" and data-sensitive="${e.sensitive}"`);
     }
@@ -202,6 +202,22 @@ for (const lang of ['pt', 'en']) {
     if (emptyGot !== emptyWant) fail(`family-empty message modes are "${emptyGot}", expected "${emptyWant}"`);
     if (!/<style[^>]*>[\s\S]*?<\/style>/.test(readFileSync(join(dir, 'index.html'), 'utf8').match(/<head>[\s\S]*?<\/head>/)?.[0] ?? '')) fail('the prepaint thread filter <style> is missing in <head>');
     if (!/data-empty hidden/.test(html) || !/data-status/.test(html)) fail('empty-thread message or status line is missing');
+
+    // introduction: shown in the language of the page when the data has it (between the theme and the filters), otherwise no block at all
+    const introWant = epoch.intro?.[lang]?.trim();
+    const introHtml = html.match(/<p class="epoch__intro"[^>]*>([^<]*)<\/p>/)?.[1];
+    if (introWant && (!introHtml || introHtml.replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&') !== introWant)) fail('the introduction of the epoch is missing or differs from the data');
+    if (!introWant && introHtml !== undefined) fail('an epoch without an introduction in this language must show no introduction block');
+    if (introWant && introHtml !== undefined && html.indexOf('class="epoch__intro"') > html.indexOf('class="epoch-switch"')) fail('the introduction must come before the epoch switcher and the filters');
+    // every story on the timeline has its year on the scale: the year it starts in
+    for (const e of feed) {
+      const m = html.match(new RegExp(`<span class="feed__year"[^>]*>(\\d+)</span>\\s*<article [^>]*id="c-${e.id}"`));
+      if (!m || Number(m[1]) !== startYear(e)) fail(`card ${e.id}: the year ${startYear(e)} is missing from the scale`);
+    }
+    // the view switch (timeline / cards) is in the markup and starts hidden-by-script; its labels are the new ones
+    if (!/data-view-switch/.test(html)) fail('the view switch is missing');
+    const viewLabels = { pt: ['Cronologia', 'Cartões'], en: ['Timeline', 'Cards'] }[lang];
+    for (const label of viewLabels) if (!new RegExp(`data-view="(?:timeline|grid)"[^>]*>${label}<`).test(html)) fail(`view switch label "${label}" is missing`);
 
     // epoch switcher: the MVP epochs as tabs, then the others under one "more eras soon" disclosure; every epoch once;
     // the current one marked, epochs with a page linked, the rest plain text marked --soon

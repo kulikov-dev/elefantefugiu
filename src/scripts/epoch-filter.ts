@@ -2,7 +2,7 @@
 // without this script the page is the plain timeline and the thread chips are links to thread pages.
 // State lives in the address (?fio=mar&vista=grelha) and is written with replaceState (no extra history entries).
 import { pickPlural } from '../lib/plural-pick';
-import { matchesThread, parseState, serializeState, type FilterState } from '../lib/epoch-filter';
+import { gridAvailable, matchesThread, parseState, serializeState, type FilterState } from '../lib/epoch-filter';
 import { isVisibleInMode } from '../lib/family';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
@@ -17,6 +17,7 @@ if (root && feed) {
   const status = root.querySelector<HTMLElement>('[data-status]');
   const fioButtons = [...root.querySelectorAll<HTMLButtonElement>('button[data-fio]')];
   const viewButtons = [...root.querySelectorAll<HTMLButtonElement>('button[data-view]')];
+  const viewSwitch = root.querySelector<HTMLElement>('[data-view-switch]');
 
   let state: FilterState = parseState(location.search, known);
 
@@ -48,9 +49,14 @@ if (root && feed) {
       if (allowedByMode(item)) shownByMode += 1;
       if (visible && allowedByMode(item)) shown += 1;
     }
-    feed.dataset.view = state.grid ? 'grid' : 'timeline';
+    // The switch is offered only when the filter leaves enough stories; with fewer the timeline is the only view (the choice stays in
+    // the address, so it comes back when the filter shows enough again).
+    const gridOk = gridAvailable(shown);
+    if (viewSwitch) viewSwitch.hidden = !gridOk;
+    const grid = state.grid && gridOk;
+    feed.dataset.view = grid ? 'grid' : 'timeline';
     // The grid view is driven by <html data-vista>, which the head script already set from the address.
-    if (state.grid) document.documentElement.dataset.vista = 'grelha';
+    if (grid) document.documentElement.dataset.vista = 'grelha';
     else delete document.documentElement.dataset.vista;
     // Same for the thread: the prepaint CSS keys on <html data-fio>, so it must follow every change of the filter.
     if (state.fio) document.documentElement.dataset.fio = state.fio;
@@ -59,7 +65,7 @@ if (root && feed) {
     // "No stories of this thread here" only when the mode leaves something to filter; an empty mode has its own message.
     if (empty) empty.hidden = !(shown === 0 && shownByMode > 0);
     for (const b of fioButtons) b.setAttribute('aria-pressed', String((b.dataset.fio || null) === state.fio));
-    for (const b of viewButtons) b.setAttribute('aria-pressed', String((b.dataset.view === 'grid') === state.grid));
+    for (const b of viewButtons) b.setAttribute('aria-pressed', String((b.dataset.view === 'grid') === grid));
     if (status) {
       const forms = status.dataset as Record<string, string>;
       status.textContent = pickPlural({ stories_one: forms.one ?? '', ...(forms.few ? { stories_few: forms.few } : {}), ...(forms.many ? { stories_many: forms.many } : {}), stories_other: forms.other ?? '' }, 'stories', shown, status.dataset.locale ?? 'en').replace('{n}', String(shown));

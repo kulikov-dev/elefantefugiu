@@ -114,7 +114,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
                   </a>
                 </li>
               ) : (
-                <li class="timeline__item timeline__item--soon">
+                <li class="timeline__item timeline__item--soon" title={epoch.intro?.[lang]?.trim() || undefined}>
                   <span class="timeline__name">{epoch.name[lang]}</span>
                   <span class="timeline__years">{epochYearsText(epoch, lang)}</span>
                   <span class="timeline__soon">{t(lang, 'ui.soon')}</span>
