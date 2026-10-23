@@ -249,11 +249,9 @@
     "army_title": "One against five",
     "ship_title": "The size of the nau",
     "test_numbers": "Test numbers, invented. Not historical data.",
-    "army_scale": "Each dot stands for {n} people. Filled dots show the lowest estimate; empty dots, the rest of the range up to the highest estimate.",
     "army_play": "Show one by one",
     "army_playing": "Showing…",
     "army_ratio": "The group “{big}” has about {x} times as many people as the group “{small}” (comparing the middle of the estimates).",
-    "people_exact": "{n} people",
     "people_range": "from {min} to {max} people",
     "dots_title": "{title}: {caption}",
     "table_group": "Group",
@@ -270,7 +268,11 @@
     "ship_size_height": "{length} m long, {height} m high",
     "ship_ratio": "“{big}” is about {x} times as long as “{small}”.",
     "legend_low": "lowest estimate",
-    "legend_range": "rest of the range"
+    "legend_range": "rest of the range",
+    "people_exact_one": "{n} person",
+    "people_exact_other": "{n} people",
+    "army_scale_one": "Each dot stands for {n} person. Filled dots show the lowest estimate; empty dots, the rest of the range up to the highest estimate.",
+    "army_scale_other": "Each dot stands for {n} people. Filled dots show the lowest estimate; empty dots, the rest of the range up to the highest estimate."
   },
   "theme": {
     "label": "Theme",

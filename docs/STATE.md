@@ -430,6 +430,44 @@ Vitest `tests/vitest/pages.spec.ts` (11 тестов: разделы и теги
 3. **Семейный режим, формулировки.** Проверено по `src/lib/family.ts` (`isVisibleInMode`): режим `12` скрывает карточки с тяжёлой темой (`sensitive`) и метку 16, а режим `all` («Младше 12») скрывает любую метку и тяжёлые темы, то есть формулировки «без сражений, жестокости и тяжёлых тем» (метка 12+ стоит на сражениях и жестокости) и «без тяжёлых тем: репрессий, преследований, смерти» верны. В меню «С детьми» вместо общей строки пояснение под каждым из двух вариантов (`family.opt_all_hint`, `family.opt_12_hint`, ключ `family.note` удалён). На «О проекте» и «Метод и источники» фраза про кнопку заменена на «Кнопка «С детьми» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя» (pt, en, ru; то же в `docs/texts-*.md` и `docs/spec.md`).
 4. **Ссылка «Заметили неточность в этой истории?»** вынесена из «Подробнее»: маленькая текстовая ссылка стоит под кнопкой «Поделиться» и видна всегда (`check-cards` следит за местом).
 5. **«Что уже есть»** на «О проекте» считается из данных (`src/lib/ready-epochs.ts`, токены `{{ready}}` и `{{soon}}`): эпоха готова, если у неё есть опубликованная история (`epochHasContent`). Формы: ru «Готова одна эпоха», «Готовы две эпохи», «Готовы пять эпох» (числа словами до девяти, `Intl.PluralRules`), pt «Está pronta uma época» / «Estão prontas duas épocas», en «One era is ready» / «Two eras are ready»; затем «всего N историй» и фраза про оставшиеся эпохи. Сейчас на сайте: «Готовы две эпохи: «Авис…» и «Помбал…», всего 13 историй. Семь эпох … в работе». Название эпохи в тексте файлов `docs/texts-*.md` остаётся как образец; страница берёт его из данных.
+6. **Множественное число.** В исходниках нет заглушек «(s)», «(es)», «story/stories» («lugar(es)», «época(s)» и подобные были только в моих отчётах): строки с числом уже брали формы через `plural()` / `pickPlural()` (`Intl.PluralRules`, ru: one / few / many / other). Исправлено два места, где число стояло в фиксированной форме: «1 people» и «1 pessoas» в интерактиве «Один против пяти» (`viz.people_exact`, `viz.army_scale`), теперь `plural(lang, key, n, shown)` (четвёртый параметр: как записать число, форма выбирается по самому числу). Защита: `check-i18n` падает на заглушке вида `x(s)` и `story/stories`. Итоговая таблица строк со склонением:
+
+| Ключ | Форма | pt | en | ru |
+| --- | --- | --- | --- | --- |
+| `plural.stories` | one | {n} história | {n} story | {n} история |
+| `plural.stories` | few | — | — | {n} истории |
+| `plural.stories` | many | — | — | {n} историй |
+| `plural.stories` | other | {n} histórias | {n} stories | {n} истории |
+| `plural.places` | one | {n} lugar onde aconteceu | {n} place where it happened | {n} место, где это случилось |
+| `plural.places` | few | — | — | {n} места, где это случилось |
+| `plural.places` | many | — | — | {n} мест, где это случилось |
+| `plural.places` | other | {n} lugares onde aconteceu | {n} places where it happened | {n} места, где это случилось |
+| `plural.epochs_more` | one | Mais {n} época em preparação | {n} more era in the works | Ещё {n} эпоха в работе |
+| `plural.epochs_more` | few | — | — | Ещё {n} эпохи в работе |
+| `plural.epochs_more` | many | — | — | Ещё {n} эпох в работе |
+| `plural.epochs_more` | other | Mais {n} épocas em preparação | {n} more eras in the works | Ещё {n} эпохи в работе |
+| `map.cluster` | one | {n} história aqui | {n} story here | {n} история здесь |
+| `map.cluster` | few | — | — | {n} истории здесь, приблизьте карту, чтобы увидеть их |
+| `map.cluster` | many | — | — | {n} историй здесь, приблизьте карту, чтобы увидеть их |
+| `map.cluster` | other | {n} histórias aqui, aproxime o mapa para as ver | {n} stories here, zoom in to see them | {n} истории здесь, приблизьте карту, чтобы увидеть их |
+| `map.in_area` | one | {n} história nesta área | {n} story in this area | {n} история в этой области |
+| `map.in_area` | few | — | — | {n} истории в этой области |
+| `map.in_area` | many | — | — | {n} историй в этой области |
+| `map.in_area` | other | {n} histórias nesta área | {n} stories in this area | {n} истории в этой области |
+| `map.overseas` | one | Mais {n} história além-mar → | {n} more story overseas → | Ещё {n} история за морем → |
+| `map.overseas` | few | — | — | Ещё {n} истории за морем → |
+| `map.overseas` | many | — | — | Ещё {n} историй за морем → |
+| `map.overseas` | other | Mais {n} histórias além-mar → | {n} more stories overseas → | Ещё {n} истории за морем → |
+| `viz.people_exact` | one | {n} pessoa | {n} person | {n} человек |
+| `viz.people_exact` | few | — | — | {n} человека |
+| `viz.people_exact` | many | — | — | {n} человек |
+| `viz.people_exact` | other | {n} pessoas | {n} people | {n} человека |
+| `viz.army_scale` | one | Cada ponto representa {n} pessoa. … | Each dot stands for {n} person. … | Каждая точка — {n} человек. … |
+| `viz.army_scale` | few | . … | . … | Каждая точка — {n} человека. … |
+| `viz.army_scale` | many | . … | . … | Каждая точка — {n} человек. … |
+| `viz.army_scale` | other | Cada ponto representa {n} pessoas. … | Each dot stands for {n} people. … | Каждая точка — {n} человека. … |
+
+Не склоняются по смыслу и оставлены: «Скрыто историй: {n}» (после двоеточия), «в {n} м», «в {n} км» (единицы), «от {min} до {max} человек» (диапазон).
 
 ## Служебные страницы: новые тексты, маскот на «Нашли ошибку?», «Спасибо» и 404
 

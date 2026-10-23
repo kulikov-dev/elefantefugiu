@@ -249,11 +249,9 @@
     "army_title": "Um contra cinco",
     "ship_title": "O tamanho da nau",
     "test_numbers": "Números de teste, inventados. Não são dados históricos.",
-    "army_scale": "Cada ponto representa {n} pessoas. Os pontos cheios mostram a estimativa mais baixa; os pontos vazios, o resto do intervalo até à estimativa mais alta.",
     "army_play": "Mostrar um a um",
     "army_playing": "A mostrar…",
     "army_ratio": "O grupo «{big}» tem cerca de {x} vezes mais pessoas do que o grupo «{small}» (comparando o meio das estimativas).",
-    "people_exact": "{n} pessoas",
     "people_range": "de {min} a {max} pessoas",
     "dots_title": "{title}: {caption}",
     "table_group": "Grupo",
@@ -270,7 +268,11 @@
     "ship_size_height": "{length} m de comprimento, {height} m de altura",
     "ship_ratio": "«{big}» é cerca de {x} vezes mais comprido do que «{small}».",
     "legend_low": "estimativa mais baixa",
-    "legend_range": "resto do intervalo"
+    "legend_range": "resto do intervalo",
+    "people_exact_one": "{n} pessoa",
+    "people_exact_other": "{n} pessoas",
+    "army_scale_one": "Cada ponto representa {n} pessoa. Os pontos cheios mostram a estimativa mais baixa; os pontos vazios, o resto do intervalo até à estimativa mais alta.",
+    "army_scale_other": "Cada ponto representa {n} pessoas. Os pontos cheios mostram a estimativa mais baixa; os pontos vazios, o resto do intervalo até à estimativa mais alta."
   },
   "theme": {
     "label": "Tema",

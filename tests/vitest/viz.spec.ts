@@ -83,3 +83,18 @@ describe('wording helpers', () => {
     expect(ratioNumber(12.4, 'en')).toBe('12');
   });
 });
+
+describe('plural forms of "people" in the interactive', () => {
+  it('one person, many people, and the Russian forms; the number keeps its separators', async () => {
+    const { plural } = await import('../../src/i18n');
+    expect(plural('en', 'viz.people_exact', 1, '1')).toBe('1 person');
+    expect(plural('en', 'viz.people_exact', 7000, '7,000')).toBe('7,000 people');
+    expect(plural('pt', 'viz.people_exact', 1, '1')).toBe('1 pessoa');
+    expect(plural('pt', 'viz.people_exact', 7000, '7 000')).toBe('7 000 pessoas');
+    expect(plural('ru', 'viz.people_exact', 1, '1')).toBe('1 человек');
+    expect(plural('ru', 'viz.people_exact', 3, '3')).toBe('3 человека');
+    expect(plural('ru', 'viz.people_exact', 7000, '7 000')).toBe('7 000 человек');
+    expect(plural('en', 'viz.army_scale', 1, '1')).toMatch(/^Each dot stands for 1 person\./);
+    expect(plural('ru', 'viz.army_scale', 1000, '1 000')).toMatch(/^Каждая точка — 1 000 человек\./);
+  });
+});

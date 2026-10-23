@@ -33,6 +33,15 @@ for (const [key] of dict.ru) {
   const m = key.match(/^(.*)_(few|many)$/);
   if (m) for (const c of ['one', 'few', 'many', 'other']) if (!dict.ru.has(`${m[1]}_${c}`)) errors.push(`ru.json: ${m[1]} has no _${c}`);
 }
+// No stand-ins for a plural such as "era(s)", "história(s)" or "story/stories": plural strings are real forms (key_one, key_other, and
+// key_few, key_many in Russian), chosen with Intl.PluralRules (src/i18n/index.ts).
+for (const lang of LANGS) {
+  for (const [key, value] of dict[lang]) {
+    if (/\w\((?:s|es|ies|ões|ns)\)/.test(String(value)) || /(?:story|stories|história|histórias|era|eras|época|épocas)\/(?:story|stories|história|histórias|era|eras|época|épocas)/i.test(String(value))) {
+      errors.push(`${lang}.json: ${key} has a stand-in for a plural ("${value}"); write the plural forms instead`);
+    }
+  }
+}
 // Placeholders such as {n} or {mode} must be the same in every language.
 const holes = (s) => [...String(s).matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort().join(',');
 for (const key of base) {

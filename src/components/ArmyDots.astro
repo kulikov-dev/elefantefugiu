@@ -3,7 +3,7 @@
 // The estimate is a range: filled dots for the lowest estimate, empty dots for the rest of the range, and the line
 // "according to historians' estimates" comes from the data. The same numbers are in a table beside the drawing.
 // Without JavaScript the full drawing and the table are shown; the script only adds "Show one by one".
-import { t } from '../i18n';
+import { plural, t } from '../i18n';
 import baseCss from '../styles/viz-base.css?inline';
 import ownCss from '../styles/viz-dots.css?inline';
 import type { Lang } from '../i18n/routes';
@@ -23,11 +23,11 @@ const layout = layoutDots(data.groups);
 const unit = data.groups[0]!.unit_per_dot;
 const range = (g: (typeof data.groups)[number]) =>
   g.min === g.max
-    ? fill(t(lang, 'viz.people_exact'), { n: formatNumber(g.min, lang) })
+    ? plural(lang, 'viz.people_exact', g.min, formatNumber(g.min, lang))
     : fill(t(lang, 'viz.people_range'), { min: formatNumber(g.min, lang), max: formatNumber(g.max, lang) });
 const { big, small, ratio } = groupRatio(data.groups);
 const ratioText = fill(t(lang, 'viz.army_ratio'), { big: big.label[lang], small: small.label[lang], x: ratioNumber(ratio, lang) });
-const scaleText = fill(t(lang, 'viz.army_scale'), { n: formatNumber(unit, lang) });
+const scaleText = plural(lang, 'viz.army_scale', unit, formatNumber(unit, lang));
 const title = t(lang, 'viz.army_title');
 // The description read by screen readers: scale, every group with its range, and the ratio in words.
 const desc = [scaleText, ...data.groups.map((g) => `${g.label[lang]}: ${range(g)}.`), ratioText, data.estimate_note[lang]].join(' ');

@@ -39,11 +39,14 @@ export function pluralCategory(lang: Lang, n: number): 'one' | 'few' | 'many' | 
   return form === 'one' || form === 'few' || form === 'many' ? form : 'other';
 }
 
-/** Plural string: looks up `${key}_${category}` (falling back to `${key}_other`) and replaces {n} with the number. */
-export function plural(lang: Lang, key: string, n: number): string {
+/**
+ * Plural string: looks up `${key}_${category}` (falling back to `${key}_other`) and replaces {n} with the number, or with `shown` when
+ * the number is to be written another way (with thousands separators, for example) while the form still follows n.
+ */
+export function plural(lang: Lang, key: string, n: number, shown: string = String(n)): string {
   const category = pluralCategory(lang, n);
   const form = has(lang, `${key}_${category}`) ? category : 'other';
-  return t(lang, `${key}_${form}`).replace('{n}', String(n));
+  return t(lang, `${key}_${form}`).replace('{n}', shown);
 }
 
 /** All forms of a plural key that exist in the language: {one, few?, many?, other}. For scripts that count in the browser. */
