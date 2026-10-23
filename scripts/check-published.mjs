@@ -80,7 +80,7 @@ if (errors.length > 0) {
   if (errors.length > 40) console.error(`... and ${errors.length - 40} more`);
   process.exit(1);
 }
-// Not a failure (ALLOW_PLACEHOLDER=false is the gate for a real launch), but worth saying: threads and epochs that still carry placeholder text.
-const placeholderPages = ['threads', 'epochs'].flatMap((name) => parse(readFileSync(join(root, `src/content/${name}.yaml`), 'utf8'), { schema: 'core' }).filter((x) => x.placeholder === true).map((x) => `${name}/${x.id}`));
+// Not a failure (ALLOW_PLACEHOLDER=false is the gate for a real launch), but worth saying: threads and epochs that still carry provisional fields.
+const placeholderPages = ['threads', 'epochs'].flatMap((name) => parse(readFileSync(join(root, `src/content/${name}.yaml`), 'utf8'), { schema: 'core' }).filter((x) => x.placeholder === true || (Array.isArray(x.placeholder) && x.placeholder.length > 0)).map((x) => `${name}/${x.id}${Array.isArray(x.placeholder) ? ` [${x.placeholder.join(', ')}]` : ''}`));
 if (placeholderPages.length > 0) console.log(`NOTE  still marked placeholder (their text is not final): ${placeholderPages.join(', ')}`);
 console.log(`published check passed: ${published.length} published cards, ${hidden.length} not published (${hidden.map((c) => c.id).join(', ') || 'none'}); ${looked} text files, ${mapPages} map configurations with ${points} points: nothing of the others in dist/`);

@@ -349,15 +349,24 @@ const allowRaw = (process.env.ALLOW_PLACEHOLDER ?? 'true').trim().toLowerCase();
 if (allowRaw !== 'true' && allowRaw !== 'false') {
   report('error', 'environment', `ALLOW_PLACEHOLDER must be "true" or "false", got "${process.env.ALLOW_PLACEHOLDER}"`);
 }
+// What ALLOW_PLACEHOLDER=false stops (docs/spec.md, "Placeholder marks"): only what is on the site.
+//  - a card with status draft is not checked at all (it is not published: the browser suites use the drafts as fixtures);
+//  - an epoch without a published story is not checked (the site says "Soon");
+//  - a mark on the preview picture (fallback_image) of an epoch is a NOTE, not an error, until the pictures are made;
+//  - a mark on any other field of a published card, an epoch with stories or a thread with stories is an error.
+const publishedCards = events.filter((e) => e.item.status === 'ready');
+const epochHasStories = (id: string) => publishedCards.some((e) => e.item.epoch === id);
 const placeholders = [
-  ...events.filter((e) => e.item.placeholder || e.item.interactive?.data.placeholder).map((e) => e.file),
-  ...epochs.filter((e) => e.item.placeholder).map((e) => e.file),
-  ...threads.filter((e) => e.item.placeholder).map((e) => e.file),
+  ...publishedCards.filter((e) => e.item.placeholder || e.item.interactive?.data.placeholder).map((e) => e.file),
+  ...epochs.filter((e) => epochHasStories(e.item.id) && e.item.placeholder.some((f) => f !== 'fallback_image')).map((e) => `${e.file} [${e.item.placeholder.filter((f) => f !== 'fallback_image').join(', ')}]`),
+  ...threads.filter((t) => t.item.placeholder && publishedCards.some((e) => e.item.threads.includes(t.item.id))).map((t) => t.file),
 ];
+const pictureNotes = epochs.filter((e) => epochHasStories(e.item.id) && e.item.placeholder.includes('fallback_image')).map((e) => e.item.id);
 if (allowRaw === 'false' && placeholders.length > 0) {
   const shown = placeholders.slice(0, 5).join(', ');
-  report('error', 'environment', `ALLOW_PLACEHOLDER=false but ${placeholders.length} entries have placeholder: true (${shown}${placeholders.length > 5 ? ', ...' : ''})`);
+  report('error', 'environment', `ALLOW_PLACEHOLDER=false but ${placeholders.length} entries on the site are still marked placeholder (${shown}${placeholders.length > 5 ? ', ...' : ''})`);
 }
+if (allowRaw === 'false' && pictureNotes.length > 0) console.log(`NOTE  preview picture (fallback_image) still provisional for: ${pictureNotes.join(', ')}`);
 
 // threads with few cards are hidden from filters and menus (decision after stage 2)
 const cardCounts = countCardsByThread(events.map((e) => e.item));

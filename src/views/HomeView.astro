@@ -9,7 +9,7 @@ import StartCard from '../components/StartCard.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
-import { epochYearsText } from '../lib/epochs';
+import { epochHasTestText, epochYearsText } from '../lib/epochs';
 import { epochTiles, firstMvpEpoch, homeStartStory } from '../lib/home';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
 import { tileConfig } from '../lib/tiles';
@@ -34,7 +34,7 @@ const threadCounts = new Map(site.visibleThreads.map((th) => [th.id, countByMode
 const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
 
 // Test text must stay out of search results until it is real.
-const noindex = site.featured.some((e) => e.placeholder) || ready.some((tile) => tile.epoch.placeholder);
+const noindex = site.featured.some((e) => e.placeholder) || ready.some((tile) => epochHasTestText(tile.epoch));
 
 // "Left off": the epochs with a page, by id, for the script that knows the last epoch of the reader.
 const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, { href: epochHref(lang, tile.epoch.slug[lang]), name: tile.epoch.name[lang] }]));

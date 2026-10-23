@@ -13,6 +13,8 @@ const MIN_CARDS = 1;
 const errors = [];
 let pages = 0;
 
+// An epoch shows test text when a field other than the preview picture is still provisional (placeholder: [...] in epochs.yaml).
+const epochTestText = (epoch) => (epoch.placeholder ?? []).some((field) => field !== 'fallback_image');
 const load = (file) => parse(readFileSync(join(root, 'src/content', file), 'utf8'), { schema: 'core', customTags: ['timestamp'] });
 const eventsDir = join(root, 'src/content/events');
 const events = readdirSync(eventsDir)
@@ -127,7 +129,7 @@ for (const lang of ['pt', 'en']) {
     }
     pages += 1;
     const feed = inEpoch(epoch);
-    const placeholder = epoch.placeholder || feed.some((e) => e.placeholder);
+    const placeholder = epochTestText(epoch) || feed.some((e) => e.placeholder);
     commonChecks(html, where, lang, { placeholder, expectedH1: epoch.name[lang] });
     if (!html.includes(epoch.theme[lang])) fail('theme phrase is missing');
     if (!html.includes(`${epoch.years.from}\u2013${epoch.years.to}`)) fail('years are missing');
@@ -329,7 +331,7 @@ for (const lang of ['pt', 'en']) {
   const raw = readFileSync(path, 'utf8');
   const tiles = epochs.map((epoch) => ({ epoch, page: hasPage(epoch), count: inEpoch(epoch).length }));
   const first = epochs.find(hasPage);
-  const placeholder = featuredIds.some((id) => events.find((e) => e.id === id)?.placeholder) || tiles.some((t) => t.page && t.epoch.placeholder);
+  const placeholder = featuredIds.some((id) => events.find((e) => e.id === id)?.placeholder) || tiles.some((t) => t.page && epochTestText(t.epoch));
   commonChecks(html, where, lang, { placeholder, expectedH1: HOME_H1[lang] });
 
   // The small map draws map tiles in the browser (Leaflet shows the attribution it is given): the config must carry it, with a link.

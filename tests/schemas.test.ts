@@ -19,7 +19,7 @@ test('min_age rejects other values', () => {
 // ---- epochs outside the MVP (stage 4a follow-up) ----
 import { epochSchema } from '../src/data/schemas';
 
-const baseEpoch = { id: 'e', slug: { pt: 'e', en: 'e' }, order: 1, name: { pt: 'E', en: 'E' }, placeholder: false };
+const baseEpoch = { id: 'e', slug: { pt: 'e', en: 'e' }, order: 1, name: { pt: 'E', en: 'E' }, placeholder: [] };
 const fullStyle = { bg: '#fff', accent: '#000', heading_font: 'serif', frame: '1px solid #000' };
 
 test('epochSchema: epoch outside the MVP needs years_label only', () => {

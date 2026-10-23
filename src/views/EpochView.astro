@@ -17,6 +17,7 @@ import { feedFilterCss, gridAvailable } from '../lib/epoch-filter';
 import { pluralForms, t, tAll } from '../i18n';
 import {
   epochFeed,
+  epochHasTestText,
   epochSectionId,
   epochSwitcherItems,
   epochYearsText,
@@ -65,7 +66,7 @@ const intro = epoch.intro?.[lang]?.trim() || undefined;
 
 const alternates = altPaths((l) => epochHref(l, epoch.slug[l]));
 // Pages that show test text stay out of search results until the text is real.
-const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
+const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
 ---
 <BaseLayout
   lang={lang}

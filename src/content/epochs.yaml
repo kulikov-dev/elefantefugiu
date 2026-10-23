@@ -1,7 +1,8 @@
-# MVP epochs (4, 6, 8): names, theme phrases and style values are placeholders (placeholder: true).
+# MVP epochs (4, 6, 8). `placeholder` lists the fields that are still provisional: Avis and Pombal have final names, theme phrases and
+# colours and wait only for their preview picture (fallback_image); Estado Novo has no page yet and all three are provisional.
 # Epochs outside the MVP (1, 2, 3, 5, 7, 9) come from docs/design.md section 4.1. They have no page yet:
 # they only feed the "Coming soon" tiles on the home page and the "Em breve" neighbours.
-# Names, slugs and years_label of those six are real data (placeholder: false), but the Portuguese
+# Names, slugs and years_label of those six are real data (placeholder: []), but the Portuguese
 # and English wording is still to be checked by a native speaker.
 - id: avis-e-descobrimentos
   slug:
@@ -27,7 +28,7 @@
     frame: 1px solid var(--color-line)
   mvp: true
   fallback_image: images/placeholders/epoch-a.svg
-  placeholder: true
+  placeholder: [fallback_image]
   intro:
     pt: Uma nova dinastia defendeu o país em Aljubarrota e virou-se para o mar. Em
       século e meio, o pequeno Portugal chegou a África, à Índia, ao Brasil e ao
@@ -62,7 +63,7 @@
     frame: 1px solid var(--color-line)
   mvp: true
   fallback_image: images/placeholders/epoch-b.svg
-  placeholder: true
+  placeholder: [fallback_image]
   intro:
     pt: A 1 de novembro de 1755, o terramoto, o tsunami e o incêndio destruíram o
       centro de Lisboa. O Marquês de Pombal reconstruiu a cidade a régua e
@@ -100,7 +101,7 @@
     frame: 1px solid var(--color-line)
   mvp: true
   fallback_image: images/placeholders/epoch-c.svg
-  placeholder: true
+  placeholder: [theme, style, fallback_image]
   intro:
     pt: Salazar, professor de economia, veio pôr as finanças em ordem e ficou 40
       anos. O país viveu com censura e polícia política, ficou fora da Segunda
@@ -133,7 +134,7 @@
     en: "until the 5th century"
     ru: "до V в."
   mvp: false
-  placeholder: false
+  placeholder: []
   intro:
     pt: O pastor Viriato derrotou legiões romanas durante oito anos, e Roma só se
       livrou dele subornando os seus próprios homens. Depois chegaram as
@@ -163,7 +164,7 @@
     en: "5th–12th centuries"
     ru: "V–XII вв."
   mvp: false
-  placeholder: false
+  placeholder: []
   intro:
     pt: Quando Roma enfraqueceu, os suevos fundaram no norte um reino com capital em
       Braga. Seguiram-se os visigodos e, em 711, os mouros, que ficaram no sul
@@ -195,7 +196,7 @@
     en: "1139–1249"
     ru: "1139–1249"
   mvp: false
-  placeholder: false
+  placeholder: []
   intro:
     pt: D. Afonso Henriques pegou em armas contra a própria mãe e tornou-se o
       primeiro rei de Portugal. Com a ajuda de cruzados a caminho da Terra
@@ -227,7 +228,7 @@
     en: "1580–1750"
     ru: "1580–1750"
   mvp: false
-  placeholder: false
+  placeholder: []
   intro:
     pt: "O jovem rei D. Sebastião desapareceu numa batalha em Marrocos, e Portugal
       passou 60 anos sob reis espanhóis. Em 1640, um grupo de conjurados
@@ -260,7 +261,7 @@
     en: "1820–1926"
     ru: "1820–1926"
   mvp: false
-  placeholder: false
+  placeholder: []
   intro:
     pt: "Durante um século, Portugal discutiu o que queria ser: constituição, guerra
       civil entre dois irmãos, caminhos de ferro e o Ultimato inglês. Em 1908, o
@@ -293,7 +294,7 @@
     en: "1974 – today"
     ru: "1974 – наши дни"
   mvp: false
-  placeholder: false
+  placeholder: []
   intro:
     pt: Depois da revolução, as colónias tornaram-se independentes e regressaram ao
       país centenas de milhares de pessoas. Em 1986, Portugal entrou na

@@ -157,6 +157,9 @@ const epochStyle = z.strictObject({
   frame: z.string(),
 });
 
+/** The fields of an epoch that can still be provisional. Written per field (placeholder: [fallback_image]) so it is clear what is temporary. */
+export const EPOCH_PLACEHOLDER_FIELDS = ['name', 'theme', 'style', 'intro', 'fallback_image'] as const;
+
 export const epochSchema = z
   .strictObject({
     id: z.string(),
@@ -180,7 +183,8 @@ export const epochSchema = z
     intro: z.strictObject({ pt: z.string().optional(), en: z.string().optional(), ru: z.string().optional() }).optional(),
     /** Preview image (Open Graph) for cards of this epoch that have no image of their own. Path inside public/. */
     fallback_image: z.string().optional(),
-    placeholder: z.boolean().default(false),
+    /** Which fields are still provisional. `fallback_image` (a picture to be made) does not make the page test text; any other field does. */
+    placeholder: z.array(z.enum(EPOCH_PLACEHOLDER_FIELDS)).default([]),
   })
   .superRefine((epoch, ctx) => {
     const need = (ok: boolean, field: string, why: string) => {

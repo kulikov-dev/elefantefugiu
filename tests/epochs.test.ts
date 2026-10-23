@@ -88,7 +88,7 @@ test('epochs.yaml: orders 1-9 once each, MVP epochs are exactly 4, 6 and 8', () 
 
 test('epochs.yaml: epochs outside the MVP are real data with a years label in both languages', () => {
   for (const e of realEpochs.filter((x) => !x.mvp)) {
-    assert.equal(e.placeholder, false, e.id);
+    assert.deepEqual(e.placeholder, [], e.id);
     assert.ok(epochYearsText(e, 'pt') && epochYearsText(e, 'en') && epochYearsText(e, 'ru'), e.id);
   }
 });

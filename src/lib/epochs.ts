@@ -9,6 +9,9 @@ import type { Lang } from '../i18n/routes';
 export type EpochData = Localized<z.infer<typeof epochSchema>>;
 export type ThreadData = Localized<z.infer<typeof threadSchema>>;
 
+/** True when a field of the epoch other than the preview picture is still provisional: its page then shows test text (and is noindex). */
+export const epochHasTestText = (epoch: Pick<EpochData, 'placeholder'>): boolean => epoch.placeholder.some((field) => field !== 'fallback_image');
+
 /** Published events of an epoch in chronological order: the feed of the epoch page. */
 export function epochFeed(epoch: Pick<EpochData, 'id'>, events: readonly EventData[]): EventData[] {
   return events.filter((e) => e.epoch === epoch.id && isPublished(e)).sort(compareChronological);
