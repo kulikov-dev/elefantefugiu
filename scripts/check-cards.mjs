@@ -257,6 +257,10 @@ for (const ev of events) {
     if (Boolean(ev.interactive) !== has(/data-interactive=/)) fail('interactive placeholder does not match the data');
     if (!has(/data-share-link/) || !has(/data-share-button/)) fail('share widget is missing');
     if (!has(/(corrigir|report)\/\?url=/)) fail('"Found a mistake?" link with the card address is missing');
+    // The small link stays in view under "Share", not inside the folded "More" layer.
+    const actionsBlock = html.match(/<div class="actions"[\s\S]*?<\/div>/)?.[0] ?? '';
+    if (!/(corrigir|report)\/\?url=/.test(actionsBlock) || !/data-share-button/.test(actionsBlock)) fail('the report link must stand under the Share button, outside "More"');
+    if (/<details id="detalhes"[\s\S]*?(corrigir|report)\/\?url=[\s\S]*?<\/details>/.test(html)) fail('the report link must not be inside "More"');
     if (!has(/rel="(prev|next)"/) && events.filter((e) => e.epoch === ev.epoch).length > 1) fail('previous/next links are missing');
     if (has(/<script[^>]+src="https?:/)) fail('external script');
     if (/<img\b(?![^>]*\bclass="(?:mascot|minimap))[^>]*\bsrc="[^"]*"[^>]*>/.test(html) && !/loading="lazy"/.test(html)) fail('illustration is not lazy-loaded');
