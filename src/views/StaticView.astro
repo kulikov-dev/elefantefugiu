@@ -5,6 +5,8 @@ import { pagePath, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { CONTACT_EMAIL, STATIC_PAGES, type StaticKey } from '../data/static-pages';
 import { renderInline } from '../lib/static-text';
+import { epochHasContent } from '../lib/epochs';
+import { readyEpochsText, soonEpochsText } from '../lib/ready-epochs';
 import { loadSite } from '../lib/site-data';
 
 interface Props {
@@ -20,7 +22,13 @@ const link = (key: string) =>
   (LINKS as readonly string[]).includes(key) ? { href: pagePath(lang, key as (typeof LINKS)[number]), label: t(lang, `pages.${key}.title`) } : undefined;
 // {{stories}}: how many stories are published, counted from the data (with its noun in the language of the page).
 const site = await loadSite();
-const values = { stories: plural(lang, 'plural.stories', site.events.length) };
+// {{ready}} and {{soon}}: how many epochs are ready (an epoch is ready when it has a published story) and which, and how many are to come.
+const readyEpochs = site.epochs.filter((e) => epochHasContent(e, site.events));
+const values = {
+  stories: plural(lang, 'plural.stories', site.events.length),
+  ready: readyEpochsText(lang, readyEpochs.map((e) => e.name[lang])),
+  soon: soonEpochsText(lang, site.epochs.length - readyEpochs.length),
+};
 const html = (text: string) => renderInline(text, link, CONTACT_EMAIL, values);
 ---
 <BaseLayout lang={lang} pageKey={pageKey} title={title}>

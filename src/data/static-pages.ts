@@ -6,7 +6,7 @@
 //
 // Inline markup: {{about}} {{method}} {{report}} {{legal}} {{map}} link to a page of the site (the link text is the title of that
 // page; {{method|text}} gives the link another text, for a case ending); {{email}} is the contact address as a link; {{stories}} is
-// the number of published stories with its noun ("13 stories"), counted from the data; **text** is bold. Everything else is plain text.
+// the number of published stories with its noun ("13 stories"), counted from the data; {{ready}} and {{soon}} are the sentences about the ready epochs (their number and names) and about those to come (src/lib/ready-epochs.ts); **text** is bold. Everything else is plain text.
 import type { Lang } from '../i18n/routes';
 
 export const CONTACT_EMAIL = 'elefantefugiu@gmail.com';
@@ -64,7 +64,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'estado',
           heading: 'O que já existe',
-          paragraphs: ['O projeto está a crescer. Estão prontas três épocas: «Avis e Descobrimentos», «Pombal e o Terramoto» e «Estado Novo e 25 de Abril», com {{stories}} no total. Outras seis épocas, da Lusitânia romana aos nossos dias, estão a caminho.'],
+          paragraphs: ['O projeto está a crescer. {{ready}}, com {{stories}} no total. {{soon}}'],
         },
         {
           id: 'quem-faz',
@@ -110,7 +110,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'estado',
           heading: 'What’s here so far',
-          paragraphs: ['The project is growing. Three eras are ready: “Avis and the Discoveries”, “Pombal and the Earthquake” and “Estado Novo and 25 April”, {{stories}} in all. Six more eras, from Roman Lusitania to the present day, are in the works.'],
+          paragraphs: ['The project is growing. {{ready}}, {{stories}} in all. {{soon}}'],
         },
         {
           id: 'quem-faz',
@@ -156,7 +156,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'estado',
           heading: 'Что уже есть',
-          paragraphs: ['Проект растёт. Готовы три эпохи: «Авис и Великие открытия», «Помбал, землетрясение, бегство двора» и «Эштаду Нову и Революция гвоздик», всего {{stories}}. Шесть эпох, от римской Лузитании до наших дней, в работе.'],
+          paragraphs: ['Проект растёт. {{ready}}, всего {{stories}}. {{soon}}'],
         },
         {
           id: 'quem-faz',

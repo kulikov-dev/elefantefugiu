@@ -39,8 +39,8 @@ describe('static pages', () => {
       expect(new Set(LANGS.map(tokens)).size, key).toBe(1);
       for (const lang of LANGS) {
         const page = STATIC_PAGES[key][lang];
-        for (const s of page.sections) for (const p of [...s.paragraphs, ...(s.items ?? []), ...(s.after ?? [])]) expect(() => renderInline(p, link, CONTACT_EMAIL, { stories: '13 stories' })).not.toThrow();
-        for (const p of [page.lead ?? 'x', ...(page.more ?? [])]) expect(() => renderInline(p, link, CONTACT_EMAIL, { stories: '13 stories' })).not.toThrow();
+        for (const s of page.sections) for (const p of [...s.paragraphs, ...(s.items ?? []), ...(s.after ?? [])]) expect(() => renderInline(p, link, CONTACT_EMAIL, { stories: '13 stories', ready: 'x', soon: 'y' })).not.toThrow();
+        for (const p of [page.lead ?? 'x', ...(page.more ?? [])]) expect(() => renderInline(p, link, CONTACT_EMAIL, { stories: '13 stories', ready: 'x', soon: 'y' })).not.toThrow();
       }
     }
   });
@@ -119,12 +119,15 @@ describe('the text of the service pages follows the names on the site', () => {
     const pt = everything('pt');
     expect(pt).toContain('Em debate');
     expect(pt).toContain('Surpreende-me');
-    expect(pt).toContain('Estado Novo e 25 de Abril');
+    // The names of the eras are not typed in the text any more: they come from the data ({{ready}}, src/lib/ready-epochs.ts).
+    expect(pt).toContain('{{ready}}');
     expect(pt).not.toMatch(/Surpreenda-me|fuga da corte|Revolução dos Cravos»/);
+    expect(everything('ru')).toContain('{{ready}}');
     const en = everything('en');
     expect(en).toContain('Debated');
     expect(en).toContain('Get directions');
-    expect(en).toContain('Estado Novo and 25 April');
+    expect(en).toContain('{{ready}}');
+    expect(en).toContain('{{soon}}');
     expect(en).not.toMatch(/Disputed|How to get there|Age of Discovery|Carnation Revolution/);
   });
   it('leaves out what stood in square brackets in the source files (placeholders and notes)', () => {
