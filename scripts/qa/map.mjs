@@ -185,7 +185,7 @@ if (want('limit')) {
     await p.goto(MAP.pt, { waitUntil: 'networkidle0' });
     await ready(p);
     if (c.fio) await p.click(`.map-filters button[data-fio="${c.fio}"]`);
-    if (c.epoca) await p.click(`.map-filters button[data-epoca="${c.epoca}"]`);
+    if (c.epoca) await p.click(`.epoch-scale button[data-epoca="${c.epoca}"]`);
     await wait(700);
     const tag = `fio=${c.fio} epoca=${c.epoca}`;
     for (let i = 0; i < 3; i += 1) {
@@ -271,7 +271,7 @@ if (want('filters')) {
   await ready(page);
   await wait(600);
   let s = await page.evaluate(() => ({
-    pressed: [...document.querySelectorAll('.map-filters [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca),
+    pressed: [...document.querySelectorAll('.map-filters [aria-pressed="true"], .epoch-scale [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca),
     search: location.search,
   }));
   ok('filters: ?fio= and ?epoca= are read, unknown parameters are dropped from the address', s.pressed.includes('comida-e-vinho') && s.pressed.includes('pombal-e-terramoto') && s.search === '?fio=comida-e-vinho&epoca=pombal-e-terramoto', `${s.pressed} ${s.search}`);
@@ -283,14 +283,14 @@ if (want('filters')) {
   ok('filters: state survives a reload', s === '?fio=comida-e-vinho&epoca=pombal-e-terramoto', s);
 
   await page.click('.map-filters button[data-fio=""]');
-  await page.click('.map-filters button[data-epoca=""]');
+  await page.click('.epoch-scale button[data-epoca=""]');
   await wait(500);
   s = await page.evaluate(() => location.search);
   snap = await snapshot(page);
   ok('filters: "all" clears the address and the list shows 24 cards again', s === '' && snap.list.length === TOTAL, `${s} ${snap.list.length}`);
   const hist = await page.evaluate(() => history.length);
   await page.click('.map-filters button[data-fio="mar"]');
-  await page.click('.map-filters button[data-epoca="avis-e-descobrimentos"]');
+  await page.click('.epoch-scale button[data-epoca="avis-e-descobrimentos"]');
   ok('filters: choosing chips does not grow the history', (await page.evaluate(() => history.length)) === hist);
   await page.close();
 }
@@ -308,7 +308,7 @@ if (want('preview')) {
   ok('keyboard: a marker is a focusable button with a name', marker.role === 'button' && marker.tabindex === '0' && marker.name.length > 3, JSON.stringify(marker));
 
   // reach the marker with Tab (from the filters), open it with Enter
-  await page.focus('.map-filters button[data-epoca=""]');
+  await page.focus('.epoch-scale button[data-epoca=""]');
   let found = false;
   for (let i = 0; i < 30 && !found; i += 1) {
     await page.keyboard.press('Tab');
@@ -444,7 +444,7 @@ if (want('link')) {
   await ready(f);
   await wait(500);
   const sf = await centred(f);
-  const pressed = await f.evaluate(() => [...document.querySelectorAll('.map-filters [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca));
+  const pressed = await f.evaluate(() => [...document.querySelectorAll('.map-filters [aria-pressed="true"], .epoch-scale [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca));
   ok('link: filters that would hide the card are cleared', sf.selected && sf.key === odd.id && pressed.every((v) => v === '') && sf.search === `?id=${odd.id}`, JSON.stringify({ sf, pressed }));
   await f.close();
 
@@ -482,7 +482,7 @@ if (want('link')) {
     await wait(700);
     const after = await centred(p);
     const afterList = (await snapshot(p)).list;
-    const pressed = await p.evaluate(() => [...document.querySelectorAll('.map-filters [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca));
+    const pressed = await p.evaluate(() => [...document.querySelectorAll('.map-filters [aria-pressed="true"], .epoch-scale [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca));
     ok(
       `back (${label}): the map returns to the same address, preview, filters and place on the screen`,
       onCard && after.selected && after.key === before.key && after.previewOpen && after.search === before.search && Math.abs(after.dx - before.dx) <= 3 && Math.abs(after.dy - before.dy) <= 3 && same(afterList, beforeList) && pressed.includes(query ? 'comida-e-vinho' : ''),

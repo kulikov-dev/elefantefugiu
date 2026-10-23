@@ -3,6 +3,7 @@
 // Without JavaScript only the plain list of all cards by epoch is shown; the map block and the filters need the script.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FamilyNote from '../components/FamilyNote.astro';
+import EpochScale from '../components/EpochScale.astro';
 import MapBlock from '../components/MapBlock.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { storyPath, type Lang } from '../i18n/routes';
@@ -58,20 +59,6 @@ const noindex = events.some((e) => e.placeholder);
           }
         </ul>
       </div>
-      <div role="group" aria-label={t(lang, 'map.epochs_label')} class="map-filters__group">
-        <ul class="map-chips">
-          <li><button type="button" class="map-chip" data-epoca="" aria-pressed="true">{t(lang, 'map.all_epochs')}</button></li>
-          {
-            epochs.map((epoch) => (
-              <li>
-                <button type="button" class="map-chip" data-epoca={epoch.id} aria-pressed="false">
-                  {epoch.name[lang]}
-                </button>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
     </div>
 
     <MapBlock
@@ -82,7 +69,9 @@ const noindex = events.some((e) => e.placeholder);
       maxBounds={mapMaxBounds(cards)}
       view={MAINLAND_VIEW}
       tile={tile}
-    />
+    >
+      <EpochScale slot="under" lang={lang} epochs={site.epochs} readyIds={new Set(epochs.map((e) => e.id))} />
+    </MapBlock>
 
     <section class="map-static" data-map-static aria-labelledby="map-static-title">
       <h2 id="map-static-title">{t(lang, 'map.static_title')}</h2>

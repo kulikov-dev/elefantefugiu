@@ -84,6 +84,9 @@
     en: lusitania-and-rome
     ru: luzitaniya-i-rim
   order: 1
+  years:
+    from: -218
+    to: 409
   name:
     pt: "Lusitânia e Roma"
     en: "Lusitania and Rome"
@@ -100,6 +103,9 @@
     en: suebi-visigoths-and-moors
     ru: sveby-vestgoty-i-mavry
   order: 2
+  years:
+    from: 409
+    to: 1139
   name:
     pt: "Suevos, visigodos e mouros"
     en: "Suebi, Visigoths and Moors"
@@ -116,6 +122,9 @@
     en: birth-of-the-kingdom-and-reconquista
     ru: rozhdenie-korolevstva-i-rekonkista
   order: 3
+  years:
+    from: 1139
+    to: 1249
   name:
     pt: "Nascimento do reino e Reconquista"
     en: "Birth of the Kingdom and the Reconquista"
@@ -132,6 +141,9 @@
     en: union-restoration-and-brazilian-gold
     ru: uniya-restavraciya-i-zoloto-brazilii
   order: 5
+  years:
+    from: 1580
+    to: 1750
   name:
     pt: "União, Restauração e ouro do Brasil"
     en: "Union, Restoration and Brazilian Gold"
@@ -148,6 +160,9 @@
     en: monarchy-and-republic
     ru: monarhiya-i-respublika
   order: 7
+  years:
+    from: 1820
+    to: 1926
   name:
     pt: "Monarquia e República"
     en: "Monarchy and Republic"
@@ -164,6 +179,9 @@
     en: present-day-eu-and-emigration
     ru: sovremennost-es-i-emigraciya
   order: 9
+  years:
+    from: 1974
+    to: 2026
   name:
     pt: "Atualidade: UE e emigração"
     en: "The present day: the EU and emigration"

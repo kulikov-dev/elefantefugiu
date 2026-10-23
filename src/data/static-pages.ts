@@ -414,7 +414,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Privacidade',
           paragraphs: [
             'Não há contas, cookies, rastreadores nem publicidade. Não recolhemos dados pessoais ao ler o site.',
-            'O que fica no seu navegador (armazenamento local, nunca enviado para lado nenhum): o idioma escolhido, o tema claro ou escuro, o modo família, a última época visitada e a última história de «Surpreende-me». Pode apagá-lo a qualquer momento nas definições do navegador. Sem eles, o site funciona na mesma.',
+            'O que fica no seu navegador (armazenamento local, nunca enviado para lado nenhum): o idioma escolhido, o tema claro ou escuro, o modo família, a última época visitada e a última história de «Surpreende-me». Pode apagá-lo a qualquer momento nas definições do navegador. Sem eles, o site funciona na mesma. Se carregar em «Perto de mim», o navegador pede autorização para a localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
             'Quem aloja: as páginas são servidas pelo GitHub Pages (GitHub, Inc.), que pode registar o endereço IP dos pedidos, conforme a sua própria política de privacidade.',
             'Mapa: nas páginas com mapa, o seu navegador pede os mosaicos do mapa a um servidor de mapas (OpenStreetMap ou o fornecedor indicado na atribuição do mapa), que recebe o seu endereço IP. «Como chegar» abre openstreetmap.org só se clicar.',
             'Aviso de erro: se enviar o formulário de {{report}}, a sua mensagem e, se a indicar, a sua morada de e-mail seguem por e-mail para a equipa através do serviço FormSubmit (formsubmit.co), que a encaminha. Usamo-la só para corrigir o erro e responder-lhe. Se preferir, escreva diretamente para {{email}}.',
@@ -454,7 +454,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Privacy',
           paragraphs: [
             'There are no accounts, cookies, trackers or advertising. We collect no personal data when you read the site.',
-            'What stays in your browser (local storage, never sent anywhere): the language you chose, the light or dark theme, family mode, the last era you visited and the last “Surprise me” story. You can delete it at any time in your browser settings. Without it the site works just the same.',
+            'What stays in your browser (local storage, never sent anywhere): the language you chose, the light or dark theme, family mode, the last era you visited and the last “Surprise me” story. You can delete it at any time in your browser settings. Without it the site works just the same. If you press “Near me”, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
             'Hosting: the pages are served by GitHub Pages (GitHub, Inc.), which may log the IP address of requests under its own privacy policy.',
             'Map: on pages with a map your browser requests map tiles from a map server (OpenStreetMap or the provider named in the map attribution), which receives your IP address. “Get directions” opens openstreetmap.org only if you click it.',
             'Mistake reports: if you send the {{report}} form, your message and, if you give one, your email address travel by email to the team through the FormSubmit service (formsubmit.co), which forwards it. We use it only to correct the mistake and to reply to you. If you prefer, write directly to {{email}}.',
@@ -494,7 +494,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Приватность',
           paragraphs: [
             'У нас нет аккаунтов, куки, трекеров и рекламы. Мы не собираем личные данные, когда вы читаете сайт.',
-            'В вашем браузере (локальное хранилище, оно никуда не отправляется) остаются: выбранный язык, светлая или тёмная тема, семейный режим, последняя посещённая эпоха и последняя история из «Удиви меня». Это можно удалить в любой момент в настройках браузера. Без них сайт работает так же.',
+            'В вашем браузере (локальное хранилище, оно никуда не отправляется) остаются: выбранный язык, светлая или тёмная тема, семейный режим, последняя посещённая эпоха и последняя история из «Удиви меня». Это можно удалить в любой момент в настройках браузера. Без них сайт работает так же. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
             'Хостинг: страницы отдаёт GitHub Pages (GitHub, Inc.), который может записывать IP-адреса запросов согласно собственной политике приватности.',
             'Карта: на страницах с картой браузер запрашивает плитки карты у сервера карт (OpenStreetMap или поставщика, названного в подписи карты), и этот сервер получает ваш IP-адрес. Ссылка «Как добраться» открывает openstreetmap.org, только если вы по ней перейдёте.',
             'Сообщение об ошибке: если вы отправите форму на странице «{{report}}», ваше сообщение и, если вы его укажете, адрес вашей почты уйдут команде по электронной почте через сервис FormSubmit (formsubmit.co), который перешлёт их. Мы используем их только чтобы исправить ошибку и ответить вам. Если хотите, пишите прямо на {{email}}.',
