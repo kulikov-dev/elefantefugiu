@@ -13,9 +13,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const options = [
-  { value: 'all', label: t(lang, 'family.opt_all') },
-  { value: '12', label: t(lang, 'family.opt_12') },
-  { value: 'off', label: t(lang, 'family.opt_off') },
+  { value: 'all', label: t(lang, 'family.opt_all'), hint: t(lang, 'family.opt_all_hint') },
+  { value: '12', label: t(lang, 'family.opt_12'), hint: t(lang, 'family.opt_12_hint') },
+  { value: 'off', label: t(lang, 'family.opt_off'), hint: '' },
 ] as const;
 // The part after the colon is the short state shown beside the icon on a phone ("under 12", "12+").
 const shortOf = (text: string) => text.split(': ')[1] ?? text;
@@ -52,13 +52,15 @@ const shortOf = (text: string) => text.split(': ')[1] ?? text;
       {
         options.map((option) => (
           <label class="family-menu__option" data-value={option.value}>
-            <input type="radio" name="family" value={option.value} checked={option.value === 'off'} />
-            <span>{option.label}</span>
+            <input type="radio" name="family" value={option.value} checked={option.value === 'off'} aria-describedby={option.hint ? `family-hint-${option.value}` : undefined} />
+            <span class="family-menu__text">
+              <span class="family-menu__label">{option.label}</span>
+              {option.hint && <span class="family-menu__hint" id={`family-hint-${option.value}`}>{option.hint}</span>}
+            </span>
           </label>
         ))
       }
     </div>
-    <p class="family-menu__note">{t(lang, 'family.note')}</p>
     <span
       class="visually-hidden"
       role="status"

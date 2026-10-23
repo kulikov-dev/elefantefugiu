@@ -69,7 +69,7 @@ Pode ler por épocas, por fios (o mar, comida e vinho, poder e revolta, gente co
 
 - Para quem gosta de história, mas não de manuais.
 - Para quem viaja e quer saber o que aconteceu exatamente onde está.
-- Para famílias. O botão «Com crianças» no topo esconde as histórias sobre guerra, execuções e repressão.
+- Para famílias. O botão «Com crianças» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.
 
 ## Pode confiar nisto?
 
@@ -115,7 +115,7 @@ Quando as fontes divergem, damos as duas versões ou escrevemos «cerca de»: «
 
 ## Crianças e temas difíceis
 
-A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Com crianças» no topo esconde-as por completo.
+A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Com crianças» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.
 
 ## Imagens
 

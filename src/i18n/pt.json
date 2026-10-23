@@ -226,7 +226,6 @@
     "opt_all": "Menos de 12 anos",
     "opt_12": "12 anos ou mais",
     "opt_off": "Mostrar tudo",
-    "note": "As histórias sobre guerra, execuções e repressão ficam ocultas.",
     "hidden": "Histórias ocultas: {n}.",
     "show_hidden": "Mostrar todas",
     "status_off": "Modo família desligado: todas as histórias estão visíveis.",
@@ -234,7 +233,9 @@
     "status_12": "Modo família: histórias para maiores de 12 anos.",
     "footer_hint": "O modo família precisa de JavaScript. Sem ele, todas as histórias ficam visíveis.",
     "empty": "Neste modo ainda não há histórias aqui.",
-    "show_all": "Mostrar todos os modos"
+    "show_all": "Mostrar todos os modos",
+    "opt_all_hint": "Sem batalhas, violência nem temas difíceis",
+    "opt_12_hint": "Sem temas difíceis: repressão, perseguição, morte"
   },
   "gate": {
     "age_12": "Esta história é para adolescentes 12+.",

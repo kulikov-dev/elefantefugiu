@@ -8,8 +8,8 @@ const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const POMBAL = { pt: '/pt/epoca/pombal-e-terramoto/', en: '/en/era/pombal-and-the-earthquake/' };
 const WORDS = {
-  pt: { button: 'Com crianças', all: 'Com crianças: até 12', twelve: 'Com crianças: 12+', hidden: 'Histórias ocultas', showAll: 'Mostrar todas', note: 'guerra, execuções e repressão' },
-  en: { button: 'With kids', all: 'With kids: under 12', twelve: 'With kids: 12+', hidden: 'Hidden stories', showAll: 'Show all', note: 'war, executions and repression' },
+  pt: { button: 'Com crianças', all: 'Com crianças: até 12', twelve: 'Com crianças: 12+', hidden: 'Histórias ocultas', showAll: 'Mostrar todas', hint_all: 'Sem batalhas, violência nem temas difíceis', hint_12: 'Sem temas difíceis: repressão, perseguição, morte' },
+  en: { button: 'With kids', all: 'With kids: under 12', twelve: 'With kids: 12+', hidden: 'Hidden stories', showAll: 'Show all', hint_all: 'No battles, violence or difficult topics', hint_12: 'No difficult topics: repression, persecution, death' },
 };
 
 let failed = 0;
@@ -75,9 +75,11 @@ if (want('menu')) {
     ok(`menu (${lang}): closed at first`, !(await page.$eval('[data-family-menu]', (d) => d.open)));
     await page.click('[data-family-menu] summary');
     ok(`menu (${lang}): opens on the button, shows the question and three answers`, (await page.$$eval('[data-family-menu] input[type=radio]', (r) => r.length)) === 3 && (await visible(page, '#family-question')));
-    const names = await page.$$eval('[data-family-menu] .family-menu__option span', (s) => s.map((x) => x.textContent.trim()));
+    const names = await page.$$eval('[data-family-menu] .family-menu__label', (s) => s.map((x) => x.textContent.trim()));
     ok(`menu (${lang}): the answers are under 12, 12 and over, show everything (in this order)`, JSON.stringify(names) === JSON.stringify(lang === 'pt' ? ['Menos de 12 anos', '12 anos ou mais', 'Mostrar tudo'] : ['Under 12', '12 and over', 'Show everything']), names.join(' | '));
-    ok(`menu (${lang}): the small line about war, executions and repression`, (await page.$eval('.family-menu__note', (p) => p.textContent)).includes(w.note));
+    const hints = await page.$$eval('[data-family-menu] .family-menu__option', (o) => o.map((x) => x.querySelector('.family-menu__hint')?.textContent.trim() ?? ''));
+    ok(`menu (${lang}): under "under 12" and "12 and over" an explanation of what is left out, none under "show everything" and no common line`, hints[0].length > 10 && hints[1].length > 10 && hints[2] === '' && (await page.$('.family-menu__note')) === null, hints.join(' | '));
+    ok(`menu (${lang}): the explanations are the agreed words`, hints[0] === w.hint_all && hints[1] === w.hint_12, hints.slice(0, 2).join(' | '));
     ok(`menu (${lang}): "show everything" is chosen by default`, await page.$eval('[data-family-menu] input[value=off]', (i) => i.checked));
     // under 12 -> all
     await page.click('[data-family-menu] .family-menu__option[data-value="all"]');

@@ -69,7 +69,7 @@ You can read by era, by thread (the sea, food and wine, power and revolt, people
 
 - For people who love history but not textbooks.
 - For travellers who want to know what happened right where they're standing.
-- For families. The "With kids" button in the header hides stories about war, executions and repression.
+- For families. The "With kids" button in the header hides stories with battles and difficult topics: you choose the youngest reader's age.
 
 ## Can you trust it
 
@@ -115,7 +115,7 @@ When sources disagree, we give both versions or say "about": "1778 or 1782". Arm
 
 ## Children and difficult topics
 
-Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The "With kids" button in the header hides them altogether.
+Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The "With kids" button in the header hides stories with battles and difficult topics: you choose the youngest reader's age.
 
 ## Images
 

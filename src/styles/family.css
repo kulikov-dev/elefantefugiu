@@ -147,7 +147,8 @@ html[data-family='12'] [data-mode-text='12'] {
 
 .family-menu__option {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding-block: var(--space-2);
   gap: var(--space-3);
   min-height: var(--touch-target);
   cursor: pointer;
@@ -167,8 +168,13 @@ html[data-family='12'] [data-mode-text='12'] {
   outline-offset: var(--ring-offset-tight);
 }
 
-.family-menu__note {
-  margin-block-start: var(--space-2);
+.family-menu__text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* The explanation under an answer: what the mode leaves out. */
+.family-menu__hint {
   color: var(--color-ink-muted);
   font-size: var(--text-sm);
 }

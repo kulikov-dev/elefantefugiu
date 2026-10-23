@@ -54,7 +54,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Para quem',
           paragraphs: [],
-          items: ['Para quem gosta de história, mas não de manuais.', 'Para quem viaja e quer saber o que aconteceu exatamente onde está.', 'Para famílias. O botão «Com crianças» no topo esconde as histórias sobre guerra, execuções e repressão.'],
+          items: ['Para quem gosta de história, mas não de manuais.', 'Para quem viaja e quer saber o que aconteceu exatamente onde está.', 'Para famílias. O botão «Com crianças» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
         },
         {
           id: 'confianca',
@@ -100,7 +100,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Who it’s for',
           paragraphs: [],
-          items: ['For people who love history but not textbooks.', 'For travellers who want to know what happened right where they’re standing.', 'For families. The “With kids” button in the header hides stories about war, executions and repression.'],
+          items: ['For people who love history but not textbooks.', 'For travellers who want to know what happened right where they’re standing.', 'For families. The “With kids” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
         },
         {
           id: 'confianca',
@@ -146,7 +146,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Для кого',
           paragraphs: [],
-          items: ['Для тех, кто любит историю, но не учебники.', 'Для путешественников, которым интересно, что случилось именно там, где они стоят.', 'Для семей. Кнопка «С детьми» в шапке скрывает истории о войне, казнях и репрессиях.'],
+          items: ['Для тех, кто любит историю, но не учебники.', 'Для путешественников, которым интересно, что случилось именно там, где они стоят.', 'Для семей. Кнопка «С детьми» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
         },
         {
           id: 'confianca',
@@ -196,7 +196,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idades',
           heading: 'Crianças e temas difíceis',
-          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Com crianças» no topo esconde-as por completo.'],
+          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Com crianças» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
         },
         {
           id: 'imagens',
@@ -237,7 +237,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idades',
           heading: 'Children and difficult topics',
-          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “With kids” button in the header hides them altogether.'],
+          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “With kids” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
         },
         {
           id: 'imagens',
@@ -278,7 +278,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idades',
           heading: 'Дети и тяжёлые темы',
-          paragraphs: ['Большинство историй подходят для любого возраста и не имеют метки. Метка 12+ стоит там, где есть сражения или жестокость. Перед историями о репрессиях, преследованиях и смерти мы предупреждаем и спрашиваем, хотите ли вы продолжить. В таких историях нет шуток и слона. Кнопка «С детьми» в шапке скрывает их совсем.'],
+          paragraphs: ['Большинство историй подходят для любого возраста и не имеют метки. Метка 12+ стоит там, где есть сражения или жестокость. Перед историями о репрессиях, преследованиях и смерти мы предупреждаем и спрашиваем, хотите ли вы продолжить. В таких историях нет шуток и слона. Кнопка «С детьми» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
         },
         {
           id: 'imagens',
