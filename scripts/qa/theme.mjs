@@ -1,21 +1,36 @@
 // Browser checks for stage 7b-1: theme, epoch palettes, fonts, header on phones.
-// Run against dist/ served by serve.mjs (base path "/"):   node theme.mjs [flash keyboard blocked fonts header palette]
+// Run against dist/ served by serve.mjs (base path "/"):   node theme.mjs [variant] [flash keyboard blocked fonts header palette fallback]
+// The cards and epochs come from src/content (data.mjs). `variant` runs against the fixture build, where the epoch Estado Novo
+// has published cards, so its palette (grey, the red kept for the flash) can be checked too; the real site has two ready epochs.
 // Expected colours are the values of docs/visual-direction.md sections 2 and 3 (written out here, independent of tokens.css);
 // stage 7b-2 changed two light tints (Avis, Pombal) and made grey the primary colour of Estado Novo (the red is --epoch-flash).
-import { fsPath, launchBrowser } from './browser.mjs';
+import { launchBrowser } from './browser.mjs';
 import { readFileSync } from 'node:fs';
+import { fsPath } from './browser.mjs';
+import { epochPath, fixture, need, pt, real, threadPath } from './data.mjs';
 
-const base = process.env.BASE_URL || 'http://localhost:4400';
-const ONLY = process.argv.slice(2);
+const VARIANT = process.argv[2] === 'variant';
+const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
+const world = VARIANT ? fixture : real;
+const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
 const BG = { light: '#f6f1e7', dark: '#14110e' };
 const hex = (rgb) => '#' + (rgb.match(/\d+/g) ?? []).slice(0, 3).map((n) => Number(n).toString(16).padStart(2, '0')).join('');
-const EPOCHS = {
+const EPOCHS_ALL = {
   'avis-e-descobrimentos': { slug: { pt: 'avis-e-descobrimentos', en: 'avis-and-discoveries' }, tint: { light: '#e3e8dc', dark: '#0e2430' }, primary: { light: '#0f5c73', dark: '#5fb3c9' } },
   'pombal-e-terramoto': { slug: { pt: 'pombal-e-terramoto' }, tint: { light: '#f3e2cb', dark: '#241a14' }, primary: { light: '#a9482a', dark: '#e58a68' } },
   'estado-novo-e-25-de-abril': { slug: { pt: 'estado-novo-e-25-de-abril' }, tint: { light: '#ece9e3', dark: '#181817' }, primary: { light: '#4a4a48', dark: '#b8b6b0' } },
 };
+
+// Only the epochs that have a page in this build.
+const EPOCHS = Object.fromEntries(Object.entries(EPOCHS_ALL).filter(([id]) => world.readyEpochs.some((m) => m.id === id)));
+const firstEpoch = world.readyEpochs[0];
+const lastEpoch = world.readyEpochs.at(-1);
+const plainCard = need('a card of the first ready epoch', () => world.inEpoch(firstEpoch.id)[0]);
+const otherCard = world.published.find((c) => c.id !== plainCard.id && c.epoch === firstEpoch.id);
+const interactiveCard = need('a card with an interactive', () => world.published.find((c) => c.interactive));
+const aThread = world.threadsIn(lastEpoch.id)[0];
 
 let failed = 0;
 const ok = (name, cond, extra = '') => {
@@ -123,9 +138,9 @@ if (want('flash')) {
   // the family-mode state still has no flash next to the theme (one head script)
   const both = await newPage({ theme: 'dark', noScripts: true });
   await both.evaluateOnNewDocument(() => localStorage.setItem('family', 'all'));
-  await both.goto(`${base}/pt/epoca/estado-novo-e-25-de-abril/?fio=poder-e-revolta&vista=grelha`, { waitUntil: 'load' });
+  await both.goto(`${base}${epochPath(lastEpoch)}?fio=${aThread.id}&vista=grelha`, { waitUntil: 'load' });
   const all = await both.evaluate(() => { const h = document.documentElement; return { family: h.dataset.family, theme: h.dataset.theme, fio: h.dataset.fio, vista: h.dataset.vista, epoch: h.dataset.epoch }; });
-  ok('one head script sets theme, family mode, thread and view together', all.family === 'all' && all.theme === 'dark' && all.fio === 'poder-e-revolta' && all.vista === 'grelha' && all.epoch === 'estado-novo-e-25-de-abril', JSON.stringify(all));
+  ok('one head script sets theme, family mode, thread and view together', all.family === 'all' && all.theme === 'dark' && all.fio === aThread.id && all.vista === 'grelha' && all.epoch === lastEpoch.id, JSON.stringify(all));
   await both.close();
 }
 
@@ -183,7 +198,7 @@ if (want('blocked')) {
   await tap(page, '[data-theme-toggle]');
   await wait(100);
   ok('blocked storage: the button still switches the theme on the page', (await page.evaluate(() => document.documentElement.dataset.theme)) === 'light' && hex(await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === BG.light && page.errors.length === 0, page.errors.join(';'));
-  await page.goto(`${base}/pt/historia/evento-exemplo-02/`, { waitUntil: 'load' });
+  await page.goto(`${base}${pt(interactiveCard)}`, { waitUntil: 'load' });
   ok('blocked storage: a card page with an interactive loads without errors', page.errors.length === 0, page.errors.join(';'));
   await page.close();
   for (const junk of ['sepia', '1', '{"a":1}', '']) {
@@ -207,7 +222,7 @@ if (want('palette')) {
     }
   }
   const card = await newPage({ theme: 'dark' });
-  await card.goto(`${base}/pt/historia/evento-exemplo-01/`, { waitUntil: 'load' });
+  await card.goto(`${base}${pt(plainCard)}`, { waitUntil: 'load' });
   ok('a card has data-epoch of its epoch and its palette', (await card.evaluate(() => document.documentElement.dataset.epoch)) === 'avis-e-descobrimentos' && hex(await card.evaluate(() => getComputedStyle(document.body).backgroundColor)) === EPOCHS['avis-e-descobrimentos'].tint.dark);
   await card.close();
   for (const path of ['/pt/', '/pt/mapa/', '/pt/sobre/']) {
@@ -225,7 +240,7 @@ if (want('palette')) {
     weights.push(await p.evaluate(() => { const c = getComputedStyle(document.querySelector('h1')); return [c.fontWeight, c.fontFamily.split(',')[0].replace(/['"]/g, '')]; }));
     await p.close();
   }
-  ok('epoch headings differ by weight, not by family', new Set(weights.map((w) => w[0])).size === 3 && new Set(weights.map((w) => w[1])).size === 1 && weights[0][1] === 'Playfair Display', JSON.stringify(weights));
+  ok('epoch headings differ by weight, not by family', new Set(weights.map((w) => w[0])).size === Object.keys(EPOCHS).length && new Set(weights.map((w) => w[1])).size === 1 && weights[0][1] === 'Playfair Display', JSON.stringify(weights));
 }
 
 // ---------- 4b. A browser without light-dark(): the light theme ----------
@@ -274,8 +289,13 @@ if (want('fallback')) {
   const look = (page) => page.evaluate(() => {
     const body = getComputedStyle(document.body);
     const link = document.querySelector('main a') ?? document.querySelector('a');
-    const button = document.querySelector('.family-toggle__option span');
-    return { bg: body.backgroundColor, text: body.color, link: getComputedStyle(link).color, active: button ? getComputedStyle(document.querySelector('.family-toggle__option[data-value="off"] span')).backgroundColor : null, scheme: getComputedStyle(document.documentElement).colorScheme };
+    // The accent of the epoch (its primary colour), read through a probe that paints with the token.
+    const probe = document.createElement('i');
+    probe.style.background = 'var(--epoch-primary)';
+    document.body.append(probe);
+    const accent = getComputedStyle(probe).backgroundColor;
+    probe.remove();
+    return { bg: body.backgroundColor, text: body.color, link: getComputedStyle(link).color, active: accent, scheme: getComputedStyle(document.documentElement).colorScheme };
   });
   for (const scheme of ['light', 'dark']) {
     const page = await open('/pt/', { scheme, keepBlock: true });
@@ -304,7 +324,7 @@ if (want('fallback')) {
 
 // ---------- 5. Fonts: self-hosted, no external requests ----------
 if (want('fonts')) {
-  const pages = ['/pt/', '/en/', '/pt/epoca/estado-novo-e-25-de-abril/', '/pt/historia/evento-exemplo-02/', '/en/story/example-event-03/', '/pt/mapa/', '/pt/fio/mar/', '/pt/sobre/', '/pt/pagina-inexistente/'];
+  const pages = ['/pt/', '/en/', epochPath(lastEpoch), pt(interactiveCard), `/en/story/${(otherCard ?? plainCard).slug.en}/`, '/pt/mapa/', threadPath(aThread), '/pt/sobre/', '/pt/pagina-inexistente/'];
   for (const path of pages) {
     const page = await newPage();
     const warnings = [];
@@ -320,7 +340,7 @@ if (want('fonts')) {
     await page.close();
   }
   // The local server answers an unknown address with a bare message, so the real 404 page is read from the build.
-  const notFound = readFileSync(new URL('../../dist/404.html', import.meta.url), 'utf8');
+  const notFound = readFileSync(fsPath(new URL('../../dist/404.html', import.meta.url)), 'utf8');
   ok('404.html: no font preload either', (notFound.match(/<link rel="preload" as="font"/g) ?? []).length === 0);
   const html = await (await fetch(`${base}/pt/`)).text();
   const css = await Promise.all([...html.matchAll(/href="(\/_astro\/[^"]+\.css)"/g)].map((m) => fetch(base + m[1]).then((r) => r.text())));
@@ -330,7 +350,9 @@ if (want('fonts')) {
   ok('no Cyrillic face in the built CSS', !/U\+04[0-9A-F]{2}/i.test(all));
   // The fallback faces are tuned to the web fonts by published metrics (scripts/font-fallbacks.mjs). Check the numbers
   // against real text widths: web font width / default Times-like (or Arial-like) font width must be near size-adjust.
-  const factors = Object.fromEntries([...readFileSync(new URL('../../src/styles/fonts.css', import.meta.url), 'utf8').matchAll(/font-family:\s*'([^']+) Fallback';[^}]*?size-adjust:\s*([\d.]+)%/g)].map((m) => [m[1], Number(m[2]) / 100]));
+  // Only the Latin faces: the Cyrillic ones (with unicode-range) have their own factors and would overwrite these.
+  const fallbackFaces = [...readFileSync(fsPath(new URL('../../src/styles/fonts.css', import.meta.url)), 'utf8').matchAll(/@font-face\s*\{[^}]*\}/g)].map((m) => m[0]).filter((block) => /Fallback'/.test(block) && !/unicode-range/.test(block));
+  const factors = Object.fromEntries(fallbackFaces.map((block) => [block.match(/font-family:\s*'([^']+) Fallback'/)[1], Number(block.match(/size-adjust:\s*([\d.]+)%/)[1]) / 100]));
   const probe = await newPage();
   await probe.goto(`${base}/pt/`, { waitUntil: 'networkidle0' });
   const measured = await probe.evaluate(async () => {
@@ -349,7 +371,7 @@ if (want('fonts')) {
   await probe.close();
   // No layout jump when the web fonts arrive. Needs the fallback faces to resolve (local() finds Times New Roman / Arial or
   // their metric twins); a headless browser without those fonts cannot show it, and the check says so instead of failing.
-  for (const path of ['/pt/historia/evento-exemplo-01/', '/pt/epoca/pombal-e-terramoto/']) {
+  for (const path of [pt(plainCard), epochPath(lastEpoch)]) {
     const page = await newPage();
     await page.setRequestInterception(true);
     page.removeAllListeners('request');
@@ -378,7 +400,7 @@ if (want('fonts')) {
   const page = await newPage();
   const sizes = [];
   page.on('response', async (r) => { if (/\.woff2/.test(r.url())) sizes.push([r.url().split('/').pop(), (await r.buffer()).length]); });
-  await page.goto(`${base}/pt/historia/evento-exemplo-01/`, { waitUntil: 'networkidle0' });
+  await page.goto(`${base}${pt(plainCard)}`, { waitUntil: 'networkidle0' });
   console.log(`INFO  fonts loaded by a card page: ${sizes.map(([n, s]) => `${n.split('.')[0]} ${(s / 1024).toFixed(1)} KB`).join('; ')}; total ${(sizes.reduce((a, [, s]) => a + s, 0) / 1024).toFixed(1)} KB`);
   await page.close();
 }

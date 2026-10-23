@@ -6,9 +6,13 @@
 //   17 18 19 20 22  published here and moved to the epoch Avis (with years inside it), so that this epoch has more than 8 cards (the
 //                   view switch "Timeline / Grid" appears from 9) and holds a heavy-topic card (19) and a 12+ card;
 //   21 23 24        published here in the epoch Estado Novo, all of them 16+: the age screen "16+" and an epoch that every family mode
-//                   leaves empty.
+//                   leaves empty;
+// and the marker limit of the map is lowered to 7 (in the copy only), because the real limit (30) is above the number of stories:
+// with it the map has clusters and the "Show more" button, which the map suites check.
 export const MOVED = ['evento-exemplo-17', 'evento-exemplo-18', 'evento-exemplo-19', 'evento-exemplo-20', 'evento-exemplo-22'];
 export const SIXTEEN = ['evento-exemplo-21', 'evento-exemplo-23', 'evento-exemplo-24'];
+/** The limit of markers on the map in the fixture build (the real one is DEFAULT_LIMIT in src/lib/markers.ts). */
+export const VARIANT_MARKER_LIMIT = 7;
 export const MOVED_TO = 'avis-e-descobrimentos';
 export const FIXTURE_EPOCH = 'estado-novo-e-25-de-abril';
 

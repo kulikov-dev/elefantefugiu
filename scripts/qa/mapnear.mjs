@@ -1,10 +1,15 @@
 // Browser checks for the map page tools: "Near me" (a fake position, a denied one), the list with hooks and distances, "Whole world"
 // and the plate for stories overseas, the marker style and legend, the epoch scale under the map.
 // Run against dist/ served by serve.mjs (base path "/"):   node mapnear.mjs [tools near list world markers scale]
-import { fsPath, launchBrowser } from './browser.mjs';
+import { launchBrowser } from './browser.mjs';
+import { fixture, overseasOf, real } from './data.mjs';
 
-const base = process.env.BASE_URL || 'http://localhost:4400';
-const ONLY = process.argv.slice(2);
+// `variant` runs against the fixture build (more cards than its marker limit of 7, so clusters exist); the rest runs on the real site.
+const VARIANT = process.argv[2] === 'variant';
+const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
+const world = VARIANT ? fixture : real;
+const OVERSEAS = overseasOf(world.published).length;
+const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const MAP = { pt: '/pt/mapa/', en: '/en/map/', ru: '/ru/karta/' };
 const LISBON = { latitude: 38.7075, longitude: -9.1364 }; // Praça do Comércio
@@ -114,19 +119,19 @@ if (want('world')) {
   for (const lang of ['pt', 'en', 'ru']) {
     const page = await open(MAP[lang]);
     const plate = await page.$eval('[data-overseas]', (b) => ({ hidden: b.hidden, text: b.textContent.trim() }));
-    ok(`world (${lang}): a plate says how many stories are overseas (2) and ends with an arrow`, !plate.hidden && /2/.test(plate.text) && /→/.test(plate.text), plate.text);
+    ok(`world (${lang}): a plate says how many stories are overseas (${OVERSEAS}) and ends with an arrow`, !plate.hidden && plate.text.includes(String(OVERSEAS)) && /→/.test(plate.text), plate.text);
     ok(`world (${lang}): no marker of a place abroad before the world view`, (await page.$$('.mk--place')).length === 0);
     await page.click('[data-overseas]');
     await wait(1500);
     const w = await page.evaluate(() => ({ places: document.querySelectorAll('.mk--place').length, hiddenPlate: document.querySelector('[data-overseas]').hidden }));
-    ok(`world (${lang}): the plate switches to the whole world: the places abroad are marked and the plate goes away`, w.places === 2 && w.hiddenPlate, JSON.stringify(w));
+    ok(`world (${lang}): the plate switches to the whole world: the places abroad are marked and the plate goes away`, w.places === OVERSEAS && w.hiddenPlate, JSON.stringify(w));
     await page.click('.map__tools a:nth-child(2)');
     await wait(1200);
     const back = await page.evaluate(() => ({ places: document.querySelectorAll('.mk--place').length, plate: !document.querySelector('[data-overseas]').hidden }));
     ok(`world (${lang}): "All of Portugal" goes back: no places abroad, the plate is back`, back.places === 0 && back.plate, JSON.stringify(back));
     await page.click('.map__tools a:nth-child(3)');
     await wait(1200);
-    ok(`world (${lang}): the "Whole world" button does the same as the plate`, (await page.$$('.mk--place')).length === 2);
+    ok(`world (${lang}): the "Whole world" button does the same as the plate`, (await page.$$('.mk--place')).length === OVERSEAS);
     await page.close();
   }
   const page = await open(`${MAP.pt}?fio=mar`);

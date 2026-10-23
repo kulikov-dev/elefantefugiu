@@ -1,12 +1,20 @@
 // Browser checks for stage 7b-2: azulejo patterns, the waiting tile of the map, layout shifts, a neutral header.
-// Run against dist/ served by serve.mjs (base path "/"):   node azulejo.mjs [patterns waiting motion shifts header]
-import { fsPath, launchBrowser } from './browser.mjs';
+// Run against dist/ served by serve.mjs (base path "/"):   node azulejo.mjs [variant] [patterns waiting motion shifts header]
+// The epochs and cards come from src/content (data.mjs). `variant` runs against the fixture build, where the epoch Estado Novo has
+// published cards: it gives the third pattern and the grey interface of that epoch; the real site has two ready epochs.
+import { launchBrowser } from './browser.mjs';
+import { fixture, need, pt, real } from './data.mjs';
 
-const base = process.env.BASE_URL || 'http://localhost:4400';
-const ONLY = process.argv.slice(2);
+const VARIANT = process.argv[2] === 'variant';
+const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
+const world = VARIANT ? fixture : real;
+const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
-const EPOCHS = ['avis-e-descobrimentos', 'pombal-e-terramoto', 'estado-novo-e-25-de-abril'];
+const EPOCHS = world.readyEpochs.filter((m) => ['avis-e-descobrimentos', 'pombal-e-terramoto', 'estado-novo-e-25-de-abril'].includes(m.id)).map((m) => m.id);
+const firstEpochId = EPOCHS[0];
+const plainCard = need('a card of the first ready epoch', () => world.inEpoch(firstEpochId)[0]);
+const frameCard = need('a key (frame) card', () => world.published.find((c) => c.level === 'frame'));
 const FILE = { 'avis-e-descobrimentos': 'bussola', 'pombal-e-terramoto': 'rombo', 'estado-novo-e-25-de-abril': 'rosa' };
 let failed = 0;
 const ok = (name, cond, extra = '') => {
@@ -69,17 +77,18 @@ if (want('patterns')) {
     }
   }
   const distinct = new Set(EPOCHS.map((id) => masks[id][0]));
-  ok(`patterns: three epochs, three different patterns (${EPOCHS.map((id) => FILE[id]).join(', ')})`, distinct.size === 3);
+  ok(`patterns: ${EPOCHS.length} epochs, ${EPOCHS.length} different patterns (${EPOCHS.map((id) => FILE[id]).join(', ')})`, distinct.size === EPOCHS.length);
   // Neither the epoch page nor the 404 page has the corner (it looked like a button that does nothing); the 404 page has the elephant.
   const p404 = await newPage();
   await p404.goto(`${base}/404.html`, { waitUntil: 'networkidle0' });
   ok('404: no corner signature', (await p404.$('.azulejo-corner')) === null);
   await p404.close();
-  // A key card of the feed has the band, a story card has none.
+  // The cards of the feed are equal and compact (the epoch page rework): key events and stories alike have no band of the pattern;
+  // the pattern is on the rule of the card page, the strip of the timeline and the page of the epoch.
   const feed = await newPage();
-  await feed.goto(epochUrl('avis-e-descobrimentos'), { waitUntil: 'networkidle0' });
-  const bands = await feed.evaluate(() => ({ frame: [...document.querySelectorAll('.ecard--frame')].every((c) => c.querySelector('.azulejo-rule')), story: [...document.querySelectorAll('.ecard--story')].every((c) => !c.querySelector('.azulejo-rule')), frames: document.querySelectorAll('.ecard--frame').length }));
-  ok('feed: every key event has a band of the pattern, stories have none', bands.frames > 0 && bands.frame && bands.story, JSON.stringify(bands));
+  await feed.goto(epochUrl(firstEpochId), { waitUntil: 'networkidle0' });
+  const bands = await feed.evaluate(() => ({ withBand: document.querySelectorAll('.ecard .azulejo-rule').length, cards: document.querySelectorAll('.ecard').length, frames: document.querySelectorAll('.ecard--frame').length }));
+  ok('feed: the cards are equal compact cards, none carries a band of the pattern (key events included)', bands.cards > 0 && bands.frames > 0 && bands.withBand === 0, JSON.stringify(bands));
   await feed.close();
 }
 
@@ -154,7 +163,7 @@ if (want('motion')) {
 
 // ---------- 4. No layout shifts when pictures load ----------
 if (want('shifts')) {
-  for (const path of ['/pt/historia/evento-exemplo-01/', '/pt/epoca/avis-e-descobrimentos/', '/pt/epoca/avis-e-descobrimentos/?vista=grelha']) {
+  for (const path of [pt(plainCard), `/pt/epoca/${firstEpochId}/`, `/pt/epoca/${firstEpochId}/?vista=grelha`]) {
     for (const width of [360, 1280]) {
       const page = await newPage({ width });
       await page.evaluateOnNewDocument(() => {
@@ -165,7 +174,7 @@ if (want('shifts')) {
       // Scroll to the end so every lazy picture loads, then let the page settle.
       await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); } });
       await wait(500);
-      const s = await page.evaluate(() => ({ cls: window.__cls, imgs: [...document.images].map((i) => ({ w: i.getAttribute('width'), h: i.getAttribute('height'), ratio: getComputedStyle(i).aspectRatio, bg: getComputedStyle(i).backgroundColor })) }));
+      const s = await page.evaluate(() => ({ cls: window.__cls, imgs: [...document.images].filter((i) => !i.closest('.mascot, .brand, .minimap, .leaflet-container') && !i.classList.contains('mascot')).map((i) => ({ w: i.getAttribute('width'), h: i.getAttribute('height'), ratio: getComputedStyle(i).aspectRatio, bg: getComputedStyle(i).backgroundColor })) }));
       ok(`shifts (${path}, ${width} px): every picture reserves its place by proportion and has a token colour behind it`, s.imgs.every((i) => (i.w && i.h) || i.ratio !== 'auto') && s.imgs.every((i) => i.bg !== 'rgba(0, 0, 0, 0)'), JSON.stringify(s.imgs.slice(0, 2)));
       ok(`shifts (${path}, ${width} px): layout shift score ${s.cls.toFixed(3)} (at most 0.05)`, s.cls <= 0.05);
       await page.close();
@@ -175,7 +184,7 @@ if (want('shifts')) {
 
 // ---------- 5. The header is neutral on every epoch ----------
 if (want('header')) {
-  const pages = ['/pt/', ...EPOCHS.map((id) => `/pt/epoca/${id}/`), '/pt/historia/evento-exemplo-01/', '/pt/historia/evento-exemplo-17/', '/pt/mapa/'];
+  const pages = ['/pt/', ...EPOCHS.map((id) => `/pt/epoca/${id}/`), pt(plainCard), pt(frameCard), '/pt/mapa/'];
   for (const scheme of ['light', 'dark']) {
     const looks = [];
     for (const path of pages) {
@@ -190,10 +199,11 @@ if (want('header')) {
       await page.close();
     }
     const head = (l) => JSON.stringify([l.logo, l.lang, l.langInk, l.header, l.footer]);
-    ok(`header (${scheme}): logo, language switch, header and footer have the same colours on the home page, three epochs, two cards and the map`, new Set(looks.map(head)).size === 1, JSON.stringify(looks.map((l) => [l.path, l.logo, l.lang])));
-    ok(`header (${scheme}): the page behind them still follows the epoch (the three epochs differ from each other)`, new Set(looks.slice(1, 4).map((l) => l.body)).size === 3);
+    ok(`header (${scheme}): logo, language switch, header and footer have the same colours on the home page, every epoch, two cards and the map`, new Set(looks.map(head)).size === 1, JSON.stringify(looks.map((l) => [l.path, l.logo, l.lang])));
+    ok(`header (${scheme}): the page behind them still follows the epoch (the epochs differ from each other)`, new Set(looks.slice(1, 1 + EPOCHS.length).map((l) => l.body)).size === EPOCHS.length);
   }
-  // Estado Novo: the interface is grey, not carnation red.
+  // Estado Novo: the interface is grey, not carnation red (only the fixture build has a page of this epoch).
+  if (EPOCHS.includes('estado-novo-e-25-de-abril')) {
   const en = await newPage();
   await en.goto(epochUrl('estado-novo-e-25-de-abril'), { waitUntil: 'load' });
   const grey = await en.evaluate(() => {
@@ -202,6 +212,7 @@ if (want('header')) {
   });
   ok('estado novo: the primary colour of the interface is grey (#4a4a48), the flash red is kept apart, and no test card is marked (none is from 1974)', /#4a4a48/i.test(grey.primary) && /#4a4a48/i.test(grey.accent) && /#c41e3a/i.test(grey.flash) && grey.flashCards === 0, JSON.stringify(grey));
   await en.close();
+  }
 }
 
 await browser.close();

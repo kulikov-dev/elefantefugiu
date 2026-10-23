@@ -13,7 +13,7 @@ import ThreadChip from '../components/ThreadChip.astro';
 import MapBlock from '../components/MapBlock.astro';
 import { LOCALES, altPaths, epochHref, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { ageInfoOf, countByMode, familyAttrs, zeroModes } from '../lib/family';
-import { feedFilterCss } from '../lib/epoch-filter';
+import { feedFilterCss, gridAvailable } from '../lib/epoch-filter';
 import { pluralForms, t, tAll } from '../i18n';
 import {
   epochFeed,
@@ -163,6 +163,12 @@ const noindex = epoch.placeholder || feed.some((e) => e.placeholder);
       <section class="epoch__feed" aria-labelledby="timeline-title">
         <h2 id="timeline-title" class="visually-hidden">{t(lang, 'epoch.timeline_label')}</h2>
         <FamilyNote lang={lang} cards={feed.map(ageInfoOf)} />
+        {
+          /* The grid needs enough stories (the switch is hidden below that, and the script falls back to the timeline). The head script has
+             already set data-vista from ?vista=grelha: drop it here, before the feed is painted, so a short epoch does not jump from the grid
+             to the timeline when the script arrives. */
+          !gridAvailable(feed.length) && <script is:inline set:html="delete document.documentElement.dataset.vista;" />
+        }
         <ol class="feed" data-view="timeline">
           {
             feed.map((event) => (

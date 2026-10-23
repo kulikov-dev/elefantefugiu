@@ -7,7 +7,7 @@ import { execSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { FIXTURE_EPOCH, MOVED, MOVED_TO, SIXTEEN, variantOf } from './variant-plan.mjs';
+import { FIXTURE_EPOCH, MOVED, MOVED_TO, SIXTEEN, VARIANT_MARKER_LIMIT, variantOf } from './variant-plan.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const out = join(process.env.QA_VARIANT_DIR || tmpdir(), 'elefante-variant');
@@ -33,6 +33,11 @@ for (const name of readdirSync(dir)) {
 }
 if (changed !== MOVED.length + SIXTEEN.length) throw new Error(`variant: expected ${MOVED.length + SIXTEEN.length} fixture cards, changed ${changed}`);
 console.log(`fixtures: ${MOVED.length} moved to ${MOVED_TO}, ${SIXTEEN.length} set to 16+ in ${FIXTURE_EPOCH}`);
+// A lower marker limit, in the copy only.
+const markers = join(out, 'src/lib/markers.ts');
+const markersText = readFileSync(markers, 'utf8');
+if (!/export const DEFAULT_LIMIT = \d+;/.test(markersText)) throw new Error('variant: DEFAULT_LIMIT not found in src/lib/markers.ts');
+writeFileSync(markers, markersText.replace(/export const DEFAULT_LIMIT = \d+;/, `export const DEFAULT_LIMIT = ${VARIANT_MARKER_LIMIT};`));
 execSync('npx astro build', { cwd: out, stdio: 'inherit', env: { ...process.env, ALLOW_PLACEHOLDER: 'true' } });
 if (!existsSync(join(out, 'dist/index.html'))) throw new Error('variant build failed');
 console.log(`variant ready: DIST=${join(out, 'dist')} node serve.mjs 4401`);

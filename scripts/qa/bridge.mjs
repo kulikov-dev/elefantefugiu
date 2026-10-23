@@ -1,23 +1,24 @@
 // Browser checks for stage 5c: the map marks the bridge (not the place), the marker preview, "Como chegar", the bridge block.
 // Run against dist/ served by serve.mjs:   node bridge.mjs [preview caption directions block weight]
-import { fsPath, launchBrowser } from './browser.mjs';
-import { createRequire } from 'node:module';
-import { readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { launchBrowser } from './browser.mjs';
 import { gzipSync } from 'node:zlib';
+import { need, published, threads as threadsData } from './data.mjs';
 
-const require = createRequire(import.meta.url);
-const { parse } = require('../../node_modules/yaml');
-const root = fsPath(new URL('../../', import.meta.url));
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
-const events = readdirSync(join(root, 'src/content/events')).map((n) => parse(readFileSync(join(root, 'src/content/events', n), 'utf8'), { schema: 'core', customTags: ['timestamp'] })).filter((e) => e.status === 'ready');
-const byId = (id) => events.find((e) => e.id === id);
-const threadsData = parse(readFileSync(join(root, 'src/content/threads.yaml'), 'utf8'), { schema: 'core' });
-const GOA = byId('evento-exemplo-05'); // place in Goa, bridge in Lisbon (Belém)
-const FAR = byId('evento-exemplo-03'); // bridge a few km from the place
+// Two published cards, chosen from the data: one whose place is far from its bridge (a story told elsewhere, the bridge is in Portugal:
+// the map must mark the bridge, not the place) and one whose bridge is a few km from the place.
+const km = (a, b) => {
+  const r = Math.PI / 180;
+  return 6371 * Math.acos(Math.min(1, Math.sin(a.lat * r) * Math.sin(b.lat * r) + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.cos((a.lon - b.lon) * r)));
+};
+const GOA = need('a story whose place is more than 1000 km from its bridge', (list) => list.find((e) => km(e.place, e.bridge) > 1000));
+const FAR = need('a story whose bridge is 2 to 30 km from the place', (list) => list.find((e) => km(e.place, e.bridge) > 2 && km(e.place, e.bridge) < 30));
+// The name of the bridge as the site shows it: the short title in the language when the card has one, else the name.
+const bname = (e, lang = 'pt') => (e.bridge.title?.[lang]?.trim() || e.bridge.name);
+const events = published;
 const SEG = { pt: 'historia', en: 'story' };
 const UA = {
   android: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
@@ -78,7 +79,7 @@ if (want('preview')) {
     const page = await openMap(e.id);
     const p = await preview(page);
     const threads = e.threads.map((id) => threadsData.find((t) => t.id === id).name.pt);
-    ok(`preview of ${e.id}: "Hoje, aqui", bridge name, bridge address, then title, threads, hook, and the two buttons, in that order`, p.inOrder && p.today === 'Hoje, aqui' && p.name === e.bridge.name && p.address === e.bridge.address && p.title === e.title.pt && p.hook === norm(e.hook.pt), JSON.stringify({ today: p.today, name: p.name, address: p.address, title: p.title }));
+    ok(`preview of ${e.id}: "Hoje, aqui", bridge name, bridge address, then title, threads, hook, and the two buttons, in that order`, p.inOrder && p.today === 'Hoje, aqui' && p.name === bname(e) && p.address === e.bridge.address && p.title === e.title.pt && p.hook === norm(e.hook.pt), JSON.stringify({ today: p.today, name: p.name, address: p.address, title: p.title }));
     ok(`preview of ${e.id}: the threads of the card are listed`, threads.every((t) => p.threads.includes(t)), p.threads.join(', '));
     ok(`preview of ${e.id}: exactly two buttons, "Abrir" and "Como chegar"`, p.buttons.length === 2 && p.buttons[0] === 'Abrir' && p.buttons[1] === 'Como chegar', p.buttons.join(' | '));
     ok(`preview of ${e.id}: "Abrir" leads to the card, "Como chegar" to OpenStreetMap at the BRIDGE with rel="noopener"`, p.openHref.endsWith(`/${SEG.pt}/${e.slug.pt}/`) && p.howHref === osm(e) && /noopener/.test(p.howRel), `${p.openHref} ${p.howHref}`);
@@ -90,7 +91,7 @@ if (want('preview')) {
   await ready(en);
   await en.waitForSelector('[data-map-preview]:not([hidden])');
   const pe = await preview(en);
-  ok('preview in English: "Today, here", the bridge, "Open" and "Get directions"', pe.today === 'Today, here' && pe.name === GOA.bridge.name && pe.buttons.join('|') === 'Open|Get directions', JSON.stringify(pe.buttons));
+  ok('preview in English: "Today, here", the bridge, "Open" and "Get directions"', pe.today === 'Today, here' && pe.name === bname(GOA, 'en') && pe.buttons.join('|') === 'Open|Get directions', JSON.stringify(pe.buttons));
   await en.close();
 }
 
@@ -99,7 +100,7 @@ if (want('caption')) {
   const page = await openMap(GOA.id);
   const c = await page.evaluate(() => [...document.querySelectorAll('.mk')].map((m) => ({ key: m.dataset.key, selected: m.classList.contains('mk--selected'), caption: m.querySelector('.mk__caption')?.textContent ?? null, shown: m.querySelector('.mk__caption') ? getComputedStyle(m.querySelector('.mk__caption')).display !== 'none' : false })));
   const withText = c.filter((m) => m.caption);
-  ok('the bridge name is written next to the selected marker, and only there', withText.length === 1 && withText[0].key === GOA.id && withText[0].selected && withText[0].caption === GOA.bridge.name && withText[0].shown, JSON.stringify(withText));
+  ok('the bridge name is written next to the selected marker, and only there', withText.length === 1 && withText[0].key === GOA.id && withText[0].selected && withText[0].caption === bname(GOA) && withText[0].shown, JSON.stringify(withText));
   ok('no other marker or cluster has a caption', c.filter((m) => m.key !== GOA.id).every((m) => !m.caption));
   const box = await page.evaluate(() => { const el = document.querySelector('.mk--selected .mk__caption'); const r = el.getBoundingClientRect(); return { l: r.left, r: r.right, vw: document.documentElement.clientWidth, h: r.height }; });
   ok('the caption is on the screen', box.l >= -1 && box.h > 0, JSON.stringify(box));
@@ -145,13 +146,14 @@ if (want('block')) {
       const b = await page.evaluate(() => {
         const s = document.querySelector('[data-bridge]');
         const vis = (el) => !!el && el.getClientRects().length > 0;
-        return { visible: vis(s), name: s.querySelector('.bridge__name')?.textContent.trim(), address: s.querySelector('.bridge__address')?.textContent.trim(), note: s.querySelector('.bridge__note')?.textContent.trim(), noteLang: s.querySelector('.bridge__note')?.getAttribute('lang'), links: [...s.querySelectorAll('a.button')].map((a) => ({ text: a.textContent.trim(), href: a.getAttribute('href'), rel: a.getAttribute('rel'), h: Math.round(a.getBoundingClientRect().height), vis: vis(a) })), overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth };
+        return { visible: vis(s), name: s.querySelector('.bridge__name')?.textContent.trim(), address: s.querySelector('.bridge__address')?.textContent.trim(), note: s.querySelector('.bridge__note')?.textContent.trim(), noteLang: s.querySelector('.bridge__note')?.getAttribute('lang'), links: [...s.querySelectorAll('.bridge__go a, .bridge__links a')].map((a) => ({ text: a.textContent.trim(), href: a.getAttribute('href'), rel: a.getAttribute('rel'), h: Math.round(a.getBoundingClientRect().height), vis: vis(a) })), overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth };
       });
-      const names = lang === 'pt' ? ['Ver no mapa', 'Como chegar', 'Sítio oficial'] : ['Open on map', 'Get directions', 'Official website'];
-      ok(`bridge block (${lang}, ${e.id}): name, address and the note of this language`, b.visible && b.name === e.bridge.name && b.address === e.bridge.address && b.note === e.bridge.note[lang], JSON.stringify([b.name, b.address, b.note]));
-      ok(`bridge block (${lang}, ${e.id}): three buttons ${names.join(', ')}, all visible, 44 px tall, no sideways scroll`, b.links.map((l) => l.text).join('|') === names.join('|') && b.links.every((l) => l.vis && l.h >= 44) && !b.overflow, JSON.stringify(b.links.map((l) => [l.text, l.h])));
-      ok(`bridge block (${lang}, ${e.id}): the map button opens the map on this card, the official site link is the data's`, b.links[0].href.endsWith(`/${lang === 'pt' ? 'mapa' : 'map'}/?id=${e.id}`) && b.links[2].href === e.bridge.url && /noopener/.test(b.links[2].rel) && /noopener/.test(b.links[1].rel), JSON.stringify(b.links.map((l) => l.href)));
-      ok(`bridge block (${lang}, ${e.id}): the Latin placeholder note is marked lang="la"`, b.noteLang === 'la');
+      // Now: one button "Como chegar" (44 px), under it two plain links, "Ver no mapa" and "Sítio oficial".
+      const names = lang === 'pt' ? ['Como chegar', 'Ver no mapa', 'Sítio oficial'] : ['Get directions', 'Open on map', 'Official website'];
+      ok(`bridge block (${lang}, ${e.id}): name, address and the note of this language`, b.visible && b.name === bname(e, lang) && b.address === e.bridge.address && b.note === e.bridge.note[lang], JSON.stringify([b.name, b.address, b.note]));
+      ok(`bridge block (${lang}, ${e.id}): the button and two links ${names.join(', ')}, all visible, the button 44 px tall, no sideways scroll`, b.links.map((l) => l.text).join('|') === names.join('|') && b.links.every((l) => l.vis) && b.links[0].h >= 44 && !b.overflow, JSON.stringify(b.links));
+      ok(`bridge block (${lang}, ${e.id}): the map link opens the map on this card, the official site link is the data's`, b.links[1].href.endsWith(`/${lang === 'pt' ? 'mapa' : 'map'}/?id=${e.id}`) && b.links[2].href === e.bridge.url && /noopener/.test(b.links[2].rel ?? ''), JSON.stringify(b.links.map((l) => l.href)));
+      ok(`bridge block (${lang}, ${e.id}): the note carries lang="la" only for a placeholder card`, (b.noteLang ?? null) === (e.placeholder ? 'la' : null), String(b.noteLang));
       await page.close();
     }
   }
@@ -159,7 +161,7 @@ if (want('block')) {
   const page = await newPage();
   await page.goto(`${base}/pt/${SEG.pt}/${GOA.slug.pt}/`, { waitUntil: 'load' });
   const meta = await page.evaluate(() => document.body.textContent.replace(/\s+/g, ' '));
-  ok('the place of the Goa card is text on the card, and the page still has a bridge in Lisbon', meta.includes(GOA.place.name) && meta.includes(GOA.bridge.name));
+  ok('the place of the Goa card is text on the card, and the page still has a bridge in Lisbon', meta.includes(GOA.place.name) && meta.includes(bname(GOA)));
   await page.close();
 }
 
@@ -171,7 +173,7 @@ if (want('weight')) {
   const gz = gzipSync(code).length;
   console.log(`INFO  Android script on a card page: ${code.length} bytes raw, ${gz} bytes gzip`);
   ok('the Android script is under 1 KB gzip (it is on every card page)', code.length > 0 && gz < 1024, `${gz} B`);
-  const plain = await (await fetch(`${base}/pt/${SEG.pt}/evento-exemplo-01/`)).text();
+  const plain = await (await fetch(`${base}/pt/${SEG.pt}/${published.find((c) => c.id !== FAR.id).slug.pt}/`)).text();
   ok('it carries no map library and no extra request', !/leaflet/i.test(plain));
 }
 
