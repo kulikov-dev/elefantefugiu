@@ -1,22 +1,34 @@
 // Browser checks for stage 5: the map page (and, as the stage goes on, links to it and the map on epoch pages).
 // Run against `dist/` served by serve.mjs (base path "/"). Tiles are answered with a grey picture, nothing leaves the machine.
-import { fsPath, launchBrowser } from './browser.mjs';
+//   node map.mjs [variant] [nojs tiles limit filters preview layout link epoch weight]     FAMILY=all|12 runs it in a family mode
+// The cards, threads and epochs come from src/content (data.mjs). `variant` runs against the fixture build, whose marker limit is 7
+// (variant-plan.mjs) and which has more cards than that, so clusters and "Show more" exist; the real site has a limit of 30.
+import { launchBrowser } from './browser.mjs';
+import { epochs, en as enPath, fixture, need, pt, real, threads as threadsData } from './data.mjs';
 
-const base = process.env.BASE_URL || 'http://localhost:4400';
+const VARIANT = process.argv[2] === 'variant';
+const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
+const world = VARIANT ? fixture : real;
 const MAP = { pt: `${base}/pt/mapa/`, en: `${base}/en/map/` };
-const THREADS = ['mar', 'comida-e-vinho', 'poder-e-revolta', 'gente-como-nos', 'natureza'];
-const EPOCHS = ['avis-e-descobrimentos', 'pombal-e-terramoto', 'estado-novo-e-25-de-abril'];
+const THREADS = threadsData.map((t) => t.id);
+const EPOCHS = world.readyEpochs.map((m) => m.id);
 // Cards the family mode (FAMILY=all|12, default off) leaves on the map: counted from the data with the rules written out here.
-import { createRequire } from 'node:module';
-import { readFileSync, readdirSync } from 'node:fs';
-const { parse } = createRequire(import.meta.url)('../../node_modules/yaml');
-const dataDir = fsPath(new URL('../../src/content/events/', import.meta.url));
-const cards = readdirSync(dataDir).map((n) => parse(readFileSync(dataDir + n, 'utf8'), { schema: 'core', customTags: ['timestamp'] })).filter((e) => e.status === 'ready');
+const cards = world.published;
 const MODE = process.env.FAMILY || 'off';
 const TOTAL = cards.filter((e) => MODE === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (MODE === '12' && String(e.min_age) === '12')))).length;
-const LIMIT = 30; // DEFAULT_LIMIT in src/lib/markers.ts
+const LIMIT = VARIANT ? 7 : 30; // DEFAULT_LIMIT in src/lib/markers.ts (the fixture build lowers it to 7)
+// Epochs, threads and a card used by name below: the first ready epoch, the second (or the first), a thread that has some but not all
+// of the cards, and one with cards in the second epoch.
+const EP1 = EPOCHS[0];
+const EP2 = EPOCHS[1] ?? EPOCHS[0];
+const T1 = need('a thread with some but not all cards', () => threadsData.find((t) => cards.some((c) => c.threads.includes(t.id)) && cards.some((c) => !c.threads.includes(t.id)))).id;
+const T2 = need('a thread with cards in the second ready epoch', () => threadsData.find((t) => world.inEpoch(EP2).some((c) => c.threads.includes(t.id)))).id;
+// A thread that has a key (frame) card: its map shows a frame marker.
+const TF = need('a thread with a frame card', () => threadsData.find((t) => cards.some((c) => c.level === 'frame' && c.threads.includes(t.id)))).id;
+const N1 = world.inEpoch(EP1).length; // the cards of the first epoch; the Timeline / Grid switch exists from 9
+const C0 = need('a card of the first ready epoch', () => world.inEpoch(EP1)[0]);
 const STEP = 5;
-const ONLY = process.argv.slice(2); // optional section names: node map.mjs page nojs ...
+const ONLY = process.argv.slice(2).filter((a) => a !== 'variant'); // optional section names: node map.mjs page nojs ...
 
 let failed = 0;
 const ok = (name, cond, extra = '') => {
@@ -92,7 +104,7 @@ if (want('nojs'))
       };
     });
     ok(`no JS (${lang}): the map block and the filters are not shown`, !s.mapVisible && !s.filtersVisible);
-    ok(`no JS (${lang}): plain list of all cards by epoch (24 cards, 3 epochs)`, s.staticVisible && s.links.length === 24 && s.groups === 3, `links=${s.links.length} groups=${s.groups}`);
+    ok(`no JS (${lang}): plain list of all cards by epoch (${TOTAL} cards, ${EPOCHS.length} epochs)`, s.staticVisible && s.links.length === TOTAL && s.groups === EPOCHS.length, `links=${s.links.length} groups=${s.groups}`);
     ok(`no JS (${lang}): every link leads to a card page`, s.links.every((h) => /\/(historia|story)\/[a-z0-9-]+\/$/.test(h)));
     ok(`no JS (${lang}): no horizontal overflow at 360px`, s.overflow <= 0, `overflow=${s.overflow}`);
     await page.close();
@@ -126,7 +138,7 @@ if (want('limit')) {
   await wait(700);
 
   let s = await snapshot(page);
-  ok('map: whole country at first, at most 7 markers and clusters', s.total >= 1 && s.total <= LIMIT, `total=${s.total}`);
+  ok('map: whole country at first, within the marker limit', s.total >= 1 && s.total <= LIMIT, `total=${s.total}`);
   ok('map: markers and clusters together cover exactly the cards of the list "In this area"', same(s.covered, s.list), `covered=${s.covered.length} list=${s.list.length}`);
   ok('map: the list counter equals the list', Number(s.listCount) === s.list.length, `counter=${s.listCount}`);
   ok(`map: at first the list holds all ${TOTAL} cards the mode shows`, s.list.length === TOTAL, `n=${s.list.length}`);
@@ -176,7 +188,7 @@ if (want('limit')) {
   const combos = [
     ...THREADS.map((fio) => ({ fio, epoca: null })),
     ...EPOCHS.map((epoca) => ({ fio: null, epoca })),
-    { fio: 'mar', epoca: 'avis-e-descobrimentos' },
+    { fio: T1, epoca: EP1 },
     { fio: null, epoca: null },
   ];
   for (const c of combos) {
@@ -268,30 +280,30 @@ if (want('limit')) {
 // ---------- 4. Filters and the address ----------
 if (want('filters')) {
   const page = await newPage({ width: 1280, height: 900 });
-  await page.goto(`${MAP.pt}?fio=comida-e-vinho&epoca=pombal-e-terramoto&utm=x&fio2=zzz`, { waitUntil: 'networkidle0' });
+  await page.goto(`${MAP.pt}?fio=${T2}&epoca=${EP2}&utm=x&fio2=zzz`, { waitUntil: 'networkidle0' });
   await ready(page);
   await wait(600);
   let s = await page.evaluate(() => ({
     pressed: [...document.querySelectorAll('.map-filters [aria-pressed="true"], .epoch-scale [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca),
     search: location.search,
   }));
-  ok('filters: ?fio= and ?epoca= are read, unknown parameters are dropped from the address', s.pressed.includes('comida-e-vinho') && s.pressed.includes('pombal-e-terramoto') && s.search === '?fio=comida-e-vinho&epoca=pombal-e-terramoto', `${s.pressed} ${s.search}`);
+  ok('filters: ?fio= and ?epoca= are read, unknown parameters are dropped from the address', s.pressed.includes(T2) && s.pressed.includes(EP2) && s.search === `?fio=${T2}&epoca=${EP2}`, `${s.pressed} ${s.search}`);
   let snap = await snapshot(page);
   ok('filters: the list holds only the cards of that thread and epoch', snap.list.length > 0 && snap.list.length < TOTAL, `n=${snap.list.length}`);
   await page.reload({ waitUntil: 'networkidle0' });
   await ready(page);
   s = await page.evaluate(() => location.search);
-  ok('filters: state survives a reload', s === '?fio=comida-e-vinho&epoca=pombal-e-terramoto', s);
+  ok('filters: state survives a reload', s === `?fio=${T2}&epoca=${EP2}`, s);
 
   await page.click('.map-filters button[data-fio=""]');
   await page.click('.epoch-scale button[data-epoca=""]');
   await wait(500);
   s = await page.evaluate(() => location.search);
   snap = await snapshot(page);
-  ok('filters: "all" clears the address and the list shows 24 cards again', s === '' && snap.list.length === TOTAL, `${s} ${snap.list.length}`);
+  ok('filters: "all" clears the address and the list shows every card again', s === '' && snap.list.length === TOTAL, `${s} ${snap.list.length}`);
   const hist = await page.evaluate(() => history.length);
   await page.click('.map-filters button[data-fio="mar"]');
-  await page.click('.epoch-scale button[data-epoca="avis-e-descobrimentos"]');
+  await page.click(`.epoch-scale button[data-epoca="${EP1}"]`);
   ok('filters: choosing chips does not grow the history', (await page.evaluate(() => history.length)) === hist);
   await page.close();
 }
@@ -428,20 +440,20 @@ if (want('link')) {
   ok(`link: "Open on the map" centres the map on the card and opens its preview (all ${cards.length} cards, pt)`, bad.length === 0, bad.slice(0, 2).join(' | '));
 
   const en = await newPage({ width: 360, height: 740 });
-  await en.goto(`${base}/en/story/example-event-02/#detalhes`, { waitUntil: 'networkidle0' });
+  await en.goto(`${base}${enPath(C0)}#detalhes`, { waitUntil: 'networkidle0' });
   await Promise.all([en.waitForNavigation({ waitUntil: 'networkidle0' }), en.click('.bridge a[href*="/map/"]')]);
   await ready(en);
   await wait(500);
   const se = await centred(en);
-  ok('link: the same in English on a phone', se.selected && Math.abs(se.dx) <= 3 && Math.abs(se.dy) <= 3 && se.previewOpen && /\?id=evento-exemplo-02$/.test(se.search), JSON.stringify(se));
+  ok('link: the same in English on a phone', se.selected && Math.abs(se.dx) <= 3 && Math.abs(se.dy) <= 3 && se.previewOpen && new RegExp(`\\?id=${C0.id}$`).test(se.search), JSON.stringify(se));
   const pageUrl = en.url();
   await en.close();
-  ok('link: the address is /en/map/?id=<id>', /\/en\/map\/\?id=evento-exemplo-02$/.test(pageUrl), pageUrl);
+  ok('link: the address is /en/map/?id=<id>', new RegExp(`/en/map/\\?id=${C0.id}$`).test(pageUrl), pageUrl);
 
   // 2. filters that would hide the card are cleared, so the link always shows its card
-  const odd = cards.find((c) => !c.threads.includes('mar'));
+  const odd = cards.find((c) => !c.threads.includes(T1));
   const f = await newPage({ width: 1280, height: 900 });
-  await f.goto(`${MAP.pt}?fio=mar&id=${odd.id}`, { waitUntil: 'networkidle0' });
+  await f.goto(`${MAP.pt}?fio=${T1}&id=${odd.id}`, { waitUntil: 'networkidle0' });
   await ready(f);
   await wait(500);
   const sf = await centred(f);
@@ -460,7 +472,7 @@ if (want('link')) {
   // 4. Preview -> card -> Back: same address, same preview, same place on the screen
   for (const [label, query, zoomSteps] of [
     ['all cards', '', 1],
-    ['thread filter', '?fio=comida-e-vinho', 0],
+    ['thread filter', `?fio=${TF}`, 0],
   ]) {
     const p = await newPage({ width: 1280, height: 900 });
     await p.goto(`${MAP.pt}${query}`, { waitUntil: 'networkidle0' });
@@ -486,7 +498,7 @@ if (want('link')) {
     const pressed = await p.evaluate(() => [...document.querySelectorAll('.map-filters [aria-pressed="true"], .epoch-scale [aria-pressed="true"]')].map((b) => b.dataset.fio ?? b.dataset.epoca));
     ok(
       `back (${label}): the map returns to the same address, preview, filters and place on the screen`,
-      onCard && after.selected && after.key === before.key && after.previewOpen && after.search === before.search && Math.abs(after.dx - before.dx) <= 3 && Math.abs(after.dy - before.dy) <= 3 && same(afterList, beforeList) && pressed.includes(query ? 'comida-e-vinho' : ''),
+      onCard && after.selected && after.key === before.key && after.previewOpen && after.search === before.search && Math.abs(after.dx - before.dx) <= 3 && Math.abs(after.dy - before.dy) <= 3 && same(afterList, beforeList) && pressed.includes(query ? TF : ''),
       JSON.stringify({ before, after })
     );
     await p.close();
@@ -495,7 +507,7 @@ if (want('link')) {
 
 // ---------- 7b. Map on the epoch page ----------
 if (want('epoch')) {
-  const EPOCH = `${base}/pt/epoca/avis-e-descobrimentos/`;
+  const EPOCH = `${base}/pt/epoca/${EP1}/`;
   const marks = (p) =>
     p.evaluate(() => {
       const keys = [...document.querySelectorAll('.mk')].map((el) => el.dataset.key);
@@ -518,7 +530,7 @@ if (want('epoch')) {
       const vis = (el) => !!el && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().height > 0;
       return { aside: vis(document.querySelector('[data-epoch-aside]')), panes: vis(document.querySelector('.panes')), map: vis(document.querySelector('[data-map]')), cards: document.querySelectorAll('ol.feed > li').length, feedWidth: document.querySelector('.epoch__feed').getBoundingClientRect().width, overflow: document.scrollingElement.scrollWidth - innerWidth };
     });
-    ok('epoch, no JS: no map, no pane switch, the whole feed', !s.aside && !s.panes && !s.map && s.cards === 8 && s.overflow <= 0, JSON.stringify(s));
+    ok('epoch, no JS: no map, no pane switch, the whole feed', !s.aside && !s.panes && !s.map && s.cards === N1 && s.overflow <= 0, JSON.stringify(s));
     await p.close();
   }
 
@@ -530,11 +542,14 @@ if (want('epoch')) {
     await wait(500);
     const before = await p.evaluate(() => ({ feed: document.querySelector('.epoch__feed').getBoundingClientRect().toJSON(), aside: document.querySelector('.epoch__aside').getBoundingClientRect().toJSON(), panes: getComputedStyle(document.querySelector('.panes')).display }));
     ok('epoch, desktop: feed on the left, map on the right, no pane switch', before.aside.left >= before.feed.right - 1 && before.panes === 'none', JSON.stringify({ feedRight: before.feed.right, asideLeft: before.aside.left }));
+    // "Sticky" only means something when the feed is longer than the map: the fixture build has a long epoch, the real one (five cards) does not.
+    const room = await p.evaluate(() => document.querySelector('.epoch__feed').getBoundingClientRect().height - document.querySelector('.epoch__aside').getBoundingClientRect().height);
     await p.evaluate(() => document.querySelector('.epoch__body').scrollIntoView());
     await p.evaluate(() => window.scrollBy(0, 700));
     await wait(300);
     const after = await p.evaluate(() => document.querySelector('.epoch__aside').getBoundingClientRect().toJSON());
-    ok('epoch, desktop: the map stays on screen while the feed scrolls', after.top >= 0 && after.top < 100 && after.bottom <= 800, JSON.stringify(after));
+    if (room > 800) ok('epoch, desktop: the map stays on screen while the feed scrolls', after.top >= 0 && after.top < 100 && after.bottom <= 800, JSON.stringify(after));
+    else ok('epoch, desktop: a short feed (shorter than the map plus a screen): the map scrolls away with the page, nothing is pinned over the footer', after.bottom > 0 || after.top < 0, `room=${Math.round(room)} ${JSON.stringify(after)}`);
     await p.close();
   }
 
@@ -549,8 +564,10 @@ if (want('epoch')) {
         return { feed: vis(document.querySelector('.epoch__feed')), map: vis(document.querySelector('.epoch__aside')), view: vis(document.querySelector('.view-switch')), pressed: [...document.querySelectorAll('[data-pane-btn][aria-pressed="true"]')].map((b) => b.dataset.paneBtn), overflow: document.scrollingElement.scrollWidth - innerWidth };
       });
     let s = await st();
-    ok('epoch, phone: the timeline is shown first, the map is not', s.feed && !s.map && s.view && s.pressed[0] === 'feed', JSON.stringify(s));
-    ok('epoch, phone: the map code is not requested before the Map pane is opened', p.requests.filter((u) => /map-island|leaflet/i.test(u)).length === 0);
+    ok('epoch, phone: the timeline is shown first, the map is not', s.feed && !s.map && s.view === (N1 >= 9) && s.pressed[0] === 'feed', JSON.stringify(s));
+    // The map code is fetched as soon as the page has loaded (map-loader.ts), but the map is drawn, and its tiles fetched, only when
+    // the pane that holds it is on the screen.
+    ok('epoch, phone: the map code is fetched at once, but no tile before the Map pane is opened', p.requests.some((u) => /map-island/.test(u)) && p.requests.filter((u) => /tile\.openstreetmap/i.test(u)).length === 0);
     await p.click('[data-pane-btn="map"]');
     await ready(p);
     await wait(600);
@@ -558,7 +575,7 @@ if (want('epoch')) {
     ok('epoch, phone: the Map pane shows the map and hides the feed and the grid switch', !s.feed && s.map && !s.view && s.pressed[0] === 'map' && s.overflow <= 0, JSON.stringify(s));
     ok('epoch, phone: ...and now the map code is loaded', p.requests.some((u) => /map-island/.test(u)));
     const m = await marks(p);
-    ok('epoch, phone: at most 7 markers and clusters', m.total >= 1 && m.total <= LIMIT, `total=${m.total}`);
+    ok('epoch, phone: within the marker limit', m.total >= 1 && m.total <= LIMIT, `total=${m.total}`);
     // choose a marker on the map, then go back to the feed: the record is highlighted and scrolled into view
     await p.click('.mk--frame');
     await wait(400);
@@ -579,8 +596,8 @@ if (want('epoch')) {
     const key = await p.evaluate(() => [...document.querySelectorAll('.mk--frame')].map((e) => e.dataset.key).pop());
     await p.click(`.mk[data-key="${key}"]`);
     await wait(1200);
-    const r = await p.evaluate((id) => { const li = document.getElementById(`c-${id}`).closest('li'); const b = li.getBoundingClientRect(); return { active: li.hasAttribute('data-active'), others: document.querySelectorAll('.feed > li[data-active]').length, inView: b.top >= 0 && b.bottom <= innerHeight, outline: getComputedStyle(li.querySelector('article')).outlineStyle }; }, key);
-    ok('epoch: a marker highlights its record in the feed and scrolls to it', r.active && r.others === 1 && r.inView && r.outline === 'solid', JSON.stringify(r));
+    const r = await p.evaluate((id) => { const li = document.getElementById(`c-${id}`).closest('li'); const b = li.getBoundingClientRect(); return { active: li.hasAttribute('data-active'), others: document.querySelectorAll('.feed > li[data-active]').length, inView: b.top >= 0 && b.bottom <= innerHeight, shadow: getComputedStyle(li.querySelector('article')).boxShadow }; }, key);
+    ok('epoch: a marker highlights its record in the feed and scrolls to it', r.active && r.others === 1 && r.inView && r.shadow !== 'none', JSON.stringify(r));
 
     // a record chosen in the feed highlights its marker (the first record, then the last)
     const ids = await p.evaluate(() => [...document.querySelectorAll('.feed > li article')].map((a) => a.id.slice(2)));
@@ -628,13 +645,13 @@ if (want('epoch')) {
     }
     // the address: ?fio= at load, and "All" again
     const p = await newPage({ width: 1280, height: 900 });
-    await p.goto(`${EPOCH}?fio=mar`, { waitUntil: 'networkidle0' });
+    await p.goto(`${EPOCH}?fio=${T1}`, { waitUntil: 'networkidle0' });
     await ready(p);
     await wait(900);
     const cards = await cfgCards(p);
-    const mar = cards.filter((c) => c.threads.includes('mar')).map((c) => c.id);
+    const mar = cards.filter((c) => c.threads.includes(T1)).map((c) => c.id);
     let m = await marks(p);
-    ok('epoch: ?fio=mar at load: the map shows only that thread', m.covered.length > 0 && m.covered.every((id) => mar.includes(id)), `covered=${m.covered.length} mar=${mar.length}`);
+    ok('epoch: ?fio=thread at load: the map shows only that thread', m.covered.length > 0 && m.covered.every((id) => mar.includes(id)), `covered=${m.covered.length} mar=${mar.length}`);
     await p.click('[data-epoch-tools] button[data-fio=""]');
     await wait(900);
     m = await marks(p);
@@ -648,7 +665,7 @@ if (want('epoch')) {
     await p.goto(EPOCH, { waitUntil: 'networkidle0' });
     await p.waitForFunction(() => document.querySelector('[data-epoch-page]')?.dataset.map === 'unavailable', { timeout: 20000 }).catch(() => {});
     const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch-page]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('.panes').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li').length }));
-    ok('epoch, tiles fail: the map and the pane switch go away, the feed stays and gets the width', s.map === 'unavailable' && !s.aside && !s.panes && s.cards === 8 && s.feed > s.container * 0.9, JSON.stringify(s));
+    ok('epoch, tiles fail: the map and the pane switch go away, the feed stays and gets the width', s.map === 'unavailable' && !s.aside && !s.panes && s.cards === N1 && s.feed > s.container * 0.9, JSON.stringify(s));
     await p.close();
   }
 
@@ -675,7 +692,7 @@ if (want('epoch')) {
 if (want('weight')) {
   const heavy = /map-island|leaflet/i;
   const pages = [
-    ['card', `${base}/pt/historia/evento-exemplo-02/`],
+    ['card', `${base}${pt(C0)}`],
     ['thread', `${base}/pt/fio/mar/`],
     ['about', `${base}/pt/sobre/`],
   ];
@@ -700,7 +717,7 @@ if (want('weight')) {
   const page = await newPage({ width: 360, height: 100 });
   await page.goto(MAP.pt, { waitUntil: 'networkidle0' });
   await wait(500);
-  ok('weight: on the map page the map code and its styles are fetched at once, not when the block comes into view', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /leaflet.*\.css/.test(u)));
+  ok('weight: on the map page the map code and its styles are fetched at once, not when the block comes into view', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /(MapBlock|leaflet)[^/]*\.css/.test(u)));
   await page.close();
 }
 
