@@ -46,19 +46,16 @@
   },
   "home": {
     "epochs_heading": "Épocas",
-    "start": "Começar",
-    "continue": "Continuar: {name}",
+    "hook_title": "Em 1515, o rei pôs um rinoceronte contra um elefante. O elefante fugiu.",
+    "intro": "Daí o nosso nome: O Elefante Fugiu, «o elefante fugiu». Histórias do passado de Portugal: cada uma lê-se num minuto e está ligada a um lugar que pode visitar.",
+    "cta_read": "Ler num minuto",
+    "continue": "Parou na época «{name}» →",
     "open_map": "Abrir o mapa",
-    "showcase_heading": "Histórias em destaque",
+    "showcase_heading": "Por onde começar",
+    "map_label": "Mapa com todas as histórias",
+    "timeline_label": "Todas as épocas, por ordem",
     "threads_heading": "Fios",
-    "threads_intro": "Escolha um tema e siga-o ao longo dos séculos.",
-    "how_heading": "Como funciona",
-    "step_hook": "Gancho",
-    "step_hook_text": "Uma frase curta para despertar a curiosidade.",
-    "step_story": "História",
-    "step_story_text": "A história em poucas linhas, para ler num minuto.",
-    "step_more": "Saber mais",
-    "step_more_text": "Contexto, fontes e a ponte para hoje."
+    "threads_intro": "Escolha um tema e siga-o ao longo dos séculos."
   },
   "surprise": {
     "picking": "A escolher uma história para si…",
@@ -167,7 +164,11 @@
   },
   "plural": {
     "stories_one": "{n} história",
-    "stories_other": "{n} histórias"
+    "stories_other": "{n} histórias",
+    "places_one": "{n} lugar onde aconteceu",
+    "places_other": "{n} lugares onde aconteceu",
+    "epochs_more_one": "Mais {n} época em preparação",
+    "epochs_more_other": "Mais {n} épocas em preparação"
   },
   "map": {
     "home": "Todo o Portugal",

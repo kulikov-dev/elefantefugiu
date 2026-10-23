@@ -8,7 +8,7 @@ import { POSE_SIZE, poseFile, type Pose } from '../lib/mascot';
 interface Props {
   pose: Pose;
   /** normal: a figure beside the text; small: in an empty state; logo: the head in the header. */
-  size?: 'normal' | 'small' | 'logo';
+  size?: 'normal' | 'small' | 'logo' | 'hero';
   /** Appears by itself when it scrolls into view (walk), where the browser supports scroll-driven animation. */
   enter?: boolean;
 }
@@ -22,7 +22,7 @@ const { width, height } = POSE_SIZE[pose];
   alt=""
   width={width}
   height={height}
-  loading={size === 'logo' ? 'eager' : 'lazy'}
+  loading={size === 'logo' || size === 'hero' ? 'eager' : 'lazy'}
   decoding="async"
   data-mascot={pose}
 />

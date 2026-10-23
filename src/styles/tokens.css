@@ -125,6 +125,11 @@
   /* The elephant mascot: a figure beside text, a smaller one in empty states; it walks in from --mascot-shift to the side. */
   /* The family-mode menu under its button: the question and three answers; never wider than the screen. */
   --family-menu-width: min(20rem, calc(100vw - 2 * var(--space-4)));
+  --size-mascot-hero: clamp(8rem, 42vw, 20rem);
+  /* The small map on the home page. */
+  --home-map-height: 20rem;
+  /* One epoch on the time strip of the home page. */
+  --timeline-item-min: 7rem;
   --size-mascot: clamp(9rem, 40vw, 13rem);
   --size-mascot-small: clamp(5rem, 28vw, 7rem);
   --mascot-shift: 1.5rem;

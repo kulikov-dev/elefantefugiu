@@ -1,14 +1,18 @@
 ---
-// Home page: /pt/, /en/ (docs/spec.md section 5.1). Everything is built from the data; works without JavaScript
-// (only the "Surprise me" button needs a script and stays hidden without it).
+// Home page: /pt/, /en/, /ru/ (docs/spec.md section 5.1). It tells a story at once instead of explaining the project:
+// the story the name comes from, "Where to start" (three stories), the map of all the places, the epochs, the threads.
+// Everything is built from the data; it reads without JavaScript (the map and the "left off" band need a script).
 import BaseLayout from '../layouts/BaseLayout.astro';
-import EventCard from '../components/EventCard.astro';
+import HomeMap from '../components/HomeMap.astro';
+import Mascot from '../components/Mascot.astro';
+import StartCard from '../components/StartCard.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { EPOCHS_ANCHOR, epochHref, pagePath, threadHref, type Lang } from '../i18n/routes';
+import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { epochYearsText } from '../lib/epochs';
-import { epochTiles, firstMvpEpoch } from '../lib/home';
+import { epochTiles, firstMvpEpoch, homeStartStory } from '../lib/home';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
+import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
 
 interface Props {
@@ -18,41 +22,48 @@ interface Props {
 const { lang } = Astro.props;
 const site = await loadSite();
 
-const start = firstMvpEpoch(site.epochs, site.events);
+const firstEpoch = firstMvpEpoch(site.epochs, site.events);
 const tiles = epochTiles(site.epochs, site.events);
+const ready = tiles.filter((tile) => tile.available);
+const soonCount = tiles.length - ready.length;
+// The main button opens the story the name comes from; without it, the first epoch.
+const startStory = homeStartStory(site.events);
+const startHref = startStory ? storyPath(lang, startStory.slug[lang]) : firstEpoch ? epochHref(lang, firstEpoch.slug[lang]) : pagePath(lang, 'map');
 // Family mode: counters carry three numbers (off, all, 12) and a chip with a zero counter is hidden in that mode.
 const threadCounts = new Map(site.visibleThreads.map((th) => [th.id, countByMode(site.events.filter((e) => e.threads.includes(th.id)).map(ageInfoOf))]));
 const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
+
 // Test text must stay out of search results until it is real.
-const noindex = site.featured.some((e) => e.placeholder) || tiles.some((tile) => tile.available && tile.epoch.placeholder);
+const noindex = site.featured.some((e) => e.placeholder) || ready.some((tile) => tile.epoch.placeholder);
 
-// "Continue": the epochs with a page, by id, for the script that knows the last epoch of the reader.
-const continueTargets = Object.fromEntries(tiles.filter((tile) => tile.available).map((tile) => [tile.epoch.id, { href: epochHref(lang, tile.epoch.slug[lang]), name: tile.epoch.name[lang] }]));
-
-const steps = [
-  { key: 'hook', n: 1 },
-  { key: 'story', n: 2 },
-  { key: 'more', n: 3 },
-] as const;
+// "Left off": the epochs with a page, by id, for the script that knows the last epoch of the reader.
+const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, { href: epochHref(lang, tile.epoch.slug[lang]), name: tile.epoch.name[lang] }]));
 ---
 <BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex}>
   <div class="home">
+    <!-- A thin band above the first screen, only for a reader who has been in an epoch before (the script shows it). -->
+    <a
+      class="continue-band"
+      href={firstEpoch ? epochHref(lang, firstEpoch.slug[lang]) : '#'}
+      data-continue
+      data-template={t(lang, 'home.continue')}
+      data-targets={JSON.stringify(continueTargets)}
+      hidden
+    >{t(lang, 'home.continue').replace('{name}', firstEpoch?.name[lang] ?? '')}</a>
+
     <section class="hero" aria-labelledby="home-title">
-      <h1 id="home-title">{t(lang, 'site.name')}</h1>
-      <p class="hero__tagline">{t(lang, 'site.tagline')}</p>
-      <p class="hero__intro">{t(lang, 'site.description')}</p>
-      <p class="hero__actions">
-        {start && <a class="button" href={epochHref(lang, start.slug[lang])}>{t(lang, 'home.start')}</a>}
-        <a
-          class="button button--secondary"
-          href={start ? epochHref(lang, start.slug[lang]) : '#'}
-          data-continue
-          data-template={t(lang, 'home.continue')}
-          data-targets={JSON.stringify(continueTargets)}
-          hidden
-        >{t(lang, 'home.continue').replace('{name}', start?.name[lang] ?? '')}</a>
-        <a class="button button--secondary" href={pagePath(lang, 'map')}>{t(lang, 'home.open_map')}</a>
-      </p>
+      <div class="hero__text">
+        <h1 id="home-title">{t(lang, 'home.hook_title')}</h1>
+        <p class="hero__intro">{t(lang, 'home.intro')}</p>
+        <p class="hero__actions">
+          <a class="button" href={startHref}>{t(lang, 'home.cta_read')}</a>
+          <a class="hero__link" href={pagePath(lang, 'surprise')}>{t(lang, 'ui.surprise')}</a>
+          <a class="hero__link" href={pagePath(lang, 'map')}>{t(lang, 'home.open_map')}</a>
+        </p>
+      </div>
+      <div class="hero__picture">
+        <Mascot pose="run" size="hero" />
+      </div>
     </section>
 
     {
@@ -62,7 +73,7 @@ const steps = [
           <ul class="showcase">
             {site.featured.map((event) => (
               <li {...familyAttrs(event)}>
-                <EventCard lang={lang} event={event} variant="grid" threads={site.threads} visibleThreadIds={site.visibleThreadIds} showThreads={false} uniform />
+                <StartCard lang={lang} event={event} />
               </li>
             ))}
           </ul>
@@ -70,32 +81,50 @@ const steps = [
       )
     }
 
+    {site.events.length > 0 && <HomeMap lang={lang} events={site.events} tile={tileConfig(process.env)} />}
+
     <section id={EPOCHS_ANCHOR} aria-labelledby="epocas-title">
       <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
       <ol class="tiles">
         {
-          tiles.map(({ epoch, available, counts }) =>
-            available ? (
-              <li class="tile tile--link">
-                <h3 class="tile__name">
-                  <a href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
-                </h3>
-                <p class="tile__years">{epochYearsText(epoch, lang)}</p>
-                {epoch.theme && <p class="tile__theme">{epoch.theme[lang]}</p>}
-                <p class="tile__count">
-                  {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
-                </p>
-              </li>
-            ) : (
-              <li class="tile tile--soon">
-                <h3 class="tile__name">{epoch.name[lang]}</h3>
-                <p class="tile__years">{epochYearsText(epoch, lang)}</p>
-                <p class="tile__soon">{t(lang, 'ui.soon')}</p>
-              </li>
-            ),
-          )
+          ready.map(({ epoch, counts }) => (
+            <li class="tile tile--link">
+              <h3 class="tile__name">
+                <a href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
+              </h3>
+              <p class="tile__years">{epochYearsText(epoch, lang)}</p>
+              {epoch.theme && <p class="tile__theme">{epoch.theme[lang]}</p>}
+              <p class="tile__count">
+                {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+              </p>
+            </li>
+          ))
         }
       </ol>
+      <!-- All the epochs in order: the ready ones stand out and lead to their pages, the others are pale with "soon". -->
+      <div class="timeline-wrap">
+        <ol class="timeline" aria-label={t(lang, 'home.timeline_label')}>
+          {
+            tiles.map(({ epoch, available }) =>
+              available ? (
+                <li class="timeline__item timeline__item--ready">
+                  <a href={epochHref(lang, epoch.slug[lang])}>
+                    <span class="timeline__name">{epoch.name[lang]}</span>
+                    <span class="timeline__years">{epochYearsText(epoch, lang)}</span>
+                  </a>
+                </li>
+              ) : (
+                <li class="timeline__item timeline__item--soon">
+                  <span class="timeline__name">{epoch.name[lang]}</span>
+                  <span class="timeline__years">{epochYearsText(epoch, lang)}</span>
+                  <span class="timeline__soon">{t(lang, 'ui.soon')}</span>
+                </li>
+              ),
+            )
+          }
+        </ol>
+      </div>
+      {soonCount > 0 && <p class="timeline__more">{plural(lang, 'plural.epochs_more', soonCount)}</p>}
     </section>
 
     {
@@ -113,21 +142,6 @@ const steps = [
         </section>
       )
     }
-
-    <section aria-labelledby="how-title">
-      <h2 id="how-title">{t(lang, 'home.how_heading')}</h2>
-      <ol class="steps">
-        {
-          steps.map(({ key, n }) => (
-            <li class="step">
-              <span class="step__n" aria-hidden="true">{n}</span>
-              <h3 class="step__name">{t(lang, `home.step_${key}`)}</h3>
-              <p>{t(lang, `home.step_${key}_text`)}</p>
-            </li>
-          ))
-        }
-      </ol>
-    </section>
   </div>
 </BaseLayout>
 
@@ -144,6 +158,47 @@ const steps = [
     margin-block-end: var(--space-3);
   }
 
+  /* ---- the band "You left off in the era ..." ---- */
+  .continue-band {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--epoch-line);
+    border-radius: var(--radius-md);
+    background: var(--color-accent-tint);
+    color: var(--color-ink);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  .continue-band:hover {
+    border-color: var(--color-accent);
+  }
+
+  .continue-band[hidden] {
+    display: none;
+  }
+
+  .home > .continue-band + * {
+    margin-block-start: var(--space-4);
+  }
+
+  /* ---- first screen: the story on the left, the elephant on the right (above the text on a phone, smaller) ---- */
+  .hero {
+    display: grid;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .hero__picture {
+    order: -1;
+    justify-self: start;
+  }
+
+  .hero h1 {
+    font-size: var(--text-3xl);
+    line-height: 1.1;
+  }
+
   .hero__intro {
     max-width: var(--measure);
     margin-block-start: var(--space-3);
@@ -153,8 +208,34 @@ const steps = [
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
+    align-items: center;
+    gap: var(--space-1) var(--space-4);
     margin-block-start: var(--space-4);
+  }
+
+  .hero__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    font-weight: 600;
+  }
+
+  @media (min-width: 48rem) {
+    .hero {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-6);
+    }
+
+    .hero__picture {
+      order: 0;
+      justify-self: end;
+    }
+  }
+
+  /* ---- where to start, epochs ---- */
+  /* The three cards are as tall as the tallest, so the small titles line up along the bottom. */
+  .showcase > :global(li) {
+    display: flex;
   }
 
   .showcase,
@@ -214,15 +295,86 @@ const steps = [
     outline-offset: var(--ring-offset-tight);
   }
 
-  .tile--soon {
-    border-style: dashed;
+  /* ---- the time strip: all the epochs in order ---- */
+  .timeline-wrap {
+    margin-block-start: var(--space-5);
+    overflow-x: auto;
+    padding-block-end: var(--space-2);
+  }
+
+  .timeline {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(var(--timeline-item-min), 1fr);
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline__item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-2) var(--space-1);
+    border-block-start: var(--border-heavy) solid var(--epoch-line);
+    font-size: var(--text-sm);
+    line-height: 1.3;
+  }
+
+  /* A dot on the line for each epoch. */
+  .timeline__item::before {
+    content: '';
+    position: absolute;
+    inset-block-start: calc(var(--size-dot) / -2 - var(--border-heavy) / 2);
+    inset-inline-start: var(--space-2);
+    width: var(--size-dot);
+    height: var(--size-dot);
+    border-radius: 50%;
+    background: var(--epoch-line);
+  }
+
+  .timeline__item--ready {
+    border-block-start-color: var(--color-accent);
+  }
+
+  .timeline__item--ready::before {
+    background: var(--color-accent);
+  }
+
+  .timeline__item--ready a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-height: var(--touch-target);
+    color: var(--color-ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .timeline__item--ready a:hover .timeline__name {
+    text-decoration: underline;
+  }
+
+  .timeline__item--soon {
     color: var(--color-ink-muted);
   }
 
-  .tile__soon {
-    margin-block-start: auto;
+  .timeline__years {
+    color: var(--color-ink-muted);
+    font-weight: 400;
+  }
+
+  .timeline__soon {
     font-size: var(--text-sm);
-    font-weight: 600;
+    font-style: italic;
+  }
+
+  .timeline__more {
+    margin-block-start: var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
   }
 
   .chips {
@@ -232,42 +384,5 @@ const steps = [
     margin: var(--space-3) 0 0;
     padding: 0;
     list-style: none;
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-step-min)), 1fr));
-    gap: var(--space-4);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .step {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: var(--space-1) var(--space-3);
-    align-items: center;
-  }
-
-  .step > p {
-    grid-column: 1 / -1;
-    color: var(--color-ink-muted);
-  }
-
-  .step__n {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--size-step);
-    height: var(--size-step);
-    border-radius: 50%;
-    background: var(--color-accent);
-    color: var(--color-on-accent);
-    font-weight: 700;
-  }
-
-  .step__name {
-    font-size: var(--text-lg);
   }
 </style>

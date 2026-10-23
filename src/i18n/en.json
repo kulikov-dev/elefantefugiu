@@ -46,19 +46,16 @@
   },
   "home": {
     "epochs_heading": "Eras",
-    "start": "Start",
-    "continue": "Continue: {name}",
+    "hook_title": "In 1515 a king set a rhinoceros against an elephant. The elephant ran away.",
+    "intro": "That is where our name comes from: O Elefante Fugiu, “the elephant ran away”. Stories from Portugal's past: each is a one-minute read and tied to a place you can visit.",
+    "cta_read": "Read in a minute",
+    "continue": "You left off in the era “{name}” →",
     "open_map": "Open the map",
-    "showcase_heading": "Featured stories",
+    "showcase_heading": "Where to start",
+    "map_label": "Map of all the stories",
+    "timeline_label": "All eras, in order",
     "threads_heading": "Threads",
-    "threads_intro": "Pick a theme and follow it through the centuries.",
-    "how_heading": "How it works",
-    "step_hook": "Hook",
-    "step_hook_text": "One short line to catch your curiosity.",
-    "step_story": "Story",
-    "step_story_text": "The story in a few lines, a one-minute read.",
-    "step_more": "More",
-    "step_more_text": "Context, sources and the bridge to today."
+    "threads_intro": "Pick a theme and follow it through the centuries."
   },
   "surprise": {
     "picking": "Picking a story for you…",
@@ -167,7 +164,11 @@
   },
   "plural": {
     "stories_one": "{n} story",
-    "stories_other": "{n} stories"
+    "stories_other": "{n} stories",
+    "places_one": "{n} place where it happened",
+    "places_other": "{n} places where it happened",
+    "epochs_more_one": "{n} more era in the works",
+    "epochs_more_other": "{n} more eras in the works"
   },
   "map": {
     "home": "All of Portugal",

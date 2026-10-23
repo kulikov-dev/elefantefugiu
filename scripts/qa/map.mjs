@@ -674,8 +674,6 @@ if (want('epoch')) {
 if (want('weight')) {
   const heavy = /map-island|leaflet/i;
   const pages = [
-    ['home pt', `${base}/pt/`],
-    ['home en', `${base}/en/`],
     ['card', `${base}/pt/historia/evento-exemplo-02/`],
     ['thread', `${base}/pt/fio/mar/`],
     ['about', `${base}/pt/sobre/`],
@@ -686,6 +684,16 @@ if (want('weight')) {
     const found = page.requests.filter((u) => heavy.test(u));
     ok(`weight: ${name} does not load map code`, found.length === 0, found.join(' '));
     await page.close();
+  }
+  // The home page has a small map: its code is fetched only when that block comes near the screen, not at the first paint.
+  for (const lang of ['pt', 'en']) {
+    const home = await newPage({ width: 1280, height: 500 });
+    await home.goto(`${base}/${lang}/`, { waitUntil: 'networkidle0' });
+    ok(`weight: home ${lang} does not load map code at the first paint`, home.requests.filter((u) => heavy.test(u) || /home-map-island/.test(u)).length === 0, home.requests.filter((u) => heavy.test(u)).join(' '));
+    await home.evaluate(() => document.querySelector('[data-home-map]').scrollIntoView());
+    await wait(1500);
+    ok(`weight: home ${lang} loads the map code when the small map comes near the screen`, home.requests.some((u) => /home-map-island|leaflet/i.test(u)));
+    await home.close();
   }
   // The map code is fetched as soon as the page has loaded, even when the block is far below the screen (a very short one).
   const page = await newPage({ width: 360, height: 100 });

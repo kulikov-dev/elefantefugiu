@@ -242,15 +242,6 @@
   background: var(--epoch-surface);
   color: var(--color-ink-muted);
 }
-
-.hero__tagline {
-  margin-block-start: var(--space-2);
-  color: var(--color-accent);
-  font-family: var(--font-body);
-  font-size: var(--text-xl);
-  font-style: italic;
-}
-
 /* Root language chooser */
 .lang-chooser {
   display: grid;

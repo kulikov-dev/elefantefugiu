@@ -8,6 +8,13 @@ export function firstMvpEpoch<E extends Pick<EpochData, 'id' | 'order' | 'mvp'>>
   return [...epochs].sort((a, b) => a.order - b.order).find((e) => epochHasContent(e, events)) ?? null;
 }
 
+/** The story the main button of the home page opens ("Read in a minute"): the rhinoceros and the elephant, the story the name comes from. */
+export const HOME_START_ID = 'rinoceronte-1515';
+
+/** That story if it is published, otherwise nothing (the button then leads to the first epoch). */
+export const homeStartStory = <T extends { id: string; status?: string }>(events: readonly T[]): T | null =>
+  events.find((e) => e.id === HOME_START_ID && e.status !== 'draft') ?? null;
+
 export interface EpochTile<E> {
   epoch: E;
   /** True when the epoch has a page; otherwise the tile is a "Coming soon" tile without a link. */

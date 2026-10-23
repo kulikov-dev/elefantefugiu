@@ -2,6 +2,7 @@
 | --- | --- | --- |
 | Home | `/en/` | `/ru/` |
 | Map | `/en/map/` | `/ru/karta/` |
+| Surprise me | `/en/surprise-me/` | `/ru/udivi-menya/` |
 | About | `/en/about/` | `/ru/o-proekte/` |
 | Method and sources | `/en/method/` | `/ru/metod/` |
 | Found a mistake? | `/en/report/` | `/ru/oshibka/` |

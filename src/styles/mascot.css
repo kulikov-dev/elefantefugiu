@@ -17,6 +17,10 @@
   width: var(--size-mascot);
 }
 
+.mascot--hero {
+  width: var(--size-mascot-hero);
+}
+
 .mascot--small {
   width: var(--size-mascot-small);
 }

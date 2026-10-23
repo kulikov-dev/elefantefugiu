@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { EventData } from '../src/lib/events';
-import { epochTiles, firstMvpEpoch, pickFeatured, pickSurprise, surpriseCandidates } from '../src/lib/home';
+import { HOME_START_ID, epochTiles, firstMvpEpoch, homeStartStory, pickFeatured, pickSurprise, surpriseCandidates } from '../src/lib/home';
 
 const ev = (id: string, epoch: string, extra: Record<string, unknown> = {}) =>
   ({ id, epoch, year: 1500, threads: ['mar'], status: 'ready', sensitive: false, min_age: 'all', place: { name: 'x', lat: 38, lon: -9 }, ...extra }) as unknown as EventData;
@@ -49,4 +49,11 @@ test('pickSurprise: never the last card, many draws; handles one card and none',
   // edge of the random range
   assert.equal(pickSurprise(ids, null, () => 0.999999), 'e');
   assert.equal(pickSurprise(ids, null, () => 0), 'a');
+});
+
+test('homeStartStory: the story of the main button when it is published, nothing otherwise', () => {
+  assert.equal(homeStartStory([{ id: 'x' }, { id: HOME_START_ID }])?.id, HOME_START_ID);
+  assert.equal(homeStartStory([{ id: HOME_START_ID, status: 'draft' }]), null);
+  assert.equal(homeStartStory([{ id: 'x' }]), null);
+  assert.equal(homeStartStory([]), null);
 });

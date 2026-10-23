@@ -154,12 +154,12 @@ if (want('continue')) {
   const visit = await newPage();
   await visit.goto(`${base}/pt/epoca/pombal-e-terramoto/`, { waitUntil: 'load' });
   ok('continue: visiting an epoch page remembers the epoch id', (await visit.evaluate(() => localStorage.getItem('lastEpoch'))) === 'pombal-e-terramoto');
-  await visit.goto(`${base}/pt/historia/evento-exemplo-17/`, { waitUntil: 'load' });
-  ok('continue: a card remembers the epoch of the card', (await visit.evaluate(() => localStorage.getItem('lastEpoch'))) === 'estado-novo-e-25-de-abril');
-  for (const [lang, word, slug] of [['pt', 'Continuar', 'estado-novo-e-25-de-abril'], ['en', 'Continue', 'estado-novo-and-25-april'], ['ru', 'Продолжить', 'eshtadu-novu-i-revolyuciya-gvozdik']]) {
+  await visit.goto(`${base}/pt/historia/rinoceronte-e-elefante/`, { waitUntil: 'load' });
+  ok('continue: a card remembers the epoch of the card', (await visit.evaluate(() => localStorage.getItem('lastEpoch'))) === 'avis-e-descobrimentos');
+  for (const [lang, word, slug] of [['pt', 'Parou na época', 'avis-e-descobrimentos'], ['en', 'You left off', 'avis-and-the-discoveries'], ['ru', 'Вы остановились', 'avis-i-velikie-otkrytiya']]) {
     await visit.goto(`${base}/${lang}/`, { waitUntil: 'load' });
     const b = await visit.$eval('[data-continue]', (a) => ({ hidden: a.hidden, text: a.textContent.trim(), href: a.getAttribute('href') }));
-    ok(`continue (${lang}): the button shows with the name of the epoch and leads to it`, !b.hidden && b.text.startsWith(word) && b.href.endsWith(`/${slug}/`), JSON.stringify(b));
+    ok(`continue (${lang}): the band shows with the name of the epoch and leads to it`, !b.hidden && b.text.startsWith(word) && b.href.endsWith(`/${slug}/`), JSON.stringify(b));
   }
   await visit.close();
 

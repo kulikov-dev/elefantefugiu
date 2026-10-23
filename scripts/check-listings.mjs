@@ -297,7 +297,9 @@ for (const lang of ['pt', 'en']) {
 // ---------- home pages ----------
 const featuredIds = load('featured.yaml').map((f) => f.id);
 
-const SITE_NAME = 'O Elefante Fugiu';
+// The first screen tells the story the name comes from; the name itself is in the header.
+const HOME_H1 = { pt: 'Em 1515, o rei pôs um rinoceronte contra um elefante. O elefante fugiu.', en: 'In 1515 a king set a rhinoceros against an elephant. The elephant ran away.' };
+const START_ID = 'rinoceronte-1515';
 for (const lang of ['pt', 'en']) {
   const where = `${lang}/ (home)`;
   const fail = (m) => errors.push(`${where}: ${m}`);
@@ -312,14 +314,23 @@ for (const lang of ['pt', 'en']) {
   const tiles = epochs.map((epoch) => ({ epoch, page: hasPage(epoch), count: inEpoch(epoch).length }));
   const first = epochs.find(hasPage);
   const placeholder = featuredIds.some((id) => events.find((e) => e.id === id)?.placeholder) || tiles.some((t) => t.page && t.epoch.placeholder);
-  commonChecks(html, where, lang, { placeholder, expectedH1: SITE_NAME });
+  commonChecks(html, where, lang, { placeholder, expectedH1: HOME_H1[lang] });
 
-  // hero: tagline, "Start" leads to the first epoch with a page, "Open the map" leads to the map page
+  // hero: the story as the h1 and a paragraph, one main button to the story the name comes from, the elephant, two plain links
   const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)?.[0] ?? '';
-  if (!hero.includes('Foi aqui')) fail('tagline is missing');
-  const hrefs = [...hero.matchAll(/<a [^>]*href="([^"]*)"/g)].map((m) => m[1]);
-  if (first && !hrefs.some((h) => h.endsWith(`/${lang}/${SEG[lang].epoch}/${first.slug[lang]}/`))) fail('"Start" must lead to the first epoch with a page');
-  if (!hrefs.some((h) => h.endsWith(lang === 'pt' ? '/pt/mapa/' : '/en/map/'))) fail('"Open the map" link is missing');
+  if (/Foi aqui/.test(hero)) fail('the hero must not repeat the name or the tagline');
+  const heroLinks = [...hero.matchAll(/<a ([^>]*)>/g)].map((m) => ({ attrs: m[1], href: attr(m[1], 'href') }));
+  const startEvent = events.find((e) => e.id === START_ID);
+  const buttons = heroLinks.filter((l) => /class="button"/.test(l.attrs));
+  if (buttons.length !== 1) fail('the hero needs exactly one main button');
+  else if (startEvent && !buttons[0].href.endsWith(`/${lang}/${SEG[lang].story}/${slugOf(startEvent, lang)}/`)) fail(`the main button must lead to the story "${START_ID}"`);
+  if (heroLinks.length !== 3) fail('the hero has the main button and two plain links (Surprise me, Open the map)');
+  if (!heroLinks.some((l) => l.href.endsWith(lang === 'pt' ? '/pt/surpreende-me/' : '/en/surprise-me/'))) fail('"Surprise me" link is missing from the hero');
+  if (!heroLinks.some((l) => l.href.endsWith(lang === 'pt' ? '/pt/mapa/' : '/en/map/'))) fail('"Open the map" link is missing from the hero');
+  if (!/<img class="mascot mascot--hero"/.test(hero)) fail('the elephant picture is missing from the hero');
+  // the band "You left off in the era ..." is a hidden link above the first screen (a script shows it)
+  if (!/<a class="continue-band"[^>]*data-continue[^>]*hidden/.test(html)) fail('the "left off" band must exist and stay hidden without JavaScript');
+  if (/class="button[^"]*"[^>]*data-continue/.test(html)) fail('"Continue" must not be a button in the row any more');
 
   // showcase: exactly the featured cards, in the order of featured.yaml
   const showcase = html.match(/<section aria-labelledby="showcase-title"[\s\S]*?<\/section>/)?.[0] ?? '';
@@ -350,28 +361,48 @@ for (const lang of ['pt', 'en']) {
     if (!li || !li[1].includes(`data-min-age="${ev.min_age}"`) || !li[1].includes(`data-sensitive="${ev.sensitive}"`)) fail(`showcase item ${id} must carry data-min-age="${ev.min_age}" and data-sensitive="${ev.sensitive}"`);
   }
 
-  // epoch tiles: all epochs by order; pages with link, count and theme; the rest "coming soon" without link
+  // epoch tiles: only the epochs with a page (big tiles with link, count, theme and years); the others are on the time strip only
   const section = html.match(/<section id="epocas"[\s\S]*?<\/section>/)?.[0] ?? '';
   const items = [...section.matchAll(/<li class="tile ([^"]*)"[^>]*>([\s\S]*?)<\/li>/g)];
-  if (items.length !== epochs.length) fail(`expected ${epochs.length} epoch tiles, found ${items.length}`);
-  tiles.forEach(({ epoch, page, count }, i) => {
+  const readyTiles = tiles.filter((x) => x.page);
+  if (items.length !== readyTiles.length) fail(`expected ${readyTiles.length} epoch tiles (only epochs with a page), found ${items.length}`);
+  readyTiles.forEach(({ epoch }, i) => {
     const [, cls = '', body = ''] = items[i] ?? [];
     if (!body.includes(epoch.name[lang])) fail(`tile ${i + 1} is not "${epoch.name[lang]}"`);
+    if (!cls.includes('tile--link') || !new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${epoch.slug[lang]}/"`).test(body)) fail(`tile "${epoch.id}" must link to its page`);
+    const want = modeCounts(inEpoch(epoch));
+    const got = countsByMode(body.match(/<p class="tile__count"[^>]*>[\s\S]*?<\/p>/)?.[0] ?? '', wordCount);
+    if (!sameCounts(got, want)) fail(`tile "${epoch.id}": counters differ (want ${showCounts(want)}; found ${showCounts(got)})`);
+    if (!body.includes(epoch.theme[lang])) fail(`tile "${epoch.id}" misses the theme phrase`);
+    if (!body.includes(`${epoch.years.from}–${epoch.years.to}`)) fail(`tile "${epoch.id}" misses the years`);
+  });
+  if (/tile--soon/.test(section)) fail('epochs that are not ready must not have tiles of their own');
+  // the time strip: all epochs in order; ready ones are links, the others plain text marked "soon"; the caption counts them
+  const strip = section.match(/<ol class="timeline"[\s\S]*?<\/ol>/)?.[0] ?? '';
+  const stripItems = [...strip.matchAll(/<li class="timeline__item ([^"]*)"[^>]*>([\s\S]*?)<\/li>/g)];
+  if (stripItems.length !== epochs.length) fail(`the time strip must hold all ${epochs.length} epochs, found ${stripItems.length}`);
+  tiles.forEach(({ epoch, page }, i) => {
+    const [, cls = '', body = ''] = stripItems[i] ?? [];
+    if (!body.includes(epoch.name[lang])) fail(`time strip item ${i + 1} is not "${epoch.name[lang]}"`);
+    const yearsText = epoch.years_label ? epoch.years_label[lang] : `${epoch.years.from}–${epoch.years.to}`;
+    if (!body.includes(yearsText)) fail(`time strip item "${epoch.id}" misses its years`);
     if (page) {
-      if (!cls.includes('tile--link') || !new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${epoch.slug[lang]}/"`).test(body)) fail(`tile "${epoch.id}" must link to its page`);
-      const want = modeCounts(inEpoch(epoch));
-      const got = countsByMode(body.match(/<p class="tile__count"[^>]*>[\s\S]*?<\/p>/)?.[0] ?? '', wordCount);
-      if (!sameCounts(got, want)) fail(`tile "${epoch.id}": counters differ (want ${showCounts(want)}; found ${showCounts(got)})`);
-      if (!body.includes(epoch.theme[lang])) fail(`tile "${epoch.id}" misses the theme phrase`);
-      if (!body.includes(`${epoch.years.from}\u2013${epoch.years.to}`)) fail(`tile "${epoch.id}" misses the years`);
-    } else {
-      if (!cls.includes('tile--soon') || /<a\b/.test(body)) fail(`tile "${epoch.id}" has no page: "coming soon" without a link expected`);
-      // An MVP epoch that has no published card yet has numeric years only; the others have years_label.
-      const yearsText = epoch.years_label ? epoch.years_label[lang] : `${epoch.years.from}–${epoch.years.to}`;
-      if (!body.includes(yearsText)) fail(`tile "${epoch.id}" misses its years`);
-      if (!/(Em breve|Coming soon)/.test(body)) fail(`tile "${epoch.id}" misses the "coming soon" label`);
+      if (!cls.includes('timeline__item--ready') || !new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${epoch.slug[lang]}/"`).test(body)) fail(`time strip: "${epoch.id}" has a page and must be a link`);
+    } else if (!cls.includes('timeline__item--soon') || /<a\b/.test(body) || !/(Em breve|Coming soon)/.test(body)) {
+      fail(`time strip: "${epoch.id}" has no page and must be plain text marked "soon"`);
     }
   });
+  const soonN = tiles.filter((x) => !x.page).length;
+  if (soonN > 0 && !new RegExp(`<p class="timeline__more"[^>]*>[^<]*\\b${soonN}\\b`).test(section)) fail(`the caption under the strip must say ${soonN} more eras`);
+  // the small map: caption with the number of places and the link to the map page (the map itself needs JavaScript)
+  const mapBlock = html.match(/<div class="home-map"[\s\S]*?(?=<section id="epocas")/)?.[0] ?? '';
+  if (!mapBlock) fail('the small map block is missing');
+  else {
+    if (!/<a href="[^"]*\/(?:mapa|map)\/">/.test(mapBlock)) fail('the small map needs the link to the map page');
+    const places = countsByMode(mapBlock.match(/<span class="home-map__count">[\s\S]*?<\/span>\s*<a/)?.[0] ?? '', (body) => Number(text(body).match(/(\d+)\s/)?.[1]));
+    const wantPlaces = modeCounts(events);
+    if (!sameCounts(places, wantPlaces)) fail(`the small map caption counts differ (want ${showCounts(wantPlaces)}; found ${showCounts(places)})`);
+  }
 
   // thread buttons: exactly the visible threads, each a link to its page with the total from the data
   const threadsSection = html.match(/<section aria-labelledby="threads-title"[\s\S]*?<\/section>/)?.[0] ?? '';
@@ -389,8 +420,7 @@ for (const lang of ['pt', 'en']) {
     }
   }
 
-  // how it works: three steps
-  if ((html.match(/<li class="step"/g) ?? []).length !== 3) fail('"How it works" needs exactly three steps');
+  if (/home-how|class="step"/.test(html)) fail('the "How it works" block must be gone');
 }
 
 // ---------- reachability: every published card from a feed, and from a thread page when it has a visible thread ----------

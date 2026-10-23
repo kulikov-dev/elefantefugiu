@@ -1,0 +1,52 @@
+/* The small map on the home page. Values come from tokens.css. Loaded only with the block. */
+
+/* With JavaScript the frame is there from the first paint, so the page does not jump when the map arrives. */
+.home-map__canvas {
+  display: none;
+}
+
+html[data-js] .home-map__canvas {
+  display: block;
+  height: var(--home-map-height);
+  border: var(--epoch-frame);
+  border-radius: var(--radius-md);
+  background: var(--epoch-line);
+  /* Leaflet's own layers (z-index 400 and more) stay inside this frame, under the menus of the header. */
+  isolation: isolate;
+}
+
+/* The map failed (no tiles, no code): the frame goes away and only the caption with the link stays. */
+.home-map[data-state='unavailable'] .home-map__canvas {
+  display: none;
+}
+
+.home-map__caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-4);
+  margin-block-start: var(--space-2);
+}
+
+.home-map__count {
+  font-weight: var(--weight-strong);
+}
+
+.home-map__caption a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-target);
+}
+
+/* A story: a dot in the accent colour with a ring of the page colour. */
+.home-map__dot {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: var(--border-medium);
+  fill-opacity: 1;
+  cursor: pointer;
+}
+
+.home-map__dot:hover {
+  fill: var(--color-accent-strong);
+}

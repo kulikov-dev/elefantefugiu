@@ -1,0 +1,120 @@
+---
+// A card of "Where to start" on the home page: the hook is the large line (it is stronger than the title), beneath it the small
+// title, "year · city" and the credibility label. A picture, when the story has one, goes on top; without one the card
+// is simply shorter (nothing is reserved). The whole card is the link (the title, stretched).
+import TagLabel from './TagLabel.astro';
+import { t } from '../i18n';
+import { storyPath, withBase, type Lang } from '../i18n/routes';
+import { formatYear, placeShort, textLangOf, type EventData } from '../lib/events';
+
+interface Props {
+  lang: Lang;
+  event: EventData;
+}
+
+const { lang, event } = Astro.props;
+const href = storyPath(lang, event.slug[lang]);
+---
+<article class="start-card" id={`c-${event.id}`}>
+  {
+    event.image && !event.sensitive && (
+      <img class="start-card__image" src={withBase(event.image.src)} alt={event.image.alt[lang]} width="1200" height="630" loading="lazy" decoding="async" />
+    )
+  }
+  <div class="start-card__body">
+    <p class="start-card__hook" lang={textLangOf(event, lang)}>{event.hook[lang]}</p>
+    <h3 class="start-card__title"><a href={href}>{event.title[lang]}</a></h3>
+    <p class="start-card__meta">
+      <span>{formatYear(event, lang)} &middot; {placeShort(event.place, lang)}</span>
+      <TagLabel lang={lang} label={event.label} />
+      {event.sensitive && <span class="start-card__heavy">{t(lang, 'ui.heavy_topic')}</span>}
+    </p>
+  </div>
+</article>
+
+<style>
+  .start-card {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: hidden;
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .start-card:hover {
+    border-color: var(--color-accent);
+  }
+
+  .start-card:focus-within {
+    outline: var(--ring-width) solid var(--color-accent);
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  .start-card__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1200 / 630;
+    object-fit: cover;
+    background: var(--epoch-line);
+    filter: var(--image-filter);
+  }
+
+  .start-card__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .start-card__hook {
+    font-family: var(--font-body);
+    font-size: var(--text-xl);
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  .start-card__title {
+    margin-block-start: auto;
+    padding-block-start: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-strong);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .start-card__title a {
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  /* The link is the title; it covers the whole card. */
+  .start-card__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .start-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .start-card__meta :global(.tag) {
+    padding-inline: 0;
+    border-color: transparent;
+    background: transparent;
+  }
+
+  .start-card__heavy {
+    font-weight: 600;
+  }
+</style>
