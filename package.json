@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/check-i18n.mjs && node scripts/check-contrast.mjs && npm test && tsx scripts/check-data.ts && astro build",
-    "postbuild": "node scripts/make-sitemap.mjs && node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs && node scripts/check-tokens.mjs && node scripts/check-ru.mjs && node scripts/check-mascot.mjs",
+    "postbuild": "node scripts/make-sitemap.mjs && node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs && node scripts/check-tokens.mjs && node scripts/check-ru.mjs && node scripts/check-mascot.mjs && node scripts/check-published.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "check:data": "tsx scripts/check-data.ts",
@@ -23,6 +23,7 @@
     "test:unit": "vitest run",
     "check:tokens": "node scripts/check-tokens.mjs",
     "check:ru": "node scripts/check-ru.mjs && node scripts/check-mascot.mjs",
+    "check:published": "node scripts/check-published.mjs",
     "make:og": "node scripts/make-og-images.mjs",
     "make:sitemap": "node scripts/make-sitemap.mjs",
     "check:contrast": "node scripts/check-contrast.mjs",

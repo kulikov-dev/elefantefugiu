@@ -140,7 +140,7 @@ if (want('flash')) {
   await both.evaluateOnNewDocument(() => localStorage.setItem('family', 'all'));
   await both.goto(`${base}${epochPath(lastEpoch)}?fio=${aThread.id}&vista=grelha`, { waitUntil: 'load' });
   const all = await both.evaluate(() => { const h = document.documentElement; return { family: h.dataset.family, theme: h.dataset.theme, fio: h.dataset.fio, vista: h.dataset.vista, epoch: h.dataset.epoch }; });
-  ok('one head script sets theme, family mode, thread and view together', all.family === 'all' && all.theme === 'dark' && all.fio === aThread.id && all.vista === 'grelha' && all.epoch === lastEpoch.id, JSON.stringify(all));
+  ok('one head script sets theme, family mode, thread and view together (the view only for an epoch long enough for the grid)', all.family === 'all' && all.theme === 'dark' && all.fio === aThread.id && all.vista === (world.inEpoch(lastEpoch.id).length >= 9 ? 'grelha' : undefined) && all.epoch === lastEpoch.id, JSON.stringify(all));
   await both.close();
 }
 
