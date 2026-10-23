@@ -332,6 +332,14 @@ for (const lang of ['pt', 'en']) {
   const placeholder = featuredIds.some((id) => events.find((e) => e.id === id)?.placeholder) || tiles.some((t) => t.page && t.epoch.placeholder);
   commonChecks(html, where, lang, { placeholder, expectedH1: HOME_H1[lang] });
 
+  // The small map draws map tiles in the browser (Leaflet shows the attribution it is given): the config must carry it, with a link.
+  const mapConfig = raw.match(/<script type="application\/json" data-home-map-config>([\s\S]*?)<\/script>/)?.[1] ?? '';
+  if (!mapConfig) fail('the small map has no config');
+  else {
+    const attribution = JSON.parse(mapConfig).tile?.attribution ?? '';
+    if (!/<a [^>]*href="https?:\/\/[^"]+"/.test(attribution) || !/(OpenStreetMap|©|&copy;)/i.test(attribution)) fail('the small map needs the attribution of the tiles with a link (© OpenStreetMap contributors)');
+  }
+
   // hero: the story as the h1 and a paragraph, one main button to the story the name comes from, the elephant, two plain links
   const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)?.[0] ?? '';
   if (/Foi aqui/.test(hero)) fail('the hero must not repeat the name or the tagline');

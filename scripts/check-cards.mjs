@@ -257,6 +257,11 @@ for (const ev of events) {
     if (Boolean(ev.interactive) !== has(/data-interactive=/)) fail('interactive placeholder does not match the data');
     if (!has(/data-share-link/) || !has(/data-share-button/)) fail('share widget is missing');
     if (!has(/(corrigir|report)\/\?url=/)) fail('"Found a mistake?" link with the card address is missing');
+    // The mini-map is made of map tiles: the credit "© OpenStreetMap contributors" (or the provider's own) with its link is part of the licence.
+    if (/class="minimap__tile"/.test(html)) {
+      const credit = html.match(/<figcaption class="minimap__credit"[^>]*>([\s\S]*?)<\/figcaption>/)?.[1] ?? '';
+      if (!/<a [^>]*href="https?:\/\/[^"]+"/.test(credit) || !/(OpenStreetMap|©|&copy;)/i.test(credit)) fail('the mini-map needs the credit of the tiles with a link (© OpenStreetMap contributors)');
+    }
     // The small link stays in view under "Share", not inside the folded "More" layer.
     const actionsBlock = html.match(/<div class="actions"[\s\S]*?<\/div>/)?.[0] ?? '';
     if (!/(corrigir|report)\/\?url=/.test(actionsBlock) || !/data-share-button/.test(actionsBlock)) fail('the report link must stand under the Share button, outside "More"');
