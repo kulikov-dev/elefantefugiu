@@ -26,7 +26,7 @@ interface Config {
   strings: { zoom_in: string; zoom_out: string };
 }
 
-const BEHAVIOUR = { maxZoom: 14, fitMaxZoom: 9, fitPadding: 28, dotRadius: 9, tileErrorsBeforeGivingUp: 4, tileTimeoutMs: 8000 };
+const BEHAVIOUR = { maxZoom: 14, dotRadius: 9, tileErrorsBeforeGivingUp: 4, tileTimeoutMs: 8000 };
 
 function loadLeafletCss(): Promise<void> {
   return new Promise((resolve) => {
@@ -94,10 +94,8 @@ export async function mount(root: HTMLElement): Promise<void> {
         .on('click', () => location.assign(card.href))
         .addTo(dots);
     }
-    if (fit) {
-      const points = (shown.length > 0 ? shown : cfg.cards).map((c) => [c.lat, c.lon] as [number, number]);
-      map.fitBounds(L.latLngBounds(points), { padding: [BEHAVIOUR.fitPadding, BEHAVIOUR.fitPadding], maxZoom: BEHAVIOUR.fitMaxZoom, animate: false });
-    }
+    // The first view is the mainland by its borders, not the box of the points: a point outside it is simply out of the frame.
+    if (fit) map.fitBounds(box(cfg.home), { animate: false });
   };
   draw(true);
   onFamilyChange(() => draw(false));

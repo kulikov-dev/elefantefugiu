@@ -6,7 +6,7 @@ import '../styles/home-map.css';
 import { plural, t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
 import { ageInfoOf, countByMode, countVariants, familyAttrs } from '../lib/family';
-import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
+import { HOME_MAP_VIEW, mapMaxBounds } from '../lib/map-data';
 import { safeJson } from '../lib/map-cards';
 import type { TileConfig } from '../lib/tiles';
 import type { EventData } from '../lib/events';
@@ -31,7 +31,7 @@ const config = {
     sensitive: familyAttrs(e)['data-sensitive'] === 'true',
   })),
   maxBounds: mapMaxBounds(events.map((e) => e.bridge)),
-  home: MAINLAND_VIEW,
+  home: HOME_MAP_VIEW,
   tile: { url: tile.url, attribution: tile.attribution },
   strings: { zoom_in: t(lang, 'map.zoom_in'), zoom_out: t(lang, 'map.zoom_out') },
 };

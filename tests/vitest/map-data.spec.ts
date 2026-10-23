@@ -107,3 +107,14 @@ describe('cardsView (initial view of a map with some cards)', () => {
     }
   });
 });
+
+describe('HOME_MAP_VIEW', () => {
+  it('is the mainland by its borders (about 36.9 to 42.2 N, 9.6 to 6.2 W), and holds every mainland story', async () => {
+    const { HOME_MAP_VIEW } = await import('../../src/lib/map-data');
+    expect(HOME_MAP_VIEW).toEqual({ south: 36.9, west: -9.6, north: 42.2, east: -6.2 });
+    // Lisbon, Porto, Elvas, Torres Vedras: inside.
+    for (const [lat, lon] of [[38.7, -9.14], [41.15, -8.61], [38.88, -7.16], [39.1, -9.26]] as const) {
+      expect(lat >= HOME_MAP_VIEW.south && lat <= HOME_MAP_VIEW.north && lon >= HOME_MAP_VIEW.west && lon <= HOME_MAP_VIEW.east).toBe(true);
+    }
+  });
+});

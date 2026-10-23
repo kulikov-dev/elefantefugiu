@@ -4,6 +4,9 @@ import type { Bounds } from './markers';
 /** Initial view: the whole mainland. */
 export const MAINLAND_VIEW: Bounds = { south: 36.8, west: -9.7, north: 42.3, east: -6.0 };
 
+/** The first view of the small map on the home page: the mainland, by its borders (not by the points of the stories). */
+export const HOME_MAP_VIEW: Bounds = { south: 36.9, west: -9.6, north: 42.2, east: -6.2 };
+
 /** Where Portuguese places can be (same areas as check:data). Used to keep every card inside the allowed map area. */
 const REGIONS: Bounds[] = [
   { south: 36.8, north: 42.2, west: -9.6, east: -6.1 }, // mainland
