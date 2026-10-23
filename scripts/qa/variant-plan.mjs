@@ -7,12 +7,26 @@
 //                   view switch "Timeline / Grid" appears from 9) and holds a heavy-topic card (19) and a 12+ card;
 //   21 23 24        published here in the epoch Estado Novo, all of them 16+: the age screen "16+" and an epoch that every family mode
 //                   leaves empty;
+// 20              also carries a ship scale ("Size of the nau"): the real site has no card with this interactive yet;
 // and the marker limit of the map is lowered to 7 (in the copy only), because the real limit (30) is above the number of stories:
 // with it the map has clusters and the "Show more" button, which the map suites check.
 export const MOVED = ['evento-exemplo-17', 'evento-exemplo-18', 'evento-exemplo-19', 'evento-exemplo-20', 'evento-exemplo-22'];
 export const SIXTEEN = ['evento-exemplo-21', 'evento-exemplo-23', 'evento-exemplo-24'];
 /** The limit of markers on the map in the fixture build (the real one is DEFAULT_LIMIT in src/lib/markers.ts). */
 export const VARIANT_MARKER_LIMIT = 7;
+/** The fixture card that carries the ship scale, and the data it carries (the shape of shipScaleData in src/data/schemas.ts). */
+export const SHIP_CARD = 'evento-exemplo-20';
+export const SHIP_SCALE = {
+  type: 'ship_scale',
+  data: {
+    placeholder: true,
+    caption: { pt: 'Navis piscium, legenda de teste.', en: 'Ship of fish, test caption.', ru: 'Ид эст лаборум лорем ипсум.' },
+    items: [
+      { id: 'old-ship', label: { pt: 'Navis antiqua', en: 'Old ship', ru: 'Амет консектетур.' }, length_m: 25, height_m: 20, tone: 'ochre' },
+      { id: 'modern-ship', label: { pt: 'Navis nova', en: 'New ship', ru: 'Темпор инцидидунт.' }, length_m: 200, height_m: 50, tone: 'grey' },
+    ],
+  },
+};
 export const MOVED_TO = 'avis-e-descobrimentos';
 export const FIXTURE_EPOCH = 'estado-novo-e-25-de-abril';
 
@@ -25,7 +39,9 @@ export function variantOf(event) {
     out.epoch = MOVED_TO;
     out.year = 1400 + moved * 30;
     delete out.year_label;
-  } else if (SIXTEEN.includes(event.id)) {
+  }
+  if (event.id === SHIP_CARD) out.interactive = SHIP_SCALE;
+  if (SIXTEEN.includes(event.id)) {
     out.min_age = '16';
   }
   return out;

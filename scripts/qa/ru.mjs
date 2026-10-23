@@ -1,10 +1,18 @@
 // Browser checks for the Russian stage: the language menu on 320 and 360 px, the root choice, the banner on a card that is
 // not translated, noindex and hreflang, Cyrillic fonts only on the Russian pages, plural forms.
-// Run against dist/ served by serve.mjs (base path "/"):   node ru.mjs [menu root banner fonts plural]
-import { fsPath, launchBrowser } from './browser.mjs';
+// Run against dist/ served by serve.mjs (base path "/"):   node ru.mjs [variant] [menu root banner fonts plural]
+// The cards and epochs come from src/content (data.mjs). Every real card is translated into Russian, so the page of a card that is
+// not translated (the banner, noindex, no hreflang) exists only in the fixture build: `variant` runs against it.
+import { launchBrowser } from './browser.mjs';
+import { epochPath, fixture, need, pt, en, real, threadPath } from './data.mjs';
 
-const base = process.env.BASE_URL || 'http://localhost:4400';
-const ONLY = process.argv.slice(2);
+const VARIANT = process.argv[2] === 'variant';
+const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
+const world = VARIANT ? fixture : real;
+const ruPath = (c) => `/ru/istoriya/${c.slug.ru ?? c.slug.en}/`;
+const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
+const ruCard = need('a card translated into Russian', () => world.published.find((c) => c.ru_ready));
+const firstEpoch = world.readyEpochs[0];
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const HEADER_MAX = 145; // the height of the header on a phone before the Russian stage (stage 7b-1)
 
@@ -29,9 +37,11 @@ const newPage = async ({ width = 360, language = null, saved = null } = {}) => {
   await page.evaluateOnNewDocument(
     (lang, stored) => {
       if (lang !== null) Object.defineProperty(navigator, 'language', { get: () => lang });
+      // The browser profile is shared by the whole suite: start every page from the saved choice it asks for (none, or the given one).
       try {
-        if (stored !== null && !sessionStorage.getItem('__seeded')) {
-          localStorage.setItem('lang', stored);
+        if (!sessionStorage.getItem('__seeded')) {
+          if (stored !== null) localStorage.setItem('lang', stored);
+          else localStorage.removeItem('lang');
           sessionStorage.setItem('__seeded', '1');
         }
       } catch (e) {}
@@ -75,12 +85,12 @@ if (want('menu')) {
   }
   // Switching keeps the page: a card in Russian leads to the card in the other languages, and the choice is remembered.
   const page = await newPage({ width: 360 });
-  await page.goto(`${base}/ru/istoriya/testovoe-sobytie-01/`, { waitUntil: 'load' });
+  await page.goto(`${base}${ruPath(ruCard)}`, { waitUntil: 'load' });
   const hrefs = await page.$$eval('.lang-switch a', (as) => as.map((a) => a.getAttribute('href')));
-  ok('menu: on a Russian card the links lead to the same card in pt and en and to itself', hrefs.join() === '/pt/historia/evento-exemplo-01/,/en/story/example-event-01/,/ru/istoriya/testovoe-sobytie-01/', hrefs.join());
+  ok('menu: on a Russian card the links lead to the same card in pt and en and to itself', hrefs.join() === [pt(ruCard), en(ruCard), ruPath(ruCard)].join(), hrefs.join());
   await page.click('.lang-switch__current');
   await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('.lang-switch a[hreflang="en"]')]);
-  ok('menu: choosing English opens the English card and stores "en"', page.url().endsWith('/en/story/example-event-01/') && (await page.evaluate(() => localStorage.getItem('lang'))) === 'en');
+  ok('menu: choosing English opens the English card and stores "en"', page.url().endsWith(en(ruCard)) && (await page.evaluate(() => localStorage.getItem('lang'))) === 'en');
   await page.close();
 }
 
@@ -108,65 +118,86 @@ if (want('root')) {
 
 // ---------- 3. A card that is not translated ----------
 if (want('banner')) {
-  const page = await newPage({ width: 360 });
-  await page.goto(`${base}/ru/istoriya/example-event-09/`, { waitUntil: 'load' });
-  const stand = await page.evaluate(() => {
-    const banner = document.querySelector('[data-not-translated]');
-    const r = banner?.getBoundingClientRect();
-    return {
-      lang: document.documentElement.lang,
-      banner: banner?.textContent.trim() ?? null,
-      visible: Boolean(r && r.width > 0 && r.height > 0),
-      noindex: document.querySelector('meta[name=robots]')?.content ?? null,
-      alternates: [...document.querySelectorAll('link[rel=alternate]')].map((l) => l.getAttribute('hreflang')),
-      h1: document.querySelector('h1').textContent.trim(),
-      storyLang: document.querySelector('#historia .prose')?.getAttribute('lang') ?? null,
-    };
-  });
-  ok('banner: the Russian page of a card that is not translated says so, above the text', stand.visible && stand.banner === 'Эта страница пока не переведена. Показан текст на английском.', stand.banner ?? 'no banner');
-  ok('banner: the page is noindex and has no hreflang', stand.noindex === 'noindex' && stand.alternates.length === 0, JSON.stringify([stand.noindex, stand.alternates]));
-  ok('banner: the text is the English one and is marked as such (lang)', stand.lang === 'ru' && stand.h1 === 'Example event 09' && ['en', 'la'].includes(stand.storyLang), JSON.stringify([stand.lang, stand.h1, stand.storyLang]));
-  await page.close();
-
-  const ready = await newPage({ width: 360 });
-  await ready.goto(`${base}/ru/istoriya/testovoe-sobytie-01/`, { waitUntil: 'load' });
-  const r = await ready.evaluate(() => ({ banner: Boolean(document.querySelector('[data-not-translated]')), h1: document.querySelector('h1').textContent.trim(), alternates: [...document.querySelectorAll('link[rel=alternate]')].map((l) => l.getAttribute('hreflang')).sort(), robots: document.querySelector('meta[name=robots]')?.content ?? null, hook: document.querySelector('.hook')?.textContent.trim() ?? '' }));
-  ok('banner: a card ready in Russian has no banner, its own title and text, hreflang pt, en, ru and x-default', !r.banner && r.h1 === 'Тестовое событие 01' && /[а-я]/.test(r.hook) && r.alternates.join() === 'en,pt,ru,x-default', JSON.stringify(r));
-  await ready.close();
-
-  // The Portuguese and English pages of a card that is not translated do not name a Russian version.
-  for (const path of ['/pt/historia/evento-exemplo-09/', '/en/story/example-event-09/']) {
-    const p = await newPage();
-    await p.goto(`${base}${path}`, { waitUntil: 'load' });
-    const alt = await p.$$eval('link[rel=alternate]', (ls) => ls.map((l) => l.getAttribute('hreflang')).sort());
-    ok(`banner: ${path} names pt, en and x-default only`, alt.join() === 'en,pt,x-default', alt.join());
-    await p.close();
+  // The cards that are not translated: none on the real site (all are ready in Russian), the fixtures in the fixture build.
+  const standIns = world.published.filter((c) => !c.ru_ready);
+  if (VARIANT) {
+    const standIn = need('a card that is not translated into Russian', () => standIns[0]);
+    const page = await newPage({ width: 360 });
+    await page.goto(`${base}${ruPath(standIn)}`, { waitUntil: 'load' });
+    const stand = await page.evaluate(() => {
+      const banner = document.querySelector('[data-not-translated]');
+      const r = banner?.getBoundingClientRect();
+      return {
+        lang: document.documentElement.lang,
+        banner: banner?.textContent.trim() ?? null,
+        visible: Boolean(r && r.width > 0 && r.height > 0),
+        noindex: document.querySelector('meta[name=robots]')?.content ?? null,
+        alternates: [...document.querySelectorAll('link[rel=alternate]')].map((l) => l.getAttribute('hreflang')),
+        h1: document.querySelector('h1').textContent.trim(),
+        storyLang: document.querySelector('#historia .prose')?.getAttribute('lang') ?? null,
+      };
+    });
+    ok('banner: the Russian page of a card that is not translated says so, above the text', stand.visible && stand.banner === 'Эта страница пока не переведена. Показан текст на английском.', stand.banner ?? 'no banner');
+    ok('banner: the page is noindex and has no hreflang', stand.noindex === 'noindex' && stand.alternates.length === 0, JSON.stringify([stand.noindex, stand.alternates]));
+    ok('banner: the text is the English one and is marked as such (lang)', stand.lang === 'ru' && stand.h1 === standIn.title.en && ['en', 'la'].includes(stand.storyLang), JSON.stringify([stand.lang, stand.h1, stand.storyLang]));
+    await page.close();
+    // The Portuguese and English pages of a card that is not translated do not name a Russian version.
+    for (const path of [pt(standIn), en(standIn)]) {
+      const p = await newPage();
+      await p.goto(`${base}${path}`, { waitUntil: 'load' });
+      const alt = await p.$$eval('link[rel=alternate]', (ls) => ls.map((l) => l.getAttribute('hreflang')).sort());
+      ok(`banner: ${path} names pt, en and x-default only`, alt.join() === 'en,pt,x-default', alt.join());
+      await p.close();
+    }
   }
-  // A feed of a Russian epoch page shows the English stand-in text of the cards that are not translated.
+  const ready = await newPage({ width: 360 });
+  await ready.goto(`${base}${ruPath(ruCard)}`, { waitUntil: 'load' });
+  const r = await ready.evaluate(() => ({ banner: Boolean(document.querySelector('[data-not-translated]')), h1: document.querySelector('h1').textContent.trim(), alternates: [...document.querySelectorAll('link[rel=alternate]')].map((l) => l.getAttribute('hreflang')).sort(), robots: document.querySelector('meta[name=robots]')?.content ?? null, hook: document.querySelector('.hook')?.textContent ?? '' }));
+  ok('banner: a card ready in Russian has no banner, its own title and text, hreflang pt, en, ru and x-default', !r.banner && r.h1 === ruCard.title.ru && /[а-я]/.test(r.hook) && r.alternates.join() === 'en,pt,ru,x-default', JSON.stringify(r));
+  await ready.close();
+  // A feed of a Russian epoch page marks the language of the text of every card that is not translated (and of no other card).
   const feed = await newPage({ width: 1280 });
-  await feed.goto(`${base}/ru/epoha/pombal-zemletryasenie-begstvo-dvora/`, { waitUntil: 'load' });
+  await feed.goto(`${base}${epochPath(firstEpoch, 'ru')}`, { waitUntil: 'load' });
   const f = await feed.evaluate(() => ({ cards: document.querySelectorAll('.ecard').length, marked: [...document.querySelectorAll('.ecard .ecard__hook')].filter((h) => ['en', 'la'].includes(h.getAttribute('lang'))).length }));
-  ok('banner: in the feed of a Russian epoch page every card that is not translated marks its text language', f.cards > 0 && f.marked === f.cards, JSON.stringify(f));
+  const expectedMarked = world.inEpoch(firstEpoch.id).filter((c) => !c.ru_ready).length;
+  ok('banner: in the feed of a Russian epoch page exactly the cards that are not translated mark their text language', f.cards === world.inEpoch(firstEpoch.id).length && f.marked === expectedMarked, JSON.stringify({ ...f, expectedMarked }));
   await feed.close();
 }
 
 // ---------- 4. Cyrillic fonts only on the Russian pages ----------
 if (want('fonts')) {
-  const paths = ['/pt/', '/en/', '/pt/historia/evento-exemplo-01/', '/en/story/example-event-02/', '/pt/epoca/avis-e-descobrimentos/', '/en/era/avis-and-the-discoveries/', '/pt/mapa/'];
+  const paths = ['/pt/', '/en/', pt(ruCard), en(world.published.find((c) => c.id !== ruCard.id)), epochPath(firstEpoch), epochPath(firstEpoch, 'en'), '/pt/mapa/'];
+  const withRussianText = [];
   for (const path of paths) {
     const page = await newPage({ width: 1280 });
     await page.goto(`${base}${path}`, { waitUntil: 'networkidle0' });
+    await page.evaluate(() => document.fonts.ready);
     const cyr = page.fontRequests.filter((u) => /cyrillic/i.test(u));
-    ok(`fonts: ${path} does not fetch a Cyrillic font file`, cyr.length === 0, cyr.join(' '));
+    // The font files are split by script (unicode-range): a Cyrillic file is fetched exactly when the page has a Cyrillic letter in its
+    // own text. The name "Русский" in the language menu is drawn in the system font, so it is not counted.
+    const hasCyrillic = await page.evaluate(() => {
+      // Only text that is drawn counts: a closed <details> (the list of sources) is not rendered, so it loads no font.
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+        const el = n.parentElement;
+        if (!/[Ѐ-ӿ]/.test(n.textContent) || el.closest('.lang-switch, script, style, noscript')) continue;
+        if (el.checkVisibility({ contentVisibilityAuto: true, visibilityProperty: true })) return true;
+      }
+      return false;
+    });
+    
+    ok(`fonts: ${path} fetches a Cyrillic font file only if its own text has Cyrillic letters (${hasCyrillic ? 'it has' : 'it has none'})`, (cyr.length > 0) === hasCyrillic, cyr.join(' '));
+    if (await page.evaluate(() => /[Ѐ-ӿ]/.test([...document.querySelectorAll('.lang-switch')].reduce((t, el) => t.replace(el.textContent, ''), document.body.textContent)))) withRussianText.push(path);
     await page.close();
   }
+  if (withRussianText.length > 0) console.log(`INFO  content: Russian words on pages outside /ru/ (the titles of some sources carry a note in Russian, in the list of sources): ${withRussianText.join(', ')}`);
   // The 404 page holds the text in all three languages, so it is the one page outside /ru/ that draws Cyrillic.
   const nf = await newPage({ width: 1280 });
   await nf.goto(`${base}/404.html`, { waitUntil: 'networkidle0' });
   ok('fonts: the 404 page (pt, en and ru text together) fetches the Cyrillic files', nf.fontRequests.some((u) => /cyrillic/i.test(u)));
   await nf.close();
   let ruBytes = 0;
-  for (const path of ['/ru/', '/ru/istoriya/testovoe-sobytie-01/', '/ru/epoha/avis-i-velikie-otkrytiya/']) {
+  for (const path of ['/ru/', ruPath(ruCard), epochPath(firstEpoch, 'ru')]) {
     const page = await newPage({ width: 1280 });
     const sizes = [];
     page.on('response', async (res) => {
@@ -189,7 +220,7 @@ if (want('fonts')) {
 // ---------- 5. Plural forms in the browser ----------
 if (want('plural')) {
   const page = await newPage({ width: 1280 });
-  await page.goto(`${base}/ru/epoha/avis-i-velikie-otkrytiya/`, { waitUntil: 'networkidle0' });
+  await page.goto(`${base}${epochPath(firstEpoch, 'ru')}`, { waitUntil: 'networkidle0' });
   const counts = await page.$$eval('[data-fio]', (bs) => bs.map((b) => b.getAttribute('data-fio')).filter(Boolean));
   const seen = new Set();
   for (const fio of counts.slice(0, 5)) {

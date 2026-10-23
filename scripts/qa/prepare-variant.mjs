@@ -7,7 +7,10 @@ import { execSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { FIXTURE_EPOCH, MOVED, MOVED_TO, SIXTEEN, VARIANT_MARKER_LIMIT, variantOf } from './variant-plan.mjs';
+import { createRequire } from 'node:module';
+import { FIXTURE_EPOCH, MOVED, MOVED_TO, SHIP_CARD, SHIP_SCALE, SIXTEEN, VARIANT_MARKER_LIMIT, variantOf } from './variant-plan.mjs';
+
+const { stringify } = createRequire(import.meta.url)('../../node_modules/yaml');
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const out = join(process.env.QA_VARIANT_DIR || tmpdir(), 'elefante-variant');
@@ -27,6 +30,8 @@ for (const name of readdirSync(dir)) {
   let next = text.replace(/^status: draft\s*$/m, 'status: ready');
   if (plan.epoch === MOVED_TO) next = next.replace(/^epoch: .*$/m, `epoch: ${MOVED_TO}`).replace(/^year: .*$/m, `year: ${plan.year}`).replace(/^year_label:.*\n/m, '');
   if (plan.min_age === '16') next = next.replace(/^min_age:.*$/m, "min_age: '16'");
+  if (id === SHIP_CARD) next = `${next.trimEnd()}
+${stringify({ interactive: SHIP_SCALE })}`;
   if (next === text) throw new Error(`variant: nothing changed in ${name}`);
   writeFileSync(file, next);
   changed += 1;

@@ -1,25 +1,28 @@
 // Browser checks for stage 7a: the interactives "1 against 5" (ArmyDots) and "Size of the nau" (ShipScale).
-// Run against dist/ served by serve.mjs; the section "family" also needs the variant build (prepare-variant.mjs):
-//   node interactives.mjs                          every section except "family"
-//   VARIANT_URL=http://localhost:4401 node interactives.mjs family
-// Expected values come from src/content/events/*.yaml.
-import { fsPath, launchBrowser } from './browser.mjs';
-import { createRequire } from 'node:module';
-import { readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+// Run against dist/ served by serve.mjs (base path "/"):   node interactives.mjs [variant] [keyboard text color motion nojs code modes family]
+// The cards come from src/content (data.mjs). The real site has one interactive, the dots of Aljubarrota ("1 against 5"); the ships
+// ("Size of the nau") have no real card yet, so their checks run on the fixture build (`variant`, variant-plan.mjs: a fixture card
+// carries a ship scale). The expected numbers are read from the card data.
+import { launchBrowser } from './browser.mjs';
+import { fixture, need, real } from './data.mjs';
 
-const require = createRequire(import.meta.url);
-const { parse } = require('../../node_modules/yaml');
-const root = fsPath(new URL('../../', import.meta.url));
-const base = process.env.BASE_URL || 'http://localhost:4400';
-const variantBase = process.env.VARIANT_URL || 'http://localhost:4401';
-const ONLY = process.argv.slice(2);
-const want = (name) => ONLY.length === 0 ? name !== 'family' : ONLY.includes(name);
+const VARIANT = process.argv[2] === 'variant';
+const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
+const world = VARIANT ? fixture : real;
+const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
+const want = (name) => (ONLY.length === 0 ? true : ONLY.includes(name));
 
-const events = readdirSync(join(root, 'src/content/events')).map((n) => parse(readFileSync(join(root, 'src/content/events', n), 'utf8'), { schema: 'core', customTags: ['timestamp'] }));
-const dotsCard = events.find((e) => e.interactive?.type === 'army_dots');
-const shipCard = events.find((e) => e.interactive?.type === 'ship_scale');
-const plainCard = events.find((e) => !e.interactive && e.status === 'ready');
+const dotsCard = need('a card with the dots interactive', () => world.published.find((e) => e.interactive?.type === 'army_dots'));
+// Ships: only where a card has the ship scale (the fixture build); null on the real site.
+const shipCard = world.published.find((e) => e.interactive?.type === 'ship_scale') ?? null;
+if (VARIANT && !shipCard) throw new Error('The fixture build must carry a card with a ship scale (variant-plan.mjs).');
+// The ratio sentence compares the group with the largest middle of the estimate with the one with the smallest.
+const ratioGroups = (d) => {
+  const mid = (g) => (g.min + g.max) / 2;
+  const sorted = [...d.groups].sort((a, b) => mid(a) - mid(b));
+  return [sorted.at(-1), sorted[0]];
+};
+const plainCard = need('a card without an interactive', () => world.published.find((e) => !e.interactive && e.min_age === 'all' && !e.sensitive));
 const SEG = { pt: 'historia', en: 'story' };
 const url = (b, lang, e, hash = '#detalhes') => `${b}/${lang}/${SEG[lang]}/${e.slug[lang]}/${hash}`;
 // Same call as formatNumber in src/lib/viz.ts (useGrouping: true gives "1 000" in Portuguese too).
@@ -94,28 +97,30 @@ if (want('keyboard')) {
     ok(`dots (${lang}): no script errors`, page.errors.length === 0, page.errors.join('; '));
     await page.close();
 
-    const ships = await newPage();
-    await ships.goto(url(base, lang, shipCard), { waitUntil: 'load' });
-    const got = await tabTo(ships, '[data-viz-switch] input');
-    ok(`ships (${lang}): the switch is reached with Tab (one tab stop)`, got);
-    if (got) {
-      const o = await outline(ships);
-      ok(`ships (${lang}): the focused option has a visible outline`, o.style !== 'none' && o.width >= 2, JSON.stringify(o));
-      const start = await ships.evaluate((v) => ({ mode: document.querySelector('[data-viz-ships]').dataset.mode, stack: eval(v)(document.querySelector('.viz__svg--stack')), overlay: eval(v)(document.querySelector('.viz__svg--overlay')) }), vis);
-      ok(`ships (${lang}): starts side by side`, start.mode === 'stack' && start.stack && !start.overlay);
-      await ships.keyboard.press('ArrowRight');
-      const next = await ships.evaluate((v) => ({ mode: document.querySelector('[data-viz-ships]').dataset.mode, stack: eval(v)(document.querySelector('.viz__svg--stack')), overlay: eval(v)(document.querySelector('.viz__svg--overlay')) }), vis);
-      ok(`ships (${lang}): the right arrow switches to overlaid`, next.mode === 'overlay' && !next.stack && next.overlay);
-      await ships.keyboard.press('ArrowLeft');
-      ok(`ships (${lang}): the left arrow goes back`, (await ships.evaluate(() => document.querySelector('[data-viz-ships]').dataset.mode)) === 'stack');
-      await ships.keyboard.press('Tab');
-      ok(`ships (${lang}): Tab leaves the group in one step (a radio group is one tab stop)`, !(await ships.evaluate(() => document.activeElement?.matches('[data-viz-switch] input'))));
+    if (shipCard) {
+      const ships = await newPage();
+      await ships.goto(url(base, lang, shipCard), { waitUntil: 'load' });
+      const got = await tabTo(ships, '[data-viz-switch] input');
+      ok(`ships (${lang}): the switch is reached with Tab (one tab stop)`, got);
+      if (got) {
+        const o = await outline(ships);
+        ok(`ships (${lang}): the focused option has a visible outline`, o.style !== 'none' && o.width >= 2, JSON.stringify(o));
+        const start = await ships.evaluate((v) => ({ mode: document.querySelector('[data-viz-ships]').dataset.mode, stack: eval(v)(document.querySelector('.viz__svg--stack')), overlay: eval(v)(document.querySelector('.viz__svg--overlay')) }), vis);
+        ok(`ships (${lang}): starts side by side`, start.mode === 'stack' && start.stack && !start.overlay);
+        await ships.keyboard.press('ArrowRight');
+        const next = await ships.evaluate((v) => ({ mode: document.querySelector('[data-viz-ships]').dataset.mode, stack: eval(v)(document.querySelector('.viz__svg--stack')), overlay: eval(v)(document.querySelector('.viz__svg--overlay')) }), vis);
+        ok(`ships (${lang}): the right arrow switches to overlaid`, next.mode === 'overlay' && !next.stack && next.overlay);
+        await ships.keyboard.press('ArrowLeft');
+        ok(`ships (${lang}): the left arrow goes back`, (await ships.evaluate(() => document.querySelector('[data-viz-ships]').dataset.mode)) === 'stack');
+        await ships.keyboard.press('Tab');
+        ok(`ships (${lang}): Tab leaves the group in one step (a radio group is one tab stop)`, !(await ships.evaluate(() => document.activeElement?.matches('[data-viz-switch] input'))));
+      }
+      ok(`ships (${lang}): no script errors`, ships.errors.length === 0, ships.errors.join('; '));
+      // Touch target of the switch (a thumb on a phone)
+      const h = await ships.evaluate(() => Math.round(document.querySelector('.viz__option span').getBoundingClientRect().height));
+      ok(`ships (${lang}): the switch options are at least 48 px tall`, h >= 48, String(h));
+      await ships.close();
     }
-    ok(`ships (${lang}): no script errors`, ships.errors.length === 0, ships.errors.join('; '));
-    // Touch target of the switch (a thumb on a phone)
-    const h = await ships.evaluate(() => Math.round(document.querySelector('.viz__option span').getBoundingClientRect().height));
-    ok(`ships (${lang}): the switch options are at least 48 px tall`, h >= 48, String(h));
-    await ships.close();
   }
 }
 
@@ -149,35 +154,37 @@ if (want('text')) {
       return got.dots[i]?.solid === solid && got.dots[i]?.range === total - solid;
     });
     ok(`dots (${lang}): dot counts follow the data (one dot = ${d.groups[0].unit_per_dot}; filled to min, empty to max)`, dotsOk, JSON.stringify(got.dots));
-    ok(`dots (${lang}): the scale sentence names the people per dot and the ratio is in words`, norm(got.scale).includes(norm(nf(d.groups[0].unit_per_dot, lang))) && /\d/.test(got.ratio) && d.groups.every((g) => got.ratio.includes(g.label[lang])), got.ratio);
-    ok(`dots (${lang}): the card says the numbers are test numbers`, await page.evaluate(() => /teste|test/i.test(document.querySelector('.viz__test')?.textContent ?? '')));
+    ok(`dots (${lang}): the scale sentence names the people per dot and the ratio is in words`, norm(got.scale).includes(norm(nf(d.groups[0].unit_per_dot, lang))) && /\d/.test(got.ratio) && ratioGroups(d).every((g) => got.ratio.includes(g.label[lang])), got.ratio);
+    ok(`dots (${lang}): the card says the numbers are test numbers only when the data is marked as a placeholder`, (await page.evaluate(() => /teste|test/i.test(document.querySelector('.viz__test')?.textContent ?? ''))) === Boolean(dotsCard.interactive.data.placeholder));
     // all dots are in one scale: the same radius
     ok(`dots (${lang}): one scale, one dot size`, await page.evaluate(() => new Set([...document.querySelectorAll('.dot')].map((c) => c.getAttribute('r'))).size === 1));
     await page.close();
 
-    const sp = await newPage();
-    await sp.goto(url(base, lang, shipCard), { waitUntil: 'load' });
-    const s = shipCard.interactive.data;
-    const sg = await sp.evaluate(() => ({
-      desc: document.querySelector('#viz-stack-desc').textContent,
-      labels: [...document.querySelectorAll('.viz__svg--stack .ship__label')].map((t) => t.textContent),
-      rows: [...document.querySelectorAll('.viz__table tbody tr')].map((tr) => ({ id: tr.dataset.item, length: Number(tr.dataset.length), height: tr.dataset.height, cells: [...tr.children].map((c) => c.textContent.replace(/\s+/g, ' ').trim()) })),
-      widths: [...document.querySelectorAll('.viz__svg--stack .ship__hull')].map((p) => p.getBBox().width),
-      ratio: document.querySelector('.viz__ratio').textContent,
-      titles: ['viz-stack-title', 'viz-overlay-title'].map((i) => document.getElementById(i)?.textContent),
-    }));
-    const tableOk = s.items.every((it, i) => sg.rows[i]?.id === it.id && sg.rows[i].length === it.length_m && norm(sg.rows[i].cells[0]) === norm(it.label[lang]) && norm(sg.rows[i].cells[1]) === norm(nf(it.length_m, lang)) && norm(sg.rows[i].cells[2]) === (it.height_m === undefined ? '' : norm(nf(it.height_m, lang))));
-    ok(`ships (${lang}): the table holds every ship with its length and height in metres`, tableOk && sg.rows.length === s.items.length, JSON.stringify(sg.rows.map((r) => r.cells.slice(1))));
-    ok(`ships (${lang}): labels on the drawing give the length in metres`, s.items.every((it, i) => sg.labels[i] === `${it.label[lang]}, ${nf(it.length_m, lang)} m`), sg.labels.join(' | '));
-    ok(`ships (${lang}): the description names every ship with its size and compares them in words`, s.items.every((it) => norm(sg.desc).includes(norm(it.label[lang])) && norm(sg.desc).includes(norm(nf(it.length_m, lang)))) && /\d/.test(sg.ratio), sg.ratio);
-    await sp.waitForSelector('[data-viz-switch]:not([hidden])');
-    await tap(sp, '.viz__option:nth-child(2)');
-    sg.overlayWidths = await sp.evaluate(() => [...document.querySelectorAll('.viz__svg--overlay .ship__hull')].map((p) => p.getBBox().width));
-    const k = sg.widths[sg.widths.length - 1] / sg.widths[0];
-    const want = s.items[s.items.length - 1].length_m / s.items[0].length_m;
-    ok(`ships (${lang}): silhouettes are in one scale (width ratio ${k.toFixed(2)} = length ratio ${want.toFixed(2)}), in both views`, Math.abs(k - want) < 0.05 && Math.abs(sg.overlayWidths[1] / sg.overlayWidths[0] - want) < 0.05, JSON.stringify(sg.overlayWidths));
-    ok(`ships (${lang}): both drawings have a title`, sg.titles.every((x) => x && x.length > 5));
-    await sp.close();
+    if (shipCard) {
+      const sp = await newPage();
+      await sp.goto(url(base, lang, shipCard), { waitUntil: 'load' });
+      const s = shipCard.interactive.data;
+      const sg = await sp.evaluate(() => ({
+        desc: document.querySelector('#viz-stack-desc').textContent,
+        labels: [...document.querySelectorAll('.viz__svg--stack .ship__label')].map((t) => t.textContent),
+        rows: [...document.querySelectorAll('.viz__table tbody tr')].map((tr) => ({ id: tr.dataset.item, length: Number(tr.dataset.length), height: tr.dataset.height, cells: [...tr.children].map((c) => c.textContent.replace(/\s+/g, ' ').trim()) })),
+        widths: [...document.querySelectorAll('.viz__svg--stack .ship__hull')].map((p) => p.getBBox().width),
+        ratio: document.querySelector('.viz__ratio').textContent,
+        titles: ['viz-stack-title', 'viz-overlay-title'].map((i) => document.getElementById(i)?.textContent),
+      }));
+      const tableOk = s.items.every((it, i) => sg.rows[i]?.id === it.id && sg.rows[i].length === it.length_m && norm(sg.rows[i].cells[0]) === norm(it.label[lang]) && norm(sg.rows[i].cells[1]) === norm(nf(it.length_m, lang)) && norm(sg.rows[i].cells[2]) === (it.height_m === undefined ? '' : norm(nf(it.height_m, lang))));
+      ok(`ships (${lang}): the table holds every ship with its length and height in metres`, tableOk && sg.rows.length === s.items.length, JSON.stringify(sg.rows.map((r) => r.cells.slice(1))));
+      ok(`ships (${lang}): labels on the drawing give the length in metres`, s.items.every((it, i) => sg.labels[i] === `${it.label[lang]}, ${nf(it.length_m, lang)} m`), sg.labels.join(' | '));
+      ok(`ships (${lang}): the description names every ship with its size and compares them in words`, s.items.every((it) => norm(sg.desc).includes(norm(it.label[lang])) && norm(sg.desc).includes(norm(nf(it.length_m, lang)))) && /\d/.test(sg.ratio), sg.ratio);
+      await sp.waitForSelector('[data-viz-switch]:not([hidden])');
+      await tap(sp, '.viz__option:nth-child(2)');
+      sg.overlayWidths = await sp.evaluate(() => [...document.querySelectorAll('.viz__svg--overlay .ship__hull')].map((p) => p.getBBox().width));
+      const k = sg.widths[sg.widths.length - 1] / sg.widths[0];
+      const want = s.items[s.items.length - 1].length_m / s.items[0].length_m;
+      ok(`ships (${lang}): silhouettes are in one scale (width ratio ${k.toFixed(2)} = length ratio ${want.toFixed(2)}), in both views`, Math.abs(k - want) < 0.05 && Math.abs(sg.overlayWidths[1] / sg.overlayWidths[0] - want) < 0.05, JSON.stringify(sg.overlayWidths));
+      ok(`ships (${lang}): both drawings have a title`, sg.titles.every((x) => x && x.length > 5));
+      await sp.close();
+    }
   }
 }
 
@@ -201,20 +208,22 @@ if (want('color')) {
     ok(`dots (${lang}): filled and empty dots differ in form (fill versus outline only)`, g.solid.fill !== 'none' && g.solid.stroke === 'none' && g.range.fill === 'none' && g.range.stroke !== 'none' && parseFloat(g.range.width) >= 1, JSON.stringify([g.solid, g.range]));
     // greyscale: take colour away and the text and position still carry the meaning
     await page.addStyleTag({ content: 'html { filter: grayscale(1); }' });
-    ok(`dots (${lang}): in greyscale the labels are still there`, await page.evaluate(() => document.querySelectorAll('.dots__label').length === 2));
+    ok(`dots (${lang}): in greyscale the labels are still there`, await page.evaluate((n) => document.querySelectorAll('.dots__label').length === n, dotsCard.interactive.data.groups.length));
     await page.close();
 
-    const s = shipCard.interactive.data;
-    const ship = await newPage();
-    await ship.goto(url(base, lang, shipCard), { waitUntil: 'load' });
-    await tap(ship, '.viz__option:nth-child(2)');
-    const o = await ship.evaluate(() => ({
-      keys: [...document.querySelectorAll('.viz__svg--overlay .ship__key')].map((k) => ({ text: k.querySelector('text').textContent, dash: k.querySelector('line').getAttribute('stroke-dasharray') ?? 'solid' })),
-      hulls: [...document.querySelectorAll('.viz__svg--overlay .ship__hull')].map((h) => h.getAttribute('stroke-dasharray') ?? 'solid'),
-    }));
-    ok(`ships (${lang}): the overlaid view has a legend with every ship and its length in metres`, s.items.every((it, i) => o.keys[i]?.text === `${it.label[lang]}, ${nf(it.length_m, lang)} m`), JSON.stringify(o.keys));
-    ok(`ships (${lang}): overlaid outlines differ by line pattern, and the legend repeats each pattern`, new Set(o.hulls).size === o.hulls.length && o.hulls.every((h, i) => h === o.keys[i].dash), JSON.stringify(o.hulls));
-    await ship.close();
+    if (shipCard) {
+      const s = shipCard.interactive.data;
+      const ship = await newPage();
+      await ship.goto(url(base, lang, shipCard), { waitUntil: 'load' });
+      await tap(ship, '.viz__option:nth-child(2)');
+      const o = await ship.evaluate(() => ({
+        keys: [...document.querySelectorAll('.viz__svg--overlay .ship__key')].map((k) => ({ text: k.querySelector('text').textContent, dash: k.querySelector('line').getAttribute('stroke-dasharray') ?? 'solid' })),
+        hulls: [...document.querySelectorAll('.viz__svg--overlay .ship__hull')].map((h) => h.getAttribute('stroke-dasharray') ?? 'solid'),
+      }));
+      ok(`ships (${lang}): the overlaid view has a legend with every ship and its length in metres`, s.items.every((it, i) => o.keys[i]?.text === `${it.label[lang]}, ${nf(it.length_m, lang)} m`), JSON.stringify(o.keys));
+      ok(`ships (${lang}): overlaid outlines differ by line pattern, and the legend repeats each pattern`, new Set(o.hulls).size === o.hulls.length && o.hulls.every((h, i) => h === o.keys[i].dash), JSON.stringify(o.hulls));
+      await ship.close();
+    }
   }
 }
 
@@ -239,19 +248,22 @@ if (want('motion')) {
   await wait(300);
   const sw = await live.evaluate((v) => ({ waiting: document.querySelectorAll('.dot--waiting').length, button: eval(v)(document.querySelector('[data-viz-play]')) }), vis);
   ok('the setting changes while the animation runs: the dots are all shown and the button goes away', sw.waiting === 0 && !sw.button, JSON.stringify(sw));
-  const ship = await newPage({ reduce: true });
-  await ship.goto(url(base, 'pt', shipCard), { waitUntil: 'load' });
-  ok('prefers-reduced-motion: the ship switch still works (it has no animation)', await (async () => {
-    await ship.waitForSelector('[data-viz-switch]:not([hidden])');
-    await tap(ship, '.viz__option:nth-child(2)');
-    return (await ship.evaluate(() => document.querySelector('[data-viz-ships]').dataset.mode)) === 'overlay';
-  })());
-  await calm.close(); await live.close(); await ship.close();
+  if (shipCard) {
+    const ship = await newPage({ reduce: true });
+    await ship.goto(url(base, 'pt', shipCard), { waitUntil: 'load' });
+    ok('prefers-reduced-motion: the ship switch still works (it has no animation)', await (async () => {
+      await ship.waitForSelector('[data-viz-switch]:not([hidden])');
+      await tap(ship, '.viz__option:nth-child(2)');
+      return (await ship.evaluate(() => document.querySelector('[data-viz-ships]').dataset.mode)) === 'overlay';
+    })());
+    await ship.close();
+  }
+  await calm.close(); await live.close();
 }
 
 // ---------- 4. No JavaScript ----------
 if (want('nojs')) {
-  for (const [name, card] of [['dots', dotsCard], ['ships', shipCard]]) {
+  for (const [name, card] of [['dots', dotsCard], ['ships', shipCard]].filter(([, c]) => c)) {
     const page = await newPage({ js: false });
     await page.goto(url(base, 'pt', card), { waitUntil: 'load' });
     const n = await page.evaluate((v) => {
@@ -281,7 +293,7 @@ if (want('code')) {
   const stages = ['pt', 'en'];
   let bad = [];
   let withCount = 0;
-  for (const e of events.filter((x) => x.status === 'ready')) {
+  for (const e of world.published) {
     for (const lang of stages) {
       const html = await (await fetch(url(base, lang, e, ''))).text();
       const carries = /data-viz-|\.viz__svg|class="viz"/.test(html);
@@ -289,7 +301,7 @@ if (want('code')) {
       if (carries) withCount += 1;
     }
   }
-  ok(`only the ${withCount} pages of cards with an interactive carry its markup, script or styles (all card pages, both languages)`, bad.length === 0 && withCount === 2 * events.filter((x) => x.interactive && x.status === 'ready').length, bad.join(', '));
+  ok(`only the ${withCount} pages of cards with an interactive carry its markup, script or styles (all card pages, both languages)`, bad.length === 0 && withCount === 2 * world.published.filter((x) => x.interactive && x.status === 'ready').length, bad.join(', '));
   // Other pages: home, epoch, thread, map
   const others = ['/pt/', '/en/', '/pt/mapa/', '/pt/epoca/avis-e-descobrimentos/', '/pt/fio/mar/'];
   const leaks = [];
@@ -312,14 +324,22 @@ if (want('code')) {
   await withIt.close();
 }
 
-// ---------- 6. Family modes do not break cards with an interactive ----------
+// ---------- 6. Family modes and the cards with an interactive ----------
+// The dots card of Aljubarrota is 12+: mode "all" hides it behind the age screen, "12" and "off" show it. The ship card of the fixture
+// build is for all ages: every mode shows it. What the mode allows is read from the card (min_age).
 if (want('modes')) {
   for (const mode of ['off', 'all', '12']) {
-    for (const [name, card] of [['dots', dotsCard], ['ships', shipCard]]) {
+    for (const [name, card] of [['dots', dotsCard], ['ships', shipCard]].filter(([, c]) => c)) {
+      const gated = mode === 'all' && card.min_age !== 'all';
       const page = await newPage({ mode });
       await page.goto(url(base, 'pt', card), { waitUntil: 'load' });
       const shown = await page.evaluate((v) => ({ viz: eval(v)(document.querySelector('.viz')), gate: eval(v)(document.querySelector('.gate')), mode: document.documentElement.dataset.family }), vis);
-      ok(`mode ${mode}: the card with ${name} shows its interactive (all-ages card), no screen`, shown.viz && !shown.gate && shown.mode === mode);
+      ok(`mode ${mode}: the ${card.min_age} card with ${name} ${gated ? 'shows the age screen and hides the interactive' : 'shows its interactive, no screen'}`, shown.mode === mode && (gated ? shown.gate && !shown.viz : shown.viz && !shown.gate));
+      if (gated) {
+        await tap(page, '[data-gate-open]');
+        await wait(150);
+        ok(`mode ${mode}: after "Open" the ${name} interactive is shown and the mode is unchanged`, (await page.evaluate((v) => eval(v)(document.querySelector('.viz')), vis)) && (await page.evaluate(() => document.documentElement.dataset.family)) === mode);
+      }
       if (name === 'ships') {
         await page.waitForSelector('[data-viz-switch]:not([hidden])');
         await tap(page, '.viz__option:nth-child(2)');
@@ -330,33 +350,9 @@ if (want('modes')) {
         await page.waitForFunction(() => document.querySelectorAll('.dot--waiting').length === 0 && !document.querySelector('[data-viz-play]').disabled, { timeout: 8000 });
         ok(`mode ${mode}: the dots animation runs and ends`, true);
       }
-      ok(`mode ${mode}: no script errors`, page.errors.length === 0, page.errors.join('; '));
+      ok(`mode ${mode}: no script errors (${name})`, page.errors.length === 0, page.errors.join('; '));
       await page.close();
     }
-  }
-}
-
-// ---------- 7. The variant build: the same cards are 12+, mode "all" hides them behind the screen ----------
-if (want('family')) {
-  for (const [name, card, play] of [['dots', dotsCard, '[data-viz-play]'], ['ships', shipCard, '.viz__option:nth-child(2)']]) {
-    const page = await newPage({ mode: 'all' });
-    await page.goto(url(variantBase, 'pt', card), { waitUntil: 'load' });
-    const before = await page.evaluate((v) => ({ gate: eval(v)(document.querySelector('.gate')), viz: eval(v)(document.querySelector('.viz')) }), vis);
-    ok(`variant, mode all: a 12+ card with ${name} shows the screen and hides the interactive (it stays in the HTML)`, before.gate && !before.viz && (await page.evaluate(() => document.querySelector('.viz') !== null)));
-    await tap(page, '[data-gate-open]');
-    await wait(150);
-    const opened = await page.evaluate((v) => ({ viz: eval(v)(document.querySelector('.viz')), mode: document.documentElement.dataset.family }), vis);
-    ok(`variant, mode all: after "Open" the ${name} interactive is shown and the mode is unchanged`, opened.viz && opened.mode === 'all');
-    await page.waitForSelector(play + ':not([hidden])');
-    await tap(page, play);
-    if (name === 'dots') await page.waitForFunction(() => document.querySelectorAll('.dot--waiting').length === 0 && !document.querySelector('[data-viz-play]').disabled, { timeout: 8000 });
-    ok(`variant, mode all: after "Open" the ${name} interactive works`, name === 'dots' ? true : (await page.evaluate(() => document.querySelector('[data-viz-ships]').dataset.mode)) === 'overlay');
-    ok(`variant: no script errors (${name})`, page.errors.length === 0, page.errors.join('; '));
-    await page.close();
-    const off = await newPage({ mode: 'off' });
-    await off.goto(url(variantBase, 'pt', card), { waitUntil: 'load' });
-    ok(`variant, mode off: the interactive is shown without a screen (${name})`, await off.evaluate((v) => eval(v)(document.querySelector('.viz')) && !eval(v)(document.querySelector('.gate')), vis));
-    await off.close();
   }
 }
 

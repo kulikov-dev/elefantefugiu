@@ -40,12 +40,13 @@ const SUITES = [
   { name: 'family-controls', script: 'family.mjs', args: ['toggle', 'lists'], about: 'family toggle, feed, grid, threads, tiles, home' },
   { name: 'family-pages', script: 'family.mjs', args: ['recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise'], about: 'recounting, Nearby, the gate, no flash, blocked storage, Surprise me' },
   { name: 'family-map', script: 'family.mjs', args: ['map'], about: 'the map in every family mode' },
-  { name: 'interactives', script: 'interactives.mjs', about: 'dots and ships: keyboard, text, motion, no JS, code, colour' },
+  { name: 'interactives', script: 'interactives.mjs', about: 'the dots of Aljubarrota: keyboard, text, motion, no JS, code, colour, family modes' },
   { name: 'theme', script: 'theme.mjs', about: 'theme, palettes, fonts, header, light-dark() fallback' },
   { name: 'theme-variant', script: 'theme.mjs', args: ['variant', 'palette', 'fallback'], variant: true, about: 'palettes of every epoch including Estado Novo (fixture build), the light-dark() fallback per epoch' },
   { name: 'azulejo', script: 'azulejo.mjs', about: 'azulejo patterns in both themes, map waiting tile, reduced motion, layout shifts, neutral header' },
   { name: 'azulejo-variant', script: 'azulejo.mjs', args: ['variant', 'patterns', 'header'], variant: true, about: 'the three patterns and the grey Estado Novo interface (fixture build)' },
-  { name: 'ru', script: 'ru.mjs', about: 'language menu on 320/360 px, root choice, banner and noindex on untranslated cards, Cyrillic fonts only on /ru/, plurals' },
+  { name: 'ru', script: 'ru.mjs', args: ['menu', 'root', 'banner', 'fonts', 'plural'], about: 'language menu on 320/360 px, root choice, banner and noindex on untranslated cards, Cyrillic fonts only on /ru/, plurals' },
+  { name: 'ru-variant', script: 'ru.mjs', args: ['variant', 'banner'], variant: true, about: 'the banner, noindex and hreflang of a card that is not translated (fixture build)' },
   { name: 'pages', script: 'pages.mjs', about: 'static pages, mistake report form (answered by the test), Continue, QR address' },
   { name: 'family-menu', script: 'familymenu.mjs', about: 'family-mode button and menu, the hidden-stories line, the 12+ tooltip' },
   { name: 'epoch-page', script: 'epochpage.mjs', about: 'epoch page: years on the scale, equal compact cards, view switch from 9 stories, active card, more eras list' },
@@ -55,7 +56,7 @@ const SUITES = [
   { name: 'mascot', script: 'mascot.mjs', args: ['logo', 'notfound', 'pager', 'empty', 'dark', 'motion'], about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'mascot-variant', script: 'mascot.mjs', args: ['regime'], variant: true, about: 'no elephant on the pages of the regime epoch (fixture build)' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant'], variant: true, about: '16+ epoch and an empty mode' },
-  { name: 'interactives-variant', script: 'interactives.mjs', args: ['family'], variant: true, about: 'interactives behind the age screen' },
+  { name: 'interactives-variant', script: 'interactives.mjs', args: ['variant'], variant: true, about: 'the same for the dots plus the ship scale (a fixture card): the real site has no ship card' },
 ];
 
 const argv = process.argv.slice(2);
