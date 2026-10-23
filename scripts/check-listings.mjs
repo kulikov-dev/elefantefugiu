@@ -327,11 +327,17 @@ for (const lang of ['pt', 'en']) {
   const expected = featuredIds.map((id) => slugOf(events.find((e) => e.id === id), lang));
   if (JSON.stringify(shown) !== JSON.stringify(expected)) fail(`showcase differs from featured.yaml.\n    expected: ${expected.join(', ')}\n    found:    ${shown.join(', ')}`);
 
-  // "Surprise me": button hidden until the script runs; embedded list = published, all ages, not heavy; links are real card pages
-  if (!/data-surprise hidden/.test(showcase)) fail('"Surprise me" button must be hidden without JavaScript');
-  const list = JSON.parse(raw.match(/<script type="application\/json" id="surprise-data">([\s\S]*?)<\/script>/)?.[1] ?? '[]');
+  // "Surprise me" has its own page (/pt/surpreende-me/, /en/surprise-me/): the list embedded there = published, any age, never a heavy
+  // topic; the same stories as plain links (the page without JavaScript); links are real card pages. The header menu leads to it.
+  const surpriseSlug = lang === 'pt' ? 'surpreende-me' : 'surprise-me';
+  const surpriseFile = join(dist, lang, surpriseSlug, 'index.html');
+  const surpriseRaw = existsSync(surpriseFile) ? readFileSync(surpriseFile, 'utf8') : '';
+  if (!surpriseRaw) fail(`the "Surprise me" page ${lang}/${surpriseSlug}/ was not built`);
+  if (!new RegExp(`<nav class="site-nav"[^]*?href="[^"]*/${lang}/${surpriseSlug}/"`).test(raw)) fail('the header menu must lead to the "Surprise me" page');
+  const list = JSON.parse(surpriseRaw.match(/<script type="application\/json" id="surprise-data">([\s\S]*?)<\/script>/)?.[1] ?? '[]');
   const wantList = events.filter((e) => !e.sensitive).sort(chrono);
   if (JSON.stringify(list.map((x) => x.id)) !== JSON.stringify(wantList.map((e) => e.id))) fail('surprise list differs from the eligible cards in the data (never a heavy topic, any age)');
+  if ((surpriseRaw.match(/<ul class="surprise__list[^"]*"[\s\S]*?<\/ul>/)?.[0].match(/<a /g) ?? []).length !== wantList.length) fail('the plain list of the "Surprise me" page must link every eligible story');
   for (const item of list) {
     const ev = events.find((e) => e.id === item.id);
     if (!ev || !item.href.endsWith(`/${lang}/${SEG[lang].story}/${slugOf(ev, lang)}/`)) fail(`surprise link of ${item.id} is not its card page`);

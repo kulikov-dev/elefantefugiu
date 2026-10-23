@@ -4,10 +4,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
+import { EPOCHS_ANCHOR, epochHref, pagePath, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { epochYearsText } from '../lib/epochs';
-import { epochTiles, firstMvpEpoch, surpriseCandidates } from '../lib/home';
+import { epochTiles, firstMvpEpoch } from '../lib/home';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 
@@ -23,14 +23,6 @@ const tiles = epochTiles(site.epochs, site.events);
 // Family mode: counters carry three numbers (off, all, 12) and a chip with a zero counter is hidden in that mode.
 const threadCounts = new Map(site.visibleThreads.map((th) => [th.id, countByMode(site.events.filter((e) => e.threads.includes(th.id)).map(ageInfoOf))]));
 const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
-// "Surprise me": every candidate with its age label; the script picks by the current mode.
-const surprise = surpriseCandidates(site.events).map((e) => ({
-  id: e.id,
-  href: storyPath(lang, e.slug[lang]),
-  minAge: familyAttrs(e)['data-min-age'],
-  sensitive: familyAttrs(e)['data-sensitive'] === 'true',
-}));
-
 // Test text must stay out of search results until it is real.
 const noindex = site.featured.some((e) => e.placeholder) || tiles.some((tile) => tile.available && tile.epoch.placeholder);
 
@@ -74,10 +66,6 @@ const steps = [
               </li>
             ))}
           </ul>
-          <button type="button" class="button button--secondary showcase__surprise" data-surprise hidden>
-            {t(lang, 'ui.surprise')}
-          </button>
-          <script type="application/json" id="surprise-data" set:html={JSON.stringify(surprise)} />
         </section>
       )
     }
@@ -144,7 +132,6 @@ const steps = [
 </BaseLayout>
 
 <script>
-  import '../scripts/surprise';
   import '../scripts/last-epoch';
 </script>
 
@@ -178,10 +165,6 @@ const steps = [
     margin: 0;
     padding: 0;
     list-style: none;
-  }
-
-  .showcase__surprise {
-    margin-block-start: var(--space-4);
   }
 
   .tile {

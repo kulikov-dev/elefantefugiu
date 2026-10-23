@@ -22,7 +22,7 @@ const path = (lang, ...parts) => `/${[lang, ...parts].filter(Boolean).join('/')}
 
 const out = [];
 out.push('| Page | English address | Russian address |', '| --- | --- | --- |');
-for (const [label, key] of [['Home', 'home'], ['Map', 'map'], ['About', 'about'], ['Method and sources', 'method'], ['Found a mistake?', 'report'], ['Legal information', 'legal']]) {
+for (const [label, key] of [['Home', 'home'], ['Map', 'map'], ['Surprise me', 'surprise'], ['About', 'about'], ['Method and sources', 'method'], ['Found a mistake?', 'report'], ['Legal information', 'legal']]) {
   const r = row(key);
   out.push(`| ${label} | \`${path('en', r.en)}\` | \`${path('ru', r.ru)}\` |`);
 }

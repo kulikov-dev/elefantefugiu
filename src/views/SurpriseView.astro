@@ -1,0 +1,57 @@
+---
+// "Surprise me": /pt/surpreende-me/, /en/surprise-me/, /ru/udivi-menya/. With JavaScript the page sends the reader to a random
+// story at once (src/scripts/surprise-page.ts); without it, or if the script cannot pick one, it is a plain list of stories.
+// Not indexed: it is a way, not a page to find in a search.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { storyPath, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import { familyAttrs } from '../lib/family';
+import { surpriseCandidates } from '../lib/home';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const site = await loadSite();
+const stories = surpriseCandidates(site.events);
+const list = stories.map((e) => ({ id: e.id, href: storyPath(lang, e.slug[lang]), minAge: familyAttrs(e)['data-min-age'], sensitive: familyAttrs(e)['data-sensitive'] === 'true' }));
+const title = t(lang, 'pages.surprise.title');
+---
+<BaseLayout lang={lang} pageKey="surprise" title={title} noindex>
+  <article class="surprise">
+    <h1>{title}</h1>
+    <p data-surprise-picking class="surprise__lead">{t(lang, 'surprise.picking')}</p>
+    <p data-surprise-none class="notice" role="status" hidden>{t(lang, 'surprise.none')}</p>
+    <p>{t(lang, 'surprise.fallback')}</p>
+    <ul class="surprise__list">
+      {stories.map((e) => <li {...familyAttrs(e)}><a href={storyPath(lang, e.slug[lang])}>{e.title[lang]}</a></li>)}
+    </ul>
+    <script type="application/json" id="surprise-data" set:html={JSON.stringify(list)} />
+  </article>
+</BaseLayout>
+
+<script>
+  import '../scripts/surprise-page';
+</script>
+
+<style>
+  .surprise > * + * {
+    margin-block-start: var(--space-3);
+  }
+
+  .surprise__lead {
+    font-size: var(--text-lg);
+  }
+
+  .surprise__list {
+    padding-inline-start: var(--space-5);
+  }
+
+  .surprise__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+  }
+</style>

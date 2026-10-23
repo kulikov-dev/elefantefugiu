@@ -13,7 +13,7 @@ export const DEFAULT_LANG: Lang = 'pt';
 /** Fallback chain of a text that is missing in a language: ru -> en -> pt (the data loader applies it, see lib/localize.ts). */
 export const FALLBACK_CHAIN: Record<Lang, readonly Lang[]> = { pt: [], en: ['pt'], ru: ['en', 'pt'] };
 
-export type PageKey = 'home' | 'about' | 'method' | 'report' | 'legal' | 'map';
+export type PageKey = 'home' | 'about' | 'method' | 'report' | 'legal' | 'map' | 'surprise';
 
 // An empty slug means the language root (/pt/, /en/).
 export const ROUTES: Record<PageKey, Record<Lang, string>> = {
@@ -23,6 +23,7 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   report: { pt: 'corrigir', en: 'report', ru: 'oshibka' },
   legal: { pt: 'legal', en: 'legal', ru: 'pravovaya-informaciya' },
   map: { pt: 'mapa', en: 'map', ru: 'karta' },
+  surprise: { pt: 'surpreende-me', en: 'surprise-me', ru: 'udivi-menya' },
 };
 
 /** Id of the epochs section on the home page; the "Épocas" menu item links to it. */

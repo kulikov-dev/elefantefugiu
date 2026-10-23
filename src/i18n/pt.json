@@ -14,7 +14,7 @@
   "nav": {
     "epochs": "Épocas",
     "map": "Mapa",
-    "about": "Sobre o projeto"
+    "surprise": "Surpreende-me"
   },
   "pages": {
     "about": {
@@ -31,6 +31,9 @@
     },
     "map": {
       "title": "Mapa"
+    },
+    "surprise": {
+      "title": "Surpreende-me"
     }
   },
   "footer": {
@@ -56,6 +59,11 @@
     "step_story_text": "A história em poucas linhas, para ler num minuto.",
     "step_more": "Saber mais",
     "step_more_text": "Contexto, fontes e a ponte para hoje."
+  },
+  "surprise": {
+    "picking": "A escolher uma história para si…",
+    "fallback": "Se nada acontecer, escolha uma destas:",
+    "none": "Neste modo família não há nenhuma história para sugerir."
   },
   "stub": {
     "notice": "Esta página é provisória e será preenchida mais tarde."

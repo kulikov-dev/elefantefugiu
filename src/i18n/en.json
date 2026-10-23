@@ -14,7 +14,7 @@
   "nav": {
     "epochs": "Eras",
     "map": "Map",
-    "about": "About"
+    "surprise": "Surprise me"
   },
   "pages": {
     "about": {
@@ -31,6 +31,9 @@
     },
     "map": {
       "title": "Map"
+    },
+    "surprise": {
+      "title": "Surprise me"
     }
   },
   "footer": {
@@ -56,6 +59,11 @@
     "step_story_text": "The story in a few lines, a one-minute read.",
     "step_more": "More",
     "step_more_text": "Context, sources and the bridge to today."
+  },
+  "surprise": {
+    "picking": "Picking a story for you…",
+    "fallback": "If nothing happens, choose one of these:",
+    "none": "There is no story to suggest in this family mode."
   },
   "stub": {
     "notice": "This page is a placeholder and will be filled in later."
