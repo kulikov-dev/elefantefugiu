@@ -21,7 +21,9 @@ env:
   BASE_PATH: ${{ vars.BASE_PATH || (vars.SITE_URL && '/' || format('/{0}', github.event.repository.name)) }}
   # Set the repository variable ALLOW_PLACEHOLDER to false before launch: the build then fails on placeholder entries.
   ALLOW_PLACEHOLDER: ${{ vars.ALLOW_PLACEHOLDER || 'true' }}
-  # Map tiles: leave unset for development (public OpenStreetMap server); set both before launch (see README).
+  # Map tiles: the repository variable CARTO_KEY switches the map to the CARTO basemaps (see README). TILE_URL and
+  # TILE_ATTRIBUTION are for another provider; with none of them the map uses the public OpenStreetMap server (development only).
+  CARTO_KEY: ${{ vars.CARTO_KEY }}
   TILE_URL: ${{ vars.TILE_URL }}
   TILE_ATTRIBUTION: ${{ vars.TILE_ATTRIBUTION }}
 

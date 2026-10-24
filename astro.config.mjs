@@ -1,6 +1,13 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+// A local .env file (see .env.example) fills the environment of this process; variables already set in the shell win.
+try {
+  process.loadEnvFile('.env');
+} catch {
+  // no .env file: nothing to load
+}
+
 // Site address and base path come from the environment so the project can move
 // to a custom domain without code changes (see README).
 const site = (process.env.SITE_URL || 'http://localhost:4321').trim().replace(/\/+$/, '');

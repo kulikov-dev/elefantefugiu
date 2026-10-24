@@ -32,7 +32,7 @@ const config = {
   })),
   maxBounds: mapMaxBounds(events.map((e) => e.bridge)),
   home: HOME_MAP_VIEW,
-  tile: { url: tile.url, attribution: tile.attribution },
+  tile: { url: tile.url, urlDark: tile.urlDark, attribution: tile.attribution },
   strings: { zoom_in: t(lang, 'map.zoom_in'), zoom_out: t(lang, 'map.zoom_out') },
 };
 ---

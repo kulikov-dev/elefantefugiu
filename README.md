@@ -77,6 +77,7 @@ A three-way switch in the header (everything / all ages / up to 12+). The choice
 | `SITE_URL` | Public origin of the site, without a path            | `http://localhost:4321` |
 | `BASE_PATH`| Path the site is served from, e.g. `/REPO`; empty or `/` for a domain root | empty |
 | `ALLOW_PLACEHOLDER` | `false` makes the build fail while any entry has `placeholder: true` | `true` |
+| `CARTO_KEY` | Key of the CARTO basemaps; switches the map to Voyager (light theme) and Dark Matter (dark theme); empty = see below | empty |
 | `TILE_URL` | Map tile address, `https://` and containing `{z}`, `{x}`, `{y}`; empty = public OpenStreetMap server | empty |
 | `TILE_ATTRIBUTION` | Attribution shown on the map (HTML, links allowed); required when `TILE_URL` is set | empty |
 
@@ -84,12 +85,18 @@ All internal links are built from the base path (`src/i18n/routes.ts`), so the
 site works under a non-empty base. `npm run build` fails if an internal link
 ignores the base or points to a missing page.
 
-### Map tiles (open question)
+### Map tiles
 
-With `TILE_URL` empty the map uses the public OpenStreetMap tile server. That is fine for development, but its
-usage policy does not allow steady public traffic. **Before a public launch a tile provider (with a free tier)
-or our own tiles are needed**; then set the repository variables `TILE_URL` and `TILE_ATTRIBUTION` (the deploy
-workflow passes them to the build). The map shows the attribution, visible and clickable, whatever the source.
+The production map uses the CARTO basemaps (raster tiles, non-commercial key): Voyager in the light theme, Dark Matter in
+the dark one; the style changes with the theme of the site. Set the repository variable `CARTO_KEY` (Settings, Secrets and
+variables, Actions, tab Variables); the deploy workflow passes it to the build. For a local build put `CARTO_KEY=...` in
+`.env` (git-ignored, see `.env.example`). The key is not a secret: it is part of every tile address of the built site, so
+restrict it to the site's domain in the CARTO dashboard.
+
+With `CARTO_KEY` empty the map uses the public OpenStreetMap tile server. That is fine for development, but its
+usage policy does not allow steady public traffic. Another provider: the variables `TILE_URL` and `TILE_ATTRIBUTION`
+(they win over `CARTO_KEY`). The map shows the attribution, visible and clickable, whatever the source
+("(c) OpenStreetMap contributors, (c) CARTO" with CARTO).
 If tiles do not load, the map page and the epoch page fall back to the list of cards.
 
 ## Mistake reports, static pages, sitemap

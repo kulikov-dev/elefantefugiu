@@ -76,6 +76,11 @@
   overflow: hidden;
 }
 
+.map__canvas--themed .leaflet-tile {
+  /* The tiles already come in the style of the theme (src/lib/tiles.ts): the dimming of pictures would only darken them twice. */
+  filter: none;
+}
+
 .map__canvas {
   position: absolute;
   inset: 0;

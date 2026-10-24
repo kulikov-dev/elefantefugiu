@@ -163,6 +163,14 @@ const PAIRS = [
   ['tone green on water wash', 'viz-tone-green', 'accent-tint', G],
   ['tone ochre on water wash', 'viz-tone-ochre', 'accent-tint', G],
   ['tone grey on water wash', 'viz-tone-grey', 'accent-tint', G],
+  ['marker fill on map land', 'accent', 'map-land', G],
+  ['marker fill on map water', 'accent', 'map-water', G],
+  ['marker ring on its fill', 'surface', 'accent', G],
+  ['story marker edge on map land', 'accent', 'map-land', G],
+  ['story marker edge on map water', 'accent', 'map-water', G],
+  ['selected marker outline on map land', 'ink', 'map-land', G],
+  ['selected marker outline on map water', 'ink', 'map-water', G],
+  ['text on marker caption (over map land)', 'text', 'overlay>map-land', T],
   ['divider on page (decorative)', 'border', 'epoch-tint', null],
   ['divider on surface (decorative)', 'border', 'surface', null],
 ];
@@ -177,7 +185,10 @@ function colorOf(spec, props, theme) {
     return over(pixel, colorOf(layer[2], props, theme));
   }
   const [top, back] = spec.split('>');
-  const get = (name) => parseColor(resolveText(`var(--${name === 'epoch-tint' || name.startsWith('epoch-') || name.startsWith('viz-') ? name : `color-${name}`})`, props, theme));
+  // The ground of the map: the land and water colours of the CARTO styles Voyager (light theme) and Dark Matter (dark theme),
+  // taken from their style files at basemaps.cartocdn.com/gl/voyager-gl-style and dark-matter-gl-style.
+  const MAP_GROUND = { light: { 'map-land': '#fbf8f3', 'map-water': '#b0d0d6' }, dark: { 'map-land': '#0e0e0e', 'map-water': '#2c353c' } };
+  const get = (name) => MAP_GROUND[theme]?.[name] ? parseColor(MAP_GROUND[theme][name]) : parseColor(resolveText(`var(--${name === 'epoch-tint' || name.startsWith('epoch-') || name.startsWith('viz-') ? name : `color-${name}`})`, props, theme));
   const color = get(top);
   return back ? over(color, get(back)) : color;
 }

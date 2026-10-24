@@ -19,13 +19,23 @@ interface Props {
 const { lang, cardId, point, name } = Astro.props;
 const tile = tileConfig(process.env);
 const layout = minimapLayout(point.lat, point.lon, tile.url);
+// With a provider that has a dark style the dark tiles are a second set, shown by CSS in the dark theme (lazy, so only one is fetched).
+const darkLayout = tile.urlDark ? minimapLayout(point.lat, point.lon, tile.urlDark) : undefined;
+const gridStyle = `width:${layout.inner.widthPct}%;left:${layout.inner.leftPct}%;top:${layout.inner.topPct}%`;
 const cell = 100 / 3;
 ---
 <figure class="minimap">
   <a class="minimap__frame" href={mapLinkFor(pagePath(lang, 'map'), cardId)} aria-label={`${t(lang, 'ui.open_on_map')}: ${name}`}>
-    <span class="minimap__grid" style={`width:${layout.inner.widthPct}%;left:${layout.inner.leftPct}%;top:${layout.inner.topPct}%`}>
+    <span class:list={['minimap__grid', darkLayout && 'minimap__grid--light']} style={gridStyle}>
       {layout.tiles.map((tileImg) => <img class="minimap__tile" src={tileImg.url} alt="" width="256" height="256" loading="lazy" decoding="async" style={`left:${tileImg.col * cell}%;top:${tileImg.row * cell}%`} />)}
     </span>
+    {
+      darkLayout && (
+        <span class="minimap__grid minimap__grid--dark" style={gridStyle}>
+          {darkLayout.tiles.map((tileImg) => <img class="minimap__tile" src={tileImg.url} alt="" width="256" height="256" loading="lazy" decoding="async" style={`left:${tileImg.col * cell}%;top:${tileImg.row * cell}%`} />)}
+        </span>
+      )
+    }
     <span class="minimap__marker" aria-hidden="true"></span>
   </a>
   <figcaption class="minimap__credit" set:html={tile.attribution} />
@@ -61,6 +71,36 @@ const cell = 100 / 3;
     position: absolute;
     aspect-ratio: 1;
     filter: var(--image-filter);
+  }
+
+  /* Two sets of tiles (light and dark style): the picture dimming is not applied to them, and the one of the other theme is hidden. */
+  .minimap__grid--light,
+  .minimap__grid--light .minimap__tile,
+  .minimap__grid--dark,
+  .minimap__grid--dark .minimap__tile {
+    filter: none;
+  }
+
+  .minimap__grid--dark {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .minimap__grid--light {
+      display: none;
+    }
+
+    :global(:root:not([data-theme='light'])) .minimap__grid--dark {
+      display: block;
+    }
+  }
+
+  :global(:root[data-theme='dark']) .minimap__grid--light {
+    display: none;
+  }
+
+  :global(:root[data-theme='dark']) .minimap__grid--dark {
+    display: block;
   }
 
   .minimap__tile {

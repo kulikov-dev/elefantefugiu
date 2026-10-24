@@ -9,6 +9,7 @@ import { directionsHref } from '../lib/directions';
 import { distanceParts } from '../lib/distance';
 import { distanceKm } from '../lib/events';
 import { isVisibleInMode } from '../lib/family';
+import { isDarkTheme, tileUrlFor } from '../lib/tiles';
 import { boundsAround, inBounds, selectMarkers, type Bounds, type MapCard } from '../lib/markers';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
@@ -33,7 +34,7 @@ interface Config {
   maxBounds: Bounds;
   view: Bounds;
   home: Bounds;
-  tile: { url: string; attribution: string };
+  tile: { url: string; urlDark?: string; attribution: string };
   strings: Record<string, string>;
   /** BCP 47 tag for plural rules (Russian counts with four forms). */
   pluralLocale: string;
@@ -146,7 +147,22 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   L.control.zoom({ zoomInTitle: cfg.strings.zoom_in, zoomOutTitle: cfg.strings.zoom_out }).addTo(map);
   map.attributionControl.setPrefix('<a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>');
 
-  const tiles = L.tileLayer(cfg.tile.url, { attribution: cfg.tile.attribution, maxZoom: BEHAVIOUR.maxZoom });
+  // The tiles follow the theme of the site: Voyager in the light theme, Dark Matter in the dark one (when the provider has both).
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const wantedUrl = () => tileUrlFor(cfg.tile, isDarkTheme(document.documentElement.getAttribute('data-theme'), systemDark.matches));
+  let shownUrl = wantedUrl();
+  const tiles = L.tileLayer(shownUrl, { attribution: cfg.tile.attribution, maxZoom: BEHAVIOUR.maxZoom });
+  const followTheme = () => {
+    const url = wantedUrl();
+    if (url === shownUrl) return;
+    shownUrl = url;
+    tiles.setUrl(url);
+  };
+  if (cfg.tile.urlDark) {
+    canvas.classList.add('map__canvas--themed');
+    new MutationObserver(followTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    systemDark.addEventListener('change', followTheme);
+  }
   let tilesLoaded = 0;
   let tilesFailed = 0;
   const giveUp = () => {
