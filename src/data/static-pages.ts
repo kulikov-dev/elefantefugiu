@@ -117,11 +117,11 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         },
         {
           id: 'quem-faz',
-          heading: ’Who makes this’,
+          heading: 'Who makes this',
           paragraphs: [
-            ’I live in Portugal, though I wasn\’t born here, and I\’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now here too.’,
-            ’O Elefante Fugiu is run by one person in their spare time: free, with no ads and no tracking. I\’m not a historian, so I rely on sources and list them under every story.’,
-            ’If you\’re a historian, archivist or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.’,
+            'I live in Portugal, though I wasn’t born here, and I’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now here too.',
+            'O Elefante Fugiu is run by one person in their spare time: free, with no ads and no tracking. I’m not a historian, so I rely on sources and list them under every story.',
+            'If you’re a historian, archivist or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.',
           ],
         },
         {
