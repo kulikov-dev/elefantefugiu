@@ -342,7 +342,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: ['O site não recolhe nada sobre si, mas não funciona no vácuo. Estes serviços veem o seu endereço IP:'],
           items: [
             '**GitHub Pages** (GitHub, Inc.) serve as páginas do site e pode registar endereços IP segundo as suas próprias regras.',
-            '**O servidor de mapas** (OpenStreetMap ou o fornecedor indicado no canto do mapa) recebe pedidos quando vê o mapa.',
+            '**Os mosaicos do mapa** vêm dos servidores da CARTO, que veem o seu endereço IP e o endereço da página, como em qualquer site com mapa.',
             '**FormSubmit** (formsubmit.co) reencaminha-nos a sua mensagem se enviar o formulário «Encontrou um erro?», juntamente com o email, se o indicar. Usamo-la apenas para corrigir o erro e responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
           ],
           after: ['As ligações «Como chegar», as fontes e os sites dos museus levam a outros sites, com regras próprias.'],
@@ -394,7 +394,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: ['The site itself collects nothing about you, but it doesn’t run in a vacuum. These services see your IP address:'],
           items: [
             '**GitHub Pages** (GitHub, Inc.) serves the site’s pages and may log IP addresses under its own policy.',
-            '**The map server** (OpenStreetMap or the provider named in the map’s corner) receives requests when you view the map.',
+            '**The map tiles** are loaded from CARTO’s servers, which see your IP address and the address of the page, like any site with a map.',
             '**FormSubmit** (formsubmit.co) forwards your message to us if you send the “Found a mistake?” form, together with your email if you gave it. We use it only to fix the mistake and reply to you. Prefer not to use the service? Write directly to {{email}}.',
           ],
           after: ['Links to “Get directions”, sources and museum websites lead to other sites with their own rules.'],
@@ -446,7 +446,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: ['Сайт сам ничего о вас не собирает, но он работает не в вакууме. Вот сервисы, которые видят ваш IP-адрес:'],
           items: [
             '**GitHub Pages** (GitHub, Inc.) отдаёт страницы сайта и может записывать IP-адреса по своим правилам.',
-            '**Сервер карт** (OpenStreetMap или поставщик, указанный в углу карты) получает запросы, когда вы смотрите карту.',
+            '**Плитки карты** загружаются с серверов CARTO, которые видят ваш IP-адрес и адрес страницы, как любой сайт с картой.',
             '**FormSubmit** (formsubmit.co) пересылает нам сообщение, если вы отправите форму «Нашли ошибку?», вместе с почтой, если вы её указали. Мы используем письмо только чтобы исправить ошибку и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
           ],
           after: ['Ссылки «Как добраться», на источники и сайты музеев ведут на чужие сайты со своими правилами.'],
