@@ -347,7 +347,7 @@ for (const { item: ev, file, stem } of events) {
     }
   }
   ev.sources.forEach((s, i) => {
-    if (ready && !HTTP.test(s.url)) report('error', file, `"${s.url}" is not an http(s) address`, `sources[${i}].url`);
+    if (ready && !HTTP.test(s.url) && !(s.type === 'book' && s.url === '')) report('error', file, `"${s.url}" is not an http(s) address`, `sources[${i}].url`);
     // The title of a source is as the author gave it: on pt and en pages it has no Cyrillic, unless the source itself is Russian (lang: ru).
     // A remark belongs in `note`, not in the title.
     if (s.lang !== 'ru' && /[Ѐ-ӿ]/.test(s.title)) report('error', file, `the title "${s.title}" has Cyrillic letters: put the remark in note, or mark a Russian source with lang: ru`, `sources[${i}].title`);
