@@ -68,8 +68,12 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         },
         {
           id: 'quem-faz',
-          heading: 'Quem somos',
-          paragraphs: ['O Elefante Fugiu é um projeto independente: gratuito, sem publicidade e sem rastreio. Procuramos historiadores, arqueólogos e guias dispostos a verificar uma época inteira. Se for o seu caso, escreva-nos.'],
+          heading: 'Quem faz',
+          paragraphs: [
+            'Vivo em Portugal, mas não nasci cá, e continuo a descobrir o país, história a história. O passado de Portugal é riquíssimo. O que encontro de mais interessante conto primeiro aos meus filhos, e agora também aqui.',
+            'O Elefante Fugiu é feito por uma só pessoa, nos tempos livres: é gratuito, sem publicidade e sem rastreio. Não sou historiador, por isso apoio-me em fontes e indico-as no fim de cada história.',
+            'Se é historiador, arquivista ou guia e vê onde algo pode ser contado com mais rigor, escreva-me. Qualquer sugestão é bem-vinda, mesmo sobre uma só história.',
+          ],
         },
         {
           id: 'ajudar',
@@ -114,8 +118,12 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         },
         {
           id: 'quem-faz',
-          heading: 'Who we are',
-          paragraphs: ['O Elefante Fugiu is an independent project: free, ad-free and tracking-free. We’re looking for historians, archaeologists and guides willing to check a whole era. If that’s you, get in touch.'],
+          heading: ’Who makes this’,
+          paragraphs: [
+            ’I live in Portugal, though I wasn\’t born here, and I\’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now here too.’,
+            ’O Elefante Fugiu is run by one person in their spare time: free, with no ads and no tracking. I\’m not a historian, so I rely on sources and list them under every story.’,
+            ’If you\’re a historian, archivist or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.’,
+          ],
         },
         {
           id: 'ajudar',
@@ -160,8 +168,12 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         },
         {
           id: 'quem-faz',
-          heading: 'Кто мы',
-          paragraphs: ['O Elefante Fugiu независимый проект: бесплатно, без рекламы и без слежки. Мы ищем историков, археологов и гидов, которые готовы взять на проверку целую эпоху. Напишите, если это вы.'],
+          heading: 'Кто это делает',
+          paragraphs: [
+            'Я живу в Португалии, но родился не здесь, и до сих пор открываю эту страну для себя, история за историей. Прошлое у неё удивительно богатое. Самое интересное я сначала рассказываю своим детям, а теперь и здесь.',
+            'O Elefante Fugiu я веду один, в свободное время: бесплатно, без рекламы и без слежки. Я не историк, поэтому опираюсь на источники и указываю их под каждой историей.',
+            'Если вы историк, архивист или гид и видите, где можно рассказать точнее, напишите мне. Буду рад любой подсказке, даже про одну историю.',
+          ],
         },
         {
           id: 'ajudar',
