@@ -117,21 +117,13 @@ sources:
     url: https://museuarqueologicodocarmo.pt/mac/folhetoMAC_EN.pdf
     type: institutional
     accessed: '2026-10-14'
-  - title: 'Wikipedia, 1755 Lisbon earthquake'
-    url: https://en.wikipedia.org/wiki/1755_Lisbon_earthquake
-    type: reference
-    accessed: '2026-10-14'
+  - title: 'Álvaro S. Pereira, «The Opportunity of a Disaster: The Economic Impact of the 1755 Lisbon Earthquake», The Journal of Economic History 69(2), 2009, pp. 466–499'
+    url: https://ideas.repec.org/a/cup/jechis/v69y2009i02p466-499_00.html
+    type: academic
+    accessed: '2026-10-24'
   - title: 'Harvard ReVista (DRCLAS): «Bury the dead and feed the living»'
     url: https://revista.drclas.harvard.edu/?p=31402
     type: institutional
-    accessed: '2026-10-15'
-  - title: 'Wikipedia: 1755 Lisbon earthquake'
-    note:
-      pt: 'espelho de 2007'
-      en: '2007 mirror'
-      ru: 'зеркало 2007 г.'
-    url: https://wikipedia2007.classicistranieri.com/1/7/5/1755_Lisbon_earthquake_8243.html
-    type: reference
     accessed: '2026-10-15'
   - title: 'The New Criterion: Lisbon''s narrow fate'
     url: https://newcriterion.com/article/lisbons-narrow-fate/
