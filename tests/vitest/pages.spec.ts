@@ -44,14 +44,15 @@ describe('static pages', () => {
       }
     }
   });
-  it('the Legal page names the licences, the browser storage and the form service in every language', () => {
+  it('the Legal page names the licences, the browser storage, the map, the counter and the form service in every language', () => {
     for (const lang of LANGS) {
       const text = STATIC_PAGES.legal[lang].sections.flatMap((s) => [...s.paragraphs, ...(s.items ?? [])]).join(' ');
       expect(text).toMatch(/MIT/);
       expect(text).toMatch(/CC BY-SA/);
       expect(text).toMatch(/FormSubmit/);
       expect(text).toMatch(/GitHub/);
-      expect(text).toMatch(/OpenStreetMap/);
+      expect(text).toMatch(/CARTO/);
+      expect(text).toMatch(/GoatCounter/);
       expect(text).toMatch(/\{\{email\}\}/);
     }
   });
