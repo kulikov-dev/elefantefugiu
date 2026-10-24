@@ -70,7 +70,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Quem faz',
           paragraphs: [
             'Vivo em Portugal, mas não nasci cá, e continuo a descobrir o país, história a história. O passado de Portugal é riquíssimo. O que encontro de mais interessante conto primeiro aos meus filhos, e agora também aqui.',
-            'O Elefante Fugiu é feito por uma só pessoa, nos tempos livres: é gratuito, sem publicidade e sem rastreio. Não sou historiador, por isso apoio-me em fontes e indico-as no fim de cada história.',
+            'O Elefante Fugiu é feito por uma só pessoa, nos tempos livres: é gratuito, sem publicidade e sem cookies. Não sou historiador, por isso apoio-me em fontes e indico-as no fim de cada história.',
             'Se é historiador, arquivista ou guia e vê onde algo pode ser contado com mais rigor, escreva-me. Qualquer sugestão é bem-vinda, mesmo sobre uma só história.',
           ],
         },
@@ -120,7 +120,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Who makes this',
           paragraphs: [
             'I live in Portugal, though I wasn’t born here, and I’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now here too.',
-            'O Elefante Fugiu is run by one person in their spare time: free, with no ads and no tracking. I’m not a historian, so I rely on sources and list them under every story.',
+            'O Elefante Fugiu is run by one person in their spare time: free, with no ads and no cookies. I’m not a historian, so I rely on sources and list them under every story.',
             'If you’re a historian, archivist or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.',
           ],
         },
@@ -170,7 +170,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Кто это делает',
           paragraphs: [
             'Я живу в Португалии, но родился не здесь, и до сих пор открываю эту страну для себя, история за историей. Прошлое у неё удивительно богатое. Самое интересное я сначала рассказываю своим детям, а теперь и здесь.',
-            'O Elefante Fugiu я веду один, в свободное время: бесплатно, без рекламы и без слежки. Я не историк, поэтому опираюсь на источники и указываю их под каждой историей.',
+            'O Elefante Fugiu я веду один, в свободное время: бесплатно, без рекламы и без cookie. Я не историк, поэтому опираюсь на источники и указываю их под каждой историей.',
             'Если вы историк, архивист или гид и видите, где можно рассказать точнее, напишите мне. Буду рад любой подсказке, даже про одну историю.',
           ],
         },
