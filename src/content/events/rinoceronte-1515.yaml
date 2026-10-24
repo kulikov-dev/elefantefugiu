@@ -133,11 +133,26 @@ sources:
     url: https://dorotheum.com/cz/l/2184101
     type: reference
     accessed: '2026-10-16'
-  - title: 'Qalam: «Носорог Альбрехта Дюрера»'
-    lang: ru
-    url: https://qalam.global/en/articles/nosorog-albrexta-diurera-ru-72
-    type: press
-    accessed: '2026-10-16'
+  - title: 'British Museum: «Rhinocerus», Albrecht Dürer, 1515'
+    note:
+      pt: 'a data da chegada do rinoceronte a Lisboa, 20 de maio de 1515'
+      en: 'the date the rhinoceros reached Lisbon, 20 May 1515'
+      ru: 'дата прибытия носорога в Лиссабон, 20 мая 1515 года'
+    url: https://www.britishmuseum.org/collection/object/P_1895-0122-714
+    type: institutional
+    accessed: '2026-10-24'
+  - title: 'Smarthistory: «Dürer’s Rhinoceros: art, science, and the Northern Renaissance»'
+    url: https://smarthistory.org/albrecht-durer-rhinoceros
+    type: reference
+    accessed: '2026-10-24'
+  - title: 'Silvio A. Bedini, «The Pope’s Elephant», Carcanet, 1997'
+    note:
+      pt: 'livro, sem ligação'
+      en: 'a book, no link'
+      ru: 'книга, без ссылки'
+    url: ''
+    type: book
+    accessed: '2026-10-24'
 image:
   file: rinoceronte-1515.webp
   alt:
