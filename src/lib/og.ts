@@ -9,3 +9,10 @@ export function ogImagePath(src: string, publicDir = join(process.cwd(), 'public
   const png = src.replace(/\.svg$/i, '.png');
   return existsSync(join(publicDir, png)) ? png : src;
 }
+
+/** Preview of a page that has none of its own (path inside public/): the pattern of the site, no text, no mascot. */
+export const DEFAULT_PREVIEW = 'images/og/page.png';
+/** The home page: the same pattern with the standing elephant. The only preview with the mascot (check-previews.mjs). */
+export const HOME_PREVIEW = 'images/og/home.png';
+/** A thread: its pattern in the colour of the thread, no mascot (a thread holds heavy topics). */
+export const threadPreview = (threadId: string): string => `images/og/fio-${threadId}.png`;

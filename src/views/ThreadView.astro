@@ -12,6 +12,7 @@ import { epochSectionId, threadSections, type ThreadData } from '../lib/epochs';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 import { epochPicture } from '../lib/pictures';
+import { threadPreview } from '../lib/og';
 
 interface Props {
   lang: Lang;
@@ -30,7 +31,7 @@ const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefi
 const alternates = altPaths((l) => threadHref(l, thread.slug[l]));
 const noindex = thread.placeholder || sections.some((s) => s.events.some((e) => e.placeholder));
 ---
-<BaseLayout lang={lang} title={thread.name[lang]} alternates={alternates} description={thread.description[lang]} noindex={noindex}>
+<BaseLayout lang={lang} title={thread.name[lang]} alternates={alternates} description={thread.description[lang]} noindex={noindex} preview={{ image: threadPreview(thread.id) }}>
   <div class="thread-page" style={`--thread-color: ${thread.color}`}>
     <header class="thread-page__header">
       <h1>

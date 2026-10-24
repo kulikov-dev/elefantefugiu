@@ -15,6 +15,7 @@ import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '.
 import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
 import { cardPicture } from '../lib/pictures';
+import { HOME_PREVIEW } from '../lib/og';
 
 interface Props {
   lang: Lang;
@@ -40,7 +41,7 @@ const noindex = site.featured.some((e) => e.placeholder) || ready.some((tile) =>
 // "Left off": the epochs with a page, by id, for the script that knows the last epoch of the reader.
 const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, { href: epochHref(lang, tile.epoch.slug[lang]), name: tile.epoch.name[lang] }]));
 ---
-<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex}>
+<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={{ image: HOME_PREVIEW }}>
   <div class="home">
     <!-- A thin band above the first screen, only for a reader who has been in an epoch before (the script shows it). -->
     <a

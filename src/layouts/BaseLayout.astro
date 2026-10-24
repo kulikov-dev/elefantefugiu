@@ -8,7 +8,7 @@ import { LANGS, LOCALES, altPaths, pagePath, withBase, type Lang, type PageKey }
 import { t } from '../i18n';
 import { headScript } from '../lib/head-script';
 import { azulejoRule } from '../lib/azulejo';
-import { ogImagePath } from '../lib/og';
+import { DEFAULT_PREVIEW, ogImagePath } from '../lib/og';
 import { ANALYTICS_CONFIG_SCRIPT, GOATCOUNTER_ENDPOINT, GOATCOUNTER_SCRIPT, analyticsEnabled } from '../lib/analytics';
 import bussola from '../assets/azulejo/bussola.svg?url';
 import canto from '../assets/azulejo/canto.svg?url';
@@ -58,7 +58,8 @@ const paths: Record<Lang, string> | undefined =
 const hreflangs = stand_in ? [] : LANGS.filter((l) => readyLangs.includes(l));
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = paths ? absolute(paths[lang]) : undefined;
-const image = preview?.imageUrl ? absolute(preview.imageUrl) : preview?.image ? absolute(withBase(ogImagePath(preview.image))) : undefined;
+// A page without a picture of its own (About, Method, Legal, Map, ...) gets the plain site picture; cards, epochs, threads and the home page pass theirs.
+const image = preview?.imageUrl ? absolute(preview.imageUrl) : absolute(withBase(ogImagePath(preview?.image ?? DEFAULT_PREVIEW)));
 // Thread ids the head script may put on <html data-fio> (the epoch page filter reads them before the first paint).
 const { threads: allThreads } = await loadSite();
 const azulejoCss = azulejoRule({ bussola, canto, rombo, rosa }, epoch);
