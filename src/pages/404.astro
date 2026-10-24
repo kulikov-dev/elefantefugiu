@@ -8,7 +8,7 @@ import Mascot from '../components/Mascot.astro';
 import { DEFAULT_LANG, LANGS, LANG_NAMES, pagePath } from '../i18n/routes';
 import { t } from '../i18n';
 ---
-<BaseLayout lang={DEFAULT_LANG} title={t(DEFAULT_LANG, 'notfound.page_title')} noindex>
+<BaseLayout lang={DEFAULT_LANG} title={t(DEFAULT_LANG, 'notfound.page_title')} noindex count={false}>
   {
     LANGS.map((lang) => (
       <section class="notfound__text" lang={lang} aria-labelledby={`notfound-${lang}`} data-notfound-lang={lang} data-title={t(lang, 'notfound.page_title')} hidden={lang !== DEFAULT_LANG}>
