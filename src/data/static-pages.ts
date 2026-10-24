@@ -316,7 +316,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'resumo',
           heading: 'Em resumo',
           paragraphs: [],
-          items: ['Pode usar os nossos textos livremente, com uma ligação para nós.', 'Não temos contas, cookies, publicidade nem contadores de visitas.', 'O seu navegador guarda apenas as suas preferências, e nós não as vemos.'],
+          items: ['Pode usar os nossos textos livremente, com uma ligação para nós.', 'Não temos contas, cookies nem publicidade.', 'O seu navegador guarda apenas as suas preferências, e nós não as vemos.'],
         },
         {
           id: 'licencas',
@@ -337,12 +337,18 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           ],
         },
         {
+          id: 'contagem',
+          heading: 'Contagem de visitas',
+          paragraphs: ['Contamos apenas as visitas às páginas, sem cookies e sem dados pessoais. Para isso usamos o serviço GoatCounter, que não regista o seu endereço IP (durante até 8 horas fica apenas em memória, para distinguir uma visita repetida) nem sabe quem é.'],
+        },
+        {
           id: 'terceiros',
           heading: 'Quem mais participa quando lê o site',
           paragraphs: ['O site não recolhe nada sobre si, mas não funciona no vácuo. Estes serviços veem o seu endereço IP:'],
           items: [
             '**GitHub Pages** (GitHub, Inc.) serve as páginas do site e pode registar endereços IP segundo as suas próprias regras.',
             '**Os mosaicos do mapa** vêm dos servidores da CARTO, que veem o seu endereço IP e o endereço da página, como em qualquer site com mapa.',
+            '**GoatCounter** (goatcounter.com) conta as visitas às páginas; recebe o seu endereço IP, mas só o mantém em memória, até 8 horas.',
             '**FormSubmit** (formsubmit.co) reencaminha-nos a sua mensagem se enviar o formulário «Encontrou um erro?», juntamente com o email, se o indicar. Usamo-la apenas para corrigir o erro e responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
           ],
           after: ['As ligações «Como chegar», as fontes e os sites dos museus levam a outros sites, com regras próprias.'],
@@ -368,7 +374,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'resumo',
           heading: 'In short',
           paragraphs: [],
-          items: ['You’re free to use our texts with a link back to us.', 'We have no accounts, cookies, ads or analytics counters.', 'Your browser stores only your own settings, and we can’t see them.'],
+          items: ['You’re free to use our texts with a link back to us.', 'We have no accounts, cookies or ads.', 'Your browser stores only your own settings, and we can’t see them.'],
         },
         {
           id: 'licencas',
@@ -389,12 +395,18 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           ],
         },
         {
+          id: 'contagem',
+          heading: 'Counting visits',
+          paragraphs: ['We only count page visits, without cookies or personal data. We use GoatCounter for this; it does not record your IP address (for up to 8 hours it is kept in memory only, to tell a repeat visit apart) and does not know who you are.'],
+        },
+        {
           id: 'terceiros',
           heading: 'Who else is involved when you read the site',
           paragraphs: ['The site itself collects nothing about you, but it doesn’t run in a vacuum. These services see your IP address:'],
           items: [
             '**GitHub Pages** (GitHub, Inc.) serves the site’s pages and may log IP addresses under its own policy.',
             '**The map tiles** are loaded from CARTO’s servers, which see your IP address and the address of the page, like any site with a map.',
+            '**GoatCounter** (goatcounter.com) counts page visits; it receives your IP address but keeps it only in memory, for up to 8 hours.',
             '**FormSubmit** (formsubmit.co) forwards your message to us if you send the “Found a mistake?” form, together with your email if you gave it. We use it only to fix the mistake and reply to you. Prefer not to use the service? Write directly to {{email}}.',
           ],
           after: ['Links to “Get directions”, sources and museum websites lead to other sites with their own rules.'],
@@ -420,7 +432,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'resumo',
           heading: 'Если коротко',
           paragraphs: [],
-          items: ['Тексты можно свободно использовать со ссылкой на нас.', 'У нас нет аккаунтов, куки, рекламы и счётчиков.', 'В вашем браузере хранятся только ваши настройки, и мы их не видим.'],
+          items: ['Тексты можно свободно использовать со ссылкой на нас.', 'У нас нет аккаунтов, куки и рекламы.', 'В вашем браузере хранятся только ваши настройки, и мы их не видим.'],
         },
         {
           id: 'licencas',
@@ -441,12 +453,18 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           ],
         },
         {
+          id: 'contagem',
+          heading: 'Подсчёт посещений',
+          paragraphs: ['Мы считаем только посещения страниц, без cookie и без личных данных. Для этого используется сервис GoatCounter: он не записывает ваш IP-адрес (на время до 8 часов тот остаётся только в памяти, чтобы отличить повторный заход) и не узнаёт, кто вы.'],
+        },
+        {
           id: 'terceiros',
           heading: 'Кто ещё участвует, когда вы читаете сайт',
           paragraphs: ['Сайт сам ничего о вас не собирает, но он работает не в вакууме. Вот сервисы, которые видят ваш IP-адрес:'],
           items: [
             '**GitHub Pages** (GitHub, Inc.) отдаёт страницы сайта и может записывать IP-адреса по своим правилам.',
             '**Плитки карты** загружаются с серверов CARTO, которые видят ваш IP-адрес и адрес страницы, как любой сайт с картой.',
+            '**GoatCounter** (goatcounter.com) считает посещения страниц; получает ваш IP-адрес, но хранит его только в памяти, до 8 часов.',
             '**FormSubmit** (formsubmit.co) пересылает нам сообщение, если вы отправите форму «Нашли ошибку?», вместе с почтой, если вы её указали. Мы используем письмо только чтобы исправить ошибку и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
           ],
           after: ['Ссылки «Как добраться», на источники и сайты музеев ведут на чужие сайты со своими правилами.'],
