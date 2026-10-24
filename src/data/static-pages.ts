@@ -1,8 +1,7 @@
 // Texts of the static pages: About, Method and sources, Legal information (docs/spec.md 5.6), in the three languages.
 // Source: docs/texts-ru.md, docs/texts-pt.md, docs/texts-en.md (sections 2, 3 and 4). Names of things on the site (labels, eras,
 // threads, buttons) are written as the site itself names them; the differences from the files are listed in docs/STATE.md.
-// What stood in square brackets in the files (a name of the owner, the controller of the data, the reminder to show the legal
-// text to a GDPR expert) is NOT published here; see docs/STATE.md for the list.
+// The "Who makes this" section and the data controller line in Legal information are the owner's own wording (not from the files).
 //
 // Inline markup: {{about}} {{method}} {{report}} {{legal}} {{map}} link to a page of the site (the link text is the title of that
 // page; {{method|text}} gives the link another text, for a case ending); {{email}} is the contact address as a link; {{stories}} is
@@ -356,7 +355,10 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'contacto',
           heading: 'Contactos',
-          paragraphs: ['Questões sobre licenças e dados, pedidos de remoção de material: {{email}}.'],
+          paragraphs: [
+            'Questões sobre licenças e dados, pedidos de remoção de material: {{email}}.',
+            'Responsável pelo tratamento dos dados: Artem K., Portugal, {{email}}',
+          ],
         },
       ],
     },
@@ -405,7 +407,10 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'contacto',
           heading: 'Contact',
-          paragraphs: ['Questions about licences and data, requests to remove material: {{email}}.'],
+          paragraphs: [
+            'Questions about licences and data, requests to remove material: {{email}}.',
+            'Data controller: Artem K., Portugal, {{email}}',
+          ],
         },
       ],
     },
@@ -454,7 +459,10 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'contacto',
           heading: 'Контакты',
-          paragraphs: ['Вопросы о лицензиях и данных, просьбы убрать материал: {{email}}.'],
+          paragraphs: [
+            'Вопросы о лицензиях и данных, просьбы убрать материал: {{email}}.',
+            'Ответственный за обработку данных: Artem K., Португалия, {{email}}',
+          ],
         },
       ],
     },
