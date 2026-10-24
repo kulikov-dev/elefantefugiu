@@ -55,25 +55,26 @@ story:
     «Quem for senhor de Malaca tem a mão na garganta de Veneza», escreveu o
     boticário Tomé Pires, porque Malaca controlava a rota das especiarias. A 25
     de julho de 1511, Afonso de Albuquerque atacou-a com cerca de mil homens. O
-    sultão respondeu com elefantes de guerra. Um português espetou a lança no
-    olho do elefante da frente. O bicho recuou aos berros, os outros entraram em
-    pânico e esmagaram os seus, e o sultão caiu da montada, ferido. Um mês
+    sultão respondeu com elefantes de guerra. Os portugueses receberam-nos
+    com lanças. O elefante do sultão, ferido, deu meia-volta aos berros, os outros
+    entraram em pânico e esmagaram os seus, e o sultão, também ferido, abandonou a
+    montada. Um mês
     depois, a cidade era portuguesa.
   en: >-
     «Whoever is lord of Malacca has his hand on the throat of Venice,» wrote the
     Portuguese apothecary Tomé Pires, because Malacca controlled the spice
     route. On 25 July 1511 Afonso de Albuquerque attacked it with about a
-    thousand men. The sultan answered with war elephants. One Portuguese jabbed
-    his lance into the lead elephant's eye. Howling, the animal turned back, the
-    others panicked and trampled their own side, and the sultan fell from his
-    mount, wounded. A month later the city was Portuguese.
+    thousand men. The sultan answered with war elephants. The Portuguese met them
+    with lances. The sultan's elephant, wounded, turned back howling, the others
+    panicked and trampled their own side, and the sultan, wounded too, left his
+    mount. A month later the city was Portuguese.
   ru: >-
     «Кто владеет Малаккой, тот держит Венецию за горло», писал португальский
     аптекарь Томе Пиреш, ведь Малакка контролировала путь пряностей. 25 июля
     1511 года Афонсу де Албукерки атаковал её с тысячей человек. Султан ответил
-    боевыми слонами. Один португалец вонзил копьё в глаз передовому слону. С
-    рёвом зверь повернул назад, остальные в панике затоптали своих, а султан
-    упал с животного и был ранен. Через месяц город стал португальским.
+    боевыми слонами. Португальцы встретили их копьями. Раненый слон
+    султана с рёвом повернул назад, остальные в панике затоптали своих, а султан,
+    тоже раненый, покинул спину слона. Через месяц город стал португальским.
 more:
   pt: |-
     Os números variam: algumas fontes falam em cerca de vinte elefantes, e os defensores são calculados entre 20 000 e 30 000. A Albuquerque dão-se entre 1000 e 1200 homens, uns 700 deles portugueses. Recuou depois do primeiro assalto, voltou a atacar em agosto e tomou a cidade ao fim de cerca de quarenta dias de combates.
@@ -96,10 +97,14 @@ sources:
     url: https://www.nst.com.my/amp/news/nation/2022/09/828245/courage-and-perseverance-face-adversity
     type: press
     accessed: '2026-10-15'
-  - title: 'Teylers Museum, biblioteca digital (Emags 28a_24-2), p. 222'
-    url: https://beeld.teylersmuseum.nl/Digital_Library/Emags/28a_24-2/page_222.html
-    type: reference
-    accessed: '2026-10-15'
+  - title: 'The Commentaries of the Great Afonso Dalboquerque, Second Viceroy of India, vol. III, Hakluyt Society, 1880'
+    note:
+      pt: 'tradução de Walter de Gray Birch; caps. XXII–XXIII (assalto de 25 de julho, os elefantes do rei)'
+      en: 'translated by Walter de Gray Birch; chapters XXII–XXIII (the assault of 25 July, the king’s elephants)'
+      ru: 'перевод Уолтера де Грея Бёрча; главы XXII–XXIII (штурм 25 июля, слоны султана)'
+    url: https://www.cambridge.org/core/books/commentaries-of-the-great-afonso-dalboquerque-second-viceroy-of-india/3653F43F94D14A4D4B315DA61551FD2F
+    type: academic
+    accessed: '2026-10-24'
   - title: 'Wikipedia: Malay–Portuguese conflicts'
     url: https://en.wikipedia.org/wiki/Malay%E2%80%93Portuguese_conflicts
     type: reference
