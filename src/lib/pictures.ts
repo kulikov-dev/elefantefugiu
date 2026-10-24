@@ -15,10 +15,6 @@ export const epochPicture = (epoch: { fallback_image?: PictureData | string | un
 export const cardPicture = (event: { image?: PictureData | undefined }, epoch: { fallback_image?: PictureData | string | undefined }): PictureData | undefined =>
   event.image ?? epochPicture(epoch);
 
-/** The picture of a card where it may be seen without the reader having chosen it (the home page, link previews): a heavy topic gives its place to the epoch's picture. */
-export const previewPicture = (event: { image?: PictureData | undefined; sensitive?: boolean }, epoch: { fallback_image?: PictureData | string | undefined }): PictureData | undefined =>
-  event.sensitive ? epochPicture(epoch) : cardPicture(event, epoch);
-
 /** The author in the language of the page. */
 export const authorText = (p: Pick<PictureData, 'author'>, lang: Lang): string => (typeof p.author === 'string' ? p.author : p.author[lang]);
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { picture } from '../../src/data/schemas';
-import { authorText, cardPicture, epochPicture, needsAttribution, previewPicture, sourceName, type PictureData } from '../../src/lib/pictures';
+import { authorText, cardPicture, epochPicture, needsAttribution, sourceName, type PictureData } from '../../src/lib/pictures';
 
 const base = {
   file: 'cantino-1502.webp',
@@ -51,12 +51,6 @@ describe('which picture a card shows', () => {
   it('a provisional path (a string) is not a picture', () => {
     expect(epochPicture({ fallback_image: 'images/placeholders/epoch-c.svg' })).toBeUndefined();
     expect(cardPicture({}, { fallback_image: 'images/placeholders/epoch-c.svg' })).toBeUndefined();
-  });
-
-  it('a heavy topic gives its place in previews to the epoch picture', () => {
-    expect(previewPicture({ image: own, sensitive: true }, { fallback_image: epochOwn })).toBe(epochOwn);
-    expect(previewPicture({ image: own, sensitive: false }, { fallback_image: epochOwn })).toBe(own);
-    expect(previewPicture({ image: own, sensitive: true }, {})).toBeUndefined();
   });
 });
 

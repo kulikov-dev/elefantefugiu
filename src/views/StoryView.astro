@@ -27,7 +27,7 @@ import { epochHasContent } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 import { previewImageUrl } from '../lib/picture-assets';
-import { cardPicture, previewPicture } from '../lib/pictures';
+import { cardPicture } from '../lib/pictures';
 
 interface Props {
   lang: Lang;
@@ -48,9 +48,9 @@ const alternates = altPaths((l) => storyPath(l, event.slug[l]));
 const cardUrl = new URL(alternates[lang], Astro.site).href;
 const description = firstSentence(event.story[lang]);
 
-// Preview picture (link previews): the main picture of the story, else the picture of the epoch. A heavy topic never puts its own picture
-// into a preview (the epoch's goes there). An epoch that has only a provisional picture (a path inside public/) gives that.
-const previewPic = previewPicture(event, epoch);
+// Preview picture (link previews): the main picture of the story, else the picture of the epoch (also for a heavy topic: its pictures are
+// documents and strict azulejo, not the playful ones). An epoch that has only a provisional picture (a path inside public/) gives that.
+const previewPic = cardPicture(event, epoch);
 const previewUrl = previewPic ? await previewImageUrl(previewPic) : undefined;
 const previewImage = previewPic ? undefined : typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined;
 const previewImageAlt = previewPic && previewPic === event.image ? previewPic.alt[lang] : undefined;
