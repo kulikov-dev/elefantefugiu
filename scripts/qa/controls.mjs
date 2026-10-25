@@ -67,11 +67,13 @@ const feedState = (page) =>
     }));
     const more = document.querySelector('.epoch-switch__more');
     const dashed = [...document.querySelectorAll('.epoch-switch__list .epoch-switch__item')].filter((el) => getComputedStyle(el).borderStyle.includes('dashed')).length;
-    return { items, more: more?.querySelector('summary').textContent.trim(), moreOpen: more?.open, dashed, overflow: document.scrollingElement.scrollWidth - innerWidth };
+    const tabs = [...document.querySelectorAll('.epoch-switch__list > li')];
+    const list = document.querySelector('.epoch-switch__list');
+    return { items, more: more?.querySelector('summary').textContent.trim(), moreOpen: more?.open, dashed, overflow: document.scrollingElement.scrollWidth - innerWidth, tabs: tabs.length, oneLine: new Set(tabs.map((li) => Math.round(li.getBoundingClientRect().top))).size === 1, scrolls: list.scrollWidth > list.clientWidth };
   });
-  // Tabs first (the epochs of the project's first stage), then the rest under one "More eras soon" disclosure. An epoch is a link
-  // only when it has published stories.
-  const mvp = epochs.filter((e) => e.mvp);
+  // Tabs first (the epochs that have published stories), then the rest, an epoch of the first stage without stories too, under one
+  // "More eras soon" disclosure. An epoch is a link only when it has published stories.
+  const mvp = world.readyEpochs;
   const readyIds = new Set(world.readyEpochs.map((e) => e.id));
   ok('switcher: every epoch of the project, ready or not', s.items.length === epochs.length, `n=${s.items.length}`);
   ok('switcher: current epoch marked, not a link', s.items.filter((i) => i.current).length === 1 && s.items.find((i) => i.current).link === null);
@@ -79,6 +81,7 @@ const feedState = (page) =>
   ok('switcher: the links are the ready epochs', s.items.filter((i) => i.link).every((i) => world.readyEpochs.some((m) => epochPath(m) === i.link)));
   ok('switcher: one disclosure "Mais épocas em breve", closed at first', s.more === 'Mais épocas em breve' && s.moreOpen === false, JSON.stringify([s.more, s.moreOpen]));
   ok('switcher: no dashed chips in the main row', s.dashed === 0);
+  ok('switcher: tabs are the epochs with stories only (an epoch without stories sits under "soon"), in one line on a phone', s.tabs === mvp.length && s.oneLine, JSON.stringify([s.tabs, mvp.length, s.oneLine, s.scrolls]));
   ok('switcher: no horizontal overflow at 360px', s.overflow <= 0, `overflow=${s.overflow}`);
   await page.close();
 }

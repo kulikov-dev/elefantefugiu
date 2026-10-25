@@ -1,5 +1,6 @@
 ---
-// The MVP epochs are tabs (the current one marked); every other epoch sits under one "More eras soon" disclosure.
+// The epochs that have stories are tabs (the current one marked); every other epoch, an MVP one without stories too, sits under one
+// "More eras soon" disclosure. On a phone the tabs are one line that scrolls sideways (with a fade at the edge).
 import { t } from '../i18n';
 import { epochHref, type Lang } from '../i18n/routes';
 import type { EpochData, SwitcherItem } from '../lib/epochs';
@@ -10,11 +11,11 @@ interface Props {
 }
 
 const { lang, items } = Astro.props;
-const tabs = items.filter((i) => i.epoch.mvp);
-const rest = items.filter((i) => !i.epoch.mvp);
+const tabs = items.filter((i) => i.state !== 'soon');
+const rest = items.filter((i) => i.state === 'soon');
 ---
 <nav class="epoch-switch" aria-label={t(lang, 'epoch.switcher_label')}>
-  <ol class="epoch-switch__list">
+  <ol class="epoch-switch__list" data-scroll-fade>
     {
       tabs.map(({ epoch, state }) => (
         <li>
@@ -66,13 +67,30 @@ const rest = items.filter((i) => !i.epoch.mvp);
     gap: var(--space-2);
   }
 
+  /* A phone: one line, scrolling sideways. A wide screen: the tabs wrap. */
   .epoch-switch__list {
     display: flex;
-    flex-wrap: wrap;
     gap: var(--space-2);
+    max-width: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: auto;
     list-style: none;
+  }
+
+  .epoch-switch__list > li {
+    flex: none;
+  }
+
+  .epoch-switch__list .epoch-switch__item {
+    white-space: nowrap;
+  }
+
+  @media (min-width: 48rem) {
+    .epoch-switch__list {
+      flex-wrap: wrap;
+      overflow-x: visible;
+    }
   }
 
   .epoch-switch__item {
