@@ -9,13 +9,11 @@ interface Props {
   hook: string;
   /** Language tag of the texts when it differs from the page (placeholder filler is Latin). */
   textLang?: string;
-  /** The side column holds only the mini-map, which exists from 1024 px: on a phone the column is not there at all. */
-  asideWideOnly?: boolean;
+  /** The side column holds the picture of the story; a story without a picture has no column. */
+  hasAside?: boolean;
 }
 
-const { lang, hook, textLang, asideWideOnly = false } = Astro.props;
-// The side column (a picture of the story, or the mini-map) exists only when something is put into it.
-const hasAside = Astro.slots.has('aside');
+const { lang, hook, textLang, hasAside = false } = Astro.props;
 ---
 <div class="layers" data-card-layers>
   <div class:list={['layers__top', { 'layers__top--aside': hasAside }]}>
@@ -33,14 +31,12 @@ const hasAside = Astro.slots.has('aside');
     </div>
     {
       hasAside && (
-        <aside class:list={['layers__aside', { 'layers__aside--wide-only': asideWideOnly }]}>
+        <aside class="layers__aside">
           <slot name="aside" />
         </aside>
       )
     }
   </div>
-
-  <slot name="below" />
 
   <details id="detalhes" class="more">
     <summary>
@@ -72,18 +68,10 @@ const hasAside = Astro.slots.has('aside');
     grid-row: 1;
   }
 
-  .layers__aside--wide-only {
-    display: none;
-  }
-
   @media (min-width: 64rem) {
     .layers__top--aside {
       grid-template-columns: minmax(0, 1fr) var(--card-aside-width);
       align-items: start;
-    }
-
-    .layers__aside--wide-only {
-      display: block;
     }
 
     .layers__aside {

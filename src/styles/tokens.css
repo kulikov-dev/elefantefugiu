@@ -175,6 +175,10 @@
   --map-preview-width: 24rem;
   --map-sheet-peek: 3.5rem;
   --map-sheet-open: 70%;
+  /* The map of the bridge block on a card page: its frame (phone, wide) and the size of a tile (256 px: one tile pixel is one screen pixel). */
+  --minimap-height: 13.75rem;
+  --minimap-height-wide: 18.75rem;
+  --minimap-tile: 16rem;
   --map-marker-frame: 1.75rem;
   --map-marker-story: 1.125rem;
   --map-marker-cluster: 2.25rem;

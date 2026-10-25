@@ -26,7 +26,7 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     return {
       hook: vis(document.querySelector('.hook')),
       story: vis(document.getElementById('historia')),
-      miniMap: vis(document.querySelector('.minimap')),
+      miniMap: Boolean(document.querySelector('.minimap')?.checkVisibility()),
       shareLink: vis(document.querySelector('[data-share-link]')),
       shareButton: vis(document.querySelector('[data-share-button]')),
       detailsOpen: d.open,
@@ -35,12 +35,17 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   });
   ok('no JS + no images: hook visible', s.hook);
   ok('no JS + no images: story visible', s.story);
-  // The small map (a card without a picture) is for wide screens only: at 360 px neither the tiles nor their credit take any room.
-  ok('no JS + no images: the small map is left out on a narrow screen, with no gap', !s.miniMap);
+  // The map of the bridge block is in the closed "More" layer: nothing of it takes room before the reader opens it.
+  ok('no JS + no images: the map of the bridge block is not shown while "More" is closed', !s.miniMap);
   ok('no JS: share is a plain link, button hidden', s.shareLink && !s.shareButton);
   ok('no JS: layer 3 closed by default', !s.detailsOpen);
   await page.click('#detalhes > summary');
   ok('no JS: summary toggles layer 3 (native <details>)', await page.evaluate(() => document.getElementById('detalhes').open));
+  const map = await page.evaluate(() => {
+    const frame = document.querySelector('.minimap__frame');
+    return { height: Math.round(frame.getBoundingClientRect().height), caption: document.querySelector('.minimap__caption').textContent.trim(), inBridge: Boolean(frame.closest('[data-bridge]')), link: frame.getAttribute('href') };
+  });
+  ok('no JS: opened, the map is in the bridge block, 220 px tall on a phone, with the caption "Bridge to today: name" and a link to the map page', map.inBridge && map.height === 220 && /^[^:]+: .+/.test(map.caption) && /[?&]id=/.test(map.link), JSON.stringify(map));
   ok('no JS: no horizontal overflow at 360px', s.overflow <= 0, `overflow=${s.overflow}`);
   await page.close();
 }

@@ -9,7 +9,6 @@ import CardLayers from '../components/CardLayers.astro';
 import Figure from '../components/Figure.astro';
 import ShipScale from '../components/ShipScale.astro';
 import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
-import MiniMap from '../components/MiniMap.astro';
 import NextStory from '../components/NextStory.astro';
 import PagerNav from '../components/PagerNav.astro';
 import PlaceholderNotice from '../components/PlaceholderNotice.astro';
@@ -167,19 +166,8 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
     <div class="gated card__rest">
 
-    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} asideWideOnly={!event.image}>
-      <Fragment slot="aside">
-        {
-          event.image ? (
-            <Figure lang={lang} picture={event.image} kind="main" />
-          ) : (
-            <MiniMap lang={lang} cardId={event.id} point={event.bridge} name={event.bridge.title?.[lang]?.trim() || event.bridge.name} />
-          )
-        }
-      </Fragment>
-      <Fragment slot="below">
-        {event.image && <MiniMap lang={lang} cardId={event.id} point={event.bridge} name={event.bridge.title?.[lang]?.trim() || event.bridge.name} />}
-      </Fragment>
+    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)}>
+      <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" />}</Fragment>
       <p slot="story">{event.story[lang]}</p>
       <Fragment slot="after">
         {
@@ -209,7 +197,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         {event.detail_image && <Figure lang={lang} picture={event.detail_image} kind="detail" />}
         {event.interactive?.type === 'army_dots' && <ArmyDots lang={lang} data={event.interactive.data} textLang={textLang} />}
         {event.interactive?.type === 'ship_scale' && <ShipScale lang={lang} data={event.interactive.data} textLang={textLang} />}
-        <BridgeBlock lang={lang} bridge={event.bridge} cardId={event.id} textLang={textLang} />
+        <BridgeBlock lang={lang} bridge={event.bridge} cardId={event.id} kind={event.importance === 3 ? 'frame' : 'story'} textLang={textLang} />
         {event.sources.length > 0 && <SourceList lang={lang} sources={event.sources} />}
       </Fragment>
     </CardLayers>

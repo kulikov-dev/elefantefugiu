@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MINIMAP_ASPECT, MINIMAP_GRID, minimapLayout, tileUrl, tileXY } from '../../src/lib/minimap';
+import { MINIMAP_COLS, MINIMAP_ROWS, MINIMAP_ZOOM, TILE_PX, minimapLayout, tileUrl, tileXY } from '../../src/lib/minimap';
 
 const TEMPLATE = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 
@@ -17,22 +17,30 @@ describe('mini-map tiles', () => {
     expect(tileUrl(TEMPLATE, 14, 7776, 6277)).toBe('https://tile.openstreetmap.org/14/7776/6277.png');
     expect(tileUrl('https://{s}.example/{z}/{x}/{y}{r}.png', 3, 1, 2)).toBe('https://a.example/3/1/2.png');
   });
-  it('minimapLayout: a 3 x 3 grid of distinct tiles around the point, the point in the middle of the frame', () => {
-    const layout = minimapLayout(38.7223, -9.1393, TEMPLATE);
-    expect(layout.tiles).toHaveLength(MINIMAP_GRID * MINIMAP_GRID);
-    expect(new Set(layout.tiles.map((t) => t.url)).size).toBe(9);
-    const centre = layout.tiles.find((t) => t.col === 1 && t.row === 1)!;
-    const { x, y } = tileXY(38.7223, -9.1393, 14);
-    expect(centre.url).toBe(`https://tile.openstreetmap.org/14/${Math.floor(x)}/${Math.floor(y)}.png`);
-    // The point is at 50 % of the frame: grid position + its place in the grid (in frame units) = 50.
-    const fx = (x - (Math.floor(x) - 1)) / MINIMAP_GRID;
-    const fy = (y - (Math.floor(y) - 1)) / MINIMAP_GRID;
-    expect(layout.inner.leftPct + fx * layout.inner.widthPct).toBeCloseTo(50);
-    expect(layout.inner.topPct + fy * layout.inner.widthPct * MINIMAP_ASPECT).toBeCloseTo(50);
+  it('is a street-level map (zoom 15) whose tiles keep their size', () => {
+    expect(MINIMAP_ZOOM).toBe(15);
+    expect(TILE_PX).toBe(256);
+  });
+  it('minimapLayout: a grid of distinct tiles, the one with the point and its neighbours, placed in pixels from the point', () => {
+    const tiles = minimapLayout(38.7223, -9.1393, TEMPLATE);
+    expect(tiles).toHaveLength((2 * MINIMAP_COLS + 1) * (2 * MINIMAP_ROWS + 1));
+    expect(new Set(tiles.map((t) => t.url)).size).toBe(tiles.length);
+    const { x, y } = tileXY(38.7223, -9.1393, MINIMAP_ZOOM);
+    const own = tiles.find((t) => t.url === `https://tile.openstreetmap.org/15/${Math.floor(x)}/${Math.floor(y)}.png`)!;
+    // The corner of the tile with the point lies up and to the left of the point by the fraction of the tile, in pixels.
+    expect(own.dx).toBe(Math.round(-(x - Math.floor(x)) * TILE_PX));
+    expect(own.dy).toBe(Math.round(-(y - Math.floor(y)) * TILE_PX));
+    expect(own.far).toBe(false);
+  });
+  it('the grid reaches at least a tile beyond the point on every side, the outer columns are marked far', () => {
+    const tiles = minimapLayout(38.7223, -9.1393, TEMPLATE);
+    expect(Math.min(...tiles.map((t) => t.dx))).toBeLessThanOrEqual(-TILE_PX * MINIMAP_COLS);
+    expect(Math.max(...tiles.map((t) => t.dx)) + TILE_PX).toBeGreaterThanOrEqual(TILE_PX * MINIMAP_COLS);
+    expect(tiles.filter((t) => t.far)).toHaveLength(2 * (2 * MINIMAP_ROWS + 1));
   });
   it('minimapLayout wraps tiles over the date line and drops rows beyond the poles', () => {
     const wrap = minimapLayout(0, 179.99, TEMPLATE, 2);
-    expect(wrap.tiles.every((t) => /\/2\/[0-3]\/[0-3]\.png$/.test(t.url))).toBe(true);
-    expect(minimapLayout(85, 0, TEMPLATE, 2).tiles.length).toBeLessThan(9);
+    expect(wrap.every((t) => /\/2\/[0-3]\/[0-3]\.png$/.test(t.url))).toBe(true);
+    expect(minimapLayout(85, 0, TEMPLATE, 2).length).toBeLessThan(15);
   });
 });

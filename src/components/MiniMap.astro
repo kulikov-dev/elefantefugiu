@@ -1,7 +1,8 @@
 ---
-// A small map of the story's point (its bridge to today) on a card page, from 64rem up. A few map tiles laid side by side as
-// ordinary pictures with a marker in the middle (src/lib/minimap.ts): no script, no Leaflet. The whole picture is a link to the
-// map page centred on the story. Hidden on narrower screens; its pictures are lazy, so a phone does not load them.
+// The map of the "Bridge to today" block on a card page: the place that can be visited, at street level, with the same marker the big
+// map has for this story. A few map tiles laid side by side as ordinary pictures (src/lib/minimap.ts): no script, no Leaflet, works
+// without JavaScript. The whole picture is a link to the map page centred on the story. Its pictures are lazy and sit in the "More"
+// layer, so nothing is fetched before the reader opens it.
 import { t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
 import { mapLinkFor } from '../lib/map-data';
@@ -12,50 +13,66 @@ interface Props {
   lang: Lang;
   cardId: string;
   point: { lat: number; lon: number };
-  /** Name of the place, for the label of the link. */
+  /** Name of the place in the language of the page: the caption above the map and the label of the link. */
   name: string;
+  /** The marker of the big map: a diamond for the main event of an epoch, a circle for a story. */
+  kind: 'frame' | 'story';
 }
 
-const { lang, cardId, point, name } = Astro.props;
+const { lang, cardId, point, name, kind } = Astro.props;
 const tile = tileConfig(process.env);
-const layout = minimapLayout(point.lat, point.lon, tile.url);
+const light = minimapLayout(point.lat, point.lon, tile.url);
 // With a provider that has a dark style the dark tiles are a second set, shown by CSS in the dark theme (lazy, so only one is fetched).
-const darkLayout = tile.urlDark ? minimapLayout(point.lat, point.lon, tile.urlDark) : undefined;
-const gridStyle = `width:${layout.inner.widthPct}%;left:${layout.inner.leftPct}%;top:${layout.inner.topPct}%`;
-const cell = 100 / 3;
+const dark = tile.urlDark ? minimapLayout(point.lat, point.lon, tile.urlDark) : undefined;
+const sets = [
+  { name: 'light', tiles: light },
+  ...(dark ? [{ name: 'dark', tiles: dark }] : []),
+];
+const caption = `${t(lang, 'ui.bridge')}: ${name}`;
 ---
 <figure class="minimap">
+  <p class="minimap__caption">{caption}</p>
   <a class="minimap__frame" href={mapLinkFor(pagePath(lang, 'map'), cardId)} aria-label={`${t(lang, 'ui.open_on_map')}: ${name}`}>
-    <span class:list={['minimap__grid', darkLayout && 'minimap__grid--light']} style={gridStyle}>
-      {layout.tiles.map((tileImg) => <img class="minimap__tile" src={tileImg.url} alt="" width="256" height="256" loading="lazy" decoding="async" style={`left:${tileImg.col * cell}%;top:${tileImg.row * cell}%`} />)}
-    </span>
     {
-      darkLayout && (
-        <span class="minimap__grid minimap__grid--dark" style={gridStyle}>
-          {darkLayout.tiles.map((tileImg) => <img class="minimap__tile" src={tileImg.url} alt="" width="256" height="256" loading="lazy" decoding="async" style={`left:${tileImg.col * cell}%;top:${tileImg.row * cell}%`} />)}
+      sets.map((set) => (
+        <span class:list={['minimap__grid', dark && `minimap__grid--${set.name}`]}>
+          {
+            set.tiles.map((tileImg) => (
+              <img
+                class:list={['minimap__tile', { 'minimap__tile--far': tileImg.far }]}
+                src={tileImg.url}
+                alt=""
+                width="256"
+                height="256"
+                loading="lazy"
+                decoding="async"
+                style={`left:calc(50% + ${tileImg.dx}px);top:calc(50% + ${tileImg.dy}px)`}
+              />
+            ))
+          }
         </span>
-      )
+      ))
     }
-    <span class="minimap__marker" aria-hidden="true"></span>
+    <span class:list={['minimap__marker', `minimap__marker--${kind}`]} aria-hidden="true"></span>
   </a>
   <figcaption class="minimap__credit" set:html={tile.attribution} />
 </figure>
 
 <style>
   .minimap {
-    display: none;
+    margin-block-start: var(--space-3);
   }
 
-  @media (min-width: 64rem) {
-    .minimap {
-      display: block;
-    }
+  .minimap__caption {
+    margin-block-end: var(--space-2);
+    font-weight: var(--weight-strong);
   }
 
+  /* 220 px tall on a phone, 300 px on a wide screen: the frame shows a street level map around the place. */
   .minimap__frame {
     position: relative;
     display: block;
-    aspect-ratio: 4 / 3;
+    height: var(--minimap-height);
     overflow: hidden;
     border: var(--epoch-frame);
     border-radius: var(--radius-md);
@@ -66,11 +83,35 @@ const cell = 100 / 3;
     outline-offset: var(--ring-offset-tight);
   }
 
-  /* The grid of tiles is square and wider than the frame; its place is set per card so that the point is in the middle. */
+  @media (min-width: 48rem) {
+    .minimap__frame {
+      height: var(--minimap-height-wide);
+    }
+  }
+
+  /* The tiles are positioned from the middle of the frame, where the place is; one tile pixel is one screen pixel. */
   .minimap__grid {
     position: absolute;
-    aspect-ratio: 1;
+    inset: 0;
     filter: var(--image-filter);
+  }
+
+  .minimap__tile {
+    position: absolute;
+    width: var(--minimap-tile);
+    height: var(--minimap-tile);
+    max-width: none;
+  }
+
+  /* The outer columns are for a wide frame only; a hidden lazy picture is never fetched. */
+  .minimap__tile--far {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    .minimap__tile--far {
+      display: block;
+    }
   }
 
   /* Two sets of tiles (light and dark style): the picture dimming is not applied to them, and the one of the other theme is hidden. */
@@ -103,23 +144,31 @@ const cell = 100 / 3;
     display: block;
   }
 
-  .minimap__tile {
-    position: absolute;
-    width: 33.3334%;
-    height: 33.3334%;
-  }
-
+  /* The marker of the big map: a diamond for the main event of an epoch, a circle for a story, the same sizes and colours. */
   .minimap__marker {
     position: absolute;
     inset-block-start: 50%;
     inset-inline-start: 50%;
-    width: var(--size-dot-lg);
-    height: var(--size-dot-lg);
-    transform: translate(-50%, -50%);
-    border: var(--border-medium) solid var(--color-surface);
-    border-radius: 50%;
-    background: var(--epoch-primary);
+    box-sizing: border-box;
+    translate: -50% -50%;
     box-shadow: var(--shadow-raised);
+  }
+
+  .minimap__marker--frame {
+    width: var(--map-marker-frame);
+    height: var(--map-marker-frame);
+    border: var(--map-marker-border) solid var(--color-surface);
+    border-radius: var(--radius-sm);
+    background: var(--color-accent);
+    rotate: 45deg;
+  }
+
+  .minimap__marker--story {
+    width: var(--map-marker-story);
+    height: var(--map-marker-story);
+    border: var(--map-marker-border) solid var(--color-accent);
+    border-radius: 50%;
+    background: var(--color-surface);
   }
 
   .minimap__credit {
