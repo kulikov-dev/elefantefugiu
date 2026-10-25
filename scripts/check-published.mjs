@@ -7,7 +7,7 @@
 //  - the path: no directory or file named after the id or a slug of such a card (the card page, the QR page /p/<id>/, any language);
 //  - the content: no id and no slug of such a card, and no `evento-exemplo` at all;
 //  - the title of such a card in any language (a card cannot be mentioned by name in a list);
-//  - every map configuration (`data-map-config`, `data-home-map-config`): each point is a published card, and there are as many points as published cards.
+//  - every map configuration (`data-map-config`): each point is a published card, and there are as many points as published cards.
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';

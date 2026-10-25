@@ -1,0 +1,42 @@
+---
+// One line on the home page instead of a map: "18 places where it happened -> Open the map". The number follows family mode
+// (three variants, the script-free CSS shows one). The map itself lives on the map page.
+import { plural, t } from '../i18n';
+import { pagePath, type Lang } from '../i18n/routes';
+import { ageInfoOf, countByMode, countVariants } from '../lib/family';
+import type { EventData } from '../lib/events';
+
+interface Props {
+  lang: Lang;
+  events: readonly EventData[];
+}
+
+const { lang, events } = Astro.props;
+const counts = countByMode(events.map(ageInfoOf));
+---
+<p class="home-map-line">
+  <span class="home-map-line__count">
+    {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.places', v.value)}</span>)}
+  </span>
+  <a href={pagePath(lang, 'map')}>{t(lang, 'home.open_map')}<span aria-hidden="true"> →</span></a>
+</p>
+
+<style>
+  .home-map-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-4);
+  }
+
+  .home-map-line__count {
+    font-weight: var(--weight-strong);
+  }
+
+  .home-map-line a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    font-weight: 600;
+  }
+</style>

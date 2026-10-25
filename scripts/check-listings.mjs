@@ -334,14 +334,6 @@ for (const lang of ['pt', 'en']) {
   const placeholder = featuredIds.some((id) => events.find((e) => e.id === id)?.placeholder) || tiles.some((t) => t.page && epochTestText(t.epoch));
   commonChecks(html, where, lang, { placeholder, expectedH1: HOME_H1[lang] });
 
-  // The small map draws map tiles in the browser (Leaflet shows the attribution it is given): the config must carry it, with a link.
-  const mapConfig = raw.match(/<script type="application\/json" data-home-map-config>([\s\S]*?)<\/script>/)?.[1] ?? '';
-  if (!mapConfig) fail('the small map has no config');
-  else {
-    const attribution = JSON.parse(mapConfig).tile?.attribution ?? '';
-    if (!/<a [^>]*href="https?:\/\/[^"]+"/.test(attribution) || !/(OpenStreetMap|©|&copy;)/i.test(attribution)) fail('the small map needs the attribution of the tiles with a link (© OpenStreetMap contributors)');
-  }
-
   // hero: the story as the h1 and a paragraph, one main button to the story the name comes from, the elephant, two plain links
   const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)?.[0] ?? '';
   if (/Foi aqui/.test(hero)) fail('the hero must not repeat the name or the tagline');
@@ -420,15 +412,16 @@ for (const lang of ['pt', 'en']) {
   });
   const soonN = tiles.filter((x) => !x.page).length;
   if (soonN > 0 && !new RegExp(`<p class="timeline__more"[^>]*>[^<]*\\b${soonN}\\b`).test(section)) fail(`the caption under the strip must say ${soonN} more eras`);
-  // the small map: caption with the number of places and the link to the map page (the map itself needs JavaScript)
-  const mapBlock = html.match(/<div class="home-map"[\s\S]*?(?=<section id="epocas")/)?.[0] ?? '';
-  if (!mapBlock) fail('the small map block is missing');
+  // the line instead of a map: the number of places and the link to the map page (there is no map on the home page)
+  const mapLine = html.match(/<p class="home-map-line"[\s\S]*?<\/p>/)?.[0] ?? '';
+  if (!mapLine) fail('the line with the number of places is missing');
   else {
-    if (!/<a href="[^"]*\/(?:mapa|map)\/">/.test(mapBlock)) fail('the small map needs the link to the map page');
-    const places = countsByMode(mapBlock.match(/<span class="home-map__count">[\s\S]*?<\/span>\s*<a/)?.[0] ?? '', (body) => Number(text(body).match(/(\d+)\s/)?.[1]));
+    if (!/<a href="[^"]*\/(?:mapa|map|karta)\/"/.test(mapLine)) fail('the line needs the link to the map page');
+    const places = countsByMode(mapLine.match(/<span class="home-map-line__count"[\s\S]*?<\/span>\s*<a/)?.[0] ?? '', (body) => Number(text(body).match(/(\d+)\s/)?.[1]));
     const wantPlaces = modeCounts(events);
-    if (!sameCounts(places, wantPlaces)) fail(`the small map caption counts differ (want ${showCounts(wantPlaces)}; found ${showCounts(places)})`);
+    if (!sameCounts(places, wantPlaces)) fail(`the line's place counts differ (want ${showCounts(wantPlaces)}; found ${showCounts(places)})`);
   }
+  if (/data-home-map|class="home-map"/.test(html)) fail('the map must be gone from the home page');
 
   // thread buttons: exactly the visible threads, each a link to its page with the total from the data
   const threadsSection = html.match(/<section aria-labelledby="threads-title"[\s\S]*?<\/section>/)?.[0] ?? '';

@@ -129,7 +129,6 @@
   --size-mascot-report: clamp(6rem, 30vw, 10rem);
   --size-mascot-hero: clamp(8rem, 42vw, 20rem);
   /* The small map on the home page. */
-  --home-map-height: 20rem;
   /* One epoch on the time strip of the home page. */
   --timeline-item-min: 7rem;
   --size-mascot: clamp(9rem, 40vw, 13rem);
