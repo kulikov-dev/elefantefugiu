@@ -8,6 +8,7 @@ const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const EMAIL = 'elefantefugiu@gmail.com';
+const FORM = '72b2e1f6b2547e714da237559c8e643f'; // the id of the form on FormSubmit (src/data/static-pages.ts)
 const PAGES = {
   about: { pt: 'sobre', en: 'about', ru: 'o-proekte' },
   method: { pt: 'metodo', en: 'method', ru: 'metod' },
@@ -98,7 +99,7 @@ if (want('form')) {
       overflow: document.documentElement.scrollWidth - innerWidth,
       robots: document.querySelector('meta[name=robots]')?.content ?? null,
     }));
-    ok(`form (${lang}): posts to FormSubmit for ${EMAIL}, with a subject, no captcha page, and a way back to this page`, f.action === `https://formsubmit.co/${EMAIL}` && f.method === 'post' && new RegExp(`\\(${lang}\\)`).test(f.hidden._subject) && f.hidden._captcha === 'false' && new RegExp(`/${PAGES.report[lang]}/(\\?[^#]*)?#sent$`).test(f.hidden._next), JSON.stringify(f.hidden));
+    ok(`form (${lang}): posts to FormSubmit by the id of the form, with a subject, no captcha page, and a way back to this page`, f.action === `https://formsubmit.co/${FORM}` && f.method === 'post' && new RegExp(`\\(${lang}\\)`).test(f.hidden._subject) && f.hidden._captcha === 'false' && new RegExp(`/${PAGES.report[lang]}/(\\?[^#]*)?#sent$`).test(f.hidden._next), JSON.stringify(f.hidden));
     ok(`form (${lang}): the address of the card from ?url= fills the first field; every field has a label; the honeypot is out of reach`, f.url === card && f.labels && f.honey.tab === -1 && f.honey.hidden === 'true' && f.honey.w <= 4, JSON.stringify([f.url, f.honey]));
     ok(`form (${lang}): no sideways scroll at 360 px, the page is not indexed`, f.overflow <= 0 && f.robots === 'noindex');
     // a javascript: address in ?url= is not put into the field
@@ -115,7 +116,7 @@ if (want('form')) {
     await page.waitForFunction(() => !document.getElementById('sent').hidden, { timeout: 5000 });
     const sent = await page.evaluate(() => ({ form: document.querySelector('[data-report-form]').hidden, focus: document.activeElement.id, title: document.querySelector('#sent h2').textContent.trim() }));
     const post = page.posts[0];
-    ok(`form (${lang}): one request to the AJAX address with the description, the e-mail and the page; then the confirmation takes the place of the form`, page.posts.length === 1 && post.url === `https://formsubmit.co/ajax/${EMAIL}` && post.method === 'POST' && /A data est/.test(post.body) && /leitor@example\.org/.test(post.body) && sent.form === true && sent.focus === 'sent', JSON.stringify({ n: page.posts.length, url: post?.url, sent }));
+    ok(`form (${lang}): one request to the AJAX address with the description, the e-mail and the page; then the confirmation takes the place of the form`, page.posts.length === 1 && post.url === `https://formsubmit.co/ajax/${FORM}` && post.method === 'POST' && /A data est/.test(post.body) && /leitor@example\.org/.test(post.body) && sent.form === true && sent.focus === 'sent', JSON.stringify({ n: page.posts.length, url: post?.url, sent }));
     ok(`form (${lang}): no script errors`, page.errors.length === 0, page.errors.join(';'));
     await page.close();
   }
@@ -128,11 +129,11 @@ if (want('form')) {
   const r = await bad.evaluate(() => ({ failed: document.querySelector('[data-report-failed]').textContent, link: document.querySelector('[data-report-failed] a').getAttribute('href'), disabled: document.querySelector('[data-report-submit]').disabled, text: document.querySelector('#f-what').value }));
   ok('form: when the service refuses, the reader sees the address to write to, can try again and keeps the text', r.link === `mailto:${EMAIL}` && r.disabled === false && r.text === 'Texto do erro encontrado.', JSON.stringify(r));
   await bad.close();
-  // without JavaScript the address is not written out: "name [at] host" is shown, with no mailto link, and the form has no address to post to
+  // without JavaScript the form still posts (the id of the form is in the page), and the e-mail is written as "name [at] host" only
   const nojs = await newPage({ js: false });
   await nojs.goto(`${base}/en/report/`, { waitUntil: 'load' });
-  const n = await nojs.evaluate(() => ({ hasAction: document.querySelector('[data-report-form]').hasAttribute('action'), mail: [...document.querySelectorAll('a[href^="mailto:"]')].length, shown: [...document.querySelectorAll('.email')].map((e) => e.textContent), note: document.querySelector('.report__nojs')?.checkVisibility() ?? false, raw: document.documentElement.outerHTML.includes('elefantefugiu@'), sentHidden: document.getElementById('sent').hidden }));
-  ok('form without JavaScript: no address in the page, "[at]" shown, a note says to write by mail; the confirmation waits for #sent', !n.hasAction && n.mail === 0 && n.shown.length >= 2 && n.shown.every((x) => x === 'elefantefugiu [at] gmail.com') && n.note && !n.raw && n.sentHidden, JSON.stringify(n));
+  const n = await nojs.evaluate(() => ({ action: document.querySelector('[data-report-form]').action, required: document.querySelector('#f-what').required, mail: [...document.querySelectorAll('a[href^="mailto:"]')].length, shown: [...document.querySelectorAll('.email')].map((e) => e.textContent), raw: document.documentElement.outerHTML.includes('elefantefugiu@'), sentHidden: document.getElementById('sent').hidden }));
+  ok('form without JavaScript: a real form post to the id of the form, a required description, no e-mail in the page ("[at]" only); the confirmation waits for #sent', n.action === `https://formsubmit.co/${FORM}` && n.required && n.mail === 0 && n.shown.length >= 1 && n.shown.every((x) => x === 'elefantefugiu [at] gmail.com') && !n.raw && n.sentHidden, JSON.stringify(n));
   await nojs.close();
   const back = await newPage({ width: 360 });
   await back.goto(`${base}/pt/corrigir/#sent`, { waitUntil: 'load' });

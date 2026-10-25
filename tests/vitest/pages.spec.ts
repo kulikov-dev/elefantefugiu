@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { CONTACT_EMAIL, STATIC_PAGES, type StaticKey } from '../../src/data/static-pages';
+import { CONTACT_EMAIL, FORM_ID, STATIC_PAGES, type StaticKey } from '../../src/data/static-pages';
 import { LANGS } from '../../src/i18n/routes';
 import { LAST_EPOCH_KEY, pickLastEpoch } from '../../src/lib/home';
 import { MIN_REPORT_LENGTH, formsubmitEndpoint, hasEnoughText, pageFromQuery, reportSubject, sameSiteUrl, titleFromQuery } from '../../src/lib/report';
-import { emailMarkup, emailParts, obscuredEmail, splitEmail } from '../../src/lib/contact';
+import { emailMarkup, obscuredEmail, splitEmail } from '../../src/lib/contact';
 import { escapeHtml, renderInline } from '../../src/lib/static-text';
 
 const KEYS = ['about', 'method', 'legal'] as StaticKey[];
@@ -78,16 +78,17 @@ describe('inline markup', () => {
 });
 
 describe('the mistake report form', () => {
-  it('posts to FormSubmit for the project address', () => {
-    expect(formsubmitEndpoint(CONTACT_EMAIL, false)).toBe('https://formsubmit.co/elefantefugiu@gmail.com');
-    expect(formsubmitEndpoint(CONTACT_EMAIL, true)).toBe('https://formsubmit.co/ajax/elefantefugiu@gmail.com');
+  it('posts to FormSubmit by the random id of the form, never by the e-mail', () => {
+    expect(formsubmitEndpoint(FORM_ID, false)).toBe(`https://formsubmit.co/${FORM_ID}`);
+    expect(formsubmitEndpoint(FORM_ID, true)).toBe(`https://formsubmit.co/ajax/${FORM_ID}`);
+    expect(FORM_ID).toMatch(/^[0-9a-f]{32}$/);
+    expect(FORM_ID).not.toContain('@');
     expect(CONTACT_EMAIL).toBe('elefantefugiu@gmail.com');
   });
   it('builds the address of the contact from its halves', () => {
     expect(splitEmail('elefantefugiu@gmail.com')).toEqual({ user: 'elefantefugiu', host: 'gmail.com' });
     expect(obscuredEmail('elefantefugiu@gmail.com')).toBe('elefantefugiu [at] gmail.com');
     expect(emailMarkup(CONTACT_EMAIL)).not.toContain('@');
-    expect(emailParts(CONTACT_EMAIL)).toEqual({ 'data-email-user': 'elefantefugiu', 'data-email-host': 'gmail.com' });
   });
   it('names the language in the subject', () => {
     expect(reportSubject('ru')).toContain('(ru)');

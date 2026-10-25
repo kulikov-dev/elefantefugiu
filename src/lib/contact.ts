@@ -19,9 +19,3 @@ export function emailMarkup(email: string): string {
   const { user, host } = splitEmail(email);
   return `<span class="email" data-email-user="${escapeHtml(user)}" data-email-host="${escapeHtml(host)}">${escapeHtml(obscuredEmail(email))}</span>`;
 }
-
-/** Attributes for an element that only needs the halves (the report form builds its address from them). */
-export function emailParts(email: string): { 'data-email-user': string; 'data-email-host': string } {
-  const { user, host } = splitEmail(email);
-  return { 'data-email-user': user, 'data-email-host': host };
-}

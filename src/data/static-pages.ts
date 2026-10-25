@@ -9,6 +9,8 @@
 import type { Lang } from '../i18n/routes';
 
 export const CONTACT_EMAIL = 'elefantefugiu@gmail.com';
+/** The address of the form on FormSubmit: a random id the service gives instead of the e-mail, so the form works without JavaScript and the e-mail is not in the page. */
+export const FORM_ID = '72b2e1f6b2547e714da237559c8e643f';
 
 export interface Section {
   /** Anchor of the section (the same in every language). */

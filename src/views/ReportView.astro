@@ -1,18 +1,18 @@
 ---
 // "Found a mistake?": /pt/corrigir/, /en/report/, /ru/oshibka/ (docs/spec.md 4 flow 5 and 5.6).
-// A form that posts to the FormSubmit service, which forwards it by email to CONTACT_EMAIL. The address is not in the HTML: the form
-// carries its two halves and src/scripts/email.ts builds the address of the service from them, so without JavaScript the form cannot
-// send and the page says where to write (the address as "name [at] host"). The data is sent with fetch and the confirmation appears
-// in place (src/scripts/report-form.ts). A reader who comes from a story (?url= and ?title=) sees the
+// A form that posts to the FormSubmit service, which forwards it by email to CONTACT_EMAIL. The page carries the random id of the form
+// (FORM_ID), not the e-mail, so the form works without JavaScript too (the service then sends the reader on to this page, #sent). With
+// JavaScript the same data is sent with fetch and the confirmation appears in place (src/scripts/report-form.ts). A reader who comes
+// from a story (?url= and ?title=) sees the
 // title of the story with a "change" link instead of the long address; the address goes in a hidden field. No cookies, nothing
 // is kept by the site itself. Not indexed: a form is no answer to a search.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Mascot from '../components/Mascot.astro';
 import { pagePath, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
-import { CONTACT_EMAIL } from '../data/static-pages';
-import { reportSubject } from '../lib/report';
-import { emailMarkup, emailParts } from '../lib/contact';
+import { CONTACT_EMAIL, FORM_ID } from '../data/static-pages';
+import { formsubmitEndpoint, reportSubject } from '../lib/report';
+import { emailMarkup } from '../lib/contact';
 import { renderInline } from '../lib/static-text';
 
 interface Props {
@@ -30,7 +30,6 @@ const note = renderInline(
   (key) => (key === 'legal' ? { href: `${pagePath(lang, 'legal')}#s-terceiros`, label: t(lang, 'pages.legal.title') } : undefined),
   CONTACT_EMAIL,
 );
-const nojs = renderInline(t(lang, 'report.nojs'), () => undefined, CONTACT_EMAIL);
 ---
 <BaseLayout lang={lang} pageKey="report" title={title} noindex>
   <article class="report">
@@ -61,7 +60,8 @@ const nojs = renderInline(t(lang, 'report.nojs'), () => undefined, CONTACT_EMAIL
     <form
       class="report__form"
       method="post"
-      {...emailParts(CONTACT_EMAIL)}
+      action={formsubmitEndpoint(FORM_ID, false)}
+      data-ajax={formsubmitEndpoint(FORM_ID, true)}
       data-report-form
       data-report-page={reportPage}
       data-sending={t(lang, 'report.sending')}
@@ -117,7 +117,6 @@ const nojs = renderInline(t(lang, 'report.nojs'), () => undefined, CONTACT_EMAIL
       <p class="report__failed" role="alert" data-report-failed hidden>
         {t(lang, 'report.failed')} <Fragment set:html={emailMarkup(CONTACT_EMAIL)} />.
       </p>
-      <p class="no-js-only report__nojs" set:html={nojs} />
 
       <button type="submit" class="button" data-report-submit>{t(lang, 'report.submit')}</button>
     </form>

@@ -120,8 +120,7 @@ if (want('form')) {
   ok('form: without a story the field for a link or a title is shown', !(await plain.$eval('[data-report-free]', (e) => e.hidden)) && (await plain.$eval('[data-report-story]', (e) => e.hidden)));
   await plain.close();
   const nojs = await open(`${PAGES.report.ru}?url=x`, { js: false });
-  // The address of the service is built by a script from two halves (the address is not in the HTML), so without JavaScript there is none.
-  ok('form without JavaScript: the plain field is there, the form has no address of its own and the page says where to write', !(await nojs.$eval('[data-report-free]', (e) => e.hidden)) && (await nojs.$eval('form', (f) => f.method === 'post' && !f.hasAttribute('action'))) && (await nojs.$eval('.report__nojs', (p) => p.checkVisibility())));
+  ok('form without JavaScript: the plain field is there and the form is posted to the service by the id of the form', !(await nojs.$eval('[data-report-free]', (e) => e.hidden)) && (await nojs.$eval('form', (f) => f.method === 'post' && /^https:\/\/formsubmit\.co\/[0-9a-f]{32}$/.test(f.action))));
   await nojs.close();
 }
 

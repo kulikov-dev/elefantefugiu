@@ -2,11 +2,12 @@
 //
 // The form is posted to FormSubmit (https://formsubmit.co), a service that forwards a form to an email address, so the static
 // site needs no server of its own. The first time the form is used the service sends the owner a message to confirm the
-// address; until it is confirmed the messages wait (see docs/STATE.md). The address is public anyway (it is on the About page).
+// address; until it is confirmed the messages wait (see docs/STATE.md). The form is posted to the random id of the service, not to the e-mail, so the page does not show the address.
 import type { Lang } from '../i18n/routes';
 
-export function formsubmitEndpoint(email: string, ajax: boolean): string {
-  return `https://formsubmit.co/${ajax ? 'ajax/' : ''}${email}`;
+/** The address of the form: `id` is the random id FormSubmit gives for the project address (it does not show the e-mail). */
+export function formsubmitEndpoint(id: string, ajax: boolean): string {
+  return `https://formsubmit.co/${ajax ? 'ajax/' : ''}${id}`;
 }
 
 /** The subject of the email; the language lets the team read the report in the right language. */
