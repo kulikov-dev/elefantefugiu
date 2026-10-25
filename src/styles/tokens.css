@@ -142,6 +142,9 @@
   --mascot-halo: light-dark(transparent, rgb(244 236 220 / 0.7));
   /* The wordmark: 20 px, a little less on the narrowest phones so that logo, name, language switch and theme button share one row. */
   --text-brand: clamp(0.9375rem, 5vw, 1.25rem);
+  --family-badge-size: 1.25rem; /* the state on the age button of a phone */
+  --family-badge-lift: 0.125rem;
+  --brand-wrap-width: 5.5rem; /* the wordmark wraps into two lines on a phone */
   --size-icon: 1.5rem;
   --size-caret: 0.35em;
   --map-caption-width: 12rem;

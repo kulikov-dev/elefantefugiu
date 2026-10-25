@@ -36,6 +36,9 @@ const shortOf = (text: string) => text.split(': ')[1] ?? text;
       <circle cx="12" cy="12.8" r="1.9" fill="currentColor" stroke="var(--color-surface)" stroke-width="1" />
       <path d="M8.8 21v-2.6a3.2 3.2 0 0 1 6.4 0V21z" fill="currentColor" stroke="var(--color-surface)" stroke-width="1" />
     </svg>
+    <!-- A phone with no room for the short state: a small badge on the button while a filter is on ("all" shows none). -->
+    <span class="family-button__badge" data-mode-text="all" aria-hidden="true">&lt;12</span>
+    <span class="family-button__badge" data-mode-text="12" aria-hidden="true">12+</span>
     <span class="family-button__label" aria-hidden="true">
       <span data-mode-text="off">{t(lang, 'family.button')}</span>
       <span data-mode-text="all">{t(lang, 'family.button_all')}</span>

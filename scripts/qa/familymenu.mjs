@@ -52,15 +52,32 @@ if (want('button')) {
       ok(`button (${lang}, ${stored ?? 'off'}): at least 44 px tall`, b.h >= 44, String(b.h));
       await page.close();
     }
-    // phone: the icon and the short state beside it, also when the filter is off ("all")
+    // phone: the icon alone in the first row (the wordmark, the language, the theme and this button share it); from 448 px the short state beside it
     const off = await open(`/${lang}/`, { width: 320 });
     const t0 = await off.$eval('[data-family-menu] summary', (s) => s.innerText.replace(/\s+/g, ' ').trim());
-    ok(`button (${lang}, 320 px, off): icon and the short state "${WORDS[lang].button.split(': ')[1]}"`, t0.toLowerCase() === WORDS[lang].button.split(': ')[1].toLowerCase(), t0);
-    const on12 = await open(`/${lang}/`, { width: 320, stored: '12' });
+    ok(`button (${lang}, 320 px, off): the icon alone`, t0 === '', t0);
+    const wide = await open(`/${lang}/`, { width: 460 });
+    const t2 = await wide.$eval('[data-family-menu] summary', (s) => s.innerText.replace(/\s+/g, ' ').trim());
+    ok(`button (${lang}, 460 px, off): icon and the short state "${WORDS[lang].button.split(': ')[1]}"`, t2.toLowerCase() === WORDS[lang].button.split(': ')[1].toLowerCase(), t2);
+    await wide.close();
+    const on12 = await open(`/${lang}/`, { width: 460, stored: '12' });
     const t1 = await on12.$eval('[data-family-menu] summary', (s) => s.innerText.replace(/\s+/g, ' ').trim());
-    ok(`button (${lang}, 320 px, 12+): the short state "12+" beside the icon`, t1 === '12+', t1);
+    ok(`button (${lang}, 460 px, 12+): the short state "12+" beside the icon`, t1 === '12+', t1);
     const sw = await on12.evaluate(() => [document.documentElement.scrollWidth, innerWidth]);
-    ok(`button (${lang}, 320 px): no sideways scroll`, sw[0] <= sw[1], sw.join('>'));
+    ok(`button (${lang}, 460 px): no sideways scroll`, sw[0] <= sw[1], sw.join('>'));
+    const header = await off.evaluate(() => ({ rows: new Set([...document.querySelectorAll('.brand, .lang-switch, .theme-button, .family-menu')].map((e) => Math.round(e.getBoundingClientRect().top / 4))).size, sw: document.documentElement.scrollWidth <= innerWidth, h: Math.round(document.querySelector('.site-header').getBoundingClientRect().height) }));
+    ok(`header (${lang}, 320 px): logo, language, theme and age filter in one row, the menu in the second, no sideways scroll`, header.rows === 1 && header.sw && header.h < 110, JSON.stringify(header));
+    // 360 px: no room for the state beside the icon, so a small badge says it while a filter is on; "all" has none; the label names the state
+    for (const [stored, badge, label] of [[null, '', WORDS[lang].button], ['all', '<12', WORDS[lang].all], ['12', '12+', WORDS[lang].twelve]]) {
+      const phone = await open(`/${lang}/`, { width: 360, ...(stored ? { stored } : {}) });
+      const b = await phone.evaluate(() => {
+        const el = [...document.querySelectorAll('.family-button__badge')].find((x) => x.checkVisibility());
+        const sm = document.querySelector('[data-family-menu] summary');
+        return { badge: el?.textContent.trim() ?? '', label: sm.getAttribute('aria-label'), sw: document.documentElement.scrollWidth <= innerWidth };
+      });
+      ok(`button (${lang}, 360 px, ${stored ?? 'off'}): badge "${badge}", label "${label}"`, b.badge === badge && b.label === label && b.sw, JSON.stringify(b));
+      await phone.close();
+    }
     await off.close();
     await on12.close();
   }

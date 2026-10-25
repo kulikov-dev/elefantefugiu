@@ -4,15 +4,14 @@
   border-block-end: 1px solid var(--color-line);
 }
 
-/* Phone: three short rows, logo with the language switch and the theme button, the family-mode toggle, the menu (about 140 px).
-   On wide screens (logo, menu, language and family mode need about 1000 px) everything sits in one row. */
+/* Phone: two rows. The first holds the logo, the language switch, the theme button and the age filter (its icon and the short state);
+   the second the menu. On wide screens (logo, menu, language and age filter need about 1000 px) everything sits in one row. */
 .site-header__inner {
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto auto auto;
   grid-template-areas:
-    'brand lang theme'
-    'family family family'
-    'nav nav nav';
+    'brand lang theme family'
+    'nav nav nav nav';
   align-items: center;
   gap: 0 var(--space-2);
   padding-block: var(--space-1);
@@ -39,7 +38,7 @@
 
 .site-header__inner .family-menu {
   grid-area: family;
-  justify-self: start;
+  justify-self: end;
 }
 
 .brand {
@@ -58,6 +57,27 @@
 
 .brand:hover {
   color: var(--color-accent);
+}
+
+/* A phone: the first row also holds the language switch, the theme button and the age filter, so the wordmark wraps into two short
+   lines; on the narrowest phones only the head of the elephant stays (the link keeps its name for screen readers). */
+@media (max-width: 29.99rem) {
+  .brand {
+    min-width: 0;
+  }
+
+  .brand span {
+    max-width: var(--brand-wrap-width);
+    font-size: var(--text-sm);
+    line-height: 1.1;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 22.49rem) {
+  .brand span {
+    display: none;
+  }
 }
 
 
@@ -80,7 +100,8 @@
   font-size: var(--text-sm);
   color: var(--color-ink);
   text-decoration: none;
-  border-block-end: var(--ring-width) solid transparent;
+  /* The line under the current item takes room above the text too, so that the text stays in the middle of the row. */
+  border-block: var(--ring-width) solid transparent;
 }
 
 .site-nav a:hover {
