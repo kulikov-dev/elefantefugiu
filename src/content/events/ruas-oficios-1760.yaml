@@ -105,6 +105,22 @@ sources:
     url: https://toponimialisboa.wordpress.com/2018/04/13/a-rua-dos-correeiros/
     type: institutional
     accessed: 2026-10-25
+image:
+  file: ruas-oficios-1760.webp
+  alt:
+    pt: Uma rua da Baixa de prédios iguais; nas arcadas trabalham um ourives, um relojoeiro, um
+      correeiro e um torneiro, e pela calçada passam os lisboetas.
+    en: A Baixa street of identical buildings; in the arches a goldsmith, a watchmaker, a saddler and a
+      turner work, and townspeople walk along the cobbles.
+    ru: Улица Байши из одинаковых домов; в арках ювелир, часовщик, шорник и токарь, по мостовой идут
+      горожане.
+  caption:
+    pt: A nova Baixa e os seus ofícios, por volta de 1760. Ilustração criada por IA (Gemini), em estilo azulejo.
+    en: The new Baixa and its trades, around 1760. AI-generated illustration (Gemini) in the azulejo style.
+    ru: Новая Байша и её ремёсла, около 1760 года. Иллюстрация создана ИИ (Gemini) в стиле азулежу.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
 related: []
 status: ready
 placeholder: false
