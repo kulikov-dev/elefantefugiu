@@ -6,6 +6,7 @@ import { parseDocument } from 'yaml';
 import type { ZodType } from 'astro/zod';
 import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
 import { needsAttribution } from '../src/lib/pictures';
+import { firstSentence } from '../src/lib/events';
 import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
 
 import { fileURLToPath } from 'node:url';
@@ -312,8 +313,8 @@ for (const { item: ev, file, stem } of events) {
     }
     const words = note.trim().split(/\s+/).length;
     if (words > 20) report('error', file, `${words} words, at most 20`, 'bridge.note', lang);
-    // one sentence: no full stop, question or exclamation mark followed by more text
-    if (/[.!?…]\s+\S/.test(note.trim())) report('error', file, 'more than one sentence', 'bridge.note', lang);
+    // one sentence: no full stop, question or exclamation mark followed by more text (not counting abbreviations like "D. Manuel")
+    if (firstSentence(note, 100_000) !== note.replace(/\s+/g, ' ').trim()) report('error', file, 'more than one sentence', 'bridge.note', lang);
   }
 
   // pictures: the main picture of the story and the second one for "More"
