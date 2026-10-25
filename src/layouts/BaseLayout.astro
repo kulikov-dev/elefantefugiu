@@ -42,11 +42,14 @@ interface Props {
   noindex?: boolean;
   /** Page visits are counted (GoatCounter, src/lib/analytics.ts). Off for the 404 page: it is not a page of the site. */
   count?: boolean;
+  /** The 404 page: header, skip link and footer are given in every language; src/scripts/notfound.ts keeps the one of the address. Without JavaScript the default language shows. */
+  allLangs?: boolean;
   /** Epoch id: puts <html data-epoch> so the palette of that epoch applies (epoch pages and the cards of the epoch). */
   epoch?: string;
 }
 
-const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, epoch, count = true } = Astro.props;
+const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, epoch, count = true, allLangs = false } = Astro.props;
+const chrome = allLangs ? LANGS : [lang];
 const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
@@ -104,16 +107,29 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     {counting && <script is:inline async data-goatcounter={GOATCOUNTER_ENDPOINT} src={withBase(GOATCOUNTER_SCRIPT)}></script>}
   </head>
   <body>
-    <a class="skip-link" href="#main">{t(lang, 'a11y.skip_to_content')}</a>
-    <SiteHeader lang={lang} pageKey={pageKey} alternates={alternatesProp} />
+    {
+      chrome.map((l) => (
+        <div class="lang-block" data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
+          <a class="skip-link" href="#main">{t(l, 'a11y.skip_to_content')}</a>
+          <SiteHeader lang={l} pageKey={pageKey} alternates={alternatesProp} />
+        </div>
+      ))
+    }
     <main id="main" tabindex="-1">
       <div class="container page">
         <slot />
       </div>
     </main>
-    <SiteFooter lang={lang} />
+    {
+      chrome.map((l) => (
+        <div class="lang-block" data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
+          <SiteFooter lang={l} />
+        </div>
+      ))
+    }
     <script>import '../scripts/email';</script>
     <script>import '../scripts/scroll-fade';</script>
+    <slot name="end" />
     {epoch && <script>import '../scripts/last-epoch';</script>}
     <script is:inline>
       // Remember the chosen language for the root redirect. Storage may be unavailable.

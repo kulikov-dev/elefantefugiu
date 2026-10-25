@@ -1,26 +1,26 @@
 ---
-// GitHub Pages serves one 404.html for the whole site, so it cannot know the language by itself. All three texts are in the page;
-// without JavaScript the Portuguese one shows (the other two are hidden) and a row of links leads to the home page of every
-// language. With JavaScript the language comes from the start of the address (/pt/, /en/, /ru/), else from the saved choice or
-// the browser language (src/scripts/notfound.ts).
+// GitHub Pages serves one 404.html for the whole site, so it cannot know the language by itself. The header, the text and the
+// footer are in the page in all three languages; the Portuguese ones show by default. A small inline script (it must run before the
+// header scripts, which bind to the first header in the page) keeps the language of the start of the address (/pt/, /en/, /ru/) and
+// removes the rest, with the row of language links. When the address says no language, Portuguese stays and the links are there.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Mascot from '../components/Mascot.astro';
 import { DEFAULT_LANG, LANGS, LANG_NAMES, pagePath } from '../i18n/routes';
 import { t } from '../i18n';
 ---
-<BaseLayout lang={DEFAULT_LANG} title={t(DEFAULT_LANG, 'notfound.page_title')} noindex count={false}>
+<BaseLayout lang={DEFAULT_LANG} title={t(DEFAULT_LANG, 'notfound.page_title')} noindex count={false} allLangs>
   {
     LANGS.map((lang) => (
       <section class="notfound__text" lang={lang} aria-labelledby={`notfound-${lang}`} data-notfound-lang={lang} data-title={t(lang, 'notfound.page_title')} hidden={lang !== DEFAULT_LANG}>
-        <div class="notfound__mascot">
-          <Mascot pose="think" size="normal" lang={lang} />
-        </div>
         <div class="notfound__body">
           <h1 id={`notfound-${lang}`}>{t(lang, 'notfound.title')}</h1>
           <p class="notfound__actions">
             <a class="button" href={pagePath(lang, 'home')}>{t(lang, 'notfound.home')}</a>
             <a class="button button--secondary" href={pagePath(lang, 'surprise')}>{t(lang, 'ui.surprise')}</a>
           </p>
+        </div>
+        <div class="notfound__mascot">
+          <Mascot pose="think" size="hero" lang={lang} />
         </div>
       </section>
     ))
@@ -30,22 +30,45 @@ import { t } from '../i18n';
       {LANGS.map((lang) => <li><a href={pagePath(lang, 'home')} lang={lang} hreflang={lang}>{LANG_NAMES[lang]}</a></li>)}
     </ul>
   </nav>
+  <script is:inline slot="end">
+    (function () {
+      var m = location.pathname.match(/\/(pt|en|ru)(?:\/|$)/);
+      if (!m) return;
+      var lang = m[1];
+      document.querySelectorAll('[data-notfound-lang]').forEach(function (block) {
+        if (block.getAttribute('data-notfound-lang') !== lang) return block.remove();
+        block.hidden = false;
+        var title = block.getAttribute('data-title');
+        if (title) document.title = title + ' · O Elefante Fugiu';
+      });
+      document.documentElement.lang = lang;
+      var links = document.querySelector('.notfound__languages');
+      if (links) links.remove();
+    })();
+  </script>
 </BaseLayout>
-
-<script>
-  import '../scripts/notfound';
-</script>
 
 <style>
   .notfound__text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: grid;
+    align-items: center;
     gap: var(--space-4);
   }
 
   .notfound__text[hidden] {
     display: none;
+  }
+
+  /* Half the size of the page titles; the elephant is the one of the home page hero, on the right (above the text on a phone). */
+  .notfound__text h1 {
+    font-size: var(--text-2xl);
+    line-height: 1.2;
+    max-width: var(--measure);
+  }
+
+  .notfound__mascot {
+    order: -1;
+    justify-self: start;
   }
 
   .notfound__actions {
@@ -55,11 +78,15 @@ import { t } from '../i18n';
     margin-block-start: var(--space-4);
   }
 
-  @media (min-width: 40rem) {
+  @media (min-width: 48rem) {
     .notfound__text {
-      flex-direction: row;
-      align-items: center;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: var(--space-6);
+    }
+
+    .notfound__mascot {
+      order: 0;
+      justify-self: end;
     }
   }
 

@@ -188,17 +188,27 @@ if (want('notfound')) {
     const page = await open(path);
     await wait(300);
     const n = await page.evaluate(() => {
-      const visible = [...document.querySelectorAll('[data-notfound-lang]')].filter((s) => !s.hidden);
+      const visible = [...document.querySelectorAll('section[data-notfound-lang]')].filter((s) => !s.hidden);
       const s = visible[0];
-      return { count: visible.length, lang: s?.dataset.notfoundLang, h1: s?.querySelector('h1').textContent, buttons: [...(s?.querySelectorAll('a.button') ?? [])].map((a) => a.textContent.trim()), mascot: s?.querySelector('img.mascot')?.dataset.mascot, alt: s?.querySelector('img.mascot')?.alt, htmlLang: document.documentElement.lang };
+      return { count: visible.length, lang: s?.dataset.notfoundLang, h1: s?.querySelector('h1').textContent, buttons: [...(s?.querySelectorAll('a.button') ?? [])].map((a) => a.textContent.trim()), mascot: s?.querySelector('img.mascot')?.dataset.mascot, alt: s?.querySelector('img.mascot')?.alt, htmlLang: document.documentElement.lang, headers: document.querySelectorAll('.site-header').length, footers: document.querySelectorAll('.site-footer').length, nav: document.querySelector('.site-nav a')?.textContent.trim(), links: document.querySelectorAll('.notfound__languages').length };
     });
     ok(`404 (${lang}): the text of the language of the address, the elephant, two buttons`, n.count === 1 && n.lang === lang && n.h1.startsWith(title) && n.buttons.join('|') === `${home}|${surprise}` && n.mascot === 'think' && n.alt.length > 10 && n.htmlLang === lang, JSON.stringify(n));
     await page.close();
   }
+  // An address without a language: Portuguese, whatever the browser says, and the links to the three home pages under the text.
   const bare = await open('/404.html', { language: 'ru-RU' });
   await wait(300);
-  ok('404: an address without a language follows the browser language', (await bare.$eval('[data-notfound-lang]:not([hidden])', (s) => s.dataset.notfoundLang)) === 'ru');
+  const bareState = await bare.evaluate(() => ({ lang: document.querySelector('section[data-notfound-lang]:not([hidden])')?.dataset.notfoundLang, links: document.querySelectorAll('.notfound__languages a').length, headers: document.querySelectorAll('.site-header:not([hidden])').length }));
+  ok('404: an address without a language shows Portuguese and the links to the three languages', bareState.lang === 'pt' && bareState.links === 3, JSON.stringify(bareState));
   await bare.close();
+  // The header and the footer are in the language of the address, and only one of each is left; no language links then.
+  for (const [path, lang, nav, foot] of [['/en/nope/', 'en', 'Eras', 'About the project'], ['/ru/net-takoy/', 'ru', 'Эпохи', 'О проекте']]) {
+    const p = await open(path);
+    await wait(300);
+    const r = await p.evaluate(() => ({ headers: document.querySelectorAll('.site-header').length, footers: document.querySelectorAll('.site-footer').length, nav: document.querySelector('.site-nav a')?.textContent.trim(), foot: document.querySelector('.site-footer a')?.textContent.trim(), links: document.querySelectorAll('.notfound__languages').length, skip: document.querySelector('.skip-link')?.textContent.trim() }));
+    ok(`404 (${lang}): one header and one footer, in ${lang}, and no row of language links`, r.headers === 1 && r.footers === 1 && r.nav.toLowerCase() === nav.toLowerCase() && r.foot.toLowerCase() === foot.toLowerCase() && r.links === 0, JSON.stringify(r));
+    await p.close();
+  }
   const nojs = await open('/en/nope/', { js: false });
   const j = await nojs.evaluate(() => ({ visible: [...document.querySelectorAll('[data-notfound-lang]')].filter((s) => s.checkVisibility()).map((s) => s.dataset.notfoundLang), links: [...document.querySelectorAll('.notfound__languages a')].map((a) => a.getAttribute('href')) }));
   ok('404 without JavaScript: the Portuguese text and links to the home pages of the three languages', j.visible.join() === 'pt' && j.links.length === 3 && j.links.every((h) => /\/(pt|en|ru)\/$/.test(h)), JSON.stringify(j));

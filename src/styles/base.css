@@ -97,6 +97,15 @@ a:hover {
   color: var(--color-on-accent);
 }
 
+/* Wrapper of the header / footer of one language (the 404 page gives all three); it takes no part in the layout. */
+.lang-block {
+  display: contents;
+}
+
+.lang-block[hidden] {
+  display: none;
+}
+
 main {
   flex: 1;
 }

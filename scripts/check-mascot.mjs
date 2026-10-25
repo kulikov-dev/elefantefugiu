@@ -28,10 +28,11 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
     continue;
   }
   pages += 1;
+  const LANGS_N = 3; // the 404 page carries the header of every language
   const attr = (tag, name) => tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1];
   const logos = imgs.filter((t) => /\bmascot--logo\b/.test(t));
   const figures = imgs.filter((t) => !/\bmascot--logo\b/.test(t));
-  if (/<header class="site-header"/.test(html) && logos.length !== 1) errors.push(`${rel}: expected one logo, found ${logos.length}`);
+  if (/<header class="site-header"/.test(html) && logos.length !== (rel === '404.html' ? LANGS_N : 1)) errors.push(`${rel}: expected ${rel === '404.html' ? LANGS_N + ' logos (one header per language, the script keeps one)' : 'one logo'}, found ${logos.length}`);
   for (const tag of imgs) {
     const src = attr(tag, 'src') ?? '';
     // The logo is decorative (the name stands beside it); a figure has an empty alt (home) or a description in the language of its page.
