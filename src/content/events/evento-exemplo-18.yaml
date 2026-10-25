@@ -10,7 +10,9 @@ epoch: estado-novo-e-25-de-abril
 level: frame
 year: 1935
 place:
-  name: "Peniche"
+  name:
+    pt: "Peniche"
+    en: "Peniche"
   lat: 39.3558
   lon: -9.3811
 bridge:

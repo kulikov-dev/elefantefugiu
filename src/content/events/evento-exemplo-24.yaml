@@ -10,7 +10,9 @@ epoch: estado-novo-e-25-de-abril
 level: story
 year: 1971
 place:
-  name: "Lisboa (Parque das Nações)"
+  name:
+    pt: "Lisboa (Parque das Nações)"
+    en: "Lisbon (Parque das Nações)"
   lat: 38.768
   lon: -9.094
 bridge:

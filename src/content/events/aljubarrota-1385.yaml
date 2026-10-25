@@ -15,7 +15,10 @@ year_label:
   en: 14 August 1385
   ru: 14 августа 1385
 place:
-  name: Planalto de São Jorge, Aljubarrota
+  name:
+    pt: Planalto de São Jorge, Aljubarrota
+    en: São Jorge plateau, Aljubarrota
+    ru: Плато Сан-Жорже, Алжубаррота
   short:
     pt: Aljubarrota
     en: Aljubarrota

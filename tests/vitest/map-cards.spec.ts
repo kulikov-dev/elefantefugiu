@@ -11,7 +11,7 @@ const event = (over: Record<string, unknown>) =>
     epoch: 'a',
     level: 'frame',
     year: 1498,
-    place: { name: 'Lisboa', lat: 38.7, lon: -9.1 },
+    place: { name: { pt: 'Lisboa', en: 'Lisboa', ru: 'Lisboa' }, lat: 38.7, lon: -9.1 },
     bridge: { name: 'Mosteiro', address: 'Praça do Império', lat: 38.69, lon: -9.2, url: 'https://x.y', note: { pt: 'n', en: 'n' } },
     threads: ['mar', 'natureza'],
     importance: 3,
@@ -43,14 +43,14 @@ describe('toMapCards', () => {
   });
 
   it('puts the marker at the bridge in Portugal when the place is abroad (Goa)', () => {
-    const goa = event({ place: { name: 'Goa', lat: 15.5009, lon: 73.9116 } });
+    const goa = event({ place: { name: { pt: 'Goa', en: 'Goa', ru: 'Goa' }, lat: 15.5009, lon: 73.9116 } });
     const [c] = toMapCards([goa], 'pt', () => '/x/');
     expect([c!.lat, c!.lon]).toEqual([38.69, -9.2]);
     expect(c!.meta).toBe('1498 · Goa');
   });
 
   it('never reads the place coordinates (they may be anywhere in the world)', () => {
-    const [near, far] = toMapCards([event({ place: { name: 'a', lat: 38.7, lon: -9.1 } }), event({ id: 'e2', place: { name: 'b', lat: -33.9, lon: 151.2 } })], 'pt', () => '/x/');
+    const [near, far] = toMapCards([event({ place: { name: { pt: 'a', en: 'a', ru: 'a' }, lat: 38.7, lon: -9.1 } }), event({ id: 'e2', place: { name: { pt: 'b', en: 'b', ru: 'b' }, lat: -33.9, lon: 151.2 } })], 'pt', () => '/x/');
     expect([near!.lat, near!.lon]).toEqual([far!.lat, far!.lon]);
   });
 
@@ -88,13 +88,13 @@ describe('toMapCards: stories overseas', () => {
   it('a story whose place is outside Portugal carries it as `overseas`; one at home does not', () => {
     const [home] = toMapCards([event({})], 'pt', () => '/x/');
     expect(home!.overseas).toBeUndefined();
-    const [far] = toMapCards([event({ place: { name: 'Malaca (Melaka), ponte', short: { pt: 'Malaca', en: 'Malacca', ru: 'Малакка' }, lat: 2.19, lon: 102.25 } })], 'en', () => '/x/');
+    const [far] = toMapCards([event({ place: { name: { pt: 'Malaca (Melaka), ponte', en: 'Malaca (Melaka), ponte', ru: 'Malaca (Melaka), ponte' }, short: { pt: 'Malaca', en: 'Malacca', ru: 'Малакка' }, lat: 2.19, lon: 102.25 } })], 'en', () => '/x/');
     expect(far!.overseas).toEqual({ lat: 2.19, lon: 102.25, name: 'Malacca' });
     // the marker itself stays at the bridge
     expect([far!.lat, far!.lon]).toEqual([38.69, -9.2]);
   });
   it('the islands count as Portugal', () => {
-    const [madeira] = toMapCards([event({ place: { name: 'Funchal', lat: 32.65, lon: -16.9 } })], 'pt', () => '/x/');
+    const [madeira] = toMapCards([event({ place: { name: { pt: 'Funchal', en: 'Funchal', ru: 'Funchal' }, lat: 32.65, lon: -16.9 } })], 'pt', () => '/x/');
     expect(madeira!.overseas).toBeUndefined();
   });
 });

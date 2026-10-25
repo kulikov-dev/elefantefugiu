@@ -85,7 +85,7 @@ if (want('preview')) {
     ok(`preview of ${e.id}: "Abrir" leads to the card, "Como chegar" to OpenStreetMap at the BRIDGE with rel="noopener"`, p.openHref.endsWith(`/${SEG.pt}/${e.slug.pt}/`) && p.howHref === osm(e) && /noopener/.test(p.howRel), `${p.openHref} ${p.howHref}`);
     await page.close();
   }
-  ok('the Goa card: "Como chegar" points at Lisbon (bridge), not at Goa (place)', (() => { const near = GOA.bridge.lat > 38 && GOA.place.lat < 20; return near; })());
+  ok('the Goa card: "Como chegar" points at Lisbon (bridge), not at Goa (place)', (() => { const near = GOA.bridge.lat > 37 && GOA.bridge.lat < 40 && km(GOA.place, GOA.bridge) > 1000; return near; })());
   const en = await newPage();
   await en.goto(`${base}/en/map/?id=${GOA.id}`, { waitUntil: 'load' });
   await ready(en);
@@ -161,7 +161,7 @@ if (want('block')) {
   const page = await newPage();
   await page.goto(`${base}/pt/${SEG.pt}/${GOA.slug.pt}/`, { waitUntil: 'load' });
   const meta = await page.evaluate(() => document.body.textContent.replace(/\s+/g, ' '));
-  ok('the place of the Goa card is text on the card, and the page still has a bridge in Lisbon', meta.includes(GOA.place.name) && meta.includes(bname(GOA)));
+  ok('the place of the Goa card is text on the card, and the page still has a bridge in Lisbon', meta.includes(GOA.place.name.pt) && meta.includes(bname(GOA)));
   await page.close();
 }
 

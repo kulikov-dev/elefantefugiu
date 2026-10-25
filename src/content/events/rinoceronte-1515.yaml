@@ -11,7 +11,10 @@ epoch: avis-e-descobrimentos
 level: story
 year: 1515
 place:
-  name: Lisboa, Paço da Ribeira (hoje Praça do Comércio)
+  name:
+    pt: Lisboa, Paço da Ribeira (hoje Praça do Comércio)
+    en: Lisbon, Paço da Ribeira (now Praça do Comércio)
+    ru: Лиссабон, Пасу-да-Рибейра (ныне Праса-ду-Комерсиу)
   short:
     pt: Lisboa
     en: Lisbon

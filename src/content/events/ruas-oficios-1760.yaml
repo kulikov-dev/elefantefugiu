@@ -11,7 +11,10 @@ epoch: pombal-e-terramoto
 level: story
 year: 1760
 place:
-  name: Lisboa, Baixa Pombalina
+  name:
+    pt: Lisboa, Baixa Pombalina
+    en: Lisbon, Baixa Pombalina
+    ru: Лиссабон, Байша-Помбалина
   short:
     pt: Lisboa
     en: Lisbon

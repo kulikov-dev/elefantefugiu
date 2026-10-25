@@ -15,7 +15,10 @@ year_label:
   en: 11 October 1810
   ru: 11 октября 1810
 place:
-  name: Sobral de Monte Agraço (primeira linha)
+  name:
+    pt: Sobral de Monte Agraço (primeira linha)
+    en: Sobral de Monte Agraço (the first line)
+    ru: Собраль-де-Монте-Аграсу (первая линия)
   short:
     pt: Sobral de Monte Agraço
     en: Sobral de Monte Agraço

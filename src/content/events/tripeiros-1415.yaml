@@ -11,7 +11,10 @@ epoch: avis-e-descobrimentos
 level: story
 year: 1415
 place:
-  name: Porto, estaleiros do Douro
+  name:
+    pt: Porto, estaleiros do Douro
+    en: Porto, the Douro shipyards
+    ru: Порту, верфи на Дору
   short:
     pt: Porto
     en: Porto

@@ -15,7 +15,10 @@ year_label:
   en: '1812'
   ru: '1812'
 place:
-  name: Borodino, Rússia
+  name:
+    pt: Borodino, Rússia
+    en: Borodino, Russia
+    ru: Бородино, Россия
   short:
     pt: Borodino
     en: Borodino

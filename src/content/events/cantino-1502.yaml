@@ -11,7 +11,10 @@ epoch: avis-e-descobrimentos
 level: story
 year: 1502
 place:
-  name: Lisboa
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
   short:
     pt: Lisboa
     en: Lisbon

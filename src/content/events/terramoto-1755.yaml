@@ -15,7 +15,10 @@ year_label:
   en: 1 November 1755
   ru: 1 ноября 1755
 place:
-  name: Lisboa
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
   short:
     pt: Lisboa
     en: Lisbon

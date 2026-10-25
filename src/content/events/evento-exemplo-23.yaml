@@ -10,7 +10,9 @@ epoch: estado-novo-e-25-de-abril
 level: story
 year: 1965
 place:
-  name: "Faro"
+  name:
+    pt: "Faro"
+    en: "Faro"
   lat: 37.0194
   lon: -7.9304
 bridge:

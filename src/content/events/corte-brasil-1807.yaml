@@ -11,7 +11,10 @@ epoch: pombal-e-terramoto
 level: story
 year: 1807
 place:
-  name: Lisboa, Belém
+  name:
+    pt: Lisboa, Belém
+    en: Lisbon, Belém
+    ru: Лиссабон, Белен
   short:
     pt: Lisboa
     en: Lisbon

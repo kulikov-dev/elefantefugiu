@@ -430,7 +430,7 @@ describe('markers use the bridge coordinates', () => {
       title: { pt: id, en: id },
       epoch: 'a',
       year: 1500,
-      place: { name: 'p', lat: place[0], lon: place[1] },
+      place: { name: { pt: 'p', en: 'p', ru: 'p' }, lat: place[0], lon: place[1] },
       bridge: { name: 'b', address: 'a', lat: bridge[0], lon: bridge[1], url: 'https://x.y', note: { pt: 'n', en: 'n' } },
       threads: ['mar'],
       importance: 2,

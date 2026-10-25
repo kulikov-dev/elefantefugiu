@@ -11,7 +11,10 @@ epoch: avis-e-descobrimentos
 level: story
 year: 1514
 place:
-  name: Roma, Vaticano
+  name:
+    pt: Roma, Vaticano
+    en: Rome, the Vatican
+    ru: Рим, Ватикан
   short:
     pt: Roma
     en: Rome

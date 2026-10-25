@@ -15,7 +15,10 @@ year_label:
   en: 1778 or 1782
   ru: 1778 или 1782
 place:
-  name: Lisboa, arcadas do Terreiro do Paço (hoje Praça do Comércio)
+  name:
+    pt: Lisboa, arcadas do Terreiro do Paço (hoje Praça do Comércio)
+    en: Lisbon, the arcades of Terreiro do Paço (now Praça do Comércio)
+    ru: Лиссабон, аркады Терейру-ду-Пасу (ныне Праса-ду-Комерсиу)
   short:
     pt: Lisboa
     en: Lisbon

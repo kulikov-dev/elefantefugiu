@@ -10,7 +10,9 @@ epoch: estado-novo-e-25-de-abril
 level: frame
 year: 1953
 place:
-  name: "Lisboa (Alcântara)"
+  name:
+    pt: "Lisboa (Alcântara)"
+    en: "Lisbon (Alcântara)"
   lat: 38.703
   lon: -9.176
 bridge:

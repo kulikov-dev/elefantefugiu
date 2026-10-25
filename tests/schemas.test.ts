@@ -94,9 +94,9 @@ const sample = () => parseYaml(readFile(new URL('../src/content/events/cantino-1
 test('place: any coordinates in the world are accepted (Goa), only impossible values are not', () => {
   const ok = sample();
   assert.equal(eventSchema.safeParse(ok).success, true);
-  assert.equal(eventSchema.safeParse({ ...ok, place: { name: 'Pólo', lat: -90, lon: 180 } }).success, true);
-  assert.equal(eventSchema.safeParse({ ...ok, place: { name: 'x', lat: 91, lon: 0 } }).success, false);
-  assert.equal(eventSchema.safeParse({ ...ok, place: { name: 'x', lat: 0, lon: 181 } }).success, false);
+  assert.equal(eventSchema.safeParse({ ...ok, place: { name: { pt: 'Pólo', en: 'Pole', ru: 'Полюс' }, lat: -90, lon: 180 } }).success, true);
+  assert.equal(eventSchema.safeParse({ ...ok, place: { name: { pt: 'x', en: 'x' }, lat: 91, lon: 0 } }).success, false);
+  assert.equal(eventSchema.safeParse({ ...ok, place: { name: { pt: 'x', en: 'x' }, lat: 0, lon: 181 } }).success, false);
 });
 
 test('bridge: needs a note in both languages', () => {

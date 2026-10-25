@@ -119,7 +119,8 @@ export const eventSchema = z
   year_label: text.optional(),
   /** Where the event happened, as text on the card; any coordinates in the world (the map does not use them). */
   place: z.strictObject({
-    name: z.string(),
+    /** The full name of the place in each language, shown in the header of the story ("Lisboa, Paço da Ribeira (hoje Praça do Comércio)"). */
+    name: text,
     /** A short name of the place (a city or a region) in each language, for cards and lists: "1515 · Lisbon". Optional: without it the part of `name` before the first comma or bracket is used. */
     short: text.optional(),
     lat: z.number().min(-90).max(90),

@@ -10,7 +10,9 @@ epoch: estado-novo-e-25-de-abril
 level: frame
 year: 1941
 place:
-  name: "Coimbra"
+  name:
+    pt: "Coimbra"
+    en: "Coimbra"
   lat: 40.2033
   lon: -8.4103
 bridge:

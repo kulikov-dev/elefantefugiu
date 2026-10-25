@@ -11,7 +11,10 @@ epoch: pombal-e-terramoto
 level: story
 year: 1756
 place:
-  name: Vale do Douro (Alto Douro)
+  name:
+    pt: Vale do Douro (Alto Douro)
+    en: Douro Valley (Alto Douro)
+    ru: Долина Дору (Алту-Дору)
   short:
     pt: Vale do Douro
     en: Douro Valley

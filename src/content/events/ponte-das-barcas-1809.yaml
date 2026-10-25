@@ -15,7 +15,10 @@ year_label:
   en: 29 March 1809
   ru: 29 марта 1809
 place:
-  name: Porto, Ribeira, entre o Porto e Gaia
+  name:
+    pt: Porto, Ribeira, entre o Porto e Gaia
+    en: Porto, Ribeira, between Porto and Gaia
+    ru: Порту, Рибейра, между Порту и Гайей
   short:
     pt: Porto
     en: Porto

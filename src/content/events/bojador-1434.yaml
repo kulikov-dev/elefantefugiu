@@ -11,7 +11,10 @@ epoch: avis-e-descobrimentos
 level: story
 year: 1434
 place:
-  name: Cabo Bojador (Saara Ocidental)
+  name:
+    pt: Cabo Bojador (Saara Ocidental)
+    en: Cape Bojador (Western Sahara)
+    ru: Мыс Божадор (Западная Сахара)
   short:
     pt: Cabo Bojador
     en: Cape Bojador

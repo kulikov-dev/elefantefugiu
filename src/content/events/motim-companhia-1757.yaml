@@ -15,7 +15,10 @@ year_label:
   en: 23 February 1757
   ru: 23 февраля 1757
 place:
-  name: Porto
+  name:
+    pt: Porto
+    en: Porto
+    ru: Порту
   short:
     pt: Porto
     en: Porto

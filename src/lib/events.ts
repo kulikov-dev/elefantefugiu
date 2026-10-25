@@ -146,10 +146,14 @@ export function firstSentence(text: string, maxLength = 200): string {
  * one; otherwise the part of the full name before the first comma or bracket ("Lisboa, Paço da Ribeira (hoje Praça do Comércio)"
  * gives "Lisboa"). The full name stays on the page of the story itself.
  */
-export function placeShort(place: { name: string; short?: { pt: string; en: string; ru: string } | undefined }, lang: Lang): string {
+export function placeShort(
+  place: { name: { pt: string; en: string; ru: string }; short?: { pt: string; en: string; ru: string } | undefined },
+  lang: Lang,
+): string {
   const own = place.short?.[lang]?.trim();
   if (own) return own;
-  return place.name.split(/[,(]/)[0]!.trim() || place.name;
+  const full = place.name[lang];
+  return full.split(/[,(]/)[0]!.trim() || full;
 }
 
 /** A short numeric date (15/10/2026, in Russian 15.10.2026) for places where the long form is too much. */

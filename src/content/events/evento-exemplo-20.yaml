@@ -10,7 +10,9 @@ epoch: estado-novo-e-25-de-abril
 level: frame
 year: 1947
 place:
-  name: "Porto"
+  name:
+    pt: "Porto"
+    en: "Porto"
   lat: 41.1496
   lon: -8.611
 bridge:

@@ -10,7 +10,9 @@ epoch: estado-novo-e-25-de-abril
 level: story
 year: 1959
 place:
-  name: "Guimarães"
+  name:
+    pt: "Guimarães"
+    en: "Guimarães"
   lat: 41.4425
   lon: -8.2918
 bridge:

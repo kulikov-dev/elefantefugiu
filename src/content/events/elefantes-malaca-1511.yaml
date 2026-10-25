@@ -15,7 +15,10 @@ year_label:
   en: 25 July 1511
   ru: 25 июля 1511
 place:
-  name: Malaca (Melaka), ponte sobre o rio
+  name:
+    pt: Malaca (Melaka), ponte sobre o rio
+    en: Malacca (Melaka), the bridge over the river
+    ru: Малакка (Мелака), мост через реку
   short:
     pt: Malaca
     en: Malacca

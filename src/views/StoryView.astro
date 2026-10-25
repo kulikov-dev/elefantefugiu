@@ -127,7 +127,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       <p class="card__meta">
         <span>{formatYear(event, lang)}</span>
         <span aria-hidden="true"> &middot; </span>
-        <span>{event.place.name}</span>
+        <span>{event.place.name[lang]}</span>
       </p>
       <ul class="tags gated" aria-label={t(lang, 'card.tags')}>
         <li><TagLabel lang={lang} label={event.label} /></li>

@@ -15,7 +15,10 @@ year_label:
   en: May–June 1801
   ru: Май–июнь 1801
 place:
-  name: 'Alto Alentejo: Elvas, Campo Maior, Olivença'
+  name:
+    pt: 'Alto Alentejo: Elvas, Campo Maior, Olivença'
+    en: 'Upper Alentejo: Elvas, Campo Maior, Olivença'
+    ru: 'Алту-Алентежу: Эльваш, Кампу-Майор, Оливенса'
   short:
     pt: Alto Alentejo
     en: Upper Alentejo

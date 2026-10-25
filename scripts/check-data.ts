@@ -29,6 +29,9 @@ const rel = (path: string) => relative(root, path);
 type DataLang = 'pt' | 'en' | 'ru';
 const isLang = (v: unknown): v is DataLang => v === 'pt' || v === 'en' || v === 'ru';
 /** Languages whose texts are checked: Russian only for an event that says it is ready for it. */
+/** Words of place names that have an English form, so a name that still has them in the English text was not translated. */
+const PT_ONLY_WORDS = /\b(Lisboa|Rússia|hoje|Roma|Vaticano|Saara|Ocidental|entre|primeira|linha|estaleiros|ponte|sobre|rio|arcadas|Vale|Cabo|Alto|Baixa|Mosteiro|Palácio|Praça|Museu|Torre|Jardim|Estátua)\b/i;
+
 const langsOf = (ev: { ru_ready: boolean }): DataLang[] => (ev.ru_ready ? ['pt', 'en', 'ru'] : ['pt', 'en']);
 
 /** Same parser options as Astro's YAML loader, so results match the build. */
@@ -317,6 +320,22 @@ for (const { item: ev, file, stem } of events) {
     if (firstSentence(note, 100_000) !== note.replace(/\s+/g, ' ').trim()) report('error', file, 'more than one sentence', 'bridge.note', lang);
   }
 
+  // names of places: translated, not copied. In Russian a name needs Cyrillic letters; in English a name that is exactly the Portuguese one
+  // is allowed only when it has no word that has an English form (Lisboa, hoje, Rússia ...): "Porto", "Mafra" are the same in every language.
+  const translatable = [
+    ['place.name', ev.place.name],
+    ['place.short', ev.place.short],
+    ['bridge.title', ev.bridge.title],
+  ] as const;
+  for (const [field, value] of translatable) {
+    if (!value) continue;
+    if (value.en.trim() === value.pt.trim() && PT_ONLY_WORDS.test(value.pt)) report('error', file, `the English text is the Portuguese one ("${value.pt}"): translate it`, field, 'en');
+    if (ev.ru_ready) {
+      const ru = (value.ru ?? '').trim();
+      if (ru === value.pt.trim() || (!/[Ѐ-ӿ]/.test(ru) && /[A-Za-zÀ-ÿ]/.test(ru))) report('error', file, `the Russian text is not translated ("${ru}"): write it in Cyrillic`, field, 'ru');
+    }
+  }
+
   // pictures: the main picture of the story and the second one for "More"
   if (ev.image) checkPicture(file, 'image', ev.image, langsOf(ev));
   if (ev.detail_image) checkPicture(file, 'detail_image', ev.detail_image, langsOf(ev));
@@ -442,7 +461,7 @@ const labels = count(evs.map((e) => e.label));
 console.log(`  by label: documented ${labels.get('documented') ?? 0}, legend ${labels.get('legend') ?? 0}, debated ${labels.get('debated') ?? 0}`);
 const inter = count(evs.flatMap((e) => (e.interactive ? [e.interactive.type] : [])));
 console.log(`  images: ${evs.filter((e) => e.image).length} with, ${evs.filter((e) => !e.image).length} without, ${evs.filter((e) => e.detail_image).length} with a second one; interactives: army_dots ${inter.get('army_dots') ?? 0}, ship_scale ${inter.get('ship_scale') ?? 0}`);
-console.log(`  within 10 km of Lisbon: ${near.length}; elsewhere: ${far.length} (${[...new Set(far.map((e) => e.place.name))].join(', ')}); place outside Portugal: ${evs.filter((e) => !inPortugal(e.place.lat, e.place.lon)).map((e) => e.place.name).join(', ') || 'none'}`);
+console.log(`  within 10 km of Lisbon: ${near.length}; elsewhere: ${far.length} (${[...new Set(far.map((e) => e.place.name.pt))].join(', ')}); place outside Portugal: ${evs.filter((e) => !inPortugal(e.place.lat, e.place.lon)).map((e) => e.place.name.pt).join(', ') || 'none'}`);
 console.log(`  ready in Russian (ru_ready): ${evs.filter((e) => e.ru_ready).length} of ${evs.length}; the rest show English text on /ru/ with a banner`);
 console.log(`  placeholder entries: ${placeholders.length} (ALLOW_PLACEHOLDER=${allowRaw})`);
 console.log(`\n${errors.length} error(s), ${warnings.length} warning(s)`);

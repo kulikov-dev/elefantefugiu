@@ -126,13 +126,13 @@ test('isFlashMoment: only the Estado Novo cards that begin in 1974', () => {
 });
 
 test('placeShort: the short name of the data in the language of the page, else the part before the first comma or bracket', () => {
-  const place = { name: 'Lisboa, Paço da Ribeira (hoje Praça do Comércio)' };
+  const place = { name: { pt: 'Lisboa, Paço da Ribeira (hoje Praça do Comércio)', en: 'Lisbon, Paço da Ribeira (now Praça do Comércio)', ru: 'Лиссабон, Пасу-да-Рибейра (ныне Праса-ду-Комерсиу)' } };
   assert.equal(placeShort(place, 'pt'), 'Lisboa');
-  assert.equal(placeShort(place, 'ru'), 'Lisboa');
-  assert.equal(placeShort({ name: 'Malaca (Melaka), ponte sobre o rio' }, 'en'), 'Malaca');
-  assert.equal(placeShort({ name: 'Vale do Douro (Alto Douro)' }, 'pt'), 'Vale do Douro');
+  assert.equal(placeShort(place, 'ru'), 'Лиссабон');
+  assert.equal(placeShort({ name: { pt: 'Malaca (Melaka), ponte sobre o rio', en: 'Malacca (Melaka), the bridge', ru: 'Малакка (Мелака), мост' } }, 'en'), 'Malacca');
+  assert.equal(placeShort({ name: { pt: 'Vale do Douro (Alto Douro)', en: 'Douro Valley', ru: 'Долина Дору' } }, 'pt'), 'Vale do Douro');
   const withShort = { ...place, short: { pt: 'Lisboa', en: 'Lisbon', ru: 'Лиссабон' } };
   assert.equal(placeShort(withShort, 'ru'), 'Лиссабон');
   assert.equal(placeShort(withShort, 'en'), 'Lisbon');
-  assert.equal(placeShort({ name: 'Porto' }, 'ru'), 'Porto');
+  assert.equal(placeShort({ name: { pt: 'Porto', en: 'Porto', ru: 'Порту' } }, 'ru'), 'Порту');
 });

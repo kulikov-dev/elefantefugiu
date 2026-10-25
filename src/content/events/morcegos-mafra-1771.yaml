@@ -15,7 +15,10 @@ year_label:
   en: 18th century
   ru: XVIII век
 place:
-  name: Mafra, Palácio Nacional
+  name:
+    pt: Mafra, Palácio Nacional
+    en: Mafra, National Palace
+    ru: Мафра, Национальный дворец
   short:
     pt: Mafra
     en: Mafra
