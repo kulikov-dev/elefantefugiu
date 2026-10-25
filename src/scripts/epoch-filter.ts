@@ -18,6 +18,10 @@ if (root && feed) {
   const fioButtons = [...root.querySelectorAll<HTMLButtonElement>('button[data-fio]')];
   const viewButtons = [...root.querySelectorAll<HTMLButtonElement>('button[data-view]')];
   const viewSwitch = root.querySelector<HTMLElement>('[data-view-switch]');
+  const page = document.querySelector<HTMLElement>('[data-epoch-page]');
+  const wide = window.matchMedia('(min-width: 60rem)');
+  // The map is a position of the switch on a phone (epoch-map.ts); a wide screen shows it beside the feed, so the feed positions stay pressed.
+  const mapShown = () => page?.dataset.pane === 'map' && !wide.matches;
 
   let state: FilterState = parseState(location.search, known);
 
@@ -49,10 +53,11 @@ if (root && feed) {
       if (allowedByMode(item)) shownByMode += 1;
       if (visible && allowedByMode(item)) shown += 1;
     }
-    // The switch is offered only when the filter leaves enough stories; with fewer the timeline is the only view (the choice stays in
-    // the address, so it comes back when the filter shows enough again).
+    // The cards position is offered only when the filter leaves enough stories; with fewer the timeline is the only view (the choice stays in
+    // the address, so it comes back when the filter shows enough again). A switch left with one position is hidden on a wide screen (CSS).
     const gridOk = gridAvailable(shown);
-    if (viewSwitch) viewSwitch.hidden = !gridOk;
+    for (const b of viewButtons) if (b.dataset.view === 'grid') b.hidden = !gridOk;
+    viewSwitch?.toggleAttribute('data-grid-off', !gridOk);
     const grid = state.grid && gridOk;
     feed.dataset.view = grid ? 'grid' : 'timeline';
     // The grid view is driven by <html data-vista>, which the head script already set from the address.
@@ -65,7 +70,7 @@ if (root && feed) {
     // "No stories of this thread here" only when the mode leaves something to filter; an empty mode has its own message.
     if (empty) empty.hidden = !(shown === 0 && shownByMode > 0);
     for (const b of fioButtons) b.setAttribute('aria-pressed', String((b.dataset.fio || null) === state.fio));
-    for (const b of viewButtons) b.setAttribute('aria-pressed', String((b.dataset.view === 'grid') === grid));
+    for (const b of viewButtons) b.setAttribute('aria-pressed', String(!mapShown() && (b.dataset.view === 'grid') === grid));
     if (status) {
       const forms = status.dataset as Record<string, string>;
       status.textContent = pickPlural({ stories_one: forms.one ?? '', ...(forms.few ? { stories_few: forms.few } : {}), ...(forms.many ? { stories_many: forms.many } : {}), stories_other: forms.other ?? '' }, 'stories', shown, status.dataset.locale ?? 'en').replace('{n}', String(shown));
@@ -82,7 +87,15 @@ if (root && feed) {
   };
 
   for (const b of fioButtons) b.addEventListener('click', () => set({ ...state, fio: b.dataset.fio || null }));
-  for (const b of viewButtons) b.addEventListener('click', () => set({ ...state, grid: b.dataset.view === 'grid' }));
+  for (const b of viewButtons) {
+    b.addEventListener('click', () => {
+      set({ ...state, grid: b.dataset.view === 'grid' });
+      // Chosen while the map is shown: back to the feed.
+      if (mapShown()) document.dispatchEvent(new CustomEvent('pane:set', { detail: { pane: 'feed' } }));
+    });
+  }
+  document.addEventListener('pane:change', render);
+  wide.addEventListener('change', render);
   empty?.querySelector('button')?.addEventListener('click', () => set({ ...state, fio: null }));
 
   if (controls) controls.hidden = false;

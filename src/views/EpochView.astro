@@ -1,7 +1,7 @@
 ---
 // Epoch page: /pt/epoca/{slug}, /en/era/{slug} (docs/spec.md section 5.2).
 // Heading, thread filter with counters, timeline/grid switch, the feed, the map, neighbouring epochs.
-// Wide screen: feed on the left, the map stays on screen on the right. Phone: a switch "Timeline | Map".
+// Wide screen: feed on the left, the map stays on screen on the right. One switch "Timeline · Cards · Map" (the map is a position of it on a phone only).
 // The map needs JavaScript: without it the page is the plain feed (everything map-related starts hidden).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
@@ -145,6 +145,8 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
         <div role="group" aria-label={t(lang, 'epoch.view_label')} class="view-switch" data-view-switch>
           <button type="button" data-view="timeline" aria-pressed="true">{t(lang, 'ui.view_timeline')}</button>
           <button type="button" data-view="grid" aria-pressed="false">{t(lang, 'ui.view_grid')}</button>
+          <!-- Phone only (the map is beside the feed on a wide screen), and only when the map works: the script unhides it. -->
+          <button type="button" data-pane-btn="map" aria-pressed="false" data-map-js hidden>{t(lang, 'epoch.map_pane')}</button>
         </div>
         <p
           class="visually-hidden"
@@ -158,14 +160,6 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
     </div>
 
     <div class="epoch__body">
-      <!-- Phone only, script only: choose between the timeline and the map. -->
-      <div class="panes" data-map-js hidden>
-        <div role="group" aria-label={t(lang, 'epoch.pane_label')} class="pane-switch">
-          <button type="button" data-pane-btn="feed" aria-pressed="true">{t(lang, 'ui.view_timeline')}</button>
-          <button type="button" data-pane-btn="map" aria-pressed="false">{t(lang, 'epoch.map_pane')}</button>
-        </div>
-      </div>
-
       <section class="epoch__feed" aria-labelledby="timeline-title">
         <h2 id="timeline-title" class="visually-hidden">{t(lang, 'epoch.timeline_label')}</h2>
         <FamilyNote lang={lang} cards={feed.map(ageInfoOf)} />
@@ -282,9 +276,10 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
     background: var(--epoch-surface);
   }
 
+  /* Three positions on a narrow phone (Хронология, Карточки, Карта) must fit 320 px. */
   .view-switch button {
     min-height: var(--touch-target);
-    padding-inline: var(--space-4);
+    padding-inline: var(--space-3);
     border: 0;
     background: transparent;
     color: var(--color-ink);
@@ -297,6 +292,12 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
   .view-switch button[aria-pressed='true'] {
     background: var(--color-ink);
     color: var(--color-surface);
+  }
+
+  @media (min-width: 30rem) {
+    .view-switch button {
+      padding-inline: var(--space-4);
+    }
   }
 
   .feed-empty {
@@ -361,45 +362,15 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
 
   /* ---- feed and map ---- */
 
-  .panes {
-    margin-block-end: var(--space-3);
-  }
-
-  .pane-switch {
-    display: inline-flex;
-    border: 1px solid var(--color-border-strong);
-    border-radius: var(--radius-pill);
-    overflow: hidden;
-    background: var(--epoch-surface);
-  }
-
-  .pane-switch button {
-    min-height: var(--touch-target);
-    padding-inline: var(--space-4);
-    border: 0;
-    background: transparent;
-    color: var(--color-ink);
-    font: inherit;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .pane-switch button[aria-pressed='true'] {
-    background: var(--color-ink);
-    color: var(--color-surface);
-  }
-
   /* The card whose marker was chosen on the map (and the reverse): a coloured bar on its left edge; the marker on the map is
      highlighted too, so the state is not a colour alone. All the cards are otherwise alike. */
   .feed__item[data-active] > :global(.ecard) {
     box-shadow: inset var(--border-heavy) 0 0 var(--epoch-primary);
   }
 
-  /* Phone: one pane at a time. The grid/timeline switch belongs to the feed. */
+  /* Phone: one pane at a time; the switch (one for the timeline, the cards and the map) stays in view. */
   @media (max-width: 59.99rem) {
     .epoch[data-pane='map'] .epoch__feed,
-    .epoch[data-pane='map'] .view-switch,
     .epoch[data-pane='feed'] .epoch__aside {
       display: none;
     }
@@ -407,7 +378,9 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
 
   /* Wide screen: feed on the left, the map stays on screen while the feed scrolls. */
   @media (min-width: 60rem) {
-    .panes {
+    /* The map is beside the feed: no position for it in the switch, and with no grid there is nothing left to switch. */
+    .view-switch [data-pane-btn],
+    .view-switch[data-grid-off] {
       display: none;
     }
 

@@ -528,9 +528,9 @@ if (want('epoch')) {
     await p.goto(EPOCH, { waitUntil: 'load' });
     const s = await p.evaluate(() => {
       const vis = (el) => !!el && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().height > 0;
-      return { aside: vis(document.querySelector('[data-epoch-aside]')), panes: vis(document.querySelector('.panes')), map: vis(document.querySelector('[data-map]')), cards: document.querySelectorAll('ol.feed > li').length, feedWidth: document.querySelector('.epoch__feed').getBoundingClientRect().width, overflow: document.scrollingElement.scrollWidth - innerWidth };
+      return { aside: vis(document.querySelector('[data-epoch-aside]')), panes: vis(document.querySelector('[data-pane-btn="map"]')), map: vis(document.querySelector('[data-map]')), cards: document.querySelectorAll('ol.feed > li').length, feedWidth: document.querySelector('.epoch__feed').getBoundingClientRect().width, overflow: document.scrollingElement.scrollWidth - innerWidth };
     });
-    ok('epoch, no JS: no map, no pane switch, the whole feed', !s.aside && !s.panes && !s.map && s.cards === N1 && s.overflow <= 0, JSON.stringify(s));
+    ok('epoch, no JS: no map, no map position in the switch, the whole feed', !s.aside && !s.panes && !s.map && s.cards === N1 && s.overflow <= 0, JSON.stringify(s));
     await p.close();
   }
 
@@ -540,8 +540,8 @@ if (want('epoch')) {
     await p.goto(EPOCH, { waitUntil: 'networkidle0' });
     await ready(p);
     await wait(500);
-    const before = await p.evaluate(() => ({ feed: document.querySelector('.epoch__feed').getBoundingClientRect().toJSON(), aside: document.querySelector('.epoch__aside').getBoundingClientRect().toJSON(), panes: getComputedStyle(document.querySelector('.panes')).display }));
-    ok('epoch, desktop: feed on the left, map on the right, no pane switch', before.aside.left >= before.feed.right - 1 && before.panes === 'none', JSON.stringify({ feedRight: before.feed.right, asideLeft: before.aside.left }));
+    const before = await p.evaluate(() => ({ feed: document.querySelector('.epoch__feed').getBoundingClientRect().toJSON(), aside: document.querySelector('.epoch__aside').getBoundingClientRect().toJSON(), panes: getComputedStyle(document.querySelector('[data-pane-btn="map"]')).display }));
+    ok('epoch, desktop: feed on the left, map on the right, no map position in the switch', before.aside.left >= before.feed.right - 1 && before.panes === 'none', JSON.stringify({ feedRight: before.feed.right, asideLeft: before.aside.left }));
     // "Sticky" only means something when the feed is longer than the map: the fixture build has a long epoch, the real one (five cards) does not.
     const room = await p.evaluate(() => document.querySelector('.epoch__feed').getBoundingClientRect().height - document.querySelector('.epoch__aside').getBoundingClientRect().height);
     await p.evaluate(() => document.querySelector('.epoch__body').scrollIntoView());
@@ -561,10 +561,10 @@ if (want('epoch')) {
     const st = () =>
       p.evaluate(() => {
         const vis = (el) => getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().height > 0;
-        return { feed: vis(document.querySelector('.epoch__feed')), map: vis(document.querySelector('.epoch__aside')), view: vis(document.querySelector('.view-switch')), pressed: [...document.querySelectorAll('[data-pane-btn][aria-pressed="true"]')].map((b) => b.dataset.paneBtn), overflow: document.scrollingElement.scrollWidth - innerWidth };
+        return { feed: vis(document.querySelector('.epoch__feed')), map: vis(document.querySelector('.epoch__aside')), view: vis(document.querySelector('.view-switch')), pressed: [...document.querySelectorAll('.view-switch [aria-pressed="true"]')].map((b) => b.dataset.paneBtn ?? b.dataset.view), overflow: document.scrollingElement.scrollWidth - innerWidth };
       });
     let s = await st();
-    ok('epoch, phone: the timeline is shown first, the map is not', s.feed && !s.map && s.view === (N1 >= 9) && s.pressed[0] === 'feed', JSON.stringify(s));
+    ok('epoch, phone: the timeline is shown first, the map is not; one switch: Timeline, Cards, Map', s.feed && !s.map && s.view && s.pressed.join() === 'timeline', JSON.stringify(s));
     // The map code is fetched as soon as the page has loaded (map-loader.ts), but the map is drawn, and its tiles fetched, only when
     // the pane that holds it is on the screen.
     ok('epoch, phone: the map code is fetched at once, but no tile before the Map pane is opened', p.requests.some((u) => /map-island/.test(u)) && p.requests.filter((u) => /tile\.openstreetmap/i.test(u)).length === 0);
@@ -572,7 +572,7 @@ if (want('epoch')) {
     await ready(p);
     await wait(600);
     s = await st();
-    ok('epoch, phone: the Map pane shows the map and hides the feed and the grid switch', !s.feed && s.map && !s.view && s.pressed[0] === 'map' && s.overflow <= 0, JSON.stringify(s));
+    ok('epoch, phone: the Map position shows the map and hides the feed; the switch stays and only Map is pressed', !s.feed && s.map && s.view && s.pressed.join() === 'map' && s.overflow <= 0, JSON.stringify(s));
     ok('epoch, phone: ...and now the map code is loaded', p.requests.some((u) => /map-island/.test(u)));
     const m = await marks(p);
     ok('epoch, phone: within the marker limit', m.total >= 1 && m.total <= LIMIT, `total=${m.total}`);
@@ -580,7 +580,7 @@ if (want('epoch')) {
     await p.click('.mk--frame');
     await wait(400);
     const chosen = (await marks(p)).selected;
-    await p.click('[data-pane-btn="feed"]');
+    await p.click('.view-switch [data-view="timeline"]');
     await wait(900);
     const rec = await p.evaluate((id) => { const li = document.getElementById(`c-${id}`)?.closest('li'); return li ? { active: li.hasAttribute('data-active'), top: li.getBoundingClientRect().top, h: innerHeight } : null; }, chosen);
     ok('epoch, phone: back on the timeline the record of the chosen marker is highlighted and in view', chosen && rec?.active && rec.top > -50 && rec.top < rec.h, JSON.stringify({ chosen, rec }));
@@ -664,155 +664,8 @@ if (want('epoch')) {
     const p = await newPage({ width: 1280, height: 900, tiles: 'fail' });
     await p.goto(EPOCH, { waitUntil: 'networkidle0' });
     await p.waitForFunction(() => document.querySelector('[data-epoch-page]')?.dataset.map === 'unavailable', { timeout: 20000 }).catch(() => {});
-    const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch-page]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('.panes').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li').length }));
-    ok('epoch, tiles fail: the map and the pane switch go away, the feed stays and gets the width', s.map === 'unavailable' && !s.aside && !s.panes && s.cards === N1 && s.feed > s.container * 0.9, JSON.stringify(s));
-    await p.close();
-  }
-
-  // 7. Feed and grid at the widths where the feed column is narrower (docs/visual-notes.md, note 3)
-  for (const width of [900, 960, 1100, 1280, 1440]) {
-    const p = await newPage({ width, height: 900 });
-    for (const vista of ['', '?vista=grelha']) {
-      await p.goto(`${EPOCH}${vista}`, { waitUntil: 'networkidle0' });
-      await wait(300);
-      const s = await p.evaluate(() => {
-        const feed = document.querySelector('ol.feed');
-        const cols = getComputedStyle(feed).gridTemplateColumns;
-        const cards = [...document.querySelectorAll('.ecard')];
-        const wide = cards.filter((c) => c.scrollWidth > c.clientWidth + 1).length;
-        return { overflow: document.scrollingElement.scrollWidth - innerWidth, columns: feed.dataset.view === 'grid' ? cols.split(' ').length : 1, clipped: wide, feed: Math.round(document.querySelector('.epoch__feed').getBoundingClientRect().width) };
-      });
-      ok(`epoch ${width}px ${vista ? 'grid' : 'timeline'}: no overflow, no clipped card`, s.overflow <= 0 && s.clipped === 0, JSON.stringify(s));
-    }
-    await p.close();
-  }
-}
-
-// ---------- 8. Map code only where a map is ----------
-if (want('weight')) {
-  const heavy = /map-island|leaflet/i;
-  const pages = [
-    ['card', `${base}${pt(C0)}`],
-    ['thread', `${base}/pt/fio/mar/`],
-    ['about', `${base}/pt/sobre/`],
-  ];
-  for (const [name, url] of pages) {
-    const page = await newPage();
-    await page.goto(url, { waitUntil: 'networkidle0' });
-    const found = page.requests.filter((u) => heavy.test(u));
-    ok(`weight: ${name} does not load map code`, found.length === 0, found.join(' '));
-    await page.close();
-  }
-  // The home page has no map: it never loads map code, even when scrolled to the bottom.
-  for (const lang of ['pt', 'en']) {
-    const home = await newPage({ width: 1280, height: 500 });
-    await home.goto(`${base}/${lang}/`, { waitUntil: 'networkidle0' });
-    await home.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await wait(1000);
-    ok(`weight: home ${lang} loads no map code`, home.requests.filter((u) => heavy.test(u) || /home-map|leaflet/i.test(u)).length === 0, home.requests.filter((u) => heavy.test(u)).join(' '));
-    await home.close();
-  }
-  // The map code is fetched as soon as the page has loaded (map-loader.ts), but the map is drawn, and its tiles fetched, only when
-    // the pane that holds it is on the screen.
-    ok('epoch, phone: the map code is fetched at once, but no tile before the Map pane is opened', p.requests.some((u) => /map-island/.test(u)) && p.requests.filter((u) => /tile\.openstreetmap/i.test(u)).length === 0);
-    await p.click('[data-pane-btn="map"]');
-    await ready(p);
-    await wait(600);
-    s = await st();
-    ok('epoch, phone: the Map pane shows the map and hides the feed and the grid switch', !s.feed && s.map && !s.view && s.pressed[0] === 'map' && s.overflow <= 0, JSON.stringify(s));
-    ok('epoch, phone: ...and now the map code is loaded', p.requests.some((u) => /map-island/.test(u)));
-    const m = await marks(p);
-    ok('epoch, phone: within the marker limit', m.total >= 1 && m.total <= LIMIT, `total=${m.total}`);
-    // choose a marker on the map, then go back to the feed: the record is highlighted and scrolled into view
-    await p.click('.mk--frame');
-    await wait(400);
-    const chosen = (await marks(p)).selected;
-    await p.click('[data-pane-btn="feed"]');
-    await wait(900);
-    const rec = await p.evaluate((id) => { const li = document.getElementById(`c-${id}`)?.closest('li'); return li ? { active: li.hasAttribute('data-active'), top: li.getBoundingClientRect().top, h: innerHeight } : null; }, chosen);
-    ok('epoch, phone: back on the timeline the record of the chosen marker is highlighted and in view', chosen && rec?.active && rec.top > -50 && rec.top < rec.h, JSON.stringify({ chosen, rec }));
-    await p.close();
-  }
-
-  // 4. Marker <-> feed record
-  {
-    const p = await newPage({ width: 1280, height: 800 });
-    await p.goto(EPOCH, { waitUntil: 'networkidle0' });
-    await ready(p);
-    await wait(600);
-    const key = await p.evaluate(() => [...document.querySelectorAll('.mk--frame')].map((e) => e.dataset.key).pop());
-    await p.click(`.mk[data-key="${key}"]`);
-    await wait(1200);
-    const r = await p.evaluate((id) => { const li = document.getElementById(`c-${id}`).closest('li'); const b = li.getBoundingClientRect(); return { active: li.hasAttribute('data-active'), others: document.querySelectorAll('.feed > li[data-active]').length, inView: b.top >= 0 && b.bottom <= innerHeight, shadow: getComputedStyle(li.querySelector('article')).boxShadow }; }, key);
-    ok('epoch: a marker highlights its record in the feed and scrolls to it', r.active && r.others === 1 && r.inView && r.shadow !== 'none', JSON.stringify(r));
-
-    // a record chosen in the feed highlights its marker (the first record, then the last)
-    const ids = await p.evaluate(() => [...document.querySelectorAll('.feed > li article')].map((a) => a.id.slice(2)));
-    for (const id of [ids[0], ids[ids.length - 1]]) {
-      await p.evaluate((x) => document.getElementById(`c-${x}`).scrollIntoView({ block: 'center' }), id);
-      await p.click(`#c-${id} .ecard__meta`);
-      await wait(700);
-      const m = await marks(p);
-      ok(`epoch: choosing the record ${id} highlights its marker`, m.selected === id && m.singles.includes(id), JSON.stringify(m.selected));
-    }
-
-    // the keyboard: reaching a record with Tab chooses its marker too
-    await p.evaluate((x) => document.getElementById(`c-${x}`).scrollIntoView({ block: 'center' }), ids[2]);
-    await p.focus(`#c-${ids[2]} .ecard__title a`);
-    await wait(700);
-    ok('epoch: a record reached with the keyboard highlights its marker', (await marks(p)).selected === ids[2]);
-    await p.close();
-  }
-
-  // 5. Thread filter drives the map; limit holds
-  {
-    for (const fio of THREADS) {
-      const p = await newPage({ width: 1280, height: 900 });
-      await p.goto(EPOCH, { waitUntil: 'networkidle0' });
-      await ready(p);
-      await wait(500);
-      const cards = await cfgCards(p);
-      const wanted = cards.filter((c) => c.threads.includes(fio)).map((c) => c.id).sort();
-      await p.click(`[data-epoch-tools] button[data-fio="${fio}"]`);
-      await wait(900);
-      let worst = 0;
-      let coveredOk = true;
-      for (let i = 0; i < 6; i += 1) {
-        const m = await marks(p);
-        worst = Math.max(worst, m.total);
-        if (m.covered.some((id) => !wanted.includes(id))) coveredOk = false;
-        await p.click('.leaflet-control-zoom-out').catch(() => {});
-        await wait(500);
-      }
-      const m0 = await marks(p);
-      ok(`epoch: thread ${fio}: the map shows only its cards (${wanted.length}), at most ${LIMIT} markers and clusters`, coveredOk && worst <= LIMIT && worst >= (wanted.length ? 1 : 0), `worst=${worst}`);
-      const feedIds = await p.evaluate(() => [...document.querySelectorAll('.feed > li:not([hidden]) article')].map((a) => a.id.slice(2)).sort());
-      ok(`epoch: thread ${fio}: feed and map have the same cards`, feedIds.join() === wanted.join() && m0.covered.every((id) => feedIds.includes(id)), `${feedIds.length} vs ${wanted.length}`);
-      await p.close();
-    }
-    // the address: ?fio= at load, and "All" again
-    const p = await newPage({ width: 1280, height: 900 });
-    await p.goto(`${EPOCH}?fio=${T1}`, { waitUntil: 'networkidle0' });
-    await ready(p);
-    await wait(900);
-    const cards = await cfgCards(p);
-    const mar = cards.filter((c) => c.threads.includes(T1)).map((c) => c.id);
-    let m = await marks(p);
-    ok('epoch: ?fio=thread at load: the map shows only that thread', m.covered.length > 0 && m.covered.every((id) => mar.includes(id)), `covered=${m.covered.length} mar=${mar.length}`);
-    await p.click('[data-epoch-tools] button[data-fio=""]');
-    await wait(900);
-    m = await marks(p);
-    ok('epoch: "All" brings every card back to the map', m.covered.length === cards.length, `covered=${m.covered.length} of ${cards.length}`);
-    await p.close();
-  }
-
-  // 6. Tiles fail: the feed takes the whole width
-  {
-    const p = await newPage({ width: 1280, height: 900, tiles: 'fail' });
-    await p.goto(EPOCH, { waitUntil: 'networkidle0' });
-    await p.waitForFunction(() => document.querySelector('[data-epoch-page]')?.dataset.map === 'unavailable', { timeout: 20000 }).catch(() => {});
-    const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch-page]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('.panes').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li').length }));
-    ok('epoch, tiles fail: the map and the pane switch go away, the feed stays and gets the width', s.map === 'unavailable' && !s.aside && !s.panes && s.cards === N1 && s.feed > s.container * 0.9, JSON.stringify(s));
+    const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch-page]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('[data-pane-btn="map"]').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li').length }));
+    ok('epoch, tiles fail: the map and its position in the switch go away, the feed stays and gets the width', s.map === 'unavailable' && !s.aside && !s.panes && s.cards === N1 && s.feed > s.container * 0.9, JSON.stringify(s));
     await p.close();
   }
 
@@ -863,7 +716,7 @@ if (want('weight')) {
   const page = await newPage({ width: 360, height: 100 });
   await page.goto(MAP.pt, { waitUntil: 'networkidle0' });
   await wait(500);
-  ok('weight: on the map page the map code and its styles are fetched at once, not when the block comes into view', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /(MapBlock|leaflet)[^/]*\.css/.test(u)));
+  ok('weight: on the map page the map code and its styles are fetched at once, not when the block comes into view', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /(MapBlock|leaflet|tiles)[^/]*\.css/.test(u)));
   await page.close();
 }
 

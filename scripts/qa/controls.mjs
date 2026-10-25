@@ -107,7 +107,7 @@ const feedState = (page) =>
   await page.goto(EPOCH, { waitUntil: 'networkidle0' });
   const before = await feedState(page);
   ok('JS: all cards shown, "All" pressed, timeline', before.visibleIds.length === feed.length && before.pressed.includes('timeline'), before.pressed.join('|'));
-  ok(`JS: the Timeline / Grid switch is ${GRID ? 'shown' : 'hidden'} (it needs 9 stories, this epoch has ${feed.length})`, (await page.$eval('[data-view-switch]', (el) => !el.hidden && el.getBoundingClientRect().height > 0)) === GRID);
+  ok(`JS: the Cards position of the switch is ${GRID ? 'shown' : 'hidden'} (it needs 9 stories, this epoch has ${feed.length})`, (await page.$eval('[data-view-switch] [data-view="grid"]', (el) => !el.hidden && el.getBoundingClientRect().height > 0)) === GRID);
   const marCount = Number(before.counters.find((c) => c.startsWith(`${FIO}:`)).split(':')[1]);
   ok('filter: the chip counter is the number of the epoch cards of that thread (from the data)', marCount === cardsIn(filterThread), `counter=${marCount} data=${cardsIn(filterThread)}`);
 
@@ -160,7 +160,7 @@ const feedState = (page) =>
     await page.setViewport({ width: 360, height: 800 });
 
     await page.click(`button[data-fio="${FIO}"]`);
-    ok('a filter that leaves fewer than 9 stories hides the Timeline / Grid switch', await page.$eval('[data-view-switch]', (el) => el.hidden || el.getBoundingClientRect().height === 0));
+    ok('a filter that leaves fewer than 9 stories takes the Cards position out of the switch', await page.$eval('[data-view-switch] [data-view="grid"]', (el) => el.hidden || el.getBoundingClientRect().height === 0));
     await page.click('button[data-fio=""]');
     await page.click('button[data-view="timeline"]');
     const back = await feedState(page);

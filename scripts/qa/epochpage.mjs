@@ -6,6 +6,7 @@ import { fsPath, launchBrowser } from './browser.mjs';
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
+const AVIS = { pt: '/pt/epoca/avis-e-descobrimentos/', en: '/en/era/avis-and-the-discoveries/', ru: '/ru/epoha/avis-i-velikie-otkrytiya/' };
 const POMBAL = { pt: '/pt/epoca/pombal-e-terramoto/', en: '/en/era/pombal-and-the-earthquake/', ru: '/ru/epoha/pombal-zemletryasenie-begstvo-dvora/' };
 
 let failed = 0;
@@ -80,17 +81,22 @@ if (want('cards')) {
 // ---------- 3. The view switch ----------
 if (want('switch')) {
   for (const lang of ['pt', 'en', 'ru']) {
-    const page = await open(`${POMBAL[lang]}?vista=grelha`);
+    const page = await open(`${AVIS[lang]}?vista=grelha`, { width: 1280 });
     const s = await page.evaluate(() => ({
       switchHidden: document.querySelector('[data-view-switch]').hidden || !document.querySelector('[data-view-switch]').checkVisibility(),
       vista: document.documentElement.dataset.vista ?? null,
       cols: getComputedStyle(document.querySelector('ol.feed')).display,
     }));
-    ok(`switch (${lang}): 8 stories are fewer than 9, so the switch is hidden and the timeline is shown even with ?vista=grelha`, s.switchHidden && s.vista === null && s.cols !== 'grid', JSON.stringify(s));
+    ok(`switch (${lang}): 7 stories are fewer than 9, so the switch is hidden on a wide screen and the timeline is shown even with ?vista=grelha`, s.switchHidden && s.vista === null && s.cols !== 'grid', JSON.stringify(s));
     const labels = await page.$$eval('[data-view-switch] button', (b) => b.map((x) => x.textContent.trim()));
-    const want_ = { pt: ['Cronologia', 'Cartões'], en: ['Timeline', 'Cards'], ru: ['Хронология', 'Карточки'] }[lang];
+    const want_ = { pt: ['Cronologia', 'Cartões', 'Mapa'], en: ['Timeline', 'Cards', 'Map'], ru: ['Хронология', 'Карточки', 'Карта'] }[lang];
     ok(`switch (${lang}): the labels are ${want_.join(' / ')}`, JSON.stringify(labels) === JSON.stringify(want_), labels.join(' / '));
     await page.close();
+    // 11 stories: the switch is there, ?vista=grelha gives the grid, and the map has no position in it (it is beside the feed)
+    const many = await open(`${POMBAL[lang]}?vista=grelha`, { width: 1280 });
+    const g = await many.evaluate(() => ({ shown: document.querySelector('[data-view-switch]').checkVisibility(), vista: document.documentElement.dataset.vista ?? null, map: getComputedStyle(document.querySelector('[data-view-switch] [data-pane-btn]')).display }));
+    ok(`switch (${lang}): with enough stories the switch is shown, ?vista=grelha gives the grid, and the map has no position in it on a wide screen`, g.shown && g.vista === 'grelha' && g.map === 'none', JSON.stringify(g));
+    await many.close();
   }
 }
 

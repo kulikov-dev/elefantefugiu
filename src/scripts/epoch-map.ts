@@ -39,10 +39,14 @@ if (page && feed && aside && mapRoot) {
   const setPane = (pane: 'feed' | 'map') => {
     page.dataset.pane = pane;
     for (const b of paneButtons) b.setAttribute('aria-pressed', String(b.dataset.paneBtn === pane));
+    // The other positions of the switch (timeline, cards) are pressed only while the feed is shown (epoch-filter.ts).
+    document.dispatchEvent(new CustomEvent('pane:change'));
     // Coming back to the feed: show the record that was chosen on the map meanwhile.
     if (pane === 'feed' && activeId) scrollToRecord(activeId);
   };
   for (const b of paneButtons) b.addEventListener('click', () => setPane(b.dataset.paneBtn === 'map' ? 'map' : 'feed'));
+  // "Timeline" or "Cards" was chosen in the switch while the map was shown.
+  document.addEventListener('pane:set', (e) => setPane((e as CustomEvent<{ pane: 'feed' | 'map' }>).detail.pane));
 
   // map -> feed
   mapRoot.addEventListener('map:select', (e) => {
@@ -78,7 +82,7 @@ if (page && feed && aside && mapRoot) {
   document.addEventListener('map:unavailable', () => {
     page.dataset.map = 'unavailable';
     aside.hidden = true;
-    for (const el of document.querySelectorAll<HTMLElement>('.panes')) el.hidden = true;
+    for (const b of paneButtons) b.hidden = true;
     setPane('feed');
   });
 }
