@@ -119,6 +119,7 @@
     "back_to_story": "Back to the story",
     "random_story": "Random story",
     "failed": "Could not send right now. Try again or write to us directly at",
+    "nojs": "Without JavaScript the form cannot send. Write to us at {{email}}.",
     "too_short": "Describe the mistake in a few words."
   },
   "ui": {

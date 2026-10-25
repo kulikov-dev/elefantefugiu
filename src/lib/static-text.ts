@@ -1,10 +1,12 @@
 // Inline markup of the static page texts (src/data/static-pages.ts):
 //   {{about}} {{method}} {{report}} {{legal}} {{map}}  a link to that page of the site (the link text is the title of the page);
 //   {{method|text}}                                     the same link with another text (for a case ending in Russian);
-//   {{email}}                                           the contact address as a link;
+//   {{email}}                                           the contact address: "name [at] host", a mailto link once the script runs (src/lib/contact.ts);
 //   {{stories}}                                         a value computed at build time, here the number of stories with its noun;
 //   **text**                                            bold.
 // Everything else is escaped. An unknown token is an error (a typo must not reach the page). Pure function, covered by tests.
+
+import { emailMarkup } from './contact';
 
 const ESCAPES: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const escapeHtml = (s: string): string => s.replace(/[&<>"']/g, (c) => ESCAPES[c]!);
@@ -21,7 +23,7 @@ export type InlineValues = Record<string, string>;
 export function renderInline(text: string, link: (key: string) => PageLink | undefined, email: string, values: InlineValues = {}): string {
   return escapeHtml(text)
     .replace(/\{\{(\w+)(?:\|([^}]+))?\}\}/g, (_, key: string, label: string | undefined) => {
-      if (key === 'email') return `<a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a>`;
+      if (key === 'email') return emailMarkup(email);
       if (key in values) return escapeHtml(values[key]!);
       const target = link(key);
       if (!target) throw new Error(`Unknown token {{${key}}} in a static page text`);

@@ -3,6 +3,7 @@ import { CONTACT_EMAIL, STATIC_PAGES, type StaticKey } from '../../src/data/stat
 import { LANGS } from '../../src/i18n/routes';
 import { LAST_EPOCH_KEY, pickLastEpoch } from '../../src/lib/home';
 import { MIN_REPORT_LENGTH, formsubmitEndpoint, hasEnoughText, pageFromQuery, reportSubject, sameSiteUrl, titleFromQuery } from '../../src/lib/report';
+import { emailMarkup, emailParts, obscuredEmail, splitEmail } from '../../src/lib/contact';
 import { escapeHtml, renderInline } from '../../src/lib/static-text';
 
 const KEYS = ['about', 'method', 'legal'] as StaticKey[];
@@ -61,7 +62,8 @@ describe('static pages', () => {
 describe('inline markup', () => {
   it('escapes HTML and turns tokens into links', () => {
     expect(renderInline('a <b> & {{report}}', link, 'x@y.z')).toBe('a &lt;b&gt; &amp; <a href="/x/report/">T-report</a>');
-    expect(renderInline('{{email}}', link, 'x@y.z')).toBe('<a href="mailto:x@y.z">x@y.z</a>');
+    // The address is never written out: a span with the halves apart and "x [at] y.z"; the script makes the link.
+    expect(renderInline('{{email}}', link, 'x@y.z')).toBe('<span class="email" data-email-user="x" data-email-host="y.z">x [at] y.z</span>');
     expect(escapeHtml(`"'`)).toBe('&quot;&#39;');
   });
   it('bold, a link with its own text, and a value computed by the page', () => {
@@ -80,6 +82,12 @@ describe('the mistake report form', () => {
     expect(formsubmitEndpoint(CONTACT_EMAIL, false)).toBe('https://formsubmit.co/elefantefugiu@gmail.com');
     expect(formsubmitEndpoint(CONTACT_EMAIL, true)).toBe('https://formsubmit.co/ajax/elefantefugiu@gmail.com');
     expect(CONTACT_EMAIL).toBe('elefantefugiu@gmail.com');
+  });
+  it('builds the address of the contact from its halves', () => {
+    expect(splitEmail('elefantefugiu@gmail.com')).toEqual({ user: 'elefantefugiu', host: 'gmail.com' });
+    expect(obscuredEmail('elefantefugiu@gmail.com')).toBe('elefantefugiu [at] gmail.com');
+    expect(emailMarkup(CONTACT_EMAIL)).not.toContain('@');
+    expect(emailParts(CONTACT_EMAIL)).toEqual({ 'data-email-user': 'elefantefugiu', 'data-email-host': 'gmail.com' });
   });
   it('names the language in the subject', () => {
     expect(reportSubject('ru')).toContain('(ru)');

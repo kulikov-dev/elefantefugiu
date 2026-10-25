@@ -128,11 +128,11 @@ if (want('form')) {
   const r = await bad.evaluate(() => ({ failed: document.querySelector('[data-report-failed]').textContent, link: document.querySelector('[data-report-failed] a').getAttribute('href'), disabled: document.querySelector('[data-report-submit]').disabled, text: document.querySelector('#f-what').value }));
   ok('form: when the service refuses, the reader sees the address to write to, can try again and keeps the text', r.link === `mailto:${EMAIL}` && r.disabled === false && r.text === 'Texto do erro encontrado.', JSON.stringify(r));
   await bad.close();
-  // without JavaScript the form still has everything it needs
+  // without JavaScript the address is not written out: "name [at] host" is shown, with no mailto link, and the form has no address to post to
   const nojs = await newPage({ js: false });
   await nojs.goto(`${base}/en/report/`, { waitUntil: 'load' });
-  const n = await nojs.evaluate(() => ({ action: document.querySelector('[data-report-form]').action, required: document.querySelector('#f-what').required, mail: [...document.querySelectorAll('a[href^="mailto:"]')].length, sentHidden: document.getElementById('sent').hidden }));
-  ok('form without JavaScript: a real form post, a required description, the address to write to; the confirmation waits for #sent', n.action === `https://formsubmit.co/${EMAIL}` && n.required && n.mail >= 2 && n.sentHidden, JSON.stringify(n));
+  const n = await nojs.evaluate(() => ({ hasAction: document.querySelector('[data-report-form]').hasAttribute('action'), mail: [...document.querySelectorAll('a[href^="mailto:"]')].length, shown: [...document.querySelectorAll('.email')].map((e) => e.textContent), note: document.querySelector('.report__nojs')?.checkVisibility() ?? false, raw: document.documentElement.outerHTML.includes('elefantefugiu@'), sentHidden: document.getElementById('sent').hidden }));
+  ok('form without JavaScript: no address in the page, "[at]" shown, a note says to write by mail; the confirmation waits for #sent', !n.hasAction && n.mail === 0 && n.shown.length >= 2 && n.shown.every((x) => x === 'elefantefugiu [at] gmail.com') && n.note && !n.raw && n.sentHidden, JSON.stringify(n));
   await nojs.close();
   const back = await newPage({ width: 360 });
   await back.goto(`${base}/pt/corrigir/#sent`, { waitUntil: 'load' });

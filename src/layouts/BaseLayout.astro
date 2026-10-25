@@ -112,6 +112,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
       </div>
     </main>
     <SiteFooter lang={lang} />
+    <script>import '../scripts/email';</script>
     {epoch && <script>import '../scripts/last-epoch';</script>}
     <script is:inline>
       // Remember the chosen language for the root redirect. Storage may be unavailable.

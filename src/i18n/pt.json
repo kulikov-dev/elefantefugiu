@@ -119,6 +119,7 @@
     "back_to_story": "Voltar à história",
     "random_story": "História ao acaso",
     "failed": "Não foi possível enviar agora. Tente de novo ou escreva-nos diretamente para",
+    "nojs": "Sem JavaScript o formulário não consegue enviar. Escreva-nos para {{email}}.",
     "too_short": "Descreva o erro em poucas palavras."
   },
   "ui": {
