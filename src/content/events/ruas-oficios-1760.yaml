@@ -1,0 +1,111 @@
+id: ruas-oficios-1760
+slug:
+  pt: as-ruas-dos-oficios
+  en: the-streets-of-trades
+  ru: ulitsy-remesel
+title:
+  pt: As ruas dos ofícios
+  en: The streets of trades
+  ru: Улицы ремёсел
+epoch: pombal-e-terramoto
+level: story
+year: 1760
+place:
+  name: Lisboa, Baixa Pombalina
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7101
+  lon: -9.1383
+bridge:
+  name: Rua Áurea (Rua do Ouro)
+  title:
+    pt: Rua Áurea (Rua do Ouro)
+    en: Rua Áurea (Rua do Ouro)
+    ru: Руа-Аурея (Rua do Ouro)
+  address: Rua Áurea, Baixa, Lisboa
+  lat: 38.7101
+  lon: -9.1383
+  url: https://www.visitlisboa.com/
+  note:
+    pt: "Percorra a Rua Áurea e as vizinhas Rua dos Correeiros e Rua dos Sapateiros: os nomes ainda
+      guardam os ofícios."
+    en: "Walk along Rua Áurea and its neighbours Rua dos Correeiros and Rua dos Sapateiros: the names
+      still keep the trades."
+    ru: "Пройдите по Руа-Аурея и соседним Rua dos Correeiros и Rua dos Sapateiros: их названия до сих
+      пор хранят ремёсла."
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Depois do terramoto, as ruas da Baixa foram repartidas pelos ofícios.
+  en: After the earthquake, the Baixa's streets were shared out among the trades.
+  ru: После землетрясения улицы Байши поделили между ремёслами.
+story:
+  pt: "Depois de 1755, a Baixa de Lisboa foi reconstruída a régua e esquadro: ruas direitas, prédios
+    iguais. A portaria régia de 5 de novembro de 1760 deu nomes às ruas e destinou a algumas delas
+    certos ofícios. Na Rua Áurea deviam trabalhar os ourives e, na Rua dos Correeiros, os
+    correeiros, os seleiros e os torneiros. Os lisboetas ainda dizem Rua do Ouro, embora na placa se
+    leia Rua Áurea."
+  en: "After 1755, Lisbon's lower town was rebuilt with a ruler: straight streets, identical
+    buildings. A royal order of 5 November 1760 named the streets and assigned certain trades to
+    some of them. Goldsmiths were to work on Rua Áurea, and harness-makers, saddlers and turners on
+    Rua dos Correeiros. Lisbon people still say Rua do Ouro, Gold Street, although the sign reads
+    Rua Áurea."
+  ru: "После 1755 года нижний город Лиссабона отстроили заново, по линейке: прямые улицы, одинаковые
+    дома. Королевская портария 5 ноября 1760 года дала улицам имена и назначила некоторым из них
+    ремёсла. На Руа-Аурея должны были работать ювелиры, а на Rua dos Correeiros шорники, седельщики
+    и токари. Лиссабонцы до сих пор говорят «Руа-ду-Ору», Золотая улица, хотя по табличке она
+    Руа-Аурея."
+more:
+  pt: >-
+    Assim, Pombal pôs ordem não só no traçado, mas também no comércio: o comprador sabia onde
+    procurar um anel ou uma sela. Na Rua Áurea, além dos ourives, as lojas que sobrassem ficavam
+    para os relojoeiros.
+
+
+    Parte dos nomes veio do uso ou surgiu mais tarde. A Rua da Prata chamava-se Rua Bela da Rainha
+    até 1910, e a Rua dos Fanqueiros aparece na portaria como Rua Nova da Princesa. Em 1910, um mês
+    depois da proclamação da República, as ruas com nomes ligados à monarquia foram rebatizadas. Daí
+    uma confusão que dura até hoje: a Rua Áurea continua a ser, para toda a gente, a Rua do Ouro.
+  en: >-
+    Pombal thus brought order not only to the street plan but to trade as well: a shopper knew where
+    to look for a ring or a saddle. On Rua Áurea, besides the goldsmiths, the spare shops were to go
+    to watchmakers.
+
+
+    Some of the names came from everyday use or later. Rua da Prata was called Rua Bela da Rainha
+    until 1910, and Rua dos Fanqueiros appears in the order as Rua Nova da Princesa. In 1910, a
+    month after the Republic was proclaimed, streets with names tied to the monarchy were renamed.
+    Hence a confusion that lives on: to everyone, Rua Áurea is still Rua do Ouro.
+  ru: >-
+    Так Помбал навёл порядок не только в планировке, но и в торговле: покупатель знал, где искать
+    кольцо или сбрую. На Руа-Аурея, кроме ювелиров, в оставшихся лавках должны были сидеть
+    часовщики.
+
+
+    Часть названий пришла из обихода или появилась позже. Улица Rua da Prata до 1910 года называлась
+    Rua Bela da Rainha, а Rua dos Fanqueiros в портарии значится как Rua Nova da Princesa. В 1910
+    году, через месяц после провозглашения республики, улицам с «королевскими» названиями дали новые
+    имена. Отсюда путаница, которая жива до сих пор: Руа-Аурея для всех остаётся Руа-ду-Ору.
+sources:
+  - title: "Time Out Lisboa: «O Rossio na Betesga: a Baixa lisboeta onde as ruas têm dois nomes»"
+    url: https://www.timeout.pt/lisboa/pt/noticias/o-rossio-na-betesga-baixa-lisboeta-onde-as-ruas-tem-dois-nomes-012619
+    type: press
+    accessed: 2026-10-25
+  - title: "Toponímia de Lisboa (Câmara Municipal de Lisboa): «A Rua Áurea dos ourives pombalinos»"
+    url: https://toponimialisboa.wordpress.com/2014/01/09/a-rua-aurea-dos-ourives-pombalinos/
+    type: institutional
+    accessed: 2026-10-25
+  - title: "Toponímia de Lisboa (Câmara Municipal de Lisboa): «A Rua dos Correeiros»"
+    url: https://toponimialisboa.wordpress.com/2018/04/13/a-rua-dos-correeiros/
+    type: institutional
+    accessed: 2026-10-25
+related: []
+status: ready
+placeholder: false
+ru_ready: true
