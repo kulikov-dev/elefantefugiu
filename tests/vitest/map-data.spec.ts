@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { cardsView, mapLinkFor, mapMaxBounds, MAINLAND_VIEW, parseMapState, passesFilters, serializeMapState, type MapKnown } from '../../src/lib/map-data';
+import { cardsView, mapLinkFor, mapMaxBounds, MAINLAND_VIEW, portugalView, parseMapState, passesFilters, serializeMapState, type MapKnown } from '../../src/lib/map-data';
 
 const known: MapKnown = {
   threads: ['mar', 'natureza'],
@@ -105,6 +105,21 @@ describe('cardsView (initial view of a map with some cards)', () => {
       expect((v.north + v.south) / 2).toBeCloseTo(38.7);
       expect((v.east + v.west) / 2).toBeCloseTo(-9.1);
     }
+  });
+});
+
+describe('portugalView (first view of the map page)', () => {
+  it('is centred on the markers of the mainland, not on the middle of the mainland', () => {
+    const v = portugalView([{ lat: 41.15, lon: -8.6 }, { lat: 38.7, lon: -9.14 }, { lat: 37.1, lon: -8.67 }]);
+    expect((v.west + v.east) / 2).toBeLessThan((MAINLAND_VIEW.west + MAINLAND_VIEW.east) / 2);
+    expect(v.south).toBeLessThanOrEqual(37.1);
+    expect(v.north).toBeGreaterThanOrEqual(41.15);
+  });
+  it('ignores the islands (their own buttons) and falls back to the mainland without markers', () => {
+    const withIsland = portugalView([{ lat: 38.7, lon: -9.14 }, { lat: 38.65, lon: -28.0 }]);
+    expect(withIsland.west).toBeGreaterThan(-12);
+    expect(portugalView([{ lat: 38.65, lon: -28.0 }])).toEqual(MAINLAND_VIEW);
+    expect(portugalView([])).toEqual(MAINLAND_VIEW);
   });
 });
 

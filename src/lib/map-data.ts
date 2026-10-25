@@ -64,6 +64,16 @@ export function cardsView(cards: readonly { lat: number; lon: number }[], padRat
   return { south: s, west: w, north: n, east: e };
 }
 
+/**
+ * First view of the map page and of an epoch map: the box around the markers on the mainland, so the frame is centred on Portugal
+ * (the box of the whole mainland, centred on the middle of it, left half the frame to Spain). The islands and places abroad do not
+ * count: they have their own buttons. Without such markers the whole mainland.
+ */
+export function portugalView(cards: readonly { lat: number; lon: number }[]): Bounds {
+  const [mainland] = REGIONS as [Bounds, ...Bounds[]];
+  return cardsView(cards.filter((c) => c.lat >= mainland.south && c.lat <= mainland.north && c.lon >= mainland.west && c.lon <= mainland.east));
+}
+
 // ---- address state: ?fio=mar&epoca=avis-e-descobrimentos&id=evento-exemplo-02 ----------------------------------
 
 export interface MapState {

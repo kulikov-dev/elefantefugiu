@@ -10,7 +10,7 @@ import { storyPath, type Lang } from '../i18n/routes';
 import { t, tAll } from '../i18n';
 import { epochHasContent, epochYearsText } from '../lib/epochs';
 import { groupByEpoch, toMapCards } from '../lib/map-cards';
-import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
+import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { ageInfoOf, countByMode, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
@@ -67,7 +67,7 @@ const noindex = events.some((e) => e.placeholder);
       threads={threads}
       known={known}
       maxBounds={mapMaxBounds(cards)}
-      view={MAINLAND_VIEW}
+      view={portugalView(cards)}
       tile={tile}
     >
       <EpochScale slot="under" lang={lang} epochs={site.epochs} readyIds={new Set(epochs.map((e) => e.id))} />

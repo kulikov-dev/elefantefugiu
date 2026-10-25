@@ -131,7 +131,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
 
   // ---- map and tiles ----------------------------------------------------------------------------------------
 
-  const maxBounds = toLatLngBounds(cfg.maxBounds);
+  let maxBounds = toLatLngBounds(cfg.maxBounds);
   // Readers who ask for less motion get no zoom, fade or marker animations.
   const animate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const map = L.map(canvas, {
@@ -675,6 +675,19 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
 
   const setMinZoom = () => map.setMinZoom(world ? BEHAVIOUR.worldMinZoom : map.getBoundsZoom(maxBounds, false));
 
+  /**
+   * The first view is the box around the markers of the mainland. A wide frame shows more than the allowed area is wide, and Leaflet then
+   * centres the frame on the allowed area (the middle of the mainland, half of it Spain). So the frame is fitted freely first and the
+   * allowed area grows by what that view shows: centred on the markers, with the sea on one side and Spain on the other.
+   */
+  const fitFirstView = () => {
+    map.setMaxBounds(L.latLngBounds([-85, -180], [85, 180]));
+    map.fitBounds(toLatLngBounds(cfg.view), { animate: false });
+    maxBounds = L.latLngBounds(maxBounds.getSouthWest(), maxBounds.getNorthEast()).extend(map.getBounds());
+    map.setMaxBounds(maxBounds);
+    setMinZoom();
+  };
+
   const firstView = () => {
     setMinZoom();
     const saved = (history.state as { mapView?: { lat: number; lon: number; zoom: number } } | null)?.mapView;
@@ -682,7 +695,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     if (pageMode && saved) map.setView([saved.lat, saved.lon], saved.zoom, { animate: false });
     else if (target) map.setView([target.lat, target.lon], BEHAVIOUR.cardZoom, { animate: false });
     else if (state.fio || state.epoca) fitToFilter();
-    else map.fitBounds(toLatLngBounds(cfg.view), { animate: false });
+    else fitFirstView();
     if (target) openPreview(target, false);
     syncChips();
     root.dataset.state = 'ready';

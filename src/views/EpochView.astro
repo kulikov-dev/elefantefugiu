@@ -28,7 +28,7 @@ import {
 import { mascotAllowed } from '../lib/mascot';
 import { yearRange } from '../lib/events';
 import { toMapCards } from '../lib/map-cards';
-import { MAINLAND_VIEW, mapMaxBounds } from '../lib/map-data';
+import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
 import { previewImageUrl } from '../lib/picture-assets';
@@ -203,7 +203,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
           threads={mapThreads}
           known={{ threads: site.threads.map((th) => th.id), epochs: [] }}
           maxBounds={mapMaxBounds(mapCards)}
-          view={MAINLAND_VIEW}
+          view={portugalView(mapCards)}
           tile={tileConfig(process.env)}
         />
       </aside>
