@@ -38,6 +38,11 @@ const open = async (path, { width = 1280, js = true, language = null } = {}) => 
   page.on('request', (r) => {
     if (/formsubmit\.co/.test(r.url())) {
       page.posts.push({ url: r.url(), body: r.postData() ?? '' });
+      // page.slowFail: the service answers late and with an error (the "sending" state and its way out).
+      if (page.slowFail) {
+        setTimeout(() => r.respond({ status: 500, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"success":"false"}' }), 700);
+        return;
+      }
       r.respond({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"success":"true"}' });
     } else r.continue();
   });
@@ -145,6 +150,20 @@ if (want('thanks')) {
     await wait(300);
     ok(`thanks (${lang}): arriving from the service shows the screen with the way back`, !(await arrived.$eval('#sent', (e) => e.hidden)) && (await arrived.$eval('[data-report-back]', (a, u) => !a.hidden && a.getAttribute('href') === u, url)));
     await arrived.close();
+  }
+  // while sending: the button is off and says so; after an error it is on again and the message shows
+  for (const [lang, sending, submit] of [['pt', 'A enviar…', 'Enviar'], ['en', 'Sending…', 'Send'], ['ru', 'Отправляем…', 'Отправить']]) {
+    const page = await open(PAGES.report[lang]);
+    page.slowFail = true;
+    await page.type('#f-what', 'Uma data errada');
+    await page.click('[data-report-submit]');
+    await wait(250);
+    const during = await page.$eval('[data-report-submit]', (b) => ({ disabled: b.disabled, text: b.textContent.trim() }));
+    ok(`form (${lang}): while sending the button is off and says "${sending}"`, during.disabled && during.text === sending, JSON.stringify(during));
+    await wait(900);
+    const after = await page.evaluate(() => ({ disabled: document.querySelector('[data-report-submit]').disabled, text: document.querySelector('[data-report-submit]').textContent.trim(), failed: !document.querySelector('[data-report-failed]').hidden }));
+    ok(`form (${lang}): after an error the button is on again and the message is shown`, !after.disabled && after.text.length > 0 && after.text !== sending && after.failed, JSON.stringify(after));
+    await page.close();
   }
   // no story: only the random one
   const none = await open(`${PAGES.report.en}#sent`);

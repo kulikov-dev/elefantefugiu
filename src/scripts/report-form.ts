@@ -69,6 +69,7 @@ if (form) {
     error.hidden = true;
     what.removeAttribute('aria-invalid');
     button.disabled = true;
+    button.setAttribute('aria-busy', 'true');
     button.textContent = form.dataset.sending ?? '';
     try {
       const response = await fetch(form.dataset.ajax ?? form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
@@ -78,6 +79,7 @@ if (form) {
     } catch {
       failed.hidden = false;
       button.disabled = false;
+      button.removeAttribute('aria-busy');
       button.textContent = form.dataset.submit ?? '';
     }
   });

@@ -281,6 +281,16 @@
   color: var(--color-on-accent);
 }
 
+/* While the form is being sent the button cannot be pressed and says so. */
+.button:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: progress;
+}
+
+.button:disabled:hover {
+  background: var(--color-accent);
+}
+
 /* Outlined variant for secondary actions. */
 .button--secondary {
   background: var(--color-surface);

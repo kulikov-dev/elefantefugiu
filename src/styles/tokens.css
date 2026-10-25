@@ -204,6 +204,9 @@
   --azulejo-band-height: 1.25rem;
   --azulejo-corner-size: 5.5rem;
 
+  /* A button that cannot be pressed (the report form while it is sending). */
+  --opacity-disabled: 0.6;
+
   /* Waiting states: the breathing tile of the map (transform and opacity only) and the reserved place of a picture. */
   --wait-delay: 300ms;
   --wait-duration: 1800ms;
