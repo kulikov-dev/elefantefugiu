@@ -85,6 +85,7 @@
   /* Titles of cards: one clamped size so that a long name does not break the grid; the key events of the frame get the larger one. */
   --text-card-title: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
   --text-3xl: clamp(2.25rem, 1.6rem + 3vw, 3.75rem);
+  --text-hero: clamp(1.6875rem, 1.2rem + 2.25vw, 2.8125rem); /* the home page title: three quarters of --text-3xl */
   --leading-body: 1.6;
   --leading-heading: 1.2;
   --measure: 65ch;
