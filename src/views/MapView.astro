@@ -53,7 +53,7 @@ const noindex = events.some((e) => e.placeholder);
           {
             site.visibleThreads.map((thread) => (
               <li>
-                <ThreadChip lang={lang} name={thread.name} color={thread.color} filter={thread.id} />
+                <ThreadChip lang={lang} name={thread.name} color={thread.color} description={thread.description[lang]} filter={thread.id} />
               </li>
             ))
           }

@@ -379,22 +379,10 @@ for (const lang of ['pt', 'en']) {
     if (!li || !li[1].includes(`data-min-age="${ev.min_age}"`) || !li[1].includes(`data-sensitive="${ev.sensitive}"`)) fail(`showcase item ${id} must carry data-min-age="${ev.min_age}" and data-sensitive="${ev.sensitive}"`);
   }
 
-  // epoch tiles: only the epochs with a page (big tiles with link, count, theme and years); the others are on the time strip only
+  // the epochs: no big tiles any more, the time strip is the whole list
   const section = html.match(/<section id="epocas"[\s\S]*?<\/section>/)?.[0] ?? '';
-  const items = [...section.matchAll(/<li class="tile ([^"]*)"[^>]*>([\s\S]*?)<\/li>/g)];
   const readyTiles = tiles.filter((x) => x.page);
-  if (items.length !== readyTiles.length) fail(`expected ${readyTiles.length} epoch tiles (only epochs with a page), found ${items.length}`);
-  readyTiles.forEach(({ epoch }, i) => {
-    const [, cls = '', body = ''] = items[i] ?? [];
-    if (!body.includes(epoch.name[lang])) fail(`tile ${i + 1} is not "${epoch.name[lang]}"`);
-    if (!cls.includes('tile--link') || !new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${epoch.slug[lang]}/"`).test(body)) fail(`tile "${epoch.id}" must link to its page`);
-    const want = modeCounts(inEpoch(epoch));
-    const got = countsByMode(body.match(/<p class="tile__count"[^>]*>[\s\S]*?<\/p>/)?.[0] ?? '', wordCount);
-    if (!sameCounts(got, want)) fail(`tile "${epoch.id}": counters differ (want ${showCounts(want)}; found ${showCounts(got)})`);
-    if (!body.includes(epoch.theme[lang])) fail(`tile "${epoch.id}" misses the theme phrase`);
-    if (!body.includes(`${epoch.years.from}–${epoch.years.to}`)) fail(`tile "${epoch.id}" misses the years`);
-  });
-  if (/tile--soon/.test(section)) fail('epochs that are not ready must not have tiles of their own');
+  if (/class="tile|<ol class="tiles"/.test(section)) fail('the big epoch tiles must be gone: the time strip is the list of epochs');
   // the time strip: all epochs in order; ready ones are links, the others plain text marked "soon"; the caption counts them
   const strip = section.match(/<ol class="timeline"[\s\S]*?<\/ol>/)?.[0] ?? '';
   const stripItems = [...strip.matchAll(/<li class="timeline__item ([^"]*)"[^>]*>([\s\S]*?)<\/li>/g)];
@@ -406,6 +394,11 @@ for (const lang of ['pt', 'en']) {
     if (!body.includes(yearsText)) fail(`time strip item "${epoch.id}" misses its years`);
     if (page) {
       if (!cls.includes('timeline__item--ready') || !new RegExp(`<a [^>]*href="[^"]*/${SEG[lang].epoch}/${epoch.slug[lang]}/"`).test(body)) fail(`time strip: "${epoch.id}" has a page and must be a link`);
+      // a live epoch also carries its theme phrase and the number of its stories (in every family mode)
+      if (!body.includes(epoch.theme[lang])) fail(`time strip: "${epoch.id}" misses the theme phrase`);
+      const want = modeCounts(inEpoch(epoch));
+      const got = countsByMode(body.match(/<span class="timeline__count"[^>]*>[\s\S]*$/)?.[0] ?? '', wordCount);
+      if (!sameCounts(got, want)) fail(`time strip: "${epoch.id}": counters differ (want ${showCounts(want)}; found ${showCounts(got)})`);
     } else if (!cls.includes('timeline__item--soon') || /<a\b/.test(body) || !/(Em breve|Coming soon)/.test(body)) {
       fail(`time strip: "${epoch.id}" has no page and must be plain text marked "soon"`);
     }
@@ -423,19 +416,22 @@ for (const lang of ['pt', 'en']) {
   }
   if (/data-home-map|class="home-map"/.test(html)) fail('the map must be gone from the home page');
 
-  // thread buttons: exactly the visible threads, each a link to its page with the total from the data
+  // the threads: one row per visible thread (a colour dot, the name, the number of stories, a line about it), each a link to its page
   const threadsSection = html.match(/<section aria-labelledby="threads-title"[\s\S]*?<\/section>/)?.[0] ?? '';
-  const links = [...threadsSection.matchAll(/<a [^>]*href="[^"]*\/(?:fio|thread)\/([^"/]+)\/"[^>]*>([\s\S]*?)<\/a>/g)];
-  if (links.length !== visibleThreads.length) fail(`expected ${visibleThreads.length} thread buttons, found ${links.length}`);
+  const links = [...threadsSection.matchAll(/<a [^>]*class="thread-row"[^>]*href="[^"]*\/(?:fio|thread)\/([^"/]+)\/"[^>]*>([\s\S]*?)<\/a>/g)];
+  if (links.length !== visibleThreads.length) fail(`expected ${visibleThreads.length} thread rows, found ${links.length}`);
   for (const th of visibleThreads) {
     const l = links.find((m) => m[1] === th.slug[lang]);
-    if (!l) fail(`no button for thread "${th.id}"`);
+    if (!l) fail(`no row for thread "${th.id}"`);
     else {
       const want = modeCounts(inThread(th));
-      const got = countsByMode(l[2], countNode('thread__count'));
+      const got = countsByMode(l[2], wordCount);
       if (!sameCounts(got, want)) fail(`counters of thread "${th.id}" differ (want ${showCounts(want)}; found ${showCounts(got)})`);
-      const li = threadsSection.match(new RegExp(`<li\\b([^>]*)>\\s*<a [^>]*href="[^"]*/${th.slug[lang]}/"`));
-      if (attr(li?.[1], 'data-hide-in') !== zeroIn(want).join(' ')) fail(`thread chip "${th.id}": data-hide-in is "${attr(li?.[1], 'data-hide-in')}", expected "${zeroIn(want).join(' ')}"`);
+      if (!l[2].includes(th.name[lang])) fail(`the row of thread "${th.id}" misses its name`);
+      if (!l[2].replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').includes(th.description[lang])) fail(`the row of thread "${th.id}" misses its description`);
+      if (!l[0].includes(`--thread-color: light-dark(${th.color}, ${th.color_dark})`)) fail(`the row of thread "${th.id}" misses its colour`);
+      const li = threadsSection.match(new RegExp(`<li\b([^>]*)>\s*<a [^>]*href="[^"]*/${th.slug[lang]}/"`));
+      if (attr(li?.[1], 'data-hide-in') !== zeroIn(want).join(' ')) fail(`thread row "${th.id}": data-hide-in is "${attr(li?.[1], 'data-hide-in')}", expected "${zeroIn(want).join(' ')}"`);
     }
   }
 

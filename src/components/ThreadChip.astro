@@ -18,9 +18,11 @@ interface Props {
   filter?: string;
   /** Without the pill: the dot and the name only (cards in a list, where pills would pile up). */
   quiet?: boolean;
+  /** What the thread is about (its description): shown as a tooltip. */
+  description?: string | undefined;
 }
 
-const { lang, name, color, href, count, filter, quiet = false } = Astro.props;
+const { lang, name, color, href, count, filter, quiet = false, description } = Astro.props;
 const isButton = filter !== undefined;
 const Tag = isButton ? 'button' : href ? 'a' : 'span';
 const variants = count === undefined ? [] : typeof count === 'number' ? [{ modes: ['off', 'all', '12'], value: count }] : countVariants(count);
@@ -28,6 +30,7 @@ const variants = count === undefined ? [] : typeof count === 'number' ? [{ modes
 <Tag
   class:list={['thread', { 'thread--link': Boolean(href) || isButton, 'thread--button': isButton, 'thread--quiet': quiet }]}
   style={`--thread-color: ${color}`}
+  title={description}
   href={isButton ? undefined : href}
   type={isButton ? 'button' : undefined}
   aria-pressed={isButton ? 'false' : undefined}

@@ -107,6 +107,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
                       lang={lang}
                       name={thread.name}
                       color={thread.color}
+                      description={thread.description[lang]}
                       href={`${threadHref(lang, thread.slug[lang])}#${epochSectionId(epoch.slug[lang])}`}
                       count={counts.get(thread.id) ?? 0}
                     />
@@ -135,7 +136,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
                 </li>
                 {chips.map((thread) => (
                   <li data-hide-in={hideIn(zeroModes(chipCounts.get(thread.id)!))}>
-                    <ThreadChip lang={lang} name={thread.name} color={thread.color} count={chipCounts.get(thread.id)!} filter={thread.id} />
+                    <ThreadChip lang={lang} name={thread.name} color={thread.color} description={thread.description[lang]} count={chipCounts.get(thread.id)!} filter={thread.id} />
                   </li>
                 ))}
               </ul>

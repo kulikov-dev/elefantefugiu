@@ -138,6 +138,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
                 lang={lang}
                 name={thread.name}
                 color={thread.color}
+                description={thread.description[lang]}
                 href={site.visibleThreadIds.has(thread.id) ? threadHref(lang, thread.slug[lang]) : undefined}
               />
             </li>

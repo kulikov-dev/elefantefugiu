@@ -1,12 +1,12 @@
 ---
 // Home page: /pt/, /en/, /ru/ (docs/spec.md section 5.1). It tells a story at once instead of explaining the project:
-// the story the name comes from, "Where to start" (three stories), one line with the number of places and the link to the map, the epochs, the threads.
+// the story the name comes from, "Where to start" (three stories), one line with the number of places and the link to the map, the epochs
+// (the time strip), the threads (five rows).
 // Everything is built from the data; it reads without JavaScript (the "left off" band needs a script).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomeMapLine from '../components/HomeMapLine.astro';
 import Mascot from '../components/Mascot.astro';
 import StartCard from '../components/StartCard.astro';
-import ThreadChip from '../components/ThreadChip.astro';
 import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { epochHasTestText, epochYearsText } from '../lib/epochs';
@@ -86,32 +86,20 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 
     <section id={EPOCHS_ANCHOR} aria-labelledby="epocas-title">
       <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
-      <ol class="tiles">
-        {
-          ready.map(({ epoch, counts }) => (
-            <li class="tile tile--link">
-              <h3 class="tile__name">
-                <a href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
-              </h3>
-              <p class="tile__years">{epochYearsText(epoch, lang)}</p>
-              {epoch.theme && <p class="tile__theme">{epoch.theme[lang]}</p>}
-              <p class="tile__count">
-                {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
-              </p>
-            </li>
-          ))
-        }
-      </ol>
-      <!-- All the epochs in order: the ready ones stand out and lead to their pages, the others are pale with "soon". -->
+      <!-- All the epochs in order: the ready ones stand out (a link, the theme phrase, the number of stories), the others are pale with "soon". -->
       <div class="timeline-wrap" data-scroll-fade>
         <ol class="timeline" aria-label={t(lang, 'home.timeline_label')}>
           {
-            tiles.map(({ epoch, available }) =>
+            tiles.map(({ epoch, available, counts }) =>
               available ? (
                 <li class="timeline__item timeline__item--ready">
                   <a href={epochHref(lang, epoch.slug[lang])}>
                     <span class="timeline__name">{epoch.name[lang]}</span>
                     <span class="timeline__years">{epochYearsText(epoch, lang)}</span>
+                    {epoch.theme && <span class="timeline__theme">{epoch.theme[lang]}</span>}
+                    <span class="timeline__count">
+                      {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+                    </span>
                   </a>
                 </li>
               ) : (
@@ -133,10 +121,17 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
         <section aria-labelledby="threads-title">
           <h2 id="threads-title">{t(lang, 'home.threads_heading')}</h2>
           <p>{t(lang, 'home.threads_intro')}</p>
-          <ul class="chips">
+          <ul class="thread-list">
             {site.visibleThreads.map((thread) => (
               <li data-hide-in={hideIn(zeroModes(threadCounts.get(thread.id)!))}>
-                <ThreadChip lang={lang} name={thread.name} color={thread.color} href={threadHref(lang, thread.slug[lang])} count={threadCounts.get(thread.id)!} />
+                <a class="thread-row" href={threadHref(lang, thread.slug[lang])} style={`--thread-color: ${thread.color}`}>
+                  <span class="thread-row__dot" aria-hidden="true"></span>
+                  <span class="thread-row__name">{thread.name[lang]}</span>
+                  <span class="thread-row__count">
+                    {countVariants(threadCounts.get(thread.id)!).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+                  </span>
+                  <span class="thread-row__text">{thread.description[lang]}</span>
+                </a>
               </li>
             ))}
           </ul>
@@ -233,70 +228,23 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
     }
   }
 
-  /* ---- where to start, epochs ---- */
-  /* The three cards are as tall as the tallest, so the small titles line up along the bottom. */
+  /* ---- where to start ---- */
+  /* The cards share the whole width (auto-fit: no empty column on the right) and are as tall as the tallest, so the small titles line up. */
   .showcase > :global(li) {
     display: flex;
   }
 
-  .showcase,
-  .tiles {
+  .showcase {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-home-tile-min)), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-home-tile-min)), 1fr));
     gap: var(--space-4);
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  .tile {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-4);
-    border: 1px solid var(--epoch-line);
-    border-radius: var(--radius-md);
-    background: var(--epoch-surface);
-  }
-
-  .tile__name {
-    font-size: var(--text-lg);
-    line-height: 1.25;
-  }
-
-  .tile__years,
-  .tile__count {
-    color: var(--color-ink-muted);
-    font-size: var(--text-sm);
-  }
-
-  .tile__theme {
-    font-family: var(--font-body);
-    font-style: italic;
-  }
-
-  /* The whole tile is the link target (the link is the heading text, stretched over the tile). */
-  .tile--link .tile__name a {
-    text-decoration: none;
-  }
-
-  .tile--link .tile__name a::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  .tile--link:hover {
-    border-color: var(--color-accent);
-  }
-
-  .tile--link:focus-within {
-    outline: var(--ring-width) solid var(--color-accent);
-    outline-offset: var(--ring-offset-tight);
-  }
-
   /* ---- the time strip: all the epochs in order ---- */
+  /* The epochs with stories are wider (a theme phrase and the number of stories); the others are narrow, pale and say "soon". */
   .timeline-wrap {
     margin-block-start: var(--space-5);
     overflow-x: auto;
@@ -304,9 +252,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
   }
 
   .timeline {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(var(--timeline-item-min), 1fr);
+    display: flex;
     gap: 0;
     margin: 0;
     padding: 0;
@@ -316,6 +262,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
   .timeline__item {
     position: relative;
     display: flex;
+    flex: 1 0 var(--timeline-item-min);
     flex-direction: column;
     gap: var(--space-1);
     padding: var(--space-3) var(--space-2) var(--space-1);
@@ -337,6 +284,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
   }
 
   .timeline__item--ready {
+    flex: 2 0 var(--timeline-ready-min);
     border-block-start-color: var(--color-accent);
   }
 
@@ -350,16 +298,40 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
     gap: var(--space-1);
     min-height: var(--touch-target);
     color: var(--color-ink);
-    font-weight: 600;
     text-decoration: none;
+  }
+
+  .timeline__item--ready .timeline__name {
+    font-size: var(--text-base);
+    font-weight: 700;
   }
 
   .timeline__item--ready a:hover .timeline__name {
     text-decoration: underline;
   }
 
+  .timeline__theme {
+    font-family: var(--font-body);
+    font-style: italic;
+  }
+
+  .timeline__count {
+    color: var(--color-ink-muted);
+  }
+
+  /* An epoch that is not ready: paler than the others (thin name, a hollow dot, a faint line). */
   .timeline__item--soon {
     color: var(--color-ink-muted);
+    border-block-start-color: var(--epoch-line);
+  }
+
+  .timeline__item--soon .timeline__name {
+    font-weight: 400;
+  }
+
+  .timeline__item--soon::before {
+    background: var(--color-surface);
+    border: var(--border-medium) solid var(--epoch-line);
   }
 
   .timeline__years {
@@ -378,12 +350,73 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
     font-size: var(--text-sm);
   }
 
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
+  /* ---- the threads: five rows, a colour dot, the name, the number of stories and a line about the thread ---- */
+  .thread-list {
     margin: var(--space-3) 0 0;
     padding: 0;
     list-style: none;
+    border-block-start: 1px solid var(--epoch-line);
+  }
+
+  .thread-list > li {
+    border-block-end: 1px solid var(--epoch-line);
+  }
+
+  .thread-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      'dot name count'
+      '. text text';
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+    padding-block: var(--space-3);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .thread-row:hover .thread-row__name {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .thread-row:focus-visible {
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  .thread-row__dot {
+    grid-area: dot;
+    align-self: center;
+    width: var(--size-dot-lg);
+    height: var(--size-dot-lg);
+    border-radius: 50%;
+    background: var(--thread-color);
+  }
+
+  .thread-row__name {
+    grid-area: name;
+    font-weight: 700;
+  }
+
+  .thread-row__count {
+    grid-area: count;
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    white-space: nowrap;
+  }
+
+  .thread-row__text {
+    grid-area: text;
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  /* A wide screen: the line about the thread stands beside the name instead of under it. */
+  @media (min-width: 48rem) {
+    .thread-row {
+      grid-template-columns: auto minmax(var(--thread-name-min), var(--thread-name-max)) var(--thread-count-width) minmax(0, 1fr);
+      grid-template-areas: 'dot name count text';
+      gap: var(--space-3);
+    }
   }
 </style>

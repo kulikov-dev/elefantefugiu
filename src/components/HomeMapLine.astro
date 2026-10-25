@@ -18,7 +18,7 @@ const counts = countByMode(events.map(ageInfoOf));
   <span class="home-map-line__count">
     {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.places', v.value)}</span>)}
   </span>
-  <a href={pagePath(lang, 'map')}>{t(lang, 'home.open_map')}<span aria-hidden="true"> →</span></a>
+  <a href={pagePath(lang, 'map')}>{t(lang, 'home.open_map')}<span aria-hidden="true">&nbsp;→</span></a>
 </p>
 
 <style>

@@ -131,7 +131,12 @@
   --size-mascot-hero: clamp(8rem, 42vw, 20rem);
   /* The small map on the home page. */
   /* One epoch on the time strip of the home page. */
-  --timeline-item-min: 7rem;
+  --timeline-item-min: 5.5rem;
+  --timeline-ready-min: 11rem;
+  /* The rows of the threads on the home page (a wide screen): the name column and the column of the number of stories. */
+  --thread-name-min: 8rem;
+  --thread-name-max: 14rem;
+  --thread-count-width: 7rem;
   /* A strip that scrolls sideways fades out at the edge where there is more (src/scripts/scroll-fade.ts); the mask only needs an opaque colour. */
   --scroll-fade-size: 2.5rem;
   --scroll-fade-opaque: #000;

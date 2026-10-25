@@ -253,7 +253,8 @@ const homeThreads = [...new Set(world.published.flatMap((c) => c.threads))];
       links: [...document.querySelectorAll('.hero a.hero__link')].map((a) => a.getAttribute('href')),
       showcase: document.querySelectorAll('[data-showcase] .showcase > li').length,
       continueBand: vis(document.querySelector('[data-continue]')),
-      tiles: [...document.querySelectorAll('#epocas .tile--link')].map((t) => t.querySelector('a').getAttribute('href')),
+      tiles: [...document.querySelectorAll('#epocas .timeline__item--ready')].map((t) => t.querySelector('a').getAttribute('href')),
+      bigTiles: document.querySelectorAll('#epocas .tile').length,
       timeline: [...document.querySelectorAll('#epocas .timeline__item')].map((t) => ({ link: t.querySelector('a')?.getAttribute('href') ?? null, soon: t.classList.contains('timeline__item--soon'), text: t.textContent.replace(/\s+/g, ' ').trim() })),
       threads: [...document.querySelectorAll('section[aria-labelledby="threads-title"] a')].map((a) => a.getAttribute('href')),
       overflow: document.scrollingElement.scrollWidth - innerWidth,
@@ -263,7 +264,7 @@ const homeThreads = [...new Set(world.published.flatMap((c) => c.threads))];
   ok('home no JS: "Surprise me" and "Open the map" are links', s.links.join() === '/pt/surpreende-me/,/pt/mapa/', s.links.join());
   ok('home no JS: the "Where to start" cards are the featured ones from the data', s.showcase === featured.length, `${s.showcase} of ${featured.length}`);
   ok('home no JS: the "left off" band is not shown', s.continueBand === false);
-  ok('home no JS: one tile per ready epoch, each a link', JSON.stringify(s.tiles) === JSON.stringify(world.readyEpochs.map((m) => epochPath(m))), s.tiles.join());
+  ok('home no JS: no big epoch tiles; every ready epoch is a link on the time strip', s.bigTiles === 0 && JSON.stringify(s.tiles) === JSON.stringify(world.readyEpochs.map((m) => epochPath(m))), s.tiles.join());
   ok('home no JS: the timeline lists every epoch; the ready ones are links, the rest say "soon" and have no link', s.timeline.length === epochs.length && s.timeline.filter((t) => t.link).length === world.readyEpochs.length && s.timeline.filter((t) => t.soon && !t.link && t.text.includes(ui('ui.soon'))).length === epochs.length - world.readyEpochs.length);
   ok('home no JS: thread buttons are links to the threads that have stories, no horizontal overflow', s.threads.length === homeThreads.length && s.threads.every((h) => /^\/pt\/fio\/[^/]+\/$/.test(h)) && s.overflow <= 0, `threads=${s.threads.length}/${homeThreads.length} overflow=${s.overflow}`);
   await page.close();
@@ -273,7 +274,7 @@ const homeThreads = [...new Set(world.published.flatMap((c) => c.threads))];
 {
   const page = await newPage();
   await page.goto(HOME, { waitUntil: 'networkidle0' });
-  const tiles = await page.$$eval('#epocas .tile--link', (ts) => ts.map((t) => ({ href: t.querySelector('a').getAttribute('href'), n: Number(t.querySelector('.tile__count').textContent.match(/\d+/)[0]) })));
+  const tiles = await page.$$eval('#epocas .timeline__item--ready', (ts) => ts.map((t) => ({ href: t.querySelector('a').getAttribute('href'), n: Number(t.querySelector('.timeline__count').textContent.match(/\d+/)[0]) })));
   let match = true;
   for (const tile of tiles) {
     const p = await newPage({ js: false });
@@ -282,22 +283,22 @@ const homeThreads = [...new Set(world.published.flatMap((c) => c.threads))];
     if (cards !== tile.n) match = false;
     await p.close();
   }
-  ok('tile counts equal the number of cards on the epoch pages and in the data', tiles.length === world.readyEpochs.length && match && tiles.every((t, i) => t.n === world.inEpoch(world.readyEpochs[i].id).length), JSON.stringify(tiles.map((t) => t.n)));
+  ok('time strip counts equal the number of cards on the epoch pages and in the data', tiles.length === world.readyEpochs.length && match && tiles.every((t, i) => t.n === world.inEpoch(world.readyEpochs[i].id).length), JSON.stringify(tiles.map((t) => t.n)));
   await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('.hero a.button')]);
   ok('"Read" opens the story the name comes from', new URL(page.url()).pathname === `/pt/historia/${startCard.slug.pt}/`);
   await page.goto(HOME, { waitUntil: 'networkidle0' });
-  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('#epocas .tile--link a')]);
-  ok('a tile opens its epoch', new URL(page.url()).pathname === epochPath(world.readyEpochs[0]));
+  await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('#epocas .timeline__item--ready a')]);
+  ok('an epoch of the time strip opens its page', new URL(page.url()).pathname === epochPath(world.readyEpochs[0]));
   await page.goto(HOME, { waitUntil: 'networkidle0' });
   await Promise.all([page.waitForNavigation({ waitUntil: 'load' }), page.click('section[aria-labelledby="threads-title"] a')]);
   ok('a thread button opens its thread page', /^\/pt\/fio\/[^/]+\/$/.test(new URL(page.url()).pathname));
   await page.goto(HOME, { waitUntil: 'networkidle0' });
-  await page.focus('#epocas .tile--link a');
+  await page.focus('#epocas .timeline__item--ready a');
   const tileFocus = await page.evaluate(() => {
-    const tile = document.querySelector('#epocas .tile--link');
-    return getComputedStyle(tile).outlineStyle !== 'none' && parseFloat(getComputedStyle(tile).outlineWidth) >= 2;
+    const a = document.querySelector('#epocas .timeline__item--ready a');
+    return getComputedStyle(a).outlineStyle !== 'none' && parseFloat(getComputedStyle(a).outlineWidth) >= 2;
   });
-  ok('tile shows a visible focus outline when its link is focused', tileFocus);
+  ok('the epoch link shows a visible focus outline when focused', tileFocus);
   await page.close();
 }
 
