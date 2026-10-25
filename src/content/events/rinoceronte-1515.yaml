@@ -180,7 +180,8 @@ detail_image:
   license: "CC0"
   license_url: https://creativecommons.org/publicdomain/zero/1.0/
   source_url: "https://commons.wikimedia.org/wiki/File:Albrecht_D%C3%BCrer,_The_Rhinoceros,_1515,_NGA_47903.jpg"
-related: []
+related:
+  - hanno-1514
 status: ready
 placeholder: false
 ru_ready: true

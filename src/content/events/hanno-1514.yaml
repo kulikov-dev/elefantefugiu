@@ -1,0 +1,132 @@
+id: hanno-1514
+slug:
+  pt: o-elefante-que-foi-ver-o-papa
+  en: the-elephant-who-went-to-see-the-pope
+  ru: slon-kotoryj-poekhal-k-pape
+title:
+  pt: O elefante que foi ver o papa
+  en: The elephant who went to see the Pope
+  ru: Слон, который поехал к папе
+epoch: avis-e-descobrimentos
+level: story
+year: 1514
+place:
+  name: Roma, Vaticano
+  short:
+    pt: Roma
+    en: Rome
+    ru: Рим
+  lat: 41.9022
+  lon: 12.4539
+bridge:
+  name: Teatro Nacional D. Maria II (Praça Dom Pedro IV, Rossio)
+  title:
+    pt: Teatro Nacional D. Maria II (Rossio)
+    en: Dona Maria II National Theatre (Rossio)
+    ru: Национальный театр Дона Марии II (Россио)
+  address: Praça Dom Pedro IV, Lisboa
+  lat: 38.7148
+  lon: -9.1398
+  url: https://www.tndm.pt/
+  note:
+    pt: Aqui, no sítio do Paço dos Estaus, D. Manuel I guardava os elefantes antes de os enviar.
+    en: Here, on the site of the Estaus Palace, Manuel I kept his elephants before sending them abroad.
+    ru: Здесь, на месте дворца Эштауш, Мануэл I держал слонов перед отправкой в Рим.
+threads:
+  - natureza
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Ofereceram um elefante ao papa, e o elefante ajoelhou-se diante dele.
+  en: The Pope was given an elephant, and the elephant knelt before him.
+  ru: Папе римскому подарили слона, и слон встал перед ним на колени.
+story:
+  pt: "Em 1514, D. Manuel I enviou a Roma uma embaixada com presentes para o novo papa, Leão X. O
+    presente principal era um jovem elefante branco da Índia, com cerca de quatro anos. Na receção,
+    o elefante ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no
+    Vaticano. O elefante chamava-se Hanno: desfilava nas procissões, dedicavam-lhe versos e toda a
+    Roma corria para o ver."
+  en: "In 1514 King Manuel I sent an embassy to Rome with gifts for the new pope, Leo X. The main gift
+    was a young white elephant from India, about four years old. At the audience the elephant knelt
+    before the Pope and trumpeted. Leo X was delighted and gave him a home in the Vatican. The
+    elephant was called Hanno: he marched in festive processions, poets wrote verses about him, and
+    all Rome came running to see him."
+  ru: "В 1514 году король Мануэл I отправил в Рим посольство с подарками для нового папы Льва X.
+    Главным подарком был молодой белый слон из Индии, которому было около четырёх лет. На приёме
+    слон преклонил колени перед папой и затрубил. Лев X был в восторге и поселил слона в Ватикане.
+    Слона звали Ганнон: его водили в праздничных шествиях, ему посвящали стихи, а посмотреть на него
+    сбегался весь Рим."
+more:
+  pt: >-
+    A embaixada era chefiada pelo navegador Tristão da Cunha. O elefante entrou em Roma em março de
+    1514. A revista Smithsonian reconta um episódio da receção: o elefante encheu a tromba de água e
+    molhou todos os presentes, incluindo o papa, a quem a cena agradou muito.
+
+
+    Hanno viveu dois anos em Roma. No verão de 1516 adoeceu, os médicos deram-lhe um purgante com
+    ouro e, a 8 de junho, morreu. O papa estava junto dele. Leão X escreveu ele próprio o epitáfio,
+    e Rafael pintou o elefante numa parede em sua memória; o fresco não sobreviveu. Hanno foi
+    sepultado no Pátio do Belvedere, no Vaticano.
+
+
+    D. Manuel quis agradar ao papa mais uma vez e mandou-lhe o mesmo rinoceronte que, em 1515,
+    assustara um elefante em Lisboa. O rinoceronte nunca chegou a Roma: o navio naufragou ao largo
+    de Itália.
+  en: >-
+    The embassy was led by the navigator Tristão da Cunha. The elephant entered Rome in March 1514.
+    Smithsonian Magazine retells an episode from the audience: the elephant filled his trunk with
+    water and sprayed everyone present, the Pope included, who found the whole show delightful.
+
+
+    Hanno lived in Rome for two years. In the summer of 1516 he fell ill, his doctors gave him a
+    purgative laced with gold, and on 8 June he died. The Pope was at his side. Leo X wrote the
+    epitaph himself, and Raphael painted the elephant on a wall in his memory; the fresco has not
+    survived. Hanno was buried in the Belvedere Courtyard in the Vatican.
+
+
+    Manuel wanted to please the Pope once more and sent him the very rhinoceros that had frightened
+    an elephant in Lisbon in 1515. The rhino never reached Rome: the ship sank off the coast of
+    Italy.
+  ru: >-
+    Посольство вёл мореплаватель Триштан да Кунья. В Рим слон вошёл в марте 1514 года. Журнал
+    Smithsonian пересказывает такой эпизод приёма: слон набрал воды в хобот и окатил всех
+    собравшихся, включая папу, а тому всё представление очень понравилось.
+
+
+    Ганнон прожил в Риме два года. Летом 1516 года он заболел, врачи дали ему слабительное с
+    золотом, и 8 июня он умер. Папа был рядом. Лев X сам сочинил эпитафию, а Рафаэль нарисовал слона
+    на стене в память о нём; фреска не сохранилась. Ганнона похоронили во дворе Бельведере в
+    Ватикане.
+
+
+    Мануэл хотел порадовать папу ещё раз и отправил ему того самого носорога, который в 1515 году
+    напугал слона в Лиссабоне. До Рима носорог не доплыл: корабль затонул у берегов Италии.
+sources:
+  - title: "Smithsonian Magazine: «There’s an Elephant Buried Beneath the Vatican»"
+    url: https://www.smithsonianmag.com/smart-news/theres-elephant-buried-beneath-vatican-180957013/
+    type: press
+    accessed: 2026-10-25
+  - title: Silvio A. Bedini, «The Pope’s Elephant», Carcanet, 1997
+    note:
+      pt: livro, sem ligação
+      en: a book, no link
+      ru: книга, без ссылки
+    url: ""
+    type: book
+    accessed: 2026-10-25
+  - title: "Wikipedia: Dürer’s Rhinoceros"
+    note:
+      pt: só para o local onde ficavam os elefantes (Paço dos Estaus)
+      en: only for where the elephants were kept (Estaus Palace)
+      ru: только для места, где держали слонов (дворец Эштауш)
+    url: https://en.wikipedia.org/wiki/D%C3%BCrer%27s_Rhinoceros
+    type: reference
+    accessed: 2026-10-25
+related:
+  - rinoceronte-1515
+status: ready
+placeholder: false
+ru_ready: true
