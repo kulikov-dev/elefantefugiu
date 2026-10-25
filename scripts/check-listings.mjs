@@ -221,13 +221,13 @@ for (const lang of ['pt', 'en']) {
     const viewLabels = { pt: ['Cronologia', 'Cartões'], en: ['Timeline', 'Cards'] }[lang];
     for (const label of viewLabels) if (!new RegExp(`data-view="(?:timeline|grid)"[^>]*>${label}<`).test(html)) fail(`view switch label "${label}" is missing`);
 
-    // epoch switcher: the MVP epochs as tabs, then the others under one "more eras soon" disclosure; every epoch once;
+    // epoch switcher: the epochs that have stories as tabs, then the others (an MVP epoch without stories too) under one "more eras soon" disclosure; every epoch once;
     // the current one marked, epochs with a page linked, the rest plain text marked --soon
     const switcher = html.match(/<nav class="epoch-switch"[\s\S]*?<\/nav>/)?.[0] ?? '';
     const switchItems = [...switcher.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)].map((m) => m[1]);
     if (switchItems.length !== epochs.length) fail(`epoch switcher has ${switchItems.length} items, expected ${epochs.length}`);
     if (!/<details class="epoch-switch__more"/.test(switcher)) fail('epoch switcher: the "more eras soon" disclosure is missing');
-    [...epochs.filter((e) => e.mvp), ...epochs.filter((e) => !e.mvp)].forEach((other, i) => {
+    [...epochs.filter((e) => hasPage(e)), ...epochs.filter((e) => !hasPage(e))].forEach((other, i) => {
       const item = switchItems[i] ?? '';
       if (!item.includes(other.name[lang])) fail(`epoch switcher item ${i + 1} is not \"${other.name[lang]}\"`);
       const isLink = /<a\b/.test(item);
