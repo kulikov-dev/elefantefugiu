@@ -5,6 +5,7 @@
 // --color-border is a divider, not the edge of a control, so it is listed for information only (no threshold);
 // controls use --color-border-strong.
 import { readFileSync } from 'node:fs';
+import { parse } from 'yaml';
 import { withBlock } from './sync-token-fallbacks.mjs';
 
 const source = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
@@ -211,6 +212,50 @@ const rows = PAIRS.map(([id, fg, bg, need]) => {
   });
   return { id, need, cells };
 });
+
+// ---- thread colours (src/content/threads.yaml: `color` for the light theme, `color_dark`, lighter, for the dark one) ----
+// The dot of a thread is a graphic beside the name of the thread: 3:1 against the surfaces it lies on in its theme, and the five
+// colours of a theme far enough from each other (CIE76 colour difference) that two neighbours are never taken for one.
+const THREAD_GRAPHIC = 3;
+const THREAD_APART = 20;
+const threadData = parse(readFileSync(new URL('../src/content/threads.yaml', import.meta.url), 'utf8'));
+const baseProps = propsFor(scopes[0]);
+for (const { id, color, color_dark: colorDark } of threadData) {
+  for (const [theme, value] of [['light', color], ['dark', colorDark]]) {
+    for (const ground of ['surface', 'bg']) {
+      const r = ratio(parseColor(value), colorOf(ground, baseProps, theme));
+      if (r < THREAD_GRAPHIC) {
+        failures += 1;
+        console.error(`FAIL  thread "${id}" ${value} on ${ground} [${theme}]: ${r.toFixed(2)}:1, needs ${THREAD_GRAPHIC}:1`);
+      }
+    }
+  }
+}
+const toLab = ({ r, g, b }) => {
+  const [R, G, B] = [r, g, b].map(lin);
+  const f = (t) => (t > 0.008856 ? Math.cbrt(t) : 7.787 * t + 16 / 116);
+  const [x, y, z] = [(0.4124 * R + 0.3576 * G + 0.1805 * B) / 0.95047, 0.2126 * R + 0.7152 * G + 0.0722 * B, (0.0193 * R + 0.1192 * G + 0.9505 * B) / 1.08883];
+  return [116 * f(y) - 16, 500 * (f(x) - f(y)), 200 * (f(y) - f(z))];
+};
+let closest = Infinity;
+for (const key of ['color', 'color_dark']) {
+  for (let i = 0; i < threadData.length; i++) {
+    for (let j = i + 1; j < threadData.length; j++) {
+      const a = toLab(parseColor(threadData[i][key]));
+      const b = toLab(parseColor(threadData[j][key]));
+      const d = Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+      closest = Math.min(closest, d);
+      if (d < THREAD_APART) {
+        failures += 1;
+        console.error(`FAIL  threads "${threadData[i].id}" and "${threadData[j].id}" look alike (${key}): difference ${d.toFixed(1)}, needs ${THREAD_APART}`);
+      }
+    }
+  }
+}
+console.log(`
+Thread colours, light: ${threadData.map((t) => `${t.id} ${t.color}`).join(', ')}.
+Thread colours, dark: ${threadData.map((t) => `${t.id} ${t.color_dark}`).join(', ')}.
+The closest two of a theme differ by ${closest.toFixed(1)} (needs ${THREAD_APART}).`);
 
 // The two theme-color metas must be the page background of each theme.
 const names = (c) => `${c.scope.id.split('-')[0].slice(0, 6)} ${c.theme[0].toUpperCase()}`;

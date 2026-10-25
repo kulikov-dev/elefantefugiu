@@ -13,6 +13,7 @@
     en: "How a small country at the edge of Europe took to the ocean: shipyards, maps, shipwrecks and people who sailed away and came back."
     ru: "Как маленькая страна на краю Европы вышла в океан: верфи, карты, кораблекрушения и люди, которые уплывали и возвращались."
   color: "#1f6f8b"
+  color_dark: "#3a8aa8"
   icon: wave
   mvp: true
   placeholder: false
@@ -30,6 +31,7 @@
     en: "History on a plate: where Porto-style tripe and port wine come from, and why food and wine sometimes ended in a riot."
     ru: "История на тарелке: откуда взялись потроха по-портовски и портвейн и почему из-за еды и вина иногда начинались бунты."
   color: "#8a3b5c"
+  color_dark: "#b8567c"
   icon: cup
   mvp: true
   placeholder: false
@@ -47,6 +49,7 @@
     en: "Kings, plots, uprisings and revolutions: how power was seized in Portugal, and how it was lost."
     ru: "Короли, заговоры, восстания и революции: как в Португалии брали власть и как её теряли."
   color: "#8a2b2b"
+  color_dark: "#c85050"
   icon: crown
   mvp: true
   placeholder: false
@@ -63,7 +66,8 @@
     pt: "Não reis nem generais, mas artesãos, mercadores, marinheiros e gente da cidade, cujas histórias chegaram às crónicas quase por acaso."
     en: "Not kings or generals, but craftsmen, merchants, sailors and townspeople whose stories made it into the chronicles almost by chance."
     ru: "Не короли и полководцы, а мастера, торговцы, моряки и горожане, чьи истории попали в хроники почти случайно."
-  color: "#3d6b3a"
+  color: "#a8730f"
+  color_dark: "#c8921f"
   icon: people
   mvp: true
   placeholder: false
@@ -81,6 +85,7 @@
     en: "Earthquakes, elephants and rhinos: how nature changed Portugal's history, and how people marvelled at it."
     ru: "Землетрясения, слоны и носороги: как природа меняла историю Португалии и как люди ей удивлялись."
   color: "#4f7a2a"
+  color_dark: "#6c9a43"
   icon: leaf
   mvp: true
   placeholder: false

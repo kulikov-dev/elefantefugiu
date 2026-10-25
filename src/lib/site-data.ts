@@ -27,7 +27,11 @@ export async function loadSite(): Promise<SiteData> {
   // `intro` is kept as written: localize() would fill a missing Russian text with the English one, and an introduction in another
   // language than the page is worse than none.
   const epochs = (await getCollection('epochs')).map((e) => ({ ...(localize({ ...e.data, intro: undefined }, true) as EpochData), intro: e.data.intro })).sort((a, b) => a.order - b.order);
-  const threads = (await getCollection('threads')).map((e) => localize(e.data, true) as ThreadData);
+  // The colour of a thread is a pair: the dot is lighter in the dark theme (light-dark() follows the theme of the page).
+  const threads = (await getCollection('threads')).map((e) => {
+    const thread = localize(e.data, true) as ThreadData;
+    return { ...thread, color: `light-dark(${e.data.color}, ${e.data.color_dark})` };
+  });
   const visible = visibleThreads(threads, events);
   const featuredIds = (await getCollection('featured')).sort((a, b) => (a.data.position ?? 0) - (b.data.position ?? 0)).map((e) => e.data.id);
   return { events, epochs, threads, featured: pickFeatured(featuredIds, events), visibleThreads: visible, visibleThreadIds: new Set(visible.map((t) => t.id)) };

@@ -227,7 +227,10 @@ export const threadSchema = z.strictObject({
   slug: slugs,
   name: text,
   description: text,
+  /** The colour of the dot in the light theme. */
   color: z.string(),
+  /** The same colour, lighter, for the dark theme (3:1 against the dark page). */
+  color_dark: z.string(),
   icon: z.string(),
   mvp: z.boolean(),
   placeholder: z.boolean().default(false),
