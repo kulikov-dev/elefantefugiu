@@ -125,6 +125,40 @@ sources:
     url: https://en.wikipedia.org/wiki/D%C3%BCrer%27s_Rhinoceros
     type: reference
     accessed: 2026-10-25
+image:
+  file: hanno-1514.webp
+  alt:
+    pt: Um jovem elefante ajoelhado diante do papa Leão X; os cardeais mostram espanto, e ao lado estão
+      os embaixadores portugueses e o tratador.
+    en: A young elephant kneels before Pope Leo X as the cardinals look astonished; Portuguese
+      ambassadors and the mahout stand nearby.
+    ru: Молодой слон стоит на коленях перед папой Львом X, кардиналы удивляются, рядом португальские
+      послы и погонщик.
+  caption:
+    pt: O elefante Hanno diante do papa Leão X, 1514. Ilustração criada por IA (Gemini), em estilo azulejo.
+    en: The elephant Hanno before Pope Leo X, 1514. AI-generated illustration (Gemini) in the azulejo style.
+    ru: Слон Ганнон перед папой Львом X, 1514 год. Иллюстрация создана ИИ (Gemini) в стиле азулежу.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+detail_image:
+  file: hanno-1514-detalhe.webp
+  alt:
+    pt: "Desenho a tinta: um elefante com um tratador às costas e um servo junto à tromba."
+    en: "Pen drawing: an elephant with a rider on its back and an attendant by its trunk."
+    ru: "Рисунок пером: слон с погонщиком на спине и слугой у хобота."
+  caption:
+    pt: O elefante Hanno. Desenho da escola de Rafael, 1516. Kupferstichkabinett, Museus Estatais de
+      Berlim.
+    en: The elephant Hanno. Drawing from the school of Raphael, 1516. Kupferstichkabinett, Berlin State
+      Museums.
+    ru: Слон Ганнон. Рисунок школы Рафаэля, 1516 год. Кабинет гравюр и рисунков, Государственные музеи
+      Берлина.
+  author: Raffaello Sanzio (school of)
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Raffaello_Sanzio_%28school_of%29_-_The_Elephant_Hanno_-_Google_Art_Project.jpg
+  ai: false
+  focus: 40% 25%
 related:
   - rinoceronte-1515
 status: ready
