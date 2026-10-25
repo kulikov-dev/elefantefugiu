@@ -1,0 +1,135 @@
+id: morcegos-mafra-1771
+slug:
+  pt: os-guardas-noturnos-da-biblioteca
+  en: the-librarys-night-watch
+  ru: nochnye-storozha-biblioteki
+title:
+  pt: Os guardas noturnos da biblioteca
+  en: The library's night watch
+  ru: Ночные сторожа библиотеки
+epoch: pombal-e-terramoto
+level: story
+year: 1771
+year_label:
+  pt: século XVIII
+  en: 18th century
+  ru: XVIII век
+place:
+  name: Mafra, Palácio Nacional
+  short:
+    pt: Mafra
+    en: Mafra
+    ru: Мафра
+  lat: 38.9369
+  lon: -9.3258
+bridge:
+  name: Palácio Nacional de Mafra, biblioteca
+  title:
+    pt: Palácio Nacional de Mafra (biblioteca)
+    en: Mafra National Palace (library)
+    ru: Национальный дворец Мафры (библиотека)
+  address: Terreiro D. João V, Mafra
+  lat: 38.9369
+  lon: -9.3258
+  url: https://www.visitportugal.com/en/node/138329
+  note:
+    pt: A biblioteca pode ver-se na visita ao palácio; os morcegos evitam as pessoas.
+    en: The library can be seen on a visit to the palace; the bats avoid people.
+    ru: Библиотеку можно увидеть при посещении дворца; летучие мыши избегают людей.
+threads:
+  - natureza
+importance: 2
+label: debated
+min_age: all
+sensitive: false
+hook:
+  pt: Em Mafra, os livros antigos são guardados à noite por morcegos.
+  en: In Mafra, old books are guarded at night by bats.
+  ru: Старые книги в Мафре по ночам охраняют летучие мыши.
+story:
+  pt: "No Palácio-Convento de Mafra, a noroeste de Lisboa, há uma biblioteca enorme: cerca de 36 mil
+    volumes em estantes de madeira até ao teto. De dia está silenciosa e vazia. Mas à noite, de trás
+    das estantes, saem pequenos morcegos que caçam os insetos que roem o papel e as encadernações de
+    couro. Diz-se que sempre foi assim, mas ninguém sabe quando os morcegos se instalaram na
+    biblioteca."
+  en: "The palace-convent of Mafra, northwest of Lisbon, has a huge library: about 36,000 volumes on
+    wooden shelves that reach the ceiling. By day it is quiet and empty. But at night small bats fly
+    out from behind the shelves and hunt the insects that eat paper and leather bindings. People say
+    it has always been this way, but nobody knows when the bats moved into the library."
+  ru: "Во дворце-монастыре Мафры, к северо-западу от Лиссабона, есть огромная библиотека: около 36
+    тысяч томов на деревянных полках до самого потолка. Днём здесь тихо и пусто. А ночью из-за полок
+    вылетают маленькие летучие мыши и охотятся на насекомых, которые точат бумагу и кожаные
+    переплёты. Говорят, так было всегда, но когда мыши поселились в библиотеке, не знает никто."
+more:
+  pt: >-
+    O palácio foi concebido por D. João V em 1711. A biblioteca foi decorada pelo arquiteto Manuel
+    Caetano de Sousa (1742–1802), já na segunda metade do século. Os livros vão do século XIV ao
+    XIX: primeiras edições, bíblias antigas, atlas.
+
+
+    Também há morcegos noutra biblioteca famosa, a Joanina, em Coimbra. Lá, à noite, cobrem as mesas
+    com couro para que os morcegos não as sujem.
+
+
+    A etiqueta «discutível» está aqui porque os morcegos existem mesmo, mas desde quando estão na
+    biblioteca e quanto ajudam os livros, ninguém mediu.
+
+
+    O Palácio de Mafra é Património Mundial da UNESCO desde 2019.
+  en: >-
+    The palace was conceived by King John V in 1711. The library was fitted out by the architect
+    Manuel Caetano de Sousa (1742–1802), in the second half of the century. The books date from the
+    14th to the 19th century: first editions, old Bibles, atlases.
+
+
+    Bats also live in another famous library, the Joanina in Coimbra. There, the tables are covered
+    with leather at night so the bats don't soil them.
+
+
+    The "disputed" label is here because the bats are real, but how long they have been in the
+    library and how much they actually help the books, nobody has measured.
+
+
+    The Palace of Mafra has been a UNESCO World Heritage Site since 2019.
+  ru: >-
+    Дворец задумал король Жуан V в 1711 году. Библиотеку отделал архитектор Мануэл Каэтану де Соуза
+    (1742–1802), то есть уже во второй половине века. Книги здесь с XIV по XIX век: первые издания,
+    старинные Библии, атласы.
+
+
+    Летучие мыши живут и в другой знаменитой библиотеке, Жуанине в Коимбре. Там на ночь столы
+    накрывают кожей, чтобы мыши их не запачкали.
+
+
+    Метка «спорно» стоит потому, что мыши в библиотеке есть, а вот с каких пор и сколько от них
+    пользы книгам, никто не измерял.
+
+
+    Дворец Мафры с 2019 года в списке всемирного наследия ЮНЕСКО.
+sources:
+  - title: "UNESCO World Heritage Centre: «Royal Building of Mafra – Palace, Basilica, Convent, Cerco
+      Garden and Hunting Park (Tapada)»"
+    url: https://whc.unesco.org/en/list/1573
+    type: institutional
+    accessed: 2026-10-25
+  - title: "SIPA (Património Cultural): «Baixa Pombalina / Lisboa Pombalina / Baixa de Lisboa»"
+    note:
+      pt: datas do arquiteto Manuel Caetano de Sousa (1742–1802)
+      en: dates of the architect Manuel Caetano de Sousa (1742–1802)
+      ru: даты жизни архитектора Мануэла Каэтану де Соузы (1742–1802)
+    url: http://www.monumentos.gov.pt/site/app_pagesuser/sipa.aspx?id=5966
+    type: institutional
+    accessed: 2026-10-25
+  - title: "Amusing Planet: «The Bat Libraries of Portugal»"
+    url: https://www.amusingplanet.com/2022/04/the-bat-libraries-of-portugal.html
+    type: press
+    accessed: 2026-10-25
+  - title: "Postal: «A Biblioteca do Palácio Nacional de Mafra, uma das bibliotecas mais importantes da
+      Europa»"
+    url: https://postal.pt/edicaopapel/a-biblioteca-do-palacio-nacional-de-mafra-uma-das-bibliotecas-mais-importantes-da-europa/
+    type: press
+    accessed: 2026-10-25
+related: []
+status: ready
+placeholder: false
+ru_ready: true
