@@ -311,3 +311,18 @@
 [hidden] {
   display: none !important;
 }
+
+/* A strip that scrolls sideways: a fade at the edge with more behind it (the script sets data-fade-start / data-fade-end). */
+[data-scroll-fade] {
+  --fade-start: 0px;
+  --fade-end: 0px;
+  mask-image: linear-gradient(to right, transparent 0, var(--scroll-fade-opaque) var(--fade-start), var(--scroll-fade-opaque) calc(100% - var(--fade-end)), transparent 100%);
+}
+
+[data-scroll-fade][data-fade-start] {
+  --fade-start: var(--scroll-fade-size);
+}
+
+[data-scroll-fade][data-fade-end] {
+  --fade-end: var(--scroll-fade-size);
+}

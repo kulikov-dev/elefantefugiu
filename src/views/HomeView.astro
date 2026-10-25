@@ -103,7 +103,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
         }
       </ol>
       <!-- All the epochs in order: the ready ones stand out and lead to their pages, the others are pale with "soon". -->
-      <div class="timeline-wrap">
+      <div class="timeline-wrap" data-scroll-fade>
         <ol class="timeline" aria-label={t(lang, 'home.timeline_label')}>
           {
             tiles.map(({ epoch, available }) =>

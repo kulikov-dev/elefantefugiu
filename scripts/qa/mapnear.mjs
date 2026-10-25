@@ -175,12 +175,21 @@ if (want('scale')) {
     return { n: items.length, ready: items.filter((li) => li.querySelector('button')).length, soon: items.filter((li) => !li.querySelector('button')).length, widths: widths.map(Math.round), under, old: document.querySelectorAll('.map-filters button[data-epoca]').length };
   });
   ok('scale: all nine epochs in order under the map, two ready (buttons) and seven pale (not buttons)', s.n === 9 && s.ready === 2 && s.soon === 7 && s.under, JSON.stringify(s));
-  ok('scale: the long epochs are wider than the short ones (width follows the years beyond a minimum)', s.widths[0] > s.widths[8] && s.widths[1] > s.widths[5], s.widths.join(' '));
+  ok('scale: every epoch has a cell of the same width', new Set(s.widths).size === 1, s.widths.join(' '));
+  const fade = await page.evaluate(() => {
+    const strip = document.querySelector('.epoch-scale');
+    const before = { start: strip.hasAttribute('data-fade-start'), end: strip.hasAttribute('data-fade-end') };
+    strip.scrollLeft = strip.scrollWidth;
+    return new Promise((r) => setTimeout(() => r({ before, after: { start: strip.hasAttribute('data-fade-start'), end: strip.hasAttribute('data-fade-end') }, mask: getComputedStyle(strip).maskImage !== 'none' }), 200));
+  });
+  ok('scale: a fade at the right edge while there is more to scroll, and at the left once scrolled to the end', fade.mask && fade.before.end && !fade.before.start && fade.after.start && !fade.after.end, JSON.stringify(fade));
+  const words = await page.evaluate(() => [...document.querySelectorAll('.epoch-scale__name')].filter((n) => { const range = document.createRange(); range.selectNodeContents(n); return n.scrollWidth > n.clientWidth + 1; }).length);
+  ok('scale: no name is cut or broken inside a word (the names wrap at spaces)', words === 0 && (await page.evaluate(() => getComputedStyle(document.querySelector('.epoch-scale__name')).hyphens)) === 'manual');
   ok('scale: the old row of epoch buttons above the map is gone', s.old === 0);
   await page.click('.epoch-scale button[data-epoca="avis-e-descobrimentos"]');
   await wait(800);
   const c = await page.evaluate(() => ({ pressed: document.querySelector('.epoch-scale button[data-epoca="avis-e-descobrimentos"]').getAttribute('aria-pressed'), all: document.querySelector('.epoch-scale button[data-epoca=""]').getAttribute('aria-pressed'), count: document.querySelector('[data-list-count]').textContent, url: location.search }));
-  ok('scale: pressing an epoch filters the map and the list, the address says so', c.pressed === 'true' && c.all === 'false' && c.count === '5' && /epoca=avis/.test(c.url), JSON.stringify(c));
+  ok('scale: pressing an epoch filters the map and the list, the address says so', c.pressed === 'true' && c.all === 'false' && c.count === '7' && /epoca=avis/.test(c.url), JSON.stringify(c));
   await page.close();
 }
 

@@ -1,6 +1,6 @@
 ---
-// The epoch filter of the map page as a scale of time under the map: all the epochs in order, each as wide as its years
-// (beyond a minimum width, so that a short epoch stays readable and can be pressed), the ready ones are buttons that filter the
+// The epoch filter of the map page as a scale of time under the map: all the epochs in order, each in a cell of the same width
+// (a strip that scrolls sideways and fades at the edge), the ready ones are buttons that filter the
 // map, the others are pale text. A ground for the year slider that may come later (the slider is not built).
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
@@ -15,17 +15,15 @@ interface Props {
 
 const { lang, epochs, readyIds } = Astro.props;
 const sorted = [...epochs].sort((a, b) => a.order - b.order);
-// The length of an epoch in years; an epoch without numbers counts as a short one.
-const span = (e: EpochData) => (e.years ? Math.max(e.years.to - e.years.from, 1) : 50);
 ---
-<nav class="epoch-scale" aria-label={t(lang, 'map.timeline_label')}>
+<nav class="epoch-scale" data-scroll-fade aria-label={t(lang, 'map.timeline_label')}>
   <ol class="epoch-scale__list">
     <li class="epoch-scale__item epoch-scale__item--all">
       <button type="button" class="epoch-scale__button" data-epoca="" aria-pressed="true">{t(lang, 'map.all_epochs')}</button>
     </li>
     {
       sorted.map((epoch) => (
-        <li class="epoch-scale__item" style={`flex-grow:${span(epoch)}`}>
+        <li class="epoch-scale__item">
           {readyIds.has(epoch.id) ? (
             <button type="button" class="epoch-scale__button" data-epoca={epoch.id} aria-pressed="false">
               <span class="epoch-scale__name">{epoch.name[lang]}</span>
@@ -58,11 +56,10 @@ const span = (e: EpochData) => (e.years ? Math.max(e.years.to - e.years.from, 1)
     list-style: none;
   }
 
-  /* Width in proportion to the years (flex-grow is the length of the epoch, the basis is zero), but never narrower than the minimum. */
+  /* Every epoch has a cell of the same width (the names wrap at the spaces; the strip scrolls sideways and fades at the edge). */
   .epoch-scale__item {
     display: flex;
-    flex-basis: 0;
-    min-width: var(--epoch-scale-min);
+    flex: 0 0 var(--epoch-scale-cell);
   }
 
   .epoch-scale__item--all {
@@ -95,8 +92,6 @@ const span = (e: EpochData) => (e.years ? Math.max(e.years.to - e.years.from, 1)
   .epoch-scale__name {
     font-size: var(--text-xs);
     font-weight: 600;
-    hyphens: auto;
-    overflow-wrap: break-word;
   }
 
   .epoch-scale__years {

@@ -132,6 +132,9 @@
   /* The small map on the home page. */
   /* One epoch on the time strip of the home page. */
   --timeline-item-min: 7rem;
+  /* A strip that scrolls sideways fades out at the edge where there is more (src/scripts/scroll-fade.ts); the mask only needs an opaque colour. */
+  --scroll-fade-size: 2.5rem;
+  --scroll-fade-opaque: #000;
   --size-mascot: clamp(9rem, 40vw, 13rem);
   --size-mascot-small: clamp(5rem, 28vw, 7rem);
   --mascot-shift: 1.5rem;
@@ -179,7 +182,7 @@
   /* The samples in the legend under the map. */
   --legend-mark: 1.25rem;
   /* The narrowest an epoch gets on the scale of time under the map. */
-  --epoch-scale-min: 5.5rem;
+  --epoch-scale-cell: 8.5rem;
   --map-marker-border: 2px;
   --map-marker-selected-scale: 1.25;
   --map-hit-area: 0.5rem;
