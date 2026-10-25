@@ -1,0 +1,140 @@
+id: corte-brasil-1807
+slug:
+  pt: a-corte-que-fugiu-para-o-brasil
+  en: the-court-that-sailed-to-brazil
+  ru: dvor-uplyl-v-braziliyu
+title:
+  pt: A corte que fugiu para o Brasil
+  en: The court that sailed to Brazil
+  ru: Двор уплыл в Бразилию
+epoch: pombal-e-terramoto
+level: story
+year: 1807
+place:
+  name: Lisboa, Belém
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.697
+  lon: -9.203
+bridge:
+  name: Cais de Belém
+  title:
+    pt: Cais de Belém
+    en: Belém quay
+    ru: Набережная Белена (Cais de Belém)
+  address: Cais de Belém, Belém, Lisboa
+  lat: 38.697
+  lon: -9.203
+  url: https://www.visitlisboa.com/
+  note:
+    pt: Nesta margem de Belém, em novembro de 1807, a família real subiu para os navios.
+    en: From this shore at Belém, the royal family boarded the ships in November 1807.
+    ru: С этого берега у Белена в ноябре 1807 года королевская семья поднялась на корабли.
+threads:
+  - mar
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A corte partiu para o Brasil e a biblioteca ficou no cais.
+  en: The court sailed to Brazil and left its library on the quay.
+  ru: Двор уплыл в Бразилию, а библиотеку забыли на причале.
+story:
+  pt: "Em novembro de 1807, o exército de Napoleão marchava sobre Lisboa. O príncipe regente D. João
+    não se rendeu nem combateu: decidiu levar toda a corte para o Brasil. Em dois dias, em Belém,
+    embarcaram a rainha, os ministros, os arquivos e as carruagens. Partiram com eles, segundo
+    diferentes estimativas, entre 10 e 15 mil pessoas. Faltava vento, e a frota ficou no rio até 29
+    de novembro. No dia seguinte, o general Junot entrou na cidade."
+  en: "In November 1807 Napoleon's army was marching on Lisbon. Prince Regent John neither surrendered
+    nor fought: he decided to move the entire court to Brazil. In two days at Belém, the queen, the
+    ministers, the archives and the carriages were loaded onto ships. Between 10,000 and 15,000
+    people went with them, depending on the estimate. There was no wind, and the fleet waited on the
+    river until 29 November. The next day General Junot marched into the city."
+  ru: "В ноябре 1807 года на Лиссабон шла армия Наполеона. Принц-регент Жуан не стал ни сдаваться, ни
+    воевать: он решил перевезти в Бразилию весь двор. За два дня в Белене на корабли погрузили
+    королеву, министров, архивы и кареты. Вместе с ними уплыли, по разным оценкам, от 10 до 15 тысяч
+    человек. Ветра не было, и флот простоял на реке до 29 ноября. На следующий день в город вошёл
+    генерал Жюно."
+more:
+  pt: >-
+    No fim de novembro saiu o decreto da mudança da corte para o Rio de Janeiro. O embarque começou
+    no dia 27 e, na pressa, muita coisa ficou em terra. Os caixotes da Real Biblioteca, reunida de
+    novo depois do incêndio de 1755, ficaram esquecidos no porto, ao sol e à chuva. Só seguiram para
+    o Rio em 1810–1811, em três viagens. Hoje esses livros estão na base da Biblioteca Nacional do
+    Brasil.
+
+
+    A rainha D. Maria I estava gravemente doente havia muito tempo. Conta a tradição que, a caminho
+    do cais, gritou ao cocheiro: «Não corram tanto, vão pensar que estamos a fugir!» Não há
+    documentos com esta frase; repetem-na autores posteriores.
+
+
+    A frota seguiu escoltada por navios britânicos. Em janeiro de 1808 chegou a Salvador e, em
+    março, ao Rio. Durante treze anos, o Rio de Janeiro foi a capital do Império Português: o único
+    caso de uma monarquia europeia governada a partir da sua colónia. D. João VI só regressou a
+    Lisboa em 1821.
+  en: >-
+    A decree moving the court to Rio de Janeiro came out at the end of November. Boarding began on
+    the 27th, and in the rush a great deal was left ashore. The crates of the Royal Library, rebuilt
+    after the fire of 1755, were forgotten at the port in the sun and rain. They only reached Rio in
+    1810–1811, in three shipments. Today those books are at the core of the National Library of
+    Brazil.
+
+
+    Queen Maria I had long been seriously ill. According to tradition, on the way to the quay she
+    shouted at the coachman: "Not so fast, they'll think we're running away!" No document records
+    the line; later authors repeat it.
+
+
+    The fleet sailed under British escort. It reached Salvador in January 1808 and Rio in March. For
+    thirteen years Rio de Janeiro was the capital of the Portuguese Empire: the only time a European
+    monarchy was ruled from its own colony. John VI returned to Lisbon only in 1821.
+  ru: >-
+    В конце ноября вышел указ о переезде двора в Рио-де-Жанейро. Посадка началась 27-го, и в спешке
+    многое осталось на берегу. Ящики королевской библиотеки, которую собирали заново после пожара
+    1755 года, забыли в порту под солнцем и дождём. В Рио их перевезли только в 1810–1811 годах,
+    тремя рейсами. Сегодня эти книги в основе Национальной библиотеки Бразилии.
+
+
+    Королева Мария I давно была тяжело больна. По преданию, по дороге к причалу она крикнула кучеру:
+    «Не гоните так, подумают, что мы бежим!» Документов с этой фразой нет, её пересказывают
+    позднейшие авторы.
+
+
+    Флот шёл под охраной британских кораблей. В январе 1808 года он пришёл в Салвадор, в марте в
+    Рио. Тринадцать лет Рио-де-Жанейро был столицей Португальской империи: единственный случай,
+    когда европейская монархия правила из своей колонии. Король Жуан VI вернулся в Лиссабон только в
+    1821 году.
+sources:
+  - title: "Diário de Notícias: «Quando os franceses ficaram dois dias a ver navios»"
+    url: https://www.dn.pt/arquivo/diario-de-noticias/quando-os-franceses-ficaram-dois-dias-a-ver-navios-8953702.html
+    type: press
+    accessed: 2026-10-25
+  - title: "Revista Pesquisa FAPESP: «Journey reading»"
+    note:
+      pt: sobre a biblioteca, a partir do livro de Lilia Schwarcz
+      en: on the library, after the book by Lilia Schwarcz
+      ru: о библиотеке, по книге Лилии Шварц
+    url: https://revistapesquisa.fapesp.br/en/journey-reading/
+    type: press
+    accessed: 2026-10-25
+  - title: Lilia Moritz Schwarcz, «A longa viagem da biblioteca dos reis», Companhia das Letras, 2002
+    url: https://www.companhiadasletras.com.br/livro/9788535902884/a-longa-viagem-da-biblioteca-dos-reis
+    type: book
+    accessed: 2026-10-25
+  - title: Laurentino Gomes, «1808», 2007
+    note:
+      pt: livro, sem ligação; recontada a frase da rainha
+      en: a book, no link; the queen’s line is retold there
+      ru: книга, без ссылки; там пересказана фраза королевы
+    url: ""
+    type: book
+    accessed: 2026-10-25
+related: []
+status: ready
+placeholder: false
+ru_ready: true
