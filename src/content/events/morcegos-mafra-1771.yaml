@@ -129,6 +129,22 @@ sources:
     url: https://postal.pt/edicaopapel/a-biblioteca-do-palacio-nacional-de-mafra-uma-das-bibliotecas-mais-importantes-da-europa/
     type: press
     accessed: 2026-10-25
+image:
+  file: morcegos-mafra-1771.webp
+  alt:
+    pt: Uma longa sala de biblioteca com estantes em dois andares; sob a abóbada voam morcegos e, sobre
+      a mesa, está um livro aberto.
+    en: A long library hall with two tiers of shelves; bats fly under the vault and an open book lies on
+      a table.
+    ru: Длинный зал библиотеки с полками в два яруса, под сводом летают летучие мыши, на столе открытая
+      книга.
+  caption:
+    pt: A biblioteca do Palácio de Mafra de noite. Ilustração criada por IA (Gemini), em estilo azulejo.
+    en: The Mafra Palace library at night. AI-generated illustration (Gemini) in the azulejo style.
+    ru: Библиотека дворца Мафры ночью. Иллюстрация создана ИИ (Gemini) в стиле азулежу.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
 related: []
 status: ready
 placeholder: false
