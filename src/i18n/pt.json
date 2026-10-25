@@ -221,9 +221,9 @@
     "tools_label": "Vista do mapa"
   },
   "family": {
-    "button": "Com crianças",
-    "button_all": "Com crianças: até 12",
-    "button_12": "Com crianças: 12+",
+    "button": "Idade: todas",
+    "button_all": "Idade: até 12",
+    "button_12": "Idade: 12+",
     "question": "Que idade tem o leitor mais novo?",
     "opt_all": "Menos de 12 anos",
     "opt_12": "12 anos ou mais",

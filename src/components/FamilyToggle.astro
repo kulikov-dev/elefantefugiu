@@ -1,5 +1,5 @@
 ---
-// Family mode in the header (docs/spec.md 3.6): one button "With kids" that opens a small menu with the question
+// Family mode in the header (docs/spec.md 3.6): one button that names the current age filter ("Age: all", "Age: under 12", "Age: 12+") and opens a small menu with the question
 // "How old is the youngest reader?" and three answers (a radio group): under 12 -> "all", 12 and over -> "12", show everything -> "off".
 // A <details>, closed by Escape, a click elsewhere and by choosing an answer (src/scripts/family.ts). Shown only when JavaScript
 // runs (CSS on html[data-js]); the choice is kept in localStorage by src/scripts/family.ts. The button looks "on" and says which
@@ -17,7 +17,7 @@ const options = [
   { value: '12', label: t(lang, 'family.opt_12'), hint: t(lang, 'family.opt_12_hint') },
   { value: 'off', label: t(lang, 'family.opt_off'), hint: '' },
 ] as const;
-// The part after the colon is the short state shown beside the icon on a phone ("under 12", "12+").
+// The part after the colon is the short state shown beside the icon on a phone ("all", "under 12", "12+").
 const shortOf = (text: string) => text.split(': ')[1] ?? text;
 ---
 <details class="family-menu" data-family-menu>
@@ -42,6 +42,7 @@ const shortOf = (text: string) => text.split(': ')[1] ?? text;
       <span data-mode-text="12">{t(lang, 'family.button_12')}</span>
     </span>
     <span class="family-button__short" aria-hidden="true">
+      <span data-mode-text="off">{shortOf(t(lang, 'family.button'))}</span>
       <span data-mode-text="all">{shortOf(t(lang, 'family.button_all'))}</span>
       <span data-mode-text="12">{shortOf(t(lang, 'family.button_12'))}</span>
     </span>

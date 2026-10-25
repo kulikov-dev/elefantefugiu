@@ -7,8 +7,8 @@ const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const POMBAL = { pt: '/pt/epoca/pombal-e-terramoto/', en: '/en/era/pombal-and-the-earthquake/' };
 const WORDS = {
-  pt: { button: 'Com crianças', all: 'Com crianças: até 12', twelve: 'Com crianças: 12+', hidden: 'Histórias ocultas', showAll: 'Mostrar todas', hint_all: 'Sem batalhas, violência nem temas difíceis', hint_12: 'Sem temas difíceis: repressão, perseguição, morte' },
-  en: { button: 'With kids', all: 'With kids: under 12', twelve: 'With kids: 12+', hidden: 'Hidden stories', showAll: 'Show all', hint_all: 'No battles, violence or difficult topics', hint_12: 'No difficult topics: repression, persecution, death' },
+  pt: { button: 'Idade: todas', all: 'Idade: até 12', twelve: 'Idade: 12+', hidden: 'Histórias ocultas', showAll: 'Mostrar todas', hint_all: 'Sem batalhas, violência nem temas difíceis', hint_12: 'Sem temas difíceis: repressão, perseguição, morte' },
+  en: { button: 'Age: all', all: 'Age: under 12', twelve: 'Age: 12+', hidden: 'Hidden stories', showAll: 'Show all', hint_all: 'No battles, violence or difficult topics', hint_12: 'No difficult topics: repression, persecution, death' },
 };
 
 let failed = 0;
@@ -52,10 +52,10 @@ if (want('button')) {
       ok(`button (${lang}, ${stored ?? 'off'}): at least 44 px tall`, b.h >= 44, String(b.h));
       await page.close();
     }
-    // phone: icon only when off; the short state beside it when on
+    // phone: the icon and the short state beside it, also when the filter is off ("all")
     const off = await open(`/${lang}/`, { width: 320 });
     const t0 = await off.$eval('[data-family-menu] summary', (s) => s.innerText.replace(/\s+/g, ' ').trim());
-    ok(`button (${lang}, 320 px, off): icon only, no text`, t0 === '');
+    ok(`button (${lang}, 320 px, off): icon and the short state "${WORDS[lang].button.split(': ')[1]}"`, t0.toLowerCase() === WORDS[lang].button.split(': ')[1].toLowerCase(), t0);
     const on12 = await open(`/${lang}/`, { width: 320, stored: '12' });
     const t1 = await on12.$eval('[data-family-menu] summary', (s) => s.innerText.replace(/\s+/g, ' ').trim());
     ok(`button (${lang}, 320 px, 12+): the short state "12+" beside the icon`, t1 === '12+', t1);

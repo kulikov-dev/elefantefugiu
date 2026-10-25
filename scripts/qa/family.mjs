@@ -124,7 +124,7 @@ const epochSlug = (epochId, lang = 'pt') => epochsData.find((m) => m.id === epoc
 const threadSlug = (threadId, lang = 'pt') => threadsData.find((t) => t.id === threadId).slug[lang];
 
 // ---------- 1. Toggle ----------
-// The mode is chosen in a menu under the "With kids" button of the header (familymenu.mjs checks the button, the menu and the texts in
+// The mode is chosen in a menu under the "Age" button of the header (familymenu.mjs checks the button, the menu and the texts in
 // detail); here: the radio group, the storage, the keys, the announcement, the reload, and the page without JavaScript.
 if (want('toggle')) {
   const page = await newPage({ width: 360 });

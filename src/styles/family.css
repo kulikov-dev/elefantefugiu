@@ -111,7 +111,7 @@ html[data-family='12'] [data-mode-text='12'] {
   display: inline;
 }
 
-/* A phone: the icon alone, and beside it the short state ("under 12", "12+") while a mode is on. Wide: the whole label. */
+/* A phone: the icon and beside it the short state ("all", "under 12", "12+"). Wide: the whole label. */
 .family-button__label {
   display: none;
 }

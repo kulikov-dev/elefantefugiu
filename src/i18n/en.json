@@ -221,9 +221,9 @@
     "tools_label": "Map view"
   },
   "family": {
-    "button": "With kids",
-    "button_all": "With kids: under 12",
-    "button_12": "With kids: 12+",
+    "button": "Age: all",
+    "button_all": "Age: under 12",
+    "button_12": "Age: 12+",
     "question": "How old is the youngest reader?",
     "opt_all": "Under 12",
     "opt_12": "12 and over",

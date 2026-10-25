@@ -53,7 +53,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Para quem',
           paragraphs: [],
-          items: ['Para quem gosta de história, mas não de manuais.', 'Para quem viaja e quer saber o que aconteceu exatamente onde está.', 'Para famílias. O botão «Com crianças» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
+          items: ['Para quem gosta de história, mas não de manuais.', 'Para quem viaja e quer saber o que aconteceu exatamente onde está.', 'Para famílias. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
         },
         {
           id: 'confianca',
@@ -103,7 +103,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Who it’s for',
           paragraphs: [],
-          items: ['For people who love history but not textbooks.', 'For travellers who want to know what happened right where they’re standing.', 'For families. The “With kids” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
+          items: ['For people who love history but not textbooks.', 'For travellers who want to know what happened right where they’re standing.', 'For families. The “Age” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
         },
         {
           id: 'confianca',
@@ -153,7 +153,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Для кого',
           paragraphs: [],
-          items: ['Для тех, кто любит историю, но не учебники.', 'Для путешественников, которым интересно, что случилось именно там, где они стоят.', 'Для семей. Кнопка «С детьми» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
+          items: ['Для тех, кто любит историю, но не учебники.', 'Для путешественников, которым интересно, что случилось именно там, где они стоят.', 'Для семей. Кнопка «Возраст» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
         },
         {
           id: 'confianca',
@@ -207,7 +207,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idades',
           heading: 'Crianças e temas difíceis',
-          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Com crianças» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
+          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
         },
         {
           id: 'imagens',
@@ -248,7 +248,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idades',
           heading: 'Children and difficult topics',
-          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “With kids” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
+          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “Age” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
         },
         {
           id: 'imagens',
@@ -289,7 +289,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idades',
           heading: 'Дети и тяжёлые темы',
-          paragraphs: ['Большинство историй подходят для любого возраста и не имеют метки. Метка 12+ стоит там, где есть сражения или жестокость. Перед историями о репрессиях, преследованиях и смерти мы предупреждаем и спрашиваем, хотите ли вы продолжить. В таких историях нет шуток и слона. Кнопка «С детьми» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
+          paragraphs: ['Большинство историй подходят для любого возраста и не имеют метки. Метка 12+ стоит там, где есть сражения или жестокость. Перед историями о репрессиях, преследованиях и смерти мы предупреждаем и спрашиваем, хотите ли вы продолжить. В таких историях нет шуток и слона. Кнопка «Возраст» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
         },
         {
           id: 'imagens',
@@ -333,7 +333,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'O que fica guardado no seu navegador',
           paragraphs: [
-            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, o modo «Com crianças», a última época aberta e a última história de «Surpreende-me». Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para a localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
+            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, o modo família («Idade»), a última época aberta e a última história de «Surpreende-me». Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para a localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
           ],
         },
         {
@@ -391,7 +391,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'What’s stored in your browser',
           paragraphs: [
-            'So that the site remembers your choices, your browser saves: language, colour theme, “With kids” mode, the last era you opened and the last story from “Surprise me”. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me”, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
+            'So that the site remembers your choices, your browser saves: language, colour theme, family mode (“Age”), the last era you opened and the last story from “Surprise me”. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me”, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
         },
         {
@@ -449,7 +449,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'Что хранится у вас в браузере',
           paragraphs: [
-            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, режим «С детьми», последнюю открытую эпоху и последнюю историю из «Удиви меня». Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
+            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, семейный режим («Возраст»), последнюю открытую эпоху и последнюю историю из «Удиви меня». Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
           ],
         },
         {
