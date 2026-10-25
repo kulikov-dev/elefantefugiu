@@ -134,6 +134,40 @@ sources:
     url: ""
     type: book
     accessed: 2026-10-25
+image:
+  file: corte-brasil-1807.webp
+  alt:
+    pt: "Azulejo: cortesãos carregam bagagens para barcos no cais de Belém; no chão do cais, caixotes de
+      livros esquecidos e um cão."
+    en: "Azulejo: courtiers load their belongings into boats on the quay at Belém; forgotten crates of
+      books and a dog sit on the pier."
+    ru: "Азулежу: придворные грузят вещи в лодки на набережной Белена, на причале забытые ящики с
+      книгами и собака."
+  caption:
+    pt: O embarque da corte em Belém, novembro de 1807. Ilustração criada por IA (Gemini), em estilo azulejo.
+    en: The court embarking at Belém, November 1807. AI-generated illustration (Gemini) in the azulejo style.
+    ru: Посадка двора в Белене, ноябрь 1807 года. Иллюстрация создана ИИ (Gemini) в стиле азулежу.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 70%
+detail_image:
+  file: corte-brasil-1807-detalhe.webp
+  alt:
+    pt: Multidão, carruagens e barcos no cais; ao longe, a Torre de Belém e navios.
+    en: A crowd, carriages and boats on the quay; in the distance the Belém Tower and ships.
+    ru: Толпа, кареты и лодки на набережной, вдали Белемская башня и корабли.
+  caption:
+    pt: O príncipe regente e a família real embarcam em Belém. Gravura de Henri L’Evêque, c. 1813–1815.
+      Biblioteca Nacional de Portugal.
+    en: The Prince Regent and the royal family boarding the ships at Belém. Engraving by Henri L’Evêque,
+      c. 1813–1815. National Library of Portugal.
+    ru: Принц-регент и королевская семья садятся на корабли в Белене. Гравюра Анри Левека, около
+      1813–1815 годов. Национальная библиотека Португалии.
+  author: Henri L’Evêque
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Pr%C3%ADncipe_Regente_de_Portugal_e_toda_a_Fam%C3%ADlia_Real_embarcando_para_Brasil_no_cais_de_Bel%C3%A9m.jpg
+  ai: false
 related: []
 status: ready
 placeholder: false
