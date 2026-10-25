@@ -108,6 +108,22 @@ sources:
     url: https://postal.pt/opiniao/o-cabo-do-medo/
     type: press
     accessed: 2026-10-25
+image:
+  file: bojador-1434.webp
+  alt:
+    pt: Numa praia deserta, um capitão mostra aos marinheiros um ramo de flores silvestres; ao largo, um
+      barco com uma cruz na vela.
+    en: On an empty shore a captain shows his sailors a sprig of wild flowers; out at sea, a sailing
+      boat with a cross on its sail.
+    ru: На пустом берегу капитан показывает морякам пучок диких цветов, в море парусник с крестом на
+      парусе.
+  caption:
+    pt: Gil Eanes além do cabo Bojador, 1434. Ilustração criada por IA (Gemini), em estilo azulejo.
+    en: Gil Eanes beyond Cape Bojador, 1434. AI-generated illustration (Gemini) in the azulejo style.
+    ru: Жил Эанеш за мысом Божадор, 1434 год. Иллюстрация создана ИИ (Gemini) в стиле азулежу.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
 related: []
 status: ready
 placeholder: false
