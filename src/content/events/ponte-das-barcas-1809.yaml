@@ -114,6 +114,26 @@ sources:
 image:
   file: ponte-das-barcas-1809.webp
   alt:
+    pt: Uma mulher de xaile está num cais deserto e olha para a ponte de barcas desfeita; ao lado,
+      trouxas abandonadas e velas num nicho.
+    en: A woman in a shawl stands on an empty quay looking at the broken bridge of boats; beside her
+      abandoned bundles and candles in a niche.
+    ru: Женщина в шали стоит на пустой набережной и смотрит на разорванный мост из лодок, рядом
+      брошенные узелки и свечи в нише.
+  caption:
+    pt: O cais da Ribeira depois da queda da ponte das barcas, março de 1809. Ilustração criada por IA
+      (Gemini), em estilo azulejo. Não é uma imagem histórica.
+    en: The Ribeira quay after the bridge of boats fell, March 1809. AI-generated illustration (Gemini)
+      in the azulejo style. Not a historical image.
+    ru: Набережная Рибейры после гибели моста из лодок, март 1809 года. Иллюстрация создана ИИ (Gemini)
+      в стиле азулежу. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 60%
+detail_image:
+  file: ponte-das-barcas-1809-detalhe.webp
+  alt:
     pt: "Relevo de bronze das Alminhas da Ponte, na Ribeira do Porto: soldados perseguem a multidão em fuga, que cai ao rio junto à ponte das barcas, e no céu a figura de Deus entre anjos."
     en: "Bronze relief of the Alminhas da Ponte in Porto’s Ribeira: soldiers chase a fleeing crowd that falls into the river by the bridge of boats, with God among angels in the sky."
     ru: "Бронзовый рельеф Alminhas da Ponte в Рибейре (Порту): солдаты преследуют бегущую толпу, падающую в реку у моста из лодок, в небе Бог среди ангелов."
