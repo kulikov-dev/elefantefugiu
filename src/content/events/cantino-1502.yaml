@@ -131,6 +131,25 @@ sources:
 image:
   file: cantino-1502.webp
   alt:
+    pt: Duas pessoas à mesa com um mapa-múndi; sobre a mesa uma vela e moedas de ouro, e na janela
+      navios no porto.
+    en: Two people at a table with a map of the world; a candle and gold coins on the table, ships in
+      the harbour through the window.
+    ru: Два человека у стола с картой мира, на столе свеча и золотые монеты, в окне корабли в гавани.
+  caption:
+    pt: "Negócio noturno: o cartógrafo entrega o mapa do mundo por uma bolsa de ducados, 1502.
+      Ilustração criada por IA (Gemini), em estilo azulejo. Não é uma imagem histórica."
+    en: "A night deal: the mapmaker hands over the map of the world for a purse of ducats, 1502.
+      AI-generated illustration (Gemini) in the azulejo style. Not a historical image."
+    ru: "Ночная сделка: картограф отдаёт карту мира за кошелёк дукатов, 1502 год. Иллюстрация создана ИИ
+      (Gemini) в стиле азулежу. Не историческое изображение."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 55%
+detail_image:
+  file: cantino-1502-detalhe.webp
+  alt:
     pt: "Planisfério de Cantino, 1502: mapa-múndi português com a linha de Tordesilhas e a costa do Brasil."
     en: "Cantino planisphere, 1502: Portuguese world map showing the Tordesillas line and the coast of Brazil."
     ru: "Планисфера Кантино, 1502: португальская карта мира с линией Тордесильяса и побережьем Бразилии."
