@@ -14,11 +14,11 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-# Defaults suit a project site: https://OWNER.github.io/REPO/.
-# For a custom domain set the repository variable SITE_URL and leave BASE_PATH unset (see README).
+# The site lives on its own domain (public/CNAME), so the defaults are the domain root. Repository variables SITE_URL and
+# BASE_PATH still win, e.g. to test a project site: SITE_URL=https://OWNER.github.io, BASE_PATH=/REPO (see README).
 env:
-  SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io', github.repository_owner) }}
-  BASE_PATH: ${{ vars.BASE_PATH || (vars.SITE_URL && '/' || format('/{0}', github.event.repository.name)) }}
+  SITE_URL: ${{ vars.SITE_URL || 'https://elefantefugiu.pt' }}
+  BASE_PATH: ${{ vars.BASE_PATH || '/' }}
   # Set the repository variable ALLOW_PLACEHOLDER to false before launch: the build then fails on placeholder entries.
   ALLOW_PLACEHOLDER: ${{ vars.ALLOW_PLACEHOLDER || 'true' }}
   # Map tiles: the repository variable CARTO_KEY switches the map to the CARTO basemaps (see README). TILE_URL and

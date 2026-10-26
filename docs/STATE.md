@@ -1011,3 +1011,10 @@ Vitest `tests/vitest/pages.spec.ts` (11 тестов: разделы и теги
 - **Фокус главных:** Кантино `50% 55%`, Алжубаррота `50% 55%`, землетрясение `50% 40%`, мост `50% 60%` (кадр 1,91:1 для превью и «С чего начать»). Маскота на страницах нет (тяжёлые темы).
 - `docs/images/images.csv` обновлён: прежние строки стали `detail`, добавлены четыре `main`; исходники из `docs/images/` убраны.
 - **Проверено:** `npm run build` целиком и `npm test` проходят.
+
+## Домен elefantefugiu.pt (26.10.2026)
+
+- **Файлы:** `public/CNAME` (`elefantefugiu.pt`, попадает в `dist/CNAME`); `.github/workflows/deploy.yml`: по умолчанию `SITE_URL=https://elefantefugiu.pt`, `BASE_PATH=/` (переменные репозитория по-прежнему главнее, для пробной публикации на `github.io/REPO`); `.env.example` и README обновлены. Страницы, sitemap, robots.txt, canonical, hreflang, Open Graph считаются от `SITE_URL`, поэтому кода менять не пришлось. Страницы `/p/<id>/` (адреса для QR) относительные и сменой домена не затронуты.
+- **`check-cards`:** ссылка на собственный адрес сайта (кнопка «Поделиться» на странице истории) больше не считается внешней и не требует `rel="noopener"`; раньше исключались только localhost и `*.github.io`.
+- **Проверено:** `SITE_URL=https://elefantefugiu.pt npm run build` целиком проходит (exit 0). В `dist` нет ни `github.io`, ни `kulikov-dev`; `robots.txt` указывает на `https://elefantefugiu.pt/sitemap.xml`; в sitemap, canonical, `og:url` и `og:image` адреса домена.
+- **Осталось владельцу:** DNS у регистратора (4 записи A на 185.199.108–111.153 для `elefantefugiu.pt`, при желании AAAA; `www` CNAME на `kulikov-dev.github.io`) и настройки репозитория: Settings → Pages → Custom domain → `elefantefugiu.pt` → Save, после проверки DNS включить **Enforce HTTPS**. Если в Settings → Secrets and variables → Actions → Variables задавались `SITE_URL` или `BASE_PATH` для пробного сайта, удалить их. После этого запустить workflow заново. Не проверялось: живая работа домена, TLS-сертификат, GoatCounter и CARTO-ключ на новом адресе (в CARTO ключ стоит ограничить доменом `elefantefugiu.pt`).

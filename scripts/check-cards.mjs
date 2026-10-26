@@ -9,6 +9,8 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const dist = join(root, 'dist');
 const SEGMENT = { pt: 'historia', en: 'story' };
 const errors = [];
+// Links to the site's own address (the share link) are not external.
+const ownOrigin = (process.env.SITE_URL || 'http://localhost:4321').trim().replace(/\/+$/, '');
 let pages = 0;
 
 const eventsDir = join(root, 'src/content/events');
@@ -197,7 +199,7 @@ for (const ev of events) {
       for (const id of m[1].split(/\s+/)) if (!ids.includes(id)) fail(`aria-labelledby points to missing id "${id}"`);
     }
     for (const m of html.matchAll(/<a\b[^>]*href="(https?:\/\/[^"]+)"[^>]*>/g)) {
-      if (!/rel="[^"]*noopener/.test(m[0]) && !/href="https?:\/\/(localhost|[^"]*\.github\.io)/.test(m[0])) fail(`external link without rel="noopener": ${m[1]}`);
+      if (!/rel="[^"]*noopener/.test(m[0]) && !/href="https?:\/\/(localhost|[^"]*\.github\.io)/.test(m[0]) && !m[1].startsWith(`${ownOrigin}/`)) fail(`external link without rel="noopener": ${m[1]}`);
     }
 
     // ----- required blocks, against the data -----

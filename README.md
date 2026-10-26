@@ -139,16 +139,18 @@ warnings only. Test data is latin filler with `placeholder: true`; run
 3. Push to `main` (or run the workflow manually). `.github/workflows/deploy.yml`
    builds the site and deploys it.
 
-By default the workflow builds a project site at `https://OWNER.github.io/REPO/`:
-`SITE_URL` is `https://OWNER.github.io` and `BASE_PATH` is `/REPO`. You can
-override both with repository variables (Settings, Secrets and variables, Actions, Variables).
+By default the workflow builds for the domain `https://elefantefugiu.pt` (`SITE_URL`) served from the root (`BASE_PATH` is `/`).
+`public/CNAME` carries the domain into the published site. Both can be overridden with repository variables (Settings, Secrets and
+variables, Actions, Variables), e.g. `SITE_URL=https://OWNER.github.io` and `BASE_PATH=/REPO` to publish a test project site.
 
 ## Moving to a custom domain
 
-1. Point the domain's DNS to GitHub Pages and set the custom domain in Settings, Pages.
-2. Create the repository variable `SITE_URL` with the new origin, for example `https://example.pt`.
-3. Delete the repository variable `BASE_PATH` if you set one. When `SITE_URL` is set and `BASE_PATH` is not, the workflow builds with the base `/`.
-4. Run the workflow again. No code changes are needed.
+The domain is `elefantefugiu.pt` and is already the workflow default. What is left is on GitHub and at the registrar:
+
+1. DNS at the registrar: for the apex `elefantefugiu.pt` four `A` records (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and, if wanted, four `AAAA` records (2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153); for `www` a `CNAME` to `kulikov-dev.github.io`.
+2. Repository, Settings, Pages, Custom domain: `elefantefugiu.pt`, Save; when the DNS check passes, tick **Enforce HTTPS**.
+3. Delete the repository variables `SITE_URL` and `BASE_PATH` if they were set for the project site.
+4. Run the workflow again.
 
 ## Project structure
 
