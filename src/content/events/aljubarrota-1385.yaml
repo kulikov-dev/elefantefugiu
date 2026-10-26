@@ -158,6 +158,26 @@ sources:
 image:
   file: aljubarrota-1385.webp
   alt:
+    pt: Um jovem cavaleiro de armadura aponta para o chão, soldados cavam valas e cravam estacas, ao
+      longe um exército com bandeiras.
+    en: A young knight in armour points at the ground, soldiers dig ditches and drive in stakes, an army
+      with banners in the distance.
+    ru: Молодой рыцарь в доспехах указывает на землю, солдаты копают рвы и ставят колья, вдали войско с
+      флагами.
+  caption:
+    pt: Nuno Álvares Pereira escolhe o campo de batalha, 14 de agosto de 1385. Ilustração criada por IA
+      (Gemini), em estilo azulejo. Não é uma imagem histórica.
+    en: Nuno Álvares Pereira chooses the battlefield, 14 August 1385. AI-generated illustration (Gemini)
+      in the azulejo style. Not a historical image.
+    ru: Нуну Алвареш Перейра выбирает поле боя, 14 августа 1385 года. Иллюстрация создана ИИ (Gemini) в
+      стиле азулежу. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 55%
+detail_image:
+  file: aljubarrota-1385-detalhe.webp
+  alt:
     pt: "Iluminura do século XV: cavaleiros em armadura combatem diante de uma cidade amuralhada, com os estandartes de Portugal e de Castela."
     en: "15th-century miniature: armoured knights fight before a walled town, under the banners of Portugal and Castile."
     ru: "Миниатюра XV века: рыцари в доспехах сражаются у стен города под знамёнами Португалии и Кастилии."
