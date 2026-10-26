@@ -140,8 +140,9 @@ warnings only. Test data is latin filler with `placeholder: true`; run
    builds the site and deploys it.
 
 By default the workflow builds for the domain `https://elefantefugiu.pt` (`SITE_URL`) served from the root (`BASE_PATH` is `/`).
-`public/CNAME` carries the domain into the published site. Both can be overridden with repository variables (Settings, Secrets and
-variables, Actions, Variables), e.g. `SITE_URL=https://OWNER.github.io` and `BASE_PATH=/REPO` to publish a test project site.
+`public/CNAME` carries the domain into the published site. Both are written into the workflow and cannot be overridden by repository
+variables; for a test build on another address run `SITE_URL=... BASE_PATH=... npm run build` locally. `check:https` (part of `postbuild`) fails
+the build if `dist/` contains an `http://` resource (mixed content).
 
 ## Moving to a custom domain
 
@@ -149,8 +150,7 @@ The domain is `elefantefugiu.pt` and is already the workflow default. What is le
 
 1. DNS at the registrar: for the apex `elefantefugiu.pt` four `A` records (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and, if wanted, four `AAAA` records (2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153); for `www` a `CNAME` to `kulikov-dev.github.io`.
 2. Repository, Settings, Pages, Custom domain: `elefantefugiu.pt`, Save; when the DNS check passes, tick **Enforce HTTPS**.
-3. Delete the repository variables `SITE_URL` and `BASE_PATH` if they were set for the project site.
-4. Run the workflow again.
+3. Run the workflow again (repository variables `SITE_URL` and `BASE_PATH` are ignored).
 
 ## Project structure
 

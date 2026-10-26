@@ -14,11 +14,11 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-# The site lives on its own domain (public/CNAME), so the defaults are the domain root. Repository variables SITE_URL and
-# BASE_PATH still win, e.g. to test a project site: SITE_URL=https://OWNER.github.io, BASE_PATH=/REPO (see README).
+# The site lives on its own domain (public/CNAME), always over https and from the root. The address is fixed here on purpose:
+# neither repository variables nor a Pages action (configure-pages) may change it, or the pages would point to http:// or to github.io.
 env:
-  SITE_URL: ${{ vars.SITE_URL || 'https://elefantefugiu.pt' }}
-  BASE_PATH: ${{ vars.BASE_PATH || '/' }}
+  SITE_URL: https://elefantefugiu.pt
+  BASE_PATH: /
   # Set the repository variable ALLOW_PLACEHOLDER to false before launch: the build then fails on placeholder entries.
   ALLOW_PLACEHOLDER: ${{ vars.ALLOW_PLACEHOLDER || 'true' }}
   # Map tiles: the repository variable CARTO_KEY switches the map to the CARTO basemaps (see README). TILE_URL and
