@@ -139,6 +139,25 @@ sources:
 image:
   file: terramoto-1755.webp
   alt:
+    pt: O rei, a rainha e a princesa junto às carruagens na margem; ao longe, sobre a cidade, fumo e uma
+      grande onda.
+    en: The king, the queen and the princess by the carriages on the shore; in the distance over the
+      city, smoke and a big wave.
+    ru: Король, королева и принцесса у карет на берегу, вдали над городом дым и большая волна.
+  caption:
+    pt: A família real em Belém, na manhã de 1 de novembro de 1755, olha para Lisboa. Ilustração criada
+      por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
+    en: The royal family at Belém on the morning of 1 November 1755, looking at Lisbon. AI-generated
+      illustration (Gemini) in the azulejo style. Not a historical image.
+    ru: Королевская семья в Белене утром 1 ноября 1755 года смотрит на Лиссабон. Иллюстрация создана ИИ
+      (Gemini) в стиле азулежу. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 40%
+detail_image:
+  file: terramoto-1755-detalhe.webp
+  alt:
     pt: "Gravura em cobre de 1755: Lisboa em ruínas e em chamas, com o tsunami a atingir o cais e navios em perigo no porto."
     en: "Copper engraving of 1755: Lisbon in ruins and flames, with the tsunami striking the quay and ships in distress in the harbour."
     ru: "Медная гравюра 1755 года: Лиссабон в руинах и пламени, цунами бьёт по набережной, корабли в бедственном положении в гавани."
