@@ -134,7 +134,8 @@ if (want('world')) {
     ok(`world (${lang}): the "Whole world" button does the same as the plate`, (await page.$$('.mk--place')).length === OVERSEAS);
     await page.close();
   }
-  const page = await open(`${MAP.pt}?fio=mar`);
+  // A thread whose stories are all in Portugal (the sea thread has Bojador, abroad since the card was added).
+  const page = await open(`${MAP.pt}?fio=comida-e-vinho`);
   ok('world: a filter that leaves no story abroad shows no plate', await page.$eval('[data-overseas]', (b) => b.hidden));
   await page.close();
 }

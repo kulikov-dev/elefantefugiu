@@ -57,7 +57,7 @@ if (want('notfound')) {
     const page = await open('/404.html', { width });
     const n = await visibleFigures(page);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
-    ok(`404 ${width}px: one thinking elephant, no horizontal scroll`, n === 1 && !overflow && (await page.$eval('img.mascot--normal', (i) => i.dataset.mascot)) === 'think', `figures ${n}`);
+    ok(`404 ${width}px: one thinking elephant, no horizontal scroll`, n === 1 && !overflow && (await page.$$eval('img.mascot--hero', (is) => is.filter((i) => i.getClientRects().length > 0).map((i) => i.dataset.mascot)[0])) === 'think', `figures ${n}`);
     await page.close();
   }
 }

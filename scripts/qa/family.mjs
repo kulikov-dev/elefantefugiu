@@ -254,13 +254,13 @@ if (want('lists')) {
     ok(`mode ${mode}, home: showcase shows the featured cards the mode allows`, same(showcase, featured.filter((id) => shownIn(byId(id), mode)).sort()), showcase.join(','));
     const tiles = await home.evaluate((vis) => {
       const isVisible = eval(vis);
-      return [...document.querySelectorAll('li.tile--link')].map((li) => [li.querySelector('a').getAttribute('href').split('/').filter(Boolean).pop(), Number([...li.querySelectorAll('.tile__count .fv')].filter(isVisible).map((s) => s.textContent.match(/\d+/)[0])[0])]);
+      return [...document.querySelectorAll('li.timeline__item--ready')].map((li) => [li.querySelector('a').getAttribute('href').split('/').filter(Boolean).pop(), Number([...li.querySelectorAll('.timeline__count .fv')].filter(isVisible).map((s) => s.textContent.match(/\d+/)[0])[0])]);
     }, visible);
     const wantTiles = EPOCHS.map((ep) => [epochSlug(ep), epochEvents(ep).filter((e) => shownIn(e, mode)).length]);
     ok(`mode ${mode}, home: epoch tile counters equal the data`, same(tiles, wantTiles), JSON.stringify(tiles));
     const threadChips = await home.evaluate((vis) => {
       const isVisible = eval(vis);
-      return [...document.querySelectorAll('[aria-labelledby="threads-title"] li')].filter(isVisible).map((li) => [li.querySelector('a').getAttribute('href').split('/').filter(Boolean).pop(), Number([...li.querySelectorAll('.thread__count')].filter(isVisible)[0].textContent)]);
+      return [...document.querySelectorAll('[aria-labelledby="threads-title"] li')].filter(isVisible).map((li) => [li.querySelector('a').getAttribute('href').split('/').filter(Boolean).pop(), Number([...li.querySelectorAll('.thread-row__count .fv')].filter(isVisible)[0].textContent.match(/\d+/)[0])]);
     }, visible);
     threadChips.sort((a, b) => a[0].localeCompare(b[0]));
     const wantThreads = THREADS.map((th) => [threadSlug(th), threadEvents(th).filter((e) => shownIn(e, mode)).length]).filter(([, n]) => n > 0);
@@ -641,8 +641,8 @@ if (want('variant-epoch') && VARIANT) {
     const home = await newPage({ mode });
     await home.goto(`${variantBase}/pt/`, { waitUntil: 'load' });
     const tile = await home.evaluate((vis, slug) => {
-      const li = [...document.querySelectorAll('li.tile--link')].find((x) => x.querySelector('a').getAttribute('href').includes(slug));
-      return Number([...li.querySelectorAll('.tile__count .fv')].filter(eval(vis))[0].textContent.match(/\d+/)[0]);
+      const li = [...document.querySelectorAll('li.timeline__item--ready')].find((x) => x.querySelector('a').getAttribute('href').includes(slug));
+      return Number([...li.querySelectorAll('.timeline__count .fv')].filter(eval(vis))[0].textContent.match(/\d+/)[0]);
     }, visible, epochSlug(E));
     ok(`variant, mode ${mode}: the tile of the 16+ epoch shows ${vEvents.filter((e) => e.epoch === E && vShown(e, mode)).length}`, tile === vEvents.filter((e) => e.epoch === E && vShown(e, mode)).length, String(tile));
     await home.close();
