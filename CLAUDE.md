@@ -15,9 +15,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm test` — `node:test` tests in `tests/*.test.ts` plus Vitest in `tests/vitest/*.spec.ts`
   - single node:test file: `node --import tsx --test tests/events.test.ts`
   - single Vitest file: `npx vitest run tests/vitest/markers.spec.ts`
-- `npm run qa` — Chromium browser suites in `scripts/qa` (own `package.json`/dependencies, needs a finished build; `-- --list`, `-- <suite>`, `--resume`). Not part of the build.
+- `npm run qa` — Chromium browser suites in `scripts/qa` (own `package.json`/dependencies, needs a finished build; `-- --list`, `-- <suite>`, `--resume`, `--verbose`). Not part of the build. **Do not run it locally on your own initiative**: see the rule below.
 - Non-root hosting test: `SITE_URL=https://USER.github.io BASE_PATH=/REPO npm run build`
 - `ALLOW_PLACEHOLDER=false npm run build` shows which `placeholder: true` entries still block a real launch.
+
+## Rules for Claude Code on checks
+
+- After a change run locally only `npm run build` and `npm test` (that is the gate; `npm run check:data` and `npm run check:lang` for content and texts).
+- Run the full `npm run qa` (about 30 minutes) only when the owner asks for it directly; one named suite (`npm run qa -- bridge`) only to test a change of `scripts/qa` itself.
+- The browser suites run in GitHub Actions: `qa-smoke.yml` (six main suites, every push and pull request) and `qa-full.yml` (all suites, every Monday and by hand). Look at their results there: `gh run list`, `gh run view <id>` (add `--log-failed` for a failed one). If `gh` is not installed, the public API answers too: `https://api.github.com/repos/kulikov-dev/elefantefugiu/actions/runs`.
+- Never stop browsers or Node processes broadly (`taskkill /IM chrome.exe` and the like): stop the background task you started instead.
 
 ## Architecture
 

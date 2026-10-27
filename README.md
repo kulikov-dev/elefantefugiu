@@ -52,7 +52,15 @@ SITE_URL=https://USER.github.io BASE_PATH=/REPO npm run build
 
 ## Browser checks
 
-`npm run qa` runs every browser suite (Chromium, `scripts/qa`) against the finished build and prints one table (suite, checks, result); `npm run qa -- --list` shows the suites, `npm run qa -- <suite>` runs one, `--resume` continues an interrupted run, `BASE_PATH=/elefante npm run qa` runs against a build made with that base path. See `scripts/qa/README.md`.
+`npm run qa` runs every browser suite (Chromium, `scripts/qa`) against the finished build: one line per suite, the failed checks of a failing suite, and one summary line (`--verbose` prints every log and the full table); `npm run qa -- --list` shows the suites, `npm run qa -- <suite>` runs one, `--resume` continues an interrupted run, `BASE_PATH=/elefante npm run qa` runs against a build made with that base path. See `scripts/qa/README.md`.
+
+The browser checks run in GitHub Actions, not on the developer's machine:
+
+- `.github/workflows/deploy.yml`: `astro check`, `npm test` and `npm run build` (the build checks and every `postbuild` check) with `SITE_URL=https://elefantefugiu.pt`; the site is published only when all of it passes.
+- `.github/workflows/qa-smoke.yml`: on every push to main and every pull request, six main suites (`listings`, `pages`, `bridge`, `map-basic`, `family-controls`, `service`: home, epoch and thread pages, static pages, a story page, the map, the age button, the service pages and the 404 page).
+- `.github/workflows/qa-full.yml`: the full `npm run qa` (all suites, the variant build, the mascot) every Monday at 07:00 UTC and by hand (Actions tab, "QA full", Run workflow). The log holds a short summary; the full logs of every suite are the artifact `qa-full`.
+
+Look at the results in the Actions tab or with the GitHub CLI: `gh run list --workflow "QA smoke"`, `gh run view <id>`, `gh run view <id> --log-failed`. Locally, after a change, run only `npm run build` and `npm test`; the full `npm run qa` only when you really need it.
 
 ## Themes and fonts
 
