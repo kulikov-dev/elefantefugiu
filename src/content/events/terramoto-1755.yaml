@@ -169,3 +169,13 @@ status: ready
 published: '2026-10-21'
 placeholder: false
 ru_ready: true
+lang_review:
+  pt:
+    date: '2026-10-27'
+    hash: 'ee141c44a90b'
+  en:
+    date: '2026-10-27'
+    hash: '9a375b541ba9'
+  ru:
+    date: '2026-10-27'
+    hash: 'ce9e4fc2d6f8'

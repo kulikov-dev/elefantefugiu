@@ -137,3 +137,13 @@ status: ready
 published: '2026-10-21'
 placeholder: false
 ru_ready: true
+lang_review:
+  pt:
+    date: '2026-10-27'
+    hash: '8d1e13bc5c53'
+  en:
+    date: '2026-10-27'
+    hash: 'a8a59c6e6cf6'
+  ru:
+    date: '2026-10-27'
+    hash: 'defaac49b4ac'
