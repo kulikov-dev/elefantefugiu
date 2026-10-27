@@ -589,14 +589,15 @@
 /* ---- markers (frame: large diamond, story: small circle, cluster: square with a number) ---- */
 
 .mk {
+  --mk-box: max(var(--mk-size), var(--map-target-min));
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--mk-size);
-  height: var(--mk-size);
-  margin-block-start: calc(var(--mk-size) / -2);
-  margin-inline-start: calc(var(--mk-size) / -2);
+  width: var(--mk-box);
+  height: var(--mk-box);
+  margin-block-start: calc(var(--mk-box) / -2);
+  margin-inline-start: calc(var(--mk-box) / -2);
   cursor: pointer;
 }
 
@@ -634,8 +635,9 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
+  flex: none;
+  width: var(--mk-size);
+  height: var(--mk-size);
   border: var(--map-marker-border) solid var(--color-surface);
   box-shadow: var(--shadow-raised);
   transition: scale var(--transition);

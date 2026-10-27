@@ -198,6 +198,8 @@
   --map-marker-border: 2px;
   --map-marker-selected-scale: 1.25;
   --map-hit-area: 0.5rem;
+  /* A marker the reader can press is at least this big (WCAG 2.2 target size, 24 px); the drawn shape may be smaller. */
+  --map-target-min: 1.5rem;
   --epoch-map-width: clamp(20rem, 38%, 30rem);
 
   /* Interactives (stage 7a): group colours (the `tone` key of the data), outline width, widest drawing, reveal */
