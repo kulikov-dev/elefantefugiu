@@ -208,6 +208,48 @@ if (want('qr')) {
   const links = await nojs.$$eval('.lang-chooser__links a', (as) => as.map((a) => a.getAttribute('href')));
   ok('qr without JavaScript: three links to the card, each with ?src=qr; the page is noindex', links.length === 3 && links.every((h) => h.endsWith('?src=qr')) && (await nojs.$eval('meta[name=robots]', (m) => m.content)) === 'noindex', links.join(' '));
   await nojs.close();
+
+  // The query string of the reader survives the redirects (src/lib/lang-choice.ts): the sources of the visits (?src=, ?utm_source=) are not lost.
+  for (const [from, to, what] of [
+    ['/?src=x', '/pt/?src=x', 'the root keeps ?src'],
+    ['/?utm_source=news#a', '/pt/?utm_source=news#a', 'the root keeps ?utm_source and the hash'],
+    [`${QR}?src=ig`, `${pt(qrCard)}?src=ig`, 'a QR address with its own ?src (ig) is not turned into ?src=qr'],
+  ]) {
+    const page = await browser.newPage();
+    await page.evaluateOnNewDocument(() => localStorage.setItem('lang', 'pt'));
+    await page.goto(`${base}${from}`, { waitUntil: 'load' });
+    await page.waitForFunction(() => location.pathname.split('/').length > 3 || location.pathname === '/pt/', { timeout: 5000 }).catch(() => {});
+    const url = new URL(page.url());
+    ok(`redirect: ${from} -> ${to} (${what})`, url.pathname + url.search + url.hash === to, page.url());
+    await page.close();
+  }
+
+  // The counter gets the source as the referrer (count.js sends it as r); only on a build for a public address, where the counter is on.
+  const homeHtml = await (await fetch(`${base}/pt/`)).text();
+  if (!homeHtml.includes('goatcounter/count.js')) console.log('SKIP  counter: this build has no counter (SITE_URL is a local address)');
+  else {
+    for (const [query, want] of [['?src=test', 'test'], ['?utm_source=news', 'news'], ['', null]]) {
+      const page = await browser.newPage();
+      await page.setRequestInterception(true);
+      const seen = [];
+      page.on('request', (r) => {
+        if (r.url().includes('goatcounter.com/count')) {
+          seen.push(new URL(r.url()));
+          r.abort();
+        } else r.continue();
+      });
+      // The counter does not count a local address; this lets the test see what it would send.
+      await page.evaluateOnNewDocument(() => {
+        let v;
+        Object.defineProperty(window, 'goatcounter', { configurable: true, get: () => v, set: (x) => { x.allow_local = true; v = x; } });
+      });
+      await page.goto(`${base}/pt/${query}`, { waitUntil: 'networkidle0' });
+      await wait(500);
+      const hit = seen[0];
+      ok(`counter: /pt/${query} sends ${want ? `the referrer "${want}"` : 'no source'} to GoatCounter`, Boolean(hit) && (want ? hit.searchParams.get('r') === want : !/^(test|news)$/.test(hit.searchParams.get('r') ?? '')) && hit.searchParams.get('p') === '/pt/', hit ? hit.search : 'no request');
+      await page.close();
+    }
+  }
 }
 
 await browser.close();

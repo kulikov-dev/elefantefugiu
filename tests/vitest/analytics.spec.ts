@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { runInNewContext } from 'node:vm';
+import { rootScript } from '../../src/lib/lang-choice';
 import { ANALYTICS_CONFIG_SCRIPT, GOATCOUNTER_ENDPOINT, analyticsEnabled } from '../../src/lib/analytics';
 
 describe('analyticsEnabled', () => {
@@ -32,6 +34,13 @@ describe('the configuration that runs before count.js', () => {
     expect(run('?source=x', 'r').referrer).toBe('r');
   });
 
+  it('takes ?utm_source=... as a synonym of src, and src wins when both are there', () => {
+    expect(run('?utm_source=newsletter', 'https://example.org/').referrer).toBe('newsletter');
+    expect(run('?a=1&utm_source=instagram.com&b=2', '').referrer).toBe('instagram.com');
+    expect(run('?utm_source=news&src=qr', '').referrer).toBe('qr');
+    expect(run('?utm_source=<script>', 'r').referrer).toBe('r');
+  });
+
   it('counts the page without its query, so a QR visit and a plain visit are one page', () => {
     const { path } = run('?src=qr', '');
     expect(path('/pt/historia/x/?src=qr')).toBe('/pt/historia/x/');
@@ -42,6 +51,30 @@ describe('the configuration that runs before count.js', () => {
   it('takes only a short, plain name', () => {
     expect(run('?src=<script>', 'r').referrer).toBe('r');
     expect(run('?src=' + 'a'.repeat(33), 'r').referrer).toBe('r');
+  });
+});
+
+describe('the root page and /p/{id} keep the query when they redirect (src/lib/lang-choice.ts)', () => {
+  const go = (target: string, search: string, hash = '') => {
+    let went = '';
+    runInNewContext(rootScript({ pt: target, en: target, ru: target }), {
+      localStorage: { getItem: () => null },
+      navigator: { language: 'pt-PT' },
+      location: { search, hash, replace: (to: string) => void (went = to) },
+      String,
+      Object,
+    });
+    return went;
+  };
+  it('passes ?src and any other query on, with the hash', () => {
+    expect(go('/pt/', '?src=ig')).toBe('/pt/?src=ig');
+    expect(go('/pt/', '?utm_source=news&x=1', '#a')).toBe('/pt/?utm_source=news&x=1#a');
+    expect(go('/pt/', '')).toBe('/pt/');
+  });
+  it('on /p/{id} the default ?src=qr stays unless the reader came with one of their own', () => {
+    expect(go('/pt/historia/x/?src=qr', '')).toBe('/pt/historia/x/?src=qr');
+    expect(go('/pt/historia/x/?src=qr', '?src=ig')).toBe('/pt/historia/x/?src=ig');
+    expect(go('/pt/historia/x/?src=qr', '?utm_source=news')).toBe('/pt/historia/x/?src=qr&utm_source=news');
   });
 });
 

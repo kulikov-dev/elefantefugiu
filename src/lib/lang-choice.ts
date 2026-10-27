@@ -26,6 +26,10 @@ export function rootScript(hrefs: Record<Lang, string>): string {
     JSON.stringify(BROWSER_PREFIX) +
     ",l=null;try{l=localStorage.getItem('lang')}catch(x){}" +
     "if(!l||!Object.prototype.hasOwnProperty.call(H,l)){var b=String(navigator.language||'').toLowerCase().split(/[-_]/)[0];l=Object.prototype.hasOwnProperty.call(P,b)?P[b]:D}" +
-    'location.replace(H[l])})();'
+    // The query string and the hash of the address the reader came with go on to the language page (?src=ig, ?utm_source=...); on a key that the target
+    // address has too (/p/{id} puts ?src=qr), the reader's one wins.
+    "var u=H[l],i=u.indexOf('?'),p=i<0?u:u.slice(0,i),a=i<0?'':u.slice(i+1),s=String(location.search||'').replace(/^\\?/,''),h=String(location.hash||'');" +
+    "if(s){var k={};s.split('&').forEach(function(x){k[x.split('=')[0]]=1});a=a.split('&').filter(function(x){return x&&!k[x.split('=')[0]]}).concat(s.split('&').filter(Boolean)).join('&')}" +
+    "location.replace(p+(a?'?'+a:'')+h)})();"
   );
 }

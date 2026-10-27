@@ -17,10 +17,12 @@ export function analyticsEnabled(site: string): boolean {
 }
 
 /**
- * Runs before count.js. Only page views are counted (no click events). When the address has ?src=qr (or ig, reddit, ...) that
- * name is sent as the referrer, so it appears in the "Referrers" list of the dashboard; without it the real referrer is sent.
- * GoatCounter itself reads src only together with a campaign name (utm_campaign), which our addresses do not have.
+ * Runs before count.js. Only page views are counted (no click events). When the address has ?src=qr (or ig, reddit, ...), or
+ * ?utm_source=... as a synonym (src wins when both are there), that name is sent as the referrer (count.js sends it as `r`; the GoatCounter
+ * docs allow any string there, "June Newsletter"), so it appears in the "Referrers" list of the dashboard; without it the real referrer
+ * is sent. GoatCounter itself reads src only together with a campaign name (utm_campaign), which our addresses do not have.
+ * The root page and /p/{id} keep the query when they redirect to a language page (src/lib/lang-choice.ts).
  * The path is sent without the query, so /story/?src=qr and /story/ are one page (the query still goes along as it is).
  */
 export const ANALYTICS_CONFIG_SCRIPT =
-  'window.goatcounter={no_events:true,path:function(p){return p.replace(/[?#].*$/,"")},referrer:function(r){var m=/[?&]src=([A-Za-z0-9_-]{1,32})(?:&|$)/.exec(location.search);return m?m[1]:r}};';
+  'window.goatcounter={no_events:true,path:function(p){return p.replace(/[?#].*$/,"")},referrer:function(r){var q=location.search,m=/[?&]src=([A-Za-z0-9_.-]{1,32})(?:&|$)/.exec(q)||/[?&]utm_source=([A-Za-z0-9_.-]{1,32})(?:&|$)/.exec(q);return m?m[1]:r}};';
