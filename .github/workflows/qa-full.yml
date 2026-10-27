@@ -1,0 +1,48 @@
+# The full browser check (npm run qa): all 32 suites, the variant build and the mascot. Every Monday morning and by hand (Actions tab ->
+# QA full -> Run workflow). The log holds one line per suite and the failed checks; the full logs of every suite are the artifact.
+name: QA full
+
+on:
+  schedule:
+    - cron: '0 7 * * 1' # Monday 07:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  SITE_URL: https://elefantefugiu.pt
+  BASE_PATH: /
+  CHROME_PATH: /usr/bin/google-chrome
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Build
+        run: npx astro build
+      - name: All browser suites
+        run: npm run qa
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo '### QA full'
+            echo '```'
+            node scripts/qa/run.mjs --report
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Report and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-full
+          path: scripts/qa/out/
+          retention-days: 30

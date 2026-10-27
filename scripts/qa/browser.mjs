@@ -14,7 +14,7 @@ const CANDIDATES = [
 
 export async function launchBrowser() {
   const own = process.env.CHROME_PATH || CANDIDATES.find((p) => existsSync(p));
-  if (own) return puppeteer.launch({ executablePath: own, headless: 'new', args: ['--no-sandbox'] });
+  if (own) return puppeteer.launch({ executablePath: own, headless: 'new', args: ['--no-sandbox', '--disable-dev-shm-usage'] });
   const { default: chromium } = await import('@sparticuz/chromium');
   return puppeteer.launch({ args: chromium.args, executablePath: await chromium.executablePath(), headless: 'shell' });
 }

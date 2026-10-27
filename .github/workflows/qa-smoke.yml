@@ -1,0 +1,56 @@
+# The main browser suites of scripts/qa on every push to main and on every pull request: a few minutes, no variant build.
+# The list covers: home, epoch and thread pages (listings), the static pages, the Continue button and the QR address (pages), a story page
+# with its "Bridge to today" block (bridge), the map (map-basic), the age button (family-controls), the service pages and the 404 page in every
+# language (service). The full set (all 32 suites, the variant build, the mascot) is qa-full.yml.
+name: QA smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: qa-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SITE_URL: https://elefantefugiu.pt
+  BASE_PATH: /
+  # The Chrome installed on the runner (ubuntu-latest has google-chrome); scripts/qa/browser.mjs uses it instead of @sparticuz/chromium.
+  CHROME_PATH: /usr/bin/google-chrome
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      # Only the site build: the checks of the build itself are run by the deploy workflow.
+      - name: Build
+        run: npx astro build
+      - name: Browser suites
+        run: npm run qa -- listings pages bridge map-basic family-controls service
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo '### QA smoke'
+            echo '```'
+            node scripts/qa/run.mjs --report listings pages bridge map-basic family-controls service
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Logs of the suites
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-smoke
+          path: scripts/qa/out/
+          retention-days: 14

@@ -12,6 +12,7 @@ npm run qa                 # every suite, one table at the end (about 25 minutes
 npm run qa -- --list       # the suites and what they cover
 npm run qa -- behave map-tools     # only these suites
 npm run qa -- --resume     # go on with the last run: suites that already have a result are skipped
+npm run qa -- --verbose    # the whole log of every suite and the full table (by default: one line per suite, the failed checks of a failing suite, one summary line)
 npm run qa -- --report     # the table of the last run, nothing is run
 ```
 

@@ -5,6 +5,8 @@
 //   npm run qa -- --resume        continue the last run: suites that already have a result are skipped
 //   npm run qa -- --budget=250    stop before starting a suite once 250 seconds have passed (exit code 2; use --resume to go on)
 //   npm run qa -- --report        print the table of the last run without running anything
+//   npm run qa -- --verbose       the whole log of every suite and the table at the end (by default: one line per suite, the failed
+//                                 checks of a failing suite and one summary line; in GitHub Actions a failed check is also an annotation)
 // BASE_PATH=/elefante npm run qa    the same against a build made with that base path (build with the same BASE_PATH first)
 // Needs a finished build (dist/). The script installs scripts/qa/node_modules when it is missing, starts the static server
 // (and, for the *-variant suites, builds the variant site of prepare-variant.mjs and serves it too), and stops them at the end.
@@ -65,6 +67,8 @@ const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(`--${name}`);
 const budget = Number((argv.find((a) => a.startsWith('--budget=')) ?? '').split('=')[1] || Infinity);
 const named = argv.filter((a) => !a.startsWith('--'));
+const verbose = flag('verbose');
+const inActions = process.env.GITHUB_ACTIONS === 'true';
 
 function load() {
   try {
@@ -181,10 +185,26 @@ for (const suite of wanted) {
   const ok = result.code === 0 && fail === 0 && pass > 0;
   data.results[suite.name] = { pass, fail, skip: count('SKIP'), code: result.code, ok, seconds: Math.round((Date.now() - t0) / 1000), note: ok || fail ? undefined : pass === 0 ? 'no checks ran, see out/' + suite.name + '.log' : undefined };
   save(data);
-  console.log(ok ? `${pass} passed` : `FAILED (${fail} failed, exit ${result.code}; log: scripts/qa/out/${suite.name}.log)`);
+  const seconds = Math.round((Date.now() - t0) / 1000);
+  console.log(ok ? `${pass} passed (${seconds}s)` : `FAILED (${fail} failed, exit ${result.code}; log: scripts/qa/out/${suite.name}.log)`);
+  if (verbose) console.log(result.log);
+  else if (!ok) {
+    // Details only for a failing suite: its failed checks (or the last lines of the log when no check ran), at most 25 lines.
+    const lines = result.log.split('\n');
+    const failed = lines.filter((l) => /^FAIL\b/.test(l));
+    const shown = (failed.length ? failed : lines.filter(Boolean).slice(-12)).slice(0, 25);
+    for (const l of shown) console.log(`    ${l}`);
+    if (inActions) for (const l of shown) console.log(`::error title=QA ${suite.name}::${l.replace(/[\r\n%]/g, ' ')}`);
+  }
 }
 
-console.log(`\n${table(data.results, wanted)}`);
+const resultLines = table(data.results, wanted).split('\n');
+// The whole table only with --verbose; by default the summary line (the last one) and, when something failed, the names of the suites.
+if (verbose) console.log(`\n${resultLines.join('\n')}`);
+else {
+  const failedNames = wanted.filter((s) => !data.results[s.name]?.ok).map((s) => s.name);
+  console.log(`\n${resultLines.at(-1)}${failedNames.length ? `: ${failedNames.join(', ')}` : ''}`);
+}
 if (stoppedEarly) {
   console.log(`\nStopped after the ${budget} s budget. Continue with: npm run qa -- --resume`);
   process.exit(2);
