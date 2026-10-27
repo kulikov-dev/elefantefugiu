@@ -47,7 +47,7 @@ export interface Pending {
 export function pending(): Pending[] {
   const items = collectTexts();
   const marks = readMarks();
-  return units(items).flatMap(({ unit, lang }) => {
+  return units(items).flatMap(({ unit, lang }): Pending[] => {
     const mark = marks.get(`${unit}/${lang}`);
     if (!mark) return [{ unit, lang, why: 'not read' as const }];
     return mark.hash === hashOf(items, unit, lang) ? [] : [{ unit, lang, why: 'changed after reading' as const }];
