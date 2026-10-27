@@ -113,3 +113,16 @@ test('epochSchema: intro is optional, any language may be left out, a typo in a 
   assert.equal(epochSchema.safeParse({ ...base, intro: { pt: 'a', en: 'b', ru: 'c' } }).success, true);
   assert.equal(epochSchema.safeParse({ ...base, intro: { pt: 'a', fr: 'b' } }).success, false);
 });
+
+// ---- schema.org markup needs: the publication date and the coordinates of the bridge place ----
+test('published: required (YYYY-MM-DD); updated optional; the bridge needs coordinates', () => {
+  const ok = sample();
+  assert.equal(eventSchema.safeParse(ok).success, true);
+  const { published: _p, ...noPublished } = ok;
+  assert.equal(eventSchema.safeParse(noPublished).success, false);
+  assert.equal(eventSchema.safeParse({ ...ok, published: '21.10.2026' }).success, false);
+  assert.equal(eventSchema.safeParse({ ...ok, updated: '2026-11-02' }).success, true);
+  assert.equal(eventSchema.safeParse({ ...ok, updated: 'yesterday' }).success, false);
+  const { lat: _a, ...noLat } = ok.bridge;
+  assert.equal(eventSchema.safeParse({ ...ok, bridge: noLat }).success, false);
+});

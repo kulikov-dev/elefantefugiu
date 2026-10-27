@@ -107,6 +107,12 @@ const interactive = z.discriminatedUnion('type', [
 export type ArmyDotsData = z.infer<typeof armyDotsData>;
 export type ShipScaleData = z.infer<typeof shipScaleData>;
 
+/** A calendar date as YYYY-MM-DD. YAML turns an unquoted 2026-10-21 into a date, so that is accepted and written back as the same text. */
+const isoDate = z.preprocess(
+  (v) => (v instanceof Date ? v.toISOString().slice(0, 10) : v),
+  z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'a date is YYYY-MM-DD'),
+);
+
 export const eventSchema = z
   .strictObject({
   id: z.string(),
@@ -157,6 +163,10 @@ export const eventSchema = z
   reviewed_by: z.string().optional(),
   reviewed_on: z.coerce.date().optional(),
   status: z.enum(['draft', 'ready']),
+  /** The day the story was first published (YYYY-MM-DD): the schema.org datePublished of the page (src/lib/schema.ts). Required. */
+  published: isoDate,
+  /** The day the story was last changed in substance (YYYY-MM-DD): dateModified; without it dateModified is `published`. */
+  updated: isoDate.optional(),
   placeholder: z.boolean().default(false),
   /** The Russian texts are written (and, for a real card, read by a native speaker). While false, /ru/ shows the English text with a banner. */
   ru_ready: z.boolean().default(false),
