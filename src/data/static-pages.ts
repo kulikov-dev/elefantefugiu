@@ -321,6 +321,11 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           items: ['Pode usar os textos livremente, com uma ligação para este site.', 'Não há contas, cookies nem publicidade.', 'O seu navegador guarda apenas as suas preferências, e eu não as vejo.'],
         },
         {
+          id: 'cookies',
+          heading: 'Cookies',
+          paragraphs: ['O site não usa cookies. A contagem de visitas funciona sem eles e o navegador guarda apenas as suas preferências (tema, idade, língua, última época), como se explica mais abaixo.'],
+        },
+        {
           id: 'licencas',
           heading: 'O que pode fazer com os materiais',
           paragraphs: [],
@@ -379,6 +384,11 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           items: ['You’re free to use the texts with a link back to this site.', 'There are no accounts, cookies or ads.', 'Your browser stores only your own settings, and I can’t see them.'],
         },
         {
+          id: 'cookies',
+          heading: 'Cookies',
+          paragraphs: ['This site does not use cookies. Visit counting works without them, and your browser stores only your settings (theme, age, language, last era), as explained below.'],
+        },
+        {
           id: 'licencas',
           heading: 'What you can do with the material',
           paragraphs: [],
@@ -435,6 +445,11 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Если коротко',
           paragraphs: [],
           items: ['Тексты можно свободно использовать со ссылкой на этот сайт.', 'На сайте нет аккаунтов, куки и рекламы.', 'В вашем браузере хранятся только ваши настройки, и я их не вижу.'],
+        },
+        {
+          id: 'cookies',
+          heading: 'Cookie',
+          paragraphs: ['Сайт не использует cookie. Подсчёт посещений идёт без них, а в браузере хранятся только ваши настройки (тема, возраст, язык, последняя эпоха), подробнее ниже.'],
         },
         {
           id: 'licencas',

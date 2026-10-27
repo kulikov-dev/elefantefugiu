@@ -48,7 +48,7 @@ const schema = pageNodes(schemaCtx, {
     {page.more?.map((p) => <p set:html={html(p)} />)}
     {
       page.sections.map((section) => (
-        <section class="static__section" aria-labelledby={`s-${section.id}`}>
+        <section class="static__section" id={section.id} aria-labelledby={`s-${section.id}`}>
           <h2 id={`s-${section.id}`}>{section.heading}</h2>
           <div class="prose">
             {section.paragraphs.map((p) => <p set:html={html(p)} />)}
