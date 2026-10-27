@@ -1,5 +1,7 @@
 // Page weight of the built card, epoch and thread pages: HTML + linked CSS + linked JS, images NOT counted.
-// Budget: about 500 KB per card page without interactives (docs/spec.md section 9).
+// Budget: about 500 KB per card page without interactives (docs/spec.md section 9). For a card page (the page a QR code opens) the
+// budget is counted on the first screen: HTML + CSS + JS + the pictures loaded at once (loading="eager": the main picture and the
+// logo, in the size a phone 360 px wide with a 2x screen picks from srcset). Lazy pictures further down are not counted.
 // Usage: node scripts/check-weight.mjs   (after npm run build)
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -49,6 +51,26 @@ const rows = pages.map((file) => {
   };
 });
 
+// First screen of the card pages: the eager pictures, each in the smallest srcset candidate that covers 360 css px at 2x (720 px).
+const PHONE_PX = 720;
+const eagerImages = (text) => {
+  let total = 0;
+  for (const [tag] of text.matchAll(/<img\b[^>]*>/g)) {
+    if (!/\sloading="eager"/.test(tag)) continue;
+    const src = tag.match(/\ssrc="([^"]+)"/)?.[1];
+    const candidates = [...(tag.match(/\ssrcset="([^"]+)"/)?.[1] ?? '').matchAll(/(\S+)\s+(\d+)w/g)].map((m) => ({ url: m[1], w: Number(m[2]) })).sort((a, b) => a.w - b.w);
+    const pick = candidates.find((c) => c.w >= PHONE_PX) ?? candidates.at(-1);
+    const url = pick?.url ?? src;
+    if (url?.startsWith(base) && existsSync(fromDist(url))) total += statSync(fromDist(url)).size;
+  }
+  return total;
+};
+const cardRows = rows
+  .filter((r) => /[\\/](historia|story)[\\/]/.test(r.file))
+  .map((r) => ({ ...r, eager: eagerImages(readFileSync(join(dist, r.file), 'utf8')) }))
+  .map((r) => ({ ...r, firstScreen: r.raw + r.eager }));
+const maxCard = cardRows.reduce((a, b) => (b.firstScreen > a.firstScreen ? b : a), { firstScreen: 0 });
+
 const max = rows.reduce((a, b) => (b.raw > a.raw ? b : a));
 const avg = (key) => rows.reduce((s, r) => s + r[key], 0) / rows.length;
 console.log(`Pages checked: ${rows.length} cards, epochs, threads and home pages (HTML + CSS + JS, without images)`);
@@ -56,6 +78,9 @@ console.log(`  average: ${kb(avg('raw'))} raw, ${kb(avg('gzip'))} gzip, ${kb(avg
 console.log(`  heaviest: ${max.file}: ${kb(max.raw)} raw, ${kb(max.gzip)} gzip, ${kb(max.brotli)} brotli`);
 console.log(`  images are not counted (largest on a page: ${kb(Math.max(...rows.map((r) => r.images)))})`);
 console.log(`  budget: ${kb(BUDGET)} (raw, without images)`);
+if (cardRows.length) {
+  console.log(`  first screen of a card page (HTML + CSS + JS + eager pictures at 360 px, 2x; lazy pictures not counted): heaviest ${maxCard.file}: ${kb(maxCard.firstScreen)} (${kb(maxCard.raw)} + pictures ${kb(maxCard.eager)}), budget ${kb(BUDGET)}`);
+}
 
 // The map: its code is loaded only by pages with a map, and fetched at once on those pages.
 // Counted apart from the page budget; a page without a map never requests these files.
@@ -111,7 +136,7 @@ if (vizLeaks.length) {
   console.error(`Interactive code found on pages without an interactive: ${vizLeaks.slice(0, 5).join(', ')}`);
   process.exit(1);
 }
-if (max.raw > BUDGET) {
+if (max.raw > BUDGET || maxCard.firstScreen > BUDGET) {
   console.error('Over budget.');
   process.exit(1);
 }

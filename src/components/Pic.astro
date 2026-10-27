@@ -19,9 +19,11 @@ interface Props {
   decorative?: boolean;
   /** Use the crop point of the data (object-position). */
   crop?: boolean;
+  /** WebP quality; teasers of other stories further down the page are lighter than the picture of the story itself. */
+  quality?: number;
 }
 
-const { picture, lang, widths, sizes, loading = 'lazy', class: className, decorative = false, crop = false } = Astro.props;
+const { picture, lang, widths, sizes, loading = 'lazy', class: className, decorative = false, crop = false, quality = 80 } = Astro.props;
 const source = pictureSource(picture.file);
 ---
 <Image
@@ -30,7 +32,7 @@ const source = pictureSource(picture.file);
   widths={widths}
   sizes={sizes}
   format="webp"
-  quality={80}
+  quality={quality}
   loading={loading}
   decoding="async"
   fetchpriority={loading === 'eager' ? 'high' : undefined}
