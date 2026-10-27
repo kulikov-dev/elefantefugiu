@@ -1,5 +1,5 @@
 ---
-// The three layers of a card: 1 hook, 2 story, 3 "More" (a <details>, works without JavaScript).
+// The three layers of a card: 1 hook, 2 story, 3 "More" (a <details>, works without JavaScript); the slot "after" (Next) follows the layers.
 // A small script mirrors the layer state in the address hash: #historia, #detalhes.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
@@ -26,8 +26,6 @@ const { lang, hook, textLang, hasAside = false } = Astro.props;
           <slot name="story" />
         </div>
       </section>
-
-      <slot name="after" />
     </div>
     {
       hasAside && (
@@ -49,6 +47,9 @@ const { lang, hook, textLang, hasAside = false } = Astro.props;
       <slot name="more" />
     </div>
   </details>
+
+  <!-- After "More": "Next" (the following story). Order of the page: hook, story, More, Next, Nearby, share and report. -->
+  <slot name="after" />
 </div>
 
 <style>
