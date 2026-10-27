@@ -47,7 +47,7 @@
   "home": {
     "epochs_heading": "Eras",
     "hook_title": "In 1515 a king set a rhinoceros against an elephant. The elephant ran away.",
-    "intro": "That is where our name comes from: O Elefante Fugiu, “the elephant ran away”. Stories from Portugal's past: each is a one-minute read and tied to a place you can visit.",
+    "intro": "That is where the name comes from: O Elefante Fugiu, “the elephant ran away”. Stories from Portugal's past: each is a one-minute read and tied to a place you can visit.",
     "cta_read": "Read in a minute",
     "continue": "Continue where you left off: {name} →",
     "open_map": "Open the map",
@@ -90,7 +90,7 @@
     "next_story": "Next",
     "sources_checked": "links checked on",
     "source_in_russian": "in Russian",
-    "report_inline": "Spotted an inaccuracy in this story? Write to us",
+    "report_inline": "Spotted an inaccuracy in this story? Write to me",
     "nearby_m": "{n} m away",
     "nearby_km": "{n} km away",
     "nearby_same": "at the same place"
@@ -101,24 +101,24 @@
     "home": "Home"
   },
   "report": {
-    "lead": "Even elephants sometimes lose their way. If a story has a wrong date, name, place or translation, let us know. We'll check it, fix the text and update the date it was last checked.",
+    "lead": "Even elephants sometimes lose their way. If a story has a wrong date, name, place or translation, let me know. I'll check it, fix the text and update the date it was last checked.",
     "page_label": "Which story is it about",
     "page_change": "change",
     "url_label": "Story link or title",
     "what_label": "What's wrong?",
     "what_hint": "For example: the battle was on 14 August, not the 15th",
     "fix_label": "What's correct? (if you know)",
-    "source_label": "Where can we check this? (if you know)",
+    "source_label": "Where can I check this? (if you know)",
     "source_hint": "A link, a book, a museum label",
     "email_label": "Your email (if you'd like a reply)",
     "submit": "Send",
     "sending": "Sending…",
-    "note": "Your message reaches our inbox through the FormSubmit service. We don't store anything on the site (more in {{legal|Legal information}}). You can also write to us directly: {{email}}.",
+    "note": "Your message reaches my inbox through the FormSubmit service. I don't store anything on the site (more in {{legal|Legal information}}). You can also write to me directly: {{email}}.",
     "sent_title": "Thank you! The elephant is already running to check.",
-    "sent_text": "If you left your email, we'll write back once we've looked into it.",
+    "sent_text": "If you left your email, I'll write back once I've looked into it.",
     "back_to_story": "Back to the story",
     "random_story": "Random story",
-    "failed": "Could not send right now. Try again or write to us directly at",
+    "failed": "Could not send right now. Try again or write to me directly at",
     "too_short": "Describe the mistake in a few words."
   },
   "ui": {

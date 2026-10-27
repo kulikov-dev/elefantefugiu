@@ -37,18 +37,18 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
   about: {
     pt: {
       lead: 'Em 1515, o rei D. Manuel I decidiu pôr à prova se o elefante e o rinoceronte eram mesmo inimigos mortais. Os animais foram soltos no pátio de um palácio de Lisboa, diante de uma multidão. O elefante olhou para o adversário e fugiu.',
-      more: ['Daí o nosso nome: **O Elefante Fugiu**. Reunimos histórias assim do passado de Portugal: curtas, verificadas e ligadas a um lugar que se pode visitar hoje. Cada uma lê-se num minuto.'],
+      more: ['Daí o nome: **O Elefante Fugiu**. Reúno histórias assim do passado de Portugal: curtas, com fontes e ligadas a um lugar que se pode visitar hoje. Cada uma lê-se num minuto.'],
       sections: [
         {
           id: 'foi-aqui',
           heading: 'Foi aqui',
-          paragraphs: ['Uma história fica melhor na memória quando estamos no sítio exato. Por isso, cada história tem um ponto no mapa e uma «ponte para hoje»: uma igreja, uma praça, um museu ou um monumento onde ficou um vestígio dela.'],
+          paragraphs: ['Uma história fica melhor na memória quando se está no sítio exato. Por isso, cada história tem um ponto no mapa e uma «ponte para hoje»: uma igreja, uma praça, um museu ou um monumento onde ficou um vestígio dela.'],
         },
         {
           id: 'como-ler',
           heading: 'Como ler',
           paragraphs: ['Cada história tem três camadas. Pare em qualquer uma.'],
-          items: ['**Gancho.** Uma frase: «O rei pôs um rinoceronte contra um elefante. O elefante fugiu.»', '**História.** Como aconteceu, em poucas linhas.', '**Saber mais.** O contexto, como sabemos e onde ir.'],
+          items: ['**Gancho.** Uma frase: «O rei pôs um rinoceronte contra um elefante. O elefante fugiu.»', '**História.** Como aconteceu, em poucas linhas.', '**Saber mais.** O contexto, como se sabe e onde ir.'],
           after: ['Pode ler por épocas, por fios (o mar, comida e vinho, poder e revolta, gente como nós, natureza) ou simplesmente no mapa.'],
         },
         {
@@ -60,7 +60,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'confianca',
           heading: 'Pode confiar nisto?',
-          paragraphs: ['Não fazemos passar lendas por factos. Cada história tem uma etiqueta: «Documentado», «Lenda» ou «Em debate», e no fim a lista de fontes. Explicamos como trabalhamos em {{method|Método e fontes}}.'],
+          paragraphs: ['Não faço passar lendas por factos. Cada história tem uma etiqueta: «Documentado», «Lenda» ou «Em debate», e no fim a lista de fontes. Explico como trabalho em {{method|Método e fontes}}.'],
         },
         {
           id: 'estado',
@@ -80,14 +80,14 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'ajudar',
           heading: 'Como ajudar',
           paragraphs: [],
-          items: ['Encontrou uma imprecisão? Diga-nos em {{report}}.', 'Conhece uma história que falta aqui? Envie-a para {{email}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
-          after: ['Escreva-nos: {{email}}'],
+          items: ['Encontrou uma imprecisão? Diga-me em {{report}}.', 'Conhece uma história que falta aqui? Envie-a para {{email}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
+          after: ['Escreva-me: {{email}}'],
         },
       ],
     },
     en: {
       lead: 'In 1515 King Manuel I decided to test whether the elephant and the rhinoceros really were sworn enemies. The animals were let into the courtyard of a Lisbon palace in front of a crowd. The elephant took one look at its opponent and ran away.',
-      more: ['Hence our name: **O Elefante Fugiu**, “The elephant ran away”. We collect stories like this from Portugal’s past: short, checked, and tied to a place you can visit today. Each one takes a minute to read.'],
+      more: ['Hence the name: **O Elefante Fugiu**, “The elephant ran away”. I collect stories like this from Portugal’s past: short, with sources, and tied to a place you can visit today. Each one takes a minute to read.'],
       sections: [
         {
           id: 'foi-aqui',
@@ -98,7 +98,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'como-ler',
           heading: 'How to read',
           paragraphs: ['Every story has three layers. Stop at any of them.'],
-          items: ['**Hook.** One line: “The king set a rhino against an elephant. The elephant ran away.”', '**Story.** How it happened, in a few lines.', '**More.** What was going on around it, how we know, and where to go.'],
+          items: ['**Hook.** One line: “The king set a rhino against an elephant. The elephant ran away.”', '**Story.** How it happened, in a few lines.', '**More.** What was going on around it, how it is known, and where to go.'],
           after: ['You can read by era, by thread (the sea, food and wine, power and revolt, people like us, nature) or simply on the map.'],
         },
         {
@@ -110,7 +110,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'confianca',
           heading: 'Can you trust it',
-          paragraphs: ['We don’t pass legends off as facts. Every story carries a label: “Documented”, “Legend” or “Debated”, and a list of sources at the bottom. How we work is explained in {{method|Method and sources}}.'],
+          paragraphs: ['I don’t pass legends off as facts. Every story carries a label: “Documented”, “Legend” or “Debated”, and a list of sources at the bottom. How I work is explained in {{method|Method and sources}}.'],
         },
         {
           id: 'estado',
@@ -130,14 +130,14 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'ajudar',
           heading: 'How to help',
           paragraphs: [],
-          items: ['Spotted a mistake? Tell us via {{report}}.', 'Know a story that’s missing here? Send it to {{email}}.', 'Enjoyed it? Share a story with someone heading to Portugal. That’s the best help of all.'],
-          after: ['Write to us: {{email}}'],
+          items: ['Spotted a mistake? Tell me via {{report}}.', 'Know a story that’s missing here? Send it to {{email}}.', 'Enjoyed it? Share a story with someone heading to Portugal. That’s the best help of all.'],
+          after: ['Write to me: {{email}}'],
         },
       ],
     },
     ru: {
       lead: 'В 1515 году король Мануэл I решил проверить, правда ли слон и носорог заклятые враги. Зверей выпустили во двор лиссабонского дворца при толпе зрителей. Слон посмотрел на противника и сбежал.',
-      more: ['Отсюда наше название: **O Elefante Fugiu**, «Слон сбежал». Мы собираем такие истории из прошлого Португалии: короткие, проверенные и привязанные к месту, куда можно прийти сегодня. Одна история читается за минуту.'],
+      more: ['Отсюда и название: **O Elefante Fugiu**, «Слон сбежал». Я собираю такие истории из прошлого Португалии: короткие, с источниками и привязанные к месту, куда можно прийти сегодня. Одна история читается за минуту.'],
       sections: [
         {
           id: 'foi-aqui',
@@ -148,7 +148,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'como-ler',
           heading: 'Как читать',
           paragraphs: ['У каждой истории три слоя. Остановитесь на любом.'],
-          items: ['**Крючок.** Одна фраза: «Король стравил носорога со слоном. Слон убежал».', '**История.** Как это было, в нескольких строках.', '**Подробнее.** Что вокруг, откуда мы это знаем и куда сходить.'],
+          items: ['**Крючок.** Одна фраза: «Король стравил носорога со слоном. Слон убежал».', '**История.** Как это было, в нескольких строках.', '**Подробнее.** Что вокруг, откуда это известно и куда сходить.'],
           after: ['Истории можно читать по эпохам, по нитям (море, еда и вино, власть и бунт, люди как мы, природа) или просто на карте.'],
         },
         {
@@ -160,7 +160,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'confianca',
           heading: 'Можно ли этому верить',
-          paragraphs: ['Мы не выдаём легенды за факты. У каждой истории есть метка: «Документально», «Легенда» или «Спорно», а внизу список источников. Как мы работаем, рассказано в {{method|«Методе и источниках»}}.'],
+          paragraphs: ['Я не выдаю легенды за факты. У каждой истории есть метка: «Документально», «Легенда» или «Спорно», а внизу список источников. Как я работаю, рассказано в {{method|«Методе и источниках»}}.'],
         },
         {
           id: 'estado',
@@ -180,7 +180,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'ajudar',
           heading: 'Как помочь',
           paragraphs: [],
-          items: ['Нашли неточность? Напишите нам через {{report}}.', 'Знаете историю, которой тут не хватает? Пришлите её на {{email}}.', 'Понравилось? Поделитесь историей с тем, кто собирается в Португалию. Это лучшая помощь.'],
+          items: ['Нашли неточность? Напишите мне через {{report}}.', 'Знаете историю, которой тут не хватает? Пришлите её на {{email}}.', 'Понравилось? Поделитесь историей с тем, кто собирается в Португалию. Это лучшая помощь.'],
           after: ['Пишите: {{email}}'],
         },
       ],
@@ -188,13 +188,13 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
   },
   method: {
     pt: {
-      lead: 'A história está cheia de invenções bonitas, e nós também gostamos delas. Por isso dizemos sempre com clareza o que está provado e o que não está.',
+      lead: 'A história está cheia de invenções bonitas, e eu também gosto delas. Por isso digo sempre com clareza o que está provado e o que não está.',
       sections: [
         {
           id: 'etiquetas',
           heading: 'Três etiquetas',
           paragraphs: [],
-          items: ['**Documentado.** O acontecimento é confirmado por documentos da época ou por trabalhos de historiadores.', '**Lenda.** A história conta-se há séculos, mas não há provas. Recontamo-la e explicamos o que nela é verdade.', '**Em debate.** Os historiadores não concordam ou as fontes contradizem-se. Dizemos exatamente onde está a divergência.'],
+          items: ['**Documentado.** O acontecimento é confirmado por documentos da época ou por trabalhos de historiadores.', '**Lenda.** A história conta-se há séculos, mas não há provas. Reconto-a e explico o que nela é verdade.', '**Em debate.** Os historiadores não concordam ou as fontes contradizem-se. Digo exatamente onde está a divergência.'],
         },
         {
           id: 'datas-fontes',
@@ -204,12 +204,12 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'numeros',
           heading: 'Datas e números',
-          paragraphs: ['Quando as fontes divergem, damos as duas versões ou escrevemos «cerca de»: «1778 ou 1782». O tamanho dos exércitos e o número de vítimas são quase sempre estimativas, por isso damos um intervalo em vez de um número redondo.'],
+          paragraphs: ['Quando as fontes divergem, dou as duas versões ou escrevo «cerca de»: «1778 ou 1782». O tamanho dos exércitos e o número de vítimas são quase sempre estimativas, por isso dou um intervalo em vez de um número redondo.'],
         },
         {
           id: 'idades',
           heading: 'Crianças e temas difíceis',
-          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte avisamos e perguntamos se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
+          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte aviso e pergunto se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
         },
         {
           id: 'imagens',
@@ -219,7 +219,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'correcoes',
           heading: 'Erros',
-          paragraphs: ['Acontecem. Se encontrar um, diga-nos em {{report}}. Corrigimos o texto e atualizamos a data da verificação. A ligação da história não muda, por isso pode continuar a partilhá-la.'],
+          paragraphs: ['Acontecem. Se encontrar um, diga-me em {{report}}. Corrijo o texto e atualizo a data da verificação. A ligação da história não muda, por isso pode continuar a partilhá-la.'],
         },
         {
           id: 'idiomas',
@@ -229,28 +229,28 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
       ],
     },
     en: {
-      lead: 'History is full of beautiful inventions, and we love them too. That’s why we always say plainly what has been proven and what hasn’t.',
+      lead: 'History is full of beautiful inventions, and I love them too. That’s why I always say plainly what has been proven and what hasn’t.',
       sections: [
         {
           id: 'etiquetas',
           heading: 'Three labels',
           paragraphs: [],
-          items: ['**Documented.** The event is confirmed by documents of the time or by historians’ work.', '**Legend.** The story has been told for centuries, but there’s no proof. We retell it and explain what’s true in it.', '**Debated.** Historians disagree or the sources contradict each other. We say exactly what the dispute is about.'],
+          items: ['**Documented.** The event is confirmed by documents of the time or by historians’ work.', '**Legend.** The story has been told for centuries, but there’s no proof. I retell it and explain what’s true in it.', '**Debated.** Historians disagree or the sources contradict each other. I say exactly what the dispute is about.'],
         },
         {
           id: 'datas-fontes',
-          heading: 'Where our facts come from',
+          heading: 'Where the facts come from',
           paragraphs: ['First of all from period documents, academic work, archives and the official websites of museums. Every story has at least one source, and major events have at least two. They are all listed at the bottom of the story, next to the date it was last checked.'],
         },
         {
           id: 'numeros',
           heading: 'Dates and numbers',
-          paragraphs: ['When sources disagree, we give both versions or say “about”: “1778 or 1782”. Army sizes and death tolls are almost always estimates, so we give a range instead of one neat number.'],
+          paragraphs: ['When sources disagree, I give both versions or say “about”: “1778 or 1782”. Army sizes and death tolls are almost always estimates, so I give a range instead of one neat number.'],
         },
         {
           id: 'idades',
           heading: 'Children and difficult topics',
-          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death we give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “Age” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
+          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death I give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “Age” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
         },
         {
           id: 'imagens',
@@ -260,53 +260,53 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'correcoes',
           heading: 'Mistakes',
-          paragraphs: ['They happen. If you find one, tell us via {{report}}. We’ll fix the text and update the date it was checked. The story’s link doesn’t change, so you can keep sharing it.'],
+          paragraphs: ['They happen. If you find one, tell me via {{report}}. I’ll fix the text and update the date it was checked. The story’s link doesn’t change, so you can keep sharing it.'],
         },
         {
           id: 'idiomas',
           heading: 'Languages',
-          paragraphs: ['Stories are written in Portuguese and translated into English and Russian. If a translation isn’t ready yet, we show the English or Portuguese text and say so.'],
+          paragraphs: ['Stories are written in Portuguese and translated into English and Russian. If a translation isn’t ready yet, I show the English or Portuguese text and say so.'],
         },
       ],
     },
     ru: {
-      lead: 'История полна красивых выдумок, и мы их тоже любим. Поэтому всегда говорим прямо, что из этого доказано, а что нет.',
+      lead: 'История полна красивых выдумок, и я их тоже люблю. Поэтому всегда говорю прямо, что из этого доказано, а что нет.',
       sections: [
         {
           id: 'etiquetas',
           heading: 'Три метки',
           paragraphs: [],
-          items: ['**Документально.** Событие подтверждают документы того времени или работы историков.', '**Легенда.** Историю рассказывают веками, но доказательств нет. Мы пересказываем её и объясняем, что в ней правда.', '**Спорно.** Историки не сходятся или источники противоречат друг другу. Пишем, в чём именно спор.'],
+          items: ['**Документально.** Событие подтверждают документы того времени или работы историков.', '**Легенда.** Историю рассказывают веками, но доказательств нет. Я пересказываю её и объясняю, что в ней правда.', '**Спорно.** Историки не сходятся или источники противоречат друг другу. Пишу, в чём именно спор.'],
         },
         {
           id: 'datas-fontes',
-          heading: 'Откуда мы берём факты',
+          heading: 'Откуда берутся факты',
           paragraphs: ['В первую очередь из документов эпохи, научных работ, архивов и официальных сайтов музеев. У каждой истории есть хотя бы один источник, у крупных событий не меньше двух. Все они перечислены внизу истории, рядом дата последней проверки.'],
         },
         {
           id: 'numeros',
           heading: 'Даты и числа',
-          paragraphs: ['Если источники расходятся, пишем оба варианта или «около»: «1778 или 1782». Численность армий и число жертв почти всегда оценка, поэтому даём диапазон вместо одной красивой цифры.'],
+          paragraphs: ['Если источники расходятся, пишу оба варианта или «около»: «1778 или 1782». Численность армий и число жертв почти всегда оценка, поэтому даю диапазон вместо одной красивой цифры.'],
         },
         {
           id: 'idades',
           heading: 'Дети и тяжёлые темы',
-          paragraphs: ['Большинство историй подходят для любого возраста и не имеют метки. Метка 12+ стоит там, где есть сражения или жестокость. Перед историями о репрессиях, преследованиях и смерти мы предупреждаем и спрашиваем, хотите ли вы продолжить. В таких историях нет шуток и слона. Кнопка «Возраст» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
+          paragraphs: ['Большинство историй подходят для любого возраста и не имеют метки. Метка 12+ стоит там, где есть сражения или жестокость. Перед историями о репрессиях, преследованиях и смерти я предупреждаю и спрашиваю, хотите ли вы продолжить. В таких историях нет шуток и слона. Кнопка «Возраст» в шапке скрывает истории со сценами сражений и на тяжёлые темы: вы выбираете возраст младшего читателя.'],
         },
         {
           id: 'imagens',
           heading: 'Картинки',
-          paragraphs: ['У каждой иллюстрации подписаны автор и лицензия. Если картинка сделана нейросетью, мы пишем об этом в подписи, чтобы её не приняли за документ эпохи.'],
+          paragraphs: ['У каждой иллюстрации подписаны автор и лицензия. Если картинка сделана нейросетью, это сказано в подписи, чтобы её не приняли за документ эпохи.'],
         },
         {
           id: 'correcoes',
           heading: 'Ошибки',
-          paragraphs: ['Они случаются. Если вы нашли ошибку, напишите через {{report}}. Мы поправим текст и обновим дату проверки. Ссылка на историю при этом не меняется, так что ею можно спокойно делиться.'],
+          paragraphs: ['Они случаются. Если вы нашли ошибку, напишите мне через {{report}}. Я поправлю текст и обновлю дату проверки. Ссылка на историю при этом не меняется, так что ею можно спокойно делиться.'],
         },
         {
           id: 'idiomas',
           heading: 'Языки',
-          paragraphs: ['Истории пишутся на португальском и переводятся на английский и русский. Если русского перевода ещё нет, покажем английский и предупредим об этом.'],
+          paragraphs: ['Истории пишутся на португальском и переводятся на английский и русский. Если русского перевода ещё нет, покажу английский и предупрежу об этом.'],
         },
       ],
     },
@@ -318,17 +318,17 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'resumo',
           heading: 'Em resumo',
           paragraphs: [],
-          items: ['Pode usar os nossos textos livremente, com uma ligação para nós.', 'Não temos contas, cookies nem publicidade.', 'O seu navegador guarda apenas as suas preferências, e nós não as vemos.'],
+          items: ['Pode usar os textos livremente, com uma ligação para este site.', 'Não há contas, cookies nem publicidade.', 'O seu navegador guarda apenas as suas preferências, e eu não as vejo.'],
         },
         {
           id: 'licencas',
-          heading: 'O que pode fazer com os nossos materiais',
+          heading: 'O que pode fazer com os materiais',
           paragraphs: [],
           items: [
             '**Textos** (histórias, descrições, textos da interface) estão sob a licença CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.pt). Pode copiá-los, traduzi-los e adaptá-los, incluindo para visitas guiadas e aulas. Duas condições: indique «O Elefante Fugiu» com uma ligação e partilhe a sua versão nas mesmas condições.',
             '**O código do site** é aberto, sob a licença MIT.',
             '**As ilustrações** pertencem aos seus autores. O autor e a licença estão indicados por baixo de cada uma.',
-            '**O nome «O Elefante Fugiu», o logótipo e a mascote (o elefante)** não estão abrangidos pelas licenças livres. Para os usar, escreva-nos.',
+            '**O nome «O Elefante Fugiu», o logótipo e a mascote (o elefante)** não estão abrangidos pelas licenças livres. Para os usar, escreva-me.',
           ],
         },
         {
@@ -341,7 +341,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'contagem',
           heading: 'Contagem de visitas',
-          paragraphs: ['Contamos apenas as visitas às páginas, sem cookies e sem dados pessoais. Para isso usamos o serviço GoatCounter, que não regista o seu endereço IP (durante até 8 horas fica apenas em memória, para distinguir uma visita repetida) nem sabe quem é.'],
+          paragraphs: ['Conto apenas as visitas às páginas, sem cookies e sem dados pessoais. Para isso uso o serviço GoatCounter, que não regista o seu endereço IP (durante até 8 horas fica apenas em memória, para distinguir uma visita repetida) nem sabe quem é.'],
         },
         {
           id: 'terceiros',
@@ -351,14 +351,14 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**GitHub Pages** (GitHub, Inc.) serve as páginas do site e pode registar endereços IP segundo as suas próprias regras.',
             '**Os mosaicos do mapa** vêm dos servidores da CARTO, que veem o seu endereço IP e o endereço da página, como em qualquer site com mapa.',
             '**GoatCounter** (goatcounter.com) conta as visitas às páginas; recebe o seu endereço IP, mas só o mantém em memória, até 8 horas.',
-            '**FormSubmit** (formsubmit.co) reencaminha-nos a sua mensagem se enviar o formulário «Encontrou um erro?», juntamente com o email, se o indicar. Usamo-la apenas para corrigir o erro e responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
+            '**FormSubmit** (formsubmit.co) reencaminha-me a sua mensagem se enviar o formulário «Encontrou um erro?», juntamente com o email, se o indicar. Uso-a apenas para corrigir o erro e responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
           ],
           after: ['As ligações «Como chegar», as fontes e os sites dos museus levam a outros sites, com regras próprias.'],
         },
         {
           id: 'aviso',
           heading: 'Aviso',
-          paragraphs: ['Verificamos cada história, mas a história é um campo de debate e os erros são possíveis. Este site não substitui as fontes académicas. Os horários e preços dos museus mudam: confirme-os no site oficial antes de ir.'],
+          paragraphs: ['Confronto cada história com as fontes, mas a história é um campo de debate e os erros são possíveis. Este site não substitui as fontes académicas. Os horários e preços dos museus mudam: confirme-os no site oficial antes de ir.'],
         },
         {
           id: 'contacto',
@@ -376,17 +376,17 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'resumo',
           heading: 'In short',
           paragraphs: [],
-          items: ['You’re free to use our texts with a link back to us.', 'We have no accounts, cookies or ads.', 'Your browser stores only your own settings, and we can’t see them.'],
+          items: ['You’re free to use the texts with a link back to this site.', 'There are no accounts, cookies or ads.', 'Your browser stores only your own settings, and I can’t see them.'],
         },
         {
           id: 'licencas',
-          heading: 'What you can do with our material',
+          heading: 'What you can do with the material',
           paragraphs: [],
           items: [
             '**Texts** (stories, descriptions, interface text) are published under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). You may copy, translate and adapt them, including for tours and lessons. Two conditions: credit “O Elefante Fugiu” with a link, and share your version under the same terms.',
             '**The site’s code** is open under the MIT licence.',
             '**Illustrations** belong to their authors. The author and licence are given under each one.',
-            '**The name “O Elefante Fugiu”, the logo and the elephant mascot** are not covered by the open licences. To use them, write to us.',
+            '**The name “O Elefante Fugiu”, the logo and the elephant mascot** are not covered by the open licences. To use them, write to me.',
           ],
         },
         {
@@ -399,7 +399,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'contagem',
           heading: 'Counting visits',
-          paragraphs: ['We only count page visits, without cookies or personal data. We use GoatCounter for this; it does not record your IP address (for up to 8 hours it is kept in memory only, to tell a repeat visit apart) and does not know who you are.'],
+          paragraphs: ['I only count page visits, without cookies or personal data. I use GoatCounter for this; it does not record your IP address (for up to 8 hours it is kept in memory only, to tell a repeat visit apart) and does not know who you are.'],
         },
         {
           id: 'terceiros',
@@ -409,14 +409,14 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**GitHub Pages** (GitHub, Inc.) serves the site’s pages and may log IP addresses under its own policy.',
             '**The map tiles** are loaded from CARTO’s servers, which see your IP address and the address of the page, like any site with a map.',
             '**GoatCounter** (goatcounter.com) counts page visits; it receives your IP address but keeps it only in memory, for up to 8 hours.',
-            '**FormSubmit** (formsubmit.co) forwards your message to us if you send the “Found a mistake?” form, together with your email if you gave it. We use it only to fix the mistake and reply to you. Prefer not to use the service? Write directly to {{email}}.',
+            '**FormSubmit** (formsubmit.co) forwards your message to me if you send the “Found a mistake?” form, together with your email if you gave it. I use it only to fix the mistake and reply to you. Prefer not to use the service? Write directly to {{email}}.',
           ],
           after: ['Links to “Get directions”, sources and museum websites lead to other sites with their own rules.'],
         },
         {
           id: 'aviso',
           heading: 'Disclaimer',
-          paragraphs: ['We check every story, but history is a field of debate, and mistakes are possible. This site does not replace scholarly sources. Museum opening hours and prices change: check them on the official website before you go.'],
+          paragraphs: ['I check every story against its sources, but history is a field of debate, and mistakes are possible. This site does not replace scholarly sources. Museum opening hours and prices change: check them on the official website before you go.'],
         },
         {
           id: 'contacto',
@@ -434,17 +434,17 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'resumo',
           heading: 'Если коротко',
           paragraphs: [],
-          items: ['Тексты можно свободно использовать со ссылкой на нас.', 'У нас нет аккаунтов, куки и рекламы.', 'В вашем браузере хранятся только ваши настройки, и мы их не видим.'],
+          items: ['Тексты можно свободно использовать со ссылкой на этот сайт.', 'На сайте нет аккаунтов, куки и рекламы.', 'В вашем браузере хранятся только ваши настройки, и я их не вижу.'],
         },
         {
           id: 'licencas',
-          heading: 'Что можно делать с нашими материалами',
+          heading: 'Что можно делать с материалами сайта',
           paragraphs: [],
           items: [
             '**Тексты** (истории, описания, надписи на сайте) распространяются по лицензии CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.ru). Их можно копировать, переводить и переделывать, в том числе для экскурсий и уроков. Условия два: укажите «O Elefante Fugiu» со ссылкой и распространяйте свою версию на тех же условиях.',
             '**Код сайта** открыт по лицензии MIT.',
             '**Иллюстрации** принадлежат своим авторам. Автор и лицензия указаны под каждой.',
-            '**Название «O Elefante Fugiu», логотип и слон-талисман** в свободные лицензии не входят. Чтобы использовать их, напишите нам.',
+            '**Название «O Elefante Fugiu», логотип и слон-талисман** в свободные лицензии не входят. Чтобы использовать их, напишите мне.',
           ],
         },
         {
@@ -457,7 +457,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'contagem',
           heading: 'Подсчёт посещений',
-          paragraphs: ['Мы считаем только посещения страниц, без cookie и без личных данных. Для этого используется сервис GoatCounter: он не записывает ваш IP-адрес (на время до 8 часов тот остаётся только в памяти, чтобы отличить повторный заход) и не узнаёт, кто вы.'],
+          paragraphs: ['Я считаю только посещения страниц, без cookie и без личных данных. Для этого используется сервис GoatCounter: он не записывает ваш IP-адрес (на время до 8 часов тот остаётся только в памяти, чтобы отличить повторный заход) и не узнаёт, кто вы.'],
         },
         {
           id: 'terceiros',
@@ -467,14 +467,14 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**GitHub Pages** (GitHub, Inc.) отдаёт страницы сайта и может записывать IP-адреса по своим правилам.',
             '**Плитки карты** загружаются с серверов CARTO, которые видят ваш IP-адрес и адрес страницы, как любой сайт с картой.',
             '**GoatCounter** (goatcounter.com) считает посещения страниц; получает ваш IP-адрес, но хранит его только в памяти, до 8 часов.',
-            '**FormSubmit** (formsubmit.co) пересылает нам сообщение, если вы отправите форму «Нашли ошибку?», вместе с почтой, если вы её указали. Мы используем письмо только чтобы исправить ошибку и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
+            '**FormSubmit** (formsubmit.co) пересылает мне сообщение, если вы отправите форму «Нашли ошибку?», вместе с почтой, если вы её указали. Я использую письмо только чтобы исправить ошибку и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
           ],
           after: ['Ссылки «Как добраться», на источники и сайты музеев ведут на чужие сайты со своими правилами.'],
         },
         {
           id: 'aviso',
           heading: 'Оговорка',
-          paragraphs: ['Мы проверяем каждую историю, но история наука спорная, и ошибки возможны. Сайт не заменяет научные источники. Часы работы и цены музеев меняются: перед поездкой проверьте их на официальном сайте.'],
+          paragraphs: ['Каждую историю я сверяю с источниками, но история наука спорная, и ошибки возможны. Сайт не заменяет научные источники. Часы работы и цены музеев меняются: перед поездкой проверьте их на официальном сайте.'],
         },
         {
           id: 'contacto',

@@ -47,7 +47,7 @@
   "home": {
     "epochs_heading": "Épocas",
     "hook_title": "Em 1515, o rei pôs um rinoceronte contra um elefante. O elefante fugiu.",
-    "intro": "Daí o nosso nome: O Elefante Fugiu, «o elefante fugiu». Histórias do passado de Portugal: cada uma lê-se num minuto e está ligada a um lugar que pode visitar.",
+    "intro": "Daí o nome: O Elefante Fugiu, «o elefante fugiu». Histórias do passado de Portugal: cada uma lê-se num minuto e está ligada a um lugar que pode visitar.",
     "cta_read": "Ler num minuto",
     "continue": "Continuar onde parou: {name} →",
     "open_map": "Abrir o mapa",
@@ -90,7 +90,7 @@
     "next_story": "A seguir",
     "sources_checked": "ligações verificadas em",
     "source_in_russian": "em russo",
-    "report_inline": "Reparou numa imprecisão nesta história? Escreva-nos",
+    "report_inline": "Reparou numa imprecisão nesta história? Escreva-me",
     "nearby_m": "a {n} m",
     "nearby_km": "a {n} km",
     "nearby_same": "no mesmo local"
@@ -101,7 +101,7 @@
     "home": "Início"
   },
   "report": {
-    "lead": "Até os elefantes às vezes se enganam no caminho. Se numa história há uma data, um nome, um lugar ou uma tradução errada, diga-nos. Vamos verificar, corrigir o texto e atualizar a data da última verificação.",
+    "lead": "Até os elefantes às vezes se enganam no caminho. Se numa história há uma data, um nome, um lugar ou uma tradução errada, diga-me. Vou verificar, corrigir o texto e atualizar a data da última verificação.",
     "page_label": "De que história se trata",
     "page_change": "alterar",
     "url_label": "Ligação ou título da história",
@@ -113,12 +113,12 @@
     "email_label": "O seu email (se quiser resposta)",
     "submit": "Enviar",
     "sending": "A enviar…",
-    "note": "A mensagem chega ao nosso email através do serviço FormSubmit. Não guardamos nada no site (mais em {{legal|Informação legal}}). Também pode escrever-nos diretamente: {{email}}.",
+    "note": "A mensagem chega ao meu email através do serviço FormSubmit. Não guardo nada no site (mais em {{legal|Informação legal}}). Também pode escrever-me diretamente: {{email}}.",
     "sent_title": "Obrigado! O elefante já foi a correr verificar.",
-    "sent_text": "Se deixou o seu email, escrevemos-lhe quando tivermos analisado.",
+    "sent_text": "Se deixou o seu email, escrevo-lhe quando tiver analisado.",
     "back_to_story": "Voltar à história",
     "random_story": "História ao acaso",
-    "failed": "Não foi possível enviar agora. Tente de novo ou escreva-nos diretamente para",
+    "failed": "Não foi possível enviar agora. Tente de novo ou escreva-me diretamente para",
     "too_short": "Descreva o erro em poucas palavras."
   },
   "ui": {
