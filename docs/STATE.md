@@ -34,7 +34,7 @@ docs/               design.md, spec.md, STATE.md, history.md, glossary.md, langu
 
 **Языки.** pt-PT (AO1990), en-US, ru; ru → en → pt как цепочка запасных. Слаги заморожены (`docs/addresses.md`). Вычитка языков 28.10.2026: `docs/glossary.md`, отчёты `docs/language-review/{pt,en,ru}.md`; `npm run check:lang` (в `npm test`), `lang:pending`, `lang:mark`; отметки `lang_review` у историй и `docs/language-review/reviewed.json` у остального.
 
-**Карта.** Подложка CARTO Voyager / Dark Matter по теме при `CARTO_KEY`; без ключа публичный OpenStreetMap (только разработка). За один раз не больше 30 маркеров и кластеров (`DEFAULT_LIMIT`), «Показать ещё» +5. Маркеры с областью нажатия 24×24. Код карты грузится отдельным островом, только на страницах с картой.
+**Карта.** Подложка CARTO Voyager / Dark Matter по теме при `CARTO_KEY`; без ключа публичный OpenStreetMap (только разработка). За один раз не больше 30 маркеров и кластеров (`DEFAULT_LIMIT`), «Показать ещё» +5. Маркеры с областью нажатия 24×24. На телефоне список «В области» это нижняя шторка (по умолчанию закрыта, кнопка «Список»); нажатие на маркер показывает небольшое превью с кнопкой «Открыть», карточка истории открывается отдельной страницей. Код карты грузится отдельным островом, только на страницах с картой.
 
 **Метаданные.** `canonical`, `hreflang` pt/en/ru и `x-default`, Open Graph и Twitter (JPEG/PNG 1200×630), `sitemap.xml` (90 адресов: по 30 на язык), `robots.txt`; JSON-LD schema.org на всех индексируемых страницах (`WebSite`, `Organization`; история: `Article` + `Event` + место с `geo` + хлебные крошки; эпоха: `CollectionPage` + `ItemList`). Страницы с `noindex`: форма, «Удиви меня», заглушки ru без перевода, страницы с тестовым текстом.
 
@@ -42,12 +42,10 @@ docs/               design.md, spec.md, STATE.md, history.md, glossary.md, langu
 
 **Аналитика.** GoatCounter без cookie, скрипт самохостинг (`public/vendor/goatcounter/count.js`, не минифицирован), `?src=qr` попадает в «Referrers»; на локальных адресах выключена.
 
-**Домен и публикация.** https://elefantefugiu.pt, `public/CNAME`, `SITE_URL` и `BASE_PATH=/` зашиты в workflow. Переменные репозитория: `ALLOW_PLACEHOLDER` (перед запуском `false`), `CARTO_KEY`, при другом провайдере `TILE_URL` и `TILE_ATTRIBUTION`.
+**Домен и публикация.** https://elefantefugiu.pt (DNS, Custom domain и Enforce HTTPS сделаны 26.10.2026, сайт открывается по https), `public/CNAME`, `SITE_URL` и `BASE_PATH=/` зашиты в workflow. `CARTO_KEY` задан в переменных репозитория, карта CARTO работает на живом сайте (с 25.10.2026). Форма проверена живой отправкой (27.10.2026), просмотры в GoatCounter идут. Переменные репозитория: `ALLOW_PLACEHOLDER` (перед запуском `false`), `CARTO_KEY`, при другом провайдере `TILE_URL` и `TILE_ATTRIBUTION`.
 
 ## Открытые вопросы и что осталось владельцу
 
-- Домен: DNS-записи (4 × A на 185.199.108–111.153), Custom domain и Enforce HTTPS в Settings → Pages. Подтвердить, что сделано.
-- `CARTO_KEY` в переменных репозитория (без него боевая карта на тайлах OSM).
 - Правообладатель в `LICENSE`: сейчас «O Elefante Fugiu contributors», подтвердить.
 - Вычитка носителем: списки в `docs/language-review/*.md` («Что показать живому носителю»: pt 32, ru 15, en 12 правок, не применённых по правилам уверенности).
 - Ссылки с 403 (защита от ботов; проверить руками): britannica, infopedia ×2, dorotheum, smarthistory, britishmuseum, newcriterion, fandom, visitportugal. Цепочка сертификатов не отдаётся сервером (в Firefox проверить): `dl.uc.pt`, `exercito.pt`, `cloud.theportugalnews.com`, `comerciocomhistoria.gov.pt`. `monumentos.gov.pt` отвечает только по http.
@@ -62,5 +60,5 @@ docs/               design.md, spec.md, STATE.md, history.md, glossary.md, langu
 - Lighthouse после правок сдвига вёрстки и веса (до правок: история 87, эпоха 91, карта 81).
 - Rich Results Test и validator.schema.org (после выкатки: история `/pt/historia/o-elefante-que-foi-ver-o-papa/`, эпоха `/pt/epoca/avis-e-descobrimentos/`).
 - Полный `npm run qa` после вычитки языков (прерван на 12 из 32 наборов по решению владельца; предыдущий полный прогон до схемы, раздела Cookies и вычитки: 32 набора, 1581 проверка; `theme` в общем запуске падал из-за обрыва сессии браузера, отдельно проходит).
-- Safari, Firefox, реальные телефоны, скринридеры (VoiceOver, NVDA, TalkBack); жесты карты (щипок, перетаскивание); превью Open Graph отладчиками соцсетей; живая отправка формы на FormSubmit.
+- Safari, Firefox, реальные телефоны, скринридеры (VoiceOver, NVDA, TalkBack); жесты карты (щипок, перетаскивание); превью Open Graph отладчиками соцсетей.
 - Слепое сравнение «до и после» вычитки ненадёжно (разные читатели): улучшение подтверждено только для английского.
