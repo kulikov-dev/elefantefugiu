@@ -1,7 +1,8 @@
 // Checks dist/sitemap.xml against the built pages (part of postbuild, after make-sitemap.mjs).
 //  - every built page that may be indexed is in the sitemap, and every address in the sitemap is a built page;
 //  - the QR pages (/p/...), the 404 page and the language chooser at the root are not in it;
-//  - every hreflang alternate of an entry is itself an entry (the sitemap does not point to a page it leaves out).
+//  - every hreflang alternate of an entry is itself an entry (the sitemap does not point to a page it leaves out);
+//  - every indexable page, Russian ones included, declares hreflang pt, en, ru and x-default.
 // Pages with noindex are left out on purpose: the report form and "Surprise me" always, and a page with a test text or a
 // placeholder while there is one. The latter are listed as a NOTE, because they are what keeps a page out of the search index.
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -33,6 +34,9 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
   }
   indexable += 1;
   if (!canonical || !listed.has(canonical)) errors.push(`${path}: may be indexed but is not in the sitemap`);
+  // Russian is a language like the others: an indexable page names pt, en, ru and x-default (the pt page) as its alternates.
+  const langs = new Set([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)"/g)].map((m) => m[1]));
+  for (const want of ['pt', 'en', 'ru', 'x-default']) if (!langs.has(want)) errors.push(`${path}: no hreflang="${want}" alternate`);
 }
 
 for (const loc of locs) {
