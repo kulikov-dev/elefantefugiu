@@ -26,7 +26,7 @@ bridge:
   title:
     pt: Monumento de Lagoa Henriques (1960) junto aos antigos estaleiros do Ouro
     en: Monument by Lagoa Henriques (1960) near the old Ouro shipyards
-    ru: Памятник работы Лагоа Энрикиша (1960) у бывших верфей Оуру
+    ru: Памятник работы Лагоа Энрикеша (1960) у бывших верфей Оуру
   address: Ribeira, Porto
   lat: 41.1409
   lon: -8.6134
@@ -36,7 +36,7 @@ bridge:
       Lagoa Henriques.
     en: In Porto, by the old Ouro shipyards, stands a 1960 monument by Lagoa
       Henriques.
-    ru: В Порту у бывших верфей Оуру стоит памятник Лагоа Энрикиша 1960 года.
+    ru: В Порту у бывших верфей Оуру стоит памятник Лагоа Энрикеша 1960 года.
 threads:
   - comida-e-vinho
   - gente-como-nos
@@ -63,11 +63,10 @@ story:
     would keep the tripe. Henry called the nickname “tripe-eaters” an honor. Porto has worn it ever
     since.
   ru: >-
-    Согласно легенде, в 1415 году верфи Порту втайне строили флот для похода на
-    Сеуту. Инфант Энрике (Генрих Мореплаватель), родившийся в этом городе,
-    нагрянул без предупреждения и открыл настоящую цель мастеру верфи по имени
-    Ваш. Ваш пообещал кораблям всё мясо города, а людям остались потроха. Энрике
-    назвал прозвище «tripeiros», то есть любители потрохов, почётным. Порту
+    По легенде, в 1415 году верфи Порту втайне строили флот для похода на Сеуту. Инфант Энрике
+    (Генрих Мореплаватель), родившийся в этом городе, нагрянул без предупреждения и раскрыл
+    настоящую цель мастеру верфи по имени Ваш. Ваш пообещал кораблям всё мясо города, а людям
+    остались потроха. Энрике назвал прозвище «tripeiros», то есть любители потрохов, почётным. Порту
     носит его до сих пор.
 more:
   pt: >-
@@ -85,11 +84,10 @@ more:
     bronze monument by Lagoa Henriques was placed beside the old yards, thanking the people of Porto
     who equipped the fleet. Its inscription says À Grei, “to the people.”
   ru: >-
-    Хроники того времени с этой историей не сохранилось, и версии расходятся: в
-    одной прозвищу уже тридцать лет, оно пришло из войны с Кастилией. Зато блюдо
-    настоящее: tripas à moda do Porto, рубец, тушёный с фасолью, колбасами и
-    кусками свинины, курицы и телятины. В 1960 году у старых верфей поставили
-    бронзовый памятник работы Лагоа Энрикеша в благодарность жителям Порту,
+    В хрониках того времени этой истории нет, и версии расходятся: по одной из них прозвище старше
+    на тридцать лет и возникло во время войны с Кастилией. Зато блюдо настоящее: tripas à moda do
+    Porto, рубец, тушёный с фасолью, колбасами и кусками свинины, курицы и телятины. В 1960 году у
+    старых верфей поставили бронзовый памятник работы Лагоа Энрикеша в благодарность жителям Порту,
     снарядившим флот. На нём надпись À Grei, «народу».
 sources:
   - title: 'Infopédia: Lenda dos Tripeiros'
@@ -121,7 +119,7 @@ image:
   caption:
     pt: "Ilustração criada por IA (Gemini) a partir da lenda dos tripeiros. Não é uma imagem histórica."
     en: "AI-generated illustration (Gemini) based on the tripeiros legend. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по легенде о трипейруш. Не историческое изображение."
+    ru: "Иллюстрация создана ИИ (Gemini) по легенде о tripeiros. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -134,7 +132,8 @@ detail_image:
   caption:
     pt: "«Pela Grei» (Monumento aos Tripeiros), de Lagoa Henriques, 1960. Bronze. Largo de António Calém, Porto."
     en: "“Pela Grei” (Monument to the Tripeiros) by Lagoa Henriques, 1960. Bronze. Largo de António Calém, Porto."
-    ru: "«Pela Grei» (Памятник трипейруш), скульптор Лагоа Энрикеш, 1960. Бронза. Ларгу де Антониу Калем, Порту."
+    ru: "«Pela Grei» (Памятник любителям потрохов), скульптор Лагоа Энрикеш, 1960. Бронза. Ларгу
+      де Антониу Калем, Порту."
   author: "Joseolgon"
   license: "CC BY 4.0"
   license_url: https://creativecommons.org/licenses/by/4.0/

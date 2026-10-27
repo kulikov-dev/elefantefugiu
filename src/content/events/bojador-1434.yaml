@@ -44,15 +44,11 @@ sensitive: false
 hook:
   pt: Ninguém passava o Bojador. Gil Eanes voltou com uma planta como prova.
   en: For twelve years sailors feared one cape. Gil Eanes brought back flowers.
-  ru: Двенадцать лет моряки боялись одного мыса. Жил Эанеш привёз оттуда цветы.
+  ru: За этим мысом, говорили моряки, не возвращаются. Эанеш вернулся — с цветами.
 story:
   pt: O cabo Bojador, na costa do Saara Ocidental, era tido como um lugar de onde não se voltava. Dizia-se que para lá dele não havia gente, o mar era raso e as correntes não deixavam o navio regressar. O Infante D. Henrique mandou lá navio após navio, e todos voltaram para trás. Em 1433 voltou também Gil Eanes, de Lagos. O Infante enviou-o de novo e, em 1434, ele passou. Como prova, trouxe ao Infante plantas a que chamavam «rosas de Santa Maria».
   en: Cape Bojador, on the coast of Western Sahara, was a place of no return, until Gil Eanes passed it in 1434. Sailors said that beyond it lay a land without people, a shallow sea, and currents that would never let a ship return. Prince Henry sent ship after ship, and every one turned back. In 1433 Gil Eanes of Lagos failed too. The prince sent him again, and in 1434 he got through. As proof, he brought the prince plants the Portuguese called “Saint Mary’s roses.”
-  ru: Мыс Божадор на берегу Западной Сахары считали краем, откуда не возвращаются. Говорили, что за
-    ним нет людей, море мелкое, а течения не отпустят корабль назад. Инфант Энрике годами посылал
-    туда корабли, и все поворачивали. В 1433 году повернул и Жил Эанеш из Лагуша. Инфант отправил
-    его снова, и в 1434 году он прошёл. Людей на берегу не было, и в доказательство Жил Эанеш привёз
-    инфанту растения, которые в Португалии звали «розами Святой Марии».
+  ru: Моряки XV века верили, что мыс Божадор на берегу Западной Сахары — край, откуда не возвращаются. Говорили, что за ним нет людей, море мелкое, а течения не отпустят корабль назад. Инфант Энрике годами посылал туда корабли, и все поворачивали. В 1433 году повернул и Жил Эанеш из Лагуша. Инфант отправил его снова, и в 1434 году он обогнул мыс. Людей на берегу не было, и в доказательство Жил Эанеш привёз инфанту растения, которые в Португалии звали «розами Святой Марии».
 more:
   pt: >-
     Sabe-se tudo isto pela crónica de Gomes Eanes de Zurara, escrita por volta de 1453. Zurara

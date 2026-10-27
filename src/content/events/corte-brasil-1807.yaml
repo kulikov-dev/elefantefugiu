@@ -45,7 +45,7 @@ sensitive: false
 hook:
   pt: Uma corte inteira embarcou em dois dias. Os livros ficaram no cais.
   en: The court sailed to Brazil and left its library on the quay.
-  ru: Двор уплыл в Бразилию, а библиотеку забыли на причале.
+  ru: Принц-регент не стал воевать и увёз весь двор за океан.
 story:
   pt: "Em novembro de 1807, as tropas de Napoleão avançavam sobre Lisboa e a corte portuguesa
     decidiu partir. O príncipe regente D. João não se rendeu nem combateu: decidiu levar toda a
@@ -59,11 +59,11 @@ story:
     carriages were loaded onto ships. Between 10,000 and 15,000 people went with them, depending on
     the estimate. There was no wind, and the fleet waited on the river until November 29. The next
     day General Junot marched into the city."
-  ru: "В ноябре 1807 года на Лиссабон шла армия Наполеона. Принц-регент Жуан не стал ни сдаваться, ни
-    воевать: он решил перевезти в Бразилию весь двор. За два дня в Белене на корабли погрузили
-    королеву, министров, архивы и кареты. Вместе с ними уплыли, по разным оценкам, от 10 до 15 тысяч
-    человек. Ветра не было, и флот простоял на реке до 29 ноября. На следующий день в город вошёл
-    генерал Жюно."
+  ru: "В ноябре 1807 года армия Наполеона шла на Лиссабон, и португальский двор бежал за океан.
+    Принц-регент Жуан не стал ни сдаваться, ни воевать: он решил перевезти в Бразилию весь двор. За
+    два дня в Белене на корабли поднялись королева и министры, а следом погрузили архивы и кареты.
+    Вместе с ними уплыли, по разным оценкам, от 10 до 15 тысяч человек. Ветра не было, и флот
+    простоял на реке до 29 ноября. На следующий день в город вошёл генерал Жюно."
 more:
   pt: >-
     No fim de novembro saiu o decreto da mudança da corte para o Rio de Janeiro. O embarque começou
@@ -102,7 +102,7 @@ more:
     В конце ноября вышел указ о переезде двора в Рио-де-Жанейро. Посадка началась 27-го, и в спешке
     многое осталось на берегу. Ящики королевской библиотеки, которую собирали заново после пожара
     1755 года, забыли в порту под солнцем и дождём. В Рио их перевезли только в 1810–1811 годах,
-    тремя рейсами. Сегодня эти книги в основе Национальной библиотеки Бразилии.
+    тремя рейсами. Сегодня эти книги составляют основу Национальной библиотеки Бразилии.
 
 
     Королева Мария I давно была тяжело больна. По преданию, по дороге к причалу она крикнула кучеру:
@@ -161,7 +161,7 @@ detail_image:
   alt:
     pt: Multidão, carruagens e barcos no cais; ao longe, a Torre de Belém e navios.
     en: A crowd, carriages and boats on the waterfront; in the distance the Belém Tower and ships.
-    ru: Толпа, кареты и лодки на набережной, вдали Белемская башня и корабли.
+    ru: Толпа, кареты и лодки на набережной, вдали башня Белен и корабли.
   caption:
     pt: O príncipe regente e a família real embarcam em Belém. Gravura de Henri L’Evêque, c. 1813–1815.
       Biblioteca Nacional de Portugal.
