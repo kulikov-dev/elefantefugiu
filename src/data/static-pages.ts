@@ -87,7 +87,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
     },
     en: {
       lead: 'In 1515 King Manuel I decided to test whether the elephant and the rhinoceros really were sworn enemies. The animals were let into the courtyard of a Lisbon palace in front of a crowd. The elephant took one look at its opponent and ran away.',
-      more: ['Hence the name: **O Elefante Fugiu**, “The elephant ran away”. I collect stories like this from Portugal’s past: short, with sources, and tied to a place you can visit today. Each one takes a minute to read.'],
+      more: ['Hence the name: **O Elefante Fugiu**, “The elephant ran away.” I collect stories like this from Portugal’s past: short, with sources, and tied to a place you can visit today. Each one takes a minute to read.'],
       sections: [
         {
           id: 'foi-aqui',
@@ -105,12 +105,12 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Who it’s for',
           paragraphs: [],
-          items: ['For people who love history but not textbooks.', 'For travellers who want to know what happened right where they’re standing.', 'For families. The “Age” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
+          items: ['For people who love history but not textbooks.', 'For travelers who want to know what happened right where they’re standing.', 'For families. The “Age” button in the header hides stories with battles and difficult topics: you pick the age of the youngest reader.'],
         },
         {
           id: 'confianca',
           heading: 'Can you trust it',
-          paragraphs: ['I don’t pass legends off as facts. Every story carries a label: “Documented”, “Legend” or “Debated”, and a list of sources at the bottom. How I work is explained in {{method|Method and sources}}.'],
+          paragraphs: ['I don’t pass legends off as facts. Every story carries a label (“Documented,” “Legend,” or “Debated”) and a list of sources at the bottom. How I work is explained in {{method|Method and sources}}.'],
         },
         {
           id: 'estado',
@@ -121,8 +121,8 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'quem-faz',
           heading: 'Who makes this',
           paragraphs: [
-            'I live in Portugal, though I wasn’t born here, and I’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now here too.',
-            'O Elefante Fugiu is run by one person in their spare time: free, with no ads and no cookies. I’m not a historian, so I rely on sources and list them under every story.',
+            'I live in Portugal, though I wasn’t born here, and I’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now I share them here, too.',
+            'O Elefante Fugiu is a one-person project made in my spare time: free, with no ads and no cookies. I’m not a historian, so I rely on sources and list them under every story.',
             'If you’re a historian, archivist or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.',
           ],
         },
@@ -240,22 +240,22 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'datas-fontes',
           heading: 'Where the facts come from',
-          paragraphs: ['First of all from period documents, academic work, archives and the official websites of museums. Every story has at least one source, and major events have at least two. They are all listed at the bottom of the story, next to the date it was last checked.'],
+          paragraphs: ['Primarily from period documents, academic work, archives, and the official websites of museums. Every story has at least one source, and major events have at least two. They are all listed at the bottom of the story, next to the date it was last checked.'],
         },
         {
           id: 'numeros',
           heading: 'Dates and numbers',
-          paragraphs: ['When sources disagree, I give both versions or say “about”: “1778 or 1782”. Army sizes and death tolls are almost always estimates, so I give a range instead of one neat number.'],
+          paragraphs: ['When sources disagree, I give both versions or say “about”: “1778 or 1782.” Army sizes and death tolls are almost always estimates, so I give a range instead of one neat number.'],
         },
         {
           id: 'idades',
           heading: 'Children and difficult topics',
-          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution and death I give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “Age” button in the header hides stories with battles and difficult topics: you choose the youngest reader’s age.'],
+          paragraphs: ['Most stories are fine for any age and have no label. The 12+ label marks stories with battles or cruelty. Before stories about repression, persecution, or death, I give a warning and ask whether you want to continue. Those stories have no jokes and no elephant. The “Age” button in the header hides stories with battles and difficult topics: you pick the age of the youngest reader.'],
         },
         {
           id: 'imagens',
           heading: 'Images',
-          paragraphs: ['Every illustration is credited with its author and licence. If an image was made with AI, the caption says so, so that nobody mistakes it for a period document.'],
+          paragraphs: ['Every illustration is credited with its author and license. If an image was made with AI, the caption says so, so that nobody mistakes it for a period document.'],
         },
         {
           id: 'correcoes',
@@ -394,16 +394,16 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: [],
           items: [
             '**Texts** (stories, descriptions, interface text) are published under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). You may copy, translate and adapt them, including for tours and lessons. Two conditions: credit “O Elefante Fugiu” with a link, and share your version under the same terms.',
-            '**The site’s code** is open under the MIT licence.',
-            '**Illustrations** belong to their authors. The author and licence are given under each one.',
-            '**The name “O Elefante Fugiu”, the logo and the elephant mascot** are not covered by the open licences. To use them, write to me.',
+            '**The site’s code** is open under the MIT license.',
+            '**Illustrations** belong to their authors. The author and license are given under each one.',
+            '**The name “O Elefante Fugiu,” the logo, and the elephant mascot** are not covered by the open licenses. To use them, write to me.',
           ],
         },
         {
           id: 'privacidade',
           heading: 'What’s stored in your browser',
           paragraphs: [
-            'So that the site remembers your choices, your browser saves: language, colour theme, the age you chose (“Age”), the last era you opened and the last story from “Surprise me”. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me”, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
+            'So that the site remembers your choices, your browser saves: language, colour theme, the age you chose (“Age”), the last era you opened, and the last story from “Surprise me.” This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me,” your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
         },
         {
@@ -421,7 +421,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**GoatCounter** (goatcounter.com) counts page visits; it receives your IP address but keeps it only in memory, for up to 8 hours.',
             '**FormSubmit** (formsubmit.co) forwards your message to me if you send the “Found a mistake?” form, together with your email if you gave it. I use it only to fix the mistake and reply to you. Prefer not to use the service? Write directly to {{email}}.',
           ],
-          after: ['Links to “Get directions”, sources and museum websites lead to other sites with their own rules.'],
+          after: ['Links to “Get directions,” sources, and museum websites lead to other sites with their own rules.'],
         },
         {
           id: 'aviso',
@@ -432,7 +432,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'contacto',
           heading: 'Contact',
           paragraphs: [
-            'Questions about licences and data, requests to remove material: {{email}}.',
+            'Questions about licenses and data, requests to remove material: {{email}}.',
             'Data controller: Artem K., Portugal, {{email}}',
           ],
         },

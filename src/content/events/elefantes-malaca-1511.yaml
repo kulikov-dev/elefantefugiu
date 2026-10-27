@@ -12,7 +12,7 @@ level: story
 year: 1511
 year_label:
   pt: 25 de julho de 1511
-  en: 25 July 1511
+  en: July 25, 1511
   ru: 25 июля 1511
 place:
   name:
@@ -62,13 +62,12 @@ story:
     pânico e esmagaram os seus, e o sultão, também ferido, abandonou a montada. Um mês depois, a
     cidade era portuguesa.
   en: >-
-    «Whoever is lord of Malacca has his hand on the throat of Venice,» wrote the
-    Portuguese apothecary Tomé Pires, because Malacca controlled the spice
-    route. On 25 July 1511 Afonso de Albuquerque attacked it with about a
-    thousand men. The sultan answered with war elephants. The Portuguese met them
-    with lances. The sultan's elephant, wounded, turned back howling, the others
-    panicked and trampled their own side, and the sultan, wounded too, left his
-    mount. A month later the city was Portuguese.
+    “Whoever is lord of Malacca has his hand on the throat of Venice,” wrote the Portuguese
+    apothecary Tomé Pires, because Malacca controlled the spice route. On July 25, 1511, Afonso de
+    Albuquerque attacked it with about a thousand men. The sultan answered with war elephants. The
+    Portuguese met them with lances. The sultan’s elephant, wounded, turned back howling. The others
+    panicked and trampled their own side, and the sultan, hurt as well, abandoned his mount. A month
+    later the city was Portuguese.
   ru: >-
     «Кто владеет Малаккой, тот держит Венецию за горло», писал португальский
     аптекарь Томе Пиреш, ведь Малакка контролировала путь пряностей. 25 июля
@@ -88,9 +87,21 @@ more:
     relevos. Muito do que se sabe das suas campanhas vem do filho, Brás, que transformou os papéis
     do pai nos Comentários e construiu em Lisboa a Casa dos Bicos com a fortuna que o pai juntara.
   en: |-
-    The numbers vary: some sources mention about twenty elephants, and the defenders are put at 20,000 to 30,000. Albuquerque is given between 1,000 and 1,200 men, about 700 of them Portuguese. He pulled back after the first assault, attacked again in August and took the city after about forty days of fighting.
+    Accounts differ: some sources mention about twenty elephants and put the defenders at 20,000 to
 
-    The monument to Albuquerque in Belém shows the taking of Malacca on one of its four reliefs. Much of what is known of his campaigns comes from his son Brás, who turned his father's papers into the Commentaries and built Lisbon's Casa dos Bicos with the fortune his father had made.
+    30,000. Albuquerque’s force is put at between 1,000 and 1,200 men, about 700 of them Portuguese.
+
+    He pulled back after the first assault, attacked again in August and took the city after about
+
+    forty days of fighting.
+
+
+
+    The monument to Albuquerque in Belém shows the taking of Malacca on one of its four reliefs.
+
+    Much of what is known of his campaigns comes from his son Brás, who turned his father’s papers
+
+    into the Commentaries and built Lisbon’s Casa dos Bicos with the fortune his father had amassed.
   ru: |-
     Цифры расходятся: одни источники упоминают около двадцати слонов, а защитников оценивают в 20 000–30 000. Албукерки дают от 1000 до 1200 человек, около 700 из них португальцы. После первого штурма он отступил, в августе атаковал снова и взял город после примерно сорока дней боёв.
 
@@ -107,7 +118,7 @@ sources:
   - title: 'The Commentaries of the Great Afonso Dalboquerque, Second Viceroy of India, vol. III, Hakluyt Society, 1880'
     note:
       pt: 'tradução de Walter de Gray Birch; caps. XXII–XXIII (assalto de 25 de julho, os elefantes do rei)'
-      en: 'translated by Walter de Gray Birch; chapters XXII–XXIII (the assault of 25 July, the king’s elephants)'
+      en: 'translated by Walter de Gray Birch; chapters XXII–XXIII (the assault of July 25, the king’s elephants)'
       ru: 'перевод Уолтера де Грея Бёрча; главы XXII–XXIII (штурм 25 июля, слоны султана)'
     url: https://www.cambridge.org/core/books/commentaries-of-the-great-afonso-dalboquerque-second-viceroy-of-india/3653F43F94D14A4D4B315DA61551FD2F
     type: academic

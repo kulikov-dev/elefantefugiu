@@ -12,7 +12,7 @@ level: frame
 year: 1385
 year_label:
   pt: 14 de agosto de 1385
-  en: 14 August 1385
+  en: August 14, 1385
   ru: 14 августа 1385
 place:
   name:
@@ -29,7 +29,7 @@ bridge:
   name: Centro de Interpretação da Batalha de Aljubarrota (CIBA)
   title:
     pt: Centro de Interpretação da Batalha de Aljubarrota (CIBA)
-    en: Aljubarrota Battle Interpretation Centre
+    en: Aljubarrota Battle Interpretation Center
     ru: Центр битвы при Алжубарроте
   address: Calvaria de Cima, Porto de Mós
   lat: 39.5886
@@ -38,8 +38,7 @@ bridge:
   note:
     pt: No planalto de São Jorge, o centro de interpretação explica o campo onde se
       travou a batalha.
-    en: On the São Jorge plateau, an interpretation centre explains the field where
-      the battle was fought.
+    en: On the São Jorge plateau, an interpretation center walks visitors through the battlefield.
     ru: На плато Сан-Жоржи центр интерпретации рассказывает о поле, где шла битва.
 threads:
   - poder-e-revolta
@@ -52,7 +51,7 @@ hook:
   pt: >-
     Os generais discutiam. Um jovem de 25 anos foi escolher o campo.
   en: >-
-    At 25, he left the war council and chose the battlefield himself.
+    Outnumbered, Portugal let a 25-year-old pick the battlefield.
   ru: 25-летний коннетабль ушёл с совета и сам выбрал поле боя.
 story:
   pt: >-
@@ -63,12 +62,12 @@ story:
     vésperas, os franceses que atacaram primeiro caíram lá dentro. Os castelhanos, muito mais
     numerosos, perderam.
   en: >-
-    In 1385 Nuno Álvares Pereira was 25 and Portugal's constable. The war
-    council could not agree where to fight, so on 6 August he left the camp with
-    about 2,000 men and chose the battlefield himself. Froissart says he had
-    ditches and wolf pits dug across a narrow plateau. On 14 August, at the hour
-    of vespers, the French knights who charged first rode straight into them.
-    The Castilians, several times more numerous, lost.
+    At 25, Nuno Álvares Pereira was Portugal’s constable and about to fight at Aljubarrota, badly
+    outnumbered. When the war council could not agree where to fight, he left camp on August 6 with
+    about 2,000 men and chose the battlefield himself. Froissart says he had ditches and wolf pits
+    dug across a narrow plateau. On August 14, at the hour of vespers, the French knights who
+    charged first rode straight into them. The Castilians, who outnumbered them several times over,
+    lost.
   ru: >-
     В 1385 году Нуну Алвариш Перейра был 25-летним коннетаблем Португалии.
     Военный совет не мог решить, где принимать бой, и 6 августа он ушёл из
@@ -87,17 +86,14 @@ more:
     nas fontes no século XVI. Nuno foi canonizado em 2009. Fossos e covas vêm de Froissart; Ayala,
     cronista castelhano e testemunha ocular, e Fernão Lopes, sessenta anos depois, não os descrevem.
   en: >-
-    After the victory, Nuno gave most of his wealth to his veterans. In 1423,
-    aged 63, he entered the Carmo convent he had founded in Lisbon and became
-    Friar Nuno of Saint Mary. The 1755 earthquake destroyed the convent's roof;
-    today its nave stands open to the sky. Numbers for the armies vary widely:
-    the Aljubarrota Battle Foundation puts the Portuguese at about 7,000 and the
-    Castilians at 31,000–44,000, of whom only about 10,000 fought. The
-    'Portuguese square' is now called a myth, and the baker woman who killed
-    fleeing Castilians first appears in sources in the 16th century. He was
-    canonised in 2009. The ditches and pits come from Froissart; Ayala, the
-    Castilian eyewitness chronicler, and Fernão Lopes, sixty years later, do not
-    describe them.
+    After the victory, Nuno gave most of his wealth to his veterans. In 1423, aged 63, he entered
+    the Carmo Convent he had founded in Lisbon and became Friar Nuno of Saint Mary. The 1755
+    earthquake destroyed the convent’s roof; today its nave stands open to the sky. Estimates of the
+    armies vary widely. The Aljubarrota Battle Foundation counts about 7,000 Portuguese and
+    31,000–44,000 Castilians, of whom only about 10,000 fought. The “Portuguese square” is now
+    considered a myth, and the baker woman who killed fleeing Castilians first appears in sources in
+    the 16th century. Nuno was canonized in 2009. The ditches and pits come from Froissart; Ayala,
+    the Castilian eyewitness chronicler, and Fernão Lopes, sixty years later, do not describe them.
   ru: >-
     После победы Нуну раздал большую часть состояния своим ветеранам. В 1423
     году, в 63 года, он вступил в основанный им в Лиссабоне монастырь Кармо и
@@ -119,7 +115,7 @@ sources:
   - title: 'Diário de Notícias: «Vitória em Aljubarrota não é graças ao quadrado que não existe»'
     note:
       pt: 'sobre o livro «Aljubarrota», Desassossego'
-      en: 'on the book “Aljubarrota”, Desassossego'
+      en: 'on the book “Aljubarrota,” Desassossego'
       ru: 'о книге «Aljubarrota», Desassossego'
     url: https://www.dn.pt/edicao-impressa/vitória-em-aljubarrota-não-é-graças-ao-quadrado-que-não-existe-nem-seria-necessário
     type: press
@@ -164,8 +160,7 @@ image:
   caption:
     pt: Nuno Álvares Pereira escolhe o campo de batalha, 14 de agosto de 1385. Ilustração criada por IA
       (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: Nuno Álvares Pereira chooses the battlefield, 14 August 1385. AI-generated illustration (Gemini)
-      in the azulejo style. Not a historical image.
+    en: Nuno Álvares Pereira chooses the battlefield, August 14, 1385. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
     ru: Нуну Алвареш Перейра выбирает поле боя, 14 августа 1385 года. Иллюстрация создана ИИ (Gemini) в
       стиле азулежу. Не историческое изображение.
   author: Gemini (AI)
@@ -197,7 +192,7 @@ interactive:
       ru: Одна точка — 1000 человек. Источники сильно расходятся в цифрах.
     estimate_note:
       pt: Segundo estimativas de historiadores.
-      en: According to historians' estimates.
+      en: According to historians’ estimates.
       ru: По оценкам историков.
     groups:
       - id: portugueses

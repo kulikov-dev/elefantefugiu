@@ -12,7 +12,7 @@ level: frame
 year: 1810
 year_label:
   pt: 11 de outubro de 1810
-  en: 11 October 1810
+  en: October 11, 1810
   ru: 11 октября 1810
 place:
   name:
@@ -29,7 +29,7 @@ bridge:
   name: Centro de Interpretação das Linhas de Torres Vedras (Forte de São Vicente)
   title:
     pt: Centro de Interpretação das Linhas de Torres Vedras (Forte de São Vicente)
-    en: Lines of Torres Vedras Interpretation Centre (São Vicente Fort)
+    en: Lines of Torres Vedras Interpretation Center (São Vicente Fort)
     ru: Форт Сан-Висенте
   address: Forte de São Vicente, 2560-629 Torres Vedras
   lat: 39.0958
@@ -38,8 +38,7 @@ bridge:
   note:
     pt: No Forte de São Vicente, o centro de interpretação explica as linhas que
       protegeram Lisboa.
-    en: At the São Vicente fort, an interpretation centre explains the lines that
-      protected Lisbon.
+    en: At the São Vicente fort, an interpretation center explains the lines that protected Lisbon.
     ru: В форте Сан-Висенте центр интерпретации рассказывает о линиях, защитивших
       Лиссабон.
 threads:
@@ -53,7 +52,7 @@ hook:
   pt: >-
     Masséna avançou sobre Lisboa e deu com fortes que não esperava.
   en: >-
-    Portugal spent a year building forts the French barely knew existed.
+    Masséna marched on Lisbon and found a line of secret forts.
   ru: >-
     Целый год строили линию фортов, о которой французы почти не знали.
 story:
@@ -65,11 +64,11 @@ story:
     destruído. A 11 de outubro chegou às Linhas de Torres Vedras. Um mês depois,
     com fome, voltou para trás.
   en: >-
-    In October 1809, Wellington ordered fortifications built on the hills north
-    of Lisbon. Portuguese workers raised forts and redoubts in secret. In
-    September 1810, Marshal Masséna marched on Lisbon with about 60,000 men,
-    through a land stripped of food by its own farmers. On 11 October he reached
-    the Lines of Torres Vedras. A month later, hungry, he turned back.
+    In October 1809, Wellington began fortifying the hills north of Lisbon, a project kept secret
+    from the French. Portuguese workers raised forts and redoubts in secret. In September 1810,
+    Marshal Masséna marched on Lisbon with about 60,000 men, through a land stripped of food by its
+    own farmers. On October 11 he reached the Lines of Torres Vedras. A month later, hungry, he
+    turned back.
   ru: >-
     В октябре 1809 года Веллингтон приказал построить укрепления на холмах
     севернее Лиссабона. Португальские рабочие втайне возводили форты и редуты. В
@@ -91,16 +90,14 @@ more:
     também um desastre para os civis: algumas estimativas apontam para dezenas
     de milhares de mortos portugueses por fome e doença.
   en: >-
-    The system had three lines of forts and redoubts between the Tagus and the
-    Atlantic, designed by Wellington's chief engineer, Colonel Richard Fletcher.
-    The biggest fort, São Vicente at Torres Vedras, had a garrison of about
-    2,000 men and room for around 4,000. Portuguese farmers left their land and
-    destroyed the food they could not carry, so the French army went hungry. The
-    French probed the lines at Sobral on 13 and 14 October, then camped in front
-    of them until mid-November. Sources differ on the number of forts, and put
-    Masséna's army at the lines between just over 50,000 and 61,000 men. The
-    campaign was also a disaster for civilians: some estimates speak of tens of
-    thousands of Portuguese dead from hunger and disease.
+    The system had three lines of forts and redoubts between the Tagus and the Atlantic, designed by
+    Wellington’s chief engineer, Colonel Richard Fletcher. The biggest fort, São Vicente at Torres
+    Vedras, had a garrison of about 2,000 men and room for around 4,000. Portuguese farmers left
+    their land and destroyed the food they could not carry, so the French army went hungry. The
+    French probed the lines at Sobral on October 13 and 14, then camped in front of them until
+    mid-November. Sources differ on the number of forts, and estimate Masséna’s army at the lines at
+    anywhere from just over 50,000 to 61,000 men. The campaign was also a disaster for civilians:
+    some estimates put the Portuguese dead from hunger and disease in the tens of thousands.
   ru: >-
     Система состояла из трёх линий фортов и редутов между Тежу и Атлантикой,
     спроектированных главным инженером Веллингтона полковником Ричардом

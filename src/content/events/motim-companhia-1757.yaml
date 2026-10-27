@@ -12,7 +12,7 @@ level: story
 year: 1757
 year_label:
   pt: 23 de fevereiro de 1757
-  en: 23 February 1757
+  en: February 23, 1757
   ru: 23 февраля 1757
 place:
   name:
@@ -53,7 +53,7 @@ hook:
   pt: >-
     O Porto revoltou-se contra o ministro do rei, a gritar «Viva el-Rei!»
   en: >-
-    Porto rose against the king's minister, shouting 'Long live the king!'
+    Porto rose against the king’s minister, shouting “Long live the king!”
   ru: >-
     Порту восстал против министра, крича «Да здравствует король!»
 story:
@@ -63,11 +63,10 @@ story:
     juiz e destruíram bens. Pombal respondeu com tropas e julgamentos. Em outubro, entre 14 e 17
     pessoas foram executadas.
   en: >-
-    On Ash Wednesday, 23 February 1757, crowds filled the streets of Porto,
-    shouting for the king and against the new Wine Company. Tavern-keepers saw
-    only a monopoly. People roughed up a judge and wrecked property. Pombal
-    answered with troops and trials. By October, between 14 and 17 people were
-    put to death.
+    On Ash Wednesday, February 23, 1757, crowds filled the streets of Porto, shouting for the king
+    and against the new Wine Company. Tavern-keepers saw only a monopoly. The crowd roughed up a
+    judge and wrecked property. Pombal answered with troops and trials. By October, between 14 and
+    17 people had been executed.
   ru: >-
     В пепельную среду, 23 февраля 1757 года, толпы заполнили улицы Порту с
     криками в защиту короля и против новой Винной компании. Хозяева таверн
@@ -85,9 +84,21 @@ more:
     muito para além de Pombal: o nome e a marca ainda se usam hoje. A origem da Companhia e os
     marcos que delimitaram a região contam-se noutra história.
   en: |-
-    In Portuguese the riot is the Motim da Companhia. Troops and martial law followed. Counts of the executed differ, from 14 to 17 in the sources consulted; one lists 13 men and four women on 14 October 1757.
+    In Portuguese the riot is the Motim da Companhia. Troops and martial law followed. Sources give
 
-    Behind the anger lay prices and control: the Company decided who could buy and sell Douro wine, and English traders, Douro growers and Porto's tavern-keepers all had grievances. The Company outlived Pombal by far: its name and trademark are still in use today. How it began, and the stones that marked its borders, are told on another card.
+    different counts of the executed, from 14 to 17; one lists 13 men and four women on October 14,
+
+    1757.
+
+
+
+    Behind the anger lay prices and control: the Company decided who could buy and sell Douro wine,
+
+    and English traders, Douro growers and Porto’s tavern-keepers all had grievances. The Company
+
+    outlived Pombal by centuries: its name and trademark are still in use today. How it began, and
+
+    the stones that marked its borders, are told on another card.
   ru: |-
     По-португальски бунт называется Motim da Companhia. Затем пришли войска и военное положение. Число казнённых расходится: от 14 до 17 в просмотренных источниках, один перечисляет 13 мужчин и четырёх женщин 14 октября 1757 года.
 

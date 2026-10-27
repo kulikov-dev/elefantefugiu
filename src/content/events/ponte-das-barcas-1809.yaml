@@ -12,7 +12,7 @@ level: story
 year: 1809
 year_label:
   pt: 29 de março de 1809
-  en: 29 March 1809
+  en: March 29, 1809
   ru: 29 марта 1809
 place:
   name:
@@ -38,8 +38,7 @@ bridge:
   note:
     pt: As Alminhas da Ponte, na Ribeira, ficam perto do lugar da antiga ponte de
       barcas.
-    en: The Alminhas da Ponte shrine in the Ribeira stands near the place of the old
-      bridge of boats.
+    en: The Alminhas da Ponte shrine in the Ribeira stands near the site of the old bridge of boats.
     ru: Часовня Алминьяш-да-Понте в Рибейре стоит недалеко от места старого моста из
       лодок.
 threads:
@@ -60,11 +59,10 @@ story:
     multidão apinhou-se nas tábuas até a ponte ceder. As estimativas dos mortos
     vão de algumas centenas a mais de 4000.
   en: >-
-    In March 1809, French troops under Marshal Soult took Porto. In panic,
-    residents fled toward Gaia over the Ponte das Barcas, a floating bridge of
-    boats built in 1806. Chased by soldiers, the crowd packed onto the planks
-    until the bridge gave way. Estimates of the dead run from several hundred to
-    over 4,000.
+    On March 29, 1809, French troops under Marshal Soult took Porto, and the city’s escape route
+    turned into a trap. In a panic, residents fled toward Gaia over the Ponte das Barcas, a floating
+    bridge of boats built in 1806. Chased by soldiers, the crowd packed onto the planks until the
+    bridge gave way. Estimates of the dead run from several hundred to over 4,000.
   ru: >-
     В марте 1809 года французские войска маршала Сульта взяли Порту. В панике
     жители бросились в сторону Гаи по мосту Понте-даш-Баркаш, плавучему мосту из
@@ -77,9 +75,14 @@ more:
 
     O memorial na Ribeira, as Alminhas da Ponte, tem desde 1897 um baixo-relevo em bronze do escultor José Joaquim Teixeira Lopes, e há sempre velas acesas. A Igreja de São José das Taipas também serve de memorial, e todos os anos, a 29 de março, diz-se missa pelas vítimas. O número exato de mortos nunca foi apurado.
   en: |-
-    The Ponte das Barcas had 20 barges joined by cables and covered with planks. In Porto it is simply 'the Disaster'.
+    The Ponte das Barcas had 20 barges joined by cables and covered with planks. In Porto it is
+    simply “the Disaster.”
 
-    Its memorial on the Ribeira, the Alminhas da Ponte ('little souls of the bridge'), has had a bronze relief by the sculptor José Joaquim Teixeira Lopes since 1897, and candles are kept burning there. The church of São José das Taipas also serves as a memorial, and every 29 March a Mass is said for the victims. The exact number of dead was never established.
+
+    Its memorial on the Ribeira, the Alminhas da Ponte (“little souls of the bridge”), has had a
+    bronze relief by the sculptor José Joaquim Teixeira Lopes since 1897, and candles are kept
+    burning there. The church of São José das Taipas also serves as a memorial, and every March 29 a
+    Mass is said for the victims. The exact number of dead was never established.
   ru: |-
     У Понте-даш-Баркаш было 20 барж, соединённых канатами и покрытых досками. В Порту её называют просто «Бедствие».
 
@@ -111,15 +114,13 @@ image:
   alt:
     pt: Uma mulher de xaile está num cais deserto e olha para a ponte de barcas desfeita; ao lado,
       trouxas abandonadas e velas num nicho.
-    en: A woman in a shawl stands on an empty quay looking at the broken bridge of boats; beside her
-      abandoned bundles and candles in a niche.
+    en: A woman in a shawl stands on an empty dock looking at the broken bridge of boats; beside her abandoned bundles and candles in a niche.
     ru: Женщина в шали стоит на пустой набережной и смотрит на разорванный мост из лодок, рядом
       брошенные узелки и свечи в нише.
   caption:
     pt: O cais da Ribeira depois da queda da ponte das barcas, março de 1809. Ilustração criada por IA
       (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: The Ribeira quay after the bridge of boats fell, March 1809. AI-generated illustration (Gemini)
-      in the azulejo style. Not a historical image.
+    en: The Ribeira waterfront after the bridge of boats fell, March 1809. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
     ru: Набережная Рибейры после гибели моста из лодок, март 1809 года. Иллюстрация создана ИИ (Gemini)
       в стиле азулежу. Не историческое изображение.
   author: Gemini (AI)

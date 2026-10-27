@@ -33,7 +33,7 @@ bridge:
   url: https://www.museusemonumentos.pt/
   note:
     pt: Na Torre de Belém, uma guarita tem esculpida a cabeça de um rinoceronte.
-    en: On the Tower of Belém, a sentry box carries a carved rhinoceros head.
+    en: On Belém Tower, a sentry box carries a carved rhinoceros head.
     ru: На Беленской башне одна из сторожевых башенок украшена резной головой
       носорога.
 threads:
@@ -46,7 +46,7 @@ hook:
   pt: >-
     O rei pôs um rinoceronte contra um elefante. O elefante fugiu.
   en: >-
-    The king pitted a rhino against an elephant. The elephant fled.
+    Manuel I staged a rhino-elephant duel. The elephant ran before it began.
   ru: Король стравил носорога со слоном. Слон убежал.
 story:
   pt: >-
@@ -56,10 +56,9 @@ story:
     inimigos de morte. Trouxeram um elefante novo perante a multidão. O bicho
     assustou-se com o barulho e fugiu antes de a luta começar.
   en: >-
-    In May 1515 a rhinoceros arrived in Lisbon from India, the first live one in
-    Europe since Roman times. On 3 June King Manuel I decided to test Pliny's
-    claim that elephants and rhinos are bitter enemies. A young elephant was
-    brought out before a crowd. It panicked at the noisy crowd and fled before a
+    The first live rhinoceros in Europe since Roman times arrived in Lisbon from India in May 1515.
+    On June 3, King Manuel I decided to test Pliny’s claim that elephants and rhinos are bitter
+    enemies. A young elephant was brought out before a crowd, panicked at the din, and fled before a
     single blow was struck.
   ru: >-
     В мае 1515 года в Лиссабон из Индии привезли носорога, первого живого
@@ -88,13 +87,35 @@ more:
     Em Lisboa, diz-se que há um rinoceronte de pedra numa guarita da Torre de Belém, construída por
     essa altura.
   en: |-
-    The rhino was a gift from Sultan Muzaffar of Cambay (Gujarat) to the governor Afonso de Albuquerque, who sent it on to Manuel after a four-month voyage. It lived in Europe from 20 May 1515 to January 1516.
+    The rhino was a gift from Sultan Muzaffar of Cambay (Gujarat) to the governor Afonso de
 
-    A year earlier Manuel had sent Pope Leo X an elephant, Hanno, and in December 1515 he decided to send the rhino too. The ship sank in a storm off La Spezia at the end of January 1516, and the animal drowned. Accounts of the body differ: most say it washed ashore and was stuffed and sent on to the Pope, others that the skin went back to Lisbon first. No stuffed rhino is known to exist today.
+    Albuquerque, who sent it on to Manuel after a four-month voyage. It lived in Europe from May 20,
 
-    Albrecht Dürer never saw it: he worked from a sketch and a description from Lisbon, but his woodcut, with its extra horn on the shoulder, became Europe's standard rhinoceros for centuries.
+    1515, to January 1516.
 
-    In Lisbon, a stone rhinoceros is thought to look out from a corner turret of Belém Tower, built in those same years.
+
+
+    A year earlier Manuel had sent Pope Leo X an elephant, Hanno, and in December 1515 he decided to
+
+    send the rhino too. The ship sank in a storm off La Spezia at the end of January 1516, and the
+
+    animal drowned. Accounts of what happened to the body differ: most say it washed ashore and was
+
+    stuffed and sent on to the pope; others say the skin went back to Lisbon first. No stuffed rhino
+
+    is known to exist today.
+
+
+
+    Albrecht Dürer never saw it: he worked from a sketch and a description from Lisbon, but his
+
+    woodcut, with its extra horn on the shoulder, became Europe’s standard rhinoceros for centuries.
+
+
+
+    In Lisbon, a stone rhinoceros is said to gaze out from a corner turret of Belém Tower, built in
+
+    those same years.
   ru: |-
     Носорог был подарком султана Музаффара Камбейского (Гуджарат) губернатору Афонсу де Албукерки, который переслал его Мануэлу после четырёхмесячного плавания. Он прожил в Европе с 20 мая 1515 года по январь 1516-го.
 
@@ -154,7 +175,7 @@ sources:
   - title: 'British Museum: «Rhinocerus», Albrecht Dürer, 1515'
     note:
       pt: 'a data da chegada do rinoceronte a Lisboa, 20 de maio de 1515'
-      en: 'the date the rhinoceros reached Lisbon, 20 May 1515'
+      en: 'the date the rhinoceros reached Lisbon, May 20, 1515'
       ru: 'дата прибытия носорога в Лиссабон, 20 мая 1515 года'
     url: https://www.britishmuseum.org/collection/object/P_1895-0122-714
     type: institutional
@@ -188,7 +209,8 @@ detail_image:
   file: rinoceronte-1515-detalhe.webp
   alt:
     pt: "Xilogravura de Albrecht Dürer, 1515: um rinoceronte de perfil, coberto de placas, com um corno a mais no ombro."
-    en: "Albrecht Dürer's 1515 woodcut: a rhinoceros in profile, covered in plates, with an extra small horn on its shoulder."
+    en: "Albrecht Dürer’s 1515 woodcut: a rhinoceros in profile, covered in plates, with an extra
+      small horn on its shoulder."
     ru: "Гравюра на дереве Альбрехта Дюрера, 1515: носорог в профиль, покрытый пластинами, с маленьким лишним рогом на плече."
   caption:
     pt: "Albrecht Dürer, Rinoceronte, 1515. Xilogravura. National Gallery of Art, Washington (Coleção Rosenwald)."

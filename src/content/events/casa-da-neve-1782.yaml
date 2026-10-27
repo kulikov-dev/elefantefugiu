@@ -52,7 +52,7 @@ sensitive: false
 hook:
   pt: O café mais antigo de Lisboa foi aberto pelo neveiro do rei.
   en: >-
-    Lisbon's oldest café was opened by the king's own ice-master.
+    Lisbon’s oldest café was founded by the king’s own snow-keeper.
   ru: Старейшее кафе Лиссабона основал королевский хранитель льда.
 story:
   pt: >-
@@ -62,13 +62,11 @@ story:
     pagar. Hoje é o café mais antigo de Lisboa, o Martinho da Arcada, e a mesa de Fernando Pessoa
     continua reservada.
   en: >-
-    In the second half of the 18th century, under the arcades of what is now
-    Praça do Comércio, Lisbon got a shop that sold a luxury: ice (sources say
-    1778 or 1782). Its founder, Julião Pereira de Castro, was the royal
-    household's chief snow-keeper. In a city of taverns, his Casa da Neve served
-    cold drinks and flavoured ices to those who could pay. Today it is Lisbon's
-    oldest café, Martinho da Arcada, and Fernando Pessoa's table is still
-    reserved.
+    Under the arcades of today’s Praça do Comércio, Lisbon got a shop that sold a luxury: ice
+    (sources say 1778 or 1782). Its founder, Julião Pereira de Castro, was the royal household’s
+    chief keeper of snow. In a city of taverns, his Casa da Neve served chilled drinks and flavored
+    ices to anyone who could pay. Today it is Lisbon’s oldest café, Martinho da Arcada, and Fernando
+    Pessoa’s table is still reserved.
   ru: >-
     Во второй половине XVIII века под аркадами нынешней площади Коммерсио в
     Лиссабоне открылась лавка, продававшая роскошь: лёд (по разным источникам, в
@@ -85,11 +83,23 @@ more:
 
     As fontes divergem em pormenores: o ano da abertura (1778 ou 1782) e o dia (2 ou 7 de janeiro), e quando o café passou a ter o nome do dono, Martinho Bartolomeu Rodrigues (1829 ou 1845). Pelo meio foi Casa de Café Italiana. Diz-se que por lá passaram Bocage, Eça de Queirós e Pessoa. A praça tinha sido reconstruída depois do terramoto de 1755.
   en: |-
-    Where did the ice come from? At first snow was gathered in the Serra da Estrela and the Serra da Lousã, packed in pits and carried by ox-cart and donkey to the Tagus, then by boat to Lisbon. Later the Royal Ice Factory in the Serra de Montejunto, much closer to the city, froze water at night in shallow tanks. Julião bought and rebuilt it in January 1782, as an inscription above its door says, and he held the kingdom's monopoly on snow and ice.
+    Where did the ice come from? At first snow was gathered in the Serra da Estrela and the Serra da
+    Lousã, packed in pits and carried by ox-cart and donkey to the Tagus, then by boat to Lisbon.
+    Later the Royal Ice Factory in the Serra de Montejunto, much closer to the city, froze water at
+    night in shallow tanks. Julião bought and rebuilt it in January 1782, as an inscription above
+    its door records. He also held the kingdom’s monopoly on snow and ice.
 
-    What was 'neve'? Not snow but flavoured ice, something between a sorbet and a granita. Eça de Queirós has a character taste orange and strawberry in 1877. In the 18th century the Casa da Neve even quarrelled with another historic café, Marrare, which also claimed a share of the ice reaching Lisbon.
 
-    Sources disagree on small details: the opening year (1778 or 1782) and day (2 or 7 January), and when the café took the name of its owner, Martinho Bartolomeu Rodrigues (1829 or 1845). In between it was an Italian coffee house. Its guests are said to include Bocage, Eça de Queirós and Pessoa. The square had been rebuilt after the 1755 earthquake.
+    What was “neve”? Not snow but flavored ice, something between a sorbet and a granita. Writing in
+    1877, Eça de Queirós has a character taste orange and strawberry ices. In the 18th century the
+    Casa da Neve even squabbled with Marrare, another historic café that also claimed a share of the
+    ice reaching Lisbon.
+
+
+    Sources disagree on small details: the opening year (1778 or 1782) and day (January 2 or 7), and
+    when the café took the name of its owner, Martinho Bartolomeu Rodrigues (1829 or 1845). In
+    between it was an Italian coffee house. Its guests are said to have included Bocage, Eça de
+    Queirós, and Pessoa. The square had been rebuilt after the 1755 earthquake.
   ru: |-
     Откуда брался лёд? Сначала снег собирали в Серра-да-Эштрела и Серра-да-Лозан, утрамбовывали в ямах и везли на волах и ослах до Тежу, а затем на лодках в Лиссабон. Позже Королевская ледяная фабрика в Серра-ди-Монтежунту, гораздо ближе к городу, замораживала воду по ночам в мелких бассейнах. Жулиан купил и перестроил её в январе 1782 года, как говорит надпись над дверью, и владел монополией на снег и лёд в королевстве.
 
@@ -158,7 +168,8 @@ image:
   file: casa-da-neve-1782.webp
   alt:
     pt: "Ilustração ao estilo do azulejo azul e branco: sob as arcadas junto ao Tejo, um homem descarrega de um burro blocos de gelo embrulhados em palha e os clientes do café provam gelados."
-    en: "Blue-and-white azulejo-style illustration: under the arcades by the Tagus, a man unloads straw-wrapped blocks of ice from a donkey while café guests taste ices."
+    en: "Blue-and-white azulejo-style illustration: under the arcades by the Tagus, a man unloads
+      straw-wrapped blocks of ice from a donkey while café patrons sample ices."
     ru: "Иллюстрация в духе сине-белого азулежу: под аркадами у Тежу человек снимает с осла блоки льда в соломе, а посетители кафе пробуют мороженое."
   caption:
     pt: "Ilustração criada por IA (Gemini) a partir da história da Casa da Neve. Não é uma imagem histórica."

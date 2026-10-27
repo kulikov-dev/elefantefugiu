@@ -5,7 +5,7 @@ slug:
   ru: nochnye-storozha-biblioteki
 title:
   pt: Os guardas noturnos da biblioteca
-  en: The library's night watch
+  en: The Library’s Night Watch
   ru: Ночные сторожа библиотеки
 epoch: pombal-e-terramoto
 level: story
@@ -47,7 +47,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Em Mafra, os livros antigos são guardados à noite por morcegos.
-  en: In Mafra, old books are guarded at night by bats.
+  en: The night shift at Mafra’s great library has wings.
   ru: Старые книги в Мафре по ночам охраняют летучие мыши.
 story:
   pt: "A biblioteca do Palácio de Mafra, a noroeste de Lisboa, tem cerca de 36 mil volumes em
@@ -55,10 +55,10 @@ story:
     estantes, saem pequenos morcegos que caçam os insetos que roem o papel e as encadernações de
     couro. Diz-se que sempre foi assim, mas ninguém sabe quando os morcegos se instalaram na
     biblioteca."
-  en: "The palace-convent of Mafra, northwest of Lisbon, has a huge library: about 36,000 volumes on
+  en: "Northwest of Lisbon, the palace-convent of Mafra holds a library of about 36,000 volumes on
     wooden shelves that reach the ceiling. By day it is quiet and empty. But at night small bats fly
-    out from behind the shelves and hunt the insects that eat paper and leather bindings. People say
-    it has always been this way, but nobody knows when the bats moved into the library."
+    out from behind the shelves and hunt the insects that eat paper and leather bindings. Some say
+    the bats have always been there, but nobody knows when they moved in."
   ru: "Во дворце-монастыре Мафры, к северо-западу от Лиссабона, есть огромная библиотека: около 36
     тысяч томов на деревянных полках до самого потолка. Днём здесь тихо и пусто. А ночью из-за полок
     вылетают маленькие летучие мыши и охотятся на насекомых, которые точат бумагу и кожаные
@@ -80,17 +80,17 @@ more:
 
     O Palácio de Mafra é Património Mundial da UNESCO desde 2019.
   en: >-
-    The palace was conceived by King John V in 1711. The library was fitted out by the architect
-    Manuel Caetano de Sousa (1742–1802), in the second half of the century. The books date from the
-    14th to the 19th century: first editions, old Bibles, atlases.
+    King John V conceived the palace in 1711. The architect Manuel Caetano de Sousa (1742–1802)
+    fitted out the library in the second half of the century. The books date from the 14th to the
+    19th century: first editions, old Bibles, atlases.
 
 
     Bats also live in another famous library, the Joanina in Coimbra. There, the tables are covered
-    with leather at night so the bats don't soil them.
+    with leather at night to protect them from bat droppings.
 
 
-    The "disputed" label is here because the bats are real, but how long they have been in the
-    library and how much they actually help the books, nobody has measured.
+    The “Debated” label is here because the bats are real, but no one has measured how long they
+    have lived in the library or how much they actually help the books.
 
 
     The Palace of Mafra has been a UNESCO World Heritage Site since 2019.

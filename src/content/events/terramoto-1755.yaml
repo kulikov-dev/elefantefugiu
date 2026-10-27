@@ -12,7 +12,7 @@ level: frame
 year: 1755
 year_label:
   pt: 1 de novembro de 1755
-  en: 1 November 1755
+  en: November 1, 1755
   ru: 1 ноября 1755
 place:
   name:
@@ -49,7 +49,7 @@ sensitive: true
 hook:
   pt: Na manhã do terramoto, o rei já estava em Belém.
   en: >-
-    The king left Lisbon that morning because his daughter asked.
+    On All Saints’ Day the king had already gone to Belém.
   ru: >-
     Король уехал из Лиссабона в то утро, потому что дочь попросила.
 story:
@@ -60,12 +60,11 @@ story:
     cheias. Seguiram-se o tsunami e dias de fogo, e morreram dezenas de milhares. O rei escapou, mas
     ficou com medo de paredes, e a corte mudou-se para tendas na Ajuda.
   en: >-
-    On 1 November 1755, All Saints' Day, King José I heard Mass at sunrise and
-    left Lisbon, because a daughter wanted to spend the holiday outside the
-    city. At 9:40 the earthquake hit; the churches were full. A tsunami and days
-    of fire followed; tens of thousands died. The king lived, but afterwards
-    feared living within walls, and the court moved into tents on the hills of
-    Ajuda.
+    On November 1, 1755, All Saints’ Day, King José I heard Mass at sunrise and left Lisbon because
+    a daughter wanted to spend the holiday outside the city. At 9:40 a.m. the earthquake hit, and
+    the churches were full. A tsunami and days of fire followed; tens of thousands died. The king
+    survived, but he feared living within walls afterward, and the court moved into tents on the
+    hills of Ajuda.
   ru: >-
     1 ноября 1755 года, в День всех святых, король Жозе I выслушал мессу на
     рассвете и уехал из Лиссабона: одна из дочерей хотела провести праздник за
@@ -85,16 +84,15 @@ more:
     sem pão. Hoje, a nave sem telhado do Convento do Carmo, fundado pelo vencedor de Aljubarrota, é
     o memorial do terramoto.
   en: >-
-    Numbers are uncertain. Economic historian Álvaro Pereira estimates
-    30,000–40,000 deaths in Lisbon and 40,000–50,000 across Portugal, Spain and
-    Morocco; other estimates range from 10,000 to 100,000. Wave heights are
-    disputed too: a study of primary documents says long-repeated figures, such
-    as 14–16 m at Tangier, should be abandoned. Pombal, the king's chief
-    minister, reportedly said: bury the dead and heal the living. Records show
-    he ordered the bodies removed the very next day, to prevent plague. The king
-    wrote to his brother-in-law in Spain that he had no house, no servants, no
-    subjects, no money, no bread. Today the roofless nave of the Carmo convent,
-    founded by Nuno Álvares Pereira of Aljubarrota fame, serves as the memorial.
+    The death toll is uncertain. The economic historian Álvaro Pereira estimates 30,000–40,000
+    deaths in Lisbon and 40,000–50,000 across Portugal, Spain and Morocco; other estimates range
+    from 10,000 to 100,000. Wave heights are disputed too: a study of primary documents says
+    long-repeated figures, such as 14–16 meters (about 46–52 feet) at Tangier, should be abandoned.
+    Pombal, the king’s chief minister, reportedly said, “Bury the dead and heal the living.” Records
+    show he ordered the bodies removed the very next day, to prevent plague. The king wrote to his
+    brother-in-law in Spain that he had no house, no servants, no subjects, no money, no bread.
+    Today the roofless nave of the Carmo Convent, founded by Nuno Álvares Pereira of Aljubarrota
+    fame, serves as the memorial.
   ru: >-
     Цифры неточны. Историк экономики Альваро Перейра оценивает число погибших в
     30 000–40 000 в Лиссабоне и 40 000–50 000 в Португалии, Испании и Марокко;
@@ -145,8 +143,7 @@ image:
   caption:
     pt: A família real em Belém, na manhã de 1 de novembro de 1755, olha para Lisboa. Ilustração criada
       por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: The royal family at Belém on the morning of 1 November 1755, looking at Lisbon. AI-generated
-      illustration (Gemini) in the azulejo style. Not a historical image.
+    en: The royal family at Belém on the morning of November 1, 1755, looking at Lisbon. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
     ru: Королевская семья в Белене утром 1 ноября 1755 года смотрит на Лиссабон. Иллюстрация создана ИИ
       (Gemini) в стиле азулежу. Не историческое изображение.
   author: Gemini (AI)

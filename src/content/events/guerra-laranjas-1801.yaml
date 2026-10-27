@@ -37,8 +37,7 @@ bridge:
   url: https://www.cm-elvas.pt/
   note:
     pt: Elvas, a praça-forte que travou o exército de Godoy, é Património Mundial.
-    en: Elvas, the fortress town that held back Godoy's army, is a World Heritage
-      Site.
+    en: Elvas, the fortress town that held back Godoy’s army, is a World Heritage Site.
     ru: Эльваш, крепость, остановившая армию Годоя, входит в список Всемирного
       наследия.
 threads:
@@ -50,7 +49,7 @@ sensitive: false
 hook:
   pt: >-
     Diz-se que um ramo de laranjas deu nome a esta guerra.
-  en: The war named after a sprig of oranges sent to a queen.
+  en: A branch of oranges supposedly gave this war its name.
   ru: Война, названная в честь апельсиновой ветки для королевы.
 story:
   pt: >-
@@ -61,12 +60,11 @@ story:
     rainha Maria Luísa como sinal de vitória. Os inimigos transformaram-no em anedota, e a guerra
     ficou a ser a Guerra das Laranjas.
   en: >-
-    In May 1801 Spain, pushed by Napoleon's France, invaded Portugal. The army
-    was led by Manuel Godoy, the prime minister and, people said, the queen's
-    lover. He could not take the fortress of Elvas, but he took Olivença and a
-    few border towns. Outside Elvas, says the tradition, Godoy picked a branch
-    of oranges and sent it to Queen María Luisa as a token of victory. His
-    enemies turned it into a joke, and the war became the War of the Oranges.
+    In May 1801 Spain, prodded by Napoleon’s France, invaded Portugal. The army was led by Manuel
+    Godoy, the prime minister and, people said, the queen’s lover. He could not take the fortress of
+    Elvas, but he took Olivença and a few border towns. Outside Elvas, according to tradition, Godoy
+    plucked a branch of oranges and sent it to Queen María Luisa as a token of victory. His enemies
+    turned it into a joke, and the conflict became known as the War of the Oranges.
   ru: >-
     В мае 1801 года Испания, подталкиваемая наполеоновской Францией, вторглась в
     Португалию. Армией командовал Мануэль Годой, первый министр и, как говорили,
@@ -92,11 +90,29 @@ more:
     ramo de flores de laranjeira, as espanholas e inglesas de laranjas, e diz-se que foram os
     adversários de Godoy a fazer dele uma anedota.
   en: |-
-    The war lasted about eighteen days, from 20 May to the Treaty of Badajoz on 6 June 1801. Elvas, under General Francisco de Noronha, held out. Spain gave back most of the towns it had taken but kept Olivença, and Portugal had to close its ports to British ships.
+    The war lasted about eighteen days, from May 20 to the Treaty of Badajoz on June 6, 1801. Elvas,
 
-    In 1815 the Congress of Vienna recognised Portugal's right to Olivença, and Spain ratified the final act in 1817, yet the town was never returned. Today Olivença, 23 km from Elvas, has about 12,000 inhabitants and is administered by Spain. Whether it should return to Portugal is still argued.
+    under General Francisco de Noronha, held out. Spain gave back most of the towns it had taken but
 
-    The orange episode is tradition, not a documented fact. Portuguese sources speak of a branch of orange blossom, Spanish and English ones of oranges, and it is the opponents of Godoy who are said to have turned it into a joke.
+    kept Olivença, and Portugal had to close its ports to British ships.
+
+
+
+    In 1815 the Congress of Vienna recognized Portugal’s right to Olivença, and Spain ratified the
+
+    final act in 1817, yet the town was never returned. Today Olivença, about 14 miles (23 km) from
+
+    Elvas, has about 12,000 inhabitants and is administered by Spain. Whether it should return to
+
+    Portugal is still debated.
+
+
+
+    The orange episode is tradition, not a documented fact. Portuguese sources speak of a branch of
+
+    orange blossom, Spanish and English ones of oranges, and it was Godoy’s opponents who supposedly
+
+    turned it into a joke.
   ru: |-
     Война длилась около восемнадцати дней, с 20 мая до Бадахосского договора 6 июня 1801 года. Элваш под командованием генерала Франсишку де Норонья устоял. Испания вернула большинство захваченных городов, но оставила Оливенсу, а Португалия должна была закрыть порты для британских кораблей.
 
@@ -152,7 +168,8 @@ image:
     ru: "Иллюстрация в духе сине-белого азулежу: испанский командующий держит апельсиновую ветку перед солдатами; позади бастионы крепости Элваш."
   caption:
     pt: "Ilustração criada por IA (Gemini) a partir da tradição da «Guerra das Laranjas». Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the 'War of the Oranges' tradition. Not a historical image."
+    en: "AI-generated illustration (Gemini) based on the “War of the Oranges” tradition. Not a
+      historical image."
     ru: "Иллюстрация создана ИИ (Gemini) по преданию об «Апельсиновой войне». Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated

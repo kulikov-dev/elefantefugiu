@@ -5,7 +5,7 @@ slug:
   ru: dvor-uplyl-v-braziliyu
 title:
   pt: A corte que fugiu para o Brasil
-  en: The court that sailed to Brazil
+  en: The Court That Sailed to Brazil
   ru: Двор уплыл в Бразилию
 epoch: pombal-e-terramoto
 level: story
@@ -25,7 +25,7 @@ bridge:
   name: Cais de Belém
   title:
     pt: Cais de Belém
-    en: Belém quay
+    en: Belém waterfront
     ru: Набережная Белена (Cais de Belém)
   address: Cais de Belém, Belém, Lisboa
   lat: 38.697
@@ -53,11 +53,12 @@ story:
     carruagens. Seguiram com a corte, segundo as estimativas, entre 10 e 15 mil pessoas. Faltava
     vento, e a frota ficou no rio até 29 de novembro. No dia seguinte, o general Junot entrou na
     cidade."
-  en: "In November 1807 Napoleon's army was marching on Lisbon. Prince Regent John neither surrendered
-    nor fought: he decided to move the entire court to Brazil. In two days at Belém, the queen, the
-    ministers, the archives and the carriages were loaded onto ships. Between 10,000 and 15,000
-    people went with them, depending on the estimate. There was no wind, and the fleet waited on the
-    river until 29 November. The next day General Junot marched into the city."
+  en: "As Napoleon’s army closed in on Lisbon in November 1807, the Portuguese court boarded ships
+    for Brazil. Prince Regent John would neither surrender nor fight. Instead he decided to move the
+    entire court to Brazil. In two days at Belém, the queen, the ministers, the archives, and the
+    carriages were loaded onto ships. Between 10,000 and 15,000 people went with them, depending on
+    the estimate. There was no wind, and the fleet waited on the river until November 29. The next
+    day General Junot marched into the city."
   ru: "В ноябре 1807 года на Лиссабон шла армия Наполеона. Принц-регент Жуан не стал ни сдаваться, ни
     воевать: он решил перевезти в Бразилию весь двор. За два дня в Белене на корабли погрузили
     королеву, министров, архивы и кареты. Вместе с ними уплыли, по разным оценкам, от 10 до 15 тысяч
@@ -82,21 +83,21 @@ more:
     caso de uma monarquia europeia governada a partir da sua colónia. D. João VI só regressou a
     Lisboa em 1821.
   en: >-
-    A decree moving the court to Rio de Janeiro came out at the end of November. Boarding began on
-    the 27th, and in the rush a great deal was left ashore. The crates of the Royal Library, rebuilt
-    after the fire of 1755, were forgotten at the port in the sun and rain. They only reached Rio in
-    1810–1811, in three shipments. Today those books are at the core of the National Library of
-    Brazil.
+    A decree moving the court to Rio de Janeiro was issued at the end of November. Boarding began on
+    November 27, and in the rush a great deal was left ashore. The crates of the Royal Library,
+    rebuilt after the fire of 1755, were forgotten at the port in the sun and rain. They only
+    reached Rio in 1810–1811, in three shipments. Today those books form the core of the National
+    Library of Brazil.
 
 
     Queen Maria I had long been seriously ill. According to tradition, on the way to the quay she
-    shouted at the coachman: "Not so fast, they'll think we're running away!" No document records
+    shouted at the coachman: “Not so fast, they’ll think we’re running away!” No document records
     the line; later authors repeat it.
 
 
     The fleet sailed under British escort. It reached Salvador in January 1808 and Rio in March. For
     thirteen years Rio de Janeiro was the capital of the Portuguese Empire: the only time a European
-    monarchy was ruled from its own colony. John VI returned to Lisbon only in 1821.
+    monarchy was governed from one of its colonies. John VI returned to Lisbon only in 1821.
   ru: >-
     В конце ноября вышел указ о переезде двора в Рио-де-Жанейро. Посадка началась 27-го, и в спешке
     многое осталось на берегу. Ящики королевской библиотеки, которую собирали заново после пожара
@@ -143,8 +144,8 @@ image:
   alt:
     pt: "Azulejo: cortesãos carregam bagagens para barcos no cais de Belém; no chão do cais, caixotes de
       livros esquecidos e um cão."
-    en: "Azulejo: courtiers load their belongings into boats on the quay at Belém; forgotten crates of
-      books and a dog sit on the pier."
+    en: "Azulejo: courtiers load their belongings into boats on the dock at Belém; forgotten
+      crates of books and a dog sit on the pier."
     ru: "Азулежу: придворные грузят вещи в лодки на набережной Белена, на причале забытые ящики с
       книгами и собака."
   caption:
@@ -159,7 +160,7 @@ detail_image:
   file: corte-brasil-1807-detalhe.webp
   alt:
     pt: Multidão, carruagens e barcos no cais; ao longe, a Torre de Belém e navios.
-    en: A crowd, carriages and boats on the quay; in the distance the Belém Tower and ships.
+    en: A crowd, carriages and boats on the waterfront; in the distance the Belém Tower and ships.
     ru: Толпа, кареты и лодки на набережной, вдали Белемская башня и корабли.
   caption:
     pt: O príncipe regente e a família real embarcam em Belém. Gravura de Henri L’Evêque, c. 1813–1815.

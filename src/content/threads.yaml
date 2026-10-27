@@ -10,7 +10,8 @@
     ru: "Море"
   description:
     pt: "Como um pequeno país na ponta da Europa se fez ao oceano: estaleiros, mapas, naufrágios e gente que partia e voltava."
-    en: "How a small country at the edge of Europe took to the ocean: shipyards, maps, shipwrecks and people who sailed away and came back."
+    en: "How a small country at the edge of Europe took to the ocean: shipyards, maps, shipwrecks,
+      and people who sailed away and came back."
     ru: "Как маленькая страна на краю Европы вышла в океан: верфи, карты, кораблекрушения и люди, которые уплывали и возвращались."
   color: "#1f6f8b"
   color_dark: "#3a8aa8"
@@ -46,7 +47,8 @@
     ru: "Власть и бунт"
   description:
     pt: "Reis, conspirações, revoltas e revoluções: como se tomou e como se perdeu o poder em Portugal."
-    en: "Kings, plots, uprisings and revolutions: how power was seized in Portugal, and how it was lost."
+    en: "Kings, plots, uprisings, and revolutions: how power was seized in Portugal, and how it
+      was lost."
     ru: "Короли, заговоры, восстания и революции: как в Португалии брали власть и как её теряли."
   color: "#8a2b2b"
   color_dark: "#c85050"
@@ -64,7 +66,8 @@
     ru: "Люди как мы"
   description:
     pt: "Não reis nem generais, mas artesãos, mercadores, marinheiros e gente da cidade, cujas histórias chegaram às crónicas quase por acaso."
-    en: "Not kings or generals, but craftsmen, merchants, sailors and townspeople whose stories made it into the chronicles almost by chance."
+    en: "Not kings or generals, but craftsmen, merchants, sailors, and townspeople whose stories
+      made it into the chronicles almost by chance."
     ru: "Не короли и полководцы, а мастера, торговцы, моряки и горожане, чьи истории попали в хроники почти случайно."
   color: "#a8730f"
   color_dark: "#c8921f"
@@ -82,7 +85,8 @@
     ru: "Природа"
   description:
     pt: "Terramotos, elefantes e rinocerontes: como a natureza mudou a história de Portugal e como as pessoas se espantaram com ela."
-    en: "Earthquakes, elephants and rhinos: how nature changed Portugal's history, and how people marvelled at it."
+    en: "Earthquakes, elephants, and rhinos: how nature changed Portugal’s history, and how people
+      marvelled at it."
     ru: "Землетрясения, слоны и носороги: как природа меняла историю Португалии и как люди ей удивлялись."
   color: "#4f7a2a"
   color_dark: "#6c9a43"

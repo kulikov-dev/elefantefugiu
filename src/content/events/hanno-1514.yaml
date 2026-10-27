@@ -5,7 +5,7 @@ slug:
   ru: slon-kotoryj-poekhal-k-pape
 title:
   pt: O elefante que foi ver o papa
-  en: The elephant who went to see the Pope
+  en: The Elephant Who Went to See the Pope
   ru: Слон, который поехал к папе
 epoch: avis-e-descobrimentos
 level: story
@@ -44,7 +44,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Hanno, o elefante de D. Manuel, ajoelhou-se diante do papa Leão X.
-  en: The Pope was given an elephant, and the elephant knelt before him.
+  en: Manuel sent the pope an elephant. All Rome came to see him.
   ru: Папе римскому подарили слона, и слон встал перед ним на колени.
 story:
   pt: "Em 1514, D. Manuel I mandou uma embaixada a Roma, com presentes para o novo papa, Leão X.
@@ -53,11 +53,11 @@ story:
     elefante ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no
     Vaticano. O elefante chamava-se Hanno: desfilava nas procissões, dedicavam-lhe versos e toda a
     Roma corria para o ver."
-  en: "In 1514 King Manuel I sent an embassy to Rome with gifts for the new pope, Leo X. The main gift
-    was a young white elephant from India, about four years old. At the audience the elephant knelt
-    before the Pope and trumpeted. Leo X was delighted and gave him a home in the Vatican. The
-    elephant was called Hanno: he marched in festive processions, poets wrote verses about him, and
-    all Rome came running to see him."
+  en: "In 1514 King Manuel I sent an embassy to Rome with gifts for the new pope, Leo X. The main
+    gift was a young white elephant from India, about four years old. At the audience the elephant
+    knelt before the pope and trumpeted. Leo X was delighted and gave him a home in the Vatican. The
+    elephant was named Hanno. He marched in festive processions, poets wrote verses about him, and
+    all of Rome came running to see him."
   ru: "В 1514 году король Мануэл I отправил в Рим посольство с подарками для нового папы Льва X.
     Главным подарком был молодой белый слон из Индии, которому было около четырёх лет. На приёме
     слон преклонил колени перед папой и затрубил. Лев X был в восторге и поселил слона в Ватикане.
@@ -81,19 +81,18 @@ more:
     de Itália.
   en: >-
     The embassy was led by the navigator Tristão da Cunha. The elephant entered Rome in March 1514.
-    Smithsonian Magazine retells an episode from the audience: the elephant filled his trunk with
-    water and sprayed everyone present, the Pope included, who found the whole show delightful.
+    Smithsonian Magazine recounts a moment from the audience: the elephant filled his trunk with
+    water and sprayed everyone present, including the pope, who found it all delightful.
 
 
     Hanno lived in Rome for two years. In the summer of 1516 he fell ill, his doctors gave him a
-    purgative laced with gold, and on 8 June he died. The Pope was at his side. Leo X wrote the
+    purgative laced with gold, and he died on June 8. The pope was at his side. Leo X wrote the
     epitaph himself, and Raphael painted the elephant on a wall in his memory; the fresco has not
     survived. Hanno was buried in the Belvedere Courtyard in the Vatican.
 
 
-    Manuel wanted to please the Pope once more and sent him the very rhinoceros that had frightened
-    an elephant in Lisbon in 1515. The rhino never reached Rome: the ship sank off the coast of
-    Italy.
+    Manuel wanted to please the pope again and sent him the same rhinoceros that had scared an
+    elephant in Lisbon in 1515. The rhino never reached Rome: the ship sank off the coast of Italy.
   ru: >-
     Посольство вёл мореплаватель Триштан да Кунья. В Рим слон вошёл в марте 1514 года. Журнал
     Smithsonian пересказывает такой эпизод приёма: слон набрал воды в хобот и окатил всех

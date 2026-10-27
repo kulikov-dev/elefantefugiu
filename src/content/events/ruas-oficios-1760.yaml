@@ -5,7 +5,7 @@ slug:
   ru: ulitsy-remesel
 title:
   pt: As ruas dos ofícios
-  en: The streets of trades
+  en: Streets of the Trades
   ru: Улицы ремёсел
 epoch: pombal-e-terramoto
 level: story
@@ -46,7 +46,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Depois do terramoto, as ruas da Baixa foram repartidas pelos ofícios.
-  en: After the earthquake, the Baixa's streets were shared out among the trades.
+  en: "Goldsmiths here, saddlers there: a rebuilt Lisbon sorted its trades by street."
   ru: После землетрясения улицы Байши поделили между ремёслами.
 story:
   pt: "Depois do terramoto de 1755, a Baixa de Lisboa foi reconstruída a régua e esquadro, com
@@ -54,11 +54,11 @@ story:
     destinou a algumas delas certos ofícios. Na Rua Áurea deviam trabalhar os ourives e, na Rua dos
     Correeiros, os correeiros, os seleiros e os torneiros. Os lisboetas ainda dizem Rua do Ouro,
     embora na placa se leia Rua Áurea."
-  en: "After 1755, Lisbon's lower town was rebuilt with a ruler: straight streets, identical
-    buildings. A royal order of 5 November 1760 named the streets and assigned certain trades to
-    some of them. Goldsmiths were to work on Rua Áurea, and harness-makers, saddlers and turners on
-    Rua dos Correeiros. Lisbon people still say Rua do Ouro, Gold Street, although the sign reads
-    Rua Áurea."
+  en: "After 1755, Lisbon’s lower town was rebuilt as if drawn with a ruler: straight streets,
+    identical buildings. A royal order of November 5, 1760, named the streets and assigned trades to
+    some of them. Goldsmiths were to work on Rua Áurea, and harness makers, saddlers, and turners on
+    Rua dos Correeiros. Lisbon residents still say Rua do Ouro, or Gold Street, although the sign
+    reads Rua Áurea."
   ru: "После 1755 года нижний город Лиссабона отстроили заново, по линейке: прямые улицы, одинаковые
     дома. Королевская портария 5 ноября 1760 года дала улицам имена и назначила некоторым из них
     ремёсла. На Руа-Аурея должны были работать ювелиры, а на Rua dos Correeiros шорники, седельщики
@@ -81,10 +81,10 @@ more:
     to watchmakers.
 
 
-    Some of the names came from everyday use or later. Rua da Prata was called Rua Bela da Rainha
-    until 1910, and Rua dos Fanqueiros appears in the order as Rua Nova da Princesa. In 1910, a
-    month after the Republic was proclaimed, streets with names tied to the monarchy were renamed.
-    Hence a confusion that lives on: to everyone, Rua Áurea is still Rua do Ouro.
+    Some of the names came from everyday use or were added later. Rua da Prata was called Rua Bela
+    da Rainha until 1910, and Rua dos Fanqueiros appears in the order as Rua Nova da Princesa. In
+    1910, a month after the Republic was proclaimed, streets with names tied to the monarchy were
+    renamed. The result is a confusion that lives on: to everyone, Rua Áurea is still Rua do Ouro.
   ru: >-
     Так Помбал навёл порядок не только в планировке, но и в торговле: покупатель знал, где искать
     кольцо или сбрую. На Руа-Аурея, кроме ювелиров, в оставшихся лавках должны были сидеть
