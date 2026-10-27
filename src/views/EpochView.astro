@@ -119,8 +119,9 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
         )
       }
 
-      <!-- Filter and view switch need JavaScript: hidden until the script shows them. Counters are fixed at build time. -->
-      <div class="tools__js" data-js-only hidden>
+      <!-- Filter and view switch need JavaScript. They are in the page from the start and shown by CSS as soon as the head script has set
+           html[data-js] (before the first paint), so the script running later does not push the feed down. Counters are fixed at build time. -->
+      <div class="tools__js" data-js-only>
         {
           chips.length > 0 && (
             <div role="group" aria-label={t(lang, 'epoch.chips_label')}>
@@ -263,9 +264,13 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
   }
 
   .tools__js {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: var(--space-3);
+  }
+
+  :global(html[data-js]) .tools__js {
+    display: flex;
   }
 
   .view-switch {

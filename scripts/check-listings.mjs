@@ -168,7 +168,7 @@ for (const lang of ['pt', 'en']) {
 
     // client controls: same counters as the link chips, filter buttons for the script, data for the filter on every card
     const tools = html.match(/<div class="tools"[\s\S]*?<section class="epoch__feed" aria-labelledby="timeline-title"/)?.[0] ?? '';
-    if (!/data-epoch-tools/.test(tools) || !/data-js-only hidden/.test(tools)) fail('filter controls are missing or not hidden until the script runs');
+    if (!/data-epoch-tools/.test(tools) || !/data-js-only/.test(tools)) fail('filter controls are missing');
     const noscriptChips = tools.match(/<noscript>[\s\S]*?<\/noscript>/)?.[0] ?? '';
     if (wantChips.length > 0 && !/<a [^>]*thread--link/.test(noscriptChips)) fail('without JavaScript the chips must be links (inside <noscript>)');
     const jsPart = tools.replace(noscriptChips, '');

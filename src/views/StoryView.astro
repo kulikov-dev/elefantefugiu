@@ -115,7 +115,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
       <ol>
         <li>{epochLink ? <a href={epochLink}>{epoch.name[lang]}</a> : <span class="crumbs__text">{epoch.name[lang]}</span>}</li>
-        <li aria-current="page">{title}</li>
+        <li aria-current="page"><span class="crumbs__text">{title}</span></li>
       </ol>
     </nav>
 
@@ -244,31 +244,41 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     margin-block-start: var(--space-5);
   }
 
+  /* One line, always: a long name is cut with an ellipsis instead of wrapping, so the web font arriving later (a different text width)
+     cannot turn one line into two and push the whole card down. */
   .crumbs ol {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0 var(--space-2);
     list-style: none;
     color: var(--color-ink-muted);
     font-size: var(--text-sm);
   }
 
+  .crumbs li {
+    display: flex;
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+
+  .crumbs li:last-child {
+    flex: 1 1 0;
+  }
+
   .crumbs li + li::before {
     content: '\203a' / '';
+    flex: none;
     margin-inline-end: var(--space-2);
+    line-height: var(--touch-target);
   }
 
-  .crumbs a {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--touch-target);
-  }
-
-  .crumbs [aria-current='page'],
+  .crumbs a,
   .crumbs__text {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--touch-target);
+    min-width: 0;
+    overflow: hidden;
+    line-height: var(--touch-target);
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .card__header > :global(* + *) {
