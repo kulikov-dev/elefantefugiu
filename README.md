@@ -127,6 +127,11 @@ epochs.yaml  threads.yaml  featured.yaml
 Interface strings are not content data: they live in `src/i18n/pt.json`,
 `en.json` and `ru.json` (the build checks that they have the same keys).
 
+Adding a story: copy an existing `events/<id>.yaml`, fill the texts, `place`, `bridge` (with coordinates and address), `sources` and
+`published` (the day of publication, `YYYY-MM-DD`; `updated` only after a substantive change). The schema.org markup (JSON-LD:
+Article, Event, place with geo, breadcrumbs, the epoch's story list) is generated from these fields (`src/lib/schema.ts`), nothing is
+written by hand. `npm run build` stops (`check:schema`) when an indexable page lacks any part of it.
+
 `npm run check:data` reports problems as `file [field, language]: message`
 and prints a summary. Length limits for entries with `placeholder: true` are
 warnings only. Test data is latin filler with `placeholder: true`; run
