@@ -41,6 +41,10 @@
     license: AI-generated
     ai: true
   placeholder: []
+  description:
+    pt: "Uma nova dinastia salvou o país em Aljubarrota e virou-se para o mar: em século e meio, Portugal chegou a África, à Índia, ao Brasil e ao Japão."
+    en: "A new dynasty saved the country at Aljubarrota and turned to the sea. In a century and a half, tiny Portugal reached Africa, India, Brazil and Japan."
+    ru: "Новая династия отстояла страну при Алжубарроте и повернулась к морю: за полтора века маленькая Португалия дошла до Африки, Индии, Бразилии и Японии."
   intro:
     pt: Uma nova dinastia defendeu o país em Aljubarrota e virou-se para o mar. Em
       século e meio, o pequeno Portugal chegou a África, à Índia, ao Brasil e ao
@@ -88,6 +92,10 @@
     license: AI-generated
     ai: true
   placeholder: []
+  description:
+    pt: "Em 1755, um terramoto, um tsunami e um incêndio destruíram Lisboa. Pombal reconstruiu a cidade; meio século depois, a corte partiu para o Brasil."
+    en: "On 1 November 1755 an earthquake, a tsunami and fire destroyed Lisbon. Pombal rebuilt the city; half a century later the royal court sailed for Brazil."
+    ru: "1 ноября 1755 года землетрясение, цунами и пожар разрушили Лиссабон. Помбал отстроил город, а через полвека двор уплыл в Бразилию."
   intro:
     pt: A 1 de novembro de 1755, o terramoto, o tsunami e o incêndio destruíram o
       centro de Lisboa. O Marquês de Pombal reconstruiu a cidade a régua e

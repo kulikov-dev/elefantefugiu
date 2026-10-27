@@ -192,6 +192,8 @@ export const epochSchema = z
     years_label: text.optional(),
     /** Theme phrase. Required for MVP epochs; epochs without a page do not need one. */
     theme: text.optional(),
+    /** One or two sentences (up to about 155 characters) for the meta description of the epoch page and its link preview; without it the theme phrase is used. */
+    description: text.optional(),
     /** Epoch look (stage 6). Required for MVP epochs. */
     style: epochStyle.optional(),
     mvp: z.boolean(),

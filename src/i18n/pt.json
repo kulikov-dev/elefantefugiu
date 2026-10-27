@@ -18,22 +18,28 @@
   },
   "pages": {
     "about": {
-      "title": "Sobre o projeto"
+      "title": "Sobre o projeto",
+      "description": "Quem faz O Elefante Fugiu, porquê e para quem: histórias curtas do passado de Portugal, cada uma ligada a um lugar que se pode visitar."
     },
     "method": {
-      "title": "Método e fontes"
+      "title": "Método e fontes",
+      "description": "Como separo o que está provado da lenda: três etiquetas, fontes em cada história, datas e números, imagens e erros."
     },
     "report": {
-      "title": "Encontrou um erro?"
+      "title": "Encontrou um erro?",
+      "description": "Encontrou uma data, um nome ou um lugar errado numa história? Diga-me e eu verifico."
     },
     "legal": {
-      "title": "Informação legal"
+      "title": "Informação legal",
+      "description": "Licenças (CC BY-SA, MIT), o que o site guarda no seu navegador, contagem de visitas sem cookies e os serviços que veem o seu IP."
     },
     "map": {
-      "title": "Mapa"
+      "title": "Mapa",
+      "description": "Todas as histórias no mapa de Portugal: filtre por época e por fio, abra uma história e veja como chegar ao lugar onde aconteceu."
     },
     "surprise": {
-      "title": "Surpreenda-me"
+      "title": "Surpreenda-me",
+      "description": "Uma história ao acaso do passado de Portugal, escolhida para si em poucos segundos."
     }
   },
   "footer": {

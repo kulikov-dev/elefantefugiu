@@ -53,7 +53,10 @@ const chrome = allLangs ? LANGS : [lang];
 const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
-const description = descriptionProp ?? t(lang, 'site.description');
+// The service pages have a description of their own (pages.<key>.description); every other page without one uses the site description.
+const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'map', 'surprise'];
+const pageDescription = pageKey && DESCRIBED_PAGES.includes(pageKey) ? t(lang, `pages.${pageKey}.description`) : undefined;
+const description = descriptionProp ?? pageDescription ?? t(lang, 'site.description');
 
 const paths: Record<Lang, string> | undefined =
   alternatesProp ?? (pageKey ? altPaths((l) => pagePath(l, pageKey)) : undefined);

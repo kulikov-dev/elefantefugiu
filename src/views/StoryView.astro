@@ -45,7 +45,7 @@ const epochLink = epochHasContent(epoch, all) ? epochHref(lang, epoch.slug[lang]
 const title = event.title[lang];
 const alternates = altPaths((l) => storyPath(l, event.slug[l]));
 const cardUrl = new URL(alternates[lang], Astro.site).href;
-const description = firstSentence(event.story[lang]);
+const description = firstSentence(event.story[lang], 155);
 
 // Preview picture (link previews): the main picture of the story, else the picture of the epoch (also for a heavy topic: its pictures are
 // documents and strict azulejo, not the playful ones). An epoch that has only a provisional picture (a path inside public/) gives that.

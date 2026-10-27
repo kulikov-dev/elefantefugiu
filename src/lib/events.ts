@@ -114,8 +114,16 @@ const ABBREVIATIONS = new Set([
 function truncate(text: string, max: number): string {
   if (text.length <= max) return text;
   const cut = text.slice(0, max - 1);
+  // Stop at a comma, semicolon, colon or opening bracket when that keeps most of the text, so the cut does not fall inside a phrase;
+  // otherwise at a word boundary.
+  const clause = Math.max(cut.lastIndexOf(', '), cut.lastIndexOf('; '), cut.lastIndexOf(': '), cut.lastIndexOf(' ('));
   const space = cut.lastIndexOf(' ');
-  return `${(space > max / 2 ? cut.slice(0, space) : cut).replace(/[\s,;:.\-\u2013]+$/u, '')}\u2026`;
+  const at = clause > max * 0.6 ? clause : space > max / 2 ? space : cut.length;
+  let head = cut.slice(0, at);
+  // never end inside a bracket
+  const open = head.lastIndexOf('(');
+  if (open > head.lastIndexOf(')') && open > max / 2) head = head.slice(0, open);
+  return `${head.replace(/[\s,;:.(\-\u2013]+$/u, '')}\u2026`;
 }
 
 /**

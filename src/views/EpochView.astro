@@ -77,7 +77,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
   lang={lang}
   title={epoch.name[lang]}
   alternates={alternates}
-  description={epoch.theme?.[lang]}
+  description={epoch.description?.[lang] ?? epoch.theme?.[lang]}
   preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl }}
   noindex={noindex}
   epoch={epoch.id}

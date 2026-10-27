@@ -98,6 +98,16 @@ for (const name of existsSync(eventsDir) ? readdirSync(eventsDir).sort() : []) {
 }
 
 // ---------- rules ----------
+// The meta description of an epoch: one or two sentences, up to about 155 characters (search results cut it there).
+for (const { item, file } of epochs) {
+  for (const lang of ['pt', 'en', 'ru'] as const) {
+    const text = item.description?.[lang];
+    if (text === undefined) continue;
+    if (text.trim().length < 40) report('error', file, 'is too short for a description', 'description', lang);
+    else if (text.length > 160) report('warn', file, `${text.length} characters, a description is cut in search results at about 155`, 'description', lang);
+  }
+}
+
 // The introduction of an epoch: 2 or 3 sentences, per language; a language may be missing (the page then shows no block).
 for (const { item, file } of epochs) {
   for (const lang of ['pt', 'en', 'ru'] as const) {

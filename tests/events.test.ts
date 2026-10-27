@@ -108,6 +108,8 @@ test('firstSentence: plain, punctuation, abbreviations, long text', () => {
   const long = `${'palavra '.repeat(60)}fim.`;
   const cut = firstSentence(long, 100);
   assert.ok(cut.length <= 100 && cut.endsWith('\u2026'), cut);
+  // a long sentence is cut at a clause (comma, colon, bracket) when one is late enough, not in the middle of a phrase
+  assert.equal(firstSentence('Primeiro bloco da frase, segundo bloco da frase: terceiro bloco (quarto bloco muito comprido que não cabe aqui).', 60), 'Primeiro bloco da frase, segundo bloco da frase\u2026');
 });
 
 test('formatDate: stored day does not shift, language-specific', () => {

@@ -1,7 +1,7 @@
 {
   "site": {
     "name": "O Elefante Fugiu",
-    "tagline": "Foi aqui",
+    "tagline": "It happened here",
     "description": "Short interactive stories from Portuguese history, tied to the map and to time."
   },
   "a11y": {
@@ -18,22 +18,28 @@
   },
   "pages": {
     "about": {
-      "title": "About the project"
+      "title": "About the project",
+      "description": "Who makes O Elefante Fugiu, why and for whom: short stories from Portugal’s past, each tied to a place you can visit."
     },
     "method": {
-      "title": "Method and sources"
+      "title": "Method and sources",
+      "description": "How I tell what is proven from legend: three labels, sources under every story, dates and numbers, images and mistakes."
     },
     "report": {
-      "title": "Found a mistake?"
+      "title": "Found a mistake?",
+      "description": "Spotted a wrong date, name or place in a story? Tell me and I will check it."
     },
     "legal": {
-      "title": "Legal information"
+      "title": "Legal information",
+      "description": "Licences (CC BY-SA, MIT), what the site stores in your browser, cookie-free visit counting and the services that see your IP address."
     },
     "map": {
-      "title": "Map"
+      "title": "Map",
+      "description": "All the stories on a map of Portugal: filter by era and thread, open a story and see how to get to the place where it happened."
     },
     "surprise": {
-      "title": "Surprise me"
+      "title": "Surprise me",
+      "description": "A random story from Portugal’s past, picked for you in a few seconds."
     }
   },
   "footer": {
