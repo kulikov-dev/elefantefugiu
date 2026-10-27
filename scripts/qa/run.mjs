@@ -166,7 +166,7 @@ for (const suite of wanted) {
   }
   const t0 = Date.now();
   process.stdout.write(`running ${suite.name} ... `);
-  const result = await new Promise((resolve) => {
+  const runOnce = () => new Promise((resolve) => {
     const child = spawn('node', [suite.script, ...(suite.args ?? [])], {
       cwd: here,
       env: { ...process.env, BASE_URL: `http://localhost:${MAIN}${BASE_PATH}`, VARIANT_URL: `http://localhost:${VARIANT}${BASE_PATH}`, ...(suite.env ?? {}) },
@@ -177,6 +177,13 @@ for (const suite of wanted) {
     const timer = setTimeout(() => child.kill(), 15 * 60 * 1000);
     child.on('close', (code) => (clearTimeout(timer), resolve({ code, log })));
   });
+  let result = await runOnce();
+  // A browser that dies in the middle of a suite (ProtocolError, no check failed) is a crash of the runner, not a finding: one more try.
+  // A suite with a FAIL line is never run again.
+  if (result.code !== 0 && !/^FAIL/m.test(result.log)) {
+    process.stdout.write('crashed, once more ... ');
+    result = await runOnce();
+  }
   mkdirSync(out, { recursive: true });
   writeFileSync(`${out}${suite.name}.log`, result.log);
   const count = (word) => (result.log.match(new RegExp(`^${word}\\b`, 'gm')) ?? []).length;
