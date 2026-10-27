@@ -1,0 +1,10 @@
+---
+// One <script type="application/ld+json"> with the structured data of the page (src/lib/schema.ts builds it from the page data).
+import { serialize, type Node } from '../lib/schema';
+
+interface Props {
+  data: Node;
+}
+const { data } = Astro.props;
+---
+<script is:inline type="application/ld+json" set:html={serialize(data)} />

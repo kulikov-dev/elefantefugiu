@@ -28,7 +28,8 @@ const walk = (dir) => {
     }
     if (!TEXT.test(name)) continue;
     let text = readFileSync(path, 'utf8');
-    if (name.endsWith('.html')) text = text.replace(/<a\b[^>]*>/g, '');
+    // The citation list of the JSON-LD names the sources of a story: links like <a>, not loaded.
+    if (name.endsWith('.html')) text = text.replace(/<a\b[^>]*>/g, '').replace(/"citation":\[[^\]]*\]/g, '');
     for (const m of text.matchAll(/http:\/\/[^\s"'`()<>\\]+/g)) {
       if (!NAMESPACE.test(m[0])) found.push(`${path.slice(dist.length)}: ${m[0]}`);
     }

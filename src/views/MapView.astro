@@ -6,7 +6,7 @@ import FamilyNote from '../components/FamilyNote.astro';
 import EpochScale from '../components/EpochScale.astro';
 import MapBlock from '../components/MapBlock.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { storyPath, type Lang } from '../i18n/routes';
+import { pagePath, storyPath, type Lang } from '../i18n/routes';
 import { t, tAll } from '../i18n';
 import { epochHasContent, epochYearsText } from '../lib/epochs';
 import { groupByEpoch, toMapCards } from '../lib/map-cards';
@@ -14,6 +14,8 @@ import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { ageInfoOf, countByMode, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
+import { pageNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
 
 interface Props {
   lang: Lang;
@@ -32,8 +34,10 @@ const threads = Object.fromEntries(site.threads.map((th) => [th.id, { name: th.n
 const known = { threads: site.visibleThreads.map((th) => th.id), epochs: epochs.map((e) => e.id) };
 const tile = tileConfig(process.env);
 const noindex = events.some((e) => e.placeholder);
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')), name: t(lang, 'pages.map.title'), description: t(lang, 'pages.map.description') });
 ---
-<BaseLayout lang={lang} title={t(lang, 'pages.map.title')} pageKey="map" noindex={noindex}>
+<BaseLayout lang={lang} title={t(lang, 'pages.map.title')} pageKey="map" noindex={noindex} schema={schema}>
   <div class="map-page">
     <h1>{t(lang, 'pages.map.title')}</h1>
     <FamilyNote lang={lang} cards={events.map(ageInfoOf)} />

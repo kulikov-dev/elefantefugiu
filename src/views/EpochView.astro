@@ -33,6 +33,8 @@ import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
 import { previewImageUrl } from '../lib/picture-assets';
 import { epochPicture } from '../lib/pictures';
+import { epochNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
 
 interface Props {
   lang: Lang;
@@ -72,6 +74,13 @@ const epochPic = epochPicture(epoch);
 const previewUrl = epochPic ? await previewImageUrl(epochPic) : undefined;
 // Pages that show test text stay out of search results until the text is real.
 const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = epochNodes(schemaCtx, {
+  url: schemaCtx.abs(alternates[lang]),
+  name: epoch.name[lang],
+  description: epoch.description?.[lang] ?? epoch.theme?.[lang] ?? epoch.name[lang],
+  stories: feed.map((e) => ({ url: schemaCtx.abs(storyPath(lang, e.slug[lang])), name: e.title[lang] })),
+});
 ---
 <BaseLayout
   lang={lang}
@@ -80,6 +89,7 @@ const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
   description={epoch.description?.[lang] ?? epoch.theme?.[lang]}
   preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl }}
   noindex={noindex}
+  schema={schema}
   epoch={epoch.id}
 >
   <!-- ?fio= applied before the first paint (the head script sets data-fio on <html>). -->

@@ -12,6 +12,7 @@
     "language": "Language"
   },
   "nav": {
+    "home": "Home",
     "epochs": "Eras",
     "map": "Map",
     "surprise": "Surprise me"
