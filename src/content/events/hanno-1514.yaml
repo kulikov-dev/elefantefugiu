@@ -43,13 +43,14 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: Ofereceram um elefante ao papa, e o elefante ajoelhou-se diante dele.
+  pt: Hanno, o elefante de D. Manuel, ajoelhou-se diante do papa Leão X.
   en: The Pope was given an elephant, and the elephant knelt before him.
   ru: Папе римскому подарили слона, и слон встал перед ним на колени.
 story:
-  pt: "Em 1514, D. Manuel I enviou a Roma uma embaixada com presentes para o novo papa, Leão X. O
-    presente principal era um jovem elefante branco da Índia, com cerca de quatro anos. Na receção,
-    o elefante ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no
+  pt: "Em 1514, D. Manuel I mandou uma embaixada a Roma, com presentes para o novo papa, Leão X.
+    Manuel I enviou a Roma uma embaixada com presentes para o novo papa, Leão X. O presente
+    principal era um jovem elefante branco da Índia, com cerca de quatro anos. Na receção, o
+    elefante ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no
     Vaticano. O elefante chamava-se Hanno: desfilava nas procissões, dedicavam-lhe versos e toda a
     Roma corria para o ver."
   en: "In 1514 King Manuel I sent an embassy to Rome with gifts for the new pope, Leo X. The main gift

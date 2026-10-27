@@ -48,18 +48,17 @@ min_age: '12'
 sensitive: false
 hook:
   pt: >-
-    Depois da Rússia, restavam uns cem homens da Legião de Napoleão.
+    Nove mil portugueses marcharam com Napoleão. Restavam uns cem.
   en: >-
     After Russia, about a hundred of Napoleon's Portuguese Legion were left.
   ru: >-
     Из португальского легиона Наполеона после России осталась примерно сотня.
 story:
   pt: >-
-    Em 1808, os ocupantes franceses dissolveram o exército português e formaram
-    uma legião com as suas unidades. Cerca de 9000 homens, comandados pelo
-    marquês de Alorna, partiram para França como Legião Portuguesa. Combateram
-    em Wagram, em 1809, e em 1812 foram para a Rússia, a Smolensk e a Borodino.
-    Em 1813, restavam apenas uns cem.
+    Em 1808, ocupado o país, os franceses dissolveram o exército português e criaram uma legião com
+    as suas unidades. Cerca de 9000 homens, comandados pelo marquês de Alorna, partiram para França
+    como Legião Portuguesa. Combateram em Wagram, em 1809, e em 1812 foram para a Rússia, a Smolensk
+    e a Borodino. Em 1813, restavam apenas uns cem.
   en: >-
     In 1808 the French occupiers disbanded Portugal's army, then built a legion
     from its units. About 9,000 men, led by the Marquis of Alorna, marched off

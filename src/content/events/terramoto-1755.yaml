@@ -47,18 +47,18 @@ label: documented
 min_age: '12'
 sensitive: true
 hook:
-  pt: O rei saiu de Lisboa nessa manhã porque uma filha quis.
+  pt: Na manhã do terramoto, o rei já estava em Belém.
   en: >-
     The king left Lisbon that morning because his daughter asked.
   ru: >-
     Король уехал из Лиссабона в то утро, потому что дочь попросила.
 story:
   pt: >-
-    A 1 de novembro de 1755, Dia de Todos os Santos, D. José I ouviu missa logo
-    de manhã e saiu de Lisboa, porque uma filha queria passar o feriado fora. Às
-    9h40, o terramoto; as igrejas estavam cheias. Seguiram-se o tsunami e dias
-    de fogo, e morreram dezenas de milhares. O rei escapou, mas ficou com medo
-    de paredes, e a corte mudou-se para tendas na Ajuda.
+    A 1 de novembro de 1755, Dia de Todos os Santos, D. José I ouviu missa de manhã e deixou Lisboa
+    porque uma das filhas queria passar o feriado fora. José I ouviu missa logo de manhã e saiu de
+    Lisboa, porque uma filha queria passar o feriado fora. Às 9h40, o terramoto; as igrejas estavam
+    cheias. Seguiram-se o tsunami e dias de fogo, e morreram dezenas de milhares. O rei escapou, mas
+    ficou com medo de paredes, e a corte mudou-se para tendas na Ajuda.
   en: >-
     On 1 November 1755, All Saints' Day, King José I heard Mass at sunrise and
     left Lisbon, because a daughter wanted to spend the holiday outside the
@@ -75,17 +75,15 @@ story:
     холмах Ажуды.
 more:
   pt: >-
-    Os números são incertos. O historiador de economia Álvaro Pereira estima
-    entre 30 000 e 40 000 mortos em Lisboa e entre 40 000 e 50 000 em Portugal,
-    Espanha e Marrocos; outras estimativas vão dos 10 000 aos 100 000. Também as
-    alturas das ondas são discutidas: um estudo feito a partir de documentos da
-    época diz que valores muito repetidos, como os 14 a 16 metros em Tânger,
-    devem ser postos de parte. Pombal, o ministro do rei, terá dito: enterrar os
-    mortos e tratar dos vivos. Os registos mostram que mandou retirar os corpos
-    logo no dia seguinte, para evitar a peste. O rei escreveu ao cunhado, em
-    Espanha, que ficara sem casa, sem criados, sem súbditos, sem dinheiro e sem
-    pão. Hoje, a nave sem telhado do Convento do Carmo, fundado pelo vencedor de
-    Aljubarrota, é o memorial do terramoto.
+    Os números são incertos. O historiador económico Álvaro Pereira estima entre 30 000 e 40 000
+    mortos em Lisboa e entre 40 000 e 50 000 em Portugal, Espanha e Marrocos; outras estimativas vão
+    dos 10 000 aos 100 000. Também as alturas das ondas são discutidas: um estudo feito a partir de
+    documentos da época diz que valores muito repetidos, como os 14 a 16 metros em Tânger, devem ser
+    postos de parte. Pombal, o ministro do rei, terá dito: enterrar os mortos e tratar dos vivos. Os
+    registos mostram que mandou retirar os corpos logo no dia seguinte, para evitar a peste. O rei
+    escreveu ao cunhado, em Espanha, que ficara sem casa, sem criados, sem súbditos, sem dinheiro e
+    sem pão. Hoje, a nave sem telhado do Convento do Carmo, fundado pelo vencedor de Aljubarrota, é
+    o memorial do terramoto.
   en: >-
     Numbers are uncertain. Economic historian Álvaro Pereira estimates
     30,000–40,000 deaths in Lisbon and 40,000–50,000 across Portugal, Spain and

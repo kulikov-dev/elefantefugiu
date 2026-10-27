@@ -49,17 +49,16 @@ min_age: all
 sensitive: false
 hook:
   pt: >-
-    A guerra batizada por um ramo de laranjeira enviado à rainha.
+    Diz-se que um ramo de laranjas deu nome a esta guerra.
   en: The war named after a sprig of oranges sent to a queen.
   ru: Война, названная в честь апельсиновой ветки для королевы.
 story:
   pt: >-
-    Em maio de 1801, a Espanha, empurrada pela França de Napoleão, invadiu
-    Portugal. O exército era comandado por Manuel Godoy, o primeiro-ministro e,
-    diziam, amante da rainha. Não conseguiu tomar a fortaleza de Elvas, mas
-    tomou Olivença e algumas vilas da fronteira. Diante de Elvas, conta a
-    tradição, Godoy colheu um ramo de laranjas e enviou-o à rainha Maria Luísa
-    como sinal de vitória. Os inimigos transformaram-no em anedota, e a guerra
+    Em maio de 1801, a Espanha, pressionada por Napoleão, invadiu Portugal numa guerra que durou
+    menos de três semanas. O exército era comandado por Manuel Godoy, o primeiro-ministro e, diziam,
+    amante da rainha. Não conseguiu tomar a fortaleza de Elvas, mas tomou Olivença e algumas vilas
+    da fronteira. Diante de Elvas, conta a tradição, Godoy colheu um ramo de laranjas e enviou-o à
+    rainha Maria Luísa como sinal de vitória. Os inimigos transformaram-no em anedota, e a guerra
     ficou a ser a Guerra das Laranjas.
   en: >-
     In May 1801 Spain, pushed by Napoleon's France, invaded Portugal. The army
@@ -77,11 +76,21 @@ story:
     превратили это в шутку, и война осталась в истории «Апельсиновой».
 more:
   pt: |-
-    A guerra durou cerca de dezoito dias, de 20 de maio ao Tratado de Badajoz, a 6 de junho de 1801. Elvas, sob o comando do general Francisco de Noronha, resistiu. A Espanha devolveu a maioria das praças que tinha tomado, mas ficou com Olivença, e Portugal teve de fechar os portos aos navios britânicos.
+    A guerra durou cerca de dezoito dias, de 20 de maio ao Tratado de Badajoz, a 6 de junho de 1801.
+    Elvas, sob o comando do general Francisco de Noronha, resistiu. A Espanha devolveu a maioria das
+    praças que tinha tomado, mas ficou com Olivença, e Portugal teve de fechar os portos aos navios
+    britânicos.
 
-    Em 1815, o Congresso de Viena reconheceu o direito de Portugal a Olivença, e a Espanha ratificou a ata final em 1817, mas a vila nunca foi devolvida. Hoje, Olivença, a 23 km de Elvas, tem cerca de 12 000 habitantes e é administrada pela Espanha. Se deve voltar a Portugal continua em discussão.
 
-    O episódio das laranjas é tradição, não um facto documentado. As fontes portuguesas falam de um ramo de flores de laranjeira, as espanholas e inglesas de laranjas, e diz-se que foram os adversários de Godoy a fazer dele uma anedota.
+    Em 1815, o Congresso de Viena reconheceu o direito de Portugal a Olivença, e a Espanha ratificou
+    a ata final em 1817, mas a vila nunca foi devolvida. Hoje, Olivença, a 23 km de Elvas, tem cerca
+    de 12 000 habitantes e é administrada pela Espanha. Continua em discussão se deve regressar a
+    Portugal.
+
+
+    O episódio das laranjas é tradição, não um facto documentado. As fontes portuguesas falam de um
+    ramo de flores de laranjeira, as espanholas e inglesas de laranjas, e diz-se que foram os
+    adversários de Godoy a fazer dele uma anedota.
   en: |-
     The war lasted about eighteen days, from 20 May to the Treaty of Badajoz on 6 June 1801. Elvas, under General Francisco de Noronha, held out. Spain gave back most of the towns it had taken but kept Olivença, and Portugal had to close its ports to British ships.
 

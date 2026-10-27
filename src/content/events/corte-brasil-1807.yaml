@@ -43,15 +43,16 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: A corte partiu para o Brasil e a biblioteca ficou no cais.
+  pt: Uma corte inteira embarcou em dois dias. Os livros ficaram no cais.
   en: The court sailed to Brazil and left its library on the quay.
   ru: Двор уплыл в Бразилию, а библиотеку забыли на причале.
 story:
-  pt: "Em novembro de 1807, o exército de Napoleão marchava sobre Lisboa. O príncipe regente D. João
-    não se rendeu nem combateu: decidiu levar toda a corte para o Brasil. Em dois dias, em Belém,
-    embarcaram a rainha, os ministros, os arquivos e as carruagens. Partiram com eles, segundo
-    diferentes estimativas, entre 10 e 15 mil pessoas. Faltava vento, e a frota ficou no rio até 29
-    de novembro. No dia seguinte, o general Junot entrou na cidade."
+  pt: "Em novembro de 1807, as tropas de Napoleão avançavam sobre Lisboa e a corte portuguesa
+    decidiu partir. O príncipe regente D. João não se rendeu nem combateu: decidiu levar toda a
+    corte para o Brasil. Em dois dias, em Belém, embarcaram a rainha, os ministros, os arquivos e as
+    carruagens. Seguiram com a corte, segundo as estimativas, entre 10 e 15 mil pessoas. Faltava
+    vento, e a frota ficou no rio até 29 de novembro. No dia seguinte, o general Junot entrou na
+    cidade."
   en: "In November 1807 Napoleon's army was marching on Lisbon. Prince Regent John neither surrendered
     nor fought: he decided to move the entire court to Brazil. In two days at Belém, the queen, the
     ministers, the archives and the carriages were loaded onto ships. Between 10,000 and 15,000
@@ -67,7 +68,7 @@ more:
     No fim de novembro saiu o decreto da mudança da corte para o Rio de Janeiro. O embarque começou
     no dia 27 e, na pressa, muita coisa ficou em terra. Os caixotes da Real Biblioteca, reunida de
     novo depois do incêndio de 1755, ficaram esquecidos no porto, ao sol e à chuva. Só seguiram para
-    o Rio em 1810–1811, em três viagens. Hoje esses livros estão na base da Biblioteca Nacional do
+    o Rio em 1810–1811, em três viagens. Hoje esses livros estão na origem da Biblioteca Nacional do
     Brasil.
 
 

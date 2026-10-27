@@ -2,7 +2,7 @@
   "site": {
     "name": "O Elefante Fugiu",
     "tagline": "Foi aqui",
-    "description": "Pequenas histórias interativas da história de Portugal, ligadas ao mapa e ao tempo."
+    "description": "Pequenas histórias interativas do passado de Portugal, ligadas ao mapa e ao tempo."
   },
   "a11y": {
     "skip_to_content": "Saltar para o conteúdo",
@@ -20,7 +20,7 @@
   "pages": {
     "about": {
       "title": "Sobre o projeto",
-      "description": "Quem faz O Elefante Fugiu, porquê e para quem: histórias curtas do passado de Portugal, cada uma ligada a um lugar que se pode visitar."
+      "description": "O Elefante Fugiu reúne histórias curtas do passado de Portugal, cada uma ligada a um lugar que se pode visitar. Conheça o projeto e quem o faz."
     },
     "method": {
       "title": "Método e fontes",
@@ -28,19 +28,19 @@
     },
     "report": {
       "title": "Encontrou um erro?",
-      "description": "Encontrou uma data, um nome ou um lugar errado numa história? Diga-me e eu verifico."
+      "description": "Há uma data, um nome ou um lugar errado numa história? Escreva-me: verifico e corrijo."
     },
     "legal": {
       "title": "Informação legal",
-      "description": "Licenças (CC BY-SA, MIT), o que o site guarda no seu navegador, contagem de visitas sem cookies e os serviços que veem o seu IP."
+      "description": "Licenças dos textos e do código, o que o site guarda no seu navegador, a contagem de visitas sem cookies e os serviços que veem o seu IP."
     },
     "map": {
       "title": "Mapa",
-      "description": "Todas as histórias no mapa de Portugal: filtre por época e por fio, abra uma história e veja como chegar ao lugar onde aconteceu."
+      "description": "Todas as histórias no mapa de Portugal: filtre por época ou por fio, abra uma história e veja como chegar ao sítio onde aconteceu."
     },
     "surprise": {
       "title": "Surpreenda-me",
-      "description": "Uma história ao acaso do passado de Portugal, escolhida para si em poucos segundos."
+      "description": "Não sabe por onde começar? Uma história do passado de Portugal, escolhida ao acaso para si."
     }
   },
   "footer": {
@@ -207,7 +207,7 @@
     "locating": "A localizar…",
     "geo_denied": "O acesso à localização foi recusado. Pode permiti-lo nas definições do navegador.",
     "geo_unavailable": "Não foi possível saber onde está.",
-    "geo_unsupported": "Este navegador não sabe indicar a localização.",
+    "geo_unsupported": "Este navegador não permite obter a localização.",
     "geo_far": "Está longe de Portugal: o mapa não o mostra, mas a lista fica ordenada por distância.",
     "here": "Está aqui",
     "world": "O mundo todo",
@@ -221,13 +221,13 @@
     "legend_story": "história",
     "legend_cluster": "várias histórias juntas",
     "legend_place": "onde aconteceu (fora de Portugal)",
-    "legend_here": "você",
+    "legend_here": "a sua posição",
     "timeline_label": "Épocas, pela ordem do tempo",
     "tools_label": "Vista do mapa"
   },
   "family": {
     "button": "Idade: todas",
-    "button_all": "Idade: até 12",
+    "button_all": "Idade: menos de 12",
     "button_12": "Idade: 12+",
     "question": "Que idade tem o leitor mais novo?",
     "opt_all": "Menos de 12 anos",
@@ -236,7 +236,7 @@
     "hidden": "Histórias ocultas: {n}.",
     "show_hidden": "Mostrar todas",
     "status_off": "Idade: todas. Todas as histórias estão visíveis.",
-    "status_all": "Idade: até 12. Histórias para menores de 12 anos.",
+    "status_all": "Idade: menos de 12. Histórias para menores de 12 anos.",
     "status_12": "Idade: 12+. Histórias para leitores a partir dos 12 anos.",
     "footer_hint": "A escolha da idade precisa de JavaScript. Sem ele, todas as histórias ficam visíveis.",
     "empty": "Para esta idade ainda não há histórias aqui.",

@@ -45,7 +45,7 @@ label: legend
 min_age: all
 sensitive: false
 hook:
-  pt: O Porto deu a carne, ficou com as tripas, ganhou alcunha.
+  pt: "Diz a lenda: o Porto ficou com as tripas e uma alcunha."
   en: >-
     Porto gave away its meat, kept the tripe, and got a nickname.
   ru: Порту отдал мясо, оставил потроха и получил прозвище.

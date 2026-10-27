@@ -47,13 +47,11 @@ hook:
   ru: Он приехал торговать лошадьми. Увёз целый мир.
 story:
   pt: >-
-    Em 1501, Alberto Cantino chegou a Lisboa a dizer que vinha tratar de
-    cavalos. Era espião do duque de Ferrara e queria saber o que os capitães
-    andavam a descobrir. Os mapas das novas rotas eram segredo de Estado, mas
-    por 12 ducados de ouro alguém em Lisboa desenhou-lhe uma cópia do mundo: o
-    Brasil, África, o caminho para a Índia. Em 1502 levou-a às escondidas. Em
-    Génova copiaram-na, e as suas costas chegaram ao mapa de Waldseemüller, de
-    1507, o que deu nome à América.
+    Em 1501, Alberto Cantino chegou a Lisboa dizendo que vinha comprar cavalos. Era espião do duque
+    de Ferrara e queria saber o que os capitães andavam a descobrir. Os mapas das novas rotas eram
+    segredo de Estado, mas por 12 ducados de ouro alguém em Lisboa desenhou-lhe uma cópia do mundo:
+    o Brasil, África, o caminho para a Índia. Em 1502 levou-a às escondidas. Em Génova copiaram-na,
+    e as suas costas chegaram ao mapa de Waldseemüller, de 1507, aquele que batizou a América.
   en: >-
     Alberto Cantino arrived in Lisbon in 1501 as a horse dealer. He was really a
     spy for the Duke of Ferrara, sent to learn what Portuguese captains found.
@@ -72,11 +70,23 @@ story:
     Вальдземюллера 1507 года, ту самую, что дала имя Америке.
 more:
   pt: |-
-    As cartas de Cantino sobrevivem. Numa delas, de 1501, diz que ouviu Gaspar Corte-Real fazer ao rei D. Manuel o relato da sua viagem à Terra Nova. Como obteve o mapa é discutido: suborno a um funcionário português, compra, ou as duas coisas. O preço, segundo as cartas, foi de 12 ducados de ouro.
+    As cartas de Cantino sobrevivem. Numa delas, de 1501, diz que ouviu Gaspar Corte-Real fazer ao
+    rei D. Manuel o relato da sua viagem à Terra Nova. Como obteve o mapa é discutido: suborno a um
+    funcionário português, compra, ou as duas coisas. O preço, segundo as cartas, foi de 12 ducados
+    de ouro.
 
-    O mapa é enorme, com mais de dois metros de largura, desenhado em seis folhas de pergaminho. Já mostra a linha de Tordesilhas, a costa do Brasil e o forte português da Mina, e é a mais antiga carta que se conserva a colocar partes de África, do Brasil e da Índia por latitude.
 
-    O segredo não durou. Em 1504, D. Manuel proibiu os cartógrafos de desenhar a costa africana para lá de São Tomé, mas as cópias já circulavam, e o próprio mapa de Cantino envelheceu depressa: os mapas de Caverio e de Waldseemüller depressa o ultrapassaram. Ficou na biblioteca de Ferrara e depois em Módena. Em 1859, uma revolta saqueou o palácio, e o diretor da biblioteca encontrou-o num talho, colado num biombo.
+    O mapa é enorme, com mais de dois metros de largura, desenhado em seis folhas de pergaminho. Já
+    mostra a linha de Tordesilhas, a costa do Brasil e o forte português da Mina, e é a mais antiga
+    carta que se conserva a colocar partes de África, do Brasil e da Índia por latitude.
+
+
+    O segredo não durou. Em 1504, D. Manuel proibiu os cartógrafos de desenhar a costa africana para
+    lá de São Tomé, mas as cópias já circulavam, e o próprio mapa de Cantino envelheceu depressa: os
+    de Caverio e de Waldseemüller não tardaram a ultrapassá-lo. Ficou na biblioteca de Ferrara e
+    depois em Módena. Em 1859, uma revolta saqueou o palácio, e o diretor da biblioteca encontrou-o
+    num talho, colado num biombo.
+
 
     Hoje está na Biblioteca Estense, em Módena. Há uma cópia no Museu de Marinha, em Belém.
   en: |-

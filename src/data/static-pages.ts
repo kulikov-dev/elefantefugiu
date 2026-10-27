@@ -55,7 +55,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'para-quem',
           heading: 'Para quem',
           paragraphs: [],
-          items: ['Para quem gosta de história, mas não de manuais.', 'Para quem viaja e quer saber o que aconteceu exatamente onde está.', 'Para famílias. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
+          items: ['Para quem gosta de história, mas não de manuais.', 'Para quem viaja e quer saber o que aconteceu exatamente onde está.', 'Para famílias. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolha a idade do leitor mais novo.'],
         },
         {
           id: 'confianca',
@@ -80,7 +80,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'ajudar',
           heading: 'Como ajudar',
           paragraphs: [],
-          items: ['Encontrou uma imprecisão? Diga-me em {{report}}.', 'Conhece uma história que falta aqui? Envie-a para {{email}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
+          items: ['Encontrou uma imprecisão? Diga-me em {{report}}.', 'Conhece uma história que ainda não está aqui? Envie-a para {{email}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
           after: ['Escreva-me: {{email}}'],
         },
       ],
@@ -199,7 +199,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'datas-fontes',
           heading: 'De onde vêm os factos',
-          paragraphs: ['Antes de mais, de documentos da época, trabalhos académicos, arquivos e sites oficiais de museus. Cada história tem pelo menos uma fonte; os grandes acontecimentos têm pelo menos duas. Estão todas no fim da história, junto à data da última verificação.'],
+          paragraphs: ['Vêm, antes de mais, de documentos da época, trabalhos académicos, arquivos e sites oficiais de museus. Cada história tem pelo menos uma fonte; os grandes acontecimentos têm pelo menos duas. Estão todas no fim da história, junto à data da última verificação.'],
         },
         {
           id: 'numeros',
@@ -209,7 +209,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idades',
           heading: 'Crianças e temas difíceis',
-          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte aviso e pergunto se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolhe a idade do leitor mais novo.'],
+          paragraphs: ['A maioria das histórias serve para todas as idades e não tem etiqueta. A etiqueta 12+ assinala batalhas ou crueldade. Antes das histórias sobre repressão, perseguição e morte, aviso e pergunto se quer continuar. Nessas histórias não há piadas nem elefante. O botão «Idade» no topo esconde as histórias com batalhas e temas difíceis: escolha a idade do leitor mais novo.'],
         },
         {
           id: 'imagens',
@@ -340,7 +340,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'O que fica guardado no seu navegador',
           paragraphs: [
-            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta e a última história de «Surpreenda-me». Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para a localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
+            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta e a última história de «Surpreenda-me». Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para aceder à localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
           ],
         },
         {
@@ -369,7 +369,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'contacto',
           heading: 'Contactos',
           paragraphs: [
-            'Questões sobre licenças e dados, pedidos de remoção de material: {{email}}.',
+            'Dúvidas sobre licenças e dados, pedidos de remoção de material: {{email}}.',
             'Responsável pelo tratamento dos dados: Artem K., Portugal, {{email}}',
           ],
         },

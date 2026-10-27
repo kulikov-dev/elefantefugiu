@@ -58,11 +58,10 @@ hook:
     Порту восстал против министра, крича «Да здравствует король!»
 story:
   pt: >-
-    Na quarta-feira de cinzas, 23 de fevereiro de 1757, a multidão encheu as
-    ruas do Porto a gritar pelo rei e contra a nova Companhia do vinho. Os
-    taberneiros só viam um monopólio. Agrediram um juiz e destruíram bens.
-    Pombal respondeu com tropas e julgamentos. Em outubro, entre 14 e 17 pessoas
-    foram executadas.
+    Na Quarta-feira de Cinzas, 23 de fevereiro de 1757, a multidão encheu as ruas do Porto a gritar
+    pelo rei e contra a nova Companhia do vinho. Os taberneiros só viam um monopólio. Agrediram um
+    juiz e destruíram bens. Pombal respondeu com tropas e julgamentos. Em outubro, entre 14 e 17
+    pessoas foram executadas.
   en: >-
     On Ash Wednesday, 23 February 1757, crowds filled the streets of Porto,
     shouting for the king and against the new Wine Company. Tavern-keepers saw
@@ -76,9 +75,15 @@ story:
     ответил войсками и судами. К октябрю от 14 до 17 человек были казнены.
 more:
   pt: |-
-    Em Portugal, a revolta chama-se Motim da Companhia. Seguiram-se tropas e lei marcial. As contagens dos executados variam, de 14 a 17 nas fontes consultadas; uma indica 13 homens e quatro mulheres, a 14 de outubro de 1757.
+    Em Portugal, a revolta chama-se Motim da Companhia. Seguiu-se a repressão, com tropas e lei
+    marcial. As contagens dos executados variam, de 14 a 17 nas fontes consultadas; uma indica 13
+    homens e quatro mulheres, a 14 de outubro de 1757.
 
-    Por trás da raiva estavam preços e controlo: a Companhia decidia quem comprava e vendia vinho do Douro, e ingleses, lavradores do Douro e taberneiros do Porto tinham queixas. A Companhia sobreviveu muito a Pombal: o nome e a marca ainda se usam hoje. Como tudo começou, e os marcos que lhe delimitaram a região, contam-se noutro cartão.
+
+    Por trás da raiva estavam preços e controlo: a Companhia decidia quem comprava e vendia vinho do
+    Douro, e ingleses, lavradores do Douro e taberneiros do Porto tinham queixas. A Companhia durou
+    muito para além de Pombal: o nome e a marca ainda se usam hoje. A origem da Companhia e os
+    marcos que delimitaram a região contam-se noutra história.
   en: |-
     In Portuguese the riot is the Motim da Companhia. Troops and martial law followed. Counts of the executed differ, from 14 to 17 in the sources consulted; one lists 13 men and four women on 14 October 1757.
 
@@ -153,7 +158,7 @@ image:
 detail_image:
   file: motim-companhia-1757-detalhe.webp
   alt:
-    pt: "O Marquês de Pombal sentado, com planos sobre a mesa, aponta para os navios no Tejo."
+    pt: "O marquês de Pombal sentado, com planos sobre a mesa, aponta para os navios no Tejo."
     en: "The Marquis of Pombal, seated with plans on the table, points to ships on the Tagus."
     ru: "Маркиз де Помбал сидит с чертежами на столе и указывает на корабли на Тежу."
   caption:
