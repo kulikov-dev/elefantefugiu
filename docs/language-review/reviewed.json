@@ -1,0 +1,470 @@
+{
+  "epoch/atualidade-ue-e-emigracao/en": {
+    "date": "2026-10-27",
+    "hash": "8db90becfe78"
+  },
+  "epoch/atualidade-ue-e-emigracao/pt": {
+    "date": "2026-10-27",
+    "hash": "e5b2b3eb0680"
+  },
+  "epoch/atualidade-ue-e-emigracao/ru": {
+    "date": "2026-10-27",
+    "hash": "655023d81ee3"
+  },
+  "epoch/avis-e-descobrimentos/en": {
+    "date": "2026-10-27",
+    "hash": "e993031ee821"
+  },
+  "epoch/avis-e-descobrimentos/pt": {
+    "date": "2026-10-27",
+    "hash": "ee300be03a48"
+  },
+  "epoch/avis-e-descobrimentos/ru": {
+    "date": "2026-10-27",
+    "hash": "7a019303129d"
+  },
+  "epoch/estado-novo-e-25-de-abril/en": {
+    "date": "2026-10-27",
+    "hash": "52722c7579d2"
+  },
+  "epoch/estado-novo-e-25-de-abril/pt": {
+    "date": "2026-10-27",
+    "hash": "477ac1d09aa7"
+  },
+  "epoch/estado-novo-e-25-de-abril/ru": {
+    "date": "2026-10-27",
+    "hash": "17edf9b9f709"
+  },
+  "epoch/lusitania-e-roma/en": {
+    "date": "2026-10-27",
+    "hash": "46292f1573f8"
+  },
+  "epoch/lusitania-e-roma/pt": {
+    "date": "2026-10-27",
+    "hash": "b87904ccc3ef"
+  },
+  "epoch/lusitania-e-roma/ru": {
+    "date": "2026-10-27",
+    "hash": "dd4e34097329"
+  },
+  "epoch/monarquia-e-republica/en": {
+    "date": "2026-10-27",
+    "hash": "70ac3524ea6b"
+  },
+  "epoch/monarquia-e-republica/pt": {
+    "date": "2026-10-27",
+    "hash": "ea83e277988f"
+  },
+  "epoch/monarquia-e-republica/ru": {
+    "date": "2026-10-27",
+    "hash": "2f04749793bd"
+  },
+  "epoch/nascimento-do-reino-e-reconquista/en": {
+    "date": "2026-10-27",
+    "hash": "b82dd5a94462"
+  },
+  "epoch/nascimento-do-reino-e-reconquista/pt": {
+    "date": "2026-10-27",
+    "hash": "6bfff819cccc"
+  },
+  "epoch/nascimento-do-reino-e-reconquista/ru": {
+    "date": "2026-10-27",
+    "hash": "eaa6d0477ab8"
+  },
+  "epoch/pombal-e-terramoto/en": {
+    "date": "2026-10-27",
+    "hash": "aa23685c7330"
+  },
+  "epoch/pombal-e-terramoto/pt": {
+    "date": "2026-10-27",
+    "hash": "bfc4ec22b2b5"
+  },
+  "epoch/pombal-e-terramoto/ru": {
+    "date": "2026-10-27",
+    "hash": "29984e580239"
+  },
+  "epoch/suevos-visigodos-e-mouros/en": {
+    "date": "2026-10-27",
+    "hash": "80581bf20f52"
+  },
+  "epoch/suevos-visigodos-e-mouros/pt": {
+    "date": "2026-10-27",
+    "hash": "8e575415b2a7"
+  },
+  "epoch/suevos-visigodos-e-mouros/ru": {
+    "date": "2026-10-27",
+    "hash": "6fa37bf2979b"
+  },
+  "epoch/uniao-restauracao-e-ouro-do-brasil/en": {
+    "date": "2026-10-27",
+    "hash": "24128cd2c0b5"
+  },
+  "epoch/uniao-restauracao-e-ouro-do-brasil/pt": {
+    "date": "2026-10-27",
+    "hash": "9292c6539bef"
+  },
+  "epoch/uniao-restauracao-e-ouro-do-brasil/ru": {
+    "date": "2026-10-27",
+    "hash": "0def49f81d48"
+  },
+  "static/about/en": {
+    "date": "2026-10-27",
+    "hash": "48d20a6b6abf"
+  },
+  "static/about/pt": {
+    "date": "2026-10-27",
+    "hash": "fcb7d3860020"
+  },
+  "static/about/ru": {
+    "date": "2026-10-27",
+    "hash": "e3be13321951"
+  },
+  "static/legal/en": {
+    "date": "2026-10-27",
+    "hash": "b0f5e9c3361a"
+  },
+  "static/legal/pt": {
+    "date": "2026-10-27",
+    "hash": "c57407790df8"
+  },
+  "static/legal/ru": {
+    "date": "2026-10-27",
+    "hash": "c687f28285bb"
+  },
+  "static/method/en": {
+    "date": "2026-10-27",
+    "hash": "90c81c377380"
+  },
+  "static/method/pt": {
+    "date": "2026-10-27",
+    "hash": "348c2b9f3e96"
+  },
+  "static/method/ru": {
+    "date": "2026-10-27",
+    "hash": "49ab08caecef"
+  },
+  "thread/comida-e-vinho/en": {
+    "date": "2026-10-27",
+    "hash": "1ec1febf29b1"
+  },
+  "thread/comida-e-vinho/pt": {
+    "date": "2026-10-27",
+    "hash": "c108a62cc602"
+  },
+  "thread/comida-e-vinho/ru": {
+    "date": "2026-10-27",
+    "hash": "373459d94a22"
+  },
+  "thread/gente-como-nos/en": {
+    "date": "2026-10-27",
+    "hash": "fb57983e9a1a"
+  },
+  "thread/gente-como-nos/pt": {
+    "date": "2026-10-27",
+    "hash": "0283eeae86ef"
+  },
+  "thread/gente-como-nos/ru": {
+    "date": "2026-10-27",
+    "hash": "5416c5e85505"
+  },
+  "thread/mar/en": {
+    "date": "2026-10-27",
+    "hash": "9e2cbe57999f"
+  },
+  "thread/mar/pt": {
+    "date": "2026-10-27",
+    "hash": "f3e6ab42cec6"
+  },
+  "thread/mar/ru": {
+    "date": "2026-10-27",
+    "hash": "98453d37d08a"
+  },
+  "thread/natureza/en": {
+    "date": "2026-10-27",
+    "hash": "788d37677c69"
+  },
+  "thread/natureza/pt": {
+    "date": "2026-10-27",
+    "hash": "e468b3025f91"
+  },
+  "thread/natureza/ru": {
+    "date": "2026-10-27",
+    "hash": "df6cbf304a94"
+  },
+  "thread/poder-e-revolta/en": {
+    "date": "2026-10-27",
+    "hash": "92de69281148"
+  },
+  "thread/poder-e-revolta/pt": {
+    "date": "2026-10-27",
+    "hash": "d2e0c30faa9b"
+  },
+  "thread/poder-e-revolta/ru": {
+    "date": "2026-10-27",
+    "hash": "5a9936531a84"
+  },
+  "ui/a11y/en": {
+    "date": "2026-10-27",
+    "hash": "4e9ae3600017"
+  },
+  "ui/a11y/pt": {
+    "date": "2026-10-27",
+    "hash": "0271d1fc3be8"
+  },
+  "ui/a11y/ru": {
+    "date": "2026-10-27",
+    "hash": "c3acb4aa1a8f"
+  },
+  "ui/card/en": {
+    "date": "2026-10-27",
+    "hash": "c17f8baec453"
+  },
+  "ui/card/pt": {
+    "date": "2026-10-27",
+    "hash": "018e9039f8c8"
+  },
+  "ui/card/ru": {
+    "date": "2026-10-27",
+    "hash": "821b24ffe8b3"
+  },
+  "ui/epoch/en": {
+    "date": "2026-10-27",
+    "hash": "415379bc87b0"
+  },
+  "ui/epoch/pt": {
+    "date": "2026-10-27",
+    "hash": "be0a4d3dc372"
+  },
+  "ui/epoch/ru": {
+    "date": "2026-10-27",
+    "hash": "89d284feb3e6"
+  },
+  "ui/family/en": {
+    "date": "2026-10-27",
+    "hash": "95d3fe6dbfce"
+  },
+  "ui/family/pt": {
+    "date": "2026-10-27",
+    "hash": "6578a7ff92a1"
+  },
+  "ui/family/ru": {
+    "date": "2026-10-27",
+    "hash": "adc290a4887c"
+  },
+  "ui/feed/en": {
+    "date": "2026-10-27",
+    "hash": "4d335448cc2b"
+  },
+  "ui/feed/pt": {
+    "date": "2026-10-27",
+    "hash": "f122db0eeba9"
+  },
+  "ui/feed/ru": {
+    "date": "2026-10-27",
+    "hash": "d3abe0976dee"
+  },
+  "ui/footer/en": {
+    "date": "2026-10-27",
+    "hash": "5714911c2d6a"
+  },
+  "ui/footer/pt": {
+    "date": "2026-10-27",
+    "hash": "639b49d93ec2"
+  },
+  "ui/footer/ru": {
+    "date": "2026-10-27",
+    "hash": "2748c0cd5505"
+  },
+  "ui/gate/en": {
+    "date": "2026-10-27",
+    "hash": "8d62df1af552"
+  },
+  "ui/gate/pt": {
+    "date": "2026-10-27",
+    "hash": "e406bb76b8f4"
+  },
+  "ui/gate/ru": {
+    "date": "2026-10-27",
+    "hash": "56e8330cfbe5"
+  },
+  "ui/home/en": {
+    "date": "2026-10-27",
+    "hash": "f9c9d5e23922"
+  },
+  "ui/home/pt": {
+    "date": "2026-10-27",
+    "hash": "e93d2ed322ef"
+  },
+  "ui/home/ru": {
+    "date": "2026-10-27",
+    "hash": "dddfba76aeb3"
+  },
+  "ui/map/en": {
+    "date": "2026-10-27",
+    "hash": "83afed50657e"
+  },
+  "ui/map/pt": {
+    "date": "2026-10-27",
+    "hash": "f8dd6dd80341"
+  },
+  "ui/map/ru": {
+    "date": "2026-10-27",
+    "hash": "c94078655d79"
+  },
+  "ui/mascot/en": {
+    "date": "2026-10-27",
+    "hash": "c16aedff7f13"
+  },
+  "ui/mascot/pt": {
+    "date": "2026-10-27",
+    "hash": "29f3d4b278c5"
+  },
+  "ui/mascot/ru": {
+    "date": "2026-10-27",
+    "hash": "83ab1c05a11d"
+  },
+  "ui/nav/en": {
+    "date": "2026-10-27",
+    "hash": "79f683f4c026"
+  },
+  "ui/nav/pt": {
+    "date": "2026-10-27",
+    "hash": "6a2a6f229e46"
+  },
+  "ui/nav/ru": {
+    "date": "2026-10-27",
+    "hash": "f949fedfee17"
+  },
+  "ui/notfound/en": {
+    "date": "2026-10-27",
+    "hash": "2ef96340479d"
+  },
+  "ui/notfound/pt": {
+    "date": "2026-10-27",
+    "hash": "850995e7399f"
+  },
+  "ui/notfound/ru": {
+    "date": "2026-10-27",
+    "hash": "593d21118ce4"
+  },
+  "ui/pages/en": {
+    "date": "2026-10-27",
+    "hash": "cc2c546caa95"
+  },
+  "ui/pages/pt": {
+    "date": "2026-10-27",
+    "hash": "806332f9fcb9"
+  },
+  "ui/pages/ru": {
+    "date": "2026-10-27",
+    "hash": "89ce5a3b9180"
+  },
+  "ui/plural/en": {
+    "date": "2026-10-27",
+    "hash": "7c6cc09e404f"
+  },
+  "ui/plural/pt": {
+    "date": "2026-10-27",
+    "hash": "56ca5b855150"
+  },
+  "ui/plural/ru": {
+    "date": "2026-10-27",
+    "hash": "cdbe52bc1360"
+  },
+  "ui/report/en": {
+    "date": "2026-10-27",
+    "hash": "a79db33d21ea"
+  },
+  "ui/report/pt": {
+    "date": "2026-10-27",
+    "hash": "37fb982d55f5"
+  },
+  "ui/report/ru": {
+    "date": "2026-10-27",
+    "hash": "185ebc80a806"
+  },
+  "ui/site/en": {
+    "date": "2026-10-27",
+    "hash": "2f4ef200d99f"
+  },
+  "ui/site/pt": {
+    "date": "2026-10-27",
+    "hash": "368645685a5c"
+  },
+  "ui/site/ru": {
+    "date": "2026-10-27",
+    "hash": "81ff9660e1ce"
+  },
+  "ui/stub/en": {
+    "date": "2026-10-27",
+    "hash": "aa0a00d62e2b"
+  },
+  "ui/stub/pt": {
+    "date": "2026-10-27",
+    "hash": "16e8d1753acc"
+  },
+  "ui/stub/ru": {
+    "date": "2026-10-27",
+    "hash": "aa808f44aac4"
+  },
+  "ui/surprise/en": {
+    "date": "2026-10-27",
+    "hash": "97ea9c9e4c5c"
+  },
+  "ui/surprise/pt": {
+    "date": "2026-10-27",
+    "hash": "b38e98ff7a07"
+  },
+  "ui/surprise/ru": {
+    "date": "2026-10-27",
+    "hash": "fb94307f2e87"
+  },
+  "ui/theme/en": {
+    "date": "2026-10-27",
+    "hash": "30cea1c36ce2"
+  },
+  "ui/theme/pt": {
+    "date": "2026-10-27",
+    "hash": "c788f3e57c0a"
+  },
+  "ui/theme/ru": {
+    "date": "2026-10-27",
+    "hash": "6cef5af89de3"
+  },
+  "ui/thread/en": {
+    "date": "2026-10-27",
+    "hash": "cd2a00bda36e"
+  },
+  "ui/thread/pt": {
+    "date": "2026-10-27",
+    "hash": "e5f5d06466ab"
+  },
+  "ui/thread/ru": {
+    "date": "2026-10-27",
+    "hash": "591bc49253f2"
+  },
+  "ui/ui/en": {
+    "date": "2026-10-27",
+    "hash": "bc62a1c67bef"
+  },
+  "ui/ui/pt": {
+    "date": "2026-10-27",
+    "hash": "18732fb79c38"
+  },
+  "ui/ui/ru": {
+    "date": "2026-10-27",
+    "hash": "9c595cacad58"
+  },
+  "ui/viz/en": {
+    "date": "2026-10-27",
+    "hash": "3a469ea208e1"
+  },
+  "ui/viz/pt": {
+    "date": "2026-10-27",
+    "hash": "71e99a5d6269"
+  },
+  "ui/viz/ru": {
+    "date": "2026-10-27",
+    "hash": "c5a84233df0f"
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "_about": "Stop-lists of npm run check:lang (scripts/check-lang.ts). Each rule is a regular expression (flags: u, i unless 'cs' is set) over the text of one language and a hint of what to write instead. docs/glossary.md says which form is the canonical one. 'exceptions' lists the places where a hit is right (a quotation, the name of a source or of a building): unit + field + the matched text.",
+  "pt": [
+    {
+      "re": "\\b(celulares?|usuári[oa]s?|[oô]nibus|trens?|equipes?|registros?|contatos?|x[ií]caras?|banheiros?|geladeiras?|caf[eé] da manh[ãa]|bacana|tchau|pra|vc)\\b",
+      "hint": "brasileirismo: telemóvel, utilizador, autocarro, comboio, equipa, registo, contacto, chávena, casa de banho, frigorífico, pequeno-almoço"
+    },
+    {
+      "re": "\\bfatos?\\b",
+      "hint": "«fato» é roupa em pt-PT; para «facto» escreva facto(s)"
+    },
+    {
+      "re": "\\bvoc[êe]s?\\b",
+      "hint": "pt-PT omite «você»: «Encontrou um erro?»"
+    },
+    {
+      "re": "(?<!toda )\\ba gente\\b",
+      "hint": "«a gente» por «nós» não se escreve em pt-PT"
+    },
+    {
+      "re": "\\b(est(ou|á|ás|amos|ão|ava|avam|ivemos|ive|eve)|estar)\\s+(?!a\\b)\\p{L}+(ando|endo|indo)\\b",
+      "hint": "estar + gerúndio é brasileiro: estar a + infinitivo"
+    },
+    {
+      "re": "(?<![\\p{L}-])(me|nos|lhe|lhes) (diga|digam|escreva|escrevam|avise|avisem|deixe|deixem|conte|contem|mande|mandem|ajude|ajudem|envie|enviem)\\b",
+      "hint": "próclise brasileira no imperativo: diga-me, escreva-me"
+    },
+    {
+      "re": "(?<![\\p{L}-])se (chama|chamava|chamou|chamam|chamavam)\\b",
+      "hint": "ênclise em frase afirmativa: chama-se"
+    },
+    {
+      "re": "\\b\\d{1,2} de (Janeiro|Fevereiro|Março|Abril|Maio|Junho|Julho|Agosto|Setembro|Outubro|Novembro|Dezembro)\\b",
+      "cs": true,
+      "hint": "meses em minúscula: 27 de outubro de 2026"
+    },
+    {
+      "re": "\"",
+      "cs": true,
+      "hint": "aspas retas: use «…» (e “…” dentro)"
+    },
+    {
+      "re": "(?<![\\d.])\\d{1,3}\\.\\d{1,2}(?![\\d.])",
+      "hint": "vírgula decimal em português: 2,5"
+    },
+    {
+      "re": "\\b(acç\\p{L}*|actu\\p{L}*|activ\\p{L}*|direct\\p{L}*|director\\p{L}*|projec\\p{L}*|objec\\p{L}*|colec\\p{L}*|correcç\\p{L}*|afect\\p{L}*|exact\\p{L}*|óptim\\p{L}*|espectácul\\p{L}*|selecç\\p{L}*|infecç\\p{L}*|arquitect\\p{L}*|perspect\\p{L}*)\\b",
+      "hint": "grafia anterior ao Acordo Ortográfico de 1990 (ação, atual, ativo, direto, diretor, projeto, objeto, coleção, correção, afetar, exato, ótimo, espetáculo, seleção, arquiteto, perspetiva)"
+    }
+  ],
+  "en": [
+    {
+      "re": "\b(colour|favour|honour|neighbour|behaviour|labour|flavour|harbour|rumour)\\p{L}*",
+      "hint": "American spelling: color, favor, honor, neighbor, behavior, labor, flavor, harbor, rumor"
+    },
+    {
+      "re": "\\b(centres?|centred|metres?|litres?|theatres?|defences?|offences?|licences?|pretences?|grey\\p{L}*|programmes?|tyres?|kerbs?|ploughs?|moulds?|aluminium|artefacts?|judgements?|acknowledgements?|ageing|sceptic\\p{L}*|storeys?|cheques?|pyjamas|jewellery|manoeuvr\\p{L}*|catalogues?|sulphur|speciality|skilful|wilful|instalments?|fulfil|enrol|cosy|draught|enquir\\p{L}*|moustaches?)\\b",
+      "hint": "American spelling: center, meter, liter, theater, defense, offense, license, gray, program, tire, curb, plow, mold, aluminum, artifact, judgment, aging, skeptic, story, check, pajamas, jewelry, maneuver, catalog, sulfur, specialty, skillful, willful, installment, fulfill, enroll, cozy, draft, inquire, mustache"
+    },
+    {
+      "re": "\\b(travell\\p{L}*|cancell\\p{L}*|labell\\p{L}*|modell\\p{L}*|fuell\\p{L}*|signall\\p{L}*|whilst|amongst|amidst|towards|learnt|spelt|burnt|dreamt|spoilt|afterwards)\\b",
+      "hint": "American usage: traveled, canceled, labeled, modeled, while, among, amid, toward, learned, spelled, burned, dreamed, afterward"
+    },
+    {
+      "re": "\\b(organis|realis|recognis|civilis|specialis|apologis|memoris|capitalis|criticis|colonis|popularis|mobilis|modernis|characteris|minimis|maximis|symbolis|summaris|authoris|standardis|finalis|centralis|categoris|harmonis|industrialis|legalis|neutralis|normalis|prioritis|stabilis|sympathis|urbanis|utilis|visualis|emphasis(e|ed|es|ing)\\b|analys(e|ed|es|ing)\\b)\\p{L}*",
+      "hint": "American -ize spelling (organize, recognize, analyze …)"
+    },
+    {
+      "re": "\\b\\d{1,2}(st|nd|rd|th)? (January|February|March|April|May|June|July|August|September|October|November|December)\\b",
+      "cs": true,
+      "hint": "American date order: October 27, 2026"
+    },
+    {
+      "re": "\\bthe \\d{1,2}(st|nd|rd|th) of\\b",
+      "hint": "American date order: October 27"
+    },
+    {
+      "re": "\"",
+      "cs": true,
+      "hint": "typographic quotes: “…” (and ‘…’ inside)"
+    },
+    {
+      "re": "(?<![\\p{L}])'(?=\\p{L})|(?<=[\\p{L}.,!?])'(?![\\p{L}])",
+      "cs": true,
+      "hint": "typographic quotes, not straight ones: “…” and ‘…’"
+    },
+    {
+      "re": "\\p{L}'\\p{L}",
+      "cs": true,
+      "hint": "typographic apostrophe ’ (don’t, Porto’s), not straight '"
+    },
+    {
+      "re": "”[.,]",
+      "cs": true,
+      "hint": "American style: period and comma go inside the closing quotation mark"
+    },
+    {
+      "re": "[«»]",
+      "cs": true,
+      "hint": "American quotation marks “…”, not guillemets"
+    }
+  ],
+  "ru": [
+    {
+      "re": "\\b(Жоау|Жуау|Жуао|Жоан|Мануэль(?! Годо)|Мануэля|Мануэлю|Мануэлем|Мануэле|Опорто|Оппорто|Элваш\\p{L}*|Эльвас\\p{L}*|Элвас\\p{L}*|Белем\\p{L}*|Жозеф\\p{L}*|Себаштиан\\p{L}*|Лисабон\\p{L}*|Коммерсио|Коммерсиу|Воша)\\b",
+      "cs": true,
+      "hint": "транскрипция по глоссарию (docs/glossary.md): Жуан, Мануэл, Порту, Эльваш, Белен, Жозе, Себастьян, Лиссабон, Комерсиу, Албукерки"
+    },
+    {
+      "re": "(?<=[а-яё,;:] )Вы(?![а-яё])|(?<=[а-яё,;:] )(Вам|Вас|Ваш|Ваша|Ваше|Ваши|Вашего|Вашу|Вами)(?![а-яё])",
+      "cs": true,
+      "hint": "«вы» со строчной"
+    },
+    {
+      "re": "\"|“|”",
+      "cs": true,
+      "hint": "кавычки «…» (внутри „…“)"
+    },
+    {
+      "re": "\\s-\\s",
+      "hint": "тире (—) с пробелами, не дефис"
+    }
+  ],
+  "yo": {
+    "_about": "ё in Russian: a word written without ё whose form with ё is written somewhere else in the texts is a hit (scripts/check-lang.ts builds the list from the texts). Words that are different words: pairs below.",
+    "ignore": [
+      "все",
+      "всех",
+      "всем",
+      "всему",
+      "ее",
+      "нем",
+      "небо",
+      "перепел",
+      "слез",
+      "совершенно",
+      "узнаем",
+      "осел",
+      "ела",
+      "мел",
+      "лез",
+      "шел",
+      "обо",
+      "нес",
+      "вел",
+      "лет",
+      "чем"
+    ]
+  },
+  "exceptions": [
+    {
+      "lang": "en",
+      "unit": "event/hanno-1514",
+      "match": "Theatre",
+      "why": "proper name: Dona Maria II National Theatre"
+    },
+    {
+      "lang": "ru",
+      "unit": "event/tripeiros-1415",
+      "match": "Ваш",
+      "why": "a name: the shipbuilder Vaz"
+    },
+    {
+      "lang": "pt",
+      "unit": "epoch/estado-novo-e-25-de-abril",
+      "match": "25 de Abril",
+      "why": "the name of the revolution is written with a capital"
+    },
+    {
+      "lang": "ru",
+      "unit": "event/motim-companhia-1757",
+      "match": "Жозеф",
+      "why": "a French painter, Joseph Vernet"
+    }
+  ]
+}

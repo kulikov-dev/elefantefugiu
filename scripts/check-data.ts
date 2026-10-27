@@ -8,6 +8,7 @@ import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
 import { needsAttribution } from '../src/lib/pictures';
 import { firstSentence } from '../src/lib/events';
 import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
+import { pending } from './lib/lang-review';
 
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -395,6 +396,14 @@ featured.forEach(({ item, file }) => {
 });
 dupes('featured id', featured.map((f) => ({ id: f.item.id, file: f.file })));
 if (featured.length !== 3) report('error', 'src/content/featured.yaml', `${featured.length} entries, the home page needs exactly 3 (spec 5.1)`);
+
+// Language review (docs/language-review/): texts that were not read by a language editor or changed after they were read. A warning only;
+// npm run lang:pending lists them.
+{
+  const byUnit = new Map<string, string[]>();
+  for (const p of pending()) byUnit.set(p.unit, [...(byUnit.get(p.unit) ?? []), `${p.lang} (${p.why})`]);
+  for (const [unit, what] of byUnit) report('warn', 'language review', `${unit}: ${what.join(', ')}; run npm run lang:pending`);
+}
 
 // ALLOW_PLACEHOLDER gate
 const allowRaw = (process.env.ALLOW_PLACEHOLDER ?? 'true').trim().toLowerCase();

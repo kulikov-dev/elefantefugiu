@@ -132,6 +132,13 @@ Adding a story: copy an existing `events/<id>.yaml`, fill the texts, `place`, `b
 Article, Event, place with geo, breadcrumbs, the epoch's story list) is generated from these fields (`src/lib/schema.ts`), nothing is
 written by hand. `npm run build` stops (`check:schema`) when an indexable page lacks any part of it.
 
+A new or changed story goes through the language review (`docs/language-review/`): `npm run lang:pending` shows what was not read yet or
+changed since it was read (`check:data` warns about the same); read only that, against `docs/glossary.md` (names, titles, places, quotation
+marks, "ё"), then mark the texts with `npx tsx scripts/lang-mark.ts <pt|en|ru|all> [unit-prefix]` after the corrections are committed
+(it writes `lang_review` into the story file and `docs/language-review/reviewed.json` for the rest). `npm run check:lang` (part of
+`npm test`) fails on Brazilian forms in pt, British spellings and typography in en, names outside the glossary and an inconsistent "ё" in ru;
+its rules and exceptions are in `scripts/lang-rules.json`.
+
 `npm run check:data` reports problems as `file [field, language]: message`
 and prints a summary. Length limits for entries with `placeholder: true` are
 warnings only. Test data is latin filler with `placeholder: true`; run

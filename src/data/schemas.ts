@@ -113,6 +113,9 @@ const isoDate = z.preprocess(
   z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'a date is YYYY-MM-DD'),
 );
 
+/** "Read by a language editor": the day and the hash of the text of one language at that time (scripts/lang-mark.ts writes it, npm run lang:pending reads it). */
+const langMark = z.strictObject({ date: isoDate, hash: z.string() });
+
 export const eventSchema = z
   .strictObject({
   id: z.string(),
@@ -165,6 +168,8 @@ export const eventSchema = z
   status: z.enum(['draft', 'ready']),
   /** The day the story was first published (YYYY-MM-DD): the schema.org datePublished of the page (src/lib/schema.ts). Required. */
   published: isoDate,
+  /** Marks of the language review per language (docs/language-review/); written by scripts/lang-mark.ts, never by hand. */
+  lang_review: z.strictObject({ pt: langMark.optional(), en: langMark.optional(), ru: langMark.optional() }).optional(),
   /** The day the story was last changed in substance (YYYY-MM-DD): dateModified; without it dateModified is `published`. */
   updated: isoDate.optional(),
   placeholder: z.boolean().default(false),
