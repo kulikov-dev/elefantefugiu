@@ -114,20 +114,20 @@ sources:
       According to Primary Documentary Sources (InTech)'
     url: https://cdn.intechopen.com/pdfs/13093/InTech-The_atlantic_tsunami_on_november_1st_1755_world_range_and_amplitude_according_to_primary_documentary_sources.pdf
     type: academic
-    accessed: '2026-10-14'
+    accessed: '2026-10-27'
   - title: 'Museu Arqueológico do Carmo, folheto (EN): história do edifício e do
       terramoto'
     url: https://museuarqueologicodocarmo.pt/mac/folhetoMAC_EN.pdf
     type: institutional
-    accessed: '2026-10-14'
+    accessed: '2026-10-27'
   - title: 'Álvaro S. Pereira, «The Opportunity of a Disaster: The Economic Impact of the 1755 Lisbon Earthquake», The Journal of Economic History 69(2), 2009, pp. 466–499'
     url: https://ideas.repec.org/a/cup/jechis/v69y2009i02p466-499_00.html
     type: academic
-    accessed: '2026-10-24'
+    accessed: '2026-10-27'
   - title: 'Harvard ReVista (DRCLAS): «Bury the dead and feed the living»'
-    url: https://revista.drclas.harvard.edu/?p=31402
+    url: https://revista.drclas.harvard.edu/bury-the-dead-and-feed-the-living/
     type: institutional
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'The New Criterion: Lisbon''s narrow fate'
     url: https://newcriterion.com/article/lisbons-narrow-fate/
     type: press
@@ -135,7 +135,7 @@ sources:
   - title: 'Junia Furtado, review of Mark C. Molesky, «This Gulf of Fire: The Destruction of Lisbon, or Apocalypse in the Age of Science and Reason» (New York, 2015), e-Journal of Portuguese History, vol. 15, no. 2, 2017 (Dialnet)'
     url: https://dialnet.unirioja.es/descarga/articulo/6269265.pdf
     type: academic
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
 image:
   file: terramoto-1755.webp
   alt:

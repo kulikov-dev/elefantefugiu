@@ -101,60 +101,60 @@ sources:
   - title: 'Lisboa Secreta: Café Martinho da Arcada'
     url: https://lisboasecreta.co/lojas-historicas-lisboa-cafe-martinho-da-arcada/
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Correio da Manhã: Livro desvenda os 240 anos do Martinho da Arcada'
     url: https://www.cmjornal.pt/cultura/detalhe/livro-desvenda-os-240-anos-do-martinho-da-arcada
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Lojas com História (Lisboa): Café Restaurante Martinho da Arcada'
-    url: https://lojascomhistoria.pt/shops/cafe-restaurante-martinho-da-arcada
+    note:
+      pt: 'cópia no Internet Archive'
+      en: 'Internet Archive copy'
+      ru: 'копия в Internet Archive'
+    url: https://web.archive.org/web/20260413020816/https://lojascomhistoria.pt/shops/cafe-restaurante-martinho-da-arcada
     type: institutional
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Diário de Notícias: «O café de todos nós», Paulo Dentinho'
     url: https://www.dn.pt/arquivo/diario-de-noticias/o-cafe-de-todos-nos-por-paulo-dentinho-14492563.html
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Ara.cat: Food tour of Lisbon with a guide who has been dead for 100 years'
     url: https://en.ara.cat/food/food-tour-of-lisbon-with-guide-who-has-been-dead-for-100-years_130_5402142.html
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Diário de Notícias: «O café de Pessoa e de outros lisboetas»'
     url: https://www.dn.pt/arquivo/diario-de-noticias/o-cafe-de-pessoa-e-de-outros-lisboetas-13007586.html
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Lisbon City Council: Lojas com História, Café Martinho da Arcada'
-    url: https://www.comerciocomhistoria.gov.pt/en/?p=21796
-    type: institutional
-    accessed: '2026-10-16'
-  - title: 'Lojas com História: Café Restaurante Martinho da Arcada'
-    url: https://lojascomhistoria.pt/shops/cafe-restaurante-martinho-da-arcada
+    url: https://www.comerciocomhistoria.gov.pt/en/listings/cafe-martinho-da-arcada-3223/
     type: institutional
     accessed: '2026-10-16'
   - title: 'Time Out Lisboa: Martinho da Arcada'
     url: https://www.timeout.pt/lisboa/pt/restaurantes/martinho-da-arcada
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'RTP: Castanheira de Pera cria monumento ao neveiro'
     url: https://www.rtp.pt/noticias/economia/castanheira-de-pera-requalifica-largo-e-cria-monumento-ao-neveiro_n1488704
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Time Out: O Rossio na Betesga #22, a neve da Conservaria Pomona'
     url: https://www.timeout.pt/lisboa/pt/noticias/o-rossio-na-betesga-22-a-neve-da-conservaria-pomona-041219
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'RTP: Projeto recria tradição antiga e leva neve da Serra da Estrela até
       Lisboa'
     url: https://www.rtp.pt/noticias/cultura/projeto-recria-tradicao-antiga-e-leva-neve-da-serra-da-estrela-ate-lisboa_n1340652
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'RFM: A neve já chegou a Lisboa'
     url: https://rfm.pt/atualidade/amp/10887/a-neve-ja-chegou-a-lisboa
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Get Lisbon: Real Fábrica do Gelo da Serra de Montejunto'
     url: https://getlisbon.com/discovering/royal-factory-ice/
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: casa-da-neve-1782.webp
   alt:

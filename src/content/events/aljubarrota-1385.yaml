@@ -118,7 +118,7 @@ sources:
       forças, baixas, formação'
     url: https://fundacao-aljubarrota.pt/panel-d/
     type: institutional
-    accessed: '2026-10-14'
+    accessed: '2026-10-27'
   - title: 'Diário de Notícias: «Vitória em Aljubarrota não é graças ao quadrado que não existe»'
     note:
       pt: 'sobre o livro «Aljubarrota», Desassossego'
@@ -126,7 +126,7 @@ sources:
       ru: 'о книге «Aljubarrota», Desassossego'
     url: https://www.dn.pt/edicao-impressa/vitória-em-aljubarrota-não-é-graças-ao-quadrado-que-não-existe-nem-seria-necessário
     type: press
-    accessed: '2026-10-14'
+    accessed: '2026-10-27'
   - title: 'João Gouveia Monteiro (coord.), «Aljubarrota Revisitada», Imprensa da Universidade de Coimbra, 2001'
     url: https://dl.uc.pt/bitstream/10316.2/2642/1/aljubarrota_revisitada_2001.pdf
     type: academic
@@ -134,13 +134,13 @@ sources:
   - title: 'The Holy See (vatican.va): Nuno De Santa Maria Álvares Pereira (1360-1431) - Biography'
     url: https://www.vatican.va/news_services/liturgy/saints/2009/ns_lit_doc_20090426_nuno_en.html
     type: institutional
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Britannica: St. Nuno Álvares Pereira'
     url: https://www.britannica.com/print/article/451304
     type: reference
     accessed: '2026-10-15'
   - title: 'Visit Portugal: Museu Arqueológico do Carmo / Convento do Carmo'
-    url: https://www.visitportugal.com/it/node/137892
+    url: https://www.visitportugal.com/en/node/137892
     type: institutional
     accessed: '2026-10-15'
   - title: 'The Portugal News: The Battle of Aljubarrota'
@@ -150,11 +150,11 @@ sources:
   - title: 'Wikipedia: Battle of Aljubarrota'
     url: https://en.wikipedia.org/wiki/Battle_of_Aljubarrota
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: The Battle of Aljubarrota (Antiquity, 1963)
-    url: https://resolve.cambridge.org/core/journals/antiquity/article/battle-of-aljubarrota/849391E3737AD96B5A81A35A8C619B51
+    url: https://www.cambridge.org/core/journals/antiquity/article/abs/battle-of-aljubarrota/849391E3737AD96B5A81A35A8C619B51
     type: academic
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: aljubarrota-1385.webp
   alt:

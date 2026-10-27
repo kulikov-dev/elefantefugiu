@@ -91,12 +91,12 @@ sources:
   - title: 'Executed Today: «1757: The Tipplers Revolt leaders»'
     url: https://www.executedtoday.com/2013/page/9/
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: Fernando de Sousa, «Morra a Companhia!» (O lado sombrio da instituição
       pombalina), Revista População e Sociedade
     url: https://repositorio-aberto.up.pt/bitstream/10216/20418/2/revpopsoc162008frsilva000085287.pdf
     type: academic
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Fernando de Sousa, A Companhia Geral da Agricultura das Vinhas do Alto Douro (1756–1978), CEPESE 2003'
     note:
       pt: 'resumo'
@@ -104,7 +104,7 @@ sources:
       ru: 'аннотация'
     url: https://repositorio-aberto.up.pt/handle/10216/20325
     type: academic
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Lélia Paula Teixeira Ribeiro, Os arquitectos do Quartel do Segundo Regimento de Infantaria e da Real Casa Pia de Correcção e Educação e Aquartelamento das Partidas Avulsas, Revista da Faculdade de Letras, Ciências e Técnicas do Património (Porto), I série, vol. IV, 2005, pp. 281-292'
     note:
       pt: 'nota 1, sobre 23.02.1757 (quarta-feira de cinzas)'
@@ -112,7 +112,7 @@ sources:
       ru: 'сноска 1 о 23.02.1757 (Quarta-feira de cinzas)'
     url: https://ler.letras.up.pt/uploads/ficheiros/4947.pdf
     type: academic
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Real Companhia Velha: Gaia Cellars'
     note:
       pt: 'sítio oficial'
@@ -120,15 +120,15 @@ sources:
       ru: 'официальный сайт'
     url: https://realcompanhiavelha.pt/en/caves/
     type: institutional
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Agroportal: 17•56 Museu & Enoteca da Real Companhia Velha (2018)'
     note:
       pt: 'inauguração'
       en: 'opening'
       ru: 'открытие'
-    url: https://bo.agroportal.pt/?p=689450
+    url: https://www.agroportal.pt/1756-museu-enoteca-real-companhia-velha-abre-novo-centro-de-visitas-no-cais-de-gaia-a-beira-rio/
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'R. McCaa (UMN): Pombal, the paradox'
     note:
       pt: 'diapositivo'
@@ -136,7 +136,7 @@ sources:
       ru: 'слайд'
     url: https://users.pop.umn.edu/~rmccaa/colonial/brazilc3/tsld014.htm
     type: reference
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: motim-companhia-1757.webp
   alt:

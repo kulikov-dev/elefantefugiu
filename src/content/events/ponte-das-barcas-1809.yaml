@@ -88,11 +88,11 @@ sources:
   - title: 'Wikipedia: Porto Boat Bridge disaster'
     url: https://en.wikipedia.org/wiki/Porto_Boat_Bridge_disaster
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Wikipedia: First Battle of Porto'
     url: https://en.wikipedia.org/wiki/First_Battle_of_Porto
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Infopédia: Ponte das Barcas'
     url: https://www.infopedia.pt/artigos/$ponte-das-barcas
     type: reference
@@ -100,17 +100,12 @@ sources:
   - title: 'Wikipedia: List of disasters in Portugal by death toll'
     url: https://en.wikipedia.org/wiki/List_of_disasters_in_Portugal_by_death_toll
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Diário de Notícias: «As alminhas da ponte não deixam esquecer a tragédia
       da Ponte das Barcas»'
     url: https://www.dn.pt/arquivo/diario-de-noticias/as-alminhas-da-ponte-nao-deixam-esquecer-a-tragedia-da-ponte-das-barcas-11839283.html
     type: press
-    accessed: '2026-10-16'
-  - title: 'History.com: 8 of the Most Devastating Bridge Collapses (Ponte das
-      Barcas)'
-    url: https://www.history.com/articles/deadly-bridge-collapses
-    type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: ponte-das-barcas-1809.webp
   alt:

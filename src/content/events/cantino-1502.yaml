@@ -99,35 +99,39 @@ sources:
   - title: 'Wikipedia: Cantino planisphere'
     url: https://en.wikipedia.org/wiki/Cantino_planisphere
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'National Geographic History: The Cantino Planisphere'
     url: https://www.nationalgeographic.com/history/history-magazine/article/cantino-planisphere-map-new-world-portugal
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Museu de Marinha: Planisfério de Cantino (cópia)'
     url: https://cultura.marinha.pt/en/museumarinha_web/colecoes_web/pecasemdestaque_web/Pages/mapa-cantino.aspx
     type: institutional
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Gregory C. McIntosh: The Cantino Planisphere of 1502 (MEDEA)'
-    url: https://www.medea-chart.org/single-post/2018/02/21/The-Cantino-Planisphere-of-1502-by-Gregory-C-McIntosh
+    note:
+      pt: 'cópia no Internet Archive'
+      en: 'Internet Archive copy'
+      ru: 'копия в Internet Archive'
+    url: https://web.archive.org/web/20260608122155/https://www.medea-chart.org/single-post/2018/02/21/The-Cantino-Planisphere-of-1502-by-Gregory-C-McIntosh
     type: academic
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Biblioteca Estense / Historylab: Cantino planisphere'
     url: https://historylab.es/cantino-planisphere/
     type: institutional
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'BnF: Le planisphère de Caverio (dossier pédagogique)'
     url: https://classes.bnf.fr/pdf/caverio.pdf
     type: institutional
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Wagner (Ohio State): 1502 / Cantino Planisphere'
-    url: https://u.osu.edu/wagner.19/?p=806
+    url: https://u.osu.edu/wagner.19/maps-to-know/1502-cantino-planisphere/
     type: reference
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Northwest Cartographic: The Cantino Planisphere'
     url: https://nwcartographic.com/blogs/essays-articles/the-cantino-planisphere
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: cantino-1502.webp
   alt:

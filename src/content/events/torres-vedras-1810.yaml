@@ -34,7 +34,7 @@ bridge:
   address: Forte de São Vicente, 2560-629 Torres Vedras
   lat: 39.0958
   lon: -9.26
-  url: https://www.rhlt.pt/?p=2685
+  url: https://www.rhlt.pt/en/portfolio/lines-of-torres-vedras-visitors-centre-s-vicentes-fort-chapel/
   note:
     pt: No Forte de São Vicente, o centro de interpretação explica as linhas que
       protegeram Lisboa.
@@ -116,11 +116,11 @@ sources:
   - title: 'Wikipedia: Battle of Sobral'
     url: https://en.wikipedia.org/wiki/Battle_of_Sobral
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'History of War: Lines of Torres Vedras'
     url: https://www.historyofwar.org/articles/lines_of_torres_vedras.html
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Military Wiki / Wikipedia: Lines of Torres Vedras'
     url: https://military-history.fandom.com/wiki/Lines_of_Torres_Vedras
     type: reference
@@ -132,21 +132,21 @@ sources:
       ru: 'описание книги'
     url: https://betterread.com.au/book/fuentes-de-onoro-1811.do
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Rota Histórica das Linhas de Torres Vedras: Centro de Interpretação
       (Capela do Forte de S. Vicente)'
-    url: https://www.rhlt.pt/?p=2685
+    url: https://www.rhlt.pt/en/portfolio/lines-of-torres-vedras-visitors-centre-s-vicentes-fort-chapel/
     type: institutional
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Portugal Film Commission: Fort of São Vicente'
     url: https://portugalfilmcommission.com/en/location/fort-of-sao-vicente/
     type: institutional
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'British Historical Society of Portugal: Wellington took refuge behind
       the Lines of Torres Vedras'
     url: https://www.bhsportugal.org/anglo-portuguese-timeline/wellington-took-refuge-behind-the-lines-of-torres-vedras
     type: institutional
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: torres-vedras-1810.webp
   alt:

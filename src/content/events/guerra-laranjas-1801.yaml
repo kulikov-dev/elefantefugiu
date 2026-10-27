@@ -98,23 +98,23 @@ sources:
   - title: 'Wikipedia: War of the Oranges'
     url: https://en.wikipedia.org/wiki/War_of_the_Oranges
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Diário de Notícias: «Da Guerra das Laranjas à Guerra das Rosas»'
     url: https://www.dn.pt/opiniao-dn/opiniao/da-guerra-das-laranjas-guerra-das-rosas
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Observador: Olivença'
     note:
       pt: 'a disputa, o Congresso de Viena, 1817, 12 mil habitantes'
       en: 'the dispute, the Congress of Vienna, 1817, 12,000 inhabitants'
       ru: 'спор, Венский конгресс, 1817, 12 тыс. жителей'
-    url: https://observador.pt/?p=6905419
+    url: https://observador.pt/2024/09/13/de-d-dinis-a-nuno-melo-o-que-esta-em-causa-na-questao-de-olivenca/
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Dialnet: «Olivença, filha da Espanha e neta de Portugal»'
     url: https://dialnet.unirioja.es/descarga/articulo/5396891.pdf
     type: academic
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Tratado de Badajoz, 6.06.1801'
     note:
       pt: 'descrição de uma edição rara, Castro e Silva'
@@ -122,19 +122,19 @@ sources:
       ru: 'описание редкого издания, Castro e Silva'
     url: https://www.castroesilva.com/store/sku/2312SB006/optForgotPasswordForm.asp
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Wikipedia: War of the Oranges'
     url: https://en.wikipedia.org/wiki/War_of_the_Oranges
     type: reference
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Diário de Notícias (opinião): Da Guerra das Laranjas à Guerra das Rosas'
     url: https://www.dn.pt/opiniao-dn/opiniao/da-guerra-das-laranjas-guerra-das-rosas
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Muy Interesante: ¿Qué fue la guerra de las Naranjas?'
     url: https://muyinteresante.okdiario.com/historia/34542.html
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: guerra-laranjas-1801.webp
   alt:

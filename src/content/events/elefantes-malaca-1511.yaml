@@ -95,11 +95,11 @@ sources:
   - title: 'EBSCO Research Starters: Melaka Falls to the Portuguese'
     url: https://www.ebsco.com/research-starters/history/melaka-falls-portuguese
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'New Straits Times: Courage and perseverance in the face of adversity'
     url: https://www.nst.com.my/amp/news/nation/2022/09/828245/courage-and-perseverance-face-adversity
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'The Commentaries of the Great Afonso Dalboquerque, Second Viceroy of India, vol. III, Hakluyt Society, 1880'
     note:
       pt: 'tradução de Walter de Gray Birch; caps. XXII–XXIII (assalto de 25 de julho, os elefantes do rei)'
@@ -107,31 +107,27 @@ sources:
       ru: 'перевод Уолтера де Грея Бёрча; главы XXII–XXIII (штурм 25 июля, слоны султана)'
     url: https://www.cambridge.org/core/books/commentaries-of-the-great-afonso-dalboquerque-second-viceroy-of-india/3653F43F94D14A4D4B315DA61551FD2F
     type: academic
-    accessed: '2026-10-24'
+    accessed: '2026-10-27'
   - title: 'Wikipedia: Malay–Portuguese conflicts'
     url: https://en.wikipedia.org/wiki/Malay%E2%80%93Portuguese_conflicts
     type: reference
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Wikipedia: Portuguese Malacca'
     url: https://en.wikipedia.org/wiki/Portuguese_Malacca
     type: reference
-    accessed: '2026-10-15'
-  - title: 'Fundação José Saramago: The foundation (Casa dos Bicos)'
-    url: https://josesaramago.org/en/?p=162
-    type: institutional
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'Time Out Lisbon: Casa dos Bicos'
     url: https://timeout.com/lisbon/attractions/casa-dos-bicos
     type: press
-    accessed: '2026-10-15'
+    accessed: '2026-10-27'
   - title: 'World History Encyclopedia: Portuguese Malacca'
     url: https://www.worldhistory.org/Portuguese_Malacca/
     type: reference
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'EBSCO: Tomé Pires'
     url: https://www.ebsco.com/research-starters/biography/tome-pires
     type: reference
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
   - title: 'Koboi Project: Malacca'
     note:
       pt: 'monumento a Albuquerque em Belém'
@@ -139,7 +135,7 @@ sources:
       ru: 'памятник Албукерки в Белеме'
     url: https://koboiproject.com/tag/malacca/page/2/
     type: press
-    accessed: '2026-10-16'
+    accessed: '2026-10-27'
 image:
   file: elefantes-malaca-1511.webp
   alt:
