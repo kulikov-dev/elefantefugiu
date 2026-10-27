@@ -40,20 +40,21 @@ docs/               design.md, spec.md, STATE.md, history.md, glossary.md, langu
 
 **Проверки.** `npm run build`: i18n, контраст, `npm test` (node:test + Vitest + `check:lang`), `check:data`, `astro build`, затем `postbuild`: sitemap, превью, ссылки, карточки, ленты, вес (первый экран истории ≤ 500 КБ), токены, ru, маскот, published, email, https, schema. `npm run qa`: 32 браузерных набора (не входят в сборку, ~30 мин). CI (`.github/workflows/deploy.yml`): `astro check`, Vitest, сборка, публикация.
 
-**Аналитика.** GoatCounter без cookie, скрипт самохостинг (`public/vendor/goatcounter/count.js`, не минифицирован), `?src=qr` попадает в «Referrers»; на локальных адресах выключена.
+**Аналитика.** GoatCounter без cookie, источник визита `?src=` (или синоним `?utm_source=`) уходит как referrer (`r` в запросе count.js, проверено запросом в браузере); корень `/` и `/p/{id}` при переходе на язык сохраняют query string и hash (раньше терялись, а `?src=qr` на `/p/` затирал чужой `src`); проверка в QA smoke (`pages`), скрипт самохостинг (`public/vendor/goatcounter/count.js`, не минифицирован), `?src=qr` попадает в «Referrers»; на локальных адресах выключена.
 
 **Домен и публикация.** https://elefantefugiu.pt (DNS, Custom domain и Enforce HTTPS сделаны 26.10.2026, сайт открывается по https), `public/CNAME`, `SITE_URL` и `BASE_PATH=/` зашиты в workflow. `CARTO_KEY` задан в переменных репозитория, карта CARTO работает на живом сайте (с 25.10.2026). Форма проверена живой отправкой (27.10.2026), просмотры в GoatCounter идут. Переменные репозитория: `ALLOW_PLACEHOLDER` (перед запуском `false`), `CARTO_KEY`, при другом провайдере `TILE_URL` и `TILE_ATTRIBUTION`.
 
 ## Открытые вопросы и что осталось владельцу
 
-- Правообладатель в `LICENSE`: сейчас «O Elefante Fugiu contributors», подтвердить.
 - Вычитка носителем: списки в `docs/language-review/*.md` («Что показать живому носителю»: pt 32, ru 15, en 12 правок, не применённых по правилам уверенности).
 - Ссылки с 403 (защита от ботов; проверить руками): britannica, infopedia ×2, dorotheum, smarthistory, britishmuseum, newcriterion, fandom, visitportugal. Цепочка сертификатов не отдаётся сервером (в Firefox проверить): `dl.uc.pt`, `exercito.pt`, `cloud.theportugalnews.com`, `comerciocomhistoria.gov.pt`. `monumentos.gov.pt` отвечает только по http.
-- Настоящие тексты для эпохи Estado Novo и 8 тестовых карточек; нить Memória, очерки и рецензент (design.md §6.1) появятся, когда будет рецензент.
+- Настоящие тексты для эпохи Estado Novo и 8 тестовых карточек. **Решение владельца (28.10.2026): тяжёлые темы (16+, нить Memória, очерки о них) не берутся до появления рецензента** (design.md §6.1). Пилот QR-кодов у реальных мест вынесен за рамки MVP, адреса `/p/{id}` остаются.
 - Адрес `/pt/surpreende-me/` оставлен как есть (решение владельца).
 - F5 на карте возвращает последний вид (положение и масштаб в `history.state`): так нужно для «Назад»; если F5 должен начинать с целой страны, сказать.
 
 Закрыто и проверено по коду (раньше значилось открытым): форма ошибки (FormSubmit), растровые превью, тайлы (CARTO, тёмная подложка по теме), `/p/{id}` (страница-переход), кнопка «Продолжить» (`last-epoch.ts`), `sitemap.xml`, аналитика, стили эпох, версия Node в workflow, 404 по языкам, русский язык, геолокация «Рядом со мной», слаги, домен. Бургер-меню не делается: меню переносится второй строкой без JavaScript.
+
+**Лицензии.** `LICENSE`: «Copyright (c) 2026 Artem K. and O Elefante Fugiu contributors»; для CC BY-SA указание авторства «O Elefante Fugiu, elefantefugiu.pt» (`LICENSE-CONTENT.md`). Подпись у ИИ-картинок во всех историях и языках: «Иллюстрация создана ИИ. Не историческое изображение.» / «Ilustração criada por IA. Não é uma imagem histórica.» / «AI-generated illustration. Not a historical image.» (название модели в подписи нет; описание сцены перед фразой оставлено; поле `author: Gemini (AI)` не менялось). История `terramoto-1755`: Белен назван в тексте на трёх языках, не только в крючке.
 
 ## Не проверено
 
