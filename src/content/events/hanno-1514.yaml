@@ -47,10 +47,9 @@ hook:
   en: Manuel sent the pope an elephant. All Rome came to see him.
   ru: Папе римскому подарили слона, и слон встал перед ним на колени.
 story:
-  pt: "Em 1514, D. Manuel I mandou uma embaixada a Roma, com presentes para o novo papa, Leão X.
-    Manuel I enviou a Roma uma embaixada com presentes para o novo papa, Leão X. O presente
-    principal era um jovem elefante branco da Índia, com cerca de quatro anos. Na receção, o
-    elefante ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no
+  pt: "Em 1514, D. Manuel I mandou uma embaixada a Roma, com presentes para o novo papa, Leão X. O
+    presente principal era um jovem elefante branco da Índia, com cerca de quatro anos. Na receção,
+    o elefante ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no
     Vaticano. O elefante chamava-se Hanno: desfilava nas procissões, dedicavam-lhe versos e toda a
     Roma corria para o ver."
   en: "In 1514 King Manuel I sent an embassy to Rome with gifts for the new pope, Leo X. The main
@@ -171,7 +170,7 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '9b9e3cce1ff8'
+    hash: 'dc4b229d9992'
   en:
     date: '2026-10-27'
     hash: '726414a7da84'

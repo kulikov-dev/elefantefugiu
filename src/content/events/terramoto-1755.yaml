@@ -54,22 +54,23 @@ hook:
     В день землетрясения король уже уехал в Белен.
 story:
   pt: >-
-    A 1 de novembro de 1755, Dia de Todos os Santos, D. José I ouviu missa de manhã e deixou Lisboa
-    porque uma das filhas queria passar o feriado fora. José I ouviu missa logo de manhã e saiu de
-    Lisboa, porque uma filha queria passar o feriado fora. Às 9h40, o terramoto; as igrejas estavam
-    cheias. Seguiram-se o tsunami e dias de fogo, e morreram dezenas de milhares. O rei escapou, mas
-    ficou com medo de paredes, e a corte mudou-se para tendas na Ajuda.
+    A 1 de novembro de 1755, Dia de Todos os Santos, D. José I ouviu missa logo de manhã e partiu
+    para Belém, então nos arredores de Lisboa, porque uma das filhas queria passar o feriado fora.
+    Às 9h40, o terramoto; as igrejas estavam cheias. Seguiram-se o tsunami e dias de fogo, e
+    morreram dezenas de milhares. O rei escapou, mas ficou com medo de paredes, e a corte mudou-se
+    para tendas na Ajuda.
   en: >-
-    On November 1, 1755, All Saints’ Day, King José I heard Mass at sunrise and left Lisbon because
-    a daughter wanted to spend the holiday outside the city. At 9:40 a.m. the earthquake hit, and
-    the churches were full. A tsunami and days of fire followed; tens of thousands died. The king
-    survived, but he feared living within walls afterward, and the court moved into tents on the
-    hills of Ajuda.
+    On November 1, 1755, All Saints’ Day, King José I heard Mass at sunrise and left for Belém, at
+    the time on the outskirts of Lisbon, because a daughter wanted to spend the holiday outside the
+    city. At 9:40 a.m. the earthquake hit, and the churches were full. A tsunami and days of fire
+    followed; tens of thousands died. The king survived, but he feared living within walls
+    afterward, and the court moved into tents on the hills of Ajuda.
   ru: >-
-    1 ноября 1755 года, в День всех святых, король Жозе I после рассветной мессы уехал из Лиссабона:
-    дочь хотела провести праздник за городом. В 9:40 началось землетрясение, церкви были полны.
-    Затем нахлынуло цунами, несколько дней бушевали пожары, погибли десятки тысяч человек. Король
-    остался жив, но с тех пор боялся жить в доме, и двор переехал в палатки на холмах Ажуды.
+    1 ноября 1755 года, в День всех святых, король Жозе I после рассветной мессы уехал в Белен,
+    тогда пригород Лиссабона: дочь хотела провести праздник за городом. В 9:40 началось
+    землетрясение, церкви были полны. Затем нахлынуло цунами, несколько дней бушевали пожары,
+    погибли десятки тысяч человек. Король остался жив, но с тех пор боялся жить в доме, и двор
+    переехал в палатки на холмах Ажуды.
 more:
   pt: >-
     Os números são incertos. O historiador económico Álvaro Pereira estima entre 30 000 e 40 000
@@ -172,10 +173,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: 'ee141c44a90b'
+    hash: 'eedce16f1613'
   en:
     date: '2026-10-27'
-    hash: '9a375b541ba9'
+    hash: 'ce50ff59f9e2'
   ru:
     date: '2026-10-27'
-    hash: 'ce9e4fc2d6f8'
+    hash: '3a24b8dd4d1d'
