@@ -14,7 +14,7 @@
   "nav": {
     "epochs": "Épocas",
     "map": "Mapa",
-    "surprise": "Surpreende-me"
+    "surprise": "Surpreenda-me"
   },
   "pages": {
     "about": {
@@ -33,7 +33,7 @@
       "title": "Mapa"
     },
     "surprise": {
-      "title": "Surpreende-me"
+      "title": "Surpreenda-me"
     }
   },
   "footer": {
@@ -59,7 +59,7 @@
   "surprise": {
     "picking": "A escolher uma história para si…",
     "fallback": "Se nada acontecer, escolha uma destas:",
-    "none": "Neste modo família não há nenhuma história para sugerir."
+    "none": "Para esta idade não há nenhuma história para sugerir."
   },
   "stub": {
     "notice": "Esta página é provisória e será preenchida mais tarde."
@@ -129,13 +129,13 @@
     "label_legend": "Lenda",
     "label_debated": "Em debate",
     "heavy_topic": "Tema difícil",
-    "family_mode": "Modo família",
+    "family_mode": "Idade",
     "age_all": "Para todos",
     "share": "Partilhar",
     "report_error": "Encontrou um erro?",
     "nearby": "Mais perto",
     "open_on_map": "Ver no mapa",
-    "surprise": "Surpreende-me",
+    "surprise": "Surpreenda-me",
     "soon": "Em breve",
     "show_more": "Mostrar mais",
     "view_list": "Lista",
@@ -228,12 +228,12 @@
     "opt_off": "Mostrar tudo",
     "hidden": "Histórias ocultas: {n}.",
     "show_hidden": "Mostrar todas",
-    "status_off": "Modo família desligado: todas as histórias estão visíveis.",
-    "status_all": "Modo família: histórias para menores de 12 anos.",
-    "status_12": "Modo família: histórias para maiores de 12 anos.",
-    "footer_hint": "O modo família precisa de JavaScript. Sem ele, todas as histórias ficam visíveis.",
-    "empty": "Neste modo ainda não há histórias aqui.",
-    "show_all": "Mostrar todos os modos",
+    "status_off": "Idade: todas. Todas as histórias estão visíveis.",
+    "status_all": "Idade: até 12. Histórias para menores de 12 anos.",
+    "status_12": "Idade: 12+. Histórias para leitores a partir dos 12 anos.",
+    "footer_hint": "A escolha da idade precisa de JavaScript. Sem ele, todas as histórias ficam visíveis.",
+    "empty": "Para esta idade ainda não há histórias aqui.",
+    "show_all": "Mostrar todas as idades",
     "opt_all_hint": "Sem batalhas, violência nem temas difíceis",
     "opt_12_hint": "Sem temas difíceis: repressão, perseguição, morte"
   },

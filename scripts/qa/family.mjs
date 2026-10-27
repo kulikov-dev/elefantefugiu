@@ -163,7 +163,7 @@ if (want('toggle')) {
   await page.waitForFunction(() => document.documentElement.dataset.family === 'all');
   ok('toggle: the choice is stored in localStorage "family"', (await page.evaluate(() => localStorage.getItem('family'))) === 'all');
   const status = await page.evaluate(() => document.querySelector('[data-family-status]').textContent);
-  ok('toggle: the change is announced (role=status)', /menos de 12|Modo família/i.test(status) || status.length > 10, status);
+  ok('toggle: the change is announced (role=status)', /menos de 12|Idade/i.test(status) || status.length > 10, status);
   await page.reload({ waitUntil: 'load' });
   await page.click('[data-family-menu] summary');
   const after = await page.evaluate(() => ({ mode: document.documentElement.dataset.family, checked: document.querySelector('[data-family-toggle] input:checked').value }));
@@ -614,13 +614,13 @@ if (want('variant-epoch') && VARIANT) {
     const isVisible = eval(vis);
     return { message: isVisible(document.querySelector('[data-family-empty]')) ? document.querySelector('[data-family-empty]').innerText.replace(/\s+/g, ' ') : null, feed: [...document.querySelectorAll('ol.feed > li')].filter(isVisible).length };
   }, visible);
-  ok('variant, mode all: an epoch with no visible card shows the message and the link', msg.feed === 0 && /Neste modo ainda não há histórias aqui\.\s*Mostrar todos os modos/.test(msg.message ?? ''), JSON.stringify(msg));
+  ok('variant, mode all: an epoch with no visible card shows the message and the link', msg.feed === 0 && /Para esta idade ainda não há histórias aqui\.\s*Mostrar todas as idades/.test(msg.message ?? ''), JSON.stringify(msg));
   await setMode(page, '12');
   ok('variant, mode 12: the same message', await page.evaluate((vis) => eval(vis)(document.querySelector('[data-family-empty]')), visible));
   await page.click('[data-family-empty] [data-family-set]');
   await page.waitForFunction(() => document.documentElement.dataset.family === 'off');
   const back = await page.evaluate((vis) => ({ message: eval(vis)(document.querySelector('[data-family-empty]')), feed: [...document.querySelectorAll('ol.feed > li')].filter(eval(vis)).length, stored: localStorage.getItem('family'), checked: document.querySelector('[data-family-toggle] input:checked').value }), visible);
-  ok('variant: "Mostrar todos os modos" switches to off, shows the cards, stores the choice, moves the toggle', !back.message && back.feed === vEvents.filter((e) => e.epoch === E).length && back.stored === 'off' && back.checked === 'off', JSON.stringify(back));
+  ok('variant: "Mostrar todas as idades" switches to off, shows the cards, stores the choice, moves the toggle', !back.message && back.feed === vEvents.filter((e) => e.epoch === E).length && back.stored === 'off' && back.checked === 'off', JSON.stringify(back));
   await page.close();
 
   // gate text for a 16+ card

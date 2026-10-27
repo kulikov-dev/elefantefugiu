@@ -59,7 +59,7 @@
   "surprise": {
     "picking": "Picking a story for you…",
     "fallback": "If nothing happens, choose one of these:",
-    "none": "There is no story to suggest in this family mode."
+    "none": "There is no story to suggest for this age."
   },
   "stub": {
     "notice": "This page is a placeholder and will be filled in later."
@@ -122,14 +122,14 @@
     "too_short": "Describe the mistake in a few words."
   },
   "ui": {
-    "read_more": "Read ▾",
+    "read_more": "Read more ▾",
     "more": "More →",
     "bridge": "Bridge to today",
     "label_documented": "Documented",
     "label_legend": "Legend",
     "label_debated": "Debated",
     "heavy_topic": "Heavy topic",
-    "family_mode": "Family mode",
+    "family_mode": "Age",
     "age_all": "All ages",
     "share": "Share",
     "report_error": "Found a mistake?",
@@ -228,12 +228,12 @@
     "opt_off": "Show everything",
     "hidden": "Hidden stories: {n}.",
     "show_hidden": "Show all",
-    "status_off": "Family mode is off: every story is shown.",
-    "status_all": "Family mode: stories for readers under 12.",
-    "status_12": "Family mode: stories for readers 12 and over.",
-    "footer_hint": "Family mode needs JavaScript. Without it, every story stays visible.",
+    "status_off": "Age: all. Every story is shown.",
+    "status_all": "Age: under 12. Stories for readers under 12.",
+    "status_12": "Age: 12+. Stories for readers 12 and over.",
+    "footer_hint": "Choosing an age needs JavaScript. Without it, every story stays visible.",
     "empty": "No stories here yet in this mode.",
-    "show_all": "Show all modes",
+    "show_all": "Show all ages",
     "opt_all_hint": "No battles, violence or difficult topics",
     "opt_12_hint": "No difficult topics: repression, persecution, death"
   },

@@ -180,7 +180,7 @@ if (want('thanks')) {
 // ---------- 4. The 404 page ----------
 if (want('notfound')) {
   for (const [path, lang, title, home, surprise] of [
-    ['/pt/nao-existe/', 'pt', 'O elefante fugiu outra vez', 'Início', 'Surpreende-me'],
+    ['/pt/nao-existe/', 'pt', 'O elefante fugiu outra vez', 'Início', 'Surpreenda-me'],
     ['/en/nope/', 'en', 'The elephant ran away again', 'Home', 'Surprise me'],
     ['/ru/net-takoy/', 'ru', 'Слон опять сбежал', 'На главную', 'Удиви меня'],
   ]) {

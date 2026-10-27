@@ -128,10 +128,10 @@ describe('the text of the service pages follows the names on the site', () => {
   it('uses the names of the labels, the buttons and the eras as the site writes them', () => {
     const pt = everything('pt');
     expect(pt).toContain('Em debate');
-    expect(pt).toContain('Surpreende-me');
+    expect(pt).toContain('Surpreenda-me');
     // The names of the eras are not typed in the text any more: they come from the data ({{ready}}, src/lib/ready-epochs.ts).
     expect(pt).toContain('{{ready}}');
-    expect(pt).not.toMatch(/Surpreenda-me|fuga da corte|Revolução dos Cravos»/);
+    expect(pt).not.toMatch(/Surpreende-me|fuga da corte|Revolução dos Cravos»/);
     expect(everything('ru')).toContain('{{ready}}');
     const en = everything('en');
     expect(en).toContain('Debated');
