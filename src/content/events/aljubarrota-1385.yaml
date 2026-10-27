@@ -155,11 +155,9 @@ image:
     ru: Молодой рыцарь в доспехах указывает на землю, солдаты копают рвы и ставят колья, вдали войско с
       флагами.
   caption:
-    pt: Nuno Álvares Pereira escolhe o campo de batalha, 14 de agosto de 1385. Ilustração criada por IA
-      (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: Nuno Álvares Pereira chooses the battlefield, August 14, 1385. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
-    ru: Нуну Алвареш Перейра выбирает поле боя, 14 августа 1385 года. Иллюстрация создана ИИ (Gemini) в
-      стиле азулежу. Не историческое изображение.
+    pt: Nuno Álvares Pereira escolhe o campo de batalha, 14 de agosto de 1385. Ilustração criada por IA. Não é uma imagem histórica.
+    en: Nuno Álvares Pereira chooses the battlefield, August 14, 1385. AI-generated illustration. Not a historical image.
+    ru: Нуну Алвареш Перейра выбирает поле боя, 14 августа 1385 года. Иллюстрация создана ИИ. Не историческое изображение.
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -238,10 +236,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '667b6be40bb8'
+    hash: 'e4bb874acdd1'
   en:
     date: '2026-10-27'
-    hash: '43b2d7c7c681'
+    hash: '4090d05fd745'
   ru:
     date: '2026-10-27'
-    hash: '97e420bc97c2'
+    hash: '5b090ab3927b'

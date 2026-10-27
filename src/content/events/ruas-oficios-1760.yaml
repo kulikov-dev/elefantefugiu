@@ -119,9 +119,9 @@ image:
     ru: Улица Байши из одинаковых домов; в арках ювелир, часовщик, шорник и токарь, по мостовой идут
       горожане.
   caption:
-    pt: A nova Baixa e os seus ofícios, por volta de 1760. Ilustração criada por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: The new Baixa and its trades, around 1760. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
-    ru: Новая Байша и её ремёсла, около 1760 года. Иллюстрация создана ИИ (Gemini) в стиле азулежу. Не историческое изображение.
+    pt: A nova Baixa e os seus ofícios, por volta de 1760. Ilustração criada por IA. Não é uma imagem histórica.
+    en: The new Baixa and its trades, around 1760. AI-generated illustration. Not a historical image.
+    ru: Новая Байша и её ремёсла, около 1760 года. Иллюстрация создана ИИ. Не историческое изображение.
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -133,10 +133,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: 'c32ec13278df'
+    hash: 'db45f1cb46ad'
   en:
     date: '2026-10-27'
-    hash: 'ea982726812f'
+    hash: '2bdb4bde16d0'
   ru:
     date: '2026-10-27'
-    hash: '30ebda8e95be'
+    hash: '7609c265b0d7'

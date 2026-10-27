@@ -177,10 +177,9 @@ image:
     ru: "Иллюстрация в духе сине-белого азулежу: испанский командующий держит апельсиновую ветку
       перед солдатами; позади бастионы крепости Эльваш."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da tradição da «Guerra das Laranjas». Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the “War of the Oranges” tradition. Not a
-      historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по преданию об «Апельсиновой войне». Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -206,10 +205,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '6bbc91196df1'
+    hash: 'a59cc956c8a7'
   en:
     date: '2026-10-27'
-    hash: 'c50b6e5280bc'
+    hash: '2a15eee65c58'
   ru:
     date: '2026-10-27'
-    hash: '7180c886901d'
+    hash: 'a0e1d095129a'

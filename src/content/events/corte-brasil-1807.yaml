@@ -149,9 +149,9 @@ image:
     ru: "Азулежу: придворные грузят вещи в лодки на набережной Белена, на причале забытые ящики с
       книгами и собака."
   caption:
-    pt: O embarque da corte em Belém, novembro de 1807. Ilustração criada por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: The court embarking at Belém, November 1807. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
-    ru: Посадка двора в Белене, ноябрь 1807 года. Иллюстрация создана ИИ (Gemini) в стиле азулежу. Не историческое изображение.
+    pt: O embarque da corte em Belém, novembro de 1807. Ilustração criada por IA. Não é uma imagem histórica.
+    en: The court embarking at Belém, November 1807. AI-generated illustration. Not a historical image.
+    ru: Посадка двора в Белене, ноябрь 1807 года. Иллюстрация создана ИИ. Не историческое изображение.
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -181,10 +181,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '0f9e028c2c9e'
+    hash: '34e4f2f58a66'
   en:
     date: '2026-10-27'
-    hash: 'eaa1bbc34ed8'
+    hash: '74a35de4c562'
   ru:
     date: '2026-10-27'
-    hash: '590afc09fff7'
+    hash: '7d5fd3e71bd0'

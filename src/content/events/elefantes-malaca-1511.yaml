@@ -163,9 +163,9 @@ image:
     en: "Blue-and-white azulejo-style illustration: war elephants advance toward a wooden bridge where Portuguese soldiers wait with spears at the ready, while Malay warriors run alongside."
     ru: "Иллюстрация в духе сине-белого азулежу: боевые слоны идут к деревянному мосту, где их ждут португальские солдаты с копьями наготове, рядом бегут малайские воины."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da história da tomada de Malaca. Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the story of the taking of Malacca. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по истории о взятии Малакки. Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -193,10 +193,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: 'e4601528812c'
+    hash: '59e8d1353a0a'
   en:
     date: '2026-10-27'
-    hash: 'e073512f1771'
+    hash: '08cfe4f09106'
   ru:
     date: '2026-10-27'
-    hash: '27f2333af970'
+    hash: '31dd1e14fc15'

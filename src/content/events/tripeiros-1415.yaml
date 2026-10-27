@@ -117,9 +117,9 @@ image:
     en: "Blue-and-white azulejo-style illustration: at the Douro shipyard, the people of Porto carry baskets onto the ships while a woman holds a pot of tripe and two men talk."
     ru: "Иллюстрация в духе сине-белого азулежу: на верфи у Дору жители Порту несут корзины на корабли, женщина держит горшок с потрохами, а двое мужчин беседуют."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da lenda dos tripeiros. Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the tripeiros legend. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по легенде о tripeiros. Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -146,10 +146,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '25bfc424219b'
+    hash: 'f2f71921eea1'
   en:
     date: '2026-10-27'
-    hash: '62888e9f634e'
+    hash: '7e9a5350396a'
   ru:
     date: '2026-10-27'
-    hash: '054133250cd5'
+    hash: 'c7ae5879ae0b'

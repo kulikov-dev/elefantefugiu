@@ -208,9 +208,9 @@ image:
     en: "Blue-and-white azulejo-style illustration: in a courtyard by the Tagus, a rhinoceros stands its ground while a young elephant flees in panic and the court watches from a balcony."
     ru: "Иллюстрация в духе сине-белого азулежу: во дворе у Тежу носорог стоит на месте, а молодой слон в панике убегает; придворные смотрят с балкона."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da história do combate de 1515. Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the story of the 1515 fight. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по истории о поединке 1515 года. Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -238,10 +238,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: 'de327efdd8fc'
+    hash: '4ae6d67c96ef'
   en:
     date: '2026-10-27'
-    hash: '6f036cd03d29'
+    hash: '109bccf2d3fb'
   ru:
     date: '2026-10-27'
-    hash: '12d35bc2269c'
+    hash: '3521f99b88d6'

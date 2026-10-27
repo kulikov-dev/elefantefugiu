@@ -142,9 +142,9 @@ image:
     ru: Длинный зал библиотеки с полками в два яруса, под сводом летают летучие мыши, на столе открытая
       книга.
   caption:
-    pt: A biblioteca do Palácio de Mafra de noite. Ilustração criada por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: The Mafra Palace library at night. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
-    ru: Библиотека дворца Мафры ночью. Иллюстрация создана ИИ (Gemini) в стиле азулежу. Не историческое изображение.
+    pt: A biblioteca do Palácio de Mafra de noite. Ilustração criada por IA. Não é uma imagem histórica.
+    en: The Mafra Palace library at night. AI-generated illustration. Not a historical image.
+    ru: Библиотека дворца Мафры ночью. Иллюстрация создана ИИ. Не историческое изображение.
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -156,10 +156,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '2ddfa1c9ef91'
+    hash: '828a36edccc2'
   en:
     date: '2026-10-27'
-    hash: '30da72846f91'
+    hash: '694a1e3aa2c8'
   ru:
     date: '2026-10-27'
-    hash: '659201580a9b'
+    hash: '087ce77eba19'

@@ -137,11 +137,9 @@ image:
       city, smoke and a big wave.
     ru: Король, королева и принцесса у карет на берегу, вдали над городом дым и большая волна.
   caption:
-    pt: A família real em Belém, na manhã de 1 de novembro de 1755, olha para Lisboa. Ilustração criada
-      por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: The royal family at Belém on the morning of November 1, 1755, looking at Lisbon. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
-    ru: Королевская семья в Белене утром 1 ноября 1755 года смотрит на Лиссабон. Иллюстрация создана ИИ
-      (Gemini) в стиле азулежу. Не историческое изображение.
+    pt: A família real em Belém, na manhã de 1 de novembro de 1755, olha para Lisboa. Ilustração criada por IA. Não é uma imagem histórica.
+    en: The royal family at Belém on the morning of November 1, 1755, looking at Lisbon. AI-generated illustration. Not a historical image.
+    ru: Королевская семья в Белене утром 1 ноября 1755 года смотрит на Лиссабон. Иллюстрация создана ИИ. Не историческое изображение.
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -173,10 +171,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: 'eedce16f1613'
+    hash: 'd85e2feb9ac6'
   en:
     date: '2026-10-27'
-    hash: 'ce50ff59f9e2'
+    hash: '51ae08bb8c88'
   ru:
     date: '2026-10-27'
-    hash: '3a24b8dd4d1d'
+    hash: '7e6ac6e7ea57'

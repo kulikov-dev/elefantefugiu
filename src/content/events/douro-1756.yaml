@@ -142,9 +142,9 @@ image:
     en: "Blue-and-white azulejo-style illustration: on the Douro terraces, workers set up a granite boundary marker, an official in a tricorne points out the boundary and another man pulls up elder bushes."
     ru: "Иллюстрация в духе сине-белого азулежу: на террасах долины Дору рабочие ставят гранитный межевой столб, чиновник в треуголке указывает границу, а ещё один человек вырывает кусты бузины."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da história da demarcação do Douro. Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the story of the Douro demarcation. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по истории о границах Дору. Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -157,10 +157,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '0db6fe673b36'
+    hash: '204dedf37a44'
   en:
     date: '2026-10-27'
-    hash: '12b7f4739e26'
+    hash: 'becfc0080b05'
   ru:
     date: '2026-10-27'
-    hash: '419487d163bd'
+    hash: 'cc343a830a91'

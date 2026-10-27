@@ -148,9 +148,9 @@ image:
     en: "Blue-and-white azulejo-style illustration: peasants dig trenches and fill earth baskets on a hill, officers study a map and oxen haul a cannon, with a signal mast and a windmill behind."
     ru: "Иллюстрация в духе сине-белого азулежу: крестьяне роют рвы и набивают землёй корзины на холме, офицеры смотрят карту, волы тянут пушку; позади сигнальная мачта и мельница."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da história das Linhas de Torres Vedras. Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the story of the Lines of Torres Vedras. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по истории о линиях Торриш-Ведраш. Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -178,10 +178,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '18a3fd920868'
+    hash: 'd1422fdd6d84'
   en:
     date: '2026-10-27'
-    hash: 'e1ad49ae1b64'
+    hash: '45f917c0513d'
   ru:
     date: '2026-10-27'
-    hash: 'c8004e969ea7'
+    hash: 'aaadcfd63f94'

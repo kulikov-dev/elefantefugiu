@@ -137,9 +137,9 @@ image:
     ru: Молодой слон стоит на коленях перед папой Львом X, кардиналы удивляются, рядом португальские
       послы и погонщик.
   caption:
-    pt: O elefante Hanno diante do papa Leão X, 1514. Ilustração criada por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: The elephant Hanno before Pope Leo X, 1514. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
-    ru: Слон Ганнон перед папой Львом X, 1514 год. Иллюстрация создана ИИ (Gemini) в стиле азулежу. Не историческое изображение.
+    pt: O elefante Hanno diante do papa Leão X, 1514. Ilustração criada por IA. Não é uma imagem histórica.
+    en: The elephant Hanno before Pope Leo X, 1514. AI-generated illustration. Not a historical image.
+    ru: Слон Ганнон перед папой Львом X, 1514 год. Иллюстрация создана ИИ. Не историческое изображение.
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -170,10 +170,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: 'dc4b229d9992'
+    hash: 'f2b6e84442aa'
   en:
     date: '2026-10-27'
-    hash: '726414a7da84'
+    hash: 'd5a7e63d0340'
   ru:
     date: '2026-10-27'
-    hash: '5ad7f201dcee'
+    hash: 'bcce831a7ec2'

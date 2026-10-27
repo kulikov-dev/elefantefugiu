@@ -109,9 +109,9 @@ image:
     ru: На пустом берегу капитан показывает морякам пучок диких цветов, в море парусник с крестом на
       парусе.
   caption:
-    pt: Gil Eanes além do cabo Bojador, 1434. Ilustração criada por IA (Gemini), em estilo azulejo. Não é uma imagem histórica.
-    en: Gil Eanes beyond Cape Bojador, 1434. AI-generated illustration (Gemini) in the azulejo style. Not a historical image.
-    ru: Жил Эанеш за мысом Божадор, 1434 год. Иллюстрация создана ИИ (Gemini) в стиле азулежу. Не историческое изображение.
+    pt: Gil Eanes além do cabo Bojador, 1434. Ilustração criada por IA. Não é uma imagem histórica.
+    en: Gil Eanes beyond Cape Bojador, 1434. AI-generated illustration. Not a historical image.
+    ru: Жил Эанеш за мысом Божадор, 1434 год. Иллюстрация создана ИИ. Не историческое изображение.
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -123,10 +123,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: 'c0aed7951701'
+    hash: 'c47f3b7b4ffb'
   en:
     date: '2026-10-27'
-    hash: '61416fe3828a'
+    hash: '6b29256b6e3f'
   ru:
     date: '2026-10-27'
-    hash: 'd535e5cf0f48'
+    hash: '9f0435dad180'

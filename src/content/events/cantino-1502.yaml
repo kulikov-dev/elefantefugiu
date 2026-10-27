@@ -192,11 +192,11 @@ image:
     ru: Два человека у стола с картой мира, на столе свеча и золотые монеты, в окне корабли в гавани.
   caption:
     pt: "Negócio noturno: o cartógrafo entrega o mapa do mundo por uma bolsa de ducados, 1502.
-      Ilustração criada por IA (Gemini), em estilo azulejo. Não é uma imagem histórica."
+      Ilustração criada por IA. Não é uma imagem histórica."
     en: "A night deal: the mapmaker hands over the map of the world for a purse of ducats, 1502.
-      AI-generated illustration (Gemini) in the azulejo style. Not a historical image."
-    ru: "Ночная сделка: картограф отдаёт карту мира за кошелёк дукатов, 1502 год. Иллюстрация создана ИИ
-      (Gemini) в стиле азулежу. Не историческое изображение."
+      AI-generated illustration. Not a historical image."
+    ru: "Ночная сделка: картограф отдаёт карту мира за кошелёк дукатов, 1502 год. Иллюстрация
+      создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -226,10 +226,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '6cd48f45189b'
+    hash: '1ee5da4bc720'
   en:
     date: '2026-10-27'
-    hash: '6c044e2ad884'
+    hash: '1b9059bb4b96'
   ru:
     date: '2026-10-27'
-    hash: 'a78271ed837f'
+    hash: 'f0b0a70f784f'

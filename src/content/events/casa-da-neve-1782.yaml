@@ -183,9 +183,9 @@ image:
       straw-wrapped blocks of ice from a donkey while café patrons sample ices."
     ru: "Иллюстрация в духе сине-белого азулежу: под аркадами у Тежу человек снимает с осла блоки льда в соломе, а посетители кафе пробуют мороженое."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da história da Casa da Neve. Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the story of the Casa da Neve. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по истории Дома снега. Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -212,10 +212,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '0c123b5a8204'
+    hash: '248070b61edb'
   en:
     date: '2026-10-27'
-    hash: 'b829097e7ca8'
+    hash: '1a81fe3b6bad'
   ru:
     date: '2026-10-27'
-    hash: '0abcb70811a8'
+    hash: 'f85f3495d21e'

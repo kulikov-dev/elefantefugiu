@@ -166,9 +166,9 @@ image:
     en: "Blue-and-white azulejo-style illustration: a crowd fills a narrow street in Porto, protesting with raised arms."
     ru: "Иллюстрация в духе сине-белого азулежу: толпа заполняет узкую улицу Порту и протестует, подняв руки."
   caption:
-    pt: "Ilustração criada por IA (Gemini) a partir da história do motim de 1757. Não é uma imagem histórica."
-    en: "AI-generated illustration (Gemini) based on the story of the 1757 riot. Not a historical image."
-    ru: "Иллюстрация создана ИИ (Gemini) по истории о бунте 1757 года. Не историческое изображение."
+    pt: "Ilustração criada por IA. Não é uma imagem histórica."
+    en: "AI-generated illustration. Not a historical image."
+    ru: "Иллюстрация создана ИИ. Не историческое изображение."
   author: Gemini (AI)
   license: AI-generated
   ai: true
@@ -194,10 +194,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
-    hash: '17abe9859dc4'
+    hash: 'abe103366912'
   en:
     date: '2026-10-27'
-    hash: '2274084b0c18'
+    hash: 'ef0342b03479'
   ru:
     date: '2026-10-27'
-    hash: 'f4c0b1c9ef7a'
+    hash: 'a52c4c2430f8'
