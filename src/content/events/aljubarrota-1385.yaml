@@ -234,11 +234,11 @@ placeholder: false
 ru_ready: true
 lang_review:
   pt:
-    date: '2026-10-27'
-    hash: 'e4bb874acdd1'
+    date: '2026-10-28'
+    hash: 'f48cb02ff562'
   en:
-    date: '2026-10-27'
-    hash: '4090d05fd745'
+    date: '2026-10-28'
+    hash: '77f1a2d90c8b'
   ru:
-    date: '2026-10-27'
-    hash: '5b090ab3927b'
+    date: '2026-10-28'
+    hash: '0415b6d3608b'

@@ -225,11 +225,11 @@ placeholder: false
 ru_ready: true
 lang_review:
   pt:
-    date: '2026-10-27'
-    hash: '1ee5da4bc720'
+    date: '2026-10-28'
+    hash: '6885911607ce'
   en:
-    date: '2026-10-27'
-    hash: '1b9059bb4b96'
+    date: '2026-10-28'
+    hash: 'cf177e401e12'
   ru:
-    date: '2026-10-27'
-    hash: 'f0b0a70f784f'
+    date: '2026-10-28'
+    hash: '5ec984b435bd'

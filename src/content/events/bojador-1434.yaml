@@ -122,11 +122,11 @@ placeholder: false
 ru_ready: true
 lang_review:
   pt:
-    date: '2026-10-27'
-    hash: 'c47f3b7b4ffb'
+    date: '2026-10-28'
+    hash: '26a1b65dc666'
   en:
-    date: '2026-10-27'
-    hash: '6b29256b6e3f'
+    date: '2026-10-28'
+    hash: '0f90cf35c331'
   ru:
-    date: '2026-10-27'
-    hash: '9f0435dad180'
+    date: '2026-10-28'
+    hash: 'b818dc0e21d9'

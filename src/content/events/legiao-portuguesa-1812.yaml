@@ -139,11 +139,11 @@ placeholder: false
 ru_ready: true
 lang_review:
   pt:
-    date: '2026-10-27'
-    hash: 'ae3af0c2d7cb'
+    date: '2026-10-28'
+    hash: 'd45f4fe1ba3b'
   en:
-    date: '2026-10-27'
-    hash: 'f9d3d76a58d4'
+    date: '2026-10-28'
+    hash: 'acb843c42c23'
   ru:
-    date: '2026-10-27'
-    hash: 'f84a7c66a4bf'
+    date: '2026-10-28'
+    hash: 'df20d2f0f659'

@@ -180,11 +180,11 @@ placeholder: false
 ru_ready: true
 lang_review:
   pt:
-    date: '2026-10-27'
-    hash: '34e4f2f58a66'
+    date: '2026-10-28'
+    hash: 'b3bda40bb447'
   en:
-    date: '2026-10-27'
-    hash: '74a35de4c562'
+    date: '2026-10-28'
+    hash: '7fe7489d35f1'
   ru:
-    date: '2026-10-27'
-    hash: '7d5fd3e71bd0'
+    date: '2026-10-28'
+    hash: '6cdc8e4b4ff7'
