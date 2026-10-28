@@ -386,7 +386,9 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 
   .thread-row__dot {
     grid-area: dot;
-    align-self: center;
+    /* On the first line of the name, not in the middle of the row (on a wide screen the line about the thread can take two lines). */
+    align-self: start;
+    margin-block-start: calc((1lh - var(--size-dot-lg)) / 2);
     width: var(--size-dot-lg);
     height: var(--size-dot-lg);
     border-radius: 50%;
