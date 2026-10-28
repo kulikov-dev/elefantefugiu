@@ -147,6 +147,12 @@ marks, "ё"), then mark the texts with `npx tsx scripts/lang-mark.ts <pt|en|ru|a
 `npm test`) fails on Brazilian forms in pt, British spellings and typography in en, names outside the glossary and an inconsistent "ё" in ru;
 its rules and exceptions are in `scripts/lang-rules.json`.
 
+Before committing a story, check it against `docs/style-ai-tells.md` (habits of machine-written text: stock words, "not just X but Y",
+lists of three, endings that grade instead of stating a fact, empty praise, invented detail) and look at `npm run check:ai-tells -- --verbose --unit
+event/<id>`. It prints warnings only (never an error; part of `npm test`, where it is one summary line); the cure is a name, a number or a detail from the card's
+sources, never an added adjective. If an AI assistant drafts a card, give it that guide. Rules and the `ai_tells.allow` list (each entry
+needs a `why`) are in `scripts/lang-rules.json`.
+
 `npm run check:data` reports problems as `file [field, language]: message`
 and prints a summary. Length limits for entries with `placeholder: true` are
 warnings only. Test data is latin filler with `placeholder: true`; run

@@ -147,6 +147,298 @@
       "чем"
     ]
   },
+  "ai_tells": {
+    "_about": "Rules of npm run check:ai-tells (scripts/check-ai-tells.ts, docs/style-ai-tells.md). WARNINGS only, never an error: they point at habits of machine-written text, the cure is a concrete name, number or detail from the card's sources. Regular expressions (flags u, i) over the text of one language outside quotations. 'cliches' and 'constructions' hit anywhere; 'endings' only in the last sentence of a text; 'evaluative' are empty praise words (counted: each is a hit, and a share above thresholds.evaluative_share is one more); 'allow' lists the places where a hit is right (unit + optional field + the matched text + why).",
+    "fields": {
+      "event": [
+        "hook",
+        "story",
+        "more"
+      ],
+      "epoch": [
+        "intro",
+        "description"
+      ],
+      "thread": [
+        "description"
+      ]
+    },
+    "thresholds": {
+      "triples_in_a_row": 2,
+      "triples_in_text": 3,
+      "dashes_per_paragraph": 2,
+      "sentence_spread_min_sentences": 5,
+      "sentence_spread_min_variation": 0.25,
+      "same_paragraph_start": 3,
+      "same_sentence_start_in_a_row": 3,
+      "evaluative_share": 0.03
+    },
+    "cliches": {
+      "en": [
+        {
+          "re": "\\bdelv(e|es|ed|ing)\\b",
+          "hint": "delve: say what was found"
+        },
+        {
+          "re": "\\btestaments? to\\b",
+          "hint": "testament to: say what the thing shows, with a fact"
+        },
+        {
+          "re": "\\btapestr(y|ies)\\b",
+          "hint": "tapestry: name the threads"
+        },
+        {
+          "re": "\\bnestled\\b",
+          "hint": "nestled: where exactly, how far from what"
+        },
+        {
+          "re": "\\bvibrant\\b",
+          "hint": "vibrant: what is going on there"
+        },
+        {
+          "re": "\\brich (history|heritage|culture)\\b",
+          "hint": "rich history: which year, which event"
+        },
+        {
+          "re": "\\bbustling\\b",
+          "hint": "bustling: how many people, doing what"
+        },
+        {
+          "re": "\\b(boasts?|boasting|boasted)\\b",
+          "hint": "boasts: say what it has, with a number"
+        },
+        {
+          "re": "\\ba glimpse (into|of)\\b",
+          "hint": "a glimpse into: show the detail itself"
+        },
+        {
+          "re": "\\b(stands|stood) as\\b",
+          "hint": "stands as: say what it is"
+        },
+        {
+          "re": "\\bserves? as a reminder\\b",
+          "hint": "serves as a reminder: end on the fact"
+        },
+        {
+          "re": "\\bin the heart of\\b",
+          "hint": "in the heart of: the street or the district"
+        },
+        {
+          "re": "\\btimeless\\b",
+          "hint": "timeless: say how long, since when"
+        },
+        {
+          "re": "\\biconic\\b",
+          "hint": "iconic: iconic for whom, and why"
+        },
+        {
+          "re": "\\bunveil(s|ed|ing)?\\b",
+          "hint": "unveil: say who showed what"
+        },
+        {
+          "re": "\\bembark(s|ed|ing)? on a journey\\b",
+          "hint": "embark on a journey: where from, where to"
+        }
+      ],
+      "ru": [
+        {
+          "re": "\\bпогру(зи|жа)\\p{L}*ся\\b",
+          "hint": "погрузиться: о чём именно рассказ"
+        },
+        {
+          "re": "\\bбогат\\p{L}+ истори\\p{L}+",
+          "hint": "богатая история: какой год, какое событие"
+        },
+        {
+          "re": "\\bстоит отметить\\b",
+          "hint": "стоит отметить: просто скажите это"
+        },
+        {
+          "re": "\\bярк\\p{L}+ пример\\p{L}*",
+          "hint": "яркий пример: назовите пример"
+        },
+        {
+          "re": "\\bнеотъемлем\\p{L}+ част\\p{L}+",
+          "hint": "неотъемлемая часть: чего и чем связана"
+        },
+        {
+          "re": "\\bуникальн\\p{L}+",
+          "hint": "уникальный: чем отличается, с числом или именем"
+        },
+        {
+          "re": "\\bв самом сердце\\b",
+          "hint": "в самом сердце: улица или район"
+        },
+        {
+          "re": "\\bудивительн\\p{L}+",
+          "hint": "удивительный: что именно удивило"
+        },
+        {
+          "re": "\\bпоистине\\b",
+          "hint": "поистине: уберите, оставьте факт"
+        },
+        {
+          "re": "\\bсвоего рода\\b",
+          "hint": "своего рода: назовите, чем это было"
+        },
+        {
+          "re": "\\bсыгра\\p{L}+ ключев\\p{L}+ рол\\p{L}+",
+          "hint": "сыграл ключевую роль: что он сделал"
+        }
+      ],
+      "pt": [
+        {
+          "re": "\\bric[ao]s? hist[óo]ria\\b",
+          "hint": "rica história: que ano, que acontecimento"
+        },
+        {
+          "re": "\\btestemunhos? de\\b",
+          "hint": "testemunho de: diga o que mostra, com um facto"
+        },
+        {
+          "re": "\\bmergulh\\p{L}+",
+          "hint": "mergulhar: diga de que se trata"
+        },
+        {
+          "re": "\\bno cora[çc][ãa]o d[eoa]s?\\b",
+          "hint": "no coração de: a rua ou o bairro"
+        },
+        {
+          "re": "\\bverdeiros? tesouros?\\b",
+          "hint": "verdadeiro tesouro: diga o que lá está"
+        },
+        {
+          "re": "\\bdesempenh\\p{L}+ um papel fundamental\\b",
+          "hint": "desempenhou um papel fundamental: o que fez"
+        },
+        {
+          "re": "\\búnic[oa]s?\\b",
+          "hint": "único: único porquê? (se é «o único sobrevivente», um facto, vá para allow)"
+        },
+        {
+          "re": "\\bfascinante\\b",
+          "hint": "fascinante: o que fascina, concretamente"
+        },
+        {
+          "re": "\\bvale a pena referir\\b",
+          "hint": "vale a pena referir: refira-o"
+        }
+      ]
+    },
+    "constructions": {
+      "en": [
+        {
+          "re": "\\bnot (just|only|merely|simply)\\b[^.?!]{1,90}?(,? but\\b|—)",
+          "hint": "«not just X but Y»: say Y"
+        },
+        {
+          "re": "\\b(interestingly|curiously|strangely enough|it(’s| is) worth noting|it(’s| is) worth mentioning)\\b",
+          "hint": "a pointer instead of the fact: say the fact"
+        },
+        {
+          "re": "\\b(reminds|reminded|remind) us\\b",
+          "hint": "a moral: end on the fact"
+        }
+      ],
+      "ru": [
+        {
+          "re": "\\bне просто\\b[^.?!]{1,90}?(,\\s*а\\b|—)",
+          "hint": "«не просто X, а Y»: скажите Y"
+        },
+        {
+          "re": "\\b(интересно,? что|как ни странно|стоит упомянуть|любопытно,? что)\\b",
+          "hint": "указатель вместо факта: скажите факт"
+        },
+        {
+          "re": "\\bнапомина\\p{L}+ нам\\b",
+          "hint": "мораль: закончите фактом"
+        }
+      ],
+      "pt": [
+        {
+          "re": "\\bn[ãa]o (\\p{L}+ )?(apenas|s[óo]|simplesmente)\\b[^.?!]{1,90}?(,? mas\\b|—|,? sim\\b)",
+          "hint": "«não apenas X, mas Y»: diga Y"
+        },
+        {
+          "re": "\\b(curiosamente|[ée] curioso que|por estranho que pare[çc]a|vale a pena mencionar)\\b",
+          "hint": "um aviso em vez do facto: diga o facto"
+        },
+        {
+          "re": "\\blembra-nos\\b|\\blembram-nos\\b",
+          "hint": "uma moral: termine com o facto"
+        }
+      ]
+    },
+    "endings": {
+      "en": [
+        {
+          "re": "\\b(today|now)\\b[^.]{0,80}\\b(museum|visit(ors)?|you can (see|visit))\\b",
+          "hint": "ending: today there is a museum / you can see: end on a fact of the story"
+        },
+        {
+          "re": "\\b(lives on|to this day|still alive|legacy)\\b",
+          "hint": "ending: an assessment, not a fact"
+        },
+        {
+          "re": "\\b(story|memory|spirit) that\\b[^.]{0,40}\\b(lives|endures|lingers)\\b",
+          "hint": "ending: «a story that lives on»"
+        }
+      ],
+      "ru": [
+        {
+          "re": "\\bсегодня\\b[^.]{0,80}\\b(музе|можно (увидеть|посетить|побывать))",
+          "hint": "концовка: «сегодня там музей / можно увидеть»: закончите фактом истории"
+        },
+        {
+          "re": "\\b(до сих пор|наследи\\p{L}+)\\b",
+          "hint": "концовка: оценка, не факт"
+        }
+      ],
+      "pt": [
+        {
+          "re": "\\bhoje\\b[^.]{0,80}\\b(museu|pode(m)? (ver|visitar)|visit\\p{L}+)\\b",
+          "hint": "final: hoje há um museu / pode ver: termine com um facto da história"
+        },
+        {
+          "re": "\\b(ainda hoje|at[ée] hoje|legado|heran[çc]a que)\\b",
+          "hint": "final: avaliação, não facto"
+        }
+      ]
+    },
+    "evaluative": {
+      "en": [
+        "\\bimportant (event|moment|figure)\\b",
+        "\\b(enormous|huge|great|immense) (importance|significance)\\b",
+        "\\blegendary\\b",
+        "\\bfamous\\b",
+        "\\brenowned\\b",
+        "\\bremarkable\\b",
+        "\\bincredible\\b",
+        "\\bgrandiose\\b"
+      ],
+      "ru": [
+        "\\bважн\\p{L}+ событи\\p{L}+",
+        "\\bогромн\\p{L}+ значени\\p{L}+",
+        "\\bлегендарн\\p{L}+",
+        "\\bзнаменит\\p{L}+",
+        "\\bвыдающ\\p{L}+",
+        "\\bвеликолепн\\p{L}+",
+        "\\bграндиозн\\p{L}+",
+        "\\bневероятн\\p{L}+"
+      ],
+      "pt": [
+        "\\bimportante (acontecimento|evento|momento)\\b",
+        "\\b(enorme|grande) import[âa]ncia\\b",
+        "\\blend[áa]ri[oa]s?\\b",
+        "\\bfamos[oa]s?\\b",
+        "\\bc[ée]lebres?\\b",
+        "\\bnot[áa]vel\\b",
+        "\\bgrandios[oa]s?\\b",
+        "\\bincr[íi]vel\\b"
+      ]
+    },
+    "allow": []
+  },
   "exceptions": [
     {
       "lang": "en",
