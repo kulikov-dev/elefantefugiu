@@ -278,17 +278,17 @@ for (const ev of events) {
     const links = [...bridgeBlock.matchAll(/<a ([^>]*)>([\s\S]*?)<\/a>/g)].map((m) => ({ attrs: m[1], text: plain(m[2]) }));
     const how = links.find((l) => l.text === labels.how);
     const r5 = (n) => Number(n.toFixed(5));
-    const wantOsm = `https://www.openstreetmap.org/?mlat=${r5(ev.bridge.lat)}&mlon=${r5(ev.bridge.lon)}#map=17/${r5(ev.bridge.lat)}/${r5(ev.bridge.lon)}`;
+    // "How to get there" is a plain Google Maps directions link (no API, no script), in a new tab; no other service is named in the block.
+    const wantGoogle = `https://www.google.com/maps/dir/?api=1&destination=${r5(ev.bridge.lat)},${r5(ev.bridge.lon)}`;
     if (!links.some((l) => l.text === labels.map)) fail(`the "${labels.map}" button is missing`);
     if (!how) fail(`the "${labels.how}" button is missing`);
     else {
-      if (!how.attrs.includes(`href="${wantOsm.replace(/&/g, '&amp;')}"`)) fail(`"${labels.how}" should link to ${wantOsm}`);
-      if (!/rel="noopener"/.test(how.attrs)) fail(`"${labels.how}" needs rel="noopener"`);
-      if (!/data-directions/.test(how.attrs) || !how.attrs.includes(`data-lat="${ev.bridge.lat}"`) || !how.attrs.includes(`data-lon="${ev.bridge.lon}"`)) fail(`"${labels.how}" must carry data-directions, data-lat and data-lon of the bridge`);
+      if (!how.attrs.includes(`href="${wantGoogle.replace(/&/g, '&amp;')}"`)) fail(`"${labels.how}" should link to ${wantGoogle}`);
+      if (!/rel="noopener"/.test(how.attrs) || !/target="_blank"/.test(how.attrs)) fail(`"${labels.how}" needs target="_blank" and rel="noopener"`);
     }
     const site = links.find((l) => l.text === labels.site);
     if (!site || !site.attrs.includes(`href="${ev.bridge.url}"`) || !/rel="noopener"/.test(site.attrs)) fail(`the "${labels.site}" link to ${ev.bridge.url} with rel="noopener" is missing`);
-    if (/google\.|maps\.apple|bing\.com\/maps|waze|geo:/i.test(bridgeBlock)) fail('the bridge block must not name Google or another service, and the geo: link is made by the script on Android only');
+    if (/maps\.apple|bing\.com\/maps|waze|geo:|openstreetmap\.org\/\?mlat/i.test(bridgeBlock.split(wantGoogle.replace(/&/g, '&amp;')).join(''))) fail('the bridge block must not name another service than the Google Maps directions link');
     const sources = html.match(/<section class="sources"[\s\S]*?<\/section>/)?.[0] ?? '';
     if ((sources.match(/<li\b/g) ?? []).length !== ev.sources.length) fail(`expected ${ev.sources.length} sources in the list`);
     // Who reviewed a card and when (reviewed_by, reviewed_on) is not shown: the project has no separate reviewer. The date of the sources is.

@@ -1,7 +1,6 @@
 // Browser checks for stage 5c: the map marks the bridge (not the place), the marker preview, "Como chegar", the bridge block.
 // Run against dist/ served by serve.mjs:   node bridge.mjs [preview caption directions block weight]
 import { launchBrowser } from './browser.mjs';
-import { gzipSync } from 'node:zlib';
 import { need, published, threads as threadsData } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
@@ -28,6 +27,7 @@ const UA = {
   windows: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
 };
 const r5 = (n) => Number(n.toFixed(5));
+const google = (e) => `https://www.google.com/maps/dir/?api=1&destination=${r5(e.bridge.lat)},${r5(e.bridge.lon)}`;
 const osm = (e) => `https://www.openstreetmap.org/?mlat=${r5(e.bridge.lat)}&mlon=${r5(e.bridge.lon)}#map=17/${r5(e.bridge.lat)}/${r5(e.bridge.lon)}`;
 const norm = (s) => String(s).replace(/\s+/g, ' ').trim();
 
@@ -110,7 +110,7 @@ if (want('caption')) {
   await page.close();
 }
 
-// ---------- 3. "Como chegar": OSM for all, geo: on Android only ----------
+// ---------- 3. "Como chegar": the map preview keeps OSM (geo: on Android); the card page has a plain Google Maps link ----------
 if (want('directions')) {
   for (const [name, ua, geo] of [['Android', UA.android, true], ['iPhone', UA.iphone, false], ['iPad', UA.ipad, false], ['macOS desktop', UA.mac, false], ['Windows desktop', UA.windows, false]]) {
     const page = await openMap(FAR.id, { ua, width: name.includes('desktop') ? 1100 : 390 });
@@ -121,18 +121,18 @@ if (want('directions')) {
     const card = await newPage({ ua, width: name.includes('desktop') ? 1100 : 390 });
     await card.goto(`${base}/pt/${SEG.pt}/${FAR.slug.pt}/`, { waitUntil: 'load' });
     await wait(300);
-    const href = await card.evaluate(() => document.querySelector('[data-bridge] a[data-directions]').getAttribute('href'));
-    ok(`card page, ${name}: "Como chegar" is ${geo ? 'a geo: link' : 'the OpenStreetMap link'}`, geo ? expectGeo.test(href) : href === osm(FAR), href);
+    const a = await card.evaluate(() => { const l = document.querySelector('[data-bridge] a[data-directions]'); return { href: l.getAttribute('href'), target: l.getAttribute('target'), rel: l.getAttribute('rel') }; });
+    ok(`card page, ${name}: "Como chegar" is the Google Maps link to the bridge, in a new tab, rel noopener`, a.href === google(FAR) && a.target === '_blank' && /noopener/.test(a.rel ?? ''), JSON.stringify(a));
     ok(`card page, ${name}: no script error`, card.errors.length === 0, card.errors.join('; '));
     await card.close();
   }
   const nojs = await newPage({ ua: UA.android, js: false });
   await nojs.goto(`${base}/pt/${SEG.pt}/${FAR.slug.pt}/`, { waitUntil: 'load' });
-  ok('no JavaScript, even on Android: the OpenStreetMap link works', (await nojs.evaluate(() => document.querySelector('[data-bridge] a[data-directions]').getAttribute('href'))) === osm(FAR));
+  ok('no JavaScript, even on Android: the Google Maps link works', (await nojs.evaluate(() => document.querySelector('[data-bridge] a[data-directions]').getAttribute('href'))) === google(FAR));
   await nojs.close();
-  // nothing of Google or other services anywhere on the map page or a card
+  // no other service anywhere on the map page or a card; the one Google address is the directions link of the card page (a link, nothing is loaded)
   for (const path of ['/pt/mapa/', `/pt/${SEG.pt}/${FAR.slug.pt}/`]) {
-    const html = await (await fetch(base + path)).text();
+    const html = (await (await fetch(base + path)).text()).replace(/&amp;/g, '&').split(google(FAR)).join('');
     ok(`${path}: no Google, Apple, Bing, Waze or Mapbox address in the page`, !/google\.[a-z]+\/maps|maps\.google|maps\.apple|bing\.com\/maps|waze\.com|mapbox\.com/i.test(html));
   }
 }
@@ -165,14 +165,11 @@ if (want('block')) {
   await page.close();
 }
 
-// ---------- 5. Weight of the Android script on a card ----------
+// ---------- 5. Weight: the card page has no script for directions and no map library ----------
 if (want('weight')) {
   const html = await (await fetch(`${base}/pt/${SEG.pt}/${FAR.slug.pt}/`)).text();
   const scripts = [...html.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)].map((m) => m[1]).filter((c) => /data-directions|geo:/.test(c));
-  const code = Buffer.from(scripts.join('\n'));
-  const gz = gzipSync(code).length;
-  console.log(`INFO  Android script on a card page: ${code.length} bytes raw, ${gz} bytes gzip`);
-  ok('the Android script is under 1 KB gzip (it is on every card page)', code.length > 0 && gz < 1024, `${gz} B`);
+  ok('the card page has no inline script for directions (the link is a plain link)', scripts.length === 0, String(scripts.length));
   const plain = await (await fetch(`${base}/pt/${SEG.pt}/${published.find((c) => c.id !== FAR.id).slug.pt}/`)).text();
   ok('it carries no map library and no extra request', !/leaflet/i.test(plain));
 }

@@ -13,7 +13,7 @@ interface Props {
   lang: Lang;
   cardId: string;
   point: { lat: number; lon: number };
-  /** Name of the place in the language of the page: the caption above the map and the label of the link. */
+  /** Name of the place in the language of the page: the label of the link (the heading of the block above the map already names the bridge). */
   name: string;
   /** The marker of the big map: a diamond for the main event of an epoch, a circle for a story. */
   kind: 'frame' | 'story';
@@ -28,10 +28,8 @@ const sets = [
   { name: 'light', tiles: light },
   ...(dark ? [{ name: 'dark', tiles: dark }] : []),
 ];
-const caption = `${t(lang, 'ui.bridge')}: ${name}`;
 ---
 <figure class="minimap">
-  <p class="minimap__caption">{caption}</p>
   <a class="minimap__frame" href={mapLinkFor(pagePath(lang, 'map'), cardId)} aria-label={`${t(lang, 'ui.open_on_map')}: ${name}`}>
     {
       sets.map((set) => (
@@ -61,11 +59,6 @@ const caption = `${t(lang, 'ui.bridge')}: ${name}`;
 <style>
   .minimap {
     margin-block-start: var(--space-3);
-  }
-
-  .minimap__caption {
-    margin-block-end: var(--space-2);
-    font-weight: var(--weight-strong);
   }
 
   /* 220 px tall on a phone, 300 px on a wide screen: the frame shows a street level map around the place. */

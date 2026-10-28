@@ -43,9 +43,9 @@ const wait = (ms) => new Promise((r) => setTimeout(r, ms));
   ok('no JS: summary toggles layer 3 (native <details>)', await page.evaluate(() => document.getElementById('detalhes').open));
   const map = await page.evaluate(() => {
     const frame = document.querySelector('.minimap__frame');
-    return { height: Math.round(frame.getBoundingClientRect().height), caption: document.querySelector('.minimap__caption').textContent.trim(), inBridge: Boolean(frame.closest('[data-bridge]')), link: frame.getAttribute('href') };
+    return { height: Math.round(frame.getBoundingClientRect().height), caption: document.querySelector('.minimap__caption')?.textContent.trim() ?? null, inBridge: Boolean(frame.closest('[data-bridge]')), link: frame.getAttribute('href') };
   });
-  ok('no JS: opened, the map is in the bridge block, 220 px tall on a phone, with the caption "Bridge to today: name" and a link to the map page', map.inBridge && map.height === 220 && /^[^:]+: .+/.test(map.caption) && /[?&]id=/.test(map.link), JSON.stringify(map));
+  ok('no JS: opened, the map is in the bridge block, 220 px tall on a phone, with no caption of its own (the heading of the block is above it) and a link to the map page', map.inBridge && map.height === 220 && map.caption === null && /[?&]id=/.test(map.link), JSON.stringify(map));
   ok('no JS: no horizontal overflow at 360px', s.overflow <= 0, `overflow=${s.overflow}`);
   await page.close();
 }

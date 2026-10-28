@@ -1,6 +1,7 @@
 // "How to get there" links for a bridge place. Pure functions, no DOM.
-// Everyone gets an openstreetmap.org link with a marker (works without JavaScript, no third-party service). On Android only,
-// a small script swaps it for a geo: link, which opens the phone's own map application. iOS and desktops keep the OSM link.
+// The card page: a plain Google Maps directions link (googleDirectionsLink: no API, no script, opens in a new tab).
+// The preview of the map page: an openstreetmap.org link with a marker; on Android only a geo: link, which opens the phone's own map
+// application (directionsHref, used by src/scripts/map-island.ts).
 
 /** Five decimals are about a metre: enough, and no 15-digit floats in an address. */
 const c = (n: number): string => String(Number(n.toFixed(5)));
@@ -8,6 +9,11 @@ const c = (n: number): string => String(Number(n.toFixed(5)));
 /** openstreetmap.org centred on the point, with a marker on it. */
 export function osmLink(lat: number, lon: number): string {
   return `https://www.openstreetmap.org/?mlat=${c(lat)}&mlon=${c(lon)}#map=17/${c(lat)}/${c(lon)}`;
+}
+
+/** Google Maps directions to the point, from wherever the reader is: https://developers.google.com/maps/documentation/urls/get-started (a link, not the API). */
+export function googleDirectionsLink(lat: number, lon: number): string {
+  return `https://www.google.com/maps/dir/?api=1&destination=${c(lat)},${c(lon)}`;
 }
 
 /** geo: URI with a labelled pin (RFC 5870 plus the q= convention that Android map applications read). */

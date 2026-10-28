@@ -1,11 +1,10 @@
 ---
-// "Bridge to today": the place that can be visited now: name, address, a one-sentence note, its map, links to the map page, to
-// directions and to the official site. "Como chegar" is an OpenStreetMap link for everyone; the script of this block
-// swaps it for a geo: link on Android only (src/lib/directions.ts; the inline script is src/lib/directions-script.ts).
+// "Bridge to today": the place that can be visited now. Order: the heading, the name (the name as written on the spot, small, only when it
+// differs), the note (why to go there), the map, the address, then the button "Como chegar" and the links. "Como chegar" is a plain
+// Google Maps directions link (no API, no script; opens in a new tab); "Ver no mapa" leads to our own map page.
 import { t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
-import { osmLink } from '../lib/directions';
-import { directionsScript } from '../lib/directions-script';
+import { googleDirectionsLink } from '../lib/directions';
 import MiniMap from './MiniMap.astro';
 import { mapLinkFor } from '../lib/map-data';
 import type { LText } from '../lib/localize';
@@ -34,10 +33,10 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
   <p class="bridge__name">{title}</p>
   {portugueseName && <p class="bridge__local" lang="pt">{portugueseName}</p>}
   <p class="bridge__note" lang={textLang}>{bridge.note[lang]}</p>
-  <address class="bridge__address">{bridge.address}</address>
   <MiniMap lang={lang} cardId={cardId} point={bridge} name={title} kind={kind} />
+  <address class="bridge__address">{bridge.address}</address>
   <p class="bridge__go">
-    <a class="button" href={osmLink(bridge.lat, bridge.lon)} rel="noopener" data-directions data-lat={bridge.lat} data-lon={bridge.lon} data-label={bridge.name}>
+    <a class="button" href={googleDirectionsLink(bridge.lat, bridge.lon)} target="_blank" rel="noopener" data-directions>
       {t(lang, 'ui.directions')}
     </a>
   </p>
@@ -46,8 +45,6 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
     {external && <li><a href={bridge.url} rel="noopener">{t(lang, 'card.official_site')}</a></li>}
   </ul>
 </section>
-
-<script is:inline set:html={directionsScript()} />
 
 <style>
   .bridge {

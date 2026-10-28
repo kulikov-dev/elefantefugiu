@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { directionsHref, geoLink, isAndroid, osmLink } from '../../src/lib/directions';
+import { directionsHref, geoLink, googleDirectionsLink, isAndroid, osmLink } from '../../src/lib/directions';
 
 const UA = {
   androidChrome: 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
@@ -67,30 +67,9 @@ describe('the address of "Como chegar"', () => {
   });
 });
 
-// ---- the inline script of the card page does what the library does ----
-import { runInNewContext } from 'node:vm';
-import { directionsScript } from '../../src/lib/directions-script';
-
-function runScript(userAgent: string, link = { lat: '38.6999', lon: '-9.204', label: 'Torre (Belém) & Cia' }) {
-  const a = { dataset: link, href: 'https://www.openstreetmap.org/?x' };
-  runInNewContext(directionsScript(), { navigator: { userAgent }, document: { querySelectorAll: () => [a] }, String, Number, encodeURIComponent });
-  return a.href;
-}
-
-describe('the inline Android script', () => {
-  it('writes the same geo: link as geoLink on Android', () => {
-    expect(runScript(UA.androidChrome)).toBe(geoLink(38.6999, -9.204, 'Torre (Belém) & Cia'));
-  });
-  it('leaves the OpenStreetMap link alone on iOS, desktops and Windows Phone', () => {
-    for (const ua of [UA.iphone, UA.ipad, UA.ipadDesktop, UA.windows, UA.mac, UA.linux, UA.androidDesktopSite, UA.windowsPhone, UA.empty]) expect(runScript(ua)).toBe('https://www.openstreetmap.org/?x');
-  });
-  it('agrees with isAndroid for every agent string', () => {
-    for (const ua of Object.values(UA)) expect(runScript(ua).startsWith('geo:')).toBe(isAndroid(ua));
-  });
-  it('rounds like the library', () => {
-    expect(runScript(UA.androidChrome, { lat: '38.123456789', lon: '-9.987654321', label: 'x' })).toBe(geoLink(38.123456789, -9.987654321, 'x'));
-  });
-  it('is short', () => {
-    expect(directionsScript().length).toBeLessThan(600);
+describe('googleDirectionsLink (card page)', () => {
+  it('is a Google Maps directions link to the point with five decimals', () => {
+    expect(googleDirectionsLink(38.6999, -9.204)).toBe('https://www.google.com/maps/dir/?api=1&destination=38.6999,-9.204');
+    expect(googleDirectionsLink(38.123456789, -9.987654321)).toBe('https://www.google.com/maps/dir/?api=1&destination=38.12346,-9.98765');
   });
 });
