@@ -19,3 +19,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+This license covers the source code of the site only (src/, scripts/, tests/, the build and
+configuration files). It does not cover the content: the texts of stories, epochs and threads, the
+descriptions, the interface texts and the illustrations. The content is under a separate license,
+see LICENSE-CONTENT.md. The project name, the logo and the elephant mascot are covered by neither.

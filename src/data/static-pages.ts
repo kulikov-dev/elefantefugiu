@@ -330,10 +330,10 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'O que pode fazer com os materiais',
           paragraphs: [],
           items: [
-            '**Textos** (histórias, descrições, textos da interface) estão sob a licença CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.pt). Pode copiá-los, traduzi-los e adaptá-los, incluindo para visitas guiadas e aulas. Duas condições: indique «O Elefante Fugiu» com uma ligação e partilhe a sua versão nas mesmas condições.',
-            '**O código do site** é aberto, sob a licença MIT.',
-            '**As ilustrações** pertencem aos seus autores. O autor e a licença estão indicados por baixo de cada uma.',
-            '**O nome «O Elefante Fugiu», o logótipo e a mascote (o elefante)** não estão abrangidos pelas licenças livres. Para os usar, escreva-me.',
+            '**Textos e ilustrações do projeto** (histórias, descrições, textos da interface e as ilustrações criadas para o site) estão sob a licença CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/deed.pt; texto completo e permissão adicional: https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE-CONTENT.md). O uso no ensino é permitido, incluindo aulas, cursos e visitas guiadas pagos, desde que indique «O Elefante Fugiu» com uma ligação ao site. É proibido vender os próprios textos e ilustrações, por exemplo em livros, aplicações ou conjuntos de materiais.',
+            '**O código do site** é aberto, sob a licença MIT (https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE).',
+            '**As imagens de outras fontes** (por exemplo da Wikimedia Commons) mantêm a sua própria licença, indicada por baixo de cada uma, com o autor.',
+            '**O nome «O Elefante Fugiu», o logótipo e a mascote (o elefante)** não estão abrangidos por estas licenças. Para os usar, escreva-me.',
           ],
         },
         {
@@ -393,10 +393,10 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'What you can do with the material',
           paragraphs: [],
           items: [
-            '**Texts** (stories, descriptions, interface text) are published under CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/). You may copy, translate and adapt them, including for tours and lessons. Two conditions: credit “O Elefante Fugiu” with a link, and share your version under the same terms.',
-            '**The site’s code** is open under the MIT license.',
-            '**Illustrations** belong to their authors. The author and license are given under each one.',
-            '**The name “O Elefante Fugiu,” the logo, and the elephant mascot** are not covered by the open licenses. To use them, write to me.',
+            '**Texts and illustrations of the project** (stories, descriptions, interface text and the illustrations made for the site) are published under CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/; full text and the additional permission: https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE-CONTENT.md). Use in teaching is allowed, including paid lessons, courses and tours, if you credit “O Elefante Fugiu” with a link to the site. Selling the texts and illustrations themselves, for example in books, apps or kits of materials, is not allowed.',
+            '**The site’s code** is open under the MIT license (https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE).',
+            '**Images from other sources** (for example Wikimedia Commons) keep their own license, given with the author under each one.',
+            '**The name “O Elefante Fugiu,” the logo, and the elephant mascot** are not covered by these licenses. To use them, write to me.',
           ],
         },
         {
@@ -456,10 +456,10 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Что можно делать с материалами сайта',
           paragraphs: [],
           items: [
-            '**Тексты** (истории, описания, надписи на сайте) распространяются по лицензии CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/deed.ru). Их можно копировать, переводить и переделывать, в том числе для экскурсий и уроков. Условия два: укажите «O Elefante Fugiu» со ссылкой и распространяйте свою версию на тех же условиях.',
-            '**Код сайта** открыт по лицензии MIT.',
-            '**Иллюстрации** принадлежат своим авторам. Автор и лицензия указаны под каждой.',
-            '**Название «O Elefante Fugiu», логотип и слон-талисман** в свободные лицензии не входят. Чтобы использовать их, напишите мне.',
+            '**Тексты и иллюстрации проекта** (истории, описания, надписи на сайте и иллюстрации, сделанные для сайта) распространяются по лицензии CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/deed.ru; полный текст и дополнительное разрешение: https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE-CONTENT.md). Использовать их в обучении можно, в том числе на платных уроках, курсах и экскурсиях, если указан источник «O Elefante Fugiu» со ссылкой на сайт. Продавать сами тексты и иллюстрации, например в книгах, приложениях или наборах материалов, нельзя.',
+            '**Код сайта** открыт по лицензии MIT (https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE).',
+            '**Изображения из других источников** (например, из Викисклада) сохраняют свои лицензии: они указаны под каждым изображением вместе с автором.',
+            '**Название «O Elefante Fugiu», логотип и слон-талисман** в эти лицензии не входят. Чтобы использовать их, напишите мне.',
           ],
         },
         {

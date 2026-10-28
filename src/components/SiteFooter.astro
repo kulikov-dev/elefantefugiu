@@ -2,11 +2,17 @@
 import { pagePath, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 
+const CONTENT_LICENSE = { pt: 'https://creativecommons.org/licenses/by-nc/4.0/deed.pt', en: 'https://creativecommons.org/licenses/by-nc/4.0/', ru: 'https://creativecommons.org/licenses/by-nc/4.0/deed.ru' } as const;
+const CODE_LICENSE = 'https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE';
+
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
+
+// "Texts and illustrations: {content}, ... Code: {code}." with the two names as links (the sentence is the translation's, the links are the site's).
+const licenseParts = t(lang, 'footer.licenses').split(/(\{content\}|\{code\})/);
 
 const links = [
   { label: t(lang, 'footer.about'), href: pagePath(lang, 'about') },
@@ -22,7 +28,9 @@ const links = [
         {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
       </ul>
     </nav>
-    <p>{t(lang, 'footer.licenses')}</p>
+    <p>
+      {licenseParts.map((part) => (part === '{content}' ? <a href={CONTENT_LICENSE[lang]} rel="license noopener">CC BY-NC 4.0</a> : part === '{code}' ? <a href={CODE_LICENSE} rel="noopener">MIT</a> : part))}
+    </p>
     <p><a href={`${pagePath(lang, 'legal')}#cookies`}>{t(lang, 'footer.privacy')}</a></p>
     <p class="no-js-only">{t(lang, 'family.footer_hint')}</p>
   </div>

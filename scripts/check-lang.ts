@@ -25,7 +25,7 @@ const prose = (text: string): string =>
     .replace(/https?:\/\/\S+/g, ' ')
     .replace(/\{\{[^}]*\}\}/g, ' ')
     .replace(/\{[a-z_]+\}/g, ' ')
-    .replace(/CC BY(-SA)? \d\.\d/g, ' CC ')
+    .replace(/CC BY(-SA|-NC)? \d\.\d/g, ' CC ')
     .replace(/\*\*/g, '');
 
 /** The regex word boundary knows only ASCII letters; here a word ends at any letter ("Praça" is not "pra"). The first boundary of a pattern becomes a look-behind, the others look-aheads. */

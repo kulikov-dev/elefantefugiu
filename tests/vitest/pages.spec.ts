@@ -49,7 +49,8 @@ describe('static pages', () => {
     for (const lang of LANGS) {
       const text = STATIC_PAGES.legal[lang].sections.flatMap((s) => [...s.paragraphs, ...(s.items ?? [])]).join(' ');
       expect(text).toMatch(/MIT/);
-      expect(text).toMatch(/CC BY-SA/);
+      expect(text).toMatch(/CC BY-NC/);
+      expect(text).toMatch(/LICENSE-CONTENT/);
       expect(text).toMatch(/FormSubmit/);
       expect(text).toMatch(/GitHub/);
       expect(text).toMatch(/CARTO/);

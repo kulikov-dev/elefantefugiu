@@ -32,7 +32,7 @@
     },
     "legal": {
       "title": "Informação legal",
-      "description": "Licenças dos textos e do código, o que o site guarda no seu navegador, a contagem de visitas sem cookies e os serviços que veem o seu IP."
+      "description": "Licenças dos textos, das ilustrações e do código, o que o site guarda no seu navegador, a contagem de visitas sem cookies e os serviços que veem o seu IP."
     },
     "map": {
       "title": "Mapa",
@@ -48,7 +48,7 @@
     "method": "Método e fontes",
     "report": "Encontrou um erro?",
     "legal": "Informação legal",
-    "licenses": "Código sob licença MIT. Textos sob licença CC BY-SA 4.0.",
+    "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
     "privacy": "Sem publicidade nem cookies"
   },
   "home": {

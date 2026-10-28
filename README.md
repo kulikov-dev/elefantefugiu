@@ -199,4 +199,5 @@ docs             design.md, spec.md, STATE.md
 
 ## Licenses
 
-Code: MIT (`LICENSE`). Texts: CC BY-SA 4.0 (`LICENSE-CONTENT.md`).
+Code: MIT (`LICENSE`). Texts and illustrations: CC BY-NC 4.0 (`LICENSE-CONTENT.md`), use in teaching is allowed,
+including paid lessons, courses and tours, with credit and a link; pictures from Wikimedia Commons keep their own licenses.

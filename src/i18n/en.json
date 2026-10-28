@@ -32,7 +32,7 @@
     },
     "legal": {
       "title": "Legal information",
-      "description": "How you may reuse the texts and code, what your browser stores, and which services see your IP address. No cookies, no ads."
+      "description": "How you may reuse the texts, illustrations and code, what your browser stores, and which services see your IP address. No cookies, no ads."
     },
     "map": {
       "title": "Map",
@@ -48,7 +48,7 @@
     "method": "Method and sources",
     "report": "Found a mistake?",
     "legal": "Legal information",
-    "licenses": "Code under the MIT license. Texts under CC BY-SA 4.0.",
+    "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
     "privacy": "No ads, no cookies"
   },
   "home": {
