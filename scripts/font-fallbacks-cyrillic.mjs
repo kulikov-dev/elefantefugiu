@@ -40,19 +40,20 @@ const avg = (font) => {
 const fb = (dir) => `${root}node_modules/${dir}`;
 const pairs = [
   { family: 'Source Serif 4', file: fb('@fontsource/source-serif-4/files/source-serif-4-cyrillic-400-normal.woff2'), system: times, locals: ['Times New Roman', 'Liberation Serif', 'Tinos'] },
-  { family: 'Playfair Display', file: fb('@fontsource-variable/playfair-display/files/playfair-display-cyrillic-wght-normal.woff2'), system: times, locals: ['Times New Roman', 'Liberation Serif', 'Tinos'] },
+  { family: 'Playfair Display', file: fb('@fontsource-variable/playfair-display/files/playfair-display-cyrillic-wght-normal.woff2'), system: times, locals: ['Times New Roman', 'Liberation Serif', 'Tinos'], boost: 1.023 },
   { family: 'Oswald', file: fb('@fontsource/oswald/files/oswald-cyrillic-600-normal.woff2'), system: arial, locals: ['Arial', 'Liberation Sans', 'Arimo'] },
 ];
 const pct = (n) => `${(n * 100).toFixed(2)}%`;
 const RANGE = 'U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116';
 console.log(`/* Cyrillic letters measured on ${letters.length} letters of ru.json; the system font is ${times.split(/[\/]/).pop()} / ${arial.split(/[\/]/).pop()}. */`);
-for (const { family, file, system, locals } of pairs) {
+for (const { family, file, system, locals, boost = 1 } of pairs) {
   const web = open(file);
   const fallback = open(system);
   const w = avg(web);
   const f = avg(fallback);
   if (w.covered < 0.99 || f.covered < 0.99) throw new Error(`${family}: the font lacks some letters (web ${w.covered.toFixed(3)}, system ${f.covered.toFixed(3)})`);
-  const sizeAdjust = w.width / f.width;
+  // boost: the headings are set in weights 600-800, 2-3% wider than the regular weight measured here (see font-fallbacks.mjs).
+  const sizeAdjust = (w.width / f.width) * boost;
   console.log(`@font-face {
   font-family: '${family} Fallback';
   src: ${locals.map((n) => `local('${n}')`).join(', ')};
