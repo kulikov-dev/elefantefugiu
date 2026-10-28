@@ -68,9 +68,13 @@ story:
     колеблются от нескольких сотен до более чем 4000.
 more:
   pt: |-
-    A Ponte das Barcas tinha vinte barcaças ligadas por cabos e cobertas de pranchas. No Porto, é simplesmente «o Desastre».
+    A Ponte das Barcas tinha vinte barcaças ligadas por cabos e cobertas de pranchas. No Porto, é
+    simplesmente «o Desastre».
 
-    O memorial na Ribeira, as Alminhas da Ponte, tem desde 1897 um baixo-relevo em bronze do escultor José Joaquim Teixeira Lopes, e há sempre velas acesas. A Igreja de São José das Taipas também serve de memorial, e todos os anos, a 29 de março, diz-se missa pelas vítimas. O número exato de mortos nunca foi apurado.
+
+    O memorial na Ribeira, as Alminhas da Ponte, tem desde 1897 um baixo-relevo em bronze do
+    escultor José Joaquim Teixeira Lopes, e há sempre velas acesas. A Igreja de São José das Taipas
+    também serve de memorial. O número exato de mortos nunca foi apurado.
   en: |-
     The Ponte das Barcas had 20 barges joined by cables and covered with planks. In Porto it is
     simply “the Disaster.”
@@ -82,12 +86,17 @@ more:
     Mass is said for the victims. The exact number of dead was never established.
   ru: |-
     У Понте-даш-Баркаш было 20 барж, соединённых канатами и покрытых досками. Саму катастрофу в
+
     Порту зовут просто «Бедствие».
 
 
+
     На мемориале на набережной Рибейра, Алминьяш-да-Понте («маленькие души моста»), с 1897 года есть
+
     бронзовый барельеф скульптора Жозе Жоакина Тейшейры Лопеша, и там всегда горят свечи. Церковь
-    Сан-Жозе-даш-Тайпаш тоже служит мемориалом, а каждый год 29 марта служат мессу по жертвам.
+
+    Сан-Жозе-даш-Тайпаш тоже служит мемориалом.
+
     Точное число погибших так и не установили.
 sources:
   - title: 'Wikipedia: Porto Boat Bridge disaster'
@@ -152,10 +161,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
-    hash: 'daa43e9c9f19'
+    hash: 'd2c2b55d6687'
   en:
     date: '2026-10-28'
     hash: '1fe901921418'
   ru:
     date: '2026-10-28'
-    hash: 'e42dd0b8bfe1'
+    hash: 'efd9a4046b2f'
