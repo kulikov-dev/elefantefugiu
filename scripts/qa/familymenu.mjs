@@ -7,7 +7,7 @@ const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const POMBAL = { pt: '/pt/epoca/pombal-e-terramoto/', en: '/en/era/pombal-and-the-earthquake/' };
 const WORDS = {
-  pt: { button: 'Idade: todas', all: 'Idade: até 12', twelve: 'Idade: 12+', hidden: 'Histórias ocultas', showAll: 'Mostrar todas', hint_all: 'Sem batalhas, violência nem temas difíceis', hint_12: 'Sem temas difíceis: repressão, perseguição, morte' },
+  pt: { button: 'Idade: todas', all: 'Idade: menos de 12', twelve: 'Idade: 12+', hidden: 'Histórias ocultas', showAll: 'Mostrar todas', hint_all: 'Sem batalhas, violência nem temas difíceis', hint_12: 'Sem temas difíceis: repressão, perseguição, morte' },
   en: { button: 'Age: all', all: 'Age: under 12', twelve: 'Age: 12+', hidden: 'Hidden stories', showAll: 'Show all', hint_all: 'No battles, violence or difficult topics', hint_12: 'No difficult topics: repression, persecution, death' },
 };
 
