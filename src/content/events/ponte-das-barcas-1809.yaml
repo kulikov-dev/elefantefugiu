@@ -77,13 +77,17 @@ more:
     também serve de memorial. O número exato de mortos nunca foi apurado.
   en: |-
     The Ponte das Barcas had 20 barges joined by cables and covered with planks. In Porto it is
+
     simply “the Disaster.”
 
 
+
     Its memorial on the Ribeira, the Alminhas da Ponte (“little souls of the bridge”), has had a
+
     bronze relief by the sculptor José Joaquim Teixeira Lopes since 1897, and candles are kept
-    burning there. The church of São José das Taipas also serves as a memorial, and every March 29 a
-    Mass is said for the victims. The exact number of dead was never established.
+
+    burning there. The church of São José das Taipas also serves as a memorial. The exact number of
+    dead was never established.
   ru: |-
     У Понте-даш-Баркаш было 20 барж, соединённых канатами и покрытых досками. Саму катастрофу в
 
@@ -164,7 +168,7 @@ lang_review:
     hash: 'd2c2b55d6687'
   en:
     date: '2026-10-28'
-    hash: '1fe901921418'
+    hash: 'a1fde9575b12'
   ru:
     date: '2026-10-28'
     hash: 'efd9a4046b2f'
