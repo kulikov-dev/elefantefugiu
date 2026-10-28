@@ -116,9 +116,9 @@
 @font-face {
   font-family: 'Playfair Display Fallback';
   src: local('Times New Roman'), local('Liberation Serif'), local('Tinos');
-  size-adjust: 111.26%;
-  ascent-override: 97.25%;
-  descent-override: 22.56%;
+  size-adjust: 113.82%;
+  ascent-override: 95.06%;
+  descent-override: 22.05%;
   line-gap-override: 0.00%;
 }
 

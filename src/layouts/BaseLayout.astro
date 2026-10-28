@@ -10,6 +10,14 @@ import { headScript } from '../lib/head-script';
 import { azulejoRule } from '../lib/azulejo';
 import { DEFAULT_PREVIEW, ogImagePath } from '../lib/og';
 import { ANALYTICS_CONFIG_SCRIPT, GOATCOUNTER_ENDPOINT, GOATCOUNTER_SCRIPT, analyticsEnabled } from '../lib/analytics';
+import playfairLatin from '@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url';
+import playfairCyrillic from '@fontsource-variable/playfair-display/files/playfair-display-cyrillic-wght-normal.woff2?url';
+import serifLatin from '@fontsource/source-serif-4/files/source-serif-4-latin-400-normal.woff2?url';
+import serifLatinItalic from '@fontsource/source-serif-4/files/source-serif-4-latin-400-italic.woff2?url';
+import serifCyrillic from '@fontsource/source-serif-4/files/source-serif-4-cyrillic-400-normal.woff2?url';
+import serifCyrillicItalic from '@fontsource/source-serif-4/files/source-serif-4-cyrillic-400-italic.woff2?url';
+import oswaldLatin from '@fontsource/oswald/files/oswald-latin-600-normal.woff2?url';
+import oswaldCyrillic from '@fontsource/oswald/files/oswald-cyrillic-600-normal.woff2?url';
 import bussola from '../assets/azulejo/bussola.svg?url';
 import canto from '../assets/azulejo/canto.svg?url';
 import rombo from '../assets/azulejo/rombo.svg?url';
@@ -55,6 +63,10 @@ interface Props {
 
 const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, schema, epoch, count = true, allLangs = false } = Astro.props;
 const chrome = allLangs ? LANGS : [lang];
+const fontFiles =
+  lang === 'ru'
+    ? [playfairCyrillic, serifCyrillic, serifCyrillicItalic, oswaldCyrillic, playfairLatin]
+    : [playfairLatin, serifLatin, serifLatinItalic, oswaldLatin];
 const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
@@ -93,6 +105,10 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <FaviconLinks />
+    <!-- The fonts of the first screen (title, text, hook, labels) are fetched with the stylesheet, not after it, so the lines of
+         the title and the tags do not break differently when a font arrives (a layout jump). The same files the @font-face rules
+         of fonts.css name; a Russian page also draws Latin letters (names), so it gets both scripts of the heading font. -->
+    {fontFiles.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
     {canonical && <link rel="canonical" href={canonical} />}
     {paths && hreflangs.map((target) => <link rel="alternate" hreflang={target} href={absolute(paths[target])} />)}
     {paths && hreflangs.length > 0 && <link rel="alternate" hreflang="x-default" href={absolute(paths.pt)} />}
