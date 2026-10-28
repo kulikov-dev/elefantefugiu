@@ -129,9 +129,12 @@ if (want('directions')) {
   await nojs.goto(`${base}/pt/${SEG.pt}/${FAR.slug.pt}/`, { waitUntil: 'load' });
   ok('no JavaScript, even on Android: the Google Maps link works', (await nojs.evaluate(() => document.querySelector('[data-bridge] a[data-directions]').getAttribute('href'))) === google(FAR));
   await nojs.close();
-  // no other service anywhere on the map page or a card; the one Google address is the directions link of the card page (a link, nothing is loaded)
+  // no other service anywhere on the map page or a card; the Google addresses are the links of the data (maps_url, or directions to the
+  // coordinates on the card page): links, nothing is loaded. The map page carries the maps_url of the cards that have one in its data.
+  const known = [google(FAR), ...published.map((e) => e.bridge.maps_url).filter(Boolean)];
   for (const path of ['/pt/mapa/', `/pt/${SEG.pt}/${FAR.slug.pt}/`]) {
-    const html = (await (await fetch(base + path)).text()).replace(/&amp;/g, '&').split(google(FAR)).join('');
+    let html = (await (await fetch(base + path)).text()).replace(/&amp;/g, '&');
+    for (const u of known) html = html.split(u).join('');
     ok(`${path}: no Google, Apple, Bing, Waze or Mapbox address in the page`, !/google\.[a-z]+\/maps|maps\.google|maps\.apple|bing\.com\/maps|waze\.com|mapbox\.com/i.test(html));
   }
 }
