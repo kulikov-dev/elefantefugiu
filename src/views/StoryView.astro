@@ -18,11 +18,11 @@ import ShareButton from '../components/ShareButton.astro';
 import SourceList from '../components/SourceList.astro';
 import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
+import { EPOCHS_ANCHOR, LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
 import { distanceParts } from '../lib/distance';
-import { epochHasContent } from '../lib/epochs';
+import { epochHasContent, nextEpochEntry } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 import { previewImageUrl } from '../lib/picture-assets';
@@ -99,6 +99,16 @@ const relatedVariants = groupVariants(
 const pagerVariants = groupVariants(
   (mode) => cardNeighbours(event, all, allowedIn(mode)),
   ({ prev, next }) => `${prev?.id ?? ''}|${next?.id ?? ''}`,
+);
+
+// "Next": the next story of the epoch; on the last story of an epoch the first story of the next epoch with a page ("Next era: <name>");
+// on the last story of the last such epoch a link to all eras. Each is computed per mode like the previous / next links above.
+const continueVariants = groupVariants(
+  (mode) => {
+    const { next } = cardNeighbours(event, all, allowedIn(mode));
+    return { next, nextEpoch: next ? null : nextEpochEntry(epoch, site.epochs, all, allowedIn(mode)) };
+  },
+  ({ next, nextEpoch }) => `${next?.id ?? ''}|${nextEpoch?.story.id ?? ''}`,
 );
 
 // Intermediate screen: the modes that hide this card, and the text of each (age and/or heavy topic).
@@ -193,20 +203,29 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       <p slot="story">{event.story[lang]}</p>
       <Fragment slot="after">
         {
-          pagerVariants
-            .filter((variant) => variant.value.next)
-            .map(({ modes, value: { next } }) => (
+          continueVariants.map(({ modes, value: { next, nextEpoch } }) => {
+            const target = next ?? nextEpoch?.story;
+            const targetEpoch = nextEpoch?.epoch ?? epoch;
+            return (
               <div class="fv fv--block" data-modes={modes.join(' ')}>
-                <NextStory
-                  lang={lang}
-                  href={storyPath(lang, next!.slug[lang])}
-                  hook={next!.hook[lang]}
-                  title={next!.title[lang]}
-                  textLang={textLangOf(next!, lang)}
-                  picture={cardPicture(next!, site.epochs.find((ep) => ep.id === next!.epoch) ?? epoch)}
-                />
+                {target ? (
+                  <NextStory
+                    lang={lang}
+                    href={storyPath(lang, target.slug[lang])}
+                    hook={target.hook[lang]}
+                    title={target.title[lang]}
+                    textLang={textLangOf(target, lang)}
+                    picture={cardPicture(target, site.epochs.find((ep) => ep.id === target.epoch) ?? targetEpoch)}
+                    label={nextEpoch ? t(lang, 'card.next_epoch').replace('{name}', nextEpoch.epoch.name[lang]) : undefined}
+                  />
+                ) : (
+                  <p class="all-eras">
+                    <a class="button button--secondary" href={`${pagePath(lang, 'home')}#${EPOCHS_ANCHOR}`}>{t(lang, 'card.all_epochs')}</a>
+                  </p>
+                )}
               </div>
-            ))
+            );
+          })
         }
       </Fragment>
       <Fragment slot="more">

@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { EventData } from '../src/lib/events';
-import { epochFeed, epochHasContent, epochSwitcherItems, neighbourEpochs, threadCountsInEpoch, threadSections } from '../src/lib/epochs';
+import { epochFeed, epochHasContent, epochSwitcherItems, neighbourEpochs, nextEpochEntry, threadCountsInEpoch, threadSections } from '../src/lib/epochs';
 
 // Synthetic data: only the fields the helpers read.
 const ev = (id: string, epoch: string, year: number, threads: string[], status: 'ready' | 'draft' = 'ready') =>
@@ -116,4 +116,20 @@ test('epochSwitcherItems: all epochs by order, current marked, link only with a 
   // an MVP epoch without a published card has no page, so it is not a link
   const empty = epochSwitcherItems(ep('e1', 1), [ep('e1', 1), ep('e9', 9)], events);
   assert.deepEqual(empty.map((i) => i.state), ['current', 'soon']);
+});
+
+test('nextEpochEntry: the first story of the nearest later epoch with a page; the mode can skip stories and whole epochs; none at the end', () => {
+  const four = [ep('a', 1), ep('b', 2, false), ep('c', 3), ep('d', 4)];
+  const evs = [ev('x', 'a', 1900, ['sea']), ev('y', 'c', 1950, ['sea']), ev('z', 'c', 1960, ['sea']), ev('w', 'd', 1990, ['sea'])];
+  // "b" has no page: from a the next epoch is c, and its first story is y
+  const first = nextEpochEntry(four[0]!, four, evs);
+  assert.equal(first?.epoch.id, 'c');
+  assert.equal(first?.story.id, 'y');
+  // the mode hides y: z is the first it shows
+  assert.equal(nextEpochEntry(four[0]!, four, evs, (e) => e.id !== 'y')?.story.id, 'z');
+  // the mode hides every story of c: the epoch is skipped
+  assert.equal(nextEpochEntry(four[0]!, four, evs, (e) => e.epoch !== 'c')?.epoch.id, 'd');
+  // after the last epoch with a page, and when the mode hides everything that follows: none
+  assert.equal(nextEpochEntry(four[3]!, four, evs), null);
+  assert.equal(nextEpochEntry(four[0]!, four, evs, (e) => e.epoch === 'a'), null);
 });

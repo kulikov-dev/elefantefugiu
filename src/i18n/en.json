@@ -95,6 +95,8 @@
     "not_translated": "This page has not been translated yet. The English text is shown.",
     "more_toggle": "More",
     "next_story": "Next",
+    "next_epoch": "Next era: {name}",
+    "all_epochs": "See all eras",
     "sources_checked": "links checked on",
     "source_in_russian": "in Russian",
     "report_inline": "Spotted an inaccuracy in this story? Write to me",

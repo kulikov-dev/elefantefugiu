@@ -1,5 +1,5 @@
 ---
-// "Next": a large card after the story that leads to the next story of the epoch, so that a reader who has just finished
+// "Next": a large card after the story that leads to the next story of the epoch (at the end of an epoch, to the first story of the next one), so that a reader who has just finished
 // wants the following one. The hook of the next story is the invitation (large), its title is small beneath it.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
@@ -15,9 +15,11 @@ interface Props {
   textLang?: string | undefined;
   /** The picture of the next story (or of its epoch): a reserved strip on top, cropped to its focus point. */
   picture?: PictureData | undefined;
+  /** The label above the hook; "Next" by default, "Next era: <name>" at the end of an epoch. */
+  label?: string | undefined;
 }
 
-const { lang, href, hook, title, textLang, picture } = Astro.props;
+const { lang, href, hook, title, textLang, picture, label } = Astro.props;
 ---
 <a class="next-story" {href} rel="next">
   {
@@ -26,7 +28,7 @@ const { lang, href, hook, title, textLang, picture } = Astro.props;
     )
   }
   <span class="next-story__body">
-    <span class="next-story__label">{t(lang, 'card.next_story')} <span aria-hidden="true">&rarr;</span></span>
+    <span class="next-story__label">{label ?? t(lang, 'card.next_story')} <span aria-hidden="true">&rarr;</span></span>
     <span class="next-story__hook" lang={textLang}>{hook}</span>
     <span class="next-story__title">&mdash; {title}</span>
   </span>

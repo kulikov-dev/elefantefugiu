@@ -95,6 +95,8 @@
     "not_translated": "Esta página ainda não foi traduzida. É mostrado o texto em inglês.",
     "more_toggle": "Saber mais",
     "next_story": "A seguir",
+    "next_epoch": "Próxima época: {name}",
+    "all_epochs": "Ver todas as épocas",
     "sources_checked": "ligações verificadas em",
     "source_in_russian": "em russo",
     "report_inline": "Reparou numa imprecisão nesta história? Escreva-me",

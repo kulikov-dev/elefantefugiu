@@ -18,6 +18,9 @@ const events = readdirSync(eventsDir)
   .filter((n) => n.endsWith('.yaml'))
   .map((n) => parse(readFileSync(join(eventsDir, n), 'utf8'), { schema: 'core', customTags: ['timestamp'] }))
   .filter((e) => e.status === 'ready');
+// The epochs: an epoch has a page (and is a place "Next" can lead to) when it is part of the MVP and has a ready card.
+const epochList = parse(readFileSync(join(root, 'src/content/epochs.yaml'), 'utf8'), { schema: 'core' });
+const liveEpochs = epochList.filter((e) => e.mvp && events.some((ev) => ev.epoch === e.id)).sort((a, b) => a.order - b.order);
 
 // A thread has a page (and its chip on a card is a link) from 5 ready cards (src/lib/threads.ts, written out here independently).
 const threadCount = new Map();
@@ -103,14 +106,26 @@ for (const ev of events) {
         if (wrong.length) fail(`previous / next, mode ${m}: leads to hidden card(s) ${wrong.join(', ')}`);
       }
     }
-    // "Next": the next story of the epoch that the mode shows (the card itself counts as present), none at the end of the epoch.
+    // "Next": the next story of the epoch that the mode shows (the card itself counts as present); at the end of the epoch the first story the mode
+    // shows in the next epoch with a page; after the last such epoch no card but the link "All eras" to the epochs of the home page.
     const chrono = (a, b) => startYear(a) - startYear(b) || endYear(a) - endYear(b) || a.id.localeCompare(b.id);
     const nextBlocks = blocks('class="next-story"');
     for (const m of MODES) {
       const inEpoch = events.filter((e) => e.epoch === ev.epoch && (e.id === ev.id || shownIn(e, m))).sort(chrono);
-      const want = inEpoch[inEpoch.findIndex((e) => e.id === ev.id) + 1]?.id ?? null;
+      let want = inEpoch[inEpoch.findIndex((e) => e.id === ev.id) + 1]?.id ?? null;
+      if (!want) {
+        const myOrder = epochList.find((e) => e.id === ev.epoch)?.order ?? 0;
+        for (const later of liveEpochs.filter((e) => e.order > myOrder)) {
+          const first = events.filter((e) => e.epoch === later.id && shownIn(e, m)).sort(chrono)[0];
+          if (first) { want = first.id; break; }
+        }
+      }
       const got = linkIds(blockFor(nextBlocks, m));
       if ((want ? [want] : []).join() !== got.join()) fail(`"Next", mode ${m}: expected ${want ?? 'nothing'}, found ${got.join(', ') || 'nothing'}`);
+      const allEras = blocks('class="all-eras"');
+      const allErasBlock = blockFor(allEras, m);
+      if (want && allErasBlock) fail(`"Next", mode ${m}: the link to all eras must be only where there is no next story`);
+      if (!want && !(allErasBlock && allErasBlock[2].includes('#epocas'))) fail(`"Next", mode ${m}: no next story, so the link "All eras" (to #epocas) is expected`);
     }
     // "Nearby": other stories within 5 km of this story's bridge, nearest first, at most 3, each with its distance; no block when there are none.
     const km = (a, b) => {

@@ -41,6 +41,25 @@ export function neighbourEpochs<E extends Pick<EpochData, 'id' | 'order' | 'mvp'
   };
 }
 
+/**
+ * Where "Next" leads from the last story of an epoch: the first story the mode shows (`allowed`) in the nearest later epoch with a page,
+ * with that epoch. An epoch whose stories the mode hides all is skipped. `null` after the last such epoch: the page then offers
+ * "All eras" instead.
+ */
+export function nextEpochEntry<E extends Pick<EpochData, 'id' | 'order' | 'mvp'>>(
+  epoch: E,
+  epochs: readonly E[],
+  events: readonly EventData[],
+  allowed: (e: EventData) => boolean = () => true,
+): { epoch: E; story: EventData } | null {
+  const later = [...epochs].filter((e) => e.order > epoch.order && epochHasContent(e, events)).sort((a, b) => a.order - b.order);
+  for (const e of later) {
+    const story = epochFeed(e, events).find(allowed);
+    if (story) return { epoch: e, story };
+  }
+  return null;
+}
+
 /** Cards per thread inside one epoch (a card counts for its primary and its second thread). */
 export function threadCountsInEpoch(epoch: Pick<EpochData, 'id'>, events: readonly EventData[]): Map<string, number> {
   return countCardsByThread(epochFeed(epoch, events));
