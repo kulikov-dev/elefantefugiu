@@ -5,7 +5,7 @@ import * as L from 'leaflet';
 // ?url: the file is emitted but NOT linked into pages; it is added below, only when the map starts.
 import leafletCss from 'leaflet/dist/leaflet.css?url';
 import { parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
-import { directionsHref } from '../lib/directions';
+import { googleDirectionsLink } from '../lib/directions';
 import { distanceParts } from '../lib/distance';
 import { distanceKm } from '../lib/events';
 import { isVisibleInMode } from '../lib/family';
@@ -335,8 +335,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     $('[data-preview-title]').textContent = card.title;
     $('[data-preview-hook]').textContent = card.hook;
     $<HTMLAnchorElement>('[data-preview-open]').href = card.href;
-    // "How to get there": OpenStreetMap for everyone, a geo: link on Android only (src/lib/directions.ts).
-    $<HTMLAnchorElement>('[data-preview-directions]').href = directionsHref(card.lat, card.lon, card.bridgeName, navigator.userAgent);
+    // "How to get there": a plain Google Maps directions link, the same as on the card page (src/lib/directions.ts).
+    $<HTMLAnchorElement>('[data-preview-directions]').href = googleDirectionsLink(card.lat, card.lon);
     const threadList = $('[data-preview-threads]');
     threadList.replaceChildren(
       ...card.threads

@@ -36,11 +36,9 @@ bridge:
   lon: -9.26
   url: https://www.rhlt.pt/en/portfolio/lines-of-torres-vedras-visitors-centre-s-vicentes-fort-chapel/
   note:
-    pt: No Forte de São Vicente, o centro de interpretação explica as linhas que
-      protegeram Lisboa.
-    en: At the São Vicente fort, an interpretation center explains the lines that protected Lisbon.
-    ru: В форте Сан-Висенте центр интерпретации рассказывает о линиях, защитивших
-      Лиссабон.
+    pt: Visite o maior dos fortes das três linhas que travaram os franceses diante de Lisboa em 1810.
+    en: Visit the biggest fort of the three lines that stopped the French in front of Lisbon in 1810.
+    ru: Посетите крупнейший форт трёх линий, остановивших французов перед Лиссабоном в 1810 году.
 threads:
   - poder-e-revolta
   - gente-como-nos

@@ -36,11 +36,9 @@ bridge:
   lon: -8.6112
   url: https://www.cm-porto.pt/
   note:
-    pt: As Alminhas da Ponte, na Ribeira, ficam perto do lugar da antiga ponte de
-      barcas.
-    en: The Alminhas da Ponte shrine in the Ribeira stands near the site of the old bridge of boats.
-    ru: Часовня Алминьяш-да-Понте в Рибейре стоит недалеко от места старого моста из
-      лодок.
+    pt: "Aqui lembram-se as vítimas de março de 1809."
+    en: The victims of March 1809 are remembered here.
+    ru: "Здесь помнят жертв марта 1809 года."
 threads:
   - gente-como-nos
 importance: 2

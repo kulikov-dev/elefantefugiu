@@ -36,9 +36,9 @@ bridge:
   lon: -9.3258
   url: https://www.visitportugal.com/en/node/138329
   note:
-    pt: A biblioteca pode ver-se na visita ao palácio; os morcegos evitam as pessoas.
-    en: The library can be seen on a visit to the palace; the bats avoid people.
-    ru: Библиотеку можно увидеть при посещении дворца; летучие мыши избегают людей.
+    pt: A biblioteca visita-se com o palácio; os morcegos trabalham de noite, quando já não há visitantes.
+    en: The library is part of the palace tour; the bats work at night, once the visitors have gone.
+    ru: Библиотеку показывают при осмотре дворца; летучие мыши работают ночью, когда посетителей уже нет.
 threads:
   - natureza
 importance: 2

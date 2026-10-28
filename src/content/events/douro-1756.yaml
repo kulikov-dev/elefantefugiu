@@ -32,12 +32,9 @@ bridge:
   lon: -8.6153
   url: https://realcompanhiavelha.pt/en/caves/
   note:
-    pt: Em Gaia, o museu da Real Companhia Velha conta a história da companhia
-      fundada em 1756.
-    en: In Gaia, the Real Companhia Velha museum tells the story of the company
-      founded in 1756.
-    ru: В Гайе музей Реал-Компаньи-Велья рассказывает о компании, основанной в 1756
-      году.
+    pt: Conheça a companhia criada em 1756 para proteger o vinho do Porto e as pedras que marcaram o Douro.
+    en: Learn about the company created in 1756 to protect port wine, and the stones that marked out the Douro.
+    ru: Узнайте о компании, созданной в 1756 году для защиты портвейна, и о камнях, которыми огородили Дору.
 threads:
   - comida-e-vinho
   - poder-e-revolta

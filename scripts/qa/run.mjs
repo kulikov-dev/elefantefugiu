@@ -39,7 +39,7 @@ const SUITES = [
   { name: 'map-variant', script: 'map.mjs', args: ['variant', 'limit', 'filters', 'preview', 'link', 'epoch'], variant: true, about: 'clusters, Show more, filters, preview, links and the epoch map with more cards than the marker limit (fixture build, limit 7)' },
   { name: 'map-limit-all', script: 'map.mjs', args: ['limit'], env: { FAMILY: 'all' }, about: 'the same sweep in family mode "all"' },
   { name: 'map-limit-12', script: 'map.mjs', args: ['limit'], env: { FAMILY: '12' }, about: 'the same sweep in family mode "12"' },
-  { name: 'bridge', script: 'bridge.mjs', about: 'marker preview, bridge caption, Como chegar (OSM, geo: on Android), bridge block' },
+  { name: 'bridge', script: 'bridge.mjs', about: 'marker preview, bridge caption, Como chegar (Google Maps link), bridge block' },
   { name: 'family-controls', script: 'family.mjs', args: ['toggle', 'lists'], about: 'family toggle, feed, grid, threads, tiles, home' },
   { name: 'family-pages', script: 'family.mjs', args: ['recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise'], about: 'recounting, Nearby, the gate, no flash, blocked storage, Surprise me' },
   { name: 'family-map', script: 'family.mjs', args: ['map'], about: 'the map in every family mode' },

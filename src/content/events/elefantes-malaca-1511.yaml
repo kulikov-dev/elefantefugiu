@@ -36,11 +36,9 @@ bridge:
   lon: -9.206
   url: https://www.visitlisboa.com/
   note:
-    pt: Em Belém, o monumento a Afonso de Albuquerque lembra o conquistador de
-      Malaca.
-    en: In Belém, the monument to Afonso de Albuquerque recalls the conqueror of
-      Malacca.
-    ru: В Белене памятник Афонсу де Албукерки напоминает о завоевателе Малакки.
+    pt: O relevo do monumento mostra a tomada de Malaca, onde os elefantes do sultão se viraram contra os seus.
+    en: The monument’s relief shows the taking of Malacca, where the sultan’s elephants turned on their own men.
+    ru: Рельеф памятника изображает взятие Малакки, где слоны султана повернули против своих.
 threads:
   - natureza
 importance: 1

@@ -36,12 +36,9 @@ bridge:
   lon: -9.1347
   url: http://www.martinhodaarcada.pt
   note:
-    pt: Sob as mesmas arcadas, o Martinho da Arcada é um dos cafés mais antigos de
-      Lisboa.
-    en: Under the same arcades, Martinho da Arcada is one of the oldest cafés in
-      Lisbon.
-    ru: Под теми же арками находится «Мартиньо да Аркада», одно из старейших кафе
-      Лиссабона.
+    pt: Sente-se sob as arcadas onde se vendia o gelo do rei; a mesa de Fernando Pessoa continua reservada.
+    en: Sit under the arcades where the king’s ice was sold; Fernando Pessoa’s table is still reserved.
+    ru: Сядьте под аркадами, где продавали королевский лёд; стол Фернандо Пессоа и сейчас зарезервирован.
 threads:
   - comida-e-vinho
   - gente-como-nos

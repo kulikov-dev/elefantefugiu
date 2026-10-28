@@ -32,12 +32,12 @@ bridge:
   lon: -9.1383
   url: https://www.visitlisboa.com/
   note:
-    pt: "Percorra a Rua Áurea e as vizinhas Rua dos Correeiros e Rua dos Sapateiros: os nomes ainda
-      guardam os ofícios."
-    en: "Walk along Rua Áurea and its neighbours Rua dos Correeiros and Rua dos Sapateiros: the names
-      still keep the trades."
-    ru: "Пройдите по Руа-Аурея и соседним улицам Коррейруш и Сапатейруш (Rua dos Sapateiros): их
-      названия до сих пор хранят ремёсла."
+    pt: "Passeie pelas ruas vizinhas dos Correeiros e dos Sapateiros: os nomes ainda guardam os
+      ofícios da Baixa de 1760."
+    en: "Stroll the neighboring Rua dos Correeiros and Rua dos Sapateiros: their names still keep
+      the 1760 trades."
+    ru: "Пройдитесь по соседним улицам Коррейруш и Сапатейруш: их названия хранят ремёсла Байши
+      1760 года."
 threads:
   - gente-como-nos
 importance: 2

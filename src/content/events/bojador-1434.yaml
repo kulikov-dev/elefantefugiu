@@ -32,9 +32,9 @@ bridge:
   lon: -8.66944
   url: https://www.cm-lagos.pt/
   note:
-    pt: Gil Eanes nasceu em Lagos; a sua estátua está no jardim junto à avenida marginal.
-    en: Gil Eanes was born in Lagos; his statue stands in the garden by the waterfront.
-    ru: Жил Эанеш родился в Лагуше; его статуя стоит в саду у набережной.
+    pt: Passeie pelo jardim à beira-mar onde Lagos, a sua terra natal, homenageia o navegador que passou o cabo do medo.
+    en: Stroll the seafront garden where Lagos, his hometown, honors the sailor who passed the cape of fear.
+    ru: Пройдитесь по приморскому саду, где Лагуш, его родной город, чтит моряка, прошедшего мыс страха.
 threads:
   - mar
 importance: 2

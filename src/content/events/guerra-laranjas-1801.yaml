@@ -36,10 +36,9 @@ bridge:
   lon: -7.1631
   url: https://www.cm-elvas.pt/
   note:
-    pt: Elvas, a praça-forte que travou o exército de Godoy, é Património Mundial.
-    en: Elvas, the fortress town that held back Godoy’s army, is a World Heritage Site.
-    ru: Эльваш, крепость, остановившая армию Годоя, входит в список Всемирного
-      наследия.
+    pt: Percorra as muralhas e os baluartes, hoje Património Mundial, e imagine o cerco de 1801.
+    en: Walk the ramparts and bastions, now a World Heritage Site, and picture the siege of 1801.
+    ru: Пройдите по стенам и бастионам, теперь это Всемирное наследие, и представьте осаду 1801 года.
 threads:
   - poder-e-revolta
 importance: 2

@@ -32,9 +32,9 @@ bridge:
   lon: -9.203
   url: https://www.visitlisboa.com/
   note:
-    pt: Nesta margem de Belém, em novembro de 1807, a família real subiu para os navios.
-    en: From this shore at Belém, the royal family boarded the ships in November 1807.
-    ru: С этого берега у Белена в ноябре 1807 года королевская семья поднялась на корабли.
+    pt: Imagine daqui, em dois dias de novembro de 1807, a corte inteira a subir para os navios.
+    en: Picture the entire court boarding the ships from here in two days in November 1807.
+    ru: Представьте, как отсюда за два дня в ноябре 1807 года на корабли поднялся весь двор.
 threads:
   - mar
   - poder-e-revolta

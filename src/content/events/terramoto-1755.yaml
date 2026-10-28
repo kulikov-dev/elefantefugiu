@@ -36,10 +36,9 @@ bridge:
   lon: -9.1406
   url: https://museuarqueologicodocarmo.pt/
   note:
-    pt: Em Lisboa, as ruínas do Convento do Carmo estão abertas ao céu desde 1755.
-    en: In Lisbon, the ruins of the Carmo Convent have stood open to the sky since
-      1755.
-    ru: В Лиссабоне руины монастыря Кармо стоят под открытым небом с 1755 года.
+    pt: "Ande sob os arcos sem teto da nave: é o que o terramoto deixou da igreja do Carmo."
+    en: "Walk under the roofless arches of the nave: what the earthquake left of the Carmo church."
+    ru: "Пройдите под сводами нефа без крыши: вот что землетрясение оставило от церкви Кармо."
 threads:
   - natureza
 importance: 3

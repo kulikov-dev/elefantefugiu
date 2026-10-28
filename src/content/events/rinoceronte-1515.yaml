@@ -32,9 +32,9 @@ bridge:
   lon: -9.216
   url: https://www.museusemonumentos.pt/
   note:
-    pt: Na Torre de Belém, uma guarita tem esculpida a cabeça de um rinoceronte.
-    en: On Belém Tower, a sentry box carries a carved rhinoceros head.
-    ru: На башне Белен одна из сторожевых башенок украшена резной головой носорога.
+    pt: "Procure a guarita com a cabeça de rinoceronte esculpida: lembra o animal que Manuel I enviou ao papa."
+    en: "Look for the sentry box with the carved rhinoceros head: it recalls the animal Manuel I sent to the pope."
+    ru: "Найдите сторожевую башенку с резной головой носорога: она напоминает о звере, которого Мануэл I послал папе."
 threads:
   - natureza
 importance: 1

@@ -28,7 +28,6 @@ const UA = {
 };
 const r5 = (n) => Number(n.toFixed(5));
 const google = (e) => `https://www.google.com/maps/dir/?api=1&destination=${r5(e.bridge.lat)},${r5(e.bridge.lon)}`;
-const osm = (e) => `https://www.openstreetmap.org/?mlat=${r5(e.bridge.lat)}&mlon=${r5(e.bridge.lon)}#map=17/${r5(e.bridge.lat)}/${r5(e.bridge.lon)}`;
 const norm = (s) => String(s).replace(/\s+/g, ' ').trim();
 
 let failed = 0;
@@ -70,7 +69,7 @@ const preview = (page) =>
     const text = (s) => p.querySelector(s)?.textContent.replace(/\s+/g, ' ').trim();
     const open = p.querySelector('[data-preview-open]');
     const how = p.querySelector('[data-preview-directions]');
-    return { inOrder, today: text('.map__preview-today'), name: text('[data-preview-bridge-name]'), address: text('[data-preview-bridge-address]'), title: text('[data-preview-title]'), threads: [...p.querySelectorAll('[data-preview-threads] li')].map((l) => l.textContent.trim()), hook: text('[data-preview-hook]'), openText: open.textContent.trim(), openHref: open.getAttribute('href'), howText: how.textContent.trim(), howHref: how.getAttribute('href'), howRel: how.getAttribute('rel'), buttons: [...p.querySelectorAll('a.button')].map((a) => a.textContent.trim()) };
+    return { inOrder, today: text('.map__preview-today'), name: text('[data-preview-bridge-name]'), address: text('[data-preview-bridge-address]'), title: text('[data-preview-title]'), threads: [...p.querySelectorAll('[data-preview-threads] li')].map((l) => l.textContent.trim()), hook: text('[data-preview-hook]'), openText: open.textContent.trim(), openHref: open.getAttribute('href'), howText: how.textContent.trim(), howHref: how.getAttribute('href'), howRel: how.getAttribute('rel'), howTarget: how.getAttribute('target'), buttons: [...p.querySelectorAll('a.button')].map((a) => a.textContent.trim()) };
   });
 
 // ---------- 1. The marker preview ----------
@@ -82,7 +81,7 @@ if (want('preview')) {
     ok(`preview of ${e.id}: "Hoje, aqui", bridge name, bridge address, then title, threads, hook, and the two buttons, in that order`, p.inOrder && p.today === 'Hoje, aqui' && p.name === bname(e) && p.address === e.bridge.address && p.title === e.title.pt && p.hook === norm(e.hook.pt), JSON.stringify({ today: p.today, name: p.name, address: p.address, title: p.title }));
     ok(`preview of ${e.id}: the threads of the card are listed`, threads.every((t) => p.threads.includes(t)), p.threads.join(', '));
     ok(`preview of ${e.id}: exactly two buttons, "Abrir" and "Como chegar"`, p.buttons.length === 2 && p.buttons[0] === 'Abrir' && p.buttons[1] === 'Como chegar', p.buttons.join(' | '));
-    ok(`preview of ${e.id}: "Abrir" leads to the card, "Como chegar" to OpenStreetMap at the BRIDGE with rel="noopener"`, p.openHref.endsWith(`/${SEG.pt}/${e.slug.pt}/`) && p.howHref === osm(e) && /noopener/.test(p.howRel), `${p.openHref} ${p.howHref}`);
+    ok(`preview of ${e.id}: "Abrir" leads to the card, "Como chegar" to Google Maps at the BRIDGE, in a new tab with rel="noopener"`, p.openHref.endsWith(`/${SEG.pt}/${e.slug.pt}/`) && p.howHref === google(e) && p.howTarget === '_blank' && /noopener/.test(p.howRel), `${p.openHref} ${p.howHref}`);
     await page.close();
   }
   ok('the Goa card: "Como chegar" points at Lisbon (bridge), not at Goa (place)', (() => { const near = GOA.bridge.lat > 37 && GOA.bridge.lat < 40 && km(GOA.place, GOA.bridge) > 1000; return near; })());
@@ -110,13 +109,13 @@ if (want('caption')) {
   await page.close();
 }
 
-// ---------- 3. "Como chegar": the map preview keeps OSM (geo: on Android); the card page has a plain Google Maps link ----------
+// ---------- 3. "Como chegar": the same plain Google Maps link in the map preview and on the card page, on every device ----------
 if (want('directions')) {
-  for (const [name, ua, geo] of [['Android', UA.android, true], ['iPhone', UA.iphone, false], ['iPad', UA.ipad, false], ['macOS desktop', UA.mac, false], ['Windows desktop', UA.windows, false]]) {
+  for (const [name, ua] of [['Android', UA.android], ['iPhone', UA.iphone], ['iPad', UA.ipad], ['macOS desktop', UA.mac], ['Windows desktop', UA.windows]]) {
     const page = await openMap(FAR.id, { ua, width: name.includes('desktop') ? 1100 : 390 });
     const p = await preview(page);
-    const expectGeo = new RegExp(`^geo:${r5(FAR.bridge.lat)},${r5(FAR.bridge.lon)}\\?q=${r5(FAR.bridge.lat)},${r5(FAR.bridge.lon)}\\(`);
-    ok(`map preview, ${name}: "Como chegar" is ${geo ? 'a geo: link' : 'the OpenStreetMap link'}`, geo ? expectGeo.test(p.howHref) : p.howHref === osm(FAR), p.howHref);
+    const prev = await page.evaluate(() => { const l = document.querySelector('[data-preview-directions]'); return { href: l.getAttribute('href'), target: l.getAttribute('target'), rel: l.getAttribute('rel') }; });
+    ok(`map preview, ${name}: "Como chegar" is the Google Maps link to the bridge, in a new tab, rel noopener`, prev.href === google(FAR) && prev.target === '_blank' && /noopener/.test(prev.rel ?? ''), JSON.stringify(prev));
     await page.close();
     const card = await newPage({ ua, width: name.includes('desktop') ? 1100 : 390 });
     await card.goto(`${base}/pt/${SEG.pt}/${FAR.slug.pt}/`, { waitUntil: 'load' });

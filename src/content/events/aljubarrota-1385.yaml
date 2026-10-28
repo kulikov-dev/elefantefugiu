@@ -36,10 +36,9 @@ bridge:
   lon: -8.9293
   url: https://fundacao-aljubarrota.pt/
   note:
-    pt: No planalto de São Jorge, o centro de interpretação explica o campo onde se
-      travou a batalha.
-    en: On the São Jorge plateau, an interpretation center walks visitors through the battlefield.
-    ru: На плато Сан-Жорже музейный центр рассказывает о поле битвы.
+    pt: Aqui pode percorrer o terreno que Nuno Álvares Pereira escolheu e ver como a batalha se travou.
+    en: Walk the ground Nuno Álvares Pereira chose and see how the battle was fought.
+    ru: Пройдите по земле, которую выбрал Нуну Алвареш Перейра, и узнайте, как шла битва.
 threads:
   - poder-e-revolta
   - gente-como-nos

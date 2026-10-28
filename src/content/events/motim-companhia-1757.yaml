@@ -36,12 +36,9 @@ bridge:
   lon: -8.6153
   url: https://realcompanhiavelha.pt/en/caves/
   note:
-    pt: Em Gaia, o museu da Real Companhia Velha guarda a memória da companhia que o
-      motim atacou.
-    en: In Gaia, the Real Companhia Velha museum keeps the memory of the company the
-      riot attacked.
-    ru: В Гайе музей Реал-Компаньи-Велья хранит память о компании, на которую
-      обрушился мятеж.
+    pt: Conheça a companhia contra a qual o Porto se revoltou na Quarta-feira de Cinzas de 1757.
+    en: Learn about the company that Porto rose against on Ash Wednesday 1757.
+    ru: Узнайте о компании, против которой Порту восстал в Пепельную среду 1757 года.
 threads:
   - comida-e-vinho
   - poder-e-revolta

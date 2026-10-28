@@ -36,9 +36,9 @@ bridge:
   lon: -9.1206
   url: https://www.exercito.pt/
   note:
-    pt: O Museu Militar de Lisboa guarda a memória militar de Portugal.
-    en: The Lisbon Military Museum keeps the military memory of Portugal.
-    ru: Лиссабонский военный музей хранит память о войнах Португалии.
+    pt: Percorra séculos de história militar portuguesa, de que a Legião de Napoleão é só um capítulo.
+    en: Walk through centuries of Portuguese military history, of which Napoleon’s Portuguese Legion is just one chapter.
+    ru: "Пройдите по залам военной истории Португалии: Португальский легион Наполеона лишь одна из её глав."
 threads:
   - gente-como-nos
   - poder-e-revolta

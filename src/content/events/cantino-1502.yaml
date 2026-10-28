@@ -32,9 +32,9 @@ bridge:
   lon: -9.2066
   url: https://cultura.marinha.pt/en/museumarinha_web/colecoes_web/pecasemdestaque_web/Pages/mapa-cantino.aspx
   note:
-    pt: No Museu de Marinha vê-se uma cópia do mapa de Cantino.
-    en: The Museu de Marinha shows a copy of the Cantino map.
-    ru: В Морском музее показывают копию карты Кантино.
+    pt: Veja como era o mundo em 1502 numa cópia do mapa que saiu de Portugal às escondidas.
+    en: See the world as it looked in 1502 in a copy of the map that was smuggled out of Portugal.
+    ru: Посмотрите, каким был мир в 1502 году, на копии карты, тайно вывезенной из Португалии.
 threads:
   - mar
 importance: 1

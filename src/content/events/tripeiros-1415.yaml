@@ -32,11 +32,9 @@ bridge:
   lon: -8.6134
   url: https://porto.pt/en/news/let_s_talk_about_food_
   note:
-    pt: No Porto, junto aos antigos estaleiros do Ouro, há um monumento de 1960 de
-      Lagoa Henriques.
-    en: In Porto, by the old Ouro shipyards, stands a 1960 monument by Lagoa
-      Henriques.
-    ru: В Порту у бывших верфей Оуру стоит памятник Лагоа Энрикеша 1960 года.
+    pt: Este bronze de 1960 homenageia quem equipou a frota de 1415 para Ceuta.
+    en: This 1960 bronze honors the people who equipped the fleet of 1415 for Ceuta.
+    ru: Этот бронзовый памятник 1960 года чтит тех, кто снаряжал флот 1415 года на Сеуту.
 threads:
   - comida-e-vinho
   - gente-como-nos
