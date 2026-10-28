@@ -62,7 +62,8 @@ for (const ev of events) {
     // One theme control: the round button in the header (with a tooltip); no second control in the footer.
     if (!/<header class="site-header"[\s\S]*?data-theme-toggle[\s\S]*?<\/header>/.test(html) || !/data-theme-toggle[^>]*title="[^"]+"/.test(html)) fail('theme: the button with a tooltip is expected in the header');
     if (/data-theme-choice/.test(html) || /<footer[\s\S]*data-theme-toggle/.test(html)) fail('theme: the footer must not repeat the theme control');
-    // Fonts are not preloaded (decision after 7b-1: first paint first; font-display swap and the fallback faces do the rest).
+    // Fonts are not preloaded on the Portuguese and English pages (decision after 7b-1: first paint first; font-display swap and the
+    // fallback faces do the rest). The Russian pages preload theirs: scripts/check-ru.mjs.
     if (/<link[^>]*rel="preload"[^>]*as="font"/.test(head)) fail('no font preload is expected');
     if (!/<html[^>]*lang="[a-z]{2}"[^>]*data-epoch="[a-z0-9-]+"/.test(full)) fail('the card page needs <html data-epoch="...">');
     if (head.indexOf('data-family') > head.indexOf('rel="stylesheet"') && head.includes('rel="stylesheet"')) fail('the head script must come before the stylesheets (no flash)');

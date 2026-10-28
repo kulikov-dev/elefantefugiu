@@ -121,7 +121,7 @@ The elephant pictures are made from the originals in `docs/mascot/originals/` wi
 
 Data: every localized field is `{pt, en, ru?}`. An event has `ru_ready` (default `false`). While it is `false`, `/ru/` shows the English text (fallback chain ru, en, pt) at the English address, with a banner, `noindex` and no `hreflang`; with `ru_ready: true` every localized field needs its `ru` text and the same length rules apply (`check:data` and the schema say which field is missing). Interface strings: `src/i18n/ru.json` (Russian plurals need `_one`, `_few`, `_many`, `_other`; `npm run check:i18n` checks all three files). `npm run export:ui-table` prints the PT / EN / RU table for a native speaker.
 
-Fonts: the Cyrillic subsets of the three fonts are declared in `src/styles/fonts.css` with their own `unicode-range`, so only pages that draw Cyrillic letters fetch them (no preload). Cyrillic fallback faces: `node scripts/font-fallbacks-cyrillic.mjs`.
+Fonts: the Cyrillic subsets of the three fonts are declared in `src/styles/fonts.css` with their own `unicode-range`, so only pages that draw Cyrillic letters fetch them (preloaded on the Russian pages only; the Portuguese and English pages preload nothing). Cyrillic fallback faces: `node scripts/font-fallbacks-cyrillic.mjs`.
 
 ## Content data
 

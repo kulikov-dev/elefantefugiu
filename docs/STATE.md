@@ -7,7 +7,7 @@
 - Astro 7.3.8, TypeScript 6, Zod (из `astro/zod`). Node 22 (`.nvmrc`, `engines` ≥ 22.12; workflow берёт версию из `.nvmrc`).
 - Leaflet 1.9.4 (без плагина кластеров, кластеры свои: `src/lib/markers.ts`), `tsx` 4.23.15, `yaml` 2.9.1, Vitest 5.0.4: версии закреплены точно.
 - `scripts/qa/` (свои зависимости, в сборку не входит): `puppeteer-core` 23.11.1, `@sparticuz/chromium` 131.0.1.
-- Шрифты Playfair Display, Source Serif 4, Oswald: Fontsource, самохостинг (латиница и кириллица).
+- Шрифты Playfair Display, Source Serif 4, Oswald: Fontsource, самохостинг (латиница и кириллица). Preload только на русских страницах (шесть файлов, `check:ru`); на pt и en его нет, там хватает подогнанных запасных шрифтов (заголовочный Playfair расширен на 2,3% под веса 600–800). Решение 2026-10-28: сдвиг вёрстки на 360 px был 0,17–0,19 на двух ru-страницах, стал около 0.
 
 ## Структура
 
