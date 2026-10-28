@@ -58,7 +58,7 @@ const { lang, hook, textLang, hasAside = false } = Astro.props;
     margin-block-start: var(--space-5);
   }
 
-  /* From 1024 px a side column to the right of the hook and the story, instead of an empty half of the page. On a phone the
+  /* From 1024 px a side column to the right of the hook and the story (the text keeps its measure, the picture gets the rest). On a phone the
      column (a picture) comes first, as the picture of a story always did. */
   .layers__top--aside {
     display: grid;
@@ -71,13 +71,15 @@ const { lang, hook, textLang, hasAside = false } = Astro.props;
 
   @media (min-width: 64rem) {
     .layers__top--aside {
-      grid-template-columns: minmax(0, 1fr) var(--card-aside-width);
+      grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
       align-items: start;
     }
 
+    /* The picture takes what is left beside the text column (the line length stays), up to its own limit. */
     .layers__aside {
       grid-column: 2;
       grid-row: 1;
+      max-width: var(--card-image-max);
     }
 
     .layers__main {
