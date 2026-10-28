@@ -1,7 +1,7 @@
 // Pure helpers for epoch and thread pages. No Astro imports, so they run in plain unit tests.
 import type { z } from 'astro/zod';
 import type { epochSchema, threadSchema } from '../data/schemas';
-import { compareChronological, isPublished, type EventData } from './events';
+import { compareChronological, isPublished, yearText, type EventData } from './events';
 import { countCardsByThread } from './threads';
 import type { Localized } from './localize';
 import type { Lang } from '../i18n/routes';
@@ -92,7 +92,8 @@ export const epochSectionId = (epochSlug: string): string => `e-${epochSlug}`;
 export function epochYearsText(epoch: Pick<EpochData, 'years' | 'years_label'>, lang: Lang): string {
   if (epoch.years_label) return epoch.years_label[lang];
   if (!epoch.years) return '';
-  return epoch.years.from === epoch.years.to ? String(epoch.years.from) : `${epoch.years.from}\u2013${epoch.years.to}`;
+  const { from, to } = epoch.years;
+  return from === to ? yearText(from, lang) : `${yearText(from, lang)}\u2013${yearText(to, lang)}`;
 }
 
 export interface SwitcherItem<E> {

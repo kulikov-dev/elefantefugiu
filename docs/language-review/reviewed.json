@@ -155,6 +155,18 @@
     "date": "2026-10-27",
     "hash": "373459d94a22"
   },
+  "thread/engenho/en": {
+    "date": "2026-10-28",
+    "hash": "12fdfa2adbde"
+  },
+  "thread/engenho/pt": {
+    "date": "2026-10-28",
+    "hash": "b0b77c2cd8f0"
+  },
+  "thread/engenho/ru": {
+    "date": "2026-10-28",
+    "hash": "666589ed1964"
+  },
   "thread/gente-como-nos/en": {
     "date": "2026-10-27",
     "hash": "fb57983e9a1a"
@@ -217,15 +229,15 @@
   },
   "ui/card/en": {
     "date": "2026-10-28",
-    "hash": "0111e578cfd5"
+    "hash": "152540ddc1b1"
   },
   "ui/card/pt": {
     "date": "2026-10-28",
-    "hash": "e3a45914f951"
+    "hash": "bc1292c37209"
   },
   "ui/card/ru": {
     "date": "2026-10-28",
-    "hash": "40fd692f458f"
+    "hash": "4cab90fcf168"
   },
   "ui/epoch/en": {
     "date": "2026-10-27",

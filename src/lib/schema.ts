@@ -73,8 +73,11 @@ const place = (name: string, lat: number, lon: number, address?: string): Node =
   geo: { '@type': 'GeoCoordinates', latitude: lat, longitude: lon },
 });
 
-/** A year as an ISO 8601 year ("1514", "0800"). */
-export const isoYear = (year: number): string => String(year).padStart(4, '0');
+/**
+ * A year as an ISO 8601 year ("1514", "0800"). The data stores a year before the common era as a negative number that counts like
+ * the history books ("-140" is 140 BC); ISO 8601 counts astronomically (there is a year 0, so 140 BC is "-0139").
+ */
+export const isoYear = (year: number): string => (year < -1 ? `-${String(-year - 1).padStart(4, '0')}` : String(Math.max(year + (year < 0 ? 1 : 0), 0)).padStart(4, '0'));
 
 export interface StorySchemaInput {
   url: string;

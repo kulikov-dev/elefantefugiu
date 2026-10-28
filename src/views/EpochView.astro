@@ -26,7 +26,7 @@ import {
   type EpochData,
 } from '../lib/epochs';
 import { mascotAllowed } from '../lib/mascot';
-import { yearRange } from '../lib/events';
+import { yearRange, yearText } from '../lib/events';
 import { toMapCards } from '../lib/map-cards';
 import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
@@ -185,7 +185,7 @@ const schema = epochNodes(schemaCtx, {
           {
             feed.map((event) => (
               <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
-                <span class="feed__year">{yearRange(event)[0]}</span>
+                <span class="feed__year">{yearText(yearRange(event)[0], lang)}</span>
                 <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear fallback={epochPic} tiles={gridAvailable(feed.length)} />
               </li>
             ))

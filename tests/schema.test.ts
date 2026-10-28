@@ -61,5 +61,7 @@ test('graph and serialize: one document, "<" escaped', () => {
   const doc = graph(ctx, []);
   assert.equal(doc['@context'], 'https://schema.org');
   assert.equal(isoYear(800), '0800');
+  assert.equal(isoYear(-140), '-0139', '140 BC is the astronomical year -139');
+  assert.equal(isoYear(-1), '0000', '1 BC is the astronomical year 0');
   assert.doesNotMatch(serialize({ a: '</script>' }), /</);
 });

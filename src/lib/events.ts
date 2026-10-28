@@ -1,6 +1,7 @@
 // Pure helpers for card pages. No Astro imports, so they run in plain unit tests.
 import type { z } from 'astro/zod';
 import type { eventSchema } from '../data/schemas';
+import { t } from '../i18n';
 import { LOCALES, type Lang } from '../i18n/routes';
 import type { Localized } from './localize';
 
@@ -14,12 +15,17 @@ export function yearRange(event: Pick<EventData, 'year'>): [number, number] {
   return typeof event.year === 'number' ? [event.year, event.year] : [event.year.from, event.year.to];
 }
 
+/** One year as the reader sees it: "1385"; a year before the common era (stored as a negative number) as "140 a.C." / "140 BC" / "140 до н. э.". */
+export function yearText(year: number, lang: Lang): string {
+  return year < 0 ? t(lang, 'card.year_bc').replace('{n}', String(-year)) : String(year);
+}
+
 /** Text shown for the year: `year_label` if given, else "1385" or "1385–1390". */
 export function formatYear(event: Pick<EventData, 'year' | 'year_label'>, lang: Lang): string {
   const label = event.year_label?.[lang]?.trim();
   if (label) return label;
   const [from, to] = yearRange(event);
-  return from === to ? String(from) : `${from}\u2013${to}`;
+  return from === to ? yearText(from, lang) : `${yearText(from, lang)}\u2013${yearText(to, lang)}`;
 }
 
 /**

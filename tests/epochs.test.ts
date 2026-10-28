@@ -88,9 +88,15 @@ test('epochs.yaml: orders 1-9 once each, MVP epochs are exactly 4, 6 and 8', () 
 
 test('epochs.yaml: epochs outside the MVP are real data with a years label in both languages', () => {
   for (const e of realEpochs.filter((x) => !x.mvp)) {
-    assert.deepEqual(e.placeholder, [], e.id);
+    // Name, years, style and intro are final; the theme phrase and the preview picture of the three epochs prepared for later may still be provisional.
+    assert.deepEqual(e.placeholder.filter((f) => f !== 'theme' && f !== 'fallback_image'), [], e.id);
     assert.ok(epochYearsText(e, 'pt') && epochYearsText(e, 'en') && epochYearsText(e, 'ru'), e.id);
   }
+});
+
+test('epochYearsText: years before the common era are written with the era', () => {
+  assert.equal(epochYearsText({ years: { from: -218, to: 409 } }, 'pt'), '218 a.C.–409');
+  assert.equal(epochYearsText({ years: { from: -218, to: 409 } }, 'ru'), '218 до н. э.–409');
 });
 
 test('epochYearsText: label wins, numeric range is the fallback', () => {

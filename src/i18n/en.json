@@ -95,6 +95,7 @@
     "not_translated": "This page has not been translated yet. The English text is shown.",
     "more_toggle": "More",
     "next_story": "Next",
+    "year_bc": "{n} BC",
     "next_epoch": "Next era: {name}",
     "all_epochs": "See all eras",
     "sources_checked": "links checked on",

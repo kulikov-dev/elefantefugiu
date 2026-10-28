@@ -161,8 +161,18 @@
     pt: "até ao séc. V"
     en: "until the 5th century"
     ru: "до V в."
+  theme:
+    pt: "Viriato, estradas e latim"
+    en: "Viriathus, roads, and Latin"
+    ru: "Вириат, дороги и латынь"
+  style:
+    bg: "#f3e7dc"
+    accent: "#7a2e1c"
+    heading_font: var(--font-heading)
+    frame: 1px solid var(--color-line)
   mvp: false
-  placeholder: []
+  fallback_image: images/placeholders/epoch-a.svg
+  placeholder: [theme, fallback_image]
   intro:
     pt: O pastor Viriato derrotou legiões romanas durante oito anos, e Roma só se
       livrou dele subornando os seus próprios homens. Depois chegaram as
@@ -247,8 +257,18 @@
     pt: "1580–1750"
     en: "1580–1750"
     ru: "1580–1750"
+  theme:
+    pt: "Ouro, barroco e independência"
+    en: "Gold, baroque, and independence"
+    ru: "Золото, барокко и независимость"
+  style:
+    bg: "#f5e8ec"
+    accent: "#6e1f3a"
+    heading_font: var(--font-heading)
+    frame: 1px solid var(--color-line)
   mvp: false
-  placeholder: []
+  fallback_image: images/placeholders/epoch-b.svg
+  placeholder: [theme, fallback_image]
   intro:
     pt: "O jovem rei D. Sebastião desapareceu numa batalha em Marrocos, e Portugal
       passou 60 anos sob reis espanhóis. Em 1640, um grupo de conjurados
@@ -279,8 +299,18 @@
     pt: "1820–1926"
     en: "1820–1926"
     ru: "1820–1926"
+  theme:
+    pt: "Do rei à república"
+    en: "From king to republic"
+    ru: "От короля к республике"
+  style:
+    bg: "#e5ebf0"
+    accent: "#2e4d66"
+    heading_font: var(--font-heading)
+    frame: 1px solid var(--color-line)
   mvp: false
-  placeholder: []
+  fallback_image: images/placeholders/epoch-c.svg
+  placeholder: [theme, fallback_image]
   intro:
     pt: "Durante um século, Portugal discutiu o que queria ser: constituição, guerra
       civil entre dois irmãos, caminhos de ferro e o Ultimato inglês. Em 1908, o

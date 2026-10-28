@@ -283,6 +283,46 @@
   --epoch-heading-weight: 700;
 }
 
+/* Epochs 1, 5 and 7 (docs/visual-direction.md section 3; the cards come later). Starting colours of the owner, the rest derived the
+   way the first three were: strong = a step darker (light) / lighter (dark) than primary, surface = paper (light) or a step above the
+   tint (dark), line = a step above the tint. Heading weights 500, 800 and 600 (the owner's choice; a weight shared with another epoch is fine). */
+
+:root[data-epoch='lusitania-e-roma'] {
+  /* Terracotta, olive, granite. */
+  --epoch-primary: light-dark(#7a2e1c, #e8957a);
+  --epoch-primary-strong: light-dark(#5c2012, #f2b5a0);
+  --epoch-accent: light-dark(#5b6828, #b9c77a);
+  --epoch-alt: light-dark(#4f5b62, #a9b6bd);
+  --epoch-tint: light-dark(#f3e7dc, #2a211d);
+  --epoch-surface: light-dark(#fbf8f1, #362a24);
+  --epoch-line: light-dark(#dcc6b0, #4d3c33);
+  --epoch-heading-weight: 500;
+}
+
+:root[data-epoch='uniao-restauracao-e-ouro-do-brasil'] {
+  /* Baroque: claret and the emerald of Brazil; the gold of the age is the alternative colour. */
+  --epoch-primary: light-dark(#6e1f3a, #e59ab4);
+  --epoch-primary-strong: light-dark(#511429, #f1bdd0);
+  --epoch-accent: light-dark(#1e6a52, #7fd1b3);
+  --epoch-alt: light-dark(#7a5200, #e8b84f);
+  --epoch-tint: light-dark(#f2eae6, #2a1d22); /* light: old paper with a faint wine tone (the first #f5e8ec was candy pink) */
+  --epoch-surface: light-dark(#fbf8f1, #35252b);
+  --epoch-line: light-dark(#dccbc6, #503a43);
+  --epoch-heading-weight: 800;
+}
+
+:root[data-epoch='monarquia-e-republica'] {
+  /* Nineteenth-century iron and the green of the Republic; the red of its flag is the alternative colour. */
+  --epoch-primary: light-dark(#2e4d66, #9dbad3);
+  --epoch-primary-strong: light-dark(#1f364a, #c0d5e6);
+  --epoch-accent: light-dark(#2f6b45, #8ccb9f);
+  --epoch-alt: light-dark(#8f2a2a, #e58a86);
+  --epoch-tint: light-dark(#e5ebf0, #1c242b);
+  --epoch-surface: light-dark(#fbf8f1, #26313a);
+  --epoch-line: light-dark(#c3cfd9, #384a5a);
+  --epoch-heading-weight: 600;
+}
+
 /* The epoch colours reach the content only: the header and the footer (language, theme, family mode) keep the base
    colours on every page. */
 :root[data-epoch] main {
@@ -376,6 +416,36 @@
     --epoch-tint: #ece9e3;
     --epoch-surface: #fbf8f1;
     --epoch-line: #cdc9bf;
+  }
+
+  :root[data-epoch='lusitania-e-roma'] {
+    --epoch-primary: #7a2e1c;
+    --epoch-primary-strong: #5c2012;
+    --epoch-accent: #5b6828;
+    --epoch-alt: #4f5b62;
+    --epoch-tint: #f3e7dc;
+    --epoch-surface: #fbf8f1;
+    --epoch-line: #dcc6b0;
+  }
+
+  :root[data-epoch='uniao-restauracao-e-ouro-do-brasil'] {
+    --epoch-primary: #6e1f3a;
+    --epoch-primary-strong: #511429;
+    --epoch-accent: #1e6a52;
+    --epoch-alt: #7a5200;
+    --epoch-tint: #f2eae6;
+    --epoch-surface: #fbf8f1;
+    --epoch-line: #dccbc6;
+  }
+
+  :root[data-epoch='monarquia-e-republica'] {
+    --epoch-primary: #2e4d66;
+    --epoch-primary-strong: #1f364a;
+    --epoch-accent: #2f6b45;
+    --epoch-alt: #8f2a2a;
+    --epoch-tint: #e5ebf0;
+    --epoch-surface: #fbf8f1;
+    --epoch-line: #c3cfd9;
   }
 }
 /* END generated: light-dark() fallback */

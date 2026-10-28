@@ -34,6 +34,22 @@ test('formatYear: label, single year, range', () => {
   assert.equal(formatYear({ year: 1500, year_label: { pt: 'por volta de 1500', en: 'around 1500', ru: 'около 1500' } }, 'en'), 'around 1500');
 });
 
+test('formatYear: a year before the common era is "140 a.C." / "140 BC" / "140 до н. э.", a year of the common era is bare (also before 1000)', () => {
+  assert.equal(formatYear({ year: -140 }, 'pt'), '140 a.C.');
+  assert.equal(formatYear({ year: -140 }, 'en'), '140 BC');
+  assert.equal(formatYear({ year: -140 }, 'ru'), '140 до н. э.');
+  assert.equal(formatYear({ year: 60 }, 'pt'), '60');
+  assert.equal(formatYear({ year: 800 }, 'ru'), '800');
+  assert.equal(formatYear({ year: { from: -218, to: -201 } }, 'en'), '218 BC–201 BC');
+  assert.equal(formatYear({ year: { from: -50, to: 50 } }, 'pt'), '50 a.C.–50');
+  assert.equal(formatYear({ year: -140, year_label: { pt: 'c. 140 a.C.', en: 'c. 140 BC', ru: 'ок. 140 до н. э.' } }, 'en'), 'c. 140 BC');
+});
+
+test('chronological order puts years before the common era first, the earlier the sooner', () => {
+  const list = [ev('d', { year: 60 }), ev('b', { year: -140 }), ev('c', { year: -50 }), ev('a', { year: { from: -218, to: -201 } }), ev('e', { year: 1385 })];
+  assert.deepEqual(list.sort(compareChronological).map((e) => e.id), ['a', 'b', 'c', 'd', 'e']);
+});
+
 test('chronological order uses start year, end year, then id', () => {
   const list = [ev('c', { year: 1500 }), ev('b', { year: { from: 1400, to: 1450 } }), ev('a', { year: { from: 1400, to: 1410 } }), ev('d', { year: 1500 })];
   assert.deepEqual(list.sort(compareChronological).map((e) => e.id), ['a', 'b', 'c', 'd']);

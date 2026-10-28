@@ -142,7 +142,7 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
       if (about?.['@type'] !== 'Event') fail('Article.about is not an Event');
       else {
         need(about, 'about', 'name');
-        need(about, 'about', 'startDate', (v) => typeof v === 'string' && /^\d{4}(-\d{2}(-\d{2})?)?$/.test(v));
+        need(about, 'about', 'startDate', (v) => typeof v === 'string' && /^-?\d{4}(-\d{2}(-\d{2})?)?$/.test(v));
         need(about, 'about', 'location', (v) => v?.['@type'] === 'Place' && filled(v.name));
       }
       const loc = article.contentLocation;
