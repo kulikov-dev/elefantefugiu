@@ -32,8 +32,9 @@ bridge:
     en: Mafra National Palace (library)
     ru: Национальный дворец Мафры (библиотека)
   address: Terreiro D. João V, Mafra
-  lat: 38.9369
-  lon: -9.3258
+  lat: 38.93678
+  lon: -9.32486
+  maps_url: "https://www.google.com/maps/place/Biblioteca+do+Pal%C3%A1cio+Nacional+de+Mafra/@38.9367794,-9.3274389,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ed7359ff985bd:0x91eed2923a43dfde!8m2!3d38.9367753!4d-9.324864!16s%2Fg%2F11b6gfftxd"
   url: https://www.visitportugal.com/en/node/138329
   note:
     pt: A biblioteca visita-se com o palácio; os morcegos trabalham de noite, quando já não há visitantes.

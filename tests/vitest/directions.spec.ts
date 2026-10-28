@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { googleDirectionsLink } from '../../src/lib/directions';
+import { bridgeDirectionsLink, googleDirectionsLink } from '../../src/lib/directions';
 
 describe('googleDirectionsLink', () => {
   it('is a Google Maps directions link to the point', () => {
@@ -13,5 +13,15 @@ describe('googleDirectionsLink', () => {
     expect(url.protocol).toBe('https:');
     expect(url.hostname).toBe('www.google.com');
     expect(url.pathname).toBe('/maps/dir/');
+  });
+});
+
+describe('bridgeDirectionsLink', () => {
+  it('opens the maps_url of the place when there is one', () => {
+    const maps_url = 'https://www.google.com/maps/place/Museu+Nacional+dos+Coches/@38.69,-9.19,17z';
+    expect(bridgeDirectionsLink({ lat: 38.6, lon: -9.2, maps_url })).toBe(maps_url);
+  });
+  it('falls back to directions to the coordinates', () => {
+    expect(bridgeDirectionsLink({ lat: 38.6999, lon: -9.204 })).toBe(googleDirectionsLink(38.6999, -9.204));
   });
 });

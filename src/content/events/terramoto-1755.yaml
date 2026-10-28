@@ -32,8 +32,9 @@ bridge:
     en: Carmo Archaeological Museum
     ru: Археологический музей Кармо
   address: Largo do Carmo, 1200-092 Lisboa
-  lat: 38.7123
-  lon: -9.1406
+  lat: 38.71204
+  lon: -9.14061
+  maps_url: "https://www.google.com/maps/place/%D0%9A%D0%B0%D1%80%D0%BC%D0%B5%D0%BB%D0%B8%D1%82%D1%81%D0%BA%D0%B8%D0%B9+%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C/@38.7120425,-9.1431878,17z/data=!3m2!4b1!5s0xd19347f4bd8b7d7:0xd780cc121205771!4m6!3m5!1s0xd19347f372ec63f:0x32d7f56592e02cef!8m2!3d38.7120383!4d-9.1406129!16zL20vMGdxNG41"
   url: https://museuarqueologicodocarmo.pt/
   note:
     pt: "Ande sob os arcos sem teto da nave: é o que o terramoto deixou da igreja do Carmo."

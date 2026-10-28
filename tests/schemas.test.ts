@@ -106,6 +106,18 @@ test('bridge: needs a note in both languages', () => {
   assert.equal(eventSchema.safeParse({ ...ok, bridge: { ...ok.bridge, extra: 1 } }).success, false);
 });
 
+test('bridge.maps_url: optional, a clean Google Maps address only', () => {
+  const ok = sample();
+  const parse = (maps_url: unknown) => eventSchema.safeParse({ ...ok, bridge: { ...ok.bridge, maps_url } }).success;
+  assert.equal(parse(undefined), true);
+  assert.equal(parse('https://www.google.com/maps/place/Gil+Eannes/@37.09,-8.67,17z/data=!3m1!4b1'), true);
+  assert.equal(parse('https://www.google.com/maps/search/?api=1&query=Museu+Nacional+dos+Coches'), true);
+  assert.equal(parse('https://www.google.com/maps/place/x/@1,2,17z?entry=tts&g_ep=abc'), false);
+  assert.equal(parse('https://maps.app.goo.gl/B1WYdpKLyhMAR9oh7'), false);
+  assert.equal(parse('https://example.com/maps/'), false);
+  assert.equal(parse('not a url'), false);
+});
+
 test('epochSchema: intro is optional, any language may be left out, a typo in a language key is an error', () => {
   const base = { ...baseEpoch, mvp: false, years_label: { pt: 'séc. V', en: '5th century' } };
   assert.equal(epochSchema.safeParse(base).success, true);

@@ -294,7 +294,7 @@ for (const ev of events) {
     const how = links.find((l) => l.text === labels.how);
     const r5 = (n) => Number(n.toFixed(5));
     // "How to get there" is a plain Google Maps directions link (no API, no script), in a new tab; no other service is named in the block.
-    const wantGoogle = `https://www.google.com/maps/dir/?api=1&destination=${r5(ev.bridge.lat)},${r5(ev.bridge.lon)}`;
+    const wantGoogle = ev.bridge.maps_url ?? `https://www.google.com/maps/dir/?api=1&destination=${r5(ev.bridge.lat)},${r5(ev.bridge.lon)}`;
     if (!links.some((l) => l.text === labels.map)) fail(`the "${labels.map}" button is missing`);
     if (!how) fail(`the "${labels.how}" button is missing`);
     else {

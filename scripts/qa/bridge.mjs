@@ -27,7 +27,7 @@ const UA = {
   windows: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
 };
 const r5 = (n) => Number(n.toFixed(5));
-const google = (e) => `https://www.google.com/maps/dir/?api=1&destination=${r5(e.bridge.lat)},${r5(e.bridge.lon)}`;
+const google = (e) => e.bridge.maps_url ?? `https://www.google.com/maps/dir/?api=1&destination=${r5(e.bridge.lat)},${r5(e.bridge.lon)}`;
 const norm = (s) => String(s).replace(/\s+/g, ' ').trim();
 
 let failed = 0;

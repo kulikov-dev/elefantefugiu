@@ -28,8 +28,9 @@ bridge:
     en: Belém Tower
     ru: Башня Белен
   address: Av. Brasília, Lisboa
-  lat: 38.6916
-  lon: -9.216
+  lat: 38.69158
+  lon: -9.21598
+  maps_url: "https://www.google.com/maps/place/%D0%A2%D0%BE%D1%80%D1%80%D0%B8-%D0%B4%D0%B8-%D0%91%D0%B5%D0%BB%D0%B5%D0%BD/@38.6915879,-9.2185522,17z/data=!3m2!4b1!5s0xd1ecb6968ca6973:0x7ffc53d5b48b9149!4m6!3m5!1s0xd1ecb42c3c29c4b:0x3002dcadcf52513f!8m2!3d38.6915837!4d-9.2159773!16zL20vMDVnYng2"
   url: https://www.museusemonumentos.pt/
   note:
     pt: "Procure a guarita com a cabeça de rinoceronte esculpida: lembra o animal que Manuel I enviou ao papa."

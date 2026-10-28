@@ -32,8 +32,9 @@ bridge:
     en: Monument to Afonso de Albuquerque
     ru: Памятник Афонсу де Албукерки
   address: Praça Afonso de Albuquerque, Belém, Lisboa
-  lat: 38.697
-  lon: -9.206
+  lat: 38.69666
+  lon: -9.20024
+  maps_url: "https://www.google.com/maps/place/Monumento+a+Afonso+de+Albuquerque/@38.6966606,-9.2028152,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ecb92497f5713:0x8711169c2cf7072a!8m2!3d38.6966564!4d-9.2002403!16s%2Fg%2F11h07hr264"
   url: https://www.visitlisboa.com/
   note:
     pt: O relevo do monumento mostra a tomada de Malaca, onde os elefantes do sultão se viraram contra os seus.

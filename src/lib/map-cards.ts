@@ -13,6 +13,8 @@ export interface MapCardInfo {
   /** The bridge, shown in the marker preview and as the caption of the selected marker. */
   bridgeName: string;
   bridgeAddress: string;
+  /** Google Maps link of the place, when the data has one ("How to get there" opens it instead of a directions link). */
+  mapsUrl?: string;
   importance: 1 | 2 | 3;
   threads: string[];
   epoch: string;
@@ -36,6 +38,7 @@ export function toMapCards(events: readonly EventData[], lang: Lang, hrefOf: (ev
     lon: e.bridge.lon,
     bridgeName: e.bridge.title?.[lang]?.trim() || e.bridge.name,
     bridgeAddress: e.bridge.address,
+    ...(e.bridge.maps_url ? { mapsUrl: e.bridge.maps_url } : {}),
     importance: e.importance,
     threads: [...e.threads],
     epoch: e.epoch,

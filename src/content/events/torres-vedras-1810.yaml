@@ -32,8 +32,9 @@ bridge:
     en: Lines of Torres Vedras Interpretation Center (São Vicente Fort)
     ru: Форт Сан-Висенте
   address: Forte de São Vicente, 2560-629 Torres Vedras
-  lat: 39.0958
-  lon: -9.26
+  lat: 39.09941
+  lon: -9.26449
+  maps_url: "https://www.google.com/maps/place/Centro+de+Interpreta%C3%A7%C3%A3o+das+Linhas+de+Torres+Vedras/@39.0994144,-9.2670683,17z/data=!3m1!4b1!4m6!3m5!1s0xd1f2de9aba1749b:0x3a06fda877116e16!8m2!3d39.0994103!4d-9.2644934!16s%2Fg%2F11f15mlfzp"
   url: https://www.rhlt.pt/en/portfolio/lines-of-torres-vedras-visitors-centre-s-vicentes-fort-chapel/
   note:
     pt: Visite o maior dos fortes das três linhas que travaram os franceses diante de Lisboa em 1810.

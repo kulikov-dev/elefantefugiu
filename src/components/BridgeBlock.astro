@@ -1,17 +1,17 @@
 ---
 // "Bridge to today": the place that can be visited now. Order: the heading, the name (the name as written on the spot, small, only when it
 // differs), the note (why to go there), the map, the address, then the button "Como chegar" and the links. "Como chegar" is a plain
-// Google Maps directions link (no API, no script; opens in a new tab); "Ver no mapa" leads to our own map page.
+// Google Maps link (the place's own link when the data has one, else directions to its coordinates; no API, no script; opens in a new tab); "Ver no mapa" leads to our own map page.
 import { t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
-import { googleDirectionsLink } from '../lib/directions';
+import { bridgeDirectionsLink } from '../lib/directions';
 import MiniMap from './MiniMap.astro';
 import { mapLinkFor } from '../lib/map-data';
 import type { LText } from '../lib/localize';
 
 interface Props {
   lang: Lang;
-  bridge: { name: string; title?: LText | undefined; address: string; lat: number; lon: number; url: string; note: LText };
+  bridge: { name: string; title?: LText | undefined; address: string; lat: number; lon: number; maps_url?: string | undefined; url: string; note: LText };
   /** Id of the card: "See on the map" centres the map on it and opens its preview. */
   cardId: string;
   /** The marker of the big map for this story: a diamond for the main event of an epoch (importance 3), a circle otherwise. */
@@ -36,7 +36,7 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
   <MiniMap lang={lang} cardId={cardId} point={bridge} name={title} kind={kind} />
   <address class="bridge__address">{bridge.address}</address>
   <p class="bridge__go">
-    <a class="button" href={googleDirectionsLink(bridge.lat, bridge.lon)} target="_blank" rel="noopener" data-directions>
+    <a class="button" href={bridgeDirectionsLink(bridge)} target="_blank" rel="noopener" data-directions>
       {t(lang, 'ui.directions')}
     </a>
   </p>

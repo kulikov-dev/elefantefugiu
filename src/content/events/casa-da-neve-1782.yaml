@@ -32,8 +32,9 @@ bridge:
     en: Café Martinho da Arcada
     ru: Кафе «Мартиньо да Аркада»
   address: Praça do Comércio 3, 1100-148 Lisboa
-  lat: 38.708
-  lon: -9.1347
+  lat: 38.70874
+  lon: -9.1359
+  maps_url: "https://www.google.com/maps/place/Martinho+da+Arcada/@38.7087489,-9.1384751,17z/data=!3m1!4b1!4m6!3m5!1s0xd1934798b2bca21:0xdd20f511c720ecaa!8m2!3d38.7087447!4d-9.1359002!16s%2Fg%2F122pdhsr"
   url: http://www.martinhodaarcada.pt
   note:
     pt: Sente-se sob as arcadas onde se vendia o gelo do rei; a mesa de Fernando Pessoa continua reservada.

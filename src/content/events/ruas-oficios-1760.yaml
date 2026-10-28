@@ -28,8 +28,9 @@ bridge:
     en: Rua Áurea (Rua do Ouro)
     ru: Руа-Аурея (Rua do Ouro)
   address: Rua Áurea, Baixa, Lisboa
-  lat: 38.7101
-  lon: -9.1383
+  lat: 38.71006
+  lon: -9.13821
+  maps_url: "https://www.google.com/maps/place/R.+%C3%81urea+108,+1100-060+Lisboa/@38.710067,-9.1407893,17z/data=!3m1!4b1!4m6!3m5!1s0xd19347910fae5b9:0xfb8de11f84a5b0eb!8m2!3d38.7100628!4d-9.1382144!16s%2Fg%2F11g0tbw3wk"
   url: https://www.visitlisboa.com/
   note:
     pt: "Passeie pelas ruas vizinhas dos Correeiros e dos Sapateiros: os nomes ainda guardam os

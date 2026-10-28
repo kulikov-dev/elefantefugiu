@@ -29,7 +29,8 @@ bridge:
     ru: Национальный театр королевы Марии II (Россио)
   address: Praça Dom Pedro IV, Lisboa
   lat: 38.7148
-  lon: -9.1398
+  lon: -9.13979
+  maps_url: "https://www.google.com/maps/place/%D0%9D%D0%B0%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9+%D1%82%D0%B5%D0%B0%D1%82%D1%80+%D0%BA%D0%BE%D1%80%D0%BE%D0%BB%D0%B5%D0%B2%D1%8B+%D0%9C%D0%B0%D1%80%D0%B8%D0%B8+II/@38.7148047,-9.1423624,17z/data=!3m1!4b1!4m6!3m5!1s0xd193387484dd455:0xf4376138a1d71cf4!8m2!3d38.7148005!4d-9.1397875!16s%2Fm%2F02vkj7h"
   url: https://www.tndm.pt/
   note:
     pt: Aqui, no sítio do Paço dos Estaus, D. Manuel I guardava os elefantes antes de os enviar.

@@ -28,8 +28,9 @@ bridge:
     en: Statue of Gil Eanes
     ru: Статуя Жила Эанеша
   address: Jardim da Constituição, Lagos
-  lat: 37.09947
-  lon: -8.66944
+  lat: 37.09946
+  lon: -8.66941
+  maps_url: "https://www.google.com/maps/place/Gil+Eannes/@37.0994637,-8.671981,17z/data=!3m1!4b1!4m6!3m5!1s0xd1b31d04611dd25:0xc5372b0d46755029!8m2!3d37.0994594!4d-8.6694061!16s%2Fg%2F11fx8krj7n"
   url: https://www.cm-lagos.pt/
   note:
     pt: Passeie pelo jardim à beira-mar onde Lagos, a sua terra natal, homenageia o navegador que passou o cabo do medo.

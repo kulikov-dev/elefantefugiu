@@ -28,8 +28,9 @@ bridge:
     en: Maritime Museum
     ru: Морской музей
   address: Praça do Império, Belém, Lisboa
-  lat: 38.6975
-  lon: -9.2066
+  lat: 38.69694
+  lon: -9.20916
+  maps_url: "https://www.google.com/maps/place/%D0%9C%D0%BE%D1%80%D1%81%D0%BA%D0%BE%D0%B9+%D0%BC%D1%83%D0%B7%D0%B5%D0%B9/@38.696948,-9.2117303,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ecb432766b9b9:0x60942ea3f8998033!8m2!3d38.6969438!4d-9.2091554!16s%2Fm%2F02w78ms"
   url: https://cultura.marinha.pt/en/museumarinha_web/colecoes_web/pecasemdestaque_web/Pages/mapa-cantino.aspx
   note:
     pt: Veja como era o mundo em 1502 numa cópia do mapa que saiu de Portugal às escondidas.

@@ -144,6 +144,12 @@ export const eventSchema = z
     address: z.string(),
     lat: z.number(),
     lon: z.number(),
+    /** The link of the place on Google Maps (the full address, without tracking parameters); "How to get there" opens it. Without it, a directions link to lat/lon. */
+    maps_url: z
+      .string()
+      .url()
+      .refine((u) => u.startsWith('https://www.google.com/maps/') && !/[?&](g_ep|skid|entry|ucbcb)=/.test(u), 'a clean https://www.google.com/maps/ address (no g_ep, skid, entry, ucbcb)')
+      .optional(),
     url: z.string(),
     /** One sentence, up to 20 words, both languages. */
     note: text,

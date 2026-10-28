@@ -22,19 +22,20 @@ place:
   lat: 38.697
   lon: -9.203
 bridge:
-  name: Cais de Belém
+  name: Museu Nacional dos Coches
   title:
-    pt: Cais de Belém
-    en: Belém waterfront
-    ru: Набережная Белена (Cais de Belém)
-  address: Cais de Belém, Belém, Lisboa
-  lat: 38.697
-  lon: -9.203
-  url: https://www.visitlisboa.com/
+    pt: Museu Nacional dos Coches
+    en: National Coach Museum
+    ru: Национальный музей карет
+  address: Av. da Índia 136, Lisboa
+  lat: 38.696685
+  lon: -9.198172
+  maps_url: "https://www.google.com/maps/search/?api=1&query=Museu+Nacional+dos+Coches"
+  url: https://www.mncoches.gov.pt/
   note:
-    pt: Imagine daqui, em dois dias de novembro de 1807, a corte inteira a subir para os navios.
-    en: Picture the entire court boarding the ships from here in two days in November 1807.
-    ru: Представьте, как отсюда за два дня в ноябре 1807 года на корабли поднялся весь двор.
+    pt: Perto de onde a corte embarcou, expõem-se carros de passeio da família real, do tempo de D. Maria I.
+    en: Near where the court embarked, the museum displays pleasure carriages the royal family used in Maria I’s time.
+    ru: Рядом с местом посадки двора выставлены прогулочные кареты королевской семьи времён Марии I.
 threads:
   - mar
   - poder-e-revolta
@@ -181,10 +182,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
-    hash: 'b3bda40bb447'
+    hash: '0f52fd42d2ea'
   en:
     date: '2026-10-28'
-    hash: '7fe7489d35f1'
+    hash: 'a7174afefbc0'
   ru:
     date: '2026-10-28'
-    hash: '6cdc8e4b4ff7'
+    hash: '253f25f5b7ad'

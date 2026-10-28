@@ -22,14 +22,15 @@ place:
   lat: 41.1496
   lon: -8.611
 bridge:
-  name: Monumento de Lagoa Henriques (1960) junto aos antigos estaleiros do Ouro
+  name: Monumento aos Tripeiros (Pela Grei)
   title:
-    pt: Monumento de Lagoa Henriques (1960) junto aos antigos estaleiros do Ouro
-    en: Monument by Lagoa Henriques (1960) near the old Ouro shipyards
-    ru: Памятник работы Лагоа Энрикеша (1960) у бывших верфей Оуру
-  address: Ribeira, Porto
-  lat: 41.1409
-  lon: -8.6134
+    pt: Monumento aos Tripeiros (Pela Grei)
+    en: Monument to the Tripeiros (Pela Grei)
+    ru: Памятник трипейрам (Pela Grei)
+  address: Largo de António Calém, 4150-078 Porto
+  lat: 41.14814
+  lon: -8.65439
+  maps_url: "https://www.google.com/maps/place/Monumento+aos+Tripeiros/@41.1128874,-8.795909,12z/data=!4m7!3m6!1s0xd24657b7e7de213:0xa61766395790c971!8m2!3d41.1481432!4d-8.6543901!15sCiJNb251bWVudG8gZGUgTGFnb2EgSGVucmlxdWVzIHBvcnRvWiQiIm1vbnVtZW50byBkZSBsYWdvYSBoZW5yaXF1ZXMgcG9ydG-SARNoaXN0b3JpY2FsX2xhbmRtYXJrmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVVI0YmsxNlNVcFJFQUXgAQD6AQQIABA6!16s%2Fg%2F11f3x690t7"
   url: https://porto.pt/en/news/let_s_talk_about_food_
   note:
     pt: Este bronze de 1960 homenageia quem equipou a frota de 1415 para Ceuta.
@@ -144,10 +145,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
-    hash: '595750dd090e'
+    hash: '883acd4ac0df'
   en:
     date: '2026-10-28'
-    hash: '46cb7a4d132b'
+    hash: '58249636307c'
   ru:
     date: '2026-10-28'
-    hash: '0e90447649c8'
+    hash: 'e1debfae06dd'

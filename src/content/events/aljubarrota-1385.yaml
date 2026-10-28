@@ -34,6 +34,7 @@ bridge:
   address: Calvaria de Cima, Porto de Mós
   lat: 39.5886
   lon: -8.9293
+  maps_url: "https://www.google.com/maps/search/?api=1&query=CIBA+Centro+de+Interpreta%C3%A7%C3%A3o+da+Batalha+de+Aljubarrota"
   url: https://fundacao-aljubarrota.pt/
   note:
     pt: Aqui pode percorrer o terreno que Nuno Álvares Pereira escolheu e ver como a batalha se travou.

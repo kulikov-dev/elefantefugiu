@@ -32,8 +32,9 @@ bridge:
     en: Lisbon Military Museum
     ru: Лиссабонский военный музей
   address: Largo do Museu da Artilharia, Lisboa
-  lat: 38.7143
-  lon: -9.1206
+  lat: 38.7127
+  lon: -9.12463
+  maps_url: "https://www.google.com/maps/place/Lisbon+Military+Museum/@38.7127015,-9.1272066,17z/data=!3m1!4b1!4m6!3m5!1s0xd193474f03e1a87:0xd6abc4a72ca26307!8m2!3d38.7126973!4d-9.1246317!16s%2Fg%2F120rsg7l"
   url: https://www.exercito.pt/
   note:
     pt: Percorra séculos de história militar portuguesa, de que a Legião de Napoleão é só um capítulo.

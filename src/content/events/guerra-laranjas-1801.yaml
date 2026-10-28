@@ -32,8 +32,9 @@ bridge:
     en: Elvas, the fortress town that stopped Godoy
     ru: Эльваш, крепость, остановившая Годоя
   address: Praça da República, Elvas
-  lat: 38.8811
-  lon: -7.1631
+  lat: 38.88343
+  lon: -7.16302
+  maps_url: "https://www.google.com/maps/place/%D0%97%D0%B0%D0%BC%D0%BE%D0%BA+%D0%AD%D0%BB%D0%B2%D0%B0%D1%88/@38.8832611,-7.1626324,16z/data=!4m7!3m6!1s0xd171c65fb5fbdbd:0xaaee83da8d5382b2!8m2!3d38.8834301!4d-7.1630191!15sCjxFbHZhcywgYSBwcmHDp2EtZm9ydGUgcXVlIHRyYXZvdSBHb2RveSAoUGF0cmltw7NuaW8gTXVuZGlhbClaOyI5ZWx2YXMgYSBwcmHDp2EgZm9ydGUgcXVlIHRyYXZvdSBnb2RveSBwYXRyaW3Ds25pbyBtdW5kaWFskgEGY2FzdGxlmgEjQ2haRFNVaE5NRzluUzBWSlEwRm5TVU5hZUhOVUxVdFJFQUXgAQD6AQQIABBI!16s%2Fm%2F0411hsd"
   url: https://www.cm-elvas.pt/
   note:
     pt: Percorra as muralhas e os baluartes, hoje Património Mundial, e imagine o cerco de 1801.

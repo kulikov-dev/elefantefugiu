@@ -28,8 +28,9 @@ bridge:
     en: 17•56 Museum and Wine Library of the Real Companhia Velha
     ru: Музей и энотека «17•56» компании Реал-Компанья-Велья
   address: Alameda da Rua Serpa Pinto 44B, Vila Nova de Gaia
-  lat: 41.1389
-  lon: -8.6153
+  lat: 41.13682
+  lon: -8.61858
+  maps_url: "https://www.google.com/maps/place/Real+Companhia+Velha+-+1st+Demarcation+Museum/@41.1368233,-8.6211562,17z/data=!3m1!4b1!4m6!3m5!1s0xd2465d35be81f23:0x7a24699d5efe89cc!8m2!3d41.1368193!4d-8.6185813!16s%2Fg%2F11g1lxy6jq"
   url: https://realcompanhiavelha.pt/en/caves/
   note:
     pt: Conheça a companhia criada em 1756 para proteger o vinho do Porto e as pedras que marcaram o Douro.
