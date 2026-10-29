@@ -26,11 +26,13 @@ interface Props {
   scaleYear?: boolean;
   /** The picture of the epoch, for a card that has no picture of its own. */
   fallback?: PictureData | undefined;
+  /** The id of the epoch of the story, for a page where the cards of several epochs stand together (a thread): a stripe of its colour on the left (the name of the epoch is the heading of the section). */
+  toneEpoch?: string | undefined;
   /** The page can show the cards as tiles (the grid view): the picture is then made wide enough for a tile, not only for the small thumbnail. */
   tiles?: boolean;
 }
 
-const { lang, event, variant, threads, visibleThreadIds, showThreads = true, scaleYear = false, fallback, tiles = false } = Astro.props;
+const { lang, event, variant, threads, visibleThreadIds, showThreads = true, scaleYear = false, toneEpoch, fallback, tiles = false } = Astro.props;
 const picture = event.image ?? fallback;
 // A thumbnail is 5.5 rem wide; a tile of the grid is as wide as its column.
 const wide = variant === 'grid' || tiles;
@@ -43,7 +45,13 @@ const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) =
 // Placeholder text is Latin filler: mark it so screen readers do not read it as Portuguese.
 const textLang = textLangOf(event, lang);
 ---
-<article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-story={event.id} data-flash={isFlashMoment(event) ? '' : undefined}>
+<article
+  class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`, { 'ecard--toned': toneEpoch }]}
+  id={`c-${event.id}`}
+  data-story={event.id}
+  data-flash={isFlashMoment(event) ? '' : undefined}
+  style={toneEpoch ? `--tone: var(--tone-${toneEpoch}, var(--epoch-primary))` : undefined}
+>
   <div class="ecard__head">
     {
       picture && (
@@ -130,6 +138,11 @@ const textLang = textLangOf(event, lang);
     border-radius: var(--radius-md);
     background: var(--epoch-surface);
     scroll-margin-block-start: var(--space-4);
+  }
+
+  /* A card with an epoch (thread pages): a stripe of the colour of the epoch on the left, the same width as the heavy bars. */
+  .ecard--toned {
+    border-inline-start: var(--border-heavy) solid var(--tone);
   }
 
   .ecard__head {

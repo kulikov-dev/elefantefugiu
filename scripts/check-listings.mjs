@@ -298,6 +298,7 @@ for (const lang of ['pt', 'en']) {
       const chip = html.match(new RegExp(`<a class="chip" href="#e-${epoch.slug[lang]}"[\\s\\S]*?</a>`))?.[0] ?? '';
       if (!sameCounts(countsByMode(chip, countNode('chip__count')), modeCounts(list))) fail(`epoch chip "${epoch.id}": counters differ (want ${showCounts(modeCounts(list))})`);
       const head = section[0].match(/<h2[\s\S]*?<\/h2>/)?.[0] ?? '';
+      if (!head.includes(epoch.name[lang])) fail(`section "${epoch.id}": the heading must name the epoch "${epoch.name[lang]}"`);
       if (!sameCounts(countsByMode(head, wordCount), modeCounts(list))) fail(`section "${epoch.id}": counters differ (want ${showCounts(modeCounts(list))})`);
       const hideAttr = attr(section[0].match(/^<section\b([^>]*)>/)?.[1], 'data-hide-in');
       if (hideAttr !== zeroIn(modeCounts(list)).join(' ')) fail(`section "${epoch.id}": data-hide-in is "${hideAttr}", expected "${zeroIn(modeCounts(list)).join(' ')}"`);
@@ -305,6 +306,9 @@ for (const lang of ['pt', 'en']) {
       for (const e of list) {
         const li = gridHtml.match(new RegExp(`<li ([^>]*)>\\s*<article [^>]*id="c-${e.id}"`));
         if (!li || !li[1].includes(`data-min-age="${e.min_age}"`) || !li[1].includes(`data-sensitive="${e.sensitive}"`)) fail(`tile ${e.id}: the item must carry data-min-age="${e.min_age}" and data-sensitive="${e.sensitive}"`);
+        // the stripe of the colour of the epoch (the colour is never the only sign: the heading of the section names the epoch in text, checked above)
+        const article = gridHtml.match(new RegExp(`<article [^>]*id="c-${e.id}"[^>]*>([\\s\\S]*?)</article>`))?.[0] ?? '';
+        if (!article.includes(`--tone: var(--tone-${epoch.id}`)) fail(`tile ${e.id}: the colour of the epoch "${epoch.id}" is missing (--tone)`);
       }
     }
     // thread chips on tiles are left out (the page is about this thread)
@@ -425,9 +429,26 @@ for (const lang of ['pt', 'en']) {
     if (!l) fail(`no row for thread "${th.id}"`);
     else {
       const want = modeCounts(inThread(th));
-      const got = countsByMode(l[2], wordCount);
+      const got = countsByMode(l[2].split('thread-row__text')[0], wordCount);
       if (!sameCounts(got, want)) fail(`counters of thread "${th.id}" differ (want ${showCounts(want)}; found ${showCounts(got)})`);
       if (!l[2].includes(th.name[lang])) fail(`the row of thread "${th.id}" misses its name`);
+      // the row of dots: one dot per story, in the colour of its epoch; for each mode the dots and the label of the stories that the mode shows
+      const eras = [...l[2].matchAll(/<span class="fv" data-modes="([^"]*)"[^>]*><span class="thread-row__eras"[^>]*role="img"[^>]*aria-label="([^"]*)"[^>]*>([\s\S]*?)<\/span><\/span>/g)];
+      for (const mode of MODES) {
+        const shownHere = inThread(th).filter((e) => shownIn(e, mode));
+        const v = eras.find((m) => m[1].split(' ').includes(mode));
+        if (shownHere.length === 0) continue;
+        if (!v) {
+          fail(`the row of thread "${th.id}": no row of dots for the mode ${mode}`);
+          continue;
+        }
+        const names = epochs.filter((ep) => shownHere.some((e) => e.epoch === ep.id)).map((ep) => ep.name[lang]);
+        if ((v[3].match(/class="thread-row__era"/g) ?? []).length !== shownHere.length) fail(`the row of thread "${th.id}", mode ${mode}: the number of dots is not ${shownHere.length}`);
+        if (!v[2].endsWith(`: ${names.join(', ')}`)) fail(`the row of thread "${th.id}", mode ${mode}: the label must name the epochs "${names.join(', ')}"`);
+        const tones = epochs.flatMap((ep) => shownHere.filter((e) => e.epoch === ep.id).map(() => `--tone: var(--tone-${ep.id}`));
+        const got = [...v[3].matchAll(/--tone: var\((--tone-[a-z0-9-]+)/g)].map((m) => `--tone: var(${m[1]}`);
+        if (JSON.stringify(got) !== JSON.stringify(tones)) fail(`the row of thread "${th.id}", mode ${mode}: the dots must go in the order of time with the colours of their epochs`);
+      }
       if (!l[2].replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&amp;/g, '&').includes(th.description[lang])) fail(`the row of thread "${th.id}" misses its description`);
       if (!l[0].includes(`--thread-color: light-dark(${th.color}, ${th.color_dark})`)) fail(`the row of thread "${th.id}" misses its colour`);
       const li = threadsSection.match(new RegExp(`<li\b([^>]*)>\s*<a [^>]*href="[^"]*/${th.slug[lang]}/"`));

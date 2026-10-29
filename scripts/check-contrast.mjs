@@ -154,6 +154,9 @@ const PAIRS = [
   ['heavy-topic frame on page', 'heavy-border', 'epoch-tint', G],
   ['notice frame on its bg', 'notice-border', 'notice-bg', G],
   ['epoch accent bar on page', 'epoch-accent', 'epoch-tint', G],
+  // The colour of an epoch on the neutral pages (the stripe and the dot of a card of a thread, the dots of a thread in the lists): the bg and the surface are the base ones.
+  ['epoch tone on the neutral page', 'epoch-primary', 'bg', G],
+  ['epoch tone on the neutral card', 'epoch-primary', 'surface', G],
   ['tone blue on surface', 'viz-tone-blue', 'surface', G],
   ['tone red on surface', 'viz-tone-red', 'surface', G],
   ['tone green on surface', 'viz-tone-green', 'surface', G],

@@ -9,9 +9,9 @@ import Mascot from '../components/Mascot.astro';
 import StartCard from '../components/StartCard.astro';
 import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
-import { epochHasTestText, epochYearsText } from '../lib/epochs';
+import { epochHasTestText, epochYearsText, threadSections } from '../lib/epochs';
 import { epochTiles, firstMvpEpoch, homeStartStory } from '../lib/home';
-import { ageInfoOf, countByMode, countVariants, familyAttrs, zeroModes } from '../lib/family';
+import { ageInfoOf, countByMode, countVariants, familyAttrs, groupVariants, isVisibleInMode, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 import { cardPicture } from '../lib/pictures';
 import { HOME_PREVIEW } from '../lib/og';
@@ -32,6 +32,21 @@ const startStory = homeStartStory(site.events);
 const startHref = startStory ? storyPath(lang, startStory.slug[lang]) : firstEpoch ? epochHref(lang, firstEpoch.slug[lang]) : pagePath(lang, 'map');
 // Family mode: counters carry three numbers (off, all, 12) and a chip with a zero counter is hidden in that mode.
 const threadCounts = new Map(site.visibleThreads.map((th) => [th.id, countByMode(site.events.filter((e) => e.threads.includes(th.id)).map(ageInfoOf))]));
+// One dot per story of a thread in the order of time, in the colour of its epoch; the names of the epochs (each once) go to the label of the row of dots.
+// Family mode: the row is made for each distinct result of the three modes, so the dots and the label speak of the stories that the mode shows.
+const threadEras = new Map(
+  site.visibleThreads.map((th) => {
+    const dots = threadSections(th, site.epochs, site.events).flatMap(({ epoch, events }) => events.map((event) => ({ epoch, event })));
+    const variants = groupVariants(
+      (mode) => {
+        const shown = dots.filter(({ event }) => isVisibleInMode(ageInfoOf(event), mode));
+        return { shown, names: [...new Set(shown.map(({ epoch }) => epoch.name[lang]))] };
+      },
+      (v) => v.shown.map(({ event }) => event.id).join(),
+    ).filter((variant) => variant.value.shown.length > 0);
+    return [th.id, variants];
+  }),
+);
 const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
 
 // Test text must stay out of search results until it is real.
@@ -131,6 +146,15 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
                     {countVariants(threadCounts.get(thread.id)!).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
                   </span>
                   <span class="thread-row__text">{thread.description[lang]}</span>
+                  {
+                    threadEras.get(thread.id)!.map((v) => (
+                      <span class="fv" data-modes={v.modes.join(' ')}>
+                        <span class="thread-row__eras" role="img" aria-label={`${t(lang, 'home.epochs_heading')}: ${v.value.names.join(', ')}`}>
+                          {v.value.shown.map(({ epoch }) => <span class="thread-row__era" style={`--tone: var(--tone-${epoch.id}, var(--epoch-primary))`}></span>)}
+                        </span>
+                      </span>
+                    ))
+                  }
                 </a>
               </li>
             ))}
@@ -367,7 +391,8 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas:
       'dot name count'
-      '. text text';
+      '. text text'
+      '. eras eras';
     align-items: baseline;
     gap: var(--space-1) var(--space-3);
     padding-block: var(--space-3);
@@ -413,11 +438,30 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
     font-size: var(--text-sm);
   }
 
+  /* Under the name: a dot for every story of the thread, in the order of time, in the colour of its epoch (decorative: the label of the row names the epochs). */
+  .thread-row__eras {
+    grid-area: eras;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    margin-block-start: var(--space-1);
+  }
+
+  .thread-row__era {
+    flex: none;
+    width: var(--size-dot-tone);
+    height: var(--size-dot-tone);
+    border-radius: 50%;
+    background: var(--tone);
+  }
+
   /* A wide screen: the line about the thread stands beside the name instead of under it. */
   @media (min-width: 48rem) {
     .thread-row {
       grid-template-columns: auto minmax(var(--thread-name-min), var(--thread-name-max)) var(--thread-count-width) minmax(0, 1fr);
-      grid-template-areas: 'dot name count text';
+      grid-template-areas:
+        'dot name count text'
+        '. eras eras eras';
       gap: var(--space-3);
     }
   }

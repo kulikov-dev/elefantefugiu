@@ -1,8 +1,8 @@
 // Browser checks for the static pages, the mistake report form, "Continue" on the home page, the QR address, the "read" marks and "Then and now".
-// Run against dist/ served by serve.mjs (base path "/"):   node pages.mjs [static form continue qr read thennow]
+// Run against dist/ served by serve.mjs (base path "/"):   node pages.mjs [static form continue qr read thennow tone]
 // No request ever leaves for formsubmit.co: the form is answered by the test itself.
 import { launchBrowser } from './browser.mjs';
-import { epochPath, epochs, en, pt, published, readyEpochs, HOME_START_ID } from './data.mjs';
+import { epochPath, epochs, en, pt, published, readyEpochs, threadPath, threads, HOME_START_ID } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -461,6 +461,67 @@ if (want('thennow')) {
       await page.close();
     }
   }
+}
+
+// ---- The colour of the epochs on the threads: a stripe on every card of a thread (the section with the name of its epoch), the dots of a thread on the home page ----
+if (want('tone')) {
+  const byPtSlug = new Map(published.map((e) => [e.slug.pt, e]));
+  const epochName = (id) => epochs.find((e) => e.id === id).name.pt;
+  /** The colour of a token as the browser computes it (a probe element, so light-dark() is resolved in the theme of the page). */
+  const toneOf = (page, id) => page.evaluate((i) => {
+    const probe = document.createElement('span');
+    probe.style.color = `var(--tone-${i})`;
+    document.body.append(probe);
+    const c = getComputedStyle(probe).color;
+    probe.remove();
+    return c;
+  }, id);
+  const cards = (page) => page.evaluate(() => [...document.querySelectorAll('.grid .ecard')].map((c) => ({
+    slug: c.querySelector('.ecard__title a').getAttribute('href').split('/').filter(Boolean).pop(),
+    section: c.closest('section')?.querySelector('h2 a')?.textContent.trim() ?? null,
+    stripe: getComputedStyle(c).borderInlineStartWidth,
+    color: getComputedStyle(c).borderInlineStartColor,
+    overflow: c.scrollWidth - c.clientWidth,
+  })));
+  for (const thread of threads) {
+    const status = (await fetch(base + threadPath(thread))).status;
+    if (status !== 200) continue; // a thread with too few stories has no page
+    for (const [width, js] of [[360, true], [1280, true], [360, false]]) {
+      const where = `thread ${thread.id}, ${width} px${js ? '' : ', no JavaScript'}`;
+      const page = await newPage({ width, js });
+      await page.goto(base + threadPath(thread), { waitUntil: 'load' });
+      const got = await cards(page);
+      const want_ = published.filter((e) => (e.threads ?? []).includes(thread.id));
+      ok(`${where}: every story of the thread is a card`, got.length === want_.length, `${got.length} of ${want_.length}`);
+      ok(`${where}: every card lies in the section with the heading of its epoch`, got.every((c) => c.section === epochName(byPtSlug.get(c.slug)?.epoch)), JSON.stringify(got.filter((c) => c.section !== epochName(byPtSlug.get(c.slug)?.epoch)).map((c) => c.slug)));
+      let colours = true;
+      for (const c of got) {
+        const expected = await toneOf(page, byPtSlug.get(c.slug).epoch);
+        if (c.stripe !== '4px' || c.color !== expected) colours = false;
+      }
+      ok(`${where}: the stripe is 4 px and has the colour of the epoch of the story`, colours);
+      ok(`${where}: nothing runs out of a card`, got.every((c) => c.overflow <= 0));
+      await page.close();
+    }
+  }
+  // The home page: under every thread a row of dots, one for a story, in the colours of the epochs; the label names the epochs; the dots are not read.
+  const home = await newPage({ width: 360 });
+  await home.goto(`${base}/pt/`, { waitUntil: 'load' });
+  const rows = await home.evaluate(() => [...document.querySelectorAll('.thread-row')].map((r) => ({
+    href: r.getAttribute('href'),
+    label: [...r.querySelectorAll('.thread-row__eras')].find((e) => e.checkVisibility())?.getAttribute('aria-label') ?? null,
+    role: [...r.querySelectorAll('.thread-row__eras')].find((e) => e.checkVisibility())?.getAttribute('role') ?? null,
+    dots: [...r.querySelectorAll('.thread-row__era')].filter((d) => d.checkVisibility()).length,
+    size: getComputedStyle(r.querySelector('.thread-row__era')).width,
+  })));
+  ok('home: a row of dots under every thread, 8 px, a role "img" with the label "Épocas: ..."', rows.length > 0 && rows.every((r) => r.role === 'img' && r.label?.startsWith('Épocas: ') && r.size === '8px'), JSON.stringify(rows.map((r) => r.label)));
+  ok('home: a dot for every story of the thread, the label names every epoch of the thread once, in the order of time', rows.every((r) => {
+    const thread = threads.find((t) => r.href.endsWith(`/${t.slug.pt}/`));
+    const stories = published.filter((e) => (e.threads ?? []).includes(thread.id));
+    const names = epochs.filter((ep) => stories.some((e) => e.epoch === ep.id)).map((ep) => ep.name.pt);
+    return r.dots === stories.length && r.label === `Épocas: ${names.join(', ')}`;
+  }), JSON.stringify(rows.map((r) => [r.dots, r.label])));
+  await home.close();
 }
 
 await browser.close();

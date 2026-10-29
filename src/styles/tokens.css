@@ -248,12 +248,25 @@
   --epoch-frame: 1px solid var(--epoch-line);
 }
 
+/* The colour of each epoch outside its own page (the stripe and the caption dot of a card on a thread page, the dots of a thread in the lists):
+   a single place for the primary colour of the palette below, which refers to it. An element takes one with style="--tone: var(--tone-<epoch id>)". */
+:root {
+  --tone-avis-e-descobrimentos: light-dark(#0f5c73, #5fb3c9);
+  --tone-pombal-e-terramoto: light-dark(#a9482a, #e58a68);
+  --tone-estado-novo-e-25-de-abril: light-dark(#4a4a48, #b8b6b0);
+  --tone-lusitania-e-roma: light-dark(#7a2e1c, #e8957a);
+  --tone-uniao-restauracao-e-ouro-do-brasil: light-dark(#6e1f3a, #e59ab4);
+  --tone-monarquia-e-republica: light-dark(#2e4d66, #9dbad3);
+  --tone: var(--epoch-primary);
+  --size-dot-tone: 0.5rem;
+}
+
 /* ---- Epoch palettes (docs/visual-direction.md section 3). Set on <html data-epoch="..."> of the epoch page and of the
    cards of that epoch. Link and button colour follow the epoch's primary. Values of the table, except where the
    contrast check (npm run check:contrast) asked for a darker accent: marked "adjusted". ---- */
 
 :root[data-epoch='avis-e-descobrimentos'] {
-  --epoch-primary: light-dark(#0f5c73, #5fb3c9);
+  --epoch-primary: var(--tone-avis-e-descobrimentos);
   --epoch-primary-strong: light-dark(#0a4254, #8fd0e2);
   --epoch-accent: light-dark(#7f5b0e, #e0b24a); /* adjusted: #8a6410 gave 4.4:1 on the tint */
   --epoch-alt: light-dark(#a4262c, #e06a6f);
@@ -264,7 +277,7 @@
 }
 
 :root[data-epoch='pombal-e-terramoto'] {
-  --epoch-primary: light-dark(#a9482a, #e58a68);
+  --epoch-primary: var(--tone-pombal-e-terramoto);
   --epoch-primary-strong: light-dark(#85361d, #f2a98c);
   --epoch-accent: light-dark(#85590f, #e8b84f); /* adjusted: #8f6111 gave 4.4:1 on the tint */
   --epoch-alt: light-dark(#2b5f9e, #7fa9e0);
@@ -277,7 +290,7 @@
 :root[data-epoch='estado-novo-e-25-de-abril'] {
   /* Grey is the colour of the interface; the carnation red is kept for the moments around 25 April (--epoch-flash,
      put on an element by data-flash). */
-  --epoch-primary: light-dark(#4a4a48, #b8b6b0);
+  --epoch-primary: var(--tone-estado-novo-e-25-de-abril);
   --epoch-primary-strong: light-dark(#2e2e2c, #d8d6d0);
   --epoch-flash: light-dark(#c41e3a, #ff6b81);
   --epoch-flash-strong: light-dark(#9b1730, #ff9aab);
@@ -295,7 +308,7 @@
 
 :root[data-epoch='lusitania-e-roma'] {
   /* Terracotta, olive, granite. */
-  --epoch-primary: light-dark(#7a2e1c, #e8957a);
+  --epoch-primary: var(--tone-lusitania-e-roma);
   --epoch-primary-strong: light-dark(#5c2012, #f2b5a0);
   --epoch-accent: light-dark(#5b6828, #b9c77a);
   --epoch-alt: light-dark(#4f5b62, #a9b6bd);
@@ -307,7 +320,7 @@
 
 :root[data-epoch='uniao-restauracao-e-ouro-do-brasil'] {
   /* Baroque: claret and the emerald of Brazil; the gold of the age is the alternative colour. */
-  --epoch-primary: light-dark(#6e1f3a, #e59ab4);
+  --epoch-primary: var(--tone-uniao-restauracao-e-ouro-do-brasil);
   --epoch-primary-strong: light-dark(#511429, #f1bdd0);
   --epoch-accent: light-dark(#1e6a52, #7fd1b3);
   --epoch-alt: light-dark(#7a5200, #e8b84f);
@@ -319,7 +332,7 @@
 
 :root[data-epoch='monarquia-e-republica'] {
   /* Nineteenth-century iron and the green of the Republic; the red of its flag is the alternative colour. */
-  --epoch-primary: light-dark(#2e4d66, #9dbad3);
+  --epoch-primary: var(--tone-monarquia-e-republica);
   --epoch-primary-strong: light-dark(#1f364a, #c0d5e6);
   --epoch-accent: light-dark(#2f6b45, #8ccb9f);
   --epoch-alt: light-dark(#8f2a2a, #e58a86);
@@ -392,8 +405,16 @@
     --viz-tone-grey: #4a4a48;
   }
 
+  :root {
+    --tone-avis-e-descobrimentos: #0f5c73;
+    --tone-pombal-e-terramoto: #a9482a;
+    --tone-estado-novo-e-25-de-abril: #4a4a48;
+    --tone-lusitania-e-roma: #7a2e1c;
+    --tone-uniao-restauracao-e-ouro-do-brasil: #6e1f3a;
+    --tone-monarquia-e-republica: #2e4d66;
+  }
+
   :root[data-epoch='avis-e-descobrimentos'] {
-    --epoch-primary: #0f5c73;
     --epoch-primary-strong: #0a4254;
     --epoch-accent: #7f5b0e;
     --epoch-alt: #a4262c;
@@ -403,7 +424,6 @@
   }
 
   :root[data-epoch='pombal-e-terramoto'] {
-    --epoch-primary: #a9482a;
     --epoch-primary-strong: #85361d;
     --epoch-accent: #85590f;
     --epoch-alt: #2b5f9e;
@@ -413,7 +433,6 @@
   }
 
   :root[data-epoch='estado-novo-e-25-de-abril'] {
-    --epoch-primary: #4a4a48;
     --epoch-primary-strong: #2e2e2c;
     --epoch-flash: #c41e3a;
     --epoch-flash-strong: #9b1730;
@@ -425,7 +444,6 @@
   }
 
   :root[data-epoch='lusitania-e-roma'] {
-    --epoch-primary: #7a2e1c;
     --epoch-primary-strong: #5c2012;
     --epoch-accent: #5b6828;
     --epoch-alt: #4f5b62;
@@ -435,7 +453,6 @@
   }
 
   :root[data-epoch='uniao-restauracao-e-ouro-do-brasil'] {
-    --epoch-primary: #6e1f3a;
     --epoch-primary-strong: #511429;
     --epoch-accent: #1e6a52;
     --epoch-alt: #7a5200;
@@ -445,7 +462,6 @@
   }
 
   :root[data-epoch='monarquia-e-republica'] {
-    --epoch-primary: #2e4d66;
     --epoch-primary-strong: #1f364a;
     --epoch-accent: #2f6b45;
     --epoch-alt: #8f2a2a;
