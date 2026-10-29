@@ -16,13 +16,21 @@ export function analyticsEnabled(site: string): boolean {
   return !/(^localhost$|\.localhost$|^127\.|^10\.|^172\.(1[6-9]|2[0-9]|3[01])\.|^192\.168\.|^0\.0\.0\.0$|^\[?::1\]?$)/.test(host);
 }
 
+/** The address the site had before the move (GitHub Pages of the owner): the visits that still come from it are told as one name. */
+export const OLD_DOMAIN = 'kulikov-dev.github.io';
+
 /**
- * Runs before count.js. Only page views are counted (no click events). When the address has ?src=qr (or ig, reddit, ...), or
- * ?utm_source=... as a synonym (src wins when both are there), that name is sent as the referrer (count.js sends it as `r`; the GoatCounter
- * docs allow any string there, "June Newsletter"), so it appears in the "Referrers" list of the dashboard; without it the real referrer
- * is sent. GoatCounter itself reads src only together with a campaign name (utm_campaign), which our addresses do not have.
+ * Runs before count.js. Only page views are counted (no click events). The referrer (count.js sends it as `r`) is told in two cases only:
+ * the address has ?src=qr (or ig, reddit, ...) or ?utm_source=... as a synonym (src wins when both are there), and that name is sent;
+ * or the reader came from another site, and then the referrer as it is. A visit with no source and a move inside the site send no referrer,
+ * so the site does not show up as its own source; the old address of the site (kulikov-dev.github.io) is told as the one name "old-domain".
+ * A campaign of its own is not made here: GoatCounter fills Campaigns from `campaign` / `utm_campaign` in the query, which count.js sends as `q`
+ * as it is, so a link with &campaign=<name> is enough. The path is sent without the query, so /story/?src=qr and /story/ are one page.
  * The root page and /p/{id} keep the query when they redirect to a language page (src/lib/lang-choice.ts).
- * The path is sent without the query, so /story/?src=qr and /story/ are one page (the query still goes along as it is).
  */
 export const ANALYTICS_CONFIG_SCRIPT =
-  'window.goatcounter={no_events:true,path:function(p){return p.replace(/[?#].*$/,"")},referrer:function(r){var q=location.search,m=/[?&]src=([A-Za-z0-9_.-]{1,32})(?:&|$)/.exec(q)||/[?&]utm_source=([A-Za-z0-9_.-]{1,32})(?:&|$)/.exec(q);return m?m[1]:r}};';
+  '(function(){var q=location.search,m=/[?&]src=([A-Za-z0-9_.-]{1,32})(?:&|$)/.exec(q)||/[?&]utm_source=([A-Za-z0-9_.-]{1,32})(?:&|$)/.exec(q);' +
+  'window.goatcounter={no_events:true,path:function(p){return p.replace(/[?#].*$/,"")},referrer:function(r){if(m)return m[1];' +
+  'var h=/^[a-z][a-z0-9+.-]*:\\/\\/([^\\/?#:]*)/i.exec(r||"");if(!h)return"";h=h[1].toLowerCase().replace(/^www[.]/,"");' +
+  `return h===location.hostname.toLowerCase().replace(/^www[.]/,"")?"":h==="${OLD_DOMAIN}"?"old-domain":r}};` +
+  '})();';

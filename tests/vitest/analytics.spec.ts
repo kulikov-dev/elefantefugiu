@@ -16,29 +16,44 @@ describe('analyticsEnabled', () => {
 });
 
 describe('the configuration that runs before count.js', () => {
-  const run = (search: string, referrer: string) => {
-    const g = { goatcounter: undefined as unknown as { no_events: boolean; referrer: (r: string) => string; path: (p: string) => string } };
-    new Function('window', 'location', ANALYTICS_CONFIG_SCRIPT)(g, { search });
-    return { no_events: g.goatcounter.no_events, referrer: g.goatcounter.referrer(referrer), path: g.goatcounter.path };
+  type Config = { no_events: boolean; referrer: (r: string) => string; path: (p: string) => string; get_data?: (v?: unknown) => { q?: string } };
+  const run = (search: string, referrer: string, hostname = 'elefantefugiu.pt') => {
+    const g = { goatcounter: undefined as unknown as Config };
+    new Function('window', 'location', ANALYTICS_CONFIG_SCRIPT)(g, { search, hostname });
+    return { g, no_events: g.goatcounter.no_events, referrer: g.goatcounter.referrer(referrer), path: g.goatcounter.path };
   };
-
   it('counts page views only (no click events)', () => {
     expect(run('', '').no_events).toBe(true);
   });
 
-  it('sends ?src=... as the referrer, else the real referrer', () => {
+  it('sends ?src=... as the referrer, else the referrer of another site as it is', () => {
     expect(run('?src=qr', 'https://example.org/').referrer).toBe('qr');
     expect(run('?a=1&src=reddit', '').referrer).toBe('reddit');
     expect(run('?src=ig&b=2', '').referrer).toBe('ig');
     expect(run('', 'https://example.org/').referrer).toBe('https://example.org/');
-    expect(run('?source=x', 'r').referrer).toBe('r');
+    expect(run('?source=x', 'https://example.org/').referrer).toBe('https://example.org/');
+    expect(run('', 'android-app://org.telegram.messenger/').referrer).toBe('android-app://org.telegram.messenger/');
+  });
+
+  it('sends no referrer for a direct visit and for a move inside the site (also with www)', () => {
+    expect(run('', '').referrer).toBe('');
+    expect(run('', 'https://elefantefugiu.pt/pt/historia/x/').referrer).toBe('');
+    expect(run('', 'https://www.elefantefugiu.pt/').referrer).toBe('');
+    expect(run('', 'https://ELEFANTEFUGIU.pt/pt/').referrer).toBe('');
+    expect(run('', 'not an address').referrer).toBe('');
+  });
+
+  it('tells the old address of the site (kulikov-dev.github.io) as one name', () => {
+    expect(run('', 'https://kulikov-dev.github.io/elefantefugiu/pt/').referrer).toBe('old-domain');
+    expect(run('', 'https://kulikov-dev.github.io/').referrer).toBe('old-domain');
+    expect(run('?src=qr', 'https://kulikov-dev.github.io/').referrer).toBe('qr');
   });
 
   it('takes ?utm_source=... as a synonym of src, and src wins when both are there', () => {
     expect(run('?utm_source=newsletter', 'https://example.org/').referrer).toBe('newsletter');
     expect(run('?a=1&utm_source=instagram.com&b=2', '').referrer).toBe('instagram.com');
     expect(run('?utm_source=news&src=qr', '').referrer).toBe('qr');
-    expect(run('?utm_source=<script>', 'r').referrer).toBe('r');
+    expect(run('?utm_source=<script>', 'https://example.org/').referrer).toBe('https://example.org/');
   });
 
   it('counts the page without its query, so a QR visit and a plain visit are one page', () => {
@@ -49,8 +64,8 @@ describe('the configuration that runs before count.js', () => {
   });
 
   it('takes only a short, plain name', () => {
-    expect(run('?src=<script>', 'r').referrer).toBe('r');
-    expect(run('?src=' + 'a'.repeat(33), 'r').referrer).toBe('r');
+    expect(run('?src=<script>', 'https://example.org/').referrer).toBe('https://example.org/');
+    expect(run('?src=' + 'a'.repeat(33), '').referrer).toBe('');
   });
 });
 

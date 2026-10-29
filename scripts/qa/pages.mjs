@@ -228,7 +228,15 @@ if (want('qr')) {
   const homeHtml = await (await fetch(`${base}/pt/`)).text();
   if (!homeHtml.includes('goatcounter/count.js')) console.log('SKIP  counter: this build has no counter (SITE_URL is a local address)');
   else {
-    for (const [query, want] of [['?src=test', 'test'], ['?utm_source=news', 'news'], ['', null]]) {
+    // [query, the page the visit came from, what `r` must be (null: none)]
+    for (const [query, from, want] of [
+      ['?src=test', 'https://example.org/', 'test'],
+      ['?utm_source=news', '', 'news'],
+      ['', '', null],
+      ['', `${base}/pt/mapa/`, null],
+      ['', 'https://kulikov-dev.github.io/elefantefugiu/pt/', 'old-domain'],
+      ['', 'https://example.org/page', 'https://example.org/page'],
+    ]) {
       const page = await browser.newPage();
       await page.setRequestInterception(true);
       const seen = [];
@@ -239,14 +247,17 @@ if (want('qr')) {
         } else r.continue();
       });
       // The counter does not count a local address; this lets the test see what it would send.
-      await page.evaluateOnNewDocument(() => {
+      // The page the visit came from is set as document.referrer: the browser does not give a cross-origin address to a page opened by a test.
+      await page.evaluateOnNewDocument((ref) => {
         let v;
         Object.defineProperty(window, 'goatcounter', { configurable: true, get: () => v, set: (x) => { x.allow_local = true; v = x; } });
-      });
+        if (ref) Object.defineProperty(document, 'referrer', { configurable: true, get: () => ref });
+      }, from);
       await page.goto(`${base}/pt/${query}`, { waitUntil: 'networkidle0' });
       await wait(500);
       const hit = seen[0];
-      ok(`counter: /pt/${query} sends ${want ? `the referrer "${want}"` : 'no source'} to GoatCounter`, Boolean(hit) && (want ? hit.searchParams.get('r') === want : !/^(test|news)$/.test(hit.searchParams.get('r') ?? '')) && hit.searchParams.get('p') === '/pt/', hit ? hit.search : 'no request');
+      const sent = hit?.searchParams.get('r') ?? null;
+      ok(`counter: /pt/${query} from ${from || 'nowhere'} sends ${want ? `the referrer "${want}"` : 'no referrer'} to GoatCounter`, Boolean(hit) && sent === want && hit.searchParams.get('p') === '/pt/', hit ? hit.search : 'no request');
       await page.close();
     }
   }

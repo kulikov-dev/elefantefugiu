@@ -107,6 +107,14 @@ usage policy does not allow steady public traffic. Another provider: the variabl
 ("(c) OpenStreetMap contributors, (c) CARTO" with CARTO).
 If tiles do not load, the map page and the epoch page fall back to the list of cards.
 
+## Analytics
+
+Page views are counted with GoatCounter (no cookies, no personal data; the script is a copy in `public/vendor/goatcounter/`, the settings are in `src/lib/analytics.ts`). The counter is off on local addresses.
+
+- **Where a visit came from.** A link with `?src=qr` (or `?utm_source=...`) tells the source; it shows up in "Referrers". Without it, only a referrer from another site is sent: a direct visit and a move inside the site send none, and the old address `kulikov-dev.github.io` is shown as `old-domain`. The old paths `/elefantefugiu/...` in the statistics are the history from before the move and stay as they are.
+- **Campaigns.** For a separate campaign add `&campaign=<name>` to the link (for example `?src=reddit&campaign=launch`): GoatCounter then fills "Campaigns" by itself.
+- **Your own visits.** Open any page of the site with `#toggle-goatcounter` at the end of the address (for example `https://elefantefugiu.pt/pt/#toggle-goatcounter`): this browser stops counting (an alert says so; it is normal) and the same address again turns counting back on. The switch is a flag in the `localStorage` of that browser, so do it once in every browser and on every device, and again after the site data are cleared.
+
 ## Mistake reports, static pages, sitemap
 
 The "Found a mistake?" form posts to the FormSubmit service, which forwards it to the project address (`CONTACT_EMAIL` in `src/data/static-pages.ts`); the first message must be confirmed once by the owner (see `docs/STATE.md`). Texts of the About, Method and Legal pages are in `src/data/static-pages.ts` (three languages, same sections). `npm run build` also writes `dist/sitemap.xml` and `dist/robots.txt` from the built pages (only pages without `noindex`; `robots.txt` counts at the root of a domain). `/p/{event id}/` is the QR address of a card (redirects to the card in the reader's language with `?src=qr`). `npm run make:og` makes PNG previews of the SVG pictures. `node scripts/export-addresses.mjs` prints the table of all addresses. Node 22 is pinned in `.nvmrc` and the workflow.
