@@ -12,16 +12,16 @@
     "hash": "655023d81ee3"
   },
   "epoch/avis-e-descobrimentos/en": {
-    "date": "2026-10-27",
-    "hash": "e993031ee821"
+    "date": "2026-10-29",
+    "hash": "e177fa7af912"
   },
   "epoch/avis-e-descobrimentos/pt": {
-    "date": "2026-10-27",
-    "hash": "ee300be03a48"
+    "date": "2026-10-29",
+    "hash": "75f558cdfd58"
   },
   "epoch/avis-e-descobrimentos/ru": {
-    "date": "2026-10-27",
-    "hash": "7a019303129d"
+    "date": "2026-10-29",
+    "hash": "459bab8b25cf"
   },
   "epoch/estado-novo-e-25-de-abril/en": {
     "date": "2026-10-27",
@@ -36,28 +36,28 @@
     "hash": "17edf9b9f709"
   },
   "epoch/lusitania-e-roma/en": {
-    "date": "2026-10-27",
-    "hash": "46292f1573f8"
+    "date": "2026-10-29",
+    "hash": "3576132dd756"
   },
   "epoch/lusitania-e-roma/pt": {
-    "date": "2026-10-27",
-    "hash": "b87904ccc3ef"
+    "date": "2026-10-29",
+    "hash": "e0673a941803"
   },
   "epoch/lusitania-e-roma/ru": {
-    "date": "2026-10-27",
-    "hash": "dd4e34097329"
+    "date": "2026-10-29",
+    "hash": "77ffdc43576d"
   },
   "epoch/monarquia-e-republica/en": {
-    "date": "2026-10-27",
-    "hash": "70ac3524ea6b"
+    "date": "2026-10-29",
+    "hash": "7a9085ffc0c6"
   },
   "epoch/monarquia-e-republica/pt": {
-    "date": "2026-10-27",
-    "hash": "ea83e277988f"
+    "date": "2026-10-29",
+    "hash": "a96c8f7cef36"
   },
   "epoch/monarquia-e-republica/ru": {
-    "date": "2026-10-27",
-    "hash": "2f04749793bd"
+    "date": "2026-10-29",
+    "hash": "25d28bd9e612"
   },
   "epoch/nascimento-do-reino-e-reconquista/en": {
     "date": "2026-10-27",
@@ -72,16 +72,16 @@
     "hash": "eaa6d0477ab8"
   },
   "epoch/pombal-e-terramoto/en": {
-    "date": "2026-10-27",
-    "hash": "aa23685c7330"
+    "date": "2026-10-29",
+    "hash": "0edf6e35b923"
   },
   "epoch/pombal-e-terramoto/pt": {
-    "date": "2026-10-27",
-    "hash": "bfc4ec22b2b5"
+    "date": "2026-10-29",
+    "hash": "5238e6dd09c5"
   },
   "epoch/pombal-e-terramoto/ru": {
-    "date": "2026-10-27",
-    "hash": "29984e580239"
+    "date": "2026-10-29",
+    "hash": "5693fea59be0"
   },
   "epoch/suevos-visigodos-e-mouros/en": {
     "date": "2026-10-27",
@@ -96,16 +96,16 @@
     "hash": "6fa37bf2979b"
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/en": {
-    "date": "2026-10-27",
-    "hash": "24128cd2c0b5"
+    "date": "2026-10-29",
+    "hash": "29a497a571ac"
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/pt": {
-    "date": "2026-10-27",
-    "hash": "9292c6539bef"
+    "date": "2026-10-29",
+    "hash": "3eff75ac8b62"
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/ru": {
-    "date": "2026-10-27",
-    "hash": "0def49f81d48"
+    "date": "2026-10-29",
+    "hash": "6355975415fc"
   },
   "static/about/en": {
     "date": "2026-10-27",
@@ -241,15 +241,15 @@
   },
   "ui/epoch/en": {
     "date": "2026-10-29",
-    "hash": "a93460380c97"
+    "hash": "5c4aea7e1153"
   },
   "ui/epoch/pt": {
     "date": "2026-10-29",
-    "hash": "b9ce16f4c038"
+    "hash": "f3c7d7a872c9"
   },
   "ui/epoch/ru": {
     "date": "2026-10-29",
-    "hash": "867fe5d823ed"
+    "hash": "5d5783d8dd7c"
   },
   "ui/family/en": {
     "date": "2026-10-27",
