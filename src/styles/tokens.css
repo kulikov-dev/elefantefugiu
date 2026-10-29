@@ -60,6 +60,8 @@
   --epoch-flash-strong: var(--epoch-primary-strong);
 
   /* Spacing */
+  /* Air between the lines of a row that wraps (a heading and its counter, a title and its note). */
+  --space-wrap: 0.35rem;
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
