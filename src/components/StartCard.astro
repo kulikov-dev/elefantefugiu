@@ -3,6 +3,7 @@
 // title, "year · city" and the credibility label. A picture, when the story has one, goes on top; without one the card
 // is simply shorter (nothing is reserved; the picture of the epoch fills in for a story without one). The whole card is the link (the title, stretched).
 import TagLabel from './TagLabel.astro';
+import ReadMark from './ReadMark.astro';
 import Pic from './Pic.astro';
 import type { PictureData } from '../lib/pictures';
 import { t } from '../i18n';
@@ -19,7 +20,7 @@ interface Props {
 const { lang, event, picture } = Astro.props;
 const href = storyPath(lang, event.slug[lang]);
 ---
-<article class="start-card" id={`c-${event.id}`}>
+<article class="start-card" id={`c-${event.id}`} data-story={event.id}>
   {
     picture && (
       <Pic
@@ -40,6 +41,7 @@ const href = storyPath(lang, event.slug[lang]);
       <span>{formatYear(event, lang)} &middot; {placeShort(event.place, lang)}</span>
       <TagLabel lang={lang} label={event.label} />
       {event.sensitive && <span class="start-card__heavy">{t(lang, 'ui.heavy_topic')}</span>}
+      <ReadMark lang={lang} />
     </p>
   </div>
 </article>

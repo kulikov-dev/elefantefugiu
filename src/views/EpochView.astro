@@ -97,7 +97,10 @@ const schema = epochNodes(schemaCtx, {
   <div class="epoch" data-epoch-page data-pane="feed">
     <header class="epoch__header">
       <h1>{epoch.name[lang]}</h1>
-      <p class="epoch__years">{epochYearsText(epoch, lang)}</p>
+      <p class="epoch__years">
+        {epochYearsText(epoch, lang)}
+        <span class="epoch__read" data-read-progress data-template={t(lang, 'epoch.read_progress')} aria-live="polite">{t(lang, 'epoch.read_progress').replace('{n}', '0').replace('{m}', String(feed.length))}</span>
+      </p>
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
       {intro && <p class="epoch__intro">{intro}</p>}
     </header>
@@ -251,6 +254,22 @@ const schema = epochNodes(schemaCtx, {
   .epoch__years {
     color: var(--color-ink-muted);
     font-size: var(--text-lg);
+  }
+
+  /* "read N of M": the place is in the line from the start (hidden), so the line does not change when the script shows it. */
+  .epoch__read {
+    margin-inline-start: var(--space-3);
+    color: var(--color-ink-muted);
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    visibility: hidden;
+  }
+
+  .epoch__read[data-shown] {
+    visibility: visible;
   }
 
   .epoch__theme {

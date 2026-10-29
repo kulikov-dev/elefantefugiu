@@ -54,6 +54,16 @@ const schema = pageNodes(schemaCtx, {
             {section.paragraphs.map((p) => <p set:html={html(p)} />)}
             {section.items && <ul>{section.items.map((item) => <li set:html={html(item)} />)}</ul>}
             {section.after?.map((p) => <p set:html={html(p)} />)}
+            {
+              section.action === 'reset-read' && (
+                <p class="static__action" data-js-only>
+                  <button type="button" class="button button--secondary" data-read-reset data-done={t(lang, 'ui.read_reset_done')}>
+                    {t(lang, 'ui.read_reset')}
+                  </button>
+                  <span role="status" data-read-reset-status />
+                </p>
+              )
+            }
           </div>
         </section>
       ))
@@ -68,6 +78,18 @@ const schema = pageNodes(schemaCtx, {
 
   .static > p {
     max-width: var(--measure);
+  }
+
+  /* The reset button of the "read" marks needs JavaScript: shown when the head script has set html[data-js]. */
+  .static__action {
+    display: none;
+  }
+
+  :global(html[data-js]) .static__action {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
   }
 
   .static__lead {

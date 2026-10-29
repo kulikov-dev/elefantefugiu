@@ -1,0 +1,39 @@
+---
+// The "read" mark in a list of stories: a small tick and the word. The place is always in the page, only hidden (visibility), so it takes
+// the same room read or not and the page never shifts when src/scripts/read-marks.ts shows it. The list item or card that holds it carries
+// data-story="<id>"; the script sets data-read on it. Hidden it is not read out by screen readers; shown, the word is read as text.
+// The tick and the word are always seen together; in a row that wraps the mark goes to the end of the wrapped line.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+<span class="read-mark">
+  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+    <path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <span class="read-mark__word">{t(lang, 'ui.read')}</span>
+</span>
+
+<style is:global>
+  .read-mark {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    margin-inline-start: auto;
+    gap: var(--space-1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    visibility: hidden;
+  }
+
+  [data-read] > .read-mark,
+  [data-read] .read-mark {
+    visibility: visible;
+  }
+</style>

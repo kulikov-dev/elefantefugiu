@@ -2,12 +2,13 @@
 // "Nearby": a short list of other cards.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
+import ReadMark from './ReadMark.astro';
 
 interface Props {
   lang: Lang;
   /** Heading id; must differ between the variants of one page. */
   headingId?: string;
-  items: { title: string; href: string; meta: string; minAge: string; sensitive: boolean }[];
+  items: { id: string; title: string; href: string; meta: string; minAge: string; sensitive: boolean }[];
 }
 
 const { lang, items, headingId = 'related-title' } = Astro.props;
@@ -19,9 +20,10 @@ const { lang, items, headingId = 'related-title' } = Astro.props;
       <ul>
         {
           items.map((item) => (
-            <li data-min-age={item.minAge} data-sensitive={String(item.sensitive)}>
+            <li data-min-age={item.minAge} data-sensitive={String(item.sensitive)} data-story={item.id}>
               <a href={item.href}>{item.title}</a>
               <span class="related__meta">{item.meta}</span>
+              <ReadMark lang={lang} />
             </li>
           ))
         }

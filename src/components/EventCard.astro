@@ -10,6 +10,7 @@ import AgeBadge from './AgeBadge.astro';
 import TagLabel from './TagLabel.astro';
 import ThreadChip from './ThreadChip.astro';
 import Pic from './Pic.astro';
+import ReadMark from './ReadMark.astro';
 import type { PictureData } from '../lib/pictures';
 
 interface Props {
@@ -42,7 +43,7 @@ const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) =
 // Placeholder text is Latin filler: mark it so screen readers do not read it as Portuguese.
 const textLang = textLangOf(event, lang);
 ---
-<article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-flash={isFlashMoment(event) ? '' : undefined}>
+<article class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`]} id={`c-${event.id}`} data-story={event.id} data-flash={isFlashMoment(event) ? '' : undefined}>
   <div class="ecard__head">
     {
       picture && (
@@ -81,6 +82,7 @@ const textLang = textLangOf(event, lang);
       ))
     }
     {event.min_age !== 'all' && <li><AgeBadge lang={lang} age={event.min_age} /></li>}
+    <li class="ecard__read"><ReadMark lang={lang} /></li>
     {
       event.sensitive && (
         <li>
@@ -188,6 +190,11 @@ const textLang = textLangOf(event, lang);
     padding-inline: 0;
     border-color: transparent;
     background: transparent;
+  }
+
+  /* The "read" mark: the last place of the row, pushed to the end; it is always there (hidden), so nothing moves when it shows. */
+  .ecard__read {
+    margin-inline-start: auto;
   }
 
   .ecard__heavy {

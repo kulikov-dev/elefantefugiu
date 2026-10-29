@@ -1,5 +1,5 @@
-// Browser checks for the static pages, the mistake report form, "Continue" on the home page and the QR address.
-// Run against dist/ served by serve.mjs (base path "/"):   node pages.mjs [static form continue qr]
+// Browser checks for the static pages, the mistake report form, "Continue" on the home page, the QR address and the "read" marks.
+// Run against dist/ served by serve.mjs (base path "/"):   node pages.mjs [static form continue qr read]
 // No request ever leaves for formsubmit.co: the form is answered by the test itself.
 import { launchBrowser } from './browser.mjs';
 import { epochPath, epochs, en, pt, published, readyEpochs, HOME_START_ID } from './data.mjs';
@@ -250,6 +250,112 @@ if (want('qr')) {
       await page.close();
     }
   }
+}
+
+// ---- "read" marks: the end of the story seen + time on the page -> the tick in the list of the epoch -> reset on the legal page ----
+if (want('read')) {
+  const story = published.find((e) => e.min_age === 'all' && !e.sensitive) ?? published[0];
+  const epoch = epochs.find((e) => e.id === story.epoch);
+  const inThisEpoch = published.filter((e) => e.epoch === epoch.id);
+  const shownIn = (e, mode) => mode === 'off' || (!e.sensitive && (mode === 'all' ? e.min_age === 'all' : e.min_age === 'all' || e.min_age === '12'));
+  const saved = (page) => page.evaluate(() => { try { return JSON.parse(localStorage.getItem('readStories') ?? '[]'); } catch { return null; } });
+  /** The story page opened with the wait shortened (delay, ms) and, when asked, with the tab hidden; ends after `stay` ms. */
+  const openStory = async ({ delay = null, hidden = false, stay = 1800, width = 1280 } = {}) => {
+    const page = await browser.newPage();
+    await page.setViewport({ width, height: 900 });
+    await page.evaluateOnNewDocument((d, h) => {
+      // Every page of the browser shares one localStorage: each test starts from nothing read.
+      try { localStorage.removeItem('readStories'); } catch {}
+      if (d !== null) window.__readDelayMs = d;
+      if (h) Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
+    }, delay, hidden);
+    await page.goto(base + pt(story), { waitUntil: 'networkidle0' });
+    await wait(stay);
+    return page;
+  };
+  const tag = story.id;
+
+  // 1. Shortened wait: the end is in view, the time has passed -> the id is kept.
+  let page = await openStory({ delay: 600 });
+  const afterWait = await saved(page);
+  ok(`read: ${tag}: the end of the story seen and the (shortened) wait passed -> the id is in readStories`, Array.isArray(afterWait) && afterWait.includes(story.id), JSON.stringify(afterWait));
+  await page.close();
+
+  // 2. The real wait (20 s): a short visit marks nothing; a hidden tab does not count time.
+  page = await openStory({ delay: null, stay: 1500 });
+  ok('read: a visit shorter than the wait marks nothing (no id after 1.5 s with the real delay)', (await saved(page)).length === 0);
+  await page.close();
+  page = await openStory({ delay: 300, hidden: true, stay: 1500 });
+  ok('read: time with the tab hidden does not count', (await saved(page)).length === 0);
+  await page.close();
+
+  // 3. The epoch page: the tick, "read N of M" (M = the stories of the mode), the mode changes the numbers.
+  const epochPage = async (mode, read) => {
+    const p = await browser.newPage();
+    await p.setViewport({ width: 360, height: 900 });
+    await p.evaluateOnNewDocument((m, r) => {
+      try {
+        localStorage.setItem('family', m);
+        if (r) localStorage.setItem('readStories', JSON.stringify(r));
+        else localStorage.removeItem('readStories');
+      } catch {}
+    }, mode, read);
+    await p.goto(base + epochPath(epoch), { waitUntil: 'networkidle0' });
+    await wait(300);
+    return p;
+  };
+  page = await epochPage('off', [story.id]);
+  const marks = await page.evaluate((id) => {
+    const card = document.querySelector('[data-story="' + id + '"]');
+    const mark = card?.querySelector('.read-mark');
+    const rect = mark?.getBoundingClientRect();
+    const progress = document.querySelector('[data-read-progress]');
+    return { read: card?.hasAttribute('data-read'), visibility: mark && getComputedStyle(mark).visibility, word: mark?.textContent.trim(), onScreenWidth: rect?.width > 0, progress: progress?.textContent.trim(), shown: progress?.hasAttribute('data-shown') && getComputedStyle(progress).visibility === 'visible' };
+  }, story.id);
+  ok('read: the list of the epoch shows the tick and the word "lida" for the read story', marks.read && marks.visibility === 'visible' && marks.word === 'lida' && marks.onScreenWidth, JSON.stringify(marks));
+  ok(`read: "lidas 1 de M" where M is the stories of the epoch (${inThisEpoch.length})`, marks.shown && marks.progress === `lidas 1 de ${inThisEpoch.length}`, marks.progress);
+  await page.close();
+  page = await epochPage('off', null);
+  const none = await page.evaluate(() => ({ marks: document.querySelectorAll('[data-read]').length, progress: getComputedStyle(document.querySelector('[data-read-progress]')).visibility }));
+  ok('read: with nothing read there is no tick and no "read N of M"', none.marks === 0 && none.progress === 'hidden', JSON.stringify(none));
+  await page.close();
+  for (const mode of ['all', '12']) {
+    const shown = inThisEpoch.filter((e) => shownIn(e, mode));
+    const readAll = inThisEpoch.map((e) => e.id);
+    page = await epochPage(mode, readAll);
+    const text = await page.evaluate(() => document.querySelector('[data-read-progress]').textContent.trim());
+    ok(`read: family mode ${mode}: "${text}" counts only the stories the mode shows (${shown.length})`, text === `lidas ${shown.length} de ${shown.length}`);
+    await page.close();
+  }
+
+  // 4. The reset on the legal page: the button works, the key is gone, the tick is gone.
+  page = await browser.newPage();
+  await page.setViewport({ width: 360, height: 900 });
+  await page.evaluateOnNewDocument((id) => { try { localStorage.setItem('readStories', JSON.stringify([id])); } catch {} }, story.id);
+  await page.goto(base + '/pt/legal/', { waitUntil: 'networkidle0' });
+  await page.click('[data-read-reset]');
+  await wait(200);
+  const reset = await page.evaluate(() => ({ key: localStorage.getItem('readStories'), status: document.querySelector('[data-read-reset-status]').textContent }));
+  ok('read: the reset button on the legal page clears the key and says so', reset.key === null && reset.status === 'Marcas repostas.', JSON.stringify(reset));
+  await page.close();
+  page = await browser.newPage(); // a new page: the first one sets the key again on every document it opens
+  await page.setViewport({ width: 360, height: 900 });
+  await page.goto(base + epochPath(epoch), { waitUntil: 'networkidle0' });
+  ok('read: after the reset the list shows no tick', (await page.evaluate(() => document.querySelectorAll('[data-read]').length)) === 0);
+  await page.close();
+
+  // 5. No JavaScript: the pages work, the mark is only a hidden place and the button is not offered.
+  page = await newPage({ js: false });
+  await page.goto(base + epochPath(epoch), { waitUntil: 'networkidle0' });
+  ok('read: without JavaScript the list has no tick', (await page.evaluate(() => [...document.querySelectorAll('.read-mark')].every((m) => getComputedStyle(m).visibility === 'hidden'))));
+  await page.goto(base + '/pt/legal/', { waitUntil: 'networkidle0' });
+  ok('read: without JavaScript the reset button is not shown', (await page.evaluate(() => getComputedStyle(document.querySelector('[data-read-reset]').parentElement).display)) === 'none');
+  await page.close();
+  // Leave the storage clean for whatever runs next in this browser.
+  page = await browser.newPage();
+  await page.goto(base + '/pt/', { waitUntil: 'domcontentloaded' });
+  await page.evaluate(() => { try { localStorage.removeItem('readStories'); localStorage.removeItem('family'); } catch {} });
+  await page.close();
 }
 
 await browser.close();

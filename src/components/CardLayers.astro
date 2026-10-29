@@ -11,9 +11,11 @@ interface Props {
   textLang?: string;
   /** The side column holds the picture of the story; a story without a picture has no column. */
   hasAside?: boolean;
+  /** The id of the story: the empty mark after the text tells the "read" script (src/scripts/read-marks.ts) when the end of the text is on the screen. */
+  storyId?: string;
 }
 
-const { lang, hook, textLang, hasAside = false } = Astro.props;
+const { lang, hook, textLang, hasAside = false, storyId } = Astro.props;
 ---
 <div class="layers" data-card-layers>
   <div class:list={['layers__top', { 'layers__top--aside': hasAside }]}>
@@ -25,6 +27,7 @@ const { lang, hook, textLang, hasAside = false } = Astro.props;
         <div class="prose" lang={textLang}>
           <slot name="story" />
         </div>
+        {storyId && <span class="story-end" data-story-end={storyId} aria-hidden="true"></span>}
       </section>
     </div>
     {
@@ -86,6 +89,11 @@ const { lang, hook, textLang, hasAside = false } = Astro.props;
       grid-column: 1;
       grid-row: 1;
     }
+  }
+
+  .story-end {
+    display: block;
+    block-size: 1px;
   }
 
   .hook {
