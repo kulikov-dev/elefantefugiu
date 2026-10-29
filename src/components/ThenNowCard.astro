@@ -1,0 +1,136 @@
+---
+// One card of "Then and now" (see ThenNow.astro). The two figures are set like the years of the feed: the label face, lining numerals.
+// A figure does not break inside itself (white-space: nowrap on each part). The pair is always on two lines, the first figure (smaller,
+// muted) above and "→ second figure" below, in every card at every width: whether a pair "would fit one line" depends on the language and the screen, and
+// cards of one row must not take different shapes. A long phrase (more than 22 characters) may wrap inside its own part, otherwise it
+// would run out of the card of a phone.
+import { t } from '../i18n';
+import { storyPath, type Lang } from '../i18n/routes';
+import type { EventData } from '../lib/events';
+import type { EpochData } from '../lib/epochs';
+import { thenNowText, tieNumbers } from '../lib/then-now';
+
+interface Props {
+  lang: Lang;
+  card: NonNullable<EpochData['then_now']>[number];
+  /** The story the card leads to, when it is published. */
+  story?: EventData | undefined;
+  /** The id of the card: the button of ThenNow moves the focus to the second one. */
+  id?: string;
+}
+
+const { lang, card, story, id } = Astro.props;
+const then = tieNumbers(card.then_big[lang]);
+const now = tieNumbers(card.now_big[lang]);
+const LONG = 22;
+---
+<li class="then-now__card" data-kind={card.kind} id={id} tabindex="-1">
+  <p class="then-now__big">
+    <span class:list={['then-now__part', 'then-now__then', { 'then-now__part--wrap': then.length > LONG }]}>{then}</span>
+    <span class:list={['then-now__part', 'then-now__now', { 'then-now__part--wrap': now.length > LONG }]}>
+      <svg class="then-now__arrow" viewBox="0 0 24 14" width="24" height="14" aria-hidden="true" focusable="false">
+        <path d="M1 7h20M15 1.5L21.5 7 15 12.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="visually-hidden">{t(lang, 'epoch.then_now_today')}</span>{now}
+    </span>
+  </p>
+  <p class="then-now__text">{thenNowText(card, lang)}</p>
+  {
+    (card.kind !== 'known' || story) && (
+      <p class="then-now__foot">
+        {card.kind !== 'known' && (
+          <span class="then-now__kind">
+            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+              {card.kind === 'estimate' ? (
+                <path d="M2 11c2-6 4-6 6 0s4 6 6-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+              ) : (
+                <path d="M3 8h10M8 3v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              )}
+            </svg>
+            {t(lang, `epoch.then_now_${card.kind}`)}
+          </span>
+        )}
+        {story && <a class="then-now__link" href={storyPath(lang, story.slug[lang])}>→ {story.title[lang]}</a>}
+      </p>
+    )
+  }
+</li>
+
+<style is:global>
+  .then-now__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .then-now__big {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: var(--color-ink);
+    font-family: var(--font-label);
+    font-size: var(--text-then-now);
+    font-variant-numeric: lining-nums;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .then-now__part {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  /* The old figure is the smaller one and quieter: about 0.7 of the new figure, in the muted colour of the text. */
+  .then-now__then {
+    color: var(--color-ink-muted);
+    font-size: var(--text-then-now-old);
+  }
+
+  .then-now__part--wrap {
+    white-space: normal;
+  }
+
+  .then-now__arrow {
+    display: inline-block;
+    margin-inline-end: var(--space-2);
+    color: var(--epoch-primary);
+    vertical-align: baseline;
+  }
+
+  .then-now__card:focus-visible {
+    outline: var(--ring-width) solid var(--color-accent);
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  .then-now__text {
+    max-width: var(--measure);
+  }
+
+  /* The mark and the link to the story stand at the bottom of the card, so the cards of one row end alike. */
+  .then-now__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+    margin-block-start: auto;
+    padding-block-start: var(--space-1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .then-now__kind {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .then-now__link {
+    margin-inline-start: auto;
+    font-weight: 600;
+  }
+</style>

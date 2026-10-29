@@ -171,6 +171,7 @@
     "then_now_calc": "cálculo",
     "then_now_note_estimate": "Estimativa: reconstituição de historiadores.",
     "then_now_note_calc": "Cálculo: nosso, a partir da distância e da velocidade.",
+    "then_now_more": "Mais {n} comparações",
     "then_now_sources": "Fontes",
     "read_progress": "lidas {n} de {m}",
     "filter_all": "Todos",

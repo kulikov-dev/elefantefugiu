@@ -2,11 +2,16 @@
 // "Then and now" on an epoch page (docs/spec.md 5.2): three cards, each a figure of the epoch beside the same thing today. The data are in
 // epochs.yaml (then_now); the numbers marked {n} are calculated (src/lib/then-now.ts). The mark "estimate" or "calculation" is shown on
 // those cards only (a plain fact has none); under the block one sentence explains the marks that are used, and the sources are folded.
+//
+// One list. Below 768 px, with JavaScript (html[data-js], set in <head> before the first paint, so nothing moves), the second and third
+// cards are hidden by CSS and a button under the first one shows them: it sets aria-expanded, goes away, and moves the focus to the second
+// card (tabindex="-1"). Without JavaScript, and from 768 px, everything is shown and there is no button.
 import { t } from '../i18n';
-import { storyPath, type Lang } from '../i18n/routes';
+import type { Lang } from '../i18n/routes';
 import { isPublished, type EventData } from '../lib/events';
 import type { EpochData } from '../lib/epochs';
-import { thenNowNoteKinds, thenNowText, tieNumbers } from '../lib/then-now';
+import { thenNowNoteKinds } from '../lib/then-now';
+import ThenNowCard from './ThenNowCard.astro';
 
 interface Props {
   lang: Lang;
@@ -18,46 +23,26 @@ interface Props {
 const { lang, epoch, events } = Astro.props;
 const cards = epoch.then_now ?? [];
 const published = new Map(events.filter(isPublished).map((e) => [e.id, e]));
+const storyOf = (card: (typeof cards)[number]) => (card.story ? published.get(card.story) : undefined);
 const noteKinds = thenNowNoteKinds(cards);
+const hidden = Math.max(0, cards.length - 1);
 ---
 {
   cards.length > 0 && (
     <section class="then-now" aria-labelledby="then-now-title" data-then-now>
       <h2 id="then-now-title">{t(lang, 'epoch.then_now')}</h2>
-      <ul class="then-now__list">
-        {
-          cards.map((card) => {
-            const story = card.story ? published.get(card.story) : undefined;
-            return (
-              <li class="then-now__card" data-kind={card.kind}>
-                <p class="then-now__big">
-                  <span>{tieNumbers(card.then_big[lang])}</span>{' '}
-                  <span class="then-now__arrow" aria-hidden="true">→</span>
-                  <span class="visually-hidden">{t(lang, 'epoch.then_now_today')}</span>&nbsp;<span>{tieNumbers(card.now_big[lang])}</span>
-                </p>
-                <p class="then-now__text">{thenNowText(card, lang)}</p>
-                {(card.kind !== 'known' || story) && (
-                  <p class="then-now__foot">
-                    {card.kind !== 'known' && (
-                      <span class="then-now__kind">
-                        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
-                          {card.kind === 'estimate' ? (
-                            <path d="M2 11c2-6 4-6 6 0s4 6 6-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-                          ) : (
-                            <path d="M3 8h10M8 3v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                          )}
-                        </svg>
-                        {t(lang, `epoch.then_now_${card.kind}`)}
-                      </span>
-                    )}
-                    {story && <a class="then-now__link" href={storyPath(lang, story.slug[lang])}>→ {story.title[lang]}</a>}
-                  </p>
-                )}
-              </li>
-            );
-          })
-        }
+
+      <ul class="then-now__list" id="then-now-list">
+        {cards.map((card, i) => <ThenNowCard lang={lang} card={card} story={storyOf(card)} id={`then-now-${i + 1}`} />)}
       </ul>
+      {
+        hidden > 0 && (
+          <button type="button" class="button button--secondary then-now__more" aria-expanded="false" aria-controls="then-now-list" data-then-now-more>
+            {t(lang, 'epoch.then_now_more').replace('{n}', String(hidden))}
+          </button>
+        )
+      }
+
       {noteKinds.length > 0 && <p class="then-now__note">{noteKinds.map((kind) => t(lang, `epoch.then_now_note_${kind}`)).join(' ')}</p>}
       <details class="then-now__sources">
         <summary>{t(lang, 'epoch.then_now_sources')}</summary>
@@ -98,53 +83,26 @@ const noteKinds = thenNowNoteKinds(cards);
     list-style: none;
   }
 
-  .then-now__card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-2);
-    padding: var(--space-4);
-    border: var(--epoch-frame);
-    border-radius: var(--radius-md);
-    background: var(--epoch-surface);
+  /* The button is for a phone with JavaScript only. */
+  .then-now__more {
+    display: none;
+    margin-block-start: var(--space-4);
   }
 
-  .then-now__big {
-    font-family: var(--epoch-heading-font);
-    font-size: var(--text-xl);
-    font-weight: var(--epoch-heading-weight);
-    line-height: 1.2;
-    overflow-wrap: anywhere;
+  @media (max-width: 47.99rem) {
+    :global(html[data-js]) .then-now:not([data-expanded]) :global(.then-now__card:nth-child(n + 2)) {
+      display: none;
+    }
+
+    :global(html[data-js]) .then-now:not([data-expanded]) .then-now__more {
+      display: inline-flex;
+    }
   }
 
-  .then-now__arrow {
-    color: var(--epoch-primary);
-  }
-
-  .then-now__text {
-    max-width: var(--measure);
-  }
-
-  .then-now__foot {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--space-1) var(--space-3);
-    margin-block-start: auto;
-    padding-block-start: var(--space-1);
-    color: var(--color-ink-muted);
-    font-size: var(--text-sm);
-  }
-
-  .then-now__kind {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-  }
-
-  .then-now__link {
-    margin-inline-start: auto;
-    font-weight: 600;
+  @media (min-width: 64rem) {
+    .then-now__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
   }
 
   .then-now__note {
@@ -180,14 +138,19 @@ const noteKinds = thenNowNoteKinds(cards);
   .then-now__src-for {
     font-weight: 600;
   }
-
-  @media (min-width: 64rem) {
-    .then-now__list {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .then-now__big {
-      font-size: var(--text-2xl);
-    }
-  }
 </style>
+
+<script>
+  // The button shows the cards that a phone keeps under it: the section gets data-expanded (CSS shows them and hides the button),
+  // aria-expanded says so, and the focus goes to the second card, the first one that was hidden.
+  const button = document.querySelector<HTMLButtonElement>('[data-then-now-more]');
+  const section = button?.closest<HTMLElement>('[data-then-now]');
+  if (button && section) {
+    button.addEventListener('click', () => {
+      section.setAttribute('data-expanded', '');
+      button.setAttribute('aria-expanded', 'true');
+      const second = section.querySelector<HTMLElement>('.then-now__card:nth-child(2)');
+      second?.focus();
+    });
+  }
+</script>

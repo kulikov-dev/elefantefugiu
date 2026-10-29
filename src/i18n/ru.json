@@ -171,6 +171,7 @@
     "then_now_calc": "расчёт",
     "then_now_note_estimate": "Оценка — реконструкция историков.",
     "then_now_note_calc": "Расчёт — наше вычисление по расстоянию и скорости.",
+    "then_now_more": "Ещё {n} сравнения",
     "then_now_sources": "Источники",
     "read_progress": "прочитано {n} из {m}",
     "filter_all": "Все",

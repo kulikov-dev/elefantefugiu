@@ -358,39 +358,95 @@ if (want('read')) {
   await page.close();
 }
 
-// ---- "Then and now" on the epoch pages: three cards, a mark on the estimates and calculations, sources, the calculated {n} ----
+// ---- "Then and now" on the epoch pages: one list; on a phone with JavaScript one card and a button, otherwise all three; marks, sources, {n} ----
 if (want('thennow')) {
   const ratio = (a, b) => { const n = a / b; return Math.max(1, n >= 100 ? Math.round(n / 10) * 10 : Math.round(n)); };
   const publishedIds = new Set(published.map((e) => e.id));
   const withBlock = readyEpochs.filter((e) => Array.isArray(e.then_now) && e.then_now.length > 0);
   ok('then and now: at least one live epoch has the block (the data are in epochs.yaml)', withBlock.length > 0);
+  /** What the reader sees now: the cards that are shown, in order, the button, the focus. */
+  const state = (page) => page.evaluate(() => {
+    const root = document.querySelector('[data-then-now]');
+    if (!root) return null;
+    const shown = (el) => el.checkVisibility({ visibilityProperty: true });
+    const button = root.querySelector('[data-then-now-more]');
+    const sizeOf = (el) => parseFloat(getComputedStyle(el).fontSize);
+    return {
+      heading: root.querySelector('h2')?.textContent.trim(),
+      lists: root.querySelectorAll('.then-now__list').length,
+      cardsInPage: root.querySelectorAll('.then-now__card').length,
+      cards: [...root.querySelectorAll('.then-now__card')].filter(shown).map((c) => ({
+        id: c.id,
+        kind: c.dataset.kind,
+        big: c.querySelector('.then-now__big')?.textContent.replace(/\s+/g, ' ').trim(),
+        text: c.querySelector('.then-now__text')?.textContent.replace(/\s+/g, ' ').trim(),
+        mark: c.querySelector('.then-now__kind')?.textContent.trim() ?? null,
+        link: c.querySelector('.then-now__link')?.getAttribute('href') ?? null,
+        font: getComputedStyle(c.querySelector('.then-now__big')).fontFamily,
+        broken: [...c.querySelectorAll('.then-now__part')].some((p) => p.getClientRects().length > 1 && !p.classList.contains('then-now__part--wrap')),
+        right: c.getBoundingClientRect().right,
+        ratio: sizeOf(c.querySelector('.then-now__then')) / sizeOf(c.querySelector('.then-now__now')),
+        quieter: getComputedStyle(c.querySelector('.then-now__then')).color !== getComputedStyle(c.querySelector('.then-now__now')).color,
+      })),
+      button: button ? { shown: shown(button), expanded: button.getAttribute('aria-expanded'), controls: button.getAttribute('aria-controls'), controlsExists: Boolean(document.getElementById(button.getAttribute('aria-controls') ?? '')), text: button.textContent.trim(), tag: button.tagName } : null,
+      focusId: document.activeElement?.id ?? '',
+      sources: [...root.querySelectorAll('.then-now__sources > ul > li')].map((li) => li.querySelectorAll('a[href^="http"]').length),
+      note: root.querySelector('.then-now__note')?.textContent.trim() ?? '',
+      leftover: root.textContent.includes('{n}'),
+      overflow: document.scrollingElement.scrollWidth - innerWidth,
+    };
+  });
   for (const epoch of withBlock) {
-    for (const width of [360, 1280]) {
+    const data = epoch.then_now;
+    // A phone with JavaScript: the first card and the button; a click shows the others, hides the button, moves the focus to the second card.
+    {
+      const where = `then and now (${epoch.id}, 360 px)`;
+      const page = await newPage({ width: 360 });
+      await page.evaluateOnNewDocument(() => {
+        window.__tnShift = 0;
+        new PerformanceObserver((q) => {
+          for (const e of q.getEntries()) if (!e.hadRecentInput && (e.sources ?? []).some((s) => s.node?.parentElement?.closest?.('[data-then-now]') || s.node?.closest?.('[data-then-now]'))) window.__tnShift += e.value;
+        }).observe({ type: 'layout-shift', buffered: true });
+      });
+      await page.goto(base + epochPath(epoch), { waitUntil: 'networkidle0' });
+      const before = await state(page);
+      ok(`${where}: the block, its heading and ONE list of three cards are on the page`, before && before.heading === 'Então e agora' && before.lists === 1 && before.cardsInPage === 3, JSON.stringify([before?.heading, before?.lists, before?.cardsInPage]));
+      if (!before) { await page.close(); continue; }
+      ok(`${where}: one card is seen, and the button "Mais 2 comparações" (a <button>, aria-expanded=false, aria-controls the list)`, before.cards.length === 1 && before.button?.tag === 'BUTTON' && before.button.shown && before.button.text === 'Mais 2 comparações' && before.button.expanded === 'false' && before.button.controls === 'then-now-list' && before.button.controlsExists, JSON.stringify([before.cards.length, before.button]));
+      ok(`${where}: the block does not move while the page loads`, (await page.evaluate(() => window.__tnShift)) === 0);
+      await page.click('[data-then-now-more]');
+      await wait(200);
+      const after = await state(page);
+      ok(`${where}: after the click three cards are seen, the button is gone`, after.cards.length === 3 && after.button?.shown === false, JSON.stringify([after.cards.length, after.button?.shown]));
+      ok(`${where}: aria-expanded is true and the focus is on the second card (tabindex -1)`, after.button?.expanded === 'true' && after.focusId === 'then-now-2', JSON.stringify([after.button?.expanded, after.focusId]));
+      ok(`${where}: no sideways scroll, no leftover {n}, every card inside the screen`, after.overflow <= 0 && !after.leftover && after.cards.every((c) => c.right <= 360));
+      ok(`${where}: the figures are in the label face (Oswald), the old one is about 0.7 of the new one and quieter, a figure is not broken in two`, after.cards.every((c) => /Oswald/.test(c.font) && !c.broken && c.ratio > 0.6 && c.ratio < 0.8 && c.quieter), JSON.stringify(after.cards.map((c) => [c.ratio.toFixed(2), c.quieter, c.broken])));
+      await page.close();
+    }
+    // Without JavaScript all three cards are shown and there is no button.
+    {
+      const where = `then and now (${epoch.id}, 360 px, no JavaScript)`;
+      const page = await newPage({ width: 360, js: false });
+      await page.goto(base + epochPath(epoch), { waitUntil: 'load' });
+      const got = await state(page);
+      ok(`${where}: all three cards are seen and the button is not`, got && got.cards.length === 3 && got.button?.shown === false, JSON.stringify([got?.cards.length, got?.button?.shown]));
+      await page.close();
+    }
+    // A wide screen: three cards at once, no button.
+    for (const width of [768, 1280]) {
+      const where = `then and now (${epoch.id}, ${width} px)`;
       const page = await newPage({ width });
       await page.goto(base + epochPath(epoch), { waitUntil: 'networkidle0' });
-      const got = await page.evaluate(() => {
-        const root = document.querySelector('[data-then-now]');
-        if (!root) return null;
-        const cards = [...root.querySelectorAll('.then-now__card')].map((c) => ({
-          kind: c.dataset.kind,
-          big: c.querySelector('.then-now__big')?.textContent.replace(/s+/g, ' ').trim(),
-          text: c.querySelector('.then-now__text')?.textContent.replace(/s+/g, ' ').trim(),
-          mark: c.querySelector('.then-now__kind')?.textContent.trim() ?? null,
-          link: c.querySelector('.then-now__link')?.getAttribute('href') ?? null,
-        }));
-        const sources = [...root.querySelectorAll('.then-now__sources > ul > li')].map((li) => li.querySelectorAll('a[href^="http"]').length);
-        return { heading: root.querySelector('h2')?.textContent.trim(), cards, sources, note: root.querySelector('.then-now__note')?.textContent.trim() ?? '', leftover: root.textContent.includes('{n}'), overflow: document.scrollingElement.scrollWidth - innerWidth };
-      });
-      const where = `then and now (${epoch.id}, ${width} px)`;
-      ok(`${where}: the block, its heading and three cards are on the page`, got && got.heading === 'Então e agora' && got.cards.length === 3, JSON.stringify(got?.heading));
+      const got = await state(page);
+      ok(`${where}: three cards at once and no button`, got && got.cards.length === 3 && got.button?.shown === false, JSON.stringify([got?.cards.length, got?.button?.shown]));
       if (!got) { await page.close(); continue; }
       ok(`${where}: no sideways scroll, no leftover {n}`, got.overflow <= 0 && !got.leftover);
-      ok(`${where}: every card has its figures, its kind, and a sentence`, got.cards.every((c, i) => c.big && c.big.includes('→') && c.text && c.kind === epoch.then_now[i].kind), JSON.stringify(got.cards.map((c) => c.kind)));
+      ok(`${where}: every card has its figures with the arrow beside the second, and a sentence`, got.cards.every((c, i) => c.big && c.text && c.kind === data[i].kind), JSON.stringify(got.cards.map((c) => c.kind)));
       ok(`${where}: the mark "estimativa" or "cálculo" only on estimates and calculations, none on a plain fact`, got.cards.every((c) => (c.kind === 'known' ? c.mark === null : c.mark === { estimate: 'estimativa', calc: 'cálculo' }[c.kind])), JSON.stringify(got.cards.map((c) => c.mark)));
-      ok(`${where}: every card has its sources under "Fontes" (the number of links is the data's)`, got.sources.length === 3 && got.sources.every((n, i) => n === epoch.then_now[i].sources.length), JSON.stringify(got.sources));
-      ok(`${where}: the sentence under the block explains the marks that are used`, (epoch.then_now.some((c) => c.kind !== 'known') ? got.note.length > 0 : got.note === '') && (!epoch.then_now.some((c) => c.kind === 'calc') || /Cálculo/.test(got.note)) && (!epoch.then_now.some((c) => c.kind === 'estimate') || /Estimativa/.test(got.note)), got.note);
-      ok(`${where}: the link to a story shows only when that story is published`, got.cards.every((c, i) => { const id = epoch.then_now[i].story; return id && publishedIds.has(id) ? Boolean(c.link) : c.link === null; }), JSON.stringify(got.cards.map((c) => c.link)));
-      ok(`${where}: the calculated number of {n} is the ratio of the hours`, got.cards.every((c, i) => { const d = epoch.then_now[i]; return d.then_hours === undefined || c.text.includes(String(ratio(d.then_hours, d.now_hours))); }));
+      ok(`${where}: every card has its sources under "Fontes" (the number of links is the data's)`, got.sources.length === 3 && got.sources.every((n, i) => n === data[i].sources.length), JSON.stringify(got.sources));
+      ok(`${where}: the sentence under the block explains the marks that are used`, (data.some((c) => c.kind !== 'known') ? got.note.length > 0 : got.note === '') && (!data.some((c) => c.kind === 'calc') || /Cálculo/.test(got.note)) && (!data.some((c) => c.kind === 'estimate') || /Estimativa/.test(got.note)), got.note);
+      ok(`${where}: the link to a story shows only when that story is published`, got.cards.every((c, i) => { const id = data[i].story; return id && publishedIds.has(id) ? Boolean(c.link) : c.link === null; }), JSON.stringify(got.cards.map((c) => c.link)));
+      ok(`${where}: the calculated number of {n} is the ratio of the hours`, got.cards.every((c, i) => { const d = data[i]; return d.then_hours === undefined || c.text.includes(String(ratio(d.then_hours, d.now_hours))); }));
       await page.close();
     }
   }

@@ -82,6 +82,10 @@
   --text-lg: 1.25rem;
   --text-xl: 1.5rem;
   --text-2xl: clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem);
+  /* The two big figures of a "Then and now" card (set in the label face, like the years of the feed). */
+  --text-then-now: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  /* The old figure of the pair is about 0.7 of the new one. */
+  --text-then-now-old: calc(var(--text-then-now) * 0.7);
   /* Titles of cards: one clamped size so that a long name does not break the grid; the key events of the frame get the larger one. */
   --text-card-title: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem);
   --text-3xl: clamp(2.25rem, 1.6rem + 3vw, 3.75rem);
