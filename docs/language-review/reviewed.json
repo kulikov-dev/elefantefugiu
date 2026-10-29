@@ -120,16 +120,16 @@
     "hash": "e3be13321951"
   },
   "static/legal/en": {
-    "date": "2026-10-28",
-    "hash": "5f9761c05007"
+    "date": "2026-10-29",
+    "hash": "39ce56e68253"
   },
   "static/legal/pt": {
-    "date": "2026-10-28",
-    "hash": "da7e512277a1"
+    "date": "2026-10-29",
+    "hash": "37bc9c73404f"
   },
   "static/legal/ru": {
-    "date": "2026-10-28",
-    "hash": "cd4191473fe5"
+    "date": "2026-10-29",
+    "hash": "06e5eba050cc"
   },
   "static/method/en": {
     "date": "2026-10-27",
@@ -240,16 +240,16 @@
     "hash": "4cab90fcf168"
   },
   "ui/epoch/en": {
-    "date": "2026-10-27",
-    "hash": "415379bc87b0"
+    "date": "2026-10-29",
+    "hash": "a93460380c97"
   },
   "ui/epoch/pt": {
-    "date": "2026-10-27",
-    "hash": "be0a4d3dc372"
+    "date": "2026-10-29",
+    "hash": "b9ce16f4c038"
   },
   "ui/epoch/ru": {
-    "date": "2026-10-27",
-    "hash": "89d284feb3e6"
+    "date": "2026-10-29",
+    "hash": "867fe5d823ed"
   },
   "ui/family/en": {
     "date": "2026-10-27",
@@ -456,16 +456,16 @@
     "hash": "591bc49253f2"
   },
   "ui/ui/en": {
-    "date": "2026-10-27",
-    "hash": "bc62a1c67bef"
+    "date": "2026-10-29",
+    "hash": "289f67dd9bc4"
   },
   "ui/ui/pt": {
-    "date": "2026-10-27",
-    "hash": "18732fb79c38"
+    "date": "2026-10-29",
+    "hash": "34c74906cf61"
   },
   "ui/ui/ru": {
-    "date": "2026-10-27",
-    "hash": "9c595cacad58"
+    "date": "2026-10-29",
+    "hash": "af09ac571f19"
   },
   "ui/viz/en": {
     "date": "2026-10-27",
