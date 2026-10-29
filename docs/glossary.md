@@ -48,6 +48,10 @@
 | Наполеон | Napoleão | Napoleon | Наполеон |
 | Альберто Кантино | Alberto Cantino | Alberto Cantino | Альберто Кантино |
 | Альбрехт Дюрер | Albrecht Dürer | Albrecht Dürer | Альбрехт Дюрер |
+| Катарина Брагансская | Catarina de Bragança | Catherine of Braganza | Катарина Брагансская |
+| Гагу Коутинью | Gago Coutinho | Gago Coutinho | Гагу Коутинью |
+| Сакадура Кабрал | Sacadura Cabral | Sacadura Cabral | Сакадура Кабрал |
+| Сэмюэл Пипс | Samuel Pepys | Samuel Pepys | Сэмюэл Пипс |
 
 ## Места
 
@@ -73,6 +77,11 @@
 | Бразилия | Brasil | Brazil | Бразилия |
 | Западная Сахара | Saara Ocidental | Western Sahara | Западная Сахара |
 | Алминьяш-да-Понте | Alminhas da Ponte | Alminhas da Ponte | Алминьяш-да-Понте |
+| Олисипо | Olisipo | Olisipo | Олисипо |
+| Бракара | Bracara | Bracara | Бракара |
+| Стадион «да Луж» | Estádio da Luz | Estádio da Luz | стадион «да Луж» |
+| Пастейш де Белен | Pastéis de Belém | Pastéis de Belém | «Пастейш де Белен» |
+| Мумбаи (прежде Бомбей) | Bombaim / Mumbai | Bombay / Mumbai | Бомбей (сегодня Мумбаи) |
 
 ## Термины
 

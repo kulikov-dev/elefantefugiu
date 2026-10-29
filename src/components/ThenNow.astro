@@ -1,0 +1,193 @@
+---
+// "Then and now" on an epoch page (docs/spec.md 5.2): three cards, each a figure of the epoch beside the same thing today. The data are in
+// epochs.yaml (then_now); the numbers marked {n} are calculated (src/lib/then-now.ts). The mark "estimate" or "calculation" is shown on
+// those cards only (a plain fact has none); under the block one sentence explains the marks that are used, and the sources are folded.
+import { t } from '../i18n';
+import { storyPath, type Lang } from '../i18n/routes';
+import { isPublished, type EventData } from '../lib/events';
+import type { EpochData } from '../lib/epochs';
+import { thenNowNoteKinds, thenNowText, tieNumbers } from '../lib/then-now';
+
+interface Props {
+  lang: Lang;
+  epoch: EpochData;
+  /** The stories of the site: a card leads to its story only when that story is published. */
+  events: readonly EventData[];
+}
+
+const { lang, epoch, events } = Astro.props;
+const cards = epoch.then_now ?? [];
+const published = new Map(events.filter(isPublished).map((e) => [e.id, e]));
+const noteKinds = thenNowNoteKinds(cards);
+---
+{
+  cards.length > 0 && (
+    <section class="then-now" aria-labelledby="then-now-title" data-then-now>
+      <h2 id="then-now-title">{t(lang, 'epoch.then_now')}</h2>
+      <ul class="then-now__list">
+        {
+          cards.map((card) => {
+            const story = card.story ? published.get(card.story) : undefined;
+            return (
+              <li class="then-now__card" data-kind={card.kind}>
+                <p class="then-now__big">
+                  <span>{tieNumbers(card.then_big[lang])}</span>{' '}
+                  <span class="then-now__arrow" aria-hidden="true">→</span>
+                  <span class="visually-hidden">{t(lang, 'epoch.then_now_today')}</span>&nbsp;<span>{tieNumbers(card.now_big[lang])}</span>
+                </p>
+                <p class="then-now__text">{thenNowText(card, lang)}</p>
+                {(card.kind !== 'known' || story) && (
+                  <p class="then-now__foot">
+                    {card.kind !== 'known' && (
+                      <span class="then-now__kind">
+                        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                          {card.kind === 'estimate' ? (
+                            <path d="M2 11c2-6 4-6 6 0s4 6 6-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                          ) : (
+                            <path d="M3 8h10M8 3v10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                          )}
+                        </svg>
+                        {t(lang, `epoch.then_now_${card.kind}`)}
+                      </span>
+                    )}
+                    {story && <a class="then-now__link" href={storyPath(lang, story.slug[lang])}>→ {story.title[lang]}</a>}
+                  </p>
+                )}
+              </li>
+            );
+          })
+        }
+      </ul>
+      {noteKinds.length > 0 && <p class="then-now__note">{noteKinds.map((kind) => t(lang, `epoch.then_now_note_${kind}`)).join(' ')}</p>}
+      <details class="then-now__sources">
+        <summary>{t(lang, 'epoch.then_now_sources')}</summary>
+        <ul>
+          {
+            cards.map((card) => (
+              <li>
+                <span class="then-now__src-for">{card.then_big[lang]} → {card.now_big[lang]}</span>
+                {card.sources.map((source, i) => (
+                  <>
+                    {i > 0 ? '; ' : ' '}
+                    <a href={source.url} rel="noopener">{source.title}</a>
+                  </>
+                ))}
+              </li>
+            ))
+          }
+        </ul>
+      </details>
+    </section>
+  )
+}
+
+<style>
+  .then-now {
+    margin-block-start: var(--space-7);
+  }
+
+  .then-now h2 {
+    font-size: var(--text-xl);
+  }
+
+  .then-now__list {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: minmax(0, 1fr);
+    margin-block-start: var(--space-3);
+    list-style: none;
+  }
+
+  .then-now__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-4);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .then-now__big {
+    font-family: var(--epoch-heading-font);
+    font-size: var(--text-xl);
+    font-weight: var(--epoch-heading-weight);
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .then-now__arrow {
+    color: var(--epoch-primary);
+  }
+
+  .then-now__text {
+    max-width: var(--measure);
+  }
+
+  .then-now__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+    margin-block-start: auto;
+    padding-block-start: var(--space-1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .then-now__kind {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  .then-now__link {
+    margin-inline-start: auto;
+    font-weight: 600;
+  }
+
+  .then-now__note {
+    max-width: var(--measure);
+    margin-block-start: var(--space-3);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .then-now__sources {
+    margin-block-start: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .then-now__sources summary {
+    display: flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    color: var(--color-accent);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .then-now__sources ul {
+    margin-block-start: var(--space-1);
+    padding-inline-start: var(--space-4);
+  }
+
+  .then-now__sources li + li {
+    margin-block-start: var(--space-1);
+  }
+
+  .then-now__src-for {
+    font-weight: 600;
+  }
+
+  @media (min-width: 64rem) {
+    .then-now__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .then-now__big {
+      font-size: var(--text-2xl);
+    }
+  }
+</style>

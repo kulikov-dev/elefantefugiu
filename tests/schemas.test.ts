@@ -118,6 +118,40 @@ test('bridge.maps_url: optional, a clean Google Maps address only', () => {
   assert.equal(parse('not a url'), false);
 });
 
+const thenNowSource = { title: 'A source', url: 'https://example.org/a', type: 'web', accessed: '2026-10-29' };
+const thenNowCard = (over: Record<string, unknown> = {}) => ({
+  id: 'a',
+  then_big: { pt: '1', en: '1', ru: '1' },
+  now_big: { pt: '2', en: '2', ru: '2' },
+  text: { pt: 'um', en: 'one', ru: 'один' },
+  kind: 'known',
+  sources: [thenNowSource],
+  ...over,
+});
+const withThenNow = (cards: unknown[]) => epochSchema.safeParse({ ...baseEpoch, mvp: false, years_label: { pt: 'séc. V', en: '5th century' }, then_now: cards });
+
+test('then_now: exactly three cards, each with a kind and at least one source', () => {
+  const three = [thenNowCard({ id: 'a' }), thenNowCard({ id: 'b' }), thenNowCard({ id: 'c' })];
+  assert.equal(withThenNow(three).success, true);
+  assert.equal(withThenNow(three.slice(0, 2)).success, false, 'two cards');
+  assert.equal(withThenNow([...three, thenNowCard({ id: 'd' })]).success, false, 'four cards');
+  assert.equal(withThenNow([thenNowCard({ id: 'a' }), thenNowCard({ id: 'b' }), thenNowCard({ id: 'c', sources: [] })]).success, false, 'no source');
+  assert.equal(withThenNow([thenNowCard({ id: 'a' }), thenNowCard({ id: 'b' }), thenNowCard({ id: 'c', kind: undefined })]).success, false, 'no kind');
+  assert.equal(withThenNow([thenNowCard({ id: 'a' }), thenNowCard({ id: 'b' }), thenNowCard({ id: 'c', kind: 'rumour' })]).success, false, 'a kind that is not known');
+  assert.equal(withThenNow([thenNowCard({ id: 'a' }), thenNowCard({ id: 'a' }), thenNowCard({ id: 'c' })]).success, false, 'the same id twice');
+});
+
+test('then_now: {n} and the hours go together', () => {
+  const n = { pt: 'cerca de {n}', en: 'about {n}', ru: 'около {n}' };
+  const ok = (card: unknown) => withThenNow([card, thenNowCard({ id: 'b' }), thenNowCard({ id: 'c' })]).success;
+  assert.equal(ok(thenNowCard({ text: n, then_hours: 40, now_hours: 2 })), true);
+  assert.equal(ok(thenNowCard({ text: n })), false, '{n} without hours');
+  assert.equal(ok(thenNowCard({ then_hours: 40, now_hours: 2 })), false, 'hours without {n}');
+  assert.equal(ok(thenNowCard({ text: n, then_hours: 40 })), false, 'one of the two hours');
+  assert.equal(ok(thenNowCard({ text: { pt: 'cerca de {n}', en: 'about', ru: 'около {n}' }, then_hours: 40, now_hours: 2 })), false, '{n} in one language only');
+  assert.equal(ok(thenNowCard({ text: n, then_hours: 0, now_hours: 2 })), false, 'zero hours');
+});
+
 test('epochSchema: intro is optional, any language may be left out, a typo in a language key is an error', () => {
   const base = { ...baseEpoch, mvp: false, years_label: { pt: 'séc. V', en: '5th century' } };
   assert.equal(epochSchema.safeParse(base).success, true);

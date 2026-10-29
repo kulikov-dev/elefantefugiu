@@ -198,6 +198,36 @@ const epochStyle = z.strictObject({
 });
 
 /** The fields of an epoch that can still be provisional. Written per field (placeholder: [fallback_image]) so it is clear what is temporary. */
+/**
+ * One card of "Then and now" on an epoch page: a figure of the epoch beside the same thing today.
+ * `then_big` and `now_big` are the short big words (numbers with their unit, written the way each language writes them), `text` is one
+ * sentence in the voice of the site. For a road (or any time that can be compared) give `then_hours` and `now_hours` and put `{n}` in the
+ * text: the page puts there how many times the "now" fits into the "then" (see src/lib/then-now.ts).
+ * kind: known (a recorded fact), estimate (a historians' reconstruction), calc (our own calculation from distance and speed).
+ */
+export const thenNowCard = z
+  .strictObject({
+    id: z.string(),
+    then_big: text,
+    now_big: text,
+    text,
+    kind: z.enum(['known', 'estimate', 'calc']),
+    /** The id of a story of the site that the card leads to. The link shows only once that story is published. */
+    story: z.string().optional(),
+    then_hours: z.number().positive().optional(),
+    now_hours: z.number().positive().optional(),
+    /** At least one source for every card. */
+    sources: z.array(source).min(1),
+  })
+  .superRefine((card, ctx) => {
+    const hasN = [card.text.pt, card.text.en, card.text.ru ?? ''].some((t) => t.includes('{n}'));
+    const everyN = [card.text.pt, card.text.en].every((t) => t.includes('{n}')) && (card.text.ru === undefined || card.text.ru.includes('{n}'));
+    if (hasN && !everyN) ctx.addIssue({ code: 'custom', path: ['text'], message: '{n} must be in the text of every language, or in none' });
+    if ((card.then_hours === undefined) !== (card.now_hours === undefined)) ctx.addIssue({ code: 'custom', path: ['then_hours'], message: 'then_hours and now_hours go together' });
+    if (hasN && card.then_hours === undefined) ctx.addIssue({ code: 'custom', path: ['then_hours'], message: 'the text has {n}: then_hours and now_hours are needed' });
+    if (!hasN && card.then_hours !== undefined) ctx.addIssue({ code: 'custom', path: ['text'], message: 'then_hours is given but the text has no {n}' });
+  });
+
 export const EPOCH_PLACEHOLDER_FIELDS = ['name', 'theme', 'style', 'intro', 'fallback_image'] as const;
 
 export const epochSchema = z
@@ -228,6 +258,8 @@ export const epochSchema = z
      * is a provisional picture that only serves the preview (Estado Novo); a real picture is an object.
      */
     fallback_image: z.union([picture, z.string()]).optional(),
+    /** "Then and now": exactly three cards; the block shows on the epoch page once the epoch has a page. */
+    then_now: z.array(thenNowCard).length(3).optional(),
     /** Which fields are still provisional. `fallback_image` (a picture to be made) does not make the page test text; any other field does. */
     placeholder: z.array(z.enum(EPOCH_PLACEHOLDER_FIELDS)).default([]),
   })
@@ -235,6 +267,8 @@ export const epochSchema = z
     const need = (ok: boolean, field: string, why: string) => {
       if (!ok) ctx.addIssue({ code: 'custom', path: [field], message: `${field} is required when ${why}` });
     };
+    const ids = (epoch.then_now ?? []).map((c) => c.id);
+    if (new Set(ids).size !== ids.length) ctx.addIssue({ code: 'custom', path: ['then_now'], message: 'then_now ids must be different' });
     if (epoch.mvp) {
       need(epoch.years !== undefined, 'years', 'mvp is true');
       need(epoch.theme !== undefined, 'theme', 'mvp is true');

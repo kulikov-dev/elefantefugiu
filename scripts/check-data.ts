@@ -120,6 +120,29 @@ for (const { item, file } of epochs) {
   }
 }
 
+// "Then and now" of an epoch (then_now): three cards, each with a kind and at least one source (the schema stops the rest). Here: the sentence
+// is one sentence of 25-40 words in every language it is written in, the sources are addresses without Cyrillic titles, and a story that is not
+// published yet is a note (its link is hidden until it is).
+{
+  const readyIds = new Set(events.filter((e) => e.item.status === 'ready').map((e) => e.item.id));
+  for (const { item, file } of epochs) {
+    (item.then_now ?? []).forEach((card, i) => {
+      const at = `then_now[${i}]`;
+      for (const lang of ['pt', 'en', 'ru'] as const) {
+        const text = card.text[lang];
+        if (text === undefined) continue;
+        const n = text.replace('{n}', '0').trim().split(/\s+/).filter(Boolean).length;
+        if (n < 25 || n > 40) report('warn', file, `${n} words, the sentence of a "Then and now" card is 25-40 words`, `${at}.text`, lang);
+      }
+      card.sources.forEach((s, k) => {
+        if (!/^https?:\/\/\S+$/.test(s.url)) report('error', file, `"${s.url}" is not an http(s) address`, `${at}.sources[${k}].url`);
+        if (s.lang !== 'ru' && /[Ѐ-ӿ]/.test(s.title)) report('error', file, `the title "${s.title}" has Cyrillic letters`, `${at}.sources[${k}].title`);
+      });
+      if (card.story && !readyIds.has(card.story)) report('warn', file, `story "${card.story}" is not published (yet): the link is hidden until it is`, `${at}.story`);
+    });
+  }
+}
+
 // A picture (image, detail_image, fallback_image) of a card or an epoch. Every picture that is in the data is on the site, so every one
 // must have its file and its texts: alt and caption in each language the page is written in, the author, the licence, and the source.
 type Texts = Partial<Record<DataLang, string | undefined>>;

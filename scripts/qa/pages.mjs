@@ -1,5 +1,5 @@
-// Browser checks for the static pages, the mistake report form, "Continue" on the home page, the QR address and the "read" marks.
-// Run against dist/ served by serve.mjs (base path "/"):   node pages.mjs [static form continue qr read]
+// Browser checks for the static pages, the mistake report form, "Continue" on the home page, the QR address, the "read" marks and "Then and now".
+// Run against dist/ served by serve.mjs (base path "/"):   node pages.mjs [static form continue qr read thennow]
 // No request ever leaves for formsubmit.co: the form is answered by the test itself.
 import { launchBrowser } from './browser.mjs';
 import { epochPath, epochs, en, pt, published, readyEpochs, HOME_START_ID } from './data.mjs';
@@ -356,6 +356,44 @@ if (want('read')) {
   await page.goto(base + '/pt/', { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => { try { localStorage.removeItem('readStories'); localStorage.removeItem('family'); } catch {} });
   await page.close();
+}
+
+// ---- "Then and now" on the epoch pages: three cards, a mark on the estimates and calculations, sources, the calculated {n} ----
+if (want('thennow')) {
+  const ratio = (a, b) => { const n = a / b; return Math.max(1, n >= 100 ? Math.round(n / 10) * 10 : Math.round(n)); };
+  const publishedIds = new Set(published.map((e) => e.id));
+  const withBlock = readyEpochs.filter((e) => Array.isArray(e.then_now) && e.then_now.length > 0);
+  ok('then and now: at least one live epoch has the block (the data are in epochs.yaml)', withBlock.length > 0);
+  for (const epoch of withBlock) {
+    for (const width of [360, 1280]) {
+      const page = await newPage({ width });
+      await page.goto(base + epochPath(epoch), { waitUntil: 'networkidle0' });
+      const got = await page.evaluate(() => {
+        const root = document.querySelector('[data-then-now]');
+        if (!root) return null;
+        const cards = [...root.querySelectorAll('.then-now__card')].map((c) => ({
+          kind: c.dataset.kind,
+          big: c.querySelector('.then-now__big')?.textContent.replace(/s+/g, ' ').trim(),
+          text: c.querySelector('.then-now__text')?.textContent.replace(/s+/g, ' ').trim(),
+          mark: c.querySelector('.then-now__kind')?.textContent.trim() ?? null,
+          link: c.querySelector('.then-now__link')?.getAttribute('href') ?? null,
+        }));
+        const sources = [...root.querySelectorAll('.then-now__sources > ul > li')].map((li) => li.querySelectorAll('a[href^="http"]').length);
+        return { heading: root.querySelector('h2')?.textContent.trim(), cards, sources, note: root.querySelector('.then-now__note')?.textContent.trim() ?? '', leftover: root.textContent.includes('{n}'), overflow: document.scrollingElement.scrollWidth - innerWidth };
+      });
+      const where = `then and now (${epoch.id}, ${width} px)`;
+      ok(`${where}: the block, its heading and three cards are on the page`, got && got.heading === 'Então e agora' && got.cards.length === 3, JSON.stringify(got?.heading));
+      if (!got) { await page.close(); continue; }
+      ok(`${where}: no sideways scroll, no leftover {n}`, got.overflow <= 0 && !got.leftover);
+      ok(`${where}: every card has its figures, its kind, and a sentence`, got.cards.every((c, i) => c.big && c.big.includes('→') && c.text && c.kind === epoch.then_now[i].kind), JSON.stringify(got.cards.map((c) => c.kind)));
+      ok(`${where}: the mark "estimativa" or "cálculo" only on estimates and calculations, none on a plain fact`, got.cards.every((c) => (c.kind === 'known' ? c.mark === null : c.mark === { estimate: 'estimativa', calc: 'cálculo' }[c.kind])), JSON.stringify(got.cards.map((c) => c.mark)));
+      ok(`${where}: every card has its sources under "Fontes" (the number of links is the data's)`, got.sources.length === 3 && got.sources.every((n, i) => n === epoch.then_now[i].sources.length), JSON.stringify(got.sources));
+      ok(`${where}: the sentence under the block explains the marks that are used`, (epoch.then_now.some((c) => c.kind !== 'known') ? got.note.length > 0 : got.note === '') && (!epoch.then_now.some((c) => c.kind === 'calc') || /Cálculo/.test(got.note)) && (!epoch.then_now.some((c) => c.kind === 'estimate') || /Estimativa/.test(got.note)), got.note);
+      ok(`${where}: the link to a story shows only when that story is published`, got.cards.every((c, i) => { const id = epoch.then_now[i].story; return id && publishedIds.has(id) ? Boolean(c.link) : c.link === null; }), JSON.stringify(got.cards.map((c) => c.link)));
+      ok(`${where}: the calculated number of {n} is the ratio of the hours`, got.cards.every((c, i) => { const d = epoch.then_now[i]; return d.then_hours === undefined || c.text.includes(String(ratio(d.then_hours, d.now_hours))); }));
+      await page.close();
+    }
+  }
 }
 
 await browser.close();

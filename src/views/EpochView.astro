@@ -8,6 +8,7 @@ import EventCard from '../components/EventCard.astro';
 import EpochSwitcher from '../components/EpochSwitcher.astro';
 import FamilyNote from '../components/FamilyNote.astro';
 import Mascot from '../components/Mascot.astro';
+import ThenNow from '../components/ThenNow.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import MapBlock from '../components/MapBlock.astro';
@@ -223,6 +224,8 @@ const schema = epochNodes(schemaCtx, {
         />
       </aside>
     </div>
+
+    <ThenNow lang={lang} epoch={epoch} events={site.events} />
 
     <PagerNav
       label={t(lang, 'epoch.neighbours_label')}

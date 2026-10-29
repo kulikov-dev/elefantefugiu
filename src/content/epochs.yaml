@@ -55,6 +55,86 @@
     ru: Новая династия отстояла страну при Алжубарроте и повернулась к морю. За
       полтора века маленькая Португалия дошла до Африки, Индии, Бразилии и
       Японии. В Лиссабон поплыли перец, слоны и носороги.
+  then_now:
+    - id: lisboa-1528
+      then_big:
+        pt: "70 mil"
+        en: "70,000"
+        ru: "70 тыс."
+      now_big:
+        pt: "um estádio"
+        en: "one stadium"
+        ru: "один стадион"
+      text:
+        pt: "Em 1528 viviam em Lisboa cerca de 70 mil pessoas, a maior cidade do país. Quase tantas, 68 100, cabem hoje no Estádio da Luz, depois das obras de 2025."
+        en: "In 1528 about 70,000 people lived in Lisbon, the country’s largest city. Almost as many, 68,100, fit in the Estádio da Luz since its 2025 expansion."
+        ru: "В 1528 году в Лиссабоне жило около 70 тысяч человек, это самый большой город страны. Почти столько же, 68 100 мест, вмещает стадион «да Луж» после расширения 2025 года."
+      kind: estimate
+      sources:
+        - title: "Teresa Rodrigues, «Portugal nos séculos XVI e XVII. Vicissitudes da dinâmica demográfica», CEPESE"
+          url: "https://www.cepese.pt/portal.%22/pt/publicacoes/colecoes/working-papers/populacao-e-prospectiva/portugal-nos-seculos-xvi-e-xvii.-vicissitudes-da-dinamica-demografica/Portugal-nos-seculos-XVI-e-XVII-Vicissitudes-da.pdf"
+          type: academic
+          accessed: 2026-10-29
+        - title: "Estádio da Luz passa a ter 68.100 lugares"
+          url: "https://echoboomer.pt/estadio-da-luz-passa-a-ter-68100-lugares/"
+          type: press
+          accessed: 2026-10-29
+    - id: portugal-1500
+      then_big:
+        pt: "1 milhão"
+        en: "1 million"
+        ru: "1 млн"
+      now_big:
+        pt: "2,9 milhões"
+        en: "2.9 million"
+        ru: "2,9 млн"
+      text:
+        pt: "Por volta de 1500, todo o Portugal tinha cerca de um milhão de habitantes. Hoje só a Área Metropolitana de Lisboa tem cerca de 2,9 milhões: o triplo do país inteiro de então."
+        en: "Around 1500 the whole of Portugal had about a million inhabitants. The Lisbon metropolitan area alone has about 2.9 million now, three times the entire country of that time."
+        ru: "Около 1500 года во всей Португалии жил примерно миллион человек. Сегодня в одной Лиссабонской агломерации около 2,9 миллиона: втрое больше, чем тогда во всей стране."
+      kind: estimate
+      sources:
+        - title: "Teresa Rodrigues, «Portugal nos séculos XVI e XVII. Vicissitudes da dinâmica demográfica», CEPESE"
+          url: "https://www.cepese.pt/portal.%22/pt/publicacoes/colecoes/working-papers/populacao-e-prospectiva/portugal-nos-seculos-xvi-e-xvii.-vicissitudes-da-dinamica-demografica/Portugal-nos-seculos-XVI-e-XVII-Vicissitudes-da.pdf"
+          type: academic
+          accessed: 2026-10-29
+        - title: "N. Palma, J. Reis, M. Zhang, Historical Methods 53 (2020)"
+          url: "https://doi.org/10.1080/01615440.2019.1682240"
+          type: academic
+          accessed: 2026-10-29
+        - title: "Censos 2021: Área Metropolitana de Lisboa (RR)"
+          url: "https://rr.pt/noticia/pais/2021/07/28/censos-2021-area-metropolitana-de-lisboa-ganhou-49-mil-habitantes-em-dez-anos/247780/"
+          type: press
+          accessed: 2026-10-29
+    - id: lisboa-porto
+      then_big:
+        pt: "1 semana"
+        en: "1 week"
+        ru: "неделя"
+      now_big:
+        pt: "2 h 44 min"
+        en: "2 h 44 min"
+        ru: "2 ч 44 мин"
+      text:
+        pt: "De Lisboa ao Porto, cerca de 300 quilómetros, um cavaleiro demorava à volta de uma semana. Hoje o comboio mais rápido leva 2 h 44 min: nessa semana faria o percurso cerca de {n} vezes."
+        en: "A rider took about a week to get from Lisbon to Porto, some 300 kilometers. The fastest train now takes 2 h 44 min: in that week it would make the trip about {n} times."
+        ru: "Из Лиссабона в Порту, около 300 километров, всадник добирался примерно за неделю. Самый быстрый поезд сегодня идёт 2 часа 44 минуты: за ту неделю он проехал бы этот путь около {n} раз."
+      kind: calc
+      then_hours: 168
+      now_hours: 2.7333
+      sources:
+        - title: "Mala-posta (pt.wikipedia; G. Ferreira, A Mala-Posta em Portugal, 1946)"
+          url: "https://pt.wikipedia.org/wiki/Mala-posta"
+          type: reference
+          accessed: 2026-10-29
+        - title: "The Portugal News: Lisboa–Porto em 2 h 44 min"
+          url: "https://www.theportugalnews.com/news/2024-12-12/train-between-lisbon-and-porto-to-take-10-minutes-less/94206"
+          type: press
+          accessed: 2026-10-29
+        - title: "EveryRail: Porto–Lisboa de comboio"
+          url: "https://everyrail.com/trains/porto-to-lisbon/"
+          type: website
+          accessed: 2026-10-29
 - id: pombal-e-terramoto
   slug:
     pt: pombal-e-terramoto
@@ -109,6 +189,84 @@
       Маркиз де Помбал отстроил город по линейке и правил страной железной
       рукой. Через полвека пришли войска Наполеона, и королевский двор уплыл в
       Бразилию.
+  then_now:
+    - id: marcos-do-douro
+      then_big:
+        pt: "335"
+        en: "335"
+        ru: "335"
+      now_big:
+        pt: "105"
+        en: "105"
+        ru: "105"
+      text:
+        pt: "Entre 1758 e 1761 foram plantados 335 marcos de granito ao longo do Douro (201 em 1758 e 134 em 1761), para marcar os limites da primeira região vinhateira demarcada. O Museu do Douro encontrou e descreveu 105."
+        en: "Between 1758 and 1761, 335 granite markers were set along the Douro (201 in 1758 and 134 in 1761) to mark the boundaries of the first demarcated wine region. The Museu do Douro has found and recorded 105."
+        ru: "В 1758–1761 годах вдоль Дору поставили 335 гранитных столбов (201 в 1758-м и 134 в 1761-м), чтобы обозначить границы первого винного края. Музей Дору нашёл и описал 105."
+      kind: known
+      story: douro-1756
+      sources:
+        - title: "Museu do Douro, «Marcos da Demarcação»"
+          url: "https://museudodouro.pt/exposicoes/passado/marcos-da-demarcacao-"
+          type: institutional
+          accessed: 2026-10-29
+        - title: "RTP: Localizados 105 marcos pombalinos dos 335 colocados no século XVIII"
+          url: "https://www.rtp.pt/noticias/pais/localizados-105-marcos-pombalinos-dos-335-colocados-no-seculo-xviii_n41501"
+          type: press
+          accessed: 2026-10-29
+    - id: mala-posta-1798
+      then_big:
+        pt: "40 h"
+        en: "40 h"
+        ru: "40 ч"
+      now_big:
+        pt: "1 h 40 min"
+        en: "1 h 40 min"
+        ru: "1 ч 40 мин"
+      text:
+        pt: "A primeira diligência partia de Lisboa às 5 h e chegava a Coimbra às 21 h do dia seguinte: 40 horas. Hoje o comboio leva 1 h 40 min: nas mesmas 40 horas faria o percurso cerca de {n} vezes."
+        en: "The first mail coach left Lisbon at 5 a.m. and reached Coimbra at 9 p.m. next day: 40 hours. A train now takes 1 h 40 min: in the same 40 hours it would make the trip about {n} times."
+        ru: "Первая почтовая карета выезжала из Лиссабона в 5 утра и приезжала в Коимбру в 21:00 следующего дня: 40 часов. Сегодня поезд идёт около 1 часа 40 минут: за те же 40 часов он проехал бы этот путь около {n} раз."
+      kind: known
+      then_hours: 40
+      now_hours: 1.6667
+      sources:
+        - title: "Fundação Portuguesa das Comunicações, «Percurso de Correios»"
+          url: "https://www.fpc.pt/Portals/0/PDF%20Exposicoes/Percurso%20de%20Correios.pdf"
+          type: institutional
+          accessed: 2026-10-29
+        - title: "Rail Monsters: comboios em Portugal (Lisboa–Coimbra)"
+          url: "https://railmonsters.com/pt/r/portugal"
+          type: website
+          accessed: 2026-10-29
+    - id: lisboa-1755
+      then_big:
+        pt: "190–275 mil"
+        en: "190–275,000"
+        ru: "190–275 тыс."
+      now_big:
+        pt: "545 mil"
+        en: "545,000"
+        ru: "545 тыс."
+      text:
+        pt: "Antes do terramoto de 1755 viviam em Lisboa entre 190 e 275 mil pessoas; as estimativas divergem. Hoje, dentro dos limites da cidade, os Censos 2021 contaram cerca de 545 mil."
+        en: "Before the 1755 earthquake, between 190,000 and 275,000 people lived in Lisbon; estimates differ. Within today’s city limits, the 2021 census counted about 545,000 people."
+        ru: "Перед землетрясением 1755 года в Лиссабоне жило от 190 до 275 тысяч человек, оценки расходятся. В нынешних границах города перепись 2021 года насчитала около 545 тысяч."
+      kind: estimate
+      story: terramoto-1755
+      sources:
+        - title: "Teresa Rodrigues, «Portugal nos séculos XVI e XVII. Vicissitudes da dinâmica demográfica», CEPESE"
+          url: "https://www.cepese.pt/portal.%22/pt/publicacoes/colecoes/working-papers/populacao-e-prospectiva/portugal-nos-seculos-xvi-e-xvii.-vicissitudes-da-dinamica-demografica/Portugal-nos-seculos-XVI-e-XVII-Vicissitudes-da.pdf"
+          type: academic
+          accessed: 2026-10-29
+        - title: "1755 Lisbon earthquake (Á. Pereira, 2006)"
+          url: "https://en.wikipedia.org/wiki/1755_Lisbon_earthquake"
+          type: reference
+          accessed: 2026-10-29
+        - title: "Censos 2021: Área Metropolitana de Lisboa (RR)"
+          url: "https://rr.pt/noticia/pais/2021/07/28/censos-2021-area-metropolitana-de-lisboa-ganhou-49-mil-habitantes-em-dez-anos/247780/"
+          type: press
+          accessed: 2026-10-29
 - id: estado-novo-e-25-de-abril
   slug:
     pt: estado-novo-e-25-de-abril
@@ -182,6 +340,82 @@
     ru: Пастух Вириат восемь лет громил римские легионы, и Рим избавился от него,
       только подкупив его же людей. Потом пришли дороги, мосты, города и латынь.
       Через тысячу лет из неё вырастет португальский язык.
+  then_now:
+    - id: via-olisipo-bracara
+      then_big:
+        pt: "2 semanas"
+        en: "2 weeks"
+        ru: "2 недели"
+      now_big:
+        pt: "cerca de 3,5 h"
+        en: "about 3.5 h"
+        ru: "около 3,5 ч"
+      text:
+        pt: "A estrada romana de Olisipo a Bracara tinha 362 quilómetros. A pé, a 25–30 km por dia, eram cerca de duas semanas. Hoje o comboio leva cerca de 3,5 h: no mesmo tempo faria o percurso cerca de {n} vezes."
+        en: "The Roman road Olisipo–Bracara ran 362 kilometers. On foot, at 25–30 km a day, that took about two weeks. A train now needs about 3.5 hours: in the same time it would make the trip about {n} times."
+        ru: "Римская дорога из Олисипо в Бракару была длиной 362 километра. Пешком, по 25–30 километров в день, это около двух недель. Поезд сегодня идёт около трёх с половиной часов: за то же время он проехал бы этот путь около {n} раз."
+      kind: calc
+      then_hours: 336
+      now_hours: 3.5
+      sources:
+        - title: "Via XVI Olisipo–Bracara, Vias Romanas em Portugal (pt.wikipedia)"
+          url: "https://pt.wikipedia.org/wiki/Via_XVI"
+          type: reference
+          accessed: 2026-10-29
+        - title: "Rail Ninja: Braga–Lisboa (tempos de percurso)"
+          url: "https://rail.ninja/pt/route/braga-to-lisbon"
+          type: website
+          accessed: 2026-10-29
+    - id: esperanca-de-vida
+      then_big:
+        pt: "20–30 anos"
+        en: "20–30 years"
+        ru: "20–30 лет"
+      now_big:
+        pt: "mais de 80 anos"
+        en: "over 80 years"
+        ru: "больше 80 лет"
+      text:
+        pt: "No Império Romano a esperança de vida à nascença era de 20 a 30 anos, porque morriam muitas crianças. Quem chegava à idade adulta vivia bastante mais. Hoje, em Portugal, ultrapassa os 80 anos."
+        en: "In the Roman Empire, life expectancy at birth was 20 to 30 years, because many children died. Whoever reached adulthood lived considerably longer. In Portugal today it is over 80."
+        ru: "В Римской империи средняя продолжительность жизни при рождении была 20–30 лет, потому что умирало много детей. Кто доживал до взрослых лет, жил заметно дольше. Сегодня в Португалии она больше 80 лет."
+      kind: estimate
+      sources:
+        - title: "B. W. Frier, «Demography», Cambridge Ancient History XI (2000), via Demography of the Roman Empire"
+          url: "https://en.wikipedia.org/wiki/Demography_of_the_Roman_Empire"
+          type: reference
+          accessed: 2026-10-29
+        - title: "INE, esperança de vida à nascença 2022–2024 (DN)"
+          url: "https://www.dn.pt/sociedade/esperança-de-vida-à-nascença-aumenta-para-8149-anos-em-portugal"
+          type: press
+          accessed: 2026-10-29
+    - id: peninsula-iberica
+      then_big:
+        pt: "5–7,5 milhões"
+        en: "5–7.5 million"
+        ru: "5–7,5 млн"
+      now_big:
+        pt: "cerca de 61 milhões"
+        en: "about 61 million"
+        ru: "около 61 млн"
+      text:
+        pt: "Na Península Ibérica viviam, no tempo de Roma, entre 5 e 7,5 milhões de pessoas, segundo as estimativas. Hoje Espanha e Portugal juntas, com as ilhas, têm cerca de 61 milhões. Portugal ainda não existia."
+        en: "Under Rome, an estimated 5 to 7.5 million people lived on the Iberian Peninsula. Spain and Portugal together, islands included, now have about 61 million. Portugal did not exist yet."
+        ru: "На Пиренейском полуострове в римское время жили, по оценке, от 5 до 7,5 миллиона человек. Сегодня Испания и Португалия вместе, считая острова, насчитывают около 61 миллиона. Самой Португалии тогда ещё не было."
+      kind: estimate
+      sources:
+        - title: "B. W. Frier, «Demography», Cambridge Ancient History XI (2000), via Demography of the Roman Empire"
+          url: "https://en.wikipedia.org/wiki/Demography_of_the_Roman_Empire"
+          type: reference
+          accessed: 2026-10-29
+        - title: "INE España, Estadística Continua de Población, 1T 2026"
+          url: "https://ine.es/dyngs/Prensa/ECP1T26.htm"
+          type: institutional
+          accessed: 2026-10-29
+        - title: "INE, população residente a 31 de dezembro de 2025"
+          url: "https://www.ine.pt/ine_novidades/semin/INEWS66/index.html"
+          type: institutional
+          accessed: 2026-10-29
 - id: suevos-visigodos-e-mouros
   slug:
     pt: suevos-visigodos-e-mouros
@@ -282,6 +516,82 @@
     ru: "Молодой король Себастьян сгинул в битве в Марокко, и на 60 лет Португалия досталась
       испанским королям. В 1640 году заговорщики вернули стране независимость. Вскоре в Бразилии
       нашли золото, и Лиссабон заблестел: дворец в Мафре, акведук, церкви в позолоченной резьбе."
+  then_now:
+    - id: bombaim-1661
+      then_big:
+        pt: "10 mil"
+        en: "10,000"
+        ru: "10 тыс."
+      now_big:
+        pt: "12,4 milhões"
+        en: "12.4 million"
+        ru: "12,4 млн"
+      text:
+        pt: "Quando, em 1661, as ilhas de Bombaim foram dadas como dote de Catarina de Bragança, tinham cerca de 10 mil habitantes. Em Mumbai, o censo de 2011 contou 12,4 milhões: mais do que Portugal inteiro hoje."
+        en: "When the islands of Bombay went to England in 1661 as the dowry of Catherine of Braganza, they had about 10,000 inhabitants. Mumbai’s 2011 census counted 12.4 million: more than all of Portugal today."
+        ru: "Когда в 1661 году Бомбейские острова ушли в приданое Катарины Брагансской, там жило около 10 тысяч человек. Перепись 2011 года насчитала в Мумбаи 12,4 миллиона: больше, чем сегодня во всей Португалии."
+      kind: estimate
+      story: catarina-de-braganca
+      sources:
+        - title: "Encyclopædia Britannica, 11.ª ed. (1911), Bombay City"
+          url: "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Bombay_City"
+          type: reference
+          accessed: 2026-10-29
+        - title: "Census of India 2011: Greater Mumbai (citypopulation.de)"
+          url: "https://citypopulation.de/en/india/maharashtra/_/2742201000__mumbai"
+          type: reference
+          accessed: 2026-10-29
+        - title: "INE, população residente a 31 de dezembro de 2025"
+          url: "https://www.ine.pt/ine_novidades/semin/INEWS66/index.html"
+          type: institutional
+          accessed: 2026-10-29
+    - id: cha-pepys
+      then_big:
+        pt: "nunca bebera"
+        en: "never drunk"
+        ru: "никогда не пил"
+      now_big:
+        pt: "100 milhões de chávenas por dia"
+        en: "100 million cups a day"
+        ru: "100 млн чашек в день"
+      text:
+        pt: "Em 1660, Samuel Pepys escreveu no diário que pediu uma chávena de chá, coisa que nunca tinha bebido. Hoje os britânicos bebem mais de 100 milhões de chávenas por dia, segundo a associação do chá do Reino Unido, em 2023."
+        en: "In 1660 Samuel Pepys wrote in his diary that he sent for a cup of tea, never drunk before. Britons now drink more than 100 million cups a day, the UK Tea & Infusions Association said in 2023."
+        ru: "В 1660 году Сэмюэл Пипс записал в дневнике, что велел принести чашку чая, которого никогда прежде не пробовал. Сегодня британцы выпивают больше 100 миллионов чашек в день, сообщила ассоциация чая в 2023 году."
+      kind: known
+      story: catarina-de-braganca
+      sources:
+        - title: "The Diary of Samuel Pepys, 25 September 1660"
+          url: "https://www.pepysdiary.com/diary/1660/09/25/"
+          type: reference
+          accessed: 2026-10-29
+        - title: "UK Tea & Infusions Association, 22 August 2023"
+          url: "https://tea.co.uk/news/article/tea-loved-by-brits-and-5-billion-cups-of-tea-are-drunk-globally-each-day"
+          type: institutional
+          accessed: 2026-10-29
+    - id: ouro-do-brasil
+      then_big:
+        pt: "557 t"
+        en: "557 t"
+        ru: "557 т"
+      now_big:
+        pt: "383 t"
+        en: "383 t"
+        ru: "383 т"
+      text:
+        pt: "Entre 1720 e 1807 chegaram ao porto de Lisboa 557 toneladas de ouro do Brasil. É mais do que as 382,7 toneladas que o Banco de Portugal guarda hoje nas suas reservas."
+        en: "Between 1720 and 1807, 557 tons of Brazilian gold reached the port of Lisbon. That is more than the 382.7 tons the Bank of Portugal holds in its reserves today."
+        ru: "С 1720 по 1807 год в порт Лиссабона пришло 557 тонн бразильского золота. Это больше, чем 382,7 тонны, которые Банк Португалии хранит в резервах сегодня."
+      kind: estimate
+      sources:
+        - title: "F. C. Lima, R. M. de Sousa, América Latina en la historia económica 24(1), 2017"
+          url: "https://scielo.org.mx/article_plus.php?lng=es&pid=S1405-22532017000100037&tlng=en"
+          type: academic
+          accessed: 2026-10-29
+        - title: "Reservas de ouro do Banco de Portugal, 2025 (Forbes Portugal)"
+          url: "https://www.forbespt.com/reservas-de-ouro-do-banco-de-portugal-valorizaram-se-46-em-2025/"
+          type: press
+          accessed: 2026-10-29
 - id: monarquia-e-republica
   slug:
     pt: monarquia-e-republica
@@ -324,6 +634,80 @@
       двух братьев, железные дороги и британский ультиматум. В 1908 году на
       главной площади Лиссабона застрелили короля, а через два года страна стала
       республикой. Но за 16 лет республика сменила больше 40 правительств."
+  then_now:
+    - id: travessia-1922
+      then_big:
+        pt: "79 dias"
+        en: "79 days"
+        ru: "79 дней"
+      now_big:
+        pt: "cerca de 10 h"
+        en: "about 10 h"
+        ru: "около 10 ч"
+      text:
+        pt: "Em 1922, Gago Coutinho e Sacadura Cabral levaram 79 dias a chegar ao Rio, com 62 h 26 min de voo. Hoje o voo dura cerca de 10 horas: nesses 79 dias dava para lá ir cerca de {n} vezes."
+        en: "In 1922 Gago Coutinho and Sacadura Cabral took 79 days to reach Rio, with 62 h 26 min in the air. A direct flight now takes about 10 hours: in those 79 days you could fly there about {n} times."
+        ru: "В 1922 году Гагу Коутинью и Сакадура Кабрал добирались до Рио 79 дней, из них 62 часа 26 минут в воздухе. Прямой рейс сегодня идёт около 10 часов: за эти 79 дней можно слетать в Рио около {n} раз."
+      kind: known
+      story: travessia-1922
+      then_hours: 1896
+      now_hours: 9.6
+      sources:
+        - title: "Museu de Marinha: centenário da travessia aérea do Atlântico Sul"
+          url: "https://cultura.marinha.pt/en/museumarinha_web/exposicoes_web/exposicoes_online/Pages/centenario-travessia-aerea-atlantico-sul.aspx"
+          type: institutional
+          accessed: 2026-10-29
+        - title: "Omio: voos Lisboa–Rio de Janeiro"
+          url: "https://www.omio.com.br/voos/rio-de-janeiro/lisboa-r3eqz"
+          type: website
+          accessed: 2026-10-29
+    - id: analfabetismo
+      then_big:
+        pt: "7 em cada 10"
+        en: "7 in 10"
+        ru: "7 из 10"
+      now_big:
+        pt: "3 em cada 100"
+        en: "3 in 100"
+        ru: "3 из 100"
+      text:
+        pt: "Em 1911 não sabiam ler sete em cada dez portugueses com mais de sete anos. Nos Censos 2021 são cerca de três em cada cem; a base é diferente: então desde os sete anos, agora desde os dez."
+        en: "In 1911 seven in ten Portuguese over the age of seven could not read. In the 2021 census it is about three in a hundred; the base differs: then from age seven, now from age ten."
+        ru: "В 1911 году не умели читать семеро из десяти португальцев старше семи лет. По переписи 2021 года неграмотных около трёх из ста; база подсчёта чуть отличается: тогда от семи лет, теперь от десяти."
+      kind: known
+      sources:
+        - title: "Educação de adultos (Universidade de Évora): analfabetismo em 1911"
+          url: "https://dspace.uevora.pt/rdpc/bitstream/10174/8603/1/51.CL_%20EdAlt2013_LC.pdf"
+          type: academic
+          accessed: 2026-10-29
+        - title: "INE: taxa de analfabetismo, Censos 2021"
+          url: "https://www.ine.pt/scripts/esc2023/5.SUPERMAT.pdf"
+          type: institutional
+          accessed: 2026-10-29
+    - id: pasteis-de-belem
+      then_big:
+        pt: "1837"
+        en: "1837"
+        ru: "1837"
+      now_big:
+        pt: "20 mil por dia"
+        en: "20,000 a day"
+        ru: "20 тыс. в день"
+      text:
+        pt: "Desde 1837 os Pastéis de Belém fazem-se segundo uma receita secreta, nas instalações ao lado de uma refinaria de açúcar. Hoje saem, em média, cerca de 20 mil por dia."
+        en: "Since 1837 the Pastéis de Belém have been baked to a secret recipe in buildings next to a sugar refinery. Today the shop turns out about 20,000 a day on average."
+        ru: "С 1837 года «Пастейш де Белен» пекут по секретному рецепту в постройках рядом с сахарным заводом. Сегодня их выпекают в среднем около 20 тысяч в день."
+      kind: estimate
+      story: pasteis-de-belem
+      sources:
+        - title: "Pastéis de Belém: história"
+          url: "https://pasteisdebelem.pt/en/history/"
+          type: institutional
+          accessed: 2026-10-29
+        - title: "Forbes Portugal: Um segredo muito guloso"
+          url: "https://www.forbespt.com/um-segredo-muito-guloso"
+          type: press
+          accessed: 2026-10-29
 - id: atualidade-ue-e-emigracao
   slug:
     pt: atualidade-ue-e-emigracao

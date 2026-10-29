@@ -17,7 +17,9 @@ const lines: string[] = [];
 const perUnit = new Map<string, number>();
 for (const it of collectTexts()) {
   const fields = fieldsOf(it.unit);
-  if (!fields || !fields.includes(it.field)) continue;
+  // The sentence of a "Then and now" card of an epoch is prose like the introduction: it is read too.
+  const prose = fields?.includes(it.field) || (it.unit.startsWith('epoch/') && /^then_now\[\d+\]\.text$/.test(it.field));
+  if (!fields || !prose) continue;
   if (only && it.unit !== only) continue;
   for (const w of analyze(it.lang, it.text, { unit: it.unit, field: it.field })) {
     lines.push(`- ${it.unit} ${it.lang} [${it.field}] ${w.kind}: «${w.fragment}»: ${w.hint}`);
