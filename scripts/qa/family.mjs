@@ -17,7 +17,8 @@ const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
 const MODES = ['off', 'all', '12'];
 const EPOCHS = world.readyEpochs.map((m) => m.id);
-const THREADS = threadsData.map((t) => t.id);
+// Only the threads that have a page: a thread without a published card (Engenho, until its first card) has none (MIN_CARDS_PER_THREAD in src/lib/threads.ts).
+const THREADS = threadsData.filter((t) => world.inThread(t.id).length > 0).map((t) => t.id);
 const epochsData = epochs;
 const events = world.published;
 // The epoch whose pages are tried most (the last ready one), a thread that has cards in it, and a heavy-topic card.
