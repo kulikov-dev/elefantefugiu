@@ -110,9 +110,22 @@ image:
   license: AI-generated
   ai: true
   focus: "55% 15%"
+detail_image:
+  file: elevador-santa-justa-detalhe.webp
+  alt:
+    pt: "Desenho técnico a sépia do elevador em vista lateral e vista de frente, com a torre de ferro, o passadiço e os edifícios vizinhos, e uma assinatura manuscrita por baixo."
+    en: "Sepia technical drawing of the lift in side view and front view, with the iron tower, the walkway and the neighbouring buildings, and a handwritten signature below."
+    ru: "Технический рисунок лифта в сепии, вид сбоку и спереди: железная башня, мостик и соседние дома, а внизу рукописная подпись."
+  caption:
+    pt: "Projeto do Elevador de Santa Justa, que no desenho se chama «ascensor Ouro-Carmo». Raoul Mesnier du Ponsard. Wikimedia Commons, domínio público."
+    en: "Design of the Santa Justa Lift, called the “ascensor Ouro-Carmo” on the drawing. Raoul Mesnier du Ponsard. Wikimedia Commons, public domain."
+    ru: "Проект лифта Санта-Жушта, на чертеже он назван «ascensor Ouro-Carmo». Рауль Мениер дю Понсар. Wikimedia Commons, общественное достояние."
+  author: "Raoul Mesnier du Ponsard"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Projeto_do_elevador_de_Sta_Justa.jpg"
 related:
   - elevador-bom-jesus
-status: draft
-published: '2026-10-29'
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

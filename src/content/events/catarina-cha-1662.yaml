@@ -125,9 +125,25 @@ image:
   license: AI-generated
   ai: true
   focus: "40% 55%"
+detail_image:
+  file: catarina-cha-1662-detalhe.webp
+  alt:
+    pt: "Pintura de dois grandes veleiros com bandeiras no Tejo, um deles de três mastros, junto a uma margem com um edifício de cúpula, sob um céu de nuvens rosadas."
+    en: "Painting of two large flagged sailing ships on the Tagus, one with three masts, near a shore with a domed building, under a sky of pink clouds."
+    ru: "Картина: два больших парусника с флагами на Тежу, один трёхмачтовый, у берега со зданием под куполом, под небом с розовыми облаками."
+  caption:
+    pt: "O embarque de Catarina de Bragança, Lisboa, 1662. Cópia do início do século XVIII de um original perdido de Dirk Stoop. Wikimedia Commons, domínio público."
+    en: "The embarkation of Catherine of Braganza, Lisbon, 1662. An early 18th-century copy of a lost original by Dirk Stoop. Wikimedia Commons, public domain."
+    ru: "Отплытие Катарины Брагансской, Лиссабон, 1662. Копия начала XVIII века с утраченного оригинала Дирка Стопа. Wikimedia Commons, общественное достояние."
+  author:
+    pt: "Autor desconhecido (cópia de um original perdido de Dirk Stoop)"
+    en: "Unknown author (copy of a lost original by Dirk Stoop)"
+    ru: "Автор неизвестен (копия утраченного оригинала Дирка Стопа)"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:The_Embarkation_of_Catherine_of_Braganza,_Lisbon,_1662_(early_18th-century_copy_of_a_lost_original_by_Dirk_Stoop).png"
 related:
   - restauracao-1640
-status: draft
-published: '2026-10-29'
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

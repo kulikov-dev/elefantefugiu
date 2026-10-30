@@ -133,7 +133,20 @@ image:
   license: AI-generated
   ai: true
   focus: "50% 35%"
-status: draft
-published: '2026-10-29'
+detail_image:
+  file: carros-de-cesto-monte-detalhe.webp
+  alt:
+    pt: "Gravura de uma senhora e um senhor de chapéu sentados num carro de cesto, empurrado por dois homens de branco e chapéu de palha numa calçada em descida."
+    en: "Engraving of a lady and a gentleman in hats sitting in a wicker sled pushed by two men in white and straw hats down a cobbled slope."
+    ru: "Гравюра: дама и господин в шляпах сидят в плетёных санях, которые толкают двое мужчин в белом и соломенных шляпах по мощёному спуску."
+  caption:
+    pt: "Carro de cesto do Monte com turistas a descer para o Funchal. Godefroy Durand, gravura publicada em The Graphic, 28 de janeiro de 1893. Wikimedia Commons, domínio público."
+    en: "A wicker sled of Monte taking tourists down to Funchal. Godefroy Durand, engraving published in The Graphic, January 28, 1893. Wikimedia Commons, public domain."
+    ru: "Плетёные сани из Монте везут туристов в Фуншал. Годфруа Дюран, гравюра в The Graphic, 28 января 1893. Wikimedia Commons, общественное достояние."
+  author: "Godefroy Durand"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Carro_de_cesto_do_Monte,_gravura_(1893).jpg"
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

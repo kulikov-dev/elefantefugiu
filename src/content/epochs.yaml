@@ -328,7 +328,7 @@
     accent: "#7a2e1c"
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
-  mvp: false
+  mvp: true
   fallback_image:
     file: epoca-lusitania-e-roma.webp
     alt:
@@ -342,7 +342,7 @@
     author: Gemini (AI)
     license: AI-generated
     ai: true
-  placeholder: [theme]
+  placeholder: []
   intro:
     pt: "Durante oito anos as legiões romanas não conseguiram vencer o pastor Viriato, e Roma acabou por subornar os seus companheiros. Depois chegaram as estradas, as pontes e o latim: a ponte do tempo de Trajano em Chaves ainda hoje se atravessa a pé. E na praça de Murça continua uma porca de granito esculpida antes da chegada dos romanos."
     en: "For eight years Roman legions couldn’t beat a shepherd named Viriathus, so Rome simply bribed his friends. Then came roads, bridges, and Latin: people still walk across the bridge built under Trajan in Chaves. And in the square of Murça stands a granite pig carved before the Romans ever arrived."
@@ -507,7 +507,7 @@
     accent: "#6e1f3a"
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
-  mvp: false
+  mvp: true
   fallback_image:
     file: epoca-uniao-restauracao-e-ouro-do-brasil.webp
     alt:
@@ -521,7 +521,7 @@
     author: Gemini (AI)
     license: AI-generated
     ai: true
-  placeholder: [theme]
+  placeholder: []
   intro:
     pt: "O jovem rei D. Sebastião desapareceu numa batalha em Marrocos, Portugal passou 60 anos sob reis espanhóis, e pelo país andavam impostores que se diziam o rei regressado. Em 1640, um grupo de conjurados devolveu a independência numa só manhã. Depois chegou o ouro do Brasil, e D. João V encomendou sinos na Flandres e uma capela inteira em Roma."
     en: "Young King Sebastian vanished in battle in Morocco, Portugal spent 60 years under Spanish kings, and impostors roamed the country claiming to be the returning king. In 1640 a band of conspirators won back independence in a single morning. Then Brazilian gold arrived, and King John V ordered bells from Flanders and an entire chapel from Rome."
@@ -628,7 +628,7 @@
     accent: "#2e4d66"
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
-  mvp: false
+  mvp: true
   fallback_image:
     file: epoca-monarquia-e-republica.webp
     alt:
@@ -642,7 +642,7 @@
     author: Gemini (AI)
     license: AI-generated
     ai: true
-  placeholder: [theme]
+  placeholder: []
   intro:
     pt: "Durante um século Portugal discutiu o que queria ser: constituição, uma guerra civil entre dois irmãos príncipes e, em 1910, a República. E enquanto os políticos discutiam, o país construía pontes de ferro, elevadores e funiculares."
     en: "For a whole century Portugal argued about what it wanted to be: a constitution, a civil war between two royal brothers, and in 1910, a republic. And while politicians argued, the country built iron bridges, lifts, and funiculars."

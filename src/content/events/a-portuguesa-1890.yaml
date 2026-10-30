@@ -119,7 +119,20 @@ image:
   license: AI-generated
   ai: true
   focus: "45% 55%"
-status: draft
-published: '2026-10-29'
+detail_image:
+  file: a-portuguesa-1890-detalhe.webp
+  alt:
+    pt: "Capa da partitura de «A Portuguesa»: o título em letras douradas na diagonal, sobre uma metade azul-escura e outra cor de papel."
+    en: "Cover of the sheet music of “A Portuguesa”: the title in gold letters set diagonally, over a dark blue half and a paper-coloured half."
+    ru: "Обложка нот «А Португеза»: название золотыми буквами по диагонали на тёмно-синей и бумажной половинах."
+  caption:
+    pt: "Capa da partitura original de «A Portuguesa». Alfredo Keil, 1890. Biblioteca Nacional de Portugal, via Wikimedia Commons, domínio público."
+    en: "Cover of the original sheet music of “A Portuguesa.” Alfredo Keil, 1890. National Library of Portugal, via Wikimedia Commons, public domain."
+    ru: "Обложка оригинальных нот «А Португеза». Алфреду Кейл, 1890. Национальная библиотека Португалии, через Wikimedia Commons, общественное достояние."
+  author: "Alfredo Keil"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:A_Portuguesa_-_capa.jpg"
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

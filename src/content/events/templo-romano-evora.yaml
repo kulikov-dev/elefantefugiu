@@ -133,7 +133,23 @@ image:
   license: AI-generated
   ai: true
   focus: "50% 35%"
-status: draft
-published: '2026-10-29'
+detail_image:
+  file: templo-romano-evora-detalhe.webp
+  alt:
+    pt: "Gravura a preto e branco do templo romano de Évora, com colunas coríntias e um coroamento de ameias medievais, pessoas junto às colunas e um edifício ao fundo."
+    en: "Black-and-white engraving of the Roman temple of Évora, with Corinthian columns and a medieval battlemented top, people beside the columns and a building behind."
+    ru: "Чёрно-белая гравюра римского храма в Эворе: коринфские колонны и средневековый зубчатый венец, люди у колонн, позади здание."
+  caption:
+    pt: "O templo romano de Évora com as ameias medievais, antes das obras de 1871. Gravura em madeira de The Penny Magazine, 6 de junho de 1835. Wikimedia Commons, domínio público."
+    en: "The Roman temple of Évora with its medieval battlements, before the works of 1871. Woodcut from The Penny Magazine, June 6, 1835. Wikimedia Commons, public domain."
+    ru: "Римский храм в Эворе со средневековыми зубцами, до работ 1871 года. Ксилография из The Penny Magazine, 6 июня 1835. Wikimedia Commons, общественное достояние."
+  author:
+    pt: "Autor desconhecido"
+    en: "Unknown author"
+    ru: "Автор неизвестен"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Penny_Magazine_1835_217_Temple_of_Diana_at_Evora.jpg"
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

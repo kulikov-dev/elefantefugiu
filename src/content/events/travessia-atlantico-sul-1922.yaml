@@ -123,7 +123,23 @@ image:
   license: AI-generated
   ai: true
   focus: "40% 55%"
-status: draft
-published: '2026-10-29'
+detail_image:
+  file: travessia-atlantico-sul-1922-detalhe.webp
+  alt:
+    pt: "Postal com os retratos de dois aviadores de capacete e óculos dentro de uma cruz vermelha, um hidroavião e uma torre à beira-mar por baixo e a legenda «Aos Heroicos Aviadores»."
+    en: "Postcard with portraits of two aviators in helmets and goggles inside a red cross, a seaplane and a tower by the sea below and the words “Aos Heroicos Aviadores.”"
+    ru: "Открытка с портретами двух лётчиков в шлемах и очках внутри красного креста, гидропланом и башней на берегу внизу и надписью «Героическим авиаторам»."
+  caption:
+    pt: "Postal «Aos Heroicos Aviadores. Homenagem dos Portugueses», com Sacadura Cabral e Gago Coutinho, 1922. Wikimedia Commons, domínio público."
+    en: "Postcard “Aos Heroicos Aviadores. Homenagem dos Portugueses” (To the Heroic Aviators. Homage of the Portuguese), showing Sacadura Cabral and Gago Coutinho, 1922. Wikimedia Commons, public domain."
+    ru: "Открытка «Героическим авиаторам. Дань португальцев» с Сакадурой Кабралом и Гагу Коутинью, 1922. Wikimedia Commons, общественное достояние."
+  author:
+    pt: "Autor desconhecido"
+    en: "Unknown author"
+    ru: "Автор неизвестен"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Gago_Coutinho_e_Sacadura_Cabral,_primeira_travessia_a%C3%A9rea_do_Atl%C3%A2ntico_Sul._1922.jpg"
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

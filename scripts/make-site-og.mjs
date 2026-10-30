@@ -1,4 +1,4 @@
-// Makes the preview pictures (PNG, 1200x630) of the pages that have no picture of their own: the home page, the five threads
+// Makes the preview pictures (PNG, 1200x630) of the pages that have no picture of their own: the home page, the threads
 // and every other page of the site. No text (the title and the description come from the page; a picture with text would have
 // to exist in three languages) and no elephant on the threads and the plain pages: a thread holds heavy topics.
 // Made from the azulejo patterns of src/assets/azulejo and the mascot of public/mascot. Run by hand when something changes,

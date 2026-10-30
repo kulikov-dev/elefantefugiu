@@ -112,9 +112,37 @@ sources:
     url: https://www.infopedia.pt/artigos/$igreja-de-s.-francisco-(porto)
     type: reference
     accessed: '2026-10-29'
+image:
+  file: ouro-sao-francisco-porto.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa igreja, três douradores num andaime aplicam folhas de ouro a um retábulo de talha com colunas de videira, enquanto dois frades de tigela na mão olham de boca aberta."
+    en: "Blue-and-white azulejo-style illustration: in a church, three gilders on a scaffold lay gold leaf on a carved altarpiece with vine-wrapped columns while two friars holding bowls look on with open mouths."
+    ru: "Иллюстрация в духе сине-белого азулежу: в церкви трое позолотчиков на лесах накладывают золотые листы на резной алтарь с колоннами в виноградных лозах, а два монаха с мисками в руках смотрят с открытыми ртами."
+  caption:
+    pt: "Douradores a trabalhar na Igreja de São Francisco, no Porto. Ilustração em estilo azulejo, criada por IA."
+    en: "Gilders at work in the Church of São Francisco in Porto. Azulejo-style illustration, created by AI."
+    ru: "Позолотчики за работой в церкви Сан-Франсишку в Порту. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+detail_image:
+  file: ouro-sao-francisco-porto-detalhe.webp
+  alt:
+    pt: "Interior da igreja visto da nave: o altar-mor dourado, com colunas torcidas, estátuas de santos, um crucifixo na janela ao centro e o teto abobadado coberto de talha."
+    en: "Interior of the church seen from the nave: the gilded main altar with twisted columns, statues of saints, a crucifix in the window at the center and the vaulted ceiling covered in carving."
+    ru: "Интерьер церкви, вид из нефа: позолоченный главный алтарь с витыми колоннами, статуи святых, распятие в окне посередине и сводчатый потолок в резьбе."
+  caption:
+    pt: "Altar-mor da Igreja de São Francisco, no Porto. Fotografia de SamFa from Paris, France, 2014. Wikimedia Commons, CC BY 2.0."
+    en: "The main altar of the Church of São Francisco in Porto. Photograph by SamFa from Paris, France, 2014. Wikimedia Commons, CC BY 2.0."
+    ru: "Главный алтарь церкви Сан-Франсишку в Порту. Фото: SamFa from Paris, France, 2014. Wikimedia Commons, CC BY 2.0."
+  author: "SamFa from Paris, France"
+  license: "CC BY 2.0"
+  license_url: "https://creativecommons.org/licenses/by/2.0/"
+  source_url: "https://commons.wikimedia.org/wiki/File:Church_of_S%C3%A3o_Francisco_(15213569634).jpg"
 related:
   - mafra-sinos-1717
-status: draft
-published: '2026-10-29'
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

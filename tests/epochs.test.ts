@@ -70,7 +70,7 @@ test('threadSections: grouped by epoch order, empty epochs left out, counts matc
   assert.equal(sea[0]!.events.length, threadCountsInEpoch({ id: 'e1' }, events).get('sea'));
 });
 
-// ---- the real epochs.yaml: nine epochs, MVP ones are 4, 6 and 8 ----
+// ---- the real epochs.yaml: nine epochs, the open (MVP) ones are 1, 4, 5, 6, 7 and 8 ----
 import { readFileSync } from 'node:fs';
 import { parse } from 'yaml';
 import { epochSchema } from '../src/data/schemas';
@@ -81,9 +81,9 @@ const realEpochs = (parse(readFileSync(new URL('../src/content/epochs.yaml', imp
   localize(epochSchema.parse(e), true),
 );
 
-test('epochs.yaml: orders 1-9 once each, MVP epochs are exactly 4, 6 and 8', () => {
+test('epochs.yaml: orders 1-9 once each, MVP epochs are exactly 1, 4, 5, 6, 7 and 8', () => {
   assert.deepEqual(realEpochs.map((e) => e.order).sort((a, b) => a - b), [1, 2, 3, 4, 5, 6, 7, 8, 9]);
-  assert.deepEqual(realEpochs.filter((e) => e.mvp).map((e) => e.order).sort((a, b) => a - b), [4, 6, 8]);
+  assert.deepEqual(realEpochs.filter((e) => e.mvp).map((e) => e.order).sort((a, b) => a - b), [1, 4, 5, 6, 7, 8]);
 });
 
 test('epochs.yaml: epochs outside the MVP are real data with a years label in both languages', () => {

@@ -125,7 +125,20 @@ image:
   license: AI-generated
   ai: true
   focus: "50% 55%"
-status: draft
-published: '2026-10-29'
+detail_image:
+  file: restauracao-1640-detalhe.webp
+  alt:
+    pt: "Pintura histórica: D. João IV, de coroa e manto, assiste à aclamação, enquanto um fidalgo ergue o estandarte real diante da multidão que atira os chapéus ao ar."
+    en: "Historical painting: John IV, crowned and in a mantle, watches the acclamation while a nobleman raises the royal banner before a crowd tossing its hats in the air."
+    ru: "Историческая картина: Жуан IV в короне и мантии наблюдает за провозглашением, а дворянин поднимает королевское знамя перед толпой, подбрасывающей шляпы."
+  caption:
+    pt: "A Aclamação de D. João IV. Veloso Salgado, 1908. Wikimedia Commons, domínio público."
+    en: "The Acclamation of John IV. Veloso Salgado, 1908. Wikimedia Commons, public domain."
+    ru: "Провозглашение Жуана IV королём. Велозу Салгаду, 1908. Wikimedia Commons, общественное достояние."
+  author: "Veloso Salgado"
+  license: "Public domain"
+  source_url: "https://commons.wikimedia.org/wiki/File:Joao_IV_proclaimed_king.jpg"
+status: ready
+published: '2026-10-30'
 placeholder: false
 ru_ready: true

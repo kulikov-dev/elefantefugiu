@@ -410,7 +410,9 @@ describe('real events', () => {
     const frames = cards.filter((c) => c.importance === 3).length;
     expect(drawn(r)).toBe(Math.min(DEFAULT_LIMIT, cards.length));
     expect(r.markers.filter((m) => m.kind === 'frame')).toHaveLength(Math.min(DEFAULT_LIMIT, frames));
-    expect(r.inArea).toHaveLength(cards.length);
+    // The islands (Madeira, Azores) are outside the frame of the mainland: they have their own buttons.
+    const onMainland = cards.filter((c) => c.lat >= country.south && c.lat <= country.north && c.lon >= country.west && c.lon <= country.east);
+    expect(r.inArea).toHaveLength(onMainland.length);
   });
 
   it('every real card is reachable', () => {
