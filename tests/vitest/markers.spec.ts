@@ -4,8 +4,10 @@ import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
 import {
   boundsAround,
+  declutterMarkers,
   DEFAULT_LIMIT,
   inBounds,
+  MARKER_BOX,
   selectMarkers,
   SHOW_MORE_STEP,
   type Bounds,
@@ -467,5 +469,79 @@ describe('markers use the bridge coordinates', () => {
     const many = Array.from({ length: 30 }, (_, i) => ev(`e${i}`, [-30 + i, 100 + i], [37 + (i % 6) * 0.9, -9 + (i % 5) * 0.55]));
     const r = pick(many);
     expect(r.markers.length + r.clusters.length).toBeLessThanOrEqual(DEFAULT_LIMIT);
+  });
+});
+
+// ---- markers that would overlap on the screen -----------------------------------
+
+describe('declutterMarkers', () => {
+  // The "screen" of these tests is the plane itself: lon is x and lat is y, in px.
+  const project = (p: { lat: number; lon: number }) => ({ x: p.lon, y: p.lat });
+  const single = (id: string, x: number, y: number, kind: 'frame' | 'story' = 'story') => ({ id, lat: y, lon: x, kind });
+  const result = (markers: ReturnType<typeof single>[], clusters: MarkerResult['clusters'] = []): MarkerResult => ({ markers, clusters, inArea: markers.map((m) => m.id), canShowMore: false });
+
+  it('leaves markers alone when their boxes do not touch', () => {
+    const r = declutterMarkers(result([single('a', 0, 0), single('b', MARKER_BOX.story, 0), single('c', 100, 100)]), project);
+    expect(r.markers.map((m) => m.id)).toEqual(['a', 'b', 'c']);
+    expect(r.clusters).toEqual([]);
+  });
+
+  it('joins two markers whose centres are closer than the mean of their boxes into a cluster of two', () => {
+    const r = declutterMarkers(result([single('a', 0, 0), single('b', MARKER_BOX.story - 1, 0), single('far', 200, 0)]), project);
+    expect(r.markers.map((m) => m.id)).toEqual(['far']);
+    expect(r.clusters).toHaveLength(1);
+    expect(r.clusters[0]).toMatchObject({ id: 'cluster:a+b', count: 2, ids: ['a', 'b'] });
+  });
+
+  it('uses the bigger box of a frame marker: a frame and a story 25 px apart overlap, 27 px apart do not', () => {
+    expect(declutterMarkers(result([single('f', 0, 0, 'frame'), single('s', 25, 0)]), project).clusters).toHaveLength(1);
+    expect(declutterMarkers(result([single('f', 0, 0, 'frame'), single('s', 27, 0)]), project).clusters).toHaveLength(0);
+  });
+
+  it('joins a chain: A touches B and B touches C, so the three are one cluster at the middle of the three', () => {
+    const r = declutterMarkers(result([single('a', 0, 0), single('b', 20, 0), single('c', 40, 0)]), project);
+    expect(r.markers).toEqual([]);
+    expect(r.clusters).toHaveLength(1);
+    expect(r.clusters[0]).toMatchObject({ count: 3, ids: ['a', 'b', 'c'], lat: 0, lon: 20 });
+  });
+
+  it('adds up the counts when a single joins a cluster, and keeps every card once', () => {
+    const cluster = { id: 'cluster:x+y', count: 2, lat: 0, lon: 0, ids: ['x', 'y'] };
+    const r = declutterMarkers(result([single('a', 10, 0)], [cluster]), project);
+    expect(r.clusters).toHaveLength(1);
+    expect(r.clusters[0]).toMatchObject({ count: 3, ids: ['a', 'x', 'y'] });
+  });
+
+  it('keeps the card named in `keep` (the selected one) single, whatever is around it', () => {
+    const r = declutterMarkers(result([single('sel', 0, 0), single('b', 5, 0)]), project, { keep: 'sel' });
+    expect(r.markers.map((m) => m.id)).toEqual(['b', 'sel']);
+    expect(r.clusters).toEqual([]);
+  });
+
+  it('changes nothing else: the area list and "Show more" stay as the selection made them', () => {
+    const input = { ...result([single('a', 0, 0), single('b', 1, 0)]), canShowMore: true };
+    const r = declutterMarkers(input, project);
+    expect(r.inArea).toEqual(input.inArea);
+    expect(r.canShowMore).toBe(true);
+  });
+
+  it('on the real cards: after joining no two markers overlap, and every card is covered once, at every zoom of a Lisbon view', () => {
+    const cards = realCards();
+    const lisbon = { lat: 38.71, lon: -9.14 };
+    for (const px of [800, 4000, 20000, 100000]) {
+      // px per degree of longitude; latitude a bit more (Mercator), enough for a test of overlap
+      const proj = (p: { lat: number; lon: number }) => ({ x: (p.lon - lisbon.lon) * px, y: -(p.lat - lisbon.lat) * px * 1.27 });
+      const area: Bounds = { south: 38.5, north: 38.95, west: -9.5, east: -8.8 };
+      const sel = selectMarkers({ cards, bounds: area, center: lisbon });
+      const r = declutterMarkers(sel, proj);
+      const items = [...r.markers.map((m) => ({ ids: [m.id], p: proj(m), box: MARKER_BOX[m.kind] })), ...r.clusters.map((c) => ({ ids: c.ids, p: proj(c), box: MARKER_BOX.cluster }))];
+      for (let i = 0; i < items.length; i += 1) {
+        for (let j = i + 1; j < items.length; j += 1) {
+          const d = Math.hypot(items[i]!.p.x - items[j]!.p.x, items[i]!.p.y - items[j]!.p.y);
+          expect(d, `${px} px/deg: ${items[i]!.ids} and ${items[j]!.ids}`).toBeGreaterThanOrEqual((items[i]!.box + items[j]!.box) / 2);
+        }
+      }
+      expect(covered(r).sort()).toEqual(covered(sel).sort());
+    }
   });
 });

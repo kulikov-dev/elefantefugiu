@@ -10,7 +10,7 @@ import { distanceParts } from '../lib/distance';
 import { distanceKm } from '../lib/events';
 import { isVisibleInMode } from '../lib/family';
 import { isDarkTheme, tileUrlFor } from '../lib/tiles';
-import { boundsAround, inBounds, selectMarkers, type Bounds, type MapCard } from '../lib/markers';
+import { boundsAround, declutterMarkers, inBounds, selectMarkers, type Bounds, type MapCard } from '../lib/markers';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 interface CardInfo extends MapCard {
@@ -215,7 +215,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     const size = map.getSize();
     if (size.x === 0 || size.y === 0) return;
     const c = map.getCenter();
-    const result = selectMarkers({
+    const chosen = selectMarkers({
       cards,
       bounds: fromLatLngBounds(map.getBounds()),
       center: { lat: c.lat, lon: c.lng },
@@ -224,6 +224,10 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       more,
       pinned: state.id,
     });
+    // Markers that would sit on top of each other join into a cluster, so none hides another or takes its clicks (target size,
+    // WCAG 2.2). At the closest zoom nothing separates any more, so the markers stay as they are.
+    const result =
+      map.getZoom() >= BEHAVIOUR.maxZoom ? chosen : declutterMarkers(chosen, (p) => map.latLngToContainerPoint([p.lat, p.lon]), { keep: state.id });
 
     const wanted = new Set<string>();
     for (const m of result.markers) {

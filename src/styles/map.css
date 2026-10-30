@@ -352,6 +352,14 @@
   gap: var(--space-2);
 }
 
+/* On a phone the "overseas" plate fills the top edge up to the right corner, and "Show more" would sit on top of it (target size, WCAG 2.2): it
+   goes to a second row, under the plate, while the plate is there. */
+@media (max-width: 40rem) {
+  .map:has(.map__overseas:not([hidden])) .map__actions {
+    inset-block-start: calc(var(--space-3) + var(--touch-target) + var(--space-2));
+  }
+}
+
 .map__actions .button {
   min-height: var(--touch-target);
   padding-inline: var(--space-3);

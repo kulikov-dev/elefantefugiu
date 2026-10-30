@@ -205,7 +205,8 @@
   --epoch-scale-cell: 8.5rem;
   --map-marker-border: 2px;
   --map-marker-selected-scale: 1.25;
-  --map-hit-area: 0.5rem;
+  /* No invisible margin around a marker: the box is already the target (below), and a margin of a marker would take the clicks of its neighbour. */
+  --map-hit-area: 0;
   /* A marker the reader can press is at least this big (WCAG 2.2 target size, 24 px); the drawn shape may be smaller. */
   --map-target-min: 1.5rem;
   --epoch-map-width: clamp(20rem, 38%, 30rem);

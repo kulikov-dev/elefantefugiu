@@ -219,3 +219,94 @@ export function selectMarkers(input: MarkerInput): MarkerResult {
 export function boundsAround(p: LatLon, padding = 0.0005): Bounds {
   return { south: p.lat - padding, north: p.lat + padding, west: p.lon - padding, east: p.lon + padding };
 }
+
+/**
+ * The box of a marker as it is drawn, in px (map.css: --mk-box is the shape or the minimum target of 24 px, whichever is larger).
+ * Two markers whose centres are closer than the mean of their boxes overlap: the one on top hides the other and takes its clicks.
+ */
+export const MARKER_BOX = { frame: 28, story: 24, cluster: 36 } as const;
+
+export interface Point {
+  x: number;
+  y: number;
+}
+
+/**
+ * Markers that would overlap on the screen become one cluster (WCAG 2.2, target size: a target of 24 px that is partly hidden by
+ * another one cannot be pressed with certainty). `project` gives the screen position of a point at the current zoom. Chains join:
+ * if A touches B and B touches C, the three are one cluster. A cluster is the same thing the limit makes (src/lib/markers.ts
+ * `Cluster`): opening it zooms to its members, and they stand apart at the zoom that fits them. `keep` is a card that stays single
+ * (the selected one). Pure; the caller skips this at the closest zoom, where nothing can be separated any more.
+ */
+export function declutterMarkers(result: MarkerResult, project: (p: LatLon) => Point, options: { keep?: string | null } = {}): MarkerResult {
+  // A new cluster is larger than the markers it replaces and stands at a new place, so it may touch the next marker: repeat until nothing joins.
+  let current = result;
+  for (let round = 0; round < 12; round += 1) {
+    const next = joinOverlapping(current, project, options.keep ?? null);
+    if (next.markers.length + next.clusters.length === current.markers.length + current.clusters.length) return next;
+    current = next;
+  }
+  return current;
+}
+
+function joinOverlapping(result: MarkerResult, project: (p: LatLon) => Point, keep: string | null): MarkerResult {
+  interface Item {
+    ids: string[];
+    lat: number;
+    lon: number;
+    count: number;
+    box: number;
+    pos: Point;
+    locked: boolean;
+    single?: SingleMarker;
+    cluster?: Cluster;
+  }
+  const items: Item[] = [
+    ...result.markers.map((m): Item => ({ ids: [m.id], lat: m.lat, lon: m.lon, count: 1, box: MARKER_BOX[m.kind], pos: project(m), locked: m.id === keep, single: m })),
+    ...result.clusters.map((c): Item => ({ ids: c.ids, lat: c.lat, lon: c.lon, count: c.count, box: MARKER_BOX.cluster, pos: project(c), locked: false, cluster: c })),
+  ];
+  const parent = items.map((_, i) => i);
+  const find = (i: number): number => {
+    while (parent[i] !== i) {
+      parent[i] = parent[parent[i]!]!;
+      i = parent[i]!;
+    }
+    return i;
+  };
+  for (let i = 0; i < items.length; i += 1) {
+    for (let j = i + 1; j < items.length; j += 1) {
+      const a = items[i]!;
+      const b = items[j]!;
+      if (a.locked || b.locked) continue;
+      if (Math.hypot(a.pos.x - b.pos.x, a.pos.y - b.pos.y) < (a.box + b.box) / 2) parent[find(i)] = find(j);
+    }
+  }
+  const groups = new Map<number, Item[]>();
+  items.forEach((it, i) => {
+    const root = find(i);
+    groups.set(root, [...(groups.get(root) ?? []), it]);
+  });
+  const markers: SingleMarker[] = [];
+  const clusters: Cluster[] = [];
+  for (const g of groups.values()) {
+    if (g.length === 1) {
+      const only = g[0]!;
+      if (only.single) markers.push(only.single);
+      else clusters.push(only.cluster!);
+      continue;
+    }
+    const ids = g.flatMap((x) => x.ids).sort();
+    const count = g.reduce((n, x) => n + x.count, 0);
+    clusters.push({
+      id: `cluster:${ids.join('+')}`,
+      count,
+      lat: g.reduce((sum, x) => sum + x.lat * x.count, 0) / count,
+      lon: g.reduce((sum, x) => sum + x.lon * x.count, 0) / count,
+      ids,
+    });
+  }
+  markers.sort(byId);
+  clusters.sort(byId);
+  return { ...result, markers, clusters };
+}
+
