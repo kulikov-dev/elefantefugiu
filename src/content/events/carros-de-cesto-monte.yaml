@@ -119,6 +119,20 @@ sources:
       pt: sobre o túmulo de Carlos I
       en: on the tomb of Charles I
       ru: о могиле Карла I
+image:
+  file: carros-de-cesto-monte.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa rua de calçada inclinada, dois homens de branco e chapéu de palha empurram um carro de cesto onde seguem um senhor de chapéu e uma senhora; ao fundo, uma igreja de duas torres."
+    en: "Blue-and-white azulejo-style illustration: on a steep cobbled street, two men in white and straw hats push a wicker sled carrying a man in a hat and a woman; a twin-towered church stands at the top."
+    ru: "Иллюстрация в духе сине-белого азулежу: на крутой мощёной улице двое мужчин в белом и соломенных шляпах толкают плетёные сани, в которых едут мужчина в шляпе и женщина; наверху церковь с двумя башнями."
+  caption:
+    pt: "A descida de carro de cesto do Monte ao Funchal. Ilustração em estilo azulejo, criada por IA."
+    en: "A wicker sled ride from Monte down to Funchal. Azulejo-style illustration, created by AI."
+    ru: "Спуск в плетёных санях из Монте в Фуншал. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 35%"
 status: draft
 published: '2026-10-29'
 placeholder: false

@@ -105,6 +105,20 @@ sources:
     url: https://www.e-konomista.pt/hino-nacional-portuguesa/
     type: press
     accessed: '2026-10-29'
+image:
+  file: a-portuguesa-1890.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: diante de um edifício neoclássico com homens numa varanda, uma multidão atira os chapéus ao ar e uma banda de música toca, enquanto pombos voam sobre uma praça aberta para o rio."
+    en: "Blue-and-white azulejo-style illustration: in front of a neoclassical building with men on a balcony, a crowd throws its hats in the air and a brass band plays, while pigeons fly over a square open to the river."
+    ru: "Иллюстрация в духе сине-белого азулежу: перед зданием в духе классицизма, на балконе которого стоят мужчины, толпа подбрасывает шляпы, играет духовой оркестр, а над площадью, открытой к реке, летают голуби."
+  caption:
+    pt: "A proclamação da República nos Paços do Concelho, 5 de outubro de 1910. Ilustração em estilo azulejo, criada por IA."
+    en: "The republic proclaimed at Lisbon City Hall, October 5, 1910. Azulejo-style illustration, created by AI."
+    ru: "Провозглашение республики у ратуши Лиссабона, 5 октября 1910 года. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "45% 55%"
 status: draft
 published: '2026-10-29'
 placeholder: false

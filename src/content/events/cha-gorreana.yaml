@@ -108,6 +108,20 @@ sources:
     url: https://en.wikipedia.org/wiki/Gorreana
     type: reference
     accessed: '2026-10-29'
+image:
+  file: cha-gorreana.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa plantação à beira-mar, um mestre chinês de túnica mostra folhas de chá a duas mulheres de lenço, e outro enrola folhas numa esteira entre cestos; ao fundo, uma árvore sem folhas e uma fábrica com chaminé."
+    en: "Blue-and-white azulejo-style illustration: on a plantation by the sea, a Chinese master in a tunic shows tea leaves to two women in headscarves while another rolls leaves on a mat among baskets; a leafless tree and a factory with a chimney stand behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: на плантации у моря китайский мастер в длинной рубахе показывает чайные листья двум женщинам в платках, а другой скручивает листья на циновке среди корзин; позади безлистное дерево и фабрика с трубой."
+  caption:
+    pt: "Mestres chineses ensinam os açorianos a cultivar chá. Ilustração em estilo azulejo, criada por IA."
+    en: "Chinese tea masters teach Azoreans to grow tea. Azulejo-style illustration, created by AI."
+    ru: "Китайские мастера учат азорцев выращивать чай. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "40% 60%"
 related:
   - catarina-cha-1662
 status: draft

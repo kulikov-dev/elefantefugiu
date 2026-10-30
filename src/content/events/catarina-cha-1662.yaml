@@ -111,6 +111,20 @@ sources:
     url: https://www.portugal.com/history-and-culture/14-incredible-facts-about-queen-catherine-of-braganza-portugals-queen-of-tea/
     type: website
     accessed: '2026-10-29'
+image:
+  file: catarina-cha-1662.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa sala com lareira e uma janela sobre o mar, uma dama serve chá a outras damas à volta de uma mesa de toalha de renda, e cavalheiros de peruca olham, um deles com uma caneca na mão."
+    en: "Blue-and-white azulejo-style illustration: in a room with a fireplace and a window onto the sea, a lady pours tea for other ladies around a table with a lace cloth while gentlemen in wigs look on, one holding a tankard."
+    ru: "Иллюстрация в духе сине-белого азулежу: в комнате с камином и окном на море дама наливает чай другим дамам за столом с кружевной скатертью, а кавалеры в париках смотрят, один из них с кружкой в руке."
+  caption:
+    pt: "D. Catarina de Bragança serve chá à corte inglesa. Ilustração em estilo azulejo, criada por IA."
+    en: "Catherine of Braganza serves tea to the English court. Azulejo-style illustration, created by AI."
+    ru: "Катарина Брагансская угощает английский двор чаем. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "40% 55%"
 related:
   - restauracao-1640
 status: draft

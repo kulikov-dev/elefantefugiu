@@ -128,6 +128,20 @@ sources:
     url: https://echoboomer.pt/garum-retirado-ruinas-romanas-de-troia/
     type: press
     accessed: '2026-10-29'
+image:
+  file: garum-lisboa.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: à beira do rio, trabalhadores romanos deitam peixe miúdo em tanques de pedra, rodeados de ânforas; ao fundo, um barco de vela quadrada é carregado, e gaivotas voam sobre a água, enquanto dois gatos rondam o peixe."
+    en: "Blue-and-white azulejo-style illustration: on a riverbank, Roman workers pour small fish into stone vats surrounded by amphorae; in the background a square-sailed boat is being loaded, gulls fly over the water and two cats prowl around the fish."
+    ru: "Иллюстрация в духе сине-белого азулежу: на берегу реки римские рабочие засыпают мелкую рыбу в каменные чаны, вокруг стоят амфоры; позади грузят судно с квадратным парусом, над водой летают чайки, а возле рыбы бродят два кота."
+  caption:
+    pt: "A fábrica romana de garum em Olisipo. Ilustração em estilo azulejo, criada por IA."
+    en: "The Roman garum factory in Olisipo. Azulejo-style illustration, created by AI."
+    ru: "Римская фабрика гарума в Олисипо. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "55% 50%"
 status: draft
 published: '2026-10-29'
 placeholder: false

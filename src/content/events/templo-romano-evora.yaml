@@ -119,6 +119,20 @@ sources:
       pt: talho até 1836, Cinatti, «templo de Diana» do jesuíta Manuel Fialho
       en: butcher shop until 1836, Cinatti, the “Temple of Diana” name from the Jesuit Manuel Fialho
       ru: лавка до 1836 года, Чинатти, «храм Дианы» от иезуита Мануэла Фиалью
+image:
+  file: templo-romano-evora.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um templo romano de colunas coríntias embutido numa torre medieval de pedra, com um talho aberto entre as colunas, onde duas mulheres de cesto compram carne a um homem de avental; à esquerda, um operário de picareta puxa um carrinho de mão."
+    en: "Blue-and-white azulejo-style illustration: a Roman temple with Corinthian columns built into a medieval stone tower, with a butcher shop open between the columns where two women with baskets buy meat from a man in an apron; on the left a workman with a pickaxe pulls a handcart."
+    ru: "Иллюстрация в духе сине-белого азулежу: римский храм с коринфскими колоннами, встроенный в средневековую каменную башню, между колоннами открыта мясная лавка, где две женщины с корзинами покупают мясо у мужчины в фартуке; слева рабочий с киркой везёт тачку."
+  caption:
+    pt: "O talho no templo romano de Évora, cerca de 1400. Ilustração em estilo azulejo, criada por IA."
+    en: "The butcher shop in Évora’s Roman temple, around 1400. Azulejo-style illustration, created by AI."
+    ru: "Мясная лавка в римском храме Эворы, около 1400 года. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 35%"
 status: draft
 published: '2026-10-29'
 placeholder: false

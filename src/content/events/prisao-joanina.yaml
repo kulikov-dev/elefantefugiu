@@ -100,6 +100,20 @@ sources:
     url: https://www.360meridianos.com/6-curiosidades-sobre-a-universidade-de-coimbra/
     type: website
     accessed: '2026-10-29'
+image:
+  file: prisao-joanina.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa grande biblioteca de estantes até ao teto, onde voa um morcego, leitores trabalham a uma mesa, e por baixo, numa cela abobadada com uma janela gradeada, um estudante de capa está sentado num banco."
+    en: "Blue-and-white azulejo-style illustration: in a grand library with shelves up to the ceiling, where a bat flies, readers work at a table, and below, in a vaulted cell with a barred window, a student in a cloak sits on a bench."
+    ru: "Иллюстрация в духе сине-белого азулежу: в большой библиотеке с полками до потолка, где летает летучая мышь, за столом работают читатели, а под ними в сводчатой камере с решётчатым окном на скамье сидит студент в плаще."
+  caption:
+    pt: "A Biblioteca Joanina e a prisão académica por baixo. Ilustração em estilo azulejo, criada por IA."
+    en: "The Joanina Library and the student jail beneath it. Azulejo-style illustration, created by AI."
+    ru: "Библиотека Жуанина и студенческая тюрьма под ней. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
 related:
   - morcegos-mafra-1771
 status: draft

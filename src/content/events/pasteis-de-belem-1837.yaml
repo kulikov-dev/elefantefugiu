@@ -111,6 +111,20 @@ sources:
     url: https://www.rtp.pt/noticias/cultura/a-ideia-de-docaria-conventual-e-um-mito-construido-diz-investigador_n1471160
     type: press
     accessed: '2026-10-29'
+image:
+  file: pasteis-de-belem-1837.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: à porta de uma casa pequena, um frade oferece um tabuleiro de pastéis a uma multidão do século XIX, com um soldado, senhoras de chapéu, rapazes e vendedoras de cestos à cabeça, e um grande mosteiro ao fundo."
+    en: "Blue-and-white azulejo-style illustration: at the door of a small house, a friar offers a tray of tarts to a nineteenth-century crowd that includes a soldier, ladies in bonnets, boys and women with baskets on their heads, with a large monastery behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: у двери небольшого дома монах предлагает поднос с пирожными толпе XIX века: тут солдат, дамы в шляпках, мальчики и женщины с корзинами на голове, а позади большой монастырь."
+  caption:
+    pt: "Os primeiros pastéis em Belém, 1837. Ilustração em estilo azulejo, criada por IA."
+    en: "The first custard tarts in Belém, 1837. Azulejo-style illustration, created by AI."
+    ru: "Первые пастейш в Белене, 1837 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "45% 55%"
 status: draft
 published: '2026-10-29'
 placeholder: false

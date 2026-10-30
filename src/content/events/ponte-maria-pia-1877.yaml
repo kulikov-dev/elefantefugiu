@@ -90,6 +90,20 @@ sources:
     url: https://en.wikipedia.org/wiki/Maria_Pia_Bridge
     type: reference
     accessed: '2026-10-29'
+image:
+  file: ponte-maria-pia-1877.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: uma ponte de ferro de um só arco alto, com um comboio a fumegar por cima, sobre um rio com barcos de vela; na margem, uma multidão com cartolas no ar celebra, entre senhoras e militares."
+    en: "Blue-and-white azulejo-style illustration: an iron bridge with a single high arch and a smoking train on top, over a river with sailing boats; on the bank a crowd with top hats in the air celebrates, among ladies and soldiers."
+    ru: "Иллюстрация в духе сине-белого азулежу: железный мост с одной высокой аркой и дымящим поездом наверху над рекой с парусными лодками; на берегу ликует толпа с цилиндрами в воздухе, среди неё дамы и военные."
+  caption:
+    pt: "A inauguração da Ponte D. Maria Pia, 4 de novembro de 1877. Ilustração em estilo azulejo, criada por IA."
+    en: "The opening of the Maria Pia Bridge, November 4, 1877. Azulejo-style illustration, created by AI."
+    ru: "Открытие моста Марии Пии, 4 ноября 1877 года. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "55% 25%"
 status: draft
 published: '2026-10-29'
 placeholder: false

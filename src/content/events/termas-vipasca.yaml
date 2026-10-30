@@ -127,6 +127,20 @@ sources:
     url: https://www.mindat.org/article.php/1681/The+Bronze+Boards+of+Vipasca
     type: reference
     accessed: '2026-10-29'
+image:
+  file: termas-vipasca.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: à porta de um edifício de pedra com chaminé fumegante, uma mulher entrega uma moeda a um homem, atrás de uma fila de mulheres com toalhas e pães, enquanto à direita mineiros com picaretas e cestos de minério conversam; ao fundo, uma mina."
+    en: "Blue-and-white azulejo-style illustration: at the door of a stone building with a smoking chimney, a woman hands a coin to a man, with a line of women holding towels and loaves behind her, while on the right miners with pickaxes and baskets of ore talk; a mine lies in the background."
+    ru: "Иллюстрация в духе сине-белого азулежу: у двери каменного здания с дымящей трубой женщина протягивает мужчине монету, за ней очередь женщин с полотенцами и хлебами, а справа беседуют шахтёры с кирками и корзинами руды; позади видна шахта."
+  caption:
+    pt: "Manhã à porta dos banhos de Vipasca. Ilustração em estilo azulejo, criada por IA."
+    en: "Morning at the Vipasca baths. Azulejo-style illustration, created by AI."
+    ru: "Утро у бани в Випаске. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
 status: draft
 published: '2026-10-29'
 placeholder: false

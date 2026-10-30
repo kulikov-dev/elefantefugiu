@@ -128,6 +128,20 @@ sources:
       pt: inscrições nas colunas
       en: inscriptions on the columns
       ru: надписи на колоннах
+image:
+  file: ponte-trajano-chaves.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: uma ponte romana de arcos sobre um rio, com duas colunas a meio, pessoas que a atravessam e três homens sentados na margem com os pés na água, de onde sobe vapor; ao fundo, uma vila numa colina."
+    en: "Blue-and-white azulejo-style illustration: a Roman arched bridge over a river, with two columns halfway across, people walking over it and three men sitting on the bank with their feet in steaming water; a hillside town lies behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: римский мост на арках через реку с двумя колоннами посередине, по мосту идут люди, а на берегу трое мужчин сидят, опустив ноги в парящую воду; позади город на холме."
+  caption:
+    pt: "A nova ponte de Aquae Flaviae, cerca de 104. Ilustração em estilo azulejo, criada por IA."
+    en: "The new bridge at Aquae Flaviae, around 104 AD. Azulejo-style illustration, created by AI."
+    ru: "Новый мост в Аквах Флавиевых, около 104 года. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 30%"
 status: draft
 published: '2026-10-29'
 placeholder: false

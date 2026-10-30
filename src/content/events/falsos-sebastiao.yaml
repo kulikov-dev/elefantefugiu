@@ -102,6 +102,20 @@ sources:
     url: https://periodicos.unifesp.br/index.php/fontes/article/download/16113/12582/79287
     type: academic
     accessed: '2026-10-29'
+image:
+  file: falsos-sebastiao.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um homem coroado e esfarrapado, montado num burro, saúda aldeões ajoelhados que levam velas, enquanto um cão ladra e uma mulher e um padre de braços cruzados o olham desconfiados."
+    en: "Blue-and-white azulejo-style illustration: a ragged man in a crown, riding a donkey, greets kneeling villagers holding candles while a dog barks and a woman and a priest with folded arms look at him with suspicion."
+    ru: "Иллюстрация в духе сине-белого азулежу: оборванный человек в короне верхом на осле приветствует коленопреклонённых крестьян со свечами, лает собака, а женщина и священник со скрещёнными руками смотрят на него с недоверием."
+  caption:
+    pt: "Um falso «D. Sebastião» entra numa aldeia. Ilustração em estilo azulejo, criada por IA."
+    en: "A false “King Sebastian” rides into a village. Azulejo-style illustration, created by AI."
+    ru: "Самозваный «король Себастьян» въезжает в деревню. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "55% 45%"
 status: draft
 published: '2026-10-29'
 placeholder: false

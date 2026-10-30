@@ -109,6 +109,20 @@ sources:
     url: https://www.dn.pt/sociedade/hidroaviao-de-sacadura-cabral-e-gago-coutinho-e-unico-no-mundo-e-esta-em-lisboa-14158708.html
     type: press
     accessed: '2026-10-29'
+image:
+  file: travessia-atlantico-sul-1922.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um hidroavião biplano com dois aviadores, um deles com um sextante, voa baixo sobre as ondas, com o sol e algumas estrelas no céu e uns rochedos ao longe."
+    en: "Blue-and-white azulejo-style illustration: a biplane seaplane with two aviators, one holding a sextant, flies low over the waves, with the sun and a few stars in the sky and some rocks in the distance."
+    ru: "Иллюстрация в духе сине-белого азулежу: гидроплан-биплан с двумя лётчиками, один из которых держит секстан, летит низко над волнами, в небе солнце и несколько звёзд, вдали скалы."
+  caption:
+    pt: "O hidroavião de Coutinho e Cabral sobre o Atlântico Sul, 1922. Ilustração em estilo azulejo, criada por IA."
+    en: "Coutinho and Cabral’s seaplane over the South Atlantic, 1922. Azulejo-style illustration, created by AI."
+    ru: "Гидроплан Коутинью и Кабрала над Южной Атлантикой, 1922 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "40% 55%"
 status: draft
 published: '2026-10-29'
 placeholder: false

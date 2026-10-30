@@ -96,6 +96,20 @@ sources:
     url: https://en.wikipedia.org/wiki/Bom_Jesus_do_Monte_Funicular
     type: reference
     accessed: '2026-10-29'
+image:
+  file: elevador-bom-jesus.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um funicular de duas carruagens sobe numa encosta ao lado de uma escadaria barroca que leva a uma igreja de duas torres; à direita, um cano deita água para um depósito de madeira e um barril."
+    en: "Blue-and-white azulejo-style illustration: a two-car funicular climbs a hillside beside a Baroque staircase leading to a twin-towered church; on the right a pipe pours water into a wooden tank and a barrel."
+    ru: "Иллюстрация в духе сине-белого азулежу: двухвагонный фуникулёр поднимается по склону рядом с барочной лестницей, ведущей к церкви с двумя башнями; справа из трубы льётся вода в деревянный бак и бочку."
+  caption:
+    pt: "O elevador a água do Bom Jesus, sobre Braga. Ilustração em estilo azulejo, criada por IA."
+    en: "The water-powered funicular at Bom Jesus above Braga. Azulejo-style illustration, created by AI."
+    ru: "Водяной фуникулёр Бон-Жезуш над Брагой. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "55% 20%"
 related:
   - elevador-santa-justa
 status: draft

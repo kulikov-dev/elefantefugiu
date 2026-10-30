@@ -102,6 +102,20 @@ sources:
     url: https://www.infopedia.pt/artigos/$palacio-nacional-da-pena
     type: reference
     accessed: '2026-10-29'
+image:
+  file: palacio-da-pena.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um homem barbudo com uma paleta pinta num cavalete, com um cão a seu lado, num jardim de fetos e árvores, e ao fundo, sobre um monte, um palácio de torres e cúpulas amarelas."
+    en: "Blue-and-white azulejo-style illustration: a bearded man with a palette paints at an easel, a dog beside him, in a garden of ferns and trees, with a palace of yellow towers and domes on a hill behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: бородатый мужчина с палитрой пишет за мольбертом, рядом собака, в саду с папоротниками и деревьями, а позади на холме дворец с жёлтыми башнями и куполами."
+  caption:
+    pt: "D. Fernando II pinta o Palácio da Pena. Ilustração em estilo azulejo, criada por IA."
+    en: "Ferdinand II paints Pena Palace. Azulejo-style illustration, created by AI."
+    ru: "Фердинанд II пишет дворец Пена. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "45% 45%"
 related:
   - pasteis-de-belem-1837
 status: draft

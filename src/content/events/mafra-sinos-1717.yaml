@@ -115,6 +115,20 @@ sources:
       pt: página oficial do monumento
       en: official page of the monument
       ru: официальная страница памятника
+image:
+  file: mafra-sinos-1717.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa fundição de sinos, um fidalgo de tricórnio aponta para dois sacos que despejam moedas de ouro numa mesa, diante de dois fundidores de braços cruzados e boquiabertos, entre sinos pendurados."
+    en: "Blue-and-white azulejo-style illustration: in a bell foundry, a nobleman in a tricorn points at two sacks pouring gold coins onto a table in front of two founders with folded arms and open mouths, among hanging bells."
+    ru: "Иллюстрация в духе сине-белого азулежу: в колокололитейной мастерской дворянин в треуголке указывает на два мешка, высыпающих на стол золотые монеты, перед двумя литейщиками со скрещёнными руками и открытыми ртами, вокруг висят колокола."
+  caption:
+    pt: "O enviado português paga aos fundidores os sinos de Mafra. Ilustração em estilo azulejo, criada por IA."
+    en: "The Portuguese envoy pays the founders for Mafra’s bells. Azulejo-style illustration, created by AI."
+    ru: "Португальский посол платит литейщикам за колокола Мафры. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "45% 50%"
 related:
   - morcegos-mafra-1771
 status: draft

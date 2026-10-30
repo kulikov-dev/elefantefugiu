@@ -107,6 +107,20 @@ sources:
     url: https://www.museudelisboa.pt/en/sites/roman-galleries
     type: institutional
     accessed: '2026-10-29'
+image:
+  file: galerias-romanas-rua-da-prata.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa rua em obras, operários de casaca e calções cavam um buraco no chão, e por baixo, em arcadas romanas alagadas, um homem desce por uma corda com uma lanterna."
+    en: "Blue-and-white azulejo-style illustration: on a street under construction, workmen in coats and breeches dig a hole in the ground, and below, in flooded Roman arcades, a man climbs down a rope with a lantern."
+    ru: "Иллюстрация в духе сине-белого азулежу: на строящейся улице рабочие в камзолах и коротких штанах роют яму, а под ней, в затопленных римских арках, по верёвке спускается человек с фонарём."
+  caption:
+    pt: "Os construtores descobrem as galerias romanas sob a Baixa, 1771. Ilustração em estilo azulejo, criada por IA."
+    en: "Builders discover the Roman galleries under the Baixa, 1771. Azulejo-style illustration, created by AI."
+    ru: "Строители находят римские галереи под Байшей, 1771 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
 status: draft
 published: '2026-10-29'
 placeholder: false

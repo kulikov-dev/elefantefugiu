@@ -111,6 +111,20 @@ sources:
     url: https://www.timeout.pt/lisboa/pt/blog/sete-coisas-que-nao-sabe-sobre-o-palacio-da-independencia-102417
     type: press
     accessed: '2026-10-29'
+image:
+  file: restauracao-1640.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: num salão de palácio de janelas altas, fidalgos de capa e chapéu rodeiam uma dama de preto com gola de renda diante de um trono, e lá fora uma multidão atira os chapéus ao ar."
+    en: "Blue-and-white azulejo-style illustration: in a palace hall with tall windows, nobles in capes and hats surround a lady in black with a lace ruff in front of a throne, while outside a crowd throws its hats in the air."
+    ru: "Иллюстрация в духе сине-белого азулежу: в дворцовом зале с высокими окнами дворяне в плащах и шляпах окружают даму в чёрном с кружевным воротником перед троном, а снаружи толпа подбрасывает шляпы."
+  caption:
+    pt: "Os conjurados no paço de Lisboa, 1 de dezembro de 1640. Ilustração em estilo azulejo, criada por IA."
+    en: "The conspirators in the Lisbon palace, December 1, 1640. Azulejo-style illustration, created by AI."
+    ru: "Заговорщики во дворце в Лиссабоне, 1 декабря 1640 года. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 55%"
 status: draft
 published: '2026-10-29'
 placeholder: false

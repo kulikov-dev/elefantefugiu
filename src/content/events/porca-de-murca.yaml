@@ -129,6 +129,20 @@ sources:
       pt: Salamanca
       en: Salamanca
       ru: Саламанка
+image:
+  file: porca-de-murca.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa aldeia de casas redondas de colmo e muralha de pedra, dois escultores esculpem uma porca de granito, enquanto duas crianças apontam para uma porca viva com leitões."
+    en: "Blue-and-white azulejo-style illustration: in a village of round thatched houses and a stone wall, two sculptors carve a granite pig while two children point at a living sow with her piglets."
+    ru: "Иллюстрация в духе сине-белого азулежу: в деревне с круглыми домами под соломой и каменной стеной два мастера высекают гранитную свинью, а двое детей показывают на живую свинью с поросятами."
+  caption:
+    pt: "Artesãos de um castro esculpem uma porca de granito. Ilustração em estilo azulejo, criada por IA."
+    en: "Hillfort craftsmen carve a granite pig. Azulejo-style illustration, created by AI."
+    ru: "Мастера городища высекают гранитную свинью. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "40% 60%"
 status: draft
 published: '2026-10-29'
 placeholder: false

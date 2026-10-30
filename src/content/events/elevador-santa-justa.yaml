@@ -96,6 +96,20 @@ sources:
     url: https://en.wikipedia.org/wiki/Raoul_Mesnier_du_Ponsard
     type: reference
     accessed: '2026-10-29'
+image:
+  file: elevador-santa-justa.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: uma torre de ferro rendilhada com uma cabine de passageiros e um passadiço para as ruínas de uma igreja gótica; em primeiro plano, um homem de bigode com uma planta desenrolada e curiosos de chapéu."
+    en: "Blue-and-white azulejo-style illustration: a lacy iron tower with a passenger car and a walkway to the ruins of a Gothic church; in the foreground a moustached man with an unrolled plan and onlookers in hats."
+    ru: "Иллюстрация в духе сине-белого азулежу: ажурная железная башня с кабиной пассажиров и мостиком к руинам готической церкви; на переднем плане усатый мужчина с развёрнутым чертежом и зеваки в шляпах."
+  caption:
+    pt: "O Elevador de Santa Justa, 1902. Ilustração em estilo azulejo, criada por IA."
+    en: "The Santa Justa Lift, 1902. Azulejo-style illustration, created by AI."
+    ru: "Лифт Санта-Жушта, 1902 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "55% 15%"
 related:
   - elevador-bom-jesus
 status: draft

@@ -329,8 +329,20 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: false
-  fallback_image: images/placeholders/epoch-a.svg
-  placeholder: [theme, fallback_image]
+  fallback_image:
+    file: epoca-lusitania-e-roma.webp
+    alt:
+      pt: "Ilustração ao estilo do azulejo azul e branco: uma ponte romana de arcos sobre um rio, com um marco e um javali de granito em primeiro plano, um cavaleiro romano ao lado de um homem com uma mula carregada, um pastor com cabras e, ao fundo, um castro de casas redondas dentro de uma muralha."
+      en: "Blue-and-white azulejo-style illustration: a Roman arched bridge over a river, with a milestone and a granite boar in the foreground, a Roman horseman beside a man leading a loaded mule, a shepherd with goats and, behind, a hillfort of round houses inside a wall."
+      ru: "Иллюстрация в духе сине-белого азулежу: римский мост на арках через реку, на переднем плане межевой камень и гранитный кабан, римский всадник рядом с мужчиной, ведущим гружёного мула, пастух с козами, а позади городище с круглыми домами за стеной."
+    caption:
+      pt: "Ilustração criada por IA (Gemini) a partir da época da Lusitânia e Roma. Não é uma imagem histórica."
+      en: "AI-generated illustration (Gemini) based on the age of Lusitania and Rome. Not a historical image."
+      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Лузитании и Рима. Не историческое изображение."
+    author: Gemini (AI)
+    license: AI-generated
+    ai: true
+  placeholder: [theme]
   intro:
     pt: "Durante oito anos as legiões romanas não conseguiram vencer o pastor Viriato, e Roma acabou por subornar os seus companheiros. Depois chegaram as estradas, as pontes e o latim: a ponte do tempo de Trajano em Chaves ainda hoje se atravessa a pé. E na praça de Murça continua uma porca de granito esculpida antes da chegada dos romanos."
     en: "For eight years Roman legions couldn’t beat a shepherd named Viriathus, so Rome simply bribed his friends. Then came roads, bridges, and Latin: people still walk across the bridge built under Trajan in Chaves. And in the square of Murça stands a granite pig carved before the Romans ever arrived."
@@ -496,8 +508,20 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: false
-  fallback_image: images/placeholders/epoch-b.svg
-  placeholder: [theme, fallback_image]
+  fallback_image:
+    file: epoca-uniao-restauracao-e-ouro-do-brasil.webp
+    alt:
+      pt: "Ilustração ao estilo do azulejo azul e branco: num cais, um galeão de três mastros é carregado de caixotes, e uma família, um frade e um cavalheiro de peruca olham o porto, com uma praça barroca e uma igreja de duas torres ao fundo."
+      en: "Blue-and-white azulejo-style illustration: on a quay, a three-masted galleon is loaded with crates while a family, a friar and a gentleman in a wig look over the port, with a Baroque square and a twin-towered church behind."
+      ru: "Иллюстрация в духе сине-белого азулежу: на набережной грузят ящики на трёхмачтовый галеон, а семья, монах и господин в парике смотрят на порт; позади барочная площадь и церковь с двумя башнями."
+    caption:
+      pt: "Ilustração criada por IA (Gemini) a partir da época da União, Restauração e ouro do Brasil. Não é uma imagem histórica."
+      en: "AI-generated illustration (Gemini) based on the age of the Union, the Restoration, and Brazilian gold. Not a historical image."
+      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Унии, Реставрации и золота Бразилии. Не историческое изображение."
+    author: Gemini (AI)
+    license: AI-generated
+    ai: true
+  placeholder: [theme]
   intro:
     pt: "O jovem rei D. Sebastião desapareceu numa batalha em Marrocos, Portugal passou 60 anos sob reis espanhóis, e pelo país andavam impostores que se diziam o rei regressado. Em 1640, um grupo de conjurados devolveu a independência numa só manhã. Depois chegou o ouro do Brasil, e D. João V encomendou sinos em Antuérpia e uma capela inteira em Roma."
     en: "Young King Sebastian vanished in battle in Morocco, Portugal spent 60 years under Spanish kings, and impostors roamed the country claiming to be the returning king. In 1640 a band of conspirators won back independence in a single morning. Then Brazilian gold arrived, and King John V ordered bells from Antwerp and an entire chapel from Rome."
@@ -605,8 +629,20 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: false
-  fallback_image: images/placeholders/epoch-c.svg
-  placeholder: [theme, fallback_image]
+  fallback_image:
+    file: epoca-monarquia-e-republica.webp
+    alt:
+      pt: "Ilustração ao estilo do azulejo azul e branco: uma ponte de ferro de um só arco com um comboio por cima, sobre um rio com barcos de vela, e na margem um cavalheiro de cartola, uma senhora de guarda-sol e um rapaz que acena."
+      en: "Blue-and-white azulejo-style illustration: an iron bridge with a single arch and a train on top, over a river with sailing boats, and on the bank a gentleman in a top hat, a lady with a parasol and a boy waving."
+      ru: "Иллюстрация в духе сине-белого азулежу: железный мост с одной аркой и поездом наверху над рекой с парусными лодками, а на берегу господин в цилиндре, дама с зонтиком и машущий рукой мальчик."
+    caption:
+      pt: "Ilustração criada por IA (Gemini) a partir da época da Monarquia e República. Não é uma imagem histórica."
+      en: "AI-generated illustration (Gemini) based on the age of the Monarchy and the Republic. Not a historical image."
+      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Монархии и Республики. Не историческое изображение."
+    author: Gemini (AI)
+    license: AI-generated
+    ai: true
+  placeholder: [theme]
   intro:
     pt: "Durante um século Portugal discutiu o que queria ser: constituição, uma guerra civil entre dois irmãos príncipes e, em 1910, a República. E enquanto os políticos discutiam, o país construía pontes de ferro, elevadores e funiculares."
     en: "For a whole century Portugal argued about what it wanted to be: a constitution, a civil war between two royal brothers, and in 1910, a republic. And while politicians argued, the country built iron bridges, lifts, and funiculars."

@@ -116,6 +116,20 @@ sources:
     url: https://artsandculture.google.com/story/IwWBW96usfduJw
     type: institutional
     accessed: '2026-10-29'
+image:
+  file: capela-sao-joao-baptista.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: num cais de pedra com navios de três mastros, marinheiros descarregam um caixote, outro caixote aberto mostra palha, uma coluna e um painel, e um homem de casaca segura a maqueta de uma capela."
+    en: "Blue-and-white azulejo-style illustration: on a stone quay with three-masted ships, sailors unload a crate, another open crate shows straw, a column and a panel, and a man in a frock coat holds a model of a chapel."
+    ru: "Иллюстрация в духе сине-белого азулежу: на каменной набережной с трёхмачтовыми кораблями матросы разгружают ящик, в другом открытом ящике видны солома, колонна и панно, а мужчина в сюртуке держит в руках макет часовни."
+  caption:
+    pt: "Os caixotes com as peças da capela no cais de Lisboa. Ilustração em estilo azulejo, criada por IA."
+    en: "Crates with the chapel’s pieces on the Lisbon quay. Azulejo-style illustration, created by AI."
+    ru: "Ящики с частями часовни на лиссабонской набережной. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 55%"
 status: draft
 published: '2026-10-29'
 placeholder: false

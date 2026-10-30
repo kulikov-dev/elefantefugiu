@@ -130,6 +130,20 @@ sources:
     url: https://ukulelemagazine.com/stories/news/dias-grave-marker
     type: press
     accessed: '2026-10-29'
+image:
+  file: braguinha-ukulele-1879.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa oficina de madeira sob palmeiras, um artesão toca um instrumento de cordas entre ukuleles pendurados, e lá fora um homem toca ukulele para três crianças que dançam, com um veleiro ao fundo."
+    en: "Blue-and-white azulejo-style illustration: in a wooden workshop under palm trees, a craftsman strums a small stringed instrument among hanging ukuleles, and outside a man plays a ukulele for three dancing children, with a sailing ship behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: в деревянной мастерской под пальмами мастер играет на небольшом струнном инструменте среди подвешенных укулеле, а снаружи мужчина играет на укулеле для трёх танцующих детей, позади парусный корабль."
+  caption:
+    pt: "Um mestre madeirense e os primeiros ukuleles em Honolulu. Ilustração em estilo azulejo, criada por IA."
+    en: "A Madeiran craftsman and the first ukuleles in Honolulu. Azulejo-style illustration, created by AI."
+    ru: "Мадейрский мастер и первые укулеле в Гонолулу. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "45% 35%"
 status: draft
 published: '2026-10-29'
 placeholder: false

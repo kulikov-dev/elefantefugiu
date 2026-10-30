@@ -110,6 +110,20 @@ sources:
     url: https://www.dn.pt/cultura/dos-falsos-hogwarts-a-diagon-al-todos-os-sitios-que-nao-inspiraram-jk-rowling-12223928.html
     type: press
     accessed: '2026-10-29'
+image:
+  file: livraria-lello.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: o interior de uma livraria neogótica com estantes até ao teto e uma claraboia de vitral, com uma escadaria curva ao centro, rodeada de clientes, enquanto outros espreitam das galerias."
+    en: "Blue-and-white azulejo-style illustration: the interior of a neo-Gothic bookshop with shelves up to the ceiling and a stained-glass skylight, a curving staircase in the middle surrounded by customers, and others looking down from the galleries."
+    ru: "Иллюстрация в духе сине-белого азулежу: интерьер неоготического книжного магазина с полками до потолка и витражным фонарём в потолке, посередине изогнутая лестница в окружении покупателей, а другие смотрят сверху с галерей."
+  caption:
+    pt: "A escadaria da Livraria Lello. Ilustração em estilo azulejo, criada por IA."
+    en: "The staircase of Livraria Lello. Azulejo-style illustration, created by AI."
+    ru: "Лестница книжного магазина Lello. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 45%"
 status: draft
 published: '2026-10-29'
 placeholder: false

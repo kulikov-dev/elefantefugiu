@@ -106,6 +106,20 @@ sources:
     url: https://www.infopedia.pt/apoio/artigos/%24viriato
     type: reference
     accessed: '2026-10-29'
+image:
+  file: viriato-139-ac.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa tenda de campanha, um general romano de capacete com crista pousa uma bolsa de moedas na mesa diante de três homens de manto, e um legionário de lança monta guarda à entrada."
+    en: "Blue-and-white azulejo-style illustration: in a field tent a Roman general in a crested helmet sets a purse of coins on the table before three cloaked men, while a legionary with a spear stands guard at the entrance."
+    ru: "Иллюстрация в духе сине-белого азулежу: в походной палатке римский полководец в шлеме с гребнем кладёт на стол кошель с монетами перед тремя мужчинами в плащах, а у входа стоит легионер с копьём."
+  caption:
+    pt: "Cepião suborna os companheiros de Viriato, 139 a.C. Ilustração em estilo azulejo, criada por IA."
+    en: "Caepio bribes Viriathus’s companions, 139 BC. Azulejo-style illustration, created by AI."
+    ru: "Цепион подкупает приближённых Вириата, 139 год до н. э. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "30% 50%"
 status: draft
 published: '2026-10-29'
 placeholder: false

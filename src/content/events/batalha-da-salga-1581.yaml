@@ -128,6 +128,20 @@ sources:
     url: https://www.exploreterceiraisland.com/en/?p=39214
     type: website
     accessed: '2026-10-29'
+image:
+  file: batalha-da-salga-1581.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa encosta à beira-mar, um frade e aldeões armados de paus empurram uma manada de touros contra soldados espanhóis que fogem, com navios ao largo e mulheres que também empunham paus."
+    en: "Blue-and-white azulejo-style illustration: on a seaside slope, a friar and villagers with sticks drive a herd of bulls at fleeing Spanish soldiers, with ships offshore and women who also hold sticks."
+    ru: "Иллюстрация в духе сине-белого азулежу: на приморском склоне монах и крестьяне с палками гонят стадо быков на бегущих испанских солдат, вдали стоят корабли, а рядом женщины тоже с палками."
+  caption:
+    pt: "Os touros põem em fuga o desembarque espanhol na Salga, 1581. Ilustração em estilo azulejo, criada por IA."
+    en: "Bulls rout the Spanish landing at Salga Bay, 1581. Azulejo-style illustration, created by AI."
+    ru: "Быки гонят испанский десант в бухте Салга, 1581 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "55% 45%"
 status: draft
 published: '2026-10-29'
 placeholder: false
