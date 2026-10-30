@@ -1,0 +1,104 @@
+id: elevador-santa-justa
+slug:
+  pt: o-elevador-que-nao-foi-eiffel-que-fez
+  en: the-lift-eiffel-didnt-build
+  ru: lift-kotoryy-postroil-ne-eyfel
+title:
+  pt: O elevador que não foi Eiffel que fez
+  en: The Lift Eiffel Didn’t Build
+  ru: Лифт, который построил не Эйфель
+epoch: monarquia-e-republica
+level: story
+year: 1902
+place:
+  name:
+    pt: Lisboa, Baixa e Chiado
+    en: Lisbon, Baixa and Chiado
+    ru: Лиссабон, Байша и Шиаду
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7121
+  lon: -9.1394
+bridge:
+  name: Elevador de Santa Justa
+  title:
+    pt: Elevador de Santa Justa
+    en: Santa Justa Lift
+    ru: Лифт Санта-Жушта
+  address: Rua de Santa Justa, Lisboa
+  lat: 38.7121301
+  lon: -9.1394297
+  maps_url: https://www.google.com/maps/place/%D0%9B%D0%B8%D1%84%D1%82+%D0%A1%D0%B0%D0%BD%D1%82%D0%B0+%D0%A5%D1%83%D1%81%D1%82%D0%B0/@38.7121065,-9.1420124,17z/data=!3m1!4b1!4m6!3m5!1s0xd193478b78a8d2f:0xe1147c62e070697c!8m2!3d38.7121301!4d-9.1394297!16zL20vMDYydGw1
+  url: https://www.visitlisboa.com/en/places/elevador-de-santa-justa
+  note:
+    pt: Do miradouro vê-se a Baixa, o castelo e o rio.
+    en: From the top you can see the Baixa, the castle, and the river.
+    ru: С верхней площадки видно Байшу, замок и реку.
+threads:
+  - engenho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O elevador de ferro que não foi Eiffel que construiu.
+  en: The iron elevator Eiffel didn’t build.
+  ru: Железный лифт, который построил не Эйфель.
+story:
+  pt: A Baixa fica em baixo, e o Chiado no alto da colina. Para os lisboetas não terem de subir
+    escadas, em 1900 começou a construir-se uma torre de ferro com um elevador. Dois anos depois, o
+    Elevador de Santa Justa, com 45 metros, levou os primeiros passageiros. Primeiro movia-o uma
+    máquina a vapor, a partir de 1907 um motor elétrico. O ferro rendilhado lembra tanto a Torre
+    Eiffel que muitos ainda o atribuem a Eiffel.
+  en: The Baixa lies down low, and the Chiado district sits on the hill above it. To spare people the
+    stairs, construction began in 1900 on an iron tower with an elevator. Two years later, the
+    45-meter Santa Justa Lift carried its first passengers. At first it ran on a steam engine, and
+    from 1907 on an electric motor. The lacy ironwork looks so much like the Eiffel Tower that many
+    people still credit it to Eiffel.
+  ru: Байша лежит внизу, а район Шиаду на холме над ней. Чтобы горожанам не карабкаться по лестницам,
+    в 1900 году начали строить железную башню с лифтом. Через два года 45-метровый лифт Санта-Жушта
+    поднял первых пассажиров. Сначала его двигал паровой двигатель, с 1907 года электрический.
+    Ажурное железо так похоже на Эйфелеву башню, что лифт до сих пор считают работой Эйфеля.
+more:
+  pt: >-
+    Na verdade, o elevador foi projetado por Raoul Mesnier du Ponsard, engenheiro nascido no Porto
+    numa família francesa. Foi aluno de Eiffel, daí a semelhança. Mesnier construiu em Lisboa outros
+    elevadores e ascensores, e antes ainda o funicular de Braga que ainda hoje anda a água.
+
+
+    O elevador tem duas cabines de madeira, cada uma para 29 pessoas. Lá em cima há um miradouro e
+    um passadiço que leva às ruínas do Convento do Carmo, destruído pelo terramoto de 1755.
+  en: >-
+    In fact, the lift was designed by Raoul Mesnier du Ponsard, an engineer born in Porto to a
+    French family. He studied under Eiffel, which explains the resemblance. Mesnier built other
+    lifts and funiculars in Lisbon, and before that the funicular in Braga that still runs on water.
+
+
+    The lift has two wooden cars, each holding 29 people. At the top there’s a viewing platform and
+    a walkway leading to the ruins of the Carmo Convent, destroyed in the 1755 earthquake.
+  ru: >-
+    На самом деле лифт спроектировал Раул Мениер дю Понсар, инженер, родившийся в Порту в семье
+    французов. Он учился у Эйфеля, отсюда и сходство. Мениер построил в Лиссабоне и другие
+    подъёмники и фуникулёры, а ещё раньше фуникулёр в Браге, который до сих пор ездит на воде.
+
+
+    В лифте две деревянные кабины, в каждую помещается 29 человек. Наверху смотровая площадка и
+    мостик, по которому можно пройти к руинам монастыря Карму, разрушенного землетрясением 1755
+    года.
+sources:
+  - title: "Amusing Planet: «The Santa Justa Elevator in Lisbon»"
+    url: https://www.amusingplanet.com/2015/08/the-santa-justa-elevator-in-lisbon.html
+    type: website
+    accessed: '2026-10-29'
+  - title: "Wikipedia: Raoul Mesnier du Ponsard"
+    url: https://en.wikipedia.org/wiki/Raoul_Mesnier_du_Ponsard
+    type: reference
+    accessed: '2026-10-29'
+related:
+  - elevador-bom-jesus
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

@@ -1,0 +1,125 @@
+id: templo-romano-evora
+slug:
+  pt: o-templo-que-um-talho-salvou
+  en: the-temple-a-butcher-shop-saved
+  ru: khram-kotoryy-spasla-myasnaya-lavka
+title:
+  pt: O templo que um talho salvou
+  en: The Temple a Butcher Shop Saved
+  ru: Храм, который спасла мясная лавка
+epoch: lusitania-e-roma
+level: story
+year:
+  from: 1
+  to: 100
+year_label:
+  pt: séc. I
+  en: 1st century
+  ru: I век
+year_scale:
+  pt: séc. I
+  en: 1st c.
+  ru: I век
+place:
+  name:
+    pt: Évora
+    en: Évora
+    ru: Эвора
+  lat: 38.5726
+  lon: -7.9073
+bridge:
+  name: Templo Romano de Évora
+  title:
+    pt: Templo Romano de Évora
+    en: Roman Temple of Évora
+    ru: Римский храм, Эвора
+  address: Largo do Conde de Vila Flor, Évora
+  lat: 38.5725904
+  lon: -7.9072944
+  maps_url: https://www.google.com/maps/place/%D0%A0%D0%B8%D0%BC%D1%81%D0%BA%D0%B8%D0%B9+%D0%A5%D1%80%D0%B0%D0%BC+%D0%94%D0%B8%D0%B0%D0%BD%D1%8B/@38.5725946,-7.9098693,17z/data=!3m1!4b1!4m6!3m5!1s0xd19e4dd098f7a41:0x1a7638f5bfbe7fbd!8m2!3d38.5725904!4d-7.9072944!16s%2Fm%2F03hlk1t
+  url: https://www.cm-evora.pt/
+  note:
+    pt: As colunas estão ao ar livre, a dois passos da Sé.
+    en: The columns stand in the open air, a short walk from the cathedral.
+    ru: Колонны стоят под открытым небом в двух шагах от собора.
+threads:
+  - engenho
+  - comida-e-vinho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O templo que um talho salvou.
+  en: The temple a butcher shop saved.
+  ru: Храм, который спасла мясная лавка.
+story:
+  pt: "No século I construiu-se no centro de Évora um templo, provavelmente em honra do imperador
+    Augusto. Quando o império caiu, os templos antigos foram desmontados por todo o país para dar
+    pedra a casas e muralhas. Évora teve sorte: na Idade Média o templo foi integrado numa torre do
+    castelo, os espaços entre as colunas foram tapados e, do século XIV até 1836, funcionou lá
+    dentro o talho da cidade. A cidade precisava do talho, e ninguém desmontou o edifício."
+  en: "In the 1st century a temple was built in the center of Évora, probably in honor of Emperor
+    Augustus. After the empire fell, old temples all over the country were taken apart for stone to
+    build houses and walls. Évora got lucky: in the Middle Ages the temple was built into a castle
+    tower, the gaps between the columns were walled up, and from the 14th century until 1836 the
+    town’s butcher shop operated inside. The town needed its butcher, so nobody took the building
+    apart."
+  ru: "В I веке в центре Эворы построили храм, скорее всего в честь императора Августа. Когда империя
+    пала, старые храмы по всей стране разбирали на камень для домов и стен. Эворе повезло: в Средние
+    века храм встроили в башню замка, промежутки между колоннами заложили, а с XIV века до 1836 года
+    внутри работала городская мясная лавка. Лавка была нужна городу, и здание никто не разбирал."
+more:
+  pt: >-
+    O perigo era real. Em 1467 o rei D. Afonso V autorizou que se tirasse pedra do templo para obras
+    e para a defesa. Mas enquanto lá dentro se vendia carne, ninguém tocava na torre, e as colunas
+    passaram quase quinhentos anos dentro de paredes medievais.
+
+
+    Na década de 1870 essas paredes foram demolidas sob a direção do arquiteto italiano Giuseppe
+    Cinatti, e o templo voltou a abrir-se à cidade.
+
+
+    Ainda hoje muitos lhe chamam «templo de Diana». O nome foi inventado no século XVII por um padre
+    português, e a arqueologia não o confirma.
+  en: >-
+    The danger was real. In 1467 King Afonso V allowed stone to be taken from the temple for
+    building and defense. But as long as meat was being sold inside, no one touched the tower, and
+    the columns spent almost five hundred years inside medieval walls.
+
+
+    In the 1870s those walls were torn down under the Italian architect Giuseppe Cinatti, and the
+    temple opened up to the town again.
+
+
+    Many people still call it the “Temple of Diana.” A Portuguese priest came up with that name in
+    the 17th century, and archaeology doesn’t back it up.
+  ru: >-
+    Опасность была настоящей. В 1467 году король Афонсу V разрешил брать с храма камень для
+    строительства и обороны. Но пока внутри торговали мясом, башню не трогали, и колонны почти
+    пятьсот лет простояли внутри средневековых стен.
+
+
+    В 1870-х годах эти стены снесли под руководством итальянского архитектора Джузеппе Чинатти, и
+    храм снова открылся городу.
+
+
+    Его до сих пор часто зовут «храмом Дианы». Это имя в XVII веке придумал португальский священник,
+    археология его не подтверждает.
+sources:
+  - title: "Wikipedia: Roman Temple of Évora"
+    url: https://en.wikipedia.org/wiki/Roman_Temple_of_%C3%89vora
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Wikipédia: Templo romano de Évora"
+    url: https://pt.wikipedia.org/wiki/Templo_romano_de_%C3%89vora
+    type: reference
+    accessed: '2026-10-29'
+    note:
+      pt: talho até 1836, Cinatti, «templo de Diana» do jesuíta Manuel Fialho
+      en: butcher shop until 1836, Cinatti, the “Temple of Diana” name from the Jesuit Manuel Fialho
+      ru: лавка до 1836 года, Чинатти, «храм Дианы» от иезуита Мануэла Фиалью
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

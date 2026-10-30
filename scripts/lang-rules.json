@@ -463,6 +463,12 @@
       "unit": "event/motim-companhia-1757",
       "match": "Жозеф",
       "why": "a French painter, Joseph Vernet"
+    },
+    {
+      "lang": "pt",
+      "unit": "event/palacio-da-pena",
+      "match": "colecionava",
+      "why": "correct after the 1990 Agreement (colecionar, coleção); the stop-list pattern colec* is too wide"
     }
   ]
 }

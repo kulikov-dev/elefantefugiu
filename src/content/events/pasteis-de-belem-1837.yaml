@@ -1,0 +1,117 @@
+id: pasteis-de-belem-1837
+slug:
+  pt: os-doces-dos-frades-ou-a-melhor-publicidade
+  en: monks-pastries-or-maybe-the-best-ad-of-the
+  ru: pirozhnye-monakhov-a-mozhet-byt-luchshaya
+title:
+  pt: Os doces dos frades ou a melhor publicidade do século XIX
+  en: Monks’ Pastries, or Maybe the Best Ad of the 19th Century
+  ru: Пирожные монахов, а может быть, лучшая реклама XIX века
+epoch: monarquia-e-republica
+level: story
+year: 1837
+place:
+  name:
+    pt: Lisboa, Belém
+    en: Lisbon, Belém
+    ru: Лиссабон, Белен
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.6975
+  lon: -9.2032
+bridge:
+  name: Pastéis de Belém
+  title:
+    pt: Pastéis de Belém
+    en: Pastéis de Belém
+    ru: Пастейш-де-Белен
+  address: Rua de Belém 84–92, Lisboa
+  lat: 38.6975105
+  lon: -9.2032276
+  maps_url: https://www.google.com/maps/place/Past%C3%A9is+de+Bel%C3%A9m/@38.6975147,-9.2058025,17z/data=!3m2!4b1!5s0xd1ecb452eeecc51:0xfe3cb68ec8239ac7!4m6!3m5!1s0xd1ecb452efd715b:0xffeff6c6b46d9665!8m2!3d38.6975105!4d-9.2032276!16s%2Fg%2F1q5bm9555
+  url: https://pasteisdebelem.pt/en/
+  note:
+    pt: Os pastéis polvilham-se com canela e açúcar em pó ali mesmo, à mesa.
+    en: The tarts get a dusting of cinnamon and powdered sugar right at the table.
+    ru: Пирожные посыпают корицей и сахарной пудрой прямо за столом.
+threads:
+  - comida-e-vinho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Receita secreta dos frades, ou talvez a melhor publicidade do século XIX.
+  en: A secret monastery recipe, or maybe the 19th century’s best marketing.
+  ru: Секретный рецепт монахов, а может быть, лучшая реклама XIX века.
+story:
+  pt: Em 1834, depois da guerra civil, todos os conventos de Portugal foram extintos e os frades
+    mandados para casa. Para sobreviver, alguém do Mosteiro dos Jerónimos, em Belém, começou a
+    vender pastéis de nata numa loja ali ao lado. Em 1837 começaram a fazê-los «pela receita do
+    convento» numa casa junto a uma antiga refinaria de açúcar. A receita é guardada em segredo há
+    quase duzentos anos, e a fila para os pastéis continua.
+  en: In 1834, after the civil war, every monastery in Portugal was shut down and the monks sent home.
+    To make a living, someone from the Jerónimos Monastery in Belém started selling sweet custard
+    tarts in a shop next door. In 1837 they began baking them “from the monastery recipe” in a
+    building by an old sugar refinery. The recipe has been kept secret for almost two hundred years,
+    and there’s still a line for the tarts.
+  ru: В 1834 году, после гражданской войны, в Португалии закрыли все монастыри, а монахов отправили по
+    домам. Чтобы прожить, кто-то из монастыря Жеронимуш в Белене стал продавать сладкие пирожные с
+    заварным кремом в лавке по соседству. В 1837 году их начали печь «по монастырскому рецепту» в
+    доме у бывшего сахарного завода. Рецепт держат в секрете почти двести лет, а очередь за
+    пирожными стоит до сих пор.
+more:
+  pt: >-
+    Em 2022, o historiador João Pedro Gomes, da Universidade de Coimbra, defendeu uma tese sobre a
+    doçaria portuguesa e chegou a uma conclusão inesperada. A «doçaria conventual» é em boa parte um
+    mito. Nos conventos fazia-se doces, como em todo o lado, mas a lenda das receitas secretas das
+    freiras floresceu no século XIX, quando os conventos fecharam e as pastelarias gostavam de
+    vender doces com uma história «conventual».
+
+
+    Nem a versão mais famosa escapa: a de que as freiras engomavam a roupa com claras de ovo e
+    usavam as gemas que sobravam nos doces. Gomes chama-lhe uma historieta: não há provas escritas.
+
+
+    Os pastéis não ficam piores por isso.
+  en: >-
+    In 2022, historian João Pedro Gomes of the University of Coimbra defended a dissertation on
+    Portuguese sweets and came to a surprising conclusion. “Convent pastry” is largely a myth.
+    Convents made sweets, like everyone else, but the legend of nuns’ secret recipes blossomed in
+    the 19th century, when the convents closed and bakeries were happy to sell pastries with a
+    “convent” backstory.
+
+
+    Even the most famous version takes a hit: that nuns starched their clothes with egg whites and
+    used the leftover yolks in sweets. Gomes calls it a tall tale: there’s no written evidence.
+
+
+    The tarts are no worse for it.
+  ru: >-
+    Историк Жуан Педру Гомеш из Коимбрского университета в 2022 году защитил диссертацию о
+    португальских сладостях и пришёл к неожиданному выводу. «Монастырская кондитерская» во многом
+    миф. В монастырях пекли сладкое, как и везде, но легенда о тайных рецептах монахинь расцвела в
+    XIX веке, когда монастыри закрыли, а кондитерские охотно продавали пирожные с «монастырской»
+    историей.
+
+
+    Достаётся и самой знаменитой версии: будто монахини крахмалили одежду яичными белками, а
+    оставшиеся желтки пускали в сладости. Гомеш называет это байкой: письменных свидетельств нет.
+
+
+    Пирожные от этого хуже не стали.
+sources:
+  - title: "Pastéis de Belém: History"
+    url: https://pasteisdebelem.pt/en/history/
+    type: institutional
+    accessed: '2026-10-29'
+  - title: 'RTP: «A ideia de doçaria conventual "é um mito" construído, diz investigador» (5.03.2023)'
+    url: https://www.rtp.pt/noticias/cultura/a-ideia-de-docaria-conventual-e-um-mito-construido-diz-investigador_n1471160
+    type: press
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

@@ -1,0 +1,96 @@
+id: ponte-maria-pia-1877
+slug:
+  pt: a-ponte-de-eiffel-sobre-o-douro
+  en: eiffels-bridge-over-the-douro
+  ru: most-eyfelya-nad-doru
+title:
+  pt: A ponte de Eiffel sobre o Douro
+  en: Eiffel’s Bridge Over the Douro
+  ru: Мост Эйфеля над Дору
+epoch: monarquia-e-republica
+level: frame
+year: 1877
+year_label:
+  pt: 4 de novembro de 1877
+  en: November 4, 1877
+  ru: 4 ноября 1877
+place:
+  name:
+    pt: Porto, rio Douro
+    en: Porto, Douro River
+    ru: Порту, река Дору
+  short:
+    pt: Porto
+    en: Porto
+    ru: Порту
+  lat: 41.1398
+  lon: -8.5972
+bridge:
+  name: Ponte D. Maria Pia
+  title:
+    pt: Ponte D. Maria Pia
+    en: Maria Pia Bridge
+    ru: Мост Марии Пии
+  address: Avenida de Paiva Couceiro, Porto
+  lat: 41.139835
+  lon: -8.5971934
+  maps_url: https://www.google.com/maps/place/Bridge+Maria+Pia/@41.139839,-8.5997683,17z/data=!3m1!4b1!4m6!3m5!1s0xd2464c1d1dcb865:0xf7b80d68d48d9e53!8m2!3d41.139835!4d-8.5971934!16zL20vMGRfOWI5
+  url: https://museusoaresdosreis.gov.pt/d-maria-bridge-in-porto-inaugurated-146-years-ago/?lang=en
+  note:
+    pt: O arco rendilhado vê-se bem da marginal e das pontes vizinhas.
+    en: The lacy arch is easy to see from the riverfront and from the neighboring bridges.
+    ru: Ажурную арку хорошо видно с набережной и с соседних мостов.
+threads:
+  - engenho
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O primeiro recorde de Eiffel não está em Paris, mas no Porto.
+  en: Eiffel’s first record isn’t in Paris. It’s in Porto.
+  ru: Первый рекорд Эйфеля стоит не в Париже, а в Порту.
+story:
+  pt: "A linha de comboio de Lisboa parava no rio Douro: os comboios não conseguiam chegar ao Porto. A
+    ponte foi encomendada à empresa parisiense de Gustave Eiffel. O seu único arco de ferro, com 160
+    metros, tornou-se o mais longo do mundo. A 4 de novembro de 1877, a ponte foi inaugurada pelo
+    rei D. Luís e pela rainha D. Maria Pia, que lhe deu o nome. A Torre Eiffel só apareceria doze
+    anos depois."
+  en: "The railroad from Lisbon dead-ended at the Douro River: trains couldn’t get into Porto. The
+    bridge was ordered from Gustave Eiffel’s Paris firm. Its single iron arch, 160 meters long,
+    became the longest in the world. On November 4, 1877, the bridge was opened by King Luís and
+    Queen Maria Pia, who gave it her name. The Eiffel Tower wouldn’t appear for another twelve
+    years."
+  ru: "Железная дорога из Лиссабона упиралась в реку Дору: поезда не могли попасть в Порту. Мост
+    заказали парижской фирме Гюстава Эйфеля. Его единственная железная арка длиной 160 метров стала
+    самой длинной в мире. 4 ноября 1877 года мост открыли король Луиш и королева Мария Пия, в честь
+    которой его и назвали. Эйфелева башня появится только через двенадцать лет."
+more:
+  pt: A ponte tem uma só via, e os comboios atravessavam-na a 20 quilómetros por hora. Foi assim
+    durante mais de cem anos, até 1991, quando o tráfego passou para a nova Ponte de São João. Desde
+    então a Ponte D. Maria Pia está vazia, mas continua a ser monumento nacional e marco da
+    engenharia mundial.
+  en: The bridge has a single track, and trains crept across at 20 kilometers per hour. It stayed that
+    way for more than a hundred years, until 1991, when traffic moved to the new São João Bridge.
+    Since then the Maria Pia Bridge has stood empty, but it’s still a national monument and a
+    landmark of world engineering.
+  ru: Мост однопутный, и поезда ползли по нему со скоростью 20 километров в час. Так продолжалось
+    больше ста лет, до 1991 года, когда движение перевели на новый мост Сан-Жуан. С тех пор мост
+    Марии Пии стоит пустым, но остаётся национальным памятником и памятником мировой инженерии.
+sources:
+  - title: "Infopédia: Ponte de D. Maria Pia"
+    url: https://www.infopedia.pt/$ponte-de-d.-maria-pia
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Museu Nacional Soares dos Reis: «D. Maria bridge in Porto inaugurated 146 years ago»"
+    url: https://museusoaresdosreis.gov.pt/d-maria-bridge-in-porto-inaugurated-146-years-ago/?lang=en
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Wikipedia: Maria Pia Bridge"
+    url: https://en.wikipedia.org/wiki/Maria_Pia_Bridge
+    type: reference
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

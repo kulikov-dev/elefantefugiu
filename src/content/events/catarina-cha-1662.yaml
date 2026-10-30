@@ -1,0 +1,119 @@
+id: catarina-cha-1662
+slug:
+  pt: a-rainha-que-ensinou-a-inglaterra-a-beber
+  en: the-queen-who-taught-england-to-drink-tea
+  ru: koroleva-kotoraya-nauchila-angliyu-pit-chay
+title:
+  pt: A rainha que ensinou a Inglaterra a beber chá
+  en: The Queen Who Taught England to Drink Tea
+  ru: Королева, которая научила Англию пить чай
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1662
+place:
+  name:
+    pt: Inglaterra
+    en: England
+    ru: Англия
+  lat: 51.5074
+  lon: -0.1278
+bridge:
+  name: Paço Ducal de Vila Viçosa
+  title:
+    pt: Paço Ducal de Vila Viçosa
+    en: Ducal Palace of Vila Viçosa
+    ru: Дворец герцогов Браганса, Вила-Висоса
+  address: Terreiro do Paço, Vila Viçosa
+  lat: 38.7824622
+  lon: -7.4219141
+  maps_url: https://www.google.com/maps/place/%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86+%D0%9F%D0%B0%D1%81%D1%83-%D0%94%D1%83%D0%BA%D0%B0%D0%BB+%D0%B2+%D0%92%D0%B8%D0%BB%D0%B0+%D0%92%D0%B8%D1%81%D0%BE%D0%B7%D0%B0/@38.7824664,-7.424489,17z/data=!3m1!4b1!4m6!3m5!1s0xd17153b588b219d:0x2e68da7d934b92e2!8m2!3d38.7824622!4d-7.4219141!16s%2Fm%2F0j46s59
+  url: https://www.fcbraganca.pt/
+  note:
+    pt: Aqui Catarina nasceu e cresceu, antes de ser rainha de Inglaterra.
+    en: Catherine was born and grew up here, before she became Queen of England.
+    ru: Здесь Катарина родилась и выросла, до того как стать английской королевой.
+threads:
+  - comida-e-vinho
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Uma princesa portuguesa levou para Inglaterra o chá e, no dote, Bombaim.
+  en: A Portuguese princess brought England tea and, in her dowry, Bombay.
+  ru: Португальская принцесса привезла в Англию чай, а в приданое Бомбей.
+story:
+  pt: "Em 1662, D. Catarina de Bragança, filha de D. João IV, casou com o rei Carlos II de Inglaterra.
+    O dote era enorme: dois milhões de cruzados, Tânger, Bombaim e o direito de os mercadores
+    ingleses negociarem no Brasil e na Índia. Levou também o hábito português de beber chá. Na corte
+    começaram a imitar a rainha, e o chá passou de remédio raro a bebida da moda."
+  en: "In 1662, Catherine of Braganza, daughter of John IV, married King Charles II of England. Her
+    dowry was huge: two million cruzados, Tangier, Bombay, and the right for English merchants to
+    trade in Brazil and India. She also brought the Portuguese habit of drinking tea. The court
+    began to copy the queen, and tea went from a rare medicine to a fashionable drink."
+  ru: "В 1662 году Катарина Брагансская, дочь Жуана IV, вышла замуж за английского короля Карла II. Её
+    приданое было огромным: два миллиона крузадо, Танжер, Бомбей и право английским купцам торговать
+    в Бразилии и Индии. Привезла она и португальскую привычку пить чай. При дворе стали подражать
+    королеве, и чай из редкого лекарства превратился в модный напиток."
+more:
+  pt: >-
+    Em Londres já se vendia chá antes dela. Em 1658, uma casa de café junto à Bolsa Real publicou o
+    primeiro anúncio de chá em Inglaterra: «excelente bebida chinesa, aprovada por todos os
+    médicos». Bebiam-no os homens nas casas de café, como um remédio saudável e muito caro.
+
+
+    Catarina bebia chá todos os dias, nos seus aposentos, rodeada das suas damas. Os cortesãos
+    começaram a fazer o mesmo, depois a nobreza, e o chá passou da casa de café para a sala de
+    estar. Por isso lhe chamam a rainha que ensinou a Inglaterra a beber chá: não foi a primeira a
+    levá-lo, mas fez dele um hábito.
+
+
+    Bombaim, que veio no seu dote, foi entregue pela Inglaterra à Companhia das Índias Orientais em
+    1668. Desse porto nasceu Mumbai.
+  en: >-
+    Tea was sold in London before she arrived. In 1658, a coffeehouse near the Royal Exchange
+    printed England’s first tea advertisement: “that excellent and by all Physitians approved China
+    drink.” Men drank it in coffeehouses as a healthy and very expensive remedy.
+
+
+    Catherine drank tea every day in her own rooms, with her ladies. Courtiers started doing the
+    same, then the nobility, and tea moved from the coffeehouse into the drawing room. That’s why
+    she’s called the queen who taught England to drink tea: she wasn’t the first to bring it, but
+    she made it a habit.
+
+
+    England handed Bombay, part of her dowry, to the East India Company in 1668. That port grew into
+    Mumbai.
+  ru: >-
+    Чай в Лондоне продавали и до неё. В 1658 году кофейня у Королевской биржи напечатала первую в
+    Англии рекламу чая: «превосходный китайский напиток, одобренный всеми врачами». Его пили мужчины
+    в кофейнях, как полезное и очень дорогое снадобье.
+
+
+    Катарина пила чай каждый день, у себя, в кругу дам. Придворные стали делать то же, за ними
+    знать, и чай переехал из кофейни в гостиную. Поэтому её и называют королевой, которая научила
+    Англию пить чай: не первой привезла его, а сделала привычкой.
+
+
+    Бомбей из её приданого Англия в 1668 году отдала Ост-Индской компании. Из этого порта вырос
+    Мумбаи.
+sources:
+  - title: "Fitzwilliam Museum: «Tea»"
+    url: https://fitzmuseum.cam.ac.uk/objects-and-artworks/highlights/context/stories-and-histories/tea
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Britannica: Catherine of Braganza"
+    url: https://www.britannica.com/print/article/99703
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Portugal.com: «14 Incredible Facts about Queen Catherine of Braganza»"
+    url: https://www.portugal.com/history-and-culture/14-incredible-facts-about-queen-catherine-of-braganza-portugals-queen-of-tea/
+    type: website
+    accessed: '2026-10-29'
+related:
+  - restauracao-1640
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

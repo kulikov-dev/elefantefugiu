@@ -1,0 +1,110 @@
+id: palacio-da-pena
+slug:
+  pt: o-rei-artista-e-o-seu-palacio-de-conto-de
+  en: the-artist-king-and-his-fairy-tale-palace
+  ru: korol-khudozhnik-i-ego-dvorets-skazka
+title:
+  pt: O rei-artista e o seu palácio de conto de fadas
+  en: The Artist King and His Fairy-Tale Palace
+  ru: Король-художник и его дворец-сказка
+epoch: monarquia-e-republica
+level: story
+year:
+  from: 1838
+  to: 1869
+year_label:
+  pt: 1838 – década de 1860
+  en: 1838 – the 1860s
+  ru: 1838 – 1860-е
+place:
+  name:
+    pt: Sintra
+    en: Sintra
+    ru: Синтра
+  lat: 38.7876
+  lon: -9.3906
+bridge:
+  name: Palácio Nacional da Pena
+  title:
+    pt: Palácio Nacional da Pena
+    en: Pena National Palace
+    ru: Национальный дворец Пена
+  address: Estrada da Pena, Sintra
+  lat: 38.7875851
+  lon: -9.3906089
+  maps_url: https://www.google.com/maps/place/%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86+%D0%9F%D0%B5%D0%BD%D0%B0/@38.7875893,-9.3931838,17z/data=!3m1!4b1!4m6!3m5!1s0xd1edabff29c5a67:0x77271a7dcb673b58!8m2!3d38.7875851!4d-9.3906089!16zL20vMDI5OGYx
+  url: https://www.parquesdesintra.pt/en/
+  note:
+    pt: Há autocarro até lá acima, mas a pé pelo parque é mais bonito.
+    en: There’s a bus to the top, but walking up through the park is prettier.
+    ru: Наверх ходит автобус, но пешком через парк выйдет красивее.
+threads:
+  - gente-como-nos
+  - natureza
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O convento abandonado que se tornou um conto de fadas.
+  en: The abandoned monastery that became a fairy tale.
+  ru: Заброшенный монастырь, который стал сказкой.
+story:
+  pt: O príncipe alemão Fernando de Saxe-Coburgo casou com a rainha D. Maria II e tornou-se o rei D.
+    Fernando II. Pintava, colecionava e adorava castelos românticos. Em 1838 comprou, no alto de um
+    monte em Sintra, um convento vazio desde a extinção das ordens em 1834. Ao velho edifício
+    juntaram-se torres, portões e muralhas nas cores mais ousadas. Assim, sobre o velho convento,
+    cresceram as torres cor-de-rosa e amarelas do Palácio da Pena.
+  en: The German prince Ferdinand of Saxe-Coburg married Portugal’s Queen Maria II and became King
+    Ferdinand II. He painted, collected art, and loved romantic castles. In 1838 he bought a
+    monastery on a hilltop in Sintra that had stood empty since the monasteries were closed in 1834.
+    Towers, gates, and walls in the boldest colors were added to the old building. That’s how the
+    pink and yellow towers of Pena Palace rose over the old monastery.
+  ru: Немецкий принц Фердинанд Саксен-Кобург женился на португальской королеве Марии II и стал королём
+    Фердинандом II. Он рисовал, коллекционировал и обожал романтические замки. В 1838 году он купил
+    на вершине холма в Синтре монастырь, пустовавший с тех пор, как в 1834 году закрыли монастыри. К
+    старому зданию пристроили башни, ворота и стены в самых смелых цветах. Так над старым монастырём
+    выросли розовые и жёлтые башни дворца Пена.
+more:
+  pt: >-
+    A obra foi dirigida pelo barão de Eschwege, engenheiro alemão ao serviço de Portugal. A ala nova
+    começou por volta de 1843, e os trabalhos terminaram em meados da década de 1860. À volta do
+    palácio, D. Fernando plantou um enorme parque com árvores de todo o mundo.
+
+
+    As cores vivas foram desbotando, e só em 1994 os restauradores as devolveram: o rosa ao velho
+    convento e o ocre à ala nova. Um ano depois, a Paisagem Cultural de Sintra entrou na lista do
+    Património Mundial da UNESCO.
+  en: >-
+    Construction was led by Baron von Eschwege, a German engineer in Portuguese service. The new
+    wing was begun around 1843, and work was finished by the mid-1860s. Around the palace, Ferdinand
+    planted a huge park with trees from all over the world.
+
+
+    The bright colors faded over time, and it wasn’t until 1994 that restorers brought them back:
+    pink for the old monastery and ochre for the new wing. A year later, the Cultural Landscape of
+    Sintra was added to UNESCO’s World Heritage List.
+  ru: >-
+    Строительством руководил барон Эшвеге, немецкий инженер на португальской службе. Новое крыло
+    начали около 1843 года, работы закончились к середине 1860-х. Вокруг дворца Фердинанд посадил
+    огромный парк с деревьями со всего света.
+
+
+    Яркие цвета со временем выцвели, и только в 1994 году реставраторы вернули их: розовый старому
+    монастырю и охру новому крылу. Через год культурный ландшафт Синтры внесли в список всемирного
+    наследия ЮНЕСКО.
+sources:
+  - title: "Visit Sintra: National Palace of Pena"
+    url: https://visitsintra.travel/en/visit/monuments/national-palace-of-pena
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Infopédia: Palácio Nacional da Pena"
+    url: https://www.infopedia.pt/artigos/$palacio-nacional-da-pena
+    type: reference
+    accessed: '2026-10-29'
+related:
+  - pasteis-de-belem-1837
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

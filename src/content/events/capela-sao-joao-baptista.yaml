@@ -1,0 +1,122 @@
+id: capela-sao-joao-baptista
+slug:
+  pt: a-capela-que-veio-de-roma-as-pecas
+  en: the-chapel-shipped-from-rome-in-pieces
+  ru: chasovnya-kotoruyu-privezli-iz-rima-po
+title:
+  pt: A capela que veio de Roma às peças
+  en: The Chapel Shipped From Rome in Pieces
+  ru: Часовня, которую привезли из Рима по частям
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year:
+  from: 1742
+  to: 1752
+place:
+  name:
+    pt: Lisboa, Igreja de São Roque
+    en: Lisbon, Church of São Roque
+    ru: Лиссабон, церковь Сан-Роке
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7135
+  lon: -9.1435
+bridge:
+  name: Capela de São João Baptista, Igreja de São Roque
+  title:
+    pt: Capela de São João Baptista, Igreja de São Roque
+    en: Chapel of St. John the Baptist, Church of São Roque
+    ru: Часовня Иоанна Крестителя, церковь Сан-Роке
+  address: Largo Trindade Coelho, Lisboa
+  lat: 38.713516
+  lon: -9.1434694
+  maps_url: https://www.google.com/maps/place/%D0%A6%D0%B5%D1%80%D0%BA%D0%BE%D0%B2%D1%8C+%D0%A1%D0%B2%D1%8F%D1%82%D0%BE%D0%B3%D0%BE+%D0%A0%D0%BE%D1%85%D0%B0/@38.7135202,-9.1460443,17z/data=!3m1!4b1!4m6!3m5!1s0xd1933807947f01b:0x50882d63dd407eef!8m2!3d38.713516!4d-9.1434694!16s%2Fm%2F0412y0c
+  url: https://museusaoroque.scml.pt/
+  note:
+    pt: A capela fica numa das capelas laterais da igreja, e a maqueta no Museu de São Roque, ao lado.
+    en: The chapel is in a side altar of the church, and the model is in the museum next door.
+    ru: Часовня в одном из боковых приделов церкви, а макет в музее Сан-Роке по соседству.
+threads:
+  - engenho
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O rei encomendou uma capela em Roma e trouxe-a às peças.
+  en: The king ordered a chapel from Rome and shipped it in pieces.
+  ru: Король заказал часовню в Риме и привёз её по частям.
+story:
+  pt: D. João V queria uma capela que não ficasse atrás das de Roma. Em 1742 foi encomendada aos
+    melhores mestres romanos, e mais de 130 pessoas trabalharam nela cinco anos, em mármore,
+    lápis-lazúli, ametista e bronze dourado. Depois de pronta, a capela foi montada em Roma e
+    benzida pelo papa Bento XIV, e a seguir desmontada em 174 peças. Três navios levaram-nas para
+    Lisboa, onde a capela voltou a ser montada na Igreja de São Roque.
+  en: John V wanted a chapel as fine as any in Rome. In 1742 it was commissioned from Rome’s best
+    craftsmen, and more than 130 people spent five years making it from marble, lapis lazuli,
+    amethyst, and gilded bronze. Once finished, the chapel was assembled in Rome and blessed by Pope
+    Benedict XIV, then taken apart into 174 pieces. Three ships carried them to Lisbon, where the
+    chapel was put back together in the Church of São Roque.
+  ru: Жуан V хотел у себя часовню не хуже римских. В 1742 году её заказали лучшим мастерам Рима, и
+    больше 130 человек делали её пять лет из мрамора, лазурита, аметиста и позолоченной бронзы.
+    Готовую часовню собрали в Риме, папа Бенедикт XIV её благословил, а потом её разобрали на 174
+    части. Три корабля привезли их в Лиссабон, где часовню собрали заново в церкви Сан-Роке.
+more:
+  pt: >-
+    O rei nunca foi a Roma ver a sua capela. Em vez disso, os mestres fizeram-lhe uma maqueta exata
+    em nogueira, com dourados e pequenas pinturas sobre cobre. Por ela o rei aprovava o projeto, e
+    por ela a capela foi depois montada em Lisboa. A maqueta sobreviveu e está no museu ao lado.
+
+
+    Os quadros da capela são, na verdade, mosaicos. O pintor Agostino Masucci pintou-os a óleo, e os
+    mestres passaram-nos para pedra. O mosaico, ao contrário da pintura, não escurece com as velas e
+    a humidade.
+
+
+    Poucos anos depois da montagem veio o terramoto de 1755, mas a igreja e a capela resistiram.
+  en: >-
+    The king never went to Rome to see his chapel. Instead, the craftsmen made him an exact walnut
+    model, with gilding and tiny paintings on copper. The king approved the design from it, and the
+    chapel was later reassembled in Lisbon from it too. The model survived and is in the museum next
+    door.
+
+
+    The paintings in the chapel are actually mosaics. The painter Agostino Masucci painted them in
+    oil, and the craftsmen translated them into stone. Unlike paint, mosaic doesn’t darken from
+    candle smoke and damp.
+
+
+    A few years after the chapel was assembled, the 1755 earthquake struck, but the church and the
+    chapel survived.
+  ru: >-
+    Король так и не съездил в Рим посмотреть на свою часовню. Вместо этого мастера сделали для него
+    точный макет из ореха, с позолотой и крошечными картинами на меди. По нему король одобрял
+    проект, а потом по нему же часовню собирали в Лиссабоне. Макет сохранился и стоит в музее рядом.
+
+
+    Картины в самой часовне на самом деле мозаики. Художник Агостино Мазуччи написал их маслом, а
+    мастера перевели в камень. Мозаика, в отличие от живописи, не темнеет от свечей и сырости.
+
+
+    Через несколько лет после сборки случилось землетрясение 1755 года, но церковь и часовня
+    уцелели.
+sources:
+  - title: "The Art Newspaper: «Prefabulous: the story of an 18th-century chapel made entirely in Rome»"
+    url: https://www.theartnewspaper.com/2018/08/20/prefabulous-the-story-of-an-18th-century-chapel-made-entirely-in-rome-for-a-church-in-lisbon
+    type: press
+    accessed: '2026-10-29'
+  - title: "Museu de São Roque: Model of the chapel of St. John the Baptist"
+    url: https://museusaoroque.scml.pt/en/collections/csjb-en/model-of-the-chapel-of-st-john-the-baptist/
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Google Arts & Culture (Santa Casa): «The Chapel»"
+    url: https://artsandculture.google.com/story/IwWBW96usfduJw
+    type: institutional
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

@@ -126,6 +126,8 @@ export const eventSchema = z
   level: z.enum(['frame', 'story']),
   year: z.union([z.number().int(), yearRange]),
   year_label: text.optional(),
+  /** The short year on the scale of the epoch page, where the year number would mislead (a century: "I century", an approximate year: "c. 104"). Without it the scale shows the first year. */
+  year_scale: text.optional(),
   /** Where the event happened, as text on the card; any coordinates in the world (the map does not use them). */
   place: z.strictObject({
     /** The full name of the place in each language, shown in the header of the story ("Lisboa, Paço da Ribeira (hoje Praça do Comércio)"). */

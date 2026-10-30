@@ -1,0 +1,108 @@
+id: falsos-sebastiao
+slug:
+  pt: o-rei-que-voltou-quatro-vezes
+  en: the-king-who-came-back-four-times
+  ru: korol-kotoryy-vozvrashchalsya-chetyre-raza
+title:
+  pt: O rei que voltou quatro vezes
+  en: The King Who Came Back Four Times
+  ru: Король, который возвращался четыре раза
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year:
+  from: 1584
+  to: 1602
+place:
+  name:
+    pt: Portugal
+    en: Portugal
+    ru: Португалия
+  lat: 39.5
+  lon: -8
+bridge:
+  name: Estátua de D. Sebastião
+  title:
+    pt: Estátua de D. Sebastião
+    en: Statue of King Sebastian
+    ru: Статуя короля Себастьяна
+  address: Praça Gil Eanes, Lagos
+  lat: 37.102751
+  lon: -8.672983
+  maps_url: https://www.google.com/maps/place/Est%C3%A1tua+a+El+Rei+D.+Sebasti%C3%A3o/@37.102751,-9.8924654,9z/data=!4m7!3m6!1s0xd1b31cdd8e43117:0xee106bb1a5e35f4b!8m2!3d37.102751!4d-8.672983!15sCjLQn9Cw0LzRj9GC0L3QuNC6INC60L7RgNC-0LvRjiDQodC10LHQsNGI0YLQuNCw0L3Rg5IBCG1vbnVtZW504AEA!16s%2Fg%2F11cjkqs7ng
+  url: https://www.cm-lagos.pt/
+  note:
+    pt: A estátua de João Cutileiro foi inaugurada em 1973 e as opiniões sobre ela dividiram-se.
+    en: João Cutileiro’s statue was unveiled in 1973, and opinions about it were divided.
+    ru: Статую работы Жуана Кутилейру открыли в 1973 году, и мнения о ней разделились.
+threads:
+  - poder-e-revolta
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Durante vinte anos, o rei desaparecido foi «encontrado».
+  en: The missing king kept being “found” for twenty years.
+  ru: Пропавшего короля «находили» двадцать лет подряд.
+story:
+  pt: Em 1578, o jovem rei D. Sebastião desapareceu numa batalha em Marrocos. Ninguém viu bem o corpo,
+    e os portugueses acreditavam que o rei voltaria numa manhã de nevoeiro para salvar o país dos
+    espanhóis. Os impostores aproveitaram. Em 1584 disse-se rei um antigo noviço de Penamacor, em
+    1585 um ermitão da Ericeira, depois um pasteleiro de Madrigal, em Espanha, e um calabrês em
+    Veneza. Todos foram desmascarados, mas a fé no regresso ficou.
+  en: In 1578, the young King Sebastian vanished in a battle in Morocco. No one got a good look at the
+    body, and the Portuguese believed the king would return one foggy morning to save the country
+    from the Spanish. Impostors took advantage. In 1584 a former novice from Penamacor claimed to be
+    the king, in 1585 a hermit from Ericeira, then a pastry cook from Madrigal in Spain, and a
+    Calabrian in Venice. All were exposed, but the faith in his return lived on.
+  ru: "В 1578 году молодой король Себастьян исчез в битве в Марокко. Тела никто толком не видел, и
+    португальцы верили: король вернётся туманным утром и спасёт страну от испанцев. Этим
+    пользовались самозванцы. В 1584 году «королём» назвался бывший послушник из Пенамакора, в 1585-м
+    отшельник из Эрисейры, потом кондитер из испанского Мадригала и калабриец в Венеции. Всех
+    разоблачили, но вера в возвращение осталась."
+more:
+  pt: >-
+    A esta fé no regresso do rei chama-se sebastianismo. O impostor da Ericeira, Mateus Álvares,
+    filho de um pedreiro dos Açores, conseguiu juntar um bando inteiro e distribuir títulos pelos
+    seus seguidores. O pasteleiro Gabriel de Espinosa enganou até uma freira de sangue real, prima
+    de D. Sebastião. Mas nenhum deles durou muito: quem aguentou mais tempo, cerca de quatro anos,
+    foi o italiano Marco Tullio Catizone.
+
+
+    «Esperar por D. Sebastião» ainda hoje quer dizer, em português, esperar por um milagre que não
+    vai acontecer.
+  en: >-
+    This faith in the king’s return is called Sebastianism. The Ericeira impostor, Mateus Álvares,
+    the son of a stonemason from the Azores, managed to gather a whole band of followers and hand
+    out titles to them. The pastry cook Gabriel de Espinosa fooled even a nun of royal blood,
+    Sebastian’s own cousin. But none of them lasted long: the one who kept it up longest, about four
+    years, was the Italian Marco Tullio Catizone.
+
+
+    In Portuguese, “waiting for King Sebastian” still means waiting for a miracle that will never
+    come.
+  ru: >-
+    Веру в возвращение короля называют себастьянизмом. Самозванцу из Эрисейры, Матеушу Алварешу,
+    сыну каменщика с Азорских островов, удалось собрать целый отряд и раздать сторонникам титулы.
+    Кондитер Габриэль де Эспиноса обманул даже монахиню королевской крови, двоюродную сестру
+    Себастьяна. Но никто из них долго не продержался: дольше всех, около четырёх лет, тянул обман
+    итальянец Марко Туллио Катицоне.
+
+
+    Фраза «ждать короля Себастьяна» до сих пор значит по-португальски «ждать чуда, которого не
+    будет».
+sources:
+  - title: "Interacções (ISMT): José Henrique Dias, «D. Sebastião e as Máscaras»"
+    url: https://interacoes-ismt.com/index.php/revista/article/download/123/127
+    type: academic
+    accessed: '2026-10-29'
+  - title: "Revista de fontes (Unifesp): Luís Filipe Silvério Lima, «Uma carta de Robert Cecil,
+      secretário de Estado da Inglaterra, sobre o falso Sebastião de Veneza (1601?)»"
+    url: https://periodicos.unifesp.br/index.php/fontes/article/download/16113/12582/79287
+    type: academic
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

@@ -1,0 +1,116 @@
+id: cha-gorreana
+slug:
+  pt: o-cha-que-nasceu-de-uma-doenca-das-laranjas
+  en: the-tea-that-grew-out-of-an-orange-blight
+  ru: chay-kotoryy-vyros-iz-bolezni-apelsinov
+title:
+  pt: O chá que nasceu de uma doença das laranjas
+  en: The Tea That Grew Out of an Orange Blight
+  ru: Чай, который вырос из болезни апельсинов
+epoch: monarquia-e-republica
+level: story
+year: 1883
+place:
+  name:
+    pt: Maia, ilha de São Miguel
+    en: Maia, São Miguel Island
+    ru: Майя, остров Сан-Мигел
+  short:
+    pt: São Miguel
+    en: São Miguel
+    ru: Сан-Мигел
+  lat: 37.8184
+  lon: -25.4025
+bridge:
+  name: Fábrica de Chá Gorreana
+  title:
+    pt: Fábrica de Chá Gorreana
+    en: Gorreana Tea Factory
+    ru: Чайная фабрика Горреана
+  address: EN 1-1.ª, Maia, Ribeira Grande, ilha de São Miguel
+  lat: 37.8183649
+  lon: -25.4024703
+  maps_url: https://www.google.com/maps/place/Gorreana+Tea+Factory/@37.8183691,-25.4050452,17z/data=!3m1!4b1!4m6!3m5!1s0xb5cd92f08cd731d:0x8861d92fa0979fa2!8m2!3d37.8183649!4d-25.4024703!16s%2Fg%2F122nbwym
+  url: https://gorreana.de/en/
+  note:
+    pt: Os socalcos de chá descem até ao oceano, e na fábrica trabalham máquinas antigas.
+    en: The tea terraces slope down to the ocean, and old machines still work in the factory.
+    ru: Чайные террасы спускаются к океану, а в цехе стоят старые машины.
+threads:
+  - comida-e-vinho
+  - natureza
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O chá mais antigo da Europa nasceu de uma doença das laranjas.
+  en: Europe’s oldest tea exists because of a disease that hit oranges.
+  ru: Самый старый чай Европы появился из-за болезни апельсинов.
+story:
+  pt: "A ilha de São Miguel, nos Açores, vivia das laranjas: seguiam de barco para Inglaterra. Mas por
+    volta de 1864 uma doença quase acabou com os pomares. Os ilhéus procuraram uma alternativa e
+    resolveram experimentar o chá. Em 1878 vieram de Macau dois mestres chineses, Lau-a-Pan e o seu
+    intérprete Lau-a-Teng, que ensinaram a cultivar e secar a folha. Em 1883 nasceu a plantação da
+    Gorreana. Ainda funciona, e é a plantação de chá mais antiga da Europa."
+  en: The island of São Miguel in the Azores lived on oranges, shipped by boat to England. But by 1864
+    a blight had nearly wiped out the orchards. Islanders looked for something to replace them and
+    decided to try tea. In 1878 two Chinese tea masters, Lau-a-Pan and his interpreter Lau-a-Teng,
+    were brought in from Macau, and they taught the locals to grow and dry the leaf. In 1883 the
+    Gorreana plantation was founded. It’s still running, and it’s the oldest tea plantation in
+    Europe.
+  ru: "Остров Сан-Мигел на Азорах жил апельсинами: их везли кораблями в Англию. Но к 1864 году болезнь
+    почти уничтожила сады. Островитяне искали, чем их заменить, и решили попробовать чай. В 1878
+    году из Макао пригласили двух китайских мастеров, Лау-а-Пана и его переводчика Лау-а-Тенга, и
+    они научили местных растить и сушить чайный лист. В 1883 году появилась плантация Горреана. Она
+    работает до сих пор, и это самая старая чайная плантация Европы."
+more:
+  pt: >-
+    Os primeiros pés de chá foram trazidos para a ilha já em 1860, pelo proprietário José do Canto.
+    A plantação da Gorreana foi fundada por Ermelinda Gago da Câmara.
+
+
+    E assim o círculo fechou-se: em 1662 a princesa portuguesa Catarina pôs o chá na moda em
+    Inglaterra, e mais de duzentos anos depois Portugal passou a cultivar o seu.
+
+
+    Hoje há duas plantações de chá nos Açores: a Gorreana e a do Porto Formoso.
+  en: >-
+    The first tea bushes were brought to the island back in 1860 by landowner José do Canto. The
+    Gorreana plantation was founded by Ermelinda Gago da Câmara.
+
+
+    And so things came full circle: in 1662 the Portuguese princess Catherine made tea fashionable
+    in England, and more than two hundred years later Portugal began growing its own.
+
+
+    Today the Azores have two tea plantations: Gorreana and Porto Formoso.
+  ru: >-
+    Первые кусты чая на остров привёз ещё в 1860 году землевладелец Жозе ду Канту. Плантацию
+    Горреана основала Эрмелинда Гаго да Камара.
+
+
+    Так круг замкнулся: в 1662 году португальская принцесса Катарина сделала чай модным в Англии, а
+    через двести с лишним лет Португалия стала выращивать собственный.
+
+
+    Сегодня чайных плантаций на Азорах две: Горреана и Порту-Формозу.
+sources:
+  - title: "Diário de Notícias: «O chá mais antigo da Europa produz-se em São Miguel»"
+    url: https://www.dn.pt/arquivo/diario-de-noticias/o-cha-mais-antigo-da-europa-produz-se-em-sao-miguel.html
+    type: press
+    accessed: '2026-10-29'
+  - title: "Infopédia: chá Gorreana"
+    url: https://www.infopedia.pt/artigos/$cha-gorreana
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Wikipedia: Gorreana"
+    url: https://en.wikipedia.org/wiki/Gorreana
+    type: reference
+    accessed: '2026-10-29'
+related:
+  - catarina-cha-1662
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

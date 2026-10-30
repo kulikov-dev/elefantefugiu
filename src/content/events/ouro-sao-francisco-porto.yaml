@@ -1,0 +1,120 @@
+id: ouro-sao-francisco-porto
+slug:
+  pt: cerca-de-400-quilos-de-ouro-do-brasil
+  en: about-400-kilograms-of-brazilian-gold
+  ru: okolo-400-kilogrammov-brazilskogo-zolota
+title:
+  pt: Cerca de 400 quilos de ouro do Brasil
+  en: About 400 Kilograms of Brazilian Gold
+  ru: Около 400 килограммов бразильского золота
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year:
+  from: 1700
+  to: 1750
+year_label:
+  pt: primeira metade do séc. XVIII
+  en: first half of the 18th century
+  ru: первая половина XVIII века
+year_scale:
+  pt: séc. XVIII
+  en: 18th c.
+  ru: XVIII в.
+place:
+  name:
+    pt: Porto
+    en: Porto
+    ru: Порту
+  lat: 41.141
+  lon: -8.616
+bridge:
+  name: Igreja de São Francisco
+  title:
+    pt: Igreja de São Francisco
+    en: Church of São Francisco
+    ru: Церковь Сан-Франсишку
+  address: Rua de São Francisco, Porto
+  lat: 41.1410065
+  lon: -8.616031
+  maps_url: https://www.google.com/maps/place/%D0%A6%D0%B5%D1%80%D0%BA%D0%BE%D0%B2%D1%8C+%D0%A1%D0%B2%D1%8F%D1%82%D0%BE%D0%B3%D0%BE+%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D0%B8%D1%81%D0%BA%D0%B0/@41.1410105,-8.6186059,17z/data=!3m1!4b1!4m6!3m5!1s0xd24651e2e1751f9:0xcae5f5a2cd96956c!8m2!3d41.1410065!4d-8.616031!16zL20vMGczN2sy
+  url: https://porto.travel/san-francisco-church/
+  note:
+    pt: A igreja fica sobre a Ribeira, ao lado do Palácio da Bolsa.
+    en: The church stands above the Ribeira waterfront, next to the Stock Exchange Palace.
+    ru: Церковь стоит над набережной Рибейры, рядом с Биржевым дворцом.
+threads:
+  - engenho
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Frades com voto de pobreza cobriram a sua igreja de ouro.
+  en: Friars sworn to poverty covered their church in gold.
+  ru: Монахи с обетом бедности покрыли свою церковь золотом.
+story:
+  pt: "No final do século XVII encontrou-se ouro no Brasil, e para Portugal partiram navios com uma
+    carga preciosa. Parte desse ouro foi para as igrejas. Os franciscanos do Porto, uma ordem com
+    voto de pobreza, cobriram por dentro a sua igreja gótica de talha dourada: colunas, abóbadas,
+    altares, anjos e videiras. Gastaram-se cerca de 400 quilos de ouro brasileiro. Por fora a igreja
+    é simples e cinzenta, e por isso o interior corta a respiração."
+  en: "At the end of the 17th century gold was found in Brazil, and ships with precious cargo set sail
+    for Portugal. Some of that gold went to churches. The Franciscans in Porto, an order sworn to
+    poverty, covered the inside of their Gothic church with gilded wood carving: columns, vaults,
+    altars, angels, and grapevines. It took about 400 kilograms of Brazilian gold. From the outside
+    the church is plain and gray, which is why the interior takes your breath away."
+  ru: "В конце XVII века в Бразилии нашли золото, и в Португалию поплыли корабли с драгоценным грузом.
+    Часть золота ушла на церкви. Францисканцы в Порту, орден, давший обет бедности, покрыли свою
+    готическую церковь изнутри резьбой из позолоченного дерева: колонны, своды, алтари, ангелы и
+    виноградные лозы. На это ушло около 400 килограммов бразильского золота. Снаружи церковь простая
+    и серая, поэтому внутри дух захватывает."
+more:
+  pt: >-
+    O ouro foi encontrado nas serras de Minas Gerais, e para lá correram milhares de garimpeiros. A
+    Coroa ficava com a quinta parte de tudo o que se extraía, o «quinto». Esse dinheiro construiu
+    Mafra e a capela de São Roque, e igrejas por todo o país vestiram-se de talha dourada: a madeira
+    era esculpida, coberta de finíssimas folhas de ouro e forrava as paredes por inteiro.
+
+
+    A Igreja de São Francisco sobreviveu ao próprio convento. Em 1832, durante o Cerco do Porto, um
+    incêndio destruiu os claustros, e no seu lugar construiu-se o Palácio da Bolsa, que hoje está
+    parede com parede com a igreja. E debaixo do chão ficaram as catacumbas onde durante séculos se
+    enterraram as famílias ricas da cidade.
+  en: >-
+    The gold was found in the mountains of Minas Gerais, and thousands of prospectors rushed there.
+    The Crown took a fifth of everything mined, the “quinto.” That money built Mafra and the São
+    Roque chapel, and churches all over the country were dressed in talha dourada, gilded carving:
+    wood was carved, covered with the thinnest sheets of gold, and used to line entire walls.
+
+
+    The Church of São Francisco outlived its own monastery. In 1832, during the Siege of Porto, a
+    fire destroyed the cloisters, and the Stock Exchange Palace was built in their place; today it
+    stands wall to wall with the church. And under the floor are the catacombs where the city’s
+    wealthy families were buried for centuries.
+  ru: >-
+    Золото нашли в горах Минас-Жерайс, и туда хлынули тысячи искателей. Корона забирала пятую часть
+    всего добытого, «кинту». Эти деньги построили Мафру и часовню Сан-Роке, а церкви по всей стране
+    одели в «тальу дораду», позолоченную резьбу: дерево вырезали, покрывали тончайшими листами
+    золота и закрывали им стены целиком.
+
+
+    Церковь Сан-Франсишку пережила и сам монастырь. В 1832 году, во время осады Порту, пожар
+    уничтожил монастырские галереи, и на их месте построили Биржевой дворец, который теперь стоит
+    стена к стене с церковью. А под полом сохранились катакомбы, где веками хоронили богатые семьи
+    города.
+sources:
+  - title: "Porto.travel: São Francisco Church"
+    url: https://porto.travel/san-francisco-church/
+    type: website
+    accessed: '2026-10-29'
+  - title: "Infopédia: Igreja de S. Francisco (Porto)"
+    url: https://www.infopedia.pt/artigos/$igreja-de-s.-francisco-(porto)
+    type: reference
+    accessed: '2026-10-29'
+related:
+  - mafra-sinos-1717
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

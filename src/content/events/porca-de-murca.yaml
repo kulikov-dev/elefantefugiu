@@ -1,0 +1,135 @@
+id: porca-de-murca
+slug:
+  pt: os-porcos-de-granito-mais-velhos-do-que-os
+  en: granite-pigs-older-than-the-romans
+  ru: granitnye-svini-starshe-rimlyan
+title:
+  pt: Os porcos de granito mais velhos do que os romanos
+  en: Granite Pigs Older Than the Romans
+  ru: Гранитные свиньи старше римлян
+epoch: lusitania-e-roma
+level: story
+year:
+  from: -400
+  to: -1
+year_label:
+  pt: séc. IV–I a.C.
+  en: 4th–1st century BC
+  ru: IV–I века до н. э.
+year_scale:
+  pt: séc. IV a.C.
+  en: 4th c. BC
+  ru: IV в. до н. э.
+place:
+  name:
+    pt: Murça
+    en: Murça
+    ru: Мурса
+  lat: 41.4073
+  lon: -7.4534
+bridge:
+  name: Porca de Murça
+  title:
+    pt: Porca de Murça
+    en: Murça Pig (Porca de Murça)
+    ru: Свинья из Мурсы
+  address: Largo 31 de Janeiro, Murça
+  lat: 41.4072519
+  lon: -7.4533598
+  maps_url: https://www.google.com/maps/place/Porca+de+Mur%C3%A7a/@41.4072519,-7.4559347,17z/data=!4m6!3m5!1s0xd3b3e3127539c43:0xf67fa0571bc33dd1!8m2!3d41.4072519!4d-7.4533598!16s%2Fg%2F11ffkszc3n
+  url: https://www.cm-murca.pt/
+  note:
+    pt: A figura está mesmo no meio da praça e pode tocar-se; daqui começam as vinhas do Douro.
+    en: The figure stands right in the square, and you can touch it; the Douro vineyards start here.
+    ru: Фигура стоит прямо на площади, её можно потрогать; отсюда начинаются виноградники Дору.
+threads:
+  - natureza
+importance: 2
+label: debated
+min_age: all
+sensitive: false
+hook:
+  pt: A porca com mais de dois mil anos.
+  en: A pig more than two thousand years old.
+  ru: Свинья, которой больше двух тысяч лет.
+story:
+  pt: "Ainda antes dos romanos, os povos do nordeste de Portugal e do oeste de Espanha esculpiam em
+    granito javalis, porcos e touros. Chamam-lhes berrões. Já se encontraram mais de quatrocentos.
+    Ninguém sabe ao certo para que serviam: talvez para proteger os rebanhos, talvez como marcos ou
+    sepulturas. O mais famoso, a Porca de Murça, tem quase dois metros de comprido, e os habitantes
+    veem nela o símbolo da vila."
+  en: "Even before the Romans, tribes in northeastern Portugal and western Spain carved boars, pigs,
+    and bulls out of granite. They’re called berrões. More than four hundred have been found. No one
+    knows for sure what they were for: maybe to protect herds, maybe as boundary markers or grave
+    markers. The most famous, the Porca de Murça, is almost two meters long, and the townspeople see
+    it as the symbol of their town."
+  ru: "Ещё до римлян племена на северо-востоке Португалии и на западе Испании высекали из гранита
+    кабанов, свиней и быков. Их называют «берройнш». Таких фигур нашли больше четырёхсот. Зачем их
+    ставили, никто точно не знает: может быть, чтобы оберегать стада, может быть, как межевые знаки
+    или надгробия. Самая известная, «Свинья из Мурсы», длиной почти два метра, и горожане считают её
+    символом городка."
+more:
+  pt: >-
+    A Porca de Murça foi esculpida num só bloco de granito: 1,7 metros de comprimento e cerca de um
+    metro de altura. O mais provável é ter vindo do castro no monte em frente à vila.
+
+
+    Os animais de pedra sobreviveram a quem os fez. No tempo dos romanos, alguns receberam
+    inscrições funerárias em latim. Em Bragança, o pelourinho medieval assenta numa base de granito
+    em forma de berrão.
+
+
+    Em Espanha, estes animais entraram na literatura. O touro de pedra junto à ponte romana de
+    Salamanca aparece no «Lazarilho de Tormes»: o amo cego bate com a cabeça do rapaz na pedra para
+    ele «ganhar juízo». E Cervantes lembra os «touros de Guisando» no «Dom Quixote».
+  en: >-
+    The Murça pig was carved from a single block of granite: 1.7 meters long and about a meter high.
+    It most likely came from the hillfort on the hill facing the town.
+
+
+    The stone animals outlived the people who made them. In Roman times, some were carved with Latin
+    funeral inscriptions. In Bragança, the medieval pillory stands on a granite base shaped like the
+    same kind of boar.
+
+
+    In Spain, these animals made it into literature. The stone bull by the Roman bridge in Salamanca
+    appears in “Lazarillo de Tormes”: the boy’s blind master slams his head against the stone to
+    “smarten him up.” And Cervantes mentions the “Bulls of Guisando” in “Don Quixote.”
+  ru: >-
+    Свинью из Мурсы высекли из одного куска гранита: 1,7 метра в длину и около метра в высоту.
+    Скорее всего, её привезли с городища на холме напротив городка.
+
+
+    Каменные звери пережили своих мастеров. При римлянах на некоторых вырезали латинские надгробные
+    надписи. В Брагансе средневековый позорный столб, пелоуриню, поставили на гранитное основание в
+    виде такого же кабана.
+
+
+    В Испании эти звери попали в литературу. О каменном быке у римского моста в Саламанке
+    рассказывает «Жизнь Ласарильо с Тормеса»: слепой хозяин бьёт мальчика головой о камень, чтобы
+    тот «поумнел». А «быков из Гисандо» вспоминает Сервантес в «Дон Кихоте».
+sources:
+  - title: "Infopédia: Porca de Murça"
+    url: https://www.infopedia.pt/artigos/$porca-de-murca
+    type: reference
+    accessed: '2026-10-29'
+  - title: «The berrões, protohistoric stone statues of the boars»
+    url: https://oasisbr.ibict.br/vufind/Record/RCAP_59bdddfe29cc24d0648fec24fbaaab6e
+    type: academic
+    accessed: '2026-10-29'
+  - title: "Wikipedia: Pillory of Bragança"
+    url: https://en.wikipedia.org/wiki/Pillory_of_Bragan%C3%A7a
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Wikipedia: Verraco of the bridge"
+    url: https://en.wikipedia.org/wiki/Verraco_of_the_bridge
+    type: reference
+    accessed: '2026-10-29'
+    note:
+      pt: Salamanca
+      en: Salamanca
+      ru: Саламанка
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

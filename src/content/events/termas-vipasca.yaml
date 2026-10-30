@@ -1,0 +1,133 @@
+id: termas-vipasca
+slug:
+  pt: os-banhos-onde-as-mulheres-pagavam-o-dobro
+  en: the-baths-where-women-paid-double
+  ru: banya-gde-zhenshchiny-platili-vdvoe
+title:
+  pt: Os banhos onde as mulheres pagavam o dobro
+  en: The Baths Where Women Paid Double
+  ru: Баня, где женщины платили вдвое
+epoch: lusitania-e-roma
+level: story
+year:
+  from: 90
+  to: 120
+year_label:
+  pt: finais do séc. I – início do séc. II
+  en: late 1st – early 2nd century
+  ru: конец I – начало II века
+year_scale:
+  pt: séc. I–II
+  en: 1st–2nd c.
+  ru: I–II вв.
+place:
+  name:
+    pt: Aljustrel (Vipasca)
+    en: Aljustrel (Vipasca)
+    ru: Алжуштрел (Випаска)
+  short:
+    pt: Aljustrel
+    en: Aljustrel
+    ru: Алжуштрел
+  lat: 37.8794
+  lon: -8.1667
+bridge:
+  name: Museu Geológico
+  title:
+    pt: Museu Geológico
+    en: Geological Museum
+    ru: Геологический музей
+  address: Rua da Academia das Ciências 19, Lisboa
+  lat: 38.7131327
+  lon: -9.150004
+  maps_url: https://www.google.com/maps/place/Museu+Geol%C3%B3gico/@38.7131369,-9.1525789,17z/data=!3m2!4b1!5s0xd19337e3cd580cf:0xefc252225a3c85c9!4m6!3m5!1s0xd193306a60a7a37:0x118f7f3e933d18b2!8m2!3d38.7131327!4d-9.150004!16s%2Fg%2F120t4qlr
+  url: https://www.lneg.pt/
+  note:
+    pt: Aqui guarda-se a primeira das duas placas de bronze com as leis de Vipasca.
+    en: The first of the two bronze tablets with the laws of Vipasca is kept here.
+    ru: Здесь хранится первая из двух бронзовых досок с законами Випаски.
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Nos banhos romanos, as mulheres pagavam o dobro dos homens.
+  en: At the Roman baths, women paid twice as much as men.
+  ru: В римской бане женщины платили вдвое больше мужчин.
+story:
+  pt: Junto à mina de Vipasca, hoje Aljustrel, no Alentejo, cresceu no tempo dos romanos uma aldeia de
+    mineiros. A vida dela foi regulada por lei em placas de bronze. Nos banhos, a manhã até à sétima
+    hora era das mulheres, e os homens tomavam banho da oitava hora do dia até à segunda da noite.
+    Um homem pagava meia moeda, uma mulher uma inteira. As crianças, os soldados e os escravos do
+    imperador não pagavam. As placas foram encontradas nas velhas escórias da mina em 1876 e 1906.
+  en: By the Vipasca mine, today’s Aljustrel in the Alentejo, a Roman miners’ village grew up. Its
+    life was laid down by law on bronze tablets. At the baths, the morning until the seventh hour
+    belonged to women, and men bathed from the eighth hour of the day until the second hour of the
+    night. A man paid half a coin, a woman a whole one. Children, soldiers, and imperial slaves got
+    in free. The tablets were found in the mine’s old slag heaps in 1876 and 1906.
+  ru: У рудника Випаска, нынешнего Алжуштрела в Алентежу, при римлянах вырос посёлок горняков. Его
+    жизнь расписали законом на бронзовых досках. В бане утро до седьмого часа отдавали женщинам, а
+    мужчины мылись с восьмого часа дня до второго часа ночи. Мужчина платил полмонеты, женщина
+    целую. Бесплатно пускали детей, солдат и императорских рабов. Доски нашли в старых шлаках
+    рудника в 1876 и 1906 годах.
+more:
+  pt: >-
+    Os historiadores discutem se as mulheres eram mesmo prejudicadas. Uma das hipóteses: as horas
+    delas eram de manhã, quando era preciso voltar a aquecer os banhos, e o arrendatário cobrava
+    mais para cobrir as despesas. Ele, aliás, era obrigado a aquecer os banhos todos os dias e a
+    manter cheias as caldeiras de bronze.
+
+
+    As placas descrevem a aldeia inteira. O direito de cortar o cabelo pertencia a um só barbeiro
+    arrendatário, os barbeiros ambulantes eram afastados, e os donos podiam cortar o cabelo aos seus
+    escravos. Os mestres-escola estavam isentos de impostos.
+
+
+    A primeira placa está no Museu Geológico, em Lisboa, e a segunda no Museu Nacional de
+    Arqueologia. A mina de Aljustrel continua a trabalhar.
+  en: >-
+    Historians argue over whether women were really being treated unfairly. One theory: their hours
+    fell in the morning, when the baths had to be heated up again, and the leaseholder charged more
+    to cover his costs. He was also required to heat the baths every day and keep the bronze boilers
+    full.
+
+
+    The tablets describe the whole village. The right to cut hair belonged to a single licensed
+    barber, traveling barbers were sent away, and masters were allowed to cut their own slaves’
+    hair. Schoolteachers were exempt from taxes.
+
+
+    The first tablet is in the Geological Museum in Lisbon, the second in the National Archaeology
+    Museum. The Aljustrel mine is still working today.
+  ru: >-
+    Историки спорят, обижали ли тут женщин. Одна из версий: их часы приходились на утро, когда баню
+    нужно было заново растапливать, и арендатор брал больше за свои расходы. Он, кстати, обязан был
+    топить баню каждый день и следить, чтобы бронзовые котлы были полны.
+
+
+    Доски расписывают весь посёлок. Право стричь людей принадлежало одному цирюльнику-арендатору,
+    бродячих цирюльников гнали, а хозяевам разрешалось стричь своих рабов самим. Школьных учителей
+    освободили от налогов.
+
+
+    Первая доска хранится в Геологическом музее Лиссабона, вторая в Национальном археологическом
+    музее. Рудник в Алжуштреле работает и сегодня.
+sources:
+  - title: "Universidade de Coimbra: «O quotidiano numa aldeia mineira romana: o caso de Vipasca»"
+    url: https://estudogeral.uc.pt/handle/10316/24288
+    type: academic
+    accessed: '2026-10-29'
+  - title: "Conimbriga (UC): «O preço de entrada nas termas de Vipasca»"
+    url: https://dl.uc.pt/bitstream/10316.2/45379/1/o_preco_de_entrada_nas_termas_de_vipasca.pdf
+    type: academic
+    accessed: '2026-10-29'
+  - title: "Mindat: «The Bronze Boards of Vipasca»"
+    url: https://www.mindat.org/article.php/1681/The+Bronze+Boards+of+Vipasca
+    type: reference
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

@@ -1,0 +1,104 @@
+id: elevador-bom-jesus
+slug:
+  pt: o-funicular-que-anda-a-agua
+  en: the-funicular-that-runs-on-water
+  ru: funikuler-kotoryy-ezdit-na-vode
+title:
+  pt: O funicular que anda a água
+  en: The Funicular That Runs on Water
+  ru: Фуникулёр, который ездит на воде
+epoch: monarquia-e-republica
+level: story
+year: 1882
+year_label:
+  pt: 25 de março de 1882
+  en: March 25, 1882
+  ru: 25 марта 1882
+place:
+  name:
+    pt: Braga, Bom Jesus do Monte
+    en: Braga, Bom Jesus do Monte
+    ru: Брага, Бон-Жезуш-ду-Монте
+  short:
+    pt: Braga
+    en: Braga
+    ru: Брага
+  lat: 41.5549
+  lon: -8.3779
+bridge:
+  name: Elevador do Bom Jesus
+  title:
+    pt: Elevador do Bom Jesus
+    en: Bom Jesus Funicular
+    ru: Фуникулёр Бон-Жезуш
+  address: Bom Jesus do Monte, Tenões, Braga
+  lat: 41.554926
+  lon: -8.3779446
+  maps_url: https://www.google.com/maps/place/%D0%A4%D1%83%D0%BD%D0%B8%D0%BA%D1%83%D0%BB%D1%91%D1%80+%D0%B2+%D0%91%D0%BE%D0%BD-%D0%96%D0%B5%D0%B7%D1%83%D1%81/@41.55493,-8.3805195,17z/data=!4m6!3m5!1s0xd24fc159d7b4fc1:0xab584a4ddc47d0f4!8m2!3d41.554926!4d-8.3779446!16s%2Fm%2F0274x_9
+  url: https://bomjesus.pt/
+  note:
+    pt: Suba de funicular e desça a pé pela escadaria barroca.
+    en: Ride the funicular up and walk down the Baroque staircase.
+    ru: Наверх лучше на фуникулёре, а вниз пешком по барочной лестнице.
+threads:
+  - engenho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O funicular que anda a água há 140 anos.
+  en: The funicular that’s run on water for 140 years.
+  ru: Фуникулёр, который 140 лет работает на воде.
+story:
+  pt: Sobre Braga ergue-se o santuário do Bom Jesus do Monte, com uma enorme escadaria barroca. Em
+    1882, a subida dos peregrinos ficou mais fácil com um funicular. As duas cabines estão ligadas
+    por um só cabo. Lá em cima, o depósito da cabine de cima enche-se com quase seis mil litros de
+    água, ela fica mais pesada, desce e puxa a de baixo para cima. Em baixo a água é despejada, e
+    tudo se repete. O funicular continua sem motor.
+  en: Above Braga stands the sanctuary of Bom Jesus do Monte, with a huge Baroque staircase. In 1882,
+    a funicular made the climb easier for pilgrims. Its two cars are linked by a single cable. At
+    the top, the upper car’s tank is filled with almost six thousand liters of water; it gets
+    heavier, rolls down, and pulls the lower car up. At the bottom the water is drained, and it all
+    starts again. The funicular still has no motor.
+  ru: Над Брагой стоит святилище Бон-Жезуш-ду-Монте с огромной барочной лестницей. В 1882 году
+    паломникам облегчили подъём фуникулёром. Две кабины связаны одним тросом. Наверху в бак верхней
+    кабины заливают почти шесть тысяч литров воды, она тяжелеет, едет вниз и тянет нижнюю наверх.
+    Внизу воду сливают, и всё повторяется. Мотора у фуникулёра нет до сих пор.
+more:
+  pt: >-
+    É o funicular de contrapeso de água mais antigo do mundo ainda a transportar passageiros. O
+    percurso tem 274 metros e sobe 116.
+
+
+    Projetou-o Raoul Mesnier du Ponsard, com o engenheiro suíço Niklaus Riggenbach. Vinte anos
+    depois, o mesmo Mesnier construiria em Lisboa o Elevador de Santa Justa.
+  en: >-
+    It’s the oldest water-counterbalanced funicular in the world still carrying passengers. The
+    track is 274 meters long and climbs 116 meters.
+
+
+    It was designed by Raoul Mesnier du Ponsard together with the Swiss engineer Niklaus Riggenbach.
+    Twenty years later, the same Mesnier would build the Santa Justa Lift in Lisbon.
+  ru: >-
+    Это самый старый в мире фуникулёр на водяном противовесе, который всё ещё возит пассажиров.
+    Длина пути 274 метра, подъём 116 метров.
+
+
+    Спроектировал его Раул Мениер дю Понсар вместе со швейцарским инженером Никлаусом Риггенбахом.
+    Через двадцать лет тот же Мениер построит в Лиссабоне лифт Санта-Жушта.
+sources:
+  - title: "Bom Jesus do Monte: «Elevator or Funicular»"
+    url: https://bomjesus.pt/bom-jesus/elevator-or-funicular/?lang=en
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Wikipedia: Bom Jesus do Monte Funicular"
+    url: https://en.wikipedia.org/wiki/Bom_Jesus_do_Monte_Funicular
+    type: reference
+    accessed: '2026-10-29'
+related:
+  - elevador-santa-justa
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

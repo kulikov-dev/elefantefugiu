@@ -1,0 +1,112 @@
+id: viriato-139-ac
+slug:
+  pt: roma-nao-paga-a-traidores
+  en: rome-doesnt-pay-traitors
+  ru: rim-ne-platit-predatelyam
+title:
+  pt: Roma não paga a traidores
+  en: Rome Doesn’t Pay Traitors
+  ru: Рим не платит предателям
+epoch: lusitania-e-roma
+level: frame
+year: -139
+place:
+  name:
+    pt: Lusitânia
+    en: Lusitania
+    ru: Лузитания
+  lat: 39.9
+  lon: -7.6
+bridge:
+  name: Monumento a Viriato
+  title:
+    pt: Monumento a Viriato, Cava de Viriato
+    en: Viriathus Monument, Cava de Viriato
+    ru: Памятник Вириату у Кава-де-Вириату
+  address: Cava de Viriato, Viseu
+  lat: 40.6652641
+  lon: -7.9118442
+  maps_url: https://www.google.com/maps/place/Viriato+Monument/@40.6652681,-7.9167151,17z/data=!3m1!4b1!4m6!3m5!1s0xd23364a4986e6e5:0xd208e68e18032fe3!8m2!3d40.6652641!4d-7.9118442!16s%2Fg%2F122dm3l7
+  url: https://www.cm-viseu.pt/
+  note:
+    pt: Ao lado fica uma enorme muralha octogonal que em Viseu sempre se chamou o acampamento de
+      Viriato.
+    en: Next to it is a huge octagonal earthwork that Viseu has long called Viriathus’s camp.
+    ru: Рядом огромный восьмиугольный вал, который в Визеу издавна называют лагерем Вириата.
+threads:
+  - poder-e-revolta
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Roma não conseguiu vencer o pastor. Então comprou os amigos dele.
+  en: Rome couldn’t defeat the shepherd. So it bought his friends.
+  ru: Победить пастуха Рим не смог. Тогда он подкупил его друзей.
+story:
+  pt: Viriato era um pastor lusitano e tornou-se o chefe contra quem Roma lutou oito anos. Atraía as
+    legiões para as serras e para emboscadas e acabou por obrigar Roma a assinar a paz. Foi então
+    que o general romano Cepião escolheu outro caminho. Três companheiros de Viriato foram ter com
+    ele para negociar, e Cepião prometeu-lhes uma recompensa pela morte do chefe. De regresso,
+    mataram Viriato enquanto dormia. Sem o seu chefe, os lusitanos renderam-se pouco depois.
+  en: Viriathus was a Lusitanian shepherd who became the leader Rome fought for eight years. He lured
+    the legions into the mountains and into ambushes, and in the end he forced Rome to sign a peace.
+    That’s when the Roman general Caepio tried another way. Three of Viriathus’s companions came to
+    him to negotiate, and Caepio promised them a reward for their leader’s death. When they got
+    back, they killed Viriathus in his sleep. Without him, the Lusitanians soon surrendered.
+  ru: Вириат был пастухом из лузитан, а стал вождём, с которым Рим воевал восемь лет. Он заманивал
+    легионы в горы и засады и в конце концов заставил Рим подписать мир. Тогда римский полководец
+    Цепион пошёл другим путём. Трое приближённых Вириата приехали к нему на переговоры, и он
+    пообещал им награду за смерть вождя. Вернувшись, они убили Вириата во сне. Без вождя лузитаны
+    вскоре сдались.
+more:
+  pt: >-
+    A história chega-nos pelos historiadores gregos Apiano e Diodoro, que divergem nos pormenores:
+    nem o nome do terceiro conjurado é o mesmo. Segundo a tradição, quando os assassinos foram
+    buscar a recompensa, Cepião respondeu-lhes: «Roma não paga a traidores.» Em Apiano é diferente:
+    Cepião pagou-lhes uma parte e mandou-os a Roma buscar o resto.
+
+
+    Para os portugueses, Viriato tornou-se o primeiro herói do país, muito antes de Portugal
+    existir. Nele vê-se um povo pequeno que não se rende a um grande império. Há ruas, escolas e
+    clubes de futebol com o seu nome, e em Viseu, onde se diz que ficava o seu acampamento, tem um
+    monumento.
+  en: >-
+    The story comes from the Greek historians Appian and Diodorus, and they disagree on the details:
+    they don’t even give the same name for the third conspirator. According to legend, when the
+    killers came for their reward, Caepio told them, “Rome doesn’t pay traitors.” Appian tells it
+    differently: Caepio paid them part of the money and sent them to Rome for the rest.
+
+
+    For the Portuguese, Viriathus became the country’s first hero, long before Portugal existed.
+    They see in him a small people that won’t give in to a great empire. Streets, schools, and
+    soccer clubs carry his name, and in Viseu, where his camp is believed to have stood, he has a
+    monument.
+  ru: >-
+    Об этом рассказывают греческие историки Аппиан и Диодор, и в деталях они расходятся: даже имя
+    третьего заговорщика у них разное. По преданию, когда убийцы пришли за наградой, Цепион ответил
+    им: «Рим не платит предателям». У Аппиана всё иначе: Цепион заплатил им часть денег и отправил
+    за остальным в Рим.
+
+
+    Для португальцев Вириат стал первым героем страны, задолго до того, как появилась сама
+    Португалия. В нём видят маленький народ, который не сдаётся большой империи. Его именем называют
+    улицы, школы и футбольные клубы, а в Визеу, где, как считается, стоял его лагерь, ему поставили
+    памятник.
+sources:
+  - title: "Appian: Roman History, The Spanish Wars (Iberike), 69–75"
+    url: https://fgh.perseids.org/read/greekLit/tlg0551/tlg007/perseus-eng2/12.72-13.77
+    type: reference
+    accessed: '2026-10-29'
+    note:
+      pt: Tradução inglesa, Perseus
+      en: English translation, Perseus
+      ru: Английский перевод, Perseus
+  - title: "Infopédia: Viriato"
+    url: https://www.infopedia.pt/apoio/artigos/%24viriato
+    type: reference
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

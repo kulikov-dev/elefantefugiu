@@ -1,0 +1,116 @@
+id: livraria-lello
+slug:
+  pt: a-livraria-onde-j-k-rowling-nunca-entrou
+  en: the-bookstore-j-k-rowling-never-visited
+  ru: knizhnyy-magazin-gde-ne-byvala-rouling
+title:
+  pt: A livraria onde J.K. Rowling nunca entrou
+  en: The Bookstore J.K. Rowling Never Visited
+  ru: Книжный магазин, где не бывала Роулинг
+epoch: monarquia-e-republica
+level: story
+year: 1906
+year_label:
+  pt: 1906 e 2020
+  en: 1906 and 2020
+  ru: 1906 и 2020
+place:
+  name:
+    pt: Porto
+    en: Porto
+    ru: Порту
+  lat: 41.1469
+  lon: -8.6148
+bridge:
+  name: Livraria Lello
+  title:
+    pt: Livraria Lello
+    en: Livraria Lello
+    ru: Книжный магазин Lello
+  address: Rua das Carmelitas 144, Porto
+  lat: 41.1468933
+  lon: -8.6147867
+  maps_url: https://www.google.com/maps/search/?api=1&query=Livraria+Lello+Porto
+  url: https://www.livrarialello.pt/
+  note:
+    pt: A escada vermelha no meio da sala, a mesma da lenda.
+    en: The red staircase in the middle of the room, the one from the legend.
+    ru: Красная лестница в центре зала, та самая, из легенды.
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A livraria onde J.K. Rowling nunca entrou.
+  en: The bookstore J.K. Rowling never set foot in.
+  ru: Магазин, в котором не была Дж. Роулинг.
+story:
+  pt: "A Livraria Lello abriu no Porto em 1906: fachada neogótica, vitrais e uma escada vermelha que
+    parece escorrer do primeiro andar. No início dos anos 90, a jovem Joanne Rowling viveu no Porto
+    e deu aulas de inglês. Assim nasceu a lenda de que a escada da Lello lhe inspirou Hogwarts. A
+    livraria tornou-se uma das mais visitadas do mundo. Em 2020, Rowling escreveu: «Nunca estive
+    nesta livraria.»"
+  en: "Livraria Lello opened in Porto in 1906: a neo-Gothic facade, stained glass, and a red staircase
+    that seems to pour down from the second floor. In the early 1990s, a young Joanne Rowling lived
+    in Porto and taught English. That’s how the legend was born that Lello’s staircase inspired
+    Hogwarts. The shop became one of the most visited bookstores in the world. In 2020, Rowling
+    wrote: “I never visited this bookshop.”"
+  ru: "Книжный магазин Lello открылся в Порту в 1906 году: неоготический фасад, витражи и красная
+    лестница, которая будто течёт со второго этажа. В начале 1990-х в Порту жила и преподавала
+    английский молодая Джоан Роулинг. Так родилась легенда, что лестница Lello вдохновила её на
+    Хогвартс. Магазин стал одним из самых посещаемых в мире. В 2020 году Роулинг написала: «Никогда
+    не бывала в этом магазине»."
+more:
+  pt: >-
+    Rowling viveu no Porto de 1991 a 1993 e, segundo ela, escreveu cá os primeiros capítulos. No
+    tweet de 21 de maio de 2020 acrescentou: «É linda, e gostava de a visitar, mas não tem nada a
+    ver com Hogwarts.»
+
+
+    Um sítio do Porto, porém, ela própria reconheceu. No Café Majestic, na Rua de Santa Catarina,
+    escreveu algumas vezes, e chamou-lhe talvez o café mais bonito onde alguma vez trabalhou.
+
+
+    A lenda da Lello ficou lenda, mas mudou a livraria para sempre: hoje lá dentro há mais turistas
+    do que compradores.
+  en: >-
+    Rowling lived in Porto from 1991 to 1993 and, by her own account, wrote the first chapters
+    there. In a tweet on May 21, 2020, she added that it’s beautiful and she’d love to visit, but it
+    has nothing to do with Hogwarts.
+
+
+    One place in Porto, though, she has acknowledged herself. She wrote a few times at the Majestic
+    Café on Rua de Santa Catarina and called it possibly the most beautiful café she’d ever worked
+    in.
+
+
+    The Lello legend stayed a legend, but it changed the shop forever: these days there are more
+    tourists inside than customers.
+  ru: >-
+    Роулинг жила в Порту с 1991 по 1993 год и, по её словам, писала здесь первые главы. В твите 21
+    мая 2020 года она добавила: «Он прекрасен, и я бы хотела там побывать, но к Хогвартсу он не
+    имеет отношения».
+
+
+    Зато одно место в Порту она признала сама. В кафе Majestic на улице Санта-Катарина она писала
+    несколько раз и назвала его, наверное, самым красивым кафе, в котором ей доводилось работать.
+
+
+    Легенда о Lello так и осталась легендой, но магазин она изменила навсегда: туристов в нём теперь
+    больше, чем покупателей.
+sources:
+  - title: "Observador: «Afinal, a Lello não inspirou Harry Potter»"
+    url: https://observador.pt/2020/05/21/afinal-a-lello-nao-inspirou-harry-potter-j-k-rowling-diz-que-nunca-entrou-na-livraria/
+    type: press
+    accessed: '2026-10-29'
+  - title: "Diário de Notícias: «Dos falsos Hogwarts à Diagon-Al: todos os sítios que não inspiraram
+      J.K. Rowling»"
+    url: https://www.dn.pt/cultura/dos-falsos-hogwarts-a-diagon-al-todos-os-sitios-que-nao-inspiraram-jk-rowling-12223928.html
+    type: press
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

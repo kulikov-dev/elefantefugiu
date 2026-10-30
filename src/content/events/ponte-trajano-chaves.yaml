@@ -1,0 +1,134 @@
+id: ponte-trajano-chaves
+slug:
+  pt: a-ponte-que-serve-ha-1900-anos
+  en: the-bridge-thats-served-for-1-900-years
+  ru: most-kotoryy-sluzhit-1900-let
+title:
+  pt: A ponte que serve há 1900 anos
+  en: The Bridge That’s Served for 1,900 Years
+  ru: Мост, который служит 1900 лет
+epoch: lusitania-e-roma
+level: frame
+year: 104
+year_label:
+  pt: c. de 104
+  en: c. 104
+  ru: около 104 года
+year_scale:
+  pt: c. 104
+  en: c. 104
+  ru: ок. 104
+place:
+  name:
+    pt: Chaves (Aquae Flaviae)
+    en: Chaves (Aquae Flaviae)
+    ru: Шавиш (Аквы Флавиевы)
+  short:
+    pt: Chaves
+    en: Chaves
+    ru: Шавиш
+  lat: 41.7405
+  lon: -7.4684
+bridge:
+  name: Ponte Romana (Ponte de Trajano)
+  title:
+    pt: Ponte Romana (Ponte de Trajano)
+    en: Roman Bridge (Trajan’s Bridge)
+    ru: Римский мост (мост Траяна)
+  address: Rua do Rio, Chaves
+  lat: 41.7382094
+  lon: -7.4670247
+  maps_url: https://www.google.com/maps/place/%D0%A0%D0%B8%D0%BC%D1%81%D0%BA%D0%B8%D0%B9+%D0%BC%D0%BE%D1%81%D1%82/@41.7382134,-7.4695996,17z/data=!3m1!4b1!4m6!3m5!1s0xd3ade69ba31eb8f:0xd02b5b1c5d78e2d7!8m2!3d41.7382094!4d-7.4670247!16zL20vMDFyc3E5
+  url: https://www.chaves.pt/
+  note:
+    pt: Atravesse o rio a pé e procure a meio as duas colunas com inscrições latinas.
+    en: Walk across the river and look for the two columns with Latin inscriptions halfway over.
+    ru: Перейдите реку пешком и найдите на середине две колонны с латинскими надписями.
+threads:
+  - engenho
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A ponte romana que os habitantes pagaram do seu bolso.
+  en: The Roman bridge the townspeople paid for themselves.
+  ru: Римский мост, который горожане оплатили сами.
+story:
+  pt: Os romanos cobriram a Lusitânia de estradas, e na estrada de Braga para Astorga precisaram de
+    uma ponte sobre o rio Tâmega. Na povoação de Aquae Flaviae, hoje Chaves, construíram-na na
+    passagem do século I para o II, no tempo do imperador Trajano. A ponte sobreviveu à queda de
+    Roma, aos mouros, às cheias e às guerras. Foi reparada e trocou de guardas, mas os arcos romanos
+    ainda hoje levam a estrada sobre o rio.
+  en: The Romans covered Lusitania with roads, and on the road from Braga to Astorga they needed a
+    bridge over the Tâmega River. In the town of Aquae Flaviae, today’s Chaves, they built it around
+    the turn of the 2nd century, under Emperor Trajan. The bridge outlived the fall of Rome, the
+    Moors, floods, and wars. It has been repaired and its railings replaced, but the Roman arches
+    still carry the road across the river.
+  ru: Римляне покрыли Лузитанию дорогами, и на дороге из Браги в Асторгу им понадобился мост через
+    реку Тамегу. В городке Аквы Флавиевы, нынешнем Шавише, его построили на рубеже I и II веков, при
+    императоре Траяне. Мост пережил падение Рима, мавров, наводнения и войны. Его чинили и меняли
+    перила, но римские арки до сих пор держат дорогу через реку.
+more:
+  pt: >-
+    Os romanos instalaram-se aqui por causa das águas quentes, e Chaves ainda hoje é conhecida por
+    elas. A ponte ligou as termas à grande estrada do império.
+
+
+    A ponte começou com 16 arcos e hoje veem-se 12: os outros ficaram debaixo de casas e de areias
+    do rio. No século XVI uma cheia destruiu-a em parte, e em 1880 as guardas de pedra foram
+    substituídas por grades de ferro. Em 2001, à entrada da ponte, foram escavados 50 metros de
+    calçada romana.
+
+
+    A meio da ponte estão duas colunas romanas com inscrições em latim. A dedicada a Trajano diz que
+    os habitantes de Aquae Flaviae construíram a ponte de pedra à sua própria custa. A outra, o
+    Padrão dos Povos, enumera dez comunidades da região.
+  en: >-
+    The Romans settled here for the hot springs, and Chaves is still known for them. The bridge
+    connected the springs to the empire’s great highway.
+
+
+    The bridge started with 16 arches, and 12 can be seen today: the rest disappeared under houses
+    and river silt. In the 16th century a flood partly destroyed it, and in 1880 the stone railings
+    were replaced with iron ones. In 2001, 50 meters of Roman paving were dug up at the entrance to
+    the bridge.
+
+
+    Halfway across stand two Roman columns with Latin inscriptions. The one dedicated to Trajan says
+    the people of Aquae Flaviae built the stone bridge at their own expense. The other, known as the
+    Padrão dos Povos, or “stone of the peoples,” lists ten local communities.
+  ru: >-
+    Римляне поселились здесь ради горячих источников, и Шавиш знаменит ими до сих пор. Мост соединил
+    источники с большой имперской дорогой.
+
+
+    Сначала у моста было 16 арок, сейчас видно 12: остальные ушли под дома и речные наносы. В XVI
+    веке наводнение частично его разрушило, в 1880 году каменные перила заменили железными. В 2001
+    году у въезда на мост раскопали 50 метров римской мостовой.
+
+
+    На середине моста стоят две римские колонны с латинскими надписями. На одной, посвящённой
+    Траяну, сказано, что жители Акв Флавиевых построили каменный мост за свой счёт. На другой, её
+    зовут «Падрау-душ-Повуш», «камень народов», перечислены десять местных общин.
+sources:
+  - title: "Postal: «Tem quase 2 000 anos, esta ponte romana é a mais antiga de Portugal»"
+    url: https://postal.pt/nacional/tem-quase-2-000-anos-esta-ponte-romana-e-a-mais-antiga-de-portugal-e-nao-e-a-de-tavira/
+    type: press
+    accessed: '2026-10-29'
+  - title: "Infopédia: Ponte de Trajano"
+    url: https://www.infopedia.pt/$ponte-de-trajano
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Wikipedia: Roman Bridge of Chaves"
+    url: https://en.wikipedia.org/wiki/Roman_Bridge_of_Chaves
+    type: reference
+    accessed: '2026-10-29'
+    note:
+      pt: inscrições nas colunas
+      en: inscriptions on the columns
+      ru: надписи на колоннах
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

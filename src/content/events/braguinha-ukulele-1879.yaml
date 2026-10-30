@@ -1,0 +1,136 @@
+id: braguinha-ukulele-1879
+slug:
+  pt: a-braguinha-que-se-tornou-ukulele
+  en: the-guitar-that-became-the-ukulele
+  ru: gitara-kotoraya-stala-ukulele
+title:
+  pt: A braguinha que se tornou ukulele
+  en: The Guitar That Became the Ukulele
+  ru: Гитара, которая стала укулеле
+epoch: monarquia-e-republica
+level: story
+year: 1879
+year_label:
+  pt: agosto de 1879
+  en: August 1879
+  ru: август 1879
+place:
+  name:
+    pt: Funchal, Madeira
+    en: Funchal, Madeira
+    ru: Фуншал, Мадейра
+  short:
+    pt: Funchal
+    en: Funchal
+    ru: Фуншал
+  lat: 32.6466
+  lon: -16.9093
+bridge:
+  name: Cais do Funchal
+  title:
+    pt: Cais do Funchal
+    en: Funchal Quay
+    ru: Порт Фуншала
+  address: Cais do Funchal, Madeira
+  lat: 32.6466
+  lon: -16.9093
+  maps_url: https://www.google.com/maps/search/?api=1&query=Cais+do+Funchal+Madeira
+  url: https://visitmadeira.com/
+  note:
+    pt: Daqui partiu o «Ravenscrag», a 23 de abril de 1879, levando para o Havai os futuros mestres do
+      ukulele.
+    en: From here the Ravenscrag sailed for Hawaii on April 23, 1879, carrying the future ukulele
+      makers.
+    ru: Отсюда 23 апреля 1879 года «Равенскраг» ушёл на Гавайи с будущими мастерами укулеле.
+threads:
+  - mar
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O ukulele havaiano chegou de barco da Madeira.
+  en: Hawaii’s ukulele sailed in from Madeira.
+  ru: Гавайская укулеле приплыла с Мадейры.
+story:
+  pt: "Em 1879, o navio «Ravenscrag» levou da Madeira para o Havai centenas de emigrantes que iam
+    trabalhar nas plantações de açúcar. Entre eles iam três marceneiros: Manuel Nunes, Augusto Dias
+    e José do Espírito Santo. Os emigrantes levaram também uma pequena viola de quatro cordas, a
+    braguinha. Acabados os contratos, os marceneiros abriram oficinas em Honolulu. Com a madeira
+    havaiana de koa faziam braguinhas à sua maneira, e os havaianos chamaram-lhes «ukulele»."
+  en: "In 1879, the ship Ravenscrag carried hundreds of emigrants from Madeira to Hawaii to work on
+    sugar plantations. Among them were three cabinetmakers: Manuel Nunes, Augusto Dias, and José do
+    Espírito Santo. The emigrants also brought along a small four-string guitar, the braguinha. Once
+    their contracts were up, the cabinetmakers opened workshops in Honolulu. They built braguinhas
+    their own way from Hawaiian koa wood, and Hawaiians called them “ukulele.”"
+  ru: "В 1879 году корабль «Равенскраг» привёз из Мадейры на Гавайи сотни переселенцев, которые ехали
+    работать на сахарных плантациях. Среди них были три столяра-краснодеревщика: Мануэл Нуниш,
+    Аугушту Диаш и Жозе ду Эшпириту Санту. Привезли переселенцы и маленькую четырёхструнную гитару,
+    брагинью. Отработав контракты, столяры открыли в Гонолулу мастерские. Из гавайского дерева коа
+    они делали брагиньи на новый лад, и гавайцы назвали их «укулеле»."
+more:
+  pt: >-
+    O navio saiu do Funchal a 23 de abril e chegou a Honolulu em agosto de 1879. O ukulele herdou da
+    braguinha o corpo pequeno e de outro instrumento madeirense, o rajão de cinco cordas, a
+    afinação. O rei Kalakaua e a sua irmã Liliʻuokalani adoraram os novos instrumentos, que depressa
+    se tornaram havaianos. A própria palavra, segundo a versão mais conhecida, quer dizer «pulga
+    saltitante»: seria o aspeto dos dedos do músico.
+
+
+    Na Madeira a braguinha continua a tocar-se, em grupos folclóricos e nas festas.
+
+
+    Em 2018, os descendentes de Augusto Dias colocaram no seu túmulo, em Honolulu, uma placa de
+    bronze que o lembra como um dos primeiros construtores de ukuleles.
+  en: >-
+    The ship left Funchal on April 23 and reached Honolulu in August 1879. The ukulele took its
+    small body from the braguinha and its tuning from another Madeiran instrument, the five-string
+    rajão. King Kalakaua and his sister Liliʻuokalani fell in love with the new instruments, and
+    they quickly became Hawaiian. The word itself, in the best-known version, means “jumping flea,”
+    supposedly what the player’s fingers looked like.
+
+
+    On Madeira, the braguinha is still played today, in folk groups and at festivals.
+
+
+    In 2018, Augusto Dias’s descendants placed a bronze plaque on his grave in Honolulu honoring him
+    as one of the first ukulele makers.
+  ru: >-
+    Корабль вышел из Фуншала 23 апреля и пришёл в Гонолулу в августе 1879 года. Укулеле взяла у
+    брагиньи маленький корпус, а настройку у другого мадейрского инструмента, пятиструнного ражана.
+    Король Калакауа и его сестра Лилиуокалани полюбили новые инструменты, и они быстро стали
+    гавайскими. Само слово, по самой известной версии, значит «прыгающая блоха»: так будто бы
+    выглядели пальцы музыканта.
+
+
+    На Мадейре брагинью играют до сих пор, в фольклорных ансамблях и на праздниках.
+
+
+    В 2018 году потомки Аугушту Диаша поставили на его могиле в Гонолулу бронзовую табличку как
+    одному из первых мастеров укулеле.
+sources:
+  - title: "Ukulele Magazine: «140 years ago, the ukulele as we know it arrives in Hawaii»"
+    url: https://ukulelemagazine.com/stories/ukulele-history-140-years-ago-the-ukulele-as-we-know-it-arrives-in-hawaii
+    type: press
+    accessed: '2026-10-29'
+  - title: "Cultura Madeira: «Braguinha and rajão in Hawaii»"
+    url: https://web.archive.org/web/20220810140138/https://cultura.madeira.gov.pt/en/did-you-know-that-1/1135-%E2%80%9Cbraguinha%E2%80%9D-and-%E2%80%9Craj%C3%A3o%E2%80%9D-in-hawaii.html
+    type: website
+    accessed: '2026-10-29'
+    note:
+      pt: cópia arquivada (Internet Archive)
+      en: archived copy (Internet Archive)
+      ru: архивная копия (Internet Archive)
+  - title: "Ukulele Hall of Fame: Manuel Nunes"
+    url: https://ukulele.org/inductees/1997-1998/manuel-nunes/
+    type: institutional
+    accessed: '2026-10-29'
+  - title: Ukulele Magazine, «New Memorial Commemorates Early Ukulele Builder»
+    url: https://ukulelemagazine.com/stories/news/dias-grave-marker
+    type: press
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

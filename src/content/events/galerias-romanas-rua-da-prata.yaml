@@ -1,0 +1,113 @@
+id: galerias-romanas-rua-da-prata
+slug:
+  pt: as-galerias-que-se-esvaziam-duas-vezes-por
+  en: the-galleries-drained-twice-a-year
+  ru: galerei-kotorye-otkachivayut-dva-raza-v-god
+title:
+  pt: As galerias que se esvaziam duas vezes por ano
+  en: The Galleries Drained Twice a Year
+  ru: Галереи, которые откачивают два раза в год
+epoch: lusitania-e-roma
+level: story
+year:
+  from: 1
+  to: 100
+year_label:
+  pt: séc. I (descobertas em 1771)
+  en: 1st century (found in 1771)
+  ru: I век, найдены в 1771
+year_scale:
+  pt: séc. I
+  en: 1st c.
+  ru: I век
+place:
+  name:
+    pt: Lisboa, Rua da Prata
+    en: Lisbon, Rua da Prata
+    ru: Лиссабон, Руа-да-Прата
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7098
+  lon: -9.1368
+bridge:
+  name: Galerias Romanas da Rua da Prata
+  title:
+    pt: Galerias Romanas da Rua da Prata
+    en: Roman Galleries of Rua da Prata
+    ru: Римские галереи на Руа-да-Прата
+  address: Rua da Conceição, Lisboa
+  lat: 38.7097774
+  lon: -9.1367633
+  maps_url: https://www.google.com/maps/place/Galerias+Romanas+da+Rua+da+Prata/@38.7097816,-9.1393382,17z/data=!3m1!4b1!4m6!3m5!1s0xd1935954f5b713f:0x5a27ff9f6a3eb64c!8m2!3d38.7097774!4d-9.1367633!16s%2Fg%2F11h6fblg6t
+  url: https://museudelisboa.pt/en/about/venues/roman-galleries/
+  note:
+    pt: "A tampa na Rua da Conceição passa despercebida: no resto do ano passam por cima carros e
+      elétricos."
+    en: "The hatch on Rua da Conceição is easy to miss: most of the year, cars and streetcars roll over
+      it."
+    ru: "Люк на Руа-да-Консейсан легко пропустить: всё остальное время по нему ездят машины и трамваи."
+threads:
+  - engenho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: As galerias romanas inundadas de Lisboa.
+  en: Lisbon’s flooded Roman galleries.
+  ru: Затопленные римские галереи Лиссабона.
+story:
+  pt: "Depois do terramoto de 1755 a Baixa foi reconstruída de raiz, e em 1771 os construtores deram
+    com galerias romanas subterrâneas debaixo da Rua da Prata. Ainda hoje se discute para que
+    serviam: talvez fossem as fundações de um grande edifício na encosta. As galerias estão cheias
+    de água. Duas vezes por ano a água é bombeada, abre-se uma tampa no meio da rua e as pessoas
+    descem mesmo por baixo da calçada."
+  en: "After the 1755 earthquake, the Baixa was rebuilt from scratch, and in 1771 builders came across
+    Roman underground galleries beneath Rua da Prata. People still argue about what they were for:
+    maybe the foundations of a large building on the slope. The galleries are full of water. Twice a
+    year the water is pumped out, a hatch opens in the middle of the street, and people climb down
+    right under the pavement."
+  ru: "После землетрясения 1755 года Байшу отстраивали заново, и в 1771 году строители наткнулись под
+    Руа-да-Прата на римские подземные галереи. Зачем римляне их построили, спорят до сих пор: может
+    быть, это фундамент большого здания на склоне. Галереи заполнены водой. Два раза в год воду
+    откачивают, посреди улицы открывают люк, и горожане спускаются прямо под мостовую."
+more:
+  pt: >-
+    No século XX os lisboetas conheciam o sítio como a «cisterna da Rua da Prata» e iam lá buscar
+    água. Não se pode esvaziá-la mais vezes: as galerias sustentam os prédios que estão por cima, e
+    sem água a estrutura pode sofrer.
+
+
+    Por isso as galerias abrem só alguns dias por ano, e desce-se em grupos acompanhados pela equipa
+    do Museu de Lisboa.
+  en: >-
+    In the 20th century, Lisbon residents knew the place as the “Rua da Prata cistern” and drew
+    water from it. It can’t be drained more often: the galleries support the buildings above, and
+    without the water the structure could be damaged.
+
+
+    That’s why the galleries open only a few days a year, and visitors go down in groups led by
+    staff from the Lisbon Museum.
+  ru: >-
+    В XX веке лиссабонцы знали это место как «водохранилище Руа-да-Прата» и брали оттуда воду.
+    Откачивать её чаще нельзя: галереи держат дома, которые стоят сверху, и без воды конструкции
+    могут пострадать.
+
+
+    Поэтому галереи открывают всего на несколько дней в году, и спускаются туда группами с
+    сотрудниками Музея Лиссабона.
+sources:
+  - title: "Postal: «Este monumento em Portugal só abre duas vezes ao ano»"
+    url: https://postal.pt/cultura/este-monumento-em-portugal-so-abre-duas-vezes-ao-ano-e-provavelmente-ja-lhe-passou-por-cima/
+    type: press
+    accessed: '2026-10-29'
+  - title: "Museu de Lisboa: Galerias Romanas"
+    url: https://www.museudelisboa.pt/en/sites/roman-galleries
+    type: institutional
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

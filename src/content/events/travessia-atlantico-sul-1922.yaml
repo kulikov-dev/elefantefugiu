@@ -1,0 +1,115 @@
+id: travessia-atlantico-sul-1922
+slug:
+  pt: atravessar-o-atlantico-com-um-sextante
+  en: across-the-atlantic-with-a-sextant
+  ru: cherez-atlantiku-s-sekstantom
+title:
+  pt: Atravessar o Atlântico com um sextante
+  en: Across the Atlantic With a Sextant
+  ru: Через Атлантику с секстантом
+epoch: monarquia-e-republica
+level: frame
+year: 1922
+year_label:
+  pt: 30 de março – 17 de junho de 1922
+  en: March 30 – June 17, 1922
+  ru: 30 марта – 17 июня 1922
+place:
+  name:
+    pt: Atlântico Sul
+    en: South Atlantic
+    ru: Южная Атлантика
+  lat: 0.917
+  lon: -29.345
+bridge:
+  name: Museu de Marinha
+  title:
+    pt: Museu de Marinha
+    en: Maritime Museum
+    ru: Морской музей
+  address: Praça do Império, Belém, Lisboa
+  lat: 38.6969438
+  lon: -9.2091554
+  maps_url: https://www.google.com/maps/place/%D0%9C%D0%BE%D1%80%D1%81%D0%BA%D0%BE%D0%B9+%D0%BC%D1%83%D0%B7%D0%B5%D0%B9/@38.696948,-9.2117303,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ecb432766b9b9:0x60942ea3f8998033!8m2!3d38.6969438!4d-9.2091554!16s%2Fm%2F02w78ms
+  url: https://cultura.marinha.pt/en/museumarinha_web/Pages/default.aspx
+  note:
+    pt: O único hidroavião que resta, o «Santa Cruz», está no Pavilhão das Galeotas.
+    en: The only surviving seaplane, the “Santa Cruz,” is in the Royal Barges Pavilion.
+    ru: Единственный уцелевший гидроплан, «Санта-Круш», стоит в павильоне королевских галер.
+threads:
+  - mar
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os primeiros a atravessar o Atlântico Sul pelo ar gastaram três aviões.
+  en: The first flight across the South Atlantic took three planes.
+  ru: Первыми через Южную Атлантику перелетели, сменив три самолёта.
+story:
+  pt: Em 1922, dois oficiais da Marinha, Gago Coutinho e Sacadura Cabral, decidiram voar de Lisboa ao
+    Brasil no centenário da sua independência. Sobre o oceano não há onde fixar o olhar, e Coutinho
+    guiou o avião pelo sol e pelas estrelas, com um sextante inventado por ele. O primeiro
+    hidroavião desfez-se nas ondas junto a uns rochedos a meio do oceano, o segundo amarou por
+    avaria do motor. A Marinha levou um terceiro, e a 17 de junho, 79 dias depois da partida, os
+    aviadores amararam no Rio.
+  en: In 1922, navy officers Gago Coutinho and Sacadura Cabral set out to fly from Lisbon to Brazil
+    for its independence centennial. Over the ocean there’s nothing to fix your eyes on, so Coutinho
+    navigated by the sun and stars with a sextant he’d invented himself. The first seaplane broke up
+    in the waves near rocks in the middle of the ocean, and the second came down on the water with
+    engine trouble. The navy brought a third, and on June 17, 79 days after takeoff, the aviators
+    landed in Rio.
+  ru: В 1922 году два офицера флота, Гагу Коутинью и Сакадура Кабрал, решили долететь из Лиссабона до
+    Бразилии к столетию её независимости. Над океаном не за что зацепиться взглядом, и Коутинью вёл
+    самолёт по солнцу и звёздам, с секстантом, который придумал сам. Первый гидроплан разбился о
+    волны у скал посреди океана, второй сел на воду из-за поломки мотора. Флот привёз третий, и 17
+    июня, через 79 дней после вылета, лётчики сели в Рио.
+more:
+  pt: >-
+    Um sextante normal precisa de horizonte, e lá de cima, com a bruma, ele não se vê. Coutinho
+    juntou ao sextante um horizonte artificial, uma bolha de nível, e conseguiu medir a altura do
+    sol em pleno voo. O instrumento foi depois fabricado em série.
+
+
+    O troço mais difícil foi o salto até aos minúsculos Penedos de São Pedro e São Paulo: uma ilhota
+    de umas centenas de metros no meio do oceano. Coutinho levou o avião até lá exatamente como
+    tinha calculado, mas ao amarar numa onda alta o «Lusitânia» perdeu um flutuador e afundou-se. A
+    tripulação do segundo avião, o «Pátria», andou nove horas à deriva até ser recolhida.
+  en: >-
+    An ordinary sextant needs a horizon, and from up in the haze you can’t see one. Coutinho fitted
+    his sextant with an artificial horizon, a bubble level, so he could measure the sun’s height in
+    mid-flight. The instrument was later mass-produced.
+
+
+    The hardest leg was the hop to the tiny Saint Peter and Saint Paul Rocks: an islet a few hundred
+    meters across in the middle of the ocean. Coutinho brought the plane there exactly as
+    calculated, but landing on a steep wave, the “Lusitânia” lost a float and sank. The crew of the
+    second plane, the “Pátria,” drifted for nine hours before they were picked up.
+  ru: >-
+    Обычный морской секстант нужен горизонт, а с высоты в дымке его не видно. Коутинью приделал к
+    секстанту искусственный горизонт, пузырёк уровня, и смог мерить высоту солнца прямо в полёте.
+    Этот прибор потом выпускали серийно.
+
+
+    Самым трудным был прыжок к крошечным скалам Святых Петра и Павла: островок в несколько сотен
+    метров посреди океана. Коутинью вывел самолёт к ним точно по расчёту, но при посадке на крутую
+    волну «Лузитания» потеряла поплавок и затонула. Экипаж второго самолёта, «Патрии», девять часов
+    носило по волнам, пока их не подобрали.
+sources:
+  - title: "Museu de Marinha: «Naval aviation – First air crossing of the South Atlantic»"
+    url: https://cultura.marinha.pt/en/museumarinha_web/exposicoes_web/pavilhao-galeotas/Pages/aviacao-naval-travessia-aerea-atlantico.aspx
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Museu de Marinha: Seaplane Fairey IIID «Santa Cruz»"
+    url: https://cultura.marinha.pt/en/museumarinha_web/colecoes_web/pecasemdestaque_web/Pages/hidroaviaofairey.aspx
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Diário de Notícias: «Hidroavião de Sacadura Cabral e Gago Coutinho é único no mundo e está
+      em Lisboa»"
+    url: https://www.dn.pt/sociedade/hidroaviao-de-sacadura-cabral-e-gago-coutinho-e-unico-no-mundo-e-esta-em-lisboa-14158708.html
+    type: press
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

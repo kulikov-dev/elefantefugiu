@@ -1,0 +1,117 @@
+id: restauracao-1640
+slug:
+  pt: a-manha-de-1-de-dezembro
+  en: the-morning-of-december-1
+  ru: utro-1-dekabrya
+title:
+  pt: A manhã de 1 de dezembro
+  en: The Morning of December 1
+  ru: Утро 1 декабря
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: frame
+year: 1640
+place:
+  name:
+    pt: Lisboa, Paço da Ribeira
+    en: Lisbon, Ribeira Palace
+    ru: Лиссабон, дворец Рибейра
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7066
+  lon: -9.136
+bridge:
+  name: Palácio da Independência
+  title:
+    pt: Palácio da Independência
+    en: Independence Palace
+    ru: Дворец Независимости
+  address: Largo de São Domingos 10, Lisboa
+  lat: 38.7152044
+  lon: -9.1391892
+  maps_url: https://www.google.com/maps/place/Pal%C3%A1cio+da+Independ%C3%AAncia/@38.7152086,-9.1417641,17z/data=!3m1!4b1!4m6!3m5!1s0xd1933873aff6ce5:0x3a8629912bb3ad62!8m2!3d38.7152044!4d-9.1391892!16s%2Fg%2F121f8yq1
+  url: https://www.timeout.pt/lisboa/pt/atraccoes/palacio-da-independencia
+  note:
+    pt: Nesta casa os conjurados prepararam a última reunião antes da manhã de 1 de dezembro.
+    en: In this house the conspirators prepared their last meeting before the morning of December 1.
+    ru: В этом доме заговорщики готовили последнюю встречу перед утром 1 декабря.
+threads:
+  - poder-e-revolta
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Sessenta anos de reis espanhóis acabaram numa só manhã.
+  en: Sixty years of Spanish kings ended in a single morning.
+  ru: Шестьдесят лет испанских королей закончились за одно утро.
+story:
+  pt: Desde 1580, Portugal era governado pelos reis de Espanha. Os impostos subiam, e os fidalgos
+    portugueses eram mandados combater por interesses alheios. No outono de 1640, um grupo de
+    conjurados nobres decidiu agir. Na manhã de 1 de dezembro entraram no paço em Lisboa, prenderam
+    a vice-rainha espanhola, a duquesa de Mântua, e aclamaram rei o duque de Bragança. Ele tornou-se
+    D. João IV.
+  en: From 1580, Portugal was ruled by the kings of Spain. Taxes kept rising, and Portuguese nobles
+    were sent off to fight for someone else’s interests. In the fall of 1640, a group of noble
+    conspirators made up their minds. On the morning of December 1 they walked into the palace in
+    Lisbon, arrested the Spanish vicereine, the Duchess of Mantua, and proclaimed the Duke of
+    Braganza king. He became John IV.
+  ru: С 1580 года Португалией правили короли Испании. Налоги росли, португальских дворян отправляли
+    воевать за чужие интересы. Осенью 1640 года группа знатных заговорщиков решилась. Утром 1
+    декабря они вошли во дворец в Лиссабоне, арестовали испанскую наместницу, герцогиню Мантуанскую,
+    и провозгласили королём герцога Браганса. Он стал Жуаном IV.
+more:
+  pt: >-
+    Os conjurados ficaram na história como os «Quarenta Conjurados». A última reunião antes da
+    revolta foi preparada em casa de D. Antão de Almada, junto ao Rossio. Hoje é o Palácio da
+    Independência.
+
+
+    Os portugueses chamam a este dia a Restauração da Independência: o país voltou a ser um reino à
+    parte, com rei próprio. O 1 de dezembro continua a ser feriado nacional, e a praça com o
+    obelisco em honra deste dia chama-se mesmo Praça dos Restauradores.
+
+
+    Manter a independência foi mais difícil do que recuperá-la: a guerra com Espanha durou mais 28
+    anos, até à paz de 1668.
+  en: >-
+    The plotters went down in history as the “Forty Conspirators.” They prepared their last meeting
+    before the uprising in the house of Antão de Almada, near Rossio Square. Today it’s the Palace
+    of Independence.
+
+
+    The Portuguese call this day the Restoration of Independence, or Restauração: the country became
+    a separate kingdom with its own king again. December 1 is still a national holiday, and the
+    square with the obelisk honoring the day is called just that: Praça dos Restauradores,
+    Restorers’ Square.
+
+
+    Keeping independence turned out to be harder than winning it back: the war with Spain dragged on
+    for another 28 years, until the peace of 1668.
+  ru: >-
+    Заговорщиков вошло в историю как «Сорок заговорщиков». Последнюю встречу перед восстанием они
+    готовили в доме Антана де Алмады у площади Росиу. Сегодня это Дворец Независимости.
+
+
+    Португальцы называют этот день Реставрацией независимости, Restauração: страна снова стала
+    отдельным королевством со своим королём. 1 декабря до сих пор государственный праздник, а
+    площадь с обелиском в честь этого дня так и называется: Праса-душ-Рештаурадореш, площадь
+    Реставраторов.
+
+
+    Удержать независимость оказалось труднее, чем вернуть: война с Испанией шла ещё 28 лет, до мира
+    1668 года.
+sources:
+  - title: "Wikipedia: Forty Conspirators"
+    url: https://en.wikipedia.org/wiki/Forty_Conspirators
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Time Out Lisboa: «Sete coisas que não sabe sobre o Palácio da Independência»"
+    url: https://www.timeout.pt/lisboa/pt/blog/sete-coisas-que-nao-sabe-sobre-o-palacio-da-independencia-102417
+    type: press
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

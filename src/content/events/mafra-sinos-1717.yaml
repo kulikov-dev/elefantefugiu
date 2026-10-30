@@ -1,0 +1,123 @@
+id: mafra-sinos-1717
+slug:
+  pt: os-sinos-que-o-rei-pagou-a-dobrar
+  en: the-bells-the-king-paid-double-for
+  ru: kolokola-za-kotorye-korol-zaplatil-vdvoe
+title:
+  pt: Os sinos que o rei pagou a dobrar
+  en: The Bells the King Paid Double For
+  ru: Колокола, за которые король заплатил вдвое
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: frame
+year:
+  from: 1717
+  to: 1730
+place:
+  name:
+    pt: Mafra
+    en: Mafra
+    ru: Мафра
+  lat: 38.937
+  lon: -9.3259
+bridge:
+  name: Palácio Nacional de Mafra
+  title:
+    pt: Palácio Nacional de Mafra
+    en: Mafra National Palace
+    ru: Национальный дворец Мафры
+  address: Terreiro D. João V, Mafra
+  lat: 38.9369587
+  lon: -9.3259297
+  maps_url: https://www.google.com/maps/place/%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86+%D0%9C%D0%B0%D1%84%D1%80%D0%B0/@38.9369628,-9.3285046,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ed7cd8a70e97d:0x6a25dbce17b7c99d!8m2!3d38.9369587!4d-9.3259297!16zL20vMGZjends
+  url: https://www.museusemonumentos.pt/pt/museus-e-monumentos/palacio-nacional-de-mafra
+  note:
+    pt: Os sinos estão nas duas torres, uma de cada lado da fachada da basílica.
+    en: The bells hang in the two towers on either side of the basilica’s facade.
+    ru: Колокола висят в двух башнях по краям фасада базилики.
+threads:
+  - poder-e-revolta
+  - engenho
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os mestres exigiram pagamento adiantado. O rei pagou o dobro.
+  en: The bellmakers demanded payment up front. The king paid double.
+  ru: Мастера потребовали деньги вперёд. Король заплатил вдвое.
+story:
+  pt: "O rei D. João V fez uma promessa: se lhe nascesse um herdeiro, construiria um convento. Nasceu
+    uma filha, e em 1717 lançou-se em Mafra a primeira pedra. Para a obra seguiam ouro e diamantes
+    do Brasil, e chegou a haver 45 mil operários ao mesmo tempo. Para as duas torres encomendaram-se
+    na Flandres quase cem sinos. Os mestres duvidaram de que Portugal pagasse e pediram o dinheiro
+    adiantado. O rei respondeu dobrando a quantia."
+  en: "King John V made a vow: if he had an heir, he would build a monastery. A daughter was born, and
+    in 1717 the first stone was laid in Mafra. Gold and diamonds from Brazil poured into the
+    project, and at times 45,000 workers were on site at once. For the two towers, almost a hundred
+    bells were ordered from Flanders. The bellmakers doubted Portugal would pay and asked for the
+    money in advance. The king’s answer was to double the sum."
+  ru: "Король Жуан V дал обет: если у него родится наследник, он построит монастырь. Родилась дочь, и
+    в 1717 году в Мафре заложили первый камень. На стройку шло золото и алмазы из Бразилии, а
+    рабочих бывало до 45 тысяч одновременно. Для двух башен заказали во Фландрии почти сотню
+    колоколов. Мастера усомнились, что Португалия расплатится, и попросили деньги вперёд. Король в
+    ответ удвоил сумму."
+more:
+  pt: >-
+    Os sinos não eram só para tocar. Foram afinados de maneira a que neles se pudessem tocar
+    melodias, como num enorme instrumento musical. Nas cidades flamengas, um conjunto de sinos assim
+    era o orgulho das câmaras, e D. João V queria que Mafra tivesse o melhor.
+
+
+    A basílica e o convento foram sagrados a 22 de outubro de 1730, no 41.º aniversário do rei, com
+    oito dias de festa. As obras continuaram até 1755, quando os operários fizeram falta em Lisboa
+    depois do terramoto.
+
+
+    A obra não custou só dinheiro: ao longo dos anos morreram mais de 1300 operários. No romance
+    «Memorial do Convento», José Saramago conta Mafra pelos olhos de quem a construiu.
+  en: >-
+    The bells weren’t just for ringing. They were tuned so that melodies could be played on them,
+    like a giant musical instrument. In Flemish cities, a set of bells like this was the pride of
+    the town hall, and John V wanted Mafra to have the best.
+
+
+    The basilica and monastery were consecrated on October 22, 1730, the king’s 41st birthday, with
+    eight days of celebrations. Work went on until 1755, when the workers were needed in Lisbon
+    after the earthquake.
+
+
+    The building cost more than money: over the years, more than 1,300 workers died. In his novel
+    “Baltasar and Blimunda,” José Saramago tells Mafra’s story through the eyes of the people who
+    built it.
+  ru: >-
+    Колокола заказывали не просто звонить. Их подобрали по тону так, что на них можно играть
+    мелодии, как на огромном музыкальном инструменте. Такой набор колоколов во фламандских городах
+    был гордостью ратуш, и Жуан V хотел, чтобы у Мафры был лучший.
+
+
+    Базилику и монастырь освятили 22 октября 1730 года, в 41-й день рождения короля, восемью днями
+    праздников. Работы продолжались до 1755 года, когда рабочие понадобились в Лиссабоне после
+    землетрясения.
+
+
+    Стройка дорого стоила не только деньгами: за годы работ погибли больше 1300 рабочих. В романе
+    Жозе Сарамаго «Воспоминания о монастыре» Мафра описана глазами тех, кто её строил.
+sources:
+  - title: "Wikipedia: Palace of Mafra"
+    url: https://en.wikipedia.org/wiki/Palace_of_Mafra
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Museus e Monumentos de Portugal: Palácio Nacional de Mafra"
+    url: https://www.museusemonumentos.pt/pt/museus-e-monumentos/palacio-nacional-de-mafra
+    type: institutional
+    accessed: '2026-10-29'
+    note:
+      pt: página oficial do monumento
+      en: official page of the monument
+      ru: официальная страница памятника
+related:
+  - morcegos-mafra-1771
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

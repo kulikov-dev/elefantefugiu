@@ -92,7 +92,7 @@
 | «Мост в сегодня» | ponte para hoje | bridge to today | мост в сегодня |
 | Хронология (вид эпохи) | linha do tempo | timeline | хронология |
 | Возраст (кнопка) | Idade | Age | Возраст |
-| Доказано / вероятно / легенда | documentado / debatido / lenda | documented / debated / legend | документально / спорно / легенда |
+| Доказано / вероятно / легенда | documentado / debatido / lenda | documented / debated / legend | документально / в обсуждении / легенда |
 | Великие географические открытия | os Descobrimentos | the Age of Discovery | Великие географические открытия |
 | Терремото 1755 | o terramoto de 1755 | the 1755 Lisbon earthquake | лиссабонское землетрясение 1755 года |
 | Реконкиста | Reconquista | the Reconquista | Реконкиста |

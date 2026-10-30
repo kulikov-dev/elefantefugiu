@@ -1,0 +1,111 @@
+id: a-portuguesa-1890
+slug:
+  pt: o-hino-que-nasceu-contra-inglaterra
+  en: the-anthem-written-against-britain
+  ru: gimn-kotoryy-sochinili-protiv-anglii
+title:
+  pt: O hino que nasceu contra Inglaterra
+  en: The Anthem Written Against Britain
+  ru: Гимн, который сочинили против Англии
+epoch: monarquia-e-republica
+level: frame
+year:
+  from: 1890
+  to: 1911
+place:
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7081
+  lon: -9.1385
+bridge:
+  name: Paços do Concelho de Lisboa
+  title:
+    pt: Paços do Concelho de Lisboa
+    en: Lisbon City Hall
+    ru: Ратуша Лиссабона
+  address: Praça do Município, Lisboa
+  lat: 38.7081427
+  lon: -9.1385249
+  maps_url: https://www.google.com/maps/search/?api=1&query=Pa%C3%A7os+do+Concelho+de+Lisboa
+  url: https://www.lisboa.pt/
+  note:
+    pt: Desta varanda proclamou-se, a 5 de outubro de 1910, a República que fez da marcha proibida o
+      hino.
+    en: From this balcony on October 5, 1910, the republic that made the banned march its anthem was
+      proclaimed.
+    ru: С этого балкона 5 октября 1910 года объявили республику, которая сделала запрещённый марш
+      гимном.
+threads:
+  - poder-e-revolta
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A monarquia proibiu esta canção, e a República fez dela o hino.
+  en: The monarchy banned this song, and the republic made it the anthem.
+  ru: Монархия запрещала эту песню, а республика сделала её гимном.
+story:
+  pt: Em janeiro de 1890, a Grã-Bretanha exigiu que Portugal saísse das terras entre Angola e
+    Moçambique. O rei cedeu, e o país sentiu-o como uma humilhação. O compositor Alfredo Keil e o
+    poeta Henrique Lopes de Mendonça escreveram numa só noite a marcha «A Portuguesa». A monarquia
+    proibiu-a. A 5 de outubro de 1910, a República foi proclamada da varanda da Câmara Municipal de
+    Lisboa, e em 1911 a marcha tornou-se o hino nacional.
+  en: In January 1890, Britain demanded that Portugal pull out of the lands between Angola and
+    Mozambique. The king gave in, and the country took it as a humiliation. Composer Alfredo Keil
+    and poet Henrique Lopes de Mendonça wrote the march “A Portuguesa” in a single night. The
+    monarchy banned it. On October 5, 1910, the republic was proclaimed from the balcony of Lisbon
+    City Hall, and in 1911 the march became the national anthem.
+  ru: В январе 1890 года Британия потребовала, чтобы Португалия ушла с земель между Анголой и
+    Мозамбиком. Король уступил, и страна восприняла это как унижение. Композитор Алфреду Кейл и поэт
+    Энрике Лопеш де Мендонса за одну ночь написали марш «A Portuguesa». Монархия его запретила. 5
+    октября 1910 года с балкона лиссабонской ратуши провозгласили республику, а в 1911 году марш
+    стал гимном страны.
+more:
+  pt: >-
+    No refrão, o hino chama «Às armas!» e «contra os canhões, marchar, marchar». Muitos estão
+    convencidos de que a primeira versão dizia «contra os bretões», ou seja, os britânicos. Outros
+    acham que os «bretões» foram acrescentados mais tarde, no calor das disputas políticas. O texto
+    definitivo só foi aprovado em 1957.
+
+
+    A marcha foi proibida depois da revolta republicana do Porto, a 31 de janeiro de 1891: os
+    revoltosos cantavam-na. Vinte anos depois, a canção proibida soava nas praças como hino do novo
+    regime.
+  en: >-
+    In the chorus, the anthem calls out “To arms!” and “against the cannons, march, march.” Many
+    people are sure the first version said “against the Bretons,” meaning the British. Others think
+    the “Bretons” were added later, in the heat of political battles. The final lyrics weren’t
+    approved until 1957.
+
+
+    The march was banned after the republican uprising in Porto on January 31, 1891: the rebels had
+    been singing it. Twenty years later, the banned song rang out in the squares as the anthem of
+    the new government.
+  ru: >-
+    В припеве гимн зовёт «К оружию!» и «против пушек, марш, марш». Многие уверены, что в первой
+    версии пели «против бретонцев», то есть британцев. Другие считают, что «бретонцев» добавили
+    позже, в разгар политических споров. Окончательный текст утвердили только в 1957 году.
+
+
+    Запретили марш после республиканского восстания в Порту 31 января 1891 года: его пели
+    восставшие. Через двадцать лет запрещённая песня звучала на площадях уже как гимн новой власти.
+sources:
+  - title: "Infopédia: A Portuguesa (hino)"
+    url: https://www.infopedia.pt/artigos/$a-portuguesa-(hino)
+    type: reference
+    accessed: '2026-10-29'
+  - title: "Wikipedia: A Portuguesa"
+    url: https://en.wikipedia.org/wiki/A_Portuguesa
+    type: reference
+    accessed: '2026-10-29'
+  - title: "e-konomista: «Hino Nacional: A Portuguesa»"
+    url: https://www.e-konomista.pt/hino-nacional-portuguesa/
+    type: press
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

@@ -1,0 +1,125 @@
+id: carros-de-cesto-monte
+slug:
+  pt: trenos-sem-neve
+  en: sleds-without-snow
+  ru: sani-bez-snega
+title:
+  pt: Trenós sem neve
+  en: Sleds Without Snow
+  ru: Сани без снега
+epoch: monarquia-e-republica
+level: story
+year: 1850
+year_label:
+  pt: c. de 1850
+  en: c. 1850
+  ru: около 1850 года
+year_scale:
+  pt: c. 1850
+  en: c. 1850
+  ru: ок. 1850
+place:
+  name:
+    pt: Monte, Funchal
+    en: Monte, Funchal
+    ru: Монте, Фуншал
+  short:
+    pt: Funchal
+    en: Funchal
+    ru: Фуншал
+  lat: 32.6761
+  lon: -16.9025
+bridge:
+  name: Igreja de Nossa Senhora do Monte
+  title:
+    pt: Igreja de Nossa Senhora do Monte
+    en: Church of Our Lady of Monte
+    ru: Церковь Носса-Сеньора-ду-Монте
+  address: Largo da Fonte, Monte, Funchal
+  lat: 32.6760681
+  lon: -16.9025329
+  maps_url: https://www.google.com/maps/place/Igreja+de+Nossa+Senhora+do+Monte/@32.6754242,-16.9037646,18z/data=!4m6!3m5!1s0xc60607c9aefec6b:0x6a753a9054b8f097!8m2!3d32.6760681!4d-16.9025329!16s%2Fg%2F122wt7df
+  url: https://visitmadeira.com/pt/o-que-fazer/viver-a-cidade-do-funchal/passear-na-cidade/carrinhos-de-cesto/
+  note:
+    pt: Os carreiros esperam os passageiros ao fundo da escadaria da igreja.
+    en: The drivers wait for passengers at the foot of the church stairs.
+    ru: Возчики ждут пассажиров у подножия лестницы к церкви.
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Na Madeira desce-se a montanha em trenós de vime, sem neve.
+  en: On Madeira, wicker sleds race downhill with no snow at all.
+  ru: На Мадейре с горы в город съезжают в плетёных санях без снега.
+story:
+  pt: "A freguesia do Monte fica numa encosta íngreme sobre o Funchal. No século XIX, os seus
+    habitantes inventaram uma maneira rápida de descer à cidade: um cesto-cadeira de vime sobre
+    patins de madeira desliza pela calçada lisa como um trenó. Dois homens de branco e chapéu de
+    palha correm ao lado, empurram e dão direção, e travam com a sola das botas. O transporte há
+    muito virou atração, mas as botas dos carreiros são as mesmas, de borracha grossa."
+  en: "The village of Monte sits on a steep slope above Funchal. In the 19th century, its residents
+    came up with a fast way to get down to town: a wicker armchair-basket on wooden runners slides
+    over the smooth cobblestones like a sled. Two men in white with straw hats run alongside,
+    pushing and steering, and brake with the soles of their boots. The ride long ago became a
+    tourist attraction, but the drivers’ boots haven’t changed: thick rubber soles."
+  ru: "Деревня Монте стоит на крутом склоне над Фуншалом. В XIX веке её жители придумали, как быстро
+    спускаться в город: плетёная корзина-кресло на деревянных полозьях скользит по гладкой мостовой,
+    как сани. Двое мужчин в белом и соломенных шляпах бегут рядом, толкают и рулят, а тормозят
+    подошвами ботинок. Транспорт давно стал аттракционом, а ботинки у возчиков всё те же, на толстой
+    резине."
+more:
+  pt: >-
+    A descida, de cerca de dois quilómetros, passa pelas ruas da cidade e demora poucos minutos. Os
+    condutores chamam-se carreiros, e antigamente levavam à cidade não só pessoas mas também cargas,
+    e arrastavam os cestos vazios de volta monte acima.
+
+
+    Lá em cima, junto à partida, fica a Igreja de Nossa Senhora do Monte. Nela está sepultado o
+    último imperador da Áustria, Carlos I. Depois da Primeira Guerra Mundial foi exilado na Madeira,
+    onde morreu em 1922.
+  en: >-
+    The run is about two kilometers long, goes right through the town’s streets, and takes a few
+    minutes. The drivers are called carreiros, and in the old days they brought down not just people
+    but cargo too, then hauled the empty baskets back up the hill.
+
+
+    At the top, by the starting point, stands the Church of Our Lady of Monte. The last emperor of
+    Austria, Charles I, is buried there. After World War I he was sent into exile on Madeira, where
+    he died in 1922.
+  ru: >-
+    Спуск длиной около двух километров идёт прямо по городским улицам и занимает несколько минут.
+    Возчиков называют «каррейруш», и раньше они спускали в город не только людей, но и грузы, а
+    пустые корзины тащили обратно в гору.
+
+
+    Наверху, у старта, стоит церковь Носса-Сеньора-ду-Монте. В ней похоронен последний император
+    Австрии Карл I. После Первой мировой войны его отправили в изгнание на Мадейру, где он и умер в
+    1922 году.
+sources:
+  - title: "Visit Madeira: Carrinhos de cesto"
+    url: https://visitmadeira.com/pt/o-que-fazer/viver-a-cidade-do-funchal/passear-na-cidade/carrinhos-de-cesto/
+    type: institutional
+    accessed: '2026-10-29'
+  - title: "Cultura Madeira: «The basket car»"
+    url: https://web.archive.org/web/20221203044339/https://cultura.madeira.gov.pt/en/works,-artists-and-collections/841-the-basket-car.html
+    type: website
+    accessed: '2026-10-29'
+    note:
+      pt: cópia arquivada (Internet Archive)
+      en: archived copy (Internet Archive)
+      ru: архивная копия (Internet Archive)
+  - title: "Wikipedia: Monte (Funchal)"
+    url: https://en.wikipedia.org/wiki/Monte_(Funchal)
+    type: reference
+    accessed: '2026-10-29'
+    note:
+      pt: sobre o túmulo de Carlos I
+      en: on the tomb of Charles I
+      ru: о могиле Карла I
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

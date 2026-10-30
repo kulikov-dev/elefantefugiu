@@ -1,0 +1,108 @@
+id: prisao-joanina
+slug:
+  pt: a-prisao-debaixo-da-biblioteca
+  en: the-prison-under-the-library
+  ru: tyurma-pod-bibliotekoy
+title:
+  pt: A prisão debaixo da biblioteca
+  en: The Prison Under the Library
+  ru: Тюрьма под библиотекой
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year:
+  from: 1717
+  to: 1834
+place:
+  name:
+    pt: Coimbra
+    en: Coimbra
+    ru: Коимбра
+  lat: 40.2071
+  lon: -8.4265
+bridge:
+  name: Biblioteca Joanina
+  title:
+    pt: Biblioteca Joanina, Universidade de Coimbra
+    en: Joanina Library, University of Coimbra
+    ru: Библиотека Жуанина, Университет Коимбры
+  address: Pátio das Escolas, Coimbra
+  lat: 40.2071225
+  lon: -8.4265219
+  maps_url: https://www.google.com/maps/search/?api=1&query=Biblioteca+Joanina+Coimbra
+  url: https://www.uc.pt/en/bguc/the-library/joanina-library/
+  note:
+    pt: As celas do piso inferior visitam-se juntamente com a biblioteca.
+    en: The cells on the lower floor are part of the library visit.
+    ru: Камеры тюрьмы на нижнем этаже показывают вместе с библиотекой.
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Debaixo da biblioteca dourada de Coimbra havia uma prisão para estudantes.
+  en: Beneath Coimbra’s golden library was a jail for students.
+  ru: Под золотой библиотекой Коимбры была тюрьма для студентов.
+story:
+  pt: Em 1717, D. João V deu à Universidade de Coimbra dinheiro para uma nova biblioteca. Em onze anos
+    construíram-se três salas de ouro e laca vermelha e verde, com estantes até ao teto. A
+    biblioteca ficou a chamar-se Joanina, em honra do rei. Mas por baixo das salas, no piso
+    inferior, havia uma prisão. No final do século XVIII passou para aqui a prisão académica, e até
+    1834 nela ficavam estudantes castigados e até professores.
+  en: In 1717, John V gave the University of Coimbra money for a new library. Over eleven years, three
+    halls were built in gold and red and green lacquer, with bookshelves up to the ceiling. The
+    library was named the Joanina in the king’s honor. But under the halls, on the lower floor,
+    there was a prison. In the late 18th century the university jail moved here, and until 1834 it
+    held students who’d broken the rules, and even professors.
+  ru: В 1717 году Жуан V дал Коимбрскому университету деньги на новую библиотеку. За одиннадцать лет
+    построили три зала в золоте, красном и зелёном лаке, с книжными полками до потолка. Библиотеку
+    назвали Жуаниной в честь короля. А под залами, на нижнем этаже, была тюрьма. В конце XVIII века
+    сюда перевели университетскую тюрьму, и до 1834 года в ней держали провинившихся студентов и
+    даже профессоров.
+more:
+  pt: >-
+    A universidade tinha as suas próprias leis e julgava a sua gente: estudantes, professores,
+    funcionários. A prisão ficava primeiro debaixo da sala principal da universidade, e no final do
+    século XVIII mudou-se para debaixo da biblioteca, para os restos de uma prisão real ainda mais
+    antiga, do tempo de D. João I, no final do século XIV. As penas eram curtas: era um castigo por
+    faltas, não uma pena de trabalhos.
+
+
+    Lá em cima, entretanto, os morcegos fazem o seu serviço. Vivem atrás das estantes e de noite
+    caçam os insetos que estragam os livros, por isso, antes de fechar, as mesas são cobertas para
+    não ficarem sujas.
+  en: >-
+    The university lived by its own laws and judged its own people: students, teachers, and staff.
+    Its jail was first under the university’s great hall, and in the late 18th century it moved
+    under the library, into the remains of an even older royal prison built under John I at the end
+    of the 14th century. Sentences were short: it was punishment for misconduct, not hard labor.
+
+
+    Upstairs, meanwhile, bats are on duty. They live behind the shelves and hunt the insects that
+    damage books at night, so the tables are covered before closing to keep them clean.
+  ru: >-
+    Университет жил по своим законам и судил своих людей сам: студентов, преподавателей, служителей.
+    Его тюрьма сначала была под парадным залом университета, а в конце XVIII века переехала под
+    библиотеку, в остатки ещё более старой королевской тюрьмы, построенной при Жуане I в конце XIV
+    века. Сажали в неё не надолго, это было наказание за проступки, а не каторга.
+
+
+    Наверху тем временем свою службу несут летучие мыши. Они живут за полками и по ночам охотятся на
+    насекомых, которые портят книги, поэтому перед закрытием столы накрывают, чтобы мыши их не
+    запачкали.
+sources:
+  - title: "Universidade de Coimbra: Joanina Library"
+    url: https://www.uc.pt/en/tourism/unesco/joanina-library
+    type: academic
+    accessed: '2026-10-29'
+  - title: "360meridianos: «6 curiosidades sobre a Universidade de Coimbra»"
+    url: https://www.360meridianos.com/6-curiosidades-sobre-a-universidade-de-coimbra/
+    type: website
+    accessed: '2026-10-29'
+related:
+  - morcegos-mafra-1771
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

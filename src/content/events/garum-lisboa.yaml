@@ -1,0 +1,134 @@
+id: garum-lisboa
+slug:
+  pt: o-molho-de-peixe-debaixo-do-banco
+  en: the-fish-sauce-under-the-bank
+  ru: rybnyy-sous-pod-bankom
+title:
+  pt: O molho de peixe debaixo do banco
+  en: The Fish Sauce Under the Bank
+  ru: Рыбный соус под банком
+epoch: lusitania-e-roma
+level: story
+year:
+  from: 1
+  to: 409
+year_label:
+  pt: séc. I–V
+  en: 1st–5th century
+  ru: I–V века
+year_scale:
+  pt: séc. I–V
+  en: 1st–5th c.
+  ru: I–V вв.
+place:
+  name:
+    pt: Lisboa (Olisipo)
+    en: Lisbon (Olisipo)
+    ru: Лиссабон (Олисипо)
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7098
+  lon: -9.137
+bridge:
+  name: Núcleo Arqueológico da Rua dos Correeiros (NARC)
+  title:
+    pt: Núcleo Arqueológico da Rua dos Correeiros (NARC)
+    en: Archaeological Center of Rua dos Correeiros (NARC)
+    ru: Археологический центр на Руа-душ-Коррейруш (NARC)
+  address: Rua dos Correeiros, Lisboa
+  lat: 38.7098186
+  lon: -9.1370025
+  maps_url: https://www.google.com/maps/place/N%C3%BAcleo+Arqueol%C3%B3gico+da+Rua+dos+Correeiros+(Funda%C3%A7%C3%A3o+Millennium+bcp)/@38.7098228,-9.1395774,17z/data=!3m1!4b1!4m6!3m5!1s0xd1934799ff6445b:0x1c13d26f01f9253b!8m2!3d38.7098186!4d-9.1370025!16s%2Fg%2F1th5dv8s
+  url: https://www.fundacaomillenniumbcp.pt/
+  note:
+    pt: Os tanques romanos ficam mesmo por baixo do edifício do banco, com entrada pelas traseiras.
+    en: The Roman vats lie right under the bank building, with the entrance around the back.
+    ru: Римские чаны лежат прямо под банковским зданием, вход с тыльной стороны.
+threads:
+  - comida-e-vinho
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Debaixo de um banco de Lisboa, os romanos faziam molho de peixe.
+  en: Under a Lisbon bank, Romans once made fish sauce.
+  ru: Под лиссабонским банком римляне варили рыбный соус.
+story:
+  pt: Em 1991, um banco da Baixa decidiu remodelar a sua sede. Debaixo do chão, os operários
+    encontraram tanques de pedra onde os romanos salgavam peixe. Aqui, na margem do Tejo, a antiga
+    Olisipo fazia conservas de peixe e um molho forte de peixe, sal e ervas, apreciado em todo o
+    império. O banco não tapou a descoberta, e hoje debaixo dos seus escritórios está uma fábrica
+    romana de peixe.
+  en: In 1991 a bank in Lisbon’s Baixa set out to renovate its headquarters. Under the floor, workers
+    found stone vats where the Romans had salted fish. Here on the banks of the Tagus, ancient
+    Olisipo made preserved fish and a pungent sauce of fish, salt, and herbs that was loved across
+    the empire. The bank didn’t fill the find back in, and today a Roman fish factory lies beneath
+    its offices.
+  ru: В 1991 году банк в Байше взялся перестроить свою штаб-квартиру. Под полом рабочие нашли каменные
+    чаны, в которых римляне солили рыбу. Здесь, на берегу Тежу, древний Олисипо делал рыбные
+    консервы и острый соус из рыбы, соли и трав, который любили по всей империи. Банк не стал
+    засыпать находку, и теперь под его офисом лежит римская рыбная фабрика.
+more:
+  pt: >-
+    O molho chamava-se garum, e para os romanos era como o sal e o molho de soja juntos para nós. O
+    peixe e as vísceras eram cobertos de sal e deixados a fermentar ao sol durante semanas, e depois
+    tirava-se o líquido transparente. O melhor garum era caríssimo: Plínio, o Velho, escreveu que
+    quase só os perfumes valiam mais.
+
+
+    A costa lusitana era uma das grandes produtoras. Ânforas com molho e peixe daqui seguiam para
+    todo o Mediterrâneo. Em 2021, pela primeira vez em quinze séculos, voltou a fazer-se garum num
+    tanque romano: nas ruínas de Tróia, em frente a Setúbal, com sardinha da região.
+
+
+    Em 1995 abriu um museu debaixo do banco. Além dos tanques, veem-se muros romanos, um pedaço de
+    chão de mosaico e achados dos séculos seguintes, até ao terramoto de 1755.
+  en: >-
+    The sauce was called garum, and for the Romans it was like salt and soy sauce rolled into one.
+    Fish and guts were layered with salt and left to ferment in the sun for weeks, and then the
+    clear liquid was drained off. The best garum was extremely expensive: Pliny the Elder wrote that
+    hardly anything but perfume was valued more.
+
+
+    The Lusitanian coast was one of its main producers. Amphorae of local sauce and fish traveled
+    all over the Mediterranean. In 2021, for the first time in fifteen centuries, garum was made
+    again in a Roman vat: in the ruins of Tróia, across from Setúbal, from local sardines.
+
+
+    In 1995 a museum opened under the bank. Besides the vats, you can see Roman walls, a piece of
+    mosaic floor, and finds from later centuries, right up to the earthquake of 1755.
+  ru: >-
+    Соус назывался гарум, и для римлян он был тем же, чем для нас соль и соевый соус вместе. Рыбу и
+    потроха пересыпали солью и неделями оставляли бродить на солнце, а потом сливали прозрачную
+    жидкость. Лучший гарум стоил очень дорого: Плиний Старший писал, что дороже ценятся разве что
+    благовония.
+
+
+    Лузитанский берег был одним из главных его производителей. Амфоры с местным соусом и рыбой
+    расходились по всему Средиземноморью. В 2021 году гарум впервые за пятнадцать веков снова
+    сделали в римском чане: в руинах Тройи напротив Сетубала, из местной сардины.
+
+
+    В 1995 году под банком открыли музей. Кроме чанов в нём видны римские стены, кусок мозаичного
+    пола и находки следующих веков, вплоть до землетрясения 1755 года.
+sources:
+  - title: "Time Out Lisbon: Núcleo Arqueológico da Rua dos Correeiros"
+    url: https://www.timeout.com/lisbon/attractions/nucleo-arqueologico-da-rua-dos-correeiros
+    type: press
+    accessed: '2026-10-29'
+  - title: "Get Lisbon: «Garum and the fish canning industry of Roman Lisbon»"
+    url: https://getlisbon.com/discovering/garum-and-the-fish-canning-industry-of-roman-lisbon/
+    type: website
+    accessed: '2026-10-29'
+  - title: "Echo Boomer: «Garum é retirado dos tanques das Ruínas Romanas de Tróia» (2021)"
+    url: https://echoboomer.pt/garum-retirado-ruinas-romanas-de-troia/
+    type: press
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true

@@ -189,7 +189,7 @@ const schema = epochNodes(schemaCtx, {
           {
             feed.map((event) => (
               <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
-                <span class="feed__year">{yearText(yearRange(event)[0], lang)}</span>
+                <span class="feed__year">{event.year_scale?.[lang]?.trim() || yearText(yearRange(event)[0], lang)}</span>
                 <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear fallback={epochPic} tiles={gridAvailable(feed.length)} />
               </li>
             ))

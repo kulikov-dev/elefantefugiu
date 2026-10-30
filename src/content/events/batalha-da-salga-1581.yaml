@@ -1,0 +1,134 @@
+id: batalha-da-salga-1581
+slug:
+  pt: touros-contra-o-desembarque
+  en: bulls-against-the-landing
+  ru: byki-protiv-desanta
+title:
+  pt: Touros contra o desembarque
+  en: Bulls Against the Landing
+  ru: Быки против десанта
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1581
+year_label:
+  pt: 25 de julho de 1581
+  en: July 25, 1581
+  ru: 25 июля 1581
+place:
+  name:
+    pt: Baía da Salga, ilha Terceira
+    en: Salga Bay, Terceira Island
+    ru: Бухта Салга, остров Терсейра
+  short:
+    pt: Terceira
+    en: Terceira
+    ru: Терсейра
+  lat: 38.6467
+  lon: -27.0975
+bridge:
+  name: Baía da Salga
+  title:
+    pt: Baía da Salga
+    en: Salga Bay
+    ru: Бухта Салга
+  address: Salga, ilha Terceira, Açores
+  lat: 38.6467
+  lon: -27.0975
+  maps_url: https://www.google.com/maps/search/?api=1&query=Ba%C3%ADa+da+Salga+Terceira+A%C3%A7ores
+  url: https://www.visitazores.com/en/
+  note:
+    pt: Sobre a baía ainda se veem as ruínas do velho forte da Salga.
+    en: The ruins of the old Salga fort still stand above the bay.
+    ru: Над бухтой сохранились руины старого форта Салга.
+threads:
+  - poder-e-revolta
+  - natureza
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Na Terceira, um desembarque espanhol foi travado por uma manada de touros.
+  en: On Terceira, a herd of bulls drove off a Spanish landing.
+  ru: На Терсейре испанский десант отбили стадом быков.
+story:
+  pt: "Em 1580, Portugal passou para o rei espanhol Filipe II, mas a ilha Terceira, nos Açores, não o
+    reconheceu. A 25 de julho de 1581, os espanhóis desembarcaram na baía da Salga. Os ilhéus
+    recuavam, e então frei Pedro propôs um plano: lançar touros contra o inimigo. Centenas de
+    animais, entre gritos, pauladas e tiros, avançaram contra as fileiras espanholas. As fileiras
+    desfizeram-se, os ilhéus atacaram logo atrás, e os espanhóis fugiram para os barcos."
+  en: "In 1580 Portugal passed to the Spanish king Philip II, but the island of Terceira in the Azores
+    refused to recognize him. On July 25, 1581, the Spanish landed in Salga Bay. The islanders were
+    falling back, and that’s when a friar named Pedro came up with a plan: send bulls at the enemy.
+    Hundreds of animals, driven by shouts, sticks, and gunfire, charged into the Spanish lines. The
+    lines broke, the islanders attacked right behind them, and the landing force ran for its boats."
+  ru: "В 1580 году Португалия досталась испанскому королю Филиппу II, но остров Терсейра на Азорах его
+    не признал. 25 июля 1581 года испанцы высадились в бухте Салга. Островитяне отступали, и тогда
+    монах Педро предложил план: пустить на врага быков. Сотни животных под крики, удары палками и
+    выстрелы рванули на испанский строй. Строй рассыпался, островитяне ударили следом, и десант
+    бежал к лодкам."
+more:
+  pt: >-
+    Conta-se que um dos espanhóis ainda gritou: «Vien con ganado, gañados somos!» Em espanhol é um
+    trocadilho: «ganado» quer dizer «gado», e «gañados» soa a «estamos perdidos». Pode dizer-se que
+    fugiram ao som do próprio trocadilho.
+
+
+    A ilha não lutou só com touros. Segundo a tradição, Brianda Pereira, cuja casa os espanhóis
+    queimaram no desembarque, juntou as mulheres das aldeias vizinhas, e elas foram à luta ao lado
+    dos homens. O seu nome está em ruas e escolas da Terceira.
+
+
+    A vitória deu à ilha mais dois anos de liberdade: os espanhóis só tomaram a Terceira em 1583. E
+    os touros continuam a ser queridos: no verão leva-se um touro preso por uma corda comprida pelas
+    ruas das aldeias, é a tourada à corda.
+  en: >-
+    It’s said that one of the Spaniards managed to shout, “Vien con ganado, gañados somos!” In
+    Spanish it’s a pun: “ganado” means “cattle,” and “gañados” sounds like “we’re done for.” So you
+    could say they fled to the sound of their own pun.
+
+
+    The island didn’t fight with bulls alone. According to legend, Brianda Pereira, whose house the
+    Spanish burned when they landed, gathered the women of the nearby villages, and they went into
+    battle alongside the men. Streets and schools on Terceira are named after her.
+
+
+    The victory bought the island two more years of freedom: the Spanish didn’t take Terceira until
+    1583. And people here still love their bulls: in summer, a bull on a long rope is led through
+    the village streets, a tradition called tourada à corda.
+  ru: >-
+    Говорят, один из испанцев успел крикнуть: «Vien con ganado, gañados somos!» По-испански это игра
+    слов: «ganado» значит «скот», а «gañados» звучит как «нам конец». Так что бежали они, можно
+    сказать, под собственный каламбур.
+
+
+    Остров воевал не только быками. По преданию, Брианда Перейра, чей дом испанцы сожгли при
+    высадке, собрала женщин из окрестных деревень, и они пошли в бой вместе с мужчинами. Её имя
+    носят улицы и школы Терсейры.
+
+
+    Победа подарила острову ещё два года свободы: испанцы взяли Терсейру только в 1583 году. А быков
+    здесь любят до сих пор: летом по улицам деревень водят быка на длинной верёвке, это «турада а
+    корда».
+sources:
+  - title: "Avelino de Freitas de Meneses: «Insegurança e revolta nas relações entre açorianos e
+      soldados estrangeiros (1580-1590)»"
+    url: https://dl.uc.pt/bitstream/10316.2/93039/1/inseguranca_e_revolta_nas_relacoes_entre_acorianos.pdf
+    type: academic
+    accessed: '2026-10-29'
+  - title: "CTT: stamp booklet «440 anos da Batalha da Salga», 2021"
+    url: https://web.archive.org/web/20240902215148/https://www.ctt.pt/contentAsset/raw-data/c1ada2e6-d0ae-42d5-bd9a-97f31cc7f1b2/ficheiro/414698dc-395b-48ad-997d-4a2531f511da/export/Pagela-triptica-batalha-salga-2021.pdf
+    type: website
+    accessed: '2026-10-29'
+    note:
+      pt: cópia arquivada (Internet Archive)
+      en: archived copy (Internet Archive)
+      ru: архивная копия (Internet Archive)
+  - title: "Explore Terceira: «Legend of Brianda Pereira – Batalha of Salga»"
+    url: https://www.exploreterceiraisland.com/en/?p=39214
+    type: website
+    accessed: '2026-10-29'
+status: draft
+published: '2026-10-29'
+placeholder: false
+ru_ready: true
