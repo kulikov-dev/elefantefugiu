@@ -194,7 +194,7 @@ for (const lang of ['pt', 'en']) {
     }
     if ((jsPart.match(/<button\b[^>]*data-view="(timeline|grid)"/g) ?? []).length !== 2) fail('timeline/grid switch needs two buttons');
     for (const e of feed) {
-      const li = feedHtml.match(new RegExp(`<li ([^>]*data-threads="([^"]*)"[^>]*)>\\s*(?:<span class="feed__year"[^>]*>[^<]*</span>\\s*)?<article [^>]*id="c-${e.id}"`));
+      const li = feedHtml.match(new RegExp(`<li ([^>]*data-threads="([^"]*)"[^>]*)>\\s*(?:<span class="feed__year[^"]*"[^>]*>(?:<span[^>]*>[^<]*</span>|[^<])*</span>\\s*)?<article [^>]*id="c-${e.id}"`));
       if (!li || li[2].split(' ').sort().join(' ') !== [...e.threads].sort().join(' ')) fail(`card ${e.id}: data-threads does not match its threads`);
       else if (!li[1].includes(`data-min-age="${e.min_age}"`) || !li[1].includes(`data-sensitive="${e.sensitive}"`)) fail(`card ${e.id}: the feed item must carry data-min-age="${e.min_age}" and data-sensitive="${e.sensitive}"`);
     }
@@ -213,10 +213,12 @@ for (const lang of ['pt', 'en']) {
     if (introWant && introHtml !== undefined && html.indexOf('class="epoch__intro"') > html.indexOf('class="epoch-switch"')) fail('the introduction must come before the epoch switcher and the filters');
     // every story on the timeline has its year on the scale: the year it starts in
     for (const e of feed) {
-      const m = html.match(new RegExp(`<span class="feed__year"[^>]*>([^<]*)</span>\\s*<article [^>]*id="c-${e.id}"`));
+      const m = html.match(new RegExp(`<span class="feed__year[^"]*"[^>]*>((?:<span[^>]*>[^<]*</span>|[^<])*)</span>\\s*<article [^>]*id="c-${e.id}"`));
       const bc = JSON.parse(readFileSync(join(root, `src/i18n/${lang}.json`), 'utf8')).card.year_bc;
       const wantScale = (e.year_scale?.[lang] ?? (startYear(e) < 0 ? bc.replace('{n}', String(-startYear(e))) : String(startYear(e)))).trim();
-      if (!m || m[1].trim() !== wantScale) fail(`card ${e.id}: the scale shows "${m?.[1]}", expected "${wantScale}"`);
+      // The year may stand in two parts (a date before the common era), with no-break spaces and word joiners inside: compare the plain text.
+      const shown = m?.[1].replace(/<[^>]*>/g, '').replace(/⁠/g, '').replace(/[ \s]+/g, ' ').trim();
+      if (!m || shown !== wantScale) fail(`card ${e.id}: the scale shows "${shown}", expected "${wantScale}"`);
     }
     // the view switch (timeline / cards) is in the markup and starts hidden-by-script; its labels are the new ones
     if (!/data-view-switch/.test(html)) fail('the view switch is missing');

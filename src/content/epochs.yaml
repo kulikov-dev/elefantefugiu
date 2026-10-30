@@ -12,17 +12,17 @@
     ru: do-portugalii
   order: 0
   name:
-    pt: "Antes de Portugal"
-    en: "Before Portugal"
-    ru: "До Португалии"
+    pt: "Prólogo: dinossauros e pedras"
+    en: "Prologue: Dinosaurs and Stones"
+    ru: "Пролог: динозавры и камни"
   years_label:
-    pt: "até ao séc. VI a.C."
-    en: "before the 6th c. BC"
-    ru: "до VI в. до н. э."
+    pt: "150 milhões de anos – séc. VI a.C."
+    en: "150 million years ago – 6th c. BC"
+    ru: "150 млн лет — VI в. до н. э."
   theme:
-    pt: "Dinossauros, grutas e os primeiros artistas"
-    en: "Dinosaurs, caves and the first artists"
-    ru: "Динозавры, пещеры и первые художники"
+    pt: "Pegadas de dinossauros, gravuras do Côa, cromeleques"
+    en: "Dinosaur tracks, Côa rock art, stone circles"
+    ru: "Следы динозавров, рисунки Коа, кромлехи"
   mvp: false
   placeholder: [theme]
 - id: avis-e-descobrimentos

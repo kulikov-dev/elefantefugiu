@@ -32,6 +32,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Pure unit tests with their own small input (`e1`, `e2`, ...) are fine: the input is part of the test.
 - When the data changes (new stories, epochs open) or the behaviour of the map or navigation changes, run the affected QA suites locally before pushing to main (`npm run qa -- map-variant map-more`, and so on). A suite named in the change is not "the owner's full run": this is the one case where the rule above allows a named suite.
 
+### "Show and wait for OK" means stop
+
+When a prompt says to show something and wait for "ok" (or approval) before going on, stop after showing it, even if the later steps (docs, build, commit, push, deploy) are listed as one chain. Do not treat the chain as permission to continue: run those steps only after the owner's explicit "ok", and after any new corrections to what was shown, show the result again and wait again unless the owner said otherwise.
+
 ### Large changes (opening epochs, reworking the map or navigation)
 
 Branch, not main: branch -> push -> QA full on the branch (`gh workflow run qa-full.yml --ref <branch>`, or Actions -> QA full -> Run workflow -> choose the branch; `qa-full.yml` has `workflow_dispatch` and checks out the chosen ref) -> `gh run watch` / `gh run view <id> --log-failed` -> merge into main only after it is green.

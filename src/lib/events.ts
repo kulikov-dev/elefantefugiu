@@ -20,6 +20,17 @@ export function yearText(year: number, lang: Lang): string {
   return year < 0 ? t(lang, 'card.year_bc').replace('{n}', String(-year)) : String(year);
 }
 
+/**
+ * The year as it stands in the narrow column of the epoch timeline: at most two lines. A date before the common era ("IV в. до н. э.", "séc. IV a.C.",
+ * "4th c. BC", "140 BC") breaks before the era mark: ["IV в.", "до н. э."]; inside a part the spaces are no-break spaces and a range ("I–V") is held together by word joiners, so a line never splits further.
+ * Any other text is one part.
+ */
+export function yearParts(text: string): string[] {
+  const tight = (part: string) => part.trim().replace(/\s+/g, '\u00A0').replace(/\u2013/g, '\u2060\u2013\u2060');
+  const m = /^(.+?)\s+((?:до\s+н\.\s*э\.|a\.C\.|BC))$/u.exec(text.trim());
+  return m ? [tight(m[1]), tight(m[2])] : [tight(text)];
+}
+
 /** Text shown for the year: `year_label` if given, else "1385" or "1385–1390". */
 export function formatYear(event: Pick<EventData, 'year' | 'year_label'>, lang: Lang): string {
   const label = event.year_label?.[lang]?.trim();

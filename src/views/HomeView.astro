@@ -102,7 +102,10 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
     <section id={EPOCHS_ANCHOR} aria-labelledby="epocas-title">
       <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
       <!-- All the epochs in order: the ready ones stand out (a link, the theme phrase, the number of stories), the others are pale with "soon". -->
-      <div class="timeline-wrap" data-scroll-fade>
+      <div class="timeline-nav">
+        <!-- The buttons need the script (it removes `hidden`); from 48rem up. -->
+        <button type="button" class="timeline-nav__button timeline-nav__button--prev" data-timeline-prev aria-label={t(lang, 'home.timeline_prev')} hidden disabled><span aria-hidden="true">‹</span></button>
+        <div class="timeline-wrap" data-scroll-fade data-timeline-scroller tabindex="0" role="region" aria-labelledby="epocas-title">
         <ol class="timeline" aria-label={t(lang, 'home.timeline_label')}>
           {
             tiles.map(({ epoch, available, counts }) =>
@@ -127,6 +130,8 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
             )
           }
         </ol>
+        </div>
+        <button type="button" class="timeline-nav__button timeline-nav__button--next" data-timeline-next aria-label={t(lang, 'home.timeline_next')} hidden><span aria-hidden="true">›</span></button>
       </div>
       {soonCount > 0 && <p class="timeline__more">{plural(lang, 'plural.epochs_more', soonCount)}</p>}
     </section>
@@ -167,6 +172,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 
 <script>
   import '../scripts/last-epoch';
+  import '../scripts/timeline-nav';
 </script>
 
 <style>
@@ -269,10 +275,82 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 
   /* ---- the time strip: all the epochs in order ---- */
   /* The epochs with stories are wider (a theme phrase and the number of stories); the others are narrow, pale and say "soon". */
-  .timeline-wrap {
+  .timeline-nav {
+    position: relative;
     margin-block-start: var(--space-5);
+  }
+
+  /* The strip scrolls by finger, trackpad, Shift + wheel and keyboard (it takes focus); with the script the scrollbar is hidden and the arrows
+     below take its place. Without the script: a thin system scrollbar and a fade that always stands at the right edge. */
+  .timeline-wrap {
     overflow-x: auto;
     padding-block-end: var(--space-2);
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
+  :global(html:not([data-js])) .timeline-wrap {
+    --fade-end: var(--scroll-fade-size);
+  }
+
+  :global(html[data-js]) .timeline-wrap {
+    scrollbar-width: none;
+  }
+
+  :global(html[data-js]) .timeline-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .timeline-wrap:focus-visible {
+    outline: var(--ring-width) solid var(--color-focus);
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  .timeline-nav__button {
+    display: none;
+    position: absolute;
+    inset-block-start: var(--space-2);
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+    width: var(--touch-target);
+    height: var(--touch-target);
+    padding: 0;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font-size: var(--text-xl);
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .timeline-nav__button--prev {
+    inset-inline-start: 0;
+  }
+
+  .timeline-nav__button--next {
+    inset-inline-end: 0;
+  }
+
+  /* At the end of the strip the arrow is plainly dimmer than the live one: no fill, a faint frame, a pale mark. */
+  .timeline-nav__button:disabled {
+    border-color: var(--epoch-line);
+    background: transparent;
+    color: var(--color-ink-muted);
+    opacity: var(--opacity-disabled);
+    cursor: default;
+  }
+
+  /* The arrows stand in their own gutters beside the strip, so they never cover an epoch. */
+  @media (min-width: 48rem) {
+    .timeline-nav {
+      padding-inline: calc(var(--touch-target) + var(--space-2));
+    }
+
+    .timeline-nav__button {
+      display: inline-flex;
+    }
   }
 
   .timeline {
@@ -285,6 +363,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 
   .timeline__item {
     position: relative;
+    scroll-snap-align: start;
     display: flex;
     flex: 1 0 var(--timeline-item-min);
     flex-direction: column;

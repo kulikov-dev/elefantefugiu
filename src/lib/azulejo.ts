@@ -14,7 +14,7 @@ export const DIRECTED: readonly AzulejoName[] = ['no', 'onda', 'pegada', 'xadrez
  * Pattern of an epoch: compass (Avis and the Discoveries), rhombus (Pombal and 1755), rose (Estado Novo and 25 April), Solomon's knot
  * (Lusitania and Rome: the Roman floors of Conimbriga), carpet flower (Union, Restoration and the gold of Brazil: the "tapete" azulejo of the
  * 17th century), waves (Monarchy and Republic: the "mar largo" pavement of the Rossio, 1849), the Moorish star-and-cross lattice (Suebi, Visigoths and Moors),
- * the Romanesque chequer band (Birth of the Kingdom: the axadrezado of cathedral portals) and a trail of dinosaur footprints (Before Portugal).
+ * the Romanesque chequer band (Birth of the Kingdom: the axadrezado of cathedral portals) and a trail of dinosaur footprints (Prologue).
  */
 export const EPOCH_PATTERN: Record<string, Exclude<AzulejoName, 'canto' | 'no-v' | 'onda-v' | 'pegada-v' | 'xadrez-v'>> = {
   'antes-de-portugal': 'pegada',

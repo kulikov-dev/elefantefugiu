@@ -191,7 +191,7 @@ The domain is `elefantefugiu.pt` and is already the workflow default. What is le
 ```
 src/pages        routes: / (language chooser), /[lang]/[...page] (home and stubs), /[lang]/[map] (map page, own file so the map code reaches only map pages), /[lang]/[segment]/[slug] (cards, epochs, threads), 404
 src/views        page bodies: StoryView, EpochView (feed and map), ThreadView, HomeView, MapView
-src/scripts      client code: epoch-filter (thread filter, timeline/grid), epoch-map (feed and map talk to each other, phone pane switch), map-loader (loads the map when the block comes into view), map-island (Leaflet, loaded on demand), lang-carry (language switch keeps ?fio= ?vista=), surprise ("Surprise me")
+src/scripts      client code: epoch-filter (thread filter, timeline/grid), epoch-map (feed and map talk to each other, phone pane switch), map-loader (loads the map when the block comes into view), map-island (Leaflet, loaded on demand), timeline-nav (arrows of the time strip on the home page), lang-carry (language switch keeps ?fio= ?vista=), surprise ("Surprise me")
 src/layouts      BaseLayout (head, meta tags, header, footer)
 src/components   header, footer, language switch, card components (CardLayers, TagLabel, ...), list components (EventCard, ThreadChip, PagerNav, EpochSwitcher)
 src/content      YAML content: events/, epochs, threads, featured

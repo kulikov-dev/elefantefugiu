@@ -1,6 +1,6 @@
 ---
 // The "read" mark in a list of stories: a small tick and the word. The place is always in the page, only hidden (visibility), so it takes
-// the same room read or not and the page never shifts when src/scripts/read-marks.ts shows it. The list item or card that holds it carries
+// the same width read or not (the card list also keeps its height unless the mark has to wrap) so the page hardly shifts when src/scripts/read-marks.ts shows it. The list item or card that holds it carries
 // data-story="<id>"; the script sets data-read on it. Hidden it is not read out by screen readers; shown, the word is read as text.
 // The tick and the word are always seen together; in a row that wraps the mark goes to the end of the wrapped line.
 import { t } from '../i18n';

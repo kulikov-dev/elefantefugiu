@@ -63,6 +63,8 @@
     "open_map": "Открыть карту",
     "showcase_heading": "С чего начать",
     "timeline_label": "Все эпохи по порядку",
+    "timeline_prev": "Более ранние эпохи",
+    "timeline_next": "Более поздние эпохи",
     "threads_heading": "Нити",
     "threads_intro": "Выберите тему и проследите её сквозь века."
   },

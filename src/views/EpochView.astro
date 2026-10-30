@@ -27,7 +27,8 @@ import {
   type EpochData,
 } from '../lib/epochs';
 import { mascotAllowed } from '../lib/mascot';
-import { yearRange, yearText } from '../lib/events';
+import { yearParts, yearRange, yearText } from '../lib/events';
+import { DIRECTED, patternFor } from '../lib/azulejo';
 import { toMapCards } from '../lib/map-cards';
 import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
@@ -46,6 +47,8 @@ const { lang, epoch } = Astro.props;
 const site = await loadSite();
 
 const feed = epochFeed(epoch, site.events);
+// An epoch whose pattern runs in one direction (braid, waves, chequer band, footprints) has it for the axis of the timeline: no straight line beside it.
+const patternAxis = DIRECTED.includes(patternFor(epoch.id));
 const counts = threadCountsInEpoch(epoch, site.events);
 // Only threads that have a page, and only those with cards in this epoch, so every counter is a real count.
 const chips = site.visibleThreads.filter((th) => (counts.get(th.id) ?? 0) > 0);
@@ -185,11 +188,13 @@ const schema = epochNodes(schemaCtx, {
              to the timeline when the script arrives. */
           !gridAvailable(feed.length) && <script is:inline set:html="delete document.documentElement.dataset.vista;" />
         }
-        <ol class="feed" data-view="timeline">
+        <ol class="feed" data-view="timeline" {...(patternAxis ? { 'data-axis': '' } : {})}>
           {
             feed.map((event) => (
               <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
-                <span class="feed__year">{event.year_scale?.[lang]?.trim() || yearText(yearRange(event)[0], lang)}</span>
+                <span class:list={['feed__year', yearParts(event.year_scale?.[lang]?.trim() || yearText(yearRange(event)[0], lang)).length > 1 && 'feed__year--bc']}>
+                  {yearParts(event.year_scale?.[lang]?.trim() || yearText(yearRange(event)[0], lang)).map((part, i) => <>{i > 0 && ' '}<span>{part}</span></>)}
+                </span>
                 <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear fallback={epochPic} tiles={gridAvailable(feed.length)} />
               </li>
             ))
@@ -476,6 +481,15 @@ const schema = epochNodes(schemaCtx, {
     mask: var(--azulejo-strip-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-y;
   }
 
+  /* The pattern is the axis: the straight line is dropped (its width stays, so the layout does not move) and the pattern is as strong as a strip may be. */
+  :global(html:not([data-vista='grelha'])) .feed[data-axis] {
+    border-inline-start-color: transparent;
+  }
+
+  :global(html:not([data-vista='grelha'])) .feed[data-axis]::before {
+    opacity: var(--azulejo-opacity-axis);
+  }
+
   .feed__item {
     position: relative;
   }
@@ -492,6 +506,11 @@ const schema = epochNodes(schemaCtx, {
     line-height: 1.2;
   }
 
+  /* A date before the common era is two short lines ("IV в." / "до н. э."); a little smaller than other years, so the second line fits the column. */
+  .feed__year--bc {
+    font-size: var(--text-base);
+  }
+
   :global(html[data-vista='grelha']) .feed .feed__year {
     display: none;
   }
@@ -499,6 +518,10 @@ const schema = epochNodes(schemaCtx, {
   @media (min-width: 40rem) {
     :global(html:not([data-vista='grelha'])) .feed {
       margin-inline-start: calc(var(--timeline-year-width) + var(--space-2));
+    }
+
+    :global(html:not([data-vista='grelha'])) .feed__year--bc span {
+      display: block;
     }
 
     :global(html:not([data-vista='grelha'])) .feed__year {
@@ -522,16 +545,15 @@ const schema = epochNodes(schemaCtx, {
     inset-block-start: var(--timeline-dot-top);
     width: var(--timeline-dot);
     height: var(--timeline-dot);
-    border: var(--border-medium) solid var(--color-surface);
+    border: var(--border-medium) solid var(--epoch-tint);
     border-radius: 50%;
-    background: var(--epoch-accent);
+    background: var(--tone);
   }
 
-  /* Stories between the key events: smaller dot, lighter card. */
+  /* Stories between the key events: smaller dot (the same colour of the epoch), lighter card. */
   .feed__item--story::before {
     inset-inline-start: calc(-1 * var(--space-5) - var(--timeline-dot-small) / 2 - var(--timeline-line) / 2);
     width: var(--timeline-dot-small);
     height: var(--timeline-dot-small);
-    background: var(--color-ink-muted);
   }
 </style>

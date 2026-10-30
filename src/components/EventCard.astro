@@ -209,9 +209,15 @@ const WIDE_SIZES = '(min-width: 72rem) 326px, (min-width: 52rem) calc((100vw - 6
     background: transparent;
   }
 
-  /* The "read" mark: the last place of the row, pushed to the end; it is always there (hidden), so nothing moves when it shows. */
+  /* The "read" mark: the last place of the row, pushed to the end; it is always there (hidden) with its width, so nothing moves sideways when it shows. */
   .ecard__read {
     margin-inline-start: auto;
+    /* Unread, the place takes no height: when the chips fill the row the mark would wrap to a row of its own and leave an empty line. */
+    height: 0;
+  }
+
+  :global([data-read]) .ecard__read {
+    height: auto;
   }
 
   .ecard__heavy {

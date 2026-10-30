@@ -336,6 +336,50 @@ for (const lang of ['pt', 'en']) {
   await page.close();
 }
 
+// ---------- 9b. The time strip of the home page: arrows, hidden scrollbar, no JavaScript ----------
+{
+  const state = (page) =>
+    page.evaluate(() => {
+      const strip = document.querySelector('[data-timeline-scroller]');
+      const prev = document.querySelector('[data-timeline-prev]');
+      const next = document.querySelector('[data-timeline-next]');
+      const shown = (b) => getComputedStyle(b).display !== 'none' && !b.hidden;
+      return { left: strip.scrollLeft, max: strip.scrollWidth - strip.clientWidth, prev: prev.disabled, next: next.disabled, prevShown: shown(prev), nextShown: shown(next), labels: [prev, next].map((b) => b.getAttribute('aria-label')), tabindex: strip.getAttribute('tabindex'), scrollbar: getComputedStyle(strip).scrollbarWidth, snap: getComputedStyle(strip).scrollSnapType };
+    });
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const wide = await newPage({ width: 1280 });
+  await wide.goto(HOME, { waitUntil: 'networkidle0' });
+  const a = await state(wide);
+  ok('time strip: wider than the screen, the arrows are shown, the left one is disabled at the start', a.max > 0 && a.prevShown && a.nextShown && a.prev && !a.next, JSON.stringify(a));
+  ok('time strip: arrows have labels, the strip takes focus (tabindex 0), has no scrollbar, snaps on x', a.labels.every((l) => l && l.length > 2) && a.tabindex === '0' && a.scrollbar === 'none' && /x/.test(a.snap), JSON.stringify([a.labels, a.tabindex, a.scrollbar, a.snap]));
+  await wide.click('[data-timeline-next]');
+  await wait(900);
+  const b = await state(wide);
+  ok('time strip: the right arrow scrolls by one epoch and enables the left one', b.left > 0 && b.left < b.max && !b.prev, JSON.stringify(b));
+  for (let i = 0; i < b.max / 100 + 20 && !(await state(wide)).next; i += 1) {
+    await wide.click('[data-timeline-next]');
+    await wait(500);
+  }
+  const c = await state(wide);
+  ok('time strip: at the right end the right arrow is disabled and the left one works', c.next && !c.prev && c.left >= c.max - 2, JSON.stringify(c));
+  const dim = await wide.evaluate(() => {
+    const css = (sel) => getComputedStyle(document.querySelector(sel));
+    return { disabled: Number(css('[data-timeline-next]').opacity), enabled: Number(css('[data-timeline-prev]').opacity) };
+  });
+  ok('time strip: a disabled arrow is plainly dimmer than a working one', dim.disabled < dim.enabled, JSON.stringify(dim));
+  await wide.close();
+  const phone = await newPage({ width: 360 });
+  await phone.goto(HOME, { waitUntil: 'networkidle0' });
+  const p = await state(phone);
+  ok('time strip: on a phone there are no arrows (the strip is scrolled by finger)', !p.prevShown && !p.nextShown && p.scrollbar === 'none', JSON.stringify(p));
+  await phone.close();
+  const plain = await newPage({ width: 1280, js: false });
+  await plain.goto(HOME, { waitUntil: 'load' });
+  const n = await state(plain);
+  ok('time strip: without JavaScript there are no arrows, a thin scrollbar stays, the fade at the right edge is static', !n.prevShown && !n.nextShown && n.scrollbar === 'thin', JSON.stringify(n));
+  await plain.close();
+}
+
 // ---------- 10. Language switch on the home page, keyboard ----------
 {
   const page = await newPage();

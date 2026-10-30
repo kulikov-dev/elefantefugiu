@@ -63,6 +63,8 @@
     "open_map": "Open the map",
     "showcase_heading": "Where to start",
     "timeline_label": "All eras, in order",
+    "timeline_prev": "Earlier eras",
+    "timeline_next": "Later eras",
     "threads_heading": "Threads",
     "threads_intro": "Pick a theme and follow it through the centuries."
   },

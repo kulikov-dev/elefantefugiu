@@ -154,3 +154,20 @@ test('placeShort: the short name of the data in the language of the page, else t
   assert.equal(placeShort(withShort, 'en'), 'Lisbon');
   assert.equal(placeShort({ name: { pt: 'Porto', en: 'Porto', ru: 'Порту' } }, 'ru'), 'Порту');
 });
+
+test('yearParts: a date before the common era breaks before the era mark, a range is never torn at the dash', async () => {
+  const { yearParts } = await import('../src/lib/events');
+  const nb = String.fromCharCode(0xa0);
+  const wj = String.fromCharCode(0x2060);
+  assert.deepEqual(yearParts('IV в. до н. э.'), [`IV${nb}в.`, `до${nb}н.${nb}э.`]);
+  assert.deepEqual(yearParts('séc. IV a.C.'), [`séc.${nb}IV`, 'a.C.']);
+  assert.deepEqual(yearParts('4th c. BC'), [`4th${nb}c.`, 'BC']);
+  assert.deepEqual(yearParts('140 BC'), ['140', 'BC']);
+  assert.deepEqual(yearParts('1385'), ['1385']);
+  for (const text of ['séc. I–V', 'I–V вв.', '1st–5th c.']) {
+    const parts = yearParts(text);
+    assert.equal(parts.length, 1);
+    assert.ok(parts[0].includes(`${wj}\u2013${wj}`), text);
+    assert.ok(!/ /.test(parts[0]), text);
+  }
+});

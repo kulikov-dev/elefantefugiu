@@ -137,7 +137,7 @@
   --size-mascot-hero: clamp(8rem, 42vw, 20rem);
   /* The small map on the home page. */
   /* One epoch on the time strip of the home page. */
-  --timeline-item-min: 5.5rem;
+  --timeline-item-min: 10rem; /* an epoch to come: not narrower than 160px, so the name and the dates take two or three lines */
   --timeline-ready-min: 11rem;
   /* The rows of the threads on the home page (a wide screen): the name column and the column of the number of stories. */
   --thread-name-min: 8rem;
@@ -166,11 +166,11 @@
   /* Chips inside a feed card: a small target (24 px is the WCAG minimum, 32 px is comfortable). */
   --chip-height-compact: 1.75rem;
   /* The column of years on the timeline of an epoch page. */
-  --timeline-year-width: 3.5rem;
+  --timeline-year-width: 5rem; /* "séc. I–II" and "I–III вв." stay on one line (no break at the dash) */
   /* The year is lifted so that its middle is level with the dot of its card. */
   --timeline-year-top: calc(var(--timeline-dot-top) - 0.7em);
   --timeline-dot: 12px;
-  --timeline-dot-small: 8px;
+  --timeline-dot-small: 10px;
   --timeline-dot-top: 1.4rem;
 
   /* Grids and widths */
@@ -228,6 +228,7 @@
      (5-10% under text, up to 50% on frames and dividers; never on text). */
   --azulejo-opacity: 0.08; /* under text: 5-10% */
   --azulejo-opacity-frame: 0.4; /* bands, strips and the corner: up to 50% */
+  --azulejo-opacity-axis: 0.5; /* the pattern that is the axis of an epoch timeline, with no straight line: the strongest a strip may be */
   --azulejo-band-height: 1.25rem;
   --azulejo-corner-size: 5.5rem;
 

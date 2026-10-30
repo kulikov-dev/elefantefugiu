@@ -118,6 +118,7 @@ const PAIRS = [
   ['button text', 'on-accent', 'accent', T],
   ['button text, hover', 'on-accent', 'accent-strong', T],
   ['epoch primary text on page', 'epoch-primary', 'epoch-tint', T],
+  ['timeline dot on page (the epoch colour)', 'epoch-primary', 'epoch-tint', G],
   ['epoch primary text on surface', 'epoch-primary', 'surface', T],
   ['epoch accent text on page', 'epoch-accent', 'epoch-tint', T],
   ['epoch accent text on surface', 'epoch-accent', 'surface', T],
