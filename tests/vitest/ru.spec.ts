@@ -172,7 +172,7 @@ describe('Russian interface strings and plurals', () => {
     expect(Object.keys(pluralForms('ru', 'map.cluster')).sort()).toEqual(['few', 'many', 'one', 'other']);
   });
   it('the browser picker agrees with the server for every count and language', () => {
-    const locale = { pt: 'pt-PT', en: 'en-GB', ru: 'ru-RU' } as const;
+    const locale = { pt: 'pt-PT', en: 'en-US', ru: 'ru-RU' } as const;
     for (const lang of LANGS) {
       const strings = Object.fromEntries(Object.entries(pluralForms(lang, 'map.in_area')).map(([k, v]) => [`in_area_${k}`, v]));
       for (const n of [0, 1, 2, 3, 4, 5, 11, 12, 21, 22, 100, 101]) {

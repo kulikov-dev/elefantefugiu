@@ -28,7 +28,7 @@ const STORY = /^(pt\/historia|en\/story|ru\/istoriya)\/[^/]+\/index\.html$/;
 const EPOCH = /^(pt\/epoca|en\/era|ru\/epoha)\/[^/]+\/index\.html$/;
 const HOME = /^(pt|en|ru)\/index\.html$/;
 const ABOUT = /^(pt\/sobre|en\/about|ru\/o-proekte)\/index\.html$/;
-const LOCALE = { pt: 'pt-PT', en: 'en-GB', ru: 'ru-RU' };
+const LOCALE = { pt: 'pt-PT', en: 'en-US', ru: 'ru-RU' };
 
 const errors = [];
 const smallImages = [];

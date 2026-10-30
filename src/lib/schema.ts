@@ -9,7 +9,7 @@ export type Node = Record<string, unknown>;
 
 export interface SchemaContext {
   lang: Lang;
-  /** BCP 47 tag of the page language (pt-PT, en-GB, ru-RU). */
+  /** BCP 47 tag of the page language (pt-PT, en-US, ru-RU). */
   inLanguage: string;
   /** Base-aware path (or already absolute address) -> absolute address on the site. */
   abs: (path: string) => string;

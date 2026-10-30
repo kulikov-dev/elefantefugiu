@@ -130,7 +130,7 @@ test('firstSentence: plain, punctuation, abbreviations, long text', () => {
 
 test('formatDate: stored day does not shift, language-specific', () => {
   const day = new Date('2026-10-13');
-  assert.match(formatDate(day, 'en'), /13 October 2026/);
+  assert.match(formatDate(day, 'en'), /October 13, 2026/);
   assert.match(formatDate(day, 'pt'), /13 de outubro de 2026/);
 });
 

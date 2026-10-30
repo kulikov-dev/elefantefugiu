@@ -5,7 +5,7 @@ export type Lang = (typeof LANGS)[number];
 export const LANG_NAMES: Record<Lang, string> = { pt: 'Português', en: 'English', ru: 'Русский' };
 
 /** BCP 47 tag per language: plural rules, number and date formats, og:locale (as pt_PT). */
-export const LOCALES: Record<Lang, string> = { pt: 'pt-PT', en: 'en-GB', ru: 'ru-RU' };
+export const LOCALES: Record<Lang, string> = { pt: 'pt-PT', en: 'en-US', ru: 'ru-RU' };
 
 /** The default language: the root without a saved choice or a matching browser language leads here. */
 export const DEFAULT_LANG: Lang = 'pt';
