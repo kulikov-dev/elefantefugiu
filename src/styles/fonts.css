@@ -57,7 +57,7 @@
 
 /* Cyrillic subset (for /ru/). The same families and weights as above, declared again with the Cyrillic unicode-range:
    the browser downloads one of these files only when a page really draws a Cyrillic letter, so the Portuguese and English
-   pages never fetch them (the closed language menu draws no Cyrillic; the Russian pages do). No preload. */
+   pages never fetch them (the closed language menu draws no Cyrillic; the Russian pages do). */
 @font-face {
   font-family: 'Playfair Display';
   font-style: normal;

@@ -63,10 +63,12 @@ interface Props {
 
 const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, schema, epoch, count = true, allLangs = false } = Astro.props;
 const chrome = allLangs ? LANGS : [lang];
-// Only the Russian pages: their Cyrillic faces arrive late and the tags and the hook re-wrap (a layout jump of 0.17 on a phone).
-// The Portuguese and English pages are the other way round: first paint first (decision after 7b-1), the fallback faces are enough.
-// A Russian page also draws Latin letters (the name of the site, names of places), so the Latin faces of the heading and the label follow.
-const fontFiles = lang === 'ru' ? [playfairCyrillic, serifCyrillic, serifCyrillicItalic, oswaldCyrillic, playfairLatin, oswaldLatin] : [];
+// Fonts of the first screen are fetched together with the stylesheet, not after it (a browser finds a font only when the CSS is parsed and the
+// text that uses it is laid out: 250-300 ms later on a phone). The Russian pages: their Cyrillic faces arrive late and the tags and the hook
+// re-wrap (a layout jump of 0.17 on a phone); a Russian page also draws Latin letters (the name of the site, names of places), so the Latin
+// faces of the heading and the label follow. The Portuguese and English pages: the three faces that make the first screen, the heading
+// (Playfair), the text (Source Serif 400) and the labels and tabs (Oswald 600); the italic and bold faces stay late (they only swap in).
+const fontFiles = lang === 'ru' ? [playfairCyrillic, serifCyrillic, serifCyrillicItalic, oswaldCyrillic, playfairLatin, oswaldLatin] : [playfairLatin, serifLatin, oswaldLatin];
 const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
@@ -105,8 +107,8 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <FaviconLinks />
-    <!-- Russian pages only: the fonts of the first screen are fetched with the stylesheet, not after it, so the lines of the title
-         and the tags do not break differently when a font arrives. The same files the @font-face rules of fonts.css name. -->
+    <!-- The fonts of the first screen are fetched with the stylesheet, not after it, so the lines of the title and the tags do not break
+         differently when a font arrives. The same files the @font-face rules of fonts.css name. -->
     {fontFiles.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
     {canonical && <link rel="canonical" href={canonical} />}
     {paths && hreflangs.map((target) => <link rel="alternate" hreflang={target} href={absolute(paths[target])} />)}

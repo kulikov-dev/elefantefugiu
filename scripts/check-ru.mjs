@@ -36,7 +36,7 @@ function basics(html, where) {
   pages += 1;
   if (!/<html lang="ru"/.test(html)) fail(where, 'is not <html lang="ru">');
   if (!/<meta property="og:locale" content="ru_RU"/.test(html)) fail(where, 'og:locale is not ru_RU');
-  // The Russian pages preload their fonts (the late Cyrillic faces made the tags and the hook re-wrap on a phone); the pt and en pages do not (check-cards).
+  // The Russian pages preload their fonts (the late Cyrillic faces made the tags and the hook re-wrap on a phone); the pt and en pages preload three Latin faces (check-cards).
   const head = html.match(/<head>[\s\S]*?<\/head>/)?.[0] ?? '';
   const preloads = [...head.matchAll(/<link[^>]*rel="preload"[^>]*as="font"[^>]*>/g)].map((m) => m[0]);
   if (preloads.length !== 6 || !preloads.every((l) => /crossorigin/.test(l) && /type="font\/woff2"/.test(l))) fail(where, `${preloads.length} font preloads, six (crossorigin, woff2) are expected`);

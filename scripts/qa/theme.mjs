@@ -335,13 +335,13 @@ if (want('fonts')) {
     const fonts = page.requested.filter((u) => /\.(woff2?|ttf|otf)(\?|$)/.test(u));
     const families = await page.evaluate(() => [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family));
     ok(`${path}: no request leaves the site (no font server); ${fonts.length} font files from our own host`, outside.length === 0 && fonts.every((u) => u.startsWith(base)) && fonts.every((u) => /woff2$/.test(u)), outside.slice(0, 2).join(' '));
-    ok(`${path}: no font is preloaded, and the browser has no preload warning`, warnings.length === 0 && (await page.evaluate(() => document.querySelectorAll('link[rel=preload][as=font]').length)) === 0 || path.includes('pagina-inexistente'), warnings.join(' | '));
+    ok(`${path}: the three Latin faces of the first screen are preloaded, and the browser has no preload warning`, warnings.length === 0 && (await page.evaluate(() => document.querySelectorAll('link[rel=preload][as=font]').length)) === 3 || path.includes('pagina-inexistente'), warnings.join(' | '));
     ok(`${path}: Source Serif 4 and Playfair Display are the faces in use`, families.includes('Source Serif 4') || path.includes('pagina-inexistente'), families.join(', '));
     await page.close();
   }
   // The local server answers an unknown address with a bare message, so the real 404 page is read from the build.
   const notFound = readFileSync(fsPath(new URL('../../dist/404.html', import.meta.url)), 'utf8');
-  ok('404.html: no font preload either', (notFound.match(/<link rel="preload" as="font"/g) ?? []).length === 0);
+  ok('404.html: the same three faces are preloaded', (notFound.match(/<link rel="preload" as="font"/g) ?? []).length === 3);
   const html = await (await fetch(`${base}/pt/`)).text();
   const css = await Promise.all([...html.matchAll(/href="(\/_astro\/[^"]+\.css)"/g)].map((m) => fetch(base + m[1]).then((r) => r.text())));
   const all = css.join('\n') + html;

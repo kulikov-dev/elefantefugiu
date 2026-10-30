@@ -208,7 +208,7 @@ if (want('fonts')) {
     const cyr = page.fontRequests.filter((u) => /cyrillic/i.test(u));
     ok(`fonts: ${path} fetches Cyrillic files (and no Latin-extended or other subsets)`, cyr.length > 0 && page.fontRequests.every((u) => /latin-|cyrillic-/.test(u) && !/-ext-/.test(u)), cyr.map((u) => u.split('/').pop()).join(' '));
     const preloads = await page.$$eval('link[rel=preload][as=font]', (ls) => ls.length);
-    ok(`fonts: ${path} has no font preload`, preloads === 0);
+    ok(`fonts: ${path} preloads six faces (Cyrillic heading, text, italic and labels, the Latin heading and labels)`, preloads === 6, `n=${preloads}`);
     ok(`fonts: ${path} draws its Russian text with the web fonts (not the fallback)`, await page.evaluate(() => ['400 17px "Source Serif 4"', '600 17px "Source Serif 4"', 'italic 400 17px "Source Serif 4"', '700 32px "Playfair Display"', '600 14px "Oswald"'].every((f) => document.fonts.check(f, 'Привет'))));
     ruBytes = Math.max(ruBytes, sizes.reduce((a, [, n]) => a + n, 0));
     console.log(`INFO  ${path}: Cyrillic font files ${sizes.map(([n, s]) => `${n} ${(s / 1024).toFixed(1)} KB`).join(', ')}`);

@@ -62,9 +62,10 @@ for (const ev of events) {
     // One theme control: the round button in the header (with a tooltip); no second control in the footer.
     if (!/<header class="site-header"[\s\S]*?data-theme-toggle[\s\S]*?<\/header>/.test(html) || !/data-theme-toggle[^>]*title="[^"]+"/.test(html)) fail('theme: the button with a tooltip is expected in the header');
     if (/data-theme-choice/.test(html) || /<footer[\s\S]*data-theme-toggle/.test(html)) fail('theme: the footer must not repeat the theme control');
-    // Fonts are not preloaded on the Portuguese and English pages (decision after 7b-1: first paint first; font-display swap and the
-    // fallback faces do the rest). The Russian pages preload theirs: scripts/check-ru.mjs.
-    if (/<link[^>]*rel="preload"[^>]*as="font"/.test(head)) fail('no font preload is expected');
+    // The Portuguese and English pages preload the three Latin faces of the first screen (Playfair, Source Serif 400, Oswald 600);
+    // the Russian pages preload six (scripts/check-ru.mjs).
+    const fontPreloads = [...head.matchAll(/<link[^>]*rel="preload"[^>]*as="font"[^>]*>/g)].map((m) => m[0]);
+    if (fontPreloads.length !== 3 || !fontPreloads.every((l) => /crossorigin/.test(l) && /type="font\/woff2"/.test(l) && /latin/.test(l))) fail(`${fontPreloads.length} font preloads, three Latin woff2 faces with crossorigin are expected`);
     if (!/<html[^>]*lang="[a-z]{2}"[^>]*data-epoch="[a-z0-9-]+"/.test(full)) fail('the card page needs <html data-epoch="...">');
     if (head.indexOf('data-family') > head.indexOf('rel="stylesheet"') && head.includes('rel="stylesheet"')) fail('the head script must come before the stylesheets (no flash)');
     // Family mode: one button in the header (details with a summary) that opens a labelled radio group of three answers; no card page repeats it.
