@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { EventData } from '../src/lib/events';
-import { HOME_START_ID, epochTiles, firstMvpEpoch, homeStartStory, pickFeatured, pickSurprise, surpriseCandidates } from '../src/lib/home';
+import { HOME_START_ID, epochTiles, firstMvpEpoch, homeStartStory, pickFeatured, chooseSurprise, pickSurprise, surpriseCandidates } from '../src/lib/home';
 
 const ev = (id: string, epoch: string, extra: Record<string, unknown> = {}) =>
   ({ id, epoch, year: 1500, threads: ['mar'], status: 'ready', sensitive: false, min_age: 'all', place: { name: 'x', lat: 38, lon: -9 }, ...extra }) as unknown as EventData;
@@ -56,4 +56,38 @@ test('homeStartStory: the story of the main button when it is published, nothing
   assert.equal(homeStartStory([{ id: HOME_START_ID, status: 'draft' }]), null);
   assert.equal(homeStartStory([{ id: 'x' }]), null);
   assert.equal(homeStartStory([]), null);
+});
+
+test('chooseSurprise: unread stories only, never the open one; a single unread story every time', () => {
+  const ids = ['a', 'b', 'c', 'd', 'e'];
+  for (let i = 0; i < 300; i += 1) {
+    const r = chooseSurprise(ids, ['a', 'b'], null, 'c');
+    assert.ok(r.id === 'd' || r.id === 'e');
+    assert.equal(r.allRead, false);
+  }
+  for (let i = 0; i < 50; i += 1) assert.deepEqual(chooseSurprise(ids, ['a', 'b', 'c', 'd'], 'e', null), { id: 'e', allRead: false });
+  assert.deepEqual(chooseSurprise(['a'], [], null, 'a'), { id: 'a', allRead: false });
+});
+
+test('chooseSurprise: all read gives the one read longest ago (not the last shown), and says so', () => {
+  const ids = ['a', 'b', 'c'];
+  assert.deepEqual(chooseSurprise(ids, ['b', 'c', 'a'], null), { id: 'b', allRead: true });
+  assert.deepEqual(chooseSurprise(ids, ['b', 'c', 'a'], 'b'), { id: 'c', allRead: true });
+  assert.deepEqual(chooseSurprise(ids, ['b', 'c', 'a'], null, 'b'), { id: 'c', allRead: true });
+  // Marks of stories outside the mode do not matter; the order of the others decides.
+  assert.deepEqual(chooseSurprise(ids, ['z', 'c', 'y', 'a', 'b'], null), { id: 'c', allRead: true });
+  assert.deepEqual(chooseSurprise(['a'], ['a'], 'a'), { id: 'a', allRead: true });
+});
+
+test('chooseSurprise: no marks is the plain random choice; nothing to choose from gives null', () => {
+  const ids = ['a', 'b', 'c', 'd'];
+  const seen = new Set<string | null>();
+  for (let i = 0; i < 300; i += 1) {
+    const r = chooseSurprise(ids, [], 'a');
+    assert.equal(r.allRead, false);
+    assert.notEqual(r.id, 'a');
+    seen.add(r.id);
+  }
+  assert.equal(seen.size, 3);
+  assert.deepEqual(chooseSurprise([], ['a'], null), { id: null, allRead: false });
 });

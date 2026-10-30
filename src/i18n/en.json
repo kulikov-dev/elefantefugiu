@@ -69,7 +69,8 @@
   "surprise": {
     "picking": "Picking a story for you…",
     "fallback": "If nothing happens, choose one of these:",
-    "none": "There is no story to suggest for this age."
+    "none": "There is no story to suggest for this age.",
+    "all_read": "You’ve read every story! Here’s one you’ve already read"
   },
   "stub": {
     "notice": "This page is a placeholder and will be filled in later."

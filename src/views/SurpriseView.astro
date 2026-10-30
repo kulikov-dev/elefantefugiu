@@ -16,7 +16,7 @@ interface Props {
 const { lang } = Astro.props;
 const site = await loadSite();
 const stories = surpriseCandidates(site.events);
-const list = stories.map((e) => ({ id: e.id, href: storyPath(lang, e.slug[lang]), minAge: familyAttrs(e)['data-min-age'], sensitive: familyAttrs(e)['data-sensitive'] === 'true' }));
+const list = stories.map((e) => ({ id: e.id, href: storyPath(lang, e.slug[lang]), title: e.title[lang], minAge: familyAttrs(e)['data-min-age'], sensitive: familyAttrs(e)['data-sensitive'] === 'true' }));
 const title = t(lang, 'pages.surprise.title');
 ---
 <BaseLayout lang={lang} pageKey="surprise" title={title} noindex>
@@ -24,6 +24,7 @@ const title = t(lang, 'pages.surprise.title');
     <h1>{title}</h1>
     <p data-surprise-picking class="surprise__lead">{t(lang, 'surprise.picking')}</p>
     <p data-surprise-none class="notice" role="status" hidden>{t(lang, 'surprise.none')}</p>
+    <p data-surprise-allread class="notice" role="status" hidden>{t(lang, 'surprise.all_read')}: <a href="#"></a></p>
     <p>{t(lang, 'surprise.fallback')}</p>
     <ul class="surprise__list">
       {stories.map((e) => <li {...familyAttrs(e)}><a href={storyPath(lang, e.slug[lang])}>{e.title[lang]}</a></li>)}

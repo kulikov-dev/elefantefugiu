@@ -57,6 +57,35 @@ export function pickSurprise(ids: readonly string[], last: string | null, random
   return pool[Math.min(pool.length - 1, Math.floor(random() * pool.length))] ?? null;
 }
 
+export interface SurpriseChoice {
+  id: string | null;
+  /** True when every story the mode allows is already read: the id is then one the reader has read, and the page says so. */
+  allRead: boolean;
+}
+
+/**
+ * "Surprise me" with the read marks. `ids` are the stories the family mode allows; `read` is the list of marks, oldest first (a story read
+ * again moves to the end, see addRead). Never the story the reader has open (`current`) unless it is the only one.
+ * Unread stories come first (random, not the same as `last` when there is a choice). When nothing unread is left, the one read the
+ * longest ago (not `last`, so a second click gives another), and `allRead` is true. Without marks it is the plain random choice.
+ */
+export function chooseSurprise(
+  ids: readonly string[],
+  read: readonly string[],
+  last: string | null,
+  current: string | null = null,
+  random: () => number = Math.random,
+): SurpriseChoice {
+  const pool = ids.length > 1 && current ? ids.filter((id) => id !== current) : [...ids];
+  if (pool.length === 0) return { id: null, allRead: false };
+  const done = new Set(read);
+  const unread = pool.filter((id) => !done.has(id));
+  if (unread.length > 0) return { id: pickSurprise(unread, last, random), allRead: false };
+  const oldestFirst = [...pool].sort((a, b) => read.indexOf(a) - read.indexOf(b));
+  const choice = oldestFirst.length > 1 ? oldestFirst.filter((id) => id !== last) : oldestFirst;
+  return { id: choice[0] ?? null, allRead: true };
+}
+
 /** localStorage key of the last epoch the reader visited (the id, so it works in every language). */
 export const LAST_EPOCH_KEY = 'lastEpoch';
 

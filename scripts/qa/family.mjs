@@ -1,5 +1,5 @@
 // Browser checks for stage 6: family mode. Run against dist/ served by serve.mjs (base path "/"):
-//   node family.mjs [variant] [toggle lists recount nearby gate surprise map flash blocked variant-epoch]
+//   node family.mjs [variant] [toggle lists recount nearby gate surprise surprise-read map flash blocked variant-epoch]
 // The cards, epochs and threads come from src/content (data.mjs). The real site has heavy-topic cards and 12+ cards, so most of the
 // checks run on it. `variant` runs against the fixture build (variant-plan.mjs), which adds a 16+ epoch that every mode leaves empty,
 // and (section variant-epoch) the age screen for 16+.
@@ -438,6 +438,51 @@ if (want('gate')) {
   await wait(600);
   ok('"Back" after arriving from the site returns to the previous page', /\/epoca\//.test(viaSite.url()), viaSite.url());
   await viaSite.close();
+}
+
+// ---------- 6b. "Surprise me" and the read marks ----------
+if (want('surprise-read')) {
+  const draw = async (mode, read, { once = false } = {}) => {
+    const page = await newPage({ mode });
+    // The pages of a suite share one storage: the marks and the last draw of the page before are cleared first.
+    await page.evaluateOnNewDocument((marks) => { localStorage.removeItem('lastSurprise'); localStorage.removeItem('readStories'); if (marks) localStorage.setItem('readStories', JSON.stringify(marks)); }, read);
+    await page.goto(`${base}/pt/surpreende-me/`, { waitUntil: 'domcontentloaded' });
+    await page.waitForFunction(() => location.pathname.includes('/historia/') || !document.querySelector('[data-surprise-allread]')?.hidden, { timeout: 8000 }).catch(() => {});
+    const got = await page.evaluate(() => {
+      const note = document.querySelector('[data-surprise-allread]');
+      return { path: location.pathname, line: note && !note.hidden ? note.textContent.trim() : null, href: note?.querySelector('a')?.getAttribute('href') ?? null };
+    });
+    await page.evaluate(() => { localStorage.removeItem('lastSurprise'); localStorage.removeItem('readStories'); });
+    await page.close();
+    return { id: idOfHref(got.href ?? got.path), line: got.line };
+  };
+  for (const mode of MODES) {
+    const pool = events.filter((e) => !e.sensitive && shownIn(e, mode));
+    if (pool.length < 2) continue;
+    const order = pool.map((e) => e.id);
+    // All read but one: ten draws, always that one, no line.
+    const lone = order.at(-1);
+    const wrong = [];
+    for (let i = 0; i < 10; i += 1) {
+      const r = await draw(mode, order.filter((id) => id !== lone));
+      if (r.id !== lone || r.line) wrong.push(`${r.id}${r.line ? ' + line' : ''}`);
+    }
+    ok(`mode ${mode}: all ${pool.length} stories of the mode read but one, "Surprise me" leads to that one ten times, no line`, wrong.length === 0, wrong.join(', '));
+    // All read: the one read longest ago, with the line, and the mode still holds.
+    const all = await draw(mode, order);
+    ok(`mode ${mode}: all read, "Surprise me" offers a read story of the mode (the oldest mark) and says so`, all.id === order[0] && /Leu todas as histórias! Eis uma que já leu/.test(all.line ?? ''), `${all.id} ${all.line}`);
+    const outside = events.filter((e) => !pool.includes(e)).map((e) => e.id);
+    const mixed = await draw(mode, [...outside, ...order]);
+    ok(`mode ${mode}: marks of stories outside the mode do not count`, order.includes(mixed.id), `${mixed.id}`);
+  }
+  // Nothing read (a new visitor), and blocked storage: a plain random story, no line, no error.
+  const fresh = await draw('off', null);
+  ok('no marks: a plain random story, no line', !!fresh.id && !fresh.line, `${fresh.id}`);
+  const page = await newPage({ blocked: true });
+  await page.goto(`${base}/pt/surpreende-me/`, { waitUntil: 'domcontentloaded' });
+  await page.waitForFunction(() => location.pathname.includes('/historia/'), { timeout: 8000 }).catch(() => {});
+  ok('blocked storage: a story is picked without an error', /\/historia\//.test(page.url()) && page.errors.length === 0, page.errors.join('; '));
+  await page.close();
 }
 
 // ---------- 6. "Surprise me": 20 draws in every mode ----------

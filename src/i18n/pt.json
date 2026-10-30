@@ -69,7 +69,8 @@
   "surprise": {
     "picking": "A escolher uma história para si…",
     "fallback": "Se nada acontecer, escolha uma destas:",
-    "none": "Para esta idade não há nenhuma história para sugerir."
+    "none": "Para esta idade não há nenhuma história para sugerir.",
+    "all_read": "Leu todas as histórias! Eis uma que já leu"
   },
   "stub": {
     "notice": "Esta página é provisória e será preenchida mais tarde."

@@ -31,7 +31,7 @@ const VARIANT = 4401;
 const SUITES = [
   { name: 'behave', script: 'behave.mjs', about: 'tab order, skip link, focus, no horizontal scroll' },
   { name: 'listings', script: 'listings.mjs', about: 'home, epoch and thread pages in a browser' },
-  { name: 'controls', script: 'controls.mjs', about: 'epoch filters, view and pane switches, Surprise me' },
+  { name: 'controls', script: 'controls.mjs', about: 'epoch filters, view and pane switches, Surprise me and the read marks' },
   { name: 'controls-variant', script: 'controls.mjs', args: ['variant'], variant: true, about: 'the same on the fixture build: an epoch with more than 8 cards, so the Timeline / Grid switch appears' },
   { name: 'map-basic', script: 'map.mjs', args: ['nojs', 'tiles', 'filters', 'preview', 'layout'], about: 'map without JS, tiles failing, filters, preview, layout' },
   { name: 'map-more', script: 'map.mjs', args: ['link', 'epoch', 'weight'], about: 'map links, the epoch page map, weight' },
@@ -41,7 +41,7 @@ const SUITES = [
   { name: 'map-limit-12', script: 'map.mjs', args: ['limit'], env: { FAMILY: '12' }, about: 'the same sweep in family mode "12"' },
   { name: 'bridge', script: 'bridge.mjs', about: 'marker preview, bridge caption, Como chegar (Google Maps link), bridge block' },
   { name: 'family-controls', script: 'family.mjs', args: ['toggle', 'lists'], about: 'family toggle, feed, grid, threads, tiles, home' },
-  { name: 'family-pages', script: 'family.mjs', args: ['recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise'], about: 'recounting, Nearby, the gate, no flash, blocked storage, Surprise me' },
+  { name: 'family-pages', script: 'family.mjs', args: ['recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'surprise-read'], about: 'recounting, Nearby, the gate, no flash, blocked storage, Surprise me and the read marks' },
   { name: 'family-map', script: 'family.mjs', args: ['map'], about: 'the map in every family mode' },
   { name: 'interactives', script: 'interactives.mjs', about: 'the dots of Aljubarrota: keyboard, text, motion, no JS, code, colour, family modes' },
   { name: 'theme', script: 'theme.mjs', about: 'theme, palettes, fonts, header, light-dark() fallback' },
@@ -58,7 +58,7 @@ const SUITES = [
   { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), 404 in every language' },
   { name: 'mascot', script: 'mascot.mjs', args: ['logo', 'notfound', 'pager', 'empty', 'dark', 'motion'], about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'mascot-variant', script: 'mascot.mjs', args: ['regime'], variant: true, about: 'no elephant on the pages of the regime epoch (fixture build)' },
-  { name: 'family-controls-variant', script: 'family.mjs', args: ['variant', 'toggle', 'lists', 'recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'map'], variant: true, about: 'the family checks on the fixture build (more cards, a long epoch with the grid, markers over the limit)' },
+  { name: 'family-controls-variant', script: 'family.mjs', args: ['variant', 'toggle', 'lists', 'recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'surprise-read', 'map'], variant: true, about: 'the family checks on the fixture build (more cards, a long epoch with the grid, markers over the limit)' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant', 'variant-epoch'], variant: true, about: 'a 16+ epoch that every mode leaves empty (fixture build)' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['variant'], variant: true, about: 'the same for the dots plus the ship scale (a fixture card): the real site has no ship card' },
 ];
