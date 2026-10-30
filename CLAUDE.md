@@ -12,7 +12,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` — runs i18n key check, contrast check, all unit tests, data check, then `astro build`; `postbuild` then runs links, cards, listings, weight and tokens checks against `dist/`. The build is the main gate: it fails on broken internal links, hard-coded colours/fonts/sizes, page weight over 500 KB, etc.
 - `npm run check` — `astro check` (types)
 - `npm run check:data` — validate `src/content/*.yaml`
-- `npm test` — `node:test` tests in `tests/*.test.ts` plus Vitest in `tests/vitest/*.spec.ts`
+- `npm test` — `astro check` (types), then `node:test` tests in `tests/*.test.ts`, Vitest in `tests/vitest/*.spec.ts`, and the language checks
   - single node:test file: `node --import tsx --test tests/events.test.ts`
   - single Vitest file: `npx vitest run tests/vitest/markers.spec.ts`
 - `npm run qa` — Chromium browser suites in `scripts/qa` (own `package.json`/dependencies, needs a finished build; `-- --list`, `-- <suite>`, `--resume`, `--verbose`). Not part of the build. **Do not run it locally on your own initiative**: see the rule below.
@@ -21,7 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Rules for Claude Code on checks
 
-- After a change run locally only `npm run build` and `npm test` (that is the gate; `npm run check:data` and `npm run check:lang` for content and texts).
+- After a change run locally only `npm run build` and `npm test` (that is the gate: `npm test` includes `astro check`, and the Deploy workflow runs the same check, so Deploy must never fail on something that these two commands catch locally; `npm run check:data` and `npm run check:lang` for content and texts).
 - Run the full `npm run qa` (about 30 minutes) only when the owner asks for it directly; one named suite (`npm run qa -- bridge`) only to test a change of `scripts/qa` itself.
 - The browser suites run in GitHub Actions: `qa-smoke.yml` (six main suites, every push and pull request) and `qa-full.yml` (all suites, every Monday and by hand). Look at their results there: `gh run list`, `gh run view <id>` (add `--log-failed` for a failed one). If `gh` is not installed, the public API answers too: `https://api.github.com/repos/kulikov-dev/elefantefugiu/actions/runs`.
 - Never stop browsers or Node processes broadly (`taskkill /IM chrome.exe` and the like): stop the background task you started instead.

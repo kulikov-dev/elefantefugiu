@@ -16,7 +16,7 @@
     "check:data": "tsx scripts/check-data.ts",
     "check:links": "node scripts/check-links.mjs",
     "export:ui-table": "node scripts/export-ui-table.mjs",
-    "test": "node --import tsx --test \"tests/**/*.test.ts\" && vitest run && tsx scripts/check-lang.ts && tsx scripts/check-ai-tells.ts",
+    "test": "astro check && node --import tsx --test \"tests/**/*.test.ts\" && vitest run && tsx scripts/check-lang.ts && tsx scripts/check-ai-tells.ts",
     "check:cards": "node scripts/check-cards.mjs",
     "check:weight": "node scripts/check-weight.mjs",
     "check:listings": "node scripts/check-listings.mjs",

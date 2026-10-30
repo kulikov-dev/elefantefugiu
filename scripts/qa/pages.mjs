@@ -325,8 +325,11 @@ if (want('read')) {
   }, story.id);
   ok('read: the list of the epoch shows the tick and the word "lida" for the read story', marks.read && marks.visibility === 'visible' && marks.word === 'lida' && marks.onScreenWidth, JSON.stringify(marks));
   ok(`read: "lidas 1 de M" where M is the stories of the epoch (${inThisEpoch.length})`, marks.shown && marks.progress === `lidas 1 de ${inThisEpoch.length}`, marks.progress);
+  const heightsRead = await page.evaluate(() => [...document.querySelectorAll('.ecard')].map((c) => Math.round(c.getBoundingClientRect().height)));
   await page.close();
   page = await epochPage('off', null);
+  const heightsUnread = await page.evaluate(() => [...document.querySelectorAll('.ecard')].map((c) => Math.round(c.getBoundingClientRect().height)));
+  ok('read: a card has the same height read or not (the tick stands in the corner, out of the flow)', JSON.stringify(heightsRead) === JSON.stringify(heightsUnread) && heightsRead.length > 0, JSON.stringify([heightsRead, heightsUnread]));
   const none = await page.evaluate(() => ({ marks: document.querySelectorAll('[data-read]').length, progress: getComputedStyle(document.querySelector('[data-read-progress]')).visibility }));
   ok('read: with nothing read there is no tick and no "read N of M"', none.marks === 0 && none.progress === 'hidden', JSON.stringify(none));
   await page.close();
