@@ -6,7 +6,7 @@
 // The rules are written out here, independent of src/lib/family.ts:
 //   off: everything;  all: min_age all and not heavy;  12: min_age all or 12 and not heavy.
 import { launchBrowser } from './browser.mjs';
-import { epochs, featuredIds, fixture, need, pt, real, threads as threadsData, ui } from './data.mjs';
+import { epochs, featuredIds, fixture, isOnMainland, need, pt, real, threads as threadsData, ui } from './data.mjs';
 
 const VARIANT = process.argv[2] === 'variant';
 const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
@@ -487,7 +487,9 @@ if (want('map')) {
       await wait(250);
     }
     const all = await snap();
-    ok(`mode ${mode}, map: with "Show more" exactly the cards the mode shows are reachable (${allowed.length})`, same(all.covered, allowed), `${all.covered.length}`);
+    // The first view of the map is the mainland: a story on an island or abroad (the plate, "whole world") is not drawn there.
+    const reachable = ids(events.filter((e) => shownIn(e, mode) && isOnMainland(e)));
+    ok(`mode ${mode}, map: with "Show more" every card of the mainland that the mode shows is reachable, none the mode hides (${reachable.length} of ${allowed.length})`, reachable.every((id) => all.covered.includes(id)) && all.covered.every((id) => allowed.includes(id)), `${all.covered.length}`);
     await page.close();
   }
   // switching the mode on the map page without a reload
@@ -650,7 +652,7 @@ if (want('variant-epoch') && VARIANT) {
     const th = await newPage({ mode });
     await th.goto(`${variantBase}/pt/fio/${threadSlug(TH)}/`, { waitUntil: 'load' });
     const sections = await th.evaluate((vis) => [...document.querySelectorAll('section.section')].filter(eval(vis)).map((s) => s.id), visible);
-    const wantSections = ['avis-e-descobrimentos', 'pombal-e-terramoto', E].filter((ep) => vEvents.some((e) => e.epoch === ep && e.threads.includes(TH) && vShown(e, mode))).map((ep) => `e-${epochSlug(ep)}`);
+    const wantSections = EPOCHS.filter((ep) => vEvents.some((e) => e.epoch === ep && e.threads.includes(TH) && vShown(e, mode))).map((ep) => `e-${epochSlug(ep)}`);
     const chips = await th.evaluate((vis) => [...document.querySelectorAll('a.chip')].filter(eval(vis)).map((a) => a.getAttribute('href').slice(1)), visible);
     ok(`variant, mode ${mode}: thread page hides the epoch section and its chip when no card of it is visible`, same(sections, wantSections) && same(chips, wantSections), `${sections.length} sections`);
     await th.close();

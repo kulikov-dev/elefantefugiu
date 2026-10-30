@@ -25,7 +25,7 @@ const sorted = [...epochs].sort((a, b) => a.order - b.order);
       sorted.map((epoch) => (
         <li class="epoch-scale__item">
           {readyIds.has(epoch.id) ? (
-            <button type="button" class="epoch-scale__button" data-epoca={epoch.id} aria-pressed="false">
+            <button type="button" class="epoch-scale__button" data-epoca={epoch.id} aria-pressed="false" style={`--tone: var(--tone-${epoch.id}, var(--epoch-primary))`}>
               <span class="epoch-scale__name">{epoch.name[lang]}</span>
               <span class="epoch-scale__years">{epochYearsText(epoch, lang)}</span>
             </button>
@@ -103,6 +103,17 @@ const sorted = [...epochs].sort((a, b) => a.order - b.order);
     border-color: var(--color-ink);
     background: var(--color-ink);
     color: var(--color-surface);
+  }
+
+  /* An epoch pressed: in the primary colour of that epoch, as on the home page ("All" stays ink). */
+  button.epoch-scale__button[data-epoca]:not([data-epoca='']):not([aria-pressed='true']):hover {
+    border-color: var(--tone);
+  }
+
+  button.epoch-scale__button[data-epoca]:not([data-epoca=''])[aria-pressed='true'] {
+    border-color: var(--tone);
+    background: var(--tone);
+    color: var(--color-on-accent);
   }
 
   button.epoch-scale__button[aria-pressed='true'] .epoch-scale__years {

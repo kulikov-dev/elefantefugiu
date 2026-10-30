@@ -87,7 +87,7 @@ function table(results, list) {
     const r = results[s.name];
     if (!r) return [s.name, '-', 'not run', '-'];
     const checks = r.pass + r.fail;
-    const verdict = r.ok ? `PASS${r.skip ? ` (${r.skip} skipped)` : ''}` : `FAIL${r.fail ? ` (${r.fail} failed)` : ` (${r.note ?? 'exit ' + r.code})`}`;
+    const verdict = r.ok ? `PASS${r.skip ? ` (${r.skip} skipped)` : ''}${r.retried ? ' (after a retry)' : ''}` : `FAIL${r.fail ? ` (${r.fail} failed)` : ` (${r.note ?? 'exit ' + r.code})`}`;
     return [s.name, String(checks), verdict, `${r.seconds}s`];
   });
   const head = ['suite', 'checks', 'result', 'time'];
@@ -178,11 +178,18 @@ for (const suite of wanted) {
     child.on('close', (code) => (clearTimeout(timer), resolve({ code, log })));
   });
   let result = await runOnce();
-  // A browser that dies in the middle of a suite (ProtocolError, no check failed) is a crash of the runner, not a finding: one more try.
-  // A suite with a FAIL line is never run again.
-  if (result.code !== 0 && !/^FAIL/m.test(result.log)) {
+  // A browser that dies in the middle of a suite (ProtocolError, "Session with given id not found", "Target closed") is a crash of the runner,
+  // not a finding: one more try, for every suite. A failed exit with no FAIL line is a crash too; a suite with only FAIL lines is never rerun.
+  // The log of the second run starts with a RETRY line that quotes the crash of the first, so a reader of the log knows there was one.
+  const CRASH = /ProtocolError|Protocol error|Session with given id not found|Target closed|Navigating frame was detached|Execution context was destroyed|Browser has disconnected|Connection closed/;
+  let retried = false;
+  if (result.code !== 0 && (!/^FAIL/m.test(result.log) || CRASH.test(result.log))) {
     process.stdout.write('crashed, once more ... ');
+    retried = true;
+    const lines = result.log.split(/\r?\n/);
+    const first = (lines.find((l) => CRASH.test(l)) ?? lines.filter(Boolean).at(-1) ?? '').trim();
     result = await runOnce();
+    result.log = `RETRY  the first run crashed (${first.slice(0, 200)}); this is the second run${'\n'}${result.log}`;
   }
   mkdirSync(out, { recursive: true });
   writeFileSync(`${out}${suite.name}.log`, result.log);
@@ -190,10 +197,10 @@ for (const suite of wanted) {
   const pass = count('PASS');
   const fail = count('FAIL');
   const ok = result.code === 0 && fail === 0 && pass > 0;
-  data.results[suite.name] = { pass, fail, skip: count('SKIP'), code: result.code, ok, seconds: Math.round((Date.now() - t0) / 1000), note: ok || fail ? undefined : pass === 0 ? 'no checks ran, see out/' + suite.name + '.log' : undefined };
+  data.results[suite.name] = { retried: retried || undefined, pass, fail, skip: count('SKIP'), code: result.code, ok, seconds: Math.round((Date.now() - t0) / 1000), note: ok || fail ? undefined : pass === 0 ? 'no checks ran, see out/' + suite.name + '.log' : undefined };
   save(data);
   const seconds = Math.round((Date.now() - t0) / 1000);
-  console.log(ok ? `${pass} passed (${seconds}s)` : `FAILED (${fail} failed, exit ${result.code}; log: scripts/qa/out/${suite.name}.log)`);
+  console.log(ok ? `${pass} passed (${seconds}s${retried ? ', after a retry' : ''})` : `FAILED (${fail} failed, exit ${result.code}; log: scripts/qa/out/${suite.name}.log)`);
   if (verbose) console.log(result.log);
   else if (!ok) {
     // Details only for a failing suite: its failed checks (or the last lines of the log when no check ran), at most 25 lines.

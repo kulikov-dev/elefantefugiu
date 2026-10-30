@@ -24,7 +24,7 @@ const rest = items.filter((i) => i.state === 'soon');
               {epoch.name[lang]}
             </span>
           ) : state === 'link' ? (
-            <a class="epoch-switch__item" href={epochHref(lang, epoch.slug[lang])}>
+            <a class="epoch-switch__item" href={epochHref(lang, epoch.slug[lang])} style={`--tone: var(--tone-${epoch.id}, var(--epoch-primary))`}>
               {epoch.name[lang]}
             </a>
           ) : (
@@ -43,7 +43,7 @@ const rest = items.filter((i) => i.state === 'soon');
             rest.map(({ epoch, state }) => (
               <li>
                 {state === 'link' ? (
-                  <a class="epoch-switch__rest-item" href={epochHref(lang, epoch.slug[lang])}>{epoch.name[lang]}</a>
+                  <a class="epoch-switch__rest-item" href={epochHref(lang, epoch.slug[lang])} style={`--tone: var(--tone-${epoch.id}, var(--epoch-primary))`}>{epoch.name[lang]}</a>
                 ) : (
                   <span class="epoch-switch__rest-item epoch-switch__rest-item--soon epoch-switch__item--soon">
                     <span class="epoch-switch__rest-name">{epoch.name[lang]} <span class="epoch-switch__rest-soon">&middot; {t(lang, 'ui.soon')}</span></span>
@@ -116,8 +116,9 @@ const rest = items.filter((i) => i.state === 'soon');
     text-decoration: none;
   }
 
+  /* The border on hover is the colour of the epoch pointed at, not of the page. */
   a.epoch-switch__item:hover {
-    border-color: var(--color-accent);
+    border-color: var(--tone, var(--color-accent));
   }
 
   /* The current tab: the epoch's own colour, so the reader sees where they are. */
@@ -171,7 +172,7 @@ const rest = items.filter((i) => i.state === 'soon');
   }
 
   a.epoch-switch__rest-item:hover {
-    color: var(--color-accent);
+    color: var(--tone, var(--color-accent));
   }
 
   span.epoch-switch__rest-item {

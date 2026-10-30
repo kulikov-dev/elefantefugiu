@@ -2,7 +2,7 @@
 // Run against dist/ served by serve.mjs (base path "/"):   node theme.mjs [variant] [flash keyboard blocked fonts header palette fallback]
 // The cards and epochs come from src/content (data.mjs). `variant` runs against the fixture build, where the epoch Estado Novo
 // has published cards, so its palette (grey, the red kept for the flash) can be checked too; the real site has two ready epochs.
-// Expected colours are the values of docs/visual-direction.md sections 2 and 3 (written out here, independent of tokens.css);
+// Expected colours are the values of docs/visual-direction.md sections 2 and 3 (written out here, independent of tokens.css; one line per epoch);
 // stage 7b-2 changed two light tints (Avis, Pombal) and made grey the primary colour of Estado Novo (the red is --epoch-flash).
 import { launchBrowser } from './browser.mjs';
 import { readFileSync } from 'node:fs';
@@ -17,14 +17,20 @@ const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
 const BG = { light: '#f6f1e7', dark: '#14110e' };
 const hex = (rgb) => '#' + (rgb.match(/\d+/g) ?? []).slice(0, 3).map((n) => Number(n).toString(16).padStart(2, '0')).join('');
-const EPOCHS_ALL = {
-  'avis-e-descobrimentos': { slug: { pt: 'avis-e-descobrimentos', en: 'avis-and-discoveries' }, tint: { light: '#e3e8dc', dark: '#0e2430' }, primary: { light: '#0f5c73', dark: '#5fb3c9' } },
-  'pombal-e-terramoto': { slug: { pt: 'pombal-e-terramoto' }, tint: { light: '#f3e2cb', dark: '#241a14' }, primary: { light: '#a9482a', dark: '#e58a68' } },
-  'estado-novo-e-25-de-abril': { slug: { pt: 'estado-novo-e-25-de-abril' }, tint: { light: '#ece9e3', dark: '#181817' }, primary: { light: '#4a4a48', dark: '#b8b6b0' } },
+// The table of the epoch colours (tint of the page and primary colour, light and dark) and of the weight of the heading; the slugs come from epochs.yaml.
+const PALETTE = {
+  'avis-e-descobrimentos': { weight: '600', tint: { light: '#e3e8dc', dark: '#0e2430' }, primary: { light: '#0f5c73', dark: '#5fb3c9' } },
+  'pombal-e-terramoto': { weight: '800', tint: { light: '#f3e2cb', dark: '#241a14' }, primary: { light: '#a9482a', dark: '#e58a68' } },
+  'estado-novo-e-25-de-abril': { weight: '700', tint: { light: '#ece9e3', dark: '#181817' }, primary: { light: '#4a4a48', dark: '#b8b6b0' } },
+  'lusitania-e-roma': { weight: '500', tint: { light: '#f3e7dc', dark: '#2a211d' }, primary: { light: '#7a2e1c', dark: '#e8957a' } },
+  'uniao-restauracao-e-ouro-do-brasil': { weight: '800', tint: { light: '#f2eae6', dark: '#2a1d22' }, primary: { light: '#6e1f3a', dark: '#e59ab4' } },
+  'monarquia-e-republica': { weight: '600', tint: { light: '#e5ebf0', dark: '#1c242b' }, primary: { light: '#2e4d66', dark: '#9dbad3' } },
 };
 
-// Only the epochs that have a page in this build.
-const EPOCHS = Object.fromEntries(Object.entries(EPOCHS_ALL).filter(([id]) => world.readyEpochs.some((m) => m.id === id)));
+// Only the epochs that have a page in this build (an epoch missing from the table above is not checked for its colours).
+const EPOCHS = Object.fromEntries(
+  world.readyEpochs.filter((m) => PALETTE[m.id]).map((m) => [m.id, { ...PALETTE[m.id], slug: m.slug }]),
+);
 const firstEpoch = world.readyEpochs[0];
 const lastEpoch = world.readyEpochs.at(-1);
 const plainCard = need('a card of the first ready epoch', () => world.inEpoch(firstEpoch.id)[0]);
@@ -223,7 +229,8 @@ if (want('palette')) {
   }
   const card = await newPage({ theme: 'dark' });
   await card.goto(`${base}${pt(plainCard)}`, { waitUntil: 'load' });
-  ok('a card has data-epoch of its epoch and its palette', (await card.evaluate(() => document.documentElement.dataset.epoch)) === 'avis-e-descobrimentos' && hex(await card.evaluate(() => getComputedStyle(document.body).backgroundColor)) === EPOCHS['avis-e-descobrimentos'].tint.dark);
+  const cardPalette = EPOCHS[plainCard.epoch];
+  ok('a card has data-epoch of its epoch and its palette', (await card.evaluate(() => document.documentElement.dataset.epoch)) === plainCard.epoch && (!cardPalette || hex(await card.evaluate(() => getComputedStyle(document.body).backgroundColor)) === cardPalette.tint.dark));
   await card.close();
   for (const path of ['/pt/', '/pt/mapa/', '/pt/sobre/']) {
     const p = await newPage({ theme: 'light' });
@@ -240,7 +247,9 @@ if (want('palette')) {
     weights.push(await p.evaluate(() => { const c = getComputedStyle(document.querySelector('h1')); return [c.fontWeight, c.fontFamily.split(',')[0].replace(/['"]/g, '')]; }));
     await p.close();
   }
-  ok('epoch headings differ by weight, not by family', new Set(weights.map((w) => w[0])).size === Object.keys(EPOCHS).length && new Set(weights.map((w) => w[1])).size === 1 && weights[0][1] === 'Playfair Display', JSON.stringify(weights));
+  // A weight may be shared by two epochs (the owner's choice); what must hold is the weight of the table for each and one family for all.
+  const ids = Object.keys(EPOCHS);
+  ok('epoch headings take the weight of their epoch, one family for all', weights.every((w, i) => w[0] === EPOCHS[ids[i]].weight) && new Set(weights.map((w) => w[0])).size > 1 && new Set(weights.map((w) => w[1])).size === 1 && weights[0][1] === 'Playfair Display', JSON.stringify(weights));
 }
 
 // ---------- 4b. A browser without light-dark(): the light theme ----------

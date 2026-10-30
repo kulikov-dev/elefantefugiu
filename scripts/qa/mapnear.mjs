@@ -2,7 +2,7 @@
 // and the plate for stories overseas, the marker style and legend, the epoch scale under the map.
 // Run against dist/ served by serve.mjs (base path "/"):   node mapnear.mjs [tools near list world markers scale]
 import { launchBrowser } from './browser.mjs';
-import { epochs, fixture, overseasOf, real } from './data.mjs';
+import { epochs, fixture, isInPortugal, overseasOf, real, threads } from './data.mjs';
 
 // `variant` runs against the fixture build (more cards than its marker limit of 7, so clusters exist); the rest runs on the real site.
 const VARIANT = process.argv[2] === 'variant';
@@ -136,10 +136,13 @@ if (want('world')) {
     ok(`world (${lang}): the "Whole world" button does the same as the plate`, (await page.$$('.mk--place')).length === OVERSEAS);
     await page.close();
   }
-  // A thread whose stories are all in Portugal (the sea thread has Bojador, abroad since the card was added).
-  const page = await open(`${MAP.pt}?fio=comida-e-vinho`);
-  ok('world: a filter that leaves no story abroad shows no plate', await page.$eval('[data-overseas]', (b) => b.hidden));
-  await page.close();
+  // A thread whose stories are all in Portugal (picked from the data; if every thread has a story abroad, there is nothing to check).
+  const home = threads.find((t) => world.inThread(t.id).length > 0 && world.inThread(t.id).every(isInPortugal));
+  if (home) {
+    const page = await open(`${MAP.pt}?fio=${home.id}`);
+    ok(`world: a filter that leaves no story abroad shows no plate (thread ${home.id})`, await page.$eval('[data-overseas]', (b) => b.hidden));
+    await page.close();
+  }
 }
 
 // ---------- 5. Markers and legend ----------
