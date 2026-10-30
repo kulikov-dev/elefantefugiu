@@ -523,9 +523,9 @@
     ai: true
   placeholder: [theme]
   intro:
-    pt: "O jovem rei D. Sebastião desapareceu numa batalha em Marrocos, Portugal passou 60 anos sob reis espanhóis, e pelo país andavam impostores que se diziam o rei regressado. Em 1640, um grupo de conjurados devolveu a independência numa só manhã. Depois chegou o ouro do Brasil, e D. João V encomendou sinos em Antuérpia e uma capela inteira em Roma."
-    en: "Young King Sebastian vanished in battle in Morocco, Portugal spent 60 years under Spanish kings, and impostors roamed the country claiming to be the returning king. In 1640 a band of conspirators won back independence in a single morning. Then Brazilian gold arrived, and King John V ordered bells from Antwerp and an entire chapel from Rome."
-    ru: "Молодой король Себастьян пропал в битве в Марокко, Португалия на 60 лет досталась испанским королям, а по стране бродили самозванцы, выдававшие себя за вернувшегося короля. В 1640 году заговорщики за одно утро вернули независимость. Потом из Бразилии пошло золото, и король Жуан V заказывал колокола в Антверпене, а часовню целиком в Риме."
+    pt: "O jovem rei D. Sebastião desapareceu numa batalha em Marrocos, Portugal passou 60 anos sob reis espanhóis, e pelo país andavam impostores que se diziam o rei regressado. Em 1640, um grupo de conjurados devolveu a independência numa só manhã. Depois chegou o ouro do Brasil, e D. João V encomendou sinos na Flandres e uma capela inteira em Roma."
+    en: "Young King Sebastian vanished in battle in Morocco, Portugal spent 60 years under Spanish kings, and impostors roamed the country claiming to be the returning king. In 1640 a band of conspirators won back independence in a single morning. Then Brazilian gold arrived, and King John V ordered bells from Flanders and an entire chapel from Rome."
+    ru: "Молодой король Себастьян пропал в битве в Марокко, Португалия на 60 лет досталась испанским королям, а по стране бродили самозванцы, выдававшие себя за вернувшегося короля. В 1640 году заговорщики за одно утро вернули независимость. Потом из Бразилии пошло золото, и король Жуан V заказывал колокола во Фландрии, а часовню целиком в Риме."
   then_now:
     - id: bombaim-1661
       then_big:
