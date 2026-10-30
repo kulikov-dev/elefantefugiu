@@ -364,16 +364,18 @@ if (want('fonts')) {
   const factors = Object.fromEntries(fallbackFaces.map((block) => [block.match(/font-family:\s*'([^']+) Fallback'/)[1], Number(block.match(/size-adjust:\s*([\d.]+)%/)[1]) / 100]));
   const probe = await newPage();
   await probe.goto(`${base}/pt/`, { waitUntil: 'networkidle0' });
-  const measured = await probe.evaluate(async () => {
+  // The Playfair fallback is widened for the heaviest heading weight of the epochs (fonts.css), so it is measured at that weight.
+  const headingWeight = Math.max(...Object.values(PALETTE).map((p) => Number(p.weight)));
+  const measured = await probe.evaluate(async (headingWeight) => {
     for (const f of ['Source Serif 4', 'Playfair Display', 'Oswald']) await document.fonts.load(`40px '${f}'`);
     const text = 'A história do elefante que fugiu de Lisboa para o mar em mil trezentos e noventa e sete, segundo as crónicas portuguesas.';
     const width = (family, t, extra = '') => { const s = document.createElement('span'); s.style.cssText = `position:absolute;white-space:nowrap;font-size:40px;font-family:${family};${extra}`; s.textContent = t; document.body.append(s); const w = s.getBoundingClientRect().width; s.remove(); return w; };
     return {
       'Source Serif 4': width("'Source Serif 4',serif", text) / width('serif', text),
-      'Playfair Display': width("'Playfair Display',serif", text, 'font-weight:700') / width('serif', text, 'font-weight:700'),
+      'Playfair Display': width("'Playfair Display',serif", text, `font-weight:${headingWeight}`) / width('serif', text, `font-weight:${headingWeight}`),
       Oswald: width("'Oswald',sans-serif", text.toUpperCase(), 'font-weight:600;letter-spacing:0.06em') / width('sans-serif', text.toUpperCase(), 'font-weight:600;letter-spacing:0.06em'),
     };
-  });
+  }, headingWeight);
   for (const [family, got] of Object.entries(measured)) {
     ok(`fallback face of ${family}: size-adjust ${(factors[family] * 100).toFixed(1)}% is within 5% of the measured width ratio ${(got * 100).toFixed(1)}%`, Math.abs(got / factors[family] - 1) < 0.05);
   }
