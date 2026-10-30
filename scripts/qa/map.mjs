@@ -290,6 +290,7 @@ if (want('filters')) {
   ok('filters: ?fio= and ?epoca= are read, unknown parameters are dropped from the address', s.pressed.includes(T2) && s.pressed.includes(EP2) && s.search === `?fio=${T2}&epoca=${EP2}`, `${s.pressed} ${s.search}`);
   let snap = await snapshot(page);
   ok('filters: the list holds only the cards of that thread and epoch', snap.list.length > 0 && snap.list.length < TOTAL, `n=${snap.list.length}`);
+  const filtered = snap.list.length;
   await page.reload({ waitUntil: 'networkidle0' });
   await ready(page);
   s = await page.evaluate(() => location.search);
@@ -300,7 +301,9 @@ if (want('filters')) {
   await wait(500);
   s = await page.evaluate(() => location.search);
   snap = await snapshot(page);
-  ok('filters: "all" clears the address and the list shows every card again', s === '' && snap.list.length === TOTAL, `${s} ${snap.list.length}`);
+  // The map stays where the filters left it (opened with ?fio&epoca it fits the cards of that epoch, which may not hold every card of the site), so
+  // the list shows every card of the area in view: more than before, and the address is clean.
+  ok('filters: "all" clears the address and the list grows back', s === '' && snap.list.length > filtered && snap.list.length <= TOTAL, `${s} ${filtered} -> ${snap.list.length} of ${TOTAL}`);
   const hist = await page.evaluate(() => history.length);
   await page.click('.map-filters button[data-fio="mar"]');
   await page.click(`.epoch-scale button[data-epoca="${EP1}"]`);

@@ -3,6 +3,7 @@
 // Run against dist/ served by serve.mjs (base path "/"; the server answers a missing address with 404.html like GitHub Pages):
 //   node service.mjs [texts form thanks notfound]
 import { fsPath, launchBrowser } from './browser.mjs';
+import { TOTAL } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -66,7 +67,7 @@ if (want('texts')) {
       }));
       ok(`texts (${lang} ${key}): one h1, headings of the sections, no square brackets, no raw ** or {{ }}, no horizontal scroll`, m.h1 === 1 && m.h2 >= 5 && !/\[|\]|\*\*|\{\{/.test(m.body) && m.sw, `h2 ${m.h2}`);
       if (key === 'about') {
-        ok(`texts (${lang} about): the number of stories is filled in from the data`, /\b1[0-9]\b|\b2[0-9]\b/.test(m.body.split('\n').find((l) => /\d+/.test(l) && /(ready|prontas|Готовы)/i.test(l)) ?? ''), '');
+        ok(`texts (${lang} about): the number of stories is filled in from the data`, new RegExp(`\\b${TOTAL}\\b`).test(m.body.split('\n').find((l) => /\d+/.test(l) && /(ready|prontas|Готовы)/i.test(l)) ?? ''), `expected ${TOTAL}`);
         ok(`texts (${lang} about): the address is a mailto link, the method page is linked`, m.mail >= 1 && (await page.$$eval('article a', (a) => a.filter((x) => /\/(metodo|method|metod)\//.test(x.getAttribute('href'))).length)) >= 1);
       }
       if (key === 'legal') ok(`texts (${lang} legal): the Near me sentence stays in the browser section`, /(Perto de mim|Near me|Рядом со мной)/.test(m.body));
