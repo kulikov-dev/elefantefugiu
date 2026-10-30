@@ -3,7 +3,7 @@
 const strip = document.querySelector<HTMLElement>('[data-timeline-scroller]');
 const prev = document.querySelector<HTMLButtonElement>('[data-timeline-prev]');
 const next = document.querySelector<HTMLButtonElement>('[data-timeline-next]');
-const EDGE = 2; // pixels of tolerance for fractional widths
+const STRIP_EDGE = 2; // pixels of tolerance for fractional widths
 
 if (strip && prev && next) {
   const items = [...strip.querySelectorAll<HTMLElement>('.timeline__item')];
@@ -12,13 +12,13 @@ if (strip && prev && next) {
 
   const update = () => {
     const max = strip.scrollWidth - strip.clientWidth;
-    prev.disabled = strip.scrollLeft <= EDGE;
-    next.disabled = max <= EDGE || strip.scrollLeft >= max - EDGE;
+    prev.disabled = strip.scrollLeft <= STRIP_EDGE;
+    next.disabled = max <= STRIP_EDGE || strip.scrollLeft >= max - STRIP_EDGE;
   };
 
   const go = (direction: 1 | -1) => {
     const here = strip.scrollLeft;
-    const target = direction > 0 ? items.find((item) => leftOf(item) > here + EDGE) : [...items].reverse().find((item) => leftOf(item) < here - EDGE);
+    const target = direction > 0 ? items.find((item) => leftOf(item) > here + STRIP_EDGE) : [...items].reverse().find((item) => leftOf(item) < here - STRIP_EDGE);
     const left = target ? leftOf(target) : direction > 0 ? strip.scrollWidth : 0;
     strip.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
