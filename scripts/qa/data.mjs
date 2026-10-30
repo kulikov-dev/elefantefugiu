@@ -79,5 +79,7 @@ export const HOME_START_ID = 'rinoceronte-1515';
 // The areas of Portugal are read from src/lib/map-data.ts (one source of truth), so "overseas" means what the site means by it.
 const REGIONS = eval(readFileSync(fsPath(new URL('../../src/lib/map-data.ts', import.meta.url)), 'utf8').match(/const REGIONS: Bounds\[\] = (\[[^;]*\]);/)[1].replace(/\/\/.*$/gm, ''));
 export const isInPortugal = (e) => REGIONS.some((r) => e.place.lat >= r.south && e.place.lat <= r.north && e.place.lon >= r.west && e.place.lon <= r.east);
+/** Is the place on the mainland (the first area of the map: the first view of the map page is the box around it)? */
+export const isOnMainland = (e) => { const r = REGIONS[0]; return e.place.lat >= r.south && e.place.lat <= r.north && e.place.lon >= r.west && e.place.lon <= r.east; };
 /** Published stories whose place is outside Portugal (the plate "N more stories overseas"). */
 export const overseasOf = (list = published) => list.filter((e) => !isInPortugal(e));

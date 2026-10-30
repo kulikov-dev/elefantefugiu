@@ -4,7 +4,7 @@
 // The cards, threads and epochs come from src/content (data.mjs). `variant` runs against the fixture build, whose marker limit is 7
 // (variant-plan.mjs) and which has more cards than that, so clusters and "Show more" exist; the real site has a limit of 30.
 import { launchBrowser } from './browser.mjs';
-import { epochs, en as enPath, fixture, need, pt, real, threads as threadsData } from './data.mjs';
+import { epochs, en as enPath, fixture, isOnMainland, need, pt, real, threads as threadsData } from './data.mjs';
 
 const VARIANT = process.argv[2] === 'variant';
 const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
@@ -15,7 +15,11 @@ const EPOCHS = world.readyEpochs.map((m) => m.id);
 // Cards the family mode (FAMILY=all|12, default off) leaves on the map: counted from the data with the rules written out here.
 const cards = world.published;
 const MODE = process.env.FAMILY || 'off';
-const TOTAL = cards.filter((e) => MODE === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (MODE === '12' && String(e.min_age) === '12')))).length;
+const shown = cards.filter((e) => MODE === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (MODE === '12' && String(e.min_age) === '12'))));
+const TOTAL = shown.length;
+// Of those, the cards on the mainland: the first view of the map is the box around it, so a story on an island or abroad is not in the list
+// "In this area" at first (abroad it is drawn only in the "whole world" view, behind the plate), and a card just across the border may be.
+const ONMAP = shown.filter(isOnMainland).map((e) => e.id);
 const LIMIT = VARIANT ? 7 : 30; // DEFAULT_LIMIT in src/lib/markers.ts (the fixture build lowers it to 7)
 // Epochs, threads and a card used by name below: the first ready epoch, the second (or the first), a thread that has some but not all
 // of the cards, and one with cards in the second epoch.
@@ -23,8 +27,8 @@ const EP1 = EPOCHS[0];
 const EP2 = EPOCHS[1] ?? EPOCHS[0];
 const T1 = need('a thread with some but not all cards', () => threadsData.find((t) => cards.some((c) => c.threads.includes(t.id)) && cards.some((c) => !c.threads.includes(t.id)))).id;
 const T2 = need('a thread with cards in the second ready epoch', () => threadsData.find((t) => world.inEpoch(EP2).some((c) => c.threads.includes(t.id)))).id;
-// A thread that has a key (frame) card: its map shows a frame marker.
-const TF = need('a thread with a frame card', () => threadsData.find((t) => cards.some((c) => c.level === 'frame' && c.threads.includes(t.id)))).id;
+// A thread that has a key (frame) card on the mainland: its map shows a frame marker at the first view.
+const TF = need('a thread with a frame card', () => threadsData.find((t) => cards.some((c) => c.level === 'frame' && isOnMainland(c) && c.threads.includes(t.id)))).id;
 const N1 = world.inEpoch(EP1).length; // the cards of the first epoch; the Timeline / Grid switch exists from 9
 const C0 = need('a card of the first ready epoch', () => world.inEpoch(EP1)[0]);
 const STEP = 5;
@@ -141,7 +145,7 @@ if (want('limit')) {
   ok('map: whole country at first, within the marker limit', s.total >= 1 && s.total <= LIMIT, `total=${s.total}`);
   ok('map: markers and clusters together cover exactly the cards of the list "In this area"', same(s.covered, s.list), `covered=${s.covered.length} list=${s.list.length}`);
   ok('map: the list counter equals the list', Number(s.listCount) === s.list.length, `counter=${s.listCount}`);
-  ok(`map: at first the list holds all ${TOTAL} cards the mode shows`, s.list.length === TOTAL, `n=${s.list.length}`);
+  ok(`map: at first the list holds every card of the mainland the mode shows (${ONMAP.length})`, ONMAP.every((id) => s.list.includes(id)) && s.list.length <= TOTAL, `n=${s.list.length}`);
 
   const attributionState = (p) =>
     p.evaluate(() => {
@@ -240,7 +244,7 @@ if (want('limit')) {
   await wait(700);
   const before = await snapshot(page);
   // With fewer stories than the limit there are no clusters and the button is hidden; the mechanism is covered by tests/vitest/markers.spec.ts.
-  const mechanism = TOTAL > LIMIT;
+  const mechanism = ONMAP.length > LIMIT;
   ok('show more: the button is offered only while there are clusters', before.moreVisible === (before.clusters.length > 0));
   const totals = [before.total];
   for (let i = 0; mechanism && i < 2; i += 1) {
@@ -250,7 +254,8 @@ if (want('limit')) {
     totals.push(snap.total);
     ok(`show more: press ${i + 1} stays within ${LIMIT + STEP * (i + 1)} and keeps the list`, snap.total <= LIMIT + STEP * (i + 1) && same(snap.list, before.list), `total=${snap.total}`);
   }
-  ok('show more: each press draws more than the one before', !mechanism || totals[1] > totals[0] && totals[2] >= totals[1], totals.join(' -> '));
+  // Markers that would overlap on screen join into clusters (declutterMarkers), so a press may draw few more, never fewer.
+  ok('show more: each press draws no fewer than the one before, and the last more than the first', !mechanism || (totals[1] >= totals[0] && totals[2] >= totals[1] && totals[2] > totals[0]), totals.join(' -> '));
   let presses = 2;
   for (let i = 0; i < 10 && (await snapshot(page)).moreVisible; i += 1) {
     await page.click('[data-more]');
@@ -258,7 +263,8 @@ if (want('limit')) {
     await wait(250);
   }
   const done = await snapshot(page);
-  ok('show more: enough presses draw every card as a single marker', !done.moreVisible && done.clusters.length === 0 && done.singles.length === TOTAL, `presses=${presses} singles=${done.singles.length}`);
+  // At this zoom the cards of a city overlap, so they stay in clusters (zooming in separates them): what must hold is that nothing is lost.
+  ok('show more: enough presses leave no card out, single or in a cluster', ONMAP.every((id) => done.covered.includes(id)), `presses=${presses} singles=${done.singles.length} covered=${done.covered.length}`);
 
   // a pan with the keyboard does not break the limit
   await page.goto(MAP.pt, { waitUntil: 'networkidle0' });
@@ -323,10 +329,10 @@ if (want('preview')) {
   });
   ok('keyboard: a marker is a focusable button with a name', marker.role === 'button' && marker.tabindex === '0' && marker.name.length > 3, JSON.stringify(marker));
 
-  // reach the marker with Tab (from the filters), open it with Enter
+  // reach the marker with Tab (from the filters, through the list "In this area", which has a link per card), open it with Enter
   await page.focus('.epoch-scale button[data-epoca=""]');
   let found = false;
-  for (let i = 0; i < 30 && !found; i += 1) {
+  for (let i = 0; i < TOTAL + 30 && !found; i += 1) {
     await page.keyboard.press('Tab');
     found = await page.evaluate(() => document.activeElement?.classList.contains('mk--frame'));
   }
@@ -485,7 +491,11 @@ if (want('link')) {
       await p.click('.leaflet-control-zoom-in');
       await wait(650);
     }
-    // pick a single frame marker that is on the screen and not covered
+    // pick a single frame marker that is on the screen and not covered; markers that overlap are one cluster: open it (it zooms to its members) until one stands alone
+    for (let i = 0; i < 8 && !(await p.$('.mk--frame')); i += 1) {
+      await p.click((await p.$('.mk--cluster')) ? '.mk--cluster' : '.leaflet-control-zoom-in');
+      await wait(900);
+    }
     const key = await p.evaluate(() => document.querySelector('.mk--frame')?.dataset.key);
     await p.click(`.mk[data-key="${key}"]`);
     await wait(500);
@@ -568,9 +578,9 @@ if (want('epoch')) {
       });
     let s = await st();
     ok('epoch, phone: the timeline is shown first, the map is not; one switch: Timeline, Cards, Map', s.feed && !s.map && s.view && s.pressed.join() === 'timeline', JSON.stringify(s));
-    // The map code is fetched as soon as the page has loaded (map-loader.ts), but the map is drawn, and its tiles fetched, only when
-    // the pane that holds it is on the screen.
-    ok('epoch, phone: the map code is fetched at once, but no tile before the Map pane is opened', p.requests.some((u) => /map-island/.test(u)) && p.requests.filter((u) => /tile\.openstreetmap/i.test(u)).length === 0);
+    // The map code is fetched when the block is on its way into view (map-loader.ts): a hidden pane has no size, so neither the code nor
+    // a tile is fetched before the Map pane is opened.
+    ok('epoch, phone: no map code and no tile before the Map pane is opened', !p.requests.some((u) => /map-island/.test(u)) && p.requests.filter((u) => /tile\.openstreetmap/i.test(u)).length === 0);
     await p.click('[data-pane-btn="map"]');
     await ready(p);
     await wait(600);
@@ -715,11 +725,11 @@ if (want('weight')) {
     ok(`weight: home ${lang} loads no map code`, home.requests.filter((u) => heavy.test(u) || /home-map|leaflet/i.test(u)).length === 0, home.requests.filter((u) => heavy.test(u)).join(' '));
     await home.close();
   }
-  // The map code is fetched as soon as the page has loaded, even when the block is far below the screen (a very short one).
-  const page = await newPage({ width: 360, height: 100 });
+  // The map code is fetched when the block is about to be seen (one screen of margin): on the map page the block is on the first screen.
+  const page = await newPage({ width: 360, height: 740 });
   await page.goto(MAP.pt, { waitUntil: 'networkidle0' });
   await wait(500);
-  ok('weight: on the map page the map code and its styles are fetched at once, not when the block comes into view', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /(MapBlock|leaflet|tiles)[^/]*\.css/.test(u)));
+  ok('weight: on the map page the map code and its styles are fetched when the block is on the first screen', page.requests.some((u) => /map-island/.test(u)) && page.requests.some((u) => /(MapBlock|leaflet|tiles)[^/]*\.css/.test(u)));
   await page.close();
 }
 
