@@ -45,10 +45,15 @@ for (const loc of locs) {
 }
 for (const href of new Set(alternates)) if (!listed.has(href)) errors.push(`${href}: named as an alternate but not an entry of the sitemap`);
 if (new Set(locs).size !== locs.length) errors.push('an address is listed twice');
+// <lastmod> (make-sitemap.mjs: the day of the last commit of the source): a calendar day, not in the future. A shallow clone writes none.
+const lastmods = [...xml.matchAll(/<lastmod>([^<]*)<\/lastmod>/g)].map((m) => m[1]);
+const tomorrow = new Date(Date.now() + 86_400_000).toISOString().slice(0, 10);
+for (const day of lastmods) if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || day > tomorrow) errors.push(`<lastmod>${day}</lastmod> is not a day in the past`);
+if (lastmods.length > locs.length) errors.push('more <lastmod> than addresses');
 
 if (errors.length) {
   console.error(`Sitemap check failed:\n${errors.map((e) => `- ${e}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`Sitemap check passed: ${locs.length} addresses, all ${indexable} indexable pages of dist/ are in it; no QR pages, no 404.`);
+console.log(`Sitemap check passed: ${locs.length} addresses, all ${indexable} indexable pages of dist/ are in it; no QR pages, no 404; ${lastmods.length} with <lastmod>.`);
 if (notes.length) console.log(`  NOTE: ${notes.length} page(s) left out by noindex (test text or placeholder): ${notes.join(', ')}`);
