@@ -24,7 +24,7 @@ const { lang, href, hook, title, textLang, picture, label } = Astro.props;
 <a class="next-story" {href} rel="next">
   {
     picture && (
-      <Pic picture={picture} lang={lang} class="next-story__image" widths={[240, 320, 400]} sizes="(min-width: 768px) 400px, 100vw" quality={70} decorative crop />
+      <Pic picture={picture} lang={lang} class="next-story__image" widths={[320, 480, 640]} sizes="min(580px, calc(100vw - 37px))" quality={70} decorative crop />
     )
   }
   <span class="next-story__body">

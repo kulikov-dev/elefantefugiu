@@ -18,12 +18,14 @@ interface Props {
 const { lang, picture, kind } = Astro.props;
 // The main picture fills the column beside the text from 1024 px: the row (container minus the text measure and the gap) up to
 // 511 px at the widest, 100vw - 641 px on the way there; below 1024 px it fills the width of the page. The detail picture fills the text column.
-const widths = kind === 'main' ? [320, 480, 640, 960] : [480, 720, 1080, 1440];
+const widths = kind === 'main' ? [320, 480, 680, 768, 960] : [480, 720, 1080, 1440];
 // "Public domain" is said in the language of the page; the Creative Commons names are the same everywhere.
 const license = picture.license === 'Public domain' ? t(lang, 'card.license_public_domain') : picture.license;
 // 511 = --container (72 rem) minus the page padding (2 x --space-4), the text column (--measure, 65ch = 585 px) and the grid gap
 // (--space-5); 641 = 585 + 24 + 32 (the same three, with the page padding of one 1024 px row). Change a token: change these two.
-const sizes = kind === 'main' ? '(min-width: 1024px) min(511px, calc(100vw - 641px)), 100vw' : '(min-width: 768px) 720px, 100vw';
+// Below 1024 px the main picture fills the text column (the page width less 2 x 16 px of padding and the 1 px border of the figure), 766 px at
+// the widest (48 rem of the story column); the detail picture sits in the opened "More" (page width less 68 px), 720 px at the widest.
+const sizes = kind === 'main' ? '(min-width: 1024px) min(511px, calc(100vw - 641px)), min(766px, calc(100vw - 34px))' : 'min(720px, calc(100vw - 68px))';
 ---
 <figure class={`figure figure--${kind}`}>
   <Pic picture={picture} lang={lang} widths={widths} sizes={sizes} loading={kind === 'main' ? 'eager' : 'lazy'} class="figure__img" />
