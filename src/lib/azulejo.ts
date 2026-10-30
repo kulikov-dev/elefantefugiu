@@ -1,14 +1,21 @@
-// Azulejo patterns (docs/visual-direction.md section 4). Four one-colour SVG files in src/assets/azulejo/ are used as CSS
+// Azulejo patterns (docs/visual-direction.md section 4). Seven one-colour SVG files in src/assets/azulejo/ are used as CSS
 // masks; the colour comes from the epoch tokens. Which pattern belongs to which epoch is decided here, the files are
 // imported in BaseLayout (?url, so the address keeps the base path).
 
-export type AzulejoName = 'bussola' | 'rombo' | 'rosa' | 'canto';
+export type AzulejoName = 'bussola' | 'rombo' | 'rosa' | 'no' | 'tapete' | 'onda' | 'canto';
 
-/** Pattern of an epoch: compass (Avis and the Discoveries), rhombus (Pombal and 1755), rose (Estado Novo and 25 April). */
+/**
+ * Pattern of an epoch: compass (Avis and the Discoveries), rhombus (Pombal and 1755), rose (Estado Novo and 25 April), Solomon's knot
+ * (Lusitania and Rome: the Roman floors of Conimbriga), carpet flower (Union, Restoration and the gold of Brazil: the "tapete" azulejo of the
+ * 17th century), waves (Monarchy and Republic: the "mar largo" pavement of the Rossio, 1849).
+ */
 export const EPOCH_PATTERN: Record<string, Exclude<AzulejoName, 'canto'>> = {
   'avis-e-descobrimentos': 'bussola',
   'pombal-e-terramoto': 'rombo',
   'estado-novo-e-25-de-abril': 'rosa',
+  'lusitania-e-roma': 'no',
+  'uniao-restauracao-e-ouro-do-brasil': 'tapete',
+  'monarquia-e-republica': 'onda',
 };
 
 /** Pattern for pages outside an epoch (the 404 page uses the corner signature only). */
@@ -18,9 +25,10 @@ export function patternFor(epoch: string | undefined): Exclude<AzulejoName, 'can
   return (epoch && EPOCH_PATTERN[epoch]) || DEFAULT_PATTERN;
 }
 
-/** The tile of the map waiting state is the compass or the rhombus (docs/visual-direction.md section 8); the rose never. */
-export function waitPatternFor(epoch: string | undefined): 'bussola' | 'rombo' {
-  return patternFor(epoch) === 'rombo' ? 'rombo' : 'bussola';
+/** The tile of the map waiting state is the pattern of the epoch, except the rose (docs/visual-direction.md section 8): that one gives the compass. */
+export function waitPatternFor(epoch: string | undefined): Exclude<AzulejoName, 'rosa' | 'canto'> {
+  const own = patternFor(epoch);
+  return own === 'rosa' ? 'bussola' : own;
 }
 
 /** An address (or data: URI) as a CSS url("...") value that survives an inline <style>. */

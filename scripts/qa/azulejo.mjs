@@ -11,17 +11,23 @@ const world = VARIANT ? fixture : real;
 const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
-const EPOCHS = world.readyEpochs.filter((m) => ['avis-e-descobrimentos', 'pombal-e-terramoto', 'estado-novo-e-25-de-abril'].includes(m.id)).map((m) => m.id);
+// Every epoch that has published cards: each of them has a pattern of its own (src/lib/azulejo.ts).
+const EPOCHS = world.readyEpochs.map((m) => m.id);
 const firstEpochId = EPOCHS[0];
 const plainCard = need('a card of the first ready epoch', () => world.inEpoch(firstEpochId)[0]);
 const frameCard = need('a key (frame) card', () => world.published.find((c) => c.level === 'frame'));
-const FILE = { 'avis-e-descobrimentos': 'bussola', 'pombal-e-terramoto': 'rombo', 'estado-novo-e-25-de-abril': 'rosa' };
 let failed = 0;
 const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
 const browser = await launchBrowser();
+/** The name of a pattern from its address: the files are small, so the build inlines them as data: URIs, and each starts with a comment naming it. */
+const nameOf = (u) => {
+  const [head, body = ''] = u.split(',');
+  const svg = head.endsWith('base64') ? Buffer.from(body, 'base64').toString() : decodeURIComponent(body);
+  return svg.match(/Azulejo pattern "?'?(\w+)/)?.[1] ?? 'unknown';
+};
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** `intercept(request)` decides what happens to every request (it must call continue, respond or abort). */
@@ -77,7 +83,7 @@ if (want('patterns')) {
     }
   }
   const distinct = new Set(EPOCHS.map((id) => masks[id][0]));
-  ok(`patterns: ${EPOCHS.length} epochs, ${EPOCHS.length} different patterns (${EPOCHS.map((id) => FILE[id]).join(', ')})`, distinct.size === EPOCHS.length);
+  ok(`patterns: ${EPOCHS.length} epochs, ${EPOCHS.length} different patterns (${EPOCHS.map((id) => nameOf(masks[id][0])).join(', ')})`, distinct.size === EPOCHS.length);
   // Neither the epoch page nor the 404 page has the corner (it looked like a button that does nothing); the 404 page has the elephant.
   const p404 = await newPage();
   await p404.goto(`${base}/404.html`, { waitUntil: 'networkidle0' });
