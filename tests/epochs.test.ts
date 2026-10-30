@@ -81,9 +81,9 @@ const realEpochs = (parse(readFileSync(new URL('../src/content/epochs.yaml', imp
   localize(epochSchema.parse(e), true),
 );
 
-test('epochs.yaml: orders run 1..N once each, and at least one epoch is open (MVP)', () => {
-  const orders = realEpochs.map((e) => e.order).sort((a, b) => a - b);
-  assert.deepEqual(orders, orders.map((_, i) => i + 1));
+test('epochs.yaml: every order is used once (the first may be 0: it is only a sort key), and at least one epoch is open (MVP)', () => {
+  const orders = realEpochs.map((e) => e.order);
+  assert.equal(new Set(orders).size, orders.length);
   assert.ok(realEpochs.some((e) => e.mvp));
 });
 

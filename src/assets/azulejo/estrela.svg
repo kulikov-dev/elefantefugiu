@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <!-- Azulejo pattern "estrela": seamless 80x80 tile of the Moorish star-and-cross lattice (laceria): a filled eight-pointed star in the middle and a quarter of a cross on each corner, so four tiles put a cross between four stars; thin diagonal strands join the star to the crosses -->
+  <path fill="none" stroke="#000" stroke-opacity="0.5" stroke-width="3" d="M22.3 22.3 L13.1 13.1 M57.7 22.3 L66.9 13.1 M22.3 57.7 L13.1 66.9 M57.7 57.7 L66.9 66.9"/>
+  <path fill="#000" d="M62.0 40.0 L50.2 44.2 L55.6 55.6 L44.2 50.2 L40.0 62.0 L35.8 50.2 L24.4 55.6 L29.8 44.2 L18.0 40.0 L29.8 35.8 L24.4 24.4 L35.8 29.8 L40.0 18.0 L44.2 29.8 L55.6 24.4 L50.2 35.8 Z"/>
+  <g fill="#000">
+    <path d="M-4 -16 h8 v12 h12 v8 h-12 v12 h-8 v-12 h-12 v-8 h12 Z"/>
+    <path d="M76 -16 h8 v12 h12 v8 h-12 v12 h-8 v-12 h-12 v-8 h12 Z"/>
+    <path d="M-4 64 h8 v12 h12 v8 h-12 v12 h-8 v-12 h-12 v-8 h12 Z"/>
+    <path d="M76 64 h8 v12 h12 v8 h-12 v12 h-8 v-12 h-12 v-8 h12 Z"/>
+  </g>
+</svg>

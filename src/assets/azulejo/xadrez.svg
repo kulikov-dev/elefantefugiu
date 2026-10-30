@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <!-- Azulejo pattern "xadrez": seamless 80x80 tile of the Romanesque chequer band (axadrezado) of cathedral portals: two rows of alternating squares between two thin lines; it runs left to right -->
+  <g fill="#000">
+    <rect x="0" y="20" width="20" height="20"/>
+    <rect x="40" y="20" width="20" height="20"/>
+    <rect x="20" y="40" width="20" height="20"/>
+    <rect x="60" y="40" width="20" height="20"/>
+  </g>
+  <path fill="none" stroke="#000" stroke-opacity="0.5" stroke-width="3" d="M0 12.5 H80 M0 67.5 H80"/>
+</svg>

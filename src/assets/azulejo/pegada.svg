@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <!-- Azulejo pattern "pegada": seamless 80x80 tile, one big three-toed dinosaur footprint per tile pointing to the right, so a band reads as a trail -->
+  <g fill="#000" transform="translate(13 40)">
+    <ellipse cx="0" cy="0" rx="8.5" ry="10"/>
+    <path transform="rotate(-48) translate(9 0)" d="M0 -5 Q12 -5.5 24 0 Q12 5.5 0 5 Z"/>
+    <path transform="rotate(0) translate(9 0)" d="M0 -5.5 Q17 -6.050000000000001 34 0 Q17 6.050000000000001 0 5.5 Z"/>
+    <path transform="rotate(48) translate(9 0)" d="M0 -5 Q12 -5.5 24 0 Q12 5.5 0 5 Z"/>
+  </g>
+</svg>

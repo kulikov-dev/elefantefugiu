@@ -1,9 +1,30 @@
 # MVP epochs (4, 6, 8). `placeholder` lists the fields that are still provisional: Avis and Pombal have final names, theme phrases and
 # colours and wait only for their preview picture (fallback_image); Estado Novo has no page yet and all three are provisional.
-# Epochs outside the MVP (1, 2, 3, 5, 7, 9) come from docs/design.md section 4.1. They have no page yet:
+# Epochs outside the MVP (0, 2, 3, 9, and any other without a story) come from docs/design.md section 4.1. Epoch 0 "Before Portugal" has
+# order 0 so that it stands first without renumbering the others: `order` is only a sort key. They have no page yet:
 # they only feed the "Coming soon" tiles on the home page and the "Em breve" neighbours.
 # Names, slugs and years_label of those six are real data (placeholder: []), but the Portuguese
 # and English wording is still to be checked by a native speaker.
+- id: antes-de-portugal
+  slug:
+    pt: antes-de-portugal
+    en: before-portugal
+    ru: do-portugalii
+  order: 0
+  name:
+    pt: "Antes de Portugal"
+    en: "Before Portugal"
+    ru: "До Португалии"
+  years_label:
+    pt: "até ao séc. VI a.C."
+    en: "before the 6th c. BC"
+    ru: "до VI в. до н. э."
+  theme:
+    pt: "Dinossauros, grutas e os primeiros artistas"
+    en: "Dinosaurs, caves and the first artists"
+    ru: "Динозавры, пещеры и первые художники"
+  mvp: false
+  placeholder: [theme]
 - id: avis-e-descobrimentos
   slug:
     pt: avis-e-descobrimentos

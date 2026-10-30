@@ -13,6 +13,11 @@ const files = {
   onda: '/b/onda.svg',
   'onda-v': '/b/onda-v.svg',
   canto: '/b/canto.svg',
+  estrela: '/b/estrela.svg',
+  xadrez: '/b/xadrez.svg',
+  'xadrez-v': '/b/xadrez-v.svg',
+  pegada: '/b/pegada.svg',
+  'pegada-v': '/b/pegada-v.svg',
 };
 const epochIds: string[] = parse(readFileSync('src/content/epochs.yaml', 'utf8')).filter((e: { mvp?: boolean }) => e.mvp).map((e: { id: string }) => e.id);
 
@@ -31,6 +36,17 @@ describe('azulejo patterns', () => {
     expect(EPOCH_PATTERN['lusitania-e-roma']).toBe('no');
     expect(EPOCH_PATTERN['uniao-restauracao-e-ouro-do-brasil']).toBe('tapete');
     expect(EPOCH_PATTERN['monarquia-e-republica']).toBe('onda');
+  });
+
+  it('the epochs prepared for later have their patterns already (star-and-cross, chequer band, footprints), all different from the others', () => {
+    expect(EPOCH_PATTERN['suevos-visigodos-e-mouros']).toBe('estrela');
+    expect(EPOCH_PATTERN['nascimento-do-reino-e-reconquista']).toBe('xadrez');
+    expect(EPOCH_PATTERN['antes-de-portugal']).toBe('pegada');
+    const names = Object.values(EPOCH_PATTERN);
+    expect(new Set(names).size).toBe(names.length);
+    expect(stripPatternFor('antes-de-portugal')).toBe('pegada-v');
+    expect(stripPatternFor('suevos-visigodos-e-mouros')).toBe('estrela');
+    expect(stripPatternFor('nascimento-do-reino-e-reconquista')).toBe('xadrez-v');
   });
 
   it('pages outside an epoch get the default pattern', () => {

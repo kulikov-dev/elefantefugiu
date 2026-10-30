@@ -258,6 +258,9 @@
   --tone-lusitania-e-roma: light-dark(#7a2e1c, #e8957a);
   --tone-uniao-restauracao-e-ouro-do-brasil: light-dark(#6e1f3a, #e59ab4);
   --tone-monarquia-e-republica: light-dark(#2e4d66, #9dbad3);
+  --tone-antes-de-portugal: light-dark(#6b4a2b, #d5a577);
+  --tone-suevos-visigodos-e-mouros: light-dark(#1f5c5a, #7cc4be);
+  --tone-nascimento-do-reino-e-reconquista: light-dark(#24427a, #a3b1ea);
   --tone: var(--epoch-primary);
   --size-dot-tone: 0.5rem;
 }
@@ -343,6 +346,46 @@
   --epoch-heading-weight: 600;
 }
 
+/* Epochs 0, 2 and 3 (docs/visual-direction.md section 3.1b; they have no page yet, the palettes wait for the day they open). Starting
+   colours of the owner (primary, accent, tint), the rest derived the way the earlier ones were. Adjusted: the dark primary of 3 is a step
+   towards violet (#9bb3e0 was too near the Monarchy blue), the light accent of 2 is a darker ochre (#9a6a1f gave 4.0:1 on the tint). */
+
+:root[data-epoch='antes-de-portugal'] {
+  /* Sandstone and fern; the slate blue is the sky over the dinosaurs. */
+  --epoch-primary: var(--tone-antes-de-portugal);
+  --epoch-primary-strong: light-dark(#4a3119, #e8c7a0);
+  --epoch-accent: light-dark(#3f6b3a, #9ccb92);
+  --epoch-alt: light-dark(#3e5a6b, #9cb8c8);
+  --epoch-tint: light-dark(#f2ece2, #26221c);
+  --epoch-surface: light-dark(#fbf8f1, #322c25);
+  --epoch-line: light-dark(#d8ccb8, #4a4034);
+  --epoch-heading-weight: 700;
+}
+
+:root[data-epoch='suevos-visigodos-e-mouros'] {
+  /* Green-turquoise Islamic tiles and the ochre of clay; the brick red of the first roofs is the alternative colour. */
+  --epoch-primary: var(--tone-suevos-visigodos-e-mouros);
+  --epoch-primary-strong: light-dark(#123e3d, #a8ddd8);
+  --epoch-accent: light-dark(#8a5c14, #d9b26a);
+  --epoch-alt: light-dark(#8c4a2a, #e0a07f);
+  --epoch-tint: light-dark(#e6f0ee, #1b2625);
+  --epoch-surface: light-dark(#fbf8f1, #263433);
+  --epoch-line: light-dark(#bcd2ce, #34504d);
+  --epoch-heading-weight: 500;
+}
+
+:root[data-epoch='nascimento-do-reino-e-reconquista'] {
+  /* The blue cross on the white shield of Afonso Henriques and the granite of Romanesque cathedrals. */
+  --epoch-primary: var(--tone-nascimento-do-reino-e-reconquista);
+  --epoch-primary-strong: light-dark(#172c55, #c9d2f4);
+  --epoch-accent: light-dark(#6b6358, #bdb3a6);
+  --epoch-alt: light-dark(#8a2f2f, #e39a96);
+  --epoch-tint: light-dark(#eeedea, #222120);
+  --epoch-surface: light-dark(#fbf8f1, #2d2b2a);
+  --epoch-line: light-dark(#cfccc6, #403e3c);
+  --epoch-heading-weight: 800;
+}
+
 /* The epoch colours reach the content only: the header and the footer (language, theme, family mode) keep the base
    colours on every page. */
 :root[data-epoch] main {
@@ -413,6 +456,9 @@
     --tone-lusitania-e-roma: #7a2e1c;
     --tone-uniao-restauracao-e-ouro-do-brasil: #6e1f3a;
     --tone-monarquia-e-republica: #2e4d66;
+    --tone-antes-de-portugal: #6b4a2b;
+    --tone-suevos-visigodos-e-mouros: #1f5c5a;
+    --tone-nascimento-do-reino-e-reconquista: #24427a;
   }
 
   :root[data-epoch='avis-e-descobrimentos'] {
@@ -469,6 +515,33 @@
     --epoch-tint: #e5ebf0;
     --epoch-surface: #fbf8f1;
     --epoch-line: #c3cfd9;
+  }
+
+  :root[data-epoch='antes-de-portugal'] {
+    --epoch-primary-strong: #4a3119;
+    --epoch-accent: #3f6b3a;
+    --epoch-alt: #3e5a6b;
+    --epoch-tint: #f2ece2;
+    --epoch-surface: #fbf8f1;
+    --epoch-line: #d8ccb8;
+  }
+
+  :root[data-epoch='suevos-visigodos-e-mouros'] {
+    --epoch-primary-strong: #123e3d;
+    --epoch-accent: #8a5c14;
+    --epoch-alt: #8c4a2a;
+    --epoch-tint: #e6f0ee;
+    --epoch-surface: #fbf8f1;
+    --epoch-line: #bcd2ce;
+  }
+
+  :root[data-epoch='nascimento-do-reino-e-reconquista'] {
+    --epoch-primary-strong: #172c55;
+    --epoch-accent: #6b6358;
+    --epoch-alt: #8a2f2f;
+    --epoch-tint: #eeedea;
+    --epoch-surface: #fbf8f1;
+    --epoch-line: #cfccc6;
   }
 }
 /* END generated: light-dark() fallback */
