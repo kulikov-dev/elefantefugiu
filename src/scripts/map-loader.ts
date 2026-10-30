@@ -1,5 +1,5 @@
 // Map "island" loader. Small on purpose: it only decides WHEN to draw the map.
-// Leaflet, its styles and the map code are a separate chunk, fetched as soon as the page has loaded (pages with a map only).
+// Leaflet, its styles and the map code are a separate chunk, fetched when the map is about to be seen (pages with a map only).
 // Without JavaScript none of this runs: the block and the filters stay hidden and the plain list is shown.
 
 const roots = [...document.querySelectorAll<HTMLElement>('[data-map]')];
@@ -26,14 +26,14 @@ for (const root of roots) {
   const plain = document.querySelector<HTMLElement>('[data-map-static]');
   if (plain) plain.hidden = true;
 
-  // The map code is fetched as soon as the page has loaded (about 46 KB gzip), wherever the block is. Drawing the map waits
-  // until the block can be seen: a hidden block (the phone's "Map" pane while the timeline shows) has no size yet, and
-  // the tiles are only worth fetching for a map that is on the way into view (one screen of margin).
-  const code = import('./map-island');
+  // The map code (about 46 KB gzip) is fetched when the block is on its way into view (one screen of margin), not when the page loads:
+  // a page whose map is below the fold, or hidden behind the phone's "Map" pane, does not pay for it while it is read. A hidden block has
+  // no size, so it does not intersect until the reader opens the pane; the waiting tile shows for the moment the chunk takes.
   const start = () => {
-    code.then((island) => island.mount(root, () => showUnavailable(root))).catch(() => showUnavailable(root));
+    import('./map-island')
+      .then((island) => island.mount(root, () => showUnavailable(root)))
+      .catch(() => showUnavailable(root));
   };
-  code.catch(() => showUnavailable(root));
 
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver(
