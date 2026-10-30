@@ -480,7 +480,7 @@ if (want('map')) {
     const allowed = ids(events.filter((e) => shownIn(e, mode)));
     ok(`mode ${mode}, map: markers and "In this area" hold no hidden card; the limit of ${LIMIT} holds`, s.covered.every((id) => allowed.includes(id)) && s.list.every((id) => allowed.includes(id)) && s.total <= LIMIT && same(s.covered, s.list), `${s.total} markers, ${s.covered.length} cards`);
     // every allowed card can be reached with "Show more"
-    for (let i = 0; i < 8; i += 1) {
+    for (let i = 0; i < Math.ceil(allowed.length / 5) + 2; i += 1) { // each press adds 5 slots
       const more = await page.$('[data-more]:not([hidden])');
       if (!more) break;
       await more.click();

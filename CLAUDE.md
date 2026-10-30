@@ -26,6 +26,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - The browser suites run in GitHub Actions: `qa-smoke.yml` (six main suites, every push and pull request) and `qa-full.yml` (all suites, every Monday and by hand). Look at their results there: `gh run list`, `gh run view <id>` (add `--log-failed` for a failed one). If `gh` is not installed, the public API answers too: `https://api.github.com/repos/kulikov-dev/elefantefugiu/actions/runs`.
 - Never stop browsers or Node processes broadly (`taskkill /IM chrome.exe` and the like): stop the background task you started instead.
 
+### Tests do not hold content numbers
+
+- In `tests/` and `scripts/qa/` there is no number or list that depends on the content: the count of stories, epochs, threads or cards on the map, epoch ids, which epochs are open (MVP), how many cards an epoch has. Expectations are counted from the data (`scripts/qa/data.mjs`, `src/content/epochs.yaml`, `world.*` for the fixture build), and a limit on key presses, scrolls or clicks is derived from them (`TOTAL + 30` Tab stops, `ceil(cards / step) + 2` presses of "Show more"). A test that needs a kind of epoch or card picks it from the data and fails with a message naming what is missing (`need`).
+- Pure unit tests with their own small input (`e1`, `e2`, ...) are fine: the input is part of the test.
+- When the data changes (new stories, epochs open) or the behaviour of the map or navigation changes, run the affected QA suites locally before pushing to main (`npm run qa -- map-variant map-more`, and so on). A suite named in the change is not "the owner's full run": this is the one case where the rule above allows a named suite.
+
+### Large changes (opening epochs, reworking the map or navigation)
+
+Branch, not main: branch -> push -> QA full on the branch (`gh workflow run qa-full.yml --ref <branch>`, or Actions -> QA full -> Run workflow -> choose the branch; `qa-full.yml` has `workflow_dispatch` and checks out the chosen ref) -> `gh run watch` / `gh run view <id> --log-failed` -> merge into main only after it is green.
+
 ## Architecture
 
 - **Content** is YAML in `src/content/` (`events/<id>.yaml`, one per event, file name = id; plus `epochs`, `threads`, `featured`, `ui`). Zod schemas live in `src/data/schemas.ts` and are shared by Astro collections (`src/content.config.ts`) and `scripts/check-data.ts`. Interface strings are NOT content: they are in `src/i18n/pt.json` / `en.json` (the build requires identical keys).

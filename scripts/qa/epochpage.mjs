@@ -2,12 +2,22 @@
 // the labels "Timeline / Cards", the active card, the "more eras" dropdown (keyboard, without JavaScript, no dead links).
 // Run against dist/ served by serve.mjs (base path "/"):   node epochpage.mjs [years cards switch active more]
 import { fsPath, launchBrowser } from './browser.mjs';
+import { epochPath, inEpoch, readyEpochs } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
-const AVIS = { pt: '/pt/epoca/avis-e-descobrimentos/', en: '/en/era/avis-and-the-discoveries/', ru: '/ru/epoha/avis-i-velikie-otkrytiya/' };
-const POMBAL = { pt: '/pt/epoca/pombal-e-terramoto/', en: '/en/era/pombal-and-the-earthquake/', ru: '/ru/epoha/pombal-zemletryasenie-begstvo-dvora/' };
+// The Timeline / Cards switch exists from 9 stories (GRID in controls.mjs). MANY: a ready epoch with at least that many, FEW: one with fewer;
+// both come from the data, so opening an epoch or adding stories moves the checks to whichever epochs fit.
+const GRID_FROM = 9;
+const pick = (what, test) => {
+  const found = readyEpochs.find((e) => test(inEpoch(e.id).length));
+  if (!found) throw new Error(`epochpage needs ${what}; none found in src/content`);
+  const by = (lang) => epochPath(found, lang);
+  return { pt: by('pt'), en: by('en'), ru: by('ru'), n: inEpoch(found.id).length };
+};
+const POMBAL = pick(`a ready epoch with ${GRID_FROM} or more stories`, (n) => n >= GRID_FROM);
+const AVIS = pick(`a ready epoch with fewer than ${GRID_FROM} stories`, (n) => n < GRID_FROM);
 
 let failed = 0;
 const ok = (name, cond, extra = '') => {
@@ -87,12 +97,12 @@ if (want('switch')) {
       vista: document.documentElement.dataset.vista ?? null,
       cols: getComputedStyle(document.querySelector('ol.feed')).display,
     }));
-    ok(`switch (${lang}): 7 stories are fewer than 9, so the switch is hidden on a wide screen and the timeline is shown even with ?vista=grelha`, s.switchHidden && s.vista === null && s.cols !== 'grid', JSON.stringify(s));
+    ok(`switch (${lang}): ${AVIS.n} stories are fewer than ${GRID_FROM}, so the switch is hidden on a wide screen and the timeline is shown even with ?vista=grelha`, s.switchHidden && s.vista === null && s.cols !== 'grid', JSON.stringify(s));
     const labels = await page.$$eval('[data-view-switch] button', (b) => b.map((x) => x.textContent.trim()));
     const want_ = { pt: ['Cronologia', 'Cartões', 'Mapa'], en: ['Timeline', 'Cards', 'Map'], ru: ['Хронология', 'Карточки', 'Карта'] }[lang];
     ok(`switch (${lang}): the labels are ${want_.join(' / ')}`, JSON.stringify(labels) === JSON.stringify(want_), labels.join(' / '));
     await page.close();
-    // 11 stories: the switch is there, ?vista=grelha gives the grid, and the map has no position in it (it is beside the feed)
+    // many stories: the switch is there, ?vista=grelha gives the grid, and the map has no position in it (it is beside the feed)
     const many = await open(`${POMBAL[lang]}?vista=grelha`, { width: 1280 });
     const g = await many.evaluate(() => ({ shown: document.querySelector('[data-view-switch]').checkVisibility(), vista: document.documentElement.dataset.vista ?? null, map: getComputedStyle(document.querySelector('[data-view-switch] [data-pane-btn]')).display }));
     ok(`switch (${lang}): with enough stories the switch is shown, ?vista=grelha gives the grid, and the map has no position in it on a wide screen`, g.shown && g.vista === 'grelha' && g.map === 'none', JSON.stringify(g));
@@ -118,7 +128,7 @@ if (want('more')) {
   for (const js of [true, false]) {
     const page = await open(POMBAL.pt, { js });
     let focused = false;
-    for (let i = 0; i < 40 && !focused; i += 1) {
+    for (let i = 0; i < POMBAL.n * 4 + 40 && !focused; i += 1) { // Tab stops grow with the cards before the switch
       await page.keyboard.press('Tab');
       focused = await page.evaluate(() => document.activeElement?.matches('.epoch-switch__summary'));
     }

@@ -2,12 +2,14 @@
 // and the plate for stories overseas, the marker style and legend, the epoch scale under the map.
 // Run against dist/ served by serve.mjs (base path "/"):   node mapnear.mjs [tools near list world markers scale]
 import { launchBrowser } from './browser.mjs';
-import { fixture, overseasOf, real } from './data.mjs';
+import { epochs, fixture, overseasOf, real } from './data.mjs';
 
 // `variant` runs against the fixture build (more cards than its marker limit of 7, so clusters exist); the rest runs on the real site.
 const VARIANT = process.argv[2] === 'variant';
 const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
 const world = VARIANT ? fixture : real;
+const EPOCHS_ALL = epochs.length;
+const EPOCHS_READY = world.readyEpochs.length;
 const OVERSEAS = overseasOf(world.published).length;
 const ONLY = process.argv.slice(2).filter((a) => a !== 'variant');
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
@@ -175,7 +177,7 @@ if (want('scale')) {
     const under = document.querySelector('.epoch-scale').getBoundingClientRect().top >= document.querySelector('.map__stage').getBoundingClientRect().bottom;
     return { n: items.length, ready: items.filter((li) => li.querySelector('button')).length, soon: items.filter((li) => !li.querySelector('button')).length, widths: widths.map(Math.round), under, old: document.querySelectorAll('.map-filters button[data-epoca]').length };
   });
-  ok('scale: all nine epochs in order under the map, two ready (buttons) and seven pale (not buttons)', s.n === 9 && s.ready === 2 && s.soon === 7 && s.under, JSON.stringify(s));
+  ok(`scale: all ${EPOCHS_ALL} epochs in order under the map, ${EPOCHS_READY} ready (buttons) and ${EPOCHS_ALL - EPOCHS_READY} pale (not buttons)`, s.n === EPOCHS_ALL && s.ready === EPOCHS_READY && s.soon === EPOCHS_ALL - EPOCHS_READY && s.under, JSON.stringify(s));
   ok('scale: every epoch has a cell of the same width', new Set(s.widths).size === 1, s.widths.join(' '));
   const fade = await page.evaluate(() => {
     const strip = document.querySelector('.epoch-scale');

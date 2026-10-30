@@ -236,7 +236,7 @@ if (want('limit')) {
   }
   ok(`map: never more than ${LIMIT} markers and clusters (${results.n} views: every thread, every epoch, around ${around.length} cards, zoom out and in)`, results.over.length === 0, results.over.slice(0, 3).join('; ') || `max=${results.max}`);
   ok('map: in every view the list equals what the markers and clusters cover', results.mismatch.length === 0, results.mismatch.slice(0, 3).join('; '));
-  ok('map: the sampling is not empty (at least 100 views show something)', results.nonEmpty >= 100, `${results.nonEmpty} of ${results.n}`);
+  ok('map: the sampling is not empty (at least a third of the views show something)', results.nonEmpty >= results.n / 3, `${results.nonEmpty} of ${results.n}`);
 
   // "Show more": 7 -> 12 -> 17 for the same area, list unchanged
   await page.goto(MAP.pt, { waitUntil: 'networkidle0' });
@@ -257,7 +257,7 @@ if (want('limit')) {
   // Markers that would overlap on screen join into clusters (declutterMarkers), so a press may draw few more, never fewer.
   ok('show more: each press draws no fewer than the one before, and the last more than the first', !mechanism || (totals[1] >= totals[0] && totals[2] >= totals[1] && totals[2] > totals[0]), totals.join(' -> '));
   let presses = 2;
-  for (let i = 0; i < 10 && (await snapshot(page)).moreVisible; i += 1) {
+  for (let i = 0; i < Math.ceil(TOTAL / STEP) + 2 && (await snapshot(page)).moreVisible; i += 1) { // each press adds STEP slots
     await page.click('[data-more]');
     presses += 1;
     await wait(250);
