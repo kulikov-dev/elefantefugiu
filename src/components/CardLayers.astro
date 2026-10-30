@@ -9,7 +9,7 @@ interface Props {
   hook: string;
   /** Language tag of the texts when it differs from the page (placeholder filler is Latin). */
   textLang?: string;
-  /** The side column holds the picture of the story; a story without a picture has no column. */
+  /** The side column holds the picture of the story (a <div>: the picture belongs to the story, it is not a complementary landmark inside <main>); a story without a picture has no column. */
   hasAside?: boolean;
   /** The id of the story: the empty mark after the text tells the "read" script (src/scripts/read-marks.ts) when the end of the text is on the screen. */
   storyId?: string;
@@ -32,9 +32,9 @@ const { lang, hook, textLang, hasAside = false, storyId } = Astro.props;
     </div>
     {
       hasAside && (
-        <aside class="layers__aside">
+        <div class="layers__aside">
           <slot name="aside" />
-        </aside>
+        </div>
       )
     }
   </div>
