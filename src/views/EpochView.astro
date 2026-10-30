@@ -88,7 +88,7 @@ const schema = epochNodes(schemaCtx, {
   title={epoch.name[lang]}
   alternates={alternates}
   description={epoch.description?.[lang] ?? epoch.theme?.[lang]}
-  preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl }}
+  preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl, imageAlt: epochPic?.alt[lang] }}
   noindex={noindex}
   schema={schema}
   epoch={epoch.id}

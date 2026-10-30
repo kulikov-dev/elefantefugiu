@@ -1,5 +1,5 @@
 // Checks the link previews (Open Graph, Twitter) of every page of dist/ (part of postbuild).
-//  - every page has og:image and twitter:image, the same address, and the file is in dist/;
+//  - every page has og:image and twitter:image, the same address, and the file is in dist/; and og:image:alt and twitter:image:alt, the same text;
 //  - the picture is a PNG or a JPEG of 1200 x 630 (an SVG is not accepted by social networks); a picture made from a source that
 //    is smaller than that has the same proportion (1.91 : 1) at the largest size the source allows, not under 600 px wide;
 //  - the elephant is on the preview of the home page only: the plain site picture (images/og/home.png) is not on any other
@@ -39,6 +39,11 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
     continue;
   }
   if (og !== tw) errors.push(`${rel}: og:image and twitter:image differ`);
+  // What the picture shows, for people who do not see it (and for the sharing tools that read it): the same text in both tags.
+  const ogAlt = html.match(/<meta property="og:image:alt" content="([^"]+)"/)?.[1];
+  const twAlt = html.match(/<meta name="twitter:image:alt" content="([^"]+)"/)?.[1];
+  if (!ogAlt || !twAlt) errors.push(`${rel}: og:image:alt and twitter:image:alt are expected next to the preview picture`);
+  else if (ogAlt !== twAlt) errors.push(`${rel}: og:image:alt and twitter:image:alt differ`);
   const path = new URL(og).pathname;
   if (!path.startsWith(`${base}/`)) {
     errors.push(`${rel}: the preview ${og} is outside the base path ${base}/`);

@@ -2,7 +2,10 @@
   "site": {
     "name": "O Elefante Fugiu",
     "tagline": "It happened here",
-    "description": "Short interactive stories from Portuguese history, tied to the map and to time."
+    "description": "Short interactive stories from Portuguese history, tied to the map and to time.",
+    "preview_alt_home": "The project’s mascot, an elephant in a blue coat with a cane, on a light azulejo pattern.",
+    "preview_alt_page": "A light azulejo pattern with no text.",
+    "preview_alt_thread": "A light pattern of azulejo diamonds with a band in the color of the thread along the bottom."
   },
   "a11y": {
     "skip_to_content": "Skip to content",

@@ -2,7 +2,10 @@
   "site": {
     "name": "O Elefante Fugiu",
     "tagline": "Foi aqui",
-    "description": "Pequenas histórias interativas do passado de Portugal, ligadas ao mapa e ao tempo."
+    "description": "Pequenas histórias interativas do passado de Portugal, ligadas ao mapa e ao tempo.",
+    "preview_alt_home": "O elefante, mascote do projeto, de casaca azul e bengala, sobre um padrão claro de azulejos.",
+    "preview_alt_page": "Padrão claro de azulejos, sem texto.",
+    "preview_alt_thread": "Padrão claro de losangos de azulejo, com uma faixa na cor do fio ao longo da base."
   },
   "a11y": {
     "skip_to_content": "Saltar para o conteúdo",

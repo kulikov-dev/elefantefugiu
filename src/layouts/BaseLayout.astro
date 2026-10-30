@@ -8,7 +8,7 @@ import { LANGS, LOCALES, altPaths, pagePath, withBase, type Lang, type PageKey }
 import { t } from '../i18n';
 import { headScript } from '../lib/head-script';
 import { azulejoRule } from '../lib/azulejo';
-import { DEFAULT_PREVIEW, ogImagePath } from '../lib/og';
+import { DEFAULT_PREVIEW, HOME_PREVIEW, ogImagePath } from '../lib/og';
 import { ANALYTICS_CONFIG_SCRIPT, GOATCOUNTER_ENDPOINT, GOATCOUNTER_SCRIPT, analyticsEnabled } from '../lib/analytics';
 import playfairLatin from '@fontsource-variable/playfair-display/files/playfair-display-latin-wght-normal.woff2?url';
 import playfairCyrillic from '@fontsource-variable/playfair-display/files/playfair-display-cyrillic-wght-normal.woff2?url';
@@ -84,7 +84,21 @@ const hreflangs = stand_in ? [] : LANGS.filter((l) => readyLangs.includes(l));
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = paths ? absolute(paths[lang]) : undefined;
 // A page without a picture of its own (About, Method, Legal, Map, ...) gets the plain site picture; cards, epochs, threads and the home page pass theirs.
-const image = preview?.imageUrl ? absolute(preview.imageUrl) : absolute(withBase(ogImagePath(preview?.image ?? DEFAULT_PREVIEW)));
+const previewPath = preview?.image ?? DEFAULT_PREVIEW;
+const image = preview?.imageUrl ? absolute(preview.imageUrl) : absolute(withBase(ogImagePath(previewPath)));
+// What the preview picture shows, for og:image:alt and twitter:image:alt: the page gives it when it has a picture of its own (a card, an epoch);
+// the pictures of the site that have no picture of their own are three: the home page (the mascot), a thread (its pattern), the rest (the pattern).
+const previewAlt =
+  preview?.imageAlt ??
+  (preview?.imageUrl
+    ? undefined
+    : previewPath === HOME_PREVIEW
+      ? t(lang, 'site.preview_alt_home')
+      : previewPath === DEFAULT_PREVIEW
+        ? t(lang, 'site.preview_alt_page')
+        : /^images\/og\/fio-/.test(previewPath)
+          ? t(lang, 'site.preview_alt_thread')
+          : undefined);
 // Thread ids the head script may put on <html data-fio> (the epoch page filter reads them before the first paint).
 const { threads: allThreads } = await loadSite();
 const azulejoCss = azulejoRule({ bussola, canto, rombo, rosa }, epoch);
@@ -121,12 +135,12 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta property="og:locale" content={OG_LOCALE(lang)} />
     {paths && hreflangs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE(l)} />)}
     {image && <meta property="og:image" content={image} />}
-    {image && preview?.imageAlt && <meta property="og:image:alt" content={preview.imageAlt} />}
+    {image && previewAlt && <meta property="og:image:alt" content={previewAlt} />}
     <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={preview?.title ?? fullTitle} />
     <meta name="twitter:description" content={description} />
     {image && <meta name="twitter:image" content={image} />}
-    {image && preview?.imageAlt && <meta name="twitter:image:alt" content={preview.imageAlt} />}
+    {image && previewAlt && <meta name="twitter:image:alt" content={previewAlt} />}
     <!-- Azulejo masks: the pattern of this epoch and the corner (addresses come from the imports, so the base path holds). -->
     <style is:inline set:html={azulejoCss} />
     {jsonLd && <JsonLd data={jsonLd} />}
