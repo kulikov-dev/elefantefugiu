@@ -461,7 +461,8 @@ const schema = epochNodes(schemaCtx, {
     border-inline-start: var(--timeline-line) solid var(--epoch-line);
   }
 
-  /* A strip of the epoch's pattern along the timeline line (behind the dots; the grid view has no timeline). */
+  /* A strip of the epoch's pattern along the timeline line (behind the dots; the grid view has no timeline). The strip is vertical, so a directed
+     pattern (braid, waves) comes in its turned tile: it runs down the strip. */
   :global(html:not([data-vista='grelha'])) .feed::before {
     content: '';
     position: absolute;
@@ -471,8 +472,8 @@ const schema = epochNodes(schemaCtx, {
     background-color: var(--epoch-primary);
     opacity: var(--azulejo-opacity-frame);
     pointer-events: none;
-    -webkit-mask: var(--azulejo-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-y;
-    mask: var(--azulejo-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-y;
+    -webkit-mask: var(--azulejo-strip-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-y;
+    mask: var(--azulejo-strip-url) 0 0 / var(--azulejo-band-height) var(--azulejo-band-height) repeat-y;
   }
 
   .feed__item {

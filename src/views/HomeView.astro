@@ -107,7 +107,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
           {
             tiles.map(({ epoch, available, counts }) =>
               available ? (
-                <li class="timeline__item timeline__item--ready">
+                <li class="timeline__item timeline__item--ready" style={`--tone: var(--tone-${epoch.id}, var(--epoch-primary))`}>
                   <a href={epochHref(lang, epoch.slug[lang])}>
                     <span class="timeline__name">{epoch.name[lang]}</span>
                     <span class="timeline__years">{epochYearsText(epoch, lang)}</span>
@@ -309,11 +309,12 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 
   .timeline__item--ready {
     flex: 2 0 var(--timeline-ready-min);
-    border-block-start-color: var(--color-accent);
+    border-block-start-color: var(--tone);
   }
 
+  /* The line and the dot of a ready epoch are in the primary colour of that epoch (--tone, light and dark); the epochs to come stay grey. */
   .timeline__item--ready::before {
-    background: var(--color-accent);
+    background: var(--tone);
   }
 
   .timeline__item--ready a {

@@ -67,9 +67,8 @@ const rest = items.filter((i) => i.state === 'soon');
     gap: var(--space-2);
   }
 
-  /* A phone: one line, scrolling sideways. A wide screen: a grid of 2 or 3 columns, so the number of rows depends on the number of tabs
-     and the width of the container, never on the width of the text: when the web font replaces the fallback the tabs change their
-     width inside their cells, and nothing below them moves (a flowing row wrapped differently before and after the font). */
+  /* A phone: one line, scrolling sideways. A wide screen: an ordinary row, the tabs as wide as their text, left to right, wrapping onto the
+     next line with the same gap as the thread filters below. */
   .epoch-switch__list {
     display: flex;
     gap: var(--space-2);
@@ -89,31 +88,17 @@ const rest = items.filter((i) => i.state === 'soon');
   }
 
   @media (min-width: 48rem) {
-    .epoch-switch {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    /* The tabs and the "soon" disclosure become cells of the one grid (the list keeps its role through the attribute in the markup). */
+    /* The tabs and the "soon" disclosure flow in one row (the list keeps its role through the attribute in the markup). */
     .epoch-switch__list {
       display: contents;
     }
 
-    .epoch-switch__list > li,
     .epoch-switch__more {
-      justify-self: start;
       max-width: 100%;
     }
 
     .epoch-switch__more[open] {
-      grid-column: 1 / -1;
-      justify-self: stretch;
-    }
-  }
-
-  @media (min-width: 64rem) {
-    .epoch-switch {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      flex: 1 1 100%;
     }
   }
 

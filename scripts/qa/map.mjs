@@ -337,6 +337,22 @@ if (want('preview')) {
     found = await page.evaluate(() => document.activeElement?.classList.contains('mk--frame'));
   }
   ok('keyboard: Tab reaches the markers', found);
+  // "Skip to map markers": hidden until it has the focus, and then moves the focus to a marker or cluster
+  await page.focus('.epoch-scale button[data-epoca=""]');
+  let skipped = false;
+  for (let i = 0; i < TOTAL + 30 && !skipped; i += 1) {
+    await page.keyboard.press('Tab');
+    skipped = await page.evaluate(() => document.activeElement?.matches('[data-skip-markers]'));
+  }
+  const skipBox = skipped ? await page.evaluate(() => { const r = document.activeElement.getBoundingClientRect(); return { w: r.width, h: r.height, text: document.activeElement.textContent.trim() }; }) : null;
+  ok('keyboard: the link "Ir para o mapa" in front of the list shows when focused', skipped && skipBox.w > 40 && skipBox.h > 20 && skipBox.text === 'Ir para o mapa', JSON.stringify(skipBox));
+  if (skipped) {
+    await page.keyboard.press('Enter');
+    await wait(200);
+    ok('keyboard: the link moves the focus to the first marker or cluster', await page.evaluate(() => document.activeElement?.classList.contains('mk')));
+  }
+  await page.focus('.epoch-scale button[data-epoca=""]');
+  for (let i = 0; i < TOTAL + 30 && !(await page.evaluate(() => document.activeElement?.classList.contains('mk--frame'))); i += 1) await page.keyboard.press('Tab');
   const focusedKey = await page.evaluate(() => document.activeElement.dataset.key);
   await page.keyboard.press('Enter');
   await wait(400);

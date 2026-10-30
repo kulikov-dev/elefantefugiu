@@ -372,6 +372,12 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     root.dispatchEvent(new CustomEvent('map:select', { bubbles: true, detail: { id } }));
   }
 
+  // "Skip to map markers" (in front of the list): the focus goes to the first marker or cluster, the map itself when none is drawn.
+  $('[data-skip-markers]').addEventListener('click', (e) => {
+    e.preventDefault();
+    (root.querySelector<HTMLElement>('.mk') ?? canvas).focus();
+  });
+
   const closePreview = () => {
     const id = state.id;
     select(null, false);

@@ -297,6 +297,31 @@
   box-shadow: var(--shadow-raised);
 }
 
+/* "Skip to map markers": out of sight until it takes the focus (the list is long, the markers are what a keyboard reader came for). */
+.map__skip {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.map__skip:focus {
+  position: static;
+  display: block;
+  width: auto;
+  height: auto;
+  margin: var(--space-2) var(--space-4) 0;
+  padding: var(--space-2) var(--space-4);
+  overflow: visible;
+  clip-path: none;
+  border-radius: var(--radius-md);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  text-align: center;
+}
+
 .map__list-head {
   display: flex;
   flex: none;

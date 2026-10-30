@@ -74,7 +74,7 @@ const config = {
   <script type="application/json" data-map-config set:html={safeJson(config)} />
 
   <div class="map__stage">
-    <div class="map__canvas" data-map-canvas></div>
+    <div class="map__canvas" id="map-canvas" data-map-canvas></div>
     <!-- The waiting state: a breathing tile of the epoch's pattern. It shows only when the map is still not ready after
          --wait-delay (CSS), so a fast connection never sees it. -->
     <div class="map__loading" data-map-loading role="status">
@@ -109,6 +109,7 @@ const config = {
 
 
   <section class="map__list" data-map-list aria-labelledby="map-list-title">
+    <a class="map__skip" href="#map-canvas" data-skip-markers>{t(lang, 'map.skip_to_markers')}</a>
     <div class="map__list-head">
       <h2 class="map__list-title" id="map-list-title" tabindex="-1">
         {t(lang, 'map.list_title')}

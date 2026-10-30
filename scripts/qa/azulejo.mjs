@@ -60,7 +60,8 @@ if (want('patterns')) {
       const s = await page.evaluate(async () => {
         const css = (el, pseudo) => getComputedStyle(el, pseudo);
         const mask = (c) => (c.maskImage && c.maskImage !== 'none' ? c.maskImage : c.webkitMaskImage);
-        const urlOf = (m) => (m && m.match(/url\("?([^")]+)"?\)/)?.[1]) || '';
+        // a quoted address may hold brackets (a data: URI with rotate(90 ...)), an unquoted one ends at the first bracket
+        const urlOf = (m) => { const found = m && m.match(/url\("([^"]+)"\)|url\(([^")]+)\)/); return (found && (found[1] ?? found[2])) || ''; };
         const loads = (u) => new Promise((res) => { const i = new Image(); i.onload = () => res(i.naturalWidth > 0); i.onerror = () => res(false); i.src = u; });
         const feed = document.querySelector('.feed');
         const strip = css(feed, '::before');
