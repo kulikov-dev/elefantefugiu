@@ -87,9 +87,9 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
         <section aria-labelledby="showcase-title" data-showcase>
           <h2 id="showcase-title">{t(lang, 'home.showcase_heading')}</h2>
           <ul class="showcase">
-            {site.featured.map((event) => (
+            {site.featured.map((event, index) => (
               <li {...familyAttrs(event)}>
-                <StartCard lang={lang} event={event} picture={cardPicture(event, site.epochs.find((ep) => ep.id === event.epoch) ?? {})} />
+                <StartCard lang={lang} event={event} first={index === 0} picture={cardPicture(event, site.epochs.find((ep) => ep.id === event.epoch) ?? {})} />
               </li>
             ))}
           </ul>

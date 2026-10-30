@@ -15,9 +15,11 @@ interface Props {
   event: EventData;
   /** The picture on top: the story's own, or the epoch's when it has none (decided by the page: cardPicture). */
   picture?: PictureData | undefined;
+  /** The first card of the page: its picture is on the first screen (the largest element of the page), so it loads at once and first. */
+  first?: boolean;
 }
 
-const { lang, event, picture } = Astro.props;
+const { lang, event, picture, first = false } = Astro.props;
 const href = storyPath(lang, event.slug[lang]);
 ---
 <article class="start-card" id={`c-${event.id}`} data-story={event.id}>
@@ -30,6 +32,7 @@ const href = storyPath(lang, event.slug[lang]);
         widths={[320, 480, 640, 768, 960]}
         sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
         quality={72}
+        loading={first ? 'eager' : 'lazy'}
         crop
       />
     )
