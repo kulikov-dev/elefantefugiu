@@ -44,7 +44,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Fecharam os conventos e alguém dos Jerónimos começou a vender pastéis.
-  en: A secret monastery recipe, or maybe the 19th century’s best marketing.
+  en: When Portugal’s monasteries closed in 1834, the tarts went on sale.
   ru: Секретный рецепт монахов, а может быть, лучшая реклама XIX века.
 story:
   pt: Em 1834, depois da guerra civil, todos os conventos de Portugal foram extintos e os frades
@@ -84,7 +84,7 @@ more:
     “convent” backstory.
 
 
-    Even the most famous version takes a hit: that nuns starched their clothes with egg whites and
+    Even the most widely told version takes a hit: that nuns starched their clothes with egg whites and
     used the leftover yolks in sweets. Gomes calls it a tall tale: there’s no written evidence.
 
 

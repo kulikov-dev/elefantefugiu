@@ -36,7 +36,7 @@ bridge:
   url: https://museusaoroque.scml.pt/
   note:
     pt: A capela é uma das capelas laterais da igreja, e a maqueta está no Museu de São Roque, ao lado.
-    en: The chapel is in a side altar of the church, and the model is in the museum next door.
+    en: The chapel is one of the church’s side chapels, and the model is in the museum next door.
     ru: Часовня в одном из боковых приделов церкви, а макет в музее Сан-Роке по соседству.
 threads:
   - engenho

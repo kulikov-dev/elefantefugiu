@@ -51,7 +51,7 @@ min_age: all
 sensitive: false
 hook:
   pt: O templo romano de Évora sobreviveu porque lá se vendia carne.
-  en: The temple a butcher shop saved.
+  en: Évora’s Roman temple survived because meat was sold inside it.
   ru: Храм, который спасла мясная лавка.
 story:
   pt: "No século I construiu-se no centro de Évora um templo, provavelmente em honra do imperador

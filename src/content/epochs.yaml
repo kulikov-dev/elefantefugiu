@@ -17,7 +17,7 @@
     ru: "Пролог: динозавры и камни"
   years_label:
     pt: "há cerca de 150 milhões de anos – séc. VI a.C."
-    en: "150 million years ago – 6th c. BC"
+    en: "about 150 million years ago – 6th c. BC"
     ru: "150 млн лет — VI в. до н. э."
   theme:
     pt: "Pegadas de dinossauros, gravuras do Côa, cromeleques"
@@ -56,7 +56,7 @@
       ru: "Иллюстрация в духе сине-белого азулежу: корабли с крестом ордена Христа на парусах уходят в море, а люди на берегу машут им вслед."
     caption:
       pt: "Ilustração criada por IA a partir da época de Avis e dos Descobrimentos. Não é uma imagem histórica."
-      en: "AI-generated illustration (Gemini) based on the age of Avis and the Discoveries. Not a historical image."
+      en: "AI-generated illustration based on the era of Avis and the Discoveries. Not a historical image."
       ru: "Иллюстрация создана ИИ (Gemini) по эпохе Ависов и Великих открытий. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
@@ -188,7 +188,7 @@
         площадь Комерсиу у Тежу, на переднем плане каменщики и архитекторы с чертежом."
     caption:
       pt: "Ilustração criada por IA a partir da época de Pombal. Não é uma imagem histórica."
-      en: "AI-generated illustration (Gemini) based on the age of Pombal. Not a historical image."
+      en: "AI-generated illustration based on the era of Pombal. Not a historical image."
       ru: "Иллюстрация создана ИИ (Gemini) по эпохе Помбала. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
@@ -338,7 +338,7 @@
     ru: "Лузитания и Рим"
   years_label:
     pt: "séc. VI a.C. – séc. V"
-    en: "until the 5th century"
+    en: "6th c. BC – 5th c."
     ru: "до V в."
   theme:
     pt: "Viriato, estradas e latim"
@@ -358,7 +358,7 @@
       ru: "Иллюстрация в духе сине-белого азулежу: римский мост на арках через реку, на переднем плане межевой камень и гранитный кабан, римский всадник рядом с мужчиной, ведущим гружёного мула, пастух с козами, а позади городище с круглыми домами за стеной."
     caption:
       pt: "Ilustração criada por IA a partir da época da Lusitânia e Roma. Não é uma imagem histórica."
-      en: "AI-generated illustration (Gemini) based on the age of Lusitania and Rome. Not a historical image."
+      en: "AI-generated illustration based on the era of Lusitania and Rome. Not a historical image."
       ru: "Иллюстрация создана ИИ (Gemini) по эпохе Лузитании и Рима. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
@@ -513,7 +513,7 @@
     to: 1750
   name:
     pt: "União, Restauração e ouro do Brasil"
-    en: "Union, Restoration and Brazilian Gold"
+    en: "Union, Restoration, and Brazilian Gold"
     ru: "Уния, Реставрация и золото Бразилии"
   years_label:
     pt: "1580–1750"
@@ -537,7 +537,7 @@
       ru: "Иллюстрация в духе сине-белого азулежу: на набережной грузят ящики на трёхмачтовый галеон, а семья, монах и господин в парике смотрят на порт; позади барочная площадь и церковь с двумя башнями."
     caption:
       pt: "Ilustração criada por IA a partir da época da União, Restauração e ouro do Brasil. Não é uma imagem histórica."
-      en: "AI-generated illustration (Gemini) based on the age of the Union, the Restoration, and Brazilian gold. Not a historical image."
+      en: "AI-generated illustration based on the era of the Union, the Restoration, and Brazilian gold. Not a historical image."
       ru: "Иллюстрация создана ИИ (Gemini) по эпохе Унии, Реставрации и золота Бразилии. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
@@ -658,7 +658,7 @@
       ru: "Иллюстрация в духе сине-белого азулежу: железный мост с одной аркой и поездом наверху над рекой с парусными лодками, а на берегу господин в цилиндре, дама с зонтиком и машущий рукой мальчик."
     caption:
       pt: "Ilustração criada por IA a partir da época da Monarquia e República. Não é uma imagem histórica."
-      en: "AI-generated illustration (Gemini) based on the age of the Monarchy and the Republic. Not a historical image."
+      en: "AI-generated illustration based on the era of the Monarchy and the Republic. Not a historical image."
       ru: "Иллюстрация создана ИИ (Gemini) по эпохе Монархии и Республики. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
@@ -666,7 +666,7 @@
   placeholder: []
   intro:
     pt: "Durante um século Portugal discutiu o que queria ser: constituição, uma guerra civil entre dois irmãos príncipes e, em 1910, a República. E enquanto os políticos discutiam, o país construía pontes de ferro, elevadores e funiculares."
-    en: "For a whole century Portugal argued about what it wanted to be: a constitution, a civil war between two royal brothers, and in 1910, a republic. And while politicians argued, the country built iron bridges, lifts, and funiculars."
+    en: "For a whole century Portugal argued about what it wanted to be: a constitution, a civil war between two royal brothers, and in 1910, a republic. And while politicians argued, the country built iron bridges, elevators, and funiculars."
     ru: "Целый век Португалия спорила, какой ей быть: конституция, гражданская война двух братьев-принцев, а в 1910 году республика. А пока политики спорили, страна строила железные мосты, лифты и фуникулёры."
   then_now:
     - id: travessia-1922
@@ -729,7 +729,7 @@
         ru: "20 тыс. в день"
       text:
         pt: "Desde 1837 os Pastéis de Belém fazem-se segundo uma receita secreta, nas instalações ao lado de uma refinaria de açúcar. Hoje saem, em média, cerca de 20 mil por dia."
-        en: "Since 1837 the Pastéis de Belém have been baked to a secret recipe in buildings next to a sugar refinery. Today the shop turns out about 20,000 a day on average."
+        en: "Since 1837 the Pastéis de Belém have been baked from a secret recipe in buildings next to a sugar refinery. Today the shop turns out about 20,000 a day on average."
         ru: "С 1837 года «Пастейш де Белен» пекут по секретному рецепту в постройках рядом с сахарным заводом. Сегодня их выпекают в среднем около 20 тысяч в день."
       kind: estimate
       story: pasteis-de-belem-1837

@@ -48,7 +48,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Duas cabines, um cabo e água em vez de motor.
-  en: The funicular that’s run on water for 140 years.
+  en: Two cars, one cable, and water instead of a motor.
   ru: Фуникулёр, который 140 лет работает на воде.
 story:
   pt: Sobre Braga ergue-se o santuário do Bom Jesus do Monte, com uma enorme escadaria barroca. Em

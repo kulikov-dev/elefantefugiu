@@ -44,7 +44,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Um hidroavião desfez-se nas ondas, outro amarou, o terceiro chegou ao Rio.
-  en: The first flight across the South Atlantic took three planes.
+  en: One seaplane broke up, one landed at sea, the third reached Rio.
   ru: Первыми через Южную Атлантику перелетели, сменив три самолёта.
 story:
   pt: Em 1922, dois oficiais da Marinha, Gago Coutinho e Sacadura Cabral, decidiram voar de Lisboa ao

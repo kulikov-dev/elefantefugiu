@@ -5,7 +5,7 @@ slug:
   ru: lift-kotoryy-postroil-ne-eyfel
 title:
   pt: O elevador que não foi Eiffel que fez
-  en: The Lift Eiffel Didn’t Build
+  en: The Elevator Eiffel Didn’t Build
   ru: Лифт, который построил не Эйфель
 epoch: monarquia-e-republica
 level: story
@@ -44,7 +44,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Projetou-o um aluno de Eiffel, e por isso o atribuem ao mestre.
-  en: The iron elevator Eiffel didn’t build.
+  en: Many credit Eiffel, but a student of his designed it.
   ru: Железный лифт, который построил не Эйфель.
 story:
   pt: A Baixa fica em baixo, e o Chiado no alto da colina. Para os lisboetas não terem de subir
@@ -71,12 +71,11 @@ more:
     O elevador tem duas cabines de madeira, cada uma para 29 pessoas. Lá em cima há um miradouro e
     um passadiço que leva às ruínas do Convento do Carmo, destruído pelo terramoto de 1755.
   en: >-
-    In fact, the lift was designed by Raoul Mesnier du Ponsard, an engineer born in Porto to a
-    French family. He studied under Eiffel, which explains the resemblance. Mesnier built other
-    lifts and funiculars in Lisbon, and before that the funicular in Braga that still runs on water.
+    In fact, the elevator was designed by Raoul Mesnier du Ponsard, an engineer born in Porto to a
+    French family. He studied under Eiffel, which explains the resemblance. Mesnier built other elevators and funiculars in Lisbon, and before that the funicular in Braga that still runs on water.
 
 
-    The lift has two wooden cars, each holding 29 people. At the top there’s a viewing platform and
+    The elevator has two wooden cars, each holding 29 people. At the top there’s a viewing platform and
     a walkway leading to the ruins of the Carmo Convent, destroyed in the 1755 earthquake.
   ru: >-
     На самом деле лифт спроектировал Раул Мениер дю Понсар, инженер, родившийся в Порту в семье
@@ -100,7 +99,7 @@ image:
   file: elevador-santa-justa.webp
   alt:
     pt: "Ilustração ao estilo do azulejo azul e branco: uma torre de ferro rendilhada com uma cabine de passageiros e um passadiço para as ruínas de uma igreja gótica; em primeiro plano, um homem de bigode com uma planta desenrolada e curiosos de chapéu."
-    en: "Blue-and-white azulejo-style illustration: a lacy iron tower with a passenger car and a walkway to the ruins of a Gothic church; in the foreground a moustached man with an unrolled plan and onlookers in hats."
+    en: "Blue-and-white azulejo-style illustration: a lacy iron tower with a passenger car and a walkway to the ruins of a Gothic church; in the foreground a mustached man with an unrolled plan and onlookers in hats."
     ru: "Иллюстрация в духе сине-белого азулежу: ажурная железная башня с кабиной пассажиров и мостиком к руинам готической церкви; на переднем плане усатый мужчина с развёрнутым чертежом и зеваки в шляпах."
   caption:
     pt: "O Elevador de Santa Justa, 1902. Ilustração em estilo azulejo, criada por IA."
@@ -114,7 +113,7 @@ detail_image:
   file: elevador-santa-justa-detalhe.webp
   alt:
     pt: "Desenho técnico a sépia do elevador em vista lateral e vista de frente, com a torre de ferro, o passadiço e os edifícios vizinhos, e uma assinatura manuscrita por baixo."
-    en: "Sepia technical drawing of the lift in side view and front view, with the iron tower, the walkway and the neighbouring buildings, and a handwritten signature below."
+    en: "Sepia technical drawing of the elevator in side view and front view, with the iron tower, the walkway and the neighboring buildings, and a handwritten signature below."
     ru: "Технический рисунок лифта в сепии, вид сбоку и спереди: железная башня, мостик и соседние дома, а внизу рукописная подпись."
   caption:
     pt: "Projeto do Elevador de Santa Justa, que no desenho se chama «ascensor Ouro-Carmo». Raoul Mesnier du Ponsard. Wikimedia Commons, domínio público."
