@@ -21,6 +21,10 @@
 | Века | pt «séc. XVI» (в тексте «século XVI»), en «the 16th century», ru «XVI век». |
 | Заголовки en | **Title Case** для названий историй и страниц, как в изданиях (Smithsonian): «The Day the Elephants Turned Around». Заголовки разделов страниц и кнопки в sentence case. |
 | «Вы» | pt: без «você», обращение глаголом («Encontrou um erro?»); ru: «вы» со строчной; en: you. |
+| Лифт в en | **elevator** (US); «Santa Justa Lift» только как имя собственное. Также «funicular», «streetcar», «railroad». |
+| Эпоха в en и в подписях | **era**, не «age» («age» занято кнопкой «Возраст / Idade / Age»); в ru подпись к картинке эпохи «по мотивам эпохи …», в pt «a partir da época …». |
+| Название модели ИИ | В подписях и текстах не называем: «создана ИИ» / «created by AI» / «criada por IA». |
+| Оксфордская запятая в en | Ставим: «Union, Restoration, and Brazilian Gold». |
 
 ## Имена и титулы
 
@@ -52,6 +56,32 @@
 | Гагу Коутинью | Gago Coutinho | Gago Coutinho | Гагу Коутинью |
 | Сакадура Кабрал | Sacadura Cabral | Sacadura Cabral | Сакадура Кабрал |
 | Сэмюэл Пипс | Samuel Pepys | Samuel Pepys | Сэмюэл Пипс |
+| Король Жуан IV | D. João IV | King John IV | Жуан IV |
+| Король Афонсу V | D. Afonso V | King Afonso V | Афонсу V |
+| Король Луиш I (в текстах без номера) | D. Luís | King Luís | Луиш |
+| Королева Мария II | D. Maria II | Queen Maria II | Мария II |
+| Королева Мария Пия | D. Maria Pia | Queen Maria Pia | Мария Пия |
+| Король-консорт Фернанду II (дворец Пена) | D. Fernando II | King Ferdinand II | Фердинанд II (в ru текстах принц Фердинанд Саксен-Кобург; по правилу о королях можно «Фернанду II», решение владельца) |
+| Карл II Английский | Carlos II de Inglaterra | Charles II | Карл II |
+| Филипп II Испанский | Filipe II | Philip II | Филипп II |
+| Папа Бенедикт XIV | papa Bento XIV | Pope Benedict XIV | папа Бенедикт XIV |
+| Карл I Австрийский | Carlos I da Áustria | Charles I of Austria | Карл I Австрийский |
+| Император Траян | imperador Trajano | Emperor Trajan | император Траян |
+| Император Август | imperador Augusto | Emperor Augustus | император Август |
+| Плиний Старший | Plínio, o Velho | Pliny the Elder | Плиний Старший |
+| Вириат | Viriato | Viriathus | Вириат |
+| Цепион | Cepião | Caepio | Цепион |
+| Аппиан, Диодор | Apiano, Diodoro | Appian, Diodorus | Аппиан, Диодор |
+| Рауль Мениер дю Понсар (инженер) | Raoul Mesnier du Ponsard | Raoul Mesnier du Ponsard | Рауль Мениер дю Понсар (везде одинаково) |
+| Никлаус Риггенбах | Niklaus Riggenbach | Niklaus Riggenbach | Никлаус Риггенбах |
+| Гюстав Эйфель | Gustave Eiffel | Gustave Eiffel | Гюстав Эйфель |
+| Аугушту Диаш | Augusto Dias | Augusto Dias | Аугушту Диаш |
+| Алфреду Кейл | Alfredo Keil | Alfredo Keil | Алфреду Кейл |
+| Энрике Лопеш де Мендонса | Henrique Lopes de Mendonça | Henrique Lopes de Mendonça | Энрике Лопеш де Мендонса |
+| Брианда Перейра | Brianda Pereira | Brianda Pereira | Брианда Перейра |
+| Джузеппе Чинатти | Giuseppe Cinatti | Giuseppe Cinatti | Джузеппе Чинатти |
+| Калакауа | Kalakaua | Kalakaua | Калакауа |
+| Гагу Коутинью и Сакадура Кабрал: самолёты | «Lusitânia», «Pátria», «Santa Cruz» | “Lusitânia,” “Pátria,” “Santa Cruz” | «Лузитания», «Патрия», «Санта-Круш» |
 
 ## Места
 
@@ -82,6 +112,21 @@
 | Стадион «да Луж» | Estádio da Luz | Estádio da Luz | стадион «да Луж» |
 | Пастейш де Белен | Pastéis de Belém | Pastéis de Belém | «Пастейш де Белен» |
 | Мумбаи (прежде Бомбей) | Bombaim / Mumbai | Bombay / Mumbai | Бомбей (сегодня Мумбаи) |
+| Аквы Флавиевы (Шавиш) | Aquae Flaviae (Chaves) | Aquae Flaviae (Chaves) | Аквы Флавиевы (Шавиш) |
+| Эвора | Évora | Évora | Эвора |
+| Мурса | Murça | Murça | Мурса |
+| Випаска, Алжуштрел | Vipasca, Aljustrel | Vipasca, Aljustrel | Випаска, Алжуштрел |
+| Визеу | Viseu | Viseu | Визеу |
+| Фуншал, Мадейра, Монте | Funchal, Madeira, Monte | Funchal, Madeira, Monte | Фуншал, Мадейра, Монте |
+| Терсейра, бухта Салга | Terceira, Baía da Salga | Terceira, Salga Bay | Терсейра, бухта Салга |
+| Сан-Мигел, Горреана | São Miguel, Gorreana | São Miguel, Gorreana | Сан-Мигел, Горреана |
+| Брага, Бон-Жезуш-ду-Монте | Braga, Bom Jesus do Monte | Braga, Bom Jesus do Monte | Брага, Бон-Жезуш-ду-Монте |
+| Коимбра, библиотека Жуанина | Coimbra, Biblioteca Joanina | Coimbra, Joanina Library | Коимбра, библиотека Жуанина |
+| Синтра, дворец Пена | Sintra, Palácio Nacional da Pena | Sintra, Pena National Palace | Синтра, дворец Пена |
+| Церковь Сан-Роке, часовня Иоанна Крестителя | Igreja de São Roque, Capela de São João Baptista (так в официальном названии) | Church of São Roque, Chapel of St. John the Baptist | церковь Сан-Роке, часовня Иоанна Крестителя |
+| Площадь Реставрадориш | Praça dos Restauradores | Praça dos Restauradores | Праса-душ-Рештаурадореш |
+| Лифт Санта-Жушта | Elevador de Santa Justa | Santa Justa Lift (имя собственное; в тексте «elevator») | лифт Санта-Жушта |
+| Каррейруш (возчики) | carreiros | carreiros | каррейруш |
 
 ## Термины
 
@@ -92,7 +137,7 @@
 | «Мост в сегодня» | ponte para hoje | bridge to today | мост в сегодня |
 | Хронология (вид эпохи) | linha do tempo | timeline | хронология |
 | Возраст (кнопка) | Idade | Age | Возраст |
-| Доказано / вероятно / легенда | documentado / debatido / lenda | documented / debated / legend | документально / в обсуждении / легенда |
+| Доказано / вероятно / легенда | documentado / em debate / lenda | documented / debated / legend | документально / в обсуждении / легенда |
 | Великие географические открытия | os Descobrimentos | the Age of Discovery | Великие географические открытия |
 | Терремото 1755 | o terramoto de 1755 | the 1755 Lisbon earthquake | лиссабонское землетрясение 1755 года |
 | Реконкиста | Reconquista | the Reconquista | Реконкиста |
