@@ -55,6 +55,8 @@ interface Props {
   /** Open Graph / Twitter preview. Without `title` the page title is used. */
   preview?: {
     title?: string;
+    /** og:description and twitter:description when they differ from the description of the page (a story: its hook). */
+    description?: string;
     type?: 'website' | 'article';
     /** Path inside public/ (no base): a provisional picture of an epoch that has no real one yet. */
     image?: string;
@@ -156,7 +158,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta property="og:site_name" content={siteName} />
     <meta property="og:type" content={preview?.type ?? 'website'} />
     <meta property="og:title" content={preview?.title ?? fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={preview?.description ?? description} />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:locale" content={OG_LOCALE(lang)} />
     {paths && hreflangs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE(l)} />)}
@@ -167,7 +169,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     {image && previewAlt && <meta property="og:image:alt" content={previewAlt} />}
     <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={preview?.title ?? fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={preview?.description ?? description} />
     {image && <meta name="twitter:image" content={image} />}
     {image && previewAlt && <meta name="twitter:image:alt" content={previewAlt} />}
     <!-- Azulejo masks: the pattern of this epoch and the corner (addresses come from the imports, so the base path holds). -->

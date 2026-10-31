@@ -14,6 +14,7 @@ const dist = join(root, 'dist/');
 const MAX = 200 * 1024;
 const errors = [];
 const walk = (dir) => readdirSync(dir).flatMap((n) => (statSync(join(dir, n)).isDirectory() ? walk(join(dir, n)) : [join(dir, n)]));
+const decode = (s) => s.replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16))).replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d))).replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 const meta = (html, attr, name) => new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`).exec(html)?.[1];
 let manifest = {};
 try {
@@ -75,6 +76,18 @@ for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
     if (meta(html, 'property', 'og:image:type') !== 'image/jpeg' || info.format !== 'jpeg') fail('og:image:type is missing or is not image/jpeg');
   }
   if (!meta(html, 'property', 'og:image:alt')) fail('no og:image:alt');
+  if (kind === 'story') {
+    // The title of a story is its name (not the hook), at most 60 characters; the description is the hook, at most 200.
+    const ogTitle = decode(meta(html, 'property', 'og:title') ?? '');
+    const ogDescription = decode(meta(html, 'property', 'og:description') ?? '');
+    if (!ogTitle) fail('no og:title');
+    else if ([...ogTitle].length > 60) fail(`og:title is ${[...ogTitle].length} characters, more than 60: "${ogTitle}"`);
+    if (meta(html, 'name', 'twitter:title') !== meta(html, 'property', 'og:title')) fail('twitter:title is not the same as og:title');
+    if (!ogDescription) fail('no og:description');
+    else if ([...ogDescription].length > 200) fail(`og:description is ${[...ogDescription].length} characters, more than 200`);
+    if (meta(html, 'name', 'twitter:description') !== meta(html, 'property', 'og:description')) fail('twitter:description is not the same as og:description');
+    if (ogTitle && ogTitle === ogDescription) fail('og:title and og:description are the same text (the title must be the name of the story, the description its hook)');
+  }
   if (meta(html, 'name', 'twitter:image') !== og) fail('twitter:image is not the same as og:image');
   if (meta(html, 'name', 'twitter:card') !== 'summary_large_image') fail('twitter:card is not summary_large_image');
 }
