@@ -3,8 +3,11 @@
 //   node map.mjs [variant] [nojs tiles limit filters preview layout link epoch weight]     FAMILY=all|12 runs it in a family mode
 // The cards, threads and epochs come from src/content (data.mjs). `variant` runs against the fixture build, whose marker limit is 7
 // (variant-plan.mjs) and which has more cards than that, so clusters and "Show more" exist; the real site has a limit of 30.
+import { readFileSync } from 'node:fs';
 import { launchBrowser } from './browser.mjs';
 import { epochs, en as enPath, fixture, isOnMainland, need, pt, real, threads as threadsData } from './data.mjs';
+// The text of the skip link comes from the interface strings, so a rewording does not break the check.
+const SKIP_LABEL = JSON.parse(readFileSync(new URL('../../src/i18n/pt.json', import.meta.url), 'utf8')).map.skip_to_markers;
 
 const VARIANT = process.argv[2] === 'variant';
 const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
@@ -345,7 +348,7 @@ if (want('preview')) {
     skipped = await page.evaluate(() => document.activeElement?.matches('[data-skip-markers]'));
   }
   const skipBox = skipped ? await page.evaluate(() => { const r = document.activeElement.getBoundingClientRect(); return { w: r.width, h: r.height, text: document.activeElement.textContent.trim() }; }) : null;
-  ok('keyboard: the link "Ir para o mapa" in front of the list shows when focused', skipped && skipBox.w > 40 && skipBox.h > 20 && skipBox.text === 'Ir para o mapa', JSON.stringify(skipBox));
+  ok(`keyboard: the link "${SKIP_LABEL}" in front of the list shows when focused`, skipped && skipBox.w > 40 && skipBox.h > 20 && skipBox.text === SKIP_LABEL, JSON.stringify(skipBox));
   if (skipped) {
     await page.keyboard.press('Enter');
     await wait(200);
