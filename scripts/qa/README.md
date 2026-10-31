@@ -8,12 +8,14 @@ versions pinned in `package.json`). Only Chromium is covered; Safari and Firefox
 
 ```sh
 npm run build              # in the repo root: makes dist/
-npm run qa                 # every suite, one table at the end (about 25 minutes)
+npm run qa                 # every suite, one table at the end (about 40 minutes on one machine; CI splits it into 4 shards)
 npm run qa -- --list       # the suites and what they cover
 npm run qa -- behave map-tools     # only these suites
 npm run qa -- --resume     # go on with the last run: suites that already have a result are skipped
 npm run qa -- --verbose    # the whole log of every suite and the full table (by default: one line per suite, the failed checks of a failing suite, one summary line)
 npm run qa -- --report     # the table of the last run, nothing is run
+npm run qa -- --shard=2/4  # only the suites of shard 2 of scripts/qa/shards.json (ports 4410/4411)
+MAP_SAMPLE=30 MAP_SEED=44 npm run qa -- map-limit   # the sweeps of the map in a sample (see below)
 ```
 
 `npm run qa` installs `scripts/qa/node_modules` the first time, starts a static server for `dist/` (port 4400), builds the fixture site (see below) and
@@ -22,6 +24,25 @@ when any suite fails. A build with a base path: `BASE_PATH=/elefante npm run qa`
 
 The browser: on Windows and macOS the installed Chrome or Edge is used (`CHROME_PATH=...` chooses another one); on Linux the bundled
 `@sparticuz/chromium`. One suite alone: start `node serve.mjs` in `scripts/qa/` and run `node behave.mjs`.
+
+## QA full in GitHub Actions: shards and the map sample
+
+`.github/workflows/qa-full.yml` runs the suites in 4 parallel jobs (`strategy.matrix`, `fail-fast: false`); each job installs, builds the site and runs
+`npm run qa -- --shard=N/4`. Which suites belong to a shard is written in `shards.json` (balanced by the seconds in `weights`, not by the alphabet);
+the list of the suites is `suites.mjs`. Each shard has its own ports (shard N: `4400 + 10 (N-1)` and the next one). The results of a shard are the artifact
+`qa-shard-N`; the last job `summary` (`if: always()`, `summary.mjs`) collects them into one table in the job summary (suite, checks, result, time, shard) and
+fails if any suite is red or missing or any shard job did not succeed. A shard step has no `continue-on-error`.
+
+**A new suite** goes into `suites.mjs` and into one shard of `shards.json` (the lightest one, see `weights`). `run.mjs` and `tests/qa-shards.test.ts` (part of
+`npm test`) fail when a suite is in no shard, in two, or a shard names a suite that does not exist. After a real run the `weights` can be refreshed from the table.
+
+**MAP_SAMPLE.** The sweeps of `map.mjs` (`limit`: zoom out and in over every thread, every epoch and cards; `link`: every card opened from its page on the map)
+take minutes. `MAP_SAMPLE=30` runs the edge cases that are never dropped (every thread and every epoch at the widest, middle and deepest zoom; the cards at the north,
+south, east and west borders of the mainland; for `link` the first and last card of each epoch, the same borders, and 10 picked cards) plus 30 views picked with
+`MAP_SEED` (the same seed, the same pick; the weekly run uses the ISO week, so week after week other views come up). The marker limit is checked in every
+view that runs; the fixture build (limit 7) uses the same rule. Without `MAP_SAMPLE` (or with `MAP_SAMPLE=full`) every view runs, as before. In CI: the Monday run
+and a manual run use the sample; the run of the 1st of each month and a manual run with `full_map: true` run everything. The checks keep their names; only the
+number of views in the text of "never more than N markers" changes.
 
 ## Where the cards come from
 
@@ -77,5 +98,5 @@ words `evento-exemplo` of a card that is not published appears anywhere in `dist
 ## Adding a suite
 
 Write `<name>.mjs` that prints `PASS  ...` / `FAIL  ...` lines (and exits 1 on a failure), take the cards from `data.mjs`, start the browser with
-`launchBrowser()` from `browser.mjs`, and add a line to `SUITES` in `run.mjs`. If it needs cards the real site does not have, give it a `variant`
+`launchBrowser()` from `browser.mjs`, and add a line to `SUITES` in `suites.mjs` and the name to a shard of `shards.json`. If it needs cards the real site does not have, give it a `variant`
 argument (`variant: true` in `SUITES`) and extend `variant-plan.mjs` instead of editing the content.
