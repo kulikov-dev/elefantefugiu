@@ -47,9 +47,9 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: O primeiro recorde de Eiffel não está em Paris, mas no Porto.
-  en: Eiffel’s first record isn’t in Paris. It’s in Porto.
-  ru: Первый рекорд Эйфеля стоит не в Париже, а в Порту.
+  pt: O recorde de Eiffel não está em Paris, mas no Porto.
+  en: Eiffel’s record isn’t in Paris. It’s in Porto.
+  ru: Рекорд Эйфеля стоит не в Париже, а в Порту.
 story:
   pt: "A linha de comboio de Lisboa parava no rio Douro: os comboios não conseguiam chegar ao Porto. A
     ponte foi encomendada à empresa parisiense de Gustave Eiffel. O seu único arco de ferro, com 160
