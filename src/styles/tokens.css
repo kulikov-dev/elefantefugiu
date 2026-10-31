@@ -167,6 +167,7 @@
   --timeline-line: 2px;
   /* Chips inside a feed card: a small target (24 px is the WCAG minimum, 32 px is comfortable). */
   --chip-height-compact: 1.75rem;
+  --offscreen: -9999px; /* where the honeypot field of the report form stands: far outside the screen */
   --actions-width: 26rem; /* "Share" and "I liked it" side by side at the end of a story */
   --read-chip: 1.5rem; /* the round "read" tick in the corner of a card */
   --new-chip-height: 1.25rem; /* the mark "New" (src/components/NewMark.astro) */

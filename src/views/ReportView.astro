@@ -29,6 +29,8 @@ const note = renderInline(
   t(lang, 'report.note'),
   (key) => (key === 'legal' ? { href: `${pagePath(lang, 'legal')}#s-terceiros`, label: t(lang, 'pages.legal.title') } : undefined),
   CONTACT_EMAIL,
+  {},
+  lang,
 );
 ---
 <BaseLayout lang={lang} pageKey="report" title={title} noindex>
@@ -74,8 +76,8 @@ const note = renderInline(
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value={next} data-report-next />
       <input type="hidden" name="language" value={lang} />
-      <!-- Honeypot: people never see it; a robot fills it and the service drops the message. -->
-      <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <!-- Honeypot: out of the screen (not display: none, which a robot may skip), out of the tab order and of screen readers; a robot fills it and the service drops the message. -->
+      <input type="text" name="_honey" class="report__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
       <!-- The page the mistake is on. A reader who came from a story sees its title and "change"; the address travels in the
            hidden field. Everyone else (and anyone without JavaScript) gets a plain field for a link or a title. -->
@@ -115,7 +117,7 @@ const note = renderInline(
       </div>
 
       <p class="report__failed" role="alert" data-report-failed hidden>
-        {t(lang, 'report.failed')} <Fragment set:html={emailMarkup(CONTACT_EMAIL)} />.
+        {t(lang, 'report.failed')} <Fragment set:html={emailMarkup(CONTACT_EMAIL, lang)} />.
       </p>
 
       <button type="submit" class="button" data-report-submit>{t(lang, 'report.submit')}</button>
@@ -132,6 +134,15 @@ const note = renderInline(
 <style>
   .report > * + * {
     margin-block-start: var(--space-4);
+  }
+
+  /* The honeypot field: far outside the screen, where no person looks and no screen reader goes (it is also aria-hidden and out of the tab order); a robot that fills every field fills it. */
+  .report__honey {
+    position: absolute;
+    left: var(--offscreen);
+    width: 1px;
+    height: 1px;
+    opacity: 0;
   }
 
   /* The title and the lead on the left, the elephant on the right (above the title on a phone, smaller). */

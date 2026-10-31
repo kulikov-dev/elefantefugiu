@@ -90,6 +90,29 @@ describe('the mistake report form', () => {
     expect(splitEmail('elefantefugiu@gmail.com')).toEqual({ user: 'elefantefugiu', host: 'gmail.com' });
     expect(obscuredEmail('elefantefugiu@gmail.com')).toBe('elefantefugiu [at] gmail.com');
     expect(emailMarkup(CONTACT_EMAIL)).not.toContain('@');
+    // without JavaScript the word for "@" is in the language of the page
+    expect(obscuredEmail('elefantefugiu@gmail.com', 'pt')).toBe('elefantefugiu (arroba) gmail.com');
+    expect(obscuredEmail('elefantefugiu@gmail.com', 'en')).toBe('elefantefugiu (at) gmail.com');
+    expect(obscuredEmail('elefantefugiu@gmail.com', 'ru')).toBe('elefantefugiu (собака) gmail.com');
+    for (const lang of ['pt', 'en', 'ru'] as const) {
+      const markup = emailMarkup(CONTACT_EMAIL, lang);
+      expect(markup).not.toContain('@');
+      expect(markup).not.toContain(CONTACT_EMAIL);
+      expect(markup).toContain('data-email-user="elefantefugiu"');
+      expect(markup).toContain('data-email-host="gmail.com"');
+    }
+    expect(renderInline('{{email}}', link, 'x@y.z', {}, 'ru')).toBe('<span class="email" data-email-user="x" data-email-host="y.z">x (собака) y.z</span>');
+  });
+  it('the About page has no address: it leads to the contact form; the address stays on the Legal page, put together by the script', () => {
+    for (const lang of ['pt', 'en', 'ru'] as const) {
+      const about = STATIC_PAGES.about[lang];
+      const texts = [about.lead ?? '', ...(about.more ?? []), ...about.sections.flatMap((s) => [...s.paragraphs, ...(s.items ?? []), ...(s.after ?? [])])];
+      expect(texts.some((x) => x.includes('{{email}}')), lang).toBe(false);
+      expect(texts.some((x) => x.includes('{{report')), lang).toBe(true);
+      const legal = STATIC_PAGES.legal[lang];
+      const legalTexts = legal.sections.flatMap((s) => [...s.paragraphs, ...(s.items ?? []), ...(s.after ?? [])]);
+      expect(legalTexts.some((x) => x.includes('{{email}}')), lang).toBe(true);
+    }
   });
   it('names the language in the subject', () => {
     expect(reportSubject('ru')).toContain('(ru)');

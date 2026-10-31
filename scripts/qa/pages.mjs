@@ -68,7 +68,7 @@ if (want('static')) {
         // The legal page opens with its summary section, not with a lead paragraph (docs/texts-*.md).
         ok(`static (${key}, ${lang}, ${width} px): one h1, sections with ids${key === 'legal' ? '' : ', a lead'}, no sideways scroll, no leftover {{token}}`, s.h1 === 1 && s.h2.length >= 4 && (key === 'legal' || s.lead > 40) && s.overflow <= 0 && !s.raw, JSON.stringify({ h2: s.h2.length, lead: s.lead, overflow: s.overflow }));
         // The contact address ("Write to us: ...") is on About and Legal; the Method page has no contact line of its own.
-        ok(`static (${key}, ${lang}, ${width} px): indexable, hreflang pt, en, ru and x-default${key === 'method' ? '' : ', the contact address is a link'}`, s.robots === null && s.alternates === 'en,pt,ru,x-default' && (key === 'method' || s.email >= 1), JSON.stringify([s.robots, s.alternates, s.email]));
+        ok(`static (${key}, ${lang}, ${width} px): indexable, hreflang pt, en, ru and x-default${key === 'legal' ? ', the contact address is a link' : key === 'about' ? ', no address (a link to the contact form)' : ''}`, s.robots === null && s.alternates === 'en,pt,ru,x-default' && (key === 'method' || (key === 'about' ? s.email === 0 : s.email >= 1)), JSON.stringify([s.robots, s.alternates, s.email]));
         if (width === 1280) {
           const bad = [];
           for (const l of s.links.filter((x) => x.href.startsWith('/'))) {
@@ -94,13 +94,17 @@ if (want('form')) {
       method: document.querySelector('[data-report-form]').method,
       url: document.querySelector('#f-url').value,
       labels: [...document.querySelectorAll('.field label')].every((l) => document.getElementById(l.htmlFor)),
-      honey: (() => { const h = document.querySelector('[name=_honey]'); return { tab: h.tabIndex, hidden: h.getAttribute('aria-hidden'), w: h.getBoundingClientRect().width }; })(),
+      honey: (() => { const h = document.querySelector('[name=_honey]'); return { tab: h.tabIndex, hidden: h.getAttribute('aria-hidden'), w: h.getBoundingClientRect().width, right: h.getBoundingClientRect().right, ac: h.getAttribute('autocomplete'), }; })(),
       hidden: Object.fromEntries([...document.querySelectorAll('input[type=hidden]')].map((i) => [i.name, i.value])),
       overflow: document.documentElement.scrollWidth - innerWidth,
       robots: document.querySelector('meta[name=robots]')?.content ?? null,
     }));
     ok(`form (${lang}): posts to FormSubmit by the id of the form, with a subject, no captcha page, and a way back to this page`, f.action === `https://formsubmit.co/${FORM}` && f.method === 'post' && new RegExp(`\\(${lang}\\)`).test(f.hidden._subject) && f.hidden._captcha === 'false' && new RegExp(`/${PAGES.report[lang]}/(\\?[^#]*)?#sent$`).test(f.hidden._next), JSON.stringify(f.hidden));
-    ok(`form (${lang}): the address of the card from ?url= fills the first field; every field has a label; the honeypot is out of reach`, f.url === card && f.labels && f.honey.tab === -1 && f.honey.hidden === 'true' && f.honey.w <= 4, JSON.stringify([f.url, f.honey]));
+    ok(`form (${lang}): the address of the card from ?url= fills the first field; every field has a label; the honeypot is out of reach`, f.url === card && f.labels && f.honey.tab === -1 && f.honey.hidden === 'true' && f.honey.ac === 'off' && f.honey.right < 0, JSON.stringify([f.url, f.honey]));
+    // The HTML the server sends (not the page after the script, which turns the halves of the address into a link where the message of a refused send is).
+    const source = await (await fetch(`${base}/${lang}/${PAGES.report[lang]}/`)).text();
+    const formHtml = source.slice(source.indexOf('<form'), source.indexOf('</form>'));
+    ok(`form (${lang}): no "@" anywhere in the HTML of the form (the address is the id of the service)`, formHtml.length > 100 && !formHtml.includes('@'));
     ok(`form (${lang}): no sideways scroll at 360 px, the page is not indexed`, f.overflow <= 0 && f.robots === 'noindex');
     // a javascript: address in ?url= is not put into the field
     await page.goto(`${base}/${lang}/${PAGES.report[lang]}/?url=${encodeURIComponent('javascript:alert(1)')}`, { waitUntil: 'load' });
@@ -120,6 +124,20 @@ if (want('form')) {
     ok(`form (${lang}): no script errors`, page.errors.length === 0, page.errors.join(';'));
     await page.close();
   }
+  // The honeypot is out of the screen at 320 and 1280 px (nobody sees it), a robot that fills every field fills it, and Tab never stops on it.
+  for (const width of [320, 1280]) {
+    const page = await newPage({ width });
+    await page.goto(`${base}/pt/corrigir/`, { waitUntil: 'load' });
+    const box = await page.evaluate(() => { const r = document.querySelector('[name=_honey]').getBoundingClientRect(); return { right: r.right, left: r.left, scroll: document.documentElement.scrollWidth - innerWidth }; });
+    ok(`form: the honeypot is outside the screen at ${width} px and adds no sideways scroll`, box.right < 0 && box.scroll <= 0, JSON.stringify(box));
+    const stops = [];
+    for (let i = 0; i < 60; i += 1) {
+      await page.keyboard.press('Tab');
+      stops.push(await page.evaluate(() => document.activeElement?.getAttribute('name') ?? document.activeElement?.tagName));
+    }
+    ok(`form: the focus was never on _honey at ${width} px`, !stops.includes('_honey'), stops.join(','));
+    await page.close();
+  }
   // a refused send: the message about writing directly, the button works again, nothing is lost
   const bad = await newPage({ answer: (r) => r.respond({ status: 500, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: '{"success":"false"}' }) });
   await bad.goto(`${base}/pt/corrigir/`, { waitUntil: 'load' });
@@ -129,11 +147,11 @@ if (want('form')) {
   const r = await bad.evaluate(() => ({ failed: document.querySelector('[data-report-failed]').textContent, link: document.querySelector('[data-report-failed] a').getAttribute('href'), disabled: document.querySelector('[data-report-submit]').disabled, text: document.querySelector('#f-what').value }));
   ok('form: when the service refuses, the reader sees the address to write to, can try again and keeps the text', r.link === `mailto:${EMAIL}` && r.disabled === false && r.text === 'Texto do erro encontrado.', JSON.stringify(r));
   await bad.close();
-  // without JavaScript the form still posts (the id of the form is in the page), and the e-mail is written as "name [at] host" only
+  // without JavaScript the form still posts (the id of the form is in the page), and the e-mail is written as "name (at) host" only (pt "(arroba)", ru "(собака)")
   const nojs = await newPage({ js: false });
   await nojs.goto(`${base}/en/report/`, { waitUntil: 'load' });
   const n = await nojs.evaluate(() => ({ action: document.querySelector('[data-report-form]').action, required: document.querySelector('#f-what').required, mail: [...document.querySelectorAll('a[href^="mailto:"]')].length, shown: [...document.querySelectorAll('.email')].map((e) => e.textContent), raw: document.documentElement.outerHTML.includes('elefantefugiu@'), sentHidden: document.getElementById('sent').hidden }));
-  ok('form without JavaScript: a real form post to the id of the form, a required description, no e-mail in the page ("[at]" only); the confirmation waits for #sent', n.action === `https://formsubmit.co/${FORM}` && n.required && n.mail === 0 && n.shown.length >= 1 && n.shown.every((x) => x === 'elefantefugiu [at] gmail.com') && !n.raw && n.sentHidden, JSON.stringify(n));
+  ok('form without JavaScript: a real form post to the id of the form, a required description, no e-mail in the page ("(at)" only); the confirmation waits for #sent', n.action === `https://formsubmit.co/${FORM}` && n.required && n.mail === 0 && n.shown.length >= 1 && n.shown.every((x) => x === 'elefantefugiu (at) gmail.com') && !n.raw && n.sentHidden, JSON.stringify(n));
   await nojs.close();
   const back = await newPage({ width: 360 });
   await back.goto(`${base}/pt/corrigir/#sent`, { waitUntil: 'load' });

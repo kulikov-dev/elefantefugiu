@@ -68,7 +68,7 @@ if (want('texts')) {
       ok(`texts (${lang} ${key}): one h1, headings of the sections, no square brackets, no raw ** or {{ }}, no horizontal scroll`, m.h1 === 1 && m.h2 >= 5 && !/\[|\]|\*\*|\{\{/.test(m.body) && m.sw, `h2 ${m.h2}`);
       if (key === 'about') {
         ok(`texts (${lang} about): the number of stories is filled in from the data`, new RegExp(`\\b${TOTAL}\\b`).test(m.body.split('\n').find((l) => /\d+/.test(l) && /(ready|prontas|Готовы)/i.test(l)) ?? ''), `expected ${TOTAL}`);
-        ok(`texts (${lang} about): the address is a mailto link, the method page is linked`, m.mail >= 1 && (await page.$$eval('article a', (a) => a.filter((x) => /\/(metodo|method|metod)\//.test(x.getAttribute('href'))).length)) >= 1);
+        ok(`texts (${lang} about): no address, a link to the contact form, the method page is linked`, m.mail === 0 && (await page.$$eval('article a', (a) => a.some((x) => /\/(corrigir|report|oshibka)\//.test(x.getAttribute('href'))))) && (await page.$$eval('article a', (a) => a.filter((x) => /\/(metodo|method|metod)\//.test(x.getAttribute('href'))).length)) >= 1);
       }
       if (key === 'legal') ok(`texts (${lang} legal): the Near me sentence stays in the browser section`, /(Perto de mim|Near me|Рядом со мной)/.test(m.body));
       ok(`texts (${lang} ${key}): no script errors`, page.errors.length === 0, page.errors.join('; '));

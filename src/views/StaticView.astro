@@ -31,7 +31,7 @@ const values = {
   ready: readyEpochsText(lang, readyEpochs.map((e) => e.name[lang])),
   soon: soonEpochsText(lang, site.epochs.length - readyEpochs.length),
 };
-const html = (text: string) => renderInline(text, link, CONTACT_EMAIL, values);
+const html = (text: string) => renderInline(text, link, CONTACT_EMAIL, values, lang);
 // Structured data: AboutPage for "About the project", WebPage for Method and Legal (the report form is noindex and gets none).
 const schemaCtx = schemaContext(lang, Astro.site);
 const schema = pageNodes(schemaCtx, {
