@@ -324,7 +324,7 @@ if (want('read')) {
     return { read: card?.hasAttribute('data-read'), visibility: mark && getComputedStyle(mark).visibility, word: mark?.textContent.trim(), onScreenWidth: rect?.width > 0, progress: progress?.textContent.trim(), shown: progress?.hasAttribute('data-shown') && getComputedStyle(progress).visibility === 'visible' };
   }, story.id);
   ok('read: the list of the epoch shows the tick and the word "lida" for the read story', marks.read && marks.visibility === 'visible' && marks.word === 'lida' && marks.onScreenWidth, JSON.stringify(marks));
-  ok(`read: "lidas 1 de M" where M is the stories of the epoch (${inThisEpoch.length})`, marks.shown && marks.progress === `lidas 1 de ${inThisEpoch.length}`, marks.progress);
+  ok(`read: "lida 1 de M" (the word agrees with 1) where M is the stories of the epoch (${inThisEpoch.length})`, marks.shown && marks.progress === `lida 1 de ${inThisEpoch.length}`, marks.progress);
   const heightsRead = await page.evaluate(() => [...document.querySelectorAll('.ecard')].map((c) => Math.round(c.getBoundingClientRect().height)));
   await page.close();
   page = await epochPage('off', null);
@@ -338,7 +338,7 @@ if (want('read')) {
     const readAll = inThisEpoch.map((e) => e.id);
     page = await epochPage(mode, readAll);
     const text = await page.evaluate(() => document.querySelector('[data-read-progress]').textContent.trim());
-    ok(`read: family mode ${mode}: "${text}" counts only the stories the mode shows (${shown.length})`, text === `lidas ${shown.length} de ${shown.length}`);
+    ok(`read: family mode ${mode}: "${text}" counts only the stories the mode shows (${shown.length})`, text === `${shown.length === 1 ? 'lida' : 'lidas'} ${shown.length} de ${shown.length}`);
     await page.close();
   }
 

@@ -2,6 +2,7 @@
 // epoch page and the reset button of the legal page. Everything is in try/catch: without localStorage the site works as before. Nothing is
 // sent anywhere (no counter event).
 import { READ_DELAY_MS, READ_KEY, addRead, parseRead, readProgress, type StoryOnPage } from '../lib/read-marks';
+import { pickPlural } from '../lib/plural-pick';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 const load = (): string[] => {
@@ -35,7 +36,10 @@ function show(): void {
   const progress = document.querySelector<HTMLElement>('[data-read-progress]');
   if (progress) {
     const { n, m } = readProgress(onPage(), read, currentFamilyMode());
-    progress.textContent = (progress.dataset.template ?? '{n} / {m}').replace('{n}', String(n)).replace('{m}', String(m));
+    const d = progress.dataset;
+    // "read N of M" agrees with N (Portuguese "lida 1 de 11", "lidas 2 de 11"): the form comes from Intl.PluralRules of the page.
+    const forms = { p_one: d.one ?? '', p_few: d.few ?? '', p_many: d.many ?? '', p_other: d.other ?? '' };
+    progress.textContent = pickPlural(forms, 'p', n, d.locale ?? 'en').replace('{n}', String(n)).replace('{m}', String(m));
     progress.toggleAttribute('data-shown', n > 0);
   }
 }

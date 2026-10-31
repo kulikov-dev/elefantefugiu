@@ -4,6 +4,7 @@
 // to the epochs. An epoch whose every shown story is new is a new era: its cards carry no mark, the strip says "new era" instead of "+N", and the
 // line speaks of epochs when all the new stories are in such epochs. Only the stories the family mode shows are counted. Without localStorage, nothing is marked. Nothing is sent anywhere.
 import { VISIT_KEY, advanceVisit, isNewSince, newCounts, newEras, parseVisit, type EpochFirsts, type NewCandidate } from '../lib/new-marks';
+import { pickPlural } from '../lib/plural-pick';
 import { READ_KEY, parseRead } from '../lib/read-marks';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
@@ -24,7 +25,6 @@ const readList = (): string[] => {
   }
 };
 
-const rules = new Intl.PluralRules(document.documentElement.lang);
 const forms = (raw: string | undefined): Record<string, string> => {
   try {
     return JSON.parse(raw ?? '{}') as Record<string, string>;
@@ -32,7 +32,9 @@ const forms = (raw: string | undefined): Record<string, string> => {
     return {};
   }
 };
-const say = (table: Record<string, string>, n: number): string => (table[rules.select(n)] ?? table.other ?? '{n}').replace('{n}', String(n));
+/** The form for n (one, few, many, other: Intl.PluralRules of the page, in pickPlural) from a table of the forms of one string. */
+const say = (table: Record<string, string>, n: number): string =>
+  pickPlural(Object.fromEntries(Object.entries(table).map(([category, text]) => [`p_${category}`, text])), 'p', n, document.documentElement.lang || 'en').replace('{n}', String(n));
 
 /** The day of the earliest story of every epoch for each family mode (BaseLayout puts it in every page). */
 function epochFirsts(): EpochFirsts {

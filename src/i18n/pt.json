@@ -180,9 +180,7 @@
     "then_now_calc": "cálculo",
     "then_now_note_estimate": "Estimativa: reconstituição de historiadores.",
     "then_now_note_calc": "Cálculo: nosso, a partir da distância e da velocidade.",
-    "then_now_more": "Mais {n} comparações",
     "then_now_sources": "Fontes",
-    "read_progress": "lidas {n} de {m}",
     "filter_all": "Todos",
     "view_label": "Modo de visualização",
     "empty": "Nesta época ainda não há histórias neste fio.",
@@ -207,7 +205,11 @@
     "new_plus_one": "+{n} nova",
     "new_plus_other": "+{n} novas",
     "new_epochs_one": "{n} época nova",
-    "new_epochs_other": "{n} épocas novas"
+    "new_epochs_other": "{n} épocas novas",
+    "then_now_more_one": "Mais {n} comparação",
+    "then_now_more_other": "Mais {n} comparações",
+    "read_progress_one": "lida {n} de {m}",
+    "read_progress_other": "lidas {n} de {m}"
   },
   "map": {
     "home": "Portugal inteiro",

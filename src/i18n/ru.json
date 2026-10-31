@@ -180,9 +180,7 @@
     "then_now_calc": "расчёт",
     "then_now_note_estimate": "Оценка — реконструкция историков.",
     "then_now_note_calc": "Расчёт — наше вычисление по расстоянию и скорости.",
-    "then_now_more": "Ещё {n} сравнения",
     "then_now_sources": "Источники",
-    "read_progress": "прочитано {n} из {m}",
     "filter_all": "Все",
     "view_label": "Вид",
     "empty": "В этой нити пока нет историй из этой эпохи.",
@@ -219,7 +217,15 @@
     "new_epochs_one": "{n} новая эпоха",
     "new_epochs_few": "{n} новые эпохи",
     "new_epochs_many": "{n} новых эпох",
-    "new_epochs_other": "{n} новые эпохи"
+    "new_epochs_other": "{n} новые эпохи",
+    "then_now_more_one": "Ещё {n} сравнение",
+    "then_now_more_few": "Ещё {n} сравнения",
+    "then_now_more_many": "Ещё {n} сравнений",
+    "then_now_more_other": "Ещё {n} сравнения",
+    "read_progress_one": "прочитано {n} из {m}",
+    "read_progress_few": "прочитано {n} из {m}",
+    "read_progress_many": "прочитано {n} из {m}",
+    "read_progress_other": "прочитано {n} из {m}"
   },
   "map": {
     "home": "Вся Португалия",

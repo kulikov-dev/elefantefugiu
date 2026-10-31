@@ -6,7 +6,7 @@
 // One list. Below 768 px, with JavaScript (html[data-js], set in <head> before the first paint, so nothing moves), the second and third
 // cards are hidden by CSS and a button under the first one shows them: it sets aria-expanded, goes away, and moves the focus to the second
 // card (tabindex="-1"). Without JavaScript, and from 768 px, everything is shown and there is no button.
-import { t } from '../i18n';
+import { plural, t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 import { isPublished, type EventData } from '../lib/events';
 import type { EpochData } from '../lib/epochs';
@@ -38,7 +38,7 @@ const hidden = Math.max(0, cards.length - 1);
       {
         hidden > 0 && (
           <button type="button" class="button button--secondary then-now__more" aria-expanded="false" aria-controls="then-now-list" data-then-now-more>
-            {t(lang, 'epoch.then_now_more').replace('{n}', String(hidden))}
+            {plural(lang, 'plural.then_now_more', hidden)}
           </button>
         )
       }

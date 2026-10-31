@@ -180,9 +180,7 @@
     "then_now_calc": "calculation",
     "then_now_note_estimate": "Estimate: a historians’ reconstruction.",
     "then_now_note_calc": "Calculation: ours, from distance and speed.",
-    "then_now_more": "{n} more comparisons",
     "then_now_sources": "Sources",
-    "read_progress": "read {n} of {m}",
     "filter_all": "All",
     "view_label": "View",
     "empty": "There are no stories in this thread in this era yet.",
@@ -207,7 +205,11 @@
     "new_plus_one": "+{n} new",
     "new_plus_other": "+{n} new",
     "new_epochs_one": "{n} new era",
-    "new_epochs_other": "{n} new eras"
+    "new_epochs_other": "{n} new eras",
+    "then_now_more_one": "{n} more comparison",
+    "then_now_more_other": "{n} more comparisons",
+    "read_progress_one": "read {n} of {m}",
+    "read_progress_other": "read {n} of {m}"
   },
   "map": {
     "home": "All of Portugal",

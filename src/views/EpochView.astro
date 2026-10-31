@@ -15,7 +15,7 @@ import MapBlock from '../components/MapBlock.astro';
 import { LOCALES, altPaths, epochHref, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { ageInfoOf, countByMode, familyAttrs, zeroModes } from '../lib/family';
 import { feedFilterCss, gridAvailable } from '../lib/epoch-filter';
-import { pluralForms, t, tAll } from '../i18n';
+import { plural, pluralForms, t, tAll } from '../i18n';
 import {
   epochFeed,
   epochHasTestText,
@@ -103,7 +103,7 @@ const schema = epochNodes(schemaCtx, {
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">
         {epochYearsText(epoch, lang)}
-        <span class="epoch__read" data-read-progress data-template={t(lang, 'epoch.read_progress')} aria-live="polite">{t(lang, 'epoch.read_progress').replace('{n}', '0').replace('{m}', String(feed.length))}</span>
+        <span class="epoch__read" data-read-progress data-locale={LOCALES[lang]} {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.read_progress')).map(([k, v]) => [`data-${k}`, v]))} aria-live="polite">{plural(lang, 'plural.read_progress', 0).replace('{m}', String(feed.length))}</span>
       </p>
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
       {intro && <p class="epoch__intro">{intro}</p>}
