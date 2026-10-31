@@ -119,3 +119,13 @@ status: ready
 published: '2026-10-30'
 placeholder: false
 ru_ready: true
+lang_review:
+  pt:
+    date: '2026-10-31'
+    hash: 'f1ec23cab9cb'
+  en:
+    date: '2026-10-31'
+    hash: '6e196c2ea194'
+  ru:
+    date: '2026-10-31'
+    hash: 'f55f0488fe68'

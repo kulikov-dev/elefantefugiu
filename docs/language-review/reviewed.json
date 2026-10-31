@@ -1,4 +1,31 @@
 {
+  "epoch/antes-de-portugal/en": {
+    "date": "2026-10-31",
+    "hash": "43c8d2560a19",
+    "fields": {
+      "slug": "06a400b2",
+      "name": "a4f48d58",
+      "years_label": "be5a720e"
+    }
+  },
+  "epoch/antes-de-portugal/pt": {
+    "date": "2026-10-31",
+    "hash": "fdcc02a94764",
+    "fields": {
+      "slug": "46dacf32",
+      "name": "e1114a88",
+      "years_label": "fd87ec71"
+    }
+  },
+  "epoch/antes-de-portugal/ru": {
+    "date": "2026-10-31",
+    "hash": "de9175e3b687",
+    "fields": {
+      "slug": "847ce4a0",
+      "name": "04b7c5b6",
+      "years_label": "98a23c64"
+    }
+  },
   "epoch/atualidade-ue-e-emigracao/en": {
     "date": "2026-10-27",
     "hash": "8db90becfe78",
@@ -123,28 +150,136 @@
     }
   },
   "epoch/lusitania-e-roma/en": {
-    "date": "2026-10-29",
-    "hash": "3576132dd756"
+    "date": "2026-10-31",
+    "hash": "7dbaf94335d4",
+    "fields": {
+      "slug": "0fc9a72d",
+      "name": "52fba0af",
+      "years_label": "f6861e14",
+      "theme": "1208f7a8",
+      "fallback_image.alt": "18a0cf9b",
+      "fallback_image.caption": "9e0c5e37",
+      "intro": "dcd9605e",
+      "then_now[0].then_big": "fc523027",
+      "then_now[0].now_big": "03b60d3d",
+      "then_now[0].text": "eaceee5a",
+      "then_now[1].then_big": "6f61cbd2",
+      "then_now[1].now_big": "2f4c7753",
+      "then_now[1].text": "388510da",
+      "then_now[2].then_big": "0385c65b",
+      "then_now[2].now_big": "c28be407",
+      "then_now[2].text": "97573c00"
+    }
   },
   "epoch/lusitania-e-roma/pt": {
-    "date": "2026-10-29",
-    "hash": "e0673a941803"
+    "date": "2026-10-31",
+    "hash": "f0372b88e7f9",
+    "fields": {
+      "slug": "3cf7791a",
+      "name": "07105b92",
+      "years_label": "b66de089",
+      "theme": "cf93bc51",
+      "fallback_image.alt": "7ddbbbdb",
+      "fallback_image.caption": "7613e8cf",
+      "intro": "66bbcec1",
+      "then_now[0].then_big": "0a49534d",
+      "then_now[0].now_big": "e637f209",
+      "then_now[0].text": "d40e3e74",
+      "then_now[1].then_big": "ec7f5f44",
+      "then_now[1].now_big": "9d6999f5",
+      "then_now[1].text": "d55ceb5b",
+      "then_now[2].then_big": "bb32fc0a",
+      "then_now[2].now_big": "4b9c5eeb",
+      "then_now[2].text": "8e7656e2"
+    }
   },
   "epoch/lusitania-e-roma/ru": {
-    "date": "2026-10-29",
-    "hash": "77ffdc43576d"
+    "date": "2026-10-31",
+    "hash": "b4457c55828b",
+    "fields": {
+      "slug": "d306b876",
+      "name": "d57c2871",
+      "years_label": "25b7a763",
+      "theme": "c37e0191",
+      "fallback_image.alt": "a6d66389",
+      "fallback_image.caption": "067bb079",
+      "intro": "82a89e1a",
+      "then_now[0].then_big": "86b07779",
+      "then_now[0].now_big": "d75cb162",
+      "then_now[0].text": "cd18c00b",
+      "then_now[1].then_big": "5085614b",
+      "then_now[1].now_big": "af24763e",
+      "then_now[1].text": "e41a9880",
+      "then_now[2].then_big": "9edfa165",
+      "then_now[2].now_big": "f0a3f12d",
+      "then_now[2].text": "52fd5ac4"
+    }
   },
   "epoch/monarquia-e-republica/en": {
-    "date": "2026-10-29",
-    "hash": "7a9085ffc0c6"
+    "date": "2026-10-31",
+    "hash": "6fa5ff8e354f",
+    "fields": {
+      "slug": "5dd7c6dd",
+      "name": "21feb3bb",
+      "years_label": "6cd38a82",
+      "theme": "74e375bf",
+      "fallback_image.alt": "edc07775",
+      "fallback_image.caption": "929673b8",
+      "intro": "4b1c91f7",
+      "then_now[0].then_big": "4284aa2b",
+      "then_now[0].now_big": "7e62ef52",
+      "then_now[0].text": "43e5ad0d",
+      "then_now[1].then_big": "5be813e8",
+      "then_now[1].now_big": "6c4e4834",
+      "then_now[1].text": "2622753c",
+      "then_now[2].then_big": "3e8a9277",
+      "then_now[2].now_big": "2357c50a",
+      "then_now[2].text": "98c202af"
+    }
   },
   "epoch/monarquia-e-republica/pt": {
-    "date": "2026-10-29",
-    "hash": "a96c8f7cef36"
+    "date": "2026-10-31",
+    "hash": "ab4f7881d4b3",
+    "fields": {
+      "slug": "c1ef2006",
+      "name": "728bff68",
+      "years_label": "6cd38a82",
+      "theme": "71dd98c0",
+      "fallback_image.alt": "247b09ac",
+      "fallback_image.caption": "773a5b8a",
+      "intro": "64f7e3cc",
+      "then_now[0].then_big": "6a2340c8",
+      "then_now[0].now_big": "4cb52d31",
+      "then_now[0].text": "7042813b",
+      "then_now[1].then_big": "7d21b004",
+      "then_now[1].now_big": "0402c023",
+      "then_now[1].text": "c1bd1865",
+      "then_now[2].then_big": "3e8a9277",
+      "then_now[2].now_big": "3c6f298f",
+      "then_now[2].text": "b2db7295"
+    }
   },
   "epoch/monarquia-e-republica/ru": {
-    "date": "2026-10-29",
-    "hash": "25d28bd9e612"
+    "date": "2026-10-31",
+    "hash": "0f1e27a16d53",
+    "fields": {
+      "slug": "afa855e5",
+      "name": "6dffbe03",
+      "years_label": "6cd38a82",
+      "theme": "a447d7c9",
+      "fallback_image.alt": "d7437fdb",
+      "fallback_image.caption": "6a3a0af7",
+      "intro": "c0694779",
+      "then_now[0].then_big": "26899e09",
+      "then_now[0].now_big": "2ab1006b",
+      "then_now[0].text": "2e24edca",
+      "then_now[1].then_big": "ef8b85b6",
+      "then_now[1].now_big": "fec78838",
+      "then_now[1].text": "114010dc",
+      "then_now[2].then_big": "3e8a9277",
+      "then_now[2].now_big": "ca421e40",
+      "then_now[2].text": "b5c570f2"
+    }
   },
   "epoch/nascimento-do-reino-e-reconquista/en": {
     "date": "2026-10-27",
@@ -273,16 +408,70 @@
     }
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/en": {
-    "date": "2026-10-29",
-    "hash": "29a497a571ac"
+    "date": "2026-10-31",
+    "hash": "47a95d7e09a7",
+    "fields": {
+      "slug": "be684acf",
+      "name": "f5ee0745",
+      "years_label": "0f0c07aa",
+      "theme": "3fec4772",
+      "fallback_image.alt": "ab58614b",
+      "fallback_image.caption": "632ad236",
+      "intro": "d28990b3",
+      "then_now[0].then_big": "28ec0398",
+      "then_now[0].now_big": "b45c9142",
+      "then_now[0].text": "1be0e753",
+      "then_now[1].then_big": "69ba97dc",
+      "then_now[1].now_big": "f5c28493",
+      "then_now[1].text": "e678db18",
+      "then_now[2].then_big": "3929016b",
+      "then_now[2].now_big": "01164134",
+      "then_now[2].text": "f35efb1c"
+    }
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/pt": {
-    "date": "2026-10-29",
-    "hash": "3eff75ac8b62"
+    "date": "2026-10-31",
+    "hash": "5f948230a2a7",
+    "fields": {
+      "slug": "57104557",
+      "name": "42baae77",
+      "years_label": "0f0c07aa",
+      "theme": "bf0e84ba",
+      "fallback_image.alt": "cc2ffe58",
+      "fallback_image.caption": "a3002b44",
+      "intro": "6b8b14c8",
+      "then_now[0].then_big": "fbb31d2f",
+      "then_now[0].now_big": "8dd778d5",
+      "then_now[0].text": "8d367168",
+      "then_now[1].then_big": "593321f4",
+      "then_now[1].now_big": "6d8a995c",
+      "then_now[1].text": "0da35a5e",
+      "then_now[2].then_big": "3929016b",
+      "then_now[2].now_big": "01164134",
+      "then_now[2].text": "2f9e2216"
+    }
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/ru": {
-    "date": "2026-10-29",
-    "hash": "6355975415fc"
+    "date": "2026-10-31",
+    "hash": "f9168a144af1",
+    "fields": {
+      "slug": "4b15a6f6",
+      "name": "a3365c3a",
+      "years_label": "0f0c07aa",
+      "theme": "ae547824",
+      "fallback_image.alt": "812669c1",
+      "fallback_image.caption": "25f71c62",
+      "intro": "84c8e7c5",
+      "then_now[0].then_big": "f81ad671",
+      "then_now[0].now_big": "9a7a140c",
+      "then_now[0].text": "5ccd04b1",
+      "then_now[1].then_big": "e1ef32e2",
+      "then_now[1].now_big": "5485be67",
+      "then_now[1].text": "2c85cfc1",
+      "then_now[2].then_big": "29664e26",
+      "then_now[2].now_big": "fffd44d3",
+      "then_now[2].text": "fe89cfa6"
+    }
   },
   "static/about/en": {
     "date": "2026-10-27",
@@ -351,8 +540,37 @@
     }
   },
   "static/about/ru": {
-    "date": "2026-10-27",
-    "hash": "e3be13321951"
+    "date": "2026-10-31",
+    "hash": "d9bd1b875712",
+    "fields": {
+      "lead": "6006edf0",
+      "more[0]": "e7f81e38",
+      "sections[foi-aqui].heading": "8a9b15e3",
+      "sections[foi-aqui].paragraphs[0]": "0ebb6fd4",
+      "sections[como-ler].heading": "4a38ce16",
+      "sections[como-ler].paragraphs[0]": "3aeb6808",
+      "sections[como-ler].items[0]": "249e1bfa",
+      "sections[como-ler].items[1]": "aca5972f",
+      "sections[como-ler].items[2]": "54c0fb0d",
+      "sections[como-ler].after[0]": "ba1da35d",
+      "sections[para-quem].heading": "cc2bd4cf",
+      "sections[para-quem].items[0]": "3b2a7a2b",
+      "sections[para-quem].items[1]": "8871f21f",
+      "sections[para-quem].items[2]": "ba9b700e",
+      "sections[confianca].heading": "559e785c",
+      "sections[confianca].paragraphs[0]": "69ab0a6b",
+      "sections[estado].heading": "02d17a74",
+      "sections[estado].paragraphs[0]": "fcbe7fce",
+      "sections[quem-faz].heading": "5b23c5c7",
+      "sections[quem-faz].paragraphs[0]": "5a518ce3",
+      "sections[quem-faz].paragraphs[1]": "85e70678",
+      "sections[quem-faz].paragraphs[2]": "cf7077c1",
+      "sections[ajudar].heading": "cd11ddab",
+      "sections[ajudar].items[0]": "4c57685c",
+      "sections[ajudar].items[1]": "59f9d1f5",
+      "sections[ajudar].items[2]": "d08fecf5",
+      "sections[ajudar].after[0]": "7b14f585"
+    }
   },
   "static/legal/en": {
     "date": "2026-10-29",
@@ -503,8 +721,27 @@
     }
   },
   "static/method/ru": {
-    "date": "2026-10-27",
-    "hash": "49ab08caecef"
+    "date": "2026-10-31",
+    "hash": "97707301fb3d",
+    "fields": {
+      "lead": "9a4f48c6",
+      "sections[etiquetas].heading": "183ae554",
+      "sections[etiquetas].items[0]": "6357dd55",
+      "sections[etiquetas].items[1]": "3b58eb11",
+      "sections[etiquetas].items[2]": "dac98fa4",
+      "sections[datas-fontes].heading": "53b6b9ec",
+      "sections[datas-fontes].paragraphs[0]": "cf290db9",
+      "sections[numeros].heading": "16889f4b",
+      "sections[numeros].paragraphs[0]": "fe3ab8ec",
+      "sections[idades].heading": "a9b15450",
+      "sections[idades].paragraphs[0]": "674b34da",
+      "sections[imagens].heading": "4150ebf1",
+      "sections[imagens].paragraphs[0]": "e8b18a48",
+      "sections[correcoes].heading": "bb095483",
+      "sections[correcoes].paragraphs[0]": "bc0fa318",
+      "sections[idiomas].heading": "19e4bb1a",
+      "sections[idiomas].paragraphs[0]": "bb46ea7d"
+    }
   },
   "thread/comida-e-vinho/en": {
     "date": "2026-10-27",
@@ -543,11 +780,11 @@
     }
   },
   "thread/engenho/pt": {
-    "date": "2026-10-28",
-    "hash": "b0b77c2cd8f0",
+    "date": "2026-10-31",
+    "hash": "da28d7ff3c03",
     "fields": {
       "slug": "b68ad2ec",
-      "name": "12eb81a8",
+      "name": "01b8b7b5",
       "description": "ebfbfd9a"
     }
   },
@@ -1059,28 +1296,217 @@
     }
   },
   "ui/home/en": {
-    "date": "2026-10-27",
-    "hash": "f9c9d5e23922"
+    "date": "2026-10-31",
+    "hash": "d4baf53dbe86",
+    "fields": {
+      "home.epochs_heading": "76f67d07",
+      "home.hook_title": "d430ec48",
+      "home.intro": "43a58774",
+      "home.cta_read": "70ce1b58",
+      "home.continue": "63f6ded8",
+      "home.open_map": "298b0f61",
+      "home.showcase_heading": "a08cf344",
+      "home.timeline_label": "1082b2b0",
+      "home.timeline_prev": "b08d9350",
+      "home.timeline_next": "655d2a16",
+      "home.threads_heading": "3e42e385",
+      "home.threads_intro": "e5b0ef25"
+    }
   },
   "ui/home/pt": {
-    "date": "2026-10-27",
-    "hash": "7b476723889c"
+    "date": "2026-10-31",
+    "hash": "79ab724431dc",
+    "fields": {
+      "home.epochs_heading": "758fb779",
+      "home.hook_title": "3c5bf4a0",
+      "home.intro": "6bac37b5",
+      "home.cta_read": "830fde55",
+      "home.continue": "ab81f77a",
+      "home.open_map": "b48c5808",
+      "home.showcase_heading": "20b75c1c",
+      "home.timeline_label": "772fbe55",
+      "home.timeline_prev": "ea9efc13",
+      "home.timeline_next": "0bb406d6",
+      "home.threads_heading": "131755fe",
+      "home.threads_intro": "a1e64c71"
+    }
   },
   "ui/home/ru": {
-    "date": "2026-10-27",
-    "hash": "dddfba76aeb3"
+    "date": "2026-10-31",
+    "hash": "23d474706ad7",
+    "fields": {
+      "home.epochs_heading": "edfeb3e6",
+      "home.hook_title": "e92c3faa",
+      "home.intro": "0b273ac5",
+      "home.cta_read": "d8fdb29f",
+      "home.continue": "7d81b649",
+      "home.open_map": "5978ea17",
+      "home.showcase_heading": "c160bf60",
+      "home.timeline_label": "6c56f3aa",
+      "home.timeline_prev": "32c3465f",
+      "home.timeline_next": "45f1135f",
+      "home.threads_heading": "1c888997",
+      "home.threads_intro": "ba1c78d9"
+    }
   },
   "ui/map/en": {
-    "date": "2026-10-27",
-    "hash": "83afed50657e"
+    "date": "2026-10-31",
+    "hash": "6ef4dc03c30f",
+    "fields": {
+      "map.home": "4dec3361",
+      "map.map_label": "5f959734",
+      "map.threads_label": "4a3ab1b3",
+      "map.epochs_label": "e2bb51ca",
+      "map.all_epochs": "e4607a53",
+      "map.static_title": "3411716a",
+      "map.marker_frame": "c4e52ea0",
+      "map.marker_story": "c478361e",
+      "map.cluster_one": "670004ba",
+      "map.cluster_other": "d4e91e9f",
+      "map.in_area_one": "a682f65c",
+      "map.in_area_other": "582c054a",
+      "map.zoom_in": "0e47f09a",
+      "map.zoom_out": "bc7b631a",
+      "map.list_title": "824791fa",
+      "map.skip_to_markers": "89759b6a",
+      "map.list_open": "28cd43f8",
+      "map.list_close": "08cd45a3",
+      "map.list_empty": "890f385a",
+      "map.loading": "5e7f3ac4",
+      "map.unavailable": "f0cd1a6a",
+      "map.preview_open": "ed077f3d",
+      "map.preview_close": "7d8ab368",
+      "map.today_here": "f8f180b7",
+      "map.locate": "8a28bd76",
+      "map.locating": "753d6b00",
+      "map.geo_denied": "f4ae175d",
+      "map.geo_unavailable": "e3e656ee",
+      "map.geo_unsupported": "39831d31",
+      "map.geo_far": "5b56b4b4",
+      "map.here": "b0b52ce0",
+      "map.world": "f40e9d12",
+      "map.overseas_one": "17dae129",
+      "map.overseas_other": "efdbaef7",
+      "map.dist_m": "42b43536",
+      "map.dist_km": "771dd9c5",
+      "map.dist_here": "63af46e0",
+      "map.legend_label": "e1ccc3fa",
+      "map.legend_frame": "fe35b8a1",
+      "map.legend_story": "c478361e",
+      "map.legend_cluster": "c4ad8c8d",
+      "map.legend_place": "5c84c0b0",
+      "map.legend_here": "bb0347a4",
+      "map.timeline_label": "31893031",
+      "map.tools_label": "e57a7098"
+    }
   },
   "ui/map/pt": {
-    "date": "2026-10-27",
-    "hash": "f8dd6dd80341"
+    "date": "2026-10-31",
+    "hash": "91c2e7f75f65",
+    "fields": {
+      "map.home": "a162074f",
+      "map.map_label": "5a315b46",
+      "map.threads_label": "6339fbfc",
+      "map.epochs_label": "6f8636d6",
+      "map.all_epochs": "98bd5469",
+      "map.static_title": "ddcc8088",
+      "map.marker_frame": "14556926",
+      "map.marker_story": "5572a0d2",
+      "map.cluster_one": "8e749b31",
+      "map.cluster_other": "ecff5a27",
+      "map.in_area_one": "0b2d6e22",
+      "map.in_area_other": "7a7d9663",
+      "map.zoom_in": "0e37130c",
+      "map.zoom_out": "e45cb1f6",
+      "map.list_title": "b3303fe8",
+      "map.skip_to_markers": "85c343de",
+      "map.list_open": "2a51af93",
+      "map.list_close": "78a70c2e",
+      "map.list_empty": "d9120534",
+      "map.loading": "5bbf520c",
+      "map.unavailable": "46acdb43",
+      "map.preview_open": "a01a5fce",
+      "map.preview_close": "9bc3b60a",
+      "map.today_here": "70b31350",
+      "map.locate": "3ad063e6",
+      "map.locating": "feca61f7",
+      "map.geo_denied": "76659a05",
+      "map.geo_unavailable": "0296d987",
+      "map.geo_unsupported": "23af3a31",
+      "map.geo_far": "08a1983b",
+      "map.here": "4339c269",
+      "map.world": "13c3f12e",
+      "map.overseas_one": "28e81b7e",
+      "map.overseas_other": "63a29891",
+      "map.dist_m": "6bdb0d95",
+      "map.dist_km": "a0f31c35",
+      "map.dist_here": "6addbaaf",
+      "map.legend_label": "568f35d4",
+      "map.legend_frame": "65e5ee97",
+      "map.legend_story": "5572a0d2",
+      "map.legend_cluster": "654cb3d0",
+      "map.legend_place": "5ce64e26",
+      "map.legend_here": "a09253db",
+      "map.timeline_label": "f7a17def",
+      "map.tools_label": "2cac16c6"
+    }
   },
   "ui/map/ru": {
-    "date": "2026-10-27",
-    "hash": "c94078655d79"
+    "date": "2026-10-31",
+    "hash": "e098c3c996ae",
+    "fields": {
+      "map.home": "7e0ed18a",
+      "map.map_label": "264f2d77",
+      "map.threads_label": "f12be0e5",
+      "map.epochs_label": "860de27c",
+      "map.all_epochs": "f020549b",
+      "map.static_title": "744835a1",
+      "map.marker_frame": "582899dd",
+      "map.marker_story": "c3e8dff2",
+      "map.cluster_one": "11b15b94",
+      "map.cluster_few": "9933a07e",
+      "map.cluster_many": "bf325653",
+      "map.cluster_other": "9933a07e",
+      "map.in_area_one": "ff7b80f5",
+      "map.in_area_few": "4203da87",
+      "map.in_area_many": "2c78ea31",
+      "map.in_area_other": "4203da87",
+      "map.zoom_in": "bfb85a01",
+      "map.zoom_out": "8e6a41ec",
+      "map.list_title": "21571199",
+      "map.skip_to_markers": "9e2c632f",
+      "map.list_open": "3b00cb8d",
+      "map.list_close": "de0a84c2",
+      "map.list_empty": "fc5322be",
+      "map.loading": "9514ff87",
+      "map.unavailable": "d7264822",
+      "map.preview_open": "ea1f4082",
+      "map.preview_close": "1d5cb94d",
+      "map.today_here": "32dd65d8",
+      "map.locate": "56469893",
+      "map.locating": "acf3e6e3",
+      "map.geo_denied": "e63afb05",
+      "map.geo_unavailable": "b7464261",
+      "map.geo_unsupported": "8160338f",
+      "map.geo_far": "851b6be6",
+      "map.here": "37eb1cae",
+      "map.world": "04cf7407",
+      "map.overseas_one": "404eb569",
+      "map.overseas_few": "fe927773",
+      "map.overseas_many": "9a2a3ce5",
+      "map.overseas_other": "fe927773",
+      "map.dist_m": "7db630fb",
+      "map.dist_km": "790496be",
+      "map.dist_here": "7af0d09d",
+      "map.legend_label": "16840e9d",
+      "map.legend_frame": "1bf94043",
+      "map.legend_story": "c3e8dff2",
+      "map.legend_cluster": "601667fe",
+      "map.legend_place": "27f663ac",
+      "map.legend_here": "36c93704",
+      "map.timeline_label": "51dab5bf",
+      "map.tools_label": "57e0d287"
+    }
   },
   "ui/mascot/en": {
     "date": "2026-10-27",
@@ -1356,16 +1782,40 @@
     }
   },
   "ui/site/en": {
-    "date": "2026-10-27",
-    "hash": "2f4ef200d99f"
+    "date": "2026-10-31",
+    "hash": "a792ba9073fb",
+    "fields": {
+      "site.name": "875e6fd9",
+      "site.tagline": "113f0565",
+      "site.description": "5d4c254f",
+      "site.preview_alt_home": "5f79d260",
+      "site.preview_alt_page": "721580ed",
+      "site.preview_alt_thread": "db29aadf"
+    }
   },
   "ui/site/pt": {
-    "date": "2026-10-27",
-    "hash": "368645685a5c"
+    "date": "2026-10-31",
+    "hash": "22ad353e1dfa",
+    "fields": {
+      "site.name": "875e6fd9",
+      "site.tagline": "8a5851c2",
+      "site.description": "7aa9da1c",
+      "site.preview_alt_home": "3a2d8ef2",
+      "site.preview_alt_page": "c5a734d8",
+      "site.preview_alt_thread": "c5327129"
+    }
   },
   "ui/site/ru": {
-    "date": "2026-10-27",
-    "hash": "81ff9660e1ce"
+    "date": "2026-10-31",
+    "hash": "fd2d964ea2d1",
+    "fields": {
+      "site.name": "875e6fd9",
+      "site.tagline": "da433f13",
+      "site.description": "bd1264eb",
+      "site.preview_alt_home": "b3a8267a",
+      "site.preview_alt_page": "ead684b9",
+      "site.preview_alt_thread": "f0e6ca8e"
+    }
   },
   "ui/stub/en": {
     "date": "2026-10-27",
@@ -1389,16 +1839,34 @@
     }
   },
   "ui/surprise/en": {
-    "date": "2026-10-27",
-    "hash": "97ea9c9e4c5c"
+    "date": "2026-10-31",
+    "hash": "7124705d266c",
+    "fields": {
+      "surprise.picking": "2930d851",
+      "surprise.fallback": "c20f9bd1",
+      "surprise.none": "8a4ea578",
+      "surprise.all_read": "75518950"
+    }
   },
   "ui/surprise/pt": {
-    "date": "2026-10-27",
-    "hash": "b38e98ff7a07"
+    "date": "2026-10-31",
+    "hash": "a24ee39d4a3a",
+    "fields": {
+      "surprise.picking": "d4e6f895",
+      "surprise.fallback": "9f7308f8",
+      "surprise.none": "6d68dec2",
+      "surprise.all_read": "e07aafa1"
+    }
   },
   "ui/surprise/ru": {
-    "date": "2026-10-27",
-    "hash": "fb94307f2e87"
+    "date": "2026-10-31",
+    "hash": "924827a24d06",
+    "fields": {
+      "surprise.picking": "235738fb",
+      "surprise.fallback": "b8cd012f",
+      "surprise.none": "c96e004a",
+      "surprise.all_read": "48838dde"
+    }
   },
   "ui/theme/en": {
     "date": "2026-10-27",
@@ -1518,8 +1986,34 @@
     }
   },
   "ui/ui/ru": {
-    "date": "2026-10-29",
-    "hash": "af09ac571f19"
+    "date": "2026-10-31",
+    "hash": "342c464b20ea",
+    "fields": {
+      "ui.read_more": "a73da60d",
+      "ui.more": "b3f497b3",
+      "ui.bridge": "ebdf7ba0",
+      "ui.label_documented": "82ec13a1",
+      "ui.label_legend": "19244d76",
+      "ui.label_debated": "79ae5c94",
+      "ui.heavy_topic": "9f1c0ea0",
+      "ui.family_mode": "35c7d5b1",
+      "ui.age_all": "c89f3ec3",
+      "ui.share": "dc120821",
+      "ui.report_error": "894f8ff0",
+      "ui.read": "55e4a0b7",
+      "ui.read_reset": "cda3e894",
+      "ui.read_reset_done": "f3920cd4",
+      "ui.nearby": "de5c415b",
+      "ui.open_on_map": "7b79d1b3",
+      "ui.surprise": "24f93002",
+      "ui.soon": "72c299e0",
+      "ui.show_more": "c6826c78",
+      "ui.view_list": "93fd1e0f",
+      "ui.view_timeline": "24c7474a",
+      "ui.view_grid": "c8174286",
+      "ui.sources": "d0578b52",
+      "ui.directions": "345025d4"
+    }
   },
   "ui/viz/en": {
     "date": "2026-10-27",
