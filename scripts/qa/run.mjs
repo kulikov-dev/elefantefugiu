@@ -5,6 +5,7 @@
 //   npm run qa -- --resume        continue the last run: suites that already have a result are skipped
 //   npm run qa -- --budget=250    stop before starting a suite once 250 seconds have passed (exit code 2; use --resume to go on)
 //   npm run qa -- --report        print the table of the last run without running anything
+//   npm run qa -- --shard=2/4     only the suites of shard 2 of shards.json (QA full runs 4 of them in parallel jobs); ports 4410/4411 for shard 2
 //   npm run qa -- --verbose       the whole log of every suite and the table at the end (by default: one line per suite, the failed
 //                                 checks of a failing suite and one summary line; in GitHub Actions a failed check is also an annotation)
 // BASE_PATH=/elefante npm run qa    the same against a build made with that base path (build with the same BASE_PATH first)
@@ -17,6 +18,7 @@ import { createConnection } from 'node:net';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { SUITES } from './suites.mjs';
 
 const here = fileURLToPath(new URL('./', import.meta.url));
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -25,46 +27,31 @@ const VARIANT_DIR = join(process.env.QA_VARIANT_DIR || tmpdir(), 'elefante-varia
 const out = `${here}out/`;
 const resultsFile = `${out}qa-results.json`;
 const BASE_PATH = (process.env.BASE_PATH ?? '').replace(/\/$/, '');
-const MAIN = 4400;
-const VARIANT = 4401;
-
-const SUITES = [
-  { name: 'behave', script: 'behave.mjs', about: 'tab order, skip link, focus, no horizontal scroll' },
-  { name: 'listings', script: 'listings.mjs', about: 'home, epoch and thread pages in a browser' },
-  { name: 'controls', script: 'controls.mjs', about: 'epoch filters, view and pane switches, Surprise me and the read marks' },
-  { name: 'controls-variant', script: 'controls.mjs', args: ['variant'], variant: true, about: 'the same on the fixture build: an epoch with more than 8 cards, so the Timeline / Grid switch appears' },
-  { name: 'map-basic', script: 'map.mjs', args: ['nojs', 'tiles', 'filters', 'preview', 'layout'], about: 'map without JS, tiles failing, filters, preview, layout' },
-  { name: 'map-more', script: 'map.mjs', args: ['link', 'epoch', 'weight'], about: 'map links, the epoch page map, weight' },
-  { name: 'map-limit', script: 'map.mjs', args: ['limit'], about: 'at most 30 markers (the limit of the real site) over a sweep of views' },
-  { name: 'map-variant', script: 'map.mjs', args: ['variant', 'limit', 'filters', 'preview', 'link', 'epoch'], variant: true, about: 'clusters, Show more, filters, preview, links and the epoch map with more cards than the marker limit (fixture build, limit 7)' },
-  { name: 'map-limit-all', script: 'map.mjs', args: ['limit'], env: { FAMILY: 'all' }, about: 'the same sweep in family mode "all"' },
-  { name: 'map-limit-12', script: 'map.mjs', args: ['limit'], env: { FAMILY: '12' }, about: 'the same sweep in family mode "12"' },
-  { name: 'bridge', script: 'bridge.mjs', about: 'marker preview, bridge caption, Como chegar (Google Maps link), bridge block' },
-  { name: 'family-controls', script: 'family.mjs', args: ['toggle', 'lists'], about: 'family toggle, feed, grid, threads, tiles, home' },
-  { name: 'family-pages', script: 'family.mjs', args: ['recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'surprise-read'], about: 'recounting, Nearby, the gate, no flash, blocked storage, Surprise me and the read marks' },
-  { name: 'family-map', script: 'family.mjs', args: ['map'], about: 'the map in every family mode' },
-  { name: 'interactives', script: 'interactives.mjs', about: 'the dots of Aljubarrota: keyboard, text, motion, no JS, code, colour, family modes' },
-  { name: 'theme', script: 'theme.mjs', about: 'theme, palettes, fonts, header, light-dark() fallback' },
-  { name: 'theme-variant', script: 'theme.mjs', args: ['variant', 'palette', 'fallback'], variant: true, about: 'palettes of every epoch including Estado Novo (fixture build), the light-dark() fallback per epoch' },
-  { name: 'azulejo', script: 'azulejo.mjs', about: 'azulejo patterns in both themes, map waiting tile, reduced motion, layout shifts, neutral header' },
-  { name: 'azulejo-variant', script: 'azulejo.mjs', args: ['variant', 'patterns', 'header'], variant: true, about: 'the three patterns and the grey Estado Novo interface (fixture build)' },
-  { name: 'ru', script: 'ru.mjs', args: ['menu', 'root', 'banner', 'fonts', 'plural'], about: 'language menu on 320/360 px, root choice, banner and noindex on untranslated cards, Cyrillic fonts only on /ru/, plurals' },
-  { name: 'ru-variant', script: 'ru.mjs', args: ['variant', 'banner'], variant: true, about: 'the banner, noindex and hreflang of a card that is not translated (fixture build)' },
-  { name: 'pages', script: 'pages.mjs', about: 'static pages, mistake report form (answered by the test), Continue, QR address' },
-  { name: 'family-menu', script: 'familymenu.mjs', about: 'family-mode button and menu, the hidden-stories line, the 12+ tooltip' },
-  { name: 'epoch-page', script: 'epochpage.mjs', about: 'epoch page: years on the scale, equal compact cards, view switch from 9 stories, active card, more eras list' },
-  { name: 'map-tools', script: 'mapnear.mjs', args: ['tools', 'near', 'list', 'world', 'scale'], about: 'map page: Near me, list with hooks and distances, Whole world and the overseas plate, markers and legend, epoch scale' },
-  { name: 'map-tools-variant', script: 'mapnear.mjs', args: ['variant', 'markers'], variant: true, about: 'marker styles and the legend: a cluster needs more cards than the marker limit (fixture build, limit 7)' },
-  { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), 404 in every language' },
-  { name: 'mascot', script: 'mascot.mjs', args: ['logo', 'notfound', 'pager', 'empty', 'dark', 'motion'], about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
-  { name: 'mascot-variant', script: 'mascot.mjs', args: ['regime'], variant: true, about: 'no elephant on the pages of the regime epoch (fixture build)' },
-  { name: 'family-controls-variant', script: 'family.mjs', args: ['variant', 'toggle', 'lists', 'recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'surprise-read', 'map'], variant: true, about: 'the family checks on the fixture build (more cards, a long epoch with the grid, markers over the limit)' },
-  { name: 'family-variant', script: 'family.mjs', args: ['variant', 'variant-epoch'], variant: true, about: 'a 16+ epoch that every mode leaves empty (fixture build)' },
-  { name: 'interactives-variant', script: 'interactives.mjs', args: ['variant'], variant: true, about: 'the same for the dots plus the ship scale (a fixture card): the real site has no ship card' },
-];
 
 const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(`--${name}`);
+const shardArg = (argv.find((a) => a.startsWith('--shard=')) ?? '').slice('--shard='.length);
+const [shardNo, shardOf] = shardArg ? shardArg.split('/').map(Number) : [0, 0];
+// Each shard has its own pair of ports (shard 1: 4400/4401, shard 2: 4410/4411, ...), so shards may also share a machine.
+const MAIN = 4400 + Math.max(0, shardNo - 1) * 10;
+const VARIANT = MAIN + 1;
+
+// shards.json: the suites of every shard. A suite that is in no shard (or in two) is an error, so a new suite cannot be forgotten.
+const shardList = JSON.parse(readFileSync(`${here}shards.json`, 'utf8')).shards;
+{
+  const placed = shardList.flat();
+  const lost = SUITES.map((s) => s.name).filter((n) => !placed.includes(n));
+  const twice = placed.filter((n, i) => placed.indexOf(n) !== i);
+  const unknown = placed.filter((n) => !SUITES.some((s) => s.name === n));
+  if (lost.length || twice.length || unknown.length) {
+    console.error(`shards.json does not match suites.mjs: in no shard [${lost}], twice [${twice}], unknown [${unknown}]`);
+    process.exit(1);
+  }
+}
+if (shardArg && !(shardOf === shardList.length && shardNo >= 1 && shardNo <= shardOf)) {
+  console.error(`--shard=${shardArg}: shards.json has ${shardList.length} shards, use --shard=1/${shardList.length} ... --shard=${shardList.length}/${shardList.length}`);
+  process.exit(1);
+}
 const budget = Number((argv.find((a) => a.startsWith('--budget=')) ?? '').split('=')[1] || Infinity);
 const named = argv.filter((a) => !a.startsWith('--'));
 const verbose = flag('verbose');
@@ -103,7 +90,8 @@ if (flag('list')) {
   process.exit(0);
 }
 
-const wanted = named.length ? named.map((n) => SUITES.find((s) => s.name === n) ?? (console.error(`Unknown suite "${n}". Try: npm run qa -- --list`), process.exit(1))) : SUITES;
+const inShard = shardArg ? SUITES.filter((s) => shardList[shardNo - 1].includes(s.name)) : SUITES;
+const wanted = named.length ? named.map((n) => SUITES.find((s) => s.name === n) ?? (console.error(`Unknown suite "${n}". Try: npm run qa -- --list`), process.exit(1))).filter((s) => !shardArg || inShard.includes(s)) : inShard;
 if (flag('report')) {
   console.log(table(load().results, wanted));
   process.exit(0);

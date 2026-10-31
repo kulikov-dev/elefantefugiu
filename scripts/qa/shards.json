@@ -1,0 +1,79 @@
+{
+ "_about": "Suites per shard of QA full (run.mjs --shard=i/4). Balanced by the seconds in \"weights\" (estimates; refresh from a real run). Every suite of suites.mjs must be in exactly one shard: npm test checks.",
+ "weights": {
+  "map-variant": 230,
+  "map-more": 120,
+  "family-controls-variant": 78,
+  "controls": 76,
+  "controls-variant": 74,
+  "map-limit": 70,
+  "map-limit-all": 60,
+  "map-limit-12": 60,
+  "pages": 56,
+  "family-pages": 48,
+  "theme": 46,
+  "family-menu": 40,
+  "map-tools": 33,
+  "interactives-variant": 33,
+  "azulejo": 28,
+  "interactives": 27,
+  "azulejo-variant": 20,
+  "service": 20,
+  "ru": 17,
+  "epoch-page": 17,
+  "family-controls": 14,
+  "behave": 14,
+  "listings": 13,
+  "theme-variant": 13,
+  "mascot": 12,
+  "map-basic": 12,
+  "bridge": 8,
+  "family-map": 8,
+  "mascot-variant": 3,
+  "family-variant": 3,
+  "map-tools-variant": 3,
+  "ru-variant": 2
+ },
+ "shards": [
+  [
+   "map-variant",
+   "interactives-variant",
+   "service",
+   "behave",
+   "map-basic",
+   "family-variant",
+   "ru-variant"
+  ],
+  [
+   "map-more",
+   "map-limit-all",
+   "family-pages",
+   "map-tools",
+   "azulejo-variant",
+   "family-controls",
+   "theme-variant",
+   "family-map"
+  ],
+  [
+   "family-controls-variant",
+   "map-limit",
+   "map-limit-12",
+   "family-menu",
+   "azulejo",
+   "ru",
+   "listings",
+   "bridge"
+  ],
+  [
+   "controls",
+   "controls-variant",
+   "pages",
+   "theme",
+   "interactives",
+   "epoch-page",
+   "mascot",
+   "mascot-variant",
+   "map-tools-variant"
+  ]
+ ]
+}

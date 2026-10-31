@@ -1,16 +1,23 @@
-# The full browser check (npm run qa): all 32 suites, the variant build and the mascot. Every Monday morning and by hand (Actions tab ->
-# QA full -> Run workflow). The log holds one line per suite and the failed checks; the full logs of every suite are the artifact.
+# The full browser check (npm run qa): all suites, the variant build and the mascot, in 4 parallel jobs (shards, scripts/qa/shards.json).
+# Every Monday morning, the first of the month (the map sweeps in full) and by hand (Actions tab -> QA full -> Run workflow).
+# The last job "summary" prints one table of all suites; the full logs of every suite are the artifacts qa-shard-N.
 name: QA full
 
 on:
   schedule:
-    - cron: '0 7 * * 1' # Monday 07:00 UTC
+    - cron: '0 7 * * 1' # Monday 07:00 UTC: the map sweeps are a sample of 30 views plus the edge cases (MAP_SAMPLE, seed = the week)
+    - cron: '0 6 1 * *' # the 1st of the month 06:00 UTC: the map sweeps in full
   workflow_dispatch: # also on a branch: gh workflow run qa-full.yml --ref <branch> (checkout takes the chosen ref); -f suites='map-variant theme' runs only those
     inputs:
       suites:
         description: 'Suites to run, separated by spaces (empty: all of them)'
         required: false
         default: ''
+      full_map:
+        description: 'Run the map sweeps in full (every view) instead of the sample of 30 plus the edge cases'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: read
@@ -22,34 +29,66 @@ env:
 
 jobs:
   qa:
+    name: shard ${{ matrix.shard }}/4
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false # a failed shard does not stop the others: one run shows everything that is red
+      matrix:
+        shard: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            scripts/qa/package-lock.json
       - run: npm ci
       - name: Build
         run: npx astro build
+      - name: Size of the map sweeps
+        env:
+          FULL: ${{ inputs.full_map || github.event.schedule == '0 6 1 * *' }}
+        run: |
+          # MAP_SEED = the ISO week (year and number), so week after week other views of the sweeps come up.
+          echo "MAP_SEED=$(date +%G%V)" >> "$GITHUB_ENV"
+          if [ "$FULL" = true ]; then echo 'MAP_SAMPLE=full' >> "$GITHUB_ENV"; else echo 'MAP_SAMPLE=30' >> "$GITHUB_ENV"; fi
+      # No continue-on-error: a red suite makes the shard, and so the run, red.
       - name: Browser suites
         env:
           SUITES: ${{ inputs.suites }}
-        run: npm run qa -- $SUITES
-      - name: Summary
-        if: always()
-        run: |
-          {
-            echo '### QA full'
-            echo '```'
-            node scripts/qa/run.mjs --report
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
-      - name: Report and logs
+        run: npm run qa -- --shard=${{ matrix.shard }}/4 $SUITES
+      - name: Results and logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: qa-full
+          name: qa-shard-${{ matrix.shard }}
           path: scripts/qa/out/
           retention-days: 30
+
+  summary:
+    needs: qa
+    if: always() # also when a shard failed or was cancelled
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: qa-shard-*
+          path: qa-results
+      - name: One table
+        env:
+          SUITES: ${{ inputs.suites }}
+        run: node scripts/qa/summary.mjs qa-results --only="$SUITES" >> "$GITHUB_STEP_SUMMARY"
+      # The table fails when a suite is red or missing; this also covers a shard that failed before any suite ran.
+      - name: Fail when a shard failed
+        if: needs.qa.result != 'success'
+        run: |
+          echo "A shard ended as: ${{ needs.qa.result }}"
+          exit 1
