@@ -325,7 +325,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'cookies',
           heading: 'Cookies',
-          paragraphs: ['O site não usa cookies. A contagem de visitas funciona sem eles e o navegador guarda apenas as suas preferências (tema, idade, língua, última época), como se explica mais abaixo.', 'O site guarda neste navegador quais as histórias que já leu; esta informação não é enviada a ninguém.'],
+          paragraphs: ['O site não usa cookies. A contagem de visitas funciona sem eles e o navegador guarda apenas as suas preferências (tema, idade, língua, última época), como se explica mais abaixo.', 'O site guarda neste navegador quais as histórias que já leu e a data da sua última visita (para assinalar as histórias novas); esta informação não é enviada a ninguém.'],
           action: 'reset-read',
         },
         {
@@ -343,7 +343,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'O que fica guardado no seu navegador',
           paragraphs: [
-            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta, a última história de «Surpreenda-me» e as histórias que marcou como lidas. Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para aceder à localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
+            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta, a última história de «Surpreenda-me», as histórias que marcou como lidas e a data da última visita. Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para aceder à localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
           ],
         },
         {
@@ -389,7 +389,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'cookies',
           heading: 'Cookies',
-          paragraphs: ['This site does not use cookies. Visit counting works without them, and your browser stores only your settings (theme, age, language, last era), as explained below.', 'The site remembers in this browser which stories you have read; this is never sent anywhere.'],
+          paragraphs: ['This site does not use cookies. Visit counting works without them, and your browser stores only your settings (theme, age, language, last era), as explained below.', 'The site remembers in this browser which stories you have read and the date of your last visit (to mark new stories); this is never sent anywhere.'],
           action: 'reset-read',
         },
         {
@@ -407,7 +407,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'What’s stored in your browser',
           paragraphs: [
-            'So that the site remembers your choices, your browser saves: language, colour theme, the age you chose (“Age”), the last era you opened, the last story from “Surprise me,” and the stories you marked as read. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me,” your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
+            'So that the site remembers your choices, your browser saves: language, colour theme, the age you chose (“Age”), the last era you opened, the last story from “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me,” your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
         },
         {
@@ -453,7 +453,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'cookies',
           heading: 'Cookie',
-          paragraphs: ['Сайт не использует cookie. Подсчёт посещений идёт без них, а в браузере хранятся только ваши настройки (тема, возраст, язык, последняя эпоха), подробнее ниже.', 'Сайт запоминает в этом браузере, какие истории вы уже прочитали, и никуда это не отправляет.'],
+          paragraphs: ['Сайт не использует cookie. Подсчёт посещений идёт без них, а в браузере хранятся только ваши настройки (тема, возраст, язык, последняя эпоха), подробнее ниже.', 'Сайт запоминает в этом браузере, какие истории вы уже прочитали и когда были здесь в последний раз (чтобы отметить новые истории), и никуда это не отправляет.'],
           action: 'reset-read',
         },
         {
@@ -471,7 +471,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'Что хранится у вас в браузере',
           paragraphs: [
-            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, выбранный возраст («Возраст»), последнюю открытую эпоху, последнюю историю из «Удиви меня» и отметки о прочитанных историях. Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
+            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, выбранный возраст («Возраст»), последнюю открытую эпоху, последнюю историю из «Удиви меня» отметки о прочитанных историях и дату последнего визита. Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
           ],
         },
         {

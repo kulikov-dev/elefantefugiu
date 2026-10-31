@@ -60,6 +60,8 @@
     "intro": "That is where the name comes from: O Elefante Fugiu, “the elephant ran away.” Stories from Portugal’s past, each a one-minute read tied to a place you can visit.",
     "cta_read": "Read in a minute",
     "continue": "Continue where you left off: {name} →",
+    "new_since": "Since your last visit: {text}",
+    "new_era": "new era",
     "open_map": "Open the map",
     "showcase_heading": "Where to start",
     "timeline_label": "All eras, in order",
@@ -151,6 +153,7 @@
     "report_error": "Found a mistake?",
     "read": "read",
     "read_reset": "Reset read marks",
+    "new": "New",
     "read_reset_done": "Marks reset.",
     "nearby": "Nearby",
     "open_on_map": "Open on map",
@@ -198,7 +201,13 @@
     "places_one": "{n} place where it happened",
     "places_other": "{n} places where it happened",
     "epochs_more_one": "{n} more era in the works",
-    "epochs_more_other": "{n} more eras in the works"
+    "epochs_more_other": "{n} more eras in the works",
+    "new_stories_one": "{n} new story",
+    "new_stories_other": "{n} new stories",
+    "new_plus_one": "+{n} new",
+    "new_plus_other": "+{n} new",
+    "new_epochs_one": "{n} new era",
+    "new_epochs_other": "{n} new eras"
   },
   "map": {
     "home": "All of Portugal",

@@ -1,0 +1,42 @@
+---
+// The mark "New" on a story published since the reader's last visit and not read yet (src/scripts/new-marks.ts sets data-new on the card or
+// list item that holds it: data-story + data-published). It stands in the place of the "read" tick (the two are never shown together: the script
+// does not mark a story that is read), and like the tick it is always in the page, only hidden (visibility), so the card keeps its height.
+// Without JavaScript it stays hidden.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+<span class="new-mark">{t(lang, 'ui.new')}</span>
+
+<style is:global>
+  .new-mark {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    padding-inline: var(--space-2);
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    line-height: var(--new-chip-height);
+    text-transform: uppercase;
+    visibility: hidden;
+  }
+
+  [data-new] > .new-mark,
+  [data-new] .new-mark {
+    visibility: visible;
+  }
+
+  /* Read and new never go together. */
+  [data-read] .new-mark {
+    visibility: hidden;
+  }
+</style>

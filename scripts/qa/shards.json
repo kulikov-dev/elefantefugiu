@@ -33,7 +33,8 @@
   "map-tools-variant": 3,
   "mascot": 11,
   "mascot-variant": 3,
-  "transitions": 20
+  "transitions": 20,
+  "newmarks": 150
  },
  "shards": [
   [
@@ -64,7 +65,8 @@
    "azulejo-variant",
    "family-controls",
    "map-basic",
-   "mascot-variant"
+   "mascot-variant",
+   "newmarks"
   ],
   [
    "map-limit-12",

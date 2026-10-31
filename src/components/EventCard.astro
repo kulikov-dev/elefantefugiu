@@ -11,6 +11,7 @@ import TagLabel from './TagLabel.astro';
 import ThreadChip from './ThreadChip.astro';
 import Pic from './Pic.astro';
 import ReadMark from './ReadMark.astro';
+import NewMark from './NewMark.astro';
 import type { PictureData } from '../lib/pictures';
 import { claimStoryName } from '../lib/transitions';
 
@@ -56,10 +57,12 @@ const WIDE_SIZES = '(min-width: 72rem) 326px, (min-width: 52rem) calc((100vw - 6
   class:list={['ecard', `ecard--${variant}`, `ecard--${event.level}`, { 'ecard--toned': toneEpoch }]}
   id={`c-${event.id}`}
   data-story={event.id}
+  data-published={event.published}
+  data-epoch={event.epoch}
   data-flash={isFlashMoment(event) ? '' : undefined}
   style={toneEpoch ? `--tone: var(--tone-${toneEpoch}, var(--epoch-primary))` : undefined}
 >
-  <span class="ecard__read"><ReadMark lang={lang} /></span>
+  <span class="ecard__read"><ReadMark lang={lang} /><NewMark lang={lang} /></span>
   <div class="ecard__head">
     {
       picture && (
@@ -224,6 +227,14 @@ const WIDE_SIZES = '(min-width: 72rem) 326px, (min-width: 52rem) calc((100vw - 6
     inset-block-start: var(--space-2);
     inset-inline-end: var(--space-2);
     z-index: 1;
+    display: grid;
+    align-items: center;
+    justify-items: end;
+  }
+
+  /* The tick and the mark "New" take the same place (one grid cell): they are never shown together. */
+  .ecard__read > :global(*) {
+    grid-area: 1 / 1;
   }
 
   .ecard__read :global(.read-mark) {
@@ -247,7 +258,7 @@ const WIDE_SIZES = '(min-width: 72rem) 326px, (min-width: 52rem) calc((100vw - 6
   }
 
   .ecard__meta {
-    padding-inline-end: var(--space-5);
+    padding-inline-end: var(--new-chip-room);
   }
 
   .ecard__heavy {

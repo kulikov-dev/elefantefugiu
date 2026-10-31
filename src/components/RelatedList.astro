@@ -3,12 +3,13 @@
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 import ReadMark from './ReadMark.astro';
+import NewMark from './NewMark.astro';
 
 interface Props {
   lang: Lang;
   /** Heading id; must differ between the variants of one page. */
   headingId?: string;
-  items: { id: string; title: string; href: string; meta: string; minAge: string; sensitive: boolean }[];
+  items: { id: string; title: string; href: string; meta: string; minAge: string; sensitive: boolean; published: string; epoch: string }[];
 }
 
 const { lang, items, headingId = 'related-title' } = Astro.props;
@@ -20,10 +21,10 @@ const { lang, items, headingId = 'related-title' } = Astro.props;
       <ul>
         {
           items.map((item) => (
-            <li data-min-age={item.minAge} data-sensitive={String(item.sensitive)} data-story={item.id}>
+            <li data-min-age={item.minAge} data-sensitive={String(item.sensitive)} data-story={item.id} data-published={item.published} data-epoch={item.epoch}>
               <a href={item.href}>{item.title}</a>
               <span class="related__meta">{item.meta}</span>
-              <ReadMark lang={lang} />
+              <span class="related__slot"><ReadMark lang={lang} /><NewMark lang={lang} /></span>
             </li>
           ))
         }
@@ -55,6 +56,17 @@ const { lang, items, headingId = 'related-title' } = Astro.props;
 
   a {
     font-weight: 600;
+  }
+
+  /* The "read" tick and the mark "New" take the same place (a grid cell), so a row never changes its height. */
+  .related__slot {
+    display: inline-grid;
+    margin-inline-start: auto;
+  }
+
+  .related__slot > :global(*) {
+    grid-area: 1 / 1;
+    justify-self: end;
   }
 
   .related__meta {

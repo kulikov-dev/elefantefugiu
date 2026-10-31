@@ -8,7 +8,7 @@ import HomeMapLine from '../components/HomeMapLine.astro';
 import Mascot from '../components/Mascot.astro';
 import StartCard from '../components/StartCard.astro';
 import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
-import { plural, t } from '../i18n';
+import { plural, pluralForms, t } from '../i18n';
 import { epochHasTestText, epochYearsText, threadSections } from '../lib/epochs';
 import { epochTiles, firstMvpEpoch, homeStartStory } from '../lib/home';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, groupVariants, isVisibleInMode, zeroModes } from '../lib/family';
@@ -54,6 +54,9 @@ const noindex = site.featured.some((e) => e.placeholder) || ready.some((tile) =>
 
 // "Left off": the epochs with a page, by id, for the script that knows the last epoch of the reader.
 const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, { href: epochHref(lang, tile.epoch.slug[lang]), name: tile.epoch.name[lang] }]));
+// "New since your last visit" (src/scripts/new-marks.ts): the stories with the day they were published and their age data, so the script counts
+// only what the family mode shows.
+const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e.published, ...ageInfoOf(e) }));
 ---
 <BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={{ image: HOME_PREVIEW }}>
   <div class="home">
@@ -66,6 +69,20 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
       data-targets={JSON.stringify(continueTargets)}
       hidden
     >{t(lang, 'home.continue').replace('{name}', firstEpoch?.name[lang] ?? '')}</a>
+
+    <!-- "Since your last visit: N new stories" with the epochs (the script fills and shows it; nothing when N is 0, on a first visit, without storage). -->
+    <p
+      class="new-line"
+      data-new-line
+      data-template={t(lang, 'home.new_since')}
+      data-forms={JSON.stringify(pluralForms(lang, 'plural.new_stories'))}
+      data-epoch-forms={JSON.stringify(pluralForms(lang, 'plural.new_plus'))}
+      data-era-forms={JSON.stringify(pluralForms(lang, 'plural.new_epochs'))}
+      data-era-text={t(lang, 'home.new_era')}
+      data-targets={JSON.stringify(continueTargets)}
+      hidden
+    ></p>
+    <script type="application/json" data-new-data set:html={JSON.stringify(newData)} />
 
     <section class="hero" aria-labelledby="home-title">
       <div class="hero__text">
@@ -117,6 +134,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
                     {epoch.theme && <span class="timeline__theme">{epoch.theme[lang]}</span>}
                     <span class="timeline__count">
                       {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+                      <span class="timeline__new" data-new-epoch={epoch.id} hidden></span>
                     </span>
                   </a>
                 </li>
@@ -421,6 +439,27 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 
   .timeline__count {
     color: var(--color-ink-muted);
+  }
+
+  /* "+N new" after the number of stories of an epoch (the script shows it). */
+  .timeline__new {
+    color: var(--color-accent-strong);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .timeline__new::before {
+    content: ' · ';
+    font-weight: 400;
+  }
+
+  /* ---- the line "Since your last visit: N new stories" ---- */
+  .new-line {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--epoch-line);
+    border-radius: var(--radius-md);
+    background: var(--color-accent-tint);
+    font-size: var(--text-sm);
   }
 
   /* An epoch that is not ready: paler than the others (thin name, a hollow dot, a faint line). */

@@ -60,6 +60,8 @@
     "intro": "Daí o nome. Histórias do passado de Portugal: cada uma lê-se num minuto e está ligada a um lugar que pode visitar.",
     "cta_read": "Ler num minuto",
     "continue": "Continuar onde parou: {name} →",
+    "new_since": "Desde a sua última visita: {text}",
+    "new_era": "nova época",
     "open_map": "Abrir o mapa",
     "showcase_heading": "Por onde começar",
     "timeline_label": "Todas as épocas, por ordem",
@@ -152,6 +154,7 @@
     "read": "lida",
     "read_reset": "Repor as marcas de leitura",
     "read_reset_done": "Marcas repostas.",
+    "new": "Novo",
     "nearby": "Mais perto",
     "open_on_map": "Ver no mapa",
     "surprise": "Surpreenda-me",
@@ -198,7 +201,13 @@
     "places_one": "{n} lugar onde aconteceu",
     "places_other": "{n} lugares onde aconteceu",
     "epochs_more_one": "Mais {n} época em preparação",
-    "epochs_more_other": "Mais {n} épocas em preparação"
+    "epochs_more_other": "Mais {n} épocas em preparação",
+    "new_stories_one": "{n} história nova",
+    "new_stories_other": "{n} histórias novas",
+    "new_plus_one": "+{n} nova",
+    "new_plus_other": "+{n} novas",
+    "new_epochs_one": "{n} época nova",
+    "new_epochs_other": "{n} épocas novas"
   },
   "map": {
     "home": "Portugal inteiro",

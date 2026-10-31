@@ -94,6 +94,8 @@ const relatedVariants = groupVariants(
       meta: `${formatYear(e, lang)} · ${distanceText(km)}`,
       minAge: familyAttrs(e)['data-min-age'],
       sensitive: familyAttrs(e)['data-sensitive'] === 'true',
+      published: e.published,
+      epoch: e.epoch,
     })),
   (items) => items.map((i) => i.id).join('|'),
 );

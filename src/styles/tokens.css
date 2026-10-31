@@ -166,6 +166,8 @@
   /* Chips inside a feed card: a small target (24 px is the WCAG minimum, 32 px is comfortable). */
   --chip-height-compact: 1.75rem;
   --read-chip: 1.5rem; /* the round "read" tick in the corner of a card */
+  --new-chip-height: 1.25rem; /* the mark "New" (src/components/NewMark.astro) */
+  --new-chip-room: 4.5rem; /* room for it at the end of the first line of a card */
   /* The column of years on the timeline of an epoch page. */
   --timeline-year-width: 5rem; /* "séc. I–II" and "I–III вв." stay on one line (no break at the dash) */
   /* The year is lifted so that its middle is level with the dot of its card. */

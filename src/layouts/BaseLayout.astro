@@ -37,6 +37,7 @@ import JsonLd from '../components/JsonLd.astro';
 import { graph, type Node } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 import { speculationRules } from '../lib/transitions';
+import { ageInfoOf, isVisibleInMode } from '../lib/family';
 
 interface Props {
   lang: Lang;
@@ -111,7 +112,17 @@ const previewAlt =
           ? t(lang, 'site.preview_alt_thread')
           : undefined);
 // Thread ids the head script may put on <html data-fio> (the epoch page filter reads them before the first paint).
-const { threads: allThreads } = await loadSite();
+const { threads: allThreads, events: allEvents } = await loadSite();
+// "New since your last visit": the day of the earliest story of every epoch for each family mode, so a page can tell a new epoch (all its stories are
+// new) from an epoch with some new stories (src/scripts/new-marks.ts).
+const epochFirsts: Record<string, Record<string, string>> = {};
+for (const e of allEvents) {
+  for (const mode of ['off', 'all', '12'] as const) {
+    if (!isVisibleInMode(ageInfoOf(e), mode)) continue;
+    const byMode = (epochFirsts[e.epoch] ??= {});
+    if (byMode[mode] === undefined || e.published < byMode[mode]) byMode[mode] = e.published;
+  }
+}
 const azulejoCss = azulejoRule({ bussola, canto, estrela, no, 'no-v': noV, onda, 'onda-v': ondaV, pegada, 'pegada-v': pegadaV, rombo, rosa, tapete, xadrez, 'xadrez-v': xadrezV }, epoch);
 // Structured data: on every indexable page (not on noindex pages and not on the 404 page).
 const jsonLd = noindex || allLangs ? undefined : graph(schemaContext(lang, Astro.site), schema ?? []);
@@ -186,6 +197,8 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <script>import '../scripts/email';</script>
     <script>import '../scripts/scroll-fade';</script>
     <script>import '../scripts/read-marks';</script>
+    <script type="application/json" data-epoch-firsts set:html={JSON.stringify(epochFirsts)} />
+    <script>import '../scripts/new-marks';</script>
     <slot name="end" />
     {epoch && <script>import '../scripts/last-epoch';</script>}
     <script is:inline>
