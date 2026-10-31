@@ -35,4 +35,5 @@ export const SUITES = [
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['variant'], variant: true, about: 'the same for the dots plus the ship scale (a fixture card): the real site has no ship card' },
   { name: 'transitions', script: 'transitions.mjs', about: 'page transitions: the @view-transition rule, unique names, none under reduced motion, speculation rules (prefetch only), one counter hit per move' },
   { name: 'newmarks', script: 'newmarks.mjs', about: 'new since the last visit: first visit, return, read, same session, family mode, no JS, blocked storage, reset on the legal page' },
+  { name: 'likes', script: 'like.mjs', about: 'the button "I liked it": only with JS, in one line with Share down to 320 px, the link below does not move, one counter event per reader and story' },
 ];

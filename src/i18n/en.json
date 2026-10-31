@@ -150,6 +150,8 @@
     "family_mode": "Age",
     "age_all": "All ages",
     "share": "Share",
+    "like": "I liked it",
+    "like_thanks": "Thanks!",
     "report_error": "Found a mistake?",
     "read": "read",
     "read_reset": "Reset read marks",

@@ -26,6 +26,8 @@
   --color-surface-hover: light-dark(#f1eadb, #26211b);
   /* A neutral wash for blocks inside an epoch (the same under every epoch palette). */
   --color-accent-tint: light-dark(#efe7d6, #221d17);
+  /* The background of a button that has been pressed ("Thanks!" of the like button): its own shade, clearly paler or lighter than the page in both themes. */
+  --color-pressed: light-dark(#e6d9bd, #44352a);
 
   /* Heavy-topic marker (frame, text on tint). */
   --color-heavy-border: light-dark(#7a2e0e, #e58a68);
@@ -165,6 +167,7 @@
   --timeline-line: 2px;
   /* Chips inside a feed card: a small target (24 px is the WCAG minimum, 32 px is comfortable). */
   --chip-height-compact: 1.75rem;
+  --actions-width: 26rem; /* "Share" and "I liked it" side by side at the end of a story */
   --read-chip: 1.5rem; /* the round "read" tick in the corner of a card */
   --new-chip-height: 1.25rem; /* the mark "New" (src/components/NewMark.astro) */
   --new-chip-room: 4.5rem; /* room for it at the end of the first line of a card */
@@ -434,6 +437,7 @@
     --color-overlay: rgb(251 248 241 / 0.96);
     --color-surface-hover: #f1eadb;
     --color-accent-tint: #efe7d6;
+    --color-pressed: #e6d9bd;
     --color-heavy-border: #7a2e0e;
     --color-heavy-bg: #fdeee6;
     --color-heavy-ink: #5e2108;

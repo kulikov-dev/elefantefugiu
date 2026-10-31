@@ -325,7 +325,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'cookies',
           heading: 'Cookies',
-          paragraphs: ['O site não usa cookies. A contagem de visitas funciona sem eles e o navegador guarda apenas as suas preferências (tema, idade, língua, última época), como se explica mais abaixo.', 'O site guarda neste navegador quais as histórias que já leu e a data da sua última visita (para assinalar as histórias novas); esta informação não é enviada a ninguém.'],
+          paragraphs: ['O site não usa cookies. A contagem de visitas funciona sem eles e o navegador guarda apenas as suas preferências (tema, idade, língua, última época), como se explica mais abaixo.', 'O site guarda neste navegador quais as histórias que já leu e a data da sua última visita (para assinalar as histórias novas); esta informação não é enviada a ninguém. O botão «Gostei» envia para as estatísticas um evento anónimo «história de que gostaram», sem cookies nem dados pessoais.'],
           action: 'reset-read',
         },
         {
@@ -389,7 +389,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'cookies',
           heading: 'Cookies',
-          paragraphs: ['This site does not use cookies. Visit counting works without them, and your browser stores only your settings (theme, age, language, last era), as explained below.', 'The site remembers in this browser which stories you have read and the date of your last visit (to mark new stories); this is never sent anywhere.'],
+          paragraphs: ['This site does not use cookies. Visit counting works without them, and your browser stores only your settings (theme, age, language, last era), as explained below.', 'The site remembers in this browser which stories you have read and the date of your last visit (to mark new stories); this is never sent anywhere. The “I liked it” button sends an anonymous “story liked” event to the statistics, with no cookies and no personal data.'],
           action: 'reset-read',
         },
         {
@@ -453,7 +453,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'cookies',
           heading: 'Cookie',
-          paragraphs: ['Сайт не использует cookie. Подсчёт посещений идёт без них, а в браузере хранятся только ваши настройки (тема, возраст, язык, последняя эпоха), подробнее ниже.', 'Сайт запоминает в этом браузере, какие истории вы уже прочитали и когда были здесь в последний раз (чтобы отметить новые истории), и никуда это не отправляет.'],
+          paragraphs: ['Сайт не использует cookie. Подсчёт посещений идёт без них, а в браузере хранятся только ваши настройки (тема, возраст, язык, последняя эпоха), подробнее ниже.', 'Сайт запоминает в этом браузере, какие истории вы уже прочитали и когда были здесь в последний раз (чтобы отметить новые истории), и никуда это не отправляет. Кнопка «Понравилось» отправляет в статистику анонимное событие «история понравилась», без cookie и личных данных.'],
           action: 'reset-read',
         },
         {

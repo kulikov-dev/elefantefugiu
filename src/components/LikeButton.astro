@@ -1,0 +1,50 @@
+---
+// "I liked it": a small secondary button at the end of a story, beside "Share" (src/scripts/like.ts, rules in src/lib/like.ts). It starts hidden and the
+// script shows it, so without JavaScript there is no button. A press sends one anonymous event to GoatCounter and the button turns into "Thanks!";
+// there is no number on the page. The icon is a heart drawn like the other icons of the site (a stroke, round ends); pressed, it is filled.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  /** The id of the story: the same in every language, so the pages of a story add up in the counter. */
+  id: string;
+  /** The title of the story for the counter. */
+  title: string;
+}
+
+const { lang, id, title } = Astro.props;
+---
+<button class="button button--secondary like" type="button" data-like={id} data-title={title} data-thanks={t(lang, 'ui.like_thanks')} aria-pressed="false" hidden>
+  <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
+    <path d="M10 16.6s-6.4-3.9-6.4-8.5a3.5 3.5 0 0 1 6.4-1.9 3.5 3.5 0 0 1 6.4 1.9c0 4.6-6.4 8.5-6.4 8.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+  </svg>
+  <span data-like-label>{t(lang, 'ui.like')}</span>
+</button>
+<script>
+  import '../scripts/like';
+</script>
+
+<style>
+  .like {
+    gap: var(--space-2);
+    white-space: nowrap;
+  }
+
+  /* 320 px: "ПОНРАВИЛОСЬ" with the heart just fits in half a line when the gap between them is smaller. */
+  @media (max-width: 26rem) {
+    .like {
+      gap: var(--space-1);
+    }
+  }
+
+  /* Pressed: its own shade of background (a pair for each theme), the heart is filled; nothing moves and the size does not change. */
+  .like[aria-pressed='true'] {
+    background: var(--color-pressed);
+    color: var(--color-text);
+  }
+
+  .like[aria-pressed='true'] svg path {
+    fill: currentColor;
+  }
+</style>

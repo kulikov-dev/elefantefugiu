@@ -319,7 +319,7 @@ for (const ev of events) {
       if (!/<a [^>]*href="https?:\/\/[^"]+"/.test(credit) || !/(OpenStreetMap|©|&copy;)/i.test(credit)) fail('the mini-map needs the credit of the tiles with a link (© OpenStreetMap contributors)');
     }
     // The small link stays in view under "Share", not inside the folded "More" layer.
-    const actionsBlock = html.match(/<div class="actions"[\s\S]*?<\/div>/)?.[0] ?? '';
+    const actionsBlock = html.match(/<div class="actions"[\s\S]*?<p class="report-link"[\s\S]*?<\/p>/)?.[0] ?? '';
     if (!/(corrigir|report)\/\?url=/.test(actionsBlock) || !/data-share-button/.test(actionsBlock)) fail('the report link must stand under the Share button, outside "More"');
     if (/<details id="detalhes"[\s\S]*?(corrigir|report)\/\?url=[\s\S]*?<\/details>/.test(html)) fail('the report link must not be inside "More"');
     if (!has(/rel="(prev|next)"/) && events.filter((e) => e.epoch === ev.epoch).length > 1) fail('previous/next links are missing');
