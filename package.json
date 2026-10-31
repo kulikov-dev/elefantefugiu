@@ -19,6 +19,7 @@
     "test": "astro check && node --import tsx --test \"tests/**/*.test.ts\" && vitest run && tsx scripts/check-lang.ts && tsx scripts/check-ai-tells.ts",
     "check:cards": "node scripts/check-cards.mjs",
     "check:og": "node scripts/check-og.mjs",
+    "schedule": "node scripts/schedule.mjs",
     "make:og": "node scripts/make-og.mjs",
     "check:weight": "node scripts/check-weight.mjs",
     "check:listings": "node scripts/check-listings.mjs",
