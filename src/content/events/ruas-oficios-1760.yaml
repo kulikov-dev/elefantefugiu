@@ -131,11 +131,11 @@ placeholder: false
 ru_ready: true
 lang_review:
   pt:
-    date: '2026-10-28'
-    hash: '916599c13cae'
+    date: '2026-10-31'
+    hash: 'fcf8da11174c'
   en:
-    date: '2026-10-28'
-    hash: '11a02efc401d'
+    date: '2026-10-31'
+    hash: 'a78f744502be'
   ru:
-    date: '2026-10-28'
-    hash: 'e41f2d98a82e'
+    date: '2026-10-31'
+    hash: 'f1e3b534059d'

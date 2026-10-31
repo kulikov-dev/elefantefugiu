@@ -57,14 +57,14 @@
     }
   },
   "epoch/avis-e-descobrimentos/en": {
-    "date": "2026-10-29",
-    "hash": "e177fa7af912",
+    "date": "2026-10-31",
+    "hash": "603e878dd940",
     "fields": {
       "slug": "60406320",
       "name": "c0281cdf",
       "theme": "d13296d8",
       "fallback_image.alt": "2d1be2aa",
-      "fallback_image.caption": "0b8c76b1",
+      "fallback_image.caption": "74833c49",
       "description": "cea91d2b",
       "intro": "c1c8bb3d",
       "then_now[0].then_big": "8a88d2f9",
@@ -79,14 +79,14 @@
     }
   },
   "epoch/avis-e-descobrimentos/pt": {
-    "date": "2026-10-29",
-    "hash": "75f558cdfd58",
+    "date": "2026-10-31",
+    "hash": "620f409154d8",
     "fields": {
       "slug": "da9c8cc1",
       "name": "6a50744d",
       "theme": "e27e699f",
       "fallback_image.alt": "fdaa8e81",
-      "fallback_image.caption": "25df0854",
+      "fallback_image.caption": "b365c135",
       "description": "ce4a6b62",
       "intro": "1ef063a7",
       "then_now[0].then_big": "7baeaa6b",
@@ -101,14 +101,14 @@
     }
   },
   "epoch/avis-e-descobrimentos/ru": {
-    "date": "2026-10-29",
-    "hash": "459bab8b25cf",
+    "date": "2026-10-31",
+    "hash": "19f41255acd3",
     "fields": {
       "slug": "d0d889e4",
       "name": "813b7aea",
       "theme": "ce4d71e4",
       "fallback_image.alt": "44d9bab2",
-      "fallback_image.caption": "0bca3d06",
+      "fallback_image.caption": "0cebbf1b",
       "description": "e747ba72",
       "intro": "137cb084",
       "then_now[0].then_big": "87c27e06",
@@ -312,14 +312,14 @@
     }
   },
   "epoch/pombal-e-terramoto/en": {
-    "date": "2026-10-29",
-    "hash": "0edf6e35b923",
+    "date": "2026-10-31",
+    "hash": "e75dd8dcee17",
     "fields": {
       "slug": "aeed9993",
       "name": "f0e490ea",
       "theme": "aa0af79a",
       "fallback_image.alt": "429fac1c",
-      "fallback_image.caption": "93ceda57",
+      "fallback_image.caption": "d27d9baa",
       "description": "3149f232",
       "intro": "e9cd49ae",
       "then_now[0].then_big": "7acc684a",
@@ -334,14 +334,14 @@
     }
   },
   "epoch/pombal-e-terramoto/pt": {
-    "date": "2026-10-29",
-    "hash": "5238e6dd09c5",
+    "date": "2026-10-31",
+    "hash": "7af665828950",
     "fields": {
       "slug": "16c3c48b",
       "name": "d3c3d441",
       "theme": "03e6ae70",
       "fallback_image.alt": "378efb26",
-      "fallback_image.caption": "a50ad5a9",
+      "fallback_image.caption": "68caa762",
       "description": "f076676e",
       "intro": "3db885ca",
       "then_now[0].then_big": "7acc684a",
@@ -356,14 +356,14 @@
     }
   },
   "epoch/pombal-e-terramoto/ru": {
-    "date": "2026-10-29",
-    "hash": "5693fea59be0",
+    "date": "2026-10-31",
+    "hash": "0d45b5caa9f5",
     "fields": {
       "slug": "c4b9b8fd",
       "name": "51a3d5fc",
       "theme": "9752aa63",
       "fallback_image.alt": "41f467e7",
-      "fallback_image.caption": "53634f18",
+      "fallback_image.caption": "badd2438",
       "description": "9dc90072",
       "intro": "28b5fd99",
       "then_now[0].then_big": "7acc684a",
@@ -771,12 +771,12 @@
     }
   },
   "thread/engenho/en": {
-    "date": "2026-10-28",
-    "hash": "12fdfa2adbde",
+    "date": "2026-10-31",
+    "hash": "b2dc782589d2",
     "fields": {
       "slug": "8c85b663",
       "name": "729bb48d",
-      "description": "9e6a8722"
+      "description": "dff87b3f"
     }
   },
   "thread/engenho/pt": {

@@ -110,10 +110,10 @@ ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
-    hash: 'bc10e348b952'
+    hash: '7598e8bc8c44'
   en:
     date: '2026-10-31'
-    hash: '713ca382985a'
+    hash: '1b4deb8e4217'
   ru:
     date: '2026-10-31'
-    hash: '9df2867a05d0'
+    hash: '1e2a30a7c569'
