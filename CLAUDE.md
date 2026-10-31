@@ -40,6 +40,16 @@ When a prompt says to show something and wait for "ok" (or approval) before goin
 
 Branch, not main: branch -> push -> QA full on the branch (`gh workflow run qa-full.yml --ref <branch>`, or Actions -> QA full -> Run workflow -> choose the branch; `qa-full.yml` has `workflow_dispatch` and checks out the chosen ref) -> `gh run watch` / `gh run view <id> --log-failed` -> merge into main only after it is green.
 
+## Economy mode (the default)
+
+Follow this by default; it narrows the rules above (the owner can lift any point in a prompt).
+
+- **Checks before a commit:** only `npm run build` and `npm test` (`astro check` is inside). Do not run QA suites locally: CI runs them after the push. Exceptions: the owner asks directly, or CI failed and one suite has to be reproduced. (This replaces "run the affected QA suites locally before pushing" above.)
+- **Screenshots:** only the place that changed, not the whole page; by default 360 px light and 1280 px dark; other combinations only when asked.
+- **Docs:** one or two lines per change in `docs/STATE.md`; `docs/spec.md` only when behaviour changed; `README.md` only when how to use the project changed.
+- **Report:** up to 15 lines: what was done, what was checked, questions. No retelling of the task, no logs.
+- **Small tasks** (a text, a colour, a spacing) when the owner said "no ok" ("без ок"): do it at once: edit, build, test, commit, push. "Show and wait for OK" above still applies whenever the owner did not say that.
+
 ## Architecture
 
 - **Content** is YAML in `src/content/` (`events/<id>.yaml`, one per event, file name = id; plus `epochs`, `threads`, `featured`, `ui`). Zod schemas live in `src/data/schemas.ts` and are shared by Astro collections (`src/content.config.ts`) and `scripts/check-data.ts`. Interface strings are NOT content: they are in `src/i18n/pt.json` / `en.json` (the build requires identical keys).
