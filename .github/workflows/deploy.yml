@@ -52,11 +52,14 @@ jobs:
       # data checks, the tests, the build and then every postbuild check (sitemap, previews, links, cards, listings, weight, tokens,
       # ru, mascot, published, email, https, schema). If anything fails here, the deploy job does not run.
       # The browser suites are in qa-smoke.yml (every push and pull request) and qa-full.yml (weekly and by hand).
+      # withastro/action has no node-version-file input: the version is read from .nvmrc, so every workflow runs the same Node.
+      - name: Node version of .nvmrc
+        id: nvm
+        run: echo "version=$(tr -d 'v \r\n' < .nvmrc)" >> "$GITHUB_OUTPUT"
       - name: Build and upload your site output
         uses: withastro/action@v6
         with:
-          # The same Node as the steps above and as .nvmrc (the package needs 22.12 or newer).
-          node-version: 22
+          node-version: ${{ steps.nvm.outputs.version }}
 
   deploy:
     needs: build

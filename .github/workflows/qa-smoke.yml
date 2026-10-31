@@ -32,6 +32,9 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            scripts/qa/package-lock.json
       - run: npm ci
       # Only the site build: the checks of the build itself are run by the deploy workflow.
       - name: Build
