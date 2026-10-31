@@ -4,11 +4,13 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { parseDocument } from 'yaml';
-import { LANG_LIST, collectTexts, hashOf, root, units, type TextLang } from './lang-texts';
+import { LANG_LIST, collectTexts, fieldHashes, hashOf, root, units, type TextLang } from './lang-texts';
 
 export interface Mark {
   date: string;
   hash: string;
+  /** Hash of every field of the unit when it was read (units kept in reviewed.json only), so that `lang:pending` can name the keys that changed. */
+  fields?: Record<string, string>;
 }
 export const REVIEWED_JSON = join(root, 'docs/language-review/reviewed.json');
 
@@ -41,6 +43,14 @@ export interface Pending {
   unit: string;
   lang: TextLang;
   why: 'not read' | 'changed after reading';
+  /** Fields (keys) that are new, changed or gone since the mark; undefined when the mark has no per-field record. */
+  changed?: string[];
+}
+
+/** The fields that differ between the record of a mark and the texts now. */
+export function changedFields(before: Record<string, string>, now: Record<string, string>): string[] {
+  const keys = new Set([...Object.keys(before), ...Object.keys(now)]);
+  return [...keys].filter((k) => before[k] !== now[k]).sort();
 }
 
 /** What is not read yet or changed after it was read. */
@@ -50,7 +60,8 @@ export function pending(): Pending[] {
   return units(items).flatMap(({ unit, lang }): Pending[] => {
     const mark = marks.get(`${unit}/${lang}`);
     if (!mark) return [{ unit, lang, why: 'not read' as const }];
-    return mark.hash === hashOf(items, unit, lang) ? [] : [{ unit, lang, why: 'changed after reading' as const }];
+    if (mark.hash === hashOf(items, unit, lang)) return [];
+    return [{ unit, lang, why: 'changed after reading' as const, ...(mark.fields ? { changed: changedFields(mark.fields, fieldHashes(items, unit, lang)) } : {}) }];
   });
 }
 
@@ -62,10 +73,10 @@ export function mark(langs: readonly TextLang[], date: string, only: (unit: stri
   let n = 0;
   for (const { unit, lang } of units(items)) {
     if (!langs.includes(lang) || !only(unit)) continue;
-    const m = { date, hash: hashOf(items, unit, lang) };
+    const m: Mark = { date, hash: hashOf(items, unit, lang) };
     n += 1;
     if (unit.startsWith('event/')) stories.set(unit, { ...stories.get(unit), [lang]: m });
-    else json[`${unit}/${lang}`] = m;
+    else json[`${unit}/${lang}`] = { ...m, fields: fieldHashes(items, unit, lang) };
   }
   const sorted = Object.fromEntries(Object.entries(json).sort(([a], [b]) => a.localeCompare(b)));
   writeFileSync(REVIEWED_JSON, `${JSON.stringify(sorted, null, 2)}\n`);
@@ -86,5 +97,26 @@ export function mark(langs: readonly TextLang[], date: string, only: (unit: stri
     const out = `${stripped.replace(/\n*$/, '\n')}${block}\n`;
     writeFileSync(file, out.replace(/\n/g, nl));
   }
+  return n;
+}
+
+/**
+ * Adds the per-field record to the marks in reviewed.json that are still valid (the text has not changed since they were made) and have none;
+ * date and hash stay as they are, so nothing becomes "read" that was not. Returns how many marks got a record.
+ */
+export function recordFields(): number {
+  const items = collectTexts();
+  const json = readJson();
+  let n = 0;
+  for (const [key, m] of Object.entries(json)) {
+    const slash = key.lastIndexOf('/');
+    const unit = key.slice(0, slash);
+    const lang = key.slice(slash + 1) as TextLang;
+    if (m.fields || m.hash !== hashOf(items, unit, lang)) continue;
+    json[key] = { ...m, fields: fieldHashes(items, unit, lang) };
+    n += 1;
+  }
+  const sorted = Object.fromEntries(Object.entries(json).sort(([a], [b]) => a.localeCompare(b)));
+  writeFileSync(REVIEWED_JSON, `${JSON.stringify(sorted, null, 2)}\n`);
   return n;
 }

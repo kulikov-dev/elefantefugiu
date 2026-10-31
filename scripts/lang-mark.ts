@@ -2,9 +2,14 @@
 // Run it only after the corrections of that language are committed.
 // Usage: npx tsx scripts/lang-mark.ts <pt|en|ru|all> [unit-prefix ...] [--date=YYYY-MM-DD]
 import { LANG_LIST, type TextLang } from './lib/lang-texts';
-import { mark } from './lib/lang-review';
+import { mark, recordFields } from './lib/lang-review';
 
 const args = process.argv.slice(2);
+if (args.includes('--fields')) {
+  // The per-field record for the marks that are still valid; nothing becomes "read" that was not.
+  console.log(`Per-field record added to ${recordFields()} mark(s).`);
+  process.exit(0);
+}
 const date = args.find((a) => a.startsWith('--date='))?.slice('--date='.length) ?? new Date().toISOString().slice(0, 10);
 const [which, ...prefixes] = args.filter((a) => !a.startsWith('--'));
 if (!which || (which !== 'all' && !(LANG_LIST as readonly string[]).includes(which))) {

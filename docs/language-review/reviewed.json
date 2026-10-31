@@ -1,39 +1,126 @@
 {
   "epoch/atualidade-ue-e-emigracao/en": {
     "date": "2026-10-27",
-    "hash": "8db90becfe78"
+    "hash": "8db90becfe78",
+    "fields": {
+      "slug": "093f5956",
+      "name": "acc67cd7",
+      "years_label": "31040f5f",
+      "intro": "4eebf87e"
+    }
   },
   "epoch/atualidade-ue-e-emigracao/pt": {
     "date": "2026-10-27",
-    "hash": "e5b2b3eb0680"
+    "hash": "e5b2b3eb0680",
+    "fields": {
+      "slug": "5cedb5df",
+      "name": "af300165",
+      "years_label": "a6bc53d9",
+      "intro": "e3c22cdb"
+    }
   },
   "epoch/atualidade-ue-e-emigracao/ru": {
     "date": "2026-10-27",
-    "hash": "655023d81ee3"
+    "hash": "655023d81ee3",
+    "fields": {
+      "slug": "d94a9e21",
+      "name": "a5b8318b",
+      "years_label": "6a0b9e4b",
+      "intro": "01b4f59b"
+    }
   },
   "epoch/avis-e-descobrimentos/en": {
     "date": "2026-10-29",
-    "hash": "e177fa7af912"
+    "hash": "e177fa7af912",
+    "fields": {
+      "slug": "60406320",
+      "name": "c0281cdf",
+      "theme": "d13296d8",
+      "fallback_image.alt": "2d1be2aa",
+      "fallback_image.caption": "0b8c76b1",
+      "description": "cea91d2b",
+      "intro": "c1c8bb3d",
+      "then_now[0].then_big": "8a88d2f9",
+      "then_now[0].now_big": "27fef3c3",
+      "then_now[0].text": "a941f325",
+      "then_now[1].then_big": "38393a13",
+      "then_now[1].now_big": "a6f787af",
+      "then_now[1].text": "3ea1b7ab",
+      "then_now[2].then_big": "c8cc5223",
+      "then_now[2].now_big": "b51bba81",
+      "then_now[2].text": "dcb11047"
+    }
   },
   "epoch/avis-e-descobrimentos/pt": {
     "date": "2026-10-29",
-    "hash": "75f558cdfd58"
+    "hash": "75f558cdfd58",
+    "fields": {
+      "slug": "da9c8cc1",
+      "name": "6a50744d",
+      "theme": "e27e699f",
+      "fallback_image.alt": "fdaa8e81",
+      "fallback_image.caption": "25df0854",
+      "description": "ce4a6b62",
+      "intro": "1ef063a7",
+      "then_now[0].then_big": "7baeaa6b",
+      "then_now[0].now_big": "00a77eb4",
+      "then_now[0].text": "2f94b454",
+      "then_now[1].then_big": "e48b524f",
+      "then_now[1].now_big": "71a48f0a",
+      "then_now[1].text": "0455bd5a",
+      "then_now[2].then_big": "84c52e5b",
+      "then_now[2].now_big": "b51bba81",
+      "then_now[2].text": "a6cb2ec2"
+    }
   },
   "epoch/avis-e-descobrimentos/ru": {
     "date": "2026-10-29",
-    "hash": "459bab8b25cf"
+    "hash": "459bab8b25cf",
+    "fields": {
+      "slug": "d0d889e4",
+      "name": "813b7aea",
+      "theme": "ce4d71e4",
+      "fallback_image.alt": "44d9bab2",
+      "fallback_image.caption": "0bca3d06",
+      "description": "e747ba72",
+      "intro": "137cb084",
+      "then_now[0].then_big": "87c27e06",
+      "then_now[0].now_big": "b49b2ba3",
+      "then_now[0].text": "cf3556cc",
+      "then_now[1].then_big": "a680ef2d",
+      "then_now[1].now_big": "ef58dfe3",
+      "then_now[1].text": "ffacccb6",
+      "then_now[2].then_big": "d543bab5",
+      "then_now[2].now_big": "d9f5b152",
+      "then_now[2].text": "0b170de3"
+    }
   },
   "epoch/estado-novo-e-25-de-abril/en": {
     "date": "2026-10-27",
-    "hash": "52722c7579d2"
+    "hash": "52722c7579d2",
+    "fields": {
+      "slug": "621e8f97",
+      "name": "65441f1d",
+      "intro": "9d0f938f"
+    }
   },
   "epoch/estado-novo-e-25-de-abril/pt": {
     "date": "2026-10-27",
-    "hash": "477ac1d09aa7"
+    "hash": "477ac1d09aa7",
+    "fields": {
+      "slug": "8da080c5",
+      "name": "394200b5",
+      "intro": "46513844"
+    }
   },
   "epoch/estado-novo-e-25-de-abril/ru": {
     "date": "2026-10-27",
-    "hash": "17edf9b9f709"
+    "hash": "17edf9b9f709",
+    "fields": {
+      "slug": "1db9500c",
+      "name": "f8b92ba1",
+      "intro": "be56c129"
+    }
   },
   "epoch/lusitania-e-roma/en": {
     "date": "2026-10-29",
@@ -61,39 +148,129 @@
   },
   "epoch/nascimento-do-reino-e-reconquista/en": {
     "date": "2026-10-27",
-    "hash": "b82dd5a94462"
+    "hash": "b82dd5a94462",
+    "fields": {
+      "slug": "626a63c5",
+      "name": "2609e3e8",
+      "years_label": "e1018973",
+      "intro": "d4ba52c5"
+    }
   },
   "epoch/nascimento-do-reino-e-reconquista/pt": {
     "date": "2026-10-27",
-    "hash": "6bfff819cccc"
+    "hash": "6bfff819cccc",
+    "fields": {
+      "slug": "571a8e21",
+      "name": "efb253b2",
+      "years_label": "e1018973",
+      "intro": "dabfa60f"
+    }
   },
   "epoch/nascimento-do-reino-e-reconquista/ru": {
     "date": "2026-10-27",
-    "hash": "eaa6d0477ab8"
+    "hash": "eaa6d0477ab8",
+    "fields": {
+      "slug": "60a5fa75",
+      "name": "5f993609",
+      "years_label": "e1018973",
+      "intro": "c9f26448"
+    }
   },
   "epoch/pombal-e-terramoto/en": {
     "date": "2026-10-29",
-    "hash": "0edf6e35b923"
+    "hash": "0edf6e35b923",
+    "fields": {
+      "slug": "aeed9993",
+      "name": "f0e490ea",
+      "theme": "aa0af79a",
+      "fallback_image.alt": "429fac1c",
+      "fallback_image.caption": "93ceda57",
+      "description": "3149f232",
+      "intro": "e9cd49ae",
+      "then_now[0].then_big": "7acc684a",
+      "then_now[0].now_big": "1253e937",
+      "then_now[0].text": "9b98a768",
+      "then_now[1].then_big": "0aa22675",
+      "then_now[1].now_big": "cbdd405f",
+      "then_now[1].text": "4b145446",
+      "then_now[2].then_big": "edde162d",
+      "then_now[2].now_big": "0faa6d75",
+      "then_now[2].text": "a4ec3a49"
+    }
   },
   "epoch/pombal-e-terramoto/pt": {
     "date": "2026-10-29",
-    "hash": "5238e6dd09c5"
+    "hash": "5238e6dd09c5",
+    "fields": {
+      "slug": "16c3c48b",
+      "name": "d3c3d441",
+      "theme": "03e6ae70",
+      "fallback_image.alt": "378efb26",
+      "fallback_image.caption": "a50ad5a9",
+      "description": "f076676e",
+      "intro": "3db885ca",
+      "then_now[0].then_big": "7acc684a",
+      "then_now[0].now_big": "1253e937",
+      "then_now[0].text": "30946a8e",
+      "then_now[1].then_big": "0aa22675",
+      "then_now[1].now_big": "cbdd405f",
+      "then_now[1].text": "6a031cb6",
+      "then_now[2].then_big": "9e30c7f5",
+      "then_now[2].now_big": "3283ac1e",
+      "then_now[2].text": "2cc9f173"
+    }
   },
   "epoch/pombal-e-terramoto/ru": {
     "date": "2026-10-29",
-    "hash": "5693fea59be0"
+    "hash": "5693fea59be0",
+    "fields": {
+      "slug": "c4b9b8fd",
+      "name": "51a3d5fc",
+      "theme": "9752aa63",
+      "fallback_image.alt": "41f467e7",
+      "fallback_image.caption": "53634f18",
+      "description": "9dc90072",
+      "intro": "28b5fd99",
+      "then_now[0].then_big": "7acc684a",
+      "then_now[0].now_big": "1253e937",
+      "then_now[0].text": "17c034d5",
+      "then_now[1].then_big": "76b8fc56",
+      "then_now[1].now_big": "258e1647",
+      "then_now[1].text": "50e46c7c",
+      "then_now[2].then_big": "8b0a4d79",
+      "then_now[2].now_big": "04b32c54",
+      "then_now[2].text": "187c0af8"
+    }
   },
   "epoch/suevos-visigodos-e-mouros/en": {
     "date": "2026-10-27",
-    "hash": "80581bf20f52"
+    "hash": "80581bf20f52",
+    "fields": {
+      "slug": "84a10dc9",
+      "name": "55d01965",
+      "years_label": "25ecc97d",
+      "intro": "c864566f"
+    }
   },
   "epoch/suevos-visigodos-e-mouros/pt": {
     "date": "2026-10-27",
-    "hash": "8e575415b2a7"
+    "hash": "8e575415b2a7",
+    "fields": {
+      "slug": "cf9398bc",
+      "name": "2343c141",
+      "years_label": "491707fe",
+      "intro": "8779d063"
+    }
   },
   "epoch/suevos-visigodos-e-mouros/ru": {
     "date": "2026-10-27",
-    "hash": "6fa37bf2979b"
+    "hash": "6fa37bf2979b",
+    "fields": {
+      "slug": "782c7092",
+      "name": "33302cf7",
+      "years_label": "ca76cadf",
+      "intro": "2273a681"
+    }
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/en": {
     "date": "2026-10-29",
@@ -109,11 +286,69 @@
   },
   "static/about/en": {
     "date": "2026-10-27",
-    "hash": "48d20a6b6abf"
+    "hash": "48d20a6b6abf",
+    "fields": {
+      "lead": "88fa9a22",
+      "more[0]": "801abb96",
+      "sections[foi-aqui].heading": "49e9094b",
+      "sections[foi-aqui].paragraphs[0]": "fa9186f7",
+      "sections[como-ler].heading": "96b291fe",
+      "sections[como-ler].paragraphs[0]": "aca870ce",
+      "sections[como-ler].items[0]": "c7c0a3a4",
+      "sections[como-ler].items[1]": "1449d50f",
+      "sections[como-ler].items[2]": "be8be2c4",
+      "sections[como-ler].after[0]": "00e6b3a6",
+      "sections[para-quem].heading": "71ef524a",
+      "sections[para-quem].items[0]": "21a04d5b",
+      "sections[para-quem].items[1]": "92b63edc",
+      "sections[para-quem].items[2]": "33a8a936",
+      "sections[confianca].heading": "6cc716fe",
+      "sections[confianca].paragraphs[0]": "6e9afe9a",
+      "sections[estado].heading": "8df8af73",
+      "sections[estado].paragraphs[0]": "07f10138",
+      "sections[quem-faz].heading": "4147f20a",
+      "sections[quem-faz].paragraphs[0]": "7badd050",
+      "sections[quem-faz].paragraphs[1]": "6001e1bc",
+      "sections[quem-faz].paragraphs[2]": "5c704110",
+      "sections[ajudar].heading": "a899a3d4",
+      "sections[ajudar].items[0]": "27ad6969",
+      "sections[ajudar].items[1]": "e6b7b9ce",
+      "sections[ajudar].items[2]": "94c12792",
+      "sections[ajudar].after[0]": "5998f5df"
+    }
   },
   "static/about/pt": {
     "date": "2026-10-27",
-    "hash": "fcb7d3860020"
+    "hash": "fcb7d3860020",
+    "fields": {
+      "lead": "23d5ecdf",
+      "more[0]": "e3b33178",
+      "sections[foi-aqui].heading": "8a5851c2",
+      "sections[foi-aqui].paragraphs[0]": "80d5863d",
+      "sections[como-ler].heading": "0822e57f",
+      "sections[como-ler].paragraphs[0]": "bbeb3add",
+      "sections[como-ler].items[0]": "22429d43",
+      "sections[como-ler].items[1]": "95461235",
+      "sections[como-ler].items[2]": "1c04a686",
+      "sections[como-ler].after[0]": "f19cfdab",
+      "sections[para-quem].heading": "c95e1bbc",
+      "sections[para-quem].items[0]": "14850d49",
+      "sections[para-quem].items[1]": "ece10a18",
+      "sections[para-quem].items[2]": "cbeabbfe",
+      "sections[confianca].heading": "f85ac239",
+      "sections[confianca].paragraphs[0]": "846626f7",
+      "sections[estado].heading": "db181379",
+      "sections[estado].paragraphs[0]": "fd653365",
+      "sections[quem-faz].heading": "a0278557",
+      "sections[quem-faz].paragraphs[0]": "43547574",
+      "sections[quem-faz].paragraphs[1]": "9895d66d",
+      "sections[quem-faz].paragraphs[2]": "5ae075d6",
+      "sections[ajudar].heading": "79c495ad",
+      "sections[ajudar].items[0]": "85769db2",
+      "sections[ajudar].items[1]": "180e7909",
+      "sections[ajudar].items[2]": "7f9722a0",
+      "sections[ajudar].after[0]": "31c83066"
+    }
   },
   "static/about/ru": {
     "date": "2026-10-27",
@@ -121,23 +356,151 @@
   },
   "static/legal/en": {
     "date": "2026-10-29",
-    "hash": "39ce56e68253"
+    "hash": "39ce56e68253",
+    "fields": {
+      "sections[resumo].heading": "9e90b1ac",
+      "sections[resumo].items[0]": "6ca61acb",
+      "sections[resumo].items[1]": "ee9fa7eb",
+      "sections[resumo].items[2]": "97fc1a25",
+      "sections[cookies].heading": "141395eb",
+      "sections[cookies].paragraphs[0]": "85615952",
+      "sections[cookies].paragraphs[1]": "b39ccb41",
+      "sections[licencas].heading": "7c6f13c4",
+      "sections[licencas].items[0]": "6fe5b87d",
+      "sections[licencas].items[1]": "6d265705",
+      "sections[licencas].items[2]": "a14f7259",
+      "sections[licencas].items[3]": "5c17408b",
+      "sections[privacidade].heading": "e3ed9c3a",
+      "sections[privacidade].paragraphs[0]": "3e4dac6f",
+      "sections[contagem].heading": "5ecb1515",
+      "sections[contagem].paragraphs[0]": "1da3f452",
+      "sections[terceiros].heading": "52430d31",
+      "sections[terceiros].paragraphs[0]": "340604c2",
+      "sections[terceiros].items[0]": "40823fd2",
+      "sections[terceiros].items[1]": "a51930ca",
+      "sections[terceiros].items[2]": "bebe50b8",
+      "sections[terceiros].items[3]": "953bda4c",
+      "sections[terceiros].after[0]": "761b1de6",
+      "sections[aviso].heading": "129c678f",
+      "sections[aviso].paragraphs[0]": "91f42e48",
+      "sections[contacto].heading": "2b5c3d26",
+      "sections[contacto].paragraphs[0]": "bbe8dc30",
+      "sections[contacto].paragraphs[1]": "83239d2b"
+    }
   },
   "static/legal/pt": {
     "date": "2026-10-29",
-    "hash": "37bc9c73404f"
+    "hash": "37bc9c73404f",
+    "fields": {
+      "sections[resumo].heading": "814481c3",
+      "sections[resumo].items[0]": "a7f06f8b",
+      "sections[resumo].items[1]": "85791aa6",
+      "sections[resumo].items[2]": "cb33d2da",
+      "sections[cookies].heading": "141395eb",
+      "sections[cookies].paragraphs[0]": "9216b0ca",
+      "sections[cookies].paragraphs[1]": "280ab52c",
+      "sections[licencas].heading": "f1dcb460",
+      "sections[licencas].items[0]": "4df16bd5",
+      "sections[licencas].items[1]": "a25d2bae",
+      "sections[licencas].items[2]": "0ebdd9b4",
+      "sections[licencas].items[3]": "a51d2b5b",
+      "sections[privacidade].heading": "c9dcdbfa",
+      "sections[privacidade].paragraphs[0]": "83611d5b",
+      "sections[contagem].heading": "d1169625",
+      "sections[contagem].paragraphs[0]": "7a03b6f9",
+      "sections[terceiros].heading": "f2cc09bc",
+      "sections[terceiros].paragraphs[0]": "6a1df4c8",
+      "sections[terceiros].items[0]": "36f96a07",
+      "sections[terceiros].items[1]": "c896513f",
+      "sections[terceiros].items[2]": "0079ca68",
+      "sections[terceiros].items[3]": "2ff9b038",
+      "sections[terceiros].after[0]": "729feb6c",
+      "sections[aviso].heading": "3e1da477",
+      "sections[aviso].paragraphs[0]": "512fed74",
+      "sections[contacto].heading": "baf2c13e",
+      "sections[contacto].paragraphs[0]": "da7ba560",
+      "sections[contacto].paragraphs[1]": "233a2d31"
+    }
   },
   "static/legal/ru": {
     "date": "2026-10-29",
-    "hash": "06e5eba050cc"
+    "hash": "06e5eba050cc",
+    "fields": {
+      "sections[resumo].heading": "b71947fb",
+      "sections[resumo].items[0]": "0bf40fb1",
+      "sections[resumo].items[1]": "eeb0459f",
+      "sections[resumo].items[2]": "0f5bce1d",
+      "sections[cookies].heading": "45823eaa",
+      "sections[cookies].paragraphs[0]": "9e74a759",
+      "sections[cookies].paragraphs[1]": "7a377c48",
+      "sections[licencas].heading": "61fc3206",
+      "sections[licencas].items[0]": "05253adc",
+      "sections[licencas].items[1]": "ca4ab5b7",
+      "sections[licencas].items[2]": "9f28c586",
+      "sections[licencas].items[3]": "66637ede",
+      "sections[privacidade].heading": "c059ac38",
+      "sections[privacidade].paragraphs[0]": "ed966bbb",
+      "sections[contagem].heading": "bc9c4708",
+      "sections[contagem].paragraphs[0]": "4faa68f5",
+      "sections[terceiros].heading": "240bdd41",
+      "sections[terceiros].paragraphs[0]": "827994a8",
+      "sections[terceiros].items[0]": "61fb862d",
+      "sections[terceiros].items[1]": "65d32084",
+      "sections[terceiros].items[2]": "3d9f9476",
+      "sections[terceiros].items[3]": "ebcb4f3a",
+      "sections[terceiros].after[0]": "14183ec9",
+      "sections[aviso].heading": "e066726d",
+      "sections[aviso].paragraphs[0]": "258613b3",
+      "sections[contacto].heading": "fca8d5aa",
+      "sections[contacto].paragraphs[0]": "06940806",
+      "sections[contacto].paragraphs[1]": "11a7f6fd"
+    }
   },
   "static/method/en": {
     "date": "2026-10-27",
-    "hash": "90c81c377380"
+    "hash": "90c81c377380",
+    "fields": {
+      "lead": "e6a5db5f",
+      "sections[etiquetas].heading": "67d8c3df",
+      "sections[etiquetas].items[0]": "804a4f7a",
+      "sections[etiquetas].items[1]": "fc60d37c",
+      "sections[etiquetas].items[2]": "20216637",
+      "sections[datas-fontes].heading": "93af900f",
+      "sections[datas-fontes].paragraphs[0]": "42423fa9",
+      "sections[numeros].heading": "26af7cb5",
+      "sections[numeros].paragraphs[0]": "a163c47b",
+      "sections[idades].heading": "79c35efa",
+      "sections[idades].paragraphs[0]": "16e4b57d",
+      "sections[imagens].heading": "be7e2f20",
+      "sections[imagens].paragraphs[0]": "74dd616f",
+      "sections[correcoes].heading": "0079708a",
+      "sections[correcoes].paragraphs[0]": "399afcf1",
+      "sections[idiomas].heading": "318655ce",
+      "sections[idiomas].paragraphs[0]": "eef635d4"
+    }
   },
   "static/method/pt": {
     "date": "2026-10-27",
-    "hash": "348c2b9f3e96"
+    "hash": "348c2b9f3e96",
+    "fields": {
+      "lead": "15f3e125",
+      "sections[etiquetas].heading": "b88968a6",
+      "sections[etiquetas].items[0]": "c59a8970",
+      "sections[etiquetas].items[1]": "f1b01f5e",
+      "sections[etiquetas].items[2]": "3a186960",
+      "sections[datas-fontes].heading": "aea1fc56",
+      "sections[datas-fontes].paragraphs[0]": "16c86cae",
+      "sections[numeros].heading": "3ec5c7b4",
+      "sections[numeros].paragraphs[0]": "a224acba",
+      "sections[idades].heading": "6d3677f8",
+      "sections[idades].paragraphs[0]": "15d8278e",
+      "sections[imagens].heading": "dfca0b15",
+      "sections[imagens].paragraphs[0]": "0c4bde7a",
+      "sections[correcoes].heading": "63952b06",
+      "sections[correcoes].paragraphs[0]": "410f1287",
+      "sections[idiomas].heading": "bee378b2",
+      "sections[idiomas].paragraphs[0]": "f440ed1e"
+    }
   },
   "static/method/ru": {
     "date": "2026-10-27",
@@ -145,159 +508,555 @@
   },
   "thread/comida-e-vinho/en": {
     "date": "2026-10-27",
-    "hash": "1ec1febf29b1"
+    "hash": "1ec1febf29b1",
+    "fields": {
+      "slug": "f5e27af4",
+      "name": "0fcb5412",
+      "description": "769b72ce"
+    }
   },
   "thread/comida-e-vinho/pt": {
     "date": "2026-10-27",
-    "hash": "c108a62cc602"
+    "hash": "c108a62cc602",
+    "fields": {
+      "slug": "352d8358",
+      "name": "d87bc697",
+      "description": "a3cf303e"
+    }
   },
   "thread/comida-e-vinho/ru": {
     "date": "2026-10-27",
-    "hash": "373459d94a22"
+    "hash": "373459d94a22",
+    "fields": {
+      "slug": "5f679122",
+      "name": "5c88d30e",
+      "description": "1a5cf0f3"
+    }
   },
   "thread/engenho/en": {
     "date": "2026-10-28",
-    "hash": "12fdfa2adbde"
+    "hash": "12fdfa2adbde",
+    "fields": {
+      "slug": "8c85b663",
+      "name": "729bb48d",
+      "description": "9e6a8722"
+    }
   },
   "thread/engenho/pt": {
     "date": "2026-10-28",
-    "hash": "b0b77c2cd8f0"
+    "hash": "b0b77c2cd8f0",
+    "fields": {
+      "slug": "b68ad2ec",
+      "name": "12eb81a8",
+      "description": "ebfbfd9a"
+    }
   },
   "thread/engenho/ru": {
     "date": "2026-10-28",
-    "hash": "666589ed1964"
+    "hash": "666589ed1964",
+    "fields": {
+      "slug": "0634f831",
+      "name": "14fe6385",
+      "description": "73e01266"
+    }
   },
   "thread/gente-como-nos/en": {
     "date": "2026-10-27",
-    "hash": "fb57983e9a1a"
+    "hash": "fb57983e9a1a",
+    "fields": {
+      "slug": "69e33848",
+      "name": "f07e33bd",
+      "description": "ec4e88c9"
+    }
   },
   "thread/gente-como-nos/pt": {
     "date": "2026-10-27",
-    "hash": "0283eeae86ef"
+    "hash": "0283eeae86ef",
+    "fields": {
+      "slug": "d638bc21",
+      "name": "aa266c95",
+      "description": "b4569ba8"
+    }
   },
   "thread/gente-como-nos/ru": {
     "date": "2026-10-27",
-    "hash": "5416c5e85505"
+    "hash": "5416c5e85505",
+    "fields": {
+      "slug": "3e98d742",
+      "name": "6e4a9e19",
+      "description": "ba1b5174"
+    }
   },
   "thread/mar/en": {
     "date": "2026-10-27",
-    "hash": "9e2cbe57999f"
+    "hash": "9e2cbe57999f",
+    "fields": {
+      "slug": "4a69f19c",
+      "name": "76b3af33",
+      "description": "44289e16"
+    }
   },
   "thread/mar/pt": {
     "date": "2026-10-27",
-    "hash": "f3e6ab42cec6"
+    "hash": "f3e6ab42cec6",
+    "fields": {
+      "slug": "51609286",
+      "name": "b4b7d381",
+      "description": "6ddc7bba"
+    }
   },
   "thread/mar/ru": {
     "date": "2026-10-27",
-    "hash": "98453d37d08a"
+    "hash": "98453d37d08a",
+    "fields": {
+      "slug": "187897ce",
+      "name": "fa8e72e0",
+      "description": "ce7a78d8"
+    }
   },
   "thread/natureza/en": {
     "date": "2026-10-27",
-    "hash": "788d37677c69"
+    "hash": "788d37677c69",
+    "fields": {
+      "slug": "5697abca",
+      "name": "c71ce8cc",
+      "description": "48a28f89"
+    }
   },
   "thread/natureza/pt": {
     "date": "2026-10-27",
-    "hash": "e468b3025f91"
+    "hash": "e468b3025f91",
+    "fields": {
+      "slug": "3a00b019",
+      "name": "f58c2019",
+      "description": "b3e7dd39"
+    }
   },
   "thread/natureza/ru": {
     "date": "2026-10-27",
-    "hash": "df6cbf304a94"
+    "hash": "df6cbf304a94",
+    "fields": {
+      "slug": "4e1cf489",
+      "name": "8bcf7cb6",
+      "description": "55d600e2"
+    }
   },
   "thread/poder-e-revolta/en": {
     "date": "2026-10-27",
-    "hash": "92de69281148"
+    "hash": "92de69281148",
+    "fields": {
+      "slug": "fa0cc1fc",
+      "name": "e90d2520",
+      "description": "8a8f5f52"
+    }
   },
   "thread/poder-e-revolta/pt": {
     "date": "2026-10-27",
-    "hash": "d2e0c30faa9b"
+    "hash": "d2e0c30faa9b",
+    "fields": {
+      "slug": "2beefd5f",
+      "name": "5cd725df",
+      "description": "daff6ed4"
+    }
   },
   "thread/poder-e-revolta/ru": {
     "date": "2026-10-27",
-    "hash": "5a9936531a84"
+    "hash": "5a9936531a84",
+    "fields": {
+      "slug": "8f4c9401",
+      "name": "e22bf760",
+      "description": "acf1fc1a"
+    }
   },
   "ui/a11y/en": {
     "date": "2026-10-27",
-    "hash": "4e9ae3600017"
+    "hash": "4e9ae3600017",
+    "fields": {
+      "a11y.skip_to_content": "ac576a66",
+      "a11y.home": "8989cd4d",
+      "a11y.main_nav": "eb355944",
+      "a11y.footer_nav": "b8e78ad4",
+      "a11y.language": "a4fe6526"
+    }
   },
   "ui/a11y/pt": {
     "date": "2026-10-27",
-    "hash": "0271d1fc3be8"
+    "hash": "0271d1fc3be8",
+    "fields": {
+      "a11y.skip_to_content": "8d82be62",
+      "a11y.home": "a70db825",
+      "a11y.main_nav": "895f0739",
+      "a11y.footer_nav": "9e51a9a1",
+      "a11y.language": "7ae9d418"
+    }
   },
   "ui/a11y/ru": {
     "date": "2026-10-27",
-    "hash": "c3acb4aa1a8f"
+    "hash": "c3acb4aa1a8f",
+    "fields": {
+      "a11y.skip_to_content": "f35ba214",
+      "a11y.home": "b394215a",
+      "a11y.main_nav": "8fff0bba",
+      "a11y.footer_nav": "bd58f1ab",
+      "a11y.language": "5bd57038"
+    }
   },
   "ui/card/en": {
     "date": "2026-10-28",
-    "hash": "152540ddc1b1"
+    "hash": "152540ddc1b1",
+    "fields": {
+      "card.breadcrumb": "2bd873d6",
+      "card.tags": "993bbf7f",
+      "card.age_prefix": "e1db024e",
+      "card.age_reason_12": "3745cd5c",
+      "card.heavy_topic_note": "e3e7e824",
+      "card.placeholder_title": "ab0e2c41",
+      "card.placeholder_note": "5c0102c8",
+      "card.image_credit": "1aa4cb0b",
+      "card.image_license": "c011d609",
+      "card.image_source": "0e570ca6",
+      "card.license_public_domain": "8c3ff64b",
+      "card.story_heading": "c34eb7c8",
+      "card.context": "a6e600a1",
+      "card.official_site": "b16446d4",
+      "card.accessed": "6b0ad162",
+      "card.share_copied": "71af38a2",
+      "card.share_failed": "93af6ce9",
+      "card.epoch_nav": "b5c52cb9",
+      "card.prev": "a57b08a4",
+      "card.next": "1ff57a29",
+      "card.not_translated": "cc119d1a",
+      "card.more_toggle": "d47d7cb0",
+      "card.next_story": "1ff57a29",
+      "card.year_bc": "d68797d9",
+      "card.next_epoch": "79ef7367",
+      "card.all_epochs": "1c505039",
+      "card.sources_checked": "606cf669",
+      "card.source_in_russian": "1db2e996",
+      "card.report_inline": "6b6615f7",
+      "card.nearby_m": "42b43536",
+      "card.nearby_km": "771dd9c5",
+      "card.nearby_same": "8a221599"
+    }
   },
   "ui/card/pt": {
     "date": "2026-10-28",
-    "hash": "bc1292c37209"
+    "hash": "bc1292c37209",
+    "fields": {
+      "card.breadcrumb": "acd2bcae",
+      "card.tags": "477378a0",
+      "card.age_prefix": "103dca52",
+      "card.age_reason_12": "91393921",
+      "card.heavy_topic_note": "166c469f",
+      "card.placeholder_title": "dbb61a83",
+      "card.placeholder_note": "386fc2c6",
+      "card.image_credit": "8fc6b8b6",
+      "card.image_license": "70dfbb51",
+      "card.image_source": "1bdb4add",
+      "card.license_public_domain": "cba5b0c5",
+      "card.story_heading": "928313b0",
+      "card.context": "dbb654a4",
+      "card.official_site": "bb75d42d",
+      "card.accessed": "793dbeb1",
+      "card.share_copied": "a8c19545",
+      "card.share_failed": "d2a29704",
+      "card.epoch_nav": "f72ddce4",
+      "card.prev": "e4ce7c09",
+      "card.next": "ae53628a",
+      "card.not_translated": "e967af19",
+      "card.more_toggle": "5d29e304",
+      "card.next_story": "e60cf337",
+      "card.year_bc": "57fbe98b",
+      "card.next_epoch": "35ec55ec",
+      "card.all_epochs": "05b21720",
+      "card.sources_checked": "e037bb26",
+      "card.source_in_russian": "3a41c97a",
+      "card.report_inline": "02907624",
+      "card.nearby_m": "6bdb0d95",
+      "card.nearby_km": "a0f31c35",
+      "card.nearby_same": "32bc8dd1"
+    }
   },
   "ui/card/ru": {
     "date": "2026-10-28",
-    "hash": "4cab90fcf168"
+    "hash": "4cab90fcf168",
+    "fields": {
+      "card.breadcrumb": "b58bb737",
+      "card.tags": "69ad4f65",
+      "card.age_prefix": "422040cb",
+      "card.age_reason_12": "19cbcb16",
+      "card.heavy_topic_note": "ba15cb5a",
+      "card.placeholder_title": "99303a31",
+      "card.placeholder_note": "5693facb",
+      "card.image_credit": "e5f53473",
+      "card.image_license": "133595a7",
+      "card.image_source": "56e46960",
+      "card.license_public_domain": "4fcbf81a",
+      "card.story_heading": "1417b779",
+      "card.context": "ec399d99",
+      "card.official_site": "dff2ca45",
+      "card.accessed": "54598932",
+      "card.share_copied": "bccf32dd",
+      "card.share_failed": "5726b0ae",
+      "card.epoch_nav": "5ff4b38b",
+      "card.prev": "1a9fb1f3",
+      "card.next": "ea58bb0b",
+      "card.not_translated": "e3107f94",
+      "card.more_toggle": "59589fe2",
+      "card.next_story": "ea58bb0b",
+      "card.year_bc": "7dc01ef3",
+      "card.next_epoch": "235c6666",
+      "card.all_epochs": "8bf0c527",
+      "card.sources_checked": "be657c07",
+      "card.source_in_russian": "32ade6d1",
+      "card.report_inline": "1dfc32d1",
+      "card.nearby_m": "7db630fb",
+      "card.nearby_km": "790496be",
+      "card.nearby_same": "19f248c5"
+    }
   },
   "ui/epoch/en": {
     "date": "2026-10-29",
-    "hash": "9353ec1a4bab"
+    "hash": "9353ec1a4bab",
+    "fields": {
+      "epoch.chips_label": "1206bb79",
+      "epoch.timeline_label": "7ea9ba91",
+      "epoch.neighbours_label": "31e92d15",
+      "epoch.prev": "d7b1cbc6",
+      "epoch.next": "8608262d",
+      "epoch.more_soon": "334df466",
+      "epoch.switcher_label": "e4607a53",
+      "epoch.then_now": "8a8f5452",
+      "epoch.then_now_today": "68efe119",
+      "epoch.then_now_estimate": "79e1d925",
+      "epoch.then_now_calc": "361900df",
+      "epoch.then_now_note_estimate": "da29483b",
+      "epoch.then_now_note_calc": "7ae2513b",
+      "epoch.then_now_more": "6681e0ed",
+      "epoch.then_now_sources": "caf85b08",
+      "epoch.read_progress": "cdb0064e",
+      "epoch.filter_all": "a52ace42",
+      "epoch.view_label": "dcc839a4",
+      "epoch.empty": "e8de1882",
+      "epoch.show_all": "2150d8df",
+      "epoch.map_pane": "be176b00"
+    }
   },
   "ui/epoch/pt": {
     "date": "2026-10-29",
-    "hash": "ad91d7d76bb8"
+    "hash": "ad91d7d76bb8",
+    "fields": {
+      "epoch.chips_label": "159b2a8b",
+      "epoch.timeline_label": "61e8a689",
+      "epoch.neighbours_label": "b94abf23",
+      "epoch.prev": "a8d1f381",
+      "epoch.next": "5dadd37b",
+      "epoch.more_soon": "7fcc7b25",
+      "epoch.switcher_label": "98bd5469",
+      "epoch.then_now": "db10b532",
+      "epoch.then_now_today": "62a951fd",
+      "epoch.then_now_estimate": "20c308d7",
+      "epoch.then_now_calc": "5cff310f",
+      "epoch.then_now_note_estimate": "c0adbf6f",
+      "epoch.then_now_note_calc": "b52537c4",
+      "epoch.then_now_more": "3b39045c",
+      "epoch.then_now_sources": "ebddcc6f",
+      "epoch.read_progress": "5e570976",
+      "epoch.filter_all": "bd02b9a7",
+      "epoch.view_label": "af738ae4",
+      "epoch.empty": "91d4ac6c",
+      "epoch.show_all": "f95552be",
+      "epoch.map_pane": "d2f671e0"
+    }
   },
   "ui/epoch/ru": {
     "date": "2026-10-29",
-    "hash": "da21ff195922"
+    "hash": "da21ff195922",
+    "fields": {
+      "epoch.chips_label": "3cd1888b",
+      "epoch.timeline_label": "24c7474a",
+      "epoch.neighbours_label": "84c99ee7",
+      "epoch.prev": "b9798b8e",
+      "epoch.next": "ff3fa8c1",
+      "epoch.more_soon": "5b3ced05",
+      "epoch.switcher_label": "f020549b",
+      "epoch.then_now": "04772f00",
+      "epoch.then_now_today": "ca56506f",
+      "epoch.then_now_estimate": "45b9ff4d",
+      "epoch.then_now_calc": "1ad7e3ee",
+      "epoch.then_now_note_estimate": "879076a1",
+      "epoch.then_now_note_calc": "2698076d",
+      "epoch.then_now_more": "a0f34bbb",
+      "epoch.then_now_sources": "d0578b52",
+      "epoch.read_progress": "2772fdbc",
+      "epoch.filter_all": "215816bf",
+      "epoch.view_label": "9022ba37",
+      "epoch.empty": "4c004bfd",
+      "epoch.show_all": "29beefeb",
+      "epoch.map_pane": "2751c910"
+    }
   },
   "ui/family/en": {
     "date": "2026-10-27",
-    "hash": "95d3fe6dbfce"
+    "hash": "95d3fe6dbfce",
+    "fields": {
+      "family.button": "900727a4",
+      "family.button_all": "a02e65b4",
+      "family.button_12": "01430bca",
+      "family.question": "6294005a",
+      "family.opt_all": "dc30990d",
+      "family.opt_12": "b60024c2",
+      "family.opt_off": "9a7ce4e4",
+      "family.hidden": "239f431b",
+      "family.show_hidden": "2150d8df",
+      "family.status_off": "1460a65f",
+      "family.status_all": "ad0015f8",
+      "family.status_12": "c5718a36",
+      "family.footer_hint": "6a8e6129",
+      "family.empty": "b5f4ad51",
+      "family.show_all": "bbbf5c83",
+      "family.opt_all_hint": "3d44e390",
+      "family.opt_12_hint": "1d0e2583"
+    }
   },
   "ui/family/pt": {
     "date": "2026-10-27",
-    "hash": "6578a7ff92a1"
+    "hash": "6578a7ff92a1",
+    "fields": {
+      "family.button": "e1e5e3f4",
+      "family.button_all": "c782cb37",
+      "family.button_12": "52088d09",
+      "family.question": "81b8e707",
+      "family.opt_all": "bd6b2c48",
+      "family.opt_12": "78dbcf9e",
+      "family.opt_off": "c148397b",
+      "family.hidden": "c6333b08",
+      "family.show_hidden": "f95552be",
+      "family.status_off": "521625e7",
+      "family.status_all": "f681e1a3",
+      "family.status_12": "403e058a",
+      "family.footer_hint": "0f763817",
+      "family.empty": "9b7816d1",
+      "family.show_all": "fa435b1c",
+      "family.opt_all_hint": "1dfa3aa2",
+      "family.opt_12_hint": "25f5eac4"
+    }
   },
   "ui/family/ru": {
     "date": "2026-10-27",
-    "hash": "adc290a4887c"
+    "hash": "adc290a4887c",
+    "fields": {
+      "family.button": "239201c5",
+      "family.button_all": "39d0bad3",
+      "family.button_12": "c53babce",
+      "family.question": "b8275277",
+      "family.opt_all": "9bcad82a",
+      "family.opt_12": "4802ab5a",
+      "family.opt_off": "a74661a5",
+      "family.hidden": "e0487713",
+      "family.show_hidden": "29beefeb",
+      "family.status_off": "34249581",
+      "family.status_all": "8cab9e08",
+      "family.status_12": "79431d1a",
+      "family.footer_hint": "6da44adc",
+      "family.empty": "928c292d",
+      "family.show_all": "93092b32",
+      "family.opt_all_hint": "fb29bf83",
+      "family.opt_12_hint": "9e5a3dd8"
+    }
   },
   "ui/feed/en": {
     "date": "2026-10-27",
-    "hash": "4d335448cc2b"
+    "hash": "4d335448cc2b",
+    "fields": {
+      "feed.expand_story": "f6dd46fb"
+    }
   },
   "ui/feed/pt": {
     "date": "2026-10-27",
-    "hash": "f122db0eeba9"
+    "hash": "f122db0eeba9",
+    "fields": {
+      "feed.expand_story": "c3d66e0b"
+    }
   },
   "ui/feed/ru": {
     "date": "2026-10-27",
-    "hash": "d3abe0976dee"
+    "hash": "d3abe0976dee",
+    "fields": {
+      "feed.expand_story": "c010195f"
+    }
   },
   "ui/footer/en": {
     "date": "2026-10-28",
-    "hash": "83639dab4701"
+    "hash": "83639dab4701",
+    "fields": {
+      "footer.about": "c6c67de4",
+      "footer.method": "353d6b66",
+      "footer.report": "6422c7dc",
+      "footer.legal": "8c14d709",
+      "footer.licenses": "716ae8ad",
+      "footer.privacy": "01bbf5ef"
+    }
   },
   "ui/footer/pt": {
     "date": "2026-10-28",
-    "hash": "2b4a9d2c7303"
+    "hash": "2b4a9d2c7303",
+    "fields": {
+      "footer.about": "64f99e9e",
+      "footer.method": "3bfb8bc8",
+      "footer.report": "21025963",
+      "footer.legal": "84edf558",
+      "footer.licenses": "5fb81908",
+      "footer.privacy": "89dea5c6"
+    }
   },
   "ui/footer/ru": {
     "date": "2026-10-28",
-    "hash": "7094377fbfb5"
+    "hash": "7094377fbfb5",
+    "fields": {
+      "footer.about": "d09828b0",
+      "footer.method": "27eabdd9",
+      "footer.report": "894f8ff0",
+      "footer.legal": "013e672c",
+      "footer.licenses": "8b197920",
+      "footer.privacy": "499ca82d"
+    }
   },
   "ui/gate/en": {
     "date": "2026-10-27",
-    "hash": "d9572c8dfa81"
+    "hash": "d9572c8dfa81",
+    "fields": {
+      "gate.age_12": "69e3ae2b",
+      "gate.age_16": "c9a325fd",
+      "gate.heavy": "7f80bbd1",
+      "gate.question": "f0dac2af",
+      "gate.open": "ed077f3d",
+      "gate.back": "6aadac2f"
+    }
   },
   "ui/gate/pt": {
     "date": "2026-10-27",
-    "hash": "e406bb76b8f4"
+    "hash": "e406bb76b8f4",
+    "fields": {
+      "gate.age_12": "ed7918c9",
+      "gate.age_16": "82cc334d",
+      "gate.heavy": "166c469f",
+      "gate.question": "bb935734",
+      "gate.open": "a01a5fce",
+      "gate.back": "59dc9267"
+    }
   },
   "ui/gate/ru": {
     "date": "2026-10-27",
-    "hash": "56e8330cfbe5"
+    "hash": "56e8330cfbe5",
+    "fields": {
+      "gate.age_12": "bf7c6853",
+      "gate.age_16": "abf4faed",
+      "gate.heavy": "ba15cb5a",
+      "gate.question": "fbc9d401",
+      "gate.open": "ea1f4082",
+      "gate.back": "6c99e7d8"
+    }
   },
   "ui/home/en": {
     "date": "2026-10-27",
@@ -325,75 +1084,276 @@
   },
   "ui/mascot/en": {
     "date": "2026-10-27",
-    "hash": "c16aedff7f13"
+    "hash": "c16aedff7f13",
+    "fields": {
+      "mascot.walk": "2fde6a80",
+      "mascot.run": "53c2740b",
+      "mascot.peek": "f5da3a15",
+      "mascot.map": "ff0c4fc6",
+      "mascot.bow": "a8b03274",
+      "mascot.think": "a02535d1",
+      "mascot.stay": "bb926fa8",
+      "mascot.sad": "9e17cea6",
+      "mascot.head": "1f597ef3"
+    }
   },
   "ui/mascot/pt": {
     "date": "2026-10-27",
-    "hash": "29f3d4b278c5"
+    "hash": "29f3d4b278c5",
+    "fields": {
+      "mascot.walk": "a629585f",
+      "mascot.run": "d53373c2",
+      "mascot.peek": "65c77322",
+      "mascot.map": "dda57d72",
+      "mascot.bow": "9a2d2140",
+      "mascot.think": "62f57079",
+      "mascot.stay": "03f6da93",
+      "mascot.sad": "a23fdb7d",
+      "mascot.head": "25698569"
+    }
   },
   "ui/mascot/ru": {
     "date": "2026-10-27",
-    "hash": "83ab1c05a11d"
+    "hash": "83ab1c05a11d",
+    "fields": {
+      "mascot.walk": "c3f8e763",
+      "mascot.run": "f5f99ebf",
+      "mascot.peek": "9b0da017",
+      "mascot.map": "ea5d56f0",
+      "mascot.bow": "4fde10d8",
+      "mascot.think": "3c23725b",
+      "mascot.stay": "0f272fb2",
+      "mascot.sad": "1bad4d03",
+      "mascot.head": "451bc3ff"
+    }
   },
   "ui/nav/en": {
     "date": "2026-10-27",
-    "hash": "79f683f4c026"
+    "hash": "79f683f4c026",
+    "fields": {
+      "nav.home": "3a786953",
+      "nav.epochs": "76f67d07",
+      "nav.map": "be176b00",
+      "nav.surprise": "fc704e0c"
+    }
   },
   "ui/nav/pt": {
     "date": "2026-10-27",
-    "hash": "6a2a6f229e46"
+    "hash": "6a2a6f229e46",
+    "fields": {
+      "nav.home": "325dfc37",
+      "nav.epochs": "758fb779",
+      "nav.map": "d2f671e0",
+      "nav.surprise": "43fb6d2d"
+    }
   },
   "ui/nav/ru": {
     "date": "2026-10-27",
-    "hash": "f949fedfee17"
+    "hash": "f949fedfee17",
+    "fields": {
+      "nav.home": "d328e53d",
+      "nav.epochs": "edfeb3e6",
+      "nav.map": "2751c910",
+      "nav.surprise": "24f93002"
+    }
   },
   "ui/notfound/en": {
     "date": "2026-10-27",
-    "hash": "2ef96340479d"
+    "hash": "2ef96340479d",
+    "fields": {
+      "notfound.title": "090deafc",
+      "notfound.page_title": "a469ab4c",
+      "notfound.home": "3a786953"
+    }
   },
   "ui/notfound/pt": {
     "date": "2026-10-27",
-    "hash": "850995e7399f"
+    "hash": "850995e7399f",
+    "fields": {
+      "notfound.title": "e4d2fc0c",
+      "notfound.page_title": "829c38bb",
+      "notfound.home": "325dfc37"
+    }
   },
   "ui/notfound/ru": {
     "date": "2026-10-27",
-    "hash": "593d21118ce4"
+    "hash": "593d21118ce4",
+    "fields": {
+      "notfound.title": "54411d8a",
+      "notfound.page_title": "af9d3306",
+      "notfound.home": "ad94907f"
+    }
   },
   "ui/pages/en": {
     "date": "2026-10-28",
-    "hash": "a1000c397b4b"
+    "hash": "a1000c397b4b",
+    "fields": {
+      "pages.about.title": "c6c67de4",
+      "pages.about.description": "47ab5812",
+      "pages.method.title": "353d6b66",
+      "pages.method.description": "5617f93c",
+      "pages.report.title": "6422c7dc",
+      "pages.report.description": "249f6b7c",
+      "pages.legal.title": "8c14d709",
+      "pages.legal.description": "f51b60c9",
+      "pages.map.title": "be176b00",
+      "pages.map.description": "7b7039ce",
+      "pages.surprise.title": "fc704e0c",
+      "pages.surprise.description": "79a7313e"
+    }
   },
   "ui/pages/pt": {
     "date": "2026-10-28",
-    "hash": "c6a0bcb1fbb7"
+    "hash": "c6a0bcb1fbb7",
+    "fields": {
+      "pages.about.title": "64f99e9e",
+      "pages.about.description": "1de38d20",
+      "pages.method.title": "3bfb8bc8",
+      "pages.method.description": "f2684a46",
+      "pages.report.title": "21025963",
+      "pages.report.description": "e9cba8b3",
+      "pages.legal.title": "84edf558",
+      "pages.legal.description": "03856acd",
+      "pages.map.title": "d2f671e0",
+      "pages.map.description": "42376e78",
+      "pages.surprise.title": "43fb6d2d",
+      "pages.surprise.description": "b2597a37"
+    }
   },
   "ui/pages/ru": {
     "date": "2026-10-28",
-    "hash": "ca928aa2c862"
+    "hash": "ca928aa2c862",
+    "fields": {
+      "pages.about.title": "d09828b0",
+      "pages.about.description": "03793291",
+      "pages.method.title": "27eabdd9",
+      "pages.method.description": "b01b9241",
+      "pages.report.title": "894f8ff0",
+      "pages.report.description": "e14846d3",
+      "pages.legal.title": "013e672c",
+      "pages.legal.description": "0e4d6a8a",
+      "pages.map.title": "2751c910",
+      "pages.map.description": "f0ed3f40",
+      "pages.surprise.title": "24f93002",
+      "pages.surprise.description": "94898ce7"
+    }
   },
   "ui/plural/en": {
     "date": "2026-10-27",
-    "hash": "7c6cc09e404f"
+    "hash": "7c6cc09e404f",
+    "fields": {
+      "plural.stories_one": "0910cedb",
+      "plural.stories_other": "3fd4ec19",
+      "plural.places_one": "f4648713",
+      "plural.places_other": "eb7e38c6",
+      "plural.epochs_more_one": "ea37fa0b",
+      "plural.epochs_more_other": "1b4b54f7"
+    }
   },
   "ui/plural/pt": {
     "date": "2026-10-27",
-    "hash": "56ca5b855150"
+    "hash": "56ca5b855150",
+    "fields": {
+      "plural.stories_one": "7504b5ba",
+      "plural.stories_other": "1b4a5044",
+      "plural.places_one": "270411b1",
+      "plural.places_other": "e851f426",
+      "plural.epochs_more_one": "8485de5e",
+      "plural.epochs_more_other": "9ca81b4c"
+    }
   },
   "ui/plural/ru": {
     "date": "2026-10-27",
-    "hash": "cdbe52bc1360"
+    "hash": "cdbe52bc1360",
+    "fields": {
+      "plural.stories_one": "9842fe6a",
+      "plural.stories_few": "05b0f741",
+      "plural.stories_many": "799237a1",
+      "plural.stories_other": "05b0f741",
+      "plural.places_one": "b8f6b327",
+      "plural.places_few": "6eb46700",
+      "plural.places_many": "c48f0c89",
+      "plural.places_other": "6eb46700",
+      "plural.epochs_more_one": "3ecc8464",
+      "plural.epochs_more_few": "e79d6e96",
+      "plural.epochs_more_many": "174acd08",
+      "plural.epochs_more_other": "e79d6e96"
+    }
   },
   "ui/report/en": {
     "date": "2026-10-27",
-    "hash": "a79db33d21ea"
+    "hash": "a79db33d21ea",
+    "fields": {
+      "report.lead": "c406d8e1",
+      "report.page_label": "826099af",
+      "report.page_change": "12ea12ea",
+      "report.url_label": "d1f08148",
+      "report.what_label": "ce1425ff",
+      "report.what_hint": "c856e464",
+      "report.fix_label": "9b492b5d",
+      "report.source_label": "8116f1f8",
+      "report.source_hint": "ad4d3cf2",
+      "report.email_label": "6680157f",
+      "report.submit": "f6f4688f",
+      "report.sending": "b8ed5279",
+      "report.note": "14674630",
+      "report.sent_title": "20be54f2",
+      "report.sent_text": "4d00ced2",
+      "report.back_to_story": "13297167",
+      "report.random_story": "1b47cb08",
+      "report.failed": "65380d25",
+      "report.too_short": "cdba94fd"
+    }
   },
   "ui/report/pt": {
     "date": "2026-10-27",
-    "hash": "37fb982d55f5"
+    "hash": "37fb982d55f5",
+    "fields": {
+      "report.lead": "cb4abaf5",
+      "report.page_label": "529025ff",
+      "report.page_change": "bb1728ea",
+      "report.url_label": "d42894ac",
+      "report.what_label": "41fb5ff6",
+      "report.what_hint": "f473f646",
+      "report.fix_label": "3e87f362",
+      "report.source_label": "f4bb32a5",
+      "report.source_hint": "fb9999ba",
+      "report.email_label": "513b9b8a",
+      "report.submit": "e1d12d1a",
+      "report.sending": "e10e08e2",
+      "report.note": "324d67a6",
+      "report.sent_title": "f11880ea",
+      "report.sent_text": "3104347c",
+      "report.back_to_story": "449e0d98",
+      "report.random_story": "564db5d4",
+      "report.failed": "b486d7ec",
+      "report.too_short": "8cb2205a"
+    }
   },
   "ui/report/ru": {
     "date": "2026-10-27",
-    "hash": "185ebc80a806"
+    "hash": "185ebc80a806",
+    "fields": {
+      "report.lead": "d3936a0c",
+      "report.page_label": "d3edc089",
+      "report.page_change": "70656421",
+      "report.url_label": "0123f930",
+      "report.what_label": "871e5323",
+      "report.what_hint": "123fe5ae",
+      "report.fix_label": "c18ed50e",
+      "report.source_label": "fb7cc213",
+      "report.source_hint": "d9272a8b",
+      "report.email_label": "e13fe8b3",
+      "report.submit": "ceb68a92",
+      "report.sending": "899dce11",
+      "report.note": "7a522748",
+      "report.sent_title": "1a574ee5",
+      "report.sent_text": "36bc6d4e",
+      "report.back_to_story": "19efe17c",
+      "report.random_story": "92559db3",
+      "report.failed": "2964a9b8",
+      "report.too_short": "a504f1f7"
+    }
   },
   "ui/site/en": {
     "date": "2026-10-27",
@@ -409,15 +1369,24 @@
   },
   "ui/stub/en": {
     "date": "2026-10-27",
-    "hash": "aa0a00d62e2b"
+    "hash": "aa0a00d62e2b",
+    "fields": {
+      "stub.notice": "f3b171b2"
+    }
   },
   "ui/stub/pt": {
     "date": "2026-10-27",
-    "hash": "16e8d1753acc"
+    "hash": "16e8d1753acc",
+    "fields": {
+      "stub.notice": "87949bdd"
+    }
   },
   "ui/stub/ru": {
     "date": "2026-10-27",
-    "hash": "aa808f44aac4"
+    "hash": "aa808f44aac4",
+    "fields": {
+      "stub.notice": "44b35242"
+    }
   },
   "ui/surprise/en": {
     "date": "2026-10-27",
@@ -433,35 +1402,120 @@
   },
   "ui/theme/en": {
     "date": "2026-10-27",
-    "hash": "30cea1c36ce2"
+    "hash": "30cea1c36ce2",
+    "fields": {
+      "theme.label": "efb52e71",
+      "theme.system": "6725e7bb",
+      "theme.light": "dbcd5e7b",
+      "theme.dark": "60acc53f",
+      "theme.button": "da48de77",
+      "theme.status": "c26bebc8"
+    }
   },
   "ui/theme/pt": {
     "date": "2026-10-27",
-    "hash": "c788f3e57c0a"
+    "hash": "c788f3e57c0a",
+    "fields": {
+      "theme.label": "d5df3708",
+      "theme.system": "f150afd3",
+      "theme.light": "2f3e8dcc",
+      "theme.dark": "fde8bb83",
+      "theme.button": "e576d035",
+      "theme.status": "2f66ee73"
+    }
   },
   "ui/theme/ru": {
     "date": "2026-10-27",
-    "hash": "6cef5af89de3"
+    "hash": "6cef5af89de3",
+    "fields": {
+      "theme.label": "682f961a",
+      "theme.system": "3860f597",
+      "theme.light": "f0cd3a60",
+      "theme.dark": "1eecfcaa",
+      "theme.button": "01f12e99",
+      "theme.status": "03a778c1"
+    }
   },
   "ui/thread/en": {
     "date": "2026-10-27",
-    "hash": "cd2a00bda36e"
+    "hash": "cd2a00bda36e",
+    "fields": {
+      "thread.eras_label": "d1e7cf1c"
+    }
   },
   "ui/thread/pt": {
     "date": "2026-10-27",
-    "hash": "e5f5d06466ab"
+    "hash": "e5f5d06466ab",
+    "fields": {
+      "thread.eras_label": "491d1154"
+    }
   },
   "ui/thread/ru": {
     "date": "2026-10-27",
-    "hash": "591bc49253f2"
+    "hash": "591bc49253f2",
+    "fields": {
+      "thread.eras_label": "7cab7a72"
+    }
   },
   "ui/ui/en": {
     "date": "2026-10-29",
-    "hash": "289f67dd9bc4"
+    "hash": "289f67dd9bc4",
+    "fields": {
+      "ui.read_more": "101b512f",
+      "ui.more": "40fcf024",
+      "ui.bridge": "c37e9203",
+      "ui.label_documented": "f6751cc4",
+      "ui.label_legend": "7482e374",
+      "ui.label_debated": "d5951f7e",
+      "ui.heavy_topic": "2a0fb8ca",
+      "ui.family_mode": "39b7370f",
+      "ui.age_all": "f92b1ab2",
+      "ui.share": "29887a5f",
+      "ui.report_error": "6422c7dc",
+      "ui.read": "3316348d",
+      "ui.read_reset": "342c8e82",
+      "ui.read_reset_done": "176efc56",
+      "ui.nearby": "a994cd47",
+      "ui.open_on_map": "51140831",
+      "ui.surprise": "fc704e0c",
+      "ui.soon": "4f7d6401",
+      "ui.show_more": "f5c9bd13",
+      "ui.view_list": "6f202f54",
+      "ui.view_timeline": "9dcff98e",
+      "ui.view_grid": "a52fcbbc",
+      "ui.sources": "caf85b08",
+      "ui.directions": "46bfe9d0"
+    }
   },
   "ui/ui/pt": {
     "date": "2026-10-29",
-    "hash": "34c74906cf61"
+    "hash": "34c74906cf61",
+    "fields": {
+      "ui.read_more": "d723dc4e",
+      "ui.more": "18a5d0fe",
+      "ui.bridge": "cca29726",
+      "ui.label_documented": "320895f5",
+      "ui.label_legend": "4e0118ac",
+      "ui.label_debated": "53228903",
+      "ui.heavy_topic": "77cb8018",
+      "ui.family_mode": "ef9ed887",
+      "ui.age_all": "e1aa256c",
+      "ui.share": "4a2f603c",
+      "ui.report_error": "21025963",
+      "ui.read": "c0ce2d9a",
+      "ui.read_reset": "22e7efdf",
+      "ui.read_reset_done": "4e866509",
+      "ui.nearby": "c51c4ddf",
+      "ui.open_on_map": "99072ff9",
+      "ui.surprise": "43fb6d2d",
+      "ui.soon": "25d3f4bf",
+      "ui.show_more": "70187495",
+      "ui.view_list": "5e77e178",
+      "ui.view_timeline": "cc91da83",
+      "ui.view_grid": "d189efa1",
+      "ui.sources": "ebddcc6f",
+      "ui.directions": "9ec199be"
+    }
   },
   "ui/ui/ru": {
     "date": "2026-10-29",
@@ -469,14 +1523,105 @@
   },
   "ui/viz/en": {
     "date": "2026-10-27",
-    "hash": "3a469ea208e1"
+    "hash": "3a469ea208e1",
+    "fields": {
+      "viz.army_title": "7c5d7cbc",
+      "viz.ship_title": "1be9eddc",
+      "viz.test_numbers": "14734d16",
+      "viz.army_play": "56eeea0f",
+      "viz.army_playing": "ec1e8ad5",
+      "viz.army_ratio": "be5fa158",
+      "viz.people_range": "6a39d21c",
+      "viz.dots_title": "efee997e",
+      "viz.table_group": "34ca0e76",
+      "viz.table_estimate": "558ecb0f",
+      "viz.table_note": "d8da2c49",
+      "viz.table_length": "93a7a83c",
+      "viz.table_height": "ebb6b4e2",
+      "viz.table_item": "40970cf7",
+      "viz.ship_view": "dcc839a4",
+      "viz.ship_stack": "a3d7b387",
+      "viz.ship_overlay": "17b7a868",
+      "viz.ship_scale": "60df8dd1",
+      "viz.ship_size": "e51990aa",
+      "viz.ship_size_height": "9c02a746",
+      "viz.ship_ratio": "ada2eaa6",
+      "viz.legend_low": "5af1140a",
+      "viz.legend_range": "87f8dd6e",
+      "viz.people_exact_one": "2ba422f2",
+      "viz.people_exact_other": "5caf6072",
+      "viz.army_scale_one": "25308826",
+      "viz.army_scale_other": "19e89b4b"
+    }
   },
   "ui/viz/pt": {
     "date": "2026-10-27",
-    "hash": "71e99a5d6269"
+    "hash": "71e99a5d6269",
+    "fields": {
+      "viz.army_title": "b7c4b106",
+      "viz.ship_title": "80169446",
+      "viz.test_numbers": "0f40c8dc",
+      "viz.army_play": "c4c6dbbf",
+      "viz.army_playing": "45b11446",
+      "viz.army_ratio": "62e10ab1",
+      "viz.people_range": "35fe7797",
+      "viz.dots_title": "efee997e",
+      "viz.table_group": "399b037d",
+      "viz.table_estimate": "a2704707",
+      "viz.table_note": "ecef8a87",
+      "viz.table_length": "ad6e0e2d",
+      "viz.table_height": "f57125dd",
+      "viz.table_item": "2fe3e895",
+      "viz.ship_view": "05df1c8d",
+      "viz.ship_stack": "a9a0fe21",
+      "viz.ship_overlay": "fa132867",
+      "viz.ship_scale": "341c728e",
+      "viz.ship_size": "a862df3a",
+      "viz.ship_size_height": "091667f8",
+      "viz.ship_ratio": "97f8e6cf",
+      "viz.legend_low": "1059b44e",
+      "viz.legend_range": "946384ef",
+      "viz.people_exact_one": "f89fe816",
+      "viz.people_exact_other": "df99fc1d",
+      "viz.army_scale_one": "783b1b58",
+      "viz.army_scale_other": "42f519c7"
+    }
   },
   "ui/viz/ru": {
     "date": "2026-10-27",
-    "hash": "c5a84233df0f"
+    "hash": "c5a84233df0f",
+    "fields": {
+      "viz.army_title": "7e1c1581",
+      "viz.ship_title": "9ec25e79",
+      "viz.test_numbers": "4e617370",
+      "viz.army_play": "3d65557a",
+      "viz.army_playing": "825fea97",
+      "viz.army_ratio": "8427ce8c",
+      "viz.people_range": "16425c5d",
+      "viz.dots_title": "efee997e",
+      "viz.table_group": "907efbd4",
+      "viz.table_estimate": "fec2ceac",
+      "viz.table_note": "2e80d342",
+      "viz.table_length": "757ad31b",
+      "viz.table_height": "b28208d6",
+      "viz.table_item": "f45ea006",
+      "viz.ship_view": "9022ba37",
+      "viz.ship_stack": "de5c415b",
+      "viz.ship_overlay": "adca2212",
+      "viz.ship_scale": "67298094",
+      "viz.ship_size": "95ccc796",
+      "viz.ship_size_height": "c517d6e1",
+      "viz.ship_ratio": "781ccdf3",
+      "viz.legend_low": "72844170",
+      "viz.legend_range": "7bdcc3db",
+      "viz.people_exact_one": "f6ab5176",
+      "viz.people_exact_few": "64de102c",
+      "viz.people_exact_many": "f6ab5176",
+      "viz.people_exact_other": "64de102c",
+      "viz.army_scale_one": "cf9dc76d",
+      "viz.army_scale_few": "3708e272",
+      "viz.army_scale_many": "cf9dc76d",
+      "viz.army_scale_other": "3708e272"
+    }
   }
 }

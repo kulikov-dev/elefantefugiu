@@ -123,6 +123,13 @@ export function hashOf(items: TextItem[], unit: string, lang: TextLang): string 
   return h.digest('hex').slice(0, 12);
 }
 
+/** The hash of every field of a unit in one language (field name -> hash), to say which keys changed after a mark. */
+export function fieldHashes(items: TextItem[], unit: string, lang: TextLang): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const it of items.filter((i) => i.unit === unit && i.lang === lang)) out[it.field] = createHash('sha256').update(it.text).digest('hex').slice(0, 8);
+  return out;
+}
+
 /** Unit keys and the languages each has text in. */
 export function units(items: TextItem[]): { unit: string; lang: TextLang }[] {
   const seen = new Set<string>();
