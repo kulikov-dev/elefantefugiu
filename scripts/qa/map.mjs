@@ -1,10 +1,12 @@
 // Browser checks for stage 5: the map page (and, as the stage goes on, links to it and the map on epoch pages).
 // Run against `dist/` served by serve.mjs (base path "/"). Tiles are answered with a grey picture, nothing leaves the machine.
+//   MAP_SAMPLE=30 MAP_SEED=<week> node map.mjs ...   the long sweeps (limit, link) run the edge cases and 30 picked views (sample.mjs)
 //   node map.mjs [variant] [nojs tiles limit filters preview layout link epoch weight]     FAMILY=all|12 runs it in a family mode
 // The cards, threads and epochs come from src/content (data.mjs). `variant` runs against the fixture build, whose marker limit is 7
 // (variant-plan.mjs) and which has more cards than that, so clusters and "Show more" exist; the real site has a limit of 30.
 import { readFileSync } from 'node:fs';
 import { launchBrowser } from './browser.mjs';
+import { pick, SAMPLE, SEED } from './sample.mjs';
 import { epochs, en as enPath, fixture, isOnMainland, need, pt, real, threads as threadsData } from './data.mjs';
 // The text of the skip link comes from the interface strings, so a rewording does not break the check.
 const SKIP_LABEL = JSON.parse(readFileSync(new URL('../../src/i18n/pt.json', import.meta.url), 'utf8')).map.skip_to_markers;
@@ -175,9 +177,11 @@ if (want('limit')) {
     await phone.close();
   }
 
-  const zoom = async (p, dir) => {
+  // ms: the pause after the click; a view that is only passed on the way to a sampled one needs a short one (the checks are about
+  // what holds in every view, so a click that lands in the middle of an animation changes the coverage, never the verdict)
+  const zoom = async (p, dir, ms = 650) => {
     await p.click(`.leaflet-control-zoom-${dir}`).catch(() => {}); // a disabled button at the zoom limit is fine
-    await wait(650);
+    await wait(ms);
   };
 
   const sample = async (p, label, results) => {
@@ -190,54 +194,63 @@ if (want('limit')) {
     return snap;
   };
 
-  // every thread, every epoch: from 3 steps out to 9 steps in. A fresh page for each, because a reload keeps the last view.
-  const results = { n: 0, nonEmpty: 0, over: [], mismatch: [], max: 0 };
+  // Every thread, every epoch (from 3 steps out to 12 in), and around cards (the link "?id=" centres the map on a card at zoom 14; look from
+  // there out to the whole country and in to the street). A fresh page for each, because a reload keeps the last view.
+  // A view is (unit, step): 15 steps in a unit. Without MAP_SAMPLE all of them run. With it: the edge cases below always, plus SAMPLE views picked
+  // with the seed. Edge cases: every thread and every epoch at the widest, the middle and the deepest zoom; the cards at the four borders of the
+  // mainland (north, south, east, west) at the start, the widest and four steps in.
+  const STEPS = 15;
   const combos = [
     ...THREADS.map((fio) => ({ fio, epoca: null })),
     ...EPOCHS.map((epoca) => ({ fio: null, epoca })),
     { fio: T1, epoca: EP1 },
     { fio: null, epoca: null },
   ];
-  for (const c of combos) {
-    const p = await newPage({ width: 1280, height: 900 });
-    await p.goto(MAP.pt, { waitUntil: 'networkidle0' });
-    await ready(p);
-    if (c.fio) await p.click(`.map-filters button[data-fio="${c.fio}"]`);
-    if (c.epoca) await p.click(`.epoch-scale button[data-epoca="${c.epoca}"]`);
-    await wait(700);
-    const tag = `fio=${c.fio} epoca=${c.epoca}`;
-    for (let i = 0; i < 3; i += 1) {
-      await zoom(p, 'out');
-      await sample(p, `${tag} out${i + 1}`, results);
-    }
-    for (let i = 0; i < 12; i += 1) {
-      await zoom(p, 'in');
-      await sample(p, `${tag} in${i + 1}`, results);
-    }
-    page.errors.push(...p.errors);
-    await p.close();
-  }
-  // around cards: the link "?id=" centres the map on a card at zoom 14; look from there out to the whole country and in to the street
   const allIds = await page.evaluate(() => [...document.querySelectorAll('[data-list-items] > li')].map((li) => li.dataset.id));
-  const around = allIds.filter((_, i) => i % 3 === 0);
-  for (const id of around) {
+  const byPlace = (key, dir) => allIds.map((id) => cards.find((c) => c.id === id)).filter(Boolean).reduce((m, c) => (m === null || dir * (c.place[key] - m.place[key]) > 0 ? c : m), null)?.id;
+  const borders = [byPlace('lat', 1), byPlace('lat', -1), byPlace('lon', 1), byPlace('lon', -1)].filter(Boolean);
+  const around = [...new Set([...allIds.filter((_, i) => i % 3 === 0), ...(SAMPLE ? borders : [])])];
+  const units = [...combos.map((c) => ({ kind: 'combo', ...c })), ...around.map((id) => ({ kind: 'around', id }))];
+  const want = units.map(() => new Set());
+  if (!SAMPLE) want.forEach((w) => { for (let i = 0; i < STEPS; i += 1) w.add(i); });
+  else {
+    units.forEach((u, k) => {
+      if (u.kind === 'combo') [2, 8, 14].forEach((i) => want[k].add(i)); // out3, in6, in12
+      else if (borders.includes(u.id)) [0, 4, 14].forEach((i) => want[k].add(i)); // start, in4, out10
+    });
+    // Opening a page costs more than a zoom step: the SAMPLE views come from a few units (cards), 8 steps from each, and the units change with the seed.
+    const PER_UNIT = 8;
+    const others = units.map((_, k) => k).filter((k) => want[k].size === 0);
+    for (const k of pick(others, Math.ceil(SAMPLE / PER_UNIT), 3)) for (const i of pick(Array.from({ length: STEPS }, (_, i) => i), PER_UNIT, k)) want[k].add(i);
+  }
+  const results = { n: 0, nonEmpty: 0, over: [], mismatch: [], max: 0 };
+  for (const [k, u] of units.entries()) {
+    if (want[k].size === 0) continue;
     const p = await newPage({ width: 1280, height: 900 });
-    await p.goto(`${MAP.pt}?id=${id}`, { waitUntil: 'networkidle0' });
-    await ready(p);
-    await wait(700);
-    await sample(p, `id=${id} start`, results);
-    for (let i = 0; i < 4; i += 1) {
-      await zoom(p, 'in');
-      await sample(p, `id=${id} in${i + 1}`, results);
+    const tag = u.kind === 'combo' ? `fio=${u.fio} epoca=${u.epoca}` : `id=${u.id}`;
+    let path;
+    if (u.kind === 'combo') {
+      await p.goto(MAP.pt, { waitUntil: 'networkidle0' });
+      await ready(p);
+      if (u.fio) await p.click(`.map-filters button[data-fio="${u.fio}"]`);
+      if (u.epoca) await p.click(`.epoch-scale button[data-epoca="${u.epoca}"]`);
+      path = [...[1, 2, 3].map((i) => ['out', `out${i}`]), ...Array.from({ length: 12 }, (_, i) => ['in', `in${i + 1}`])];
+    } else {
+      await p.goto(`${MAP.pt}?id=${u.id}`, { waitUntil: 'networkidle0' });
+      await ready(p);
+      path = [[null, 'start'], ...Array.from({ length: 4 }, (_, i) => ['in', `in${i + 1}`]), ...Array.from({ length: 10 }, (_, i) => ['out', `out${i + 1}`])];
     }
-    for (let i = 0; i < 10; i += 1) {
-      await zoom(p, 'out');
-      await sample(p, `id=${id} out${i + 1}`, results);
+    await wait(700);
+    for (const [i, [dir, label]] of path.entries()) {
+      if (dir) await zoom(p, dir, want[k].has(i) ? 650 : 60);
+      if (want[k].has(i)) await sample(p, `${tag} ${label}`, results);
     }
     page.errors.push(...p.errors);
     await p.close();
   }
-  ok(`map: never more than ${LIMIT} markers and clusters (${results.n} views: every thread, every epoch, around ${around.length} cards, zoom out and in)`, results.over.length === 0, results.over.slice(0, 3).join('; ') || `max=${results.max}`);
+  const total = units.length * STEPS;
+  const what = SAMPLE ? `${results.n} of ${total} views, sample of ${SAMPLE} with seed ${SEED} and the edge cases: every thread, every epoch, the borders of the mainland` : `${results.n} views: every thread, every epoch, around ${around.length} cards`;
+  ok(`map: never more than ${LIMIT} markers and clusters (${what}, zoom out and in)`, results.over.length === 0, results.over.slice(0, 3).join('; ') || `max=${results.max}`);
   ok('map: in every view the list equals what the markers and clusters cover', results.mismatch.length === 0, results.mismatch.slice(0, 3).join('; '));
   ok('map: the sampling is not empty (at least a third of the views show something)', results.nonEmpty >= results.n / 3, `${results.nonEmpty} of ${results.n}`);
 
@@ -452,8 +465,14 @@ if (want('link')) {
     });
 
   // 1. every card: "Open on the map" centres the map on it and opens its preview
+  // MAP_SAMPLE: the first and the last card of every epoch and the cards at the four borders of the mainland, plus LINK_SAMPLE picked ones.
+  const LINK_SAMPLE = 10;
+  const onPage = cards.map((c) => world.published.find((e) => e.id === c.id) ?? c);
+  const extreme = (key, dir) => onPage.filter((c) => c.place).reduce((m, c) => (m === null || dir * (c.place[key] - m.place[key]) > 0 ? c : m), null)?.id;
+  const edge = new Set([...EPOCHS.flatMap((ep) => { const ids = onPage.filter((c) => c.epoch === ep).map((c) => c.id); return [ids[0], ids.at(-1)]; }), extreme('lat', 1), extreme('lat', -1), extreme('lon', 1), extreme('lon', -1)].filter(Boolean));
+  const toCheck = SAMPLE ? [...cards.filter((c) => edge.has(c.id)), ...pick(cards.filter((c) => !edge.has(c.id)), LINK_SAMPLE, 7)] : cards;
   const bad = [];
-  for (const card of cards) {
+  for (const card of toCheck) {
     const p = await newPage({ width: 1280, height: 900 });
     // the bridge block is in layer 3, which #detalhes opens
     await p.goto(new URL(card.href, base).href + "#detalhes", { waitUntil: "networkidle0" });
@@ -465,7 +484,7 @@ if (want('link')) {
     if (!okCard) bad.push(`${card.id} ${JSON.stringify(s)}`);
     await p.close();
   }
-  ok(`link: "Open on the map" centres the map on the card and opens its preview (all ${cards.length} cards, pt)`, bad.length === 0, bad.slice(0, 2).join(' | '));
+  ok(`link: "Open on the map" centres the map on the card and opens its preview (${SAMPLE ? `${toCheck.length} of ${cards.length} cards, sample of ${LINK_SAMPLE} with seed ${SEED} and the edge cases: first and last of every epoch, the borders` : `all ${cards.length} cards`}, pt)`, bad.length === 0, bad.slice(0, 2).join(' | '));
 
   const en = await newPage({ width: 360, height: 740 });
   await en.goto(`${base}${enPath(C0)}#detalhes`, { waitUntil: 'networkidle0' });
