@@ -18,7 +18,7 @@
   years_label:
     pt: "há cerca de 150 milhões de anos – séc. VI a.C."
     en: "about 150 million years ago – 6th c. BC"
-    ru: "150 млн лет — VI в. до н. э."
+    ru: "около 150 млн лет назад – VI в. до н. э."
   theme:
     pt: "Pegadas de dinossauros, gravuras do Côa, cromeleques"
     en: "Dinosaur tracks, Côa rock art, stone circles"
@@ -57,7 +57,7 @@
     caption:
       pt: "Ilustração criada por IA a partir da época de Avis e dos Descobrimentos. Não é uma imagem histórica."
       en: "AI-generated illustration based on the era of Avis and the Discoveries. Not a historical image."
-      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Ависов и Великих открытий. Не историческое изображение."
+      ru: "Иллюстрация создана ИИ по мотивам эпохи Ависов и Великих открытий. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
     ai: true
@@ -189,7 +189,7 @@
     caption:
       pt: "Ilustração criada por IA a partir da época de Pombal. Não é uma imagem histórica."
       en: "AI-generated illustration based on the era of Pombal. Not a historical image."
-      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Помбала. Не историческое изображение."
+      ru: "Иллюстрация создана ИИ по мотивам эпохи Помбала. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
     ai: true
@@ -339,7 +339,7 @@
   years_label:
     pt: "séc. VI a.C. – séc. V"
     en: "6th c. BC – 5th c."
-    ru: "до V в."
+    ru: "VI в. до н. э. – V в."
   theme:
     pt: "Viriato, estradas e latim"
     en: "Viriathus, roads, and Latin"
@@ -359,7 +359,7 @@
     caption:
       pt: "Ilustração criada por IA a partir da época da Lusitânia e Roma. Não é uma imagem histórica."
       en: "AI-generated illustration based on the era of Lusitania and Rome. Not a historical image."
-      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Лузитании и Рима. Не историческое изображение."
+      ru: "Иллюстрация создана ИИ по мотивам эпохи Лузитании и Рима. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
     ai: true
@@ -538,7 +538,7 @@
     caption:
       pt: "Ilustração criada por IA a partir da época da União, Restauração e ouro do Brasil. Não é uma imagem histórica."
       en: "AI-generated illustration based on the era of the Union, the Restoration, and Brazilian gold. Not a historical image."
-      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Унии, Реставрации и золота Бразилии. Не историческое изображение."
+      ru: "Иллюстрация создана ИИ по мотивам эпохи Унии, Реставрации и золота Бразилии. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
     ai: true
@@ -588,7 +588,7 @@
       text:
         pt: "Em 1660, Samuel Pepys escreveu no diário que pediu uma chávena de chá, coisa que nunca tinha bebido. Hoje os britânicos bebem mais de 100 milhões de chávenas por dia, segundo a associação do chá do Reino Unido, em 2023."
         en: "In 1660 Samuel Pepys wrote in his diary that he sent for a cup of tea, never drunk before. Britons now drink more than 100 million cups a day, the UK Tea & Infusions Association said in 2023."
-        ru: "В 1660 году Сэмюэл Пипс записал в дневнике, что велел принести чашку чая, которого никогда прежде не пробовал. Сегодня британцы выпивают больше 100 миллионов чашек в день, сообщила ассоциация чая в 2023 году."
+        ru: "В 1660 году Сэмюэл Пипс записал в дневнике, что велел принести чашку чая, которого никогда прежде не пробовал. Сегодня британцы выпивают больше 100 миллионов чашек в день, сообщила Британская ассоциация чая и настоев в 2023 году."
       kind: known
       story: catarina-cha-1662
       sources:
@@ -659,7 +659,7 @@
     caption:
       pt: "Ilustração criada por IA a partir da época da Monarquia e República. Não é uma imagem histórica."
       en: "AI-generated illustration based on the era of the Monarchy and the Republic. Not a historical image."
-      ru: "Иллюстрация создана ИИ (Gemini) по эпохе Монархии и Республики. Не историческое изображение."
+      ru: "Иллюстрация создана ИИ по мотивам эпохи Монархии и Республики. Не историческое изображение."
     author: Gemini (AI)
     license: AI-generated
     ai: true

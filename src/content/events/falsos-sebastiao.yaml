@@ -44,7 +44,7 @@ sensitive: false
 hook:
   pt: Durante quase vinte anos, o rei desaparecido foi «encontrado».
   en: The missing king kept being “found” for almost twenty years.
-  ru: Пропавшего короля «находили» двадцать лет подряд.
+  ru: Пропавшего короля «находили» почти двадцать лет подряд.
 story:
   pt: Em 1578, o jovem rei D. Sebastião desapareceu numa batalha em Marrocos. Ninguém viu bem o corpo,
     e os portugueses acreditavam que o rei voltaria numa manhã de nevoeiro para salvar o país dos
@@ -89,7 +89,7 @@ more:
     итальянец Марко Туллио Катицоне.
 
 
-    Фраза «ждать короля Себастьяна» до сих пор значит по-португальски «ждать чуда, которого не
+    Фраза «ждать короля Себастьяна» значит по-португальски «ждать чуда, которого не
     будет».
 sources:
   - title: "Interacções (ISMT): José Henrique Dias, «D. Sebastião e as Máscaras»"

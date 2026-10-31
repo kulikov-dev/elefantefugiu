@@ -35,7 +35,7 @@ bridge:
   note:
     pt: Os socalcos de chá descem até ao oceano, e na fábrica trabalham máquinas antigas.
     en: The tea terraces slope down to the ocean, and old machines still work in the factory.
-    ru: Чайные террасы спускаются к океану, а в цехе стоят старые машины.
+    ru: Чайные террасы спускаются к океану, а в цехе до сих пор работают старые машины.
 threads:
   - comida-e-vinho
   - natureza
@@ -58,8 +58,7 @@ story:
     were brought in from Macau, and they taught the locals to grow and dry the leaf. In 1883 the
     Gorreana plantation was founded. It’s still running, and it’s the oldest tea plantation in
     Europe.
-  ru: "Остров Сан-Мигел на Азорах жил апельсинами: их везли кораблями в Англию. Но к 1864 году болезнь
-    почти уничтожила сады. Островитяне искали, чем их заменить, и решили попробовать чай. В 1878
+  ru: "Остров Сан-Мигел на Азорах жил апельсинами: их везли кораблями в Англию. Но около 1864 года болезнь почти уничтожила сады. Островитяне искали, чем их заменить, и решили попробовать чай. В 1878
     году из Макао пригласили двух китайских мастеров, Лау-а-Пана и его переводчика Лау-а-Тенга, и
     они научили местных растить и сушить чайный лист. В 1883 году появилась плантация Горреана. Она
     работает до сих пор, и это самая старая чайная плантация Европы."

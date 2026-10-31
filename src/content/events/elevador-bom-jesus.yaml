@@ -49,7 +49,7 @@ sensitive: false
 hook:
   pt: Duas cabines, um cabo e água em vez de motor.
   en: Two cars, one cable, and water instead of a motor.
-  ru: Фуникулёр, который 140 лет работает на воде.
+  ru: Две кабины, один трос и вода вместо мотора.
 story:
   pt: Sobre Braga ergue-se o santuário do Bom Jesus do Monte, com uma enorme escadaria barroca. Em
     1882, a subida dos peregrinos ficou mais fácil com um funicular. As duas cabines estão ligadas
@@ -85,7 +85,7 @@ more:
     Длина пути 274 метра, подъём 116 метров.
 
 
-    Спроектировал его Раул Мениер дю Понсар вместе со швейцарским инженером Никлаусом Риггенбахом.
+    Спроектировал его Рауль Мениер дю Понсар вместе со швейцарским инженером Никлаусом Риггенбахом.
     Через двадцать лет тот же Мениер построит в Лиссабоне лифт Санта-Жушта.
 sources:
   - title: "Bom Jesus do Monte: «Elevator or Funicular»"

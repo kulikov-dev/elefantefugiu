@@ -45,7 +45,7 @@ sensitive: false
 hook:
   pt: Um hidroavião desfez-se nas ondas, outro amarou, o terceiro chegou ao Rio.
   en: One seaplane broke up, one landed at sea, the third reached Rio.
-  ru: Первыми через Южную Атлантику перелетели, сменив три самолёта.
+  ru: Один гидроплан разбился, второй сел на воду, третий долетел до Рио.
 story:
   pt: Em 1922, dois oficiais da Marinha, Gago Coutinho e Sacadura Cabral, decidiram voar de Lisboa ao
     Brasil no centenário da sua independência. Sobre o oceano não há onde fixar o olhar, e Coutinho
@@ -86,7 +86,7 @@ more:
     calculated, but landing on a steep wave, the “Lusitânia” lost a float and sank. The crew of the
     second plane, the “Pátria,” drifted for nine hours before they were picked up.
   ru: >-
-    Обычный морской секстант нужен горизонт, а с высоты в дымке его не видно. Коутинью приделал к
+    Обычному морскому секстанту нужен горизонт, а с высоты в дымке его не видно. Коутинью приделал к
     секстанту искусственный горизонт, пузырёк уровня, и смог мерить высоту солнца прямо в полёте.
     Этот прибор потом выпускали серийно.
 

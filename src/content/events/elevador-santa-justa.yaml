@@ -45,7 +45,7 @@ sensitive: false
 hook:
   pt: Projetou-o um aluno de Eiffel, e por isso o atribuem ao mestre.
   en: Many credit Eiffel, but a student of his designed it.
-  ru: Железный лифт, который построил не Эйфель.
+  ru: Его проектировал ученик Эйфеля, поэтому лифт путают с работой учителя.
 story:
   pt: A Baixa fica em baixo, e o Chiado no alto da colina. Para os lisboetas não terem de subir
     escadas, em 1900 começou a construir-se uma torre de ferro com um elevador. Dois anos depois, o
@@ -78,7 +78,7 @@ more:
     The elevator has two wooden cars, each holding 29 people. At the top there’s a viewing platform and
     a walkway leading to the ruins of the Carmo Convent, destroyed in the 1755 earthquake.
   ru: >-
-    На самом деле лифт спроектировал Раул Мениер дю Понсар, инженер, родившийся в Порту в семье
+    На самом деле лифт спроектировал Рауль Мениер дю Понсар, инженер, родившийся в Порту в семье
     французов. Он учился у Эйфеля, отсюда и сходство. Мениер построил в Лиссабоне и другие
     подъёмники и фуникулёры, а ещё раньше фуникулёр в Браге, который до сих пор ездит на воде.
 
