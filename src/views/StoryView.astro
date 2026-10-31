@@ -10,6 +10,7 @@ import Figure from '../components/Figure.astro';
 import ShipScale from '../components/ShipScale.astro';
 import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
 import NextStory from '../components/NextStory.astro';
+import { claimStoryName } from '../lib/transitions';
 import PagerNav from '../components/PagerNav.astro';
 import PlaceholderNotice from '../components/PlaceholderNotice.astro';
 import RelatedList from '../components/RelatedList.astro';
@@ -199,7 +200,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     <div class="gated card__rest">
 
     <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id}>
-      <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" />}</Fragment>
+      <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
       <p slot="story">{event.story[lang]}</p>
       <Fragment slot="after">
         {

@@ -244,6 +244,8 @@
 
   /* Motion */
   --transition: 150ms ease;
+  /* The cross-fade of a page change (View Transitions, transitions.css). */
+  --vt-duration: 220ms;
 
   /* Epoch decoration: heading face, weight and the frame of a card. */
   --epoch-heading-font: var(--font-heading);

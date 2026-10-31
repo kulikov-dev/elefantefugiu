@@ -90,6 +90,7 @@ words `evento-exemplo` of a card that is not published appears anywhere in `dist
 | `azulejo` / `azulejo-variant` | the patterns in both themes, the waiting tile of the map, reduced motion, layout shifts, the neutral header |
 | `ru` / `ru-variant` | the language menu, the root choice, Cyrillic fonts only where Cyrillic is drawn, plural forms; the banner for a card that is not translated (variant) |
 | `pages` | the static pages, the report form (answered by the test, nothing leaves the machine), "Continue", the QR address |
+| `transitions` | page transitions: the `@view-transition` rule and `navigation: none` under reduced motion, no name twice, the same name in a list and on the story, speculation rules (prefetch only, no prerender), one counter hit per move ("a transition ran" is only a WARN line: a headless Chrome does not always make it) |
 | `service` | the service pages, the form from a story, the thank-you screen, 404 in every language |
 | `mascot` / `mascot-variant` | the elephant: logo, 404, walking by the pager, empty states, none on heavy cards and the regime epoch |
 

@@ -33,4 +33,5 @@ export const SUITES = [
   { name: 'family-controls-variant', script: 'family.mjs', args: ['variant', 'toggle', 'lists', 'recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'surprise-read', 'map'], variant: true, about: 'the family checks on the fixture build (more cards, a long epoch with the grid, markers over the limit)' },
   { name: 'family-variant', script: 'family.mjs', args: ['variant', 'variant-epoch'], variant: true, about: 'a 16+ epoch that every mode leaves empty (fixture build)' },
   { name: 'interactives-variant', script: 'interactives.mjs', args: ['variant'], variant: true, about: 'the same for the dots plus the ship scale (a fixture card): the real site has no ship card' },
+  { name: 'transitions', script: 'transitions.mjs', about: 'page transitions: the @view-transition rule, unique names, none under reduced motion, speculation rules (prefetch only), one counter hit per move' },
 ];

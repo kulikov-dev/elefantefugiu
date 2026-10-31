@@ -6,6 +6,7 @@ import { Image } from 'astro:assets';
 import { pictureSource } from '../lib/picture-assets';
 import type { Lang } from '../i18n/routes';
 import type { PictureData } from '../lib/pictures';
+import { STORY_IMAGE_CLASS } from '../lib/transitions';
 
 interface Props {
   picture: PictureData;
@@ -21,10 +22,13 @@ interface Props {
   crop?: boolean;
   /** WebP quality; teasers of other stories further down the page are lighter than the picture of the story itself. */
   quality?: number;
+  /** view-transition-name of the picture of a story (src/lib/transitions.ts); the same name is on the main picture of the story page. */
+  transitionName?: string | undefined;
 }
 
-const { picture, lang, widths, sizes, loading = 'lazy', class: className, decorative = false, crop = false, quality = 80 } = Astro.props;
+const { picture, lang, widths, sizes, loading = 'lazy', class: className, decorative = false, crop = false, quality = 80, transitionName } = Astro.props;
 const source = pictureSource(picture.file);
+const style = [crop && picture.focus ? `object-position: ${picture.focus}` : '', transitionName ? `view-transition-name: ${transitionName}; view-transition-class: ${STORY_IMAGE_CLASS}` : ''].filter(Boolean).join('; ') || undefined;
 ---
 <Image
   src={source}
@@ -37,5 +41,5 @@ const source = pictureSource(picture.file);
   decoding="async"
   fetchpriority={loading === 'eager' ? 'high' : undefined}
   class={className}
-  style={crop && picture.focus ? `object-position: ${picture.focus}` : undefined}
+  style={style}
 />

@@ -36,6 +36,7 @@ import { loadSite } from '../lib/site-data';
 import JsonLd from '../components/JsonLd.astro';
 import { graph, type Node } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
+import { speculationRules } from '../lib/transitions';
 
 interface Props {
   lang: Lang;
@@ -114,6 +115,8 @@ const { threads: allThreads } = await loadSite();
 const azulejoCss = azulejoRule({ bussola, canto, estrela, no, 'no-v': noV, onda, 'onda-v': ondaV, pegada, 'pegada-v': pegadaV, rombo, rosa, tapete, xadrez, 'xadrez-v': xadrezV }, epoch);
 // Structured data: on every indexable page (not on noindex pages and not on the 404 page).
 const jsonLd = noindex || allLangs ? undefined : graph(schemaContext(lang, Astro.site), schema ?? []);
+// Prefetch (never prerender) of the internal pages a reader points at or touches; see src/lib/transitions.ts. The base path is the one of the site.
+const speculation = JSON.stringify(speculationRules(withBase().slice(0, -1)));
 const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
 ---
 <!doctype html>
@@ -155,6 +158,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <style is:inline set:html={azulejoCss} />
     {jsonLd && <JsonLd data={jsonLd} />}
     <slot name="head" />
+    <script type="speculationrules" is:inline set:html={speculation} />
     {counting && <script is:inline set:html={ANALYTICS_CONFIG_SCRIPT} />}
     {counting && <script is:inline async data-goatcounter={GOATCOUNTER_ENDPOINT} src={withBase(GOATCOUNTER_SCRIPT)}></script>}
   </head>

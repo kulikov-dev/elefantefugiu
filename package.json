@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node scripts/check-i18n.mjs && node scripts/check-contrast.mjs && npm test && tsx scripts/check-data.ts && astro build",
-    "postbuild": "node scripts/make-sitemap.mjs && node scripts/check-sitemap.mjs && node scripts/check-previews.mjs && node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs && node scripts/check-tokens.mjs && node scripts/check-ru.mjs && node scripts/check-mascot.mjs && node scripts/check-published.mjs && node scripts/check-email.mjs && node scripts/check-https.mjs && node scripts/check-schema.mjs",
+    "postbuild": "node scripts/make-sitemap.mjs && node scripts/check-sitemap.mjs && node scripts/check-previews.mjs && node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs && node scripts/check-tokens.mjs && node scripts/check-ru.mjs && node scripts/check-mascot.mjs && node scripts/check-published.mjs && node scripts/check-email.mjs && node scripts/check-https.mjs && node scripts/check-schema.mjs && node scripts/check-transitions.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "check:data": "tsx scripts/check-data.ts",
@@ -22,6 +22,7 @@
     "check:listings": "node scripts/check-listings.mjs",
     "test:unit": "vitest run",
     "check:tokens": "node scripts/check-tokens.mjs",
+    "check:transitions": "node scripts/check-transitions.mjs",
     "check:ru": "node scripts/check-ru.mjs && node scripts/check-mascot.mjs",
     "check:published": "node scripts/check-published.mjs",
     "check:email": "node scripts/check-email.mjs",

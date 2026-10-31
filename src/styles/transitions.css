@@ -1,0 +1,34 @@
+/* A page change in the browser as a short cross-fade (cross-document View Transitions): no SPA, no script. A browser without support (Firefox)
+   ignores every rule here and opens the page as before. The pictures of stories carry a view-transition-name of their own (story-<slug>, set
+   in the markup: src/lib/transitions.ts), the same on the picture in a list and on the main picture of the story page, so the picture flows. */
+@view-transition {
+  navigation: auto;
+}
+
+/* The page fades; the header has a name of its own and does not blink with it. */
+::view-transition-group(root),
+::view-transition-group(site-header) {
+  animation-duration: var(--vt-duration);
+}
+
+.site-header {
+  view-transition-name: site-header;
+}
+
+/* The picture of the list (a crop) and the main picture of the story (whole) are different boxes: both snapshots fill the group, cropped alike. */
+::view-transition-group(*.story-image) {
+  animation-duration: var(--vt-duration);
+}
+
+::view-transition-old(*.story-image),
+::view-transition-new(*.story-image) {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No transitions at all for readers who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+}

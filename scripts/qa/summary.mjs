@@ -28,6 +28,7 @@ const rows = list.map((s) => {
 const shardTime = {};
 for (const r of rows) shardTime[shardOf[r.s.name] ?? '?'] = (shardTime[shardOf[r.s.name] ?? '?'] ?? 0) + r.seconds;
 const failed = rows.filter((r) => r.bad);
+const warnings = rows.flatMap((r) => (results[r.s.name]?.warnings ?? []).map((w) => `- ${r.s.name}: ${w.replace(/^WARN\s+/, '')}`));
 console.log('### QA full');
 console.log('');
 console.log('| suite | checks | result | time | shard |');
@@ -35,6 +36,12 @@ console.log('|---|---:|---|---:|---:|');
 for (const r of rows) console.log(r.line);
 console.log('');
 console.log(`${rows.length} suites, ${rows.reduce((n, r) => n + r.checks, 0)} checks, ${failed.length === 0 ? 'all passed' : `${failed.length} failed or not run: ${failed.map((r) => r.s.name).join(', ')}`}`);
+if (warnings.length) {
+  console.log('');
+  console.log('Warnings (not failures):');
+  console.log('');
+  for (const w of warnings) console.log(w);
+}
 console.log('');
 console.log(`Suite time per shard: ${Object.entries(shardTime).map(([k, v]) => `${k}: ${Math.floor(v / 60)} min ${v % 60} s`).join(', ')}`);
 process.exit(failed.length ? 1 : 0);

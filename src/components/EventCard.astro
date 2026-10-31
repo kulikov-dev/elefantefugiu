@@ -12,6 +12,7 @@ import ThreadChip from './ThreadChip.astro';
 import Pic from './Pic.astro';
 import ReadMark from './ReadMark.astro';
 import type { PictureData } from '../lib/pictures';
+import { claimStoryName } from '../lib/transitions';
 
 interface Props {
   lang: Lang;
@@ -34,6 +35,8 @@ interface Props {
 
 const { lang, event, variant, threads, visibleThreadIds, showThreads = true, scaleYear = false, toneEpoch, fallback, tiles = false } = Astro.props;
 const picture = event.image ?? fallback;
+// Only the story's own picture flows into the story page (the picture of the epoch does not appear there).
+const transitionName = event.image ? claimStoryName(Astro.request, event.slug[lang]) : undefined;
 // A thumbnail is 5.5 rem wide; a tile of the grid is as wide as its column.
 const wide = variant === 'grid' || tiles;
 // A full date ("14 August 1385") is more exact than the year; it stays on the line of the card whatever the layout.
@@ -67,6 +70,7 @@ const WIDE_SIZES = '(min-width: 72rem) 326px, (min-width: 52rem) calc((100vw - 6
           widths={wide ? [320, 480, 640, 960] : [176, 264, 352]}
           sizes={wide ? WIDE_SIZES : '88px'}
           crop
+          transitionName={transitionName}
         />
       )
     }

@@ -32,7 +32,8 @@
   "epoch-page": 17,
   "map-tools-variant": 3,
   "mascot": 11,
-  "mascot-variant": 3
+  "mascot-variant": 3,
+  "transitions": 20
  },
  "shards": [
   [
@@ -52,7 +53,8 @@
    "ru",
    "epoch-page",
    "behave",
-   "map-tools-variant"
+   "map-tools-variant",
+   "transitions"
   ],
   [
    "map-limit",

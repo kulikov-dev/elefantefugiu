@@ -23,7 +23,15 @@ const start = async () => {
 // cannot be opened for that reason is opened again in a new browser, and the log says so (a line "NOTE"); any other error is thrown as it is.
 const DEAD = /Session with given id not found|Target closed|Connection closed|Protocol error|Browser has disconnected/i;
 
-export async function launchBrowser() {
+// The speculation rules of the site (prefetch of the link a reader points at) are removed from every page, except for a suite that asks for them
+// (launchBrowser({ prefetch: true }), transitions.mjs): a click that follows a prefetch is a navigation that puppeteer's waitForNavigation does not see.
+const NO_PREFETCH = () => {
+  new MutationObserver((records) => {
+    for (const r of records) for (const n of r.addedNodes) if (n.nodeName === 'SCRIPT' && n.type === 'speculationrules') n.remove();
+  }).observe(document, { childList: true, subtree: true });
+};
+
+export async function launchBrowser({ prefetch = false } = {}) {
   let browser = await start();
   const again = async (open) => {
     try {
@@ -38,8 +46,27 @@ export async function launchBrowser() {
   };
   return new Proxy({}, {
     get(_, name) {
-      if (name === 'newPage') return () => again((b) => b.newPage());
-      if (name === 'createBrowserContext') return () => again((b) => b.createBrowserContext());
+      if (name === 'newPage') {
+        return () =>
+          again(async (b) => {
+            const page = await b.newPage();
+            if (!prefetch) await page.evaluateOnNewDocument(NO_PREFETCH);
+            return page;
+          });
+      }
+      if (name === 'createBrowserContext') {
+        return () =>
+          again(async (b) => {
+            const context = await b.createBrowserContext();
+            const open = context.newPage.bind(context);
+            context.newPage = async () => {
+              const page = await open();
+              if (!prefetch) await page.evaluateOnNewDocument(NO_PREFETCH);
+              return page;
+            };
+            return context;
+          });
+      }
       const value = browser[name];
       return typeof value === 'function' ? value.bind(browser) : value;
     },

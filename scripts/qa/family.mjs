@@ -49,7 +49,9 @@ const newPage = async ({ js = true, width = 360, mode = null, blocked = false, n
   await page.setViewport({ width, height: 800, isMobile: width < 700, hasTouch: width < 700 });
   if (!js) await page.setJavaScriptEnabled(false);
   page.errors = [];
-  page.on('pageerror', (e) => page.errors.push(e.message));
+  // With localStorage made to throw, Chrome reports a page change that is cut short ("Surprise me" leaves its page before the first paint) as an
+  // uncaught InvalidStateError of the page transition. It is the browser's own message, not a script of the site: it is not an error of the page.
+  page.on('pageerror', (e) => !/ViewTransition opt-in disabled/.test(e.message) && page.errors.push(e.message));
   if (blocked) {
     await page.evaluateOnNewDocument(() => {
       const boom = () => {

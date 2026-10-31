@@ -185,10 +185,15 @@ for (const suite of wanted) {
   const pass = count('PASS');
   const fail = count('FAIL');
   const ok = result.code === 0 && fail === 0 && pass > 0;
-  data.results[suite.name] = { retried: retried || undefined, pass, fail, skip: count('SKIP'), code: result.code, ok, seconds: Math.round((Date.now() - t0) / 1000), note: ok || fail ? undefined : pass === 0 ? 'no checks ran, see out/' + suite.name + '.log' : undefined };
+  data.results[suite.name] = { retried: retried || undefined, pass, fail, skip: count('SKIP'), warnings: result.log.split('\n').filter((l) => /^WARN/.test(l)).map((l) => l.trim().slice(0, 300)), code: result.code, ok, seconds: Math.round((Date.now() - t0) / 1000), note: ok || fail ? undefined : pass === 0 ? 'no checks ran, see out/' + suite.name + '.log' : undefined };
   save(data);
   const seconds = Math.round((Date.now() - t0) / 1000);
   console.log(ok ? `${pass} passed (${seconds}s${retried ? ', after a retry' : ''})` : `FAILED (${fail} failed, exit ${result.code}; log: scripts/qa/out/${suite.name}.log)`);
+  // A line WARN in a log is a warning, not a check: it is shown (and annotated in GitHub Actions) but does not fail the suite.
+  for (const w of data.results[suite.name].warnings) {
+    console.log(`    ${w}`);
+    if (inActions) console.log(`::warning title=QA ${suite.name}::${w.replace(/[\r\n%]/g, ' ')}`);
+  }
   if (verbose) console.log(result.log);
   else if (!ok) {
     // Details only for a failing suite: its failed checks (or the last lines of the log when no check ran), at most 25 lines.
