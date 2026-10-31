@@ -9,6 +9,7 @@ import { needsAttribution } from '../src/lib/pictures';
 import { firstSentence } from '../src/lib/events';
 import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
 import { pending } from './lib/lang-review';
+import { isLive } from '../src/lib/publication.mjs';
 
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -124,7 +125,8 @@ for (const { item, file } of epochs) {
 // is one sentence of 25-40 words in every language it is written in, the sources are addresses without Cyrillic titles, and a story that is not
 // published yet is a note (its link is hidden until it is).
 {
-  const readyIds = new Set(events.filter((e) => e.item.status === 'ready').map((e) => e.item.id));
+  // A story queued for a later day is not on the site yet (src/lib/publication.mjs): a link to it is hidden like a link to a draft.
+const readyIds = new Set(events.filter((e) => isLive(e.item)).map((e) => e.item.id));
   for (const { item, file } of epochs) {
     (item.then_now ?? []).forEach((card, i) => {
       const at = `then_now[${i}]`;

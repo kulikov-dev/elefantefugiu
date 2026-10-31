@@ -40,6 +40,14 @@ When a prompt says to show something and wait for "ok" (or approval) before goin
 
 Branch, not main: branch -> push -> QA full on the branch (`gh workflow run qa-full.yml --ref <branch>`, or Actions -> QA full -> Run workflow -> choose the branch; `qa-full.yml` has `workflow_dispatch` and checks out the chosen ref) -> `gh run watch` / `gh run view <id> --log-failed` -> merge into main only after it is green.
 
+## Queue of stories (scheduled publication)
+
+A story is on the site only when it is `status: ready` **and** its `published` day is not after today in Lisbon (`Europe/Lisbon`) at the moment of the build; one function decides: `isLive` in `src/lib/publication.mjs` (pages take it through `isPublished` in `src/lib/events.ts`; scripts that read the YAML files import it too). A story with a future day is like a draft: no page, no links, no sitemap line, and `check:published` fails if any trace of it reaches `dist/`.
+
+- **Queue a story:** `status: ready` and `published: 'YYYY-MM-DD'` in the future, then commit and push as usual. It comes out in the first build after 05:00 UTC of that day (Lisbon is already on the new day then): `deploy.yml` runs on every push and every day at 05:00 UTC (`schedule`), whether or not a story is due.
+- `npm run schedule` lists the queue for the next 8 weeks (date, slug, epoch, ready languages) and warns about a story without pt or en. `SITE_TODAY=YYYY-MM-DD` sets the day of a build or of a script (tests and stand-in builds); never write a date into a test, take it from the clock or the data.
+- GitHub switches a schedule off in a public repository after 60 days without a commit. With a longer queue make any commit, or run Deploy by hand (Actions, Run workflow), which switches the schedule on again; otherwise a queued story does not come out on its day.
+
 ## Economy mode (the default)
 
 Follow this by default; it narrows the rules above (the owner can lift any point in a prompt).
