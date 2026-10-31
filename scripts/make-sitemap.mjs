@@ -13,6 +13,7 @@ import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { isLive } from '../src/lib/publication.mjs';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const site = (process.env.SITE_URL || 'http://localhost:4321').replace(/\/+$/, '');
@@ -37,7 +38,7 @@ const latest = (days) => days.filter(Boolean).sort().at(-1) ?? '';
 const events = readdirSync(join(root, 'src/content/events'))
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => ({ ...parse(readFileSync(join(root, 'src/content/events', f), 'utf8')), day: dayOf(`src/content/events/${f}`) }))
-  .filter((e) => e.status === 'ready');
+  .filter((e) => isLive(e));
 const bySlug = (lang) => new Map(events.map((e) => [e.slug[lang] ?? e.slug.en, e]));
 const epochs = parse(readFileSync(join(root, 'src/content/epochs.yaml'), 'utf8'));
 const threads = parse(readFileSync(join(root, 'src/content/threads.yaml'), 'utf8'));

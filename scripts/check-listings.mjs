@@ -4,6 +4,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
+import { isLive } from '../src/lib/publication.mjs';
 
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -20,7 +21,7 @@ const eventsDir = join(root, 'src/content/events');
 const events = readdirSync(eventsDir)
   .filter((n) => n.endsWith('.yaml'))
   .map((n) => parse(readFileSync(join(eventsDir, n), 'utf8'), { schema: 'core', customTags: ['timestamp'] }))
-  .filter((e) => e.status === 'ready');
+  .filter((e) => isLive(e));
 const epochs = load('epochs.yaml').sort((a, b) => a.order - b.order);
 const threads = load('threads.yaml');
 

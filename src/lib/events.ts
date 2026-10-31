@@ -4,12 +4,19 @@ import type { eventSchema } from '../data/schemas';
 import { t } from '../i18n';
 import { LOCALES, type Lang } from '../i18n/routes';
 import type { Localized } from './localize';
+import { buildToday, isLive } from './publication.mjs';
 
 /** An event as the pages read it: every text object has a `ru` (see localize.ts). */
 export type EventData = Localized<z.infer<typeof eventSchema>>;
 
-/** Only `ready` events are published (docs/spec.md section 7). */
-export const isPublished = (event: Pick<EventData, 'status'>): boolean => event.status === 'ready';
+// "Today" of this build in Lisbon (or SITE_TODAY): the day every story is judged against. One value for the whole build.
+const TODAY = buildToday();
+
+/**
+ * Is the story on the site? `ready` and published today or before in Lisbon (src/lib/publication.mjs): a story queued for a later day is like a draft until that day's build
+ * (docs/spec.md section 7). Every page, list, link, map point and counter takes its stories through this function.
+ */
+export const isPublished = (event: Pick<EventData, 'status'> & { published?: unknown }): boolean => isLive(event, TODAY);
 
 export function yearRange(event: Pick<EventData, 'year'>): [number, number] {
   return typeof event.year === 'number' ? [event.year, event.year] : [event.year.from, event.year.to];

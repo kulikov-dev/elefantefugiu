@@ -4,6 +4,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { isLive } from '../../src/lib/publication.mjs';
 import { FRAME, H, SAFE, W, asset, cardHash, cropBox, epochPalette, loadFonts, paper, patternName, patternSource, rounded, textPath, tileBody, tokensCss } from './og-card.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
@@ -33,7 +34,7 @@ export function epochYears(epoch, lang) {
  * has no page, so it has no card; when it opens, the next build makes it.
  */
 export function liveEpochs(epochs, events) {
-  return epochs.filter((e) => events.some((s) => s.status === 'ready' && s.epoch === e.id) && typeof e.fallback_image === 'object' && e.fallback_image?.file);
+  return epochs.filter((e) => events.some((s) => isLive(s) && s.epoch === e.id) && typeof e.fallback_image === 'object' && e.fallback_image?.file);
 }
 
 // ---- drawing ----

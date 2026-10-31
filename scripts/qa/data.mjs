@@ -5,6 +5,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { fsPath } from './browser.mjs';
+import { isLive } from '../../src/lib/publication.mjs';
 
 const { parse } = createRequire(import.meta.url)('../../node_modules/yaml');
 const content = fsPath(new URL('../../src/content/', import.meta.url));
@@ -13,7 +14,7 @@ const read = (name) => parse(readFileSync(`${content}${name}`, 'utf8'));
 export const events = readdirSync(`${content}events`)
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => ({ ...parse(readFileSync(`${content}events/${f}`, 'utf8')), file: f }));
-export const published = events.filter((e) => e.status === 'ready');
+export const published = events.filter((e) => isLive(e));
 export const fixtures = events.filter((e) => e.status === 'draft');
 export const epochs = read('epochs.yaml').sort((a, b) => a.order - b.order);
 export const threads = read('threads.yaml');
@@ -53,7 +54,7 @@ export const epochsOfThread = (threadId, list = published) => epochs.filter((ep)
  */
 import { variantOf } from './variant-plan.mjs';
 function makeWorld(list) {
-  const pub = list.filter((e) => e.status === 'ready');
+  const pub = list.filter((e) => isLive(e));
   const inEp = (id) => pub.filter((e) => e.epoch === id);
   return {
     published: pub,

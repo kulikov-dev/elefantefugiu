@@ -3,6 +3,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from 'yaml';
+import { isLive } from '../src/lib/publication.mjs';
 
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -17,7 +18,7 @@ const eventsDir = join(root, 'src/content/events');
 const events = readdirSync(eventsDir)
   .filter((n) => n.endsWith('.yaml'))
   .map((n) => parse(readFileSync(join(eventsDir, n), 'utf8'), { schema: 'core', customTags: ['timestamp'] }))
-  .filter((e) => e.status === 'ready');
+  .filter((e) => isLive(e));
 // The epochs: an epoch has a page (and is a place "Next" can lead to) when it is part of the MVP and has a ready card.
 const epochList = parse(readFileSync(join(root, 'src/content/epochs.yaml'), 'utf8'), { schema: 'core' });
 const liveEpochs = epochList.filter((e) => e.mvp && events.some((ev) => ev.epoch === e.id)).sort((a, b) => a.order - b.order);

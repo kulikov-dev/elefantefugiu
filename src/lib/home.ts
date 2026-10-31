@@ -1,6 +1,7 @@
 // Pure helpers for the home page. No Astro imports, so they run in plain unit tests.
 import { epochFeed, epochHasContent, type EpochData } from './epochs';
-import type { EventData } from './events';
+import { isPublished, type EventData } from './events';
+import { isLive } from './publication.mjs';
 import { ageInfoOf, countByMode, type FamilyMode } from './family';
 
 /** The first epoch (by `order`) that has a page: the target of the "Start" button. */
@@ -12,8 +13,8 @@ export function firstMvpEpoch<E extends Pick<EpochData, 'id' | 'order' | 'mvp'>>
 export const HOME_START_ID = 'rinoceronte-1515';
 
 /** That story if it is published, otherwise nothing (the button then leads to the first epoch). */
-export const homeStartStory = <T extends { id: string; status?: string }>(events: readonly T[]): T | null =>
-  events.find((e) => e.id === HOME_START_ID && e.status !== 'draft') ?? null;
+export const homeStartStory = <T extends { id: string; status?: string; published?: unknown }>(events: readonly T[]): T | null =>
+  events.find((e) => e.id === HOME_START_ID && e.status !== 'draft' && isLive({ status: 'ready', published: e.published })) ?? null;
 
 export interface EpochTile<E> {
   epoch: E;
@@ -45,7 +46,7 @@ export function pickFeatured(ids: readonly string[], events: readonly EventData[
  * the family mode (isSurpriseAllowed): in "off" any age is fine, in the other modes only what the mode shows.
  */
 export function surpriseCandidates(events: readonly EventData[]): EventData[] {
-  return events.filter((e) => e.status === 'ready' && !e.sensitive);
+  return events.filter((e) => isPublished(e) && !e.sensitive);
 }
 
 export const SURPRISE_KEY = 'lastSurprise';

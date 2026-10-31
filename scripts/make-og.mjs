@@ -9,6 +9,7 @@ import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync,
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { isLive } from '../src/lib/publication.mjs';
 import { cardHash, cardInputs, composeCard, epochTitle } from './lib/og-card.mjs';
 import { composeEpochCard, composeHomeCard, epochYears, liveEpochs, pageCardInputs } from './lib/og-page-card.mjs';
 
@@ -24,7 +25,7 @@ const epochs = read('src/content/epochs.yaml');
 const events = readdirSync(join(root, 'src/content/events'))
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => read(`src/content/events/${f}`))
-  .filter((e) => e.status === 'ready');
+  .filter((e) => isLive(e));
 
 mkdirSync(cacheDir, { recursive: true });
 mkdirSync(outDir, { recursive: true });

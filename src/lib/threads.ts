@@ -4,19 +4,23 @@
 
 // 1: every thread that has a published card is in the filters (decision of the owner after the first real cards; it was 5
 // while there were only test cards). Raise it to hide threads that are still thin.
+import { isLive } from './publication.mjs';
+
 export const MIN_CARDS_PER_THREAD = 1;
 
 export interface ThreadedCard {
   threads: readonly string[];
   /** Cards without a status are counted; drafts are not published, so they are not counted. */
   status?: 'draft' | 'ready';
+  /** The day of publication (YYYY-MM-DD): a card queued for a later day does not count. */
+  published?: string;
 }
 
 /** Number of published cards per thread id (a card counts once per thread it lists). */
 export function countCardsByThread(cards: readonly ThreadedCard[]): Map<string, number> {
   const counts = new Map<string, number>();
   for (const card of cards) {
-    if (card.status === 'draft') continue;
+    if (card.status === 'draft' || (card.status !== undefined && !isLive({ status: card.status, published: card.published }))) continue;
     for (const id of new Set(card.threads)) counts.set(id, (counts.get(id) ?? 0) + 1);
   }
   return counts;
