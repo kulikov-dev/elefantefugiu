@@ -1,6 +1,6 @@
 // Checks that dist/ holds nothing from cards that are not published: no page, no sitemap line, no map point, no link, no text.
-// Part of postbuild. "Not published" is every card in src/content/events that is not `status: ready`, or that is a test fixture
-// (`placeholder: true`, the evento-exemplo-* stand-ins). The browser suites (scripts/qa) build such cards into a separate copy of the site
+// Part of postbuild. "Not published" is every card in src/content/events that is not `status: ready`, or that waits for its day (`published` after today in Lisbon:
+// src/lib/publication.mjs, the same rule as the pages), or that is a test fixture (`placeholder: true`, the evento-exemplo-* stand-ins). A story queued for tomorrow is caught like a draft. The browser suites (scripts/qa) build such cards into a separate copy of the site
 // outside this repository; this check is what keeps them from ever reaching the real one.
 //
 // What it looks at, in every file of dist/ that is text (html, xml, json, js, css, txt, webmanifest):
@@ -12,17 +12,19 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { isLive } from '../src/lib/publication.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 // CHECK_DIST=<dir> checks another build (the browser suites use it to prove that the fixture build WOULD be caught).
 const dist = process.env.CHECK_DIST || join(root, 'dist');
-const eventsDir = join(root, 'src/content/events');
+// CHECK_EVENTS=<dir> reads the cards from another folder (the tests use it with stories of "yesterday" and "tomorrow"); SITE_TODAY sets the day.
+const eventsDir = process.env.CHECK_EVENTS || join(root, 'src/content/events');
 const TEXT = new Set(['.html', '.xml', '.json', '.js', '.css', '.txt', '.webmanifest', '.svg']);
 
 const cards = readdirSync(eventsDir)
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => ({ file: f, ...parse(readFileSync(join(eventsDir, f), 'utf8'), { schema: 'core' }) }));
-const isPublished = (c) => c.status === 'ready' && c.placeholder !== true;
+const isPublished = (c) => isLive(c) && c.placeholder !== true;
 const published = cards.filter(isPublished);
 const hidden = cards.filter((c) => !isPublished(c));
 

@@ -57,3 +57,59 @@ test('the title of a draft card in a list fails', () => {
   // "Example event 17" is 16 characters: long enough to count as a title.
   assert.equal(r.status, 1);
 });
+
+// ---- a story with a day in the future is caught like a draft ----
+// A small folder of cards: one published yesterday (visible), one queued for tomorrow (not on the site until the build of that day). The days come from the clock.
+import { lisbonToday } from '../src/lib/publication.mjs';
+
+const addDays = (day: string, n: number): string => new Date(Date.parse(`${day}T12:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);
+const todayInLisbon = lisbonToday();
+const card = (id: string, published: string, title: string) =>
+  [`id: ${id}`, 'status: ready', `published: '${published}'`, 'slug:', `  pt: ${id}-pt`, `  en: ${id}-en`, `  ru: ${id}-ru`, 'title:', `  pt: ${title} pt`, `  en: ${title} en`, `  ru: ${title} ru`, ''].join('\n');
+
+function runWithCards(files: Record<string, string>, env: Record<string, string> = {}) {
+  const events = mkdtempSync(join(tmpdir(), 'events-'));
+  writeFileSync(join(events, 'yesterday-story.yaml'), card('yesterday-story', addDays(todayInLisbon, -1), 'The story of yesterday'));
+  writeFileSync(join(events, 'tomorrow-story.yaml'), card('tomorrow-story', addDays(todayInLisbon, 1), 'The queued story of tomorrow'));
+  try {
+    const dist = mkdtempSync(join(tmpdir(), 'dist-'));
+    try {
+      for (const [name, text] of Object.entries(files)) {
+        const path = join(dist, name);
+        mkdirSync(join(path, '..'), { recursive: true });
+        writeFileSync(path, text);
+      }
+      return spawnSync(process.execPath, [script], { env: { ...process.env, CHECK_DIST: dist, CHECK_EVENTS: events, ...env }, encoding: 'utf8' });
+    } finally {
+      rmSync(dist, { recursive: true, force: true });
+    }
+  } finally {
+    rmSync(events, { recursive: true, force: true });
+  }
+}
+
+test('the story of yesterday may be on the site: a page named after it passes', () => {
+  const r = runWithCards({ 'pt/historia/yesterday-story-pt/index.html': '<html><body>The story of yesterday pt</body></html>' });
+  assert.equal(r.status, 0, r.stderr);
+});
+
+test('a page of the story queued for tomorrow fails, like a draft', () => {
+  const r = runWithCards({ 'pt/historia/tomorrow-story-pt/index.html': '<html></html>' });
+  assert.equal(r.status, 1);
+  assert.match(r.stderr, /named after a card that is not published/);
+});
+
+test('its QR page, its map point, its sitemap line, its line in a feed and its title in a list fail', () => {
+  assert.equal(runWithCards({ 'p/tomorrow-story/index.html': '<html></html>' }).status, 1);
+  const config = JSON.stringify({ cards: [{ id: 'tomorrow-story' }] });
+  assert.equal(runWithCards({ 'pt/mapa/index.html': `<script type="application/json" data-map-config>${config}</script>` }).status, 1);
+  assert.equal(runWithCards({ 'sitemap-0.xml': '<url><loc>https://example.org/en/story/tomorrow-story-en/</loc></url>' }).status, 1);
+  assert.equal(runWithCards({ 'rss.xml': '<item><link>https://example.org/en/story/tomorrow-story-en/</link></item>' }).status, 1);
+  assert.equal(runWithCards({ 'en/index.html': '<html><body><li>The queued story of tomorrow en</li></body></html>' }).status, 1);
+});
+
+test('on the day it is published the same story is allowed (SITE_TODAY is the day of the build)', () => {
+  const tomorrow = addDays(todayInLisbon, 1);
+  const r = runWithCards({ 'pt/historia/tomorrow-story-pt/index.html': '<html></html>' }, { SITE_TODAY: tomorrow });
+  assert.equal(r.status, 0, r.stderr);
+});
