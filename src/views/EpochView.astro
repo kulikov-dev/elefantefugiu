@@ -12,7 +12,7 @@ import ThenNow from '../components/ThenNow.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import MapBlock from '../components/MapBlock.astro';
-import { LOCALES, altPaths, epochHref, storyPath, threadHref, type Lang } from '../i18n/routes';
+import { LOCALES, altPaths, epochHref, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { ageInfoOf, countByMode, familyAttrs, zeroModes } from '../lib/family';
 import { feedFilterCss, gridAvailable } from '../lib/epoch-filter';
 import { plural, pluralForms, t, tAll } from '../i18n';
@@ -34,6 +34,7 @@ import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
 import { previewImageUrl } from '../lib/picture-assets';
+import { OG_CARD, epochCardPath } from '../lib/og-cards';
 import { epochPicture } from '../lib/pictures';
 import { epochNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
@@ -75,7 +76,9 @@ const intro = epoch.intro?.[lang]?.trim() || undefined;
 const alternates = altPaths((l) => epochHref(l, epoch.slug[l]));
 // The picture of the epoch: for the cards without a picture of their own and for the link preview of the page.
 const epochPic = epochPicture(epoch);
-const previewUrl = epochPic ? await previewImageUrl(epochPic) : undefined;
+// The card made for the epoch (scripts/make-og.mjs) goes first; without one the picture itself.
+const card = epochCardPath(epoch.id, lang);
+const previewUrl = card ? withBase(card) : epochPic ? await previewImageUrl(epochPic) : undefined;
 // Pages that show test text stay out of search results until the text is real.
 const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
 const schemaCtx = schemaContext(lang, Astro.site);
@@ -91,7 +94,7 @@ const schema = epochNodes(schemaCtx, {
   title={epoch.name[lang]}
   alternates={alternates}
   description={epoch.description?.[lang] ?? epoch.theme?.[lang]}
-  preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl, imageAlt: epochPic?.alt[lang] }}
+  preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl, imageSize: card ? OG_CARD : undefined, imageAlt: epochPic?.alt[lang] }}
   noindex={noindex}
   schema={schema}
   epoch={epoch.id}

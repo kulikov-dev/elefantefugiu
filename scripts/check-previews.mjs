@@ -2,7 +2,7 @@
 //  - every page has og:image and twitter:image, the same address, and the file is in dist/; and og:image:alt and twitter:image:alt, the same text;
 //  - the picture is a PNG or a JPEG of 1200 x 630 (an SVG is not accepted by social networks); a picture made from a source that
 //    is smaller than that has the same proportion (1.91 : 1) at the largest size the source allows, not under 600 px wide;
-//  - the elephant is on the preview of the home page only: the plain site picture (images/og/home.png) is not on any other
+//  - the elephant is on the preview of the home page only (its card, or the plain picture): the plain site picture (images/og/home.png) is not on any other
 //    page, so a card, a thread or an epoch with a heavy topic never shows the mascot in a link preview.
 // Not checked: 404, the QR pages (/p/...) and the language chooser at the root (they are not shared).
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
@@ -62,7 +62,9 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
   if (size.width !== 1200) smaller.add(`${path.split('/').pop()} ${size.text}`);
   const isHome = /^(pt|en|ru)\/index\.html$/.test(rel);
   if (path.endsWith('/images/og/home.png') && !isHome) errors.push(`${rel}: the preview with the mascot is only for the home page`);
-  if (isHome && !path.endsWith('/images/og/home.png')) errors.push(`${rel}: the home page must use images/og/home.png`);
+  // The home page: the card made for it (og-cards/<lang>/home-<hash>.jpg, scripts/make-og.mjs: a picture of the first story with the head of the elephant on the plate)
+  // or, without one, the plain picture with the mascot.
+  if (isHome && !path.endsWith('/images/og/home.png') && !/\/og-cards\/(pt|en|ru)\/home-[0-9a-f]{10}\.jpg$/.test(path)) errors.push(`${rel}: the home page must use its card (og-cards/<lang>/home-<hash>.jpg) or images/og/home.png`);
 }
 
 if (errors.length) {

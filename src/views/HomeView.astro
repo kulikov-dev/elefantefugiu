@@ -7,7 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import HomeMapLine from '../components/HomeMapLine.astro';
 import Mascot from '../components/Mascot.astro';
 import StartCard from '../components/StartCard.astro';
-import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
+import { EPOCHS_ANCHOR, epochHref, pagePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { plural, pluralForms, t } from '../i18n';
 import { epochHasTestText, epochYearsText, threadSections } from '../lib/epochs';
 import { epochTiles, firstMvpEpoch, homeStartStory } from '../lib/home';
@@ -15,6 +15,7 @@ import { ageInfoOf, countByMode, countVariants, familyAttrs, groupVariants, isVi
 import { loadSite } from '../lib/site-data';
 import { cardPicture } from '../lib/pictures';
 import { HOME_PREVIEW } from '../lib/og';
+import { OG_CARD, homeCardPath } from '../lib/og-cards';
 
 interface Props {
   lang: Lang;
@@ -29,6 +30,8 @@ const ready = tiles.filter((tile) => tile.available);
 const soonCount = tiles.length - ready.length;
 // The main button opens the story the name comes from; without it, the first epoch.
 const startStory = homeStartStory(site.events);
+// The card of the home page (scripts/make-og.mjs: the picture of the story the site begins with); without one the standing elephant.
+const homeCard = homeCardPath(lang);
 const startHref = startStory ? storyPath(lang, startStory.slug[lang]) : firstEpoch ? epochHref(lang, firstEpoch.slug[lang]) : pagePath(lang, 'map');
 // Family mode: counters carry three numbers (off, all, 12) and a chip with a zero counter is hidden in that mode.
 const threadCounts = new Map(site.visibleThreads.map((th) => [th.id, countByMode(site.events.filter((e) => e.threads.includes(th.id)).map(ageInfoOf))]));
@@ -58,7 +61,7 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 // only what the family mode shows.
 const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e.published, ...ageInfoOf(e) }));
 ---
-<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={{ image: HOME_PREVIEW }}>
+<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={{ image: HOME_PREVIEW, imageUrl: homeCard ? withBase(homeCard) : undefined, imageSize: homeCard ? OG_CARD : undefined, imageAlt: homeCard ? startStory?.image?.alt[lang] : undefined }}>
   <div class="home">
     <!-- A thin band above the first screen, only for a reader who has been in an epoch before (the script shows it). -->
     <a

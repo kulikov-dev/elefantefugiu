@@ -10,6 +10,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import { cardHash, cardInputs, composeCard, epochTitle } from './lib/og-card.mjs';
+import { composeEpochCard, composeHomeCard, epochYears, liveEpochs, pageCardInputs } from './lib/og-page-card.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const cacheDir = join(root, '.og-cache');
@@ -52,6 +53,38 @@ for (const event of events) {
     if (!existsSync(target)) copyFileSync(cache, target);
     wanted.add(target);
     (manifest[event.id] ??= {})[lang] = rel;
+  }
+}
+// The cards of the live epochs (an epoch with a page: a published story and a picture of its own) and of the home page, in every language.
+// An epoch that is not open has no page and no card; when it opens, the next build makes its card. The key in the manifest is "epoch:<id>" or "home".
+/** The picture of the home page card: the story the site begins with (the rhinoceros and the elephant of 1515); no caption on the plate. */
+const HOME_STORY = 'rinoceronte-1515';
+async function page(key, lang, slug, args, inputs, draw) {
+  const hash = cardHash(inputs);
+  const cache = join(cacheDir, `${hash}.jpg`);
+  if (force || !existsSync(cache)) {
+    writeFileSync(cache, await draw(args));
+    drawn += 1;
+  } else cached += 1;
+  const rel = `og-cards/${lang}/${slug}-${hash}.jpg`;
+  const target = join(root, 'public', rel);
+  mkdirSync(dirname(target), { recursive: true });
+  if (!existsSync(target)) copyFileSync(cache, target);
+  wanted.add(target);
+  (manifest[key] ??= {})[lang] = rel;
+}
+for (const epoch of liveEpochs(epochs, events)) {
+  for (const lang of LANGS) {
+    const args = { file: epoch.fallback_image.file, focus: epoch.fallback_image.focus, epochId: epoch.id, epochName: epochTitle(epoch.name, lang), years: epochYears(epoch, lang) };
+    const inputs = pageCardInputs({ kind: 'epoch', file: args.file, focus: args.focus, epochId: epoch.id, text: args.epochName, years: args.years });
+    await page(`epoch:${epoch.id}`, lang, `epoch-${epoch.slug[lang] ?? epoch.slug.en}`, args, inputs, composeEpochCard);
+  }
+}
+const homeStory = events.find((e) => e.id === HOME_STORY);
+if (homeStory?.image) {
+  for (const lang of LANGS) {
+    const args = { variant: 'panel', file: homeStory.image.file, focus: homeStory.image.focus, caption: '' };
+    await page('home', lang, 'home', args, pageCardInputs({ kind: 'home', file: args.file, focus: args.focus, epochId: 'home', variant: 'panel' }), composeHomeCard);
   }
 }
 // Cards of earlier versions and of stories that are gone do not stay in public/.

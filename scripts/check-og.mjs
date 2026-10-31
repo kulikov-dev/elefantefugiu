@@ -1,25 +1,38 @@
-// Preview cards of the stories on dist/ (scripts/make-og.mjs, src/lib/og-cards.ts). Every indexable story page must have:
+// Preview cards on dist/ (scripts/make-og.mjs, src/lib/og-cards.ts). Every indexable story page, every page of a live epoch and the home page of every
+// language must have:
 //   - og:image with an absolute address on our own domain (the one of its canonical address), og:image:width / height / type that match the file,
 //     twitter:image the same as og:image and twitter:card summary_large_image;
 //   - the file in dist/, a JPEG of 1200 x 630, at most 200 KB, with the hash in its name (a changed card is fetched anew by the messengers).
+// A page of an epoch or the home page must have a card when the manifest of make-og.mjs has one for it.
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
-const dist = fileURLToPath(new URL('../dist/', import.meta.url));
+const root = fileURLToPath(new URL('../', import.meta.url));
+const dist = join(root, 'dist/');
 const MAX = 200 * 1024;
 const errors = [];
 const walk = (dir) => readdirSync(dir).flatMap((n) => (statSync(join(dir, n)).isDirectory() ? walk(join(dir, n)) : [join(dir, n)]));
 const meta = (html, attr, name) => new RegExp(`<meta ${attr}="${name}" content="([^"]*)"`).exec(html)?.[1];
+let manifest = {};
+try {
+  manifest = JSON.parse(readFileSync(join(root, '.og-cache/manifest.json'), 'utf8'));
+} catch {
+  // No manifest (a build that skipped make-og.mjs): only the rules below apply.
+}
 
-let stories = 0;
+const EPOCH_PAGE = /^(pt\/epoca|en\/era|ru\/epoha)\/[^/]+\/index\.html$/;
+const HOME_PAGE = /^(pt|en|ru)\/index\.html$/;
+const counts = { story: 0, epoch: 0, home: 0 };
 let cards = 0;
 for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
   const html = readFileSync(file, 'utf8');
-  if (meta(html, 'property', 'og:type') !== 'article' || /<meta name="robots" content="noindex"/.test(html)) continue;
   const rel = relative(dist, file).split(sep).join('/');
-  stories += 1;
+  const isStory = meta(html, 'property', 'og:type') === 'article';
+  const kind = isStory ? 'story' : EPOCH_PAGE.test(rel) ? 'epoch' : HOME_PAGE.test(rel) ? 'home' : null;
+  if (!kind || /<meta name="robots" content="noindex"/.test(html)) continue;
+  counts[kind] += 1;
   const fail = (what) => errors.push(`${rel}: ${what}`);
   const og = meta(html, 'property', 'og:image');
   const canonical = /<link rel="canonical" href="([^"]+)"/.exec(html)?.[1];
@@ -49,19 +62,31 @@ for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
   const info = await sharp(imageFile).metadata();
   if (info.width !== 1200 || info.height !== 630) fail(`${path} is ${info.width}x${info.height}, not 1200x630`);
   if (size > MAX) fail(`${path} is ${(size / 1024).toFixed(0)} KB, more than 200 KB`);
-  if (!/^og-cards\/(pt|en|ru)\/.+-[0-9a-f]{10}\.jpg$/.test(path)) fail(`og:image ${path} is not a card with a hash in its name (og-cards/<lang>/<slug>-<hash>.jpg)`);
-  else cards += 1;
-  if (meta(html, 'property', 'og:image:width') !== String(info.width) || meta(html, 'property', 'og:image:height') !== String(info.height)) fail('og:image:width / og:image:height are missing or do not match the file');
-  if (meta(html, 'property', 'og:image:type') !== 'image/jpeg' || info.format !== 'jpeg') fail('og:image:type is missing or is not image/jpeg');
+  const isCard = /^og-cards\/(pt|en|ru)\/.+-[0-9a-f]{10}\.jpg$/.test(path);
+  const epochId = /<html[^>]* data-epoch="([^"]+)"/.exec(html)?.[1];
+  const key = kind === 'story' ? undefined : kind === 'home' ? 'home' : `epoch:${epochId}`;
+  const lang = rel.split('/')[0];
+  const mustHaveCard = kind === 'story' || (key && manifest[key]?.[lang]);
+  if (mustHaveCard && !isCard) fail(`og:image ${path} is not a card with a hash in its name (og-cards/<lang>/<slug>-<hash>.jpg)`);
+  if (isCard) {
+    cards += 1;
+    if (key && manifest[key]?.[lang] && manifest[key][lang] !== path) fail(`og:image ${path} is not the card of the manifest (${manifest[key][lang]})`);
+    if (meta(html, 'property', 'og:image:width') !== String(info.width) || meta(html, 'property', 'og:image:height') !== String(info.height)) fail('og:image:width / og:image:height are missing or do not match the file');
+    if (meta(html, 'property', 'og:image:type') !== 'image/jpeg' || info.format !== 'jpeg') fail('og:image:type is missing or is not image/jpeg');
+  }
   if (!meta(html, 'property', 'og:image:alt')) fail('no og:image:alt');
   if (meta(html, 'name', 'twitter:image') !== og) fail('twitter:image is not the same as og:image');
   if (meta(html, 'name', 'twitter:card') !== 'summary_large_image') fail('twitter:card is not summary_large_image');
 }
-if (stories === 0) errors.push('no story page found in dist/');
+if (counts.story === 0) errors.push('no story page found in dist/');
+if (counts.home !== 3) errors.push(`${counts.home} home pages checked, expected 3 (pt, en, ru; a noindex home page is not checked)`);
+for (const key of Object.keys(manifest).filter((k) => k.startsWith('epoch:'))) {
+  for (const lang of ['pt', 'en', 'ru']) if (!existsSync(join(dist, manifest[key][lang]))) errors.push(`${manifest[key][lang]} of ${key} is not in dist/`);
+}
 
 if (errors.length) {
   console.error(`Preview card check failed (${errors.length}):`);
   for (const e of errors.slice(0, 40)) console.error(`- ${e}`);
   process.exit(1);
 }
-console.log(`Preview card check passed: ${stories} story pages, ${cards} with a card (1200x630 JPEG, up to 200 KB, absolute address on our domain, size and type in the head).`);
+console.log(`Preview card check passed: ${counts.story} story pages, ${counts.epoch} epoch pages, ${counts.home} home pages, ${cards} with a card (1200x630 JPEG, up to 200 KB, absolute address on our domain, size and type in the head).`);

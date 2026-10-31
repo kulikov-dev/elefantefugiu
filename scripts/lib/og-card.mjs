@@ -87,7 +87,7 @@ export function cardHash(inputs) {
 
 const fontFile = (pkg, file) => readFileSync(require.resolve(`${pkg}/files/${file}`));
 let fonts = null;
-const loadFonts = () =>
+export const loadFonts = () =>
   (fonts ??= {
     // Playfair is a variable font: through fontkitten only its default weight has outlines, so the bold of the wordmark is drawn with a stroke.
     serif: [openFont(fontFile('@fontsource-variable/playfair-display', 'playfair-display-latin-wght-normal.woff2')), openFont(fontFile('@fontsource-variable/playfair-display', 'playfair-display-cyrillic-wght-normal.woff2'))],
@@ -112,14 +112,14 @@ export function textPath(faces, text, size, x, y, attrs = '') {
 
 // ---- drawing ----
 
-const asset = (...p) => readFileSync(`${root}${p.join('/')}`);
-const tokensCss = readFileSync(`${root}src/styles/tokens.css`, 'utf8');
+export const asset = (...p) => readFileSync(`${root}${p.join('/')}`);
+export const tokensCss = readFileSync(`${root}src/styles/tokens.css`, 'utf8');
 export const AZULEJO = { 'antes-de-portugal': 'pegada', 'avis-e-descobrimentos': 'bussola', 'pombal-e-terramoto': 'rombo', 'estado-novo-e-25-de-abril': 'rosa', 'lusitania-e-roma': 'no', 'suevos-visigodos-e-mouros': 'estrela', 'nascimento-do-reino-e-reconquista': 'xadrez', 'uniao-restauracao-e-ouro-do-brasil': 'tapete', 'monarquia-e-republica': 'onda' };
 /** The patterns that run in one direction (src/lib/azulejo.ts DIRECTED): on the sides of the frame the turned file `<name>-v.svg` is used, so the band runs along the side. */
 export const DIRECTED = ['no', 'onda', 'pegada', 'xadrez'];
 export const patternName = (epochId) => AZULEJO[epochId] ?? 'bussola';
-const patternFile = (name) => asset('src/assets/azulejo', `${name}.svg`).toString('utf8');
-const patternSource = (epochId) => patternFile(patternName(epochId)) + (DIRECTED.includes(patternName(epochId)) ? patternFile(`${patternName(epochId)}-v`) : '');
+export const patternFile = (name) => asset('src/assets/azulejo', `${name}.svg`).toString('utf8');
+export const patternSource = (epochId) => patternFile(patternName(epochId)) + (DIRECTED.includes(patternName(epochId)) ? patternFile(`${patternName(epochId)}-v`) : '');
 
 /** What a card is drawn from, as the list that cardHash takes (the bytes of the picture, the pattern, the logo, the colours, the name, the crop). */
 export function cardInputs({ file, focus, epochId, epochName }) {
@@ -146,7 +146,7 @@ export function frameBands(epochId) {
 }
 
 /** The inside of a pattern file (without the <svg> element and the comments), in the colour, and the size of its viewBox. */
-function tileBody(file, color) {
+export function tileBody(file, color) {
   const source = patternFile(file);
   const size = Number(/viewBox="0 0 (\d+) \d+"/.exec(source)?.[1] ?? 60);
   const body = source.replace(/<\?xml[^>]*>/, '').replace(/<!--[\s\S]*?-->/g, '').replace(/^\s*<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
@@ -194,8 +194,8 @@ export async function drawFrame(epochId, color) {
   return sharp({ create: { width: W, height: H, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(inputs).png().toBuffer();
 }
 
-const rounded = (w, h, r) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" rx="${r}" fill="#fff"/></svg>`);
-const paper = (w, h, r, color) => sharp({ create: { width: w, height: h, channels: 4, background: color } }).composite([{ input: rounded(w, h, r), blend: 'dest-in' }]).png().toBuffer();
+export const rounded = (w, h, r) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" rx="${r}" fill="#fff"/></svg>`);
+export const paper = (w, h, r, color) => sharp({ create: { width: w, height: h, channels: 4, background: color } }).composite([{ input: rounded(w, h, r), blend: 'dest-in' }]).png().toBuffer();
 
 /** The illustration cropped to its focus, made w x h, with the top corners rounded (the strip is under it). */
 async function illustration(file, focus, w, h, r) {
