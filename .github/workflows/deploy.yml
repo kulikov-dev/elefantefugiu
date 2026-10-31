@@ -3,6 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  # Every day at 05:00 UTC (05:00 or 06:00 in Lisbon): the same build and deploy as a push, nothing else (no QA full). A story queued for a day (status ready, published in the
+  # future) comes out in the first build of that day, in Lisbon (src/lib/publication.mjs). The build runs every day whether or not a story is due: simpler and surer than comparing.
+  # GitHub switches a schedule off in a public repository after 60 days without a commit: a push or a manual run (Actions -> Run workflow) switches it on again.
+  schedule:
+    - cron: '0 5 * * *'
   workflow_dispatch:
 
 permissions:
