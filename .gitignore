@@ -9,3 +9,7 @@ dist/
 # browser QA scripts (not part of the build)
 scripts/qa/node_modules/
 scripts/qa/out/
+
+# preview cards of the stories (scripts/make-og.mjs)
+.og-cache/
+public/og-cards/

@@ -61,6 +61,8 @@ interface Props {
     /** Address of a picture made by Astro (src/lib/picture-assets.ts previewImageUrl), with the base path already in it. */
     imageUrl?: string;
     imageAlt?: string;
+    /** The size and the type of the picture at imageUrl, when known (the cards of the stories): og:image:width, height, type. */
+    imageSize?: { width: number; height: number; type: string };
   };
   noindex?: boolean;
   /** The schema.org nodes of the page itself (src/lib/schema.ts); WebSite and Organization are added here. Pages with noindex get no markup. */
@@ -159,6 +161,9 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta property="og:locale" content={OG_LOCALE(lang)} />
     {paths && hreflangs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE(l)} />)}
     {image && <meta property="og:image" content={image} />}
+    {image && preview?.imageSize && <meta property="og:image:width" content={String(preview.imageSize.width)} />}
+    {image && preview?.imageSize && <meta property="og:image:height" content={String(preview.imageSize.height)} />}
+    {image && preview?.imageSize && <meta property="og:image:type" content={preview.imageSize.type} />}
     {image && previewAlt && <meta property="og:image:alt" content={previewAlt} />}
     <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={preview?.title ?? fullTitle} />

@@ -27,6 +27,7 @@ import { epochHasContent, nextEpochEntry } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 import { previewImageUrl } from '../lib/picture-assets';
+import { OG_CARD, storyCardPath } from '../lib/og-cards';
 import { cardPicture } from '../lib/pictures';
 import { DEFAULT_PREVIEW, ogImagePath } from '../lib/og';
 import { storyNodes } from '../lib/schema';
@@ -55,13 +56,18 @@ const description = firstSentence(event.story[lang], 155);
 // Preview picture (link previews): the main picture of the story, else the picture of the epoch (also for a heavy topic: its pictures are
 // documents and strict azulejo, not the playful ones). An epoch that has only a provisional picture (a path inside public/) gives that.
 const previewPic = cardPicture(event, epoch);
-const previewUrl = previewPic ? await previewImageUrl(previewPic) : undefined;
+// The card made for the story (scripts/make-og.mjs: the picture in a frame of the azulejo of the epoch, with the name of the site and of the epoch) goes first;
+// without one (dev server, a build without make-og) the picture itself, cropped to 1200 x 630, as before.
+const card = storyCardPath(event.id, lang);
+const plainUrl = previewPic ? await previewImageUrl(previewPic) : undefined;
+const previewUrl = card ? withBase(card) : plainUrl;
 const previewImage = previewPic ? undefined : typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined;
 const previewImageAlt = previewPic && previewPic === event.image ? previewPic.alt[lang] : undefined;
 
 // Structured data: built from the fields of the story; the picture is the one of the link preview (og:image).
 const schemaCtx = schemaContext(lang, Astro.site);
-const schemaImage = schemaCtx.abs(previewUrl ?? withBase(ogImagePath(previewImage ?? DEFAULT_PREVIEW)));
+// Article.image stays the illustration (the card is for og:image and twitter:image only).
+const schemaImage = schemaCtx.abs(plainUrl ?? withBase(ogImagePath(previewImage ?? DEFAULT_PREVIEW)));
 const schema = storyNodes(schemaCtx, {
   url: cardUrl,
   title,
@@ -138,7 +144,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
   title={title}
   alternates={alternates}
   description={description}
-  preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageUrl: previewUrl, imageAlt: previewImageAlt }}
+  preview={{ title: event.hook[lang], type: 'article', image: previewImage, imageUrl: previewUrl, imageSize: card ? OG_CARD : undefined, imageAlt: previewImageAlt }}
   noindex={event.placeholder || standIn}
   schema={schema}
   readyLangs={readyLangs}

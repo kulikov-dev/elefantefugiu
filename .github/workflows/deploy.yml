@@ -52,6 +52,14 @@ jobs:
       # data checks, the tests, the build and then every postbuild check (sitemap, previews, links, cards, listings, weight, tokens,
       # ru, mascot, published, email, https, schema). If anything fails here, the deploy job does not run.
       # The browser suites are in qa-smoke.yml (every push and pull request) and qa-full.yml (weekly and by hand).
+      # The preview cards of the stories (scripts/make-og.mjs): a card is drawn again only when its picture, pattern, colours, name or the drawing changed.
+      # The name of the cache is made of what the cards are drawn from; with no exact hit the nearest older cache is restored and only the changed cards are drawn.
+      - name: Cache of the preview cards
+        uses: actions/cache@v4
+        with:
+          path: .og-cache
+          key: og-${{ hashFiles('scripts/lib/og-card.mjs', 'scripts/make-og.mjs', 'src/assets/stories/**', 'src/assets/azulejo/**', 'src/content/epochs.yaml', 'src/content/events/**', 'src/styles/tokens.css', 'public/mascot/head.webp') }}
+          restore-keys: og-
       # withastro/action has no node-version-file input: the version is read from .nvmrc, so every workflow runs the same Node.
       - name: Node version of .nvmrc
         id: nvm

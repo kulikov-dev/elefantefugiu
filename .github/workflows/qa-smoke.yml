@@ -37,6 +37,17 @@ jobs:
             scripts/qa/package-lock.json
       - run: npm ci
       # Only the site build: the checks of the build itself are run by the deploy workflow.
+      # The preview cards of the stories (scripts/make-og.mjs): a card is drawn again only when its picture, pattern, colours, name or the drawing changed.
+      # The name of the cache is made of what the cards are drawn from; with no exact hit the nearest older cache is restored and only the changed cards are drawn.
+      - name: Cache of the preview cards
+        uses: actions/cache@v4
+        with:
+          path: .og-cache
+          key: og-${{ hashFiles('scripts/lib/og-card.mjs', 'scripts/make-og.mjs', 'src/assets/stories/**', 'src/assets/azulejo/**', 'src/content/epochs.yaml', 'src/content/events/**', 'src/styles/tokens.css', 'public/mascot/head.webp') }}
+          restore-keys: og-
+      # The same preview cards as on the site (the build below is only astro build: make-og.mjs is a step of npm run build).
+      - name: Preview cards
+        run: node scripts/make-og.mjs
       - name: Build
         run: npx astro build
       - name: Browser suites
