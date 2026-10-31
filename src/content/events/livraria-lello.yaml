@@ -43,7 +43,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: A livraria onde J.K. Rowling nunca entrou.
+  pt: A lenda de Hogwarts enche a Lello, mas Rowling nunca lá esteve.
   en: The bookstore J.K. Rowling never set foot in.
   ru: Магазин, в котором не была Дж. Роулинг.
 story:

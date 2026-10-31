@@ -47,7 +47,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: O funicular que anda a água há 140 anos.
+  pt: Duas cabines, um cabo e água em vez de motor.
   en: The funicular that’s run on water for 140 years.
   ru: Фуникулёр, который 140 лет работает на воде.
 story:

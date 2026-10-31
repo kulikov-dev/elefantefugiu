@@ -43,7 +43,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: O elevador de ferro que não foi Eiffel que construiu.
+  pt: Projetou-o um aluno de Eiffel, e por isso o atribuem ao mestre.
   en: The iron elevator Eiffel didn’t build.
   ru: Железный лифт, который построил не Эйфель.
 story:

@@ -42,7 +42,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: Durante vinte anos, o rei desaparecido foi «encontrado».
+  pt: Durante quase vinte anos, o rei desaparecido foi «encontrado».
   en: The missing king kept being “found” for twenty years.
   ru: Пропавшего короля «находили» двадцать лет подряд.
 story:
@@ -70,8 +70,7 @@ more:
     foi o italiano Marco Tullio Catizone.
 
 
-    «Esperar por D. Sebastião» ainda hoje quer dizer, em português, esperar por um milagre que não
-    vai acontecer.
+    «Esperar por D. Sebastião» quer dizer, em português, esperar por um milagre que não vai acontecer.
   en: >-
     This faith in the king’s return is called Sebastianism. The Ericeira impostor, Mateus Álvares,
     the son of a stonemason from the Azores, managed to gather a whole band of followers and hand

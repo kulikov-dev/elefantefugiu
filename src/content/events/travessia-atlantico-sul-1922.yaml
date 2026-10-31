@@ -43,7 +43,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: Os primeiros a atravessar o Atlântico Sul pelo ar gastaram três aviões.
+  pt: Um hidroavião desfez-se nas ondas, outro amarou, o terceiro chegou ao Rio.
   en: The first flight across the South Atlantic took three planes.
   ru: Первыми через Южную Атлантику перелетели, сменив три самолёта.
 story:
