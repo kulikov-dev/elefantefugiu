@@ -153,6 +153,8 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
          differently when a font arrives. The same files the @font-face rules of fonts.css name. -->
     {fontFiles.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
     {canonical && <link rel="canonical" href={canonical} />}
+    <!-- The feed of the stories in the language of the page (src/pages/[lang]/rss.xml.ts). -->
+    <link rel="alternate" type="application/rss+xml" title={`${siteName} (RSS)`} href={absolute(withBase(`${lang}/rss.xml`))} />
     {paths && hreflangs.map((target) => <link rel="alternate" hreflang={target} href={absolute(paths[target])} />)}
     {paths && hreflangs.length > 0 && <link rel="alternate" hreflang="x-default" href={absolute(paths.pt)} />}
     <meta property="og:site_name" content={siteName} />
