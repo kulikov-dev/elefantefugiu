@@ -212,6 +212,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id}>
       <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
       <p slot="story">{event.story[lang]}</p>
+      <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
       <Fragment slot="after">
         {
           continueVariants.map(({ modes, value: { next, nextEpoch } }) => {
@@ -265,10 +266,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     }
 
     <div class="actions">
-      <div class="actions__row">
-        <ShareButton lang={lang} url={cardUrl} title={title} />
-        <LikeButton lang={lang} id={event.id} title={event.title.pt} />
-      </div>
+      <ShareButton lang={lang} url={cardUrl} title={title} />
       <ReportLink lang={lang} cardUrl={cardUrl} title={title} />
     </div>
 
@@ -380,52 +378,5 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-1);
-  }
-
-  /* "Share" and "I liked it" in one line down to 320 px: two equal columns, the labels on one line, less padding on a narrow screen. Pressing "I liked it"
-     changes only its words (the width is the column's), so nothing below moves. Without JavaScript the second one is not there and "Share" has its column alone. */
-  .actions__row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-    gap: var(--space-2) var(--space-3);
-    width: 100%;
-    max-width: var(--actions-width);
-  }
-
-  .actions__row > :global(.share) {
-    display: grid;
-    gap: 0;
-    min-width: 0;
-  }
-
-  .actions__row :global(.button) {
-    width: 100%;
-    min-width: 0;
-    padding-inline: var(--space-3);
-    white-space: nowrap;
-  }
-
-  /* The heart never shrinks to a dot. */
-  .actions__row :global(.like svg) {
-    flex: none;
-  }
-
-  @media (max-width: 26rem) {
-    .actions__row {
-      gap: var(--space-2);
-    }
-
-    .actions__row :global(.button) {
-      padding-inline: var(--space-2);
-    }
-  }
-
-  /* 320 px: the longest label (Russian "ПОНРАВИЛОСЬ" with the heart) has no room to spare in half a line. */
-  @media (max-width: 22rem) {
-    .actions__row :global(.button) {
-      padding-inline: var(--space-1);
-      font-size: var(--text-sm);
-    }
   }
 </style>

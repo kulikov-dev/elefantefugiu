@@ -28,6 +28,8 @@ const { lang, hook, textLang, hasAside = false, storyId } = Astro.props;
           <slot name="story" />
         </div>
         {storyId && <span class="story-end" data-story-end={storyId} aria-hidden="true"></span>}
+        <!-- Right under the text, before "More": the small "I liked it" (src/components/LikeButton.astro), on the right edge of the text column. -->
+        <div class="story__like"><slot name="like" /></div>
       </section>
     </div>
     {
@@ -108,6 +110,18 @@ const { lang, hook, textLang, hasAside = false, storyId } = Astro.props;
 
   .story h2 {
     margin-block-end: var(--space-2);
+  }
+
+  /* The line of "I liked it": as wide as the text column, the button on its right edge, like the signature at the end of a text. */
+  .story__like {
+    display: flex;
+    justify-content: flex-end;
+    max-width: var(--measure);
+    margin-block-start: var(--space-1);
+  }
+
+  .story__like:empty {
+    display: none;
   }
 
   .more {

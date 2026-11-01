@@ -1,7 +1,7 @@
-// Browser checks of the button "I liked it" at the end of a story (src/components/LikeButton.astro, src/scripts/like.ts, src/lib/like.ts), against dist/ served by
+// Browser checks of the button "I liked it" under the text of a story, before "More" (src/components/LikeButton.astro, src/scripts/like.ts, src/lib/like.ts), against dist/ served by
 // serve.mjs:   node like.mjs [layout counter]
-//   layout   the button exists only with JavaScript; "Share" and "I liked it" in one line at 320 and 390 px in every language; the labels fit; pressing changes the words
-//            and nothing else: the link "Spotted a mistake?" under them does not move
+//   layout   the button exists only with JavaScript; it stands under the text, before "More", on the right edge of the text column, not among the actions at the foot
+//            ("Share" is alone there); pressing changes the words and the heart and nothing else, at 320 and 390 px in every language; both themes: the colour of the links, a focus ring
 //   counter  (only on a build for a public address, where the counter is on) one request with event=true and the path like/<id> (no language) per reader and story,
 //            "Thanks!" after a reload, nothing sent twice, nothing sent with the counter switched off, one per page load without localStorage
 import { launchBrowser } from './browser.mjs';
@@ -60,6 +60,18 @@ const open = async ({ lang = 'pt', width = 390, js = true, blocked = false, skip
   await wait(300);
   return page;
 };
+/** The visible pair "heart + words": the gap between them and how far it is from the right edge of the button (inside its padding). */
+const pairGeo = (page) =>
+  page.evaluate(() => {
+    const btn = document.querySelector('[data-like]');
+    const pair = [...btn.querySelectorAll('.like__pair')].find((p) => getComputedStyle(p).visibility === 'visible');
+    const svg = pair.querySelector('svg').getBoundingClientRect();
+    const range = document.createRange();
+    range.selectNodeContents(pair.querySelector('span'));
+    const word = range.getBoundingClientRect();
+    const pad = parseFloat(getComputedStyle(btn).paddingRight);
+    return { gap: Math.round((word.left - svg.right) * 10) / 10, right: Math.round((btn.getBoundingClientRect().right - pad - pair.getBoundingClientRect().right) * 10) / 10 };
+  });
 const rect = (page, sel) =>
   page.evaluate((s) => {
     const e = document.querySelector(s);
@@ -78,36 +90,87 @@ if (want('layout')) {
   for (const width of [320, 390]) {
     for (const lang of LANGS) {
       const page = await open({ lang, width });
-      const label = await page.evaluate(() => document.querySelector('[data-like]').textContent.trim());
-      ok(`${lang} ${width} px: the button says "${ui('ui.like', lang)}", not pressed`, label === ui('ui.like', lang) && (await page.evaluate(() => document.querySelector('[data-like]').getAttribute('aria-pressed'))) === 'false', label);
+      const word = await page.evaluate(() => document.querySelector('[data-like]').innerText.trim());
+      ok(`${lang} ${width} px: the button says "${ui('ui.like', lang)}", not pressed`, word === ui('ui.like', lang) && (await page.evaluate(() => document.querySelector('[data-like]').getAttribute('aria-pressed'))) === 'false', word);
+      // The place: after the end of the text, before "More", not among the actions at the foot of the page; on the right edge of the column of the text.
+      const place = await page.evaluate(() => {
+        const like = document.querySelector('[data-like]');
+        const end = document.querySelector('[data-story-end]');
+        const more = document.querySelector('details#detalhes');
+        const prose = document.querySelector('.story .prose').getBoundingClientRect();
+        const r = like.getBoundingClientRect();
+        return {
+          afterText: Boolean(end.compareDocumentPosition(like) & Node.DOCUMENT_POSITION_FOLLOWING),
+          beforeMore: Boolean(like.compareDocumentPosition(more) & Node.DOCUMENT_POSITION_FOLLOWING),
+          inActions: Boolean(like.closest('.actions')),
+          rightGap: Math.round(prose.right - r.right),
+          h: Math.round(r.height),
+          w: Math.round(r.width),
+          over: document.documentElement.scrollWidth > innerWidth,
+        };
+      });
+      ok(`${lang} ${width} px: the button stands under the text, before "More", and not in the actions at the foot`, place.afterText && place.beforeMore && !place.inActions, JSON.stringify(place));
+      ok(`${lang} ${width} px: it is on the right edge of the text column and is at least 44 px high`, Math.abs(place.rightGap) <= 12 && place.h >= 44, `gap ${place.rightGap}, height ${place.h}`);
+      ok(`${lang} ${width} px: the page does not scroll sideways`, !place.over);
       const share = await rect(page, '[data-share-button]');
-      const like = await rect(page, '[data-like]');
-      const link = await rect(page, '.report-link a');
-      ok(`${lang} ${width} px: "Share" and "I liked it" are in one line`, share.y === like.y && share.h === like.h && like.x > share.x, `${JSON.stringify(share)} ${JSON.stringify(like)}`);
-      ok(`${lang} ${width} px: both labels fit in their buttons`, !share.over && !like.over, `${share.over} ${like.over}`);
-      ok(`${lang} ${width} px: the page does not scroll sideways`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      ok(`${lang} ${width} px: "Share" is alone at the foot, of its own width (not stretched)`, share.w < 240 && share.x <= 20, JSON.stringify(share));
+      const before = {
+        like: await rect(page, '[data-like]'),
+        more: await rect(page, 'details#detalhes'),
+        actions: await rect(page, '.actions'),
+        link: await rect(page, '.report-link a'),
+      };
+      const geoBefore = await pairGeo(page);
       await page.click('[data-like]');
+      await page.mouse.move(1, 1);
       await wait(150);
-      const after = await rect(page, '[data-like]');
-      const linkAfter = await rect(page, '.report-link a');
-      const pressed = await page.evaluate(() => ({ p: document.querySelector('[data-like]').getAttribute('aria-pressed'), t: document.querySelector('[data-like]').textContent.trim() }));
-      ok(`${lang} ${width} px: pressed it says "${ui('ui.like_thanks', lang)}" (aria-pressed)`, pressed.p === 'true' && pressed.t === ui('ui.like_thanks', lang), JSON.stringify(pressed));
-      ok(`${lang} ${width} px: the button keeps its size and the label still fits`, after.w === like.w && after.h === like.h && after.y === like.y && !after.over, `${JSON.stringify(like)} -> ${JSON.stringify(after)}`);
-      ok(`${lang} ${width} px: the link "Spotted a mistake?" does not move`, linkAfter.y === link.y && linkAfter.x === link.x && linkAfter.h === link.h, `${JSON.stringify(link)} -> ${JSON.stringify(linkAfter)}`);
+      const geoAfter = await pairGeo(page);
+      ok(`${lang} ${width} px: the heart is right against its words (about 6 px) and the pair is on the right edge of the button, before and after pressing`, [geoBefore, geoAfter].every((g) => g.gap >= 5 && g.gap <= 7 && Math.abs(g.right) <= 1), JSON.stringify([geoBefore, geoAfter]));
+      const after = {
+        like: await rect(page, '[data-like]'),
+        more: await rect(page, 'details#detalhes'),
+        actions: await rect(page, '.actions'),
+        link: await rect(page, '.report-link a'),
+      };
+      const pressed = await page.evaluate(() => ({
+        p: document.querySelector('[data-like]').getAttribute('aria-pressed'),
+        t: document.querySelector('[data-like]').innerText.trim(),
+        fill: getComputedStyle([...document.querySelectorAll('[data-like] .like__pair')].find((p) => getComputedStyle(p).visibility === 'visible').querySelector('svg path')).fill,
+      }));
+      ok(`${lang} ${width} px: pressed it says "${ui('ui.like_thanks', lang)}" (aria-pressed) and the heart is filled`, pressed.p === 'true' && pressed.t === ui('ui.like_thanks', lang) && pressed.fill !== 'none', JSON.stringify(pressed));
+      ok(`${lang} ${width} px: pressing moves nothing: the button, "More", the actions and the link below keep their place and size`, JSON.stringify(before) === JSON.stringify(after) && !after.like.over, `${JSON.stringify(before)} -> ${JSON.stringify(after)}`);
       await page.close();
     }
   }
-  // The pressed button is clearly paler or lighter than the page (a colour of its own in each theme), in both themes.
+  // Both themes: the colour of the links of the epoch, a heart of 20 px, a focus ring that can be seen.
   for (const scheme of ['light', 'dark']) {
-    const page = await browser.newPage();
-    await page.setViewport({ width: 390, height: 900 });
-    await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: scheme }]);
-    await page.goto(`${base}${path('pt')}`, { waitUntil: 'networkidle0' });
-    await page.evaluate(() => localStorage.clear());
-    await page.click('[data-like]');
-    const colours = await page.evaluate(() => ({ pressed: getComputedStyle(document.querySelector('[data-like]')).backgroundColor, share: getComputedStyle(document.querySelector('[data-share-button]')).backgroundColor }));
-    ok(`${scheme} theme: the pressed button has a background of its own (not the one of "Share")`, colours.pressed !== colours.share, JSON.stringify(colours));
-    await page.close();
+    for (const lang of LANGS) {
+      const page = await browser.newPage();
+      await page.setViewport({ width: 390, height: 900, isMobile: true, hasTouch: true });
+      await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: scheme }]);
+      await page.goto(`${base}${path(lang)}`, { waitUntil: 'networkidle0' });
+      await page.evaluate(() => localStorage.clear());
+      const look = await page.evaluate(() => {
+        const like = document.querySelector('[data-like]');
+        const link = document.querySelector('.report-link a');
+        const s = getComputedStyle(like);
+        const svg = like.querySelector('svg').getBoundingClientRect();
+        return { colour: s.color, link: getComputedStyle(link).color, border: s.borderTopWidth, bg: s.backgroundColor, svg: Math.round(svg.width), weight: s.fontWeight, caps: s.textTransform };
+      });
+      ok(`${scheme} theme (${lang}): no frame, no background, the colour of the links, a heart of 20 px, the words not in capitals`, look.colour === look.link && look.border === '0px' && look.bg === 'rgba(0, 0, 0, 0)' && look.svg === 20 && look.caps === 'none', JSON.stringify(look));
+      // Tab to the button: the ring is drawn.
+      let focused = false;
+      for (let i = 0; i < 400 && !focused; i += 1) {
+        await page.keyboard.press('Tab');
+        focused = await page.evaluate(() => document.activeElement?.hasAttribute('data-like'));
+      }
+      const ring = await page.evaluate(() => {
+        const s = getComputedStyle(document.activeElement);
+        return { visible: document.activeElement.matches(':focus-visible'), style: s.outlineStyle, width: s.outlineWidth };
+      });
+      ok(`${scheme} theme (${lang}): Tab reaches the button and its focus ring is visible`, focused && ring.visible && ring.style !== 'none' && parseFloat(ring.width) >= 2, JSON.stringify(ring));
+      await page.close();
+    }
   }
 }
 
@@ -131,7 +194,7 @@ if (want('counter')) {
       const sent = hits.length;
       await page.reload({ waitUntil: 'networkidle0' });
       await wait(300);
-      const label = await page.evaluate(() => ({ t: document.querySelector('[data-like]').textContent.trim(), p: document.querySelector('[data-like]').getAttribute('aria-pressed') }));
+      const label = await page.evaluate(() => ({ t: document.querySelector('[data-like]').innerText.trim(), p: document.querySelector('[data-like]').getAttribute('aria-pressed') }));
       ok('counter: after a reload the button says "Thanks!" and nothing is sent', label.p === 'true' && label.t === ui('ui.like_thanks', 'ru') && events(page).length === sent, JSON.stringify(label));
       await page.close();
     }

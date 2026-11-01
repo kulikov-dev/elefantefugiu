@@ -322,6 +322,11 @@ for (const ev of events) {
     // The small link stays in view under "Share", not inside the folded "More" layer.
     const actionsBlock = html.match(/<div class="actions"[\s\S]*?<p class="report-link"[\s\S]*?<\/p>/)?.[0] ?? '';
     if (!/(corrigir|report)\/\?url=/.test(actionsBlock) || !/data-share-button/.test(actionsBlock)) fail('the report link must stand under the Share button, outside "More"');
+    // "I liked it" stands right under the text of the story, before "More", and not among the actions at the foot (src/components/LikeButton.astro).
+    const likeAt = html.indexOf('data-like=');
+    if (likeAt < 0) fail('the "I liked it" button is missing');
+    else if (!(html.indexOf('data-story-end') < likeAt && likeAt < html.indexOf('id="detalhes"'))) fail('the "I liked it" button must stand after the end of the text and before "More"');
+    if (/data-like=/.test(actionsBlock)) fail('the "I liked it" button must not be among the actions at the foot');
     if (/<details id="detalhes"[\s\S]*?(corrigir|report)\/\?url=[\s\S]*?<\/details>/.test(html)) fail('the report link must not be inside "More"');
     if (!has(/rel="(prev|next)"/) && events.filter((e) => e.epoch === ev.epoch).length > 1) fail('previous/next links are missing');
     if (has(/<script[^>]+src="https?:/)) fail('external script');

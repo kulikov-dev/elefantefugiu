@@ -14,11 +14,8 @@ const storage = (): Storage | undefined => {
 document.querySelectorAll<HTMLButtonElement>('[data-like]').forEach((button) => {
   const id = button.dataset.like ?? '';
   const title = button.dataset.title ?? id;
-  const label = button.querySelector<HTMLElement>('[data-like-label]');
-  const show = (): void => {
-    button.setAttribute('aria-pressed', 'true');
-    if (label) label.textContent = button.dataset.thanks ?? '';
-  };
+  // The words "Thanks!" are in the page already (LikeButton.astro): pressing only turns aria-pressed on, the style does the rest.
+  const show = (): void => button.setAttribute('aria-pressed', 'true');
   button.hidden = false;
   const deps = () => ({ counter: (window as unknown as { goatcounter?: Counter }).goatcounter, storage: storage(), done });
   if (isLiked(id, deps())) show();

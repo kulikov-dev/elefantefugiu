@@ -1,7 +1,10 @@
 ---
-// "I liked it": a small secondary button at the end of a story, beside "Share" (src/scripts/like.ts, rules in src/lib/like.ts). It starts hidden and the
-// script shows it, so without JavaScript there is no button. A press sends one anonymous event to GoatCounter and the button turns into "Thanks!";
-// there is no number on the page. The icon is a heart drawn like the other icons of the site (a stroke, round ends); pressed, it is filled.
+// "I liked it": a small text button under the text of a story, before "More", on the right edge of the text column (src/components/CardLayers.astro puts it there;
+// src/scripts/like.ts, rules in src/lib/like.ts). No frame: an action like a link, in the colour of the links of the epoch, with a heart of 20 px drawn like the
+// other icons of the site (a stroke, round ends). It starts hidden and the script shows it, so without JavaScript there is no button. A press sends one anonymous
+// event to GoatCounter; the heart is then filled and the words are "Thanks!". Both pairs "heart + words" are in the page, one above the other in one grid cell: the
+// button is as wide as the longer pair, the visible pair is pushed to the right edge with the heart right against its words, and pressing changes nothing in the
+// size. There is no number on the page.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 
@@ -14,12 +17,21 @@ interface Props {
 }
 
 const { lang, id, title } = Astro.props;
+const heart = 'M10 16.6s-6.4-3.9-6.4-8.5a3.5 3.5 0 0 1 6.4-1.9 3.5 3.5 0 0 1 6.4 1.9c0 4.6-6.4 8.5-6.4 8.5z';
 ---
-<button class="button button--secondary like" type="button" data-like={id} data-title={title} data-thanks={t(lang, 'ui.like_thanks')} aria-pressed="false" hidden>
-  <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true" focusable="false">
-    <path d="M10 16.6s-6.4-3.9-6.4-8.5a3.5 3.5 0 0 1 6.4-1.9 3.5 3.5 0 0 1 6.4 1.9c0 4.6-6.4 8.5-6.4 8.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-  </svg>
-  <span data-like-label>{t(lang, 'ui.like')}</span>
+<button class="like" type="button" data-like={id} data-title={title} aria-pressed="false" hidden>
+  <span class="like__pair like__ask">
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+      <path d={heart} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+    </svg>
+    <span>{t(lang, 'ui.like')}</span>
+  </span>
+  <span class="like__pair like__thanks">
+    <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+      <path d={heart} fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
+    </svg>
+    <span>{t(lang, 'ui.like_thanks')}</span>
+  </span>
 </button>
 <script>
   import '../scripts/like';
@@ -27,24 +39,43 @@ const { lang, id, title } = Astro.props;
 
 <style>
   .like {
-    gap: var(--space-2);
+    display: inline-grid;
+    align-items: center;
+    min-height: var(--touch-target);
+    padding-inline: var(--space-2);
+    border: 0;
+    background: none;
+    color: var(--color-accent);
+    font: inherit;
+    font-size: var(--text-base);
     white-space: nowrap;
+    cursor: pointer;
   }
 
-  /* 320 px: "ПОНРАВИЛОСЬ" with the heart just fits in half a line when the gap between them is smaller. */
-  @media (max-width: 26rem) {
-    .like {
-      gap: var(--space-1);
-    }
+  .like:hover {
+    color: var(--color-accent-strong);
+    text-decoration: underline;
   }
 
-  /* Pressed: its own shade of background (a pair for each theme), the heart is filled; nothing moves and the size does not change. */
-  .like[aria-pressed='true'] {
-    background: var(--color-pressed);
-    color: var(--color-text);
+  .like[hidden] {
+    display: none;
   }
 
-  .like[aria-pressed='true'] svg path {
-    fill: currentColor;
+  /* The two pairs share one cell: the button keeps the width of the longer one, pressed or not; the visible pair sits on the right edge, the heart against its words. */
+  .like__pair {
+    display: inline-flex;
+    grid-area: 1 / 1;
+    justify-self: end;
+    align-items: center;
+    gap: var(--like-gap);
+  }
+
+  .like svg {
+    flex: none;
+  }
+
+  .like[aria-pressed='false'] .like__thanks,
+  .like[aria-pressed='true'] .like__ask {
+    visibility: hidden;
   }
 </style>
