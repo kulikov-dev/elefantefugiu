@@ -37,7 +37,7 @@ threads:
   - poder-e-revolta
 importance: 3
 label: documented
-min_age: all
+min_age: '12'
 sensitive: false
 hook:
   pt: Roma não conseguiu vencer o pastor. Então comprou os amigos dele.
