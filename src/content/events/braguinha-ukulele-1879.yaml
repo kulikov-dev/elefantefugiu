@@ -172,5 +172,5 @@ meanwhile:
   - scope: pt
     year: 1879
     text:
-      pt: "A lâmpada de Thomas Edison arde mais de treze horas num teste."
+      pt: "Num teste, a lâmpada de Thomas Edison fica acesa mais de treze horas."
     source: "https://en.wikipedia.org/wiki/Incandescent_light_bulb"
