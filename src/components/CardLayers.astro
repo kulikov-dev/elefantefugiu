@@ -33,7 +33,7 @@ const { lang, hook, textLang, hasAside = false, storyId } = Astro.props;
       <!-- After the story: the small block "Meanwhile" (src/components/Meanwhile.astro); empty for a story without lines. -->
       <slot name="meanwhile" />
 
-      <!-- Then, before "More": the small "I liked it" (src/components/LikeButton.astro), on the right edge of the text column. -->
+      <!-- Then, before "More": the small "I liked it" (src/components/LikeButton.astro), on the right edge of the text column (from 768 px on the left edge). -->
       <div class="story__like"><slot name="like" /></div>
     </div>
     {
@@ -126,6 +126,20 @@ const { lang, hook, textLang, hasAside = false, storyId } = Astro.props;
 
   .story__like:empty {
     display: none;
+  }
+
+  /* From 768 px the button stands at the left edge of the text, a paragraph's distance below the text (on the right it sat by the picture and read as its caption);
+     the padding of the button is taken back so the heart is in line with the text. */
+  @media (min-width: 48rem) {
+    .story__like {
+      justify-content: flex-start;
+      margin-block-start: var(--space-4);
+      margin-inline-start: calc(-1 * var(--space-2));
+    }
+
+    .story__like :global(.like__pair) {
+      justify-self: start;
+    }
   }
 
   .more {
