@@ -10,7 +10,7 @@ Documents and their roles (the docs are written in Russian):
 - `docs/design.md`: the idea and principles; changes rarely.
 - `docs/spec.md`: how the site works now; the source of truth for behaviour (when it disagrees with design, spec and the code win).
 - `docs/STATE.md`: current state, work in progress, open questions, what is not checked; read it before non-trivial changes.
-- `docs/history.md`: archive of stages, reports and closed checklists.
+- `docs/history.md`: archive of stages, reports and closed checklists. Do not read it unless the task is directly about the history of the project (it is large and holds nothing needed for current work).
 - Reference files: `docs/glossary.md`, `docs/style-ai-tells.md`, `docs/visual-direction.md`, `docs/addresses.md`, `docs/language-review/`.
 
 Update STATE with 1-3 lines per task; details of behaviour go to spec, "what was done and how it was checked" goes to history.
