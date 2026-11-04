@@ -76,7 +76,7 @@ const schema = storyNodes(schemaCtx, {
   title,
   description,
   image: schemaImage,
-  story: { year: event.year, place: { name: event.place.name[lang], lat: event.place.lat, lon: event.place.lon } },
+  story: { year: event.year },
   bridge: { name: event.bridge.title?.[lang] ?? event.bridge.name, address: event.bridge.address, lat: event.bridge.lat, lon: event.bridge.lon },
   published: event.published,
   updated: event.updated,

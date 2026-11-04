@@ -1,7 +1,8 @@
 // Checks the schema.org markup (JSON-LD) of the built pages (part of postbuild; also `npm run check:schema`).
 //  - every indexable page has exactly one JSON-LD script that parses, with WebSite and Organization (no email address);
 //  - a story page has an Article (headline, description equal to the meta description, image, inLanguage, datePublished,
-//    dateModified, author and publisher, about = Event with a start date and a place, contentLocation with geo, citation) and a BreadcrumbList;
+//    dateModified, author and publisher, temporalCoverage = the year of the story (ISO 8601, or from/to), contentLocation with geo, citation) and a BreadcrumbList;
+//    there is no Event anywhere on a story page (for Google an Event is a future happening with tickets, not a story of the past);
 //  - an epoch page has a CollectionPage, an ItemList of its stories and a BreadcrumbList; map, thread, About, Method and Legal have a
 //    WebPage (AboutPage) and a BreadcrumbList;
 //  - every address in the markup is absolute and on the domain of the site (the citations are the sources and may be anywhere);
@@ -37,6 +38,8 @@ let stories = 0;
 
 const asArray = (v) => (Array.isArray(v) ? v : v === undefined ? [] : [v]);
 const filled = (v) => typeof v === 'string' && v.trim() !== '';
+/** Is there a node of the type Event anywhere in the document (nested too)? */
+const hasEvent = (node) => (Array.isArray(node) ? node.some(hasEvent) : node && typeof node === 'object' ? asArray(node['@type']).includes('Event') || Object.values(node).some(hasEvent) : false);
 const isoDate = (v) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v));
 
 // Addresses in the markup: the keys below hold one; `citation` is left alone (the sources of the story are on other sites).
@@ -138,13 +141,8 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
       need(article, 'Article', 'author', (v) => v?.['@id'] !== undefined || filled(v?.name));
       need(article, 'Article', 'publisher', (v) => v?.['@id'] !== undefined || filled(v?.name));
       need(article, 'Article', 'isPartOf', (v) => v && typeof v === 'object');
-      const about = article.about;
-      if (about?.['@type'] !== 'Event') fail('Article.about is not an Event');
-      else {
-        need(about, 'about', 'name');
-        need(about, 'about', 'startDate', (v) => typeof v === 'string' && /^-?\d{4}(-\d{2}(-\d{2})?)?$/.test(v));
-        need(about, 'about', 'location', (v) => v?.['@type'] === 'Place' && filled(v.name));
-      }
+      need(article, 'Article', 'temporalCoverage', (v) => typeof v === 'string' && /^-?\d{4}(\/-?\d{4})?$/.test(v));
+      if (hasEvent(JSON.parse(scripts[0]))) fail('an Event is in the JSON-LD of a story page (use Article.temporalCoverage and contentLocation)');
       const loc = article.contentLocation;
       if (loc?.['@type'] !== 'Place') fail('Article.contentLocation is not a Place');
       else {
@@ -212,5 +210,5 @@ if (errors.length) {
   console.error(`Schema check failed:\n${errors.map((e) => `- ${e}`).join('\n')}`);
   process.exit(1);
 }
-console.log(`Schema check passed: ${checked} indexable pages have valid JSON-LD (${stories} story pages with Article, Event, geo and breadcrumbs); noindex pages have none.`);
+console.log(`Schema check passed: ${checked} indexable pages have valid JSON-LD (${stories} story pages with Article, temporalCoverage, geo and breadcrumbs, no Event); noindex pages have none.`);
 if (smallImages.length) console.log(`  NOTE: ${smallImages.length} story picture(s) narrower than 1200 px (the source file is smaller): ${smallImages.join(', ')}`);

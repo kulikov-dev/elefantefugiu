@@ -85,7 +85,7 @@ export interface StorySchemaInput {
   description: string;
   /** Absolute address of the main picture (the same as og:image). */
   image: string;
-  story: { year: number | { from: number; to: number }; place: { name: string; lat: number; lon: number } };
+  story: { year: number | { from: number; to: number } };
   bridge: { name: string; address: string; lat: number; lon: number };
   published: string;
   updated?: string | undefined;
@@ -94,7 +94,11 @@ export interface StorySchemaInput {
   epoch?: { name: string; url: string } | undefined;
 }
 
-/** A story page: Article (about an Event, content location = the place of the "Bridge to today") and BreadcrumbList. */
+/**
+ * A story page: Article and BreadcrumbList. The time of the story is Article.temporalCoverage (a year, or "from/to" for a span, ISO 8601, a year before the common era
+ * astronomical) and the place is Article.contentLocation (the place of the "Bridge to today"). There is no Event: for Google an Event is a future happening with tickets (offers,
+ * performer, organizer, eventStatus), and a story of the past is not that.
+ */
 export function storyNodes(ctx: SchemaContext, input: StorySchemaInput): Node[] {
   const { year } = input.story;
   const [from, to] = typeof year === 'number' ? [year, year] : [year.from, year.to];
@@ -114,13 +118,7 @@ export function storyNodes(ctx: SchemaContext, input: StorySchemaInput): Node[] 
     author: { '@id': ORGANIZATION_ID(ctx) },
     publisher: { '@id': ORGANIZATION_ID(ctx) },
     isPartOf: input.epoch ? { '@type': 'CollectionPage', '@id': `${input.epoch.url}#webpage`, url: input.epoch.url, name: input.epoch.name } : { '@id': WEBSITE_ID(ctx) },
-    about: {
-      '@type': 'Event',
-      name: input.title,
-      startDate: isoYear(from),
-      ...(to !== from ? { endDate: isoYear(to) } : {}),
-      location: place(input.story.place.name, input.story.place.lat, input.story.place.lon),
-    },
+    temporalCoverage: to !== from ? `${isoYear(from)}/${isoYear(to)}` : isoYear(from),
     contentLocation: place(input.bridge.name, input.bridge.lat, input.bridge.lon, input.bridge.address),
     ...(input.sourceUrls.length > 0 ? { citation: input.sourceUrls } : {}),
   };
