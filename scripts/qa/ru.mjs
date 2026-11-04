@@ -132,7 +132,7 @@ if (want('banner')) {
         banner: banner?.textContent.trim() ?? null,
         visible: Boolean(r && r.width > 0 && r.height > 0),
         noindex: document.querySelector('meta[name=robots]')?.content ?? null,
-        alternates: [...document.querySelectorAll('link[rel=alternate]')].map((l) => l.getAttribute('hreflang')),
+        alternates: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => l.getAttribute('hreflang')),
         h1: document.querySelector('h1').textContent.trim(),
         storyLang: document.querySelector('#historia .prose')?.getAttribute('lang') ?? null,
       };
@@ -145,14 +145,14 @@ if (want('banner')) {
     for (const path of [pt(standIn), en(standIn)]) {
       const p = await newPage();
       await p.goto(`${base}${path}`, { waitUntil: 'load' });
-      const alt = await p.$$eval('link[rel=alternate]', (ls) => ls.map((l) => l.getAttribute('hreflang')).sort());
+      const alt = await p.$$eval('link[rel=alternate][hreflang]', (ls) => ls.map((l) => l.getAttribute('hreflang')).sort());
       ok(`banner: ${path} names pt, en and x-default only`, alt.join() === 'en,pt,x-default', alt.join());
       await p.close();
     }
   }
   const ready = await newPage({ width: 360 });
   await ready.goto(`${base}${ruPath(ruCard)}`, { waitUntil: 'load' });
-  const r = await ready.evaluate(() => ({ banner: Boolean(document.querySelector('[data-not-translated]')), h1: document.querySelector('h1').textContent.trim(), alternates: [...document.querySelectorAll('link[rel=alternate]')].map((l) => l.getAttribute('hreflang')).sort(), robots: document.querySelector('meta[name=robots]')?.content ?? null, hook: document.querySelector('.hook')?.textContent ?? '' }));
+  const r = await ready.evaluate(() => ({ banner: Boolean(document.querySelector('[data-not-translated]')), h1: document.querySelector('h1').textContent.trim(), alternates: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => l.getAttribute('hreflang')).sort(), robots: document.querySelector('meta[name=robots]')?.content ?? null, hook: document.querySelector('.hook')?.textContent ?? '' }));
   ok('banner: a card ready in Russian has no banner, its own title and text, hreflang pt, en, ru and x-default', !r.banner && r.h1 === ruCard.title.ru && /[а-я]/.test(r.hook) && r.alternates.join() === 'en,pt,ru,x-default', JSON.stringify(r));
   await ready.close();
   // A feed of a Russian epoch page marks the language of the text of every card that is not translated (and of no other card).

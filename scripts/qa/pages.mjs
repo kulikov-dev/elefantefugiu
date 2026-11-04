@@ -59,7 +59,7 @@ if (want('static')) {
             lead: document.querySelector('.static__lead')?.textContent.trim().length ?? 0,
             overflow: document.documentElement.scrollWidth - innerWidth,
             robots: document.querySelector('meta[name=robots]')?.content ?? null,
-            alternates: [...document.querySelectorAll('link[rel=alternate]')].map((l) => l.getAttribute('hreflang')).sort().join(),
+            alternates: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => l.getAttribute('hreflang')).sort().join(),
             email: links.filter((l) => l.href === 'mailto:elefantefugiu@gmail.com').length,
             raw: document.querySelector('.static').innerHTML.includes('{{'),
             links,
