@@ -23,19 +23,12 @@ const pathOf = (e, lang) => `/${lang}/${SEG[lang]}/${e.slug[lang]}/`;
 
 /** The first year of a story, and the distance from it to a year of the event (there is no year 0). */
 const startOf = (e) => (typeof e.year === 'number' ? e.year : e.year.from);
-const delta = (year, start) => year - start + (start > 0 && year < 0 ? 1 : start < 0 && year > 0 ? -1 : 0);
 /** What the data promises for a story on the page of a language: [{scope, text, caption}], its own line first. A Russian page of a story not ready in Russian shows English with no Russian line. */
 function expected(e, lang) {
-  const items = e.meanwhile ?? [];
+  const items = e.sensitive ? [] : (e.meanwhile ?? []);
   const own = lang === 'ru' && !e.ru_ready ? undefined : items.find((i) => i.scope === lang);
   const world = items.find((i) => i.scope === 'world');
-  const caption = (i) => {
-    const d = delta(i.year, startOf(e));
-    if (d === 0) return ui('card.meanwhile_same', lang);
-    const cat = new Intl.PluralRules({ pt: 'pt-PT', en: 'en', ru: 'ru' }[lang]).select(Math.abs(d));
-    const base = `card.meanwhile_${d < 0 ? 'before' : 'after'}`;
-    return (ui(`${base}_${cat}`, lang) ?? ui(`${base}_other`, lang)).replace('{n}', String(Math.abs(d)));
-  };
+  const caption = (i) => (i.year < 0 ? ui('card.year_bc', lang).replace('{n}', String(-i.year)) : i.year < 1000 ? ui('card.year_ad', lang).replace('{n}', String(i.year)) : String(i.year));
   return [own, world].filter(Boolean).map((i) => ({ scope: i.scope, caption: caption(i), text: i.text[lang] ?? i.text.en }));
 }
 
@@ -47,7 +40,7 @@ function blockOf(html) {
   if (!m) return null;
   return [...m[1].matchAll(/<li[^>]*data-scope="([^"]+)"[^>]*>([\s\S]*?)<\/li>/g)].map((li) => ({
     scope: li[1],
-    caption: strip(li[2].match(/class="[^"]*meanwhile__when[^"]*"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? ''),
+    caption: strip(li[2].match(/class="[^"]*meanwhile__year[^"]*"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? ''),
     text: strip(li[2].match(/class="[^"]*meanwhile__text[^"]*"[^>]*>([\s\S]*?)<\/span>/)?.[1] ?? ''),
   }));
 }

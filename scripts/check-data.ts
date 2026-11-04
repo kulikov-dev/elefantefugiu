@@ -260,6 +260,7 @@ for (const { item: ev, file, stem } of events) {
   }
 
   // "Meanwhile": the errors are in the schema (src/lib/meanwhile.ts); here the warnings (more than 15 words, an exclamation mark).
+  if (ev.sensitive && (ev.meanwhile ?? []).length > 0) report('error', file, 'a heavy story (sensitive) has no "Meanwhile" lines', 'meanwhile');
   for (const p of meanwhileProblems(ev.meanwhile ?? [], storyStartYear(ev.year))) {
     if (p.level === 'warn') report('warn', file, p.message, `meanwhile[${p.index}]`);
   }

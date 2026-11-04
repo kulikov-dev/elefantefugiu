@@ -2,45 +2,23 @@ import { describe, expect, it } from 'vitest';
 import {
   MEANWHILE_MAX_ITEMS,
   meanwhileFor,
-  meanwhileLabel,
   meanwhileProblems,
+  meanwhileYearText,
   storyStartYear,
   yearDelta,
   type MeanwhileItemLike,
 } from '../../src/lib/meanwhile';
 
-describe('meanwhileLabel', () => {
-  const cases: Record<'pt' | 'en' | 'ru', Record<number, string>> = {
-    pt: {
-      0: 'No mesmo ano',
-      [-1]: '1 ano antes', [1]: '1 ano depois',
-      [-2]: '2 anos antes', [2]: '2 anos depois',
-      [-5]: '5 anos antes', [5]: '5 anos depois',
-      [-11]: '11 anos antes', [11]: '11 anos depois',
-      [-15]: '15 anos antes', [15]: '15 anos depois',
-    },
-    en: {
-      0: 'That same year',
-      [-1]: '1 year earlier', [1]: '1 year later',
-      [-2]: '2 years earlier', [2]: '2 years later',
-      [-5]: '5 years earlier', [5]: '5 years later',
-      [-11]: '11 years earlier', [11]: '11 years later',
-      [-15]: '15 years earlier', [15]: '15 years later',
-    },
-    ru: {
-      0: 'В том же году',
-      [-1]: 'За год до этого', [1]: 'Через год',
-      [-2]: 'За 2 года до этого', [2]: 'Через 2 года',
-      [-5]: 'За 5 лет до этого', [5]: 'Через 5 лет',
-      [-11]: 'За 11 лет до этого', [11]: 'Через 11 лет',
-      [-15]: 'За 15 лет до этого', [15]: 'Через 15 лет',
-    },
-  };
-  for (const lang of ['pt', 'en', 'ru'] as const) {
-    it(`writes the caption in ${lang}`, () => {
-      for (const [delta, text] of Object.entries(cases[lang])) expect(meanwhileLabel(lang, Number(delta))).toBe(text);
-    });
-  }
+describe('meanwhileYearText', () => {
+  it('writes the year of the event, with the era before the common era and in the first centuries', () => {
+    expect(meanwhileYearText('ru', 1755)).toBe('1755');
+    expect(meanwhileYearText('ru', -9)).toBe('9 до н. э.');
+    expect(meanwhileYearText('pt', -9)).toBe('9 a.C.');
+    expect(meanwhileYearText('en', -9)).toBe('9 BC');
+    expect(meanwhileYearText('ru', 8)).toBe('8 н. э.');
+    expect(meanwhileYearText('pt', 8)).toBe('8 d.C.');
+    expect(meanwhileYearText('en', 8)).toBe('AD 8');
+  });
 });
 
 describe('yearDelta', () => {

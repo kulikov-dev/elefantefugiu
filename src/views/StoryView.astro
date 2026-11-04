@@ -26,7 +26,7 @@ import { EPOCHS_ANCHOR, LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath
 import { t } from '../i18n';
 import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
 import { distanceParts } from '../lib/distance';
-import { meanwhileFor, storyStartYear } from '../lib/meanwhile';
+import { meanwhileFor } from '../lib/meanwhile';
 import { epochHasContent, nextEpochEntry } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
@@ -141,8 +141,8 @@ const eventThreads = event.threads.map((id) => site.threads.find((th) => th.id =
 // Placeholder text is Latin filler: mark it, so screen readers do not read it as Portuguese.
 const textLang = textLangOf(event, lang);
 const standIn = isRuStandIn(event, lang);
-// "Meanwhile": the line of the page's language, then the world. A Russian line is hidden on a card that is shown in English under /ru/ (stand-in).
-const meanwhileLines = meanwhileFor(event.meanwhile, lang).filter((line) => !(standIn && line.scope === 'ru'));
+// "Meanwhile": the line of the page's language, then the world; none on a heavy story. A Russian line is hidden on a card that is shown in English under /ru/ (stand-in).
+const meanwhileLines = event.sensitive ? [] : meanwhileFor(event.meanwhile, lang).filter((line) => !(standIn && line.scope === 'ru'));
 // hreflang names the languages the card is written in; a card without Russian leaves ru out.
 const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 ---
@@ -217,8 +217,8 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id}>
       <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
       <p slot="story">{event.story[lang]}</p>
+      <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
       <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
-      <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} storyYear={storyStartYear(event.year)} textLang={textLang} /></Fragment>
       <Fragment slot="after">
         {
           continueVariants.map(({ modes, value: { next, nextEpoch } }) => {

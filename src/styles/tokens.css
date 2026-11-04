@@ -95,6 +95,7 @@
   --leading-body: 1.6;
   --leading-heading: 1.2;
   --measure: 65ch;
+  --meanwhile-year-col: 5rem; /* the year column of a "Meanwhile" row: fits "9 до н. э." */
   --container: 72rem;
 
   /* Radius */

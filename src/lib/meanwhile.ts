@@ -1,6 +1,6 @@
 // "Meanwhile" (pt "Entretanto", en "Meanwhile", ru "А в это время"): one or two facts from elsewhere, near the year of a story.
 // Pure helpers, no Astro imports: the schema, check:data, the page and the tests all read the rules from here.
-import { plural, t } from '../i18n';
+import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 
 /** `world` is for every reader; the others are for the pages of that language only (ru: Russia, en: England / the USA, pt: Brazil). */
@@ -93,8 +93,8 @@ export function meanwhileFor(items: readonly MeanwhileItemLike[] | undefined, la
   return [...pick(lang), ...pick('world')];
 }
 
-/** The time caption before a line, from the distance in years: "Same year" / "5 years earlier" / "3 years later" and the other languages. */
-export function meanwhileLabel(lang: Lang, delta: number): string {
-  if (delta === 0) return t(lang, 'card.meanwhile_same');
-  return plural(lang, delta < 0 ? 'card.meanwhile_before' : 'card.meanwhile_after', Math.abs(delta));
+/** The year in front of a line: "1755"; before the common era "9 BC" / "9 a.C." / "9 до н. э."; the first centuries (under 1000) "AD 8" / "8 d.C." / "8 н. э.". */
+export function meanwhileYearText(lang: Lang, year: number): string {
+  if (year < 0) return t(lang, 'card.year_bc').replace('{n}', String(-year));
+  return year < 1000 ? t(lang, 'card.year_ad').replace('{n}', String(year)) : String(year);
 }

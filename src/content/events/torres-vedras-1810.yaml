@@ -180,26 +180,3 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'b27c8a090b4b'
-meanwhile:
-  - scope: ru
-    year: 1811
-    text:
-      ru: "В Царском Селе открывается Лицей."
-    source: "https://ru.wikipedia.org/wiki/Царскосельский_лицей"
-  - scope: en
-    year: 1806
-    text:
-      en: "Lewis and Clark return to St. Louis after crossing the continent."
-    source: "https://en.wikipedia.org/wiki/Lewis_and_Clark_Expedition"
-  - scope: pt
-    year: 1808
-    text:
-      pt: "É criada no Rio de Janeiro a Impressão Régia."
-    source: "https://pt.wikipedia.org/wiki/Imprensa_Nacional_(Brasil)"
-  - scope: world
-    year: 1810
-    text:
-      pt: "Realiza-se em Munique o primeiro Oktoberfest."
-      en: "The first Oktoberfest is held in Munich."
-      ru: "В Мюнхене проходит первый Октоберфест."
-    source: "https://en.wikipedia.org/wiki/Oktoberfest"

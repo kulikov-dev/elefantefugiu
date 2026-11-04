@@ -200,21 +200,3 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: '59c389082545'
-meanwhile:
-  - scope: ru
-    year: 1757
-    text:
-      ru: "В Петербурге основана Академия художеств."
-    source: "https://ru.wikipedia.org/wiki/Императорская_академия_художеств"
-  - scope: en
-    year: 1759
-    text:
-      en: "Kew Gardens is established near London."
-    source: "https://www.kew.org/about-us/history-of-kew"
-  - scope: world
-    year: 1751
-    text:
-      pt: "Sai em Paris o primeiro volume da Encyclopédie de Diderot."
-      en: "The first volume of Diderot’s Encyclopédie is published in Paris."
-      ru: "В Париже выходит первый том «Энциклопедии» Дидро и Д'Аламбера."
-    source: "https://en.wikipedia.org/wiki/Encyclop%C3%A9die"

@@ -173,26 +173,3 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: 'efd9a4046b2f'
-meanwhile:
-  - scope: ru
-    year: 1809
-    text:
-      ru: "Иван Крылов выпускает первый сборник басен."
-    source: "https://ru.wikipedia.org/wiki/Крылов,_Иван_Андреевич"
-  - scope: en
-    year: 1809
-    text:
-      en: "Abraham Lincoln is born in Kentucky."
-    source: "https://en.wikipedia.org/wiki/Abraham_Lincoln"
-  - scope: pt
-    year: 1808
-    text:
-      pt: "Funda-se no Rio de Janeiro o Jardim Botânico."
-    source: "https://pt.wikipedia.org/wiki/Jardim_Bot%C3%A2nico_do_Rio_de_Janeiro"
-  - scope: world
-    year: 1809
-    text:
-      pt: "Nasce em Inglaterra Charles Darwin."
-      en: "Charles Darwin is born in England."
-      ru: "В Англии родился Чарльз Дарвин."
-    source: "https://en.wikipedia.org/wiki/Charles_Darwin"

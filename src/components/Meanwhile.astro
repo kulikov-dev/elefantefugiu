@@ -3,18 +3,16 @@
 // First the line of the page's own language (Russia, England / the USA, Brazil), then the world. No lines, no block. Works without JS.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
-import { meanwhileLabel, yearDelta, type MeanwhileLine } from '../lib/meanwhile';
+import { meanwhileYearText, type MeanwhileLine } from '../lib/meanwhile';
 
 interface Props {
   lang: Lang;
   lines: MeanwhileLine[];
-  /** The first year of the story: the captions count from it. */
-  storyYear: number;
   /** Language tag of the texts when it differs from the page. */
   textLang?: string;
 }
 
-const { lang, lines, storyYear, textLang } = Astro.props;
+const { lang, lines, textLang } = Astro.props;
 ---
 {
   lines.length > 0 && (
@@ -24,7 +22,7 @@ const { lang, lines, storyYear, textLang } = Astro.props;
         {
           lines.map((line) => (
             <li data-scope={line.scope}>
-              <span class="meanwhile__when">{meanwhileLabel(lang, yearDelta(line.year, storyYear))}</span>
+              <span class="meanwhile__year">{meanwhileYearText(lang, line.year)}</span>
               <span class="meanwhile__text" lang={textLang}>{line.text}</span>
             </li>
           ))
@@ -54,15 +52,22 @@ const { lang, lines, storyYear, textLang } = Astro.props;
     list-style: none;
   }
 
+  /* A row: the year of the event in a column of fixed width (like the year in the feed of an epoch), then the text, a step smaller than the story. */
+  .meanwhile__list > li {
+    display: grid;
+    grid-template-columns: var(--meanwhile-year-col) minmax(0, 1fr);
+    column-gap: var(--space-2);
+    font-size: var(--text-sm);
+    font-style: normal;
+  }
+
   .meanwhile__list > li + li {
     margin-block-start: var(--space-2);
   }
 
-  .meanwhile__when {
-    margin-inline-end: var(--space-2);
+  .meanwhile__year {
     color: var(--color-ink-muted);
-    font-size: var(--text-sm);
-    font-weight: var(--weight-strong);
+    font-variant-numeric: tabular-nums;
   }
 
   .meanwhile__text {
