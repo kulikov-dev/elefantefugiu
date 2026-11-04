@@ -180,6 +180,17 @@
   white-space: nowrap;
 }
 
+/* A language the page does not exist in (the page of a holiday): shown, not a link. */
+.lang-switch__off {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch-target);
+  padding-inline: var(--space-3);
+  color: var(--color-muted);
+  font-size: var(--text-base);
+  white-space: nowrap;
+}
+
 .lang-switch a:hover {
   background: var(--color-surface-hover);
 }

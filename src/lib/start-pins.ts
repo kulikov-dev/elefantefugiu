@@ -39,13 +39,5 @@ export function anniversaryPins(stories: readonly StartStory[], year: number): P
   });
 }
 
-/**
- * The holiday pins of `year`. Empty until the holidays file exists: the prompt that adds it fills this function (the window of a holiday is the
- * 3 days before it and the day itself; Easter and Carnival are computed) and nothing else has to change.
- */
-export function holidayPins(_year: number): Pin[] {
-  return [];
-}
-
 /** All the pins that can show on a day: anniversaries and holidays of the year of that day. */
-export const pinsFor = (stories: readonly StartStory[], year: number, holidays: readonly Pin[] = holidayPins(year)): Pin[] => [...anniversaryPins(stories, year), ...holidays];
+export const pinsFor = (stories: readonly StartStory[], year: number, holidays: readonly Pin[] = []): Pin[] => [...anniversaryPins(stories, year), ...holidays];

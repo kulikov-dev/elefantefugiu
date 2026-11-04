@@ -358,5 +358,9 @@
     "stay": "O elefante da mascote de pé, apoiado na bengala",
     "sad": "O elefante da mascote triste, de cabeça baixa",
     "head": "A cabeça do elefante da mascote"
+  },
+  "festa": {
+    "history": "A história deste dia",
+    "traditions": "Tradições e curiosidades"
   }
 }

@@ -28,7 +28,9 @@
 
 **Карта.** CARTO Voyager / Dark Matter по `CARTO_KEY`, без ключа OSM (только разработка). Не более 30 маркеров и кластеров, «Показать ещё» +5, шторка «В области» на телефоне, «Рядом со мной». Остров грузится лениво (`map-loader`, `map-island`). Spec §5.4.
 
-**«С чего начать».** `src/lib/start-set.ts`, пины `start-pins.ts` (`holidayPins` пустая), данные браузера в `/{lang}/start/<hash>.json`. Годовщины только без `sensitive`; поле `day: 'MM-DD'` у 10 историй. Набор QA `start`. Spec §5.1.
+**«С чего начать».** `src/lib/start-set.ts`, пины `start-pins.ts` (праздники: `holidayPins` в `festas-data.ts`), данные браузера в `/{lang}/start/<hash>.json`. Годовщины только без `sensitive`; поле `day: 'MM-DD'` у 10 историй. Набор QA `start`. Spec §5.1.
+
+**Праздники.** `src/data/festas.yaml`, `src/lib/festas.mjs`, окно −3 дня по Лиссабону, `?hoje=` и `?festa=`; включён только `restauracao`, только ru (pt/en без текстов: шапки и значка нет). Набор QA `festas`. Карточка про корону лежит в `festas.yaml`: для истории нужны pt и en. Spec §5.7.
 
 **Метка «Новое».** `lastVisit {prev, last}`, `src/lib/new-marks.ts`, новая эпоха считается по датам (`epochFirsts` в `BaseLayout`). Нет на «С чего начать» и переключателе эпох (решение владельца). Spec §5.2.
 

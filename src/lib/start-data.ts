@@ -9,9 +9,8 @@ import { formatYear, placeShort, textLangOf, type EventData } from './events';
 import { normalizeMinAge, normalizeSensitive, type MinAge } from './family';
 import { cardPicture } from './pictures';
 import { pictureSource } from './picture-assets';
-import { buildToday } from './publication.mjs';
 import { START_CARD_QUALITY, START_CARD_SIZES, START_CARD_WIDTHS, type StartCardData } from './start-card';
-import { holidayPins } from './start-pins';
+import { builtHolidays } from './festas-data';
 import type { Pin, StartStory } from './start-set';
 import type { SiteData } from './site-data';
 
@@ -29,12 +28,6 @@ export const toStart = (e: EventData): StartStory => ({
   ...(typeof e.year === 'number' ? { year: e.year } : {}),
   ...(e.day ? { day: e.day } : {}),
 });
-
-/** The holiday pins of the year of the build and of the next one (a reader on the other side of New Year). */
-export function builtHolidays(): Pin[] {
-  const year = Number(buildToday().slice(0, 4));
-  return [...holidayPins(year), ...holidayPins(year + 1)];
-}
 
 async function cardData(site: SiteData, event: EventData, lang: Lang): Promise<StartCardData> {
   const picture = cardPicture(event, site.epochs.find((ep) => ep.id === event.epoch) ?? {});
@@ -65,7 +58,7 @@ export function startFile(site: SiteData, lang: Lang): Promise<{ json: string; h
       const data: StartData = {
         fallback: site.featured.map((e) => e.id),
         // A picture of a pinned page gets the base path of the site here, as the script puts it in the card.
-        holidays: builtHolidays().map((pin) => (pin.target.type === 'page' && pin.target.image ? { ...pin, target: { ...pin.target, image: withBase(pin.target.image) } } : pin)),
+        holidays: builtHolidays(lang).map((pin) => (pin.target.type === 'page' && pin.target.image ? { ...pin, target: { ...pin.target, image: withBase(pin.target.image) } } : pin)),
         stories: site.events.map((e) => ({ ...toStart(e), minAge: normalizeMinAge(e.min_age) })),
         cards: Object.fromEntries(await Promise.all(site.events.map(async (e) => [e.id, await cardData(site, e, lang)] as const))),
       };

@@ -64,7 +64,7 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
   if (path.endsWith('/images/og/home.png') && !isHome) errors.push(`${rel}: the preview with the mascot is only for the home page`);
   // The home page: the card made for it (og-cards/<lang>/home-<hash>.jpg, scripts/make-og.mjs: a picture of the first story with the head of the elephant on the plate)
   // or, without one, the plain picture with the mascot.
-  if (isHome && !path.endsWith('/images/og/home.png') && !/\/og-cards\/(pt|en|ru)\/home-[0-9a-f]{10}\.jpg$/.test(path)) errors.push(`${rel}: the home page must use its card (og-cards/<lang>/home-<hash>.jpg) or images/og/home.png`);
+  if (isHome && !path.endsWith('/images/og/home.png') && !/\/og-cards\/(pt|en|ru)\/home-[0-9a-f]{10}\.jpg$/.test(path) && !/\/og-festas\/[a-z0-9-]+-[0-9a-f]{10}\.png$/.test(path)) errors.push(`${rel}: the home page must use its card (og-cards/<lang>/home-<hash>.jpg), the picture of a holiday in its window (og-festas/<id>-<hash>.png) or images/og/home.png`);
 }
 
 if (errors.length) {

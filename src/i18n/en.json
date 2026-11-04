@@ -358,5 +358,9 @@
     "stay": "The elephant mascot standing, leaning on a cane",
     "sad": "The elephant mascot looking sad, head bowed",
     "head": "The head of the elephant mascot"
+  },
+  "festa": {
+    "history": "The story of this day",
+    "traditions": "Traditions and facts"
   }
 }

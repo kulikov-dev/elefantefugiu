@@ -229,6 +229,17 @@
   --viz-water: var(--color-accent-tint);
   --viz-label-size: var(--text-base);
 
+  /* The drawings of the holidays (src/lib/festa-art.mjs; the approved draft docs/drafts/preview-1dec.html): azulejo cobalt for the lines, one warm colour,
+     a pale blue wash for the plate and the cushion, a cream for the egg shell. The preview picture (scripts/make-festa-og.mjs) reads the light values from here. */
+  --festa-ink: light-dark(#1f4e9c, #a9c2f0);
+  --festa-warm: light-dark(#d9a441, #e0b45a);
+  --festa-wash: light-dark(#e4ecf8, #22324f);
+  --festa-shell: light-dark(#fffdf7, #efe8d8);
+  --festa-art-max: 23.75rem; /* the drawing on the page of a holiday (380 px) */
+  --festa-head-art-max: 26rem; /* and in the header of the home page */
+  --size-festa-badge: calc(var(--size-logo) * 0.62); /* the small crown by the logo */
+  --festa-glow-time: 4s;
+
   /* Azulejo patterns (docs/visual-direction.md section 4): tile size, and the opacity of the pattern layer only
      (5-10% under text, up to 50% on frames and dividers; never on text). */
   --azulejo-opacity: 0.08; /* under text: 5-10% */
@@ -455,6 +466,10 @@
     --viz-tone-green: #2f6f3e;
     --viz-tone-ochre: #7f5b0e;
     --viz-tone-grey: #4a4a48;
+    --festa-ink: #1f4e9c;
+    --festa-warm: #d9a441;
+    --festa-wash: #e4ecf8;
+    --festa-shell: #fffdf7;
   }
 
   :root {

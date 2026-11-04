@@ -67,8 +67,11 @@ for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
   const epochId = /<html[^>]* data-epoch="([^"]+)"/.exec(html)?.[1];
   const key = kind === 'story' ? undefined : kind === 'home' ? 'home' : `epoch:${epochId}`;
   const lang = rel.split('/')[0];
+  // The home page in the window of a holiday shares the picture of the holiday (scripts/make-festa-og.mjs): a PNG of 1200x630, the hash in its name.
+  const isFesta = kind === 'home' && /^og-festas\/[a-z0-9-]+-[0-9a-f]{10}\.png$/.test(path);
+  if (isFesta && info.format !== 'png') fail(`${path} is not a PNG`);
   const mustHaveCard = kind === 'story' || (key && manifest[key]?.[lang]);
-  if (mustHaveCard && !isCard) fail(`og:image ${path} is not a card with a hash in its name (og-cards/<lang>/<slug>-<hash>.jpg)`);
+  if (mustHaveCard && !isCard && !isFesta) fail(`og:image ${path} is not a card with a hash in its name (og-cards/<lang>/<slug>-<hash>.jpg)`);
   if (isCard) {
     cards += 1;
     if (key && manifest[key]?.[lang] && manifest[key][lang] !== path) fail(`og:image ${path} is not the card of the manifest (${manifest[key][lang]})`);

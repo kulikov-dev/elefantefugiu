@@ -1,0 +1,108 @@
+---
+// The page of a holiday: /ru/festa/<slug>/ (docs/spec.md "Праздники"). The date, the name, the lead, the drawing, "The story of this day" (a card kept in
+// src/data/festas.yaml until the story has pt and en texts and can be a story of the site), "Traditions and facts". Outside the window one line
+// above the name says when the holiday is celebrated; the head script shows it. Written in one language only: no hreflang, the language switch
+// shows the other languages but does not lead there.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FestaArt from '../components/FestaArt.astro';
+import { festaPath, storyPath, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import type { FestaData } from '../data/schemas';
+import { builtFesta, festaIndexable, festaText } from '../lib/festas-data';
+import { festaCardPath } from '../lib/og-cards';
+import { withBase } from '../i18n/routes';
+import { loadSite } from '../lib/site-data';
+import { pageNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
+
+interface Props {
+  lang: Lang;
+  festa: FestaData;
+}
+
+const { lang, festa } = Astro.props;
+const text = festaText(festa, lang)!;
+const site = await loadSite();
+const bySlug = new Map(site.events.map((e) => [e.id, e]));
+const href = festaPath(lang, festa.slug);
+const indexable = festaIndexable(festa);
+const built = builtFesta();
+// Without JavaScript the line stands when the build is outside the window.
+const offBuilt = !(indexable && built?.id === festa.id);
+const og = festaCardPath(festa.id);
+// Structured data (an indexable page only; BaseLayout leaves it out under noindex).
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(href), name: text.name, description: text.lead });
+const host = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+---
+<BaseLayout
+  lang={lang}
+  pageKey={undefined}
+  title={text.name}
+  description={text.lead}
+  alternates={{ pt: href, en: href, ru: href }}
+  hreflang={false}
+  activeLangs={[lang]}
+  noindex={!indexable}
+  schema={schema}
+  preview={{ description: text.lead, imageUrl: og ? withBase(og) : undefined, imageSize: og ? { width: 1200, height: 630, type: 'image/png' } : undefined, imageAlt: text.art_title }}
+>
+  <article class="festa-page">
+    <div class="festa-page__top">
+      <header>
+        <!-- In the window the date; outside it the line "this holiday is celebrated on ..." in the same place and style (the head script decides). -->
+        <p class:list={['festa-page__date', { 'is-off-built': offBuilt }]} data-festa-on={festa.id}>{text.date}</p>
+        <p class="festa-page__date" data-festa-off={festa.id} data-festa-built={offBuilt ? '' : undefined}>{text.off_window}</p>
+        <h1>{text.name}</h1>
+        <p class="festa-page__lead">{text.lead}</p>
+      </header>
+      {
+        festa.art && (
+          <div class="festa-page__art">
+            <FestaArt art={festa.art} title={text.art_title} id={`festa-art-${festa.id}`} />
+          </div>
+        )
+      }
+    </div>
+    <section aria-labelledby="festa-history">
+      <h2 id="festa-history">{t(lang, 'festa.history')}</h2>
+      <article class="festa-card">
+        <p class="festa-card__kicker">{text.card.kicker}</p>
+        <h3 class="festa-card__title">{text.card.title}</h3>
+        <p class="festa-card__hook">{text.card.hook}</p>
+        <p>{text.card.text}</p>
+        <p class="festa-card__bridge">{text.card.bridge}</p>
+        <p class="festa-card__sources">
+          {t(lang, 'ui.sources')}:{' '}
+          {text.card.sources.map((url, i) => (
+            <>
+              {i > 0 && ', '}
+              <a href={url} rel="noopener">{host(url)}</a>
+            </>
+          ))}
+        </p>
+      </article>
+    </section>
+    <section aria-labelledby="festa-traditions">
+      <h2 id="festa-traditions">{t(lang, 'festa.traditions')}</h2>
+      <ul class="festa-trad">
+        {
+          text.traditions.map((item) => {
+            const story = item.link ? bySlug.get(item.link.story) : undefined;
+            return (
+              <li>
+                <strong>{item.title}</strong> {item.text}
+                {item.link && story && (
+                  <>
+                    {' '}
+                    <a href={storyPath(lang, story.slug[lang])}>{item.link.label}</a>
+                  </>
+                )}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+  </article>
+</BaseLayout>

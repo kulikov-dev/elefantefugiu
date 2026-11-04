@@ -1,0 +1,13 @@
+---
+// /{lang}/festa/{slug}/: the page of a holiday, for the holidays that have a text in the language (src/data/festas.yaml). Only Russian for now.
+import FestaView from '../../../views/FestaView.astro';
+import { LANGS } from '../../../i18n/routes';
+import { FESTAS, festaText } from '../../../lib/festas-data';
+
+export const getStaticPaths = () =>
+  LANGS.flatMap((lang) => FESTAS.filter((festa) => festaText(festa, lang)).map((festa) => ({ params: { lang, slug: festa.slug }, props: { festa } })));
+
+const { lang } = Astro.params;
+const { festa } = Astro.props;
+---
+<FestaView lang={lang as (typeof LANGS)[number]} festa={festa} />

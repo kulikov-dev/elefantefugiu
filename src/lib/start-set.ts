@@ -26,6 +26,8 @@ export interface Pin {
   /** The small line above the card. */
   label: Say;
   target: PinTarget;
+  /** The id of a story that this pin stands for (a holiday of that story): while the pin shows, the anniversary of that story and the rotation leave the story out. */
+  covers?: string;
 }
 
 /** What the function needs to know about a story. Only the stories the family mode shows are passed. */
@@ -137,16 +139,21 @@ export function activePins(pins: readonly Pin[], today: string, stories: readonl
     if (!had || better(pin, had)) best.set(key, pin);
   }
   const sorted = [...best.values()].sort((a, b) => kindRank(b.kind) - kindRank(a.kind) || b.priority - a.priority || (a.id < b.id ? -1 : 1));
+  // A holiday that stands for a story takes the card of its anniversary: two cards about one thing are not shown.
+  const covered = coveredStories(sorted);
   // One anniversary at most: the second pin is left for a holiday.
   let anniversaries = 0;
-  return sorted.filter((pin) => pin.kind !== 'anniversary' || ++anniversaries === 1);
+  return sorted.filter((pin) => (pin.kind !== 'anniversary' || !(pin.target.type === 'story' && covered.has(pin.target.id))) && (pin.kind !== 'anniversary' || ++anniversaries === 1));
 }
+
+/** The stories that the holiday pins of the list stand for. */
+const coveredStories = (pins: readonly Pin[]): Set<string> => new Set(pins.flatMap((pin) => (pin.kind === 'holiday' && pin.covers ? [pin.covers] : [])));
 
 /** The cards of the showcase, in order: the pins first, then the rotation. Fewer than `count` only when the pool is too small. */
 export function startSet({ today, stories, read, pins, count = START_COUNT }: StartInput): StartCardRef[] {
   const chosen = activePins(pins, today, stories).slice(0, Math.min(MAX_PINS, count - 1));
   const cards: StartCardRef[] = chosen.map((pin) => ({ source: 'pin', target: pin.target, kind: pin.kind, label: pin.label }));
-  const pinned = new Set(chosen.flatMap((pin) => (pin.target.type === 'story' ? [pin.target.id] : [])));
+  const pinned = new Set([...chosen.flatMap((pin) => (pin.target.type === 'story' ? [pin.target.id] : [])), ...coveredStories(chosen)]);
   for (const story of rotation(stories, periodOf(today), read, count - cards.length, pinned)) cards.push({ source: 'rotation', target: { type: 'story', id: story.id } });
   return cards;
 }

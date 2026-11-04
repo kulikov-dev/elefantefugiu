@@ -68,3 +68,11 @@ export function threadHref(lang: Lang, slug: string): string {
 export function altPaths(make: (lang: Lang) => string): Record<Lang, string> {
   return Object.fromEntries(LANGS.map((lang) => [lang, make(lang)])) as Record<Lang, string>;
 }
+
+/** Address segment of the page of a holiday: /ru/festa/{slug}/ (docs/spec.md "Праздники"). */
+export const FESTA_SEGMENT = 'festa';
+
+/** Base-aware URL of the page of a holiday; `slug` is the slug in src/data/festas.yaml. */
+export function festaPath(lang: Lang, slug: string): string {
+  return withBase(`${lang}/${FESTA_SEGMENT}/${slug}/`);
+}

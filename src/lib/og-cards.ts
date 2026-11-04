@@ -27,3 +27,14 @@ export function cardPath(key: string, lang: Lang, cwd = process.cwd()): string |
 export const storyCardPath = (id: string, lang: Lang): string | undefined => cardPath(id, lang);
 export const epochCardPath = (id: string, lang: Lang): string | undefined => cardPath(`epoch:${id}`, lang);
 export const homeCardPath = (lang: Lang): string | undefined => cardPath('home', lang);
+
+/** The preview picture of a holiday (scripts/make-festa-og.mjs: 1200x630 PNG, the drawing on the paper of the light theme), a path inside public/; undefined when there is none. */
+export function festaCardPath(id: string, cwd = process.cwd()): string | undefined {
+  try {
+    const manifest = JSON.parse(readFileSync(join(cwd, '.og-cache/festas.json'), 'utf8')) as Record<string, string>;
+    const rel = manifest[id];
+    return rel && existsSync(join(cwd, 'public', rel)) ? rel : undefined;
+  } catch {
+    return undefined;
+  }
+}

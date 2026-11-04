@@ -1,0 +1,149 @@
+import { runInNewContext } from 'node:vm';
+import { describe, expect, it } from 'vitest';
+import { addDays, easterSunday, festaDay, festaDays, festaNow, festaRules, isInWindow, windowOf, type FestaRef } from '../../src/lib/festas';
+import { headScript } from '../../src/lib/head-script';
+import { lisbonToday } from '../../src/lib/publication.mjs';
+
+// Made-up holidays: the input is part of the test, not the content of the site.
+const fixed = (id: string, day: string, enabled = true): FestaRef => ({ id, enabled, date: { fixed: day } });
+const dec1 = fixed('dec1', '12-01');
+
+describe('Easter and Carnival', () => {
+  it('counts Easter by the Gregorian rule', () => {
+    expect(easterSunday(2026)).toBe('2026-04-05');
+    expect(easterSunday(2027)).toBe('2027-03-28');
+    expect(easterSunday(2028)).toBe('2028-04-16');
+  });
+
+  it('puts Carnival 47 days before Easter', () => {
+    expect(festaDay({ easter: -47 }, 2027)).toBe('2027-02-09');
+    expect(festaDay({ easter: 0 }, 2026)).toBe('2026-04-05');
+  });
+
+  it('puts a fixed day in the year asked for', () => {
+    expect(festaDay({ fixed: '12-01' }, 2031)).toBe('2031-12-01');
+  });
+});
+
+describe('the window', () => {
+  it('opens 3 days before the holiday and closes at the end of its day', () => {
+    expect(windowOf('2026-12-01')).toEqual({ from: '2026-11-28', to: '2026-12-01' });
+    expect(isInWindow(dec1, '2026-11-27')).toBe(false);
+    expect(isInWindow(dec1, '2026-11-28')).toBe(true);
+    expect(isInWindow(dec1, '2026-12-01')).toBe(true);
+    expect(isInWindow(dec1, '2026-12-02')).toBe(false);
+  });
+
+  it('keeps the boundaries by the clock in Lisbon (23:59 and 00:00)', () => {
+    // Winter in Lisbon is UTC+0.
+    expect(lisbonToday(new Date('2026-11-27T23:59:00Z'))).toBe('2026-11-27');
+    expect(lisbonToday(new Date('2026-11-28T00:00:00Z'))).toBe('2026-11-28');
+    expect(lisbonToday(new Date('2026-12-01T23:59:00Z'))).toBe('2026-12-01');
+    expect(lisbonToday(new Date('2026-12-02T00:00:00Z'))).toBe('2026-12-02');
+    const on = (iso: string) => festaNow([dec1], lisbonToday(new Date(iso)))?.inWindow;
+    expect(on('2026-11-27T23:59:00Z')).toBe(false);
+    expect(on('2026-11-28T00:00:00Z')).toBe(true);
+    expect(on('2026-12-01T23:59:00Z')).toBe(true);
+    expect(on('2026-12-02T00:00:00Z')).toBe(false);
+  });
+
+  it('is by Lisbon time in summer too (UTC+1: midnight in Lisbon is 23:00 UTC the day before)', () => {
+    expect(lisbonToday(new Date('2026-06-09T22:59:00Z'))).toBe('2026-06-09');
+    expect(lisbonToday(new Date('2026-06-09T23:00:00Z'))).toBe('2026-06-10');
+  });
+
+  it('crosses the New Year', () => {
+    const jan1 = fixed('jan1', '01-01');
+    expect(festaNow([jan1], '2026-12-29')).toMatchObject({ id: 'jan1', day: '2027-01-01', inWindow: true });
+    expect(festaNow([jan1], '2026-12-28')?.inWindow).toBe(false);
+  });
+});
+
+describe('which holiday is on', () => {
+  it('gives the next holiday, outside the window, so the build has markup for it', () => {
+    expect(festaNow([dec1], '2026-11-04')).toEqual({ id: 'dec1', day: '2026-12-01', inWindow: false });
+    expect(festaNow([dec1], '2026-12-02')).toEqual({ id: 'dec1', day: '2027-12-01', inWindow: false });
+  });
+
+  it('prefers the holiday whose day is today, then the nearest', () => {
+    const list = [dec1, fixed('dec3', '12-03')];
+    expect(festaNow(list, '2026-11-29')?.id).toBe('dec1');
+    expect(festaNow(list, '2026-11-30')?.id).toBe('dec1');
+    expect(festaNow(list, '2026-12-01')?.id).toBe('dec1');
+    expect(festaNow(list, '2026-12-02')?.id).toBe('dec3');
+    expect(festaNow(list, '2026-12-03')?.id).toBe('dec3');
+    // Two holidays on one day: the id decides.
+    expect(festaNow([fixed('b', '12-01'), fixed('a', '12-01')], '2026-12-01')?.id).toBe('a');
+  });
+
+  it('skips a holiday that is not enabled', () => {
+    expect(festaNow([fixed('off', '12-01', false)], '2026-11-30')).toBeUndefined();
+    expect(festaNow([fixed('off', '12-01', false), fixed('on', '12-25')], '2026-11-30')).toEqual({ id: 'on', day: '2026-12-25', inWindow: false });
+  });
+
+  it('?festa=<id> turns a holiday on whatever the date and whether or not it is enabled', () => {
+    expect(festaNow([dec1], '2026-07-01', 'dec1')).toMatchObject({ id: 'dec1', inWindow: true });
+    expect(festaNow([fixed('off', '12-01', false)], '2026-07-01', 'off')).toMatchObject({ id: 'off', inWindow: true });
+    expect(festaNow([dec1], '2026-11-30', 'nothing')).toMatchObject({ id: 'dec1', inWindow: true });
+  });
+
+  it('gives nothing for a day that is not a day', () => {
+    expect(festaNow([dec1], 'tomorrow')).toBeUndefined();
+    expect(festaNow([dec1], '2026-13-45')).toBeUndefined();
+  });
+
+  it('follows Easter and Carnival', () => {
+    const list: FestaRef[] = [
+      { id: 'carnaval', enabled: true, date: { easter: -47 } },
+      { id: 'pascoa', enabled: true, date: { easter: 0 } },
+    ];
+    expect(festaNow(list, '2027-02-06')).toMatchObject({ id: 'carnaval', inWindow: true });
+    expect(festaNow(list, '2027-02-05')).toMatchObject({ id: 'carnaval', inWindow: false });
+    expect(festaNow(list, '2027-03-25')).toMatchObject({ id: 'pascoa', inWindow: true });
+  });
+});
+
+describe('the head script', () => {
+  const festas: FestaRef[] = [dec1, fixed('dec3', '12-03'), fixed('off', '12-02', false), { id: 'pascoa', enabled: true, date: { easter: 0 } }];
+  const known = festas.map((f) => f.id);
+  const run = (search: string) => {
+    const attrs: Record<string, string> = {};
+    runInNewContext(headScript([], undefined, { days: festaDays(festas, 2026), ids: known }), {
+      document: { documentElement: { setAttribute: (n: string, v: string) => void (attrs[n] = v) }, querySelectorAll: () => [] },
+      localStorage: { getItem: () => null },
+      location: { search },
+      URLSearchParams,
+      String,
+    });
+    return attrs['data-festa'];
+  };
+
+  it('agrees with festaNow on every day of two years', () => {
+    for (let day = '2026-01-01'; day < '2028-01-01'; day = addDays(day, 1)) {
+      const expected = festaNow(festas, day);
+      expect(run(`?hoje=${day}`), day).toBe(expected?.inWindow ? expected.id : undefined);
+    }
+  });
+
+  it('takes ?festa= of a holiday it knows, even a disabled one, and ignores an unknown one', () => {
+    expect(run('?hoje=2026-07-01&festa=dec1')).toBe('dec1');
+    expect(run('?hoje=2026-07-01&festa=off')).toBe('off');
+    expect(run('?hoje=2026-07-01&festa=nothing')).toBeUndefined();
+  });
+
+  it('ignores a ?hoje= that is not a day (and uses the day in Lisbon)', () => {
+    const now = festaNow(festas, lisbonToday());
+    expect(run('?hoje=2026-13-45')).toBe(now?.inWindow ? now.id : undefined);
+  });
+
+  it('lets ?festa= win over ?hoje=', () => {
+    expect(run('?hoje=2026-11-30&festa=dec3')).toBe('dec3');
+  });
+});
+
+describe('festaRules', () => {
+  it('writes a pair of rules for each id', () => {
+    expect(festaRules(['a'])).toBe('html[data-festa="a"] [data-festa-show="a"]{display:block}html[data-js]:not([data-festa="a"]) [data-festa-off="a"]{display:block}html[data-js]:not([data-festa="a"]) [data-festa-on="a"]{display:none}');
+    expect(festaRules([])).toBe('');
+  });
+});

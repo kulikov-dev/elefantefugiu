@@ -1,0 +1,23 @@
+---
+// The small crown by the logo on every page in the window of a holiday. Decorative (aria-hidden), takes no room: the logo does not move.
+// Only the holiday of the build has it; the head script turns it on (src/styles/festas.css).
+import { CROWN_MINI } from '../lib/festa-art.mjs';
+import { builtFesta, FESTAS, festaText } from '../lib/festas-data';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const built = builtFesta();
+const festa = built ? FESTAS.find((f) => f.id === built.id) : undefined;
+const show = festa?.art === 'crown' && festaText(festa, lang) !== undefined;
+---
+{
+  show && festa && (
+    <span class="festa-badge" aria-hidden="true" data-festa-show={festa.id} data-festa-built={built!.inWindow ? '' : undefined}>
+      <svg viewBox="0 0 26 22" focusable="false" set:html={CROWN_MINI} />
+    </span>
+  )
+}

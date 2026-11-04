@@ -1,0 +1,20 @@
+---
+// The drawing of a holiday: inline SVG, colours from the --festa-* tokens (light and dark theme), role="img" with a title. The markup is in
+// src/lib/festa-art.mjs (the approved draft); the animation and the phone rules are in src/styles/festas.css.
+import { ART } from '../lib/festa-art.mjs';
+
+interface Props {
+  art: keyof typeof ART;
+  /** The text for screen readers (the title of the drawing). */
+  title: string;
+  /** A unique id for the <title>. */
+  id: string;
+}
+
+const { art, title, id } = Astro.props;
+const drawing = ART[art];
+---
+<svg class="festa-art" viewBox={drawing.viewBox} role="img" aria-labelledby={id}>
+  <title id={id}>{title}</title>
+  <Fragment set:html={drawing.inner} />
+</svg>

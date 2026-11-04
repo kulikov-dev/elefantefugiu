@@ -322,3 +322,72 @@ export const threadSchema = z.strictObject({
 
 /** One showcase entry; `id` is the id of an event. Order in the file is the display order. */
 export const featuredSchema = z.strictObject({ id: z.string(), /** Position in featured.yaml; added by the loader (src/content.config.ts), not written in the file. */ position: z.number().int().optional() });
+
+// ---- Holidays (src/data/festas.yaml, docs/spec.md "Праздники") ----
+
+const festaCard = z.strictObject({
+  /** The line above the title: the epoch and the year. */
+  kicker: z.string(),
+  title: z.string(),
+  hook: z.string(),
+  text: z.string(),
+  /** The bridge to today as plain text (no point on the map): the place, then a note. */
+  bridge: z.string(),
+  sources: z.array(z.string().url()).min(1),
+});
+
+const festaTradition = z.strictObject({
+  title: z.string(),
+  text: z.string(),
+  /** A link to a story of the site (its id in `story`); the address is made per language. */
+  link: z.strictObject({ story: z.string(), label: z.string() }).optional(),
+});
+
+/** What a holiday says in one language. A language with no entry has no header, no badge and no page of the holiday. */
+export const festaTextSchema = z.strictObject({
+  /** "1 декабря": the date as people say it; the page shows it above the name. */
+  date: z.string(),
+  /** "День восстановления независимости". */
+  name: z.string(),
+  /** The line of the header of the home page: date and name. */
+  head_date: z.string(),
+  head_title: z.string(),
+  head_line: z.string(),
+  head_link: z.string(),
+  /** The title of the drawing (role="img"). */
+  art_title: z.string(),
+  /** The line under the name on the page of the holiday. */
+  lead: z.string(),
+  /** Above the name of the page outside the window. */
+  off_window: z.string(),
+  /** The small line above the card of the showcase. */
+  pin_label: z.string(),
+  card: festaCard,
+  traditions: z.array(festaTradition).min(1),
+});
+
+export const festaSchema = z.strictObject({
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+  /** The address part: /ru/festa/{slug}/ */
+  slug: z.string().regex(/^[a-z][a-z0-9-]*$/),
+  enabled: z.boolean(),
+  /** A fixed day `{ fixed: '12-01' }` or a shift from Easter `{ easter: -47 }`. */
+  date: z.union([z.strictObject({ fixed: z.string().regex(/^\d{2}-\d{2}$/) }), z.strictObject({ easter: z.number().int() })]),
+  art: z.enum(['crown', 'folar']).optional(),
+  /** The id of the story of the day; the showcase shows the holiday instead of the anniversary of that story. */
+  story: z.string().optional(),
+  text: z.strictObject({ pt: festaTextSchema.optional(), en: festaTextSchema.optional(), ru: festaTextSchema.optional() }),
+});
+
+export const festaListSchema = z.array(festaSchema).superRefine((list, ctx) => {
+  const seen = new Set<string>();
+  list.forEach((f, i) => {
+    for (const key of [`id:${f.id}`, `slug:${f.slug}`]) {
+      if (seen.has(key)) ctx.addIssue({ code: 'custom', path: [i], message: `${key} is used twice` });
+      seen.add(key);
+    }
+  });
+});
+
+export type FestaData = z.infer<typeof festaSchema>;
+export type FestaText = z.infer<typeof festaTextSchema>;

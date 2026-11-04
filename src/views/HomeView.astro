@@ -16,11 +16,13 @@ import { loadSite } from '../lib/site-data';
 import { cardPicture } from '../lib/pictures';
 import type { EventData } from '../lib/events';
 import { buildToday } from '../lib/publication.mjs';
-import { builtHolidays, startFile, startFileHref, toStart } from '../lib/start-data';
+import { startFile, startFileHref, toStart } from '../lib/start-data';
+import { builtFesta, builtHolidays, festaText, FESTAS } from '../lib/festas-data';
+import FestaHero from '../components/FestaHero.astro';
 import { pinsFor } from '../lib/start-pins';
 import { setKey, startSet, withFallback } from '../lib/start-set';
 import { HOME_PREVIEW } from '../lib/og';
-import { OG_CARD, homeCardPath } from '../lib/og-cards';
+import { OG_CARD, festaCardPath, homeCardPath } from '../lib/og-cards';
 
 interface Props {
   lang: Lang;
@@ -37,6 +39,10 @@ const soonCount = tiles.length - ready.length;
 const startStory = homeStartStory(site.events);
 // The card of the home page (scripts/make-og.mjs: the picture of the story the site begins with); without one the standing elephant.
 const homeCard = homeCardPath(lang);
+// In the window of a holiday (by the day of the build) the home page shares the picture of the holiday instead (scripts/make-festa-og.mjs).
+const builtDay = builtFesta();
+const festaNow = builtDay?.inWindow ? FESTAS.find((f) => f.id === builtDay.id && f.enabled) : undefined;
+const festaCard = festaNow && festaText(festaNow, lang) ? festaCardPath(festaNow.id) : undefined;
 const startHref = startStory ? storyPath(lang, startStory.slug[lang]) : firstEpoch ? epochHref(lang, firstEpoch.slug[lang]) : pagePath(lang, 'map');
 // Family mode: counters carry three numbers (off, all, 12) and a chip with a zero counter is hidden in that mode.
 const threadCounts = new Map(site.visibleThreads.map((th) => [th.id, countByMode(site.events.filter((e) => e.threads.includes(th.id)).map(ageInfoOf))]));
@@ -64,7 +70,7 @@ const today = buildToday();
 const startStories = site.events.map(toStart);
 const builtYear = Number(today.slice(0, 4));
 const fallbackIds = site.featured.map((e) => e.id);
-const startRefs = withFallback(startSet({ today, stories: startStories, read: new Set(), pins: pinsFor(startStories, builtYear, builtHolidays()) }), fallbackIds);
+const startRefs = withFallback(startSet({ today, stories: startStories, read: new Set(), pins: pinsFor(startStories, builtYear, builtHolidays(lang)) }), fallbackIds);
 const eventById = new Map(site.events.map((e) => [e.id, e]));
 const shown = startRefs.map((ref) => ({ ref, event: ref.target.type === 'story' ? eventById.get(ref.target.id) : undefined })).filter((x) => x.ref.target.type === 'page' || x.event);
 const hasCaption = shown.some((x) => x.ref.label);
@@ -84,7 +90,11 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 // only what the family mode shows.
 const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e.published, ...ageInfoOf(e) }));
 ---
-<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={{ image: HOME_PREVIEW, imageUrl: homeCard ? withBase(homeCard) : undefined, imageSize: homeCard ? OG_CARD : undefined, imageAlt: homeCard ? startStory?.image?.alt[lang] : undefined }}>
+<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={
+    festaCard
+      ? { image: HOME_PREVIEW, imageUrl: withBase(festaCard), imageSize: { width: 1200, height: 630, type: 'image/png' }, imageAlt: festaText(festaNow!, lang)!.art_title }
+      : { image: HOME_PREVIEW, imageUrl: homeCard ? withBase(homeCard) : undefined, imageSize: homeCard ? OG_CARD : undefined, imageAlt: homeCard ? startStory?.image?.alt[lang] : undefined }
+  }>
   <div class="home">
     <!-- A thin band above the first screen, only for a reader who has been in an epoch before (the script shows it). -->
     <a
@@ -109,6 +119,9 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
       hidden
     ></p>
     <script type="application/json" data-new-data set:html={JSON.stringify(newData)} />
+
+    <!-- The header of a holiday (the 3 days before it and its day): hidden until the head script turns it on, so the page does not shift. -->
+    <FestaHero lang={lang} />
 
     <section class="hero" aria-labelledby="home-title">
       <div class="hero__text">

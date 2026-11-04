@@ -8,9 +8,11 @@ interface Props {
   pageKey?: PageKey;
   /** Explicit path of the same page in each language (cards); wins over pageKey. */
   alternates?: Record<Lang, string>;
+  /** Only these languages are links; the others are shown dimmed and are not active (the page exists in one language only). */
+  activeLangs?: readonly Lang[];
 }
 
-const { lang, pageKey = 'home', alternates } = Astro.props;
+const { lang, pageKey = 'home', alternates, activeLangs } = Astro.props;
 ---
 <details class="lang-switch" data-lang-switch>
   <summary class="lang-switch__current" aria-label={`${lang.toUpperCase()}, ${t(lang, 'a11y.language')}: ${LANG_NAMES[lang]}`}>
@@ -23,6 +25,9 @@ const { lang, pageKey = 'home', alternates } = Astro.props;
     {
       LANGS.map((target) => (
         <li>
+          {activeLangs && !activeLangs.includes(target) ? (
+            <span class="lang-switch__off" lang={target} aria-disabled="true">{LANG_NAMES[target]}</span>
+          ) : (
           <a
             href={alternates ? alternates[target] : pagePath(target, pageKey)}
             lang={target}
@@ -32,6 +37,7 @@ const { lang, pageKey = 'home', alternates } = Astro.props;
           >
             {LANG_NAMES[target]}
           </a>
+          )}
         </li>
       ))
     }

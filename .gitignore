@@ -28,3 +28,6 @@ docs/language-review/inventory.tsv
 
 # a draft preview that is not part of the site
 docs/drafts/preview-1dec.html
+
+# preview pictures of the holidays (scripts/make-festa-og.mjs)
+public/og-festas/

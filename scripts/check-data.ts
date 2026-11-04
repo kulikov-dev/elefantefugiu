@@ -8,7 +8,8 @@ import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
 import { needsAttribution } from '../src/lib/pictures';
 import { firstSentence } from '../src/lib/events';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
-import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
+import { epochSchema, eventSchema, featuredSchema, festaListSchema, threadSchema } from '../src/data/schemas';
+import { isCalendarDay } from '../src/lib/start-pins';
 import { pending } from './lib/lang-review';
 import { isLive } from '../src/lib/publication.mjs';
 
@@ -467,6 +468,30 @@ for (const t of threads) {
   const n = cardCounts.get(t.item.id) ?? 0;
   if (n < MIN_CARDS_PER_THREAD) {
     report('warn', t.file, `thread "${t.item.id}" has ${n} cards, it is hidden from filters and menus (needs ${MIN_CARDS_PER_THREAD})`);
+  }
+}
+
+// ---------- holidays (src/data/festas.yaml) ----------
+// The schema stops the shape. Here: the story of a holiday and the stories its traditions link to exist, a fixed day is a day of the calendar, an
+// enabled holiday has a text somewhere, and a text needs a drawing for the header.
+{
+  const path = join(root, 'src/data/festas.yaml');
+  const file = rel(path);
+  const data = existsSync(path) ? readYaml(path) : undefined;
+  const parsed = data === undefined ? undefined : validate(festaListSchema, data, file);
+  const known = new Set(events.map((e) => e.item.id));
+  for (const festa of parsed ?? []) {
+    const at = `${file} (${festa.id})`;
+    if ('fixed' in festa.date && !isCalendarDay(2024, festa.date.fixed)) report('error', at, `${festa.date.fixed} is not a day of the calendar`, 'date');
+    if (festa.story && !known.has(festa.story)) report('error', at, `the story "${festa.story}" does not exist`, 'story');
+    const langs = Object.keys(festa.text);
+    if (festa.enabled && langs.length === 0) report('error', at, 'is enabled but has no text', 'text');
+    if (festa.enabled && langs.length > 0 && !festa.art) report('error', at, 'has a text but no drawing (art)', 'art');
+    for (const lang of langs) {
+      for (const [i, item] of (festa.text[lang as DataLang]?.traditions ?? []).entries()) {
+        if (item.link && !known.has(item.link.story)) report('error', at, `the story "${item.link.story}" does not exist`, `traditions[${i}].link`, lang);
+      }
+    }
   }
 }
 

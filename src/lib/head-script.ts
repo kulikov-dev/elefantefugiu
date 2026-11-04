@@ -4,15 +4,25 @@
 //   data-theme   the theme choice from localStorage: light, dark or system (the CSS reads it, see tokens.css)
 //   data-vista   "grelha" when the address has ?vista=grelha
 //   data-fio     a thread id from ?fio=, only when it is one of the known threads
+//   data-festa   the id of the holiday that is on now (the 3 days before it and its day, by the date in Lisbon; ?hoje=YYYY-MM-DD sets the date,
+//                ?festa=<id> turns a holiday on whatever the date); the same rule as festaNow() in festas.ts, which a test compares
 // With an explicit light or dark theme it also sets the browser UI colour (<meta name="theme-color">) to that theme.
 // CSS then shows the right state straight away; the page scripts take over later and keep these attributes in step.
 // One script, one storage reader, so family mode and theme do not duplicate each other. Written as one string so a unit test can run it.
 import { THEME_COLORS } from './theme';
 
-/** Same rules as normalizeFamilyMode in family.ts and normalizeTheme in theme.ts; tests compare them. */
-export function headScript(threadIds: readonly string[], colors: { light: string; dark: string } = THEME_COLORS): string {
+/** The days of the enabled holidays (festas.ts festaDays) and the ids that ?festa= may name. */
+export interface HeadFestas {
+  days: readonly (readonly [string, string])[];
+  ids: readonly string[];
+}
+
+/** Same rules as normalizeFamilyMode in family.ts, normalizeTheme in theme.ts and festaNow in festas.ts; tests compare them. */
+export function headScript(threadIds: readonly string[], colors: { light: string; dark: string } = THEME_COLORS, festas: HeadFestas = { days: [], ids: [] }): string {
   const ids = JSON.stringify([...threadIds]).replace(/</g, '\\u003c');
   const cols = JSON.stringify(colors);
+  const days = JSON.stringify(festas.days).replace(/</g, '\\u003c');
+  const known = JSON.stringify(festas.ids).replace(/</g, '\\u003c');
   return (
     "(function(){var d=document,e=d.documentElement,m='off',t='system',F=" +
     ids +
@@ -25,6 +35,14 @@ export function headScript(threadIds: readonly string[], colors: { light: string
     "v=g('theme');if(v==='light'||v==='dark')t=v;e.setAttribute('data-theme',t);" +
     "if(t!=='system'){var s=d.querySelectorAll('meta[name=theme-color]');for(var i=0;i<s.length;i++)s[i].setAttribute('content',C[t])}" +
     "try{var q=new URLSearchParams(location.search),f=q.get('fio');if(f&&F.indexOf(f)>-1)e.setAttribute('data-fio',f);" +
-    "if(q.get('vista')==='grelha')e.setAttribute('data-vista','grelha')}catch(x){}})();"
+    "if(q.get('vista')==='grelha')e.setAttribute('data-vista','grelha');" +
+    "var D=" +
+    days +
+    ",K=" +
+    known +
+    ",N=function(s){return Date.parse(s+'T00:00:00Z')/864e5},y=q.get('hoje')||'',b=null,o=q.get('festa');" +
+    "if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(y)||isNaN(N(y)))y=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Lisbon',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());" +
+    "for(var j=0;j<D.length;j++){var k=N(D[j][1])-N(y);if(k>=0&&k<=3&&(!b||k<b[0]))b=[k,D[j][0]]}" +
+    "if(o&&K.indexOf(o)>-1)e.setAttribute('data-festa',o);else if(b)e.setAttribute('data-festa',b[1])}catch(x){}})();"
   );
 }

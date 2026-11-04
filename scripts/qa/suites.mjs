@@ -37,5 +37,6 @@ export const SUITES = [
   { name: 'newmarks', script: 'newmarks.mjs', about: 'new since the last visit: first visit, return, read, same session, family mode, no JS, blocked storage, reset on the legal page' },
   { name: 'start', script: 'start.mjs', about: 'Where to start: the story of the day first with its line (?hoje=), a story read leaves the rotation but not the pins, the data file, no JS' },
   { name: 'likes', script: 'like.mjs', about: 'the button "I liked it": only with JS, in one line with Share down to 320 px, the link below does not move, one counter event per reader and story' },
+  { name: 'festas', script: 'festas.mjs', about: 'holidays: header and badge only in the window (?hoje=), ?festa=, no shift of the logo, the page of a holiday with its line outside the window, no hreflang, rays move / stand still / hidden on a phone, no JS' },
   { name: 'meanwhile', script: 'meanwhile.mjs', about: 'the block "Meanwhile" on a story: only where the data has lines, the language of the page first and then the world, the year before each line, none on a heavy story, after the text and before "More", no horizontal scroll at 360 px, in every family mode, no JS needed' },
 ];

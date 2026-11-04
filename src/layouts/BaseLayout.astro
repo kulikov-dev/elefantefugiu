@@ -7,6 +7,8 @@ import SiteFooter from '../components/SiteFooter.astro';
 import { LANGS, LOCALES, altPaths, pagePath, withBase, type Lang, type PageKey } from '../i18n/routes';
 import { t } from '../i18n';
 import { headScript } from '../lib/head-script';
+import { festaRules } from '../lib/festas';
+import { headFestas } from '../lib/festas-data';
 import { azulejoRule } from '../lib/azulejo';
 import { DEFAULT_PREVIEW, HOME_PREVIEW, ogImagePath } from '../lib/og';
 import { ANALYTICS_CONFIG_SCRIPT, GOATCOUNTER_ENDPOINT, GOATCOUNTER_SCRIPT, analyticsEnabled } from '../lib/analytics';
@@ -67,6 +69,10 @@ interface Props {
     imageSize?: { width: number; height: number; type: string };
   };
   noindex?: boolean;
+  /** hreflang links to the other languages. Off for a page that exists in one language only (the page of a holiday). */
+  hreflang?: boolean;
+  /** The languages the language switch leads to; the others are shown but not active (the page of a holiday exists in one language). */
+  activeLangs?: readonly Lang[];
   /** The schema.org nodes of the page itself (src/lib/schema.ts); WebSite and Organization are added here. Pages with noindex get no markup. */
   schema?: Node[];
   /** Page visits are counted (GoatCounter, src/lib/analytics.ts). Off for the 404 page: it is not a page of the site. */
@@ -77,7 +83,7 @@ interface Props {
   epoch?: string;
 }
 
-const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, schema, epoch, count = true, allLangs = false } = Astro.props;
+const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, hreflang = true, activeLangs, schema, epoch, count = true, allLangs = false } = Astro.props;
 const chrome = allLangs ? LANGS : [lang];
 // Fonts of the first screen are fetched together with the stylesheet, not after it (a browser finds a font only when the CSS is parsed and the
 // text that uses it is laid out: 250-300 ms later on a phone). The Russian pages: their Cyrillic faces arrive late and the tags and the hook
@@ -96,7 +102,7 @@ const description = descriptionProp ?? pageDescription ?? t(lang, 'site.descript
 const paths: Record<Lang, string> | undefined =
   alternatesProp ?? (pageKey ? altPaths((l) => pagePath(l, pageKey)) : undefined);
 // hreflang: the ready languages, and only when the page itself is written in its language.
-const hreflangs = stand_in ? [] : LANGS.filter((l) => readyLangs.includes(l));
+const hreflangs = stand_in || !hreflang ? [] : LANGS.filter((l) => readyLangs.includes(l));
 const absolute = (path: string) => new URL(path, Astro.site).href;
 const canonical = paths ? absolute(paths[lang]) : undefined;
 // A page without a picture of its own (About, Method, Legal, Map, ...) gets the plain site picture; cards, epochs, threads and the home page pass theirs.
@@ -132,6 +138,7 @@ const azulejoCss = azulejoRule({ bussola, canto, estrela, no, 'no-v': noV, onda,
 const jsonLd = noindex || allLangs ? undefined : graph(schemaContext(lang, Astro.site), schema ?? []);
 // Prefetch (never prerender) of the internal pages a reader points at or touches; see src/lib/transitions.ts. The base path is the one of the site.
 const speculation = JSON.stringify(speculationRules(withBase().slice(0, -1)));
+const festas = headFestas();
 const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
 ---
 <!doctype html>
@@ -144,7 +151,8 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta name="theme-color" content={THEME_COLORS.dark} media="(prefers-color-scheme: dark)" />
     <!-- Before the first paint: data-js, data-family, data-theme, data-vista, data-fio on <html> (no flash of the wrong state).
          After the theme-color tags: with an explicit theme it sets them. -->
-    <script is:inline set:html={headScript(allThreads.map((th) => th.id))} />
+    <script is:inline set:html={headScript(allThreads.map((th) => th.id), undefined, festas)} />
+    <style set:html={festaRules(festas.ids)} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
@@ -187,7 +195,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
       chrome.map((l) => (
         <div class="lang-block" data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
           <a class="skip-link" href="#main">{t(l, 'a11y.skip_to_content')}</a>
-          <SiteHeader lang={l} pageKey={pageKey} alternates={alternatesProp} />
+          <SiteHeader lang={l} pageKey={pageKey} alternates={alternatesProp} activeLangs={activeLangs} />
         </div>
       ))
     }

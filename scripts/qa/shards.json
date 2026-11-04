@@ -37,7 +37,8 @@
   "newmarks": 150,
   "likes": 30,
   "start": 20,
-  "meanwhile": 40
+  "meanwhile": 40,
+  "festas": 15
  },
  "shards": [
   [
@@ -83,7 +84,8 @@
    "ru-variant",
    "likes",
    "start",
-   "meanwhile"
+   "meanwhile",
+   "festas"
   ]
  ]
 }

@@ -1,0 +1,36 @@
+---
+// The header of the home page in the window of a holiday: the drawing, the date line, the title, one line and the link to the page of the holiday.
+// The markup of every holiday that has a text in this language is in the page, hidden; the head script turns one on (see src/styles/festas.css).
+// The home page below stays as it was.
+import FestaArt from './FestaArt.astro';
+import { festaPath, type Lang } from '../i18n/routes';
+import { builtFesta, festaText, festasIn } from '../lib/festas-data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const built = builtFesta();
+const festas = festasIn(lang).filter((f) => f.art);
+---
+{
+  festas.map((festa) => {
+    const text = festaText(festa, lang)!;
+    return (
+      <div data-festa-show={festa.id} data-festa-built={built?.id === festa.id && built.inWindow && festa.enabled ? '' : undefined}>
+        <section class="festa-head" aria-labelledby={`festa-head-${festa.id}`}>
+          <div>
+            <p class="festa-head__date">{text.head_date}</p>
+            <h2 class="festa-head__title" id={`festa-head-${festa.id}`}>{text.head_title}</h2>
+            <p class="festa-head__line">{text.head_line}</p>
+            <a class="festa-head__link" href={festaPath(lang, festa.slug)}>{text.head_link}</a>
+          </div>
+          <div class="festa-head__art">
+            <FestaArt art={festa.art!} title={text.art_title} id={`festa-head-art-${festa.id}`} />
+          </div>
+        </section>
+      </div>
+    );
+  })
+}

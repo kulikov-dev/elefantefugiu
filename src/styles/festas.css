@@ -1,0 +1,242 @@
+/* The holidays (src/data/festas.yaml): the header of the home page, the badge by the logo, the page of a holiday, and the drawings.
+   What shows: the head script puts <html data-festa="<id>"> in the window of a holiday; the build adds one rule per holiday (festaRules in
+   src/lib/festas.ts, in BaseLayout) that shows the markup of that holiday. Without JavaScript the markup of the holiday of the build stands
+   (data-festa-built). */
+[data-festa-show],
+[data-festa-off] {
+  display: none;
+}
+
+html:not([data-js]) [data-festa-on].is-off-built {
+  display: none;
+}
+
+html:not([data-js]) [data-festa-show][data-festa-built],
+html:not([data-js]) [data-festa-off][data-festa-built] {
+  display: block;
+}
+
+/* The drawing. The rays are the only thing that moves: they grow lighter and fade; still with "reduce motion". */
+.festa-art {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.festa-rays {
+  animation: festa-glow var(--festa-glow-time) ease-in-out infinite;
+}
+
+@keyframes festa-glow {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .festa-rays {
+    animation: none;
+    opacity: 0.45;
+  }
+}
+
+/* A phone: the rays go, the crown, the cushion and the sceptre stay. */
+@media (max-width: 29.99rem) {
+  .festa-rays {
+    display: none;
+  }
+}
+
+/* The header of the home page. */
+.festa-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  align-items: center;
+  margin-block: var(--space-5);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.festa-head__date {
+  margin: 0;
+  color: var(--festa-ink);
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
+.festa-head__title {
+  margin: var(--space-1) 0 var(--space-2);
+  font-size: var(--text-xl);
+  line-height: var(--leading-heading);
+}
+
+.festa-head__line {
+  margin: 0;
+}
+
+.festa-head__link {
+  display: inline-block;
+  margin-top: var(--space-3);
+  font-weight: var(--weight-strong);
+}
+
+.festa-head__art {
+  max-width: var(--festa-head-art-max);
+  width: 100%;
+  justify-self: center;
+}
+
+@media (min-width: 48rem) {
+  .festa-head {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    padding: var(--space-5) var(--space-6);
+  }
+
+  .festa-head__title {
+    font-size: var(--text-2xl);
+  }
+}
+
+/* The badge by the logo: it sits on the top corner of the elephant's head and takes no room, so the logo stays where it is. */
+.brand {
+  position: relative;
+}
+
+.festa-badge {
+  position: absolute;
+  inset-block-start: calc(50% - var(--size-logo) / 2 - var(--size-festa-badge) / 3);
+  inset-inline-start: calc(var(--size-festa-badge) / -4);
+  width: var(--size-festa-badge);
+  pointer-events: none;
+}
+
+.festa-badge svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The page of a holiday. */
+.festa-page {
+  display: grid;
+  gap: var(--space-6);
+  margin-block: var(--space-6);
+}
+
+.festa-page header {
+  display: grid;
+  gap: var(--space-2);
+  max-width: var(--measure);
+}
+
+.festa-page__top {
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* From 900 px: the text on the left, the drawing (380 px at most) on the right. */
+@media (min-width: 56.25rem) {
+  .festa-page__top {
+    grid-template-columns: minmax(0, 1fr) var(--festa-art-max);
+    align-items: center;
+  }
+}
+
+.festa-page__date {
+  margin: 0;
+  color: var(--festa-ink);
+  font-family: var(--font-label);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
+.festa-page h1,
+.festa-page header p {
+  margin: 0;
+}
+
+.festa-page__lead {
+  color: var(--color-muted);
+}
+
+.festa-page__art {
+  max-width: var(--festa-art-max);
+}
+
+.festa-page h2 {
+  margin-block-end: var(--space-3);
+}
+
+.festa-card {
+  display: grid;
+  gap: var(--space-3);
+  max-width: var(--measure);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.festa-card > * {
+  margin: 0;
+}
+
+.festa-card__kicker {
+  color: var(--color-muted);
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
+.festa-card__title {
+  font-size: var(--text-xl);
+}
+
+.festa-card__hook {
+  color: var(--festa-ink);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-style: italic;
+}
+
+.festa-card__bridge,
+.festa-card__sources {
+  padding-top: var(--space-3);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--color-border);
+}
+
+.festa-card__sources a {
+  overflow-wrap: anywhere;
+}
+
+.festa-trad {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--measure);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.festa-trad strong {
+  color: var(--festa-ink);
+  font-family: var(--font-heading);
+}
+
+.festa-trad a {
+  display: inline-block;
+  font-weight: var(--weight-strong);
+}

@@ -84,6 +84,6 @@ describe('head script', () => {
     expect(run({ storageThrows: true, theme: 'dark' })['data-theme']).toBe('system');
   });
   it('is short', () => {
-    expect(headScript(['a', 'b', 'c', 'd', 'e']).length).toBeLessThan(1100);
+    expect(headScript(['a', 'b', 'c', 'd', 'e']).length).toBeLessThan(1400);
   });
 });
