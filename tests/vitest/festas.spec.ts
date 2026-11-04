@@ -141,6 +141,62 @@ describe('the head script', () => {
   });
 });
 
+describe('the tab icon', () => {
+  const icons = { dec1: { svg: '/f/a.svg', png: '/f/a-32.png', apple: '/f/a-180.png' } };
+  const festas: FestaRef[] = [dec1];
+  type Link = { fi: string; fn: string; href: string; sizes?: string; removed?: boolean };
+  const links = (): Link[] => [
+    { fi: 'png', fn: '/n.png', href: '/n.png', sizes: '96x96' },
+    { fi: 'svg', fn: '/n.svg', href: '/n.svg' },
+    { fi: 'ico', fn: '/n.ico', href: '/n.ico' },
+    { fi: 'apple', fn: '/n.apple', href: '/n.apple' },
+  ];
+  const run = (search: string, list: Link[], built = false) => {
+    const nodes = list.map((l) => ({
+      getAttribute: (n: string) => (n === 'data-fi' ? l.fi : n === 'data-fn' ? l.fn : null),
+      setAttribute: (n: string, v: string) => void (n === 'href' ? (l.href = v) : n === 'sizes' ? (l.sizes = v) : undefined),
+      remove: () => void (l.removed = true),
+    }));
+    runInNewContext(headScript([], undefined, { days: festaDays(festas, 2026), ids: ['dec1'], icons, built }), {
+      document: { documentElement: { setAttribute: () => undefined }, querySelectorAll: (q: string) => (q === 'link[data-fi]' ? nodes : []) },
+      localStorage: { getItem: () => null },
+      location: { search },
+      URLSearchParams,
+      String,
+    });
+    return list;
+  };
+
+  it('swaps the icons in the window and drops the ICO', () => {
+    const [png, svg, ico, apple] = run('?hoje=2026-11-30', links());
+    expect(png).toMatchObject({ href: '/f/a-32.png', sizes: '32x32' });
+    expect(svg!.href).toBe('/f/a.svg');
+    expect(apple!.href).toBe('/f/a-180.png');
+    expect(ico!.removed).toBe(true);
+  });
+
+  it('leaves the usual icons alone outside the window', () => {
+    const [png, svg, ico, apple] = run('?hoje=2026-12-05', links());
+    expect([png!.href, svg!.href, ico!.href, apple!.href]).toEqual(['/n.png', '/n.svg', '/n.ico', '/n.apple']);
+    expect(ico!.removed).toBeUndefined();
+  });
+
+  it('puts the usual icons back when the page was built in the window and the reader is outside it', () => {
+    const built = [
+      { fi: 'png', fn: '/n.png', href: '/f/a-32.png', sizes: '32x32' },
+      { fi: 'svg', fn: '/n.svg', href: '/f/a.svg' },
+      { fi: 'apple', fn: '/n.apple', href: '/f/a-180.png' },
+    ];
+    const [png, svg, apple] = run('?hoje=2026-12-05', built, true);
+    expect(png).toMatchObject({ href: '/n.png', sizes: '96x96' });
+    expect([svg!.href, apple!.href]).toEqual(['/n.svg', '/n.apple']);
+  });
+
+  it('takes ?festa= for the icon too', () => {
+    expect(run('?hoje=2026-07-01&festa=dec1', links())[1]!.href).toBe('/f/a.svg');
+  });
+});
+
 describe('festaRules', () => {
   it('writes a pair of rules for each id', () => {
     expect(festaRules(['a'])).toBe('html[data-festa="a"] [data-festa-show="a"]{display:block}html[data-js]:not([data-festa="a"]) [data-festa-off="a"]{display:block}html[data-js]:not([data-festa="a"]) [data-festa-on="a"]{display:none}');

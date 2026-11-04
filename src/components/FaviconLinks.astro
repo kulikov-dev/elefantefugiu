@@ -1,10 +1,19 @@
 ---
 // Icons of the site (made with realfavicongenerator.net, files in public/): PNG and ICO for the tab, SVG for browsers that take it,
 // the touch icon for iOS and the web manifest. Every address goes through withBase, so a base path (GitHub Pages) works.
+// In the window of a holiday (the day of the build) the tab shows the holiday's icon instead (`festa`: addresses made by scripts/make-festa-og.mjs); the head script
+// does the same by the day of the reader and puts the usual icon back out of the window. data-fi names a link for it, data-fn is its usual address.
 import { withBase } from '../i18n/routes';
+
+interface Props {
+  festa?: { svg: string; png: string; apple: string } | undefined;
+}
+
+const { festa } = Astro.props;
+const normal = { svg: withBase('favicon.svg'), png: withBase('favicon-96x96.png'), ico: withBase('favicon.ico'), apple: withBase('apple-touch-icon.png') };
 ---
-<link rel="icon" type="image/png" href={withBase('favicon-96x96.png')} sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
-<link rel="shortcut icon" href={withBase('favicon.ico')} />
-<link rel="apple-touch-icon" sizes="180x180" href={withBase('apple-touch-icon.png')} />
+<link rel="icon" type="image/png" href={festa ? festa.png : normal.png} sizes={festa ? '32x32' : '96x96'} data-fi="png" data-fn={normal.png} />
+<link rel="icon" type="image/svg+xml" href={festa ? festa.svg : normal.svg} data-fi="svg" data-fn={normal.svg} />
+{!festa && <link rel="shortcut icon" href={normal.ico} data-fi="ico" data-fn={normal.ico} />}
+<link rel="apple-touch-icon" sizes="180x180" href={festa ? festa.apple : normal.apple} data-fi="apple" data-fn={normal.apple} />
 <link rel="manifest" href={withBase('site.webmanifest')} />

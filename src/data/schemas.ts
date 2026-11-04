@@ -374,6 +374,8 @@ export const festaSchema = z.strictObject({
   /** A fixed day `{ fixed: '12-01' }` or a shift from Easter `{ easter: -47 }`. */
   date: z.union([z.strictObject({ fixed: z.string().regex(/^\d{2}-\d{2}$/) }), z.strictObject({ easter: z.number().int() })]),
   art: z.enum(['crown', 'folar']).optional(),
+  /** The icon of the tab in the window of the holiday (src/lib/festa-art.mjs ICONS); null: the holiday has none and the usual icon stays. */
+  favicon: z.enum(['crown']).nullable(),
   /** The id of the story of the day; the showcase shows the holiday instead of the anniversary of that story. */
   story: z.string().optional(),
   text: z.strictObject({ pt: festaTextSchema.optional(), en: festaTextSchema.optional(), ru: festaTextSchema.optional() }),

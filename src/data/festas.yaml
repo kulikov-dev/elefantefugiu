@@ -1,12 +1,13 @@
 # The holidays of the site: one place for all of them (src/data/schemas.ts festaSchema, src/lib/festas.ts, docs/spec.md "Праздники").
 # Window: from 00:00 three days before the holiday to the end of its day, by Lisbon time. `enabled: false` keeps a holiday out of the calendar
 # (it still can be looked at with ?festa=<id>). A language with no text under `text` has no header, badge or page of the holiday.
-# date: { fixed: 'MM-DD' } or { easter: <days from Easter Sunday> }.
+# date: { fixed: 'MM-DD' } or { easter: <days from Easter Sunday> }. favicon: the icon of the tab in the window (crown) or null.
 # The texts and drawings are approved by the owner (docs/drafts/preview-1dec.html); the other holidays get theirs when they are switched on.
 - id: sao-martinho
   slug: sao-martinho
   enabled: false
   date: { fixed: '11-11' }
+  favicon: null
   text: {}
 
 - id: restauracao
@@ -14,6 +15,8 @@
   enabled: true
   date: { fixed: '12-01' }
   art: crown
+  # The icon of the tab in the window (a plain crown, src/lib/festa-art.mjs).
+  favicon: crown
   # The story of the day: in the window its anniversary does not get a card of its own on the showcase.
   story: restauracao-1640
   text:
@@ -53,6 +56,7 @@
   slug: natal
   enabled: false
   date: { fixed: '12-25' }
+  favicon: null
   text: {}
 
 # Carnival: 47 days before Easter.
@@ -60,6 +64,7 @@
   slug: carnaval
   enabled: false
   date: { easter: -47 }
+  favicon: null
   text: {}
 
 # The drawing of the folar is ready (src/lib/festa-art.mjs, "Фолар на тарелке: круглый сдобный хлеб с тремя яйцами в скорлупе, каждое держит крест из теста");
@@ -69,28 +74,33 @@
   enabled: false
   date: { easter: 0 }
   art: folar
+  favicon: null
   text: {}
 
 - id: dia-de-portugal
   slug: dia-de-portugal
   enabled: false
   date: { fixed: '06-10' }
+  favicon: null
   text: {}
 
 - id: santos-populares
   slug: santos-populares
   enabled: false
   date: { fixed: '06-13' }
+  favicon: null
   text: {}
 
 - id: sao-joao
   slug: sao-joao
   enabled: false
   date: { fixed: '06-24' }
+  favicon: null
   text: {}
 
 - id: republica
   slug: republica
   enabled: false
   date: { fixed: '10-05' }
+  favicon: null
   text: {}

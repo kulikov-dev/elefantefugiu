@@ -237,7 +237,6 @@
   --festa-shell: light-dark(#fffdf7, #efe8d8);
   --festa-art-max: 23.75rem; /* the drawing on the page of a holiday (380 px) */
   --festa-head-art-max: 26rem; /* and in the header of the home page */
-  --size-festa-badge: calc(var(--size-logo) * 0.62); /* the small crown by the logo */
   --festa-glow-time: 4s;
 
   /* Azulejo patterns (docs/visual-direction.md section 4): tile size, and the opacity of the pattern layer only

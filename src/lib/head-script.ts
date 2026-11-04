@@ -15,6 +15,10 @@ import { THEME_COLORS } from './theme';
 export interface HeadFestas {
   days: readonly (readonly [string, string])[];
   ids: readonly string[];
+  /** The icon of the tab (addresses of the SVG, the PNG 32 and the touch icon 180) of each holiday that has one. */
+  icons?: Record<string, { svg: string; png: string; apple: string }>;
+  /** The page was built in the window of a holiday, so its icon links are the holiday's; out of the window the script puts the usual ones back (data-fn). */
+  built?: boolean;
 }
 
 /** Same rules as normalizeFamilyMode in family.ts, normalizeTheme in theme.ts and festaNow in festas.ts; tests compare them. */
@@ -23,6 +27,7 @@ export function headScript(threadIds: readonly string[], colors: { light: string
   const cols = JSON.stringify(colors);
   const days = JSON.stringify(festas.days).replace(/</g, '\\u003c');
   const known = JSON.stringify(festas.ids).replace(/</g, '\\u003c');
+  const icons = JSON.stringify(festas.icons ?? {}).replace(/</g, '\\u003c');
   return (
     "(function(){var d=document,e=d.documentElement,m='off',t='system',F=" +
     ids +
@@ -40,9 +45,14 @@ export function headScript(threadIds: readonly string[], colors: { light: string
     days +
     ",K=" +
     known +
+    ",I=" +
+    icons +
+    ",G=" +
+    String(festas.built === true) +
     ",N=function(s){return Date.parse(s+'T00:00:00Z')/864e5},y=q.get('hoje')||'',b=null,o=q.get('festa');" +
     "if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(y)||isNaN(N(y)))y=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Lisbon',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());" +
     "for(var j=0;j<D.length;j++){var k=N(D[j][1])-N(y);if(k>=0&&k<=3&&(!b||k<b[0]))b=[k,D[j][0]]}" +
-    "if(o&&K.indexOf(o)>-1)e.setAttribute('data-festa',o);else if(b)e.setAttribute('data-festa',b[1])}catch(x){}})();"
+    "var w=o&&K.indexOf(o)>-1?o:b?b[1]:'',u=w&&I[w];if(w)e.setAttribute('data-festa',w);" +
+    "if(u||G){var L=d.querySelectorAll('link[data-fi]');for(var z=0;z<L.length;z++){var n=L[z],r=n.getAttribute('data-fi');if(u&&r==='ico')n.remove();else{n.setAttribute('href',u?u[r]:n.getAttribute('data-fn'));if(r==='png')n.setAttribute('sizes',u?'32x32':'96x96')}}}}catch(x){}})();"
   );
 }

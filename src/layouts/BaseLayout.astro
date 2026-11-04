@@ -8,7 +8,7 @@ import { LANGS, LOCALES, altPaths, pagePath, withBase, type Lang, type PageKey }
 import { t } from '../i18n';
 import { headScript } from '../lib/head-script';
 import { festaRules } from '../lib/festas';
-import { headFestas } from '../lib/festas-data';
+import { builtFesta, headFestas } from '../lib/festas-data';
 import { azulejoRule } from '../lib/azulejo';
 import { DEFAULT_PREVIEW, HOME_PREVIEW, ogImagePath } from '../lib/og';
 import { ANALYTICS_CONFIG_SCRIPT, GOATCOUNTER_ENDPOINT, GOATCOUNTER_SCRIPT, analyticsEnabled } from '../lib/analytics';
@@ -138,7 +138,9 @@ const azulejoCss = azulejoRule({ bussola, canto, estrela, no, 'no-v': noV, onda,
 const jsonLd = noindex || allLangs ? undefined : graph(schemaContext(lang, Astro.site), schema ?? []);
 // Prefetch (never prerender) of the internal pages a reader points at or touches; see src/lib/transitions.ts. The base path is the one of the site.
 const speculation = JSON.stringify(speculationRules(withBase().slice(0, -1)));
-const festas = headFestas();
+const festas = headFestas(lang);
+// In the window of a holiday (the day of the build) the tab icon of the holiday; the head script follows the day of the reader.
+const festaIconNow = festas.built ? festas.icons?.[builtFesta()!.id] : undefined;
 const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
 ---
 <!doctype html>
@@ -151,12 +153,12 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta name="theme-color" content={THEME_COLORS.dark} media="(prefers-color-scheme: dark)" />
     <!-- Before the first paint: data-js, data-family, data-theme, data-vista, data-fio on <html> (no flash of the wrong state).
          After the theme-color tags: with an explicit theme it sets them. -->
+    <FaviconLinks festa={festaIconNow} />
     <script is:inline set:html={headScript(allThreads.map((th) => th.id), undefined, festas)} />
     <style set:html={festaRules(festas.ids)} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
-    <FaviconLinks />
     <!-- The fonts of the first screen are fetched with the stylesheet, not after it, so the lines of the title and the tags do not break
          differently when a font arrives. The same files the @font-face rules of fonts.css name. -->
     {fontFiles.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}

@@ -48,7 +48,8 @@ const shown = (page) =>
     const logo = document.querySelector('.brand img')?.getBoundingClientRect();
     return {
       head: seen(document.querySelector('.festa-head')),
-      badge: seen(document.querySelector('.festa-badge')),
+      // The tab icon of the holiday: the SVG link points into /festas/.
+      icon: (document.querySelector('link[rel=icon][type="image/svg+xml"]')?.getAttribute('href') ?? '').includes('/festas/'),
       off: seen(document.querySelector('[data-festa-off]')),
       date: seen(document.querySelector('[data-festa-on]')),
       festa: document.documentElement.getAttribute('data-festa'),
@@ -61,31 +62,31 @@ const shown = (page) =>
 if (want('window')) {
   const inside = await open(`/ru/?hoje=${MIDDLE}`);
   const a = await shown(inside);
-  ok(`/ru/?hoje=${MIDDLE}: the header and the badge show`, a.head && a.badge && a.festa === FESTA.id, JSON.stringify(a));
+  ok(`/ru/?hoje=${MIDDLE}: the header shows and the tab icon is the holiday's`, a.head && a.icon && a.festa === FESTA.id, JSON.stringify(a));
   const link = await inside.$eval('.festa-head__link', (el) => ({ text: el.textContent.trim(), href: el.getAttribute('href') }));
   ok('the header leads to the page of the holiday with its text', link.href === PAGE && link.text === TEXT.head_link, JSON.stringify(link));
   const outside = await open(`/ru/?hoje=${AFTER}`);
   const b = await shown(outside);
-  ok(`/ru/?hoje=${AFTER}: nothing shows`, !b.head && !b.badge && !b.festa, JSON.stringify(b));
+  ok(`/ru/?hoje=${AFTER}: nothing shows`, !b.head && !b.icon && !b.festa, JSON.stringify(b));
   ok('the logo and the brand stay where they were (no shift)', a.logo === b.logo && a.brand === b.brand, `${a.logo} ${a.brand} | ${b.logo} ${b.brand}`);
   const before = await shown(await open(`/ru/?hoje=${BEFORE}`));
-  ok(`/ru/?hoje=${BEFORE}: nothing shows, the day before the window`, !before.head && !before.badge, JSON.stringify(before));
+  ok(`/ru/?hoje=${BEFORE}: nothing shows, the day before the window`, !before.head && !before.icon, JSON.stringify(before));
   const first = await shown(await open(`/ru/?hoje=${FIRST}`));
-  ok(`/ru/?hoje=${FIRST}: the first day of the window shows`, first.head && first.badge, JSON.stringify(first));
+  ok(`/ru/?hoje=${FIRST}: the first day of the window shows`, first.head && first.icon, JSON.stringify(first));
   const last = await shown(await open(`/ru/?hoje=${DAY}`));
-  ok(`/ru/?hoje=${DAY}: the day of the holiday shows`, last.head && last.badge, JSON.stringify(last));
+  ok(`/ru/?hoje=${DAY}: the day of the holiday shows`, last.head && last.icon, JSON.stringify(last));
   const forced = await shown(await open(`/ru/?hoje=${AFTER}&festa=${FESTA.id}`));
-  ok('?festa=<id> turns the holiday on whatever the date', forced.head && forced.badge && forced.festa === FESTA.id, JSON.stringify(forced));
+  ok('?festa=<id> turns the holiday on whatever the date', forced.head && forced.icon && forced.festa === FESTA.id, JSON.stringify(forced));
   const other = await shown(await open(`/ru/?hoje=${AFTER}&festa=nothing`));
-  ok('an unknown ?festa= is ignored', !other.head && !other.badge, JSON.stringify(other));
-  // Other pages: the badge only, no header.
+  ok('an unknown ?festa= is ignored', !other.head && !other.icon, JSON.stringify(other));
+  // Other pages: the tab icon only, no header.
   const about = await shown(await open(`/ru/o-proekte/?hoje=${MIDDLE}`));
-  ok('a page that is not the home page has the badge and no header', about.badge && !about.head, JSON.stringify(about));
+  ok('a page that is not the home page has the tab icon and no header', about.icon && !about.head, JSON.stringify(about));
   // Languages without a text: nothing, even with ?festa=.
   for (const lang of ['pt', 'en']) {
     if (FESTA.text[lang]) continue;
     const page = await shown(await open(`/${lang}/?hoje=${MIDDLE}&festa=${FESTA.id}`));
-    ok(`/${lang}/: no header and no badge while there is no text in the language`, !page.head && !page.badge, JSON.stringify(page));
+    ok(`/${lang}/: no header and the usual tab icon while there is no text in the language`, !page.head && !page.icon, JSON.stringify(page));
   }
 }
 
@@ -96,7 +97,7 @@ if (want('page')) {
   ok(`${PAGE}?hoje=${AFTER}: the line "${TEXT.off_window}" shows in the place of the date`, out.off && !out.date && line === TEXT.off_window, JSON.stringify(out));
   const inside = await open(`${PAGE}?hoje=${MIDDLE}`);
   const inn = await shown(inside);
-  ok(`${PAGE}?hoje=${MIDDLE}: the date shows instead of the line, the badge shows`, !inn.off && inn.date && inn.badge, JSON.stringify(inn));
+  ok(`${PAGE}?hoje=${MIDDLE}: the date shows instead of the line, the tab icon is the holiday's`, !inn.off && inn.date && inn.icon, JSON.stringify(inn));
   const checks = await outside.evaluate(() => ({
     h1: document.querySelector('h1')?.textContent?.trim(),
     hreflang: document.querySelectorAll('link[rel=alternate][hreflang]').length,

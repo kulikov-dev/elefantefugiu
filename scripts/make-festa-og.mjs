@@ -2,20 +2,23 @@
 // paper of the site, no text. Run by the build before astro build (npm run build); the home page in the window of a holiday and the page of the holiday share it.
 //   public/og-festas/<id>-<hash>.png   what the site publishes (the hash in the name makes the messengers fetch a changed picture anew)
 //   .og-cache/festas.json              which file belongs to which holiday (src/lib/og-cards.ts festaCardPath reads it)
-// Neither is in the repository. The colours are the light values of the --festa-* tokens of src/styles/tokens.css.
+//   public/festas/favicon-<name>.svg, -32.png, -180.png   the icon of the tab in the window of a holiday (festas.yaml `favicon`); 180 is the touch icon of iOS
+// None of these is in the repository. The colours are the light values of the --festa-* tokens of src/styles/tokens.css.
 import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { parse } from 'yaml';
-import { ART } from '../src/lib/festa-art.mjs';
+import { ART, ICONS } from '../src/lib/festa-art.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const outDir = join(root, 'public/og-festas');
 const cacheDir = join(root, '.og-cache');
 mkdirSync(outDir, { recursive: true });
 mkdirSync(cacheDir, { recursive: true });
+const iconDir = join(root, 'public/festas');
+mkdirSync(iconDir, { recursive: true });
 
 const tokens = readFileSync(join(root, 'src/styles/tokens.css'), 'utf8');
 /** The light value of a colour token: `light-dark(<light>, <dark>)`. */
@@ -27,6 +30,14 @@ const light = (name) => {
 };
 const colors = { '--festa-ink': light('--festa-ink'), '--festa-warm': light('--festa-warm'), '--festa-wash': light('--festa-wash'), '--festa-shell': light('--festa-shell') };
 const paper = light('--color-bg');
+/** The dark value of a colour token: the second colour of `light-dark(<light>, <dark>)`. */
+const dark = (name) => {
+  const line = tokens.split('\n').find((l) => l.trim().startsWith(`${name}:`)) ?? '';
+  const m = /light-dark\(\s*#[0-9a-fA-F]{3,8}\s*,\s*(#[0-9a-fA-F]{3,8})\s*\)/.exec(line);
+  if (!m) throw new Error(`make-festa-og: ${name} has no dark colour in tokens.css`);
+  return m[1];
+};
+const iconColors = { ink: light('--festa-ink'), warm: light('--festa-warm'), inkDark: dark('--festa-ink'), warmDark: dark('--festa-warm') };
 
 const W = 1200;
 const H = 630;
@@ -49,6 +60,21 @@ for (const festa of festas) {
   manifest[festa.id] = `og-festas/${name}`;
   keep.add(name);
 }
+// The icons of the tab: an SVG for the browsers that take it (it follows the colour scheme of the device) and PNG 32 and 180 in the light colours.
+// The touch icon has the paper of the site behind the crown (iOS fills a transparent one with black).
+const icons = new Set([...new Set(festas.map((f) => f.favicon).filter(Boolean))]);
+const iconFiles = new Set();
+for (const name of icons) {
+  const make = ICONS[name];
+  if (!make) throw new Error(`make-festa-og: no icon "${name}" in src/lib/festa-art.mjs`);
+  writeFileSync(join(iconDir, `favicon-${name}.svg`), make(iconColors));
+  const light1 = Buffer.from(make(iconColors, 'light'));
+  await sharp(light1, { density: 384 }).resize(32, 32).png({ compressionLevel: 9 }).toFile(join(iconDir, `favicon-${name}-32.png`));
+  const crown = await sharp(light1, { density: 1152 }).resize(124, 124).png().toBuffer();
+  await sharp({ create: { width: 180, height: 180, channels: 4, background: paper } }).composite([{ input: crown, left: 28, top: 28 }]).png({ compressionLevel: 9 }).toFile(join(iconDir, `favicon-${name}-180.png`));
+  for (const f of [`favicon-${name}.svg`, `favicon-${name}-32.png`, `favicon-${name}-180.png`]) iconFiles.add(f);
+}
+for (const file of readdirSync(iconDir)) if (!iconFiles.has(file)) rmSync(join(iconDir, file));
 for (const file of readdirSync(outDir)) if (!keep.has(file)) rmSync(join(outDir, file));
 writeFileSync(join(cacheDir, 'festas.json'), JSON.stringify(manifest, null, 1));
-console.log(`Holiday previews: ${keep.size} picture(s) in public/og-festas/.`);
+console.log(`Holiday previews: ${keep.size} picture(s) in public/og-festas/, ${icons.size} tab icon(s) in public/festas/.`);
