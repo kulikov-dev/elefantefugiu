@@ -126,6 +126,11 @@ export const eventSchema = z
   level: z.enum(['frame', 'story']),
   year: z.union([z.number().int(), yearRange]),
   year_label: text.optional(),
+  /**
+   * The exact day of the event (MM-DD), for the anniversary on the home page ("On this day in 1877"). Only where the text or the sources of the card
+   * name the day, only for a single year after 0 (never a period, never a year before the common era).
+   */
+  day: z.string().regex(/^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/, 'a day is MM-DD').optional(),
   /** The short year on the scale of the epoch page, where the year number would mislead (a century: "I century", an approximate year: "c. 104"). Without it the scale shows the first year. */
   year_scale: text.optional(),
   /** Where the event happened, as text on the card; any coordinates in the world (the map does not use them). */
@@ -185,6 +190,11 @@ export const eventSchema = z
   ru_ready: z.boolean().default(false),
   })
   .superRefine((event, ctx) => {
+    if (event.day !== undefined) {
+      const [month, day] = event.day.split('-').map(Number) as [number, number];
+      if (typeof event.year !== 'number' || event.year < 1) ctx.addIssue({ code: 'custom', path: ['day'], message: 'day is only for a single year after 0 (not a period, not before the common era)' });
+      else if (new Date(Date.UTC(2024, month - 1, day)).getUTCMonth() !== month - 1) ctx.addIssue({ code: 'custom', path: ['day'], message: 'there is no such day in the calendar' });
+    }
     // Russian is required only for an event that says it is ready for it: then every text object needs a ru text.
     if (!event.ru_ready) return;
     for (const path of missingRu(event)) {

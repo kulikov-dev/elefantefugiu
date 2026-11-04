@@ -7,37 +7,41 @@ import ReadMark from './ReadMark.astro';
 import Pic from './Pic.astro';
 import type { PictureData } from '../lib/pictures';
 import { claimStoryName } from '../lib/transitions';
+import { START_CARD_QUALITY, START_CARD_SIZES, START_CARD_WIDTHS } from '../lib/start-card';
 import { t } from '../i18n';
-import { storyPath, type Lang } from '../i18n/routes';
+import { storyPath, withBase, type Lang } from '../i18n/routes';
 import { formatYear, placeShort, textLangOf, type EventData } from '../lib/events';
 
 interface Props {
   lang: Lang;
-  event: EventData;
+  /** A story. */
+  event?: EventData | undefined;
+  /** A page that is not a story (a pinned holiday page): a hook, a title that leads to `href`, an optional picture (an address inside the site). */
+  page?: { href: string; title: string; hook: string; image?: string | undefined } | undefined;
   /** The picture on top: the story's own, or the epoch's when it has none (decided by the page: cardPicture). */
   picture?: PictureData | undefined;
   /** The first card of the page: its picture is on the first screen (the largest element of the page), so it loads at once and first. */
   first?: boolean;
 }
 
-const { lang, event, picture, first = false } = Astro.props;
-const href = storyPath(lang, event.slug[lang]);
-const transitionName = event.image ? claimStoryName(Astro.request, event.slug[lang]) : undefined;
-// The width the picture really has (measured in the browser): the showcase is a grid of tiles at least 16 rem wide with a gap of 16 px in a
-// container of 1152 px less 2 x 16 px of page padding; a card has a 1 px border. One column below 35 rem (page width less 2 x 16 + 2 px),
-// two columns from 35 rem, three from 52 rem, and at 72 rem the container stops growing (361 px).
-const SIZES = '(min-width: 72rem) 361px, (min-width: 52rem) calc((100vw - 64px) / 3 - 2px), (min-width: 35rem) calc(50vw - 26px), calc(100vw - 34px)';
+const { lang, event, page, picture, first = false } = Astro.props;
+// A blank card (the template the script copies, no id) has no address yet: the script puts it in.
+const href = page ? page.href : event!.id ? storyPath(lang, event!.slug[lang]) : '';
+const transitionName = event?.image ? claimStoryName(Astro.request, event.slug[lang]) : undefined;
 ---
-<article class="start-card" id={`c-${event.id}`} data-story={event.id}>
+<article class="start-card" id={event ? `c-${event.id}` : undefined} data-story={event?.id}>
   {
-    picture && (
+    page?.image && <img class="start-card__image" src={withBase(page.image)} alt="" loading={first ? 'eager' : 'lazy'} decoding="async" />
+  }
+  {
+    picture && event && (
       <Pic
         picture={picture}
         lang={lang}
         class="start-card__image"
-        widths={[320, 480, 680, 768, 960]}
-        sizes={SIZES}
-        quality={72}
+        widths={START_CARD_WIDTHS}
+        sizes={START_CARD_SIZES}
+        quality={START_CARD_QUALITY}
         loading={first ? 'eager' : 'lazy'}
         crop
         transitionName={transitionName}
@@ -45,14 +49,18 @@ const SIZES = '(min-width: 72rem) 361px, (min-width: 52rem) calc((100vw - 64px) 
     )
   }
   <div class="start-card__body">
-    <p class="start-card__hook" lang={textLangOf(event, lang)}>{event.hook[lang]}</p>
-    <h3 class="start-card__title"><a href={href}>{event.title[lang]}</a></h3>
-    <p class="start-card__meta">
-      <span>{formatYear(event, lang)} &middot; {placeShort(event.place, lang)}</span>
-      <TagLabel lang={lang} label={event.label} />
-      {event.sensitive && <span class="start-card__heavy">{t(lang, 'ui.heavy_topic')}</span>}
-      <ReadMark lang={lang} />
-    </p>
+    <p class="start-card__hook" lang={event ? textLangOf(event, lang) : undefined}>{event ? event.hook[lang] : page!.hook}</p>
+    <h3 class="start-card__title"><a href={href || undefined}>{event ? event.title[lang] : page!.title}</a></h3>
+    {
+      event && (
+        <p class="start-card__meta">
+          <span data-start-year-place>{formatYear(event, lang)} &middot; {placeShort(event.place, lang)}</span>
+          <TagLabel lang={lang} label={event.label} />
+          {event.sensitive && <span class="start-card__heavy">{t(lang, 'ui.heavy_topic')}</span>}
+          <ReadMark lang={lang} />
+        </p>
+      )
+    }
   </div>
 </article>
 

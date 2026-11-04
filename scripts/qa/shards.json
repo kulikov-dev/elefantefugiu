@@ -35,7 +35,8 @@
   "mascot-variant": 3,
   "transitions": 20,
   "newmarks": 150,
-  "likes": 30
+  "likes": 30,
+  "start": 20
  },
  "shards": [
   [
@@ -79,7 +80,8 @@
    "theme-variant",
    "family-variant",
    "ru-variant",
-   "likes"
+   "likes",
+   "start"
   ]
  ]
 }

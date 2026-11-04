@@ -14,6 +14,11 @@ import { epochTiles, firstMvpEpoch, homeStartStory } from '../lib/home';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, groupVariants, isVisibleInMode, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 import { cardPicture } from '../lib/pictures';
+import type { EventData } from '../lib/events';
+import { buildToday } from '../lib/publication.mjs';
+import { builtHolidays, startFile, startFileHref, toStart } from '../lib/start-data';
+import { pinsFor } from '../lib/start-pins';
+import { setKey, startSet, withFallback } from '../lib/start-set';
 import { HOME_PREVIEW } from '../lib/og';
 import { OG_CARD, homeCardPath } from '../lib/og-cards';
 
@@ -52,8 +57,26 @@ const threadEras = new Map(
 );
 const hideIn = (modes: string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
 
+// "Where to start": the three cards of the day (src/lib/start-set.ts), counted for the day of the build and with nothing read; the script
+// (src/scripts/start-set.ts) counts again in the browser with the read marks, the family mode and the day in Lisbon, and swaps the cards if the result differs.
+// featured.yaml stays as the stand-in set for a pool too small to give three cards.
+const today = buildToday();
+const startStories = site.events.map(toStart);
+const builtYear = Number(today.slice(0, 4));
+const fallbackIds = site.featured.map((e) => e.id);
+const startRefs = withFallback(startSet({ today, stories: startStories, read: new Set(), pins: pinsFor(startStories, builtYear, builtHolidays()) }), fallbackIds);
+const eventById = new Map(site.events.map((e) => [e.id, e]));
+const shown = startRefs.map((ref) => ({ ref, event: ref.target.type === 'story' ? eventById.get(ref.target.id) : undefined })).filter((x) => x.ref.target.type === 'page' || x.event);
+const hasCaption = shown.some((x) => x.ref.label);
+// The data of the cards for the script is a file of its own (src/lib/start-data.ts); the page only names it.
+const startUrl = startFileHref(lang, (await startFile(site, lang)).hash);
+// Blank cards for the script to copy (a copy keeps the scoped styles of the component).
+const blank = { pt: '', en: '', ru: '' };
+const stubEvent = (label: 'documented' | 'legend' | 'debated') =>
+  ({ id: '', slug: blank, title: blank, hook: blank, label, sensitive: true, year: 0, place: { name: blank, short: blank, lat: 0, lon: 0 }, placeholder: false, ru_ready: true }) as unknown as EventData;
+
 // Test text must stay out of search results until it is real.
-const noindex = site.featured.some((e) => e.placeholder) || ready.some((tile) => epochHasTestText(tile.epoch));
+const noindex = shown.some((x) => x.event?.placeholder) || ready.some((tile) => epochHasTestText(tile.epoch));
 
 // "Left off": the epochs with a page, by id, for the script that knows the last epoch of the reader.
 const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, { href: epochHref(lang, tile.epoch.slug[lang]), name: tile.epoch.name[lang] }]));
@@ -103,16 +126,40 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
     </section>
 
     {
-      site.featured.length > 0 && (
-        <section aria-labelledby="showcase-title" data-showcase>
+      shown.length > 0 && (
+        <section aria-labelledby="showcase-title" data-showcase data-start-key={setKey(startRefs)} data-start-url={startUrl}>
           <h2 id="showcase-title">{t(lang, 'home.showcase_heading')}</h2>
-          <ul class="showcase">
-            {site.featured.map((event, index) => (
-              <li {...familyAttrs(event)}>
-                <StartCard lang={lang} event={event} first={index === 0} picture={cardPicture(event, site.epochs.find((ep) => ep.id === event.epoch) ?? {})} />
+          <ul class:list={['showcase', { 'showcase--captioned': hasCaption }]} data-start-list>
+            {shown.map(({ ref, event }, index) => (
+              <li {...(event ? familyAttrs(event) : {})}>
+                {hasCaption && <p class="showcase__caption">{ref.label?.[lang]}</p>}
+                {
+                  event ? (
+                    <StartCard lang={lang} event={event} first={index === 0} picture={cardPicture(event, site.epochs.find((ep) => ep.id === event.epoch) ?? {})} />
+                  ) : (
+                    ref.target.type === 'page' && <StartCard lang={lang} first={index === 0} page={{ href: ref.target.href, title: ref.target.title[lang], hook: ref.target.hook[lang], image: ref.target.image }} />
+                  )
+                }
               </li>
             ))}
           </ul>
+          <!-- Blank cards (one per label, and one for a page) that the script fills when it swaps the cards. -->
+          {
+            (['documented', 'legend', 'debated'] as const).map((label) => (
+              <template data-start-template={label}>
+                <li>
+                  <p class="showcase__caption"></p>
+                  <StartCard lang={lang} event={stubEvent(label)} />
+                </li>
+              </template>
+            ))
+          }
+          <template data-start-template="page">
+            <li>
+              <p class="showcase__caption"></p>
+              <StartCard lang={lang} page={{ href: '', title: '', hook: '' }} />
+            </li>
+          </template>
         </section>
       )
     }
@@ -193,6 +240,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
 
 <script>
   import '../scripts/last-epoch';
+  import '../scripts/start-set';
   import '../scripts/timeline-nav';
 </script>
 
@@ -283,6 +331,20 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
   /* The cards share the whole width (auto-fit: no empty column on the right) and are as tall as the tallest, so the small titles line up. */
   .showcase > :global(li) {
     display: flex;
+    flex-direction: column;
+  }
+
+  /* The line above a pinned card ("On this day in 1877"). When any card has one, every item keeps the line's place, so the cards start at the same height. */
+  .showcase__caption {
+    min-height: 1lh;
+    margin-block-end: var(--space-1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .showcase:not(.showcase--captioned) .showcase__caption {
+    display: none;
   }
 
   .showcase {

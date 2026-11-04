@@ -80,6 +80,7 @@ words `evento-exemplo` of a card that is not published appears anywhere in `dist
 | `map-limit`, `map-limit-all`, `map-limit-12` | a sweep of views never draws more than the marker limit, in each family mode |
 | `map-variant` | with the limit of 7: clusters, "Show more", filters, preview, links, the epoch map |
 | `map-tools` / `map-tools-variant` | the tools under the zoom (Near me, All of Portugal, Whole world), the overseas plate, the legend and marker styles, the epoch scale |
+| `start` | "Where to start" on the home page: the story of the day first with its line (`?hoje=`), a story read leaves the rotation but not the pins, the data file, no JS |
 | `bridge` | the marker preview, the caption, "Como chegar" (OpenStreetMap, `geo:` on Android only), the bridge block on the card |
 | `family-controls`, `family-pages`, `family-map` | family mode: the radio group, lists, counters, recounting without reload, Nearby, the age screen, no flash, blocked storage, the map |
 | `family-controls-variant`, `family-variant` | the same on the fixture build, and the 16+ epoch that every mode leaves empty |

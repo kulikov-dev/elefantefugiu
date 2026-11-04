@@ -323,6 +323,8 @@ for (const lang of ['pt', 'en']) {
 
 // ---------- home pages ----------
 const featuredIds = load('featured.yaml').map((f) => f.id);
+// "Where to start" (src/lib/start-set.ts) is counted at build time from the day, so the check does not know which stories it shows: it checks
+// the rules (three published stories, once each, with their age data) and that the stand-in set of featured.yaml is still there.
 
 // The first screen tells the story the name comes from; the name itself is in the header.
 const HOME_H1 = { pt: 'Em 1515, o rei pôs um rinoceronte contra um elefante. O elefante fugiu.', en: 'In 1515 a king set a rhinoceros against an elephant. The elephant ran away.' };
@@ -331,16 +333,19 @@ for (const lang of ['pt', 'en']) {
   const where = `${lang}/ (home)`;
   const fail = (m) => errors.push(`${where}: ${m}`);
   const path = join(dist, lang, 'index.html');
-  const html = read(path);
+  // The blank cards the script copies (<template>) are not part of the page.
+  const html = read(path)?.replace(/<template[\s\S]*?<\/template>/g, '');
   if (!html) {
     fail('page was not built');
     continue;
   }
   pages += 1;
   const raw = readFileSync(path, 'utf8');
+  const showcase = html.match(/<section aria-labelledby="showcase-title"[\s\S]*?<\/section>/)?.[0] ?? '';
+  const shownEvents = cardSlugsIn(showcase, lang).map((slug) => events.find((e) => slugOf(e, lang) === slug));
   const tiles = epochs.map((epoch) => ({ epoch, page: hasPage(epoch), count: inEpoch(epoch).length }));
   const first = epochs.find(hasPage);
-  const placeholder = featuredIds.some((id) => events.find((e) => e.id === id)?.placeholder) || tiles.some((t) => t.page && epochTestText(t.epoch));
+  const placeholder = shownEvents.some((e) => e?.placeholder) || tiles.some((t) => t.page && epochTestText(t.epoch));
   commonChecks(html, where, lang, { placeholder, expectedH1: HOME_H1[lang] });
 
   // hero: the story as the h1 and a paragraph, one main button to the story the name comes from, the elephant, two plain links
@@ -359,11 +364,11 @@ for (const lang of ['pt', 'en']) {
   if (!/<a class="continue-band"[^>]*data-continue[^>]*hidden/.test(html)) fail('the "left off" band must exist and stay hidden without JavaScript');
   if (/class="button[^"]*"[^>]*data-continue/.test(html)) fail('"Continue" must not be a button in the row any more');
 
-  // showcase: exactly the featured cards, in the order of featured.yaml
-  const showcase = html.match(/<section aria-labelledby="showcase-title"[\s\S]*?<\/section>/)?.[0] ?? '';
-  const shown = cardSlugsIn(showcase, lang);
-  const expected = featuredIds.map((id) => slugOf(events.find((e) => e.id === id), lang));
-  if (JSON.stringify(shown) !== JSON.stringify(expected)) fail(`showcase differs from featured.yaml.\n    expected: ${expected.join(', ')}\n    found:    ${shown.join(', ')}`);
+  // showcase: three published stories (as many as there are, up to three), each once; the featured.yaml stand-ins exist
+  const wanted = Math.min(3, events.length);
+  if (shownEvents.length !== wanted || shownEvents.some((e) => !e) || new Set(shownEvents.map((e) => e?.id)).size !== shownEvents.length) fail(`showcase must hold ${wanted} different published stories, found ${shownEvents.length}`);
+  if (featuredIds.some((id) => !events.some((e) => e.id === id))) fail('featured.yaml names a story that is not published');
+  if (!/data-start-key="[^"]+" data-start-url="[^"]+"/.test(showcase)) fail('the showcase must carry the key of its set and the address of its data file');
 
   // "Surprise me" has its own page (/pt/surpreende-me/, /en/surprise-me/): the list embedded there = published, any age, never a heavy
   // topic; the same stories as plain links (the page without JavaScript); links are real card pages. The header menu leads to it.
@@ -382,10 +387,9 @@ for (const lang of ['pt', 'en']) {
     else if (item.minAge !== String(ev.min_age) || item.sensitive !== Boolean(ev.sensitive)) fail(`surprise item ${item.id} carries a wrong age label or heavy-topic flag`);
   }
   // showcase items carry the data the CSS hides them by
-  for (const id of featuredIds) {
-    const ev = events.find((e) => e.id === id);
-    const li = showcase.match(new RegExp(`<li ([^>]*)>\\s*<article [^>]*id="c-${id}"`));
-    if (!li || !li[1].includes(`data-min-age="${ev.min_age}"`) || !li[1].includes(`data-sensitive="${ev.sensitive}"`)) fail(`showcase item ${id} must carry data-min-age="${ev.min_age}" and data-sensitive="${ev.sensitive}"`);
+  for (const ev of shownEvents.filter(Boolean)) {
+    const li = showcase.match(new RegExp(`<li ([^>]*)>(?:\s*<p class="showcase__caption[^>]*>[^<]*</p>)?\s*<article [^>]*id="c-${ev.id}"`));
+    if (!li || !li[1].includes(`data-min-age="${ev.min_age}"`) || !li[1].includes(`data-sensitive="${ev.sensitive}"`)) fail(`showcase item ${ev.id} must carry data-min-age="${ev.min_age}" and data-sensitive="${ev.sensitive}"`);
   }
 
   // the epochs: no big tiles any more, the time strip is the whole list
