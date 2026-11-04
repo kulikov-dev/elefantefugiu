@@ -1,0 +1,43 @@
+---
+// The line of small links at the foot of a story: "Back: <previous story>", "All stories of the era <name>" and, on the very last story, "Next: <first story of the first era>"
+// so that reading does not stop. No boxes: the big "Next" card (NextStory.astro) is the one invitation to go on.
+import type { Lang } from '../i18n/routes';
+import { t } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  prev?: { title: string; href: string } | null;
+  /** The page of the epoch of the story; none when the epoch has no page. */
+  epoch?: { name: string; href: string } | undefined;
+  /** Only when the story has no next story and no big card: the way back to the start. */
+  wrap?: { title: string; href: string } | null;
+}
+
+const { lang, prev, epoch, wrap } = Astro.props;
+---
+{
+  (prev || epoch || wrap) && (
+    <nav class="story-links" aria-label={t(lang, 'card.epoch_nav')}>
+      {prev && <a href={prev.href} rel="prev">{`← ${t(lang, 'card.footer_prev').replace('{title}', prev.title)}`}</a>}
+      {epoch && <a href={epoch.href}>{t(lang, 'card.footer_epoch').replace('{name}', epoch.name)}</a>}
+      {wrap && <a href={wrap.href} rel="next">{`${t(lang, 'card.footer_next').replace('{title}', wrap.title)} →`}</a>}
+    </nav>
+  )
+}
+
+<style>
+  .story-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    padding-block-start: var(--space-3);
+    border-block-start: 1px solid var(--epoch-line);
+    font-size: var(--text-sm);
+  }
+
+  .story-links a {
+    display: inline-block;
+    padding-block: var(--space-1);
+    color: var(--color-ink-muted);
+  }
+</style>

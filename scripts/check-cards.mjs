@@ -97,7 +97,7 @@ for (const ev of events) {
     } else if (gateBlock) fail('a card no mode hides must not have the screen');
     // Nearby, "Next" and previous / next: for each mode the variant shown holds only cards the mode shows
     const blocks = (cls) => [...html.matchAll(new RegExp(`<div class="fv fv--block"[^>]*?data-modes="([^"]*)"[^>]*>([\\s\\S]*?)(?=<div class="fv fv--block"|<div class="actions"|</div></article>|$)`, 'g'))].filter((b) => b[2].includes(cls));
-    const pagerBlocks = blocks('class="pager"');
+    const pagerBlocks = blocks('class="story-links"');
     const pagerCovered = pagerBlocks.flatMap((b) => b[1].split(' '));
     if (MODES.some((m) => pagerCovered.filter((x) => x === m).length !== 1)) fail(`previous / next: every mode needs exactly one variant (found ${pagerCovered.join(' ')})`);
     // The block of one mode among the blocks of a kind: null when no block covers the mode.

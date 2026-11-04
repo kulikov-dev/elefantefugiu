@@ -325,7 +325,7 @@ if (want('nearby')) {
         (vis) => {
           const isVisible = eval(vis);
           const nearby = [...document.querySelectorAll('.related li')].filter(isVisible).map((li) => li.querySelector('a').getAttribute('href'));
-          const pager = [...document.querySelectorAll('.pager a')].filter(isVisible).map((a) => a.getAttribute('href'));
+          const pager = [...document.querySelectorAll('.story-links a')].filter(isVisible).map((a) => a.getAttribute('href'));
           return { nearby, pager };
         },
         visible,

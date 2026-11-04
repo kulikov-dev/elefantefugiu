@@ -12,7 +12,7 @@ import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
 import Meanwhile from '../components/Meanwhile.astro';
 import NextStory from '../components/NextStory.astro';
 import { claimStoryName } from '../lib/transitions';
-import PagerNav from '../components/PagerNav.astro';
+import StoryLinks from '../components/StoryLinks.astro';
 import PlaceholderNotice from '../components/PlaceholderNotice.astro';
 import RelatedList from '../components/RelatedList.astro';
 import ReportLink from '../components/ReportLink.astro';
@@ -110,9 +110,17 @@ const relatedVariants = groupVariants(
     })),
   (items) => items.map((i) => i.id).join('|'),
 );
-const pagerVariants = groupVariants(
-  (mode) => cardNeighbours(event, all, allowedIn(mode)),
-  ({ prev, next }) => `${prev?.id ?? ''}|${next?.id ?? ''}`,
+// The line of small links at the foot: the previous story and the epoch; on the last story of the last epoch (no next story, no big "Next" card)
+// also "Next: <the first story of the first epoch>", so that the reading does not stop.
+const footerVariants = groupVariants(
+  (mode) => {
+    const allowed = allowedIn(mode);
+    const { prev, next } = cardNeighbours(event, all, allowed);
+    const noNext = !next && !nextEpochEntry(epoch, site.epochs, all, allowed);
+    const first = noNext ? nextEpochEntry({ ...epoch, order: -Infinity }, site.epochs, all, allowed)?.story : undefined;
+    return { prev, wrap: first && first.id !== event.id ? first : null };
+  },
+  ({ prev, wrap }) => `${prev?.id ?? ''}|${wrap?.id ?? ''}`,
 );
 
 // "Next": the next story of the epoch; on the last story of an epoch the first story of the next epoch with a page ("Next era: <name>");
@@ -277,12 +285,13 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     </div>
 
     {
-      pagerVariants.map(({ modes, value: { prev, next } }) => (
+      footerVariants.map(({ modes, value: { prev, wrap } }) => (
         <div class="fv fv--block" data-modes={modes.join(' ')}>
-          <PagerNav
-            label={t(lang, 'card.epoch_nav')}
-            prev={prev ? { dir: `\u2190 ${t(lang, 'card.prev')}`, title: prev.title[lang], href: storyPath(lang, prev.slug[lang]), rel: 'prev' } : null}
-            next={next ? { dir: `${t(lang, 'card.next')} \u2192`, title: next.title[lang], href: storyPath(lang, next.slug[lang]), rel: 'next' } : null}
+          <StoryLinks
+            lang={lang}
+            prev={prev ? { title: prev.title[lang], href: storyPath(lang, prev.slug[lang]) } : null}
+            epoch={epochLink ? { name: epoch.name[lang], href: epochLink } : undefined}
+            wrap={wrap ? { title: wrap.title[lang], href: storyPath(lang, wrap.slug[lang]) } : null}
           />
         </div>
       ))
