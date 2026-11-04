@@ -4,7 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-"O Elefante Fugiu": a static bilingual (pt / en) Astro + TypeScript site of short interactive stories from Portuguese history, tied to a map and to time. Deployed to GitHub Pages; no server, accounts, cookies or trackers. Node >= 22.12. `README.md` has the full script table, configuration and structure; product specs are in `docs/design.md` and `docs/spec.md`. `docs/STATE.md` (written in Russian) is the running log of decisions per stage and should be read before non-trivial changes.
+"O Elefante Fugiu": a static bilingual (pt / en) Astro + TypeScript site of short interactive stories from Portuguese history, tied to a map and to time. Deployed to GitHub Pages; no server, accounts, cookies or trackers. Node >= 22.12. `README.md` has the full script table, configuration and structure.
+
+Documents and their roles (the docs are written in Russian):
+- `docs/design.md`: the idea and principles; changes rarely.
+- `docs/spec.md`: how the site works now; the source of truth for behaviour (when it disagrees with design, spec and the code win).
+- `docs/STATE.md`: current state, work in progress, open questions, what is not checked; read it before non-trivial changes.
+- `docs/history.md`: archive of stages, reports and closed checklists.
+- Reference files: `docs/glossary.md`, `docs/style-ai-tells.md`, `docs/visual-direction.md`, `docs/addresses.md`, `docs/language-review/`.
+
+Update STATE with 1-3 lines per task; details of behaviour go to spec, "what was done and how it was checked" goes to history.
 
 ## Commands
 
@@ -54,7 +63,7 @@ Follow this by default; it narrows the rules above (the owner can lift any point
 
 - **Checks before a commit:** only `npm run build` and `npm test` (`astro check` is inside). Do not run QA suites locally: CI runs them after the push. Exceptions: the owner asks directly, or CI failed and one suite has to be reproduced. (This replaces "run the affected QA suites locally before pushing" above.)
 - **Screenshots:** only the place that changed, not the whole page; by default 360 px light and 1280 px dark; other combinations only when asked.
-- **Docs:** one or two lines per change in `docs/STATE.md`; `docs/spec.md` only when behaviour changed; `README.md` only when how to use the project changed.
+- **Docs:** 1-3 lines per task in `docs/STATE.md`; `docs/spec.md` when behaviour changed (details of behaviour live there, not in STATE); `README.md` only when how to use the project changed.
 - **Report:** up to 15 lines: what was done, what was checked, questions. No retelling of the task, no logs.
 - **Small tasks** (a text, a colour, a spacing) when the owner said "no ok" ("без ок"): do it at once: edit, build, test, commit, push. "Show and wait for OK" above still applies whenever the owner did not say that.
 
