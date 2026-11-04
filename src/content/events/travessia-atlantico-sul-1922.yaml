@@ -167,12 +167,5 @@ meanwhile:
   - scope: pt
     year: 1922
     text:
-      pt: "Realiza-se em São Paulo a Semana de Arte Moderna."
-    source: "https://pt.wikipedia.org/wiki/Semana_de_Arte_Moderna"
-  - scope: world
-    year: 1922
-    text:
       pt: "Howard Carter descobre o túmulo de Tutankhamon."
-      en: "Howard Carter finds the tomb of Tutankhamun."
-      ru: "Говард Картер находит гробницу Тутанхамона."
     source: "https://en.wikipedia.org/wiki/Tomb_of_Tutankhamun"

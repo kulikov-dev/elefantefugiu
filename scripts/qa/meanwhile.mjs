@@ -1,8 +1,7 @@
 // Browser checks of the block "Meanwhile" (pt "Entretanto", ru "А в это время") on a story page, against dist/ served by serve.mjs:   node meanwhile.mjs [markup layout]
 // (src/components/Meanwhile.astro, src/lib/meanwhile.ts; the lines are in the YAML of the story, field `meanwhile`)
 //   markup   every published story in every language, read from the HTML as served (so without JavaScript): the block exists exactly when the data has a line for the
-//            language (its own scope or `world`), the lines are its own language first and then the world, a line of another language is never there, and each time caption is
-//            the one the distance in years gives
+//            language (its own scope or `world`), there is one line (its own scope, else `world`), a line of another language is never there, and the year in front of it is the year of the event
 //   layout   at 360 px (and 1280) in every language: the block stands after the text and before "More", outside it, with no horizontal scroll; a story without lines has no
 //            block; the block is in view in every family mode
 import { launchBrowser } from './browser.mjs';
@@ -26,10 +25,11 @@ const startOf = (e) => (typeof e.year === 'number' ? e.year : e.year.from);
 /** What the data promises for a story on the page of a language: [{scope, text, caption}], its own line first. A Russian page of a story not ready in Russian shows English with no Russian line. */
 function expected(e, lang) {
   const items = e.sensitive ? [] : (e.meanwhile ?? []);
-  const own = lang === 'ru' && !e.ru_ready ? undefined : items.find((i) => i.scope === lang);
-  const world = items.find((i) => i.scope === 'world');
+  const own = items.find((i) => i.scope === lang);
+  // One line: the page language, else the world; a Russian line is hidden on the English stand-in of a story not ready in Russian.
+  const line = own ? (lang === 'ru' && !e.ru_ready ? undefined : own) : items.find((i) => i.scope === 'world');
   const caption = (i) => (i.year < 0 ? ui('card.year_bc', lang).replace('{n}', String(-i.year)) : i.year < 1000 ? ui('card.year_ad', lang).replace('{n}', String(i.year)) : String(i.year));
-  return [own, world].filter(Boolean).map((i) => ({ scope: i.scope, caption: caption(i), text: i.text[lang] ?? i.text.en }));
+  return [line].filter(Boolean).map((i) => ({ scope: i.scope, caption: caption(i), text: i.text[lang] ?? i.text.en }));
 }
 
 const decode = (s) => s.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n))).replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16))).replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
@@ -65,13 +65,13 @@ if (want('markup')) {
       else if (got.some((l) => l.scope !== 'world' && l.scope !== lang)) bad.push(`${lang}/${e.id}: a line of another language`);
     }
   }
-  ok(`markup: the block is on exactly the pages that have lines (${withLines} with, ${without} without), own language first then the world, the right captions`, bad.length === 0, bad.slice(0, 3).join(' | '));
+  ok(`markup: the block is on exactly the pages that have lines (${withLines} with, ${without} without), the line of the language or the world one, the right years`, bad.length === 0, bad.slice(0, 3).join(' | '));
 }
 
 if (want('layout')) {
   const browser = await launchBrowser();
   for (const lang of LANGS) {
-    const two = need(`a story with two "Meanwhile" lines in ${lang}`, (list) => list.find((e) => expected(e, lang).length === 2));
+    const two = need(`a story with a "Meanwhile" line in ${lang}`, (list) => list.find((e) => expected(e, lang).length === 1));
     const none = need(`a story with no "Meanwhile" line in ${lang}`, (list) => list.find((e) => expected(e, lang).length === 0));
     for (const width of [360, 1280]) {
       const page = await browser.newPage();
@@ -97,7 +97,7 @@ if (want('layout')) {
           visible: !!block && block.getClientRects().length > 0,
         };
       });
-      ok(`${lang} ${width}px: two lines, after the text, before "More" and outside it, heading "${ui('card.meanwhile_title', lang)}"`, geo.has && geo.items === 2 && geo.after && geo.before && geo.outside && geo.title === ui('card.meanwhile_title', lang), JSON.stringify(geo));
+      ok(`${lang} ${width}px: one line, after the text, before "More" and outside it, heading "${ui('card.meanwhile_title', lang)}"`, geo.has && geo.items === 1 && geo.after && geo.before && geo.outside && geo.title === ui('card.meanwhile_title', lang), JSON.stringify(geo));
       ok(`${lang} ${width}px: no horizontal scroll, the block is inside the screen`, geo.scrollX <= 0 && geo.fits && geo.visible, `scrollX ${geo.scrollX}`);
       if (width === 360) {
         // Family mode hides cards by age, never this block: it is in view in every mode (the mode is the attribute data-family of <html>, set by the script in <head>).

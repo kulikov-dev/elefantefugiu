@@ -190,16 +190,6 @@ lang_review:
     date: '2026-10-28'
     hash: '253f25f5b7ad'
 meanwhile:
-  - scope: ru
-    year: 1803
-    text:
-      ru: "Из Кронштадта выходят корабли первого русского кругосветного плавания."
-    source: "https://ru.wikipedia.org/wiki/Первое_русское_кругосветное_плавание"
-  - scope: en
-    year: 1807
-    text:
-      en: "Robert Fulton’s steamboat makes its first trip up the Hudson River."
-    source: "https://en.wikipedia.org/wiki/Clermont_(steamboat)"
   - scope: world
     year: 1808
     text:

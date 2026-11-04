@@ -236,24 +236,17 @@ lang_review:
     hash: '5ec984b435bd'
 meanwhile:
   - scope: ru
-    year: 1508
+    year: 1504
     text:
-      ru: "Освящён Архангельский собор Московского Кремля."
-    source: "https://ru.wikipedia.org/wiki/Архангельский_собор_(Москва)"
+      ru: "Во Флоренции открывают «Давида» Микеланджело."
+    source: "https://en.wikipedia.org/wiki/David_(Michelangelo)"
   - scope: en
-    year: 1503
+    year: 1504
     text:
-      en: "Work begins on Henry VII’s chapel at Westminster Abbey."
-    source: "https://en.wikipedia.org/wiki/Henry_VII_Lady_Chapel"
+      en: "Michelangelo’s David is unveiled in Florence."
+    source: "https://en.wikipedia.org/wiki/David_(Michelangelo)"
   - scope: pt
     year: 1500
     text:
       pt: "Pero Vaz de Caminha escreve ao rei a carta sobre a nova terra."
     source: "https://pt.wikipedia.org/wiki/Carta_de_Pero_Vaz_de_Caminha"
-  - scope: world
-    year: 1504
-    text:
-      pt: "É inaugurado em Florença o David de Michelangelo."
-      en: "Michelangelo’s David is unveiled in Florence."
-      ru: "Во Флоренции открывают «Давида» Микеланджело."
-    source: "https://en.wikipedia.org/wiki/David_(Michelangelo)"

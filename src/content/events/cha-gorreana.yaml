@@ -140,22 +140,10 @@ meanwhile:
   - scope: ru
     year: 1883
     text:
-      ru: "В Москве освящают храм Христа Спасителя."
-    source: "https://ru.wikipedia.org/wiki/Храм_Христа_Спасителя"
+      ru: "Из Парижа в Вену отправляется первый «Восточный экспресс»."
+    source: "https://en.wikipedia.org/wiki/Orient_Express"
   - scope: en
     year: 1886
     text:
       en: "The Statue of Liberty is dedicated in New York Harbor."
     source: "https://en.wikipedia.org/wiki/Statue_of_Liberty"
-  - scope: pt
-    year: 1883
-    text:
-      pt: "Campos dos Goytacazes é a primeira cidade da América Latina com energia elétrica."
-    source: "https://pt.wikipedia.org/wiki/Campos_dos_Goytacazes"
-  - scope: world
-    year: 1883
-    text:
-      pt: "Parte de Paris para Viena o primeiro Expresso do Oriente."
-      en: "The first Orient Express leaves Paris for Vienna."
-      ru: "Из Парижа в Вену отправляется первый «Восточный экспресс»."
-    source: "https://en.wikipedia.org/wiki/Orient_Express"

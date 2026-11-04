@@ -247,11 +247,6 @@ lang_review:
     date: '2026-10-28'
     hash: '712ae30db0b9'
 meanwhile:
-  - scope: en
-    year: 1515
-    text:
-      en: "King’s College Chapel in Cambridge is completed."
-    source: "https://en.wikipedia.org/wiki/King%27s_College_Chapel,_Cambridge"
   - scope: world
     year: 1512
     text:

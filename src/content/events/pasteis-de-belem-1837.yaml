@@ -138,21 +138,6 @@ lang_review:
     date: '2026-10-31'
     hash: 'fc2816d9cd78'
 meanwhile:
-  - scope: ru
-    year: 1837
-    text:
-      ru: "Открывается Царскосельская железная дорога."
-    source: "https://ru.wikipedia.org/wiki/Царскосельская_железная_дорога"
-  - scope: en
-    year: 1837
-    text:
-      en: "John Deere makes his first steel plow."
-    source: "https://en.wikipedia.org/wiki/John_Deere"
-  - scope: pt
-    year: 1837
-    text:
-      pt: "Funda-se no Rio de Janeiro o Colégio Pedro II."
-    source: "https://pt.wikipedia.org/wiki/Col%C3%A9gio_Pedro_II"
   - scope: world
     year: 1837
     text:

@@ -157,14 +157,7 @@ meanwhile:
       en: "Jonathan Swift publishes Gulliver’s Travels."
     source: "https://en.wikipedia.org/wiki/Gulliver%27s_Travels"
   - scope: pt
-    year: 1727
+    year: 1726
     text:
-      pt: "Francisco de Melo Palheta traz café para o Pará."
-    source: "https://pt.wikipedia.org/wiki/Francisco_de_Melo_Palheta"
-  - scope: world
-    year: 1717
-    text:
-      pt: "Toca-se pela primeira vez, no Tamisa, a Música Aquática de Handel."
-      en: "Handel’s Water Music is first played on the Thames."
-      ru: "Гендель впервые исполняет «Музыку на воде» на Темзе."
-    source: "https://en.wikipedia.org/wiki/Water_Music"
+      pt: "Jonathan Swift publica As Viagens de Gulliver."
+    source: "https://en.wikipedia.org/wiki/Gulliver%27s_Travels"

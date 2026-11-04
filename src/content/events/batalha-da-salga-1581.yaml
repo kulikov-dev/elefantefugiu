@@ -157,24 +157,17 @@ lang_review:
     hash: 'ca8f4c60c577'
 meanwhile:
   - scope: ru
-    year: 1584
+    year: 1582
     text:
-      ru: "Основан Архангельск."
-    source: "https://ru.wikipedia.org/wiki/Архангельск"
+      ru: "Папа Григорий XIII вводит календарь, которым мы пользуемся до сих пор."
+    source: "https://en.wikipedia.org/wiki/Gregorian_calendar"
   - scope: en
     year: 1580
     text:
       en: "Francis Drake returns to Plymouth after sailing around the world."
     source: "https://en.wikipedia.org/wiki/Francis_Drake"
   - scope: pt
-    year: 1595
-    text:
-      pt: "Anchieta publica em Coimbra a gramática da língua tupi."
-    source: "https://pt.wikipedia.org/wiki/Jos%C3%A9_de_Anchieta"
-  - scope: world
     year: 1582
     text:
       pt: "O papa Gregório XIII introduz o calendário que ainda hoje usamos."
-      en: "Pope Gregory XIII introduces the calendar still used today."
-      ru: "Папа Григорий XIII вводит календарь, которым мы пользуемся до сих пор."
     source: "https://en.wikipedia.org/wiki/Gregorian_calendar"

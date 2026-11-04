@@ -156,11 +156,3 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '59d8ac21864e'
-meanwhile:
-  - scope: world
-    year: -9
-    text:
-      pt: "É consagrado em Roma o Altar da Paz."
-      en: "The Altar of Peace is dedicated in Rome."
-      ru: "В Риме освящают Алтарь мира."
-    source: "https://en.wikipedia.org/wiki/Ara_Pacis"

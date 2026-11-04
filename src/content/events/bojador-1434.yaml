@@ -132,15 +132,13 @@ lang_review:
     date: '2026-10-28'
     hash: 'b818dc0e21d9'
 meanwhile:
+  - scope: ru
+    year: 1436
+    text:
+      ru: "Достроен купол собора Санта-Мария-дель-Фьоре во Флоренции."
+    source: "https://en.wikipedia.org/wiki/Florence_Cathedral"
   - scope: en
     year: 1440
     text:
       en: "Henry VI founds Eton College."
     source: "https://en.wikipedia.org/wiki/Eton_College"
-  - scope: world
-    year: 1436
-    text:
-      pt: "Fica pronta a cúpula da catedral de Florença."
-      en: "The dome of Florence Cathedral is finished."
-      ru: "Достроен купол собора Санта-Мария-дель-Фьоре во Флоренции."
-    source: "https://en.wikipedia.org/wiki/Florence_Cathedral"

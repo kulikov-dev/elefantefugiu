@@ -160,12 +160,5 @@ meanwhile:
   - scope: pt
     year: 1896
     text:
-      pt: "Inaugura-se o Teatro Amazonas, em Manaus."
-    source: "https://pt.wikipedia.org/wiki/Teatro_Amazonas"
-  - scope: world
-    year: 1896
-    text:
       pt: "Abrem em Atenas os primeiros Jogos Olímpicos da era moderna."
-      en: "The first modern Olympic Games open in Athens."
-      ru: "В Афинах открываются первые современные Олимпийские игры."
     source: "https://en.wikipedia.org/wiki/1896_Summer_Olympics"

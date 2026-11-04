@@ -243,16 +243,3 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: '0415b6d3608b'
-meanwhile:
-  - scope: en
-    year: 1387
-    text:
-      en: "Geoffrey Chaucer starts writing The Canterbury Tales."
-    source: "https://en.wikipedia.org/wiki/The_Canterbury_Tales"
-  - scope: world
-    year: 1386
-    text:
-      pt: "É fundada a Universidade de Heidelberga, na Alemanha."
-      en: "Heidelberg University is founded in Germany."
-      ru: "Основан Гейдельбергский университет."
-    source: "https://en.wikipedia.org/wiki/Heidelberg_University"

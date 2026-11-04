@@ -117,12 +117,13 @@ describe('meanwhileProblems (the rules of check:data)', () => {
 
 describe('meanwhileFor', () => {
   const items = [world({ year: 1750 }), local('ru', { year: 1760 }), local('pt', { year: 1740 })];
-  it('puts the line of the page language first, then the world', () => {
-    expect(meanwhileFor(items, 'ru').map((l) => l.scope)).toEqual(['ru', 'world']);
-    expect(meanwhileFor(items, 'pt').map((l) => l.scope)).toEqual(['pt', 'world']);
+  it('gives one line: the page language, else the world', () => {
+    expect(meanwhileFor(items, 'ru').map((l) => l.scope)).toEqual(['ru']);
+    expect(meanwhileFor(items, 'pt').map((l) => l.scope)).toEqual(['pt']);
+    expect(meanwhileFor(items, 'en').map((l) => l.scope)).toEqual(['world']);
   });
   it('leaves out a local line of another language', () => {
-    expect(meanwhileFor(items, 'en').map((l) => l.scope)).toEqual(['world']);
+    expect(meanwhileFor([local('ru')], 'en')).toEqual([]);
   });
   it('takes the text of the page language', () => {
     expect(meanwhileFor([world()], 'ru')[0]?.text).toBe('Текст.');

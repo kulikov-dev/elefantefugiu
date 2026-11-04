@@ -170,20 +170,3 @@ meanwhile:
     text:
       ru: "Екатерина II получает коллекцию картин, с которой начинается Эрмитаж."
     source: "https://ru.wikipedia.org/wiki/Эрмитаж"
-  - scope: en
-    year: 1771
-    text:
-      en: "The first edition of the Encyclopaedia Britannica is completed in Edinburgh."
-    source: "https://en.wikipedia.org/wiki/Encyclop%C3%A6dia_Britannica"
-  - scope: pt
-    year: 1770
-    text:
-      pt: "Inaugura-se a Casa de Ópera de Vila Rica, em Minas Gerais."
-    source: "https://pt.wikipedia.org/wiki/Teatro_Municipal_de_Ouro_Preto"
-  - scope: world
-    year: 1769
-    text:
-      pt: "Em França, Cugnot testa um carro a vapor."
-      en: "In France, Cugnot tests a steam-powered cart."
-      ru: "Французский инженер Кюньо испытывает паровую повозку."
-    source: "https://en.wikipedia.org/wiki/Fardier_%C3%A0_vapeur"

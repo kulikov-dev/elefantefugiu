@@ -133,11 +133,3 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '4f444d60fa5b'
-meanwhile:
-  - scope: world
-    year: -138
-    text:
-      pt: "Zhang Qian parte da China numa viagem para ocidente."
-      en: "Zhang Qian sets out from China on his journey west."
-      ru: "Чжан Цянь отправляется из Китая в путешествие на запад."
-    source: "https://en.wikipedia.org/wiki/Zhang_Qian"

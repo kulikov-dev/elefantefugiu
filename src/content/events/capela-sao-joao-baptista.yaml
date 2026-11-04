@@ -145,16 +145,6 @@ lang_review:
     date: '2026-10-31'
     hash: 'c1b42014ba78'
 meanwhile:
-  - scope: ru
-    year: 1748
-    text:
-      ru: "Закладывают Смольный собор в Петербурге."
-    source: "https://ru.wikipedia.org/wiki/Смольный_собор"
-  - scope: en
-    year: 1749
-    text:
-      en: "The Radcliffe Camera, a round library in Oxford, is inaugurated."
-    source: "https://en.wikipedia.org/wiki/Radcliffe_Camera"
   - scope: world
     year: 1742
     text:

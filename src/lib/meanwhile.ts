@@ -1,4 +1,4 @@
-// "Meanwhile" (pt "Entretanto", en "Meanwhile", ru "А в это время"): one or two facts from elsewhere, near the year of a story.
+// "Meanwhile" (pt "Entretanto", en "Meanwhile", ru "А в это время"): one well-known fact from elsewhere, near the year of a story.
 // Pure helpers, no Astro imports: the schema, check:data, the page and the tests all read the rules from here.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
@@ -11,7 +11,7 @@ export type MeanwhileScope = (typeof MEANWHILE_SCOPES)[number];
 export const MEANWHILE_MAX_YEARS = 15;
 /** A line is up to this many words (a warning, not an error). */
 export const MEANWHILE_MAX_WORDS = 15;
-/** At most one line of each scope (ru, en, pt, world), so four in the data; a page shows two of them: its own language, then the world. */
+/** At most one line of each scope (ru, en, pt, world), so four in the data; a page shows one: the line of its own language, else the world line. */
 export const MEANWHILE_MAX_ITEMS = MEANWHILE_SCOPES.length;
 
 export interface MeanwhileItemLike {
@@ -83,14 +83,14 @@ export interface MeanwhileLine {
   source: string;
 }
 
-/** The lines for the page of a language: its own first (if any), then the world. A line without a text in that language is left out. */
+/** The line for the page of a language (at most one, so a list of 0 or 1): its own, else the world one. A line without a text in that language is left out. */
 export function meanwhileFor(items: readonly MeanwhileItemLike[] | undefined, lang: Lang): MeanwhileLine[] {
   const pick = (scope: MeanwhileScope): MeanwhileLine[] =>
     (items ?? [])
       .filter((i) => i.scope === scope)
       .flatMap((i) => (i.text[lang]?.trim() ? [{ scope: i.scope, year: i.year, text: i.text[lang]!, source: i.source }] : []))
       .slice(0, 1);
-  return [...pick(lang), ...pick('world')];
+  return [...pick(lang), ...pick('world')].slice(0, 1);
 }
 
 /** The year in front of a line: "1755"; before the common era "9 BC" / "9 a.C." / "9 до н. э."; the first centuries (under 1000) "AD 8" / "8 d.C." / "8 н. э.". */

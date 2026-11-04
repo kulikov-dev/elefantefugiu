@@ -162,15 +162,3 @@ meanwhile:
     text:
       ru: "Основан Санкт-Петербург."
     source: "https://ru.wikipedia.org/wiki/Санкт-Петербург"
-  - scope: en
-    year: 1712
-    text:
-      en: "Thomas Newcomen builds a steam engine that pumps water out of a mine."
-    source: "https://en.wikipedia.org/wiki/Newcomen_atmospheric_engine"
-  - scope: world
-    year: 1700
-    text:
-      pt: "Num inventário dos Médicis, em Florença, consta um piano de Cristofori."
-      en: "A Medici inventory in Florence lists a piano built by Cristofori."
-      ru: "Во Флоренции в описи Медичи значится фортепиано мастера Кристофори."
-    source: "https://en.wikipedia.org/wiki/Bartolomeo_Cristofori"

@@ -135,11 +135,3 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'd5578da844e0'
-meanwhile:
-  - scope: world
-    year: 8
-    text:
-      pt: "O poeta romano Ovídio conclui as Metamorfoses."
-      en: "The Roman poet Ovid completes the Metamorphoses."
-      ru: "Овидий заканчивает «Метаморфозы»."
-    source: "https://en.wikipedia.org/wiki/Metamorphoses"

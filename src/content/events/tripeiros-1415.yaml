@@ -153,11 +153,6 @@ lang_review:
     date: '2026-10-28'
     hash: 'e1debfae06dd'
 meanwhile:
-  - scope: en
-    year: 1413
-    text:
-      en: "The University of St Andrews is founded in Scotland."
-    source: "https://en.wikipedia.org/wiki/University_of_St_Andrews"
   - scope: world
     year: 1420
     text:

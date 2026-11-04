@@ -170,14 +170,7 @@ meanwhile:
       en: "Thomas Edison’s light bulb burns for more than thirteen hours in a test."
     source: "https://en.wikipedia.org/wiki/Incandescent_light_bulb"
   - scope: pt
-    year: 1881
+    year: 1879
     text:
-      pt: "Machado de Assis publica em livro as Memórias Póstumas de Brás Cubas."
-    source: "https://pt.wikipedia.org/wiki/Mem%C3%B3rias_P%C3%B3stumas_de_Br%C3%A1s_Cubas"
-  - scope: world
-    year: 1880
-    text:
-      pt: "Fica concluída a catedral de Colónia."
-      en: "Cologne Cathedral is finally completed."
-      ru: "Достроен Кёльнский собор."
-    source: "https://en.wikipedia.org/wiki/Cologne_Cathedral"
+      pt: "A lâmpada de Thomas Edison arde mais de treze horas num teste."
+    source: "https://en.wikipedia.org/wiki/Incandescent_light_bulb"

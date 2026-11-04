@@ -158,16 +158,6 @@ lang_review:
     date: '2026-10-31'
     hash: '7786a81daba9'
 meanwhile:
-  - scope: ru
-    year: 1672
-    text:
-      ru: "В Преображенском дворце открывается придворный театр царя Алексея Михайловича."
-    source: "https://ru.wikipedia.org/wiki/Артаксерксово_действо"
-  - scope: en
-    year: 1662
-    text:
-      en: "The Royal Society receives its first royal charter."
-    source: "https://en.wikipedia.org/wiki/Royal_Society"
   - scope: world
     year: 1662
     text:

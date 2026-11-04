@@ -1,6 +1,6 @@
 ---
-// "Meanwhile": up to two facts from elsewhere near the year of the story, after the text and before "More" (src/lib/meanwhile.ts).
-// First the line of the page's own language (Russia, England / the USA, Brazil), then the world. No lines, no block. Works without JS.
+// "Meanwhile": one well-known fact from elsewhere near the year of the story, after the text, before "I liked it" and "More" (src/lib/meanwhile.ts).
+// The line of the page's own language (Russia, England / the USA, Brazil), else the world one. No line, no block. Works without JS.
 import { t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 import { meanwhileYearText, type MeanwhileLine } from '../lib/meanwhile';
@@ -52,11 +52,11 @@ const { lang, lines, textLang } = Astro.props;
     list-style: none;
   }
 
-  /* A row: the year of the event in a column of fixed width (like the year in the feed of an epoch), then the text, a step smaller than the story. */
+  /* A row: the year of the event in a column as wide as the year (like the year in the feed of an epoch), then the text, a step smaller than the story. */
   .meanwhile__list > li {
     display: grid;
-    grid-template-columns: var(--meanwhile-year-col) minmax(0, 1fr);
-    column-gap: var(--space-2);
+    grid-template-columns: max-content 1fr;
+    column-gap: var(--space-3);
     font-size: var(--text-sm);
     font-style: normal;
   }
