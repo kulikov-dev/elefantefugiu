@@ -331,7 +331,8 @@ if (want('nearby')) {
         visible,
       );
       const nearby = links.nearby.map(idOfHref);
-      const pager = links.pager.map(idOfHref);
+      // The line of small links at the foot also has the link to the epoch page (/pt/epoca/...): it is not a story. Any other link that is not a story still fails the suite.
+      const pager = links.pager.filter((href) => !href.startsWith('/pt/epoca/')).map(idOfHref);
       const hidden = [...nearby, ...pager].filter((id) => !shownIn(byId(id), mode));
       if (hidden.length) bad.push(`${e.id}: ${hidden.join(',')}`);
       if (nearby.length > 7) bad.push(`${e.id}: ${nearby.length} nearby`);
