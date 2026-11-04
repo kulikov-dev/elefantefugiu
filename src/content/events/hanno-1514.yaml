@@ -178,3 +178,21 @@ lang_review:
   ru:
     date: '2026-10-27'
     hash: 'bcce831a7ec2'
+meanwhile:
+  - scope: ru
+    year: 1524
+    text:
+      ru: "Основан Новодевичий монастырь в Москве."
+    source: "https://ru.wikipedia.org/wiki/Новодевичий_монастырь"
+  - scope: en
+    year: 1514
+    text:
+      en: "Cardinal Wolsey begins building Hampton Court Palace."
+    source: "https://en.wikipedia.org/wiki/Hampton_Court_Palace"
+  - scope: world
+    year: 1516
+    text:
+      pt: "Thomas More publica a Utopia."
+      en: "Thomas More publishes Utopia."
+      ru: "Томас Мор публикует «Утопию»."
+    source: "https://en.wikipedia.org/wiki/Utopia_(book)"

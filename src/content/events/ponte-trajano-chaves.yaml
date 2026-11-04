@@ -156,3 +156,11 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '246022c1d6b0'
+meanwhile:
+  - scope: world
+    year: 105
+    text:
+      pt: "Cai Lun apresenta o papel ao imperador da China."
+      en: "Cai Lun presents paper to the Chinese emperor."
+      ru: "Цай Лунь представляет китайскому императору бумагу."
+    source: "https://en.wikipedia.org/wiki/Cai_Lun"

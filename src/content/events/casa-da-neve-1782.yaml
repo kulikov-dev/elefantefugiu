@@ -217,3 +217,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'fb9e16445769'
+meanwhile:
+  - scope: ru
+    year: 1782
+    text:
+      ru: "В Петербурге открывают памятник Петру I, «Медный всадник»."
+    source: "https://ru.wikipedia.org/wiki/Медный_всадник_(памятник)"
+  - scope: en
+    year: 1782
+    text:
+      en: "The United States adopts its Great Seal."
+    source: "https://en.wikipedia.org/wiki/Great_Seal_of_the_United_States"
+  - scope: pt
+    year: 1783
+    text:
+      pt: "Inaugura-se no Rio de Janeiro o Passeio Público."
+    source: "https://en.wikipedia.org/wiki/Passeio_P%C3%BAblico_(Rio_de_Janeiro)"
+  - scope: world
+    year: 1782
+    text:
+      pt: "Estreia em Viena a ópera de Mozart O Rapto do Serralho."
+      en: "Mozart’s opera The Abduction from the Seraglio premieres in Vienna."
+      ru: "В Вене ставят оперу Моцарта «Похищение из сераля»."
+    source: "https://en.wikipedia.org/wiki/The_Abduction_from_the_Seraglio"

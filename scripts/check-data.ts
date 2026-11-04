@@ -7,6 +7,7 @@ import type { ZodType } from 'astro/zod';
 import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
 import { needsAttribution } from '../src/lib/pictures';
 import { firstSentence } from '../src/lib/events';
+import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
 import { epochSchema, eventSchema, featuredSchema, threadSchema } from '../src/data/schemas';
 import { pending } from './lib/lang-review';
 import { isLive } from '../src/lib/publication.mjs';
@@ -256,6 +257,11 @@ for (const { item: ev, file, stem } of events) {
   // Only MVP epochs get a page and a feed; a published card in another epoch could not be reached from anywhere.
   if (ready && epochById.get(ev.epoch)?.mvp === false) {
     report('error', file, `epoch "${ev.epoch}" is not part of the MVP (mvp: false) and has no page, so this published card has no feed`, 'epoch');
+  }
+
+  // "Meanwhile": the errors are in the schema (src/lib/meanwhile.ts); here the warnings (more than 15 words, an exclamation mark).
+  for (const p of meanwhileProblems(ev.meanwhile ?? [], storyStartYear(ev.year))) {
+    if (p.level === 'warn') report('warn', file, p.message, `meanwhile[${p.index}]`);
   }
 
   // slugs (Russian: the own one when the event is ready in Russian, else the English one is used under /ru/)

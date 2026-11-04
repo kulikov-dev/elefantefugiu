@@ -148,3 +148,26 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: 'df20d2f0f659'
+meanwhile:
+  - scope: ru
+    year: 1811
+    text:
+      ru: "В Петербурге освящают Казанский собор."
+    source: "https://ru.wikipedia.org/wiki/Казанский_собор_(Санкт-Петербург)"
+  - scope: en
+    year: 1817
+    text:
+      en: "Construction of the Erie Canal begins in New York."
+    source: "https://en.wikipedia.org/wiki/Erie_Canal"
+  - scope: pt
+    year: 1813
+    text:
+      pt: "Inaugura-se no Rio de Janeiro o Real Teatro de São João."
+    source: "https://en.wikipedia.org/wiki/Teatro_Jo%C3%A3o_Caetano"
+  - scope: world
+    year: 1812
+    text:
+      pt: "Os irmãos Grimm publicam o primeiro volume dos seus contos."
+      en: "The Brothers Grimm publish the first volume of their fairy tales."
+      ru: "Братья Гримм издают первый том сказок."
+    source: "https://en.wikipedia.org/wiki/Grimms%27_Fairy_Tales"

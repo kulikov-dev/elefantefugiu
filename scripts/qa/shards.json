@@ -36,7 +36,8 @@
   "transitions": 20,
   "newmarks": 150,
   "likes": 30,
-  "start": 20
+  "start": 20,
+  "meanwhile": 40
  },
  "shards": [
   [
@@ -81,7 +82,8 @@
    "family-variant",
    "ru-variant",
    "likes",
-   "start"
+   "start",
+   "meanwhile"
   ]
  ]
 }

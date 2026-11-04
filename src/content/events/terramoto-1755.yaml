@@ -179,3 +179,26 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: '27581a882949'
+meanwhile:
+  - scope: ru
+    year: 1755
+    text:
+      ru: "В Москве основан университет."
+    source: "https://ru.wikipedia.org/wiki/Московский_государственный_университет"
+  - scope: en
+    year: 1753
+    text:
+      en: "The British Museum is founded by an act of Parliament."
+    source: "https://en.wikipedia.org/wiki/British_Museum"
+  - scope: pt
+    year: 1757
+    text:
+      pt: "Começa a construção do santuário do Bom Jesus de Matosinhos, em Congonhas."
+    source: "https://pt.wikipedia.org/wiki/Santu%C3%A1rio_do_Bom_Jesus_de_Matosinhos"
+  - scope: world
+    year: 1755
+    text:
+      pt: "Samuel Johnson publica o seu Dicionário da Língua Inglesa."
+      en: "Samuel Johnson publishes his Dictionary of the English Language."
+      ru: "Сэмюэл Джонсон издаёт «Словарь английского языка»."
+    source: "https://en.wikipedia.org/wiki/A_Dictionary_of_the_English_Language"

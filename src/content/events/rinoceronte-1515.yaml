@@ -246,3 +246,16 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: '712ae30db0b9'
+meanwhile:
+  - scope: en
+    year: 1515
+    text:
+      en: "King’s College Chapel in Cambridge is completed."
+    source: "https://en.wikipedia.org/wiki/King%27s_College_Chapel,_Cambridge"
+  - scope: world
+    year: 1512
+    text:
+      pt: "É mostrado ao público o teto da Capela Sistina, pintado por Michelangelo."
+      en: "Michelangelo’s Sistine Chapel ceiling is unveiled."
+      ru: "Открывают роспись потолка Сикстинской капеллы работы Микеланджело."
+    source: "https://en.wikipedia.org/wiki/Sistine_Chapel_ceiling"

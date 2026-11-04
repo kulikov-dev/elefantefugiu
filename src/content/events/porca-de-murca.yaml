@@ -157,3 +157,11 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '102d675e521b'
+meanwhile:
+  - scope: world
+    year: -387
+    text:
+      pt: "Platão funda a Academia, em Atenas."
+      en: "Plato founds his Academy in Athens."
+      ru: "В Афинах Платон основывает Академию."
+    source: "https://en.wikipedia.org/wiki/Platonic_Academy"

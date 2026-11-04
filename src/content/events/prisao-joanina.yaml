@@ -130,3 +130,16 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'bcfcab7f8050'
+meanwhile:
+  - scope: en
+    year: 1719
+    text:
+      en: "Daniel Defoe publishes Robinson Crusoe."
+    source: "https://en.wikipedia.org/wiki/Robinson_Crusoe"
+  - scope: world
+    year: 1721
+    text:
+      pt: "Bach dedica os Concertos de Brandeburgo a um margrave."
+      en: "Bach dedicates his Brandenburg Concertos to a margrave."
+      ru: "Бах посвящает маркграфу свои Бранденбургские концерты."
+    source: "https://en.wikipedia.org/wiki/Brandenburg_Concertos"

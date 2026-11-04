@@ -63,7 +63,13 @@ function stories(): TextItem[] {
       const data = readYaml(join(dir, f));
       // Published and real only: no drafts, no test cards.
       if (data.status !== 'ready' || data.placeholder) return [];
-      return fromYaml(`event/${data.id}`, `src/content/events/${f}`, data, data.ru_ready ? LANG_LIST : ['pt', 'en'], new Set(['lang_review']));
+      const langs = data.ru_ready ? LANG_LIST : (['pt', 'en'] as const);
+      const file = `src/content/events/${f}`;
+      // The "Meanwhile" lines are a unit of their own (`meanwhile/<id>`): adding them must not turn the marks of the story into "changed after reading".
+      return [
+        ...fromYaml(`event/${data.id}`, file, data, langs, new Set(['lang_review', 'meanwhile'])),
+        ...fromYaml(`meanwhile/${data.id}`, file, { meanwhile: data.meanwhile ?? [] }, langs),
+      ];
     });
 }
 

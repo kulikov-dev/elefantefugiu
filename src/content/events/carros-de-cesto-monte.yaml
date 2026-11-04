@@ -158,3 +158,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '4d679c8c109d'
+meanwhile:
+  - scope: ru
+    year: 1852
+    text:
+      ru: "В «Современнике» печатают первую повесть Толстого, «Детство»."
+    source: "https://ru.wikipedia.org/wiki/Детство_(Толстой)"
+  - scope: en
+    year: 1851
+    text:
+      en: "Herman Melville publishes Moby-Dick."
+    source: "https://en.wikipedia.org/wiki/Moby-Dick"
+  - scope: pt
+    year: 1854
+    text:
+      pt: "Inaugura-se a primeira linha de caminho de ferro do Brasil, no Rio de Janeiro."
+    source: "https://pt.wikipedia.org/wiki/Estrada_de_Ferro_Mau%C3%A1"
+  - scope: world
+    year: 1853
+    text:
+      pt: "Estreia em Veneza a ópera La traviata, de Verdi."
+      en: "Verdi’s opera La traviata premieres in Venice."
+      ru: "В Венеции впервые ставят оперу Верди «Травиата»."
+    source: "https://en.wikipedia.org/wiki/La_traviata"

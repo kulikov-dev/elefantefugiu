@@ -162,3 +162,26 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: 'a58940401726'
+meanwhile:
+  - scope: ru
+    year: 1756
+    text:
+      ru: "В Царском Селе завершена перестройка Екатерининского дворца."
+    source: "https://ru.wikipedia.org/wiki/Екатерининский_дворец"
+  - scope: en
+    year: 1757
+    text:
+      en: "Edmund Burke publishes his essay on the sublime and the beautiful."
+    source: "https://en.wikipedia.org/wiki/Edmund_Burke"
+  - scope: pt
+    year: 1750
+    text:
+      pt: "Inauguram-se no Rio de Janeiro os Arcos da Lapa."
+    source: "https://pt.wikipedia.org/wiki/Arcos_da_Lapa"
+  - scope: world
+    year: 1756
+    text:
+      pt: "Nasce em Salzburgo Wolfgang Amadeus Mozart."
+      en: "Wolfgang Amadeus Mozart is born in Salzburg."
+      ru: "В Зальцбурге родился Вольфганг Амадей Моцарт."
+    source: "https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart"

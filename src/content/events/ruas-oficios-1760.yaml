@@ -139,3 +139,21 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'f1e3b534059d'
+meanwhile:
+  - scope: ru
+    year: 1762
+    text:
+      ru: "Достроен Зимний дворец в Петербурге."
+    source: "https://ru.wikipedia.org/wiki/Зимний_дворец"
+  - scope: en
+    year: 1759
+    text:
+      en: "Josiah Wedgwood founds his pottery business."
+    source: "https://en.wikipedia.org/wiki/Josiah_Wedgwood"
+  - scope: world
+    year: 1760
+    text:
+      pt: "Nasce o artista japonês Hokusai."
+      en: "The Japanese artist Hokusai is born."
+      ru: "Родился японский художник Хокусай."
+    source: "https://en.wikipedia.org/wiki/Hokusai"

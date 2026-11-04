@@ -138,3 +138,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'ea56294a173b'
+meanwhile:
+  - scope: ru
+    year: 1909
+    text:
+      ru: "В Париже дают первые «Русские сезоны» Сергея Дягилева."
+    source: "https://ru.wikipedia.org/wiki/Русские_сезоны"
+  - scope: en
+    year: 1908
+    text:
+      en: "Ford introduces the Model T."
+    source: "https://en.wikipedia.org/wiki/Ford_Model_T"
+  - scope: pt
+    year: 1906
+    text:
+      pt: "Santos-Dumont voa em Paris com o 14-bis, num voo oficial."
+    source: "https://pt.wikipedia.org/wiki/14-bis"
+  - scope: world
+    year: 1905
+    text:
+      pt: "Einstein publica a teoria da relatividade restrita."
+      en: "Einstein publishes his theory of special relativity."
+      ru: "Эйнштейн публикует специальную теорию относительности."
+    source: "https://en.wikipedia.org/wiki/Annus_mirabilis_papers"

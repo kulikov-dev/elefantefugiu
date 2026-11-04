@@ -47,6 +47,8 @@ const holes = (s) => [...String(s).matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort
 for (const key of base) {
   if (!dict.en.has(key) || !dict.ru.has(key)) continue;
   for (const lang of ['en', 'ru']) {
+    // The Russian "one" form may say "год" instead of "1 год" ("За год до этого"): it has no {n}.
+    if (lang === 'ru' && key.endsWith('_one') && holes(dict.ru.get(key)) === '' && holes(dict.pt.get(key)) === 'n') continue;
     if (holes(dict.pt.get(key)) !== holes(dict[lang].get(key))) errors.push(`placeholders of ${key} differ in ${lang}.json (${holes(dict[lang].get(key))}) and pt.json (${holes(dict.pt.get(key))})`);
   }
 }

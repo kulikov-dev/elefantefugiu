@@ -157,3 +157,21 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '7786a81daba9'
+meanwhile:
+  - scope: ru
+    year: 1672
+    text:
+      ru: "В Преображенском дворце открывается придворный театр царя Алексея Михайловича."
+    source: "https://ru.wikipedia.org/wiki/Артаксерксово_действо"
+  - scope: en
+    year: 1662
+    text:
+      en: "The Royal Society receives its first royal charter."
+    source: "https://en.wikipedia.org/wiki/Royal_Society"
+  - scope: world
+    year: 1662
+    text:
+      pt: "Paris inaugura o primeiro transporte público urbano: carruagens num percurso fixo."
+      en: "Paris launches the first city public transport: carriages on a fixed route."
+      ru: "В Париже запускают первый городской общественный транспорт: кареты по маршруту."
+    source: "https://fr.wikipedia.org/wiki/Carrosses_%C3%A0_cinq_sols"

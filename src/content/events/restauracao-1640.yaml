@@ -152,3 +152,21 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'b408c01bc932'
+meanwhile:
+  - scope: ru
+    year: 1639
+    text:
+      ru: "Отряд Ивана Москвитина выходит к Охотскому морю."
+    source: "https://ru.wikipedia.org/wiki/Москвитин,_Иван_Юрьевич"
+  - scope: en
+    year: 1636
+    text:
+      en: "Harvard College is founded in Massachusetts."
+    source: "https://en.wikipedia.org/wiki/Harvard_University"
+  - scope: world
+    year: 1642
+    text:
+      pt: "Rembrandt conclui A Ronda da Noite."
+      en: "Rembrandt finishes The Night Watch."
+      ru: "Рембрандт заканчивает «Ночной дозор»."
+    source: "https://en.wikipedia.org/wiki/The_Night_Watch"

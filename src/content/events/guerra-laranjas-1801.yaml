@@ -212,3 +212,21 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: 'fb147f73ad0b'
+meanwhile:
+  - scope: ru
+    year: 1804
+    text:
+      ru: "Основан Казанский университет."
+    source: "https://ru.wikipedia.org/wiki/Казанский_университет"
+  - scope: en
+    year: 1800
+    text:
+      en: "The Library of Congress is established."
+    source: "https://en.wikipedia.org/wiki/Library_of_Congress"
+  - scope: world
+    year: 1801
+    text:
+      pt: "Estreia em Viena o oratório As Estações, de Haydn."
+      en: "Haydn’s oratorio The Seasons premieres in Vienna."
+      ru: "В Вене впервые звучит оратория Гайдна «Времена года»."
+    source: "https://en.wikipedia.org/wiki/The_Seasons_(Haydn)"

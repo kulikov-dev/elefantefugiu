@@ -155,3 +155,11 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'b0c422c8b82b'
+meanwhile:
+  - scope: world
+    year: 80
+    text:
+      pt: "Inaugura-se o Coliseu, em Roma."
+      en: "The Colosseum opens in Rome."
+      ru: "В Риме открывают Колизей."
+    source: "https://en.wikipedia.org/wiki/Colosseum"

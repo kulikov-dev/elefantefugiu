@@ -138,3 +138,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'e9770a5b366e'
+meanwhile:
+  - scope: ru
+    year: 1904
+    text:
+      ru: "В Московском художественном театре ставят «Вишнёвый сад» Чехова."
+    source: "https://ru.wikipedia.org/wiki/Вишнёвый_сад"
+  - scope: en
+    year: 1902
+    text:
+      en: "The Flatiron Building is completed in New York."
+    source: "https://en.wikipedia.org/wiki/Flatiron_Building"
+  - scope: pt
+    year: 1905
+    text:
+      pt: "Abre ao trânsito a Avenida Central, no Rio de Janeiro."
+    source: "https://pt.wikipedia.org/wiki/Avenida_Rio_Branco_(Rio_de_Janeiro)"
+  - scope: world
+    year: 1903
+    text:
+      pt: "Os irmãos Wright realizam o primeiro voo de avião com motor."
+      en: "The Wright brothers make the first powered airplane flight."
+      ru: "Братья Райт совершают первый полёт на самолёте с двигателем."
+    source: "https://en.wikipedia.org/wiki/Wright_brothers"

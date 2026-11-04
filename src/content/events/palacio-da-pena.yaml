@@ -131,3 +131,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '3383b982fcbc'
+meanwhile:
+  - scope: ru
+    year: 1839
+    text:
+      ru: "Открывается Пулковская обсерватория."
+    source: "https://ru.wikipedia.org/wiki/Пулковская_обсерватория"
+  - scope: en
+    year: 1838
+    text:
+      en: "Samuel Morse publicly demonstrates his telegraph in New Jersey."
+    source: "https://en.wikipedia.org/wiki/Samuel_Morse"
+  - scope: pt
+    year: 1838
+    text:
+      pt: "Funda-se no Rio de Janeiro o Instituto Histórico e Geográfico Brasileiro."
+    source: "https://pt.wikipedia.org/wiki/Instituto_Hist%C3%B3rico_e_Geogr%C3%A1fico_Brasileiro"
+  - scope: world
+    year: 1839
+    text:
+      pt: "A França apresenta o daguerreótipo, o primeiro processo prático de fotografia."
+      en: "France presents the daguerreotype, the first practical photography process."
+      ru: "Во Франции объявляют о дагеротипии, первом способе фотографии."
+    source: "https://en.wikipedia.org/wiki/Daguerreotype"

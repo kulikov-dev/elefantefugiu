@@ -129,3 +129,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'f55f0488fe68'
+meanwhile:
+  - scope: ru
+    year: 1586
+    text:
+      ru: "Мастер Андрей Чохов отливает Царь-пушку."
+    source: "https://ru.wikipedia.org/wiki/Царь-пушка"
+  - scope: en
+    year: 1599
+    text:
+      en: "The Globe Theatre opens in London."
+    source: "https://en.wikipedia.org/wiki/Globe_Theatre"
+  - scope: pt
+    year: 1585
+    text:
+      pt: "Funda-se a cidade de João Pessoa, na Paraíba."
+    source: "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pessoa,_Para%C3%ADba"
+  - scope: world
+    year: 1583
+    text:
+      pt: "Começa a construção do castelo de Osaka, no Japão."
+      en: "Construction begins on Osaka Castle in Japan."
+      ru: "В Японии начинают строить замок Осака."
+    source: "https://en.wikipedia.org/wiki/Osaka_Castle"

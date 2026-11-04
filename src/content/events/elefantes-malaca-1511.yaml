@@ -200,3 +200,21 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: 'f0b83bca7cf1'
+meanwhile:
+  - scope: ru
+    year: 1508
+    text:
+      ru: "В Кремле достроена колокольня Ивана Великого."
+    source: "https://ru.wikipedia.org/wiki/Колокольня_Ивана_Великого"
+  - scope: en
+    year: 1509
+    text:
+      en: "John Colet founds St. Paul’s School in London."
+    source: "https://en.wikipedia.org/wiki/St_Paul%27s_School,_London"
+  - scope: world
+    year: 1511
+    text:
+      pt: "É impresso o Elogio da Loucura, de Erasmo de Roterdão."
+      en: "Erasmus’s In Praise of Folly is printed."
+      ru: "Выходит в печать «Похвала глупости» Эразма Роттердамского."
+    source: "https://en.wikipedia.org/wiki/In_Praise_of_Folly"

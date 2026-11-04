@@ -447,6 +447,12 @@
       "why": "proper name: Dona Maria II National Theatre"
     },
     {
+      "lang": "en",
+      "unit": "meanwhile/falsos-sebastiao",
+      "match": "Theatre",
+      "why": "proper name: Globe Theatre"
+    },
+    {
       "lang": "ru",
       "unit": "event/tripeiros-1415",
       "match": "Ваш",

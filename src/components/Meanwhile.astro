@@ -1,0 +1,71 @@
+---
+// "Meanwhile": up to two facts from elsewhere near the year of the story, after the text and before "More" (src/lib/meanwhile.ts).
+// First the line of the page's own language (Russia, England / the USA, Brazil), then the world. No lines, no block. Works without JS.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import { meanwhileLabel, yearDelta, type MeanwhileLine } from '../lib/meanwhile';
+
+interface Props {
+  lang: Lang;
+  lines: MeanwhileLine[];
+  /** The first year of the story: the captions count from it. */
+  storyYear: number;
+  /** Language tag of the texts when it differs from the page. */
+  textLang?: string;
+}
+
+const { lang, lines, storyYear, textLang } = Astro.props;
+---
+{
+  lines.length > 0 && (
+    <section class="meanwhile" aria-labelledby="meanwhile-title" data-meanwhile>
+      <h2 class="meanwhile__title" id="meanwhile-title">{t(lang, 'card.meanwhile_title')}</h2>
+      <ul class="meanwhile__list">
+        {
+          lines.map((line) => (
+            <li data-scope={line.scope}>
+              <span class="meanwhile__when">{meanwhileLabel(lang, yearDelta(line.year, storyYear))}</span>
+              <span class="meanwhile__text" lang={textLang}>{line.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  )
+}
+
+<style>
+  .meanwhile {
+    max-width: var(--measure);
+  }
+
+  /* A service label, small capitals like the other labels of the card, not a heading of the same weight as "The story". */
+  .meanwhile .meanwhile__title {
+    color: var(--color-ink-muted);
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+  }
+
+  .meanwhile__list {
+    margin-block-start: var(--space-1);
+    list-style: none;
+  }
+
+  .meanwhile__list > li + li {
+    margin-block-start: var(--space-2);
+  }
+
+  .meanwhile__when {
+    margin-inline-end: var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-strong);
+  }
+
+  .meanwhile__text {
+    overflow-wrap: anywhere;
+  }
+</style>

@@ -31,6 +31,9 @@ const { lang, hook, textLang, hasAside = false, storyId } = Astro.props;
         <!-- Right under the text, before "More": the small "I liked it" (src/components/LikeButton.astro), on the right edge of the text column. -->
         <div class="story__like"><slot name="like" /></div>
       </section>
+
+      <!-- After the story, before "More": the small block "Meanwhile" (src/components/Meanwhile.astro); empty for a story without lines. -->
+      <slot name="meanwhile" />
     </div>
     {
       hasAside && (

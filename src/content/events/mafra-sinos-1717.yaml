@@ -145,3 +145,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'a23c96961bfe'
+meanwhile:
+  - scope: ru
+    year: 1724
+    text:
+      ru: "В Петербурге основана Академия наук."
+    source: "https://ru.wikipedia.org/wiki/Российская_академия_наук"
+  - scope: en
+    year: 1726
+    text:
+      en: "Jonathan Swift publishes Gulliver’s Travels."
+    source: "https://en.wikipedia.org/wiki/Gulliver%27s_Travels"
+  - scope: pt
+    year: 1727
+    text:
+      pt: "Francisco de Melo Palheta traz café para o Pará."
+    source: "https://pt.wikipedia.org/wiki/Francisco_de_Melo_Palheta"
+  - scope: world
+    year: 1717
+    text:
+      pt: "Toca-se pela primeira vez, no Tamisa, a Música Aquática de Handel."
+      en: "Handel’s Water Music is first played on the Thames."
+      ru: "Гендель впервые исполняет «Музыку на воде» на Темзе."
+    source: "https://en.wikipedia.org/wiki/Water_Music"

@@ -127,3 +127,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'e8321f1e5740'
+meanwhile:
+  - scope: ru
+    year: 1873
+    text:
+      ru: "Илья Репин заканчивает картину «Бурлаки на Волге»."
+    source: "https://ru.wikipedia.org/wiki/Бурлаки_на_Волге"
+  - scope: en
+    year: 1883
+    text:
+      en: "The Brooklyn Bridge opens in New York."
+    source: "https://en.wikipedia.org/wiki/Brooklyn_Bridge"
+  - scope: pt
+    year: 1884
+    text:
+      pt: "Inaugura-se a linha férrea do Corcovado, no Rio de Janeiro."
+    source: "https://pt.wikipedia.org/wiki/Estrada_de_Ferro_Corcovado"
+  - scope: world
+    year: 1882
+    text:
+      pt: "Abre o túnel ferroviário de São Gotardo, através dos Alpes."
+      en: "The Gotthard railway tunnel through the Alps opens."
+      ru: "Открывается Сен-Готардский железнодорожный тоннель через Альпы."
+    source: "https://en.wikipedia.org/wiki/Gotthard_Rail_Tunnel"

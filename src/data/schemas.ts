@@ -2,6 +2,7 @@
 // Shared by src/content.config.ts (Astro) and scripts/check-data.ts (readable checks).
 import { z } from 'astro/zod';
 import { missingRu } from '../lib/localize';
+import { MEANWHILE_MAX_ITEMS, MEANWHILE_SCOPES, meanwhileProblems, storyStartYear } from '../lib/meanwhile';
 
 /** Text in the site languages. pt and en are always there; ru is optional (an event needs it only when ru_ready is true). */
 export const text = z.strictObject({ pt: z.string(), en: z.string(), ru: z.string().optional() });
@@ -116,6 +117,15 @@ const isoDate = z.preprocess(
 /** "Read by a language editor": the day and the hash of the text of one language at that time (scripts/lang-mark.ts writes it, npm run lang:pending reads it). */
 const langMark = z.strictObject({ date: isoDate, hash: z.string() });
 
+/** "Meanwhile": a fact from elsewhere near the year of the story (src/lib/meanwhile.ts holds the rules; check:data adds the word-count warnings). */
+const meanwhileItem = z.strictObject({
+  scope: z.enum(MEANWHILE_SCOPES),
+  year: z.number().int(),
+  /** Scope "world": all three languages; any other scope: only its own language. */
+  text: z.strictObject({ pt: z.string().optional(), en: z.string().optional(), ru: z.string().optional() }),
+  source: z.string(),
+});
+
 export const eventSchema = z
   .strictObject({
   id: z.string(),
@@ -168,6 +178,8 @@ export const eventSchema = z
   sensitive: z.boolean(),
   hook: text,
   story: text,
+  /** Up to four lines (one per scope); a page shows two after the story: the one for its language (scope pt / en / ru), then the world. Optional. */
+  meanwhile: z.array(meanwhileItem).max(MEANWHILE_MAX_ITEMS).optional(),
   more: text,
   sources: z.array(source),
   image: picture.optional(),
@@ -194,6 +206,9 @@ export const eventSchema = z
       const [month, day] = event.day.split('-').map(Number) as [number, number];
       if (typeof event.year !== 'number' || event.year < 1) ctx.addIssue({ code: 'custom', path: ['day'], message: 'day is only for a single year after 0 (not a period, not before the common era)' });
       else if (new Date(Date.UTC(2024, month - 1, day)).getUTCMonth() !== month - 1) ctx.addIssue({ code: 'custom', path: ['day'], message: 'there is no such day in the calendar' });
+    }
+    for (const p of meanwhileProblems(event.meanwhile ?? [], storyStartYear(event.year))) {
+      if (p.level === 'error') ctx.addIssue({ code: 'custom', path: ['meanwhile', p.index], message: p.message });
     }
     // Russian is required only for an event that says it is ready for it: then every text object needs a ru text.
     if (!event.ru_ready) return;

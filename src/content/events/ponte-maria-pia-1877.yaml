@@ -118,3 +118,26 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '1e2a30a7c569'
+meanwhile:
+  - scope: ru
+    year: 1877
+    text:
+      ru: "В Большом театре впервые ставят «Лебединое озеро» Чайковского."
+    source: "https://ru.wikipedia.org/wiki/Лебединое_озеро"
+  - scope: en
+    year: 1872
+    text:
+      en: "Yellowstone becomes the first national park."
+    source: "https://en.wikipedia.org/wiki/Yellowstone_National_Park"
+  - scope: pt
+    year: 1873
+    text:
+      pt: "Inaugura-se em Salvador o Elevador Lacerda."
+    source: "https://pt.wikipedia.org/wiki/Elevador_Lacerda"
+  - scope: world
+    year: 1877
+    text:
+      pt: "Edison inventa o fonógrafo."
+      en: "Thomas Edison invents the phonograph."
+      ru: "Эдисон изобретает фонограф."
+    source: "https://en.wikipedia.org/wiki/Phonograph"
