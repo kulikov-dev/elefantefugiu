@@ -6,7 +6,7 @@
 // The rules are written out here, independent of src/lib/family.ts:
 //   off: everything;  all: min_age all and not heavy;  12: min_age all or 12 and not heavy.
 import { launchBrowser } from './browser.mjs';
-import { epochs, featuredIds, fixture, isOnMainland, need, pt, real, threads as threadsData, ui } from './data.mjs';
+import { epochs, fixture, isOnMainland, need, pt, real, threads as threadsData, ui } from './data.mjs';
 
 const VARIANT = process.argv[2] === 'variant';
 const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
@@ -252,9 +252,17 @@ if (want('lists')) {
     // home
     const home = await newPage({ mode });
     await home.goto(`${base}/pt/`, { waitUntil: 'load' });
-    const showcase = (await shownCards(home, '.showcase > li')).sort();
-    const featured = featuredIds.filter((id) => events.some((c) => c.id === id));
-    ok(`mode ${mode}, home: showcase shows the featured cards the mode allows`, same(showcase, featured.filter((id) => shownIn(byId(id), mode)).sort()), showcase.join(','));
+    // The showcase is a set of the day (src/lib/start-set.ts): which stories it holds is not in the data, but it holds as many as the mode leaves
+    // (up to three, never a heavy topic from the rotation), each once, and every one of them is allowed by the mode. The script swaps the built set
+    // after its data file has come, so wait for that.
+    const wantCount = Math.min(3, events.filter((e) => !e.sensitive && shownIn(e, mode)).length);
+    let showcase = [];
+    for (let i = 0; i < 24; i += 1) {
+      showcase = (await shownCards(home, '.showcase > li')).sort();
+      if (showcase.length === wantCount && showcase.every((id) => shownIn(byId(id), mode))) break;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+    ok(`mode ${mode}, home: showcase shows ${wantCount} different stories the mode allows`, showcase.length === wantCount && new Set(showcase).size === wantCount && showcase.every((id) => shownIn(byId(id), mode)), showcase.join(','));
     const tiles = await home.evaluate((vis) => {
       const isVisible = eval(vis);
       return [...document.querySelectorAll('li.timeline__item--ready')].map((li) => [li.querySelector('a').getAttribute('href').split('/').filter(Boolean).pop(), Number([...li.querySelectorAll('.timeline__count .fv')].filter(isVisible).map((s) => s.textContent.match(/\d+/)[0])[0])]);
