@@ -1,9 +1,9 @@
-# MVP epochs (4, 6, 8). `placeholder` lists the fields that are still provisional: Avis and Pombal have final names, theme phrases and
-# colours and wait only for their preview picture (fallback_image); Estado Novo has no page yet and all three are provisional.
-# Epochs outside the MVP (0, 2, 3, 9, and any other without a story) come from docs/design.md section 4.1. Epoch 0 "Before Portugal" has
-# order 0 so that it stands first without renumbering the others: `order` is only a sort key. They have no page yet:
+# Epochs with `mvp: true` and a published story are live: 1, 4, 5, 6, 7 (as of 2026-11-04). Estado Novo (8) is `mvp: true` too but has only
+# draft test cards, so it shows as "Coming soon"; its `placeholder` lists the fields that are still provisional (theme, style, fallback_image).
+# Epochs with `mvp: false` (0, 2, 3, 9) come from docs/design.md section 4.1. Epoch 0 "Before Portugal" has
+# order 0 so that it stands first without renumbering the others: `order` is only a sort key. Epochs without a story have no page yet:
 # they only feed the "Coming soon" tiles on the home page and the "Em breve" neighbours.
-# Names, slugs and years_label of those six are real data (placeholder: []), but the Portuguese
+# Names, slugs and years_label of those are real data (placeholder: []), but the Portuguese
 # and English wording is still to be checked by a native speaker.
 - id: antes-de-portugal
   slug:

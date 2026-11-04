@@ -1,7 +1,7 @@
 # The main browser suites of scripts/qa on every push to main and on every pull request: a few minutes, no variant build.
 # The list covers: home, epoch and thread pages (listings), the static pages, the Continue button and the QR address (pages), a story page
 # with its "Bridge to today" block (bridge), the map (map-basic), the age button (family-controls), the service pages and the 404 page in every
-# language (service). The full set (all 32 suites, the variant build, the mascot) is qa-full.yml.
+# language (service). The full set (all suites of scripts/qa/suites.mjs, the variant build, the mascot) is qa-full.yml.
 name: QA smoke
 
 on:

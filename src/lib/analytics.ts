@@ -20,7 +20,7 @@ export function analyticsEnabled(site: string): boolean {
 export const OLD_DOMAIN = 'kulikov-dev.github.io';
 
 /**
- * Runs before count.js. Only page views are counted (no click events). The referrer (count.js sends it as `r`) is told in two cases only:
+ * Runs before count.js. Page views and the visit source are counted; the only event is "I liked it" (src/lib/like.ts). The referrer (count.js sends it as `r`) is told in two cases only:
  * the address has ?src=qr (or ig, reddit, ...) or ?utm_source=... as a synonym (src wins when both are there), and that name is sent;
  * or the reader came from another site, and then the referrer as it is. A visit with no source and a move inside the site send no referrer,
  * so the site does not show up as its own source; the old address of the site (kulikov-dev.github.io) is told as the one name "old-domain".
