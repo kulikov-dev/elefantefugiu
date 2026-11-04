@@ -1,6 +1,7 @@
 ---
 import { pagePath, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
+import { TELEGRAM_TEXT, TELEGRAM_URL } from '../lib/social';
 
 const CONTENT_LICENSE = { pt: 'https://creativecommons.org/licenses/by-nc/4.0/deed.pt', en: 'https://creativecommons.org/licenses/by-nc/4.0/', ru: 'https://creativecommons.org/licenses/by-nc/4.0/deed.ru' } as const;
 const CODE_LICENSE = 'https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE';
@@ -21,13 +22,15 @@ const links = [
   { label: t(lang, 'footer.legal'), href: pagePath(lang, 'legal') },
   // The feed of the stories in this language (src/pages/[lang]/rss.xml.ts); the word is the same in every language.
   { label: 'RSS', href: withBase(`${lang}/rss.xml`) },
+  // The Telegram channel is in Russian only: its link is on the Russian pages and nowhere else (scripts/check-telegram.mjs).
+  ...(lang === 'ru' ? [{ label: TELEGRAM_TEXT.footer, href: TELEGRAM_URL, external: true }] : []),
 ];
 ---
 <footer class="site-footer">
   <div class="container">
     <nav aria-label={t(lang, 'a11y.footer_nav')}>
       <ul class="site-footer__links">
-        {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        {links.map((link) => <li><a href={link.href} rel={'external' in link ? 'noopener' : undefined}>{link.label}</a></li>)}
       </ul>
     </nav>
     <p>

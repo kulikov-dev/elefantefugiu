@@ -17,6 +17,7 @@ import RelatedList from '../components/RelatedList.astro';
 import ReportLink from '../components/ReportLink.astro';
 import ShareButton from '../components/ShareButton.astro';
 import LikeButton from '../components/LikeButton.astro';
+import TelegramBlock from '../components/TelegramBlock.astro';
 import SourceList from '../components/SourceList.astro';
 import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
@@ -281,6 +282,9 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         </div>
       ))
     }
+
+    {/* The channel is in Russian: the invitation is on the Russian pages only. */}
+    {lang === 'ru' && <TelegramBlock lang={lang} />}
     </div>
   </article>
 </BaseLayout>
