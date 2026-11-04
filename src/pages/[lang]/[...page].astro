@@ -2,6 +2,7 @@
 import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import HomeView from '../../views/HomeView.astro';
 import ReportView from '../../views/ReportView.astro';
+import ShareView from '../../views/ShareView.astro';
 import StaticView from '../../views/StaticView.astro';
 import SurpriseView from '../../views/SurpriseView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -33,6 +34,8 @@ const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
     <SurpriseView lang={lang} />
   ) : pageKey === 'report' ? (
     <ReportView lang={lang} />
+  ) : pageKey === 'share' ? (
+    <ShareView lang={lang} />
   ) : pageKey === 'about' || pageKey === 'method' || pageKey === 'legal' ? (
     <StaticView lang={lang} pageKey={pageKey} />
   ) : (

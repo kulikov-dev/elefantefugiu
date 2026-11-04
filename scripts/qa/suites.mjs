@@ -27,7 +27,7 @@ export const SUITES = [
   { name: 'epoch-page', script: 'epochpage.mjs', about: 'epoch page: years on the scale, equal compact cards, view switch from 9 stories, active card, more eras list' },
   { name: 'map-tools', script: 'mapnear.mjs', args: ['tools', 'near', 'list', 'world', 'scale'], about: 'map page: Near me, list with hooks and distances, Whole world and the overseas plate, markers and legend, epoch scale' },
   { name: 'map-tools-variant', script: 'mapnear.mjs', args: ['variant', 'markers'], variant: true, about: 'marker styles and the legend: a cluster needs more cards than the marker limit (fixture build, limit 7)' },
-  { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), 404 in every language' },
+  { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), the form "Know a story?", 404 in every language' },
   { name: 'mascot', script: 'mascot.mjs', args: ['logo', 'notfound', 'pager', 'empty', 'dark', 'motion'], about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'mascot-variant', script: 'mascot.mjs', args: ['regime'], variant: true, about: 'no elephant on the pages of the regime epoch (fixture build)' },
   { name: 'family-controls-variant', script: 'family.mjs', args: ['variant', 'toggle', 'lists', 'recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'surprise-read', 'map'], variant: true, about: 'the family checks on the fixture build (more cards, a long epoch with the grid, markers over the limit)' },

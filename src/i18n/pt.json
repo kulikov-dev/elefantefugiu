@@ -33,6 +33,10 @@
       "title": "Encontrou um erro?",
       "description": "Há uma data, um nome ou um lugar errado numa história? Escreva-me: verifico e corrijo."
     },
+    "share": {
+      "title": "Conhece uma história?",
+      "description": "Aconteceu algo pouco conhecido na sua terra, ou ainda lá vive uma tradição curiosa? Conte-me: confirmo nas fontes e, se der, faço dela uma história."
+    },
     "legal": {
       "title": "Informação legal",
       "description": "Licenças dos textos, das ilustrações e do código, o que o site guarda no seu navegador, a contagem de visitas sem cookies e os serviços que veem o seu IP."
@@ -50,6 +54,7 @@
     "about": "Sobre o projeto",
     "method": "Método e fontes",
     "report": "Encontrou um erro?",
+    "share": "Conhece uma história?",
     "legal": "Informação legal",
     "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
     "privacy": "Sem publicidade nem cookies"
@@ -138,6 +143,22 @@
     "random_story": "História ao acaso",
     "failed": "Não foi possível enviar agora. Tente de novo ou escreva-me diretamente para",
     "too_short": "Descreva o erro em poucas palavras."
+  },
+  "share": {
+    "lead": "Talvez na sua cidade ou aldeia tenha acontecido algo que pouca gente conhece. Ou ainda lá vive uma tradição curiosa. Conte-me. Vou confirmar nas fontes e, se der, transformo-a numa história para o site.",
+    "required": "(obrigatório)",
+    "where_label": "Onde foi",
+    "where_hint": "Cidade, aldeia ou local concreto",
+    "what_label": "O que aconteceu",
+    "what_hint": "Conte por palavras suas. O ano pode ser aproximado.",
+    "source_label": "Como sabe isto",
+    "source_hint": "Livro, museu, placa, história local. Uma ligação, se tiver.",
+    "email_label": "O seu email (se quiser resposta)",
+    "subject": "Elefante: conheço uma história",
+    "note": "Reescrevo a história eu próprio e confirmo nas fontes. O seu nome não aparece no site. A mensagem chega-me por email através do FormSubmit; o site não guarda nada.",
+    "sent_title": "Obrigado! O elefante tomou nota.",
+    "sent_text": "Leio todas as mensagens. Se deixou o email, respondo quando tiver novidades.",
+    "report_link": "Quer contar uma história nova em vez de corrigir? Por aqui."
   },
   "ui": {
     "read_more": "Ler mais ▾",

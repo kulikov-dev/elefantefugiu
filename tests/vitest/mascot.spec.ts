@@ -58,7 +58,7 @@ describe('the mascot is never put on a page that can be heavy', () => {
     .map((f) => f.slice(root.length));
   it('only these files draw the mascot (none of them is a card page, a card layer or the card parts)', () => {
     expect(users.sort()).toEqual(
-      ['src/components/Logo.astro', 'src/components/PagerNav.astro', 'src/pages/404.astro', 'src/views/EpochView.astro', 'src/views/HomeView.astro', 'src/views/ReportView.astro', 'src/views/ThreadView.astro'].sort(),
+      ['src/components/Logo.astro', 'src/components/PagerNav.astro', 'src/pages/404.astro', 'src/views/EpochView.astro', 'src/views/HomeView.astro', 'src/components/ContactForm.astro', 'src/views/ThreadView.astro'].sort(),
     );
     for (const heavy of ['StoryView', 'CardLayers', 'BridgeBlock', 'SourceList', 'NextStory', 'EventCard', 'HeavyTopicBanner']) {
       expect(users.some((f) => f.includes(heavy)), heavy).toBe(false);

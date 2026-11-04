@@ -42,6 +42,7 @@
 | О проекте | `/pt/sobre` | `/en/about` | `/ru/o-proekte` | Миссия, контакты | да |
 | Метод и источники | `/pt/metodo` | `/en/method` | `/ru/metod` | Метки, проверка, лицензии | да |
 | Нашли ошибку | `/pt/corrigir` | `/en/report` | `/ru/oshibka` | Сообщение об ошибке | да |
+| Знаю историю | `/pt/conheco-uma-historia` | `/en/share-a-story` | `/ru/znayu-istoriyu` | Форма: прислать историю (FormSubmit, свой `_subject`) | да |
 | Правовая информация | `/pt/legal` | `/en/legal` | `/ru/pravovaya-informaciya` | CC BY-NC, MIT, приватность | да |
 | QR-адрес | `/p/{id}` | `/p/{id}` | Короткий постоянный адрес точки (id события, страница-переход с `?src=qr`) | да |
 | 404 | n/a | n/a | Страница не найдена | да |

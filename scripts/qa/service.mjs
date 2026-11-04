@@ -1,7 +1,7 @@
 // Browser checks for the service pages: the texts of About, Method and Legal, the form "Found a mistake?" (from a story, the
-// title and "change", the thank-you screen with the way back), the 404 page in every language, and the mascot on them.
+// title and "change", the thank-you screen with the way back), the form "Know a story?", the 404 page in every language, and the mascot on them.
 // Run against dist/ served by serve.mjs (base path "/"; the server answers a missing address with 404.html like GitHub Pages):
-//   node service.mjs [texts form thanks notfound]
+//   node service.mjs [texts form thanks share notfound]
 import { fsPath, launchBrowser } from './browser.mjs';
 import { TOTAL } from './data.mjs';
 
@@ -13,6 +13,7 @@ const PAGES = {
   method: { pt: '/pt/metodo/', en: '/en/method/', ru: '/ru/metod/' },
   legal: { pt: '/pt/legal/', en: '/en/legal/', ru: '/ru/pravovaya-informaciya/' },
   report: { pt: '/pt/corrigir/', en: '/en/report/', ru: '/ru/oshibka/' },
+  share: { pt: '/pt/conheco-uma-historia/', en: '/en/share-a-story/', ru: '/ru/znayu-istoriyu/' },
 };
 const STORY = { pt: '/pt/historia/tripeiros/', en: '/en/story/tripe-eaters-of-porto/', ru: '/ru/istoriya/lyubiteli-potrohov-iz-portu/' };
 const TITLE = { pt: 'Os tripeiros', en: 'The Tripe Eaters of Porto', ru: 'Любители потрохов из Порту' };
@@ -178,7 +179,72 @@ if (want('thanks')) {
   await evil.close();
 }
 
-// ---------- 4. The 404 page ----------
+// ---------- 4. The form "Know a story?" ----------
+if (want('share')) {
+  const sitemap = await (await fetch(`${base}/sitemap.xml`)).text();
+  for (const lang of ['pt', 'en', 'ru']) {
+    const res = await fetch(`${base}${PAGES.share[lang]}`);
+    const source = await res.text();
+    ok(`share (${lang}): the page exists, is indexable, names the three languages and is in the sitemap`, res.status === 200 && !/name="robots" content="[^"]*noindex/.test(source) && ['pt', 'en', 'ru', 'x-default'].every((l) => source.includes(`hreflang="${l}"`)) && sitemap.includes(`${PAGES.share[lang]}</loc>`), `status ${res.status}`);
+    const formHtml = source.slice(source.indexOf('<form'), source.indexOf('</form>'));
+    ok(`share (${lang}): no "@" anywhere in the HTML of the form`, formHtml.length > 100 && !formHtml.includes('@'));
+    const reportSource = await (await fetch(`${base}${PAGES.report[lang]}`)).text();
+    const subjectOf = (html) => /name="_subject" value="([^"]*)"/.exec(html)?.[1] ?? '';
+    ok(`share (${lang}): the subject line is its own, not the one of the mistake form`, subjectOf(source).length > 5 && subjectOf(source) !== subjectOf(reportSource), `"${subjectOf(source)}" / "${subjectOf(reportSource)}"`);
+
+    const page = await open(PAGES.share[lang], { width: 360 });
+    const f = await page.evaluate(() => {
+      const form = document.querySelector('[data-report-form]');
+      const honey = form.querySelector('[name=_honey]');
+      const label = (id) => document.querySelector(`label[for=${id}]`)?.textContent.replace(/\s+/g, ' ').trim() ?? '';
+      return {
+        action: form.getAttribute('action'),
+        method: form.method,
+        captcha: form.querySelector('[name=_captcha]')?.value,
+        honey: { tab: honey.tabIndex, hidden: honey.getAttribute('aria-hidden'), ac: honey.getAttribute('autocomplete'), right: honey.getBoundingClientRect().right },
+        noValidate: form.noValidate,
+        required: [...form.querySelectorAll('[required]')].map((e) => e.name),
+        marked: [...form.querySelectorAll('.field__required')].map((s) => s.closest('label').htmlFor),
+        optionalLabels: ['f-source', 'f-email'].map(label),
+        requiredMark: document.querySelector('.field__required')?.textContent.trim(),
+        overflow: document.documentElement.scrollWidth - innerWidth,
+      };
+    });
+    ok(`share (${lang}): posts to FormSubmit by the id of the form, no captcha page, the honeypot is out of reach`, /^https:\/\/formsubmit\.co\/[0-9a-f]{32}$/.test(f.action) && f.method === 'post' && f.captcha === 'false' && f.honey.tab === -1 && f.honey.hidden === 'true' && f.honey.ac === 'off' && f.honey.right < 0, JSON.stringify(f.honey));
+    ok(`share (${lang}): the required fields (where, what) are required for the browser and marked in their labels; the others are neither`, !f.noValidate && f.required.join() === 'where,what' && f.marked.join() === 'f-where,f-what' && f.requiredMark.length > 3 && f.optionalLabels.every((l) => !l.includes(f.requiredMark)), JSON.stringify(f));
+    ok(`share (${lang}): no sideways scroll at 360 px`, f.overflow <= 0);
+    // empty: the browser stops the send, nothing leaves
+    await page.click('[data-report-submit]');
+    const empty = await page.evaluate(() => ({ valid: document.querySelector('[data-report-form]').checkValidity(), focus: document.activeElement?.id, sentHidden: document.getElementById('sent').hidden }));
+    ok(`share (${lang}): an empty form is stopped by the browser on the first required field, nothing is sent`, !empty.valid && empty.focus === 'f-where' && empty.sentHidden && page.posts.length === 0, JSON.stringify(empty));
+    // filled: one request to the AJAX address, then the thank-you screen with "home" and "surprise me"
+    await page.type('#f-where', 'Aldeia de Teste');
+    await page.type('#f-what', 'Aconteceu algo por volta de 1700.');
+    await page.click('[data-report-submit]');
+    await page.waitForFunction(() => !document.getElementById('sent').hidden, { timeout: 5000 });
+    const sent = await page.evaluate(() => {
+      const sent = document.getElementById('sent');
+      return { form: document.querySelector('[data-report-form]').hidden, mascot: sent.querySelector('img.mascot')?.alt ?? '', buttons: [...sent.querySelectorAll('a.button')].filter((a) => !a.hidden).map((a) => a.getAttribute('href')) };
+    });
+    const post = page.posts[0];
+    ok(`share (${lang}): one request to the AJAX address with the place and the text; the thank-you screen with the elephant, "home" and "surprise me"`, page.posts.length === 1 && /formsubmit\.co\/ajax\//.test(post.url) && /Aldeia/.test(decodeURIComponent(post.body)) && decodeURIComponent(post.body).includes(subjectOf(source)) && sent.form && sent.mascot.length > 10 && sent.buttons.length === 2 && sent.buttons[0] === `/${lang}/` && /(surpreende-me|surprise-me|udivi-menya)/.test(sent.buttons[1]), JSON.stringify(sent));
+    ok(`share (${lang}): no script errors`, page.errors.length === 0, page.errors.join('; '));
+    await page.close();
+
+    // the three places that lead here lead to the page of their own language
+    const hrefs = async (path, selector) => {
+      const p = await open(path);
+      const h = await p.$$eval(selector, (as) => as.map((a) => new URL(a.href).pathname));
+      await p.close();
+      return h;
+    };
+    ok(`share (${lang}): the link in the footer leads to the page of the language`, (await hrefs(PAGES.report[lang], '.site-footer a')).includes(PAGES.share[lang]));
+    ok(`share (${lang}): the last words of About the project lead there`, (await hrefs(PAGES.about[lang], 'article section:last-of-type .prose p:last-child a')).includes(PAGES.share[lang]));
+    ok(`share (${lang}): "Found a mistake?" has the link under the form`, (await hrefs(PAGES.report[lang], '.report__more a')).includes(PAGES.share[lang]));
+  }
+}
+
+// ---------- 5. The 404 page ----------
 if (want('notfound')) {
   for (const [path, lang, title, home, surprise] of [
     ['/pt/nao-existe/', 'pt', 'O elefante fugiu outra vez', 'Início', 'Surpreenda-me'],

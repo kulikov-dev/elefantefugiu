@@ -33,6 +33,10 @@
       "title": "Found a mistake?",
       "description": "Spotted a wrong date, name, or place in a story? Tell me, and I’ll check it."
     },
+    "share": {
+      "title": "Know a story?",
+      "description": "Did something little known happen in your town, or does a strange tradition live on there? Tell me, and I’ll check the sources and maybe make it a story."
+    },
     "legal": {
       "title": "Legal information",
       "description": "How you may reuse the texts, illustrations and code, what your browser stores, and which services see your IP address. No cookies, no ads."
@@ -50,6 +54,7 @@
     "about": "About the project",
     "method": "Method and sources",
     "report": "Found a mistake?",
+    "share": "Know a story?",
     "legal": "Legal information",
     "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
     "privacy": "No ads, no cookies"
@@ -138,6 +143,22 @@
     "random_story": "Random story",
     "failed": "Could not send right now. Try again or write to me directly at",
     "too_short": "Describe the mistake in a few words."
+  },
+  "share": {
+    "lead": "Maybe something happened in your town or village that few people know about. Or a strange tradition still lives on there. Tell me. I’ll check the sources and, if it works out, turn it into a story for the site.",
+    "required": "(required)",
+    "where_label": "Where",
+    "where_hint": "Town, village, or a specific place",
+    "what_label": "What happened",
+    "what_hint": "In your own words. A rough year is fine.",
+    "source_label": "How do you know",
+    "source_hint": "A book, museum, plaque, local tale. A link if you have one.",
+    "email_label": "Your email (if you’d like a reply)",
+    "subject": "Elefante: know a story",
+    "note": "I’ll rewrite the story myself and check it against sources. Your name won’t appear on the site. Your message reaches me by email via FormSubmit; the site stores nothing.",
+    "sent_title": "Thanks! The elephant took notes.",
+    "sent_text": "I read every message. If you left your email, I’ll write back once I’ve looked into it.",
+    "report_link": "Have a new story rather than a fix? This way."
   },
   "ui": {
     "read_more": "Read more ▾",

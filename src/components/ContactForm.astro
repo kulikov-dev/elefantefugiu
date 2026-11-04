@@ -1,0 +1,246 @@
+---
+// The shell of the two forms that post to FormSubmit: "Found a mistake?" (ReportView) and "Know a story?" (ShareView). The page carries the
+// random id of the form (FORM_ID), not the e-mail, so the form works without JavaScript too (the service then sends the reader on to this
+// page, #sent). With JavaScript the same data is sent with fetch and the confirmation appears in place (src/scripts/report-form.ts). Each
+// form brings its own fields (the default slot), its own subject line and the buttons of the thank-you screen (the "sent-actions" slot).
+// No cookies, nothing is kept by the site itself.
+import Mascot from './Mascot.astro';
+import { pagePath, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import { CONTACT_EMAIL, FORM_ID } from '../data/static-pages';
+import { formsubmitEndpoint } from '../lib/report';
+import { emailMarkup } from '../lib/contact';
+
+interface Props {
+  lang: Lang;
+  /** The page of the form: where the service sends the reader back (#sent). */
+  pageKey: 'report' | 'share';
+  title: string;
+  lead: string;
+  /** The subject line of the e-mail, so the messages of the two forms can be told apart. */
+  subject: string;
+  /** The note under the button, already rendered (it carries links). */
+  note: string;
+  sentTitle: string;
+  sentText: string;
+  /** The HTML form checks the fields itself (the required ones are marked in the markup); the report form checks its description in the script. */
+  validate?: boolean;
+  /** The pose of the elephant on the thank-you screen. */
+  sentPose?: 'run' | 'bow';
+}
+
+const { lang, pageKey, title, lead, subject, note, sentTitle, sentText, validate = false, sentPose = 'run' } = Astro.props;
+const formPage = new URL(pagePath(lang, pageKey), Astro.site).href;
+const next = `${formPage}#sent`;
+---
+<article class="report">
+  <header class="report__head">
+    <div class="report__intro">
+      <h1>{title}</h1>
+      <p class="report__lead">{lead}</p>
+    </div>
+    <div class="report__mascot">
+      <Mascot pose="peek" size="report" lang={lang} />
+    </div>
+  </header>
+
+  <section id="sent" class="report__sent" tabindex="-1" aria-labelledby="sent-title" role="status" hidden>
+    <div class="report__sent-mascot">
+      <Mascot pose={sentPose} size="report" lang={lang} />
+    </div>
+    <div class="report__sent-text">
+      <h2 id="sent-title">{sentTitle}</h2>
+      <p>{sentText}</p>
+      <p class="report__sent-actions">
+        <slot name="sent-actions" />
+      </p>
+    </div>
+  </section>
+
+  <form
+    class="report__form"
+    method="post"
+    action={formsubmitEndpoint(FORM_ID, false)}
+    data-ajax={formsubmitEndpoint(FORM_ID, true)}
+    data-report-form
+    data-report-page={formPage}
+    data-sending={t(lang, 'report.sending')}
+    data-submit={t(lang, 'report.submit')}
+    data-too-short={t(lang, 'report.too_short')}
+    novalidate={!validate}
+  >
+    <input type="hidden" name="_subject" value={subject} />
+    <input type="hidden" name="_template" value="table" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_next" value={next} data-report-next />
+    <input type="hidden" name="language" value={lang} />
+    <!-- Honeypot: out of the screen (not display: none, which a robot may skip), out of the tab order and of screen readers; a robot fills it and the service drops the message. -->
+    <input type="text" name="_honey" class="report__honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <slot />
+
+    <p class="report__failed" role="alert" data-report-failed hidden>
+      {t(lang, 'report.failed')} <Fragment set:html={emailMarkup(CONTACT_EMAIL, lang)} />.
+    </p>
+
+    <button type="submit" class="button" data-report-submit>{t(lang, 'report.submit')}</button>
+  </form>
+
+  <p class="report__note" set:html={note} />
+  {Astro.slots.has('after') && <p class="report__more"><slot name="after" /></p>}
+</article>
+
+<script>
+  import '../scripts/report-form';
+</script>
+
+<style>
+  .report > * + * {
+    margin-block-start: var(--space-4);
+  }
+
+  /* The honeypot field: far outside the screen, where no person looks and no screen reader goes (it is also aria-hidden and out of the tab order); a robot that fills every field fills it. */
+  .report__honey {
+    position: absolute;
+    left: var(--offscreen);
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  /* The title and the lead on the left, the elephant on the right (above the title on a phone, smaller). */
+  .report__head {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .report__intro > * + * {
+    margin-block-start: var(--space-3);
+  }
+
+  .report__lead {
+    max-width: var(--measure);
+    font-size: var(--text-lg);
+  }
+
+  @media (min-width: 40rem) {
+    .report__head {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-5);
+    }
+  }
+
+  .report__form {
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--measure);
+  }
+
+  .report__form :global(.field) {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .report__form :global(.field label),
+  .report__form :global(.field__label) {
+    font-weight: var(--weight-strong);
+  }
+
+  .report__form :global(.field input),
+  .report__form :global(.field textarea) {
+    width: 100%;
+    min-height: var(--touch-target);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+    color: var(--color-ink);
+    font: inherit;
+  }
+
+  .report__form :global(.field[hidden]),
+  :global([data-report-back][hidden]) {
+    display: none;
+  }
+
+  .report__form :global(.report__story) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  /* The mark of a required field, inside its label. */
+  .report__form :global(.field__required) {
+    color: var(--color-ink-muted);
+    font-weight: normal;
+  }
+
+  .report__form :global(.field__hint) {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .report__form :global(.field__error),
+  .report__failed {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-heavy-border);
+    border-radius: var(--radius-md);
+    background: var(--color-heavy-bg);
+    color: var(--color-heavy-ink);
+  }
+
+  .report__form .button {
+    justify-self: start;
+  }
+
+  .report__note,
+  .report__more {
+    max-width: var(--measure);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  /* The confirmation: shown when the page opens at #sent (the service sends the reader here) or by the script. */
+  .report__sent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    border: var(--epoch-frame);
+    border-inline-start: var(--epoch-accent-bar);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .report__sent[hidden] {
+    display: none;
+  }
+
+  .report__sent-text > * + * {
+    margin-block-start: var(--space-2);
+  }
+
+  .report__sent-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-block-start: var(--space-4);
+  }
+
+  @media (min-width: 40rem) {
+    .report__sent {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .report__sent:target {
+    display: flex !important;
+  }
+</style>

@@ -3,7 +3,7 @@
 // threads, buttons) are written as the site itself names them; the differences from the files are listed in docs/STATE.md.
 // The "Who makes this" section and the data controller line in Legal information are the owner's own wording (not from the files).
 //
-// Inline markup: {{about}} {{method}} {{report}} {{legal}} {{map}} link to a page of the site (the link text is the title of that
+// Inline markup: {{about}} {{method}} {{report}} {{share}} {{legal}} {{map}} link to a page of the site (the link text is the title of that
 // page; {{method|text}} gives the link another text, for a case ending); {{email}} is the contact address as a link; {{stories}} is
 // the number of published stories with its noun ("13 stories"), counted from the data; {{ready}} and {{soon}} are the sentences about the ready epochs (their number and names) and about those to come (src/lib/ready-epochs.ts); **text** is bold. Everything else is plain text.
 import type { Lang } from '../i18n/routes';
@@ -82,8 +82,8 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'ajudar',
           heading: 'Como ajudar',
           paragraphs: [],
-          items: ['Encontrou uma imprecisão? Diga-me em {{report}}.', 'Conhece uma história que ainda não está aqui? Envie-a pelo {{report|formulário de contacto}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
-          after: ['Escreva-me pelo {{report|formulário de contacto}}.'],
+          items: ['Encontrou uma imprecisão? Diga-me em {{report}}.', 'Conhece uma história que ainda não está aqui? Envie-a pelo {{share|formulário}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
+          after: ['Escreva-me pelo {{report|formulário de contacto}}.', 'Conhece uma história da sua terra? {{share|Conte-me}}.'],
         },
       ],
     },
@@ -132,8 +132,8 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'ajudar',
           heading: 'How to help',
           paragraphs: [],
-          items: ['Spotted a mistake? Tell me via {{report}}.', 'Know a story that’s missing here? Send it through {{report|the contact form}}.', 'Enjoyed it? Share a story with someone heading to Portugal. That’s the best help of all.'],
-          after: ['Write to me through {{report|the contact form}}.'],
+          items: ['Spotted a mistake? Tell me via {{report}}.', 'Know a story that’s missing here? Send it through {{share|this form}}.', 'Enjoyed it? Share a story with someone heading to Portugal. That’s the best help of all.'],
+          after: ['Write to me through {{report|the contact form}}.', 'Know a story from your hometown? {{share|Tell me}}.'],
         },
       ],
     },
@@ -182,8 +182,8 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'ajudar',
           heading: 'Как помочь',
           paragraphs: [],
-          items: ['Нашли неточность? Напишите мне через {{report}}.', 'Знаете историю, которой тут не хватает? Пришлите её через {{report|форму обратной связи}}.', 'Понравилось? Поделитесь историей с тем, кто собирается в Португалию. Это лучшая помощь.'],
-          after: ['Пишите через {{report|форму обратной связи}}.'],
+          items: ['Нашли неточность? Напишите мне через {{report}}.', 'Знаете историю, которой тут не хватает? Пришлите её через {{share|эту форму}}.', 'Понравилось? Поделитесь историей с тем, кто собирается в Португалию. Это лучшая помощь.'],
+          after: ['Пишите через {{report|форму обратной связи}}.', 'Знаете историю своего города? {{share|Расскажите мне}}.'],
         },
       ],
     },
@@ -359,7 +359,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**GitHub Pages** (GitHub, Inc.) serve as páginas do site e pode registar endereços IP segundo as suas próprias regras.',
             '**Os mosaicos do mapa** vêm dos servidores da CARTO, que veem o seu endereço IP e o endereço da página, como em qualquer site com mapa.',
             '**GoatCounter** (goatcounter.com) conta as visitas às páginas; recebe o seu endereço IP, mas só o mantém em memória, até 8 horas.',
-            '**FormSubmit** (formsubmit.co) reencaminha-me a sua mensagem se enviar o formulário «Encontrou um erro?», juntamente com o email, se o indicar. Uso-a apenas para corrigir o erro e responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
+            '**FormSubmit** (formsubmit.co) reencaminha-me a sua mensagem se enviar o formulário «Encontrou um erro?» ou o formulário «Conhece uma história?», juntamente com o email, se o indicar. Uso-a apenas para corrigir o erro ou verificar a história e para responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
           ],
           after: ['As ligações «Como chegar», as fontes e os sites dos museus levam a outros sites, com regras próprias.'],
         },
@@ -423,7 +423,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**GitHub Pages** (GitHub, Inc.) serves the site’s pages and may log IP addresses under its own policy.',
             '**The map tiles** are loaded from CARTO’s servers, which see your IP address and the address of the page, like any site with a map.',
             '**GoatCounter** (goatcounter.com) counts page visits; it receives your IP address but keeps it only in memory, for up to 8 hours.',
-            '**FormSubmit** (formsubmit.co) forwards your message to me if you send the “Found a mistake?” form, together with your email if you gave it. I use it only to fix the mistake and reply to you. Prefer not to use the service? Write directly to {{email}}.',
+            '**FormSubmit** (formsubmit.co) forwards your message to me if you send the “Found a mistake?” form or the “Know a story?” form, together with your email if you gave it. I use it only to fix the mistake or check the story, and to reply to you. Prefer not to use the service? Write directly to {{email}}.',
           ],
           after: ['Links to “Get directions,” sources, and museum websites lead to other sites with their own rules.'],
         },
@@ -487,7 +487,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**GitHub Pages** (GitHub, Inc.) отдаёт страницы сайта и может записывать IP-адреса по своим правилам.',
             '**Фрагменты карты** загружаются с серверов CARTO, которые видят ваш IP-адрес и адрес страницы, как любой сайт с картой.',
             '**GoatCounter** (goatcounter.com) считает посещения страниц; получает ваш IP-адрес, но хранит его только в памяти, до 8 часов.',
-            '**FormSubmit** (formsubmit.co) пересылает мне сообщение, если вы отправите форму «Нашли ошибку?», вместе с адресом почты, если вы его указали. Я использую письмо только чтобы исправить ошибку и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
+            '**FormSubmit** (formsubmit.co) пересылает мне сообщение, если вы отправите форму «Нашли ошибку?» или форму «Знаете историю?», вместе с адресом почты, если вы его указали. Я использую письмо только чтобы исправить ошибку или проверить историю и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
           ],
           after: ['Ссылки «Как добраться», на источники и сайты музеев ведут на чужие сайты со своими правилами.'],
         },

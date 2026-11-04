@@ -1,0 +1,56 @@
+---
+// "Know a story?": /pt/conheco-uma-historia/, /en/share-a-story/, /ru/znayu-istoriyu/. A reader sends a place, what happened and where
+// they know it from; the owner checks it and may write a story from it. The same shell and the same FormSubmit form as "Found a mistake?"
+// (ContactForm), with its own subject line. Where and what are required: the browser checks them (no novalidate), the script only sends.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { pagePath, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import { CONTACT_EMAIL } from '../data/static-pages';
+import { renderInline } from '../lib/static-text';
+import { pageNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const title = t(lang, 'pages.share.title');
+// The sentence under the button has no links; the form service is named in the Legal page (section "Who else is involved").
+const note = renderInline(t(lang, 'share.note'), () => undefined, CONTACT_EMAIL, {}, lang);
+// An indexable page (it is in the sitemap, unlike the mistake form): WebPage with its breadcrumb.
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'share')), name: title, description: t(lang, 'pages.share.description'), type: 'WebPage' });
+---
+<BaseLayout lang={lang} pageKey="share" title={title} schema={schema}>
+  <ContactForm lang={lang} pageKey="share" title={title} lead={t(lang, 'share.lead')} subject={t(lang, 'share.subject')} note={note} sentTitle={t(lang, 'share.sent_title')} sentText={t(lang, 'share.sent_text')} validate sentPose="bow">
+    <div class="field">
+      <label for="f-where">{t(lang, 'share.where_label')} <span class="field__required">{t(lang, 'share.required')}</span></label>
+      <input id="f-where" name="where" type="text" required maxlength="300" aria-describedby="f-where-hint" />
+      <p id="f-where-hint" class="field__hint">{t(lang, 'share.where_hint')}</p>
+    </div>
+
+    <div class="field">
+      <label for="f-what">{t(lang, 'share.what_label')} <span class="field__required">{t(lang, 'share.required')}</span></label>
+      <textarea id="f-what" name="what" rows="7" required maxlength="4000" aria-describedby="f-what-hint"></textarea>
+      <p id="f-what-hint" class="field__hint">{t(lang, 'share.what_hint')}</p>
+    </div>
+
+    <div class="field">
+      <label for="f-source">{t(lang, 'share.source_label')}</label>
+      <input id="f-source" name="source" type="text" autocomplete="off" maxlength="500" aria-describedby="f-source-hint" />
+      <p id="f-source-hint" class="field__hint">{t(lang, 'share.source_hint')}</p>
+    </div>
+
+    <div class="field">
+      <label for="f-email">{t(lang, 'share.email_label')}</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" />
+    </div>
+
+    <Fragment slot="sent-actions">
+      <a class="button" href={pagePath(lang, 'home')}>{t(lang, 'notfound.home')}</a>
+      <a class="button button--secondary" href={pagePath(lang, 'surprise')}>{t(lang, 'pages.surprise.title')}</a>
+    </Fragment>
+  </ContactForm>
+</BaseLayout>
