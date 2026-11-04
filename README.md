@@ -58,7 +58,7 @@ The browser checks run in GitHub Actions, not on the developer's machine:
 
 - `.github/workflows/deploy.yml`: `astro check`, `npm test` and `npm run build` (the build checks and every `postbuild` check) with `SITE_URL=https://elefantefugiu.pt`; the site is published only when all of it passes.
 - `.github/workflows/qa-smoke.yml`: on every push to main and every pull request, six main suites (`listings`, `pages`, `bridge`, `map-basic`, `family-controls`, `service`: home, epoch and thread pages, static pages, a story page, the map, the age button, the service pages and the 404 page).
-- `.github/workflows/qa-full.yml`: the full `npm run qa` (all suites, the variant build, the mascot) every Monday at 07:00 UTC and by hand (Actions tab, "QA full", Run workflow). The log holds a short summary; the full logs of every suite are the artifact `qa-full`.
+- `.github/workflows/qa-full.yml`: the full `npm run qa` (all suites, the variant build, the mascot) every Monday at 05:00 UTC and by hand (Actions tab, "QA full", Run workflow). The log holds a short summary; the full logs of every suite are the artifact `qa-full`.
 
 Look at the results in the Actions tab or with the GitHub CLI: `gh run list --workflow "QA smoke"`, `gh run view <id>`, `gh run view <id> --log-failed`. Locally, after a change, run only `npm run build` and `npm test`; the full `npm run qa` only when you really need it.
 

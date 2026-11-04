@@ -226,7 +226,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idiomas',
           heading: 'Línguas',
-          paragraphs: ['As histórias são escritas em português e traduzidas para inglês e russo.'],
+          paragraphs: ['Escrevo as histórias em russo e traduzo-as eu próprio para inglês. A versão portuguesa é traduzida com a ajuda de IA e revista por mim. Se alguma frase não soar natural, {{report|diga-me}} e eu corrijo.'],
         },
       ],
     },
@@ -267,7 +267,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idiomas',
           heading: 'Languages',
-          paragraphs: ['Stories are written in Portuguese and translated into English and Russian. If a translation isn’t ready yet, I show the English or Portuguese text and say so.'],
+          paragraphs: ['I write the stories in Russian and translate them into English myself. The Portuguese version is translated with the help of AI and then reviewed by me. If something doesn’t sound natural, {{report|let me know}} and I’ll fix it.'],
         },
       ],
     },
@@ -308,7 +308,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idiomas',
           heading: 'Языки',
-          paragraphs: ['Истории пишутся на португальском и переводятся на английский и русский. Если русского перевода ещё нет, покажу английский и предупрежу об этом.'],
+          paragraphs: ['Истории я пишу по-русски и сам перевожу на английский. Португальскую версию перевожу с помощью ИИ и вычитываю. Если фраза звучит не по-португальски или не по-английски, {{report|напишите}}, я поправлю.'],
         },
       ],
     },

@@ -5,7 +5,7 @@ name: QA full
 
 on:
   schedule:
-    - cron: '0 7 * * 1' # Monday 07:00 UTC: the map sweeps are a sample of 30 views plus the edge cases (MAP_SAMPLE, seed = the week)
+    - cron: '0 5 * * 1' # Monday 05:00 UTC: the map sweeps are a sample of 30 views plus the edge cases (MAP_SAMPLE, seed = the week)
     - cron: '0 6 1 * *' # the 1st of the month 06:00 UTC: the map sweeps in full
   workflow_dispatch: # also on a branch: gh workflow run qa-full.yml --ref <branch> (checkout takes the chosen ref); -f suites='map-variant theme' runs only those
     inputs:
