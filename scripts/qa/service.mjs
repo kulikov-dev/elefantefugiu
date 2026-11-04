@@ -181,11 +181,10 @@ if (want('thanks')) {
 
 // ---------- 4. The form "Know a story?" ----------
 if (want('share')) {
-  const sitemap = await (await fetch(`${base}/sitemap.xml`)).text();
   for (const lang of ['pt', 'en', 'ru']) {
     const res = await fetch(`${base}${PAGES.share[lang]}`);
     const source = await res.text();
-    ok(`share (${lang}): the page exists, is indexable, names the three languages and is in the sitemap`, res.status === 200 && !/name="robots" content="[^"]*noindex/.test(source) && ['pt', 'en', 'ru', 'x-default'].every((l) => source.includes(`hreflang="${l}"`)) && sitemap.includes(`${PAGES.share[lang]}</loc>`), `status ${res.status}`);
+    ok(`share (${lang}): the page exists, is indexable, names the three languages (the sitemap is checked by check:sitemap in the build)`, res.status === 200 && !/name="robots" content="[^"]*noindex/.test(source) && ['pt', 'en', 'ru', 'x-default'].every((l) => source.includes(`hreflang="${l}"`)), `status ${res.status}`);
     const formHtml = source.slice(source.indexOf('<form'), source.indexOf('</form>'));
     ok(`share (${lang}): no "@" anywhere in the HTML of the form`, formHtml.length > 100 && !formHtml.includes('@'));
     const reportSource = await (await fetch(`${base}${PAGES.report[lang]}`)).text();
