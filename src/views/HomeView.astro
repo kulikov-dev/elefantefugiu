@@ -652,14 +652,21 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
     background: var(--tone);
   }
 
-  /* A wide screen: the line about the thread stands beside the name instead of under it. */
+  /* A wide screen: the line about the thread stands beside the name instead of under it, and the dots sit right under the name in its column. The line
+     about the thread spans both rows, and the extra height of a long line goes to the second row (1fr), below the dots, not between the name and them. */
   @media (min-width: 48rem) {
     .thread-row {
       grid-template-columns: auto minmax(var(--thread-name-min), var(--thread-name-max)) var(--thread-count-width) minmax(0, 1fr);
+      grid-template-rows: auto 1fr;
       grid-template-areas:
         'dot name count text'
-        '. eras eras eras';
-      gap: var(--space-3);
+        '. eras . text';
+      gap: 0 var(--space-3);
+    }
+
+    .thread-row__eras {
+      align-self: start;
+      margin-block-start: calc(var(--space-3) / 2);
     }
   }
 </style>
