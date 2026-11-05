@@ -57,6 +57,7 @@
 | Сакадура Кабрал | Sacadura Cabral | Sacadura Cabral | Сакадура Кабрал |
 | Сэмюэл Пипс | Samuel Pepys | Samuel Pepys | Сэмюэл Пипс |
 | Король Жуан IV | D. João IV | King John IV | Жуан IV |
+| Луиза де Гусман (жена Жуана IV) | Luísa de Gusmão | Luísa de Gusmão | Луиза де Гусман |
 | Король Афонсу V | D. Afonso V | King Afonso V | Афонсу V |
 | Король Луиш I (в текстах без номера) | D. Luís | King Luís | Луиш |
 | Королева Мария II | D. Maria II | Queen Maria II | Мария II |
@@ -124,6 +125,9 @@
 | Коимбра, библиотека Жуанина | Coimbra, Biblioteca Joanina | Coimbra, Joanina Library | Коимбра, библиотека Жуанина |
 | Синтра, дворец Пена | Sintra, Palácio Nacional da Pena | Sintra, Pena National Palace | Синтра, дворец Пена |
 | Церковь Сан-Роке, часовня Иоанна Крестителя | Igreja de São Roque, Capela de São João Baptista (так в официальном названии) | Church of São Roque, Chapel of St. John the Baptist | церковь Сан-Роке, часовня Иоанна Крестителя |
+| Вила-Висоза | Vila Viçosa | Vila Viçosa | Вила-Висоза |
+| Святилище Носса Сеньора да Консейсан (Вила-Висоза) | Santuário de Nossa Senhora da Conceição | Sanctuary of Our Lady of the Conception | святилище Носса Сеньора да Консейсан |
+| Дворец герцогов (Гимарайнш) | Paço dos Duques | Ducal Palace (Guimarães) | дворец герцогов в Гимарайнше |
 | Площадь Реставрадориш | Praça dos Restauradores | Praça dos Restauradores | Праса-душ-Рештаурадореш |
 | Лифт Санта-Жушта | Elevador de Santa Justa | Santa Justa Lift (имя собственное; в тексте «elevator») | лифт Санта-Жушта |
 | Каррейруш (возчики) | carreiros | carreiros | каррейруш |

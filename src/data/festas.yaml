@@ -20,7 +20,51 @@
   favicon: crown
   # The preview picture when the page is shared: a file in src/assets/ (.png or .jpg, cut to 1200x630 from the middle). Without the file the drawing (art) is used.
   image: festas/restauracao.jpg
+  # The story of the day: a story of the site (src/content/events), shown on the page as a usual card.
+  story: rei-que-deu-a-coroa-1646
   text:
+    pt:
+      date: '1 de dezembro'
+      name: 'Restauração da Independência'
+      head_date: '1 de dezembro · Restauração da Independência'
+      head_title: 'A coroa que nunca mais foi usada'
+      head_line: 'Em 1640, Portugal voltou a ter o seu próprio rei, e seis anos depois ele entregou a coroa.'
+      head_link: 'A história deste dia →'
+      art_title: 'Uma coroa numa almofada de veludo, com um ceptro à frente'
+      lead: 'A 1 de dezembro de 1640, Portugal voltou a ser um reino independente, depois de 60 anos sob a mesma coroa que Espanha.'
+      og_description: 'Porque é que, desde 1646, nenhum rei de Portugal voltou a usar a coroa, e como este feriado chegou a ser suspenso para poupar.'
+      off_window: 'Este feriado celebra-se a 1 de dezembro'
+      traditions:
+        - title: '«Antes rainha por um dia».'
+          text: 'Conta-se que foi a mulher do duque, Luísa de Gusmão, quem o convenceu a aceitar: «Antes ser rainha por um dia do que duquesa toda a vida». É provável que a frase lhe tenha sido atribuída mais tarde, mas todos a aprendem na escola.'
+        - title: 'O feriado que foi suspenso.'
+          text: 'Em 2013, durante a crise, o 1.º de Dezembro deixou de ser feriado para poupar. Três anos depois, em 2016, o feriado voltou.'
+        - title: 'Uma praça com nomes de batalhas.'
+          text: 'A Praça dos Restauradores, no centro de Lisboa, tem o nome deste dia. No obelisco de 1886 estão gravados os nomes das batalhas da guerra que, depois de 1640, durou mais 28 anos.'
+        - title: 'Quarenta conjurados.'
+          text: 'Na manhã de 1 de dezembro de 1640, quarenta fidalgos invadiram o paço, em Lisboa.'
+          link: { story: restauracao-1640, label: 'A nossa história →' }
+    en:
+      date: 'December 1'
+      name: 'Restoration of Independence Day'
+      head_date: 'December 1 · Restoration of Independence Day'
+      head_title: 'The crown no king wore again'
+      head_line: 'In 1640, Portugal got its own king back. Six years later, he gave the crown away.'
+      head_link: 'The story of this day →'
+      art_title: 'A crown on a velvet cushion, with a scepter in front of it'
+      lead: 'On December 1, 1640, Portugal became a separate kingdom again after 60 years of sharing a crown with Spain.'
+      og_description: 'Why no king of Portugal wore the crown after 1646, and how this holiday was once canceled to save money.'
+      off_window: 'This holiday is celebrated on December 1'
+      traditions:
+        - title: '“Better a queen for a day.”'
+          text: 'The story goes that the hesitant duke was talked into it by his wife, Luísa de Gusmão: “Better to be queen for a day than duchess for a lifetime.” The line was probably put in her mouth later, but every Portuguese schoolchild knows it.'
+        - title: 'The holiday that was canceled.'
+          text: 'In 2013, during the debt crisis, December 1 became a working day to save money. Three years later, in 2016, the holiday came back.'
+        - title: 'A square full of battles.'
+          text: 'Praça dos Restauradores in central Lisbon is named for this day. Its 1886 obelisk lists the battles of the war that went on for 28 more years after 1640.'
+        - title: 'Forty conspirators.'
+          text: 'On the morning of December 1, 1640, forty noblemen stormed the palace in Lisbon.'
+          link: { story: restauracao-1640, label: 'Our story →' }
     ru:
       date: '1 декабря'
       name: 'День восстановления независимости'
@@ -33,16 +77,6 @@
       # What a messenger shows when the page is shared: the title is `name · date`, the description is this line.
       og_description: 'Почему с 1646 года ни один король Португалии не надевал корону и как этот праздник однажды отменили ради экономии.'
       off_window: 'Этот праздник отмечают 1 декабря'
-      # A story of the site needs pt and en text; until they are written the card lives here (and has no point on the map).
-      card:
-        kicker: 'Уния и Реставрация · 1646'
-        title: 'Король, который отдал корону'
-        hook: 'С 1646 года ни один король Португалии не надевал корону.'
-        text: 'В 1640 году герцог Браганса стал королём Жуаном IV, но война с Испанией шла ещё много лет. В 1646 году король объявил королевой и покровительницей Португалии Деву Марию Непорочного Зачатия и поднёс свою корону её статуе в Вила-Висозе. С тех пор корона считалась её. Королей больше не короновали, а провозглашали, и корону клали рядом на подушку.'
-        bridge: 'Мост в сегодня: святилище Носса Сеньора да Консейсан, Вила-Висоза. Статуя стоит в церкви внутри стен старого замка.'
-        sources:
-          - 'https://rfm.pt/atualidade/5105/8-de-dezembro-e-feriado-porque-a-explicacao-esta-ligada-a-uma-coroacao-muito-especial'
-          - 'https://www.dnoticias.pt/2022/3/22/302517-fatima-recebe-esta-semana-congresso-sobre-a-padroeira-de-portugal/'
       traditions:
         - title: '«Лучше королевой на день».'
           text: 'Говорят, колеблющегося герцога уговорила жена, Луиза де Гусман: «Лучше быть королевой один день, чем герцогиней всю жизнь». Скорее всего, фразу ей приписали позже, но её знает каждый португальский школьник.'

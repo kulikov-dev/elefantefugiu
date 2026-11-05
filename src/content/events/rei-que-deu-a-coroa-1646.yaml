@@ -1,0 +1,146 @@
+id: rei-que-deu-a-coroa-1646
+slug:
+  pt: o-rei-que-entregou-a-coroa
+  en: the-king-who-gave-away-his-crown
+  ru: korol-kotoryj-otdal-koronu
+title:
+  pt: O rei que entregou a coroa
+  en: The King Who Gave Away His Crown
+  ru: Король, который отдал корону
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1646
+place:
+  name:
+    pt: Vila Viçosa, Santuário de Nossa Senhora da Conceição
+    en: Vila Viçosa, Sanctuary of Our Lady of the Conception
+    ru: Вила-Висоза, святилище Носса Сеньора да Консейсан
+  short:
+    pt: Vila Viçosa
+    en: Vila Viçosa
+    ru: Вила-Висоза
+  lat: 38.7812069
+  lon: -7.4154627
+bridge:
+  name: Santuário de Nossa Senhora da Conceição
+  title:
+    pt: Santuário de Nossa Senhora da Conceição
+    en: Sanctuary of Our Lady of the Conception
+    ru: Святилище Носса Сеньора да Консейсан
+  address: Vila Viçosa
+  lat: 38.7812069
+  lon: -7.4154627
+  maps_url: https://www.google.com/maps/place/Santu%C3%A1rio+de+Nossa+Senhora+da+Concei%C3%A7%C3%A3o+de+Vila+Vi%C3%A7osa/@38.7812111,-7.4180376,17z/data=!3m1!4b1!4m6!3m5!1s0xd1715162939d5ff:0x567b10253b038b96!8m2!3d38.7812069!4d-7.4154627!16s%2Fg%2F121g1zl2
+  url: https://www.google.com/maps/place/Santu%C3%A1rio+de+Nossa+Senhora+da+Concei%C3%A7%C3%A3o+de+Vila+Vi%C3%A7osa/@38.7812111,-7.4180376,17z/data=!3m1!4b1!4m6!3m5!1s0xd1715162939d5ff:0x567b10253b038b96!8m2!3d38.7812069!4d-7.4154627!16s%2Fg%2F121g1zl2
+  note:
+    pt: A mesma imagem a quem o rei entregou a coroa, na igreja dentro das muralhas do castelo.
+    en: The very statue the king gave his crown to, in the church inside the old castle walls.
+    ru: Та самая статуя, которой король отдал корону, стоит в церкви внутри стен старого замка.
+threads:
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Por tradição, nenhum rei português pôs a coroa desde 1646.
+  en: By tradition, no Portuguese king has worn the crown since 1646.
+  ru: С 1646 года короли Португалии, как считается, больше не надевали корону.
+story:
+  pt: >-
+    Em 1640, o duque de Bragança tornou-se o rei D. João IV, mas a guerra com Espanha durou ainda
+    muitos anos. Em 1646, o rei proclamou Nossa Senhora da Conceição rainha e padroeira de Portugal
+    e ofereceu a sua coroa à imagem de Vila Viçosa. Desde então, a coroa passou a ser dela e,
+    segundo a tradição, os reis não voltaram a pô-la: eram aclamados, com a coroa pousada ao lado,
+    numa almofada.
+  en: >-
+    In 1640, the Duke of Braganza became King John IV, but the war with Spain went on for many more
+    years. In 1646, the king proclaimed Our Lady of the Immaculate Conception queen and patron of
+    Portugal and offered his crown to her statue in Vila Viçosa. From then on, the crown was hers,
+    and by tradition no king wore it again: kings were acclaimed, with the crown set beside them on
+    a cushion.
+  ru: >-
+    В 1640 году герцог Браганса стал королём Жуаном IV, но война с Испанией шла ещё много лет. В
+    1646 году король объявил королевой и покровительницей Португалии Деву Марию Непорочного Зачатия
+    и поднёс свою корону её статуе в Вила-Висозе. С тех пор корона считалась её, и, по традиции,
+    короли её больше не надевали: их провозглашали, а корону клали рядом на подушку.
+more:
+  pt: >-
+    A decisão foi tomada numa grande assembleia de nobres, clero e cidades em Lisboa, e a 25 de março
+    de 1646 o rei assinou a provisão. Para um país ainda em guerra com Espanha, era um gesto claro: a
+    nova dinastia, ainda frágil, ficava sob a proteção da própria Virgem.
+
+
+    O rei quis que todos o soubessem. Em 1654, enviou às câmaras o texto de um juramento em latim em
+    honra da Imaculada Conceição e mandou gravá-lo em pedra às portas e nas praças das cidades.
+    Estas lápides sobrevivem em várias cidades; uma delas está na coleção do Paço dos Duques, em
+    Guimarães. E o 8 de dezembro, dia da Imaculada Conceição, continua a ser feriado em Portugal: é a
+    festa da padroeira do país.
+
+
+    O último rei, D. Manuel II, também não foi coroado em 1908, mas aclamado.
+  en: >-
+    The decision was made at a great assembly of nobles, clergy and towns in Lisbon, and on March 25,
+    1646, the king signed the decree. For a country still at war with Spain, the message was clear:
+    the new and still shaky dynasty was under the protection of the Virgin herself.
+
+
+    The king wanted everyone to know. In 1654, he sent the towns the text of a Latin oath honoring
+    the Immaculate Conception and ordered it carved in stone at town gates and squares. Such plaques
+    survive in several towns; one is in the collection of the Ducal Palace in Guimarães. And
+    December 8, the feast of the Immaculate Conception, is still a public holiday in Portugal: it is
+    the day of the country’s patron.
+
+
+    The last king, Manuel II, was not crowned in 1908 either, only acclaimed.
+  ru: >-
+    Решение приняли на большом собрании дворян, духовенства и городов в Лиссабоне, и 25 марта 1646
+    года король подписал указ. Для страны, которая всё ещё воевала с Испанией, это был понятный ход:
+    новую, ещё шаткую династию брала под защиту сама Дева Мария.
+
+
+    Король хотел, чтобы об этом знал каждый. В 1654 году он разослал по городам текст клятвы на
+    латыни в честь Непорочного Зачатия и велел высечь его на камне у ворот и на площадях. Такие
+    доски сохранились в разных городах, одна есть в собрании дворца герцогов в Гимарайнше. А 8
+    декабря, день Непорочного Зачатия, в Португалии до сих пор выходной: это праздник
+    покровительницы страны.
+
+
+    Последнего короля, Мануэла II, в 1908 году тоже не короновали, а провозгласили.
+sources:
+  - title: "RFM: 8 de dezembro é feriado, e a explicação está ligada a uma coroação muito especial"
+    url: https://rfm.pt/atualidade/5105/8-de-dezembro-e-feriado-porque-a-explicacao-esta-ligada-a-uma-coroacao-muito-especial
+    type: press
+    accessed: '2026-11-05'
+  - title: "DN Madeira: Fátima recebe esta semana congresso sobre a padroeira de Portugal"
+    url: https://www.dnoticias.pt/2022/3/22/302517-fatima-recebe-esta-semana-congresso-sobre-a-padroeira-de-portugal/
+    type: press
+    accessed: '2026-11-05'
+  - title: "DN Madeira: Padroeira de Portugal vai ter monumento nacional"
+    url: https://www.dnoticias.pt/2022/3/24/303039-padroeira-de-portugal-vai-ter-monumento-nacional/
+    type: press
+    accessed: '2026-11-05'
+  - title: "Paço dos Duques de Guimarães: Lápide em honra da Imaculada Conceição"
+    url: https://pacodosduques.gov.pt/monumentos/paco-dos-duques/colecao/varia/pd1378-lapide-em-honra-da-imaculada-conceicao/
+    type: institutional
+    accessed: '2026-11-05'
+image:
+  file: rei-que-deu-a-coroa-1646.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um rei de capa ajoelhado oferece uma coroa sobre uma almofada à estátua da Virgem, num altar com velas, com fidalgos e padres atrás dele."
+    en: "Blue-and-white azulejo-style illustration: a kneeling king in a cape holds out a crown on a cushion to a statue of the Virgin on a candlelit altar, with nobles and priests behind him."
+    ru: "Иллюстрация в духе сине-белого азулежу: коленопреклонённый король в плаще подносит корону на подушке статуе Девы Марии на алтаре со свечами, за ним дворяне и священники."
+  caption:
+    pt: "O rei D. João IV oferece a coroa a Nossa Senhora da Conceição, 1646. Ilustração em estilo azulejo, criada por IA."
+    en: "King John IV offers his crown to Our Lady of the Conception, 1646. Azulejo-style illustration, created by AI."
+    ru: "Король Жуан IV подносит корону Деве Марии, 1646 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "60% 50%"
+status: ready
+published: '2026-11-05'
+placeholder: false
+ru_ready: true
+related:
+  - restauracao-1640

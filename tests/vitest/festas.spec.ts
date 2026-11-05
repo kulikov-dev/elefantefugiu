@@ -203,3 +203,13 @@ describe('festaRules', () => {
     expect(festaRules([])).toBe('');
   });
 });
+
+describe('the holidays of the site (src/data/festas.yaml)', () => {
+  it('an enabled holiday has its text in every language, and the story of the day', async () => {
+    const { FESTAS, festaText } = await import('../../src/lib/festas-data');
+    for (const festa of FESTAS.filter((f) => f.enabled)) {
+      for (const lang of ['pt', 'en', 'ru'] as const) expect(festaText(festa, lang), `${festa.id} in ${lang}`).toBeDefined();
+      expect(festa.story, `${festa.id} needs a story of the day`).toBeTruthy();
+    }
+  });
+});

@@ -1,7 +1,7 @@
 // Browser checks of the holidays (src/data/festas.yaml, src/lib/festas.mjs, docs/spec.md "Праздники"), run against dist/ served by serve.mjs:
 //   node festas.mjs [window page art nojs]
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
-// text in Russian (the only language with texts for now); the suite names what is missing when there is none.
+// text in every language of the site (pt, en, ru) and a drawing; the suite names what is missing when there is none.
 import { launchBrowser } from './browser.mjs';
 import { festas, published, readyEpochs } from './data.mjs';
 import { addDays, festaDay, windowOf } from '../../src/lib/festas.mjs';
@@ -10,16 +10,19 @@ const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
 const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 
-const FESTA = festas.find((f) => f.enabled && f.text?.ru && f.art);
-if (!FESTA) throw new Error('The suite needs an enabled holiday with a Russian text and a drawing in src/data/festas.yaml. None found.');
+const LANGS = ['pt', 'en', 'ru'];
+const FESTA = festas.find((f) => f.enabled && f.art && LANGS.every((l) => f.text?.[l]));
+if (!FESTA) throw new Error('need: an enabled holiday with a drawing and a text in pt, en and ru in src/data/festas.yaml. None found.');
 const TEXT = FESTA.text.ru;
+const STORY = published.find((e) => e.id === FESTA.story);
+if (!STORY) throw new Error(`need: the story "${FESTA.story}" of the holiday "${FESTA.id}" among the published stories`);
 const year = new Date().getFullYear() + 1;
 const DAY = festaDay(FESTA.date, year);
 const { from: FIRST } = windowOf(DAY);
 const BEFORE = addDays(FIRST, -1);
 const AFTER = addDays(DAY, 1);
 const MIDDLE = addDays(DAY, -1);
-const PAGE = `/ru/festa/${FESTA.slug}/`;
+const pageOf = (lang) => `/${lang}/festa/${FESTA.slug}/`;
 
 let failed = 0;
 const ok = (name, cond, extra = '') => {
@@ -60,11 +63,27 @@ const shown = (page) =>
   });
 
 if (want('window')) {
+  for (const lang of LANGS) {
+    const t = FESTA.text[lang];
+    const page = await open(`/${lang}/?hoje=${MIDDLE}`);
+    const st = await shown(page);
+    ok(`/${lang}/?hoje=${MIDDLE}: the header shows and the tab icon is the holiday's`, st.head && st.icon && st.festa === FESTA.id, JSON.stringify(st));
+    const link = await page.$eval('.festa-head__link', (el) => ({ text: el.textContent.trim(), href: el.getAttribute('href') }));
+    ok(`/${lang}/: the header leads to the page of the holiday with its text`, link.href === pageOf(lang) && link.text === t.head_link, JSON.stringify(link));
+    const head = await page.$eval('.festa-head', (el) => el.textContent);
+    ok(`/${lang}/: the header says the date line and the title of the holiday`, head.includes(t.head_date) && head.includes(t.head_title), head.trim().slice(0, 120));
+    const out = await shown(await open(`/${lang}/?hoje=${AFTER}`));
+    ok(`/${lang}/?hoje=${AFTER}: nothing shows`, !out.head && !out.icon && !out.festa, JSON.stringify(out));
+    // The header stands after the hero and before the cards of "Where to start".
+    const order = await page.evaluate(() => {
+      const head = document.querySelector('.festa-head');
+      const start = document.querySelector('.start-card');
+      return !!head && !!start && !!(head.compareDocumentPosition(start) & Node.DOCUMENT_POSITION_FOLLOWING);
+    });
+    ok(`/${lang}/: the header is before the cards of "Where to start"`, order);
+  }
   const inside = await open(`/ru/?hoje=${MIDDLE}`);
   const a = await shown(inside);
-  ok(`/ru/?hoje=${MIDDLE}: the header shows and the tab icon is the holiday's`, a.head && a.icon && a.festa === FESTA.id, JSON.stringify(a));
-  const link = await inside.$eval('.festa-head__link', (el) => ({ text: el.textContent.trim(), href: el.getAttribute('href') }));
-  ok('the header leads to the page of the holiday with its text', link.href === PAGE && link.text === TEXT.head_link, JSON.stringify(link));
   const outside = await open(`/ru/?hoje=${AFTER}`);
   const b = await shown(outside);
   ok(`/ru/?hoje=${AFTER}: nothing shows`, !b.head && !b.icon && !b.festa, JSON.stringify(b));
@@ -101,8 +120,8 @@ if (want('window')) {
   await tab.goto(`${base}/ru/?hoje=${MIDDLE}`, { waitUntil: 'load' });
   await tab.goto(`${base}/ru/o-proekte/?hoje=`, { waitUntil: 'load' });
   ok('an empty ?hoje= clears it too', !(await iconOf(tab)));
-  // Languages without a text: nothing, even with ?festa=.
-  for (const lang of ['pt', 'en']) {
+  // A language with no text of the holiday (none in the data now): nothing, even with ?festa=.
+  for (const lang of LANGS) {
     if (FESTA.text[lang]) continue;
     const page = await shown(await open(`/${lang}/?hoje=${MIDDLE}&festa=${FESTA.id}`));
     ok(`/${lang}/: no header and the usual tab icon while there is no text in the language`, !page.head && !page.icon, JSON.stringify(page));
@@ -110,30 +129,41 @@ if (want('window')) {
 }
 
 if (want('page')) {
-  const outside = await open(`${PAGE}?hoje=${AFTER}`);
-  const out = await shown(outside);
-  const line = await outside.$eval('[data-festa-off]', (el) => el.textContent.trim());
-  ok(`${PAGE}?hoje=${AFTER}: the line "${TEXT.off_window}" shows in the place of the date`, out.off && !out.date && line === TEXT.off_window, JSON.stringify(out));
-  const inside = await open(`${PAGE}?hoje=${MIDDLE}`);
-  const inn = await shown(inside);
-  ok(`${PAGE}?hoje=${MIDDLE}: the date shows instead of the line, the tab icon is the holiday's`, !inn.off && inn.date && inn.icon, JSON.stringify(inn));
-  const checks = await outside.evaluate(() => ({
-    h1: document.querySelector('h1')?.textContent?.trim(),
-    hreflang: document.querySelectorAll('link[rel=alternate][hreflang]').length,
-    activeLang: [...document.querySelectorAll('.lang-switch__list a')].map((a) => a.getAttribute('hreflang')),
-    disabled: [...document.querySelectorAll('.lang-switch__off')].map((a) => a.getAttribute('lang')),
-    links: [...document.querySelectorAll('.festa-trad a')].map((a) => a.getAttribute('href')),
-    sources: [...document.querySelectorAll('.festa-card__sources a')].map((a) => a.getAttribute('href')),
-    overflow: document.documentElement.scrollWidth > innerWidth,
-  }));
-  ok('the title is the name of the holiday', checks.h1 === TEXT.name, checks.h1);
-  ok('no hreflang on the page', checks.hreflang === 0, String(checks.hreflang));
-  ok('the language switch leads to the Russian page only, the other languages are not links', checks.activeLang.join() === 'ru' && checks.disabled.join() === 'pt,en', JSON.stringify(checks));
-  const wantLinks = (TEXT.traditions ?? []).filter((t) => t.link).length;
-  ok('every tradition with a link has it (a story of the site)', checks.links.length === wantLinks && checks.links.every((h) => /^\/ru\/istoriya\/[^/]+\/$/.test(h)), JSON.stringify(checks.links));
-  ok('the sources are links', checks.sources.length === TEXT.card.sources.length && checks.sources.every((h) => /^https:\/\//.test(h)));
-  const phone = await open(`${PAGE}?hoje=${AFTER}`, { width: 360 });
-  ok('360 px: no horizontal scroll on the page', !(await shown(phone)).overflow);
+  for (const lang of LANGS) {
+    const t = FESTA.text[lang];
+    const url = pageOf(lang);
+    const outside = await open(`${url}?hoje=${AFTER}`);
+    const out = await shown(outside);
+    const line = await outside.$eval('[data-festa-off]', (el) => el.textContent.trim());
+    ok(`${url}?hoje=${AFTER}: the line "${t.off_window}" shows in the place of the date`, out.off && !out.date && line === t.off_window, JSON.stringify(out));
+    const inn = await shown(await open(`${url}?hoje=${MIDDLE}`));
+    ok(`${url}?hoje=${MIDDLE}: the date shows instead of the line, the tab icon is the holiday's`, !inn.off && inn.date && inn.icon, JSON.stringify(inn));
+    const checks = await outside.evaluate(() => ({
+      h1: document.querySelector('h1')?.textContent?.trim(),
+      date: document.querySelector('[data-festa-on]')?.textContent?.trim(),
+      hreflang: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => `${l.getAttribute('hreflang')} ${new URL(l.href).pathname}`),
+      robots: document.querySelector('meta[name=robots]')?.getAttribute('content') ?? '',
+      activeLang: [...document.querySelectorAll('.lang-switch__list a')].map((a) => a.getAttribute('hreflang')),
+      disabled: document.querySelectorAll('.lang-switch__off').length,
+      links: [...document.querySelectorAll('.festa-trad a')].map((a) => a.getAttribute('href')),
+      headings: [...document.querySelectorAll('.festa-page h2')].map((h) => h.textContent.trim()),
+      card: [...document.querySelectorAll('.festa-story .start-card')].map((c) => ({ story: c.getAttribute('data-story'), href: c.querySelector('a')?.getAttribute('href'), hasImage: !!c.querySelector('img') })),
+    }));
+    ok(`${lang}: the title is the name of the holiday and the date line is its date`, checks.h1 === t.name && checks.date === t.date, JSON.stringify([checks.h1, checks.date]));
+    const wantHreflang = [...LANGS.map((l) => `${l} ${pageOf(l)}`), `x-default ${pageOf('pt')}`].sort().join('|');
+    ok(`${lang}: hreflang to the three pages and x-default`, checks.hreflang.slice().sort().join('|') === wantHreflang, JSON.stringify(checks.hreflang));
+    ok(`${lang}: outside the window the page is noindex`, /noindex/.test(checks.robots), checks.robots);
+    ok(`${lang}: the language switch leads to all three pages, none is off`, [...checks.activeLang].sort().join() === 'en,pt,ru' && checks.disabled === 0, JSON.stringify([checks.activeLang, checks.disabled]));
+    ok(`${lang}: two blocks (the story of the day, traditions and facts)`, checks.headings.length === 2, JSON.stringify(checks.headings));
+    const wantLinks = (t.traditions ?? []).filter((x) => x.link).length;
+    ok(`${lang}: every tradition with a link has it (a story of the site)`, checks.links.length === wantLinks && checks.links.every((h) => new RegExp(`^/${lang}/[^/]+/[^/]+/$`).test(h)), JSON.stringify(checks.links));
+    ok(`${lang}: the story of the day is the usual card with a picture, and its link leads to the story`, checks.card.length === 1 && checks.card[0].story === STORY.id && checks.card[0].hasImage && checks.card[0].href?.endsWith(`/${STORY.slug[lang]}/`), JSON.stringify(checks.card));
+    const story = await open(checks.card[0]?.href ?? '/');
+    const h1 = await story.$eval('h1', (el) => el.textContent.trim()).catch(() => '');
+    ok(`${lang}: the link of the card opens the story "${STORY.title[lang]}"`, h1 === STORY.title[lang], h1);
+    const phone = await open(`${url}?hoje=${AFTER}`, { width: 360 });
+    ok(`${lang}, 360 px: no horizontal scroll on the page`, !(await shown(phone)).overflow);
+  }
 }
 
 if (want('art')) {

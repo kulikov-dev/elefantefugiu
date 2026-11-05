@@ -11,8 +11,8 @@ import { fileURLToPath } from 'node:url';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const walk = (dir) => readdirSync(dir).flatMap((n) => (statSync(join(dir, n)).isDirectory() ? walk(join(dir, n)) : [join(dir, n)]));
-// The page of a holiday exists in one language only and has no hreflang (src/views/FestaView.astro).
-const ONE_LANGUAGE = /^ru\/festa\/[^/]+\/index\.html$/;
+// The page of a holiday (in each language that has its text) is noindex outside its window; in the window it is a page like the others (src/views/FestaView.astro).
+const FESTA_PAGE = /^(pt|en|ru)\/festa\/[^/]+\/index\.html$/;
 const ALWAYS_NOINDEX = /^(pt\/corrigir|en\/report|ru\/oshibka|pt\/surpreende-me|en\/surprise-me|ru\/udivi-menya)\/index\.html$/;
 
 const xml = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
@@ -31,17 +31,13 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   if (canonical) canonicals.add(canonical);
   if (/<meta name="robots" content="[^"]*noindex/.test(html)) {
-    if (!ALWAYS_NOINDEX.test(path) && !ONE_LANGUAGE.test(path)) notes.push(path);
+    if (!ALWAYS_NOINDEX.test(path) && !FESTA_PAGE.test(path)) notes.push(path);
     continue;
   }
   indexable += 1;
   if (!canonical || !listed.has(canonical)) errors.push(`${path}: may be indexed but is not in the sitemap`);
   // Russian is a language like the others: an indexable page names pt, en, ru and x-default (the pt page) as its alternates.
   const langs = new Set([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)"/g)].map((m) => m[1]));
-  if (ONE_LANGUAGE.test(path)) {
-    if (langs.size > 0) errors.push(`${path}: the page of a holiday has hreflang alternates`);
-    continue;
-  }
   for (const want of ['pt', 'en', 'ru', 'x-default']) if (!langs.has(want)) errors.push(`${path}: no hreflang="${want}" alternate`);
 }
 

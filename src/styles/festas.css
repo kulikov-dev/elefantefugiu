@@ -158,49 +158,8 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
   margin-block-end: var(--space-3);
 }
 
-.festa-card {
-  display: grid;
-  gap: var(--space-3);
+.festa-story {
   max-width: var(--measure);
-  padding: var(--space-5);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-}
-
-.festa-card > * {
-  margin: 0;
-}
-
-.festa-card__kicker {
-  color: var(--color-muted);
-  font-family: var(--font-label);
-  font-size: var(--text-sm);
-  letter-spacing: var(--letter-label);
-  text-transform: uppercase;
-}
-
-.festa-card__title {
-  font-size: var(--text-xl);
-}
-
-.festa-card__hook {
-  color: var(--festa-ink);
-  font-family: var(--font-heading);
-  font-size: var(--text-lg);
-  font-style: italic;
-}
-
-.festa-card__bridge,
-.festa-card__sources {
-  padding-top: var(--space-3);
-  color: var(--color-muted);
-  font-size: var(--text-sm);
-  border-top: 1px solid var(--color-border);
-}
-
-.festa-card__sources a {
-  overflow-wrap: anywhere;
 }
 
 .festa-trad {

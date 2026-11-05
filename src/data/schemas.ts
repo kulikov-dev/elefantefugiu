@@ -325,17 +325,6 @@ export const featuredSchema = z.strictObject({ id: z.string(), /** Position in f
 
 // ---- Holidays (src/data/festas.yaml, docs/spec.md "Праздники") ----
 
-const festaCard = z.strictObject({
-  /** The line above the title: the epoch and the year. */
-  kicker: z.string(),
-  title: z.string(),
-  hook: z.string(),
-  text: z.string(),
-  /** The bridge to today as plain text (no point on the map): the place, then a note. */
-  bridge: z.string(),
-  sources: z.array(z.string().url()).min(1),
-});
-
 const festaTradition = z.strictObject({
   title: z.string(),
   text: z.string(),
@@ -362,7 +351,6 @@ export const festaTextSchema = z.strictObject({
   og_description: z.string().optional(),
   /** Above the name of the page outside the window. */
   off_window: z.string(),
-  card: festaCard,
   traditions: z.array(festaTradition).min(1),
 });
 
@@ -374,6 +362,8 @@ export const festaSchema = z.strictObject({
   /** A fixed day `{ fixed: '12-01' }` or a shift from Easter `{ easter: -47 }`. */
   date: z.union([z.strictObject({ fixed: z.string().regex(/^\d{2}-\d{2}$/) }), z.strictObject({ easter: z.number().int() })]),
   art: z.enum(['crown', 'folar']).optional(),
+  /** The story of the day: the id of a story of the site; the page shows it as a usual card. */
+  story: z.string().optional(),
   /** The icon of the tab in the window of the holiday (src/lib/festa-art.mjs ICONS); null: the holiday has none and the usual icon stays. */
   favicon: z.enum(['crown']).nullable(),
   /** The preview picture: a path inside src/assets/ (festas/<id>.jpg or .png, the other extension is tried too). Optional: without the file the drawing is the picture. */

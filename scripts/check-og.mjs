@@ -25,7 +25,7 @@ try {
 
 const EPOCH_PAGE = /^(pt\/epoca|en\/era|ru\/epoha)\/[^/]+\/index\.html$/;
 const HOME_PAGE = /^(pt|en|ru)\/index\.html$/;
-const FESTA_PAGE = /^ru\/festa\/[^/]+\/index\.html$/;
+const FESTA_PAGE = /^(pt|en|ru)\/festa\/[^/]+\/index\.html$/;
 const counts = { story: 0, epoch: 0, home: 0, festa: 0 };
 let cards = 0;
 for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {

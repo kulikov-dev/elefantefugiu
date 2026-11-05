@@ -1,14 +1,15 @@
 ---
-// The page of a holiday: /ru/festa/<slug>/ (docs/spec.md "Праздники"). The date, the name, the lead, the drawing, "The story of this day" (a card kept in
-// src/data/festas.yaml until the story has pt and en texts and can be a story of the site), "Traditions and facts". Outside the window one line
-// above the name says when the holiday is celebrated; the head script shows it. Written in one language only: no hreflang, the language switch
-// shows the other languages but does not lead there.
+// The page of a holiday: /<lang>/festa/<slug>/ (docs/spec.md "Праздники"). The date, the name, the lead, the drawing, "The story of this day" (the story of
+// the site named in `story` of src/data/festas.yaml, as the usual card), "Traditions and facts". Outside the window one line
+// above the name says when the holiday is celebrated; the head script shows it. hreflang is given for the languages in which the holiday has a text.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FestaArt from '../components/FestaArt.astro';
-import { festaPath, storyPath, type Lang } from '../i18n/routes';
+import StartCard from '../components/StartCard.astro';
+import { festaPath, storyPath, LANGS, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import type { FestaData } from '../data/schemas';
 import { builtFesta, festaIndexable, festaText } from '../lib/festas-data';
+import { cardPicture } from '../lib/pictures';
 import { festaCardPath, festaCardSize } from '../lib/og-cards';
 import { withBase } from '../i18n/routes';
 import { loadSite } from '../lib/site-data';
@@ -33,16 +34,19 @@ const og = festaCardPath(festa.id);
 // Structured data (an indexable page only; BaseLayout leaves it out under noindex).
 const schemaCtx = schemaContext(lang, Astro.site);
 const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(href), name: text.name, description: text.lead });
-const host = (url: string) => new URL(url).hostname.replace(/^www\./, '');
+// The story of the day, as a card of "Where to start"; the section is left out when the holiday names none (or the story is not on the site).
+const dayStory = festa.story ? bySlug.get(festa.story) : undefined;
+const storyEpoch = dayStory ? site.epochs.find((ep) => ep.id === dayStory.epoch) : undefined;
+const readyLangs = LANGS.filter((l) => festaText(festa, l));
 ---
 <BaseLayout
   lang={lang}
   pageKey={undefined}
   title={text.name}
   description={text.lead}
-  alternates={{ pt: href, en: href, ru: href }}
-  hreflang={false}
-  activeLangs={[lang]}
+  alternates={{ pt: festaPath('pt', festa.slug), en: festaPath('en', festa.slug), ru: festaPath('ru', festa.slug) }}
+  readyLangs={readyLangs}
+  activeLangs={readyLangs}
   noindex={!indexable}
   schema={schema}
   preview={{ title: `${text.name} · ${text.date}`, description: text.og_description ?? text.lead, imageUrl: og ? withBase(og) : undefined, imageSize: og ? festaCardSize(og) : undefined, imageAlt: text.art_title }}
@@ -64,25 +68,16 @@ const host = (url: string) => new URL(url).hostname.replace(/^www\./, '');
         )
       }
     </div>
-    <section aria-labelledby="festa-history">
-      <h2 id="festa-history">{t(lang, 'festa.history')}</h2>
-      <article class="festa-card">
-        <p class="festa-card__kicker">{text.card.kicker}</p>
-        <h3 class="festa-card__title">{text.card.title}</h3>
-        <p class="festa-card__hook">{text.card.hook}</p>
-        <p>{text.card.text}</p>
-        <p class="festa-card__bridge">{text.card.bridge}</p>
-        <p class="festa-card__sources">
-          {t(lang, 'ui.sources')}:{' '}
-          {text.card.sources.map((url, i) => (
-            <>
-              {i > 0 && ', '}
-              <a href={url} rel="noopener">{host(url)}</a>
-            </>
-          ))}
-        </p>
-      </article>
-    </section>
+    {
+      dayStory && (
+        <section aria-labelledby="festa-history">
+          <h2 id="festa-history">{t(lang, 'festa.history')}</h2>
+          <div class="festa-story" data-festa-story={dayStory.id}>
+            <StartCard lang={lang} event={dayStory} picture={cardPicture(dayStory, storyEpoch ?? {})} />
+          </div>
+        </section>
+      )
+    }
     <section aria-labelledby="festa-traditions">
       <h2 id="festa-traditions">{t(lang, 'festa.traditions')}</h2>
       <ul class="festa-trad">

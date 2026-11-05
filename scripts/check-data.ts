@@ -486,6 +486,9 @@ for (const t of threads) {
     const langs = Object.keys(festa.text);
     if (festa.enabled && langs.length === 0) report('error', at, 'is enabled but has no text', 'text');
     if (festa.enabled && langs.length > 0 && !festa.art) report('error', at, 'has a text but no drawing (art)', 'art');
+    if (festa.story && !known.has(festa.story)) report('error', at, `the story "${festa.story}" does not exist`, 'story');
+    if (festa.story && known.has(festa.story) && !events.some((e) => e.item.id === festa.story && isLive(e.item))) report('error', at, `the story "${festa.story}" is not on the site (a draft or a future day)`, 'story');
+    if (festa.enabled && langs.length > 0 && !festa.story) report('error', at, 'has a text but no story of the day (story)', 'story');
     for (const lang of langs) {
       for (const [i, item] of (festa.text[lang as DataLang]?.traditions ?? []).entries()) {
         if (item.link && !known.has(item.link.story)) report('error', at, `the story "${item.link.story}" does not exist`, `traditions[${i}].link`, lang);
