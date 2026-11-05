@@ -348,6 +348,8 @@ export const boloTextSchema = z.strictObject({
   fava: boloResult,
   /** Under the cake after the eighth slice. */
   done: z.string(),
+  /** The button next to it: a new whole cake (shown only after the eighth slice). */
+  again: z.string(),
 });
 
 export const festaTextSchema = z.strictObject({

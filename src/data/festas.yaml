@@ -115,7 +115,8 @@
         fruit: { head: 'Fruta cristalizada.', text: 'Nada lá dentro, come à vontade.' }
         brinde: { head: 'Brinde.', text: 'Antigamente cozia-se no bolo uma pequena figura, e calhou-te a ti.' }
         fava: { head: 'Fava.', text: 'Diz a tradição que para o ano és tu quem paga o bolo-rei.' }
-        done: 'O bolo acabou. Fazemos outro no próximo Natal.'
+        done: 'O bolo acabou.'
+        again: 'Fazer outro'
       traditions:
         - title: 'A fogueira de Natal.'
           text: 'Nas aldeias da Beira, na noite da consoada, ergue-se diante da igreja o madeiro, uma fogueira de troncos inteiros. São os rapazes da terra que trazem a lenha, e o de Penamacor costuma estar entre os maiores do país. Diz-se que o fogo serve para aquecer o Menino.'
@@ -142,7 +143,8 @@
         fruit: { head: 'Candied fruit.', text: 'Nothing baked inside, enjoy.' }
         brinde: { head: 'Trinket.', text: 'A tiny figurine used to be baked into the cake, and you got it.' }
         fava: { head: 'Fava bean.', text: 'By tradition, you buy next year’s cake.' }
-        done: 'The cake is gone. We’ll bake a new one next Christmas.'
+        done: 'The cake is gone.'
+        again: 'Bake another one'
       traditions:
         - title: 'The Christmas bonfire.'
           text: 'In villages of the Beira region, a madeiro, a bonfire of whole tree trunks, is built in front of the church on Christmas Eve. Local young men haul in the logs, and the one in Penamacor is often among the biggest in the country. The fire, people say, is there to keep the Baby Jesus warm.'
@@ -170,7 +172,8 @@
         fruit: { head: 'Цукаты.', text: 'Ничего не запечено, ешь спокойно.' }
         brinde: { head: 'Подарок.', text: 'Раньше в пирог запекали маленькую фигурку, и она досталась тебе.' }
         fava: { head: 'Боб.', text: 'По обычаю, в следующем году пирог покупаешь ты.' }
-        done: 'Пирог съеден. Новый испечём к следующему Рождеству.'
+        done: 'Пирог съеден.'
+        again: 'Испечь ещё один'
       traditions:
         - title: 'Рождественский костёр.'
           text: 'В деревнях Бейры в сочельник перед церковью складывают мадейру, костёр из целых стволов. Брёвна свозят местные парни, и в Пенамакоре он бывает одним из самых больших в стране. Как говорят, огонь нужен, чтобы согреть Младенца.'

@@ -284,7 +284,8 @@ for (const BOLO_LANG of want('bolo') ? BOLO_LANGS : []) {
       slices: document.querySelectorAll('.bolo svg .slice').length,
       hint: document.querySelector('.bolo__hint').checkVisibility(),
       bubble: document.querySelector('.bolo__bubble').checkVisibility(),
-      done: document.querySelector('.bolo__done').textContent.trim(),
+      done: document.querySelector('.bolo__done-text').textContent.trim(),
+      again: document.querySelector('.bolo__again').checkVisibility(),
       disabled: document.querySelector('.bolo__cake').getAttribute('aria-disabled'),
     }));
   const which = (text) => (text.includes(G.fava.head) ? 'fava' : text.includes(G.brinde.head) ? 'brinde' : text.includes(G.fruit.head) ? 'fruit' : '?');
@@ -312,7 +313,7 @@ for (const BOLO_LANG of want('bolo') ? BOLO_LANGS : []) {
   // Eight presses.
   const page = await fresh();
   const before = await state(page);
-  ok('a fresh cake: whole, the hint stands, no bubble, no line', before.slices === N && before.hint && !before.bubble && before.done === '', JSON.stringify(before));
+  ok('a fresh cake: whole, the hint stands, no bubble, no line, no button "again"', before.slices === N && before.hint && !before.bubble && before.done === '' && !before.again, JSON.stringify(before));
   const seen = [];
   for (let i = 0; i < N; i++) {
     await page.click('.bolo__cake');
@@ -329,7 +330,7 @@ for (const BOLO_LANG of want('bolo') ? BOLO_LANGS : []) {
   ok('no counter of slices anywhere', !(await page.evaluate(() => /\d\s*(из|of|de)\s*\d/.test(document.querySelector('.bolo').textContent))));
   await new Promise((r) => setTimeout(r, 3200));
   const last = await state(page);
-  ok('after the eighth slice: the line, the button is aria-disabled, no bubble, no slices', last.done === G.done && last.disabled === 'true' && !last.bubble && last.slices === 0, JSON.stringify(last));
+  ok('after the eighth slice: the line and the button "again", the cake is aria-disabled, no bubble, no slices', last.done === G.done && last.again && (await page.$eval('.bolo__again', (el) => el.textContent.trim())) === G.again && last.disabled === 'true' && !last.bubble && last.slices === 0, JSON.stringify(last));
   await page.click('.bolo__cake');
   ok('a press after the last slice changes nothing', (await stored(page)).cut === N);
   const events = await page.evaluate(() => window.__events);
@@ -337,6 +338,17 @@ for (const BOLO_LANG of want('bolo') ? BOLO_LANGS : []) {
   await page.reload({ waitUntil: 'load' });
   const again = await state(page);
   ok('after a reload the cake is still eaten (line, aria-disabled, no hint)', again.done === G.done && again.disabled === 'true' && again.slices === 0 && !again.hint, JSON.stringify(again));
+  // "Bake another one": a new whole cake, new random slices, cut 0 in the storage, the hint does not come back.
+  ok('after a reload the button "again" is still there', again.again, JSON.stringify(again));
+  const oldCake = await stored(page);
+  await page.click('.bolo__again');
+  const next = await state(page);
+  const newCake = await stored(page);
+  ok('"again": a whole cake, no line, no button, no hint, not aria-disabled', next.slices === N && next.done === '' && !next.again && !next.hint && next.disabled === null && !next.bubble, JSON.stringify(next));
+  ok('"again": the state is cut 0 of this year with the bean and the gift in two different slices', newCake && newCake.cut === 0 && newCake.year === oldCake.year && newCake.fava !== newCake.brinde && newCake.fava >= 0 && newCake.fava < N && newCake.brinde >= 0 && newCake.brinde < N, JSON.stringify([oldCake, newCake]));
+  ok('"again": the event festa-natal-bolo-again is sent, nothing else', JSON.stringify(await page.evaluate(() => window.__events)) === JSON.stringify(['festa-natal-bolo-again']), JSON.stringify(await page.evaluate(() => window.__events)));
+  await page.click('.bolo__cake');
+  ok('the new cake can be cut again (and the hint stays away)', (await stored(page)).cut === 1 && !(await state(page)).hint);
   ok('the page has no script errors', page.errors.length === 0, page.errors.join('; '));
 
   // A cake started before: reload after two slices.

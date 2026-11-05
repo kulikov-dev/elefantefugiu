@@ -2,7 +2,7 @@
 // on the plate), and a speech bubble over the slice tells what it held (candied fruit, the gift or the bean). The bean and the gift lie in two different random
 // slices; the state stays in localStorage (festa-natal-bolo: { year, cut, fava, brinde }), a new calendar year in Lisbon is a new cake. Without storage it works
 // until the page is reloaded. The rules and the drawing are in src/lib/bolo-rei.mjs. Two events go to GoatCounter: the first slice of a visit and the eighth.
-import { H, N, W, anchor, draw, readState, shift, whatIn } from '../lib/bolo-rei.mjs';
+import { H, N, W, anchor, draw, freshState, readState, shift, whatIn } from '../lib/bolo-rei.mjs';
 import { lisbonToday } from '../lib/publication.mjs';
 import type { Counter } from '../lib/like';
 
@@ -17,6 +17,7 @@ interface Texts {
   brinde: { head: string; text: string };
   fava: { head: string; text: string };
   done: string;
+  again: string;
 }
 
 /** Small icons for the bubble: a candied cherry, the bean, a figurine in a crown. */
@@ -60,7 +61,8 @@ if (root) {
   const stage = root.querySelector<HTMLElement>('.bolo__stage')!;
   const bubble = root.querySelector<HTMLElement>('.bolo__bubble')!;
   const hint = root.querySelector<HTMLElement>('.bolo__hint')!;
-  const done = root.querySelector<HTMLElement>('.bolo__done')!;
+  const done = root.querySelector<HTMLElement>('.bolo__done-text')!;
+  const again = root.querySelector<HTMLButtonElement>('.bolo__again')!;
   const year = Number(today().slice(0, 4));
   const reduced = (): boolean => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const eaten = (n: number): number[] => Array.from({ length: n }, (_, i) => i);
@@ -89,6 +91,7 @@ if (root) {
     hideBubble();
     svg.innerHTML = draw({ gone: eaten(N) });
     done.textContent = texts.done;
+    again.hidden = false;
     hint.hidden = true;
     cake.setAttribute('aria-disabled', 'true');
   };
@@ -136,6 +139,20 @@ if (root) {
       timer = window.setTimeout(finish, AFTER_LAST);
     }
   };
+
+  // After the eighth slice: a new whole cake, the bean and the gift in new random slices. The hint does not come back.
+  again.addEventListener('click', () => {
+    state = freshState(year);
+    count = 0;
+    save();
+    hideBubble();
+    done.textContent = '';
+    again.hidden = true;
+    cake.removeAttribute('aria-disabled');
+    svg.innerHTML = draw();
+    tell('festa-natal-bolo-again');
+    cake.focus();
+  });
 
   // A cake that was started before: the eaten slices are gone, and no hint.
   if (count >= N) finish();

@@ -248,6 +248,21 @@ html[data-js] .bolo__cake:not([disabled], [aria-disabled='true']) {
   font-size: var(--text-sm);
 }
 
+.bolo__again {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-accent);
+  font: inherit;
+  font-weight: var(--weight-strong);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.bolo__again[hidden] {
+  display: none;
+}
+
 .bolo .slice.cut {
   transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
