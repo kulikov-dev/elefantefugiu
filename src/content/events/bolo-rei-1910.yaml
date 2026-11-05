@@ -1,0 +1,113 @@
+id: bolo-rei-1910
+slug:
+  pt: o-bolo-que-sobreviveu-ao-rei
+  en: the-cake-that-outlived-the-king
+  ru: pirog-kotoryy-perezhil-korolya
+title:
+  pt: O bolo que sobreviveu ao rei
+  en: The cake that outlived the king
+  ru: Пирог, который пережил короля
+epoch: monarquia-e-republica
+level: story
+year: 1910
+place:
+  name:
+    pt: Lisboa, Praça da Figueira
+    en: Lisbon, Praça da Figueira
+    ru: Лиссабон, Праса-да-Фигейра
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7131861
+  lon: -9.1379474
+bridge:
+  name: Confeitaria Nacional
+  title:
+    pt: Confeitaria Nacional
+    en: Confeitaria Nacional
+    ru: Кондитерская Confeitaria Nacional
+  address: Praça da Figueira 18B, Lisboa
+  lat: 38.7131861
+  lon: -9.1379474
+  maps_url: https://www.google.com/maps/place/Confeitaria+Nacional/@38.7131903,-9.1405223,17z/data=!3m1!4b1!4m6!3m5!1s0xd1934789c7f87bd:0xcefed3286a39bde3!8m2!3d38.7131861!4d-9.1379474!16s%2Fg%2F1q5bmg1bj
+  url: https://www.confeitarianacional.com/
+  note:
+    pt: A confeitaria onde, ao que se diz, o bolo-rei foi vendido pela primeira vez, e que continua no mesmo sítio.
+    en: The shop where bolo-rei is said to have first been sold, and it still stands in the same spot.
+    ru: Та самая кондитерская, где, как считается, bolo-rei продали впервые, и она до сих пор работает на том же месте.
+threads:
+  - comida-e-vinho
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A monarquia caiu em 1910, mas o bolo-rei nunca mudou de nome.
+  en: The king fell in 1910, but nobody managed to rename the bolo-rei.
+  ru: Короля свергли в 1910 году, а bolo-rei так и не смогли переименовать.
+story:
+  pt: O bolo-rei, uma coroa de massa doce com frutas cristalizadas e frutos secos, é o grande bolo de Natal de Portugal. A receita, ao que se diz, veio de França na segunda metade do século XIX para a Confeitaria Nacional, em Lisboa. Quando Portugal se tornou república, em 1910, um bolo «real» na montra deixou de cair bem. Tentaram vendê-lo como «bolo-presidente», «bolo-Arriaga», em honra do primeiro presidente, e até «ex-bolo-rei». Nenhum nome pegou, e o bolo continuou rei.
+  en: Bolo-rei, a ring of sweet dough topped with candied fruit and nuts that looks like a crown, is Portugal’s great Christmas cake. The recipe is said to have come from France in the second half of the 19th century, to the Confeitaria Nacional in Lisbon. When Portugal became a republic in 1910, a “king cake” in the shop window suddenly looked out of place. Bakers tried selling it as “bolo-presidente,” “bolo-Arriaga” after the first president, and even “ex-bolo-rei.” None of the names stuck, and the cake stayed king.
+  ru: Bolo-rei, кольцо из сдобного теста с цукатами и орехами, похожее на корону, — главный рождественский пирог Португалии. Рецепт, как считается, привезли из Франции во второй половине XIX века в лиссабонскую кондитерскую Confeitaria Nacional. Когда в 1910 году Португалия стала республикой, «королевский» пирог на витрине оказался не к месту. Его пробовали продавать как «болу-президенте», «болу-арриага» в честь первого президента и даже «бывший болу-рей». Ни одно имя не прижилось, и пирог так и остался королём.
+more:
+  pt: >-
+    A Confeitaria Nacional foi fundada em 1829 por Baltazar Rodrigues Castanheiro. O filho trouxe a receita de Paris e, segundo a própria confeitaria, o bolo chegou ao balcão em 1875. Em França, um bolo parecido come-se na Epifania, o dia dos três Reis Magos. Por isso, o «rei» do nome não é, muito provavelmente, um monarca português, mas os Reis Magos. É também por isso que o bolo-rei se come no Natal e no Dia de Reis, a 6 de janeiro.
+
+
+    Aos republicanos isso de nada valeu: a palavra «rei» na montra continuava a lembrar a monarquia derrubada. Segundo algumas fontes, chegou a ser proposto no parlamento o nome «bolo-república», mas também não vingou. Em França passou-se algo parecido: durante a Revolução, tentaram proibir o «bolo dos reis», e também lá não conseguiram.
+
+
+    Por tradição, o bolo levava uma fava seca e um pequeno brinde. Quem encontrava o brinde tinha sorte; quem encontrava a fava pagava o bolo-rei do ano seguinte.
+  en: >-
+    The Confeitaria Nacional was founded in 1829 by Baltazar Rodrigues Castanheiro. His son brought the recipe back from Paris, and according to the shop itself, the cake first went on sale there in 1875. In France, a similar cake is eaten at Epiphany, the day of the Three Kings. So the “king” in the name most likely isn’t a Portuguese monarch at all, but the Magi. That’s why bolo-rei is eaten both at Christmas and on Three Kings’ Day, January 6.
+
+
+    None of that helped the republicans: the word “king” in the window still reminded people of the fallen monarchy. According to some sources, someone even proposed “bolo-república” in parliament, but that didn’t catch on either. Something similar happened in France: during the Revolution, people tried to ban the “cake of kings,” and failed there too.
+
+
+    By custom, a dried fava bean and a small trinket were baked into the cake. Whoever found the trinket was in luck; whoever got the bean had to buy next year’s bolo-rei.
+  ru: >-
+    Confeitaria Nacional открыл в 1829 году Балтазар Родригеш Каштаньейру. Его сын привёз рецепт из Парижа, и, по словам самой кондитерской, в 1875 году пирог впервые появился на её прилавке. Во Франции похожий пирог пекут на Богоявление, в день трёх волхвов. Так что «король» в названии — это, скорее всего, не португальский монарх, а волхвы. Поэтому bolo-rei едят и на Рождество, и на День волхвов, 6 января.
+
+
+    Республиканцам это не помогло: слово «король» на витрине всё равно напоминало о свергнутой монархии. По некоторым данным, в парламенте предлагали даже название «болу-република», но и оно не прошло. Похожее было во Франции: в годы революции «пирог королей» пытались запретить, но и там не вышло.
+
+
+    В пирог по обычаю запекали сухой боб и маленький подарок. Кому достался подарок, тому повезло, а кому боб, тот покупает пирог в следующем году.
+sources:
+  - title: 'RTP: «Loja mais antiga da Baixa de Lisboa esconde o segredo do bolo-rei»'
+    url: https://www.rtp.pt/noticias/pais/loja-mais-antiga-da-baixa-de-lisboa-esconde-o-segredo-do-bolo-rei_n3821
+    type: press
+    accessed: '2026-11-05'
+  - title: 'CM: «Sabia que a origem do bolo-rei não é portuguesa?»'
+    url: https://www.cmjornal.pt/mundo/detalhe/sabia-que-a-origem-do-bolo-rei-nao-e-portuguesa
+    type: press
+    accessed: '2026-11-05'
+  - title: 'Wikipédia: Bolo-rei'
+    url: https://pt.wikipedia.org/wiki/Bolo-rei
+    type: encyclopedia
+    accessed: '2026-11-05'
+image:
+  file: bolo-rei-1910.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa montra de uma confeitaria, um pasteleiro de barrete pendura uma tabuleta sobre dois bolos-reis cobertos de frutas cristalizadas; na rua, um homem de chapéu de coco, uma mulher com um cesto e um rapaz olham para a montra, com um elétrico e prédios de Lisboa ao fundo."
+    en: "Blue-and-white azulejo-style illustration: in a pastry-shop window, a baker in a tall cap hangs a sign above two bolo-rei cakes covered in candied fruit; in the street, a man in a bowler hat, a woman with a basket and a boy look at the window, with a tram and Lisbon buildings behind them."
+    ru: "Иллюстрация в духе сине-белого азулежу: в витрине кондитерской пекарь в колпаке вешает табличку над двумя пирогами bolo-rei с цукатами; на улице мужчина в котелке, женщина с корзиной и мальчик смотрят на витрину, а позади трамвай и лиссабонские дома."
+  caption:
+    pt: "O bolo-rei na montra, 1910. Ilustração em estilo azulejo, criada por IA."
+    en: "Bolo-rei in the shop window, 1910. Azulejo-style illustration, created by AI."
+    ru: "Bolo-rei в витрине, 1910 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "45% 55%"
+status: ready
+published: '2026-11-05'
+placeholder: false
+ru_ready: true
+lang_review:
+  ru:
+    date: '2026-11-05'
+    hash: '3c28ad6d81a4'

@@ -1,5 +1,5 @@
 // Browser checks of the holidays (src/data/festas.yaml, src/lib/festas.mjs, docs/spec.md "Праздники"), run against dist/ served by serve.mjs:
-//   node festas.mjs [window page art nojs]
+//   node festas.mjs [window page art nojs bolo]
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
 // text in every language of the site (pt, en, ru) and a drawing; the suite names what is missing when there is none.
 import { launchBrowser } from './browser.mjs';
@@ -23,6 +23,11 @@ const BEFORE = addDays(FIRST, -1);
 const AFTER = addDays(DAY, 1);
 const MIDDLE = addDays(DAY, -1);
 const pageOf = (lang) => `/${lang}/festa/${FESTA.slug}/`;
+
+// The holiday with the cake to cut (art: bolo), in the language that has its game texts: the day, the window and the words come from the data.
+const BOLO = festas.find((f) => f.enabled && f.art === 'bolo' && Object.values(f.text ?? {}).some((t) => t.bolo));
+const BOLO_LANG = BOLO ? LANGS.find((l) => BOLO.text[l]?.bolo) : undefined;
+const BOLO_DAY = BOLO ? festaDay(BOLO.date, year) : '';
 
 let failed = 0;
 const ok = (name, cond, extra = '') => {
@@ -196,6 +201,153 @@ if (want('nojs')) {
   const page = await open('/ru/', { js: false });
   const built = await page.evaluate(() => ({ head: document.querySelector('.festa-head')?.checkVisibility(), marked: document.querySelector('[data-festa-show]')?.hasAttribute('data-festa-built') }));
   ok('without JavaScript the header shows only if the build was made in the window', built.head === built.marked, JSON.stringify(built));
+}
+
+if (want('bolo')) {
+  if (!BOLO) throw new Error('need: an enabled holiday with art: bolo and the texts of the game (text.<lang>.bolo) in src/data/festas.yaml');
+  const T = BOLO.text[BOLO_LANG];
+  const G = T.bolo;
+  const NEAR = addDays(BOLO_DAY, -1); // inside the window
+  const OUT = addDays(BOLO_DAY, 1); // just after it
+  const url = `/${BOLO_LANG}/festa/${BOLO.slug}/?hoje=${NEAR}`;
+  const N = 8;
+  const KEY = 'festa-natal-bolo';
+  const story = published.find((e) => e.id === BOLO.story);
+  // A page whose GoatCounter is a recorder: the events the cake sends.
+  const openCake = async (opts = {}, path = url) => {
+    const page = await browser.newPage();
+    await page.setViewport({ width: opts.width ?? 1280, height: 900 });
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: opts.reduce ? 'reduce' : 'no-preference' }]);
+    page.errors = [];
+    page.on('pageerror', (e) => page.errors.push(e.message));
+    await page.evaluateOnNewDocument(() => {
+      window.__events = [];
+      window.goatcounter = { count: (v) => window.__events.push(v.path) };
+    });
+    await page.goto(`${base}${path}`, { waitUntil: 'load' });
+    return page;
+  };
+  const fresh = async (opts, path) => {
+    const page = await openCake(opts, path);
+    await page.evaluate(() => localStorage.clear());
+    await page.reload({ waitUntil: 'load' });
+    return page;
+  };
+  const stored = (page) => page.evaluate((k) => JSON.parse(localStorage.getItem(k) ?? 'null'), KEY);
+  const state = (page) =>
+    page.evaluate(() => ({
+      slices: document.querySelectorAll('.bolo svg .slice').length,
+      hint: document.querySelector('.bolo__hint').checkVisibility(),
+      bubble: document.querySelector('.bolo__bubble').checkVisibility(),
+      done: document.querySelector('.bolo__done').textContent.trim(),
+      disabled: document.querySelector('.bolo__cake').getAttribute('aria-disabled'),
+    }));
+  const which = (text) => (text.includes(G.fava.head) ? 'fava' : text.includes(G.brinde.head) ? 'brinde' : text.includes(G.fruit.head) ? 'fruit' : '?');
+
+  // The page of the holiday after the window and the home page inside it and after it.
+  const lead = await openCake({}, `/${BOLO_LANG}/festa/${BOLO.slug}/?hoje=${OUT}`);
+  const href = await lead.$eval('.festa-story a', (el) => el.getAttribute('href')).catch(() => '');
+  ok('the card of the story of the day leads to the story', !!story && href.includes(story.slug[BOLO_LANG] ?? story.slug.en), href);
+  const home = await open(`/${BOLO_LANG}/?hoje=${NEAR}`);
+  const homeNow = await shown(home);
+  ok('home page in the window: the header of the holiday and its tab icon', homeNow.festa === BOLO.id && homeNow.icon, JSON.stringify(homeNow));
+  const homeOut = await shown(await open(`/${BOLO_LANG}/?hoje=${OUT}`));
+  ok('home page after the window: no header and the usual icon', !homeOut.festa && !homeOut.icon, JSON.stringify(homeOut));
+  const homeCake = await home.evaluate((id) => {
+    const art = document.querySelector(`[data-festa-show="${id}"] .festa-art`);
+    return { slices: art?.querySelectorAll('.slice').length, role: art?.getAttribute('role'), head: art?.closest('.festa-head')?.checkVisibility() };
+  }, BOLO.id);
+  ok('the cake on the home page is whole and has role="img"', homeCake.slices === N && homeCake.role === 'img' && homeCake.head === true, JSON.stringify(homeCake));
+
+  // Without JavaScript: a whole cake, the button is off.
+  const plain = await open(url, { js: false });
+  const noJs = await plain.evaluate(() => ({ slices: document.querySelectorAll('.bolo svg .slice').length, off: document.querySelector('.bolo__cake').disabled, hint: document.querySelector('.bolo__hint').checkVisibility() }));
+  ok('no JavaScript: the whole cake, the button is off, no hint', noJs.slices === N && noJs.off && !noJs.hint, JSON.stringify(noJs));
+
+  // Eight presses.
+  const page = await fresh();
+  const before = await state(page);
+  ok('a fresh cake: whole, the hint stands, no bubble, no line', before.slices === N && before.hint && !before.bubble && before.done === '', JSON.stringify(before));
+  const seen = [];
+  for (let i = 0; i < N; i++) {
+    await page.click('.bolo__cake');
+    seen.push(await page.$eval('.bolo__bubble', (el) => el.textContent.trim()));
+    if (i === 0) {
+      const after = await state(page);
+      ok('after the first slice the hint is gone and the bubble shows', !after.hint && after.bubble, JSON.stringify(after));
+    }
+  }
+  const kinds = seen.map(which);
+  const keep = await stored(page);
+  ok('eight slices: the bean once, the gift once, the rest candied fruit', kinds.filter((k) => k === 'fava').length === 1 && kinds.filter((k) => k === 'brinde').length === 1 && kinds.filter((k) => k === 'fruit').length === N - 2, kinds.join());
+  ok('the bean and the gift lie in two different slices (those the state names)', keep && keep.fava !== keep.brinde && kinds[keep.fava] === 'fava' && kinds[keep.brinde] === 'brinde', JSON.stringify(keep));
+  ok('no counter of slices anywhere', !(await page.evaluate(() => /\d\s*(из|of|de)\s*\d/.test(document.querySelector('.bolo').textContent))));
+  await new Promise((r) => setTimeout(r, 3200));
+  const last = await state(page);
+  ok('after the eighth slice: the line, the button is aria-disabled, no bubble, no slices', last.done === G.done && last.disabled === 'true' && !last.bubble && last.slices === 0, JSON.stringify(last));
+  await page.click('.bolo__cake');
+  ok('a press after the last slice changes nothing', (await stored(page)).cut === N);
+  const events = await page.evaluate(() => window.__events);
+  ok('GoatCounter: festa-natal-bolo-cut once (the first slice) and festa-natal-bolo-eaten once, nothing else', JSON.stringify(events) === JSON.stringify(['festa-natal-bolo-cut', 'festa-natal-bolo-eaten']), JSON.stringify(events));
+  await page.reload({ waitUntil: 'load' });
+  const again = await state(page);
+  ok('after a reload the cake is still eaten (line, aria-disabled, no hint)', again.done === G.done && again.disabled === 'true' && again.slices === 0 && !again.hint, JSON.stringify(again));
+  ok('the page has no script errors', page.errors.length === 0, page.errors.join('; '));
+
+  // A cake started before: reload after two slices.
+  const part = await fresh();
+  await part.click('.bolo__cake');
+  await part.click('.bolo__cake');
+  await part.reload({ waitUntil: 'load' });
+  const partly = await state(part);
+  ok('reload after two slices: six slices, no hint, no bubble, no counter line', partly.slices === N - 2 && !partly.hint && !partly.bubble && partly.done === '', JSON.stringify(partly));
+
+  // The keyboard: Enter and Space cut.
+  const keys = await fresh();
+  await keys.focus('.bolo__cake');
+  await keys.keyboard.press('Enter');
+  const one = (await stored(keys))?.cut;
+  await keys.keyboard.press('Space');
+  const two = (await stored(keys))?.cut;
+  ok('Enter and Space on the focused cake cut a slice each', one === 1 && two === 2, `${one},${two}`);
+
+  // Reduced motion: the slice stands cut at once, the bubble has no animation.
+  const still = await fresh({ reduce: true });
+  await still.click('.bolo__cake');
+  const calm = await still.evaluate(() => ({
+    moved: document.querySelector('.bolo .slice.cut')?.style.transform ?? '',
+    transition: getComputedStyle(document.querySelector('.bolo .slice.cut')).transitionDuration,
+    animation: getComputedStyle(document.querySelector('.bolo__bubble')).animationName,
+  }));
+  ok('prefers-reduced-motion: the slice is out at once, no transition, no bubble animation', calm.moved !== '' && !calm.moved.includes('translate(0px,0px)') && parseFloat(calm.transition) < 0.001 && calm.animation === 'none', JSON.stringify(calm));
+
+  // The year: a cake of an earlier year is a new whole cake.
+  const old = await fresh();
+  await old.evaluate((k, y) => localStorage.setItem(k, JSON.stringify({ year: y, cut: 8, fava: 0, brinde: 1 })), KEY, Number(NEAR.slice(0, 4)) - 1);
+  await old.reload({ waitUntil: 'load' });
+  const renewed = await state(old);
+  ok('the state of an earlier year: a whole new cake again', renewed.slices === N && renewed.hint && renewed.done === '', JSON.stringify(renewed));
+  await old.click('.bolo__cake');
+  ok('the new cake is stored under the year of the Lisbon day (?hoje=)', (await stored(old))?.year === Number(NEAR.slice(0, 4)), JSON.stringify(await stored(old)));
+
+  // A phone: the bubble stands under the cake (it does not cover it) and stays inside the page; on a wide screen it is over the slice.
+  const phone = await fresh({ width: 360 });
+  await phone.click('.bolo__cake');
+  const box = await phone.evaluate(() => {
+    const b = document.querySelector('.bolo__bubble').getBoundingClientRect();
+    const c = document.querySelector('.bolo__cake').getBoundingClientRect();
+    return { left: Math.round(b.left), right: Math.round(b.right), top: Math.round(b.top), cakeBottom: Math.round(c.bottom), width: innerWidth, overflow: document.documentElement.scrollWidth > innerWidth };
+  });
+  ok('360 px: the bubble is under the cake, inside the screen', box.left >= 0 && box.right <= box.width && box.top >= box.cakeBottom && !box.overflow, JSON.stringify(box));
+  const wide = await fresh({ width: 1280 });
+  await wide.click('.bolo__cake');
+  const over = await wide.evaluate(() => {
+    const b = document.querySelector('.bolo__bubble').getBoundingClientRect();
+    const c = document.querySelector('.bolo__cake').getBoundingClientRect();
+    const top = document.querySelector('.festa-page h1').getBoundingClientRect();
+    return { bubbleBottom: Math.round(b.bottom), cakeBottom: Math.round(c.bottom), cakeTop: Math.round(c.top), h1Bottom: Math.round(top.bottom), cakeWidth: Math.round(c.width) };
+  });
+  ok('1280 px: the cake stands under the heading, 640 px at most, and the bubble is over the cake', over.cakeTop >= over.h1Bottom && over.cakeWidth <= 640 && over.bubbleBottom < over.cakeBottom, JSON.stringify(over));
 }
 
 await browser.close();

@@ -83,6 +83,8 @@
 | Джузеппе Чинатти | Giuseppe Cinatti | Giuseppe Cinatti | Джузеппе Чинатти |
 | Калакауа | Kalakaua | Kalakaua | Калакауа |
 | Гагу Коутинью и Сакадура Кабрал: самолёты | «Lusitânia», «Pátria», «Santa Cruz» | “Lusitânia,” “Pátria,” “Santa Cruz” | «Лузитания», «Патрия», «Санта-Круш» |
+| Балтазар Родригеш Каштаньейру (основатель Confeitaria Nacional, 1829) | Baltazar Rodrigues Castanheiro | Baltazar Rodrigues Castanheiro | Балтазар Родригеш Каштаньейру |
+| Мануэл ди Арриага (первый президент Республики) | Manuel de Arriaga | Manuel de Arriaga | Мануэл ди Арриага («болу-арриага») |
 
 ## Места
 
@@ -131,6 +133,17 @@
 | Площадь Реставрадориш | Praça dos Restauradores | Praça dos Restauradores | Праса-душ-Рештаурадореш |
 | Лифт Санта-Жушта | Elevador de Santa Justa | Santa Justa Lift (имя собственное; в тексте «elevator») | лифт Санта-Жушта |
 | Каррейруш (возчики) | carreiros | carreiros | каррейруш |
+| Праса-да-Фигейра, Лиссабон | Praça da Figueira | Praça da Figueira | Праса-да-Фигейра |
+| Confeitaria Nacional (кондитерская на Праса-да-Фигейра, 1829) | Confeitaria Nacional | Confeitaria Nacional | Confeitaria Nacional (латиницей) |
+| Бейра | Beira | Beira | Бейра |
+| Пенамакор | Penamacor | Penamacor | Пенамакор |
+| Миньу | Minho | Minho | Миньу |
+| Траш-уш-Монтеш | Trás-os-Montes | Trás-os-Montes | Траш-уш-Монтеш |
+| Алгарве | Algarve | the Algarve | Алгарве |
+| Армасан-ди-Пера | Armação de Pêra | Armação de Pêra | Армасан-ди-Пера |
+| Каркавелуш | Carcavelos | Carcavelos | Каркавелуш |
+| Матозиньюш | Matosinhos | Matosinhos | Матозиньюш |
+| Азорские острова | Açores | the Azores | Азоры |
 
 ## Термины
 
@@ -148,3 +161,9 @@
 | Португальский легион | Legião Portuguesa | the Portuguese Legion | Португальский легион |
 | Королевская винная компания | Real Companhia Velha | Real Companhia Velha (the Old Company) | Реал-Компанья-Велья |
 | Любители потрохов | tripeiros | tripeiros (tripe-eaters) | трипейруш («любители потрохов») |
+| Пирог на Рождество и День волхвов | bolo-rei | bolo-rei | bolo-rei (латиницей; «болу-президенте», «болу-арриага», «бывший болу-рей» — прозвища 1910 года) |
+| Португальский Санта-Клаус | Pai Natal | Pai Natal | Пай Натал |
+| Рождественский ужин в сочельник | consoada | consoada | консоада |
+| Ночная рождественская месса | Missa do Galo | Missa do Galo (“Rooster’s Mass”) | Missa do Galo, «месса петуха» |
+| Рождественский костёр в Бейре | madeiro | madeiro (a Christmas bonfire of whole trunks) | мадейру (madeiro; не склоняется, не путать с островом Мадейра) |
+| Блюдо из остатков рождественского ужина | roupa-velha | roupa-velha (“old clothes”) | roupa-velha, «старая одежда» |

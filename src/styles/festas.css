@@ -133,6 +133,16 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
   }
 }
 
+/* The cake of Christmas goes under the heading, up to 640 px wide, on the left in the column of the text (the other drawings stand to the right from 900 px). */
+.festa-page__top--stack {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+.festa-page__art.festa-page__art--wide {
+  max-width: var(--festa-bolo-max);
+}
+
 .festa-page__date {
   margin: 0;
   color: var(--festa-ink);
@@ -179,4 +189,164 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
 .festa-trad a {
   display: inline-block;
   font-weight: var(--weight-strong);
+}
+
+/* "Cut a slice" (src/components/BoloGame.astro): the cake is a button with a knife for the cursor; the speech bubble is HTML over the drawing. */
+.bolo__stage {
+  position: relative;
+}
+
+.bolo__cake {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: inherit;
+  cursor: default;
+}
+
+/* The knife (a cursor cannot read tokens: the cobalt and the cream of the drawing, 32 px, the hotspot at the tip of the blade). */
+html[data-js] .bolo__cake:not([disabled], [aria-disabled='true']) {
+  cursor:
+    url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20transform%3D%22rotate%28-45%2016%2016%29%22%3E%3Cpath%20d%3D%22M2%2016%20L19%2012%20L19%2020%20Z%22%20fill%3D%22%23FFFDF7%22%20stroke%3D%22%231F4E9C%22%20stroke-width%3D%221.6%22%20stroke-linejoin%3D%22round%22/%3E%3Crect%20x%3D%2219%22%20y%3D%2213%22%20width%3D%2211%22%20height%3D%226%22%20rx%3D%222.5%22%20fill%3D%22%231F4E9C%22/%3E%3C/g%3E%3C/svg%3E')
+      5 27,
+    pointer;
+}
+
+.bolo__cake:focus-visible {
+  outline: var(--border-medium) solid var(--festa-ink);
+  outline-offset: var(--space-1);
+}
+
+.bolo__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.bolo__hint[hidden],
+.bolo__bubble[hidden] {
+  display: none;
+}
+
+.bolo__knife {
+  flex: none;
+  width: var(--bolo-knife-width);
+  height: auto;
+}
+
+.bolo__done {
+  min-height: var(--bolo-done-height);
+  margin: var(--space-2) 0 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.bolo .slice.cut {
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+/* The bubble: its place and the tail are set by the script (left, top, --tail), the rest is here. */
+.bolo__bubble {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  width: max-content;
+  max-width: min(var(--bolo-bubble-max), 78%);
+  padding: var(--space-3);
+  border: var(--border-medium) solid var(--festa-ink);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  line-height: var(--leading-heading);
+  pointer-events: none;
+  transform: translateY(calc(-100% - var(--space-3)));
+  animation: bolo-pop 0.3s 0.25s both;
+}
+
+.bolo__bubble::after {
+  content: '';
+  position: absolute;
+  bottom: calc(var(--bolo-bubble-tail) / -2 - 1px);
+  left: var(--tail, 50%);
+  width: var(--bolo-bubble-tail);
+  height: var(--bolo-bubble-tail);
+  margin-left: calc(var(--bolo-bubble-tail) / -2);
+  border-right: var(--border-medium) solid var(--festa-ink);
+  border-bottom: var(--border-medium) solid var(--festa-ink);
+  background: var(--color-surface);
+  transform: rotate(45deg);
+}
+
+/* Narrow: under the cake, in the flow (the script gives it the left margin), the tail up. */
+.bolo__bubble--below {
+  position: relative;
+  top: auto;
+  left: auto;
+  margin-top: var(--space-3);
+  transform: none;
+  animation-name: bolo-fade;
+}
+
+.bolo__bubble--below::after {
+  top: calc(var(--bolo-bubble-tail) / -2 - 1px);
+  bottom: auto;
+  border-top: var(--border-medium) solid var(--festa-ink);
+  border-right: 0;
+  border-bottom: 0;
+  border-left: var(--border-medium) solid var(--festa-ink);
+}
+
+.bolo__bubble svg {
+  flex: none;
+  width: var(--bolo-bubble-icon);
+  height: var(--bolo-bubble-icon);
+}
+
+.bolo__bubble b {
+  color: var(--festa-ink);
+}
+
+@keyframes bolo-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bolo-pop {
+  from {
+    opacity: 0;
+    margin-top: var(--space-2);
+  }
+
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bolo .slice.cut {
+    transition: none;
+  }
+
+  .bolo__bubble {
+    animation: none;
+  }
 }

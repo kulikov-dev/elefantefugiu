@@ -333,6 +333,23 @@ const festaTradition = z.strictObject({
 });
 
 /** What a holiday says in one language. A language with no entry has no header, no badge and no page of the holiday. */
+/** A result of cutting a slice of the bolo-rei: the first words (shown in bold) and the rest. */
+const boloResult = z.strictObject({ head: z.string(), text: z.string() });
+
+/** The words of the game "Cut a slice" on the page of Christmas (src/scripts/bolo-rei.ts). */
+export const boloTextSchema = z.strictObject({
+  /** The name of the button that is the cake. */
+  aria: z.string(),
+  /** The hint under the cake, with a little knife: shown until the first slice is cut. */
+  hint: z.string(),
+  /** In the speech bubble over the cut slice: candied fruit only, the gift, the bean. */
+  fruit: boloResult,
+  brinde: boloResult,
+  fava: boloResult,
+  /** Under the cake after the eighth slice. */
+  done: z.string(),
+});
+
 export const festaTextSchema = z.strictObject({
   /** "1 декабря": the date as people say it; the page shows it above the name. */
   date: z.string(),
@@ -351,6 +368,8 @@ export const festaTextSchema = z.strictObject({
   og_description: z.string().optional(),
   /** Above the name of the page outside the window. */
   off_window: z.string(),
+  /** The words of the game with the cake (a holiday whose art is the bolo needs them). */
+  bolo: boloTextSchema.optional(),
   traditions: z.array(festaTradition).min(1),
 });
 
@@ -361,11 +380,11 @@ export const festaSchema = z.strictObject({
   enabled: z.boolean(),
   /** A fixed day `{ fixed: '12-01' }` or a shift from Easter `{ easter: -47 }`. */
   date: z.union([z.strictObject({ fixed: z.string().regex(/^\d{2}-\d{2}$/) }), z.strictObject({ easter: z.number().int() })]),
-  art: z.enum(['crown', 'folar']).optional(),
+  art: z.enum(['crown', 'folar', 'bolo']).optional(),
   /** The story of the day: the id of a story of the site; the page shows it as a usual card. */
   story: z.string().optional(),
   /** The icon of the tab in the window of the holiday (src/lib/festa-art.mjs ICONS); null: the holiday has none and the usual icon stays. */
-  favicon: z.enum(['crown']).nullable(),
+  favicon: z.enum(['crown', 'bolo']).nullable(),
   /** The preview picture: a path inside src/assets/ (festas/<id>.jpg or .png, the other extension is tried too). Optional: without the file the drawing is the picture. */
   image: z.string().regex(/^[\w./-]+\.(png|jpg)$/).optional(),
   text: z.strictObject({ pt: festaTextSchema.optional(), en: festaTextSchema.optional(), ru: festaTextSchema.optional() }),

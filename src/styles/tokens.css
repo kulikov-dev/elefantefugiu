@@ -235,6 +235,21 @@
   --festa-warm: light-dark(#d9a441, #e0b45a);
   --festa-wash: light-dark(#e4ecf8, #22324f);
   --festa-shell: light-dark(#fffdf7, #efe8d8);
+  /* Bolo-rei (docs/drafts/bolo-rei.js): candied fruit is the one place where colour is the point, a deliberate exception to "cobalt plus one warm";
+     the glaze tones brown the crust of the cake. */
+  --festa-cherry: light-dark(#c8372d, #e2675c);
+  --festa-angelica: light-dark(#4e8f45, #7dbb6e);
+  --festa-peel: light-dark(#e58a2b, #f0a050);
+  --festa-glaze: light-dark(#7a3a0e, #7a3a0e);
+  --festa-glaze-deep: light-dark(#5a2a08, #5a2a08);
+  /* The plate of the bolo-rei: the pale blue wash in the light theme, the surface of the cards of the site in the dark one (no blue fill on the warm dark page). */
+  --festa-plate: light-dark(var(--festa-wash), var(--color-surface));
+  --festa-bolo-max: 40rem; /* the cake on the page of Christmas, under the heading (640 px) */
+  --bolo-bubble-max: 17.5rem; /* the speech bubble over a cut slice */
+  --bolo-bubble-icon: 2.5rem;
+  --bolo-bubble-tail: 0.875rem;
+  --bolo-done-height: 1.5rem; /* the line under the cake keeps its place before it has a word */
+  --bolo-knife-width: 1.625rem; /* the little knife of the hint */
   --festa-art-max: 23.75rem; /* the drawing on the page of a holiday (380 px) */
   --festa-head-art-max: 26rem; /* and in the header of the home page */
   --festa-glow-time: 4s;
@@ -479,6 +494,12 @@
     --festa-warm: #d9a441;
     --festa-wash: #e4ecf8;
     --festa-shell: #fffdf7;
+    --festa-cherry: #c8372d;
+    --festa-angelica: #4e8f45;
+    --festa-peel: #e58a2b;
+    --festa-glaze: #7a3a0e;
+    --festa-glaze-deep: #5a2a08;
+    --festa-plate: var(--festa-wash);
   }
 
   :root {

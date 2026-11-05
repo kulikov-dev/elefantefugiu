@@ -4,6 +4,7 @@
 // above the name says when the holiday is celebrated; the head script shows it. hreflang is given for the languages in which the holiday has a text.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FestaArt from '../components/FestaArt.astro';
+import BoloGame from '../components/BoloGame.astro';
 import StartCard from '../components/StartCard.astro';
 import { festaPath, storyPath, LANGS, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
@@ -52,7 +53,7 @@ const readyLangs = LANGS.filter((l) => festaText(festa, l));
   preview={{ title: `${text.name} · ${text.date}`, description: text.og_description ?? text.lead, imageUrl: og ? withBase(og) : undefined, imageSize: og ? festaCardSize(og) : undefined, imageAlt: text.art_title }}
 >
   <article class="festa-page">
-    <div class="festa-page__top">
+    <div class:list={['festa-page__top', { 'festa-page__top--stack': festa.art === 'bolo' }]}>
       <header>
         <!-- In the window the date; outside it the line "this holiday is celebrated on ..." in the same place and style (the head script decides). -->
         <p class:list={['festa-page__date', { 'is-off-built': offBuilt }]} data-festa-on={festa.id}>{text.date}</p>
@@ -62,8 +63,12 @@ const readyLangs = LANGS.filter((l) => festaText(festa, l));
       </header>
       {
         festa.art && (
-          <div class="festa-page__art">
-            <FestaArt art={festa.art} title={text.art_title} id={`festa-art-${festa.id}`} />
+          <div class:list={['festa-page__art', { 'festa-page__art--wide': festa.art === 'bolo' }]}>
+            {festa.art === 'bolo' && text.bolo ? (
+              <BoloGame text={text.bolo} />
+            ) : (
+              <FestaArt art={festa.art} title={text.art_title} id={`festa-art-${festa.id}`} />
+            )}
           </div>
         )
       }
