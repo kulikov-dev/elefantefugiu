@@ -9,6 +9,7 @@ import EpochSwitcher from '../components/EpochSwitcher.astro';
 import FamilyNote from '../components/FamilyNote.astro';
 import Mascot from '../components/Mascot.astro';
 import ThenNow from '../components/ThenNow.astro';
+import EpochPanno from '../components/EpochPanno.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import MapBlock from '../components/MapBlock.astro';
@@ -102,15 +103,18 @@ const schema = epochNodes(schemaCtx, {
   <!-- ?fio= applied before the first paint (the head script sets data-fio on <html>). -->
   <style slot="head" is:inline set:html={feedFilterCss(site.threads.map((th) => th.id))} />
   <div class="epoch" data-epoch-page data-pane="feed">
+    <div class="epoch__head">
     <header class="epoch__header">
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">
         {epochYearsText(epoch, lang)}
-        <span class="epoch__read" data-read-progress data-locale={LOCALES[lang]} {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.read_progress')).map(([k, v]) => [`data-${k}`, v]))} aria-live="polite">{plural(lang, 'plural.read_progress', 0).replace('{m}', String(feed.length))}</span>
+        {!epochPic && <span class="epoch__read" data-read-progress data-locale={LOCALES[lang]} {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.read_progress')).map(([k, v]) => [`data-${k}`, v]))} aria-live="polite">{plural(lang, 'plural.read_progress', 0).replace('{m}', String(feed.length))}</span>}
       </p>
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
       {intro && <p class="epoch__intro">{intro}</p>}
     </header>
+      {epochPic && <EpochPanno lang={lang} picture={epochPic} links={Object.fromEntries(feed.map((e) => [e.id, storyPath(lang, e.slug[lang])]))} />}
+    </div>
     <div class="azulejo-rule" aria-hidden="true"></div>
 
     <EpochSwitcher lang={lang} items={switcherItems} />
@@ -252,6 +256,27 @@ const schema = epochNodes(schemaCtx, {
 <style>
   .epoch > :global(* + *) {
     margin-block-start: var(--space-5);
+  }
+
+  /* The panel of the epoch (JavaScript only) stands beside the text on a wide screen and under it on a phone. Without JavaScript it is not shown
+     and the head is the plain header, so no column is kept for it. */
+  @media (min-width: 60rem) {
+    :global(html[data-js]) .epoch__head:has(:global(.panno)) {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) var(--epoch-panno-width);
+      gap: var(--space-5);
+      align-items: start;
+    }
+  }
+
+  .epoch__head > :global(.panno) {
+    margin-block-start: var(--space-3);
+  }
+
+  @media (min-width: 60rem) {
+    .epoch__head > :global(.panno) {
+      margin-block-start: 0;
+    }
   }
 
   .epoch__header > * + * {

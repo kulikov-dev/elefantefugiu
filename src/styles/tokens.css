@@ -215,6 +215,7 @@
   /* A marker the reader can press is at least this big (WCAG 2.2 target size, 24 px); the drawn shape may be smaller. */
   --map-target-min: 1.5rem;
   --epoch-map-width: clamp(20rem, 38%, 30rem);
+  --epoch-panno-width: 23rem; /* the personal panel of the epoch, beside the heading text on a wide screen */
 
   /* Interactives (stage 7a): group colours (the `tone` key of the data), outline width, widest drawing, reveal */
   /* Group colours of the interactives: the five hues of the epoch palettes (section 3), fixed by name so that "blue"
@@ -260,6 +261,9 @@
   --azulejo-opacity-frame: 0.4; /* bands, strips and the corner: up to 50% */
   --azulejo-opacity-axis: 0.5; /* the pattern that is the axis of an epoch timeline, with no straight line: the strongest a strip may be */
   --azulejo-band-height: 1.25rem;
+  --panno-glaze: light-dark(#fdfcf8, #2c363c); /* a piece of the epoch panel not yet won: smooth glazed tile, muted in the dark theme */
+  --panno-glaze-edge: light-dark(#dcd8ca, #3b484f);
+  --panno-seam-open: light-dark(#b8b29f, #1a2226); /* the seam between two pieces already shown: fine and half transparent (the picture draws its own) */
   --azulejo-corner-size: 5.5rem;
 
   /* A button that cannot be pressed (the report form while it is sending). */
@@ -500,6 +504,9 @@
     --festa-glaze: #7a3a0e;
     --festa-glaze-deep: #5a2a08;
     --festa-plate: var(--festa-wash);
+    --panno-glaze: #fdfcf8;
+    --panno-glaze-edge: #dcd8ca;
+    --panno-seam-open: #b8b29f;
   }
 
   :root {

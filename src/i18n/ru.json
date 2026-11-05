@@ -219,6 +219,11 @@
   "feed": {
     "expand_story": "Читать историю"
   },
+  "panno": {
+    "label": "Ваше панно эпохи",
+    "continue": "Продолжить чтение",
+    "done": "Эпоха прочитана"
+  },
   "plural": {
     "stories_one": "{n} история",
     "stories_few": "{n} истории",
@@ -251,7 +256,11 @@
     "read_progress_one": "прочитано {n} из {m}",
     "read_progress_few": "прочитано {n} из {m}",
     "read_progress_many": "прочитано {n} из {m}",
-    "read_progress_other": "прочитано {n} из {m}"
+    "read_progress_other": "прочитано {n} из {m}",
+    "panno_count_one": "прочитано {n} из {m}",
+    "panno_count_few": "прочитано {n} из {m}",
+    "panno_count_many": "прочитано {n} из {m}",
+    "panno_count_other": "прочитано {n} из {m}"
   },
   "map": {
     "home": "Вся Португалия",

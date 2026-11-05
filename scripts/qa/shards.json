@@ -38,6 +38,7 @@
   "likes": 30,
   "start": 20,
   "meanwhile": 40,
+  "panno": 25,
   "festas": 15
  },
  "shards": [
@@ -85,6 +86,7 @@
    "likes",
    "start",
    "meanwhile",
+   "panno",
    "festas"
   ]
  ]

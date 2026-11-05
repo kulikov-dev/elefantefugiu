@@ -219,6 +219,11 @@
   "feed": {
     "expand_story": "Read the story"
   },
+  "panno": {
+    "label": "Your panel of this era",
+    "continue": "Keep reading",
+    "done": "Era complete"
+  },
   "plural": {
     "stories_one": "{n} story",
     "stories_other": "{n} stories",
@@ -235,7 +240,9 @@
     "then_now_more_one": "{n} more comparison",
     "then_now_more_other": "{n} more comparisons",
     "read_progress_one": "read {n} of {m}",
-    "read_progress_other": "read {n} of {m}"
+    "read_progress_other": "read {n} of {m}",
+    "panno_count_one": "{n} of {m} read",
+    "panno_count_other": "{n} of {m} read"
   },
   "map": {
     "home": "All of Portugal",
