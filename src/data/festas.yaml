@@ -8,6 +8,7 @@
   enabled: false
   date: { fixed: '11-11' }
   favicon: null
+  image: festas/sao-martinho.jpg
   text: {}
 
 - id: restauracao
@@ -58,6 +59,7 @@
   enabled: false
   date: { fixed: '12-25' }
   favicon: null
+  image: festas/natal.jpg
   text: {}
 
 # Carnival: 47 days before Easter.
@@ -66,6 +68,7 @@
   enabled: false
   date: { easter: -47 }
   favicon: null
+  image: festas/carnaval.jpg
   text: {}
 
 # The drawing of the folar is ready (src/lib/festa-art.mjs, "Фолар на тарелке: круглый сдобный хлеб с тремя яйцами в скорлупе, каждое держит крест из теста");
@@ -76,6 +79,7 @@
   date: { easter: 0 }
   art: folar
   favicon: null
+  image: festas/pascoa.jpg
   text: {}
 
 - id: dia-de-portugal
@@ -83,6 +87,7 @@
   enabled: false
   date: { fixed: '06-10' }
   favicon: null
+  image: festas/dia-de-portugal.jpg
   text: {}
 
 - id: santos-populares
@@ -90,6 +95,7 @@
   enabled: false
   date: { fixed: '06-13' }
   favicon: null
+  image: festas/santos-populares.jpg
   text: {}
 
 - id: sao-joao
@@ -97,6 +103,7 @@
   enabled: false
   date: { fixed: '06-24' }
   favicon: null
+  image: festas/sao-joao.jpg
   text: {}
 
 - id: republica
@@ -104,4 +111,5 @@
   enabled: false
   date: { fixed: '10-05' }
   favicon: null
+  image: festas/republica.jpg
   text: {}
