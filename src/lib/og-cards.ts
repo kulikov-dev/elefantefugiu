@@ -28,7 +28,7 @@ export const storyCardPath = (id: string, lang: Lang): string | undefined => car
 export const epochCardPath = (id: string, lang: Lang): string | undefined => cardPath(`epoch:${id}`, lang);
 export const homeCardPath = (lang: Lang): string | undefined => cardPath('home', lang);
 
-/** The preview picture of a holiday (scripts/make-festa-og.mjs: 1200x630 PNG, the drawing on the paper of the light theme), a path inside public/; undefined when there is none. */
+/** The preview picture of a holiday (scripts/make-festa-og.mjs: 1200x630; the picture of the owner as a JPEG, else the drawing on the paper of the light theme as a PNG), a path inside public/; undefined when there is none. */
 export function festaCardPath(id: string, cwd = process.cwd()): string | undefined {
   try {
     const manifest = JSON.parse(readFileSync(join(cwd, '.og-cache/festas.json'), 'utf8')) as Record<string, string>;
@@ -38,3 +38,6 @@ export function festaCardPath(id: string, cwd = process.cwd()): string | undefin
     return undefined;
   }
 }
+
+/** The size and the type of the picture of a holiday, for og:image:width, height and type. */
+export const festaCardSize = (rel: string) => ({ width: 1200, height: 630, type: rel.endsWith('.jpg') ? 'image/jpeg' : 'image/png' }) as const;

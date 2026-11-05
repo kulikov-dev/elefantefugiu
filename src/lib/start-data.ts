@@ -10,13 +10,11 @@ import { normalizeMinAge, normalizeSensitive, type MinAge } from './family';
 import { cardPicture } from './pictures';
 import { pictureSource } from './picture-assets';
 import { START_CARD_QUALITY, START_CARD_SIZES, START_CARD_WIDTHS, type StartCardData } from './start-card';
-import { builtHolidays } from './festas-data';
-import type { Pin, StartStory } from './start-set';
+import type { StartStory } from './start-set';
 import type { SiteData } from './site-data';
 
 export interface StartData {
   fallback: string[];
-  holidays: Pin[];
   stories: (StartStory & { minAge: MinAge })[];
   cards: Record<string, StartCardData>;
 }
@@ -57,8 +55,6 @@ export function startFile(site: SiteData, lang: Lang): Promise<{ json: string; h
     made = (async () => {
       const data: StartData = {
         fallback: site.featured.map((e) => e.id),
-        // A picture of a pinned page gets the base path of the site here, as the script puts it in the card.
-        holidays: builtHolidays(lang).map((pin) => (pin.target.type === 'page' && pin.target.image ? { ...pin, target: { ...pin.target, image: withBase(pin.target.image) } } : pin)),
         stories: site.events.map((e) => ({ ...toStart(e), minAge: normalizeMinAge(e.min_age) })),
         cards: Object.fromEntries(await Promise.all(site.events.map(async (e) => [e.id, await cardData(site, e, lang)] as const))),
       };

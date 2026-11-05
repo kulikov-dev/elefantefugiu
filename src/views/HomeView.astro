@@ -17,12 +17,12 @@ import { cardPicture } from '../lib/pictures';
 import type { EventData } from '../lib/events';
 import { buildToday } from '../lib/publication.mjs';
 import { startFile, startFileHref, toStart } from '../lib/start-data';
-import { builtFesta, builtHolidays, festaText, FESTAS } from '../lib/festas-data';
+import { builtFesta, festaText, FESTAS } from '../lib/festas-data';
 import FestaHero from '../components/FestaHero.astro';
 import { pinsFor } from '../lib/start-pins';
 import { setKey, startSet, withFallback } from '../lib/start-set';
 import { HOME_PREVIEW } from '../lib/og';
-import { OG_CARD, festaCardPath, homeCardPath } from '../lib/og-cards';
+import { OG_CARD, festaCardPath, festaCardSize, homeCardPath } from '../lib/og-cards';
 
 interface Props {
   lang: Lang;
@@ -70,7 +70,7 @@ const today = buildToday();
 const startStories = site.events.map(toStart);
 const builtYear = Number(today.slice(0, 4));
 const fallbackIds = site.featured.map((e) => e.id);
-const startRefs = withFallback(startSet({ today, stories: startStories, read: new Set(), pins: pinsFor(startStories, builtYear, builtHolidays(lang)) }), fallbackIds);
+const startRefs = withFallback(startSet({ today, stories: startStories, read: new Set(), pins: pinsFor(startStories, builtYear) }), fallbackIds);
 const eventById = new Map(site.events.map((e) => [e.id, e]));
 const shown = startRefs.map((ref) => ({ ref, event: ref.target.type === 'story' ? eventById.get(ref.target.id) : undefined })).filter((x) => x.ref.target.type === 'page' || x.event);
 const hasCaption = shown.some((x) => x.ref.label);
@@ -92,7 +92,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
 ---
 <BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={
     festaCard
-      ? { image: HOME_PREVIEW, imageUrl: withBase(festaCard), imageSize: { width: 1200, height: 630, type: 'image/png' }, imageAlt: festaText(festaNow!, lang)!.art_title }
+      ? { image: HOME_PREVIEW, imageUrl: withBase(festaCard), imageSize: festaCardSize(festaCard), imageAlt: festaText(festaNow!, lang)!.art_title }
       : { image: HOME_PREVIEW, imageUrl: homeCard ? withBase(homeCard) : undefined, imageSize: homeCard ? OG_CARD : undefined, imageAlt: homeCard ? startStory?.image?.alt[lang] : undefined }
   }>
   <div class="home">
@@ -120,9 +120,6 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
     ></p>
     <script type="application/json" data-new-data set:html={JSON.stringify(newData)} />
 
-    <!-- The header of a holiday (the 3 days before it and its day): hidden until the head script turns it on, so the page does not shift. -->
-    <FestaHero lang={lang} />
-
     <section class="hero" aria-labelledby="home-title">
       <div class="hero__text">
         <h1 id="home-title">{t(lang, 'home.hook_title')}</h1>
@@ -137,6 +134,9 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
         <Mascot pose="run" size="hero" />
       </div>
     </section>
+
+    <!-- The block of a holiday, after the hero and before the showcase (the 3 days before it and its day): hidden until the head script turns it on, so the page does not shift. -->
+    <FestaHero lang={lang} />
 
     {
       shown.length > 0 && (

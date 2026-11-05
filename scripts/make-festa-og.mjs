@@ -5,7 +5,7 @@
 //   public/festas/favicon-<name>.svg, -32.png, -180.png   the icon of the tab in the window of a holiday (festas.yaml `favicon`); 180 is the touch icon of iOS
 // None of these is in the repository. The colours are the light values of the --festa-* tokens of src/styles/tokens.css.
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -44,7 +44,24 @@ const H = 630;
 const festas = parse(readFileSync(join(root, 'src/data/festas.yaml'), 'utf8'));
 const manifest = {};
 const keep = new Set();
+/** The picture of the owner (festas.yaml `image`, a file in src/assets/; the other of .png / .jpg is tried when it is missing), or undefined. */
+const ownPicture = (festa) => {
+  if (!festa.image) return undefined;
+  const swap = festa.image.endsWith('.png') ? festa.image.replace(/\.png$/, '.jpg') : festa.image.replace(/\.jpg$/, '.png');
+  return [festa.image, swap].map((rel) => join(root, 'src/assets', rel)).find((file) => existsSync(file));
+};
 for (const festa of festas) {
+  if (Object.keys(festa.text ?? {}).length === 0) continue;
+  const own = ownPicture(festa);
+  if (own) {
+    // Cut to 1200x630 from the middle, a JPEG like the cards of the stories; the hash of the file is in the name.
+    const buffer = await sharp(own).resize(W, H, { fit: 'cover', position: 'centre' }).jpeg({ quality: 82, mozjpeg: true }).toBuffer();
+    const name = `${festa.id}-${createHash('sha1').update(buffer).digest('hex').slice(0, 10)}.jpg`;
+    writeFileSync(join(outDir, name), buffer);
+    manifest[festa.id] = `og-festas/${name}`;
+    keep.add(name);
+    continue;
+  }
   if (!festa.art || !ART[festa.art] || Object.keys(festa.text ?? {}).length === 0) continue;
   let inner = ART[festa.art].inner;
   for (const [name, value] of Object.entries(colors)) inner = inner.split(`var(${name})`).join(value);

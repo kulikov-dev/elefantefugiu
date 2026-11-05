@@ -8,6 +8,7 @@
   enabled: false
   date: { fixed: '11-11' }
   favicon: null
+  image: festas/sao-martinho.jpg
   text: {}
 
 - id: restauracao
@@ -17,8 +18,8 @@
   art: crown
   # The icon of the tab in the window (a plain crown, src/lib/festa-art.mjs).
   favicon: crown
-  # The story of the day: in the window its anniversary does not get a card of its own on the showcase.
-  story: restauracao-1640
+  # The preview picture when the page is shared: a file in src/assets/ (.png or .jpg, cut to 1200x630 from the middle). Without the file the drawing (art) is used.
+  image: festas/restauracao.jpg
   text:
     ru:
       date: '1 декабря'
@@ -28,9 +29,10 @@
       head_line: 'В 1640 году Португалия вернула себе своего короля, а через шесть лет он отдал корону.'
       head_link: 'История этого дня →'
       art_title: 'Корона лежит на бархатной подушке, перед ней скипетр'
-      lead: 'Restauração da Independência. 1 декабря 1640 года Португалия снова стала отдельным королевством после 60 лет общей короны с Испанией.'
+      lead: '1 декабря 1640 года Португалия снова стала отдельным королевством после 60 лет общей короны с Испанией.'
+      # What a messenger shows when the page is shared: the title is `name · date`, the description is this line.
+      og_description: 'Почему с 1646 года ни один король Португалии не надевал корону и как этот праздник однажды отменили ради экономии.'
       off_window: 'Этот праздник отмечают 1 декабря'
-      pin_label: '1 декабря · Реставрасан'
       # A story of the site needs pt and en text; until they are written the card lives here (and has no point on the map).
       card:
         kicker: 'Уния и Реставрация · 1646'
@@ -49,14 +51,15 @@
         - title: 'Площадь с названиями битв.'
           text: 'Праса-душ-Рештаурадореш в центре Лиссабона названа в честь этого дня. На её обелиске 1886 года выбиты названия сражений войны, которая после 1640 года шла ещё 28 лет.'
         - title: 'Сорок заговорщиков.'
-          text: 'Утром 1 декабря 1640 года во дворец в Лиссабоне ворвались сорок дворян. Как это было, рассказывает наша история.'
-          link: { story: restauracao-1640, label: 'Как это было утром 1 декабря →' }
+          text: 'Утром 1 декабря 1640 года во дворец в Лиссабоне ворвались сорок дворян.'
+          link: { story: restauracao-1640, label: 'Наша история →' }
 
 - id: natal
   slug: natal
   enabled: false
   date: { fixed: '12-25' }
   favicon: null
+  image: festas/natal.jpg
   text: {}
 
 # Carnival: 47 days before Easter.
@@ -65,6 +68,7 @@
   enabled: false
   date: { easter: -47 }
   favicon: null
+  image: festas/carnaval.jpg
   text: {}
 
 # The drawing of the folar is ready (src/lib/festa-art.mjs, "Фолар на тарелке: круглый сдобный хлеб с тремя яйцами в скорлупе, каждое держит крест из теста");
@@ -75,6 +79,7 @@
   date: { easter: 0 }
   art: folar
   favicon: null
+  image: festas/pascoa.jpg
   text: {}
 
 - id: dia-de-portugal
@@ -82,6 +87,7 @@
   enabled: false
   date: { fixed: '06-10' }
   favicon: null
+  image: festas/dia-de-portugal.jpg
   text: {}
 
 - id: santos-populares
@@ -89,6 +95,7 @@
   enabled: false
   date: { fixed: '06-13' }
   favicon: null
+  image: festas/santos-populares.jpg
   text: {}
 
 - id: sao-joao
@@ -96,6 +103,7 @@
   enabled: false
   date: { fixed: '06-24' }
   favicon: null
+  image: festas/sao-joao.jpg
   text: {}
 
 - id: republica
@@ -103,4 +111,5 @@
   enabled: false
   date: { fixed: '10-05' }
   favicon: null
+  image: festas/republica.jpg
   text: {}

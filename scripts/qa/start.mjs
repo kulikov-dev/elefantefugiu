@@ -3,7 +3,7 @@
 // The day is set with ?hoje=YYYY-MM-DD. The story and the day come from the data (a published story that is not a heavy topic and has `day`):
 // the card must be first with its line; a story read in the browser leaves the rotation but not the pins.
 import { launchBrowser } from './browser.mjs';
-import { inFestaWindow, need, published } from './data.mjs';
+import { need, published } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -12,8 +12,7 @@ const want = (name) => ONLY.length === 0 || ONLY.includes(name);
 const year = new Date().getFullYear();
 // The anniversary of the day: with several stories on one day, the candidates by id and the index year % number (src/lib/start-pins.ts).
 const candidates = (day) => published.filter((e) => e.day === day && e.sensitive !== true && typeof e.year === 'number' && e.year > 0).sort((a, b) => (a.id < b.id ? -1 : 1));
-// Not on a day inside the window of a holiday: its pin would be first (and a holiday may stand for the story of that day).
-const STORY = need('a story that is not a heavy topic with an exact day (`day`) outside the windows of the holidays', (list) => list.find((e) => e.day && e.sensitive !== true && typeof e.year === 'number' && e.year > 0 && !inFestaWindow(`${year}-${e.day}`)));
+const STORY = need('a story that is not a heavy topic with an exact day (`day`)', (list) => list.find((e) => e.day && e.sensitive !== true && typeof e.year === 'number' && e.year > 0));
 const pick = candidates(STORY.day)[year % candidates(STORY.day).length];
 const HOJE = `${year}-${STORY.day}`;
 const LINE = { pt: `Neste dia, em ${pick.year}`, en: `On this day in ${pick.year}`, ru: `В этот день в ${pick.year} году` };

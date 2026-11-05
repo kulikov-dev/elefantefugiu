@@ -358,10 +358,10 @@ export const festaTextSchema = z.strictObject({
   art_title: z.string(),
   /** The line under the name on the page of the holiday. */
   lead: z.string(),
+  /** The description when the page or the home page in the window is shared (og:description); the title is `name · date`. Without it the lead is used. */
+  og_description: z.string().optional(),
   /** Above the name of the page outside the window. */
   off_window: z.string(),
-  /** The small line above the card of the showcase. */
-  pin_label: z.string(),
   card: festaCard,
   traditions: z.array(festaTradition).min(1),
 });
@@ -376,8 +376,8 @@ export const festaSchema = z.strictObject({
   art: z.enum(['crown', 'folar']).optional(),
   /** The icon of the tab in the window of the holiday (src/lib/festa-art.mjs ICONS); null: the holiday has none and the usual icon stays. */
   favicon: z.enum(['crown']).nullable(),
-  /** The id of the story of the day; the showcase shows the holiday instead of the anniversary of that story. */
-  story: z.string().optional(),
+  /** The preview picture: a path inside src/assets/ (festas/<id>.jpg or .png, the other extension is tried too). Optional: without the file the drawing is the picture. */
+  image: z.string().regex(/^[\w./-]+\.(png|jpg)$/).optional(),
   text: z.strictObject({ pt: festaTextSchema.optional(), en: festaTextSchema.optional(), ru: festaTextSchema.optional() }),
 });
 

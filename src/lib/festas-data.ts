@@ -1,12 +1,11 @@
-// The holidays of src/data/festas.yaml, read and checked once. For pages and for the pins of the showcase; the dates and windows are in festas.ts.
+// The holidays of src/data/festas.yaml, read and checked once. For pages; the dates and windows are in festas.ts.
 import { parse } from 'yaml';
 import raw from '../data/festas.yaml?raw';
 import { festaListSchema, type FestaData, type FestaText } from '../data/schemas';
-import { festaPath, withBase, type Lang } from '../i18n/routes';
-import { festaDay, festaDays, festaNow, isInWindow, windowOf, type FestaNow } from './festas';
+import { withBase, type Lang } from '../i18n/routes';
+import { festaDays, festaNow, isInWindow, type FestaNow } from './festas';
 import { buildToday } from './publication.mjs';
 import type { HeadFestas } from './head-script';
-import type { Pin, Say } from './start-set';
 
 export const FESTAS: readonly FestaData[] = festaListSchema.parse(parse(raw));
 
@@ -38,36 +37,3 @@ export function headFestas(lang: Lang, today = buildToday()): HeadFestas {
 
 /** May the page of the holiday be indexed on this build? The holiday is on and the day of the build is in its window. */
 export const festaIndexable = (festa: FestaData, today = buildToday()): boolean => festa.enabled && isInWindow(festa, today);
-
-// The pins of the showcase live here, not in start-pins.ts: that file goes to the browser, and this one reads the YAML file.
-/**
- * The holiday pins of `year` for the showcase of one language: the enabled holidays that have a text in it (src/data/festas.yaml). The window of a holiday is the 3 days
- * before it and the day itself; Easter and Carnival are computed. The pin leads to the page of the holiday; `story` of the holiday is the story it stands for.
- */
-export function holidayPins(year: number, lang: Lang): Pin[] {
-  return FESTAS.flatMap((festa): Pin[] => {
-    const text = festaText(festa, lang);
-    if (!festa.enabled || !text) return [];
-    const to = festaDay(festa.date, year);
-    const say = (value: string): Say => ({ pt: value, en: value, ru: value });
-    return [
-      {
-        id: `holiday:${festa.id}`,
-        kind: 'holiday',
-        from: windowOf(to).from,
-        to,
-        priority: 0,
-        label: say(text.pin_label),
-        target: { type: 'page', href: festaPath(lang, festa.slug), title: say(text.head_title), hook: say(text.head_line) },
-        ...(festa.story ? { covers: festa.story } : {}),
-      },
-    ];
-  });
-}
-
-
-/** The holiday pins of the year of the build and of the next one (a reader on the other side of New Year), for one language. */
-export function builtHolidays(lang: Lang, today = buildToday()): Pin[] {
-  const year = Number(today.slice(0, 4));
-  return [...holidayPins(year, lang), ...holidayPins(year + 1, lang)];
-}

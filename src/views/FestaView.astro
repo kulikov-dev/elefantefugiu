@@ -9,7 +9,7 @@ import { festaPath, storyPath, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import type { FestaData } from '../data/schemas';
 import { builtFesta, festaIndexable, festaText } from '../lib/festas-data';
-import { festaCardPath } from '../lib/og-cards';
+import { festaCardPath, festaCardSize } from '../lib/og-cards';
 import { withBase } from '../i18n/routes';
 import { loadSite } from '../lib/site-data';
 import { pageNodes } from '../lib/schema';
@@ -45,7 +45,7 @@ const host = (url: string) => new URL(url).hostname.replace(/^www\./, '');
   activeLangs={[lang]}
   noindex={!indexable}
   schema={schema}
-  preview={{ description: text.lead, imageUrl: og ? withBase(og) : undefined, imageSize: og ? { width: 1200, height: 630, type: 'image/png' } : undefined, imageAlt: text.art_title }}
+  preview={{ title: `${text.name} · ${text.date}`, description: text.og_description ?? text.lead, imageUrl: og ? withBase(og) : undefined, imageSize: og ? festaCardSize(og) : undefined, imageAlt: text.art_title }}
 >
   <article class="festa-page">
     <div class="festa-page__top">
