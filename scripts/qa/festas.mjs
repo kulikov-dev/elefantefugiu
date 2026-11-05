@@ -1,5 +1,5 @@
 // Browser checks of the holidays (src/data/festas.yaml, src/lib/festas.mjs, docs/spec.md "Праздники"), run against dist/ served by serve.mjs:
-//   node festas.mjs [window page art nojs bolo]
+//   node festas.mjs [window page art nojs natal bolo]
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
 // text in every language of the site (pt, en, ru) and a drawing; the suite names what is missing when there is none.
 import { launchBrowser } from './browser.mjs';
@@ -26,14 +26,15 @@ const pageOf = (lang) => `/${lang}/festa/${FESTA.slug}/`;
 
 // The holiday with the cake to cut (art: bolo), in the language that has its game texts: the day, the window and the words come from the data.
 const BOLO = festas.find((f) => f.enabled && f.art === 'bolo' && Object.values(f.text ?? {}).some((t) => t.bolo));
-const BOLO_LANG = BOLO ? LANGS.find((l) => BOLO.text[l]?.bolo) : undefined;
+const BOLO_LANGS = BOLO ? LANGS.filter((l) => BOLO.text[l]?.bolo) : [];
 const BOLO_DAY = BOLO ? festaDay(BOLO.date, year) : '';
 
 let failed = 0;
-const ok = (name, cond, extra = '') => {
+const baseOk = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
+const ok = baseOk;
 const browser = await launchBrowser();
 const open = async (url, { width = 1280, scheme = 'light', reduce = false, js = true } = {}) => {
   const page = await browser.newPage();
@@ -203,7 +204,51 @@ if (want('nojs')) {
   ok('without JavaScript the header shows only if the build was made in the window', built.head === built.marked, JSON.stringify(built));
 }
 
-if (want('bolo')) {
+if (want('natal')) {
+  if (!BOLO) throw new Error('need: an enabled holiday with art: bolo in src/data/festas.yaml');
+  const pageB = (l) => `/${l}/festa/${BOLO.slug}/`;
+  const want3 = [...LANGS.map((l) => `${l} ${pageB(l)}`), `x-default ${pageB('pt')}`].sort().join('|');
+  for (const lang of LANGS) {
+    const t = BOLO.text[lang];
+    if (!t) throw new Error(`need: text.${lang} of the holiday "${BOLO.id}" in src/data/festas.yaml`);
+    const inWin = addDays(BOLO_DAY, -1);
+    const out = addDays(BOLO_DAY, 1);
+    const home = await open(`/${lang}/?hoje=${inWin}`);
+    const h = await home.evaluate((id) => {
+      const box = document.querySelector(`[data-festa-show="${id}"]`);
+      return { shown: !!box?.querySelector('.festa-head')?.checkVisibility(), text: box?.textContent ?? '', href: box?.querySelector('.festa-head__link')?.getAttribute('href'), icon: (document.querySelector('link[rel=icon][type="image/svg+xml"]')?.getAttribute('href') ?? '').includes('/festas/'), og: document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '', after: !!document.querySelector('.festa-head')?.compareDocumentPosition(document.querySelector('.start-card') ?? document.body) };
+    }, BOLO.id);
+    ok(`/${lang}/ in the window: the block of the holiday with its date line, title and link, and the icon of the tab`, h.shown && h.text.includes(t.head_date) && h.text.includes(t.head_title) && h.href === pageB(lang) && h.icon, JSON.stringify({ ...h, text: h.text.length }));
+    const outHome = await shown(await open(`/${lang}/?hoje=${out}`));
+    ok(`/${lang}/ after the window: no block, the usual icon`, !outHome.festa && !outHome.icon, JSON.stringify(outHome));
+    const page = await open(`${pageB(lang)}?hoje=${out}`);
+    const c = await page.evaluate(() => ({
+      h1: document.querySelector('h1')?.textContent?.trim(),
+      hreflang: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => `${l.getAttribute('hreflang')} ${new URL(l.href).pathname}`),
+      robots: document.querySelector('meta[name=robots]')?.getAttribute('content') ?? '',
+      og: document.querySelector('meta[property="og:title"]')?.getAttribute('content') ?? '',
+      ogd: document.querySelector('meta[property="og:description"]')?.getAttribute('content') ?? '',
+      ogi: document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '',
+      lang: [...document.querySelectorAll('.lang-switch__list a')].map((a) => a.getAttribute('hreflang')),
+      off: document.querySelectorAll('.lang-switch__off').length,
+      headings: [...document.querySelectorAll('.festa-page h2')].map((x) => x.textContent.trim()),
+      trad: document.querySelectorAll('.festa-trad li').length,
+    }));
+    ok(`${lang}: the page says the name of the holiday`, c.h1 === t.name, c.h1);
+    ok(`${lang}: hreflang to the three pages and x-default`, c.hreflang.slice().sort().join('|') === want3, JSON.stringify(c.hreflang));
+    ok(`${lang}: noindex outside the window`, /noindex/.test(c.robots), c.robots);
+    ok(`${lang}: the language switch leads to all three pages, none is off`, [...c.lang].sort().join() === 'en,pt,ru' && c.off === 0, JSON.stringify([c.lang, c.off]));
+    ok(`${lang}: the preview (title, description, picture) is the holiday's`, c.og === `${t.name} · ${t.date}` && c.ogd === t.og_description && c.ogi.includes('og-festas/'), JSON.stringify([c.og, c.ogd, c.ogi]));
+    ok(`${lang}: two blocks and all the traditions`, c.headings.length === 2 && c.trad === t.traditions.length, JSON.stringify([c.headings, c.trad]));
+  }
+  // Sitemap: this build is outside the window of the holiday, so none of its pages stands in it (the build in the window is checked by check-sitemap).
+  const map = await (await fetch(`${base}/sitemap.xml`)).text();
+  const inMap = LANGS.filter((l) => map.includes(pageB(l)));
+  ok('the sitemap has all three pages of the holiday or none of them', inMap.length === 0 || inMap.length === 3, inMap.join());
+}
+
+for (const BOLO_LANG of want('bolo') ? BOLO_LANGS : []) {
+  const ok = (name, cond, extra) => baseOk(`[${BOLO_LANG}] ${name}`, cond, extra);
   if (!BOLO) throw new Error('need: an enabled holiday with art: bolo and the texts of the game (text.<lang>.bolo) in src/data/festas.yaml');
   const T = BOLO.text[BOLO_LANG];
   const G = T.bolo;

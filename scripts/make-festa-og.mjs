@@ -55,7 +55,10 @@ for (const festa of festas) {
   const own = ownPicture(festa);
   if (own) {
     // Cut to 1200x630 from the middle, a JPEG like the cards of the stories; the hash of the file is in the name.
-    const buffer = await sharp(own).resize(W, H, { fit: 'cover', position: 'centre' }).jpeg({ quality: 82, mozjpeg: true }).toBuffer();
+    // The quality goes down until the picture is under 190 KB (the check of the preview cards allows 200 KB).
+    const cut = sharp(own).resize(W, H, { fit: 'cover', position: 'centre' });
+    let buffer = await cut.clone().jpeg({ quality: 82, mozjpeg: true }).toBuffer();
+    for (let quality = 78; buffer.length > 190 * 1024 && quality >= 50; quality -= 4) buffer = await cut.clone().jpeg({ quality, mozjpeg: true }).toBuffer();
     const name = `${festa.id}-${createHash('sha1').update(buffer).digest('hex').slice(0, 10)}.jpg`;
     writeFileSync(join(outDir, name), buffer);
     manifest[festa.id] = `og-festas/${name}`;

@@ -162,7 +162,7 @@
 | Королевская винная компания | Real Companhia Velha | Real Companhia Velha (the Old Company) | Реал-Компанья-Велья |
 | Любители потрохов | tripeiros | tripeiros (tripe-eaters) | трипейруш («любители потрохов») |
 | Пирог на Рождество и День волхвов | bolo-rei | bolo-rei | bolo-rei (латиницей; «болу-президенте», «болу-арриага», «бывший болу-рей» — прозвища 1910 года) |
-| Португальский Санта-Клаус | Pai Natal | Pai Natal | Пай Натал |
+| Португальский Санта-Клаус | Pai Natal (мн. ч. Pais Natal) | Pai Natal | Пай Натал |
 | Рождественский ужин в сочельник | consoada | consoada | консоада |
 | Ночная рождественская месса | Missa do Galo | Missa do Galo (“Rooster’s Mass”) | Missa do Galo, «месса петуха» |
 | Рождественский костёр в Бейре | madeiro | madeiro (a Christmas bonfire of whole trunks) | мадейру (madeiro; не склоняется, не путать с островом Мадейра) |

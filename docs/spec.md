@@ -388,7 +388,7 @@ QR-адрес ──────────────────> Карто
 
 ### 5.7 Праздники
 
-Механизм для всех праздников; наполнены два: 1 декабря (`restauracao`, pt/en/ru) и 25 декабря (`natal`, пока только ru). Данные: `src/data/festas.yaml` (схема `festaSchema` в `src/data/schemas.ts`), логика дат и окна: `src/lib/festas.mjs` (чистые функции, тесты `tests/vitest/festas.spec.ts`), чтение файла: `src/lib/festas-data.ts`.
+Механизм для всех праздников; наполнены два: 1 декабря (`restauracao`) и 25 декабря (`natal`), оба на pt, en и ru. Данные: `src/data/festas.yaml` (схема `festaSchema` в `src/data/schemas.ts`), логика дат и окна: `src/lib/festas.mjs` (чистые функции, тесты `tests/vitest/festas.spec.ts`), чтение файла: `src/lib/festas-data.ts`.
 
 - **Поля:** `id`, `slug`, `enabled`, `date` (`{ fixed: 'MM-DD' }` или `{ easter: ±дни }`, Карнавал `-47`), `art` (`crown` | `folar` | `bolo`), `story` (id истории дня; у включённого праздника обязательно, `check:data` проверяет, что история есть на сайте), `text` по языкам (нет языка: нет ни шапки, ни значка, ни страницы). Выключены (`enabled: false`): все, кроме `restauracao`; у `pascoa` есть рисунок (фолар), текстов нет.
 - **Окно:** с 00:00 за 3 дня до праздника до конца его дня по Лиссабону (`WINDOW_DAYS = 3`). Пересечение окон: праздник, чей день сегодня, иначе ближайший (`festaNow`).

@@ -98,6 +98,60 @@
   image: festas/natal.jpg
   story: bolo-rei-1910
   text:
+    pt:
+      date: '25 de dezembro'
+      name: 'Natal'
+      head_date: '25 de dezembro · Natal'
+      head_title: 'O bolo que sobreviveu ao rei'
+      head_line: 'A monarquia caiu em 1910, mas o bolo-rei nunca mudou de nome.'
+      head_link: 'A história deste dia →'
+      art_title: 'Bolo-rei num prato: um anel de massa doce com frutas cristalizadas'
+      lead: 'Em Portugal, a grande ceia de Natal é na véspera e na mesa não pode faltar o bolo-rei.'
+      og_description: 'Porque é que a República nunca conseguiu mudar o nome ao bolo-rei e onde há quem vá ao mar na manhã de Natal.'
+      off_window: 'Este feriado celebra-se a 25 de dezembro'
+      bolo:
+        aria: 'Bolo-rei num prato. Cortar uma fatia'
+        hint: 'Carrega no bolo para cortar uma fatia'
+        fruit: { head: 'Fruta cristalizada.', text: 'Nada lá dentro, come à vontade.' }
+        brinde: { head: 'Brinde.', text: 'Antigamente cozia-se no bolo uma pequena figura, e calhou-te a ti.' }
+        fava: { head: 'Fava.', text: 'Diz a tradição que para o ano és tu quem paga o bolo-rei.' }
+        done: 'O bolo acabou. Fazemos outro no próximo Natal.'
+      traditions:
+        - title: 'A fogueira de Natal.'
+          text: 'Nas aldeias da Beira, na noite da consoada, ergue-se diante da igreja o madeiro, uma fogueira de troncos inteiros. São os rapazes da terra que trazem a lenha, e o de Penamacor costuma estar entre os maiores do país. Diz-se que o fogo serve para aquecer o Menino.'
+        - title: 'Missa do Galo.'
+          text: 'A missa da meia-noite chama-se Missa do Galo: segundo a lenda, foi um galo o primeiro a anunciar o nascimento de Cristo.'
+        - title: 'Bacalhau ou polvo.'
+          text: 'A ceia da véspera chama-se consoada. No interior, come-se bacalhau: seco e salgado, era barato e aguentava a viagem. No Norte, no Minho e em Trás-os-Montes, come-se polvo, que, ao que se diz, chegava seco pela mão de comerciantes galegos. No dia 25, com as sobras, faz-se a roupa-velha.'
+        - title: 'Pais Natal no mar.'
+          text: 'Na manhã de 25 de dezembro, na praia de Armação de Pêra, no Algarve, pessoas vestidas de Pai Natal entram no mar de inverno para angariar dinheiro para sapatos para crianças carenciadas. Fazem-no há mais de dez anos. Nos Açores, diz-se, um mergulho no dia 25 é um ritual de renovação. E a 1 de janeiro há banhos por toda a costa, de Carcavelos a Matosinhos.'
+    en:
+      date: 'December 25'
+      name: 'Christmas'
+      head_date: 'December 25 · Christmas'
+      head_title: 'The cake that outlived the king'
+      head_line: 'The king fell in 1910, but nobody managed to rename the bolo-rei.'
+      head_link: 'The story of this day →'
+      art_title: 'Bolo-rei on a plate: a ring of sweet dough with candied fruit'
+      lead: 'In Portugal, the big Christmas meal is on Christmas Eve, and there is always a bolo-rei on the table.'
+      og_description: 'Why Portugal’s republic never managed to rename the bolo-rei, and where people jump into the ocean on Christmas morning.'
+      off_window: 'This holiday is celebrated on December 25'
+      bolo:
+        aria: 'Bolo-rei on a plate. Cut a slice'
+        hint: 'Click or tap the cake to cut a slice'
+        fruit: { head: 'Candied fruit.', text: 'Nothing baked inside, enjoy.' }
+        brinde: { head: 'Trinket.', text: 'A tiny figurine used to be baked into the cake, and you got it.' }
+        fava: { head: 'Fava bean.', text: 'By tradition, you buy next year’s cake.' }
+        done: 'The cake is gone. We’ll bake a new one next Christmas.'
+      traditions:
+        - title: 'The Christmas bonfire.'
+          text: 'In villages of the Beira region, a madeiro, a bonfire of whole tree trunks, is built in front of the church on Christmas Eve. Local young men haul in the logs, and the one in Penamacor is often among the biggest in the country. The fire, people say, is there to keep the Baby Jesus warm.'
+        - title: 'The Rooster’s Mass.'
+          text: 'Midnight Mass on Christmas Eve is called Missa do Galo, “the Rooster’s Mass”: legend has it that a rooster was the first to announce the birth of Christ.'
+        - title: 'Cod or octopus.'
+          text: 'Christmas Eve dinner is called the consoada. Inland, it’s bacalhau: dried and salted, the cod was cheap and kept well on the road. In the north, in Minho and Trás-os-Montes, people eat octopus, said to have arrived dried with Galician traders. On the 25th, the leftovers become roupa-velha, “old clothes.”'
+        - title: 'Santas in the ocean.'
+          text: 'On Christmas morning at Armação de Pêra beach in the Algarve, people dressed as Pai Natal, the Portuguese Santa Claus, wade into the winter ocean to raise money for shoes for kids in need. They’ve been doing it for more than ten years. In the Azores, it is said, a dip in the sea on the 25th is a way to start afresh. And on January 1, people swim all along the coast, from Carcavelos to Matosinhos.'
     ru:
       date: '25 декабря'
       name: 'Рождество'
