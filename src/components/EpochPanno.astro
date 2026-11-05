@@ -68,7 +68,7 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
   </div>
   <dialog class="panno-zoom" data-panno-dialog aria-label={t(lang, 'panno.zoom')}>
     <div class="panno-zoom__scroll" data-panno-scroll>
-      <img class="panno-zoom__image" data-panno-full alt={plural(lang, 'plural.panno_alt', pieces).replace('{n}', String(pieces)).replace('{m}', String(pieces))} />
+      <img class="panno-zoom__image" data-panno-full width={full.options.width} height={full.options.height} alt={plural(lang, 'plural.panno_alt', pieces).replace('{n}', String(pieces)).replace('{m}', String(pieces))} />
     </div>
     <button class="panno-zoom__close" type="button" data-panno-close aria-label={t(lang, 'panno.close')}>×</button>
   </dialog>
@@ -217,6 +217,7 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
   .panno-zoom__image {
     display: block;
     margin: auto;
+    background: var(--panno-glaze);
     width: auto;
     height: auto;
     max-width: 100%;
