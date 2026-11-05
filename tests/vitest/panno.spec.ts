@@ -16,22 +16,74 @@ const piecesOf = (g: { cols: number; rows: number }): number => g.cols * g.rows;
 
 describe('order of the tiles', () => {
   it('is every tile of the grid exactly once, for every grid', () => {
-    for (const g of GRIDS) expect([...openOrder('some-epoch', piecesOf(g))].sort((a, b) => a - b)).toEqual(Array.from({ length: piecesOf(g) }, (_, i) => i));
+    for (const g of GRIDS) expect([...openOrder('some-epoch', g.cols, g.rows)].sort((a, b) => a - b)).toEqual(Array.from({ length: piecesOf(g) }, (_, i) => i));
   });
 
   it('is the same on every call for the same epoch (deterministic)', () => {
-    for (const g of GRIDS) expect(openOrder('monarquia-e-republica', piecesOf(g))).toEqual(openOrder('monarquia-e-republica', piecesOf(g)));
+    for (const g of GRIDS) expect(openOrder('monarquia-e-republica', g.cols, g.rows)).toEqual(openOrder('monarquia-e-republica', g.cols, g.rows));
   });
 
   it('differs between epochs and is not the plain reading order', () => {
-    const a = openOrder('lusitania-e-roma', 54);
-    expect(a).not.toEqual(openOrder('pombal-e-terramoto', 54));
+    const a = openOrder('lusitania-e-roma', 9, 6);
+    expect(a).not.toEqual(openOrder('pombal-e-terramoto', 9, 6));
     expect(a).not.toEqual(Array.from({ length: 54 }, (_, i) => i));
+  });
+
+  it('starts with three tiles that are not on the edge', () => {
+    for (const g of GRIDS) {
+      for (const id of ['lusitania-e-roma', 'avis-e-descobrimentos', 'pombal-e-terramoto', 'x', 'y']) {
+        for (const tile of openOrder(id, g.cols, g.rows).slice(0, 3)) {
+          const x = tile % g.cols;
+          const y = Math.floor(tile / g.cols);
+          expect(x > 0 && x < g.cols - 1 && y > 0 && y < g.rows - 1, `${id} ${g.cols}x${g.rows} tile ${tile}`).toBe(true);
+        }
+      }
+    }
+  });
+
+  it('opens in spots: at 25% open the tiles make no more than 3 connected groups, at any step from the third tile on', () => {
+    const groups = (open: ReadonlySet<number>, cols: number, rows: number): number => {
+      const seen = new Set<number>();
+      let count = 0;
+      for (const start of open) {
+        if (seen.has(start)) continue;
+        count++;
+        const stack = [start];
+        seen.add(start);
+        while (stack.length > 0) {
+          const t = stack.pop() as number;
+          const x = t % cols;
+          const y = Math.floor(t / cols);
+          for (const [nx, ny] of [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]] as const) {
+            const n = ny * cols + nx;
+            if (nx >= 0 && nx < cols && ny >= 0 && ny < rows && open.has(n) && !seen.has(n)) {
+              seen.add(n);
+              stack.push(n);
+            }
+          }
+        }
+      }
+      return count;
+    };
+    for (const g of GRIDS) {
+      for (const id of ['lusitania-e-roma', 'avis-e-descobrimentos', 'uniao-restauracao-e-ouro-do-brasil', 'pombal-e-terramoto', 'monarquia-e-republica', 'a', 'b', 'c']) {
+        const order = openOrder(id, g.cols, g.rows);
+        expect(groups(new Set(order.slice(0, Math.round(piecesOf(g) / 4))), g.cols, g.rows), `${id} ${g.cols}x${g.rows}`).toBeLessThanOrEqual(3);
+        for (let k = 3; k <= order.length; k++) expect(groups(new Set(order.slice(0, k)), g.cols, g.rows)).toBeLessThanOrEqual(3);
+      }
+    }
+  });
+
+  it('is not the plain reading order, and the three starts are apart (not neighbours)', () => {
+    const order = openOrder('monarquia-e-republica', 9, 6);
+    const [a, b, c] = order as [number, number, number];
+    const d = (p: number, q: number): number => Math.abs((p % 9) - (q % 9)) + Math.abs(Math.floor(p / 9) - Math.floor(q / 9));
+    expect(Math.min(d(a, b), d(a, c), d(b, c))).toBeGreaterThan(2);
   });
 
   it('never closes a tile when one more story is read (monotone): k + 1 = the same tiles and new ones', () => {
     for (const g of GRIDS) {
-      const order = openOrder('avis-e-descobrimentos', piecesOf(g));
+      const order = openOrder('avis-e-descobrimentos', g.cols, g.rows);
       for (let m = 1; m <= 30; m++) {
         for (let n = 0; n < m; n++) {
           const now = openSet(n, m, order);
@@ -59,7 +111,7 @@ describe('share of tiles open', () => {
     const after = openPieces(m, m + 1, total);
     expect(after).toBeLessThan(total);
     expect(after).toBe(Math.round((total * m) / (m + 1)));
-    const order = openOrder('uniao-restauracao-e-ouro-do-brasil', total);
+    const order = openOrder('uniao-restauracao-e-ouro-do-brasil', g.cols, g.rows);
     for (const piece of openSet(m, m + 1, order)) expect(openSet(m, m, order).has(piece)).toBe(true);
   });
 
@@ -75,7 +127,7 @@ describe('share of tiles open', () => {
   });
 
   it('opens as many tiles as the share says', () => {
-    const order = openOrder('pombal-e-terramoto', 96);
+    const order = openOrder('pombal-e-terramoto', 12, 8);
     expect(openSet(3, 7, order).size).toBe(openPieces(3, 7, 96));
   });
 });
@@ -105,7 +157,7 @@ describe('states of the panel', () => {
     const { n, m: total } = readProgress(grown, ids(all), 'off');
     expect(openPieces(n, total, 24)).toBeLessThan(24);
     expect(firstUnread(grown, ids(all), 'off')).toBe('new');
-    const order = openOrder('e', 24);
+    const order = openOrder('e', 6, 4);
     for (const piece of openSet(n, total, order)) expect(openSet(m, m, order).has(piece)).toBe(true);
   });
 

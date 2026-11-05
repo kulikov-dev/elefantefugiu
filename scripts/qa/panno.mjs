@@ -59,6 +59,7 @@ const state = (page) =>
       open: panel ? panel.querySelectorAll('[data-open]').length : -1,
       pieces: panel ? [...panel.querySelectorAll('[data-open]')].map((c) => Number(c.dataset.piece)).sort((a, b) => a - b) : [],
       line: panel?.querySelector('[data-panno-count]')?.textContent.trim() ?? null,
+      hint: panel?.querySelector('[data-panno-hint]')?.getClientRects().length > 0 ? panel.querySelector('[data-panno-hint]').textContent.trim() : null,
       href: grid?.getAttribute('href') ?? null,
       image: panel?.dataset.imageLarge ?? null,
       imageSmall: panel?.dataset.imageSmall ?? null,
@@ -83,23 +84,21 @@ await probe.close();
 const N = ORDER.length;
 const piecesFor = (k) => Math.round((PIECES * k) / N);
 const at = (k) => ORDER.slice(0, k);
-const lineOf = (k, lang = 'pt') =>
-  k === 0
-    ? ui('panno.hint_first', lang)
-    : k === N
-      ? ui('panno.done', lang)
-      : `${ui('plural.panno_count_other', lang).replace('{n}', String(k)).replace('{m}', String(N))} · ${ui('panno.hint', lang)}`;
+// Two lines under the panel: "N of M read" (none with nothing read, the closing line when all are read) and the hint (not shown when all are read).
+const lineOf = (k, lang = 'pt') => (k === 0 ? '' : k === N ? ui('panno.done', lang) : ui('plural.panno_count_other', lang).replace('{n}', String(k)).replace('{m}', String(N)));
 
 if (want('states')) {
   let page = await open(null);
   let s = await state(page);
   ok(`0 read: the panel is shown, no piece open, the line "${lineOf(0)}"`, s.shown && s.open === 0 && s.line === lineOf(0), JSON.stringify([s.shown, s.open, s.line]));
+  ok('0 read: only the hint line is shown, with a capital', s.hint === ui('panno.hint', 'pt') && s.line === '', JSON.stringify([s.hint, s.line]));
   ok('0 read: the picture is not requested (neither size)', page.images.every((u) => !u.includes(s.image.split('?')[0]) && !u.includes(s.imageSmall.split('?')[0])), JSON.stringify(page.images));
   await page.close();
   for (const k of new Set([1, Math.ceil(N / 2)])) {
     page = await open(at(k));
     s = await state(page);
     ok(`${k} of ${N} read: ${piecesFor(k)} pieces open and the line says so`, s.open === piecesFor(k) && s.line === lineOf(k), JSON.stringify([s.open, s.line]));
+    ok(`${k} of ${N} read: the second line is the hint`, s.hint === ui('panno.hint', 'pt'), JSON.stringify(s.hint));
     ok(`${k} of ${N} read: the same tiles as the order of the page promises (${PIECES} tiles, ${epoch.panno.cols} x ${epoch.panno.rows})`, s.pieces.length === s.open && s.pieces.every((c) => c >= 0 && c < PIECES), JSON.stringify(s.pieces));
     ok(`${k} of ${N} read: the alt says how many tiles are open, without describing the scene`, s.alt?.includes(ui('plural.panno_alt_other', 'pt').replace('{n}', String(piecesFor(k))).replace('{m}', String(PIECES))), String(s.alt));
     ok(`${k} of ${N} read: the picture is fetched`, page.images.some((u) => u.includes(s.image.split('?')[0]) || u.includes(s.imageSmall.split('?')[0])), JSON.stringify(page.images));
@@ -108,7 +107,7 @@ if (want('states')) {
   for (const lang of ['pt', 'en', 'ru']) {
     page = await open(ORDER, { url: epochPath(epoch, lang) });
     s = await state(page);
-    ok(`${lang}: all read: every tile open and the line "${ui('panno.done', lang)}"`, s.open === PIECES && s.line === ui('panno.done', lang), JSON.stringify([s.open, s.line]));
+    ok(`${lang}: all read: every tile open and the line "${ui('panno.done', lang)}"`, s.open === PIECES && s.line === ui('panno.done', lang) && s.hint === null, JSON.stringify([s.open, s.line, s.hint]));
     await page.close();
   }
 }

@@ -48,11 +48,15 @@ function showPanno(read: string[]): void {
   if (open.size > 0 && d.imageSmall && d.imageLarge && !panel.style.getPropertyValue('--panno-image')) panel.style.setProperty('--panno-image', `image-set(${cssUrl(d.imageSmall)} 1x, ${cssUrl(d.imageLarge)} 2x)`);
   grid.querySelectorAll<HTMLElement>('[data-piece]').forEach((cell) => cell.toggleAttribute('data-open', open.has(Number(cell.dataset.piece))));
   const all = m > 0 && n === m;
-  // "2 of 7 read · each story reveals part of the panel"; with nothing read only the second part, capitalised; all read: the closing line.
+  // Two lines: "3 of 11 read" and what a story does to the panel. With nothing read only the second line; all read: only the closing line.
   const counted = pickPlural({ p_one: d.one ?? '', p_few: d.few ?? '', p_many: d.many ?? '', p_other: d.other ?? '' }, 'p', n, d.locale ?? 'en').replace('{n}', String(n)).replace('{m}', String(m));
-  const line = all ? (d.done ?? '') : n === 0 ? (d.hintFirst ?? '') : `${counted} · ${d.hint ?? ''}`;
   const count = panel.querySelector<HTMLElement>('[data-panno-count]');
-  if (count) count.textContent = line;
+  const hint = panel.querySelector<HTMLElement>('[data-panno-hint]');
+  if (count) {
+    count.textContent = all ? (d.done ?? '') : n === 0 ? '' : counted;
+    count.hidden = !all && n === 0;
+  }
+  if (hint) hint.hidden = all;
   const alt = pickPlural({ p_one: d.altOne ?? '', p_few: d.altFew ?? '', p_many: d.altMany ?? '', p_other: d.altOther ?? '' }, 'p', open.size, d.locale ?? 'en').replace('{n}', String(open.size)).replace('{m}', String(order.length));
   const next = all ? undefined : firstUnread(stories, read, mode);
   const href = next ? (JSON.parse(d.links ?? '{}') as Record<string, string>)[next] : undefined;

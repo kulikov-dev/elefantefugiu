@@ -30,11 +30,9 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
   data-panno
   data-image-small={small?.src}
   data-image-large={large?.src}
-  data-order={openOrder(epochId, pieces).join(',')}
+  data-order={openOrder(epochId, cols, rows).join(',')}
   data-links={JSON.stringify(links)}
   {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.panno_alt')).map(([k, v]) => [`data-alt-${k}`, v]))}
-  data-hint={t(lang, 'panno.hint')}
-  data-hint-first={t(lang, 'panno.hint_first')}
   data-continue={t(lang, 'panno.continue')}
   data-locale={LOCALES[lang]}
   {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.panno_count')).map(([k, v]) => [`data-${k}`, v]))}
@@ -43,7 +41,8 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
   <a class="panno__grid" data-panno-grid role="img" aria-label={plural(lang, 'plural.panno_alt', 0).replace('{n}', '0').replace('{m}', String(pieces))} style={`--cols:${cols};--rows:${rows};aspect-ratio:${cols} / ${rows}`}>
     {cells.map((c) => <span class="panno__cell" data-piece={c.piece} style={`--x:${(c.x / (cols - 1)) * 100}%;--y:${(c.y / (rows - 1)) * 100}%`}></span>)}
   </a>
-  <p class="panno__count" data-panno-count>{t(lang, 'panno.hint_first')}</p>
+  <p class="panno__count" data-panno-count hidden></p>
+  <p class="panno__count" data-panno-hint>{t(lang, 'panno.hint')}</p>
 </div>
 
 <style>
@@ -94,9 +93,18 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     box-shadow: none;
   }
 
+  /* The caption is two lines on purpose: how many are read, and what a story does to the panel. */
   .panno__count {
     margin-block-start: var(--space-2);
     color: var(--color-ink-muted);
     font-size: var(--text-sm);
+  }
+
+  .panno__count[hidden] {
+    display: none;
+  }
+
+  .panno__count + .panno__count {
+    margin-block-start: 0;
   }
 </style>

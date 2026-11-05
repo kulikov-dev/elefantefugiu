@@ -220,8 +220,7 @@
     "expand_story": "Read the story"
   },
   "panno": {
-    "hint": "each story reveals part of the panel",
-    "hint_first": "Each story reveals part of the panel",
+    "hint": "Each story reveals part of the panel",
     "continue": "Keep reading",
     "done": "Era complete"
   },

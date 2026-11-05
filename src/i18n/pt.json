@@ -220,8 +220,7 @@
     "expand_story": "Ler a história"
   },
   "panno": {
-    "hint": "cada história revela parte do painel",
-    "hint_first": "Cada história revela parte do painel",
+    "hint": "Cada história revela parte do painel",
     "continue": "Continuar a ler",
     "done": "Época lida"
   },

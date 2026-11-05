@@ -22,16 +22,73 @@ function random(seed: number): () => number {
   };
 }
 
+const STARTS = 3;
+/** How much more a tile with more open neighbours is wanted: weight = 1 + BIAS * (open neighbours - 1), so the spots grow dense, not stringy. */
+const BIAS = 0.5;
+
 /**
- * The order the tiles open in: a fixed permutation of all tiles (index = row * cols + column), seeded by the id of the epoch. The same on every
- * load, and the order never changes: with one more story read the same tiles stay open and new ones are added.
+ * The order the tiles open in (index = row * cols + column): growth in spots, a fixed permutation of all tiles seeded by the id of the epoch. It
+ * starts with three tiles that are not on the edge and far from each other; then every next tile is a random one from the neighbours (by side)
+ * of the tiles already open, with a small preference for those that touch more open tiles. The same on every load, and the order never changes:
+ * with one more story read the same tiles stay open and new ones are added.
  */
-export function openOrder(epochId: string, pieces: number): number[] {
-  const order = Array.from({ length: pieces }, (_, i) => i);
+export function openOrder(epochId: string, cols: number, rows: number): number[] {
+  const pieces = cols * rows;
   const next = random(seedOf(epochId));
-  for (let i = pieces - 1; i > 0; i--) {
-    const j = Math.floor(next() * (i + 1));
-    [order[i], order[j]] = [order[j] as number, order[i] as number];
+  const isOpen = new Array<boolean>(pieces).fill(false);
+  const order: number[] = [];
+  const at = (x: number, y: number): number => y * cols + x;
+  const take = (i: number): void => {
+    isOpen[i] = true;
+    order.push(i);
+  };
+
+  // Starts: inside the edge (when the grid has an inside), each the best of a few random tries by the distance to those already taken.
+  const inner = Array.from({ length: pieces }, (_, i) => i).filter((i) => i % cols > 0 && i % cols < cols - 1 && Math.floor(i / cols) > 0 && Math.floor(i / cols) < rows - 1);
+  const pool = inner.length >= STARTS ? inner : Array.from({ length: pieces }, (_, i) => i);
+  const far = (i: number): number => Math.min(...order.map((o) => Math.abs((o % cols) - (i % cols)) + Math.abs(Math.floor(o / cols) - Math.floor(i / cols))));
+  take(pool[Math.floor(next() * pool.length)] as number);
+  while (order.length < Math.min(STARTS, pieces)) {
+    let best = -1;
+    for (let t = 0; t < 12; t++) {
+      const c = pool[Math.floor(next() * pool.length)] as number;
+      if (!isOpen[c] && (best < 0 || far(c) > far(best))) best = c;
+    }
+    if (best < 0) best = pool.find((c) => !isOpen[c]) ?? isOpen.indexOf(false);
+    take(best);
+  }
+
+  const neighbours = (i: number): number[] => {
+    const x = i % cols;
+    const y = Math.floor(i / cols);
+    const out: number[] = [];
+    if (x > 0) out.push(at(x - 1, y));
+    if (x < cols - 1) out.push(at(x + 1, y));
+    if (y > 0) out.push(at(x, y - 1));
+    if (y < rows - 1) out.push(at(x, y + 1));
+    return out;
+  };
+  while (order.length < pieces) {
+    const weights: { tile: number; w: number }[] = [];
+    let sum = 0;
+    for (let i = 0; i < pieces; i++) {
+      if (isOpen[i]) continue;
+      const touching = neighbours(i).filter((n) => isOpen[n]).length;
+      if (touching === 0) continue;
+      const w = 1 + BIAS * (touching - 1);
+      weights.push({ tile: i, w });
+      sum += w;
+    }
+    let pick = next() * sum;
+    let chosen = (weights[weights.length - 1] as { tile: number }).tile;
+    for (const c of weights) {
+      pick -= c.w;
+      if (pick < 0) {
+        chosen = c.tile;
+        break;
+      }
+    }
+    take(chosen);
   }
   return order;
 }
