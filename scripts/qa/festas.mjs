@@ -265,9 +265,14 @@ for (const BOLO_LANG of want('bolo') ? BOLO_LANGS : []) {
     await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: opts.reduce ? 'reduce' : 'no-preference' }]);
     page.errors = [];
     page.on('pageerror', (e) => page.errors.push(e.message));
+    // A build for a real address (as in CI) has the counter: its config script sets window.goatcounter and count.js sets .count. Both are taken over here, so the recorder stays whoever comes second.
+    await page.setRequestInterception(true);
+    page.on('request', (r) => (r.url().includes('goatcounter.com/count') ? r.abort() : r.continue()));
     await page.evaluateOnNewDocument(() => {
       window.__events = [];
-      window.goatcounter = { count: (v) => window.__events.push(v.path) };
+      const recorder = { allow_local: true };
+      Object.defineProperty(recorder, 'count', { configurable: true, get: () => (v) => { if (v?.event) window.__events.push(v.path); }, set: () => {} });
+      Object.defineProperty(window, 'goatcounter', { configurable: true, get: () => recorder, set: () => {} });
     });
     await page.goto(`${base}${path}`, { waitUntil: 'load' });
     return page;

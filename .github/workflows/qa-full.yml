@@ -57,6 +57,9 @@ jobs:
       # The same preview cards as on the site (the build below is only astro build: make-og.mjs is a step of npm run build).
       - name: Preview cards
         run: node scripts/make-og.mjs
+      # The pictures and tab icons of the holidays (public/og-festas, public/festas) are not in the repository: npm run build makes them.
+      - name: Holiday pictures
+        run: node scripts/make-festa-og.mjs
       - name: Build
         run: npx astro build
       - name: Size of the map sweeps
