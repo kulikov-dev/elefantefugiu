@@ -286,6 +286,9 @@ if (want('read')) {
   const story = published.find((e) => e.min_age === 'all' && !e.sensitive) ?? published[0];
   const epoch = epochs.find((e) => e.id === story.epoch);
   const inThisEpoch = published.filter((e) => e.epoch === epoch.id);
+  // An epoch with a picture has the panel and its line under it ("1 de M lidas", "Época lida"); the plain "lida 1 de M" by the years stays on an epoch without one.
+  const hasPanno = typeof epoch.fallback_image === 'object';
+  const countOf = (n, m) => (hasPanno ? (n === m ? 'Época lida' : `${n} de ${m} lidas`) : `${n === 1 ? 'lida' : 'lidas'} ${n} de ${m}`);
   const shownIn = (e, mode) => mode === 'off' || (!e.sensitive && (mode === 'all' ? e.min_age === 'all' : e.min_age === 'all' || e.min_age === '12'));
   const saved = (page) => page.evaluate(() => { try { return JSON.parse(localStorage.getItem('readStories') ?? '[]'); } catch { return null; } });
   /** The story page opened with the wait shortened (delay, ms) and, when asked, with the tab hidden; ends after `stay` ms. */
@@ -338,25 +341,25 @@ if (want('read')) {
     const card = document.querySelector('[data-story="' + id + '"]');
     const mark = card?.querySelector('.read-mark');
     const rect = mark?.getBoundingClientRect();
-    const progress = document.querySelector('[data-read-progress]');
-    return { read: card?.hasAttribute('data-read'), visibility: mark && getComputedStyle(mark).visibility, word: mark?.textContent.trim(), onScreenWidth: rect?.width > 0, progress: progress?.textContent.trim(), shown: progress?.hasAttribute('data-shown') && getComputedStyle(progress).visibility === 'visible' };
+    const progress = document.querySelector('[data-read-progress], [data-panno-count]');
+    return { read: card?.hasAttribute('data-read'), visibility: mark && getComputedStyle(mark).visibility, word: mark?.textContent.trim(), onScreenWidth: rect?.width > 0, progress: progress?.textContent.trim(), shown: (progress?.hasAttribute('data-shown') || progress?.hasAttribute('data-panno-count')) && getComputedStyle(progress).visibility === 'visible' && progress.getClientRects().length > 0 };
   }, story.id);
   ok('read: the list of the epoch shows the tick and the word "lida" for the read story', marks.read && marks.visibility === 'visible' && marks.word === 'lida' && marks.onScreenWidth, JSON.stringify(marks));
-  ok(`read: "lida 1 de M" (the word agrees with 1) where M is the stories of the epoch (${inThisEpoch.length})`, marks.shown && marks.progress === `lida 1 de ${inThisEpoch.length}`, marks.progress);
+  ok(`read: "${countOf(1, inThisEpoch.length)}" where M is the stories of the epoch (${inThisEpoch.length})`, marks.shown && marks.progress === countOf(1, inThisEpoch.length), marks.progress);
   const heightsRead = await page.evaluate(() => [...document.querySelectorAll('.ecard')].map((c) => Math.round(c.getBoundingClientRect().height)));
   await page.close();
   page = await epochPage('off', null);
   const heightsUnread = await page.evaluate(() => [...document.querySelectorAll('.ecard')].map((c) => Math.round(c.getBoundingClientRect().height)));
   ok('read: a card has the same height read or not (the tick stands in the corner, out of the flow)', JSON.stringify(heightsRead) === JSON.stringify(heightsUnread) && heightsRead.length > 0, JSON.stringify([heightsRead, heightsUnread]));
-  const none = await page.evaluate(() => ({ marks: document.querySelectorAll('[data-read]').length, progress: getComputedStyle(document.querySelector('[data-read-progress]')).visibility }));
-  ok('read: with nothing read there is no tick and no "read N of M"', none.marks === 0 && none.progress === 'hidden', JSON.stringify(none));
+  const none = await page.evaluate(() => ({ marks: document.querySelectorAll('[data-read]').length, progress: document.querySelector('[data-read-progress]') ? getComputedStyle(document.querySelector('[data-read-progress]')).visibility : null, open: document.querySelectorAll('[data-panno] [data-open]').length, count: document.querySelector('[data-panno-count]')?.textContent.trim() ?? null }));
+  ok('read: with nothing read there is no tick; no "read N of M" by the years, no piece of the panel open', none.marks === 0 && none.open === 0 && (hasPanno ? none.count === countOf(0, inThisEpoch.length) && none.progress === null : none.progress === 'hidden'), JSON.stringify(none));
   await page.close();
   for (const mode of ['all', '12']) {
     const shown = inThisEpoch.filter((e) => shownIn(e, mode));
     const readAll = inThisEpoch.map((e) => e.id);
     page = await epochPage(mode, readAll);
-    const text = await page.evaluate(() => document.querySelector('[data-read-progress]').textContent.trim());
-    ok(`read: family mode ${mode}: "${text}" counts only the stories the mode shows (${shown.length})`, text === `${shown.length === 1 ? 'lida' : 'lidas'} ${shown.length} de ${shown.length}`);
+    const text = await page.evaluate(() => document.querySelector('[data-read-progress], [data-panno-count]').textContent.trim());
+    ok(`read: family mode ${mode}: "${text}" counts only the stories the mode shows (${shown.length})`, text === countOf(shown.length, shown.length));
     await page.close();
   }
 

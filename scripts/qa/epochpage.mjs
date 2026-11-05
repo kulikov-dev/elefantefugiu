@@ -2,7 +2,7 @@
 // the labels "Timeline / Cards", the active card, the "more eras" dropdown (keyboard, without JavaScript, no dead links).
 // Run against dist/ served by serve.mjs (base path "/"):   node epochpage.mjs [years cards switch active more]
 import { fsPath, launchBrowser } from './browser.mjs';
-import { epochPath, inEpoch, readyEpochs } from './data.mjs';
+import { byId, epochPath, inEpoch, readyEpochs } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -40,6 +40,11 @@ const open = async (path, { width = 1280, height = 800, js = true } = {}) => {
 
 // ---------- 1. Years on the scale ----------
 if (want('years')) {
+  // The year on the scale is the year_scale text of the story in the language when the data has one ("séc. XVIII"), else a four-digit year.
+  const yearIsRight = (r, lang) => {
+    const scale = byId(r.id)?.year_scale?.[lang]?.trim();
+    return scale ? r.year === scale.replace(/\s+/g, ' ') : /^\d{4}$/.test(r.year);
+  };
   for (const lang of ['pt', 'en', 'ru']) {
     const page = await open(POMBAL[lang]);
     const m = await page.evaluate(() => {
@@ -50,11 +55,11 @@ if (want('years')) {
         const ry = y.getBoundingClientRect();
         const rc = card.getBoundingClientRect();
         const cs = getComputedStyle(y);
-        return { year: y.textContent.trim(), visible: y.checkVisibility(), left: ry.right <= rc.left, size: parseFloat(cs.fontSize), weight: Number(cs.fontWeight), meta: card.querySelector('.ecard__meta').innerText.replace(/\s+/g, ' ').trim() };
+        return { id: card.dataset.story, year: y.textContent.replace(/\s+/g, ' ').trim(), visible: y.checkVisibility(), left: ry.right <= rc.left, size: parseFloat(cs.fontSize), weight: Number(cs.fontWeight), meta: card.querySelector('.ecard__meta').innerText.replace(/\s+/g, ' ').trim() };
       });
       return { rows, vw: innerWidth, sw: document.documentElement.scrollWidth };
     });
-    ok(`years (${lang}): every story has its year on the scale, left of the card, large (18 px or more) and bold`, m.rows.length > 0 && m.rows.every((r) => /^\d{4}$/.test(r.year) && r.visible && r.left && r.size >= 18 && r.weight >= 600), JSON.stringify(m.rows[0]));
+    ok(`years (${lang}): every story has its year on the scale, left of the card, large (18 px or more) and bold`, m.rows.length > 0 && m.rows.every((r) => yearIsRight(r, lang) && r.visible && r.left && r.size >= 18 && r.weight >= 600), JSON.stringify(m.rows[0]));
     ok(`years (${lang}): the line of the card carries a full date only when the data has one, never a bare year beside the scale`, m.rows.every((r) => !new RegExp(`^${r.year}\\s*·`).test(r.meta)), m.rows.map((r) => r.meta).join(' | '));
     ok(`years (${lang}): no sideways scroll`, m.sw <= m.vw);
     await page.close();

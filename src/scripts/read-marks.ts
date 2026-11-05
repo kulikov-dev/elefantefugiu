@@ -2,6 +2,8 @@
 // epoch page and the reset button of the legal page. Everything is in try/catch: without localStorage the site works as before. Nothing is
 // sent anywhere (no counter event).
 import { READ_DELAY_MS, READ_KEY, addRead, parseRead, readProgress, type StoryOnPage } from '../lib/read-marks';
+import { cssUrl } from '../lib/azulejo';
+import { firstUnread, openSet } from '../lib/panno';
 import { pickPlural } from '../lib/plural-pick';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
@@ -28,6 +30,39 @@ function onPage(): StoryOnPage[] {
   });
 }
 
+/**
+ * The panel of the epoch page: the pieces won, the line under it, and the first story not read yet as its link (all read: no link). Only the
+ * stories the mode shows count. The picture is asked for only when a piece is open (its address waits in data-image).
+ */
+function showPanno(read: string[]): void {
+  const panel = document.querySelector<HTMLElement>('[data-panno]');
+  const grid = panel?.querySelector<HTMLAnchorElement>('[data-panno-grid]');
+  if (!panel || !grid) return;
+  const stories = onPage();
+  const mode = currentFamilyMode();
+  const { n, m } = readProgress(stories, read, mode);
+  panel.hidden = m === 0;
+  const open = openSet(n, m);
+  if (open.size > 0 && panel.dataset.image && !panel.style.getPropertyValue('--panno-image')) panel.style.setProperty('--panno-image', cssUrl(panel.dataset.image));
+  grid.querySelectorAll<HTMLElement>('[data-piece]').forEach((cell) => cell.toggleAttribute('data-open', open.has(Number(cell.dataset.piece))));
+  const d = panel.dataset;
+  const all = m > 0 && n === m;
+  const line = all ? (d.done ?? '') : pickPlural({ p_one: d.one ?? '', p_few: d.few ?? '', p_many: d.many ?? '', p_other: d.other ?? '' }, 'p', n, d.locale ?? 'en').replace('{n}', String(n)).replace('{m}', String(m));
+  const count = panel.querySelector<HTMLElement>('[data-panno-count]');
+  if (count) count.textContent = line;
+  const next = all ? undefined : firstUnread(stories, read, mode);
+  const href = next ? (JSON.parse(d.links ?? '{}') as Record<string, string>)[next] : undefined;
+  if (href) {
+    grid.href = href;
+    grid.removeAttribute('role');
+    grid.setAttribute('aria-label', `${d.label}: ${line}. ${d.continue}`);
+  } else {
+    grid.removeAttribute('href');
+    grid.setAttribute('role', 'img');
+    grid.setAttribute('aria-label', `${d.label}: ${line}`);
+  }
+}
+
 /** The tick in the lists, and "read N of M" on the epoch page (only the stories the mode shows). */
 function show(): void {
   const read = load();
@@ -42,6 +77,7 @@ function show(): void {
     progress.textContent = pickPlural(forms, 'p', n, d.locale ?? 'en').replace('{n}', String(n)).replace('{m}', String(m));
     progress.toggleAttribute('data-shown', n > 0);
   }
+  showPanno(read);
 }
 
 /**

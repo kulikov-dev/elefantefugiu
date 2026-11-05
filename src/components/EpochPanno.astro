@@ -1,0 +1,98 @@
+---
+// The personal panel of an epoch page (docs/spec.md 5.2): the epoch picture cut in 6 x 4 pieces, opened by the stories the reader has read.
+// Needs JavaScript (the marks live in the browser): without it the panel is not shown and takes no room. The place is in the page from the
+// start (a fixed proportion), shown by CSS as soon as the head script has set html[data-js], so the script that opens the pieces moves nothing.
+// src/scripts/read-marks.ts opens the pieces, writes the line below, and points the panel at the first story not read yet (all read: no link).
+// The picture is fetched only when at least one piece is open: its address waits in data-image until then.
+import { getImage } from 'astro:assets';
+import { pluralForms, t } from '../i18n';
+import { LOCALES, type Lang } from '../i18n/routes';
+import type { PictureData } from '../lib/pictures';
+import { pictureSource } from '../lib/picture-assets';
+import { GRID_COLS, GRID_ROWS } from '../lib/panno';
+
+interface Props {
+  lang: Lang;
+  picture: PictureData;
+  /** Story id -> address of its page, for the stories of the epoch. */
+  links: Record<string, string>;
+}
+
+const { lang, picture, links } = Astro.props;
+const image = await getImage({ src: pictureSource(picture.file), width: 720, format: 'webp', quality: 78 });
+const cells = Array.from({ length: GRID_COLS * GRID_ROWS }, (_, i) => ({ piece: i, x: i % GRID_COLS, y: Math.floor(i / GRID_COLS) }));
+---
+<div
+  class="panno"
+  data-panno
+  data-image={image.src}
+  data-links={JSON.stringify(links)}
+  data-label={t(lang, 'panno.label')}
+  data-continue={t(lang, 'panno.continue')}
+  data-locale={LOCALES[lang]}
+  {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.panno_count')).map(([k, v]) => [`data-${k}`, v]))}
+  data-done={t(lang, 'panno.done')}
+>
+  <a class="panno__grid" data-panno-grid aria-label={t(lang, 'panno.label')}>
+    {cells.map((c) => <span class="panno__cell" data-piece={c.piece} style={`--x:${(c.x / (GRID_COLS - 1)) * 100}%;--y:${(c.y / (GRID_ROWS - 1)) * 100}%`}></span>)}
+  </a>
+  <p class="panno__count" data-panno-count></p>
+</div>
+
+<style>
+  .panno {
+    display: none;
+    min-width: 0;
+  }
+
+  :global(html[data-js]) .panno {
+    display: block;
+  }
+
+  .panno[hidden] {
+    display: none;
+  }
+
+  /* Pieces with no gap: the proportion of the box is the proportion of the picture (the 6 x 4 grid is 3:2, the pictures are 1264 x 848). */
+  .panno__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    aspect-ratio: 1264 / 848;
+    overflow: hidden;
+    border: 1px solid var(--panno-glaze-edge);
+    border-radius: var(--radius-sm);
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .panno__grid:not([href]) {
+    cursor: default;
+  }
+
+  .panno__grid:focus-visible {
+    outline: var(--border-heavy) solid var(--epoch-primary);
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  /* Not won: a smooth glazed tile with its own edge. */
+  .panno__cell {
+    background: var(--panno-glaze);
+    box-shadow: inset 0 0 0 1px var(--panno-glaze-edge);
+  }
+
+  /* Won: its part of the picture. The seam between two won pieces is one hairline (right and bottom edge only), half transparent, so the full panel does not show a second
+     grid over the seams the picture draws itself. */
+  .panno__cell[data-open] {
+    background-image: var(--panno-image);
+    background-size: 600% 400%;
+    background-position: var(--x) var(--y);
+    box-shadow: inset -1px -1px 0 0 color-mix(in srgb, var(--panno-seam-open) 30%, transparent);
+  }
+
+  .panno__count {
+    margin-block-start: var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+</style>

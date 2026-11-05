@@ -36,6 +36,7 @@
 **Метка «Новое».** `lastVisit {prev, last}`, `src/lib/new-marks.ts`, новая эпоха считается по датам (`epochFirsts` в `BaseLayout`). Нет на «С чего начать» и переключателе эпох (решение владельца). Spec §5.2.
 
 **«Прочитано».** `localStorage` `readStories`: конец текста виден и 20 с при видимой вкладке; ничего не уходит в GoatCounter. Spec §3.4, §5.2.
+- 05.11.2026: панно эпохи (вариант А: картина 6×4 из `fallback_image`, плитки открываются по доле прочитанного, ссылка на первую непрочитанную) только у эпох с картинкой и с JS; у них счётчика в строке с годами нет. `src/lib/panno.ts`, `EpochPanno.astro`, набор QA `panno`, ветка `feat/panno`. Spec §5.2.
 
 **«Понравилось».** Под текстом истории, только с JS; одно событие GoatCounter `like/<id>`, повтор не шлёт (`like:<id>` в `localStorage`); правила `src/lib/like.ts`; набор QA `likes`. В GoatCounter: Pages, фильтр `like/`. Spec §5.3.
 
