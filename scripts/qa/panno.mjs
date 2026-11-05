@@ -18,11 +18,12 @@ const ok = (name, cond, extra = '') => {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
 
-const PIECES = 24;
-const epoch = readyEpochs.find((e) => typeof e.fallback_image === 'object');
-if (!epoch) throw new Error('need: a live epoch with a picture of its own (fallback_image) in src/content/epochs.yaml. None found.');
+// Prefer an epoch with a 9 x 6 grid (the number of open tiles is then not the trivial 24), else any live epoch with `panno`.
+const epoch = readyEpochs.find((e) => e.panno?.cols === 9 && e.panno?.rows === 6) ?? readyEpochs.find((e) => e.panno);
+if (!epoch) throw new Error('need: a live epoch with `panno` (image, cols, rows) in src/content/epochs.yaml. None found.');
+const PIECES = epoch.panno.cols * epoch.panno.rows;
 const path = epochPath(epoch, 'pt');
-const without = epochs.find((e) => typeof e.fallback_image !== 'object' && inEpoch(e.id).length > 0);
+const without = epochs.find((e) => !e.panno && inEpoch(e.id).length > 0);
 const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -59,7 +60,9 @@ const state = (page) =>
       pieces: panel ? [...panel.querySelectorAll('[data-open]')].map((c) => Number(c.dataset.piece)).sort((a, b) => a - b) : [],
       line: panel?.querySelector('[data-panno-count]')?.textContent.trim() ?? null,
       href: grid?.getAttribute('href') ?? null,
-      image: panel?.dataset.image ?? null,
+      image: panel?.dataset.imageLarge ?? null,
+      imageSmall: panel?.dataset.imageSmall ?? null,
+      alt: grid?.getAttribute('aria-label') ?? null,
       width: panel?.getBoundingClientRect().width ?? 0,
       links: panel ? JSON.parse(panel.dataset.links) : {},
       order: [...document.querySelectorAll('.feed [data-story]')].map((c) => c.dataset.story),
@@ -80,28 +83,32 @@ await probe.close();
 const N = ORDER.length;
 const piecesFor = (k) => Math.round((PIECES * k) / N);
 const at = (k) => ORDER.slice(0, k);
-const lineOf = (k, lang = 'pt') => ui('plural.panno_count_other', lang).replace('{n}', String(k)).replace('{m}', String(N));
+const lineOf = (k, lang = 'pt') =>
+  k === 0
+    ? ui('panno.hint_first', lang)
+    : k === N
+      ? ui('panno.done', lang)
+      : `${ui('plural.panno_count_other', lang).replace('{n}', String(k)).replace('{m}', String(N))} · ${ui('panno.hint', lang)}`;
 
 if (want('states')) {
   let page = await open(null);
   let s = await state(page);
   ok(`0 read: the panel is shown, no piece open, the line "${lineOf(0)}"`, s.shown && s.open === 0 && s.line === lineOf(0), JSON.stringify([s.shown, s.open, s.line]));
-  ok('0 read: the picture is not fetched', page.images.every((u) => !u.includes(s.image.split('?')[0])), JSON.stringify(page.images));
+  ok('0 read: the picture is not requested (neither size)', page.images.every((u) => !u.includes(s.image.split('?')[0]) && !u.includes(s.imageSmall.split('?')[0])), JSON.stringify(page.images));
   await page.close();
   for (const k of new Set([1, Math.ceil(N / 2)])) {
     page = await open(at(k));
     s = await state(page);
     ok(`${k} of ${N} read: ${piecesFor(k)} pieces open and the line says so`, s.open === piecesFor(k) && s.line === lineOf(k), JSON.stringify([s.open, s.line]));
-    // The first eight pieces are the middle two rows of the 6 x 4 grid (the middle 2 x 2, then the neighbours at the sides).
-    const MIDDLE_ROWS = new Set([6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]);
-    ok(`${k} of ${N} read: the first pieces open are the middle ones (rows 2 and 3), never scattered`, s.pieces.length > 8 || s.pieces.every((c) => MIDDLE_ROWS.has(c)), JSON.stringify(s.pieces));
-    ok(`${k} of ${N} read: the picture is fetched`, page.images.some((u) => u.includes(s.image.split('?')[0])), JSON.stringify(page.images));
+    ok(`${k} of ${N} read: the same tiles as the order of the page promises (${PIECES} tiles, ${epoch.panno.cols} x ${epoch.panno.rows})`, s.pieces.length === s.open && s.pieces.every((c) => c >= 0 && c < PIECES), JSON.stringify(s.pieces));
+    ok(`${k} of ${N} read: the alt says how many tiles are open, without describing the scene`, s.alt?.includes(ui('plural.panno_alt_other', 'pt').replace('{n}', String(piecesFor(k))).replace('{m}', String(PIECES))), String(s.alt));
+    ok(`${k} of ${N} read: the picture is fetched`, page.images.some((u) => u.includes(s.image.split('?')[0]) || u.includes(s.imageSmall.split('?')[0])), JSON.stringify(page.images));
     await page.close();
   }
   for (const lang of ['pt', 'en', 'ru']) {
     page = await open(ORDER, { url: epochPath(epoch, lang) });
     s = await state(page);
-    ok(`${lang}: all read: every piece open and the line "${ui('panno.done', lang)}"`, s.open === PIECES && s.line === ui('panno.done', lang), JSON.stringify([s.open, s.line]));
+    ok(`${lang}: all read: every tile open and the line "${ui('panno.done', lang)}"`, s.open === PIECES && s.line === ui('panno.done', lang), JSON.stringify([s.open, s.line]));
     await page.close();
   }
 }

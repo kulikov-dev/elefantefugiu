@@ -35,3 +35,12 @@ export async function previewImageUrl(picture: PictureData): Promise<string> {
   });
   return image.src;
 }
+
+const pannos = import.meta.glob<{ default: ImageMetadata }>('../assets/panno/*.{jpg,jpeg,png,webp}', { eager: true });
+
+/** The picture of an epoch panel (src/assets/panno/); a name that is not there stops the build. */
+export function pannoSource(file: string): ImageMetadata {
+  const found = pannos[`../assets/panno/${file}`];
+  if (!found) throw new Error(`Panel picture "${file}" is not in src/assets/panno/`);
+  return found.default;
+}

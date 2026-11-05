@@ -255,6 +255,12 @@ export const thenNowCard = z
     if (!hasN && card.then_hours !== undefined) ctx.addIssue({ code: 'custom', path: ['text'], message: 'then_hours is given but the text has no {n}' });
   });
 
+/** The personal panel of an epoch page: its own picture (src/assets/panno/) cut in cols x rows tiles; the tiles drawn on the picture are the tiles of the panel. */
+export const PANNO_GRID_MIN = 4;
+export const PANNO_GRID_MAX = 14;
+const pannoSide = z.number().int().min(PANNO_GRID_MIN).max(PANNO_GRID_MAX);
+export const pannoSchema = z.strictObject({ image: z.string().min(1), cols: pannoSide, rows: pannoSide });
+
 export const EPOCH_PLACEHOLDER_FIELDS = ['name', 'theme', 'style', 'intro', 'fallback_image'] as const;
 
 export const epochSchema = z
@@ -285,6 +291,8 @@ export const epochSchema = z
      * is a provisional picture that only serves the preview (Estado Novo); a real picture is an object.
      */
     fallback_image: z.union([picture, z.string()]).optional(),
+    /** The panel of the epoch page; epochs without it have no panel (the page keeps "read N of M" by the years). Independent of fallback_image. */
+    panno: pannoSchema.optional(),
     /** "Then and now": exactly three cards; the block shows on the epoch page once the epoch has a page. */
     then_now: z.array(thenNowCard).length(3).optional(),
     /** Which fields are still provisional. `fallback_image` (a picture to be made) does not make the page test text; any other field does. */

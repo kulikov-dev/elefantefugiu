@@ -220,7 +220,8 @@
     "expand_story": "Ler a história"
   },
   "panno": {
-    "label": "O seu painel desta época",
+    "hint": "cada história revela parte do painel",
+    "hint_first": "Cada história revela parte do painel",
     "continue": "Continuar a ler",
     "done": "Época lida"
   },
@@ -242,7 +243,9 @@
     "read_progress_one": "lida {n} de {m}",
     "read_progress_other": "lidas {n} de {m}",
     "panno_count_one": "{n} de {m} lidas",
-    "panno_count_other": "{n} de {m} lidas"
+    "panno_count_other": "{n} de {m} lidas",
+    "panno_alt_one": "Painel da época: {n} de {m} ladrilhos abertos",
+    "panno_alt_other": "Painel da época: {n} de {m} ladrilhos abertos"
   },
   "map": {
     "home": "Portugal inteiro",

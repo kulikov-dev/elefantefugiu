@@ -1,42 +1,49 @@
 ---
-// The personal panel of an epoch page (docs/spec.md 5.2): the epoch picture cut in 6 x 4 pieces, opened by the stories the reader has read.
+// The personal panel of an epoch page (docs/spec.md 5.2): the epoch's own picture (`panno` in epochs.yaml) cut in cols x rows tiles, opened by the stories the reader has read.
 // Needs JavaScript (the marks live in the browser): without it the panel is not shown and takes no room. The place is in the page from the
-// start (a fixed proportion), shown by CSS as soon as the head script has set html[data-js], so the script that opens the pieces moves nothing.
-// src/scripts/read-marks.ts opens the pieces, writes the line below, and points the panel at the first story not read yet (all read: no link).
-// The picture is fetched only when at least one piece is open: its address waits in data-image until then.
+// start (aspect-ratio = cols / rows), shown by CSS as soon as the head script has set html[data-js], so the script that opens the tiles moves nothing.
+// src/scripts/read-marks.ts opens the tiles, writes the line below, and points the panel at the first story not read yet (all read: no link).
+// The picture is fetched only when at least one tile is open: its addresses (480 and 960 px wide) wait in data-image-small / data-image-large until then.
 import { getImage } from 'astro:assets';
-import { pluralForms, t } from '../i18n';
+import { plural, pluralForms, t } from '../i18n';
 import { LOCALES, type Lang } from '../i18n/routes';
-import type { PictureData } from '../lib/pictures';
-import { pictureSource } from '../lib/picture-assets';
-import { GRID_COLS, GRID_ROWS } from '../lib/panno';
+import { pannoSource } from '../lib/picture-assets';
+import { openOrder } from '../lib/panno';
 
 interface Props {
   lang: Lang;
-  picture: PictureData;
+  epochId: string;
+  panno: { image: string; cols: number; rows: number };
   /** Story id -> address of its page, for the stories of the epoch. */
   links: Record<string, string>;
 }
 
-const { lang, picture, links } = Astro.props;
-const image = await getImage({ src: pictureSource(picture.file), width: 720, format: 'webp', quality: 78 });
-const cells = Array.from({ length: GRID_COLS * GRID_ROWS }, (_, i) => ({ piece: i, x: i % GRID_COLS, y: Math.floor(i / GRID_COLS) }));
+const { lang, epochId, panno, links } = Astro.props;
+const { cols, rows } = panno;
+const source = pannoSource(panno.image);
+const [small, large] = await Promise.all([480, 960].map((width) => getImage({ src: source, width, format: 'webp', quality: 80 })));
+const pieces = cols * rows;
+const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols, y: Math.floor(i / cols) }));
 ---
 <div
   class="panno"
   data-panno
-  data-image={image.src}
+  data-image-small={small?.src}
+  data-image-large={large?.src}
+  data-order={openOrder(epochId, pieces).join(',')}
   data-links={JSON.stringify(links)}
-  data-label={t(lang, 'panno.label')}
+  {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.panno_alt')).map(([k, v]) => [`data-alt-${k}`, v]))}
+  data-hint={t(lang, 'panno.hint')}
+  data-hint-first={t(lang, 'panno.hint_first')}
   data-continue={t(lang, 'panno.continue')}
   data-locale={LOCALES[lang]}
   {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.panno_count')).map(([k, v]) => [`data-${k}`, v]))}
   data-done={t(lang, 'panno.done')}
 >
-  <a class="panno__grid" data-panno-grid aria-label={t(lang, 'panno.label')}>
-    {cells.map((c) => <span class="panno__cell" data-piece={c.piece} style={`--x:${(c.x / (GRID_COLS - 1)) * 100}%;--y:${(c.y / (GRID_ROWS - 1)) * 100}%`}></span>)}
+  <a class="panno__grid" data-panno-grid role="img" aria-label={plural(lang, 'plural.panno_alt', 0).replace('{n}', '0').replace('{m}', String(pieces))} style={`--cols:${cols};--rows:${rows};aspect-ratio:${cols} / ${rows}`}>
+    {cells.map((c) => <span class="panno__cell" data-piece={c.piece} style={`--x:${(c.x / (cols - 1)) * 100}%;--y:${(c.y / (rows - 1)) * 100}%`}></span>)}
   </a>
-  <p class="panno__count" data-panno-count></p>
+  <p class="panno__count" data-panno-count>{t(lang, 'panno.hint_first')}</p>
 </div>
 
 <style>
@@ -53,14 +60,12 @@ const cells = Array.from({ length: GRID_COLS * GRID_ROWS }, (_, i) => ({ piece: 
     display: none;
   }
 
-  /* Pieces with no gap: the proportion of the box is the proportion of the picture (the 6 x 4 grid is 3:2, the pictures are 1264 x 848). */
+  /* Tiles with no gap and no frame: the box has the proportion of the picture (cut to whole tiles, so cols : rows), and the tiles drawn on the picture lie on the closed ones. */
   .panno__grid {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    aspect-ratio: 1264 / 848;
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
     overflow: hidden;
-    border: 1px solid var(--panno-glaze-edge);
     border-radius: var(--radius-sm);
     color: inherit;
     text-decoration: none;
@@ -81,13 +86,12 @@ const cells = Array.from({ length: GRID_COLS * GRID_ROWS }, (_, i) => ({ piece: 
     box-shadow: inset 0 0 0 1px var(--panno-glaze-edge);
   }
 
-  /* Won: its part of the picture. The seam between two won pieces is one hairline (right and bottom edge only), half transparent, so the full panel does not show a second
-     grid over the seams the picture draws itself. */
+  /* Won: its part of the picture, with no seam of its own: the picture draws the seams. */
   .panno__cell[data-open] {
     background-image: var(--panno-image);
-    background-size: 600% 400%;
+    background-size: calc(var(--cols) * 100%) calc(var(--rows) * 100%);
     background-position: var(--x) var(--y);
-    box-shadow: inset -1px -1px 0 0 color-mix(in srgb, var(--panno-seam-open) 30%, transparent);
+    box-shadow: none;
   }
 
   .panno__count {

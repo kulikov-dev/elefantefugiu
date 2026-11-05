@@ -263,7 +263,6 @@
   --azulejo-band-height: 1.25rem;
   --panno-glaze: light-dark(#fdfcf8, #2c363c); /* a piece of the epoch panel not yet won: smooth glazed tile, muted in the dark theme */
   --panno-glaze-edge: light-dark(#dcd8ca, #3b484f);
-  --panno-seam-open: light-dark(#b8b29f, #1a2226); /* the seam between two pieces already shown: fine and half transparent (the picture draws its own) */
   --azulejo-corner-size: 5.5rem;
 
   /* A button that cannot be pressed (the report form while it is sending). */
@@ -506,7 +505,6 @@
     --festa-plate: var(--festa-wash);
     --panno-glaze: #fdfcf8;
     --panno-glaze-edge: #dcd8ca;
-    --panno-seam-open: #b8b29f;
   }
 
   :root {

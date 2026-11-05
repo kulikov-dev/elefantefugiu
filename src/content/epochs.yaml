@@ -48,6 +48,10 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: true
+  panno:
+    image: avis.jpg
+    cols: 9
+    rows: 6
   fallback_image:
     file: epoca-avis-e-descobrimentos.webp
     alt:
@@ -179,6 +183,10 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: true
+  panno:
+    image: pombal.jpg
+    cols: 12
+    rows: 8
   fallback_image:
     file: epoca-pombal-e-terramoto.webp
     alt:
@@ -350,6 +358,10 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: true
+  panno:
+    image: roma.jpg
+    cols: 6
+    rows: 4
   fallback_image:
     file: epoca-lusitania-e-roma.webp
     alt:
@@ -529,6 +541,10 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: true
+  panno:
+    image: uniao.jpg
+    cols: 12
+    rows: 8
   fallback_image:
     file: epoca-uniao-restauracao-e-ouro-do-brasil.webp
     alt:
@@ -650,6 +666,10 @@
     heading_font: var(--font-heading)
     frame: 1px solid var(--color-line)
   mvp: true
+  panno:
+    image: monarquia.jpg
+    cols: 9
+    rows: 6
   fallback_image:
     file: epoca-monarquia-e-republica.webp
     alt:

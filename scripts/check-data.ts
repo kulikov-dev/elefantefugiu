@@ -186,6 +186,7 @@ for (const { item, file } of epochs) {
   } else if (pic) {
     checkPicture(file, 'fallback_image', pic, ['pt', 'en', 'ru']);
   }
+  if (item.panno && !existsSync(join(root, 'src/assets/panno', item.panno.image))) report('error', file, `file "src/assets/panno/${item.panno.image}" does not exist`, 'panno.image');
 }
 
 const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;

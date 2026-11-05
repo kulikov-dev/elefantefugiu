@@ -286,9 +286,9 @@ if (want('read')) {
   const story = published.find((e) => e.min_age === 'all' && !e.sensitive) ?? published[0];
   const epoch = epochs.find((e) => e.id === story.epoch);
   const inThisEpoch = published.filter((e) => e.epoch === epoch.id);
-  // An epoch with a picture has the panel and its line under it ("1 de M lidas", "Época lida"); the plain "lida 1 de M" by the years stays on an epoch without one.
-  const hasPanno = typeof epoch.fallback_image === 'object';
-  const countOf = (n, m) => (hasPanno ? (n === m ? 'Época lida' : `${n} de ${m} lidas`) : `${n === 1 ? 'lida' : 'lidas'} ${n} de ${m}`);
+  // An epoch with `panno` has the panel and its line under it ("1 de M lidas · cada história revela parte do painel", "Época lida"); the plain "lida 1 de M" by the years stays on an epoch without one.
+  const hasPanno = !!epoch.panno;
+  const countOf = (n, m) => (hasPanno ? (n === m ? 'Época lida' : n === 0 ? 'Cada história revela parte do painel' : `${n} de ${m} lidas · cada história revela parte do painel`) : `${n === 1 ? 'lida' : 'lidas'} ${n} de ${m}`);
   const shownIn = (e, mode) => mode === 'off' || (!e.sensitive && (mode === 'all' ? e.min_age === 'all' : e.min_age === 'all' || e.min_age === '12'));
   const saved = (page) => page.evaluate(() => { try { return JSON.parse(localStorage.getItem('readStories') ?? '[]'); } catch { return null; } });
   /** The story page opened with the wait shortened (delay, ms) and, when asked, with the tab hidden; ends after `stay` ms. */

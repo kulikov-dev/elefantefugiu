@@ -1,59 +1,82 @@
 import { describe, expect, it } from 'vitest';
-import { firstUnread, GRID_COLS, OPEN_ORDER, openPieces, openSet, PIECES } from '../../src/lib/panno';
+import { pannoSchema } from '../../src/data/schemas';
+import { firstUnread, openOrder, openPieces, openSet } from '../../src/lib/panno';
 import { readProgress, type StoryOnPage } from '../../src/lib/read-marks';
 
 const story = (id: string, sensitive: unknown = false, minAge: unknown = 'all'): StoryOnPage => ({ id, minAge, sensitive });
 const stories = (n: number): StoryOnPage[] => Array.from({ length: n }, (_, i) => story(`s${i + 1}`));
 const ids = (list: StoryOnPage[]): string[] => list.map((s) => s.id);
 
-describe('order of the pieces', () => {
-  it('is every piece of the grid exactly once', () => {
-    expect([...OPEN_ORDER].sort((a, b) => a - b)).toEqual(Array.from({ length: PIECES }, (_, i) => i));
+const GRIDS = [
+  { cols: 6, rows: 4 },
+  { cols: 9, rows: 6 },
+  { cols: 12, rows: 8 },
+];
+const piecesOf = (g: { cols: number; rows: number }): number => g.cols * g.rows;
+
+describe('order of the tiles', () => {
+  it('is every tile of the grid exactly once, for every grid', () => {
+    for (const g of GRIDS) expect([...openOrder('some-epoch', piecesOf(g))].sort((a, b) => a - b)).toEqual(Array.from({ length: piecesOf(g) }, (_, i) => i));
   });
 
-  it('starts with the middle 2 x 2, a horizontal pair first, then widens sideways', () => {
-    expect(OPEN_ORDER.slice(0, 8)).toEqual([8, 9, 14, 15, 7, 10, 13, 16]);
+  it('is the same on every call for the same epoch (deterministic)', () => {
+    for (const g of GRIDS) expect(openOrder('monarquia-e-republica', piecesOf(g))).toEqual(openOrder('monarquia-e-republica', piecesOf(g)));
   });
 
-  it('joins every piece to the part already open (no piece alone, no diagonal start)', () => {
-    const touches = (a: number, b: number): boolean => {
-      const dx = Math.abs((a % GRID_COLS) - (b % GRID_COLS));
-      const dy = Math.abs(Math.floor(a / GRID_COLS) - Math.floor(b / GRID_COLS));
-      return dx + dy === 1;
-    };
-    OPEN_ORDER.forEach((piece, i) => {
-      if (i === 0) return;
-      expect(OPEN_ORDER.slice(0, i).some((other) => touches(piece, other)), `piece ${piece} at step ${i}`).toBe(true);
-    });
+  it('differs between epochs and is not the plain reading order', () => {
+    const a = openOrder('lusitania-e-roma', 54);
+    expect(a).not.toEqual(openOrder('pombal-e-terramoto', 54));
+    expect(a).not.toEqual(Array.from({ length: 54 }, (_, i) => i));
   });
 
-  it('is mirrored left to right in the pairs of the first rows', () => {
-    for (let i = 0; i < 4; i += 2) expect((OPEN_ORDER[i] ?? 0) + (OPEN_ORDER[i + 1] ?? 0)).toBe(2 * Math.floor((OPEN_ORDER[i] ?? 0) / GRID_COLS) * GRID_COLS + GRID_COLS - 1);
+  it('never closes a tile when one more story is read (monotone): k + 1 = the same tiles and new ones', () => {
+    for (const g of GRIDS) {
+      const order = openOrder('avis-e-descobrimentos', piecesOf(g));
+      for (let m = 1; m <= 30; m++) {
+        for (let n = 0; n < m; n++) {
+          const now = openSet(n, m, order);
+          const next = openSet(n + 1, m, order);
+          for (const piece of now) expect(next.has(piece)).toBe(true);
+          expect(next.size).toBeGreaterThanOrEqual(now.size);
+        }
+      }
+    }
   });
 });
 
-describe('share of pieces open', () => {
-  it('is the share of the stories read, rounded to a piece', () => {
-    expect(openPieces(0, 12)).toBe(0);
-    expect(openPieces(1, 12)).toBe(2);
-    expect(openPieces(3, 12)).toBe(6);
-    expect(openPieces(12, 12)).toBe(PIECES);
-    expect(openPieces(1, 7)).toBe(3);
-    expect(openPieces(5, 0)).toBe(0);
-    expect(openPieces(20, 12)).toBe(PIECES);
+describe('share of tiles open', () => {
+  it.each(GRIDS)('$cols x $rows: 0 read none, some read the rounded share, all read every tile', (g) => {
+    const total = piecesOf(g);
+    expect(openPieces(0, 7, total)).toBe(0);
+    expect(openPieces(3, 7, total)).toBe(Math.round((total * 3) / 7));
+    expect(openPieces(7, 7, total)).toBe(total);
+    expect(openPieces(5, 0, total)).toBe(0);
   });
 
-  it('shows a horizontal pair in the middle for 1 of 12', () => {
-    expect([...openSet(1, 12)].sort((a, b) => a - b)).toEqual([8, 9]);
+  it.each(GRIDS)('$cols x $rows: all read and then a new story comes out: a few tiles close, never more than a share', (g) => {
+    const total = piecesOf(g);
+    const m = 11;
+    const after = openPieces(m, m + 1, total);
+    expect(after).toBeLessThan(total);
+    expect(after).toBe(Math.round((total * m) / (m + 1)));
+    const order = openOrder('uniao-restauracao-e-ouro-do-brasil', total);
+    for (const piece of openSet(m, m + 1, order)) expect(openSet(m, m, order).has(piece)).toBe(true);
   });
 
-  it('never closes a piece when one more story is read', () => {
-    for (let m = 1; m <= 40; m++) {
-      for (let n = 0; n < m; n++) {
-        const now = openSet(n, m);
-        for (const piece of now) expect(openSet(n + 1, m).has(piece)).toBe(true);
-      }
-    }
+  it('the count changes with the grid: 1 of 12 is 2 tiles on 6 x 4, 9 on 9 x 6 (rounded 4.5), 8 on 12 x 8', () => {
+    expect(openPieces(1, 12, 24)).toBe(2);
+    expect(openPieces(1, 12, 54)).toBe(5);
+    expect(openPieces(1, 12, 96)).toBe(8);
+  });
+
+  it('is capped: more stories read than exist never opens more than the grid', () => {
+    expect(openPieces(20, 12, 54)).toBe(54);
+    expect(openPieces(-3, 12, 54)).toBe(0);
+  });
+
+  it('opens as many tiles as the share says', () => {
+    const order = openOrder('pombal-e-terramoto', 96);
+    expect(openSet(3, 7, order).size).toBe(openPieces(3, 7, 96));
   });
 });
 
@@ -62,7 +85,7 @@ describe('states of the panel', () => {
   const all = stories(m);
   const state = (read: string[]) => {
     const { n, m: total } = readProgress(all, read, 'off');
-    return { n, m: total, open: openPieces(n, total), next: firstUnread(all, read, 'off') };
+    return { n, m: total, open: openPieces(n, total, 24), next: firstUnread(all, read, 'off') };
   };
 
   it('0 read: nothing open, the link leads to the first story', () => {
@@ -74,17 +97,16 @@ describe('states of the panel', () => {
   });
 
   it('all read: the whole picture, no link', () => {
-    expect(state(ids(all))).toEqual({ n: m, m, open: PIECES, next: undefined });
+    expect(state(ids(all))).toEqual({ n: m, m, open: 24, next: undefined });
   });
 
   it('all read and then a new story comes out: some pieces close again, the link leads to the new story', () => {
     const grown: StoryOnPage[] = [...all, story('new')];
     const { n, m: total } = readProgress(grown, ids(all), 'off');
-    expect(openPieces(n, total)).toBeLessThan(PIECES);
-    expect(openPieces(n, total)).toBeGreaterThan(PIECES - 3);
+    expect(openPieces(n, total, 24)).toBeLessThan(24);
     expect(firstUnread(grown, ids(all), 'off')).toBe('new');
-    // The pieces still open are a part of those that were: nothing jumps.
-    for (const piece of openSet(n, total)) expect(openSet(m, m).has(piece)).toBe(true);
+    const order = openOrder('e', 24);
+    for (const piece of openSet(n, total, order)) expect(openSet(m, m, order).has(piece)).toBe(true);
   });
 
   it('counts only the stories the family mode shows', () => {
@@ -92,5 +114,21 @@ describe('states of the panel', () => {
     const { n, m: total } = readProgress(list, ['a'], 'all');
     expect([n, total]).toEqual([1, 2]);
     expect(firstUnread(list, ['a'], 'all')).toBe('c');
+  });
+});
+
+describe('panno in the data of an epoch', () => {
+  const ok = { image: 'roma.jpg', cols: 6, rows: 4 };
+  it('accepts whole numbers of tiles from 4 to 14', () => {
+    expect(pannoSchema.safeParse(ok).success).toBe(true);
+    expect(pannoSchema.safeParse({ ...ok, cols: 14, rows: 14 }).success).toBe(true);
+  });
+
+  it('rejects fewer than 4, more than 14, fractions, and unknown fields', () => {
+    expect(pannoSchema.safeParse({ ...ok, cols: 3 }).success).toBe(false);
+    expect(pannoSchema.safeParse({ ...ok, rows: 15 }).success).toBe(false);
+    expect(pannoSchema.safeParse({ ...ok, cols: 6.5 }).success).toBe(false);
+    expect(pannoSchema.safeParse({ ...ok, extra: 1 }).success).toBe(false);
+    expect(pannoSchema.safeParse({ cols: 6, rows: 4 }).success).toBe(false);
   });
 });

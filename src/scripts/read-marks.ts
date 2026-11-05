@@ -42,24 +42,28 @@ function showPanno(read: string[]): void {
   const mode = currentFamilyMode();
   const { n, m } = readProgress(stories, read, mode);
   panel.hidden = m === 0;
-  const open = openSet(n, m);
-  if (open.size > 0 && panel.dataset.image && !panel.style.getPropertyValue('--panno-image')) panel.style.setProperty('--panno-image', cssUrl(panel.dataset.image));
-  grid.querySelectorAll<HTMLElement>('[data-piece]').forEach((cell) => cell.toggleAttribute('data-open', open.has(Number(cell.dataset.piece))));
   const d = panel.dataset;
+  const order = (d.order ?? '').split(',').filter(Boolean).map(Number);
+  const open = openSet(n, m, order);
+  if (open.size > 0 && d.imageSmall && d.imageLarge && !panel.style.getPropertyValue('--panno-image')) panel.style.setProperty('--panno-image', `image-set(${cssUrl(d.imageSmall)} 1x, ${cssUrl(d.imageLarge)} 2x)`);
+  grid.querySelectorAll<HTMLElement>('[data-piece]').forEach((cell) => cell.toggleAttribute('data-open', open.has(Number(cell.dataset.piece))));
   const all = m > 0 && n === m;
-  const line = all ? (d.done ?? '') : pickPlural({ p_one: d.one ?? '', p_few: d.few ?? '', p_many: d.many ?? '', p_other: d.other ?? '' }, 'p', n, d.locale ?? 'en').replace('{n}', String(n)).replace('{m}', String(m));
+  // "2 of 7 read · each story reveals part of the panel"; with nothing read only the second part, capitalised; all read: the closing line.
+  const counted = pickPlural({ p_one: d.one ?? '', p_few: d.few ?? '', p_many: d.many ?? '', p_other: d.other ?? '' }, 'p', n, d.locale ?? 'en').replace('{n}', String(n)).replace('{m}', String(m));
+  const line = all ? (d.done ?? '') : n === 0 ? (d.hintFirst ?? '') : `${counted} · ${d.hint ?? ''}`;
   const count = panel.querySelector<HTMLElement>('[data-panno-count]');
   if (count) count.textContent = line;
+  const alt = pickPlural({ p_one: d.altOne ?? '', p_few: d.altFew ?? '', p_many: d.altMany ?? '', p_other: d.altOther ?? '' }, 'p', open.size, d.locale ?? 'en').replace('{n}', String(open.size)).replace('{m}', String(order.length));
   const next = all ? undefined : firstUnread(stories, read, mode);
   const href = next ? (JSON.parse(d.links ?? '{}') as Record<string, string>)[next] : undefined;
   if (href) {
     grid.href = href;
     grid.removeAttribute('role');
-    grid.setAttribute('aria-label', `${d.label}: ${line}. ${d.continue}`);
+    grid.setAttribute('aria-label', `${alt}. ${d.continue}`);
   } else {
     grid.removeAttribute('href');
     grid.setAttribute('role', 'img');
-    grid.setAttribute('aria-label', `${d.label}: ${line}`);
+    grid.setAttribute('aria-label', alt);
   }
 }
 

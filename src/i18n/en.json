@@ -220,7 +220,8 @@
     "expand_story": "Read the story"
   },
   "panno": {
-    "label": "Your panel of this era",
+    "hint": "each story reveals part of the panel",
+    "hint_first": "Each story reveals part of the panel",
     "continue": "Keep reading",
     "done": "Era complete"
   },
@@ -242,7 +243,9 @@
     "read_progress_one": "read {n} of {m}",
     "read_progress_other": "read {n} of {m}",
     "panno_count_one": "{n} of {m} read",
-    "panno_count_other": "{n} of {m} read"
+    "panno_count_other": "{n} of {m} read",
+    "panno_alt_one": "Panel of the era: {n} of {m} tiles open",
+    "panno_alt_other": "Panel of the era: {n} of {m} tiles open"
   },
   "map": {
     "home": "All of Portugal",
