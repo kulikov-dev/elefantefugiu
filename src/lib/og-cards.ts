@@ -41,3 +41,14 @@ export function festaCardPath(id: string, cwd = process.cwd()): string | undefin
 
 /** The size and the type of the picture of a holiday, for og:image:width, height and type. */
 export const festaCardSize = (rel: string) => ({ width: 1200, height: 630, type: rel.endsWith('.jpg') ? 'image/jpeg' : 'image/png' }) as const;
+
+/** The preview picture of a finished panel (scripts/make-panno-og.mjs: 1200x630 JPEG, the whole panel on fields of the colour of the epoch), a path inside public/; undefined when there is none. */
+export function pannoCardPath(epochId: string, cwd = process.cwd()): string | undefined {
+  try {
+    const manifest = JSON.parse(readFileSync(join(cwd, '.og-cache/panno.json'), 'utf8')) as Record<string, string>;
+    const rel = manifest[epochId];
+    return rel && existsSync(join(cwd, 'public', rel)) ? rel : undefined;
+  } catch {
+    return undefined;
+  }
+}

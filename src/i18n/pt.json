@@ -221,7 +221,16 @@
   },
   "panno": {
     "hint": "Cada história revela parte do painel",
-    "continue": "Continuar a ler",
+        "zoom": "Abrir o painel em grande",
+    "close": "Fechar",
+    "share": "Partilhar",
+    "copied": "Ligação copiada",
+    "share_text": "Li todas as histórias da época «{name}» e completei o painel",
+    "page_title": "Painel da época «{name}»",
+    "invite": "Leia as histórias desta época e complete o seu painel",
+    "to_epoch": "Ir para a época",
+    "og_title": "Painel da época «{name}» completo",
+"continue": "Continuar a ler",
     "done": "Época lida"
   },
   "plural": {

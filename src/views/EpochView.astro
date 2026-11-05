@@ -113,7 +113,7 @@ const schema = epochNodes(schemaCtx, {
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
       {intro && <p class="epoch__intro">{intro}</p>}
     </header>
-      {epoch.panno && <EpochPanno lang={lang} epochId={epoch.id} panno={epoch.panno} links={Object.fromEntries(feed.map((e) => [e.id, storyPath(lang, e.slug[lang])]))} />}
+      {epoch.panno && <EpochPanno lang={lang} epochId={epoch.id} epochSlug={epoch.slug[lang]} epochName={epoch.name[lang]} panno={epoch.panno} links={Object.fromEntries(feed.map((e) => [e.id, storyPath(lang, e.slug[lang])]))} />}
     </div>
     <div class="azulejo-rule" aria-hidden="true"></div>
 

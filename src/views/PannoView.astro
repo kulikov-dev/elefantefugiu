@@ -1,0 +1,74 @@
+---
+// The page of a finished panel: /ru/panno/<slug>/, /pt/painel/<slug>/, /en/panel/<slug>/ (docs/spec.md 5.2). What a reader shares after reading an epoch to the end: the title,
+// the whole panel, a line that invites to read, a button to the epoch. Open to anyone with the link, out of search (noindex, so also out of the sitemap).
+// Its own preview picture (scripts/make-panno-og.mjs): the whole panel on fields of the colour of the epoch.
+import { getImage } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { altPaths, epochHref, pannoHref, withBase, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import type { EpochData } from '../lib/epochs';
+import { OG_CARD, pannoCardPath } from '../lib/og-cards';
+import { pannoSource } from '../lib/picture-assets';
+
+interface Props {
+  lang: Lang;
+  epoch: EpochData;
+}
+
+const { lang, epoch } = Astro.props;
+const panno = epoch.panno!;
+const name = epoch.name[lang];
+const title = t(lang, 'panno.page_title').replace('{name}', name);
+const invite = t(lang, 'panno.invite');
+const source = pannoSource(panno.image);
+const sizes = await Promise.all([480, 960, source.width].map((width) => getImage({ src: source, width, format: 'webp', quality: 85 })));
+const full = sizes[sizes.length - 1]!;
+const og = pannoCardPath(epoch.id);
+---
+<BaseLayout
+  lang={lang}
+  title={title}
+  description={invite}
+  alternates={altPaths((l) => pannoHref(l, epoch.slug[l]))}
+  epoch={epoch.id}
+  noindex
+  preview={{
+    title: t(lang, 'panno.og_title').replace('{name}', name),
+    description: invite,
+    imageUrl: og ? withBase(og) : undefined,
+    imageSize: og ? OG_CARD : undefined,
+    imageAlt: title,
+  }}
+>
+  <article class="panno-page">
+    <h1>{title}</h1>
+    <img
+      class="panno-page__image"
+      src={full.src}
+      srcset={sizes.map((s) => `${s.src} ${s.options.width}w`).join(', ')}
+      sizes="(min-width: 60rem) 60rem, 100vw"
+      width={full.options.width}
+      height={full.options.height}
+      alt={title}
+    />
+    <p class="panno-page__invite">{invite}</p>
+    <p><a class="button" href={epochHref(lang, epoch.slug[lang])}>{t(lang, 'panno.to_epoch')}</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .panno-page > :global(* + *) {
+    margin-block-start: var(--space-4);
+  }
+
+  .panno-page__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+  }
+
+  .panno-page__invite {
+    font-size: var(--text-lg);
+  }
+</style>

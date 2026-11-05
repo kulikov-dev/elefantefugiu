@@ -40,6 +40,8 @@ export const hasInteractive = (e) => !!e.interactive;
 
 /** Page addresses (base path "/"). */
 export const epochPath = (e, lang = 'pt') => `/${lang}/${{ pt: 'epoca', en: 'era', ru: 'epoha' }[lang]}/${e.slug[lang]}/`;
+/** The page of the finished panel of an epoch with `panno`. */
+export const pannoPath = (e, lang = 'pt') => `/${lang}/${{ pt: 'painel', en: 'panel', ru: 'panno' }[lang]}/${e.slug[lang]}/`;
 export const threadPath = (t, lang = 'pt') => `/${lang}/${{ pt: 'fio', en: 'thread', ru: 'niti' }[lang]}/${t.slug[lang]}/`;
 /** Published cards of an epoch in the order of the page (by year, then as the build orders them). */
 export const feedOf = (epochId, list = published) => inEpoch(epochId, list).sort((a, b) => a.year - b.year);
