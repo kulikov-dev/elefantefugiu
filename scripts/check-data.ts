@@ -483,7 +483,6 @@ for (const t of threads) {
   for (const festa of parsed ?? []) {
     const at = `${file} (${festa.id})`;
     if ('fixed' in festa.date && !isCalendarDay(2024, festa.date.fixed)) report('error', at, `${festa.date.fixed} is not a day of the calendar`, 'date');
-    if (festa.story && !known.has(festa.story)) report('error', at, `the story "${festa.story}" does not exist`, 'story');
     const langs = Object.keys(festa.text);
     if (festa.enabled && langs.length === 0) report('error', at, 'is enabled but has no text', 'text');
     if (festa.enabled && langs.length > 0 && !festa.art) report('error', at, 'has a text but no drawing (art)', 'art');

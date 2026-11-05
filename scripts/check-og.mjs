@@ -25,13 +25,14 @@ try {
 
 const EPOCH_PAGE = /^(pt\/epoca|en\/era|ru\/epoha)\/[^/]+\/index\.html$/;
 const HOME_PAGE = /^(pt|en|ru)\/index\.html$/;
-const counts = { story: 0, epoch: 0, home: 0 };
+const FESTA_PAGE = /^ru\/festa\/[^/]+\/index\.html$/;
+const counts = { story: 0, epoch: 0, home: 0, festa: 0 };
 let cards = 0;
 for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
   const html = readFileSync(file, 'utf8');
   const rel = relative(dist, file).split(sep).join('/');
   const isStory = meta(html, 'property', 'og:type') === 'article';
-  const kind = isStory ? 'story' : EPOCH_PAGE.test(rel) ? 'epoch' : HOME_PAGE.test(rel) ? 'home' : null;
+  const kind = isStory ? 'story' : EPOCH_PAGE.test(rel) ? 'epoch' : HOME_PAGE.test(rel) ? 'home' : FESTA_PAGE.test(rel) ? 'festa' : null;
   if (!kind || /<meta name="robots" content="noindex"/.test(html)) continue;
   counts[kind] += 1;
   const fail = (what) => errors.push(`${rel}: ${what}`);
@@ -65,11 +66,14 @@ for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
   if (size > MAX) fail(`${path} is ${(size / 1024).toFixed(0)} KB, more than 200 KB`);
   const isCard = /^og-cards\/(pt|en|ru)\/.+-[0-9a-f]{10}\.jpg$/.test(path);
   const epochId = /<html[^>]* data-epoch="([^"]+)"/.exec(html)?.[1];
-  const key = kind === 'story' ? undefined : kind === 'home' ? 'home' : `epoch:${epochId}`;
+  const key = kind === 'story' || kind === 'festa' ? undefined : kind === 'home' ? 'home' : `epoch:${epochId}`;
   const lang = rel.split('/')[0];
-  // The home page in the window of a holiday shares the picture of the holiday (scripts/make-festa-og.mjs): a PNG of 1200x630, the hash in its name.
-  const isFesta = kind === 'home' && /^og-festas\/[a-z0-9-]+-[0-9a-f]{10}\.png$/.test(path);
-  if (isFesta && info.format !== 'png') fail(`${path} is not a PNG`);
+  // The page of a holiday and the home page in its window share the picture of the holiday (scripts/make-festa-og.mjs): 1200x630, the hash in its name, a PNG (the drawing)
+  // or a JPEG (the picture of the owner, festas.yaml `image`).
+  const isFesta = (kind === 'home' || kind === 'festa') && /^og-festas\/[a-z0-9-]+-[0-9a-f]{10}\.(png|jpg)$/.test(path);
+  if (isFesta && info.format !== (path.endsWith('.jpg') ? 'jpeg' : 'png')) fail(`${path} is not a ${path.endsWith('.jpg') ? 'JPEG' : 'PNG'}`);
+  if (kind === 'festa' && / · O Elefante Fugiu$/.test(decode(meta(html, 'property', 'og:title') ?? ''))) fail('og:title of the page of a holiday is the name and the date, with no name of the site');
+  if (kind === 'festa' && !isFesta) fail(`og:image ${path} is not the picture of the holiday (og-festas/<id>-<hash>)`);
   const mustHaveCard = kind === 'story' || (key && manifest[key]?.[lang]);
   if (mustHaveCard && !isCard && !isFesta) fail(`og:image ${path} is not a card with a hash in its name (og-cards/<lang>/<slug>-<hash>.jpg)`);
   if (isCard) {

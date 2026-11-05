@@ -3,7 +3,7 @@
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
 // text in Russian (the only language with texts for now); the suite names what is missing when there is none.
 import { launchBrowser } from './browser.mjs';
-import { festas } from './data.mjs';
+import { festas, published, readyEpochs } from './data.mjs';
 import { addDays, festaDay, windowOf } from '../../src/lib/festas.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
@@ -82,6 +82,25 @@ if (want('window')) {
   // Other pages: the tab icon only, no header.
   const about = await shown(await open(`/ru/o-proekte/?hoje=${MIDDLE}`));
   ok('a page that is not the home page has the tab icon and no header', about.icon && !about.head, JSON.stringify(about));
+  // The tab icon on a story page, an epoch page and the map; an explicit ?hoje= stays for the next pages of the tab, ?hoje=off and an empty one clear it.
+  const iconOf = (page) => page.evaluate(() => (document.querySelector('link[rel=icon][type="image/svg+xml"]')?.getAttribute('href') ?? '').includes('/festas/'));
+  const story = published.find((e) => e.slug?.ru);
+  const epoch = readyEpochs.find((e) => e.slug?.ru);
+  if (!story || !epoch) throw new Error('need: a published story and an open epoch with a Russian address');
+  for (const [what, url] of [['a story page', `/ru/istoriya/${story.slug.ru}/`], ['an epoch page', `/ru/epoha/${epoch.slug.ru}/`], ['the map', '/ru/karta/']]) {
+    ok(`${what}?hoje=${MIDDLE}: the tab icon is the holiday's`, await iconOf(await open(`${url}?hoje=${MIDDLE}`)));
+    ok(`${what}?hoje=${AFTER}: the usual tab icon`, !(await iconOf(await open(`${url}?hoje=${AFTER}`))));
+  }
+  const tab = await open(`/ru/?hoje=${MIDDLE}`);
+  await tab.goto(`${base}/ru/istoriya/${story.slug.ru}/`, { waitUntil: 'load' });
+  ok('?hoje= given once is kept for the next page of the tab (no parameter in its address)', await iconOf(tab));
+  await tab.goto(`${base}/ru/istoriya/${story.slug.ru}/?hoje=off`, { waitUntil: 'load' });
+  ok('?hoje=off clears it', !(await iconOf(tab)));
+  await tab.goto(`${base}/ru/o-proekte/`, { waitUntil: 'load' });
+  ok('and the next page has the usual icon', !(await iconOf(tab)));
+  await tab.goto(`${base}/ru/?hoje=${MIDDLE}`, { waitUntil: 'load' });
+  await tab.goto(`${base}/ru/o-proekte/?hoje=`, { waitUntil: 'load' });
+  ok('an empty ?hoje= clears it too', !(await iconOf(tab)));
   // Languages without a text: nothing, even with ?festa=.
   for (const lang of ['pt', 'en']) {
     if (FESTA.text[lang]) continue;

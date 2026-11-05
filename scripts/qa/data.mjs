@@ -85,8 +85,5 @@ export const isOnMainland = (e) => { const r = REGIONS[0]; return e.place.lat >=
 /** Published stories whose place is outside Portugal (the plate "N more stories overseas"). */
 export const overseasOf = (list = published) => list.filter((e) => !isInPortugal(e));
 
-// The holidays (src/data/festas.yaml): a day inside the window of an enabled holiday shows its pin on the showcase, so a suite that needs a plain day avoids them.
-import { isInWindow } from '../../src/lib/festas.mjs';
+// The holidays (src/data/festas.yaml).
 export const festas = parse(readFileSync(fsPath(new URL('../../src/data/festas.yaml', import.meta.url)), 'utf8'));
-/** Is `day` (YYYY-MM-DD) in the window of an enabled holiday? */
-export const inFestaWindow = (day) => festas.some((f) => f.enabled && isInWindow(f, day));

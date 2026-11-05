@@ -10,12 +10,11 @@ import { lisbonToday } from '../lib/publication.mjs';
 import { READ_KEY, parseRead } from '../lib/read-marks';
 import { START_CARD_SIZES, type StartCardData } from '../lib/start-card';
 import { pinsFor } from '../lib/start-pins';
-import { setKey, startSet, withFallback, type Pin, type StartCardRef, type StartStory } from '../lib/start-set';
+import { setKey, startSet, withFallback, type StartCardRef, type StartStory } from '../lib/start-set';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 interface StartData {
   fallback: string[];
-  holidays: Pin[];
   stories: (StartStory & { minAge: MinAge })[];
   cards: Record<string, StartCardData>;
 }
@@ -46,7 +45,7 @@ function compute(info: StartData): StartCardRef[] {
   const mode = currentFamilyMode();
   const stories = info.stories.filter((s) => isVisibleInMode({ minAge: s.minAge, sensitive: s.sensitive }, mode));
   const day = today();
-  const pins = pinsFor(stories, Number(day.slice(0, 4)), info.holidays);
+  const pins = pinsFor(stories, Number(day.slice(0, 4)));
   return withFallback(startSet({ today: day, stories, read: readSet(), pins }), info.fallback.filter((id) => stories.some((s) => s.id === id)));
 }
 

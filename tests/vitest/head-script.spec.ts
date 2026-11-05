@@ -87,3 +87,41 @@ describe('head script', () => {
     expect(headScript(['a', 'b', 'c', 'd', 'e']).length).toBeLessThan(1800);
   });
 });
+
+describe('head script: ?hoje= kept for the tab', () => {
+  const festas = { days: [['x', '2030-12-01']] as [string, string][], ids: ['x'], icons: {} };
+  /** One page load: `store` is the sessionStorage of the tab (shared by the loads), `search` the address. */
+  const load = (store: Map<string, string>, search: string) => {
+    const attrs: Record<string, string> = {};
+    runInNewContext(headScript([], undefined, festas), {
+      document: { documentElement: { setAttribute: (n: string, v: string) => void (attrs[n] = v) }, querySelectorAll: () => [] },
+      localStorage: { getItem: () => null },
+      sessionStorage: { getItem: (k: string) => store.get(k) ?? null, setItem: (k: string, v: string) => void store.set(k, v), removeItem: (k: string) => void store.delete(k) },
+      location: { search },
+      URLSearchParams,
+      Intl,
+      Date,
+      String,
+      isNaN,
+    });
+    return attrs['data-festa'];
+  };
+  it('an explicit ?hoje= carries over to the next page without the parameter', () => {
+    const store = new Map<string, string>();
+    expect(load(store, '?hoje=2030-11-30')).toBe('x');
+    expect(load(store, '')).toBe('x');
+  });
+  it('?hoje=off or an empty ?hoje= clears it', () => {
+    for (const reset of ['?hoje=off', '?hoje=']) {
+      const store = new Map<string, string>();
+      load(store, '?hoje=2030-11-30');
+      expect(load(store, reset)).toBeUndefined();
+      expect(load(store, '')).toBeUndefined();
+    }
+  });
+  it('a reader with no parameter and nothing stored is not touched', () => {
+    const store = new Map<string, string>();
+    load(store, '');
+    expect(store.size).toBe(0);
+  });
+});

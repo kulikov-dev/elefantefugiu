@@ -166,30 +166,6 @@ describe('startSet: pins', () => {
     expect(cards).toHaveLength(3);
   });
 
-  it('a holiday that stands for a story takes the anniversary of that story and the rotation leaves the story out', () => {
-    for (let p = 0; p < 20; p++) {
-      const d = addDays(day, p * PERIOD_DAYS);
-      const holiday: Pin = pin({ id: 'h', kind: 'holiday', covers: 's01', from: d, to: d, target: { type: 'page', href: '/ru/festa/x/', title: label('t'), hook: label('h') } });
-      const cards = startSet({ today: d, stories, read: NONE, pins: [pin({ id: 'a', from: d, to: d, target: { type: 'story', id: 's01' } }), holiday] });
-      expect(cards).toHaveLength(3);
-      expect(cards[0]).toMatchObject({ source: 'pin', target: { type: 'page' } });
-      expect(cards.slice(1).every((c) => c.source === 'rotation')).toBe(true);
-      expect(ids(cards)).not.toContain('s01');
-    }
-  });
-
-  it('keeps the anniversary of the story while the holiday is not in its window', () => {
-    const holiday: Pin = pin({ id: 'h', kind: 'holiday', covers: 's01', from: addDays(day, 1), to: addDays(day, 3), target: { type: 'page', href: '/ru/festa/x/', title: label('t'), hook: label('h') } });
-    const cards = startSet({ today: day, stories, read: NONE, pins: [pin({ id: 'a', target: { type: 'story', id: 's01' } }), holiday] });
-    expect(ids(cards)[0]).toBe('s01');
-  });
-
-  it('a covered anniversary does not use up the one anniversary of another story', () => {
-    const holiday: Pin = pin({ id: 'h', kind: 'holiday', covers: 's01', target: { type: 'page', href: '/ru/festa/x/', title: label('t'), hook: label('h') } });
-    const cards = startSet({ today: day, stories, read: NONE, pins: [pin({ id: 'a1', target: { type: 'story', id: 's01' } }), pin({ id: 'a2', target: { type: 'story', id: 's02' } }), holiday] });
-    expect(ids(cards).slice(0, 2)).toEqual(['/ru/festa/x/', 's02']);
-  });
-
   it('compares sets by their cards and lines', () => {
     const a = startSet({ today: day, stories, read: NONE, pins: [pin({ id: 'a', label: label('x') })] });
     const b = startSet({ today: day, stories, read: NONE, pins: [pin({ id: 'a', label: label('y') })] });

@@ -267,6 +267,16 @@
   --epoch-frame: 1px solid var(--epoch-line);
 }
 
+/* A desktop reads from a distance and the headings are large there: from 900 px the scale is about a fifth smaller (the phone keeps it). One place, so no page sets its own size. */
+@media (min-width: 56.25rem) {
+  :root {
+    --text-xl: calc(1.5rem * 0.9);
+    --text-2xl: calc(clamp(1.75rem, 1.4rem + 1.6vw, 2.5rem) * 0.82);
+    --text-3xl: calc(clamp(2.25rem, 1.6rem + 3vw, 3.75rem) * 0.82);
+    --text-hero: calc(clamp(1.6875rem, 1.2rem + 2.25vw, 2.8125rem) * 0.82);
+  }
+}
+
 /* The colour of each epoch outside its own page (the stripe and the caption dot of a card on a thread page, the dots of a thread in the lists):
    a single place for the primary colour of the palette below, which refers to it. An element takes one with style="--tone: var(--tone-<epoch id>)". */
 :root {
