@@ -94,10 +94,10 @@ const continueTargets = Object.fromEntries(ready.map((tile) => [tile.epoch.id, {
 // only what the family mode shows.
 const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e.published, ...ageInfoOf(e) }));
 ---
-<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} preview={
+<BaseLayout lang={lang} pageKey="home" title={t(lang, 'site.name')} noindex={noindex} description={t(lang, 'site.home_preview_description')} preview={
     festaCard
-      ? { image: HOME_PREVIEW, imageUrl: withBase(festaCard), imageSize: festaCardSize(festaCard), imageAlt: festaText(festaNow!, lang)!.art_title }
-      : { image: HOME_PREVIEW, imageUrl: homeCard ? withBase(homeCard) : undefined, imageSize: homeCard ? OG_CARD : undefined, imageAlt: homeCard ? startStory?.image?.alt[lang] : undefined }
+      ? { title: t(lang, 'site.home_preview_title'), description: t(lang, 'site.home_preview_description'), image: HOME_PREVIEW, imageUrl: withBase(festaCard), imageSize: festaCardSize(festaCard), imageAlt: festaText(festaNow!, lang)!.art_title }
+      : { title: t(lang, 'site.home_preview_title'), description: t(lang, 'site.home_preview_description'), image: HOME_PREVIEW, imageUrl: homeCard ? withBase(homeCard) : undefined, imageSize: homeCard ? OG_CARD : undefined, imageAlt: homeCard ? startStory?.image?.alt[lang] : undefined }
   }>
   <div class="home">
     <!-- A thin band above the first screen, only for a reader who has been in an epoch before (the script shows it). -->

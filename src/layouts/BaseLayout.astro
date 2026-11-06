@@ -95,7 +95,7 @@ const chrome = allLangs ? LANGS : [lang];
 const fontFiles = lang === 'ru' ? [playfairCyrillic, serifCyrillic, serifCyrillicItalic, oswaldCyrillic, playfairLatin, oswaldLatin] : [playfairLatin, serifLatin, oswaldLatin];
 const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
-const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
+const fullTitle = pageKey === 'home' ? t(lang, 'site.home_preview_title') : `${title} · ${siteName}`;
 // The service pages have a description of their own (pages.<key>.description); every other page without one uses the site description.
 const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise', 'myths'];
 const pageDescription = pageKey && DESCRIBED_PAGES.includes(pageKey) ? t(lang, `pages.${pageKey}.description`) : undefined;
