@@ -7,10 +7,13 @@
 //   reward   only with every story read: the panel is a button (enlarged in a <dialog>: Esc, cross, backdrop, focus back, picture only when opened, scrolled sideways on a phone held upright)
 //            and "Share" (Web Share or copy + a quiet line, one GoatCounter event); family mode counts the stories it shows
 //   pages    the page of the finished panel in three languages: noindex, not in the sitemap, own preview picture 1200 x 630 at an absolute address, hreflang, the way to the epoch
+//   moment   the moment of assembly: the tiles of the last story open one by one (120 ms, 1.5 s at most), then the rim, then the closing line and "Share"; once only (flag
+//            panno-celebrated-<epoch> in localStorage, swept by the reset of the legal page); only while the panel is in view; reduced motion: the finished panel at once
+//   line     the line at the foot of a story: only on the last story of an epoch with a panel, after the story is counted, until the panel is celebrated; none without JS
 //   layout   no horizontal scroll at 360 px, the panel fills the column on a phone, no layout shift, an epoch without a picture has no panel and keeps "read N of M" by the years
 // The epoch is picked from the data (the first live one with a picture), and so is the number of pieces to expect: nothing here knows a count of stories.
 import { launchBrowser } from './browser.mjs';
-import { epochPath, epochs, inEpoch, pannoPath, readyEpochs, ui } from './data.mjs';
+import { epochPath, epochs, inEpoch, pannoPath, pt, readyEpochs, ui } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -31,7 +34,7 @@ const browser = await launchBrowser();
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /** A fresh page of the epoch with `read` (a list of ids) in readStories before the page starts. */
-async function open(read, { width = 1280, height = 900, js = true, url = path, family = null } = {}) {
+async function open(read, { width = 1280, height = 900, js = true, url = path, family = null, celebrated = true, reduced = false, watch = false, push = 0 } = {}) {
   const context = await browser.createBrowserContext();
   const page = await context.newPage();
   page.close = () => context.close();
@@ -47,6 +50,31 @@ async function open(read, { width = 1280, height = 900, js = true, url = path, f
         localStorage.setItem('readStories', JSON.stringify(ids));
       } catch {}
     }, read);
+  }
+  // The moment of assembly belongs to the suite "moment"; everywhere else the panel is already celebrated (a new browser context starts with an empty storage).
+  if (celebrated) await page.evaluateOnNewDocument((ids) => { try { for (const id of ids) localStorage.setItem('panno-celebrated-' + id, '1'); } catch {} }, epochs.filter((e) => e.panno).map((e) => e.id));
+  if (reduced) await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+  if (push) {
+    // The panel lies far below the first screen until the test scrolls to it.
+    await page.evaluateOnNewDocument((px) => new MutationObserver((_, o) => { if (!document.head) return; const st = document.createElement('style'); st.textContent = '.epoch__head{padding-block-start:' + px + 'px}'; document.head.append(st); o.disconnect(); }).observe(document, { childList: true, subtree: true }), push);
+  }
+  if (watch) {
+    // The timeline of the moment: every tile that gets data-open and every change of data-moment, with the state of the closing line, the rim and the flag at that time.
+    await page.evaluateOnNewDocument((id) => {
+      window.__tl = [];
+      const flag = () => { try { return localStorage.getItem('panno-celebrated-' + id); } catch { return null; } };
+      new MutationObserver((records) => {
+        for (const rec of records) {
+          const el = rec.target;
+          const panel = el.closest?.('[data-panno]') ?? el;
+          const share = panel.querySelector?.('[data-panno-share]');
+          const frame = panel.querySelector?.('.panno__frame');
+          const snap = { t: performance.now(), shareHidden: share?.hidden, flag: flag(), rim: frame ? getComputedStyle(frame).boxShadow : null };
+          if (rec.attributeName === 'data-open' && el.hasAttribute('data-open') && rec.oldValue === null) window.__tl.push({ ...snap, k: 'open', piece: Number(el.dataset.piece) });
+          if (rec.attributeName === 'data-moment') window.__tl.push({ ...snap, k: 'moment', v: el.dataset.moment ?? null });
+        }
+      }).observe(document, { subtree: true, attributes: true, attributeOldValue: true, attributeFilter: ['data-open', 'data-moment'] });
+    }, epoch.id);
   }
   if (family) await page.evaluateOnNewDocument((m) => { try { localStorage.setItem('family', m); } catch {} }, family);
   await page.goto(`${base}${url}`, { waitUntil: 'networkidle0' });
@@ -309,6 +337,151 @@ if (want('pages')) {
       );
       ok('og:image leads to an existing file of 1200 x 630', JSON.stringify(size) === '[1200,630]', JSON.stringify([rel, size]));
     }
+    await page.close();
+  }
+}
+
+if (want('moment')) {
+  const SLEEP = 2600; // 1.5 s of tiles + 0.3 s of rim + the margin of a slow machine
+  const piecesBefore = piecesFor(N - 1);
+  const fresh = PIECES - piecesBefore;
+  const finished = (page) =>
+    page.evaluate(() => {
+      const panel = document.querySelector('[data-panno]');
+      const frame = panel.querySelector('.panno__frame');
+      const shown = (el) => !!el && el.getClientRects().length > 0;
+      return {
+        open: panel.querySelectorAll('[data-open]').length,
+        moment: panel.dataset.moment ?? null,
+        complete: panel.hasAttribute('data-complete'),
+        line: panel.querySelector('[data-panno-count]').textContent.trim(),
+        share: shown(panel.querySelector('[data-panno-share]')),
+        zoom: !panel.querySelector('[data-panno-zoom]').hidden,
+        rim: getComputedStyle(frame).boxShadow,
+        flag: localStorage.getItem('panno-celebrated-' + panel.dataset.epochId),
+        order: panel.dataset.order.split(',').map(Number),
+        tl: window.__tl ?? [],
+      };
+    });
+  const transparent = (shadow) => shadow === 'none' || /rgba\(0, 0, 0, 0\)/.test(shadow);
+  const brief = (s) => JSON.stringify({ ...s, tl: undefined, order: undefined });
+
+  // 1. The first show of the finished panel: the tiles of the last story first closed, then one by one, then the rim, then the line and "Share"; the flag is set.
+  let page = await open(ORDER, { celebrated: false, watch: true });
+  await wait(SLEEP);
+  let s = await finished(page);
+  const moments = s.tl.filter((e) => e.k === 'moment');
+  const opened = s.tl.slice(s.tl.indexOf(moments[0]) + 1).filter((e) => e.k === 'open');
+  ok('moment: it starts (data-moment goes tiles -> rim -> none)', JSON.stringify(moments.map((e) => e.v)) === JSON.stringify(['tiles', 'rim', null]), JSON.stringify(moments.map((e) => e.v)));
+  ok(`moment: the ${fresh} tiles of the last story were closed at the start and open one by one in the order of the panel`, opened.length === fresh && JSON.stringify(opened.map((e) => e.piece)) === JSON.stringify(s.order.slice(piecesBefore)), JSON.stringify(opened.map((e) => e.piece)));
+  const span = opened.length > 1 ? opened.at(-1).t - opened[0].t : 0;
+  const step = Math.min(120, Math.floor(1500 / fresh));
+  ok(`moment: about ${step} ms a tile, the whole row within 1.5 s`, fresh === 1 || (span >= (fresh - 1) * step * 0.6 && span <= 1500), `${Math.round(span)} ms`);
+  ok('moment: no rim and no closing line while the tiles open; the rim and the line only after the last tile', moments.length === 3 && transparent(moments[0].rim) && moments[0].shareHidden === true && moments[1].t >= opened.at(-1).t && moments[2].t - moments[1].t >= 250, JSON.stringify(moments.map((e) => [e.v, Math.round(e.t)])));
+  ok('moment: the flag is set when it starts (before the last tile is open)', opened.length > 0 && opened[0].flag !== null && moments[1]?.flag !== null, JSON.stringify([opened[0]?.flag, moments[1]?.flag]));
+  ok('moment: at the end all tiles are open, the rim is drawn, "Epoch complete" and "Share" are there, the panel is a button', s.open === PIECES && s.moment === null && s.complete && !transparent(s.rim) && s.line === ui('panno.done', 'pt') && s.share && s.zoom, brief(s));
+  ok('moment: the page was not scrolled', (await page.evaluate(() => window.scrollY)) === 0);
+
+  // 2. The second show (the same storage): no animation at all, the rim stays.
+  await page.reload({ waitUntil: 'networkidle0' });
+  await wait(300);
+  s = await finished(page);
+  ok('moment: shown again, there is no animation: no data-moment, every tile open at once, the rim and the closing line there', s.tl.filter((e) => e.k === 'moment').length === 0 && s.open === PIECES && !transparent(s.rim) && s.line === ui('panno.done', 'pt') && s.share, brief(s));
+  // The reset of the legal page sweeps the flag with the marks.
+  await page.goto(`${base}/pt/legal/`, { waitUntil: 'networkidle0' });
+  await page.click('[data-read-reset]');
+  await wait(200);
+  ok('moment: the reset on the legal page removes the flag too', await page.evaluate(() => !Object.keys(localStorage).some((k) => k.startsWith('panno-celebrated-'))));
+  await page.close();
+
+  // 3. Reduced motion: the finished panel with the rim at once, no animation; the flag is set.
+  page = await open(ORDER, { celebrated: false, reduced: true, watch: true });
+  await wait(300);
+  s = await finished(page);
+  ok('moment: with reduced motion the finished panel is there at once, with the rim, without animation', s.tl.filter((e) => e.k === 'moment').length === 0 && s.open === PIECES && !transparent(s.rim) && s.line === ui('panno.done', 'pt') && s.share, brief(s));
+  ok('moment: with reduced motion the flag is set', s.flag !== null, String(s.flag));
+  await page.close();
+
+  // 4. Only while the panel is in view: far below the first screen nothing starts (and the flag stays unset) until it is scrolled to; the page is never scrolled for the reader.
+  page = await open(ORDER, { celebrated: false, watch: true, push: 4000 });
+  await wait(900);
+  s = await finished(page);
+  ok('moment: the panel out of view waits closed, the flag is not set', s.moment === 'tiles' && s.open === piecesBefore && s.flag === null && !s.share, brief(s));
+  await page.evaluate(() => document.querySelector('[data-panno]').scrollIntoView());
+  await wait(SLEEP);
+  s = await finished(page);
+  ok('moment: scrolled into view it plays to the end', s.moment === null && s.open === PIECES && s.flag !== null && s.share && !transparent(s.rim), brief(s));
+  await page.close();
+}
+
+if (want('line')) {
+  const plain = (e) => e.min_age === 'all' && !e.sensitive;
+  const last = inEpoch(epoch.id).filter(plain).at(-1);
+  const first = inEpoch(epoch.id).filter(plain)[0];
+  if (!last || N < 3) throw new Error(`need: a live epoch with a panel, at least 3 stories and one of them for all ages (${epoch.id} has ${N})`);
+  const expected = ui('panno.story_line', 'pt').replace('{name}', epoch.name.pt);
+  const others = (target) => ORDER.filter((id) => id !== target.id);
+  /** The story page opened with `read` in the storage and the wait shortened; looked at before it is counted and after. */
+  async function story(target, read, { celebrated = false, js = true, delay = 1500 } = {}) {
+    const context = await browser.createBrowserContext();
+    const page = await context.newPage();
+    page.close = () => context.close();
+    await page.setViewport({ width: 1280, height: 900 });
+    if (!js) await page.setJavaScriptEnabled(false);
+    await page.evaluateOnNewDocument(
+      (ids, id, done, d) => {
+        try {
+          localStorage.setItem('readStories', JSON.stringify(ids));
+          if (done) localStorage.setItem('panno-celebrated-' + id, '1');
+        } catch {}
+        window.__readDelayMs = d;
+      },
+      read,
+      epoch.id,
+      celebrated,
+      delay,
+    );
+    await page.goto(`${base}${pt(target)}`, { waitUntil: 'networkidle0' });
+    await page.evaluate(() => document.querySelector('[data-story-end]')?.scrollIntoView({ block: 'center' }));
+    return page;
+  }
+  const lineOf = (page) =>
+    page.evaluate(() => {
+      const el = document.querySelector('[data-story-panno]');
+      const end = document.querySelector('[data-story-end]');
+      return el ? { shown: el.getClientRects().length > 0, text: el.textContent.trim(), href: el.querySelector('a')?.getAttribute('href'), below: el.getBoundingClientRect().top > end.getBoundingClientRect().bottom, endTop: end.getBoundingClientRect().top + scrollY } : null;
+    });
+
+  let page = await story(last, others(last));
+  const before = await lineOf(page);
+  ok('line: there is a line in the page, hidden until the story is counted', before && !before.shown, JSON.stringify(before));
+  await wait(3000);
+  let after = await lineOf(page);
+  ok('line: on the last story not read, once it is counted, the line says so and leads to the epoch', after.shown && after.text === expected && after.href === epochPath(epoch), JSON.stringify(after));
+  ok('line: it is below the end of the story and shifts nothing above it', after.below && Math.abs(after.endTop - before.endTop) <= 1, JSON.stringify([before.endTop, after.endTop]));
+  await page.close();
+
+  page = await story(first, ORDER.slice(1, -1).filter((id) => id !== first.id));
+  await wait(3000);
+  after = await lineOf(page);
+  ok('line: with another story still unread there is no line', after && !after.shown, JSON.stringify(after));
+  await page.close();
+
+  page = await story(last, others(last), { celebrated: true });
+  await wait(3000);
+  after = await lineOf(page);
+  ok('line: once the panel has been celebrated there is no line', after && !after.shown, JSON.stringify(after));
+  await page.close();
+
+  page = await story(last, others(last), { js: false });
+  after = await lineOf(page);
+  ok('line: without JavaScript there is no line', after && !after.shown, JSON.stringify(after));
+  await page.close();
+
+  const target = without ? inEpoch(without.id).find(plain) : undefined;
+  if (target) {
+    page = await story(target, []);
+    ok('line: an epoch without a panel has none', (await lineOf(page)) === null);
     await page.close();
   }
 }

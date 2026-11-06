@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { pannoSchema } from '../../src/data/schemas';
-import { firstUnread, openOrder, openPieces, openSet } from '../../src/lib/panno';
+import { CELEBRATION_MAX_MS, celebrationStep, firstUnread, lastOpened, openOrder, openPieces, openSet, pannoCelebratedKey, showPannoLine } from '../../src/lib/panno';
 import { readProgress, type StoryOnPage } from '../../src/lib/read-marks';
 
 const story = (id: string, sensitive: unknown = false, minAge: unknown = 'all'): StoryOnPage => ({ id, minAge, sensitive });
@@ -188,5 +188,45 @@ describe('panno in the data of an epoch', () => {
     expect(pannoSchema.safeParse({ image: ok.image, cols: 6, rows: 4 }).success).toBe(false);
     expect(pannoSchema.safeParse({ ...ok, share_hook: { pt: 'a', en: 'b' } }).success).toBe(false);
     expect(pannoSchema.safeParse({ ...ok, share_hook: { pt: 'a', en: '', ru: 'в' } }).success).toBe(false);
+  });
+});
+
+describe('moment of assembly', () => {
+  it('opens the tiles the last story opened, in the order of the panel, and with one story every tile', () => {
+    for (const g of GRIDS) {
+      const order = openOrder('some-epoch', g.cols, g.rows);
+      for (const m of [1, 2, 7, 11]) {
+        const last = lastOpened(m, order);
+        expect(last).toEqual(order.slice(openPieces(m - 1, m, order.length)));
+        expect(last.length).toBe(order.length - openPieces(m - 1, m, order.length));
+        expect(last.length).toBeGreaterThan(0);
+      }
+      expect(lastOpened(1, order)).toEqual(order);
+      expect(lastOpened(0, order)).toEqual([]);
+    }
+  });
+
+  it('takes 120 ms a tile and never more than 1.5 s for the row', () => {
+    expect(celebrationStep(0)).toBe(0);
+    expect(celebrationStep(1)).toBe(120);
+    expect(celebrationStep(12)).toBe(120);
+    for (const count of [1, 5, 12, 13, 24, 54, 96]) expect(celebrationStep(count) * count).toBeLessThanOrEqual(CELEBRATION_MAX_MS);
+    expect(celebrationStep(54)).toBeLessThan(120);
+  });
+
+  it('keeps the flag in the same storage as the marks, by epoch', () => {
+    expect(pannoCelebratedKey('pombal-e-terramoto')).toBe('panno-celebrated-pombal-e-terramoto');
+    expect(pannoCelebratedKey('a')).not.toBe(pannoCelebratedKey('b'));
+  });
+
+  it('shows the line only when every story the mode shows is read and the panel was not celebrated', () => {
+    const s = stories(3);
+    expect(showPannoLine(s, ['s1', 's2', 's3'], 'off', false)).toBe(true);
+    expect(showPannoLine(s, ['s1', 's2'], 'off', false)).toBe(false);
+    expect(showPannoLine(s, ['s1', 's2', 's3'], 'off', true)).toBe(false);
+    expect(showPannoLine([], [], 'off', false)).toBe(false);
+    const heavy = [story('a'), story('b', true)];
+    expect(showPannoLine(heavy, ['a'], 'all', false)).toBe(true);
+    expect(showPannoLine(heavy, ['a'], 'off', false)).toBe(false);
   });
 });
