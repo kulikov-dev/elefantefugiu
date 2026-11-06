@@ -150,11 +150,11 @@ if (want('block')) {
         const vis = (el) => !!el && el.getClientRects().length > 0;
         return { visible: vis(s), name: s.querySelector('.bridge__name')?.textContent.trim(), address: s.querySelector('.bridge__address')?.textContent.trim(), note: s.querySelector('.bridge__note')?.textContent.trim(), noteLang: s.querySelector('.bridge__note')?.getAttribute('lang'), links: [...s.querySelectorAll('.bridge__go a, .bridge__links a')].map((a) => ({ text: a.textContent.trim(), href: a.getAttribute('href'), rel: a.getAttribute('rel'), h: Math.round(a.getBoundingClientRect().height), vis: vis(a) })), overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth };
       });
-      // Now: one button "Como chegar" (44 px), under it two plain links, "Ver no mapa" and "Sítio oficial".
-      const names = lang === 'pt' ? ['Como chegar', 'Ver no mapa', 'Sítio oficial'] : ['Get directions', 'Open on map', 'Official website'];
+      // One button "Como chegar" (44 px), under it plain links: "Ver no mapa", "O que mais há perto de si →" (the map that starts Near me) and "Sítio oficial".
+      const names = lang === 'pt' ? ['Como chegar', 'Ver no mapa', 'O que mais há perto de si →', 'Sítio oficial'] : ['Get directions', 'Open on map', 'What else is near you →', 'Official website'];
       ok(`bridge block (${lang}, ${e.id}): name, address and the note of this language`, b.visible && b.name === bname(e, lang) && b.address === e.bridge.address && b.note === e.bridge.note[lang], JSON.stringify([b.name, b.address, b.note]));
-      ok(`bridge block (${lang}, ${e.id}): the button and two links ${names.join(', ')}, all visible, the button 44 px tall, no sideways scroll`, b.links.map((l) => l.text).join('|') === names.join('|') && b.links.every((l) => l.vis) && b.links[0].h >= 44 && !b.overflow, JSON.stringify(b.links));
-      ok(`bridge block (${lang}, ${e.id}): the map link opens the map on this card, the official site link is the data's`, b.links[1].href.endsWith(`/${lang === 'pt' ? 'mapa' : 'map'}/?id=${e.id}`) && b.links[2].href === e.bridge.url && /noopener/.test(b.links[2].rel ?? ''), JSON.stringify(b.links.map((l) => l.href)));
+      ok(`bridge block (${lang}, ${e.id}): the button and three links ${names.join(', ')}, all visible, the button 44 px tall, no sideways scroll`, b.links.map((l) => l.text).join('|') === names.join('|') && b.links.every((l) => l.vis) && b.links[0].h >= 44 && !b.overflow, JSON.stringify(b.links));
+      ok(`bridge block (${lang}, ${e.id}): the map link opens the map on this card, the official site link is the data's`, b.links[1].href.endsWith(`/${lang === 'pt' ? 'mapa' : 'map'}/?id=${e.id}`) && b.links[2].href.endsWith(`/${lang === 'pt' ? 'mapa' : 'map'}/?perto=1`) && b.links[3].href === e.bridge.url && /noopener/.test(b.links[3].rel ?? ''), JSON.stringify(b.links.map((l) => l.href)));
       ok(`bridge block (${lang}, ${e.id}): the note carries lang="la" only for a placeholder card`, (b.noteLang ?? null) === (e.placeholder ? 'la' : null), String(b.noteLang));
       await page.close();
     }

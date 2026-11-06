@@ -50,7 +50,7 @@ describe('static pages', () => {
       const text = STATIC_PAGES.legal[lang].sections.flatMap((s) => [...s.paragraphs, ...(s.items ?? [])]).join(' ');
       expect(text).toMatch(/MIT/);
       expect(text).toMatch(/CC BY-NC/);
-      expect(text).toMatch(/LICENSE-CONTENT/);
+      expect(text).toMatch(/Attribution-NonCommercial/);
       expect(text).toMatch(/FormSubmit/);
       expect(text).toMatch(/GitHub/);
       expect(text).toMatch(/CARTO/);

@@ -53,7 +53,7 @@ Daí o nosso nome: **O Elefante Fugiu**. Reunimos histórias assim do passado de
 
 ## Foi aqui
 
-Uma história fica melhor na memória quando estamos no sítio exato. Por isso, cada história tem um ponto no mapa e uma «ponte para hoje»: uma igreja, uma praça, um museu ou um monumento onde ficou um vestígio dela.
+Uma história fica melhor na memória quando estamos no sítio exato. Por isso, cada história tem um ponto no mapa e um bloco «Onde ver hoje»: uma igreja, uma praça, um museu ou um monumento onde ficou um vestígio dela.
 
 ## Como ler
 

@@ -15,6 +15,25 @@
 
 /* ---- filters ---- */
 
+/* "Near me": a button of its own at the top, above the chips. */
+.map-filters__near {
+  margin: 0;
+}
+
+.map-near {
+  gap: var(--space-2);
+}
+
+.map-near[aria-pressed='true'] {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+
+.map-near[aria-busy='true'] {
+  opacity: 0.7;
+}
+
 .map-filters {
   display: flex;
   flex-direction: column;

@@ -44,6 +44,13 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')),
 
     <!-- Filters need JavaScript: hidden until the loader shows them. -->
     <div class="map-filters" data-map-js hidden>
+      <!-- "Near me": a button of its own at the top of the map (the position is asked for by its press only; src/scripts/map-island.ts). -->
+      <p class="map-filters__near">
+        <button type="button" class="button map-near" data-locate aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          {t(lang, 'map.locate')}
+        </button>
+      </p>
       <div role="group" aria-label={t(lang, 'map.threads_label')} class="map-filters__group">
         <ul class="map-chips">
           <li>

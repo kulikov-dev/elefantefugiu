@@ -441,6 +441,12 @@
   },
   "exceptions": [
     {
+      "lang": "pt",
+      "unit": "static/legal",
+      "match": "4.0",
+      "why": "the version of the licence in its full name: Creative Commons Attribution-NonCommercial 4.0 International"
+    },
+    {
       "lang": "en",
       "unit": "event/hanno-1514",
       "match": "Theatre",

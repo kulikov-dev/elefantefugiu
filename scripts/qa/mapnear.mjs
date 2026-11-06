@@ -51,51 +51,75 @@ if (want('tools')) {
       const zoom = document.querySelector('.leaflet-control-zoom').getBoundingClientRect();
       return [...document.querySelectorAll('.map__tools a')].map((a) => ({ title: a.title, label: a.getAttribute('aria-label'), top: a.getBoundingClientRect().top >= zoom.bottom, w: a.getBoundingClientRect().width, h: a.getBoundingClientRect().height }));
     });
-    ok(`tools (${lang}): three icon buttons under the zoom, each with a title and the same name for screen readers, at least 44 px`, t.length === 3 && t.every((b) => b.top && b.w >= 44 && b.h >= 44 && b.title && b.title === b.label), JSON.stringify(t.map((b) => b.title)));
-    if (lang === 'pt') ok('tools (pt): the titles are Perto de mim / Portugal inteiro / O mundo todo', t.map((b) => b.title).join('|') === 'Perto de mim|Portugal inteiro|O mundo todo', t.map((b) => b.title).join(' | '));
-    if (lang === 'en') ok('tools (en): the titles are Near me / All of Portugal / Whole world', t.map((b) => b.title).join('|') === 'Near me|All of Portugal|Whole world', t.map((b) => b.title).join(' | '));
-    if (lang === 'ru') ok('tools (ru): the titles are Рядом со мной / Вся Португалия / Весь мир', t.map((b) => b.title).join('|') === 'Рядом со мной|Вся Португалия|Весь мир', t.map((b) => b.title).join(' | '));
+    ok(`tools (${lang}): two icon buttons under the zoom (All of Portugal, Whole world), each with a title and the same name for screen readers, at least 44 px`, t.length === 2 && t.every((b) => b.top && b.w >= 44 && b.h >= 44 && b.title && b.title === b.label), JSON.stringify(t.map((b) => b.title)));
+    if (lang === 'pt') ok('tools (pt): the titles are Portugal inteiro / O mundo todo', t.map((b) => b.title).join('|') === 'Portugal inteiro|O mundo todo', t.map((b) => b.title).join(' | '));
+    if (lang === 'en') ok('tools (en): the titles are All of Portugal / Whole world', t.map((b) => b.title).join('|') === 'All of Portugal|Whole world', t.map((b) => b.title).join(' | '));
+    if (lang === 'ru') ok('tools (ru): the titles are Вся Португалия / Весь мир', t.map((b) => b.title).join('|') === 'Вся Португалия|Весь мир', t.map((b) => b.title).join(' | '));
     ok(`tools (${lang}): the old text button "All of Portugal" is gone`, (await page.$('[data-map-home]')) === null);
+    // "Near me" is a button with words in the bar above the map, before the chips, not an icon among the tools.
+    const near = await page.evaluate(() => { const b = document.querySelector('[data-locate]'); const chips = document.querySelector('.map-chips'); const r = b?.getBoundingClientRect(); return b ? { text: b.textContent.trim(), above: Boolean(b.compareDocumentPosition(chips) & Node.DOCUMENT_POSITION_FOLLOWING), h: r.height, inTools: Boolean(b.closest('.map__tools')), visible: b.checkVisibility() } : null; });
+    const WORDS = { pt: 'Perto de mim', en: 'Near me', ru: 'Что рядом со мной' };
+    ok(`tools (${lang}): "${WORDS[lang]}" is a button with those words in the bar above the map, before the chips, at least 44 px high`, near && near.text === WORDS[lang] && near.above && near.h >= 44 && !near.inTools && near.visible, JSON.stringify(near));
     await page.close();
   }
 }
 
 // ---------- 2. Near me ----------
 if (want('near')) {
+  // The position is asked for by a press only: a plain load of the map page never asks; the link of a story page (?perto=1) starts it once and the address is cleaned.
+  {
+    const asks = async (path) => {
+      const context = await browser.createBrowserContext();
+      await context.overridePermissions(base, ['geolocation']);
+      const page = await context.newPage();
+      await page.setGeolocation({ ...LISBON, accuracy: 20 });
+      await page.evaluateOnNewDocument(() => { window.__asked = 0; const g = navigator.geolocation; const orig = g.getCurrentPosition.bind(g); g.getCurrentPosition = (...a) => { window.__asked += 1; return orig(...a); }; });
+      await page.goto(`${base}${path}`, { waitUntil: 'networkidle0' });
+      await page.waitForSelector('.map[data-state="ready"]', { timeout: 15000 });
+      await wait(800);
+      const r = await page.evaluate(() => ({ asked: window.__asked, me: document.querySelectorAll('.mk--me').length, url: location.search }));
+      await context.close();
+      return r;
+    };
+    const plain = await asks(MAP.pt);
+    ok('near me: a plain load of the map page never asks for the position', plain.asked === 0 && plain.me === 0, JSON.stringify(plain));
+    const link = await asks(`${MAP.pt}?perto=1`);
+    ok('near me: arriving with ?perto=1 (the link of a story page) asks once, marks the position and cleans the address', link.asked === 1 && link.me === 1 && link.url === '', JSON.stringify(link));
+  }
   const page = await open(MAP.pt, { position: LISBON });
-  await page.click('.map__tools a:nth-child(1)');
+  await page.click('[data-locate]');
   await page.waitForSelector('.mk--me', { timeout: 8000 });
   await wait(600);
   const n = await page.evaluate(() => {
     const metas = [...document.querySelectorAll('.map__items li')].map((li) => li.querySelector('.map__item-meta').textContent);
-    return { me: document.querySelectorAll('.mk--me').length, metas: metas.slice(0, 4), pressed: document.querySelector('.map__tools a:nth-child(1)').getAttribute('aria-pressed'), legend: !document.querySelector('[data-legend-here]').hidden };
+    return { me: document.querySelectorAll('.mk--me').length, metas: metas.slice(0, 4), pressed: document.querySelector('[data-locate]').getAttribute('aria-pressed'), legend: !document.querySelector('[data-legend-here]').hidden };
   });
   ok('near me: the position is marked and the legend names it', n.me === 1 && n.legend && n.pressed === 'true', JSON.stringify(n));
   ok('near me: every line of the list ends with a distance ("a 350 m", "a 2,1 km", "aqui mesmo")', n.metas.length > 0 && n.metas.every((m) => /a \d+(,\d)? (m|km)$|aqui mesmo$/.test(m)), n.metas.join(' | '));
   const order = await page.evaluate(() => [...document.querySelectorAll('.map__items li .map__item-meta')].map((m) => m.textContent.match(/a (\d+(?:,\d)?) (m|km)$/)).map((x) => (x ? parseFloat(x[1].replace(',', '.')) * (x[2] === 'km' ? 1000 : 1) : 0)));
   ok('near me: the distances only grow down the list', order.every((v, i) => i === 0 || v >= order[i - 1]), order.join(' '));
   ok('near me: no pop-up dialog and no script error', page.dialogs === 0 && page.errors.length === 0, page.errors.join('; '));
-  await page.click('.map__tools a:nth-child(1)');
+  await page.click('[data-locate]');
   await wait(300);
   ok('near me: a second press removes the marker and the distances', (await page.$$('.mk--me')).length === 0 && (await page.$$eval('.map__items .map__item-meta', (m) => m.every((x) => !/ a \d/.test(x.textContent)))));
   await page.close();
 
   const keep = await open(MAP.pt, { position: LISBON });
-  await keep.click('.map__tools a:nth-child(1)');
+  await keep.click('[data-locate]');
   await keep.waitForSelector('.mk--me', { timeout: 8000 });
   const stored = await keep.evaluate(() => JSON.stringify({ ...localStorage }) + JSON.stringify({ ...sessionStorage }) + location.href + document.cookie);
   ok('near me: the position is not kept anywhere (storage, address, cookies)', !/38\.7|-9\.13/.test(stored), stored.slice(0, 120));
   await keep.close();
 
   const denied = await open(MAP.en, { denied: true });
-  await denied.click('.map__tools a:nth-child(1)');
+  await denied.click('[data-locate]');
   await wait(1200);
   const d = await denied.evaluate(() => ({ text: document.querySelector('[data-map-message]').textContent, hidden: document.querySelector('[data-map-message]').hidden, me: document.querySelectorAll('.mk--me').length }));
   ok('near me: access denied gives a short message in the page, no marker, no dialog', !d.hidden && d.text.length > 10 && d.me === 0 && denied.dialogs === 0, d.text);
   await denied.close();
 
   const far = await open(MAP.en, { position: TOKYO });
-  await far.click('.map__tools a:nth-child(1)');
+  await far.click('[data-locate]');
   await wait(1500);
   const f = await far.evaluate(() => ({ text: document.querySelector('[data-map-message]').textContent, me: document.querySelectorAll('.mk--me').length, metas: [...document.querySelectorAll('.map__items .map__item-meta')].slice(0, 1).map((m) => m.textContent) }));
   ok('near me: far from Portugal the map says so, shows no marker and still sorts the list by distance', /far from Portugal/.test(f.text) && f.me === 0 && /km away/.test(f.metas[0] ?? ''), JSON.stringify(f));
@@ -127,11 +151,11 @@ if (want('world')) {
     await wait(1500);
     const w = await page.evaluate(() => ({ places: document.querySelectorAll('.mk--place').length, hiddenPlate: document.querySelector('[data-overseas]').hidden }));
     ok(`world (${lang}): the plate switches to the whole world: the places abroad are marked and the plate goes away`, w.places === OVERSEAS && w.hiddenPlate, JSON.stringify(w));
-    await page.click('.map__tools a:nth-child(2)');
+    await page.click('.map__tools a:nth-child(1)');
     await wait(1200);
     const back = await page.evaluate(() => ({ places: document.querySelectorAll('.mk--place').length, plate: !document.querySelector('[data-overseas]').hidden }));
     ok(`world (${lang}): "All of Portugal" goes back: no places abroad, the plate is back`, back.places === 0 && back.plate, JSON.stringify(back));
-    await page.click('.map__tools a:nth-child(3)');
+    await page.click('.map__tools a:nth-child(2)');
     await wait(1200);
     ok(`world (${lang}): the "Whole world" button does the same as the plate`, (await page.$$('.mk--place')).length === OVERSEAS);
     await page.close();

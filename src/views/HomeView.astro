@@ -23,6 +23,8 @@ import { pinsFor } from '../lib/start-pins';
 import { setKey, startSet, withFallback } from '../lib/start-set';
 import { HOME_PREVIEW } from '../lib/og';
 import { OG_CARD, festaCardPath, festaCardSize, homeCardPath } from '../lib/og-cards';
+import { liveMyths } from '../lib/myths';
+import { MYTHS } from '../lib/myths-data';
 
 interface Props {
   lang: Lang;
@@ -31,6 +33,8 @@ interface Props {
 const { lang } = Astro.props;
 const site = await loadSite();
 
+// "Myth or fact": the invitation after "Where to start" (only when there is a claim to play).
+const hasMyths = liveMyths(MYTHS, site.events).length > 0;
 const firstEpoch = firstMvpEpoch(site.epochs, site.events);
 const tiles = epochTiles(site.epochs, site.events);
 const ready = tiles.filter((tile) => tile.available);
@@ -124,6 +128,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
       <div class="hero__text">
         <h1 id="home-title">{t(lang, 'home.hook_title')}</h1>
         <p class="hero__intro">{t(lang, 'home.intro')}</p>
+        <p class="hero__how">{t(lang, 'home.how')}</p>
         <p class="hero__actions">
           <a class="button" href={startHref}>{t(lang, 'home.cta_read')}</a>
           <a class="hero__link" href={pagePath(lang, 'surprise')}>{t(lang, 'ui.surprise')}</a>
@@ -173,6 +178,16 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
               <StartCard lang={lang} page={{ href: '', title: '', hook: '' }} />
             </li>
           </template>
+        </section>
+      )
+    }
+
+    {
+      hasMyths && (
+        <section class="home-myths" aria-labelledby="myths-title">
+          <h2 id="myths-title">{t(lang, 'home.myths_title')}</h2>
+          <p>{t(lang, 'home.myths_line')}</p>
+          <p><a class="button" href={pagePath(lang, 'myths')}>{t(lang, 'home.myths_play')}</a></p>
         </section>
       )
     }
@@ -311,6 +326,16 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
     max-width: var(--measure);
     margin-block-start: var(--space-3);
     font-size: var(--text-lg);
+  }
+
+  .home-myths > * + * {
+    margin-block-start: var(--space-3);
+  }
+
+  .hero__how {
+    max-width: var(--measure);
+    margin-block-start: var(--space-2);
+    color: var(--color-ink-muted);
   }
 
   .hero__actions {

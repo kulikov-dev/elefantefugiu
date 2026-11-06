@@ -6,7 +6,7 @@ import { t } from '../i18n';
 import { pagePath, type Lang } from '../i18n/routes';
 import { bridgeDirectionsLink } from '../lib/directions';
 import MiniMap from './MiniMap.astro';
-import { mapLinkFor } from '../lib/map-data';
+import { mapLinkFor, mapNearLink } from '../lib/map-data';
 import type { LText } from '../lib/localize';
 
 interface Props {
@@ -27,6 +27,8 @@ const title = bridge.title?.[lang]?.trim() || bridge.name;
 const portugueseName = title !== bridge.name ? bridge.name : undefined;
 // The map page reads ?id= : it centres on that card and opens its preview.
 const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
+// "What else is near you": the map page that starts "Near me" on arrival (the position is asked for by this press, never by loading a page).
+const nearHref = mapNearLink(pagePath(lang, 'map'));
 ---
 <section class="bridge" aria-labelledby="bridge-title" data-bridge>
   <h2 id="bridge-title">{t(lang, 'ui.bridge')}</h2>
@@ -42,6 +44,7 @@ const mapHref = mapLinkFor(pagePath(lang, 'map'), cardId);
   </p>
   <ul class="bridge__links">
     <li><a href={mapHref}>{t(lang, 'ui.open_on_map')}</a></li>
+    <li><a href={nearHref} data-near-link>{t(lang, 'ui.near_more')}</a></li>
     {external && <li><a href={bridge.url} rel="noopener">{t(lang, 'card.official_site')}</a></li>}
   </ul>
 </section>

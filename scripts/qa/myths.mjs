@@ -69,11 +69,20 @@ if (want('page')) {
     ok(`${lang}: About has the line with a link to the page, at its end`, last.at(-1) === `/${lang}/${SEG[lang]}/`, last.at(-1));
     await about.close();
   }
-  // Not on the home page nor in the stories.
-  const home = await browser.newPage();
-  await home.goto(`${base}/pt/`, { waitUntil: 'networkidle0' });
-  ok('the home page has no link to the page (only the footer has)', (await home.$$eval(`main a[href="/pt/${SEG.pt}/"]`, (l) => l.length)) === 0);
-  await home.close();
+  // The home page: a block after "Where to start" with a heading, one line and the button; the end of a story: one small line. The footer keeps its link.
+  for (const lang of LANGS) {
+    const home = await browser.newPage();
+    await home.goto(`${base}/${lang}/`, { waitUntil: 'networkidle0' });
+    const b = await home.evaluate((href) => { const s = document.querySelector('.home-myths'); const start = document.querySelector('[data-showcase]'); return s ? { h2: s.querySelector('h2')?.textContent.trim(), p: s.querySelectorAll('p').length, href: s.querySelector('a.button')?.getAttribute('href'), after: !start || Boolean(start.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING), btn: s.querySelector('a.button')?.textContent.trim() } : null; }, `/${lang}/${SEG[lang]}/`);
+    const WORDS = { pt: ['Mito ou verdade: consegue adivinhar o que aconteceu mesmo?', 'Jogar'], en: ['Myth or fact: can you tell what really happened?', 'Play'], ru: ['Миф или правда: угадаешь, что было на самом деле?', 'Играть'] }[lang];
+    ok(`${lang}: the home page has the block after "Where to start": the heading, one line and the button`, b && b.h2 === WORDS[0] && b.btn === WORDS[1] && b.p === 2 && b.href === `/${lang}/${SEG[lang]}/` && b.after, JSON.stringify(b));
+    await home.close();
+    const story = await browser.newPage();
+    await story.goto(`${base}/${lang}/${STORY_SEG[lang]}/${storyOf(LIST[0]).slug[lang]}/`, { waitUntil: 'networkidle0' });
+    const hrefs = await story.$$eval('.story-myths a', (l) => l.map((a) => a.getAttribute('href')));
+    ok(`${lang}: a story ends with one small line that leads to the page`, hrefs.length === 1 && hrefs[0] === `/${lang}/${SEG[lang]}/`, hrefs.join());
+    await story.close();
+  }
 }
 
 if (want('answer')) {

@@ -126,6 +126,12 @@ export function serializeMapState(state: MapState): string {
   return query ? `?${query}` : '';
 }
 
+/** The address parameter that makes the map page ask for the reader's position at once (the link "What else is near you" on a story page): `?perto=1`. It is read once and dropped from the address; the map page never asks without it or without a press of its own button. */
+export const NEAR_PARAM = 'perto';
+
+/** Address of the map page that starts "Near me" on arrival: `base` is the map page path with trailing slash. */
+export const mapNearLink = (base: string): string => `${base}?${NEAR_PARAM}=1`;
+
 /** Address of the map page for a card ("Open on the map"): `base` is the map page path with trailing slash. */
 export function mapLinkFor(base: string, cardId: string): string {
   return `${base}${serializeMapState({ fio: null, epoca: null, id: cardId })}`;

@@ -53,7 +53,7 @@ Hence our name: **O Elefante Fugiu**, "The elephant ran away". We collect storie
 
 ## Foi aqui. It happened here
 
-A story sticks better when you're standing on the very spot. That's why every story has a point on the map and a "bridge to today": a church, a square, a museum or a monument where it left a trace.
+A story sticks better when you're standing on the very spot. That's why every story has a point on the map and a "Where to see it today" block: a church, a square, a museum or a monument where it left a trace.
 
 ## How to read
 

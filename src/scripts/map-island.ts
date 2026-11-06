@@ -4,7 +4,7 @@ import { pickPlural } from '../lib/plural-pick';
 import * as L from 'leaflet';
 // ?url: the file is emitted but NOT linked into pages; it is added below, only when the map starts.
 import leafletCss from 'leaflet/dist/leaflet.css?url';
-import { parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
+import { NEAR_PARAM, parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
 import { bridgeDirectionsLink } from '../lib/directions';
 import { distanceParts } from '../lib/distance';
 import { distanceKm } from '../lib/events';
@@ -106,6 +106,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const sheet = $('[data-map-list]');
   const status = $('[data-map-status]');
   const pageMode = cfg.mode === 'page';
+  /** The link "What else is near you" of a story page comes with `?perto=1`: "Near me" starts on arrival (read once, the address is cleaned by the first writeUrl). */
+  const wantsNear = pageMode && new URLSearchParams(location.search).get(NEAR_PARAM) === '1';
   const byId = new Map(cfg.cards.map((c) => [c.id, c]));
   // Family mode: cards the mode hides take no part in anything below (markers, the marker limit, "In this area", filters).
   // The list is recomputed when the mode changes.
@@ -538,6 +540,10 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     );
   };
 
+  // The button "Near me" in the bar above the map (MapView.astro): the position is asked for by its press, nowhere else (but the link of a story page, see wantsNear).
+  const locateButton = pageMode ? document.querySelector<HTMLButtonElement>('[data-locate]') : null;
+  locateButton?.addEventListener('click', () => locate(locateButton));
+
   // ---- the tools under the zoom buttons ---------------------------------------------------------------------------
 
   const toolButton = (icon: keyof typeof ICONS, title: string, onClick: (button: HTMLAnchorElement) => void, pressed = false): HTMLAnchorElement => {
@@ -570,7 +576,6 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       bar.setAttribute('role', 'group');
       bar.setAttribute('aria-label', cfg.strings.tools_label!);
       L.DomEvent.disableClickPropagation(bar);
-      if (pageMode) bar.append(toolButton('locate', cfg.strings.locate!, locate, true));
       bar.append(
         toolButton('home', cfg.strings.home!, () => {
           if (world) setWorld(false);
@@ -714,6 +719,10 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     refreshMarkers();
     // The page around the map (epoch page) can now send it a selection.
     root.dispatchEvent(new CustomEvent('map:ready', { bubbles: true }));
+    if (wantsNear && locateButton) {
+      writeUrl();
+      locate(locateButton);
+    }
   };
 
   map.on('moveend', () => {

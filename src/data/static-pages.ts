@@ -44,7 +44,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'foi-aqui',
           heading: 'Foi aqui',
-          paragraphs: ['Uma história fica melhor na memória quando se está no sítio exato. Por isso, cada história tem um ponto no mapa e uma «ponte para hoje»: uma igreja, uma praça, um museu ou um monumento onde ficou um vestígio dela.'],
+          paragraphs: ['Uma história fica melhor na memória quando se está no sítio exato. Por isso, cada história tem um ponto no mapa e um bloco «Onde ver hoje»: uma igreja, uma praça, um museu ou um monumento onde ficou um vestígio dela.'],
         },
         {
           id: 'como-ler',
@@ -94,7 +94,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'foi-aqui',
           heading: 'Foi aqui. It happened here',
-          paragraphs: ['A story sticks better when you’re standing on the very spot. That’s why every story has a point on the map and a “bridge to today”: a church, a square, a museum or a monument where it left a trace.'],
+          paragraphs: ['A story sticks better when you’re standing on the very spot. That’s why every story has a point on the map and a “Where to see it today” block: a church, a square, a museum or a monument where it left a trace.'],
         },
         {
           id: 'como-ler',
@@ -144,7 +144,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'foi-aqui',
           heading: 'Foi aqui. Это было здесь',
-          paragraphs: ['История запоминается лучше, когда стоишь на том самом месте. Поэтому у каждой истории есть точка на карте и «мост в наши дни»: церковь, площадь, музей или памятник, где от неё остался след.'],
+          paragraphs: ['История запоминается лучше, когда стоишь на том самом месте. Поэтому у каждой истории есть точка на карте и блок «Где это увидеть сегодня»: церковь, площадь, музей или памятник, где от неё остался след.'],
         },
         {
           id: 'como-ler',
@@ -333,8 +333,8 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'O que pode fazer com os materiais',
           paragraphs: [],
           items: [
-            '**Textos e ilustrações do projeto** (histórias, descrições, textos da interface e as ilustrações criadas para o site) estão sob a licença CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/deed.pt; texto completo e permissão adicional: https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE-CONTENT.md). O uso no ensino é permitido, incluindo aulas, cursos e visitas guiadas pagos, desde que indique «O Elefante Fugiu» com uma ligação ao site. É proibido vender os próprios textos e ilustrações, por exemplo em livros, aplicações ou conjuntos de materiais.',
-            '**O código do site** é aberto, sob a licença MIT (https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE).',
+            '**Textos e ilustrações do projeto** (histórias, descrições, textos da interface e as ilustrações criadas para o site) estão sob a licença Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0; https://creativecommons.org/licenses/by-nc/4.0/deed.pt), com uma permissão adicional. O uso no ensino é permitido, incluindo aulas, cursos e visitas guiadas pagos, desde que indique «O Elefante Fugiu» com uma ligação ao site. É proibido vender os próprios textos e ilustrações, por exemplo em livros, aplicações ou conjuntos de materiais. O texto completo da licença pode ser pedido por email: {{email}}.',
+            '**O código do site** é aberto, sob a licença MIT.',
             '**As imagens de outras fontes** (por exemplo da Wikimedia Commons) mantêm a sua própria licença, indicada por baixo de cada uma, com o autor.',
             '**O nome «O Elefante Fugiu», o logótipo e a mascote (o elefante)** não estão abrangidos por estas licenças. Para os usar, escreva-me.',
           ],
@@ -343,7 +343,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'O que fica guardado no seu navegador',
           paragraphs: [
-            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta, a última história de «Surpreenda-me», as histórias que marcou como lidas e a data da última visita. Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim», o navegador pede autorização para aceder à localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
+            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta, a última história de «Surpreenda-me», as histórias que marcou como lidas e a data da última visita. Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim» no mapa ou em «O que mais há perto de si» numa história, o navegador pede autorização para aceder à localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
           ],
         },
         {
@@ -397,8 +397,8 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'What you can do with the material',
           paragraphs: [],
           items: [
-            '**Texts and illustrations of the project** (stories, descriptions, interface text and the illustrations made for the site) are published under CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/; full text and the additional permission: https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE-CONTENT.md). Use in teaching is allowed, including paid lessons, courses and tours, if you credit “O Elefante Fugiu” with a link to the site. Selling the texts and illustrations themselves, for example in books, apps or kits of materials, is not allowed.',
-            '**The site’s code** is open under the MIT license (https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE).',
+            '**Texts and illustrations of the project** (stories, descriptions, interface text and the illustrations made for the site) are published under the Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0; https://creativecommons.org/licenses/by-nc/4.0/), with an additional permission. Use in teaching is allowed, including paid lessons, courses and tours, if you credit “O Elefante Fugiu” with a link to the site. Selling the texts and illustrations themselves, for example in books, apps or kits of materials, is not allowed. The full text of the license can be requested by email: {{email}}.',
+            '**The site’s code** is open under the MIT license.',
             '**Images from other sources** (for example Wikimedia Commons) keep their own license, given with the author under each one.',
             '**The name “O Elefante Fugiu,” the logo, and the elephant mascot** are not covered by these licenses. To use them, write to me.',
           ],
@@ -407,7 +407,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'What’s stored in your browser',
           paragraphs: [
-            'So that the site remembers your choices, your browser saves: language, colour theme, the age you chose (“Age”), the last era you opened, the last story from “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me,” your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
+            'So that the site remembers your choices, your browser saves: language, colour theme, the age you chose (“Age”), the last era you opened, the last story from “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me” on the map or “What else is near you” on a story, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
         },
         {
@@ -461,8 +461,8 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Что можно делать с материалами сайта',
           paragraphs: [],
           items: [
-            '**Тексты и иллюстрации проекта** (истории, описания, надписи на сайте и иллюстрации, сделанные для сайта) распространяются по лицензии CC BY-NC 4.0 (https://creativecommons.org/licenses/by-nc/4.0/deed.ru; полный текст и дополнительное разрешение: https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE-CONTENT.md). Использовать их в обучении можно, в том числе на платных уроках, курсах и экскурсиях, если указан источник «O Elefante Fugiu» со ссылкой на сайт. Продавать сами тексты и иллюстрации, например в книгах, приложениях или наборах материалов, нельзя.',
-            '**Код сайта** открыт по лицензии MIT (https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE).',
+            '**Тексты и иллюстрации проекта** (истории, описания, надписи на сайте и иллюстрации, сделанные для сайта) распространяются по лицензии Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0; https://creativecommons.org/licenses/by-nc/4.0/deed.ru) с дополнительным разрешением. Использовать их в обучении можно, в том числе на платных уроках, курсах и экскурсиях, если указан источник «O Elefante Fugiu» со ссылкой на сайт. Продавать сами тексты и иллюстрации, например в книгах, приложениях или наборах материалов, нельзя. Полный текст лицензии можно запросить по почте: {{email}}.',
+            '**Код сайта** открыт по лицензии MIT.',
             '**Изображения из других источников** (например, из Викисклада) сохраняют свои лицензии: они указаны под каждым изображением вместе с автором.',
             '**Название «O Elefante Fugiu», логотип и слон-талисман** в эти лицензии не входят. Чтобы использовать их, напишите мне.',
           ],
@@ -471,7 +471,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'Что хранится у вас в браузере',
           paragraphs: [
-            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, выбранный возраст («Возраст»), последнюю открытую эпоху, последнюю историю из «Удиви меня» отметки о прочитанных историях и дату последнего визита. Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Рядом со мной», браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
+            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, выбранный возраст («Возраст»), последнюю открытую эпоху, последнюю историю из «Удиви меня» отметки о прочитанных историях и дату последнего визита. Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Что рядом со мной» на карте или «Что ещё рядом с вами» в истории, браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
           ],
         },
         {

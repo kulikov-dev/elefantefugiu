@@ -4,7 +4,6 @@ import { t } from '../i18n';
 import { TELEGRAM_TEXT, TELEGRAM_URL } from '../lib/social';
 
 const CONTENT_LICENSE = { pt: 'https://creativecommons.org/licenses/by-nc/4.0/deed.pt', en: 'https://creativecommons.org/licenses/by-nc/4.0/', ru: 'https://creativecommons.org/licenses/by-nc/4.0/deed.ru' } as const;
-const CODE_LICENSE = 'https://github.com/kulikov-dev/elefantefugiu/blob/main/LICENSE';
 
 interface Props {
   lang: Lang;
@@ -36,7 +35,7 @@ const links = [
       </ul>
     </nav>
     <p>
-      {licenseParts.map((part) => (part === '{content}' ? <a href={CONTENT_LICENSE[lang]} rel="license noopener">CC BY-NC 4.0</a> : part === '{code}' ? <a href={CODE_LICENSE} rel="noopener">MIT</a> : part))}
+      {licenseParts.map((part) => (part === '{content}' ? <a href={CONTENT_LICENSE[lang]} rel="license noopener">CC BY-NC 4.0</a> : part === '{code}' ? 'MIT' : part))}
     </p>
     <p><a href={`${pagePath(lang, 'legal')}#cookies`}>{t(lang, 'footer.privacy')}</a></p>
     <p class="no-js-only">{t(lang, 'family.footer_hint')}</p>

@@ -151,7 +151,7 @@
 |---|---|---|---|
 | Эпоха истории | época | era | эпоха |
 | Нить | fio | thread | нить |
-| «Мост в сегодня» | ponte para hoje | bridge to today | мост в сегодня |
+| Блок «Где это увидеть сегодня» (поле данных `bridge`) | Onde ver hoje | Where to see it today | Где это увидеть сегодня |
 | Хронология (вид эпохи) | linha do tempo | timeline | хронология |
 | Возраст (кнопка) | Idade | Age | Возраст |
 | Доказано / вероятно / легенда | documentado / em debate / lenda | documented / debated / legend | документально / в обсуждении / легенда |

@@ -78,7 +78,11 @@
     "timeline_prev": "Earlier eras",
     "timeline_next": "Later eras",
     "threads_heading": "Threads",
-    "threads_intro": "Pick a theme and follow it through the centuries."
+    "threads_intro": "Pick a theme and follow it through the centuries.",
+    "how": "A short story, the details with sources, and the place where you can still see it today.",
+    "myths_title": "Myth or fact: can you tell what really happened?",
+    "myths_line": "What guides and friends say about Portugal: pick what you think, then see the answer.",
+    "myths_play": "Play"
   },
   "surprise": {
     "picking": "Picking a story for you…",
@@ -171,7 +175,7 @@
   "ui": {
     "read_more": "Read more ▾",
     "more": "More →",
-    "bridge": "Bridge to today",
+    "bridge": "Where to see it today",
     "label_documented": "Documented",
     "label_legend": "Legend",
     "label_debated": "Debated",
@@ -195,7 +199,9 @@
     "view_timeline": "Timeline",
     "view_grid": "Cards",
     "sources": "Sources",
-    "directions": "Get directions"
+    "directions": "Get directions",
+    "near_more": "What else is near you →",
+    "story_myths": "Test yourself: myth or fact? →"
   },
   "epoch": {
     "chips_label": "Threads in this era",
