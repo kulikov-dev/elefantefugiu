@@ -188,8 +188,23 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     display: none;
   }
 
+  /* Compact and second to the caption: as tall as its line, small capitals, a 1 px line of the strong border colour, no fill in the dark theme. */
   .panno__share {
-    font-size: var(--text-sm);
+    box-sizing: border-box;
+    block-size: calc(var(--text-sm) * var(--leading-body));
+    min-height: 0;
+    padding: 0 var(--space-3);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--panno-share-fill);
+    font-size: var(--text-xs);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .panno__share:hover {
+    background: var(--color-accent-tint);
   }
 
   .panno__status {
