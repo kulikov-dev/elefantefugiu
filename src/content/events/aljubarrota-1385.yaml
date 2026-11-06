@@ -56,12 +56,13 @@ hook:
   ru: Совет спорил, а 25-летний коннетабль просто ушёл и выбрал поле боя.
 story:
   pt: >-
-    Aos 25 anos, o condestável Nuno Álvares Pereira tinha de decidir como travar a batalha de
-    Aljubarrota, em 1385. O conselho de guerra não chegou a acordo sobre onde combater, por isso, a
-    6 de agosto, saiu do acampamento com uns 2000 homens e escolheu sozinho o campo de batalha.
-    Segundo Froissart, mandou abrir valas e covas de lobo num planalto estreito. A 14, à hora das
-    vésperas, os franceses que atacaram primeiro caíram lá dentro. Os castelhanos, muito mais
-    numerosos, perderam.
+    Em 1385, Nuno Álvares Pereira, condestável de Portugal aos 25 anos, ou seja, comandante supremo,
+    enfrentou o exército do rei de Castela, que reclamava o trono português por casamento com a
+    filha do último rei e trouxera cavaleiros franceses. O conselho de guerra não chegou a acordo
+    sobre onde combater, por isso, a 6 de agosto, Nuno saiu do acampamento com uns 2000 homens e
+    escolheu sozinho o campo de batalha. Segundo Froissart, mandou abrir valas e covas de lobo num
+    planalto estreito. A 14, à hora das vésperas, os franceses que atacaram primeiro caíram lá
+    dentro. Os castelhanos, muito mais numerosos, perderam, e Portugal manteve a independência.
   en: >-
     At 25, Nuno Álvares Pereira was Portugal’s constable and about to fight at Aljubarrota, badly
     outnumbered. When the war council could not agree where to fight, he left camp on August 6 with
@@ -70,11 +71,13 @@ story:
     charged first rode straight into them. The Castilians, who outnumbered them several times over,
     lost.
   ru: >-
-    В 1385 году Нуну Алвареш Перейра был 25-летним коннетаблем Португалии. Военный совет не мог
-    решить, где принимать бой, и 6 августа он ушёл из лагеря с двумя тысячами человек и сам выбрал
-    поле боя. По Фруассару, он велел вырыть рвы и волчьи ямы на узком плато. 14 августа, в час
-    вечерни, французские рыцари, атаковавшие первыми, влетели прямо в них. Кастильцы, которых было в
-    разы больше, проиграли.
+    В 1385 году Нуну Алвареш Перейра, 25-летний коннетабль, то есть главнокомандующий Португалии,
+    встретил армию кастильского короля. Тот претендовал на португальский трон через жену, дочь
+    последнего короля, и привёл с собой французских рыцарей. Военный совет не мог решить, где
+    принимать бой, и 6 августа Нуну ушёл из лагеря с двумя тысячами человек и сам выбрал поле боя.
+    По Фруассару, он велел вырыть рвы и волчьи ямы на узком плато. 14 августа, в час вечерни,
+    французские рыцари, атаковавшие первыми, влетели прямо в них. Кастильцы, которых было в разы
+    больше, проиграли, и Португалия осталась независимой.
 more:
   pt: >-
     Depois da vitória, Nuno deu a maior parte da fortuna aos seus veteranos. Em 1423, com 63 anos,
@@ -231,15 +234,13 @@ interactive:
           ru: Сражались лишь около 10 000.
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'a4826f9158b2'
-  en:
-    date: '2026-10-28'
-    hash: '77f1a2d90c8b'
   ru:
     date: '2026-10-28'
     hash: '0415b6d3608b'

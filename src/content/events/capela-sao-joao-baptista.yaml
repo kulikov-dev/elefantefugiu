@@ -50,20 +50,24 @@ hook:
   en: The king ordered a chapel from Rome and shipped it in pieces.
   ru: Король заказал часовню в Риме и привёз её по частям.
 story:
-  pt: D. João V queria uma capela que não ficasse atrás das de Roma. Em 1742 foi encomendada aos
+  pt: >-
+    D. João V queria uma capela que não ficasse atrás das de Roma. Em 1742 foi encomendada aos
     melhores mestres romanos, e mais de 130 pessoas trabalharam nela cinco anos, em mármore,
-    lápis-lazúli, ametista e bronze dourado. Depois de pronta, a capela foi montada em Roma e
-    benzida pelo papa Bento XIV, e a seguir desmontada em 174 peças. Três navios levaram-nas para
-    Lisboa, onde a capela voltou a ser montada na Igreja de São Roque.
+    lápis-lazúli, ametista e bronze dourado. O rei nunca foi a Roma e aprovou o projeto por uma
+    maqueta. Depois de pronta, a capela foi montada em Roma e benzida pelo papa Bento XIV, e a
+    seguir desmontada em 174 peças. Três navios levaram-nas para Lisboa, onde a capela voltou a ser
+    montada na Igreja de São Roque. Sobreviveu ao terramoto de 1755.
   en: John V wanted a chapel as fine as any in Rome. In 1742 it was commissioned from Rome’s best
     craftsmen, and more than 130 people spent five years making it from marble, lapis lazuli,
     amethyst, and gilded bronze. Once finished, the chapel was assembled in Rome and blessed by Pope
     Benedict XIV, then taken apart into 174 pieces. Three ships carried them to Lisbon, where the
     chapel was put back together in the Church of São Roque.
-  ru: Жуан V хотел у себя часовню не хуже римских. В 1742 году её заказали лучшим мастерам Рима, и
-    больше 130 человек делали её пять лет из мрамора, лазурита, аметиста и позолоченной бронзы.
-    Готовую часовню собрали в Риме, папа Бенедикт XIV её благословил, а потом её разобрали на 174
-    части. Три корабля привезли их в Лиссабон, где часовню собрали заново в церкви Сан-Роке.
+  ru: >-
+    Жуан V хотел у себя часовню не хуже римских. В 1742 году её заказали лучшим мастерам Рима, и
+    больше 130 человек делали её пять лет из мрамора, лазурита, аметиста и позолоченной бронзы. Сам
+    король в Рим не ездил и проект одобрял по макету. Готовую часовню собрали в Риме, папа Бенедикт
+    XIV её благословил, а потом разобрали на 174 части. Три корабля привезли их в Лиссабон, где
+    часовню собрали заново в церкви Сан-Роке. Землетрясение 1755 года она пережила.
 more:
   pt: >-
     O rei nunca foi a Roma ver a sua capela. Em vez disso, os mestres fizeram-lhe uma maqueta exata
@@ -132,15 +136,13 @@ image:
   focus: "50% 55%"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '46b2f01dd8cd'
-  en:
-    date: '2026-10-31'
-    hash: '449f762198b0'
   ru:
     date: '2026-10-31'
     hash: 'c1b42014ba78'

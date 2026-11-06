@@ -47,25 +47,30 @@ hook:
   en: Many credit Eiffel, but a student of his designed it.
   ru: Его проектировал ученик Эйфеля, поэтому лифт путают с работой учителя.
 story:
-  pt: A Baixa fica em baixo, e o Chiado no alto da colina. Para os lisboetas não terem de subir
+  pt: >-
+    A Baixa fica em baixo, e o Chiado no alto da colina. Para os lisboetas não terem de subir
     escadas, em 1900 começou a construir-se uma torre de ferro com um elevador. Dois anos depois, o
     Elevador de Santa Justa, com 45 metros, levou os primeiros passageiros. Primeiro movia-o uma
     máquina a vapor, a partir de 1907 um motor elétrico. O ferro rendilhado lembra tanto a Torre
-    Eiffel que muitos ainda o atribuem a Eiffel.
+    Eiffel que muitos ainda o atribuem a Eiffel, mas foi construído por um engenheiro português de
+    origem francesa, Raul Mesnier du Ponsard.
   en: The Baixa lies down low, and the Chiado district sits on the hill above it. To spare people the
     stairs, construction began in 1900 on an iron tower with an elevator. Two years later, the
     45-meter Santa Justa Lift carried its first passengers. At first it ran on a steam engine, and
     from 1907 on an electric motor. The lacy ironwork looks so much like the Eiffel Tower that many
     people still credit it to Eiffel.
-  ru: Байша лежит внизу, а район Шиаду на холме над ней. Чтобы горожанам не карабкаться по лестницам,
+  ru: >-
+    Байша лежит внизу, а район Шиаду на холме над ней. Чтобы горожанам не карабкаться по лестницам,
     в 1900 году начали строить железную башню с лифтом. Через два года 45-метровый лифт Санта-Жушта
     поднял первых пассажиров. Сначала его двигал паровой двигатель, с 1907 года электрический.
-    Ажурное железо так похоже на Эйфелеву башню, что лифт до сих пор считают работой Эйфеля.
+    Ажурное железо так похоже на Эйфелеву башню, что лифт до сих пор считают работой Эйфеля, но
+    построил его португальский инженер французского происхождения Рауль Мениер дю Понсар.
 more:
-  pt: >-
+  pt: |-
     Na verdade, o elevador foi projetado por Raoul Mesnier du Ponsard, engenheiro nascido no Porto
-    numa família francesa. Foi aluno de Eiffel, daí a semelhança. Mesnier construiu em Lisboa outros
-    elevadores e ascensores, e antes ainda o funicular de Braga que ainda hoje anda a água.
+    numa família francesa. Segundo uma versão corrente, foi aluno de Eiffel, daí a semelhança, mas
+    não há documentos que o provem. Mesnier construiu em Lisboa outros elevadores e ascensores, e
+    antes ainda o funicular de Braga que ainda hoje anda a água.
 
 
     O elevador tem duas cabines de madeira, cada uma para 29 pessoas. Lá em cima há um miradouro e
@@ -77,10 +82,11 @@ more:
 
     The elevator has two wooden cars, each holding 29 people. At the top there’s a viewing platform and
     a walkway leading to the ruins of the Carmo Convent, destroyed in the 1755 earthquake.
-  ru: >-
+  ru: |-
     На самом деле лифт спроектировал Рауль Мениер дю Понсар, инженер, родившийся в Порту в семье
-    французов. Он учился у Эйфеля, отсюда и сходство. Мениер построил в Лиссабоне и другие
-    подъёмники и фуникулёры, а ещё раньше фуникулёр в Браге, который до сих пор ездит на воде.
+    французов. По распространённой версии, он учился у Эйфеля, отсюда и сходство, но документов об
+    этом нет. Мениер построил в Лиссабоне и другие подъёмники и фуникулёры, а ещё раньше фуникулёр в
+    Браге, который до сих пор ездит на воде.
 
 
     В лифте две деревянные кабины, в каждую помещается 29 человек. Наверху смотровая площадка и
@@ -126,15 +132,13 @@ related:
   - elevador-bom-jesus
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '6723517f2082'
-  en:
-    date: '2026-10-31'
-    hash: '03bbf9bd9abb'
   ru:
     date: '2026-10-31'
     hash: 'e9770a5b366e'

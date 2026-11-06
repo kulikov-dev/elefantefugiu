@@ -55,12 +55,13 @@ hook:
   ru: Султан вывел боевых слонов. Они развернулись против него.
 story:
   pt: >-
-    Quem fosse senhor de Malaca, escreveu Tomé Pires, tinha a mão na garganta de Veneza: Malaca
-    controlava a rota das especiarias. A 25 de julho de 1511, Afonso de Albuquerque atacou-a com
-    cerca de mil homens. O sultão respondeu com elefantes de guerra. Os portugueses receberam-nos
-    com lanças. O elefante do sultão, ferido, deu meia-volta aos berros, os outros entraram em
-    pânico e esmagaram os seus, e o sultão, também ferido, abandonou a montada. Um mês depois, a
-    cidade era portuguesa.
+    Quem fosse senhor de Malaca, escreveu o boticário português Tomé Pires, tinha a mão na garganta
+    de Veneza: por Malaca passavam as especiarias que enriqueciam Veneza. A 25 de julho de 1511, o
+    governador da Índia portuguesa, Afonso de Albuquerque, atacou a cidade com cerca de mil homens.
+    O sultão respondeu com elefantes de guerra. Os portugueses receberam-nos com lanças. O elefante
+    do sultão, ferido, deu meia-volta aos berros, os outros entraram em pânico e esmagaram os seus,
+    e o sultão, também ferido, abandonou a montada. A cidade resistiu à primeira vez, mas, depois de
+    cerca de quarenta dias de combates, em agosto, tornou-se portuguesa.
   en: >-
     “Whoever is lord of Malacca has his hand on the throat of Venice,” wrote the Portuguese
     apothecary Tomé Pires, because Malacca controlled the spice route. On July 25, 1511, Afonso de
@@ -69,11 +70,12 @@ story:
     panicked and trampled their own side, and the sultan, hurt as well, abandoned his mount. A month
     later the city was Portuguese.
   ru: >-
-    «Кто владеет Малаккой, тот держит Венецию за горло», — писал португальский аптекарь Томе Пиреш,
-    ведь Малакка контролировала путь пряностей. 25 июля 1511 года Афонсу де Албукерки атаковал её с
-    тысячей человек. Султан ответил боевыми слонами. Португальцы встретили их копьями. Раненый слон
-    султана с рёвом повернул назад, остальные в панике затоптали своих, а султан, тоже раненый,
-    покинул спину слона. Через месяц город стал португальским.
+    «Кто владеет Малаккой, тот держит Венецию за горло», — писал португальский аптекарь Томе Пиреш:
+    через Малакку шли пряности, на которых богатела Венеция. 25 июля 1511 года губернатор
+    Португальской Индии Афонсу де Албукерки атаковал город с тысячей человек. Султан ответил боевыми
+    слонами. Португальцы встретили их копьями. Раненый слон султана с рёвом повернул назад,
+    остальные в панике затоптали своих, а султан, тоже раненый, покинул спину слона. Город устоял с
+    первого раза, но после примерно сорока дней боёв, в августе, стал португальским.
 more:
   pt: |-
     Os números variam: algumas fontes falam em cerca de vinte elefantes, e os defensores são
@@ -188,15 +190,13 @@ detail_image:
 related: []
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: 'd5a74f934a2b'
-  en:
-    date: '2026-10-28'
-    hash: 'da49cb95e7f8'
   ru:
     date: '2026-10-28'
     hash: 'f0b83bca7cf1'

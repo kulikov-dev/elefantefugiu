@@ -46,21 +46,25 @@ hook:
   en: The bellmakers demanded payment up front. The king paid double.
   ru: Мастера потребовали деньги вперёд. Король заплатил вдвое.
 story:
-  pt: "O rei D. João V fez uma promessa: se lhe nascesse um herdeiro, construiria um convento. Nasceu
-    uma filha, e em 1717 lançou-se em Mafra a primeira pedra. Para a obra seguiam ouro e diamantes
-    do Brasil, e chegou a haver 45 mil operários ao mesmo tempo. Para as duas torres encomendaram-se
-    na Flandres quase cem sinos. Os mestres duvidaram de que Portugal pagasse e pediram o dinheiro
-    adiantado. O rei respondeu dobrando a quantia."
+  pt: >-
+    O rei D. João V fez uma promessa: se lhe nascesse um filho, construiria um convento. Nasceu uma
+    filha, e o rei cumpriu a palavra: em 1717 lançou-se em Mafra a primeira pedra. Para a obra
+    seguiam ouro e diamantes do Brasil, e chegou a haver 45 mil operários ao mesmo tempo. Para as
+    duas torres encomendaram-se na Flandres quase cem sinos, afinados para neles se tocarem
+    melodias. Os mestres duvidaram de que Portugal pagasse e pediram o dinheiro adiantado. Diz-se
+    que o rei, que queria o melhor conjunto de sinos, respondeu dobrando a quantia.
   en: "King John V made a vow: if he had an heir, he would build a monastery. A daughter was born, and
     in 1717 the first stone was laid in Mafra. Gold and diamonds from Brazil poured into the
     project, and at times 45,000 workers were on site at once. For the two towers, almost a hundred
     bells were ordered from Flanders. The bellmakers doubted Portugal would pay and asked for the
     money in advance. The king’s answer was to double the sum."
-  ru: "Король Жуан V дал обет: если у него родится наследник, он построит монастырь. Родилась дочь, и
-    в 1717 году в Мафре заложили первый камень. На стройку шло золото и алмазы из Бразилии, а
-    рабочих бывало до 45 тысяч одновременно. Для двух башен заказали во Фландрии почти сотню
-    колоколов. Мастера усомнились, что Португалия расплатится, и попросили деньги вперёд. Король в
-    ответ удвоил сумму."
+  ru: >-
+    Король Жуан V дал обет: если у него родится ребёнок, он построит монастырь. Родилась дочь, и
+    король сдержал слово: в 1717 году в Мафре заложили первый камень. На стройку шло золото и алмазы
+    из Бразилии, а рабочих бывало до 45 тысяч одновременно. Для двух башен заказали во Фландрии
+    почти сотню колоколов, настроенных так, чтобы на них играть мелодии. Мастера усомнились, что
+    Португалия расплатится, и попросили деньги вперёд. По преданию, король хотел лучший набор
+    колоколов и в ответ удвоил сумму.
 more:
   pt: >-
     Os sinos não eram só para tocar. Foram afinados de maneira a que neles se pudessem tocar
@@ -133,15 +137,13 @@ related:
   - morcegos-mafra-1771
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '423e5c68ca99'
-  en:
-    date: '2026-10-31'
-    hash: 'd5a57809ee0c'
   ru:
     date: '2026-10-31'
     hash: 'a23c96961bfe'

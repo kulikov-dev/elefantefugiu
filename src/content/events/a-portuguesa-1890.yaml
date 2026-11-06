@@ -48,21 +48,25 @@ hook:
   en: The monarchy banned this song, and the republic made it the anthem.
   ru: Монархия запрещала эту песню, а республика сделала её гимном.
 story:
-  pt: Em janeiro de 1890, a Grã-Bretanha exigiu que Portugal saísse das terras entre Angola e
+  pt: >-
+    Em janeiro de 1890, a Grã-Bretanha exigiu que Portugal saísse das terras entre Angola e
     Moçambique. O rei cedeu, e o país sentiu-o como uma humilhação. O compositor Alfredo Keil e o
-    poeta Henrique Lopes de Mendonça escreveram numa só noite a marcha «A Portuguesa». A monarquia
-    proibiu-a. A 5 de outubro de 1910, a República foi proclamada da varanda da Câmara Municipal de
-    Lisboa, e em 1911 a marcha tornou-se o hino nacional.
+    poeta Henrique Lopes de Mendonça escreveram numa só noite, em resposta, a marcha «A Portuguesa».
+    Em 1891 cantaram-na os republicanos que se revoltaram no Porto, e a monarquia proibiu-a. A 5 de
+    outubro de 1910, a República foi proclamada da varanda da Câmara Municipal de Lisboa, a canção
+    proibida soou nas praças, e em 1911 a marcha tornou-se o hino nacional.
   en: In January 1890, Britain demanded that Portugal pull out of the lands between Angola and
     Mozambique. The king gave in, and the country took it as a humiliation. Composer Alfredo Keil
     and poet Henrique Lopes de Mendonça wrote the march “A Portuguesa” in a single night. The
     monarchy banned it. On October 5, 1910, the republic was proclaimed from the balcony of Lisbon
     City Hall, and in 1911 the march became the national anthem.
-  ru: В январе 1890 года Британия потребовала, чтобы Португалия ушла с земель между Анголой и
+  ru: >-
+    В январе 1890 года Британия потребовала, чтобы Португалия ушла с земель между Анголой и
     Мозамбиком. Король уступил, и страна восприняла это как унижение. Композитор Алфреду Кейл и поэт
-    Энрике Лопеш де Мендонса за одну ночь написали марш «A Portuguesa». Монархия его запретила. 5
-    октября 1910 года с балкона лиссабонской ратуши провозгласили республику, а в 1911 году марш
-    стал гимном страны.
+    Энрике Лопеш де Мендонса за одну ночь написали в ответ марш «A Portuguesa». В 1891 году его пели
+    республиканцы, восставшие в Порту, и монархия его запретила. 5 октября 1910 года республику
+    провозгласили с балкона лиссабонской ратуши, запрещённая песня зазвучала на площадях, а в 1911
+    году стала гимном.
 more:
   pt: >-
     No refrão, o hino chama «Às armas!» e «contra os canhões, marchar, marchar». Muitos estão
@@ -134,15 +138,13 @@ detail_image:
   source_url: "https://commons.wikimedia.org/wiki/File:A_Portuguesa_-_capa.jpg"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'c3835e1efcbf'
-  en:
-    date: '2026-10-31'
-    hash: 'bee405a14bf2'
   ru:
     date: '2026-10-31'
     hash: 'b2108fc4ca44'

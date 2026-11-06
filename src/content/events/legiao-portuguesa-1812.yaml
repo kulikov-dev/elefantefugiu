@@ -56,20 +56,22 @@ hook:
     Девять тысяч португальцев пошли за Наполеоном. К 1813-му осталось около сотни.
 story:
   pt: >-
-    Em 1808, ocupado o país, os franceses dissolveram o exército português e criaram uma legião com
-    as suas unidades. Cerca de 9000 homens, comandados pelo marquês de Alorna, partiram para França
-    como Legião Portuguesa. Combateram em Wagram, em 1809, e em 1812 foram para a Rússia, a Smolensk
-    e a Borodino. Em 1813, restavam apenas uns cem.
+    Em 1807 os franceses ocuparam Portugal. Junot quis desarmar o país e, em 1808, por ordem de
+    Napoleão, as melhores unidades do exército português dissolvido formaram uma legião. Cerca de
+    9000 homens, comandados pelo marquês de Alorna, partiram para França como Legião Portuguesa.
+    Combateram em Wagram, em 1809, e em 1812 foram para a Rússia, a Smolensk e a Borodino.
+    Sobreviveram poucos.
   en: >-
     In 1808 the French occupiers disbanded Portugal’s army, then raised a legion from its units.
     About 9,000 men, led by the Marquis of Alorna, marched off to France as the Portuguese Legion.
     They fought at Wagram in 1809 and in 1812 went to Russia, to Smolensk and Borodino. By 1813 only
     about a hundred were left.
   ru: >-
-    В 1808 году французы распустили армию оккупированной Португалии, а из её частей сформировали
-    легион для Наполеона. Около 9000 человек под командованием маркиза д’Алорна отправились во
-    Францию как Португальский легион. Они сражались при Ваграме в 1809 году, а в 1812 году ушли в
-    Россию, под Смоленск и Бородино. К 1813 году в строю осталось около ста человек.
+    В 1807 году французы заняли Португалию. Жюно хотел разоружить страну, и в 1808 году по приказу
+    Наполеона из лучших частей распущенной португальской армии сформировали легион. Около 9000
+    человек под командованием маркиза д’Алорна ушли во Францию как Португальский легион. Они
+    сражались при Ваграме в 1809 году, а в 1812 году ушли в Россию, под Смоленск и Бородино. Уцелели
+    немногие.
 more:
   pt: >-
     A Legião foi organizada a partir de fevereiro de 1808 e partiu para Espanha
@@ -136,15 +138,13 @@ related:
   - torres-vedras-1810
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: 'd45f4fe1ba3b'
-  en:
-    date: '2026-10-28'
-    hash: 'acb843c42c23'
   ru:
     date: '2026-10-28'
     hash: 'df20d2f0f659'

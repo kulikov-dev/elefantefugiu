@@ -57,12 +57,14 @@ hook:
     Целый год строили линию фортов, о которой французы почти не знали.
 story:
   pt: >-
-    Em outubro de 1809, Wellington mandou fortificar as colinas a norte de
-    Lisboa. Trabalhadores portugueses ergueram fortes e redutos em segredo. Em
-    setembro de 1810, o marechal Masséna avançou para Lisboa com cerca de 60 000
-    homens, por uma terra sem comida, que os próprios camponeses tinham
-    destruído. A 11 de outubro chegou às Linhas de Torres Vedras. Um mês depois,
-    com fome, voltou para trás.
+    Em outubro de 1809, Wellington, que comandava o exército anglo-português contra os franceses,
+    mandou fortificar as colinas a norte de Lisboa: começaram assim as Linhas de Torres Vedras.
+    Trabalhadores portugueses ergueram fortes e redutos em segredo. Em setembro de 1810, o marechal
+    francês Masséna avançou para Lisboa com cerca de 60 000 homens, por uma terra onde os próprios
+    camponeses tinham destruído toda a comida. A 11 de outubro chegou às Linhas, mas não as
+    conseguiu tomar, e, com o exército esfomeado, um mês depois voltou para trás. A campanha foi uma
+    catástrofe também para os civis: segundo algumas estimativas, dezenas de milhares de portugueses
+    morreram de fome e doenças.
   en: >-
     In October 1809, Wellington began fortifying the hills north of Lisbon, a project kept secret
     from the French. Portuguese workers raised forts and redoubts in secret. In September 1810,
@@ -70,11 +72,13 @@ story:
     own farmers. On October 11 he reached the Lines of Torres Vedras. A month later, hungry, he
     turned back.
   ru: >-
-    В октябре 1809 года Веллингтон приказал укрепить холмы севернее Лиссабона: так начали строить
-    линии Торриш-Ведраш. Португальские рабочие втайне возводили форты и редуты. В сентябре 1810 года
-    маршал Массена двинулся на Лиссабон примерно с 60 тысячами человек по земле, где крестьяне сами
-    уничтожили всю еду. 11 октября он дошёл до линий Торриш-Ведраш. Через месяц, голодный, он
-    повернул назад.
+    В октябре 1809 года Веллингтон, командовавший англо-португальской армией против французов,
+    приказал укрепить холмы севернее Лиссабона: так начали строить линии Торриш-Ведраш.
+    Португальские рабочие втайне возводили форты и редуты. В сентябре 1810 года французский маршал
+    Массена двинулся на Лиссабон примерно с 60 тысячами человек по земле, где крестьяне сами
+    уничтожили всю еду. 11 октября он дошёл до линий, но взять их не смог, а армия голодала, и через
+    месяц он повернул назад. Кампания стала катастрофой и для мирных жителей: по некоторым оценкам,
+    десятки тысяч португальцев умерли от голода и болезней.
 more:
   pt: >-
     O sistema tinha três linhas de fortes e redutos entre o Tejo e o Atlântico,
@@ -168,15 +172,13 @@ related:
   - ponte-das-barcas-1809
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '6776b6d0aad5'
-  en:
-    date: '2026-10-31'
-    hash: '3d7a6193979a'
   ru:
     date: '2026-10-31'
     hash: 'b27c8a090b4b'

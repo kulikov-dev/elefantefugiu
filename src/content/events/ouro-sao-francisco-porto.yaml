@@ -54,21 +54,26 @@ hook:
   en: Friars sworn to poverty covered their church in gold.
   ru: Монахи с обетом бедности покрыли свою церковь золотом.
 story:
-  pt: "No final do século XVII encontrou-se ouro no Brasil, e para Portugal partiram navios com uma
-    carga preciosa. Parte desse ouro foi para as igrejas. Os franciscanos do Porto, uma ordem com
-    voto de pobreza, cobriram por dentro a sua igreja gótica de talha dourada: colunas, abóbadas,
-    altares, anjos e videiras. Gastaram-se cerca de 400 quilos de ouro brasileiro. Por fora a igreja
-    é simples e cinzenta, e por isso o interior corta a respiração."
+  pt: >-
+    No final do século XVII encontrou-se ouro no Brasil, e para Portugal partiram navios com uma
+    carga preciosa. Parte desse ouro foi para as igrejas, que por todo o país se vestiram de talha
+    dourada. Os franciscanos do Porto fizeram voto de pobreza, mas a talha da sua igreja gótica foi
+    paga pela Ordem Terceira, uma confraria de ricos comerciantes leigos. Cobre o interior por
+    inteiro: colunas, abóbadas, altares, anjos e videiras. Diz-se que se gastaram cerca de 400
+    quilos de ouro brasileiro. Por fora a igreja é simples e cinzenta, e por isso o interior corta a
+    respiração.
   en: "At the end of the 17th century gold was found in Brazil, and ships with precious cargo set sail
     for Portugal. Some of that gold went to churches. The Franciscans in Porto, an order sworn to
     poverty, covered the inside of their Gothic church with gilded wood carving: columns, vaults,
     altars, angels, and grapevines. It took about 400 kilograms of Brazilian gold. From the outside
     the church is plain and gray, which is why the interior takes your breath away."
-  ru: "В конце XVII века в Бразилии нашли золото, и в Португалию поплыли корабли с драгоценным грузом.
-    Часть золота ушла на церкви. Францисканцы в Порту, орден, давший обет бедности, покрыли свою
-    готическую церковь изнутри резьбой из позолоченного дерева: колонны, своды, алтари, ангелы и
-    виноградные лозы. На это ушло около 400 килограммов бразильского золота. Снаружи церковь простая
-    и серая, поэтому внутри дух захватывает."
+  ru: >-
+    В конце XVII века в Бразилии нашли золото, и в Португалию поплыли корабли с драгоценным грузом.
+    Часть золота ушла на церкви: их по всей стране одевали в «талью дораду», позолоченную резьбу по
+    дереву. Францисканцы в Порту дали обет бедности, но резьбу в их готической церкви оплатил Третий
+    орден: братство богатых купцов-мирян. Колонны, своды, алтари, ангелы и виноградные лозы покрыты
+    ею изнутри. На это, как говорят, ушло около 400 килограммов бразильского золота. Снаружи церковь
+    простая и серая, поэтому внутри дух захватывает.
 more:
   pt: >-
     O ouro foi encontrado nas serras de Minas Gerais, e para lá correram milhares de garimpeiros. A
@@ -144,15 +149,13 @@ related:
   - mafra-sinos-1717
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '7adfda60e389'
-  en:
-    date: '2026-10-31'
-    hash: 'd4798d52a5eb'
   ru:
     date: '2026-10-31'
     hash: '70abe4b2cdb5'

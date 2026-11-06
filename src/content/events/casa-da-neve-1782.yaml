@@ -54,11 +54,12 @@ hook:
   ru: Стол Пессоа здесь зарезервирован до сих пор. Начиналось всё со льда.
 story:
   pt: >-
-    Sob as arcadas da atual Praça do Comércio, em Lisboa, abriu no século XVIII uma loja que vendia
-    um luxo: gelo. O fundador, Julião Pereira de Castro, era o neveiro da Casa Real. Numa cidade de
-    tabernas, a sua Casa da Neve servia bebidas geladas e «neves» de vários sabores a quem podia
-    pagar. Hoje é o café mais antigo de Lisboa, o Martinho da Arcada, e a mesa de Fernando Pessoa
-    continua reservada.
+    No século XVIII o gelo era um luxo: a neve apanhava-se no inverno na Serra da Estrela e seguia
+    para Lisboa. Julião Pereira de Castro, neveiro da Casa Real, obteve o monopólio da neve e do
+    gelo e abriu sob as arcadas da atual Praça do Comércio a Casa da Neve (em 1778 ou 1782, segundo
+    as fontes). Servia bebidas geladas e «neves» de vários sabores a quem podia pagar. Mais tarde o
+    café ficou com o nome do dono e hoje é o mais antigo de Lisboa, o Martinho da Arcada; entre os
+    clientes esteve, diz-se, o poeta Fernando Pessoa, e a sua mesa continua reservada.
   en: >-
     Under the arcades of today’s Praça do Comércio, Lisbon got a shop that sold a luxury: ice
     (sources say 1778 or 1782). Its founder, Julião Pereira de Castro, was the royal household’s
@@ -66,12 +67,12 @@ story:
     ices to anyone who could pay. Today it is Lisbon’s oldest café, Martinho da Arcada, and Fernando
     Pessoa’s table is still reserved.
   ru: >-
-    Во второй половине XVIII века под аркадами нынешней площади Комерсиу в Лиссабоне открылась
-    лавка, продававшая роскошь: лёд (по разным источникам, в 1778 или 1782 году). Её основатель
-    Жулиан Перейра де Кастру был главным хранителем снега при королевском дворе. Таверн в городе
-    хватало, но его Каза-да-Нев подавала холодные напитки и фруктовый лёд тем, кто мог заплатить.
-    Сегодня это старейшее кафе Лиссабона, Мартиньо да Аркада, а стол Фернандо Пессоа по-прежнему
-    зарезервирован.
+    В XVIII веке лёд был роскошью: снег собирали зимой в горах Серра-да-Эштрела и везли в Лиссабон.
+    Жулиан Перейра де Кастру, главный хранитель снега при дворе, получил монополию на снег и лёд и
+    открыл под аркадами нынешней площади Комерсиу лавку Каза-да-Нев (по разным источникам, в 1778
+    или 1782 году). Холодные напитки и фруктовый лёд она подавала тем, кто мог заплатить. Позже кафе
+    назвали по имени хозяина, и сегодня это старейшее кафе Лиссабона, Мартиньо да Аркада; среди
+    гостей, как говорят, был поэт Фернандо Пессоа, и его стол по-прежнему зарезервирован.
 more:
   pt: |-
     Primeiro, a neve era recolhida na Serra da Estrela e na Serra da Lousã, prensada em poços e levada em carros de bois e burros até ao Tejo, e depois de barco até Lisboa. Mais tarde, a Real Fábrica do Gelo, na Serra de Montejunto, muito mais perto da cidade, congelava a água de noite em tanques rasos. Julião comprou-a e reedificou-a em janeiro de 1782, como diz uma inscrição sobre a porta, e tinha o monopólio da neve e do gelo do reino.
@@ -205,15 +206,13 @@ related:
   - terramoto-1755
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '1d3571e0c71b'
-  en:
-    date: '2026-10-31'
-    hash: '1fa5e90f198a'
   ru:
     date: '2026-10-31'
     hash: 'fb9e16445769'

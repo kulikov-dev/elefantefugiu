@@ -46,9 +46,11 @@ hook:
   en: The missing king kept being “found” for almost twenty years.
   ru: Пропавшего короля «находили» почти двадцать лет подряд.
 story:
-  pt: Em 1578, o jovem rei D. Sebastião desapareceu numa batalha em Marrocos. Ninguém viu bem o corpo,
+  pt: >-
+    Em 1578, o jovem rei D. Sebastião desapareceu numa batalha em Marrocos. Ninguém viu bem o corpo,
     e os portugueses acreditavam que o rei voltaria numa manhã de nevoeiro para salvar o país dos
-    espanhóis. Os impostores aproveitaram. Em 1584 disse-se rei um antigo noviço de Penamacor, em
+    espanhóis, que o governavam desde 1580. Os impostores aproveitaram: dizendo-se rei, podia
+    juntar-se um bando e distribuir títulos. Em 1584 disse-se rei um antigo noviço de Penamacor, em
     1585 um ermitão da Ericeira, depois um pasteleiro de Madrigal, em Espanha, e um calabrês em
     Veneza. Todos foram desmascarados, mas a fé no regresso ficou.
   en: In 1578, the young King Sebastian vanished in a battle in Morocco. No one got a good look at the
@@ -56,11 +58,13 @@ story:
     from the Spanish. Impostors took advantage. In 1584 a former novice from Penamacor claimed to be
     the king, in 1585 a hermit from Ericeira, then a pastry cook from Madrigal in Spain, and a
     Calabrian in Venice. All were exposed, but the faith in his return lived on.
-  ru: "В 1578 году молодой король Себастьян исчез в битве в Марокко. Тела никто толком не видел, и
-    португальцы верили: король вернётся туманным утром и спасёт страну от испанцев. Этим
-    пользовались самозванцы. В 1584 году «королём» назвался бывший послушник из Пенамакора, в 1585-м
+  ru: >-
+    В 1578 году молодой король Себастьян исчез в битве в Марокко. Тела никто толком не видел, и
+    португальцы верили: король вернётся туманным утром и спасёт страну от испанцев, правивших ею с
+    1580 года. Этим пользовались самозванцы: назвавшись королём, можно было собрать отряд и
+    раздавать титулы. В 1584 году «королём» назвался бывший послушник из Пенамакора, в 1585-м
     отшельник из Эрисейры, потом кондитер из испанского Мадригала и калабриец в Венеции. Всех
-    разоблачили, но вера в возвращение осталась."
+    разоблачили, но вера в возвращение осталась.
 more:
   pt: >-
     A esta fé no regresso do rei chama-se sebastianismo. O impostor da Ericeira, Mateus Álvares,
@@ -117,15 +121,13 @@ image:
   focus: "55% 45%"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'f1ec23cab9cb'
-  en:
-    date: '2026-10-31'
-    hash: '6e196c2ea194'
   ru:
     date: '2026-10-31'
     hash: 'f55f0488fe68'

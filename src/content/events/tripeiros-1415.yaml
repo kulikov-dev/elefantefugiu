@@ -50,11 +50,12 @@ hook:
   ru: Порту отдал мясо, оставил потроха и получил прозвище.
 story:
   pt: >-
-    Diz a lenda que, em 1415, os estaleiros do Porto construíam em segredo uma
-    armada para Ceuta. O infante D. Henrique, nascido na cidade, apareceu sem
-    avisar e contou ao mestre Vaz o verdadeiro destino. Vaz prometeu toda a
-    carne da cidade aos navios; o povo ficava com as tripas. O infante disse que
-    a alcunha de «tripeiros» era uma honra. O Porto nunca mais a largou.
+    Diz a lenda que, em 1415, os estaleiros do Porto construíam em segredo uma armada para Ceuta,
+    cidade na costa africana, em frente a Gibraltar. O infante D. Henrique, nascido, segundo se crê,
+    no Porto, apareceu sem avisar e contou ao mestre Vaz o verdadeiro destino. Vaz prometeu toda a
+    carne da cidade aos navios; o povo ficava com as tripas. O infante disse que a alcunha de
+    «tripeiros» era uma honra. O Porto nunca mais a largou. Nas crónicas da época esta história não
+    existe, mas o prato é verdadeiro: tripas à moda do Porto.
   en: >-
     Legend has it that in 1415 Porto’s shipyards were secretly building the fleet that would sail
     for Ceuta. Prince Henry, born in the city, turned up unannounced and told the foreman, Master
@@ -62,11 +63,12 @@ story:
     would keep the tripe. Henry called the nickname “tripe-eaters” an honor. Porto has worn it ever
     since.
   ru: >-
-    По легенде, в 1415 году верфи Порту втайне строили флот для похода на Сеуту. Инфант Энрике
-    (Генрих Мореплаватель), родившийся в этом городе, нагрянул без предупреждения и раскрыл
-    настоящую цель мастеру верфи по имени Ваш. Ваш пообещал кораблям всё мясо города, а людям
-    остались потроха. Энрике назвал прозвище «tripeiros», то есть любители потрохов, почётным. Порту
-    носит его до сих пор.
+    По легенде, в 1415 году верфи Порту втайне строили флот для похода на Сеуту, город на
+    африканском берегу напротив Гибралтара. Инфант Энрике (Генрих Мореплаватель), родившийся, как
+    считается, в Порту, нагрянул без предупреждения и раскрыл настоящую цель мастеру верфи по имени
+    Ваш. Ваш пообещал кораблям всё мясо города, а людям остались потроха. Энрике назвал прозвище
+    «tripeiros», то есть любители потрохов, почётным. Порту носит его до сих пор. В хрониках той
+    поры этой истории нет, но блюдо настоящее: tripas à moda do Porto.
 more:
   pt: >-
     Não se conserva nenhuma crónica da época com esta história, e as versões
@@ -140,15 +142,13 @@ detail_image:
 related: []
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: '883acd4ac0df'
-  en:
-    date: '2026-10-28'
-    hash: '58249636307c'
   ru:
     date: '2026-10-28'
     hash: 'e1debfae06dd'

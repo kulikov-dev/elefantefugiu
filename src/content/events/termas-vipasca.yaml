@@ -57,21 +57,26 @@ hook:
   en: At the Roman baths, women paid twice as much as men.
   ru: В римской бане женщины платили вдвое больше мужчин.
 story:
-  pt: Junto à mina de Vipasca, hoje Aljustrel, no Alentejo, cresceu no tempo dos romanos uma aldeia de
+  pt: >-
+    Junto à mina de Vipasca, hoje Aljustrel, no Alentejo, cresceu no tempo dos romanos uma aldeia de
     mineiros. A vida dela foi regulada por lei em placas de bronze. Nos banhos, a manhã até à sétima
     hora era das mulheres, e os homens tomavam banho da oitava hora do dia até à segunda da noite.
-    Um homem pagava meia moeda, uma mulher uma inteira. As crianças, os soldados e os escravos do
-    imperador não pagavam. As placas foram encontradas nas velhas escórias da mina em 1876 e 1906.
+    Um homem pagava meia moeda, uma mulher uma inteira; os historiadores discutem porquê, e uma
+    versão diz que de manhã era preciso acender de novo a caldeira. As crianças, os soldados e os
+    escravos do imperador não pagavam. As placas foram encontradas nas velhas escórias da mina em
+    1876 e 1906.
   en: By the Vipasca mine, today’s Aljustrel in the Alentejo, a Roman miners’ village grew up. Its
     life was laid down by law on bronze tablets. At the baths, the morning until the seventh hour
     belonged to women, and men bathed from the eighth hour of the day until the second hour of the
     night. A man paid half a coin, a woman a whole one. Children, soldiers, and imperial slaves got
     in free. The tablets were found in the mine’s old slag heaps in 1876 and 1906.
-  ru: У рудника Випаска, нынешнего Алжуштрела в Алентежу, при римлянах вырос посёлок горняков. Его
+  ru: >-
+    У рудника Випаска, нынешнего Алжуштрела в Алентежу, при римлянах вырос посёлок горняков. Его
     жизнь расписали законом на бронзовых досках. В бане утро до седьмого часа отдавали женщинам, а
     мужчины мылись с восьмого часа дня до второго часа ночи. Мужчина платил полмонеты, женщина
-    целую. Бесплатно пускали детей, солдат и императорских рабов. Доски нашли в старых шлаках
-    рудника в 1876 и 1906 годах.
+    целую; историки спорят почему, и одна версия: утром баню приходилось растапливать заново.
+    Бесплатно пускали детей, солдат и императорских рабов. Доски нашли в старых шлаках рудника в
+    1876 и 1906 годах.
 more:
   pt: >-
     Os historiadores discutem se as mulheres eram mesmo prejudicadas. Uma das hipóteses: as horas
@@ -143,15 +148,13 @@ image:
   focus: "50% 50%"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'e49768d66819'
-  en:
-    date: '2026-10-31'
-    hash: '53a2e72f4ca1'
   ru:
     date: '2026-10-31'
     hash: 'b0c422c8b82b'

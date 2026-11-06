@@ -51,8 +51,9 @@ story:
     Em 1501, Alberto Cantino chegou a Lisboa dizendo que vinha comprar cavalos. Era espião do duque
     de Ferrara e queria saber o que os capitães andavam a descobrir. Os mapas das novas rotas eram
     segredo de Estado, mas por 12 ducados de ouro alguém em Lisboa desenhou-lhe uma cópia do mundo:
-    o Brasil, África, o caminho para a Índia. Em 1502 levou-a às escondidas. Em Génova copiaram-na,
-    e as suas costas chegaram ao mapa de Waldseemüller, de 1507, aquele que batizou a América.
+    o Brasil, África, o caminho para a Índia. Em 1502 levou-a às escondidas, e o segredo escapou: em
+    Génova um cartógrafo copiou-a, e dessas cópias as costas do Novo Mundo chegaram ao mapa de
+    Waldseemüller, de 1507, aquele que batizou a América.
   en: >-
     Alberto Cantino arrived in Lisbon in 1501 posing as a horse dealer. In fact he was a spy for the
     Duke of Ferrara, sent to learn what Portuguese captains had discovered. Maps of the new routes
@@ -61,13 +62,12 @@ story:
     copied it, and from there its coastlines reached Waldseemüller’s 1507 map, the one that gave
     America its name.
   ru: >-
-    Альберто Кантино приехал в Лиссабон в 1501 году под видом торговца лошадьми.
-    На самом деле он был шпионом герцога Феррарского и выяснял, что находят
-    португальские капитаны. Карты новых маршрутов были государственной тайной,
-    но за 12 золотых дукатов кто-то в Лиссабоне нарисовал ему копию мира:
-    Бразилию, Африку, дорогу в Индию. В 1502 году он тайно вывез её. В Генуе
-    карту скопировал картограф, и оттуда её берега попали на карту
-    Вальдземюллера 1507 года, ту самую, что дала имя Америке.
+    Альберто Кантино приехал в Лиссабон в 1501 году под видом торговца лошадьми. На самом деле он
+    был шпионом герцога Феррарского и выяснял, что находят португальские капитаны. Карты новых
+    маршрутов были государственной тайной, но за 12 золотых дукатов кто-то в Лиссабоне нарисовал ему
+    копию мира: Бразилию, Африку, дорогу в Индию. В 1502 году он тайно вывез её, и секрет вышел
+    наружу: в Генуе с неё снял копию картограф, а по таким копиям берега Нового Света попали на
+    карту Вальдземюллера 1507 года, ту самую, что дала имя Америке.
 more:
   pt: |-
     As cartas de Cantino sobrevivem. Numa delas, de 1501, diz que ouviu Gaspar Corte-Real fazer ao
@@ -222,15 +222,13 @@ detail_image:
 related: []
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: '6885911607ce'
-  en:
-    date: '2026-10-28'
-    hash: 'cf177e401e12'
   ru:
     date: '2026-10-28'
     hash: '5ec984b435bd'

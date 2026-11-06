@@ -47,23 +47,26 @@ hook:
   en: One seaplane broke up, one landed at sea, the third reached Rio.
   ru: Один гидроплан разбился, второй сел на воду, третий долетел до Рио.
 story:
-  pt: Em 1922, dois oficiais da Marinha, Gago Coutinho e Sacadura Cabral, decidiram voar de Lisboa ao
+  pt: >-
+    Em 1922, dois oficiais da Marinha, Gago Coutinho e Sacadura Cabral, decidiram voar de Lisboa ao
     Brasil no centenário da sua independência. Sobre o oceano não há onde fixar o olhar, e Coutinho
-    guiou o avião pelo sol e pelas estrelas, com um sextante inventado por ele. O primeiro
-    hidroavião desfez-se nas ondas junto a uns rochedos a meio do oceano, o segundo amarou por
-    avaria do motor. A Marinha levou um terceiro, e a 17 de junho, 79 dias depois da partida, os
-    aviadores amararam no Rio.
+    guiou o avião pelo sol e pelas estrelas, com um sextante a que juntou um horizonte artificial: o
+    verdadeiro não se vê na bruma. O primeiro hidroavião desfez-se nas ondas junto aos rochedos de
+    São Pedro e São Paulo, a meio do oceano, o segundo amarou por avaria do motor. A Marinha levou
+    um terceiro, e a 17 de junho, 79 dias depois da partida, os aviadores amararam no Rio.
   en: In 1922, navy officers Gago Coutinho and Sacadura Cabral set out to fly from Lisbon to Brazil
     for its independence centennial. Over the ocean there’s nothing to fix your eyes on, so Coutinho
     navigated by the sun and stars with a sextant he’d invented himself. The first seaplane broke up
     in the waves near rocks in the middle of the ocean, and the second came down on the water with
     engine trouble. The navy brought a third, and on June 17, 79 days after takeoff, the aviators
     landed in Rio.
-  ru: В 1922 году два офицера флота, Гагу Коутинью и Сакадура Кабрал, решили долететь из Лиссабона до
+  ru: >-
+    В 1922 году два офицера флота, Гагу Коутинью и Сакадура Кабрал, решили долететь из Лиссабона до
     Бразилии к столетию её независимости. Над океаном не за что зацепиться взглядом, и Коутинью вёл
-    самолёт по солнцу и звёздам, с секстантом, который придумал сам. Первый гидроплан разбился о
-    волны у скал посреди океана, второй сел на воду из-за поломки мотора. Флот привёз третий, и 17
-    июня, через 79 дней после вылета, лётчики сели в Рио.
+    самолёт по солнцу и звёздам, с секстантом, к которому приделал искусственный горизонт:
+    настоящего в дымке не видно. Первый гидроплан разбился о волны у скал Святых Петра и Павла
+    посреди океана, второй сел на воду из-за поломки мотора. Флот привёз третий, и 17 июня, через 79
+    дней после вылета, лётчики сели в Рио.
 more:
   pt: >-
     Um sextante normal precisa de horizonte, e lá de cima, com a bruma, ele não se vê. Coutinho
@@ -141,15 +144,13 @@ detail_image:
   source_url: "https://commons.wikimedia.org/wiki/File:Gago_Coutinho_e_Sacadura_Cabral,_primeira_travessia_a%C3%A9rea_do_Atl%C3%A2ntico_Sul._1922.jpg"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '958f641f7b7e'
-  en:
-    date: '2026-10-31'
-    hash: '2179642725e7'
   ru:
     date: '2026-10-31'
     hash: 'e6e5ef22d021'

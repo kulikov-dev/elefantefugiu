@@ -50,11 +50,11 @@ hook:
   ru: Король стравил носорога со слоном. Слон убежал.
 story:
   pt: >-
-    Em maio de 1515 chegou a Lisboa um rinoceronte vindo da Índia, o primeiro
-    vivo que a Europa via desde os romanos. A 3 de junho, D. Manuel I quis ver
-    se era verdade o que Plínio escrevera: que elefantes e rinocerontes são
-    inimigos de morte. Trouxeram um elefante novo perante a multidão. O bicho
-    assustou-se com o barulho e fugiu antes de a luta começar.
+    Em maio de 1515 chegou a Lisboa um rinoceronte vindo da Índia, o primeiro vivo que a Europa via
+    desde os romanos. A 3 de junho, D. Manuel I quis ver se era verdade o que Plínio escrevera: que
+    elefantes e rinocerontes são inimigos de morte. Trouxeram um elefante perante a multidão. O
+    bicho assustou-se com o barulho e fugiu antes de a luta começar: Plínio enganara-se. Mais tarde
+    o rinoceronte foi enviado como presente ao papa, mas o navio naufragou ao largo de Itália.
   en: >-
     The first live rhinoceros in Europe since Roman times arrived in Lisbon from India in May 1515.
     On June 3, King Manuel I decided to test Pliny’s claim that elephants and rhinos are bitter
@@ -63,8 +63,8 @@ story:
   ru: >-
     В мае 1515 года из Индии в Лиссабон привезли первого со времён римлян живого носорога в Европе.
     3 июня король Мануэл I решил проверить слова Плиния о том, что слоны и носороги — смертельные
-    враги. К носорогу вывели молодого слона перед толпой. Слон испугался шума и убежал, не
-    дождавшись первого удара.
+    враги. К носорогу вывели слона. Слон испугался шума и убежал, не дождавшись первого удара:
+    Плиний ошибся. Позже носорога отправили в дар папе, но корабль затонул у Италии.
 more:
   pt: |-
     O rinoceronte foi uma oferta do sultão Muzaffar de Cambaia (Guzerate) ao governador Afonso de
@@ -234,15 +234,13 @@ related:
   - hanno-1514
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: 'ce450bfbb4d5'
-  en:
-    date: '2026-10-28'
-    hash: '9a6ccb25f0ca'
   ru:
     date: '2026-10-28'
     hash: '712ae30db0b9'

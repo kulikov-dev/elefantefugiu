@@ -49,10 +49,11 @@ hook:
 story:
   pt: >-
     Em 1640, o duque de Bragança tornou-se o rei D. João IV, mas a guerra com Espanha durou ainda
-    muitos anos. Em 1646, o rei proclamou Nossa Senhora da Conceição rainha e padroeira de Portugal
-    e ofereceu a sua coroa à imagem de Vila Viçosa. Desde então, a coroa passou a ser dela e,
-    segundo a tradição, os reis não voltaram a pô-la: eram aclamados, com a coroa pousada ao lado,
-    numa almofada.
+    muitos anos. Para proteger a nova dinastia, em 1646 o rei proclamou Nossa Senhora da Conceição
+    padroeira de Portugal e ofereceu a sua coroa à imagem de Vila Viçosa, a terra dos Braganças.
+    Desde então, a coroa passou a ser dela e, segundo a tradição, os reis não voltaram a pô-la: eram
+    aclamados, com a coroa pousada ao lado, numa almofada. O dia da Imaculada Conceição, 8 de
+    dezembro, continua a ser feriado em Portugal.
   en: >-
     In 1640, the Duke of Braganza became King John IV, but the war with Spain went on for many more
     years. In 1646, the king proclaimed Our Lady of the Immaculate Conception queen and patron of
@@ -60,10 +61,11 @@ story:
     and by tradition no king wore it again: kings were acclaimed, with the crown set beside them on
     a cushion.
   ru: >-
-    В 1640 году герцог Браганса стал королём Жуаном IV, но война с Испанией шла ещё много лет. В
-    1646 году король объявил королевой и покровительницей Португалии Деву Марию Непорочного Зачатия
-    и поднёс свою корону её статуе в Вила-Висозе. С тех пор корона считалась её, и, по традиции,
-    короли её больше не надевали: их провозглашали, а корону клали рядом на подушку.
+    В 1640 году герцог Браганса стал королём Жуаном IV, но война с Испанией шла ещё много лет. Чтобы
+    защитить новую династию, в 1646 году король объявил покровительницей Португалии Деву Марию
+    Непорочного Зачатия и поднёс свою корону её статуе в Вила-Висозе, родовой резиденции Браганса. С
+    тех пор корона считалась её, и короли её больше не надевали: их провозглашали, а корону клали
+    рядом на подушку. День Непорочного Зачатия, 8 декабря, в Португалии до сих пор выходной.
 more:
   pt: >-
     A decisão foi tomada numa grande assembleia de nobres, clero e cidades em Lisboa, e a 25 de março
@@ -140,6 +142,7 @@ image:
   focus: "60% 50%"
 status: ready
 published: '2026-11-05'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 related:

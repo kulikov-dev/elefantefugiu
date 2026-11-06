@@ -47,20 +47,24 @@ hook:
   en: When Portugal’s monasteries closed in 1834, the tarts went on sale.
   ru: Монахов отправили по домам, и пирожные с заварным кремом пошли в продажу.
 story:
-  pt: Em 1834, depois da guerra civil, todos os conventos de Portugal foram extintos e os frades
-    mandados para casa. Para sobreviver, alguém do Mosteiro dos Jerónimos, em Belém, começou a
-    vender pastéis de nata numa loja ali ao lado. Em 1837 começaram a fazê-los «pela receita do
-    convento» numa casa junto a uma antiga refinaria de açúcar. A receita é guardada em segredo há
-    quase duzentos anos, e a fila para os pastéis continua.
+  pt: >-
+    Em 1834, depois da guerra civil, todos os conventos de Portugal foram extintos e os frades
+    mandados para casa. Para sobreviver, alguém do Mosteiro dos Jerónimos começou a vender pastéis
+    de nata numa loja ali ao lado. Em 1837 começaram a fazê-los «pela receita do convento» numa casa
+    junto a uma antiga refinaria de açúcar, e a receita é guardada em segredo há quase duzentos
+    anos. Mas o historiador João Pedro Gomes considera a «doçaria conventual» em grande parte um
+    mito, que serviu de publicidade depois da extinção dos conventos.
   en: In 1834, after the civil war, every monastery in Portugal was shut down and the monks sent home.
     To make a living, someone from the Jerónimos Monastery in Belém started selling sweet custard
     tarts in a shop next door. In 1837 they began baking them “from the monastery recipe” in a
     building by an old sugar refinery. The recipe has been kept secret for almost two hundred years,
     and there’s still a line for the tarts.
-  ru: В 1834 году, после гражданской войны, в Португалии закрыли все монастыри, а монахов отправили по
-    домам. Чтобы прожить, кто-то из монастыря Жеронимуш в Белене стал продавать сладкие пирожные с
-    заварным кремом в лавке по соседству. В 1837 году их начали печь «по монастырскому рецепту» в
-    доме у бывшего сахарного завода. Рецепт держат в секрете почти двести лет.
+  ru: >-
+    В 1834 году в Португалии закрыли все монастыри, а монахов отправили по домам. Чтобы прожить,
+    кто-то из монастыря Жеронимуш стал продавать пирожные с заварным кремом в лавке по соседству. В
+    1837 году их начали печь «по монастырскому рецепту» в доме у бывшего сахарного завода, и рецепт
+    держат в секрете почти двести лет. Но историк Жуан Педру Гомеш считает «монастырскую»
+    кондитерскую во многом мифом, ставшим рекламой после закрытия монастырей.
 more:
   pt: >-
     Em 2022, o historiador João Pedro Gomes, da Universidade de Coimbra, defendeu uma tese sobre a
@@ -125,15 +129,13 @@ image:
   focus: "45% 55%"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '7fdf7127979a'
-  en:
-    date: '2026-10-31'
-    hash: '74c2ad91d38a'
   ru:
     date: '2026-10-31'
     hash: 'fc2816d9cd78'

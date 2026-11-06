@@ -50,21 +50,25 @@ hook:
   en: "Goldsmiths here, saddlers there: a rebuilt Lisbon sorted its trades by street."
   ru: Золотых дел мастера на одной улице, шорники на другой — по указу.
 story:
-  pt: "Depois do terramoto de 1755, a Baixa de Lisboa foi reconstruída a régua e esquadro, com
-    ruas direitas e prédios iguais. A portaria régia de 5 de novembro de 1760 deu nomes às ruas e
-    destinou a algumas delas certos ofícios. Na Rua Áurea deviam trabalhar os ourives e, na Rua dos
-    Correeiros, os correeiros, os seleiros e os torneiros. Os lisboetas ainda dizem Rua do Ouro,
-    embora na placa se leia Rua Áurea."
+  pt: >-
+    Depois do terramoto de 1755, a Baixa de Lisboa foi reconstruída a régua e esquadro, com ruas
+    direitas e prédios iguais. A portaria régia de 5 de novembro de 1760 deu nomes às ruas e
+    destinou a algumas certos ofícios, para o comprador saber onde procurar um anel ou um arreio. Na
+    Rua Áurea, a «Dourada», deviam trabalhar os ourives e, na Rua dos Correeiros, os correeiros, os
+    seleiros e os torneiros. Mas os lisboetas ainda lhe chamam Rua do Ouro, também «dourada», embora
+    na placa se leia Rua Áurea.
   en: "After 1755, Lisbon’s lower town was rebuilt as if drawn with a ruler: straight streets,
     identical buildings. A royal order of November 5, 1760, named the streets and assigned trades to
     some of them. Goldsmiths were to work on Rua Áurea, and harness makers, saddlers, and turners on
     Rua dos Correeiros. Lisbon residents still say Rua do Ouro, or Gold Street, although the sign
     reads Rua Áurea."
-  ru: "После землетрясения 1755 года нижний город Лиссабона отстроили по линейке: прямые улицы,
+  ru: >-
+    После землетрясения 1755 года нижний город Лиссабона отстроили по линейке: прямые улицы,
     одинаковые дома. Королевское распоряжение от 5 ноября 1760 года дало улицам имена и назначило
-    некоторым из них ремёсла. На Руа-Аурея должны были работать ювелиры, а на улице Коррейруш (Rua
-    dos Correeiros) — шорники, седельщики и токари. Лиссабонцы до сих пор говорят «Руа-ду-Ору»,
-    Золотая улица, хотя по табличке она Руа-Аурея."
+    некоторым ремёсла, чтобы покупатель знал, где искать кольцо или сбрую. На Руа-Аурея, «Золотой»,
+    должны были работать ювелиры, а на улице Коррейруш (Rua dos Correeiros) — шорники, седельщики и
+    токари. Но лиссабонцы до сих пор зовут её «Руа-ду-Ору», тоже Золотая улица, хотя по табличке она
+    Руа-Аурея.
 more:
   pt: >-
     Assim, Pombal pôs ordem no traçado e no comércio: o comprador sabia onde
@@ -127,15 +131,13 @@ image:
 related: []
 status: ready
 published: '2026-10-25'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'fcf8da11174c'
-  en:
-    date: '2026-10-31'
-    hash: 'a78f744502be'
   ru:
     date: '2026-10-31'
     hash: 'f1e3b534059d'
