@@ -6,11 +6,11 @@
 // controls use --color-border-strong.
 import { readFileSync } from 'node:fs';
 import { parse } from 'yaml';
-import { withBlock } from './sync-token-fallbacks.mjs';
+import { lf, withBlock } from './sync-token-fallbacks.mjs';
 
 const source = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8');
 // The generated @supports-not block (light values for browsers without light-dark()) must match the light-dark() colours.
-if (withBlock(source) !== source) {
+if (withBlock(source) !== lf(source)) {
   console.error('FAIL  the light-dark() fallback block in src/styles/tokens.css is out of date: run  node scripts/sync-token-fallbacks.mjs');
   process.exit(1);
 }

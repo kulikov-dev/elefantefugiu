@@ -50,6 +50,9 @@ function lightSide(value) {
   }
 }
 
+/** Line endings do not matter for the comparison: CRLF (a Windows checkout) and LF are the same text. */
+export const lf = (text) => text.replace(/\r\n/g, '\n');
+
 export function buildBlock(css) {
   const withoutBlock = css.includes(BEGIN) ? css.slice(0, css.indexOf(BEGIN)) + css.slice(css.indexOf(END) + END.length) : css;
   const plain = withoutBlock.replace(/\/\*[\s\S]*?\*\//g, '');
@@ -60,7 +63,8 @@ export function buildBlock(css) {
   return `${BEGIN}\n/* Browsers without light-dark() get the light theme: the same custom properties with their light values. */\n@supports not (color: light-dark(#000, #fff)) {\n${lines.join('\n\n')}\n}\n${END}`;
 }
 
-export function withBlock(css) {
+export function withBlock(input) {
+  const css = lf(input);
   const base = css.includes(BEGIN) ? css.slice(0, css.indexOf(BEGIN)).replace(/\s+$/, '') + css.slice(css.indexOf(END) + END.length) : css;
   return `${base.replace(/\s+$/, '')}\n\n${buildBlock(css)}\n`;
 }
@@ -69,7 +73,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1
   const css = readFileSync(file, 'utf8');
   const next = withBlock(css);
   if (process.argv.includes('--check')) {
-    if (next !== css) {
+    if (next !== lf(css)) {
       console.error('The light-dark() fallback block in src/styles/tokens.css is out of date: run  node scripts/sync-token-fallbacks.mjs');
       process.exit(1);
     }
