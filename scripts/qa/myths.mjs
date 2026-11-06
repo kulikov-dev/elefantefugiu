@@ -48,7 +48,11 @@ const open = async ({ lang = 'pt', width = 390, js = true, id = '', hash = '' } 
   // The counter of the site is not loaded on a local address: a stand-in records what the page would send.
   await page.evaluateOnNewDocument(() => {
     window.__counted = [];
-    Object.defineProperty(window, 'goatcounter', { configurable: true, value: { count: (v) => window.__counted.push(v) } });
+    // A build on a real address sets window.goatcounter in its own config script: the stand-in takes the assignment and keeps its count.
+    const stub = {};
+    // count.js of the real build assigns its own count (and counts the page view itself): the recorder stays and takes the events only.
+    Object.defineProperty(stub, 'count', { get: () => (v) => { if (v && v.event) window.__counted.push(v); }, set: () => {} });
+    Object.defineProperty(window, 'goatcounter', { configurable: true, get: () => stub, set: () => {} });
   });
   await page.goto(`${pageUrl(lang, id)}${hash}`, { waitUntil: 'networkidle0' });
   await wait(200);
