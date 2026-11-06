@@ -82,8 +82,8 @@
     "threads_heading": "Fios",
     "threads_intro": "Escolha um tema e siga-o ao longo dos séculos.",
     "how": "Uma história curta, os detalhes com fontes e o sítio onde ainda a pode ver hoje.",
-    "myths_title": "Mito ou verdade: consegue adivinhar o que aconteceu mesmo?",
-    "myths_line": "O que guias e amigos contam sobre Portugal: escolha o que pensa e veja a resposta.",
+    "myths_title": "Mito ou verdade?",
+    "myths_line": "{stories} sobre Portugal que os guias contam. Consegue adivinhar quais são verdade?",
     "myths_play": "Jogar"
   },
   "surprise": {
@@ -396,7 +396,7 @@
     "traditions": "Tradições e factos"
   },
   "myths": {
-    "lead": "O que guias, roteiros e amigos contam sobre Portugal. Escolha o que pensa e veja o que realmente aconteceu. Por trás de cada resposta há uma das nossas histórias.",
+    "lead": "O que os guias, os roteiros e os amigos contam sobre Portugal. Consegue adivinhar o que é verdade? Por trás de cada resposta há uma das nossas histórias.",
     "og_title_page": "Mito ou verdade: o que se conta sobre Portugal",
     "og_title": "Mito ou verdade: {statement}?",
     "og_description": "A resposta e a história completa na ligação",
@@ -410,6 +410,28 @@
     "full_story": "A história completa →",
     "link": "Ligação para esta afirmação",
     "end": "Ouviu mais alguma coisa que gostava de ver confirmada?",
-    "end_link": "Conte-nos →"
+    "end_link": "Conte-nos →",
+    "progress_label": "Progresso do jogo",
+    "step": "Pergunta {i} de {total}",
+    "sq_label": "Pergunta {i}: {state}",
+    "sq_empty": "sem resposta",
+    "sq_hit": "acertou",
+    "sq_miss": "errou",
+    "outcome_hit": "Acertou",
+    "outcome_miss": "Errou",
+    "outcome_part": "Conta como certo: servem as duas respostas",
+    "next": "Seguinte",
+    "finish": "Resultado",
+    "score": "{score} em {total}",
+    "band_low": "Os mitos têm vida longa: até os portugueses acreditam neles",
+    "band_mid": "Bom faro para a verdade",
+    "band_high": "Ninguém o engana: nível de cronista",
+    "misses": "Onde errou",
+    "again": "Jogar outra vez",
+    "read": "Ler as histórias",
+    "share_title": "Mito ou verdade sobre Portugal: {score} em {total}",
+    "share_ask": "e tu?",
+    "copied": "Copiado",
+    "best": "O seu melhor resultado: {score} em {total}"
   }
 }

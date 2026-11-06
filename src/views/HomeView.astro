@@ -34,7 +34,8 @@ const { lang } = Astro.props;
 const site = await loadSite();
 
 // "Myth or fact": the invitation after "Where to start" (only when there is a claim to play).
-const hasMyths = liveMyths(MYTHS, site.events).length > 0;
+const mythCount = liveMyths(MYTHS, site.events).length;
+const hasMyths = mythCount > 0;
 const firstEpoch = firstMvpEpoch(site.epochs, site.events);
 const tiles = epochTiles(site.epochs, site.events);
 const ready = tiles.filter((tile) => tile.available);
@@ -186,7 +187,8 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
       hasMyths && (
         <section class="home-myths" aria-labelledby="myths-title">
           <h2 id="myths-title">{t(lang, 'home.myths_title')}</h2>
-          <p>{t(lang, 'home.myths_line')}</p>
+          <p>{t(lang, 'home.myths_line').replace('{stories}', plural(lang, 'plural.stories', mythCount))}</p>
+          <ol class="squares" aria-hidden="true">{Array.from({ length: mythCount }, () => <li class="sq sq--empty" />)}</ol>
           <p><a class="button" href={pagePath(lang, 'myths')}>{t(lang, 'home.myths_play')}</a></p>
         </section>
       )

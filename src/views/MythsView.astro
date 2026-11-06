@@ -1,7 +1,8 @@
 ---
 // "Myth or fact": /pt/mito-ou-verdade/, /en/myth-or-fact/, /ru/mif-ili-pravda/ (docs/spec.md 5.8). Claims a tourist might say, each tied to one of our stories (src/content/myths.yaml).
-// A card shows the claim and two buttons; a press opens the answer (the verdict, a few words, the story with its picture, Share) and turns the buttons off. Nothing is kept and nothing
-// is counted but one anonymous event `myth-<id>` per answer. Without JavaScript the card is a <details> opened by "Answer".
+// A card shows the claim and two buttons; a press opens the answer (the verdict and whether the guess was right, a few words, the story with its picture, Share, Next) and turns the buttons off.
+// With JavaScript it is a game (src/scripts/myths.ts): one card at a time, a row of squares at the top, a result screen at the end (score, a line by the range, the misses with links, Share, Play again);
+// the best result is kept in this browser only. The counter gets `myth-<id>` per answer, `myths-finish` and `myths-share`. Without JavaScript the card is a <details> opened by "Answer", all of them in a list.
 // The same view makes the page of one card (/ru/mif-ili-pravda/<id>/): all the cards, that one first and marked; noindex, canonical to the page of all of them, a preview picture of its
 // own (scripts/make-myth-og.mjs) with the claim and no answer.
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -30,6 +31,9 @@ const cards = mythsInOrder(liveMyths(MYTHS, site.events), first);
 const title = t(lang, 'pages.myths.title');
 const shareTemplate = t(lang, 'myths.share_text');
 const abs = (path: string) => new URL(path, Astro.site).href;
+const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'outcome_hit', 'outcome_miss', 'outcome_part', 'next', 'finish', 'score', 'band_low', 'band_mid', 'band_high', 'share_title', 'share_ask', 'copied', 'best'] as const;
+const strings = Object.fromEntries(keys.map((k) => [k, t(lang, `myths.${k}`)]));
+strings.failed = t(lang, 'card.share_failed');
 const one = first ? cards.find((c) => c.id === first) : undefined;
 const og = one ? mythCardPath(one.id, lang) : undefined;
 const schemaCtx = schemaContext(lang, Astro.site);
@@ -53,16 +57,21 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
       }
     : { title: t(lang, 'myths.og_title_page') }}
 >
-  <article class="myths">
+  <article class="myths" data-game data-strings={JSON.stringify(strings)} data-share-url={`${abs(pagePath(lang, 'myths'))}?src=share`}>
     <h1>{title}</h1>
     <p class="myths__lead">{t(lang, 'myths.lead')}</p>
+    <p class="myths__best" data-best hidden></p>
+    <div class="myths__progress" data-progress role="group" aria-label={t(lang, 'myths.progress_label')} hidden>
+      <p class="myths__step" data-step></p>
+      <ol class="squares" data-squares></ol>
+    </div>
     <div class="myths__list">
       {
         cards.map((m) => {
           const story = events.get(m.story)!;
           const href = mythPath(lang, m.id);
           return (
-            <section class:list={['myth', { 'myth--first': m.id === first }]} id={m.id} data-myth={m.id} data-title={m.statement[lang]} aria-labelledby={`${m.id}-statement`}>
+            <section class:list={['myth', { 'myth--first': m.id === first }]} id={m.id} data-myth={m.id} data-verdict={m.verdict} data-title={m.statement[lang]} aria-labelledby={`${m.id}-statement`}>
               <div class="myth__head">
                 <span class="myth__place">{story.place.name[lang]}</span>
                 <a class="myth__anchor" href={`#${m.id}`} aria-label={t(lang, 'myths.link')}>#</a>
@@ -75,7 +84,10 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
               <details class="myth__answer" data-answer>
                 <summary class="myth__summary">{t(lang, 'myths.answer')}</summary>
                 <div class="myth__body" tabindex="-1" data-body>
-                  <MythVerdict lang={lang} verdict={m.verdict} />
+                  <p class="myth__verdict">
+                    <MythVerdict lang={lang} verdict={m.verdict} />
+                    <span class="myth__outcome" data-outcome></span>
+                  </p>
                   <p class="myth__text">{m.answer[lang]}</p>
                   <div class="myth__foot">
                   <a class="myth__story" href={storyPath(lang, story.slug[lang])}>
@@ -87,6 +99,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
                   </a>
                   <ShareButton lang={lang} url={abs(href)} shareUrl={abs(href)} title={title} text={withStatement(shareTemplate, m.statement[lang])} quiet />
                   </div>
+                  <button class="button myth__next" type="button" data-next hidden>{t(lang, 'myths.next')}</button>
                 </div>
               </details>
             </section>
@@ -94,6 +107,21 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
         })
       }
     </div>
+    <section class="myths__final" data-final aria-labelledby="myths-score" hidden>
+      <h2 class="myths__score" id="myths-score" tabindex="-1" data-score></h2>
+      <ol class="squares" data-final-squares></ol>
+      <p class="myths__band" data-band></p>
+      <div class="myths__misses" data-misses-box hidden>
+        <h3>{t(lang, 'myths.misses')}</h3>
+        <ul class="myths__miss-list" data-misses></ul>
+      </div>
+      <div class="myths__actions">
+        <button class="button" type="button" data-final-share>{t(lang, 'ui.share')}</button>
+        <button class="button button--secondary" type="button" data-again>{t(lang, 'myths.again')}</button>
+        <a class="button button--secondary" href={pagePath(lang, 'home')}>{t(lang, 'myths.read')}</a>
+      </div>
+      <p class="myths__status" role="status" data-final-status></p>
+    </section>
     <p class="myths__end">{t(lang, 'myths.end')} <a href={pagePath(lang, 'share')}>{t(lang, 'myths.end_link')}</a></p>
   </article>
 </BaseLayout>
@@ -263,6 +291,12 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
     width: 100%;
   }
 
+  /* In the game the card is not shared (that would give the answer away): only the result is; the anchor "#" goes too. Without JavaScript both stay. */
+  :global(html[data-js]) .myth__foot :global([data-share]),
+  :global(html[data-js]) .myth__anchor {
+    display: none;
+  }
+
   .myth__story {
     display: flex;
     align-items: center;
@@ -303,6 +337,93 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   .myth__story-more {
     color: var(--color-ink-muted);
     font-size: var(--text-sm);
+  }
+
+  /* The pieces of the game are for JavaScript: the script shows them, and `hidden` must win over the display of a button. */
+  .myths [hidden] {
+    display: none;
+  }
+
+  .myths__best,
+  .myths__step {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .myths__step {
+    font-family: var(--font-label);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+  }
+
+  .myths__progress {
+    display: grid;
+    gap: var(--space-2);
+    max-width: var(--measure);
+  }
+
+  .myth__verdict {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+    margin: 0;
+  }
+
+  .myth__outcome {
+    font-weight: var(--weight-strong);
+  }
+
+  .myth__next {
+    justify-self: stretch;
+  }
+
+  .myths__final {
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--measure);
+    padding: var(--space-4);
+    border: 1px solid var(--epoch-line);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .myths__final > * {
+    margin: 0;
+  }
+
+  .myths__score {
+    font-size: var(--text-3xl);
+    line-height: var(--leading-heading);
+  }
+
+  .myths__score:focus {
+    outline: none;
+  }
+
+  .myths__band {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    font-weight: var(--weight-strong);
+  }
+
+  .myths__miss-list {
+    display: grid;
+    gap: var(--space-2);
+    margin: var(--space-2) 0 0;
+    padding-inline-start: var(--space-5);
+  }
+
+  .myths__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .myths__status {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    overflow-wrap: anywhere;
   }
 
   .myths__end {

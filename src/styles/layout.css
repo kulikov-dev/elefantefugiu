@@ -360,3 +360,49 @@
 [data-scroll-fade][data-fade-end] {
   --fade-end: var(--scroll-fade-size);
 }
+
+/* A row of tiles (azulejos): the progress and the result of "Myth or fact" and the empty row of its block on the home page.
+   A hit is a solid blue tile with a white four-petal pattern, a miss a white tile with a thin blue frame, no answer yet a dashed frame (solid or empty tells them apart without colour). */
+.squares {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sq {
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-5);
+  height: var(--space-5);
+  border-radius: var(--radius-sm);
+}
+
+.sq svg {
+  width: 80%;
+  height: 80%;
+}
+
+.sq--empty {
+  border: var(--border-medium) dashed var(--color-border-strong);
+}
+
+.sq--hit {
+  border: 1px solid var(--color-tile-blue);
+  background: var(--color-tile-blue);
+  color: var(--color-tile-glyph);
+}
+
+.sq--miss {
+  border: 1px solid var(--color-tile-line);
+  background: var(--color-tile-white);
+}
+
+.sq--current {
+  outline: var(--border-medium) solid var(--color-ink);
+  outline-offset: var(--border-medium);
+}

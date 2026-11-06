@@ -1,12 +1,15 @@
-// Browser checks of "Myth or fact" (src/views/MythsView.astro, src/scripts/myths.ts, src/content/myths.yaml) against dist/ served by serve.mjs:   node myths.mjs [page answer nojs anchor card links layout]
+// Browser checks of "Myth or fact" (src/views/MythsView.astro, src/scripts/myths.ts, src/content/myths.yaml) against dist/ served by serve.mjs:   node myths.mjs [page answer game nojs anchor card links layout]
 //   page     the page in every language: a card for every claim of the data (those whose story is published), the two buttons, the footer link, the line at the end of About
-//   answer   the answer is hidden until a press; a press opens that card only, marks the pressed button, turns both off, shows the verdict, the text, the story with its title and Share;
-//            no words "right" / "wrong"; nothing is saved; one counter event `myth-<id>` and no other
+//   answer   with JavaScript one card is shown at a time; the answer is hidden until a press; a press opens that card only, marks the pressed button, turns both off, shows the verdict, whether the
+//            guess was right, the text, the story with its title and Next (no Share and no "#" on a card); a press saves nothing; one counter event `myth-<id>` and no other
+//   game     the row of squares (empty / right / wrong, a shape each, a label for a screen reader), the result screen (score, the line by the range, the misses with links), the best result,
+//            Share (the dialog of the browser or the clipboard, no answers in the text, ?src=share), Play again, the events `myths-finish` and `myths-share` once each
 //   nojs     without JavaScript: no buttons, every card is a <details> opened by "Answer"
 //   anchor   the address with #id leads to the card, the answer stays closed
 //   card     the address of one card: that card first and marked, noindex, canonical to the page of all of them, its own og:title and picture, hreflang between the languages
 //   links    the link of every answer leads to the story in the language of the page
-//   layout   no horizontal scroll at 360 px (closed and with every answer open)
+//   layout   no horizontal scroll at 360 px (a question, an answered question, the result)
+import { readFileSync } from 'node:fs';
 import { launchBrowser } from './browser.mjs';
 import { myths, published } from './data.mjs';
 
@@ -26,9 +29,13 @@ const SEG = { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' };
 const STORY_SEG = { pt: 'historia', en: 'story', ru: 'istoriya' };
 const ABOUT = { pt: 'sobre', en: 'about', ru: 'o-proekte' };
 const SHARE = { pt: 'conheco-uma-historia', en: 'share-a-story', ru: 'znayu-istoriyu' };
-const WRONG = /верно|ошибк|неверно|правильно|correct|wrong|incorrect|right!|certo!|errado|incorreto/i;
 if (myths.length < 2) throw new Error('The suite needs at least two claims in src/content/myths.yaml whose story is published (need: two claims).');
 const LIST = myths;
+const UI = Object.fromEntries(LANGS.map((l) => [l, JSON.parse(readFileSync(new URL(`../../src/i18n/${l}.json`, import.meta.url), 'utf8')).myths]));
+const fill = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
+// A press that is right (a "partly" claim takes either) or wrong, and what it counts as.
+const pickFor = (m, hit) => (hit ? (m.verdict === 'fact' ? 'fact' : 'myth') : m.verdict === 'myth' ? 'fact' : 'myth');
+const isHit = (m, pick) => m.verdict === 'part' || m.verdict === pick;
 const storyOf = (m) => published.find((e) => e.id === m.story);
 const pageUrl = (lang, id = '') => `${base}/${lang}/${SEG[lang]}/${id ? `${id}/` : ''}`;
 
@@ -73,8 +80,9 @@ if (want('page')) {
   for (const lang of LANGS) {
     const home = await browser.newPage();
     await home.goto(`${base}/${lang}/`, { waitUntil: 'networkidle0' });
-    const b = await home.evaluate((href) => { const s = document.querySelector('.home-myths'); const start = document.querySelector('[data-showcase]'); return s ? { h2: s.querySelector('h2')?.textContent.trim(), p: s.querySelectorAll('p').length, href: s.querySelector('a.button')?.getAttribute('href'), after: !start || Boolean(start.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING), btn: s.querySelector('a.button')?.textContent.trim() } : null; }, `/${lang}/${SEG[lang]}/`);
-    const WORDS = { pt: ['Mito ou verdade: consegue adivinhar o que aconteceu mesmo?', 'Jogar'], en: ['Myth or fact: can you tell what really happened?', 'Play'], ru: ['Миф или правда: угадаешь, что было на самом деле?', 'Играть'] }[lang];
+    const b = await home.evaluate((href) => { const s = document.querySelector('.home-myths'); const start = document.querySelector('[data-showcase]'); return s ? { tiles: [...s.querySelectorAll('ol.squares .sq--empty')].length, text: s.querySelector('p')?.textContent, h2: s.querySelector('h2')?.textContent.trim(), p: s.querySelectorAll('p').length, href: s.querySelector('a.button')?.getAttribute('href'), after: !start || Boolean(start.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING), btn: s.querySelector('a.button')?.textContent.trim() } : null; }, `/${lang}/${SEG[lang]}/`);
+    const WORDS = { pt: ['Mito ou verdade?', 'Jogar'], en: ['Myth or fact?', 'Play'], ru: ['Миф или правда?', 'Играть'] }[lang];
+    ok(`${lang}: the home page block has a row of empty tiles, one for each claim, and the count in its line`, b && b.tiles === LIST.length && b.text.includes(String(LIST.length)), JSON.stringify(b));
     ok(`${lang}: the home page has the block after "Where to start": the heading, one line and the button`, b && b.h2 === WORDS[0] && b.btn === WORDS[1] && b.p === 2 && b.href === `/${lang}/${SEG[lang]}/` && b.after, JSON.stringify(b));
     await home.close();
     const story = await browser.newPage();
@@ -96,6 +104,8 @@ if (want('answer')) {
     ok(`${lang}: every answer is closed and hidden`, closed && !(await visible(page, `${card} [data-body]`)) && !(await visible(page, `${card} .myth__story`)) && !(await visible(page, `${card} .verdict`)));
     // The title of the story and its picture are not in the page's text before the answer is shown.
     ok(`${lang}: the title of the story is not visible before the answer`, !(await page.evaluate((c) => { const el = document.querySelector(`${c} .myth__story-title`); return el ? el.checkVisibility() : false; }, card)));
+    const hidden = await page.$$eval('[data-myth]', (l) => l.map((c) => !c.checkVisibility()));
+    ok(`${lang}: one card is shown, the others are hidden`, hidden[0] === false && hidden.slice(1).every(Boolean), hidden.join());
     const before = await stored(page);
     await page.click(`${card} [data-pick="myth"]`);
     await wait(200);
@@ -107,33 +117,140 @@ if (want('answer')) {
         pressed: buttons.map((b) => b.getAttribute('aria-pressed')),
         disabled: buttons.map((b) => b.disabled),
         verdict: el.querySelector('.verdict')?.textContent.trim(),
+        outcome: el.querySelector('[data-outcome]')?.textContent.trim(),
+        next: el.querySelector('[data-next]')?.checkVisibility(),
         text: el.querySelector('.myth__text')?.textContent.trim(),
         title: el.querySelector('.myth__story-title')?.textContent.trim(),
         thumb: el.querySelector('.myth__thumb')?.complete,
-        share: Boolean(el.querySelector('[data-share-button], [data-share-link]')),
+        share: [...el.querySelectorAll('[data-share-button], [data-share-link]')].some((b) => b.checkVisibility()),
+        anchor: el.querySelector('.myth__anchor').checkVisibility(),
         otherOpen: document.querySelector(`[data-myth="${other}"] [data-answer]`).open,
         focus: document.activeElement === el.querySelector('[data-body]'),
-        wrong: el.innerText,
       };
     }, card, second.id);
     ok(`${lang}: the press opens the answer of that card only`, after.open && !after.otherOpen);
     ok(`${lang}: the pressed button is marked, the other is not, both are off`, after.pressed.join() === 'true,false' && after.disabled.every(Boolean), after.pressed.join());
-    ok(`${lang}: the answer shows the verdict, the text, the title of the story and Share`, after.verdict && after.text === first.answer[lang] && after.title === storyOf(first).title[lang] && after.share, JSON.stringify({ v: after.verdict, t: after.title }));
+    ok(`${lang}: the answer shows the verdict, the text, the title of the story and Next; the card has no Share and no "#" (the answer would be given away)`, after.verdict && after.text === first.answer[lang] && after.title === storyOf(first).title[lang] && !after.share && !after.anchor && after.next, JSON.stringify({ v: after.verdict, t: after.title }));
+    const expected = UI[lang][`outcome_${first.verdict === 'part' ? 'part' : first.verdict === 'myth' ? 'hit' : 'miss'}`];
+    ok(`${lang}: the answer says whether the guess was right`, after.outcome === expected, `${after.outcome} / ${expected}`);
     ok(`${lang}: the focus moves to the answer`, after.focus);
-    ok(`${lang}: nothing tells whether the guess was right`, !WRONG.test(after.wrong));
     ok(`${lang}: the other card has its own buttons still on`, await page.$eval(`[data-myth="${second.id}"] [data-pick]`, (b) => !b.disabled));
     // A second press does nothing more.
     await page.click(`${card} [data-pick="fact"]`).catch(() => {});
     const counted = await page.evaluate(() => window.__counted);
     ok(`${lang}: one counter event, myth-<id>, and no other`, counted.length === 1 && counted[0].path === `myth-${first.id}` && counted[0].event === true, JSON.stringify(counted));
-    ok(`${lang}: nothing is saved in the browser`, (await stored(page)) === before);
-    // The other button of another card: the verdict label is the data's, whichever button was pressed.
+    ok(`${lang}: a press saves nothing in the browser`, (await stored(page)) === before);
+    // Next shows the second card and hides the first; the verdict label is the data's, whichever button was pressed.
+    await page.click(`${card} [data-next]`);
+    ok(`${lang}: Next shows the next card and hides this one`, (await visible(page, `[data-myth="${second.id}"] [data-pick]`)) && !(await visible(page, card)));
     await page.click(`[data-myth="${second.id}"] [data-pick="fact"]`);
     const verdict = await page.$eval(`[data-myth="${second.id}"] .verdict`, (v) => v.textContent.trim());
     ok(`${lang}: the verdict of a card does not depend on the button pressed`, verdict.length > 2);
     ok(`${lang}: no script error`, page.errors.length === 0, page.errors.join('; '));
     await page.close();
   }
+}
+
+if (want('game')) {
+  for (const lang of LANGS) {
+    const N = LIST.length;
+    const ui = UI[lang];
+    const page = await open({ lang, width: 360 });
+    // The browser keeps the best result of the earlier languages: a first visit has none.
+    await page.evaluate(() => localStorage.removeItem('myths:best'));
+    await page.reload({ waitUntil: 'networkidle0' });
+    const squares = () => page.$$eval('[data-squares] .sq', (l) => l.map((e) => ({ cls: [...e.classList].filter((c) => c !== 'sq' && c !== 'sq--current').join(), current: e.classList.contains('sq--current'), icon: Boolean(e.querySelector('svg')), label: e.querySelector('.visually-hidden')?.textContent })));
+    const start = await squares();
+    ok(`${lang}: ${N} squares, all empty, the first is the current one, each has a label for a screen reader`, start.length === N && start.every((q) => q.cls === 'sq--empty' && !q.icon && q.label) && start[0].current && start.filter((q) => q.current).length === 1, JSON.stringify(start[0]));
+    ok(`${lang}: the step line says which question of how many`, (await page.$eval('[data-step]', (e) => e.textContent)) === fill(ui.step, { i: 1, total: N }));
+    ok(`${lang}: no best result on the first visit`, !(await visible(page, '[data-best]')));
+    const hits = [];
+    for (let i = 0; i < N; i += 1) {
+      const m = LIST[i];
+      const pick = pickFor(m, i % 2 === 0);
+      hits.push(isHit(m, pick));
+      await page.click(`[data-myth="${m.id}"] [data-pick="${pick}"]`);
+      const sq = (await squares())[i];
+      if (!(sq.cls === (hits[i] ? 'sq--hit' : 'sq--miss') && sq.icon === hits[i])) ok(`${lang}: square ${i + 1} is ${hits[i] ? 'a solid tile with the pattern' : 'a plain white tile'}`, false, JSON.stringify(sq));
+      const label = await page.$eval(`[data-myth="${m.id}"] [data-next]`, (b) => b.textContent.trim());
+      if (label !== (i === N - 1 ? ui.finish : ui.next)) ok(`${lang}: the button after question ${i + 1} reads "${i === N - 1 ? ui.finish : ui.next}"`, false, label);
+      await page.click(`[data-myth="${m.id}"] [data-next]`);
+    }
+    const score = hits.filter(Boolean).length;
+    const fin = await page.evaluate(() => ({
+      shown: document.querySelector('[data-final]').checkVisibility(),
+      cards: [...document.querySelectorAll('[data-myth]')].some((c) => c.checkVisibility()),
+      progress: document.querySelector('[data-progress]').checkVisibility(),
+      score: document.querySelector('[data-score]').textContent.trim(),
+      band: document.querySelector('[data-band]').textContent.trim(),
+      squares: [...document.querySelectorAll('[data-final-squares] .sq')].map((e) => e.className),
+      misses: [...document.querySelectorAll('[data-misses] a')].map((a) => a.getAttribute('href')),
+      focus: document.activeElement?.hasAttribute('data-score'),
+      buttons: [...document.querySelectorAll('[data-final] .button')].map((b) => b.textContent.trim()),
+      read: document.querySelector('[data-final] a.button')?.getAttribute('href'),
+      percent: /%/.test(document.querySelector('[data-final]').innerText),
+    }));
+    ok(`${lang}: the result screen replaces the cards and the progress`, fin.shown && !fin.cards && !fin.progress, JSON.stringify({ s: fin.shown, c: fin.cards, p: fin.progress }));
+    ok(`${lang}: the result says the score as "x of N", no percent`, fin.score === fill(ui.score, { score, total: N }) && !fin.percent, fin.score);
+    const ratio = score / N;
+    const band = ratio < 0.5 ? 'low' : ratio < 0.8 ? 'mid' : 'high';
+    ok(`${lang}: the line by the range (${band})`, fin.band === ui[`band_${band}`], fin.band);
+    ok(`${lang}: the row of squares repeats the game`, fin.squares.length === N && fin.squares.every((c, i) => c.includes(hits[i] ? 'sq--hit' : 'sq--miss')));
+    const missed = LIST.filter((_, i) => !hits[i]).map((m) => `/${lang}/${STORY_SEG[lang]}/${storyOf(m).slug[lang]}/`);
+    ok(`${lang}: "where you slipped" lists the stories of the wrong answers, with links`, fin.misses.join() === missed.join() && (await visible(page, '[data-misses-box]')) === (missed.length > 0), fin.misses.join());
+    ok(`${lang}: the focus is on the score`, fin.focus);
+    ok(`${lang}: Share, Play again, Read the stories (to the home page)`, fin.buttons.length === 3 && fin.buttons[1] === ui.again && fin.buttons[2] === ui.read && fin.read === `/${lang}/`, fin.buttons.join(' | '));
+    const counted = await page.evaluate(() => window.__counted.map((c) => c.path));
+    ok(`${lang}: the events are myth-<id> for each answer and one myths-finish`, counted.length === N + 1 && counted.filter((p) => p === 'myths-finish').length === 1 && LIST.every((m) => counted.includes(`myth-${m.id}`)), counted.join());
+    ok(`${lang}: the best result is kept`, (await page.evaluate(() => localStorage.getItem('myths:best'))) === JSON.stringify({ score, total: N }));
+    // Share without the dialog of the browser: the text goes to the clipboard, quietly; the link has ?src=share; the answers are not in it.
+    await page.evaluate(() => {
+      Object.defineProperty(navigator, 'share', { configurable: true, value: undefined });
+      Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async (t) => { window.__copied = t; } } });
+    });
+    await page.click('[data-final-share]');
+    await wait(100);
+    await page.click('[data-final-share]');
+    await wait(100);
+    const copied = await page.evaluate(() => ({ text: window.__copied ?? '', status: document.querySelector('[data-final-status]').textContent, shares: window.__counted.filter((c) => c.path === 'myths-share').length }));
+    const lines = copied.text.split('\n');
+    ok(`${lang}: the copied text has the score, the squares, the question and the link with ?src=share`, lines.length === 4 && lines[0] === fill(ui.share_title, { score, total: N }) && lines[1] === hits.map((h) => (h ? '🟦' : '⬜')).join('') && lines[2] === ui.share_ask && lines[3].includes(`/${lang}/${SEG[lang]}/`) && lines[3].endsWith('?src=share'), JSON.stringify(lines));
+    ok(`${lang}: the text has nothing of the claims or their answers`, LIST.every((m) => !copied.text.includes(m.answer[lang].slice(0, 25)) && !copied.text.includes(m.statement[lang].slice(0, 25))));
+    ok(`${lang}: the quiet note says "${ui.copied}"`, copied.status === ui.copied, copied.status);
+    ok(`${lang}: one myths-share event, however many times it is pressed`, copied.shares === 1, String(copied.shares));
+    // With the dialog of the browser: the title, the text and the link are given to it.
+    await page.evaluate(() => { window.__shared = null; Object.defineProperty(navigator, 'share', { configurable: true, value: async (d) => { window.__shared = d; } }); });
+    await page.click('[data-final-share]');
+    await wait(100);
+    const dialog = await page.evaluate(() => window.__shared);
+    ok(`${lang}: the dialog of the browser gets the title, the text and the link`, dialog && dialog.title === lines[0] && dialog.text === lines.slice(0, 3).join('\n') && dialog.url === lines[3], JSON.stringify(dialog));
+    // Play again: every card, one shown, clean, the best result on the start line.
+    await page.click('[data-again]');
+    await wait(100);
+    const again = await page.evaluate(() => ({
+      ids: [...document.querySelectorAll('[data-myth]')].map((c) => c.dataset.myth),
+      shown: [...document.querySelectorAll('[data-myth]')].filter((c) => c.checkVisibility()).length,
+      open: [...document.querySelectorAll('[data-answer]')].some((d) => d.open),
+      disabled: [...document.querySelectorAll('[data-pick]')].some((b) => b.disabled),
+      final: document.querySelector('[data-final]').checkVisibility(),
+      best: document.querySelector('[data-best]').textContent.trim(),
+      bestShown: document.querySelector('[data-best]').checkVisibility(),
+    }));
+    ok(`${lang}: Play again keeps every card, shows one, clean`, [...again.ids].sort().join() === LIST.map((m) => m.id).sort().join() && again.shown === 1 && !again.open && !again.disabled && !again.final, JSON.stringify({ n: again.ids.length, s: again.shown }));
+    ok(`${lang}: the best result is on the start line`, again.bestShown && again.best === fill(ui.best, { score, total: N }), again.best);
+    ok(`${lang}: all squares are empty again`, (await squares()).every((q) => q.cls === 'sq--empty'));
+    ok(`${lang}: no script error`, page.errors.length === 0, page.errors.join('; '));
+    await page.close();
+  }
+  // A result from a game of another length is not shown; a whole one is.
+  const page = await open({ lang: 'pt' });
+  await page.evaluate((n) => localStorage.setItem('myths:best', JSON.stringify({ score: n, total: n })), LIST.length);
+  await page.reload({ waitUntil: 'networkidle0' });
+  ok('the best result of an earlier visit is shown at the start', await visible(page, '[data-best]'));
+  await page.evaluate(() => localStorage.setItem('myths:best', '{"score":3,"total":999}'));
+  await page.reload({ waitUntil: 'networkidle0' });
+  ok('a best result from a game of another length is not shown', !(await visible(page, '[data-best]')));
+  await page.close();
 }
 
 if (want('nojs')) {
@@ -219,12 +336,20 @@ if (want('links')) {
 if (want('layout')) {
   for (const lang of LANGS) {
     const page = await open({ lang, width: 360 });
-    ok(`${lang} 360 px: no horizontal scroll`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-    await page.evaluate(() => document.querySelectorAll('[data-pick="myth"]').forEach((b) => b.click()));
+    const fits = () => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
+    ok(`${lang} 360 px: no horizontal scroll`, await fits());
+    await page.click(`[data-myth="${LIST[0].id}"] [data-pick="myth"]`);
     await wait(200);
-    ok(`${lang} 360 px: no horizontal scroll with every answer open`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), String(await page.evaluate(() => document.documentElement.scrollWidth)));
-    const small = await page.$$eval('.myth__button', (l) => l.filter((b) => b.getBoundingClientRect().height < 44).length);
+    ok(`${lang} 360 px: no horizontal scroll with the answer open`, await fits(), String(await page.evaluate(() => document.documentElement.scrollWidth)));
+    const small = await page.$$eval('.myth__button, .myth__next', (l) => l.filter((b) => b.checkVisibility() && b.getBoundingClientRect().height < 44).length);
     ok(`${lang} 360 px: the buttons are at least 44 px high`, small === 0);
+    for (let i = 0; i < LIST.length; i += 1) {
+      if (i > 0) await page.click(`[data-myth="${LIST[i].id}"] [data-pick="myth"]`);
+      await page.click(`[data-myth="${LIST[i].id}"] [data-next]`);
+    }
+    ok(`${lang} 360 px: no horizontal scroll on the result`, await fits(), String(await page.evaluate(() => document.documentElement.scrollWidth)));
+    const low = await page.$$eval('[data-final] .button', (l) => l.filter((b) => b.getBoundingClientRect().height < 44).length);
+    ok(`${lang} 360 px: the buttons of the result are at least 44 px high`, low === 0);
     await page.close();
   }
 }

@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { mythListSchema, type MythData } from '../../src/data/schemas';
 import { ROUTES, mythPath, pagePath } from '../../src/i18n/routes';
-import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, answerEvent, liveMyths, mythsInOrder, withStatement, wordCount } from '../../src/lib/myths';
+import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, answerEvent, bandOf, fill, liveMyths, mythsInOrder, outcomeOf, parseBest, shuffled, squaresLine, withStatement, wordCount } from '../../src/lib/myths';
 
 const myth = (id: string, story = `story-${id}`): MythData => ({ id, story, verdict: 'myth', statement: { pt: 'a', en: 'b', ru: 'в' }, answer: { pt: 'a', en: 'b', ru: 'в' } });
 
@@ -34,6 +34,47 @@ describe('rules', () => {
 
   it('names the counter event of an answer', () => {
     expect(answerEvent('lello')).toBe('myth-lello');
+  });
+});
+
+describe('the game', () => {
+  it('counts a right guess, a wrong one and a "partly" claim', () => {
+    expect(outcomeOf('myth', 'myth')).toBe('hit');
+    expect(outcomeOf('fact', 'myth')).toBe('miss');
+    expect(outcomeOf('part', 'fact')).toBe('part');
+    expect(outcomeOf('part', 'myth')).toBe('part');
+  });
+
+  it('picks the caption by the share of right answers: 0-4, 5-7, 8-10 of ten', () => {
+    const band = (n: number) => bandOf(n, 10);
+    expect([0, 4].map(band)).toEqual(['low', 'low']);
+    expect([5, 7].map(band)).toEqual(['mid', 'mid']);
+    expect([8, 10].map(band)).toEqual(['high', 'high']);
+    expect(bandOf(0, 0)).toBe('low');
+  });
+
+  it('writes the squares of a result for a message', () => {
+    expect(squaresLine([true, false, true])).toBe('🟦⬜🟦');
+  });
+
+  it('fills the marks of a template and leaves an unknown one', () => {
+    expect(fill('{score} of {total} {x}', { score: 7, total: 10 })).toBe('7 of 10 {x}');
+  });
+
+  it('shuffles into a copy with the same members', () => {
+    const list = [1, 2, 3, 4, 5];
+    const out = shuffled(list, () => 0);
+    expect([...out].sort()).toEqual(list);
+    expect(list).toEqual([1, 2, 3, 4, 5]);
+    expect(shuffled(list, () => 0.5)).toHaveLength(5);
+  });
+
+  it('reads the best result only if it is whole and for a game of this length', () => {
+    expect(parseBest('{"score":7,"total":10}', 10)).toEqual({ score: 7, total: 10 });
+    expect(parseBest('{"score":7,"total":8}', 10)).toBeUndefined();
+    expect(parseBest('{"score":11,"total":10}', 10)).toBeUndefined();
+    expect(parseBest('nope', 10)).toBeUndefined();
+    expect(parseBest(null, 10)).toBeUndefined();
   });
 });
 

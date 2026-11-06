@@ -23,9 +23,9 @@
     en: Eiffel built the Santa Justa Lift in Lisbon
     ru: Лифт Санта-Жушта в Лиссабоне построил Эйфель
   answer:
-    pt: Foi projetado por Raoul Mesnier du Ponsard, aluno de Eiffel. Daí a semelhança do ferro rendilhado com a Torre Eiffel.
-    en: It was designed by Raoul Mesnier du Ponsard, a student of Eiffel. That explains why the lacy ironwork looks like the Eiffel Tower.
-    ru: Его спроектировал Рауль Мениер дю Понсар, ученик Эйфеля. Отсюда и сходство ажурного железа с Эйфелевой башней.
+    pt: Foi projetado por Raoul Mesnier du Ponsard, engenheiro português de origem francesa. O ferro rendilhado ao gosto de Eiffel deu origem à lenda.
+    en: It was designed by Raoul Mesnier du Ponsard, a Portuguese engineer of French descent. The lacy ironwork in Eiffel’s style gave rise to the legend.
+    ru: Его спроектировал Рауль Мениер дю Понсар, португальский инженер французского происхождения. Ажурное железо в духе Эйфеля и породило легенду.
 
 - id: maria-pia
   story: ponte-maria-pia-1877
@@ -59,9 +59,9 @@
     en: The ukulele was invented in Hawaii
     ru: Укулеле придумали на Гавайях
   answer:
-    pt: O antepassado dele é a braguinha madeirense, levada para lá em 1879 por emigrantes da Madeira. Foram os havaianos que lhe deram o nome ukulele.
-    en: Its ancestor is the Madeiran braguinha, brought over in 1879 by emigrants from Madeira. Hawaiians gave the instrument the name ukulele.
-    ru: "Его предок — мадейрская брагинья: её в 1879 году привезли переселенцы с Мадейры. Гавайцы дали инструменту имя укулеле."
+    pt: O antepassado dele é a braguinha madeirense, levada em 1879 por emigrantes. O ukulele foi feito em Honolulu por marceneiros madeirenses, e o nome deram-no os havaianos.
+    en: Its ancestor is the Madeiran braguinha, brought over in 1879 by emigrants. Madeiran carpenters built the ukulele in Honolulu, and Hawaiians gave it its name.
+    ru: "Его предок — мадейрская брагинья, которую в 1879 году привезли переселенцы. Укулеле сделали в Гонолулу мадейрские столяры, а имя дали гавайцы."
 
 - id: vipasca
   story: termas-vipasca
