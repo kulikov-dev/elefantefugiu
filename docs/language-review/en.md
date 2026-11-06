@@ -311,3 +311,7 @@
 - `event/torres-vedras-1810` [story]: «through a land stripped of food» → «through a countryside stripped of food» ('Countryside' естественнее, чем 'a land'.)
 - `ui/map` [map.locating]: «Finding where you are…» → «Finding your location…» (Короче и стандартнее.)
 - `ui/family` [family.opt_12_hint]: «No difficult topics: repression, persecution, death» → «No difficult topics such as repression, persecution, or death» (Фраза без связки.)
+
+## 06.11.2026: слой «История» после правок связок (партии А и Б)
+
+Переведено ИИ с новых ru-текстов, автор не читал: слой «История» en у 35 историй (`docs/story-logic-batch-a.md`, `docs/story-logic-batch-b.md`), плюс «Подробнее» en у motim-companhia-1757, batalha-da-salga-1581, restauracao-1640, braguinha-ukulele-1879, elevador-santa-justa и название en у ouro-sao-francisco-porto («The Church a Begging Order Covered in Gold», Title Case по глоссарию). В `npm run lang:pending` это «en (not read)» (пометки `lang_review.en` у этих историй нет). После чтения: `npx tsx scripts/lang-mark.ts en event/<id>`.
