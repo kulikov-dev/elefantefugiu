@@ -203,6 +203,20 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     text-transform: uppercase;
   }
 
+  /* The look stays small, the target is a touch target tall: an invisible layer of the button reaches up to the picture above (the gap under it, no further) and the rest down. */
+  .panno__share {
+    --share-height: calc(var(--text-sm) * var(--leading-body));
+    position: relative;
+  }
+
+  .panno__share::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: calc(-1 * var(--space-2));
+    inset-block-end: calc(-1 * (var(--touch-target) - var(--share-height) - var(--space-2) + var(--border-medium)));
+  }
+
   .panno__share:hover {
     background: var(--color-accent-tint);
   }
