@@ -54,28 +54,32 @@ hook:
   en: Hawaii’s ukulele sailed in from Madeira.
   ru: Гавайская укулеле приплыла с Мадейры.
 story:
-  pt: "Em 1879, o navio «Ravenscrag» levou da Madeira para o Havai centenas de emigrantes que iam
-    trabalhar nas plantações de açúcar. Entre eles iam três marceneiros: Manuel Nunes, Augusto Dias
-    e José do Espírito Santo. Os emigrantes levaram também uma pequena viola de quatro cordas, a
-    braguinha. Acabados os contratos, os marceneiros abriram oficinas em Honolulu. Com a madeira
-    havaiana de koa faziam braguinhas à sua maneira, e os havaianos chamaram-lhes «ukulele»."
+  pt: >-
+    Em 1879, o navio «Ravenscrag» levou da Madeira para o Havai centenas de emigrantes que iam
+    trabalhar nas plantações de açúcar. Entre eles iam três marceneiros. Os emigrantes levaram
+    também uma pequena viola, a braguinha. Acabados os contratos, os marceneiros abriram oficinas em
+    Honolulu. Com a madeira havaiana de koa faziam novos instrumentos: o corpo da braguinha e a
+    afinação do rajão, outro instrumento madeirense. Agradaram ao rei Kalakaua, e os havaianos
+    chamaram-lhes «ukulele». Segundo uma versão, quer dizer «pulga saltitante»: seria o aspeto dos
+    dedos dos músicos.
   en: "In 1879, the ship Ravenscrag carried hundreds of emigrants from Madeira to Hawaii to work on
     sugar plantations. Among them were three cabinetmakers: Manuel Nunes, Augusto Dias, and José do
     Espírito Santo. The emigrants also brought along a small four-string guitar, the braguinha. Once
     their contracts were up, the cabinetmakers opened workshops in Honolulu. They built braguinhas
     their own way from Hawaiian koa wood, and Hawaiians called them “ukulele.”"
-  ru: "В 1879 году корабль «Равенскраг» привёз из Мадейры на Гавайи сотни переселенцев, которые ехали
-    работать на сахарных плантациях. Среди них были три столяра-краснодеревщика: Мануэл Нуниш,
-    Аугушту Диаш и Жозе ду Эшпириту Санту. Привезли переселенцы и маленькую четырёхструнную гитару,
-    брагинью. Отработав контракты, столяры открыли в Гонолулу мастерские. Из гавайского дерева коа
-    они делали брагиньи на новый лад, и гавайцы назвали их «укулеле»."
+  ru: >-
+    В 1879 году корабль «Равенскраг» привёз из Мадейры на Гавайи сотни переселенцев, ехавших на
+    сахарные плантации. Среди них были три столяра-краснодеревщика. Привезли переселенцы и маленькую
+    гитару, брагинью. Отработав контракты, столяры открыли в Гонолулу мастерские. Из гавайского
+    дерева коа они делали новые инструменты: корпус от брагиньи, строй от другого мадейрского
+    инструмента, ражана. Их полюбил король Калакауа, а гавайцы назвали их «укулеле». По одной из
+    версий, по-гавайски это значит «прыгающая блоха»: так выглядели пальцы музыкантов.
 more:
   pt: >-
-    O navio saiu do Funchal a 23 de abril e chegou a Honolulu em agosto de 1879. O ukulele herdou da
-    braguinha o corpo pequeno e de outro instrumento madeirense, o rajão de cinco cordas, a
-    afinação. O rei Kalakaua e a sua irmã Liliʻuokalani adoraram os novos instrumentos, que depressa
-    se tornaram havaianos. A própria palavra, segundo a versão mais conhecida, quer dizer «pulga
-    saltitante»: seria o aspeto dos dedos do músico.
+    Os marceneiros eram Manuel Nunes, Augusto Dias e José do Espírito Santo. O navio saiu do Funchal
+    a 23 de abril e chegou a Honolulu em agosto de 1879. O ukulele herdou da braguinha o corpo
+    pequeno e de outro instrumento madeirense, o rajão de cinco cordas, a afinação. O rei Kalakaua e
+    a sua irmã Liliʻuokalani adoraram os novos instrumentos, que depressa se tornaram havaianos.
 
 
     Na Madeira a braguinha continua a tocar-se, em grupos folclóricos e nas festas.
@@ -97,11 +101,10 @@ more:
     In 2018, Augusto Dias’s descendants placed a bronze plaque on his grave in Honolulu honoring him
     as one of the first ukulele makers.
   ru: >-
-    Корабль вышел из Фуншала 23 апреля и пришёл в Гонолулу в августе 1879 года. Укулеле взяла у
-    брагиньи маленький корпус, а настройку у другого мадейрского инструмента, пятиструнного ражана.
-    Король Калакауа и его сестра Лилиуокалани полюбили новые инструменты, и они быстро стали
-    гавайскими. Само слово, по самой известной версии, значит «прыгающая блоха»: так будто бы
-    выглядели пальцы музыканта.
+    Столярами были Мануэл Нуниш, Аугушту Диаш и Жозе ду Эшпириту Санту. Корабль вышел из Фуншала 23
+    апреля и пришёл в Гонолулу в августе 1879 года. Укулеле взяла у брагиньи маленький корпус, а
+    настройку у другого мадейрского инструмента, пятиструнного ражана. Король Калакауа и его сестра
+    Лилиуокалани полюбили новые инструменты, и они быстро стали гавайскими.
 
 
     На Мадейре брагинью играют до сих пор, в фольклорных ансамблях и на праздниках.
@@ -146,15 +149,13 @@ image:
   focus: "45% 35%"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '92d78b5ba249'
-  en:
-    date: '2026-10-31'
-    hash: '3368778b63f9'
   ru:
     date: '2026-10-31'
     hash: '2b416cadd7c9'

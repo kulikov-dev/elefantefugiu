@@ -331,7 +331,7 @@ for (const { item: ev, file, stem } of events) {
   }
 
   // text length
-  const limits = { hook: [0, 12], story: [40, 90], more: [0, 250] } as const;
+  const limits = { hook: [0, 12], story: [40, 150], more: [0, 250] } as const;
   for (const field of ['hook', 'story', 'more'] as const) {
     for (const lang of langsOf(ev)) {
       const value = ev[field][lang] ?? '';

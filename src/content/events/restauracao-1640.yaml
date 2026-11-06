@@ -48,20 +48,25 @@ hook:
   en: Sixty years of Spanish kings ended in a single morning.
   ru: Шестьдесят лет испанских королей закончились за одно утро.
 story:
-  pt: Desde 1580, Portugal era governado pelos reis de Espanha. Os impostos subiam, e os fidalgos
+  pt: >-
+    Desde 1580, Portugal era governado pelos reis de Espanha. Os impostos subiam, e os fidalgos
     portugueses eram mandados combater por interesses alheios. No outono de 1640, um grupo de
     conjurados nobres decidiu agir. Na manhã de 1 de dezembro entraram no paço em Lisboa, prenderam
-    a vice-rainha espanhola, a duquesa de Mântua, e aclamaram rei o duque de Bragança. Ele tornou-se
-    D. João IV.
+    a vice-rainha espanhola, a duquesa de Mântua, e aclamaram rei o duque de Bragança, descendente
+    da dinastia de Avis e chefe de uma das casas mais nobres do reino. Ele tornou-se D. João IV.
+    Manter a independência revelou-se mais difícil: a guerra com Espanha durou ainda 28 anos.
   en: From 1580, Portugal was ruled by the kings of Spain. Taxes kept rising, and Portuguese nobles
     were sent off to fight for someone else’s interests. In the fall of 1640, a group of noble
     conspirators made up their minds. On the morning of December 1 they walked into the palace in
     Lisbon, arrested the Spanish vicereine, the Duchess of Mantua, and proclaimed the Duke of
     Braganza king. He became John IV.
-  ru: С 1580 года Португалией правили короли Испании. Налоги росли, португальских дворян отправляли
+  ru: >-
+    С 1580 года Португалией правили короли Испании. Налоги росли, португальских дворян отправляли
     воевать за чужие интересы. Осенью 1640 года группа знатных заговорщиков решилась. Утром 1
     декабря они вошли во дворец в Лиссабоне, арестовали испанскую наместницу, герцогиню Мантуанскую,
-    и провозгласили королём герцога Браганса. Он стал Жуаном IV.
+    и провозгласили королём герцога Браганса, потомка Ависской династии и главу одного из самых
+    знатных родов страны. Он стал Жуаном IV. Удержать независимость оказалось труднее: война с
+    Испанией шла ещё 28 лет.
 more:
   pt: >-
     Os conjurados ficaram na história como os «Quarenta Conjurados». A última reunião antes da
@@ -74,8 +79,7 @@ more:
     obelisco em honra deste dia chama-se mesmo Praça dos Restauradores.
 
 
-    Manter a independência foi mais difícil do que recuperá-la: a guerra com Espanha durou mais 28
-    anos, até à paz de 1668.
+    A guerra com Espanha só terminou com a paz de 1668.
   en: >-
     The plotters went down in history as the “Forty Conspirators.” They held their last meeting before the uprising in the house of Antão de Almada, near Rossio Square. Today it’s the Palace
     of Independence.
@@ -100,8 +104,7 @@ more:
     Реставраторов.
 
 
-    Удержать независимость оказалось труднее, чем вернуть: война с Испанией шла ещё 28 лет, до мира
-    1668 года.
+    Война с Испанией закончилась миром только в 1668 году.
 sources:
   - title: "Wikipedia: Forty Conspirators"
     url: https://en.wikipedia.org/wiki/Forty_Conspirators
@@ -140,15 +143,13 @@ detail_image:
   source_url: "https://commons.wikimedia.org/wiki/File:Joao_IV_proclaimed_king.jpg"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'cd84d36892be'
-  en:
-    date: '2026-10-31'
-    hash: '7fa465aa719b'
   ru:
     date: '2026-10-31'
     hash: 'b408c01bc932'

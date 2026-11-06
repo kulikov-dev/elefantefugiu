@@ -227,7 +227,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
     <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id}>
       <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
-      <p slot="story">{event.story[lang]}</p>
+      <Fragment slot="story">{event.story[lang].split(/\n+/).map((paragraph) => <p>{paragraph}</p>)}</Fragment>
       <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
       <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
       <Fragment slot="after">

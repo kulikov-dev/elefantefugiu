@@ -47,9 +47,20 @@ hook:
   en: For twelve years sailors feared one cape. Gil Eanes brought back flowers.
   ru: За этим мысом, говорили моряки, не возвращаются. Эанеш вернулся — с цветами.
 story:
-  pt: O cabo Bojador, na costa do Saara Ocidental, era tido como um lugar de onde não se voltava. Dizia-se que para lá dele não havia gente, o mar era raso e as correntes não deixavam o navio regressar. O Infante D. Henrique mandou lá navio após navio, e todos voltaram para trás. Em 1433 voltou também Gil Eanes, de Lagos. O Infante enviou-o de novo e, em 1434, ele passou. Como prova, trouxe ao Infante plantas a que chamavam «rosas de Santa Maria».
+  pt: >-
+    O cabo Bojador, no Saara Ocidental, era tido como um lugar de onde não se voltava: para lá não
+    havia gente, o mar era raso e as correntes prendiam os navios. O Infante D. Henrique mandou lá
+    navios, e todos voltaram, em 1433 também Gil Eanes. Enviado de novo, em 1434 dobrou o cabo e
+    regressou vivo. Trouxe as «rosas de Santa Maria» como prova de que desembarcara: gente não
+    havia. O medo era uma invenção, e os portugueses seguiram para sul.
   en: Cape Bojador, on the coast of Western Sahara, was a place of no return, until Gil Eanes passed it in 1434. Sailors said that beyond it lay a land without people, a shallow sea, and currents that would never let a ship return. Prince Henry sent ship after ship, and every one turned back. In 1433 Gil Eanes of Lagos failed too. The prince sent him again, and in 1434 he got through. As proof, he brought the prince plants the Portuguese called “Saint Mary’s roses.”
-  ru: Моряки XV века верили, что мыс Божадор на берегу Западной Сахары — край, откуда не возвращаются. Говорили, что за ним нет людей, море мелкое, а течения не отпустят корабль назад. Инфант Энрике годами посылал туда корабли, и все поворачивали. В 1433 году повернул и Жил Эанеш из Лагуша. Инфант отправил его снова, и в 1434 году он обогнул мыс. Людей на берегу не было, и в доказательство Жил Эанеш привёз инфанту растения, которые в Португалии звали «розами Святой Марии».
+  ru: >-
+    Моряки XV века верили, что мыс Божадор на берегу Западной Сахары — край, откуда не возвращаются:
+    за ним нет людей, море мелкое, а течения не отпустят корабль. Инфант Энрике годами посылал туда
+    корабли, и все поворачивали, в 1433 году и Жил Эанеш. Инфант отправил его снова, и в 1434 году
+    он обогнул мыс и вернулся живым. Людей на берегу не было, но он привёз «розы Святой Марии» как
+    доказательство, что там высаживался. Страх оказался выдумкой, и португальцы пошли дальше вдоль
+    Африки.
 more:
   pt: >-
     Sabe-se tudo isto pela crónica de Gomes Eanes de Zurara, escrita por volta de 1453. Zurara
@@ -119,15 +130,13 @@ image:
 related: []
 status: ready
 published: '2026-10-25'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: '26a1b65dc666'
-  en:
-    date: '2026-10-28'
-    hash: '0f90cf35c331'
   ru:
     date: '2026-10-28'
     hash: 'b818dc0e21d9'

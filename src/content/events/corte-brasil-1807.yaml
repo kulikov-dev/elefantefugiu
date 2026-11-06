@@ -48,23 +48,26 @@ hook:
   en: The court sailed to Brazil and left its library on the quay.
   ru: Принц-регент не стал воевать и увёз весь двор за океан.
 story:
-  pt: "Em novembro de 1807, as tropas de Napoleão avançavam sobre Lisboa e a corte portuguesa
-    decidiu partir. O príncipe regente D. João não se rendeu nem combateu: decidiu levar toda a
-    corte para o Brasil. Em dois dias, em Belém, embarcaram a rainha, os ministros, os arquivos e as
-    carruagens. Seguiram com a corte, segundo as estimativas, entre 10 e 15 mil pessoas. Faltava
-    vento, e a frota ficou no rio até 29 de novembro. No dia seguinte, o general Junot entrou na
-    cidade."
+  pt: >-
+    Em novembro de 1807, as tropas de Napoleão avançavam sobre Lisboa. A rainha D. Maria I estava
+    doente, e governava o príncipe regente D. João, que não se rendeu nem combateu: decidiu levar a
+    corte para o Brasil. Em Belém embarcaram a rainha, os ministros e os arquivos, entre 10 e 15 mil
+    pessoas. Sem vento, a frota ficou no rio até 29 de novembro. No dia seguinte Junot entrou na
+    cidade, e a corte, sob escolta britânica, partiu: o Rio foi capital do império durante treze
+    anos.
   en: "As Napoleon’s army closed in on Lisbon in November 1807, the Portuguese court boarded ships
     for Brazil. Prince Regent John would neither surrender nor fight. Instead he decided to move the
     entire court to Brazil. In two days at Belém, the queen, the ministers, the archives, and the
     carriages were loaded onto ships. Between 10,000 and 15,000 people went with them, depending on
     the estimate. There was no wind, and the fleet waited on the river until November 29. The next
     day General Junot marched into the city."
-  ru: "В ноябре 1807 года армия Наполеона шла на Лиссабон, и португальский двор бежал за океан.
-    Принц-регент Жуан не стал ни сдаваться, ни воевать: он решил перевезти в Бразилию весь двор. За
-    два дня в Белене на корабли поднялись королева и министры, а следом погрузили архивы и кареты.
-    Вместе с ними уплыли, по разным оценкам, от 10 до 15 тысяч человек. Ветра не было, и флот
-    простоял на реке до 29 ноября. На следующий день в город вошёл генерал Жюно."
+  ru: >-
+    В ноябре 1807 года армия Наполеона шла на Лиссабон. Королева Мария I была тяжело больна, и
+    страной правил принц-регент Жуан. Он не стал ни сдаваться, ни воевать, а решил перевезти в
+    Бразилию весь двор. За два дня в Белене на корабли поднялись королева и министры, следом
+    погрузили архивы и кареты. Уплыли, по оценкам, 10–15 тысяч человек. Ветра не было, и флот
+    простоял на реке до 29 ноября. На следующий день в город вошёл генерал Жюно, а двор под
+    британской охраной дошёл до Бразилии: Рио-де-Жанейро на тринадцать лет стал столицей империи.
 more:
   pt: >-
     No fim de novembro saiu o decreto da mudança da corte para o Rio de Janeiro. O embarque começou
@@ -177,15 +180,13 @@ detail_image:
 related: []
 status: ready
 published: '2026-10-25'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: '0f52fd42d2ea'
-  en:
-    date: '2026-10-28'
-    hash: 'a7174afefbc0'
   ru:
     date: '2026-10-28'
     hash: '253f25f5b7ad'

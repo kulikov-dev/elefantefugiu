@@ -44,21 +44,24 @@ hook:
   en: Rome couldn’t defeat the shepherd. So it bought his friends.
   ru: Победить пастуха Рим не смог. Тогда он подкупил его друзей.
 story:
-  pt: Viriato era um pastor lusitano e tornou-se o chefe contra quem Roma lutou oito anos. Atraía as
-    legiões para as serras e para emboscadas e acabou por obrigar Roma a assinar a paz. Foi então
-    que o general romano Cepião escolheu outro caminho. Três companheiros de Viriato foram ter com
-    ele para negociar, e Cepião prometeu-lhes uma recompensa pela morte do chefe. De regresso,
-    mataram Viriato enquanto dormia. Sem o seu chefe, os lusitanos renderam-se pouco depois.
+  pt: >-
+    Viriato era um pastor lusitano e tornou-se o chefe contra quem Roma lutou oito anos. Atraía as
+    legiões para emboscadas e obrigou Roma a assinar a paz. O general Cepião obteve do Senado o
+    direito de voltar à guerra e decidiu eliminar o chefe por mãos alheias. Três companheiros de
+    Viriato foram negociar com ele, e Cepião prometeu-lhes uma recompensa pela morte do chefe.
+    Mataram Viriato enquanto dormia, mas, ao pedirem o dinheiro, segundo a tradição, ouviram: «Roma
+    não paga a traidores.» Sem o seu chefe, os lusitanos renderam-se.
   en: Viriathus was a Lusitanian shepherd who became the leader Rome fought for eight years. He lured
     the legions into the mountains and into ambushes, and in the end he forced Rome to sign a peace.
     That’s when the Roman general Caepio tried another way. Three of Viriathus’s companions came to
     him to negotiate, and Caepio promised them a reward for their leader’s death. When they got
     back, they killed Viriathus in his sleep. Without him, the Lusitanians soon surrendered.
-  ru: Вириат был пастухом из лузитан, а стал вождём, с которым Рим воевал восемь лет. Он заманивал
-    легионы в горы и засады и в конце концов заставил Рим подписать мир. Тогда римский полководец
-    Цепион пошёл другим путём. Трое приближённых Вириата приехали к нему на переговоры, и он
-    пообещал им награду за смерть вождя. Вернувшись, они убили Вириата во сне. Без вождя лузитаны
-    вскоре сдались.
+  ru: >-
+    Вириат был пастухом из лузитан, а стал вождём, с которым Рим воевал восемь лет. Он заманивал
+    легионы в засады и заставил Рим подписать мир. Римский полководец Цепион добился у сената права
+    снова воевать и решил убрать вождя чужими руками. Трое приближённых Вириата приехали к нему на
+    переговоры, и он пообещал им награду за смерть вождя. Они убили Вириата во сне, но, придя за
+    деньгами, по преданию, услышали: «Рим не платит предателям». Без вождя лузитаны вскоре сдались.
 more:
   pt: >-
     A história chega-nos pelos historiadores gregos Apiano e Diodoro, que divergem nos pormenores:
@@ -121,15 +124,13 @@ image:
   focus: "30% 50%"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'ea11f18c05df'
-  en:
-    date: '2026-10-31'
-    hash: '6464ec768ba1'
   ru:
     date: '2026-10-31'
     hash: '4f444d60fa5b'

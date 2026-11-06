@@ -51,12 +51,17 @@ hook:
     Чтобы спасти портвейн, в долине Дору поставили 335 гранитных столбов.
 story:
   pt: >-
-    Nos anos 1750, o comércio do vinho do Porto estava em crise: excesso de vinho, falsificações e
-    um negócio dominado por comerciantes britânicos. Em 1756, Sebastião José de Carvalho e Melo, o
-    futuro marquês de Pombal, criou uma companhia com o monopólio do comércio com Inglaterra e o
-    Brasil, e arrancaram-se os sabugueiros. Dois anos depois foi erguido o primeiro dos 335 marcos
-    de granito que delimitam a região, muitas vezes apontada como a primeira região vinhateira
-    demarcada do mundo.
+    Nos anos 1750, o vinho do Porto caiu em desgraça. Havia demasiado vinho no Douro, a procura e os
+    preços desceram, e o vinho fraco era tingido com sumo de sabugueiro para parecer escuro e
+    encorpado. Vendiam-no sobretudo comerciantes britânicos no Porto.
+
+    Em 1756, Sebastião José de Carvalho e Melo, o futuro marquês de Pombal, criou uma companhia com
+    o monopólio do comércio com Inglaterra e o Brasil. Limitou a produção e fixava os preços da uva.
+    Os sabugueiros do vale foram arrancados, para que não houvesse com que dar cor ao vinho.
+
+    Depois traçou-se a fronteira da região: em 1758 foi erguido o primeiro dos 335 marcos de
+    granito, e o Douro tornou-se a primeira região vinhateira do mundo com limites oficialmente
+    demarcados.
   en: >-
     By the 1750s the port wine trade was in crisis: too much wine, too many fakes, and most of it
     sold by British merchants in Porto. In 1756 Sebastião José de Carvalho e Melo, the future
@@ -64,11 +69,16 @@ story:
     the elder trees were uprooted. Two years later the first of 335 granite pillars went up to mark
     the region’s borders, in what is often called the world’s first demarcated wine region.
   ru: >-
-    К 1750-м портвейн переживал кризис: вина и подделок было слишком много, а торговали им в
-    основном британские купцы в Порту. В 1756 году Себастьян Жозе де Карвалью-и-Мелу, будущий маркиз
-    Помбал, создал компанию с монополией на торговлю с Англией и Бразилией, и бузину вырвали. Через
-    два года поставили первый из 335 гранитных столбов, отмечавших границы региона, который часто
-    называют первым в мире винным регионом с официально закреплёнными границами.
+    К 1750-м портвейн попал в беду. Вина в Дору стало слишком много, спрос и цены упали, а слабое
+    вино подкрашивали соком бузины, чтобы оно выглядело густым и тёмным. Торговали им в основном
+    британские купцы в Порту.
+
+    В 1756 году Себастьян Жозе де Карвалью-и-Мелу, будущий маркиз Помбал, создал компанию с
+    монополией на торговлю с Англией и Бразилией. Она ограничила производство и назначала цены на
+    виноград. Бузину в долине выкорчевали, чтобы подкрашивать было нечем.
+
+    Потом провели границу региона: в 1758 году поставили первый из 335 гранитных столбов, и Дору
+    стал первым в мире винным регионом с официально закреплёнными границами.
 more:
   pt: |-
     Nos marcos estavam gravados «Feitoria» e um ano (nos primeiros, 1758), e cerca de cem dos 335
@@ -150,15 +160,13 @@ related:
   - motim-companhia-1757
 status: ready
 published: '2026-10-21'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-28'
     hash: '988b15930663'
-  en:
-    date: '2026-10-28'
-    hash: 'a24ef2e855ea'
   ru:
     date: '2026-10-28'
     hash: 'a58940401726'

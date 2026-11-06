@@ -48,21 +48,24 @@ hook:
   en: Manuel sent the pope an elephant. All Rome came to see him.
   ru: Папе римскому подарили слона, и слон встал перед ним на колени.
 story:
-  pt: "Em 1514, D. Manuel I mandou uma embaixada a Roma, com presentes para o novo papa, Leão X. O
-    presente principal era um jovem elefante branco da Índia, com cerca de quatro anos. Na receção,
-    o elefante ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no
-    Vaticano. O elefante chamava-se Hanno: desfilava nas procissões, dedicavam-lhe versos e toda a
-    Roma corria para o ver."
+  pt: >-
+    Em 1514, D. Manuel I, querendo ganhar as boas graças do novo papa, Leão X, mandou uma embaixada
+    a Roma com presentes. O principal era um jovem elefante branco da Índia. Na receção, o elefante
+    ajoelhou-se diante do papa e barriu. Leão X ficou encantado e instalou o elefante no Vaticano. O
+    elefante chamava-se Hanno: desfilava nas procissões, dedicavam-lhe versos e toda a Roma corria
+    para o ver. Dois anos depois morreu; Leão X escreveu-lhe ele próprio o epitáfio, e Rafael pintou
+    o elefante numa parede.
   en: "In 1514 King Manuel I sent an embassy to Rome with gifts for the new pope, Leo X. The main
     gift was a young white elephant from India, about four years old. At the audience the elephant
     knelt before the pope and trumpeted. Leo X was delighted and gave him a home in the Vatican. The
     elephant was named Hanno. He marched in festive processions, poets wrote verses about him, and
     all of Rome came running to see him."
-  ru: "В 1514 году король Мануэл I отправил в Рим посольство с подарками для нового папы Льва X.
-    Главным подарком был молодой белый слон из Индии, которому было около четырёх лет. На приёме
-    слон преклонил колени перед папой и затрубил. Лев X был в восторге и поселил слона в Ватикане.
-    Слона звали Ганнон: его водили в праздничных шествиях, ему посвящали стихи, а посмотреть на него
-    сбегался весь Рим."
+  ru: >-
+    В 1514 году король Мануэл I, желая расположить к себе нового папу Льва X, отправил в Рим
+    посольство с подарками. Главным был молодой белый слон из Индии. На приёме слон преклонил колени
+    перед папой и затрубил. Лев X был в восторге и поселил слона в Ватикане. Слона звали Ганнон: его
+    водили в шествиях, ему посвящали стихи, а посмотреть на него сбегался весь Рим. Через два года
+    он умер, Лев X сам сочинил ему эпитафию, а Рафаэль нарисовал слона на стене.
 more:
   pt: >-
     A embaixada era chefiada pelo navegador Tristão da Cunha. O elefante entrou em Roma em março de
@@ -166,15 +169,13 @@ related:
   - rinoceronte-1515
 status: ready
 published: '2026-10-25'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-27'
     hash: 'f2b6e84442aa'
-  en:
-    date: '2026-10-27'
-    hash: 'd5a7e63d0340'
   ru:
     date: '2026-10-27'
     hash: 'bcce831a7ec2'

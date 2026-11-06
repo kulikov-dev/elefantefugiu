@@ -51,19 +51,22 @@ hook:
   en: The night shift at Mafra’s great library has wings.
   ru: Старые книги в Мафре по ночам охраняют летучие мыши.
 story:
-  pt: "A biblioteca do Palácio de Mafra, a noroeste de Lisboa, tem cerca de 36 mil volumes em
-    estantes de madeira até ao teto. De dia está silenciosa e vazia. Mas à noite, de trás das
-    estantes, saem pequenos morcegos que caçam os insetos que roem o papel e as encadernações de
-    couro. Diz-se que sempre foi assim, mas ninguém sabe quando os morcegos se instalaram na
-    biblioteca."
+  pt: >-
+    A biblioteca do Palácio de Mafra, a noroeste de Lisboa, tem cerca de 36 mil volumes em estantes
+    de madeira até ao teto. De dia está silenciosa e vazia. Mas à noite, de trás das estantes, saem
+    pequenos morcegos que caçam os insetos que roem o papel e as encadernações de couro. Assim, os
+    morcegos servem de guardas à biblioteca. Diz-se que sempre foi assim, mas ninguém sabe quando se
+    instalaram, nem ninguém mediu a ajuda que dão aos livros.
   en: "Northwest of Lisbon, the palace-convent of Mafra holds a library of about 36,000 volumes on
     wooden shelves that reach the ceiling. By day it is quiet and empty. But at night small bats fly
     out from behind the shelves and hunt the insects that eat paper and leather bindings. Some say
     the bats have always been there, but nobody knows when they moved in."
-  ru: "Во дворце-монастыре Мафры, к северо-западу от Лиссабона, есть огромная библиотека: около 36
+  ru: >-
+    Во дворце-монастыре Мафры, к северо-западу от Лиссабона, есть огромная библиотека: около 36
     тысяч томов на деревянных полках до самого потолка. Днём здесь тихо и пусто. А ночью из-за полок
     вылетают маленькие летучие мыши и охотятся на насекомых, которые точат бумагу и кожаные
-    переплёты. Говорят, так было всегда, но когда мыши поселились в библиотеке, не знает никто."
+    переплёты. Так мыши служат библиотеке сторожами. Говорят, так было всегда, но когда они
+    поселились, не знает никто, и пользу их для книг никто не измерял.
 more:
   pt: >-
     O palácio foi concebido por D. João V em 1711. A biblioteca foi decorada já na segunda metade do
@@ -152,15 +155,13 @@ image:
 related: []
 status: ready
 published: '2026-10-25'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '25cad18ee630'
-  en:
-    date: '2026-10-31'
-    hash: '7232970aa175'
   ru:
     date: '2026-10-31'
     hash: 'df8b27ec76d1'

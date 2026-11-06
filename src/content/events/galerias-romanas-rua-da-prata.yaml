@@ -59,20 +59,24 @@ hook:
   en: Lisbon’s flooded Roman galleries.
   ru: Затопленные римские галереи Лиссабона.
 story:
-  pt: "Depois do terramoto de 1755 a Baixa foi reconstruída de raiz, e em 1771 os construtores deram
-    com galerias romanas subterrâneas debaixo da Rua da Prata. Ainda hoje se discute para que
-    serviam: talvez fossem as fundações de um grande edifício na encosta. As galerias estão cheias
-    de água. Duas vezes por ano a água é bombeada, abre-se uma tampa no meio da rua e as pessoas
-    descem mesmo por baixo da calçada."
+  pt: >-
+    Depois do terramoto de 1755 a Baixa foi reconstruída de raiz, e em 1771 os construtores deram
+    com galerias romanas debaixo da Rua da Prata. Ainda hoje se discute para que serviam: talvez
+    fossem as fundações de um grande edifício na encosta. As galerias estão cheias de água e não se
+    pode esvaziá-las mais vezes: sustentam os prédios por cima. Por isso a água é bombeada duas
+    vezes por ano, abre-se uma tampa no meio da rua e grupos com o Museu de Lisboa descem por baixo
+    da calçada.
   en: "After the 1755 earthquake, the Baixa was rebuilt from scratch, and in 1771 builders came across
     Roman underground galleries beneath Rua da Prata. People still argue about what they were for:
     maybe the foundations of a large building on the slope. The galleries are full of water. Twice a
     year the water is pumped out, a hatch opens in the middle of the street, and people climb down
     right under the pavement."
-  ru: "После землетрясения 1755 года Байшу отстраивали заново, и в 1771 году строители наткнулись под
+  ru: >-
+    После землетрясения 1755 года Байшу отстраивали заново, и в 1771 году строители наткнулись под
     Руа-да-Прата на римские подземные галереи. Зачем римляне их построили, спорят до сих пор: может
-    быть, это фундамент большого здания на склоне. Галереи заполнены водой. Два раза в год воду
-    откачивают, посреди улицы открывают люк, и горожане спускаются прямо под мостовую."
+    быть, это фундамент большого здания на склоне. Галереи заполнены водой, а откачивать её чаще
+    нельзя: они держат дома сверху. Поэтому два раза в год воду убирают, посреди улицы открывают
+    люк, и группы с сотрудниками Музея Лиссабона спускаются под мостовую.
 more:
   pt: >-
     No século XX os lisboetas conheciam o sítio como a «cisterna da Rua da Prata» e iam lá buscar
@@ -123,15 +127,13 @@ image:
   focus: "50% 50%"
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: '0642c40f3e2d'
-  en:
-    date: '2026-10-31'
-    hash: 'dcc5edc80a09'
   ru:
     date: '2026-10-31'
     hash: 'd5578da844e0'

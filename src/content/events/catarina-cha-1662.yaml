@@ -44,18 +44,22 @@ hook:
   en: A Portuguese princess brought England tea and, in her dowry, Bombay.
   ru: Португальская принцесса привезла в Англию чай, а в приданое — Бомбей.
 story:
-  pt: "Em 1662, D. Catarina de Bragança, filha de D. João IV, casou com o rei Carlos II de Inglaterra.
-    O dote era enorme: dois milhões de cruzados, Tânger, Bombaim e o direito de os mercadores
-    ingleses negociarem no Brasil e na Índia. Levou também o hábito português de beber chá. Na corte
-    começaram a imitar a rainha, e o chá passou de remédio raro a bebida da moda."
+  pt: >-
+    Em 1662, D. Catarina de Bragança, filha de D. João IV, casou com o rei Carlos II de Inglaterra,
+    com um dote enorme. Levou também o hábito português de beber chá: em Portugal ele chegara
+    através dos mercadores de Macau, e a nobreza já o bebia. Em Londres o chá vendia-se nas casas de
+    café como remédio caro, e Catarina bebia-o todos os dias, rodeada das suas damas. Os cortesãos
+    começaram a imitá-la, e o chá passou de remédio a bebida da moda.
   en: "In 1662, Catherine of Braganza, daughter of John IV, married King Charles II of England. Her
     dowry was huge: two million cruzados, Tangier, Bombay, and the right for English merchants to
     trade in Brazil and India. She also brought the Portuguese habit of drinking tea. The court
     began to copy the queen, and tea went from a rare medicine to a fashionable drink."
-  ru: "В 1662 году Катарина Брагансская, дочь Жуана IV, вышла замуж за английского короля Карла II. Её
-    приданое было огромным: два миллиона крузадо, Танжер, Бомбей и право английским купцам торговать
-    в Бразилии и Индии. Привезла она и португальскую привычку пить чай. При дворе стали подражать
-    королеве, и чай из редкого лекарства превратился в модный напиток."
+  ru: >-
+    В 1662 году Катарина Брагансская, дочь Жуана IV, вышла замуж за английского короля Карла II с
+    огромным приданым. Привезла она и португальскую привычку пить чай: в Португалии он появился
+    через купцов из Макао, и знать пила его уже тогда. В Лондоне чай продавали в кофейнях как
+    дорогое снадобье, а она пила его каждый день, в кругу дам. Придворные стали подражать, и чай из
+    лекарства превратился в модный напиток.
 more:
   pt: >-
     Em Londres já se vendia chá antes dela. Em 1658, uma casa de café junto à Bolsa Real publicou o
@@ -145,15 +149,13 @@ related:
   - restauracao-1640
 status: ready
 published: '2026-10-30'
+updated: '2026-11-06'
 placeholder: false
 ru_ready: true
 lang_review:
   pt:
     date: '2026-10-31'
     hash: 'b9a697003426'
-  en:
-    date: '2026-10-31'
-    hash: '0c61fdd09f38'
   ru:
     date: '2026-10-31'
     hash: '7786a81daba9'

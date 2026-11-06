@@ -80,7 +80,7 @@ describe('ru_ready in the schema', () => {
       const words = (s: string) => s.trim().split(/\s+/).length;
       expect(words(e.hook.ru), `${n} hook`).toBeLessThanOrEqual(12);
       expect(words(e.story.ru), `${n} story`).toBeGreaterThanOrEqual(40);
-      expect(words(e.story.ru), `${n} story`).toBeLessThanOrEqual(90);
+      expect(words(e.story.ru), `${n} story`).toBeLessThanOrEqual(150);
       expect(words(e.more.ru), `${n} more`).toBeLessThanOrEqual(250);
     }
   });
