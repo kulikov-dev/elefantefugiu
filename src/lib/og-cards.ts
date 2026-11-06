@@ -52,3 +52,14 @@ export function pannoCardPath(epochId: string, cwd = process.cwd()): string | un
     return undefined;
   }
 }
+
+/** The preview picture of one claim of "Myth or fact" in a language (scripts/make-myth-og.mjs: 1200x630 JPEG, the claim and two buttons, no answer), a path inside public/; undefined when there is none. */
+export function mythCardPath(id: string, lang: Lang, cwd = process.cwd()): string | undefined {
+  try {
+    const manifest = JSON.parse(readFileSync(join(cwd, '.og-cache/myths.json'), 'utf8')) as Record<string, Partial<Record<Lang, string>>>;
+    const rel = manifest[id]?.[lang];
+    return rel && existsSync(join(cwd, 'public', rel)) ? rel : undefined;
+  } catch {
+    return undefined;
+  }
+}

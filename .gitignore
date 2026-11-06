@@ -14,6 +14,8 @@ scripts/qa/out/
 .og-cache/
 public/og-cards/
 public/og-panno/
+# preview pictures of the claims of "Myth or fact" (scripts/make-myth-og.mjs)
+public/og-myths/
 
 # local scratch of the scripts (not part of the build, tests or CI)
 scripts/.tmp/

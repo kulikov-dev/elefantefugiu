@@ -14,6 +14,8 @@ const walk = (dir) => readdirSync(dir).flatMap((n) => (statSync(join(dir, n)).is
 // The page of a holiday (in each language that has its text) is noindex outside its window; in the window it is a page like the others (src/views/FestaView.astro).
 const FESTA_PAGE = /^(pt|en|ru)\/festa\/[^/]+\/index\.html$/;
 const ALWAYS_NOINDEX = /^(pt\/corrigir|en\/report|ru\/oshibka|pt\/surpreende-me|en\/surprise-me|ru\/udivi-menya)\/index\.html$/;
+// One card of "Myth or fact" (/ru/mif-ili-pravda/<id>/): the same page as the page of all of them, out of the search so that only the page of all of them is found.
+const MYTH_CARD = /^(pt\/mito-ou-verdade|en\/myth-or-fact|ru\/mif-ili-pravda)\/[^/]+\/index\.html$/;
 
 const xml = readFileSync(join(dist, 'sitemap.xml'), 'utf8');
 const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
@@ -31,7 +33,7 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
   if (canonical) canonicals.add(canonical);
   if (/<meta name="robots" content="[^"]*noindex/.test(html)) {
-    if (!ALWAYS_NOINDEX.test(path) && !FESTA_PAGE.test(path)) notes.push(path);
+    if (!ALWAYS_NOINDEX.test(path) && !FESTA_PAGE.test(path) && !MYTH_CARD.test(path)) notes.push(path);
     continue;
   }
   indexable += 1;

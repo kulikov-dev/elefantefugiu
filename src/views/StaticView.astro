@@ -19,7 +19,7 @@ interface Props {
 const { lang, pageKey } = Astro.props;
 const page = STATIC_PAGES[pageKey][lang];
 const title = t(lang, `pages.${pageKey}.title`);
-const LINKS = ['about', 'method', 'report', 'share', 'legal', 'map'] as const;
+const LINKS = ['about', 'method', 'report', 'share', 'legal', 'map', 'myths'] as const;
 const link = (key: string) =>
   (LINKS as readonly string[]).includes(key) ? { href: pagePath(lang, key as (typeof LINKS)[number]), label: t(lang, `pages.${key}.title`) } : undefined;
 // {{stories}}: how many stories are published, counted from the data (with its noun in the language of the page).

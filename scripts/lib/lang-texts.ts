@@ -84,6 +84,12 @@ function collection(name: 'epochs' | 'threads'): TextItem[] {
   });
 }
 
+/** "Myth or fact": the claims and answers are one unit (`myths`), read together. */
+function myths(): TextItem[] {
+  const file = 'src/content/myths.yaml';
+  return fromYaml('myths', file, readYaml(join(root, file)), LANG_LIST);
+}
+
 function staticPages(): TextItem[] {
   const out: TextItem[] = [];
   for (const [page, byLang] of Object.entries(STATIC_PAGES)) {
@@ -119,7 +125,7 @@ function interfaceStrings(): TextItem[] {
 
 /** All the texts of the site that are read. */
 export function collectTexts(): TextItem[] {
-  return [...stories(), ...collection('epochs'), ...collection('threads'), ...staticPages(), ...interfaceStrings()];
+  return [...stories(), ...collection('epochs'), ...collection('threads'), ...myths(), ...staticPages(), ...interfaceStrings()];
 }
 
 /** The hash of the text of one language of a unit: over every field in the order of the inventory, with the field name. */

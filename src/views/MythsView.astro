@@ -1,0 +1,315 @@
+---
+// "Myth or fact": /pt/mito-ou-verdade/, /en/myth-or-fact/, /ru/mif-ili-pravda/ (docs/spec.md 5.8). Claims a tourist might say, each tied to one of our stories (src/content/myths.yaml).
+// A card shows the claim and two buttons; a press opens the answer (the verdict, a few words, the story with its picture, Share) and turns the buttons off. Nothing is kept and nothing
+// is counted but one anonymous event `myth-<id>` per answer. Without JavaScript the card is a <details> opened by "Answer".
+// The same view makes the page of one card (/ru/mif-ili-pravda/<id>/): all the cards, that one first and marked; noindex, canonical to the page of all of them, a preview picture of its
+// own (scripts/make-myth-og.mjs) with the claim and no answer.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MythVerdict from '../components/MythVerdict.astro';
+import Pic from '../components/Pic.astro';
+import ShareButton from '../components/ShareButton.astro';
+import { altPaths, mythPath, pagePath, storyPath, withBase, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import { OG_CARD, mythCardPath } from '../lib/og-cards';
+import { liveMyths, mythsInOrder, withStatement } from '../lib/myths';
+import { MYTHS } from '../lib/myths-data';
+import { pageNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+  /** The id of the claim whose own address this is; it goes first and is marked. */
+  first?: string | undefined;
+}
+
+const { lang, first } = Astro.props;
+const site = await loadSite();
+const events = new Map(site.events.map((e) => [e.id, e]));
+const cards = mythsInOrder(liveMyths(MYTHS, site.events), first);
+const title = t(lang, 'pages.myths.title');
+const shareTemplate = t(lang, 'myths.share_text');
+const abs = (path: string) => new URL(path, Astro.site).href;
+const one = first ? cards.find((c) => c.id === first) : undefined;
+const og = one ? mythCardPath(one.id, lang) : undefined;
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')), name: title, description: t(lang, 'pages.myths.description'), type: 'WebPage' });
+---
+<BaseLayout
+  lang={lang}
+  pageKey="myths"
+  title={title}
+  noindex={one !== undefined}
+  schema={one ? undefined : schema}
+  alternates={one ? altPaths((l) => mythPath(l, one.id)) : undefined}
+  canonicalTo={one ? altPaths((l) => pagePath(l, 'myths')) : undefined}
+  preview={one
+    ? {
+        title: withStatement(t(lang, 'myths.og_title'), one.statement[lang]),
+        description: t(lang, 'myths.og_description'),
+        imageUrl: og ? withBase(og) : undefined,
+        imageSize: og ? OG_CARD : undefined,
+        imageAlt: one.statement[lang],
+      }
+    : { title: t(lang, 'myths.og_title_page') }}
+>
+  <article class="myths">
+    <h1>{title}</h1>
+    <p class="myths__lead">{t(lang, 'myths.lead')}</p>
+    <div class="myths__list">
+      {
+        cards.map((m) => {
+          const story = events.get(m.story)!;
+          const href = mythPath(lang, m.id);
+          return (
+            <section class:list={['myth', { 'myth--first': m.id === first }]} id={m.id} data-myth={m.id} data-title={m.statement[lang]} aria-labelledby={`${m.id}-statement`}>
+              <div class="myth__head">
+                <span class="myth__place">{story.place.name[lang]}</span>
+                <a class="myth__anchor" href={`#${m.id}`} aria-label={t(lang, 'myths.link')}>#</a>
+              </div>
+              <p class="myth__statement" id={`${m.id}-statement`}>{m.statement[lang]}</p>
+              <div class="myth__buttons" role="group" aria-label={t(lang, 'myths.question')}>
+                <button class="myth__button" type="button" data-pick="myth" aria-pressed="false">{t(lang, 'myths.myth')}</button>
+                <button class="myth__button" type="button" data-pick="fact" aria-pressed="false">{t(lang, 'myths.fact')}</button>
+              </div>
+              <details class="myth__answer" data-answer>
+                <summary class="myth__summary">{t(lang, 'myths.answer')}</summary>
+                <div class="myth__body" tabindex="-1" data-body>
+                  <MythVerdict lang={lang} verdict={m.verdict} />
+                  <p class="myth__text">{m.answer[lang]}</p>
+                  <div class="myth__foot">
+                  <a class="myth__story" href={storyPath(lang, story.slug[lang])}>
+                    {story.image && <Pic picture={story.image} lang={lang} class="myth__thumb" widths={[96, 192]} sizes="6rem" quality={70} decorative crop />}
+                    <span class="myth__story-text">
+                      <span class="myth__story-title">{story.title[lang]}</span>
+                      <span class="myth__story-more">{t(lang, 'myths.full_story')}</span>
+                    </span>
+                  </a>
+                  <ShareButton lang={lang} url={abs(href)} shareUrl={abs(href)} title={title} text={withStatement(shareTemplate, m.statement[lang])} quiet />
+                  </div>
+                </div>
+              </details>
+            </section>
+          );
+        })
+      }
+    </div>
+    <p class="myths__end">{t(lang, 'myths.end')} <a href={pagePath(lang, 'share')}>{t(lang, 'myths.end_link')}</a></p>
+  </article>
+</BaseLayout>
+
+<script>
+  import '../scripts/myths';
+</script>
+
+<style>
+  .myths > * + * {
+    margin-block-start: var(--space-4);
+  }
+
+  .myths__lead {
+    max-width: var(--measure);
+    color: var(--color-ink-muted);
+    font-size: var(--text-lg);
+  }
+
+  .myths__list {
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--measure);
+  }
+
+  .myth {
+    padding: var(--space-4);
+    border: 1px solid var(--epoch-line);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+    scroll-margin-block-start: var(--space-5);
+  }
+
+  /* The card the address points at (the page of one card: it is first; a link with #id: the target). */
+  .myth--first,
+  .myth:target {
+    border-color: var(--epoch-accent);
+    border-inline-start: var(--epoch-accent-bar);
+  }
+
+  .myth__head {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: var(--color-ink-muted);
+    font-family: var(--font-label);
+    font-size: var(--text-xs);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+  }
+
+  .myth__anchor {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: var(--touch-target);
+    min-height: var(--touch-target);
+    margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .myth__anchor:hover {
+    color: var(--color-accent);
+  }
+
+  .myth__statement {
+    margin-block: var(--space-2) var(--space-4);
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-strong);
+    line-height: var(--leading-heading);
+  }
+
+  /* The two buttons are for JavaScript; without it the <details> below is the way to the answer (and its summary is shown). */
+  .myth__buttons {
+    display: none;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  :global(html[data-js]) .myth__buttons {
+    display: flex;
+  }
+
+  :global(html[data-js]) .myth__summary {
+    display: none;
+  }
+
+  .myth__button {
+    min-width: calc(var(--touch-target) * 2.5);
+    min-height: var(--touch-target);
+    padding: var(--space-2) var(--space-5);
+    border: var(--border-medium) solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-label);
+    font-size: var(--text-base);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .myth__button:hover:not(:disabled) {
+    background: var(--color-ink);
+    color: var(--color-surface);
+  }
+
+  /* After the answer both are off: the one pressed stays marked, the other fades. */
+  .myth__button:disabled {
+    cursor: default;
+    opacity: 0.45;
+  }
+
+  .myth__button[aria-pressed='true']:disabled {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-surface);
+    opacity: 1;
+  }
+
+  .myth__summary {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    padding-inline: var(--space-4);
+    border: var(--border-medium) solid var(--color-border-strong);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-label);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .myth__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .myth__body {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-3);
+    margin-block-start: var(--space-4);
+    padding-block-start: var(--space-4);
+    border-block-start: 1px dashed var(--epoch-line);
+  }
+
+  .myth__body:focus {
+    outline: none;
+  }
+
+  .myth__text {
+    max-width: var(--measure);
+  }
+
+  /* The story and the quiet Share on one line (Share at the right); when they do not fit, Share goes under the story, at the left. */
+  .myth__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-3);
+    width: 100%;
+  }
+
+  .myth__story {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    max-width: 100%;
+    padding: var(--space-2);
+    border: 1px solid var(--epoch-line);
+    border-radius: var(--radius-md);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .myth__story:hover .myth__story-title {
+    color: var(--color-accent);
+  }
+
+  .myth__story :global(.myth__thumb) {
+    flex: none;
+    width: calc(var(--touch-target) * 1.5);
+    height: var(--touch-target);
+    border-radius: var(--radius-sm);
+    background: var(--epoch-line);
+    filter: var(--image-filter);
+    object-fit: cover;
+  }
+
+  .myth__story-text {
+    display: grid;
+    min-width: 0;
+  }
+
+  .myth__story-title {
+    font-family: var(--font-heading);
+    font-weight: var(--weight-strong);
+    line-height: var(--leading-heading);
+  }
+
+  .myth__story-more {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .myths__end {
+    max-width: var(--measure);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+</style>

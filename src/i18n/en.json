@@ -48,6 +48,10 @@
     "surprise": {
       "title": "Surprise me",
       "description": "Not sure where to start? Get a random story from Portugal’s past in seconds."
+    },
+    "myths": {
+      "title": "Myth or fact",
+      "description": "What guides, guidebooks, and friends say about Portugal: pick what you think, then read what really happened. Behind every answer is one of our stories."
     }
   },
   "footer": {
@@ -57,7 +61,8 @@
     "share": "Know a story?",
     "legal": "Legal information",
     "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
-    "privacy": "No ads, no cookies"
+    "privacy": "No ads, no cookies",
+    "myths": "Myth or fact"
   },
   "home": {
     "epochs_heading": "Eras",
@@ -221,7 +226,7 @@
   },
   "panno": {
     "hint": "Each story reveals part of the panel",
-        "zoom": "Open the panel full size",
+    "zoom": "Open the panel full size",
     "close": "Close",
     "share": "Share",
     "copied": "Link copied",
@@ -231,7 +236,7 @@
     "to_epoch": "Go to the era",
     "og_title": "“{name}” era panel",
     "og_description": "Each story reveals a piece of the picture. Build your own",
-"continue": "Keep reading",
+    "continue": "Keep reading",
     "done": "Era complete"
   },
   "plural": {
@@ -381,5 +386,22 @@
   "festa": {
     "history": "The story of this day",
     "traditions": "Traditions and facts"
+  },
+  "myths": {
+    "lead": "What guides, guidebooks, and friends say about Portugal. Pick what you think, then see what really happened. Behind every answer is one of our stories.",
+    "og_title_page": "Myth or Fact: What People Say About Portugal",
+    "og_title": "Myth or fact: {statement}?",
+    "og_description": "The answer and the full story at the link",
+    "share_text": "{statement}. Myth or fact?",
+    "og_label": "Myth or fact?",
+    "answer": "Answer",
+    "myth": "Myth",
+    "fact": "Fact",
+    "part": "Partly",
+    "question": "Choose an answer",
+    "full_story": "Read the full story →",
+    "link": "Link to this claim",
+    "end": "Heard something else you’d like checked?",
+    "end_link": "Tell us →"
   }
 }

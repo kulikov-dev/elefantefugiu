@@ -39,7 +39,8 @@
   "start": 20,
   "meanwhile": 40,
   "panno": 25,
-  "festas": 15
+  "festas": 15,
+  "myths": 25
  },
  "shards": [
   [
@@ -87,7 +88,8 @@
    "start",
    "meanwhile",
    "panno",
-   "festas"
+   "festas",
+   "myths"
   ]
  ]
 }

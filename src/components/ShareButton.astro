@@ -9,11 +9,17 @@ interface Props {
   /** Absolute address of the card, used by the link without JavaScript. */
   url: string;
   title: string;
+  /** The line that goes with the link when the browser shares (a claim of "Myth or fact"); without it only the title and the link. */
+  text?: string | undefined;
+  /** Address to share when it is not the one the reader is on (the card of a claim: its own address); without it the current address. */
+  shareUrl?: string | undefined;
+  /** A quiet text link (small caps, muted, accent on hover) instead of the framed button. */
+  quiet?: boolean;
 }
 
-const { lang, url, title } = Astro.props;
+const { lang, url, title, text, shareUrl, quiet = false } = Astro.props;
 ---
-<span class="share" data-share data-title={title} data-copied={t(lang, 'card.share_copied')} data-failed={t(lang, 'card.share_failed')}>
+<span class:list={['share', { 'share--quiet': quiet }]} data-share data-title={title} data-text={text} data-url={shareUrl} data-copied={t(lang, 'card.share_copied')} data-failed={t(lang, 'card.share_failed')}>
   <a class="button button--secondary" href={url} data-share-link>{t(lang, 'ui.share')}</a>
   <button class="button button--secondary" type="button" data-share-button hidden>{t(lang, 'ui.share')}</button>
   <span class="share__status" role="status" data-share-status></span>
@@ -25,6 +31,23 @@ const { lang, url, title } = Astro.props;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2) var(--space-3);
+  }
+
+  .share--quiet .button {
+    min-height: var(--touch-target);
+    padding-inline: var(--space-2);
+    border: 0;
+    background: none;
+    color: var(--color-ink-muted);
+    font-family: var(--font-label);
+    font-size: var(--text-xs);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+  }
+
+  .share--quiet .button:hover {
+    background: none;
+    color: var(--color-accent);
   }
 
   .share__status {
@@ -65,11 +88,11 @@ const { lang, url, title } = Astro.props;
 
     button.addEventListener('click', async () => {
       // Current address, so an open layer (#detalhes) is part of the shared link.
-      const url = location.href;
+      const url = root.dataset.url ? new URL(root.dataset.url, location.href).href : location.href;
       const title = root.dataset.title ?? document.title;
       if (typeof navigator.share === 'function') {
         try {
-          await navigator.share({ title, url });
+          await navigator.share(root.dataset.text ? { title, text: root.dataset.text, url } : { title, url });
           return;
         } catch (error) {
           if (error instanceof DOMException && error.name === 'AbortError') return; // the person closed the dialog

@@ -38,6 +38,13 @@
   --color-label-legend-ink: light-dark(#5c3b00, #f2d9a0);
   --color-label-debated-bg: light-dark(#f1e6f6, #261a2d);
   --color-label-debated-ink: light-dark(#522463, #ddc4ea);
+  /* Verdicts of "Myth or fact": myth terracotta, fact green, partly ochre (text on tint). */
+  --color-verdict-myth-bg: light-dark(#f8e0d4, #3a1d12);
+  --color-verdict-myth-ink: light-dark(#7a2a10, #f6c4ae);
+  --color-verdict-fact-bg: light-dark(#e2f1e4, #14281c);
+  --color-verdict-fact-ink: light-dark(#14532d, #bfe6cb);
+  --color-verdict-part-bg: light-dark(#f4e6b8, #33280b);
+  --color-verdict-part-ink: light-dark(#5a4200, #ecd27f);
   /* "Test text" notice. */
   --color-notice-border: light-dark(#6b5200, #e0b24a);
   --color-notice-bg: light-dark(#fff4c2, #2b2410);
@@ -488,6 +495,12 @@
     --color-label-legend-ink: #5c3b00;
     --color-label-debated-bg: #f1e6f6;
     --color-label-debated-ink: #522463;
+    --color-verdict-myth-bg: #f8e0d4;
+    --color-verdict-myth-ink: #7a2a10;
+    --color-verdict-fact-bg: #e2f1e4;
+    --color-verdict-fact-ink: #14532d;
+    --color-verdict-part-bg: #f4e6b8;
+    --color-verdict-part-ink: #5a4200;
     --color-notice-border: #6b5200;
     --color-notice-bg: #fff4c2;
     --color-notice-ink: #3d2f00;

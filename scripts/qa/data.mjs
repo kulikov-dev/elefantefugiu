@@ -16,6 +16,8 @@ export const events = readdirSync(`${content}events`)
   .map((f) => ({ ...parse(readFileSync(`${content}events/${f}`, 'utf8')), file: f }));
 export const published = events.filter((e) => isLive(e));
 export const fixtures = events.filter((e) => e.status === 'draft');
+/** The claims of "Myth or fact" whose story is on the site (src/content/myths.yaml), in the order of the file. */
+export const myths = read('myths.yaml').filter((m) => published.some((e) => e.id === m.story));
 export const epochs = read('epochs.yaml').sort((a, b) => a.order - b.order);
 export const threads = read('threads.yaml');
 

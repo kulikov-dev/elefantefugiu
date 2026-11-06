@@ -3,7 +3,7 @@
 // threads, buttons) are written as the site itself names them; the differences from the files are listed in docs/STATE.md.
 // The "Who makes this" section and the data controller line in Legal information are the owner's own wording (not from the files).
 //
-// Inline markup: {{about}} {{method}} {{report}} {{share}} {{legal}} {{map}} link to a page of the site (the link text is the title of that
+// Inline markup: {{about}} {{method}} {{report}} {{share}} {{legal}} {{map}} {{myths}} link to a page of the site (the link text is the title of that
 // page; {{method|text}} gives the link another text, for a case ending); {{email}} is the contact address as a link; {{stories}} is
 // the number of published stories with its noun ("13 stories"), counted from the data; {{ready}} and {{soon}} are the sentences about the ready epochs (their number and names) and about those to come (src/lib/ready-epochs.ts); **text** is bold. Everything else is plain text.
 import type { Lang } from '../i18n/routes';
@@ -83,7 +83,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Como ajudar',
           paragraphs: [],
           items: ['Encontrou uma imprecisão? Diga-me em {{report}}.', 'Conhece uma história que ainda não está aqui? Envie-a pelo {{share|formulário}}.', 'Gostou? Partilhe uma história com alguém que vai visitar Portugal. É a melhor ajuda.'],
-          after: ['Escreva-me pelo {{report|formulário de contacto}}.', 'Conhece uma história da sua terra? {{share|Conte-me}}.'],
+          after: ['Escreva-me pelo {{report|formulário de contacto}}.', 'Conhece uma história da sua terra? {{share|Conte-me}}.', 'Quer pôr à prova o que sabe sobre Portugal? {{myths|Mito ou verdade}}.'],
         },
       ],
     },
@@ -133,7 +133,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'How to help',
           paragraphs: [],
           items: ['Spotted a mistake? Tell me via {{report}}.', 'Know a story that’s missing here? Send it through {{share|this form}}.', 'Enjoyed it? Share a story with someone heading to Portugal. That’s the best help of all.'],
-          after: ['Write to me through {{report|the contact form}}.', 'Know a story from your hometown? {{share|Tell me}}.'],
+          after: ['Write to me through {{report|the contact form}}.', 'Know a story from your hometown? {{share|Tell me}}.', 'Want to test what you know about Portugal? {{myths|Myth or fact}}.'],
         },
       ],
     },
@@ -183,7 +183,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Как помочь',
           paragraphs: [],
           items: ['Нашли неточность? Напишите мне через {{report}}.', 'Знаете историю, которой тут не хватает? Пришлите её через {{share|эту форму}}.', 'Понравилось? Поделитесь историей с тем, кто собирается в Португалию. Это лучшая помощь.'],
-          after: ['Пишите через {{report|форму обратной связи}}.', 'Знаете историю своего города? {{share|Расскажите мне}}.'],
+          after: ['Пишите через {{report|форму обратной связи}}.', 'Знаете историю своего города? {{share|Расскажите мне}}.', 'Хотите проверить, что вы знаете о Португалии? {{myths|Миф или правда}}.'],
         },
       ],
     },

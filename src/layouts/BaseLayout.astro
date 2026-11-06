@@ -48,6 +48,8 @@ interface Props {
   pageKey?: PageKey;
   /** Base-aware path of this page in each language. For pages that are not in ROUTES (cards). Overrides pageKey. */
   alternates?: Record<Lang, string>;
+  /** Base-aware path of the page the canonical link points to, per language, when it is not the page itself (the page of one card of "Myth or fact" points to the page of all of them). og:url stays the page's own address. */
+  canonicalTo?: Record<Lang, string>;
   /** Languages in which this page is really written; hreflang is given for those only (a card not ready in Russian leaves ru out). */
   readyLangs?: readonly Lang[];
   /** The page stands in for a language it is not written in (the Russian page of a card with English text): no hreflang at all. */
@@ -83,7 +85,7 @@ interface Props {
   epoch?: string;
 }
 
-const { lang, title, pageKey, alternates: alternatesProp, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, hreflang = true, activeLangs, schema, epoch, count = true, allLangs = false } = Astro.props;
+const { lang, title, pageKey, alternates: alternatesProp, canonicalTo, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, hreflang = true, activeLangs, schema, epoch, count = true, allLangs = false } = Astro.props;
 const chrome = allLangs ? LANGS : [lang];
 // Fonts of the first screen are fetched together with the stylesheet, not after it (a browser finds a font only when the CSS is parsed and the
 // text that uses it is laid out: 250-300 ms later on a phone). The Russian pages: their Cyrillic faces arrive late and the tags and the hook
@@ -95,7 +97,7 @@ const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? `${siteName} · ${t(lang, 'site.tagline')}` : `${title} · ${siteName}`;
 // The service pages have a description of their own (pages.<key>.description); every other page without one uses the site description.
-const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise'];
+const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise', 'myths'];
 const pageDescription = pageKey && DESCRIBED_PAGES.includes(pageKey) ? t(lang, `pages.${pageKey}.description`) : undefined;
 const description = descriptionProp ?? pageDescription ?? t(lang, 'site.description');
 
@@ -104,7 +106,8 @@ const paths: Record<Lang, string> | undefined =
 // hreflang: the ready languages, and only when the page itself is written in its language.
 const hreflangs = stand_in || !hreflang ? [] : LANGS.filter((l) => readyLangs.includes(l));
 const absolute = (path: string) => new URL(path, Astro.site).href;
-const canonical = paths ? absolute(paths[lang]) : undefined;
+const ownAddress = paths ? absolute(paths[lang]) : undefined;
+const canonical = canonicalTo ? absolute(canonicalTo[lang]) : ownAddress;
 // A page without a picture of its own (About, Method, Legal, Map, ...) gets the plain site picture; cards, epochs, threads and the home page pass theirs.
 const previewPath = preview?.image ?? DEFAULT_PREVIEW;
 const image = preview?.imageUrl ? absolute(preview.imageUrl) : absolute(withBase(ogImagePath(previewPath)));
@@ -171,7 +174,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <meta property="og:type" content={preview?.type ?? 'website'} />
     <meta property="og:title" content={preview?.title ?? fullTitle} />
     <meta property="og:description" content={preview?.description ?? description} />
-    {canonical && <meta property="og:url" content={canonical} />}
+    {ownAddress && <meta property="og:url" content={ownAddress} />}
     <meta property="og:locale" content={OG_LOCALE(lang)} />
     {paths && hreflangs.filter((l) => l !== lang).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE(l)} />)}
     {image && <meta property="og:image" content={image} />}

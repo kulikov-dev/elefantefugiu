@@ -7,7 +7,7 @@ import { emailMarkup, obscuredEmail, splitEmail } from '../../src/lib/contact';
 import { escapeHtml, renderInline } from '../../src/lib/static-text';
 
 const KEYS = ['about', 'method', 'legal'] as StaticKey[];
-const link = (key: string) => (['about', 'method', 'report', 'share', 'legal', 'map'].includes(key) ? { href: `/x/${key}/`, label: `T-${key}` } : undefined);
+const link = (key: string) => (['about', 'method', 'report', 'share', 'legal', 'map', 'myths'].includes(key) ? { href: `/x/${key}/`, label: `T-${key}` } : undefined);
 
 describe('static pages', () => {
   it('have the same sections, in the same order, in the three languages', () => {

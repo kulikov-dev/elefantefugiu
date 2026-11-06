@@ -13,7 +13,7 @@ export const DEFAULT_LANG: Lang = 'pt';
 /** Fallback chain of a text that is missing in a language: ru -> en -> pt (the data loader applies it, see lib/localize.ts). */
 export const FALLBACK_CHAIN: Record<Lang, readonly Lang[]> = { pt: [], en: ['pt'], ru: ['en', 'pt'] };
 
-export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise';
+export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths';
 
 // An empty slug means the language root (/pt/, /en/).
 export const ROUTES: Record<PageKey, Record<Lang, string>> = {
@@ -25,6 +25,7 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   legal: { pt: 'legal', en: 'legal', ru: 'pravovaya-informaciya' },
   map: { pt: 'mapa', en: 'map', ru: 'karta' },
   surprise: { pt: 'surpreende-me', en: 'surprise-me', ru: 'udivi-menya' },
+  myths: { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' },
 };
 
 /** Id of the epochs section on the home page; the "Épocas" menu item links to it. */
@@ -40,6 +41,11 @@ export function withBase(path = ''): string {
 export function pagePath(lang: Lang, key: PageKey): string {
   const slug = ROUTES[key][lang];
   return withBase(slug ? `${lang}/${slug}/` : `${lang}/`);
+}
+
+/** Base-aware URL of the page of one claim of "Myth or fact": /ru/mif-ili-pravda/{id}/ (the same page with every card, that one first; noindex, docs/spec.md 5.8). The id is the same in every language. */
+export function mythPath(lang: Lang, id: string): string {
+  return withBase(`${lang}/${ROUTES.myths[lang]}/${id}/`);
 }
 
 /** Address segment of a card page: /pt/historia/{slug}, /en/story/{slug} (docs/spec.md section 2). */

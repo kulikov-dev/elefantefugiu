@@ -8,7 +8,8 @@ import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
 import { needsAttribution } from '../src/lib/pictures';
 import { firstSentence } from '../src/lib/events';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
-import { epochSchema, eventSchema, featuredSchema, festaListSchema, threadSchema } from '../src/data/schemas';
+import { epochSchema, eventSchema, featuredSchema, festaListSchema, mythListSchema, threadSchema } from '../src/data/schemas';
+import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, wordCount } from '../src/lib/myths';
 import { isCalendarDay } from '../src/lib/start-pins';
 import { pending } from './lib/lang-review';
 import { isLive } from '../src/lib/publication.mjs';
@@ -496,6 +497,34 @@ for (const t of threads) {
       }
     }
   }
+}
+
+// ---------- "Myth or fact" (src/content/myths.yaml) ----------
+// The schema stops the shape. Here: the story of a claim exists, is on the site (not a draft, not a future day), is not a heavy topic (sensitive) and is read in Russian
+// (the link of the Russian card leads to a Russian page); the words of a text are counted against the limits (a warning, the owner decides).
+{
+  const path = join(content, 'myths.yaml');
+  const file = rel(path);
+  const data = existsSync(path) ? readYaml(path) : undefined;
+  if (data === undefined && !existsSync(path)) report('error', file, 'file is missing');
+  const parsed = data === undefined ? undefined : validate(mythListSchema, data, file);
+  for (const myth of parsed ?? []) {
+    const at = `${file} (${myth.id})`;
+    const story = events.find((e) => e.item.id === myth.story)?.item;
+    if (!story) report('error', at, `the story "${myth.story}" does not exist`, 'story');
+    else {
+      if (!isLive(story)) report('error', at, `the story "${myth.story}" is not on the site (a draft or a future day)`, 'story');
+      if (story.sensitive) report('error', at, `the story "${myth.story}" is a heavy topic (sensitive): no claim rests on it`, 'story');
+      if (!story.ru_ready) report('warn', at, `the story "${myth.story}" is not ready in Russian: the Russian card links to a page with English text`, 'story', 'ru');
+    }
+    for (const lang of ['pt', 'en', 'ru'] as const) {
+      const statement = wordCount(myth.statement[lang]);
+      const answer = wordCount(myth.answer[lang]);
+      if (statement > STATEMENT_MAX_WORDS) report('warn', at, `the statement has ${statement} words, the limit is ${STATEMENT_MAX_WORDS}`, 'statement', lang);
+      if (answer > ANSWER_MAX_WORDS) report('warn', at, `the answer has ${answer} words, the limit is ${ANSWER_MAX_WORDS}`, 'answer', lang);
+    }
+  }
+  console.log(`myths: ${(parsed ?? []).length} claim(s)`);
 }
 
 // ---------- output ----------

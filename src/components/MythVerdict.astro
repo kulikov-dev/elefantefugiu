@@ -1,0 +1,61 @@
+---
+// The verdict of a claim of "Myth or fact": a label in the style of the credibility labels (TagLabel): text plus a shape, never colour alone. Myth is terracotta, fact green, partly ochre (tokens `--color-verdict-*`, contrast checked in check-contrast.mjs); each has its own shape.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import type { MythVerdict } from '../data/schemas';
+
+interface Props {
+  lang: Lang;
+  verdict: MythVerdict;
+}
+
+const { lang, verdict } = Astro.props;
+---
+<span class={`verdict verdict--${verdict}`}>
+  <svg class="verdict__icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true" focusable="false">
+    <circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+    {
+      verdict === 'fact' ? (
+        <path d="M5 8.3l2.2 2.2L11.2 5.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      ) : verdict === 'myth' ? (
+        <path d="M5.6 5.6l4.8 4.8M10.4 5.6l-4.8 4.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+      ) : (
+        <path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor" />
+      )
+    }
+  </svg>
+  {t(lang, `myths.${verdict}`)}
+</span>
+
+<style>
+  .verdict {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--pad-chip-y) var(--pad-chip-x);
+    border: 1px solid currentColor;
+    border-radius: var(--radius-pill);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-strong);
+    line-height: 1.5;
+  }
+
+  .verdict__icon {
+    flex: none;
+  }
+
+  .verdict--myth {
+    background: var(--color-verdict-myth-bg);
+    color: var(--color-verdict-myth-ink);
+  }
+
+  .verdict--fact {
+    background: var(--color-verdict-fact-bg);
+    color: var(--color-verdict-fact-ink);
+  }
+
+  .verdict--part {
+    background: var(--color-verdict-part-bg);
+    color: var(--color-verdict-part-ink);
+  }
+</style>

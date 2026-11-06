@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/check-i18n.mjs && node scripts/check-contrast.mjs && npm test && tsx scripts/check-data.ts && node scripts/make-og.mjs && node scripts/make-festa-og.mjs && node scripts/make-panno-og.mjs && astro build",
+    "build": "node scripts/check-i18n.mjs && node scripts/check-contrast.mjs && npm test && tsx scripts/check-data.ts && node scripts/make-og.mjs && node scripts/make-festa-og.mjs && node scripts/make-panno-og.mjs && node scripts/make-myth-og.mjs && astro build",
     "postbuild": "node scripts/make-sitemap.mjs && node scripts/check-sitemap.mjs && node scripts/check-previews.mjs && node scripts/check-links.mjs && node scripts/check-cards.mjs && node scripts/check-listings.mjs && node scripts/check-weight.mjs && node scripts/check-tokens.mjs && node scripts/check-ru.mjs && node scripts/check-mascot.mjs && node scripts/check-published.mjs && node scripts/check-email.mjs && node scripts/check-https.mjs && node scripts/check-schema.mjs && node scripts/check-transitions.mjs && node scripts/check-og.mjs && node scripts/check-rss.mjs && node scripts/check-telegram.mjs",
     "preview": "astro preview",
     "check": "astro check",

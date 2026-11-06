@@ -414,3 +414,28 @@ export const festaListSchema = z.array(festaSchema).superRefine((list, ctx) => {
 
 export type FestaData = z.infer<typeof festaSchema>;
 export type FestaText = z.infer<typeof festaTextSchema>;
+
+// "Myth or fact" (src/content/myths.yaml, docs/spec.md 5.8): a claim, a verdict, a short answer, the story behind it. The order of the list is the order on the page.
+export const MYTH_VERDICTS = ['myth', 'fact', 'part'] as const;
+export type MythVerdict = (typeof MYTH_VERDICTS)[number];
+const mythText = z.strictObject({ pt: z.string().min(1), en: z.string().min(1), ru: z.string().min(1) });
+
+export const mythSchema = z.strictObject({
+  /** The anchor of the card and the last part of its address; the same in every language. */
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+  /** The id of the story the claim rests on. */
+  story: z.string().min(1),
+  verdict: z.enum(MYTH_VERDICTS),
+  statement: mythText,
+  answer: mythText,
+});
+
+export const mythListSchema = z.array(mythSchema).superRefine((list, ctx) => {
+  const seen = new Set<string>();
+  list.forEach((m, i) => {
+    if (seen.has(m.id)) ctx.addIssue({ code: 'custom', path: [i, 'id'], message: `id ${m.id} is used twice` });
+    seen.add(m.id);
+  });
+});
+
+export type MythData = z.infer<typeof mythSchema>;

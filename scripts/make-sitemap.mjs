@@ -43,10 +43,12 @@ const bySlug = (lang) => new Map(events.map((e) => [e.slug[lang] ?? e.slug.en, e
 const epochs = parse(readFileSync(join(root, 'src/content/epochs.yaml'), 'utf8'));
 const threads = parse(readFileSync(join(root, 'src/content/threads.yaml'), 'utf8'));
 const staticDay = dayOf('src/data/static-pages.ts');
+const mythsDay = dayOf('src/content/myths.yaml');
 const STORY = /^(pt|en|ru)\/(historia|story|istoriya)\/([^/]+)\/index\.html$/;
 const EPOCH = /^(pt|en|ru)\/(epoca|era|epoha)\/([^/]+)\/index\.html$/;
 const THREAD = /^(pt|en|ru)\/(fio|thread|niti)\/([^/]+)\/index\.html$/;
 const STATIC = /^(pt\/(sobre|metodo|legal)|en\/(about|method|legal)|ru\/(o-proekte|metod|pravovaya-informaciya))\/index\.html$/;
+const MYTHS = /^(pt\/mito-ou-verdade|en\/myth-or-fact|ru\/mif-ili-pravda)\/index\.html$/;
 const lastmodOf = (path) => {
   let m;
   if ((m = path.match(STORY))) return bySlug(m[1]).get(m[3])?.day ?? '';
@@ -60,6 +62,7 @@ const lastmodOf = (path) => {
   }
   if (/^(pt|en|ru)\/index\.html$/.test(path)) return latest(events.map((e) => e.day));
   if (STATIC.test(path)) return staticDay;
+  if (MYTHS.test(path)) return mythsDay;
   return '';
 };
 

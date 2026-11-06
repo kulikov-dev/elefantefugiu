@@ -3,6 +3,7 @@
 | Home | `/en/` | `/ru/` |
 | Map | `/en/map/` | `/ru/karta/` |
 | Surprise me | `/en/surprise-me/` | `/ru/udivi-menya/` |
+| Myth or fact | `/en/myth-or-fact/` | `/ru/mif-ili-pravda/` |
 | About | `/en/about/` | `/ru/o-proekte/` |
 | Method and sources | `/en/method/` | `/ru/metod/` |
 | Found a mistake? | `/en/report/` | `/ru/oshibka/` |

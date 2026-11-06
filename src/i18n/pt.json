@@ -48,6 +48,10 @@
     "surprise": {
       "title": "Surpreenda-me",
       "description": "Não sabe por onde começar? Uma história do passado de Portugal, escolhida ao acaso para si."
+    },
+    "myths": {
+      "title": "Mito ou verdade",
+      "description": "O que guias, roteiros e amigos contam sobre Portugal: escolha o que pensa e leia o que realmente aconteceu. Por trás de cada resposta há uma das nossas histórias."
     }
   },
   "footer": {
@@ -57,7 +61,8 @@
     "share": "Conhece uma história?",
     "legal": "Informação legal",
     "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
-    "privacy": "Sem publicidade nem cookies"
+    "privacy": "Sem publicidade nem cookies",
+    "myths": "Mito ou verdade"
   },
   "home": {
     "epochs_heading": "Épocas",
@@ -221,7 +226,7 @@
   },
   "panno": {
     "hint": "Cada história revela parte do painel",
-        "zoom": "Abrir o painel em grande",
+    "zoom": "Abrir o painel em grande",
     "close": "Fechar",
     "share": "Partilhar",
     "copied": "Ligação copiada",
@@ -231,7 +236,7 @@
     "to_epoch": "Ir para a época",
     "og_title": "Painel da época «{name}»",
     "og_description": "Cada história revela um pedaço do painel. Complete o seu",
-"continue": "Continuar a ler",
+    "continue": "Continuar a ler",
     "done": "Época lida"
   },
   "plural": {
@@ -381,5 +386,22 @@
   "festa": {
     "history": "A história deste dia",
     "traditions": "Tradições e factos"
+  },
+  "myths": {
+    "lead": "O que guias, roteiros e amigos contam sobre Portugal. Escolha o que pensa e veja o que realmente aconteceu. Por trás de cada resposta há uma das nossas histórias.",
+    "og_title_page": "Mito ou verdade: o que se conta sobre Portugal",
+    "og_title": "Mito ou verdade: {statement}?",
+    "og_description": "A resposta e a história completa na ligação",
+    "share_text": "{statement}. Mito ou verdade?",
+    "og_label": "Mito ou verdade?",
+    "answer": "Resposta",
+    "myth": "Mito",
+    "fact": "Verdade",
+    "part": "Em parte",
+    "question": "Escolha uma resposta",
+    "full_story": "A história completa →",
+    "link": "Ligação para esta afirmação",
+    "end": "Ouviu mais alguma coisa que gostava de ver confirmada?",
+    "end_link": "Conte-nos →"
   }
 }

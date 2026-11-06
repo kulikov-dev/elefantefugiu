@@ -1,5 +1,5 @@
 // Inline markup of the static page texts (src/data/static-pages.ts):
-//   {{about}} {{method}} {{report}} {{share}} {{legal}} {{map}}  a link to that page of the site (the link text is the title of the page);
+//   {{about}} {{method}} {{report}} {{share}} {{legal}} {{map}} {{myths}}  a link to that page of the site (the link text is the title of the page);
 //   {{method|text}}                                     the same link with another text (for a case ending in Russian);
 //   {{email}}                                           the contact address: "name (at) host" (the word for @ in the language of the page), a mailto link once the script runs (src/lib/contact.ts);
 //   {{stories}}                                         a value computed at build time, here the number of stories with its noun;
