@@ -75,7 +75,6 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: [
             'Vivo em Portugal, mas não nasci cá, e continuo a descobrir o país, história a história. O passado de Portugal é riquíssimo. O que encontro de mais interessante conto primeiro aos meus filhos, e agora também aqui.',
             'O Elefante Fugiu é feito por uma só pessoa, nos tempos livres: é gratuito, sem publicidade e sem cookies. Não sou historiador, por isso apoio-me em fontes e indico-as no fim de cada história.',
-            'Escrevo as histórias em russo; as versões em inglês e em português são traduzidas com a ajuda de IA, e eu reviso-as.',
             'Se é historiador, arquivista ou guia e vê onde algo pode ser contado com mais rigor, escreva-me. Qualquer sugestão é bem-vinda, mesmo sobre uma só história.',
           ],
         },
@@ -126,7 +125,6 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: [
             'I live in Portugal, though I wasn’t born here, and I’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now I share them here, too.',
             'O Elefante Fugiu is a one-person project made in my spare time: free, with no ads and no cookies. I’m not a historian, so I rely on sources and list them under every story.',
-            'I write the stories in Russian; the English and Portuguese versions are translated with the help of AI, and I check them.',
             'If you’re a historian, archivist or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.',
           ],
         },
@@ -177,7 +175,6 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: [
             'Я живу в Португалии, но родился не здесь, и до сих пор открываю эту страну для себя, история за историей. Прошлое у неё удивительно богатое. Самое интересное я сначала рассказываю своим детям, а теперь и здесь.',
             'O Elefante Fugiu я веду один, в свободное время: бесплатно, без рекламы и без cookie. Я не историк, поэтому опираюсь на источники и указываю их под каждой историей.',
-            'Истории я пишу по-русски; английский и португальский переводятся с помощью ИИ, я их проверяю.',
             'Если вы историк, архивист или гид и видите, где можно рассказать точнее, напишите мне. Буду рад любой подсказке, даже про одну историю.',
           ],
         },
@@ -229,7 +226,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idiomas',
           heading: 'Línguas',
-          paragraphs: ['Escrevo as histórias em russo; as versões em inglês e em português são traduzidas com a ajuda de IA, e eu reviso-as. Se alguma frase não soar natural, {{report|diga-me}} e eu corrijo.'],
+          paragraphs: ['Escrevo as histórias em russo e traduzo-as eu próprio para inglês. A versão portuguesa é traduzida com a ajuda de IA e revista por mim. Se alguma frase não soar natural, {{report|diga-me}} e eu corrijo.'],
         },
       ],
     },
@@ -270,7 +267,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idiomas',
           heading: 'Languages',
-          paragraphs: ['I write the stories in Russian; the English and Portuguese versions are translated with the help of AI, and I check them. If something doesn’t sound natural, {{report|let me know}} and I’ll fix it.'],
+          paragraphs: ['I write the stories in Russian and translate them into English myself. The Portuguese version is translated with the help of AI and then reviewed by me. If something doesn’t sound natural, {{report|let me know}} and I’ll fix it.'],
         },
       ],
     },
@@ -311,7 +308,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'idiomas',
           heading: 'Языки',
-          paragraphs: ['Истории я пишу по-русски; английский и португальский переводятся с помощью ИИ, я их проверяю. Если фраза звучит не по-португальски или не по-английски, {{report|напишите}}, я поправлю.'],
+          paragraphs: ['Истории я пишу по-русски и сам перевожу на английский. Португальскую версию перевожу с помощью ИИ и вычитываю. Если фраза звучит не по-португальски или не по-английски, {{report|напишите}}, я поправлю.'],
         },
       ],
     },
