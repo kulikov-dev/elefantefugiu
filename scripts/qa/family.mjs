@@ -592,6 +592,32 @@ if (want('map')) {
   const e2 = await epochPage.evaluate(() => document.querySelectorAll('.mk[data-key]').length);
   ok('epoch page map: switching the mode redraws the markers, within the marker limit', e2 > 0 && e2 <= (VARIANT ? 7 : 30), String(e2));
   await epochPage.close();
+  // The menus of the header lie over anything a page puts under it: a positioned block (as the panel of the epoch page had), a Leaflet-like layer
+  // with a high z-index. The header makes its own stacking context (view-transition-name), so its z-index decides (--z-header).
+  for (const width of [390, 1280]) {
+    const over = await newPage({ mode: 'all', width });
+    await over.goto(`${base}/pt/epoca/${epochSlug(LAST)}/`, { waitUntil: 'load' });
+    await over.evaluate(() => {
+      for (const z of ['auto', '1000']) {
+        const box = document.createElement('div');
+        box.style.cssText = `position:absolute;inset:0 0 auto 0;z-index:${z};height:600px;background:transparent`;
+        box.dataset.qaCover = z;
+        document.querySelector('main').append(box);
+      }
+    });
+    for (const [name, toggle, option] of [['family menu', '[data-family-menu] summary', '.family-menu__option[data-value="off"]'], ['language menu', '[data-lang-switch] summary', '.lang-switch__list li:last-child']]) {
+      await over.click(toggle);
+      const hit = await over.evaluate((sel) => {
+        const el = document.querySelector(sel);
+        const r = el.getBoundingClientRect();
+        const top = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+        return !!top && el.contains(top);
+      }, option);
+      ok(`epoch page, ${width} px: the ${name} lies over a positioned block under the header (clickable)`, hit);
+      await over.click(toggle);
+    }
+    await over.close();
+  }
   // the list of the no-script map page
   for (const mode of ['all', '12']) {
     const p = await newPage({ mode, tiles: 'fail' });

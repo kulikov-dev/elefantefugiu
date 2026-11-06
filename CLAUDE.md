@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Отвечай пользователю по-русски.
+
 ## What this is
 
 "O Elefante Fugiu": a static bilingual (pt / en) Astro + TypeScript site of short interactive stories from Portuguese history, tied to a map and to time. Deployed to GitHub Pages; no server, accounts, cookies or trackers. Node >= 22.12. `README.md` has the full script table, configuration and structure.
