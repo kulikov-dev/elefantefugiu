@@ -13,6 +13,7 @@ scripts/qa/out/
 # preview cards of the stories (scripts/make-og.mjs)
 .og-cache/
 public/og-cards/
+public/og-panno/
 
 # local scratch of the scripts (not part of the build, tests or CI)
 scripts/.tmp/

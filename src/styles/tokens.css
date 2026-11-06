@@ -263,6 +263,10 @@
   --azulejo-band-height: 1.25rem;
   --panno-glaze: light-dark(#fdfcf8, #2c363c); /* a piece of the epoch panel not yet won: smooth glazed tile, muted in the dark theme */
   --panno-glaze-edge: light-dark(#dcd8ca, #3b484f);
+  --panno-backdrop: light-dark(rgb(10 8 6 / 0.88), rgb(10 8 6 / 0.92)); /* behind the enlarged panel: dark in both themes, the picture is the light thing */
+  --panno-control: light-dark(rgb(20 17 14 / 0.7), rgb(20 17 14 / 0.7));
+  --panno-control-ink: light-dark(#fbf8f1, #fbf8f1);
+  --panno-zoom-height: 70dvh; /* the enlarged panel on a phone held upright: this tall, as wide as it comes, scrolled sideways */
   --azulejo-corner-size: 5.5rem;
 
   /* A button that cannot be pressed (the report form while it is sending). */
@@ -505,6 +509,9 @@
     --festa-plate: var(--festa-wash);
     --panno-glaze: #fdfcf8;
     --panno-glaze-edge: #dcd8ca;
+    --panno-backdrop: rgb(10 8 6 / 0.88);
+    --panno-control: rgb(20 17 14 / 0.7);
+    --panno-control-ink: #fbf8f1;
   }
 
   :root {

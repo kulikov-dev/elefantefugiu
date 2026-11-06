@@ -3,13 +3,15 @@
 //   card    /pt/historia/{slug}   /en/story/{slug}
 //   epoch   /pt/epoca/{slug}      /en/era/{slug}
 //   thread  /pt/fio/{slug}        /en/thread/{slug}
+//   panel   /pt/painel/{slug}     /en/panel/{slug}   (the finished panel of an epoch that has `panno`; noindex)
 // Segments come from src/i18n/routes.ts, slugs from the data (one per language).
 // Epochs without content and threads with too few cards get no page.
 import type { GetStaticPaths } from 'astro';
 import EpochView from '../../../views/EpochView.astro';
 import StoryView from '../../../views/StoryView.astro';
+import PannoView from '../../../views/PannoView.astro';
 import ThreadView from '../../../views/ThreadView.astro';
-import { EPOCH_SEGMENT, LANGS, STORY_SEGMENT, THREAD_SEGMENT, type Lang } from '../../../i18n/routes';
+import { EPOCH_SEGMENT, LANGS, PANNO_SEGMENT, STORY_SEGMENT, THREAD_SEGMENT, type Lang } from '../../../i18n/routes';
 import { epochHasContent, type EpochData, type ThreadData } from '../../../lib/epochs';
 import type { EventData } from '../../../lib/events';
 import { loadSite } from '../../../lib/site-data';
@@ -17,7 +19,8 @@ import { loadSite } from '../../../lib/site-data';
 type PageProps =
   | { kind: 'story'; event: EventData }
   | { kind: 'epoch'; epoch: EpochData }
-  | { kind: 'thread'; thread: ThreadData };
+  | { kind: 'thread'; thread: ThreadData }
+  | { kind: 'panno'; epoch: EpochData };
 
 export const getStaticPaths = (async () => {
   const site = await loadSite();
@@ -32,6 +35,12 @@ export const getStaticPaths = (async () => {
         params: { lang, segment: EPOCH_SEGMENT[lang], slug: epoch.slug[lang] },
         props: { kind: 'epoch', epoch } as PageProps,
       })),
+    ...site.epochs
+      .filter((epoch) => epoch.panno && epochHasContent(epoch, site.events))
+      .map((epoch) => ({
+        params: { lang, segment: PANNO_SEGMENT[lang], slug: epoch.slug[lang] },
+        props: { kind: 'panno', epoch } as PageProps,
+      })),
     ...site.visibleThreads.map((thread) => ({
       params: { lang, segment: THREAD_SEGMENT[lang], slug: thread.slug[lang] },
       props: { kind: 'thread', thread } as PageProps,
@@ -44,4 +53,5 @@ const lang = Astro.params.lang as Lang;
 ---
 {props.kind === 'story' && <StoryView lang={lang} event={props.event} />}
 {props.kind === 'epoch' && <EpochView lang={lang} epoch={props.epoch} />}
+{props.kind === 'panno' && <PannoView lang={lang} epoch={props.epoch} />}
 {props.kind === 'thread' && <ThreadView lang={lang} thread={props.thread} />}

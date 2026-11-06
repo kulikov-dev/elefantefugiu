@@ -5,6 +5,7 @@ import { READ_DELAY_MS, READ_KEY, addRead, parseRead, readProgress, type StoryOn
 import { cssUrl } from '../lib/azulejo';
 import { firstUnread, openSet } from '../lib/panno';
 import { pickPlural } from '../lib/plural-pick';
+import { wirePannoReward } from './panno-reward';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 const load = (): string[] => {
@@ -57,6 +58,11 @@ function showPanno(read: string[]): void {
     count.hidden = !all && n === 0;
   }
   if (hint) hint.hidden = all;
+  // The reward is for the whole panel only: the panel becomes a button (enlarge) and "Share" appears.
+  const zoom = panel.querySelector<HTMLElement>('[data-panno-zoom]');
+  const share = panel.querySelector<HTMLElement>('[data-panno-share]');
+  if (zoom) zoom.hidden = !all;
+  if (share) share.hidden = !all;
   const alt = pickPlural({ p_one: d.altOne ?? '', p_few: d.altFew ?? '', p_many: d.altMany ?? '', p_other: d.altOther ?? '' }, 'p', open.size, d.locale ?? 'en').replace('{n}', String(open.size)).replace('{m}', String(order.length));
   const next = all ? undefined : firstUnread(stories, read, mode);
   const href = next ? (JSON.parse(d.links ?? '{}') as Record<string, string>)[next] : undefined;
@@ -139,6 +145,8 @@ function watchReset(): void {
   });
 }
 
+const pannoPanel = document.querySelector<HTMLElement>('[data-panno]');
+if (pannoPanel) wirePannoReward(pannoPanel);
 show();
 onFamilyChange(show);
 watchEnd();

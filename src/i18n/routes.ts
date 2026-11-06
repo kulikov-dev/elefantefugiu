@@ -54,6 +54,14 @@ export function storyPath(lang: Lang, slug: string): string {
 export const EPOCH_SEGMENT: Record<Lang, string> = { pt: 'epoca', en: 'era', ru: 'epoha' };
 export const THREAD_SEGMENT: Record<Lang, string> = { pt: 'fio', en: 'thread', ru: 'niti' };
 
+/** The page of a finished panel (the reward of an epoch read to the end): /ru/panno/{slug}, /pt/painel/{slug}, /en/panel/{slug}. noindex, linked from nowhere but the share. */
+export const PANNO_SEGMENT: Record<Lang, string> = { pt: 'painel', en: 'panel', ru: 'panno' };
+
+/** Base-aware URL of a panel page; `slug` is the slug of the epoch for that language. */
+export function pannoHref(lang: Lang, slug: string): string {
+  return withBase(`${lang}/${PANNO_SEGMENT[lang]}/${slug}/`);
+}
+
 /** Base-aware URL of an epoch page; `slug` is the epoch slug for that language. */
 export function epochHref(lang: Lang, slug: string): string {
   return withBase(`${lang}/${EPOCH_SEGMENT[lang]}/${slug}/`);

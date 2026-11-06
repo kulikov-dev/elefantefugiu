@@ -8,20 +8,26 @@ import { getImage } from 'astro:assets';
 import { plural, pluralForms, t } from '../i18n';
 import { LOCALES, type Lang } from '../i18n/routes';
 import { pannoSource } from '../lib/picture-assets';
+import { pannoHref } from '../i18n/routes';
 import { openOrder } from '../lib/panno';
 
 interface Props {
   lang: Lang;
   epochId: string;
+  /** The slug of the epoch in this language: the page of the finished panel (the share link) lies under it. */
+  epochSlug: string;
+  epochName: string;
   panno: { image: string; cols: number; rows: number };
   /** Story id -> address of its page, for the stories of the epoch. */
   links: Record<string, string>;
 }
 
-const { lang, epochId, panno, links } = Astro.props;
+const { lang, epochId, epochSlug, epochName, panno, links } = Astro.props;
 const { cols, rows } = panno;
 const source = pannoSource(panno.image);
 const [small, large] = await Promise.all([480, 960].map((width) => getImage({ src: source, width, format: 'webp', quality: 80 })));
+// The picture of the enlarged panel: the source in its own size (not stretched), fetched only when the dialog is opened.
+const full = await getImage({ src: source, width: source.width, format: 'webp', quality: 85 });
 const pieces = cols * rows;
 const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols, y: Math.floor(i / cols) }));
 ---
@@ -30,6 +36,13 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
   data-panno
   data-image-small={small?.src}
   data-image-large={large?.src}
+  data-image-full={full.src}
+  data-epoch-id={epochId}
+  data-share-url={pannoHref(lang, epochSlug)}
+  data-share-title={t(lang, 'panno.og_title').replace('{name}', epochName)}
+  data-share-text={t(lang, 'panno.share_text').replace('{name}', epochName)}
+  data-copied={t(lang, 'panno.copied')}
+  data-copy-failed={t(lang, 'card.share_failed')}
   data-order={openOrder(epochId, cols, rows).join(',')}
   data-links={JSON.stringify(links)}
   {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.panno_alt')).map(([k, v]) => [`data-alt-${k}`, v]))}
@@ -38,11 +51,27 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
   {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.panno_count')).map(([k, v]) => [`data-${k}`, v]))}
   data-done={t(lang, 'panno.done')}
 >
-  <a class="panno__grid" data-panno-grid role="img" aria-label={plural(lang, 'plural.panno_alt', 0).replace('{n}', '0').replace('{m}', String(pieces))} style={`--cols:${cols};--rows:${rows};aspect-ratio:${cols} / ${rows}`}>
-    {cells.map((c) => <span class="panno__cell" data-piece={c.piece} style={`--x:${(c.x / (cols - 1)) * 100}%;--y:${(c.y / (rows - 1)) * 100}%`}></span>)}
-  </a>
-  <p class="panno__count" data-panno-count hidden></p>
-  <p class="panno__count" data-panno-hint>{t(lang, 'panno.hint')}</p>
+  <div class="panno__frame">
+    <a class="panno__grid" data-panno-grid role="img" aria-label={plural(lang, 'plural.panno_alt', 0).replace('{n}', '0').replace('{m}', String(pieces))} style={`--cols:${cols};--rows:${rows};aspect-ratio:${cols} / ${rows}`}>
+      {cells.map((c) => <span class="panno__cell" data-piece={c.piece} style={`--x:${(c.x / (cols - 1)) * 100}%;--y:${(c.y / (rows - 1)) * 100}%`}></span>)}
+    </a>
+    <!-- The reward: a read-to-the-end panel opens large. Shown by src/scripts/read-marks.ts only when every story is read. -->
+    <button class="panno__zoom" type="button" data-panno-zoom hidden aria-label={t(lang, 'panno.zoom')}></button>
+  </div>
+  <div class="panno__caption">
+    <div class="panno__line">
+      <p class="panno__count" data-panno-count hidden></p>
+      <button class="button button--secondary panno__share" type="button" data-panno-share hidden>{t(lang, 'panno.share')}</button>
+      <span class="panno__status" role="status" data-panno-status></span>
+    </div>
+    <p class="panno__count" data-panno-hint>{t(lang, 'panno.hint')}</p>
+  </div>
+  <dialog class="panno-zoom" data-panno-dialog aria-label={t(lang, 'panno.zoom')}>
+    <div class="panno-zoom__scroll" data-panno-scroll>
+      <img class="panno-zoom__image" data-panno-full width={full.options.width} height={full.options.height} alt={plural(lang, 'plural.panno_alt', pieces).replace('{n}', String(pieces)).replace('{m}', String(pieces))} />
+    </div>
+    <button class="panno-zoom__close" type="button" data-panno-close aria-label={t(lang, 'panno.close')}>×</button>
+  </dialog>
 </div>
 
 <style>
@@ -93,9 +122,47 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     box-shadow: none;
   }
 
-  /* The caption is two lines on purpose: how many are read, and what a story does to the panel. */
-  .panno__count {
+  /* The grid and the reward button share one cell, so the button lies over the whole panel with no positioning: a positioned box here
+     painted over the open family menu of the header and took its clicks. */
+  .panno__frame {
+    display: grid;
+  }
+
+  .panno__frame > * {
+    grid-area: 1 / 1;
+  }
+
+  /* The reward button lies over the whole panel; it is there only when the panel is complete. */
+  .panno__zoom {
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    cursor: zoom-in;
+  }
+
+  .panno__zoom[hidden] {
+    display: none;
+  }
+
+  .panno__zoom:focus-visible {
+    outline: var(--border-heavy) solid var(--epoch-primary);
+    outline-offset: var(--ring-offset-tight);
+  }
+
+  /* The caption is two lines on purpose: how many are read, and what a story does to the panel. Beside the first line, when all is read, "Share". */
+  .panno__caption {
     margin-block-start: var(--space-2);
+  }
+
+  .panno__line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .panno__count {
     color: var(--color-ink-muted);
     font-size: var(--text-sm);
   }
@@ -104,7 +171,98 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     display: none;
   }
 
-  .panno__count + .panno__count {
-    margin-block-start: 0;
+  .panno__share {
+    font-size: var(--text-sm);
+  }
+
+  .panno__status {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  /* The enlarged panel: a native dialog over a dark backdrop, the picture as it is (no seams drawn over it). */
+  .panno-zoom {
+    width: 100%;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    background: transparent;
+    color: var(--panno-control-ink);
+  }
+
+  .panno-zoom::backdrop {
+    background: var(--panno-backdrop);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .panno-zoom[open] {
+      animation: panno-zoom-in 0.15s ease-out;
+    }
+  }
+
+  @keyframes panno-zoom-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  /* The scroll box fills the dialog. The picture sits in the middle by auto margins (a centred flex box would cut off the left of a wider picture). No touch-action: the reader may pinch. */
+  .panno-zoom__scroll {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .panno-zoom__image {
+    display: block;
+    margin: auto;
+    background: var(--panno-glaze);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  /* A phone held upright: the panel is this tall and as wide as it comes, and the reader scrolls it sideways (opened at its middle) instead of seeing it small. */
+  @media (max-width: 47.99rem) and (orientation: portrait) {
+    .panno-zoom__scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .panno-zoom__image {
+      flex: none;
+      max-width: none;
+      max-height: none;
+      height: var(--panno-zoom-height);
+      width: auto;
+    }
+  }
+
+  .panno-zoom__close {
+    position: absolute;
+    inset-block-start: var(--space-2);
+    inset-inline-end: var(--space-2);
+    width: var(--touch-target);
+    height: var(--touch-target);
+    padding: 0;
+    border: 1px solid var(--panno-control-ink);
+    border-radius: 50%;
+    background: var(--panno-control);
+    color: var(--panno-control-ink);
+    font-size: var(--text-xl);
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .panno-zoom__close:focus-visible {
+    outline: var(--border-heavy) solid var(--panno-control-ink);
+    outline-offset: var(--ring-offset-tight);
   }
 </style>
