@@ -245,7 +245,8 @@
     "og_title": "Painel da época «{name}»",
     "og_description": "Cada história revela um pedaço do painel. Complete o seu",
     "continue": "Continuar a ler",
-    "done": "Época lida"
+    "done": "Época lida",
+    "story_line": "Era a última história da época «{name}». O seu painel está completo →"
   },
   "plural": {
     "stories_one": "{n} história",

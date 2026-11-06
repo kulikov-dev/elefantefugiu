@@ -294,6 +294,7 @@
 
   /* Motion */
   --transition: 150ms ease;
+  --panno-rim-fade: 300ms; /* the rim of the finished panel fades in (the same time as CELEBRATION_RIM_MS in src/lib/panno.ts) */
   /* The cross-fade of a page change (View Transitions, transitions.css). */
   --vt-duration: 220ms;
 

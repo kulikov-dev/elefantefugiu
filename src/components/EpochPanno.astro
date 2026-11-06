@@ -133,6 +133,22 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     grid-area: 1 / 1;
   }
 
+  /* The assembled panel has a thin rim of the colour of the epoch (a shadow, not a border: nothing moves). In the moment of assembly it fades in after the last tile. */
+  .panno__frame {
+    border-radius: var(--radius-sm);
+    box-shadow: 0 0 0 var(--border-medium) transparent;
+  }
+
+  .panno[data-complete]:not([data-moment='tiles']) .panno__frame {
+    box-shadow: 0 0 0 var(--border-medium) var(--epoch-primary);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .panno__frame {
+      transition: box-shadow var(--panno-rim-fade);
+    }
+  }
+
   /* The reward button lies over the whole panel; it is there only when the panel is complete. */
   .panno__zoom {
     padding: 0;

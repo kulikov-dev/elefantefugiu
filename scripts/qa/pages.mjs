@@ -325,13 +325,15 @@ if (want('read')) {
   const epochPage = async (mode, read) => {
     const p = await browser.newPage();
     await p.setViewport({ width: 360, height: 900 });
-    await p.evaluateOnNewDocument((m, r) => {
+    await p.evaluateOnNewDocument((m, r, id) => {
       try {
         localStorage.setItem('family', m);
         if (r) localStorage.setItem('readStories', JSON.stringify(r));
         else localStorage.removeItem('readStories');
+        // The moment of assembly of a finished panel is the business of the panno suite: here the panel is already celebrated.
+        localStorage.setItem('panno-celebrated-' + id, '1');
       } catch {}
-    }, mode, read);
+    }, mode, read, epoch.id);
     await p.goto(base + epochPath(epoch), { waitUntil: 'networkidle0' });
     await wait(300);
     return p;
@@ -389,7 +391,7 @@ if (want('read')) {
   // Leave the storage clean for whatever runs next in this browser.
   page = await browser.newPage();
   await page.goto(base + '/pt/', { waitUntil: 'domcontentloaded' });
-  await page.evaluate(() => { try { localStorage.removeItem('readStories'); localStorage.removeItem('family'); } catch {} });
+  await page.evaluate(() => { try { localStorage.removeItem('readStories'); localStorage.removeItem('family'); localStorage.removeItem('panno-celebrated-' + id); } catch {} }, epoch.id);
   await page.close();
 }
 

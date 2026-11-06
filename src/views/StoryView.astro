@@ -27,7 +27,7 @@ import { t } from '../i18n';
 import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
 import { distanceParts } from '../lib/distance';
 import { meanwhileFor } from '../lib/meanwhile';
-import { epochHasContent, nextEpochEntry } from '../lib/epochs';
+import { epochFeed, epochHasContent, nextEpochEntry } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
 import { liveMyths } from '../lib/myths';
@@ -148,6 +148,8 @@ const gateVariants = groupVariants(
   (text) => text,
 ).filter((v) => v.value !== '');
 const backHref = epochLink ?? pagePath(lang, 'home');
+// The line about a finished panel (src/scripts/read-marks.ts shows it): only for an epoch with a panel. The stories of the epoch with their age data, so the script counts what the mode shows.
+const pannoStories = epoch.panno && epochLink ? JSON.stringify(epochFeed(epoch, all).map((e) => ({ id: e.id, ...ageInfoOf(e) }))) : undefined;
 
 const eventThreads = event.threads.map((id) => site.threads.find((th) => th.id === id)).filter((th) => th !== undefined);
 // Placeholder text is Latin filler: mark it, so screen readers do not read it as Portuguese.
@@ -232,6 +234,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
       <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
       <Fragment slot="after">
+        {pannoStories && <p class="story-panno" data-story-panno data-epoch-id={epoch.id} data-stories={pannoStories} hidden><a href={epochLink}>{t(lang, 'panno.story_line').replace('{name}', epoch.name[lang])}</a></p>}
         {
           continueVariants.map(({ modes, value: { next, nextEpoch } }) => {
             const target = next ?? nextEpoch?.story;
@@ -319,6 +322,11 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     font-size: var(--text-sm);
   }
 
+  .story-panno {
+    font-size: var(--text-sm);
+  }
+
+  .story-panno a,
   .story-myths a {
     display: inline-block;
     padding-block: var(--space-1);

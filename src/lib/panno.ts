@@ -107,3 +107,39 @@ export function firstUnread(onPage: readonly StoryOnPage[], read: readonly strin
   const done = new Set(read);
   return onPage.find((story) => story.id && isVisibleInMode(story, mode) && !done.has(story.id))?.id;
 }
+
+/** The key in localStorage (next to `readStories`, so the reset of the legal page sweeps it too) that says the finished panel of the epoch has been shown assembled. */
+export const PANNO_CELEBRATED_PREFIX = 'panno-celebrated-';
+export const pannoCelebratedKey = (epochId: string): string => `${PANNO_CELEBRATED_PREFIX}${epochId}`;
+
+/** The pause between two tiles of the moment of assembly, and the most the whole row of tiles may take. */
+export const CELEBRATION_STEP_MS = 120;
+export const CELEBRATION_MAX_MS = 1500;
+/** The rim of the colour of the epoch fades in this long after the last tile (the same number is `--panno-rim-fade` in tokens.css). */
+export const CELEBRATION_RIM_MS = 300;
+
+/**
+ * The tiles the last story read opened: the ones that are open with m of m stories read and were not with m - 1, in the order they open in.
+ * With one story in the panel that is every tile.
+ */
+export function lastOpened(m: number, order: readonly number[]): number[] {
+  if (m <= 0) return [];
+  return order.slice(openPieces(m - 1, m, order.length));
+}
+
+/** The pause between two of `count` tiles: 120 ms, less when the row would take more than 1.5 s in all. */
+export function celebrationStep(count: number): number {
+  if (count <= 0) return 0;
+  return Math.min(CELEBRATION_STEP_MS, Math.floor(CELEBRATION_MAX_MS / count));
+}
+
+/**
+ * The line at the foot of a story (docs/spec.md 5.2): shown when, with the story just counted, every story of its epoch that the mode shows is read
+ * and the panel of the epoch has not been celebrated yet.
+ */
+export function showPannoLine(onEpoch: readonly StoryOnPage[], read: readonly string[], mode: FamilyMode, celebrated: boolean): boolean {
+  if (celebrated) return false;
+  const done = new Set(read);
+  const shown = onEpoch.filter((s) => s.id && isVisibleInMode(s, mode));
+  return shown.length > 0 && shown.every((s) => done.has(s.id));
+}

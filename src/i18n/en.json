@@ -245,7 +245,8 @@
     "og_title": "“{name}” era panel",
     "og_description": "Each story reveals a piece of the picture. Build your own",
     "continue": "Keep reading",
-    "done": "Era complete"
+    "done": "Era complete",
+    "story_line": "That was the last story of the era “{name}.” Your panel is complete →"
   },
   "plural": {
     "stories_one": "{n} story",
