@@ -46,6 +46,7 @@
   --color-verdict-part-bg: light-dark(#f4e6b8, #33280b);
   --color-verdict-part-ink: light-dark(#5a4200, #ecd27f);
   /* The tiles of "Myth or fact" (a row of azulejos): a hit is a solid blue tile with a white four-petal pattern, a miss a white tile with a thin blue frame, no answer yet a dashed frame. */
+  --tile-gap: 0.25rem; /* between the tiles of a row (4 px) */
   --color-tile-blue: light-dark(#1f4e9c, #5a88d8);
   --color-tile-glyph: light-dark(#ffffff, #ffffff);
   --color-tile-white: light-dark(#ffffff, #efe8d8);

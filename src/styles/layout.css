@@ -362,11 +362,11 @@
 }
 
 /* A row of tiles (azulejos): the progress and the result of "Myth or fact" and the empty row of its block on the home page.
-   A hit is a solid blue tile with a white four-petal pattern, a miss a white tile with a thin blue frame, no answer yet a dashed frame (solid or empty tells them apart without colour). */
+   A hit is a solid blue tile with a white four-petal pattern, a miss a white tile with a thin blue frame, no answer yet a thin plain frame (solid or empty tells them apart without colour). */
 .squares {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-1);
+  gap: var(--tile-gap);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -388,7 +388,7 @@
 }
 
 .sq--empty {
-  border: var(--border-medium) dashed var(--color-border-strong);
+  border: 1px solid var(--color-border-strong);
 }
 
 .sq--hit {
