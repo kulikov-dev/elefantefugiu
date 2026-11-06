@@ -239,7 +239,7 @@ if (want('reward')) {
     const r = await page.evaluate(() => ({ events: window.__events, shared: window.__shared, copied: window.__copied, status: document.querySelector('[data-panno-status]').textContent }));
     const url = new URL(pannoPath(epoch, 'pt'), base).href;
     ok(`share (${withShare ? 'Web Share' : 'copy'}): exactly one event "panno-share-${epoch.id}"`, r.events.length === 1 && r.events[0].path === `panno-share-${epoch.id}` && r.events[0].event === true, JSON.stringify(r.events));
-    if (withShare) ok('share: title, text and the address of the panel page are given', r.shared?.url === url && r.shared?.text === ui('panno.share_text', 'pt').replace('{name}', name) && !!r.shared?.title, JSON.stringify(r.shared));
+    if (withShare) ok('share: title, text and the address of the panel page are given', r.shared?.url === url && r.shared?.text === ui('panno.share_text', 'pt').replace('{name}', name).replace('{hook}', epoch.panno.share_hook.pt).replace('{stories}', `${N} histórias`) && !!r.shared?.title, JSON.stringify(r.shared));
     else {
       ok('copy: the address of the panel page is copied and a quiet line says so', r.copied === url && r.status === ui('panno.copied', 'pt'), JSON.stringify([r.copied, r.status]));
       await wait(2300);
@@ -291,7 +291,7 @@ if (want('pages')) {
     const name = epoch.name[lang];
     ok(`${lang}: the panel page has the heading, the whole picture, the invitation and the way to the epoch`, h.h1 === ui('panno.page_title', lang).replace('{name}', name) && h.img > 0 && h.text.includes(ui('panno.invite', lang)) && h.epochLink.includes(epochPath(epoch, lang)), JSON.stringify([h.h1, h.img, h.epochLink]));
     ok(`${lang}: the panel page is noindex and not in the sitemap`, /noindex/.test(h.robots ?? '') && !sitemap.includes(pannoPath(epoch, lang)) && !/\/(panno|painel|panel)\//.test(sitemap), String(h.robots));
-    ok(`${lang}: og:title and og:description are the ones of the panel`, h.ogTitle?.startsWith(ui('panno.og_title', lang).replace('{name}', name)) && h.ogDescription === ui('panno.invite', lang), JSON.stringify([h.ogTitle, h.ogDescription]));
+    ok(`${lang}: og:title and og:description are the ones of the panel`, h.ogTitle?.startsWith(ui('panno.og_title', lang).replace('{name}', name)) && h.ogDescription === ui('panno.og_description', lang), JSON.stringify([h.ogTitle, h.ogDescription]));
     ok(`${lang}: hreflang links the three languages`, JSON.stringify(h.hreflang.filter((x) => x !== 'x-default')) === JSON.stringify(['en', 'pt', 'ru']), JSON.stringify(h.hreflang));
     ok(`${lang}: og:image is an absolute address`, /^https?:\/\//.test(h.ogImage ?? ''), String(h.ogImage));
     if (lang === 'pt') {

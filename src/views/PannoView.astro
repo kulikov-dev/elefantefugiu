@@ -34,7 +34,7 @@ const og = pannoCardPath(epoch.id);
   noindex
   preview={{
     title: t(lang, 'panno.og_title').replace('{name}', name),
-    description: invite,
+    description: t(lang, 'panno.og_description'),
     imageUrl: og ? withBase(og) : undefined,
     imageSize: og ? OG_CARD : undefined,
     imageAlt: title,

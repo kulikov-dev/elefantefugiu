@@ -63,6 +63,8 @@ function showPanno(read: string[]): void {
   const share = panel.querySelector<HTMLElement>('[data-panno-share]');
   if (zoom) zoom.hidden = !all;
   if (share) share.hidden = !all;
+  // The share line counts the stories of the panel as the reader sees them (family mode included): "{stories}" of the template is "N stories" in the right form.
+  if (all) d.shareText = (d.shareTemplate ?? '').replace('{stories}', pickPlural({ p_one: d.storiesOne ?? '', p_few: d.storiesFew ?? '', p_many: d.storiesMany ?? '', p_other: d.storiesOther ?? '' }, 'p', m, d.locale ?? 'en').replace('{n}', String(m)));
   const alt = pickPlural({ p_one: d.altOne ?? '', p_few: d.altFew ?? '', p_many: d.altMany ?? '', p_other: d.altOther ?? '' }, 'p', open.size, d.locale ?? 'en').replace('{n}', String(open.size)).replace('{m}', String(order.length));
   const next = all ? undefined : firstUnread(stories, read, mode);
   const href = next ? (JSON.parse(d.links ?? '{}') as Record<string, string>)[next] : undefined;

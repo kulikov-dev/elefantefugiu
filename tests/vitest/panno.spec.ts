@@ -170,7 +170,7 @@ describe('states of the panel', () => {
 });
 
 describe('panno in the data of an epoch', () => {
-  const ok = { image: 'roma.jpg', cols: 6, rows: 4 };
+  const ok = { image: 'roma.jpg', cols: 6, rows: 4, share_hook: { pt: 'a', en: 'b', ru: 'в' } };
   it('accepts whole numbers of tiles from 4 to 14', () => {
     expect(pannoSchema.safeParse(ok).success).toBe(true);
     expect(pannoSchema.safeParse({ ...ok, cols: 14, rows: 14 }).success).toBe(true);
@@ -181,6 +181,12 @@ describe('panno in the data of an epoch', () => {
     expect(pannoSchema.safeParse({ ...ok, rows: 15 }).success).toBe(false);
     expect(pannoSchema.safeParse({ ...ok, cols: 6.5 }).success).toBe(false);
     expect(pannoSchema.safeParse({ ...ok, extra: 1 }).success).toBe(false);
-    expect(pannoSchema.safeParse({ cols: 6, rows: 4 }).success).toBe(false);
+    expect(pannoSchema.safeParse({ cols: 6, rows: 4, share_hook: ok.share_hook }).success).toBe(false);
+  });
+
+  it('needs the share hook in all three languages', () => {
+    expect(pannoSchema.safeParse({ image: ok.image, cols: 6, rows: 4 }).success).toBe(false);
+    expect(pannoSchema.safeParse({ ...ok, share_hook: { pt: 'a', en: 'b' } }).success).toBe(false);
+    expect(pannoSchema.safeParse({ ...ok, share_hook: { pt: 'a', en: '', ru: 'в' } }).success).toBe(false);
   });
 });

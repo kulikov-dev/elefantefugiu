@@ -259,7 +259,9 @@ export const thenNowCard = z
 export const PANNO_GRID_MIN = 4;
 export const PANNO_GRID_MAX = 14;
 const pannoSide = z.number().int().min(PANNO_GRID_MIN).max(PANNO_GRID_MAX);
-export const pannoSchema = z.strictObject({ image: z.string().min(1), cols: pannoSide, rows: pannoSide });
+/** The hook of the share text ("from granite pigs to a bathhouse where women paid double"): lower case, no full stop, in every language. */
+const shareHook = z.strictObject({ pt: z.string().min(1), en: z.string().min(1), ru: z.string().min(1) });
+export const pannoSchema = z.strictObject({ image: z.string().min(1), cols: pannoSide, rows: pannoSide, share_hook: shareHook });
 
 export const EPOCH_PLACEHOLDER_FIELDS = ['name', 'theme', 'style', 'intro', 'fallback_image'] as const;
 

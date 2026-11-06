@@ -17,7 +17,7 @@ interface Props {
   /** The slug of the epoch in this language: the page of the finished panel (the share link) lies under it. */
   epochSlug: string;
   epochName: string;
-  panno: { image: string; cols: number; rows: number };
+  panno: { image: string; cols: number; rows: number; share_hook: Record<Lang, string> };
   /** Story id -> address of its page, for the stories of the epoch. */
   links: Record<string, string>;
 }
@@ -40,7 +40,8 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
   data-epoch-id={epochId}
   data-share-url={pannoHref(lang, epochSlug)}
   data-share-title={t(lang, 'panno.og_title').replace('{name}', epochName)}
-  data-share-text={t(lang, 'panno.share_text').replace('{name}', epochName)}
+  data-share-template={t(lang, 'panno.share_text').replace('{name}', epochName).replace('{hook}', panno.share_hook[lang])}
+  {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.stories')).map(([k, v]) => [`data-stories-${k}`, v]))}
   data-copied={t(lang, 'panno.copied')}
   data-copy-failed={t(lang, 'card.share_failed')}
   data-order={openOrder(epochId, cols, rows).join(',')}

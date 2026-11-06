@@ -52,6 +52,10 @@
     image: avis.jpg
     cols: 9
     rows: 6
+    share_hook:
+      pt: "de um elefante para o papa ao mar que ferve para lá do cabo"
+      en: "from an elephant for the pope to the sea that boils beyond the cape"
+      ru: "от слона для папы римского до моря, которое кипит за мысом"
   fallback_image:
     file: epoca-avis-e-descobrimentos.webp
     alt:
@@ -187,6 +191,10 @@
     image: pombal.jpg
     cols: 12
     rows: 8
+    share_hook:
+      pt: "da neve para os cafés de Lisboa aos morcegos da biblioteca"
+      en: "from snow for Lisbon’s cafés to bats in the library"
+      ru: "от снега для лиссабонских кафе до летучих мышей в библиотеке"
   fallback_image:
     file: epoca-pombal-e-terramoto.webp
     alt:
@@ -362,6 +370,10 @@
     image: roma.jpg
     cols: 6
     rows: 4
+    share_hook:
+      pt: "dos porcos de granito às termas onde as mulheres pagavam o dobro"
+      en: "from granite pigs to a bathhouse where women paid double"
+      ru: "от гранитных свиней до бани, где женщины платили вдвое"
   fallback_image:
     file: epoca-lusitania-e-roma.webp
     alt:
@@ -545,6 +557,10 @@
     image: uniao.jpg
     cols: 12
     rows: 8
+    share_hook:
+      pt: "de touros contra um desembarque a uma capela trazida de Roma às peças"
+      en: "from bulls against a landing party to a chapel shipped from Rome in pieces"
+      ru: "от быков против десанта до часовни, которую привезли из Рима по частям"
   fallback_image:
     file: epoca-uniao-restauracao-e-ouro-do-brasil.webp
     alt:
@@ -670,6 +686,10 @@
     image: monarquia.jpg
     cols: 9
     rows: 6
+    share_hook:
+      pt: "do elevador que Eiffel não construiu à braguinha que se tornou ukulele"
+      en: "from the elevator Eiffel didn’t build to the guitar that became the ukulele"
+      ru: "от лифта, который построил не Эйфель, до гитары, ставшей укулеле"
   fallback_image:
     file: epoca-monarquia-e-republica.webp
     alt:
