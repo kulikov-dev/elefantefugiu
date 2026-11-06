@@ -122,14 +122,18 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     box-shadow: none;
   }
 
+  /* The grid and the reward button share one cell, so the button lies over the whole panel with no positioning: a positioned box here
+     painted over the open family menu of the header and took its clicks. */
   .panno__frame {
-    position: relative;
+    display: grid;
+  }
+
+  .panno__frame > * {
+    grid-area: 1 / 1;
   }
 
   /* The reward button lies over the whole panel; it is there only when the panel is complete. */
   .panno__zoom {
-    position: absolute;
-    inset: 0;
     padding: 0;
     border: 0;
     border-radius: var(--radius-sm);
