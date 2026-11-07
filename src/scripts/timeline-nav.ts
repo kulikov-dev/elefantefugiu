@@ -1,5 +1,6 @@
 // Arrows of the time strip on the home page (from 48rem up; the CSS hides them below): each press scrolls the strip by one epoch, the arrow at the
 // end of the strip is disabled. Without this script the buttons stay hidden and the strip is scrolled by hand (finger, trackpad, keyboard).
+// A strip with a chosen epoch (aria-pressed, the filter of the map page) is scrolled so that the choice is in view, on load and whenever the choice changes.
 const strip = document.querySelector<HTMLElement>('[data-timeline-scroller]');
 const prev = document.querySelector<HTMLButtonElement>('[data-timeline-prev]');
 const next = document.querySelector<HTMLButtonElement>('[data-timeline-next]');
@@ -23,6 +24,16 @@ if (strip && prev && next) {
     strip.scrollTo({ left, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   };
 
+  const revealChosen = () => {
+    const chosen = strip.querySelector<HTMLElement>('[aria-pressed="true"]')?.closest<HTMLElement>('.timeline__item');
+    if (!chosen) return;
+    const left = leftOf(chosen);
+    const right = left + chosen.getBoundingClientRect().width;
+    if (left < strip.scrollLeft || right > strip.scrollLeft + strip.clientWidth) {
+      strip.scrollTo({ left: Math.max(0, left - strip.clientWidth / 4), behavior: 'auto' });
+    }
+  };
+
   prev.addEventListener('click', () => go(-1));
   next.addEventListener('click', () => go(1));
   strip.addEventListener('scroll', update, { passive: true });
@@ -30,5 +41,7 @@ if (strip && prev && next) {
   if ('ResizeObserver' in window) new ResizeObserver(update).observe(strip);
   prev.removeAttribute('hidden');
   next.removeAttribute('hidden');
+  revealChosen();
+  new MutationObserver(revealChosen).observe(strip, { attributes: true, attributeFilter: ['aria-pressed'], subtree: true });
   update();
 }

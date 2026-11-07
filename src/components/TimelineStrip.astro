@@ -1,0 +1,33 @@
+---
+// The strip of epochs along a coloured axis, shared by the home page (full items: theme, number of stories) and the map page (compact items: name and years).
+// The component is the frame: the arrows (src/scripts/timeline-nav.ts shows them from 48rem up), the scrolling box with the fade at the edges and the list;
+// the items (`<li class="timeline__item ...">`) are the slot. The styles are global, in src/styles/timeline.css.
+import '../styles/timeline.css';
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  /** The compact strip: every epoch in a cell of the same width, no extra lines. */
+  compact?: boolean;
+  /** The scrolling box is a region that takes focus (so the keyboard scrolls it); give the id of its heading. Without it the items themselves are the stops. */
+  labelledby?: string;
+  /** The name of the list for a screen reader. */
+  label: string;
+}
+
+const { lang, compact = false, labelledby, label } = Astro.props;
+---
+<div class="timeline-nav">
+  <button type="button" class="timeline-nav__button timeline-nav__button--prev" data-timeline-prev aria-label={t(lang, 'home.timeline_prev')} hidden disabled><span aria-hidden="true">‹</span></button>
+  <div class="timeline-wrap" data-scroll-fade data-timeline-scroller tabindex={labelledby ? 0 : undefined} role={labelledby ? 'region' : undefined} aria-labelledby={labelledby}>
+    <ol class:list={['timeline', { 'timeline--compact': compact }]} aria-label={label}>
+      <slot />
+    </ol>
+  </div>
+  <button type="button" class="timeline-nav__button timeline-nav__button--next" data-timeline-next aria-label={t(lang, 'home.timeline_next')} hidden><span aria-hidden="true">›</span></button>
+</div>
+
+<script>
+  import '../scripts/timeline-nav';
+</script>

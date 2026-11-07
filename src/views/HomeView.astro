@@ -23,6 +23,7 @@ import { pinsFor } from '../lib/start-pins';
 import { setKey, startSet, withFallback } from '../lib/start-set';
 import { HOME_PREVIEW } from '../lib/og';
 import { OG_CARD, festaCardPath, festaCardSize, homeCardPath } from '../lib/og-cards';
+import TimelineStrip from '../components/TimelineStrip.astro';
 import { liveMyths } from '../lib/myths';
 import { MYTHS } from '../lib/myths-data';
 
@@ -202,11 +203,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
     <section id={EPOCHS_ANCHOR} aria-labelledby="epocas-title">
       <h2 id="epocas-title">{t(lang, 'home.epochs_heading')}</h2>
       <!-- All the epochs in order: the ready ones stand out (a link, the theme phrase, the number of stories), the others are pale with "soon". -->
-      <div class="timeline-nav">
-        <!-- The buttons need the script (it removes `hidden`); from 48rem up. -->
-        <button type="button" class="timeline-nav__button timeline-nav__button--prev" data-timeline-prev aria-label={t(lang, 'home.timeline_prev')} hidden disabled><span aria-hidden="true">‹</span></button>
-        <div class="timeline-wrap" data-scroll-fade data-timeline-scroller tabindex="0" role="region" aria-labelledby="epocas-title">
-        <ol class="timeline" aria-label={t(lang, 'home.timeline_label')}>
+      <TimelineStrip lang={lang} labelledby="epocas-title" label={t(lang, 'home.timeline_label')}>
           {
             tiles.map(({ epoch, available, counts }) =>
               available ? (
@@ -230,10 +227,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
               ),
             )
           }
-        </ol>
-        </div>
-        <button type="button" class="timeline-nav__button timeline-nav__button--next" data-timeline-next aria-label={t(lang, 'home.timeline_next')} hidden><span aria-hidden="true">›</span></button>
-      </div>
+      </TimelineStrip>
       {soonCount > 0 && <p class="timeline__more">{plural(lang, 'plural.epochs_more', soonCount)}</p>}
     </section>
 
@@ -275,7 +269,6 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
   import '../scripts/last-epoch';
   import '../scripts/home-myths';
   import '../scripts/start-set';
-  import '../scripts/timeline-nav';
 </script>
 
 <style>
@@ -400,147 +393,6 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
     list-style: none;
   }
 
-  /* ---- the time strip: all the epochs in order ---- */
-  /* The epochs with stories are wider (a theme phrase and the number of stories); the others are narrow, pale and say "soon". */
-  .timeline-nav {
-    position: relative;
-    margin-block-start: var(--space-5);
-  }
-
-  /* The strip scrolls by finger, trackpad, Shift + wheel and keyboard (it takes focus); with the script the scrollbar is hidden and the arrows
-     below take its place. Without the script: a thin system scrollbar and a fade that always stands at the right edge. */
-  .timeline-wrap {
-    overflow-x: auto;
-    padding-block-end: var(--space-2);
-    scroll-snap-type: x proximity;
-    scrollbar-width: thin;
-  }
-
-  :global(html:not([data-js])) .timeline-wrap {
-    --fade-end: var(--scroll-fade-size);
-  }
-
-  :global(html[data-js]) .timeline-wrap {
-    scrollbar-width: none;
-  }
-
-  :global(html[data-js]) .timeline-wrap::-webkit-scrollbar {
-    display: none;
-  }
-
-  .timeline-wrap:focus-visible {
-    outline: var(--ring-width) solid var(--color-focus);
-    outline-offset: var(--ring-offset-tight);
-  }
-
-  .timeline-nav__button {
-    display: none;
-    position: absolute;
-    inset-block-start: var(--space-2);
-    z-index: 1;
-    align-items: center;
-    justify-content: center;
-    width: var(--touch-target);
-    height: var(--touch-target);
-    padding: 0;
-    border: 1px solid var(--color-border-strong);
-    border-radius: 50%;
-    background: var(--color-surface);
-    color: var(--color-ink);
-    font-size: var(--text-xl);
-    line-height: 1;
-    cursor: pointer;
-  }
-
-  .timeline-nav__button--prev {
-    inset-inline-start: 0;
-  }
-
-  .timeline-nav__button--next {
-    inset-inline-end: 0;
-  }
-
-  /* At the end of the strip the arrow is plainly dimmer than the live one: no fill, a faint frame, a pale mark. */
-  .timeline-nav__button:disabled {
-    border-color: var(--epoch-line);
-    background: transparent;
-    color: var(--color-ink-muted);
-    opacity: var(--opacity-disabled);
-    cursor: default;
-  }
-
-  /* The arrows stand in their own gutters beside the strip, so they never cover an epoch. */
-  @media (min-width: 48rem) {
-    .timeline-nav {
-      padding-inline: calc(var(--touch-target) + var(--space-2));
-    }
-
-    .timeline-nav__button {
-      display: inline-flex;
-    }
-  }
-
-  .timeline {
-    display: flex;
-    gap: 0;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .timeline__item {
-    position: relative;
-    scroll-snap-align: start;
-    display: flex;
-    flex: 1 0 var(--timeline-item-min);
-    flex-direction: column;
-    gap: var(--space-1);
-    padding: var(--space-3) var(--space-2) var(--space-1);
-    border-block-start: var(--border-heavy) solid var(--epoch-line);
-    font-size: var(--text-sm);
-    line-height: 1.3;
-  }
-
-  /* A dot on the line for each epoch. */
-  .timeline__item::before {
-    content: '';
-    position: absolute;
-    inset-block-start: calc(var(--size-dot) / -2 - var(--border-heavy) / 2);
-    inset-inline-start: var(--space-2);
-    width: var(--size-dot);
-    height: var(--size-dot);
-    border-radius: 50%;
-    background: var(--epoch-line);
-  }
-
-  .timeline__item--ready {
-    flex: 2 0 var(--timeline-ready-min);
-    border-block-start-color: var(--tone);
-  }
-
-  /* The line and the dot of a ready epoch are in the primary colour of that epoch (--tone, light and dark); the epochs to come stay grey. */
-  .timeline__item--ready::before {
-    background: var(--tone);
-  }
-
-  .timeline__item--ready a {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    min-height: var(--touch-target);
-    color: var(--color-ink);
-    text-decoration: none;
-  }
-
-  .timeline__item--ready .timeline__name {
-    font-size: var(--text-base);
-    font-weight: 700;
-  }
-
-  .timeline__item--ready a:hover .timeline__name {
-    text-decoration: underline;
-  }
-
   .timeline__theme {
     font-family: var(--font-body);
     font-style: italic;
@@ -569,26 +421,6 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
     border-radius: var(--radius-md);
     background: var(--color-accent-tint);
     font-size: var(--text-sm);
-  }
-
-  /* An epoch that is not ready: paler than the others (thin name, a hollow dot, a faint line). */
-  .timeline__item--soon {
-    color: var(--color-ink-muted);
-    border-block-start-color: var(--epoch-line);
-  }
-
-  .timeline__item--soon .timeline__name {
-    font-weight: 400;
-  }
-
-  .timeline__item--soon::before {
-    background: var(--color-surface);
-    border: var(--border-medium) solid var(--epoch-line);
-  }
-
-  .timeline__years {
-    color: var(--color-ink-muted);
-    font-weight: 400;
   }
 
   .timeline__soon {
