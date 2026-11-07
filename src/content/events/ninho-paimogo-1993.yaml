@@ -1,0 +1,146 @@
+id: ninho-paimogo-1993
+slug:
+  pt: "o-ninho-que-a-agua-inundou"
+  en: "the-nest-the-flood-took"
+  ru: "gnezdo-kotoroe-zalilo-vodoy"
+title:
+  pt: "O ninho que a água inundou"
+  en: "The Nest the Flood Took"
+  ru: "Гнездо, которое залило водой"
+epoch: antes-de-portugal
+level: frame
+year: -152000000
+years_ago:
+  n: 152
+  unit: million
+place:
+  name:
+    pt: "Praia de Paimogo, Lourinhã"
+    en: "Paimogo beach, Lourinhã"
+    ru: "Пляж Паймогу, Лоуриньян"
+  short:
+    pt: "Lourinhã"
+    en: "Lourinhã"
+    ru: "Лоуриньян"
+  lat: 39.241971
+  lon: -9.3133
+bridge:
+  name: "Museu da Lourinhã"
+  title:
+    pt: "Museu da Lourinhã"
+    en: "Lourinhã Museum"
+    ru: "Музей Лоуриньяна"
+  address: "Rua João Luís de Moura 95, Lourinhã"
+  lat: 39.241971
+  lon: -9.3133
+  maps_url: "https://www.google.com/maps/place/Lourinh%C3%A3+Museum/@39.2419751,-9.3158749,17z/data=!3m1!4b1!4m6!3m5!1s0xd1f36576980a9f9:0x4b600b86601ee71!8m2!3d39.241971!4d-9.3133!16s%2Fm%2F02x3zx5"
+  url: "https://museulourinha.org/"
+  note:
+    pt: "Aqui guardam-se os achados do ninho de Paimogo."
+    en: "The finds from the Paimogo nest are kept here."
+    ru: "Здесь хранятся находки из гнезда Паймогу."
+threads:
+  - natureza
+importance: 3
+label: documented
+min_age: 'all'
+sensitive: false
+hook:
+  pt: "Uma cheia destruiu um ninho de dinossauro e guardou-o para nós."
+  en: "A flood destroyed a dinosaur nest and saved it for us."
+  ru: "Паводок погубил гнездо динозавра и сохранил его для нас."
+story:
+  pt: >-
+    Em 1984, Isabel e Horácio Mateus fundaram com amigos um pequeno museu na Lourinhã e começaram a recolher fósseis na costa da região. Procuraram com persistência e, em 1993, numa arriba sobre a praia de Paimogo, repararam em fragmentos de casca na rocha.
+
+    Havia muita casca porque era um ninho inteiro: cerca de uma centena de ovos de um dinossauro carnívoro, provavelmente o Lourinhanosaurus. E em alguns ovos conservaram-se ossinhos minúsculos de crias que nunca chegaram a nascer.
+
+    Ovos de dinossauro encontram-se com alguma frequência, mas embriões lá dentro quase nunca: os seus ossos frágeis raramente se conservam. Por isso o pequeno museu ficou conhecido entre paleontólogos de todo o mundo, e a Lourinhã passou a ser chamada a capital dos dinossauros portugueses.
+  en: >-
+    In 1984, Isabel and Horácio Mateus and a group of friends founded a small museum in Lourinhã and began collecting fossils along the local coast. They kept searching, and in 1993, in a cliff above Paimogo beach, they spotted bits of eggshell in the rock.
+
+    There was a lot of shell because it was a whole nest: about a hundred eggs of a meat-eating dinosaur, most likely Lourinhanosaurus. And inside some of the eggs were the tiny bones of babies that never hatched.
+
+    Dinosaur eggs turn up fairly often, but embryos inside them almost never do: their fragile bones rarely survive. So paleontologists around the world heard about the little museum, and Lourinhã came to be called Portugal’s dinosaur capital.
+  ru: >-
+    В 1984 году Изабел и Орасиу Матеуш вместе с друзьями основали в Лоуриньяне маленький музей и стали собирать окаменелости на здешнем побережье. Искали они упорно, и в 1993 году в обрыве над пляжем Паймогу заметили в камне обломки скорлупы.
+
+    Скорлупы было много, потому что это было целое гнездо: около сотни яиц хищного динозавра, скорее всего лоуриньянозавра. А в некоторых яйцах сохранились крошечные косточки детёнышей, которые так и не вылупились.
+
+    Яйца динозавров находят нередко, а зародыши в них почти никогда: их хрупкие кости обычно не сохраняются. Поэтому о маленьком музее узнали палеонтологи всего мира, а Лоуриньян стали называть столицей португальских динозавров.
+meanwhile:
+  - scope: world
+    year: -152000000
+    text:
+      pt: "Na América do Norte pastavam braquiossauros"
+      en: "Brachiosaurus grazed in North America"
+      ru: "В Северной Америке паслись брахиозавры"
+    source: "https://en.wikipedia.org/wiki/Brachiosaurus"
+more:
+  pt: >-
+    Só em 2024 se explicou porque é que as crias ficaram nos ovos. Investigadores espanhóis e portugueses estudaram o ninho durante quatro anos e concluíram que os ovos foram postos por pelo menos duas fêmeas. Depois veio uma cheia: a água arrastou os ovos, amontoou-os e cobriu-os de lodo. As crias não nasceram, mas foi esse lodo que lhes conservou os ossos.
+
+
+    O mesmo estudo deu pistas sobre a forma como estes predadores faziam os ninhos. Ao que parece, não punham os ovos num buraco, mas num monte de terra, como fazem hoje algumas aves.
+
+
+    O ninho de Paimogo continua no Museu da Lourinhã, que os Mateus começaram com um punhado de achados. Hoje o museu guarda os exemplares a partir dos quais foram descritas novas espécies, entre elas a Miragaia.
+  en: >-
+    Why the babies stayed in their eggs was only explained in 2024. Spanish and Portuguese researchers studied the nest for four years and found that at least two females had laid the eggs. Then a flood came: the water shifted the eggs, piled them up, and buried them in mud. The babies never hatched, but the mud is what preserved their bones.
+
+
+    The same study hinted at how these predators built their nests. It seems they laid their eggs not in a hole but in a mound of earth, as some birds do today.
+
+
+    The Paimogo nest is still at the Lourinhã Museum, which the Mateuses started with a handful of finds. Today it holds the specimens that new species were described from, Miragaia among them.
+  ru: >-
+    Почему детёныши остались в яйцах, объяснили только в 2024 году. Испанские и португальские учёные четыре года изучали гнездо и выяснили, что яйца отложили как минимум две самки. Потом на берег пришёл паводок: вода сдвинула яйца, сгрудила их в кучу и засыпала илом. Детёныши не вылупились, но именно ил сохранил их кости.
+
+
+    Та же работа подсказала, как эти хищники устраивали гнёзда. Похоже, яйца они клали не в ямку, а в насыпанную горку земли, как сейчас делают некоторые птицы.
+
+
+    Гнездо из Паймогу и сегодня лежит в музее Лоуриньяна, который Матеуши когда-то начинали с нескольких находок. Теперь там хранятся образцы, по которым описаны новые виды, и среди них Мирагайя.
+sources:
+  - title: "Wikipedia: Lourinhanosaurus"
+    url: "https://en.wikipedia.org/wiki/Lourinhanosaurus"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "1993, cerca de 100 ovos"
+      en: "1993, about 100 eggs"
+      ru: "1993 год, около 100 яиц"
+  - title: "FCT NOVA, 2024: Portuguese and Spanish paleontologists unveil mysteries of Jurassic dinosaur reproduction"
+    url: "https://www.fct.unl.pt/en/news/2024/06/portuguese-and-spanish-paleontologists-unveil-mysteries-jurassic-dinosaur-reproduction"
+    type: institutional
+    accessed: '2026-11-07'
+    note:
+      pt: "Duas fêmeas, cheia, ninhos em monte; o achado de Isabel e Horácio Mateus"
+      en: "Two females, the flood, mound nests; the find of Isabel and Horácio Mateus"
+      ru: "Две самки, паводок, гнёзда-горки; находка Изабел и Орасиу Матеуш"
+  - title: "Wikipédia: Museu da Lourinhã"
+    url: "https://pt.wikipedia.org/wiki/Museu_da_Lourinh%C3%A3"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "Fundado em 1984 por Isabel e Horácio Mateus; holótipos"
+      en: "Founded in 1984 by Isabel and Horácio Mateus; holotypes"
+      ru: "Основан в 1984 году Изабел и Орасиу Матеуш; голотипы"
+image:
+  file: ninho-paimogo-1993.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um homem e uma mulher de chapéu, ajoelhados numa praia, limpam com pincéis um ninho com cerca de vinte ovos numa arriba; ao lado um balde, um martelo e um caderno, e ao fundo uma fortaleza sobre o cabo."
+    en: "Blue-and-white azulejo-style illustration: a man and a woman in hats kneel on a beach and brush a nest of about twenty eggs out of a cliff; beside them a bucket, a hammer and a notebook, and a fort on a headland in the distance."
+    ru: "Иллюстрация в духе сине-белого азулежу: мужчина и женщина в шляпах стоят на коленях на пляже и кисточками расчищают в обрыве гнездо примерно с двадцатью яйцами; рядом ведро, молоток и тетрадь, а вдали на мысу крепость."
+  caption:
+    pt: "Paleontólogos no ninho de Paimogo, 1993. Ilustração em estilo azulejo, criada por IA."
+    en: "Paleontologists at the Paimogo nest, 1993. Azulejo-style illustration, created by AI."
+    ru: "Палеонтологи у гнезда в Паймогу, 1993 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "40% 55%"
+status: ready
+published: '2026-11-07'
+placeholder: false
+ru_ready: true

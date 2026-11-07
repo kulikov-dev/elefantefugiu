@@ -1,0 +1,139 @@
+id: pegadas-galinha-1994
+slug:
+  pt: "um-passeio-de-147-metros"
+  en: "a-147-meter-stroll"
+  ru: "progulka-dlinoy-147-metrov"
+title:
+  pt: "Um passeio de 147 metros"
+  en: "A 147-Meter Stroll"
+  ru: "Прогулка длиной 147 метров"
+epoch: antes-de-portugal
+level: story
+year: -170000000
+years_ago:
+  n: 170
+  unit: million
+place:
+  name:
+    pt: "Serra de Aire, Bairro, Ourém"
+    en: "Serra de Aire, Bairro, Ourém"
+    ru: "Серра-де-Айре, Байру, Оурен"
+  short:
+    pt: "Serra de Aire"
+    en: "Serra de Aire"
+    ru: "Серра-де-Айре"
+  lat: 39.5725874
+  lon: -8.5887259
+bridge:
+  name: "Monumento Natural das Pegadas de Dinossáurios da Serra de Aire"
+  title:
+    pt: "Monumento Natural das Pegadas de Dinossáurios da Serra de Aire"
+    en: "Natural Monument of the Dinosaur Footprints of the Serra de Aire"
+    ru: "Природный памятник «Следы динозавров Серра-де-Айре»"
+  address: "Bairro, Ourém"
+  lat: 39.5725874
+  lon: -8.5887259
+  maps_url: "https://www.google.com/maps/place/Monumento+Natural+das+Pegadas+de+Dinoss%C3%A1urios+-+Our%C3%A9m+%2F+Torres+Novas/@39.5725915,-8.5913008,17z/data=!3m1!4b1!4m6!3m5!1s0xd18853322971aed:0xae2f7fa45a4e28ae!8m2!3d39.5725874!4d-8.5887259!16s%2Fg%2F1q54w18b0"
+  url: "https://roteirodasminas.dgeg.gov.pt/en/lista-de-pontos/natural-monument-of-dinosaur-footprints-of-the-aire-sierra-en"
+  note:
+    pt: "O caminho acompanha o trilho de pegadas mais longo."
+    en: "The path follows the longest line of footprints."
+    ru: "Дорожка идёт вдоль самой длинной цепочки следов."
+threads:
+  - natureza
+  - engenho
+importance: 2
+label: documented
+min_age: 'all'
+sensitive: false
+hook:
+  pt: "Pedreira fechada por pegadas deixadas há 170 milhões de anos."
+  en: "A quarry was shut down over footprints left 170 million years ago."
+  ru: "Карьер закрыли из-за следов, оставленных 170 млн лет назад."
+story:
+  pt: >-
+    Na Serra de Aire, junto à aldeia do Bairro, perto de Ourém, a família Galinha extraiu calcário durante anos. A pedra era retirada camada a camada e, no verão de 1994, numa laje acabada de pôr a descoberto, apareceram filas de covas enormes.
+
+    Eram pegadas de saurópodes. Há cerca de 170 milhões de anos havia aqui águas pouco fundas, e gigantes de pescoço comprido caminharam sobre o lodo mole. O lodo endureceu, novas camadas cobriram-no, e as pegadas ficaram escondidas até os trabalhadores da pedreira as descobrirem. O trilho mais longo estende-se por 147 metros, um dos mais longos conhecidos no mundo.
+
+    Continuar a extrair pedra significava destruir o achado. Por isso a pedreira fechou, e a laje foi classificada como monumento natural.
+  en: >-
+    In the Serra de Aire hills, near the village of Bairro outside Ourém, the Galinha family quarried limestone for years. The stone came off layer by layer, and in the summer of 1994 rows of huge dents appeared on a freshly exposed slab.
+
+    They were sauropod footprints. About 170 million years ago this was shallow water, and long-necked giants walked across the soft mud. The mud turned to stone, new layers covered it, and the tracks stayed hidden until the quarry workers uncovered them. The longest trackway runs for 147 meters, one of the longest known in the world.
+
+    Quarrying any further would have destroyed the find. So the quarry was closed, and the slab was declared a natural monument.
+  ru: >-
+    В Серра-де-Айре, у деревни Байру под Оуренем, годами добывали известняк в карьере семьи Галинья. Камень снимали пласт за пластом, и летом 1994 года на свежей плите показались ряды огромных вмятин.
+
+    Это были следы зауроподов. Около 170 млн лет назад здесь было мелководье, и длинношеие гиганты прошли по мягкому илу. Ил окаменел, сверху его укрыли новые слои, и следы пролежали под ними, пока их не вскрыли камнерезы. Самая длинная цепочка тянется на 147 метров, это одна из самых длинных известных в мире.
+
+    Добывать камень дальше значило уничтожить находку. Поэтому карьер закрыли, а плиту объявили природным памятником.
+more:
+  pt: >-
+    As pegadas de um saurópode são de dois tipos. As patas traseiras deixavam grandes covas ovais, as dianteiras marcas mais pequenas, em forma de ferradura. Pela distância entre elas, os cientistas percebem o tamanho do animal, o comprimento do passo e para onde virava.
+
+
+    Pegadas de saurópodes desta idade, do Jurássico Médio, são raras no mundo. Por isso a pedreira do Galinha é conhecida por paleontólogos muito para lá de Portugal: mostra como andavam os gigantes de pescoço comprido muito antes de os predadores da história vizinha porem os seus ovos na Lourinhã.
+
+
+    Hoje há um caminho sobre a laje, e pode-se acompanhar o trilho mais longo, passo a passo.
+  en: >-
+    Sauropods left two kinds of prints. The hind feet made large oval pits, the front feet smaller horseshoe-shaped ones. From the spacing, scientists can tell how big the animal was, how long its stride was, and where it turned.
+
+
+    Sauropod tracks this old, from the Middle Jurassic, are rare worldwide. That’s why paleontologists far beyond Portugal know the Galinha quarry: it shows how the long-necked giants walked long before the predators in the neighboring story laid their eggs at Lourinhã.
+
+
+    Today a path runs across the slab, and you can walk alongside the longest trackway, step by step.
+  ru: >-
+    Следы у зауропода двух видов. Задние лапы оставляли большие овальные ямы, передние поменьше, в форме подковы. По расстоянию между ними учёные видят, какой длины было животное, как широко оно шагало и куда поворачивало.
+
+
+    Следов зауроподов такого возраста, средней юры, в мире сохранилось мало. Поэтому карьер Галинья знают палеонтологи далеко за пределами Португалии: по нему видно, как ходили длинношеие гиганты задолго до того, как в Лоуриньяне отложили свои яйца хищники из соседней истории.
+
+
+    Сейчас по плите проложена дорожка, и самую длинную цепочку можно пройти рядом, шаг за шагом.
+sources:
+  - title: "Atlas Obscura: Pedreira do Galinha"
+    url: "https://www.atlasobscura.com/places/pedreira-do-galinha"
+    type: website
+    accessed: '2026-11-07'
+    note:
+      pt: "1994, 147 m"
+      en: "1994, 147 m"
+      ru: "1994 год, 147 м"
+  - title: "DGEG, Roteiro das Minas: Natural Monument of Dinosaur Footprints of the Aire Sierra"
+    url: "https://roteirodasminas.dgeg.gov.pt/en/lista-de-pontos/natural-monument-of-dinosaur-footprints-of-the-aire-sierra-en"
+    type: institutional
+    accessed: '2026-11-07'
+    note:
+      pt: "147 m e 142 m, «entre os mais longos conhecidos no mundo»"
+      en: "147 m and 142 m, “among the longest known in the world”"
+      ru: "147 м и 142 м, «одни из самых длинных известных в мире»"
+  - title: "Wikipedia: Aire Range Dinosaur Tracks Natural Monument"
+    url: "https://en.wikipedia.org/wiki/Aire_Range_Dinosaur_Tracks_Natural_Monument"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "Jurássico Médio, Bajociano–Batoniano (cerca de 170 milhões de anos); a página indica 175"
+      en: "Middle Jurassic, Bajocian–Bathonian (about 170 million years); the page says 175"
+      ru: "Средняя юра, байос–бат (около 170 млн лет); на странице стоит 175"
+image:
+  file: pegadas-galinha-1994.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa pedreira, três trabalhadores de capacete, um com picareta e outro a apontar, ao lado de uma miniescavadora; sobre a laje correm duas filas de pegadas enormes, um rapaz corre junto a elas e, ao longe, um dinossauro de pescoço comprido."
+    en: "Blue-and-white azulejo-style illustration: in a quarry, three workers in hard hats, one with a pickaxe and one pointing, stand beside a mini-excavator; two lines of huge footprints cross the slab, a boy runs alongside them, and a long-necked dinosaur stands far away."
+    ru: "Иллюстрация в духе сине-белого азулежу: в карьере трое рабочих в касках, один с киркой, другой показывает рукой, стоят у мини-экскаватора; по плите тянутся две цепочки огромных следов, рядом бежит мальчик, а вдали стоит длинношеий динозавр."
+  caption:
+    pt: "A pedreira do Galinha, 1994. Ilustração em estilo azulejo, criada por IA."
+    en: "The Galinha quarry, 1994. Azulejo-style illustration, created by AI."
+    ru: "Карьер Галинья, 1994 год. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-07'
+placeholder: false
+ru_ready: true

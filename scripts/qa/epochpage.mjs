@@ -2,7 +2,7 @@
 // the labels "Timeline / Cards", the active card, the "more eras" dropdown (keyboard, without JavaScript, no dead links).
 // Run against dist/ served by serve.mjs (base path "/"):   node epochpage.mjs [years cards switch active more]
 import { fsPath, launchBrowser } from './browser.mjs';
-import { byId, epochPath, inEpoch, readyEpochs } from './data.mjs';
+import { byId, epochPath, inEpoch, readyEpochs, ui } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -42,13 +42,15 @@ const open = async (path, { width = 1280, height = 800, js = true } = {}) => {
 if (want('years')) {
   // The year on the scale is the year_scale text of the story in the language when the data has one ("séc. XVIII"), else a four-digit year.
   const yearIsRight = (r, lang) => {
-    const scale = byId(r.id)?.year_scale?.[lang]?.trim();
+    const e = byId(r.id);
+    // A story told in "years ago" (the prologue) has the scale text made from its count: "150 million years ago".
+    const scale = e?.year_scale?.[lang]?.trim() || (e?.years_ago ? ui(`card.ago_scale_${e.years_ago.unit}`, lang).replace('{n}', String(e.years_ago.n)) : undefined);
     return scale ? r.year === scale.replace(/\s+/g, ' ') : /^\d{4}$/.test(r.year);
   };
   for (const lang of ['pt', 'en', 'ru']) {
     const page = await open(POMBAL[lang]);
     const m = await page.evaluate(() => {
-      const items = [...document.querySelectorAll('ol.feed > li')];
+      const items = [...document.querySelectorAll('ol.feed > li.feed__item')];
       const rows = items.map((li) => {
         const y = li.querySelector('.feed__year');
         const card = li.querySelector('.ecard');
@@ -66,7 +68,7 @@ if (want('years')) {
   }
   const phone = await open(POMBAL.pt, { width: 320 });
   const p = await phone.evaluate(() => {
-    const li = document.querySelector('ol.feed > li');
+    const li = document.querySelector('ol.feed > li.feed__item');
     const y = li.querySelector('.feed__year').getBoundingClientRect();
     const c = li.querySelector('.ecard').getBoundingClientRect();
     return { above: y.bottom <= c.top + 1, sw: document.documentElement.scrollWidth <= innerWidth };
@@ -84,7 +86,7 @@ if (want('cards')) {
     const paddings = [...document.querySelectorAll('ol.feed .ecard')].map((e) => getComputedStyle(e).paddingTop + getComputedStyle(e).paddingLeft);
     // "One line of hook": the hook is as tall as one line (a hook that wraps makes its card taller, whatever else is in it).
     const oneLine = (hook) => hook.getBoundingClientRect().height < parseFloat(getComputedStyle(hook).lineHeight) * 1.6;
-    const withoutHeavy = [...document.querySelectorAll('ol.feed > li')].filter((li) => !li.querySelector('.ecard__heavy') && oneLine(li.querySelector('.ecard__hook'))).map((li) => li.querySelector('.ecard').getBoundingClientRect().height);
+    const withoutHeavy = [...document.querySelectorAll('ol.feed > li.feed__item')].filter((li) => !li.querySelector('.ecard__heavy') && oneLine(li.querySelector('.ecard__hook'))).map((li) => li.querySelector('.ecard').getBoundingClientRect().height);
     return { titles: [...new Set(titles)], paddings: [...new Set(paddings)], maxPlain: Math.max(...withoutHeavy) };
   });
   ok('cards: every title has the same size', c.titles.length === 1, c.titles.join(' '));
@@ -118,10 +120,10 @@ if (want('switch')) {
 // ---------- 4. The active card ----------
 if (want('active')) {
   const page = await open(POMBAL.pt);
-  await page.evaluate(() => document.querySelector('ol.feed > li:nth-child(2)').setAttribute('data-active', ''));
+  await page.evaluate(() => document.querySelector('ol.feed > li.feed__item:nth-child(2)').setAttribute('data-active', ''));
   const a = await page.evaluate(() => {
     const own = (li) => getComputedStyle(li.querySelector('.ecard'));
-    const [first, second] = [...document.querySelectorAll('ol.feed > li')];
+    const [first, second] = [...document.querySelectorAll('ol.feed > li.feed__item')];
     return { active: own(second).boxShadow, other: own(first).boxShadow, titleA: getComputedStyle(second.querySelector('.ecard__title')).fontSize, titleO: getComputedStyle(first.querySelector('.ecard__title')).fontSize };
   });
   ok('active: the chosen card gets a coloured bar on its left edge and nothing else changes (the title keeps its size)', a.active !== 'none' && a.other === 'none' && a.titleA === a.titleO, JSON.stringify(a));

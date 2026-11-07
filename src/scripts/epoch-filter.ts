@@ -11,7 +11,8 @@ const feed = document.querySelector<HTMLElement>('ol.feed');
 
 if (root && feed) {
   const known = (root.dataset.threads ?? '').split(',').filter(Boolean);
-  const items = [...feed.children] as HTMLElement[];
+  // The note where the scale breaks (`.feed__gap`) is not a story: it is hidden by CSS while a filter is on.
+  const items = [...feed.children].filter((el) => !el.classList.contains('feed__gap')) as HTMLElement[];
   const controls = root.querySelector<HTMLElement>('[data-js-only]');
   const empty = document.querySelector<HTMLElement>('[data-empty]');
   const status = root.querySelector<HTMLElement>('[data-status]');

@@ -2,6 +2,7 @@
 // Shared by src/content.config.ts (Astro) and scripts/check-data.ts (readable checks).
 import { z } from 'astro/zod';
 import { missingRu } from '../lib/localize';
+import { yearsAgoProblems } from '../lib/years-ago.mjs';
 import { MEANWHILE_MAX_ITEMS, MEANWHILE_SCOPES, meanwhileProblems, storyStartYear } from '../lib/meanwhile';
 
 /** Text in the site languages. pt and en are always there; ru is optional (an event needs it only when ru_ready is true). */
@@ -137,6 +138,11 @@ export const eventSchema = z
   year: z.union([z.number().int(), yearRange]),
   year_label: text.optional(),
   /**
+   * "About N million / thousand years ago" for a story from before people or long before the common era (the prologue epoch). `year` stays the sort key
+   * (a negative number, the count of years within 1 %), and the captions of the card, the scale and the "Meanwhile" line are made from this field in each language.
+   */
+  years_ago: z.strictObject({ n: z.number().int().positive(), unit: z.enum(['million', 'thousand']) }).optional(),
+  /**
    * The exact day of the event (MM-DD), for the anniversary on the home page ("On this day in 1877"). Only where the text or the sources of the card
    * name the day, only for a single year after 0 (never a period, never a year before the common era).
    */
@@ -207,6 +213,7 @@ export const eventSchema = z
       if (typeof event.year !== 'number' || event.year < 1) ctx.addIssue({ code: 'custom', path: ['day'], message: 'day is only for a single year after 0 (not a period, not before the common era)' });
       else if (new Date(Date.UTC(2024, month - 1, day)).getUTCMonth() !== month - 1) ctx.addIssue({ code: 'custom', path: ['day'], message: 'there is no such day in the calendar' });
     }
+    if (event.years_ago) for (const message of yearsAgoProblems(event.years_ago, event.year)) ctx.addIssue({ code: 'custom', path: ['years_ago'], message });
     for (const p of meanwhileProblems(event.meanwhile ?? [], storyStartYear(event.year))) {
       if (p.level === 'error') ctx.addIssue({ code: 'custom', path: ['meanwhile', p.index], message: p.message });
     }
@@ -283,6 +290,8 @@ export const epochSchema = z
     /** Epoch look (stage 6). Required for MVP epochs. */
     style: epochStyle.optional(),
     mvp: z.boolean(),
+    /** The note on the timeline where the scale breaks (millions of years, then thousands): "nearly 150 million years pass". Shown between the two parts of the feed. */
+    scale_gap: text.optional(),
     /**
      * A short introduction for readers who do not know the epoch (2 or 3 sentences), per language. Every language is optional and a
      * missing one is never replaced by another: the page shows the block only in a language that has the text.

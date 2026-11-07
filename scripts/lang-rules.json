@@ -124,6 +124,7 @@
   "yo": {
     "_about": "ё in Russian: a word written without ё whose form with ё is written somewhere else in the texts is a hit (scripts/check-lang.ts builds the list from the texts). Words that are different words: pairs below.",
     "ignore": [
+      "гнезда",
       "все",
       "всех",
       "всем",

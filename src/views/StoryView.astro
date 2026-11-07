@@ -24,7 +24,7 @@ import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { EPOCHS_ANCHOR, LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
-import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, type EventData } from '../lib/events';
+import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, yearRange, type EventData } from '../lib/events';
 import { distanceParts } from '../lib/distance';
 import { meanwhileFor } from '../lib/meanwhile';
 import { epochFeed, epochHasContent, nextEpochEntry } from '../lib/epochs';
@@ -156,7 +156,9 @@ const eventThreads = event.threads.map((id) => site.threads.find((th) => th.id =
 const textLang = textLangOf(event, lang);
 const standIn = isRuStandIn(event, lang);
 // "Meanwhile": the line of the page's language, then the world; none on a heavy story. A Russian line is hidden on a card that is shown in English under /ru/ (stand-in).
-const meanwhileLines = event.sensitive ? [] : meanwhileFor(event.meanwhile, lang).filter((line) => !(standIn && line.scope === 'ru'));
+// A line of the same year as a story from tens of thousands of years ago or more (the prologue) wears the caption of the story ("about 150 million years ago"), not a year number.
+const ancient = yearRange(event)[0] <= -10000;
+const meanwhileLines = (event.sensitive ? [] : meanwhileFor(event.meanwhile, lang).filter((line) => !(standIn && line.scope === 'ru'))).map((line) => (ancient && line.year === yearRange(event)[0] ? { ...line, label: formatYear(event, lang) } : line));
 // hreflang names the languages the card is written in; a card without Russian leaves ru out.
 const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 ---

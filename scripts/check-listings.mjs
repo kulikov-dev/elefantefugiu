@@ -215,8 +215,9 @@ for (const lang of ['pt', 'en']) {
     // every story on the timeline has its year on the scale: the year it starts in
     for (const e of feed) {
       const m = html.match(new RegExp(`<span class="feed__year[^"]*"[^>]*>((?:<span[^>]*>[^<]*</span>|[^<])*)</span>\\s*<article [^>]*id="c-${e.id}"`));
-      const bc = JSON.parse(readFileSync(join(root, `src/i18n/${lang}.json`), 'utf8')).card.year_bc;
-      const wantScale = (e.year_scale?.[lang] ?? (startYear(e) < 0 ? bc.replace('{n}', String(-startYear(e))) : String(startYear(e)))).trim();
+      const card = JSON.parse(readFileSync(join(root, `src/i18n/${lang}.json`), 'utf8')).card;
+      const bc = card.year_bc;
+      const wantScale = (e.year_scale?.[lang] ?? (e.years_ago ? card[`ago_scale_${e.years_ago.unit}`].replace('{n}', String(e.years_ago.n)) : startYear(e) < 0 ? bc.replace('{n}', String(-startYear(e))) : String(startYear(e)))).trim();
       // The year may stand in two parts (a date before the common era), with no-break spaces and word joiners inside: compare the plain text.
       const shown = m?.[1].replace(/<[^>]*>/g, '').replace(/⁠/g, '').replace(/[ \s]+/g, ' ').trim();
       if (!m || shown !== wantScale) fail(`card ${e.id}: the scale shows "${shown}", expected "${wantScale}"`);

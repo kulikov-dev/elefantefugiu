@@ -25,5 +25,5 @@
 **Природа / Natureza / Nature**
 
 - ru: Землетрясения, слоны и носороги: как природа меняла историю Португалии и как люди ей удивлялись.
-- pt: Terramotos, elefantes e rinocerontes: como a natureza mudou a história de Portugal e como as pessoas se espantaram com ela.
-- en: Earthquakes, elephants and rhinos: how nature changed Portugal's history, and how people marvelled at it.
+- pt: Dinossauros, terramotos, elefantes e rinocerontes: como a natureza mudou a história de Portugal e como as pessoas se espantaram com ela.
+- en: Dinosaurs, earthquakes, elephants and rhinos: how nature changed Portugal's history, and how people marvelled at it.

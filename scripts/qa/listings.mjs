@@ -41,7 +41,7 @@ const newPage = async () => {
   const s = await page.evaluate(() => {
     const vis = (el) => !!el && el.getBoundingClientRect().height > 0;
     return {
-      cards: document.querySelectorAll('.feed > li').length,
+      cards: document.querySelectorAll('.feed > li.feed__item').length,
       hooksVisible: [...document.querySelectorAll('.ecard__hook')].every(vis),
       titlesVisible: [...document.querySelectorAll('.ecard__title a')].every(vis),
       chips: document.querySelectorAll('.chips a.thread--link').length,

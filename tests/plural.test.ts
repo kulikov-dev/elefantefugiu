@@ -74,7 +74,8 @@ test('every plural string has all the forms of its language (ru: one, few, many,
 
 test('a string with {n} or {m} that is not a plural string is a unit or a bare figure (nothing to decline)', () => {
   // The number is followed by a unit (m, km), a year era, or stands after a colon: the word does not change with it.
-  const bare = new Set(['card.year_bc', 'card.year_ad', 'card.nearby_m', 'card.nearby_km', 'map.dist_m', 'map.dist_km', 'family.hidden']);
+  // `card.ago_*`: "about 150 million years ago": the count is a million or a thousand with its word, and the data (years-ago.mjs) keeps the Russian plural simple.
+  const bare = new Set(['card.ago_million', 'card.ago_thousand', 'card.ago_scale_million', 'card.ago_scale_thousand', 'card.year_bc', 'card.year_ad', 'card.nearby_m', 'card.nearby_km', 'map.dist_m', 'map.dist_km', 'family.hidden']);
   for (const [lang, dict] of [['pt', pt], ['en', en], ['ru', ru]] as const) {
     for (const [key, text] of flat(dict as Dictionary)) {
       if (!/\{[nm]\}/.test(text) || /_(one|few|many|other)$/.test(key)) continue;

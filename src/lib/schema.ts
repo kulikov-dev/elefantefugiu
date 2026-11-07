@@ -118,7 +118,8 @@ export function storyNodes(ctx: SchemaContext, input: StorySchemaInput): Node[] 
     author: { '@id': ORGANIZATION_ID(ctx) },
     publisher: { '@id': ORGANIZATION_ID(ctx) },
     isPartOf: input.epoch ? { '@type': 'CollectionPage', '@id': `${input.epoch.url}#webpage`, url: input.epoch.url, name: input.epoch.name } : { '@id': WEBSITE_ID(ctx) },
-    temporalCoverage: to !== from ? `${isoYear(from)}/${isoYear(to)}` : isoYear(from),
+    // A time further back than four digits (dinosaurs, the Stone Age) has no honest ISO 8601 year: the date is left out.
+    ...(Math.min(from, to) < -9999 ? {} : { temporalCoverage: to !== from ? `${isoYear(from)}/${isoYear(to)}` : isoYear(from) }),
     contentLocation: place(input.bridge.name, input.bridge.lat, input.bridge.lon, input.bridge.address),
     ...(input.sourceUrls.length > 0 ? { citation: input.sourceUrls } : {}),
   };

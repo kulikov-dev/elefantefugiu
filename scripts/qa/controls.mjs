@@ -35,7 +35,7 @@ const newPage = async ({ js = true, width = 360 } = {}) => {
 };
 const feedState = (page) =>
   page.evaluate(() => {
-    const lis = [...document.querySelectorAll('ol.feed > li')];
+    const lis = [...document.querySelectorAll('ol.feed > li.feed__item')];
     const visible = lis.filter((li) => !li.hidden && li.getBoundingClientRect().height > 0);
     const feed = document.querySelector('ol.feed');
     return {
@@ -93,7 +93,7 @@ const feedState = (page) =>
   const s = await page.evaluate(() => ({
     links: document.querySelectorAll('.chips a.thread--link').length,
     jsControls: !!document.querySelector('[data-js-only]') && document.querySelector('[data-js-only]').getBoundingClientRect().height > 0,
-    cards: [...document.querySelectorAll('ol.feed > li')].filter((li) => li.getBoundingClientRect().height > 0).length,
+    cards: [...document.querySelectorAll('ol.feed > li.feed__item')].filter((li) => li.getBoundingClientRect().height > 0).length,
     view: document.querySelector('ol.feed').dataset.view,
     overflow: document.scrollingElement.scrollWidth - innerWidth,
   }));
@@ -179,13 +179,13 @@ const feedState = (page) =>
   const s = await feedState(page);
   ok('unknown thread and view are ignored and removed from the address', s.visibleIds.length === feed.length && s.search === '' && s.view === 'timeline', s.search);
   // The test data has no thread that is empty in this epoch, so the empty state is simulated: no card carries the thread.
-  await page.evaluate(() => document.querySelectorAll('ol.feed > li').forEach((li) => (li.dataset.threads = 'other')));
+  await page.evaluate(() => document.querySelectorAll('ol.feed > li.feed__item').forEach((li) => (li.dataset.threads = 'other')));
   await page.click(`button[data-fio="${FIO}"]`);
   const empty = await feedState(page);
   ok('empty thread: message shown, feed hidden', empty.emptyVisible && empty.visibleIds.length === 0);
   ok('empty thread: message text and "Show all" button', await page.evaluate(() => /ainda não há histórias neste fio/.test(document.querySelector('[data-empty]').textContent) && /Mostrar todas/.test(document.querySelector('[data-empty] button').textContent)));
   await page.click('[data-empty] button');
-  await page.evaluate(() => document.querySelectorAll('ol.feed > li').forEach((li, i) => (li.dataset.threads = li.dataset.threads || 'mar')));
+  await page.evaluate(() => document.querySelectorAll('ol.feed > li.feed__item').forEach((li, i) => (li.dataset.threads = li.dataset.threads || 'mar')));
   const shown = await feedState(page);
   ok('"Show all" clears the filter', !shown.emptyVisible && shown.search === '');
   await page.close();
@@ -196,7 +196,7 @@ for (const view of ['timeline', 'filtered', ...(GRID ? ['grid'] : [])]) {
   const page = await newPage();
   const url = `${EPOCH}${{ timeline: '', filtered: `?fio=${FIO}`, grid: '?vista=grelha' }[view]}`;
   await page.goto(url, { waitUntil: 'networkidle0' });
-  const links = await page.$$eval('ol.feed > li:not([hidden]) .ecard__title a', (as) => as.map((a) => a.getAttribute('href')));
+  const links = await page.$$eval('ol.feed > li.feed__item:not([hidden]) .ecard__title a', (as) => as.map((a) => a.getAttribute('href')));
   const target = links.at(-1);
   await page.evaluate((h) => document.querySelector(`.ecard__title a[href="${h}"]`).scrollIntoView({ block: 'center' }), target);
   await wait(200);
@@ -279,7 +279,7 @@ const homeThreads = [...new Set(world.published.flatMap((c) => c.threads))];
   for (const tile of tiles) {
     const p = await newPage({ js: false });
     await p.goto(`${base}${tile.href}`, { waitUntil: 'load' });
-    const cards = await p.$$eval('ol.feed > li', (l) => l.length);
+    const cards = await p.$$eval('ol.feed > li.feed__item', (l) => l.length);
     if (cards !== tile.n) match = false;
     await p.close();
   }

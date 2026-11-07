@@ -28,7 +28,8 @@ import {
   type EpochData,
 } from '../lib/epochs';
 import { mascotAllowed } from '../lib/mascot';
-import { yearParts, yearRange, yearText } from '../lib/events';
+import { scaleYearText, yearParts, yearRange } from '../lib/events';
+import { scaleGapIndex } from '../lib/years-ago.mjs';
 import { DIRECTED, patternFor } from '../lib/azulejo';
 import { toMapCards } from '../lib/map-cards';
 import { mapMaxBounds, portugalView } from '../lib/map-data';
@@ -50,6 +51,7 @@ const site = await loadSite();
 
 const feed = epochFeed(epoch, site.events);
 // An epoch whose pattern runs in one direction (braid, waves, chequer band, footprints) has it for the axis of the timeline: no straight line beside it.
+const gapAt = scaleGapIndex(feed.map((e) => yearRange(e)[0]));
 const patternAxis = DIRECTED.includes(patternFor(epoch.id));
 const counts = threadCountsInEpoch(epoch, site.events);
 // Only threads that have a page, and only those with cards in this epoch, so every counter is a real count.
@@ -197,13 +199,16 @@ const schema = epochNodes(schemaCtx, {
         }
         <ol class="feed" data-view="timeline" {...(patternAxis ? { 'data-axis': '' } : {})}>
           {
-            feed.map((event) => (
-              <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
-                <span class:list={['feed__year', yearParts(event.year_scale?.[lang]?.trim() || yearText(yearRange(event)[0], lang)).length > 1 && 'feed__year--bc']}>
-                  {yearParts(event.year_scale?.[lang]?.trim() || yearText(yearRange(event)[0], lang)).map((part, i) => <>{i > 0 && ' '}<span>{part}</span></>)}
-                </span>
-                <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear fallback={epochPic} tiles={gridAvailable(feed.length)} />
-              </li>
+            feed.map((event, i) => (
+              <>
+                {i === gapAt && epoch.scale_gap && <li class="feed__gap" data-scale-gap>{epoch.scale_gap[lang]}</li>}
+                <li class:list={['feed__item', `feed__item--${event.level}`]} data-threads={event.threads.join(' ')} {...familyAttrs(event)}>
+                  <span class:list={['feed__year', yearParts(scaleYearText(event, lang)).length > 1 && 'feed__year--bc']}>
+                    {yearParts(scaleYearText(event, lang)).map((part, i) => <>{i > 0 && ' '}<span>{part}</span></>)}
+                  </span>
+                  <EventCard lang={lang} event={event} variant="feed" threads={site.threads} visibleThreadIds={site.visibleThreadIds} scaleYear fallback={epochPic} tiles={gridAvailable(feed.length)} />
+                </li>
+              </>
             ))
           }
         </ol>
@@ -564,6 +569,23 @@ const schema = epochNodes(schemaCtx, {
 
   .feed__item + .feed__item {
     margin-block-start: var(--space-4);
+  }
+
+  /* Where the scale of the timeline breaks (millions of years, then thousands): a quiet note on the line, not a story. It has no place in the grid and
+     none while a thread filter is on (the prepaint rule keys on <html data-fio>). */
+  .feed__gap {
+    margin-block: var(--space-4);
+    color: var(--color-ink-muted);
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-style: italic;
+    letter-spacing: var(--letter-label);
+    text-align: center;
+  }
+
+  :global(html[data-vista='grelha']) .feed .feed__gap,
+  :global(html[data-fio]) .feed .feed__gap {
+    display: none;
   }
 
   .feed__item::before {

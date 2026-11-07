@@ -22,7 +22,7 @@ const { lang, lines, textLang } = Astro.props;
         {
           lines.map((line) => (
             <li data-scope={line.scope}>
-              <span class="meanwhile__year">{meanwhileYearText(lang, line.year)}</span>
+              <span class="meanwhile__year">{line.label ?? meanwhileYearText(lang, line.year)}</span>
               <span class="meanwhile__text" lang={textLang}>{line.text}</span>
             </li>
           ))

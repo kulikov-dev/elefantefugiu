@@ -42,7 +42,7 @@ const transitionName = event.image ? claimStoryName(Astro.request, event.slug[la
 const wide = variant === 'grid' || tiles;
 // A full date ("14 August 1385") is more exact than the year; it stays on the line of the card whatever the layout.
 const label = event.year_label?.[lang]?.trim();
-const fullDate = label && label !== String(yearRange(event)[0]) ? label : undefined;
+const fullDate = label && label !== String(yearRange(event)[0]) ? label : event.years_ago ? formatYear(event, lang) : undefined;
 const yearText = formatYear(event, lang);
 const href = storyPath(lang, event.slug[lang]);
 const eventThreads = showThreads ? event.threads.map((id) => threads.find((th) => th.id === id)).filter((th) => th !== undefined) : [];
