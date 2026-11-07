@@ -34,6 +34,9 @@ const T1 = need('a thread with some but not all cards', () => threadsData.find((
 const T2 = need('a thread with cards in the second ready epoch', () => threadsData.find((t) => world.inEpoch(EP2).some((c) => c.threads.includes(t.id)))).id;
 // A thread that has a key (frame) card on the mainland: its map shows a frame marker at the first view.
 const TF = need('a thread with a frame card', () => threadsData.find((t) => cards.some((c) => c.level === 'frame' && isOnMainland(c) && c.threads.includes(t.id)))).id;
+// The thread buttons of the epoch page are only those with cards in that epoch: the threads of EP1, and one of them with some but not all of its cards.
+const EP1_THREADS = world.threadsIn(EP1).map((t) => t.id);
+const TE = need('a thread with some but not all cards of the first ready epoch', () => world.threadsIn(EP1).find((t) => world.inEpoch(EP1).some((c) => !c.threads.includes(t.id)))).id;
 const N1 = world.inEpoch(EP1).length; // the cards of the first epoch; the Timeline / Grid switch exists from 9
 const C0 = need('a card of the first ready epoch', () => world.inEpoch(EP1)[0]);
 const STEP = 5;
@@ -670,7 +673,7 @@ if (want('epoch')) {
 
   // 5. Thread filter drives the map; limit holds
   {
-    for (const fio of THREADS) {
+    for (const fio of EP1_THREADS) {
       const p = await newPage({ width: 1280, height: 900 });
       await p.goto(EPOCH, { waitUntil: 'networkidle0' });
       await ready(p);
@@ -696,11 +699,11 @@ if (want('epoch')) {
     }
     // the address: ?fio= at load, and "All" again
     const p = await newPage({ width: 1280, height: 900 });
-    await p.goto(`${EPOCH}?fio=${T1}`, { waitUntil: 'networkidle0' });
+    await p.goto(`${EPOCH}?fio=${TE}`, { waitUntil: 'networkidle0' });
     await ready(p);
     await wait(900);
     const cards = await cfgCards(p);
-    const mar = cards.filter((c) => c.threads.includes(T1)).map((c) => c.id);
+    const mar = cards.filter((c) => c.threads.includes(TE)).map((c) => c.id);
     let m = await marks(p);
     ok('epoch: ?fio=thread at load: the map shows only that thread', m.covered.length > 0 && m.covered.every((id) => mar.includes(id)), `covered=${m.covered.length} mar=${mar.length}`);
     await p.click('[data-epoch-tools] button[data-fio=""]');
