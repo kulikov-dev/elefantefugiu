@@ -90,6 +90,7 @@
   --font-heading: 'Playfair Display', 'Playfair Display Fallback', Georgia, 'Times New Roman', serif;
   --font-label: 'Oswald', 'Oswald Fallback', 'Arial Narrow', Arial, sans-serif;
   --letter-label: 0.06em;
+  --letter-label-tight: 0.04em; /* small capitals on the compact Share button under the panel */
   --weight-strong: 600;
   --text-xs: 0.8125rem;
   --text-sm: 0.875rem;
@@ -278,6 +279,7 @@
   --panno-glaze: light-dark(#fdfcf8, #2c363c); /* a piece of the epoch panel not yet won: smooth glazed tile, muted in the dark theme */
   --panno-glaze-edge: light-dark(#dcd8ca, #3b484f);
   --panno-backdrop: light-dark(rgb(10 8 6 / 0.88), rgb(10 8 6 / 0.92)); /* behind the enlarged panel: dark in both themes, the picture is the light thing */
+  --panno-sheen: light-dark(rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.5)); /* the glint over the finished panel: a band of light */
   --panno-control: light-dark(rgb(20 17 14 / 0.7), rgb(20 17 14 / 0.7));
   --panno-share-fill: light-dark(var(--color-surface), transparent); /* the compact Share button under the finished panel: filled in the light theme, bare in the dark one */
   --panno-control-ink: light-dark(#fbf8f1, #fbf8f1);
@@ -295,7 +297,16 @@
 
   /* Motion */
   --transition: 150ms ease;
-  --panno-rim-fade: 300ms; /* the rim of the finished panel fades in (the same time as CELEBRATION_RIM_MS in src/lib/panno.ts) */
+  /* The moment of assembly of the epoch panel; the same times as CELEBRATION_* in src/lib/panno.ts. */
+  --panno-rim-fade: 400ms; /* the rim of the finished panel fades in */
+  --panno-tile: 260ms; /* a tile settles into its place */
+  --panno-lay-lift: 14px; /* it comes from this far above ... */
+  --panno-lay-scale: 1.05; /* ... a little large, */
+  --panno-lay-sink: 1px; /* and sinks a hair past its place and back (the settling) */
+  --panno-lay-settle: 0.99;
+  --panno-sheen-width: 12%; /* the glint is a narrow band, this share of the panel wide */
+  --panno-sheen-skew: -20deg;
+  --panno-sheen-time: 1200ms; /* the glint passes over the panel */
   /* The cross-fade of a page change (View Transitions, transitions.css). */
   --vt-duration: 220ms;
 
@@ -536,6 +547,7 @@
     --panno-glaze: #fdfcf8;
     --panno-glaze-edge: #dcd8ca;
     --panno-backdrop: rgb(10 8 6 / 0.88);
+    --panno-sheen: rgb(255 255 255 / 0.5);
     --panno-control: rgb(20 17 14 / 0.7);
     --panno-share-fill: var(--color-surface);
     --panno-control-ink: #fbf8f1;

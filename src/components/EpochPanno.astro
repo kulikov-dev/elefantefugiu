@@ -58,6 +58,8 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     </a>
     <!-- The reward: a read-to-the-end panel opens large. Shown by src/scripts/read-marks.ts only when every story is read. -->
     <button class="panno__zoom" type="button" data-panno-zoom hidden aria-label={t(lang, 'panno.zoom')}></button>
+    <!-- Only for the moment of assembly: the glint. Lies over the panel, takes no clicks. -->
+    <div class="panno__fx" aria-hidden="true"><span class="panno__sheen"></span></div>
   </div>
   <div class="panno__caption">
     <div class="panno__line">
@@ -149,6 +151,65 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     }
   }
 
+  /* The moment of assembly (src/scripts/read-marks.ts): only transform and opacity move, nothing shifts. The layer holds the glint; it is clipped to
+     the panel and takes no clicks. */
+  .panno__fx {
+    display: grid;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    pointer-events: none;
+  }
+
+  /* A narrow band of light, tilted, with soft edges; it starts outside the panel on the left. */
+  .panno__sheen {
+    grid-area: 1 / 1;
+    justify-self: start;
+    inline-size: var(--panno-sheen-width);
+    background: linear-gradient(90deg, transparent, var(--panno-sheen) 50%, transparent);
+    opacity: 0;
+    transform: translate(-300%, -5%) skewX(var(--panno-sheen-skew));
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* Under a tile that is still settling lies the glaze, so it comes out of a closed tile, not out of the page. */
+    .panno[data-moment] .panno__grid {
+      background: var(--panno-glaze);
+    }
+
+    .panno__cell[data-open][data-anim] {
+      animation: panno-lay var(--panno-tile) ease-out backwards;
+    }
+
+    .panno[data-sheen] .panno__sheen {
+      animation: panno-sheen var(--panno-sheen-time) ease-in-out both;
+    }
+  }
+
+  /* From above, a little large and transparent; a slight overshoot in the last part is the settling. */
+  @keyframes panno-lay {
+    from {
+      opacity: 0;
+      transform: translateY(calc(-1 * var(--panno-lay-lift))) scale(var(--panno-lay-scale));
+    }
+
+    70% {
+      opacity: 1;
+      transform: translateY(var(--panno-lay-sink)) scale(var(--panno-lay-settle));
+    }
+  }
+
+  @keyframes panno-sheen {
+    from {
+      opacity: 1;
+      transform: translate(-300%, -5%) skewX(var(--panno-sheen-skew));
+    }
+
+    to {
+      opacity: 1;
+      transform: translate(900%, 5%) skewX(var(--panno-sheen-skew));
+    }
+  }
+
   /* The reward button lies over the whole panel; it is there only when the panel is complete. */
   .panno__zoom {
     padding: 0;
@@ -199,7 +260,7 @@ const cells = Array.from({ length: pieces }, (_, i) => ({ piece: i, x: i % cols,
     background: var(--panno-share-fill);
     font-size: var(--text-xs);
     line-height: 1;
-    letter-spacing: 0.04em;
+    letter-spacing: var(--letter-label-tight);
     text-transform: uppercase;
   }
 
