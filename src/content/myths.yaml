@@ -122,3 +122,27 @@
     pt: Os morcegos existem mesmo e à noite caçam os insetos que roem o papel. Mas desde quando lá estão e quanto ajudam os livros, ninguém mediu.
     en: The bats are real and hunt paper-eating insects at night. But no one has measured how long they have been there or how much they help the books.
     ru: Летучие мыши там живут и ночью охотятся на насекомых, которые точат бумагу. Но с каких пор они там и сколько пользы книгам, никто не измерял.
+
+- id: espichel
+  story: pedra-da-mua
+  verdict: myth
+  statement:
+    pt: As pegadas no Cabo Espichel são da mula de Nossa Senhora
+    en: The tracks at Cape Espichel were left by the Virgin’s mule
+    ru: Следы на скале у мыса Эшпишел оставил мул Богородицы
+  answer:
+    pt: Diz a lenda que a mula subiu a falésia com Nossa Senhora. Na verdade, os trilhos foram deixados por saurópodes há cerca de 150 milhões de anos.
+    en: Legend says a mule carried the Virgin up the cliff. The trackways were actually left by sauropods about 150 million years ago.
+    ru: По легенде, мул поднял Богородицу на скалу. На самом деле цепочки следов оставили зауроподы около 150 млн лет назад.
+
+- id: coa
+  story: gravuras-coa-1995
+  verdict: fact
+  statement:
+    pt: Portugal cancelou uma barragem para salvar gravuras rupestres
+    en: Portugal canceled a dam to save prehistoric rock art
+    ru: Португалия отменила стройку плотины ради наскальных рисунков
+  answer:
+    pt: Em 1995, a construção da barragem no Côa foi travada para não submergir gravuras da Idade da Pedra. Hoje são Património Mundial da UNESCO.
+    en: In 1995, work on the Côa dam was halted so Stone Age engravings would not be flooded. Today they are a UNESCO World Heritage Site.
+    ru: В 1995 году стройку плотины на реке Коа остановили, чтобы не затопить рисунки каменного века. Сегодня это объект ЮНЕСКО.
