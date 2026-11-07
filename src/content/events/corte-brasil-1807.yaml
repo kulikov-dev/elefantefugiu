@@ -185,13 +185,6 @@ published: '2026-10-25'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-28'
-    hash: '0f52fd42d2ea'
-  ru:
-    date: '2026-10-28'
-    hash: '253f25f5b7ad'
 meanwhile:
   - scope: world
     year: 1808
@@ -200,3 +193,10 @@ meanwhile:
       en: "Beethoven’s Fifth Symphony is performed for the first time, in Vienna."
       ru: "В Вене впервые звучит Пятая симфония Бетховена."
     source: "https://en.wikipedia.org/wiki/Symphony_No._5_(Beethoven)"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'c37931274639'
+  ru:
+    date: '2026-10-28'
+    hash: '253f25f5b7ad'

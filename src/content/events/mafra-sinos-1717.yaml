@@ -142,13 +142,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '423e5c68ca99'
-  ru:
-    date: '2026-10-31'
-    hash: 'a23c96961bfe'
 meanwhile:
   - scope: ru
     year: 1724
@@ -165,3 +158,10 @@ meanwhile:
     text:
       pt: "Jonathan Swift publica «As Viagens de Gulliver»."
     source: "https://en.wikipedia.org/wiki/Gulliver%27s_Travels"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '58936a8b38d6'
+  ru:
+    date: '2026-10-31'
+    hash: 'a23c96961bfe'

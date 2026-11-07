@@ -160,16 +160,16 @@ published: '2026-10-25'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '25cad18ee630'
-  ru:
-    date: '2026-10-31'
-    hash: 'df8b27ec76d1'
 meanwhile:
   - scope: ru
     year: 1764
     text:
       ru: "Екатерина II получает коллекцию картин, с которой начинается Эрмитаж."
     source: "https://ru.wikipedia.org/wiki/Эрмитаж"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'e7b9324eaf23'
+  ru:
+    date: '2026-10-31'
+    hash: 'df8b27ec76d1'

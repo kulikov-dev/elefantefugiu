@@ -141,13 +141,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '46b2f01dd8cd'
-  ru:
-    date: '2026-10-31'
-    hash: 'c1b42014ba78'
 meanwhile:
   - scope: world
     year: 1742
@@ -156,3 +149,10 @@ meanwhile:
       en: "Anders Celsius proposes the temperature scale that bears his name."
       ru: "Андерс Цельсий предлагает температурную шкалу."
     source: "https://en.wikipedia.org/wiki/Anders_Celsius"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '629c8dee4767'
+  ru:
+    date: '2026-10-31'
+    hash: 'c1b42014ba78'

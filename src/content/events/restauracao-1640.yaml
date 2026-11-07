@@ -149,13 +149,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'cd84d36892be'
-  ru:
-    date: '2026-10-31'
-    hash: 'b408c01bc932'
 meanwhile:
   - scope: ru
     year: 1642
@@ -167,3 +160,10 @@ meanwhile:
     text:
       en: "Harvard College is founded in Massachusetts."
     source: "https://en.wikipedia.org/wiki/Harvard_University"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '9ebd094fb4c8'
+  ru:
+    date: '2026-10-31'
+    hash: 'b408c01bc932'

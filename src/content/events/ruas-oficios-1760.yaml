@@ -136,16 +136,16 @@ published: '2026-10-25'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'fcf8da11174c'
-  ru:
-    date: '2026-10-31'
-    hash: 'f1e3b534059d'
 meanwhile:
   - scope: ru
     year: 1762
     text:
       ru: "Достроен Зимний дворец в Петербурге."
     source: "https://ru.wikipedia.org/wiki/Зимний_дворец"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '16359c4be92e'
+  ru:
+    date: '2026-10-31'
+    hash: 'f1e3b534059d'

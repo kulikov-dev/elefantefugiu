@@ -155,16 +155,16 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '7adfda60e389'
-  ru:
-    date: '2026-10-31'
-    hash: '70abe4b2cdb5'
 meanwhile:
   - scope: ru
     year: 1703
     text:
       ru: "Основан Санкт-Петербург."
     source: "https://ru.wikipedia.org/wiki/Санкт-Петербург"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '7a915f861849'
+  ru:
+    date: '2026-10-31'
+    hash: '70abe4b2cdb5'

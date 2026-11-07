@@ -139,13 +139,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '6723517f2082'
-  ru:
-    date: '2026-10-31'
-    hash: 'e9770a5b366e'
 meanwhile:
   - scope: world
     year: 1903
@@ -154,3 +147,10 @@ meanwhile:
       en: "The Wright brothers make the first powered airplane flight."
       ru: "Братья Райт совершают первый полёт на самолёте с двигателем."
     source: "https://en.wikipedia.org/wiki/Wright_brothers"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '446ab09b5cc8'
+  ru:
+    date: '2026-10-31'
+    hash: 'e9770a5b366e'

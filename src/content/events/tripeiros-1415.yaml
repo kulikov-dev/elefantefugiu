@@ -146,13 +146,6 @@ published: '2026-10-21'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-28'
-    hash: '883acd4ac0df'
-  ru:
-    date: '2026-10-28'
-    hash: 'e1debfae06dd'
 meanwhile:
   - scope: world
     year: 1420
@@ -161,3 +154,10 @@ meanwhile:
       en: "The Forbidden City in Beijing is completed."
       ru: "В Пекине завершено строительство Запретного города."
     source: "https://en.wikipedia.org/wiki/Forbidden_City"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'a82b1555f68d'
+  ru:
+    date: '2026-10-28'
+    hash: 'e1debfae06dd'

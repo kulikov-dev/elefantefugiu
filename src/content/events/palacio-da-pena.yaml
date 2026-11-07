@@ -121,16 +121,6 @@ status: ready
 published: '2026-10-30'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '832f8d62319c'
-  en:
-    date: '2026-10-31'
-    hash: 'a72aef3a1c5b'
-  ru:
-    date: '2026-10-31'
-    hash: '3383b982fcbc'
 meanwhile:
   - scope: ru
     year: 1839
@@ -142,3 +132,13 @@ meanwhile:
     text:
       en: "Samuel Morse publicly demonstrates his telegraph in New Jersey."
     source: "https://en.wikipedia.org/wiki/Samuel_Morse"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '832f8d62319c'
+  en:
+    date: '2026-10-31'
+    hash: 'a72aef3a1c5b'
+  ru:
+    date: '2026-10-31'
+    hash: '3383b982fcbc'

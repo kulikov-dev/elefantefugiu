@@ -134,13 +134,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '964b9f318dd4'
-  ru:
-    date: '2026-10-31'
-    hash: '8b287f0661b8'
 meanwhile:
   - scope: ru
     year: 1883
@@ -152,3 +145,10 @@ meanwhile:
     text:
       en: "The Statue of Liberty is dedicated in New York Harbor."
     source: "https://en.wikipedia.org/wiki/Statue_of_Liberty"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'e95890fb3242'
+  ru:
+    date: '2026-10-31'
+    hash: '8b287f0661b8'

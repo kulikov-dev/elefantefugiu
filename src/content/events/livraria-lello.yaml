@@ -133,13 +133,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '22ef722b7b97'
-  ru:
-    date: '2026-10-31'
-    hash: 'ea56294a173b'
 meanwhile:
   - scope: ru
     year: 1905
@@ -156,3 +149,10 @@ meanwhile:
     text:
       pt: "Santos-Dumont voa em Paris com o 14-bis, num voo oficial."
     source: "https://pt.wikipedia.org/wiki/14-bis"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'cf87aa59abca'
+  ru:
+    date: '2026-10-31'
+    hash: 'ea56294a173b'

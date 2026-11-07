@@ -143,13 +143,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'c3835e1efcbf'
-  ru:
-    date: '2026-10-31'
-    hash: 'b2108fc4ca44'
 meanwhile:
   - scope: ru
     year: 1892
@@ -166,3 +159,10 @@ meanwhile:
     text:
       pt: "Abrem em Atenas os primeiros Jogos Olímpicos da era moderna."
     source: "https://en.wikipedia.org/wiki/1896_Summer_Olympics"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '537118b0677b'
+  ru:
+    date: '2026-10-31'
+    hash: 'b2108fc4ca44'

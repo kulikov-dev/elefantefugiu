@@ -141,13 +141,6 @@ published: '2026-10-25'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-28'
-    hash: '26a1b65dc666'
-  ru:
-    date: '2026-10-28'
-    hash: 'b818dc0e21d9'
 meanwhile:
   - scope: ru
     year: 1436
@@ -159,3 +152,10 @@ meanwhile:
     text:
       en: "Henry VI founds Eton College."
     source: "https://en.wikipedia.org/wiki/Eton_College"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '54d05827ec7a'
+  ru:
+    date: '2026-10-28'
+    hash: 'b818dc0e21d9'

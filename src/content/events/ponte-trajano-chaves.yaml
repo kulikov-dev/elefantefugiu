@@ -146,16 +146,6 @@ status: ready
 published: '2026-10-30'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '1d98f42491dc'
-  en:
-    date: '2026-10-31'
-    hash: '13890b3c50cf'
-  ru:
-    date: '2026-10-31'
-    hash: '246022c1d6b0'
 meanwhile:
   - scope: world
     year: 105
@@ -164,3 +154,13 @@ meanwhile:
       en: "Cai Lun presents paper to the Chinese emperor."
       ru: "Цай Лунь представляет китайскому императору бумагу."
     source: "https://en.wikipedia.org/wiki/Cai_Lun"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '1d98f42491dc'
+  en:
+    date: '2026-10-31'
+    hash: '13890b3c50cf'
+  ru:
+    date: '2026-10-31'
+    hash: '246022c1d6b0'

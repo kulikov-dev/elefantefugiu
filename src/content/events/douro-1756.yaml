@@ -174,13 +174,6 @@ published: '2026-10-21'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-28'
-    hash: '988b15930663'
-  ru:
-    date: '2026-10-28'
-    hash: 'a58940401726'
 meanwhile:
   - scope: world
     year: 1756
@@ -189,3 +182,10 @@ meanwhile:
       en: "Wolfgang Amadeus Mozart is born in Salzburg."
       ru: "В Зальцбурге родился Вольфганг Амадей Моцарт."
     source: "https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'dab112344dd0'
+  ru:
+    date: '2026-10-28'
+    hash: 'a58940401726'

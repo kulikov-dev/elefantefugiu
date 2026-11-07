@@ -156,13 +156,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '92d78b5ba249'
-  ru:
-    date: '2026-10-31'
-    hash: '2b416cadd7c9'
 meanwhile:
   - scope: ru
     year: 1878
@@ -179,3 +172,10 @@ meanwhile:
     text:
       pt: "Num teste, a lâmpada de Thomas Edison fica acesa mais de treze horas."
     source: "https://en.wikipedia.org/wiki/Incandescent_light_bulb"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '7583ec1ba252'
+  ru:
+    date: '2026-10-31'
+    hash: '2b416cadd7c9'

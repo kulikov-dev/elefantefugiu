@@ -126,13 +126,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'f6a81c74ef90'
-  ru:
-    date: '2026-10-31'
-    hash: 'bcfcab7f8050'
 meanwhile:
   - scope: ru
     year: 1721
@@ -144,3 +137,10 @@ meanwhile:
     text:
       en: "Daniel Defoe publishes Robinson Crusoe."
     source: "https://en.wikipedia.org/wiki/Robinson_Crusoe"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'c19ff46dc310'
+  ru:
+    date: '2026-10-31'
+    hash: 'bcfcab7f8050'

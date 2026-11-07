@@ -154,13 +154,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'e49768d66819'
-  ru:
-    date: '2026-10-31'
-    hash: 'b0c422c8b82b'
 meanwhile:
   - scope: world
     year: 80
@@ -169,3 +162,10 @@ meanwhile:
       en: "The Colosseum opens in Rome."
       ru: "В Риме открывают Колизей."
     source: "https://en.wikipedia.org/wiki/Colosseum"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'abea3f135db5'
+  ru:
+    date: '2026-10-31'
+    hash: 'b0c422c8b82b'

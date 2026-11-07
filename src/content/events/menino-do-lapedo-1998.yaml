@@ -159,3 +159,7 @@ status: ready
 published: '2026-11-07'
 placeholder: false
 ru_ready: true
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'e77bd9408492'

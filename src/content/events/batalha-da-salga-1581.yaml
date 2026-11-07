@@ -152,13 +152,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '580492392d39'
-  ru:
-    date: '2026-10-31'
-    hash: 'ca8f4c60c577'
 meanwhile:
   - scope: ru
     year: 1582
@@ -175,3 +168,10 @@ meanwhile:
     text:
       pt: "O papa Gregório XIII introduz o calendário que ainda hoje usamos."
     source: "https://en.wikipedia.org/wiki/Gregorian_calendar"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '61849735923f'
+  ru:
+    date: '2026-10-31'
+    hash: 'ca8f4c60c577'

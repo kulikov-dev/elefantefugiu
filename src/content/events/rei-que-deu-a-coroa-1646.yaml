@@ -148,3 +148,7 @@ placeholder: false
 ru_ready: true
 related:
   - restauracao-1640
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '524d516d2715'

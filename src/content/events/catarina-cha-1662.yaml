@@ -154,13 +154,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'b9a697003426'
-  ru:
-    date: '2026-10-31'
-    hash: '7786a81daba9'
 meanwhile:
   - scope: world
     year: 1662
@@ -169,3 +162,10 @@ meanwhile:
       en: "Paris launches the first city public transport: carriages on a fixed route."
       ru: "В Париже запускают первый городской общественный транспорт: кареты по маршруту."
     source: "https://fr.wikipedia.org/wiki/Carrosses_%C3%A0_cinq_sols"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '6218363786c2'
+  ru:
+    date: '2026-10-31'
+    hash: '7786a81daba9'

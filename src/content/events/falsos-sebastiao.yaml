@@ -127,13 +127,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'f1ec23cab9cb'
-  ru:
-    date: '2026-10-31'
-    hash: 'f55f0488fe68'
 meanwhile:
   - scope: ru
     year: 1586
@@ -145,3 +138,10 @@ meanwhile:
     text:
       en: "The Globe Theatre opens in London."
     source: "https://en.wikipedia.org/wiki/Globe_Theatre"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '3737cfa1db52'
+  ru:
+    date: '2026-10-31'
+    hash: 'f55f0488fe68'

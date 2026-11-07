@@ -238,13 +238,6 @@ published: '2026-10-21'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-28'
-    hash: 'ce450bfbb4d5'
-  ru:
-    date: '2026-10-28'
-    hash: '712ae30db0b9'
 meanwhile:
   - scope: world
     year: 1512
@@ -253,3 +246,10 @@ meanwhile:
       en: "Michelangelo’s Sistine Chapel ceiling is unveiled."
       ru: "Открывают роспись потолка Сикстинской капеллы работы Микеланджело."
     source: "https://en.wikipedia.org/wiki/Sistine_Chapel_ceiling"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '795f4630bfdc'
+  ru:
+    date: '2026-10-28'
+    hash: '712ae30db0b9'

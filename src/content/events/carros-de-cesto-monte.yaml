@@ -148,16 +148,6 @@ status: ready
 published: '2026-10-30'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: 'b9d16ad7e7aa'
-  en:
-    date: '2026-10-31'
-    hash: '1dc9de733ad0'
-  ru:
-    date: '2026-10-31'
-    hash: '4d679c8c109d'
 meanwhile:
   - scope: ru
     year: 1853
@@ -174,3 +164,13 @@ meanwhile:
     text:
       pt: "Estreia em Veneza a ópera «La traviata», de Verdi."
     source: "https://en.wikipedia.org/wiki/La_traviata"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'b9d16ad7e7aa'
+  en:
+    date: '2026-10-31'
+    hash: '1dc9de733ad0'
+  ru:
+    date: '2026-10-31'
+    hash: '4d679c8c109d'

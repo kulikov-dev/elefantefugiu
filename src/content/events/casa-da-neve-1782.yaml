@@ -211,16 +211,16 @@ published: '2026-10-21'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '1d3571e0c71b'
-  ru:
-    date: '2026-10-31'
-    hash: 'fb9e16445769'
 meanwhile:
   - scope: ru
     year: 1782
     text:
       ru: "В Петербурге открывают памятник Петру I, «Медный всадник»."
     source: "https://ru.wikipedia.org/wiki/Медный_всадник_(памятник)"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'f248676fcc89'
+  ru:
+    date: '2026-10-31'
+    hash: 'fb9e16445769'

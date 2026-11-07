@@ -174,13 +174,6 @@ published: '2026-10-25'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-27'
-    hash: 'f2b6e84442aa'
-  ru:
-    date: '2026-10-27'
-    hash: 'bcce831a7ec2'
 meanwhile:
   - scope: ru
     year: 1516
@@ -192,3 +185,10 @@ meanwhile:
     text:
       en: "Cardinal Wolsey begins building Hampton Court Palace."
     source: "https://en.wikipedia.org/wiki/Hampton_Court_Palace"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: 'bf5cfa81a278'
+  ru:
+    date: '2026-10-27'
+    hash: 'bcce831a7ec2'

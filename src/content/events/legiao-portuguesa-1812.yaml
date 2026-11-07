@@ -142,13 +142,6 @@ published: '2026-10-21'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-28'
-    hash: 'd45f4fe1ba3b'
-  ru:
-    date: '2026-10-28'
-    hash: 'df20d2f0f659'
 meanwhile:
   - scope: world
     year: 1812
@@ -157,3 +150,10 @@ meanwhile:
       en: "The Brothers Grimm publish the first volume of their fairy tales."
       ru: "Братья Гримм издают первый том сказок."
     source: "https://en.wikipedia.org/wiki/Grimms%27_Fairy_Tales"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '4b2376c0f5fe'
+  ru:
+    date: '2026-10-28'
+    hash: 'df20d2f0f659'

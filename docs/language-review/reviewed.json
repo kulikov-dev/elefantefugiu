@@ -9,12 +9,19 @@
     }
   },
   "epoch/antes-de-portugal/pt": {
-    "date": "2026-10-31",
-    "hash": "fdcc02a94764",
+    "date": "2026-11-07",
+    "hash": "2a9516e2f45e",
     "fields": {
       "slug": "46dacf32",
       "name": "e1114a88",
-      "years_label": "fd87ec71"
+      "years_label": "17c0f285",
+      "scale_gap": "00f4cda6",
+      "theme": "45e7fe08",
+      "description": "e6a2ca96",
+      "panno.share_hook": "6510f5a5",
+      "fallback_image.alt": "374128fc",
+      "fallback_image.caption": "69f88eb2",
+      "intro": "10cb6e87"
     }
   },
   "epoch/antes-de-portugal/ru": {
@@ -37,7 +44,7 @@
     }
   },
   "epoch/atualidade-ue-e-emigracao/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "e5b2b3eb0680",
     "fields": {
       "slug": "5cedb5df",
@@ -79,12 +86,13 @@
     }
   },
   "epoch/avis-e-descobrimentos/pt": {
-    "date": "2026-10-31",
-    "hash": "620f409154d8",
+    "date": "2026-11-07",
+    "hash": "e960045fdd31",
     "fields": {
       "slug": "da9c8cc1",
       "name": "6a50744d",
       "theme": "e27e699f",
+      "panno.share_hook": "5a328032",
       "fallback_image.alt": "fdaa8e81",
       "fallback_image.caption": "b365c135",
       "description": "ce4a6b62",
@@ -132,7 +140,7 @@
     }
   },
   "epoch/estado-novo-e-25-de-abril/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "477ac1d09aa7",
     "fields": {
       "slug": "8da080c5",
@@ -172,13 +180,14 @@
     }
   },
   "epoch/lusitania-e-roma/pt": {
-    "date": "2026-10-31",
-    "hash": "f0372b88e7f9",
+    "date": "2026-11-07",
+    "hash": "70eb1dcfd8df",
     "fields": {
       "slug": "3cf7791a",
       "name": "07105b92",
       "years_label": "b66de089",
       "theme": "cf93bc51",
+      "panno.share_hook": "0b601842",
       "fallback_image.alt": "7ddbbbdb",
       "fallback_image.caption": "7613e8cf",
       "intro": "66bbcec1",
@@ -238,16 +247,17 @@
     }
   },
   "epoch/monarquia-e-republica/pt": {
-    "date": "2026-10-31",
-    "hash": "ab4f7881d4b3",
+    "date": "2026-11-07",
+    "hash": "a137d9ec0b5f",
     "fields": {
       "slug": "c1ef2006",
       "name": "728bff68",
       "years_label": "6cd38a82",
       "theme": "71dd98c0",
+      "panno.share_hook": "852bb5b9",
       "fallback_image.alt": "247b09ac",
       "fallback_image.caption": "773a5b8a",
-      "intro": "64f7e3cc",
+      "intro": "85553e3d",
       "then_now[0].then_big": "6a2340c8",
       "then_now[0].now_big": "4cb52d31",
       "then_now[0].text": "7042813b",
@@ -292,7 +302,7 @@
     }
   },
   "epoch/nascimento-do-reino-e-reconquista/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "6bfff819cccc",
     "fields": {
       "slug": "571a8e21",
@@ -334,12 +344,13 @@
     }
   },
   "epoch/pombal-e-terramoto/pt": {
-    "date": "2026-10-31",
-    "hash": "7af665828950",
+    "date": "2026-11-07",
+    "hash": "e983398009ec",
     "fields": {
       "slug": "16c3c48b",
       "name": "d3c3d441",
       "theme": "03e6ae70",
+      "panno.share_hook": "67a26596",
       "fallback_image.alt": "378efb26",
       "fallback_image.caption": "68caa762",
       "description": "f076676e",
@@ -388,7 +399,7 @@
     }
   },
   "epoch/suevos-visigodos-e-mouros/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "8e575415b2a7",
     "fields": {
       "slug": "cf9398bc",
@@ -430,13 +441,14 @@
     }
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/pt": {
-    "date": "2026-10-31",
-    "hash": "5f948230a2a7",
+    "date": "2026-11-07",
+    "hash": "0693a844d0db",
     "fields": {
       "slug": "57104557",
       "name": "42baae77",
       "years_label": "0f0c07aa",
       "theme": "bf0e84ba",
+      "panno.share_hook": "0b1d1148",
       "fallback_image.alt": "cc2ffe58",
       "fallback_image.caption": "a3002b44",
       "intro": "6b8b14c8",
@@ -473,6 +485,278 @@
       "then_now[2].text": "fe89cfa6"
     }
   },
+  "festa/natal/pt": {
+    "date": "2026-11-07",
+    "hash": "01c967b9630d",
+    "fields": {
+      "date": "1c0e7051",
+      "name": "ac6ce12f",
+      "head_date": "ce6b7d7f",
+      "head_title": "04fe409b",
+      "head_line": "236cebf2",
+      "head_link": "0bdb44c1",
+      "art_title": "7856ae33",
+      "lead": "d21de333",
+      "og_description": "eac558c2",
+      "off_window": "d4979671",
+      "bolo.aria": "0d27f86b",
+      "bolo.hint": "bfed28e4",
+      "bolo.fruit.head": "6e293093",
+      "bolo.fruit.text": "7941aff6",
+      "bolo.brinde.head": "e905d911",
+      "bolo.brinde.text": "b7367585",
+      "bolo.fava.head": "f75d0561",
+      "bolo.fava.text": "687bb9e8",
+      "bolo.done": "7138fcee",
+      "bolo.again": "f06fe92c",
+      "traditions.0.title": "88bdb16f",
+      "traditions.0.text": "b5f444ad",
+      "traditions.1.title": "23c19f8d",
+      "traditions.1.text": "879c0245",
+      "traditions.2.title": "a84aaf95",
+      "traditions.2.text": "5576b2a2",
+      "traditions.3.title": "ada7fafa",
+      "traditions.3.text": "80ae8571"
+    }
+  },
+  "festa/restauracao/pt": {
+    "date": "2026-11-07",
+    "hash": "6ab78f134e48",
+    "fields": {
+      "date": "79113ea2",
+      "name": "6c5f1151",
+      "head_date": "27c45c45",
+      "head_title": "275a6d18",
+      "head_line": "478cc91f",
+      "head_link": "0bdb44c1",
+      "art_title": "84649666",
+      "lead": "cdac7396",
+      "og_description": "103c08d0",
+      "off_window": "2727a0c9",
+      "traditions.0.title": "e0ac763d",
+      "traditions.0.text": "8daee9cd",
+      "traditions.1.title": "07012c86",
+      "traditions.1.text": "90dcc8a3",
+      "traditions.2.title": "311584b1",
+      "traditions.2.text": "ba6eb7d5",
+      "traditions.3.title": "d1ce2395",
+      "traditions.3.text": "ee3cbc9b",
+      "traditions.3.link.story": "a042fe71",
+      "traditions.3.link.label": "9d951d9f"
+    }
+  },
+  "meanwhile/a-portuguesa-1890/pt": {
+    "date": "2026-11-07",
+    "hash": "78dcc765b461",
+    "fields": {
+      "meanwhile[2].text": "43a6a4ee"
+    }
+  },
+  "meanwhile/batalha-da-salga-1581/pt": {
+    "date": "2026-11-07",
+    "hash": "8042a2e2f237",
+    "fields": {
+      "meanwhile[2].text": "846577c4"
+    }
+  },
+  "meanwhile/braguinha-ukulele-1879/pt": {
+    "date": "2026-11-07",
+    "hash": "90f943dd5625",
+    "fields": {
+      "meanwhile[2].text": "01c435ad"
+    }
+  },
+  "meanwhile/cantino-1502/pt": {
+    "date": "2026-11-07",
+    "hash": "07645f75b4c9",
+    "fields": {
+      "meanwhile[2].text": "8f12cec6"
+    }
+  },
+  "meanwhile/capela-sao-joao-baptista/pt": {
+    "date": "2026-11-07",
+    "hash": "b99307910cd8",
+    "fields": {
+      "meanwhile[0].text": "d91dc694"
+    }
+  },
+  "meanwhile/carros-de-cesto-monte/pt": {
+    "date": "2026-11-07",
+    "hash": "65293c7d2ce2",
+    "fields": {
+      "meanwhile[2].text": "f7161b27"
+    }
+  },
+  "meanwhile/catarina-cha-1662/pt": {
+    "date": "2026-11-07",
+    "hash": "d56bd93980a9",
+    "fields": {
+      "meanwhile[0].text": "bb547fe2"
+    }
+  },
+  "meanwhile/corte-brasil-1807/pt": {
+    "date": "2026-11-07",
+    "hash": "eab7c8f4465e",
+    "fields": {
+      "meanwhile[0].text": "39913146"
+    }
+  },
+  "meanwhile/douro-1756/pt": {
+    "date": "2026-11-07",
+    "hash": "17c7d1dc1e0e",
+    "fields": {
+      "meanwhile[0].text": "472779e3"
+    }
+  },
+  "meanwhile/elevador-bom-jesus/pt": {
+    "date": "2026-11-07",
+    "hash": "713915e07e5f",
+    "fields": {
+      "meanwhile[2].text": "2237a77c"
+    }
+  },
+  "meanwhile/elevador-santa-justa/pt": {
+    "date": "2026-11-07",
+    "hash": "3c900a1b0717",
+    "fields": {
+      "meanwhile[0].text": "6f2f6b6c"
+    }
+  },
+  "meanwhile/gravuras-coa-1995/pt": {
+    "date": "2026-11-07",
+    "hash": "41cfa47925d4",
+    "fields": {
+      "meanwhile[0].text": "8d21e015"
+    }
+  },
+  "meanwhile/legiao-portuguesa-1812/pt": {
+    "date": "2026-11-07",
+    "hash": "8cbe40178945",
+    "fields": {
+      "meanwhile[0].text": "a934cd51"
+    }
+  },
+  "meanwhile/livraria-lello/pt": {
+    "date": "2026-11-07",
+    "hash": "e2ddd27546b9",
+    "fields": {
+      "meanwhile[2].text": "569d5bf9"
+    }
+  },
+  "meanwhile/mafra-sinos-1717/pt": {
+    "date": "2026-11-07",
+    "hash": "81e9c7b8ca5a",
+    "fields": {
+      "meanwhile[2].text": "3e70fe22"
+    }
+  },
+  "meanwhile/miragaia-2009/pt": {
+    "date": "2026-11-07",
+    "hash": "5b4717e45e7f",
+    "fields": {
+      "meanwhile[0].text": "1508b3eb"
+    }
+  },
+  "meanwhile/ninho-paimogo-1993/pt": {
+    "date": "2026-11-07",
+    "hash": "f5d210c4a0cd",
+    "fields": {
+      "meanwhile[0].text": "9f1dd8eb"
+    }
+  },
+  "meanwhile/pasteis-de-belem-1837/pt": {
+    "date": "2026-11-07",
+    "hash": "df88c9b49765",
+    "fields": {
+      "meanwhile[0].text": "ef28d7ca"
+    }
+  },
+  "meanwhile/pedra-da-mua/pt": {
+    "date": "2026-11-07",
+    "hash": "8031774d5714",
+    "fields": {
+      "meanwhile[0].text": "2f4bf15e"
+    }
+  },
+  "meanwhile/ponte-maria-pia-1877/pt": {
+    "date": "2026-11-07",
+    "hash": "1d8242da72f9",
+    "fields": {
+      "meanwhile[2].text": "897e4f94"
+    }
+  },
+  "meanwhile/ponte-trajano-chaves/pt": {
+    "date": "2026-11-07",
+    "hash": "11f8b5984bd1",
+    "fields": {
+      "meanwhile[0].text": "2007a718"
+    }
+  },
+  "meanwhile/porca-de-murca/pt": {
+    "date": "2026-11-07",
+    "hash": "eb5f2f0fc6ed",
+    "fields": {
+      "meanwhile[0].text": "11404875"
+    }
+  },
+  "meanwhile/rinoceronte-1515/pt": {
+    "date": "2026-11-07",
+    "hash": "7cfc1f3426d3",
+    "fields": {
+      "meanwhile[0].text": "ffaf8a04"
+    }
+  },
+  "meanwhile/termas-vipasca/pt": {
+    "date": "2026-11-07",
+    "hash": "f02ff442b7f8",
+    "fields": {
+      "meanwhile[0].text": "332b968a"
+    }
+  },
+  "meanwhile/travessia-atlantico-sul-1922/pt": {
+    "date": "2026-11-07",
+    "hash": "0ce3eac5560f",
+    "fields": {
+      "meanwhile[2].text": "2b131764"
+    }
+  },
+  "meanwhile/tripeiros-1415/pt": {
+    "date": "2026-11-07",
+    "hash": "5f8b04a1e05d",
+    "fields": {
+      "meanwhile[0].text": "427906e2"
+    }
+  },
+  "myths/pt": {
+    "date": "2026-11-07",
+    "hash": "a8f79f4986e2",
+    "fields": {
+      "[0].statement": "3852a557",
+      "[0].answer": "2564e218",
+      "[1].statement": "231016c2",
+      "[1].answer": "6c6ade17",
+      "[2].statement": "a22b192f",
+      "[2].answer": "37c5c1db",
+      "[3].statement": "a872d1d0",
+      "[3].answer": "72995d4f",
+      "[4].statement": "beb57c84",
+      "[4].answer": "b19a53e1",
+      "[5].statement": "16413f32",
+      "[5].answer": "e7cdb104",
+      "[6].statement": "87c311f5",
+      "[6].answer": "14d95b0e",
+      "[7].statement": "ecc9cdd8",
+      "[7].answer": "5e0aa8f5",
+      "[8].statement": "e8df35df",
+      "[8].answer": "4f99e78e",
+      "[9].statement": "ba30b104",
+      "[9].answer": "7776a728",
+      "[10].statement": "b66f910e",
+      "[10].answer": "11850019",
+      "[11].statement": "0657502b",
+      "[11].answer": "5a3b7fa9"
+    }
+  },
   "static/about/en": {
     "date": "2026-10-27",
     "hash": "48d20a6b6abf",
@@ -507,19 +791,19 @@
     }
   },
   "static/about/pt": {
-    "date": "2026-10-27",
-    "hash": "fcb7d3860020",
+    "date": "2026-11-07",
+    "hash": "9c1f1f9dcc61",
     "fields": {
       "lead": "23d5ecdf",
       "more[0]": "e3b33178",
       "sections[foi-aqui].heading": "8a5851c2",
-      "sections[foi-aqui].paragraphs[0]": "80d5863d",
+      "sections[foi-aqui].paragraphs[0]": "1ab93445",
       "sections[como-ler].heading": "0822e57f",
       "sections[como-ler].paragraphs[0]": "bbeb3add",
       "sections[como-ler].items[0]": "22429d43",
       "sections[como-ler].items[1]": "95461235",
       "sections[como-ler].items[2]": "1c04a686",
-      "sections[como-ler].after[0]": "f19cfdab",
+      "sections[como-ler].after[0]": "7c307c62",
       "sections[para-quem].heading": "c95e1bbc",
       "sections[para-quem].items[0]": "14850d49",
       "sections[para-quem].items[1]": "ece10a18",
@@ -534,9 +818,11 @@
       "sections[quem-faz].paragraphs[2]": "5ae075d6",
       "sections[ajudar].heading": "79c495ad",
       "sections[ajudar].items[0]": "85769db2",
-      "sections[ajudar].items[1]": "180e7909",
+      "sections[ajudar].items[1]": "545b41fa",
       "sections[ajudar].items[2]": "7f9722a0",
-      "sections[ajudar].after[0]": "31c83066"
+      "sections[ajudar].after[0]": "972b4c11",
+      "sections[ajudar].after[1]": "588989fc",
+      "sections[ajudar].after[2]": "269fcdf2"
     }
   },
   "static/about/ru": {
@@ -607,8 +893,8 @@
     }
   },
   "static/legal/pt": {
-    "date": "2026-10-29",
-    "hash": "37bc9c73404f",
+    "date": "2026-11-07",
+    "hash": "62fe191633dd",
     "fields": {
       "sections[resumo].heading": "814481c3",
       "sections[resumo].items[0]": "a7f06f8b",
@@ -616,14 +902,14 @@
       "sections[resumo].items[2]": "cb33d2da",
       "sections[cookies].heading": "141395eb",
       "sections[cookies].paragraphs[0]": "9216b0ca",
-      "sections[cookies].paragraphs[1]": "280ab52c",
+      "sections[cookies].paragraphs[1]": "e8372529",
       "sections[licencas].heading": "f1dcb460",
-      "sections[licencas].items[0]": "4df16bd5",
-      "sections[licencas].items[1]": "a25d2bae",
+      "sections[licencas].items[0]": "945ffa21",
+      "sections[licencas].items[1]": "156829cb",
       "sections[licencas].items[2]": "0ebdd9b4",
       "sections[licencas].items[3]": "a51d2b5b",
       "sections[privacidade].heading": "c9dcdbfa",
-      "sections[privacidade].paragraphs[0]": "83611d5b",
+      "sections[privacidade].paragraphs[0]": "904ce3c9",
       "sections[contagem].heading": "d1169625",
       "sections[contagem].paragraphs[0]": "7a03b6f9",
       "sections[terceiros].heading": "f2cc09bc",
@@ -631,7 +917,7 @@
       "sections[terceiros].items[0]": "36f96a07",
       "sections[terceiros].items[1]": "c896513f",
       "sections[terceiros].items[2]": "0079ca68",
-      "sections[terceiros].items[3]": "2ff9b038",
+      "sections[terceiros].items[3]": "5f81ca23",
       "sections[terceiros].after[0]": "729feb6c",
       "sections[aviso].heading": "3e1da477",
       "sections[aviso].paragraphs[0]": "512fed74",
@@ -698,8 +984,8 @@
     }
   },
   "static/method/pt": {
-    "date": "2026-10-27",
-    "hash": "348c2b9f3e96",
+    "date": "2026-11-07",
+    "hash": "c9cd29be182e",
     "fields": {
       "lead": "15f3e125",
       "sections[etiquetas].heading": "b88968a6",
@@ -717,7 +1003,7 @@
       "sections[correcoes].heading": "63952b06",
       "sections[correcoes].paragraphs[0]": "410f1287",
       "sections[idiomas].heading": "bee378b2",
-      "sections[idiomas].paragraphs[0]": "f440ed1e"
+      "sections[idiomas].paragraphs[0]": "09a84ded"
     }
   },
   "static/method/ru": {
@@ -753,7 +1039,7 @@
     }
   },
   "thread/comida-e-vinho/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "c108a62cc602",
     "fields": {
       "slug": "352d8358",
@@ -780,7 +1066,7 @@
     }
   },
   "thread/engenho/pt": {
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "hash": "da28d7ff3c03",
     "fields": {
       "slug": "b68ad2ec",
@@ -807,7 +1093,7 @@
     }
   },
   "thread/gente-como-nos/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "0283eeae86ef",
     "fields": {
       "slug": "d638bc21",
@@ -834,7 +1120,7 @@
     }
   },
   "thread/mar/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "f3e6ab42cec6",
     "fields": {
       "slug": "51609286",
@@ -861,12 +1147,12 @@
     }
   },
   "thread/natureza/pt": {
-    "date": "2026-10-27",
-    "hash": "e468b3025f91",
+    "date": "2026-11-07",
+    "hash": "9320c3fc002d",
     "fields": {
       "slug": "3a00b019",
       "name": "f58c2019",
-      "description": "b3e7dd39"
+      "description": "579e700e"
     }
   },
   "thread/natureza/ru": {
@@ -888,7 +1174,7 @@
     }
   },
   "thread/poder-e-revolta/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "d2e0c30faa9b",
     "fields": {
       "slug": "2beefd5f",
@@ -917,7 +1203,7 @@
     }
   },
   "ui/a11y/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "0271d1fc3be8",
     "fields": {
       "a11y.skip_to_content": "8d82be62",
@@ -977,8 +1263,8 @@
     }
   },
   "ui/card/pt": {
-    "date": "2026-10-28",
-    "hash": "bc1292c37209",
+    "date": "2026-11-07",
+    "hash": "b95c09bbfaa1",
     "fields": {
       "card.breadcrumb": "acd2bcae",
       "card.tags": "477378a0",
@@ -992,18 +1278,25 @@
       "card.image_source": "1bdb4add",
       "card.license_public_domain": "cba5b0c5",
       "card.story_heading": "928313b0",
+      "card.meanwhile_title": "16b10836",
       "card.context": "dbb654a4",
       "card.official_site": "bb75d42d",
       "card.accessed": "793dbeb1",
       "card.share_copied": "a8c19545",
       "card.share_failed": "d2a29704",
       "card.epoch_nav": "f72ddce4",
-      "card.prev": "e4ce7c09",
-      "card.next": "ae53628a",
-      "card.not_translated": "e967af19",
+      "card.footer_prev": "7de92fd8",
+      "card.footer_epoch": "e1a7d283",
+      "card.footer_next": "6d59d65d",
+      "card.not_translated": "21047dae",
       "card.more_toggle": "5d29e304",
       "card.next_story": "e60cf337",
       "card.year_bc": "57fbe98b",
+      "card.year_ad": "01149698",
+      "card.ago_million": "0c974f2f",
+      "card.ago_thousand": "fbadbe1c",
+      "card.ago_scale_million": "7e55939b",
+      "card.ago_scale_thousand": "f59b0c6b",
       "card.next_epoch": "35ec55ec",
       "card.all_epochs": "05b21720",
       "card.sources_checked": "e037bb26",
@@ -1080,8 +1373,8 @@
     }
   },
   "ui/epoch/pt": {
-    "date": "2026-10-29",
-    "hash": "ad91d7d76bb8",
+    "date": "2026-11-07",
+    "hash": "959aa0bca18d",
     "fields": {
       "epoch.chips_label": "159b2a8b",
       "epoch.timeline_label": "61e8a689",
@@ -1095,10 +1388,8 @@
       "epoch.then_now_estimate": "20c308d7",
       "epoch.then_now_calc": "5cff310f",
       "epoch.then_now_note_estimate": "c0adbf6f",
-      "epoch.then_now_note_calc": "b52537c4",
-      "epoch.then_now_more": "3b39045c",
+      "epoch.then_now_note_calc": "7dd7cde4",
       "epoch.then_now_sources": "ebddcc6f",
-      "epoch.read_progress": "5e570976",
       "epoch.filter_all": "bd02b9a7",
       "epoch.view_label": "af738ae4",
       "epoch.empty": "91d4ac6c",
@@ -1157,7 +1448,7 @@
     }
   },
   "ui/family/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "6578a7ff92a1",
     "fields": {
       "family.button": "e1e5e3f4",
@@ -1210,7 +1501,7 @@
     }
   },
   "ui/feed/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "f122db0eeba9",
     "fields": {
       "feed.expand_story": "c3d66e0b"
@@ -1221,6 +1512,14 @@
     "hash": "d3abe0976dee",
     "fields": {
       "feed.expand_story": "c010195f"
+    }
+  },
+  "ui/festa/pt": {
+    "date": "2026-11-07",
+    "hash": "908dcb18f750",
+    "fields": {
+      "festa.history": "c5e57292",
+      "festa.traditions": "2a56e8e3"
     }
   },
   "ui/footer/en": {
@@ -1236,15 +1535,17 @@
     }
   },
   "ui/footer/pt": {
-    "date": "2026-10-28",
-    "hash": "2b4a9d2c7303",
+    "date": "2026-11-07",
+    "hash": "e1eacbaa90ac",
     "fields": {
       "footer.about": "64f99e9e",
       "footer.method": "3bfb8bc8",
       "footer.report": "21025963",
+      "footer.share": "c8989d75",
       "footer.legal": "84edf558",
       "footer.licenses": "5fb81908",
-      "footer.privacy": "89dea5c6"
+      "footer.privacy": "89dea5c6",
+      "footer.myths": "a95a347e"
     }
   },
   "ui/footer/ru": {
@@ -1272,7 +1573,7 @@
     }
   },
   "ui/gate/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "e406bb76b8f4",
     "fields": {
       "gate.age_12": "ed7918c9",
@@ -1314,21 +1615,27 @@
     }
   },
   "ui/home/pt": {
-    "date": "2026-10-31",
-    "hash": "79ab724431dc",
+    "date": "2026-11-07",
+    "hash": "5808224e0ac7",
     "fields": {
       "home.epochs_heading": "758fb779",
       "home.hook_title": "3c5bf4a0",
       "home.intro": "6bac37b5",
       "home.cta_read": "830fde55",
       "home.continue": "ab81f77a",
+      "home.new_since": "215aaec2",
+      "home.new_era": "c0cedf36",
       "home.open_map": "b48c5808",
       "home.showcase_heading": "20b75c1c",
       "home.timeline_label": "772fbe55",
       "home.timeline_prev": "ea9efc13",
       "home.timeline_next": "0bb406d6",
       "home.threads_heading": "131755fe",
-      "home.threads_intro": "a1e64c71"
+      "home.threads_intro": "a1e64c71",
+      "home.how": "9baf2807",
+      "home.myths_title": "961b569c",
+      "home.myths_line": "2d1875a9",
+      "home.myths_play": "d823cfcb"
     }
   },
   "ui/home/ru": {
@@ -1401,7 +1708,7 @@
     }
   },
   "ui/map/pt": {
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "hash": "91c2e7f75f65",
     "fields": {
       "map.home": "a162074f",
@@ -1524,7 +1831,7 @@
     }
   },
   "ui/mascot/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "29f3d4b278c5",
     "fields": {
       "mascot.walk": "a629585f",
@@ -1553,6 +1860,49 @@
       "mascot.head": "451bc3ff"
     }
   },
+  "ui/myths/pt": {
+    "date": "2026-11-07",
+    "hash": "db0402e27544",
+    "fields": {
+      "myths.lead": "7577aa7b",
+      "myths.og_title_page": "13eef565",
+      "myths.og_title": "2875fc96",
+      "myths.og_description": "7c62df8a",
+      "myths.share_text": "c69f4791",
+      "myths.og_label": "961b569c",
+      "myths.answer": "e209fb3b",
+      "myths.myth": "74b2512f",
+      "myths.fact": "c6427f37",
+      "myths.part": "9e55ebc4",
+      "myths.question": "fd800058",
+      "myths.full_story": "08a4b75b",
+      "myths.link": "c1fdcaa9",
+      "myths.end": "37f55900",
+      "myths.end_link": "e5b0eeb6",
+      "myths.progress_label": "7a0da766",
+      "myths.step": "6b82fc0a",
+      "myths.sq_label": "1ad6bc1e",
+      "myths.sq_empty": "4d70d853",
+      "myths.sq_hit": "660a83c2",
+      "myths.sq_miss": "7bc3d1ed",
+      "myths.outcome_hit": "e9fdff1c",
+      "myths.outcome_miss": "939d736d",
+      "myths.outcome_part": "be63d960",
+      "myths.next": "ae53628a",
+      "myths.finish": "a71bc39f",
+      "myths.score": "fad05a2a",
+      "myths.band_low": "66d2f32e",
+      "myths.band_mid": "ba032fdb",
+      "myths.band_high": "40acc835",
+      "myths.misses": "72d1944d",
+      "myths.again": "bd43a8a6",
+      "myths.read": "c0276313",
+      "myths.share_title": "36fed4ef",
+      "myths.share_ask": "5443db00",
+      "myths.copied": "d8dd878f",
+      "myths.best": "1dfeac67"
+    }
+  },
   "ui/nav/en": {
     "date": "2026-10-27",
     "hash": "79f683f4c026",
@@ -1564,7 +1914,7 @@
     }
   },
   "ui/nav/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "6a2a6f229e46",
     "fields": {
       "nav.home": "325dfc37",
@@ -1593,7 +1943,7 @@
     }
   },
   "ui/notfound/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "850995e7399f",
     "fields": {
       "notfound.title": "e4d2fc0c",
@@ -1629,8 +1979,8 @@
     }
   },
   "ui/pages/pt": {
-    "date": "2026-10-28",
-    "hash": "c6a0bcb1fbb7",
+    "date": "2026-11-07",
+    "hash": "8930970f0934",
     "fields": {
       "pages.about.title": "64f99e9e",
       "pages.about.description": "1de38d20",
@@ -1638,12 +1988,16 @@
       "pages.method.description": "f2684a46",
       "pages.report.title": "21025963",
       "pages.report.description": "e9cba8b3",
+      "pages.share.title": "c8989d75",
+      "pages.share.description": "468eff0d",
       "pages.legal.title": "84edf558",
       "pages.legal.description": "03856acd",
       "pages.map.title": "d2f671e0",
       "pages.map.description": "42376e78",
       "pages.surprise.title": "43fb6d2d",
-      "pages.surprise.description": "b2597a37"
+      "pages.surprise.description": "b2597a37",
+      "pages.myths.title": "a95a347e",
+      "pages.myths.description": "1baf35f5"
     }
   },
   "ui/pages/ru": {
@@ -1664,6 +2018,26 @@
       "pages.surprise.description": "94898ce7"
     }
   },
+  "ui/panno/pt": {
+    "date": "2026-11-07",
+    "hash": "a7fbd56dad8a",
+    "fields": {
+      "panno.hint": "0fb99f47",
+      "panno.zoom": "32a38fbf",
+      "panno.close": "0f2bd88e",
+      "panno.share": "4a2f603c",
+      "panno.copied": "7ae63667",
+      "panno.share_text": "a3996221",
+      "panno.page_title": "0c488fe6",
+      "panno.invite": "cae98b8b",
+      "panno.to_epoch": "46cd9c97",
+      "panno.og_title": "0c488fe6",
+      "panno.og_description": "a03b4844",
+      "panno.continue": "f000e8a4",
+      "panno.done": "3e430b0b",
+      "panno.story_line": "030ed862"
+    }
+  },
   "ui/plural/en": {
     "date": "2026-10-27",
     "hash": "7c6cc09e404f",
@@ -1677,15 +2051,29 @@
     }
   },
   "ui/plural/pt": {
-    "date": "2026-10-27",
-    "hash": "56ca5b855150",
+    "date": "2026-11-07",
+    "hash": "8e9688dbc03e",
     "fields": {
       "plural.stories_one": "7504b5ba",
       "plural.stories_other": "1b4a5044",
       "plural.places_one": "270411b1",
       "plural.places_other": "e851f426",
       "plural.epochs_more_one": "8485de5e",
-      "plural.epochs_more_other": "9ca81b4c"
+      "plural.epochs_more_other": "9ca81b4c",
+      "plural.new_stories_one": "b37a19f9",
+      "plural.new_stories_other": "92db52d8",
+      "plural.new_plus_one": "ced5e01e",
+      "plural.new_plus_other": "e0d718e0",
+      "plural.new_epochs_one": "b09ccc6a",
+      "plural.new_epochs_other": "ac2406a0",
+      "plural.then_now_more_one": "3732dd7a",
+      "plural.then_now_more_other": "3b39045c",
+      "plural.read_progress_one": "8782cae3",
+      "plural.read_progress_other": "5e570976",
+      "plural.panno_count_one": "cefdb814",
+      "plural.panno_count_other": "cefdb814",
+      "plural.panno_alt_one": "55cbf581",
+      "plural.panno_alt_other": "55cbf581"
     }
   },
   "ui/plural/ru": {
@@ -1732,7 +2120,7 @@
     }
   },
   "ui/report/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "37fb982d55f5",
     "fields": {
       "report.lead": "cb4abaf5",
@@ -1781,6 +2169,26 @@
       "report.too_short": "a504f1f7"
     }
   },
+  "ui/share/pt": {
+    "date": "2026-11-07",
+    "hash": "c168e14424b0",
+    "fields": {
+      "share.lead": "62734d15",
+      "share.required": "548cf380",
+      "share.where_label": "27c7231c",
+      "share.where_hint": "703e9643",
+      "share.what_label": "c18c46e8",
+      "share.what_hint": "cf3e660f",
+      "share.source_label": "dc0c38c4",
+      "share.source_hint": "1a44a245",
+      "share.email_label": "513b9b8a",
+      "share.subject": "a6fa1f5f",
+      "share.note": "2b38bd40",
+      "share.sent_title": "5b34baff",
+      "share.sent_text": "276025b7",
+      "share.report_link": "b040fe50"
+    }
+  },
   "ui/site/en": {
     "date": "2026-10-31",
     "hash": "a792ba9073fb",
@@ -1794,12 +2202,14 @@
     }
   },
   "ui/site/pt": {
-    "date": "2026-10-31",
-    "hash": "22ad353e1dfa",
+    "date": "2026-11-07",
+    "hash": "ecbb9864c841",
     "fields": {
       "site.name": "875e6fd9",
       "site.tagline": "8a5851c2",
       "site.description": "7aa9da1c",
+      "site.home_preview_title": "62b0d860",
+      "site.home_preview_description": "beb25b87",
       "site.preview_alt_home": "3a2d8ef2",
       "site.preview_alt_page": "c5a734d8",
       "site.preview_alt_thread": "c5327129"
@@ -1825,7 +2235,7 @@
     }
   },
   "ui/stub/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "16e8d1753acc",
     "fields": {
       "stub.notice": "87949bdd"
@@ -1849,7 +2259,7 @@
     }
   },
   "ui/surprise/pt": {
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "hash": "a24ee39d4a3a",
     "fields": {
       "surprise.picking": "d4e6f895",
@@ -1881,7 +2291,7 @@
     }
   },
   "ui/theme/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "c788f3e57c0a",
     "fields": {
       "theme.label": "d5df3708",
@@ -1912,7 +2322,7 @@
     }
   },
   "ui/thread/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "e5f5d06466ab",
     "fields": {
       "thread.eras_label": "491d1154"
@@ -1956,12 +2366,12 @@
     }
   },
   "ui/ui/pt": {
-    "date": "2026-10-29",
-    "hash": "34c74906cf61",
+    "date": "2026-11-07",
+    "hash": "8a2420e5f632",
     "fields": {
       "ui.read_more": "d723dc4e",
       "ui.more": "18a5d0fe",
-      "ui.bridge": "cca29726",
+      "ui.bridge": "bc72f9a2",
       "ui.label_documented": "320895f5",
       "ui.label_legend": "4e0118ac",
       "ui.label_debated": "53228903",
@@ -1969,10 +2379,13 @@
       "ui.family_mode": "ef9ed887",
       "ui.age_all": "e1aa256c",
       "ui.share": "4a2f603c",
+      "ui.like": "00a2798e",
+      "ui.like_thanks": "eeafad88",
       "ui.report_error": "21025963",
       "ui.read": "c0ce2d9a",
       "ui.read_reset": "22e7efdf",
       "ui.read_reset_done": "4e866509",
+      "ui.new": "2b1d9b4b",
       "ui.nearby": "c51c4ddf",
       "ui.open_on_map": "99072ff9",
       "ui.surprise": "43fb6d2d",
@@ -1982,7 +2395,9 @@
       "ui.view_timeline": "cc91da83",
       "ui.view_grid": "d189efa1",
       "ui.sources": "ebddcc6f",
-      "ui.directions": "9ec199be"
+      "ui.directions": "9ec199be",
+      "ui.near_more": "0fd59db1",
+      "ui.story_myths": "bb584398"
     }
   },
   "ui/ui/ru": {
@@ -2049,7 +2464,7 @@
     }
   },
   "ui/viz/pt": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "71e99a5d6269",
     "fields": {
       "viz.army_title": "b7c4b106",

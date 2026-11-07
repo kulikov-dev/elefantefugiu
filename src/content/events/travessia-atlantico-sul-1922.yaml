@@ -149,13 +149,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '958f641f7b7e'
-  ru:
-    date: '2026-10-31'
-    hash: 'e6e5ef22d021'
 meanwhile:
   - scope: ru
     year: 1923
@@ -172,3 +165,10 @@ meanwhile:
     text:
       pt: "Howard Carter descobre o túmulo de Tutankhamon."
     source: "https://en.wikipedia.org/wiki/Tomb_of_Tutankhamun"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '9bc97db31a12'
+  ru:
+    date: '2026-10-31'
+    hash: 'e6e5ef22d021'

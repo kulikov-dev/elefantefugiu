@@ -195,16 +195,16 @@ published: '2026-10-21'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-28'
-    hash: 'd5a74f934a2b'
-  ru:
-    date: '2026-10-28'
-    hash: 'f0b83bca7cf1'
 meanwhile:
   - scope: ru
     year: 1508
     text:
       ru: "В Кремле достроена колокольня Ивана Великого."
     source: "https://ru.wikipedia.org/wiki/Колокольня_Ивана_Великого"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '1a94843e70ae'
+  ru:
+    date: '2026-10-28'
+    hash: 'f0b83bca7cf1'

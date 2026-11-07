@@ -117,16 +117,6 @@ status: ready
 published: '2026-10-30'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '903cdc008659'
-  en:
-    date: '2026-10-31'
-    hash: '097aebe3d529'
-  ru:
-    date: '2026-10-31'
-    hash: 'e8321f1e5740'
 meanwhile:
   - scope: ru
     year: 1873
@@ -143,3 +133,13 @@ meanwhile:
     text:
       pt: "Inaugura-se a ponte de Brooklyn, em Nova Iorque."
     source: "https://en.wikipedia.org/wiki/Brooklyn_Bridge"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '903cdc008659'
+  en:
+    date: '2026-10-31'
+    hash: '097aebe3d529'
+  ru:
+    date: '2026-10-31'
+    hash: 'e8321f1e5740'

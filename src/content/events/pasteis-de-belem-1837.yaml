@@ -134,13 +134,6 @@ published: '2026-10-30'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-10-31'
-    hash: '7fdf7127979a'
-  ru:
-    date: '2026-10-31'
-    hash: 'fc2816d9cd78'
 meanwhile:
   - scope: world
     year: 1837
@@ -149,3 +142,10 @@ meanwhile:
       en: "Hans Christian Andersen publishes The Little Mermaid."
       ru: "Андерсен публикует сказку «Русалочка»."
     source: "https://en.wikipedia.org/wiki/The_Little_Mermaid"
+lang_review:
+  pt:
+    date: '2026-11-07'
+    hash: '08e82adcc2aa'
+  ru:
+    date: '2026-10-31'
+    hash: 'fc2816d9cd78'
