@@ -57,7 +57,7 @@ story:
 
     Os paleontólogos escavaram-nos em 1999 e 2001 e reuniram quase todo o pescoço. Tinha pelo menos 17 vértebras, mais do que a maioria dos saurópodes, os tais gigantes de pescoço comprido. A ciência não conhecia nenhum estegossauro com um pescoço assim, por isso em 2009 o achado foi descrito como espécie nova e batizado Miragaia longicollum, «a de pescoço comprido, de Miragaia».
   en: >-
-    Stegosaurs are easy to spot: plates on the back, spikes on the tail, and a short neck held close to the ground. In 1999, near the village of Miragaia outside Lourinhã, road builders uncovered bones that didn’t fit that picture.
+    You can spot a stegosaur at a glance: plates down the back, spikes on the tail, a short neck near the ground. In 1999, near the village of Miragaia outside Lourinhã, road builders uncovered bones that didn’t fit that picture.
 
     Paleontologists dug them out in 1999 and 2001 and recovered almost the entire neck. It had at least 17 vertebrae, more than most sauropods, the famous long-necked giants. Science knew of no stegosaur with a neck like that, so in 2009 the find was described as a new species and named Miragaia longicollum, “the long-necked one from Miragaia.”
   ru: >-
@@ -69,7 +69,7 @@ meanwhile:
     year: -149000000
     text:
       pt: "Na América do Norte vivia o seu parente, o estegossauro."
-      en: "Its relative Stegosaurus lived in North America"
+      en: "Its relative Stegosaurus lived in North America."
       ru: "В Северной Америке жил её родственник, стегозавр"
     source: "https://en.wikipedia.org/wiki/Stegosaurus"
 more:

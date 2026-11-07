@@ -28,11 +28,11 @@
     ru: "⋯ прошло почти 150 млн лет ⋯"
   theme:
     pt: "Pegadas de dinossauros e gravuras do Côa"
-    en: "Dinosaur tracks and Côa rock art"
+    en: "Dinosaur footprints and Côa rock art"
     ru: "Следы динозавров и рисунки Коа"
   description:
     pt: "Antes de haver gente, Portugal era a orla de um Atlântico jovem. Há pegadas de dinossauros nas arribas e gravuras da Idade da Pedra poupadas às águas."
-    en: "Before people, Portugal was the shore of a young Atlantic. Dinosaur tracks survive on the cliffs, and Stone Age engravings were saved from drowning."
+    en: "Before people, Portugal was the shore of a young Atlantic. Dinosaurs left footprints on its cliffs; Stone Age engravings were saved from drowning."
     ru: "До людей Португалия была берегом молодого Атлантического океана. Следы динозавров остались на обрывах, а рисунки каменного века страна спасла от затопления."
   style:
     bg: "#f2ece2"
@@ -46,13 +46,13 @@
     rows: 6
     share_hook:
       pt: "durante séculos, peregrinos vieram ver as pegadas de uma mula, e a mula era um dinossauro"
-      en: "for centuries pilgrims came to see a mule’s hoofprints, and the mule was a dinosaur"
+      en: "for centuries, pilgrims came to see a mule’s footprints, and the mule turned out to be a dinosaur"
       ru: "паломники веками шли смотреть на следы мула, а мул оказался динозавром"
   fallback_image:
     file: epoca-antes-de-portugal.webp
     alt:
       pt: "Ilustração ao estilo do azulejo azul e branco: dinossauros de pescoço comprido atravessam águas pouco fundas junto a uma praia, com pegadas no lodo, araucárias e palmeiras e pterossauros no céu."
-      en: "Blue-and-white azulejo-style illustration: long-necked dinosaurs wade through shallow water by a shore, with tracks in the mud, monkey-puzzle trees and palms, and pterosaurs in the sky."
+      en: "Blue-and-white azulejo-style illustration: long-necked dinosaurs wade through shallow water by a shore, with footprints in the mud, monkey-puzzle trees and palms, and pterosaurs in the sky."
       ru: "Иллюстрация в духе сине-белого азулежу: длинношеие динозавры бредут по мелководью у берега, на иле видны следы, вокруг араукарии и пальмы, а в небе летают птерозавры."
     caption:
       pt: "Ilustração criada por IA a partir da época do Prólogo. Não é uma imagem histórica."
@@ -303,7 +303,7 @@
         ru: "1 ч 40 мин"
       text:
         pt: "A primeira diligência partia de Lisboa às 5 h e chegava a Coimbra às 21 h do dia seguinte: 40 horas. Hoje o comboio leva 1 h 40 min: nas mesmas 40 horas faria o percurso cerca de {n} vezes."
-        en: "The first mail coach left Lisbon at 5 a.m. and reached Coimbra at 9 p.m. next day: 40 hours. A train now takes 1 h 40 min: in the same 40 hours it would make the trip about {n} times."
+        en: "The first mail coach left Lisbon at 5 a.m. and reached Coimbra at 9 p.m. the next day: 40 hours. A train now takes 1 h 40 min: in the same 40 hours it would make the trip about {n} times."
         ru: "Первая почтовая карета выезжала из Лиссабона в 5 утра и приезжала в Коимбру в 21:00 следующего дня: 40 часов. Сегодня поезд идёт около 1 часа 40 минут: за те же 40 часов он проехал бы этот путь около {n} раз."
       kind: known
       then_hours: 40
@@ -652,7 +652,7 @@
     - id: cha-pepys
       then_big:
         pt: "nunca bebera"
-        en: "never drunk"
+        en: "never tasted"
         ru: "никогда не пил"
       now_big:
         pt: "100 milhões de chávenas por dia"
@@ -787,7 +787,7 @@
         ru: "3 из 100"
       text:
         pt: "Em 1911 não sabiam ler sete em cada dez portugueses com mais de sete anos. Nos Censos 2021 são cerca de três em cada cem; a base é diferente: então desde os sete anos, agora desde os dez."
-        en: "In 1911 seven in ten Portuguese over the age of seven could not read. In the 2021 census it is about three in a hundred; the base differs: then from age seven, now from age ten."
+        en: "In 1911 seven in ten Portuguese over the age of seven could not read. In the 2021 census it is about three in a hundred; the baselines differ: then, ages seven and up; now, ages ten and up."
         ru: "В 1911 году не умели читать семеро из десяти португальцев старше семи лет. По переписи 2021 года неграмотных около трёх из ста; база подсчёта чуть отличается: тогда от семи лет, теперь от десяти."
       kind: known
       sources:

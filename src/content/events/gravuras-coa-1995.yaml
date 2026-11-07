@@ -53,7 +53,7 @@ min_age: 'all'
 sensitive: false
 hook:
   pt: "Gravuras da Idade da Pedra travaram uma barragem."
-  en: "A dam was canceled because of Stone Age rock art."
+  en: "A dam was scrapped over Stone Age rock art."
   ru: "Стройку плотины отменили из-за рисунков каменного века."
 story:
   pt: >-
@@ -80,7 +80,7 @@ meanwhile:
     year: -22000
     text:
       pt: "Glaciares cobriam a Escandinávia, e o sul do atual mar do Norte era terra firme."
-      en: "Glaciers covered Scandinavia, and the southern North Sea was dry land"
+      en: "Glaciers covered Scandinavia, and the southern North Sea was dry land."
       ru: "Ледники покрывали Скандинавию, а южная часть нынешнего Северного моря была сушей"
     source: "https://en.wikipedia.org/wiki/Doggerland"
 more:

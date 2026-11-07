@@ -389,7 +389,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'cookies',
           heading: 'Cookies',
-          paragraphs: ['This site does not use cookies. Visit counting works without them, and your browser stores only your settings (theme, age, language, last era), as explained below.', 'The site remembers in this browser which stories you have read and the date of your last visit (to mark new stories); this is never sent anywhere. The “I liked it” button sends an anonymous “story liked” event to the statistics, with no cookies and no personal data.'],
+          paragraphs: ['This site does not use cookies. Visit counting works without them, and your browser stores only your settings (theme, age, language, last era), as explained below.', 'The site remembers in this browser which stories you have read and the date of your last visit (to mark new stories); this is never sent anywhere. The “I liked it” button sends an anonymous “story liked” event to the visit counter, with no cookies and no personal data.'],
           action: 'reset-read',
         },
         {
@@ -407,7 +407,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'What’s stored in your browser',
           paragraphs: [
-            'So that the site remembers your choices, your browser saves: language, colour theme, the age you chose (“Age”), the last era you opened, the last story from “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me” on the map or “What else is near you” on a story, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
+            'So that the site remembers your choices, your browser saves: language, color theme, the age you chose (“Age”), the last era you opened, the last story from “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me” on the map or “What else is near you” on a story, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
         },
         {

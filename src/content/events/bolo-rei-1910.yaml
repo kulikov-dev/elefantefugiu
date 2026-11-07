@@ -5,7 +5,7 @@ slug:
   ru: pirog-kotoryy-perezhil-korolya
 title:
   pt: O bolo que sobreviveu ao rei
-  en: The cake that outlived the king
+  en: The Cake That Outlived the King
   ru: Пирог, который пережил короля
 epoch: monarquia-e-republica
 level: story
@@ -34,7 +34,7 @@ bridge:
   url: https://www.confeitarianacional.com/
   note:
     pt: A confeitaria onde, ao que se diz, o bolo-rei foi vendido pela primeira vez, e que continua no mesmo sítio.
-    en: The shop where bolo-rei is said to have first been sold, and it still stands in the same spot.
+    en: The shop where bolo-rei is said to have first gone on sale; it still stands on the same spot.
     ru: Та самая кондитерская, где, как считается, bolo-rei продали впервые, и она до сих пор работает на том же месте.
 threads:
   - comida-e-vinho
@@ -93,7 +93,7 @@ image:
   file: bolo-rei-1910.webp
   alt:
     pt: "Ilustração ao estilo do azulejo azul e branco: numa montra de uma confeitaria, um pasteleiro de barrete pendura uma tabuleta sobre dois bolos-reis cobertos de frutas cristalizadas; na rua, um homem de chapéu de coco, uma mulher com um cesto e um rapaz olham para a montra, com um elétrico e prédios de Lisboa ao fundo."
-    en: "Blue-and-white azulejo-style illustration: in a pastry-shop window, a baker in a tall cap hangs a sign above two bolo-rei cakes covered in candied fruit; in the street, a man in a bowler hat, a woman with a basket and a boy look at the window, with a tram and Lisbon buildings behind them."
+    en: "Blue-and-white azulejo-style illustration: in a pastry-shop window, a baker in a tall cap hangs a sign above two bolo-rei cakes covered in candied fruit; in the street, a man in a bowler hat, a woman with a basket and a boy look at the window, with a streetcar and Lisbon buildings behind them."
     ru: "Иллюстрация в духе сине-белого азулежу: в витрине кондитерской пекарь в колпаке вешает табличку над двумя пирогами bolo-rei с цукатами; на улице мужчина в котелке, женщина с корзиной и мальчик смотрят на витрину, а позади трамвай и лиссабонские дома."
   caption:
     pt: "O bolo-rei na montra, 1910. Ilustração em estilo azulejo, criada por IA."

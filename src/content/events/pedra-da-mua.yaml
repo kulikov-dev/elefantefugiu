@@ -48,7 +48,7 @@ min_age: 'all'
 sensitive: false
 hook:
   pt: "Durante séculos, peregrinos vieram ver pegadas de mula. Eram de dinossauro."
-  en: "Pilgrims visited a mule’s hoofprints for centuries. The mule was a dinosaur."
+  en: "Pilgrims visited a mule’s footprints for centuries. The mule was a dinosaur."
   ru: "Паломники веками шли смотреть на следы мула. Мул оказался динозавром."
 story:
   pt: >-
@@ -63,7 +63,7 @@ story:
 
     Anyone who walked to the edge could see the prints, so people believed. For centuries pilgrims came to the cape: a chapel went up on the cliff, and later a large sanctuary grew beside it.
 
-    The rows of round hollows really are there, on a tilted slab above the sea. But in the 1990s scientists found that the mule had nothing to do with them. About 150 million years ago, sauropods, huge long-necked plant-eating dinosaurs, walked across a muddy shore. The miracle that drew the pilgrims turned out to be dinosaur tracks.
+    The rows of round hollows really are there, on a tilted slab above the sea. But in the 1990s scientists found that the mule had nothing to do with them. About 150 million years ago, sauropods, huge long-necked plant-eating dinosaurs, walked across a muddy shore. The miracle that drew the pilgrims turned out to be dinosaur footprints.
   ru: >-
     На мысе Эшпишел, к югу от Лиссабона, издавна рассказывают о чуде. Богородица будто бы поднялась из моря на обрыв верхом на муле, и копыта оставили следы прямо в камне.
 
@@ -75,7 +75,7 @@ meanwhile:
     year: -150000000
     text:
       pt: "Na Alemanha vivia o arqueópterix, uma das primeiras aves"
-      en: "In Germany lived Archaeopteryx, one of the first birds"
+      en: "Archaeopteryx, one of the first birds, lived in what is now Germany."
       ru: "В Германии жил археоптерикс, одна из первых птиц"
     source: "https://en.wikipedia.org/wiki/Archaeopteryx"
 more:
@@ -88,10 +88,10 @@ more:
 
     A lenda, porém, continua viva. Na Ermida da Memória, os azulejos ainda mostram Nossa Senhora com o Menino montada na mula. É um lugar raro, onde o milagre e a explicação científica apontam para as mesmas pegadas.
   en: >-
-    The slab is even called Pedra da Mua, “the mule’s stone.” It was once a flat, muddy shore, but over time the rock layers rose and tilted. That’s why the tracks now sit on a slope, and it looks as if the animal walked straight up the cliff, just as the legend says.
+    The slab is even called Pedra da Mua, “the mule’s stone.” It was once a flat, muddy shore, but over time the rock layers rose and tilted. That’s why the footprints now sit on a slope, and it looks as if the animal walked straight up the cliff, just as the legend says.
 
 
-    Scientists read more in these tracks than “dinosaurs were here.” The slab holds several trackways, and nearly all were left by small, probably young animals walking side by side in the same direction. It is one of the first signs found in Europe that sauropods moved in herds.
+    Scientists read more in these footprints than “dinosaurs were here.” The slab holds several trackways, and nearly all were left by small, probably young animals walking side by side in the same direction. It is one of the first signs found in Europe that sauropods moved in herds.
 
 
     The legend lives on all the same. Inside the Ermida da Memória, the tiles still show the Virgin and Child riding the mule. It is a rare place where a miracle and a scientific explanation point to the same footprints.
@@ -128,7 +128,7 @@ image:
     ru: "Иллюстрация в духе сине-белого азулежу: двое паломников в капюшонах стоят на коленях перед наклонной плитой с круглыми ямками, по которой идут почти прозрачные длинношеие динозавры; на вершине обрыва над морем стоит часовня с куполом."
   caption:
     pt: "Os peregrinos e as pegadas do Cabo Espichel. Ilustração em estilo azulejo, criada por IA."
-    en: "The pilgrims and the tracks of Cabo Espichel. Azulejo-style illustration, created by AI."
+    en: "The pilgrims and the footprints of Cabo Espichel. Azulejo-style illustration, created by AI."
     ru: "Паломники и следы на мысе Эшпишел. Иллюстрация в стиле азулежу, создана ИИ."
   author: Gemini (AI)
   license: AI-generated

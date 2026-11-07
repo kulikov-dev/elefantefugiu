@@ -44,7 +44,7 @@ min_age: all
 sensitive: false
 hook:
   pt: Todos acham que este elevador é de Eiffel. Projetou-o outro engenheiro.
-  en: Everyone is sure Eiffel built this lift. A different engineer designed it.
+  en: Everyone is sure Eiffel built this elevator. A different engineer designed it.
   ru: Все уверены, что этот лифт построил Эйфель. Спроектировал его совсем другой инженер.
 story:
   pt: >-

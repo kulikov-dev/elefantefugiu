@@ -64,7 +64,7 @@
           text: 'Praça dos Restauradores in central Lisbon is named for this day. Its 1886 obelisk lists the battles of the war that went on for 28 more years after 1640.'
         - title: 'Forty conspirators.'
           text: 'On the morning of December 1, 1640, forty noblemen stormed the palace in Lisbon.'
-          link: { story: restauracao-1640, label: 'Our story →' }
+          link: { story: restauracao-1640, label: 'My story →' }
     ru:
       date: '1 декабря'
       name: 'День восстановления независимости'

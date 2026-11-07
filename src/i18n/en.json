@@ -53,7 +53,7 @@
     },
     "myths": {
       "title": "Myth or fact",
-      "description": "What guides, guidebooks, and friends say about Portugal: pick what you think, then read what really happened. Behind every answer is one of our stories."
+      "description": "What guides, guidebooks, and friends say about Portugal: pick what you think, then read what really happened. Behind every answer is one of my stories."
     }
   },
   "footer": {
@@ -116,7 +116,7 @@
     "share_failed": "Could not copy. Link:",
     "epoch_nav": "Navigation within this era",
     "footer_prev": "Previous: {title}",
-    "footer_epoch": "All stories of the era {name}",
+    "footer_epoch": "All stories from the {name} era",
     "footer_next": "Next: {title}",
     "not_translated": "This page has not been translated yet. The English text is shown.",
     "more_toggle": "More",
@@ -212,7 +212,7 @@
   "epoch": {
     "chips_label": "Threads in this era",
     "timeline_label": "Timeline of this era",
-    "neighbours_label": "Neighbouring eras",
+    "neighbours_label": "Neighboring eras",
     "prev": "Previous era",
     "next": "Next era",
     "more_soon": "More eras soon",
@@ -222,7 +222,7 @@
     "then_now_estimate": "estimate",
     "then_now_calc": "calculation",
     "then_now_note_estimate": "Estimate: a historians’ reconstruction.",
-    "then_now_note_calc": "Calculation: ours, from distance and speed.",
+    "then_now_note_calc": "Calculation: my own, from distance and speed.",
     "then_now_sources": "Sources",
     "filter_all": "All",
     "view_label": "View",
@@ -401,7 +401,7 @@
     "traditions": "Traditions and facts"
   },
   "myths": {
-    "lead": "What guides, guidebooks, and friends say about Portugal. Can you tell what’s true? Behind every answer is one of our stories.",
+    "lead": "What guides, guidebooks, and friends say about Portugal. Can you tell what’s true? Behind every answer is one of my stories.",
     "og_title_page": "Myth or Fact: What People Say About Portugal",
     "og_title": "Myth or fact: {statement}?",
     "og_description": "The answer and the full story at the link",
@@ -415,7 +415,7 @@
     "full_story": "Read the full story →",
     "link": "Link to this claim",
     "end": "Heard something else you’d like checked?",
-    "end_link": "Tell us →",
+    "end_link": "Tell me →",
     "progress_label": "Game progress",
     "step": "Question {i} of {total}",
     "sq_label": "Question {i}: {state}",
