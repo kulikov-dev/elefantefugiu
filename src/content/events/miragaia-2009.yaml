@@ -46,12 +46,14 @@ label: documented
 min_age: 'all'
 sensitive: false
 hook:
-  pt: "O estegossauro português que quis ser girafa."
+  pt: "O estegossauro português que queria ser girafa."
   en: "The Portuguese stegosaur that wanted to be a giraffe."
   ru: "Португальский стегозавр, который решил стать жирафом."
 story:
   pt: >-
-    Os estegossauros reconhecem-se logo: placas no dorso, espinhos na cauda e um pescoço curto, junto ao chão. Em 1999, perto da aldeia de Miragaia, na Lourinhã, as obras de uma estrada puseram a descoberto ossos que não encaixavam neste retrato.
+    Um estegossauro conhece-se logo: placas no dorso, espinhos na cauda e um pescoço curto, rente ao
+    chão. Em 1999, perto da aldeia de Miragaia, na Lourinhã, as obras de uma estrada puseram a
+    descoberto ossos que não encaixavam neste retrato.
 
     Os paleontólogos escavaram-nos em 1999 e 2001 e reuniram quase todo o pescoço. Tinha pelo menos 17 vértebras, mais do que a maioria dos saurópodes, os tais gigantes de pescoço comprido. A ciência não conhecia nenhum estegossauro com um pescoço assim, por isso em 2009 o achado foi descrito como espécie nova e batizado Miragaia longicollum, «a de pescoço comprido, de Miragaia».
   en: >-
@@ -66,7 +68,7 @@ meanwhile:
   - scope: world
     year: -149000000
     text:
-      pt: "Na América do Norte vivia o seu parente, o estegossauro"
+      pt: "Na América do Norte vivia o seu parente, o estegossauro."
       en: "Its relative Stegosaurus lived in North America"
       ru: "В Северной Америке жил её родственник, стегозавр"
     source: "https://en.wikipedia.org/wiki/Stegosaurus"

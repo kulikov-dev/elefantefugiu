@@ -31,7 +31,7 @@
     en: "Dinosaur tracks and Côa rock art"
     ru: "Следы динозавров и рисунки Коа"
   description:
-    pt: "Antes das pessoas, Portugal era a margem de um jovem oceano Atlântico. As pegadas de dinossauros ficaram nas arribas, e as gravuras da Idade da Pedra foram salvas das águas."
+    pt: "Antes de haver gente, Portugal era a orla de um Atlântico jovem. Há pegadas de dinossauros nas arribas e gravuras da Idade da Pedra poupadas às águas."
     en: "Before people, Portugal was the shore of a young Atlantic. Dinosaur tracks survive on the cliffs, and Stone Age engravings were saved from drowning."
     ru: "До людей Португалия была берегом молодого Атлантического океана. Следы динозавров остались на обрывах, а рисунки каменного века страна спасла от затопления."
   style:
@@ -599,7 +599,7 @@
     cols: 12
     rows: 8
     share_hook:
-      pt: "de touros contra um desembarque a uma capela trazida de Roma às peças"
+      pt: "de touros contra um desembarque a uma capela trazida de Roma peça a peça"
       en: "from bulls against a landing party to a chapel shipped from Rome in pieces"
       ru: "от быков против десанта до часовни, которую привезли из Рима по частям"
   fallback_image:
@@ -746,7 +746,7 @@
     ai: true
   placeholder: []
   intro:
-    pt: "Durante um século Portugal discutiu o que queria ser: constituição, uma guerra civil entre dois irmãos príncipes e, em 1910, a República. E enquanto os políticos discutiam, o país construía pontes de ferro, elevadores e funiculares."
+    pt: "Durante um século Portugal discutiu o que queria ser: uma constituição, uma guerra civil entre dois irmãos príncipes e, em 1910, a República. E enquanto os políticos discutiam, o país construía pontes de ferro, elevadores e funiculares."
     en: "For a whole century Portugal argued about what it wanted to be: a constitution, a civil war between two royal brothers, and in 1910, a republic. And while politicians argued, the country built iron bridges, elevators, and funiculars."
     ru: "Целый век Португалия спорила, какой ей быть: конституция, гражданская война двух братьев-принцев, а в 1910 году республика. А пока политики спорили, страна строила железные мосты, лифты и фуникулёры."
   then_now:

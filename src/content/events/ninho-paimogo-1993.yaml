@@ -46,12 +46,14 @@ label: documented
 min_age: 'all'
 sensitive: false
 hook:
-  pt: "Uma cheia destruiu um ninho de dinossauro e guardou-o para nós."
+  pt: "A cheia que arrasou um ninho de dinossauro salvou-o para nós."
   en: "A flood destroyed a dinosaur nest and saved it for us."
   ru: "Паводок погубил гнездо динозавра и сохранил его для нас."
 story:
   pt: >-
-    Em 1984, Isabel e Horácio Mateus fundaram com amigos um pequeno museu na Lourinhã e começaram a recolher fósseis na costa da região. Procuraram com persistência e, em 1993, numa arriba sobre a praia de Paimogo, repararam em fragmentos de casca na rocha.
+    Em 1984, Isabel e Horácio Mateus e um grupo de amigos abriram um pequeno museu na Lourinhã e
+    passaram a recolher fósseis na costa. Procuraram com persistência e, em 1993, numa arriba sobre
+    a praia de Paimogo, repararam em fragmentos de casca na rocha.
 
     Havia muita casca porque era um ninho inteiro: cerca de uma centena de ovos de um dinossauro carnívoro, provavelmente o Lourinhanosaurus. E em alguns ovos conservaram-se ossinhos minúsculos de crias que nunca chegaram a nascer.
 
@@ -72,7 +74,7 @@ meanwhile:
   - scope: world
     year: -152000000
     text:
-      pt: "Na América do Norte pastavam braquiossauros"
+      pt: "Na América do Norte pastavam braquiossauros."
       en: "Brachiosaurus grazed in North America"
       ru: "В Северной Америке паслись брахиозавры"
     source: "https://en.wikipedia.org/wiki/Brachiosaurus"

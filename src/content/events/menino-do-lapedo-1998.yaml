@@ -46,7 +46,7 @@ label: debated
 min_age: '12'
 sensitive: true
 hook:
-  pt: "Uma criança de quatro anos pôs os cientistas a discutir vinte anos."
+  pt: "Uma criança de quatro anos dividiu os cientistas durante vinte anos."
   en: "A four-year-old from Leiria set scientists arguing for twenty years."
   ru: "Четырёхлетний ребёнок из Лейрии поссорил учёных на двадцать лет."
 story:
@@ -73,7 +73,10 @@ more:
     Em 1999, quando saiu o artigo sobre a criança do Lapedo, a ideia de que neandertais e humanos da nossa espécie tiveram filhos em comum parecia ousada. A maioria pensava que a nossa espécie simplesmente tinha substituído os neandertais. Por isso, uns cientistas viram no esqueleto sinais de mistura, e outros explicaram os seus traços pela forma como aquela criança cresceu.
 
 
-    Onze anos depois, a discussão mudou de rumo. Em 2010, geneticistas leram o genoma neandertal e encontraram vestígios dele no ADN da maioria das pessoas que vivem hoje. Ou seja, a mistura aconteceu mesmo, embora não se possa prová-la pelos ossos desta criança em particular. Por isso a história tem a marca «em debate».
+    Onze anos depois, a discussão mudou de rumo. Em 2010, geneticistas leram o genoma neandertal e
+    encontraram vestígios dele no ADN da maioria das pessoas que vivem hoje. Ou seja, a mistura
+    aconteceu mesmo, embora não se possa prová-la pelos ossos desta criança em particular. Por isso
+    a história tem a etiqueta «Em debate».
 
 
     O esqueleto está guardado no Museu Nacional de Arqueologia, em Lisboa, e em 2021 foi classificado como tesouro nacional.

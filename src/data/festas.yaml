@@ -30,7 +30,7 @@
       head_title: 'A coroa que nunca mais foi usada'
       head_line: 'Em 1640, Portugal voltou a ter o seu próprio rei, e seis anos depois ele entregou a coroa.'
       head_link: 'A história deste dia →'
-      art_title: 'Uma coroa numa almofada de veludo, com um ceptro à frente'
+      art_title: 'Uma coroa numa almofada de veludo, com um cetro à frente'
       lead: 'A 1 de dezembro de 1640, Portugal voltou a ser um reino independente, depois de 60 anos sob a mesma coroa que Espanha.'
       og_description: 'Porque é que, desde 1646, nenhum rei de Portugal voltou a usar a coroa, e como este feriado chegou a ser suspenso para poupar.'
       off_window: 'Este feriado celebra-se a 1 de dezembro'
@@ -111,10 +111,10 @@
       off_window: 'Este feriado celebra-se a 25 de dezembro'
       bolo:
         aria: 'Bolo-rei num prato. Cortar uma fatia'
-        hint: 'Carrega no bolo para cortar uma fatia'
-        fruit: { head: 'Fruta cristalizada.', text: 'Nada lá dentro, come à vontade.' }
-        brinde: { head: 'Brinde.', text: 'Antigamente cozia-se no bolo uma pequena figura, e calhou-te a ti.' }
-        fava: { head: 'Fava.', text: 'Diz a tradição que para o ano és tu quem paga o bolo-rei.' }
+        hint: 'Carregue no bolo para cortar uma fatia'
+        fruit: { head: 'Fruta cristalizada.', text: 'Não há nada escondido; coma à vontade.' }
+        brinde: { head: 'Brinde.', text: 'Antigamente cozia-se no bolo uma pequena figura, e saiu na sua fatia.' }
+        fava: { head: 'Fava.', text: 'Diz a tradição que, para o ano, é a si que cabe pagar o bolo-rei.' }
         done: 'O bolo acabou.'
         again: 'Fazer outro'
       traditions:
@@ -125,7 +125,7 @@
         - title: 'Bacalhau ou polvo.'
           text: 'A ceia da véspera chama-se consoada. No interior, come-se bacalhau: seco e salgado, era barato e aguentava a viagem. No Norte, no Minho e em Trás-os-Montes, come-se polvo, que, ao que se diz, chegava seco pela mão de comerciantes galegos. No dia 25, com as sobras, faz-se a roupa-velha.'
         - title: 'Pais Natal no mar.'
-          text: 'Na manhã de 25 de dezembro, na praia de Armação de Pêra, no Algarve, pessoas vestidas de Pai Natal entram no mar de inverno para angariar dinheiro para sapatos para crianças carenciadas. Fazem-no há mais de dez anos. Nos Açores, diz-se, um mergulho no dia 25 é um ritual de renovação. E a 1 de janeiro há banhos por toda a costa, de Carcavelos a Matosinhos.'
+          text: 'Na manhã de 25 de dezembro, na praia de Armação de Pêra, no Algarve, pessoas vestidas de Pai Natal entram no mar de inverno para angariar fundos e comprar sapatos a crianças carenciadas. Fazem-no há mais de dez anos. Nos Açores, diz-se, um mergulho no dia 25 é um ritual de renovação. E a 1 de janeiro há banhos por toda a costa, de Carcavelos a Matosinhos.'
     en:
       date: 'December 25'
       name: 'Christmas'

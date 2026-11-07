@@ -51,7 +51,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'Como ler',
           paragraphs: ['Cada história tem três camadas. Pare em qualquer uma.'],
           items: ['**Gancho.** Uma frase: «O rei pôs um rinoceronte contra um elefante. O elefante fugiu.»', '**História.** Como aconteceu, em poucas linhas.', '**Saber mais.** O contexto, como se sabe e onde ir.'],
-          after: ['Pode ler por épocas, por fios (o mar, comida e vinho, poder e revolta, gente como nós, natureza) ou simplesmente no mapa.'],
+          after: ['Pode ler por épocas, por fios (o mar, a comida e o vinho, o poder e a revolta, gente como nós, a natureza) ou simplesmente no mapa.'],
         },
         {
           id: 'para-quem',

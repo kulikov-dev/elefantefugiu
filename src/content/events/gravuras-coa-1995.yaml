@@ -52,12 +52,13 @@ label: documented
 min_age: 'all'
 sensitive: false
 hook:
-  pt: "Uma barragem foi cancelada por causa de gravuras da Idade da Pedra."
+  pt: "Gravuras da Idade da Pedra travaram uma barragem."
   en: "A dam was canceled because of Stone Age rock art."
   ru: "Стройку плотины отменили из-за рисунков каменного века."
 story:
   pt: >-
-    No início dos anos 1990 começou a construção de uma barragem no rio Côa, no nordeste de Portugal. A albufeira ia inundar o vale.
+    Corria o início dos anos 1990 quando as obras de uma barragem arrancaram no rio Côa, no nordeste
+    de Portugal. A albufeira ia inundar o vale.
 
     Durante as obras, arqueólogos repararam em figuras gravadas nas rochas de xisto junto ao rio: cavalos com crinas, auroques, veados e cabras-monteses. As gravuras mais antigas têm mais de 20 mil anos. Se a barragem fosse concluída, ficariam para sempre debaixo de água.
 
@@ -78,13 +79,15 @@ meanwhile:
   - scope: world
     year: -22000
     text:
-      pt: "Glaciares cobriam a Escandinávia, e o sul do atual mar do Norte era terra firme"
+      pt: "Glaciares cobriam a Escandinávia, e o sul do atual mar do Norte era terra firme."
       en: "Glaciers covered Scandinavia, and the southern North Sea was dry land"
       ru: "Ледники покрывали Скандинавию, а южная часть нынешнего Северного моря была сушей"
     source: "https://en.wikipedia.org/wiki/Doggerland"
 more:
   pt: >-
-    Quem viu primeiro as gravuras ainda se discute: fala-se de 1991 e de 1993. Mas só se tornaram conhecidas no outono de 1994, com a obra já em curso, e foi então que começou a campanha. O lema brincava com a canção «Nadar», dos Black Company, um grupo de rap muito popular na altura.
+    Ainda se discute quem viu primeiro as gravuras: fala-se de 1991 e de 1993. Mas só se tornaram
+    conhecidas no outono de 1994, com a obra já em curso, e foi então que começou a campanha. O lema
+    brincava com a canção «Nadar», dos Black Company, um grupo de rap muito popular na altura.
 
 
     Não se salvou uma rocha, mas uma galeria inteira. As gravuras foram feitas ao longo de muitos milhares de anos, e as mais antigas têm mais de 20 mil anos. Em geral, esta arte da Idade da Pedra encontra-se em grutas, mas aqui está ao ar livre.

@@ -53,7 +53,7 @@
     },
     "myths": {
       "title": "Mito ou verdade",
-      "description": "O que guias, roteiros e amigos contam sobre Portugal: escolha o que pensa e leia o que realmente aconteceu. Por trás de cada resposta há uma das nossas histórias."
+      "description": "O que guias, roteiros e amigos contam sobre Portugal: escolha o que pensa e leia o que realmente aconteceu. Por trás de cada resposta há uma das minhas histórias."
     }
   },
   "footer": {
@@ -118,7 +118,7 @@
     "footer_prev": "Anterior: {title}",
     "footer_epoch": "Todas as histórias da época {name}",
     "footer_next": "A seguir: {title}",
-    "not_translated": "Esta página ainda não foi traduzida. É mostrado o texto em inglês.",
+    "not_translated": "Esta página ainda não foi traduzida. Mostra-se o texto em inglês.",
     "more_toggle": "Saber mais",
     "next_story": "A seguir",
     "year_bc": "{n} a.C.",
@@ -222,7 +222,7 @@
     "then_now_estimate": "estimativa",
     "then_now_calc": "cálculo",
     "then_now_note_estimate": "Estimativa: reconstituição de historiadores.",
-    "then_now_note_calc": "Cálculo: nosso, a partir da distância e da velocidade.",
+    "then_now_note_calc": "Cálculo: meu, a partir da distância e da velocidade.",
     "then_now_sources": "Fontes",
     "filter_all": "Todos",
     "view_label": "Modo de visualização",
@@ -401,7 +401,7 @@
     "traditions": "Tradições e factos"
   },
   "myths": {
-    "lead": "O que os guias, os roteiros e os amigos contam sobre Portugal. Consegue adivinhar o que é verdade? Por trás de cada resposta há uma das nossas histórias.",
+    "lead": "O que os guias, os roteiros e os amigos contam sobre Portugal. Consegue adivinhar o que é verdade? Por trás de cada resposta há uma das minhas histórias.",
     "og_title_page": "Mito ou verdade: o que se conta sobre Portugal",
     "og_title": "Mito ou verdade: {statement}?",
     "og_description": "A resposta e a história completa na ligação",
@@ -415,7 +415,7 @@
     "full_story": "A história completa →",
     "link": "Ligação para esta afirmação",
     "end": "Ouviu mais alguma coisa que gostava de ver confirmada?",
-    "end_link": "Conte-nos →",
+    "end_link": "Conte-me →",
     "progress_label": "Progresso do jogo",
     "step": "Pergunta {i} de {total}",
     "sq_label": "Pergunta {i}: {state}",
@@ -435,7 +435,7 @@
     "again": "Jogar outra vez",
     "read": "Ler as histórias",
     "share_title": "Mito ou verdade sobre Portugal: {score} em {total}",
-    "share_ask": "e tu?",
+    "share_ask": "E o que acha?",
     "copied": "Copiado",
     "best": "O seu melhor resultado: {score} em {total}"
   }
