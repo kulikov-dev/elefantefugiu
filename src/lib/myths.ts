@@ -80,3 +80,35 @@ export function parseBest(raw: string | null, total: number): Best | undefined {
     return undefined;
   }
 }
+
+/** The game that is not finished (or just finished), kept in this browser only: the order of the claims and the outcome of each answer so far (null: not answered yet). */
+export const GAME_KEY = 'myths:game';
+export interface Game {
+  order: string[];
+  marks: (Outcome | null)[];
+}
+
+const OUTCOMES: readonly unknown[] = ['hit', 'miss', 'part'];
+
+/** What the browser holds, as a game over exactly these claims; anything else (broken, claims added or removed since) is nothing, so the game starts over. */
+export function parseGame(raw: string | null, ids: readonly string[]): Game | undefined {
+  if (!raw) return undefined;
+  try {
+    const v = JSON.parse(raw) as Partial<Game>;
+    const { order, marks } = v;
+    if (!Array.isArray(order) || !Array.isArray(marks) || order.length !== ids.length || marks.length !== ids.length) return undefined;
+    if (new Set(order).size !== ids.length || !order.every((id) => ids.includes(id as string))) return undefined;
+    if (!marks.every((m) => m === null || OUTCOMES.includes(m))) return undefined;
+    return { order: order as string[], marks: marks as (Outcome | null)[] };
+  } catch {
+    return undefined;
+  }
+}
+
+/** How many claims are answered; the game is over when all of them are. A hit and a "partly" both count as right. */
+export const answered = (game: Game): number => game.marks.filter((m) => m !== null).length;
+export const hitsOf = (game: Game): number => game.marks.filter((m) => m === 'hit' || m === 'part').length;
+
+/** The white four-petal pattern in the middle of a hit tile (a miss and an empty tile have none). */
+export const HIT_PATTERN =
+  '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><g fill="currentColor"><ellipse cx="8" cy="4.6" rx="1.9" ry="2.7"/><ellipse cx="8" cy="11.4" rx="1.9" ry="2.7"/><ellipse cx="4.6" cy="8" rx="2.7" ry="1.9"/><ellipse cx="11.4" cy="8" rx="2.7" ry="1.9"/></g></svg>';

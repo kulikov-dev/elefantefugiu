@@ -1,9 +1,10 @@
 // "Myth or fact" (src/views/MythsView.astro, docs/spec.md 5.8). With this script the page is a game: one card at a time, a row of squares at the top (empty / right / wrong),
 // a press on "Myth" or "Fact" opens the answer of the card, says whether the guess was right, marks the pressed button, turns both off and shows "Next". After the last card
 // comes the result: the score ("7 of 10", never a percent), a line by the range, the misses with links to their stories, Share, Play again (the order is shuffled), Read the stories.
+// A game that is not finished is kept in localStorage (the order and the answers) and goes on from the same card; the home page reads it too. A saved game of other claims is dropped.
 // The counter (the one already on the site; without it nothing breaks) gets `myth-<id>` per answer, `myths-finish` per result and `myths-share` per shared result. The only thing
 // kept is the best result, in localStorage. Without this script the <details> of each card opens by "Answer" and all the cards are in a list.
-import { BEST_KEY, FINISH_EVENT, SHARE_EVENT, answerEvent, bandOf, fill, outcomeOf, parseBest, shuffled, squaresLine, type Best, type Outcome, type Choice } from '../lib/myths';
+import { BEST_KEY, FINISH_EVENT, GAME_KEY, HIT_PATTERN, SHARE_EVENT, answerEvent, answered, bandOf, fill, outcomeOf, parseBest, parseGame, shuffled, squaresLine, type Best, type Game, type Outcome, type Choice } from '../lib/myths';
 
 type Counter = { count?: (vars: { path: string; title: string; event: true }) => void };
 type Mark = Outcome | undefined;
@@ -23,11 +24,12 @@ const missesBox = q('[data-misses-box]');
 const missesEl = q('[data-misses]');
 const shareButton = q<HTMLButtonElement>('[data-final-share]');
 const againButton = q<HTMLButtonElement>('[data-again]');
+const restartButton = q<HTMLButtonElement>('[data-restart]');
 const statusEl = q('[data-final-status]');
 const endLine = q('.myths__end');
 const cards = [...document.querySelectorAll<HTMLElement>('[data-myth]')];
 
-if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreEl && finalSquares && bandEl && missesBox && missesEl && shareButton && againButton && statusEl && cards.length > 0) {
+if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreEl && finalSquares && bandEl && missesBox && missesEl && shareButton && againButton && restartButton && statusEl && cards.length > 0) {
   const strings = JSON.parse(root.dataset.strings ?? '{}') as Record<string, string>;
   const shareUrl = root.dataset.shareUrl ?? location.href;
   const total = cards.length;
@@ -46,9 +48,37 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
   let marks: Mark[] = [];
   let shared = false;
 
-  // The hash of a card brings that card first (the address of one card is already first).
-  const wanted = cards.find((c) => c.id === location.hash.slice(1));
+  // The hash of a card brings that card first (the address of one card is already first). Such a game is a visit to one card: it neither continues nor replaces the saved one.
+  const wanted = cards.find((c) => c.id === location.hash.slice(1)) ?? document.querySelector<HTMLElement>('.myth--first');
   if (wanted) order = [wanted, ...cards.filter((c) => c !== wanted)];
+  const keep = !wanted;
+
+  const readGame = (): Game | undefined => {
+    try {
+      return parseGame(
+        localStorage.getItem(GAME_KEY),
+        cards.map((c) => c.id),
+      );
+    } catch {
+      return undefined;
+    }
+  };
+  const saveGame = (): void => {
+    if (!keep) return;
+    try {
+      localStorage.setItem(GAME_KEY, JSON.stringify({ order: order.map((c) => c.id), marks: marks.map((m) => m ?? null) } satisfies Game));
+    } catch {
+      // Storage is off: the game is simply not kept.
+    }
+  };
+  const dropGame = (): void => {
+    if (!keep) return;
+    try {
+      localStorage.removeItem(GAME_KEY);
+    } catch {
+      // Nothing was kept.
+    }
+  };
 
   const readBest = (): Best | undefined => {
     try {
@@ -72,9 +102,6 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
     }
   };
 
-  // The white four-petal pattern in the middle of a hit tile (a miss and an empty tile have none).
-  const PATTERN =
-    '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><g fill="currentColor"><ellipse cx="8" cy="4.6" rx="1.9" ry="2.7"/><ellipse cx="8" cy="11.4" rx="1.9" ry="2.7"/><ellipse cx="4.6" cy="8" rx="2.7" ry="1.9"/><ellipse cx="11.4" cy="8" rx="2.7" ry="1.9"/></g></svg>';
   // A claim that is "partly" is counted as a hit, so the square is a hit too.
   const isHit = (m: Mark): boolean => m === 'hit' || m === 'part';
 
@@ -85,7 +112,7 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
         const state = mark === undefined ? 'empty' : isHit(mark) ? 'hit' : 'miss';
         li.className = `sq sq--${state}${i === current ? ' sq--current' : ''}`;
         if (i === current) li.setAttribute('aria-current', 'step');
-        li.innerHTML = state === 'hit' ? PATTERN : '';
+        li.innerHTML = state === 'hit' ? HIT_PATTERN : '';
         const label = document.createElement('span');
         label.className = 'visually-hidden';
         label.textContent = s('sq_label', { i: i + 1, state: s(`sq_${state}`) });
@@ -133,10 +160,27 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
     list.append(...order);
     order.forEach(resetCard);
     showBest();
+    restartButton.hidden = true;
     show(0, focus);
   };
 
+  // Goes on from the saved game: the same order, the answers given, the first card not answered yet (all answered: the result).
+  const resume = (game: Game): void => {
+    const byId = new Map(cards.map((c) => [c.id, c]));
+    order = game.order.map((id) => byId.get(id)!);
+    start(false);
+    marks = game.marks.map((m) => m ?? undefined);
+    const done = answered(game);
+    if (done === total) {
+      finish();
+      return;
+    }
+    restartButton.hidden = false;
+    show(done, false);
+  };
+
   const finish = (): void => {
+    restartButton.hidden = true;
     const score = marks.filter(isHit).length;
     saveBest(score);
     count(FINISH_EVENT, s('score', { score, total }));
@@ -185,6 +229,9 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
       next.textContent = index === total - 1 ? s('finish') : s('next');
     }
     drawSquares(squaresEl, index);
+    restartButton.hidden = false;
+    saveGame();
+    if (index === total - 1) saveBest(marks.filter(isHit).length);
     count(answerEvent(card.dataset.myth ?? ''), card.dataset.title ?? '');
     body.focus({ preventScroll: true });
   };
@@ -195,6 +242,13 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
   }
 
   againButton.addEventListener('click', () => {
+    order = shuffled(cards);
+    start(true);
+  });
+
+  // "Start over": the saved game goes, the claims are shuffled again.
+  restartButton.addEventListener('click', () => {
+    dropGame();
     order = shuffled(cards);
     start(true);
   });
@@ -230,5 +284,11 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
     }
   });
 
-  start(false);
+  // A finished game on the home page says "Play again": the page then deals a new one, the result stays in the browser until the first answer replaces it.
+  const saved = keep ? readGame() : undefined;
+  if (saved && answered(saved) < total) {
+    resume(saved);
+  } else {
+    start(false);
+  }
 }

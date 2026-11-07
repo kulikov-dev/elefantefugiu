@@ -81,10 +81,13 @@
     "timeline_next": "Épocas seguintes",
     "threads_heading": "Fios",
     "threads_intro": "Escolha um tema e siga-o ao longo dos séculos.",
-    "how": "Uma história curta, os detalhes com fontes e o sítio onde ainda a pode ver hoje.",
+    "how": "Para passeios e viagens por Portugal: leia a história e depois vá ver o sítio.",
     "myths_title": "Mito ou verdade?",
     "myths_line": "{stories} sobre Portugal que os guias contam. Consegue adivinhar quais são verdade?",
-    "myths_play": "Jogar"
+    "myths_play": "Jogar",
+    "myths_continue": "Continuar ({done} de {total})",
+    "myths_result": "O seu resultado: {score} em {total}",
+    "myths_again": "Jogar outra vez"
   },
   "surprise": {
     "picking": "A escolher uma história para si…",
@@ -437,6 +440,7 @@
     "share_title": "Mito ou verdade sobre Portugal: {score} em {total}",
     "share_ask": "E o que acha?",
     "copied": "Copiado",
-    "best": "O seu melhor resultado: {score} em {total}"
+    "best": "O seu melhor resultado: {score} em {total}",
+    "restart": "Recomeçar"
   }
 }

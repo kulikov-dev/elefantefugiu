@@ -81,10 +81,13 @@
     "timeline_next": "Later eras",
     "threads_heading": "Threads",
     "threads_intro": "Pick a theme and follow it through the centuries.",
-    "how": "A short story, the details with sources, and the place where you can still see it today.",
+    "how": "For walks and trips around Portugal: read the story, then go see the place.",
     "myths_title": "Myth or fact?",
     "myths_line": "{stories} about Portugal that tour guides love to tell. Can you guess which ones are true?",
-    "myths_play": "Play"
+    "myths_play": "Play",
+    "myths_continue": "Continue ({done} of {total})",
+    "myths_result": "Your result: {score} of {total}",
+    "myths_again": "Play again"
   },
   "surprise": {
     "picking": "Picking a story for you…",
@@ -437,6 +440,7 @@
     "share_title": "Myth or fact about Portugal: {score} of {total}",
     "share_ask": "how about you?",
     "copied": "Copied",
-    "best": "Your best result: {score} of {total}"
+    "best": "Your best result: {score} of {total}",
+    "restart": "Start over"
   }
 }

@@ -34,7 +34,9 @@ const { lang } = Astro.props;
 const site = await loadSite();
 
 // "Myth or fact": the invitation after "Where to start" (only when there is a claim to play).
-const mythCount = liveMyths(MYTHS, site.events).length;
+const mythIds = liveMyths(MYTHS, site.events).map((m) => m.id);
+const mythCount = mythIds.length;
+const mythStrings = { continue: t(lang, 'home.myths_continue'), result: t(lang, 'home.myths_result'), again: t(lang, 'home.myths_again') };
 const hasMyths = mythCount > 0;
 const firstEpoch = firstMvpEpoch(site.epochs, site.events);
 const tiles = epochTiles(site.epochs, site.events);
@@ -185,11 +187,12 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
 
     {
       hasMyths && (
-        <section class="home-myths" aria-labelledby="myths-title">
+        <section class="home-myths" aria-labelledby="myths-title" data-home-myths data-ids={JSON.stringify(mythIds)} data-strings={JSON.stringify(mythStrings)}>
           <h2 id="myths-title">{t(lang, 'home.myths_title')}</h2>
           <p>{t(lang, 'home.myths_line').replace('{stories}', plural(lang, 'plural.stories', mythCount))}</p>
-          <ol class="squares" aria-hidden="true">{Array.from({ length: mythCount }, () => <li class="sq sq--empty" />)}</ol>
-          <p><a class="button" href={pagePath(lang, 'myths')}>{t(lang, 'home.myths_play')}</a></p>
+          <ol class="squares" aria-hidden="true" data-tiles>{Array.from({ length: mythCount }, () => <li class="sq sq--empty" />)}</ol>
+          <p class="home-myths__result" data-result hidden></p>
+          <p><a class="button" href={pagePath(lang, 'myths')} data-play>{t(lang, 'home.myths_play')}</a></p>
         </section>
       )
     }
@@ -270,6 +273,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
 
 <script>
   import '../scripts/last-epoch';
+  import '../scripts/home-myths';
   import '../scripts/start-set';
   import '../scripts/timeline-nav';
 </script>

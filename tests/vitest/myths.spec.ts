@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { mythListSchema, type MythData } from '../../src/data/schemas';
 import { ROUTES, mythPath, pagePath } from '../../src/i18n/routes';
-import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, answerEvent, bandOf, fill, liveMyths, mythsInOrder, outcomeOf, parseBest, shuffled, squaresLine, withStatement, wordCount } from '../../src/lib/myths';
+import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, answerEvent, answered, bandOf, fill, hitsOf, liveMyths, mythsInOrder, outcomeOf, parseBest, parseGame, shuffled, squaresLine, withStatement, wordCount } from '../../src/lib/myths';
 
 const myth = (id: string, story = `story-${id}`): MythData => ({ id, story, verdict: 'myth', statement: { pt: 'a', en: 'b', ru: 'в' }, answer: { pt: 'a', en: 'b', ru: 'в' } });
 
@@ -119,5 +119,26 @@ describe('src/content/myths.yaml', () => {
         expect(wordCount(m.statement[lang]), `${m.id} ${lang} statement`).toBeLessThanOrEqual(STATEMENT_MAX_WORDS);
         expect(wordCount(m.answer[lang]), `${m.id} ${lang} answer`).toBeLessThanOrEqual(ANSWER_MAX_WORDS);
       }
+  });
+});
+
+describe('saved game', () => {
+  const ids = ['a', 'b', 'c'];
+  const raw = (g: unknown) => JSON.stringify(g);
+
+  it('reads a game over the same claims and counts it', () => {
+    const game = parseGame(raw({ order: ['c', 'a', 'b'], marks: ['hit', 'part', null] }), ids);
+    expect(game).toEqual({ order: ['c', 'a', 'b'], marks: ['hit', 'part', null] });
+    expect(answered(game!)).toBe(2);
+    expect(hitsOf(game!)).toBe(2);
+  });
+
+  it('drops a game when the claims changed or the record is broken', () => {
+    expect(parseGame(raw({ order: ['a', 'b'], marks: [null, null] }), ids)).toBeUndefined();
+    expect(parseGame(raw({ order: ['a', 'b', 'x'], marks: [null, null, null] }), ids)).toBeUndefined();
+    expect(parseGame(raw({ order: ['a', 'a', 'b'], marks: [null, null, null] }), ids)).toBeUndefined();
+    expect(parseGame(raw({ order: ids, marks: ['hit', 'wrong', null] }), ids)).toBeUndefined();
+    expect(parseGame('{broken', ids)).toBeUndefined();
+    expect(parseGame(null, ids)).toBeUndefined();
   });
 });

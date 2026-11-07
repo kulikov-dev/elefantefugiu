@@ -1,7 +1,7 @@
 // Browser checks of "Myth or fact" (src/views/MythsView.astro, src/scripts/myths.ts, src/content/myths.yaml) against dist/ served by serve.mjs:   node myths.mjs [page answer game nojs anchor card links layout]
 //   page     the page in every language: a card for every claim of the data (those whose story is published), the two buttons, the footer link, the line at the end of About
 //   answer   with JavaScript one card is shown at a time; the answer is hidden until a press; a press opens that card only, marks the pressed button, turns both off, shows the verdict, whether the
-//            guess was right, the text, the story with its title and Next (no Share and no "#" on a card); a press saves nothing; one counter event `myth-<id>` and no other
+//            guess was right, the text, the story with its title and Next (no Share and no "#" on a card); a press saves only the game (`myths:game`); one counter event `myth-<id>` and no other
 //   game     the row of squares (empty / right / wrong, a shape each, a label for a screen reader), the result screen (score, the line by the range, the misses with links), the best result,
 //            Share (the dialog of the browser or the clipboard, no answers in the text, ?src=share), Play again, the events `myths-finish` and `myths-share` once each
 //   nojs     without JavaScript: no buttons, every card is a <details> opened by "Answer"
@@ -31,6 +31,7 @@ const ABOUT = { pt: 'sobre', en: 'about', ru: 'o-proekte' };
 const SHARE = { pt: 'conheco-uma-historia', en: 'share-a-story', ru: 'znayu-istoriyu' };
 if (myths.length < 2) throw new Error('The suite needs at least two claims in src/content/myths.yaml whose story is published (need: two claims).');
 const LIST = myths;
+const HOME = Object.fromEntries(LANGS.map((l) => [l, JSON.parse(readFileSync(new URL(`../../src/i18n/${l}.json`, import.meta.url), 'utf8')).home]));
 const UI = Object.fromEntries(LANGS.map((l) => [l, JSON.parse(readFileSync(new URL(`../../src/i18n/${l}.json`, import.meta.url), 'utf8')).myths]));
 const fill = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
 // A press that is right (a "partly" claim takes either) or wrong, and what it counts as.
@@ -48,6 +49,13 @@ const open = async ({ lang = 'pt', width = 390, js = true, id = '', hash = '' } 
   // The counter of the site is not loaded on a local address: a stand-in records what the page would send.
   await page.evaluateOnNewDocument(() => {
     window.__counted = [];
+    // The browser is shared by the pages of the suite: the first load of a page starts without a game kept by an earlier one (a reload of it keeps its own).
+    try {
+      if (!sessionStorage.getItem('qa-fresh')) {
+        localStorage.removeItem('myths:game');
+        sessionStorage.setItem('qa-fresh', '1');
+      }
+    } catch {}
     // A build on a real address sets window.goatcounter in its own config script: the stand-in takes the assignment and keeps its count.
     const stub = {};
     // count.js of the real build assigns its own count (and counts the page view itself): the recorder stays and takes the events only.
@@ -59,8 +67,8 @@ const open = async ({ lang = 'pt', width = 390, js = true, id = '', hash = '' } 
   return page;
 };
 const visible = (page, selector) => page.evaluate((s) => { const el = document.querySelector(s); return el ? el.checkVisibility() && el.getBoundingClientRect().height > 0 : false; }, selector);
-// What the browser holds for the page (the site keeps its own marks, e.g. the last visit): a press must add nothing to it.
-const stored = (page) => page.evaluate(() => JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage)]));
+// What the browser holds for the page (the site keeps its own marks, e.g. the last visit): a press must add nothing to it but the game that is not finished (`myths:game`).
+const stored = (page) => page.evaluate(() => JSON.stringify([Object.entries(localStorage).filter(([k]) => k !== 'myths:game'), Object.entries(sessionStorage)]));
 
 if (want('page')) {
   for (const lang of LANGS) {
@@ -84,10 +92,24 @@ if (want('page')) {
   for (const lang of LANGS) {
     const home = await browser.newPage();
     await home.goto(`${base}/${lang}/`, { waitUntil: 'networkidle0' });
-    const b = await home.evaluate((href) => { const s = document.querySelector('.home-myths'); const start = document.querySelector('[data-showcase]'); return s ? { tiles: [...s.querySelectorAll('ol.squares .sq--empty')].length, text: s.querySelector('p')?.textContent, h2: s.querySelector('h2')?.textContent.trim(), p: s.querySelectorAll('p').length, href: s.querySelector('a.button')?.getAttribute('href'), after: !start || Boolean(start.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING), btn: s.querySelector('a.button')?.textContent.trim() } : null; }, `/${lang}/${SEG[lang]}/`);
+    const b = await home.evaluate((href) => { const s = document.querySelector('.home-myths'); const start = document.querySelector('[data-showcase]'); return s ? { tiles: [...s.querySelectorAll('ol.squares .sq--empty')].length, text: s.querySelector('p')?.textContent, h2: s.querySelector('h2')?.textContent.trim(), p: [...s.querySelectorAll('p')].filter((x) => !x.hidden).length, href: s.querySelector('a.button')?.getAttribute('href'), after: !start || Boolean(start.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING), btn: s.querySelector('a.button')?.textContent.trim() } : null; }, `/${lang}/${SEG[lang]}/`);
     const WORDS = { pt: ['Mito ou verdade?', 'Jogar'], en: ['Myth or fact?', 'Play'], ru: ['Миф или правда?', 'Играть'] }[lang];
     ok(`${lang}: the home page block has a row of empty tiles, one for each claim, and the count in its line`, b && b.tiles === LIST.length && b.text.includes(String(LIST.length)), JSON.stringify(b));
     ok(`${lang}: the home page has the block after "Where to start": the heading, one line and the button`, b && b.h2 === WORDS[0] && b.btn === WORDS[1] && b.p === 2 && b.href === `/${lang}/${SEG[lang]}/` && b.after, JSON.stringify(b));
+    // The block follows the game that is kept: started (the tiles with the answers, "Continue (n of N)"), finished (the result, "Play again"), another list of claims (as new).
+    const ids = LIST.map((m) => m.id);
+    const homeState = async (game) => {
+      await home.evaluate((g) => (g ? localStorage.setItem('myths:game', JSON.stringify(g)) : localStorage.removeItem('myths:game')), game);
+      await home.reload({ waitUntil: 'networkidle0' });
+      return home.evaluate(() => ({ btn: document.querySelector('[data-play]').textContent.trim(), result: document.querySelector('[data-result]').hidden ? '' : document.querySelector('[data-result]').textContent.trim(), filled: document.querySelectorAll('.home-myths .sq:not(.sq--empty)').length }));
+    };
+    const some = await homeState({ order: ids, marks: ids.map((_, i) => (i < 2 ? 'hit' : null)) });
+    ok(`${lang}: the home block of a game under way says "Continue" with the count and shows the answers`, some.btn === fill(HOME[lang].myths_continue, { done: 2, total: LIST.length }) && some.filled === 2 && some.result === '', JSON.stringify(some));
+    const whole = await homeState({ order: ids, marks: ids.map(() => 'hit') });
+    ok(`${lang}: the home block of a finished game shows the result and "Play again"`, whole.result.includes(String(LIST.length)) && whole.filled === LIST.length && whole.btn !== some.btn, JSON.stringify(whole));
+    const stale = await homeState({ order: ids.slice(1), marks: ids.slice(1).map(() => 'hit') });
+    ok(`${lang}: the home block ignores a game of other claims`, stale.filled === 0 && stale.result === '', JSON.stringify(stale));
+    await homeState(null);
     await home.close();
     const story = await browser.newPage();
     await story.goto(`${base}/${lang}/${STORY_SEG[lang]}/${storyOf(LIST[0]).slug[lang]}/`, { waitUntil: 'networkidle0' });
@@ -143,7 +165,7 @@ if (want('answer')) {
     await page.click(`${card} [data-pick="fact"]`).catch(() => {});
     const counted = await page.evaluate(() => window.__counted);
     ok(`${lang}: one counter event, myth-<id>, and no other`, counted.length === 1 && counted[0].path === `myth-${first.id}` && counted[0].event === true, JSON.stringify(counted));
-    ok(`${lang}: a press saves nothing in the browser`, (await stored(page)) === before);
+    ok(`${lang}: a press saves nothing in the browser but the game`, (await stored(page)) === before);
     // Next shows the second card and hides the first; the verdict label is the data's, whichever button was pressed.
     await page.click(`${card} [data-next]`);
     ok(`${lang}: Next shows the next card and hides this one`, (await visible(page, `[data-myth="${second.id}"] [data-pick]`)) && !(await visible(page, card)));
@@ -254,6 +276,33 @@ if (want('game')) {
   await page.evaluate(() => localStorage.setItem('myths:best', '{"score":3,"total":999}'));
   await page.reload({ waitUntil: 'networkidle0' });
   ok('a best result from a game of another length is not shown', !(await visible(page, '[data-best]')));
+  await page.close();
+}
+
+if (want('resume')) {
+  const ui = UI.pt;
+  const N = LIST.length;
+  const page = await open({ lang: 'pt' });
+  const step = () => page.$eval('[data-step]', (e) => e.textContent.trim());
+  const answerOne = async () => {
+    await page.click('.myth:not([hidden]) [data-pick="myth"]');
+    await page.click('.myth:not([hidden]) [data-next]');
+  };
+  ok('a new game has no "Start over" link', !(await visible(page, '[data-restart]')));
+  await answerOne();
+  await answerOne();
+  ok('after an answer the "Start over" link is shown', await visible(page, '[data-restart]'));
+  await page.reload({ waitUntil: 'networkidle0' });
+  ok('a reload goes on from the same question', (await step()) === fill(ui.step, { i: 3, total: N }), await step());
+  const squares = await page.$$eval('[data-squares] .sq', (l) => l.slice(0, 3).map((q) => q.className.replace(/ sq--current/, '')));
+  ok('the answers given are kept in the row of tiles', squares[0] !== 'sq sq--empty' && squares[1] !== 'sq sq--empty' && squares[2] === 'sq sq--empty', squares.join());
+  await page.click('[data-restart]');
+  ok('"Start over" begins at the first question and forgets the game', (await step()) === fill(ui.step, { i: 1, total: N }) && (await page.evaluate(() => localStorage.getItem('myths:game'))) === null);
+  await answerOne();
+  const game = await page.evaluate(() => JSON.parse(localStorage.getItem('myths:game')));
+  await page.evaluate((g) => localStorage.setItem('myths:game', JSON.stringify({ order: g.order.slice(1), marks: g.marks.slice(1) })), game);
+  await page.reload({ waitUntil: 'networkidle0' });
+  ok('a saved game of other claims is dropped', (await step()) === fill(ui.step, { i: 1, total: N }) && !(await visible(page, '[data-restart]')));
   await page.close();
 }
 

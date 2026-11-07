@@ -60,6 +60,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   <article class="myths" data-game data-strings={JSON.stringify(strings)} data-share-url={`${abs(pagePath(lang, 'myths'))}?src=share`}>
     <h1>{title}</h1>
     <p class="myths__lead">{t(lang, 'myths.lead')}</p>
+    <p class="myths__restart"><button class="myths__restart-button" type="button" data-restart hidden>{t(lang, 'myths.restart')}</button></p>
     <p class="myths__best" data-best hidden></p>
     <div class="myths__progress" data-progress role="group" aria-label={t(lang, 'myths.progress_label')} hidden>
       <p class="myths__step" data-step></p>
@@ -342,6 +343,22 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   /* The pieces of the game are for JavaScript: the script shows them, and `hidden` must win over the display of a button. */
   .myths [hidden] {
     display: none;
+  }
+
+  .myths__restart-button {
+    min-height: var(--touch-target);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-ink-muted);
+    font: inherit;
+    font-size: var(--text-sm);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .myths__restart-button:hover {
+    color: var(--color-accent);
   }
 
   .myths__best,
