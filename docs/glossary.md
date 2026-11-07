@@ -167,3 +167,19 @@
 | Ночная рождественская месса | Missa do Galo | Missa do Galo (“Rooster’s Mass”) | Missa do Galo, «месса петуха» |
 | Рождественский костёр в Бейре | madeiro | madeiro (a Christmas bonfire of whole trunks) | мадейру (madeiro; не склоняется, не путать с островом Мадейра) |
 | Блюдо из остатков рождественского ужина | roupa-velha | roupa-velha (“old clothes”) | roupa-velha, «старая одежда» |
+
+## Пролог (антес-де-Португал): имена и термины, добавлено 07.11.2026
+
+Написание сверено со строками в src/content/events/*.yaml (pt, en, ru). Места пролога внесены в таблицу «Места» выше, термины ниже.
+
+| Понятие | pt-PT | en-US | ru |
+|---|---|---|---|
+| Завропод | saurópode | sauropod | завроподы |
+| Стегозавр | estegossauro | stegosaur (stegosaurus: только о роде) | стегозавр |
+| Следы динозавров (ископаемые) | pegadas de dinossauro; icnofóssil (термин, один раз с пояснением) | dinosaur footprints; trackway (цепочка следов одного животного) | следы динозавров; цепочка следов |
+| Цепочка следов | trilho (de pegadas) | trackway | цепочка следов |
+| Динозавр Лоуриньяноз (яйца из Паймогу) | Lourinhanosaurus | Lourinhanosaurus | лоуриньяноз |
+| Мирагайя (вид стегозавра) | Miragaia longicollum | Miragaia longicollum | Miragaia longicollum, «длинношеяя» |
+| Горные породы: сланец, известняк | xisto, calcário | schist, limestone | сланец, известняк |
+| Тур (бык) на рисунках Коа | auroque | aurochs | тур |
+| Ископаемые млн лет назад | há 150 milhões de anos | 150 million years ago | 150 млн лет назад |

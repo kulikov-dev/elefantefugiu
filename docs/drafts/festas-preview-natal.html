@@ -1,0 +1,445 @@
+<title>Праздники: превью Рождества</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;1,500&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: a stack of "screens" — each one shows a piece of the real site as it will look, with a small grey label above it. */
+:root{
+  --paper:#FBF8F1; --ink:#1F4E9C; --warm:#D9A441; --wash:#E4ECF8; --shell:#FFFDF7;
+  --fg:#1B2333; --muted:#5E6676; --line:#D8DCE4; --bg:#EEF0F4; --card:#FFFFFF;
+  --display:"Alegreya",Georgia,"Times New Roman",serif;
+  --body:"Alegreya Sans","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#18233A; --ink:#A9C2F0; --warm:#E0B45A; --wash:#22324F; --shell:#EFE8D8;
+  --fg:#E8ECF4; --muted:#A3ABBA; --line:#33405A; --bg:#0F1626; --card:#1B2740; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#18233A; --ink:#A9C2F0; --warm:#E0B45A; --wash:#22324F; --shell:#EFE8D8;
+  --fg:#E8ECF4; --muted:#A3ABBA; --line:#33405A; --bg:#0F1626; --card:#1B2740; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+.intro h1{font-size:2rem}
+.intro p{margin:.5rem 0 0;color:var(--muted);max-width:62ch}
+.label{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.screen{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.topbar{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:700;color:var(--ink)}
+.topbar .nav{margin-left:auto;font-family:var(--body);font-weight:500;font-size:.9rem;display:flex;gap:16px;color:var(--fg)}
+.mini{width:26px;height:22px}
+.festa-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:center;padding:20px 24px}
+.festa-head .date{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);font-weight:700}
+.festa-head h2{font-size:1.55rem;margin:.25rem 0 .4rem}
+.festa-head p{margin:0;color:var(--fg)}
+.festa-head a{display:inline-block;margin-top:.7rem;color:var(--ink);font-weight:700}
+.doodle{width:100%;height:auto;display:block}
+.rays{transform-origin:200px 105px;animation:glow 4s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.25}50%{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.rays{animation:none}}
+.page{padding:28px 28px 32px;display:grid;gap:26px}
+.page header{display:grid;gap:6px;max-width:62ch}
+.page header h2{font-size:2rem}
+.page header p{margin:0;color:var(--muted)}
+.page .art{max-width:520px}
+.block h3{font-size:1.3rem;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 22px;display:grid;gap:10px;max-width:66ch}
+.card .epoch{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card h4{font-family:var(--display);font-size:1.35rem;margin:0}
+.card .hook{font-family:var(--display);font-style:italic;font-size:1.12rem;margin:0;color:var(--ink)}
+.card p{margin:0}
+.card .bridge{font-size:.95rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.trad{list-style:none;margin:0;padding:0;display:grid;gap:16px;max-width:66ch}
+.trad li{display:grid;gap:2px}
+.trad b{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
+.more{color:var(--ink);font-weight:700}
+.off{font-size:.92rem;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:10px 14px;max-width:66ch}
+.notes{display:grid;gap:8px;max-width:66ch;color:var(--muted);font-size:.95rem}
+.notes p{margin:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding:20px 24px;align-items:center}
+.pair p{margin:0}
+@media (max-width:640px){.festa-head,.pair{grid-template-columns:1fr}.topbar .nav{display:none}.page{padding:20px 18px}}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+</style>
+<style>
+:root{--cherry:#C8372D;--angelica:#4E8F45;--peel:#E58A2B}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--cherry:#E2675C;--angelica:#7DBB6E;--peel:#F0A050}}
+:root[data-theme="dark"]{--cherry:#E2675C;--angelica:#7DBB6E;--peel:#F0A050}
+.bolo-btn{all:unset;display:block;width:100%;cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20transform%3D%22rotate%28-45%2016%2016%29%22%3E%3Cpath%20d%3D%22M2%2016%20L19%2012%20L19%2020%20Z%22%20fill%3D%22%23FFFDF7%22%20stroke%3D%22%231F4E9C%22%20stroke-width%3D%221.6%22%20stroke-linejoin%3D%22round%22/%3E%3Crect%20x%3D%2219%22%20y%3D%2213%22%20width%3D%2211%22%20height%3D%226%22%20rx%3D%222.5%22%20fill%3D%22%231F4E9C%22/%3E%3C/g%3E%3C/svg%3E") 5 27,pointer;border-radius:10px}
+.bolo-hint{display:inline-flex;align-items:center;gap:8px;margin:8px 0 0;font-size:.95rem;color:var(--muted)}
+.bolo-hint[hidden]{display:none}
+.bolo-btn:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.bolo-btn[aria-disabled="true"]{cursor:default}
+.slice.cut{transition:transform .45s cubic-bezier(.2,.8,.3,1)}
+.bolo-stage{position:relative}
+.bolo-bubble{position:absolute;left:0;top:0;z-index:2;display:flex;gap:10px;align-items:flex-start;width:max-content;max-width:min(280px,78%);
+  background:var(--card);color:var(--fg);border:1.5px solid var(--ink);border-radius:12px;padding:10px 12px;font-size:1rem;line-height:1.35;
+  box-shadow:0 4px 14px rgba(20,40,90,.16);transform:translateY(calc(-100% - 12px));pointer-events:none;animation:pop .3s .25s both}
+.bolo-bubble[hidden]{display:none}
+.bolo-bubble::after{content:"";position:absolute;left:var(--tail,50%);bottom:-8px;width:14px;height:14px;margin-left:-7px;background:var(--card);
+  border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:rotate(45deg)}
+.bolo-bubble svg{flex:none;width:40px;height:40px}
+.bolo-bubble b{color:var(--ink)}
+@keyframes pop{from{opacity:0;margin-top:6px}to{opacity:1;margin-top:0}}
+@media (prefers-reduced-motion:reduce){.slice.cut{transition:none}.bolo-bubble{animation:none}}
+.bolo-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:10px}
+.knife{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:700;color:var(--ink);background:var(--card);border:1.5px solid var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.knife[disabled]{opacity:.5;cursor:default}
+.knife:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.bolo-line{margin:0;min-height:1.5em;font-size:1rem;color:var(--muted)}
+.reset{font:inherit;font-size:.85rem;color:var(--muted);background:none;border:1px dashed var(--line);border-radius:6px;padding:4px 10px;cursor:pointer}
+.scard{display:grid;grid-template-columns:200px minmax(0,1fr);gap:0;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;max-width:66ch}
+.scard img{width:100%;height:100%;object-fit:cover;display:block;min-height:140px}
+.scard .body{padding:16px 18px;display:grid;gap:6px;align-content:start}
+.scard h4{font-family:var(--display);font-size:1.25rem;margin:0}
+.scard .hook{font-family:var(--display);font-style:italic;margin:0;color:var(--ink)}
+.scard .epoch{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.story{display:grid;gap:14px;max-width:66ch}
+.story p{margin:0}
+.story h4{font-family:var(--display);font-size:1.1rem;margin:6px 0 0;color:var(--ink)}
+.story .hook{font-family:var(--display);font-style:italic;font-size:1.2rem;color:var(--ink)}
+.story ul{margin:0;padding-left:1.2em}
+.meta{font-size:.9rem;color:var(--muted)}
+.warn{color:#B4541A;font-weight:700}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .warn{color:#F0A36B}}
+:root[data-theme="dark"] .warn{color:#F0A36B}
+.story-img{max-width:520px;border-radius:8px;border:1px solid var(--line);display:block;width:100%;height:auto}
+@media (max-width:640px){.scard{grid-template-columns:1fr}.scard img{aspect-ratio:1200/630;min-height:0}}
+</style>
+
+<div class="wrap">
+  <section class="intro">
+    <h1>Рождество: как это будет выглядеть</h1>
+    <p>Черновой макет с русскими текстами, окно 22–25 декабря. Пирог на странице праздника настоящий: нажми на него и отрежь кусочек. Знак <span class="warn">⚠</span> стоит там, где факт пока из одного источника; на сайт он не идёт.</p>
+  </section>
+
+  <section>
+    <p class="label">Главная, 22–25 декабря (блок после героя)</p>
+    <div class="screen">
+      <div class="topbar">O Elefante Fugiu <span class="nav"><span>Эпохи</span><span>Карта</span><span>О проекте</span></span></div>
+      <div class="festa-head">
+        <div>
+          <div class="date">25 декабря · Рождество</div>
+          <h2>Пирог, который пережил короля</h2>
+          <p>Короля свергли в 1910 году, а bolo-rei так и не смогли переименовать.</p>
+          <a href="#festa">История этого дня →</a>
+        </div>
+        <svg class="doodle" id="bolo-home" viewBox="0 0 400 240" role="img" aria-label="Bolo-rei на тарелке: кольцо из сдобы с цукатами"></svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="festa">
+    <p class="label">Страница праздника /ru/festa/natal</p>
+    <div class="screen">
+      <div class="topbar">O Elefante Fugiu</div>
+      <div class="page">
+        <header>
+          <div class="date" style="font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);font-weight:700">25 декабря</div>
+          <h2>Рождество</h2>
+          <p>В Португалии главный рождественский ужин бывает накануне, в сочельник, а на столе обязательно стоит bolo-rei.</p>
+        </header>
+        <div class="art">
+          <div class="bolo-stage" id="bolo-stage">
+            <button class="bolo-btn" id="bolo-btn" type="button" aria-describedby="bolo-line">
+              <svg class="doodle" id="bolo" viewBox="0 0 400 240" role="img" aria-label="Bolo-rei на тарелке. Отрезать кусочек"></svg>
+            </button>
+            <div class="bolo-bubble" id="bolo-bubble" role="status" aria-live="polite" hidden></div>
+          </div>
+          <p class="bolo-hint" id="bolo-hint"><svg width="26" height="12" viewBox="0 0 26 12" aria-hidden="true"><path d="M1 6 L15 2 L15 10 Z" fill="var(--shell)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/><rect x="15" y="3.5" width="10" height="5" rx="2" fill="var(--ink)"/></svg>Нажми на пирог, чтобы отрезать кусочек</p>
+          <p class="bolo-line" id="bolo-line"></p>
+          <p style="margin:10px 0 0"><button class="reset" id="reset" type="button">Испечь заново (кнопка только в превью)</button></p>
+        </div>
+
+        <div class="block">
+          <h3>История этого дня</h3>
+          <a class="scard" href="#story" style="color:inherit;text-decoration:none">
+            <img src="natal-800.jpg" alt="Азулежу: рождественский костёр перед деревенской церковью">
+            <div class="body">
+              <span class="epoch">Монархия и Республика · 1910</span>
+              <h4>Пирог, который пережил короля</h4>
+              <p class="hook">Короля свергли в 1910 году, а bolo-rei так и не смогли переименовать.</p>
+            </div>
+          </a>
+          <p class="meta" style="margin-top:8px">Стандартная карточка истории, как в «С чего начать». Картинка здесь временная: это азулежу праздника с мадейру. Для истории нужна своя, промпт ниже.</p>
+        </div>
+
+        <div class="block">
+          <h3>Традиции и факты</h3>
+          <ul class="trad">
+            <li><b>Рождественский костёр.</b> В деревнях Бейры в сочельник перед церковью складывают мадейру, костёр из целых стволов. Брёвна свозят местные парни, и в Пенамакоре он бывает одним из самых больших в стране. Как говорят, огонь нужен, чтобы согреть Младенца.</li>
+            <li><b>Месса петуха.</b> Ночную рождественскую мессу в Португалии зовут Missa do Galo, «месса петуха»: по легенде, петух первым прокричал о том, что родился Христос.</li>
+            <li><b>Треска или осьминог.</b> Ужин в сочельник называется консоада. Во внутренних районах на столе треска: сушёная и солёная, она была дешёвой и не портилась в дороге. А на севере, в Миньу и Траш-уш-Монтеш, едят осьминога, которого, как считается, сушёным привозили галисийские торговцы. 25-го из остатков жарят roupa-velha, «старую одежду».</li>
+            <li><b>Санта-Клаусы в океане.</b> Утром 25 декабря на пляже Армасан-ди-Пера в Алгарве люди в костюмах Пай Натала, португальского Санта-Клауса, заходят в зимний океан и собирают деньги на обувь для детей из бедных семей. Так делают уже больше десяти лет. А на Азорах, как пишут, окунуться в море 25 декабря — это обновиться к новому году. Купаются и 1 января, по всему побережью, от Каркавелуша до Матозиньюша.</li>
+          </ul>
+        </div>
+
+        <p class="off">Вне окна: вверху одна строка «Этот праздник отмечают 25 декабря», пирог тот же. Если пирог в этом году уже съеден, он остаётся съеденным до следующего Рождества.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <p class="label">Новая история (текст для утверждения)</p>
+    <div class="screen">
+      <div class="page">
+        <div class="story">
+          <p class="meta">Уровень: история · Метка: документально · Возраст: для всех · Эпоха: Монархия и Республика · Год: 1910 · Нити: выберет Claude Code из существующих</p>
+          <h2 style="font-size:1.8rem">Пирог, который пережил короля</h2>
+          <p class="hook">Короля свергли в 1910 году, а bolo-rei так и не смогли переименовать.</p>
+          <h4>История</h4>
+          <p>Bolo-rei, кольцо из сдобного теста с цукатами и орехами, похожее на корону, — главный рождественский пирог Португалии. Рецепт, как считается, привезли из Франции во второй половине XIX века в лиссабонскую кондитерскую Confeitaria Nacional. Когда в 1910 году Португалия стала республикой, «королевский» пирог на витрине оказался не к месту. Его пробовали продавать как «болу-президенте», «болу-арриага» в честь первого президента и даже «бывший болу-рей». Ни одно имя не прижилось, и пирог так и остался королём.</p>
+          <h4>Подробнее</h4>
+          <p>Confeitaria Nacional открыл в 1829 году Балтазар Родригеш Каштаньейру. Его сын привёз рецепт из Парижа, и, по словам самой кондитерской, в 1875 году пирог впервые появился на её прилавке. Во Франции похожий пирог пекут на Богоявление, в день трёх волхвов. Так что «король» в названии — это, скорее всего, не португальский монарх, а волхвы. Поэтому bolo-rei едят и на Рождество, и на День волхвов, 6 января.</p>
+          <p>Республиканцам это не помогло: слово «король» на витрине всё равно напоминало о свергнутой монархии. По некоторым данным, в парламенте предлагали даже название «болу-република», но и оно не прошло. Похожее было во Франции: в годы революции «пирог королей» пытались запретить, но и там не вышло.</p>
+          <p>В пирог по обычаю запекали сухой боб и маленький подарок. Кому достался подарок, тому повезло, а кому боб, тот покупает пирог в следующем году.</p>
+          <h4>Мост в сегодня</h4>
+          <p>Confeitaria Nacional, Праса-да-Фигейра, Лиссабон. Та самая кондитерская, где, как считается, bolo-rei продали впервые, и она до сих пор работает на том же месте.</p>
+          <h4>Источники</h4>
+          <ul>
+            <li>RTP: <a href="https://www.rtp.pt/noticias/pais/loja-mais-antiga-da-baixa-de-lisboa-esconde-o-segredo-do-bolo-rei_n3821">Loja mais antiga da Baixa de Lisboa esconde o segredo do bolo-rei</a></li>
+            <li>CM: <a href="https://www.cmjornal.pt/mundo/detalhe/sabia-que-a-origem-do-bolo-rei-nao-e-portuguesa">Sabia que a origem do bolo-rei não é portuguesa?</a></li>
+            <li>Wikipédia: <a href="https://pt.wikipedia.org/wiki/Bolo-rei">Bolo-rei</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">Что проверю до промпта и что нужно от тебя</p>
+    <div class="screen">
+      <div class="page notes">
+        <p><b>⚠ проверяю:</b> год 1875 (есть только на сайте самой кондитерской, RTP пишет «во второй половине XIX века»); предложение «болу-република» в парламенте (только RTP); переименование во Франции; Азоры (только RFM, поэтому «как пишут»). Что не подтвердится, уберу или смягчу.</p>
+        <p><b>Точка на карте:</b> твоя ссылка https://maps.app.goo.gl/wipwyTtCoi4FssFu7, её развернёт Claude Code.</p>
+        <p><b>Картинка истории:</b> азулежу праздника показывает мадейру, к пирогу оно не подходит. Предлагаю отдельное азулежу: витрина кондитерской 1910 года, на подносе bolo-rei, кондитер вешает табличку с новым названием, а прохожие смеются. Промпт для Gemini дам вместе с промптом для Claude Code.</p>
+        <p><b>Интерактив:</b> 8 кусков, боб и подарок лежат в случайных кусках (у каждого читателя свои, на год). Съеденное запоминается в браузере до следующего Рождества. Кнопки нет: сам пирог — кнопка, курсор над ним — нож, под пирогом подсказка до первого куска. Enter и пробел тоже режут. Результат куска появляется в облачке над отрезанным куском и читается скринридером. В режиме «меньше движения» кусок не едет, а сразу стоит отрезанным.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>/* Bolo-rei «Отрежь кусочек»: reference implementation for the site (v2).
+   BoloRei.draw(svg, state) draws the cake into an <svg viewBox="0 0 400 240">.
+   state = { gone: Set of eaten slice indexes, out: index of the slice just cut or -1 }
+   BoloRei.anchor(i) gives the point above the cut slice for the speech bubble with the result (HTML, not SVG).
+   The cake is a puffy ring: flat bottom, rounded top, no straight walls.
+   Colours come from CSS tokens: --ink (cobalt), --warm (crust), --wash, --shell. */
+(function (g) {
+  var NS = 'http://www.w3.org/2000/svg';
+  var CX = 200, CY = 128, R = 152, r = 50, K = 0.44, D = 30, N = 8, STEP = 360 / N;
+  var CRUMB = 'color-mix(in srgb, var(--warm) 30%, var(--shell))';
+  var CRUST = 'color-mix(in srgb, var(--warm) 80%, #7A3A0E)'; // golden-brown glaze
+  var SHADE = 'color-mix(in srgb, var(--warm) 64%, #5A2A08)';
+  /* candied fruit is the one place where colour is the point: red and green cherries, orange peel.
+     Tokens with fallbacks; the site adds --cherry, --angelica, --peel (light and dark). */
+  var CHERRY = 'var(--cherry, #C8372D)', GREEN = 'var(--angelica, #4E8F45)', PEEL = 'var(--peel, #E58A2B)';
+  var rad = function (d) { return d * Math.PI / 180; };
+  function pt(rr, deg, dy) { return [CX + rr * Math.cos(rad(deg)), CY + rr * Math.sin(rad(deg)) * K + (dy || 0)]; }
+  function hgt(t) { return D * Math.pow(Math.sin(Math.PI * t), 0.75); } // rounded loaf profile
+  /* the ring is hand-made: radius and height wobble a little round the circle */
+  function wob(deg) { return 1 + 0.022 * Math.sin(rad(deg * 6 + 20)) + 0.012 * Math.sin(rad(deg * 11)); }
+  function hwob(deg) { return 1 + 0.13 * Math.sin(rad(deg * 5 + 40)) + 0.07 * Math.sin(rad(deg * 13 + 10)); }
+  function surf(t, deg, lift) { var p = pt((r + (R - r) * t) * wob(deg), deg); p[1] -= hgt(t) * hwob(deg) * (lift == null ? 1 : lift); return p; }
+  function P(q) { return q[0].toFixed(1) + ' ' + q[1].toFixed(1); }
+  function poly(pts) { return 'M' + pts.map(P).join(' L') + ' Z'; }
+  function polyline(pts) { return 'M' + pts.map(P).join(' L'); }
+  function el(name, attrs, parent) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+  function clip(a, b, lo, hi) { // parts of [a,b] that fall inside [lo,hi], angles in degrees
+    var out = [];
+    for (var s = -360; s <= 360; s += 360) { var x = Math.max(a, lo + s), y = Math.min(b, hi + s); if (y > x) out.push([x, y]); }
+    return out;
+  }
+  function center(i) { return 90 + i * STEP; } // slice 0 faces the viewer, the rest go round
+  function seed(i, j) { var x = Math.sin(i * 12.9898 + j * 78.233) * 43758.5453; return x - Math.floor(x); }
+
+  /* outline of the slice body seen from above: for each angle, the highest and lowest point of the cross-section */
+  function outline(a, b) {
+    var up = [], lo = [], n = 16;
+    for (var i = 0; i <= n; i++) {
+      var d = a + (b - a) * i / n, mn = null, mx = null;
+      for (var j = 0; j <= 20; j++) { var q = surf(j / 20, d); if (!mn || q[1] < mn[1]) mn = q; if (!mx || q[1] > mx[1]) mx = q; }
+      up.push(mn); lo.push(mx);
+    }
+    return { up: up, lo: lo };
+  }
+
+  function slice(i, parent, item, open) {
+    var c = center(i), a = c - STEP / 2, b = c + STEP / 2;
+    var gp = el('g', { 'class': 'slice', 'data-i': i }, parent);
+    var ink = { stroke: 'var(--ink)', 'stroke-width': 1.8, 'stroke-linejoin': 'round', 'stroke-linecap': 'round' };
+
+    function face(d) { // cut surface: crumb under a thin crust, with bits of fruit
+      var f = el('g', {});
+      var top = []; for (var j = 0; j <= 20; j++) top.push(surf(j / 20, d));
+      el('path', Object.assign({ d: poly(top), fill: CRUMB }, ink), f);
+      var crust = []; for (j = 1; j <= 19; j++) crust.push(surf(j / 20, d, 0.86));
+      el('path', { d: polyline(crust), fill: 'none', stroke: CRUST, 'stroke-width': 2.6, 'stroke-linecap': 'round' }, f);
+      for (var m = 0; m < 6; m++) { // air holes and fruit bits
+        var t = 0.18 + 0.64 * seed(i * 7 + m, d), q = surf(t, d, 0.25 + 0.45 * seed(m, i + d));
+        if (m < 3) el('rect', { x: (q[0] - 2.5).toFixed(1), y: (q[1] - 2).toFixed(1), width: 5, height: 4, rx: 1, fill: [CHERRY, GREEN, PEEL][m], stroke: 'var(--ink)', 'stroke-width': 0.6 }, f);
+        else el('ellipse', { cx: q[0].toFixed(1), cy: q[1].toFixed(1), rx: 1.6, ry: 1.1, fill: 'var(--ink)', opacity: 0.45 }, f);
+      }
+      return f;
+    }
+    var openA = open.has((i + N - 1) % N), openB = open.has((i + 1) % N);
+    var showA = Math.cos(rad(a)) < 0, showB = Math.cos(rad(b)) > 0; // faces turned towards the viewer
+    var fa = openA ? face(a) : null, fb = openB ? face(b) : null;
+    if (fa && !showA) gp.appendChild(fa);
+    if (fb && !showB) gp.appendChild(fb);
+
+    // body: the cross-section swept round the ring, filled without outline so slices join without seams
+    var prev = null, ea = openA ? a : a - 0.8, eb = openB ? b : b + 0.8; // overlap closed joints a little: no seams
+    for (var st = 0; st <= 24; st++) {
+      var dd = ea + (eb - ea) * st / 24, arch = []; for (var j2 = 0; j2 <= 16; j2++) arch.push(surf(j2 / 16, dd));
+      el('path', { d: poly(arch), fill: CRUST, stroke: CRUST, 'stroke-width': 1 }, gp);
+      if (prev) el('path', { d: poly(prev.concat(arch.slice().reverse())), fill: CRUST, stroke: CRUST, 'stroke-width': 1 }, gp);
+      prev = arch;
+    }
+    // shade the lower slope that faces us, as an opaque tone so overlapping joints leave no lines
+    var pa = null;
+    for (st = 0; st <= 24; st++) {
+      dd = ea + (eb - ea) * st / 24;
+      var front = Math.sin(rad(dd)) > 0, sl = []; for (j2 = 0; j2 <= 4; j2++) sl.push(surf(front ? 0.8 + 0.05 * j2 : 0.2 - 0.05 * j2, dd));
+      if (pa && pa.front === front) el('path', { d: poly(pa.pts.concat(sl.slice().reverse())), fill: SHADE, stroke: SHADE, 'stroke-width': 1 }, gp);
+      pa = { pts: sl, front: front };
+    }
+    function range(lo, hi) { var res = []; clip(a, b, lo, hi).forEach(function (s) { res.push(s); }); return res; }
+    function band(t0, t1, s) { var p1 = [], p2 = []; for (var k = 0; k <= 12; k++) { var d = s[0] + (s[1] - s[0]) * k / 12; p1.push(surf(t0, d)); p2.push(surf(t1, d)); } return poly(p1.concat(p2.reverse())); }
+    function arcAt(t, s) { var p = []; for (var k = 0; k <= 12; k++) p.push(surf(t, s[0] + (s[1] - s[0]) * k / 12)); return polyline(p); }
+    // outline the base where it meets the plate
+    range(0, 180).forEach(function (s) { el('path', Object.assign({ d: arcAt(1, s), fill: 'none' }, ink), gp); });
+    range(180, 360).forEach(function (s) { el('path', Object.assign({ d: arcAt(0, s), fill: 'none' }, ink), gp); });
+    // top silhouette: the highest point of each cross-section
+    var o = outline(a, b);
+    el('path', Object.assign({ d: polyline(o.up), fill: 'none' }, ink), gp);
+    // side silhouettes at the far left and right of the ring
+    [0, 180].forEach(function (e) { clip(a, b, e - 0.01, e + 0.01).forEach(function () { var p = []; for (var k = 8; k <= 16; k++) p.push(surf(k / 16, e)); el('path', Object.assign({ d: polyline(p), fill: 'none' }, ink), gp); }); });
+    // glaze shine along the top
+    var hl = []; for (k = 0; k <= 8; k++) hl.push(surf(0.5, a + STEP * (0.1 + 0.8 * k / 8), 1.04));
+    el('path', { d: polyline(hl), fill: 'none', stroke: 'var(--shell)', 'stroke-width': 2.4, 'stroke-linecap': 'round', opacity: 0.7 }, gp);
+
+    // toppings: cobalt candied cherries (the "jewels"), candied orange slices, long candied strips, pine nuts, sugar
+    var tops = [];
+    for (var j = 0; j < 4; j++) tops.push({ d: a + STEP * (0.14 + 0.24 * j) + (seed(i, j) - 0.5) * 5, t: 0.3 + 0.4 * seed(j + 1, i), kind: (i + j) % 4 });
+    tops.sort(function (x, y) { return surf(x.t, x.d)[1] - surf(y.t, y.d)[1]; });
+    tops.forEach(function (tp, j) {
+      var p = surf(tp.t, tp.d), tr = 'translate(' + P(p) + ') rotate(' + (seed(i, j + 5) * 50 - 25).toFixed(0) + ')';
+      if (tp.kind === 0) {
+        el('circle', { cx: p[0].toFixed(1), cy: (p[1] - 3).toFixed(1), r: 6.5, fill: (i + j) % 3 ? CHERRY : GREEN, stroke: 'var(--ink)', 'stroke-width': 1.3 }, gp);
+        el('circle', { cx: (p[0] - 2.2).toFixed(1), cy: (p[1] - 5.4).toFixed(1), r: 1.8, fill: 'var(--shell)' }, gp);
+      } else if (tp.kind === 1) {
+        el('path', { d: 'M-11 2 A11 7 0 0 1 11 2 Z', fill: PEEL, stroke: 'var(--ink)', 'stroke-width': 1.4, 'stroke-linejoin': 'round', transform: tr }, gp);
+        el('path', { d: 'M0 2 L-7 -2 M0 2 L0 -4 M0 2 L7 -2', stroke: 'var(--ink)', 'stroke-width': 1, transform: tr }, gp);
+      } else if (tp.kind === 2) {
+        el('rect', { x: -9, y: -3, width: 18, height: 6, rx: 2.5, fill: (i + j) % 2 ? GREEN : CHERRY, stroke: 'var(--ink)', 'stroke-width': 1.3, transform: tr }, gp);
+        el('path', { d: 'M-5 -1 L5 -1', stroke: 'var(--ink)', 'stroke-width': 0.9, opacity: 0.6, transform: tr }, gp);
+      } else {
+        el('ellipse', { cx: 0, cy: 0, rx: 4.6, ry: 2.4, fill: 'var(--shell)', stroke: 'var(--ink)', 'stroke-width': 1.1, transform: tr }, gp);
+        el('ellipse', { cx: 6, cy: 3, rx: 4.6, ry: 2.4, fill: 'var(--shell)', stroke: 'var(--ink)', 'stroke-width': 1.1, transform: tr }, gp);
+      }
+    });
+    for (var m = 0; m < 6; m++) {
+      var q = surf(0.2 + 0.6 * seed(i + 3, m), a + STEP * (0.08 + 0.84 * seed(m, i + 7)));
+      el('rect', { x: (q[0] - 2.2).toFixed(1), y: (q[1] - 1.4).toFixed(1), width: 4.4, height: 2.8, rx: 1, fill: 'var(--shell)', stroke: 'var(--ink)', 'stroke-width': 0.6 }, gp);
+    }
+
+    if (fa && showA) gp.appendChild(fa);
+    if (fb && showB) gp.appendChild(fb);
+
+    return gp;
+  }
+
+  function drawBolo(svg, st) {
+    st = st || {};
+    var gone = st.gone || new Set(), out = st.out == null ? -1 : st.out, items = st.items || {};
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    // plate with a dotted rim
+    el('ellipse', { cx: CX, cy: CY + 16, rx: 192, ry: 88, fill: 'var(--wash)', stroke: 'var(--ink)', 'stroke-width': 2 }, svg);
+    el('ellipse', { cx: CX, cy: CY + 13, rx: 170, ry: 74, fill: 'none', stroke: 'var(--ink)', 'stroke-width': 1.2 }, svg);
+    for (var k = 0; k < 30; k++) { var p = [CX + 181 * Math.cos(rad(k * 12)), CY + 16 + 81 * Math.sin(rad(k * 12))]; el('circle', { cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 1.8, fill: 'var(--ink)' }, svg); }
+    // crumbs where slices were eaten
+    gone.forEach(function (i) {
+      for (var m = 0; m < 4; m++) { var q = pt(r + (R - r) * (0.2 + 0.6 * seed(i, m + 11)), center(i) + (seed(m, i + 2) - 0.5) * STEP * 0.8); el('circle', { cx: q[0].toFixed(1), cy: q[1].toFixed(1), r: (1.4 + 1.2 * seed(i, m)).toFixed(1), fill: 'var(--warm)', stroke: 'var(--ink)', 'stroke-width': 0.8 }, svg); }
+    });
+    var open = new Set(gone); if (out >= 0) open.add(out);
+    // back to front; a slice that was just cut is drawn last so it sits on top
+    var order = []; for (var i = 0; i < N; i++) if (!gone.has(i)) order.push(i);
+    order.sort(function (x, y) { return Math.sin(rad(center(x))) - Math.sin(rad(center(y))); });
+    var all = new Set(); for (i = 0; i < N; i++) all.add(i);
+    var moved = [];
+    order.forEach(function (i) {
+      if (i !== out) { slice(i, svg, null, open); return; }
+      var item = items.fava === out ? 'fava' : items.brinde === out ? 'brinde' : null;
+      var gp = slice(out, svg, item, all); moved.push(gp);
+    });
+    if (out >= 0) {
+      var sh = shift(out), dx = sh[0], dy = sh[1];
+      moved.forEach(function (gp) {
+        gp.classList.add('cut');
+        gp.style.transform = 'translate(0px,0px)';
+        requestAnimationFrame(function () { requestAnimationFrame(function () { gp.style.transform = 'translate(' + dx.toFixed(1) + 'px,' + dy.toFixed(1) + 'px)'; }); });
+      });
+    }
+  }
+
+  function shift(i) { var c = rad(center(i)); return [Math.cos(c) * 34, Math.sin(c) * 34 * K + 10]; } // slides out and a little towards us
+  /* where to point the speech bubble: top of the cut slice after it slid out, in viewBox units (400 x 240) */
+  function anchor(i) { var p = surf(0.5, center(i)), sh = shift(i); return [p[0] + sh[0], p[1] + sh[1] - 8]; }
+
+  /* random slices for the fava and the brinde, never the same one; the page stores them with the year */
+  function randomItems() { var f = Math.floor(Math.random() * N), b = (f + 1 + Math.floor(Math.random() * (N - 1))) % N; return { fava: f, brinde: b }; }
+
+  g.BoloRei = { draw: drawBolo, randomItems: randomItems, anchor: anchor, N: N, W: 400, H: 240 };
+})(window);
+</script>
+<script>
+(function(){
+  var year = new Date().getFullYear(), KEY = 'festa-natal-bolo';
+  var N = BoloRei.N, st = null;
+  try { st = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+  if (!st || st.year !== year) { var it = BoloRei.randomItems(); st = { year: year, cut: 0, fava: it.fava, brinde: it.brinde }; }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  var items = { fava: st.fava, brinde: st.brinde }, count = Math.min(N, st.cut || 0);
+  var svg = document.getElementById('bolo'), line = document.getElementById('bolo-line');
+  var hint = document.getElementById('bolo-hint'), art = document.getElementById('bolo-btn');
+  var bubble = document.getElementById('bolo-bubble'), stage = document.getElementById('bolo-stage');
+  var ICON = {
+    fruit: '<svg viewBox="-17 -17 34 34" aria-hidden="true"><path d="M2 -6 C4 -12 9 -14 12 -14" fill="none" stroke="var(--angelica)" stroke-width="2" stroke-linecap="round"/><circle cx="0" cy="3" r="9" fill="var(--cherry)" stroke="var(--ink)" stroke-width="1.6"/><circle cx="-3" cy="0" r="2.4" fill="var(--shell)"/></svg>',
+    fava: '<svg viewBox="-17 -17 34 34" aria-hidden="true"><path d="M-13 3 C-14 -8 -4 -12 1 -8 C5 -5 9 -10 13 -5 C17 1 10 10 0 10 C-8 10 -12 8 -13 3 Z" fill="var(--warm)" stroke="var(--ink)" stroke-width="1.8"/><path d="M-1 -6 C-2 -2 -1 2 1 3" fill="none" stroke="var(--ink)" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    brinde: '<svg viewBox="-17 -17 34 34" aria-hidden="true"><path d="M-10 13 L10 13 L8 2 L-8 2 Z" fill="var(--warm)" stroke="var(--ink)" stroke-width="1.6" stroke-linejoin="round"/><circle cx="0" cy="-3.5" r="5.2" fill="var(--shell)" stroke="var(--ink)" stroke-width="1.6"/><path d="M-6 -8 L-6 -14 L-3 -10.5 L0 -15.5 L3 -10.5 L6 -14 L6 -8 Z" fill="var(--warm)" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/></svg>'
+  };
+  var TEXT = { fruit: '<b>Цукаты.</b> Ничего не запечено, ешь спокойно.', brinde: '<b>Подарок.</b> Раньше в пирог запекали маленькую фигурку, и она досталась тебе.', fava: '<b>Боб.</b> По обычаю, в следующем году пирог покупаешь ты.' };
+  function showBubble(i, what){
+    bubble.innerHTML = ICON[what] + '<span>' + TEXT[what] + '</span>';
+    bubble.hidden = false;
+    bubble.style.animation = 'none'; void bubble.offsetWidth; bubble.style.animation = '';
+    var a = BoloRei.anchor(i), W = stage.clientWidth, H = stage.clientHeight;
+    var ax = a[0] / BoloRei.W * W, ay = Math.max(a[1] / BoloRei.H * H, bubble.offsetHeight + 16);
+    var bw = bubble.offsetWidth, left = Math.min(Math.max(ax - bw / 2, 0), W - bw);
+    bubble.style.left = left + 'px'; bubble.style.top = ay + 'px';
+    bubble.style.setProperty('--tail', Math.min(Math.max(ax - left, 18), bw - 18) + 'px');
+  }
+  function hideBubble(){ bubble.hidden = true; bubble.innerHTML = ''; }
+  function gone(n){ var s = new Set(); for (var i = 0; i < n; i++) s.add(i); return s; }
+  function finished(){ hideBubble(); line.textContent = 'Пирог съеден. Новый испечём к следующему Рождеству.'; hint.hidden = true; art.setAttribute('aria-disabled','true'); }
+  function first(){
+    BoloRei.draw(svg, { gone: gone(count), items: items });
+    if (count >= N) finished();
+    else line.textContent = '';
+    hint.hidden = count > 0;
+  }
+  window.addEventListener('resize', hideBubble);
+  function cut(){
+    if (count >= N) return;
+    var i = count; count++; st.cut = count; save(); hint.hidden = true;
+    BoloRei.draw(svg, { gone: gone(i), out: i, items: items });
+    var what = items.fava === i ? 'fava' : items.brinde === i ? 'brinde' : 'fruit';
+    showBubble(i, what);
+    if (count >= N) setTimeout(function(){ BoloRei.draw(svg, { gone: gone(N), items: items }); finished(); }, 2600);
+  }
+  art.addEventListener('click', cut);
+  document.getElementById('reset').addEventListener('click', function(){ count = 0; var it = BoloRei.randomItems(); st = { year: year, cut: 0, fava: it.fava, brinde: it.brinde }; items = { fava: st.fava, brinde: st.brinde }; save(); art.removeAttribute('aria-disabled'); hideBubble(); first(); });
+  BoloRei.draw(document.getElementById('bolo-home'), {});
+  first();
+})();
+</script>

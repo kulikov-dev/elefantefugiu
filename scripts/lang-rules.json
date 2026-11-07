@@ -50,7 +50,7 @@
   ],
   "en": [
     {
-      "re": "\b(colour|favour|honour|neighbour|behaviour|labour|flavour|harbour|rumour)\\p{L}*",
+      "re": "\\b(colour|favour|honour|neighbour|behaviour|labour|flavour|harbour|rumour)\\p{L}*",
       "hint": "American spelling: color, favor, honor, neighbor, behavior, labor, flavor, harbor, rumor"
     },
     {
@@ -438,7 +438,22 @@
         "\\bincr[íi]vel\\b"
       ]
     },
-    "allow": []
+    "allow": [
+      {
+        "lang": "pt",
+        "unit": "event/corte-brasil-1807",
+        "field": "more",
+        "match": "único",
+        "why": "a fact, not praise: the only case of a European monarchy governed from its colony"
+      },
+      {
+        "lang": "pt",
+        "unit": "event/ponte-maria-pia-1877",
+        "field": "story",
+        "match": "único",
+        "why": "\"single\": the bridge has one iron arch, it is a count, not praise"
+      }
+    ]
   },
   "exceptions": [
     {

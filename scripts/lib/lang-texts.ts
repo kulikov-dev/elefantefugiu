@@ -90,6 +90,18 @@ function myths(): TextItem[] {
   return fromYaml('myths', file, readYaml(join(root, file)), LANG_LIST);
 }
 
+/** The holidays (src/data/festas.yaml): the texts of one holiday are one unit (`festa/<id>`); a holiday with no text yet has no unit. */
+function festas(): TextItem[] {
+  const file = 'src/data/festas.yaml';
+  return (readYaml(join(root, file)) as any[]).flatMap((rec) =>
+    LANG_LIST.flatMap((lang) => {
+      const pairs: [string, string][] = [];
+      flat(rec.text?.[lang], '', pairs);
+      return pairs.filter(([, text]) => text.trim()).map(([field, text]) => ({ unit: `festa/${rec.id}`, file, field, lang, text }));
+    }),
+  );
+}
+
 function staticPages(): TextItem[] {
   const out: TextItem[] = [];
   for (const [page, byLang] of Object.entries(STATIC_PAGES)) {
@@ -125,7 +137,7 @@ function interfaceStrings(): TextItem[] {
 
 /** All the texts of the site that are read. */
 export function collectTexts(): TextItem[] {
-  return [...stories(), ...collection('epochs'), ...collection('threads'), ...myths(), ...staticPages(), ...interfaceStrings()];
+  return [...stories(), ...collection('epochs'), ...collection('threads'), ...myths(), ...festas(), ...staticPages(), ...interfaceStrings()];
 }
 
 /** The hash of the text of one language of a unit: over every field in the order of the inventory, with the field name. */
