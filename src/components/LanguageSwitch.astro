@@ -11,10 +11,9 @@ interface Props {
   activeLangs?: readonly Lang[];
 }
 
-/** The same in every language: a reader who landed on a page in a language they cannot read still finds the switch. */
-const LABEL = 'Язык / Idioma / Language';
-
+/** The same in every language (a reader who landed on a page in a language they cannot read still finds the switch), starting with the visible code. */
 const { lang, pageKey = 'home', alternates, activeLangs } = Astro.props;
+const LABEL = `${lang.toUpperCase()}, Язык / Idioma / Language`;
 ---
 <details class="lang-switch" data-lang-switch>
   <summary class="lang-switch__current" aria-label={LABEL}>

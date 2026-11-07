@@ -115,14 +115,17 @@ describe('the root chooses the language', () => {
     expect(chooseLang(undefined, 'en-US')).toBe('en');
     expect(chooseLang(null, 'EN')).toBe('en');
     expect(chooseLang(null, 'pt-BR')).toBe('pt');
-    expect(chooseLang(null, 'de-DE')).toBe('pt');
-    expect(chooseLang(null, '')).toBe('pt');
-    expect(chooseLang(null, undefined)).toBe('pt');
+    expect(chooseLang(null, 'de-DE')).toBe('en');
+    expect(chooseLang(null, 'uk-UA')).toBe('ru');
+    expect(chooseLang(null, 'be')).toBe('ru');
+    expect(chooseLang(null, 'kk-KZ')).toBe('ru');
+    expect(chooseLang(null, '')).toBe('en');
+    expect(chooseLang(null, undefined)).toBe('en');
   });
   it('an unknown or damaged saved value is ignored', () => {
     expect(chooseLang('de', 'ru-RU')).toBe('ru');
     expect(chooseLang('', 'en')).toBe('en');
-    expect(chooseLang('constructor', 'de')).toBe('pt');
+    expect(chooseLang('constructor', 'de')).toBe('en');
   });
 
   const hrefs = { pt: '/pt/', en: '/en/', ru: '/ru/' };
@@ -146,7 +149,7 @@ describe('the root chooses the language', () => {
   });
   it('the inline script survives blocked storage', () => {
     expect(run(null, 'ru-RU', true)).toBe('/ru/');
-    expect(run(null, 'fr', true)).toBe('/pt/');
+    expect(run(null, 'fr', true)).toBe('/en/');
   });
 });
 

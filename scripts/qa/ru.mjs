@@ -65,7 +65,7 @@ if (want('menu')) {
       });
       ok(`menu (${lang}, ${width} px): the header is at most ${HEADER_MAX} px (${closed.header} px), no sideways scroll`, closed.header <= HEADER_MAX && closed.sw <= closed.vw, JSON.stringify({ header: closed.header, sw: closed.sw, vw: closed.vw }));
       ok(`menu (${lang}, ${width} px): the button shows the current language, is 44 px tall and inside the screen, and does not overlap the name`, closed.text === lang.toUpperCase() && closed.h >= 44 && closed.btn.r <= closed.vw && closed.btn.l >= closed.brand.r - 1, JSON.stringify(closed));
-      ok(`menu (${lang}, ${width} px): the button is named "Язык / Idioma / Language" (the same in every language) for screen readers and the menu starts closed`, closed.label === 'Язык / Idioma / Language' && closed.open === false, closed.label);
+      ok(`menu (${lang}, ${width} px): the button is named "PT, Язык / Idioma / Language" (the visible code first, the rest the same in every language) for screen readers and the menu starts closed`, closed.label === `${lang.toUpperCase()}, Язык / Idioma / Language` && closed.open === false, closed.label);
       await page.click('.lang-switch__current');
       const opened = await page.evaluate(() => {
         const links = [...document.querySelectorAll('.lang-switch a')].map((a) => { const r = a.getBoundingClientRect(); return { text: a.textContent.trim(), lang: a.getAttribute('hreflang'), href: a.getAttribute('href'), current: a.getAttribute('aria-current'), h: Math.round(r.height), l: r.left, r: r.right, vis: r.width > 0 }; });
@@ -106,7 +106,9 @@ if (want('root')) {
   };
   ok('root: a Russian browser leads to /ru/', (await go('ru-RU', null)) === '/ru/');
   ok('root: an English browser leads to /en/', (await go('en-GB', null)) === '/en/');
-  ok('root: any other browser leads to /pt/', (await go('de-DE', null)) === '/pt/');
+  ok('root: a Portuguese browser leads to /pt/', (await go('pt-BR', null)) === '/pt/');
+  ok('root: Ukrainian, Belarusian and Kazakh browsers lead to /ru/', (await go('uk-UA', null)) === '/ru/' && (await go('be-BY', null)) === '/ru/' && (await go('kk-KZ', null)) === '/ru/');
+  ok('root: any other browser leads to /en/', (await go('de-DE', null)) === '/en/');
   ok('root: the saved choice wins over the browser (en over ru, ru over en)', (await go('ru-RU', 'en')) === '/en/' && (await go('en-US', 'ru')) === '/ru/');
   const nojs = await newPage();
   await nojs.setJavaScriptEnabled(false);
