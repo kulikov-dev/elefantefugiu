@@ -142,3 +142,6 @@ lang_review:
   pt:
     date: '2026-11-07'
     hash: '50a22f741355'
+  en:
+    date: '2026-11-07'
+    hash: 'c1c1ba54bb1b'

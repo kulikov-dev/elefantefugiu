@@ -158,6 +158,9 @@ lang_review:
   pt:
     date: '2026-11-07'
     hash: 'a82b1555f68d'
+  en:
+    date: '2026-11-07'
+    hash: '8ca11dee3370'
   ru:
     date: '2026-10-28'
     hash: 'e1debfae06dd'

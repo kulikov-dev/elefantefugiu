@@ -221,6 +221,9 @@ lang_review:
   pt:
     date: '2026-11-07'
     hash: 'f248676fcc89'
+  en:
+    date: '2026-11-07'
+    hash: '46bb901d5ca7'
   ru:
     date: '2026-10-31'
     hash: 'fb9e16445769'

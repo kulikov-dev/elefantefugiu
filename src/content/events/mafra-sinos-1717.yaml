@@ -162,6 +162,9 @@ lang_review:
   pt:
     date: '2026-11-07'
     hash: '58936a8b38d6'
+  en:
+    date: '2026-11-07'
+    hash: '32623f93d6ba'
   ru:
     date: '2026-10-31'
     hash: 'a23c96961bfe'

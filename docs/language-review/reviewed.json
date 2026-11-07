@@ -1,11 +1,18 @@
 {
   "epoch/antes-de-portugal/en": {
-    "date": "2026-10-31",
-    "hash": "43c8d2560a19",
+    "date": "2026-11-07",
+    "hash": "db625e62efe8",
     "fields": {
       "slug": "06a400b2",
       "name": "a4f48d58",
-      "years_label": "be5a720e"
+      "years_label": "c8b598d7",
+      "scale_gap": "0342ad98",
+      "theme": "5e22b20e",
+      "description": "f4e1921e",
+      "panno.share_hook": "08a1f20e",
+      "fallback_image.alt": "327eec55",
+      "fallback_image.caption": "286fec32",
+      "intro": "9bed8ccc"
     }
   },
   "epoch/antes-de-portugal/pt": {
@@ -34,7 +41,7 @@
     }
   },
   "epoch/atualidade-ue-e-emigracao/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "8db90becfe78",
     "fields": {
       "slug": "093f5956",
@@ -64,12 +71,13 @@
     }
   },
   "epoch/avis-e-descobrimentos/en": {
-    "date": "2026-10-31",
-    "hash": "603e878dd940",
+    "date": "2026-11-07",
+    "hash": "e93e5b2e0116",
     "fields": {
       "slug": "60406320",
       "name": "c0281cdf",
       "theme": "d13296d8",
+      "panno.share_hook": "093a7bc9",
       "fallback_image.alt": "2d1be2aa",
       "fallback_image.caption": "74833c49",
       "description": "cea91d2b",
@@ -131,7 +139,7 @@
     }
   },
   "epoch/estado-novo-e-25-de-abril/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "52722c7579d2",
     "fields": {
       "slug": "621e8f97",
@@ -158,13 +166,14 @@
     }
   },
   "epoch/lusitania-e-roma/en": {
-    "date": "2026-10-31",
-    "hash": "7dbaf94335d4",
+    "date": "2026-11-07",
+    "hash": "bb61b927a249",
     "fields": {
       "slug": "0fc9a72d",
       "name": "52fba0af",
       "years_label": "f6861e14",
       "theme": "1208f7a8",
+      "panno.share_hook": "4b2ca49f",
       "fallback_image.alt": "18a0cf9b",
       "fallback_image.caption": "9e0c5e37",
       "intro": "dcd9605e",
@@ -225,13 +234,14 @@
     }
   },
   "epoch/monarquia-e-republica/en": {
-    "date": "2026-10-31",
-    "hash": "6fa5ff8e354f",
+    "date": "2026-11-07",
+    "hash": "16d3d68f0d75",
     "fields": {
       "slug": "5dd7c6dd",
       "name": "21feb3bb",
       "years_label": "6cd38a82",
       "theme": "74e375bf",
+      "panno.share_hook": "c3c408f5",
       "fallback_image.alt": "edc07775",
       "fallback_image.caption": "929673b8",
       "intro": "4b1c91f7",
@@ -240,7 +250,7 @@
       "then_now[0].text": "43e5ad0d",
       "then_now[1].then_big": "5be813e8",
       "then_now[1].now_big": "6c4e4834",
-      "then_now[1].text": "2622753c",
+      "then_now[1].text": "af6fa685",
       "then_now[2].then_big": "3e8a9277",
       "then_now[2].now_big": "2357c50a",
       "then_now[2].text": "98c202af"
@@ -292,7 +302,7 @@
     }
   },
   "epoch/nascimento-do-reino-e-reconquista/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "b82dd5a94462",
     "fields": {
       "slug": "626a63c5",
@@ -322,12 +332,13 @@
     }
   },
   "epoch/pombal-e-terramoto/en": {
-    "date": "2026-10-31",
-    "hash": "e75dd8dcee17",
+    "date": "2026-11-07",
+    "hash": "204cfba64217",
     "fields": {
       "slug": "aeed9993",
       "name": "f0e490ea",
       "theme": "aa0af79a",
+      "panno.share_hook": "b1d7cb90",
       "fallback_image.alt": "429fac1c",
       "fallback_image.caption": "d27d9baa",
       "description": "3149f232",
@@ -337,7 +348,7 @@
       "then_now[0].text": "9b98a768",
       "then_now[1].then_big": "0aa22675",
       "then_now[1].now_big": "cbdd405f",
-      "then_now[1].text": "4b145446",
+      "then_now[1].text": "9ee676e5",
       "then_now[2].then_big": "edde162d",
       "then_now[2].now_big": "0faa6d75",
       "then_now[2].text": "a4ec3a49"
@@ -389,7 +400,7 @@
     }
   },
   "epoch/suevos-visigodos-e-mouros/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "80581bf20f52",
     "fields": {
       "slug": "84a10dc9",
@@ -419,20 +430,21 @@
     }
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/en": {
-    "date": "2026-10-31",
-    "hash": "47a95d7e09a7",
+    "date": "2026-11-07",
+    "hash": "0c2390469092",
     "fields": {
       "slug": "be684acf",
       "name": "f5ee0745",
       "years_label": "0f0c07aa",
       "theme": "3fec4772",
+      "panno.share_hook": "f408d935",
       "fallback_image.alt": "ab58614b",
       "fallback_image.caption": "632ad236",
       "intro": "d28990b3",
       "then_now[0].then_big": "28ec0398",
       "then_now[0].now_big": "b45c9142",
       "then_now[0].text": "1be0e753",
-      "then_now[1].then_big": "69ba97dc",
+      "then_now[1].then_big": "28c2f8d1",
       "then_now[1].now_big": "f5c28493",
       "then_now[1].text": "e678db18",
       "then_now[2].then_big": "3929016b",
@@ -485,6 +497,40 @@
       "then_now[2].text": "fe89cfa6"
     }
   },
+  "festa/natal/en": {
+    "date": "2026-11-07",
+    "hash": "d5714319acac",
+    "fields": {
+      "date": "90cddb82",
+      "name": "a09948e8",
+      "head_date": "b1a2134d",
+      "head_title": "8bed8f3f",
+      "head_line": "d8f8617c",
+      "head_link": "a053779e",
+      "art_title": "dd3cc126",
+      "lead": "c74d8219",
+      "og_description": "6f3670ab",
+      "off_window": "df16a6e0",
+      "bolo.aria": "17588d90",
+      "bolo.hint": "8b742433",
+      "bolo.fruit.head": "11d5bcdc",
+      "bolo.fruit.text": "be6f1b9e",
+      "bolo.brinde.head": "2547636b",
+      "bolo.brinde.text": "dab23339",
+      "bolo.fava.head": "e75cac23",
+      "bolo.fava.text": "3dcbe56c",
+      "bolo.done": "a3ad2053",
+      "bolo.again": "143101c9",
+      "traditions.0.title": "752b6b9d",
+      "traditions.0.text": "fddbb251",
+      "traditions.1.title": "4a505853",
+      "traditions.1.text": "662226d0",
+      "traditions.2.title": "1b8d82e3",
+      "traditions.2.text": "b1d05db5",
+      "traditions.3.title": "aa05b837",
+      "traditions.3.text": "10be0008"
+    }
+  },
   "festa/natal/pt": {
     "date": "2026-11-07",
     "hash": "01c967b9630d",
@@ -519,6 +565,32 @@
       "traditions.3.text": "80ae8571"
     }
   },
+  "festa/restauracao/en": {
+    "date": "2026-11-07",
+    "hash": "67912170e3e4",
+    "fields": {
+      "date": "2689aa65",
+      "name": "8a27c7f4",
+      "head_date": "5df5d31b",
+      "head_title": "215d6a8b",
+      "head_line": "8c53fe09",
+      "head_link": "a053779e",
+      "art_title": "d3ff895f",
+      "lead": "514c287e",
+      "og_description": "1797ecc7",
+      "off_window": "fd7200d9",
+      "traditions.0.title": "26b6c269",
+      "traditions.0.text": "8b4c54c1",
+      "traditions.1.title": "5f66f4e8",
+      "traditions.1.text": "fac6f137",
+      "traditions.2.title": "54d25a90",
+      "traditions.2.text": "2fc9d915",
+      "traditions.3.title": "5dcc8a24",
+      "traditions.3.text": "da9cda89",
+      "traditions.3.link.story": "a042fe71",
+      "traditions.3.link.label": "2398ba31"
+    }
+  },
   "festa/restauracao/pt": {
     "date": "2026-11-07",
     "hash": "6ab78f134e48",
@@ -545,11 +617,25 @@
       "traditions.3.link.label": "9d951d9f"
     }
   },
+  "meanwhile/a-portuguesa-1890/en": {
+    "date": "2026-11-07",
+    "hash": "68e9de4e71ae",
+    "fields": {
+      "meanwhile[1].text": "b9db810c"
+    }
+  },
   "meanwhile/a-portuguesa-1890/pt": {
     "date": "2026-11-07",
     "hash": "78dcc765b461",
     "fields": {
       "meanwhile[2].text": "43a6a4ee"
+    }
+  },
+  "meanwhile/batalha-da-salga-1581/en": {
+    "date": "2026-11-07",
+    "hash": "cd90fbecbad1",
+    "fields": {
+      "meanwhile[1].text": "df6b4f51"
     }
   },
   "meanwhile/batalha-da-salga-1581/pt": {
@@ -559,11 +645,32 @@
       "meanwhile[2].text": "846577c4"
     }
   },
+  "meanwhile/bojador-1434/en": {
+    "date": "2026-11-07",
+    "hash": "b7ac27229ddf",
+    "fields": {
+      "meanwhile[1].text": "c401165e"
+    }
+  },
+  "meanwhile/braguinha-ukulele-1879/en": {
+    "date": "2026-11-07",
+    "hash": "b4440fbddb30",
+    "fields": {
+      "meanwhile[1].text": "fd0bc515"
+    }
+  },
   "meanwhile/braguinha-ukulele-1879/pt": {
     "date": "2026-11-07",
     "hash": "90f943dd5625",
     "fields": {
       "meanwhile[2].text": "01c435ad"
+    }
+  },
+  "meanwhile/cantino-1502/en": {
+    "date": "2026-11-07",
+    "hash": "61f545b1b289",
+    "fields": {
+      "meanwhile[1].text": "da487d1e"
     }
   },
   "meanwhile/cantino-1502/pt": {
@@ -573,11 +680,25 @@
       "meanwhile[2].text": "8f12cec6"
     }
   },
+  "meanwhile/capela-sao-joao-baptista/en": {
+    "date": "2026-11-07",
+    "hash": "2f76d8aac290",
+    "fields": {
+      "meanwhile[0].text": "4c601297"
+    }
+  },
   "meanwhile/capela-sao-joao-baptista/pt": {
     "date": "2026-11-07",
     "hash": "b99307910cd8",
     "fields": {
       "meanwhile[0].text": "d91dc694"
+    }
+  },
+  "meanwhile/carros-de-cesto-monte/en": {
+    "date": "2026-11-07",
+    "hash": "623816362901",
+    "fields": {
+      "meanwhile[1].text": "a4ad3d56"
     }
   },
   "meanwhile/carros-de-cesto-monte/pt": {
@@ -587,11 +708,32 @@
       "meanwhile[2].text": "f7161b27"
     }
   },
+  "meanwhile/catarina-cha-1662/en": {
+    "date": "2026-11-07",
+    "hash": "445cc20c2b0c",
+    "fields": {
+      "meanwhile[0].text": "6daaa180"
+    }
+  },
   "meanwhile/catarina-cha-1662/pt": {
     "date": "2026-11-07",
     "hash": "d56bd93980a9",
     "fields": {
       "meanwhile[0].text": "bb547fe2"
+    }
+  },
+  "meanwhile/cha-gorreana/en": {
+    "date": "2026-11-07",
+    "hash": "a323c13d4e84",
+    "fields": {
+      "meanwhile[1].text": "c8eca048"
+    }
+  },
+  "meanwhile/corte-brasil-1807/en": {
+    "date": "2026-11-07",
+    "hash": "b653eef5b657",
+    "fields": {
+      "meanwhile[0].text": "7b036430"
     }
   },
   "meanwhile/corte-brasil-1807/pt": {
@@ -601,11 +743,25 @@
       "meanwhile[0].text": "39913146"
     }
   },
+  "meanwhile/douro-1756/en": {
+    "date": "2026-11-07",
+    "hash": "ad0a226ec3c7",
+    "fields": {
+      "meanwhile[0].text": "a419d270"
+    }
+  },
   "meanwhile/douro-1756/pt": {
     "date": "2026-11-07",
     "hash": "17c7d1dc1e0e",
     "fields": {
       "meanwhile[0].text": "472779e3"
+    }
+  },
+  "meanwhile/elevador-bom-jesus/en": {
+    "date": "2026-11-07",
+    "hash": "2ae51f04cf43",
+    "fields": {
+      "meanwhile[1].text": "e436b07a"
     }
   },
   "meanwhile/elevador-bom-jesus/pt": {
@@ -615,11 +771,32 @@
       "meanwhile[2].text": "2237a77c"
     }
   },
+  "meanwhile/elevador-santa-justa/en": {
+    "date": "2026-11-07",
+    "hash": "8748faa0742d",
+    "fields": {
+      "meanwhile[0].text": "cd9ea3a1"
+    }
+  },
   "meanwhile/elevador-santa-justa/pt": {
     "date": "2026-11-07",
     "hash": "3c900a1b0717",
     "fields": {
       "meanwhile[0].text": "6f2f6b6c"
+    }
+  },
+  "meanwhile/falsos-sebastiao/en": {
+    "date": "2026-11-07",
+    "hash": "7448c1a61028",
+    "fields": {
+      "meanwhile[1].text": "83835984"
+    }
+  },
+  "meanwhile/gravuras-coa-1995/en": {
+    "date": "2026-11-07",
+    "hash": "86a88b4949fe",
+    "fields": {
+      "meanwhile[0].text": "c1e41837"
     }
   },
   "meanwhile/gravuras-coa-1995/pt": {
@@ -629,11 +806,32 @@
       "meanwhile[0].text": "8d21e015"
     }
   },
+  "meanwhile/hanno-1514/en": {
+    "date": "2026-11-07",
+    "hash": "5ea0e79a9ea0",
+    "fields": {
+      "meanwhile[1].text": "f3563636"
+    }
+  },
+  "meanwhile/legiao-portuguesa-1812/en": {
+    "date": "2026-11-07",
+    "hash": "c47a96082f5c",
+    "fields": {
+      "meanwhile[0].text": "1080bcbf"
+    }
+  },
   "meanwhile/legiao-portuguesa-1812/pt": {
     "date": "2026-11-07",
     "hash": "8cbe40178945",
     "fields": {
       "meanwhile[0].text": "a934cd51"
+    }
+  },
+  "meanwhile/livraria-lello/en": {
+    "date": "2026-11-07",
+    "hash": "f1533125a16a",
+    "fields": {
+      "meanwhile[1].text": "c59eeed5"
     }
   },
   "meanwhile/livraria-lello/pt": {
@@ -643,11 +841,25 @@
       "meanwhile[2].text": "569d5bf9"
     }
   },
+  "meanwhile/mafra-sinos-1717/en": {
+    "date": "2026-11-07",
+    "hash": "92f19acc6038",
+    "fields": {
+      "meanwhile[1].text": "728eee96"
+    }
+  },
   "meanwhile/mafra-sinos-1717/pt": {
     "date": "2026-11-07",
     "hash": "81e9c7b8ca5a",
     "fields": {
       "meanwhile[2].text": "3e70fe22"
+    }
+  },
+  "meanwhile/miragaia-2009/en": {
+    "date": "2026-11-07",
+    "hash": "95929c3a8d51",
+    "fields": {
+      "meanwhile[0].text": "8a195fa2"
     }
   },
   "meanwhile/miragaia-2009/pt": {
@@ -657,11 +869,32 @@
       "meanwhile[0].text": "1508b3eb"
     }
   },
+  "meanwhile/ninho-paimogo-1993/en": {
+    "date": "2026-11-07",
+    "hash": "3e57fd533026",
+    "fields": {
+      "meanwhile[0].text": "58b516f4"
+    }
+  },
   "meanwhile/ninho-paimogo-1993/pt": {
     "date": "2026-11-07",
     "hash": "f5d210c4a0cd",
     "fields": {
       "meanwhile[0].text": "9f1dd8eb"
+    }
+  },
+  "meanwhile/palacio-da-pena/en": {
+    "date": "2026-11-07",
+    "hash": "fd6017c17a0b",
+    "fields": {
+      "meanwhile[1].text": "9f86eb6f"
+    }
+  },
+  "meanwhile/pasteis-de-belem-1837/en": {
+    "date": "2026-11-07",
+    "hash": "d5de7c560db5",
+    "fields": {
+      "meanwhile[0].text": "20aa4aed"
     }
   },
   "meanwhile/pasteis-de-belem-1837/pt": {
@@ -671,11 +904,25 @@
       "meanwhile[0].text": "ef28d7ca"
     }
   },
+  "meanwhile/pedra-da-mua/en": {
+    "date": "2026-11-07",
+    "hash": "d222508da366",
+    "fields": {
+      "meanwhile[0].text": "74afb44f"
+    }
+  },
   "meanwhile/pedra-da-mua/pt": {
     "date": "2026-11-07",
     "hash": "8031774d5714",
     "fields": {
       "meanwhile[0].text": "2f4bf15e"
+    }
+  },
+  "meanwhile/ponte-maria-pia-1877/en": {
+    "date": "2026-11-07",
+    "hash": "1f3b7d3bc178",
+    "fields": {
+      "meanwhile[1].text": "95b8748a"
     }
   },
   "meanwhile/ponte-maria-pia-1877/pt": {
@@ -685,11 +932,25 @@
       "meanwhile[2].text": "897e4f94"
     }
   },
+  "meanwhile/ponte-trajano-chaves/en": {
+    "date": "2026-11-07",
+    "hash": "c39c81defb51",
+    "fields": {
+      "meanwhile[0].text": "cbf7035c"
+    }
+  },
   "meanwhile/ponte-trajano-chaves/pt": {
     "date": "2026-11-07",
     "hash": "11f8b5984bd1",
     "fields": {
       "meanwhile[0].text": "2007a718"
+    }
+  },
+  "meanwhile/porca-de-murca/en": {
+    "date": "2026-11-07",
+    "hash": "622f9b31469d",
+    "fields": {
+      "meanwhile[0].text": "8dfafeb0"
     }
   },
   "meanwhile/porca-de-murca/pt": {
@@ -699,11 +960,39 @@
       "meanwhile[0].text": "11404875"
     }
   },
+  "meanwhile/prisao-joanina/en": {
+    "date": "2026-11-07",
+    "hash": "2e82ca9ec589",
+    "fields": {
+      "meanwhile[1].text": "5b108530"
+    }
+  },
+  "meanwhile/restauracao-1640/en": {
+    "date": "2026-11-07",
+    "hash": "792197cb3930",
+    "fields": {
+      "meanwhile[1].text": "e26ff7f0"
+    }
+  },
+  "meanwhile/rinoceronte-1515/en": {
+    "date": "2026-11-07",
+    "hash": "01933901039c",
+    "fields": {
+      "meanwhile[0].text": "ef4316d7"
+    }
+  },
   "meanwhile/rinoceronte-1515/pt": {
     "date": "2026-11-07",
     "hash": "7cfc1f3426d3",
     "fields": {
       "meanwhile[0].text": "ffaf8a04"
+    }
+  },
+  "meanwhile/termas-vipasca/en": {
+    "date": "2026-11-07",
+    "hash": "202ea4e83bf6",
+    "fields": {
+      "meanwhile[0].text": "24816130"
     }
   },
   "meanwhile/termas-vipasca/pt": {
@@ -713,6 +1002,13 @@
       "meanwhile[0].text": "332b968a"
     }
   },
+  "meanwhile/travessia-atlantico-sul-1922/en": {
+    "date": "2026-11-07",
+    "hash": "2a078b29bf10",
+    "fields": {
+      "meanwhile[1].text": "9d5bf335"
+    }
+  },
   "meanwhile/travessia-atlantico-sul-1922/pt": {
     "date": "2026-11-07",
     "hash": "0ce3eac5560f",
@@ -720,11 +1016,48 @@
       "meanwhile[2].text": "2b131764"
     }
   },
+  "meanwhile/tripeiros-1415/en": {
+    "date": "2026-11-07",
+    "hash": "b751b376fb6e",
+    "fields": {
+      "meanwhile[0].text": "a08c1722"
+    }
+  },
   "meanwhile/tripeiros-1415/pt": {
     "date": "2026-11-07",
     "hash": "5f8b04a1e05d",
     "fields": {
       "meanwhile[0].text": "427906e2"
+    }
+  },
+  "myths/en": {
+    "date": "2026-11-07",
+    "hash": "f0b968d0040a",
+    "fields": {
+      "[0].statement": "ec46fd51",
+      "[0].answer": "360bf906",
+      "[1].statement": "c4fb4a38",
+      "[1].answer": "069029a9",
+      "[2].statement": "3ad5663d",
+      "[2].answer": "060af289",
+      "[3].statement": "d7db1ec6",
+      "[3].answer": "c31b70d7",
+      "[4].statement": "5978390e",
+      "[4].answer": "15494cef",
+      "[5].statement": "b04d25ed",
+      "[5].answer": "d054f6ca",
+      "[6].statement": "dc22051d",
+      "[6].answer": "643c9e15",
+      "[7].statement": "7226b715",
+      "[7].answer": "f81d104d",
+      "[8].statement": "c8761eac",
+      "[8].answer": "8e1a6a77",
+      "[9].statement": "10eb8c5f",
+      "[9].answer": "52a4153f",
+      "[10].statement": "18caab2c",
+      "[10].answer": "bb89e254",
+      "[11].statement": "6433e501",
+      "[11].answer": "e80310af"
     }
   },
   "myths/pt": {
@@ -758,13 +1091,13 @@
     }
   },
   "static/about/en": {
-    "date": "2026-10-27",
-    "hash": "48d20a6b6abf",
+    "date": "2026-11-07",
+    "hash": "5c9e8b7e1d84",
     "fields": {
       "lead": "88fa9a22",
       "more[0]": "801abb96",
       "sections[foi-aqui].heading": "49e9094b",
-      "sections[foi-aqui].paragraphs[0]": "fa9186f7",
+      "sections[foi-aqui].paragraphs[0]": "40e95c25",
       "sections[como-ler].heading": "96b291fe",
       "sections[como-ler].paragraphs[0]": "aca870ce",
       "sections[como-ler].items[0]": "c7c0a3a4",
@@ -785,9 +1118,11 @@
       "sections[quem-faz].paragraphs[2]": "5c704110",
       "sections[ajudar].heading": "a899a3d4",
       "sections[ajudar].items[0]": "27ad6969",
-      "sections[ajudar].items[1]": "e6b7b9ce",
+      "sections[ajudar].items[1]": "8c4e6be1",
       "sections[ajudar].items[2]": "94c12792",
-      "sections[ajudar].after[0]": "5998f5df"
+      "sections[ajudar].after[0]": "fbd3eb5e",
+      "sections[ajudar].after[1]": "f6869749",
+      "sections[ajudar].after[2]": "6df91a90"
     }
   },
   "static/about/pt": {
@@ -859,8 +1194,8 @@
     }
   },
   "static/legal/en": {
-    "date": "2026-10-29",
-    "hash": "39ce56e68253",
+    "date": "2026-11-07",
+    "hash": "1bcb3cd37674",
     "fields": {
       "sections[resumo].heading": "9e90b1ac",
       "sections[resumo].items[0]": "6ca61acb",
@@ -868,14 +1203,14 @@
       "sections[resumo].items[2]": "97fc1a25",
       "sections[cookies].heading": "141395eb",
       "sections[cookies].paragraphs[0]": "85615952",
-      "sections[cookies].paragraphs[1]": "b39ccb41",
+      "sections[cookies].paragraphs[1]": "61615df9",
       "sections[licencas].heading": "7c6f13c4",
-      "sections[licencas].items[0]": "6fe5b87d",
-      "sections[licencas].items[1]": "6d265705",
+      "sections[licencas].items[0]": "a0c6d71d",
+      "sections[licencas].items[1]": "1cee6d2f",
       "sections[licencas].items[2]": "a14f7259",
       "sections[licencas].items[3]": "5c17408b",
       "sections[privacidade].heading": "e3ed9c3a",
-      "sections[privacidade].paragraphs[0]": "3e4dac6f",
+      "sections[privacidade].paragraphs[0]": "e614c8d9",
       "sections[contagem].heading": "5ecb1515",
       "sections[contagem].paragraphs[0]": "1da3f452",
       "sections[terceiros].heading": "52430d31",
@@ -883,7 +1218,7 @@
       "sections[terceiros].items[0]": "40823fd2",
       "sections[terceiros].items[1]": "a51930ca",
       "sections[terceiros].items[2]": "bebe50b8",
-      "sections[terceiros].items[3]": "953bda4c",
+      "sections[terceiros].items[3]": "c9ff7733",
       "sections[terceiros].after[0]": "761b1de6",
       "sections[aviso].heading": "129c678f",
       "sections[aviso].paragraphs[0]": "91f42e48",
@@ -961,8 +1296,8 @@
     }
   },
   "static/method/en": {
-    "date": "2026-10-27",
-    "hash": "90c81c377380",
+    "date": "2026-11-07",
+    "hash": "0b246a9b86f8",
     "fields": {
       "lead": "e6a5db5f",
       "sections[etiquetas].heading": "67d8c3df",
@@ -980,7 +1315,7 @@
       "sections[correcoes].heading": "0079708a",
       "sections[correcoes].paragraphs[0]": "399afcf1",
       "sections[idiomas].heading": "318655ce",
-      "sections[idiomas].paragraphs[0]": "eef635d4"
+      "sections[idiomas].paragraphs[0]": "86a9f92e"
     }
   },
   "static/method/pt": {
@@ -1030,7 +1365,7 @@
     }
   },
   "thread/comida-e-vinho/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "1ec1febf29b1",
     "fields": {
       "slug": "f5e27af4",
@@ -1057,7 +1392,7 @@
     }
   },
   "thread/engenho/en": {
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "hash": "b2dc782589d2",
     "fields": {
       "slug": "8c85b663",
@@ -1084,7 +1419,7 @@
     }
   },
   "thread/gente-como-nos/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "fb57983e9a1a",
     "fields": {
       "slug": "69e33848",
@@ -1111,7 +1446,7 @@
     }
   },
   "thread/mar/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "9e2cbe57999f",
     "fields": {
       "slug": "4a69f19c",
@@ -1138,12 +1473,12 @@
     }
   },
   "thread/natureza/en": {
-    "date": "2026-10-27",
-    "hash": "788d37677c69",
+    "date": "2026-11-07",
+    "hash": "6f1fb696283f",
     "fields": {
       "slug": "5697abca",
       "name": "c71ce8cc",
-      "description": "48a28f89"
+      "description": "295d1e84"
     }
   },
   "thread/natureza/pt": {
@@ -1165,7 +1500,7 @@
     }
   },
   "thread/poder-e-revolta/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "92de69281148",
     "fields": {
       "slug": "fa0cc1fc",
@@ -1192,7 +1527,7 @@
     }
   },
   "ui/a11y/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "4e9ae3600017",
     "fields": {
       "a11y.skip_to_content": "ac576a66",
@@ -1225,8 +1560,8 @@
     }
   },
   "ui/card/en": {
-    "date": "2026-10-28",
-    "hash": "152540ddc1b1",
+    "date": "2026-11-07",
+    "hash": "82cac6707d70",
     "fields": {
       "card.breadcrumb": "2bd873d6",
       "card.tags": "993bbf7f",
@@ -1240,18 +1575,25 @@
       "card.image_source": "0e570ca6",
       "card.license_public_domain": "8c3ff64b",
       "card.story_heading": "c34eb7c8",
+      "card.meanwhile_title": "22da70ec",
       "card.context": "a6e600a1",
       "card.official_site": "b16446d4",
       "card.accessed": "6b0ad162",
       "card.share_copied": "71af38a2",
       "card.share_failed": "93af6ce9",
       "card.epoch_nav": "b5c52cb9",
-      "card.prev": "a57b08a4",
-      "card.next": "1ff57a29",
+      "card.footer_prev": "062547f0",
+      "card.footer_epoch": "fb9e9ef8",
+      "card.footer_next": "d5721168",
       "card.not_translated": "cc119d1a",
       "card.more_toggle": "d47d7cb0",
       "card.next_story": "1ff57a29",
       "card.year_bc": "d68797d9",
+      "card.year_ad": "146eafc9",
+      "card.ago_million": "713644c1",
+      "card.ago_thousand": "7e907854",
+      "card.ago_scale_million": "eda9a5dd",
+      "card.ago_scale_thousand": "f0b243b8",
       "card.next_epoch": "79ef7367",
       "card.all_epochs": "1c505039",
       "card.sources_checked": "606cf669",
@@ -1346,12 +1688,12 @@
     }
   },
   "ui/epoch/en": {
-    "date": "2026-10-29",
-    "hash": "9353ec1a4bab",
+    "date": "2026-11-07",
+    "hash": "42c9ecfe2fc8",
     "fields": {
       "epoch.chips_label": "1206bb79",
       "epoch.timeline_label": "7ea9ba91",
-      "epoch.neighbours_label": "31e92d15",
+      "epoch.neighbours_label": "a490f174",
       "epoch.prev": "d7b1cbc6",
       "epoch.next": "8608262d",
       "epoch.more_soon": "334df466",
@@ -1361,10 +1703,8 @@
       "epoch.then_now_estimate": "79e1d925",
       "epoch.then_now_calc": "361900df",
       "epoch.then_now_note_estimate": "da29483b",
-      "epoch.then_now_note_calc": "7ae2513b",
-      "epoch.then_now_more": "6681e0ed",
+      "epoch.then_now_note_calc": "ddd2c560",
       "epoch.then_now_sources": "caf85b08",
-      "epoch.read_progress": "cdb0064e",
       "epoch.filter_all": "a52ace42",
       "epoch.view_label": "dcc839a4",
       "epoch.empty": "e8de1882",
@@ -1425,7 +1765,7 @@
     }
   },
   "ui/family/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "95d3fe6dbfce",
     "fields": {
       "family.button": "900727a4",
@@ -1494,7 +1834,7 @@
     }
   },
   "ui/feed/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "4d335448cc2b",
     "fields": {
       "feed.expand_story": "f6dd46fb"
@@ -1514,6 +1854,14 @@
       "feed.expand_story": "c010195f"
     }
   },
+  "ui/festa/en": {
+    "date": "2026-11-07",
+    "hash": "cdd4af4b80c1",
+    "fields": {
+      "festa.history": "55d039bc",
+      "festa.traditions": "edf33612"
+    }
+  },
   "ui/festa/pt": {
     "date": "2026-11-07",
     "hash": "908dcb18f750",
@@ -1523,15 +1871,17 @@
     }
   },
   "ui/footer/en": {
-    "date": "2026-10-28",
-    "hash": "83639dab4701",
+    "date": "2026-11-07",
+    "hash": "21f8ff84213d",
     "fields": {
       "footer.about": "c6c67de4",
       "footer.method": "353d6b66",
       "footer.report": "6422c7dc",
+      "footer.share": "475fb9b2",
       "footer.legal": "8c14d709",
       "footer.licenses": "716ae8ad",
-      "footer.privacy": "01bbf5ef"
+      "footer.privacy": "01bbf5ef",
+      "footer.myths": "b08fac08"
     }
   },
   "ui/footer/pt": {
@@ -1561,7 +1911,7 @@
     }
   },
   "ui/gate/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "d9572c8dfa81",
     "fields": {
       "gate.age_12": "69e3ae2b",
@@ -1597,21 +1947,27 @@
     }
   },
   "ui/home/en": {
-    "date": "2026-10-31",
-    "hash": "d4baf53dbe86",
+    "date": "2026-11-07",
+    "hash": "26ece5525481",
     "fields": {
       "home.epochs_heading": "76f67d07",
       "home.hook_title": "d430ec48",
       "home.intro": "43a58774",
       "home.cta_read": "70ce1b58",
       "home.continue": "63f6ded8",
+      "home.new_since": "d35e1258",
+      "home.new_era": "06d9950a",
       "home.open_map": "298b0f61",
       "home.showcase_heading": "a08cf344",
       "home.timeline_label": "1082b2b0",
       "home.timeline_prev": "b08d9350",
       "home.timeline_next": "655d2a16",
       "home.threads_heading": "3e42e385",
-      "home.threads_intro": "e5b0ef25"
+      "home.threads_intro": "e5b0ef25",
+      "home.how": "db83cdb4",
+      "home.myths_title": "32adaf87",
+      "home.myths_line": "97073875",
+      "home.myths_play": "436e6101"
     }
   },
   "ui/home/pt": {
@@ -1657,7 +2013,7 @@
     }
   },
   "ui/map/en": {
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "hash": "6ef4dc03c30f",
     "fields": {
       "map.home": "4dec3361",
@@ -1816,7 +2172,7 @@
     }
   },
   "ui/mascot/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "c16aedff7f13",
     "fields": {
       "mascot.walk": "2fde6a80",
@@ -1858,6 +2214,49 @@
       "mascot.stay": "0f272fb2",
       "mascot.sad": "1bad4d03",
       "mascot.head": "451bc3ff"
+    }
+  },
+  "ui/myths/en": {
+    "date": "2026-11-07",
+    "hash": "d886a17c0238",
+    "fields": {
+      "myths.lead": "73e126ef",
+      "myths.og_title_page": "27f885d5",
+      "myths.og_title": "9d356cf7",
+      "myths.og_description": "a4933902",
+      "myths.share_text": "2d968cb4",
+      "myths.og_label": "32adaf87",
+      "myths.answer": "b2a3aa60",
+      "myths.myth": "e50ea2d7",
+      "myths.fact": "2558566c",
+      "myths.part": "deb0147a",
+      "myths.question": "8cf0e32e",
+      "myths.full_story": "3e4a790a",
+      "myths.link": "ce50e9c5",
+      "myths.end": "21ebe1a4",
+      "myths.end_link": "31f63a14",
+      "myths.progress_label": "8fcf26c8",
+      "myths.step": "232be072",
+      "myths.sq_label": "5b01df23",
+      "myths.sq_empty": "0742a590",
+      "myths.sq_hit": "27042f4e",
+      "myths.sq_miss": "8810ad58",
+      "myths.outcome_hit": "ae3bcf71",
+      "myths.outcome_miss": "6f3efa36",
+      "myths.outcome_part": "c75d3ef8",
+      "myths.next": "1ff57a29",
+      "myths.finish": "f354093b",
+      "myths.score": "3bb6df42",
+      "myths.band_low": "4cb5c810",
+      "myths.band_mid": "7b0a0d4d",
+      "myths.band_high": "ebd5717d",
+      "myths.misses": "11514b92",
+      "myths.again": "5ef30d27",
+      "myths.read": "b31ed264",
+      "myths.share_title": "6869572f",
+      "myths.share_ask": "10a3905c",
+      "myths.copied": "8d525e5f",
+      "myths.best": "2eb6a852"
     }
   },
   "ui/myths/pt": {
@@ -1904,7 +2303,7 @@
     }
   },
   "ui/nav/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "79f683f4c026",
     "fields": {
       "nav.home": "3a786953",
@@ -1934,7 +2333,7 @@
     }
   },
   "ui/notfound/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "2ef96340479d",
     "fields": {
       "notfound.title": "090deafc",
@@ -1961,8 +2360,8 @@
     }
   },
   "ui/pages/en": {
-    "date": "2026-10-28",
-    "hash": "a1000c397b4b",
+    "date": "2026-11-07",
+    "hash": "27428ba8ffb6",
     "fields": {
       "pages.about.title": "c6c67de4",
       "pages.about.description": "47ab5812",
@@ -1970,12 +2369,16 @@
       "pages.method.description": "5617f93c",
       "pages.report.title": "6422c7dc",
       "pages.report.description": "249f6b7c",
+      "pages.share.title": "475fb9b2",
+      "pages.share.description": "1b435f87",
       "pages.legal.title": "8c14d709",
       "pages.legal.description": "f51b60c9",
       "pages.map.title": "be176b00",
       "pages.map.description": "7b7039ce",
       "pages.surprise.title": "fc704e0c",
-      "pages.surprise.description": "79a7313e"
+      "pages.surprise.description": "79a7313e",
+      "pages.myths.title": "b08fac08",
+      "pages.myths.description": "309b4e30"
     }
   },
   "ui/pages/pt": {
@@ -2018,6 +2421,26 @@
       "pages.surprise.description": "94898ce7"
     }
   },
+  "ui/panno/en": {
+    "date": "2026-11-07",
+    "hash": "6c532e6f3708",
+    "fields": {
+      "panno.hint": "af47185e",
+      "panno.zoom": "98296db8",
+      "panno.close": "7d9eb7ac",
+      "panno.share": "29887a5f",
+      "panno.copied": "d12860c2",
+      "panno.share_text": "2467eaba",
+      "panno.page_title": "b3cd69b7",
+      "panno.invite": "8f89aba4",
+      "panno.to_epoch": "7d7a55fa",
+      "panno.og_title": "a9779125",
+      "panno.og_description": "a4480c54",
+      "panno.continue": "b4b02d9f",
+      "panno.done": "42a02b70",
+      "panno.story_line": "822499e4"
+    }
+  },
   "ui/panno/pt": {
     "date": "2026-11-07",
     "hash": "a7fbd56dad8a",
@@ -2039,15 +2462,29 @@
     }
   },
   "ui/plural/en": {
-    "date": "2026-10-27",
-    "hash": "7c6cc09e404f",
+    "date": "2026-11-07",
+    "hash": "3aa473882865",
     "fields": {
       "plural.stories_one": "0910cedb",
       "plural.stories_other": "3fd4ec19",
       "plural.places_one": "f4648713",
       "plural.places_other": "eb7e38c6",
       "plural.epochs_more_one": "ea37fa0b",
-      "plural.epochs_more_other": "1b4b54f7"
+      "plural.epochs_more_other": "1b4b54f7",
+      "plural.new_stories_one": "0e7d43da",
+      "plural.new_stories_other": "f563a8ca",
+      "plural.new_plus_one": "60616cd9",
+      "plural.new_plus_other": "60616cd9",
+      "plural.new_epochs_one": "a1e274c5",
+      "plural.new_epochs_other": "cb775887",
+      "plural.then_now_more_one": "c6cf0f8b",
+      "plural.then_now_more_other": "6681e0ed",
+      "plural.read_progress_one": "cdb0064e",
+      "plural.read_progress_other": "cdb0064e",
+      "plural.panno_count_one": "ad136c1a",
+      "plural.panno_count_other": "ad136c1a",
+      "plural.panno_alt_one": "0e89cb5d",
+      "plural.panno_alt_other": "0e89cb5d"
     }
   },
   "ui/plural/pt": {
@@ -2095,7 +2532,7 @@
     }
   },
   "ui/report/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "a79db33d21ea",
     "fields": {
       "report.lead": "c406d8e1",
@@ -2169,6 +2606,26 @@
       "report.too_short": "a504f1f7"
     }
   },
+  "ui/share/en": {
+    "date": "2026-11-07",
+    "hash": "afa4c8f4e937",
+    "fields": {
+      "share.lead": "57a132df",
+      "share.required": "89db19f6",
+      "share.where_label": "1daaa38f",
+      "share.where_hint": "b5966877",
+      "share.what_label": "483bd490",
+      "share.what_hint": "daa574d3",
+      "share.source_label": "44fd428d",
+      "share.source_hint": "b8267745",
+      "share.email_label": "6680157f",
+      "share.subject": "d6ea4973",
+      "share.note": "4ee0fc6e",
+      "share.sent_title": "c983a8ff",
+      "share.sent_text": "be08818e",
+      "share.report_link": "63cec87b"
+    }
+  },
   "ui/share/pt": {
     "date": "2026-11-07",
     "hash": "c168e14424b0",
@@ -2190,12 +2647,14 @@
     }
   },
   "ui/site/en": {
-    "date": "2026-10-31",
-    "hash": "a792ba9073fb",
+    "date": "2026-11-07",
+    "hash": "ab96bd22d76f",
     "fields": {
       "site.name": "875e6fd9",
       "site.tagline": "113f0565",
       "site.description": "5d4c254f",
+      "site.home_preview_title": "8f758b63",
+      "site.home_preview_description": "f2c9a91f",
       "site.preview_alt_home": "5f79d260",
       "site.preview_alt_page": "721580ed",
       "site.preview_alt_thread": "db29aadf"
@@ -2228,7 +2687,7 @@
     }
   },
   "ui/stub/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "aa0a00d62e2b",
     "fields": {
       "stub.notice": "f3b171b2"
@@ -2249,7 +2708,7 @@
     }
   },
   "ui/surprise/en": {
-    "date": "2026-10-31",
+    "date": "2026-11-07",
     "hash": "7124705d266c",
     "fields": {
       "surprise.picking": "2930d851",
@@ -2279,7 +2738,7 @@
     }
   },
   "ui/theme/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "30cea1c36ce2",
     "fields": {
       "theme.label": "efb52e71",
@@ -2315,7 +2774,7 @@
     }
   },
   "ui/thread/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "cd2a00bda36e",
     "fields": {
       "thread.eras_label": "d1e7cf1c"
@@ -2336,12 +2795,12 @@
     }
   },
   "ui/ui/en": {
-    "date": "2026-10-29",
-    "hash": "289f67dd9bc4",
+    "date": "2026-11-07",
+    "hash": "b620bc7fc6a6",
     "fields": {
       "ui.read_more": "101b512f",
       "ui.more": "40fcf024",
-      "ui.bridge": "c37e9203",
+      "ui.bridge": "afe17ccd",
       "ui.label_documented": "f6751cc4",
       "ui.label_legend": "7482e374",
       "ui.label_debated": "d5951f7e",
@@ -2349,9 +2808,12 @@
       "ui.family_mode": "39b7370f",
       "ui.age_all": "f92b1ab2",
       "ui.share": "29887a5f",
+      "ui.like": "1ea37276",
+      "ui.like_thanks": "1aa7b1c1",
       "ui.report_error": "6422c7dc",
       "ui.read": "3316348d",
       "ui.read_reset": "342c8e82",
+      "ui.new": "18fdd549",
       "ui.read_reset_done": "176efc56",
       "ui.nearby": "a994cd47",
       "ui.open_on_map": "51140831",
@@ -2362,7 +2824,9 @@
       "ui.view_timeline": "9dcff98e",
       "ui.view_grid": "a52fcbbc",
       "ui.sources": "caf85b08",
-      "ui.directions": "46bfe9d0"
+      "ui.directions": "46bfe9d0",
+      "ui.near_more": "d3682a10",
+      "ui.story_myths": "7159aa74"
     }
   },
   "ui/ui/pt": {
@@ -2431,7 +2895,7 @@
     }
   },
   "ui/viz/en": {
-    "date": "2026-10-27",
+    "date": "2026-11-07",
     "hash": "3a469ea208e1",
     "fields": {
       "viz.army_title": "7c5d7cbc",

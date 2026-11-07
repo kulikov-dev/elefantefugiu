@@ -166,6 +166,9 @@ lang_review:
   pt:
     date: '2026-11-07'
     hash: '6218363786c2'
+  en:
+    date: '2026-11-07'
+    hash: '2bae3c26fab3'
   ru:
     date: '2026-10-31'
     hash: '7786a81daba9'
