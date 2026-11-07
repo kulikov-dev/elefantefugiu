@@ -384,6 +384,7 @@ if (want('moment')) {
   ok('moment: all tiles but the last have settled in about 3 s, evenly', early.length < 2 || (span >= 2700 && span <= 3300), `${Math.round(span)} ms`);
   const gap = opened.at(-1).t - (early.at(-1).t + TILE);
   ok('moment: a pause of about 0.4 s before the last tile', opened.length < 2 || (gap >= 350 && gap <= 600), `${Math.round(gap)} ms`);
+  const sheen = s.tl.filter((e) => e.k === 'sheen');
   ok('moment: the glint runs 1.2 s after the last tile', sheen.length === 2 && sheen[0].on && !sheen[1].on && sheen[1].t - sheen[0].t >= 1100 && sheen[0].t >= opened.at(-1).t + 400, JSON.stringify(sheen.map((e) => [e.on, Math.round(e.t)])));
   ok('moment: no rim and no closing line while the tiles open; the rim and the line only after the glint', moments.length === 3 && transparent(moments[0].rim) && moments[0].shareHidden === true && moments[1].t >= (sheen[1]?.t ?? Infinity) && moments[2].t - moments[1].t >= 350, JSON.stringify(moments.map((e) => [e.v, Math.round(e.t)])));
   ok('moment: the flag is set when it starts (before the last tile is open)', opened.length > 0 && opened[0].flag !== null && moments[1]?.flag !== null, JSON.stringify([opened[0]?.flag, moments[1]?.flag]));
