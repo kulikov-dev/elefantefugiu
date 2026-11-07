@@ -1,6 +1,6 @@
-# Epochs with `mvp: true` and a published story are live: 1, 4, 5, 6, 7 (as of 2026-11-04). Estado Novo (8) is `mvp: true` too but has only
+# Epochs with `mvp: true` and a published story are live: 0, 1, 4, 5, 6, 7 (as of 2026-11-07). Estado Novo (8) is `mvp: true` too but has only
 # draft test cards, so it shows as "Coming soon"; its `placeholder` lists the fields that are still provisional (theme, style, fallback_image).
-# Epochs with `mvp: false` (0, 2, 3, 9) come from docs/design.md section 4.1. Epoch 0 "Before Portugal" has
+# Epochs with `mvp: false` (2, 3, 9) come from docs/design.md section 4.1. Epoch 0 "Before Portugal" (the prologue) has
 # order 0 so that it stands first without renumbering the others: `order` is only a sort key. Epochs without a story have no page yet:
 # they only feed the "Coming soon" tiles on the home page and the "Em breve" neighbours.
 # Names, slugs and years_label of those are real data (placeholder: []), but the Portuguese
@@ -15,16 +15,57 @@
     pt: "Prólogo: dinossauros e pedras"
     en: "Prologue: Dinosaurs and Stones"
     ru: "Пролог: динозавры и камни"
+  years:
+    from: -170000000
+    to: -501
   years_label:
-    pt: "há cerca de 150 milhões de anos – séc. VI a.C."
-    en: "about 150 million years ago – 6th c. BC"
-    ru: "около 150 млн лет назад – VI в. до н. э."
+    pt: "há cerca de 170 milhões de anos – séc. VI a.C."
+    en: "about 170 million years ago – 6th c. BC"
+    ru: "около 170 млн лет назад – VI в. до н. э."
+  scale_gap:
+    pt: "⋯ passaram quase 150 milhões de anos ⋯"
+    en: "⋯ nearly 150 million years pass ⋯"
+    ru: "⋯ прошло почти 150 млн лет ⋯"
   theme:
-    pt: "Pegadas de dinossauros, gravuras do Côa, cromeleques"
-    en: "Dinosaur tracks, Côa rock art, stone circles"
-    ru: "Следы динозавров, рисунки Коа, кромлехи"
-  mvp: false
-  placeholder: [theme]
+    pt: "Pegadas de dinossauros e gravuras do Côa"
+    en: "Dinosaur tracks and Côa rock art"
+    ru: "Следы динозавров и рисунки Коа"
+  description:
+    pt: "Antes das pessoas, Portugal era a margem de um jovem oceano Atlântico. As pegadas de dinossauros ficaram nas arribas, e as gravuras da Idade da Pedra foram salvas das águas."
+    en: "Before people, Portugal was the shore of a young Atlantic. Dinosaur tracks survive on the cliffs, and Stone Age engravings were saved from drowning."
+    ru: "До людей Португалия была берегом молодого Атлантического океана. Следы динозавров остались на обрывах, а рисунки каменного века страна спасла от затопления."
+  style:
+    bg: "#f2ece2"
+    accent: "#6b4a2b"
+    heading_font: var(--font-heading)
+    frame: 1px solid var(--color-line)
+  mvp: true
+  panno:
+    image: prologo.jpg
+    cols: 9
+    rows: 6
+    share_hook:
+      pt: "durante séculos, peregrinos vieram ver as pegadas de uma mula, e a mula era um dinossauro"
+      en: "for centuries pilgrims came to see a mule’s hoofprints, and the mule was a dinosaur"
+      ru: "паломники веками шли смотреть на следы мула, а мул оказался динозавром"
+  fallback_image:
+    file: epoca-antes-de-portugal.webp
+    alt:
+      pt: "Ilustração ao estilo do azulejo azul e branco: dinossauros de pescoço comprido atravessam águas pouco fundas junto a uma praia, com pegadas no lodo, araucárias e palmeiras e pterossauros no céu."
+      en: "Blue-and-white azulejo-style illustration: long-necked dinosaurs wade through shallow water by a shore, with tracks in the mud, monkey-puzzle trees and palms, and pterosaurs in the sky."
+      ru: "Иллюстрация в духе сине-белого азулежу: длинношеие динозавры бредут по мелководью у берега, на иле видны следы, вокруг араукарии и пальмы, а в небе летают птерозавры."
+    caption:
+      pt: "Ilustração criada por IA a partir da época do Prólogo. Não é uma imagem histórica."
+      en: "AI-generated illustration based on the Prologue era. Not a historical image."
+      ru: "Иллюстрация создана ИИ по мотивам эпохи Пролога. Не историческое изображение."
+    author: Gemini (AI)
+    license: AI-generated
+    ai: true
+  placeholder: []
+  intro:
+    pt: "Muito antes das pessoas, Portugal era a margem de um jovem oceano Atlântico. Estava apenas a começar a abrir-se, e pelas lagunas daqui andavam os mesmos dinossauros que viviam na América do Norte: os continentes ainda quase se tocavam. As suas pegadas ficaram em arribas sobre o mar e em velhas pedreiras, e numa falésia da Lourinhã apareceram ovos com embriões. Depois chegaram as pessoas e começaram a gravar cavalos e auroques nas rochas. Muito mais tarde, o país salvou essas gravuras de ficarem debaixo de água."
+    en: "Long before people, Portugal was the shore of a young Atlantic Ocean. It was only just beginning to open, and the same dinosaurs that lived in North America walked these lagoons: the continents still nearly touched. Their footprints survive on cliffs above the sea and in old quarries, and eggs with embryos turned up in a cliff near Lourinhã. Then people arrived and began carving horses and aurochs into the rocks. Much later, the country saved those carvings from being drowned."
+    ru: "Задолго до людей Португалия была берегом молодого Атлантического океана. Он только начинал раскрываться, и по здешним лагунам ходили те же динозавры, что жили в Северной Америке: материки тогда ещё почти соприкасались. Их следы остались на скалах над морем и в старых карьерах, а яйца с эмбрионами нашли в обрыве у Лоуриньяна. Потом пришли люди и стали вырезать на скалах лошадей и туров. Эти рисунки страна спасла от затопления."
 - id: avis-e-descobrimentos
   slug:
     pt: avis-e-descobrimentos

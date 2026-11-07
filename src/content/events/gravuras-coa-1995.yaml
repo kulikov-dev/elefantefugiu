@@ -1,0 +1,140 @@
+id: gravuras-coa-1995
+slug:
+  pt: "as-gravuras-que-nao-sabem-nadar"
+  en: "the-engravings-that-cant-swim"
+  ru: "risunki-kotorye-ne-umeyut-plavat"
+title:
+  pt: "As gravuras que não sabem nadar"
+  en: "The Engravings That Can’t Swim"
+  ru: "Рисунки, которые не умеют плавать"
+epoch: antes-de-portugal
+level: frame
+year: -22000
+year_label:
+  pt: "há mais de 20 mil anos"
+  en: "over 20,000 years ago"
+  ru: "больше 20 тысяч лет назад"
+year_scale:
+  pt: "há mais de 20 mil anos"
+  en: "over 20,000 years ago"
+  ru: "больше 20 тыс. лет назад"
+place:
+  name:
+    pt: "Vale do Côa, Vila Nova de Foz Côa"
+    en: "Côa Valley, Vila Nova de Foz Côa"
+    ru: "Долина Коа, Вила-Нова-де-Фош-Коа"
+  short:
+    pt: "Vale do Côa"
+    en: "Côa Valley"
+    ru: "Долина Коа"
+  lat: 41.0056936
+  lon: -7.1051711
+bridge:
+  name: "Penascosa"
+  title:
+    pt: "Rochas da Penascosa, Vale do Côa"
+    en: "Penascosa rocks, Côa Valley"
+    ru: "Скалы Пеньяшкоза, Вале-ду-Коа"
+  address: "Vale do Côa, Vila Nova de Foz Côa"
+  lat: 41.0056936
+  lon: -7.1051711
+  maps_url: "https://www.google.com/maps/place/Penascosa+Prehistoric+Rock-Art+Site+(UNESCO+World+Heritage)/@41.0056976,-7.107746,17z/data=!3m1!4b1!4m6!3m5!1s0xd3c80973e55cdd7:0xfada3bdf1a2edad9!8m2!3d41.0056936!4d-7.1051711!16s%2Fg%2F11bv3mp2hy"
+  url: "https://arte-coa.pt/"
+  note:
+    pt: "Os cavalos e os auroques estão gravados nas rochas mesmo junto à água."
+    en: "The horses and aurochs are carved into rocks right by the water."
+    ru: "Лошади и туры вырезаны на скалах у самой воды."
+threads:
+  - engenho
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: 'all'
+sensitive: false
+hook:
+  pt: "Uma barragem foi cancelada por causa de gravuras da Idade da Pedra."
+  en: "A dam was canceled because of Stone Age rock art."
+  ru: "Стройку плотины отменили из-за рисунков каменного века."
+story:
+  pt: >-
+    No início dos anos 1990 começou a construção de uma barragem no rio Côa, no nordeste de Portugal. A albufeira ia inundar o vale.
+
+    Durante as obras, arqueólogos repararam em figuras gravadas nas rochas de xisto junto ao rio: cavalos com crinas, auroques, veados e cabras-monteses. As gravuras mais antigas têm mais de 20 mil anos. Se a barragem fosse concluída, ficariam para sempre debaixo de água.
+
+    Em 1994 os jornais noticiaram a descoberta, e habitantes, cientistas e jornalistas de todo o país saíram em defesa das gravuras. O lema passou a ser «As gravuras não sabem nadar». Em novembro de 1995, o novo primeiro-ministro, António Guterres, cancelou a obra, e em vez de uma albufeira o vale ganhou um parque arqueológico.
+  en: >-
+    In the early 1990s, work began on a dam on the Côa River in northeastern Portugal. Its reservoir was going to flood the valley.
+
+    While construction went on, archaeologists noticed figures carved into the schist rocks by the river: horses with manes, aurochs, deer, and wild goats. The oldest are more than 20,000 years old. If the dam had been finished, they would have been underwater forever.
+
+    In 1994 the newspapers reported the find, and locals, scientists, and journalists across the country rallied to save the engravings. Their slogan became “The engravings can’t swim.” In November 1995 the new prime minister, António Guterres, canceled the project, and instead of a reservoir the valley got an archaeological park.
+  ru: >-
+    В начале 1990-х на реке Коа, на северо-востоке Португалии, начали строить плотину. Водохранилище должно было затопить долину.
+
+    Пока шли работы, археологи заметили на сланцевых скалах у реки вырезанных лошадей с гривами, туров, оленей и горных козлов. Самым старым рисункам больше 20 тысяч лет. Если бы плотину достроили, они навсегда ушли бы под воду.
+
+    В 1994 году о находке написали газеты, и за рисунки вступились жители, учёные и журналисты по всей стране. Лозунгом стала фраза «Гравюры не умеют плавать». В ноябре 1995 года новый премьер-министр Антониу Гутерреш отменил строительство, и вместо водохранилища в долине устроили археологический парк.
+meanwhile:
+  - scope: world
+    year: -22000
+    text:
+      pt: "Glaciares cobriam a Escandinávia, e o sul do atual mar do Norte era terra firme"
+      en: "Glaciers covered Scandinavia, and the southern North Sea was dry land"
+      ru: "Ледники покрывали Скандинавию, а южная часть нынешнего Северного моря была сушей"
+    source: "https://en.wikipedia.org/wiki/Doggerland"
+more:
+  pt: >-
+    Quem viu primeiro as gravuras ainda se discute: fala-se de 1991 e de 1993. Mas só se tornaram conhecidas no outono de 1994, com a obra já em curso, e foi então que começou a campanha. O lema brincava com a canção «Nadar», dos Black Company, um grupo de rap muito popular na altura.
+
+
+    Não se salvou uma rocha, mas uma galeria inteira. As gravuras foram feitas ao longo de muitos milhares de anos, e as mais antigas têm mais de 20 mil anos. Em geral, esta arte da Idade da Pedra encontra-se em grutas, mas aqui está ao ar livre.
+
+
+    Em 1998 o vale entrou na lista do Património Mundial da UNESCO. E Guterres, que parou a barragem, viria a ser secretário-geral da ONU.
+  en: >-
+    Who saw the engravings first is still debated: both 1991 and 1993 come up. But they only became widely known in the fall of 1994, with construction already underway, and that’s when the campaign began. The slogan played on “Nadar” (“Swimming”), a song by Black Company, a rap group that was hugely popular at the time.
+
+
+    What was saved was not a single rock but an entire gallery. The engravings were made over many thousands of years, and the oldest are more than 20,000 years old. Stone Age art like this is usually found in caves; here it stands in the open air.
+
+
+    In 1998 the valley was added to UNESCO’s World Heritage list. And Guterres, who stopped the dam, later became Secretary-General of the United Nations.
+  ru: >-
+    Кто первым увидел рисунки, спорят до сих пор: называют и 1991, и 1993 год. Но широко о них узнали только осенью 1994-го, когда стройка уже шла, и тогда же началась кампания. Лозунг обыгрывал песню «Nadar» («Плавать») популярной тогда рэп-группы Black Company.
+
+
+    Спасли не одну скалу, а целую галерею. Рисунки вырезали много тысяч лет подряд, и самым древним больше 20 тысяч лет. Обычно такие рисунки каменного века находят в пещерах, а здесь они стоят под открытым небом.
+
+
+    В 1998 году долину внесли в список Всемирного наследия ЮНЕСКО. А Гутерреш, который остановил плотину, потом стал генеральным секретарём ООН.
+sources:
+  - title: "Wikipedia: Prehistoric Rock Art Sites in the Côa Valley and Siega Verde"
+    url: "https://en.wikipedia.org/wiki/Prehistoric_Rock_Art_Sites_in_the_C%C3%B4a_Valley_and_Siega_Verde"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "O lema, Guterres em 1995, as datações, a UNESCO em 1998"
+      en: "The slogan, Guterres in 1995, the dating, UNESCO in 1998"
+      ru: "Лозунг, Гутерреш в 1995 году, датировки, ЮНЕСКО в 1998 году"
+  - title: "TRACCE: Côa Valley: the Discovery"
+    url: "https://www.rupestre.net/tracce/?p=1000"
+    type: website
+    accessed: '2026-11-07'
+image:
+  file: gravuras-coa-1995.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: uma família e uma menina que aponta estão diante de uma rocha com cavalos e um auroque gravados, sobre um rio entre encostas de socalcos; ao longe, uma grua ergue o paredão de uma barragem."
+    en: "Blue-and-white azulejo-style illustration: a family and a girl who points stand before a rock with engraved horses and an aurochs, above a river between terraced slopes; far away a crane builds the wall of a dam."
+    ru: "Иллюстрация в духе сине-белого азулежу: семья и девочка, которая показывает рукой, стоят перед скалой с вырезанными лошадьми и туром над рекой между террасными склонами; вдали подъёмный кран возводит стену плотины."
+  caption:
+    pt: "Gravuras do Côa e a barragem que ia afogá-las. Ilustração em estilo azulejo, criada por IA."
+    en: "The Côa engravings and the dam that would have drowned them. Azulejo-style illustration, created by AI."
+    ru: "Рисунки Коа и плотина, которая должна была их затопить. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "45% 50%"
+status: ready
+published: '2026-11-07'
+placeholder: false
+ru_ready: true

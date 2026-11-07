@@ -212,7 +212,7 @@ if (want('lists')) {
       for (const [view, query] of [['feed', ''], ['grid', '?vista=grelha']]) {
         const page = await newPage({ mode });
         await page.goto(`${base}/pt/epoca/${epochSlug(epoch)}/${query}`, { waitUntil: 'load' });
-        const got = (await shownCards(page, 'ol.feed > li')).sort();
+        const got = (await shownCards(page, 'ol.feed > li.feed__item')).sort();
         const exp = ids(epochEvents(epoch).filter((e) => shownIn(e, mode)));
         ok(`mode ${mode}, epoch ${epoch.split('-')[0]}, ${view}: shown cards equal the data`, same(got, exp), same(got, exp) ? `${got.length} cards` : `got ${got.join(',')} want ${exp.join(',')}`);
         if (view === 'feed') {
@@ -288,7 +288,7 @@ if (want('recount')) {
   await page.evaluate(() => (window.__marker = 'same page'));
   for (const mode of ['all', '12', 'off', '12', 'all']) {
     await setMode(page, mode);
-    const got = (await shownCards(page, 'ol.feed > li')).sort();
+    const got = (await shownCards(page, 'ol.feed > li.feed__item')).sort();
     const exp = ids(epochEvents(LAST).filter((e) => shownIn(e, mode)));
     const all = num((await page.evaluate((vis) => [...document.querySelectorAll('[data-js-only] button[data-fio=""] .thread__count')].filter(eval(vis)).map((c) => c.textContent), visible))[0]);
     const status = await page.evaluate(() => document.querySelector('[data-status]').textContent);
@@ -298,7 +298,7 @@ if (want('recount')) {
   await page.goto(`${base}/pt/epoca/${epochSlug(LAST)}/?fio=${TH}`, { waitUntil: 'load' });
   for (const mode of MODES) {
     await setMode(page, mode);
-    const got = (await shownCards(page, 'ol.feed > li')).sort();
+    const got = (await shownCards(page, 'ol.feed > li.feed__item')).sort();
     const exp = ids(epochEvents(LAST).filter((e) => e.threads.includes(TH) && shownIn(e, mode)));
     ok(`thread filter and mode ${mode} together`, same(got, exp), `${got.length}/${exp.length}`);
   }
@@ -642,7 +642,7 @@ if (want('flash')) {
     const first = await page.evaluate(() => window.__first);
     ok(`mode ${mode}: data-family, data-js, data-fio, data-vista are on <html> when <body> first appears`, first && first.family === mode && first.js && first.fio === FTH && first.vista === 'grelha', JSON.stringify(first));
     // with the page scripts blocked, CSS alone already shows the right state
-    const got = (await shownCards(page, 'ol.feed > li')).sort();
+    const got = (await shownCards(page, 'ol.feed > li.feed__item')).sort();
     const exp = ids(epochEvents(FE).filter((e) => e.threads.includes(FTH) && shownIn(e, mode)));
     const grid = await page.evaluate(() => getComputedStyle(document.querySelector('ol.feed')).display);
     const toggle = await page.evaluate((vis) => eval(vis)(document.querySelector('[data-family-toggle]')), visible);
@@ -669,7 +669,7 @@ if (want('blocked')) {
   const first = await page.evaluate(() => window.__first);
   ok('blocked storage: the page loads in mode "off", no script error', first.family === 'off' && first.js && page.errors.length === 0, page.errors.join('; '));
   await setMode(page, 'all');
-  const got = (await shownCards(page, 'ol.feed > li')).sort();
+  const got = (await shownCards(page, 'ol.feed > li.feed__item')).sort();
   ok('blocked storage: the toggle still works on the page', same(got, ids(epochEvents(LAST).filter((e) => shownIn(e, 'all')))) && page.errors.length === 0, page.errors.join('; '));
   await page.goto(`${base}/pt/surpreende-me/`, { waitUntil: 'domcontentloaded' });
   await page.waitForFunction(() => location.pathname.includes('/historia/'), { timeout: 8000 }).catch(() => {});
@@ -697,14 +697,14 @@ if (want('variant-epoch') && VARIANT) {
   await page.goto(`${variantBase}/pt/epoca/${epochSlug(E)}/`, { waitUntil: 'load' });
   const msg = await page.evaluate((vis) => {
     const isVisible = eval(vis);
-    return { message: isVisible(document.querySelector('[data-family-empty]')) ? document.querySelector('[data-family-empty]').innerText.replace(/\s+/g, ' ') : null, feed: [...document.querySelectorAll('ol.feed > li')].filter(isVisible).length };
+    return { message: isVisible(document.querySelector('[data-family-empty]')) ? document.querySelector('[data-family-empty]').innerText.replace(/\s+/g, ' ') : null, feed: [...document.querySelectorAll('ol.feed > li.feed__item')].filter(isVisible).length };
   }, visible);
   ok('variant, mode all: an epoch with no visible card shows the message and the link', msg.feed === 0 && /Para esta idade ainda não há histórias aqui\.\s*Mostrar todas as idades/.test(msg.message ?? ''), JSON.stringify(msg));
   await setMode(page, '12');
   ok('variant, mode 12: the same message', await page.evaluate((vis) => eval(vis)(document.querySelector('[data-family-empty]')), visible));
   await page.click('[data-family-empty] [data-family-set]');
   await page.waitForFunction(() => document.documentElement.dataset.family === 'off');
-  const back = await page.evaluate((vis) => ({ message: eval(vis)(document.querySelector('[data-family-empty]')), feed: [...document.querySelectorAll('ol.feed > li')].filter(eval(vis)).length, stored: localStorage.getItem('family'), checked: document.querySelector('[data-family-toggle] input:checked').value }), visible);
+  const back = await page.evaluate((vis) => ({ message: eval(vis)(document.querySelector('[data-family-empty]')), feed: [...document.querySelectorAll('ol.feed > li.feed__item')].filter(eval(vis)).length, stored: localStorage.getItem('family'), checked: document.querySelector('[data-family-toggle] input:checked').value }), visible);
   ok('variant: "Mostrar todas as idades" switches to off, shows the cards, stores the choice, moves the toggle', !back.message && back.feed === vEvents.filter((e) => e.epoch === E).length && back.stored === 'off' && back.checked === 'off', JSON.stringify(back));
   await page.close();
 

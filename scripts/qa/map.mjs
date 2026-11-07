@@ -579,7 +579,7 @@ if (want('epoch')) {
     await p.goto(EPOCH, { waitUntil: 'load' });
     const s = await p.evaluate(() => {
       const vis = (el) => !!el && getComputedStyle(el).display !== 'none' && el.getBoundingClientRect().height > 0;
-      return { aside: vis(document.querySelector('[data-epoch-aside]')), panes: vis(document.querySelector('[data-pane-btn="map"]')), map: vis(document.querySelector('[data-map]')), cards: document.querySelectorAll('ol.feed > li').length, feedWidth: document.querySelector('.epoch__feed').getBoundingClientRect().width, overflow: document.scrollingElement.scrollWidth - innerWidth };
+      return { aside: vis(document.querySelector('[data-epoch-aside]')), panes: vis(document.querySelector('[data-pane-btn="map"]')), map: vis(document.querySelector('[data-map]')), cards: document.querySelectorAll('ol.feed > li.feed__item').length, feedWidth: document.querySelector('.epoch__feed').getBoundingClientRect().width, overflow: document.scrollingElement.scrollWidth - innerWidth };
     });
     ok('epoch, no JS: no map, no map position in the switch, the whole feed', !s.aside && !s.panes && !s.map && s.cards === N1 && s.overflow <= 0, JSON.stringify(s));
     await p.close();
@@ -647,11 +647,11 @@ if (want('epoch')) {
     const key = await p.evaluate(() => [...document.querySelectorAll('.mk--frame')].map((e) => e.dataset.key).pop());
     await p.click(`.mk[data-key="${key}"]`);
     await wait(1200);
-    const r = await p.evaluate((id) => { const li = document.getElementById(`c-${id}`).closest('li'); const b = li.getBoundingClientRect(); return { active: li.hasAttribute('data-active'), others: document.querySelectorAll('.feed > li[data-active]').length, inView: b.top >= 0 && b.bottom <= innerHeight, shadow: getComputedStyle(li.querySelector('article')).boxShadow }; }, key);
+    const r = await p.evaluate((id) => { const li = document.getElementById(`c-${id}`).closest('li'); const b = li.getBoundingClientRect(); return { active: li.hasAttribute('data-active'), others: document.querySelectorAll('.feed > li.feed__item[data-active]').length, inView: b.top >= 0 && b.bottom <= innerHeight, shadow: getComputedStyle(li.querySelector('article')).boxShadow }; }, key);
     ok('epoch: a marker highlights its record in the feed and scrolls to it', r.active && r.others === 1 && r.inView && r.shadow !== 'none', JSON.stringify(r));
 
     // a record chosen in the feed highlights its marker (the first record, then the last)
-    const ids = await p.evaluate(() => [...document.querySelectorAll('.feed > li article')].map((a) => a.id.slice(2)));
+    const ids = await p.evaluate(() => [...document.querySelectorAll('.feed > li.feed__item article')].map((a) => a.id.slice(2)));
     for (const id of [ids[0], ids[ids.length - 1]]) {
       await p.evaluate((x) => document.getElementById(`c-${x}`).scrollIntoView({ block: 'center' }), id);
       await p.click(`#c-${id} .ecard__meta`);
@@ -690,7 +690,7 @@ if (want('epoch')) {
       }
       const m0 = await marks(p);
       ok(`epoch: thread ${fio}: the map shows only its cards (${wanted.length}), at most ${LIMIT} markers and clusters`, coveredOk && worst <= LIMIT && worst >= (wanted.length ? 1 : 0), `worst=${worst}`);
-      const feedIds = await p.evaluate(() => [...document.querySelectorAll('.feed > li:not([hidden]) article')].map((a) => a.id.slice(2)).sort());
+      const feedIds = await p.evaluate(() => [...document.querySelectorAll('.feed > li.feed__item:not([hidden]) article')].map((a) => a.id.slice(2)).sort());
       ok(`epoch: thread ${fio}: feed and map have the same cards`, feedIds.join() === wanted.join() && m0.covered.every((id) => feedIds.includes(id)), `${feedIds.length} vs ${wanted.length}`);
       await p.close();
     }
@@ -715,7 +715,7 @@ if (want('epoch')) {
     const p = await newPage({ width: 1280, height: 900, tiles: 'fail' });
     await p.goto(EPOCH, { waitUntil: 'networkidle0' });
     await p.waitForFunction(() => document.querySelector('[data-epoch-page]')?.dataset.map === 'unavailable', { timeout: 20000 }).catch(() => {});
-    const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch-page]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('[data-pane-btn="map"]').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li').length }));
+    const s = await p.evaluate(() => ({ map: document.querySelector('[data-epoch-page]').dataset.map, aside: !document.querySelector('[data-epoch-aside]').hidden, panes: !document.querySelector('[data-pane-btn="map"]').hidden, feed: document.querySelector('.epoch__feed').getBoundingClientRect().width, container: document.querySelector('.epoch').getBoundingClientRect().width, cards: document.querySelectorAll('.feed > li.feed__item').length }));
     ok('epoch, tiles fail: the map and its position in the switch go away, the feed stays and gets the width', s.map === 'unavailable' && !s.aside && !s.panes && s.cards === N1 && s.feed > s.container * 0.9, JSON.stringify(s));
     await p.close();
   }

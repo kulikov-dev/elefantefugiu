@@ -28,7 +28,10 @@ function expected(e, lang) {
   const own = items.find((i) => i.scope === lang);
   // One line: the page language, else the world; a Russian line is hidden on the English stand-in of a story not ready in Russian.
   const line = own ? (lang === 'ru' && !e.ru_ready ? undefined : own) : items.find((i) => i.scope === 'world');
-  const caption = (i) => (i.year < 0 ? ui('card.year_bc', lang).replace('{n}', String(-i.year)) : i.year < 1000 ? ui('card.year_ad', lang).replace('{n}', String(i.year)) : String(i.year));
+  // A line of the year of a story from tens of thousands of years ago or more wears the caption of the story ("about 150 million years ago").
+  const ancient = startOf(e) <= -10000;
+  const agoCaption = e.year_label?.[lang] ?? (e.years_ago ? ui(`card.ago_${e.years_ago.unit}`, lang).replace('{n}', String(e.years_ago.n)) : '');
+  const caption = (i) => (ancient && i.year === startOf(e) ? agoCaption : i.year < 0 ? ui('card.year_bc', lang).replace('{n}', String(-i.year)) : i.year < 1000 ? ui('card.year_ad', lang).replace('{n}', String(i.year)) : String(i.year));
   return [line].filter(Boolean).map((i) => ({ scope: i.scope, caption: caption(i), text: i.text[lang] ?? i.text.en }));
 }
 

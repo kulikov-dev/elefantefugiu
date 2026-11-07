@@ -149,7 +149,7 @@ if (want('note')) {
       const page = await open(POMBAL[lang], { stored });
       const info = await page.evaluate(() => {
         const p = [...document.querySelectorAll('[data-family-note]')].find((el) => el.checkVisibility());
-        const hiddenCards = [...document.querySelectorAll('ol.feed > li')].filter((li) => !li.checkVisibility()).length;
+        const hiddenCards = [...document.querySelectorAll('ol.feed > li.feed__item')].filter((li) => !li.checkVisibility()).length;
         return { text: p?.textContent.replace(/\s+/g, ' ').trim() ?? null, hiddenCards, shown: p ? 1 : 0 };
       });
       ok(`note (${lang}, ${stored}): one line "${w.hidden}: N. ${w.showAll}" and N equals the cards hidden in the feed`, info.shown === 1 && info.text?.includes(w.hidden) && info.text.includes(w.showAll) && info.text.includes(`: ${info.hiddenCards}.`), JSON.stringify(info));

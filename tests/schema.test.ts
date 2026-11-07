@@ -68,6 +68,12 @@ test('graph and serialize: one document, "<" escaped', () => {
   assert.doesNotMatch(serialize({ a: '</script>' }), /</);
 });
 
+test('temporalCoverage: a time further back than four digits is left out, not made up', () => {
+  assert.equal('temporalCoverage' in storyNodes(ctx, { ...story, story: { year: -150000000 } })[0], false);
+  assert.equal('temporalCoverage' in storyNodes(ctx, { ...story, story: { year: -22000 } })[0], false);
+  assert.equal(storyNodes(ctx, { ...story, story: { year: -9999 } })[0].temporalCoverage, '-9998');
+});
+
 test('temporalCoverage: a year before the common era is astronomical, in a span too', () => {
   assert.equal(storyNodes(ctx, { ...story, story: { year: -140 } })[0].temporalCoverage, '-0139');
   assert.equal(storyNodes(ctx, { ...story, story: { year: { from: -150, to: -140 } } })[0].temporalCoverage, '-0149/-0139');
@@ -84,7 +90,10 @@ test('every story with a year has temporalCoverage in ISO form and no Event', ()
     const e = parse(readFileSync(new URL(f, dir), 'utf8'), { schema: 'core' }) as { id: string; year: number | { from: number; to: number } };
     assert.ok(e.year !== undefined, `${e.id} has a year`);
     const [article] = storyNodes(ctx, { ...story, story: { year: e.year } });
-    assert.match(String(article.temporalCoverage), /^-?\d{4}(\/-?\d{4})?$/, e.id);
+    // A time further back than four digits (the prologue: dinosaurs, the Stone Age) has no honest ISO 8601 year, so the date is left out.
+    const start = typeof e.year === 'number' ? e.year : e.year.from;
+    if (start < -9999) assert.equal(article.temporalCoverage, undefined, e.id);
+    else assert.match(String(article.temporalCoverage), /^-?\d{4}(\/-?\d{4})?$/, e.id);
     assert.doesNotMatch(JSON.stringify(article), /"Event"/);
   }
 });

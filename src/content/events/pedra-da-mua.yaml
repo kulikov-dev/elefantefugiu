@@ -1,0 +1,139 @@
+id: pedra-da-mua
+slug:
+  pt: "o-milagre-que-os-dinossauros-deixaram"
+  en: "the-miracle-the-dinosaurs-left-behind"
+  ru: "chudo-kotoroe-ostavili-dinozavry"
+title:
+  pt: "O milagre que os dinossauros deixaram"
+  en: "The Miracle the Dinosaurs Left Behind"
+  ru: "Чудо, которое оставили динозавры"
+epoch: antes-de-portugal
+level: frame
+year: -150000000
+years_ago:
+  n: 150
+  unit: million
+place:
+  name:
+    pt: "Cabo Espichel, Sesimbra"
+    en: "Cape Espichel, Sesimbra"
+    ru: "Мыс Эшпишел, Сезимбра"
+  short:
+    pt: "Cabo Espichel"
+    en: "Cape Espichel"
+    ru: "Мыс Эшпишел"
+  lat: 38.4208125
+  lon: -9.2164375
+bridge:
+  name: "Ermida da Memória"
+  title:
+    pt: "Ermida da Memória, Cabo Espichel"
+    en: "Ermida da Memória chapel, Cabo Espichel"
+    ru: "Часовня Ермида-да-Мемория, Кабу-Эшпишел"
+  address: "Cabo Espichel, Sesimbra"
+  lat: 38.4208125
+  lon: -9.2164375
+  maps_url: "https://www.google.com/maps/place/Ermida+da+Mem%C3%B3ria/@38.4215442,-9.2102445,16z/data=!4m6!3m5!1s0xd1ead1eb4c60dcb:0xfd5622f3fc88f2b3!8m2!3d38.4208125!4d-9.2164375!16s%2Fg%2F121ffj39"
+  url: "https://www.cm-sesimbra.pt/"
+  note:
+    pt: "Da falésia junto à ermida vê-se a laje por onde subiu a «mula»."
+    en: "From the cliff beside the chapel you can see the slab the “mule” climbed."
+    ru: "С обрыва рядом с часовней видна плита, по которой шёл «мул»."
+threads:
+  - natureza
+  - mar
+importance: 3
+label: documented
+min_age: 'all'
+sensitive: false
+hook:
+  pt: "Durante séculos, peregrinos vieram ver pegadas de mula. Eram de dinossauro."
+  en: "Pilgrims visited a mule’s hoofprints for centuries. The mule was a dinosaur."
+  ru: "Паломники веками шли смотреть на следы мула. Мул оказался динозавром."
+story:
+  pt: >-
+    No Cabo Espichel, a sul de Lisboa, conta-se desde há muito um milagre. Nossa Senhora teria subido do mar pela arriba montada numa mula, e os cascos deixaram marcas na própria pedra.
+
+    Quem chegava à beira da falésia via as pegadas, por isso acreditava-se no milagre. Durante séculos vieram peregrinos ao cabo: na arriba ergueu-se uma ermida e, mais tarde, ao lado nasceu um grande santuário.
+
+    As fileiras de covas redondas existem mesmo, numa laje inclinada sobre o mar. Mas nos anos 1990 os cientistas perceberam que a mula nada tinha a ver com elas. Há cerca de 150 milhões de anos, saurópodes, enormes dinossauros herbívoros de pescoço comprido, passaram por uma margem lodosa. O milagre que trazia os peregrinos eram, afinal, pegadas de dinossauros.
+  en: >-
+    At Cape Espichel, south of Lisbon, people have long told of a miracle. The Virgin Mary is said to have risen from the sea and climbed the cliff on a mule, its hooves leaving marks in the solid rock.
+
+    Anyone who walked to the edge could see the prints, so people believed. For centuries pilgrims came to the cape: a chapel went up on the cliff, and later a large sanctuary grew beside it.
+
+    The rows of round hollows really are there, on a tilted slab above the sea. But in the 1990s scientists found that the mule had nothing to do with them. About 150 million years ago, sauropods, huge long-necked plant-eating dinosaurs, walked across a muddy shore. The miracle that drew the pilgrims turned out to be dinosaur tracks.
+  ru: >-
+    На мысе Эшпишел, к югу от Лиссабона, издавна рассказывают о чуде. Богородица будто бы поднялась из моря на обрыв верхом на муле, и копыта оставили следы прямо в камне.
+
+    Следы видел каждый, кто подходил к краю, поэтому в чудо верили. К мысу веками шли паломники, на обрыве поставили часовню, а потом рядом выросло большое святилище.
+
+    Цепочки круглых ямок действительно идут по наклонной плите над морем. Но в 1990-х учёные выяснили, что мул тут ни при чём. Около 150 млн лет назад по илистому берегу прошли зауроподы, огромные длинношеие травоядные динозавры. Так чудо, ради которого сюда шли люди, оказалось следами динозавров.
+meanwhile:
+  - scope: world
+    year: -150000000
+    text:
+      pt: "Na Alemanha vivia o arqueópterix, uma das primeiras aves"
+      en: "In Germany lived Archaeopteryx, one of the first birds"
+      ru: "В Германии жил археоптерикс, одна из первых птиц"
+    source: "https://en.wikipedia.org/wiki/Archaeopteryx"
+more:
+  pt: >-
+    A laje chama-se precisamente Pedra da Mua, a «pedra da mula». Em tempos foi uma margem plana de lodo, mas com o tempo as camadas de rocha ergueram-se e ficaram inclinadas. Por isso as pegadas estão hoje numa encosta, e parece que o animal subiu a direito pela arriba, como na lenda.
+
+
+    Os cientistas leram nestas pegadas mais do que «aqui houve dinossauros». Na laje há vários trilhos, e quase todos foram deixados por animais pequenos, provavelmente jovens, que caminhavam lado a lado na mesma direção. É um dos primeiros indícios na Europa de que os saurópodes andavam em manada.
+
+
+    A lenda, porém, continua viva. Na Ermida da Memória, os azulejos ainda mostram Nossa Senhora com o Menino montada na mula. É um lugar raro, onde o milagre e a explicação científica apontam para as mesmas pegadas.
+  en: >-
+    The slab is even called Pedra da Mua, “the mule’s stone.” It was once a flat, muddy shore, but over time the rock layers rose and tilted. That’s why the tracks now sit on a slope, and it looks as if the animal walked straight up the cliff, just as the legend says.
+
+
+    Scientists read more in these tracks than “dinosaurs were here.” The slab holds several trackways, and nearly all were left by small, probably young animals walking side by side in the same direction. It is one of the first signs found in Europe that sauropods moved in herds.
+
+
+    The legend lives on all the same. Inside the Ermida da Memória, the tiles still show the Virgin and Child riding the mule. It is a rare place where a miracle and a scientific explanation point to the same footprints.
+  ru: >-
+    Плиту так и называют, Педра-да-Муа, «камень мула». Когда-то это был ровный илистый берег, но со временем пласты камня поднялись и встали наискосок. Поэтому следы теперь видны на склоне, и кажется, что животное шло прямо вверх по обрыву, как в легенде.
+
+
+    По этим следам учёные прочитали больше, чем просто «здесь были динозавры». На плите несколько цепочек, и почти все оставили небольшие, вероятно молодые животные, которые шли рядом в одну сторону. Это одно из первых свидетельств в Европе того, что зауроподы ходили стадами.
+
+
+    Легенду при этом никто не отменял. В часовне Ермида-да-Мемория на изразцах до сих пор изображена Богородица с Младенцем на муле. Получилось редкое место, где чудо и научное объяснение показывают на одни и те же следы.
+sources:
+  - title: "Wikipedia: Cape Espichel"
+    url: "https://en.wikipedia.org/wiki/Cape_Espichel"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "A lenda, o grupo de saurópodes"
+      en: "The legend, the sauropod group"
+      ru: "Легенда, стадо зауроподов"
+  - title: "Anthony Martin, «Of Sacred Mules and Sauropod Tracks» (Georgia Life Traces)"
+    url: "https://georgialifetraces.com/tag/cabo-espichel"
+    type: website
+    accessed: '2026-11-07'
+    note:
+      pt: "Reconta Lockley, Meyer e Santos (1994); os azulejos da ermida"
+      en: "Retells Lockley, Meyer and Santos (1994); the chapel tiles"
+      ru: "Пересказ работы Локли, Мейера и Сантуша (1994); изразцы в часовне"
+image:
+  file: pedra-da-mua.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: dois peregrinos de capuz ajoelham-se diante de uma laje inclinada cheia de covas redondas, por onde caminham dinossauros de pescoço comprido quase transparentes; no alto da falésia, sobre o mar, uma ermida com cúpula."
+    en: "Blue-and-white azulejo-style illustration: two hooded pilgrims kneel before a tilted slab full of round hollows, along which almost transparent long-necked dinosaurs walk; on the clifftop above the sea stands a domed chapel."
+    ru: "Иллюстрация в духе сине-белого азулежу: двое паломников в капюшонах стоят на коленях перед наклонной плитой с круглыми ямками, по которой идут почти прозрачные длинношеие динозавры; на вершине обрыва над морем стоит часовня с куполом."
+  caption:
+    pt: "Os peregrinos e as pegadas do Cabo Espichel. Ilustração em estilo azulejo, criada por IA."
+    en: "The pilgrims and the tracks of Cabo Espichel. Azulejo-style illustration, created by AI."
+    ru: "Паломники и следы на мысе Эшпишел. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "60% 50%"
+status: ready
+published: '2026-11-07'
+placeholder: false
+ru_ready: true

@@ -81,6 +81,8 @@ export interface MeanwhileLine {
   year: number;
   text: string;
   source: string;
+  /** The words in front of the line when the year number would mislead ("about 150 million years ago"); without it `meanwhileYearText` writes the year. */
+  label?: string;
 }
 
 /** The line for the page of a language (at most one, so a list of 0 or 1): its own, else the world one. A line without a text in that language is left out. */

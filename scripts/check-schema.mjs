@@ -10,6 +10,7 @@
 //  - pages with noindex have no markup.
 // A story with no `published` date stops the data check long before this one; this is the last gate on what the pages say.
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { parse } from 'yaml';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -25,6 +26,15 @@ if (process.env.SITE_URL && sitemapFirst && new URL(sitemapFirst).origin !== ori
 const raw = (process.env.BASE_PATH || '').trim();
 const base = raw && raw !== '/' ? `/${raw.replace(/^\/+|\/+$/g, '')}/` : '/';
 
+// A story further back than four digits (the prologue: dinosaurs, the Stone Age) has no honest ISO 8601 year: its Article has no temporalCoverage (src/lib/schema.ts).
+const eventsDir = fileURLToPath(new URL('../src/content/events/', import.meta.url));
+const tooOld = new Set(
+  readdirSync(eventsDir)
+    .filter((f) => f.endsWith('.yaml'))
+    .map((f) => parse(readFileSync(join(eventsDir, f), 'utf8')))
+    .filter((e) => (typeof e.year === 'number' ? e.year : e.year.from) < -9999)
+    .flatMap((e) => ['pt', 'en', 'ru'].map((l) => `${l}/${e.slug[l] ?? e.slug.en}`)),
+);
 const STORY = /^(pt\/historia|en\/story|ru\/istoriya)\/[^/]+\/index\.html$/;
 const EPOCH = /^(pt\/epoca|en\/era|ru\/epoha)\/[^/]+\/index\.html$/;
 const HOME = /^(pt|en|ru)\/index\.html$/;
@@ -141,7 +151,9 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
       need(article, 'Article', 'author', (v) => v?.['@id'] !== undefined || filled(v?.name));
       need(article, 'Article', 'publisher', (v) => v?.['@id'] !== undefined || filled(v?.name));
       need(article, 'Article', 'isPartOf', (v) => v && typeof v === 'object');
-      need(article, 'Article', 'temporalCoverage', (v) => typeof v === 'string' && /^-?\d{4}(\/-?\d{4})?$/.test(v));
+      if (tooOld.has(`${lang}/${path.split('/')[2]}`)) {
+        if (article.temporalCoverage !== undefined) fail('a story from before the year -9999 must have no Article.temporalCoverage (there is no honest ISO year)');
+      } else need(article, 'Article', 'temporalCoverage', (v) => typeof v === 'string' && /^-?\d{4}(\/-?\d{4})?$/.test(v));
       if (hasEvent(JSON.parse(scripts[0]))) fail('an Event is in the JSON-LD of a story page (use Article.temporalCoverage and contentLocation)');
       const loc = article.contentLocation;
       if (loc?.['@type'] !== 'Place') fail('Article.contentLocation is not a Place');

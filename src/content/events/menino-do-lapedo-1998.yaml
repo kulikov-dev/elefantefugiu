@@ -1,0 +1,158 @@
+id: menino-do-lapedo-1998
+slug:
+  pt: "a-crianca-que-ainda-divide-os-cientistas"
+  en: "the-child-scientists-still-argue-about"
+  ru: "rebenok-o-kotorom-sporyat-do-sikh-por"
+title:
+  pt: "A criança que ainda divide os cientistas"
+  en: "The Child Scientists Still Argue About"
+  ru: "Ребёнок, о котором спорят до сих пор"
+epoch: antes-de-portugal
+level: story
+year: -28000
+years_ago:
+  n: 28
+  unit: thousand
+place:
+  name:
+    pt: "Vale do Lapedo, Leiria"
+    en: "Lapedo Valley, Leiria"
+    ru: "Долина Лапеду, Лейрия"
+  short:
+    pt: "Vale do Lapedo"
+    en: "Lapedo Valley"
+    ru: "Долина Лапеду"
+  lat: 39.7581844
+  lon: -8.7312847
+bridge:
+  name: "Centro de Interpretação do Abrigo do Lagar Velho"
+  title:
+    pt: "Centro de Interpretação do Abrigo do Lagar Velho, Leiria"
+    en: "Lagar Velho Rock Shelter Interpretation Center, Leiria"
+    ru: "Центр интерпретации навеса Лагар-Велью (CIALV), Лейрия"
+  address: "Santa Eufémia, Leiria"
+  lat: 39.7581844
+  lon: -8.7312847
+  maps_url: "https://www.google.com/maps/place/Centro+de+Interpreta%C3%A7%C3%A3o+do+Abrigo+do+Lagar+Velho/@39.7581885,-8.7338596,17z/data=!3m1!4b1!4m6!3m5!1s0xd22716bd0e2ea7b:0x5923409b56d4f89a!8m2!3d39.7581844!4d-8.7312847!16s%2Fg%2F11dxbkk0gz"
+  url: "https://www.visiteleiria.pt/pontos-de-interesse/museus/centro-de-interpretacao-do-abrigo-do-lagar-velho/"
+  note:
+    pt: "Aqui mostram uma réplica do esqueleto e a reconstituição do rosto da criança."
+    en: "A replica of the skeleton and a reconstruction of the child’s face are on display here."
+    ru: "Здесь показывают копию скелета и реконструкцию лица ребёнка."
+threads:
+  - gente-como-nos
+importance: 2
+label: debated
+min_age: '12'
+sensitive: true
+hook:
+  pt: "Uma criança de quatro anos pôs os cientistas a discutir vinte anos."
+  en: "A four-year-old from Leiria set scientists arguing for twenty years."
+  ru: "Четырёхлетний ребёнок из Лейрии поссорил учёных на двадцать лет."
+story:
+  pt: >-
+    No fim de novembro de 1998, arqueólogos foram ao vale do Lapedo, perto de Leiria, ver pinturas rupestres no Abrigo do Lagar Velho. Pouco antes, máquinas tinham revolvido a terra do abrigo, e nela apareceram ossos. Era a sepultura de uma criança com cerca de quatro anos. Fora enterrada há cerca de 28 mil anos, com cuidado: com uma concha e ocre vermelho.
+
+    Mas o que surpreendeu os cientistas foi outra coisa. Em quase tudo era uma criança da nossa espécie, mas as pernas, robustas e com outras proporções, eram como as dos neandertais. O arqueólogo João Zilhão e os colegas propuseram que as duas espécies humanas se tinham encontrado e tido filhos em comum, e que os descendentes conservaram durante muito tempo traços de ambas.
+
+    Esta ideia foi discutida durante anos, e a discussão ainda não terminou.
+  en: >-
+    In late November 1998, archaeologists came to the Lapedo Valley near Leiria to look at rock paintings in the Lagar Velho rock shelter. Shortly before, machinery had churned up the ground there, and bones had surfaced in it. It was the grave of a child about four years old, buried about 28,000 years ago with care: with a seashell and red ocher.
+
+    But something else surprised the scientists. In almost every way it was a child of our own species, but its legs, sturdy and differently proportioned, were like a Neanderthal’s. Archaeologist João Zilhão and his colleagues proposed that the two human species had met and had children together, and that their descendants carried traits of both for a long time.
+
+    That idea was argued over for years, and the debate still isn’t over.
+  ru: >-
+    В конце ноября 1998 года археологи приехали в долину Лапеду под Лейрией посмотреть на наскальные рисунки у скального навеса Лагар-Велью. Землю под навесом незадолго до этого разворошила строительная техника, и в ней показались кости. Это было погребение ребёнка лет четырёх. Его похоронили около 28 тысяч лет назад, бережно: с ракушкой и красной охрой.
+
+    Но удивило учёных другое. Почти во всём это был ребёнок нашего вида, а вот ноги, крепкие и с другими пропорциями, были как у неандертальцев. Археолог Жуан Зильян и его коллеги предположили, что два вида людей встречались и заводили общих детей, а потомки ещё долго несли черты обоих.
+
+    С этой идеей спорили годами, и спор не закончен до сих пор.
+more:
+  pt: >-
+    Em 1999, quando saiu o artigo sobre a criança do Lapedo, a ideia de que neandertais e humanos da nossa espécie tiveram filhos em comum parecia ousada. A maioria pensava que a nossa espécie simplesmente tinha substituído os neandertais. Por isso, uns cientistas viram no esqueleto sinais de mistura, e outros explicaram os seus traços pela forma como aquela criança cresceu.
+
+
+    Onze anos depois, a discussão mudou de rumo. Em 2010, geneticistas leram o genoma neandertal e encontraram vestígios dele no ADN da maioria das pessoas que vivem hoje. Ou seja, a mistura aconteceu mesmo, embora não se possa prová-la pelos ossos desta criança em particular. Por isso a história tem a marca «em debate».
+
+
+    O esqueleto está guardado no Museu Nacional de Arqueologia, em Lisboa, e em 2021 foi classificado como tesouro nacional.
+  en: >-
+    In 1999, when the paper on the Lapedo child came out, the idea that Neanderthals and our species had children together sounded bold. Most experts believed our species had simply replaced the Neanderthals. So some scientists saw signs of mixing in the skeleton, while others put its features down to the way this particular child grew.
+
+
+    Eleven years later, the debate turned. In 2010, geneticists read the Neanderthal genome and found traces of it in the DNA of most people alive today. So mixing did happen, though it can’t be proven for this particular child from the bones alone. That’s why the story carries the “under debate” label.
+
+
+    The skeleton itself is kept at the National Museum of Archaeology in Lisbon, and in 2021 it was classified as a national treasure of Portugal.
+  ru: >-
+    В 1999 году, когда вышла статья о ребёнке из Лапеду, мысль, что неандертальцы и люди нашего вида заводили общих детей, звучала смело. Большинство считало, что наш вид просто вытеснил неандертальцев. Поэтому одни учёные увидели в скелете следы смешения, а другие объясняли его черты тем, как рос конкретный ребёнок.
+
+
+    Через одиннадцать лет спор повернулся. В 2010 году генетики прочитали геном неандертальца и нашли его следы в ДНК большинства людей, живущих сегодня. Значит, смешение действительно было, хотя доказать его именно для этого ребёнка по костям нельзя. Поэтому у истории метка «в обсуждении».
+
+
+    Сам скелет хранится в Национальном археологическом музее в Лиссабоне, а в 2021 году его признали национальным сокровищем Португалии.
+sources:
+  - title: "Wikipedia: Lapedo child"
+    url: "https://en.wikipedia.org/wiki/Lapedo_child"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "Zilhão, a concha e o ocre, a discussão sobre o híbrido"
+      en: "Zilhão, the shell and ocher, the hybrid dispute"
+      ru: "Зильян, ракушка и охра, спор о гибриде"
+  - title: "Wikipédia: Menino do Lapedo"
+    url: "https://pt.wikipedia.org/wiki/Menino_do_Lapedo"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "28 de novembro de 1998, a expedição às pinturas, o esqueleto no Museu Nacional de Arqueologia, a réplica no centro"
+      en: "November 28, 1998, the trip to the rock art, the skeleton in the National Museum of Archaeology, the replica in the center"
+      ru: "28 ноября 1998 года, экспедиция к рисункам, скелет в Национальном археологическом музее, копия в центре"
+  - title: "Visite Leiria: Centro de Interpretação do Abrigo do Lagar Velho"
+    url: "https://www.visiteleiria.pt/pontos-de-interesse/museus/centro-de-interpretacao-do-abrigo-do-lagar-velho/"
+    type: institutional
+    accessed: '2026-11-07'
+  - title: "Duarte et al., 1999, PNAS 96(13): The early Upper Paleolithic human skeleton from the Abrigo do Lagar Velho (Portugal) and modern human emergence in Iberia"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC22133"
+    type: academic
+    accessed: '2026-11-07'
+    note:
+      pt: "Idade de 1999 (cerca de 24 500 anos BP); as proporções do corpo"
+      en: "The 1999 age (about 24,500 years BP); body proportions"
+      ru: "Возраст по данным 1999 года (около 24 500 лет назад); пропорции тела"
+  - title: "Linscott et al., 2025, Science Advances 11: direct radiocarbon dating of the Lapedo child"
+    url: "https://doi.org/10.1126/sciadv.adp5769"
+    type: academic
+    accessed: '2026-11-07'
+    note:
+      pt: "Nova datação direta: cerca de 28 mil anos"
+      en: "The new direct dating: about 28,000 years"
+      ru: "Новая прямая датировка: около 28 тысяч лет"
+  - title: "Diário da República: Decreto n.º 14/2021"
+    url: "https://diariodarepublica.pt/dr/detalhe/decreto/14-2021-164712118"
+    type: institutional
+    accessed: '2026-11-07'
+    note:
+      pt: "Classificação do esqueleto como «tesouro nacional»"
+      en: "The skeleton classified as a “national treasure”"
+      ru: "Скелет признан «национальным сокровищем»"
+image:
+  file: menino-do-lapedo-1998.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: sob um abrigo de rocha, uma família junto a uma fogueira; a mulher pinta riscas de ocre vermelho na cara de uma criança que traz ao peito uma concha; ao fundo, veados junto a um rio e pinheiros."
+    en: "Blue-and-white azulejo-style illustration: under a rock shelter a family sits by a fire; the woman paints stripes of red ocher on the face of a child wearing a shell on a cord; in the background deer by a river and pine trees."
+    ru: "Иллюстрация в духе сине-белого азулежу: под скальным навесом у костра сидит семья; женщина рисует красной охрой полосы на щеках ребёнка с ракушкой на шнурке; вдали олени у реки и сосны."
+  caption:
+    pt: "Uma família do Paleolítico no abrigo do Lagar Velho. Ilustração em estilo azulejo, criada por IA."
+    en: "A Paleolithic family at the Lagar Velho shelter. Azulejo-style illustration, created by AI."
+    ru: "Семья эпохи палеолита у навеса Лагар-Велью. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "40% 55%"
+status: ready
+published: '2026-11-07'
+placeholder: false
+ru_ready: true

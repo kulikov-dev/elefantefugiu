@@ -1,0 +1,128 @@
+id: miragaia-2009
+slug:
+  pt: "a-miragaia-de-pescoco-comprido"
+  en: "the-long-necked-one-from-miragaia"
+  ru: "dlinnosheyaya-iz-miragayi"
+title:
+  pt: "A Miragaia de pescoço comprido"
+  en: "The Long-Necked One from Miragaia"
+  ru: "Длинношеяя из Мирагайи"
+epoch: antes-de-portugal
+level: story
+year: -149000000
+years_ago:
+  n: 150
+  unit: million
+place:
+  name:
+    pt: "Miragaia, Lourinhã"
+    en: "Miragaia, Lourinhã"
+    ru: "Мирагайя, Лоуриньян"
+  short:
+    pt: "Miragaia"
+    en: "Miragaia"
+    ru: "Мирагайя"
+  lat: 39.241971
+  lon: -9.3133
+bridge:
+  name: "Museu da Lourinhã"
+  title:
+    pt: "Museu da Lourinhã"
+    en: "Lourinhã Museum"
+    ru: "Музей Лоуриньяна"
+  address: "Rua João Luís de Moura 95, Lourinhã"
+  lat: 39.241971
+  lon: -9.3133
+  maps_url: "https://www.google.com/maps/place/Lourinh%C3%A3+Museum/@39.2419751,-9.3158749,17z/data=!3m1!4b1!4m6!3m5!1s0xd1f36576980a9f9:0x4b600b86601ee71!8m2!3d39.241971!4d-9.3133!16s%2Fm%2F02x3zx5"
+  url: "https://museulourinha.org/"
+  note:
+    pt: "Aqui estão guardados os ossos a partir dos quais a Miragaia foi descrita."
+    en: "This is where the bones Miragaia was described from are kept."
+    ru: "Здесь хранятся кости, по которым Мирагайю описали."
+threads:
+  - natureza
+importance: 2
+label: documented
+min_age: 'all'
+sensitive: false
+hook:
+  pt: "O estegossauro português que quis ser girafa."
+  en: "The Portuguese stegosaur that wanted to be a giraffe."
+  ru: "Португальский стегозавр, который решил стать жирафом."
+story:
+  pt: >-
+    Os estegossauros reconhecem-se logo: placas no dorso, espinhos na cauda e um pescoço curto, junto ao chão. Em 1999, perto da aldeia de Miragaia, na Lourinhã, as obras de uma estrada puseram a descoberto ossos que não encaixavam neste retrato.
+
+    Os paleontólogos escavaram-nos em 1999 e 2001 e reuniram quase todo o pescoço. Tinha pelo menos 17 vértebras, mais do que a maioria dos saurópodes, os tais gigantes de pescoço comprido. A ciência não conhecia nenhum estegossauro com um pescoço assim, por isso em 2009 o achado foi descrito como espécie nova e batizado Miragaia longicollum, «a de pescoço comprido, de Miragaia».
+  en: >-
+    Stegosaurs are easy to spot: plates on the back, spikes on the tail, and a short neck held close to the ground. In 1999, near the village of Miragaia outside Lourinhã, road builders uncovered bones that didn’t fit that picture.
+
+    Paleontologists dug them out in 1999 and 2001 and recovered almost the entire neck. It had at least 17 vertebrae, more than most sauropods, the famous long-necked giants. Science knew of no stegosaur with a neck like that, so in 2009 the find was described as a new species and named Miragaia longicollum, “the long-necked one from Miragaia.”
+  ru: >-
+    Стегозавров узнают сразу: пластины на спине, шипы на хвосте и короткая шея у самой земли. В 1999 году у деревни Мирагайя под Лоуриньяном строили дорогу и наткнулись на кости, которые в эту картину не вписались.
+
+    Палеонтологи раскапывали их в 1999 и 2001 годах и собрали почти всю шею. Позвонков в ней оказалось не меньше 17, больше, чем у большинства зауроподов, тех самых длинношеих гигантов. Стегозавров с такой шеей наука не знала, поэтому в 2009 году находку описали как новый вид и назвали Miragaia longicollum, «длинношеяя из Мирагайи».
+meanwhile:
+  - scope: world
+    year: -149000000
+    text:
+      pt: "Na América do Norte vivia o seu parente, o estegossauro"
+      en: "Its relative Stegosaurus lived in North America"
+      ru: "В Северной Америке жил её родственник, стегозавр"
+    source: "https://en.wikipedia.org/wiki/Stegosaurus"
+more:
+  pt: >-
+    O pescoço conservou-se quase inteiro: encontraram-se 15 vértebras, faltavam apenas as duas primeiras. Nenhum outro estegossauro tinha um pescoço tão comprido.
+
+
+    Para que servia, não se sabe ao certo. Os autores da descrição propuseram duas explicações. Talvez assim a Miragaia chegasse a folhas mais altas do que os vizinhos e disputasse menos comida com eles. Ou o pescoço comprido ajudava a atrair as fêmeas, como a cauda do pavão.
+
+
+    A discussão sobre a Miragaia ainda não acabou. Alguns cientistas consideram que não é um género próprio, mas mais uma espécie de Dacentrurus, outro estegossauro cujos ossos aparecem em Portugal. Outros voltaram a defender, em 2025, que a Miragaia é um género à parte. Os ossos a partir dos quais foi descrita estão guardados no Museu da Lourinhã.
+  en: >-
+    The neck survived almost whole: 15 vertebrae were found, with only the first two missing. No other stegosaur had such a long neck.
+
+
+    No one knows for sure what it was for. The authors of the description offered two explanations. Perhaps it let Miragaia reach leaves higher up than its neighbors could, so it competed less for food. Or the long neck helped it attract mates, like a peacock’s tail.
+
+
+    The debate over Miragaia isn’t settled. Some scientists think it isn’t a genus of its own but another species of Dacentrurus, a stegosaur whose bones also turn up in Portugal. Others argued again in 2025 that Miragaia stands on its own. The bones it was described from are kept at the Lourinhã Museum.
+  ru: >-
+    Шея сохранилась почти целиком: нашли 15 позвонков, не хватало только двух первых. Ни у одного другого стегозавра шея не была такой длинной.
+
+
+    Зачем она была нужна, точно не знают. Авторы описания предлагали два объяснения. Возможно, так Мирагайя доставала листья выше, чем соседи, и меньше спорила с ними за еду. Или длинная шея помогала нравиться самкам, как павлину хвост.
+
+
+    Спор о Мирагайе не закончен до сих пор. Часть учёных считает её не отдельным родом, а ещё одним видом дацентруруса, другого стегозавра, кости которого находят в Португалии. Другие в 2025 году снова доказывали, что Мирагайя самостоятельна. Кости, по которым её описали, хранятся в музее Лоуриньяна.
+sources:
+  - title: "Mateus, Maidment, Christiansen, 2009, Proceedings of the Royal Society B: description of Miragaia longicollum"
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2674496"
+    type: academic
+    accessed: '2026-11-07'
+  - title: "Wikipedia: Miragaia (dinosaur)"
+    url: "https://en.wikipedia.org/wiki/Miragaia_(dinosaur)"
+    type: reference
+    accessed: '2026-11-07'
+    note:
+      pt: "Escavações de 1999 e 2001, a discussão sobre o género"
+      en: "Digs of 1999 and 2001, the dispute over the genus"
+      ru: "Раскопки 1999 и 2001 годов, спор о роде"
+image:
+  file: miragaia-2009.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: dois estegossauros entre fetos, palmeiras e coníferas, um deles de pescoço muito comprido esticado para as copas, e pterossauros no céu."
+    en: "Blue-and-white azulejo-style illustration: two stegosaurs among ferns, palms and conifers, one with a very long neck stretched toward the treetops, and pterosaurs in the sky."
+    ru: "Иллюстрация в духе сине-белого азулежу: два стегозавра среди папоротников, пальм и хвойных деревьев, у одного очень длинная шея, вытянутая к кронам, а в небе летают птерозавры."
+  caption:
+    pt: "A Miragaia longicollum. Ilustração em estilo azulejo, criada por IA."
+    en: "Miragaia longicollum. Azulejo-style illustration, created by AI."
+    ru: "Miragaia longicollum. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-07'
+placeholder: false
+ru_ready: true
