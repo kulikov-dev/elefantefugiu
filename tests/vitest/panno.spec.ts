@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { pannoSchema } from '../../src/data/schemas';
-import { CELEBRATION_MAX_MS, celebrationStep, firstUnread, lastOpened, openOrder, openPieces, openSet, pannoCelebratedKey, showPannoLine } from '../../src/lib/panno';
+import { CELEBRATION_LAST_PAUSE_MS, CELEBRATION_LAY_MS, CELEBRATION_RIM_MS, CELEBRATION_SHEEN_GAP_MS, CELEBRATION_SHEEN_MS, CELEBRATION_TILE_MS, celebrationPlan, firstUnread, layOrder, openOrder, openPieces, openSet, pannoCelebratedKey, showPannoLine, wantsReplay } from '../../src/lib/panno';
 import { readProgress, type StoryOnPage } from '../../src/lib/read-marks';
 
 const story = (id: string, sensitive: unknown = false, minAge: unknown = 'all'): StoryOnPage => ({ id, minAge, sensitive });
@@ -192,26 +192,48 @@ describe('panno in the data of an epoch', () => {
 });
 
 describe('moment of assembly', () => {
-  it('opens the tiles the last story opened, in the order of the panel, and with one story every tile', () => {
+  it('lays the tiles in a fixed shuffle: every tile once, the same for an epoch, different between epochs, not the order of the spots', () => {
     for (const g of GRIDS) {
-      const order = openOrder('some-epoch', g.cols, g.rows);
-      for (const m of [1, 2, 7, 11]) {
-        const last = lastOpened(m, order);
-        expect(last).toEqual(order.slice(openPieces(m - 1, m, order.length)));
-        expect(last.length).toBe(order.length - openPieces(m - 1, m, order.length));
-        expect(last.length).toBeGreaterThan(0);
-      }
-      expect(lastOpened(1, order)).toEqual(order);
-      expect(lastOpened(0, order)).toEqual([]);
+      const pieces = g.cols * g.rows;
+      const lay = layOrder('some-epoch', pieces);
+      expect([...lay].sort((x, y) => x - y)).toEqual(Array.from({ length: pieces }, (_, i) => i));
+      expect(layOrder('some-epoch', pieces)).toEqual(lay);
+      expect(layOrder('another-epoch', pieces)).not.toEqual(lay);
+      expect(lay).not.toEqual(openOrder('some-epoch', g.cols, g.rows));
     }
   });
 
-  it('takes 120 ms a tile and never more than 1.5 s for the row', () => {
-    expect(celebrationStep(0)).toBe(0);
-    expect(celebrationStep(1)).toBe(120);
-    expect(celebrationStep(12)).toBe(120);
-    for (const count of [1, 5, 12, 13, 24, 54, 96]) expect(celebrationStep(count) * count).toBeLessThanOrEqual(CELEBRATION_MAX_MS);
-    expect(celebrationStep(54)).toBeLessThan(120);
+  it('plans the moment: all tiles but the last within 3 s, evenly, a pause of 0.4 s, the last, then the glint, the rim', () => {
+    for (const count of [24, 54, 96]) {
+      const plan = celebrationPlan(count);
+      expect(plan.tiles).toHaveLength(count);
+      expect(plan.tiles[0]).toBe(0);
+      const early = plan.tiles.slice(0, -1);
+      expect(early.every((t, i) => i === 0 || t > (early[i - 1] as number))).toBe(true);
+      expect((early.at(-1) as number) + CELEBRATION_TILE_MS).toBeLessThanOrEqual(CELEBRATION_LAY_MS + 1);
+      expect((early.at(-1) as number) + CELEBRATION_TILE_MS).toBeGreaterThanOrEqual(CELEBRATION_LAY_MS - 1);
+      expect((plan.tiles.at(-1) as number) - (early.at(-1) as number) - CELEBRATION_TILE_MS).toBe(CELEBRATION_LAST_PAUSE_MS);
+      expect(plan.sheenAt).toBe((plan.tiles.at(-1) as number) + CELEBRATION_TILE_MS + CELEBRATION_SHEEN_GAP_MS);
+      expect(plan.rimAt).toBe(plan.sheenAt + CELEBRATION_SHEEN_MS);
+      expect(plan.revealAt).toBe(plan.rimAt + CELEBRATION_RIM_MS);
+    }
+  });
+
+  it('has a bigger step for fewer tiles', () => {
+    const step = (count: number): number => (celebrationPlan(count).tiles[1] as number) - (celebrationPlan(count).tiles[0] as number);
+    expect(step(24)).toBeGreaterThan(step(96));
+  });
+
+  it('copes with a panel of one or two tiles', () => {
+    expect(celebrationPlan(0).tiles).toEqual([]);
+    expect(celebrationPlan(1).tiles).toHaveLength(1);
+    expect(celebrationPlan(2).tiles).toHaveLength(2);
+  });
+
+  it('replays only for ?panno=replay', () => {
+    expect(wantsReplay('?panno=replay')).toBe(true);
+    expect(wantsReplay('?x=1&panno=replay')).toBe(true);
+    for (const search of ['', '?panno=', '?panno=other', '?panno']) expect(wantsReplay(search)).toBe(false);
   });
 
   it('keeps the flag in the same storage as the marks, by epoch', () => {

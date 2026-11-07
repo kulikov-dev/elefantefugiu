@@ -112,26 +112,54 @@ export function firstUnread(onPage: readonly StoryOnPage[], read: readonly strin
 export const PANNO_CELEBRATED_PREFIX = 'panno-celebrated-';
 export const pannoCelebratedKey = (epochId: string): string => `${PANNO_CELEBRATED_PREFIX}${epochId}`;
 
-/** The pause between two tiles of the moment of assembly, and the most the whole row of tiles may take. */
-export const CELEBRATION_STEP_MS = 120;
-export const CELEBRATION_MAX_MS = 1500;
-/** The rim of the colour of the epoch fades in this long after the last tile (the same number is `--panno-rim-fade` in tokens.css). */
-export const CELEBRATION_RIM_MS = 300;
+/** The moment of assembly (docs/spec.md 5.2), all in milliseconds. The same numbers as `--panno-*` in tokens.css where CSS draws them. */
+export const CELEBRATION_START_PAUSE_MS = 500; // after the panel is seen whole, before anything moves
+export const CELEBRATION_TILE_MS = 260; // one tile settles into its place (`--panno-tile`)
+export const CELEBRATION_LAY_MS = 3000; // every tile but the last has settled by then
+export const CELEBRATION_LAST_PAUSE_MS = 400; // the pause before the last tile
+export const CELEBRATION_SHEEN_GAP_MS = 300; // from the last tile to the glint
+export const CELEBRATION_SHEEN_MS = 1200; // the diagonal glint passes over the panel (`--panno-sheen-time`)
+/** The rim of the colour of the epoch fades in this long after the glint (the same number is `--panno-rim-fade` in tokens.css). */
+export const CELEBRATION_RIM_MS = 400;
 
 /**
- * The tiles the last story read opened: the ones that are open with m of m stories read and were not with m - 1, in the order they open in.
- * With one story in the panel that is every tile.
+ * The order the tiles are laid in for the moment of assembly: a fixed shuffle of all tiles seeded by the id of the epoch, so the same on every
+ * load, and not the order of the spots in which the stories open them.
  */
-export function lastOpened(m: number, order: readonly number[]): number[] {
-  if (m <= 0) return [];
-  return order.slice(openPieces(m - 1, m, order.length));
+export function layOrder(epochId: string, pieces: number): number[] {
+  const next = random(seedOf(`lay:${epochId}`));
+  const order = Array.from({ length: pieces }, (_, i) => i);
+  for (let i = pieces - 1; i > 0; i--) {
+    const j = Math.floor(next() * (i + 1));
+    [order[i], order[j]] = [order[j] as number, order[i] as number];
+  }
+  return order;
 }
 
-/** The pause between two of `count` tiles: 120 ms, less when the row would take more than 1.5 s in all. */
-export function celebrationStep(count: number): number {
-  if (count <= 0) return 0;
-  return Math.min(CELEBRATION_STEP_MS, Math.floor(CELEBRATION_MAX_MS / count));
+export interface CelebrationPlan {
+  /** Start of each tile, in the order they are laid. */
+  tiles: number[];
+  sheenAt: number;
+  rimAt: number;
+  revealAt: number;
 }
+
+/**
+ * The timeline of the moment, counted from the end of the start pause: `count` tiles settle one by one, evenly, all but the last done within 3 s
+ * (a bigger step for 24 tiles than for 96); after a pause of 0.4 s the last one; 0.3 s later the glint, then the rim, then the closing line.
+ */
+export function celebrationPlan(count: number): CelebrationPlan {
+  const early = Math.max(count - 1, 0);
+  const step = early > 1 ? (CELEBRATION_LAY_MS - CELEBRATION_TILE_MS) / (early - 1) : 0;
+  const tiles = Array.from({ length: early }, (_, i) => Math.round(i * step));
+  if (count > 0) tiles.push(early > 0 ? (tiles.at(-1) as number) + CELEBRATION_TILE_MS + CELEBRATION_LAST_PAUSE_MS : 0);
+  const sheenAt = (tiles.at(-1) ?? 0) + CELEBRATION_TILE_MS + CELEBRATION_SHEEN_GAP_MS;
+  const rimAt = sheenAt + CELEBRATION_SHEEN_MS;
+  return { tiles, sheenAt, rimAt, revealAt: rimAt + CELEBRATION_RIM_MS };
+}
+
+/** The address `?panno=replay` of an epoch page plays the moment of assembly again for a finished panel, for a look at it (flag and marks stay as they are). */
+export const wantsReplay = (search: string): boolean => new URLSearchParams(search).get('panno') === 'replay';
 
 /**
  * The line at the foot of a story (docs/spec.md 5.2): shown when, with the story just counted, every story of its epoch that the mode shows is read

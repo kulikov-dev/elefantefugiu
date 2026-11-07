@@ -3,7 +3,7 @@
 // sent anywhere (no counter event).
 import { READ_DELAY_MS, READ_KEY, addRead, parseRead, readProgress, type StoryOnPage } from '../lib/read-marks';
 import { cssUrl } from '../lib/azulejo';
-import { CELEBRATION_RIM_MS, PANNO_CELEBRATED_PREFIX, celebrationStep, firstUnread, lastOpened, openSet, pannoCelebratedKey, showPannoLine } from '../lib/panno';
+import { CELEBRATION_START_PAUSE_MS, PANNO_CELEBRATED_PREFIX, celebrationPlan, firstUnread, layOrder, openSet, wantsReplay, pannoCelebratedKey, showPannoLine } from '../lib/panno';
 import { pickPlural } from '../lib/plural-pick';
 import { wirePannoReward } from './panno-reward';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
@@ -48,50 +48,77 @@ function markCelebrated(epochId: string): void {
   }
 }
 
+/** `?panno=replay` plays once per page load, not again at every redraw (family mode). */
+let replayShown = false;
+
 /** The moment of assembly that is running or waiting for the panel to come into view; a redraw of the panel ends it first. */
 let moment: { cancel: () => void } | undefined;
 
 /**
- * The moment of assembly (docs/spec.md 5.2): the tiles the last story opened are shown closed, and when the panel is in view they open one by one,
- * then the rim of the colour of the epoch fades in, then the closing line and "Share" appear. The flag is set when it starts, so it plays once.
- * Nothing scrolls the page.
+ * The moment of assembly (docs/spec.md 5.2): the panel waits with every tile closed; when the whole panel is in view (and after a short pause) the
+ * tiles settle one by one in a fixed random order, a glint passes over the panel, the rim of the colour of the epoch fades in, then the closing line
+ * and "Share" appear. A press on the panel jumps to the finished state. The flag is set when it starts, so it plays once. Nothing scrolls the page;
+ * only transform and opacity move. `tiles` are in the order they are laid; `settle` draws the finished panel and shows the closing line.
  */
-function startMoment(panel: HTMLElement, fresh: HTMLElement[], reveal: () => void): void {
+function startMoment(panel: HTMLElement, cells: HTMLElement[], tiles: HTMLElement[], settle: () => void, replay: boolean): void {
   const epochId = panel.dataset.epochId ?? '';
   const timers: number[] = [];
+  const at = (ms: number, run: () => void): void => void timers.push(window.setTimeout(run, ms));
+  const frame = panel.querySelector<HTMLElement>('.panno__frame') ?? panel;
+  let wait: number | undefined;
+  let started = false;
+  // A panel taller than the screen can never be seen whole: then "whole" is as much of the screen as it can fill.
+  const seen = (e: IntersectionObserverEntry): boolean => e.isIntersecting && (e.intersectionRatio >= 0.9 || e.intersectionRect.height >= window.innerHeight * 0.9);
   const observer = new IntersectionObserver(
     (entries) => {
-      if (entries.some((e) => e.isIntersecting)) run();
+      const e = entries[entries.length - 1];
+      if (!e) return;
+      window.clearTimeout(wait);
+      wait = seen(e) ? window.setTimeout(run, CELEBRATION_START_PAUSE_MS) : undefined;
     },
-    { threshold: 0.2 },
+    { threshold: Array.from({ length: 11 }, (_, i) => i / 10) },
   );
-  const cancel = (): void => {
+  const clear = (): void => {
     observer.disconnect();
+    window.clearTimeout(wait);
     timers.forEach((id) => window.clearTimeout(id));
+    panel.removeEventListener('pointerdown', skip);
+    cells.forEach((cell) => cell.removeAttribute('data-anim'));
     delete panel.dataset.moment;
+    delete panel.dataset.sheen;
     moment = undefined;
+  };
+  // A press or tap on the panel while it plays: the finished state at once.
+  const skip = (): void => {
+    if (!started) return;
+    clear();
+    settle();
   };
   const run = (): void => {
     observer.disconnect();
-    markCelebrated(epochId);
-    const step = celebrationStep(fresh.length);
-    fresh.forEach((cell, i) => timers.push(window.setTimeout(() => cell.setAttribute('data-open', ''), (i + 1) * step)));
-    timers.push(
-      window.setTimeout(() => {
-        panel.dataset.moment = 'rim';
-        timers.push(
-          window.setTimeout(() => {
-            delete panel.dataset.moment;
-            moment = undefined;
-            reveal();
-          }, CELEBRATION_RIM_MS),
-        );
-      }, (fresh.length + 1) * step),
+    started = true;
+    if (!replay) markCelebrated(epochId);
+    const plan = celebrationPlan(tiles.length);
+    tiles.forEach((cell, i) =>
+      at(plan.tiles[i] ?? 0, () => {
+        cell.setAttribute('data-anim', '');
+        cell.setAttribute('data-open', '');
+      }),
     );
+    at(plan.sheenAt, () => (panel.dataset.sheen = ''));
+    at(plan.rimAt, () => {
+      delete panel.dataset.sheen;
+      panel.dataset.moment = 'rim';
+    });
+    at(plan.revealAt, () => {
+      clear();
+      settle();
+    });
   };
-  moment = { cancel };
+  moment = { cancel: clear };
   panel.dataset.moment = 'tiles';
-  observer.observe(panel);
+  panel.addEventListener('pointerdown', skip);
+  observer.observe(frame);
 }
 
 /**
@@ -114,11 +141,14 @@ function showPanno(read: string[]): void {
   panel.toggleAttribute('data-complete', all);
   // First time the panel is shown assembled: the tiles of the last story wait closed for the moment of assembly.
   // Reduced motion (or no IntersectionObserver) gets the finished panel at once.
-  const staging = all && !celebrated(d.epochId ?? '');
+  // `?panno=replay` plays the moment once more for a finished panel (a look at it): the flag stays as it is.
+  const replay = all && !replayShown && wantsReplay(location.search);
+  if (all) replayShown = true;
+  const staging = all && (replay || !celebrated(d.epochId ?? ''));
   const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window);
-  if (staging && still) markCelebrated(d.epochId ?? '');
-  const fresh = staging && !still ? lastOpened(m, order) : [];
-  const shownOpen = new Set([...open].filter((piece) => !fresh.includes(piece)));
+  if (staging && still && !replay) markCelebrated(d.epochId ?? '');
+  const lay = staging && !still ? layOrder(d.epochId ?? '', order.length).filter((piece) => open.has(piece)) : [];
+  const shownOpen: ReadonlySet<number> = lay.length > 0 ? new Set<number>() : open;
   if ((open.size > 0 || all) && d.imageSmall && d.imageLarge && !panel.style.getPropertyValue('--panno-image')) panel.style.setProperty('--panno-image', `image-set(${cssUrl(d.imageSmall)} 1x, ${cssUrl(d.imageLarge)} 2x)`);
   const cells = [...grid.querySelectorAll<HTMLElement>('[data-piece]')];
   cells.forEach((cell) => cell.toggleAttribute('data-open', shownOpen.has(Number(cell.dataset.piece))));
@@ -140,13 +170,18 @@ function showPanno(read: string[]): void {
     // The share line counts the stories of the panel as the reader sees them (family mode included): "{stories}" of the template is "N stories" in the right form.
     if (all) d.shareText = (d.shareTemplate ?? '').replace('{stories}', pickPlural({ p_one: d.storiesOne ?? '', p_few: d.storiesFew ?? '', p_many: d.storiesMany ?? '', p_other: d.storiesOther ?? '' }, 'p', m, d.locale ?? 'en').replace('{n}', String(m)));
   };
-  if (fresh.length > 0) {
+  if (lay.length > 0) {
     if (count) count.hidden = true;
     if (hint) hint.hidden = false;
     if (zoom) zoom.hidden = true;
     if (share) share.hidden = true;
-    const tiles = fresh.map((piece) => cells.find((cell) => Number(cell.dataset.piece) === piece)).filter((cell): cell is HTMLElement => cell !== undefined);
-    startMoment(panel, tiles, reveal);
+    const tiles = lay.map((piece) => cells.find((cell) => Number(cell.dataset.piece) === piece)).filter((cell): cell is HTMLElement => cell !== undefined);
+    // The finished panel, drawn at the end of the moment or when a press cuts it short.
+    const settle = (): void => {
+      cells.forEach((cell) => cell.toggleAttribute('data-open', open.has(Number(cell.dataset.piece))));
+      reveal();
+    };
+    startMoment(panel, cells, tiles, settle, replay);
   } else reveal();
   const alt = pickPlural({ p_one: d.altOne ?? '', p_few: d.altFew ?? '', p_many: d.altMany ?? '', p_other: d.altOther ?? '' }, 'p', open.size, d.locale ?? 'en').replace('{n}', String(open.size)).replace('{m}', String(order.length));
   const next = all ? undefined : firstUnread(stories, read, mode);

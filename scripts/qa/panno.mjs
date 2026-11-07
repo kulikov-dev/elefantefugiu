@@ -7,7 +7,8 @@
 //   reward   only with every story read: the panel is a button (enlarged in a <dialog>: Esc, cross, backdrop, focus back, picture only when opened, scrolled sideways on a phone held upright)
 //            and "Share" (Web Share or copy + a quiet line, one GoatCounter event); family mode counts the stories it shows
 //   pages    the page of the finished panel in three languages: noindex, not in the sitemap, own preview picture 1200 x 630 at an absolute address, hreflang, the way to the epoch
-//   moment   the moment of assembly: the tiles of the last story open one by one (120 ms, 1.5 s at most), then the rim, then the closing line and "Share"; once only (flag
+//   moment   the moment of assembly: starts with the whole panel in view (+ 0.5 s), every tile closed, the tiles settle one by one in a fixed random order (all but the last in 3 s, then 0.4 s, the last),
+//            0.3 s later the glint (1.2 s), the rim, then the closing line and "Share"; a press on the panel jumps to the end; once only (flag
 //            panno-celebrated-<epoch> in localStorage, swept by the reset of the legal page); only while the panel is in view; reduced motion: the finished panel at once
 //   line     the line at the foot of a story: only on the last story of an epoch with a panel, after the story is counted, until the panel is celebrated; none without JS
 //   layout   no horizontal scroll at 360 px, the panel fills the column on a phone, no layout shift, an epoch without a picture has no panel and keeps "read N of M" by the years
@@ -72,8 +73,9 @@ async function open(read, { width = 1280, height = 900, js = true, url = path, f
           const snap = { t: performance.now(), shareHidden: share?.hidden, flag: flag(), rim: frame ? getComputedStyle(frame).boxShadow : null };
           if (rec.attributeName === 'data-open' && el.hasAttribute('data-open') && rec.oldValue === null) window.__tl.push({ ...snap, k: 'open', piece: Number(el.dataset.piece) });
           if (rec.attributeName === 'data-moment') window.__tl.push({ ...snap, k: 'moment', v: el.dataset.moment ?? null });
+          if (rec.attributeName === 'data-sheen') window.__tl.push({ ...snap, k: 'sheen', on: el.hasAttribute('data-sheen') });
         }
-      }).observe(document, { subtree: true, attributes: true, attributeOldValue: true, attributeFilter: ['data-open', 'data-moment'] });
+      }).observe(document, { subtree: true, attributes: true, attributeOldValue: true, attributeFilter: ['data-open', 'data-moment', 'data-sheen'] });
     }, epoch.id);
   }
   if (family) await page.evaluateOnNewDocument((m) => { try { localStorage.setItem('family', m); } catch {} }, family);
@@ -342,9 +344,9 @@ if (want('pages')) {
 }
 
 if (want('moment')) {
-  const SLEEP = 2600; // 1.5 s of tiles + 0.3 s of rim + the margin of a slow machine
-  const piecesBefore = piecesFor(N - 1);
-  const fresh = PIECES - piecesBefore;
+  const TILE = 260;
+  // 0.5 s pause + 3 s of tiles + 0.4 s pause + the last tile + 0.3 s + 1.2 s glint + 0.4 s rim + the margin of a slow machine
+  const SLEEP = 500 + 3000 + 400 + TILE + 300 + 1200 + 400 + 1500;
   const finished = (page) =>
     page.evaluate(() => {
       const panel = document.querySelector('[data-panno]');
@@ -373,11 +375,18 @@ if (want('moment')) {
   const moments = s.tl.filter((e) => e.k === 'moment');
   const opened = s.tl.slice(s.tl.indexOf(moments[0]) + 1).filter((e) => e.k === 'open');
   ok('moment: it starts (data-moment goes tiles -> rim -> none)', JSON.stringify(moments.map((e) => e.v)) === JSON.stringify(['tiles', 'rim', null]), JSON.stringify(moments.map((e) => e.v)));
-  ok(`moment: the ${fresh} tiles of the last story were closed at the start and open one by one in the order of the panel`, opened.length === fresh && JSON.stringify(opened.map((e) => e.piece)) === JSON.stringify(s.order.slice(piecesBefore)), JSON.stringify(opened.map((e) => e.piece)));
-  const span = opened.length > 1 ? opened.at(-1).t - opened[0].t : 0;
-  const step = Math.min(120, Math.floor(1500 / fresh));
-  ok(`moment: about ${step} ms a tile, the whole row within 1.5 s`, fresh === 1 || (span >= (fresh - 1) * step * 0.6 && span <= 1500), `${Math.round(span)} ms`);
-  ok('moment: no rim and no closing line while the tiles open; the rim and the line only after the last tile', moments.length === 3 && transparent(moments[0].rim) && moments[0].shareHidden === true && moments[1].t >= opened.at(-1).t && moments[2].t - moments[1].t >= 250, JSON.stringify(moments.map((e) => [e.v, Math.round(e.t)])));
+  ok('moment: the panel starts with every tile closed', s.tl.filter((e) => e.k === 'open').every((e) => e.t > moments[0].t), '');
+  ok(`moment: all ${PIECES} tiles settle one by one, in a fixed order that is not the order of the spots`, opened.length === PIECES && new Set(opened.map((e) => e.piece)).size === PIECES && JSON.stringify(opened.map((e) => e.piece)) !== JSON.stringify(s.order), JSON.stringify(opened.map((e) => e.piece)));
+  const lead = opened[0].t - moments[0].t;
+  ok('moment: the first tile waits for the start pause (0.5 s)', lead >= 450, `${Math.round(lead)} ms`);
+  const early = opened.slice(0, -1);
+  const span = early.length > 1 ? early.at(-1).t + TILE - early[0].t : 0;
+  ok('moment: all tiles but the last have settled in about 3 s, evenly', early.length < 2 || (span >= 2700 && span <= 3300), `${Math.round(span)} ms`);
+  const gap = opened.at(-1).t - (early.at(-1).t + TILE);
+  ok('moment: a pause of about 0.4 s before the last tile', opened.length < 2 || (gap >= 350 && gap <= 600), `${Math.round(gap)} ms`);
+  const sheen = s.tl.filter((e) => e.k === 'sheen');
+  ok('moment: the glint runs 1.2 s after the last tile', sheen.length === 2 && sheen[0].on && !sheen[1].on && sheen[1].t - sheen[0].t >= 1100 && sheen[0].t >= opened.at(-1).t + 400, JSON.stringify(sheen.map((e) => [e.on, Math.round(e.t)])));
+  ok('moment: no rim and no closing line while the tiles open; the rim and the line only after the glint', moments.length === 3 && transparent(moments[0].rim) && moments[0].shareHidden === true && moments[1].t >= (sheen[1]?.t ?? Infinity) && moments[2].t - moments[1].t >= 350, JSON.stringify(moments.map((e) => [e.v, Math.round(e.t)])));
   ok('moment: the flag is set when it starts (before the last tile is open)', opened.length > 0 && opened[0].flag !== null && moments[1]?.flag !== null, JSON.stringify([opened[0]?.flag, moments[1]?.flag]));
   ok('moment: at the end all tiles are open, the rim is drawn, "Epoch complete" and "Share" are there, the panel is a button', s.open === PIECES && s.moment === null && s.complete && !transparent(s.rim) && s.line === ui('panno.done', 'pt') && s.share && s.zoom, brief(s));
   ok('moment: the page was not scrolled', (await page.evaluate(() => window.scrollY)) === 0);
@@ -406,11 +415,41 @@ if (want('moment')) {
   page = await open(ORDER, { celebrated: false, watch: true, push: 4000 });
   await wait(900);
   s = await finished(page);
-  ok('moment: the panel out of view waits closed, the flag is not set', s.moment === 'tiles' && s.open === piecesBefore && s.flag === null && !s.share, brief(s));
+  ok('moment: the panel out of view waits closed, the flag is not set', s.moment === 'tiles' && s.open === 0 && s.flag === null && !s.share, brief(s));
   await page.evaluate(() => document.querySelector('[data-panno]').scrollIntoView());
   await wait(SLEEP);
   s = await finished(page);
   ok('moment: scrolled into view it plays to the end', s.moment === null && s.open === PIECES && s.flag !== null && s.share && !transparent(s.rim), brief(s));
+  await page.close();
+
+  // 5. A press on the panel while it plays: the finished state at once.
+  page = await open(ORDER, { celebrated: false, watch: true });
+  await wait(1500);
+  s = await finished(page);
+  ok('moment: a press is made while the moment runs', s.moment === 'tiles' && !s.share, brief(s));
+  const centre = await page.evaluate(() => { const r = document.querySelector('.panno__frame').getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; });
+  await page.mouse.click(centre[0], centre[1]);
+  await wait(150);
+  s = await finished(page);
+  ok('moment: a press jumps to the finished state: all tiles, the rim, the line, "Share"', s.moment === null && s.open === PIECES && !transparent(s.rim) && s.line === ui('panno.done', 'pt') && s.share && s.zoom, brief(s));
+  await page.close();
+
+  // 6. ?panno=replay: a finished, already celebrated panel plays the moment again; the flag and the marks stay as they are. Without the parameter nothing plays.
+  page = await open(ORDER, { celebrated: true, watch: true, url: path + '?panno=replay' });
+  const keep = () => page.evaluate((id) => ({ flag: localStorage.getItem('panno-celebrated-' + id), read: localStorage.getItem('readStories') }), epoch.id);
+  const before = await keep();
+  await wait(1200);
+  s = await finished(page);
+  ok('moment: ?panno=replay plays the moment for a panel already celebrated', s.moment === 'tiles' && !s.share, brief(s));
+  await wait(SLEEP);
+  s = await finished(page);
+  const after = await keep();
+  ok('moment: ?panno=replay ends on the finished panel, the flag and the marks are as they were', s.moment === null && s.open === PIECES && s.share && JSON.stringify(before) === JSON.stringify(after), JSON.stringify([before.flag, after.flag]));
+  await page.close();
+  page = await open(ORDER, { celebrated: true, watch: true });
+  await wait(1200);
+  s = await finished(page);
+  ok('moment: without the parameter a celebrated panel does not play', s.tl.filter((e) => e.k === 'moment').length === 0 && s.open === PIECES, brief(s));
   await page.close();
 }
 
