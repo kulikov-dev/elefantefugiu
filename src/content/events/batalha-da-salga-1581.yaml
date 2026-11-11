@@ -38,9 +38,9 @@ bridge:
   maps_url: https://www.google.com/maps/search/?api=1&query=Ba%C3%ADa+da+Salga+Terceira+A%C3%A7ores
   url: https://www.visitazores.com/en/
   note:
-    pt: Sobre a baía ainda se veem as ruínas do velho forte da Salga.
-    en: The ruins of the old Salga fort still stand above the bay.
-    ru: Над бухтой сохранились руины старого форта Салга.
+    pt: Junto à baía há um monumento a Brianda Pereira, que, segundo a tradição, reuniu as aldeãs contra os espanhóis.
+    en: A monument to Brianda Pereira, who by tradition rallied the village women against the Spanish, stands by the bay.
+    ru: "У бухты стоит памятник Брианде Перейре: по преданию, она собрала деревенских женщин против испанцев."
 threads:
   - poder-e-revolta
   - natureza
@@ -133,6 +133,14 @@ sources:
     url: https://www.exploreterceiraisland.com/en/?p=39214
     type: website
     accessed: '2026-10-29'
+  - title: "Wikipedia: Bay of Salga (the monument to Brianda Pereira)"
+    url: https://en.wikipedia.org/wiki/Bay_of_Salga
+    type: website
+    accessed: '2026-11-11'
+  - title: "Wikipedia: Forte da Salga (the remains levelled in the early 1990s)"
+    url: https://pt.wikipedia.org/wiki/Forte_da_Salga
+    type: website
+    accessed: '2026-11-11'
 image:
   file: batalha-da-salga-1581.webp
   alt:
