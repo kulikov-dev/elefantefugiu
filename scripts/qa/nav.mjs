@@ -53,15 +53,18 @@ const pagesOf = async (lang) => {
   const bar = await tabs(probe);
   await probe.close();
   const [home, epochs, map, myths, surprise] = bar.hrefs;
+  // The second game: the tab "Games" is the current one there too.
+  const orderHref = `/${lang}/${{ pt: 'o-que-veio-primeiro', en: 'which-came-first', ru: 'chto-bylo-ranshe' }[lang]}/`;
   const list = [
     ['home', home, home],
     ['epoch', epochPath(epoch, lang), epochs],
     ['story', `/${lang}/${STORY[lang]}/${story.slug[lang]}/`, epochs],
     ['map', map, map],
     ['myths', myths, myths],
+    ['order', orderHref, myths],
     ['surprise', surprise, surprise],
     ['thread', threadPath(thread, lang), null],
-    ...footer.filter((h) => h.startsWith(`/${lang}/`) && h.endsWith('/') && !bar.hrefs.includes(h)).map((h) => [`static ${h}`, h, null]),
+    ...footer.filter((h) => h.startsWith(`/${lang}/`) && h.endsWith('/') && !bar.hrefs.includes(h) && h !== orderHref).map((h) => [`static ${h}`, h, null]),
     ...festaList.map((f) => [`festa ${f.slug}`, `/${lang}/festa/${f.slug}/`, null]),
     ['404', `/${lang}/no-such-page/`, null],
   ];

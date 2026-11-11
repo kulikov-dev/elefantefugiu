@@ -6,6 +6,7 @@
 // The same view makes the page of one card (/ru/mif-ili-pravda/<id>/): all the cards, that one first and marked; noindex, canonical to the page of all of them, a preview picture of its
 // own (scripts/make-myth-og.mjs) with the claim and no answer.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import GamesSwitch from '../components/GamesSwitch.astro';
 import GameResult from '../components/GameResult.astro';
 import MythVerdict from '../components/MythVerdict.astro';
 import Pic from '../components/Pic.astro';
@@ -59,6 +60,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
     : { title: t(lang, 'myths.og_title_page') }}
 >
   <article class="myths" data-game data-strings={JSON.stringify(strings)} data-share-url={`${abs(pagePath(lang, 'myths'))}?src=share`}>
+    <GamesSwitch lang={lang} active="myths" />
     <h1>{title}</h1>
     <p class="myths__lead">{t(lang, 'myths.lead')}</p>
     <p class="myths__restart"><button class="myths__restart-button" type="button" data-restart hidden>{t(lang, 'myths.restart')}</button></p>

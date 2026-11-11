@@ -15,13 +15,14 @@
     "main_nav": "Main navigation",
     "tabbar": "Main sections",
     "footer_nav": "Footer links",
-    "language": "Language"
+    "language": "Language",
+    "games": "Games"
   },
   "tabbar": {
     "home": "Home",
     "epochs": "Eras",
     "map": "Map",
-    "myths": "Myths",
+    "games": "Games",
     "surprise": "Surprise"
   },
   "nav": {
@@ -62,6 +63,10 @@
     "myths": {
       "title": "Myth or fact",
       "description": "What guides, guidebooks, and friends say about Portugal: pick what you think, then read what really happened. Behind every answer is one of my stories."
+    },
+    "order": {
+      "title": "Which came first?",
+      "description": "A game: two events from Portugal’s past, which came first? Ten pairs and a result. Behind every date there is one of my stories."
     }
   },
   "footer": {
@@ -72,7 +77,8 @@
     "legal": "Legal information",
     "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
     "privacy": "No ads, no cookies",
-    "myths": "Myth or fact"
+    "myths": "Myth or fact",
+    "order": "Which came first?"
   },
   "home": {
     "epochs_heading": "Eras",
@@ -449,5 +455,40 @@
     "copied": "Copied",
     "best": "Your best title: {band}",
     "restart": "Start over"
+  },
+  "order": {
+    "lead": "Two events from Portugal’s past. Which came first? Ten pairs.",
+    "og_title_page": "Which came first? A game about Portuguese history",
+    "og_description": "Two events from Portugal’s past: which came first? Ten pairs, and behind every date a story.",
+    "question": "Which came first?",
+    "progress_label": "Game progress",
+    "step": "Pair {i} of {total}",
+    "sq_label": "Pair {i}: {state}",
+    "sq_empty": "not answered yet",
+    "sq_hit": "right",
+    "sq_miss": "wrong",
+    "first": "First",
+    "outcome_hit": "You got it",
+    "outcome_miss": "Not this time",
+    "between_one": "{n} year between them",
+    "between_other": "{n} years between them",
+    "between_about_one": "About {n} year between them",
+    "between_about_other": "About {n} years between them",
+    "read": "Read →",
+    "next": "Next",
+    "finish": "See result",
+    "band_top": "A chronicler’s sense of time",
+    "band_high": "A good sense of time",
+    "band_mid": "Time sometimes plays tricks",
+    "band_low": "Time can surprise you",
+    "misses": "Where you slipped",
+    "again": "Another round",
+    "read_all": "Read the stories",
+    "share_title": "Which came first? {band}",
+    "share_ask": "how about you?",
+    "copied": "Copied",
+    "nojs": "The game needs JavaScript.",
+    "nojs_link": "Meanwhile, you can play “Myth or fact” →",
+    "empty": "There is no pair of stories in this mode yet."
   }
 }

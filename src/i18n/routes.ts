@@ -13,7 +13,7 @@ export const DEFAULT_LANG: Lang = 'pt';
 /** Fallback chain of a text that is missing in a language: ru -> en -> pt (the data loader applies it, see lib/localize.ts). */
 export const FALLBACK_CHAIN: Record<Lang, readonly Lang[]> = { pt: [], en: ['pt'], ru: ['en', 'pt'] };
 
-export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths';
+export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths' | 'order';
 
 // An empty slug means the language root (/pt/, /en/).
 export const ROUTES: Record<PageKey, Record<Lang, string>> = {
@@ -26,6 +26,7 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   map: { pt: 'mapa', en: 'map', ru: 'karta' },
   surprise: { pt: 'surpreende-me', en: 'surprise-me', ru: 'udivi-menya' },
   myths: { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' },
+  order: { pt: 'o-que-veio-primeiro', en: 'which-came-first', ru: 'chto-bylo-ranshe' },
 };
 
 /** Id of the epochs section on the home page; the "Épocas" menu item links to it. */

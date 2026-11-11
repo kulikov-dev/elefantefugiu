@@ -15,13 +15,14 @@
     "main_nav": "Navegação principal",
     "tabbar": "Secções principais",
     "footer_nav": "Ligações do rodapé",
-    "language": "Idioma"
+    "language": "Idioma",
+    "games": "Jogos"
   },
   "tabbar": {
     "home": "Início",
     "epochs": "Épocas",
     "map": "Mapa",
-    "myths": "Mitos",
+    "games": "Jogos",
     "surprise": "Surpresa"
   },
   "nav": {
@@ -62,6 +63,10 @@
     "myths": {
       "title": "Mito ou verdade",
       "description": "O que guias, roteiros e amigos contam sobre Portugal: escolha o que pensa e leia o que realmente aconteceu. Por trás de cada resposta há uma das minhas histórias."
+    },
+    "order": {
+      "title": "O que veio primeiro?",
+      "description": "Jogo: dois acontecimentos do passado de Portugal, qual aconteceu primeiro? Dez pares e um resultado. Por trás de cada data há uma das minhas histórias."
     }
   },
   "footer": {
@@ -72,7 +77,8 @@
     "legal": "Informação legal",
     "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
     "privacy": "Sem publicidade nem cookies",
-    "myths": "Mito ou verdade"
+    "myths": "Mito ou verdade",
+    "order": "O que veio primeiro?"
   },
   "home": {
     "epochs_heading": "Épocas",
@@ -449,5 +455,40 @@
     "copied": "Copiado",
     "best": "O seu melhor título: {band}",
     "restart": "Recomeçar"
+  },
+  "order": {
+    "lead": "Dois acontecimentos do passado de Portugal. Qual aconteceu primeiro? Dez pares.",
+    "og_title_page": "O que veio primeiro? Um jogo sobre a história de Portugal",
+    "og_description": "Dois acontecimentos do passado de Portugal: qual aconteceu primeiro? Dez pares, e por trás de cada data há uma história.",
+    "question": "O que veio primeiro?",
+    "progress_label": "Progresso do jogo",
+    "step": "Par {i} de {total}",
+    "sq_label": "Par {i}: {state}",
+    "sq_empty": "sem resposta",
+    "sq_hit": "acertou",
+    "sq_miss": "errou",
+    "first": "Primeiro",
+    "outcome_hit": "Acertou",
+    "outcome_miss": "Errou",
+    "between_one": "Entre os dois, {n} ano",
+    "between_other": "Entre os dois, {n} anos",
+    "between_about_one": "Entre os dois, cerca de {n} ano",
+    "between_about_other": "Entre os dois, cerca de {n} anos",
+    "read": "Ler →",
+    "next": "Seguinte",
+    "finish": "Resultado",
+    "band_top": "Sentido do tempo de cronista",
+    "band_high": "Bom sentido do tempo",
+    "band_mid": "O tempo às vezes confunde",
+    "band_low": "O tempo sabe surpreender",
+    "misses": "Onde errou",
+    "again": "Mais uma ronda",
+    "read_all": "Ler as histórias",
+    "share_title": "O que veio primeiro? {band}",
+    "share_ask": "E o que acha?",
+    "copied": "Copiado",
+    "nojs": "O jogo precisa de JavaScript ativado.",
+    "nojs_link": "Entretanto, pode jogar ao «Mito ou verdade» →",
+    "empty": "Neste modo ainda não há nenhum par de histórias."
   }
 }

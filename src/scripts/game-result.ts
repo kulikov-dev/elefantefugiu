@@ -34,8 +34,8 @@ export interface ResultScreen {
   /** The tiles are in the answers' order; `misses` are the list items of the misses (empty: the block is hidden). */
   show(opts: { title: string; tiles: readonly TileState[]; misses: readonly HTMLElement[] }): void;
   hide(): void;
-  /** Share: the text has the title and the squares, never the answers; the dialog of the browser if there is one, otherwise the clipboard. `event` goes to the counter once per result. */
-  onShare(make: () => { title: string; text: string }, event: string): void;
+  /** Share: the text has the title and the squares, never the answers; the dialog of the browser if there is one, otherwise the clipboard. `event` (if any) goes to the counter once per result. */
+  onShare(make: () => { title: string; text: string }, event?: string): void;
   onAgain(handler: () => void): void;
   /** Forget that the result was shared (a new game). */
   reset(): void;
@@ -92,7 +92,7 @@ export function initResult(root: HTMLElement, strings: Record<string, string>, s
             statusEl.textContent = `${s('failed')} ${text} ${shareUrl}`;
           }
         }
-        if (done && !shared) {
+        if (done && !shared && event) {
           shared = true;
           countEvent(event, title);
         }
