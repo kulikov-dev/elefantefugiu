@@ -2,6 +2,9 @@
 //   node festas.mjs [window page art nojs natal bolo carnaval]
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
 // text in every language of the site (pt, en, ru) and a drawing; the suite names what is missing when there is none.
+import { spawn, spawnSync } from 'node:child_process';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { launchBrowser } from './browser.mjs';
 import { festas, published, readyEpochs } from './data.mjs';
 import { addDays, festaDay, fillDate, windowOf } from '../../src/lib/festas.mjs';
@@ -16,7 +19,10 @@ if (!FESTA) throw new Error('need: an enabled holiday with a drawing and a text 
 const TEXT = FESTA.text.ru;
 const STORY = published.find((e) => e.id === FESTA.story);
 if (!STORY) throw new Error(`need: the story "${FESTA.story}" of the holiday "${FESTA.id}" among the published stories`);
-const year = new Date().getFullYear() + 1;
+// Days come from the data, never from the clock: the year after the last published story (the days of the holidays are far from it), and, for the builds that
+// need a day of their own, the days below.
+const LATEST = published.map((e) => e.published).sort().at(-1);
+const year = Number(LATEST.slice(0, 4)) + 1;
 const DAY = festaDay(FESTA.date, year);
 const { from: FIRST } = windowOf(DAY);
 const BEFORE = addDays(FIRST, -1);
@@ -29,6 +35,27 @@ const BOLO = festas.find((f) => f.enabled && f.art === 'bolo' && Object.values(f
 const BOLO_LANGS = BOLO ? LANGS.filter((l) => BOLO.text[l]?.bolo) : [];
 const BOLO_DAY = BOLO ? festaDay(BOLO.date, year) : '';
 
+// The pages of a holiday are decided when the site is built, by the day of the build (indexing, sitemap, the picture of the home page, the header without JavaScript):
+// two builds with a day of their own (prepare-day.mjs), one inside the window of the carnival and one outside every window of every holiday. A check that needs
+// the day of the build asks for one of them (`open(url, { site: OUT })`); the day of the real build (BASE_URL) is not looked at.
+const windows = (y) => festas.map((f) => { const d = festaDay(f.date, y); return { from: windowOf(d).from, to: d }; });
+const free = (day) => [-1, 0, 1].every((k) => windows(Number(day.slice(0, 4)) + k).every((w) => day < w.from || day > w.to));
+const OUT_DAY = (() => { let d = LATEST; while (!free(d)) d = addDays(d, 1); return d; })();
+const CARN_DAY = (() => { const c = festas.find((f) => f.enabled && f.art === 'queen' && 'easter' in f.date); return c ? festaDay(c.date, year) : DAY; })();
+const dayPort = new URL(base).port ? Number(new URL(base).port) : 4400;
+const dayChildren = [];
+process.on('exit', () => dayChildren.forEach((c) => c.kill()));
+async function dayBuild(name, day, port) {
+  const r = spawnSync('node', ['prepare-day.mjs', name, day], { cwd: new URL('.', import.meta.url), stdio: 'inherit', env: process.env });
+  if (r.status !== 0) throw new Error(`the build of ${name} (${day}) failed`);
+  dayChildren.push(spawn('node', ['serve.mjs', String(port)], { cwd: new URL('.', import.meta.url), env: { ...process.env, DIST: join(process.env.QA_VARIANT_DIR || tmpdir(), `elefante-day-${name}`, 'dist') }, stdio: 'ignore' }));
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  return `http://localhost:${port}`;
+}
+const OUT = want('page') || want('natal') || want('carnaval') ? await dayBuild('out', OUT_DAY, dayPort + 2) : '';
+const IN = want('carnaval') ? await dayBuild('in', CARN_DAY, dayPort + 3) : '';
+console.log(`INFO  builds of the day: outside every window ${OUT_DAY} (${OUT}), inside the window of the carnival ${CARN_DAY} (${IN})`);
+
 let failed = 0;
 const baseOk = (name, cond, extra = '') => {
   if (!cond) failed += 1;
@@ -36,7 +63,7 @@ const baseOk = (name, cond, extra = '') => {
 };
 const ok = baseOk;
 const browser = await launchBrowser();
-const open = async (url, { width = 1280, scheme = 'light', reduce = false, js = true } = {}) => {
+const open = async (url, { width = 1280, scheme = 'light', reduce = false, js = true, site = base } = {}) => {
   const page = await browser.newPage();
   await page.setViewport({ width, height: 900, isMobile: width < 700, hasTouch: width < 700 });
   await page.emulateMediaFeatures([
@@ -46,7 +73,7 @@ const open = async (url, { width = 1280, scheme = 'light', reduce = false, js = 
   if (!js) await page.setJavaScriptEnabled(false);
   page.errors = [];
   page.on('pageerror', (e) => page.errors.push(e.message));
-  await page.goto(`${base}${url}`, { waitUntil: 'load' });
+  await page.goto(`${site}${url}`, { waitUntil: 'load' });
   return page;
 };
 /** What of the holiday is drawn on a page right now (checkVisibility: display none and hidden ancestors count). */
@@ -138,7 +165,7 @@ if (want('page')) {
   for (const lang of LANGS) {
     const t = FESTA.text[lang];
     const url = pageOf(lang);
-    const outside = await open(`${url}?hoje=${AFTER}`);
+    const outside = await open(`${url}?hoje=${AFTER}`, { site: OUT });
     const out = await shown(outside);
     const line = await outside.$eval('[data-festa-off]', (el) => el.textContent.trim());
     ok(`${url}?hoje=${AFTER}: the line "${t.off_window}" shows in the place of the date`, out.off && !out.date && line === t.off_window, JSON.stringify(out));
@@ -221,7 +248,7 @@ if (want('natal')) {
     ok(`/${lang}/ in the window: the block of the holiday with its date line, title and link, and the icon of the tab`, h.shown && h.text.includes(t.head_date) && h.text.includes(t.head_title) && h.href === pageB(lang) && h.icon, JSON.stringify({ ...h, text: h.text.length }));
     const outHome = await shown(await open(`/${lang}/?hoje=${out}`));
     ok(`/${lang}/ after the window: no block, the usual icon`, !outHome.festa && !outHome.icon, JSON.stringify(outHome));
-    const page = await open(`${pageB(lang)}?hoje=${out}`);
+    const page = await open(`${pageB(lang)}?hoje=${out}`, { site: OUT });
     const c = await page.evaluate(() => ({
       h1: document.querySelector('h1')?.textContent?.trim(),
       hreflang: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => `${l.getAttribute('hreflang')} ${new URL(l.href).pathname}`),
@@ -241,8 +268,8 @@ if (want('natal')) {
     ok(`${lang}: the preview (title, description, picture) is the holiday's`, c.og === `${t.name} · ${t.date}` && c.ogd === t.og_description && c.ogi.includes('og-festas/'), JSON.stringify([c.og, c.ogd, c.ogi]));
     ok(`${lang}: two blocks and all the traditions`, c.headings.length === 2 && c.trad === t.traditions.length, JSON.stringify([c.headings, c.trad]));
   }
-  // Sitemap: this build is outside the window of the holiday, so none of its pages stands in it (the build in the window is checked by check-sitemap).
-  const map = await (await fetch(`${base}/sitemap.xml`)).text();
+  // Sitemap: the build of the day outside every window has none of the pages of the holiday in it (the build in the window is checked by check-sitemap).
+  const map = await (await fetch(`${OUT}/sitemap.xml`)).text();
   const inMap = LANGS.filter((l) => map.includes(pageB(l)));
   ok('the sitemap has all three pages of the holiday or none of them', inMap.length === 0 || inMap.length === 3, inMap.join());
 }
@@ -439,9 +466,9 @@ if (want('carnaval')) {
     }));
     ok(`${carnPage(lang)}: hreflang to the three pages and x-default, the language switch leads to all three`, meta.hreflang.slice().sort().join('|') === carnHreflang && [...meta.switch].sort().join() === 'en,pt,ru' && meta.off === 0, JSON.stringify(meta));
     ok(`${carnPage(lang)}: the preview (title, description, picture) is the holiday's`, meta.og === `${say(lang, 'name')} · ${say(lang, 'date')}` && meta.ogd === CARN.text[lang].og_description && meta.ogi.includes('og-festas/'), JSON.stringify([meta.og, meta.ogd, meta.ogi]));
-    const home = await open(`/${lang}/?hoje=${day}`);
+    const home = await open(`/${lang}/`, { site: IN });
     const og = await home.evaluate(() => document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '');
-    ok(`/${lang}/ in the window: the block comes after the hero and the picture to share is the holiday's`, og.includes('og-festas/') && (await home.evaluate((id) => { const b = document.querySelector(`[data-festa-show="${id}"]`); const h = document.querySelector('.hero, main h1'); return !!b && !!h && !!(h.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING); }, CARN.id)), og);
+    ok(`/${lang}/ built in the window: the block comes after the hero and the picture to share is the holiday's`, og.includes('og-festas/') && (await home.evaluate((id) => { const b = document.querySelector(`[data-festa-show="${id}"]`); const h = document.querySelector('.hero, main h1'); return !!b && !!h && !!(h.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING); }, CARN.id)), og);
   }
   /** The block of the carnival on the home page and the icon of the tab. */
   const homeState = (page) =>
@@ -462,7 +489,7 @@ if (want('carnaval')) {
       ok(`/${lang}/?hoje=${date} (${name}): ${inside ? 'the block of the holiday and the tab icon' : 'the usual home page'}`, inside ? st.shown && header && st.icon && st.festa === CARN.id : !st.shown && !st.icon && st.festa !== CARN.id, JSON.stringify(st));
     }
     const url = `/${lang}/festa/${CARN.slug}/`;
-    const off = await open(`${url}?hoje=${addDays(day, 1)}`);
+    const off = await open(`${url}?hoje=${addDays(day, 1)}`, { site: OUT });
     const out = await off.evaluate(() => ({
       line: document.querySelector('[data-festa-off]')?.checkVisibility() ? document.querySelector('[data-festa-off]').textContent.trim() : '',
       date: !!document.querySelector('[data-festa-on]')?.checkVisibility(),
