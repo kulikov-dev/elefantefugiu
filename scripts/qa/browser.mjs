@@ -31,6 +31,17 @@ const NO_PREFETCH = () => {
   }).observe(document, { childList: true, subtree: true });
 };
 
+// page.click scrolls an element into view only when it is out of the viewport; one that sits in the strip of the bottom tab bar (a phone) counts as in view and the click
+// lands on the bar. So every click first brings the element to the middle of the window (the one place for this: no suite has a scroll of its own before a click).
+function centerClicks(page) {
+  const click = page.click.bind(page);
+  page.click = async (selector, options) => {
+    await page.$eval(selector, (el) => el.scrollIntoView({ block: 'center', inline: 'center' })).catch(() => {}); // a missing element: click says so itself
+    return click(selector, options);
+  };
+  return page;
+}
+
 export async function launchBrowser({ prefetch = false } = {}) {
   let browser = await start();
   const again = async (open) => {
@@ -51,7 +62,7 @@ export async function launchBrowser({ prefetch = false } = {}) {
           again(async (b) => {
             const page = await b.newPage();
             if (!prefetch) await page.evaluateOnNewDocument(NO_PREFETCH);
-            return page;
+            return centerClicks(page);
           });
       }
       if (name === 'createBrowserContext') {
@@ -62,7 +73,7 @@ export async function launchBrowser({ prefetch = false } = {}) {
             context.newPage = async () => {
               const page = await open();
               if (!prefetch) await page.evaluateOnNewDocument(NO_PREFETCH);
-              return page;
+              return centerClicks(page);
             };
             return context;
           });

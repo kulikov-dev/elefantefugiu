@@ -420,22 +420,39 @@ if (want('fonts')) {
 const HEADER_MAX = 150; // three rows of 44 px targets cannot go much below 135 px; 145 px is what the layout gives
 if (want('header')) {
   for (const lang of ['pt', 'en']) {
-    for (const width of [360, 320, 600, 767]) {
+    for (const width of [360, 320, 600, 767, 768]) {
       const page = await newPage({ width });
       await page.goto(`${base}/${lang}/`, { waitUntil: 'load' });
-      const h = await page.evaluate(() => {
+      const phone = width < 768; // up to 767 px the menu of the header is the bottom tab bar (src/components/TabBar.astro)
+      const h = await page.evaluate((phone) => {
         const vw = document.documentElement.clientWidth;
         const box = (sel) => { const r = document.querySelector(sel).getBoundingClientRect(); return { l: Math.round(r.left), r: Math.round(r.right), t: Math.round(r.top), b: Math.round(r.bottom), w: Math.round(r.width), h: Math.round(r.height) }; };
-        const parts = { brand: box('.brand'), lang: box('.lang-switch'), theme: box('.site-header .theme-button'), family: box('.family-menu'), nav: box('.site-nav') };
-        const links = [...document.querySelectorAll('.site-nav a')].map((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= vw && r.height >= 44; });
+        const parts = { brand: box('.brand'), lang: box('.lang-switch'), theme: box('.site-header .theme-button'), family: box('.family-menu'), ...(phone ? {} : { nav: box('.site-nav') }) };
+        const links = phone ? [] : [...document.querySelectorAll('.site-nav a')].map((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= vw && r.height >= 44; });
         const names = Object.keys(parts);
         let overlap = false;
         for (let i = 0; i < names.length; i += 1) for (let j = i + 1; j < names.length; j += 1) { const a = parts[names[i]]; const b = parts[names[j]]; if (a.l < b.r - 1 && b.l < a.r - 1 && a.t < b.b - 1 && b.t < a.b - 1) overlap = true; }
-        return { vw, sw: document.documentElement.scrollWidth, parts, links, overlap, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().height), themeInHeader: document.querySelector('.site-header .theme-button') !== null, themeSize: box('.site-header .theme-button'), navRows: new Set([...document.querySelectorAll('.site-nav a')].map((a) => Math.round(a.getBoundingClientRect().top))).size, brandLines: Math.round(document.querySelector('.brand span').getBoundingClientRect().height) };
-      });
+        return { vw, sw: document.documentElement.scrollWidth, parts, links, overlap, header: Math.round(document.querySelector('.site-header').getBoundingClientRect().height), themeInHeader: document.querySelector('.site-header .theme-button') !== null, themeSize: box('.site-header .theme-button'), navRows: phone ? 1 : new Set([...document.querySelectorAll('.site-nav a')].map((a) => Math.round(a.getBoundingClientRect().top))).size, brandLines: Math.round(document.querySelector('.brand span').getBoundingClientRect().height) };
+      }, phone);
       const inside = Object.values(h.parts).every((p) => p.l >= 0 && p.r <= h.vw);
-      ok(`header (${lang}, ${width} px): logo, language, family mode and menu all inside the screen, nothing overlaps, no sideways scroll, menu on one row, name on one line`, inside && h.links.every(Boolean) && h.sw <= h.vw && !h.overlap && h.navRows === 1 && h.brandLines < 40, JSON.stringify({ sw: h.sw, vw: h.vw, navRows: h.navRows, brandLines: h.brandLines }));
-      ok(`header (${lang}, ${width} px): at most ${HEADER_MAX} px tall (${h.header} px)`, h.header <= HEADER_MAX);
+      ok(`header (${lang}, ${width} px): logo, language, family mode and menu all inside the screen, nothing overlaps, no sideways scroll, menu on one row (from 768 px), name on one line`, inside && h.links.every(Boolean) && h.sw <= h.vw && !h.overlap && h.navRows === 1 && h.brandLines < 40, JSON.stringify({ sw: h.sw, vw: h.vw, navRows: h.navRows, brandLines: h.brandLines }));
+      ok(`header (${lang}, ${width} px): at most ${HEADER_MAX} px tall (${h.header} px)`, h.header <= HEADER_MAX);
+      const bar = await page.evaluate(() => {
+        const nav = document.querySelector('.tabbar');
+        const shown = !!nav && getComputedStyle(nav).display !== 'none';
+        const links = shown ? [...nav.querySelectorAll('a')] : [];
+        const vw = document.documentElement.clientWidth;
+        return {
+          shown,
+          rows: new Set(links.map((a) => Math.round(a.getBoundingClientRect().top))).size,
+          inside: links.every((a) => { const r = a.getBoundingClientRect(); return r.left >= 0 && r.right <= vw && r.width >= 44 && r.height >= 44; }),
+          // a label on one line: its box is one line high and its text is not wider than the tab
+          oneLine: links.every((a) => { const s = a.querySelector('span'); const lh = parseFloat(getComputedStyle(s).lineHeight); return s.getBoundingClientRect().height <= lh * 1.3 && s.scrollWidth <= a.clientWidth; }),
+          fontMin: Math.min(...links.map((a) => parseFloat(getComputedStyle(a.querySelector('span')).fontSize))),
+        };
+      });
+      if (phone) ok(`tab bar (${lang}, ${width} px): five tabs on one row inside the screen, each at least 44 px, labels on one line, font at least 11 px`, bar.shown && bar.rows === 1 && bar.inside && bar.oneLine && bar.fontMin >= 11, JSON.stringify(bar));
+      else ok(`tab bar (${lang}, ${width} px): absent from 768 px`, !bar.shown);
       ok(`header (${lang}, ${width} px): the round theme icon is in the header (at least 44 x 44 px)`, h.themeInHeader && h.themeSize.w >= 44 && h.themeSize.h >= 44, JSON.stringify(h.themeSize));
       // The header is an ordinary block: not sticky or fixed on narrow screens, and it scrolls away with the page.
       const pos = await page.evaluate(() => { const out = []; for (let el = document.querySelector('.site-header'); el && el !== document.documentElement; el = el.parentElement) out.push(getComputedStyle(el).position); return out; });

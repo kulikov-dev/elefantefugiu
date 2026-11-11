@@ -125,6 +125,11 @@
     display: none; /* its three links (Eras, Map, Surprise me) are tabs now */
   }
 
+  /* A link or a field brought into view (scrollIntoView, the focus from the keyboard, an anchor) stops above the bar, not under it. */
+  html {
+    scroll-padding-block-end: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
+  }
+
   body {
     padding-block-end: calc(var(--tabbar-height) + env(safe-area-inset-bottom));
   }
