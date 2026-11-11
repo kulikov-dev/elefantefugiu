@@ -115,12 +115,13 @@ if (want('question')) {
     }));
     ok(`${lang}: "Pair 1 of ${ROUND}" and ${ROUND} tiles`, /\b1\b.*\b10\b/.test(q.step) && q.tiles === ROUND, `${q.step} ${q.tiles}`);
     ok(`${lang}: two cards with a picture and a title, enabled`, q.cards.length === 2 && q.cards.every((c) => c.img && c.alt === '' && c.text.trim().length > 3 && !c.disabled));
-    ok(`${lang}: no year on a card`, q.cards.every((c) => !/\d{3,4}/.test(c.text)), q.cards.map((c) => c.text).join(' | '));
+    // A title may hold a number of its own ("A bridge that serves 1900 years"): what must not be on a card is anything but the title, so no date.
+    ok(`${lang}: a card is its title and nothing more (no year, no date)`, q.cards.every((c) => list.some((s) => s.title === c.text.trim())), q.cards.map((c) => c.text).join(' | '));
     const names = epochs.flatMap((e) => Object.values(e.name ?? {}).filter((n) => typeof n === 'string'));
     ok(`${lang}: no name of an epoch on a card`, q.cards.every((c) => names.every((n) => !c.text.includes(n))));
     ok(`${lang}: no epoch mark on a card or in the pair (no data-epoch, no colour of an epoch)`, (await page.$$eval('[data-pair] [data-epoch], [data-pair] [class*="epoch"], [data-pair] [style*="epoch"]', (l) => l.length)) === 0);
     ok(`${lang}: no second heading above the pair, no answer before the press`, q.h2 === 0 && !q.answer);
-    ok(`${lang}: the dates are not in the page before the press`, !(await page.evaluate(() => /\d{3,4}/.test(document.querySelector('[data-pair]').innerText))));
+    ok(`${lang}: the dates are not in the page before the press`, (await page.$$eval('[data-pair] .order__date, [data-pair] .order__when, [data-pair] .order__first', (l) => l.length)) === 0);
     await page.close();
   }
   // A story whose label has two years ("1906 e 2020") is in the game with the first year only.
