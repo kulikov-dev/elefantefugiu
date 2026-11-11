@@ -120,6 +120,8 @@
   --shadow-raised: light-dark(0 1px 4px rgb(31 27 22 / 0.3), 0 1px 4px rgb(0 0 0 / 0.6));
   --z-map-overlay: 1100; /* above Leaflet's own controls (1000) */
   --z-header: 1200; /* the header makes its own stacking context (view-transition-name): above every layer of a page, Leaflet and map overlays included */
+  --z-tabbar: 1150; /* the bottom tab bar of a phone: above the content and the map sheet (1100), below the header with its menus (1200) */
+  --tabbar-height: 3.5rem; /* without the safe area under it */
 
   /* Touch targets */
   --touch-target: 2.75rem;

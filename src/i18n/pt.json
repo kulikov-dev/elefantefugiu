@@ -13,8 +13,16 @@
     "skip_to_content": "Saltar para o conteúdo",
     "home": "O Elefante Fugiu, página inicial",
     "main_nav": "Navegação principal",
+    "tabbar": "Secções principais",
     "footer_nav": "Ligações do rodapé",
     "language": "Idioma"
+  },
+  "tabbar": {
+    "home": "Início",
+    "epochs": "Épocas",
+    "map": "Mapa",
+    "myths": "Mitos",
+    "surprise": "Surpresa"
   },
   "nav": {
     "home": "Início",

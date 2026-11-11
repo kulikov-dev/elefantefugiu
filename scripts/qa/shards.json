@@ -2,6 +2,7 @@
  "_about": "Suites per shard of QA full (run.mjs --shard=i/4). Balanced by the seconds in \"weights\" (seconds of the run 41188602671 with MAP_SAMPLE=30; refresh from a real run). Every suite of suites.mjs must be in exactly one shard: npm test checks.",
  "weights": {
   "behave": 7,
+  "nav": 60,
   "map-basic": 10,
   "map-variant": 248,
   "ru-variant": 1,
@@ -45,6 +46,7 @@
  "shards": [
   [
    "map-variant",
+   "nav",
    "theme",
    "azulejo",
    "service",

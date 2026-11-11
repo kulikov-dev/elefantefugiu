@@ -16,6 +16,7 @@ export const SUITES = [
   { name: 'family-pages', script: 'family.mjs', args: ['recount', 'nearby', 'gate', 'flash', 'blocked', 'surprise', 'surprise-read'], about: 'recounting, Nearby, the gate, no flash, blocked storage, Surprise me and the read marks' },
   { name: 'family-map', script: 'family.mjs', args: ['map'], about: 'the map in every family mode' },
   { name: 'interactives', script: 'interactives.mjs', about: 'the dots of Aljubarrota: keyboard, text, motion, no JS, code, colour, family modes' },
+  { name: 'nav', script: 'nav.mjs', about: 'bottom tab bar of a phone: width, active tab per page, end of the page above the bar, colour, focus, keyboard' },
   { name: 'theme', script: 'theme.mjs', about: 'theme, palettes, fonts, header, light-dark() fallback' },
   { name: 'theme-variant', script: 'theme.mjs', args: ['variant', 'palette', 'fallback'], variant: true, about: 'palettes of every epoch including Estado Novo (fixture build), the light-dark() fallback per epoch' },
   { name: 'azulejo', script: 'azulejo.mjs', about: 'azulejo patterns in both themes, map waiting tile, reduced motion, layout shifts, neutral header' },

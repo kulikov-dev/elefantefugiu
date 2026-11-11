@@ -13,8 +13,16 @@
     "skip_to_content": "Перейти к содержимому",
     "home": "O Elefante Fugiu, главная страница",
     "main_nav": "Основная навигация",
+    "tabbar": "Основные разделы",
     "footer_nav": "Ссылки в подвале",
     "language": "Язык"
+  },
+  "tabbar": {
+    "home": "Главная",
+    "epochs": "Эпохи",
+    "map": "Карта",
+    "myths": "Мифы",
+    "surprise": "Удиви"
   },
   "nav": {
     "home": "Главная",

@@ -4,6 +4,7 @@ import '../styles/global.css';
 import FaviconLinks from '../components/FaviconLinks.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import TabBar from '../components/TabBar.astro';
 import { LANGS, LOCALES, altPaths, pagePath, withBase, type Lang, type PageKey } from '../i18n/routes';
 import { t } from '../i18n';
 import { headScript } from '../lib/head-script';
@@ -87,6 +88,8 @@ interface Props {
 
 const { lang, title, pageKey, alternates: alternatesProp, canonicalTo, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, hreflang = true, activeLangs, schema, epoch, count = true, allLangs = false } = Astro.props;
 const chrome = allLangs ? LANGS : [lang];
+// The tab of the bottom bar that matches the page: the five sections; the pages of an epoch (the epoch, its stories) belong to "Epochs".
+const tab = pageKey === 'home' || pageKey === 'map' || pageKey === 'myths' || pageKey === 'surprise' ? pageKey : epoch ? 'epochs' : undefined;
 // Fonts of the first screen are fetched together with the stylesheet, not after it (a browser finds a font only when the CSS is parsed and the
 // text that uses it is laid out: 250-300 ms later on a phone). The Russian pages: their Cyrillic faces arrive late and the tags and the hook
 // re-wrap (a layout jump of 0.17 on a phone); a Russian page also draws Latin letters (the name of the site, names of places), so the Latin
@@ -213,6 +216,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
       chrome.map((l) => (
         <div class="lang-block" data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
           <SiteFooter lang={l} />
+          <TabBar lang={l} active={tab} />
         </div>
       ))
     }

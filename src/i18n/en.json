@@ -13,8 +13,16 @@
     "skip_to_content": "Skip to content",
     "home": "O Elefante Fugiu, home page",
     "main_nav": "Main navigation",
+    "tabbar": "Main sections",
     "footer_nav": "Footer links",
     "language": "Language"
+  },
+  "tabbar": {
+    "home": "Home",
+    "epochs": "Eras",
+    "map": "Map",
+    "myths": "Myths",
+    "surprise": "Surprise"
   },
   "nav": {
     "home": "Home",
