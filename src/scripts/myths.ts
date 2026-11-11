@@ -22,11 +22,12 @@ const cards = [...document.querySelectorAll<HTMLElement>('[data-myth]')];
 
 if (root && list && progress && stepEl && squaresEl && bestEl && restartButton && cards.length > 0) {
   const strings = JSON.parse(root.dataset.strings ?? '{}') as Record<string, string>;
-  const shareUrl = root.dataset.shareUrl ?? location.href;
+  // "Share" leads to the page of the range of the result (the same game, a preview of its own), with ?src=share.
+  const rankUrls = JSON.parse(root.dataset.rankUrls ?? '{}') as Record<string, string>;
   const total = cards.length;
   const s = (key: string, vars: Record<string, string | number> = {}): string => fill(strings[key] ?? '', vars);
   const stateLabel = (state: TileState): string => s(`sq_${state}`);
-  const result = initResult(root, strings, shareUrl, stateLabel);
+  const result = initResult(root, strings, () => rankUrls[bandOf(marks.filter(isHit).length, total)] ?? location.href, stateLabel);
   const count = countEvent;
 
   let order = cards;

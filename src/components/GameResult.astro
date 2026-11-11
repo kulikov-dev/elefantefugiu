@@ -1,7 +1,14 @@
 ---
-// The result screen of a game of the site ("Myth or fact", "Which came first?"): a title by the range, the row of tiles, the misses with links, Share, Play again and a link on (docs/spec.md 5.8).
-// Hidden until the game script (src/scripts/game-result.ts) shows it. The attributes data-final, data-score, data-final-squares, data-misses-box, data-misses, data-final-share, data-again, data-final-status are the hooks of the scripts and QA.
+// The result screen of a game of the site ("Myth or fact", "Which came first?"): the picture of the game whole (3:2) with the line that it is AI-made, a title by the range, the row of big tiles, the misses with links,
+// Share (the main button), Play again (the second one) and a link on (docs/spec.md 5.8, 5.9). Hidden until the game script (src/scripts/game-result.ts) shows it.
+// The attributes data-final, data-score, data-final-squares, data-misses-box, data-misses, data-final-share, data-again, data-final-status are the hooks of the scripts and QA.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import { gamePicture, type GameName } from '../lib/games-images';
+
 interface Props {
+  lang: Lang;
+  game: GameName;
   /** The heading of the block of misses ("Where you slipped"). */
   missesTitle: string;
   shareLabel: string;
@@ -12,21 +19,33 @@ interface Props {
   id?: string;
 }
 
-const { missesTitle, shareLabel, againLabel, readLabel, readHref, id = 'game-score' } = Astro.props;
+const { lang, game, missesTitle, shareLabel, againLabel, readLabel, readHref, id = 'game-score' } = Astro.props;
+// The picture is made from docs/images/games by the build; without it the screen goes without a picture.
+const picture = gamePicture(game);
 ---
 <section class="game-result" data-final aria-labelledby={id} hidden>
-  <h2 class="game-result__score" id={id} tabindex="-1" data-score></h2>
-  <ol class="squares" data-final-squares></ol>
-  <div class="game-result__misses" data-misses-box hidden>
-    <h3>{missesTitle}</h3>
-    <ul class="game-result__miss-list" data-misses></ul>
+  {
+    picture && (
+      <figure class="game-result__figure">
+        <img class="game-result__banner" src={picture.src} srcset={picture.srcset} sizes="(min-width: 768px) 720px, 100vw" width={picture.width} height={picture.height} alt="" loading="lazy" decoding="async" />
+        <figcaption class="game-result__ai">{t(lang, 'games.ai_caption')}</figcaption>
+      </figure>
+    )
+  }
+  <div class="game-result__body">
+    <h2 class="game-result__score" id={id} tabindex="-1" data-score></h2>
+    <ol class="squares squares--big" data-final-squares></ol>
+    <div class="game-result__misses" data-misses-box hidden>
+      <h3>{missesTitle}</h3>
+      <ul class="game-result__miss-list" data-misses></ul>
+    </div>
+    <div class="game-result__actions">
+      <button class="button" type="button" data-final-share>{shareLabel}</button>
+      <button class="button button--secondary" type="button" data-again>{againLabel}</button>
+    </div>
+    <p class="game-result__read"><a href={readHref}>{readLabel} →</a></p>
+    <p class="game-result__status" role="status" data-final-status></p>
   </div>
-  <div class="game-result__actions">
-    <button class="button" type="button" data-final-share>{shareLabel}</button>
-    <button class="button button--secondary" type="button" data-again>{againLabel}</button>
-    <a class="button button--secondary" href={readHref}>{readLabel}</a>
-  </div>
-  <p class="game-result__status" role="status" data-final-status></p>
 </section>
 
 <style>
@@ -35,16 +54,40 @@ const { missesTitle, shareLabel, againLabel, readLabel, readHref, id = 'game-sco
   }
 
   .game-result {
-    display: grid;
-    gap: var(--space-4);
     max-width: var(--measure);
-    padding: var(--space-4);
+    overflow: hidden;
     border: 1px solid var(--epoch-line);
     border-radius: var(--radius-md);
     background: var(--epoch-surface);
   }
 
-  .game-result > * {
+  .game-result__figure {
+    margin: 0;
+  }
+
+  .game-result__banner {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    background: var(--epoch-line);
+    filter: var(--image-filter);
+    object-fit: cover;
+  }
+
+  .game-result__ai {
+    padding: var(--space-1) var(--space-4) 0;
+    color: var(--color-ink-muted);
+    font-size: var(--text-xs);
+  }
+
+  .game-result__body {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-4);
+  }
+
+  .game-result__body > * {
     margin: 0;
   }
 
@@ -68,10 +111,47 @@ const { missesTitle, shareLabel, againLabel, readLabel, readHref, id = 'game-sco
     padding-inline-start: var(--space-5);
   }
 
+  /* The misses of "Which came first?": a pair is two lines (the date in bold, the title), the pair is set off by a thin line, no bullets. */
+  .game-result__miss-list :global(.miss-pair) {
+    display: grid;
+    gap: var(--space-1);
+    padding-block: var(--space-2);
+    border-block-start: 1px solid var(--epoch-line);
+    list-style: none;
+  }
+
+  .game-result__miss-list :global(.miss-pair:first-child) {
+    border-block-start: 0;
+  }
+
+  .game-result__miss-list:has(.miss-pair) {
+    gap: 0;
+    padding-inline-start: 0;
+  }
+
+  .game-result__miss-list :global(.miss-row) {
+    display: grid;
+    grid-template-columns: minmax(var(--miss-date-col), max-content) 1fr;
+    gap: var(--space-3);
+    align-items: baseline;
+  }
+
+  .game-result__miss-list :global(.miss-date) {
+    max-width: var(--miss-date-col);
+    font-family: var(--font-heading);
+    font-weight: var(--weight-strong);
+  }
+
   .game-result__actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
+  }
+
+  .game-result__read a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
   }
 
   .game-result__status {

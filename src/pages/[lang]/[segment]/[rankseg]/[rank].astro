@@ -1,0 +1,18 @@
+---
+// The page of a shared result of a game: /ru/mif-ili-pravda/zvanie/high/, /ru/chto-bylo-ranshe/zvanie/top/ (pt .../titulo/..., en .../rank/...; docs/spec.md 5.10). "Share" at the end of a game leads here:
+// the page is the game itself (the start screen), noindex, canonical to the game, with a preview of its own: "I got «caption». How about you?" and the picture of the game. The id of the range is the same in every language.
+import type { GetStaticPaths } from 'astro';
+import MythsView from '../../../../views/MythsView.astro';
+import OrderView from '../../../../views/OrderView.astro';
+import { LANGS, RANKS, RANK_SEGMENT, ROUTES, type GameKey, type Lang } from '../../../../i18n/routes';
+
+export const getStaticPaths = (() =>
+  LANGS.flatMap((lang) =>
+    (['myths', 'order'] as GameKey[]).flatMap((game) =>
+      RANKS[game].map((rank) => ({ params: { lang, segment: ROUTES[game][lang], rankseg: RANK_SEGMENT[lang], rank }, props: { lang: lang as Lang, game, rank } })),
+    ),
+  )) satisfies GetStaticPaths;
+
+const { lang, game, rank } = Astro.props;
+---
+{game === 'myths' ? <MythsView lang={lang} rank={rank} /> : <OrderView lang={lang} rank={rank} />}

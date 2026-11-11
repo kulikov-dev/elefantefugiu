@@ -13,7 +13,7 @@ export const DEFAULT_LANG: Lang = 'pt';
 /** Fallback chain of a text that is missing in a language: ru -> en -> pt (the data loader applies it, see lib/localize.ts). */
 export const FALLBACK_CHAIN: Record<Lang, readonly Lang[]> = { pt: [], en: ['pt'], ru: ['en', 'pt'] };
 
-export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths' | 'order';
+export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths' | 'order' | 'games';
 
 // An empty slug means the language root (/pt/, /en/).
 export const ROUTES: Record<PageKey, Record<Lang, string>> = {
@@ -27,6 +27,7 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   surprise: { pt: 'surpreende-me', en: 'surprise-me', ru: 'udivi-menya' },
   myths: { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' },
   order: { pt: 'o-que-veio-primeiro', en: 'which-came-first', ru: 'chto-bylo-ranshe' },
+  games: { pt: 'jogos', en: 'games', ru: 'igry' },
 };
 
 /** Id of the epochs section on the home page; the "Épocas" menu item links to it. */
@@ -47,6 +48,17 @@ export function pagePath(lang: Lang, key: PageKey): string {
 /** Base-aware URL of the page of one claim of "Myth or fact": /ru/mif-ili-pravda/{id}/ (the same page with every card, that one first; noindex, docs/spec.md 5.8). The id is the same in every language. */
 export function mythPath(lang: Lang, id: string): string {
   return withBase(`${lang}/${ROUTES.myths[lang]}/${id}/`);
+}
+
+/** The games that have result pages (a shared result: /ru/mif-ili-pravda/zvanie/<rank>/), and the segment of those pages. noindex, the same page as the game (docs/spec.md 5.10). */
+export type GameKey = 'myths' | 'order';
+export const RANK_SEGMENT: Record<Lang, string> = { pt: 'titulo', en: 'rank', ru: 'zvanie' };
+/** The ids of the ranges of a result (the same in every language): the captions of the result by the share of right answers. */
+export const RANKS: Record<GameKey, readonly string[]> = { myths: ['low', 'mid', 'high'], order: ['low', 'mid', 'high', 'top'] };
+
+/** Base-aware URL of the page of a result: /ru/chto-bylo-ranshe/zvanie/high/. */
+export function rankPath(lang: Lang, game: GameKey, rank: string): string {
+  return withBase(`${lang}/${ROUTES[game][lang]}/${RANK_SEGMENT[lang]}/${rank}/`);
 }
 
 /** Address segment of a card page: /pt/historia/{slug}, /en/story/{slug} (docs/spec.md section 2). */

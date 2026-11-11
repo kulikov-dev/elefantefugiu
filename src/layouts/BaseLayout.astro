@@ -89,8 +89,8 @@ interface Props {
 const { lang, title, pageKey, alternates: alternatesProp, canonicalTo, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, hreflang = true, activeLangs, schema, epoch, count = true, allLangs = false } = Astro.props;
 const chrome = allLangs ? LANGS : [lang];
 // The tab of the bottom bar that matches the page: the five sections; the pages of an epoch (the epoch, its stories) belong to "Epochs".
-// The two games (Myth or fact, Which came first?) share the tab "Games".
-const tab = pageKey === 'myths' || pageKey === 'order' ? 'games' : pageKey === 'home' || pageKey === 'map' || pageKey === 'surprise' ? pageKey : epoch ? 'epochs' : undefined;
+// The page "Games" and the two games (Myth or fact, Which came first?) share the tab "Games".
+const tab = pageKey === 'myths' || pageKey === 'order' || pageKey === 'games' ? 'games' : pageKey === 'home' || pageKey === 'map' || pageKey === 'surprise' ? pageKey : epoch ? 'epochs' : undefined;
 // Fonts of the first screen are fetched together with the stylesheet, not after it (a browser finds a font only when the CSS is parsed and the
 // text that uses it is laid out: 250-300 ms later on a phone). The Russian pages: their Cyrillic faces arrive late and the tags and the hook
 // re-wrap (a layout jump of 0.17 on a phone); a Russian page also draws Latin letters (the name of the site, names of places), so the Latin
@@ -101,7 +101,7 @@ const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? t(lang, 'site.home_preview_title') : `${title} · ${siteName}`;
 // The service pages have a description of their own (pages.<key>.description); every other page without one uses the site description.
-const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise', 'myths', 'order'];
+const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise', 'myths', 'order', 'games'];
 const pageDescription = pageKey && DESCRIBED_PAGES.includes(pageKey) ? t(lang, `pages.${pageKey}.description`) : undefined;
 const description = descriptionProp ?? pageDescription ?? t(lang, 'site.description');
 

@@ -1,0 +1,153 @@
+---
+// "Games": /pt/jogos/, /en/games/, /ru/igry/ (docs/spec.md 5.10). The choice of a game: a big card for each ("Myth or fact", "Which came first?"): the picture of the game whole (3:2) with the line that it is AI-made, the name,
+// one line of invitation, and under it the state of the game in this browser (src/scripts/games.ts reads `myths:game` and `order:game`): "Start", "Continue (question 5 of 12)" or the caption of the last result.
+// The tab "Games" and the item of the menu of the header lead here. Indexable, in the sitemap, hreflang; the preview picture is the two pictures side by side.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { GAME_OG, gamePicture, gamesCollagePath } from '../lib/games-images';
+import { pagePath, withBase, type Lang } from '../i18n/routes';
+import { plural, t } from '../i18n';
+import { liveMyths } from '../lib/myths';
+import { MYTHS } from '../lib/myths-data';
+import { pageNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const site = await loadSite();
+const myths = liveMyths(MYTHS, site.events);
+const title = t(lang, 'pages.games.title');
+const cards = [
+  { key: 'myths' as const, href: pagePath(lang, 'myths'), name: t(lang, 'pages.myths.title'), line: plural(lang, 'games.myths_line', myths.length), picture: gamePicture('myths') },
+  { key: 'order' as const, href: pagePath(lang, 'order'), name: t(lang, 'pages.order.title'), line: t(lang, 'games.order_line'), picture: gamePicture('order') },
+];
+const strings: Record<string, string> = { start: t(lang, 'games.start'), continue_myths: t(lang, 'games.continue_myths'), continue_order: t(lang, 'games.continue_order') };
+for (const band of ['low', 'mid', 'high']) strings[`myths_band_${band}`] = t(lang, `myths.band_${band}`);
+for (const band of ['low', 'mid', 'high', 'top']) strings[`order_band_${band}`] = t(lang, `order.band_${band}`);
+const collage = gamesCollagePath();
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'games')), name: title, description: t(lang, 'pages.games.description'), type: 'WebPage' });
+---
+<BaseLayout
+  lang={lang}
+  pageKey="games"
+  title={title}
+  schema={schema}
+  preview={{ title: t(lang, 'games.og_title'), description: t(lang, 'games.og_description'), ...(collage ? { imageUrl: withBase(collage), imageSize: GAME_OG, imageAlt: t(lang, 'games.og_title') } : {}) }}
+>
+  <article class="games" data-games data-strings={JSON.stringify(strings)} data-myth-ids={JSON.stringify(myths.map((m) => m.id))}>
+    <h1>{title}</h1>
+    <ul class="games__list">
+      {
+        cards.map((card) => (
+          <li>
+            <a class="game-card" href={card.href} data-game-card={card.key}>
+              {
+                card.picture && (
+                  <figure class="game-card__figure">
+                    <img class="game-card__picture" src={card.picture.src} srcset={card.picture.srcset} sizes="(min-width: 768px) 420px, 100vw" width={card.picture.width} height={card.picture.height} alt="" loading="lazy" decoding="async" />
+                    <figcaption class="game-card__ai">{t(lang, 'games.ai_caption')}</figcaption>
+                  </figure>
+                )
+              }
+              <span class="game-card__text">
+                <h2 class="game-card__name">{card.name}</h2>
+                <span class="game-card__line">{card.line}</span>
+                <span class="game-card__state" data-state>{t(lang, 'games.start')}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </article>
+</BaseLayout>
+
+<script>
+  import '../scripts/games';
+</script>
+
+<style>
+  .games > * + * {
+    margin-block-start: var(--space-4);
+  }
+
+  /* Side by side from 768 px, one under the other on a phone. */
+  .games__list {
+    display: grid;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48rem) {
+    .games__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid var(--epoch-line);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .game-card:hover .game-card__name {
+    color: var(--color-accent);
+  }
+
+  .game-card__figure {
+    margin: 0;
+  }
+
+  .game-card__picture {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    background: var(--epoch-line);
+    filter: var(--image-filter);
+    object-fit: cover;
+  }
+
+  .game-card__ai {
+    padding: var(--space-1) var(--space-4) 0;
+    color: var(--color-ink-muted);
+    font-size: var(--text-xs);
+  }
+
+  .game-card__text {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .game-card__name {
+    margin: 0;
+    font-size: var(--text-2xl);
+    line-height: var(--leading-heading);
+  }
+
+  .game-card__line {
+    color: var(--color-ink-muted);
+  }
+
+  .game-card__state {
+    color: var(--color-accent);
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+  }
+</style>

@@ -11,6 +11,8 @@ import type { SiteData } from './site-data';
 /** The sizes of the thumbnail: the width of a card on a phone and of half a column from 640 px (the card is 16:7). */
 export const ORDER_IMAGE_WIDTHS = [360, 720];
 export const ORDER_IMAGE_SIZES = '(min-width: 640px) 340px, 100vw';
+/** The thumbnail of the plate under an answer (the same as the one of "Myth or fact": 96 and 192 px). */
+export const ORDER_THUMB_WIDTHS = [96, 192];
 
 /** The stories of the game in the language, in chronological order. */
 export async function orderStories(site: SiteData, lang: Lang): Promise<OrderStory[]> {
@@ -19,7 +21,8 @@ export async function orderStories(site: SiteData, lang: Lang): Promise<OrderSto
       const picture = cardPicture(e, site.epochs.find((ep) => ep.id === e.epoch) ?? {});
       const source = picture ? pictureSource(picture.file) : undefined;
       const image = source ? await getImage({ src: source, widths: ORDER_IMAGE_WIDTHS, sizes: ORDER_IMAGE_SIZES, format: 'webp', quality: 70 }) : undefined;
-      const entry = orderEntry(e, lang);
+      const thumb = source ? await getImage({ src: source, widths: ORDER_THUMB_WIDTHS, sizes: '6rem', format: 'webp', quality: 70 }) : undefined;
+      const entry = { ...orderEntry(e, lang), ...(thumb ? { thumb: { src: thumb.src, ...(thumb.srcSet.attribute ? { srcset: thumb.srcSet.attribute } : {}) } } : {}) };
       return image ? { ...entry, img: { src: image.src, ...(image.srcSet.attribute ? { srcset: image.srcSet.attribute } : {}), ...(picture?.focus ? { pos: picture.focus } : {}) } } : entry;
     }),
   );

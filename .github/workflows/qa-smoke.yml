@@ -54,6 +54,9 @@ jobs:
       # The pictures of the claims of "Myth or fact" (public/og-myths) are not in the repository either.
       - name: Myth pictures
         run: node scripts/make-myth-og.mjs
+      # The pictures of the games (public/games, public/og-games) are made from docs/images/games and are not in the repository either.
+      - name: Game pictures
+        run: node scripts/make-games-images.mjs
       - name: Build
         run: npx astro build
       - name: Browser suites

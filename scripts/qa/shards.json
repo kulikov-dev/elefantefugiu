@@ -42,7 +42,8 @@
   "panno": 25,
   "festas": 15,
   "myths": 25,
-  "order": 25
+  "order": 25,
+  "games": 15
  },
  "shards": [
   [
@@ -93,7 +94,8 @@
    "panno",
    "festas",
    "myths",
-   "order"
+   "order",
+   "games"
   ]
  ]
 }

@@ -9,10 +9,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GamesSwitch from '../components/GamesSwitch.astro';
 import GameResult from '../components/GameResult.astro';
 import MythVerdict from '../components/MythVerdict.astro';
-import Pic from '../components/Pic.astro';
+import StoryPlate from '../components/StoryPlate.astro';
 import ShareButton from '../components/ShareButton.astro';
-import { altPaths, mythPath, pagePath, storyPath, withBase, type Lang } from '../i18n/routes';
-import { t } from '../i18n';
+import { RANKS, altPaths, mythPath, pagePath, rankPath, storyPath, withBase, type Lang } from '../i18n/routes';
+import { plural, t } from '../i18n';
+import { GAME_OG, gamePicture } from '../lib/games-images';
 import { OG_CARD, mythCardPath } from '../lib/og-cards';
 import { liveMyths, mythsInOrder, withStatement } from '../lib/myths';
 import { MYTHS } from '../lib/myths-data';
@@ -24,12 +25,15 @@ interface Props {
   lang: Lang;
   /** The id of the claim whose own address this is; it goes first and is marked. */
   first?: string | undefined;
+  /** The id of the range of a shared result (low, mid, high): the page of that result (/ru/mif-ili-pravda/zvanie/high/), the same page as the game, noindex, canonical to the game, a preview of its own. */
+  rank?: string | undefined;
 }
 
-const { lang, first } = Astro.props;
+const { lang, first, rank } = Astro.props;
 const site = await loadSite();
 const events = new Map(site.events.map((e) => [e.id, e]));
-const cards = mythsInOrder(liveMyths(MYTHS, site.events), first);
+const live = liveMyths(MYTHS, site.events);
+const cards = mythsInOrder(live, first);
 const title = t(lang, 'pages.myths.title');
 const shareTemplate = t(lang, 'myths.share_text');
 const abs = (path: string) => new URL(path, Astro.site).href;
@@ -38,6 +42,13 @@ const strings = Object.fromEntries(keys.map((k) => [k, t(lang, `myths.${k}`)]));
 strings.failed = t(lang, 'card.share_failed');
 const one = first ? cards.find((c) => c.id === first) : undefined;
 const og = one ? mythCardPath(one.id, lang) : undefined;
+// The preview of the page of the game and of a shared result: the picture of the game (whole, on fields of paper); the description has the number of the claims, taken from the data.
+const picture = gamePicture('myths');
+const pageImage = picture ? { imageUrl: withBase(picture.og), imageSize: GAME_OG, imageAlt: t(lang, 'games.ai_caption') } : {};
+const pageDescription = plural(lang, 'myths.og_description_page', live.length);
+// Where "Share" leads: the page of the range of the result, with ?src=share.
+const rankUrls = Object.fromEntries(RANKS.myths.map((r) => [r, `${abs(rankPath(lang, 'myths', r))}?src=share`]));
+const ranked = rank && RANKS.myths.includes(rank) ? rank : undefined;
 const schemaCtx = schemaContext(lang, Astro.site);
 const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')), name: title, description: t(lang, 'pages.myths.description'), type: 'WebPage' });
 ---
@@ -45,11 +56,13 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   lang={lang}
   pageKey="myths"
   title={title}
-  noindex={one !== undefined}
-  schema={one ? undefined : schema}
-  alternates={one ? altPaths((l) => mythPath(l, one.id)) : undefined}
-  canonicalTo={one ? altPaths((l) => pagePath(l, 'myths')) : undefined}
-  preview={one
+  noindex={one !== undefined || ranked !== undefined}
+  schema={one || ranked ? undefined : schema}
+  alternates={one ? altPaths((l) => mythPath(l, one.id)) : ranked ? altPaths((l) => rankPath(l, 'myths', ranked)) : undefined}
+  canonicalTo={one || ranked ? altPaths((l) => pagePath(l, 'myths')) : undefined}
+  preview={ranked
+    ? { title: t(lang, 'myths.rank_og_title').replace('{band}', t(lang, `myths.band_${ranked}`)), description: pageDescription, ...pageImage }
+    : one
     ? {
         title: withStatement(t(lang, 'myths.og_title'), one.statement[lang]),
         description: t(lang, 'myths.og_description'),
@@ -57,9 +70,9 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
         imageSize: og ? OG_CARD : undefined,
         imageAlt: one.statement[lang],
       }
-    : { title: t(lang, 'myths.og_title_page') }}
+    : { title: t(lang, 'myths.og_title_page'), description: pageDescription, ...pageImage }}
 >
-  <article class="myths" data-game data-strings={JSON.stringify(strings)} data-share-url={`${abs(pagePath(lang, 'myths'))}?src=share`}>
+  <article class="myths" data-game data-strings={JSON.stringify(strings)} data-rank-urls={JSON.stringify(rankUrls)}>
     <GamesSwitch lang={lang} active="myths" />
     <h1>{title}</h1>
     <p class="myths__lead">{t(lang, 'myths.lead')}</p>
@@ -94,13 +107,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
                   </p>
                   <p class="myth__text">{m.answer[lang]}</p>
                   <div class="myth__foot">
-                  <a class="myth__story" href={storyPath(lang, story.slug[lang])}>
-                    {story.image && <Pic picture={story.image} lang={lang} class="myth__thumb" widths={[96, 192]} sizes="6rem" quality={70} decorative crop />}
-                    <span class="myth__story-text">
-                      <span class="myth__story-title">{story.title[lang]}</span>
-                      <span class="myth__story-more">{t(lang, 'myths.full_story')}</span>
-                    </span>
-                  </a>
+                  <StoryPlate lang={lang} href={storyPath(lang, story.slug[lang])} story={story} more={t(lang, 'myths.full_story')} class="myth__story" />
                   <ShareButton lang={lang} url={abs(href)} shareUrl={abs(href)} title={title} text={withStatement(shareTemplate, m.statement[lang])} quiet />
                   </div>
                   <button class="button myth__next" type="button" data-next hidden>{t(lang, 'myths.next')}</button>
@@ -111,7 +118,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
         })
       }
     </div>
-    <GameResult missesTitle={t(lang, 'myths.misses')} shareLabel={t(lang, 'ui.share')} againLabel={t(lang, 'myths.again')} readLabel={t(lang, 'myths.read')} readHref={pagePath(lang, 'home')} id="myths-score" />
+    <GameResult lang={lang} game="myths" missesTitle={t(lang, 'myths.misses')} shareLabel={t(lang, 'ui.share')} againLabel={t(lang, 'myths.again')} readLabel={t(lang, 'myths.read')} readHref={pagePath(lang, 'home')} id="myths-score" />
     <p class="myths__end">{t(lang, 'myths.end')} <a href={pagePath(lang, 'share')}>{t(lang, 'myths.end_link')}</a></p>
   </article>
 </BaseLayout>
@@ -285,48 +292,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   :global(html[data-js]) .myth__foot :global([data-share]),
   :global(html[data-js]) .myth__anchor {
     display: none;
-  }
-
-  .myth__story {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    max-width: 100%;
-    padding: var(--space-2);
-    border: 1px solid var(--epoch-line);
-    border-radius: var(--radius-md);
-    color: var(--color-ink);
-    text-decoration: none;
-  }
-
-  .myth__story:hover .myth__story-title {
-    color: var(--color-accent);
-  }
-
-  .myth__story :global(.myth__thumb) {
-    flex: none;
-    width: calc(var(--touch-target) * 1.5);
-    height: var(--touch-target);
-    border-radius: var(--radius-sm);
-    background: var(--epoch-line);
-    filter: var(--image-filter);
-    object-fit: cover;
-  }
-
-  .myth__story-text {
-    display: grid;
-    min-width: 0;
-  }
-
-  .myth__story-title {
-    font-family: var(--font-heading);
-    font-weight: var(--weight-strong);
-    line-height: var(--leading-heading);
-  }
-
-  .myth__story-more {
-    color: var(--color-ink-muted);
-    font-size: var(--text-sm);
   }
 
   /* The pieces of the game are for JavaScript: the script shows them, and `hidden` must win over the display of a button. */
