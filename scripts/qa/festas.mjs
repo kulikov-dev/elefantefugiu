@@ -1,10 +1,10 @@
 // Browser checks of the holidays (src/data/festas.yaml, src/lib/festas.mjs, docs/spec.md "Праздники"), run against dist/ served by serve.mjs:
-//   node festas.mjs [window page art nojs natal bolo]
+//   node festas.mjs [window page art nojs natal bolo carnaval]
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
 // text in every language of the site (pt, en, ru) and a drawing; the suite names what is missing when there is none.
 import { launchBrowser } from './browser.mjs';
 import { festas, published, readyEpochs } from './data.mjs';
-import { addDays, festaDay, windowOf } from '../../src/lib/festas.mjs';
+import { addDays, festaDay, fillDate, windowOf } from '../../src/lib/festas.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -410,6 +410,72 @@ for (const BOLO_LANG of want('bolo') ? BOLO_LANGS : []) {
     return { bubbleBottom: Math.round(b.bottom), cakeBottom: Math.round(c.bottom), cakeTop: Math.round(c.top), h1Bottom: Math.round(top.bottom), cakeWidth: Math.round(c.width) };
   });
   ok('1280 px: the cake stands under the heading, 640 px at most, and the bubble is over the cake', over.cakeTop >= over.h1Bottom && over.cakeWidth <= 640 && over.bubbleBottom < over.cakeBottom, JSON.stringify(over));
+}
+
+// The holiday that moves with Easter and has the queen with a fan (art: queen), in the languages that have its text: the days come from the data (festaDay), the
+// words from the text with `{date}` filled by fillDate.
+const CARN = festas.find((f) => f.enabled && f.art === 'queen' && 'easter' in f.date);
+if (want('carnaval')) {
+  if (!CARN) throw new Error('need: an enabled holiday with art "queen" and a date from Easter in src/data/festas.yaml. None found.');
+  const CARN_LANGS = LANGS.filter((l) => CARN.text[l]);
+  const CARN_STORY = published.find((e) => e.id === CARN.story);
+  if (!CARN_STORY) throw new Error(`need: the story "${CARN.story}" of the holiday "${CARN.id}" among the published stories`);
+  const day = festaDay(CARN.date, year);
+  const { from } = windowOf(day);
+  const say = (lang, key) => fillDate(CARN.text[lang], day, lang)[key];
+  /** The block of the carnival on the home page and the icon of the tab. */
+  const homeState = (page) =>
+    page.evaluate((id) => {
+      const block = document.querySelector(`[data-festa-show="${id}"] .festa-head`);
+      return {
+        shown: !!block?.checkVisibility(),
+        text: block?.textContent ?? '',
+        href: block?.querySelector('a')?.getAttribute('href') ?? '',
+        icon: (document.querySelector('link[rel=icon][type="image/svg+xml"]')?.getAttribute('href') ?? '').includes('/festas/favicon-'),
+        festa: document.documentElement.getAttribute('data-festa'),
+      };
+    }, CARN.id);
+  for (const lang of CARN_LANGS) {
+    for (const [name, date, inside] of [['first day of the window', from, true], ['the day itself', day, true], ['the day before the window', addDays(from, -1), false], ['the day after', addDays(day, 1), false]]) {
+      const st = await homeState(await open(`/${lang}/?hoje=${date}`));
+      const header = st.text.includes(say(lang, 'head_date')) && st.text.includes(say(lang, 'head_title')) && st.text.includes(say(lang, 'head_line'));
+      ok(`/${lang}/?hoje=${date} (${name}): ${inside ? 'the block of the holiday and the tab icon' : 'the usual home page'}`, inside ? st.shown && header && st.icon && st.festa === CARN.id : !st.shown && !st.icon && st.festa !== CARN.id, JSON.stringify(st));
+    }
+    const url = `/${lang}/festa/${CARN.slug}/`;
+    const off = await open(`${url}?hoje=${addDays(day, 1)}`);
+    const out = await off.evaluate(() => ({
+      line: document.querySelector('[data-festa-off]')?.checkVisibility() ? document.querySelector('[data-festa-off]').textContent.trim() : '',
+      date: !!document.querySelector('[data-festa-on]')?.checkVisibility(),
+      robots: document.querySelector('meta[name=robots]')?.getAttribute('content') ?? '',
+    }));
+    ok(`${url}: outside the window the line "${CARN.text[lang].off_window}" and noindex`, out.line === CARN.text[lang].off_window && !out.date && /noindex/.test(out.robots), JSON.stringify(out));
+    const on = await open(`${url}?hoje=${day}`);
+    const inn = await on.evaluate(() => ({
+      h1: document.querySelector('h1')?.textContent.trim(),
+      date: document.querySelector('[data-festa-on]')?.textContent.trim(),
+      off: !!document.querySelector('[data-festa-off]')?.checkVisibility(),
+      og: document.querySelector('meta[property="og:title"]')?.getAttribute('content'),
+      href: document.querySelector('.festa-story a')?.getAttribute('href') ?? '',
+      traditions: document.querySelectorAll('.festa-trad li').length,
+    }));
+    ok(`${url}: in the window the date, the name, the traditions and the story card`, inn.h1 === CARN.text[lang].name && inn.date === say(lang, 'date') && !inn.off && inn.traditions === CARN.text[lang].traditions.length && inn.href.length > 0, JSON.stringify(inn));
+    const story = await open(inn.href || '/');
+    ok(`${url}: the card leads to the story "${CARN_STORY.title[lang]}"`, (await story.$eval('h1', (el) => el.textContent.trim()).catch(() => '')) === CARN_STORY.title[lang]);
+  }
+  // The drawing: the same on the home page and on the page, a phone too; the fan sways, with "reduce motion" it stands still; role and title.
+  for (const [where, path] of [['home', `/ru/?hoje=${day}`], ['page', `/ru/festa/${CARN.slug}/?hoje=${day}`]]) {
+    for (const width of [1280, 360]) {
+      const page = await open(path, { width });
+      const art = await page.evaluate((id) => {
+        const svg = document.querySelector(`${document.querySelector('.festa-head') ? `[data-festa-show="${id}"] ` : ''}svg.festa-art`);
+        const fan = svg?.querySelector('.fan');
+        return { shown: !!svg?.checkVisibility(), role: svg?.getAttribute('role'), title: svg?.querySelector('title')?.textContent, moves: fan ? getComputedStyle(fan).animationName : '', parts: svg ? svg.querySelectorAll('.fan, .crown').length : 0 };
+      }, CARN.id);
+      ok(`${where}, ${width} px: the queen is drawn (role img, title, the fan sways, the crown stays)`, art.shown && art.role === 'img' && art.title === CARN.text.ru.art_title && art.moves !== 'none' && art.moves !== '' && art.parts === 2, JSON.stringify(art));
+    }
+    const still = await open(path, { reduce: true });
+    ok(`${where}: prefers-reduced-motion, the fan stands still`, (await still.evaluate(() => getComputedStyle(document.querySelector('.fan')).animationName)) === 'none');
+  }
 }
 
 await browser.close();

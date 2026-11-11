@@ -251,6 +251,7 @@
   --festa-warm: light-dark(#d9a441, #e0b45a);
   --festa-wash: light-dark(#e4ecf8, #22324f);
   --festa-shell: light-dark(#fffdf7, #efe8d8);
+  --festa-face-ink: light-dark(#1f4e9c, #1f4e9c); /* moustache, brows and beauty mark: dark cobalt on the face in both themes */
   /* Bolo-rei (docs/drafts/bolo-rei.js): candied fruit is the one place where colour is the point, a deliberate exception to "cobalt plus one warm";
      the glaze tones brown the crust of the cake. */
   --festa-cherry: light-dark(#c8372d, #e2675c);
@@ -269,6 +270,7 @@
   --festa-art-max: 23.75rem; /* the drawing on the page of a holiday (380 px) */
   --festa-head-art-max: 26rem; /* and in the header of the home page */
   --festa-glow-time: 4s;
+  --festa-fan-time: 3.2s; /* the fan of the Carnival queen sways once back and forth */
 
   /* Azulejo patterns (docs/visual-direction.md section 4): tile size, and the opacity of the pattern layer only
      (5-10% under text, up to 50% on frames and dividers; never on text). */
@@ -538,6 +540,7 @@
     --festa-warm: #d9a441;
     --festa-wash: #e4ecf8;
     --festa-shell: #fffdf7;
+    --festa-face-ink: #1f4e9c;
     --festa-cherry: #c8372d;
     --festa-angelica: #4e8f45;
     --festa-peel: #e58a2b;

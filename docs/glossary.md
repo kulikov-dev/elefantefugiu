@@ -183,3 +183,18 @@
 | Горные породы: сланец, известняк | xisto, calcário | schist, limestone | сланец, известняк |
 | Тур (бык) на рисунках Коа | auroque | aurochs | тур |
 | Ископаемые млн лет назад | há 150 milhões de anos | 150 million years ago | 150 млн лет назад |
+
+## Карнавал: имена и термины, добавлено 11.11.2026
+
+Написание сверено со строками в `src/data/festas.yaml` и `src/content/events/rainha-carnaval-1923.yaml`.
+
+| Понятие | pt-PT | en-US | ru |
+|---|---|---|---|
+| Деревня на северо-востоке (Карету) | Podence | Podence | Поденсе |
+| Деревня под Ламегу (маски из ольхи) | Lazarim | Lazarim | Лазарин |
+| Город на севере (Дору) | Lamego | Lamego | Ламегу |
+| Ряженые в женских платьях (карнавал в Торриш-Ведраше) | matrafonas | matrafonas (men dressed as women) | матрафоны («матрафоны» в кавычках при первом упоминании) |
+| Ряженые Поденсе: красное покрывало с бахромой, жестяная маска, коровьи колокольчики | Caretos de Podence | Caretos de Podence | Карету из Поденсе (Карету не склоняется; наследие ЮНЕСКО с 2019) |
+| Карнавал, вторник за 47 дней до Пасхи | Carnaval (Terça-feira de Carnaval) | Carnival (Shrove Tuesday) | Карнавал, карнавальный вторник |
+| Великий пост | Quaresma | Lent | Великий пост |
+| Стихотворные «завещания» Лазарина | testamento da comadre / do compadre | the comadre’s / compadre’s “will” | «завещание кумы» / «завещание кума» |

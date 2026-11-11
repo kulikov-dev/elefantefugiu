@@ -62,6 +62,46 @@ export function festaDay(rule, year) {
   return 'fixed' in rule ? `${year}-${rule.fixed}` : addDays(easterSunday(year), rule.easter);
 }
 
+const MONTHS = {
+  pt: ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  ru: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'],
+};
+
+/**
+ * A day as people say it: "9 февраля", "9 de fevereiro", "February 9".
+ * @param {string} day YYYY-MM-DD
+ * @param {'pt' | 'en' | 'ru'} lang
+ */
+export function formatDay(day, lang) {
+  const name = MONTHS[lang][Number(day.slice(5, 7)) - 1];
+  const n = Number(day.slice(8, 10));
+  return lang === 'pt' ? `${n} de ${name}` : lang === 'en' ? `${name} ${n}` : `${n} ${name}`;
+}
+
+/**
+ * The next day of the holiday that is not before `today` (this year's or next year's), YYYY-MM-DD.
+ * @param {FestaRef} festa
+ * @param {string} today
+ */
+export function nextDay(festa, today) {
+  const year = Number(today.slice(0, 4));
+  return occurrences(festa, year, year + 1).map((o) => o.day).find((d) => d >= today) ?? festaDay(festa.date, year);
+}
+
+/**
+ * The text of a moving holiday carries `{date}`: it is replaced by the day of the holiday as people say it (the strings at the top of the object only).
+ * @template {Record<string, any>} T
+ * @param {T} text
+ * @param {string} day
+ * @param {'pt' | 'en' | 'ru'} lang
+ * @returns {T}
+ */
+export function fillDate(text, day, lang) {
+  const said = formatDay(day, lang);
+  return /** @type {T} */ (Object.fromEntries(Object.entries(text).map(([k, v]) => [k, typeof v === 'string' ? v.split('{date}').join(said) : v])));
+}
+
 /**
  * The window of a holiday that falls on `day`: first and last day, both included.
  * @param {string} day

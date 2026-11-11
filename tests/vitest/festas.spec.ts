@@ -1,6 +1,6 @@
 import { runInNewContext } from 'node:vm';
 import { describe, expect, it } from 'vitest';
-import { addDays, easterSunday, festaDay, festaDays, festaNow, festaRules, isInWindow, windowOf, type FestaRef } from '../../src/lib/festas';
+import { addDays, easterSunday, festaDay, festaDays, festaNow, festaRules, fillDate, formatDay, isInWindow, nextDay, windowOf, type FestaRef } from '../../src/lib/festas';
 import { headScript } from '../../src/lib/head-script';
 import { lisbonToday } from '../../src/lib/publication.mjs';
 
@@ -22,6 +22,29 @@ describe('Easter and Carnival', () => {
 
   it('puts a fixed day in the year asked for', () => {
     expect(festaDay({ fixed: '12-01' }, 2031)).toBe('2031-12-01');
+  });
+
+  it('gives the Tuesday of Carnival in the years after, with its window from Saturday', () => {
+    const carnival: FestaRef = { id: 'carnival', enabled: true, date: { easter: -47 } };
+    for (const [year, day] of [['2027', '2027-02-09'], ['2028', '2028-02-29'], ['2029', '2029-02-13'], ['2030', '2030-03-05']]) {
+      expect(festaDay(carnival.date, Number(year))).toBe(day);
+      expect(new Date(day + 'T00:00:00Z').getUTCDay()).toBe(2);
+      expect(new Date(windowOf(day).from + 'T00:00:00Z').getUTCDay()).toBe(6);
+    }
+    expect(windowOf('2027-02-09')).toEqual({ from: '2027-02-06', to: '2027-02-09' });
+    expect(isInWindow(carnival, '2027-02-06')).toBe(true);
+    expect(isInWindow(carnival, '2027-02-05')).toBe(false);
+    expect(isInWindow(carnival, '2027-02-10')).toBe(false);
+  });
+
+  it('puts the day of a moving holiday in {date} of its text, for the next time it comes', () => {
+    const carnival: FestaRef = { id: 'carnival', enabled: true, date: { easter: -47 } };
+    expect(nextDay(carnival, '2027-02-09')).toBe('2027-02-09');
+    expect(nextDay(carnival, '2027-02-10')).toBe('2028-02-29');
+    expect(formatDay('2027-02-09', 'ru')).toBe('9 февраля');
+    expect(formatDay('2027-02-09', 'pt')).toBe('9 de fevereiro');
+    expect(formatDay('2027-02-09', 'en')).toBe('February 9');
+    expect(fillDate({ date: '{date}', head: '{date} · Карнавал', rest: ['{date}'] }, '2027-02-09', 'ru')).toEqual({ date: '9 февраля', head: '9 февраля · Карнавал', rest: ['{date}'] });
   });
 });
 
@@ -205,10 +228,19 @@ describe('festaRules', () => {
 });
 
 describe('the holidays of the site (src/data/festas.yaml)', () => {
-  it('an enabled holiday has its text in every language, and the story of the day', async () => {
+  it('a holiday is whole: Russian alone is fine for now, but with pt or en it has all three; an enabled one has a story, and no {date} is left', async () => {
     const { FESTAS, festaText } = await import('../../src/lib/festas-data');
+    for (const festa of FESTAS) {
+      const langs = (['pt', 'en', 'ru'] as const).filter((l) => festaText(festa, l));
+      if (langs.length > 0) expect(festaText(festa, 'ru'), `${festa.id} has a text but not in ru`).toBeDefined();
+      if (langs.includes('pt') || langs.includes('en')) expect(langs, `${festa.id}: with pt or en the holiday has all three languages`).toEqual(['pt', 'en', 'ru']);
+    }
     for (const festa of FESTAS.filter((f) => f.enabled)) {
-      for (const lang of ['pt', 'en', 'ru'] as const) expect(festaText(festa, lang), `${festa.id} in ${lang}`).toBeDefined();
+      expect(festaText(festa, 'ru'), `${festa.id} in ru`).toBeDefined();
+      for (const lang of ['pt', 'en', 'ru'] as const) {
+        const text = festaText(festa, lang);
+        if (text) expect(JSON.stringify([text.date, text.head_date, text.name]), `${festa.id} in ${lang}`).not.toContain('{date}');
+      }
       expect(festa.story, `${festa.id} needs a story of the day`).toBeTruthy();
     }
   });

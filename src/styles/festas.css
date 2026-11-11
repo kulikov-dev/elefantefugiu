@@ -45,6 +45,30 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
   }
 }
 
+/* The fan of the Carnival queen sways around the glove (the only moving part of her drawing); still with "reduce motion". */
+.fan {
+  transform-box: view-box;
+  transform-origin: 69% 81.7%; /* the glove, 276 196 of the 400 x 240 drawing */
+  animation: festa-fan var(--festa-fan-time) ease-in-out infinite;
+}
+
+@keyframes festa-fan {
+  0%,
+  100% {
+    transform: rotate(-4.5deg);
+  }
+
+  50% {
+    transform: rotate(4.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fan {
+    animation: none;
+  }
+}
+
 /* A phone: the rays go, the crown, the cushion and the sceptre stay. */
 @media (max-width: 29.99rem) {
   .festa-rays {

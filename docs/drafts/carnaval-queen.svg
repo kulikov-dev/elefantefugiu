@@ -1,0 +1,90 @@
+<svg class="doodle" viewBox="0 0 400 240" role="img" aria-labelledby="qt"><title id="qt">Королева Карнавала: корона, жемчуг, кружевной веер и пышные усы</title>
+<defs>
+  <clipPath id="q-face"><ellipse cx="200" cy="128" rx="40" ry="49"/></clipPath>
+</defs>
+<g stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <!-- confetti and streamers -->
+  <g class="confetti" stroke="none">
+    <circle cx="70" cy="40" r="3.2" fill="var(--warm)"/><circle cx="330" cy="34" r="3" fill="var(--ink)"/>
+    <circle cx="352" cy="96" r="2.6" fill="var(--warm)"/><circle cx="48" cy="118" r="2.6" fill="var(--ink)"/>
+    <rect x="96" y="70" width="6" height="3.4" rx="1" fill="var(--ink)" transform="rotate(30 99 72)"/>
+    <rect x="306" y="66" width="6" height="3.4" rx="1" fill="var(--warm)" transform="rotate(-25 309 68)"/>
+    <rect x="40" y="70" width="6" height="3.4" rx="1" fill="var(--warm)" transform="rotate(-40 43 72)"/>
+    <rect x="360" y="150" width="6" height="3.4" rx="1" fill="var(--ink)" transform="rotate(20 363 152)"/>
+  </g>
+  <path d="M30 22 C60 40 40 60 72 74 C96 84 90 104 112 110" fill="none" stroke-width="1.6"/>
+  <path d="M372 20 C344 36 366 58 336 70 C312 80 322 100 300 108" fill="none" stroke-width="1.6"/>
+
+  <!-- shoulders and dress -->
+  <path d="M96 240 C100 206 128 190 160 184 L240 184 C272 190 300 206 304 240 Z" fill="var(--wash)"/>
+  <path d="M120 240 C124 222 132 212 146 206 M280 240 C276 222 268 212 254 206" fill="none" stroke-width="1.4"/>
+  <!-- neck -->
+  <path d="M184 168 L184 188 L216 188 L216 168" fill="var(--shell)"/>
+  <!-- lace ruff -->
+  <path d="M148 190 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0 q8 -12 16 0 L252 198 q-8 10 -16 2 q-8 10 -16 2 q-8 10 -16 2 q-8 10 -16 2 q-8 10 -16 2 q-8 10 -16 2 q-8 10 -16 2 Z" fill="var(--shell)"/>
+  <g fill="var(--ink)" stroke="none"><circle cx="164" cy="194" r="1.4"/><circle cx="180" cy="194" r="1.4"/><circle cx="196" cy="194" r="1.4"/><circle cx="212" cy="194" r="1.4"/><circle cx="228" cy="194" r="1.4"/><circle cx="244" cy="194" r="1.4"/></g>
+  <!-- pearls -->
+  <g fill="var(--shell)" stroke-width="1.4"><circle cx="176" cy="211" r="4"/><circle cx="186" cy="215" r="4"/><circle cx="196" cy="217" r="4"/><circle cx="206" cy="217" r="4"/><circle cx="216" cy="215" r="4"/><circle cx="226" cy="211" r="4"/><circle cx="201" cy="227" r="6" fill="var(--warm)"/></g>
+
+  <!-- wig: big curls behind the face -->
+  <g fill="var(--wash)" stroke-width="1.8">
+    <circle cx="156" cy="96" r="16"/><circle cx="148" cy="122" r="16"/><circle cx="150" cy="148" r="15"/><circle cx="158" cy="170" r="12"/>
+    <circle cx="244" cy="96" r="16"/><circle cx="252" cy="122" r="16"/><circle cx="250" cy="148" r="15"/><circle cx="242" cy="170" r="12"/>
+    <circle cx="176" cy="80" r="15"/><circle cx="200" cy="74" r="16"/><circle cx="224" cy="80" r="15"/>
+  </g>
+  <g fill="none" stroke-width="1.2">
+    <path d="M150 92 a6 6 0 1 1 8 6"/><path d="M142 118 a6 6 0 1 1 8 6"/><path d="M146 144 a6 6 0 1 1 8 6"/>
+    <path d="M250 92 a6 6 0 1 0 -8 6"/><path d="M258 118 a6 6 0 1 0 -8 6"/><path d="M254 144 a6 6 0 1 0 -8 6"/>
+    <path d="M194 70 a6 6 0 1 1 8 6"/>
+  </g>
+
+  <!-- face -->
+  <ellipse cx="200" cy="128" rx="40" ry="49" fill="var(--shell)"/>
+  <!-- stubble on the chin: the queen is a man -->
+  <g clip-path="url(#q-face)" fill="var(--ink)" stroke="none" opacity=".55">
+    <circle cx="186" cy="164" r="1"/><circle cx="192" cy="168" r="1"/><circle cx="200" cy="170" r="1"/><circle cx="208" cy="168" r="1"/><circle cx="214" cy="164" r="1"/>
+    <circle cx="189" cy="173" r="1"/><circle cx="196" cy="175" r="1"/><circle cx="204" cy="175" r="1"/><circle cx="211" cy="173" r="1"/>
+    <circle cx="180" cy="158" r="1"/><circle cx="220" cy="158" r="1"/>
+  </g>
+  <!-- fringe curls on the forehead -->
+  <g fill="var(--wash)" stroke-width="1.6"><circle cx="178" cy="90" r="9"/><circle cx="192" cy="86" r="9"/><circle cx="208" cy="86" r="9"/><circle cx="222" cy="90" r="9"/></g>
+  <!-- cheeks -->
+  <g fill="var(--warm)" stroke="none" opacity=".55"><circle cx="176" cy="140" r="8"/><circle cx="224" cy="140" r="8"/></g>
+  <!-- eyes: half-closed with long lashes, a coquettish look -->
+  <g fill="none" stroke-width="2">
+    <path d="M174 118 q8 6 16 0"/><path d="M210 118 q8 6 16 0"/>
+    <path d="M176 120 l-3 4 M180 122 l-1.5 4.5 M185 122 l0.5 4.5 M189 120 l3 3.5" stroke-width="1.3"/>
+    <path d="M211 120 l-3 3.5 M215 122 l-0.5 4.5 M220 122 l1.5 4.5 M224 120 l3 4" stroke-width="1.3"/>
+    <!-- thick eyebrows, raised -->
+    <path d="M170 108 q10 -8 22 -2" stroke-width="3.4"/><path d="M208 106 q12 -6 22 2" stroke-width="3.4"/>
+  </g>
+  <!-- beauty mark -->
+  <circle cx="226" cy="152" r="1.8" fill="var(--ink)" stroke="none"/>
+  <!-- nose -->
+  <path d="M200 124 q-5 14 -2 18 q4 2 7 -1" fill="none" stroke-width="1.8"/>
+  <!-- the moustache -->
+  <path transform="translate(200 145) scale(1.4 1.3) translate(-200 -145)" d="M200 146 C192 141 182 141 174 147 C166 153 158 152 154 144 C152 140 156 136 160 138 C156 142 160 146 166 143 C176 137 190 136 200 143 C210 136 224 137 234 143 C240 146 244 142 240 138 C244 136 248 140 246 144 C242 152 234 153 226 147 C218 141 208 141 200 146 Z" fill="var(--ink)" stroke-width="1.4"/>
+  <!-- lips -->
+  <path d="M192 160 q4 -3 8 0 q4 -3 8 0 q-3 6 -8 6 q-5 0 -8 -6 Z" fill="var(--warm)" stroke-width="1.4"/>
+
+  <!-- crown -->
+  <g class="crown">
+    <path d="M168 66 L164 36 L180 52 L192 30 L200 46 L208 30 L220 52 L236 36 L232 66 Z" fill="var(--warm)"/>
+    <path d="M168 66 L232 66" stroke-width="2.4"/>
+    <g fill="var(--shell)" stroke-width="1.3"><circle cx="164" cy="34" r="3.4"/><circle cx="192" cy="28" r="3.4"/><circle cx="208" cy="28" r="3.4"/><circle cx="236" cy="34" r="3.4"/></g>
+    <g fill="var(--ink)" stroke="none"><circle cx="184" cy="59" r="3"/><circle cx="200" cy="58" r="3.6"/><circle cx="216" cy="59" r="3"/></g>
+  </g>
+
+  <!-- lace fan in a gloved hand, it sways -->
+  <g class="fan">
+    <path d="M276 196 L238 152 A62 62 0 0 1 320 128 Z" fill="var(--warm)"/>
+    <path d="M276 196 L238 152 M276 196 L246 141 M276 196 L256 133 M276 196 L268 128 M276 196 L281 126 M276 196 L294 126 M276 196 L307 128 M276 196 L320 128" fill="none" stroke-width="1.3"/>
+    <path d="M238 152 q4 -8 8 -11 q4 -6 10 -8 q6 -4 12 -5 q6 -2 13 -2 q6 0 13 0 q7 1 13 2 q7 2 13 0" fill="none" stroke-width="1.3"/>
+    <g fill="var(--shell)" stroke="none"><circle cx="252" cy="150" r="2"/><circle cx="263" cy="142" r="2"/><circle cx="276" cy="139" r="2"/><circle cx="290" cy="139" r="2"/><circle cx="304" cy="141" r="2"/></g>
+    <circle cx="276" cy="196" r="3.4" fill="var(--ink)"/>
+    <!-- gloved hand -->
+    <path d="M262 206 C258 196 266 188 276 190 C286 186 294 194 290 204 C288 212 274 216 266 212 Z" fill="var(--shell)"/>
+    <path d="M270 194 q2 -6 8 -6 M278 192 q3 -5 8 -3" fill="none" stroke-width="1.3"/>
+  </g>
+</g>
+</svg>

@@ -401,11 +401,11 @@ export const festaSchema = z.strictObject({
   enabled: z.boolean(),
   /** A fixed day `{ fixed: '12-01' }` or a shift from Easter `{ easter: -47 }`. */
   date: z.union([z.strictObject({ fixed: z.string().regex(/^\d{2}-\d{2}$/) }), z.strictObject({ easter: z.number().int() })]),
-  art: z.enum(['crown', 'folar', 'bolo']).optional(),
+  art: z.enum(['crown', 'folar', 'bolo', 'queen']).optional(),
   /** The story of the day: the id of a story of the site; the page shows it as a usual card. */
   story: z.string().optional(),
   /** The icon of the tab in the window of the holiday (src/lib/festa-art.mjs ICONS); null: the holiday has none and the usual icon stays. */
-  favicon: z.enum(['crown', 'bolo']).nullable(),
+  favicon: z.enum(['crown', 'bolo', 'queen']).nullable(),
   /** The preview picture: a path inside src/assets/ (festas/<id>.jpg or .png, the other extension is tried too). Optional: without the file the drawing is the picture. */
   image: z.string().regex(/^[\w./-]+\.(png|jpg)$/).optional(),
   text: z.strictObject({ pt: festaTextSchema.optional(), en: festaTextSchema.optional(), ru: festaTextSchema.optional() }),

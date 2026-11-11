@@ -1,0 +1,113 @@
+id: rainha-carnaval-1923
+slug:
+  pt: a-rainha-de-bigode
+  en: the-queen-with-a-mustache
+  ru: koroleva-s-usami
+title:
+  pt: A rainha de bigode
+  en: The Queen with a Mustache
+  ru: Королева с усами
+epoch: monarquia-e-republica
+level: story
+year: 1923
+place:
+  name:
+    pt: Torres Vedras
+    en: Torres Vedras
+    ru: Торриш-Ведраш
+  short:
+    pt: Torres Vedras
+    en: Torres Vedras
+    ru: Торриш-Ведраш
+  lat: 39.090802
+  lon: -9.258594
+bridge:
+  name: Monumento ao Carnaval
+  title:
+    pt: Monumento ao Carnaval
+    en: Carnival Monument
+    ru: Памятник Карнавалу
+  address: Torres Vedras
+  lat: 39.090802
+  lon: -9.258594
+  maps_url: https://www.google.com/maps/search/?api=1&query=39.090802,-9.258594
+  url: https://www.carnavaldetorresvedras.pt/
+  note:
+    pt: O monumento que a cidade dedicou, em 1999, à sua grande festa.
+    en: The monument the town built for its great festival in 1999.
+    ru: Город поставил его своему главному празднику в 1999 году.
+threads:
+  - poder-e-revolta
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Treze anos após a queda da monarquia, os republicanos coroaram um rei.
+  en: Thirteen years after the fall of the monarchy, republicans crowned a king.
+  ru: Через 13 лет после свержения монархии республиканцы сами короновали короля.
+story:
+  pt: Em 1910, Portugal destronou o rei e tornou-se república. Em 1923, republicanos e comerciantes de Torres Vedras, uma vila a norte de Lisboa, organizaram no Carnaval uma grande festa de rua e sentaram um rei no trono. No ano seguinte, o rei ganhou uma rainha. Quem a fazia era um homem, e atrás do par vinha um cortejo de «ministros» e de «matrafonas», homens vestidos de mulher. Desde então, por tradição, a rainha do Carnaval de Torres Vedras é sempre feita por um homem.
+  en: In 1910, Portugal overthrew its king and became a republic. In 1923, republicans and shopkeepers in Torres Vedras, a town north of Lisbon, threw a big street party at Carnival and seated a king on a throne. The next year the king got a queen. A man played her, and behind the couple came a retinue of “ministers” and “matrafonas,” men in women’s dresses. Ever since, by tradition, the queen of the Torres Vedras Carnival has always been played by a man.
+  ru: В 1910 году Португалия свергла короля и стала республикой. А в 1923 году республиканцы и торговцы Торриш-Ведраша, городка к северу от Лиссабона, устроили на Карнавал большой уличный праздник и посадили на трон короля. На следующий год у короля появилась королева. Её играл мужчина, а за парой шла свита из «министров» и «матрафон», мужчин в женских платьях. С тех пор по традиции королеву Карнавала в Торриш-Ведраше всегда играет мужчина.
+more:
+  pt: >-
+    Já antes se sabia rir do poder. Em 1912, quando os partidários do rei tentaram restaurar a monarquia, os republicanos locais encenaram no Carnaval a sua «invasão». E o rei do Carnaval, tal como o verdadeiro, chegava de comboio: à estação esperavam-no os «ministros», as matrafonas e a banda dos bombeiros. Talvez seja uma paródia da visita de Manuel II, o último rei, que em 1908 chegou a Torres Vedras de comboio.
+
+
+    O rei do Carnaval reina quatro dias, e a festa toda é o poder ao contrário: o rei lê um discurso satírico e o presidente da câmara entrega-lhe as chaves da cidade. Os títulos do casal real mudam todos os anos.
+
+
+    Em 1999, o centro da cidade ganhou um monumento ao Carnaval e, em 2022, o Carnaval de Torres Vedras foi inscrito na lista nacional do património cultural imaterial.
+  en: >-
+    People here knew how to laugh at power well before that. In 1912, when supporters of the king tried to bring the monarchy back, local republicans staged their “invasion” at Carnival. And the Carnival king, like a real one, arrived by train: “ministers,” matrafonas and a firemen’s band met him at the station. It may be a parody of the visit of Manuel II, the last king, who came to Torres Vedras by rail in 1908.
+
+
+    The Carnival king reigns for four days, and the whole festival is power turned upside down: the king reads a satirical speech and the mayor hands him the keys to the town. The titles of the royal couple are new every year.
+
+
+    In 1999 a monument to Carnival was put up in the town center, and in 2022 the Torres Vedras Carnival was added to the national list of intangible cultural heritage.
+  ru: >-
+    Смеяться над властью здесь умели и раньше. В 1912 году, когда сторонники короля пытались вернуть монархию, местные республиканцы разыграли на карнавале их «вторжение». А карнавальный король, как и настоящий, приезжал поездом: его встречали на вокзале «министры», матрафоны и оркестр пожарных. Возможно, это пародия на визит Мануэла II, последнего короля, который в 1908 году прибыл в Торриш-Ведраш по железной дороге.
+
+
+    Правит карнавальный король четыре дня, и весь праздник устроен как власть наоборот: король читает сатирическую речь, а мэр вручает ему ключи от города. Титулы королевской пары каждый год новые.
+
+
+    В 1999 году в центре города поставили памятник Карнавалу, а в 2022 году Карнавал Торриш-Ведраша внесли в национальный список нематериального наследия.
+sources:
+  - title: 'Carnaval de Torres Vedras: História'
+    url: https://www.carnavaldetorresvedras.pt/historia
+    type: institutional
+    accessed: '2026-11-11'
+  - title: 'Carnaval de Torres Vedras: Reis'
+    url: https://www.carnavaldetorresvedras.pt/reis/
+    type: institutional
+    accessed: '2026-11-11'
+  - title: 'Carnaval de Torres Vedras: Matrafonas'
+    url: https://www.carnavaldetorresvedras.pt/matrafonas/
+    type: institutional
+    accessed: '2026-11-11'
+  - title: 'CM / Lusa: «Carnaval de Torres Vedras é Património Cultural Nacional»'
+    url: https://www.cmjornal.pt/cultura/detalhe/carnaval-de-torres-vedras-e-patrimonio-cultural-nacional
+    type: press
+    accessed: '2026-11-11'
+image:
+  file: rainha-carnaval-1923.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa estação de comboio, um rei de coroa de papel e capa de arminho dá o braço a uma rainha de peruca encaracolada, folho de renda e leque, ambos de bigode; os «ministros» de cartola fazem vénias, uma banda de bombeiros toca e a multidão atira os chapéus ao ar, com uma locomotiva a vapor ao fundo."
+    en: "Blue-and-white azulejo-style illustration: at a railway station, a king in a paper crown and an ermine cape walks arm in arm with a queen in a curly wig, lace ruff and fan, both with mustaches; “ministers” in top hats bow, a firemen’s band plays and the crowd throws hats in the air, with a steam locomotive behind them."
+    ru: "Иллюстрация в духе сине-белого азулежу: на вокзале король в бумажной короне и горностаевой мантии идёт под руку с королевой в кудрявом парике, кружевном воротнике и с веером, у обоих усы; «министры» в цилиндрах кланяются, оркестр пожарных играет, толпа подбрасывает шляпы, позади паровоз."
+  caption:
+    pt: "O rei e a rainha do Carnaval chegam à estação. Ilustração em estilo azulejo, criada por IA."
+    en: "The Carnival king and queen arrive at the station. Azulejo-style illustration, created by AI."
+    ru: "Король и королева Карнавала прибывают на вокзал. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-11'
+placeholder: false
+ru_ready: true

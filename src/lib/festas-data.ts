@@ -3,14 +3,17 @@ import { parse } from 'yaml';
 import raw from '../data/festas.yaml?raw';
 import { festaListSchema, type FestaData, type FestaText } from '../data/schemas';
 import { withBase, type Lang } from '../i18n/routes';
-import { festaDays, festaNow, isInWindow, type FestaNow } from './festas';
+import { fillDate, festaDays, festaNow, isInWindow, nextDay, type FestaNow } from './festas';
 import { buildToday } from './publication.mjs';
 import type { HeadFestas } from './head-script';
 
 export const FESTAS: readonly FestaData[] = festaListSchema.parse(parse(raw));
 
-/** What a holiday says in a language; undefined when it has no text there (then it shows nothing in that language). */
-export const festaText = (festa: FestaData, lang: Lang): FestaText | undefined => festa.text[lang];
+/** What a holiday says in a language; undefined when it has no text there (then it shows nothing in that language). `{date}` in it is the next day of the holiday from the day of the build. */
+export const festaText = (festa: FestaData, lang: Lang, today = buildToday()): FestaText | undefined => {
+  const text = festa.text[lang];
+  return text && fillDate(text, nextDay(festa, today), lang);
+};
 
 /** The holidays that have a text in `lang`. */
 export const festasIn = (lang: Lang): FestaData[] => FESTAS.filter((f) => festaText(f, lang));

@@ -165,6 +165,7 @@ const PAIRS = [
   // The colour of an epoch on the neutral pages (the stripe and the dot of a card of a thread, the dots of a thread in the lists): the bg and the surface are the base ones.
   ['epoch tone on the neutral page', 'epoch-primary', 'bg', G],
   ['epoch tone on the neutral card', 'epoch-primary', 'surface', G],
+  ['queen moustache, brows, mark on her face', 'festa-face-ink', 'festa-shell', G],
   ['tone blue on surface', 'viz-tone-blue', 'surface', G],
   ['tone red on surface', 'viz-tone-red', 'surface', G],
   ['tone green on surface', 'viz-tone-green', 'surface', G],
@@ -200,7 +201,7 @@ function colorOf(spec, props, theme) {
   // The ground of the map: the land and water colours of the CARTO styles Voyager (light theme) and Dark Matter (dark theme),
   // taken from their style files at basemaps.cartocdn.com/gl/voyager-gl-style and dark-matter-gl-style.
   const MAP_GROUND = { light: { 'map-land': '#fbf8f3', 'map-water': '#b0d0d6' }, dark: { 'map-land': '#0e0e0e', 'map-water': '#2c353c' } };
-  const get = (name) => MAP_GROUND[theme]?.[name] ? parseColor(MAP_GROUND[theme][name]) : parseColor(resolveText(`var(--${name === 'epoch-tint' || name.startsWith('epoch-') || name.startsWith('viz-') ? name : `color-${name}`})`, props, theme));
+  const get = (name) => MAP_GROUND[theme]?.[name] ? parseColor(MAP_GROUND[theme][name]) : parseColor(resolveText(`var(--${name === 'epoch-tint' || name.startsWith('epoch-') || name.startsWith('viz-') || name.startsWith('festa-') ? name : `color-${name}`})`, props, theme));
   const color = get(top);
   return back ? over(color, get(back)) : color;
 }
