@@ -245,7 +245,7 @@ if (want('game')) {
     await wait(100);
     const copied = await page.evaluate(() => ({ text: window.__copied ?? '', status: document.querySelector('[data-final-status]').textContent, shares: window.__counted.filter((c) => c.path === 'myths-share').length }));
     const lines = copied.text.split('\n');
-    ok(`${lang}: the copied text has the title, the squares, the question and the link with ?src=share`, lines.length === 4 && lines[0] === fill(ui.share_title, { band: ui[`band_${band}`] }) && lines[1] === hits.map((h) => (h ? '🟦' : '⬜')).join('') && lines[2] === ui.share_ask && lines[3].endsWith(`/${lang}/${SEG[lang]}/${RANK[lang]}/${band}/?src=share`), JSON.stringify(lines));
+    ok(`${lang}: the copied text is one line (the game, the caption of the result, the tiles, the question) and the link to the page of the range with ?src=share`, lines.length === 2 && lines[0] === fill(ui.result_text, { band: ui[`band_${band}`], tiles: hits.map((h) => (h ? '🟦' : '⬜')).join('') }) && lines[1].endsWith(`/${lang}/${SEG[lang]}/${RANK[lang]}/${band}/?src=share`), JSON.stringify(lines));
     ok(`${lang}: the text has nothing of the claims or their answers`, LIST.every((m) => !copied.text.includes(m.answer[lang].slice(0, 25)) && !copied.text.includes(m.statement[lang].slice(0, 25))));
     ok(`${lang}: the quiet note says "${ui.copied}"`, copied.status === ui.copied, copied.status);
     ok(`${lang}: one myths-share event, however many times it is pressed`, copied.shares === 1, String(copied.shares));
@@ -254,7 +254,8 @@ if (want('game')) {
     await page.click('[data-final-share]');
     await wait(100);
     const dialog = await page.evaluate(() => window.__shared);
-    ok(`${lang}: the dialog of the browser gets the title, the text and the link`, dialog && dialog.title === lines[0] && dialog.text === lines.slice(0, 3).join('\n') && dialog.url === lines[3], JSON.stringify(dialog));
+    const dialogTitle = await page.$eval('h1', (e) => e.textContent.trim());
+    ok(`${lang}: the dialog of the browser gets the title of the game, the one-line text and the link`, dialog && dialog.title === dialogTitle && dialog.text === lines[0] && dialog.url === lines[1], JSON.stringify(dialog));
     // Play again: every card, one shown, clean, the best result on the start line.
     await page.click('[data-again]');
     await wait(100);

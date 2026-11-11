@@ -1,4 +1,4 @@
-// Checks the pictures of the games (docs/spec.md 5.10) in the build: the two pictures 3:2 of docs/images/games, the preview pictures (1200x630 JPEG, up to 200 KB) the pages point to.
+// Checks the pictures of the games (docs/spec.md 5.10) in the build: the three pictures 3:2 of docs/images/games (myths, order, games), the preview pictures (1200x630 JPEG, up to 200 KB) the pages point to.
 // Part of postbuild. A missing source picture is a WARNING, never an error (the pages go without it); a preview picture the build points to that is not there, or is the wrong size, is an error.
 // CHECK_DIST=<dir> checks another build.
 import { existsSync, readFileSync, statSync } from 'node:fs';
@@ -8,7 +8,7 @@ import sharp from 'sharp';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const dist = process.env.CHECK_DIST || join(root, 'dist');
-const GAMES = ['myths', 'order'];
+const GAMES = ['myths', 'order', 'games'];
 const PAGES = { myths: { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' }, order: { pt: 'o-que-veio-primeiro', en: 'which-came-first', ru: 'chto-bylo-ranshe' }, games: { pt: 'jogos', en: 'games', ru: 'igry' } };
 
 const warnings = [];
@@ -26,7 +26,7 @@ for (const game of GAMES) {
 
 // Every game page that is built points to a preview picture of ours: it exists, 1200x630, up to 200 KB.
 for (const [key, byLang] of Object.entries(PAGES)) {
-  const own = key === 'games' ? GAMES.every((g) => existsSync(join(root, 'docs/images/games', `${g}.jpg`))) : existsSync(join(root, 'docs/images/games', `${key}.jpg`));
+  const own = existsSync(join(root, 'docs/images/games', `${key}.jpg`));
   if (!own) continue;
   for (const [lang, slug] of Object.entries(byLang)) {
     const page = join(dist, lang, slug, 'index.html');

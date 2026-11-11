@@ -454,14 +454,15 @@
     "misses": "Onde errou",
     "again": "Jogar outra vez",
     "read": "Ler as histórias",
-    "share_title": "Mito ou verdade sobre Portugal: {band}",
-    "share_ask": "E o que acha?",
     "copied": "Copiado",
     "best": "O seu melhor título: {band}",
     "restart": "Recomeçar",
     "og_description_page_one": "Eiffel, Rowling, pastéis com segredo. {n} afirmação sobre Portugal: o que é verdade? Depois de cada resposta, a história completa.",
     "og_description_page_other": "Eiffel, Rowling, pastéis com segredo. {n} afirmações sobre Portugal: o que é verdade? Depois de cada resposta, a história completa.",
-    "rank_og_title": "O meu resultado: «{band}». E o seu?"
+    "rank_og_title": "O meu resultado: «{band}». E o seu?",
+    "result_text": "Mito ou verdade? O meu resultado: «{band}» {tiles}. E o seu?",
+    "rank_og_description_one": "Teste o seu faro: {n} afirmação sobre Portugal.",
+    "rank_og_description_other": "Teste o seu faro: {n} afirmações sobre Portugal."
   },
   "order": {
     "lead": "Dois acontecimentos do passado de Portugal. Qual aconteceu primeiro? Dez pares.",
@@ -488,8 +489,6 @@
     "misses": "Onde errou",
     "again": "Mais uma ronda",
     "read_all": "Ler as histórias",
-    "share_title": "O que veio primeiro? {band}",
-    "share_ask": "E o que acha?",
     "copied": "Copiado",
     "nojs": "O jogo precisa de JavaScript ativado.",
     "nojs_link": "Entretanto, pode jogar ao «Mito ou verdade» →",
@@ -498,7 +497,8 @@
     "yours": "A sua escolha",
     "verdict_hit": "Acertou",
     "verdict_miss": "Errou",
-    "first_line": "Aconteceu primeiro: «{title}»"
+    "result_text": "O que veio primeiro? O meu resultado: «{band}» {tiles}. E o seu?",
+    "rank_og_description": "Teste o seu sentido do tempo: dez pares de acontecimentos da história de Portugal."
   },
   "games": {
     "ai_caption": "Ilustração criada por IA. Não é uma imagem histórica.",

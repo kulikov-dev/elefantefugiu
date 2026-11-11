@@ -1,8 +1,8 @@
 // Browser checks of "Which came first?" (src/views/OrderView.astro, src/scripts/order.ts, src/lib/order.ts, /{lang}/order.json) against dist/ served by serve.mjs:   node order.mjs [page question answer resume result family nojs nav scroll layout]
 //   page      the page in every language: one h1, the switch of the two games with the current one marked, the lead, the address, the footer link, indexable with hreflang and an og of its own
 //   question  ten pairs; a card has a picture and a title and no year, no name of an epoch (no epoch colour either); two cards, side by side from 640 px and one under the other on a phone
-//   answer    a press frames the card pressed and marks it "Your pick" (no dark fill), turns both off, shows both dates (those of the data), exactly one mark "First" (on the story that came first), the label of the verdict in the
-//             colours of the myths, the bold line of what came first, the years between as plain text, a plate for each story (the earlier first; no small "Read" links), Next; nothing else is shown before the press
+//   answer    a press frames the card pressed and marks it "Your pick" (no dark fill); after it every card is a link to its story (the whole card, "Whole story →" at its foot), both dates, exactly one mark "First", the label of the verdict in the
+//             colours of the myths with the years between beside it as plain text (no line of what came first, no separate plates, no small "Read" links), Next; nothing else is shown before the press
 //   resume    the round is kept (`order:game`): back from a story, a reload, the pair answered, a finished round shows its result (no second event) until "Another round"; a story that is gone: a new round, silently
 //   result    after ten answers the screen of the game (a title by the range, the tiles, the misses as pairs with links, Share, Another round); one counter event `order-finish` and no other; nothing is kept in the browser;
 //             "Another round" gives other pairs
@@ -169,15 +169,14 @@ if (want('answer')) {
       const probe = (css) => { const e = document.createElement('i'); e.style.color = css; document.body.append(e); const c = getComputedStyle(e).color; e.remove(); return c; };
       const luminance = (rgb) => { const m = /rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)/.exec(rgb); return m ? { l: (0.299 * m[1] + 0.587 * m[2] + 0.114 * m[3]) / 255, alpha: m[4] === undefined ? 1 : Number(m[4]) } : { l: 1, alpha: 0 }; };
       const cards = [...document.querySelectorAll('[data-pair] .order__card')];
-      const picked = cards.find((c) => c.getAttribute('aria-pressed') === 'true');
+const picked = cards.find((c) => c.getAttribute('data-picked') === 'true');
       const title = picked.querySelector('.order__title');
       const verdict = document.querySelector('[data-verdict] .verdict');
-      const outcome = document.querySelector('[data-outcome]');
       const between = document.querySelector('[data-between]');
       const body = getComputedStyle(document.body);
       return {
-        pressed: cards.map((c) => c.getAttribute('aria-pressed')),
-        disabled: cards.map((c) => c.disabled),
+pressed: cards.map((c) => c.getAttribute('data-picked')),
+tags: cards.map((c) => c.tagName),
         dates: [...document.querySelectorAll('[data-pair] .order__date')].map((d) => d.textContent.trim()),
         marks: [...document.querySelectorAll('[data-pair] .order__first')].map((m) => m.closest('.order__cell')?.querySelector('.order__title')?.textContent),
         yours: [...document.querySelectorAll('.order__yours')].map((y) => y.closest('.order__card') === picked ? y.textContent.trim() : 'other'),
@@ -192,31 +191,28 @@ if (want('answer')) {
         verdictIcon: !!verdict?.querySelector('svg'),
         verdictColor: verdict ? getComputedStyle(verdict).color : '',
         verdictInk: { fact: probe('var(--color-verdict-fact-ink)'), myth: probe('var(--color-verdict-myth-ink)') },
-        outcome: outcome?.textContent.trim(),
-        outcomeWeight: Number(getComputedStyle(outcome).fontWeight),
-        outcomeSize: getComputedStyle(outcome).fontSize,
-        betweenSize: getComputedStyle(between).fontSize,
+        row: { same: document.querySelector('.order__verdict').contains(verdict) && document.querySelector('.order__verdict').contains(between), order: verdict.compareDocumentPosition(between) & 4 },
         betweenColor: getComputedStyle(between).color,
         betweenWeight: Number(getComputedStyle(between).fontWeight),
         bodyColor: body.color,
         between: between.textContent.trim(),
-        plates: [...document.querySelectorAll('[data-plates] .story-plate')].map((x) => ({ href: x.getAttribute('href'), title: x.querySelector('.story-plate__title')?.textContent, more: x.querySelector('.story-plate__more')?.textContent, thumb: !!x.querySelector('img.story-plate__thumb') })),
-        smallRead: document.querySelectorAll('.order__read, [data-pair] a').length,
+        links: cards.map((c) => ({ href: c.getAttribute('href'), more: c.querySelector('.order__more')?.textContent, thumb: !!c.querySelector('img.order__thumb'), title: !!c.querySelector('.order__title'), buttons: c.querySelectorAll('button').length })),
+        legacy: document.querySelectorAll('.order__read, .story-plate, [data-plates], [data-outcome], [data-pair] button').length,
         next: document.querySelector('[data-next]')?.checkVisibility(),
         tiles: [...document.querySelectorAll('[data-squares] .sq')].slice(0, 2).map((s) => s.className),
         kept: JSON.parse(localStorage.getItem('order:game') ?? 'null'),
       };
     });
     const hit = first === b;
-    ok(`${lang}: the pressed card is marked and both are off`, r.pressed.join() === 'false,true' && r.disabled.every(Boolean), r.pressed.join());
+    ok(`${lang}: the pressed card is marked, and both cards are links now (no buttons left)`, r.pressed.join() === 'false,true' && r.tags.every((t) => t === 'A'), r.pressed.join() + ' ' + r.tags.join());
     ok(`${lang}: the pressed card has a frame of 2 px in the colour of a link and the small mark "Your pick" over its title, only on it`, r.border === r.accent && r.borderWidth === '2px' && r.yours.join() === ui('order.yours', lang), `${r.border} ${r.accent} ${r.borderWidth} ${r.yours.join()}`);
     ok(`${lang}: the title of the pressed card is on the surface of the card: no dark fill`, (r.titleBg.alpha === 0 || r.titleBg.l > 0.5 === r.cardBg.l > 0.5) && (r.titleBg.alpha === 0 || Math.abs(r.titleBg.l - r.cardBg.l) < 0.15) && r.titleInk < 0.5, JSON.stringify([r.titleBg, r.cardBg, r.titleInk]));
     ok(`${lang}: both dates are shown, as the data has them`, r.dates.join() === [a.date, b.date].join(), `${r.dates.join(" | ")} vs ${a.date} | ${b.date}`);
     ok(`${lang}: exactly one mark "First", on the story that came first`, r.marks.length === 1 && r.marks[0] === first.title, r.marks.join());
     ok(`${lang}: the label of the verdict is the one of the myths: a check on green for a right guess, a cross on terracotta for a wrong one`, r.verdictClass === `verdict verdict--${hit ? "fact" : "myth"}` && r.verdictText === ui(`order.verdict_${hit ? "hit" : "miss"}`, lang) && r.verdictIcon && r.verdictColor === r.verdictInk[hit ? 'fact' : 'myth'], `${r.verdictClass} ${r.verdictText} ${r.verdictColor}`);
-    ok(`${lang}: the bold line says what came first, in the size of the text`, r.outcome === ui('order.first_line', lang).replace('{title}', first.title) && r.outcomeWeight >= 600 && r.outcomeSize === r.betweenSize, `${r.outcome} ${r.outcomeWeight} ${r.outcomeSize}`);
-    ok(`${lang}: the years between are plain text under it (not grey, not bold)`, /\d/.test(r.between) && r.betweenColor === r.bodyColor && r.betweenWeight < 600, `${r.between} ${r.betweenColor} ${r.bodyColor}`);
-    ok(`${lang}: a plate for each story, the earlier first, with a thumbnail and "Whole story →"; no small "Read" links under the cards`, r.plates.length === 2 && r.plates[0].href === first.href && r.plates[1].href === later.href && r.plates.every((x) => x.more === ui('myths.full_story', lang) && x.thumb) && r.smallRead === 0, JSON.stringify(r.plates));
+    ok(`${lang}: no line of what came first: the answer is the label of the verdict with the years between beside it, in one row`, r.row.same && r.row.order > 0 && r.legacy === 0, JSON.stringify(r.row) + ' ' + r.legacy);
+    ok(`${lang}: the years between are plain text beside the label (not grey, not bold)`, /\d/.test(r.between) && r.betweenColor === r.bodyColor && r.betweenWeight < 600, `${r.between} ${r.betweenColor} ${r.bodyColor}`);
+    ok(`${lang}: each card is the link to its own story (the whole card: picture, title, dates), with "Whole story →" at its foot; no plates, no small "Read" links`, r.links.length === 2 && r.links[0].href === a.href && r.links[1].href === b.href && r.links.every((x) => x.more === ui('myths.full_story', lang) && x.thumb && x.title && x.buttons === 0), JSON.stringify(r.links));
     ok(`${lang}: Next is shown and the tile of the pair is filled`, r.next && /sq--(hit|miss)/.test(r.tiles[0]), r.tiles.join());
     ok(`${lang}: a press keeps only the round (order:game: the pairs, the pick, whether it was right), nothing else in the browser`, r.kept && r.kept.picks[0] === 1 && r.kept.hits[0] === hit && r.kept.index === 0 && (await others()) === stored, JSON.stringify(r.kept));
     ok(`${lang}: a pressed card does not send an event`, (await page.evaluate(() => window.__counted.length)) === 0);
@@ -251,21 +247,21 @@ if (want('resume')) {
     await press(page, 1);
     const before = { step: await stepText(), titles: await titles(), tiles: await page.$$eval('[data-squares] .sq', (l) => l.map((x) => x.className)) };
     // To a story and back.
-    const href = await page.$eval('[data-plates] .story-plate', (a) => a.getAttribute('href'));
+    const href = await page.$eval('[data-pair] a.order__card', (a) => a.getAttribute('href'));
     await page.goto(base + href, { waitUntil: 'networkidle0' });
     await page.goBack({ waitUntil: 'networkidle0' });
-    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    await page.waitForSelector('[data-pair] .order__card', { timeout: 10000 });
     await wait(200);
-    ok(`${lang}: back from a story the same pair is there, answered, with its answer`, (await stepText()) === before.step && JSON.stringify(await titles()) === JSON.stringify(before.titles) && (await answered()) && (await page.$eval('[data-pair] .order__card[aria-pressed="true"]', () => true)), `${await stepText()} ${before.step}`);
+    ok(`${lang}: back from a story the same pair is there, answered, with its answer`, (await stepText()) === before.step && JSON.stringify(await titles()) === JSON.stringify(before.titles) && (await answered()) && (await page.$eval('[data-pair] .order__card[data-picked="true"]', () => true)), `${await stepText()} ${before.step}`);
     ok(`${lang}: the tiles are the ones of before`, JSON.stringify(await page.$$eval('[data-squares] .sq', (l) => l.map((x) => x.className))) === JSON.stringify(before.tiles));
     // A reload; then Next, and a reload on the next pair.
     await page.reload({ waitUntil: 'networkidle0' });
-    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    await page.waitForSelector('[data-pair] .order__card', { timeout: 10000 });
     ok(`${lang}: a reload keeps the pair too`, (await stepText()) === before.step && (await answered()));
     await next(page);
     const fifthTitles = await titles();
     await page.reload({ waitUntil: 'networkidle0' });
-    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    await page.waitForSelector('[data-pair] .order__card', { timeout: 10000 });
     ok(`${lang}: after Next a reload shows the next pair, not answered`, /\b5\b/.test(await stepText()) && !(await answered()) && JSON.stringify(await titles()) === JSON.stringify(fifthTitles) && fifthTitles.join() !== before.titles.join(), await stepText());
     // The page "Games" says where the reader is.
     const gamesPage = await browser.newPage();
@@ -352,7 +348,7 @@ if (want('result')) {
     const lines = copied.split('\n');
     const hits = fin.tiles.filter((c) => c.includes('sq--hit')).length;
     const band = hits === ROUND ? 'top' : hits / ROUND >= 0.7 ? 'high' : hits / ROUND >= 0.4 ? 'mid' : 'low';
-    ok(`${lang}: the copied text has the caption, the tiles, the question and the link to the page of the range with ?src=share`, lines.length === 4 && lines[0] === ui('order.share_title', lang).replace('{band}', ui(`order.band_${band}`, lang)) && lines[1] === fin.tiles.map((c) => (c.includes('sq--hit') ? '🟦' : '⬜')).join('') && lines[2] === ui('order.share_ask', lang) && lines[3].endsWith(`/${lang}/${SEG[lang]}/${RANKSEG[lang]}/${band}/?src=share`), JSON.stringify(lines));
+    ok(`${lang}: the copied text is one line (the game, the caption of the result, the tiles, the question) and the link to the page of the range with ?src=share`, lines.length === 2 && lines[0] === ui('order.result_text', lang).replace('{band}', ui(`order.band_${band}`, lang)).replace('{tiles}', fin.tiles.map((c) => (c.includes('sq--hit') ? '🟦' : '⬜')).join('')) && lines[1].endsWith(`/${lang}/${SEG[lang]}/${RANKSEG[lang]}/${band}/?src=share`), JSON.stringify(lines));
     ok(`${lang}: sharing sends no event`, (await page.evaluate(() => window.__counted.length)) === 1);
     const counted = await page.evaluate(() => window.__counted.map((c) => c.path));
     ok(`${lang}: one counter event, order-finish, and no other`, counted.length === 1 && counted[0] === 'order-finish', counted.join());

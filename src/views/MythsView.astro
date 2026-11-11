@@ -37,7 +37,7 @@ const cards = mythsInOrder(live, first);
 const title = t(lang, 'pages.myths.title');
 const shareTemplate = t(lang, 'myths.share_text');
 const abs = (path: string) => new URL(path, Astro.site).href;
-const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'outcome_hit', 'outcome_miss', 'outcome_part', 'next', 'finish', 'band_low', 'band_mid', 'band_high', 'share_title', 'share_ask', 'copied', 'best'] as const;
+const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'outcome_hit', 'outcome_miss', 'outcome_part', 'next', 'finish', 'band_low', 'band_mid', 'band_high', 'result_text', 'copied', 'best'] as const;
 const strings = Object.fromEntries(keys.map((k) => [k, t(lang, `myths.${k}`)]));
 strings.failed = t(lang, 'card.share_failed');
 const one = first ? cards.find((c) => c.id === first) : undefined;
@@ -59,9 +59,9 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   noindex={one !== undefined || ranked !== undefined}
   schema={one || ranked ? undefined : schema}
   alternates={one ? altPaths((l) => mythPath(l, one.id)) : ranked ? altPaths((l) => rankPath(l, 'myths', ranked)) : undefined}
-  canonicalTo={one || ranked ? altPaths((l) => pagePath(l, 'myths')) : undefined}
+  canonicalTo={one ? altPaths((l) => pagePath(l, 'myths')) : undefined}
   preview={ranked
-    ? { title: t(lang, 'myths.rank_og_title').replace('{band}', t(lang, `myths.band_${ranked}`)), description: pageDescription, ...pageImage }
+    ? { title: t(lang, 'myths.rank_og_title').replace('{band}', t(lang, `myths.band_${ranked}`)), description: plural(lang, 'myths.rank_og_description', live.length), ...pageImage }
     : one
     ? {
         title: withStatement(t(lang, 'myths.og_title'), one.statement[lang]),

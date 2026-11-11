@@ -2,7 +2,7 @@
 // Run by the build before astro build (npm run build):   node scripts/make-games-images.mjs
 //   public/games/<game>-<width>-<hash>.webp   the picture whole, 3:2, in two widths (the banner of the result, the card on the page "Games")
 //   public/og-games/<game>-<hash>.jpg         the preview picture of the page of a game: 1200x630, the picture whole at the height of 630 in the middle, on fields of the paper (no cutting)
-//   public/og-games/games-<hash>.jpg          the preview picture of the page "Games": the two pictures side by side, whole
+//   public/og-games/games-<hash>.jpg          the preview picture of the page "Games" (docs/images/games/games.jpg): the same, whole at the height of 630 on fields of the paper
 //   .og-cache/games.json                      which files belong to which game (src/lib/games-images.ts reads it)
 // None of them is in the repository. A missing source picture is not an error: the page goes without that picture and `npm run check:games` warns.
 import { createHash } from 'node:crypto';
@@ -19,6 +19,8 @@ const cacheDir = join(root, '.og-cache');
 for (const d of [picDir, ogDir, cacheDir]) mkdirSync(d, { recursive: true });
 
 export const GAMES = ['myths', 'order'];
+/** The page "Games" has a preview picture of its own, no sizes for the page. */
+const PAGE_GAMES = 'games';
 const WIDTHS = [480, 960];
 const W = 1200;
 const H = 630;
@@ -66,20 +68,19 @@ for (const game of GAMES) {
   manifest[game] = entry;
 }
 
-if (sources.myths && sources.order) {
-  // The two pictures whole, side by side, in the middle of the preview picture.
-  const w = 576;
-  const h = 384;
-  const [a, b] = await Promise.all(GAMES.map((g) => sharp(sources[g]).resize(w, h).toBuffer()));
-  const collage = sharp({ create: { width: W, height: H, channels: 3, background: paper } }).composite([
-    { input: a, left: 16, top: (H - h) / 2 },
-    { input: b, left: 16 + w + 16, top: (H - h) / 2 },
-  ]);
-  const buffer = await jpegUnderLimit(collage);
-  const name = `games-${hashOf(sources.myths, sources.order)}.jpg`;
-  writeFileSync(join(ogDir, name), buffer);
-  keep.og.add(name);
-  manifest.games = { og: `og-games/${name}` };
+// The preview picture of the page "Games": its own picture, whole, on fields of paper (no cutting).
+{
+  const file = join(srcDir, `${PAGE_GAMES}.jpg`);
+  if (existsSync(file)) {
+    const source = readFileSync(file);
+    const og = await jpegUnderLimit(sharp(source).resize(W, H, { fit: 'contain', background: paper }));
+    const name = `${PAGE_GAMES}-${hashOf(source)}.jpg`;
+    writeFileSync(join(ogDir, name), og);
+    keep.og.add(name);
+    manifest.games = { og: `og-games/${name}` };
+  } else {
+    console.warn(`WARNING  docs/images/games/${PAGE_GAMES}.jpg is missing: the page "Games" goes with the preview picture of the site.`);
+  }
 }
 
 for (const f of readdirSync(picDir)) if (!keep.pics.has(f)) rmSync(join(picDir, f));

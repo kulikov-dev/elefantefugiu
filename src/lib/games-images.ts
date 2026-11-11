@@ -40,7 +40,7 @@ export function gamePicture(game: GameName, cwd = process.cwd()): GamePicture | 
   return { src: withBase(biggest.file), srcset: sizes.map((s) => `${withBase(s.file)} ${s.width}w`).join(', '), width: biggest.width, height: biggest.height, og: entry.og };
 }
 
-/** The preview picture of the page "Games" (the two pictures side by side): a path inside public/, or undefined. */
+/** The preview picture of the page "Games" (docs/images/games/games.jpg): a path inside public/, or undefined. */
 export function gamesCollagePath(cwd = process.cwd()): string | undefined {
   const og = read(cwd).games?.og;
   return og && existsSync(join(cwd, 'public', og)) ? og : undefined;

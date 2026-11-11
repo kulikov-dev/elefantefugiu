@@ -28,8 +28,6 @@ export interface OrderStory {
   to: number;
   /** The line under the title: the hook, or `order_hint`; none when the hook gives the date away. */
   hint?: string;
-  /** The small thumbnail for the plate under an answer (96 and 192 px). */
-  thumb?: { src: string; srcset?: string };
   /** The date as the story shows it. */
   date: string;
   epoch: string;

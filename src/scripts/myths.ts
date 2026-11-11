@@ -222,8 +222,7 @@ if (root && list && progress && stepEl && squaresEl && bestEl && restartButton &
   // Share: the text has the title and the squares, never the answers; the link is the game with ?src=share.
   result?.onShare(() => {
     const hits = marks.map(isHit);
-    const title = s('share_title', { band: s(`band_${bandOf(hits.filter(Boolean).length, total)}`) });
-    return { title, text: `${title}\n${squaresLine(hits)}\n${s('share_ask')}` };
+    return { title: document.querySelector('h1')?.textContent?.trim() ?? '', text: s('result_text', { band: s(`band_${bandOf(hits.filter(Boolean).length, total)}`), tiles: squaresLine(hits) }) };
   }, SHARE_EVENT);
 
   // A finished game on the home page says "Play again": the page then deals a new one, the result stays in the browser until the first answer replaces it.

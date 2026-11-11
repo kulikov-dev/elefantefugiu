@@ -7,7 +7,7 @@
 import { fill, squaresLine } from '../lib/myths';
 import { ORDER_FINISH_EVENT, ORDER_GAME_KEY, allowedIn, between, earlier, makeRound, orderBand, parseOrderGame, toOrderGame, type OrderStory, type Pair } from '../lib/order';
 import { pickPlural } from '../lib/plural-pick';
-import { storyPlate, verdictLabel } from './answer-parts';
+import { verdictLabel } from './answer-parts';
 import { currentFamilyMode } from './family-mode';
 import { countEvent, drawTiles, initResult, type TileState } from './game-result';
 
@@ -19,13 +19,11 @@ const squaresEl = q('[data-squares]');
 const pairEl = q('[data-pair]');
 const answerEl = q('[data-answer]');
 const verdictEl = q('[data-verdict]');
-const outcomeEl = q('[data-outcome]');
 const betweenEl = q('[data-between]');
-const platesEl = q('[data-plates]');
 const nextButton = q<HTMLButtonElement>('[data-next]');
 const emptyEl = q('[data-empty]');
 
-if (root && game && stepEl && squaresEl && pairEl && answerEl && verdictEl && outcomeEl && betweenEl && platesEl && nextButton && emptyEl) {
+if (root && game && stepEl && squaresEl && pairEl && answerEl && verdictEl && betweenEl && nextButton && emptyEl) {
   const strings = JSON.parse(root.dataset.strings ?? '{}') as Record<string, string>;
   const locale = root.dataset.locale ?? 'en';
   // "Share" leads to the page of the range of the result (the same game, a preview of its own), with ?src=share.
@@ -33,6 +31,7 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && verdictEl && ou
   const s = (key: string, vars: Record<string, string | number> = {}): string => fill(strings[key] ?? '', vars);
   const stateLabel = (state: TileState): string => s(`sq_${state}`);
   const bandNow = (): string => orderBand(marks.filter(Boolean).length, round.length);
+  const heading = document.querySelector('h1')?.textContent?.trim() ?? '';
   const result = initResult(root, strings, () => rankUrls[bandNow()] ?? location.href, stateLabel);
 
   let all: OrderStory[] = [];
@@ -109,14 +108,21 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && verdictEl && ou
     const first = earlier(pair);
     const hit = marks[index] === true;
     const buttons = [...pairEl.querySelectorAll<HTMLButtonElement>('[data-pick]')];
-    buttons[pick]!.setAttribute('aria-pressed', 'true');
-    const yours = document.createElement('span');
-    yours.className = 'order__yours';
-    yours.textContent = s('yours');
-    buttons[pick]!.querySelector('.order__title')?.before(yours);
+    // Each card becomes a link to its story (the whole card): the button is swapped for an <a> with the same content; the pressed one is framed and marked "Your pick".
     [pair.a, pair.b].forEach((story, k) => {
       const b = buttons[k]!;
-      b.disabled = true;
+      const link = document.createElement('a');
+      link.className = 'order__card';
+      link.href = story.href;
+      link.dataset.picked = String(k === pick);
+      link.append(...b.childNodes);
+      if (k === pick) {
+        const yours = document.createElement('span');
+        yours.className = 'order__yours';
+        yours.textContent = s('yours');
+        link.querySelector('.order__title')?.before(yours);
+      }
+      b.replaceWith(link);
       const when = document.createElement('span');
       when.className = 'order__when';
       if (story === first) {
@@ -129,14 +135,15 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && verdictEl && ou
       date.className = 'order__date';
       date.textContent = story.date;
       when.append(date);
-      b.append(when);
+      link.append(when);
+      const more = document.createElement('span');
+      more.className = 'order__more';
+      more.textContent = s('full_story');
+      link.append(more);
     });
     const gap = between(pair);
     verdictEl.replaceChildren(verdictLabel(hit ? 'fact' : 'myth', s(hit ? 'verdict_hit' : 'verdict_miss')));
-    outcomeEl.textContent = s('first_line', { title: first.title });
     betweenEl.textContent = pickPlural(strings, gap.rough ? 'between_about' : 'between', gap.n, locale).replace('{n}', String(gap.n));
-    const later = first === pair.a ? pair.b : pair.a;
-    platesEl.replaceChildren(...[first, later].map((story) => storyPlate({ href: story.href, title: story.title, thumb: story.thumb, more: s('full_story') })));
     nextButton.textContent = index === round.length - 1 ? s('finish') : s('next');
     answerEl.hidden = false;
     drawSquares();
@@ -242,10 +249,8 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && verdictEl && ou
       show(index, true);
     }
   });
-  result?.onShare(() => {
-    const title = s('share_title', { band: s(`band_${bandNow()}`) });
-    return { title, text: `${title}\n${squaresLine(marks.map(Boolean))}\n${s('share_ask')}` };
-  });
+  // The text: the game, the caption of the result, the tiles; then the link to the page of the range.
+  result?.onShare(() => ({ title: heading, text: s('result_text', { band: s(`band_${bandNow()}`), tiles: squaresLine(marks.map(Boolean)) }) }));
   result?.onAgain(() => start(true));
 
   fetch(root.dataset.src ?? '')

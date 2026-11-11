@@ -1,7 +1,7 @@
 ---
-// "Games": /pt/jogos/, /en/games/, /ru/igry/ (docs/spec.md 5.10). The choice of a game: a big card for each ("Myth or fact", "Which came first?"): the picture of the game whole (3:2) with the line that it is AI-made, the name,
+// "Games": /pt/jogos/, /en/games/, /ru/igry/ (docs/spec.md 5.10). The choice of a game: a big card for each ("Myth or fact", "Which came first?"): the picture of the game whole (3:2), the name,
 // one line of invitation, and under it the state of the game in this browser (src/scripts/games.ts reads `myths:game` and `order:game`): "Start", "Continue (question 5 of 12)" or the caption of the last result.
-// The tab "Games" and the item of the menu of the header lead here. Indexable, in the sitemap, hreflang; the preview picture is the two pictures side by side.
+// The tab "Games" and the item of the menu of the header lead here. Indexable, in the sitemap, hreflang; the preview picture is a picture of its own (docs/images/games/games.jpg). The H1 is for screen readers only (it repeats the active item of the menu).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { GAME_OG, gamePicture, gamesCollagePath } from '../lib/games-images';
 import { pagePath, withBase, type Lang } from '../i18n/routes';
@@ -39,7 +39,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'games')
   preview={{ title: t(lang, 'games.og_title'), description: t(lang, 'games.og_description'), ...(collage ? { imageUrl: withBase(collage), imageSize: GAME_OG, imageAlt: t(lang, 'games.og_title') } : {}) }}
 >
   <article class="games" data-games data-strings={JSON.stringify(strings)} data-myth-ids={JSON.stringify(myths.map((m) => m.id))}>
-    <h1>{title}</h1>
+    <h1 class="visually-hidden">{title}</h1>
     <ul class="games__list">
       {
         cards.map((card) => (
@@ -49,7 +49,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'games')
                 card.picture && (
                   <figure class="game-card__figure">
                     <img class="game-card__picture" src={card.picture.src} srcset={card.picture.srcset} sizes="(min-width: 768px) 420px, 100vw" width={card.picture.width} height={card.picture.height} alt="" loading="lazy" decoding="async" />
-                    <figcaption class="game-card__ai">{t(lang, 'games.ai_caption')}</figcaption>
                   </figure>
                 )
               }
@@ -118,12 +117,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'games')
     background: var(--epoch-line);
     filter: var(--image-filter);
     object-fit: cover;
-  }
-
-  .game-card__ai {
-    padding: var(--space-1) var(--space-4) 0;
-    color: var(--color-ink-muted);
-    font-size: var(--text-xs);
   }
 
   .game-card__text {

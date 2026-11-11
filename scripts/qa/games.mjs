@@ -3,8 +3,8 @@
 //           from 768 px and one under the other on a phone; indexable, hreflang, in the sitemap; the preview picture is the two pictures side by side (1200x630, there)
 //   state   under a game its state in this browser: "Continue (question 5 of N)", "Continue (pair 4 of 10)", the caption of a finished result; read from what the games keep, nothing written
 //   layout  no horizontal scroll at 320 px
-//   rank    the page of every range of both games in every language: the page of the game itself (its start), noindex, canonical to the game, not in the sitemap, an og:title with the caption of the range,
-//           the description of the game, the picture of the game as og:image (absolute, there, JPEG 1200x630); the page of the myths and of the order game have their own og:title and og:description, the number of the claims from the data
+//   rank    the page of every range of both games in every language: the page of the game itself (its start), noindex, its own canonical address (not the game: a messenger takes the preview from the canonical address), not in the sitemap, an og:title with the caption of the range,
+//           the description of the result (not of the game), the picture of the game as og:image (absolute, there, JPEG 1200x630); the page of the myths and of the order game have their own og:title and og:description, the number of the claims from the data
 import { launchBrowser } from './browser.mjs';
 import { myths, ui } from './data.mjs';
 
@@ -26,6 +26,12 @@ const SEG = { myths: { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-p
 const RANKSEG = { pt: 'titulo', en: 'rank', ru: 'zvanie' };
 if (myths.length < 2) throw new Error('The suite needs at least two claims in src/content/myths.yaml whose story is published (need: two claims).');
 const bandsOf = (game, lang) => Object.keys(ui(game === 'myths' ? 'myths' : 'order', lang)).filter((k) => k.startsWith('band_')).map((k) => k.slice(5));
+const rankDesc = (game, lang) => {
+  if (game === 'order') return ui('order.rank_og_description', lang);
+  const category = new Intl.PluralRules(LOCALE[lang]).select(myths.length);
+  const key = ui(`myths.rank_og_description_${category}`, lang) ? category : 'other';
+  return ui(`myths.rank_og_description_${key}`, lang).replace('{n}', String(myths.length));
+};
 const fill = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
 const sitemap = await fetch(`${base}/sitemap.xml`).then((r) => r.text());
 // The address of a build on its own site ("https://elefantefugiu.pt/ru/...") as the address on this server.
@@ -79,12 +85,12 @@ if (want('page')) {
   for (const lang of LANGS) {
     const page = await open({ lang, path: `${GAMES[lang]}/` });
     const h = await head(page);
-    ok(`${lang}: one h1, "${ui('pages.games.title', lang)}"`, h.h1 === ui('pages.games.title', lang) && (await page.$$eval('h1', (l) => l.length)) === 1, h.h1);
+    ok(`${lang}: one h1, "${ui('pages.games.title', lang)}", for screen readers only (it repeats the active item of the menu: visually hidden)`, h.h1 === ui('pages.games.title', lang) && (await page.$$eval('h1', (l) => l.length)) === 1 && (await page.$eval('h1', (e) => e.classList.contains('visually-hidden') && e.getBoundingClientRect().width <= 1)), h.h1);
     ok(`${lang}: indexable, hreflang for the three languages, in the sitemap`, !/noindex/.test(h.robots) && ['en', 'pt', 'ru'].every((l) => h.alt.includes(l)) && sitemap.includes(`/${lang}/${GAMES[lang]}/`), `${h.robots} ${h.alt}`);
     const cards = await page.evaluate(() => [...document.querySelectorAll('.game-card')].map((c) => {
       const img = c.querySelector('img');
       const r = img?.getBoundingClientRect();
-      return { href: c.getAttribute('href'), name: c.querySelector('h2')?.textContent.trim(), line: c.querySelector('.game-card__line')?.textContent.trim(), state: c.querySelector('[data-state]')?.textContent.trim(), ai: c.querySelector('.game-card__ai')?.textContent.trim(), loaded: !!img && img.complete && img.naturalWidth > 0, ratio: r ? r.width / r.height : 0, natural: img ? img.naturalWidth / img.naturalHeight : 0, alt: img?.getAttribute('alt') };
+      return { href: c.getAttribute('href'), name: c.querySelector('h2')?.textContent.trim(), line: c.querySelector('.game-card__line')?.textContent.trim(), state: c.querySelector('[data-state]')?.textContent.trim(), ai: c.querySelector('figcaption')?.textContent.trim(), loaded: !!img && img.complete && img.naturalWidth > 0, ratio: r ? r.width / r.height : 0, natural: img ? img.naturalWidth / img.naturalHeight : 0, alt: img?.getAttribute('alt') };
     }));
     ok(`${lang}: two cards, the myths first, the links lead to the games`, cards.length === 2 && cards[0].href === `/${lang}/${SEG.myths[lang]}/` && cards[1].href === `/${lang}/${SEG.order[lang]}/`, JSON.stringify(cards.map((c) => c.href)));
     ok(`${lang}: the names are the titles of the games`, cards[0].name === ui('pages.myths.title', lang) && cards[1].name === ui('pages.order.title', lang));
@@ -93,7 +99,7 @@ if (want('page')) {
     ok(`${lang}: the line of the myths has the number of the claims of the data (${myths.length}) in the right form`, cards[0].line === ui(`games.myths_line_${formKey}`, lang).replace('{n}', String(myths.length)), cards[0].line);
     ok(`${lang}: the line of the order game is the invitation`, cards[1].line === ui('games.order_line', lang));
     ok(`${lang}: the state of a game not begun is "${ui('games.start', lang)}"`, cards.every((c) => c.state === ui('games.start', lang)), cards.map((c) => c.state).join(' | '));
-    ok(`${lang}: the picture of each game is whole (3:2), decorative, loaded, with the line that it is AI-made`, cards.every((c) => c.loaded && Math.abs(c.ratio - 1.5) < 0.03 && Math.abs(c.natural - 1.5) < 0.03 && c.alt === '' && c.ai === ui('games.ai_caption', lang)), JSON.stringify(cards.map((c) => [c.ratio, c.natural, c.ai])));
+    ok(`${lang}: the picture of each game is whole (3:2), decorative, loaded, and nothing is written under it (no line about AI)`, cards.every((c) => c.loaded && Math.abs(c.ratio - 1.5) < 0.03 && Math.abs(c.natural - 1.5) < 0.03 && c.alt === '' && c.ai === undefined), JSON.stringify(cards.map((c) => [c.ratio, c.natural, c.ai])));
     ok(`${lang}: the preview picture is the two pictures side by side, 1200x630`, await (async () => { const s = await jpegSize(local(h.ogImage)); return /\/og-games\/games-[0-9a-f]+\.jpg$/.test(h.ogImage) && s.status === 200 && s.type === 'image/jpeg' && s.width === 1200 && s.height === 630 && s.bytes < 200 * 1024; })(), h.ogImage);
     ok(`${lang}: an og:title and an og:description of its own`, h.ogTitle === ui('games.og_title', lang) && h.ogDesc === ui('games.og_description', lang), `${h.ogTitle} | ${h.ogDesc}`);
     ok(`${lang}: no script error`, page.errors.length === 0, page.errors.join('; '));
@@ -154,9 +160,9 @@ if (want('rank')) {
         const caption = ui(`${game === 'myths' ? 'myths' : 'order'}.band_${band}`, lang);
         const tag = `${lang} ${game} ${band}`;
         ok(`${tag}: the page exists, is the game itself (the same h1 and the start), noindex`, /noindex/.test(h.robots) && h.h1 === gameHead.h1 && (game === 'order' ? await page.$('[data-pair] button') !== null : await page.$('[data-myth]') !== null), `${h.robots} ${h.h1}`);
-        ok(`${tag}: canonical to the game, not in the sitemap`, local(h.canonical) === gameUrl && !sitemap.includes(`/${path}`), h.canonical);
+        ok(`${tag}: noindex, canonical to its own address (not to the game: a messenger takes the preview from the canonical address), not in the sitemap`, local(h.canonical) === `${base}/${lang}/${path}` && !sitemap.includes(`/${path}`), h.canonical);
         ok(`${tag}: og:title has the caption of the range`, h.ogTitle === ui(`${game === 'myths' ? 'myths' : 'order'}.rank_og_title`, lang).replace('{band}', caption), h.ogTitle);
-        ok(`${tag}: og:description is the description of the game, as on the page of the game`, h.ogDesc === gameHead.ogDesc && h.ogDesc.length > 20, h.ogDesc);
+        ok(`${tag}: og:description is the one of the result (not the description of the game, which the game page has)`, h.ogDesc === rankDesc(game, lang) && h.ogDesc !== gameHead.ogDesc && h.ogTitle !== gameHead.ogTitle, `${h.ogDesc}`);
         const size = await jpegSize(local(h.ogImage));
         ok(`${tag}: og:image is the picture of the game: absolute, there, JPEG 1200x630`, /^https?:\/\//.test(h.ogImage) && h.ogImage === gameHead.ogImage && new RegExp(`/og-games/${game}-[0-9a-f]+\\.jpg$`).test(h.ogImage) && size.status === 200 && size.type === 'image/jpeg' && size.width === 1200 && size.height === 630, `${h.ogImage} ${JSON.stringify(size)}`);
         await page.close();

@@ -2,7 +2,7 @@
 // "Which came first?": /pt/o-que-veio-primeiro/, /en/which-came-first/, /ru/chto-bylo-ranshe/ (docs/spec.md 5.9). A round is ten pairs of stories; the reader presses the one that came first.
 // The page carries no list: src/scripts/order.ts reads /{lang}/order.json (made at build time from the published stories) and draws the pairs in the browser, in the family mode of the reader.
 // A card shows a thumbnail, a title and the hook, no year, no epoch name, no epoch colour (they would give the answer away). After a press: the pressed card is framed and marked "Your pick", both dates, the mark "First",
-// the label of the verdict (the one of "Myth or fact"), the line of what came first, the years between, a plate for each story and Next. The round is kept in this browser (`order:game`) and goes on from the same pair.
+// the label of the verdict (the one of "Myth or fact") with the years between beside it and Next; each card becomes a link to its story (the whole card), with "Whole story →" at its foot. The round is kept in this browser (`order:game`) and goes on from the same pair.
 // The result is the one of "Myth or fact" (src/components/GameResult.astro). The counter gets one event, `order-finish`. Without JavaScript: a line and a link to the myths.
 // The same view makes the page of a shared result (/ru/chto-bylo-ranshe/zvanie/high/): the page of the game, noindex, canonical to the game, a preview of its own.
 // The styles are global: the cards of a pair are made by the script (the class names are all order__*).
@@ -24,7 +24,7 @@ interface Props {
 const { lang, rank } = Astro.props;
 const title = t(lang, 'pages.order.title');
 const abs = (path: string) => new URL(path, Astro.site).href;
-const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'first', 'yours', 'verdict_hit', 'verdict_miss', 'first_line', 'next', 'finish', 'band_top', 'band_high', 'band_mid', 'band_low', 'share_title', 'share_ask', 'copied', 'empty'] as const;
+const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'first', 'yours', 'verdict_hit', 'verdict_miss', 'next', 'finish', 'band_top', 'band_high', 'band_mid', 'band_low', 'result_text', 'copied', 'empty'] as const;
 const strings: Record<string, string> = Object.fromEntries(keys.map((k) => [k, t(lang, `order.${k}`)]));
 strings.full_story = t(lang, 'myths.full_story');
 for (const base of ['between', 'between_about']) for (const [category, text] of Object.entries(pluralForms(lang, `order.${base}`))) strings[`${base}_${category}`] = text;
@@ -45,9 +45,8 @@ const rankUrls = Object.fromEntries(RANKS.order.map((r) => [r, `${abs(rankPath(l
   noindex={ranked !== undefined}
   schema={ranked ? undefined : schema}
   alternates={ranked ? altPaths((l) => rankPath(l, 'order', ranked)) : undefined}
-  canonicalTo={ranked ? altPaths((l) => pagePath(l, 'order')) : undefined}
   preview={ranked
-    ? { title: t(lang, 'order.rank_og_title').replace('{band}', t(lang, `order.band_${ranked}`)), description: t(lang, 'order.og_description'), ...pageImage }
+    ? { title: t(lang, 'order.rank_og_title').replace('{band}', t(lang, `order.band_${ranked}`)), description: t(lang, 'order.rank_og_description'), ...pageImage }
     : { title: t(lang, 'order.og_title_page'), description: t(lang, 'order.og_description'), ...pageImage }}
 >
   <article class="order" data-order data-strings={JSON.stringify(strings)} data-src={withBase(`${lang}/order.json`)} data-locale={LOCALES[lang]} data-rank-urls={JSON.stringify(rankUrls)}>
@@ -62,9 +61,7 @@ const rankUrls = Object.fromEntries(RANKS.order.map((r) => [r, `${abs(rankPath(l
       </div>
       <div class="order__pair" data-pair role="group" aria-label={t(lang, 'order.question')}></div>
       <div class="order__answer" data-answer tabindex="-1" hidden>
-        <p class="order__verdict"><span data-verdict></span> <span class="order__outcome" data-outcome></span></p>
-        <p class="order__between" data-between></p>
-        <div class="order__plates" data-plates></div>
+        <p class="order__verdict"><span data-verdict></span> <span class="order__between" data-between></span></p>
         <button class="button order__next" type="button" data-next></button>
       </div>
     </div>
@@ -146,22 +143,35 @@ const rankUrls = Object.fromEntries(RANKS.order.map((r) => [r, `${abs(rankPath(l
     cursor: pointer;
   }
 
-  .order__card:hover:not(:disabled) {
+  button.order__card:hover {
     border-color: var(--color-ink);
   }
 
-  .order__card:disabled {
-    cursor: default;
+  /* After the answer a card is a link to its story (the whole card), with "Whole story →" at its foot. */
+  a.order__card {
+    text-decoration: none;
   }
 
-  /* The picture, the title and the hook of the card not pressed fade; its date and the mark "First" do not (they are the answer). */
-  .order__card:disabled:not([aria-pressed='true']) :is(.order__thumb, .order__title, .order__hint, .order__yours) {
+  a.order__card:hover {
+    border-color: var(--color-accent);
+  }
+
+  /* The picture, the title and the hook of the card not pressed fade; its date, the mark "First" and "Whole story →" do not (they are the answer and the way on). */
+  .order__card[data-picked='false'] :is(.order__thumb, .order__title, .order__hint) {
     opacity: 0.45;
   }
 
   /* The card pressed: a frame of the colour of a link and the small mark "Your pick" above the title; the title stays on the surface of the card. */
-  .order__card[aria-pressed='true']:disabled {
+  .order__card[data-picked='true'] {
     border-color: var(--color-accent);
+  }
+
+  .order__more {
+    padding: 0 var(--space-4) var(--space-3);
+    color: var(--color-accent);
+    font-size: var(--text-sm);
+    text-decoration: underline;
+    text-underline-offset: var(--underline-offset);
   }
 
   .order__yours {
@@ -245,24 +255,12 @@ const rankUrls = Object.fromEntries(RANKS.order.map((r) => [r, `${abs(rankPath(l
     margin: 0;
   }
 
-  /* The answer as in "Myth or fact": the label of the verdict and a bold line of the same size, then the plain line of the years between. */
+  /* The answer as in "Myth or fact": the label of the verdict and, beside it, the plain line of the years between. */
   .order__verdict {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2) var(--space-3);
-  }
-
-  .order__outcome {
-    font-weight: var(--weight-strong);
-  }
-
-  /* The two plates (the same as "Whole story →" of the myths), the one that came first on the left or on top. */
-  .order__plates {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-tile-min)), 1fr));
-    gap: var(--space-2);
-    margin-block: var(--space-2);
   }
 
   .order__next {
