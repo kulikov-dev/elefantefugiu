@@ -482,3 +482,78 @@
   outline: var(--border-medium) solid var(--color-ink);
   outline-offset: var(--border-medium);
 }
+
+/* The label of a verdict ("Myth", "Fact", "Partly"; "Which came first?": a right and a wrong guess): text plus a shape, never colour alone (src/components/MythVerdict.astro, src/lib/verdict.ts). */
+.verdict {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--pad-chip-y) var(--pad-chip-x);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-strong);
+  line-height: 1.5;
+}
+
+.verdict__icon {
+  flex: none;
+}
+
+.verdict--myth {
+  background: var(--color-verdict-myth-bg);
+  color: var(--color-verdict-myth-ink);
+}
+
+.verdict--fact {
+  background: var(--color-verdict-fact-bg);
+  color: var(--color-verdict-fact-ink);
+}
+
+.verdict--part {
+  background: var(--color-verdict-part-bg);
+  color: var(--color-verdict-part-ink);
+}
+
+/* The plate that leads to a story under an answer: the thumbnail, the title and "Whole story →" (src/components/StoryPlate.astro, src/scripts/answer-parts.ts). */
+.story-plate {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 100%;
+  padding: var(--space-2);
+  border: 1px solid var(--epoch-line);
+  border-radius: var(--radius-md);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.story-plate:hover .story-plate__title {
+  color: var(--color-accent);
+}
+
+.story-plate__thumb {
+  flex: none;
+  width: calc(var(--touch-target) * 1.5);
+  height: var(--touch-target);
+  border-radius: var(--radius-sm);
+  background: var(--epoch-line);
+  filter: var(--image-filter);
+  object-fit: cover;
+}
+
+.story-plate__text {
+  display: grid;
+  min-width: 0;
+}
+
+.story-plate__title {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-strong);
+  line-height: var(--leading-heading);
+}
+
+.story-plate__more {
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}

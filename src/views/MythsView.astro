@@ -9,7 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import GamesSwitch from '../components/GamesSwitch.astro';
 import GameResult from '../components/GameResult.astro';
 import MythVerdict from '../components/MythVerdict.astro';
-import Pic from '../components/Pic.astro';
+import StoryPlate from '../components/StoryPlate.astro';
 import ShareButton from '../components/ShareButton.astro';
 import { altPaths, mythPath, pagePath, storyPath, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
@@ -94,13 +94,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
                   </p>
                   <p class="myth__text">{m.answer[lang]}</p>
                   <div class="myth__foot">
-                  <a class="myth__story" href={storyPath(lang, story.slug[lang])}>
-                    {story.image && <Pic picture={story.image} lang={lang} class="myth__thumb" widths={[96, 192]} sizes="6rem" quality={70} decorative crop />}
-                    <span class="myth__story-text">
-                      <span class="myth__story-title">{story.title[lang]}</span>
-                      <span class="myth__story-more">{t(lang, 'myths.full_story')}</span>
-                    </span>
-                  </a>
+                  <StoryPlate lang={lang} href={storyPath(lang, story.slug[lang])} story={story} more={t(lang, 'myths.full_story')} class="myth__story" />
                   <ShareButton lang={lang} url={abs(href)} shareUrl={abs(href)} title={title} text={withStatement(shareTemplate, m.statement[lang])} quiet />
                   </div>
                   <button class="button myth__next" type="button" data-next hidden>{t(lang, 'myths.next')}</button>
@@ -285,48 +279,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   :global(html[data-js]) .myth__foot :global([data-share]),
   :global(html[data-js]) .myth__anchor {
     display: none;
-  }
-
-  .myth__story {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    max-width: 100%;
-    padding: var(--space-2);
-    border: 1px solid var(--epoch-line);
-    border-radius: var(--radius-md);
-    color: var(--color-ink);
-    text-decoration: none;
-  }
-
-  .myth__story:hover .myth__story-title {
-    color: var(--color-accent);
-  }
-
-  .myth__story :global(.myth__thumb) {
-    flex: none;
-    width: calc(var(--touch-target) * 1.5);
-    height: var(--touch-target);
-    border-radius: var(--radius-sm);
-    background: var(--epoch-line);
-    filter: var(--image-filter);
-    object-fit: cover;
-  }
-
-  .myth__story-text {
-    display: grid;
-    min-width: 0;
-  }
-
-  .myth__story-title {
-    font-family: var(--font-heading);
-    font-weight: var(--weight-strong);
-    line-height: var(--leading-heading);
-  }
-
-  .myth__story-more {
-    color: var(--color-ink-muted);
-    font-size: var(--text-sm);
   }
 
   /* The pieces of the game are for JavaScript: the script shows them, and `hidden` must win over the display of a button. */

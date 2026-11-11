@@ -1,0 +1,24 @@
+---
+// The plate that leads to a story under an answer: a thumbnail, the title and "Whole story →" ("Myth or fact", "Which came first?"). The styles of `.story-plate` are global (src/styles/layout.css);
+// the same markup is made in the browser by src/scripts/answer-parts.ts. `class` adds the hooks of the page (the scripts and QA of "Myth or fact" look for .myth__story and the like).
+import Pic from './Pic.astro';
+import type { Lang } from '../i18n/routes';
+import type { EventData } from '../lib/events';
+
+interface Props {
+  lang: Lang;
+  href: string;
+  story: Pick<EventData, 'title' | 'image'>;
+  more: string;
+  class?: string;
+}
+
+const { lang, href, story, more, class: extra = '' } = Astro.props;
+---
+<a class:list={['story-plate', extra]} href={href}>
+  {story.image && <Pic picture={story.image} lang={lang} class="story-plate__thumb myth__thumb" widths={[96, 192]} sizes="6rem" quality={70} decorative crop />}
+  <span class="story-plate__text myth__story-text">
+    <span class="story-plate__title myth__story-title">{story.title[lang]}</span>
+    <span class="story-plate__more myth__story-more">{more}</span>
+  </span>
+</a>
