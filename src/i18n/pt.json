@@ -498,7 +498,7 @@
     "yours": "A sua escolha",
     "verdict_hit": "Acertou",
     "verdict_miss": "Errou",
-    "first_line": "Primeiro aconteceu: «{title}»"
+    "first_line": "Aconteceu primeiro: «{title}»"
   },
   "games": {
     "ai_caption": "Ilustração criada por IA. Não é uma imagem histórica.",

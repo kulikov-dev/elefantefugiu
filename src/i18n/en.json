@@ -498,7 +498,7 @@
     "yours": "Your pick",
     "verdict_hit": "You got it",
     "verdict_miss": "Not this time",
-    "first_line": "First came: “{title}”"
+    "first_line": "This came first: “{title}”"
   },
   "games": {
     "ai_caption": "AI-generated illustration. Not a historical image.",
