@@ -8,7 +8,7 @@ import { pictureSource } from './picture-assets';
 import { cardPicture } from './pictures';
 import type { SiteData } from './site-data';
 
-/** The sizes of the thumbnail: the width of a card on a phone and of half a column from 640 px (the card is 16:6). */
+/** The sizes of the thumbnail: the width of a card on a phone and of half a column from 640 px (the card is 16:7). */
 export const ORDER_IMAGE_WIDTHS = [360, 720];
 export const ORDER_IMAGE_SIZES = '(min-width: 640px) 340px, 100vw';
 

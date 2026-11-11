@@ -66,13 +66,18 @@ describe('the stories of the game are made of the data, without a list or a flag
 });
 
 describe('the line under the title: the hook, unless it gives the date away', () => {
-  it('a number of three or four digits, a century, a Roman numeral and a word of an era give the date away', () => {
-    for (const text of ['Desde 1646 nenhum rei', 'Since 1646 no king', 'В 1910 году', 'Of 9,000 in the army', 'С XIV века в нём торговали', 'No séc. XVIII', 'In the 18th century', 'No século XVIII', 'Из IV века', 'Um castelo medieval', 'A medieval castle', 'Римский храм', 'Средневековый замок', 'Idade Média', 'An ancient road']) {
+  it('a number from 100 to 2100 with no separator of thousands, a century, a Roman numeral and a word of an era give the date away', () => {
+    for (const text of ['Desde 1646 nenhum rei', 'Since 1646 no king', 'В 1910 году', 'Exactly 100 bulls', 'Until 2100', 'С XIV века в нём торговали', 'No séc. XVIII', 'In the 18th century', 'No século XVIII', 'Из IV века', 'Пять веков назад', 'Um castelo medieval', 'A medieval castle', 'Римский храм', 'Средневековый замок', 'Idade Média', 'An ancient road']) {
       expect(hookGivesDate(text), text).toBe(text !== 'Римский храм');
     }
   });
+  it('a number with groups of thousands is not a date: "9 000", "9,000", "9.000" (also with a no-break or a thin space), nor a number below 100 or above 2100', () => {
+    for (const text of ['Of 9,000 Portuguese in the army', 'Of 9 000 men', 'Of 9.000 men', 'Of 9\u00A0000 men', 'Of 9\u202F000 men', 'Of 12 000 men', 'Mais de 1.500 pessoas', 'Dois mil e 99 bulls', 'About 2500 men', 'Over 12000 men']) expect(hookGivesDate(text), text).toBe(false);
+    expect(hookGivesDate('In 1815, 1816 and later')).toBe(true);
+    expect(hookGivesDate('Of 9,000 men, 1813 saw the end')).toBe(true);
+  });
   it('a plain hook is shown: two-digit numbers, "I", words with Roman letters inside', () => {
-    for (const text of ['Seven kings and 12 bulls', 'I saw an elephant', 'Слон сбежал', 'O rei pagou o dobro', 'The VIP guest and the MIX of bulls', 'Шестьдесят лет королей закончились за одно утро']) expect(hookGivesDate(text), text).toBe(false);
+    for (const text of ['Seven kings and 12 bulls', 'I saw an elephant', 'Слон сбежал', 'O rei pagou o dobro', 'The VIP guest and the MIX of bulls', 'Шестьдесят лет королей закончились за одно утро', 'Мясом в нём торговали веками', 'Это вековая традиция']) expect(hookGivesDate(text), text).toBe(false);
   });
   it('the line is the hook; order_hint of the language takes its place; a hook that gives the date away and no order_hint: nothing', () => {
     const hook = { pt: 'Um rei', en: 'A king', ru: 'Король' };

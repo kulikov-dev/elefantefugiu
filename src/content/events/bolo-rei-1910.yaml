@@ -47,6 +47,10 @@ hook:
   pt: A monarquia caiu em 1910, mas o bolo-rei nunca mudou de nome.
   en: The king fell in 1910, but nobody managed to rename the bolo-rei.
   ru: Короля свергли в 1910 году, а bolo-rei так и не смогли переименовать.
+order_hint:
+  pt: "A monarquia caiu, mas o bolo-rei nunca mudou de nome."
+  en: "The king fell, but nobody managed to rename the bolo-rei."
+  ru: "Короля свергли, а bolo-rei так и не смогли переименовать."
 story:
   pt: O bolo-rei, uma coroa de massa doce com frutas cristalizadas e frutos secos, é o grande bolo de Natal de Portugal. A receita, ao que se diz, veio de França na segunda metade do século XIX para a Confeitaria Nacional, em Lisboa. Quando Portugal se tornou república, em 1910, um bolo «real» na montra deixou de cair bem. Tentaram vendê-lo como «bolo-presidente», «bolo-Arriaga», em honra do primeiro presidente, e até «ex-bolo-rei». Nenhum nome pegou, e o bolo continuou rei.
   en: Bolo-rei, a ring of sweet dough topped with candied fruit and nuts that looks like a crown, is Portugal’s great Christmas cake. The recipe is said to have come from France in the second half of the 19th century, to the Confeitaria Nacional in Lisbon. When Portugal became a republic in 1910, a “king cake” in the shop window suddenly looked out of place. Bakers tried selling it as “bolo-presidente,” “bolo-Arriaga” after the first president, and even “ex-bolo-rei.” None of the names stuck, and the cake stayed king.

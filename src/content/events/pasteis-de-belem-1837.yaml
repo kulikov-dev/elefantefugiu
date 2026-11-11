@@ -46,6 +46,8 @@ hook:
   pt: Fecharam os conventos e alguém dos Jerónimos começou a vender pastéis.
   en: When Portugal’s monasteries closed in 1834, the tarts went on sale.
   ru: Монахов отправили по домам, и пирожные с заварным кремом пошли в продажу.
+order_hint:
+  en: "When Portugal’s monasteries closed, the monks’ tarts went on sale."
 story:
   pt: >-
     Em 1834, depois da guerra civil, todos os conventos de Portugal foram extintos e os frades
