@@ -6,8 +6,8 @@
       "hint": "brasileirismo: telemóvel, utilizador, autocarro, comboio, equipa, registo, contacto, chávena, casa de banho, frigorífico, pequeno-almoço"
     },
     {
-      "re": "\\bfatos?\\b",
-      "hint": "«fato» é roupa em pt-PT; para «facto» escreva facto(s)"
+      "re": "\\bfatos?\\b(?!\\s+de\\s+(?!que\\b))",
+      "hint": "«fato» é roupa em pt-PT; para «facto» escreva facto(s) («fato de colcha» passa, é roupa; «fato de que» não)"
     },
     {
       "re": "\\bvoc[êe]s?\\b",

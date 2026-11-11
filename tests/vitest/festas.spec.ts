@@ -228,18 +228,13 @@ describe('festaRules', () => {
 });
 
 describe('the holidays of the site (src/data/festas.yaml)', () => {
-  it('a holiday is whole: Russian alone is fine for now, but with pt or en it has all three; an enabled one has a story, and no {date} is left', async () => {
+  it('an enabled holiday has its text in every language (pt, en, ru), the story of the day, and no {date} is left', async () => {
     const { FESTAS, festaText } = await import('../../src/lib/festas-data');
-    for (const festa of FESTAS) {
-      const langs = (['pt', 'en', 'ru'] as const).filter((l) => festaText(festa, l));
-      if (langs.length > 0) expect(festaText(festa, 'ru'), `${festa.id} has a text but not in ru`).toBeDefined();
-      if (langs.includes('pt') || langs.includes('en')) expect(langs, `${festa.id}: with pt or en the holiday has all three languages`).toEqual(['pt', 'en', 'ru']);
-    }
     for (const festa of FESTAS.filter((f) => f.enabled)) {
-      expect(festaText(festa, 'ru'), `${festa.id} in ru`).toBeDefined();
       for (const lang of ['pt', 'en', 'ru'] as const) {
         const text = festaText(festa, lang);
-        if (text) expect(JSON.stringify([text.date, text.head_date, text.name]), `${festa.id} in ${lang}`).not.toContain('{date}');
+        expect(text, `${festa.id} in ${lang}`).toBeDefined();
+        expect(JSON.stringify([text!.date, text!.head_date, text!.name]), `${festa.id} in ${lang}`).not.toContain('{date}');
       }
       expect(festa.story, `${festa.id} needs a story of the day`).toBeTruthy();
     }

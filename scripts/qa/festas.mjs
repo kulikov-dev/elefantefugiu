@@ -423,6 +423,26 @@ if (want('carnaval')) {
   const day = festaDay(CARN.date, year);
   const { from } = windowOf(day);
   const say = (lang, key) => fillDate(CARN.text[lang], day, lang)[key];
+  ok('the carnival has a text in all three languages (pt, en, ru)', CARN_LANGS.join() === LANGS.join(), CARN_LANGS.join());
+  const carnPage = (l) => `/${l}/festa/${CARN.slug}/`;
+  const carnHreflang = [...LANGS.map((l) => `${l} ${carnPage(l)}`), `x-default ${carnPage('pt')}`].sort().join('|');
+  for (const lang of CARN_LANGS) {
+    const inWindow = await open(`${carnPage(lang)}?hoje=${day}`);
+    const meta = await inWindow.evaluate(() => ({
+      hreflang: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => `${l.getAttribute('hreflang')} ${new URL(l.href).pathname}`),
+      switch: [...document.querySelectorAll('.lang-switch__list a')].map((a) => a.getAttribute('hreflang')),
+      off: document.querySelectorAll('.lang-switch__off').length,
+      robots: document.querySelector('meta[name=robots]')?.getAttribute('content') ?? '',
+      og: document.querySelector('meta[property="og:title"]')?.getAttribute('content'),
+      ogd: document.querySelector('meta[property="og:description"]')?.getAttribute('content'),
+      ogi: document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '',
+    }));
+    ok(`${carnPage(lang)}: hreflang to the three pages and x-default, the language switch leads to all three`, meta.hreflang.slice().sort().join('|') === carnHreflang && [...meta.switch].sort().join() === 'en,pt,ru' && meta.off === 0, JSON.stringify(meta));
+    ok(`${carnPage(lang)}: the preview (title, description, picture) is the holiday's`, meta.og === `${say(lang, 'name')} · ${say(lang, 'date')}` && meta.ogd === CARN.text[lang].og_description && meta.ogi.includes('og-festas/'), JSON.stringify([meta.og, meta.ogd, meta.ogi]));
+    const home = await open(`/${lang}/?hoje=${day}`);
+    const og = await home.evaluate(() => document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '');
+    ok(`/${lang}/ in the window: the block comes after the hero and the picture to share is the holiday's`, og.includes('og-festas/') && (await home.evaluate((id) => { const b = document.querySelector(`[data-festa-show="${id}"]`); const h = document.querySelector('.hero, main h1'); return !!b && !!h && !!(h.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING); }, CARN.id)), og);
+  }
   /** The block of the carnival on the home page and the icon of the tab. */
   const homeState = (page) =>
     page.evaluate((id) => {

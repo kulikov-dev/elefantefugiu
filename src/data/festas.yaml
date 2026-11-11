@@ -196,6 +196,42 @@
   image: festas/carnaval.jpg
   story: rainha-carnaval-1923
   text:
+    pt:
+      date: '{date}'
+      name: 'Carnaval'
+      head_date: '{date} · Carnaval'
+      head_title: 'A rainha de bigode'
+      head_line: 'Treze anos após a queda da monarquia, os republicanos coroaram um rei.'
+      head_link: 'A história deste dia →'
+      art_title: 'A rainha do Carnaval: coroa, pérolas, leque de renda e um bigode farfalhudo'
+      lead: 'Os últimos dias antes da Quaresma. Nas cidades há desfiles, e nas aldeias do Norte ainda se vestem máscaras antigas.'
+      og_description: 'Porque é que em Torres Vedras a rainha do Carnaval é sempre um homem e atrás de quem correm os caretos de Podence.'
+      off_window: 'Esta festa celebra-se na terça-feira antes da Quaresma'
+      traditions:
+        - title: 'O feriado que não é.'
+          text: 'A terça-feira de Carnaval não está na lista de feriados obrigatórios. Todos os anos o Governo decide se dá tolerância de ponto à função pública, e de 2012 a 2015 não deu. As empresas privadas decidem por si.'
+        - title: 'Os caretos de Podence.'
+          text: 'Na aldeia de Podence, no Nordeste, os rapazes vestem fatos de colcha vermelha com franjas de lã colorida e máscaras de lata de nariz pontiagudo, e correm pelas ruas com chocalhos à cintura. O grande objetivo é apanhar uma rapariga e «chocalhá-la» bem. Desde 2019 é Património Cultural Imaterial da UNESCO.'
+        - title: 'Os testamentos de Lazarim.'
+          text: 'Em Lazarim, perto de Lamego, as máscaras são esculpidas em madeira de amieiro. Na terça-feira de Carnaval, as raparigas solteiras leem na praça o «testamento da comadre», em verso, com recados para os rapazes da terra, e os rapazes respondem com o «testamento do compadre». No fim, os bonecos do compadre e da comadre ardem numa fogueira com fogo de artifício.'
+    en:
+      date: '{date}'
+      name: 'Carnival'
+      head_date: '{date} · Carnival'
+      head_title: 'The Queen with a Mustache'
+      head_line: 'Thirteen years after the fall of the monarchy, republicans crowned a king.'
+      head_link: 'The story of this day →'
+      art_title: 'The Carnival queen: a crown, pearls, a lace fan, and a big curly mustache'
+      lead: 'The last days before Lent. Towns hold parades, and in villages up north people still put on old masks.'
+      og_description: 'Why the Carnival queen in Torres Vedras is always played by a man, and who the masked caretos of Podence chase through the streets.'
+      off_window: 'Carnival falls on the Tuesday before Lent'
+      traditions:
+        - title: 'The holiday that isn’t.'
+          text: 'Carnival Tuesday is not on Portugal’s list of mandatory public holidays. Each year the government decides whether civil servants get the day off, and from 2012 to 2015 they didn’t. Private companies decide for themselves.'
+        - title: 'The caretos of Podence.'
+          text: 'In the village of Podence in the northeast, young men in suits made from red bedspreads fringed with colorful wool, wearing tin masks with pointed noses, run through the streets with cowbells on their belts. Their main goal is to catch a young woman and give her a good “rattling.” Since 2019 the tradition has been on UNESCO’s intangible heritage list.'
+        - title: 'The wills of Lazarim.'
+          text: 'In Lazarim, near Lamego, masks are carved from alder wood. On Carnival Tuesday, unmarried young women read out a rhyming “will of the comadre” in the square, poking fun at the village’s young men, and the men answer with a “will of the compadre.” Then effigies of the compadre and comadre burn in a bonfire with fireworks.'
     ru:
       date: '{date}'
       name: 'Карнавал'

@@ -194,7 +194,8 @@
 | Деревня под Ламегу (маски из ольхи) | Lazarim | Lazarim | Лазарин |
 | Город на севере (Дору) | Lamego | Lamego | Ламегу |
 | Ряженые в женских платьях (карнавал в Торриш-Ведраше) | matrafonas | matrafonas (men dressed as women) | матрафоны («матрафоны» в кавычках при первом упоминании) |
-| Ряженые Поденсе: красное покрывало с бахромой, жестяная маска, коровьи колокольчики | Caretos de Podence | Caretos de Podence | Карету из Поденсе (Карету не склоняется; наследие ЮНЕСКО с 2019) |
+| Ряженые Поденсе: красное покрывало с бахромой, жестяная маска, коровьи колокольчики | caretos de Podence (нарицательное, мн. ч.) | the caretos of Podence | карету из Поденсе (Карету не склоняется; наследие ЮНЕСКО с 2019) |
 | Карнавал, вторник за 47 дней до Пасхи | Carnaval (Terça-feira de Carnaval) | Carnival (Shrove Tuesday) | Карнавал, карнавальный вторник |
 | Великий пост | Quaresma | Lent | Великий пост |
-| Стихотворные «завещания» Лазарина | testamento da comadre / do compadre | the comadre’s / compadre’s “will” | «завещание кумы» / «завещание кума» |
+| Стихотворные «завещания» Лазарина | testamento da comadre / do compadre | “will of the comadre” / “will of the compadre” | «завещание кумы» / «завещание кума» |
+| Выходной для госслужащих по решению правительства | tolerância de ponto | the day off for civil servants (tolerância de ponto) | выходной для госслужащих |
