@@ -6,6 +6,7 @@
 // The same view makes the page of one card (/ru/mif-ili-pravda/<id>/): all the cards, that one first and marked; noindex, canonical to the page of all of them, a preview picture of its
 // own (scripts/make-myth-og.mjs) with the claim and no answer.
 import BaseLayout from '../layouts/BaseLayout.astro';
+import GameResult from '../components/GameResult.astro';
 import MythVerdict from '../components/MythVerdict.astro';
 import Pic from '../components/Pic.astro';
 import ShareButton from '../components/ShareButton.astro';
@@ -108,20 +109,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
         })
       }
     </div>
-    <section class="myths__final" data-final aria-labelledby="myths-score" hidden>
-      <h2 class="myths__score" id="myths-score" tabindex="-1" data-score></h2>
-      <ol class="squares" data-final-squares></ol>
-      <div class="myths__misses" data-misses-box hidden>
-        <h3>{t(lang, 'myths.misses')}</h3>
-        <ul class="myths__miss-list" data-misses></ul>
-      </div>
-      <div class="myths__actions">
-        <button class="button" type="button" data-final-share>{t(lang, 'ui.share')}</button>
-        <button class="button button--secondary" type="button" data-again>{t(lang, 'myths.again')}</button>
-        <a class="button button--secondary" href={pagePath(lang, 'home')}>{t(lang, 'myths.read')}</a>
-      </div>
-      <p class="myths__status" role="status" data-final-status></p>
-    </section>
+    <GameResult missesTitle={t(lang, 'myths.misses')} shareLabel={t(lang, 'ui.share')} againLabel={t(lang, 'myths.again')} readLabel={t(lang, 'myths.read')} readHref={pagePath(lang, 'home')} id="myths-score" />
     <p class="myths__end">{t(lang, 'myths.end')} <a href={pagePath(lang, 'share')}>{t(lang, 'myths.end_link')}</a></p>
   </article>
 </BaseLayout>
@@ -392,48 +380,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
 
   .myth__next {
     justify-self: stretch;
-  }
-
-  .myths__final {
-    display: grid;
-    gap: var(--space-4);
-    max-width: var(--measure);
-    padding: var(--space-4);
-    border: 1px solid var(--epoch-line);
-    border-radius: var(--radius-md);
-    background: var(--epoch-surface);
-  }
-
-  .myths__final > * {
-    margin: 0;
-  }
-
-  .myths__score {
-    font-size: var(--text-3xl);
-    line-height: var(--leading-heading);
-  }
-
-  .myths__score:focus {
-    outline: none;
-  }
-
-  .myths__miss-list {
-    display: grid;
-    gap: var(--space-2);
-    margin: var(--space-2) 0 0;
-    padding-inline-start: var(--space-5);
-  }
-
-  .myths__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
-
-  .myths__status {
-    color: var(--color-ink-muted);
-    font-size: var(--text-sm);
-    overflow-wrap: anywhere;
   }
 
   .myths__end {

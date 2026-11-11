@@ -1,12 +1,12 @@
 // "Myth or fact" (src/views/MythsView.astro, docs/spec.md 5.8). With this script the page is a game: one card at a time, a row of squares at the top (empty / right / wrong),
 // a press on "Myth" or "Fact" opens the answer of the card, says whether the guess was right, marks the pressed button, turns both off and shows "Next". After the last card
-// comes the result: the row of tiles and a title by the range (no score, no percent), the misses with links to their stories, Share, Play again (the order is shuffled), Read the stories.
+// comes the result (src/components/GameResult.astro, src/scripts/game-result.ts): the row of tiles and a title by the range (no score, no percent), the misses with links to their stories, Share, Play again (the order is shuffled), Read the stories.
 // A game that is not finished is kept in localStorage (the order and the answers) and goes on from the same card; the home page reads it too. A saved game of other claims is dropped.
 // The counter (the one already on the site; without it nothing breaks) gets `myth-<id>` per answer, `myths-finish` per result and `myths-share` per shared result. The only thing
 // kept is the best result, in localStorage. Without this script the <details> of each card opens by "Answer" and all the cards are in a list.
-import { BEST_KEY, FINISH_EVENT, GAME_KEY, HIT_PATTERN, SHARE_EVENT, answerEvent, answered, bandOf, fill, outcomeOf, parseBest, parseGame, shuffled, squaresLine, type Best, type Game, type Outcome, type Choice } from '../lib/myths';
+import { BEST_KEY, FINISH_EVENT, GAME_KEY, SHARE_EVENT, answerEvent, answered, bandOf, fill, outcomeOf, parseBest, parseGame, shuffled, squaresLine, type Best, type Game, type Outcome, type Choice } from '../lib/myths';
+import { countEvent, drawTiles, initResult, type TileState } from './game-result';
 
-type Counter = { count?: (vars: { path: string; title: string; event: true }) => void };
 type Mark = Outcome | undefined;
 
 const root = document.querySelector<HTMLElement>('[data-game]');
@@ -16,36 +16,22 @@ const progress = q('[data-progress]');
 const stepEl = q('[data-step]');
 const squaresEl = q('[data-squares]');
 const bestEl = q('[data-best]');
-const final = q('[data-final]');
-const scoreEl = q('[data-score]');
-const finalSquares = q('[data-final-squares]');
-const missesBox = q('[data-misses-box]');
-const missesEl = q('[data-misses]');
-const shareButton = q<HTMLButtonElement>('[data-final-share]');
-const againButton = q<HTMLButtonElement>('[data-again]');
 const restartButton = q<HTMLButtonElement>('[data-restart]');
-const statusEl = q('[data-final-status]');
 const endLine = q('.myths__end');
 const cards = [...document.querySelectorAll<HTMLElement>('[data-myth]')];
 
-if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreEl && finalSquares &&missesBox && missesEl && shareButton && againButton && restartButton && statusEl && cards.length > 0) {
+if (root && list && progress && stepEl && squaresEl && bestEl && restartButton && cards.length > 0) {
   const strings = JSON.parse(root.dataset.strings ?? '{}') as Record<string, string>;
   const shareUrl = root.dataset.shareUrl ?? location.href;
   const total = cards.length;
   const s = (key: string, vars: Record<string, string | number> = {}): string => fill(strings[key] ?? '', vars);
-
-  const count = (path: string, title: string): void => {
-    try {
-      (window as unknown as { goatcounter?: Counter }).goatcounter?.count?.({ path, title, event: true });
-    } catch {
-      // The counter failed: nothing to tell the reader.
-    }
-  };
+  const stateLabel = (state: TileState): string => s(`sq_${state}`);
+  const result = initResult(root, strings, shareUrl, stateLabel);
+  const count = countEvent;
 
   let order = cards;
   let index = 0;
   let marks: Mark[] = [];
-  let shared = false;
 
   // The hash of a card brings that card first (the address of one card is already first). Such a game is a visit to one card: it neither continues nor replaces the saved one.
   const wanted = cards.find((c) => c.id === location.hash.slice(1)) ?? document.querySelector<HTMLElement>('.myth--first');
@@ -104,22 +90,8 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
   // A claim that is "partly" is counted as a hit, so the square is a hit too.
   const isHit = (m: Mark): boolean => m === 'hit' || m === 'part';
 
-  const drawSquares = (target: HTMLElement, current: number): void => {
-    target.replaceChildren(
-      ...marks.map((mark, i) => {
-        const li = document.createElement('li');
-        const state = mark === undefined ? 'empty' : isHit(mark) ? 'hit' : 'miss';
-        li.className = `sq sq--${state}${i === current ? ' sq--current' : ''}`;
-        if (i === current) li.setAttribute('aria-current', 'step');
-        li.innerHTML = state === 'hit' ? HIT_PATTERN : '';
-        const label = document.createElement('span');
-        label.className = 'visually-hidden';
-        label.textContent = s('sq_label', { i: i + 1, state: s(`sq_${state}`) });
-        li.append(label);
-        return li;
-      }),
-    );
-  };
+  const states = (): TileState[] => marks.map((m) => (m === undefined ? 'empty' : isHit(m) ? 'hit' : 'miss'));
+  const drawSquares = (target: HTMLElement, current: number): void => drawTiles(target, states(), current, (i, state) => s('sq_label', { i: i + 1, state }), stateLabel);
 
   const resetCard = (card: HTMLElement): void => {
     const answer = card.querySelector<HTMLDetailsElement>('[data-answer]');
@@ -151,11 +123,10 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
 
   const start = (focus: boolean): void => {
     marks = new Array<Mark>(total).fill(undefined);
-    shared = false;
-    final.hidden = true;
+    result?.reset();
+    result?.hide();
     progress.hidden = false;
     if (endLine) endLine.hidden = true;
-    statusEl.textContent = '';
     list.append(...order);
     order.forEach(resetCard);
     showBest();
@@ -189,12 +160,11 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
     progress.hidden = true;
     bestEl.hidden = true;
     if (endLine) endLine.hidden = false;
-    scoreEl.textContent = s(`band_${bandOf(score, total)}`);
-    drawSquares(finalSquares, -1);
     const missed = order.filter((_, n) => !isHit(marks[n]));
-    missesBox.hidden = missed.length === 0;
-    missesEl.replaceChildren(
-      ...missed.map((card) => {
+    result?.show({
+      title: s(`band_${bandOf(score, total)}`),
+      tiles: states(),
+      misses: missed.map((card) => {
         const li = document.createElement('li');
         const link = card.querySelector<HTMLAnchorElement>('.myth__story');
         const a = document.createElement('a');
@@ -203,10 +173,7 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
         li.append(a);
         return li;
       }),
-    );
-    final.hidden = false;
-    scoreEl.focus({ preventScroll: true });
-    final.scrollIntoView({ block: 'start' });
+    });
   };
 
   const respond = (card: HTMLElement, picked: HTMLButtonElement): void => {
@@ -239,7 +206,7 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
     card.querySelector('[data-next]')?.addEventListener('click', () => (index === total - 1 ? finish() : show(index + 1, true)));
   }
 
-  againButton.addEventListener('click', () => {
+  result?.onAgain(() => {
     order = shuffled(cards);
     start(true);
   });
@@ -251,36 +218,12 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
     start(true);
   });
 
-  // Share: the text has the count and the squares, never the answers; the link is the game with ?src=share. The browser's own dialog if there is one, otherwise the text goes to the clipboard.
-  shareButton.addEventListener('click', async () => {
+  // Share: the text has the title and the squares, never the answers; the link is the game with ?src=share.
+  result?.onShare(() => {
     const hits = marks.map(isHit);
-    const score = hits.filter(Boolean).length;
-    const title = s('share_title', { band: s(`band_${bandOf(score, total)}`) });
-    const text = `${title}\n${squaresLine(hits)}\n${s('share_ask')}`;
-    let done = false;
-    if (typeof navigator.share === 'function') {
-      try {
-        await navigator.share({ title, text, url: shareUrl });
-        done = true;
-      } catch (error) {
-        if (error instanceof DOMException && error.name === 'AbortError') return; // the person closed the dialog
-      }
-    }
-    if (!done) {
-      try {
-        await navigator.clipboard.writeText(`${text}\n${shareUrl}`);
-        statusEl.textContent = s('copied');
-        window.setTimeout(() => (statusEl.textContent = ''), 4000);
-        done = true;
-      } catch {
-        statusEl.textContent = `${s('failed')} ${text} ${shareUrl}`;
-      }
-    }
-    if (done && !shared) {
-      shared = true;
-      count(SHARE_EVENT, title);
-    }
-  });
+    const title = s('share_title', { band: s(`band_${bandOf(hits.filter(Boolean).length, total)}`) });
+    return { title, text: `${title}\n${squaresLine(hits)}\n${s('share_ask')}` };
+  }, SHARE_EVENT);
 
   // A finished game on the home page says "Play again": the page then deals a new one, the result stays in the browser until the first answer replaces it.
   const saved = keep ? readGame() : undefined;
