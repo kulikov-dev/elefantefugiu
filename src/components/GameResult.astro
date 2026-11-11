@@ -1,0 +1,82 @@
+---
+// The result screen of a game of the site ("Myth or fact", "Which came first?"): a title by the range, the row of tiles, the misses with links, Share, Play again and a link on (docs/spec.md 5.8).
+// Hidden until the game script (src/scripts/game-result.ts) shows it. The attributes data-final, data-score, data-final-squares, data-misses-box, data-misses, data-final-share, data-again, data-final-status are the hooks of the scripts and QA.
+interface Props {
+  /** The heading of the block of misses ("Where you slipped"). */
+  missesTitle: string;
+  shareLabel: string;
+  againLabel: string;
+  readLabel: string;
+  readHref: string;
+  /** The id of the title (aria-labelledby); one per page. */
+  id?: string;
+}
+
+const { missesTitle, shareLabel, againLabel, readLabel, readHref, id = 'game-score' } = Astro.props;
+---
+<section class="game-result" data-final aria-labelledby={id} hidden>
+  <h2 class="game-result__score" id={id} tabindex="-1" data-score></h2>
+  <ol class="squares" data-final-squares></ol>
+  <div class="game-result__misses" data-misses-box hidden>
+    <h3>{missesTitle}</h3>
+    <ul class="game-result__miss-list" data-misses></ul>
+  </div>
+  <div class="game-result__actions">
+    <button class="button" type="button" data-final-share>{shareLabel}</button>
+    <button class="button button--secondary" type="button" data-again>{againLabel}</button>
+    <a class="button button--secondary" href={readHref}>{readLabel}</a>
+  </div>
+  <p class="game-result__status" role="status" data-final-status></p>
+</section>
+
+<style>
+  .game-result[hidden] {
+    display: none;
+  }
+
+  .game-result {
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--measure);
+    padding: var(--space-4);
+    border: 1px solid var(--epoch-line);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .game-result > * {
+    margin: 0;
+  }
+
+  .game-result__score {
+    font-size: var(--text-3xl);
+    line-height: var(--leading-heading);
+  }
+
+  .game-result__score:focus {
+    outline: none;
+  }
+
+  .game-result__misses[hidden] {
+    display: none;
+  }
+
+  .game-result__miss-list {
+    display: grid;
+    gap: var(--space-2);
+    margin: var(--space-2) 0 0;
+    padding-inline-start: var(--space-5);
+  }
+
+  .game-result__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .game-result__status {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    overflow-wrap: anywhere;
+  }
+</style>
