@@ -86,7 +86,6 @@
     "myths_line": "{stories} sobre Portugal que os guias contam. Consegue adivinhar quais são verdade?",
     "myths_play": "Jogar",
     "myths_continue": "Continuar ({done} de {total})",
-    "myths_result": "O seu resultado: {score} em {total}",
     "myths_again": "Jogar outra vez"
   },
   "surprise": {
@@ -437,10 +436,10 @@
     "misses": "Onde errou",
     "again": "Jogar outra vez",
     "read": "Ler as histórias",
-    "share_title": "Mito ou verdade sobre Portugal: {score} em {total}",
+    "share_title": "Mito ou verdade sobre Portugal: {band}",
     "share_ask": "E o que acha?",
     "copied": "Copiado",
-    "best": "O seu melhor resultado: {score} em {total}",
+    "best": "O seu melhor título: {band}",
     "restart": "Recomeçar"
   }
 }

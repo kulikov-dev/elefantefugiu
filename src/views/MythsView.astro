@@ -1,7 +1,7 @@
 ---
 // "Myth or fact": /pt/mito-ou-verdade/, /en/myth-or-fact/, /ru/mif-ili-pravda/ (docs/spec.md 5.8). Claims a tourist might say, each tied to one of our stories (src/content/myths.yaml).
 // A card shows the claim and two buttons; a press opens the answer (the verdict and whether the guess was right, a few words, the story with its picture, Share, Next) and turns the buttons off.
-// With JavaScript it is a game (src/scripts/myths.ts): one card at a time, a row of squares at the top, a result screen at the end (score, a line by the range, the misses with links, Share, Play again);
+// With JavaScript it is a game (src/scripts/myths.ts): one card at a time, a row of squares at the top, a result screen at the end (the row of tiles and a title by the range, no score; the misses with links, Share, Play again);
 // the best result is kept in this browser only. The counter gets `myth-<id>` per answer, `myths-finish` and `myths-share`. Without JavaScript the card is a <details> opened by "Answer", all of them in a list.
 // The same view makes the page of one card (/ru/mif-ili-pravda/<id>/): all the cards, that one first and marked; noindex, canonical to the page of all of them, a preview picture of its
 // own (scripts/make-myth-og.mjs) with the claim and no answer.
@@ -31,7 +31,7 @@ const cards = mythsInOrder(liveMyths(MYTHS, site.events), first);
 const title = t(lang, 'pages.myths.title');
 const shareTemplate = t(lang, 'myths.share_text');
 const abs = (path: string) => new URL(path, Astro.site).href;
-const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'outcome_hit', 'outcome_miss', 'outcome_part', 'next', 'finish', 'score', 'band_low', 'band_mid', 'band_high', 'share_title', 'share_ask', 'copied', 'best'] as const;
+const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'outcome_hit', 'outcome_miss', 'outcome_part', 'next', 'finish', 'band_low', 'band_mid', 'band_high', 'share_title', 'share_ask', 'copied', 'best'] as const;
 const strings = Object.fromEntries(keys.map((k) => [k, t(lang, `myths.${k}`)]));
 strings.failed = t(lang, 'card.share_failed');
 const one = first ? cards.find((c) => c.id === first) : undefined;
@@ -111,7 +111,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
     <section class="myths__final" data-final aria-labelledby="myths-score" hidden>
       <h2 class="myths__score" id="myths-score" tabindex="-1" data-score></h2>
       <ol class="squares" data-final-squares></ol>
-      <p class="myths__band" data-band></p>
       <div class="myths__misses" data-misses-box hidden>
         <h3>{t(lang, 'myths.misses')}</h3>
         <ul class="myths__miss-list" data-misses></ul>
@@ -416,12 +415,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
 
   .myths__score:focus {
     outline: none;
-  }
-
-  .myths__band {
-    font-family: var(--font-heading);
-    font-size: var(--text-lg);
-    font-weight: var(--weight-strong);
   }
 
   .myths__miss-list {

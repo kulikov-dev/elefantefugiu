@@ -193,19 +193,12 @@ button.timeline__pick {
   cursor: default;
 }
 
-/* The chosen epoch: a bold dot with a ring on the axis, the name in bold and underlined in the colour of the epoch (no frame, no fill). */
+/* The chosen epoch: a bold dot with a ring on the axis and the name in bold (no underline, no frame, no fill). */
 .timeline--compact .timeline__item:has([aria-pressed='true'])::before {
   inset-block-start: calc(var(--size-dot-lg) / -2 - var(--border-heavy) / 2);
   width: var(--size-dot-lg);
   height: var(--size-dot-lg);
   box-shadow: 0 0 0 var(--border-medium) var(--color-surface), 0 0 0 calc(var(--border-medium) * 2) var(--tone);
-}
-
-.timeline--compact [aria-pressed='true'] .timeline__name {
-  text-decoration: underline;
-  text-decoration-color: var(--tone);
-  text-decoration-thickness: var(--border-medium);
-  text-underline-offset: var(--space-1);
 }
 
 /* Under the map the strip sits closer to the map than on the home page. */

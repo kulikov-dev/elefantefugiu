@@ -33,6 +33,7 @@ if (myths.length < 2) throw new Error('The suite needs at least two claims in sr
 const LIST = myths;
 const HOME = Object.fromEntries(LANGS.map((l) => [l, JSON.parse(readFileSync(new URL(`../../src/i18n/${l}.json`, import.meta.url), 'utf8')).home]));
 const UI = Object.fromEntries(LANGS.map((l) => [l, JSON.parse(readFileSync(new URL(`../../src/i18n/${l}.json`, import.meta.url), 'utf8')).myths]));
+const document_has_digits = (t) => /\d/.test(t);
 const fill = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
 // A press that is right (a "partly" claim takes either) or wrong, and what it counts as.
 const pickFor = (m, hit) => (hit ? (m.verdict === 'fact' ? 'fact' : 'myth') : m.verdict === 'myth' ? 'fact' : 'myth');
@@ -106,7 +107,7 @@ if (want('page')) {
     const some = await homeState({ order: ids, marks: ids.map((_, i) => (i < 2 ? 'hit' : null)) });
     ok(`${lang}: the home block of a game under way says "Continue" with the count and shows the answers`, some.btn === fill(HOME[lang].myths_continue, { done: 2, total: LIST.length }) && some.filled === 2 && some.result === '', JSON.stringify(some));
     const whole = await homeState({ order: ids, marks: ids.map(() => 'hit') });
-    ok(`${lang}: the home block of a finished game shows the result and "Play again"`, whole.result.includes(String(LIST.length)) && whole.filled === LIST.length && whole.btn !== some.btn, JSON.stringify(whole));
+    ok(`${lang}: the home block of a finished game shows the result and "Play again"`, whole.result === UI[lang].band_high && !/\d/.test(whole.result) && whole.filled === LIST.length && whole.btn !== some.btn, JSON.stringify(whole));
     const stale = await homeState({ order: ids.slice(1), marks: ids.slice(1).map(() => 'hit') });
     ok(`${lang}: the home block ignores a game of other claims`, stale.filled === 0 && stale.result === '', JSON.stringify(stale));
     await homeState(null);
@@ -208,7 +209,6 @@ if (want('game')) {
       cards: [...document.querySelectorAll('[data-myth]')].some((c) => c.checkVisibility()),
       progress: document.querySelector('[data-progress]').checkVisibility(),
       score: document.querySelector('[data-score]').textContent.trim(),
-      band: document.querySelector('[data-band]').textContent.trim(),
       squares: [...document.querySelectorAll('[data-final-squares] .sq')].map((e) => e.className),
       misses: [...document.querySelectorAll('[data-misses] a')].map((a) => a.getAttribute('href')),
       focus: document.activeElement?.hasAttribute('data-score'),
@@ -217,10 +217,9 @@ if (want('game')) {
       percent: /%/.test(document.querySelector('[data-final]').innerText),
     }));
     ok(`${lang}: the result screen replaces the cards and the progress`, fin.shown && !fin.cards && !fin.progress, JSON.stringify({ s: fin.shown, c: fin.cards, p: fin.progress }));
-    ok(`${lang}: the result says the score as "x of N", no percent`, fin.score === fill(ui.score, { score, total: N }) && !fin.percent, fin.score);
     const ratio = score / N;
     const band = ratio < 0.5 ? 'low' : ratio < 0.8 ? 'mid' : 'high';
-    ok(`${lang}: the line by the range (${band})`, fin.band === ui[`band_${band}`], fin.band);
+    ok(`${lang}: the result is the title by the range (${band}), no score, no percent`, fin.score === ui[`band_${band}`] && !fin.percent && !document_has_digits(fin.score), fin.score);
     ok(`${lang}: the row of squares repeats the game`, fin.squares.length === N && fin.squares.every((c, i) => c.includes(hits[i] ? 'sq--hit' : 'sq--miss')));
     const missed = LIST.filter((_, i) => !hits[i]).map((m) => `/${lang}/${STORY_SEG[lang]}/${storyOf(m).slug[lang]}/`);
     ok(`${lang}: "where you slipped" lists the stories of the wrong answers, with links`, fin.misses.join() === missed.join() && (await visible(page, '[data-misses-box]')) === (missed.length > 0), fin.misses.join());
@@ -240,7 +239,7 @@ if (want('game')) {
     await wait(100);
     const copied = await page.evaluate(() => ({ text: window.__copied ?? '', status: document.querySelector('[data-final-status]').textContent, shares: window.__counted.filter((c) => c.path === 'myths-share').length }));
     const lines = copied.text.split('\n');
-    ok(`${lang}: the copied text has the score, the squares, the question and the link with ?src=share`, lines.length === 4 && lines[0] === fill(ui.share_title, { score, total: N }) && lines[1] === hits.map((h) => (h ? '🟦' : '⬜')).join('') && lines[2] === ui.share_ask && lines[3].includes(`/${lang}/${SEG[lang]}/`) && lines[3].endsWith('?src=share'), JSON.stringify(lines));
+    ok(`${lang}: the copied text has the title, the squares, the question and the link with ?src=share`, lines.length === 4 && lines[0] === fill(ui.share_title, { band: ui[`band_${band}`] }) && lines[1] === hits.map((h) => (h ? '🟦' : '⬜')).join('') && lines[2] === ui.share_ask && lines[3].includes(`/${lang}/${SEG[lang]}/`) && lines[3].endsWith('?src=share'), JSON.stringify(lines));
     ok(`${lang}: the text has nothing of the claims or their answers`, LIST.every((m) => !copied.text.includes(m.answer[lang].slice(0, 25)) && !copied.text.includes(m.statement[lang].slice(0, 25))));
     ok(`${lang}: the quiet note says "${ui.copied}"`, copied.status === ui.copied, copied.status);
     ok(`${lang}: one myths-share event, however many times it is pressed`, copied.shares === 1, String(copied.shares));
@@ -263,7 +262,7 @@ if (want('game')) {
       bestShown: document.querySelector('[data-best]').checkVisibility(),
     }));
     ok(`${lang}: Play again keeps every card, shows one, clean`, [...again.ids].sort().join() === LIST.map((m) => m.id).sort().join() && again.shown === 1 && !again.open && !again.disabled && !again.final, JSON.stringify({ n: again.ids.length, s: again.shown }));
-    ok(`${lang}: the best result is on the start line`, again.bestShown && again.best === fill(ui.best, { score, total: N }), again.best);
+    ok(`${lang}: the best result is on the start line`, again.bestShown && again.best === fill(ui.best, { band: ui[`band_${band}`] }), again.best);
     ok(`${lang}: all squares are empty again`, (await squares()).every((q) => q.cls === 'sq--empty'));
     ok(`${lang}: no script error`, page.errors.length === 0, page.errors.join('; '));
     await page.close();

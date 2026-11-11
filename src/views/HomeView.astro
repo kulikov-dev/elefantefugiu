@@ -37,7 +37,7 @@ const site = await loadSite();
 // "Myth or fact": the invitation after "Where to start" (only when there is a claim to play).
 const mythIds = liveMyths(MYTHS, site.events).map((m) => m.id);
 const mythCount = mythIds.length;
-const mythStrings = { continue: t(lang, 'home.myths_continue'), result: t(lang, 'home.myths_result'), again: t(lang, 'home.myths_again') };
+const mythStrings = { continue: t(lang, 'home.myths_continue'), band_low: t(lang, 'myths.band_low'), band_mid: t(lang, 'myths.band_mid'), band_high: t(lang, 'myths.band_high'),again: t(lang, 'home.myths_again') };
 const hasMyths = mythCount > 0;
 const firstEpoch = firstMvpEpoch(site.epochs, site.events);
 const tiles = epochTiles(site.epochs, site.events);

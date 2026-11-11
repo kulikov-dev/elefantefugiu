@@ -1,6 +1,6 @@
 // "Myth or fact" (src/views/MythsView.astro, docs/spec.md 5.8). With this script the page is a game: one card at a time, a row of squares at the top (empty / right / wrong),
 // a press on "Myth" or "Fact" opens the answer of the card, says whether the guess was right, marks the pressed button, turns both off and shows "Next". After the last card
-// comes the result: the score ("7 of 10", never a percent), a line by the range, the misses with links to their stories, Share, Play again (the order is shuffled), Read the stories.
+// comes the result: the row of tiles and a title by the range (no score, no percent), the misses with links to their stories, Share, Play again (the order is shuffled), Read the stories.
 // A game that is not finished is kept in localStorage (the order and the answers) and goes on from the same card; the home page reads it too. A saved game of other claims is dropped.
 // The counter (the one already on the site; without it nothing breaks) gets `myth-<id>` per answer, `myths-finish` per result and `myths-share` per shared result. The only thing
 // kept is the best result, in localStorage. Without this script the <details> of each card opens by "Answer" and all the cards are in a list.
@@ -19,7 +19,6 @@ const bestEl = q('[data-best]');
 const final = q('[data-final]');
 const scoreEl = q('[data-score]');
 const finalSquares = q('[data-final-squares]');
-const bandEl = q('[data-band]');
 const missesBox = q('[data-misses-box]');
 const missesEl = q('[data-misses]');
 const shareButton = q<HTMLButtonElement>('[data-final-share]');
@@ -29,7 +28,7 @@ const statusEl = q('[data-final-status]');
 const endLine = q('.myths__end');
 const cards = [...document.querySelectorAll<HTMLElement>('[data-myth]')];
 
-if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreEl && finalSquares && bandEl && missesBox && missesEl && shareButton && againButton && restartButton && statusEl && cards.length > 0) {
+if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreEl && finalSquares &&missesBox && missesEl && shareButton && againButton && restartButton && statusEl && cards.length > 0) {
   const strings = JSON.parse(root.dataset.strings ?? '{}') as Record<string, string>;
   const shareUrl = root.dataset.shareUrl ?? location.href;
   const total = cards.length;
@@ -90,7 +89,7 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
   const showBest = (): void => {
     const best = readBest();
     bestEl.hidden = !best;
-    if (best) bestEl.textContent = s('best', { score: best.score, total });
+    if (best) bestEl.textContent = s('best', { band: s(`band_${bandOf(best.score, total)}`) });
   };
   const saveBest = (score: number): void => {
     const best = readBest();
@@ -183,16 +182,15 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
     restartButton.hidden = true;
     const score = marks.filter(isHit).length;
     saveBest(score);
-    count(FINISH_EVENT, s('score', { score, total }));
+    count(FINISH_EVENT, `${score}/${total}`);
     order.forEach((card) => {
       card.hidden = true;
     });
     progress.hidden = true;
     bestEl.hidden = true;
     if (endLine) endLine.hidden = false;
-    scoreEl.textContent = s('score', { score, total });
+    scoreEl.textContent = s(`band_${bandOf(score, total)}`);
     drawSquares(finalSquares, -1);
-    bandEl.textContent = s(`band_${bandOf(score, total)}`);
     const missed = order.filter((_, n) => !isHit(marks[n]));
     missesBox.hidden = missed.length === 0;
     missesEl.replaceChildren(
@@ -257,7 +255,7 @@ if (root && list && progress && stepEl && squaresEl && bestEl && final && scoreE
   shareButton.addEventListener('click', async () => {
     const hits = marks.map(isHit);
     const score = hits.filter(Boolean).length;
-    const title = s('share_title', { score, total });
+    const title = s('share_title', { band: s(`band_${bandOf(score, total)}`) });
     const text = `${title}\n${squaresLine(hits)}\n${s('share_ask')}`;
     let done = false;
     if (typeof navigator.share === 'function') {

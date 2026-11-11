@@ -86,7 +86,6 @@
     "myths_line": "{stories} about Portugal that tour guides love to tell. Can you guess which ones are true?",
     "myths_play": "Play",
     "myths_continue": "Continue ({done} of {total})",
-    "myths_result": "Your result: {score} of {total}",
     "myths_again": "Play again"
   },
   "surprise": {
@@ -437,10 +436,10 @@
     "misses": "Where you slipped",
     "again": "Play again",
     "read": "Read the stories",
-    "share_title": "Myth or fact about Portugal: {score} of {total}",
+    "share_title": "Myth or fact about Portugal: {band}",
     "share_ask": "how about you?",
     "copied": "Copied",
-    "best": "Your best result: {score} of {total}",
+    "best": "Your best title: {band}",
     "restart": "Start over"
   }
 }

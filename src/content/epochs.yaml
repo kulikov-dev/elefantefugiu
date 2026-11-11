@@ -19,9 +19,9 @@
     from: -170000000
     to: -501
   years_label:
-    pt: "há cerca de 170 milhões de anos – séc. VI a.C."
-    en: "about 170 million years ago – 6th c. BC"
-    ru: "около 170 млн лет назад – VI в. до н. э."
+    pt: "há 170 milhões de anos – séc. VI a.C."
+    en: "170 million years ago – 6th c. BC"
+    ru: "170 млн лет назад – VI в. до н. э."
   scale_gap:
     pt: "⋯ passaram quase 150 milhões de anos ⋯"
     en: "⋯ nearly 150 million years pass ⋯"
