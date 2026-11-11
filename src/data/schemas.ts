@@ -183,6 +183,8 @@ export const eventSchema = z
   min_age: minAge,
   sensitive: z.boolean(),
   hook: text,
+  /** Optional: the line the game "Which came first?" shows under the title instead of the hook, when the hook gives the date away (a year, a century, an era). Without it such a hook is not shown there. */
+  order_hint: text.optional(),
   story: text,
   /** Up to four lines (one per scope); a page shows two after the story: the one for its language (scope pt / en / ru), then the world. Optional. */
   meanwhile: z.array(meanwhileItem).max(MEANWHILE_MAX_ITEMS).optional(),

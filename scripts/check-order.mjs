@@ -6,6 +6,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
+import { hookGivesDate } from '../src/lib/order-hint.mjs';
 import { isLive } from '../src/lib/publication.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -25,6 +26,10 @@ const wanted = new Set(expected.map((c) => c.id));
 const allIds = new Set(cards.map((c) => c.id));
 
 const errors = [];
+// The stories whose hook is hidden in the game (it gives the date away) and that have no order_hint of their own: a warning with the list, never an error.
+const hiddenHooks = new Map();
+const byId = new Map(cards.map((c) => [c.id, c]));
+for (const c of expected) for (const l of LANGS) if (c.order_hint?.[l] && hookGivesDate(c.order_hint[l])) errors.push(`${c.id}: order_hint (${l}) gives the date away itself`);
 for (const lang of LANGS) {
   if (!existsSync(join(dist, lang, PAGES[lang], 'index.html'))) errors.push(`${lang}: the page /${lang}/${PAGES[lang]}/ was not built`);
   const file = join(dist, lang, 'order.json');
@@ -46,6 +51,10 @@ for (const lang of LANGS) {
     if (typeof s.epoch !== 'string' || !s.epoch) bad.push('epoch');
     if (!s.href?.startsWith(`/${lang}/`)) bad.push('href');
     if (!s.img?.src) bad.push('img');
+    if (s.hint !== undefined && (typeof s.hint !== 'string' || !s.hint.trim())) bad.push('hint');
+    const card = byId.get(s.id);
+    if (s.hint && !card?.order_hint?.[lang] && hookGivesDate(s.hint)) bad.push('hint gives the date away');
+    if (!s.hint && card && !card.order_hint?.[lang]) hiddenHooks.set(s.id, { ...(hiddenHooks.get(s.id) ?? {}), [lang]: card.hook?.[lang] ?? card.hook?.en ?? '' });
     if (bad.length) errors.push(`${lang}: ${s.id}: bad ${bad.join(', ')}`);
   }
 }
@@ -53,5 +62,9 @@ for (const lang of LANGS) {
 if (errors.length) {
   console.error(`Order check failed:\n  ${errors.join('\n  ')}`);
   process.exit(1);
+}
+if (hiddenHooks.size > 0) {
+  console.warn(`WARNING  the hook is hidden in the game (it gives the date away) and order_hint is empty, ${hiddenHooks.size} stories:`);
+  for (const [id, hooks] of hiddenHooks) console.warn(`  ${id}: ${Object.entries(hooks).map(([l, h]) => `[${l}] ${h}`).join(' | ')}`);
 }
 console.log(`Order check passed: ${wanted.size} published stories in order.json of each of ${LANGS.length} languages (a heavy topic, the prologue and not-yet-published stories are out), the page of the game is built in every language.`);

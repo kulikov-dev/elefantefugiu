@@ -26,6 +26,8 @@ export interface OrderStory {
   /** The first and the last year of the story (the same for one year). */
   from: number;
   to: number;
+  /** The line under the title: the hook, or `order_hint`; none when the hook gives the date away. */
+  hint?: string;
   /** The date as the story shows it. */
   date: string;
   epoch: string;

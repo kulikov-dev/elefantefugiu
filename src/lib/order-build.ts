@@ -4,6 +4,7 @@ import type { Lang } from '../i18n/routes';
 import { storyPath } from '../i18n/routes';
 import { formatYear, isPublished, yearRange, type EventData } from './events';
 import { normalizeMinAge, normalizeSensitive } from './family';
+import { hintOf } from './order-hint.mjs';
 import { DEEPEST_YEAR, hasTwoYears, isRoughDate, sortYear, type OrderStory } from './order';
 
 export type OrderExclusion = 'sensitive' | 'prologue';
@@ -23,9 +24,11 @@ export const orderEvents = <E extends EventData>(events: readonly E[]): E[] => e
 /** One story as /{lang}/order.json holds it, without the thumbnail. */
 export function orderEntry(e: EventData, lang: Lang): OrderStory {
   const [from, to] = yearRange(e);
+  const hint = hintOf(e, lang);
   return {
     id: e.id,
     title: e.title[lang],
+    ...(hint ? { hint } : {}),
     href: storyPath(lang, e.slug[lang]),
     year: sortYear(from, to),
     from,

@@ -61,6 +61,13 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && outcomeEl && be
     title.className = 'order__title';
     title.textContent = story.title;
     button.append(title);
+    // The hook of the story (or its order_hint) when it does not give the date away; the list has no `hint` for the others.
+    if (story.hint) {
+      const hint = document.createElement('span');
+      hint.className = 'order__hint';
+      hint.textContent = story.hint;
+      button.append(hint);
+    }
     wrap.append(button);
     return wrap;
   };
