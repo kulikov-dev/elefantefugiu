@@ -458,6 +458,11 @@
   border-radius: var(--radius-sm);
 }
 
+.squares--big .sq {
+  width: var(--tile-size-big);
+  height: var(--tile-size-big);
+}
+
 .sq svg {
   width: 80%;
   height: 80%;

@@ -28,6 +28,8 @@ export interface OrderStory {
   to: number;
   /** The line under the title: the hook, or `order_hint`; none when the hook gives the date away. */
   hint?: string;
+  /** The small thumbnail for the plate under an answer (96 and 192 px). */
+  thumb?: { src: string; srcset?: string };
   /** The date as the story shows it. */
   date: string;
   epoch: string;
@@ -134,3 +136,60 @@ export function orderBand(hits: number, total: number): OrderBand {
 
 /** The only event of the game the counter gets: the result screen is shown (a shared result sends nothing). */
 export const ORDER_FINISH_EVENT = 'order-finish';
+
+/** The round that is not finished (or just finished), kept in this browser only: the pairs, the pick of each (0 = the upper card, 1 = the lower, null = not answered yet), whether it was right, and the pair the reader is on. */
+export const ORDER_GAME_KEY = 'order:game';
+export interface OrderGame {
+  pairs: [string, string][];
+  picks: (0 | 1 | null)[];
+  hits: (boolean | null)[];
+  /** The pair on the screen; equal to the number of pairs when the round is over (the result is shown). */
+  index: number;
+}
+
+/** What a round is saved as. */
+export function toOrderGame(round: readonly Pair[], picks: readonly (0 | 1 | null)[], index: number): OrderGame {
+  return {
+    pairs: round.map((p) => [p.a.id, p.b.id]),
+    picks: [...picks],
+    hits: round.map((p, i) => (picks[i] === null || picks[i] === undefined ? null : (picks[i] === 0 ? p.a : p.b) === earlier(p))),
+    index,
+  };
+}
+
+export interface ResumedRound {
+  round: Pair[];
+  picks: (0 | 1 | null)[];
+  index: number;
+}
+
+/**
+ * What the browser holds, as a round over the stories of the list; anything else (broken, a story that is not on the site any more, one the family mode does not allow now, a pair that
+ * breaks the rules of the pair) is nothing, so the page starts a new round without a word. `mode` is the family mode of the reader.
+ */
+export function parseOrderGame(raw: string | null, list: readonly OrderStory[], mode: FamilyMode): ResumedRound | undefined {
+  if (!raw) return undefined;
+  try {
+    const v = JSON.parse(raw) as Partial<OrderGame>;
+    const { pairs, picks, index } = v;
+    if (!Array.isArray(pairs) || !Array.isArray(picks) || pairs.length < 1 || pairs.length > ROUND_SIZE || picks.length !== pairs.length) return undefined;
+    if (!Number.isInteger(index) || index! < 0 || index! > pairs.length) return undefined;
+    const byId = new Map(allowedIn(list, mode).map((s) => [s.id, s]));
+    const used = new Set<string>();
+    const round: Pair[] = [];
+    for (const raw of pairs) {
+      if (!Array.isArray(raw) || raw.length !== 2) return undefined;
+      const a = byId.get(String(raw[0]));
+      const b = byId.get(String(raw[1]));
+      if (!a || !b || used.has(a.id) || used.has(b.id) || !canPair(a, b)) return undefined;
+      used.add(a.id).add(b.id);
+      round.push({ a, b });
+    }
+    if (!picks.every((p) => p === null || p === 0 || p === 1)) return undefined;
+    // The pairs before the one on the screen are answered; the one on the screen may be; the ones after are not.
+    if (picks.some((p, i) => (i < index! ? p === null : i > index! ? p !== null : false))) return undefined;
+    return { round, picks: picks as (0 | 1 | null)[], index: index! };
+  } catch {
+    return undefined;
+  }
+}

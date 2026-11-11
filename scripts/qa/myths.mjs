@@ -11,7 +11,7 @@
 //   layout   no horizontal scroll at 360 px (a question, an answered question, the result)
 import { readFileSync } from 'node:fs';
 import { launchBrowser } from './browser.mjs';
-import { myths, published } from './data.mjs';
+import { myths, published, ui as site } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -27,6 +27,8 @@ const browser = await launchBrowser();
 const LANGS = ['pt', 'en', 'ru'];
 const SEG = { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' };
 const STORY_SEG = { pt: 'historia', en: 'story', ru: 'istoriya' };
+const GAMES = { pt: 'jogos', en: 'games', ru: 'igry' };
+const RANK = { pt: 'titulo', en: 'rank', ru: 'zvanie' };
 const ABOUT = { pt: 'sobre', en: 'about', ru: 'o-proekte' };
 const SHARE = { pt: 'conheco-uma-historia', en: 'share-a-story', ru: 'znayu-istoriyu' };
 if (myths.length < 2) throw new Error('The suite needs at least two claims in src/content/myths.yaml whose story is published (need: two claims).');
@@ -80,7 +82,7 @@ if (want('page')) {
     ok(`${lang}: one h1`, (await page.$$eval('h1', (l) => l.length)) === 1);
     ok(`${lang}: the claims are those of the data`, cards.every((c, i) => c.statement === LIST[i].statement[lang]));
     const links = await page.evaluate(() => ({ foot: [...document.querySelectorAll('.site-footer a')].map((a) => a.getAttribute('href')), end: document.querySelector('.myths__end a')?.getAttribute('href') }));
-    ok(`${lang}: the footer links to the page`, links.foot.includes(`/${lang}/${SEG[lang]}/`), links.foot.join(' '));
+    ok(`${lang}: the footer links to the page "Games" (which leads to this game)`, links.foot.includes(`/${lang}/${GAMES[lang]}/`), links.foot.join(' '));
     ok(`${lang}: the line at the end leads to the form "Know a story?"`, links.end === `/${lang}/${SHARE[lang]}/`, links.end);
     await page.close();
     const about = await browser.newPage();
@@ -213,7 +215,7 @@ if (want('game')) {
       misses: [...document.querySelectorAll('[data-misses] a')].map((a) => a.getAttribute('href')),
       focus: document.activeElement?.hasAttribute('data-score'),
       buttons: [...document.querySelectorAll('[data-final] .button')].map((b) => b.textContent.trim()),
-      read: document.querySelector('[data-final] a.button')?.getAttribute('href'),
+      read: document.querySelector('[data-final] .game-result__read a')?.getAttribute('href'),
       percent: /%/.test(document.querySelector('[data-final]').innerText),
     }));
     ok(`${lang}: the result screen replaces the cards and the progress`, fin.shown && !fin.cards && !fin.progress, JSON.stringify({ s: fin.shown, c: fin.cards, p: fin.progress }));
@@ -224,7 +226,11 @@ if (want('game')) {
     const missed = LIST.filter((_, i) => !hits[i]).map((m) => `/${lang}/${STORY_SEG[lang]}/${storyOf(m).slug[lang]}/`);
     ok(`${lang}: "where you slipped" lists the stories of the wrong answers, with links`, fin.misses.join() === missed.join() && (await visible(page, '[data-misses-box]')) === (missed.length > 0), fin.misses.join());
     ok(`${lang}: the focus is on the score`, fin.focus);
-    ok(`${lang}: Share, Play again, Read the stories (to the home page)`, fin.buttons.length === 3 && fin.buttons[1] === ui.again && fin.buttons[2] === ui.read && fin.read === `/${lang}/`, fin.buttons.join(' | '));
+    ok(`${lang}: Share and Play again are the two buttons, Read the stories is a link (to the home page)`, fin.buttons.length === 2 && fin.buttons[1] === ui.again && fin.read === `/${lang}/`, fin.buttons.join(' | '));
+    // The result screen is the one of the games (GameResult): the picture of the game whole (3:2) with the line that it is AI-made, big tiles, Share the main button.
+    await page.waitForFunction(() => { const b = document.querySelector('.game-result__banner'); return b && b.complete && b.naturalWidth > 0; }, { timeout: 5000 }).catch(() => {});
+    const screen = await page.evaluate(() => { const b = document.querySelector('.game-result__banner'); const r = b?.getBoundingClientRect(); return { loaded: !!b && b.complete && b.naturalWidth > 0, ratio: r ? r.width / r.height : 0, natural: b ? b.naturalWidth / b.naturalHeight : 0, ai: document.querySelector('.game-result__ai')?.textContent.trim(), tile: document.querySelector('[data-final-squares] .sq')?.getBoundingClientRect().width, share: document.querySelector('[data-final-share]').className, again: document.querySelector('[data-again]').className }; });
+    ok(`${lang}: the picture of the game is on the result, whole (3:2), with the line that it is AI-made; the tiles are at least 28 px; Share is the main button`, screen.loaded && Math.abs(screen.ratio - 1.5) < 0.03 && Math.abs(screen.natural - 1.5) < 0.03 && screen.ai === site('games.ai_caption', lang) && screen.tile >= 28 && screen.share === 'button' && /button--secondary/.test(screen.again), JSON.stringify(screen));
     const counted = await page.evaluate(() => window.__counted.map((c) => c.path));
     ok(`${lang}: the events are myth-<id> for each answer and one myths-finish`, counted.length === N + 1 && counted.filter((p) => p === 'myths-finish').length === 1 && LIST.every((m) => counted.includes(`myth-${m.id}`)), counted.join());
     ok(`${lang}: the best result is kept`, (await page.evaluate(() => localStorage.getItem('myths:best'))) === JSON.stringify({ score, total: N }));
@@ -239,7 +245,7 @@ if (want('game')) {
     await wait(100);
     const copied = await page.evaluate(() => ({ text: window.__copied ?? '', status: document.querySelector('[data-final-status]').textContent, shares: window.__counted.filter((c) => c.path === 'myths-share').length }));
     const lines = copied.text.split('\n');
-    ok(`${lang}: the copied text has the title, the squares, the question and the link with ?src=share`, lines.length === 4 && lines[0] === fill(ui.share_title, { band: ui[`band_${band}`] }) && lines[1] === hits.map((h) => (h ? '🟦' : '⬜')).join('') && lines[2] === ui.share_ask && lines[3].includes(`/${lang}/${SEG[lang]}/`) && lines[3].endsWith('?src=share'), JSON.stringify(lines));
+    ok(`${lang}: the copied text has the title, the squares, the question and the link with ?src=share`, lines.length === 4 && lines[0] === fill(ui.share_title, { band: ui[`band_${band}`] }) && lines[1] === hits.map((h) => (h ? '🟦' : '⬜')).join('') && lines[2] === ui.share_ask && lines[3].endsWith(`/${lang}/${SEG[lang]}/${RANK[lang]}/${band}/?src=share`), JSON.stringify(lines));
     ok(`${lang}: the text has nothing of the claims or their answers`, LIST.every((m) => !copied.text.includes(m.answer[lang].slice(0, 25)) && !copied.text.includes(m.statement[lang].slice(0, 25))));
     ok(`${lang}: the quiet note says "${ui.copied}"`, copied.status === ui.copied, copied.status);
     ok(`${lang}: one myths-share event, however many times it is pressed`, copied.shares === 1, String(copied.shares));

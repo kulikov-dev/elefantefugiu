@@ -1,39 +1,56 @@
 ---
 // "Which came first?": /pt/o-que-veio-primeiro/, /en/which-came-first/, /ru/chto-bylo-ranshe/ (docs/spec.md 5.9). A round is ten pairs of stories; the reader presses the one that came first.
 // The page carries no list: src/scripts/order.ts reads /{lang}/order.json (made at build time from the published stories) and draws the pairs in the browser, in the family mode of the reader.
-// A card shows a thumbnail and a title, no year, no epoch name, no epoch colour (they would give the answer away). After a press both dates, the mark "First", the years between and links to the stories.
-// The styles are global: the cards of a pair are made by the script (the class names are all order__*). The result is the one of "Myth or fact" (src/components/GameResult.astro). The counter gets one event, `order-finish`. Nothing is kept between visits. Without JavaScript: a line and a link to the myths.
+// A card shows a thumbnail, a title and the hook, no year, no epoch name, no epoch colour (they would give the answer away). After a press: the pressed card is framed and marked "Your pick", both dates, the mark "First",
+// the label of the verdict (the one of "Myth or fact"), the line of what came first, the years between, a plate for each story and Next. The round is kept in this browser (`order:game`) and goes on from the same pair.
+// The result is the one of "Myth or fact" (src/components/GameResult.astro). The counter gets one event, `order-finish`. Without JavaScript: a line and a link to the myths.
+// The same view makes the page of a shared result (/ru/chto-bylo-ranshe/zvanie/high/): the page of the game, noindex, canonical to the game, a preview of its own.
+// The styles are global: the cards of a pair are made by the script (the class names are all order__*).
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GameResult from '../components/GameResult.astro';
 import GamesSwitch from '../components/GamesSwitch.astro';
-import { LOCALES, pagePath, withBase, type Lang } from '../i18n/routes';
+import { LOCALES, RANKS, altPaths, pagePath, rankPath, withBase, type Lang } from '../i18n/routes';
 import { pluralForms, t } from '../i18n';
+import { GAME_OG, gamePicture } from '../lib/games-images';
 import { pageNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 
 interface Props {
   lang: Lang;
+  /** The id of the range of a shared result (low, mid, high, top): the page of that result. */
+  rank?: string | undefined;
 }
 
-const { lang } = Astro.props;
+const { lang, rank } = Astro.props;
 const title = t(lang, 'pages.order.title');
 const abs = (path: string) => new URL(path, Astro.site).href;
-const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'first', 'outcome_hit', 'outcome_miss', 'read', 'next', 'finish', 'band_top', 'band_high', 'band_mid', 'band_low', 'share_title', 'share_ask', 'copied', 'empty'] as const;
+const keys = ['progress_label', 'step', 'sq_label', 'sq_empty', 'sq_hit', 'sq_miss', 'first', 'yours', 'verdict_hit', 'verdict_miss', 'first_line', 'next', 'finish', 'band_top', 'band_high', 'band_mid', 'band_low', 'share_title', 'share_ask', 'copied', 'empty'] as const;
 const strings: Record<string, string> = Object.fromEntries(keys.map((k) => [k, t(lang, `order.${k}`)]));
+strings.full_story = t(lang, 'myths.full_story');
 for (const base of ['between', 'between_about']) for (const [category, text] of Object.entries(pluralForms(lang, `order.${base}`))) strings[`${base}_${category}`] = text;
 strings.failed = t(lang, 'card.share_failed');
 const schemaCtx = schemaContext(lang, Astro.site);
 const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')), name: title, description: t(lang, 'pages.order.description'), type: 'WebPage' });
+// The preview of the page of the game and of a shared result: the picture of the game (whole, on fields of paper).
+const picture = gamePicture('order');
+const pageImage = picture ? { imageUrl: withBase(picture.og), imageSize: GAME_OG, imageAlt: t(lang, 'games.ai_caption') } : {};
+const ranked = rank && RANKS.order.includes(rank) ? rank : undefined;
+// Where "Share" leads: the page of the range of the result, with ?src=share.
+const rankUrls = Object.fromEntries(RANKS.order.map((r) => [r, `${abs(rankPath(lang, 'order', r))}?src=share`]));
 ---
-<BaseLayout lang={lang} pageKey="order" title={title} schema={schema} preview={{ title: t(lang, 'order.og_title_page'), description: t(lang, 'order.og_description') }}>
-  <article
-    class="order"
-    data-order
-    data-strings={JSON.stringify(strings)}
-    data-src={withBase(`${lang}/order.json`)}
-    data-locale={LOCALES[lang]}
-    data-share-url={`${abs(pagePath(lang, 'order'))}?src=share`}
-  >
+<BaseLayout
+  lang={lang}
+  pageKey="order"
+  title={title}
+  noindex={ranked !== undefined}
+  schema={ranked ? undefined : schema}
+  alternates={ranked ? altPaths((l) => rankPath(l, 'order', ranked)) : undefined}
+  canonicalTo={ranked ? altPaths((l) => pagePath(l, 'order')) : undefined}
+  preview={ranked
+    ? { title: t(lang, 'order.rank_og_title').replace('{band}', t(lang, `order.band_${ranked}`)), description: t(lang, 'order.og_description'), ...pageImage }
+    : { title: t(lang, 'order.og_title_page'), description: t(lang, 'order.og_description'), ...pageImage }}
+>
+  <article class="order" data-order data-strings={JSON.stringify(strings)} data-src={withBase(`${lang}/order.json`)} data-locale={LOCALES[lang]} data-rank-urls={JSON.stringify(rankUrls)}>
     <GamesSwitch lang={lang} active="order" />
     <h1>{title}</h1>
     <p class="order__lead">{t(lang, 'order.lead')}</p>
@@ -43,15 +60,16 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')
         <p class="order__step" data-step></p>
         <ol class="squares" data-squares></ol>
       </div>
-      <div class="order__pair" data-pair role="group" aria-label={t(lang, 'order.question')} tabindex="-1"></div>
+      <div class="order__pair" data-pair role="group" aria-label={t(lang, 'order.question')}></div>
       <div class="order__answer" data-answer tabindex="-1" hidden>
-        <p class="order__outcome" data-outcome></p>
+        <p class="order__verdict"><span data-verdict></span> <span class="order__outcome" data-outcome></span></p>
         <p class="order__between" data-between></p>
+        <div class="order__plates" data-plates></div>
         <button class="button order__next" type="button" data-next></button>
       </div>
     </div>
     <p class="order__empty" data-empty hidden>{t(lang, 'order.empty')}</p>
-    <GameResult missesTitle={t(lang, 'order.misses')} shareLabel={t(lang, 'ui.share')} againLabel={t(lang, 'order.again')} readLabel={t(lang, 'order.read_all')} readHref={pagePath(lang, 'home')} id="order-score" />
+    <GameResult lang={lang} game="order" missesTitle={t(lang, 'order.misses')} shareLabel={t(lang, 'ui.share')} againLabel={t(lang, 'order.again')} readLabel={t(lang, 'order.read_all')} readHref={pagePath(lang, 'home')} id="order-score" />
   </article>
 </BaseLayout>
 
@@ -102,7 +120,6 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')
     margin-block-start: var(--space-4);
   }
 
-  .order__pair:focus,
   .order__answer:focus {
     outline: none;
   }
@@ -133,23 +150,32 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')
     border-color: var(--color-ink);
   }
 
-  /* After the answer both are off: the one pressed stays marked (as the button of "Myth or fact"), the other fades. */
   .order__card:disabled {
     cursor: default;
   }
 
-  /* The picture and the title of the card not pressed fade; its date and the mark "First" do not (they are the answer). */
-  .order__card:disabled:not([aria-pressed='true']) :is(.order__thumb, .order__title, .order__hint) {
+  /* The picture, the title and the hook of the card not pressed fade; its date and the mark "First" do not (they are the answer). */
+  .order__card:disabled:not([aria-pressed='true']) :is(.order__thumb, .order__title, .order__hint, .order__yours) {
     opacity: 0.45;
   }
 
+  /* The card pressed: a frame of the colour of a link and the small mark "Your pick" above the title; the title stays on the surface of the card. */
   .order__card[aria-pressed='true']:disabled {
-    border-color: var(--color-ink);
+    border-color: var(--color-accent);
   }
 
-  .order__card[aria-pressed='true']:disabled .order__title {
-    background: var(--color-ink);
-    color: var(--color-surface);
+  .order__yours {
+    padding: var(--space-2) var(--space-4) 0;
+    color: var(--color-accent);
+    font-family: var(--font-label);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-strong);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+  }
+
+  .order__yours + .order__title {
+    padding-block-start: var(--space-1);
   }
 
   .order__thumb {
@@ -209,33 +235,37 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')
     line-height: var(--leading-heading);
   }
 
-  .order__read {
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--touch-target);
-    font-size: var(--text-sm);
-  }
-
   .order__answer {
     display: grid;
     gap: var(--space-2);
-    max-width: var(--measure);
+    margin-block-start: var(--space-4);
   }
 
   .order__answer > * {
     margin: 0;
   }
 
+  /* The answer as in "Myth or fact": the label of the verdict and a bold line of the same size, then the plain line of the years between. */
+  .order__verdict {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+  }
+
   .order__outcome {
     font-weight: var(--weight-strong);
   }
 
-  .order__between {
-    color: var(--color-ink-muted);
+  /* The two plates (the same as "Whole story →" of the myths), the one that came first on the left or on top. */
+  .order__plates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--grid-tile-min)), 1fr));
+    gap: var(--space-2);
+    margin-block: var(--space-2);
   }
 
   .order__next {
     justify-self: stretch;
-    margin-block-start: var(--space-2);
   }
 </style>

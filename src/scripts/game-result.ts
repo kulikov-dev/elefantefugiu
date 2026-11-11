@@ -42,7 +42,7 @@ export interface ResultScreen {
 }
 
 /** Wires the block of GameResult.astro found in `root`; undefined when it is not there. */
-export function initResult(root: HTMLElement, strings: Record<string, string>, shareUrl: string, stateLabel: (state: TileState) => string): ResultScreen | undefined {
+export function initResult(root: HTMLElement, strings: Record<string, string>, shareUrl: string | (() => string), stateLabel: (state: TileState) => string): ResultScreen | undefined {
   const q = <T extends HTMLElement>(selector: string): T | null => root.querySelector<T>(selector);
   const final = q('[data-final]');
   const scoreEl = q('[data-score]');
@@ -73,10 +73,11 @@ export function initResult(root: HTMLElement, strings: Record<string, string>, s
     onShare(make, event) {
       shareButton.addEventListener('click', async () => {
         const { title, text } = make();
+        const url = typeof shareUrl === 'function' ? shareUrl() : shareUrl;
         let done = false;
         if (typeof navigator.share === 'function') {
           try {
-            await navigator.share({ title, text, url: shareUrl });
+            await navigator.share({ title, text, url });
             done = true;
           } catch (error) {
             if (error instanceof DOMException && error.name === 'AbortError') return; // the person closed the dialog
@@ -84,12 +85,12 @@ export function initResult(root: HTMLElement, strings: Record<string, string>, s
         }
         if (!done) {
           try {
-            await navigator.clipboard.writeText(`${text}\n${shareUrl}`);
+            await navigator.clipboard.writeText(`${text}\n${url}`);
             statusEl.textContent = s('copied');
             window.setTimeout(() => (statusEl.textContent = ''), 4000);
             done = true;
           } catch {
-            statusEl.textContent = `${s('failed')} ${text} ${shareUrl}`;
+            statusEl.textContent = `${s('failed')} ${text} ${url}`;
           }
         }
         if (done && !shared && event) {

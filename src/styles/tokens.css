@@ -47,6 +47,8 @@
   --color-verdict-part-ink: light-dark(#5a4200, #ecd27f);
   /* The tiles of "Myth or fact" (a row of azulejos): a hit is a solid blue tile with a white four-petal pattern, a miss a white tile with a thin blue frame, no answer yet a dashed frame. */
   --tile-gap: 0.25rem; /* between the tiles of a row (4 px) */
+  --tile-size-big: 1.75rem; /* a tile of the row of a result (28 px) */
+  --miss-date-col: 7rem; /* the column of the dates in the misses of "Which came first?" */
   --color-tile-blue: light-dark(#1f4e9c, #5a88d8);
   --color-tile-glyph: light-dark(#ffffff, #ffffff);
   --color-tile-white: light-dark(#ffffff, #efe8d8);

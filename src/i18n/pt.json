@@ -68,6 +68,10 @@
     "order": {
       "title": "O que veio primeiro?",
       "description": "Jogo: dois acontecimentos do passado de Portugal, qual aconteceu primeiro? Dez pares e um resultado. Por trás de cada data há uma das minhas histórias."
+    },
+    "games": {
+      "title": "Jogos",
+      "description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos sobre a história de Portugal, e depois de cada resposta a história completa."
     }
   },
   "footer": {
@@ -78,8 +82,7 @@
     "legal": "Informação legal",
     "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
     "privacy": "Sem publicidade nem cookies",
-    "myths": "Mito ou verdade",
-    "order": "O que veio primeiro?"
+    "games": "Jogos"
   },
   "home": {
     "epochs_heading": "Épocas",
@@ -419,7 +422,7 @@
   },
   "myths": {
     "lead": "O que os guias, os roteiros e os amigos contam sobre Portugal. Consegue adivinhar o que é verdade? Por trás de cada resposta há uma das minhas histórias.",
-    "og_title_page": "Mito ou verdade: o que se conta sobre Portugal",
+    "og_title_page": "Mito ou verdade: teste o seu faro para os mitos sobre Portugal",
     "og_title": "Mito ou verdade: {statement}?",
     "og_description": "A resposta e a história completa na ligação",
     "share_text": "{statement}. Mito ou verdade?",
@@ -455,12 +458,15 @@
     "share_ask": "E o que acha?",
     "copied": "Copiado",
     "best": "O seu melhor título: {band}",
-    "restart": "Recomeçar"
+    "restart": "Recomeçar",
+    "og_description_page_one": "Eiffel, Rowling, pastéis com segredo. {n} afirmação sobre Portugal: o que é verdade? Depois de cada resposta, a história completa.",
+    "og_description_page_other": "Eiffel, Rowling, pastéis com segredo. {n} afirmações sobre Portugal: o que é verdade? Depois de cada resposta, a história completa.",
+    "rank_og_title": "O meu resultado: «{band}». E o seu?"
   },
   "order": {
     "lead": "Dois acontecimentos do passado de Portugal. Qual aconteceu primeiro? Dez pares.",
-    "og_title_page": "O que veio primeiro? Um jogo sobre a história de Portugal",
-    "og_description": "Dois acontecimentos do passado de Portugal: qual aconteceu primeiro? Dez pares, e por trás de cada data há uma história.",
+    "og_title_page": "O que veio primeiro? Teste o seu sentido do tempo",
+    "og_description": "O rinoceronte para o papa ou os elefantes de Malaca? Dez pares de acontecimentos da história de Portugal: adivinhe qual aconteceu primeiro.",
     "question": "O que veio primeiro?",
     "progress_label": "Progresso do jogo",
     "step": "Par {i} de {total}",
@@ -469,13 +475,10 @@
     "sq_hit": "acertou",
     "sq_miss": "errou",
     "first": "Primeiro",
-    "outcome_hit": "Acertou",
-    "outcome_miss": "Errou",
     "between_one": "Entre os dois, {n} ano",
     "between_other": "Entre os dois, {n} anos",
     "between_about_one": "Entre os dois, cerca de {n} ano",
     "between_about_other": "Entre os dois, cerca de {n} anos",
-    "read": "Ler →",
     "next": "Seguinte",
     "finish": "Resultado",
     "band_top": "Um sentido do tempo digno de cronista",
@@ -490,6 +493,22 @@
     "copied": "Copiado",
     "nojs": "O jogo precisa de JavaScript ativado.",
     "nojs_link": "Entretanto, pode jogar ao «Mito ou verdade» →",
-    "empty": "Neste modo ainda não há nenhum par de histórias."
+    "empty": "Neste modo ainda não há nenhum par de histórias.",
+    "rank_og_title": "O meu resultado: «{band}». E o seu?",
+    "yours": "A sua escolha",
+    "verdict_hit": "Acertou",
+    "verdict_miss": "Errou",
+    "first_line": "Primeiro aconteceu: «{title}»"
+  },
+  "games": {
+    "ai_caption": "Ilustração criada por IA. Não é uma imagem histórica.",
+    "myths_line_one": "{n} afirmação sobre Portugal: onde está a verdade e onde está a lenda?",
+    "myths_line_other": "{n} afirmações sobre Portugal: onde está a verdade e onde está a lenda?",
+    "order_line": "Dez pares de acontecimentos: adivinhe qual aconteceu primeiro.",
+    "start": "Começar",
+    "continue_myths": "Continuar (pergunta {done} de {total})",
+    "continue_order": "Continuar (par {done} de {total})",
+    "og_title": "Jogos: dois testes sobre a história de Portugal",
+    "og_description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos, e depois de cada resposta a história completa."
   }
 }

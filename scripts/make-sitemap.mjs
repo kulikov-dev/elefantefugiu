@@ -50,6 +50,7 @@ const THREAD = /^(pt|en|ru)\/(fio|thread|niti)\/([^/]+)\/index\.html$/;
 const STATIC = /^(pt\/(sobre|metodo|legal)|en\/(about|method|legal)|ru\/(o-proekte|metod|pravovaya-informaciya))\/index\.html$/;
 const MYTHS = /^(pt\/mito-ou-verdade|en\/myth-or-fact|ru\/mif-ili-pravda)\/index\.html$/;
 const ORDER = /^(pt\/o-que-veio-primeiro|en\/which-came-first|ru\/chto-bylo-ranshe)\/index\.html$/;
+const GAMES = /^(pt\/jogos|en\/games|ru\/igry)\/index\.html$/;
 const lastmodOf = (path) => {
   let m;
   if ((m = path.match(STORY))) return bySlug(m[1]).get(m[3])?.day ?? '';
@@ -63,6 +64,7 @@ const lastmodOf = (path) => {
   }
   if (/^(pt|en|ru)\/index\.html$/.test(path)) return latest(events.map((e) => e.day));
   if (STATIC.test(path)) return staticDay;
+  if (GAMES.test(path)) return latest(events.map((e) => e.day)); // the page of the games lists the two games
   if (MYTHS.test(path)) return mythsDay;
   if (ORDER.test(path)) return latest(events.map((e) => e.day)); // the pairs are made of the stories
   return '';

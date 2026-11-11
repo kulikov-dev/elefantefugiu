@@ -68,6 +68,10 @@
     "order": {
       "title": "Which came first?",
       "description": "A game: two events from Portugal’s past, which came first? Ten pairs and a result. Behind every date there is one of my stories."
+    },
+    "games": {
+      "title": "Games",
+      "description": "Myth or fact and “Which came first?”: short games about Portuguese history, and after every answer the whole story."
     }
   },
   "footer": {
@@ -78,8 +82,7 @@
     "legal": "Legal information",
     "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
     "privacy": "No ads, no cookies",
-    "myths": "Myth or fact",
-    "order": "Which came first?"
+    "games": "Games"
   },
   "home": {
     "epochs_heading": "Eras",
@@ -419,7 +422,7 @@
   },
   "myths": {
     "lead": "What guides, guidebooks, and friends say about Portugal. Can you tell what’s true? Behind every answer is one of my stories.",
-    "og_title_page": "Myth or Fact: What People Say About Portugal",
+    "og_title_page": "Myth or fact: test your nose for myths about Portugal",
     "og_title": "Myth or fact: {statement}?",
     "og_description": "The answer and the full story at the link",
     "share_text": "{statement}. Myth or fact?",
@@ -455,12 +458,15 @@
     "share_ask": "how about you?",
     "copied": "Copied",
     "best": "Your best title: {band}",
-    "restart": "Start over"
+    "restart": "Start over",
+    "og_description_page_one": "Eiffel, Rowling, pastries with a secret. {n} claim about Portugal: which of them is true? After every answer, the whole story.",
+    "og_description_page_other": "Eiffel, Rowling, pastries with a secret. {n} claims about Portugal: which of them is true? After every answer, the whole story.",
+    "rank_og_title": "I got “{band}.” How about you?"
   },
   "order": {
     "lead": "Two events from Portugal’s past. Which came first? Ten pairs.",
-    "og_title_page": "Which came first? A game about Portuguese history",
-    "og_description": "Two events from Portugal’s past: which came first? Ten pairs, and behind every date a story.",
+    "og_title_page": "Which came first? Test your sense of time",
+    "og_description": "A rhinoceros for the pope or the elephants of Malacca? Ten pairs of events from Portuguese history: guess which came first.",
     "question": "Which came first?",
     "progress_label": "Game progress",
     "step": "Pair {i} of {total}",
@@ -469,13 +475,10 @@
     "sq_hit": "right",
     "sq_miss": "wrong",
     "first": "First",
-    "outcome_hit": "You got it",
-    "outcome_miss": "Not this time",
     "between_one": "{n} year between them",
     "between_other": "{n} years between them",
     "between_about_one": "About {n} year between them",
     "between_about_other": "About {n} years between them",
-    "read": "Read →",
     "next": "Next",
     "finish": "See result",
     "band_top": "A chronicler’s sense of time",
@@ -490,6 +493,22 @@
     "copied": "Copied",
     "nojs": "The game needs JavaScript.",
     "nojs_link": "Meanwhile, you can play “Myth or fact” →",
-    "empty": "There is no pair of stories in this mode yet."
+    "empty": "There is no pair of stories in this mode yet.",
+    "rank_og_title": "I got “{band}.” How about you?",
+    "yours": "Your pick",
+    "verdict_hit": "You got it",
+    "verdict_miss": "Not this time",
+    "first_line": "First came: “{title}”"
+  },
+  "games": {
+    "ai_caption": "AI-generated illustration. Not a historical image.",
+    "myths_line_one": "{n} claim about Portugal: where is the truth, and where is the legend?",
+    "myths_line_other": "{n} claims about Portugal: where is the truth, and where is the legend?",
+    "order_line": "Ten pairs of events: guess which came first.",
+    "start": "Start",
+    "continue_myths": "Continue (question {done} of {total})",
+    "continue_order": "Continue (pair {done} of {total})",
+    "og_title": "Games: two quick tests of your Portuguese history",
+    "og_description": "Myth or fact and “Which came first?”: short games, and after every answer the whole story."
   }
 }

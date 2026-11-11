@@ -1,8 +1,9 @@
-// Browser checks of "Which came first?" (src/views/OrderView.astro, src/scripts/order.ts, src/lib/order.ts, /{lang}/order.json) against dist/ served by serve.mjs:   node order.mjs [page question answer result family nojs nav scroll layout]
+// Browser checks of "Which came first?" (src/views/OrderView.astro, src/scripts/order.ts, src/lib/order.ts, /{lang}/order.json) against dist/ served by serve.mjs:   node order.mjs [page question answer resume result family nojs nav scroll layout]
 //   page      the page in every language: one h1, the switch of the two games with the current one marked, the lead, the address, the footer link, indexable with hreflang and an og of its own
 //   question  ten pairs; a card has a picture and a title and no year, no name of an epoch (no epoch colour either); two cards, side by side from 640 px and one under the other on a phone
-//   answer    a press marks the card pressed, turns both off, shows both dates (those of the data), exactly one mark "First" (on the story that came first), the years between, "You got it" or "Not this time",
-//             a link to each story, Next; nothing else is shown before the press
+//   answer    a press frames the card pressed and marks it "Your pick" (no dark fill), turns both off, shows both dates (those of the data), exactly one mark "First" (on the story that came first), the label of the verdict in the
+//             colours of the myths, the bold line of what came first, the years between as plain text, a plate for each story (the earlier first; no small "Read" links), Next; nothing else is shown before the press
+//   resume    the round is kept (`order:game`): back from a story, a reload, the pair answered, a finished round shows its result (no second event) until "Another round"; a story that is gone: a new round, silently
 //   result    after ten answers the screen of the game (a title by the range, the tiles, the misses as pairs with links, Share, Another round); one counter event `order-finish` and no other; nothing is kept in the browser;
 //             "Another round" gives other pairs
 //   family    in the mode "all" every story of every pair carries the age label "all" (the same rule as "Surprise me")
@@ -28,6 +29,8 @@ const browser = await launchBrowser();
 const LANGS = ['pt', 'en', 'ru'];
 const SEG = { pt: 'o-que-veio-primeiro', en: 'which-came-first', ru: 'chto-bylo-ranshe' };
 const MYTHS = { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' };
+const GAMES = { pt: 'jogos', en: 'games', ru: 'igry' };
+const RANKSEG = { pt: 'titulo', en: 'rank', ru: 'zvanie' };
 const pageUrl = (lang) => `${base}/${lang}/${SEG[lang]}/`;
 const ROUND = 10;
 
@@ -39,6 +42,10 @@ const open = async ({ lang = 'pt', width = 390, js = true, family = '' } = {}) =
   page.on('pageerror', (e) => !/ViewTransition opt-in disabled/.test(e.message) && page.errors.push(e.message));
   await page.evaluateOnNewDocument((mode) => {
     window.__counted = [];
+    window.__copied = '';
+    // The browser is shared by the pages of the suite: the first load of a page starts without a round kept by an earlier one (a reload, or a return to the page, keeps its own).
+    try { if (!sessionStorage.getItem('qa-fresh')) { localStorage.removeItem('order:game'); sessionStorage.setItem('qa-fresh', '1'); } } catch {}
+    try { Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }); Object.defineProperty(navigator, 'clipboard', { value: { writeText: async (t) => { window.__copied = t; } }, configurable: true }); } catch {}
     if (mode) try { localStorage.setItem('family', mode); } catch {}
     // The counter of the site is not loaded on a local address: a stand-in records what the page would send (the real build keeps its own, the recorder takes the events only).
     const stub = {};
@@ -86,14 +93,15 @@ if (want('page')) {
       robots: document.querySelector('meta[name="robots"]')?.content ?? '',
       alt: [...document.querySelectorAll('link[rel="alternate"][hreflang]')].map((l) => l.getAttribute('hreflang')).sort().join(),
       og: document.querySelector('meta[property="og:title"]')?.content ?? '',
+      image: document.querySelector('meta[property="og:image"]')?.content ?? '',
       ogd: document.querySelector('meta[property="og:description"]')?.content ?? '',
       title: document.title,
       foot: [...document.querySelectorAll('.site-footer a')].map((a) => a.getAttribute('href')),
       lead: document.querySelector('.order__lead')?.textContent.trim(),
     }));
     ok(`${lang}: indexable, hreflang for the three languages`, !/noindex/.test(head.robots) && head.alt.includes('pt') && head.alt.includes('en') && head.alt.includes('ru'), `${head.robots} ${head.alt}`);
-    ok(`${lang}: an og:title and an og:description of its own`, head.og.length > 10 && head.ogd.length > 20 && head.og !== head.ogd, `${head.og} | ${head.ogd}`);
-    ok(`${lang}: the footer links to the game and to the myths`, head.foot.includes(`/${lang}/${SEG[lang]}/`) && head.foot.includes(`/${lang}/${MYTHS[lang]}/`), head.foot.join(' '));
+    ok(`${lang}: an og:title and an og:description of its own, the picture of the game as og:image`, head.og.length > 10 && head.ogd.length > 20 && head.og !== head.ogd && /\/og-games\/order-[0-9a-f]+\.jpg$/.test(head.image), `${head.og} | ${head.ogd} | ${head.image}`);
+    ok(`${lang}: the footer has one link, "Games", for both games`, head.foot.includes(`/${lang}/${GAMES[lang]}/`) && !head.foot.includes(`/${lang}/${SEG[lang]}/`) && !head.foot.includes(`/${lang}/${MYTHS[lang]}/`), head.foot.join(' '));
     ok(`${lang}: the lead is there`, !!head.lead && head.lead.length > 20);
     ok(`${lang}: no script error`, page.errors.length === 0, page.errors.join('; '));
     await page.close();
@@ -152,78 +160,203 @@ if (want('answer')) {
     const page = await open({ lang });
     const [a, b] = await pairOf(page, list);
     ok(`${lang}: both stories of the pair are in the list of the data`, !!a && !!b);
-    const firstId = a.year <= b.year ? a.id : b.id;
-    const stored = await page.evaluate(() => JSON.stringify(Object.entries(localStorage)));
+    const first = a.year <= b.year ? a : b;
+    const later = first === a ? b : a;
+    const others = () => page.evaluate(() => JSON.stringify(Object.entries(localStorage).filter(([k]) => k !== 'order:game')));
+    const stored = await others();
     await press(page, 1);
-    const r = await page.evaluate(() => ({
-      pressed: [...document.querySelectorAll('[data-pair] .order__card')].map((c) => c.getAttribute('aria-pressed')),
-      disabled: [...document.querySelectorAll('[data-pair] .order__card')].map((c) => c.disabled),
-      dates: [...document.querySelectorAll('[data-pair] .order__date')].map((d) => d.textContent.trim()),
-      marks: [...document.querySelectorAll('[data-pair] .order__first')].map((m) => m.closest('.order__cell')?.querySelector('.order__title')?.textContent),
-      outcome: document.querySelector('[data-outcome]')?.textContent.trim(),
-      between: document.querySelector('[data-between]')?.textContent.trim(),
-      links: [...document.querySelectorAll('[data-pair] .order__read')].map((x) => x.getAttribute('href')),
-      next: document.querySelector('[data-next]')?.checkVisibility(),
-      tiles: [...document.querySelectorAll('[data-squares] .sq')].slice(0, 2).map((s) => s.className),
-    }));
+    const r = await page.evaluate(() => {
+      const probe = (css) => { const e = document.createElement('i'); e.style.color = css; document.body.append(e); const c = getComputedStyle(e).color; e.remove(); return c; };
+      const luminance = (rgb) => { const m = /rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)/.exec(rgb); return m ? { l: (0.299 * m[1] + 0.587 * m[2] + 0.114 * m[3]) / 255, alpha: m[4] === undefined ? 1 : Number(m[4]) } : { l: 1, alpha: 0 }; };
+      const cards = [...document.querySelectorAll('[data-pair] .order__card')];
+      const picked = cards.find((c) => c.getAttribute('aria-pressed') === 'true');
+      const title = picked.querySelector('.order__title');
+      const verdict = document.querySelector('[data-verdict] .verdict');
+      const outcome = document.querySelector('[data-outcome]');
+      const between = document.querySelector('[data-between]');
+      const body = getComputedStyle(document.body);
+      return {
+        pressed: cards.map((c) => c.getAttribute('aria-pressed')),
+        disabled: cards.map((c) => c.disabled),
+        dates: [...document.querySelectorAll('[data-pair] .order__date')].map((d) => d.textContent.trim()),
+        marks: [...document.querySelectorAll('[data-pair] .order__first')].map((m) => m.closest('.order__cell')?.querySelector('.order__title')?.textContent),
+        yours: [...document.querySelectorAll('.order__yours')].map((y) => y.closest('.order__card') === picked ? y.textContent.trim() : 'other'),
+        border: getComputedStyle(picked).borderTopColor,
+        borderWidth: getComputedStyle(picked).borderTopWidth,
+        accent: probe('var(--color-accent)'),
+        titleBg: luminance(getComputedStyle(title).backgroundColor),
+        titleInk: luminance(getComputedStyle(title).color).l,
+        cardBg: luminance(getComputedStyle(picked).backgroundColor),
+        verdictClass: verdict?.className,
+        verdictText: verdict?.textContent.trim(),
+        verdictIcon: !!verdict?.querySelector('svg'),
+        verdictColor: verdict ? getComputedStyle(verdict).color : '',
+        verdictInk: { fact: probe('var(--color-verdict-fact-ink)'), myth: probe('var(--color-verdict-myth-ink)') },
+        outcome: outcome?.textContent.trim(),
+        outcomeWeight: Number(getComputedStyle(outcome).fontWeight),
+        outcomeSize: getComputedStyle(outcome).fontSize,
+        betweenSize: getComputedStyle(between).fontSize,
+        betweenColor: getComputedStyle(between).color,
+        betweenWeight: Number(getComputedStyle(between).fontWeight),
+        bodyColor: body.color,
+        between: between.textContent.trim(),
+        plates: [...document.querySelectorAll('[data-plates] .story-plate')].map((x) => ({ href: x.getAttribute('href'), title: x.querySelector('.story-plate__title')?.textContent, more: x.querySelector('.story-plate__more')?.textContent, thumb: !!x.querySelector('img.story-plate__thumb') })),
+        smallRead: document.querySelectorAll('.order__read, [data-pair] a').length,
+        next: document.querySelector('[data-next]')?.checkVisibility(),
+        tiles: [...document.querySelectorAll('[data-squares] .sq')].slice(0, 2).map((s) => s.className),
+        kept: JSON.parse(localStorage.getItem('order:game') ?? 'null'),
+      };
+    });
+    const hit = first === b;
     ok(`${lang}: the pressed card is marked and both are off`, r.pressed.join() === 'false,true' && r.disabled.every(Boolean), r.pressed.join());
-    ok(`${lang}: both dates are shown, as the data has them`, r.dates.join() === [a.date, b.date].join(), `${r.dates.join(' | ')} vs ${a.date} | ${b.date}`);
-    ok(`${lang}: exactly one mark "First", on the story that came first`, r.marks.length === 1 && r.marks[0] === list.find((s) => s.id === firstId).title, r.marks.join());
-    ok(`${lang}: the years between are given`, /\d/.test(r.between), r.between);
-    ok(`${lang}: a line says whether the guess was right`, [ui('order.outcome_hit', lang), ui('order.outcome_miss', lang)].includes(r.outcome), r.outcome);
-    ok(`${lang}: a link to each story`, r.links.length === 2 && r.links.join() === [a.href, b.href].join(), r.links.join());
+    ok(`${lang}: the pressed card has a frame of 2 px in the colour of a link and the small mark "Your pick" over its title, only on it`, r.border === r.accent && r.borderWidth === '2px' && r.yours.join() === ui('order.yours', lang), `${r.border} ${r.accent} ${r.borderWidth} ${r.yours.join()}`);
+    ok(`${lang}: the title of the pressed card is on the surface of the card: no dark fill`, (r.titleBg.alpha === 0 || r.titleBg.l > 0.5 === r.cardBg.l > 0.5) && (r.titleBg.alpha === 0 || Math.abs(r.titleBg.l - r.cardBg.l) < 0.15) && r.titleInk < 0.5, JSON.stringify([r.titleBg, r.cardBg, r.titleInk]));
+    ok(`${lang}: both dates are shown, as the data has them`, r.dates.join() === [a.date, b.date].join(), `${r.dates.join(" | ")} vs ${a.date} | ${b.date}`);
+    ok(`${lang}: exactly one mark "First", on the story that came first`, r.marks.length === 1 && r.marks[0] === first.title, r.marks.join());
+    ok(`${lang}: the label of the verdict is the one of the myths: a check on green for a right guess, a cross on terracotta for a wrong one`, r.verdictClass === `verdict verdict--${hit ? "fact" : "myth"}` && r.verdictText === ui(`order.verdict_${hit ? "hit" : "miss"}`, lang) && r.verdictIcon && r.verdictColor === r.verdictInk[hit ? 'fact' : 'myth'], `${r.verdictClass} ${r.verdictText} ${r.verdictColor}`);
+    ok(`${lang}: the bold line says what came first, in the size of the text`, r.outcome === ui('order.first_line', lang).replace('{title}', first.title) && r.outcomeWeight >= 600 && r.outcomeSize === r.betweenSize, `${r.outcome} ${r.outcomeWeight} ${r.outcomeSize}`);
+    ok(`${lang}: the years between are plain text under it (not grey, not bold)`, /\d/.test(r.between) && r.betweenColor === r.bodyColor && r.betweenWeight < 600, `${r.between} ${r.betweenColor} ${r.bodyColor}`);
+    ok(`${lang}: a plate for each story, the earlier first, with a thumbnail and "Whole story →"; no small "Read" links under the cards`, r.plates.length === 2 && r.plates[0].href === first.href && r.plates[1].href === later.href && r.plates.every((x) => x.more === ui('myths.full_story', lang) && x.thumb) && r.smallRead === 0, JSON.stringify(r.plates));
     ok(`${lang}: Next is shown and the tile of the pair is filled`, r.next && /sq--(hit|miss)/.test(r.tiles[0]), r.tiles.join());
-    ok(`${lang}: a press keeps nothing in the browser`, (await page.evaluate(() => JSON.stringify(Object.entries(localStorage)))) === stored);
+    ok(`${lang}: a press keeps only the round (order:game: the pairs, the pick, whether it was right), nothing else in the browser`, r.kept && r.kept.picks[0] === 1 && r.kept.hits[0] === hit && r.kept.index === 0 && (await others()) === stored, JSON.stringify(r.kept));
     ok(`${lang}: a pressed card does not send an event`, (await page.evaluate(() => window.__counted.length)) === 0);
     await page.close();
   }
-  // The mark "First" is on the earlier story whichever card is pressed, and a right pick says so.
+  // The right pick says so, the wrong one too: the label and the tile.
   const list = await listOf('en');
   const page = await open({ lang: 'en' });
   const [a, b] = await pairOf(page, list);
   const right = a.year <= b.year ? 0 : 1;
   await press(page, right);
-  ok('en: the right pick says "You got it", the tile is a hit', (await page.$eval('[data-outcome]', (e) => e.textContent.trim())) === 'You got it' && (await page.$eval('[data-squares] .sq', (e) => e.classList.contains('sq--hit'))));
+  ok('en: the right pick: the label "You got it" on green, the tile is a hit', (await page.$eval('[data-verdict] .verdict', (e) => e.textContent.trim() + ' ' + e.className)) === 'You got it verdict verdict--fact' && (await page.$eval('[data-squares] .sq', (e) => e.classList.contains('sq--hit'))));
   await page.close();
   const wrong = await open({ lang: 'en' });
   const [c, d] = await pairOf(wrong, list);
   await press(wrong, c.year <= d.year ? 1 : 0);
-  ok('en: the wrong pick says "Not this time", the tile is a miss', (await wrong.$eval('[data-outcome]', (e) => e.textContent.trim())) === 'Not this time' && (await wrong.$eval('[data-squares] .sq', (e) => e.classList.contains('sq--miss'))));
+  ok('en: the wrong pick: the label "Not this time" on terracotta, the tile is a miss', (await wrong.$eval('[data-verdict] .verdict', (e) => e.textContent.trim() + ' ' + e.className)) === 'Not this time verdict verdict--myth' && (await wrong.$eval('[data-squares] .sq', (e) => e.classList.contains('sq--miss'))));
   await wrong.close();
+}
+
+if (want('resume')) {
+  for (const lang of LANGS) {
+    const list = await listOf(lang);
+    const page = await open({ lang });
+    const stepText = () => page.$eval('[data-step]', (e) => e.textContent.trim());
+    const answered = () => page.evaluate(() => !document.querySelector('[data-answer]').hidden);
+    const titles = () => page.$$eval('[data-pair] .order__title', (l) => l.map((x) => x.textContent));
+    // Three pairs answered, the fourth pressed and left open.
+    const done = [];
+    for (let i = 0; i < 3; i += 1) { done.push(await pairOf(page, list)); await press(page, 0); await next(page); }
+    const fourth = await pairOf(page, list);
+    await press(page, 1);
+    const before = { step: await stepText(), titles: await titles(), tiles: await page.$$eval('[data-squares] .sq', (l) => l.map((x) => x.className)) };
+    // To a story and back.
+    const href = await page.$eval('[data-plates] .story-plate', (a) => a.getAttribute('href'));
+    await page.goto(base + href, { waitUntil: 'networkidle0' });
+    await page.goBack({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    await wait(200);
+    ok(`${lang}: back from a story the same pair is there, answered, with its answer`, (await stepText()) === before.step && JSON.stringify(await titles()) === JSON.stringify(before.titles) && (await answered()) && (await page.$eval('[data-pair] .order__card[aria-pressed="true"]', () => true)), `${await stepText()} ${before.step}`);
+    ok(`${lang}: the tiles are the ones of before`, JSON.stringify(await page.$$eval('[data-squares] .sq', (l) => l.map((x) => x.className))) === JSON.stringify(before.tiles));
+    // A reload; then Next, and a reload on the next pair.
+    await page.reload({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    ok(`${lang}: a reload keeps the pair too`, (await stepText()) === before.step && (await answered()));
+    await next(page);
+    const fifthTitles = await titles();
+    await page.reload({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    ok(`${lang}: after Next a reload shows the next pair, not answered`, /\b5\b/.test(await stepText()) && !(await answered()) && JSON.stringify(await titles()) === JSON.stringify(fifthTitles) && fifthTitles.join() !== before.titles.join(), await stepText());
+    // The page "Games" says where the reader is.
+    const gamesPage = await browser.newPage();
+    await gamesPage.goto(`${base}/${lang}/${GAMES[lang]}/`, { waitUntil: 'networkidle0' });
+    const state = await gamesPage.$eval('[data-game-card="order"] [data-state]', (e) => e.textContent.trim());
+    ok(`${lang}: the page "Games" says "Continue (pair 5 of 10)" for this round`, state === ui('games.continue_order', lang).replace('{done}', '5').replace('{total}', '10'), state);
+    await gamesPage.close();
+    // To the end: the result; one event; a reload shows the result again and sends nothing.
+    for (let i = 4; i < ROUND; i += 1) { await press(page, 0); await next(page); }
+    ok(`${lang}: the result after ten pairs`, await visible(page, '[data-final]'));
+    ok(`${lang}: one event order-finish`, (await page.evaluate(() => window.__counted.map((c) => c.path).join())) === 'order-finish');
+    const title = await page.$eval('[data-score]', (e) => e.textContent.trim());
+    const tiles = await page.$$eval('[data-final-squares] .sq', (l) => l.map((x) => x.className).join());
+    await page.reload({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('[data-final]', { timeout: 10000 });
+    await wait(300);
+    ok(`${lang}: after a reload the result of the round is shown, the same, and the event is not sent again`, (await visible(page, '[data-final]')) && !(await visible(page, '[data-pair]')) && (await page.$eval('[data-score]', (e) => e.textContent.trim())) === title && (await page.$$eval('[data-final-squares] .sq', (l) => l.map((x) => x.className).join())) === tiles && (await page.evaluate(() => window.__counted.length)) === 0);
+    const gamesAgain = await browser.newPage();
+    await gamesAgain.goto(`${base}/${lang}/${GAMES[lang]}/`, { waitUntil: 'networkidle0' });
+    ok(`${lang}: the page "Games" shows the caption of the result`, (await gamesAgain.$eval('[data-game-card="order"] [data-state]', (e) => e.textContent.trim())) === title, title);
+    await gamesAgain.close();
+    // Another round: new pairs, and a reload stays in them.
+    await page.click('[data-again]');
+    await wait(300);
+    const newTitles = await titles();
+    await page.reload({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    ok(`${lang}: after "Another round" a reload shows the new round at its first pair, not the old result`, /\b1\b/.test(await stepText()) && !(await visible(page, '[data-final]')) && JSON.stringify(await titles()) === JSON.stringify(newTitles));
+    // A story that is gone from the list: a new round, without a word.
+    await page.evaluate(() => { const g = JSON.parse(localStorage.getItem('order:game')); g.pairs[0][0] = 'story-that-is-gone'; localStorage.setItem('order:game', JSON.stringify(g)); });
+    await page.reload({ waitUntil: 'networkidle0' });
+    await page.waitForSelector('[data-pair] button', { timeout: 10000 });
+    const kept = await page.evaluate(() => localStorage.getItem('order:game'));
+    ok(`${lang}: a pair with a story that is not in the list: a new round at the first pair, no message, the kept round replaced`, /\b1\b/.test(await stepText()) && !kept.includes('story-that-is-gone') && (await page.evaluate(() => document.querySelector('[data-empty]').hidden)) && page.errors.length === 0, page.errors.join('; '));
+    void fourth; void done;
+    await page.close();
+  }
 }
 
 if (want('result')) {
   for (const lang of LANGS) {
     const list = await listOf(lang);
     const page = await open({ lang });
-    const stored = await page.evaluate(() => JSON.stringify(Object.entries(localStorage)));
+    const stored = await page.evaluate(() => JSON.stringify(Object.entries(localStorage).filter(([k]) => k !== 'order:game')));
     ok(`${lang}: the result is not shown before the end`, !(await visible(page, '[data-final]')));
     const pairs = await playRound(page, list);
     ok(`${lang}: ten pairs in a round`, pairs.length === ROUND, String(pairs.length));
     ok(`${lang}: the result screen after ten answers, the game is gone`, (await visible(page, '[data-final]')) && !(await visible(page, '[data-pair]')));
-    const fin = await page.evaluate(() => ({
-      title: document.querySelector('[data-score]')?.textContent.trim(),
-      tiles: [...document.querySelectorAll('[data-final-squares] .sq')].map((e) => e.className),
-      buttons: [...document.querySelectorAll('[data-final] .button')].map((b) => b.textContent.trim()),
-      misses: [...document.querySelectorAll('[data-misses] li')].map((li) => [...li.querySelectorAll('a')].length),
-      missText: [...document.querySelectorAll('[data-misses] li')].map((li) => li.textContent),
-      focus: document.activeElement?.hasAttribute('data-score'),
-      digits: /\d/.test(document.querySelector('[data-final]').innerText.replace(/\b10\b/, '')),
-    }));
-    ok(`${lang}: a title by the range, no score, no percent`, fin.title.length > 5 && !/[\d%]/.test(fin.title), fin.title);
-    ok(`${lang}: ten tiles, a hit or a miss each`, fin.tiles.length === ROUND && fin.tiles.every((c) => /sq--(hit|miss)/.test(c)));
-    ok(`${lang}: Share, Another round and a link on; focus on the title`, fin.buttons.length === 3 && fin.focus, fin.buttons.join(' | '));
-    ok(`${lang}: the misses are pairs with two links each`, fin.misses.length === fin.tiles.filter((c) => c.includes('sq--miss')).length && fin.misses.every((n) => n === 2), fin.misses.join());
-    // Each line of the misses: the story that came first, then the other, each with its date (as the data has it).
-    const byTitle = new Map(list.map((s) => [s.title, s]));
-    const linesOk = fin.missText.every((text) => {
-      const [x, y] = text.split(' — ').map((part) => { const m = /^(.*) \((.+)\)$/.exec(part); return m && { story: byTitle.get(m[1]), date: m[2] }; });
-      return x && y && x.story && y.story && x.date === x.story.date && y.date === y.story.date && x.story.year <= y.story.year;
+    await page.evaluate(() => document.querySelector('[data-final]').scrollIntoView());
+    await page.waitForFunction(() => document.querySelector('.game-result__banner')?.complete !== false, { timeout: 5000 }).catch(() => {});
+    const fin = await page.evaluate(() => {
+      const box = (e) => e?.getBoundingClientRect();
+      const miss = [...document.querySelectorAll('[data-misses] li')];
+      const share = document.querySelector('[data-final-share]');
+      const again = document.querySelector('[data-again]');
+      const banner = document.querySelector('.game-result__banner');
+      return {
+        title: document.querySelector('[data-score]')?.textContent.trim(),
+        tiles: [...document.querySelectorAll('[data-final-squares] .sq')].map((e) => e.className),
+        tileWidth: box(document.querySelector('[data-final-squares] .sq'))?.width,
+        buttons: [...document.querySelectorAll('[data-final] .button')].map((b) => b.textContent.trim()),
+        shareClass: share?.className,
+        againClass: again?.className,
+        read: document.querySelector('[data-final] .game-result__read a')?.getAttribute('href'),
+        readIsButton: !!document.querySelector('[data-final] a.button'),
+        banner: banner ? { loaded: banner.complete && banner.naturalWidth > 0, ratio: box(banner).width / box(banner).height, natural: banner.naturalWidth / banner.naturalHeight, alt: banner.getAttribute('alt'), top: box(banner).top - box(document.querySelector('[data-final]')).top, above: banner.compareDocumentPosition(document.querySelector('[data-score]')) & Node.DOCUMENT_POSITION_FOLLOWING } : null,
+        ai: document.querySelector('.game-result__ai')?.textContent.trim(),
+        pairs: miss.map((li) => ({ classes: li.className, listStyle: getComputedStyle(li).listStyleType, border: getComputedStyle(li).borderTopWidth, rows: [...li.querySelectorAll('.miss-row')].map((r) => ({ date: r.querySelector('.miss-date')?.textContent, bold: Number(getComputedStyle(r.querySelector('.miss-date')).fontWeight), title: r.querySelector('a')?.textContent, href: r.querySelector('a')?.getAttribute('href'), dateLeft: box(r.querySelector('.miss-date')).left, titleLeft: box(r.querySelector('a')).left })) })),
+        focus: document.activeElement?.hasAttribute('data-score'),
+      };
     });
-    ok(`${lang}: every miss reads "first (date) — second (date)", the earlier story first`, fin.missText.length === 0 || linesOk, fin.missText.join(' | '));
+    ok(`${lang}: a title by the range, no score, no percent`, fin.title.length > 5 && !/[\d%]/.test(fin.title), fin.title);
+    ok(`${lang}: ten tiles, a hit or a miss each, at least 28 px wide`, fin.tiles.length === ROUND && fin.tiles.every((c) => /sq--(hit|miss)/.test(c)) && fin.tileWidth >= 28, String(fin.tileWidth));
+    ok(`${lang}: the picture of the game is on top, whole (3:2), with the line that it is AI-made under it and the title under that`, fin.banner && fin.banner.loaded && Math.abs(fin.banner.ratio - 1.5) < 0.03 && Math.abs(fin.banner.natural - 1.5) < 0.03 && fin.banner.alt === '' && fin.banner.top < 2 && fin.banner.above !== 0 && fin.ai === ui('games.ai_caption', lang), JSON.stringify(fin.banner) + ' ' + fin.ai);
+    ok(`${lang}: Share is the main button, Another round the second, "Read the stories" a link (not a button); focus on the title`, fin.buttons.length === 2 && fin.shareClass === 'button' && /button--secondary/.test(fin.againClass) && !fin.readIsButton && fin.read === `/${lang}/` && fin.focus, fin.buttons.join(' | '));
+    const byTitle = new Map(list.map((x) => [x.title, x]));
+    const nMiss = fin.tiles.filter((c) => c.includes('sq--miss')).length;
+    ok(`${lang}: the misses are pairs: two rows each, the date in bold on the left, the title (a link) on the right, no bullets, a thin line between the pairs`, fin.pairs.length === nMiss && fin.pairs.every((x, i) => x.rows.length === 2 && x.listStyle === 'none' && x.rows.every((r) => r.bold >= 600 && r.dateLeft < r.titleLeft && r.href) && (i === 0 || x.border === '1px')), JSON.stringify(fin.pairs.slice(0, 1)));
+    ok(`${lang}: each row has the date and the title of its story, the one that came first on top`, fin.pairs.every((x) => { const [u, v] = x.rows.map((r) => ({ story: byTitle.get(r.title), date: r.date })); return u.story && v.story && u.date === u.story.date && v.date === v.story.date && u.story.year <= v.story.year; }), JSON.stringify(fin.pairs.map((x) => x.rows.map((r) => r.date))));
+    // Share: the text is the caption, the tiles, the question and the link to the page of the range, with ?src=share.
+    await page.click('[data-final-share]');
+    await wait(100);
+    const copied = await page.evaluate(() => window.__copied);
+    const lines = copied.split('\n');
+    const hits = fin.tiles.filter((c) => c.includes('sq--hit')).length;
+    const band = hits === ROUND ? 'top' : hits / ROUND >= 0.7 ? 'high' : hits / ROUND >= 0.4 ? 'mid' : 'low';
+    ok(`${lang}: the copied text has the caption, the tiles, the question and the link to the page of the range with ?src=share`, lines.length === 4 && lines[0] === ui('order.share_title', lang).replace('{band}', ui(`order.band_${band}`, lang)) && lines[1] === fin.tiles.map((c) => (c.includes('sq--hit') ? '🟦' : '⬜')).join('') && lines[2] === ui('order.share_ask', lang) && lines[3].endsWith(`/${lang}/${SEG[lang]}/${RANKSEG[lang]}/${band}/?src=share`), JSON.stringify(lines));
+    ok(`${lang}: sharing sends no event`, (await page.evaluate(() => window.__counted.length)) === 1);
     const counted = await page.evaluate(() => window.__counted.map((c) => c.path));
     ok(`${lang}: one counter event, order-finish, and no other`, counted.length === 1 && counted[0] === 'order-finish', counted.join());
-    ok(`${lang}: nothing is kept in the browser`, (await page.evaluate(() => JSON.stringify(Object.entries(localStorage)))) === stored);
+    ok(`${lang}: nothing is kept in the browser but the round`, (await page.evaluate(() => JSON.stringify(Object.entries(localStorage).filter(([k]) => k !== 'order:game')))) === stored);
     await page.close();
   }
   const list = await listOf('pt');
@@ -272,7 +405,7 @@ if (want('nojs')) {
 
 if (want('nav')) {
   for (const lang of LANGS) {
-    for (const [name, seg] of [['order', SEG[lang]], ['myths', MYTHS[lang]]]) {
+    for (const [name, seg] of [['order', SEG[lang]], ['myths', MYTHS[lang]], ['games', GAMES[lang]]]) {
       const page = await browser.newPage();
       await page.setViewport({ width: 390, height: 900, isMobile: true, hasTouch: true });
       await page.goto(`${base}/${lang}/${seg}/`, { waitUntil: 'networkidle0' });
@@ -281,21 +414,21 @@ if (want('nav')) {
         tabs: document.querySelectorAll('.tabbar a').length,
         sw: [...document.querySelectorAll('.games-switch a')].map((a) => ({ href: a.getAttribute('href'), cur: a.getAttribute('aria-current') })),
       }));
-      ok(`${lang} ${name}: the tab "Games" is the current one and leads to the myths`, n.tab.length === 1 && n.tab[0].href === `/${lang}/${MYTHS[lang]}/` && n.tabs === 5, JSON.stringify(n.tab));
+      ok(`${lang} ${name}: the tab "Games" is the current one and leads to the page "Games"`, n.tab.length === 1 && n.tab[0].href === `/${lang}/${GAMES[lang]}/` && n.tabs === 5, JSON.stringify(n.tab));
       ok(`${lang} ${name}: the tab is called "Games"`, n.tab[0]?.text === { pt: 'Jogos', en: 'Games', ru: 'Игры' }[lang], n.tab[0]?.text);
-      ok(`${lang} ${name}: the switch has the two games, the current one marked`, n.sw.length === 2 && n.sw.filter((x) => x.cur === 'page').length === 1 && n.sw.find((x) => x.cur === 'page').href === `/${lang}/${seg}/` && n.sw.some((x) => x.href === `/${lang}/${SEG[lang]}/`) && n.sw.some((x) => x.href === `/${lang}/${MYTHS[lang]}/`), JSON.stringify(n.sw));
+      ok(`${lang} ${name}: the switch has the two games, the current one marked (the page "Games" has none)`, name === 'games' ? n.sw.length === 0 : n.sw.length === 2 && n.sw.filter((x) => x.cur === 'page').length === 1 && n.sw.find((x) => x.cur === 'page').href === `/${lang}/${seg}/` && n.sw.some((x) => x.href === `/${lang}/${SEG[lang]}/`) && n.sw.some((x) => x.href === `/${lang}/${MYTHS[lang]}/`), JSON.stringify(n.sw));
       await page.close();
     }
   }
   // The menu of the header (from 768 px): "Games" between "Map" and "Surprise me", current on both game pages, leads to the myths.
   for (const lang of LANGS) {
-    for (const seg of [SEG[lang], MYTHS[lang]]) {
+    for (const seg of [SEG[lang], MYTHS[lang], GAMES[lang]]) {
       const page = await browser.newPage();
       await page.setViewport({ width: 1280, height: 900 });
       await page.goto(`${base}/${lang}/${seg}/`, { waitUntil: 'networkidle0' });
       const m = await page.evaluate(() => [...document.querySelectorAll('.site-nav a')].map((a) => ({ href: a.getAttribute('href'), cur: a.getAttribute('aria-current') })));
-      const at = m.findIndex((x) => x.href === `/${lang}/${MYTHS[lang]}/`);
-      ok(`${lang} ${seg}: the header menu has "Games" (to the myths) between the map and "Surprise me", current`, at === 2 && m.length === 4 && m[at].cur === 'page' && m.filter((x) => x.cur).length === 1 && m[3].href.includes(lang === 'pt' ? 'surpreende' : lang === 'en' ? 'surprise' : 'udivi'), JSON.stringify(m));
+      const at = m.findIndex((x) => x.href === `/${lang}/${GAMES[lang]}/`);
+      ok(`${lang} ${seg}: the header menu has "Games" (to the page "Games") between the map and "Surprise me", current`, at === 2 && m.length === 4 && m[at].cur === 'page' && m.filter((x) => x.cur).length === 1 && m[3].href.includes(lang === 'pt' ? 'surpreende' : lang === 'en' ? 'surprise' : 'udivi'), JSON.stringify(m));
       await page.close();
     }
   }
@@ -312,6 +445,7 @@ if (want('scroll')) {
       const page = await browser.newPage();
       await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
       if (reduced) await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+      await page.evaluateOnNewDocument(() => { try { if (!sessionStorage.getItem('qa-fresh')) { localStorage.removeItem('order:game'); sessionStorage.setItem('qa-fresh', '1'); } } catch {} });
       await page.goto(pageUrl(lang), { waitUntil: 'networkidle0' });
       await page.waitForSelector('[data-pair] button');
       const state = () => page.evaluate(() => ({ y: Math.round(scrollY), step: Math.round(document.querySelector('[data-step]').getBoundingClientRect().top), cards: [...document.querySelectorAll('[data-pair] .order__card')].map((c) => Math.round(c.getBoundingClientRect().bottom)), tab: Math.round(document.querySelector('.tabbar').getBoundingClientRect().top), focus: document.activeElement?.matches('[data-pair] [data-pick="0"]') }));
