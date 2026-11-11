@@ -10,7 +10,7 @@
 //   nav       the tab "Games" is current on both game pages and leads to the myths; the switch has the two links; the footer has both
 //   layout    no horizontal scroll at 320 px (a question, an answered question, the result)
 import { launchBrowser } from './browser.mjs';
-import { epochs, ui } from './data.mjs';
+import { epochs, published, ui } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -123,6 +123,12 @@ if (want('question')) {
     ok(`${lang}: the dates are not in the page before the press`, !(await page.evaluate(() => /\d{3,4}/.test(document.querySelector('[data-pair]').innerText))));
     await page.close();
   }
+  // A story whose label has two years ("1906 e 2020") is in the game with the first year only.
+  for (const lang of LANGS) {
+    const list = await listOf(lang);
+    const two = published.filter((e) => Object.values(e.year_label ?? {}).some((l) => /\b\d{4}\b[^\d]*\s(e|and|и)\s[^\d]*\b\d{4}\b/u.test(String(l))));
+    ok(`${lang}: a story with two years in its label is in the list, with its first year as the date`, two.every((e) => { const s = list.find((x) => x.id === e.id); return s && s.date === String(e.year) && s.year === e.year; }), two.map((e) => e.id).join());
+  }
   const narrow = await open({ lang: 'pt', width: 390 });
   const tops = await narrow.$$eval('[data-pair] .order__card', (l) => l.map((c) => { const r = c.getBoundingClientRect(); return [Math.round(r.left), Math.round(r.top), Math.round(r.width)]; }));
   ok('phone: the cards are one under the other', tops.length === 2 && tops[0][0] === tops[1][0] && tops[1][1] > tops[0][1], JSON.stringify(tops));
@@ -193,6 +199,7 @@ if (want('result')) {
       tiles: [...document.querySelectorAll('[data-final-squares] .sq')].map((e) => e.className),
       buttons: [...document.querySelectorAll('[data-final] .button')].map((b) => b.textContent.trim()),
       misses: [...document.querySelectorAll('[data-misses] li')].map((li) => [...li.querySelectorAll('a')].length),
+      missText: [...document.querySelectorAll('[data-misses] li')].map((li) => li.textContent),
       focus: document.activeElement?.hasAttribute('data-score'),
       digits: /\d/.test(document.querySelector('[data-final]').innerText.replace(/\b10\b/, '')),
     }));
@@ -200,6 +207,13 @@ if (want('result')) {
     ok(`${lang}: ten tiles, a hit or a miss each`, fin.tiles.length === ROUND && fin.tiles.every((c) => /sq--(hit|miss)/.test(c)));
     ok(`${lang}: Share, Another round and a link on; focus on the title`, fin.buttons.length === 3 && fin.focus, fin.buttons.join(' | '));
     ok(`${lang}: the misses are pairs with two links each`, fin.misses.length === fin.tiles.filter((c) => c.includes('sq--miss')).length && fin.misses.every((n) => n === 2), fin.misses.join());
+    // Each line of the misses: the story that came first, then the other, each with its date (as the data has it).
+    const byTitle = new Map(list.map((s) => [s.title, s]));
+    const linesOk = fin.missText.every((text) => {
+      const [x, y] = text.split(' — ').map((part) => { const m = /^(.*) \((.+)\)$/.exec(part); return m && { story: byTitle.get(m[1]), date: m[2] }; });
+      return x && y && x.story && y.story && x.date === x.story.date && y.date === y.story.date && x.story.year <= y.story.year;
+    });
+    ok(`${lang}: every miss reads "first (date) — second (date)", the earlier story first`, fin.missText.length === 0 || linesOk, fin.missText.join(' | '));
     const counted = await page.evaluate(() => window.__counted.map((c) => c.path));
     ok(`${lang}: one counter event, order-finish, and no other`, counted.length === 1 && counted[0] === 'order-finish', counted.join());
     ok(`${lang}: nothing is kept in the browser`, (await page.evaluate(() => JSON.stringify(Object.entries(localStorage)))) === stored);
@@ -263,6 +277,18 @@ if (want('nav')) {
       ok(`${lang} ${name}: the tab "Games" is the current one and leads to the myths`, n.tab.length === 1 && n.tab[0].href === `/${lang}/${MYTHS[lang]}/` && n.tabs === 5, JSON.stringify(n.tab));
       ok(`${lang} ${name}: the tab is called "Games"`, n.tab[0]?.text === { pt: 'Jogos', en: 'Games', ru: 'Игры' }[lang], n.tab[0]?.text);
       ok(`${lang} ${name}: the switch has the two games, the current one marked`, n.sw.length === 2 && n.sw.filter((x) => x.cur === 'page').length === 1 && n.sw.find((x) => x.cur === 'page').href === `/${lang}/${seg}/` && n.sw.some((x) => x.href === `/${lang}/${SEG[lang]}/`) && n.sw.some((x) => x.href === `/${lang}/${MYTHS[lang]}/`), JSON.stringify(n.sw));
+      await page.close();
+    }
+  }
+  // The menu of the header (from 768 px): "Games" between "Map" and "Surprise me", current on both game pages, leads to the myths.
+  for (const lang of LANGS) {
+    for (const seg of [SEG[lang], MYTHS[lang]]) {
+      const page = await browser.newPage();
+      await page.setViewport({ width: 1280, height: 900 });
+      await page.goto(`${base}/${lang}/${seg}/`, { waitUntil: 'networkidle0' });
+      const m = await page.evaluate(() => [...document.querySelectorAll('.site-nav a')].map((a) => ({ href: a.getAttribute('href'), cur: a.getAttribute('aria-current') })));
+      const at = m.findIndex((x) => x.href === `/${lang}/${MYTHS[lang]}/`);
+      ok(`${lang} ${seg}: the header menu has "Games" (to the myths) between the map and "Surprise me", current`, at === 2 && m.length === 4 && m[at].cur === 'page' && m.filter((x) => x.cur).length === 1 && m[3].href.includes(lang === 'pt' ? 'surpreende' : lang === 'en' ? 'surprise' : 'udivi'), JSON.stringify(m));
       await page.close();
     }
   }

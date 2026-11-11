@@ -29,6 +29,7 @@
     "home": "Início",
     "epochs": "Épocas",
     "map": "Mapa",
+    "games": "Jogos",
     "surprise": "Surpreenda-me"
   },
   "pages": {
@@ -477,9 +478,9 @@
     "read": "Ler →",
     "next": "Seguinte",
     "finish": "Resultado",
-    "band_top": "Sentido do tempo de cronista",
+    "band_top": "Um sentido do tempo digno de cronista",
     "band_high": "Bom sentido do tempo",
-    "band_mid": "O tempo às vezes confunde",
+    "band_mid": "O tempo às vezes engana",
     "band_low": "O tempo sabe surpreender",
     "misses": "Onde errou",
     "again": "Mais uma ronda",

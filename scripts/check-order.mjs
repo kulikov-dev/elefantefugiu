@@ -1,6 +1,6 @@
 // Checks the data of "Which came first?" in dist/ (docs/spec.md 5.9): /{lang}/order.json is made of the stories published that day and of nothing else.
-// Part of postbuild. Every published story of src/content/events that is not a heavy topic, does not begin before the year -2000 (the prologue) and has no pair of years in its label
-// is in the file of every language; a draft, a story queued for a later day and everything else is not. The fields are well formed and a page of the game exists in every language.
+// Part of postbuild. Every published story of src/content/events that is not a heavy topic, does not begin before the year -2000 (the prologue)
+// is in the file of every language; a draft, a story queued for a later day and everything else is not. A label with two years ("1906 e 2020") gives the first year only as the date. The fields are well formed and a page of the game exists in every language.
 // CHECK_DIST=<dir> checks another build, CHECK_EVENTS=<dir> reads the stories from another folder (the tests use both), SITE_TODAY sets the day.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -20,7 +20,7 @@ const cards = readdirSync(eventsDir)
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => parse(readFileSync(join(eventsDir, f), 'utf8'), { schema: 'core' }));
 const first = (c) => (typeof c.year === 'object' ? c.year.from : c.year);
-const expected = cards.filter((c) => isLive(c) && c.placeholder !== true && c.sensitive !== true && first(c) >= DEEPEST_YEAR && !Object.values(c.year_label ?? {}).some((l) => TWO_YEARS.test(String(l))));
+const expected = cards.filter((c) => isLive(c) && c.placeholder !== true && c.sensitive !== true && first(c) >= DEEPEST_YEAR);
 const wanted = new Set(expected.map((c) => c.id));
 const allIds = new Set(cards.map((c) => c.id));
 
@@ -35,11 +35,11 @@ for (const lang of LANGS) {
   const list = JSON.parse(readFileSync(file, 'utf8'));
   const got = new Set(list.map((s) => s.id));
   for (const id of wanted) if (!got.has(id)) errors.push(`${lang}: the published story ${id} is not in order.json`);
-  for (const id of got) if (!wanted.has(id)) errors.push(`${lang}: ${id} is in order.json but must not be (${allIds.has(id) ? 'a draft, a queued, a heavy, a prologue or a two-date story' : 'not a story'})`);
+  for (const id of got) if (!wanted.has(id)) errors.push(`${lang}: ${id} is in order.json but must not be (${allIds.has(id) ? 'a draft, a queued, a heavy or a prologue story' : 'not a story'})`);
   for (const s of list) {
     const bad = [];
     if (typeof s.title !== 'string' || !s.title) bad.push('title');
-    if (typeof s.date !== 'string' || !s.date) bad.push('date');
+    if (typeof s.date !== 'string' || !s.date || TWO_YEARS.test(s.date)) bad.push('date');
     if (!Number.isInteger(s.year) || !Number.isInteger(s.from) || !Number.isInteger(s.to) || s.from > s.to || s.year < s.from || s.year > s.to) bad.push('years');
     if (typeof s.rough !== 'boolean') bad.push('rough');
     if (!['all', '12', '16'].includes(s.minAge)) bad.push('minAge');
@@ -54,4 +54,4 @@ if (errors.length) {
   console.error(`Order check failed:\n  ${errors.join('\n  ')}`);
   process.exit(1);
 }
-console.log(`Order check passed: ${wanted.size} published stories in order.json of each of ${LANGS.length} languages (a heavy topic, the prologue, two-date and not-yet-published stories are out), the page of the game is built in every language.`);
+console.log(`Order check passed: ${wanted.size} published stories in order.json of each of ${LANGS.length} languages (a heavy topic, the prologue and not-yet-published stories are out), the page of the game is built in every language.`);

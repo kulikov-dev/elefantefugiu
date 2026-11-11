@@ -17,9 +17,12 @@ interface Props {
 
 const { lang, pageKey, alternates, activeLangs } = Astro.props;
 
+// Both games (Myth or fact, Which came first?) are the item "Games", as in the tab bar.
+const current = pageKey === 'myths' || pageKey === 'order' ? 'games' : pageKey;
 const items = [
   { label: t(lang, 'nav.epochs'), href: `${pagePath(lang, 'home')}#${EPOCHS_ANCHOR}`, key: undefined },
   { label: t(lang, 'nav.map'), href: pagePath(lang, 'map'), key: 'map' },
+  { label: t(lang, 'nav.games'), href: pagePath(lang, 'myths'), key: 'games' },
   { label: t(lang, 'nav.surprise'), href: pagePath(lang, 'surprise'), key: 'surprise' },
 ];
 ---
@@ -34,7 +37,7 @@ const items = [
         {
           items.map((item) => (
             <li>
-              <a href={item.href} aria-current={item.key && item.key === pageKey ? 'page' : undefined}>
+              <a href={item.href} aria-current={item.key && item.key === current ? 'page' : undefined}>
                 {item.label}
               </a>
             </li>

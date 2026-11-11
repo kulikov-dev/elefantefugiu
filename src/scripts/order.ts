@@ -132,12 +132,14 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && outcomeEl && be
         .filter((_, n) => !marks[n])
         .map((pair) => {
           const li = document.createElement('li');
-          [pair.a, pair.b].forEach((story, k) => {
+          // The one that came first goes first, each with its date: the list says what was before what.
+          const first = earlier(pair);
+          [first, first === pair.a ? pair.b : pair.a].forEach((story, k) => {
             if (k > 0) li.append(' — ');
             const a = document.createElement('a');
             a.href = story.href;
             a.textContent = story.title;
-            li.append(a);
+            li.append(a, ` (${story.date})`);
           });
           return li;
         }),

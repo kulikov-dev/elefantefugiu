@@ -29,19 +29,22 @@ const story = (id: string, extra: Record<string, unknown> = {}): EventData =>
   }) as unknown as EventData;
 
 describe('the stories of the game are made of the data, without a list or a flag', () => {
-  it('a story added to the data (nothing else changed) is in the list; a queued, a draft, a heavy, a prologue and a two-date story are not', () => {
+  it('a story added to the data (nothing else changed) is in the list; a queued, a draft, a heavy and a prologue story are not; a story with two years in its label is, with the first year', () => {
     const world = [
       story('added'),
       story('queued', { published: tomorrow }),
       story('draft', { status: 'draft' }),
       story('heavy', { sensitive: true }),
       story('deep', { year: -150_000_000 }),
-      story('two', { year_label: { pt: '1906 e 2020', en: '1906 and 2020', ru: '1906 и 2020' } }),
+      story('two', { year: 1500, year_label: { pt: '1906 e 2020', en: '1906 and 2020', ru: '1906 и 2020' } }),
     ];
-    expect(orderEvents(world).map((e) => e.id)).toEqual(['added']);
+    expect(orderEvents(world).map((e) => e.id)).toEqual(['added', 'two']);
     expect(orderExclusion(world[3]!)).toBe('sensitive');
     expect(orderExclusion(world[4]!)).toBe('prologue');
-    expect(orderExclusion(world[5]!)).toBe('two-dates');
+    expect(orderExclusion(world[5]!)).toBeUndefined();
+    const two = orderEntry(world[5]!, 'pt');
+    expect(two.date).toBe('1500');
+    expect(orderEntry(world[5]!, 'ru').date).toBe('1500');
   });
 
   it('the story added to the world gets into the pairs with a story of its time', () => {

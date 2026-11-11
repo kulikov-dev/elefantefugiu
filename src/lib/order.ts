@@ -36,13 +36,13 @@ export interface OrderStory {
 
 /** "c. 1850", "séc. XVIII", "1778 ou 1782", "about", "century", "век", "или": the label says the date is not exact. */
 const ROUGH_LABEL = /(^|\s)(c\.|ca\.|около)\s|séc\.|centur|век|\sou\s|\sor\s|\sили\s/iu;
-/** Two years in one label ("1906 e 2020"): which one the story is sorted by is not clear, so it stays out of the game. */
+/** Two years in one label ("1906 e 2020"): the game shows the first one only. */
 const TWO_YEARS = /\b\d{4}\b[^\d]*\s(e|and|и)\s[^\d]*\b\d{4}\b/u;
 
 /** Is the date rough? A period, or a label of a century or of an approximate year, in any language. */
 export const isRoughDate = (from: number, to: number, labels: readonly (string | undefined)[]): boolean => from !== to || labels.some((l) => l !== undefined && ROUGH_LABEL.test(l));
 
-/** Is the label a pair of years (the story cannot be given one date)? */
+/** Is the label a pair of years (the game then shows the first year only)? */
 export const hasTwoYears = (labels: readonly (string | undefined)[]): boolean => labels.some((l) => l !== undefined && TWO_YEARS.test(l));
 
 /** The year a story is sorted by: the year, or the middle of a period. */
