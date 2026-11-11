@@ -86,6 +86,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')
 
   .order__step {
     margin: 0;
+    scroll-margin-block-start: var(--space-3);
     color: var(--color-ink-muted);
     font-family: var(--font-label);
     font-size: var(--text-sm);
@@ -138,7 +139,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')
   }
 
   /* The picture and the title of the card not pressed fade; its date and the mark "First" do not (they are the answer). */
-  .order__card:disabled:not([aria-pressed='true']) :is(.order__thumb, .order__title) {
+  .order__card:disabled:not([aria-pressed='true']) :is(.order__thumb, .order__title, .order__hint) {
     opacity: 0.45;
   }
 
@@ -167,6 +168,19 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'order')
     font-size: var(--text-lg);
     font-weight: var(--weight-strong);
     line-height: var(--leading-heading);
+  }
+
+  /* The hook under the title: smaller, muted, two lines at most. */
+  .order__hint {
+    display: -webkit-box;
+    padding: 0 var(--space-4) var(--space-3);
+    overflow: hidden;
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+    line-height: var(--leading-heading);
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .order__when {

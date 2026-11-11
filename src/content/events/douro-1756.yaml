@@ -49,6 +49,8 @@ hook:
   en: To protect port, Pombal drew its borders in granite.
   ru: >-
     Чтобы спасти портвейн, в долине Дору поставили 335 гранитных столбов.
+order_hint:
+  ru: "Чтобы спасти портвейн, в долине вкопали сотни гранитных столбов."
 story:
   pt: >-
     Nos anos 1750, o vinho do Porto caiu em desgraça. Havia demasiado vinho no Douro, a procura e os

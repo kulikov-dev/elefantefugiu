@@ -6,6 +6,7 @@ import { buildToday } from '../../src/lib/publication.mjs';
 import type { EventData } from '../../src/lib/events';
 import { FAMILY_MODES, isSurpriseAllowed } from '../../src/lib/family';
 import { MAX_GAP, MAX_RUN, MIN_GAP, ROUGH_GAP, ROUND_SIZE, allowedIn, between, canPair, earlier, gapBetween, hasTwoYears, isRoughDate, makeRound, orderBand, seeded, type OrderStory } from '../../src/lib/order';
+import { hintOf, hookGivesDate } from '../../src/lib/order-hint.mjs';
 import { orderEntry, orderEvents, orderExclusion } from '../../src/lib/order-build';
 import { ROUTES, pagePath } from '../../src/i18n/routes';
 
@@ -25,6 +26,7 @@ const story = (id: string, extra: Record<string, unknown> = {}): EventData =>
     published: addDays(today, -3),
     sensitive: false,
     min_age: 'all',
+    hook: { pt: 'Um gancho', en: 'A hook', ru: 'Крючок' },
     ...extra,
   }) as unknown as EventData;
 
@@ -60,6 +62,39 @@ describe('the stories of the game are made of the data, without a list or a flag
     const entry = orderEntry(e, 'pt');
     expect(entry).toMatchObject({ id: 'x', year: 1725, from: 1700, to: 1750, date: '1700–1750', epoch: 'e2', minAge: '12', rough: true });
     expect(entry.href).toBe('/pt/historia/s-x/');
+  });
+});
+
+describe('the line under the title: the hook, unless it gives the date away', () => {
+  it('a number from 100 to 2100 with no separator of thousands, a century, a Roman numeral and a word of an era give the date away', () => {
+    for (const text of ['Desde 1646 nenhum rei', 'Since 1646 no king', 'В 1910 году', 'Exactly 100 bulls', 'Until 2100', 'С XIV века в нём торговали', 'No séc. XVIII', 'In the 18th century', 'No século XVIII', 'Из IV века', 'Пять веков назад', 'Um castelo medieval', 'A medieval castle', 'Римский храм', 'Средневековый замок', 'Idade Média', 'An ancient road']) {
+      expect(hookGivesDate(text), text).toBe(text !== 'Римский храм');
+    }
+  });
+  it('a number with groups of thousands is not a date: "9 000", "9,000", "9.000" (also with a no-break or a thin space), nor a number below 100 or above 2100', () => {
+    for (const text of ['Of 9,000 Portuguese in the army', 'Of 9 000 men', 'Of 9.000 men', 'Of 9\u00A0000 men', 'Of 9\u202F000 men', 'Of 12 000 men', 'Mais de 1.500 pessoas', 'Dois mil e 99 bulls', 'About 2500 men', 'Over 12000 men']) expect(hookGivesDate(text), text).toBe(false);
+    expect(hookGivesDate('In 1815, 1816 and later')).toBe(true);
+    expect(hookGivesDate('Of 9,000 men, 1813 saw the end')).toBe(true);
+  });
+  it('a plain hook is shown: two-digit numbers, "I", words with Roman letters inside', () => {
+    for (const text of ['Seven kings and 12 bulls', 'I saw an elephant', 'Слон сбежал', 'O rei pagou o dobro', 'The VIP guest and the MIX of bulls', 'Шестьдесят лет королей закончились за одно утро', 'Мясом в нём торговали веками', 'Это вековая традиция']) expect(hookGivesDate(text), text).toBe(false);
+  });
+  it('the line is the hook; order_hint of the language takes its place; a hook that gives the date away and no order_hint: nothing', () => {
+    const hook = { pt: 'Um rei', en: 'A king', ru: 'Король' };
+    expect(hintOf({ hook }, 'en')).toBe('A king');
+    expect(hintOf({ hook: { ...hook, en: 'A king in 1646' } }, 'en')).toBeUndefined();
+    expect(hintOf({ hook: { ...hook, en: 'A king in 1646' }, order_hint: { pt: 'x', en: 'A king and his crown', ru: 'y' } }, 'en')).toBe('A king and his crown');
+    expect(hintOf({ hook, order_hint: { pt: 'x', en: 'y' } }, 'ru')).toBe('Король');
+  });
+  it('the entry of a story carries the line only when there is one', () => {
+    const a = orderEntry(story('a', { hook: { pt: 'Um rei', en: 'A king', ru: 'Король' } }), 'en');
+    const b = orderEntry(story('b', { hook: { pt: 'Em 1646', en: 'In 1646', ru: 'В 1646' } }), 'en');
+    const c = orderEntry(story('c', { hook: { pt: 'Em 1646', en: 'In 1646', ru: 'В 1646' }, order_hint: { pt: 'Um rei', en: 'A king', ru: 'Король' } }), 'en');
+    expect([a.hint, b.hint, c.hint]).toEqual(['A king', undefined, 'A king']);
+    expect('hint' in b).toBe(false);
+  });
+  it('no hook of the data that stays visible gives the date away', () => {
+    expect(list.every((s) => !s.hint || hookGivesDate(s.hint) === false || events.some((e) => e.id === s.id && e.order_hint))).toBe(true);
   });
 });
 

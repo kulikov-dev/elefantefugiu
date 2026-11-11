@@ -1,4 +1,4 @@
-// Browser checks of "Which came first?" (src/views/OrderView.astro, src/scripts/order.ts, src/lib/order.ts, /{lang}/order.json) against dist/ served by serve.mjs:   node order.mjs [page question answer result family nojs nav layout]
+// Browser checks of "Which came first?" (src/views/OrderView.astro, src/scripts/order.ts, src/lib/order.ts, /{lang}/order.json) against dist/ served by serve.mjs:   node order.mjs [page question answer result family nojs nav scroll layout]
 //   page      the page in every language: one h1, the switch of the two games with the current one marked, the lead, the address, the footer link, indexable with hreflang and an og of its own
 //   question  ten pairs; a card has a picture and a title and no year, no name of an epoch (no epoch colour either); two cards, side by side from 640 px and one under the other on a phone
 //   answer    a press marks the card pressed, turns both off, shows both dates (those of the data), exactly one mark "First" (on the story that came first), the years between, "You got it" or "Not this time",
@@ -8,9 +8,11 @@
 //   family    in the mode "all" every story of every pair carries the age label "all" (the same rule as "Surprise me")
 //   nojs      without JavaScript: the line about JavaScript and the link to the myths, no game
 //   nav       the tab "Games" is current on both game pages and leads to the myths; the switch has the two links; the footer has both
+//   scroll    after Next and Another round: the focus on the first card, the scroll to "Pair N of 10" (at once under reduced motion), both cards above the tab bar at 390 x 844
 //   layout    no horizontal scroll at 320 px (a question, an answered question, the result)
 import { launchBrowser } from './browser.mjs';
 import { epochs, published, ui } from './data.mjs';
+import { hookGivesDate } from '../../src/lib/order-hint.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const ONLY = process.argv.slice(2);
@@ -116,7 +118,11 @@ if (want('question')) {
     ok(`${lang}: "Pair 1 of ${ROUND}" and ${ROUND} tiles`, /\b1\b.*\b10\b/.test(q.step) && q.tiles === ROUND, `${q.step} ${q.tiles}`);
     ok(`${lang}: two cards with a picture and a title, enabled`, q.cards.length === 2 && q.cards.every((c) => c.img && c.alt === '' && c.text.trim().length > 3 && !c.disabled));
     // A title may hold a number of its own ("A bridge that serves 1900 years"): what must not be on a card is anything but the title, so no date.
-    ok(`${lang}: a card is its title and nothing more (no year, no date)`, q.cards.every((c) => list.some((s) => s.title === c.text.trim())), q.cards.map((c) => c.text).join(' | '));
+    // A card is its title and the line under it (the hook, or order_hint) when the story has one; a hook that gives the date away is not in the list at all.
+    const lines = q.cards.map((c) => c.text.trim().split('\n').map((x) => x.trim()).filter(Boolean));
+    ok(`${lang}: a card is its title and the line under it, nothing more (no year, no date)`, lines.every(([t, h, ...rest]) => rest.length === 0 && list.some((s) => s.title === t && (s.hint ?? undefined) === h)), q.cards.map((c) => c.text).join(' | '));
+    ok(`${lang}: no line under a title gives the date away (a year, a century, a Roman numeral, an era), unless it is the order_hint of the story`, list.every((s) => !s.hint || !hookGivesDate(s.hint) || published.some((e) => e.id === s.id && e.order_hint?.[lang] === s.hint)), list.filter((s) => s.hint && hookGivesDate(s.hint)).map((s) => s.id).join());
+    ok(`${lang}: the line is smaller and muted, two lines at most (the hook is not cut by the size)`, await page.evaluate(() => { const h = document.querySelector('.order__hint'); if (!h) return true; const t = document.querySelector('.order__title'); const sh = getComputedStyle(h); return parseFloat(sh.fontSize) < parseFloat(getComputedStyle(t).fontSize) && sh.color !== getComputedStyle(t).color && /2/.test(sh.webkitLineClamp || sh.lineClamp) && h.getBoundingClientRect().height <= 2 * parseFloat(sh.lineHeight) + parseFloat(sh.paddingBottom) + 1; }));
     const names = epochs.flatMap((e) => Object.values(e.name ?? {}).filter((n) => typeof n === 'string'));
     ok(`${lang}: no name of an epoch on a card`, q.cards.every((c) => names.every((n) => !c.text.includes(n))));
     ok(`${lang}: no epoch mark on a card or in the pair (no data-epoch, no colour of an epoch)`, (await page.$$eval('[data-pair] [data-epoch], [data-pair] [class*="epoch"], [data-pair] [style*="epoch"]', (l) => l.length)) === 0);
@@ -297,6 +303,41 @@ if (want('nav')) {
   await home.goto(`${base}/pt/`, { waitUntil: 'networkidle0' });
   ok('home: nothing about the new game on the home page', (await home.$$eval(`a[href="/pt/${SEG.pt}/"]:not(.site-footer a)`, (l) => l.length)) === 0);
   await home.close();
+}
+
+if (want('scroll')) {
+  // After "Next" and "Another round": the focus on the first card and the scroll to the line "Pair N of 10" (smooth; at once under reduced motion), so both cards of the pair are in view above the tab bar (390 x 844).
+  for (const reduced of [false, true]) {
+    for (const lang of LANGS) {
+      const page = await browser.newPage();
+      await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
+      if (reduced) await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
+      await page.goto(pageUrl(lang), { waitUntil: 'networkidle0' });
+      await page.waitForSelector('[data-pair] button');
+      const state = () => page.evaluate(() => ({ y: Math.round(scrollY), step: Math.round(document.querySelector('[data-step]').getBoundingClientRect().top), cards: [...document.querySelectorAll('[data-pair] .order__card')].map((c) => Math.round(c.getBoundingClientRect().bottom)), tab: Math.round(document.querySelector('.tabbar').getBoundingClientRect().top), focus: document.activeElement?.matches('[data-pair] [data-pick="0"]') }));
+      for (const [label, action] of [['Next', 'next'], ['Another round', 'again']]) {
+        if (action === 'again') {
+          for (let i = 1; i < ROUND; i += 1) { await press(page, 0); await next(page); } // pairs 2 to 10: the first was answered above
+          await page.evaluate(() => document.querySelector('[data-again]').scrollIntoView());
+          await page.click('[data-again]');
+        } else {
+          await press(page, 0);
+          await page.evaluate(() => document.querySelector('[data-next]').scrollIntoView());
+          await page.click('[data-next]');
+        }
+        await wait(reduced ? 80 : 40);
+        const early = await state();
+        await wait(1300);
+        const late = await state();
+        const tag = `${lang} ${reduced ? 'reduced motion' : 'motion'}, after ${label}`;
+        ok(`${tag}: the line "Pair N" is at the top of the screen`, late.step >= 0 && late.step <= 40, JSON.stringify(late));
+        ok(`${tag}: both cards of the pair are above the tab bar`, late.cards.length === 2 && late.cards.every((b) => b <= late.tab), JSON.stringify(late));
+        ok(`${tag}: the focus is on the first card`, late.focus);
+        if (reduced) ok(`${tag}: the scroll is at once`, early.y === late.y, `${early.y} then ${late.y}`);
+      }
+      await page.close();
+    }
+  }
 }
 
 if (want('layout')) {

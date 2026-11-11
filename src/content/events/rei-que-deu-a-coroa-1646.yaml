@@ -46,6 +46,10 @@ hook:
   pt: Por tradição, nenhum rei português pôs a coroa desde 1646.
   en: By tradition, no Portuguese king has worn the crown since 1646.
   ru: С 1646 года короли Португалии, как считается, больше не надевали корону.
+order_hint:
+  pt: "O rei entregou a coroa a Nossa Senhora e, por tradição, nenhum rei voltou a usá-la."
+  en: "The king gave his crown to the Virgin Mary, and by tradition no king wore it again."
+  ru: "Король отдал корону Деве Марии, и короли, как считается, больше её не надевали."
 story:
   pt: >-
     Em 1640, o duque de Bragança tornou-se o rei D. João IV, mas a guerra com Espanha durou ainda

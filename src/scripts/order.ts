@@ -61,6 +61,13 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && outcomeEl && be
     title.className = 'order__title';
     title.textContent = story.title;
     button.append(title);
+    // The hook of the story (or its order_hint) when it does not give the date away; the list has no `hint` for the others.
+    if (story.hint) {
+      const hint = document.createElement('span');
+      hint.className = 'order__hint';
+      hint.textContent = story.hint;
+      button.append(hint);
+    }
     wrap.append(button);
     return wrap;
   };
@@ -73,9 +80,10 @@ if (root && game && stepEl && squaresEl && pairEl && answerEl && outcomeEl && be
     answerEl.hidden = true;
     pairEl.replaceChildren(cell(pair.a, 0), cell(pair.b, 1));
     pairEl.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((b) => b.addEventListener('click', () => respond(pair, Number(b.dataset.pick), b)));
+    // After "Next" and "Another round": the focus on the first card, and a smooth scroll to the line "Pair N of 10" (at once under reduced motion), so the pair is in view whole.
     if (focus) {
-      pairEl.focus({ preventScroll: true });
-      stepEl.scrollIntoView({ block: 'start' });
+      pairEl.querySelector<HTMLButtonElement>('[data-pick]')?.focus({ preventScroll: true });
+      stepEl.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
   };
 
