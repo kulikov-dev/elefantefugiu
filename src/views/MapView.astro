@@ -14,6 +14,7 @@ import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { ageInfoOf, countByMode, zeroModes } from '../lib/family';
 import { loadSite } from '../lib/site-data';
+import { placeChips, ttInfoOf } from '../lib/timetravel';
 import { pageNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 
@@ -29,6 +30,13 @@ const inEpochs = new Set(epochs.map((e) => e.id));
 const events = site.events.filter((e) => inEpochs.has(e.epoch));
 const cards = toMapCards(events, lang, (e) => storyPath(lang, e.slug[lang]));
 const groups = groupByEpoch(cards, epochs);
+
+// "Through the centuries": what the player needs of each story, the epochs in order and the places with enough stories for a chip.
+const tt = {
+  info: Object.fromEntries(events.map((e) => [e.id, ttInfoOf(e, lang)])),
+  epochs: Object.fromEntries(epochs.map((e) => [e.id, { name: e.name[lang], order: e.order }])),
+  chips: placeChips(events, lang),
+};
 
 const threads = Object.fromEntries(site.threads.map((th) => [th.id, { name: th.name[lang], color: th.color }]));
 const known = { threads: site.visibleThreads.map((th) => th.id), epochs: epochs.map((e) => e.id) };
@@ -46,6 +54,10 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')),
     <div class="map-filters" data-map-js hidden>
       <!-- "Near me": a button of its own at the top of the map (the position is asked for by its press only; src/scripts/map-island.ts). -->
       <p class="map-filters__near">
+        <button type="button" class="button map-tt" data-tt-start aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>
+          {t(lang, 'map.tt_button')}
+        </button>
         <button type="button" class="button map-near" data-locate aria-pressed="false">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           {t(lang, 'map.locate')}
@@ -72,8 +84,12 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')),
       </div>
     </div>
 
+    <!-- The scale of "Through the centuries": the epochs in their colours, a tick for each story, the runner (src/scripts/timetravel.ts fills it). -->
+    <div class="tt-scale" data-tt-scale role="img" aria-label={t(lang, 'map.tt_scale_label')} hidden></div>
+
     <MapBlock
       lang={lang}
+      tt={tt}
       cards={cards}
       threads={threads}
       known={known}

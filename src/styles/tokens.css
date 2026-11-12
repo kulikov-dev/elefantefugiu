@@ -234,6 +234,21 @@
   /* A marker the reader can press is at least this big (WCAG 2.2 target size, 24 px); the drawn shape may be smaller. */
   --map-target-min: 1.5rem;
   --epoch-map-width: clamp(20rem, 38%, 30rem);
+  /* "Through the centuries": the card over the map, the scale above it, the marks of the markers. */
+  --tt-card-width: 26.25rem; /* the card on a wide screen (420 px); on a phone it spans the map */
+  --tt-card-max-height: 45%; /* of the map, on a phone */
+  --tt-stripe: 0.375rem; /* the strip of the epoch colour at the edge of the card */
+  --tt-progress: 3px; /* the thin strip of the time left for the story */
+  --tt-fade: 200ms; /* the change of the story */
+  --tt-pulse: 1200ms; /* the one soft pulse of the current point */
+  --tt-dim: 0.38; /* the points not shown yet */
+  --tt-current-scale: 1.8;
+  --tt-scale-height: 2.5rem;
+  --tt-seg-height: 0.375rem;
+  --tt-tick-height: 1rem;
+  --tt-run-size: 1.25rem;
+  --tt-run-border: 3px;
+  --tt-year-size: clamp(2rem, 1.5rem + 2.2vw, 2.5rem);
   --epoch-panno-width: 23rem; /* the personal panel of the epoch, beside the heading text on a wide screen */
 
   /* Interactives (stage 7a): group colours (the `tone` key of the data), outline width, widest drawing, reveal */

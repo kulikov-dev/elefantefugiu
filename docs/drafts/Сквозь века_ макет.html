@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сквозь века: макет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Макет, не код сайта: значения взяты из src/styles/tokens.css. Сайт возьмёт их из токенов. */
+.light{
+  --bg:#f6f1e7; --surface:#fbf8f1; --text:#1f1b16; --muted:#5b5348; --border:#ddd3c2; --border-strong:#80766a;
+  --accent:#9a3f22; --on-accent:#fff; --overlay:rgb(251 248 241 / .96); --tint:#efe7d6;
+  --land:#ece4d3; --sea:#cfdde0; --road:#fbf8f1; --park:#dfe5cd;
+  --e1:#7a2e1c; --e2:#0f5c73; --e3:#6e1f3a; --e4:#a9482a; --e5:#2e4d66;
+}
+.dark{
+  --bg:#14110e; --surface:#1d1914; --text:#f1e9da; --muted:#b9ad9a; --border:#3a332b; --border-strong:#8f8474;
+  --accent:#e58a68; --on-accent:#14110e; --overlay:rgb(29 25 20 / .96); --tint:#221d17;
+  --land:#262019; --sea:#182126; --road:#33291f; --park:#222a1d;
+  --e1:#e8957a; --e2:#5fb3c9; --e3:#e59ab4; --e4:#e58a68; --e5:#9dbad3;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:#888;font-family:"Source Serif 4",Georgia,serif}
+.row{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin-bottom:32px}
+.cap{font:600 14px "Oswald",sans-serif;letter-spacing:.04em;color:#fff;margin:0 0 6px}
+.frame{position:relative;overflow:hidden;background:var(--bg);color:var(--text);font-size:16px;line-height:1.4}
+.phone{width:390px}
+.wide{width:1280px}
+h1,.year,.title{font-family:"Playfair Display",Georgia,serif}
+
+/* страница над картой */
+.head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);font:600 15px "Oswald",sans-serif;letter-spacing:.03em}
+.wide .head{padding:12px 32px}
+.bar{display:flex;gap:8px;padding:12px 16px 8px;flex-wrap:wrap}
+.wide .bar{padding:12px 32px 8px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface);color:var(--text);font:500 15px "Oswald",sans-serif;letter-spacing:.02em}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.btn.icon{width:44px;padding:0;justify-content:center}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:44px;display:inline-flex;align-items:center;padding:0 14px;border:1px solid var(--border-strong);border-radius:999px;background:var(--surface);font:500 15px "Oswald",sans-serif}
+.chip small{color:var(--muted);margin-left:6px;font:400 13px "Source Serif 4",serif}
+
+/* шкала над картой */
+.scale{position:relative;margin:0 16px;height:40px}
+.wide .scale{margin:0 32px}
+.scale .segs{position:absolute;left:0;right:0;top:20px;height:6px;display:flex;gap:2px}
+.scale .seg{border-radius:3px;background:var(--c)}
+.scale .ticks{position:absolute;left:0;right:0;top:15px;height:16px}
+.scale .tick{position:absolute;top:0;width:2px;height:16px;margin-left:-1px;background:var(--text);opacity:.45;border-radius:1px}
+.scale .tick.read{opacity:1}
+.scale .run{position:absolute;top:13px;width:20px;height:20px;margin-left:-10px;border-radius:50%;background:var(--surface);border:3px solid var(--c);box-shadow:0 1px 3px rgb(0 0 0 / .35)}
+.scale .lab{position:absolute;top:-1px;font:500 12px "Oswald",sans-serif;color:var(--muted);letter-spacing:.03em;white-space:nowrap}
+.scale .lab.now{color:var(--text);transform:translateX(-50%)}
+
+/* карта */
+.map{position:relative;overflow:hidden;background:var(--land);margin-top:6px}
+.phone .map{height:600px}
+.wide .map{height:560px}
+.map svg.bg{position:absolute;inset:0;width:100%;height:100%}
+.zoom{position:absolute;left:12px;top:12px;display:flex;flex-direction:column;border:1px solid var(--border-strong);border-radius:6px;background:var(--surface);overflow:hidden}
+.zoom span{width:36px;height:36px;display:grid;place-items:center;font:600 20px sans-serif}
+.zoom span+span{border-top:1px solid var(--border)}
+.attr{position:absolute;right:0;top:0;font:11px sans-serif;background:var(--overlay);padding:2px 6px;color:var(--muted)}
+.dot{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid var(--accent);background:var(--surface);box-shadow:0 1px 3px rgb(0 0 0 / .3)}
+.dot.dim{opacity:.38;width:10px;height:10px;margin:-5px 0 0 -5px;box-shadow:none}
+.dot.read{background:var(--accent)}
+.dot.cur{width:28px;height:28px;margin:-14px 0 0 -14px;border:3px solid var(--c);background:var(--c);box-shadow:0 0 0 4px var(--surface),0 2px 6px rgb(0 0 0 / .4)}
+.dot.cur::after{content:"";position:absolute;inset:-10px;border-radius:50%;border:2px solid var(--c);opacity:.5}
+.cap-dot{position:absolute;font:600 12px "Oswald",sans-serif;color:var(--text);background:var(--overlay);padding:1px 6px;border-radius:4px;margin:12px 0 0 -4px;white-space:nowrap}
+
+/* карточка режима */
+.tcard{position:absolute;background:var(--overlay);border:1px solid var(--border);box-shadow:0 -2px 12px rgb(0 0 0 / .18);padding:14px 16px 12px 20px}
+.tcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.tcard .prog{position:absolute;left:6px;right:0;top:0;height:3px;background:var(--border)}
+.tcard .prog i{display:block;height:100%;width:var(--p);background:var(--c)}
+.phone .tcard{left:0;right:0;bottom:0;height:240px;border-width:1px 0 0;border-radius:12px 12px 0 0}
+.wide .tcard{left:16px;bottom:16px;width:420px;border-radius:12px}
+.tcard .top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.year{font-size:40px;line-height:1;font-weight:700;color:var(--c)}
+.era{font:500 12px "Oswald",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:right}
+.title{font-size:20px;line-height:1.2;font-weight:700;margin:8px 0 4px}
+.hook{margin:0;font-size:16px;line-height:1.35}
+.acts{display:flex;align-items:center;gap:6px;margin-top:10px}
+.acts .read-btn{flex:1}
+.mw{margin:8px 0 0;font-size:13px;line-height:1.35;color:var(--muted)}
+.mw b{color:var(--text);font-weight:600}
+.count{font:500 13px "Oswald",sans-serif;color:var(--muted);margin-right:2px}
+
+/* финал и подсказка */
+.big{font:700 22px/1.25 "Playfair Display",serif;margin:6px 0 4px}
+.sub{margin:0 0 12px;color:var(--muted);font-size:15px}
+.note{margin:4px 0 0;font-size:12px;color:#ddd;max-width:1280px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></symbol>
+    <symbol id="pause" viewBox="0 0 24 24"><path d="M7 4.5h3.5v15H7zM13.5 4.5H17v15h-3.5z" fill="currentColor"/></symbol>
+    <symbol id="prev" viewBox="0 0 24 24"><path d="M6 5v14M19 5v14l-10-7z" fill="currentColor" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="next" viewBox="0 0 24 24"><path d="M18 5v14M5 5v14l10-7z" fill="currentColor" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="near" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="time" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<p class="cap">390 px, светлая тема. 1) старт</p>
+<div class="row" id="phones"></div>
+
+<p class="cap">1280 px, тёмная тема</p>
+<div class="row" id="wides"></div>
+
+<p class="note">Тексты и точки в макете: Лиссабон (17 историй из данных на 12.11.2026). Карта нарисована условно.</p>
+
+<script>
+/* 17 опубликованных историй Лиссабона; порядок — ключ года, как в ленте эпохи. */
+const S=[
+ [1,1,'Галереи, которые откачивают два раза в год','Затопленные римские галереи Лиссабона.',''],
+ [1,1,'Рыбный соус под банком','Под лиссабонским банком римляне варили рыбный соус.',''],
+ [1502,2,'Карта за 12 дукатов','Он приехал торговать лошадьми. Увёз целый мир.','1504 Во Флоренции открывают «Давида» Микеланджело.'],
+ [1515,2,'Носорог и слон','Король стравил носорога со слоном. Слон убежал.','1512 Открывают роспись потолка Сикстинской капеллы работы Микеланджело.'],
+ [1640,3,'Утро 1 декабря','Шестьдесят лет испанских королей закончились за одно утро.','1642 Рембрандт заканчивает «Ночной дозор».'],
+ [1725,3,'Лакей из плитки','Самому вежливому лакею Лиссабона триста лет. Он сделан из плитки.',''],
+ [1742,3,'Часовня, которую привезли из Рима по частям','Король заказал часовню в Риме и привёз её по частям.',''],
+ [1748,3,'Как испанцы поили Лиссабон','Столицу Португалии веками поили галисийцы с бочонками на плече.',''],
+ [1755,4,'Лиссабонское землетрясение','В день землетрясения король уже уехал в Белен.',''],
+ [1760,4,'Улицы ремёсел','Золотых дел мастера на одной улице, шорники на другой — по указу.',''],
+ [1782,4,'Дом снега','Стол Пессоа здесь зарезервирован до сих пор.',''],
+ [1807,4,'Двор уплыл в Бразилию','Принц-регент не стал воевать и увёз весь двор за океан.',''],
+ [1837,5,'Пирожные монахов','Монахов отправили по домам, и пирожные пошли в продажу.',''],
+ [1846,5,'Певица, о которой сняли первый звуковой фильм','Документов о ней почти нет.',''],
+ [1890,5,'Гимн, который сочинили против Англии','Монархия запрещала песню, республика сделала гимном.',''],
+ [1902,5,'Лифт, который построил не Эйфель','Спроектировал его совсем другой инженер.',''],
+ [1910,5,'Пирог, который пережил короля','Короля свергли, а bolo-rei не переименовали.',''],
+];
+const ERA=['','Лузитания и Рим','Авис и открытия','Уния, Реставрация, бразильское золото','Помбал и землетрясение','Монархия и республика'];
+const ERAS=[1,2,3,4,5];
+const N=S.length;
+/* положения точек (доли карты), условно; на телефоне держим выше карточки */
+const XY=[[.50,.30],[.52,.33],[.20,.42],[.17,.46],[.47,.36],[.62,.20],[.44,.31],[.58,.38],[.49,.35],[.45,.40],[.55,.34],[.14,.40],[.15,.44],[.60,.28],[.46,.33],[.48,.38],[.51,.37]];
+const READ=new Set([0,2,5,8,12]);
+
+const I=id=>`<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#${id}"/></svg>`;
+
+function head(){return `<div class="head"><span>O Elefante Fugiu</span><span>Карта</span></div>`}
+function bar(on){
+  return `<div class="bar"><button class="btn ${on?'':'primary'}" aria-pressed="${on}">${I('play')} Сквозь века</button><button class="btn">${I('near')} Что рядом со мной</button></div>`;
+}
+function scale(cur,p){
+  const e=S[Math.min(cur,N-1)][1];
+  const segs=ERAS.map(k=>`<div class="seg" style="flex:${S.filter(s=>s[1]===k).length};--c:var(--e${k})"></div>`).join('');
+  const x=i=>((i+.5)/N*100);
+  const ticks=S.map((_,i)=>`<div class="tick ${READ.has(i)?'read':''}" style="left:${x(i)}%"></div>`).join('');
+  const lx=x(cur);
+  return `<div class="scale" style="--c:var(--e${e})"><span class="lab" style="left:0">${S[0][0]}</span><span class="lab" style="right:0">${S[N-1][0]}</span>
+  <span class="lab now" style="left:min(max(${lx}%,12%),88%)">${S[cur][0]}</span><div class="segs">${segs}</div><div class="ticks">${ticks}</div><div class="run" style="left:${lx}%"></div></div>`;
+}
+function bg(){
+  /* условный Тежу, берега и улицы */
+  return `<svg class="bg" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M0 330 C80 300 140 320 210 270 C280 220 330 200 400 120 L400 600 L0 600Z" fill="var(--sea)"/>
+    <path d="M0 330 C80 300 140 320 210 270 C280 220 330 200 400 120" fill="none" stroke="var(--border-strong)" stroke-opacity=".35" stroke-width="1.5"/>
+    <path d="M30 40 L170 140 L260 90 L380 20" fill="none" stroke="var(--road)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M60 230 L190 190 L330 175" fill="none" stroke="var(--road)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M120 110 L160 260" fill="none" stroke="var(--road)" stroke-width="4" stroke-linecap="round"/>
+    <rect x="250" y="110" width="70" height="40" rx="12" fill="var(--park)"/>
+  </svg>`;
+}
+function dots(cur,w,h,hmax,done){
+  return S.map((s,i)=>{
+    let cls='dot';
+    if(done) cls+=READ.has(i)?' read':'';
+    else if(i===cur) cls+=' cur';
+    else if(i>cur) cls+=' dim';
+    else if(READ.has(i)) cls+=' read';
+    const left=XY[i][0]*w, top=XY[i][1]*hmax;
+    return `<i class="${cls}" style="left:${left}px;top:${top}px;--c:var(--e${s[1]})"></i>`;
+  }).join('');
+}
+function card(cur,kind){
+  const s=S[cur], p=((cur+1)/N*100).toFixed(1)+'%';
+  const mw=s[4]?`<p class="mw"><b>А в это время:</b> ${s[4].replace(/^(\d+) /,'<b>$1</b> ')}</p>`:'';
+  return `<div class="tcard" style="--c:var(--e${s[1]});--p:${p}" role="region" aria-live="polite">
+    <div class="prog"><i></i></div>
+    <div class="top"><span class="year">${s[0]}</span><span class="era">${ERA[s[1]]}</span></div>
+    <h2 class="title" style="margin-top:8px">${s[2]}</h2><p class="hook">${s[3]}</p>
+    <div class="acts"><a class="btn primary read-btn">Читать →</a><span class="count">${cur+1} / ${N}</span>
+      <button class="btn icon" aria-label="Назад">${I('prev')}</button><button class="btn icon" aria-label="Пауза">${I('pause')}</button><button class="btn icon" aria-label="Дальше">${I('next')}</button><button class="btn icon" aria-label="Выйти">${I('close')}</button></div>
+    ${mw}</div>`;
+}
+function final(unread){
+  return `<div class="tcard" style="--c:var(--accent);--p:100%"><div class="prog"><i></i></div>
+    <p class="big">17 историй этого места, от 1 до 1910</p>
+    <p class="sub">Вы прошли весь путь: от римских галерей до падения монархии.</p>
+    <div class="acts" style="margin-top:0;flex-wrap:wrap"><button class="btn">↺ Сначала</button><button class="btn primary">Непрочитанные: ${unread} →</button><button class="btn icon" aria-label="Выйти" style="margin-left:auto">${I('close')}</button></div></div>`;
+}
+function hint(){
+  return `<div class="tcard" style="--c:var(--accent);--p:0%"><div class="prog"><i></i></div>
+    <p class="big" style="font-size:19px">Здесь пока мало историй</p>
+    <p class="sub" style="margin-bottom:10px">Отдалите карту или выберите место.</p>
+    <div class="chips"><span class="chip">Лиссабон<small>17</small></span><span class="chip">Порту<small>6</small></span><span class="chip">Вся Португалия</span><span class="chip icon" style="width:44px;justify-content:center">${I('close')}</span></div></div>`;
+}
+function frame(theme,kind,html,label){
+  return `<div><p class="cap">${label}</p><div class="frame ${kind} ${theme}">${head()}${html}</div></div>`;
+}
+function build(theme,kind){
+  const phone=kind==='phone';
+  const w=phone?390:1280, mapH=phone?600:560, hmax=phone?600*.60:mapH*.62;
+  const spread=phone?1:1;
+  const mapOf=(cur,inner,done)=>`<div class="map">${bg()}<div class="zoom"><span>+</span><span>−</span></div><div class="attr">© OpenStreetMap © CARTO</div>${dots(cur,w,mapH,hmax,done)}${inner}</div>`;
+  const out=[];
+  out.push(frame(theme,kind,bar(true)+scale(0,0)+mapOf(0,card(0)),'Старт: первая история, остальные точки тусклые'));
+  out.push(frame(theme,kind,bar(true)+scale(3,0)+mapOf(3,card(3)),'История посередине: год, «Читать», «А в это время»'));
+  out.push(frame(theme,kind,bar(true)+scale(16,0)+mapOf(16,final(12),true),'Финал'));
+  if(phone) out.push(frame(theme,kind,bar(true)+`<div class="scale" style="height:40px;opacity:.4"></div>`+`<div class="map">${bg()}<div class="zoom"><span>+</span><span>−</span></div>${S.slice(0,2).map((s,i)=>`<i class="dot" style="left:${(.5+i*.04)*w}px;top:${(.3+i*.03)*hmax}px"></i>`).join('')}${hint()}</div>`,'Меньше 3 историй в окне: подсказка и фишки мест'));
+  return out.join('');
+}
+document.getElementById('phones').innerHTML=build('light','phone');
+document.getElementById('wides').innerHTML=build('dark','wide').split('</div></div><div><p class="cap">').map((x,i,a)=>x).join('</div></div><div><p class="cap">');
+</script>
+</body>
+</html>
