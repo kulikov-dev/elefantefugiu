@@ -17,6 +17,7 @@
   "theme-variant": 8,
   "azulejo-variant": 20,
   "map-tools": 33,
+  "timetravel": 90,
   "listings": 14,
   "map-limit": 116,
   "map-limit-12": 116,
@@ -95,7 +96,8 @@
    "festas",
    "myths",
    "order",
-   "games"
+   "games",
+   "timetravel"
   ]
  ]
 }

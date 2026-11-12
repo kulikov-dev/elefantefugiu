@@ -10,7 +10,9 @@ import { distanceParts } from '../lib/distance';
 import { distanceKm } from '../lib/events';
 import { isVisibleInMode } from '../lib/family';
 import { isDarkTheme, tileUrlFor } from '../lib/tiles';
-import { boundsAround, declutterMarkers, inBounds, selectMarkers, type Bounds, type MapCard } from '../lib/markers';
+import { boundsAround, declutterMarkers, inBounds, selectMarkers, type Bounds, type MapCard, type MarkerResult } from '../lib/markers';
+import { TT_PARAM, TT_SESSION_KEY, TT_WHOLE, spreadPoints } from '../lib/timetravel';
+import type { Timetravel, TtConfig, TtMapCard } from './timetravel';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
 
 interface CardInfo extends MapCard {
@@ -39,6 +41,8 @@ interface Config {
   strings: Record<string, string>;
   /** BCP 47 tag for plural rules (Russian counts with four forms). */
   pluralLocale: string;
+  /** "Through the centuries" (map page only). */
+  tt?: TtConfig;
 }
 
 /** Behaviour of the map (not styling; sizes and colours live in tokens.css and map.css). */
@@ -62,6 +66,8 @@ const BEHAVIOUR = {
   worldMinZoom: 2,
   worldMaxZoom: 5,
   messageMs: 9000,
+  /** "Through the centuries": the closest zoom of the map when it shows a place. */
+  ttMaxZoom: 15,
 };
 
 /** Icons of the map tools (a 24 px grid, stroke drawn with currentColor). */
@@ -108,6 +114,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const pageMode = cfg.mode === 'page';
   /** The link "What else is near you" of a story page comes with `?perto=1`: "Near me" starts on arrival (read once, the address is cleaned by the first writeUrl). */
   const wantsNear = pageMode && new URLSearchParams(location.search).get(NEAR_PARAM) === '1';
+  /** `?era=lisboa` (a place of the chips, or `portugal`) starts "Through the centuries" on arrival; such an address is not for the search engines. */
+  const eraParam = pageMode ? new URLSearchParams(location.search).get(TT_PARAM) : null;
+  const wantsEra = cfg.tt && eraParam && (eraParam === TT_WHOLE || cfg.tt.chips.some((c) => c.key === eraParam)) ? eraParam : null;
   const byId = new Map(cfg.cards.map((c) => [c.id, c]));
   // Family mode: cards the mode hides take no part in anything below (markers, the marker limit, "In this area", filters).
   // The list is recomputed when the mode changes.
@@ -187,6 +196,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   // ---- markers -----------------------------------------------------------------------------------------------
 
   const layers = new Map<string, L.Marker>();
+  /** "Through the centuries": the player (loaded at the first press of its button) and whether markers still carry its marks. */
+  let tt: Timetravel | null = null;
+  let ttDrawn = false;
 
   const makeIcon = (cls: string, text = '') =>
     L.divIcon({
@@ -217,19 +229,32 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     const size = map.getSize();
     if (size.x === 0 || size.y === 0) return;
     const c = map.getCenter();
-    const chosen = selectMarkers({
-      cards,
-      bounds: fromLatLngBounds(map.getBounds()),
-      center: { lat: c.lat, lon: c.lng },
-      activeThread: state.fio,
-      activeEpoch: state.epoca,
-      more,
-      pinned: state.id,
-    });
-    // Markers that would sit on top of each other join into a cluster, so none hides another or takes its clicks (target size,
-    // WCAG 2.2). At the closest zoom nothing separates any more, so the markers stay as they are.
-    const result =
-      map.getZoom() >= BEHAVIOUR.maxZoom ? chosen : declutterMarkers(chosen, (p) => map.latLngToContainerPoint([p.lat, p.lon]), { keep: state.id });
+    const ttOn = tt?.active === true;
+    let result: MarkerResult;
+    if (ttOn) {
+      // "Through the centuries": every story of the window is a marker of its own, no clusters (the ones on one spot are spread below).
+      const box = fromLatLngBounds(map.getBounds());
+      const shown = cards.filter((card) => inBounds(card, box) && (state.fio === null || card.threads.includes(state.fio)));
+      result = {
+        markers: shown.map((card) => ({ id: card.id, lat: card.lat, lon: card.lon, kind: card.importance === 3 ? 'frame' : 'story' })),
+        clusters: [],
+        inArea: shown.map((card) => card.id),
+        canShowMore: false,
+      };
+    } else {
+      const chosen = selectMarkers({
+        cards,
+        bounds: fromLatLngBounds(map.getBounds()),
+        center: { lat: c.lat, lon: c.lng },
+        activeThread: state.fio,
+        activeEpoch: state.epoca,
+        more,
+        pinned: state.id,
+      });
+      // Markers that would sit on top of each other join into a cluster, so none hides another or takes its clicks (target size,
+      // WCAG 2.2). At the closest zoom nothing separates any more, so the markers stay as they are.
+      result = map.getZoom() >= BEHAVIOUR.maxZoom ? chosen : declutterMarkers(chosen, (p) => map.latLngToContainerPoint([p.lat, p.lon]), { keep: state.id });
+    }
 
     const wanted = new Set<string>();
     for (const m of result.markers) {
@@ -266,12 +291,32 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     // A removed marker would drop keyboard focus to the page; keep it on the map instead.
     if (focusedKey && !layers.has(focusedKey)) canvas.focus();
 
+    // The show marks the markers (dim, seen, read, the current one) and lays the ones on one spot on a ring; leaving it takes the marks off.
+    if (ttOn) {
+      const spots = new Map(result.markers.map((m) => [m.id, map.latLngToContainerPoint([m.lat, m.lon])]));
+      const shift = spreadPoints([...spots].map(([id, p]) => ({ id, x: p.x, y: p.y })), tt!.spreadPx);
+      for (const m of result.markers) {
+        const o = shift.get(m.id);
+        const p = spots.get(m.id)!;
+        layers.get(m.id)?.setLatLng(o ? map.containerPointToLatLng([p.x + o.dx, p.y + o.dy]) : [m.lat, m.lon]);
+      }
+      tt!.apply(layers);
+      ttDrawn = true;
+    } else if (ttDrawn) {
+      ttDrawn = false;
+      for (const [key, marker] of layers) {
+        const card = byId.get(key);
+        if (card) marker.setLatLng([card.lat, card.lon]);
+        marker.getElement()?.classList.remove('mk--tt-dim', 'mk--tt-read', 'mk--tt-cur');
+      }
+    }
+
     drawPlaces();
     updateOverseas();
     // The list and its announcement belong to the map page; on an epoch page the feed is the list.
     if (pageMode) {
       renderList(result.inArea);
-      announce(result.inArea.length);
+      if (!ttOn) announce(result.inArea.length);
     }
     moreButton.hidden = !result.canShowMore;
     if (!result.canShowMore && document.activeElement === moreButton) (pageMode ? listTitle : canvas).focus();
@@ -365,6 +410,11 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   };
 
   function select(id: string | null, fromUser: boolean) {
+    // While "Through the centuries" runs, a press on a point shows the card of its story (and the show waits); there is no preview.
+    if (id && tt?.active) {
+      tt.pick(id);
+      return;
+    }
     state = { ...state, id };
     if (id) openPreview(byId.get(id)!, fromUser);
     else preview.hidden = true;
@@ -603,7 +653,10 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   function writeUrl(extra: Record<string, unknown> = {}) {
     if (!pageMode) return;
     try {
-      history.replaceState({ ...(history.state ?? {}), ...extra }, '', location.pathname + serializeMapState(state) + location.hash);
+      const era = tt?.era();
+      const query = serializeMapState(state);
+      const search = era ? `${query ? `${query}&` : '?'}${TT_PARAM}=${era}` : query;
+      history.replaceState({ ...(history.state ?? {}), ...extra }, '', location.pathname + search + location.hash);
     } catch {
       // Some contexts forbid it; the map still works.
     }
@@ -628,6 +681,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   };
 
   const applyFilter = (next: Partial<Pick<MapState, 'fio' | 'epoca'>>) => {
+    // An epoch chosen while the show runs ends it; a thread only narrows its list (the window stays).
+    if (tt?.active && next.epoca) tt.exit(false);
     state = { ...state, ...next };
     if (state.id && !passesFilters(byId.get(state.id)!, state)) {
       state.id = null;
@@ -637,8 +692,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     lastListKey = '';
     syncChips();
     writeUrl();
-    fitToFilter();
+    if (!tt?.active) fitToFilter();
     refreshMarkers();
+    tt?.recompute();
   };
 
   const fioChips = [...document.querySelectorAll<HTMLButtonElement>('[data-map-filters] button[data-fio], .map-filters button[data-fio]')];
@@ -681,11 +737,56 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       writeUrl();
       root.dispatchEvent(new CustomEvent('map:select', { bubbles: true, detail: { id: null } }));
     }
+    tt?.recompute();
     refreshMarkers();
   });
 
   // Phone: tell the CSS how tall the sheet is, so the attribution stays visible above it, closed or open.
   new ResizeObserver(() => root.style.setProperty('--map-sheet-height', `${sheet.offsetHeight}px`)).observe(sheet);
+
+  // ---- "Through the centuries" ----------------------------------------------------------------------------------
+
+  const ttButton = pageMode && cfg.tt ? document.querySelector<HTMLButtonElement>('[data-tt-start]') : null;
+  const hasSession = () => {
+    try {
+      return sessionStorage.getItem(TT_SESSION_KEY) !== null;
+    } catch {
+      return false;
+    }
+  };
+  let ttLoading: Promise<Timetravel> | null = null;
+  /** The player is a chunk of its own: fetched at the first press of the button (or at once for ?era= and for a return from a story). */
+  const ensureTt = (): Promise<Timetravel> =>
+    (ttLoading ??= import('./timetravel').then(({ createTimetravel }) => {
+      tt = createTimetravel(cfg.tt!, {
+        root,
+        stage: $('.map__stage'),
+        map,
+        locale: cfg.pluralLocale,
+        animate,
+        cards: () => cards as unknown as TtMapCard[],
+        fio: () => state.fio,
+        bounds: () => fromLatLngBounds(map.getBounds()),
+        fit: (box, bottom, animated, maxZoom) => {
+          if (world) setWorld(false);
+          const pad = BEHAVIOUR.fitPadding;
+          map.fitBounds(toLatLngBounds(box), { paddingTopLeft: [pad, pad], paddingBottomRight: [pad, pad + bottom], maxZoom: maxZoom ?? BEHAVIOUR.ttMaxZoom, animate: animated });
+        },
+        clearEpoch: () => {
+          state = { ...state, epoca: null, id: null };
+          preview.hidden = true;
+          syncChips();
+        },
+        refresh: () => refreshMarkers(),
+        address: () => writeUrl(),
+        startButton: ttButton!,
+      });
+      return tt;
+    }));
+  ttButton?.addEventListener('click', () => {
+    if (tt?.active) tt.exit(true);
+    else void ensureTt().then((player) => player.start());
+  });
 
   // ---- start ----------------------------------------------------------------------------------------------------
 
@@ -723,6 +824,13 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       writeUrl();
       locate(locateButton);
     }
+    if (wantsEra) {
+      const robots = document.createElement('meta');
+      robots.name = 'robots';
+      robots.content = 'noindex';
+      document.head.append(robots);
+      void ensureTt().then((player) => player.begin(wantsEra));
+    } else if (cfg.tt && hasSession()) void ensureTt().then((player) => player.resume());
   };
 
   map.on('moveend', () => {

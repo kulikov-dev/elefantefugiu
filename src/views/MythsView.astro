@@ -42,10 +42,10 @@ const strings = Object.fromEntries(keys.map((k) => [k, t(lang, `myths.${k}`)]));
 strings.failed = t(lang, 'card.share_failed');
 const one = first ? cards.find((c) => c.id === first) : undefined;
 const og = one ? mythCardPath(one.id, lang) : undefined;
-// The preview of the page of the game and of a shared result: the picture of the game (whole, on fields of paper); the description has the number of the claims, taken from the data.
+// The preview of the page of the game and of a shared result: the picture of the game (whole, on fields of paper).
 const picture = gamePicture('myths');
 const pageImage = picture ? { imageUrl: withBase(picture.og), imageSize: GAME_OG, imageAlt: t(lang, 'games.ai_caption') } : {};
-const pageDescription = plural(lang, 'myths.og_description_page', live.length);
+const pageDescription = t(lang, 'myths.og_description_page');
 // Where "Share" leads: the page of the range of the result, with ?src=share.
 const rankUrls = Object.fromEntries(RANKS.myths.map((r) => [r, `${abs(rankPath(lang, 'myths', r))}?src=share`]));
 const ranked = rank && RANKS.myths.includes(rank) ? rank : undefined;
@@ -61,7 +61,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'myths')
   alternates={one ? altPaths((l) => mythPath(l, one.id)) : ranked ? altPaths((l) => rankPath(l, 'myths', ranked)) : undefined}
   canonicalTo={one ? altPaths((l) => pagePath(l, 'myths')) : undefined}
   preview={ranked
-    ? { title: t(lang, 'myths.rank_og_title').replace('{band}', t(lang, `myths.band_${ranked}`)), description: plural(lang, 'myths.rank_og_description', live.length), ...pageImage }
+    ? { title: t(lang, 'myths.rank_og_title').replace('{band}', t(lang, `myths.band_${ranked}`)), description: t(lang, 'myths.rank_og_description'), ...pageImage }
     : one
     ? {
         title: withStatement(t(lang, 'myths.og_title'), one.statement[lang]),

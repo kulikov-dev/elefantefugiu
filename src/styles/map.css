@@ -896,3 +896,391 @@
   color: var(--color-ink-muted);
   font-size: var(--text-sm);
 }
+
+/* ---- "Through the centuries": the button, the scale above the map, the card over it, the marks of the markers ---- */
+
+.map-filters__near {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.map-tt {
+  gap: var(--space-2);
+}
+
+.map-tt[aria-pressed='true'] {
+  background: var(--color-accent-strong);
+}
+
+/* While the show runs the button "Near me" and the things that belong to the plain map step aside. */
+.map-page[data-tt='on'] .map-near,
+.map[data-tt='on'] .map__preview,
+.map[data-tt='on'] .map__overseas,
+.map[data-tt='on'] .map__actions {
+  display: none;
+}
+
+@media (max-width: 59.99rem) {
+  /* The card takes the place of the sheet; the attribution stays above the card (its height is set by the script). */
+  .map[data-tt='on'] .map__list {
+    display: none;
+  }
+
+  .map[data-tt='on'] .leaflet-bottom {
+    bottom: var(--tt-card-height, 0);
+  }
+}
+
+.tt-scale {
+  position: relative;
+  height: var(--tt-scale-height);
+}
+
+.tt-scale__bar {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: var(--space-2);
+  display: flex;
+  gap: var(--border-medium);
+  height: var(--tt-seg-height);
+}
+
+.tt-scale__seg {
+  border-radius: var(--radius-sm);
+  background: var(--tt-tone);
+}
+
+.tt-scale__ticks {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: calc(var(--space-2) + var(--tt-seg-height) / 2 - var(--tt-tick-height) / 2);
+  height: var(--tt-tick-height);
+}
+
+.tt-scale__tick {
+  position: absolute;
+  inset-block: 0;
+  width: var(--border-medium);
+  margin-inline-start: calc(var(--border-medium) / -2);
+  border-radius: 1px;
+  background: var(--color-ink);
+  opacity: 0.4;
+}
+
+.tt-scale__tick--read {
+  opacity: 1;
+}
+
+.tt-scale__run {
+  position: absolute;
+  inset-block-end: calc(var(--space-2) + var(--tt-seg-height) / 2 - var(--tt-run-size) / 2);
+  width: var(--tt-run-size);
+  height: var(--tt-run-size);
+  margin-inline-start: calc(var(--tt-run-size) / -2);
+  box-sizing: border-box;
+  border: var(--tt-run-border) solid var(--tt-tone);
+  border-radius: 50%;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+.tt-scale__label {
+  position: absolute;
+  inset-block-start: 0;
+  color: var(--color-ink-muted);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  white-space: nowrap;
+}
+
+.tt-scale__label--first {
+  inset-inline-start: 0;
+}
+
+.tt-scale__label--last {
+  inset-inline-end: 0;
+}
+
+.tt-scale__label--now {
+  translate: -50% 0;
+  color: var(--color-ink);
+  font-weight: var(--weight-strong);
+}
+
+.tt-scale__label[hidden] {
+  display: none;
+}
+
+.tt-card {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: var(--z-map-overlay);
+  box-sizing: border-box;
+  max-height: var(--tt-card-max-height);
+  overflow-y: auto;
+  padding: var(--space-3) var(--space-4);
+  border-inline-start: var(--tt-stripe) solid var(--tt-tone, var(--color-accent));
+  border-start-start-radius: var(--radius-md);
+  border-start-end-radius: var(--radius-md);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-raised);
+  touch-action: pan-y;
+}
+
+.tt-card__prog {
+  position: sticky;
+  inset-block-start: calc(var(--space-3) * -1);
+  height: var(--tt-progress);
+  margin: calc(var(--space-3) * -1) calc(var(--space-4) * -1) var(--space-3);
+  background: var(--color-border);
+}
+
+.tt-card__prog i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--tt-tone, var(--color-accent));
+}
+
+.tt-card__prog[hidden] {
+  display: none;
+}
+
+.tt-card--in > :not(.tt-card__prog) {
+  animation: tt-in var(--tt-fade) ease both;
+}
+
+@keyframes tt-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.tt-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.tt-card__year {
+  margin: 0;
+  color: var(--tt-tone, var(--color-accent));
+  font-family: var(--font-heading);
+  font-size: var(--tt-year-size);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tt-card__era {
+  margin: 0;
+  color: var(--color-ink-muted);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: var(--letter-label);
+  text-align: end;
+  text-transform: uppercase;
+}
+
+.tt-card__title {
+  margin: var(--space-1) 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  line-height: 1.2;
+}
+
+.tt-card__hook {
+  margin: 0;
+}
+
+.tt-card__acts {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-start: var(--space-2);
+}
+
+.tt-card__read {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--touch-target);
+  padding-inline: var(--space-3);
+  white-space: nowrap;
+}
+
+.tt-card__count {
+  color: var(--color-ink-muted);
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+
+.tt-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.tt-btn:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+}
+
+.tt-btn:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: default;
+}
+
+.tt-btn[hidden] {
+  display: none;
+}
+
+.tt-card__mw {
+  margin: var(--space-2) 0 0;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.tt-card__mw b {
+  color: var(--color-ink);
+  font-weight: var(--weight-strong);
+}
+
+.tt-card__other {
+  position: relative;
+}
+
+.tt-card__close {
+  position: absolute;
+  inset-block-start: calc(var(--space-1) * -1);
+  inset-inline-end: calc(var(--space-2) * -1);
+}
+
+.tt-card__big {
+  margin: 0 0 var(--space-2);
+  padding-inline-end: var(--touch-target);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.tt-card__span {
+  display: block;
+  color: var(--color-ink-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 400;
+}
+
+.tt-card__sub {
+  margin: 0 0 var(--space-3);
+  color: var(--color-ink-muted);
+}
+
+.tt-card__chips,
+.tt-card__unread {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  list-style: none;
+}
+
+.tt-card__chip-count {
+  color: var(--color-ink-muted);
+  font-size: var(--text-xs);
+  font-weight: 400;
+}
+
+.tt-card__final-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tt-card__unread {
+  flex-direction: column;
+  gap: 0;
+}
+
+.tt-card__unread-link {
+  display: block;
+  padding-block: var(--space-2);
+  border-block-end: 1px solid var(--color-border);
+}
+
+@media (min-width: 60rem) {
+  .tt-card {
+    inset-inline: var(--space-3) auto;
+    inset-block-end: var(--space-3);
+    width: var(--tt-card-width);
+    max-height: calc(100% - var(--space-3) * 2);
+    border-radius: var(--radius-md);
+  }
+}
+
+/* The markers: the points not shown yet are dim, the story on the screen is large and gives one soft pulse, the ones read are filled. */
+.map[data-tt='on'] .mk__shape {
+  transition:
+    scale var(--transition),
+    opacity var(--transition);
+}
+
+.mk--tt-dim .mk__shape {
+  opacity: var(--tt-dim);
+}
+
+.mk--tt-read .mk__shape {
+  background: var(--color-accent);
+}
+
+.mk--tt-cur .mk__shape {
+  position: relative;
+  scale: var(--tt-current-scale);
+  border-color: var(--tt-tone, var(--color-accent));
+  background: var(--tt-tone, var(--color-accent));
+}
+
+.mk--tt-cur .mk__shape::after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--border-medium) * -3);
+  border: var(--border-medium) solid var(--tt-tone, var(--color-accent));
+  border-radius: 50%;
+  animation: tt-pulse var(--tt-pulse) ease-out 1 both;
+  pointer-events: none;
+}
+
+@keyframes tt-pulse {
+  from {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mk--tt-cur .mk__shape::after {
+    display: none;
+  }
+
+  .tt-card--in > :not(.tt-card__prog) {
+    animation: none;
+  }
+}

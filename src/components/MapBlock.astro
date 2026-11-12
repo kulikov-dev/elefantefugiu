@@ -9,6 +9,7 @@ import type { Bounds } from '../lib/markers';
 import { safeJson, type MapCardInfo } from '../lib/map-cards';
 import { MAINLAND_VIEW } from '../lib/map-data';
 import type { TileConfig } from '../lib/tiles';
+import type { TtChip, TtInfo } from '../lib/timetravel';
 
 interface Props {
   lang: Lang;
@@ -25,16 +26,30 @@ interface Props {
   /** The map page also shows a place for the epoch timeline: a named slot under the map (the legend comes first). */
   /** 'page': the block owns ?fio= ?epoca= ?id= in the address. 'embedded': a parent page drives it with events. */
   mode?: 'page' | 'embedded';
+  /** "Through the centuries" (map page only): what the player needs besides the cards. */
+  tt?: { info: Record<string, TtInfo>; epochs: Record<string, { name: string; order: number }>; chips: TtChip[] };
 }
 
-const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page' } = Astro.props;
+const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page', tt } = Astro.props;
 const hasOverseas = cards.some((c) => c.overseas);
 
 /** {one, few, other} of a plural key as `cluster_one`, `cluster_few`, ... */
 const prefixed = (base: string, forms: Record<string, string>) => Object.fromEntries(Object.entries(forms).map(([k, v]) => [`${base}_${k}`, v]));
 
+const TT_KEYS = ['button', 'exit', 'play', 'pause', 'prev', 'next', 'read', 'meanwhile', 'count', 'scale_label', 'card_label', 'hint_title', 'hint_text', 'places_label', 'span', 'again', 'unread', 'unread_title', 'back'];
+const ttConfig = tt && {
+  ...tt,
+  whole: t(lang, 'map.home'),
+  strings: {
+    ...Object.fromEntries(TT_KEYS.map((k) => [k, t(lang, `map.tt_${k}`)])),
+    ...prefixed('final_place', pluralForms(lang, 'map.tt_final_place')),
+    ...prefixed('final_view', pluralForms(lang, 'map.tt_final_view')),
+  },
+};
+
 const config = {
   mode,
+  ...(ttConfig ? { tt: ttConfig } : {}),
   cards,
   threads,
   known,

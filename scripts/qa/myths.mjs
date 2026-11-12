@@ -106,7 +106,7 @@ if (want('page')) {
     await home.goto(`${base}/${lang}/`, { waitUntil: 'networkidle0' });
     const b = await home.evaluate((href) => { const s = document.querySelector('.home-myths'); const start = document.querySelector('[data-showcase]'); return s ? { tiles: [...s.querySelectorAll('ol.squares .sq--empty')].length, text: s.querySelector('p')?.textContent, h2: s.querySelector('h2')?.textContent.trim(), p: [...s.querySelectorAll('p')].filter((x) => !x.hidden).length, href: s.querySelector('a.button')?.getAttribute('href'), after: !start || Boolean(start.compareDocumentPosition(s) & Node.DOCUMENT_POSITION_FOLLOWING), btn: s.querySelector('a.button')?.textContent.trim() } : null; }, `/${lang}/${SEG[lang]}/`);
     const WORDS = { pt: ['Mito ou verdade?', 'Jogar'], en: ['Myth or fact?', 'Play'], ru: ['Миф или правда?', 'Играть'] }[lang];
-    ok(`${lang}: the home page block has a row of empty tiles, one for each claim, and the count in its line`, b && b.tiles === R && b.text.includes(String(LIST.length)), JSON.stringify(b));
+    ok(`${lang}: the home page block has a row of empty tiles, one for each claim, and the count in its line`, b && b.tiles === R && b.text === site('home.myths_line', lang) && !/[0-9]/.test(b.text), JSON.stringify(b));
     ok(`${lang}: the home page has the block after "Where to start": the heading, one line and the button`, b && b.h2 === WORDS[0] && b.btn === WORDS[1] && b.p === 2 && b.href === `/${lang}/${SEG[lang]}/` && b.after, JSON.stringify(b));
     // The block follows the game that is kept: started (the tiles with the answers, "Continue (n of N)"), finished (the result, "Play again"), another list of claims (as new).
     const ids = LIST.slice(0, R).map((m) => m.id);

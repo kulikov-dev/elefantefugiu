@@ -15,6 +15,8 @@ function showUnavailable(root: HTMLElement) {
     plain.hidden = false;
     root.querySelector<HTMLElement>('[data-map-list]')?.setAttribute('hidden', '');
   }
+  // "Through the centuries" plays on the map: without it the button has nothing to do.
+  document.querySelector<HTMLElement>('[data-tt-start]')?.setAttribute('hidden', '');
   root.dispatchEvent(new CustomEvent('map:unavailable', { bubbles: true }));
 }
 
