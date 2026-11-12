@@ -28,9 +28,7 @@ if (myths.length < 2) throw new Error('The suite needs at least two claims in pu
 const bandsOf = (game, lang) => Object.keys(ui(game === 'myths' ? 'myths' : 'order', lang)).filter((k) => k.startsWith('band_')).map((k) => k.slice(5));
 const rankDesc = (game, lang) => {
   if (game === 'order') return ui('order.rank_og_description', lang);
-  const category = new Intl.PluralRules(LOCALE[lang]).select(myths.length);
-  const key = ui(`myths.rank_og_description_${category}`, lang) ? category : 'other';
-  return ui(`myths.rank_og_description_${key}`, lang).replace('{n}', String(myths.length));
+  return ui('myths.rank_og_description', lang);
 };
 const fill = (tpl, vars) => tpl.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? String(vars[k]) : m));
 const sitemap = await fetch(`${base}/sitemap.xml`).then((r) => r.text());
@@ -95,6 +93,7 @@ if (want('page')) {
     ok(`${lang}: two cards, the myths first, the links lead to the games`, cards.length === 2 && cards[0].href === `/${lang}/${SEG.myths[lang]}/` && cards[1].href === `/${lang}/${SEG.order[lang]}/`, JSON.stringify(cards.map((c) => c.href)));
     ok(`${lang}: the names are the titles of the games`, cards[0].name === ui('pages.myths.title', lang) && cards[1].name === ui('pages.order.title', lang));
     ok(`${lang}: the line of the myths is the invitation, with no number of the pool (a round is ten)`, cards[0].line === ui('games.myths_line', lang) && !/d/.test(cards[0].line), cards[0].line);
+    for (const key of ['home.myths_line', 'myths.og_description_page', 'myths.rank_og_description', 'games.myths_line']) ok(`${lang}: ${key} has no number (the size of the pool is not told, a round is ten)`, ui(key, lang) && !/d|{/.test(ui(key, lang)), ui(key, lang));
     ok(`${lang}: the line of the order game is the invitation`, cards[1].line === ui('games.order_line', lang));
     ok(`${lang}: the state of a game not begun is "${ui('games.start', lang)}"`, cards.every((c) => c.state === ui('games.start', lang)), cards.map((c) => c.state).join(' | '));
     ok(`${lang}: the picture of each game is whole (3:2), decorative, loaded, and nothing is written under it (no line about AI)`, cards.every((c) => c.loaded && Math.abs(c.ratio - 1.5) < 0.03 && Math.abs(c.natural - 1.5) < 0.03 && c.alt === '' && c.ai === undefined), JSON.stringify(cards.map((c) => [c.ratio, c.natural, c.ai])));
@@ -174,9 +173,7 @@ if (want('myths')) {
   for (const lang of LANGS) {
     const page = await open({ lang, path: `${SEG.myths[lang]}/` });
     const h = await head(page);
-    const category = new Intl.PluralRules(LOCALE[lang]).select(myths.length);
-    const key = ui(`myths.og_description_page_${category}`, lang) ? category : 'other';
-    ok(`${lang}: the myths: og:title and og:description of their own, the number of the claims (${myths.length}) from the data`, h.ogTitle === ui('myths.og_title_page', lang) && h.ogDesc === ui(`myths.og_description_page_${key}`, lang).replace('{n}', String(myths.length)), `${h.ogTitle} | ${h.ogDesc}`);
+    ok(`${lang}: the myths: og:title and og:description of their own, no number of the pool`, h.ogTitle === ui('myths.og_title_page', lang) && h.ogDesc === ui('myths.og_description_page', lang) && !/d/.test(h.ogDesc), `${h.ogTitle} | ${h.ogDesc}`);
     ok(`${lang}: the myths: the picture of the game as og:image`, /\/og-games\/myths-[0-9a-f]+\.jpg$/.test(h.ogImage) && (await jpegSize(local(h.ogImage))).width === 1200, h.ogImage);
     await page.close();
     const card = await open({ lang, path: `${SEG.myths[lang]}/${myths[0].id}/` });

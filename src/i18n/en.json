@@ -101,7 +101,7 @@
     "threads_intro": "Pick a theme and follow it through the centuries.",
     "how": "For walks and trips around Portugal: read the story, then go see the place.",
     "myths_title": "Myth or fact?",
-    "myths_line": "{stories} about Portugal that tour guides love to tell. Can you guess which ones are true?",
+    "myths_line": "Ten claims about Portugal that tour guides love to tell. Can you guess which ones are true?",
     "myths_play": "Play",
     "myths_continue": "Continue ({done} of {total})",
     "myths_again": "Play again"
@@ -480,12 +480,10 @@
     "copied": "Copied",
     "best": "Your best title: {band}",
     "restart": "Start over",
-    "og_description_page_one": "Eiffel, Rowling, pastries with a secret. {n} claim about Portugal: which of them is true? After every answer, the whole story.",
-    "og_description_page_other": "Eiffel, Rowling, pastries with a secret. {n} claims about Portugal: which of them is true? After every answer, the whole story.",
+    "og_description_page": "Ten claims about Portugal: where is the truth, and where is the legend?",
     "rank_og_title": "I got “{band}.” How about you?",
     "result_text": "Myth or fact? I got “{band}” {tiles}. How about you?",
-    "rank_og_description_one": "Test your nose: {n} claim about Portugal.",
-    "rank_og_description_other": "Test your nose: {n} claims about Portugal."
+    "rank_og_description": "Test your nose for the legends of Portugal. Play too."
   },
   "order": {
     "lead": "Two events from Portugal’s past. Which came first? Ten pairs.",
@@ -525,7 +523,7 @@
   },
   "games": {
     "ai_caption": "AI-generated illustration. Not a historical image.",
-    "myths_line": "Ten claims about Portugal: where is the truth, and where is the legend?",
+    "myths_line": "Ten claims about Portugal. Truth or legend?",
     "order_line": "Ten pairs of events: guess which came first.",
     "start": "Start",
     "continue_myths": "Continue (question {done} of {total})",

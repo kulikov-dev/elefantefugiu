@@ -101,7 +101,7 @@
     "threads_intro": "Escolha um tema e siga-o ao longo dos séculos.",
     "how": "Para passeios e viagens por Portugal: leia a história e depois vá ver o sítio.",
     "myths_title": "Mito ou verdade?",
-    "myths_line": "{stories} sobre Portugal que os guias contam. Consegue adivinhar quais são verdade?",
+    "myths_line": "Dez afirmações sobre Portugal que os guias contam. Consegue adivinhar quais são verdade?",
     "myths_play": "Jogar",
     "myths_continue": "Continuar ({done} de {total})",
     "myths_again": "Jogar outra vez"
@@ -480,12 +480,10 @@
     "copied": "Copiado",
     "best": "O seu melhor título: {band}",
     "restart": "Recomeçar",
-    "og_description_page_one": "Eiffel, Rowling, pastéis com segredo. {n} afirmação sobre Portugal: o que é verdade? Depois de cada resposta, a história completa.",
-    "og_description_page_other": "Eiffel, Rowling, pastéis com segredo. {n} afirmações sobre Portugal: o que é verdade? Depois de cada resposta, a história completa.",
+    "og_description_page": "Dez afirmações sobre Portugal: onde está a verdade e onde está a lenda?",
     "rank_og_title": "O meu resultado: «{band}». E o seu?",
     "result_text": "Mito ou verdade? O meu resultado: «{band}» {tiles}. E o seu?",
-    "rank_og_description_one": "Teste o seu faro: {n} afirmação sobre Portugal.",
-    "rank_og_description_other": "Teste o seu faro: {n} afirmações sobre Portugal."
+    "rank_og_description": "Teste o seu faro para as lendas de Portugal. Jogue também."
   },
   "order": {
     "lead": "Dois acontecimentos do passado de Portugal. Qual aconteceu primeiro? Dez pares.",
@@ -525,7 +523,7 @@
   },
   "games": {
     "ai_caption": "Ilustração criada por IA. Não é uma imagem histórica.",
-    "myths_line": "Dez afirmações sobre Portugal: onde está a verdade e onde está a lenda?",
+    "myths_line": "Dez afirmações sobre Portugal: verdade ou lenda?",
     "order_line": "Dez pares de acontecimentos: adivinhe qual aconteceu primeiro.",
     "start": "Começar",
     "continue_myths": "Continuar (pergunta {done} de {total})",
