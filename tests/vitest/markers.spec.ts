@@ -409,11 +409,11 @@ describe('real events', () => {
   it('whole country: up to the limit, frame cards first', () => {
     const r = selectMarkers({ cards, bounds: country, center: { lat: 39.5, lon: -8 } });
     // Frame cards come first; with fewer than the limit of them the rest is filled with stories.
-    const frames = cards.filter((c) => c.importance === 3).length;
+    // The islands (Madeira, Azores) are outside the frame of the mainland: they have their own buttons, so their frame cards are not counted here.
+    const onMainland = cards.filter((c) => c.lat >= country.south && c.lat <= country.north && c.lon >= country.west && c.lon <= country.east);
+    const frames = onMainland.filter((c) => c.importance === 3).length;
     expect(drawn(r)).toBe(Math.min(DEFAULT_LIMIT, cards.length));
     expect(r.markers.filter((m) => m.kind === 'frame')).toHaveLength(Math.min(DEFAULT_LIMIT, frames));
-    // The islands (Madeira, Azores) are outside the frame of the mainland: they have their own buttons.
-    const onMainland = cards.filter((c) => c.lat >= country.south && c.lat <= country.north && c.lon >= country.west && c.lon <= country.east);
     expect(r.inArea).toHaveLength(onMainland.length);
   });
 

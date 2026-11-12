@@ -1,0 +1,133 @@
+id: rabelo-valeira-1791
+slug:
+  pt: rochedo-no-meio-do-rio
+  en: rock-in-the-river
+  ru: skala-posredi-reki
+title:
+  pt: O rochedo no meio do rio
+  en: The Rock in the Middle of the River
+  ru: Скала посреди реки
+epoch: pombal-e-terramoto
+level: frame
+year: 1791
+place:
+  name:
+    pt: Cachão da Valeira, Douro
+    en: Cachão da Valeira, Douro
+    ru: Кашан-да-Валейра, Дору
+  short:
+    pt: Valeira
+    en: Valeira
+    ru: Валейра
+  lat: 41.158
+  lon: -7.3679
+bridge:
+  name: Miradouro de São Salvador do Mundo
+  title:
+    pt: Miradouro de São Salvador do Mundo
+    en: São Salvador do Mundo Viewpoint
+    ru: Смотровая площадка Сан-Салвадор-ду-Мунду
+  address: São João da Pesqueira
+  lat: 41.1512875
+  lon: -7.3656719
+  maps_url: https://www.google.com/maps/place/Miradouro+de+S%C3%A3o+Salvador+do+Mundo/@41.1512915,-7.3682468,17z/data=!3m1!4b1!4m6!3m5!1s0xd3b66917b9956dd:0x4abcebcf2b663bcd!8m2!3d41.1512875!4d-7.3656719!16s%2Fg%2F11cmsfwzb8
+  url: https://www.taylor.pt/en/what-is-port-wine/history-of-port/river-transportation
+  note:
+    pt: Daqui vê-se o desfiladeiro onde se partiu o rochedo; hoje tem a barragem, e os rápidos estão debaixo de água.
+    en: From here you see the gorge where the rock was broken up; now a dam stands there, rapids underwater.
+    ru: Отсюда видно ущелье, где разбивали скалу; сегодня в нём плотина, пороги под водой.
+threads:
+  - comida-e-vinho
+  - engenho
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Para o vinho descer o Douro, partiu-se um rochedo durante onze anos.
+  en: Eleven years of breaking a rock so port could reach the sea.
+  ru: Чтобы портвейн доплыл до моря, одиннадцать лет разбивали скалу посреди реки.
+story:
+  pt: >-
+    O vinho do Porto faz-se no alto Douro, mas era envelhecido e vendido em Vila Nova de Gaia, junto ao mar. Não havia estradas pelas margens íngremes, por isso as pipas desciam o rio em barcos rabelos, de fundo chato, que levavam até uma centena de pipas.
+
+
+    Mas no Cachão da Valeira o rio estava barrado por uma queda de pedra, e acima dela os barcos não navegavam. Em 1780 começaram a partir-se os rochedos, os primeiros barcos passaram em 1789 e, em 1791, a obra ficou concluída. A partir daí o vinho podia descer o rio desde as vinhas mais distantes.
+
+
+    O Cachão nunca ficou seguro. Os rabelos eram governados por um único remo comprido à popa, o arrais ia de pé numa plataforma alta, e um erro numa corredeira bastava para despedaçar o barco nas pedras.
+  en: >-
+    Port is made in the upper Douro valley, but it was aged and sold in Vila Nova de Gaia, by the sea. There were no roads along the steep banks, so the casks went downriver on rabelos, flat-bottomed boats that carried up to a hundred casks.
+
+
+    But at the Valeira gorge, a rock barrier blocked the river, and boats couldn’t go beyond it. In 1780 work began on breaking up the rocks, the first boats passed in 1789, and the job was finished in 1791. From then on, wine could travel by river from the most distant vineyards.
+
+
+    The gorge never became safe. A rabelo was steered with a single long oar at the stern, the helmsman stood on a high platform, and one mistake in the rapids was enough to smash the boat on the rocks.
+  ru: >-
+    Портвейн делают в верховьях Дору, а выдерживали и продавали в Вила-Нова-ди-Гайе, у моря. Дорог по крутым берегам не было, поэтому бочки сплавляли по реке на рабелу, плоскодонных лодках на сотню бочек.
+
+
+    Но в ущелье Валейра реку перегораживал каменный порог, и выше него лодки не ходили. В 1780 году скалы начали разбивать, первые лодки прошли в 1789-м, а в 1791-м работы закончили. Теперь вино можно было везти по реке из самых дальних виноградников.
+
+
+    Безопасным ущелье так и не стало. Рабелу правили одним длинным веслом с кормы, рулевой стоял на высоком помосте, и одна ошибка на пороге разбивала лодку о камни.
+meanwhile:
+  - scope: world
+    year: 1791
+    text:
+      pt: "Estreia-se em Viena «A Flauta Mágica», de Mozart."
+      en: "Mozart’s The Magic Flute premieres in Vienna."
+      ru: "В Вене впервые ставят «Волшебную флейту» Моцарта."
+    source: "https://en.wikipedia.org/wiki/The_Magic_Flute"
+more:
+  pt: >-
+    Em 1861, na Valeira, virou-se o barco em que seguiam o inglês barão de Forrester e a famosa produtora de vinho Antónia Ferreira. Forrester morreu. Foi o primeiro a cartografar o Douro em pormenor, assinalou mais de duzentos rápidos e queria tornar o rio mais seguro. D. Antónia salvou-se; segundo a lenda, foi a crinolina que a manteve à tona.
+
+
+    Em 1887 o caminho de ferro chegou ao longo do Douro, a última viagem comercial de um rabelo terá sido em 1964 e, nos anos 1970, construiu-se a barragem da Valeira mesmo no desfiladeiro. Os rápidos ficaram debaixo de água. Os rabelos com os nomes das casas de vinho estão hoje no cais de Gaia e, uma vez por ano, a 24 de junho, saem para a regata.
+  en: >-
+    In 1861, at Valeira, a boat carrying the English Baron Forrester and the famous winemaker Antónia Ferreira capsized. Forrester died. He was the first to map the Douro in detail, marked more than two hundred rapids, and wanted to make the river safer. Antónia made it out; according to legend, her crinoline kept her afloat.
+
+
+    In 1887 a railway was built along the Douro, the last commercial rabelo run is said to have taken place in 1964, and in the 1970s the Valeira Dam was built right in the gorge. The rapids disappeared underwater. Rabelos bearing the names of port houses now sit at the Gaia waterfront, and once a year, on June 24, they come out for a regatta.
+  ru: >-
+    В 1861 году в Валейре перевернулась лодка, в которой плыли англичанин барон Форрестер и знаменитая винодельщица Антония Феррейра. Форрестер погиб. Он первым подробно нанёс Дору на карту, отметил на ней больше двухсот порогов и хотел сделать реку безопаснее. Антония выплыла; по преданию, её удержал на воде пышный кринолин.
+
+
+    В 1887 году вдоль Дору прошла железная дорога, последний коммерческий рейс рабелу, как считается, был в 1964 году, а в 1970-х прямо в ущелье построили плотину Валейра. Пороги ушли под воду. Рабелу с названиями винных домов теперь стоят у набережной Гайи и раз в год, 24 июня, выходят на регату.
+sources:
+  - title: 'Taylor’s: River transportation'
+    url: https://www.taylor.pt/en/what-is-port-wine/history-of-port/river-transportation
+    type: institutional
+    accessed: '2026-11-12'
+  - title: 'Taylor’s: The tale of the rabelo and the rapids'
+    url: https://www.taylor.pt/en/news/the-tale-of-the-rabelo-and-the-rapids
+    type: institutional
+    accessed: '2026-11-12'
+  - title: 'British Historical Society of Portugal: Forrester'
+    url: https://www.bhsportugal.org/uploads/fotos_artigos/files/12_Forrester(1).pdf
+    type: reference
+    accessed: '2026-11-12'
+  - title: 'Wikipedia: Valeira Dam'
+    url: https://en.wikipedia.org/wiki/Valeira_Dam
+    type: reference
+    accessed: '2026-11-12'
+image:
+  file: rabelo-valeira-1791.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no desfiladeiro do Douro, com vinhas em socalcos, operários com marretas partem rochedos e enchem cestos de pedra, enquanto um barco rabelo carregado de pipas passa ao lado, com o arrais de pé numa plataforma alta ao leme do remo comprido."
+    en: "Blue-and-white azulejo-style illustration: in the Douro gorge with terraced vineyards, workers with sledgehammers break up rocks and fill baskets with stone, while a rabelo boat loaded with casks passes by, its helmsman standing on a high platform at the long oar."
+    ru: "Иллюстрация в духе сине-белого азулежу: в ущелье Дору с террасными виноградниками рабочие молотами разбивают скалы и наполняют корзины камнем, а мимо проходит рабелу с бочками, рулевой стоит на высоком помосте у длинного весла."
+  caption:
+    pt: "Partem-se os rochedos do Cachão da Valeira, e um rabelo passa. Ilustração em estilo azulejo, criada por IA."
+    en: "The rocks of the Valeira gorge are broken up as a rabelo passes. Azulejo-style illustration, created by AI."
+    ru: "В ущелье Валейра разбивают скалы, мимо идёт рабелу. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-16'
+placeholder: false
+ru_ready: true

@@ -1,0 +1,141 @@
+id: aguadeiros-galegos-1748
+slug:
+  pt: os-galegos-da-agua
+  en: galician-water-carriers
+  ru: galisiyskie-vodonosy
+title:
+  pt: Os galegos que davam de beber a Lisboa
+  en: How Galicians Kept Lisbon Watered
+  ru: Как испанцы поили Лиссабон
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: frame
+year: 1748
+place:
+  name:
+    pt: Lisboa, Alfama
+    en: Lisbon, Alfama
+    ru: Лиссабон, Алфама
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7097497
+  lon: -9.1294769
+bridge:
+  name: Chafariz d’El-Rei
+  title:
+    pt: Chafariz d’El-Rei
+    en: Chafariz d’El-Rei
+    ru: Чафариш д’Эль-Рей
+  address: Rua Infante D. Henrique, Alfama, Lisboa
+  lat: 38.7097497
+  lon: -9.1294769
+  maps_url: https://www.google.com/maps/place/Chafariz+d'El-Rei/@38.7097607,-9.1320151,17z/data=!4m6!3m5!1s0xd193476a595eac1:0x253a563a9be636ad!8m2!3d38.7097497!4d-9.1294769!16s%2Fg%2F1217clcy
+  url: https://www.visitlisboa.com/pt-pt/artigos/o-mais-antigo-chafariz-de-lisboa
+  note:
+    pt: O chafariz público mais antigo de Lisboa; das seis bicas repartidas entre os habitantes restam três.
+    en: Lisbon’s oldest public fountain; of the six spouts once shared out among its people, three remain.
+    ru: Самый старый общественный фонтан Лиссабона; из шести носиков, поделённых между горожанами, осталось три.
+threads:
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Galegos de barril ao ombro deram de beber a Lisboa durante séculos.
+  en: Galicians with barrels on their shoulders kept Lisbon watered for centuries.
+  ru: Столицу Португалии веками поили галисийцы с бочонками на плече.
+story:
+  pt: >-
+    Até ao fim do século XIX não havia água nas casas de Lisboa. Ia-se buscá-la aos chafarizes da cidade e depois carregava-se pelas ruas íngremes acima. As casas ricas pagavam a aguadeiros para o fazer.
+
+
+    Os aguadeiros eram quase sempre galegos, vindos do norte de Espanha, da zona de Pontevedra e Vigo. De barril ao ombro e boné de pala, iam do chafariz à porta dos clientes. Para trabalhar era preciso inscrever-se na Câmara, e quem não cumprisse as regras pagava multa.
+
+
+    Junto aos chafarizes havia sempre gente, e para evitar zaragatas as bicas eram divididas entre grupos: umas só para aguadeiros, outras para criados, outras para marinheiros. A água canalizada chegou às casas aos poucos, e com ela o ofício desapareceu.
+  en: >-
+    Until the late 19th century, Lisbon homes had no running water. People fetched it from the city’s public fountains and then hauled it up the steep streets. Wealthy households paid water carriers to do it.
+
+
+    The carriers were almost always Galicians, from northern Spain around Pontevedra and Vigo. With a barrel on the shoulder and a peaked cap, they went from fountain to customers’ doors. To work, you had to register with the city council, and breaking the rules meant a fine.
+
+
+    The fountains were always crowded, so to prevent fights the spouts were split between groups: some only for water carriers, some for servants, some for sailors. Piped water reached homes little by little, and the trade disappeared with it.
+  ru: >-
+    Воды в домах Лиссабона не было до конца XIX века. Её набирали у городских фонтанов, чафаришей, а потом несли вверх по крутым улицам. Богатые дома платили за это водоносам.
+
+
+    Водоносами чаще всего были галисийцы, приезжие с севера Испании, из-под Понтеведры и Виго. С бочонком на плече и в кепке с козырьком они ходили от фонтана к дверям клиентов. Чтобы работать, нужно было записаться в городской палате, а за нарушение правил штрафовали.
+
+
+    У фонтанов всегда толпились люди, и чтобы не было драк, носики делили между группами: часть только для водоносов, часть для слуг, часть для моряков. Водопровод пришёл в дома постепенно, и вместе с ним исчезло ремесло.
+meanwhile:
+  - scope: world
+    year: 1748
+    text:
+      pt: "Começam as escavações de Pompeia, soterrada pelas cinzas do Vesúvio."
+      en: "Excavations begin at Pompeii, buried under the ash of Vesuvius."
+      ru: "Начинаются раскопки Помпей, засыпанных пеплом Везувия."
+    source: "https://en.wikipedia.org/wiki/Pompeii"
+more:
+  pt: >-
+    Os aguadeiros tinham também uma obrigação para com a cidade: manter os barris prontos para acudir a incêndios. Numa cidade de madeira e ruas estreitas, isso contava.
+
+
+    O chafariz público mais antigo de Lisboa, o Chafariz d’El-Rei, em Alfama, ainda existe. Teve seis bicas, e o Senado de Lisboa determinou para quem era cada uma: uma para os homens das embarcações, outras para criados e criadas, outras para homens e mulheres de diferente condição. Hoje restam três bicas, e já não corre água.
+
+
+    Quando a água canalizada os afastou, conta-se que muitos antigos aguadeiros passaram a vender capilé, uma bebida doce.
+  en: >-
+    Water carriers also had a duty to the city: keep their barrels ready in case of fire. In a city of wood and narrow streets, that mattered.
+
+
+    Lisbon’s oldest public fountain, the Chafariz d’El-Rei in Alfama, still stands. It once had six spouts, and the city senate decided who each one was for: one for the men from the boats, others for male and female servants, others for men and women of different stations. Three spouts remain today, and no water runs from them.
+
+
+    When piped water pushed them out, many former water carriers reportedly took to selling capilé, a sweet drink.
+  ru: >-
+    У водоносов была и городская обязанность: держать бочонки наготове на случай пожара. В городе из дерева и узких улиц это было важно.
+
+
+    Самый старый городской фонтан, Чафариш д’Эль-Рей в Алфаме, стоит до сих пор. Когда-то у него было шесть носиков, и Сенат Лиссабона расписал, какой из них для кого: отдельно для моряков, отдельно для служанок и слуг, отдельно для мужчин и женщин разного положения. Сегодня носиков осталось три, и вода из них не течёт.
+
+
+    Когда водопровод вытеснил их, бывшие водоносы, по рассказам, стали торговать сладким напитком капилé.
+sources:
+  - title: 'Mensagem de Lisboa: Chafarizes. Como Lisboa se refrescava antes da água canalizada (2022)'
+    url: https://amensagem.pt/2022/07/14/chafarizes-lisboa-antiga-como-cidade-refrescava-antes-agua-canalizada-calor-verao/
+    type: press
+    accessed: '2026-11-12'
+  - title: 'Visit Lisboa: O mais antigo chafariz de Lisboa'
+    url: https://www.visitlisboa.com/pt-pt/artigos/o-mais-antigo-chafariz-de-lisboa
+    type: institutional
+    accessed: '2026-11-12'
+  - title: 'UF Carnaxide-Queijas: Aguadeiros'
+    url: https://www.ufcq.pt/patrimonio/92-carnaxide/1597-aguadeiros
+    type: institutional
+    accessed: '2026-11-12'
+  - title: 'Wikipedia: Águas Livres Aqueduct'
+    url: https://en.wikipedia.org/wiki/%C3%81guas_Livres_Aqueduct
+    type: reference
+    accessed: '2026-11-12'
+image:
+  file: aguadeiros-galegos-1748.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa rua em escada de Alfama, aguadeiros de boné enchem barris nas bicas de um chafariz e fazem fila com barris na mão, um carrega um barril ao ombro, e uma mulher enche um cântaro noutra bica; roupa a secar nas janelas."
+    en: "Blue-and-white azulejo-style illustration: on a stepped Alfama street, water carriers in caps fill barrels at the spouts of a fountain and queue with barrels in hand, one carries a barrel on his shoulder, and a woman fills a jug at another spout; laundry dries in the windows."
+    ru: "Иллюстрация в духе сине-белого азулежу: на ступенчатой улице Алфамы водоносы в кепках наполняют бочонки у носиков фонтана и стоят в очереди с бочонками в руках, один несёт бочонок на плече, а женщина набирает кувшин у другого носика; в окнах сушится бельё."
+  caption:
+    pt: "Aguadeiros no chafariz, numa rua de Alfama. Ilustração em estilo azulejo, criada por IA."
+    en: "Water carriers at a fountain on an Alfama street. Azulejo-style illustration, created by AI."
+    ru: "Водоносы у фонтана на улице Алфамы. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-13'
+placeholder: false
+ru_ready: true

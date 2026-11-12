@@ -1,0 +1,126 @@
+id: figuras-de-convite-1725
+slug:
+  pt: o-lacaio-de-azulejo
+  en: tile-footman
+  ru: lakei-iz-plitki
+title:
+  pt: O lacaio de azulejo
+  en: The Footman Made of Tiles
+  ru: Лакей из плитки
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: frame
+year:
+  from: 1725
+  to: 1750
+place:
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7222524
+  lon: -9.1393366
+bridge:
+  name: Museu Nacional do Azulejo
+  title:
+    pt: Museu Nacional do Azulejo
+    en: National Tile Museum
+    ru: Национальный музей азулежу
+  address: Rua da Madre de Deus 4, Lisboa
+  lat: 38.7250559
+  lon: -9.113539
+  maps_url: https://www.google.com/maps/place/Museu+Nacional+do+Azulejo/@38.7250601,-9.1161139,17z/data=!3m1!4b1!4m6!3m5!1s0xd1933e8da53a15f:0xb31d6f4a8645bc28!8m2!3d38.7250559!4d-9.113539!16s%2Fm%2F0jt23_7
+  url: https://www.museusemonumentos.pt/pt/museus-e-monumentos/museu-nacional-do-azulejo
+  note:
+    pt: O museu guarda uma «dama de convite» de azulejo em tamanho natural, de 1725–1750.
+    en: The museum holds a life-size tile “welcome lady” from 1725–1750.
+    ru: В музее хранится изразцовая «дама приглашения» в полный рост, 1725–1750 годы.
+threads:
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O lacaio mais educado de Lisboa tem trezentos anos. É de azulejo.
+  en: Lisbon’s politest footman is three hundred years old. He’s made of tiles.
+  ru: Самому вежливому лакею Лиссабона триста лет. Он сделан из плитки.
+story:
+  pt: >-
+    Na primeira metade do século XVIII chegava a Lisboa o ouro do Brasil, e a nobreza reconstruía os seus palácios. As paredes das entradas e das escadas cobriam-se de azulejos azuis e brancos, e as oficinas não davam conta das encomendas.
+
+
+    À porta de uma casa rica, um criado recebia o convidado e acompanhava-o escada acima. Os mestres azulejadores encontraram maneira de tornar esse acolhimento eterno: junto à entrada e nos patamares começaram a pintar criados de azulejo em tamanho natural. Lacaios, alabardeiros e damas estão à entrada e na escada e recebem os convidados.
+
+
+    Chamam-lhes precisamente figuras de convite. Um criado de carne e osso era preciso alimentar e vestir, mas o de azulejo fica junto à escada durante séculos e anuncia a cada visita que o dono da casa é rico.
+  en: >-
+    In the first half of the 18th century, Brazilian gold was flowing into Lisbon, and the nobility was rebuilding its palaces. Entrance halls and staircases were covered in blue-and-white tiles, and the workshops couldn’t keep up with orders.
+
+
+    At the door of a wealthy house, a servant would greet a guest and lead them upstairs. Tile painters found a way to make that welcome permanent: by entrances and on landings, they began painting life-size servants in tile. Footmen, halberdiers, and ladies stand by the entrance and on the stairs and welcome the guests.
+
+
+    They’re called figuras de convite, “welcome figures.” A real servant had to be fed and clothed, but a tile one stands by the stairs for centuries and tells every visitor that the owner of the house is rich.
+  ru: >-
+    В первой половине XVIII века в Лиссабон шло бразильское золото, и знать перестраивала дворцы. Стены входов и лестниц покрывали сине-белыми изразцами, и мастерские не успевали с заказами.
+
+
+    У дверей богатого дома гостя встречал слуга и провожал наверх. Мастера азулежу придумали, как сделать эту встречу вечной: у входа и на площадках лестниц стали выкладывать слуг из плитки в человеческий рост. Лакеи, алебардщики и дамы стоят у входа и на лестнице и встречают гостей.
+
+
+    Их так и называют, «фигуры приглашения» (figuras de convite). Живого слугу надо кормить и одевать, а изразцовый стоит у лестницы веками и каждому гостю сообщает, что хозяин дома человек богатый.
+meanwhile:
+  - scope: world
+    year: 1723
+    text:
+      pt: "Em Leipzig, Bach torna-se cantor da Igreja de São Tomás e compõe cantatas."
+      en: "In Leipzig, Bach becomes cantor of St. Thomas Church and writes cantatas."
+      ru: "В Лейпциге Бах становится кантором церкви Святого Фомы и пишет кантаты."
+    source: "https://en.wikipedia.org/wiki/Johann_Sebastian_Bach"
+more:
+  pt: >-
+    As figuras ficavam nas entradas principais, nos patamares e junto às portas para o jardim e o pátio. Os historiadores chamam a esta época a «Grande Produção»: as oficinas de Lisboa faziam azulejo em enormes quantidades, e sobretudo em azul e branco.
+
+
+    Uma destas figuras, uma dama de corpo inteiro, está no Museu Nacional do Azulejo. Tem quase 1,8 m de altura, a estatura de uma pessoa real.
+  en: >-
+    The figures were placed at main entrances, on landings, and by doors to gardens and courtyards. Historians call this period the “Great Production”: Lisbon workshops turned out tiles in huge quantities, mostly in blue and white.
+
+
+    One of these figures, a full-length lady, is in the National Tile Museum. She is almost 1.8 m (6 ft) tall, the height of a real person.
+  ru: >-
+    Фигуры ставили у главных входов, на лестничных площадках, у дверей в сад и во двор. Это время историки называют «Большим производством»: лиссабонские мастерские выпускали азулежу в огромных количествах, в основном в сине-белой гамме.
+
+
+    Одна такая фигура, дама в полный рост, хранится в Национальном музее азулежу. Она высотой почти 1,8 м, то есть ростом с настоящего человека.
+sources:
+  - title: 'Google Arts & Culture, Museu Nacional do Azulejo: Female welcome figure, 1725/1750'
+    url: https://artsandculture.google.com/asset/female-welcome-figure/0wG97omgoDwwyw
+    type: institutional
+    accessed: '2026-11-12'
+  - title: 'Museu Nacional do Azulejo: Figura de Convite (catalogue record)'
+    url: https://raiz.museusemonumentos.pt/DetalhesObra/Index/232195?tipo=OBJ
+    type: institutional
+    accessed: '2026-11-12'
+image:
+  file: figuras-de-convite-1725.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: ao pé de uma escada nobre com balaustrada trabalhada, um criado de peruca e casaca aponta o caminho, enquanto um cavalheiro se inclina em vénia ao lado de uma dama que esconde o rosto atrás de um leque."
+    en: "Blue-and-white azulejo-style illustration: at the foot of a grand staircase with an ornate balustrade, a servant in a wig and coat points the way while a gentleman bows beside a lady hiding her face behind a fan."
+    ru: "Иллюстрация в духе сине-белого азулежу: у подножия парадной лестницы с резными перилами слуга в парике и камзоле указывает путь, рядом кавалер кланяется даме, прикрывшей лицо веером."
+  caption:
+    pt: "Um criado recebe os convidados ao pé da escada nobre. Ilustração em estilo azulejo, criada por IA."
+    en: "A servant greets guests at the foot of a grand staircase. Azulejo-style illustration, created by AI."
+    ru: "Слуга встречает гостей у парадной лестницы. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-12'
+placeholder: false
+ru_ready: true

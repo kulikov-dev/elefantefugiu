@@ -1,0 +1,127 @@
+id: maria-severa-1846
+slug:
+  pt: maria-severa
+  en: maria-severa
+  ru: mariya-severa
+title:
+  pt: A cantora que deu o primeiro filme sonoro
+  en: The Singer Behind Portugal’s First Sound Film
+  ru: Певица, о которой сняли первый звуковой фильм
+epoch: monarquia-e-republica
+level: frame
+year: 1846
+place:
+  name:
+    pt: Lisboa, Mouraria
+    en: Lisbon, Mouraria
+    ru: Лиссабон, Маурария
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7162
+  lon: -9.135
+bridge:
+  name: Museu do Fado
+  title:
+    pt: Museu do Fado
+    en: Fado Museum
+    ru: Музей фаду
+  address: Largo do Chafariz de Dentro 1, Alfama, Lisboa
+  lat: 38.7110254
+  lon: -9.1276597
+  url: https://www.museudofado.pt/
+  note:
+    pt: O museu conta o caminho do fado das tabernas ao cinema; a casa da Severa fica na Mouraria.
+    en: The museum tells fado’s path from taverns to film; Severa’s house is in Mouraria, on Rua do Capelão.
+    ru: Музей рассказывает путь фаду от таверн к кино; дом Северы с табличкой в Маурарии, на Руа-ду-Капелан.
+threads:
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Quase sem documentos, a Severa inspirou o primeiro filme sonoro português.
+  en: Few records of her survive, yet she inspired Portugal’s first sound film.
+  ru: Документов о ней почти нет, но ей посвящён первый звуковой фильм Португалии.
+story:
+  pt: >-
+    Nos anos 1840 cantava-se o fado nas tabernas dos bairros pobres de Lisboa, e as pessoas de bem evitavam essa música. Maria Severa cantava nas tabernas da Mouraria e acompanhava-se à guitarra.
+
+
+    Segundo a lenda, o seu canto conquistou o conde de Vimioso, um cavaleiro tauromáquico famoso, daqueles que enfrentam o touro a cavalo. Passou a andar no círculo dos aficionados das touradas, entre a jovem nobreza. Assim, as canções dos bairros pobres chegaram a quem nunca entrava numa taberna.
+
+
+    A Severa morreu em 1846, com 26 anos. Quase não há registos sobre ela, e por isso a sua vida tornou-se facilmente lenda. Em 1901 escreveram sobre ela um romance e uma peça, e em 1931 fez-se o filme «A Severa». Foi o primeiro filme sonoro português.
+  en: >-
+    In the 1840s, fado was sung in the taverns of Lisbon’s poor neighborhoods, and respectable people kept their distance from it. Maria Severa sang in the taverns of Mouraria and played the guitar herself.
+
+
+    According to legend, her singing won over the Count of Vimioso, a famous cavaleiro, a bullfighter who faces the bull on horseback. She found herself in his circle of bullfighting fans, among young aristocrats. That’s how songs from the poor neighborhoods reached people who never set foot in a tavern.
+
+
+    Severa died in 1846, at 26. There are hardly any records about her, which made it easy for her life to turn into legend. In 1901 a novel and a play were written about her, and in 1931 the film A Severa was made. It was Portugal’s first sound film.
+  ru: >-
+    В 1840-х годах фаду пели в тавернах бедных кварталов Лиссабона, и приличная публика эту музыку сторонилась. Мария Севера пела в тавернах Маурарии и сама играла на гитаре.
+
+
+    По преданию, её пением был покорён граф Вимиозу, знаменитый кавалейру, то есть тореадор, который выходит к быку верхом. Она оказалась в его кругу, среди любителей корриды и молодой знати. Так песни бедных кварталов услышали люди, которые раньше в таверны не заходили.
+
+
+    Севера умерла в 1846 году, в 26 лет. Записей о ней почти нет, и поэтому её жизнь легко превратилась в легенду. В 1901 году о ней написали роман и пьесу, а в 1931 году сняли фильм «Севера». Он стал первым португальским звуковым фильмом.
+meanwhile:
+  - scope: world
+    year: 1846
+    text:
+      pt: "Astrónomos descobrem o planeta Neptuno."
+      en: "Astronomers discover the planet Neptune."
+      ru: "Астрономы открывают планету Нептун."
+    source: "https://en.wikipedia.org/wiki/Neptune"
+more:
+  pt: >-
+    O filme foi visto por mais de 200 mil pessoas, e a Severa tornou-se de vez um símbolo do fado: a heroína com quem esta música teria «começado». Os historiadores, porém, são prudentes. Quase tudo o que se conta da sua vida vem do romance de Júlio Dantas, e não de documentos.
+
+
+    Da própria Severa ficou pouco. Foi sepultada numa vala comum no Cemitério do Alto de São João. Na Mouraria, na Rua do Capelão, a casa onde viveu tem desde 1989 uma lápide inaugurada por Amália Rodrigues. Ao lado fica o Largo da Severa, com uma guitarra desenhada na calçada.
+  en: >-
+    More than 200,000 people saw the film, and Severa became a lasting symbol of fado: the heroine with whom the music supposedly “began.” Historians are cautious, though. Almost everything told about her life comes from Júlio Dantas’s novel, not from documents.
+
+
+    Little remains of Severa herself. She was buried in a common grave at Alto de São João Cemetery. In Mouraria, on Rua do Capelão, the house where she lived has carried a plaque since 1989, unveiled by Amália Rodrigues. Next to it is Largo da Severa, with a guitar laid into the cobblestones.
+  ru: >-
+    Фильм посмотрели больше 200 тысяч человек, и Севера окончательно стала символом фаду: героиней, с которой эта музыка «началась». Историки при этом осторожны. Почти всё, что рассказывают о её жизни, пришло из романа Жулиу Данташа, а не из документов.
+
+
+    От самой Северы осталось немного. Похоронили её в общей могиле на кладбище Алту-де-Сан-Жуан. В Маурарии, на улице Капелан, на доме, где она жила, в 1989 году появилась табличка, которую открыла Амалия Родригеш. Рядом площадь Ларгу-да-Севера, где в мостовой выложена гитара.
+sources:
+  - title: 'Museu do Fado: Severa'
+    url: https://www.museudofado.pt/en/fado/persolanity/severa-en
+    type: institutional
+    accessed: '2026-11-12'
+  - title: 'Wikipedia (pt): Maria Severa'
+    url: https://pt.wikipedia.org/wiki/Maria_Severa
+    type: reference
+    accessed: '2026-11-12'
+  - title: 'Wikipedia (pt): Francisco de Paula de Portugal e Castro, 13.º Conde de Vimioso'
+    url: https://pt.wikipedia.org/wiki/Francisco_de_Paula_de_Portugal_e_Castro,_13.º_Conde_de_Vimioso
+    type: reference
+    accessed: '2026-11-12'
+image:
+  file: maria-severa-1846.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa taberna de pedra, sob um candeeiro, uma mulher de xaile canta e toca guitarra portuguesa; à volta ouvem um velho, um marinheiro e uma mulher sentada, e à porta um jovem de casaca com a cartola na mão."
+    en: "Blue-and-white azulejo-style illustration: in a stone tavern under a lamp, a woman in a shawl sings and plays a Portuguese guitar; an old man, a sailor and a seated woman listen, and a young man in a frock coat stands at the door with his top hat in hand."
+    ru: "Иллюстрация в духе сине-белого азулежу: в каменной таверне под лампой женщина в шали поёт и играет на португальской гитаре; её слушают старик, моряк и сидящая женщина, а у двери стоит молодой человек в сюртуке с цилиндром в руке."
+  caption:
+    pt: "Uma cantora de fado numa taberna da Mouraria. Ilustração em estilo azulejo, criada por IA."
+    en: "A fado singer in a Mouraria tavern. Azulejo-style illustration, created by AI."
+    ru: "Певица фаду в таверне Маурарии. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-14'
+placeholder: false
+ru_ready: true

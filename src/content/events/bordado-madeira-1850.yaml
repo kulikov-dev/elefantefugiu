@@ -1,0 +1,129 @@
+id: bordado-madeira-1850
+slug:
+  pt: fabrica-sem-oficina
+  en: factory-without-workshop
+  ru: fabrika-bez-tsekha
+title:
+  pt: A fábrica sem uma única oficina
+  en: The Factory Without a Single Workshop
+  ru: Фабрика без единого цеха
+epoch: monarquia-e-republica
+level: frame
+year: 1850
+place:
+  name:
+    pt: Funchal, Madeira
+    en: Funchal, Madeira
+    ru: Фуншал, Мадейра
+  short:
+    pt: Funchal
+    en: Funchal
+    ru: Фуншал
+  lat: 32.6669
+  lon: -16.9241
+bridge:
+  name: Museu do Bordado
+  title:
+    pt: Museu do Bordado e do Artesanato
+    en: Embroidery and Handicraft Museum
+    ru: Музей вышивки и ремёсел
+  address: Rua Visconde de Anadia 44, Funchal
+  lat: 32.6508447
+  lon: -16.9030389
+  maps_url: https://www.google.com/maps/place/Wine,+embroidery+and+Handicraft+Institute+of+Madeira/@32.57212,-17.084088,11z/data=!4m6!3m5!1s0xc60600e54269371:0x718216107c75758!8m2!3d32.6508447!4d-16.9030389!16s%2Fg%2F1w4f9b_7
+  url: https://www.visitportugal.com/en/node/424091
+  note:
+    pt: O museu guarda bordados do século XIX, do tempo em que dezenas de milhares de bordadeiras trabalhavam na ilha.
+    en: The museum holds 19th-century embroidery, from the time when tens of thousands of embroiderers worked on the island.
+    ru: В музее вышивка XIX века, времён, когда на острове работали десятки тысяч вышивальщиц.
+threads:
+  - gente-como-nos
+  - mar
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Na Madeira houve uma fábrica sem uma única oficina.
+  en: Madeira once had a factory without a single workshop.
+  ru: На Мадейре была фабрика без единого цеха.
+story:
+  pt: >-
+    Durante séculos, as mulheres da Madeira bordaram para si: enxovais, toalhas, roupa de casa. Elizabeth Phelps, filha de um comerciante de vinho inglês do Funchal, viu nisso um produto.
+
+
+    Bella Phelps ensinou raparigas da terra a bordar e, no fim dos anos 1840, levou o bordado madeirense para Inglaterra. O trabalho deu nas vistas: em 1850 foi mostrado numa exposição no Palácio de São Lourenço, no Funchal, e em 1851 havia amostras na Grande Exposição de Londres.
+
+
+    As encomendas multiplicaram-se, mas ninguém construiu oficinas. As bordadeiras trabalhavam em casa: levavam-lhes o tecido com o desenho e vinham buscar o trabalho pronto. No fim do século XIX havia na ilha cerca de 70 mil bordadeiras. A fábrica inteira cabia nas casas delas.
+  en: >-
+    For centuries, the women of Madeira embroidered for themselves: trousseaus, tablecloths, household linen. Elizabeth Phelps, the daughter of an English wine merchant in Funchal, saw a product in it.
+
+
+    Bella Phelps taught local girls to embroider and, in the late 1840s, brought Madeiran embroidery to England. The work got noticed: in 1850 it was shown at an exhibition in the São Lourenço Palace in Funchal, and in 1851 samples reached the Great Exhibition in London.
+
+
+    Orders poured in, but nobody built workshops. The embroiderers worked at home: fabric with the pattern was brought to them, and the finished work was collected. By the late 19th century, the island had some 70,000 bordadeiras, embroiderers. The whole factory fit inside their homes.
+  ru: >-
+    Женщины Мадейры веками вышивали для себя: приданое, скатерти, бельё. Элизабет Фелпс, дочь английского виноторговца из Фуншала, увидела в этом товар.
+
+
+    Белла Фелпс научила местных девочек вышивать, а в конце 1840-х привезла мадейрскую вышивку в Англию. Работу заметили: в 1850 году её показали на выставке во дворце Сан-Лоренсу в Фуншале, а в 1851 году образцы попали на Всемирную выставку в Лондоне.
+
+
+    Заказов стало много, но цехов никто не строил. Вышивальщицы работали дома: им приносили ткань с рисунком и забирали готовое. К концу XIX века на острове было около 70 тысяч бордадейраш, вышивальщиц. Вся эта фабрика помещалась в их домах.
+meanwhile:
+  - scope: world
+    year: 1851
+    text:
+      pt: "Abre em Londres a Grande Exposição, no Palácio de Cristal."
+      en: "The Great Exhibition opens in London, in the Crystal Palace."
+      ru: "В Лондоне открывается Всемирная выставка в Хрустальном дворце."
+    source: "https://en.wikipedia.org/wiki/The_Crystal_Palace"
+more:
+  pt: >-
+    A própria Bella Phelps não foi à exposição de Londres nem expôs nada em seu nome. Mas a partir da sua iniciativa, o bordado tornou-se o principal ganha-pão das mulheres da ilha.
+
+
+    Depois da Primeira Guerra Mundial a procura caiu, nos anos 1920 surgiram novas casas de bordados e, a partir dos anos 1970, as imitações baratas tomaram o mercado. Mas o bordado continua a fazer-se na Madeira.
+  en: >-
+    Bella Phelps herself didn’t go to the London exhibition or show anything under her own name. But her initiative made embroidery the main source of income for the island’s women.
+
+
+    After World War I demand fell, new embroidery firms appeared in the 1920s, and from the 1970s cheap imitations took over the market. But embroidery is still made on Madeira today.
+  ru: >-
+    Сама Белла Фелпс в Лондон на выставку не ездила и ничего от своего имени не показывала. Но с её затеи вышивка стала главным женским заработком на острове.
+
+
+    После Первой мировой войны спрос упал, в 1920-х появились новые фирмы, а с 1970-х рынок забрали дешёвые подделки. Но вышивку на Мадейре делают и сегодня.
+sources:
+  - title: 'Wikipedia: Bella Phelps'
+    url: https://en.wikipedia.org/wiki/Bella_Phelps
+    type: reference
+    accessed: '2026-11-12'
+  - title: 'TRC Leiden: Phelps, Bella (1820-1893)'
+    url: https://trc-leiden.nl/trc-needles/people-and-functions/businessmen/phelps-bella-1820-1893
+    type: reference
+    accessed: '2026-11-12'
+  - title: 'TRC Leiden: Madeira embroidery'
+    url: https://trc-leiden.nl/trc-needles/regional-traditions/europe-and-north-america/embroideries/madeira-embroidery
+    type: reference
+    accessed: '2026-11-12'
+image:
+  file: bordado-madeira-1850.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa encosta da Madeira em socalcos, com o mar e um veleiro ao fundo, cinco mulheres sentadas ao ar livre bordam panos, e uma mulher de pé com um cesto de panos bordados à cabeça entrega mais um."
+    en: "Blue-and-white azulejo-style illustration: on a terraced Madeira hillside with the sea and a sailing ship behind, five women sit outdoors embroidering cloths, and a standing woman with a basket of embroidered linen on her head hands over another."
+    ru: "Иллюстрация в духе сине-белого азулежу: на террасном склоне Мадейры, с морем и парусником позади, пять женщин сидят на улице и вышивают полотна, а стоящая женщина с корзиной вышитого белья на голове передаёт ещё одно."
+  caption:
+    pt: "Bordadeiras a trabalhar em casa, na Madeira. Ilustração em estilo azulejo, criada por IA."
+    en: "Embroiderers at work near their homes on Madeira. Azulejo-style illustration, created by AI."
+    ru: "Вышивальщицы за работой у своих домов на Мадейре. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-15'
+placeholder: false
+ru_ready: true
