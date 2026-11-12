@@ -57,14 +57,16 @@ const open = async (path, { width = 1280, height = 900, reduced = false, family 
       if (family_) localStorage.setItem('family', family_);
       if (read_) localStorage.setItem('readStories', JSON.stringify(read_));
       // The counter of the site is not on a local build: a stand-in that keeps what it is told for the whole tab.
+      // A build for a real address has the counter's own config script and count.js, which set window.goatcounter and its count(): the stand-in keeps its count().
       if (counter_) {
-        window.goatcounter = {
-          count: (v) => {
-            const a = JSON.parse(sessionStorage.getItem('__gc') || '[]');
-            a.push(v.path);
-            sessionStorage.setItem('__gc', JSON.stringify(a));
-          },
+        const mine = (v) => {
+          const a = JSON.parse(sessionStorage.getItem('__gc') || '[]');
+          a.push(v.path);
+          sessionStorage.setItem('__gc', JSON.stringify(a));
         };
+        const stand = {};
+        Object.defineProperty(stand, 'count', { get: () => mine, set: () => {}, enumerable: true });
+        Object.defineProperty(window, 'goatcounter', { get: () => stand, set: (v) => { for (const k of Object.keys(v ?? {})) if (k !== 'count') stand[k] = v[k]; }, configurable: true });
       }
     },
     family,
