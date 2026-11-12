@@ -251,7 +251,7 @@
         - title: 'Завещания Лазарина.'
           text: 'В деревне Лазарин под Ламегу маски режут из ольхи. В карнавальный вторник незамужние девушки читают на площади стихотворное «завещание кумы», где достаётся деревенским парням, а парни отвечают «завещанием кума» про девушек. Потом чучела кума и кумы сгорают в костре с фейерверком.'
 
-# Easter: the Sunday itself (`easter: 0`); the window is Thursday to Sunday. The texts are in ru for now, pt and en come next.
+# Easter: the Sunday itself (`easter: 0`); the window is Thursday to Sunday.
 - id: pascoa
   slug: pascoa
   enabled: true
@@ -263,6 +263,46 @@
   image: festas/pascoa.jpg
   story: monte-pascoal-1500
   text:
+    pt:
+      date: '{date}'
+      name: 'Páscoa'
+      head_date: '{date} · Páscoa'
+      head_title: 'O Monte Pascoal'
+      head_line: 'O primeiro monte visto no Brasil recebeu o nome da Páscoa.'
+      head_link: 'A história deste dia →'
+      art_title: 'Folar com três ovos sob cruzes de massa, um raminho de oliveira e amêndoas'
+      lead: 'A grande festa da primavera. Na Sexta-feira Santa come-se bacalhau, e no domingo há borrego e folar à mesa.'
+      og_description: 'Porque é que o primeiro monte avistado no Brasil tem o nome da Páscoa e onde, na noite de Páscoa, uma vila inteira toca chocalhos.'
+      off_window: 'A data da Páscoa muda todos os anos: é o primeiro domingo depois da lua cheia da primavera'
+      traditions:
+        - title: 'O folar dos padrinhos.'
+          text: 'O folar é um pão doce em que se cozem ovos inteiros, com casca, presos por tiras de massa em cruz. No Norte, no Domingo de Ramos, os afilhados levam à madrinha um ramo de violetas e ao padrinho um ramo de oliveira, e na Páscoa os padrinhos retribuem com o folar. Cada terra tem o seu: em Trás-os-Montes leva enchidos e presunto, e em Olhão, no Sul, é doce e folhado, com açúcar e canela.'
+        - title: 'A cruz vai de casa em casa.'
+          text: 'No domingo de Páscoa, sobretudo no Norte, sai o compasso: o padre ou um paroquiano leva a cruz de casa em casa. As entradas enfeitam-se com verdura e tapetes de flores, os donos da casa beijam a cruz e há sempre algo para oferecer. Pelas contas do CM, num só dia as cruzes entram em cerca de um milhão e meio de casas.'
+        - title: 'A noite dos chocalhos.'
+          text: 'No Sábado de Aleluia, os pastores levam os borregos ao centro de Castelo de Vide para serem benzidos. À noite, depois da Vigília Pascal, milhares de pessoas percorrem as ruas a tocar chocalhos de todos os tamanhos, acompanhados pelos sinos da igreja e da torre do relógio. Diz-se que era assim que os pastores agradeciam à Igreja a bênção dos rebanhos.'
+        - title: 'Mexilhão em vez de carne.'
+          text: 'Na Sexta-feira Santa, na praia do Magoito, em Sintra, dezenas de pessoas descem às rochas com baldes para apanhar mexilhão na maré vazia. Os mais velhos explicam-no com outro costume: neste dia não se come carne.'
+    en:
+      date: '{date}'
+      name: 'Easter'
+      head_date: '{date} · Easter'
+      head_title: 'Easter Mountain'
+      head_line: 'The first mountain the Portuguese saw in Brazil was named after Easter.'
+      head_link: 'The story of this day →'
+      art_title: 'A folar with three eggs under dough crosses, an olive sprig, and sugared almonds'
+      lead: 'Portugal’s big spring holiday. On Good Friday people eat bacalhau, and on Sunday there’s lamb and folar on the table.'
+      og_description: 'Why the first mountain the Portuguese saw in Brazil was named after Easter, and where a whole town rings cowbells on Easter night.'
+      off_window: 'Easter falls on a different date every year: the first Sunday after the spring full moon'
+      traditions:
+        - title: 'Folar from godparents.'
+          text: 'Folar is a sweet bread baked with whole eggs, still in their shells, held in place by crossed strips of dough. In the north, on Palm Sunday, godchildren bring their godmother a bunch of violets and their godfather an olive branch, and at Easter the godparents give them a folar in return. Every region has its own: in Trás-os-Montes it’s stuffed with sausage and ham, while in Olhão, down south, it’s sweet and flaky, with sugar and cinnamon.'
+        - title: 'The cross goes door to door.'
+          text: 'On Easter Sunday, especially in the north, the compasso makes its rounds: a priest or a parishioner carries a cross from house to house. Doorways are decorated with greenery and carpets of flowers, families kiss the cross, and visitors are offered food and drink. By the newspaper CM’s estimate, the crosses visit about 1.5 million homes in a single day.'
+        - title: 'The night of the bells.'
+          text: 'On Holy Saturday, shepherds bring their lambs to the center of Castelo de Vide, a town in the Alentejo, to be blessed. That night, after the Easter Vigil, thousands of people walk the streets ringing shepherds’ bells of every size, along with the bells of the church and the clock tower. It’s said this was how shepherds thanked the church for blessing their flocks.'
+        - title: 'Mussels instead of meat.'
+          text: 'On Good Friday, dozens of people with buckets head out at low tide to gather mussels at Magoito beach near Sintra. Older locals explain it with another custom: no meat on this day.'
     ru:
       date: '{date}'
       name: 'Пасха'

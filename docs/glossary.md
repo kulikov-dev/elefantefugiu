@@ -215,3 +215,9 @@
 | Пляж под Синтрой (мидии в Страстную пятницу) | Praia do Magoito | Magoito beach | пляж Магоиту |
 | Город на юге (сладкий фолар) | Olhão | Olhão | Ольян |
 | Писарь флота Кабрала | Pero Vaz de Caminha | Pero Vaz de Caminha | Перу Ваз ди Каминья |
+| Вербное воскресенье | Domingo de Ramos | Palm Sunday | Вербное воскресенье |
+| Страстная пятница | Sexta-feira Santa | Good Friday | Страстная пятница |
+| Страстная суббота | Sábado de Aleluia | Holy Saturday | Страстная суббота |
+| Пасхальная служба в ночь на воскресенье | Vigília Pascal | Easter Vigil | пасхальная служба |
+| Треска (сушёно-солёная) на Страстную пятницу | bacalhau | bacalhau (в en так же, как на Рождестве) | треска |
+| Мидии | mexilhão | mussels | мидии |

@@ -54,7 +54,11 @@ async function dayBuild(name, day, port) {
 }
 const OUT = want('page') || want('natal') || want('carnaval') || want('pascoa') ? await dayBuild('out', OUT_DAY, dayPort + 2) : '';
 const IN = want('carnaval') ? await dayBuild('in', CARN_DAY, dayPort + 3) : '';
-console.log(`INFO  builds of the day: outside every window ${OUT_DAY} (${OUT}), inside the window of the carnival ${CARN_DAY} (${IN})`);
+// The build inside the window of Easter: the picture of the home page to share and the indexing of its page are decided by the day of the build.
+const EASTER = festas.find((f) => f.enabled && f.art === 'folar' && 'easter' in f.date && f.date.easter === 0);
+const EASTER_DAY = EASTER ? festaDay(EASTER.date, year) : DAY;
+const IN_EASTER = want('pascoa') ? await dayBuild('in-easter', EASTER_DAY, dayPort + 4) : '';
+console.log(`INFO  builds of the day: outside every window ${OUT_DAY} (${OUT}), inside the window of the carnival ${CARN_DAY} (${IN}), of Easter ${EASTER_DAY} (${IN_EASTER})`);
 
 let failed = 0;
 const baseOk = (name, cond, extra = '') => {
@@ -525,12 +529,13 @@ if (want('carnaval')) {
   }
 }
 
-// The holiday of Easter itself (art: folar, `easter: 0`), in the languages that have its text (ru for now): window Thursday to Sunday, the block and the tab icon on the
+// The holiday of Easter itself (art: folar, `easter: 0`), in pt, en and ru: window Thursday to Sunday, the block and the tab icon on the
 // home page, the line about the date outside the window with noindex, the card of the story, a still drawing.
-const PASCOA = festas.find((f) => f.enabled && f.art === 'folar' && 'easter' in f.date && f.date.easter === 0);
+const PASCOA = EASTER;
 if (want('pascoa')) {
   if (!PASCOA) throw new Error('need: an enabled holiday with art "folar" and the date { easter: 0 } in src/data/festas.yaml. None found.');
   const P_LANGS = LANGS.filter((l) => PASCOA.text[l]);
+  ok('Easter has a text in all three languages (pt, en, ru)', P_LANGS.join() === LANGS.join(), P_LANGS.join());
   const P_STORY = published.find((e) => e.id === PASCOA.story);
   if (!P_STORY) throw new Error(`need: the story "${PASCOA.story}" of the holiday "${PASCOA.id}" among the published stories`);
   if (P_LANGS.length === 0) throw new Error(`need: a text of the holiday "${PASCOA.id}" in at least one language`);
@@ -555,6 +560,22 @@ if (want('pascoa')) {
       ok(`/${lang}/?hoje=${date} (${name}): ${inside ? 'the block of Easter and the egg icon' : 'the usual home page'}`, inside ? st.shown && header && st.icon && st.festa === PASCOA.id : !st.shown && !st.icon && st.festa !== PASCOA.id, JSON.stringify(st));
     }
     const url = `/${lang}/festa/${PASCOA.slug}/`;
+    const hreflangs = [...LANGS.map((l) => `${l} /${l}/festa/${PASCOA.slug}/`), `x-default /pt/festa/${PASCOA.slug}/`].sort().join('|');
+    const built = await open(`${url}?hoje=${day}`, { site: IN_EASTER });
+    const meta = await built.evaluate(() => ({
+      hreflang: [...document.querySelectorAll('link[rel=alternate][hreflang]')].map((l) => `${l.getAttribute('hreflang')} ${new URL(l.href).pathname}`),
+      switch: [...document.querySelectorAll('.lang-switch__list a')].map((a) => a.getAttribute('hreflang')),
+      off: document.querySelectorAll('.lang-switch__off').length,
+      robots: document.querySelector('meta[name=robots]')?.getAttribute('content') ?? '',
+      og: document.querySelector('meta[property="og:title"]')?.getAttribute('content'),
+      ogd: document.querySelector('meta[property="og:description"]')?.getAttribute('content'),
+      ogi: document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '',
+    }));
+    ok(`${url} built in the window: hreflang to the three pages and x-default, the language switch leads to all three, indexable`, meta.hreflang.slice().sort().join('|') === hreflangs && [...meta.switch].sort().join() === 'en,pt,ru' && meta.off === 0 && !/noindex/.test(meta.robots), JSON.stringify(meta));
+    ok(`${url}: the preview (title, description, picture) is the holiday's`, meta.og === `${say(lang, 'name')} · ${say(lang, 'date')}` && meta.ogd === PASCOA.text[lang].og_description && meta.ogi.includes('og-festas/'), JSON.stringify([meta.og, meta.ogd, meta.ogi]));
+    const homeIn = await open(`/${lang}/`, { site: IN_EASTER });
+    const homeOg = await homeIn.evaluate(() => document.querySelector('meta[property="og:image"]')?.getAttribute('content') ?? '');
+    ok(`/${lang}/ built in the window of Easter: the picture to share is the holiday's`, homeOg.includes('og-festas/'), homeOg);
     const off = await open(`${url}?hoje=${addDays(day, 1)}`, { site: OUT });
     const out = await off.evaluate(() => ({
       line: document.querySelector('[data-festa-off]')?.checkVisibility() ? document.querySelector('[data-festa-off]').textContent.trim() : '',
