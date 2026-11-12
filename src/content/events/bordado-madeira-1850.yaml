@@ -127,3 +127,13 @@ status: ready
 published: '2026-11-15'
 placeholder: false
 ru_ready: true
+myth:
+  verdict: myth
+  statement:
+    pt: O bordado da Madeira fazia-se em grandes fábricas
+    en: Madeira embroidery was made in big factories
+    ru: Мадейрскую вышивку делали на больших фабриках
+  answer:
+    pt: "Ninguém construiu oficinas: dezenas de milhares de bordadeiras trabalhavam em casa, recebiam o tecido com o desenho e entregavam o trabalho pronto."
+    en: "Nobody built workshops: tens of thousands of embroiderers worked at home, were brought fabric with the pattern, and the finished work was collected."
+    ru: "Цехов никто не строил: десятки тысяч вышивальщиц работали дома, им приносили ткань с рисунком и забирали готовое."

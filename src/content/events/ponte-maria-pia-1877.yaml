@@ -134,3 +134,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '1e2a30a7c569'
+myth:
+  id: maria-pia
+  verdict: fact
+  statement:
+    pt: A Ponte D. Maria Pia foi construída pela empresa de Eiffel
+    en: Eiffel’s firm built the Maria Pia Bridge in Porto
+    ru: Мост Марии Пии в Порту построила фирма Эйфеля
+  answer:
+    pt: A ponte foi encomendada à empresa parisiense de Gustave Eiffel. O seu arco de 160 metros foi o maior do mundo, doze anos antes da Torre Eiffel.
+    en: The bridge was ordered from Gustave Eiffel’s Paris firm. Its 160-meter arch was the longest in the world, twelve years before the tower.
+    ru: Мост заказали парижской фирме Гюстава Эйфеля. Его арка в 160 метров стала самой длинной в мире, за двенадцать лет до башни.

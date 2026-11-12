@@ -172,3 +172,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '7786a81daba9'
+myth:
+  id: cha
+  verdict: fact
+  statement:
+    pt: Foi uma princesa portuguesa que pôs o chá na moda em Inglaterra
+    en: A Portuguese princess made tea fashionable in England
+    ru: Чай в моду в Англии ввела португальская принцесса
+  answer:
+    pt: Catarina de Bragança, futura rainha de Inglaterra, bebia chá todos os dias e a corte seguiu-a. Já se vendia chá em Londres, mas foi ela quem o pôs na moda.
+    en: Catherine of Braganza, who became queen of England, drank tea every day, and the court followed her. Tea was already sold in London, but she made it fashionable.
+    ru: Катарина Брагансская, ставшая королевой Англии, пила чай каждый день, и за ней потянулся двор. Продавали его в Лондоне и раньше, но модным сделала она.

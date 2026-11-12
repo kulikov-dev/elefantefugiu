@@ -139,3 +139,13 @@ status: ready
 published: '2026-11-13'
 placeholder: false
 ru_ready: true
+myth:
+  verdict: fact
+  statement:
+    pt: Durante séculos foram espanhóis que levaram a água às casas de Lisboa
+    en: For centuries, Spaniards carried water to Lisbon’s homes
+    ru: Воду в дома Лиссабона веками носили испанцы
+  answer:
+    pt: "Quase sempre galegos, do norte de Espanha: com o barril ao ombro, do chafariz à porta do cliente, até chegar a água canalizada."
+    en: "Mostly Galicians from northern Spain: a barrel on the shoulder, from the public fountain to the customer’s door, until piped water arrived."
+    ru: "Чаще всего галисийцы с севера Испании: с бочонком на плече от городского фонтана до двери клиента, пока не пришёл водопровод."

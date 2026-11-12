@@ -1030,64 +1030,196 @@
       "meanwhile[0].text": "427906e2"
     }
   },
-  "myths/en": {
+  "myth/batalha-da-salga-1581/en": {
     "date": "2026-11-07",
-    "hash": "f0b968d0040a",
+    "hash": "88433dcb5002",
     "fields": {
-      "[0].statement": "ec46fd51",
-      "[0].answer": "360bf906",
-      "[1].statement": "c4fb4a38",
-      "[1].answer": "069029a9",
-      "[2].statement": "3ad5663d",
-      "[2].answer": "060af289",
-      "[3].statement": "d7db1ec6",
-      "[3].answer": "c31b70d7",
-      "[4].statement": "5978390e",
-      "[4].answer": "15494cef",
-      "[5].statement": "b04d25ed",
-      "[5].answer": "d054f6ca",
-      "[6].statement": "dc22051d",
-      "[6].answer": "643c9e15",
-      "[7].statement": "7226b715",
-      "[7].answer": "f81d104d",
-      "[8].statement": "c8761eac",
-      "[8].answer": "8e1a6a77",
-      "[9].statement": "10eb8c5f",
-      "[9].answer": "52a4153f",
-      "[10].statement": "18caab2c",
-      "[10].answer": "bb89e254",
-      "[11].statement": "6433e501",
-      "[11].answer": "e80310af"
+      "myth.statement": "d7db1ec6",
+      "myth.answer": "c31b70d7"
     }
   },
-  "myths/pt": {
+  "myth/batalha-da-salga-1581/pt": {
     "date": "2026-11-07",
-    "hash": "a8f79f4986e2",
+    "hash": "81bfa4c5d22a",
     "fields": {
-      "[0].statement": "3852a557",
-      "[0].answer": "2564e218",
-      "[1].statement": "231016c2",
-      "[1].answer": "6c6ade17",
-      "[2].statement": "a22b192f",
-      "[2].answer": "37c5c1db",
-      "[3].statement": "a872d1d0",
-      "[3].answer": "72995d4f",
-      "[4].statement": "beb57c84",
-      "[4].answer": "b19a53e1",
-      "[5].statement": "16413f32",
-      "[5].answer": "e7cdb104",
-      "[6].statement": "87c311f5",
-      "[6].answer": "14d95b0e",
-      "[7].statement": "ecc9cdd8",
-      "[7].answer": "5e0aa8f5",
-      "[8].statement": "e8df35df",
-      "[8].answer": "4f99e78e",
-      "[9].statement": "ba30b104",
-      "[9].answer": "7776a728",
-      "[10].statement": "b66f910e",
-      "[10].answer": "11850019",
-      "[11].statement": "0657502b",
-      "[11].answer": "5a3b7fa9"
+      "myth.statement": "a872d1d0",
+      "myth.answer": "72995d4f"
+    }
+  },
+  "myth/braguinha-ukulele-1879/en": {
+    "date": "2026-11-07",
+    "hash": "c92c54a86823",
+    "fields": {
+      "myth.statement": "5978390e",
+      "myth.answer": "15494cef"
+    }
+  },
+  "myth/braguinha-ukulele-1879/pt": {
+    "date": "2026-11-07",
+    "hash": "382b18dd47a4",
+    "fields": {
+      "myth.statement": "beb57c84",
+      "myth.answer": "b19a53e1"
+    }
+  },
+  "myth/catarina-cha-1662/en": {
+    "date": "2026-11-07",
+    "hash": "0dd58f98a626",
+    "fields": {
+      "myth.statement": "dc22051d",
+      "myth.answer": "643c9e15"
+    }
+  },
+  "myth/catarina-cha-1662/pt": {
+    "date": "2026-11-07",
+    "hash": "1272a07d2094",
+    "fields": {
+      "myth.statement": "87c311f5",
+      "myth.answer": "14d95b0e"
+    }
+  },
+  "myth/elevador-bom-jesus/en": {
+    "date": "2026-11-07",
+    "hash": "013991b41ff5",
+    "fields": {
+      "myth.statement": "c8761eac",
+      "myth.answer": "8e1a6a77"
+    }
+  },
+  "myth/elevador-bom-jesus/pt": {
+    "date": "2026-11-07",
+    "hash": "d8486bf29419",
+    "fields": {
+      "myth.statement": "e8df35df",
+      "myth.answer": "4f99e78e"
+    }
+  },
+  "myth/elevador-santa-justa/en": {
+    "date": "2026-11-07",
+    "hash": "6b7ff5213e7e",
+    "fields": {
+      "myth.statement": "c4fb4a38",
+      "myth.answer": "069029a9"
+    }
+  },
+  "myth/elevador-santa-justa/pt": {
+    "date": "2026-11-07",
+    "hash": "b87c5bed9264",
+    "fields": {
+      "myth.statement": "231016c2",
+      "myth.answer": "6c6ade17"
+    }
+  },
+  "myth/gravuras-coa-1995/en": {
+    "date": "2026-11-07",
+    "hash": "b02ef6741082",
+    "fields": {
+      "myth.statement": "6433e501",
+      "myth.answer": "e80310af"
+    }
+  },
+  "myth/gravuras-coa-1995/pt": {
+    "date": "2026-11-07",
+    "hash": "ab699ff15739",
+    "fields": {
+      "myth.statement": "0657502b",
+      "myth.answer": "5a3b7fa9"
+    }
+  },
+  "myth/livraria-lello/en": {
+    "date": "2026-11-07",
+    "hash": "a493278b728e",
+    "fields": {
+      "myth.statement": "ec46fd51",
+      "myth.answer": "360bf906"
+    }
+  },
+  "myth/livraria-lello/pt": {
+    "date": "2026-11-07",
+    "hash": "fc37d7260cfa",
+    "fields": {
+      "myth.statement": "3852a557",
+      "myth.answer": "2564e218"
+    }
+  },
+  "myth/morcegos-mafra-1771/en": {
+    "date": "2026-11-07",
+    "hash": "cf336c007da4",
+    "fields": {
+      "myth.statement": "10eb8c5f",
+      "myth.answer": "52a4153f"
+    }
+  },
+  "myth/morcegos-mafra-1771/pt": {
+    "date": "2026-11-07",
+    "hash": "10f65cb92b5f",
+    "fields": {
+      "myth.statement": "ba30b104",
+      "myth.answer": "7776a728"
+    }
+  },
+  "myth/pedra-da-mua/en": {
+    "date": "2026-11-07",
+    "hash": "1d06e8dc327c",
+    "fields": {
+      "myth.statement": "18caab2c",
+      "myth.answer": "bb89e254"
+    }
+  },
+  "myth/pedra-da-mua/pt": {
+    "date": "2026-11-07",
+    "hash": "f1878e588f38",
+    "fields": {
+      "myth.statement": "b66f910e",
+      "myth.answer": "11850019"
+    }
+  },
+  "myth/ponte-maria-pia-1877/en": {
+    "date": "2026-11-07",
+    "hash": "a295e82fedf0",
+    "fields": {
+      "myth.statement": "3ad5663d",
+      "myth.answer": "060af289"
+    }
+  },
+  "myth/ponte-maria-pia-1877/pt": {
+    "date": "2026-11-07",
+    "hash": "9b05d68ccbc6",
+    "fields": {
+      "myth.statement": "a22b192f",
+      "myth.answer": "37c5c1db"
+    }
+  },
+  "myth/templo-romano-evora/en": {
+    "date": "2026-11-07",
+    "hash": "d2ce5acad10d",
+    "fields": {
+      "myth.statement": "7226b715",
+      "myth.answer": "f81d104d"
+    }
+  },
+  "myth/templo-romano-evora/pt": {
+    "date": "2026-11-07",
+    "hash": "7a03ff9b6c4f",
+    "fields": {
+      "myth.statement": "ecc9cdd8",
+      "myth.answer": "5e0aa8f5"
+    }
+  },
+  "myth/termas-vipasca/en": {
+    "date": "2026-11-07",
+    "hash": "d6260306b65d",
+    "fields": {
+      "myth.statement": "b04d25ed",
+      "myth.answer": "d054f6ca"
+    }
+  },
+  "myth/termas-vipasca/pt": {
+    "date": "2026-11-07",
+    "hash": "ccb91221444f",
+    "fields": {
+      "myth.statement": "16413f32",
+      "myth.answer": "e7cdb104"
     }
   },
   "static/about/en": {

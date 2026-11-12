@@ -176,3 +176,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'df8b27ec76d1'
+myth:
+  id: mafra
+  verdict: part
+  statement:
+    pt: Os livros da biblioteca de Mafra são guardados por morcegos
+    en: Bats guard the books in the Mafra library
+    ru: Книги в библиотеке Мафры охраняют летучие мыши
+  answer:
+    pt: Os morcegos existem mesmo e à noite caçam os insetos que roem o papel. Mas desde quando lá estão e quanto ajudam os livros, ninguém mediu.
+    en: The bats are real and hunt paper-eating insects at night. But no one has measured how long they have been there or how much they help the books.
+    ru: Летучие мыши там живут и ночью охотятся на насекомых, которые точат бумагу. Но с каких пор они там и сколько пользы книгам, никто не измерял.

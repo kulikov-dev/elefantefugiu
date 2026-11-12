@@ -24,7 +24,7 @@ const LOCALE = { pt: 'pt-PT', en: 'en-US', ru: 'ru-RU' };
 const GAMES = { pt: 'jogos', en: 'games', ru: 'igry' };
 const SEG = { myths: { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' }, order: { pt: 'o-que-veio-primeiro', en: 'which-came-first', ru: 'chto-bylo-ranshe' } };
 const RANKSEG = { pt: 'titulo', en: 'rank', ru: 'zvanie' };
-if (myths.length < 2) throw new Error('The suite needs at least two claims in src/content/myths.yaml whose story is published (need: two claims).');
+if (myths.length < 2) throw new Error('The suite needs at least two claims in published stories (the field `myth` in src/content/events) (need: two claims).');
 const bandsOf = (game, lang) => Object.keys(ui(game === 'myths' ? 'myths' : 'order', lang)).filter((k) => k.startsWith('band_')).map((k) => k.slice(5));
 const rankDesc = (game, lang) => {
   if (game === 'order') return ui('order.rank_og_description', lang);
@@ -115,9 +115,9 @@ if (want('page')) {
 
 if (want('state')) {
   for (const lang of LANGS) {
-    const total = myths.length;
+    const total = Math.min(10, myths.length);
     const outcomes = (n, hit) => Array.from({ length: total }, (_, i) => (i < n ? (hit ? 'hit' : 'miss') : null));
-    const mythsGame = (marks) => JSON.stringify({ order: myths.map((m) => m.id), marks });
+    const mythsGame = (marks) => JSON.stringify({ order: myths.slice(0, total).map((m) => m.id), marks });
     const orderGame = (picks, hits, index) => JSON.stringify({ pairs: picks.map(() => ['a', 'b']), picks, hits, index });
     const state = async (storage, game) => { const p = await open({ lang, path: `${GAMES[lang]}/`, storage }); const t = await p.$eval(`[data-game-card="${game}"] [data-state]`, (e) => e.textContent.trim()); await p.close(); return t; };
     const k = Math.min(4, total - 1);

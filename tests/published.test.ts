@@ -113,3 +113,43 @@ test('on the day it is published the same story is allowed (SITE_TODAY is the da
   const r = runWithCards({ 'pt/historia/tomorrow-story-pt/index.html': '<html></html>' }, { SITE_TODAY: tomorrow });
   assert.equal(r.status, 0, r.stderr);
 });
+
+// ---- the claim of a story of a later day (the game "Myth or fact" takes the claims from the stories) ----
+const CLAIM = 'Port wine went to the sea along a road by the river';
+const ANSWER = 'There were no roads along the steep banks, so the casks floated.';
+const withClaim = (id: string, published: string) =>
+  [card(id, published, `The story of ${id}`), 'myth:', '  verdict: myth', '  statement:', `    pt: ${CLAIM} pt`, `    en: ${CLAIM}`, `    ru: ${CLAIM} ru`, '  answer:', `    pt: ${ANSWER} pt`, `    en: ${ANSWER}`, `    ru: ${ANSWER} ru`, ''].join('\n');
+
+function runWithClaim(files: Record<string, string>, env: Record<string, string> = {}) {
+  const events = mkdtempSync(join(tmpdir(), 'events-'));
+  writeFileSync(join(events, 'yesterday-story.yaml'), card('yesterday-story', addDays(todayInLisbon, -1), 'The story of yesterday'));
+  writeFileSync(join(events, 'claim-story.yaml'), withClaim('claim-story', addDays(todayInLisbon, 1)));
+  const dist = mkdtempSync(join(tmpdir(), 'dist-'));
+  try {
+    for (const [name, text] of Object.entries(files)) {
+      const path = join(dist, name);
+      mkdirSync(join(path, '..'), { recursive: true });
+      writeFileSync(path, text);
+    }
+    return spawnSync(process.execPath, [script], { env: { ...process.env, CHECK_DIST: dist, CHECK_EVENTS: events, ...env }, encoding: 'utf8' });
+  } finally {
+    rmSync(dist, { recursive: true, force: true });
+    rmSync(events, { recursive: true, force: true });
+  }
+}
+
+test('the claim of the story queued for tomorrow is nowhere: not in the page of the game, not in its preview, not as a card address', () => {
+  assert.equal(runWithClaim({ 'en/index.html': '<html><body>Nothing here</body></html>' }).status, 0);
+  const leak = runWithClaim({ 'en/myth-or-fact/index.html': `<html><body><p class="myth__statement">${CLAIM}</p></body></html>` });
+  assert.equal(leak.status, 1);
+  assert.match(leak.stderr, /claim or the answer/);
+  assert.equal(runWithClaim({ 'en/myth-or-fact/index.html': `<html><body><p>${ANSWER}</p></body></html>` }).status, 1);
+  const picture = runWithClaim({ 'og-myths/claim-story-en-0123456789.jpg': 'x' });
+  assert.equal(picture.status, 1);
+  assert.match(picture.stderr, /preview picture of a claim/);
+});
+
+test('on the day it is published the claim may be in the page of the game', () => {
+  const r = runWithClaim({ 'en/myth-or-fact/index.html': `<html><body>${CLAIM}</body></html>`, 'og-myths/claim-story-en-0123456789.jpg': 'x' }, { SITE_TODAY: addDays(todayInLisbon, 1) });
+  assert.equal(r.status, 0, r.stderr);
+});

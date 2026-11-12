@@ -157,3 +157,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'e9770a5b366e'
+myth:
+  id: santa-justa
+  verdict: myth
+  statement:
+    pt: O Elevador de Santa Justa, em Lisboa, foi construído por Eiffel
+    en: Eiffel built the Santa Justa Lift in Lisbon
+    ru: Лифт Санта-Жушта в Лиссабоне построил Эйфель
+  answer:
+    pt: Foi projetado por Raoul Mesnier du Ponsard, engenheiro português de origem francesa. O ferro rendilhado ao gosto de Eiffel deu origem à lenda.
+    en: It was designed by Raoul Mesnier du Ponsard, a Portuguese engineer of French descent. The lacy ironwork in Eiffel’s style gave rise to the legend.
+    ru: Его спроектировал Рауль Мениер дю Понсар, португальский инженер французского происхождения. Ажурное железо в духе Эйфеля и породило легенду.

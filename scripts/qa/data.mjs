@@ -16,8 +16,12 @@ export const events = readdirSync(`${content}events`)
   .map((f) => ({ ...parse(readFileSync(`${content}events/${f}`, 'utf8')), file: f }));
 export const published = events.filter((e) => isLive(e));
 export const fixtures = events.filter((e) => e.status === 'draft');
-/** The claims of "Myth or fact" whose story is on the site (src/content/myths.yaml), in the order of the file. */
-export const myths = read('myths.yaml').filter((m) => published.some((e) => e.id === m.story));
+/** The pool of "Myth or fact": a claim of every story that is on the site (the same `isLive` as the build), not sensitive, with a `myth` (src/content/events/*.yaml); the id is its own `myth.id` or the id of the story. */
+export const myths = published.filter((e) => e.myth && !e.sensitive).map((e) => ({ ...e.myth, id: e.myth.id ?? e.id, story: e.id }));
+/** The claims of stories that wait for a later day: nowhere on the site. */
+export const queuedMyths = events.filter((e) => e.myth && !isLive(e)).map((e) => ({ ...e.myth, id: e.myth.id ?? e.id, story: e.id }));
+/** A round is ten claims of the pool (all of them when there are fewer): the length of a game. */
+export const ROUND = Math.min(10, myths.length);
 export const epochs = read('epochs.yaml').sort((a, b) => a.order - b.order);
 export const threads = read('threads.yaml');
 

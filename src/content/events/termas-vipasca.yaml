@@ -171,3 +171,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'b0c422c8b82b'
+myth:
+  id: vipasca
+  verdict: fact
+  statement:
+    pt: Nos banhos romanos as mulheres pagavam o dobro dos homens
+    en: In the Roman baths, women paid twice what men did
+    ru: В римской бане женщины платили вдвое больше мужчин
+  answer:
+    pt: Pela lei das placas de bronze de Vipasca, o homem pagava meia moeda e a mulher uma inteira. Porquê, os historiadores discutem.
+    en: By the law on the bronze tablets of Vipasca, a man paid half a coin and a woman a whole one. Historians argue over why.
+    ru: По закону на бронзовых досках из Випаски мужчина платил полмонеты, женщина целую. Почему, историки спорят.

@@ -159,3 +159,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'ea56294a173b'
+myth:
+  id: lello
+  verdict: myth
+  statement:
+    pt: A Rowling imaginou Hogwarts a olhar para a escada da livraria Lello
+    en: Rowling imagined Hogwarts from the staircase of the Lello bookstore
+    ru: Роулинг придумала Хогвартс, глядя на лестницу в магазине Lello
+  answer:
+    pt: A própria Rowling escreveu em 2020 que nunca lá esteve. A lenda nasceu de ela ter vivido no Porto no início dos anos 90.
+    en: Rowling herself wrote in 2020 that she had never been there. The legend grew out of her living in Porto in the early 1990s.
+    ru: Сама Роулинг написала в 2020 году, что никогда там не бывала. Легенда выросла из того, что в начале 1990-х она жила в Порту.

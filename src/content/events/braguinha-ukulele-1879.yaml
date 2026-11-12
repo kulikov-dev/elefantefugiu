@@ -182,3 +182,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '2b416cadd7c9'
+myth:
+  id: ukulele
+  verdict: part
+  statement:
+    pt: O ukulele foi inventado no Havai
+    en: The ukulele was invented in Hawaii
+    ru: Укулеле придумали на Гавайях
+  answer:
+    pt: Foi mesmo feito no Havai, mas por marceneiros madeirenses, que juntaram o corpo da braguinha à afinação do rajão. O nome deram-no os havaianos.
+    en: It really was made in Hawaii, but by Madeiran carpenters, who took the body of the braguinha and the tuning of the rajão. Hawaiians gave it the name.
+    ru: Сделали его действительно на Гавайях, но мадейрские столяры, взяв корпус от брагиньи и строй от ражана. Имя дали гавайцы.

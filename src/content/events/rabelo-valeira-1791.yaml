@@ -131,3 +131,13 @@ status: ready
 published: '2026-11-16'
 placeholder: false
 ru_ready: true
+myth:
+  verdict: myth
+  statement:
+    pt: O vinho do Porto seguia para o mar pela estrada do Douro
+    en: Port wine went to the sea by road along the Douro
+    ru: Портвейн везли к морю по дороге вдоль Дору
+  answer:
+    pt: "Não havia estradas nas margens íngremes: as pipas desciam o rio em barcos rabelos e, por causa deles, até se partiu um rochedo no desfiladeiro da Valeira."
+    en: "There were no roads along the steep banks: casks floated downriver on rabelo boats, and for them a rock was even broken up in the Valeira gorge."
+    ru: "Дорог по крутым берегам не было: бочки сплавляли по реке на лодках рабелу, а ради них даже разбили скалу в ущелье Валейра."

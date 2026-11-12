@@ -118,6 +118,19 @@ const isoDate = z.preprocess(
 /** "Read by a language editor": the day and the hash of the text of one language at that time (scripts/lang-mark.ts writes it, npm run lang:pending reads it). */
 const langMark = z.strictObject({ date: isoDate, hash: z.string() });
 
+/** "Myth or fact" (docs/spec.md 5.8): the claim of a story, its verdict and a short answer, all three languages. The game takes every published story with a `myth` that is not `sensitive` (src/lib/myths-pool.ts). */
+export const MYTH_VERDICTS = ['myth', 'fact', 'part'] as const;
+export type MythVerdict = (typeof MYTH_VERDICTS)[number];
+const mythText = z.strictObject({ pt: z.string().min(1), en: z.string().min(1), ru: z.string().min(1) });
+export const eventMythSchema = z.strictObject({
+  /** The anchor and the address of the claim (/ru/mif-ili-pravda/<id>/); left out, it is the id of the story. Only for a claim that already has an address out in the world. */
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/).optional(),
+  verdict: z.enum(MYTH_VERDICTS),
+  statement: mythText,
+  answer: mythText,
+});
+export type EventMyth = z.infer<typeof eventMythSchema>;
+
 /** "Meanwhile": a fact from elsewhere near the year of the story (src/lib/meanwhile.ts holds the rules; check:data adds the word-count warnings). */
 const meanwhileItem = z.strictObject({
   scope: z.enum(MEANWHILE_SCOPES),
@@ -189,6 +202,8 @@ export const eventSchema = z
   /** Up to four lines (one per scope); a page shows two after the story: the one for its language (scope pt / en / ru), then the world. Optional. */
   meanwhile: z.array(meanwhileItem).max(MEANWHILE_MAX_ITEMS).optional(),
   more: text,
+  /** Optional: a claim for the game "Myth or fact". */
+  myth: eventMythSchema.optional(),
   sources: z.array(source),
   image: picture.optional(),
   /** A second picture (a document, a map, a portrait) shown inside "More", whole, never cropped. */
@@ -426,27 +441,8 @@ export const festaListSchema = z.array(festaSchema).superRefine((list, ctx) => {
 export type FestaData = z.infer<typeof festaSchema>;
 export type FestaText = z.infer<typeof festaTextSchema>;
 
-// "Myth or fact" (src/content/myths.yaml, docs/spec.md 5.8): a claim, a verdict, a short answer, the story behind it. The order of the list is the order on the page.
-export const MYTH_VERDICTS = ['myth', 'fact', 'part'] as const;
-export type MythVerdict = (typeof MYTH_VERDICTS)[number];
-const mythText = z.strictObject({ pt: z.string().min(1), en: z.string().min(1), ru: z.string().min(1) });
-
-export const mythSchema = z.strictObject({
-  /** The anchor of the card and the last part of its address; the same in every language. */
-  id: z.string().regex(/^[a-z][a-z0-9-]*$/),
-  /** The id of the story the claim rests on. */
-  story: z.string().min(1),
-  verdict: z.enum(MYTH_VERDICTS),
-  statement: mythText,
-  answer: mythText,
-});
-
-export const mythListSchema = z.array(mythSchema).superRefine((list, ctx) => {
-  const seen = new Set<string>();
-  list.forEach((m, i) => {
-    if (seen.has(m.id)) ctx.addIssue({ code: 'custom', path: [i, 'id'], message: `id ${m.id} is used twice` });
-    seen.add(m.id);
-  });
-});
-
-export type MythData = z.infer<typeof mythSchema>;
+/** A claim of the pool as the pages and the game read it: the claim of a story with its address id and the id of the story. */
+export interface MythData extends EventMyth {
+  id: string;
+  story: string;
+}

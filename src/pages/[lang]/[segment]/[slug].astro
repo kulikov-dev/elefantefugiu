@@ -16,8 +16,7 @@ import ThreadView from '../../../views/ThreadView.astro';
 import { EPOCH_SEGMENT, LANGS, PANNO_SEGMENT, ROUTES, STORY_SEGMENT, THREAD_SEGMENT, type Lang } from '../../../i18n/routes';
 import { epochHasContent, type EpochData, type ThreadData } from '../../../lib/epochs';
 import type { EventData } from '../../../lib/events';
-import { liveMyths } from '../../../lib/myths';
-import { MYTHS } from '../../../lib/myths-data';
+import { mythPool } from '../../../lib/myths-pool';
 import { loadSite } from '../../../lib/site-data';
 
 type PageProps =
@@ -46,7 +45,7 @@ export const getStaticPaths = (async () => {
         params: { lang, segment: PANNO_SEGMENT[lang], slug: epoch.slug[lang] },
         props: { kind: 'panno', epoch } as PageProps,
       })),
-    ...liveMyths(MYTHS, site.events).map((myth) => ({
+    ...mythPool(site.events).map((myth) => ({
       params: { lang, segment: ROUTES.myths[lang], slug: myth.id },
       props: { kind: 'myth', id: myth.id } as PageProps,
     })),

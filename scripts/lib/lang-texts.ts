@@ -67,8 +67,10 @@ function stories(): TextItem[] {
       const file = `src/content/events/${f}`;
       // The "Meanwhile" lines are a unit of their own (`meanwhile/<id>`): adding them must not turn the marks of the story into "changed after reading".
       return [
-        ...fromYaml(`event/${data.id}`, file, data, langs, new Set(['lang_review', 'meanwhile'])),
+        ...fromYaml(`event/${data.id}`, file, data, langs, new Set(['lang_review', 'meanwhile', 'myth'])),
         ...fromYaml(`meanwhile/${data.id}`, file, { meanwhile: data.meanwhile ?? [] }, langs),
+        // The claim of the game "Myth or fact" is a unit of its own too (`myth/<id>`): adding it must not turn the marks of the story into "changed after reading".
+        ...(data.myth ? fromYaml(`myth/${data.id}`, file, { myth: data.myth }, langs) : []),
       ];
     });
 }
@@ -82,12 +84,6 @@ function collection(name: 'epochs' | 'threads'): TextItem[] {
     const skip = new Set<string>(Array.isArray(rec.placeholder) ? rec.placeholder : []);
     return fromYaml(`${kind}/${rec.id}`, file, rec, LANG_LIST, skip);
   });
-}
-
-/** "Myth or fact": the claims and answers are one unit (`myths`), read together. */
-function myths(): TextItem[] {
-  const file = 'src/content/myths.yaml';
-  return fromYaml('myths', file, readYaml(join(root, file)), LANG_LIST);
 }
 
 /** The holidays (src/data/festas.yaml): the texts of one holiday are one unit (`festa/<id>`); a holiday with no text yet has no unit. */
@@ -137,7 +133,7 @@ function interfaceStrings(): TextItem[] {
 
 /** All the texts of the site that are read. */
 export function collectTexts(): TextItem[] {
-  return [...stories(), ...collection('epochs'), ...collection('threads'), ...myths(), ...festas(), ...staticPages(), ...interfaceStrings()];
+  return [...stories(), ...collection('epochs'), ...collection('threads'), ...festas(), ...staticPages(), ...interfaceStrings()];
 }
 
 /** The hash of the text of one language of a unit: over every field in the order of the inventory, with the field name. */

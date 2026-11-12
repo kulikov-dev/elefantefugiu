@@ -124,3 +124,13 @@ status: ready
 published: '2026-11-12'
 placeholder: false
 ru_ready: true
+myth:
+  verdict: fact
+  statement:
+    pt: Nas escadas dos palácios de Lisboa havia criados feitos de azulejo
+    en: Lisbon’s palaces had servants made of tile standing by the stairs
+    ru: Слуг у лестниц лиссабонских дворцов делали из плитки
+  answer:
+    pt: "Sim, são as «figuras de convite»: lacaios e damas de azulejo em tamanho natural recebiam os convidados à entrada e na escada."
+    en: "Yes, these are figuras de convite, “welcome figures”: life-size tile footmen and ladies greeted guests at the entrance and on the stairs."
+    ru: "Да, это «фигуры приглашения»: лакеи и дамы из азулежу в человеческий рост встречали гостей у входа и на лестнице."

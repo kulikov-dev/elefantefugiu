@@ -145,3 +145,14 @@ lang_review:
   en:
     date: '2026-11-07'
     hash: 'c1c1ba54bb1b'
+myth:
+  id: espichel
+  verdict: myth
+  statement:
+    pt: As pegadas no Cabo Espichel são da mula de Nossa Senhora
+    en: The footprints at Cape Espichel were left by the Virgin’s mule
+    ru: Следы на скале у мыса Эшпишел оставил мул Богородицы
+  answer:
+    pt: Diz a lenda que a mula subiu a falésia com Nossa Senhora. Na verdade, os trilhos foram deixados por saurópodes há cerca de 150 milhões de anos.
+    en: Legend says a mule carried the Virgin up the cliff. The trackways were actually left by sauropods about 150 million years ago.
+    ru: По легенде, мул поднял Богородицу на скалу. На самом деле цепочки следов оставили зауроподы около 150 млн лет назад.
