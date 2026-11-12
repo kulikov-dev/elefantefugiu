@@ -219,7 +219,7 @@ if (want('scale')) {
   await page.click('.epoch-scale button[data-epoca="avis-e-descobrimentos"]');
   await wait(800);
   const c = await page.evaluate(() => ({ pressed: document.querySelector('.epoch-scale button[data-epoca="avis-e-descobrimentos"]').getAttribute('aria-pressed'), all: document.querySelector('.epoch-scale button[data-epoca=""]').getAttribute('aria-pressed'), count: document.querySelector('[data-list-count]').textContent, url: location.search }));
-  ok('scale: pressing an epoch filters the map and the list, the address says so', c.pressed === 'true' && c.all === 'false' && c.count === '7' && /epoca=avis/.test(c.url), JSON.stringify(c));
+  ok('scale: pressing an epoch filters the map and the list, the address says so', c.pressed === 'true' && c.all === 'false' && c.count === String(world.inEpoch('avis-e-descobrimentos').length) && /epoca=avis/.test(c.url), JSON.stringify(c));
   await page.close();
 }
 

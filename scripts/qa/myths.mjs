@@ -144,7 +144,7 @@ if (want('answer')) {
     // The title of the story and its picture are not in the page's text before the answer is shown.
     ok(`${lang}: the title of the story is not visible before the answer`, !(await page.evaluate((c) => { const el = document.querySelector(`${c} .myth__story-title`); return el ? el.checkVisibility() : false; }, card)));
     const hidden = await page.$$eval('[data-myth]', (l) => l.map((c) => !c.checkVisibility()));
-    ok(`${lang}: one card is shown, the others are hidden`, hidden[0] === false && hidden.slice(1).every(Boolean), hidden.join());
+    ok(`${lang}: one card is shown, the first of the round; the others are hidden`, hidden.filter((h) => !h).length === 1 && hidden[(await page.$eval('[data-myth]', (l) => l.findIndex((c) => c.dataset.myth === round[0])))] === false, hidden.join());
     const before = await stored(page);
     await page.click(`${card} [data-pick="myth"]`);
     await wait(200);
@@ -273,8 +273,9 @@ if (want('game')) {
     const again = await page.evaluate(() => ({
       ids: [...document.querySelectorAll('[data-myth]')].map((c) => c.dataset.myth),
       shown: [...document.querySelectorAll('[data-myth]')].filter((c) => c.checkVisibility()).length,
-      open: [...document.querySelectorAll('[data-answer]')].some((d) => d.open),
-      disabled: [...document.querySelectorAll('[data-pick]')].some((b) => b.disabled),
+      // Only the card on the screen: a claim of the old round that is not dealt again stays as it was (hidden) until a round deals it, and then it is reset.
+      open: [...document.querySelectorAll('[data-myth]')].filter((c) => c.checkVisibility()).some((c) => c.querySelector('[data-answer]').open),
+      disabled: [...document.querySelectorAll('[data-myth]')].filter((c) => c.checkVisibility()).some((c) => [...c.querySelectorAll('[data-pick]')].some((b) => b.disabled)),
       final: document.querySelector('[data-final]').checkVisibility(),
       best: document.querySelector('[data-best]').textContent.trim(),
       bestShown: document.querySelector('[data-best]').checkVisibility(),
@@ -418,7 +419,7 @@ if (want('card')) {
       return {
         order: [...document.querySelectorAll('[data-myth]')].map((c) => c.dataset.myth),
         shown: document.querySelector('.myth:not([hidden])')?.dataset.myth,
-        first: document.querySelector('[data-myth]')?.classList.contains('myth--first'),
+        first: document.querySelector('.myth--first')?.dataset.myth,
         robots: meta('name', 'robots'),
         canonical: document.querySelector('link[rel="canonical"]')?.getAttribute('href'),
         ogUrl: meta('property', 'og:url'),
@@ -434,9 +435,9 @@ if (want('card')) {
     ok(`${lang}: the card of the address is the first of the round (the one shown), the page holds the whole pool`, info.shown === m.id && info.order.length === LIST.length, `${info.shown} ${info.order.length}`);
     const plain = await open({ lang, id: m.id, js: false });
     const plainOrder = await plain.$$eval('[data-myth]', (l) => l.map((c) => c.dataset.myth));
-    ok(`${lang}: without JavaScript the card of the address is first and the others follow`, plainOrder[0] === m.id && plainOrder.slice(1).join() === LIST.filter((x) => x.id !== m.id).map((x) => x.id).join(), plainOrder.join());
+    ok(`${lang}: without JavaScript the card of the address is first and the others follow`, plainOrder[0] === m.id && [...plainOrder.slice(1)].sort().join() === LIST.filter((x) => x.id !== m.id).map((x) => x.id).sort().join(), plainOrder.join());
     await plain.close();
-    ok(`${lang}: it is marked`, info.first);
+    ok(`${lang}: it is marked`, info.first === m.id, String(info.first));
     ok(`${lang}: noindex, canonical to the page of all of them, og:url is its own address`, /noindex/.test(info.robots) && new URL(info.canonical).pathname === `/${lang}/${SEG[lang]}/` && new URL(info.ogUrl).pathname === `/${lang}/${SEG[lang]}/${m.id}/`, `${info.robots} ${info.canonical} ${info.ogUrl}`);
     const stmt = m.statement[lang].replace(/[.!?]+$/u, '');
     ok(`${lang}: og:title has the claim, og:description invites to the link`, info.ogTitle.endsWith(`: ${stmt}?`) && info.ogTitle.length > stmt.length && info.ogDescription.length > 10, `${info.ogTitle} | ${info.ogDescription}`);
