@@ -37,6 +37,9 @@ const files = walk(dist);
 const publishedWords = new Set(published.flatMap((c) => [c.id, ...Object.values(c.slug ?? {})]));
 const words = [...new Set(hidden.flatMap((c) => [c.id, ...Object.values(c.slug ?? {})]))].filter((w) => w && w.length >= 6 && !publishedWords.has(w));
 const titles = [...new Set(hidden.flatMap((c) => Object.values(c.title ?? {})))].filter((t) => typeof t === 'string' && t.length >= 12);
+// The claim of such a card (the game "Myth or fact" takes its claims from the stories): its statement and answer in any language are not in a page, its picture is not in og-myths/.
+const claimTexts = [...new Set(hidden.flatMap((c) => (c.myth ? [...Object.values(c.myth.statement ?? {}), ...Object.values(c.myth.answer ?? {})] : [])))].filter((t) => typeof t === 'string' && t.length >= 12);
+const claimPictures = hidden.filter((c) => c.myth).map((c) => new RegExp(`^og-myths/${(c.myth.id ?? c.id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-(?:pt|en|ru)-[0-9a-f]+\\.jpg$`));
 const wordRe = (w) => new RegExp(`(?<![\\w-])${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w-])`);
 const wordRes = words.map((w) => [w, wordRe(w)]);
 
@@ -46,6 +49,7 @@ let mapPages = 0;
 for (const file of files) {
   const rel = relative(dist, file).split(sep).join('/');
   for (const w of words) if (rel.split('/').includes(w) || rel.split('/').some((part) => part.replace(/\.[a-z]+$/, '') === w)) errors.push(`${rel}: the path is named after a card that is not published (${w})`);
+  if (claimPictures.some((re) => re.test(rel))) errors.push(`${rel}: the preview picture of a claim of a card that is not published`);
   if (!TEXT.has(extname(file))) continue;
   const text = readFileSync(file, 'utf8');
   looked += 1;
@@ -54,6 +58,7 @@ for (const file of files) {
   if (extname(file) === '.html') {
     const body = text.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '');
     for (const t of titles) if (body.includes(t)) errors.push(`${rel}: the title of a card that is not published appears in the page ("${t}")`);
+    for (const t of claimTexts) if (body.includes(t) || text.includes(t)) errors.push(`${rel}: the claim or the answer of a card that is not published appears in the page ("${t.slice(0, 40)}")`);
     for (const m of text.matchAll(/<script[^>]*data-(?:home-)?map-config[^>]*>([\s\S]*?)<\/script>/g)) {
       mapPages += 1;
       let config;

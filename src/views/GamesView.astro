@@ -6,8 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { GAME_OG, gamePicture, gamesCollagePath } from '../lib/games-images';
 import { pagePath, withBase, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
-import { liveMyths } from '../lib/myths';
-import { MYTHS } from '../lib/myths-data';
+import { mythPool } from '../lib/myths-pool';
 import { pageNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 import { loadSite } from '../lib/site-data';
@@ -18,7 +17,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const site = await loadSite();
-const myths = liveMyths(MYTHS, site.events);
+const myths = mythPool(site.events);
 const title = t(lang, 'pages.games.title');
 const cards = [
   { key: 'myths' as const, href: pagePath(lang, 'myths'), name: t(lang, 'pages.myths.title'), line: plural(lang, 'games.myths_line', myths.length), picture: gamePicture('myths') },

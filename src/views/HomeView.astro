@@ -24,8 +24,8 @@ import { setKey, startSet, withFallback } from '../lib/start-set';
 import { HOME_PREVIEW } from '../lib/og';
 import { OG_CARD, festaCardPath, festaCardSize, homeCardPath } from '../lib/og-cards';
 import TimelineStrip from '../components/TimelineStrip.astro';
-import { liveMyths } from '../lib/myths';
-import { MYTHS } from '../lib/myths-data';
+import { roundSizeOf } from '../lib/myths';
+import { mythPool } from '../lib/myths-pool';
 
 interface Props {
   lang: Lang;
@@ -35,7 +35,7 @@ const { lang } = Astro.props;
 const site = await loadSite();
 
 // "Myth or fact": the invitation after "Where to start" (only when there is a claim to play).
-const mythIds = liveMyths(MYTHS, site.events).map((m) => m.id);
+const mythIds = mythPool(site.events).map((m) => m.id);
 const mythCount = mythIds.length;
 const mythStrings = { continue: t(lang, 'home.myths_continue'), band_low: t(lang, 'myths.band_low'), band_mid: t(lang, 'myths.band_mid'), band_high: t(lang, 'myths.band_high'),again: t(lang, 'home.myths_again') };
 const hasMyths = mythCount > 0;
@@ -191,7 +191,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
         <section class="home-myths" aria-labelledby="myths-title" data-home-myths data-ids={JSON.stringify(mythIds)} data-strings={JSON.stringify(mythStrings)}>
           <h2 id="myths-title">{t(lang, 'home.myths_title')}</h2>
           <p>{t(lang, 'home.myths_line').replace('{stories}', plural(lang, 'plural.stories', mythCount))}</p>
-          <ol class="squares" aria-hidden="true" data-tiles>{Array.from({ length: mythCount }, () => <li class="sq sq--empty" />)}</ol>
+          <ol class="squares" aria-hidden="true" data-tiles>{Array.from({ length: roundSizeOf(mythCount) }, () => <li class="sq sq--empty" />)}</ol>
           <p class="home-myths__result" data-result hidden></p>
           <p><a class="button" href={pagePath(lang, 'myths')} data-play>{t(lang, 'home.myths_play')}</a></p>
         </section>

@@ -143,3 +143,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'e8321f1e5740'
+myth:
+  id: bom-jesus
+  verdict: fact
+  statement:
+    pt: O funicular de Braga anda a água, sem motor
+    en: The funicular in Braga runs on water, with no motor
+    ru: Фуникулёр в Браге ездит на воде, без мотора
+  answer:
+    pt: O depósito da cabine de cima enche-se de água, a cabine fica mais pesada, desce e puxa a de baixo. Ainda hoje não tem motor.
+    en: The upper car’s tank is filled with water, so it gets heavier, rolls down, and pulls the lower car up. It still has no motor today.
+    ru: Верхнюю кабину заливают водой, она тяжелеет, едет вниз и тянет нижнюю наверх. Мотора у фуникулёра нет и сегодня.

@@ -23,8 +23,9 @@ if (root) {
   const myths = parseGame(read(GAME_KEY), mythIds);
   if (myths) {
     const done = answered(myths);
-    if (done === mythIds.length) put('myths', s(`myths_band_${bandOf(hitsOf(myths), mythIds.length)}`));
-    else if (done > 0) put('myths', s('continue_myths', { done: done + 1, total: mythIds.length }));
+    const total = myths.order.length;
+    if (done === total) put('myths', s(`myths_band_${bandOf(hitsOf(myths), total)}`));
+    else if (done > 0) put('myths', s('continue_myths', { done: done + 1, total }));
   }
 
   try {

@@ -17,7 +17,7 @@ if (root && tiles && result && play) {
     game = undefined;
   }
   if (game) {
-    const total = ids.length;
+    const total = game.order.length;
     const done = answered(game);
     tiles.replaceChildren(
       ...game.marks.map((mark) => {

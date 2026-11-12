@@ -125,3 +125,13 @@ status: ready
 published: '2026-11-14'
 placeholder: false
 ru_ready: true
+myth:
+  verdict: fact
+  statement:
+    pt: O primeiro filme sonoro português foi sobre uma cantora de fado
+    en: Portugal’s first sound film was about a fado singer
+    ru: Первый звуковой фильм Португалии сняли о певице фаду
+  answer:
+    pt: «A Severa» (1931) é sobre Maria Severa, cantora das tabernas de Lisboa, morta em 1846. Quase não há documentos sobre ela, mas há muitas lendas.
+    en: “A Severa” (1931) is about Maria Severa, a singer from Lisbon’s taverns who died in 1846. There are hardly any documents about her, but plenty of legends.
+    ru: «Севера» (1931) о Марии Севере, певице из лиссабонских таверн, умершей в 1846 году. Документов о ней почти нет, зато легенд много.

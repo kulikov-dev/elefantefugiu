@@ -1,10 +1,11 @@
 // "Myth or fact" (src/views/MythsView.astro, docs/spec.md 5.8). With this script the page is a game: one card at a time, a row of squares at the top (empty / right / wrong),
 // a press on "Myth" or "Fact" opens the answer of the card, says whether the guess was right, marks the pressed button, turns both off and shows "Next". After the last card
-// comes the result (src/components/GameResult.astro, src/scripts/game-result.ts): the row of tiles and a title by the range (no score, no percent), the misses with links to their stories, Share, Play again (the order is shuffled), Read the stories.
-// A game that is not finished is kept in localStorage (the order and the answers) and goes on from the same card; the home page reads it too. A saved game of other claims is dropped.
+// comes the result (src/components/GameResult.astro, src/scripts/game-result.ts): the row of tiles and a title by the range (no score, no percent), the misses with links to their stories, Share, Play again (a new round), Read the stories.
+// The page holds the whole pool of claims (every published story with a `myth`); a round is ten of them (src/lib/myths.ts: at least three "Myth" and three "Fact", random, in a random order; "Play again" deals a new round that avoids the claims of the last one as far as the pool allows).
+// A round that is not finished is kept in localStorage (its claims and the answers) and goes on from the same card; the home page reads it too. A saved round with a claim that has left the pool is dropped and a new one starts.
 // The counter (the one already on the site; without it nothing breaks) gets `myth-<id>` per answer, `myths-finish` per result and `myths-share` per shared result. The only thing
 // kept is the best result, in localStorage. Without this script the <details> of each card opens by "Answer" and all the cards are in a list.
-import { BEST_KEY, FINISH_EVENT, GAME_KEY, SHARE_EVENT, answerEvent, answered, bandOf, fill, outcomeOf, parseBest, parseGame, shuffled, squaresLine, type Best, type Game, type Outcome, type Choice } from '../lib/myths';
+import { BEST_KEY, FINISH_EVENT, GAME_KEY, SHARE_EVENT, answerEvent, answered, bandOf, fill, outcomeOf, parseBest, parseGame, pickRound, roundSizeOf, squaresLine, type Best, type Game, type Outcome, type Choice } from '../lib/myths';
 import { countEvent, drawTiles, initResult, type TileState } from './game-result';
 
 type Mark = Outcome | undefined;
@@ -24,20 +25,24 @@ if (root && list && progress && stepEl && squaresEl && bestEl && restartButton &
   const strings = JSON.parse(root.dataset.strings ?? '{}') as Record<string, string>;
   // "Share" leads to the page of the range of the result (the same game, a preview of its own), with ?src=share.
   const rankUrls = JSON.parse(root.dataset.rankUrls ?? '{}') as Record<string, string>;
-  const total = cards.length;
+  // The page holds the whole pool; a round is ten of its claims (all of them when there are fewer). The rest of the cards stay hidden.
+  const total = roundSizeOf(cards.length);
+  const pool = cards.map((c) => ({ id: c.id, verdict: (c.dataset.verdict ?? 'myth') as 'myth' | 'fact' | 'part' }));
+  const byId = new Map(cards.map((c) => [c.id, c]));
   const s = (key: string, vars: Record<string, string | number> = {}): string => fill(strings[key] ?? '', vars);
   const stateLabel = (state: TileState): string => s(`sq_${state}`);
   const result = initResult(root, strings, () => rankUrls[bandOf(marks.filter(isHit).length, total)] ?? location.href, stateLabel);
   const count = countEvent;
 
-  let order = cards;
+  let order: HTMLElement[] = [];
   let index = 0;
   let marks: Mark[] = [];
 
   // The hash of a card brings that card first (the address of one card is already first). Such a game is a visit to one card: it neither continues nor replaces the saved one.
   const wanted = cards.find((c) => c.id === location.hash.slice(1)) ?? document.querySelector<HTMLElement>('.myth--first');
-  if (wanted) order = [wanted, ...cards.filter((c) => c !== wanted)];
   const keep = !wanted;
+  // A new round: balanced, in a random order, without the claims of `avoid` (the round before) as far as the pool allows; the card of the address goes first in the first round only.
+  const deal = (avoid: readonly string[] = [], withWanted = false): HTMLElement[] => pickRound(pool, Math.random, avoid, withWanted ? wanted?.id : undefined).map((id) => byId.get(id)!);
 
   const readGame = (): Game | undefined => {
     try {
@@ -128,6 +133,8 @@ if (root && list && progress && stepEl && squaresEl && bestEl && restartButton &
     result?.hide();
     progress.hidden = false;
     if (endLine) endLine.hidden = true;
+    // Only the claims of the round are shown, in the order of the round.
+    for (const card of cards) card.hidden = true;
     list.append(...order);
     order.forEach(resetCard);
     showBest();
@@ -137,7 +144,6 @@ if (root && list && progress && stepEl && squaresEl && bestEl && restartButton &
 
   // Goes on from the saved game: the same order, the answers given, the first card not answered yet (all answered: the result).
   const resume = (game: Game): void => {
-    const byId = new Map(cards.map((c) => [c.id, c]));
     order = game.order.map((id) => byId.get(id)!);
     start(false);
     marks = game.marks.map((m) => m ?? undefined);
@@ -208,14 +214,14 @@ if (root && list && progress && stepEl && squaresEl && bestEl && restartButton &
   }
 
   result?.onAgain(() => {
-    order = shuffled(cards);
+    order = deal(order.map((c) => c.id));
     start(true);
   });
 
   // "Start over": the saved game goes, the claims are shuffled again.
   restartButton.addEventListener('click', () => {
     dropGame();
-    order = shuffled(cards);
+    order = deal(order.map((c) => c.id));
     start(true);
   });
 
@@ -230,6 +236,7 @@ if (root && list && progress && stepEl && squaresEl && bestEl && restartButton &
   if (saved && answered(saved) < total) {
     resume(saved);
   } else {
+    order = deal([], true);
     start(false);
   }
 }

@@ -165,3 +165,14 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: '79dfa6f6b430'
+myth:
+  id: diana
+  verdict: myth
+  statement:
+    pt: O templo romano de Évora é o templo de Diana
+    en: The Roman temple in Évora is the Temple of Diana
+    ru: Римский храм в Эворе — это храм Дианы
+  answer:
+    pt: O nome foi inventado no século XVII por um padre português, e a arqueologia não o confirma. O templo foi provavelmente dedicado ao imperador Augusto.
+    en: A Portuguese priest came up with the name in the 17th century, and archaeology doesn’t support it. The temple was most likely dedicated to Emperor Augustus.
+    ru: Имя в XVII веке придумал португальский священник, археология его не подтверждает. Храм, скорее всего, посвящён императору Августу.

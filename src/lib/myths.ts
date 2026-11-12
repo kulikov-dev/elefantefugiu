@@ -1,21 +1,11 @@
-// "Myth or fact" (docs/spec.md 5.8): the rules, with no Astro imports. The data is in src/content/myths.yaml (src/lib/myths-data.ts reads it).
+// "Myth or fact" (docs/spec.md 5.8): the rules, with no Astro imports. The claims live in the stories (the field `myth`); src/lib/myths-pool.ts makes the pool of them.
 import type { MythData } from '../data/schemas';
-import type { EventData } from './events';
 
 /** Limits of the text of a card (check:data warns above them). */
 export const STATEMENT_MAX_WORDS = 12;
 export const ANSWER_MAX_WORDS = 30;
 
 export const wordCount = (text: string): number => text.trim().split(/\s+/).filter(Boolean).length;
-
-/** A claim is shown when the story it rests on is published (and, in family mode, the story is not a heavy topic: the claims rest on stories without `sensitive`). */
-export function liveMyths(myths: readonly MythData[], events: readonly Pick<EventData, 'id' | 'sensitive'>[]): MythData[] {
-  const byId = new Map(events.map((e) => [e.id, e]));
-  return myths.filter((m) => {
-    const story = byId.get(m.story);
-    return story !== undefined && !story.sensitive;
-  });
-}
 
 /** The claims in the order of the page: the one asked for by the address first, the others as they are in the file. */
 export function mythsInOrder(list: readonly MythData[], first?: string): MythData[] {
@@ -63,6 +53,35 @@ export function shuffled<T>(list: readonly T[], random: () => number = Math.rand
   return out;
 }
 
+/** A round is ten claims of the pool (all of them when there are fewer), with at least three "Myth" and three "Fact" when the pool has so many. */
+export const ROUND_SIZE = 10;
+export const MIN_PER_VERDICT = 3;
+export const roundSizeOf = (poolSize: number): number => Math.min(ROUND_SIZE, poolSize);
+
+interface PickFrom {
+  id: string;
+  verdict: MythData['verdict'];
+}
+
+/**
+ * The ids of a new round, in a random order. The balance comes first (the minimum of each of "Myth" and "Fact"), then the claims that were not in `avoid` (the previous round) are taken
+ * before those that were, as far as the pool allows. `include` is a claim that must be in the round (the page of one claim) and stands first. `random` is for tests.
+ */
+export function pickRound(pool: readonly PickFrom[], random: () => number = Math.random, avoid: readonly string[] = [], include?: string): string[] {
+  const size = roundSizeOf(pool.length);
+  const head = include === undefined ? undefined : pool.find((m) => m.id === include);
+  const rest = pool.filter((m) => m !== head);
+  const need = size - (head ? 1 : 0);
+  const old = new Set(avoid);
+  const fresh = (list: readonly PickFrom[]): PickFrom[] => [...shuffled(list.filter((m) => !old.has(m.id)), random), ...shuffled(list.filter((m) => old.has(m.id)), random)];
+  const minimum = (verdict: PickFrom['verdict']): number => Math.max(0, Math.min(MIN_PER_VERDICT, pool.filter((m) => m.verdict === verdict).length) - (head?.verdict === verdict ? 1 : 0));
+  const chosen = [...fresh(rest.filter((m) => m.verdict === 'myth')).slice(0, minimum('myth')), ...fresh(rest.filter((m) => m.verdict === 'fact')).slice(0, minimum('fact'))].slice(0, need);
+  const taken = new Set(chosen.map((m) => m.id));
+  const more = fresh(rest.filter((m) => !taken.has(m.id))).slice(0, need - chosen.length);
+  const ids = shuffled([...chosen, ...more], random).map((m) => m.id);
+  return head ? [head.id, ...ids] : ids;
+}
+
 /** The best result is kept in this browser only: {score, total}. */
 export const BEST_KEY = 'myths:best';
 export interface Best {
@@ -81,7 +100,7 @@ export function parseBest(raw: string | null, total: number): Best | undefined {
   }
 }
 
-/** The game that is not finished (or just finished), kept in this browser only: the order of the claims and the outcome of each answer so far (null: not answered yet). */
+/** The round that is not finished (or just finished), kept in this browser only: the claims of the round in their order and the outcome of each answer so far (null: not answered yet). */
 export const GAME_KEY = 'myths:game';
 export interface Game {
   order: string[];
@@ -90,14 +109,15 @@ export interface Game {
 
 const OUTCOMES: readonly unknown[] = ['hit', 'miss', 'part'];
 
-/** What the browser holds, as a game over exactly these claims; anything else (broken, claims added or removed since) is nothing, so the game starts over. */
+/** What the browser holds, as a round over claims of this pool (`ids`); anything else (broken, another length, a claim that has left the pool) is nothing, so a new round starts. */
 export function parseGame(raw: string | null, ids: readonly string[]): Game | undefined {
   if (!raw) return undefined;
   try {
     const v = JSON.parse(raw) as Partial<Game>;
     const { order, marks } = v;
-    if (!Array.isArray(order) || !Array.isArray(marks) || order.length !== ids.length || marks.length !== ids.length) return undefined;
-    if (new Set(order).size !== ids.length || !order.every((id) => ids.includes(id as string))) return undefined;
+    const size = roundSizeOf(ids.length);
+    if (!Array.isArray(order) || !Array.isArray(marks) || order.length !== size || marks.length !== size) return undefined;
+    if (new Set(order).size !== size || !order.every((id) => ids.includes(id as string))) return undefined;
     if (!marks.every((m) => m === null || OUTCOMES.includes(m))) return undefined;
     return { order: order as string[], marks: marks as (Outcome | null)[] };
   } catch {

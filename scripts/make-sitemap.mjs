@@ -43,7 +43,6 @@ const bySlug = (lang) => new Map(events.map((e) => [e.slug[lang] ?? e.slug.en, e
 const epochs = parse(readFileSync(join(root, 'src/content/epochs.yaml'), 'utf8'));
 const threads = parse(readFileSync(join(root, 'src/content/threads.yaml'), 'utf8'));
 const staticDay = dayOf('src/data/static-pages.ts');
-const mythsDay = dayOf('src/content/myths.yaml');
 const STORY = /^(pt|en|ru)\/(historia|story|istoriya)\/([^/]+)\/index\.html$/;
 const EPOCH = /^(pt|en|ru)\/(epoca|era|epoha)\/([^/]+)\/index\.html$/;
 const THREAD = /^(pt|en|ru)\/(fio|thread|niti)\/([^/]+)\/index\.html$/;
@@ -65,7 +64,7 @@ const lastmodOf = (path) => {
   if (/^(pt|en|ru)\/index\.html$/.test(path)) return latest(events.map((e) => e.day));
   if (STATIC.test(path)) return staticDay;
   if (GAMES.test(path)) return latest(events.map((e) => e.day)); // the page of the games lists the two games
-  if (MYTHS.test(path)) return mythsDay;
+  if (MYTHS.test(path)) return latest(events.filter((e) => e.myth && !e.sensitive).map((e) => e.day)); // the pool is made of the stories
   if (ORDER.test(path)) return latest(events.map((e) => e.day)); // the pairs are made of the stories
   return '';
 };

@@ -148,3 +148,14 @@ lang_review:
   en:
     date: '2026-11-07'
     hash: 'c34fafaaf309'
+myth:
+  id: coa
+  verdict: fact
+  statement:
+    pt: Portugal cancelou uma barragem para salvar gravuras rupestres
+    en: Portugal canceled a dam to save prehistoric rock art
+    ru: Португалия отменила стройку плотины ради наскальных рисунков
+  answer:
+    pt: Em 1995, a construção da barragem no Côa foi travada para não submergir gravuras da Idade da Pedra. Hoje são Património Mundial da UNESCO.
+    en: In 1995, work on the Côa dam was halted so Stone Age engravings would not be flooded. Today they are a UNESCO World Heritage Site.
+    ru: В 1995 году стройку плотины на реке Коа остановили, чтобы не затопить рисунки каменного века. Сегодня это объект ЮНЕСКО.
