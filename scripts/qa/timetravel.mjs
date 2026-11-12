@@ -372,7 +372,7 @@ if (want('final')) {
   // the short year of the data (year_scale), else the first year; the first centuries and BC years have their era, so a story without a short year is not checked by its figure
   const label = (e) => e.year_scale?.pt ?? (range(e)[0] >= 1000 ? String(range(e)[0]) : '');
   const lastLabel = label;
-  ok('final: the summary says how many stories of the place and from which year to which', s.other.includes(String(list.length)) && s.other.includes(label(list[0])) && s.other.includes(lastLabel(list[list.length - 1])) && !/(^|s)1(s|$)/.test(s.other) && s.other.split('\n').length >= 2, JSON.stringify(s.other));
+  ok('final: the summary says how many stories of the place and from which year to which', s.other.includes(String(list.length)) && s.other.includes(label(list[0])) && s.other.includes(lastLabel(list[list.length - 1])) && !/(^|[ \n])1([ \n]|$)/.test(s.other) && s.other.split('\n').length >= 2, JSON.stringify(s.other));
   ok(`final: "Unread: K" counts the stories not read (${list.length - done.length})`, s.other.toLowerCase().includes(ui('map.tt_unread', 'pt').replace('{n}', String(list.length - done.length)).toLowerCase()), s.other);
   await page.click('.tt-card__final-acts .button:not(.button--secondary)');
   const unread = await page.evaluate(() => [...document.querySelectorAll('.tt-card__unread a')].map((a) => a.getAttribute('href')));
