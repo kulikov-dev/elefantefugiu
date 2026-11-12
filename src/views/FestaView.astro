@@ -55,9 +55,9 @@ const readyLangs = LANGS.filter((l) => festaText(festa, l));
   <article class="festa-page">
     <div class:list={['festa-page__top', { 'festa-page__top--stack': festa.art === 'bolo' }]}>
       <header>
-        <!-- In the window the date; outside it the line "this holiday is celebrated on ..." in the same place and style (the head script decides). -->
+        <!-- In the window the date; outside it the line "this holiday is celebrated on ..." in the same place, in the plain style of the lead (the head script decides). -->
         <p class:list={['festa-page__date', { 'is-off-built': offBuilt }]} data-festa-on={festa.id}>{text.date}</p>
-        <p class="festa-page__date" data-festa-off={festa.id} data-festa-built={offBuilt ? '' : undefined}>{text.off_window}</p>
+        <p class="festa-page__off" data-festa-off={festa.id} data-festa-built={offBuilt ? '' : undefined}>{text.off_window}</p>
         <h1>{text.name}</h1>
         <p class="festa-page__lead">{text.lead}</p>
       </header>

@@ -180,7 +180,8 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
   margin: 0;
 }
 
-.festa-page__lead {
+.festa-page__lead,
+.festa-page__off {
   color: var(--color-muted);
 }
 
