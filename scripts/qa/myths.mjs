@@ -144,7 +144,7 @@ if (want('answer')) {
     // The title of the story and its picture are not in the page's text before the answer is shown.
     ok(`${lang}: the title of the story is not visible before the answer`, !(await page.evaluate((c) => { const el = document.querySelector(`${c} .myth__story-title`); return el ? el.checkVisibility() : false; }, card)));
     const hidden = await page.$$eval('[data-myth]', (l) => l.map((c) => !c.checkVisibility()));
-    ok(`${lang}: one card is shown, the first of the round; the others are hidden`, hidden.filter((h) => !h).length === 1 && hidden[(await page.$eval('[data-myth]', (l) => l.findIndex((c) => c.dataset.myth === round[0])))] === false, hidden.join());
+    ok(`${lang}: one card is shown, the first of the round; the others are hidden`, hidden.filter((h) => !h).length === 1 && hidden[(await page.$$eval('[data-myth]', (l, id) => l.findIndex((c) => c.dataset.myth === id), round[0]))] === false, hidden.join());
     const before = await stored(page);
     await page.click(`${card} [data-pick="myth"]`);
     await wait(200);
