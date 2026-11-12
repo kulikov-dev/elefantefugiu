@@ -1,0 +1,119 @@
+id: monte-pascoal-1500
+slug:
+  pt: o-monte-pascoal
+  en: easter-mountain
+  ru: paskhalnaya-gora
+title:
+  pt: O Monte Pascoal
+  en: Easter Mountain
+  ru: Пасхальная гора
+epoch: avis-e-descobrimentos
+level: story
+year: 1500
+place:
+  name:
+    pt: Braga
+    en: Braga
+    ru: Брага
+  short:
+    pt: Braga
+    en: Braga
+    ru: Брага
+  lat: 41.5502057
+  lon: -8.4274763
+bridge:
+  name: Tesouro-Museu da Sé de Braga
+  title:
+    pt: Tesouro-Museu da Sé de Braga
+    en: Braga Cathedral Treasury Museum
+    ru: Сокровищница собора Браги
+  address: Rua D. Paio Mendes, Braga
+  lat: 41.5502057
+  lon: -8.4274763
+  maps_url: https://www.google.com/maps/place/Tesouro-+Braga+Cathedral+Museum/@41.5502097,-8.4300512,17z/data=!3m1!4b1!4m6!3m5!1s0xd24fec2923fa41f:0x6b5b6f1fcfcf30ab!8m2!3d41.5502057!4d-8.4274763!16s%2Fm%2F03h52tw
+  url: https://www.se-braga.pt/
+  note:
+    pt: Aqui se guarda a cruz da primeira missa no Brasil.
+    en: The cross of the first Mass in Brazil is kept here.
+    ru: Здесь хранится крест первой мессы в Бразилии.
+threads:
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O primeiro monte visto no Brasil recebeu o nome da Páscoa.
+  en: The first mountain the Portuguese saw in Brazil was named after Easter.
+  ru: Первую гору, которую португальцы увидели в Бразилии, назвали в честь Пасхи.
+story:
+  pt: >-
+    A 9 de março de 1500, a frota de Pedro Álvares Cabral largou de Lisboa rumo à Índia. Para fugir às calmarias da costa de África, os navios meteram muito para oeste e, na quarta-feira, 22 de abril, os marinheiros avistaram no horizonte uma montanha alta.
+
+
+    Era a semana da Páscoa: nesse ano, a Páscoa foi a 19 de abril. Por isso, como escreveu o escrivão da frota, Pero Vaz de Caminha, o capitão deu à montanha o nome de Monte Pascoal. A nova terra, Cabral tomou-a por uma ilha e chamou-lhe Ilha de Vera Cruz. Assim começou o Brasil português.
+  en: >-
+    On March 9, 1500, the fleet of Pedro Álvares Cabral sailed from Lisbon for India. To avoid the calms off the coast of Africa, the ships swung far to the west, and on Wednesday, April 22, the sailors saw a tall mountain on the horizon.
+
+
+    It was Easter week; that year Easter fell on April 19. So, as the fleet’s scribe Pero Vaz de Caminha wrote, the captain named the mountain Monte Pascoal, Easter Mountain. The new land Cabral took for an island and called the Island of Vera Cruz, the True Cross. That was the start of Portuguese Brazil.
+  ru: >-
+    9 марта 1500 года из Лиссабона вышел в Индию флот Педру Алвареша Кабрала. Чтобы обойти штили у берегов Африки, корабли взяли далеко на запад, и в среду 22 апреля моряки увидели на горизонте высокую гору.
+
+
+    Шла пасхальная неделя: Пасха в тот год пришлась на 19 апреля. Поэтому, как записал писарь флота Перу Ваз ди Каминья, капитан назвал гору Монте-Пашкоал, Пасхальной горой. А новую землю Кабрал принял за остров и назвал Островом Истинного Креста. Так началась португальская Бразилия.
+more:
+  pt: >-
+    No primeiro domingo depois da Páscoa, a 26 de abril, rezou-se na praia a primeira missa. Caminha contou tudo ao rei D. Manuel I numa carta, que se considera o primeiro texto sobre o Brasil. O monte ainda se chama Pascoal, e à volta dele há um parque nacional.
+
+
+    A cruz com que, segundo se crê, se disse essa missa está na Sé de Braga. Em 2025, nos 525 anos, foi levada ao Brasil, à mesma costa.
+  en: >-
+    On the first Sunday after Easter, April 26, the first Mass was held on the shore. Caminha described it all in a letter to King Manuel I, and that letter is considered the first text about Brazil. The mountain is still called Pascoal, and a national park surrounds it.
+
+
+    The cross with which, it is believed, that Mass was said is kept in Braga Cathedral. In 2025, for the 525th anniversary, it was taken to Brazil, to that very shore.
+  ru: >-
+    В первое воскресенье после Пасхи, 26 апреля, на берегу отслужили первую мессу. Каминья подробно описал всё это в письме королю Мануэлу I, и это письмо считают первым текстом о Бразилии. Гора и сейчас называется Пасхальной, вокруг неё национальный парк.
+
+
+    Крест, с которым, как считается, служили ту мессу, хранится в соборе Браги. В 2025 году, к 525-летию, его возили в Бразилию, на тот самый берег.
+sources:
+  - title: 'Carta de Pero Vaz de Caminha ao rei D. Manuel I, 1 de maio de 1500'
+    note:
+      pt: o artigo sobre a carta, de 1 de maio de 1500
+      en: an article about the letter of May 1, 1500
+      ru: статья о письме от 1 мая 1500 года
+    url: https://pt.wikipedia.org/wiki/Carta_de_Pero_Vaz_de_Caminha
+    type: reference
+    accessed: '2026-11-12'
+  - title: 'Wikipedia: Pedro Álvares Cabral'
+    url: https://en.wikipedia.org/wiki/Pedro_%C3%81lvares_Cabral
+    type: reference
+    accessed: '2026-11-12'
+  - title: 'Wikipedia: First Mass in Brazil'
+    url: https://en.wikipedia.org/wiki/First_Mass_in_Brazil
+    type: reference
+    accessed: '2026-11-12'
+  - title: 'RTP / Lusa: Brasil assinala primeira missa na Terra de Santa Cruz com cruz original de Portugal'
+    url: https://www.rtp.pt/noticias/cultura/brasil-assinala-primeira-missa-na-terra-de-santa-cruz-com-cruz-original-de-portugal_n1648732
+    type: press
+    accessed: '2026-11-12'
+image:
+  file: monte-pascoal-1500.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no convés de uma nau com a cruz da Ordem de Cristo na vela, um capitão de barrete com pluma e um marinheiro apontam para uma montanha arredondada coberta de mata, enquanto outro marinheiro olha e um escrivão escreve à mesa com uma pena; ao fundo, mais duas naus."
+    en: "Blue-and-white azulejo-style illustration: on the deck of a ship with the cross of the Order of Christ on its sail, a captain in a plumed cap and a sailor point at a rounded, forested mountain, another sailor looks on and a scribe writes at a table with a quill; two more ships sail behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: на палубе корабля с крестом ордена Христа на парусе капитан в шляпе с пером и матрос показывают на округлую поросшую лесом гору, другой матрос смотрит, а писарь за столиком пишет пером; позади идут ещё два корабля."
+  caption:
+    pt: "A frota de Cabral avista o Monte Pascoal, a 22 de abril de 1500. Ilustração em estilo azulejo, criada por IA."
+    en: "Cabral’s fleet sights Monte Pascoal, April 22, 1500. Azulejo-style illustration, created by AI."
+    ru: "Флот Кабрала видит Монте-Пашкоал, 22 апреля 1500 года. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-12'
+placeholder: false
+ru_ready: true

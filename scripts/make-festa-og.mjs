@@ -37,7 +37,7 @@ const dark = (name) => {
   if (!m) throw new Error(`make-festa-og: ${name} has no dark colour in tokens.css`);
   return m[1];
 };
-const iconColors = { ink: light('--festa-ink'), warm: light('--festa-warm'), inkDark: dark('--festa-ink'), warmDark: dark('--festa-warm'), cherry: light('--festa-cherry'), cherryDark: dark('--festa-cherry'), angelica: light('--festa-angelica'), angelicaDark: dark('--festa-angelica') };
+const iconColors = { ink: light('--festa-ink'), warm: light('--festa-warm'), inkDark: dark('--festa-ink'), warmDark: dark('--festa-warm'), cherry: light('--festa-cherry'), cherryDark: dark('--festa-cherry'), angelica: light('--festa-angelica'), angelicaDark: dark('--festa-angelica'), shell: light('--festa-shell'), shellDark: dark('--festa-shell') };
 
 const W = 1200;
 const H = 630;

@@ -199,3 +199,19 @@
 | Великий пост | Quaresma | Lent | Великий пост |
 | Стихотворные «завещания» Лазарина | testamento da comadre / do compadre | “will of the comadre” / “will of the compadre” | «завещание кумы» / «завещание кума» |
 | Выходной для госслужащих по решению правительства | tolerância de ponto | the day off for civil servants (tolerância de ponto) | выходной для госслужащих |
+
+## Пасха: имена и термины, добавлено 12.11.2026
+
+Написание сверено со строками в `src/data/festas.yaml` и `src/content/events/monte-pascoal-1500.yaml`.
+
+| Понятие | pt-PT | en-US | ru |
+|---|---|---|---|
+| Пасха (воскресенье) | Páscoa | Easter | Пасха |
+| Сдобный хлеб с целыми яйцами и крестом из теста | folar | folar (a sweet or savory Easter bread baked with whole eggs) | фолар |
+| Гора, названная в честь Пасхи | Monte Pascoal | Monte Pascoal (Easter Mountain) | Монте-Пашкоал, Пасхальная гора |
+| Земля, найденная Кабралом | Ilha de Vera Cruz | Island of Vera Cruz (True Cross) | Остров Истинного Креста |
+| Шествие с крестом по домам на Пасху | compasso pascal | compasso (the Easter procession of the cross from house to house) | компасу (шествие с крестом по домам) |
+| Городок в Алентежу (ночь колокольчиков) | Castelo de Vide | Castelo de Vide | Каштелу-ди-Види |
+| Пляж под Синтрой (мидии в Страстную пятницу) | Praia do Magoito | Magoito beach | пляж Магоиту |
+| Город на юге (сладкий фолар) | Olhão | Olhão | Ольян |
+| Писарь флота Кабрала | Pero Vaz de Caminha | Pero Vaz de Caminha | Перу Ваз ди Каминья |

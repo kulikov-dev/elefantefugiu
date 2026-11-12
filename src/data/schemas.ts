@@ -407,7 +407,7 @@ export const festaSchema = z.strictObject({
   /** The story of the day: the id of a story of the site; the page shows it as a usual card. */
   story: z.string().optional(),
   /** The icon of the tab in the window of the holiday (src/lib/festa-art.mjs ICONS); null: the holiday has none and the usual icon stays. */
-  favicon: z.enum(['crown', 'bolo', 'queen']).nullable(),
+  favicon: z.enum(['crown', 'bolo', 'queen', 'egg']).nullable(),
   /** The preview picture: a path inside src/assets/ (festas/<id>.jpg or .png, the other extension is tried too). Optional: without the file the drawing is the picture. */
   image: z.string().regex(/^[\w./-]+\.(png|jpg)$/).optional(),
   text: z.strictObject({ pt: festaTextSchema.optional(), en: festaTextSchema.optional(), ru: festaTextSchema.optional() }),
