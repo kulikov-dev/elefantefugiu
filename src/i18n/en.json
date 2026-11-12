@@ -525,8 +525,7 @@
   },
   "games": {
     "ai_caption": "AI-generated illustration. Not a historical image.",
-    "myths_line_one": "{n} claim about Portugal: where is the truth, and where is the legend?",
-    "myths_line_other": "{n} claims about Portugal: where is the truth, and where is the legend?",
+    "myths_line": "Ten claims about Portugal: where is the truth, and where is the legend?",
     "order_line": "Ten pairs of events: guess which came first.",
     "start": "Start",
     "continue_myths": "Continue (question {done} of {total})",

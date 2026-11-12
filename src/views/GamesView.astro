@@ -5,7 +5,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { GAME_OG, gamePicture, gamesCollagePath } from '../lib/games-images';
 import { pagePath, withBase, type Lang } from '../i18n/routes';
-import { plural, t } from '../i18n';
+import { t } from '../i18n';
 import { mythPool } from '../lib/myths-pool';
 import { pageNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
@@ -20,7 +20,7 @@ const site = await loadSite();
 const myths = mythPool(site.events);
 const title = t(lang, 'pages.games.title');
 const cards = [
-  { key: 'myths' as const, href: pagePath(lang, 'myths'), name: t(lang, 'pages.myths.title'), line: plural(lang, 'games.myths_line', myths.length), picture: gamePicture('myths') },
+  { key: 'myths' as const, href: pagePath(lang, 'myths'), name: t(lang, 'pages.myths.title'), line: t(lang, 'games.myths_line'), picture: gamePicture('myths') },
   { key: 'order' as const, href: pagePath(lang, 'order'), name: t(lang, 'pages.order.title'), line: t(lang, 'games.order_line'), picture: gamePicture('order') },
 ];
 const strings: Record<string, string> = { start: t(lang, 'games.start'), continue_myths: t(lang, 'games.continue_myths'), continue_order: t(lang, 'games.continue_order') };

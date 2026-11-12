@@ -525,8 +525,7 @@
   },
   "games": {
     "ai_caption": "Ilustração criada por IA. Não é uma imagem histórica.",
-    "myths_line_one": "{n} afirmação sobre Portugal: onde está a verdade e onde está a lenda?",
-    "myths_line_other": "{n} afirmações sobre Portugal: onde está a verdade e onde está a lenda?",
+    "myths_line": "Dez afirmações sobre Portugal: onde está a verdade e onde está a lenda?",
     "order_line": "Dez pares de acontecimentos: adivinhe qual aconteceu primeiro.",
     "start": "Começar",
     "continue_myths": "Continuar (pergunta {done} de {total})",

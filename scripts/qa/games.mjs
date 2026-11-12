@@ -94,9 +94,7 @@ if (want('page')) {
     }));
     ok(`${lang}: two cards, the myths first, the links lead to the games`, cards.length === 2 && cards[0].href === `/${lang}/${SEG.myths[lang]}/` && cards[1].href === `/${lang}/${SEG.order[lang]}/`, JSON.stringify(cards.map((c) => c.href)));
     ok(`${lang}: the names are the titles of the games`, cards[0].name === ui('pages.myths.title', lang) && cards[1].name === ui('pages.order.title', lang));
-    const category = new Intl.PluralRules(LOCALE[lang]).select(myths.length);
-    const formKey = ui(`games.myths_line_${category}`, lang) ? category : 'other';
-    ok(`${lang}: the line of the myths has the number of the claims of the data (${myths.length}) in the right form`, cards[0].line === ui(`games.myths_line_${formKey}`, lang).replace('{n}', String(myths.length)), cards[0].line);
+    ok(`${lang}: the line of the myths is the invitation, with no number of the pool (a round is ten)`, cards[0].line === ui('games.myths_line', lang) && !/d/.test(cards[0].line), cards[0].line);
     ok(`${lang}: the line of the order game is the invitation`, cards[1].line === ui('games.order_line', lang));
     ok(`${lang}: the state of a game not begun is "${ui('games.start', lang)}"`, cards.every((c) => c.state === ui('games.start', lang)), cards.map((c) => c.state).join(' | '));
     ok(`${lang}: the picture of each game is whole (3:2), decorative, loaded, and nothing is written under it (no line about AI)`, cards.every((c) => c.loaded && Math.abs(c.ratio - 1.5) < 0.03 && Math.abs(c.natural - 1.5) < 0.03 && c.alt === '' && c.ai === undefined), JSON.stringify(cards.map((c) => [c.ratio, c.natural, c.ai])));
