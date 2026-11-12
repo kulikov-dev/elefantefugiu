@@ -45,6 +45,20 @@ describe('startSet: rotation', () => {
     expect(new Set(ids(cards).map((id) => id)).size).toBe(3);
   });
 
+  it('shows the rotation by the year of the event, BC first, and keeps the pinned card on top', () => {
+    const dated = pool(30, 6).map((s, i) => ({ ...s, span: [(i * 7919) % 2000 - 300, 0] as const })).map((s) => ({ ...s, span: [s.span[0], s.span[0] + 1] as const }));
+    const chrono = (cards: ReturnType<typeof startSet>) => cards.map((c) => dated.find((s) => c.target.type === 'story' && s.id === c.target.id)!.span);
+    for (let p = 0; p < 40; p++) {
+      const today = addDays('2030-01-01', p * PERIOD_DAYS);
+      const spans = chrono(startSet({ today, stories: dated, read: NONE, pins: [] }));
+      expect(spans).toEqual([...spans].sort((a, b) => a[0] - b[0] || a[1] - b[1]));
+      const pinned = startSet({ today, stories: dated, read: NONE, pins: [pin({ id: 'a', from: '2030-01-01', to: '2031-12-31', target: { type: 'story', id: 's05' } })] });
+      expect(pinned[0]!.source).toBe('pin');
+      const rest = chrono(pinned.slice(1));
+      expect(rest).toEqual([...rest].sort((a, b) => a[0] - b[0] || a[1] - b[1]));
+    }
+  });
+
   it('does not give the same three cards in neighbouring periods (60 periods in a row)', () => {
     let previous = '';
     for (let p = 0; p < 60; p++) {

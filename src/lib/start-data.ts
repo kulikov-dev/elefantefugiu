@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { getImage } from 'astro:assets';
 import type { Lang } from '../i18n/routes';
 import { storyPath, withBase } from '../i18n/routes';
-import { formatYear, placeShort, textLangOf, type EventData } from './events';
+import { formatYear, placeShort, textLangOf, yearRange, type EventData } from './events';
 import { normalizeMinAge, normalizeSensitive, type MinAge } from './family';
 import { cardPicture } from './pictures';
 import { pictureSource } from './picture-assets';
@@ -25,6 +25,7 @@ export const toStart = (e: EventData): StartStory => ({
   sensitive: normalizeSensitive(e.sensitive),
   ...(typeof e.year === 'number' ? { year: e.year } : {}),
   ...(e.day ? { day: e.day } : {}),
+  span: yearRange(e),
 });
 
 async function cardData(site: SiteData, event: EventData, lang: Lang): Promise<StartCardData> {

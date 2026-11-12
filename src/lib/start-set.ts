@@ -4,6 +4,7 @@
 //
 // Rules: at most two pinned cards (a holiday, an anniversary), the rest comes from a rotation that changes every 3 days. The rotation is the
 // same for everybody on a day: a seeded shuffle of the stories the mode shows, one story per epoch while there are epochs, unread stories first.
+// The chosen cards of the rotation are shown by the year of the event, earliest first, after the pinned ones.
 import type { Lang } from '../i18n/routes';
 
 /** A text in each language of the site. */
@@ -36,6 +37,8 @@ export interface StartStory {
   /** Year and day (MM-DD) of the event, for the anniversary. */
   year?: number;
   day?: string;
+  /** First and last year of the event, the sort key of the epoch feed (`compareChronological`); the rotation is shown in this order. */
+  span?: readonly [number, number];
 }
 
 export interface StartCardRef {
@@ -115,7 +118,13 @@ export function rotation(pool: readonly StartStory[], period: number, read: Read
   take(unread, false);
   take(done, true);
   take(done, false);
-  return picked;
+  return picked.sort(byYear);
+}
+
+/** Chronological, as in the epoch feed: first year, last year, id. A story without a span keeps its place after the ones with one. */
+function byYear(a: StartStory, b: StartStory): number {
+  if (!a.span || !b.span) return a.span ? -1 : b.span ? 1 : 0;
+  return a.span[0] - b.span[0] || a.span[1] - b.span[1] || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
 }
 
 const targetKey = (target: PinTarget): string => (target.type === 'story' ? `story:${target.id}` : `page:${target.href}`);
