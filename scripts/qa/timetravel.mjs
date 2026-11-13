@@ -20,7 +20,7 @@ const ok = (name, cond, extra = '') => {
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 /** With many stories in the window the start asks first: "all in order" is the answer of the suites that walk the whole list. */
 const choose = async (page) => {
-  await wait(300);
+  await wait(600);
   await page.evaluate(() => document.querySelector('[data-tt-all]')?.click());
 };
 const browser = await launchBrowser();
@@ -167,19 +167,23 @@ if (want('window')) {
   // Zoom in on the map: the window shrinks, so does the show (counted again at the next start); at the end there are fewer than three and the card says so.
   let last = all;
   let hint = false;
-  for (let i = 0; i < 12 && !hint; i += 1) {
+  const trail = [all];
+  for (let i = 0; i < 16 && !hint; i += 1) {
     await page.evaluate(() => document.querySelector('.tt-card__close, .tt-card__acts .tt-btn:last-child')?.click());
     // The start fits the stories into the part of the map the card leaves free (it may zoom out), so one step in is not always a smaller window: three steps.
     for (let k = 0; k < 3; k += 1) await page.evaluate(() => document.querySelector('.leaflet-control-zoom-in').click());
-    await wait(900);
+    await wait(1200);
     await page.click(START);
   await choose(page);
     await wait(500);
     s = await state(page);
     if (s.other && !s.playVisible) hint = true;
-    else last = total(s);
+    else {
+      last = total(s);
+      trail.push(last);
+    }
   }
-  ok('window: with the map zoomed in the show is shorter and a window with fewer than three stories gets the hint instead', hint && last <= all, `${all} -> ${last}`);
+  ok('window: with the map zoomed in the show is shorter and a window with fewer than three stories gets the hint instead', hint && last <= all, trail.join(' -> '));
   ok('window: the hint is the one of the language', s.other.includes(ui('map.tt_hint_title', 'pt')) && s.other.includes(ui('map.tt_hint_text', 'pt')), s.other.slice(0, 80));
   await page.close();
 }

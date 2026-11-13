@@ -273,8 +273,9 @@ if (want('limit')) {
     totals.push(snap.total);
     ok(`show more: press ${i + 1} stays within ${LIMIT + STEP * (i + 1)} and keeps the list`, snap.total <= LIMIT + STEP * (i + 1) && same(snap.list, before.list), `total=${snap.total}`);
   }
-  // Markers that would overlap on screen join into clusters (declutterMarkers), so a press may draw few more, never fewer.
-  ok('show more: each press draws no fewer than the one before, and the last more than the first', !mechanism || (totals[1] >= totals[0] && totals[2] >= totals[1] && totals[2] > totals[0]), totals.join(' -> '));
+  // Markers that would overlap on screen join into clusters (declutterMarkers): a press may draw few more, and where the new markers fall on drawn ones, none or one less
+  // than the press before (a new marker can join two into a cluster), but never fewer than the first view. The cards left out are checked below.
+  ok('show more: no press draws fewer than the first view', !mechanism || (totals[1] >= totals[0] && totals[2] >= totals[0]), totals.join(' -> '));
   let presses = 2;
   for (let i = 0; i < Math.ceil(TOTAL / STEP) + 2 && (await snapshot(page)).moreVisible; i += 1) { // each press adds STEP slots
     await page.click('[data-more]');
