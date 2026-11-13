@@ -54,8 +54,11 @@ export interface TtHost {
   /** The thread filter of the map. */
   fio: () => string | null;
   bounds: () => Bounds;
-  /** Shows the box, keeping `bottom` pixels free at the foot and `right` at the right edge (under the card), never closer than `maxZoom`. */
-  fit: (box: Bounds, bottom: number, animate: boolean, maxZoom?: number, right?: number) => void;
+  /**
+   * Shows the box, keeping `bottom` pixels free at the foot and `right` at the right edge (under the card), never closer than `maxZoom`.
+   * `tall`: the height of the box fills the map and its west edge stands at the left edge; the east is cut where the card is.
+   */
+  fit: (box: Bounds, bottom: number, animate: boolean, maxZoom?: number, right?: number, tall?: boolean) => void;
   /** The epoch filter goes to "All epochs" when the mode starts. */
   clearEpoch: () => void;
   /** Redraws the markers (the island calls `apply` for the layers it draws). */
@@ -524,7 +527,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     // A start from a place, or from a view that holds the whole mainland: the map shows that place (the mainland, never the islands), in the part the card leaves free.
     if (!resumeId && (key !== TT_VIEW || coversMainland(host.bounds()))) {
       const chip = key === TT_WHOLE || key === TT_VIEW ? undefined : cfg.chips.find((c) => c.key === key);
-      host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, false, undefined, insetFor().right);
+      host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, false, undefined, insetFor().right, !chip && wide());
     }
     win = host.bounds();
     list = compute();
@@ -734,11 +737,18 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   // ---- what the island needs -------------------------------------------------------------------------------------------------------
 
+  const rangeNow = (): [number, number] => drawnRange(list.map((c) => c.epoch), idx, phase === 'play' ? 'play' : phase === 'final' || phase === 'unread' ? 'all' : 'none');
+  /** The ids of the stories that are on the map now (the island spreads only these on rings). */
+  const drawnIds = (): Set<string> => {
+    const [from, to] = rangeNow();
+    return new Set(list.slice(from, to + 1).map((c) => c.id));
+  };
+
   /** The markers drawn on the map are decorated by the state of the show: dim (not yet), seen, read, the current one (larger, one soft pulse). */
   function apply(layers: Map<string, L.Marker>) {
     drawn = layers;
     const index = new Map(list.map((c, i) => [c.id, i]));
-    const [from, to] = drawnRange(list.map((c) => c.epoch), idx, phase === 'play' ? 'play' : phase === 'final' || phase === 'unread' ? 'all' : 'none');
+    const [from, to] = rangeNow();
     const now = new Set<string>();
     for (const [id, marker] of layers) {
       const node = marker.getElement();
@@ -785,6 +795,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     resume,
     apply,
     pick,
+    drawnIds,
     spread: [BEHAVIOUR.spreadSame, BEHAVIOUR.spreadGap, BEHAVIOUR.spreadMax] as const,
   };
 }
