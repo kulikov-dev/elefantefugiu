@@ -63,3 +63,8 @@ test('an epoch title: "name (years): stories | site", shortened when long', () =
   const prologue = { name: text('Prólogo: dinossauros e pedras'), years_label: text('há 170 milhões de anos – séc. VI a.C.') };
   assert.ok(epochSeoTitle(prologue, 'pt').length <= 65);
 });
+
+test('the own `seo.title` of an epoch replaces the template', () => {
+  const epoch = { name: text('Prólogo'), years_label: text('há 170 milhões de anos'), seo: { title: text('Dinossauros em Portugal: antes da história') } };
+  assert.equal(epochSeoTitle(epoch as never, 'pt'), 'Dinossauros em Portugal: antes da história');
+});

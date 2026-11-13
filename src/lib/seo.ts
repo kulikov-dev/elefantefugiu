@@ -67,7 +67,9 @@ export function storySeoDescription(event: SeoEvent, lang: Lang, epochName: stri
 }
 
 /** The <title> of an epoch page: "{name} ({years}): stories from Portugal | {site}"; too long: without the site, then without the years, then the name with the years only, then the name. */
-export function epochSeoTitle(epoch: Pick<EpochData, 'name' | 'years_label'>, lang: Lang): string {
+export function epochSeoTitle(epoch: Pick<EpochData, 'name' | 'years_label' | 'seo'>, lang: Lang): string {
+  const own = epoch.seo?.title?.[lang]?.trim();
+  if (own) return own;
   const name = epoch.name[lang].trim();
   const years = epoch.years_label?.[lang]?.trim();
   const named = years ? `${name} (${years})` : name;

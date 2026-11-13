@@ -127,3 +127,8 @@ status: ready
 published: '2026-11-12'
 placeholder: false
 ru_ready: true
+seo:
+  title:
+    pt: "Monte Pascoal: o monte que Cabral avistou, 1500"
+    en: "Monte Pascoal: the mountain Cabral sighted, 1500"
+    ru: "Монте-Пашкоал: гора, которую увидел Кабрал, 1500"

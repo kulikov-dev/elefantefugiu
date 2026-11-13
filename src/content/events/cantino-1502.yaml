@@ -258,3 +258,8 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: '5ec984b435bd'
+seo:
+  title:
+    pt: "O mapa de Cantino: um segredo de Estado por 12 ducados, 1502"
+    en: "The Cantino Map: a state secret for 12 ducats, 1502"
+    ru: "Карта Кантино: государственная тайна за 12 дукатов, 1502"

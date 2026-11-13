@@ -308,6 +308,8 @@ export const epochSchema = z
     theme: text.optional(),
     /** One or two sentences (up to about 155 characters) for the meta description of the epoch page and its link preview; without it the theme phrase is used. */
     description: text.optional(),
+    /** Optional: the <title> of the epoch page in search results instead of the template of src/lib/seo.ts (`{name} ({years}): stories | site`). */
+    seo: z.strictObject({ title: text.optional() }).optional(),
     /** Epoch look (stage 6). Required for MVP epochs. */
     style: epochStyle.optional(),
     mvp: z.boolean(),

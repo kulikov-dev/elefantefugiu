@@ -105,6 +105,12 @@ for (const name of existsSync(eventsDir) ? readdirSync(eventsDir).sort() : []) {
 }
 
 // ---------- rules ----------
+for (const { item, file } of epochs) {
+  for (const lang of ['pt', 'en', 'ru'] as const) {
+    const title = item.seo?.title?.[lang];
+    if (title !== undefined && title.length > SEO_TITLE_MAX) report('warn', file, `${title.length} characters, a search title is cut at about 60`, 'seo.title', lang);
+  }
+}
 // The meta description of an epoch: one or two sentences, up to about 155 characters (search results cut it there).
 for (const { item, file } of epochs) {
   for (const lang of ['pt', 'en', 'ru'] as const) {
