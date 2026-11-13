@@ -44,7 +44,13 @@ const biggest = CHIPS[0];
 if (!biggest) throw new Error('The suites need a place with at least 4 published stories (a chip of "Through the centuries"). None found in src/content/events.');
 const PLACE = biggest[0];
 const inPlace = (mode = 'off') => published.filter((e) => placeKey(e) === PLACE && shownIn(e, mode)).sort(byTime);
-const whole = (mode = 'off') => published.filter((e) => onMainland(e) && shownIn(e, mode)).sort(byTime);
+// "All in order" plays Portugal with the islands (a story abroad, a hollow diamond on the map, is not in the show); the islands are not in the window of the map.
+const REGIONS = [MAINLAND, { south: 32.3, north: 33.2, west: -17.4, east: -16.2 }, { south: 36.8, north: 39.9, west: -31.4, east: -24.9 }];
+const inRegion = (r, lat, lon) => lat >= r.south && lat <= r.north && lon >= r.west && lon <= r.east;
+const abroad = (e) => !REGIONS.some((r) => inRegion(r, e.place.lat, e.place.lon));
+const island = (e) => !inRegion(MAINLAND, e.bridge.lat, e.bridge.lon) && REGIONS.some((r) => inRegion(r, e.bridge.lat, e.bridge.lon));
+const whole = (mode = 'off') => published.filter((e) => !abroad(e) && (onMainland(e) || island(e)) && shownIn(e, mode)).sort(byTime);
+const ISLANDS = published.filter((e) => !abroad(e) && island(e)).length;
 const queued = events.filter((e) => e.status === 'ready' && !isLive(e));
 
 // ---- the page --------------------------------------------------------------------------------------------------------------
@@ -156,15 +162,16 @@ if (want('window')) {
   await wait(300);
   let s = await state(page);
   const all = total(s);
-  ok('window: from the button the show plays the stories of the view (not more than the site has, every one has a marker of its own, no clusters)', all >= 3 && all <= published.length && s.markers >= all && s.clusters === 0, JSON.stringify({ all, markers: s.markers }));
-  ok('window: one point is the current one, the points after it are dim', s.cur === 1 && s.dim >= all - 1, JSON.stringify({ cur: s.cur, dim: s.dim }));
+  ok('window: from the button the show plays the stories of the view (not more than the site has, every one has a marker of its own, no clusters)', all >= 3 && all <= published.length && s.markers >= all - ISLANDS && s.clusters === 0, JSON.stringify({ all, markers: s.markers }));
+  ok('window: one point is the current one, the points after it are dim', s.cur === 1 && s.dim >= all - ISLANDS - 1, JSON.stringify({ cur: s.cur, dim: s.dim }));
   // Zoom in on the map: the window shrinks, so does the show (counted again at the next start); at the end there are fewer than three and the card says so.
   let last = all;
   let hint = false;
   for (let i = 0; i < 12 && !hint; i += 1) {
     await page.evaluate(() => document.querySelector('.tt-card__close, .tt-card__acts .tt-btn:last-child')?.click());
-    await page.evaluate(() => document.querySelector('.leaflet-control-zoom-in').click());
-    await wait(700);
+    // The start fits the stories into the part of the map the card leaves free (it may zoom out), so one step in is not always a smaller window: three steps.
+    for (let k = 0; k < 3; k += 1) await page.evaluate(() => document.querySelector('.leaflet-control-zoom-in').click());
+    await wait(900);
     await page.click(START);
   await choose(page);
     await wait(500);
@@ -264,7 +271,7 @@ if (want('controls')) {
   const target = await page.evaluate((titles_) => {
     // a dim point of the show clear of the current one (two points close together are spread, but the large current one may still touch its neighbour)
     const cur = document.querySelector('.mk--tt-cur').getBoundingClientRect();
-    const m = [...document.querySelectorAll('.mk--tt-dim')].filter((d) => titles_.some((t) => d.querySelector('.visually-hidden').textContent.startsWith(t))).find((d) => Math.hypot(d.getBoundingClientRect().x - cur.x, d.getBoundingClientRect().y - cur.y) > 80 && d.checkVisibility()) ?? document.querySelector('.mk--tt-dim');
+    const m = [...document.querySelectorAll('.mk--tt-dim')].filter((d) => { const b = d.getBoundingClientRect(); return document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2)?.closest('.mk') === d; }).filter((d) => titles_.some((t) => d.querySelector('.visually-hidden').textContent.startsWith(t))).find((d) => Math.hypot(d.getBoundingClientRect().x - cur.x, d.getBoundingClientRect().y - cur.y) > 80 && d.checkVisibility()) ?? document.querySelector('.mk--tt-dim');
     const r = m.getBoundingClientRect();
     return { x: r.x + r.width / 2, y: r.y + r.height / 2, label: m.querySelector('.visually-hidden').textContent };
   }, titles);
@@ -423,8 +430,8 @@ if (want('layout')) {
   }
   const wide = await open(`${MAP.pt}?era=${PLACE}`, { width: 1280, height: 800 });
   await wide.waitForSelector('.tt-card:not([hidden])');
-  const g = await wide.evaluate(() => { const c = document.querySelector('.tt-card').getBoundingClientRect(); const s = document.querySelector('.map__stage').getBoundingClientRect(); return { w: c.width, left: c.left - s.left, bottom: s.bottom - c.bottom }; });
-  ok('layout (1280 px): the card is a plate of 400 px at the bottom left of the map', Math.abs(g.w - 400) <= 6 && g.left < 24 && g.bottom < 24, JSON.stringify(g));
+  const g = await wide.evaluate(() => { const c = document.querySelector('.tt-card').getBoundingClientRect(); const s = document.querySelector('.map__stage').getBoundingClientRect(); return { w: c.width, right: s.right - c.right, bottom: s.bottom - c.bottom }; });
+  ok('layout (1280 px): the card is a plate of 400 px at the bottom right of the map', Math.abs(g.w - 400) <= 6 && g.right < 24 && g.bottom < 24, JSON.stringify(g));
   await wide.close();
 }
 
