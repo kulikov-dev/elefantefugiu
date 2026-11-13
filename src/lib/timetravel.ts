@@ -2,12 +2,14 @@
 // Pure helpers, no Leaflet, DOM or Astro imports, so the rules run in plain unit tests; src/scripts/timetravel.ts is the player.
 import type { Lang } from '../i18n/routes';
 import { placeShort, yearRange, yearsAgoText, type EventData } from './events';
-import { meanwhileFor, meanwhileYearText } from './meanwhile';
-import { cardsView, MAINLAND_VIEW } from './map-data';
+import { meanwhileYearText } from './meanwhile';
+import { cardsView, isInPortugal, isIsland, MAINLAND_VIEW } from './map-data';
 import { inBounds, type Bounds } from './markers';
 
 /** With fewer stories in the window there is nothing to play: the card says so and offers places instead. */
 export const TT_MIN_STORIES = 3;
+/** With more stories than this in the window, the start asks first: a place, or all of them in order. */
+export const TT_CHOOSE_OVER = 20;
 /** A place gets a chip when at least this many published stories are set there. */
 export const TT_PLACE_MIN = 4;
 /** The address parameter that starts the mode on arrival: `?era=lisboa`, `?era=portugal`. */
@@ -28,8 +30,6 @@ export interface TtInfo {
   year: string;
   /** The place key (a slug of the Portuguese short name), when the story is set somewhere. */
   place?: string;
-  /** "Meanwhile": the year as written and the line, in the page language; absent when the story has none (a heavy-topic story never has). */
-  mw?: { year: string; text: string };
 }
 
 export interface TtChip {
@@ -50,7 +50,7 @@ export function placeSlug(name: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
-type TtEvent = Pick<EventData, 'id' | 'year' | 'year_scale' | 'years_ago' | 'place' | 'meanwhile' | 'sensitive'>;
+type TtEvent = Pick<EventData, 'id' | 'year' | 'year_scale' | 'years_ago' | 'place'>;
 
 /**
  * The year of a story as the card and the scale write it, short: the `year_scale` of the data ("I в."), "150 million years ago", else the first year;
@@ -67,13 +67,11 @@ export function ttYear(event: Pick<EventData, 'year' | 'year_scale' | 'years_ago
 export function ttInfoOf(event: TtEvent, lang: Lang): TtInfo {
   const [from, to] = yearRange(event);
   const key = placeSlug(placeShort(event.place, 'pt'));
-  const line = event.sensitive ? undefined : meanwhileFor(event.meanwhile, lang)[0];
   return {
     from,
     to,
     year: ttYear(event, lang),
     ...(key ? { place: key } : {}),
-    ...(line ? { mw: { year: meanwhileYearText(lang, line.year), text: line.text } } : {}),
   };
 }
 
@@ -99,6 +97,8 @@ export interface TtCard {
   lon: number;
   epoch: string;
   threads: readonly string[];
+  /** Set for a story whose place lies abroad (a hollow diamond on the map): it takes no part in the show. */
+  overseas?: unknown;
 }
 
 /** The order of the epoch feed (start year, end year, id) across epochs: the epoch first, then the year. */
@@ -116,13 +116,18 @@ export interface PlaylistInput<C extends TtCard> {
   epochOrder: Readonly<Record<string, number>>;
   /** Only the stories of this place (a start from a chip). */
   place?: string | null;
+  /** The stories of Madeira and the Azores play too, though the window (the mainland) does not hold them. */
+  islands?: boolean;
 }
 
-/** The stories to play: those whose point is in the window, passing the thread filter (and the place), in the order of time. */
+/** Does the window show the whole mainland (so that "all in order" means all of Portugal)? */
+export const coversMainland = (b: Bounds): boolean => b.south <= 37.5 && b.north >= 41.5 && b.west <= -9 && b.east >= -7;
+
+/** The stories to play (Portugal with the islands only): those whose point is in the window, passing the thread filter (and the place), in the order of time. */
 export function playlist<C extends TtCard>(input: PlaylistInput<C>): C[] {
   return input.cards
-    .filter((c) => input.info[c.id] !== undefined)
-    .filter((c) => inBounds(c, input.bounds) && (input.fio === null || c.threads.includes(input.fio)) && (!input.place || input.info[c.id]!.place === input.place))
+    .filter((c) => input.info[c.id] !== undefined && !c.overseas && isInPortugal(c.lat, c.lon))
+    .filter((c) => (inBounds(c, input.bounds) || (input.islands === true && isIsland(c.lat, c.lon))) && (input.fio === null || c.threads.includes(input.fio)) && (!input.place || input.info[c.id]!.place === input.place))
     .map((c) => ({ c, i: input.info[c.id]! }))
     .sort((a, b) => ttCompare({ id: a.c.id, epoch: a.c.epoch, from: a.i.from, to: a.i.to }, { id: b.c.id, epoch: b.c.epoch, from: b.i.from, to: b.i.to }, input.epochOrder))
     .map((x) => x.c);
@@ -165,26 +170,23 @@ export interface ScreenPoint {
 }
 
 /**
- * Markers closer than `minDist` pixels would sit on top of each other (stories of one square, or of one building): each such group is laid on a ring
- * around its middle so that every marker can be seen and pressed. Returns the shift in pixels of the markers that move; the others are not listed.
+ * Markers lying on one spot (closer than `same` pixels to the first of their group: stories of one square, of one building) are laid on a small
+ * ring around the group's middle, `gap` pixels between neighbours, never wider than `maxRadius`, so each can be seen and pressed. All in pixels,
+ * never in degrees. Groups do not chain: a row of markers each near the next is not one group. Returns the shift in pixels of the markers that move.
  */
-export function spreadPoints(points: readonly ScreenPoint[], minDist: number): Map<string, { dx: number; dy: number }> {
+export function spreadPoints(points: readonly ScreenPoint[], same = 6, gap = 14, maxRadius = 28): Map<string, { dx: number; dy: number }> {
   const groups: ScreenPoint[][] = [];
   for (const p of [...points].sort((a, b) => a.id.localeCompare(b.id))) {
-    const near = groups.filter((g) => g.some((q) => Math.hypot(q.x - p.x, q.y - p.y) < minDist));
-    const [first, ...rest] = near;
-    if (!first) groups.push([p]);
-    else {
-      first.push(p, ...rest.flat());
-      for (const g of rest) groups.splice(groups.indexOf(g), 1);
-    }
+    const home = groups.find((g) => Math.hypot(g[0]!.x - p.x, g[0]!.y - p.y) < same);
+    if (home) home.push(p);
+    else groups.push([p]);
   }
   const out = new Map<string, { dx: number; dy: number }>();
   for (const g of groups) {
     if (g.length < 2) continue;
     const cx = g.reduce((s, p) => s + p.x, 0) / g.length;
     const cy = g.reduce((s, p) => s + p.y, 0) / g.length;
-    const radius = Math.max(minDist / (2 * Math.sin(Math.PI / g.length)), minDist / 2);
+    const radius = Math.min(Math.max(gap / (2 * Math.sin(Math.PI / g.length)), gap / 2), maxRadius);
     g.forEach((p, i) => {
       const angle = -Math.PI / 2 + (2 * Math.PI * i) / g.length;
       out.set(p.id, { dx: cx + radius * Math.cos(angle) - p.x, dy: cy + radius * Math.sin(angle) - p.y });

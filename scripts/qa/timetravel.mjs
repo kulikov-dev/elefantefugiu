@@ -18,6 +18,11 @@ const ok = (name, cond, extra = '') => {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+/** With many stories in the window the start asks first: "all in order" is the answer of the suites that walk the whole list. */
+const choose = async (page) => {
+  await wait(600);
+  await page.evaluate(() => document.querySelector('[data-tt-all]')?.click());
+};
 const browser = await launchBrowser();
 
 // ---- the data, as the build reads it ------------------------------------------------------------------------------------
@@ -39,7 +44,13 @@ const biggest = CHIPS[0];
 if (!biggest) throw new Error('The suites need a place with at least 4 published stories (a chip of "Through the centuries"). None found in src/content/events.');
 const PLACE = biggest[0];
 const inPlace = (mode = 'off') => published.filter((e) => placeKey(e) === PLACE && shownIn(e, mode)).sort(byTime);
-const whole = (mode = 'off') => published.filter((e) => onMainland(e) && shownIn(e, mode)).sort(byTime);
+// "All in order" plays Portugal with the islands (a story abroad, a hollow diamond on the map, is not in the show); the islands are not in the window of the map.
+const REGIONS = [MAINLAND, { south: 32.3, north: 33.2, west: -17.4, east: -16.2 }, { south: 36.8, north: 39.9, west: -31.4, east: -24.9 }];
+const inRegion = (r, lat, lon) => lat >= r.south && lat <= r.north && lon >= r.west && lon <= r.east;
+const abroad = (e) => !REGIONS.some((r) => inRegion(r, e.place.lat, e.place.lon));
+const island = (e) => !inRegion(MAINLAND, e.bridge.lat, e.bridge.lon) && REGIONS.some((r) => inRegion(r, e.bridge.lat, e.bridge.lon));
+const whole = (mode = 'off') => published.filter((e) => !abroad(e) && (onMainland(e) || island(e)) && shownIn(e, mode)).sort(byTime);
+const ISLANDS = published.filter((e) => !abroad(e) && island(e)).length;
 const queued = events.filter((e) => e.status === 'ready' && !isLive(e));
 
 // ---- the page --------------------------------------------------------------------------------------------------------------
@@ -76,6 +87,10 @@ const open = async (path, { width = 1280, height = 900, reduced = false, family 
   if (!js) await page.setJavaScriptEnabled(false);
   await page.goto(`${base}${path}`, { waitUntil: 'networkidle0' });
   if (js) await page.waitForSelector('.map[data-state="ready"]', { timeout: 20000 });
+  if (js && path.includes('era=')) {
+    await wait(500);
+    await choose(page);
+  }
   return page;
 };
 
@@ -94,7 +109,6 @@ const state = (page) =>
       playVisible: shown(document.querySelector('.tt-card__play')),
       other: shown(document.querySelector('.tt-card__other')) ? document.querySelector('.tt-card__other').innerText : '',
       toggle: document.querySelector('.tt-card__acts .tt-btn[aria-label]:nth-of-type(2)')?.getAttribute('aria-label') ?? '',
-      mw: shown(document.querySelector('.tt-card__mw')) ? document.querySelector('.tt-card__mw').innerText : '',
       markers: document.querySelectorAll('.mk').length,
       cur: document.querySelectorAll('.mk--tt-cur').length,
       dim: document.querySelectorAll('.mk--tt-dim').length,
@@ -143,27 +157,26 @@ if (want('order')) {
 if (want('window')) {
   const page = await open(MAP.pt);
   await page.click(START);
+  await choose(page);
   await page.waitForSelector('.tt-card:not([hidden])');
   await wait(300);
   let s = await state(page);
   const all = total(s);
-  ok('window: from the button the show plays the stories of the view (not more than the site has, every one has a marker of its own, no clusters)', all >= 3 && all <= published.length && s.markers >= all && s.clusters === 0, JSON.stringify({ all, markers: s.markers }));
-  ok('window: one point is the current one, the points after it are dim', s.cur === 1 && s.dim >= all - 1, JSON.stringify({ cur: s.cur, dim: s.dim }));
-  // Zoom in on the map: the window shrinks, so does the show (counted again at the next start); at the end there are fewer than three and the card says so.
-  let last = all;
-  let hint = false;
-  for (let i = 0; i < 12 && !hint; i += 1) {
-    await page.evaluate(() => document.querySelector('.tt-card__close, .tt-card__acts .tt-btn:last-child')?.click());
-    await page.evaluate(() => document.querySelector('.leaflet-control-zoom-in').click());
-    await wait(700);
-    await page.click(START);
-    await wait(500);
-    s = await state(page);
-    if (s.other && !s.playVisible) hint = true;
-    else last = total(s);
-  }
-  ok('window: with the map zoomed in the show is shorter and a window with fewer than three stories gets the hint instead', hint && last <= all, `${all} -> ${last}`);
+  ok('window: from the button the show plays the stories of the view (not more than the site has, every one has a marker of its own, no clusters)', all >= 3 && all <= published.length && s.markers >= all - ISLANDS && s.clusters === 0, JSON.stringify({ all, markers: s.markers }));
+  ok('window: one point is the current one, the points after it are dim', s.cur === 1 && s.dim >= all - ISLANDS - 1, JSON.stringify({ cur: s.cur, dim: s.dim }));
+  // The link of a story far from the others opens the map zoomed in on it: the window is small, the show is shorter, and with fewer than three stories the card says so.
+  // (Zoom steps by hand are no test: the start fits the stories into the free part of the map and may zoom out again.)
+  const lonely = (e) => published.filter((o) => Math.abs(o.bridge.lat - e.bridge.lat) < 0.1 && Math.abs(o.bridge.lon - e.bridge.lon) < 0.15).length < 3;
+  const target = need('a story with fewer than two others within 0.1 degree of its bridge (the hint of the mode)', (list) => list.find(lonely));
+  const near = await open(`${MAP.pt}?id=${target.id}`);
+  await near.click(START);
+  await choose(near);
+  await wait(500);
+  s = await state(near);
+  const hint = s.other && !s.playVisible;
+  ok('window: with the map zoomed in the show is shorter and a window with fewer than three stories gets the hint instead', hint && all > 3, `${all} -> hint`);
   ok('window: the hint is the one of the language', s.other.includes(ui('map.tt_hint_title', 'pt')) && s.other.includes(ui('map.tt_hint_text', 'pt')), s.other.slice(0, 80));
+  await near.close();
   await page.close();
 }
 
@@ -174,6 +187,7 @@ if (want('hint') || want('chips')) {
   const target = need('a story with fewer than two others within 0.1 degree of its bridge (the hint of the mode)', (list) => list.find(lonely));
   const page = await open(`${MAP.pt}?id=${target.id}`);
   await page.click(START);
+  await choose(page);
   await wait(500);
   const s = await state(page);
   ok('hint: a window with fewer than three stories shows the hint, no scale, no show', !s.playVisible && s.other.includes(ui('map.tt_hint_title', 'pt')) && (await page.evaluate(() => !document.querySelector('[data-tt-scale]').checkVisibility())), s.other.slice(0, 60));
@@ -253,7 +267,7 @@ if (want('controls')) {
   const target = await page.evaluate((titles_) => {
     // a dim point of the show clear of the current one (two points close together are spread, but the large current one may still touch its neighbour)
     const cur = document.querySelector('.mk--tt-cur').getBoundingClientRect();
-    const m = [...document.querySelectorAll('.mk--tt-dim')].filter((d) => titles_.some((t) => d.querySelector('.visually-hidden').textContent.startsWith(t))).find((d) => Math.hypot(d.getBoundingClientRect().x - cur.x, d.getBoundingClientRect().y - cur.y) > 80 && d.checkVisibility()) ?? document.querySelector('.mk--tt-dim');
+    const m = [...document.querySelectorAll('.mk--tt-dim')].filter((d) => { const b = d.getBoundingClientRect(); return document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2)?.closest('.mk') === d; }).filter((d) => titles_.some((t) => d.querySelector('.visually-hidden').textContent.startsWith(t))).find((d) => Math.hypot(d.getBoundingClientRect().x - cur.x, d.getBoundingClientRect().y - cur.y) > 80 && d.checkVisibility()) ?? document.querySelector('.mk--tt-dim');
     const r = m.getBoundingClientRect();
     return { x: r.x + r.width / 2, y: r.y + r.height / 2, label: m.querySelector('.visually-hidden').textContent };
   }, titles);
@@ -325,6 +339,7 @@ if (want('motion')) {
 if (want('events')) {
   const page = await open(MAP.pt);
   await page.click(START);
+  await choose(page);
   await wait(500);
   let log = await page.evaluate(() => JSON.parse(sessionStorage.getItem('__gc') || '[]'));
   ok('events: a start from the button is one event, timetravel-start-view', JSON.stringify(log) === '["timetravel-start-view"]', JSON.stringify(log));
@@ -366,7 +381,6 @@ if (want('final')) {
   const page = await open(`${MAP.pt}?era=${PLACE}`, { read: done });
   await page.waitForSelector('.tt-card:not([hidden])');
   await page.evaluate(() => document.querySelector('.tt-card__acts .tt-btn:nth-of-type(2)').click());
-  const mw = await state(page);
   await walk(page);
   const s = await state(page);
   // the short year of the data (year_scale), else the first year; the first centuries and BC years have their era, so a story without a short year is not checked by its figure
@@ -381,9 +395,6 @@ if (want('final')) {
   await page.evaluate(() => document.querySelector('.tt-card__final-acts .button--secondary').click());
   const again = await state(page);
   ok('final: "Start over" begins again from the first story', index(again) === 1 && again.playVisible);
-  const first = list[0];
-  const hasLine = !first.sensitive && (first.meanwhile ?? []).some((i) => i.scope === 'world' || i.scope === 'pt');
-  ok('meanwhile: the line "Meanwhile" is on the card exactly when the story has one for the language (and never for a heavy topic)', hasLine === (mw.mw !== '') && (!hasLine || mw.mw.startsWith(ui('map.tt_meanwhile', 'pt'))), JSON.stringify(mw.mw));
   await page.close();
 }
 
@@ -415,8 +426,8 @@ if (want('layout')) {
   }
   const wide = await open(`${MAP.pt}?era=${PLACE}`, { width: 1280, height: 800 });
   await wide.waitForSelector('.tt-card:not([hidden])');
-  const g = await wide.evaluate(() => { const c = document.querySelector('.tt-card').getBoundingClientRect(); const s = document.querySelector('.map__stage').getBoundingClientRect(); return { w: c.width, left: c.left - s.left, bottom: s.bottom - c.bottom }; });
-  ok('layout (1280 px): the card is a plate of about 420 px at the bottom left of the map', Math.abs(g.w - 420) <= 6 && g.left < 24 && g.bottom < 24, JSON.stringify(g));
+  const g = await wide.evaluate(() => { const c = document.querySelector('.tt-card').getBoundingClientRect(); const s = document.querySelector('.map__stage').getBoundingClientRect(); return { w: c.width, right: s.right - c.right, bottom: s.bottom - c.bottom }; });
+  ok('layout (1280 px): the card is a plate of 400 px at the bottom right of the map', Math.abs(g.w - 400) <= 6 && g.right < 24 && g.bottom < 24, JSON.stringify(g));
   await wide.close();
 }
 

@@ -36,7 +36,7 @@ const hasOverseas = cards.some((c) => c.overseas);
 /** {one, few, other} of a plural key as `cluster_one`, `cluster_few`, ... */
 const prefixed = (base: string, forms: Record<string, string>) => Object.fromEntries(Object.entries(forms).map(([k, v]) => [`${base}_${k}`, v]));
 
-const TT_KEYS = ['button', 'exit', 'play', 'pause', 'prev', 'next', 'read', 'meanwhile', 'count', 'scale_label', 'card_label', 'hint_title', 'hint_text', 'places_label', 'span', 'again', 'unread', 'unread_title', 'back'];
+const TT_KEYS = ['button', 'exit', 'play', 'pause', 'prev', 'next', 'read', 'count', 'scale_label', 'card_label', 'hint_title', 'hint_text', 'choose_title', 'choose_text', 'choose_all', 'places_label', 'span', 'again', 'unread', 'unread_title', 'back'];
 const ttConfig = tt && {
   ...tt,
   whole: t(lang, 'map.home'),
