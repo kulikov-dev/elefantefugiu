@@ -45,6 +45,8 @@ import { ageInfoOf, isVisibleInMode } from '../lib/family';
 interface Props {
   lang: Lang;
   title: string;
+  /** The <title> as search results show it, when it is not "{title} · {site}" (a story: name · place, year; an epoch; the home page). og:title and twitter:title keep the title above. */
+  seoTitle?: string;
   /** Page key keeps the language switch on the same page; omit for pages without a pair (404). */
   pageKey?: PageKey;
   /** Base-aware path of this page in each language. For pages that are not in ROUTES (cards). Overrides pageKey. */
@@ -86,7 +88,7 @@ interface Props {
   epoch?: string;
 }
 
-const { lang, title, pageKey, alternates: alternatesProp, canonicalTo, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, hreflang = true, activeLangs, schema, epoch, count = true, allLangs = false } = Astro.props;
+const { lang, title, seoTitle, pageKey, alternates: alternatesProp, canonicalTo, readyLangs = LANGS, stand_in = false, description: descriptionProp, preview, noindex = false, hreflang = true, activeLangs, schema, epoch, count = true, allLangs = false } = Astro.props;
 const chrome = allLangs ? LANGS : [lang];
 // The tab of the bottom bar that matches the page: the five sections; the pages of an epoch (the epoch, its stories) belong to "Epochs".
 // The page "Games" and the two games (Myth or fact, Which came first?) share the tab "Games".
@@ -100,6 +102,7 @@ const fontFiles = lang === 'ru' ? [playfairCyrillic, serifCyrillic, serifCyrilli
 const counting = count && analyticsEnabled(String(Astro.site ?? ''));
 const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? t(lang, 'site.home_preview_title') : `${title} · ${siteName}`;
+const pageTitle = seoTitle ?? (pageKey === 'home' ? t(lang, 'site.home_seo_title') : fullTitle);
 // The service pages have a description of their own (pages.<key>.description); every other page without one uses the site description.
 const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise', 'myths', 'order', 'games'];
 const pageDescription = pageKey && DESCRIBED_PAGES.includes(pageKey) ? t(lang, `pages.${pageKey}.description`) : undefined;
@@ -163,7 +166,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <FaviconLinks festa={festaIconNow} />
     <script is:inline set:html={headScript(allThreads.map((th) => th.id), undefined, festas)} />
     <style set:html={festaRules(festas.ids)} />
-    <title>{fullTitle}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
     <!-- The fonts of the first screen are fetched with the stylesheet, not after it, so the lines of the title and the tags do not break

@@ -21,7 +21,7 @@
     "check:og": "node scripts/check-og.mjs",
     "check:rss": "node scripts/check-rss.mjs",
     "check:telegram": "node scripts/check-telegram.mjs",
-    "schedule": "node scripts/schedule.mjs",
+    "schedule": "node --import tsx scripts/schedule.mjs",
     "make:og": "node scripts/make-og-images.mjs",
     "check:weight": "node scripts/check-weight.mjs",
     "check:listings": "node scripts/check-listings.mjs",

@@ -3,6 +3,8 @@
     "name": "O Elefante Fugiu",
     "tagline": "Foi aqui",
     "description": "Pequenas histórias interativas do passado de Portugal, ligadas ao mapa e ao tempo.",
+    "home_seo_title": "O Elefante Fugiu: história de Portugal no mapa",
+    "home_seo_description": "Histórias curtas da história de Portugal, da Antiguidade ao século XX, com fontes e o sítio onde as pode ver hoje. Gratuito, sem publicidade.",
     "home_preview_title": "O Elefante Fugiu: histórias do passado de Portugal",
     "home_preview_description": "Histórias curtas da história de Portugal, da Antiguidade ao século XX. Cada uma lê-se num minuto, com fontes e o sítio onde ainda a pode ver hoje. Gratuito e sem publicidade.",
     "preview_alt_home": "O elefante, mascote do projeto, de casaca azul e bengala, sobre um padrão claro de azulejos.",
@@ -63,7 +65,7 @@
     },
     "myths": {
       "title": "Mito ou verdade",
-      "description": "O que guias, roteiros e amigos contam sobre Portugal: escolha o que pensa e leia o que realmente aconteceu. Por trás de cada resposta há uma das minhas histórias."
+      "description": "O que guias, roteiros e amigos contam sobre Portugal: escolha o que pensa e leia o que aconteceu. Por trás de cada resposta há uma das minhas histórias."
     },
     "order": {
       "title": "O que veio primeiro?",
@@ -532,5 +534,9 @@
     "continue_order": "Continuar (par {done} de {total})",
     "og_title": "Jogos: dois testes sobre a história de Portugal",
     "og_description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos, e depois de cada resposta a história completa."
+  },
+  "seo": {
+    "story_visit": "Hoje pode visitar o local: {place}.",
+    "epoch_title": "{name}: histórias de Portugal"
   }
 }

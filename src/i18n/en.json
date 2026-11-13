@@ -3,6 +3,8 @@
     "name": "O Elefante Fugiu",
     "tagline": "It happened here",
     "description": "Short interactive stories from Portuguese history, tied to the map and to time.",
+    "home_seo_title": "O Elefante Fugiu: Portuguese history on a map",
+    "home_seo_description": "Short stories from Portuguese history, from ancient times to the 20th century, with sources and a place you can visit today. Free, no ads.",
     "home_preview_title": "O Elefante Fugiu: stories from Portugal’s past",
     "home_preview_description": "Short stories from Portuguese history, from ancient times to the 20th century. Each takes a minute to read and comes with sources and a place you can still visit today. Free, no ads.",
     "preview_alt_home": "The project’s mascot, an elephant in a blue coat with a cane, on a light azulejo pattern.",
@@ -532,5 +534,9 @@
     "continue_order": "Continue (pair {done} of {total})",
     "og_title": "Games: two quick tests of your Portuguese history",
     "og_description": "Myth or fact and “Which came first?”: short games, and after every answer the whole story."
+  },
+  "seo": {
+    "story_visit": "Today you can visit the place: {place}.",
+    "epoch_title": "{name}: stories from Portuguese history"
   }
 }

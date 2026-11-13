@@ -1,7 +1,7 @@
 // Checks the built card pages in dist/ against the data and the accessibility basics.
 // Run after `npm run build` (it is part of postbuild). Reads src/content/events/*.yaml.
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { parse } from 'yaml';
 import { isLive } from '../src/lib/publication.mjs';
 
@@ -335,9 +335,36 @@ for (const ev of events) {
   }
 }
 
+// ----- search titles and descriptions of every indexable page (src/lib/seo.ts): not empty, a title up to 65 characters, a description up to 160, no two pages with one title -----
+const unescape = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+const titles = new Map();
+let indexable = 0;
+const walk = (dir) => {
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    if (entry.isDirectory()) walk(join(dir, entry.name));
+    else if (entry.name === 'index.html') {
+      const html = readFileSync(join(dir, entry.name), 'utf8');
+      const head = html.match(/<head>[\s\S]*?<\/head>/)?.[0] ?? '';
+      // Pages without noindex only; the redirect pages (no canonical link) and the 404 page are not pages to find.
+      if (/<meta name="robots" content="[^"]*noindex/.test(head) || !/<link rel="canonical"/.test(head)) continue;
+      indexable += 1;
+      const where = relative(dist, dir).split(String.fromCharCode(92)).join('/') || '/';
+      const title = unescape(head.match(/<title>([\s\S]*?)<\/title>/)?.[1] ?? '').trim();
+      const description = unescape(head.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '').trim();
+      if (!title) errors.push(`${where}: the <title> is empty`);
+      else if (title.length > 65) errors.push(`${where}: the <title> is ${title.length} characters, 65 at most (give the story a \`seo.title\`): "${title}"`);
+      if (!description) errors.push(`${where}: the meta description is empty`);
+      else if (description.length > 160) errors.push(`${where}: the meta description is ${description.length} characters, 160 at most`);
+      if (title) titles.set(title, [...(titles.get(title) ?? []), where]);
+    }
+  }
+};
+walk(dist);
+for (const [title, where] of titles) if (where.length > 1) errors.push(`one <title> "${title}" on ${where.length} pages: ${where.join(', ')}`);
+
 if (pages === 0) errors.push('no card pages found in dist/');
 if (errors.length > 0) {
   console.error(`Card check failed:\n- ${errors.join('\n- ')}`);
   process.exit(1);
 }
-console.log(`Card check passed (${pages} pages: headings, alt, labels, sources, bridge, meta, hreflang).`);
+console.log(`Card check passed (${pages} pages: headings, alt, labels, sources, bridge, meta, hreflang; ${indexable} indexable pages: titles and descriptions).`);

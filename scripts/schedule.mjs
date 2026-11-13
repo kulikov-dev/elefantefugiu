@@ -1,5 +1,6 @@
 // The queue of stories: those that are ready but published on a later day (they come out in the first build of that day: src/lib/publication.mjs).
-//   npm run schedule                the next 8 weeks as a table: date, story (slug, epoch), the languages that are ready; a warning for a story that has no pt or en
+//   npm run schedule                the next 8 weeks as a table: date, story (slug, epoch), the languages that are ready; a warning for a story that has no pt or en;
+//                                   under it the search title and description of every queued story in pt, en and ru (src/lib/seo.ts), to see without opening the HTML
 //   npm run schedule -- --weeks=12  another span;   --strict  exit code 1 when there is a warning
 //   SITE_TODAY=2026-11-01 npm run schedule   look at the queue as it will be on that day
 // A language is ready when the story has its title, hook and story text (pt, en) or `ru_ready: true` with its own Russian text (ru).
@@ -8,6 +9,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import { buildToday, isLive, isQueued, publishedDay } from '../src/lib/publication.mjs';
+import { SEO_LANGS, seoLines } from './lib/seo-lines.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const argv = process.argv.slice(2);
@@ -48,6 +50,20 @@ if (rows.length === 0) {
   console.log(width.map((w) => '-'.repeat(w)).join('  '));
   for (const r of table) console.log(line(r));
   console.log(`\n${rows.length} ${rows.length === 1 ? 'story' : 'stories'} in the queue${later ? `, ${later} more after ${until}` : ''}.`);
+}
+if (inSpan.length > 0) {
+  const seo = new Map(seoLines().map((s) => [s.id, s]));
+  console.log("\nSearch title and description (the template of src/lib/seo.ts, or the story's own `seo`). Crooked, or the place not recognisable: propose a `seo` replacement to the owner.");
+  for (const r of rows) {
+    const s = seo.get(r.id);
+    if (!s) continue;
+    console.log(`\n${r.id}`);
+    for (const lang of SEO_LANGS) {
+      const { title, description, own } = s.lines[lang];
+      console.log(`  ${lang}  title (${title.length}${own ? ', seo' : ''}): ${title}`);
+      console.log(`  ${lang}  description (${description.length}): ${description}`);
+    }
+  }
 }
 if (rows.length === 0 && later > 0) console.log(`${later} more queued after ${until}.`);
 if (warnings.length) {

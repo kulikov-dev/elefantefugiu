@@ -196,6 +196,8 @@ export const eventSchema = z
   min_age: minAge,
   sensitive: z.boolean(),
   hook: text,
+  /** Optional: the <title> and the meta description of the page in search results, instead of the template of src/lib/seo.ts (name · place, year | site; hook + the place to visit today). Each may be given alone. check:data warns over 65 / 160 characters. The page itself (h1, hook, link previews, feed) does not change. */
+  seo: z.strictObject({ title: text.optional(), description: text.optional() }).optional(),
   /** Optional, any language may be left out: the line the game "Which came first?" shows under the title instead of the hook, when the hook gives the date away (a year from 100 to 2100, a century, an era). Without it such a hook is not shown there. */
   order_hint: z.strictObject({ pt: z.string().optional(), en: z.string().optional(), ru: z.string().optional() }).optional(),
   story: text,

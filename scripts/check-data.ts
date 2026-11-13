@@ -7,6 +7,8 @@ import type { ZodType } from 'astro/zod';
 import { MIN_CARDS_PER_THREAD, countCardsByThread } from '../src/lib/threads';
 import { needsAttribution } from '../src/lib/pictures';
 import { firstSentence } from '../src/lib/events';
+import { localize } from '../src/lib/localize';
+import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX, storySeoDescription, storySeoTitle } from '../src/lib/seo';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
 import { epochSchema, eventSchema, featuredSchema, festaListSchema, threadSchema } from '../src/data/schemas';
 import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, wordCount } from '../src/lib/myths';
@@ -260,6 +262,19 @@ for (const { item: ev, file, stem } of events) {
   // Only MVP epochs get a page and a feed; a published card in another epoch could not be reached from anywhere.
   if (ready && epochById.get(ev.epoch)?.mvp === false) {
     report('error', file, `epoch "${ev.epoch}" is not part of the MVP (mvp: false) and has no page, so this published card has no feed`, 'epoch');
+  }
+
+  // The search title and description (src/lib/seo.ts): the story's own `seo` or the template; over 65 / 160 characters is a warning (a build does not fail on it).
+  if (ready) {
+    const localized = localize(ev, ev.ru_ready);
+    const epochName = localize(epochById.get(ev.epoch)?.name ?? { pt: '', en: '' }, ev.ru_ready);
+    for (const lang of ev.ru_ready ? (['pt', 'en', 'ru'] as const) : (['pt', 'en'] as const)) {
+      const title = storySeoTitle(localized, lang);
+      const description = storySeoDescription(localized, lang, epochName[lang]);
+      const source = ev.seo?.title?.[lang] ? 'seo.title' : 'the title of the story with place and year';
+      if (title.length > SEO_TITLE_MAX) report('warn', file, `${title.length} characters, a search title is cut at about 60 (${source}): "${title}"`, ev.seo?.title?.[lang] ? 'seo.title' : 'title', lang);
+      if (description.length > SEO_DESCRIPTION_MAX) report('warn', file, `${description.length} characters, a search description is cut at about 155`, ev.seo?.description?.[lang] ? 'seo.description' : 'hook', lang);
+    }
   }
 
   // "Meanwhile": the errors are in the schema (src/lib/meanwhile.ts); here the warnings (more than 15 words, an exclamation mark).

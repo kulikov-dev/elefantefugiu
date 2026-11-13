@@ -24,7 +24,7 @@ import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import { EPOCHS_ANCHOR, LANGS, LOCALES, altPaths, epochHref, pagePath, storyPath, threadHref, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
-import { cardNeighbours, firstSentence, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, yearRange, type EventData } from '../lib/events';
+import { cardNeighbours, formatYear, isFlashMoment, isRuStandIn, nearbyCards, textLangOf, yearRange, type EventData } from '../lib/events';
 import { distanceParts } from '../lib/distance';
 import { meanwhileFor } from '../lib/meanwhile';
 import { epochFeed, epochHasContent, nextEpochEntry } from '../lib/epochs';
@@ -34,6 +34,7 @@ import { mythPool } from '../lib/myths-pool';
 import { previewImageUrl } from '../lib/picture-assets';
 import { OG_CARD, storyCardPath } from '../lib/og-cards';
 import { ogDescription, ogTitle } from '../lib/og-text';
+import { storySeoDescription, storySeoTitle } from '../lib/seo';
 import { cardPicture } from '../lib/pictures';
 import { DEFAULT_PREVIEW, ogImagePath } from '../lib/og';
 import { moreParagraphs, storyParagraphs } from '../lib/paragraphs';
@@ -59,7 +60,9 @@ const epochLink = epochHasContent(epoch, all) ? epochHref(lang, epoch.slug[lang]
 const title = event.title[lang];
 const alternates = altPaths((l) => storyPath(l, event.slug[l]));
 const cardUrl = new URL(alternates[lang], Astro.site).href;
-const description = firstSentence(event.story[lang], 155);
+// What search results show (the template or the story's own `seo`); the link preview keeps the hook; the schema.org description is the meta description (check:schema).
+const seoTitle = storySeoTitle(event, lang);
+const seoDescription = storySeoDescription(event, lang, epoch.name[lang]);
 
 // Preview picture (link previews): the main picture of the story, else the picture of the epoch (also for a heavy topic: its pictures are
 // documents and strict azulejo, not the playful ones). An epoch that has only a provisional picture (a path inside public/) gives that.
@@ -79,7 +82,7 @@ const schemaImage = schemaCtx.abs(plainUrl ?? withBase(ogImagePath(previewImage 
 const schema = storyNodes(schemaCtx, {
   url: cardUrl,
   title,
-  description,
+  description: seoDescription,
   image: schemaImage,
   story: { year: event.year },
   bridge: { name: event.bridge.title?.[lang] ?? event.bridge.name, address: event.bridge.address, lat: event.bridge.lat, lon: event.bridge.lon },
@@ -164,8 +167,9 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 <BaseLayout
   lang={lang}
   title={title}
+  seoTitle={seoTitle}
   alternates={alternates}
-  description={description}
+  description={seoDescription}
   preview={{ title: ogTitle(event.title[lang]), description: ogDescription(event.hook[lang]), type: 'article', image: previewImage, imageUrl: previewUrl, imageSize: card ? OG_CARD : undefined, imageAlt: previewImageAlt }}
   noindex={event.placeholder || standIn}
   schema={schema}

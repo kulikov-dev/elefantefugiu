@@ -4,6 +4,7 @@
 // Wide screen: feed on the left, the map stays on screen on the right. One switch "Timeline · Cards · Map" (the map is a position of it on a phone only).
 // The map needs JavaScript: without it the page is the plain feed (everything map-related starts hidden).
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { epochSeoTitle } from '../lib/seo';
 import EventCard from '../components/EventCard.astro';
 import EpochSwitcher from '../components/EpochSwitcher.astro';
 import FamilyNote from '../components/FamilyNote.astro';
@@ -95,6 +96,7 @@ const schema = epochNodes(schemaCtx, {
 <BaseLayout
   lang={lang}
   title={epoch.name[lang]}
+  seoTitle={epochSeoTitle(epoch, lang)}
   alternates={alternates}
   description={epoch.description?.[lang] ?? epoch.theme?.[lang]}
   preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl, imageSize: card ? OG_CARD : undefined, imageAlt: epochPic?.alt[lang] }}

@@ -11,7 +11,7 @@ const eventsDir = fileURLToPath(new URL('../src/content/events/', import.meta.ur
 const ready = readdirSync(eventsDir)
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => parse(readFileSync(`${eventsDir}${f}`, 'utf8'), { schema: 'core' }) as { id: string; status: string; published: string });
-const run = (env: Record<string, string>, ...args: string[]) => spawnSync(process.execPath, [script, ...args], { env: { ...process.env, ...env }, encoding: 'utf8' });
+const run = (env: Record<string, string>, ...args: string[]) => spawnSync(process.execPath, ['--import', 'tsx', script, ...args], { env: { ...process.env, ...env }, encoding: 'utf8' });
 
 test('the queue on a day before every story lists each ready story once, in the order of the days', () => {
   const stories = ready.filter((s) => s.status === 'ready');
@@ -23,6 +23,9 @@ test('the queue on a day before every story lists each ready story once, in the 
   const dates = [...r.stdout.matchAll(/^(\d{4}-\d{2}-\d{2})\s/gm)].map((m) => m[1]);
   assert.equal(dates.length, stories.length);
   assert.deepEqual(dates, [...dates].sort());
+  // The search title and description of every queued story, in the three languages.
+  assert.equal([...r.stdout.matchAll(/^ {2}(?:pt|en|ru) {2}title \(\d+/gm)].length, stories.length * 3);
+  assert.equal([...r.stdout.matchAll(/^ {2}(?:pt|en|ru) {2}description \(\d+/gm)].length, stories.length * 3);
 });
 
 test('with nothing queued it says so; a day far in the future queues nothing', () => {
