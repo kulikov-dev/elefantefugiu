@@ -164,27 +164,19 @@ if (want('window')) {
   const all = total(s);
   ok('window: from the button the show plays the stories of the view (not more than the site has, every one has a marker of its own, no clusters)', all >= 3 && all <= published.length && s.markers >= all - ISLANDS && s.clusters === 0, JSON.stringify({ all, markers: s.markers }));
   ok('window: one point is the current one, the points after it are dim', s.cur === 1 && s.dim >= all - ISLANDS - 1, JSON.stringify({ cur: s.cur, dim: s.dim }));
-  // Zoom in on the map: the window shrinks, so does the show (counted again at the next start); at the end there are fewer than three and the card says so.
-  let last = all;
-  let hint = false;
-  const trail = [all];
-  for (let i = 0; i < 16 && !hint; i += 1) {
-    await page.evaluate(() => document.querySelector('.tt-card__close, .tt-card__acts .tt-btn:last-child')?.click());
-    // The start fits the stories into the part of the map the card leaves free (it may zoom out), so one step in is not always a smaller window: three steps.
-    for (let k = 0; k < 3; k += 1) await page.evaluate(() => document.querySelector('.leaflet-control-zoom-in').click());
-    await wait(1200);
-    await page.click(START);
-  await choose(page);
-    await wait(500);
-    s = await state(page);
-    if (s.other && !s.playVisible) hint = true;
-    else {
-      last = total(s);
-      trail.push(last);
-    }
-  }
-  ok('window: with the map zoomed in the show is shorter and a window with fewer than three stories gets the hint instead', hint && last <= all, trail.join(' -> '));
+  // The link of a story far from the others opens the map zoomed in on it: the window is small, the show is shorter, and with fewer than three stories the card says so.
+  // (Zoom steps by hand are no test: the start fits the stories into the free part of the map and may zoom out again.)
+  const lonely = (e) => published.filter((o) => Math.abs(o.bridge.lat - e.bridge.lat) < 0.1 && Math.abs(o.bridge.lon - e.bridge.lon) < 0.15).length < 3;
+  const target = need('a story with fewer than two others within 0.1 degree of its bridge (the hint of the mode)', (list) => list.find(lonely));
+  const near = await open(`${MAP.pt}?id=${target.id}`);
+  await near.click(START);
+  await choose(near);
+  await wait(500);
+  s = await state(near);
+  const hint = s.other && !s.playVisible;
+  ok('window: with the map zoomed in the show is shorter and a window with fewer than three stories gets the hint instead', hint && all > 3, `${all} -> hint`);
   ok('window: the hint is the one of the language', s.other.includes(ui('map.tt_hint_title', 'pt')) && s.other.includes(ui('map.tt_hint_text', 'pt')), s.other.slice(0, 80));
+  await near.close();
   await page.close();
 }
 
