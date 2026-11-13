@@ -298,7 +298,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       const spots = new Map(result.markers.map((m) => [m.id, map.latLngToContainerPoint([m.lat, m.lon])]));
       // Only the points on the map count: a point with nothing shown near it stands exactly where its story is.
       const onMap = tt!.drawnIds();
-      const shift = spreadPoints([...spots].filter(([id]) => onMap.has(id)).map(([id, p]) => ({ id, x: p.x, y: p.y })), ...tt!.spread);
+      // The picture of the end is not a list: the points stay on their places, even on top of each other.
+      const shift = tt!.finale ? new Map<string, { dx: number; dy: number }>() : spreadPoints([...spots].filter(([id]) => onMap.has(id)).map(([id, p]) => ({ id, x: p.x, y: p.y })), ...tt!.spread);
       for (const m of result.markers) {
         const o = shift.get(m.id);
         const p = spots.get(m.id)!;
@@ -311,7 +312,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       for (const [key, marker] of layers) {
         const card = byId.get(key);
         if (card) marker.setLatLng([card.lat, card.lon]);
-        marker.getElement()?.classList.remove('mk--tt-dim', 'mk--tt-read', 'mk--tt-cur', 'mk--tt-hide', 'mk--tt-in');
+        marker.getElement()?.classList.remove('mk--tt-dim', 'mk--tt-read', 'mk--tt-cur', 'mk--tt-hide', 'mk--tt-in', 'mk--tt-all');
       }
     }
 

@@ -207,6 +207,12 @@
   line-height: var(--touch-target);
 }
 
+/* Hairline seams between the tiles (a fractional zoom of the show, a fractional pixel ratio of the screen): a transparent outline makes the browser draw each tile
+   over whole pixels. */
+.map .leaflet-tile {
+  outline: 1px solid transparent;
+}
+
 /* Zoom and tool buttons in the colours of the theme (Leaflet's own are white with grey icons). */
 .map .leaflet-touch .leaflet-bar a {
   background: var(--color-surface);
@@ -1307,6 +1313,17 @@
   border-color: var(--tt-tone, var(--color-accent));
   background: var(--color-surface);
   opacity: var(--tt-dim);
+}
+
+/* The end of the show: a picture, not a list: small solid dots in the colour of their epoch, no outline, no diamonds. */
+.mk--tt-all .mk__shape {
+  width: var(--tt-final-size);
+  height: var(--tt-final-size);
+  border: 0;
+  border-radius: 50%;
+  background: var(--tt-tone, var(--color-accent));
+  box-shadow: none;
+  rotate: none;
 }
 
 .mk--tt-in .mk__shape {

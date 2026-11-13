@@ -244,6 +244,7 @@
   --tt-pulse: 1200ms; /* the one soft pulse of the current point */
   --tt-dim: 0.8; /* the earlier points of the epoch */
   --tt-past-size: 0.875rem; /* and their size (a story marker is 1.125rem) */
+  --tt-final-size: 0.5rem; /* the points of the picture at the end of the show */
   --tt-current-scale: 1.5;
   --tt-scale-height: 2.75rem;
   --tt-seg-height: 0.25rem;

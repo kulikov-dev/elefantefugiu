@@ -462,6 +462,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     phase = 'final';
     playing = false;
     render();
+    fitWhole();
   }
 
   function setPlaying(on: boolean) {
@@ -507,7 +508,8 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     active = true;
     host.clearEpoch();
     // A start from a place, or from a view that holds the whole mainland: the map shows that place (the mainland, never the islands), in the part the card leaves free.
-    if (!resumeId && (key !== TT_VIEW || coversMainland(host.bounds()))) {
+    fitted = !resumeId && (key !== TT_VIEW || coversMainland(host.bounds()));
+    if (fitted) {
       const chip = key === TT_WHOLE || key === TT_VIEW ? undefined : cfg.chips.find((c) => c.key === key);
       host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, false, undefined, insetFor().right, !chip && wide());
     }
@@ -538,6 +540,17 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     cancelAnimationFrame(frame);
     frame = requestAnimationFrame(loop);
     if (first) (toggleBtn.hidden ? nextBtn : toggleBtn).focus({ preventScroll: true });
+  }
+
+  /** Whether the start put the map on a place or on the mainland (the end of the show puts it there again). */
+  let fitted = false;
+
+  /** The map as at the start: the place or the mainland, in the part the card leaves free. */
+  function fitWhole() {
+    if (!fitted) return;
+    home = null;
+    const chip = src === TT_WHOLE || src === TT_VIEW ? undefined : cfg.chips.find((c) => c.key === src);
+    host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, host.animate, undefined, insetFor().right, !chip && wide());
   }
 
   /** The start from a place, or from the button when some story lies under the card: the stories are shown above it. */
@@ -736,8 +749,10 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
         node.classList.add('mk--tt-in');
         node.addEventListener('animationend', () => node.classList.remove('mk--tt-in'), { once: true });
       }
-      node.classList.toggle('mk--tt-dim', drawnNow && !current);
-      node.classList.toggle('mk--tt-read', readSet.has(id));
+      const finale = phase === 'final' || phase === 'unread';
+      node.classList.toggle('mk--tt-all', drawnNow && finale);
+      node.classList.toggle('mk--tt-dim', drawnNow && !current && !finale);
+      node.classList.toggle('mk--tt-read', readSet.has(id) && !finale);
       node.classList.toggle('mk--tt-cur', current);
       marker.setZIndexOffset(current ? 1000 : 0);
       if (drawnNow) node.style.setProperty('--tt-tone', `var(--tone-${list[i]!.epoch}, var(--epoch-primary))`);
@@ -769,6 +784,10 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     apply,
     pick,
     drawnIds,
+    /** The end of the show: all the points at once, small and in the colour of their epoch. */
+    get finale() {
+      return active && (phase === 'final' || phase === 'unread');
+    },
     spread: [BEHAVIOUR.spreadSame, BEHAVIOUR.spreadGap, BEHAVIOUR.spreadMax] as const,
   };
 }
