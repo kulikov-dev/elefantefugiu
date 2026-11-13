@@ -13,6 +13,7 @@ import {
   TT_VIEW,
   TT_WHOLE,
   WHOLE_BOUNDS,
+  drawnRange,
   epochRuns,
   panAboveCard,
   parseSession,
@@ -29,7 +30,7 @@ import {
 
 export interface TtConfig {
   info: Record<string, TtInfo>;
-  epochs: Record<string, { name: string; order: number }>;
+  epochs: Record<string, { name: string; order: number; years: string }>;
   chips: TtChip[];
   whole: string;
   strings: Record<string, string>;
@@ -53,14 +54,19 @@ export interface TtHost {
   /** The thread filter of the map. */
   fio: () => string | null;
   bounds: () => Bounds;
-  /** Shows the box, keeping `bottom` pixels free at the foot and `right` at the right edge (under the card), never closer than `maxZoom`. */
-  fit: (box: Bounds, bottom: number, animate: boolean, maxZoom?: number, right?: number) => void;
+  /**
+   * Shows the box, keeping `bottom` pixels free at the foot and `right` at the right edge (under the card), never closer than `maxZoom`.
+   * `tall`: the height of the box fills the map and its west edge stands at the left edge; the east is cut where the card is.
+   */
+  fit: (box: Bounds, bottom: number, animate: boolean, maxZoom?: number, right?: number, tall?: boolean) => void;
   /** The epoch filter goes to "All epochs" when the mode starts. */
   clearEpoch: () => void;
   /** Redraws the markers (the island calls `apply` for the layers it draws). */
   refresh: () => void;
   /** The address changed (the place of the start is part of it). */
   address: () => void;
+  /** The mode ends: the map keeps to its own area again. */
+  leave: () => void;
   /** The pressed button of the page, to give the focus back when the mode ends. */
   startButton: HTMLButtonElement;
 }
@@ -82,6 +88,8 @@ const BEHAVIOUR = {
   cardShare: 0.45,
   /** A year written longer than this ('150 млн лет назад') is set in a smaller type to stay on one line. */
   longYear: 8,
+  /** How long the card names a new epoch, in ms. */
+  epochBannerMs: 1000,
   /** The zoom of a flight to an island, and its length in seconds. */
   islandZoom: 9,
   flySeconds: 0.6,
@@ -145,6 +153,8 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   let readSet = new Set<string>();
   /** The markers of the map as the island last drew them (they may lie on a ring, off the point of their story). */
   let drawn = new Map<string, L.Marker>();
+  /** The stories drawn at the last redraw (a story that was not there appears with a fade). */
+  const shown = new Set<string>();
   /** The window of the show: the map as it was when it started. Panning and the thread filter do not change which stories play. */
   let win: Bounds = host.bounds();
 
@@ -180,7 +190,14 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   play.append(live, acts);
 
   const other = el('div', 'tt-card__other');
-  card.append(prog, play, other);
+  /** A new epoch: for a second the card names it and says its years (over the story, the show goes on). */
+  const banner = el('div', 'tt-card__epoch');
+  banner.hidden = true;
+  banner.setAttribute('aria-hidden', 'true');
+  const bannerName = el('p', 'tt-card__epoch-name');
+  const bannerYears = el('p', 'tt-card__epoch-years');
+  banner.append(bannerName, bannerYears);
+  card.append(prog, play, other, banner);
   stage.append(card);
   // On a phone the attribution of the map stays above the card: the style reads the height from here.
   new ResizeObserver(() => root.style.setProperty('--tt-card-height', card.hidden ? '0px' : `${card.offsetHeight}px`)).observe(card);
@@ -376,7 +393,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
       const token = parseFloat(getComputedStyle(root).getPropertyValue('--tt-card-width')) || 25;
       return { right: token * rem + BEHAVIOUR.clearPx, bottom: 0 };
     }
-    return { right: 0, bottom: card.hidden ? 0 : Math.min(card.getBoundingClientRect().height, stage.clientHeight * BEHAVIOUR.cardShare) };
+    return { right: 0, bottom: card.hidden ? stage.clientHeight * BEHAVIOUR.cardShare : Math.min(card.getBoundingClientRect().height, stage.clientHeight * BEHAVIOUR.cardShare) };
   };
 
   /** Where the map was before a flight to an island (null: it is at the mainland). */
@@ -431,12 +448,31 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   // ---- moving along the list ------------------------------------------------------------------------------------------------
 
+  let bannerTimer = 0;
+  const hideBanner = () => {
+    clearTimeout(bannerTimer);
+    banner.hidden = true;
+  };
+  const showBanner = (epoch: string) => {
+    const e = cfg.epochs[epoch];
+    if (!e) return;
+    bannerName.textContent = e.name;
+    bannerYears.textContent = e.years;
+    card.style.setProperty('--tt-tone', `var(--tone-${epoch}, var(--epoch-primary))`);
+    banner.hidden = false;
+    banner.classList.toggle('tt-card__epoch--still', !host.animate);
+    clearTimeout(bannerTimer);
+    bannerTimer = window.setTimeout(hideBanner, BEHAVIOUR.epochBannerMs);
+  };
+
   function go(i: number, keepPlaying = true) {
+    const before = phase === 'play' ? list[idx]?.epoch : undefined;
     idx = stepIndex(i, 0, list.length);
     phase = 'play';
     elapsed = 0;
     if (!keepPlaying) playing = host.animate;
     render();
+    if (before !== undefined && before !== list[idx]!.epoch) showBanner(list[idx]!.epoch);
   }
 
   function finish() {
@@ -488,9 +524,10 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     src = key;
     active = true;
     host.clearEpoch();
-    if (!resumeId && key !== TT_VIEW) {
-      const chip = key === TT_WHOLE ? undefined : cfg.chips.find((c) => c.key === key);
-      host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, false, undefined, insetFor().right);
+    // A start from a place, or from a view that holds the whole mainland: the map shows that place (the mainland, never the islands), in the part the card leaves free.
+    if (!resumeId && (key !== TT_VIEW || coversMainland(host.bounds()))) {
+      const chip = key === TT_WHOLE || key === TT_VIEW ? undefined : cfg.chips.find((c) => c.key === key);
+      host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, false, undefined, insetFor().right, !chip && wide());
     }
     win = host.bounds();
     list = compute();
@@ -556,11 +593,14 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     cancelAnimationFrame(frame);
     list = [];
     home = null;
+    hideBanner();
+    shown.clear();
     card.hidden = true;
     if (scaleBox) scaleBox.hidden = true;
     delete root.dataset.tt;
     if (page) delete page.dataset.tt;
     host.startButton.setAttribute('aria-pressed', 'false');
+    host.leave();
     host.refresh();
     host.address();
     if (focus) host.startButton.focus();
@@ -619,6 +659,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     idx = stepIndex(i, 0, list.length);
     phase = 'play';
     elapsed = 0;
+    hideBanner();
     render(settle);
   };
   const indexAt = (clientX: number) => {
@@ -696,22 +737,40 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   // ---- what the island needs -------------------------------------------------------------------------------------------------------
 
+  const rangeNow = (): [number, number] => drawnRange(list.map((c) => c.epoch), idx, phase === 'play' ? 'play' : phase === 'final' || phase === 'unread' ? 'all' : 'none');
+  /** The ids of the stories that are on the map now (the island spreads only these on rings). */
+  const drawnIds = (): Set<string> => {
+    const [from, to] = rangeNow();
+    return new Set(list.slice(from, to + 1).map((c) => c.id));
+  };
+
   /** The markers drawn on the map are decorated by the state of the show: dim (not yet), seen, read, the current one (larger, one soft pulse). */
   function apply(layers: Map<string, L.Marker>) {
     drawn = layers;
     const index = new Map(list.map((c, i) => [c.id, i]));
-    const at = phase === 'final' ? list.length : idx;
+    const [from, to] = rangeNow();
+    const now = new Set<string>();
     for (const [id, marker] of layers) {
       const node = marker.getElement();
       if (!node) continue;
       const i = index.get(id);
+      const drawnNow = i !== undefined && i >= from && i <= to;
       const current = phase === 'play' && i === idx;
-      node.classList.toggle('mk--tt-dim', phase !== 'hint' && phase !== 'choose' && (i === undefined || i > at));
+      if (drawnNow) now.add(id);
+      node.classList.toggle('mk--tt-hide', !drawnNow);
+      // The story that comes: it appears at its moment (a short fade); the ones before it stay, dim.
+      if (current && !shown.has(id) && host.animate) {
+        node.classList.add('mk--tt-in');
+        node.addEventListener('animationend', () => node.classList.remove('mk--tt-in'), { once: true });
+      }
+      node.classList.toggle('mk--tt-dim', drawnNow && !current);
       node.classList.toggle('mk--tt-read', readSet.has(id));
       node.classList.toggle('mk--tt-cur', current);
       marker.setZIndexOffset(current ? 1000 : 0);
       if (current) node.style.setProperty('--tt-tone', `var(--tone-${list[idx]!.epoch}, var(--epoch-primary))`);
     }
+    shown.clear();
+    for (const id of now) shown.add(id);
   }
 
   /** A press on a marker: the story of the list is shown and the show waits. */
@@ -736,6 +795,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     resume,
     apply,
     pick,
+    drawnIds,
     spread: [BEHAVIOUR.spreadSame, BEHAVIOUR.spreadGap, BEHAVIOUR.spreadMax] as const,
   };
 }

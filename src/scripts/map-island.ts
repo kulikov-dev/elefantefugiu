@@ -68,6 +68,8 @@ const BEHAVIOUR = {
   messageMs: 9000,
   /** "Through the centuries": the closest zoom of the map when it shows a place. */
   ttMaxZoom: 15,
+  /** Degrees east of the allowed area the map may show while the card stands at its right. */
+  ttEastRoom: 14,
 };
 
 /** Icons of the map tools (a 24 px grid, stroke drawn with currentColor). */
@@ -294,7 +296,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     // The show marks the markers (dim, seen, read, the current one) and lays the ones on one spot on a ring; leaving it takes the marks off.
     if (ttOn) {
       const spots = new Map(result.markers.map((m) => [m.id, map.latLngToContainerPoint([m.lat, m.lon])]));
-      const shift = spreadPoints([...spots].map(([id, p]) => ({ id, x: p.x, y: p.y })), ...tt!.spread);
+      // Only the points on the map count: a point with nothing shown near it stands exactly where its story is.
+      const onMap = tt!.drawnIds();
+      const shift = spreadPoints([...spots].filter(([id]) => onMap.has(id)).map(([id, p]) => ({ id, x: p.x, y: p.y })), ...tt!.spread);
       for (const m of result.markers) {
         const o = shift.get(m.id);
         const p = spots.get(m.id)!;
@@ -307,7 +311,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       for (const [key, marker] of layers) {
         const card = byId.get(key);
         if (card) marker.setLatLng([card.lat, card.lon]);
-        marker.getElement()?.classList.remove('mk--tt-dim', 'mk--tt-read', 'mk--tt-cur');
+        marker.getElement()?.classList.remove('mk--tt-dim', 'mk--tt-read', 'mk--tt-cur', 'mk--tt-hide', 'mk--tt-in');
       }
     }
 
@@ -755,6 +759,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     }
   };
   let ttLoading: Promise<Timetravel> | null = null;
+  /** The `zoomSnap` of the map before the mode made it fractional (null: untouched). */
+  let ttSnap: number | null = null;
   /** The player is a chunk of its own: fetched at the first press of the button (or at once for ?era= and for a return from a story). */
   const ensureTt = (): Promise<Timetravel> =>
     (ttLoading ??= import('./timetravel').then(({ createTimetravel }) => {
@@ -767,15 +773,32 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         cards: () => cards as unknown as TtMapCard[],
         fio: () => state.fio,
         bounds: () => fromLatLngBounds(map.getBounds()),
-        fit: (box, bottom, animated, maxZoom, right = 0) => {
+        fit: (box, bottom, animated, maxZoom, right = 0, tall = false) => {
           if (world) setWorld(false);
+          // The card stands at the right: the country has to stand left of the middle, so the map may look further east than its own area allows.
+          if (right > 0) map.setMaxBounds(L.latLngBounds(maxBounds.getSouthWest(), [maxBounds.getNorth(), maxBounds.getEast() + BEHAVIOUR.ttEastRoom]));
           const pad = BEHAVIOUR.fitPadding;
+          if (tall) {
+            // Fractional zoom while the mode runs, so the height of the country fills the map.
+            ttSnap ??= map.options.zoomSnap ?? 1;
+            map.options.zoomSnap = 0;
+            const mid = (box.west + box.east) / 2;
+            const zoom = Math.min(map.getBoundsZoom(L.latLngBounds([box.south, mid], [box.north, mid + 0.01]), false, L.point(pad * 2, pad * 2 + bottom)), maxZoom ?? BEHAVIOUR.ttMaxZoom);
+            const at = map.project([(box.south + box.north) / 2, box.west], zoom);
+            map.setView(map.unproject(at.add([map.getSize().x / 2 - pad, bottom / 2]), zoom), zoom, { animate: animated });
+            return;
+          }
           map.fitBounds(toLatLngBounds(box), { paddingTopLeft: [pad, pad], paddingBottomRight: [pad + right, pad + bottom], maxZoom: maxZoom ?? BEHAVIOUR.ttMaxZoom, animate: animated });
         },
         clearEpoch: () => {
           state = { ...state, epoca: null, id: null };
           preview.hidden = true;
           syncChips();
+        },
+        leave: () => {
+          if (ttSnap !== null) map.options.zoomSnap = ttSnap;
+          ttSnap = null;
+          if (!world) map.setMaxBounds(maxBounds);
         },
         refresh: () => refreshMarkers(),
         address: () => writeUrl(),

@@ -147,6 +147,20 @@ export function epochRuns(epochs: readonly string[]): { epoch: string; count: nu
   return runs;
 }
 
+/**
+ * The stories drawn on the map, as the range of indices [from, to] (empty when from > to): before the start none; while the show plays, the epoch of the
+ * story on the screen from its first story up to it (a new epoch starts the picture from nothing, a rewind shows the epoch up to the chosen story);
+ * at the end all of them.
+ */
+export function drawnRange(epochs: readonly string[], index: number, mode: 'none' | 'play' | 'all'): [number, number] {
+  if (mode === 'none' || epochs.length === 0) return [0, -1];
+  if (mode === 'all') return [0, epochs.length - 1];
+  const at = Math.min(Math.max(index, 0), epochs.length - 1);
+  let from = at;
+  while (from > 0 && epochs[from - 1] === epochs[at]) from -= 1;
+  return [from, at];
+}
+
 /** The index after a step, kept inside the list. */
 export const stepIndex = (index: number, step: number, length: number): number => Math.min(Math.max(index + step, 0), Math.max(length - 1, 0));
 

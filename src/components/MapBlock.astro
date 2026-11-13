@@ -27,7 +27,7 @@ interface Props {
   /** 'page': the block owns ?fio= ?epoca= ?id= in the address. 'embedded': a parent page drives it with events. */
   mode?: 'page' | 'embedded';
   /** "Through the centuries" (map page only): what the player needs besides the cards. */
-  tt?: { info: Record<string, TtInfo>; epochs: Record<string, { name: string; order: number }>; chips: TtChip[] };
+  tt?: { info: Record<string, TtInfo>; epochs: Record<string, { name: string; order: number; years: string }>; chips: TtChip[] };
 }
 
 const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page', tt } = Astro.props;
