@@ -234,7 +234,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     if (ttOn) {
       // "Through the centuries": every story of the window is a marker of its own, no clusters (the ones on one spot are spread below).
       const box = fromLatLngBounds(map.getBounds());
-      const shown = cards.filter((card) => inBounds(card, box) && (state.fio === null || card.threads.includes(state.fio)));
+      const shown = cards.filter((card) => !card.overseas && inBounds(card, box) && (state.fio === null || card.threads.includes(state.fio)));
       result = {
         markers: shown.map((card) => ({ id: card.id, lat: card.lat, lon: card.lon, kind: card.importance === 3 ? 'frame' : 'story' })),
         clusters: [],
@@ -294,7 +294,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     // The show marks the markers (dim, seen, read, the current one) and lays the ones on one spot on a ring; leaving it takes the marks off.
     if (ttOn) {
       const spots = new Map(result.markers.map((m) => [m.id, map.latLngToContainerPoint([m.lat, m.lon])]));
-      const shift = spreadPoints([...spots].map(([id, p]) => ({ id, x: p.x, y: p.y })), tt!.spreadPx);
+      const shift = spreadPoints([...spots].map(([id, p]) => ({ id, x: p.x, y: p.y })), ...tt!.spread);
       for (const m of result.markers) {
         const o = shift.get(m.id);
         const p = spots.get(m.id)!;
@@ -767,10 +767,10 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         cards: () => cards as unknown as TtMapCard[],
         fio: () => state.fio,
         bounds: () => fromLatLngBounds(map.getBounds()),
-        fit: (box, bottom, animated, maxZoom) => {
+        fit: (box, bottom, animated, maxZoom, right = 0) => {
           if (world) setWorld(false);
           const pad = BEHAVIOUR.fitPadding;
-          map.fitBounds(toLatLngBounds(box), { paddingTopLeft: [pad, pad], paddingBottomRight: [pad, pad + bottom], maxZoom: maxZoom ?? BEHAVIOUR.ttMaxZoom, animate: animated });
+          map.fitBounds(toLatLngBounds(box), { paddingTopLeft: [pad, pad], paddingBottomRight: [pad + right, pad + bottom], maxZoom: maxZoom ?? BEHAVIOUR.ttMaxZoom, animate: animated });
         },
         clearEpoch: () => {
           state = { ...state, epoca: null, id: null };

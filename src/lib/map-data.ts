@@ -17,6 +17,13 @@ const REGIONS: Bounds[] = [
 /** Is this point in Portugal (the mainland, Madeira or the Azores)? A story whose place is not is "overseas" for the map. */
 export const isInPortugal = (lat: number, lon: number): boolean => REGIONS.some((r) => lat >= r.south && lat <= r.north && lon >= r.west && lon <= r.east);
 
+/** Madeira or the Azores: in Portugal but not on the mainland. */
+export const isIsland = (lat: number, lon: number): boolean => isInPortugal(lat, lon) && !inBox(REGIONS[0]!, lat, lon);
+
+function inBox(r: Bounds, lat: number, lon: number): boolean {
+  return lat >= r.south && lat <= r.north && lon >= r.west && lon <= r.east;
+}
+
 /** Extra room around the allowed area, in degrees, so the edge cards are not pinned to the border. */
 export const MAX_BOUNDS_MARGIN = 1;
 

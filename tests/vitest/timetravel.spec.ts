@@ -52,6 +52,20 @@ describe('playlist', () => {
     expect(ids).toEqual(['in']);
   });
 
+  it('leaves out a story abroad and a point outside Portugal', () => {
+    const cards = [card('in'), card('abroad', { overseas: { lat: 47, lon: -1.5, name: 'Nantes' } }), card('far', { lat: 47, lon: -1.5 })];
+    const inf = { in: info(1), abroad: info(2), far: info(3) };
+    const wide = { south: 30, north: 50, west: -20, east: 0 };
+    expect(playlist({ cards, info: inf, bounds: wide, fio: null, epochOrder: order }).map((c) => c.id)).toEqual(['in']);
+  });
+
+  it('takes the islands along when asked, though the window does not hold them', () => {
+    const cards = [card('in'), card('madeira', { lat: 32.65, lon: -16.9 })];
+    const inf = { in: info(1), madeira: info(2) };
+    expect(playlist({ cards, info: inf, bounds: box, fio: null, epochOrder: order }).map((c) => c.id)).toEqual(['in']);
+    expect(playlist({ cards, info: inf, bounds: box, fio: null, epochOrder: order, islands: true }).map((c) => c.id)).toEqual(['in', 'madeira']);
+  });
+
   it('applies the thread filter and the place', () => {
     const cards = [card('a1', { threads: ['mar'] }), card('a2', { threads: ['fe'] })];
     const inf = { a1: info(1, { place: 'lisboa' }), a2: info(2, { place: 'porto' }) };
@@ -95,19 +109,9 @@ describe('placeChips', () => {
 });
 
 describe('ttInfoOf', () => {
-  it('writes the year as the site does and takes the line of the page language', () => {
-    const e = event('x', {
-      year: 1515,
-      meanwhile: [{ scope: 'world', year: 1512, text: { pt: 'p', en: 'e', ru: 'r' }, source: 'https://x.y' }],
-    });
-    const i = ttInfoOf(e, 'en');
-    expect(i).toMatchObject({ from: 1515, to: 1515, year: '1515', place: 'lisboa', mw: { year: '1512', text: 'e' } });
-  });
-
-  it('gives a story with no line none, and a heavy-topic story never has one', () => {
-    expect(ttInfoOf(event('x'), 'en').mw).toBeUndefined();
-    const heavy = event('h', { sensitive: true, meanwhile: [{ scope: 'world', year: 1500, text: { pt: 'p', en: 'e', ru: 'r' }, source: 'https://x.y' }] });
-    expect(ttInfoOf(heavy, 'en').mw).toBeUndefined();
+  it('writes the year as the site does', () => {
+    const i = ttInfoOf(event('x', { year: 1515 }), 'en');
+    expect(i).toEqual({ from: 1515, to: 1515, year: '1515', place: 'lisboa' });
   });
 });
 
@@ -155,22 +159,26 @@ describe('small rules', () => {
 
 describe('spreadPoints', () => {
   it('moves markers on one spot apart, around their middle, and leaves the others', () => {
-    const out = spreadPoints(
-      [
-        { id: 'a', x: 100, y: 100 },
-        { id: 'b', x: 101, y: 100 },
-        { id: 'far', x: 300, y: 300 },
-      ],
-      30,
-    );
+    const out = spreadPoints([
+      { id: 'a', x: 100, y: 100 },
+      { id: 'b', x: 101, y: 100 },
+      { id: 'far', x: 300, y: 300 },
+    ]);
     expect([...out.keys()].sort()).toEqual(['a', 'b']);
     const a = { x: 100 + out.get('a')!.dx, y: 100 + out.get('a')!.dy };
     const b = { x: 101 + out.get('b')!.dx, y: 100 + out.get('b')!.dy };
-    expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeGreaterThanOrEqual(30 - 0.001);
+    expect(Math.hypot(a.x - b.x, a.y - b.y)).toBeGreaterThanOrEqual(14 - 0.001);
   });
 
-  it('does nothing when no two are closer than the least distance', () => {
-    expect(spreadPoints([{ id: 'a', x: 0, y: 0 }, { id: 'b', x: 100, y: 0 }], 30).size).toBe(0);
+  it('does nothing when no two are on one spot', () => {
+    expect(spreadPoints([{ id: 'a', x: 0, y: 0 }, { id: 'b', x: 100, y: 0 }]).size).toBe(0);
+  });
+
+  it('does not chain: a row of markers, each near the next, stays as it is, and a ring is never wide', () => {
+    const row = Array.from({ length: 40 }, (_, i) => ({ id: `r${String(i).padStart(2, '0')}`, x: i * 8, y: 0 }));
+    expect(spreadPoints(row).size).toBe(0);
+    const heap = Array.from({ length: 30 }, (_, i) => ({ id: `h${i}`, x: 50, y: 50 }));
+    for (const s of spreadPoints(heap).values()) expect(Math.hypot(s.dx, s.dy)).toBeLessThanOrEqual(28 + 0.001);
   });
 });
 

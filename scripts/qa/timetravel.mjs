@@ -18,6 +18,11 @@ const ok = (name, cond, extra = '') => {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+/** With many stories in the window the start asks first: "all in order" is the answer of the suites that walk the whole list. */
+const choose = async (page) => {
+  await wait(300);
+  await page.evaluate(() => document.querySelector('[data-tt-all]')?.click());
+};
 const browser = await launchBrowser();
 
 // ---- the data, as the build reads it ------------------------------------------------------------------------------------
@@ -76,6 +81,10 @@ const open = async (path, { width = 1280, height = 900, reduced = false, family 
   if (!js) await page.setJavaScriptEnabled(false);
   await page.goto(`${base}${path}`, { waitUntil: 'networkidle0' });
   if (js) await page.waitForSelector('.map[data-state="ready"]', { timeout: 20000 });
+  if (js && path.includes('era=')) {
+    await wait(500);
+    await choose(page);
+  }
   return page;
 };
 
@@ -94,7 +103,6 @@ const state = (page) =>
       playVisible: shown(document.querySelector('.tt-card__play')),
       other: shown(document.querySelector('.tt-card__other')) ? document.querySelector('.tt-card__other').innerText : '',
       toggle: document.querySelector('.tt-card__acts .tt-btn[aria-label]:nth-of-type(2)')?.getAttribute('aria-label') ?? '',
-      mw: shown(document.querySelector('.tt-card__mw')) ? document.querySelector('.tt-card__mw').innerText : '',
       markers: document.querySelectorAll('.mk').length,
       cur: document.querySelectorAll('.mk--tt-cur').length,
       dim: document.querySelectorAll('.mk--tt-dim').length,
@@ -143,6 +151,7 @@ if (want('order')) {
 if (want('window')) {
   const page = await open(MAP.pt);
   await page.click(START);
+  await choose(page);
   await page.waitForSelector('.tt-card:not([hidden])');
   await wait(300);
   let s = await state(page);
@@ -157,6 +166,7 @@ if (want('window')) {
     await page.evaluate(() => document.querySelector('.leaflet-control-zoom-in').click());
     await wait(700);
     await page.click(START);
+  await choose(page);
     await wait(500);
     s = await state(page);
     if (s.other && !s.playVisible) hint = true;
@@ -174,6 +184,7 @@ if (want('hint') || want('chips')) {
   const target = need('a story with fewer than two others within 0.1 degree of its bridge (the hint of the mode)', (list) => list.find(lonely));
   const page = await open(`${MAP.pt}?id=${target.id}`);
   await page.click(START);
+  await choose(page);
   await wait(500);
   const s = await state(page);
   ok('hint: a window with fewer than three stories shows the hint, no scale, no show', !s.playVisible && s.other.includes(ui('map.tt_hint_title', 'pt')) && (await page.evaluate(() => !document.querySelector('[data-tt-scale]').checkVisibility())), s.other.slice(0, 60));
@@ -325,6 +336,7 @@ if (want('motion')) {
 if (want('events')) {
   const page = await open(MAP.pt);
   await page.click(START);
+  await choose(page);
   await wait(500);
   let log = await page.evaluate(() => JSON.parse(sessionStorage.getItem('__gc') || '[]'));
   ok('events: a start from the button is one event, timetravel-start-view', JSON.stringify(log) === '["timetravel-start-view"]', JSON.stringify(log));
@@ -366,7 +378,6 @@ if (want('final')) {
   const page = await open(`${MAP.pt}?era=${PLACE}`, { read: done });
   await page.waitForSelector('.tt-card:not([hidden])');
   await page.evaluate(() => document.querySelector('.tt-card__acts .tt-btn:nth-of-type(2)').click());
-  const mw = await state(page);
   await walk(page);
   const s = await state(page);
   // the short year of the data (year_scale), else the first year; the first centuries and BC years have their era, so a story without a short year is not checked by its figure
@@ -381,9 +392,6 @@ if (want('final')) {
   await page.evaluate(() => document.querySelector('.tt-card__final-acts .button--secondary').click());
   const again = await state(page);
   ok('final: "Start over" begins again from the first story', index(again) === 1 && again.playVisible);
-  const first = list[0];
-  const hasLine = !first.sensitive && (first.meanwhile ?? []).some((i) => i.scope === 'world' || i.scope === 'pt');
-  ok('meanwhile: the line "Meanwhile" is on the card exactly when the story has one for the language (and never for a heavy topic)', hasLine === (mw.mw !== '') && (!hasLine || mw.mw.startsWith(ui('map.tt_meanwhile', 'pt'))), JSON.stringify(mw.mw));
   await page.close();
 }
 
@@ -416,7 +424,7 @@ if (want('layout')) {
   const wide = await open(`${MAP.pt}?era=${PLACE}`, { width: 1280, height: 800 });
   await wide.waitForSelector('.tt-card:not([hidden])');
   const g = await wide.evaluate(() => { const c = document.querySelector('.tt-card').getBoundingClientRect(); const s = document.querySelector('.map__stage').getBoundingClientRect(); return { w: c.width, left: c.left - s.left, bottom: s.bottom - c.bottom }; });
-  ok('layout (1280 px): the card is a plate of about 420 px at the bottom left of the map', Math.abs(g.w - 420) <= 6 && g.left < 24 && g.bottom < 24, JSON.stringify(g));
+  ok('layout (1280 px): the card is a plate of 400 px at the bottom left of the map', Math.abs(g.w - 400) <= 6 && g.left < 24 && g.bottom < 24, JSON.stringify(g));
   await wide.close();
 }
 

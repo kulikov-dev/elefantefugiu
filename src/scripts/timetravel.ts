@@ -4,8 +4,10 @@ import type * as L from 'leaflet';
 import { pickPlural } from '../lib/plural-pick';
 import { READ_KEY, parseRead } from '../lib/read-marks';
 import type { Bounds } from '../lib/markers';
+import { isIsland } from '../lib/map-data';
 import {
   READ_EVENT_PATH,
+  TT_CHOOSE_OVER,
   TT_MIN_STORIES,
   TT_SESSION_KEY,
   TT_VIEW,
@@ -14,6 +16,7 @@ import {
   epochRuns,
   panAboveCard,
   parseSession,
+  coversMainland,
   playlist,
   startEventPath,
   stepIndex,
@@ -36,6 +39,7 @@ export interface TtMapCard extends TtCard {
   title: string;
   hook: string;
   href: string;
+  overseas?: unknown;
 }
 
 export interface TtHost {
@@ -49,8 +53,8 @@ export interface TtHost {
   /** The thread filter of the map. */
   fio: () => string | null;
   bounds: () => Bounds;
-  /** Shows the box, keeping `bottom` pixels free at the foot (under the card), never closer than `maxZoom`. */
-  fit: (box: Bounds, bottom: number, animate: boolean, maxZoom?: number) => void;
+  /** Shows the box, keeping `bottom` pixels free at the foot and `right` at the right edge (under the card), never closer than `maxZoom`. */
+  fit: (box: Bounds, bottom: number, animate: boolean, maxZoom?: number, right?: number) => void;
   /** The epoch filter goes to "All epochs" when the mode starts. */
   clearEpoch: () => void;
   /** Redraws the markers (the island calls `apply` for the layers it draws). */
@@ -64,8 +68,11 @@ export interface TtHost {
 const BEHAVIOUR = {
   /** How long a story stays, in ms. */
   dwellMs: 4000,
-  /** The least distance between two markers, in px; closer ones are laid on a ring. */
-  spreadPx: 36,
+  /** Markers closer than this, in px, are on one spot and are laid on a small ring (never a long row: see `spreadPoints`). */
+  spreadSame: 6,
+  /** The room between neighbours on a ring, in px, and the widest ring. */
+  spreadGap: 14,
+  spreadMax: 28,
   /** The room kept between a marker and the card when the map pans, in px. */
   clearPx: 32,
   panSeconds: 0.3,
@@ -73,6 +80,13 @@ const BEHAVIOUR = {
   swipePx: 48,
   /** A card on a phone is at most this share of the map (the style says the same; the fit before the first story is made with it). */
   cardShare: 0.45,
+  /** A year written longer than this ('150 млн лет назад') is set in a smaller type to stay on one line. */
+  longYear: 8,
+  /** The zoom of a flight to an island, and its length in seconds. */
+  islandZoom: 9,
+  flySeconds: 0.6,
+  /** A card on a wide screen stands at the right (the style says the same: from this width in px). */
+  wideMin: 960,
 };
 
 const fill = (template: string, vars: Record<string, string | number>) => template.replace(/\{(\w+)\}/g, (m, k: string) => (k in vars ? String(vars[k]) : m));
@@ -109,7 +123,7 @@ const readIds = (): string[] => {
   }
 };
 
-type Phase = 'play' | 'hint' | 'final' | 'unread';
+type Phase = 'play' | 'hint' | 'choose' | 'final' | 'unread';
 
 export function createTimetravel(cfg: TtConfig, host: TtHost) {
   const { root, stage, map } = host;
@@ -125,11 +139,12 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   let idx = 0;
   let src = TT_VIEW;
   let playing = false;
-  let held = false;
   let elapsed = 0;
   let frame = 0;
   let last = 0;
   let readSet = new Set<string>();
+  /** The markers of the map as the island last drew them (they may lie on a ring, off the point of their story). */
+  let drawn = new Map<string, L.Marker>();
   /** The window of the show: the map as it was when it started. Panning and the thread filter do not change which stories play. */
   let win: Bounds = host.bounds();
 
@@ -150,20 +165,19 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   const top = el('div', 'tt-card__top');
   const yearEl = el('p', 'tt-card__year');
   const eraEl = el('p', 'tt-card__era');
-  top.append(yearEl, eraEl);
+  const countEl = el('span', 'tt-card__count');
+  top.append(yearEl, countEl);
   const titleEl = el('h2', 'tt-card__title');
   const hookEl = el('p', 'tt-card__hook');
-  const mwEl = el('p', 'tt-card__mw');
-  live.append(top, titleEl, hookEl);
+  live.append(top, eraEl, titleEl, hookEl);
   const acts = el('div', 'tt-card__acts');
   const readLink = el('a', 'button tt-card__read', S.read);
-  const countEl = el('span', 'tt-card__count');
   const prevBtn = iconButton('prev', S.prev!);
   const toggleBtn = iconButton('pause', S.pause!);
   const nextBtn = iconButton('next', S.next!);
   const closeBtn = iconButton('close', S.exit!);
-  acts.append(readLink, countEl, prevBtn, toggleBtn, nextBtn, closeBtn);
-  play.append(live, acts, mwEl);
+  acts.append(readLink, prevBtn, toggleBtn, nextBtn, closeBtn);
+  play.append(live, acts);
 
   const other = el('div', 'tt-card__other');
   card.append(prog, play, other);
@@ -175,7 +189,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   const renderScale = () => {
     if (!scaleBox) return;
-    scaleBox.hidden = !active || phase === 'hint' || list.length === 0;
+    scaleBox.hidden = !active || phase === 'hint' || phase === 'choose' || list.length === 0;
     if (scaleBox.hidden) return;
     const n = list.length;
     const pos = (i: number) => `${(((i + 0.5) / n) * 100).toFixed(3)}%`;
@@ -194,6 +208,12 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
       ticks.append(tick);
     });
     const at = phase === 'final' ? n - 1 : idx;
+    scaleBox.setAttribute('role', 'slider');
+    scaleBox.tabIndex = 0;
+    scaleBox.setAttribute('aria-valuemin', '1');
+    scaleBox.setAttribute('aria-valuemax', String(n));
+    scaleBox.setAttribute('aria-valuenow', String(at + 1));
+    scaleBox.setAttribute('aria-valuetext', `${cfg.info[list[at]!.id]!.year} · ${list[at]!.title}`);
     const run = el('span', 'tt-scale__run');
     run.style.left = pos(at);
     run.style.setProperty('--tt-tone', `var(--tone-${list[at]!.epoch}, var(--epoch-primary))`);
@@ -225,16 +245,13 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     const era = cfg.epochs[c.epoch];
     card.style.setProperty('--tt-tone', `var(--tone-${c.epoch}, var(--epoch-primary))`);
     yearEl.textContent = info.year;
+    yearEl.classList.toggle('tt-card__year--long', info.year.length > BEHAVIOUR.longYear);
+    progBar.style.width = `${Math.min(elapsed / BEHAVIOUR.dwellMs, 1) * 100}%`;
     eraEl.textContent = era?.name ?? '';
     titleEl.textContent = c.title;
     hookEl.textContent = c.hook;
     readLink.href = c.href;
     countEl.textContent = fill(S.count!, { i: idx + 1, total: list.length });
-    mwEl.hidden = !info.mw;
-    mwEl.replaceChildren();
-    if (info.mw) {
-      mwEl.append(el('b', '', S.meanwhile), ' ', el('b', '', info.mw.year), ` ${info.mw.text}`);
-    }
     prevBtn.disabled = idx === 0;
     updateToggle();
   };
@@ -246,6 +263,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     toggleBtn.title = label;
     toggleBtn.querySelector('svg')!.innerHTML = ICONS[playing ? 'pause' : 'play']!;
     prog.hidden = !host.animate || phase !== 'play';
+    prog.classList.toggle('tt-card__prog--paused', !playing);
   };
 
   const closeTop = () => {
@@ -257,22 +275,30 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   const renderOther = () => {
     other.replaceChildren();
-    if (phase === 'hint') {
-      const title = el('p', 'tt-card__big', S.hint_title);
-      const text = el('p', 'tt-card__sub', S.hint_text);
+    if (phase === 'hint' || phase === 'choose') {
+      const choose = phase === 'choose';
+      const title = el('p', 'tt-card__big', choose ? S.choose_title : S.hint_title);
+      const text = el('p', 'tt-card__sub', choose ? S.choose_text : S.hint_text);
       const chips = el('ul', 'tt-card__chips');
       chips.setAttribute('aria-label', S.places_label!);
-      for (const chip of [...cfg.chips, { key: TT_WHOLE, name: cfg.whole, count: 0 }]) {
+      for (const chip of choose ? cfg.chips : [...cfg.chips, { key: TT_WHOLE, name: cfg.whole, count: 0 }]) {
         const li = document.createElement('li');
         const b = el('button', 'map-chip', chip.name);
         b.type = 'button';
         b.dataset.ttPlace = chip.key;
         if (chip.count) b.append(' ', el('small', 'tt-card__chip-count', String(chip.count)));
-        b.addEventListener('click', () => begin(chip.key));
+        b.addEventListener('click', () => begin(chip.key, undefined, true));
         li.append(b);
         chips.append(li);
       }
       other.append(closeTop(), title, text, chips);
+      if (choose) {
+        const all = el('button', 'button tt-card__all', fill(S.choose_all!, { n: list.length }));
+        all.type = 'button';
+        all.dataset.ttAll = '';
+        all.addEventListener('click', () => begin(src, undefined, true));
+        other.append(all);
+      }
     } else if (phase === 'final') {
       const n = list.length;
       const first = cfg.info[list[0]!.id]!.year;
@@ -329,7 +355,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     else renderOther();
     updateToggle();
     renderScale();
-    fade();
+    if (clear) fade();
     host.refresh();
     if (phase === 'play' && clear) keepClear();
   }
@@ -342,10 +368,61 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     return { top: a.top - b.top, left: a.left - b.left, right: a.right - b.left };
   };
 
+  /** The room the card takes from the map: at the right on a wide screen, at the foot on a phone. */
+  const wide = () => window.matchMedia(`(min-width: ${BEHAVIOUR.wideMin}px)`).matches;
+  const insetFor = (): { right: number; bottom: number } => {
+    if (wide()) {
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      const token = parseFloat(getComputedStyle(root).getPropertyValue('--tt-card-width')) || 25;
+      return { right: token * rem + BEHAVIOUR.clearPx, bottom: 0 };
+    }
+    return { right: 0, bottom: card.hidden ? 0 : Math.min(card.getBoundingClientRect().height, stage.clientHeight * BEHAVIOUR.cardShare) };
+  };
+
+  /** Where the map was before a flight to an island (null: it is at the mainland). */
+  let home: { center: L.LatLng; zoom: number } | null = null;
+
+  /** The map centre that puts `at` in the part of the map the card leaves free. */
+  const centreFor = (at: L.LatLngExpression, zoom: number): L.LatLng => {
+    const inset = insetFor();
+    const p = map.project(at, zoom);
+    return map.unproject(p.add([inset.right / 2, inset.bottom / 2]), zoom);
+  };
+
+  /** A flight is on: the pan that keeps the point from the card waits for its end (a pan would stop the flight half way). */
+  let flying = false;
+  const flyTo = (center: L.LatLng, zoom: number, arrived?: () => void) => {
+    flying = true;
+    map.once('moveend', () => {
+      flying = false;
+      arrived?.();
+      keepClear();
+    });
+    if (host.animate) map.flyTo(center, zoom, { duration: BEHAVIOUR.flySeconds });
+    else map.setView(center, zoom, { animate: false });
+  };
+
   function keepClear() {
     const c = list[idx];
     if (!c || card.hidden) return;
-    const p = map.latLngToContainerPoint([c.lat, c.lon]);
+    const at = drawn.get(c.id)?.getLatLng() ?? ([c.lat, c.lon] as L.LatLngTuple);
+    // The islands are not in the window: their story is flown to; the next story of the mainland brings the map back to where it was.
+    if (isIsland(c.lat, c.lon)) {
+      if (flying || !map.getBounds().contains(at)) {
+        home ??= { center: map.getCenter(), zoom: map.getZoom() };
+        flyTo(centreFor(at, BEHAVIOUR.islandZoom), BEHAVIOUR.islandZoom);
+        return;
+      }
+    } else if (home) {
+      // `home` stays until the map is there (a story of an island may come before): then the way back starts from the right place.
+      flyTo(home.center, home.zoom, () => {
+        const now = list[idx];
+        if (!now || !isIsland(now.lat, now.lon)) home = null;
+      });
+      return;
+    }
+    if (flying) return;
+    const p = map.latLngToContainerPoint(at);
     const box = cardTop();
     if (p.x < box.left - BEHAVIOUR.clearPx || p.x > box.right + BEHAVIOUR.clearPx) return;
     const dy = panAboveCard(p.y, box.top, BEHAVIOUR.clearPx);
@@ -378,7 +455,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     frame = requestAnimationFrame(loop);
     const dt = last ? Math.min(now - last, 100) : 0;
     last = now;
-    if (!active || phase !== 'play' || !playing || held || document.hidden) return;
+    if (!active || phase !== 'play' || !playing || document.hidden) return;
     elapsed += dt;
     progBar.style.width = `${Math.min(elapsed / BEHAVIOUR.dwellMs, 1) * 100}%`;
     if (elapsed >= BEHAVIOUR.dwellMs) {
@@ -400,17 +477,20 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   const wantedPlace = () => (src === TT_VIEW || src === TT_WHOLE ? null : src);
 
   const compute = () =>
-    playlist({ cards: host.cards(), info: cfg.info, bounds: win, fio: host.fio(), epochOrder, place: wantedPlace() });
+    playlist({ cards: host.cards(), info: cfg.info, bounds: win, fio: host.fio(), epochOrder, place: wantedPlace(), islands: (src === TT_VIEW || src === TT_WHOLE) && coversMainland(win) });
 
-  /** Starts from the button (`view`: the window as it is now) or from a place chip. `resumeId`: back from a story, the same story and on pause. */
-  function begin(key: string, resumeId?: string) {
+  /**
+   * Starts from the button (`view`: the window as it is now) or from a place chip. `resumeId`: back from a story, the same story and on pause.
+   * With many stories in the window the start asks first (`choose`); `skipChoice` is the answer.
+   */
+  function begin(key: string, resumeId?: string, skipChoice = false) {
     const first = !active;
     src = key;
     active = true;
     host.clearEpoch();
     if (!resumeId && key !== TT_VIEW) {
       const chip = key === TT_WHOLE ? undefined : cfg.chips.find((c) => c.key === key);
-      host.fit(chip?.bounds ?? WHOLE_BOUNDS, 0, false);
+      host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, false, undefined, insetFor().right);
     }
     win = host.bounds();
     list = compute();
@@ -421,6 +501,14 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     last = 0;
     if (list.length < TT_MIN_STORIES) {
       phase = 'hint';
+      playing = false;
+      render();
+      host.address();
+      if (first) card.querySelector<HTMLElement>('.map-chip')?.focus({ preventScroll: true });
+      return;
+    }
+    if (!resumeId && !skipChoice && list.length > TT_CHOOSE_OVER && (key === TT_VIEW || key === TT_WHOLE)) {
+      phase = 'choose';
       playing = false;
       render();
       host.address();
@@ -443,21 +531,22 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   /** The start from a place, or from the button when some story lies under the card: the stories are shown above it. */
   function fitUnderCard() {
-    const h = card.getBoundingClientRect().height;
     const box = cardTop();
-    const covered = list.some((c) => {
+    const covered = list.filter((c) => !isIsland(c.lat, c.lon)).some((c) => {
       const p = map.latLngToContainerPoint([c.lat, c.lon]);
       return p.y > box.top - BEHAVIOUR.clearPx && p.x > box.left - BEHAVIOUR.clearPx && p.x < box.right + BEHAVIOUR.clearPx;
     });
     if (!covered) return;
-    const pts = list.map((c) => ({ lat: c.lat, lon: c.lon }));
+    // The islands are not part of the window: the fit holds the mainland stories only (the map flies to an island when its story comes).
+    const pts = list.filter((c) => !isIsland(c.lat, c.lon)).map((c) => ({ lat: c.lat, lon: c.lon }));
     const bounds = {
       south: Math.min(...pts.map((p) => p.lat)),
       north: Math.max(...pts.map((p) => p.lat)),
       west: Math.min(...pts.map((p) => p.lon)),
       east: Math.max(...pts.map((p) => p.lon)),
     };
-    host.fit(bounds, Math.min(h, stage.clientHeight * BEHAVIOUR.cardShare), host.animate, map.getZoom());
+    const inset = insetFor();
+    host.fit(bounds, inset.bottom, host.animate, map.getZoom(), inset.right);
   }
 
   function exit(focus: boolean) {
@@ -466,6 +555,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     playing = false;
     cancelAnimationFrame(frame);
     list = [];
+    home = null;
     card.hidden = true;
     if (scaleBox) scaleBox.hidden = true;
     delete root.dataset.tt;
@@ -482,6 +572,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     const keep = phase === 'play' ? list[idx]?.id : undefined;
     list = compute();
     if (list.length < TT_MIN_STORIES) phase = 'hint';
+    else if (phase === 'choose') idx = 0;
     else if (phase === 'hint') {
       phase = 'play';
       idx = 0;
@@ -521,6 +612,39 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   // ---- controls ----------------------------------------------------------------------------------------------------------------------
 
+  /** The scale is a hand-wound rewind: any move of it pauses the show and the card shows the chosen story at once. */
+  const seek = (i: number, settle: boolean) => {
+    if (!active || list.length === 0 || (phase !== 'play' && phase !== 'final')) return;
+    setPlaying(false);
+    idx = stepIndex(i, 0, list.length);
+    phase = 'play';
+    elapsed = 0;
+    render(settle);
+  };
+  const indexAt = (clientX: number) => {
+    const r = scaleBox!.getBoundingClientRect();
+    return Math.floor(((clientX - r.left) / Math.max(r.width, 1)) * list.length);
+  };
+  if (scaleBox) {
+    let dragging = false;
+    scaleBox.addEventListener('pointerdown', (e) => {
+      if (!active || (phase !== 'play' && phase !== 'final')) return;
+      dragging = true;
+      scaleBox.setPointerCapture(e.pointerId);
+      seek(indexAt(e.clientX), false);
+    });
+    scaleBox.addEventListener('pointermove', (e) => {
+      if (dragging) seek(indexAt(e.clientX), false);
+    });
+    const release = () => {
+      if (!dragging) return;
+      dragging = false;
+      keepClear();
+    };
+    scaleBox.addEventListener('pointerup', release);
+    scaleBox.addEventListener('pointercancel', release);
+  }
+
   /** One story on; after the last one the summary. */
   const step = (by: 1 | -1) => {
     if (phase === 'final' && by < 0) go(list.length - 1);
@@ -531,10 +655,6 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   nextBtn.addEventListener('click', () => step(1));
   toggleBtn.addEventListener('click', () => setPlaying(!playing));
   closeBtn.addEventListener('click', () => exit(true));
-
-  card.addEventListener('pointerenter', () => (held = true));
-  card.addEventListener('pointerleave', () => (held = false));
-  card.addEventListener('pointercancel', () => (held = false));
 
   let swipeFrom: { x: number; y: number } | null = null;
   play.addEventListener('pointerdown', (e) => {
@@ -561,7 +681,11 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
         // The map moves by the arrow keys; while the mode runs they move along the stories.
         e.preventDefault();
         e.stopPropagation();
-        if (phase === 'play' || e.key === 'ArrowLeft') step(e.key === 'ArrowRight' ? 1 : -1);
+        if (target === scaleBox) seek((phase === 'final' ? list.length - 1 : idx) + (e.key === 'ArrowRight' ? 1 : -1), true);
+        else if (phase === 'play' || e.key === 'ArrowLeft') step(e.key === 'ArrowRight' ? 1 : -1);
+      } else if (target === scaleBox && (e.key === 'Home' || e.key === 'End')) {
+        e.preventDefault();
+        seek(e.key === 'Home' ? 0 : list.length - 1, true);
       } else if (phase === 'play' && e.key === ' ' && !target.closest('a,button') && host.animate) {
         e.preventDefault();
         setPlaying(!playing);
@@ -574,6 +698,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   /** The markers drawn on the map are decorated by the state of the show: dim (not yet), seen, read, the current one (larger, one soft pulse). */
   function apply(layers: Map<string, L.Marker>) {
+    drawn = layers;
     const index = new Map(list.map((c, i) => [c.id, i]));
     const at = phase === 'final' ? list.length : idx;
     for (const [id, marker] of layers) {
@@ -581,7 +706,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
       if (!node) continue;
       const i = index.get(id);
       const current = phase === 'play' && i === idx;
-      node.classList.toggle('mk--tt-dim', phase !== 'hint' && (i === undefined || i > at));
+      node.classList.toggle('mk--tt-dim', phase !== 'hint' && phase !== 'choose' && (i === undefined || i > at));
       node.classList.toggle('mk--tt-read', readSet.has(id));
       node.classList.toggle('mk--tt-cur', current);
       marker.setZIndexOffset(current ? 1000 : 0);
@@ -611,7 +736,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     resume,
     apply,
     pick,
-    spreadPx: BEHAVIOUR.spreadPx,
+    spread: [BEHAVIOUR.spreadSame, BEHAVIOUR.spreadGap, BEHAVIOUR.spreadMax] as const,
   };
 }
 
