@@ -34,7 +34,7 @@ const groups = groupByEpoch(cards, epochs);
 // "Through the centuries": what the player needs of each story, the epochs in order and the places with enough stories for a chip.
 const tt = {
   info: Object.fromEntries(events.map((e) => [e.id, ttInfoOf(e, lang)])),
-  epochs: Object.fromEntries(epochs.map((e) => [e.id, { name: e.name[lang], order: e.order }])),
+  epochs: Object.fromEntries(epochs.map((e) => [e.id, { name: e.name[lang], order: e.order, years: epochYearsText(e, lang) }])),
   chips: placeChips(events, lang),
 };
 

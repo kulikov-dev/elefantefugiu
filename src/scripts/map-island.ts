@@ -68,6 +68,8 @@ const BEHAVIOUR = {
   messageMs: 9000,
   /** "Through the centuries": the closest zoom of the map when it shows a place. */
   ttMaxZoom: 15,
+  /** Degrees east of the allowed area the map may show while the card stands at its right. */
+  ttEastRoom: 14,
 };
 
 /** Icons of the map tools (a 24 px grid, stroke drawn with currentColor). */
@@ -307,7 +309,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       for (const [key, marker] of layers) {
         const card = byId.get(key);
         if (card) marker.setLatLng([card.lat, card.lon]);
-        marker.getElement()?.classList.remove('mk--tt-dim', 'mk--tt-read', 'mk--tt-cur');
+        marker.getElement()?.classList.remove('mk--tt-dim', 'mk--tt-read', 'mk--tt-cur', 'mk--tt-hide', 'mk--tt-in');
       }
     }
 
@@ -769,6 +771,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         bounds: () => fromLatLngBounds(map.getBounds()),
         fit: (box, bottom, animated, maxZoom, right = 0) => {
           if (world) setWorld(false);
+          // The card stands at the right: the country has to stand left of the middle, so the map may look further east than its own area allows.
+          if (right > 0) map.setMaxBounds(L.latLngBounds(maxBounds.getSouthWest(), [maxBounds.getNorth(), maxBounds.getEast() + BEHAVIOUR.ttEastRoom]));
           const pad = BEHAVIOUR.fitPadding;
           map.fitBounds(toLatLngBounds(box), { paddingTopLeft: [pad, pad], paddingBottomRight: [pad + right, pad + bottom], maxZoom: maxZoom ?? BEHAVIOUR.ttMaxZoom, animate: animated });
         },
@@ -776,6 +780,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
           state = { ...state, epoca: null, id: null };
           preview.hidden = true;
           syncChips();
+        },
+        leave: () => {
+          if (!world) map.setMaxBounds(maxBounds);
         },
         refresh: () => refreshMarkers(),
         address: () => writeUrl(),

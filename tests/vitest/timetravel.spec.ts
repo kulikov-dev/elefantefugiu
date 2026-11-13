@@ -4,6 +4,7 @@ import { isPublished } from '../../src/lib/events';
 import {
   TT_MIN_STORIES,
   TT_PLACE_MIN,
+  drawnRange,
   epochRuns,
   panAboveCard,
   parseSession,
@@ -154,6 +155,22 @@ describe('small rules', () => {
     expect(parseSession('{"id":1}')).toBeNull();
     expect(parseSession('nonsense')).toBeNull();
     expect(parseSession(null)).toBeNull();
+  });
+});
+
+describe('drawnRange', () => {
+  const ep = ['a', 'a', 'a', 'b', 'b', 'c'];
+  it('draws nothing before the start, all at the end', () => {
+    expect(drawnRange(ep, 0, 'none')).toEqual([0, -1]);
+    expect(drawnRange(ep, 0, 'all')).toEqual([0, 5]);
+    expect(drawnRange([], 0, 'play')).toEqual([0, -1]);
+  });
+
+  it('draws the epoch of the story on the screen, from its first story up to it', () => {
+    expect(drawnRange(ep, 2, 'play')).toEqual([0, 2]);
+    expect(drawnRange(ep, 3, 'play')).toEqual([3, 3]);
+    expect(drawnRange(ep, 4, 'play')).toEqual([3, 4]);
+    expect(drawnRange(ep, 5, 'play')).toEqual([5, 5]);
   });
 });
 

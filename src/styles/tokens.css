@@ -239,6 +239,7 @@
   --tt-card-max-height: 45%; /* of the map, on a phone */
   --tt-stripe: 0.375rem; /* the strip of the epoch colour at the edge of the card */
   --tt-progress: 4px; /* the thin strip of the time left for the story */
+  --tt-epoch-banner: 1000ms; /* the card names a new epoch */
   --tt-fade: 200ms; /* the change of the story */
   --tt-pulse: 1200ms; /* the one soft pulse of the current point */
   --tt-dim: 0.38; /* the points not shown yet */

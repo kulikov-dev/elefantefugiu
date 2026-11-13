@@ -1,6 +1,6 @@
 // Browser checks of "Through the centuries" (pt "Através dos séculos", en "Through the centuries", ru "Сквозь века"), the mode of the map page that plays the stories
 // of the window in the order of time (src/scripts/timetravel.ts, src/lib/timetravel.ts, docs/spec.md 5.4). Against dist/ served by serve.mjs:
-//   node timetravel.mjs [order window hint chips queue family controls back motion events address final nojs layout]
+//   node timetravel.mjs [order window reveal hint chips queue family controls back motion events address final nojs layout]
 // Everything the suite expects is counted from the data (data.mjs): the stories, their order, the places of the chips, the count of a place. Nothing is a number of the content.
 import { launchBrowser } from './browser.mjs';
 import { epochs, events, need, published, ui } from './data.mjs';
@@ -112,6 +112,7 @@ const state = (page) =>
       markers: document.querySelectorAll('.mk').length,
       cur: document.querySelectorAll('.mk--tt-cur').length,
       dim: document.querySelectorAll('.mk--tt-dim').length,
+      drawn: [...document.querySelectorAll('.leaflet-marker-icon')].filter((m) => getComputedStyle(m).display !== 'none').length,
       clusters: document.querySelectorAll('.mk--cluster').length,
     };
   });
@@ -163,7 +164,7 @@ if (want('window')) {
   let s = await state(page);
   const all = total(s);
   ok('window: from the button the show plays the stories of the view (not more than the site has, every one has a marker of its own, no clusters)', all >= 3 && all <= published.length && s.markers >= all - ISLANDS && s.clusters === 0, JSON.stringify({ all, markers: s.markers }));
-  ok('window: one point is the current one, the points after it are dim', s.cur === 1 && s.dim >= all - ISLANDS - 1, JSON.stringify({ cur: s.cur, dim: s.dim }));
+  ok('window: at the start only the first story is on the map: one point, the current one (the others come in their turn)', s.cur === 1 && s.drawn === 1 && s.dim === 0, JSON.stringify({ cur: s.cur, drawn: s.drawn, dim: s.dim }));
   // The link of a story far from the others opens the map zoomed in on it: the window is small, the show is shorter, and with fewer than three stories the card says so.
   // (Zoom steps by hand are no test: the start fits the stories into the free part of the map and may zoom out again.)
   const lonely = (e) => published.filter((o) => Math.abs(o.bridge.lat - e.bridge.lat) < 0.1 && Math.abs(o.bridge.lon - e.bridge.lon) < 0.15).length < 3;
@@ -177,6 +178,47 @@ if (want('window')) {
   ok('window: with the map zoomed in the show is shorter and a window with fewer than three stories gets the hint instead', hint && all > 3, `${all} -> hint`);
   ok('window: the hint is the one of the language', s.other.includes(ui('map.tt_hint_title', 'pt')) && s.other.includes(ui('map.tt_hint_text', 'pt')), s.other.slice(0, 80));
   await near.close();
+  await page.close();
+}
+
+// ---------- 2b. the map is drawn story by story ----------
+if (want('reveal')) {
+  const page = await open(MAP.pt);
+  const drawn = () => page.evaluate(() => [...document.querySelectorAll('.leaflet-marker-icon')].filter((m) => getComputedStyle(m).display !== 'none').length);
+  const era = () => page.evaluate(() => document.querySelector('.tt-card__era').textContent);
+  await page.click(START);
+  await wait(700);
+  ok('reveal: the choice at the start is over a map with no points', (await page.evaluate(() => !!document.querySelector('[data-tt-all]'))) && (await drawn()) === 0, `${await drawn()} drawn`);
+  await choose(page);
+  await page.evaluate(() => document.querySelector('.tt-card__acts .tt-btn:nth-of-type(2)')?.click()); // pause
+  await wait(400);
+  const first = await era();
+  let changed = false;
+  for (let i = 0; i < 80 && !changed; i += 1) {
+    await next(page);
+    await wait(80);
+    changed = (await era()) !== first;
+  }
+  await wait(250);
+  const afterChange = await state(page);
+  const banner = await page.evaluate(() => { const b = document.querySelector('.tt-card__epoch'); return b && !b.hidden ? b.innerText : ''; });
+  ok('reveal: a new epoch starts the picture from nothing: only its first story is on the map', changed && afterChange.cur === 1 && (await drawn()) === 1, `${await drawn()} drawn`);
+  ok('reveal: for a moment the card names the new epoch and its years', banner.length > 0 && banner.includes(await era()), banner.replace(/\s+/g, ' '));
+  await wait(1500);
+  ok('reveal: the name of the epoch goes after about a second', await page.evaluate(() => document.querySelector('.tt-card__epoch').hidden));
+  for (let i = 0; i < 3; i += 1) await next(page);
+  await wait(900);
+  ok('reveal: the stories before the current one of the epoch stay on the map', (await drawn()) >= 2, `${await drawn()} drawn`);
+  await page.evaluate(() => document.querySelector('[data-tt-scale]').focus());
+  await page.keyboard.press('Home');
+  await wait(700);
+  ok('reveal: a rewind to the first story leaves one point', (await drawn()) === 1, `${await drawn()} drawn`);
+  for (let guard = 0; guard < 120 && (await state(page)).playVisible; guard += 1) await next(page);
+  await wait(1500);
+  ok('reveal: at the end the points of the whole show are on the map', (await drawn()) > 3, `${await drawn()} drawn`);
+  await page.keyboard.press('Escape');
+  await wait(700);
+  ok('reveal: leaving brings the map back as it was before the mode: no point of the show is hidden or dim', await page.evaluate(() => document.querySelectorAll('.mk--tt-hide, .mk--tt-dim, .mk--tt-cur').length === 0));
   await page.close();
 }
 
