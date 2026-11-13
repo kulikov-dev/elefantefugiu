@@ -7,7 +7,6 @@ import type { Bounds } from '../lib/markers';
 import { isIsland } from '../lib/map-data';
 import {
   READ_EVENT_PATH,
-  TT_CHOOSE_OVER,
   TT_MIN_STORIES,
   TT_SESSION_KEY,
   TT_VIEW,
@@ -88,8 +87,8 @@ const BEHAVIOUR = {
   cardShare: 0.45,
   /** A year written longer than this ('150 млн лет назад') is set in a smaller type to stay on one line. */
   longYear: 8,
-  /** How long the card names a new epoch, in ms. */
-  epochBannerMs: 1000,
+  /** How long the card names a new epoch, in ms; the timer of the story starts after it. */
+  epochBannerMs: 2500,
   /** The zoom of a flight to an island, and its length in seconds. */
   islandZoom: 9,
   flySeconds: 0.6,
@@ -131,7 +130,7 @@ const readIds = (): string[] => {
   }
 };
 
-type Phase = 'play' | 'hint' | 'choose' | 'final' | 'unread';
+type Phase = 'play' | 'hint' | 'final' | 'unread';
 
 export function createTimetravel(cfg: TtConfig, host: TtHost) {
   const { root, stage, map } = host;
@@ -206,7 +205,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   const renderScale = () => {
     if (!scaleBox) return;
-    scaleBox.hidden = !active || phase === 'hint' || phase === 'choose' || list.length === 0;
+    scaleBox.hidden = !active || phase === 'hint' || list.length === 0;
     if (scaleBox.hidden) return;
     const n = list.length;
     const pos = (i: number) => `${(((i + 0.5) / n) * 100).toFixed(3)}%`;
@@ -217,13 +216,6 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
       seg.style.setProperty('--tt-tone', `var(--tone-${run.epoch}, var(--epoch-primary))`);
       bar.append(seg);
     }
-    const ticks = el('div', 'tt-scale__ticks');
-    list.forEach((c, i) => {
-      const tick = el('span', 'tt-scale__tick');
-      tick.style.left = pos(i);
-      tick.classList.toggle('tt-scale__tick--read', readSet.has(c.id));
-      ticks.append(tick);
-    });
     const at = phase === 'final' ? n - 1 : idx;
     scaleBox.setAttribute('role', 'slider');
     scaleBox.tabIndex = 0;
@@ -234,15 +226,12 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     const run = el('span', 'tt-scale__run');
     run.style.left = pos(at);
     run.style.setProperty('--tt-tone', `var(--tone-${list[at]!.epoch}, var(--epoch-primary))`);
-    const first = el('span', 'tt-scale__label tt-scale__label--first', cfg.info[list[0]!.id]!.year);
-    const lastLabel = el('span', 'tt-scale__label tt-scale__label--last', cfg.info[list[n - 1]!.id]!.year);
-    const now = el('span', 'tt-scale__label tt-scale__label--now', cfg.info[list[at]!.id]!.year);
-    now.style.left = pos(at);
-    scaleBox.replaceChildren(first, lastLabel, now, bar, ticks, run);
-    // The label of the runner goes when it would lie on the label of an end (the same year, or the runner is near the end).
-    const hits = (a: DOMRect, b: DOMRect) => a.left < b.right + 4 && b.left < a.right + 4;
-    const nowRect = now.getBoundingClientRect();
-    now.hidden = hits(nowRect, first.getBoundingClientRect()) || hits(nowRect, lastLabel.getBoundingClientRect());
+    const now = el('span', 'tt-scale__label', cfg.info[list[at]!.id]!.year);
+    scaleBox.replaceChildren(now, bar, run);
+    // The only label stands over the runner and stays inside the scale (a long year near an end shifts).
+    const half = now.offsetWidth / 2;
+    const x = (run.offsetLeft + run.offsetWidth / 2);
+    now.style.left = `${Math.min(Math.max(x, half), Math.max(scaleBox.clientWidth - half, half))}px`;
   };
 
   // ---- drawing the card -----------------------------------------------------------------------------------------------
@@ -292,30 +281,22 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   const renderOther = () => {
     other.replaceChildren();
-    if (phase === 'hint' || phase === 'choose') {
-      const choose = phase === 'choose';
-      const title = el('p', 'tt-card__big', choose ? S.choose_title : S.hint_title);
-      const text = el('p', 'tt-card__sub', choose ? S.choose_text : S.hint_text);
+    if (phase === 'hint') {
+      const title = el('p', 'tt-card__big', S.hint_title);
+      const text = el('p', 'tt-card__sub', S.hint_text);
       const chips = el('ul', 'tt-card__chips');
       chips.setAttribute('aria-label', S.places_label!);
-      for (const chip of choose ? cfg.chips : [...cfg.chips, { key: TT_WHOLE, name: cfg.whole, count: 0 }]) {
+      for (const chip of [...cfg.chips, { key: TT_WHOLE, name: cfg.whole, count: 0 }]) {
         const li = document.createElement('li');
         const b = el('button', 'map-chip', chip.name);
         b.type = 'button';
         b.dataset.ttPlace = chip.key;
         if (chip.count) b.append(' ', el('small', 'tt-card__chip-count', String(chip.count)));
-        b.addEventListener('click', () => begin(chip.key, undefined, true));
+        b.addEventListener('click', () => begin(chip.key));
         li.append(b);
         chips.append(li);
       }
       other.append(closeTop(), title, text, chips);
-      if (choose) {
-        const all = el('button', 'button tt-card__all', fill(S.choose_all!, { n: list.length }));
-        all.type = 'button';
-        all.dataset.ttAll = '';
-        all.addEventListener('click', () => begin(src, undefined, true));
-        other.append(all);
-      }
     } else if (phase === 'final') {
       const n = list.length;
       const first = cfg.info[list[0]!.id]!.year;
@@ -393,7 +374,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
       const token = parseFloat(getComputedStyle(root).getPropertyValue('--tt-card-width')) || 25;
       return { right: token * rem + BEHAVIOUR.clearPx, bottom: 0 };
     }
-    return { right: 0, bottom: card.hidden ? stage.clientHeight * BEHAVIOUR.cardShare : Math.min(card.getBoundingClientRect().height, stage.clientHeight * BEHAVIOUR.cardShare) };
+    return { right: 0, bottom: card.hidden ? stage.clientHeight * BEHAVIOUR.cardShare : card.getBoundingClientRect().height };
   };
 
   /** Where the map was before a flight to an island (null: it is at the mainland). */
@@ -449,6 +430,8 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   // ---- moving along the list ------------------------------------------------------------------------------------------------
 
   let bannerTimer = 0;
+  /** While the card names the epoch the timer of the story waits. */
+  const bannerOn = () => !banner.hidden;
   const hideBanner = () => {
     clearTimeout(bannerTimer);
     banner.hidden = true;
@@ -491,7 +474,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     frame = requestAnimationFrame(loop);
     const dt = last ? Math.min(now - last, 100) : 0;
     last = now;
-    if (!active || phase !== 'play' || !playing || document.hidden) return;
+    if (!active || phase !== 'play' || !playing || document.hidden || bannerOn()) return;
     elapsed += dt;
     progBar.style.width = `${Math.min(elapsed / BEHAVIOUR.dwellMs, 1) * 100}%`;
     if (elapsed >= BEHAVIOUR.dwellMs) {
@@ -517,9 +500,8 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
 
   /**
    * Starts from the button (`view`: the window as it is now) or from a place chip. `resumeId`: back from a story, the same story and on pause.
-   * With many stories in the window the start asks first (`choose`); `skipChoice` is the answer.
    */
-  function begin(key: string, resumeId?: string, skipChoice = false) {
+  function begin(key: string, resumeId?: string) {
     const first = !active;
     src = key;
     active = true;
@@ -538,14 +520,6 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     last = 0;
     if (list.length < TT_MIN_STORIES) {
       phase = 'hint';
-      playing = false;
-      render();
-      host.address();
-      if (first) card.querySelector<HTMLElement>('.map-chip')?.focus({ preventScroll: true });
-      return;
-    }
-    if (!resumeId && !skipChoice && list.length > TT_CHOOSE_OVER && (key === TT_VIEW || key === TT_WHOLE)) {
-      phase = 'choose';
       playing = false;
       render();
       host.address();
@@ -612,7 +586,6 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     const keep = phase === 'play' ? list[idx]?.id : undefined;
     list = compute();
     if (list.length < TT_MIN_STORIES) phase = 'hint';
-    else if (phase === 'choose') idx = 0;
     else if (phase === 'hint') {
       phase = 'play';
       idx = 0;
@@ -744,7 +717,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     return new Set(list.slice(from, to + 1).map((c) => c.id));
   };
 
-  /** The markers drawn on the map are decorated by the state of the show: dim (not yet), seen, read, the current one (larger, one soft pulse). */
+  /** The markers drawn on the map are decorated by the state of the show: the earlier ones of the epoch (small, in its colour; filled when read), the current one (larger, one soft pulse). */
   function apply(layers: Map<string, L.Marker>) {
     drawn = layers;
     const index = new Map(list.map((c, i) => [c.id, i]));
@@ -767,7 +740,7 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
       node.classList.toggle('mk--tt-read', readSet.has(id));
       node.classList.toggle('mk--tt-cur', current);
       marker.setZIndexOffset(current ? 1000 : 0);
-      if (current) node.style.setProperty('--tt-tone', `var(--tone-${list[idx]!.epoch}, var(--epoch-primary))`);
+      if (drawnNow) node.style.setProperty('--tt-tone', `var(--tone-${list[i]!.epoch}, var(--epoch-primary))`);
     }
     shown.clear();
     for (const id of now) shown.add(id);

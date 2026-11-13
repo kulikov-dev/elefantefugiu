@@ -8,8 +8,6 @@ import { inBounds, type Bounds } from './markers';
 
 /** With fewer stories in the window there is nothing to play: the card says so and offers places instead. */
 export const TT_MIN_STORIES = 3;
-/** With more stories than this in the window, the start asks first: a place, or all of them in order. */
-export const TT_CHOOSE_OVER = 20;
 /** A place gets a chip when at least this many published stories are set there. */
 export const TT_PLACE_MIN = 4;
 /** The address parameter that starts the mode on arrival: `?era=lisboa`, `?era=portugal`. */

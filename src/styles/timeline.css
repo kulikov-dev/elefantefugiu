@@ -201,6 +201,11 @@ button.timeline__pick {
   box-shadow: 0 0 0 var(--border-medium) var(--color-surface), 0 0 0 calc(var(--border-medium) * 2) var(--tone);
 }
 
+/* The dots stand half above their line: room above them, so the scrolling strip does not cut them. */
+.epoch-scale .timeline-wrap {
+  padding-block-start: var(--space-2);
+}
+
 /* Under the map the strip sits closer to the map than on the home page. */
 .epoch-scale .timeline-nav {
   margin-block-start: var(--space-3);

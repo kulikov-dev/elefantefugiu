@@ -18,7 +18,7 @@ const ok = (name, cond, extra = '') => {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-/** With many stories in the window the start asks first: "all in order" is the answer of the suites that walk the whole list. */
+/** The start no longer asks anything (the play button runs everything in the window); the pause only lets the first story settle. */
 const choose = async (page) => {
   await wait(600);
   await page.evaluate(() => document.querySelector('[data-tt-all]')?.click());
@@ -204,8 +204,8 @@ if (want('reveal')) {
   const banner = await page.evaluate(() => { const b = document.querySelector('.tt-card__epoch'); return b && !b.hidden ? b.innerText : ''; });
   ok('reveal: a new epoch starts the picture from nothing: only its first story is on the map', changed && afterChange.cur === 1 && (await drawn()) === 1, `${await drawn()} drawn`);
   ok('reveal: for a moment the card names the new epoch and its years', banner.length > 0 && banner.includes(await era()), banner.replace(/\s+/g, ' '));
-  await wait(1500);
-  ok('reveal: the name of the epoch goes after about a second', await page.evaluate(() => document.querySelector('.tt-card__epoch').hidden));
+  await wait(2800);
+  ok('reveal: the name of the epoch goes after about two and a half seconds', await page.evaluate(() => document.querySelector('.tt-card__epoch').hidden));
   for (let i = 0; i < 3; i += 1) await next(page);
   await wait(900);
   ok('reveal: the stories before the current one of the epoch stay on the map', (await drawn()) >= 2, `${await drawn()} drawn`);

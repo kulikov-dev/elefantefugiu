@@ -236,19 +236,19 @@
   --epoch-map-width: clamp(20rem, 38%, 30rem);
   /* "Through the centuries": the card over the map, the scale above it, the marks of the markers. */
   --tt-card-width: 25rem; /* the card on a wide screen (400 px, the widest); on a phone it spans the map */
-  --tt-card-max-height: 45%; /* of the map, on a phone */
+  --tt-card-max-height: 45%; /* of the map, on a phone: only the summary and the list of unread stories (the card of a story has the height of its content) */
   --tt-stripe: 0.375rem; /* the strip of the epoch colour at the edge of the card */
   --tt-progress: 4px; /* the thin strip of the time left for the story */
-  --tt-epoch-banner: 1000ms; /* the card names a new epoch */
+  --tt-epoch-banner: 2500ms; /* the card names a new epoch */
   --tt-fade: 200ms; /* the change of the story */
   --tt-pulse: 1200ms; /* the one soft pulse of the current point */
-  --tt-dim: 0.38; /* the points not shown yet */
-  --tt-current-scale: 1.8;
-  --tt-scale-height: 2.5rem;
-  --tt-seg-height: 0.375rem;
-  --tt-tick-height: 1rem;
-  --tt-run-size: 1.25rem;
-  --tt-run-border: 3px;
+  --tt-dim: 0.8; /* the earlier points of the epoch */
+  --tt-past-size: 0.875rem; /* and their size (a story marker is 1.125rem) */
+  --tt-current-scale: 1.5;
+  --tt-scale-height: 2.75rem;
+  --tt-seg-height: 0.25rem;
+  --tt-seg-gap: 0.1875rem;
+  --tt-run-size: 1rem;
   --tt-year-size-long: clamp(1.25rem, 1rem + 1.2vw, 1.5rem); /* a long year ("150 млн лет назад"): one line */
   --tt-year-size: clamp(2rem, 1.5rem + 2.2vw, 2.5rem);
   --epoch-panno-width: 23rem; /* the personal panel of the epoch, beside the heading text on a wide screen */

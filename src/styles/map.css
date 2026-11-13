@@ -207,6 +207,23 @@
   line-height: var(--touch-target);
 }
 
+/* Zoom and tool buttons in the colours of the theme (Leaflet's own are white with grey icons). */
+.map .leaflet-touch .leaflet-bar a {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-block-end-color: var(--color-border);
+}
+
+.map .leaflet-touch .leaflet-bar a:hover:not(.leaflet-disabled) {
+  background: var(--color-surface-hover);
+}
+
+.map .leaflet-touch .leaflet-bar a.leaflet-disabled {
+  background: var(--color-surface);
+  color: var(--color-ink-muted);
+  opacity: var(--opacity-disabled);
+}
+
 /* ---- preview of a marker ---- */
 
 .map__preview {
@@ -913,7 +930,8 @@
   background: var(--color-accent-strong);
 }
 
-/* While the show runs the button "Near me" and the things that belong to the plain map step aside. */
+/* While the show runs the button "Near me", the strip of epochs (the scale takes its place) and the things that belong to the plain map step aside. */
+.map-page[data-tt='on'] .epoch-scale,
 .map-page[data-tt='on'] .map-near,
 .map[data-tt='on'] .map__preview,
 .map[data-tt='on'] .map__overseas,
@@ -949,34 +967,13 @@
   inset-inline: 0;
   inset-block-end: var(--space-2);
   display: flex;
-  gap: var(--border-medium);
+  gap: var(--tt-seg-gap);
   height: var(--tt-seg-height);
 }
 
 .tt-scale__seg {
-  border-radius: var(--radius-sm);
+  border-radius: var(--tt-seg-height);
   background: var(--tt-tone);
-}
-
-.tt-scale__ticks {
-  position: absolute;
-  inset-inline: 0;
-  inset-block-end: calc(var(--space-2) + var(--tt-seg-height) / 2 - var(--tt-tick-height) / 2);
-  height: var(--tt-tick-height);
-}
-
-.tt-scale__tick {
-  position: absolute;
-  inset-block: 0;
-  width: var(--border-medium);
-  margin-inline-start: calc(var(--border-medium) / -2);
-  border-radius: 1px;
-  background: var(--color-ink);
-  opacity: 0.4;
-}
-
-.tt-scale__tick--read {
-  opacity: 1;
 }
 
 .tt-scale__run {
@@ -985,38 +982,21 @@
   width: var(--tt-run-size);
   height: var(--tt-run-size);
   margin-inline-start: calc(var(--tt-run-size) / -2);
-  box-sizing: border-box;
-  border: var(--tt-run-border) solid var(--tt-tone);
   border-radius: 50%;
-  background: var(--color-surface);
-  box-shadow: var(--shadow-raised);
+  background: var(--tt-tone);
+  box-shadow: 0 0 0 var(--border-medium) var(--color-bg);
 }
 
+/* The only label: the year, over the runner (the script keeps it inside the scale). */
 .tt-scale__label {
   position: absolute;
   inset-block-start: 0;
-  color: var(--color-ink-muted);
-  font-family: var(--font-label);
-  font-size: var(--text-xs);
-  white-space: nowrap;
-}
-
-.tt-scale__label--first {
-  inset-inline-start: 0;
-}
-
-.tt-scale__label--last {
-  inset-inline-end: 0;
-}
-
-.tt-scale__label--now {
   translate: -50% 0;
   color: var(--color-ink);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
   font-weight: var(--weight-strong);
-}
-
-.tt-scale__label[hidden] {
-  display: none;
+  white-space: nowrap;
 }
 
 .tt-card {
@@ -1025,8 +1005,6 @@
   inset-block-end: 0;
   z-index: var(--z-map-overlay);
   box-sizing: border-box;
-  max-height: var(--tt-card-max-height);
-  overflow-y: auto;
   padding: var(--space-3) var(--space-4);
   border-inline-start: var(--tt-stripe) solid var(--tt-tone, var(--color-accent));
   border-start-start-radius: var(--radius-md);
@@ -1034,6 +1012,12 @@
   background: var(--color-overlay);
   box-shadow: var(--shadow-raised);
   touch-action: pan-y;
+}
+
+/* The summary and the list of unread stories may be long: only they scroll. */
+.tt-card--other {
+  max-height: var(--tt-card-max-height);
+  overflow-y: auto;
 }
 
 .tt-card__prog {
@@ -1055,10 +1039,6 @@
   background: var(--color-ink-muted);
 }
 
-.tt-card__all {
-  margin-block-start: var(--space-3);
-}
-
 .tt-card__prog[hidden] {
   display: none;
 }
@@ -1069,13 +1049,13 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap: var(--space-1);
   padding: var(--space-3) var(--space-4);
   border-inline-start: var(--tt-stripe) solid var(--tt-tone, var(--color-accent));
-  background: var(--color-surface);
-  text-align: center;
+  background: var(--color-overlay);
+  text-align: start;
   pointer-events: none;
   animation: tt-epoch var(--tt-epoch-banner) ease both;
 }
@@ -1090,9 +1070,9 @@
 
 .tt-card__epoch-name {
   margin: 0;
-  color: var(--tt-tone, var(--color-accent));
+  color: var(--color-ink);
   font-family: var(--font-heading);
-  font-size: var(--text-lg);
+  font-size: var(--text-xl);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -1178,12 +1158,13 @@
 .tt-card__acts {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 0;
   margin-block-start: var(--space-2);
 }
 
 .tt-card__read {
-  flex: 1 0 auto;
+  flex: 0 0 auto;
+  margin-inline-end: auto;
   min-height: var(--touch-target);
   padding-inline: var(--space-3);
   white-space: nowrap;
@@ -1205,9 +1186,9 @@
   width: var(--touch-target);
   height: var(--touch-target);
   padding: 0;
-  border: 1px solid var(--color-border-strong);
+  border: 0;
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: none;
   color: var(--color-ink);
   cursor: pointer;
 }
@@ -1300,12 +1281,15 @@
     inset-inline: auto var(--space-3);
     inset-block-end: var(--space-3);
     width: var(--tt-card-width);
-    max-height: calc(100% - var(--space-3) * 2);
     border-radius: var(--radius-md);
+  }
+
+  .tt-card--other {
+    max-height: calc(100% - var(--space-3) * 2);
   }
 }
 
-/* The markers: the points not shown yet are dim, the story on the screen is large and gives one soft pulse, the ones read are filled. */
+/* The markers: the earlier points of the epoch are small, the story on the screen keeps the shape of its marker (a diamond for the main event, a circle for a story), is larger and gives one soft pulse. */
 .map[data-tt='on'] .mk__shape {
   transition:
     scale var(--transition),
@@ -1316,7 +1300,12 @@
   display: none;
 }
 
+/* The earlier points of the epoch: smaller, in the colour of the epoch; a ring while unread, filled when read. */
 .mk--tt-dim .mk__shape {
+  width: var(--tt-past-size);
+  height: var(--tt-past-size);
+  border-color: var(--tt-tone, var(--color-accent));
+  background: var(--color-surface);
   opacity: var(--tt-dim);
 }
 
@@ -1331,13 +1320,16 @@
 }
 
 .mk--tt-read .mk__shape {
-  background: var(--color-accent);
+  background: var(--tt-tone, var(--color-accent));
 }
 
 .mk--tt-cur .mk__shape {
   position: relative;
   scale: var(--tt-current-scale);
   border-color: var(--tt-tone, var(--color-accent));
+}
+
+.mk--frame.mk--tt-cur .mk__shape {
   background: var(--tt-tone, var(--color-accent));
 }
 
