@@ -144,7 +144,7 @@ Interface strings are not content data: they live in `src/i18n/pt.json`,
 `en.json` and `ru.json` (the build checks that they have the same keys).
 
 Adding a story: copy an existing `events/<id>.yaml`, fill the texts, `place`, `bridge` (with coordinates and address), `sources` and
-`published` (the day of publication, `YYYY-MM-DD`; `updated` only after a substantive change). The schema.org markup (JSON-LD:
+`published` (the day of publication, `YYYY-MM-DD`; `updated` only after a substantive change). Every story that is not `sensitive` also gets a `myth` (a claim for the game "Myth or fact": verdict, statement, answer in all three languages; docs/spec.md 5.8), or `myth_none: <the reason in one sentence>`; `check:data` warns about a story with neither. The schema.org markup (JSON-LD:
 Article, Event, place with geo, breadcrumbs, the epoch's story list) is generated from these fields (`src/lib/schema.ts`), nothing is
 written by hand. `npm run build` stops (`check:schema`) when an indexable page lacks any part of it.
 

@@ -109,6 +109,16 @@ more:
 
     Через несколько лет после сборки случилось землетрясение 1755 года, но церковь и часовня
     уцелели.
+myth:
+  verdict: fact
+  statement:
+    ru: "Часовню для Лиссабона собрали в Риме, разобрали и привезли по частям"
+    pt: "A capela foi montada em Roma, desmontada e trazida em peças"
+    en: "A chapel was built in Rome, taken apart and shipped to Lisbon"
+  answer:
+    ru: "Да: готовую часовню благословил папа, потом её разобрали на 174 части. Три корабля привезли их в Лиссабон, где часовню собрали заново."
+    pt: "Sim: a capela pronta foi benzida pelo papa e depois desmontada em 174 peças. Três navios trouxeram-nas para Lisboa, onde foi montada de novo."
+    en: "Yes: the finished chapel was blessed by the pope, then taken apart into 174 pieces. Three ships carried them to Lisbon, where it was put together again."
 sources:
   - title: "The Art Newspaper: «Prefabulous: the story of an 18th-century chapel made entirely in Rome»"
     url: https://www.theartnewspaper.com/2018/08/20/prefabulous-the-story-of-an-18th-century-chapel-made-entirely-in-rome-for-a-church-in-lisbon

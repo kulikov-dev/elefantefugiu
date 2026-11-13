@@ -115,6 +115,16 @@ more:
     Памятник Албукерки в Белене показывает взятие Малакки на одном из четырёх рельефов. Многое о его
     походах известно от сына Браша, который превратил бумаги отца в «Комментарии» и построил в
     Лиссабоне Каза-душ-Бикуш на состояние отца.
+myth:
+  verdict: fact
+  statement:
+    ru: "Боевые слоны султана Малакки обратились против его же войска"
+    pt: "Os elefantes do sultão de Malaca viraram-se contra o próprio exército"
+    en: "The sultan of Malacca’s war elephants turned on his own army"
+  answer:
+    ru: "Португальцы встретили слонов копьями. Раненый слон повернул назад, остальные в панике затоптали своих. Цифры в источниках расходятся."
+    pt: "Os portugueses receberam-nos com lanças. Um elefante ferido recuou rugindo e os outros, em pânico, pisaram os seus. Os números variam consoante as fontes."
+    en: "The Portuguese met them with spears. A wounded elephant turned back, and the rest trampled their own side in panic. Sources disagree on the numbers."
 sources:
   - title: 'EBSCO Research Starters: Melaka Falls to the Portuguese'
     url: https://www.ebsco.com/research-starters/history/melaka-falls-portuguese

@@ -111,6 +111,16 @@ more:
     уничтожил монастырские галереи, и на их месте построили Биржевой дворец, который теперь стоит
     стена к стене с церковью. А под полом сохранились катакомбы, где веками хоронили богатые семьи
     города.
+myth:
+  verdict: part
+  statement:
+    ru: "Францисканцы с обетом бедности сами покрыли свою церковь золотом"
+    pt: "Os franciscanos, de voto de pobreza, cobriram a sua igreja de ouro"
+    en: "Franciscans, sworn to poverty, covered their own church in gold"
+  answer:
+    ru: "Церковь их, но резьбу оплатил Третий орден: братство богатых купцов-мирян. Золота ушло, как говорят, около 400 килограммов."
+    pt: "A igreja é deles, mas a talha foi paga pela Ordem Terceira, uma irmandade de ricos mercadores leigos. Gastaram-se, diz-se, cerca de 400 quilos de ouro."
+    en: "It is their church, but the Third Order paid for the carving, a brotherhood of rich lay merchants. By some accounts about 400 kilograms of gold went into it."
 sources:
   - title: "Porto.travel: São Francisco Church"
     url: https://porto.travel/san-francisco-church/

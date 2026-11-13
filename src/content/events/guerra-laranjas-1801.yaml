@@ -133,6 +133,16 @@ more:
     Эпизод с апельсинами — предание, а не документированный факт. Португальские источники пишут о
     ветке апельсиновых цветов, испанские и английские — об апельсинах, а в шутку это, как говорят,
     превратили противники Годоя.
+myth:
+  verdict: part
+  statement:
+    ru: "Годой послал королеве ветку апельсинов с поля боя"
+    pt: "Godoy enviou à rainha um ramo de laranjas do campo de batalha"
+    en: "Godoy sent the queen a branch of oranges from the battlefield"
+  answer:
+    ru: "Это предание, не документированный факт. Португальцы пишут о ветке цветов, испанцы и англичане об апельсинах."
+    pt: "É uma tradição, não um facto documentado. As fontes portuguesas falam de um ramo de flores de laranjeira; as espanholas e inglesas, de laranjas."
+    en: "It is a tradition, not a documented fact. Portuguese sources write of a branch of orange blossoms; Spanish and English ones, of oranges."
 sources:
   - title: 'Wikipedia: War of the Oranges'
     url: https://en.wikipedia.org/wiki/War_of_the_Oranges

@@ -104,6 +104,16 @@ more:
 
     Поэтому галереи открывают всего на несколько дней в году, и спускаются туда группами с
     сотрудниками Музея Лиссабона.
+myth:
+  verdict: fact
+  statement:
+    ru: "Римские галереи под Лиссабоном нарочно держат затопленными"
+    pt: "As galerias romanas de Lisboa são mantidas de propósito alagadas"
+    en: "Lisbon’s Roman galleries are kept flooded on purpose"
+  answer:
+    ru: "Вода помогает держать дома сверху, без неё конструкции могут пострадать. Поэтому её убирают лишь два раза в год."
+    pt: "A água ajuda a sustentar as casas por cima; sem ela, as estruturas podem sofrer. Por isso só é retirada duas vezes por ano."
+    en: "The water helps hold up the houses above, and without it the structures could suffer. So it is pumped out only twice a year."
 sources:
   - title: "Postal: «Este monumento em Portugal só abre duas vezes ao ano»"
     url: https://postal.pt/cultura/este-monumento-em-portugal-so-abre-duas-vezes-ao-ano-e-provavelmente-ja-lhe-passou-por-cima/

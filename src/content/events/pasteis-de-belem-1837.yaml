@@ -107,6 +107,16 @@ more:
 
 
     Пирожные от этого хуже не стали.
+myth:
+  verdict: myth
+  statement:
+    ru: "Монахини крахмалили одежду белками, а желтки шли в сладости"
+    pt: "Freiras engomavam a roupa com claras e faziam doces com as gemas"
+    en: "Nuns starched clothes with egg whites and used the yolks for sweets"
+  answer:
+    ru: "Историк Жуан Педру Гомеш называет это байкой: письменных свидетельств нет. «Монастырская» кондитерская — во многом миф XIX века."
+    pt: "O historiador João Pedro Gomes chama-lhe fábula: não há testemunhos escritos. A doçaria «conventual» é em grande parte um mito do século XIX."
+    en: "Historian João Pedro Gomes calls it a tall tale: there is no written evidence. “Convent pastry” is largely a 19th-century myth."
 sources:
   - title: "Pastéis de Belém: History"
     url: https://pasteisdebelem.pt/en/history/

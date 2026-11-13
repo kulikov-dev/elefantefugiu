@@ -107,6 +107,16 @@ more:
     кастильцев, появляется в источниках лишь в XVI веке. Рвы и ямы известны по Фруассару;
     кастильский хронист-очевидец Айяла и Фернан Лопеш, писавший через шестьдесят лет, их не
     описывают.
+myth:
+  verdict: part
+  statement:
+    ru: "При Алжубарроте французские рыцари влетели в волчьи ямы"
+    pt: "Em Aljubarrota, os cavaleiros franceses caíram em covas de lobo"
+    en: "At Aljubarrota, French knights rode straight into wolf pits"
+  answer:
+    ru: "Так пишет Фруассар. Ям не описывают ни очевидец Айяла, ни Фернан Лопеш, писавший через шестьдесят лет. Это рассказ одного источника."
+    pt: "Assim escreve Froissart. Nem Ayala, testemunha ocular, nem Fernão Lopes, que escreveu sessenta anos depois, descrevem as covas. É o relato de uma só fonte."
+    en: "So Froissart writes. Neither Ayala, an eyewitness, nor Fernão Lopes, writing sixty years later, describes the pits. It is the account of a single source."
 sources:
   - title: 'Fundação Batalha de Aljubarrota, painel «The Battle»: composição das
       forças, baixas, formação'

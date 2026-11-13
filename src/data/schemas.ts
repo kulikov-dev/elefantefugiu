@@ -202,8 +202,10 @@ export const eventSchema = z
   /** Up to four lines (one per scope); a page shows two after the story: the one for its language (scope pt / en / ru), then the world. Optional. */
   meanwhile: z.array(meanwhileItem).max(MEANWHILE_MAX_ITEMS).optional(),
   more: text,
-  /** Optional: a claim for the game "Myth or fact". */
+  /** A claim for the game "Myth or fact": expected on every story that is not `sensitive` (see `myth_none`). */
   myth: eventMythSchema.optional(),
+  /** Instead of `myth`: the reason, in one sentence, why this story has no claim for the game (check:data warns about a published or queued story that has neither). */
+  myth_none: z.string().min(1).optional(),
   sources: z.array(source),
   image: picture.optional(),
   /** A second picture (a document, a map, a portrait) shown inside "More", whole, never cropped. */

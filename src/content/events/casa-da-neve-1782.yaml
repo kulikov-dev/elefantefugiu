@@ -118,6 +118,16 @@ more:
     кафе получило имя владельца, Мартиньо Бартоломеу Родригиша (1829 или 1845). До этого здесь была
     итальянская кофейня. Говорят, среди гостей были Бокаже, Эса де Кейрош и Пессоа. Площадь была
     отстроена заново после землетрясения 1755 года.
+myth:
+  verdict: fact
+  statement:
+    ru: "Лёд для лиссабонских кафе XVIII века возили с гор на волах"
+    pt: "No século XVIII, o gelo de Lisboa vinha da serra em bois"
+    en: "In 18th-century Lisbon, the ice was hauled from the mountains by oxen"
+  answer:
+    ru: "Да: снег собирали в Серра-да-Эштрела, утрамбовывали в ямах и везли на волах и ослах до Тежу, а оттуда лодками в Лиссабон."
+    pt: "Sim: a neve era apanhada na Serra da Estrela, calcada em poços e levada em bois e burros até ao Tejo, e daí de barco para Lisboa."
+    en: "Yes: snow was gathered in the Serra da Estrela, packed down in pits and carried by oxen and donkeys to the Tagus, then by boat to Lisbon."
 sources:
   - title: 'Lisboa Secreta: Café Martinho da Arcada'
     url: https://lisboasecreta.co/lojas-historicas-lisboa-cafe-martinho-da-arcada/

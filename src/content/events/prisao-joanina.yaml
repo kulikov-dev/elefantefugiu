@@ -96,6 +96,16 @@ more:
     Наверху тем временем свою службу несут летучие мыши. Они живут за полками и по ночам охотятся на
     насекомых, которые портят книги, поэтому перед закрытием столы накрывают, чтобы мыши их не
     запачкали.
+myth:
+  verdict: fact
+  statement:
+    ru: "Под золотой библиотекой Коимбры сидели в тюрьме студенты"
+    pt: "Debaixo da biblioteca dourada de Coimbra havia uma prisão de estudantes"
+    en: "Students were jailed beneath Coimbra’s gilded library"
+  answer:
+    ru: "Да: университет судил своих сам, и до 1834 года под библиотекой держали студентов и даже профессоров. Сажали ненадолго, за проступки."
+    pt: "Sim: a universidade julgava os seus, e até 1834 a prisão sob a biblioteca recebeu estudantes e mesmo professores. Era por pouco tempo, por faltas."
+    en: "Yes: the university tried its own people, and until 1834 the jail under the library held students and even professors, briefly, for misconduct."
 sources:
   - title: "Universidade de Coimbra: Joanina Library"
     url: https://www.uc.pt/en/tourism/unesco/joanina-library

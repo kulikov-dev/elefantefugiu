@@ -108,6 +108,16 @@ more:
 
 
     Война с Испанией закончилась миром только в 1668 году.
+myth:
+  verdict: part
+  statement:
+    ru: "Португалия стала независимой за одно утро 1 декабря 1640 года"
+    pt: "Portugal tornou-se independente numa manhã, a 1 de dezembro de 1640"
+    en: "Portugal became independent in a single morning, on December 1, 1640"
+  answer:
+    ru: "Власть сменилась за утро: заговорщики арестовали наместницу и провозгласили Жуана IV. Но война с Испанией шла ещё 28 лет."
+    pt: "O poder mudou numa manhã: os conjurados prenderam a governadora e aclamaram D. João IV. Mas a guerra com Espanha durou mais 28 anos."
+    en: "Power changed hands in a morning: the conspirators arrested the Spanish regent and proclaimed John IV. But the war with Spain lasted another 28 years."
 sources:
   - title: "Wikipedia: Forty Conspirators"
     url: https://en.wikipedia.org/wiki/Forty_Conspirators

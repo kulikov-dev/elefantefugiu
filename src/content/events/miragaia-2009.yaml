@@ -97,6 +97,16 @@ more:
 
 
     Спор о Мирагайе не закончен до сих пор. Часть учёных считает её не отдельным родом, а ещё одним видом дацентруруса, другого стегозавра, кости которого находят в Португалии. Другие в 2025 году снова доказывали, что Мирагайя самостоятельна. Кости, по которым её описали, хранятся в музее Лоуриньяна.
+myth:
+  verdict: myth
+  statement:
+    ru: "У всех стегозавров была короткая шея"
+    pt: "Todos os estegossauros tinham o pescoço curto"
+    en: "All stegosaurs had short necks"
+  answer:
+    ru: "Нет: у португальской Miragaia longicollum шея не меньше 17 позвонков, больше, чем у большинства зауроподов. Зачем она была нужна, точно не знают."
+    pt: "Não: o Miragaia longicollum, de Portugal, tinha pelo menos 17 vértebras no pescoço, mais do que a maioria dos saurópodes. Para que servia, não se sabe ao certo."
+    en: "No: Portugal’s Miragaia longicollum had at least 17 vertebrae in its neck, more than most sauropods. What it was for, nobody knows for sure."
 sources:
   - title: "Mateus, Maidment, Christiansen, 2009, Proceedings of the Royal Society B: description of Miragaia longicollum"
     url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2674496"

@@ -109,6 +109,16 @@ more:
     Настоящий мыс оказался не таким страшным. Говорят, Эанеш просто ушёл подальше в открытое море и
     обогнул мели. Через год он вернулся туда с Афонсу Гонсалвешем Балдайей, и они прошли ещё дальше
     на юг.
+myth:
+  verdict: myth
+  statement:
+    ru: "Мыс Божадор был так опасен, что вернуться из-за него было нельзя"
+    pt: "O cabo Bojador era tão perigoso que ninguém voltava de lá"
+    en: "Nobody could return from beyond Cape Bojador"
+  answer:
+    ru: "Страх оказался выдумкой: в 1434 году Эанеш обогнул мыс, вернулся живым и привёз «розы Святой Марии». Говорят, он просто ушёл подальше в море."
+    pt: "O medo era uma invenção: em 1434 Gil Eanes dobrou o cabo, voltou vivo e trouxe «rosas de Santa Maria». Diz-se que se afastou para o mar largo."
+    en: "The fear was an invention: in 1434 Gil Eanes rounded the cape, came back alive and brought “roses of Saint Mary.” They say he simply sailed farther out to sea."
 sources:
   - title: Gomes Eannes de Zurara, «The Chronicle of the Discovery and Conquest of Guinea», vol. I,
       translated by C. R. Beazley and E. Prestage, Hakluyt Society, 1896, chapters VIII–IX

@@ -120,6 +120,16 @@ more:
     Рио. Тринадцать лет Рио-де-Жанейро был столицей Португальской империи: единственный случай,
     когда европейская монархия правила из своей колонии. Король Жуан VI вернулся в Лиссабон только в
     1821 году.
+myth:
+  verdict: fact
+  statement:
+    ru: "Европейской империей однажды правили из её колонии"
+    pt: "Um império europeu foi governado a partir da sua colónia"
+    en: "A European empire was once ruled from its own colony"
+  answer:
+    ru: "Да: двор уплыл от Наполеона, и тринадцать лет столицей империи был Рио-де-Жанейро. Это единственный случай, когда европейская монархия правила из своей колонии."
+    pt: "Sim: a corte fugiu de Napoleão e, durante treze anos, o Rio de Janeiro foi a capital. Único caso de monarquia europeia a governar a partir da sua colónia."
+    en: "Yes: the court fled Napoleon, and for thirteen years Rio de Janeiro was the empire’s capital. It is the only case of a European monarchy ruling from its colony."
 sources:
   - title: "Diário de Notícias: «Quando os franceses ficaram dois dias a ver navios»"
     url: https://www.dn.pt/arquivo/diario-de-noticias/quando-os-franceses-ficaram-dois-dias-a-ver-navios-8953702.html

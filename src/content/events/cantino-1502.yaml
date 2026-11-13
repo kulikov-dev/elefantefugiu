@@ -144,6 +144,16 @@ more:
 
     Сегодня она хранится в библиотеке Эстенсе в Модене. Копия лежит в Морском музее Лиссабона, в
     Белене.
+myth:
+  verdict: fact
+  statement:
+    ru: "Секретную карту мира Португалии нашли в мясной лавке"
+    pt: "O mapa secreto do mundo português foi encontrado num talho"
+    en: "Portugal’s secret map of the world was found in a butcher shop"
+  answer:
+    ru: "В 1859 году мятеж разграбил дворец, а директор библиотеки нашёл карту Кантино в мясной лавке: она была наклеена на ширму."
+    pt: "Em 1859, depois de uma revolta ter saqueado o palácio, o diretor da biblioteca achou o planisfério de Cantino num talho, colado a um biombo."
+    en: "In 1859 a revolt looted the palace, and the library’s director found the Cantino map in a butcher shop, pasted onto a screen."
 sources:
   - title: 'Wikipedia: Cantino planisphere'
     url: https://en.wikipedia.org/wiki/Cantino_planisphere

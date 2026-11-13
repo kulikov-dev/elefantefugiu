@@ -91,6 +91,16 @@ more:
     Porto, рубец, тушёный с фасолью, колбасами и кусками свинины, курицы и телятины. В 1960 году у
     старых верфей поставили бронзовый памятник работы Лагоа Энрикеша в благодарность жителям Порту,
     снарядившим флот. На нём надпись À Grei, «народу».
+myth:
+  verdict: part
+  statement:
+    ru: "Жителей Порту прозвали любителями потрохов, потому что они отдали мясо флоту"
+    pt: "Os portuenses são tripeiros porque deram a carne para a frota"
+    en: "Porto’s people are “tripe eaters” because they gave the fleet their meat"
+  answer:
+    ru: "Так гласит легенда о 1415 годе. В хрониках её нет, по другой версии прозвище старше на тридцать лет. Блюдо настоящее."
+    pt: "É o que diz a lenda de 1415. Nas crónicas não consta e, segundo outra versão, a alcunha é trinta anos mais antiga. O prato é real."
+    en: "So the legend of 1415 goes. The chronicles don’t mention it, and by another version the nickname is thirty years older. The dish is real."
 sources:
   - title: 'Infopédia: Lenda dos Tripeiros'
     url: https://www.infopedia.pt/artigos/$lenda-dos-tripeiros

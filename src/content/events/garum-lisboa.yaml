@@ -115,6 +115,16 @@ more:
 
     В 1995 году под банком открыли музей. Кроме чанов в нём видны римские стены, кусок мозаичного
     пола и находки следующих веков, вплоть до землетрясения 1755 года.
+myth:
+  verdict: fact
+  statement:
+    ru: "Под лиссабонским банком нашли римскую фабрику рыбного соуса"
+    pt: "Sob um banco de Lisboa há uma fábrica romana de garum"
+    en: "Under a Lisbon bank lies a Roman fish sauce factory"
+  answer:
+    ru: "Да: в 1991 году при перестройке банка под полом нашли римские чаны для рыбы и соуса гарум. Находку не засыпали, теперь там музей."
+    pt: "Sim: em 1991, nas obras do banco, apareceram tanques romanos para peixe e garum. O achado não foi aterrado e é hoje um museu."
+    en: "Yes: in 1991, during the bank’s renovation, workers found Roman vats for fish and garum sauce. The find was not buried again, and it is now a museum."
 sources:
   - title: "Time Out Lisbon: Núcleo Arqueológico da Rua dos Correeiros"
     url: https://www.timeout.com/lisbon/attractions/nucleo-arqueologico-da-rua-dos-correeiros

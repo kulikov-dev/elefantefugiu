@@ -92,6 +92,16 @@ more:
 
     Яркие цвета со временем выцвели, и только в 1994 году реставраторы вернули их: розовый старому
     монастырю и охру новому крылу. Через год культурный ландшафт Синтры внесли в список Всемирного наследия ЮНЕСКО.
+myth:
+  verdict: myth
+  statement:
+    ru: "Дворец Пена в Синтре построили с нуля как сказочный замок"
+    pt: "A Pena foi construída de raiz como castelo de conto de fadas"
+    en: "Pena Palace was built from scratch as a fairy-tale castle"
+  answer:
+    ru: "Нет: Фердинанд II в 1838 году купил пустовавший монастырь и пристроил к нему башни и стены. Цвета вернули только в 1994 году."
+    pt: "Não: em 1838 D. Fernando II comprou um convento abandonado e acrescentou-lhe torres e muralhas. As cores só foram repostas em 1994."
+    en: "No: in 1838 King Ferdinand II bought an abandoned monastery and added towers and walls to it. The colors were restored only in 1994."
 sources:
   - title: "Visit Sintra: National Palace of Pena"
     url: https://visitsintra.travel/en/visit/monuments/national-palace-of-pena

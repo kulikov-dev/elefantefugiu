@@ -78,6 +78,16 @@ more:
 
 
     Крест, с которым, как считается, служили ту мессу, хранится в соборе Браги. В 2025 году, к 525-летию, его возили в Бразилию, на тот самый берег.
+myth:
+  verdict: fact
+  statement:
+    ru: "Кабрал принял Бразилию за остров"
+    pt: "Cabral tomou o Brasil por uma ilha"
+    en: "Cabral took Brazil for an island"
+  answer:
+    ru: "Да: Кабрал принял новую землю за остров и назвал её Островом Истинного Креста. Первой моряки увидели гору, Монте-Пашкоал."
+    pt: "Sim: Cabral tomou a nova terra por uma ilha e chamou-lhe Ilha de Vera Cruz. O que os marinheiros viram primeiro foi um monte, o Monte Pascoal."
+    en: "Yes: Cabral took the new land for an island and named it the Island of the True Cross. The first thing the sailors saw was a mountain, Monte Pascoal."
 sources:
   - title: 'Carta de Pero Vaz de Caminha ao rei D. Manuel I, 1 de maio de 1500'
     note:

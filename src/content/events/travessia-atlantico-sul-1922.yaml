@@ -100,6 +100,16 @@ more:
     метров посреди океана. Коутинью вывел самолёт к ним точно по расчёту, но при посадке на крутую
     волну «Лузитания» потеряла поплавок и затонула. Экипаж второго самолёта, «Патрии», девять часов
     носило по волнам, пока их не подобрали.
+myth:
+  verdict: fact
+  statement:
+    ru: "Чтобы долететь из Лиссабона в Рио в 1922 году, понадобилось три самолёта"
+    pt: "Para voar de Lisboa ao Rio em 1922 foram precisos três aviões"
+    en: "Flying from Lisbon to Rio in 1922 took three airplanes"
+  answer:
+    ru: "Да: первый разбился о волны у скал Святых Петра и Павла, второй сел из-за мотора. На третьем сели в Рио через 79 дней."
+    pt: "Sim: o primeiro despenhou-se nas ondas junto aos rochedos de São Pedro e São Paulo, o segundo amarou com avaria. O terceiro chegou ao Rio ao fim de 79 dias."
+    en: "Yes: the first crashed into the waves off the Saint Peter and Saint Paul Rocks, the second came down with engine trouble. The third reached Rio after 79 days."
 sources:
   - title: "Museu de Marinha: «Naval aviation – First air crossing of the South Atlantic»"
     url: https://cultura.marinha.pt/en/museumarinha_web/exposicoes_web/pavilhao-galeotas/Pages/aviacao-naval-travessia-aerea-atlantico.aspx

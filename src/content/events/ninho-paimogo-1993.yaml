@@ -103,6 +103,16 @@ more:
 
 
     Гнездо из Паймогу и сегодня лежит в музее Лоуриньяна, который Матеуши когда-то начинали с нескольких находок. Теперь там хранятся образцы, по которым описаны новые виды, и среди них Мирагайя.
+myth:
+  verdict: myth
+  statement:
+    ru: "Яйца динозавров почти никогда не находят"
+    pt: "Quase nunca se encontram ovos de dinossauro"
+    en: "Dinosaur eggs are almost never found"
+  answer:
+    ru: "Яйца находят нередко. Редкость — зародыши в них: хрупкие кости обычно не сохраняются. В Паймогу их сохранил ил после паводка."
+    pt: "Encontram-se com frequência. O raro são os embriões lá dentro: os ossos frágeis quase nunca se conservam. Em Paimogo, a lama de uma cheia conservou-os."
+    en: "They turn up often. What is rare is embryos inside: fragile bones rarely survive. At Paimogo, the silt from a flood preserved them."
 sources:
   - title: "Wikipedia: Lourinhanosaurus"
     url: "https://en.wikipedia.org/wiki/Lourinhanosaurus"

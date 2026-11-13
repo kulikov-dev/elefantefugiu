@@ -108,6 +108,16 @@ more:
     В Испании эти звери попали в литературу. О каменном быке у римского моста в Саламанке
     рассказывает «Жизнь Ласарильо с Тормеса»: слепой хозяин бьёт мальчика головой о камень, чтобы
     тот «поумнел». А «быков из Гисандо» вспоминает Сервантес в «Дон Кихоте».
+myth:
+  verdict: myth
+  statement:
+    ru: "Свинью из Мурсы высекли римляне"
+    pt: "A Porca de Murça foi esculpida pelos romanos"
+    en: "The Pig of Murça was carved by the Romans"
+  answer:
+    ru: "Нет: такие звери старше римлян, их высекали местные племена. Римляне лишь вырезали на некоторых надписи. Зачем их ставили, никто точно не знает."
+    pt: "Não: estes animais são anteriores aos romanos e foram talhados por povos locais. Os romanos limitaram-se a gravar inscrições em alguns. Para que serviam, ninguém sabe ao certo."
+    en: "No: such animals are older than the Romans and were carved by local tribes. The Romans only added inscriptions to some. Nobody knows for sure what they were for."
 sources:
   - title: "Infopédia: Porca de Murça"
     url: https://www.infopedia.pt/artigos/$porca-de-murca

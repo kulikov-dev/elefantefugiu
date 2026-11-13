@@ -76,6 +76,16 @@ more:
 
 
     В 1999 году в центре города поставили памятник Карнавалу, а в 2022 году Карнавал Торриш-Ведраша внесли в национальный список нематериального наследия.
+myth:
+  verdict: fact
+  statement:
+    ru: "Королеву карнавала в Торриш-Ведраше играет мужчина"
+    pt: "No Carnaval de Torres Vedras, a rainha é um homem"
+    en: "At the Torres Vedras Carnival, the queen is played by a man"
+  answer:
+    ru: "Да, по традиции: с 1924 года королева — мужчина, а за парой идёт свита «министров» и «матрафон». Правит карнавальный король четыре дня."
+    pt: "Sim, por tradição: desde 1924 a rainha é um homem, e o par é seguido por «ministros» e matrafonas. O rei do Carnaval reina quatro dias."
+    en: "Yes, by tradition: since 1924 the queen has been a man, and the pair is followed by “ministers” and matrafonas. The carnival king reigns for four days."
 sources:
   - title: 'Carnaval de Torres Vedras: História'
     url: https://www.carnavaldetorresvedras.pt/historia

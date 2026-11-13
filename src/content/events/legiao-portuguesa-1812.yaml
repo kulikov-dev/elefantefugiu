@@ -102,6 +102,16 @@ more:
     «иностранные» армии, остальные влились во французские сапёрные части. Источники оценивают
     численность Легиона от 8000 до 12 000 человек и расходятся в оценке потерь и в том, насколько
     охотно служили его люди. Его командир, маркиз д’Алорна, умер в Кёнигсберге.
+myth:
+  verdict: fact
+  statement:
+    ru: "Португальцы дошли до Бородина в армии Наполеона"
+    pt: "Soldados portugueses chegaram a Borodino no exército de Napoleão"
+    en: "Portuguese soldiers reached Borodino in Napoleon’s army"
+  answer:
+    ru: "Да: Португальский легион, около 9000 человек, воевал при Ваграме, а в 1812 году пошёл в Россию, под Смоленск и Бородино. Уцелели немногие."
+    pt: "Sim: a Legião Portuguesa, cerca de 9000 homens, combateu em Wagram e em 1812 marchou para a Rússia, até Smolensk e Borodino. Sobreviveram poucos."
+    en: "Yes: the Portuguese Legion, about 9,000 men, fought at Wagram and in 1812 marched into Russia, to Smolensk and Borodino. Few survived."
 sources:
   - title: 'Wikipedia: Portuguese Legion (Napoleonic Wars)'
     url: https://en.wikipedia.org/wiki/Portuguese_Legion_(Napoleonic_Wars)

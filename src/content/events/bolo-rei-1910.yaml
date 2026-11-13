@@ -80,6 +80,16 @@ more:
 
 
     В пирог по обычаю запекали сухой боб и маленький подарок. Кому достался подарок, тому повезло, а кому боб, тот покупает пирог в следующем году.
+myth:
+  verdict: myth
+  statement:
+    ru: "Bolo-rei назвали в честь португальского короля"
+    pt: "O bolo-rei tem o nome de um rei português"
+    en: "Bolo-rei is named after a Portuguese king"
+  answer:
+    ru: "Скорее всего нет: рецепт пришёл из Франции, где такой пирог пекут на Богоявление, и «король» в названии — это волхвы."
+    pt: "Provavelmente não: a receita veio de França, onde se faz um bolo assim para a Epifania, e o «rei» do nome são os Reis Magos."
+    en: "Most likely not: the recipe came from France, where a similar cake is baked for Epiphany, and the “king” in the name is the Magi."
 sources:
   - title: 'RTP: «Loja mais antiga da Baixa de Lisboa esconde o segredo do bolo-rei»'
     url: https://www.rtp.pt/noticias/pais/loja-mais-antiga-da-baixa-de-lisboa-esconde-o-segredo-do-bolo-rei_n3821

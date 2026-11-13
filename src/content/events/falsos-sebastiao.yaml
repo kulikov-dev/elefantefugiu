@@ -98,6 +98,16 @@ more:
 
     Фраза «ждать короля Себастьяна» значит по-португальски «ждать чуда, которого не
     будет».
+myth:
+  verdict: fact
+  statement:
+    ru: "Пропавшим королём Себастьяном назвался кондитер, и ему поверили"
+    pt: "Um pasteleiro fez-se passar pelo rei D. Sebastião, e acreditaram nele"
+    en: "A pastry cook posed as the lost King Sebastian, and was believed"
+  answer:
+    ru: "Да: кондитер из Мадригала обманул даже монахиню королевской крови, двоюродную сестру Себастьяна. Его, как и других самозванцев, разоблачили."
+    pt: "Sim: o pasteleiro de Madrigal enganou até uma freira de sangue real, prima de D. Sebastião. Foi desmascarado, tal como os outros impostores."
+    en: "Yes: the pastry cook of Madrigal fooled even a nun of royal blood, Sebastian’s cousin. He was exposed, like the other impostors."
 sources:
   - title: "Interacções (ISMT): José Henrique Dias, «D. Sebastião e as Máscaras»"
     url: https://interacoes-ismt.com/index.php/revista/article/download/123/127

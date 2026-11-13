@@ -12,7 +12,7 @@ import { epochSchema, eventSchema, featuredSchema, festaListSchema, threadSchema
 import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, wordCount } from '../src/lib/myths';
 import { isCalendarDay } from '../src/lib/start-pins';
 import { pending } from './lib/lang-review';
-import { isLive } from '../src/lib/publication.mjs';
+import { isLive, isQueued } from '../src/lib/publication.mjs';
 
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -520,6 +520,15 @@ for (const t of threads) {
       if (statement > STATEMENT_MAX_WORDS) report('warn', at, `the statement has ${statement} words, the limit is ${STATEMENT_MAX_WORDS}`, 'myth.statement', lang);
       if (answer > ANSWER_MAX_WORDS) report('warn', at, `the answer has ${answer} words, the limit is ${ANSWER_MAX_WORDS}`, 'myth.answer', lang);
     }
+  }
+  for (const { item, file } of events) {
+    if (item.myth && item.myth_none) report('error', file, 'a story has either `myth` or `myth_none`, not both', 'myth_none');
+  }
+  // A story on the site or in the queue, not heavy, with neither a claim nor an explicit refusal: a warning with the list at the end of the summary.
+  const withoutClaim = events.filter(({ item }) => (isLive(item) || isQueued(item)) && !item.sensitive && !item.placeholder && !item.myth && !item.myth_none);
+  if (withoutClaim.length > 0) {
+    for (const { file } of withoutClaim) report('warn', file, 'no claim for "Myth or fact": add `myth`, or `myth_none: <the reason in one sentence>`', 'myth');
+    console.log(`myths: ${withoutClaim.length} story(ies) without a claim or a refusal: ${withoutClaim.map((e) => e.item.id).join(', ')}`);
   }
   const pool = claims.filter((e) => isLive(e.item) && !e.item.sensitive);
   console.log(`myths: ${claims.length} claim(s) in stories, ${pool.length} in the pool today`);

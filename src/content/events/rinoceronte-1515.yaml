@@ -135,6 +135,16 @@ more:
 
     В Лиссабоне, как считают, каменный носорог выглядывает с угловой башенки башни Белен,
     построенной в те же годы.
+myth:
+  verdict: myth
+  statement:
+    ru: "Знаменитую гравюру носорога Дюрер рисовал с натуры"
+    pt: "Dürer desenhou o famoso rinoceronte ao vivo"
+    en: "Dürer drew his famous rhinoceros from life"
+  answer:
+    ru: "Нет: Дюрер носорога не видел, он работал по наброску и описанию купца. Отсюда лишний рог на плече зверя."
+    pt: "Não: Dürer nunca viu o rinoceronte e trabalhou a partir de um esboço e da descrição de um mercador. Daí o corno a mais no ombro do animal."
+    en: "No: Dürer never saw the rhinoceros. He worked from a sketch and a merchant’s description, hence the extra horn on the animal’s shoulder."
 sources:
   - title: Early depictions of the first Lisbon rhinoceros in the 16th century
       (Pachyderm, DOI 10.69649/pachyderm.v65i.1312)

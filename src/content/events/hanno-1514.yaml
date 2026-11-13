@@ -112,6 +112,16 @@ more:
 
     Мануэл хотел порадовать папу ещё раз и отправил ему того самого носорога, который в 1515 году
     напугал слона в Лиссабоне. До Рима носорог не доплыл: корабль затонул у берегов Италии.
+myth:
+  verdict: fact
+  statement:
+    ru: "Римские врачи лечили больного слона слабительным с золотом"
+    pt: "Em Roma, o elefante doente foi tratado com um laxante com ouro"
+    en: "Roman doctors treated the sick elephant with a laxative containing gold"
+  answer:
+    ru: "Да: летом 1516 года слон Ганнон заболел, врачи дали ему слабительное с золотом, и 8 июня он умер. Папа был рядом."
+    pt: "Sim: no verão de 1516 o elefante Hanno adoeceu, os médicos deram-lhe um laxante com ouro e a 8 de junho morreu. O papa estava presente."
+    en: "Yes: in the summer of 1516 the elephant Hanno fell ill, doctors gave him a laxative with gold, and he died on June 8. The pope was at his side."
 sources:
   - title: "Smithsonian Magazine: «There’s an Elephant Buried Beneath the Vatican»"
     url: https://www.smithsonianmag.com/smart-news/theres-elephant-buried-beneath-vatican-180957013/

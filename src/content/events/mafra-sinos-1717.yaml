@@ -108,6 +108,16 @@ more:
 
     Стройка дорого стоила не только деньгами: за годы работ погибли больше 1300 рабочих. В романе
     Жозе Сарамаго «Воспоминания о монастыре» Мафра описана глазами тех, кто её строил.
+myth:
+  verdict: fact
+  statement:
+    ru: "Колокола в Мафре настроены так, чтобы на них играть мелодии"
+    pt: "Os sinos de Mafra foram afinados para tocar melodias"
+    en: "The bells of Mafra are tuned to play melodies"
+  answer:
+    ru: "Да: почти сотню колоколов заказали во Фландрии и подобрали по тону, как огромный инструмент. Цену, по преданию, король удвоил сам."
+    pt: "Sim: quase cem sinos foram encomendados na Flandres e escolhidos pelo tom, como um enorme instrumento. O preço, diz a tradição, foi o rei que o dobrou."
+    en: "Yes: nearly a hundred bells were ordered from Flanders and chosen by tone, like one huge instrument. By tradition, the king doubled the price himself."
 sources:
   - title: "Wikipedia: Palace of Mafra"
     url: https://en.wikipedia.org/wiki/Palace_of_Mafra

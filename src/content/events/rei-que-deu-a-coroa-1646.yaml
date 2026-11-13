@@ -112,6 +112,16 @@ more:
 
 
     Последнего короля, Мануэла II, в 1908 году тоже не короновали, а провозгласили.
+myth:
+  verdict: fact
+  statement:
+    ru: "Португальских королей после 1646 года не короновали"
+    pt: "Os reis de Portugal deixaram de ser coroados depois de 1646"
+    en: "Portugal’s kings were not crowned after 1646"
+  answer:
+    ru: "Как считается, да: Жуан IV поднёс корону Деве Марии, и королей лишь провозглашали, а корону клали рядом на подушку."
+    pt: "Segundo se crê, sim: D. João IV ofereceu a coroa a Nossa Senhora, e os reis passaram a ser só aclamados, com a coroa ao lado, numa almofada."
+    en: "So it is believed: King John IV offered his crown to the Virgin Mary, and later kings were only proclaimed, with the crown laid beside them on a cushion."
 sources:
   - title: "RFM: 8 de dezembro é feriado, e a explicação está ligada a uma coroação muito especial"
     url: https://rfm.pt/atualidade/5105/8-de-dezembro-e-feriado-porque-a-explicacao-esta-ligada-a-uma-coroacao-muito-especial

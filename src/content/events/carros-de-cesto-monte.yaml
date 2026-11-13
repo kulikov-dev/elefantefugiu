@@ -96,6 +96,16 @@ more:
     Наверху, у старта, стоит церковь Носса-Сеньора-ду-Монте. В ней похоронен последний император
     Австрии Карл I. После Первой мировой войны его отправили в изгнание на Мадейру, где он и умер в
     1922 году.
+myth:
+  verdict: myth
+  statement:
+    ru: "Плетёные сани с горы Монте придумали как аттракцион для туристов"
+    pt: "Os carros de cesto do Monte foram inventados como atração turística"
+    en: "The wicker sleds of Monte were invented as a tourist attraction"
+  answer:
+    ru: "Нет: в XIX веке так спускались в город сами жители, возчики возили и грузы. Аттракционом сани стали позже."
+    pt: "Não: no século XIX eram os próprios moradores que desciam assim à cidade, e os carreiros também levavam cargas. Só mais tarde se tornaram atração."
+    en: "No: in the 19th century the villagers themselves rode them down into town, and the drivers carried freight too. They became an attraction only later."
 sources:
   - title: "Visit Madeira: Carrinhos de cesto"
     url: https://visitmadeira.com/pt/o-que-fazer/viver-a-cidade-do-funchal/passear-na-cidade/carrinhos-de-cesto/

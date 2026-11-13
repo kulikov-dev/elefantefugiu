@@ -98,6 +98,16 @@ more:
     Португалия. В нём видят маленький народ, который не сдаётся большой империи. Его именем называют
     улицы, школы и футбольные клубы, а в Визеу, где, как считается, стоял его лагерь, ему поставили
     памятник.
+myth:
+  verdict: part
+  statement:
+    ru: "Убийцам Вириата Рим ответил: «Рим не платит предателям»"
+    pt: "Aos assassinos de Viriato, Roma respondeu: «Roma não paga a traidores»"
+    en: "Viriathus’s killers were told, “Rome does not pay traitors”"
+  answer:
+    ru: "Так гласит предание, но у Аппиана иначе: Цепион заплатил часть денег и отправил за остальным в Рим."
+    pt: "É o que diz a tradição, mas em Apiano é diferente: Cepião pagou-lhes parte do dinheiro e mandou-os a Roma buscar o resto."
+    en: "So tradition says, but Appian differs: Caepio paid them part of the money and sent them to Rome for the rest."
 sources:
   - title: "Appian: Roman History, The Spanish Wars (Iberike), 69–75"
     url: https://fgh.perseids.org/read/greekLit/tlg0551/tlg007/perseus-eng2/12.72-13.77

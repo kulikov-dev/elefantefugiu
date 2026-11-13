@@ -98,6 +98,16 @@ more:
 
     Запретили марш после республиканского восстания в Порту 31 января 1891 года: его пели
     восставшие. Через двадцать лет запрещённая песня звучала на площадях уже как гимн новой власти.
+myth:
+  verdict: fact
+  statement:
+    ru: "Гимн Португалии сочинили за одну ночь в ответ на ультиматум Англии"
+    pt: "O hino foi escrito numa só noite, em resposta ao ultimato inglês"
+    en: "Portugal’s anthem was written in one night in answer to England’s ultimatum"
+  answer:
+    ru: "После британского ультиматума 1890 года Кейл и Мендонса за ночь написали марш. Монархия его запретила, республика в 1911 году сделала гимном."
+    pt: "Depois do ultimato britânico de 1890, Keil e Mendonça escreveram a marcha numa noite. A monarquia proibiu-a; a República fê-la hino em 1911."
+    en: "After Britain’s ultimatum of 1890, Keil and Mendonça wrote the march in a night. The monarchy banned it; the republic made it the anthem in 1911."
 sources:
   - title: "Infopédia: A Portuguesa (hino)"
     url: https://www.infopedia.pt/artigos/$a-portuguesa-(hino)

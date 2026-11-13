@@ -131,6 +131,16 @@ more:
 
     Не все приняли новые правила. В феврале 1757 года хозяева таверн Порту восстали против Компании:
     эта история в отдельной карточке.
+myth:
+  verdict: fact
+  statement:
+    ru: "Портвейн XVIII века подкрашивали соком бузины"
+    pt: "No século XVIII, o vinho do Porto era tingido com sabugueiro"
+    en: "18th-century port wine was dyed with elderberry juice"
+  answer:
+    ru: "Да: когда вина стало слишком много, слабое подкрашивали бузиной, чтобы оно казалось густым. Позже бузину в долине выкорчевали."
+    pt: "Sim: quando havia vinho demais, o fraco era tingido com sabugueiro para parecer mais denso. Mais tarde, os sabugueiros do vale foram arrancados."
+    en: "Yes: when there was too much wine, the weak wine was colored with elderberry so it looked thick and dark. Later the elder trees in the valley were pulled out."
 sources:
   - title: 'Taylor''s Port: The Marquis of Pombal'
     url: https://www.taylor.pt/en/what-is-port-wine/history-of-port/the-marquis-of-pombal

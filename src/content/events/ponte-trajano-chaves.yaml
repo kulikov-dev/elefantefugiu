@@ -111,6 +111,16 @@ more:
     На середине моста стоят две римские колонны с латинскими надписями. На одной, посвящённой
     Траяну, сказано, что жители Акв Флавиевых построили каменный мост за свой счёт. На другой, её
     зовут «Падрау-душ-Повуш», «камень народов», перечислены десять местных общин.
+myth:
+  verdict: fact
+  statement:
+    ru: "Римский мост в Шавише горожане построили за свой счёт"
+    pt: "Os habitantes de Chaves pagaram do seu bolso a ponte romana"
+    en: "The people of Chaves paid for their Roman bridge themselves"
+  answer:
+    ru: "Да: на колонне посреди моста написано, что жители Акв Флавиевых построили каменный мост за свой счёт."
+    pt: "Sim: uma coluna a meio da ponte diz que os habitantes de Aquae Flaviae construíram a ponte de pedra a expensas próprias."
+    en: "Yes: a column in the middle of the bridge says the citizens of Aquae Flaviae built the stone bridge at their own expense."
 sources:
   - title: "Postal: «Tem quase 2 000 anos, esta ponte romana é a mais antiga de Portugal»"
     url: https://postal.pt/nacional/tem-quase-2-000-anos-esta-ponte-romana-e-a-mais-antiga-de-portugal-e-nao-e-a-de-tavira/
