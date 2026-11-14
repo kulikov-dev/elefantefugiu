@@ -1,4 +1,22 @@
-/* ArmyDots. */
+/* ArmyDots: two groups, each a name line and rows of dots; colours are the epoch's own. */
+.dots__group {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.dots__group--a {
+  --tone: var(--epoch-primary);
+}
+
+.dots__group--b {
+  --tone: var(--epoch-alt);
+}
+
+.dots__label {
+  margin: 0;
+  max-width: var(--measure);
+}
+
 .viz__svg {
   display: block;
   box-sizing: border-box;
@@ -7,7 +25,7 @@
   padding: var(--space-2);
   border: var(--epoch-frame);
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: var(--epoch-surface);
 }
 
 .dot--solid {
@@ -20,69 +38,8 @@
   stroke-width: var(--viz-stroke);
 }
 
-.dot {
-  transition: opacity var(--transition);
-}
-
-/* While "Show one by one" runs, dots that have not appeared yet. */
-.dot--waiting {
-  opacity: 0;
-}
-
-.viz__legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-4);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: var(--text-sm);
-}
-
-.viz__swatch {
-  display: inline-block;
-  width: var(--space-3);
-  height: var(--space-3);
-  margin-inline-end: var(--space-2);
-  border: var(--viz-stroke) solid var(--tone, var(--color-ink));
-  border-radius: var(--radius-pill);
-  vertical-align: middle;
-}
-
-.viz__swatch--solid {
-  background: var(--tone, var(--color-ink));
-}
-
-.viz__scale,
-.viz__estimate,
-.viz__ratio {
-  margin: 0;
+.viz__summary {
   max-width: var(--measure);
-}
-
-.viz__estimate {
-  font-weight: 600;
-}
-
-.viz__play {
-  justify-self: start;
-  min-height: var(--touch-target-large);
-}
-
-/* Reduced motion: no animation at all, so no button either (the script also hides it). */
-@media (prefers-reduced-motion: reduce) {
-  .viz__play {
-    display: none;
-  }
-
-  .dot {
-    transition: none;
-  }
-}
-
-/* The name of a group is drawn above its dots, so groups are told apart by words and position, not by colour alone. */
-.dots__label {
-  fill: var(--color-text);
-  font-family: var(--font-body);
-  font-weight: var(--weight-strong);
+  color: var(--color-text);
+  font-size: var(--text-base);
 }

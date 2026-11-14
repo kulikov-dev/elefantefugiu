@@ -59,25 +59,31 @@ export const picture = z.strictObject({
 export const vizTones = ['blue', 'red', 'green', 'ochre', 'grey'] as const;
 const tone = z.enum(vizTones);
 
-/** "1 against 5": groups of dots in one scale; one dot is unit_per_dot people, the estimate is a range, not one number. */
+/** "1 against 5": two groups of dots in one scale; one dot is unit_per_dot people. Filled dots are `solid`, outlined ones go on up to `min`, `max` is text only. */
 export const armyDotsData = z.strictObject({
   groups: z
     .array(
       z.strictObject({
         id: z.string(),
         label: text,
-        /** Low and high estimates (a range, never one number). */
+        /** The name in the sentence "There were about 5 times as many <ratio_label>" (a case form in Russian). */
+        ratio_label: text,
+        /** Filled dots: the number that is certain (those who fought); omitted, it is the whole of `min`. */
+        solid: z.number().nonnegative().optional(),
+        /** Lowest estimate: dots are drawn up to it. */
         min: z.number().nonnegative(),
+        /** Highest estimate: only in the text and in the ratio, never drawn. */
         max: z.number().nonnegative(),
         /** People per dot; the same for every group (one scale). */
         unit_per_dot: z.number().positive(),
-        tone,
+        /** The numbers in words, shown after the name of the group. */
         note: text,
       }),
     )
-    .min(2),
-  caption: text,
-  /** The "according to historians' estimates" line shown under the dots. */
+    .length(2),
+  /** Heading of the block; without it the interface's "One against five". */
+  title: text.optional(),
+  /** The "sources differ widely" line shown last under the dots. */
   estimate_note: text,
   /** True while the numbers are invented test numbers; shown on the card. */
   placeholder: z.boolean().optional(),

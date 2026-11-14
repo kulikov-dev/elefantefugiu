@@ -73,7 +73,7 @@ Ten one-colour SVG patterns in `src/assets/azulejo/` (compass for Avis and the D
 
 ## Interactives
 
-Two interactives live in the "More" layer of a card, driven by `interactive: {type, data}` in the event file (`army_dots`: "One against five", `ship_scale`: "Size of the nau"; schemas in `src/data/schemas.ts`). They are SVG and CSS without libraries, have a text and table alternative, and a static version without JavaScript. Their script and styles are inlined only into pages that show them (`npm run check:weight` prints their size and fails if the code reaches any other page). Browser checks: `scripts/qa/interactives.mjs`.
+Two interactives live in the "More" layer of a card, driven by `interactive: {type, data}` in the event file (`army_dots`: "One against five", `ship_scale`: "Size of the nau"; schemas in `src/data/schemas.ts`). They are SVG and CSS without libraries and have a text alternative; the dots are a still picture (no script), the ship scale has a table and a small script. Their code and styles are inlined only into pages that show them (`npm run check:weight` prints their size and fails if the code reaches any other page). Browser checks: `scripts/qa/interactives.mjs`.
 
 ## Family mode
 

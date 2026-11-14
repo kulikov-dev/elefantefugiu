@@ -120,6 +120,10 @@ myth:
 sources:
   - title: 'Fundação Batalha de Aljubarrota, painel «The Battle»: composição das
       forças, baixas, formação'
+    note:
+      pt: 'números dos exércitos: 7000 portugueses; 31 000–44 000 castelhanos, dos quais cerca de 10 000 combateram'
+      en: 'army numbers: 7,000 Portuguese; 31,000–44,000 Castilians, of whom about 10,000 fought'
+      ru: 'численность армий: 7000 португальцев; 31 000–44 000 кастильцев, из них около 10 000 сражались'
     url: https://fundacao-aljubarrota.pt/panel-d/
     type: institutional
     accessed: '2026-10-27'
@@ -195,54 +199,44 @@ related:
 interactive:
   type: army_dots
   data:
-    caption:
-      pt: Um ponto são 1000 homens. Os números variam muito entre as fontes.
-      en: One dot is 1,000 men. Figures vary widely between sources.
-      ru: Одна точка — 1000 человек. Источники сильно расходятся в цифрах.
     estimate_note:
-      pt: Segundo estimativas de historiadores.
-      en: According to historians’ estimates.
-      ru: По оценкам историков.
+      pt: As fontes divergem muito.
+      en: Sources differ widely.
+      ru: Источники сильно расходятся.
     groups:
       - id: portugueses
         label:
           pt: Portugueses
           en: Portuguese
           ru: Португальцы
+        ratio_label:
+          pt: portugueses
+          en: Portuguese
+          ru: португальцев
         min: 7000
         max: 7000
         unit_per_dot: 1000
-        tone: blue
         note:
-          pt: Cerca de 7000 homens.
+          pt: Cerca de 7 000 homens.
           en: About 7,000 men.
-          ru: Около 7000 человек.
+          ru: Около 7 000 человек.
       - id: castelhanos
         label:
-          pt: Castelhanos (total)
-          en: Castilians (total)
-          ru: Кастильцы (всего)
+          pt: Castelhanos
+          en: Castilians
+          ru: Кастильцы
+        ratio_label:
+          pt: castelhanos
+          en: Castilians
+          ru: кастильцев
+        solid: 10000
         min: 31000
         max: 44000
         unit_per_dot: 1000
-        tone: red
         note:
-          pt: Entre 31 000 e 44 000, segundo a Fundação Batalha de Aljubarrota.
-          en: Between 31,000 and 44,000, according to the Aljubarrota Battle Foundation.
-          ru: От 31 000 до 44 000 по данным Фонда битвы при Алжубарроте.
-      - id: castelhanos-combate
-        label:
-          pt: Castelhanos que combateram
-          en: Castilians who fought
-          ru: Кастильцы, принявшие бой
-        min: 10000
-        max: 10000
-        unit_per_dot: 1000
-        tone: ochre
-        note:
-          pt: Só cerca de 10 000 chegaram a combater.
-          en: Only about 10,000 actually fought.
-          ru: Сражались лишь около 10 000.
+          pt: Cerca de 10 000 entraram em combate; no total, entre 31 000 e 44 000.
+          en: About 10,000 fought; in all, between 31,000 and 44,000.
+          ru: Около 10 000 вступили в бой; всего от 31 000 до 44 000.
 status: ready
 published: '2026-10-21'
 updated: '2026-11-06'

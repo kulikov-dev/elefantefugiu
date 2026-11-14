@@ -8,8 +8,9 @@ import { LOCALES, type Lang } from '../i18n/routes';
 export const fill = (template: string, values: Record<string, string | number>): string =>
   template.replace(/\{(\w+)\}/g, (whole, key: string) => (key in values ? String(values[key]) : whole));
 
-/** A number in the reader's language: 5 000 in Portuguese, 5,000 in English. */
-export const formatNumber = (n: number, lang: Lang): string => new Intl.NumberFormat(LOCALES[lang], { maximumFractionDigits: 1, useGrouping: true }).format(n);
+/** A number in the reader's language, always grouped and never broken across lines: 7 000 in Portuguese and Russian (no-break space), 7,000 in English. */
+export const formatNumber = (n: number, lang: Lang): string =>
+  new Intl.NumberFormat(LOCALES[lang], { maximumFractionDigits: 1, useGrouping: 'always' }).format(n).replace(/[   ]/g, ' ');
 
 /** "8" or "1.5": a ratio for a sentence (whole number from 10 up, one decimal below). */
 export const ratioNumber = (ratio: number, lang: Lang): string => formatNumber(ratio >= 10 ? Math.round(ratio) : Math.round(ratio * 10) / 10, lang);
@@ -23,23 +24,27 @@ export const DOT_RADIUS = 4.5;
 
 export interface DotGroupInput {
   id: string;
+  /** Filled dots: the number that is certain; without it the whole of `min`. */
+  solid?: number | undefined;
+  /** The lowest estimate: dots are drawn up to it (outlined after `solid`). */
   min: number;
+  /** The highest estimate: text only, never drawn. */
   max: number;
   unit_per_dot: number;
 }
 
 export interface DotCounts {
-  /** Filled dots: the lowest estimate. */
+  /** Filled dots. */
   solid: number;
-  /** Empty dots: the rest of the range up to the highest estimate. */
+  /** Outlined dots: from `solid` up to the lowest estimate. */
   range: number;
   total: number;
 }
 
-/** Dots of one group: filled up to the low estimate, empty up to the high one; at least one dot. */
+/** Dots of one group: filled up to `solid`, outlined up to `min`; at least one dot. */
 export function dotCounts(group: DotGroupInput): DotCounts {
-  const total = Math.max(1, Math.round(group.max / group.unit_per_dot));
-  const solid = Math.min(total, Math.max(0, Math.round(group.min / group.unit_per_dot)));
+  const total = Math.max(1, Math.round(group.min / group.unit_per_dot));
+  const solid = Math.min(total, Math.max(0, Math.round((group.solid ?? group.min) / group.unit_per_dot)));
   return { solid, range: total - solid, total };
 }
 
@@ -52,37 +57,21 @@ export interface PlacedDot {
 export interface DotLayout {
   width: number;
   height: number;
-  groups: { id: string; /** Baseline of the group's name drawn above its dots. */ labelY: number; dots: PlacedDot[] }[];
+  dots: PlacedDot[];
 }
 
-/** Height reserved above each group for its name, in viewBox units. */
-export const DOT_LABEL_ROW = 16;
-
-/**
- * Group under group: a row for the group's name, then rows of dots, one empty row between groups. Every group has the same
- * dot size and number of columns (one scale). The name is part of the drawing, so the groups differ by position and
- * words, not by colour alone.
- */
-export function layoutDots(groups: readonly DotGroupInput[], columns = DOT_COLUMNS): DotLayout {
-  let top = 0;
-  const placed = groups.map((group, index) => {
-    if (index > 0) top += DOT_CELL;
-    const labelY = top + DOT_LABEL_ROW - 4;
-    top += DOT_LABEL_ROW;
-    const { solid, total } = dotCounts(group);
-    const dots: PlacedDot[] = [];
-    for (let i = 0; i < total; i += 1) {
-      dots.push({
-        x: (i % columns) * DOT_CELL + DOT_CELL / 2,
-        y: top + Math.floor(i / columns) * DOT_CELL + DOT_CELL / 2,
-        kind: i < solid ? 'solid' : 'range',
-      });
-    }
-    top += Math.ceil(total / columns) * DOT_CELL;
-    return { id: group.id, labelY, dots };
-  });
-  return { width: columns * DOT_CELL, height: top, groups: placed };
+/** Rows of dots of one group, `columns` to a row. Every group has the same cell, dot size and number of columns (one scale). */
+export function layoutDots(group: DotGroupInput, columns = DOT_COLUMNS): DotLayout {
+  const { solid, total } = dotCounts(group);
+  const dots: PlacedDot[] = [];
+  for (let i = 0; i < total; i += 1) {
+    dots.push({ x: (i % columns) * DOT_CELL + DOT_CELL / 2, y: Math.floor(i / columns) * DOT_CELL + DOT_CELL / 2, kind: i < solid ? 'solid' : 'range' });
+  }
+  return { width: DOT_COLUMNS * DOT_CELL, height: Math.ceil(total / columns) * DOT_CELL, dots };
 }
+
+/** The ratio for the sentence "about N times as many": a whole number up to 10, above 10 rounded down to a multiple of 5 (22.7 reads "20"). */
+export const roundRatio = (ratio: number): number => (ratio > 10 ? Math.max(10, Math.floor(ratio / 5) * 5) : Math.max(1, Math.round(ratio)));
 
 /** Largest and smallest group by the middle of their estimates, and how many times the first holds the second. */
 export function groupRatio<T extends { min: number; max: number }>(groups: readonly T[]): { big: T; small: T; ratio: number } {
