@@ -77,6 +77,12 @@ more:
 
     Bombaim, que veio no seu dote, foi entregue pela Inglaterra à Companhia das Índias Orientais em
     1668. Desse porto nasceu Mumbai.
+
+
+    A própria palavra inglesa «tea» não tem nada a ver com Catarina. Os ingleses foram buscá-la aos
+    holandeses, e estes a mercadores chineses que falavam min, um dialeto do sul da China, onde o chá
+    se diz «te». Os portugueses comerciavam por Macau, onde se diz «chá», e por isso em português é
+    chá.
   en: >-
     Tea was sold in London before she arrived. In 1658, a coffeehouse near the Royal Exchange
     printed England’s first tea advertisement: “that excellent and by all Physitians approved China
@@ -91,6 +97,11 @@ more:
 
     England handed Bombay, part of her dowry, to the East India Company in 1668. That port grew into
     Mumbai.
+
+
+    The English word tea itself has nothing to do with Catarina. The English got it from the Dutch,
+    who got it from Chinese merchants speaking Min, a southern Chinese dialect, where tea is called
+    te. The Portuguese traded through Macau, where it’s called chá, so in Portuguese tea is chá.
   ru: >-
     Чай в Лондоне продавали и до неё. В 1658 году кофейня у Королевской биржи напечатала первую в
     Англии рекламу чая: «превосходный китайский напиток, одобренный всеми врачами». Его пили мужчины
@@ -104,6 +115,11 @@ more:
 
     Бомбей из её приданого Англия в 1668 году отдала Ост-Индской компании. Из этого порта вырос
     Мумбаи.
+
+
+    Само английское слово tea с Катариной не связано. Англичане взяли его у голландцев, а те у
+    китайских купцов, говоривших на миньском диалекте южного Китая, где чай называют «те».
+    Португальцы торговали через Макао, где говорят «ча», поэтому по-португальски чай chá.
 sources:
   - title: "Fitzwilliam Museum: «Tea»"
     url: https://fitzmuseum.cam.ac.uk/objects-and-artworks/highlights/context/stories-and-histories/tea
@@ -117,6 +133,10 @@ sources:
     url: https://www.portugal.com/history-and-culture/14-incredible-facts-about-queen-catherine-of-braganza-portugals-queen-of-tea/
     type: website
     accessed: '2026-10-29'
+  - title: "Wikipedia: Tea (Etymology)"
+    url: https://en.wikipedia.org/wiki/Tea#Etymology
+    type: reference
+    accessed: '2026-11-14'
 image:
   file: catarina-cha-1662.webp
   alt:
@@ -151,7 +171,7 @@ related:
   - restauracao-1640
 status: ready
 published: '2026-10-30'
-updated: '2026-11-06'
+updated: '2026-11-14'
 placeholder: false
 ru_ready: true
 meanwhile:

@@ -1,0 +1,161 @@
+id: incendio-da-madeira-1420
+slug:
+  pt: a-ilha-que-ardeu-sete-anos
+  en: the-island-that-burned-for-seven-years
+  ru: ostrov-kotoryy-gorel-sem-let
+title:
+  pt: A ilha que ardeu sete anos
+  en: The Island That Burned for Seven Years
+  ru: Остров, который горел семь лет
+epoch: avis-e-descobrimentos
+level: story
+year: 1420
+place:
+  name:
+    pt: Madeira
+    en: Madeira
+    ru: Мадейра
+  short:
+    pt: Madeira
+    en: Madeira
+    ru: Мадейра
+  lat: 32.6669
+  lon: -16.9241
+bridge:
+  name: Ribeiro Frio
+  title:
+    pt: Ribeiro Frio
+    en: Ribeiro Frio
+    ru: Рибейру-Фриу
+  address: Ribeiro Frio, Santana, Madeira
+  lat: 32.7396155
+  lon: -16.8869417
+  maps_url: https://www.google.com/maps/search/?api=1&query=Ribeiro+Frio+Madeira
+  url: https://ifcn.madeira.gov.pt/
+  note:
+    pt: A floresta que cobria a Madeira antes da chegada das pessoas sobreviveu no norte da ilha.
+    en: The forest that covered Madeira before people arrived survives in the north of the island.
+    ru: Лес, который покрывал Мадейру до прихода людей, сохранился на севере острова.
+threads:
+  - mar
+importance: 2
+label: legend
+min_age: all
+sensitive: false
+hook:
+  pt: Segundo a lenda, o fogo dos povoadores ardeu sete anos na Madeira.
+  en: Legend says the settlers’ fire on Madeira burned for seven years.
+  ru: Первые поселенцы подожгли лес Мадейры, и он, по преданию, горел семь лет.
+seo:
+  title:
+    pt: A ilha que ardeu sete anos · Madeira, 1420
+    en: The Island That Burned for Seven Years · Madeira, 1420
+    ru: Остров, который горел семь лет · Мадейра | O Elefante Fugiu
+story:
+  pt: >-
+    Quando, em 1420, os portugueses chefiados por Zarco começaram a povoar a Madeira, a ilha inteira estava coberta por floresta densa. O próprio nome «madeira» vem daí. Para lavrar e construir, era preciso limpar a terra.
+
+
+    Conta a lenda que se pegou fogo à floresta e que o incêndio ficou fora de controlo. Os cronistas do século XVI João de Barros e Gaspar Frutuoso escreveram que o fogo durou sete anos.
+
+
+    Já no século XVII se duvidou disso. O mais provável é ter ardido o sul, à volta do Funchal, onde se instalaram as pessoas, e não a ilha toda nem durante sete anos. Mas na terra limpa nasceram, de facto, os primeiros campos.
+  en: >-
+    When the Portuguese, led by Zarco, began settling Madeira in 1420, the whole island was covered in dense forest. Its very name means “wood.” To plow and build, the land had to be cleared.
+
+
+    Legend says they set the forest on fire and the blaze got out of control. Sixteenth-century chroniclers João de Barros and Gaspar Frutuoso wrote that it burned for seven years.
+
+
+    By the 17th century, people already doubted it. Most likely only the south burned, around Funchal, where people settled, and not the whole island or for seven years. But the cleared land really did become the first fields.
+  ru: >-
+    Когда в 1420 году португальцы во главе с Зарку начали заселять Мадейру, весь остров был покрыт густым лесом. Само слово madeira значит «древесина». Чтобы пахать и строить, землю надо было расчистить.
+
+
+    По преданию, лес подожгли, и пожар вышел из-под контроля. Хронисты XVI века Жуан де Барруш и Гашпар Фрутуозу писали, что огонь горел семь лет.
+
+
+    Уже в XVII веке в этом засомневались. Скорее всего, горело на юге, вокруг Фуншала, где селились люди, а не весь остров и не семь лет. Но на расчищенной земле действительно появились первые поля.
+meanwhile:
+  - scope: world
+    year: 1420
+    text:
+      pt: Em Florença começa a construção da cúpula da catedral, de Brunelleschi.
+      en: In Florence, work begins on Brunelleschi’s dome for the cathedral.
+      ru: Во Флоренции начинают строить купол собора по проекту Брунеллески.
+    source: https://en.wikipedia.org/wiki/Florence_Cathedral
+more:
+  pt: >-
+    O primeiro povoado recebeu o nome da planta que mais havia por ali: o funcho. Funchal quer dizer «sítio de muito funcho».
+
+
+    Nas encostas limpas começou a plantar-se cana-de-açúcar a partir da década de 1450, e o açúcar fez do Funchal uma cidade rica. Depois o açúcar ficou mais barato, e a partir do século XVII o que deu fama à ilha foi o vinho, o Madeira.
+
+
+    A floresta que não ardeu ficou no norte, nas serras e nos vales. É a laurissilva, uma floresta de loureiros como a que, há milhões de anos, cobria todo o sul da Europa. Hoje ocupa cerca de um sexto da ilha, e desde 1999 é Património Mundial da UNESCO.
+
+
+    A bandeira da Madeira também lembra quem descobriu a ilha: tem a cruz vermelha da Ordem de Cristo, a mesma das velas das caravelas portuguesas.
+  en: >-
+    The first settlement was named after the plant that grew there most: fennel, funcho in Portuguese. Funchal means “place full of fennel.”
+
+
+    From the 1450s, sugarcane was planted on the cleared slopes, and sugar made Funchal a rich town. Then sugar got cheaper, and from the 17th century the island became famous for its wine, Madeira.
+
+
+    The forest that didn’t burn survived in the north, in the mountains and ravines. This is the laurisilva, a laurel forest like the one that covered all of southern Europe millions of years ago. Today it covers about a sixth of the island, and it has been a UNESCO World Heritage Site since 1999.
+
+
+    Madeira’s flag also remembers who discovered the island: it carries the red cross of the Order of Christ, the same one painted on the sails of Portuguese caravels.
+  ru: >-
+    Первое поселение назвали по траве, которой там было больше всего: фенхель по-португальски funcho, а Фуншал значит «заросли фенхеля».
+
+
+    На расчищенных склонах с 1450-х годов стали сажать сахарный тростник, и сахар сделал Фуншал богатым городом. Потом сахар подешевел, и с XVII века остров прославило вино, мадера.
+
+
+    А лес, который не сгорел, остался на севере, в горах и ущельях. Это лаурисилва, лавровый лес, какой миллионы лет назад рос по всему югу Европы. Сегодня он покрывает около шестой части острова, и с 1999 года он под охраной ЮНЕСКО.
+
+
+    О том, кто открывал остров, помнит и флаг Мадейры: на нём красный крест Ордена Христа, тот же, что был на парусах португальских каравелл (см. историю про крест тамплиеров).
+myth:
+  verdict: part
+  statement:
+    pt: Ao povoar a Madeira, a ilha ardeu sete anos seguidos
+    en: When Madeira was settled, the island burned for seven years straight
+    ru: Мадейру при заселении жгли семь лет подряд
+  answer:
+    pt: Assim escreveram os cronistas, mas já no século XVII se duvidava. O mais provável é ter ardido o sul da ilha, e não tanto tempo.
+    en: That’s what the chroniclers wrote, but by the 17th century people doubted it. Most likely only the south burned, and not for that long.
+    ru: Так писали хронисты, но уже в XVII веке в этом сомневались. Скорее всего, горел юг острова, и не так долго.
+sources:
+  - title: "Elucidário Madeirense: Incêndio da Madeira"
+    url: https://elucidariomadeirense.pt/en/articles/1776
+    type: reference
+    accessed: 2026-11-14
+  - title: "Wikipedia: History of Madeira"
+    url: https://en.wikipedia.org/wiki/History_of_Madeira
+    type: reference
+    accessed: 2026-11-14
+  - title: "Wikipedia: Laurisilva of Madeira"
+    url: https://en.wikipedia.org/wiki/Laurisilva_of_Madeira
+    type: reference
+    accessed: 2026-11-14
+image:
+  file: incendio-da-madeira-1420.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa praia da Madeira, colonos com machados ao ombro olham para um homem de capa que aponta para as montanhas, de onde sobem grandes colunas de fumo; uma caravela com a cruz da Ordem de Cristo na vela está ancorada na baía, e em primeiro plano crescem ervas de funcho."
+    en: "Blue-and-white azulejo-style illustration: on a beach in Madeira, settlers with axes on their shoulders look at a man in a cloak pointing toward the mountains, where tall columns of smoke rise; a caravel with the cross of the Order of Christ on its sail lies at anchor in the bay, and fennel plants grow in the foreground."
+    ru: "Иллюстрация в духе сине-белого азулежу: на берегу Мадейры поселенцы с топорами на плечах смотрят на мужчину в плаще, который указывает на горы, где поднимаются высокие столбы дыма; в бухте стоит каравелла с крестом ордена Христа на парусе, на переднем плане растёт фенхель."
+  caption:
+    pt: Os primeiros povoadores da Madeira e o fogo na floresta. Ilustração em estilo azulejo, criada por IA.
+    en: The first settlers of Madeira and the fire in the forest. Azulejo-style illustration, created by AI.
+    ru: Первые поселенцы Мадейры и пожар в лесу. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-22
+placeholder: false
+ru_ready: true

@@ -1,0 +1,161 @@
+id: bacalhau-e-sal-1669
+slug:
+  pt: o-peixe-que-outros-pescavam
+  en: the-fish-someone-else-caught
+  ru: ryba-kotoruyu-lovili-drugie
+title:
+  pt: O peixe que outros pescavam
+  en: The Fish Someone Else Caught
+  ru: Рыба, которую ловили другие
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1669
+place:
+  name:
+    pt: Setúbal
+    en: Setúbal
+    ru: Сетубал
+  short:
+    pt: Setúbal
+    en: Setúbal
+    ru: Сетубал
+  lat: 38.5244
+  lon: -8.8882
+bridge:
+  name: Museu Marítimo de Ílhavo
+  title:
+    pt: Museu Marítimo de Ílhavo
+    en: Ílhavo Maritime Museum
+    ru: Морской музей Илявы
+  address: Avenida Dr. Rocha Madahil, Ílhavo
+  lat: 40.6043972
+  lon: -8.6660219
+  maps_url: https://www.google.com/maps/place/Museu+Mar%C3%ADtimo+de+%C3%8Dlhavo+e+Aqu%C3%A1rio+dos+Bacalhaus/@40.5474844,-8.8941706,11z/data=!4m6!3m5!1s0xd23bd318d6c081f:0xb33053c37436c43!8m2!3d40.6043972!4d-8.6660219!16s%2Fg%2F1z3t21cqy
+  url: https://www.museumaritimoilhavo.pt/
+  note:
+    pt: Museu dos pescadores do bacalhau, com um aquário onde vivem bacalhaus do Atlântico desde 2013.
+    en: A museum of the cod fishermen, with an aquarium of live Atlantic cod since 2013.
+    ru: Музей рыбаков трески, с 2013 года с аквариумом, где живут атлантические трески.
+threads:
+  - comida-e-vinho
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Durante séculos, Portugal comeu bacalhau pescado por outros.
+  en: For centuries, Portugal ate cod that other people caught.
+  ru: Португалия веками ела треску, которую ловили другие.
+seo:
+  title:
+    pt: "Bacalhau: o peixe que outros pescavam | O Elefante Fugiu"
+    en: "Bacalhau: The Fish Someone Else Caught | O Elefante Fugiu"
+    ru: "Бакалау: рыба, которую ловили другие | O Elefante Fugiu"
+story:
+  pt: >-
+    O bacalhau vive nos mares frios do norte, ao largo da Terra Nova, da Islândia e da Noruega. Nas águas quentes de Portugal não existe. E, no entanto, o bacalhau salgado e seco tornou-se o peixe do país.
+
+
+    Tudo porque se podia guardar. Salgado e seco, o bacalhau não se estraga durante meses, viaja bem pelo oceano e podia comer-se nos dias de abstinência, quando a Igreja proibia a carne. E esses dias eram muitos: todas as sextas-feiras, a Quaresma inteira e outras festas.
+
+
+    Os portugueses já iam ao bacalhau à Terra Nova por volta de 1501, depois das viagens dos irmãos Corte-Real. Mas no século XVII foram afastados por marinheiros e corsários ingleses e franceses. Os historiadores não encontraram nenhum navio português que tenha descarregado bacalhau nessa época: comprava-se aos ingleses.
+  en: >-
+    Cod lives in the cold northern seas, off Newfoundland, Iceland, and Norway. It isn’t found in Portugal’s warm waters. And yet salted, dried cod, bacalhau, became the country’s signature fish.
+
+
+    It all came down to keeping it. Salted and dried, cod doesn’t spoil for months, travels well across the ocean, and could be eaten on fast days, when the Church banned meat. And there were lots of those: every Friday, all of Lent, and other holy days.
+
+
+    The Portuguese were already fishing for cod off Newfoundland around 1501, after the voyages of the Corte-Real brothers. But in the 17th century they were pushed out by English and French sailors and privateers. Historians have found no Portuguese ship that brought home cod in that period: it was bought from the English.
+  ru: >-
+    Треска живёт в холодных северных морях, у Ньюфаундленда, Исландии и Норвегии. У тёплых берегов Португалии её нет. И всё же солёная сушёная треска, бакалау, стала главной рыбой страны.
+
+
+    Всё дело в том, что её можно было хранить. Засоленная и высушенная треска не портится месяцами, её легко везти через океан и есть в постные дни, когда мясо запрещала церковь. А таких дней в году набиралось много: все пятницы, весь Великий пост и другие праздники.
+
+
+    Португальцы ходили за треской к Ньюфаундленду уже около 1501 года, после плаваний братьев Корте-Реал. Но в XVII веке их вытеснили английские и французские моряки и пираты. Историки не нашли ни одного португальского корабля, который привёз бы тогда треску: её покупали у англичан.
+meanwhile:
+  - scope: world
+    year: 1667
+    text:
+      pt: John Milton publica «O Paraíso Perdido».
+      en: John Milton publishes Paradise Lost.
+      ru: Мильтон издаёт «Потерянный рай».
+    source: https://en.wikipedia.org/wiki/Paradise_Lost
+more:
+  pt: >-
+    O lucro de Portugal vinha do sal. Sem sal não há bacalhau salgado, e Portugal era famoso pelo sal de Setúbal e de Aveiro. Os holandeses salgavam arenque, os ingleses bacalhau, e os seus navios vinham buscar sal a Portugal.
+
+
+    O sal era tão importante que serviu para pagar a paz. Em 1669, Portugal fez a paz com a Holanda e ficou de a pagar em sal de Setúbal: 500 mil cruzados de indemnização e o resto da dívida, repartido por vinte anos. Em 1680 chegaram a Setúbal cerca de cem navios holandeses para carregar sal.
+
+
+    Os portugueses só voltaram a pescar bacalhau no século XIX, e no século XX a «frota branca» partia todos os anos para a Terra Nova e a Gronelândia. Mas, segundo o historiador Álvaro Garrido, desde os Descobrimentos o país nunca pescou mais de 15% do bacalhau que comia. Hoje o bacalhau em Portugal é sobretudo norueguês, e receitas, diz-se, há 365, uma para cada dia do ano, ou mesmo mil e uma.
+  en: >-
+    Portugal’s profit came from salt. You can’t make salt cod without salt, and Portugal was famous for its salt from Setúbal and Aveiro. The Dutch salted herring, the English salted cod, and their ships came to Portugal for salt.
+
+
+    Salt was so valuable that it paid for peace. In 1669, Portugal made peace with the Dutch Republic and agreed to pay in Setúbal salt: 500,000 cruzados of compensation and the rest of the debt, spread over twenty years. In 1680, about a hundred Dutch ships came to Setúbal to load salt.
+
+
+    The Portuguese only started catching cod again in the 19th century, and in the 20th century the “White Fleet” sailed every year for Newfoundland and Greenland. But according to historian Álvaro Garrido, since the Age of Discovery the country never caught more than 15% of the cod it ate. Today, most bacalhau in Portugal is Norwegian, and there are said to be 365 recipes, one for every day of the year, or even 1,001.
+  ru: >-
+    Свою выгоду Португалия получала от соли. Солёную треску не сделать без соли, а Португалия славилась солью из Сетубала и Авейру. Голландцы солили сельдь, англичане треску, и за солью их корабли шли в Португалию.
+
+
+    Соль была так важна, что ею оплатили мир. В 1669 году Португалия заключила мир с Голландией и обязалась расплатиться солью из Сетубала: 500 тысяч крузадо компенсации и остаток долга, растянутый на двадцать лет. В 1680 году в Сетубал за солью пришло около сотни голландских кораблей.
+
+
+    Ловить треску сами португальцы снова начали только в XIX веке, а в XX веке к Ньюфаундленду и Гренландии каждый год уходил «белый флот». Но, по оценке историка Алвару Гарриду, со времён открытий страна сама ловила не больше 15% трески, которую съедала. Сегодня бакалау в Португалии в основном норвежский, а рецептов, как говорят, 365, по одному на каждый день года, или даже тысяча и один.
+myth:
+  verdict: myth
+  statement:
+    pt: O bacalhau é pescado ao largo da costa portuguesa
+    en: The cod for bacalhau is caught off the coast of Portugal
+    ru: Треску для бакалау ловят у берегов Португалии
+  answer:
+    pt: O bacalhau vive nos mares frios do norte. Ia-se buscá-lo à Terra Nova, e hoje o bacalhau em Portugal é sobretudo norueguês.
+    en: Cod lives in the cold northern seas. The Portuguese sailed to Newfoundland for it, and today most bacalhau in Portugal is Norwegian.
+    ru: Треска живёт в холодных северных морях. За ней ходили к Ньюфаундленду, а сегодня бакалау в основном норвежский.
+sources:
+  - title: "Diário de Notícias: «Centralidade do bacalhau na identidade portuguesa é um belo mistério» (entrevista a Álvaro Garrido)"
+    url: https://www.dn.pt/arquivo/diario-de-noticias/centralidade-do-bacalhau-na-identidade-portuguesa-e-um-belo-misterio-11608576.html
+    type: press
+    accessed: 2026-11-14
+  - title: "Virgínia Rau: Os holandeses e a exportação do sal de Setúbal nos fins do século XVII"
+    url: https://ap1.sib.uc.pt/bitstream/10316.2/47100/1/os_holandeses_e_a_exportacao_do_sal.pdf
+    type: academic
+    accessed: 2026-11-14
+  - title: "Revista Mneme: o tratado de 1669 e o sal de Setúbal"
+    url: https://periodicos.ufrn.br/mneme/article/download/14323/18255/121877
+    type: academic
+    accessed: 2026-11-14
+  - title: "Wikipedia: Bacalhau"
+    url: https://en.wikipedia.org/wiki/Bacalhau
+    type: reference
+    accessed: 2026-11-14
+  - title: "Wikipedia (pt): Museu Marítimo de Ílhavo"
+    url: https://pt.wikipedia.org/wiki/Museu_Mar%C3%ADtimo_de_%C3%8Dlhavo
+    type: reference
+    accessed: 2026-11-14
+image:
+  file: bacalhau-e-sal-1669.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: num cais junto a salinas, trabalhadores com rodos juntam montes de sal e outros levam cestos de sal à cabeça para dois grandes navios; em primeiro plano, homens carregam bacalhau seco em pilhas, um homem de capa escreve numa prancheta e uma mulher mostra um bacalhau aberto."
+    en: "Blue-and-white azulejo-style illustration: on a quay beside salt pans, workers with rakes gather heaps of salt and others carry baskets of salt on their heads to two large ships; in the foreground, men carry stacks of dried cod, a man in a cloak writes on a board, and a woman holds up an opened cod."
+    ru: "Иллюстрация в духе сине-белого азулежу: на причале у соляных варниц рабочие граблями сгребают кучи соли, другие несут корзины с солью на голове к двум большим кораблям; на переднем плане мужчины тащат стопки сушёной трески, мужчина в плаще пишет на дощечке, а женщина показывает разделанную треску."
+  caption:
+    pt: Sal de Setúbal e bacalhau seco a bordo, no século XVII. Ilustração em estilo azulejo, criada por IA.
+    en: Setúbal salt and dried cod loaded aboard, 17th century. Azulejo-style illustration, created by AI.
+    ru: Соль из Сетубала и сушёная треска грузятся на корабли, XVII век. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-18
+placeholder: false
+ru_ready: true

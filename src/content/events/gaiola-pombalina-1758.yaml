@@ -1,0 +1,156 @@
+id: gaiola-pombalina-1758
+slug:
+  pt: o-esqueleto-de-madeira-da-baixa
+  en: the-wooden-skeleton-of-the-baixa
+  ru: derevyannyy-skelet-bayshi
+title:
+  pt: O esqueleto de madeira da Baixa
+  en: The Wooden Skeleton of the Baixa
+  ru: Деревянный скелет Байши
+epoch: pombal-e-terramoto
+level: story
+year: 1758
+place:
+  name:
+    pt: Baixa Pombalina, Lisboa
+    en: Baixa Pombalina, Lisbon
+    ru: Байша-Помбалина, Лиссабон
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7107
+  lon: -9.1366
+bridge:
+  name: Museu de Engenharia Civil, Instituto Superior Técnico
+  title:
+    pt: Museu de Engenharia Civil do Técnico
+    en: Civil Engineering Museum, Técnico Lisboa
+    ru: Музей гражданского строительства, Тезнику-Лишбоа
+  address: Avenida Rovisco Pais 1, Lisboa
+  lat: 38.7371927
+  lon: -9.1403618
+  maps_url: https://www.google.com/maps/place/Pavllh%C3%A3o+de+Civil,+Av.+Rovisco+Pais+1+Museu+de+Engenharia+Civil+e+Arquitectura,+1049-001+Lisboa/@38.7371969,-9.1429367,17z/data=!3m2!4b1!5s0xd1933a162d89dbd:0xef78328c5c12bfec!4m6!3m5!1s0xd1933a17c97d3b3:0xfa2ed924721c1372!8m2!3d38.7371927!4d-9.1403618!16s%2Fg%2F11b6_dj7df
+  url: https://decivil.tecnico.ulisboa.pt/
+  note:
+    pt: O museu guarda o modelo mais conhecido da gaiola pombalina.
+    en: The museum holds the best-known model of the Pombaline cage.
+    ru: В музее хранится самая известная модель помбаловской клетки.
+threads:
+  - engenho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Cada prédio da Baixa esconde nas paredes um esqueleto de madeira.
+  en: Every building in Lisbon’s Baixa hides a wooden skeleton inside its walls.
+  ru: Каждый дом лиссабонской Байши прячет в стенах деревянный скелет.
+seo:
+  title:
+    pt: O esqueleto de madeira da Baixa · Lisboa, 1758
+    en: The Wooden Skeleton of the Baixa · Lisbon, 1758
+    ru: Деревянный скелет Байши · Лиссабон, 1758 | O Elefante Fugiu
+story:
+  pt: >-
+    O terramoto de 1755 deitou abaixo os prédios de pedra da Baixa de Lisboa. Pombal decidiu reconstruí-la de raiz, e de maneira a que os prédios sobrevivessem ao próximo abalo.
+
+
+    Os engenheiros inventaram a «gaiola». Dentro das paredes montava-se uma estrutura de traves de madeira cruzadas em X. Num abalo, a pedra racha e cai, mas a madeira verga, segura os andares e impede as paredes de se desfazerem.
+
+
+    Diz-se que a estrutura foi testada assim: soldados marchavam junto a uma maqueta e batiam com os pés, a imitar os abalos. Não há documentos que o provem, e o mais provável é que tenha sido uma demonstração, não um teste.
+  en: >-
+    The 1755 earthquake brought down the stone buildings of downtown Lisbon. Pombal decided to rebuild the Baixa from scratch, and to do it so the buildings would survive the next quake.
+
+
+    Engineers came up with the gaiola, the “cage.” Inside the walls they set a frame of wooden beams braced in an X pattern. In a quake, stone cracks and falls, but wood bends, holds up the floors, and keeps the walls from falling apart.
+
+
+    The story goes that the frame was tested by soldiers marching next to a model and stamping their feet to imitate the shaking. There are no records of this, and it was most likely a demonstration, not a test.
+  ru: >-
+    Землетрясение 1755 года обрушило каменные дома нижнего Лиссабона. Помбал решил отстроить Байшу заново, и так, чтобы следующий толчок дома пережили.
+
+
+    Инженеры придумали «гайолу», клетку. Внутри стен ставили каркас из деревянных брусьев, скреплённых крест-накрест. Камень при толчке трескается и падает, а дерево гнётся, держит этажи и не даёт стенам рассыпаться.
+
+
+    Говорят, каркас проверяли так: солдаты маршировали рядом с макетом и топали, изображая толчки. Документов об этом нет, и, скорее всего, это был показ, а не испытание.
+meanwhile:
+  - scope: world
+    year: 1759
+    text:
+      pt: Em Londres abre ao público o Museu Britânico.
+      en: The British Museum opens to the public in London.
+      ru: В Лондоне для публики открывается Британский музей.
+    source: https://en.wikipedia.org/wiki/British_Museum
+more:
+  pt: >-
+    Para a cidade se erguer depressa, foi construída como um jogo de montar. As peças dos prédios eram preparadas fora da cidade, transportadas e montadas no local. As ruas foram traçadas a régua, todas com a mesma largura, e os prédios limitados a quatro andares.
+
+
+    Foi um dos primeiros casos na Europa em que uma cidade se construiu a pensar nos sismos. Estruturas semelhantes foram depois usadas na Calábria, no sul de Itália, após o seu terramoto de 1783.
+
+
+    Só no nosso tempo se conseguiu verificar se a gaiola funciona mesmo. Engenheiros do Laboratório Nacional de Engenharia Civil (LNEC) construíram paredes com gaiola em tamanho real numa mesa sísmica e abanaram-nas com amplitude crescente. Chapas metálicas nas ligações da estrutura foram ensaiadas à parte, comparando as paredes reforçadas com as normais. Estes ensaios servem para perceber como reforçar os velhos prédios da Baixa, que continuam de pé.
+  en: >-
+    To get the city up quickly, it was built like a construction kit. Building parts were made outside the city, brought in, and assembled on site. Streets were laid out with a ruler, all the same width, and buildings were limited to four stories.
+
+
+    It was one of the first times in Europe that a city was built with earthquakes in mind. Similar frames were later used in Calabria, in southern Italy, after its 1783 earthquake.
+
+
+    Only in our time could anyone check whether the cage really works. Engineers at Portugal’s National Civil Engineering Laboratory (LNEC) built full-size gaiola walls on a shake table and shook them with rising intensity. Metal plates at the frame’s joints were tested separately, comparing reinforced walls with ordinary ones. Tests like these show how to reinforce the old Baixa buildings, which are still standing.
+  ru: >-
+    Чтобы город поднялся быстро, его строили как конструктор. Детали домов готовили за городом, привозили и собирали на месте. Улицы прочертили по линейке, одной ширины, а дома ограничили четырьмя этажами.
+
+
+    Это был один из первых в Европе случаев, когда город строили с расчётом на землетрясение. Похожие каркасы потом применяли в Калабрии на юге Италии, после её землетрясения 1783 года.
+
+
+    Проверить, работает ли клетка по-настоящему, смогли только в наше время. Инженеры Национальной лаборатории гражданского строительства (LNEC) собрали стены с гайолой в натуральную величину на вибростенде и трясли их с нарастающей силой. Металлические накладки в узлах каркаса испытывали отдельно, сравнивая усиленные стены с обычными. Такие опыты нужны, чтобы понять, как укреплять старые дома Байши, которые стоят до сих пор.
+myth:
+  verdict: part
+  statement:
+    pt: Os soldados testaram a estrutura dos prédios marchando à volta da maqueta
+    en: The building frames were tested by soldiers marching around a model
+    ru: Каркасы домов проверяли маршем солдат вокруг макета
+  answer:
+    pt: É o que se conta, mas não há documentos. O mais provável é ter sido uma demonstração, não um verdadeiro teste.
+    en: That’s the story, but there are no records. It was most likely a demonstration, not a real test.
+    ru: Так рассказывают, но документов нет. Скорее всего, это был показ, а не настоящее испытание.
+sources:
+  - title: "Quake – Lisbon Earthquake Center: Gaiola pombalina"
+    url: https://lisbonquake.com/en-GB/scanner/gaiola-pombalina
+    type: institutional
+    accessed: 2026-11-14
+  - title: "LNEC: ensaios de paredes de gaiola em mesa sísmica (5as Jornadas Portuguesas de Engenharia de Estruturas)"
+    url: https://repositorio.lnec.pt/bitstream/123456789/1008611/2/JPEE201.pdf
+    type: academic
+    accessed: 2026-11-14
+  - title: "Wikipedia: Pombaline style"
+    url: https://en.wikipedia.org/wiki/Pombaline_style
+    type: reference
+    accessed: 2026-11-14
+  - title: "IST: Museu DECivil"
+    url: https://decivil.tecnico.ulisboa.pt/sobre-o-decivil/museus-e-biblioteca
+    type: institutional
+    accessed: 2026-11-14
+image:
+  file: gaiola-pombalina-1758.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um prédio de quatro andares em construção com a estrutura de traves de madeira cruzadas em X à vista e pedreiros a encher as paredes de pedra, um guindaste de cordas, ruínas à esquerda e a Baixa com o castelo ao fundo; em primeiro plano, soldados a marchar junto a uma mesa com a maqueta de um prédio e um homem de tricórnio a apontá-la."
+    en: "Blue-and-white azulejo-style illustration: a four-story building under construction with its frame of X-braced wooden beams in view and masons filling the walls with stone, a rope crane, ruins on the left, and the Baixa with the castle behind; in the foreground, soldiers marching beside a table with a model of a building and a man in a tricorn hat pointing at it."
+    ru: "Иллюстрация в духе сине-белого азулежу: строится четырёхэтажный дом, виден каркас из деревянных брусьев, скреплённых крестами, каменщики заполняют стены камнем, рядом кран на верёвках, слева руины, вдали Байша и замок; на переднем плане солдаты идут маршем у стола с макетом дома, а мужчина в треуголке указывает на него."
+  caption:
+    pt: A Baixa a ser reconstruída com a gaiola de madeira. Ilustração em estilo azulejo, criada por IA.
+    en: The Baixa being rebuilt with the wooden cage. Azulejo-style illustration, created by AI.
+    ru: Байшу отстраивают с деревянной клеткой в стенах. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-20
+placeholder: false
+ru_ready: true

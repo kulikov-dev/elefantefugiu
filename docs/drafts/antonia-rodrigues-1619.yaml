@@ -1,0 +1,139 @@
+# Draft of story 65 (not published: the bridge is not optional yet; task after 10.12.2026). Not a valid event file until `bridge` exists.
+id: antonia-rodrigues-1619
+slug:
+  pt: um-cavaleiro-chamado-antonio
+  en: a-horseman-named-antonio
+  ru: vsadnik-po-imeni-antoniu
+title:
+  pt: Um cavaleiro chamado António
+  en: A Horseman Named António
+  ru: Всадник по имени Антониу
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1619
+place:
+  name:
+    pt: Mazagão (El Jadida), Marrocos
+    en: Mazagan (El Jadida), Morocco
+    ru: Мазаган (Эль-Джадида), Марокко
+  short:
+    pt: Mazagão
+    en: Mazagan
+    ru: Мазаган
+  lat: 33.2549
+  lon: -8.5007
+"#bridge": "none: the bridge is required by the schema until it becomes optional (task after 10.12.2026); Mazagan is abroad, Aveiro was rejected by the owner"
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O rei recompensou uma mulher que enganou o exército durante cinco anos.
+  en: A king rewarded a woman who had fooled the army for five years.
+  ru: Король наградил женщину, которая пять лет обманывала армию.
+seo:
+  title:
+    pt: Um cavaleiro chamado António · Mazagão, 1619 | O Elefante Fugiu
+    en: A Horseman Named António · Mazagan, 1619 | O Elefante Fugiu
+    ru: Всадник по имени Антониу · Мазаган, 1619 | O Elefante Fugiu
+story:
+  pt: >-
+    Antónia Rodrigues nasceu em Aveiro em 1572. Aos doze anos, a mãe mandou-a para casa da irmã mais velha, em Lisboa, mas as duas não se entenderam. Antónia cortou o cabelo, vestiu-se de marinheiro, passou a chamar-se António e embarcou como grumete num navio que ia para Mazagão, a fortaleza portuguesa na costa de Marrocos.
+
+
+    Lá, «António» foi alistado como soldado e depois passou para a cavalaria. Uma noite, «ele» travou um ataque à fortaleza, e o corajoso cavaleiro ficou falado.
+
+
+    Quem a denunciou foi o amor. Uma jovem de família nobre apaixonou-se por António, e o pai exigiu o casamento. Antónia teve de confessar. Não a castigaram: em 1619, o rei deu-lhe uma tença e levou o filho dela para servir na corte.
+  en: >-
+    Antónia Rodrigues was born in Aveiro in 1572. When she was twelve, her mother sent her to live with her older sister in Lisbon, but the two didn’t get along. Antónia cut her hair, dressed as a sailor, called herself António, and signed on as a cabin boy on a ship bound for Mazagan, Portugal’s fortress on the coast of Morocco.
+
+
+    There, “António” was enlisted as a soldier and later moved to the cavalry. One night “he” stopped a raid on the fortress, and everyone started talking about the brave horseman.
+
+
+    It was love that gave her away. A young woman from a noble family fell for António, and her father demanded a wedding. Antónia had to confess. She wasn’t punished: in 1619 the king granted her a pension and took her son into service at court.
+  ru: >-
+    Антония Родригеш родилась в Авейру в 1572 году. В двенадцать лет мать отправила её к старшей сестре в Лиссабон, но с сестрой она не ужилась. Антония остригла волосы, переоделась моряком, назвалась Антониу и нанялась юнгой на корабль, который шёл в Мазаган, португальскую крепость на берегу Марокко.
+
+
+    Там «Антониу» записали в солдаты, а потом взяли в конницу. Однажды «он» сорвал ночное нападение на крепость, и о храбром всаднике заговорили.
+
+
+    Выдала её любовь. В Антониу влюбилась девушка из знатной семьи, и её отец потребовал свадьбы. Антонии пришлось признаться. Наказывать её не стали: в 1619 году король наградил её пенсией, а её сына взял на службу при дворе.
+meanwhile:
+  - scope: world
+    year: 1620
+    text:
+      pt: O «Mayflower» chega à América com os peregrinos ingleses.
+      en: The Mayflower reaches America with the English Pilgrims.
+      ru: «Мейфлауэр» с английскими пилигримами доплывает до Америки.
+    source: https://en.wikipedia.org/wiki/Mayflower
+more:
+  pt: >-
+    Antónia serviu com nome de homem durante cerca de cinco anos. Depois da confissão obrigaram-na a voltar a vestir-se de mulher; em 1603 casou e mais tarde voltou para Lisboa. Quem a recompensou foi Filipe II de Portugal, a mesma pessoa que Filipe III de Espanha: nesses anos, Portugal e Espanha tinham o mesmo rei.
+
+
+    A sua história foi escrita ainda em vida, e em Portugal chamaram-lhe «Cavaleira Portuguesa» e «Amazona de Mazagão». Depois da morte do rei, em 1621, caiu no esquecimento. Morreu por volta de 1641, e a data de nascimento só foi encontrada em 2020, no registo de batismo em Aveiro.
+
+
+    Mazagão continuou portuguesa durante mais século e meio, mais do que qualquer outra fortaleza da costa marroquina. Hoje é a cidade de El Jadida, e as muralhas e a cisterna portuguesas são Património Mundial da UNESCO.
+  en: >-
+    Antónia served under a man’s name for about five years. After her confession she was made to dress as a woman again; she married in 1603 and later returned to Lisbon. The king who rewarded her was Philip II of Portugal, the same man as Philip III of Spain: in those years Portugal and Spain shared one king.
+
+
+    Her story was written down in her own lifetime, and in Portugal she was called the “Portuguese Horsewoman” and the “Amazon of Mazagan.” After the king died in 1621, she was forgotten. She died around 1641, and her birth date was only found in 2020, in a baptism record in Aveiro.
+
+
+    Mazagan stayed Portuguese for another century and a half, longer than any other fortress on the Moroccan coast. Today it’s the city of El Jadida, and its Portuguese walls and cistern are a UNESCO World Heritage Site.
+  ru: >-
+    Антония прослужила под мужским именем около пяти лет. После признания её заставили снова носить платье, в 1603 году она вышла замуж, а позже вернулась в Лиссабон. Наградил её Филипп II Португальский, тот же человек, что Филипп III Испанский: в те годы у Португалии и Испании был один король.
+
+
+    Её историю записали ещё при её жизни, и в Португалии её прозвали «Кавалерша» и «Амазонка из Мазагана». После смерти короля в 1621 году о ней забыли. Она умерла около 1641 года, а дату рождения нашли только в 2020-м, по записи о крещении в Авейру.
+
+
+    Сам Мазаган оставался португальским ещё полтора века, дольше всех крепостей на марокканском берегу. Сегодня это город Эль-Джадида, а португальские стены и подземное водохранилище там под охраной ЮНЕСКО.
+myth:
+  verdict: myth
+  statement:
+    pt: A mulher que serviu como soldado com nome de homem foi castigada pelo rei
+    en: The woman who served as a soldier under a man’s name was punished by the king
+    ru: Женщину, служившую солдатом под мужским именем, король наказал
+  answer:
+    pt: "O rei recompensou Antónia Rodrigues: deu-lhe uma tença e levou o filho dela para servir na corte."
+    en: "The king rewarded Antónia Rodrigues: he granted her a pension and took her son into service at court."
+    ru: "Антонию Родригеш король наградил: дал пенсию, а её сына взял на службу при дворе."
+sources:
+  - title: "Wikipedia (pt): Antónia Rodrigues"
+    url: https://pt.wikipedia.org/wiki/Ant%C3%B3nia_Rodrigues
+    type: reference
+    accessed: 2026-11-14
+  - title: "Meer: Uma cavaleira portuguesa em Mazagão (2024)"
+    url: https://www.meer.com/pt/76585-uma-cavaleira-portuguesa-em-mazagao
+    type: website
+    accessed: 2026-11-14
+  - title: "UNESCO: Portuguese City of Mazagan (El Jadida)"
+    url: https://whc.unesco.org/en/list/1058
+    type: institutional
+    accessed: 2026-11-14
+image:
+  file: "antonia-rodrigues-1619.webp (source: docs/images/ai-ideas/65-antonia.jpg.jpg)"
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: pela porta de uma fortaleza à beira-mar sai um grupo de cavaleiros armados com lanças, à frente um jovem cavaleiro sem armadura; numa varanda por cima da porta, uma dama de gola rendada e um homem de barrete observam, e ao largo vê-se uma caravela com a cruz vermelha na vela."
+    en: "Blue-and-white azulejo-style illustration: a group of armed horsemen with lances rides out through the gate of a seaside fortress, led by a young rider without armor; on a balcony above the gate a lady in a ruff collar and a man in a cap look on, and out at sea a ship carries a cross on its sail."
+    ru: "Иллюстрация в духе сине-белого азулежу: из ворот крепости на берегу моря выезжает отряд всадников с копьями, впереди молодой всадник без доспехов; на балконе над воротами за ними наблюдают дама в кружевном воротнике и мужчина в шапке, а в море стоит корабль с крестом на парусе."
+  caption:
+    pt: Antónia Rodrigues, o cavaleiro «António», sai da fortaleza de Mazagão. Ilustração em estilo azulejo, criada por IA.
+    en: Antónia Rodrigues, the horseman “António,” rides out of the fortress of Mazagan. Azulejo-style illustration, created by AI.
+    ru: Антония Родригеш, всадник «Антониу», выезжает из крепости Мазаган. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-24
+placeholder: false
+ru_ready: true

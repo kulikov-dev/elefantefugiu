@@ -1,0 +1,156 @@
+id: cruz-de-cristo-1420
+slug:
+  pt: a-cruz-dos-templarios-nas-velas
+  en: the-templar-cross-on-the-sails
+  ru: krest-templierov-na-parusakh
+title:
+  pt: A cruz dos Templários nas velas
+  en: The Templar Cross on the Sails
+  ru: Крест тамплиеров на парусах
+epoch: avis-e-descobrimentos
+level: story
+year: 1420
+place:
+  name:
+    pt: Tomar
+    en: Tomar
+    ru: Томар
+  short:
+    pt: Tomar
+    en: Tomar
+    ru: Томар
+  lat: 39.6036
+  lon: -8.4147
+bridge:
+  name: Convento de Cristo
+  title:
+    pt: Convento de Cristo, Tomar
+    en: Convent of Christ, Tomar
+    ru: Монастырь Христа, Томар
+  address: Tomar
+  lat: 39.6053819
+  lon: -8.4043125
+  maps_url: https://www.google.com/maps/place/%D0%9A%D0%BE%D0%BD%D0%B2%D0%B5%D0%BD%D1%82%D1%83-%D0%B4%D0%B5-%D0%A5%D1%80%D0%B8%D1%81%D1%82%D1%83/@39.6053859,-8.4091834,17z/data=!3m1!4b1!4m6!3m5!1s0xd187f0064c714d7:0x7a4ce02db05409ef!8m2!3d39.6053819!4d-8.4043125!16s%2Fg%2F11zys9q7zs
+  url: https://www.conventocristo.gov.pt/
+  note:
+    pt: O antigo castelo templário é a casa da Ordem de Cristo, com a igreja redonda do século XII.
+    en: The former Templar castle became the headquarters of the Order of Christ; their 12th-century round church stands at its center.
+    ru: Бывший замок тамплиеров стал главным домом Ордена Христа; в центре стоит их круглая церковь XII века.
+threads:
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Extinta a Ordem do Templo, a sua cruz navegou até à Índia.
+  en: The Templars were abolished, but their cross sailed to India.
+  ru: Орден тамплиеров запретили, а его крест уплыл в Индию.
+seo:
+  title:
+    pt: A cruz dos Templários nas velas · Tomar, 1420
+    en: The Templar Cross on the Sails · Tomar, 1420
+    ru: Крест тамплиеров на парусах · Томар, 1420 | O Elefante Fugiu
+story:
+  pt: >-
+    Em 1312, o papa extinguiu a Ordem do Templo. Em França, os cavaleiros foram presos e julgados, e as suas terras entregues a outros.
+
+
+    O rei português D. Dinis fez diferente. Os Templários tinham ajudado a conquistar o país aos mouros e guardavam castelos na fronteira, e o rei não quis entregar esses castelos a uma ordem estrangeira. Fundou uma nova, a Ordem de Cristo, e em 1319 o papa autorizou que lhe passassem todos os bens dos Templários. A nova ordem instalou-se no antigo castelo deles em Tomar.
+
+
+    Cem anos depois, a ordem passou a ser governada pelo Infante D. Henrique, e os seus rendimentos pagavam as viagens ao longo da costa de África. Por isso as velas das caravelas portuguesas levavam a cruz vermelha da Ordem de Cristo.
+  en: >-
+    In 1312, the pope abolished the Knights Templar. In France, the knights were arrested and put on trial, and their lands were handed to others.
+
+
+    Portugal’s King Dinis did things differently. The Templars had helped win the country back from the Moors and guarded castles on the border, and the king didn’t want to hand those castles to a foreign order. He founded a new one, the Order of Christ, and in 1319 the pope allowed all the Templars’ property to pass to it. The new order moved into their old castle in Tomar.
+
+
+    A hundred years later, Prince Henry the Navigator took charge of the order, and its income paid for his voyages down the coast of Africa. That’s why Portuguese caravels carried the red cross of the Order of Christ on their sails.
+  ru: >-
+    В 1312 году папа распустил орден тамплиеров. Во Франции рыцарей арестовывали и судили, а их земли отдавали другим.
+
+
+    Португальский король Диниш поступил иначе. Тамплиеры помогали отвоёвывать страну у мавров и держали крепости на границе, и король не хотел отдавать их замки чужому ордену. Он основал новый, Орден Христа, и в 1319 году папа разрешил передать ему всё имущество тамплиеров. Новый орден поселился в их старом замке в Томаре.
+
+
+    Через сто лет орден возглавил инфант Энрике Мореплаватель, и доходы ордена шли на его плавания вдоль Африки. Поэтому на парусах португальских каравелл рисовали красный крест Ордена Христа.
+meanwhile:
+  - scope: world
+    year: 1420
+    text:
+      pt: Em Pequim fica concluída a construção da Cidade Proibida.
+      en: In Beijing, the Forbidden City is completed.
+      ru: В Пекине достроен Запретный город.
+    source: https://en.wikipedia.org/wiki/Forbidden_City
+more:
+  pt: >-
+    O coração do convento de Tomar foi construído ainda pelos Templários, no século XII. É uma igreja redonda, a Charola. Fizeram-na redonda à imagem dos santuários de Jerusalém que os cavaleiros tinham visto nas Cruzadas.
+
+
+    Quando os navios com a cruz da ordem chegaram à Índia e ao Brasil, o dinheiro voltou a Tomar. No reinado de D. Manuel juntou-se à igreja redonda uma nova nave, e a sua janela foi decorada com tudo o que trouxera a riqueza: cordas, correntes de âncora, corais, algas. Esta janela do Capítulo é considerada o melhor exemplo do manuelino, o estilo português da época dos Descobrimentos.
+
+
+    A cruz das velas não desapareceu. Está na bandeira da Madeira, a primeira ilha descoberta sob esta cruz, e a própria Ordem de Cristo existe até hoje: é uma das mais altas condecorações portuguesas.
+  en: >-
+    The heart of the convent in Tomar was built by the Templars themselves, in the 12th century. It’s a round church, the Charola. They made it round after the shrines of Jerusalem the knights had seen on crusade.
+
+
+    When ships under the order’s cross reached India and Brazil, money flowed back to Tomar. Under King Manuel, a new nave was added to the round church, and its window was decorated with everything that had brought the wealth: ropes, anchor chains, coral, seaweed. This Chapter House window is considered the finest example of Manueline, the Portuguese style of the Age of Discovery.
+
+
+    The cross from the sails never disappeared. It’s on the flag of Madeira, the first island discovered under this cross, and the Order of Christ itself still exists: it’s one of Portugal’s highest honors.
+  ru: >-
+    Сердце монастыря в Томаре построили ещё тамплиеры в XII веке. Это круглая церковь, шароля. Круглой её сделали по образцу святынь Иерусалима, которые рыцари видели в крестовых походах.
+
+
+    Когда корабли под крестом ордена дошли до Индии и Бразилии, деньги потекли обратно в Томар. Во времена короля Мануэла к круглой церкви пристроили новый неф, а его окно украсили всем, что принесло богатство: канатами, якорными цепями, кораллами, водорослями. Это окно капитула считают лучшим образцом мануэлину, португальского стиля эпохи открытий.
+
+
+    Крест с парусов никуда не делся. Он есть на флаге Мадейры, первого острова, который открыли под этим крестом, а сам Орден Христа существует до сих пор: это одна из высших наград Португалии.
+myth:
+  verdict: part
+  statement:
+    pt: Portugal limitou-se a mudar o nome à Ordem do Templo
+    en: Portugal simply renamed the Knights Templar
+    ru: Португалия просто переименовала орден тамплиеров
+  answer:
+    pt: A ordem foi extinta, mas o rei fundou uma nova, a Ordem de Cristo, e entregou-lhe os castelos e as terras dos Templários.
+    en: The order was abolished, but the king founded a new one, the Order of Christ, and gave it the Templars’ castles and lands.
+    ru: Орден распустили, но король основал новый, Орден Христа, и передал ему замки и земли тамплиеров.
+sources:
+  - title: "Wikipedia: Military Order of Christ"
+    url: https://en.wikipedia.org/wiki/Military_Order_of_Christ
+    type: reference
+    accessed: 2026-11-14
+  - title: "Wikipedia: Convent of the Order of Christ"
+    url: https://en.wikipedia.org/wiki/Convent_of_the_Order_of_Christ
+    type: reference
+    accessed: 2026-11-14
+  - title: "UNESCO: Convent of Christ in Tomar"
+    url: https://whc.unesco.org/en/list/265
+    type: institutional
+    accessed: 2026-11-14
+  - title: "Museu de Marinha: Infante D. Henrique, governador da Ordem de Cristo (1420)"
+    url: https://cultura.marinha.pt/en/museumarinha_web/multimedia_web/Pages/nascimento-infante-d-henrique-.aspx
+    type: institutional
+    accessed: 2026-11-14
+image:
+  file: cruz-de-cristo-1420.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: num monte, um castelo de muralhas e torres com uma igreja redonda ao centro, e abaixo uma povoação; cavaleiros de mantos brancos descem o caminho, enquanto três caravelas com grandes cruzes vermelhas nas velas navegam num rio ou no mar."
+    en: "Blue-and-white azulejo-style illustration: on a hill, a walled castle with towers and a round church at its center, with a village below; knights in white mantles ride down the road, while three caravels with large red crosses on their sails sail on the water."
+    ru: "Иллюстрация в духе сине-белого азулежу: на холме замок со стенами и башнями, в центре круглая церковь, внизу селение; по дороге едут рыцари в белых плащах, а по воде идут три каравеллы с большими красными крестами на парусах."
+  caption:
+    pt: O castelo dos Templários em Tomar e as caravelas com a cruz da Ordem de Cristo. Ilustração em estilo azulejo, criada por IA.
+    en: The Templar castle in Tomar and caravels with the cross of the Order of Christ. Azulejo-style illustration, created by AI.
+    ru: Замок тамплиеров в Томаре и каравеллы с крестом Ордена Христа. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-23
+placeholder: false
+ru_ready: true

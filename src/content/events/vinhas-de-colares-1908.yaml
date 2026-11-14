@@ -1,0 +1,143 @@
+id: vinhas-de-colares-1908
+slug:
+  pt: a-vinha-que-a-areia-salvou
+  en: the-vines-saved-by-sand
+  ru: vinograd-kotoryy-spas-pesok
+title:
+  pt: A vinha que a areia salvou
+  en: The Vines Saved by Sand
+  ru: Виноград, который спас песок
+epoch: monarquia-e-republica
+level: story
+year: 1908
+place:
+  name:
+    pt: Colares, Sintra
+    en: Colares, Sintra
+    ru: Колареш, Синтра
+  short:
+    pt: Colares
+    en: Colares
+    ru: Колареш
+  lat: 38.8128
+  lon: -9.4589
+bridge:
+  name: Adega Regional de Colares
+  title:
+    pt: Adega Regional de Colares
+    en: Adega Regional de Colares
+    ru: Винодельня Adega Regional de Colares
+  address: Alameda Coronel Linhares de Lima 32, Colares
+  lat: 38.8058621
+  lon: -9.4499685
+  maps_url: https://www.google.com/maps/place/Regional+de+Colares+Winery/@38.8058663,-9.4525434,17z/data=!3m1!4b1!4m6!3m5!1s0xd1edb7b8f7d7879:0xc43d612d271f7c91!8m2!3d38.8058621!4d-9.4499685!16s%2Fg%2F1tklrtzq
+  url: https://www.arcolares.com/
+  note:
+    pt: "Cooperativa dos viticultores de Colares, fundada em 1931: vinho de videiras que crescem na areia, em raízes próprias."
+    en: The Colares growers’ cooperative, founded in 1931, makes wine from vines that grow in the sand on their own roots.
+    ru: Кооператив виноделов Колареша, основан в 1931 году; здесь делают вино из лоз, которые растут в песке на своих корнях.
+threads:
+  - comida-e-vinho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A areia salvou Colares da filoxera, mas não das casas de férias.
+  en: Sand saved Colares’ vines from phylloxera, but not from vacation homes.
+  ru: Песок спас лозы Колареша от филлоксеры, но не спас от дач.
+seo:
+  title:
+    pt: A vinha que a areia salvou · Colares, 1908
+    en: The Vines Saved by Sand · Colares, 1908 | O Elefante Fugiu
+    ru: Виноград, который спас песок · Колареш, 1908
+story:
+  pt: >-
+    Na segunda metade do século XIX chegou à Europa, vinda da América, a filoxera. É um inseto minúsculo, parecido com um pulgão: vive na terra, nas raízes da videira, chupa-lhes a seiva, e a planta morre em poucos anos. A filoxera atravessou a França, a Espanha e Portugal, e quase todas as vinhas antigas tiveram de ser arrancadas.
+
+
+    A salvação foram as raízes americanas: nelas enxertava-se a videira europeia, porque a videira americana resiste à filoxera. Desde então, quase toda a vinha da Europa cresce sobre raízes alheias.
+
+
+    Em Colares, junto ao mar, não foi preciso enxertar. Aqui a casta Ramisco cresce nas dunas, em areia pura. A filoxera não consegue viver na areia: as galerias que abre até às raízes desabam logo. Por isso as videiras de Colares crescem sobre as suas próprias raízes, como antes da praga.
+  en: >-
+    In the second half of the 19th century, phylloxera arrived in Europe from America. It’s a tiny insect, similar to an aphid: it lives in the soil on grapevine roots, sucks their sap, and the vine dies within a few years. Phylloxera swept through France, Spain, and Portugal, and almost all the old vineyards had to be pulled up.
+
+
+    The rescue came from American roots: European vines were grafted onto them, because American grapes can withstand phylloxera. Ever since, nearly every vine in Europe has grown on borrowed roots.
+
+
+    In Colares, by the sea, grafting wasn’t needed. Here the Ramisco grape grows in the dunes, in pure sand. Phylloxera can’t live in sand: the tunnels it digs to reach the roots collapse right away. So the vines of Colares grow on their own roots, just as they did before the pest.
+  ru: >-
+    Во второй половине XIX века в Европу из Америки завезли филлоксеру. Это крошечное насекомое, похожее на тлю: оно живёт в земле на корнях винограда, сосёт из них сок, и куст за несколько лет погибает. Филлоксера прошла через Францию, Испанию и Португалию, и почти все старые виноградники пришлось выкорчевать.
+
+
+    Спасением стали американские корни: к ним прививали европейскую лозу, потому что американский виноград филлоксеру выдерживает. С тех пор почти вся лоза Европы растёт на чужих корнях.
+
+
+    В Колареше у моря прививка не понадобилась. Здесь виноград сорта рамишку растёт в дюнах, в чистом песке. Филлоксера в песке жить не может: ходы, которые она роет к корням, тут же осыпаются. Поэтому лозы Колареша растут на своих корнях, как росли до вредителя.
+meanwhile:
+  - scope: world
+    year: 1908
+    text:
+      pt: A Ford começa a produzir o Modelo T.
+      en: Ford begins producing the Model T.
+      ru: Форд начинает выпускать «Модель T».
+    source: https://en.wikipedia.org/wiki/Ford_Model_T
+more:
+  pt: >-
+    Serão estas as vinhas mais antigas? Não exatamente. Segundo os produtores locais, há vinha aqui há uns quinhentos anos, mas cada planta não vive tanto, e uma videira de oitenta anos já é tratada como um monumento. A raridade de Colares está noutra coisa: a Ramisco é, possivelmente, a única casta que nunca foi enxertada em raízes americanas.
+
+
+    Plantá-la dá muito trabalho. Para as raízes chegarem ao barro húmido, abre-se na areia uma vala com vários metros de fundo, e as paredes estão sempre a desabar. As videiras crescem rentes ao chão, levantadas por pequenas estacas de madeira, e protegidas do vento salgado por paliçadas de cana seca.
+
+
+    A areia travou a filoxera, mas não travou as férias. A terra junto ao mar, perto de Sintra, ficou cara, e no lugar das vinhas nasceram moradias e vivendas. Em 1950, Colares produzia mais de um milhão de litros de vinho por ano; hoje, cerca de vinte mil: os viticultores perderam mais de nove décimos das suas terras.
+  en: >-
+    Are these the oldest vineyards? Not quite. According to local winemakers, grapes have grown here for about five hundred years, but individual vines don’t live that long, and an eighty-year-old vine is already treated like a monument. What makes Colares rare is something else: Ramisco may be the only grape variety never grafted onto American roots.
+
+
+    Planting it is hard work. To reach the moist clay, growers dig a trench several meters deep in the sand, and its walls keep caving in. The vines sprawl low, propped up on short wooden sticks, and are shielded from the salty wind by fences of dried reeds.
+
+
+    The sand stopped phylloxera, but it couldn’t stop the beach crowd. Seaside land near Sintra became expensive, and houses and villas went up where the vineyards had been. In 1950, Colares made over a million liters of wine a year; today it makes about twenty thousand. The growers have lost more than nine-tenths of their land.
+  ru: >-
+    Самые древние ли это виноградники? Не совсем. Виноград здесь растёт, по словам местных виноделов, около пятисот лет, но отдельные кусты так долго не живут, и восьмидесятилетнюю лозу тут уже называют памятником. Редкость Колареша в другом: рамишку, возможно, единственный сорт винограда, который ни разу не прививали на американские корни.
+
+
+    Сажать его тяжело. Чтобы корни дотянулись до влажной глины, в песке копают траншею глубиной в несколько метров, а её стенки всё время осыпаются. Лозы стелются низко, их приподнимают на деревянных подпорках, а от солёного ветра закрывают заборами из сухого тростника.
+
+
+    Филлоксеру песок остановил, а курорт нет. Земля у моря под Синтрой стала дорогой, и на месте виноградников выросли дачи и виллы. В 1950 году Колареш делал больше миллиона литров вина в год, сегодня около двадцати тысяч: виноделы потеряли больше девяти десятых своих земель.
+myth_none: "Утверждение без пояснения про филлоксеру не работает: «песок спас лозы» понятно только с историей (решение владельца 13.11.2026)."
+sources:
+  - title: "World of Fine Wine: Colares on the beach (2023)"
+    url: https://worldoffinewine.com/news-features/colares-on-the-beach
+    type: press
+    accessed: 2026-11-14
+  - title: "Jancis Robinson: Colares"
+    url: https://www.jancisrobinson.com/learn/wine-regions/portugal/lisboa/colares
+    type: reference
+    accessed: 2026-11-14
+  - title: "Wikipedia: Colares DOC"
+    url: https://en.wikipedia.org/wiki/Colares_DOC
+    type: reference
+    accessed: 2026-11-14
+image:
+  file: vinhas-de-colares-1908.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: dunas de areia junto ao mar com fiadas de videiras rasteiras protegidas por vedações de cana; no meio, dois homens dentro de uma vala funda plantam uma videira e levam um cesto, e ao fundo, sobre uma colina, vê-se um palácio."
+    en: "Blue-and-white azulejo-style illustration: sand dunes by the sea with rows of low vines shielded by reed fences; in the middle, two men in a deep trench plant a vine and carry a basket, and a palace stands on a hill in the distance."
+    ru: "Иллюстрация в духе сине-белого азулежу: песчаные дюны у моря, ряды низких лоз за тростниковыми заборами; посередине в глубокой траншее двое мужчин сажают лозу, один с корзиной, а вдали на холме виден дворец."
+  caption:
+    pt: Videiras plantadas nas dunas de Colares. Ilustração em estilo azulejo, criada por IA.
+    en: Vines planted in the dunes of Colares. Azulejo-style illustration, created by AI.
+    ru: Лозы сажают в дюнах Колареша. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-21
+placeholder: false
+ru_ready: true

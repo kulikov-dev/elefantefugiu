@@ -1,0 +1,148 @@
+id: primeiro-automovel-1895
+slug:
+  pt: o-carro-contra-o-burro
+  en: the-car-vs-the-donkey
+  ru: mashina-protiv-osla
+title:
+  pt: O carro contra o burro
+  en: The Car vs. the Donkey
+  ru: Машина против осла
+epoch: monarquia-e-republica
+level: story
+year: 1895
+place:
+  name:
+    pt: Palmela
+    en: Palmela
+    ru: Палмела
+  short:
+    pt: Palmela
+    en: Palmela
+    ru: Палмела
+  lat: 38.5686
+  lon: -8.9014
+bridge:
+  name: Homenagem ao primeiro automóvel de Portugal
+  title:
+    pt: Homenagem ao primeiro automóvel de Portugal
+    en: Monument to Portugal’s First Automobile
+    ru: Памятник первому автомобилю Португалии
+  address: Santiago do Cacém
+  lat: 38.0105214
+  lon: -8.6932382
+  maps_url: https://www.google.com/maps/place/Homenagem+ao+primeiro+autom%C3%B3vel+de+Portugal/@38.0105214,-8.6958131,17z/data=!4m6!3m5!1s0xd1bc72bd352c3dd:0xec99f188987862a9!8m2!3d38.0105214!4d-8.6932382!16s%2Fg%2F11v5594b52
+  url: https://www.cm-santiagodocacem.pt/
+  note:
+    pt: A réplica do primeiro carro de Portugal está na vila aonde ele chegou em 1895.
+    en: A replica of Portugal’s first car stands in the town it reached in 1895.
+    ru: Копия первой машины Португалии стоит в городе, куда она доехала в 1895 году.
+threads:
+  - engenho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Na primeira viagem, o primeiro carro de Portugal atropelou um burro.
+  en: On its first trip, Portugal’s first car hit a donkey.
+  ru: Первая автоавария в Португалии случилась в первой же поездке. Пострадал осёл.
+seo:
+  title:
+    pt: O carro contra o burro · Palmela, 1895 | O Elefante Fugiu
+    en: The Car vs. the Donkey · Palmela, 1895 | O Elefante Fugiu
+    ru: Машина против осла · Палмела, 1895 | O Elefante Fugiu
+story:
+  pt: >-
+    Em 1895, o conde de Avillez comprou em Paris um automóvel Panhard & Levassor e trouxe-o para Lisboa. Era o primeiro carro em Portugal: rodas de ferro sem pneus e velocidade de uns 15 km/h.
+
+
+    O conde decidiu ir nele até à sua casa em Santiago do Cacém, a mais de cem quilómetros para sul. As estradas eram feitas para carroças e burros, e quem passava nunca tinha visto um carro sem cavalo.
+
+
+    Perto de Palmela, o carro atropelou um burro. Foi o primeiro acidente de automóvel do país, antes de haver quaisquer regras de trânsito. A 15 de outubro, o carro lá chegou a Santiago do Cacém.
+  en: >-
+    In 1895, the Count of Avillez bought a Panhard & Levassor automobile in Paris and brought it to Lisbon. It was the first car in Portugal: iron wheels with no tires and a top speed of about 15 km/h (9 mph).
+
+
+    The count decided to drive it to his estate in Santiago do Cacém, more than a hundred kilometers to the south. The roads were made for carts and donkeys, and people along the way had never seen a carriage without a horse.
+
+
+    Near Palmela, the car hit a donkey. It was the country’s first car accident, before there were any traffic rules. On October 15, the car finally made it to Santiago do Cacém.
+  ru: >-
+    В 1895 году граф Авиллеш купил в Париже автомобиль «Панар и Левассор» и привёз его в Лиссабон. Это была первая машина в Португалии: железные колёса без шин, скорость около 15 км/ч.
+
+
+    Граф решил доехать на ней до своего имения в Сантьягу-ду-Касен, это больше сотни километров на юг. Дороги были рассчитаны на телеги и ослов, а встречные никогда не видели повозки без лошади.
+
+
+    Под Палмелой машина сбила осла. Так в стране появилась первая автоавария, раньше первых правил движения. 15 октября автомобиль всё-таки добрался до Сантьягу-ду-Касен.
+meanwhile:
+  - scope: world
+    year: 1895
+    text:
+      pt: Em dezembro, em Paris, os irmãos Lumière exibem pela primeira vez um filme ao público.
+      en: In December, the Lumière brothers give the first public film screening in Paris.
+      ru: В декабре в Париже братья Люмьер впервые показывают фильм публике.
+    source: https://en.wikipedia.org/wiki/Lumi%C3%A8re_brothers
+more:
+  pt: >-
+    Ao início encheram o depósito com petróleo, porque ninguém em Portugal sabia com que combustível o carro andava. Só depois se percebeu que precisava de gasolina. Com o conde seguiam um mecânico francês e um fotógrafo.
+
+
+    Poucos anos depois, os automóveis já eram o brinquedo da nobreza, e o maior entusiasta do país era o próprio rei D. Carlos I: tinha vários carros e conduzia-os ele mesmo. Em 1903 nasceu o Real Automóvel Club de Portugal, cujo emblema, segundo se diz, foi desenhado pelo rei. O clube lutava por leis claras para os condutores e por boas estradas, e em 1913 publicou o primeiro mapa de estradas de Portugal.
+
+
+    As estradas onde em 1895 o carro encontrou o burro continuaram muito tempo a ser estradas de carroças. Só depois da Primeira Guerra Mundial o número de carros multiplicou-se, e em 1927 nasceu um organismo para cuidar das estradas de todo o país.
+  en: >-
+    At first they filled the tank with kerosene, because no one in Portugal knew what the car ran on. Only later did they figure out it needed gasoline. A French mechanic and a photographer rode along with the count.
+
+
+    A few years later, cars had become a toy of the nobility, and the country’s biggest car enthusiast was King Carlos I himself: he owned several and drove them himself. In 1903 the Royal Automobile Club of Portugal was founded, and the king is said to have drawn its emblem. The club pushed for clear laws for drivers and for good roads, and in 1913 it published Portugal’s first road map.
+
+
+    The roads where the car met the donkey in 1895 stayed cart roads for a long time. Only after World War I did the number of cars multiply, and in 1927 an agency was created to look after roads across the whole country.
+  ru: >-
+    В машину сначала залили керосин, потому что никто в Португалии не знал, на чём она ездит. Только потом выяснили, что нужен бензин. С графом ехали французский механик и фотограф.
+
+
+    Через несколько лет машины уже были игрушкой знати, и главным автомобилистом страны стал сам король Карлуш I: у него было несколько автомобилей, и он водил их сам. В 1903 году появился Королевский автомобильный клуб, эмблему которому король, как считается, нарисовал своей рукой. Клуб добивался понятных законов для водителей и хороших дорог, а в 1913 году выпустил первую дорожную карту Португалии.
+
+
+    Дороги, на которых в 1895 году машина встретила осла, ещё долго оставались дорогами для телег. Только после Первой мировой войны машин стало в несколько раз больше, а в 1927 году появилось ведомство, которое занялось дорогами всей страны.
+myth:
+  verdict: fact
+  statement:
+    pt: O primeiro carro de Portugal atropelou um burro logo na primeira viagem
+    en: Portugal’s first car hit a donkey on its very first trip
+    ru: Первая машина Португалии в первой же поездке сбила осла
+  answer:
+    pt: Perto de Palmela, a caminho de Lisboa para Santiago do Cacém, em 1895. É considerado o primeiro acidente de automóvel do país.
+    en: Near Palmela, on the way from Lisbon to Santiago do Cacém in 1895. It’s considered the country’s first car accident.
+    ru: Под Палмелой, по дороге из Лиссабона в Сантьягу-ду-Касен в 1895 году. Это считают первой автоаварией в стране.
+sources:
+  - title: "Observador: Do Conde de Avillez a Piscapisca.pt: a história do automóvel em Portugal (2021)"
+    url: https://observador.pt/2021/10/28/do-conde-de-avillez-a-piscapisca-pt-a-historia-do-automovel-em-portugal/
+    type: press
+    accessed: 2026-11-14
+  - title: "Wikipedia (pt): Automóvel Club de Portugal"
+    url: https://pt.wikipedia.org/wiki/Autom%C3%B3vel_Club_de_Portugal
+    type: reference
+    accessed: 2026-11-14
+image:
+  file: primeiro-automovel-1895.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa estrada de terra entre pinheiros e vinhas, um automóvel antigo de rodas de ferro leva um condutor de óculos, um passageiro e um fotógrafo com uma câmara de tripé; à frente do carro um burro está sentado no chão e um homem de chapéu levanta os braços, e ao fundo uma família corre para ver."
+    en: "Blue-and-white azulejo-style illustration: on a dirt road among pines and vines, an early automobile with iron wheels carries a driver in goggles, a passenger, and a photographer with a tripod camera; in front of it a donkey sits on the ground and a man in a hat throws up his arms, while a family runs up in the background."
+    ru: "Иллюстрация в духе сине-белого азулежу: на грунтовой дороге среди сосен и виноградников ранний автомобиль с железными колёсами везёт водителя в очках, пассажира и фотографа с камерой на треноге; перед машиной на земле сидит осёл, а мужчина в шляпе вскинул руки; вдали бежит семья."
+  caption:
+    pt: O primeiro automóvel de Portugal e o burro, 1895. Ilustração em estilo azulejo, criada por IA.
+    en: Portugal’s first automobile and the donkey, 1895. Azulejo-style illustration, created by AI.
+    ru: Первая машина Португалии и осёл, 1895 год. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-17
+placeholder: false
+ru_ready: true

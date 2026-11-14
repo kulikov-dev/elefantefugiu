@@ -1,0 +1,156 @@
+id: palavras-portuguesas-no-japao-1543
+slug:
+  pt: pao-em-japones
+  en: bread-in-japanese
+  ru: yapontsy-prosyat-khleb-po-portugalski
+title:
+  pt: Pão em japonês
+  en: Bread in Japanese
+  ru: Японцы просят хлеб по-португальски
+epoch: avis-e-descobrimentos
+level: story
+year: 1543
+place:
+  name:
+    pt: Tanegashima, Japão
+    en: Tanegashima, Japan
+    ru: Танэгасима, Япония
+  short:
+    pt: Tanegashima
+    en: Tanegashima
+    ru: Танэгасима
+  lat: 30.6
+  lon: 130.99
+bridge:
+  name: Museu Nacional de Arte Antiga
+  title:
+    pt: Museu Nacional de Arte Antiga
+    en: National Museum of Ancient Art
+    ru: Национальный музей старинного искусства
+  address: Rua das Janelas Verdes, Lisboa
+  lat: 38.7048412
+  lon: -9.1614643
+  maps_url: https://www.google.com/maps/place/Museu+Nacional+de+Arte+Antiga/@38.7048454,-9.1640392,17z/data=!3m1!4b1!4m6!3m5!1s0xd193499628e7b19:0xc932f1ff3fad2b24!8m2!3d38.7048412!4d-9.1614643!16zL20vMGMxeTE1
+  url: https://www.museudearteantiga.pt/
+  note:
+    pt: O museu guarda biombos nanban japoneses do século XVII, com navios e mercadores portugueses.
+    en: The museum holds 17th-century Japanese nanban screens showing Portuguese ships and merchants.
+    ru: В музее хранятся японские ширмы намбан XVII века с португальскими кораблями и купцами.
+threads:
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: No Japão, o pão ainda hoje se diz com uma palavra portuguesa.
+  en: In Japan, bread is still called by a Portuguese word.
+  ru: В Японии хлеб до сих пор называют португальским словом.
+seo:
+  title:
+    pt: Palavras portuguesas no japonês, 1543 | O Elefante Fugiu
+    en: Portuguese Words in Japanese, 1543 | O Elefante Fugiu
+    ru: Португальские слова в японском, 1543 | O Elefante Fugiu
+story:
+  pt: >-
+    Em 1543, uma tempestade levou até à ilha japonesa de Tanegashima um junco chinês onde viajavam mercadores portugueses. Assim os portugueses foram os primeiros europeus a chegar ao Japão, e durante os cem anos seguintes ali fizeram comércio e levaram coisas que os japoneses não conheciam.
+
+
+    Com as coisas vieram as palavras. Os japoneses não faziam pão, por isso adotaram o português «pão», e ficou «pan». A capa de chuva passou a «kappa», e as cartas de jogar a «karuta». Estas palavras continuam vivas no japonês.
+
+
+    Os japoneses chamaram aos visitantes «nanban», «bárbaros do sul», porque os navios chegavam do sul. Os pintores retrataram-nos em grandes biombos: narizes compridos, calções largos, navios enormes.
+  en: >-
+    In 1543, a storm drove a Chinese junk carrying Portuguese merchants to the Japanese island of Tanegashima. That made the Portuguese the first Europeans to reach Japan, and for the next hundred years they traded there and brought things the Japanese had never seen.
+
+
+    Along with the things came the words. The Japanese didn’t bake bread, so they borrowed the Portuguese pão, which became pan. The rain cape, capa, became kappa, and playing cards, cartas, became karuta. These words are still used in Japanese today.
+
+
+    The Japanese called the visitors nanban, “southern barbarians,” because their ships came from the south. Painters showed them on large folding screens: long noses, baggy pants, enormous ships.
+  ru: >-
+    В 1543 году бурей занесло к японскому острову Танэгасима китайскую джонку, на которой плыли португальские купцы. Так португальцы стали первыми европейцами в Японии и следующие сто лет торговали там и привозили вещи, которых японцы не знали.
+
+
+    Вместе с вещами пришли и слова. Хлеба японцы не пекли, поэтому взяли португальское pão, и получилось «пан». Плащ от дождя capa стал «каппой», игральные карты cartas стали «карутой». Эти слова в японском живут до сих пор.
+
+
+    Японцы прозвали гостей «намбан», «южные варвары», потому что корабли приходили с юга. Художники рисовали их на больших складных ширмах: высокие носы, широкие штаны, огромные корабли.
+meanwhile:
+  - scope: world
+    year: 1543
+    text:
+      pt: Copérnico publica o livro em que a Terra gira em torno do Sol.
+      en: Copernicus publishes the book in which the Earth orbits the Sun.
+      ru: Коперник издаёт книгу о том, что Земля вращается вокруг Солнца.
+    source: https://en.wikipedia.org/wiki/De_revolutionibus_orbium_coelestium
+more:
+  pt: >-
+    O mais importante que os portugueses levaram ao Japão não foi o pão, mas a espingarda. Um senhor local comprou aos mercadores de Tanegashima dois arcabuzes e mandou um ferreiro copiá-los. Um ano depois, os artesãos japoneses já os faziam sozinhos, e pouco depois produziam talvez mais do que qualquer país da Europa. No Japão, a arma ficou mesmo conhecida como «tanegashima».
+
+
+    A seguir veio a comida. De Nagasáqui, um porto que cresceu com o comércio português, espalhou-se o bolo «kasutera», do português «bolo de Castela». De onde vem a «tempura», discute-se: uma versão diz que de «tempero», outra que de «têmporas», os dias de jejum em que os católicos comiam peixe e legumes em vez de carne.
+
+
+    Em 1639, os governantes do Japão expulsaram os portugueses e fecharam o país durante quase duzentos anos, por medo dos missionários. Os mercadores partiram, mas as palavras, o bolo e as espingardas ficaram.
+  en: >-
+    The most important thing the Portuguese brought to Japan wasn’t bread but the gun. A local lord bought two matchlocks from the merchants on Tanegashima and had a swordsmith copy them. A year later, Japanese craftsmen were making them on their own, and before long they may have been producing more than any country in Europe. In Japan, the gun was even called a tanegashima.
+
+
+    Food came next. From Nagasaki, a port that grew up around Portuguese trade, came the sponge cake castella, from the Portuguese for “Castile cake.” Where tempura comes from is debated: one theory says tempero, “seasoning,” another says têmporas, the fasting days when Catholics ate fish and vegetables instead of meat.
+
+
+    In 1639, Japan’s rulers expelled the Portuguese and closed the country for almost two hundred years, out of fear of the missionaries. The merchants sailed away, but the words, the cake, and the guns stayed.
+  ru: >-
+    Самым важным, что португальцы привезли в Японию, оказался не хлеб, а ружьё. Местный князь купил у купцов на Танэгасиме два фитильных ружья и велел кузнецу их скопировать. Через год японские мастера уже делали такие ружья сами, а скоро стали выпускать их, возможно, больше, чем любая страна Европы. В Японии ружьё так и называли: «танэгасима».
+
+
+    Следом пришла еда. Из Нагасаки, порта, который вырос на португальской торговле, разошёлся бисквит кастелла: от португальского «пирог из Кастилии». Откуда взялась темпура, спорят: по одной версии, от tempero, приправа, по другой, от têmporas, постных дней, когда католики ели рыбу и овощи вместо мяса.
+
+
+    В 1639 году правители Японии выслали португальцев и закрыли страну почти на двести лет: боялись миссионеров. Купцы уплыли, а слова, бисквит и ружья остались.
+myth:
+  verdict: fact
+  statement:
+    pt: Os japoneses aprenderam a fazer espingardas com os portugueses
+    en: The Japanese learned to make guns from the Portuguese
+    ru: Японцы научились делать ружья у португальцев
+  answer:
+    pt: Em 1543, um senhor de Tanegashima comprou dois arcabuzes aos portugueses e mandou copiá-los. Um ano depois, os japoneses já os faziam sozinhos.
+    en: In 1543, a lord on Tanegashima bought two matchlocks from the Portuguese and had them copied. A year later, Japanese smiths were making them on their own.
+    ru: В 1543 году князь на Танэгасиме купил у португальцев два ружья и велел их скопировать. Через год японцы делали их сами.
+sources:
+  - title: "Wikipedia: List of Japanese words of Portuguese origin"
+    url: https://en.wikipedia.org/wiki/List_of_Japanese_words_of_Portuguese_origin
+    type: reference
+    accessed: 2026-11-14
+  - title: "Wikipedia: Tanegashima (gun)"
+    url: https://en.wikipedia.org/wiki/Tanegashima_(gun)
+    type: reference
+    accessed: 2026-11-14
+  - title: "Wikipedia: Nanban trade"
+    url: https://en.wikipedia.org/wiki/Nanban_trade
+    type: reference
+    accessed: 2026-11-14
+  - title: "Google Arts & Culture, MNAA: Namban folding screens"
+    url: https://artsandculture.google.com/asset/PwG2eWXjZIzdMw
+    type: institutional
+    accessed: 2026-11-14
+image:
+  file: palavras-portuguesas-no-japao-1543.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa praia japonesa com pinheiros, um mercador português de gola de renda e calções largos entrega um pão redondo a um japonês, ao lado uma mulher de quimono com uma criança ao colo; à direita um samurai de armadura pega num arcabuz, e ao fundo ancora uma grande nau, com barcos pequenos e casas de telhado japonês."
+    en: "Blue-and-white azulejo-style illustration: on a Japanese beach with pine trees, a Portuguese merchant in a ruff collar and baggy breeches hands a round loaf of bread to a Japanese man, beside a woman in a kimono holding a child; on the right a samurai in armor holds a matchlock gun, and in the background a large ship lies at anchor, with small boats and Japanese-roofed houses."
+    ru: "Иллюстрация в духе сине-белого азулежу: на японском берегу с соснами португальский купец в кружевном воротнике и широких штанах протягивает круглый хлеб японцу, рядом женщина в кимоно с ребёнком на руках; справа самурай в доспехах держит ружьё, а вдали стоит на якоре большой корабль, плывут лодки и видны дома с японскими крышами."
+  caption:
+    pt: Mercadores portugueses e japoneses na ilha de Tanegashima, 1543. Ilustração em estilo azulejo, criada por IA.
+    en: Portuguese merchants and Japanese on the island of Tanegashima, 1543. Azulejo-style illustration, created by AI.
+    ru: Португальские купцы и японцы на острове Танэгасима, 1543 год. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-19
+placeholder: false
+ru_ready: true
