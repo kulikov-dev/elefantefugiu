@@ -70,4 +70,5 @@ if (warnings.length) {
   console.log('');
   for (const w of warnings) console.log(`WARNING  ${w}`);
 }
-process.exit(strict && warnings.length ? 1 : 0);
+// exitCode, not process.exit(): on Linux a pipe is written asynchronously, and an exit would cut a long table (the test reads it through a pipe).
+process.exitCode = strict && warnings.length ? 1 : 0;
