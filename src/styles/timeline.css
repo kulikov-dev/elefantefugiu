@@ -201,9 +201,23 @@ button.timeline__pick {
   box-shadow: 0 0 0 var(--border-medium) var(--color-surface), 0 0 0 calc(var(--border-medium) * 2) var(--tone);
 }
 
-/* The dots stand half above their line: room above them, so the scrolling strip does not cut them. */
+/* The dots stand half above their line: room above them for the largest one (the chosen epoch: its radius and ring, less the half of the line), so the scrolling
+   strip does not cut them. At the start the first dot, with its ring, stands whole in the strip: --timeline-edge is its radius and ring. */
 .epoch-scale .timeline-wrap {
-  padding-block-start: var(--space-2);
+  --timeline-edge: calc(var(--size-dot-lg) / 2 + var(--border-medium) * 2);
+  padding-block-start: calc(var(--timeline-edge) - var(--border-heavy) / 2);
+  padding-inline-start: var(--timeline-edge);
+  scroll-padding-inline-start: var(--timeline-edge);
+}
+
+/* The first item ("All epochs"): its line starts at the centre of its dot, the dot (either size) is centred on the left edge of the item. */
+.timeline--compact .timeline__item--all {
+  padding-inline-start: var(--space-3);
+}
+
+.timeline--compact .timeline__item--all::before {
+  inset-inline-start: 0;
+  translate: -50% 0;
 }
 
 /* Under the map the strip sits closer to the map than on the home page. */

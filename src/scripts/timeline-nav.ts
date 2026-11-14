@@ -8,8 +8,9 @@ const STRIP_EDGE = 2; // pixels of tolerance for fractional widths
 
 if (strip && prev && next) {
   const items = [...strip.querySelectorAll<HTMLElement>('.timeline__item')];
-  /** Where the left edge of an epoch stands inside the scrolled strip. */
-  const leftOf = (item: HTMLElement) => item.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
+  /** Where the left edge of an epoch stands inside the scrolled strip, counted from the end of the strip's own left padding (room for the first dot and its ring). */
+  const leftOf = (item: HTMLElement) =>
+    item.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft - (parseFloat(getComputedStyle(strip).paddingLeft) || 0);
 
   const update = () => {
     const max = strip.scrollWidth - strip.clientWidth;

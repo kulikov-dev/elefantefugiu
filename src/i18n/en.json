@@ -340,6 +340,7 @@
     "legend_cluster": "several stories together",
     "legend_place": "where it happened (outside Portugal)",
     "legend_here": "you",
+    "legend_color": "color = era",
     "timeline_label": "Eras in order of time",
     "tools_label": "Map view",
     "tt_button": "Through the centuries",

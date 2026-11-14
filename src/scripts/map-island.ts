@@ -209,11 +209,22 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       html: `<span class="mk__shape" aria-hidden="true">${text ? `<span class="mk__num">${text}</span>` : ''}</span><span class="mk__caption" aria-hidden="true"></span><span class="visually-hidden"></span>`,
     });
 
-  const addLayer = (key: string, lat: number, lon: number, cls: string, label: string, text: string, onActivate: () => void) => {
+  /** The colour of an epoch (the token of the strip under the map); a cluster of several epochs has none and stays neutral (map.css). */
+  const toneOf = (epoch: string | undefined) => (epoch ? `var(--tone-${epoch}, var(--epoch-primary))` : '');
+  const clusterTone = (ids: string[]) => {
+    const epochs = new Set(ids.map((id) => byId.get(id)?.epoch));
+    return epochs.size === 1 ? toneOf([...epochs][0]) : '';
+  };
+
+  const addLayer = (key: string, lat: number, lon: number, cls: string, label: string, text: string, onActivate: () => void, tone = '') => {
     const marker = L.marker([lat, lon], { icon: makeIcon(cls, text), keyboard: true, title: '' });
     marker.on('click', onActivate);
     marker.addTo(map);
     const el = marker.getElement()!;
+    if (tone) {
+      el.style.setProperty('--mk-tone', tone);
+      el.style.setProperty('--mk-on', 'var(--color-on-accent)');
+    }
     el.querySelector('.visually-hidden')!.textContent = label;
     el.dataset.key = key;
     // Leaflet turns Enter into a click only for popups; markers also answer Enter and Space (role="button").
@@ -264,14 +275,14 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       if (!layers.has(m.id)) {
         const card = byId.get(m.id)!;
         const kind = m.kind === 'frame' ? cfg.strings.frame : cfg.strings.story;
-        addLayer(m.id, m.lat, m.lon, `mk--${m.kind}`, `${card.title}, ${kind}`, '', () => select(m.id, true));
+        addLayer(m.id, m.lat, m.lon, `mk--${m.kind}`, `${card.title}, ${kind}`, '', () => select(m.id, true), toneOf(card.epoch));
       }
     }
     for (const cl of result.clusters) {
       wanted.add(cl.id);
       if (!layers.has(cl.id)) {
         const label = fill(pickPlural(cfg.strings, 'cluster', cl.count, cfg.pluralLocale), cl.count);
-        addLayer(cl.id, cl.lat, cl.lon, 'mk--cluster', label, String(cl.count), () => openCluster(cl.ids));
+        addLayer(cl.id, cl.lat, cl.lon, 'mk--cluster', label, String(cl.count), () => openCluster(cl.ids), clusterTone(cl.ids));
       }
     }
 
@@ -356,6 +367,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         li.classList.toggle('map__item--selected', id === state.id);
         const mark = document.createElement('span');
         mark.className = 'map__item-mark';
+        mark.style.setProperty('--mk-tone', toneOf(card.epoch));
         mark.setAttribute('aria-hidden', 'true');
         const a = document.createElement('a');
         a.href = card.href;
@@ -401,7 +413,6 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         .map((id) => {
           const li = document.createElement('li');
           li.className = 'map__thread';
-          li.style.setProperty('--thread-color', cfg.threads[id]!.color);
           li.textContent = cfg.threads[id]!.name;
           return li;
         }),
@@ -489,6 +500,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       marker.on('click', () => select(id, true));
       marker.addTo(map);
       const el = marker.getElement()!;
+      el.style.setProperty('--mk-tone', toneOf(card.epoch));
       el.querySelector('.visually-hidden')!.textContent = `${card.title}, ${o.name}`;
       el.querySelector('.mk__caption')!.textContent = o.name;
       el.addEventListener('keydown', (e) => {

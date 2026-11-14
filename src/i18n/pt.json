@@ -340,6 +340,7 @@
     "legend_cluster": "várias histórias juntas",
     "legend_place": "onde aconteceu (fora de Portugal)",
     "legend_here": "a sua posição",
+    "legend_color": "cor = época",
     "timeline_label": "Épocas, pela ordem do tempo",
     "tools_label": "Vista do mapa",
     "tt_button": "Através dos séculos",

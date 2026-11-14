@@ -366,6 +366,7 @@
     "legend_cluster": "несколько историй рядом",
     "legend_place": "где это случилось (за пределами Португалии)",
     "legend_here": "вы",
+    "legend_color": "цвет = эпоха",
     "timeline_label": "Эпохи по порядку",
     "tools_label": "Вид карты",
     "tt_button": "Сквозь века",

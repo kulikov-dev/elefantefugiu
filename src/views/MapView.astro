@@ -58,7 +58,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')),
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>
           {t(lang, 'map.tt_button')}
         </button>
-        <button type="button" class="button map-near" data-locate aria-pressed="false">
+        <button type="button" class="button button--secondary map-near" data-locate aria-pressed="false">
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           {t(lang, 'map.locate')}
         </button>
@@ -71,12 +71,13 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')),
               name={tAll('epoch.filter_all')}
               color="var(--color-ink-muted)"
               filter=""
+              dot={false}
             />
           </li>
           {
             site.visibleThreads.map((thread) => (
               <li>
-                <ThreadChip lang={lang} name={thread.name} color={thread.color} description={thread.description[lang]} filter={thread.id} />
+                <ThreadChip lang={lang} name={thread.name} color={thread.color} description={thread.description[lang]} filter={thread.id} dot={false} />
               </li>
             ))
           }

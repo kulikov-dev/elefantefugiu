@@ -20,9 +20,11 @@ interface Props {
   quiet?: boolean;
   /** What the thread is about (its description): shown as a tooltip. */
   description?: string | undefined;
+  /** The colour dot before the name; the map page leaves it out (its colour is the epoch's). */
+  dot?: boolean;
 }
 
-const { lang, name, color, href, count, filter, quiet = false, description } = Astro.props;
+const { lang, name, color, href, count, filter, quiet = false, description, dot = true } = Astro.props;
 const isButton = filter !== undefined;
 const Tag = isButton ? 'button' : href ? 'a' : 'span';
 const variants = count === undefined ? [] : typeof count === 'number' ? [{ modes: ['off', 'all', '12'], value: count }] : countVariants(count);
@@ -36,7 +38,7 @@ const variants = count === undefined ? [] : typeof count === 'number' ? [{ modes
   aria-pressed={isButton ? 'false' : undefined}
   data-fio={isButton ? filter : undefined}
 >
-  <span class="thread__dot" aria-hidden="true"></span>
+  {dot && <span class="thread__dot" aria-hidden="true"></span>}
   {name[lang]}
   {
     variants.map((variant) => (
