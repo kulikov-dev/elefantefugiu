@@ -68,6 +68,9 @@ jobs:
         run: node scripts/make-games-images.mjs
       - name: Build
         run: npx astro build
+      # The search index (Pagefind) is made after the build: npm run build does it in postbuild, here only astro build runs.
+      - name: Search index
+        run: node scripts/make-search.mjs
       - name: Size of the map sweeps
         env:
           FULL: ${{ inputs.full_map || github.event.schedule == '0 6 1 * *' }}

@@ -1,0 +1,36 @@
+---
+// The page of the search: /pt/pesquisa/, /en/search/, /ru/poisk/. The link of the magnifier when JavaScript is off or has not loaded (with JavaScript
+// the magnifier opens the search over the page, and this page holds the field itself). Not indexed: it is a way, not a page to find in a search.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { EPOCHS_ANCHOR, pagePath, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const title = t(lang, 'pages.search.title');
+---
+<BaseLayout lang={lang} pageKey="search" title={title} noindex>
+  <section class="search-page">
+    <h1>{title}</h1>
+    <div data-search-page hidden></div>
+    <p class="search-page__nojs">{t(lang, 'search.nojs')} <a href={`${pagePath(lang, 'home')}#${EPOCHS_ANCHOR}`}>{t(lang, 'search.nojs_link')}</a></p>
+  </section>
+</BaseLayout>
+
+<script>
+  import '../scripts/search-page';
+</script>
+
+<style>
+  .search-page > * + * {
+    margin-block-start: var(--space-4);
+  }
+
+  /* The text for a reader without JavaScript: with it the field stands in its place (html[data-js] is set before the first paint). */
+  :global(html[data-js]) .search-page__nojs {
+    display: none;
+  }
+</style>

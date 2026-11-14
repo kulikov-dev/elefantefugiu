@@ -1,0 +1,17 @@
+---
+// The magnifier in the header (docs/spec.md "Поиск"). A link to the page of the search, so it works without JavaScript; with JavaScript
+// src/scripts/search-open.ts takes the click and opens the search over the page (the script of the search is read on the first press only).
+import { t } from '../i18n';
+import { pagePath, type Lang } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+  /** The page of the search itself: the link is the current page. */
+  current?: boolean;
+}
+
+const { lang, current = false } = Astro.props;
+---
+<a class="search-button" href={pagePath(lang, 'search')} data-search-open aria-label={t(lang, 'search.open')} aria-haspopup="dialog" aria-expanded="false" aria-current={current ? 'page' : undefined}>
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M16 16l5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+</a>

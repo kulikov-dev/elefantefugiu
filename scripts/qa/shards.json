@@ -44,7 +44,8 @@
   "festas": 15,
   "myths": 25,
   "order": 25,
-  "games": 15
+  "games": 15,
+  "search": 60
  },
  "shards": [
   [
@@ -66,7 +67,8 @@
    "epoch-page",
    "behave",
    "map-tools-variant",
-   "transitions"
+   "transitions",
+   "search"
   ],
   [
    "map-limit",

@@ -74,6 +74,10 @@
     "games": {
       "title": "Jogos",
       "description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos sobre a história de Portugal, e depois de cada resposta a história completa."
+    },
+    "search": {
+      "title": "Pesquisa",
+      "description": "Procure no site uma história, uma cidade ou uma época."
     }
   },
   "footer": {
@@ -536,5 +540,23 @@
   "seo": {
     "story_visit": "Hoje pode visitar o local: {place}.",
     "epoch_title": "{name}: histórias de Portugal"
+  },
+  "search": {
+    "open": "Pesquisar",
+    "label": "Pesquisar no site",
+    "placeholder": "Cidade, época ou palavra",
+    "close": "Fechar a pesquisa",
+    "dialog": "Pesquisa",
+    "hint": "Escreva pelo menos 2 letras.",
+    "loading": "A procurar…",
+    "results_one": "{n} resultado",
+    "results_other": "{n} resultados",
+    "empty": "Nada encontrado. Experimente uma cidade ou uma época.",
+    "empty_list": "Épocas para explorar",
+    "map_one": "Mostrar {n} história · {place} no mapa →",
+    "map_other": "Mostrar {n} histórias · {place} no mapa →",
+    "error": "A pesquisa não está disponível agora. Escolha uma época na página inicial.",
+    "nojs": "A pesquisa precisa de JavaScript. Sem ele, escolha uma época:",
+    "nojs_link": "Ver as épocas"
   }
 }

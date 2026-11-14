@@ -10,10 +10,10 @@
    the second the menu. On wide screens (logo, menu, language and age filter need about 1000 px) everything sits in one row. */
 .site-header__inner {
   display: grid;
-  grid-template-columns: 1fr auto auto auto;
+  grid-template-columns: 1fr auto auto auto auto;
   grid-template-areas:
-    'brand lang theme family'
-    'nav nav nav nav';
+    'brand search lang theme family'
+    'nav nav nav nav nav';
   align-items: center;
   gap: 0 var(--space-2);
   padding-block: var(--space-1);
@@ -25,6 +25,34 @@
 
 .site-header__tools {
   display: contents;
+}
+
+/* The magnifier is the round one too, before the language switch. */
+.site-header__inner .search-button {
+  grid-area: search;
+  justify-self: end;
+}
+
+.search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+}
+
+.search-button:hover,
+.search-button[aria-expanded='true'],
+.search-button[aria-current='page'] {
+  background: var(--color-surface-hover);
+}
+
+.search-button svg {
+  width: var(--size-icon);
+  height: var(--size-icon);
 }
 
 .site-header__inner .lang-switch {
@@ -62,8 +90,13 @@
 }
 
 /* A phone: the first row also holds the language switch, the theme button and the age filter, so the wordmark wraps into two short
-   lines; on the narrowest phones only the head of the elephant stays (the link keeps its name for screen readers). */
+   lines; on narrow phones only the head of the elephant stays (the link keeps its name for screen readers). */
 @media (max-width: 29.99rem) {
+  /* The first row holds the logo and four round buttons: they stand 4 px apart, so that the two-line wordmark still fits on a 390 px phone. */
+  .site-header__inner {
+    column-gap: var(--space-1);
+  }
+
   .brand {
     min-width: 0;
   }
@@ -76,7 +109,8 @@
   }
 }
 
-@media (max-width: 22.49rem) {
+/* The first row has the magnifier too: the two-line wordmark needs about 386 px, so below that only the head of the elephant stays (a third line would make the header taller). */
+@media (max-width: 24.1rem) {
   .brand span {
     display: none;
   }

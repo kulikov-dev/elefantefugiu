@@ -59,6 +59,9 @@ jobs:
         run: node scripts/make-games-images.mjs
       - name: Build
         run: npx astro build
+      # The search index (Pagefind) is made after the build: npm run build does it in postbuild, here only astro build runs.
+      - name: Search index
+        run: node scripts/make-search.mjs
       - name: Browser suites
         run: npm run qa -- listings pages bridge map-basic family-controls service
       - name: Summary

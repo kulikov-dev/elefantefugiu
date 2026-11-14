@@ -4,13 +4,14 @@ import { pickPlural } from '../lib/plural-pick';
 import * as L from 'leaflet';
 // ?url: the file is emitted but NOT linked into pages; it is added below, only when the map starts.
 import leafletCss from 'leaflet/dist/leaflet.css?url';
-import { NEAR_PARAM, parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
+import { NEAR_PARAM, cardsView, parseMapState, passesFilters, serializeMapState, type MapState } from '../lib/map-data';
 import { bridgeDirectionsLink } from '../lib/directions';
 import { distanceParts } from '../lib/distance';
 import { distanceKm } from '../lib/events';
 import { isVisibleInMode } from '../lib/family';
 import { isDarkTheme, tileUrlFor } from '../lib/tiles';
 import { boundsAround, declutterMarkers, inBounds, selectMarkers, type Bounds, type MapCard, type MarkerResult } from '../lib/markers';
+import { placeFromSearch } from '../lib/search';
 import { TT_PARAM, TT_SESSION_KEY, TT_WHOLE, spreadPoints } from '../lib/timetravel';
 import type { Timetravel, TtConfig, TtMapCard } from './timetravel';
 import { currentFamilyMode, onFamilyChange } from './family-mode';
@@ -119,6 +120,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   /** `?era=lisboa` (a place of the chips, or `portugal`) starts "Through the centuries" on arrival; such an address is not for the search engines. */
   const eraParam = pageMode ? new URLSearchParams(location.search).get(TT_PARAM) : null;
   const wantsEra = cfg.tt && eraParam && (eraParam === TT_WHOLE || cfg.tt.chips.some((c) => c.key === eraParam)) ? eraParam : null;
+  /** `?place=sintra` (the key of the place of a story: the line "Show N stories ... on the map" of the search) brings the map to that place on arrival; read once, the address is cleaned by the first writeUrl. */
+  const placeParam = pageMode ? placeFromSearch(location.search) : null;
   const byId = new Map(cfg.cards.map((c) => [c.id, c]));
   // Family mode: cards the mode hides take no part in anything below (markers, the marker limit, "In this area", filters).
   // The list is recomputed when the mode changes.
@@ -841,6 +844,16 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     setMinZoom();
   };
 
+  /** The box around the stories of the place of `?place=` (the family mode counted); false when no story is there. */
+  const fitToPlace = () => {
+    if (!placeParam) return false;
+    const points = cards.filter((c) => cfg.tt?.info[c.id]?.place === placeParam).map((c) => ({ lat: c.lat, lon: c.lon }));
+    if (points.length === 0) return false;
+    map.fitBounds(toLatLngBounds(cardsView(points, 0.15, 0.05)), { animate: false, maxZoom: BEHAVIOUR.fitMaxZoom });
+    writeUrl();
+    return true;
+  };
+
   const firstView = () => {
     setMinZoom();
     const saved = (history.state as { mapView?: { lat: number; lon: number; zoom: number } } | null)?.mapView;
@@ -848,7 +861,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     if (pageMode && saved) map.setView([saved.lat, saved.lon], saved.zoom, { animate: false });
     else if (target) map.setView([target.lat, target.lon], BEHAVIOUR.cardZoom, { animate: false });
     else if (state.fio || state.epoca) fitToFilter();
-    else fitFirstView();
+    else if (!fitToPlace()) fitFirstView();
     if (target) openPreview(target, false);
     syncChips();
     root.dataset.state = 'ready';

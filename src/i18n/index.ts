@@ -24,6 +24,16 @@ const pluralRules: Record<Lang, Intl.PluralRules> = {
   ru: new Intl.PluralRules(LOCALES.ru),
 };
 
+/** The strings under a key of the dictionary, flat (`search` gives `{ open: ..., results_one: ... }`): what a script gets as JSON. */
+export function section(lang: Lang, key: string): Record<string, string> {
+  let node: unknown = dictionaries[lang];
+  for (const part of key.split('.')) {
+    node = typeof node === 'object' && node !== null ? (node as Record<string, unknown>)[part] : undefined;
+  }
+  if (typeof node !== 'object' || node === null) throw new Error(`Missing i18n section "${key}" for language "${lang}"`);
+  return Object.fromEntries(Object.entries(node).filter(([, v]) => typeof v === 'string')) as Record<string, string>;
+}
+
 /** True when the key exists (a string) in the language. */
 export function has(lang: Lang, key: string): boolean {
   let node: unknown = dictionaries[lang];

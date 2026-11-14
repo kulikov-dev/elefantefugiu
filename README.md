@@ -26,7 +26,8 @@ The dev server runs at http://localhost:4321/. Open `/pt/` or `/en/`.
 | ------ | ------------ |
 | `npm run dev` | Astro dev server at http://localhost:4321/ |
 | `npm run build` | Full build: i18n key check, unit tests, data check, Astro build, then `postbuild` |
-| `npm run postbuild` | Runs by itself after `build`: internal links and anchors, card pages, epoch and thread pages, page weight |
+| `npm run postbuild` | Runs by itself after `build`: the search index (Pagefind), then internal links and anchors, card pages, epoch and thread pages, page weight |
+| `npm run make:search` | The search index only (`dist/pagefind/`, `scripts/make-search.mjs`); needs a finished `astro build`. `npm run dev` has no index: search says it is unavailable there, use `build` and `preview` |
 | `npm run preview` | Serves `dist/` locally |
 | `npm run check` | `astro check` (types, Astro files) |
 | `npm run check:data` | Validates `src/content/*.yaml` and prints a data summary (errors fail, warnings do not) |

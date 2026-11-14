@@ -3,6 +3,7 @@ import Logo from './Logo.astro';
 import LanguageSwitch from './LanguageSwitch.astro';
 import FamilyToggle from './FamilyToggle.astro';
 import ThemeButton from './ThemeButton.astro';
+import SearchButton from './SearchButton.astro';
 import { EPOCHS_ANCHOR, pagePath, type Lang, type PageKey } from '../i18n/routes';
 import { t } from '../i18n';
 
@@ -46,6 +47,7 @@ const items = [
       </ul>
     </nav>
     <div class="site-header__tools">
+      <SearchButton lang={lang} current={pageKey === 'search'} />
       <LanguageSwitch lang={lang} pageKey={pageKey} alternates={alternates} activeLangs={activeLangs} />
       <ThemeButton lang={lang} />
       <FamilyToggle lang={lang} />

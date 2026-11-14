@@ -3,7 +3,7 @@
 //  - the QR pages (/p/...), the 404 page and the language chooser at the root are not in it;
 //  - every hreflang alternate of an entry is itself an entry (the sitemap does not point to a page it leaves out);
 //  - every indexable page, Russian ones included, declares hreflang pt, en, ru and x-default.
-// Pages with noindex are left out on purpose: the report form and "Surprise me" always, the page of a holiday outside its window, and a page with a test text or a
+// Pages with noindex are left out on purpose: the report form, "Surprise me" and the page of the search always, the page of a holiday outside its window, and a page with a test text or a
 // placeholder while there is one. The latter are listed as a NOTE, because they are what keeps a page out of the search index.
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -13,7 +13,7 @@ const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const walk = (dir) => readdirSync(dir).flatMap((n) => (statSync(join(dir, n)).isDirectory() ? walk(join(dir, n)) : [join(dir, n)]));
 // The page of a holiday (in each language that has its text) is noindex outside its window; in the window it is a page like the others (src/views/FestaView.astro).
 const FESTA_PAGE = /^(pt|en|ru)\/festa\/[^/]+\/index\.html$/;
-const ALWAYS_NOINDEX = /^(pt\/corrigir|en\/report|ru\/oshibka|pt\/surpreende-me|en\/surprise-me|ru\/udivi-menya)\/index\.html$/;
+const ALWAYS_NOINDEX = /^(pt\/corrigir|en\/report|ru\/oshibka|pt\/surpreende-me|en\/surprise-me|ru\/udivi-menya|pt\/pesquisa|en\/search|ru\/poisk)\/index\.html$/;
 // One card of "Myth or fact" (/ru/mif-ili-pravda/<id>/): the same page as the page of all of them, out of the search so that only the page of all of them is found.
 const MYTH_CARD = /^(pt\/mito-ou-verdade|en\/myth-or-fact|ru\/mif-ili-pravda)\/[^/]+\/index\.html$/;
 

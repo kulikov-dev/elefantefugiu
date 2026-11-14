@@ -28,6 +28,7 @@ export const SUITES = [
   { name: 'epoch-page', script: 'epochpage.mjs', about: 'epoch page: years on the scale, equal compact cards, view switch from 9 stories, active card, more eras list' },
   { name: 'map-tools', script: 'mapnear.mjs', args: ['tools', 'near', 'list', 'world', 'scale'], about: 'map page: Near me, list with hooks and distances, Whole world and the overseas plate, markers and legend, epoch scale' },
   { name: 'map-tools-variant', script: 'mapnear.mjs', args: ['variant', 'markers'], variant: true, about: 'marker styles and the legend: a cluster needs more cards than the marker limit (fixture build, limit 7)' },
+  { name: 'search', script: 'search.mjs', about: 'search: magnifier, bar (1280) and sheet (390), Esc and focus, keys, queries in pt/en/ru, empty result, map line and ?place, family mode, events, page without JS, nothing read before opening' },
   { name: 'service', script: 'service.mjs', about: 'service pages: texts, the mistake form (from a story, thank-you screen), the form "Know a story?", 404 in every language' },
   { name: 'mascot', script: 'mascot.mjs', args: ['logo', 'notfound', 'pager', 'empty', 'dark', 'motion'], about: 'elephant mascot: logo, 404, walking by the pager, empty states, dark halo, reduced motion' },
   { name: 'mascot-variant', script: 'mascot.mjs', args: ['regime'], variant: true, about: 'no elephant on the pages of the regime epoch (fixture build)' },

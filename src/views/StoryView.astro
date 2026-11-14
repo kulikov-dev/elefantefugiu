@@ -39,6 +39,7 @@ import { cardPicture } from '../lib/pictures';
 import { DEFAULT_PREVIEW, ogImagePath } from '../lib/og';
 import { moreParagraphs, storyParagraphs } from '../lib/paragraphs';
 import { storyNodes } from '../lib/schema';
+import { searchAttrs } from '../lib/search-index';
 import { schemaContext } from '../lib/schema-site';
 import { withBase } from '../i18n/routes';
 
@@ -157,6 +158,11 @@ const eventThreads = event.threads.map((id) => site.threads.find((th) => th.id =
 // Placeholder text is Latin filler: mark it, so screen readers do not read it as Portuguese.
 const textLang = textLangOf(event, lang);
 const standIn = isRuStandIn(event, lang);
+// The search index (Pagefind, scripts/make-search.mjs) takes the hook, the story and "More" of a page that search engines may take too, with the metadata the results show.
+const indexed = !event.placeholder && !standIn;
+const pf = indexed ? { 'data-pagefind-body': '' } : {};
+// The title, the year and the place weigh more than the text: a query that names a place finds its stories first.
+const pfWeight = (weight: number) => (indexed ? { 'data-pagefind-body': '', 'data-pagefind-weight': String(weight) } : {});
 // "Meanwhile": the line of the page's language, then the world; none on a heavy story. A Russian line is hidden on a card that is shown in English under /ru/ (stand-in).
 // A line of the same year as a story from tens of thousands of years ago or more (the prologue) wears the caption of the story ("about 150 million years ago"), not a year number.
 const ancient = yearRange(event)[0] <= -10000;
@@ -177,7 +183,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
   stand_in={standIn}
   epoch={epoch.id}
 >
-  <article class="card" data-flash={isFlashMoment(event) ? '' : undefined} data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
+  <article class="card" {...(indexed ? searchAttrs(event, lang) : {})} data-flash={isFlashMoment(event) ? '' : undefined} data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
     <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
       <ol>
         <li>{epochLink ? <a href={epochLink}>{epoch.name[lang]}</a> : <span class="crumbs__text">{epoch.name[lang]}</span>}</li>
@@ -189,8 +195,8 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     {event.placeholder && <PlaceholderNotice lang={lang} />}
 
     <header class="card__header">
-      <h1>{title}</h1>
-      <p class="card__meta">
+      <h1 {...pfWeight(10)}>{title}</h1>
+      <p class="card__meta" {...pfWeight(6)}>
         <span>{formatYear(event, lang)}</span>
         <span aria-hidden="true"> &middot; </span>
         <span>{event.place.name[lang]}</span>
@@ -233,7 +239,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
     <div class="gated card__rest">
 
-    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id}>
+    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id} indexed={indexed}>
       <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
       <Fragment slot="story">{storyParagraphs(event.story[lang]).map((paragraph) => <p>{paragraph}</p>)}</Fragment>
       <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
@@ -269,7 +275,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       <Fragment slot="more">
         <section aria-labelledby="context-title">
           <h2 id="context-title">{t(lang, 'card.context')}</h2>
-          <div class="prose" lang={textLang}>
+          <div class="prose" lang={textLang} {...pf}>
             {moreParagraphs(event.more[lang]).map((paragraph) => <p>{paragraph}</p>)}
           </div>
         </section>

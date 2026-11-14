@@ -123,6 +123,9 @@
   --z-map-overlay: 1100; /* above Leaflet's own controls (1000) */
   --z-header: 1200; /* the header makes its own stacking context (view-transition-name): above every layer of a page, Leaflet and map overlays included */
   --z-tabbar: 1150; /* the bottom tab bar of a phone: above the content and the map sheet (1100), below the header with its menus (1200) */
+  --z-search: 1300; /* the full-screen search of a phone: above the header (1200) and the tab bar (1150) */
+  --search-bar-width: 34rem; /* the results that drop under the header from 768 px */
+  --search-bar-height: 70vh;
   --tabbar-height: 3.5rem; /* without the safe area under it */
 
   /* Touch targets */

@@ -1,0 +1,306 @@
+/* The search (src/scripts/search-ui.ts, read on the first press of the magnifier). Three layouts:
+   bar    from 48 rem: the field stands in the header in place of the menu, the results drop under the header, at the right;
+   sheet  a phone: a full-screen sheet, the field on top, the results under it;
+   page   the page of the search: the field and the results in the page. */
+
+.search__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.search__field {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+  min-height: var(--touch-target);
+  padding-inline: var(--space-4);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.search__field:focus-within {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.search__field svg {
+  flex: none;
+  width: var(--size-icon);
+  height: var(--size-icon);
+  color: var(--color-ink-muted);
+}
+
+.search__input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--touch-target);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  appearance: none;
+}
+
+.search__input:focus-visible {
+  outline: none;
+}
+
+.search__input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search__input::placeholder {
+  color: var(--color-ink-muted);
+  opacity: 1;
+}
+
+.search__close {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.search__close:hover {
+  background: var(--color-surface-hover);
+}
+
+.search__close svg {
+  width: var(--size-icon);
+  height: var(--size-icon);
+}
+
+/* ---- the results ---- */
+
+.search__results {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* The count is for a screen reader only; "type 2 letters", "searching" and the error are shown too. */
+.search__status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.search__status--shown {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: var(--space-3) var(--space-4);
+  clip-path: none;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  white-space: normal;
+}
+
+.search__map {
+  display: block;
+  min-height: var(--touch-target);
+  padding: var(--space-3) var(--space-4);
+  border-block-end: 1px solid var(--color-line);
+  background: var(--color-accent-tint);
+  color: var(--color-accent-strong);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.search__map:hover {
+  text-decoration: underline;
+}
+
+.search__list,
+.search__empty-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A result looks like a line of "In this area" of the map: the round mark in the colour of the epoch, the title, the hook, the year and the place. */
+.search__item {
+  display: grid;
+  grid-template-columns: var(--map-marker-cluster) minmax(0, 1fr);
+  align-items: center;
+  border-block-start: 1px solid var(--color-line);
+}
+
+.search__item:first-child {
+  border-block-start: 0;
+}
+
+.search__mark {
+  justify-self: center;
+  width: var(--size-dot);
+  height: var(--size-dot);
+  border: var(--border-medium) solid var(--tone, var(--color-accent));
+  border-radius: 50%;
+  background: var(--color-surface);
+}
+
+.search__item a {
+  display: block;
+  min-height: var(--touch-target);
+  padding-block: var(--space-2);
+  padding-inline-end: var(--space-4);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.search__item a:hover .search__title {
+  text-decoration: underline;
+}
+
+.search__title {
+  display: block;
+  font-weight: 600;
+}
+
+/* The hook is the reason to press: two lines on a phone and on the page, one in the bar (cut with an ellipsis). */
+.search__hook {
+  display: -webkit-box;
+  overflow: hidden;
+  font-style: italic;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+[data-layout='bar'] .search__hook {
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.search__meta {
+  display: block;
+  color: var(--color-ink-muted);
+  font-size: var(--text-xs);
+}
+
+/* The word of the query: bold and underlined in the colour of the epoch, no background. */
+.search mark {
+  background: none;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--tone, var(--color-accent));
+  text-decoration-thickness: var(--border-medium);
+  text-underline-offset: var(--underline-offset);
+}
+
+.search__empty {
+  padding: var(--space-5) var(--space-4);
+}
+
+.search__empty-text {
+  margin: 0 0 var(--space-3);
+  font-weight: 600;
+}
+
+.search__empty-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.search__empty-list a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--touch-target);
+  color: var(--color-ink);
+}
+
+.search__empty-list .search__mark {
+  flex: none;
+}
+
+.search__surprise {
+  font-weight: 600;
+}
+
+/* ---- bar: from 48 rem, in the header ---- */
+
+[data-layout='bar'] {
+  grid-area: nav;
+  flex: 1;
+  min-width: 0;
+}
+
+.site-header__inner:has([data-layout='bar']) .site-nav {
+  display: none;
+}
+
+[data-layout='bar'] .search__results {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-end: max(var(--space-4), calc((100% - var(--container)) / 2 + var(--space-4)));
+  z-index: 1;
+  width: min(var(--search-bar-width), calc(100% - 2 * var(--space-4)));
+  max-height: var(--search-bar-height);
+  margin-block-start: var(--space-1);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-raised);
+}
+
+@media (min-width: 64rem) {
+  [data-layout='bar'] {
+    margin-inline: var(--space-4);
+  }
+}
+
+/* ---- sheet: a phone, the whole screen ---- */
+
+[data-layout='sheet'] {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-search);
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+[data-layout='sheet'] .search__bar {
+  padding: var(--space-3);
+  border-block-end: 1px solid var(--color-line);
+}
+
+[data-layout='sheet'] .search__results {
+  flex: 1;
+  padding-block-end: env(safe-area-inset-bottom);
+}
+
+/* ---- page: the page of the search ---- */
+
+[data-layout='page'] .search__results {
+  margin-block-start: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.search__results[hidden] {
+  display: none;
+}

@@ -57,6 +57,8 @@ jobs:
       # data checks, the tests, the build and then every postbuild check (sitemap, previews, links, cards, listings, weight, tokens,
       # ru, mascot, published, email, https, schema). If anything fails here, the deploy job does not run.
       # The browser suites are in qa-smoke.yml (every push and pull request) and qa-full.yml (weekly and by hand).
+      # The search index (Pagefind, scripts/make-search.mjs) is made by postbuild after astro build, so it is part of the same npm run build: a page that asks for it
+      # (data-pagefind-body) and is missing from the index fails the build, and the index never holds a page that the build does not have.
       # The preview cards of the stories (scripts/make-og.mjs): a card is drawn again only when its picture, pattern, colours, name or the drawing changed.
       # The name of the cache is made of what the cards are drawn from; with no exact hit the nearest older cache is restored and only the changed cards are drawn.
       - name: Cache of the preview cards
