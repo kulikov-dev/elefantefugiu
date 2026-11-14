@@ -2,7 +2,7 @@
 // and the plate for stories overseas, the marker style and legend, the epoch scale under the map.
 // Run against dist/ served by serve.mjs (base path "/"):   node mapnear.mjs [tools near list world markers scale]
 import { launchBrowser } from './browser.mjs';
-import { epochs, fixture, isInPortugal, overseasOf, real, threads } from './data.mjs';
+import { epochPath, epochs, fixture, isInPortugal, overseasOf, real, threads } from './data.mjs';
 
 // `variant` runs against the fixture build (more cards than its marker limit of 7, so clusters exist); the rest runs on the real site.
 const VARIANT = process.argv[2] === 'variant';
@@ -172,26 +172,35 @@ if (want('world')) {
 // ---------- 5. Markers and legend ----------
 if (want('markers')) {
   const page = await open(MAP.pt);
-  const m = await page.evaluate(() => {
-    const frame = document.querySelector('.mk--frame .mk__shape');
-    const cluster = document.querySelector('.mk--cluster .mk__shape');
+  const probe = () => {
     const cs = (el) => getComputedStyle(el);
+    // The colour a token gives, as the browser resolves it (a probe, so light-dark() and fallbacks count).
+    const resolve = (value) => { const el = document.body.appendChild(document.createElement('span')); el.style.color = value; const c = cs(el).color; el.remove(); return c; };
+    const frame = document.querySelector('.mk--frame .mk__shape');
     return {
-      frameBg: cs(frame).backgroundColor,
-      clusterBg: cs(cluster).backgroundColor,
-      frameRot: cs(frame).rotate,
-      clusterRot: cs(cluster).rotate,
-      frameW: frame.getBoundingClientRect().width,
-      clusterW: cluster.getBoundingClientRect().width,
-      num: document.querySelector('.mk--cluster .mk__num')?.textContent,
+      frameRot: frame ? cs(frame).rotate : null,
+      frameW: frame ? frame.getBoundingClientRect().width : 0,
+      clusters: [...document.querySelectorAll('.mk--cluster')].map((el) => {
+        const shape = el.querySelector('.mk__shape');
+        const tone = el.style.getPropertyValue('--mk-tone');
+        return { tone: tone || null, bg: cs(shape).backgroundColor, rot: cs(shape).rotate, w: shape.getBoundingClientRect().width, num: el.querySelector('.mk__num')?.textContent, expected: resolve(tone || 'var(--color-border-strong)') };
+      }),
       legend: [...document.querySelectorAll('.map__legend li')].filter((li) => !li.hidden).map((li) => li.textContent.trim()),
     };
-  });
-  ok('markers: a cluster is the same diamond as a main event (same colour, turned 45 degrees), larger, with its number inside', m.frameBg === m.clusterBg && m.frameRot === m.clusterRot && m.clusterRot !== 'none' && m.clusterW > m.frameW && /^\d+$/.test(m.num ?? ''), JSON.stringify(m));
-  ok('markers: the legend under the map has four entries (the diamond, the circle, the cluster, the place abroad); "you" only after Near me', m.legend.length === 4, m.legend.join(' | '));
+  };
+  const m = await page.evaluate(probe);
+  const shapeOk = (c) => c.rot === m.frameRot && c.rot !== 'none' && c.w > m.frameW && /^\d+$/.test(c.num ?? '');
+  ok('markers: a cluster is the same diamond as a main event (turned 45 degrees), larger, with its number inside', m.clusters.length > 0 && m.clusters.every(shapeOk), JSON.stringify(m.clusters));
+  ok('markers: a cluster of several epochs (the map of all epochs) is the muted neutral', m.clusters.length > 0 && m.clusters.every((c) => !c.tone && c.bg === c.expected), JSON.stringify(m.clusters));
+  ok('markers: the legend under the map has five entries (the diamond, the circle, the cluster, the place abroad, the colour = epoch); "you" only after Near me', m.legend.length === 5, m.legend.join(' | '));
   await page.close();
-  const epoch = await open('/pt/epoca/avis-e-descobrimentos/');
+  // The map of one epoch holds stories of that epoch only: a cluster there is of one epoch and has its colour (the epoch with most stories, so there is a cluster).
+  const biggest = world.readyEpochs.reduce((a, e) => (world.inEpoch(e.id).length > world.inEpoch(a.id).length ? e : a));
+  const epoch = await open(epochPath(biggest));
+  await epoch.waitForSelector('.mk--cluster', { timeout: 20000 });
   ok('markers: the epoch page shows the same legend under its map', (await epoch.$$('.map__legend li')).length >= 3);
+  const own = await epoch.evaluate(probe);
+  ok('markers: a cluster of one epoch (the map of an epoch) has the colour of that epoch', own.clusters.length > 0 && own.clusters.every((c) => c.tone && c.bg === c.expected && shapeOk(c)), `need an epoch with more stories than the marker limit; ${JSON.stringify(own.clusters)}`);
   await epoch.close();
 }
 

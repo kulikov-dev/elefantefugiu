@@ -1,6 +1,6 @@
-# The main browser suites of scripts/qa on every push to main and on every pull request: a few minutes, no variant build.
+# The main browser suites of scripts/qa on every push to main and on every pull request: a few minutes; the variant build is made only for map-tools-variant (a few seconds).
 # The list covers: home, epoch and thread pages (listings), the static pages, the Continue button and the QR address (pages), a story page
-# with its "Bridge to today" block (bridge), the map (map-basic), the age button (family-controls), the service pages and the 404 page in every
+# with its "Bridge to today" block (bridge), the map (map-basic), the markers and the legend (map-tools-variant), Through the centuries (timetravel), the age button (family-controls), the service pages and the 404 page in every
 # language (service). The full set (all suites of scripts/qa/suites.mjs, the variant build, the mascot) is qa-full.yml.
 name: QA smoke
 
@@ -60,14 +60,14 @@ jobs:
       - name: Build
         run: npx astro build
       - name: Browser suites
-        run: npm run qa -- listings pages bridge map-basic family-controls service
+        run: npm run qa -- listings pages bridge map-basic map-tools-variant timetravel family-controls service
       - name: Summary
         if: always()
         run: |
           {
             echo '### QA smoke'
             echo '```'
-            node scripts/qa/run.mjs --report listings pages bridge map-basic family-controls service
+            node scripts/qa/run.mjs --report listings pages bridge map-basic map-tools-variant timetravel family-controls service
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Logs of the suites
