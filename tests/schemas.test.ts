@@ -54,25 +54,31 @@ test('epochSchema: a typo in a field name is an error (strict)', () => {
 import { armyDotsData, shipScaleData } from '../src/data/schemas';
 
 const tx = { pt: 'a', en: 'b' };
-const dotsGroup = { id: 'g', label: tx, min: 1, max: 2, unit_per_dot: 1, tone: 'blue', note: tx };
-const dots = { groups: [dotsGroup, { ...dotsGroup, id: 'h', tone: 'red' }], caption: tx, estimate_note: tx };
+const dotsGroup = { id: 'g', label: tx, ratio_label: tx, min: 1, max: 2, unit_per_dot: 1, note: tx };
+const dots = { groups: [dotsGroup, { ...dotsGroup, id: 'h' }], estimate_note: tx };
 
-test('army_dots: a valid record, with the optional test-numbers mark', () => {
+test('army_dots: a valid record, with the optional title, `solid` and the test-numbers mark', () => {
   assert.equal(armyDotsData.safeParse(dots).success, true);
   assert.equal(armyDotsData.safeParse({ ...dots, placeholder: true }).success, true);
+  assert.equal(armyDotsData.safeParse({ ...dots, title: tx }).success, true);
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [{ ...dotsGroup, solid: 1 }, { ...dotsGroup, id: 'h' }] }).success, true);
 });
 
-test('army_dots: needs two groups, a known tone, both languages and the estimate note', () => {
+test('army_dots: exactly two groups, both languages, the ratio name and the estimate note', () => {
   assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup] }).success, false);
-  assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...dotsGroup, id: 'h', tone: 'pink' }] }).success, false);
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...dotsGroup, id: 'h' }, { ...dotsGroup, id: 'i' }] }).success, false);
   assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...dotsGroup, id: 'h', label: { pt: 'a' } }] }).success, false);
+  const { ratio_label: _r, ...noRatio } = dotsGroup;
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...noRatio, id: 'h' }] }).success, false);
   const { estimate_note: _drop, ...noNote } = dots;
   assert.equal(armyDotsData.safeParse(noNote).success, false);
   assert.equal(armyDotsData.safeParse({ ...dots, groups: [dotsGroup, { ...dotsGroup, id: 'h', unit_per_dot: 0 }] }).success, false);
 });
 
-test('army_dots: a typo in a field name is an error (strict)', () => {
+test('army_dots: a typo in a field name is an error (strict); the old `tone`, `caption` and a third row are gone', () => {
   assert.equal(armyDotsData.safeParse({ ...dots, captoin: tx }).success, false);
+  assert.equal(armyDotsData.safeParse({ ...dots, caption: tx }).success, false);
+  assert.equal(armyDotsData.safeParse({ ...dots, groups: [{ ...dotsGroup, tone: 'blue' }, { ...dotsGroup, id: 'h' }] }).success, false);
 });
 
 const items = [{ id: 'a', label: tx, length_m: 25, tone: 'ochre' }, { id: 'b', label: tx, length_m: 200, height_m: 50, tone: 'grey' }];

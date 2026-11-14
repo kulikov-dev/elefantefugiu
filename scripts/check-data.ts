@@ -340,17 +340,20 @@ for (const { item: ev, file, stem } of events) {
         if (isTodo(value[lang] ?? "")) report('error', file, `text is empty or TODO (the interactive needs both languages)`, at(path), lang);
       }
     };
-    both(data.caption, 'caption');
+    if ('caption' in data) both(data.caption, 'caption');
     if (ev.interactive.type === 'army_dots') {
       both(ev.interactive.data.estimate_note, 'estimate_note');
+      if (ev.interactive.data.title) both(ev.interactive.data.title, 'title');
       const unit = ev.interactive.data.groups[0]?.unit_per_dot;
       ev.interactive.data.groups.forEach((g, i) => {
         both(g.label, `groups[${i}].label`);
+        both(g.ratio_label, `groups[${i}].ratio_label`);
         both(g.note, `groups[${i}].note`);
         if (g.max < g.min) report('error', file, `group "${g.id}": max (${g.max}) is below min (${g.min})`, at(`groups[${i}].max`));
         if (g.unit_per_dot !== unit) report('error', file, `group "${g.id}": unit_per_dot ${g.unit_per_dot} differs from the first group (${unit}); the groups must share one scale`, at(`groups[${i}].unit_per_dot`));
-        if (Math.ceil(g.max / g.unit_per_dot) > 400) report('error', file, `group "${g.id}": ${Math.ceil(g.max / g.unit_per_dot)} dots is too many to draw (at most 400); raise unit_per_dot`, at(`groups[${i}].unit_per_dot`));
-        if (g.max / g.unit_per_dot < 1) report('error', file, `group "${g.id}": less than one dot; lower unit_per_dot`, at(`groups[${i}].unit_per_dot`));
+        if (g.solid !== undefined && g.solid > g.min) report('error', file, `group "${g.id}": solid (${g.solid}) is above min (${g.min})`, at(`groups[${i}].solid`));
+        if (Math.ceil(g.min / g.unit_per_dot) > 400) report('error', file, `group "${g.id}": ${Math.ceil(g.min / g.unit_per_dot)} dots is too many to draw (at most 400); raise unit_per_dot`, at(`groups[${i}].unit_per_dot`));
+        if (g.min / g.unit_per_dot < 1) report('error', file, `group "${g.id}": less than one dot; lower unit_per_dot`, at(`groups[${i}].unit_per_dot`));
       });
       if (new Set(ev.interactive.data.groups.map((g) => g.id)).size !== ev.interactive.data.groups.length) report('error', file, 'two groups share an id', at('groups'));
     } else {

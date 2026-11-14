@@ -1,6 +1,6 @@
-// Browser checks for stage 7a: the interactives "1 against 5" (ArmyDots) and "Size of the nau" (ShipScale).
+// Browser checks for the interactives "1 against 5" (ArmyDots: two groups of dots, static, no script) and "Size of the nau" (ShipScale).
 // Run against dist/ served by serve.mjs (base path "/"):   node interactives.mjs [variant] [keyboard text color motion nojs code modes family]
-// The cards come from src/content (data.mjs). The real site has one interactive, the dots of Aljubarrota ("1 against 5"); the ships
+// The cards come from src/content (data.mjs). The real site has the dots (Aljubarrota, Malacca; the first card with them is checked); the ships
 // ("Size of the nau") have no real card yet, so their checks run on the fixture build (`variant`, variant-plan.mjs: a fixture card
 // carries a ship scale). The expected numbers are read from the card data.
 import { launchBrowser } from './browser.mjs';
@@ -16,17 +16,19 @@ const dotsCard = need('a card with the dots interactive', () => world.published.
 // Ships: only where a card has the ship scale (the fixture build); null on the real site.
 const shipCard = world.published.find((e) => e.interactive?.type === 'ship_scale') ?? null;
 if (VARIANT && !shipCard) throw new Error('The fixture build must carry a card with a ship scale (variant-plan.mjs).');
-// The ratio sentence compares the group with the largest middle of the estimate with the one with the smallest.
+// The ratio sentence compares the group with the largest middle of the estimate with the one with the smallest; the number is a whole
+// number up to 10 and a multiple of 5 (rounded down) above it (roundRatio in src/lib/viz.ts).
 const ratioGroups = (d) => {
   const mid = (g) => (g.min + g.max) / 2;
   const sorted = [...d.groups].sort((a, b) => mid(a) - mid(b));
   return [sorted.at(-1), sorted[0]];
 };
+const roundRatio = (r) => (r > 10 ? Math.max(10, Math.floor(r / 5) * 5) : Math.max(1, Math.round(r)));
 const plainCard = need('a card without an interactive', () => world.published.find((e) => !e.interactive && e.min_age === 'all' && !e.sensitive));
 const SEG = { pt: 'historia', en: 'story' };
 const url = (b, lang, e, hash = '#detalhes') => `${b}/${lang}/${SEG[lang]}/${e.slug[lang]}/${hash}`;
-// Same call as formatNumber in src/lib/viz.ts (useGrouping: true gives "1 000" in Portuguese too).
-const nf = (n, lang) => new Intl.NumberFormat(lang === 'pt' ? 'pt-PT' : 'en', { maximumFractionDigits: 1, useGrouping: true }).format(n);
+// Same call as formatNumber in src/lib/viz.ts (always grouped: "1 000" in Portuguese too).
+const nf = (n, lang) => new Intl.NumberFormat(lang === 'pt' ? 'pt-PT' : 'en', { maximumFractionDigits: 1, useGrouping: 'always' }).format(n);
 const norm = (s) => String(s).replace(/[\s\u00a0\u202f]+/g, ' ').trim();
 
 let failed = 0;
@@ -76,24 +78,9 @@ if (want('keyboard')) {
   for (const lang of ['pt', 'en']) {
     const page = await newPage();
     await page.goto(url(base, lang, dotsCard), { waitUntil: 'load' });
-    const reached = await tabTo(page, '[data-viz-play]');
-    ok(`dots (${lang}): the "Show one by one" button is reached with Tab`, reached);
-    if (reached) {
-      const o = await outline(page);
-      ok(`dots (${lang}): the focused button has a visible outline`, o.style !== 'none' && o.width >= 2, JSON.stringify(o));
-      await page.keyboard.press('Enter');
-      await wait(150);
-      const during = await page.evaluate(() => ({ waiting: document.querySelectorAll('.dot--waiting').length, disabled: document.querySelector('[data-viz-play]').disabled }));
-      ok(`dots (${lang}): Enter starts the animation (dots wait, button is busy)`, during.waiting > 0 && during.disabled, JSON.stringify(during));
-      await page.waitForFunction(() => document.querySelectorAll('.dot--waiting').length === 0 && !document.querySelector('[data-viz-play]').disabled, { timeout: 8000 });
-      const label = await page.evaluate(() => document.querySelector('[data-viz-play]').textContent);
-      ok(`dots (${lang}): all dots are shown again, the button is back and keeps focus`, (await page.evaluate(() => document.activeElement?.matches('[data-viz-play]'))) && label.length > 0, label);
-      // Space works too
-      await page.keyboard.press('Space');
-      await wait(150);
-      ok(`dots (${lang}): Space starts it too`, (await page.evaluate(() => document.querySelectorAll('.dot--waiting').length)) > 0);
-      await page.waitForFunction(() => document.querySelectorAll('.dot--waiting').length === 0, { timeout: 8000 });
-    }
+    // The dots are a still picture: nothing inside the block is a control or takes focus (no button, no link, no tab stop).
+    const stops = await page.evaluate(() => document.querySelectorAll('.viz a, .viz button, .viz input, .viz [tabindex], .viz [data-viz-play]').length);
+    ok(`dots (${lang}): nothing in the block takes focus (no button, no tab stop)`, stops === 0, String(stops));
     ok(`dots (${lang}): no script errors`, page.errors.length === 0, page.errors.join('; '));
     await page.close();
 
@@ -131,33 +118,33 @@ if (want('text')) {
     await page.goto(url(base, lang, dotsCard), { waitUntil: 'load' });
     const d = dotsCard.interactive.data;
     const got = await page.evaluate(() => ({
-      title: document.querySelector('#viz-svg-title').textContent,
-      desc: document.querySelector('#viz-svg-desc').textContent,
-      role: document.querySelector('.viz__svg').getAttribute('role'),
-      labelledby: document.querySelector('.viz__svg').getAttribute('aria-labelledby'),
-      rows: [...document.querySelectorAll('.viz__table tbody tr')].map((tr) => ({ id: tr.dataset.group, min: Number(tr.dataset.min), max: Number(tr.dataset.max), cells: [...tr.children].map((c) => c.textContent.replace(/\s+/g, ' ').trim()) })),
-      dots: [...document.querySelectorAll('.viz__svg g[data-group]')].map((g) => ({ id: g.dataset.group, solid: g.querySelectorAll('.dot--solid').length, range: g.querySelectorAll('.dot--range').length })),
-      estimate: document.querySelector('.viz__estimate').textContent,
-      caption: document.querySelector('.viz figcaption').textContent,
-      ratio: document.querySelector('.viz__ratio').textContent,
-      scale: document.querySelector('.viz__scale').textContent,
+      title: document.querySelector('#viz-title').textContent,
+      role: document.querySelector('.viz__figure').getAttribute('role'),
+      label: document.querySelector('.viz__figure').getAttribute('aria-label'),
+      desc: document.querySelector('#viz-desc').textContent,
+      describedby: document.querySelector('.viz__figure').getAttribute('aria-describedby'),
+      groups: [...document.querySelectorAll('.dots__group')].map((g) => ({ id: g.dataset.group, label: g.querySelector('.dots__label').textContent, solid: g.querySelectorAll('.dot--solid').length, range: g.querySelectorAll('.dot--range').length })),
+      summary: document.querySelector('.viz__summary').textContent,
+      leftovers: document.querySelectorAll('.viz__table, .viz__legend, .viz__scale, .viz__estimate, .viz__ratio, [data-viz-play]').length,
     }));
-    ok(`dots (${lang}): the drawing is an image with a title and a description`, got.role === 'img' && got.labelledby === 'viz-svg-title viz-svg-desc' && got.desc.length > 40);
-    ok(`dots (${lang}): the caption and the "by historians' estimates" line come from the data`, norm(got.caption) === norm(d.caption[lang]) && norm(got.estimate) === norm(d.estimate_note[lang]) && norm(got.desc).includes(norm(d.estimate_note[lang])));
-    const rowsOk = d.groups.every((g, i) => got.rows[i]?.id === g.id && got.rows[i].min === g.min && got.rows[i].max === g.max && norm(got.rows[i].cells[0]) === norm(g.label[lang]) && norm(got.rows[i].cells[1]).includes(norm(nf(g.min, lang))) && norm(got.rows[i].cells[1]).includes(norm(nf(g.max, lang))) && norm(got.rows[i].cells[2]) === norm(g.note[lang]));
-    ok(`dots (${lang}): the table holds every group with its label, the range and the note`, rowsOk && got.rows.length === d.groups.length, JSON.stringify(got.rows.map((r) => r.cells[1])));
-    const descOk = d.groups.every((g) => norm(got.desc).includes(norm(g.label[lang])) && norm(got.desc).includes(norm(nf(g.min, lang))) && norm(got.desc).includes(norm(nf(g.max, lang))));
-    ok(`dots (${lang}): the description names every group and its range`, descOk);
+    ok(`dots (${lang}): the figure is a group with a name and a description read by screen readers`, got.role === 'group' && got.label === got.title && got.describedby === 'viz-desc' && got.desc.length > 40);
+    if (d.title) ok(`dots (${lang}): the heading comes from the data`, norm(got.title) === norm(d.title[lang]), got.title);
+    ok(`dots (${lang}): the table, legend, separate paragraphs and the button are gone`, got.leftovers === 0, String(got.leftovers));
+    ok(`dots (${lang}): every group is named with the note of its numbers, in the data's words`, d.groups.every((g, i) => got.groups[i]?.id === g.id && norm(got.groups[i].label) === norm(`${g.label[lang]} ${g.note[lang]}`)) && got.groups.length === 2, JSON.stringify(got.groups.map((g) => g.label)));
+    ok(`dots (${lang}): the description names every group with its note and repeats the line under the drawing`, d.groups.every((g) => norm(got.desc).includes(norm(g.label[lang])) && norm(got.desc).includes(norm(g.note[lang]))) && norm(got.desc).includes(norm(got.summary)));
     const dotsOk = d.groups.every((g, i) => {
-      const total = Math.max(1, Math.round(g.max / g.unit_per_dot));
-      const solid = Math.min(total, Math.round(g.min / g.unit_per_dot));
-      return got.dots[i]?.solid === solid && got.dots[i]?.range === total - solid;
+      const total = Math.max(1, Math.round(g.min / g.unit_per_dot));
+      const solid = Math.min(total, Math.max(0, Math.round((g.solid ?? g.min) / g.unit_per_dot)));
+      return got.groups[i]?.solid === solid && got.groups[i]?.range === total - solid;
     });
-    ok(`dots (${lang}): dot counts follow the data (one dot = ${d.groups[0].unit_per_dot}; filled to min, empty to max)`, dotsOk, JSON.stringify(got.dots));
-    ok(`dots (${lang}): the scale sentence names the people per dot and the ratio is in words`, norm(got.scale).includes(norm(nf(d.groups[0].unit_per_dot, lang))) && /\d/.test(got.ratio) && ratioGroups(d).every((g) => got.ratio.includes(g.label[lang])), got.ratio);
+    ok(`dots (${lang}): dot counts follow the data (one dot = ${d.groups[0].unit_per_dot}; filled to "solid", outlined to the lowest estimate, the highest only in the text)`, dotsOk, JSON.stringify(got.groups.map((g) => [g.solid, g.range])));
+    const [big, small] = ratioGroups(d);
+    const ratio = roundRatio(((big.min + big.max) / 2) / ((small.min + small.max) / 2));
+    ok(`dots (${lang}): one line under the drawing: the scale, the ratio (${ratio}) with the name of the larger group, the "sources differ" note`, norm(got.summary).includes(norm(nf(d.groups[0].unit_per_dot, lang))) && norm(got.summary).includes(String(ratio)) && norm(got.summary).includes(norm(big.ratio_label[lang])) && norm(got.summary).endsWith(norm(d.estimate_note[lang])), got.summary);
     ok(`dots (${lang}): the card says the numbers are test numbers only when the data is marked as a placeholder`, (await page.evaluate(() => /teste|test/i.test(document.querySelector('.viz__test')?.textContent ?? ''))) === Boolean(dotsCard.interactive.data.placeholder));
     // all dots are in one scale: the same radius
     ok(`dots (${lang}): one scale, one dot size`, await page.evaluate(() => new Set([...document.querySelectorAll('.dot')].map((c) => c.getAttribute('r'))).size === 1));
+    ok(`dots (${lang}): numbers in the line and the notes do not break across lines (no-break space, no plain space inside a number)`, !/\d \d{3}(?!\d)/.test(got.summary + got.groups.map((g) => g.label).join(' ')), got.summary);
     await page.close();
 
     if (shipCard) {
@@ -195,16 +182,13 @@ if (want('color')) {
     const page = await newPage();
     await page.goto(url(base, lang, dotsCard), { waitUntil: 'load' });
     const g = await page.evaluate(() => ({
-      groups: [...document.querySelectorAll('.viz__svg g[data-group]')].map((el) => {
-        const ys = [...el.querySelectorAll('.dot')].map((c) => Number(c.getAttribute('cy')));
-        return { id: el.dataset.group, label: el.querySelector('.dots__label')?.textContent ?? '', labelY: Number(el.querySelector('.dots__label')?.getAttribute('y')), from: Math.min(...ys), to: Math.max(...ys) };
-      }),
+      groups: [...document.querySelectorAll('.dots__group')].map((el) => ({ id: el.dataset.group, label: el.querySelector('.dots__label')?.textContent ?? '', labelBefore: el.querySelector('.dots__label').compareDocumentPosition(el.querySelector('svg')) & Node.DOCUMENT_POSITION_FOLLOWING, tone: getComputedStyle(el.querySelector('.dot')).fill !== 'none' ? getComputedStyle(el.querySelector('.dot')).fill : getComputedStyle(el.querySelector('.dot')).stroke })),
       solid: (() => { const c = getComputedStyle(document.querySelector('.dot--solid')); return { fill: c.fill, stroke: c.stroke }; })(),
       range: (() => { const c = getComputedStyle(document.querySelector('.dot--range')); return { fill: c.fill, stroke: c.stroke, width: c.strokeWidth }; })(),
+      page: getComputedStyle(document.body).backgroundColor,
     }));
-    const nfx = (n) => new Intl.NumberFormat(lang === 'pt' ? 'pt-PT' : 'en', { maximumFractionDigits: 1, useGrouping: true }).format(n);
-    ok(`dots (${lang}): every group is named inside the drawing, with its range`, d.groups.every((grp, i) => norm(g.groups[i].label).includes(norm(grp.label[lang])) && norm(g.groups[i].label).includes(norm(nfx(grp.min))) && norm(g.groups[i].label).includes(norm(nfx(grp.max)))), g.groups.map((x) => x.label).join(' | '));
-    ok(`dots (${lang}): the groups sit in separate bands, each under its own name (position, not colour, tells them apart)`, g.groups.every((x, i) => x.labelY < x.from && (i === 0 || g.groups[i - 1].to < x.labelY)), JSON.stringify(g.groups.map((x) => [x.labelY, x.from, x.to])));
+    ok(`dots (${lang}): every group is named above its own dots (position and words, not colour, tell them apart)`, d.groups.every((grp, i) => norm(g.groups[i].label).startsWith(norm(grp.label[lang])) && g.groups[i].labelBefore > 0), g.groups.map((x) => x.label).join(' | '));
+    ok(`dots (${lang}): the two groups have two different colours`, g.groups.length === 2 && g.groups[0].tone !== g.groups[1].tone, JSON.stringify(g.groups.map((x) => x.tone)));
     ok(`dots (${lang}): filled and empty dots differ in form (fill versus outline only)`, g.solid.fill !== 'none' && g.solid.stroke === 'none' && g.range.fill === 'none' && g.range.stroke !== 'none' && parseFloat(g.range.width) >= 1, JSON.stringify([g.solid, g.range]));
     // greyscale: take colour away and the text and position still carry the meaning
     await page.addStyleTag({ content: 'html { filter: grayscale(1); }' });
@@ -229,25 +213,14 @@ if (want('color')) {
 
 // ---------- 3. Reduced motion ----------
 if (want('motion')) {
-  const calm = await newPage({ reduce: true });
-  await calm.goto(url(base, 'pt', dotsCard), { waitUntil: 'load' });
-  const c = await calm.evaluate((v) => ({ button: eval(v)(document.querySelector('[data-viz-play]')), hidden: document.querySelector('[data-viz-play]').hidden, waiting: document.querySelectorAll('.dot--waiting').length, dots: document.querySelectorAll('.dot').length, visibleDots: [...document.querySelectorAll('.dot')].filter((d) => getComputedStyle(d).opacity === '1').length, transition: getComputedStyle(document.querySelector('.dot')).transitionDuration }), vis);
-  ok('prefers-reduced-motion: no "Show one by one" button, every dot shown at once, no transition', !c.button && c.hidden && c.waiting === 0 && c.visibleDots === c.dots && parseFloat(c.transition) <= 0.001, JSON.stringify(c));
-  // a click on a hidden button is impossible; calling it by script does nothing either
-  await calm.evaluate(() => document.querySelector('[data-viz-play]').click());
-  await wait(200);
-  ok('prefers-reduced-motion: a script click does not start anything', (await calm.evaluate(() => document.querySelectorAll('.dot--waiting').length)) === 0);
-  // switching to reduced motion while the animation runs shows everything
-  const live = await newPage();
-  await live.goto(url(base, 'pt', dotsCard), { waitUntil: 'load' });
-  ok('normal motion: the button is shown and nothing is animated at load', (await isVisible(live, '[data-viz-play]')) && (await live.evaluate(() => document.querySelectorAll('.dot--waiting').length)) === 0);
-  await live.waitForSelector('[data-viz-play]:not([hidden])');
-  await tap(live, '[data-viz-play]');
-  await wait(100);
-  await live.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
-  await wait(300);
-  const sw = await live.evaluate((v) => ({ waiting: document.querySelectorAll('.dot--waiting').length, button: eval(v)(document.querySelector('[data-viz-play]')) }), vis);
-  ok('the setting changes while the animation runs: the dots are all shown and the button goes away', sw.waiting === 0 && !sw.button, JSON.stringify(sw));
+  // The dots do not move at all: no button, no animation, no transition, whatever the setting.
+  for (const reduce of [true, false]) {
+    const calm = await newPage({ reduce });
+    await calm.goto(url(base, 'pt', dotsCard), { waitUntil: 'load' });
+    const c = await calm.evaluate(() => ({ button: document.querySelectorAll('[data-viz-play]').length, waiting: document.querySelectorAll('.dot--waiting').length, dots: document.querySelectorAll('.dot').length, visibleDots: [...document.querySelectorAll('.dot')].filter((d) => getComputedStyle(d).opacity === '1').length, transition: getComputedStyle(document.querySelector('.dot')).transitionDuration }));
+    ok(`dots, ${reduce ? 'prefers-reduced-motion' : 'normal motion'}: no button, every dot shown at once, no transition`, c.button === 0 && c.waiting === 0 && c.visibleDots === c.dots && parseFloat(c.transition) <= 0.001, JSON.stringify(c));
+    await calm.close();
+  }
   if (shipCard) {
     const ship = await newPage({ reduce: true });
     await ship.goto(url(base, 'pt', shipCard), { waitUntil: 'load' });
@@ -258,7 +231,6 @@ if (want('motion')) {
     })());
     await ship.close();
   }
-  await calm.close(); await live.close();
 }
 
 // ---------- 4. No JavaScript ----------
@@ -283,7 +255,8 @@ if (want('nojs')) {
     // <details> is closed without JS unless the address opens it: open it as a reader would
     await page.evaluate(() => { document.querySelector('#detalhes').open = true; });
     const after = await page.evaluate((v) => ({ svg: [...document.querySelectorAll('.viz__svg')].filter(eval(v)).length, table: eval(v)(document.querySelector('.viz__table')) }), vis);
-    ok(`no JavaScript (${name}): the static drawing and the table are shown, no button or switch`, after.svg === 1 && after.table && !n.button && !n.switcher && n.waiting === 0 && n.dots === n.total && n.caption, JSON.stringify({ ...n, ...after }));
+    const drawn = name === 'dots' ? after.svg === 2 && !after.table : after.svg === 1 && after.table;
+    ok(`no JavaScript (${name}): the static drawing${name === 'dots' ? '' : ' and the table'} ${name === 'dots' ? 'is' : 'are'} shown, no button or switch`, drawn && !n.button && !n.switcher && n.waiting === 0 && n.dots === n.total && (name === 'dots' || n.caption), JSON.stringify({ ...n, ...after }));
     await page.close();
   }
 }
@@ -345,10 +318,7 @@ if (want('modes')) {
         await tap(page, '.viz__option:nth-child(2)');
         ok(`mode ${mode}: the ship switch works`, (await page.evaluate(() => document.querySelector('[data-viz-ships]').dataset.mode)) === 'overlay');
       } else {
-        await page.waitForSelector('[data-viz-play]:not([hidden])');
-        await tap(page, '[data-viz-play]');
-        await page.waitForFunction(() => document.querySelectorAll('.dot--waiting').length === 0 && !document.querySelector('[data-viz-play]').disabled, { timeout: 8000 });
-        ok(`mode ${mode}: the dots animation runs and ends`, true);
+        ok(`mode ${mode}: the dots are drawn (both groups, every dot)`, (await page.evaluate(() => document.querySelectorAll('.dots__group').length)) === 2 && (await page.evaluate(() => document.querySelectorAll('.dot').length)) > 2);
       }
       ok(`mode ${mode}: no script errors (${name})`, page.errors.length === 0, page.errors.join('; '));
       await page.close();

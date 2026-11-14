@@ -200,6 +200,50 @@ detail_image:
   license: "Public domain"
   source_url: "https://commons.wikimedia.org/wiki/File:Retrato_de_Afonso_de_Albuquerque_(ap%C3%B3s_1545)_-_Autor_desconhecido-cortado.png"
 related: []
+interactive:
+  type: army_dots
+  data:
+    title:
+      pt: Um contra vinte
+      en: One against twenty
+      ru: Один против двадцати
+    estimate_note:
+      pt: As fontes divergem.
+      en: Sources differ.
+      ru: Источники расходятся.
+    groups:
+      - id: albuquerque
+        label:
+          pt: Albuquerque
+          en: Albuquerque
+          ru: Албукерки
+        ratio_label:
+          pt: defensores
+          en: defenders
+          ru: защитников
+        min: 1000
+        max: 1200
+        unit_per_dot: 1000
+        note:
+          pt: Entre 1 000 e 1 200 homens, uns 700 deles portugueses.
+          en: Between 1,000 and 1,200 men, about 700 of them Portuguese.
+          ru: От 1 000 до 1 200 человек, около 700 из них португальцы.
+      - id: malaca
+        label:
+          pt: Defensores de Malaca
+          en: Defenders of Malacca
+          ru: Защитники Малакки
+        ratio_label:
+          pt: defensores
+          en: defenders
+          ru: защитников
+        min: 20000
+        max: 30000
+        unit_per_dot: 1000
+        note:
+          pt: Entre 20 000 e 30 000, segundo as fontes, e cerca de 20 elefantes de guerra.
+          en: Between 20,000 and 30,000, by various estimates, and about 20 war elephants.
+          ru: От 20 000 до 30 000 по разным оценкам и около 20 боевых слонов.
 status: ready
 published: '2026-10-21'
 updated: '2026-11-06'
