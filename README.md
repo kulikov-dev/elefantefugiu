@@ -149,6 +149,8 @@ Adding a story: copy an existing `events/<id>.yaml`, fill the texts, `place`, `b
 Article, Event, place with geo, breadcrumbs, the epoch's story list) is generated from these fields (`src/lib/schema.ts`), nothing is
 written by hand. `npm run build` stops (`check:schema`) when an indexable page lacks any part of it.
 
+If the story is about a journey (a voyage, a transport, a march, a flight), fill `route` too: the points in order, each with the source it comes from (the text or a listed source; no invented stops), `mode` per leg, `approx` for a leg that is known only roughly, `via` points only to lead the line round land (docs/spec.md 5.3a).
+
 A new or changed story goes through the language review (`docs/language-review/`): `npm run lang:pending` shows what was not read yet or
 changed since it was read (`check:data` warns about the same); read only that, against `docs/glossary.md` (names, titles, places, quotation
 marks, "ё"), then mark the texts with `npx tsx scripts/lang-mark.ts <pt|en|ru|all> [unit-prefix]` after the corrections are committed
