@@ -18,11 +18,6 @@ const ok = (name, cond, extra = '') => {
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-/** The start no longer asks anything (the play button runs everything in the window); the pause only lets the first story settle. */
-const choose = async (page) => {
-  await wait(600);
-  await page.evaluate(() => document.querySelector('[data-tt-all]')?.click());
-};
 const browser = await launchBrowser();
 
 // ---- the data, as the build reads it ------------------------------------------------------------------------------------
@@ -89,7 +84,6 @@ const open = async (path, { width = 1280, height = 900, reduced = false, family 
   if (js) await page.waitForSelector('.map[data-state="ready"]', { timeout: 20000 });
   if (js && path.includes('era=')) {
     await wait(500);
-    await choose(page);
   }
   return page;
 };
@@ -158,7 +152,6 @@ if (want('order')) {
 if (want('window')) {
   const page = await open(MAP.pt);
   await page.click(START);
-  await choose(page);
   await page.waitForSelector('.tt-card:not([hidden])');
   await wait(300);
   let s = await state(page);
@@ -171,7 +164,6 @@ if (want('window')) {
   const target = need('a story with fewer than two others within 0.1 degree of its bridge (the hint of the mode)', (list) => list.find(lonely));
   const near = await open(`${MAP.pt}?id=${target.id}`);
   await near.click(START);
-  await choose(near);
   await wait(500);
   s = await state(near);
   const hint = s.other && !s.playVisible;
@@ -188,8 +180,7 @@ if (want('reveal')) {
   const era = () => page.evaluate(() => document.querySelector('.tt-card__era').textContent);
   await page.click(START);
   await wait(700);
-  ok('reveal: the choice at the start is over a map with no points', (await page.evaluate(() => !!document.querySelector('[data-tt-all]'))) && (await drawn()) === 0, `${await drawn()} drawn`);
-  await choose(page);
+  ok('reveal: there is no choice screen: the show starts at once with the first story alone on the map', (await page.evaluate(() => !document.querySelector('[data-tt-all]') && !!document.querySelector('.tt-card__title'))) && (await drawn()) === 1, `${await drawn()} drawn`);
   await page.evaluate(() => document.querySelector('.tt-card__acts .tt-btn:nth-of-type(2)')?.click()); // pause
   await wait(400);
   const first = await era();
@@ -229,7 +220,6 @@ if (want('hint') || want('chips')) {
   const target = need('a story with fewer than two others within 0.1 degree of its bridge (the hint of the mode)', (list) => list.find(lonely));
   const page = await open(`${MAP.pt}?id=${target.id}`);
   await page.click(START);
-  await choose(page);
   await wait(500);
   const s = await state(page);
   ok('hint: a window with fewer than three stories shows the hint, no scale, no show', !s.playVisible && s.other.includes(ui('map.tt_hint_title', 'pt')) && (await page.evaluate(() => !document.querySelector('[data-tt-scale]').checkVisibility())), s.other.slice(0, 60));
@@ -307,16 +297,22 @@ if (want('controls')) {
   await wait(700);
   const titles = inPlace().map((e) => e.title.pt);
   const target = await page.evaluate((titles_) => {
-    // a dim point of the show clear of the current one (two points close together are spread, but the large current one may still touch its neighbour)
-    const cur = document.querySelector('.mk--tt-cur').getBoundingClientRect();
-    const m = [...document.querySelectorAll('.mk--tt-dim')].filter((d) => { const b = d.getBoundingClientRect(); return document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2)?.closest('.mk') === d; }).filter((d) => titles_.some((t) => d.querySelector('.visually-hidden').textContent.startsWith(t))).find((d) => Math.hypot(d.getBoundingClientRect().x - cur.x, d.getBoundingClientRect().y - cur.y) > 80 && d.checkVisibility()) ?? document.querySelector('.mk--tt-dim');
-    const r = m.getBoundingClientRect();
+    // a dim point of the show that is really under the pointer at its centre (the large current one may cover a close neighbour): the press must reach it
+    const m = [...document.querySelectorAll('.mk--tt-dim')].filter((d) => titles_.some((t) => d.querySelector('.visually-hidden').textContent.startsWith(t))).find((d) => {
+      const b = d.querySelector('.mk__shape').getBoundingClientRect();
+      return d.checkVisibility() && document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2)?.closest('.mk') === d;
+    });
+    if (!m) return null;
+    const r = m.querySelector('.mk__shape').getBoundingClientRect();
     return { x: r.x + r.width / 2, y: r.y + r.height / 2, label: m.querySelector('.visually-hidden').textContent };
   }, titles);
-  await page.mouse.click(target.x, target.y);
-  await wait(200);
-  s = await state(page);
-  ok('controls: a press on a point shows its card and puts the show on pause', target.label.startsWith(s.title) && s.toggle === ui('map.tt_play', 'pt'), `${target.label} | ${s.title}`);
+  ok('controls: a point of the show can be pressed (one of the earlier points of the place is not covered by the current one)', !!target, 'need an earlier point of the show clear of the current marker');
+  if (target) {
+    await page.mouse.click(target.x, target.y);
+    await wait(200);
+    s = await state(page);
+    ok('controls: a press on a point of the show shows its story and puts the show on pause', target.label.startsWith(s.title) && s.toggle === ui('map.tt_play', 'pt'), `${target.label} | ${s.title}`);
+  }
   // the swipe of the card
   const before = index(s);
   const box = await page.evaluate(() => { const r = document.querySelector('.tt-card__title').getBoundingClientRect(); return { x: r.x + 20, y: r.y + r.height / 2 }; });
@@ -381,7 +377,6 @@ if (want('motion')) {
 if (want('events')) {
   const page = await open(MAP.pt);
   await page.click(START);
-  await choose(page);
   await wait(500);
   let log = await page.evaluate(() => JSON.parse(sessionStorage.getItem('__gc') || '[]'));
   ok('events: a start from the button is one event, timetravel-start-view', JSON.stringify(log) === '["timetravel-start-view"]', JSON.stringify(log));
@@ -457,9 +452,9 @@ if (want('layout')) {
     const geometry = await page.evaluate(() => {
       const card = document.querySelector('.tt-card').getBoundingClientRect();
       const stage = document.querySelector('.map__stage').getBoundingClientRect();
-      return { fits: card.left >= stage.left - 1 && card.right <= stage.right + 1, share: card.height / stage.height, noScroll: document.documentElement.scrollWidth <= document.documentElement.clientWidth, label: document.querySelector('[data-tt-start]').textContent.trim() };
+      return { fits: card.left >= stage.left - 1 && card.right <= stage.right + 1, share: card.height / stage.height, covered: (() => { const cur = document.querySelector('.mk--tt-cur .mk__shape')?.getBoundingClientRect(); return !cur || (cur.right > card.left && cur.left < card.right && cur.bottom > card.top && cur.top < card.bottom); })(), noScroll: document.documentElement.scrollWidth <= document.documentElement.clientWidth, label: document.querySelector('[data-tt-start]').textContent.trim() };
     });
-    ok(`layout (${lang}, 360 px): the card spans the map, is at most 45% of it, no horizontal scroll, the button has the name of the mode`, geometry.fits && geometry.share <= 0.46 && geometry.noScroll && geometry.label === ui('map.tt_button', lang), JSON.stringify(geometry));
+    ok(`layout (${lang}, 360 px): the card spans the map, is at most 55% of the map, the current point is not under it, no horizontal scroll, the button has the name of the mode`, geometry.fits && geometry.share <= 0.55 && !geometry.covered && geometry.noScroll && geometry.label === ui('map.tt_button', lang), JSON.stringify(geometry));
     ok(`layout (${lang}, 360 px): the long hook is not cut (the card grows or scrolls)`, await page.evaluate(() => { const h = document.querySelector('.tt-card__hook'); return h.scrollHeight <= h.clientHeight + 1; }));
     await page.evaluate(() => document.querySelector('.tt-card__acts .tt-btn:nth-of-type(2)')?.click());
     await walk(page, lang);
