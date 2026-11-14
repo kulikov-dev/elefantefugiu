@@ -131,6 +131,46 @@ export const eventMythSchema = z.strictObject({
 });
 export type EventMyth = z.infer<typeof eventMythSchema>;
 
+/**
+ * "Route" (docs/spec.md 5.3a): the small map of the path in a story about a journey, drawn at build time as a static SVG (src/lib/route-map.ts).
+ * `points` go in order of travel. A point with a `name` is a stop (a dot with a label, in the list "Route points"); a `via` point has no name, no dot and
+ * no label: it only leads the line round land and asserts nothing. Every point but the first says how the traveller arrives at it (`mode`: sea and air go
+ * in a curve through the points, land in a straight line, river along the course of the river named by `river`) and, with `approx`, that this leg is known only roughly
+ * (a dotted line). `approx` of the route is the default of every leg.
+ */
+export const ROUTE_MODES = ['sea', 'land', 'air', 'river'] as const;
+export type RouteMode = (typeof ROUTE_MODES)[number];
+/** Rivers that a leg can follow (src/data/geo/rivers.json). */
+export const ROUTE_RIVERS = ['douro'] as const;
+const routePoint = z.strictObject({
+  name: text.optional(),
+  lat: z.number().min(-90).max(90),
+  lng: z.number().min(-180).max(180),
+  year: z.number().int().optional(),
+  /** What the list of points shows instead of the year ("March 1514", "17 June 1922"). */
+  date: text.optional(),
+  via: z.literal(true).optional(),
+  mode: z.enum(ROUTE_MODES).optional(),
+  approx: z.boolean().optional(),
+  river: z.enum(ROUTE_RIVERS).optional(),
+});
+export const routeSchema = z
+  .strictObject({ points: z.array(routePoint).min(2), approx: z.boolean().optional() })
+  .superRefine((route, ctx) => {
+    const last = route.points.length - 1;
+    route.points.forEach((p, i) => {
+      const at = (key: string) => ({ code: 'custom' as const, path: ['points', i, key] });
+      if (p.via ? p.name !== undefined || p.year !== undefined || p.date !== undefined : p.name === undefined) ctx.addIssue({ ...at('name'), message: p.via ? 'a via point has no name, year or date' : 'a stop needs a name (or is a via point)' });
+      if ((i === 0 || i === last) && p.via) ctx.addIssue({ ...at('via'), message: 'the first and the last point are stops, not via' });
+      if (i === 0 && (p.mode !== undefined || p.approx !== undefined || p.river !== undefined)) ctx.addIssue({ ...at('mode'), message: 'the first point has no mode: mode says how the traveller arrives' });
+      if (i > 0 && p.mode === undefined) ctx.addIssue({ ...at('mode'), message: 'mode is needed (how the traveller arrives at this point)' });
+      if (p.mode === 'river' && p.river === undefined) ctx.addIssue({ ...at('river'), message: 'a river leg names the river' });
+      if (p.mode !== 'river' && p.river !== undefined) ctx.addIssue({ ...at('river'), message: 'river is only for a river leg' });
+    });
+    if (route.points.filter((p) => !p.via).length < 2) ctx.addIssue({ code: 'custom', path: ['points'], message: 'at least two stops' });
+  });
+export type RouteData = z.infer<typeof routeSchema>;
+
 /** "Meanwhile": a fact from elsewhere near the year of the story (src/lib/meanwhile.ts holds the rules; check:data adds the word-count warnings). */
 const meanwhileItem = z.strictObject({
   scope: z.enum(MEANWHILE_SCOPES),
@@ -213,6 +253,8 @@ export const eventSchema = z
   /** A second picture (a document, a map, a portrait) shown inside "More", whole, never cropped. */
   detail_image: picture.optional(),
   related: z.array(z.string()).optional(),
+  /** The small map of a journey: after the story, before "More". */
+  route: routeSchema.optional(),
   interactive: interactive.optional(),
   /** Optional and not shown anywhere: the project has one editor and no separate reviewer. */
   reviewed_by: z.string().optional(),

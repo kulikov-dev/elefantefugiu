@@ -266,3 +266,101 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: '712ae30db0b9'
+route:
+  approx: true
+  points:
+    - name: { pt: "Cambaia", en: "Cambay", ru: "Камбей" }
+      lat: 22.31
+      lng: 72.62
+    - via: true
+      lat: 15
+      lng: 66
+      mode: sea
+    - via: true
+      lat: 5
+      lng: 59
+      mode: sea
+    - via: true
+      lat: -20
+      lng: 54
+      mode: sea
+    - via: true
+      lat: -30
+      lng: 46
+      mode: sea
+    - via: true
+      lat: -36
+      lng: 30
+      mode: sea
+    - via: true
+      lat: -35.5
+      lng: 19
+      mode: sea
+    - via: true
+      lat: -29
+      lng: 13
+      mode: sea
+    - via: true
+      lat: -14
+      lng: 5
+      mode: sea
+    - via: true
+      lat: 0
+      lng: -6
+      mode: sea
+    - via: true
+      lat: 5
+      lng: -14
+      mode: sea
+    - via: true
+      lat: 10
+      lng: -19
+      mode: sea
+    - via: true
+      lat: 14
+      lng: -21
+      mode: sea
+    - via: true
+      lat: 29
+      lng: -15
+      mode: sea
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.7223
+      lng: -9.1393
+      year: 1515
+      date: { pt: "maio de 1515", en: "May 1515", ru: "май 1515" }
+      mode: sea
+    - via: true
+      lat: 36.7
+      lng: -9.7
+      mode: sea
+    - via: true
+      lat: 35.95
+      lng: -5.7
+      mode: sea
+    - via: true
+      lat: 36.9
+      lng: -0.5
+      mode: sea
+    - via: true
+      lat: 38.2
+      lng: 5.5
+      mode: sea
+    - via: true
+      lat: 39
+      lng: 9.3
+      mode: sea
+    - via: true
+      lat: 41.5
+      lng: 11
+      mode: sea
+    - via: true
+      lat: 43.3
+      lng: 9.9
+      mode: sea
+    - name: { pt: "La Spezia", en: "La Spezia", ru: "Специя" }
+      lat: 44.1025
+      lng: 9.8241
+      year: 1516
+      date: { pt: "janeiro de 1516", en: "January 1516", ru: "январь 1516" }
+      mode: sea

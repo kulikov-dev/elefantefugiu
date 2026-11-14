@@ -137,6 +137,14 @@ sources:
     url: https://ukulelemagazine.com/stories/news/dias-grave-marker
     type: press
     accessed: '2026-10-29'
+  - title: 'Wikipedia: SS Ravenscrag'
+    url: https://en.wikipedia.org/wiki/SS_Ravenscrag
+    type: website
+    accessed: '2026-11-14'
+    note:
+      pt: a rota do navio, por Cabo Horn, e as datas da viagem
+      en: the route of the ship round Cape Horn and the dates of the voyage
+      ru: маршрут корабля вокруг мыса Горн и даты рейса
 image:
   file: braguinha-ukulele-1879.webp
   alt:
@@ -193,3 +201,64 @@ myth:
     pt: Foi mesmo feito no Havai, mas por marceneiros madeirenses, que juntaram o corpo da braguinha à afinação do rajão. O nome deram-no os havaianos.
     en: It really was made in Hawaii, but by Madeiran carpenters, who took the body of the braguinha and the tuning of the rajão. Hawaiians gave it the name.
     ru: Сделали его действительно на Гавайях, но мадейрские столяры, взяв корпус от брагиньи и строй от ражана. Имя дали гавайцы.
+route:
+  points:
+    - name: { pt: "Funchal", en: "Funchal", ru: "Фуншал" }
+      lat: 32.6466
+      lng: -16.9093
+      year: 1879
+      date: { pt: "23 de abril de 1879", en: "April 23, 1879", ru: "23 апреля 1879" }
+    - via: true
+      lat: 22
+      lng: -24
+      mode: sea
+    - via: true
+      lat: 10
+      lng: -29
+      mode: sea
+    - via: true
+      lat: -10
+      lng: -31
+      mode: sea
+    - via: true
+      lat: -25
+      lng: -38
+      mode: sea
+    - via: true
+      lat: -38
+      lng: -50
+      mode: sea
+    - via: true
+      lat: -50
+      lng: -52
+      mode: sea
+    - via: true
+      lat: -57.2
+      lng: -67.3
+      mode: sea
+    - via: true
+      lat: -50
+      lng: -82
+      mode: sea
+    - via: true
+      lat: -35
+      lng: -90
+      mode: sea
+    - via: true
+      lat: -15
+      lng: -105
+      mode: sea
+    - via: true
+      lat: 0
+      lng: -125
+      mode: sea
+    - via: true
+      lat: 12
+      lng: -142
+      mode: sea
+    - name: { pt: "Honolulu", en: "Honolulu", ru: "Гонолулу" }
+      lat: 21.3069
+      lng: -157.8583
+      year: 1879
+      date: { pt: "agosto de 1879", en: "August 1879", ru: "август 1879" }
+      mode: sea

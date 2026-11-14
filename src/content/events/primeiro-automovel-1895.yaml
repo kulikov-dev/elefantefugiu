@@ -146,3 +146,20 @@ status: ready
 published: 2026-11-17
 placeholder: false
 ru_ready: true
+route:
+  points:
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.7223
+      lng: -9.1393
+      year: 1895
+    - name: { pt: "Palmela", en: "Palmela", ru: "Палмела" }
+      lat: 38.5686
+      lng: -8.9014
+      year: 1895
+      mode: land
+    - name: { pt: "Santiago do Cacém", en: "Santiago do Cacém", ru: "Сантьягу-ду-Касен" }
+      lat: 38.0178
+      lng: -8.6947
+      year: 1895
+      date: { pt: "15 de outubro de 1895", en: "October 15, 1895", ru: "15 октября 1895" }
+      mode: land

@@ -132,3 +132,17 @@ seo:
     pt: "Monte Pascoal: o monte que Cabral avistou, 1500"
     en: "Monte Pascoal: the mountain Cabral sighted, 1500"
     ru: "Монте-Пашкоал: гора, которую увидел Кабрал, 1500"
+route:
+  approx: true
+  points:
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.7223
+      lng: -9.1393
+      year: 1500
+      date: { pt: "9 de março de 1500", en: "March 9, 1500", ru: "9 марта 1500" }
+    - name: { pt: "Monte Pascoal", en: "Monte Pascoal", ru: "Монте-Пашкоал" }
+      lat: -16.8975
+      lng: -39.4056
+      year: 1500
+      date: { pt: "22 de abril de 1500", en: "April 22, 1500", ru: "22 апреля 1500" }
+      mode: sea

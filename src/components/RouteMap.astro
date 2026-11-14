@@ -1,0 +1,198 @@
+---
+// The small map of a journey: after the story, before "More" (docs/spec.md 5.3a). A static SVG made at build time (src/lib/route-map.ts); the line is
+// revealed once when the map comes into view (src/scripts/route-reveal.ts); without JavaScript, or with "reduce motion", it is simply whole.
+import { t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import { ROUTE_FRAME, buildRouteMap, type MapRoute } from '../lib/route-map';
+import { routeGeo } from '../lib/route-geo';
+
+interface Props {
+  lang: Lang;
+  route: MapRoute;
+  /** The id of the story: the mask of the line needs an id of its own on the page. */
+  id: string;
+  /** Language tag of the texts when it differs from the page (a stand-in card shows English names under /ru/). */
+  textLang?: string;
+}
+
+const { lang, route, id, textLang } = Astro.props;
+const map = buildRouteMap(route, lang, routeGeo());
+const caption = `${t(lang, 'route.caption').replace('{from}', map.from).replace('{to}', map.to)}${map.years ? `, ${map.years}` : ''}`;
+const maskId = `route-mask-${id}`;
+const captionId = `route-caption-${id}`;
+---
+<section class="route" data-route aria-labelledby={captionId} lang={textLang}>
+  <p class="route__caption" id={captionId}>{caption}</p>
+  <div class="route__frame">
+    <svg class="route__svg" viewBox={`0 0 ${map.w} ${map.h}`} role="img" aria-label={caption} focusable="false">
+      <defs>
+        <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width={map.w} height={map.h}>
+          <path class="route__reveal" d={map.mask} pathLength="1" />
+        </mask>
+      </defs>
+      <rect class="route__sea" width={map.w} height={map.h} />
+      <path class="route__land" d={map.land} />
+      <g mask={`url(#${maskId})`}>
+        {map.runs.map((run) => <path class="route__halo" d={run.d} />)}
+        {map.runs.map((run) => <path class:list={['route__line', { 'route__line--approx': run.dash }]} d={run.d} stroke-dasharray={run.dash} />)}
+      </g>
+      {map.dots.map((dot) => <circle class="route__dot" cx={dot.x} cy={dot.y} r={dot.r} />)}
+      {
+        map.labels.map((label) => (
+          <text class="route__label" x={label.x} text-anchor={label.anchor} font-size={ROUTE_FRAME.font}>
+            {label.lines.map((line) => <tspan x={label.x} y={line.y}>{line.text}</tspan>)}
+          </text>
+        ))
+      }
+    </svg>
+  </div>
+  {
+    map.approx && (
+      <p class="route__note">
+        <svg class="route__legend" viewBox="0 0 32 4" aria-hidden="true" focusable="false"><path class="route__line route__line--approx" d="M1 2H31" stroke-dasharray="1 5.8" /></svg>
+        {t(lang, 'route.approx')}
+      </p>
+    )
+  }
+  <details class="route__points">
+    <summary>{t(lang, 'route.points')}</summary>
+    <ol>
+      {map.stops.map((stop) => <li>{stop.name}{stop.when ? `, ${stop.when}` : ''}</li>)}
+    </ol>
+  </details>
+</section>
+
+<style>
+  .route {
+    max-width: var(--measure);
+  }
+
+  .route__caption {
+    margin-block-end: var(--space-2);
+    font-family: var(--font-label);
+    font-size: var(--text-sm);
+    letter-spacing: var(--letter-label-tight);
+  }
+
+  .route__frame {
+    max-width: var(--route-max-width);
+  }
+
+  .route__svg {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .route__sea {
+    fill: var(--route-sea);
+  }
+
+  .route__land {
+    fill: var(--route-land);
+    stroke: var(--route-coast);
+    stroke-width: 0.5;
+    stroke-linejoin: round;
+  }
+
+  .route__halo,
+  .route__line {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .route__halo {
+    stroke: var(--route-sea);
+    stroke-opacity: 0.75;
+    stroke-width: 5;
+  }
+
+  .route__line {
+    stroke: var(--epoch-primary);
+    stroke-width: 2;
+  }
+
+  .route__dot {
+    fill: var(--epoch-primary);
+    stroke: var(--route-sea);
+    stroke-width: 2;
+  }
+
+  /* The text face of the site, regular weight; the halo of the colour of the sea keeps it readable over land and over the line. */
+  .route__label {
+    fill: var(--color-text);
+    font-family: var(--font-body);
+    paint-order: stroke;
+    stroke: var(--route-sea);
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  /* The line is drawn by revealing it through a mask: one stroke the length of the whole path (pathLength 1) that grows. */
+  .route__reveal {
+    fill: none;
+    stroke: white;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 12;
+  }
+
+  :global(.route--armed) .route__reveal {
+    stroke-dashoffset: 1;
+  }
+
+  :global(.route--armed.route--in) .route__reveal {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1.2s ease-in-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.route--armed) .route__reveal,
+    :global(.route--armed.route--in) .route__reveal {
+      stroke-dashoffset: 0;
+      transition: none;
+    }
+  }
+
+  .route__note {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-block-start: var(--space-1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .route__legend {
+    flex: none;
+    inline-size: var(--space-6);
+    block-size: var(--space-1);
+  }
+
+  .route__points {
+    margin-block-start: var(--space-2);
+    font-size: var(--text-sm);
+  }
+
+  .route__points summary {
+    min-block-size: var(--map-target-min);
+    color: var(--epoch-primary-strong);
+    cursor: pointer;
+    font-family: var(--font-label);
+    letter-spacing: var(--letter-label-tight);
+  }
+
+  .route__points ol {
+    margin-block-start: var(--space-1);
+    padding-inline-start: var(--space-5);
+  }
+</style>
+
+<script>
+  import '../scripts/route-reveal';
+</script>

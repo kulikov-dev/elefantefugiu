@@ -172,3 +172,25 @@ lang_review:
   ru:
     date: '2026-10-28'
     hash: 'df20d2f0f659'
+route:
+  approx: true
+  points:
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.7223
+      lng: -9.1393
+      year: 1808
+    - name: { pt: "Wagram", en: "Wagram", ru: "Ваграм" }
+      lat: 48.2917
+      lng: 16.5667
+      year: 1809
+      mode: land
+    - name: { pt: "Smolensk", en: "Smolensk", ru: "Смоленск" }
+      lat: 54.7826
+      lng: 32.0453
+      year: 1812
+      mode: land
+    - name: { pt: "Borodino", en: "Borodino", ru: "Бородино" }
+      lat: 55.5216
+      lng: 35.8183
+      year: 1812
+      mode: land

@@ -141,3 +141,13 @@ myth:
     pt: "Não havia estradas nas margens íngremes: as pipas desciam o rio em barcos rabelos e, por causa deles, até se partiu um rochedo no desfiladeiro da Valeira."
     en: "There were no roads along the steep banks: casks floated downriver on rabelo boats, and for them a rock was even broken up in the Valeira gorge."
     ru: "Дорог по крутым берегам не было: бочки сплавляли по реке на лодках рабелу, а ради них даже разбили скалу в ущелье Валейра."
+route:
+  points:
+    - name: { pt: "Cachão da Valeira", en: "Cachão da Valeira", ru: "Кашан-да-Валейра" }
+      lat: 41.158
+      lng: -7.3679
+    - name: { pt: "Vila Nova de Gaia", en: "Vila Nova de Gaia", ru: "Вила-Нова-ди-Гайя" }
+      lat: 41.1239
+      lng: -8.6118
+      mode: river
+      river: douro

@@ -169,3 +169,38 @@ lang_review:
   ru:
     date: '2026-10-31'
     hash: 'c1b42014ba78'
+route:
+  approx: true
+  points:
+    - name: { pt: "Roma", en: "Rome", ru: "Рим" }
+      lat: 41.9022
+      lng: 12.4539
+      year: 1742
+    - via: true
+      lat: 42.1
+      lng: 11.7
+      mode: land
+    - via: true
+      lat: 39
+      lng: 9.3
+      mode: sea
+    - via: true
+      lat: 38.2
+      lng: 5.5
+      mode: sea
+    - via: true
+      lat: 36.9
+      lng: -0.5
+      mode: sea
+    - via: true
+      lat: 35.95
+      lng: -5.7
+      mode: sea
+    - via: true
+      lat: 36.7
+      lng: -9.7
+      mode: sea
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.7135
+      lng: -9.1435
+      mode: sea

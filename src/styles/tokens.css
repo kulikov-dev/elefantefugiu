@@ -217,6 +217,11 @@
   --map-preview-width: 24rem;
   --map-sheet-peek: 3.5rem;
   --map-sheet-open: 70%;
+  /* The map of a journey in a story (src/components/RouteMap.astro): the sea, the land and the coast, drawn from tokens so the dark theme has its own; the widest the picture goes. */
+  --route-sea: light-dark(#f1ede1, #181410);
+  --route-land: light-dark(#e0d6c0, #2b251d);
+  --route-coast: light-dark(#b9ad93, #4a4136);
+  --route-max-width: 28rem;
   /* The map of the bridge block on a card page: its frame (phone, wide) and the size of a tile (256 px: one tile pixel is one screen pixel). */
   --minimap-height: 13.75rem;
   --minimap-height-wide: 18.75rem;
@@ -555,6 +560,9 @@
     --color-notice-ink: #3d2f00;
     --shadow-raised: 0 1px 4px rgb(31 27 22 / 0.3);
     --mascot-halo: transparent;
+    --route-sea: #f1ede1;
+    --route-land: #e0d6c0;
+    --route-coast: #b9ad93;
     --viz-tone-blue: #2b5f9e;
     --viz-tone-red: #a4262c;
     --viz-tone-green: #2f6f3e;

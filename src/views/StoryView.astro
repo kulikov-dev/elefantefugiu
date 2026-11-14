@@ -7,6 +7,7 @@ import BridgeBlock from '../components/BridgeBlock.astro';
 import ArmyDots from '../components/ArmyDots.astro';
 import CardLayers from '../components/CardLayers.astro';
 import Figure from '../components/Figure.astro';
+import RouteMap from '../components/RouteMap.astro';
 import ShipScale from '../components/ShipScale.astro';
 import HeavyTopicBanner from '../components/HeavyTopicBanner.astro';
 import Meanwhile from '../components/Meanwhile.astro';
@@ -242,6 +243,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id} indexed={indexed}>
       <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
       <Fragment slot="story">{storyParagraphs(event.story[lang]).map((paragraph) => <p>{paragraph}</p>)}</Fragment>
+      <Fragment slot="route">{event.route && <RouteMap lang={lang} route={event.route} id={event.id} textLang={textLang} />}</Fragment>
       <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
       <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
       <Fragment slot="after">
