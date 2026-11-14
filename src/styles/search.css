@@ -1,5 +1,5 @@
 /* The search (src/scripts/search-ui.ts, read on the first press of the magnifier). Three layouts:
-   bar    from 48 rem: the field stands in the header in place of the menu, the results drop under the header, at the right;
+   bar    from 48 rem: the field stands in the header in place of the menu, the results drop under the field, as wide as it;
    sheet  a phone: a full-screen sheet, the field on top, the results under it;
    page   the page of the search: the field and the results in the page. */
 
@@ -242,6 +242,7 @@
 /* ---- bar: from 48 rem, in the header ---- */
 
 [data-layout='bar'] {
+  position: relative;
   grid-area: nav;
   flex: 1;
   min-width: 0;
@@ -251,12 +252,12 @@
   display: none;
 }
 
+/* Under the field, from its left edge to its right one (the close button and the gap to it stay out). */
 [data-layout='bar'] .search__results {
   position: absolute;
   inset-block-start: 100%;
-  inset-inline-end: max(var(--space-4), calc((100% - var(--container)) / 2 + var(--space-4)));
+  inset-inline: 0 calc(var(--touch-target) + var(--space-2));
   z-index: 1;
-  width: min(var(--search-bar-width), calc(100% - 2 * var(--space-4)));
   max-height: var(--search-bar-height);
   margin-block-start: var(--space-1);
   border: 1px solid var(--color-border-strong);

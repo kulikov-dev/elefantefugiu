@@ -57,6 +57,7 @@ const open = async (path, { width = 1280, height = 900, family = null, js = true
 const openSearch = async (page) => {
   await page.click('[data-search-open]');
   await page.waitForSelector('.search__input');
+  await page.waitForFunction(() => document.querySelector('.search__input')?.placeholder);
 };
 const type = async (page, text) => {
   await page.click('.search__input', { clickCount: 3 });
@@ -69,7 +70,7 @@ const top = (page, n = 3) => page.evaluate((n) => [...document.querySelectorAll(
 
 // ---------- 1. Open and close ----------
 if (want('open')) {
-  for (const [width, layout] of [[1280, 'bar'], [390, 'sheet']]) {
+  for (const [width, layout] of [[1280, 'bar'], [800, 'bar'], [390, 'sheet']]) {
     const page = await open(HOME.pt, { width, height: width === 390 ? 800 : 900 });
     const label = ui('search.open', 'pt');
     const btn = await page.evaluate(() => { const b = document.querySelector('.site-header [data-search-open]'); const r = b.getBoundingClientRect(); return { label: b.getAttribute('aria-label'), w: r.width, h: r.height, expanded: b.getAttribute('aria-expanded'), tag: b.tagName }; });
@@ -82,7 +83,7 @@ if (want('open')) {
       ok('open (390): the sheet fills the screen and the page under it is inert', box.w === 390 && box.h === 800 && box.inert, JSON.stringify(box));
     } else {
       const bar = await page.evaluate(() => { const r = document.querySelector('.search').getBoundingClientRect(); const h = document.querySelector('.site-header').getBoundingClientRect(); return { inHeader: r.top >= h.top - 1 && r.bottom <= h.bottom + 1, nav: getComputedStyle(document.querySelector('.site-nav')).display }; });
-      ok('open (1280): the field stands in the header in place of the menu', bar.inHeader && bar.nav === 'none', JSON.stringify(bar));
+      ok(`open (${width}): the field stands in the header in place of the menu`, bar.inHeader && bar.nav === 'none', JSON.stringify(bar));
     }
     await page.keyboard.press('Escape');
     await wait(100);
@@ -95,9 +96,12 @@ if (want('open')) {
     if (layout === 'bar') {
       await openSearch(page);
       await type(page, bigPlace[1][0].title.pt.slice(0, 4));
-      await page.mouse.click(20, 500);
+      await wait(600);
+      const edges = await page.evaluate(() => { const f = document.querySelector('.search__field').getBoundingClientRect(); const r = document.querySelector('.search__results').getBoundingClientRect(); return { field: [f.left, f.right, f.bottom], results: [r.left, r.right, r.top] }; });
+      ok(`open (${width}): the results hang under the field, as wide as it`, Math.abs(edges.field[0] - edges.results[0]) <= 1 && Math.abs(edges.field[1] - edges.results[1]) <= 1 && edges.results[2] >= edges.field[2], JSON.stringify(edges));
+      await page.mouse.click(4, 890);
       await wait(100);
-      ok('open (1280): a click outside the results closes the bar', (await page.$('.search')) === null);
+      ok(`open (${width}): a click outside the results closes the bar`, (await page.$('.search')) === null);
     }
     ok(`open (${width}): no script error`, page.errors.length === 0, page.errors.join(' | '));
     await page.close();
