@@ -67,8 +67,10 @@ function stories(): TextItem[] {
       const file = `src/content/events/${f}`;
       // The "Meanwhile" lines are a unit of their own (`meanwhile/<id>`): adding them must not turn the marks of the story into "changed after reading".
       return [
-        ...fromYaml(`event/${data.id}`, file, data, langs, new Set(['lang_review', 'meanwhile', 'myth'])),
+        ...fromYaml(`event/${data.id}`, file, data, langs, new Set(['lang_review', 'meanwhile', 'myth', 'route'])),
         ...fromYaml(`meanwhile/${data.id}`, file, { meanwhile: data.meanwhile ?? [] }, langs),
+        // The names of the points of the route map are a unit of their own too (`route/<id>`), for the same reason.
+        ...(data.route ? fromYaml(`route/${data.id}`, file, { route: data.route }, langs) : []),
         // The claim of the game "Myth or fact" is a unit of its own too (`myth/<id>`): adding it must not turn the marks of the story into "changed after reading".
         ...(data.myth ? fromYaml(`myth/${data.id}`, file, { myth: data.myth }, langs) : []),
       ];

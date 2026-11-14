@@ -426,6 +426,11 @@
     "army_scale_one": "Each dot stands for {n} person. Filled dots show the lowest estimate; empty dots, the rest of the range up to the highest estimate.",
     "army_scale_other": "Each dot stands for {n} people. Filled dots show the lowest estimate; empty dots, the rest of the range up to the highest estimate."
   },
+  "route": {
+    "caption": "Route: {from} → {to}",
+    "points": "Route points",
+    "approx": "approximate"
+  },
   "theme": {
     "label": "Theme",
     "system": "System",

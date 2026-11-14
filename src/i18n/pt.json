@@ -426,6 +426,11 @@
     "army_scale_one": "Cada ponto representa {n} pessoa. Os pontos cheios mostram a estimativa mais baixa; os pontos vazios, o resto do intervalo até à estimativa mais alta.",
     "army_scale_other": "Cada ponto representa {n} pessoas. Os pontos cheios mostram a estimativa mais baixa; os pontos vazios, o resto do intervalo até à estimativa mais alta."
   },
+  "route": {
+    "caption": "Percurso: {from} → {to}",
+    "points": "Pontos do percurso",
+    "approx": "aproximado"
+  },
   "theme": {
     "label": "Tema",
     "system": "Sistema",

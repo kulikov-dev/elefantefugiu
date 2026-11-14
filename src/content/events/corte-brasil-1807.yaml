@@ -218,3 +218,42 @@ seo:
     pt: "A corte que fugiu para o Brasil: Lisboa, 1807"
     en: "The Court That Sailed to Brazil: Lisbon, 1807"
     ru: "Королевский двор бежит в Бразилию: Лиссабон, 1807"
+route:
+  points:
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.697
+      lng: -9.203
+      year: 1807
+      date: { pt: "novembro de 1807", en: "November 1807", ru: "ноябрь 1807" }
+    - via: true
+      lat: 24
+      lng: -22
+      mode: sea
+    - via: true
+      lat: 14
+      lng: -27.5
+      mode: sea
+    - via: true
+      lat: 0
+      lng: -31
+      mode: sea
+    - name: { pt: "Salvador", en: "Salvador", ru: "Салвадор" }
+      lat: -12.9714
+      lng: -38.5014
+      year: 1808
+      date: { pt: "janeiro de 1808", en: "January 1808", ru: "январь 1808" }
+      mode: sea
+    - via: true
+      lat: -18.5
+      lng: -37.5
+      mode: sea
+    - via: true
+      lat: -21.5
+      lng: -39.5
+      mode: sea
+    - name: { pt: "Rio de Janeiro", en: "Rio de Janeiro", ru: "Рио-де-Жанейро" }
+      lat: -22.9068
+      lng: -43.1729
+      year: 1808
+      date: { pt: "março de 1808", en: "March 1808", ru: "март 1808" }
+      mode: sea

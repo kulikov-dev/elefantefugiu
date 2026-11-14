@@ -190,3 +190,31 @@ seo:
     pt: "Gago Coutinho e Sacadura Cabral: a travessia do Atlântico, 1922"
     en: "Gago Coutinho and Sacadura Cabral: the 1922 Atlantic Crossing"
     ru: "Гагу Коутинью и Сакадура Кабрал: через Атлантику, 1922"
+route:
+  points:
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.7223
+      lng: -9.1393
+      year: 1922
+    - via: true
+      lat: 28.3
+      lng: -16.8
+      mode: air
+    - via: true
+      lat: 16.5
+      lng: -24.8
+      mode: air
+    - name: { pt: "Penedos de São Pedro e São Paulo", en: "Saint Peter and Saint Paul Rocks", ru: "Скалы Святых Петра и Павла" }
+      lat: 0.917
+      lng: -29.345
+      mode: air
+    - via: true
+      lat: -13
+      lng: -37.2
+      mode: air
+    - name: { pt: "Rio de Janeiro", en: "Rio de Janeiro", ru: "Рио-де-Жанейро" }
+      lat: -22.9068
+      lng: -43.1729
+      year: 1922
+      date: { pt: "17 de junho de 1922", en: "June 17, 1922", ru: "17 июня 1922" }
+      mode: air

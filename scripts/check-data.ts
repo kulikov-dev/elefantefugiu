@@ -9,6 +9,8 @@ import { needsAttribution } from '../src/lib/pictures';
 import { firstSentence } from '../src/lib/events';
 import { localize } from '../src/lib/localize';
 import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX, storySeoDescription, storySeoTitle } from '../src/lib/seo';
+import { buildRouteMap } from '../src/lib/route-map';
+import { routeGeo } from '../src/lib/route-geo';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
 import { epochSchema, eventSchema, featuredSchema, festaListSchema, threadSchema } from '../src/data/schemas';
 import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, wordCount } from '../src/lib/myths';
@@ -200,6 +202,7 @@ for (const { item, file } of epochs) {
 
 const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
 const isTodo = (s: string) => s.trim() === '' || /^TODO\b/i.test(s.trim());
+const ROUTE_MAP_MAX_BYTES = 15 * 1024;
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 // Portugal mainland and the nearest islands (Madeira, Azores).
@@ -287,6 +290,19 @@ for (const { item: ev, file, stem } of events) {
   if (ev.sensitive && (ev.meanwhile ?? []).length > 0) report('error', file, 'a heavy story (sensitive) has no "Meanwhile" lines', 'meanwhile');
   for (const p of meanwhileProblems(ev.meanwhile ?? [], storyStartYear(ev.year))) {
     if (p.level === 'warn') report('warn', file, p.message, `meanwhile[${p.index}]`);
+  }
+
+  // The map of a journey (src/lib/route-map.ts): the schema checks the shape (two stops, coordinates, modes); here the map is drawn once, to see that it can be and how heavy it is (about 15 KB of SVG is the limit).
+  if (ev.route) {
+    if (ev.sensitive) report('error', file, 'a heavy story (sensitive) has no route map', 'route');
+    const route = localize(ev.route, ev.ru_ready);
+    try {
+      const model = buildRouteMap(route, 'en', routeGeo());
+      const size = model.land.length + model.mask.length * 3 + 2000;
+      if (size > ROUTE_MAP_MAX_BYTES) report('warn', file, `the route map is about ${Math.round(size / 1024)} KB of SVG (limit ${ROUTE_MAP_MAX_BYTES / 1024} KB): simplify it`, 'route');
+    } catch (error) {
+      report('error', file, `the route map cannot be drawn: ${(error as Error).message}`, 'route');
+    }
   }
 
   // slugs (Russian: the own one when the event is ready in Russian, else the English one is used under /ru/)

@@ -210,3 +210,40 @@ seo:
     pt: "O elefante Hanno e o papa Leão X: Roma, 1514"
     en: "Hanno the Elephant and Pope Leo X: Rome, 1514"
     ru: "Слон Ганнон и папа Лев X: Рим, 1514"
+route:
+  approx: true
+  points:
+    - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
+      lat: 38.7223
+      lng: -9.1393
+      year: 1514
+    - via: true
+      lat: 36.7
+      lng: -9.7
+      mode: sea
+    - via: true
+      lat: 35.95
+      lng: -5.7
+      mode: sea
+    - via: true
+      lat: 36.9
+      lng: -0.5
+      mode: sea
+    - via: true
+      lat: 38.2
+      lng: 5.5
+      mode: sea
+    - via: true
+      lat: 39
+      lng: 9.3
+      mode: sea
+    - via: true
+      lat: 42.1
+      lng: 11.7
+      mode: sea
+    - name: { pt: "Roma", en: "Rome", ru: "Рим" }
+      lat: 41.9022
+      lng: 12.4539
+      year: 1514
+      date: { pt: "março de 1514", en: "March 1514", ru: "март 1514" }
+      mode: land
