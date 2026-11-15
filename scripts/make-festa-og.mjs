@@ -28,7 +28,7 @@ const light = (name) => {
   if (!m) throw new Error(`make-festa-og: ${name} is not a light-dark() colour in tokens.css`);
   return m[1];
 };
-const colors = { '--festa-ink': light('--festa-ink'), '--festa-warm': light('--festa-warm'), '--festa-wash': light('--festa-wash'), '--festa-shell': light('--festa-shell'), '--festa-plate': light('--festa-wash'), '--festa-cherry': light('--festa-cherry'), '--festa-angelica': light('--festa-angelica'), '--festa-peel': light('--festa-peel'), '--festa-glaze': light('--festa-glaze'), '--festa-glaze-deep': light('--festa-glaze-deep') };
+const colors = { '--festa-ink': light('--festa-ink'), '--festa-warm': light('--festa-warm'), '--festa-wash': light('--festa-wash'), '--festa-shell': light('--festa-shell'), '--festa-foam': light('--festa-foam'), '--festa-plate': light('--festa-wash'), '--festa-cherry': light('--festa-cherry'), '--festa-angelica': light('--festa-angelica'), '--festa-peel': light('--festa-peel'), '--festa-glaze': light('--festa-glaze'), '--festa-glaze-deep': light('--festa-glaze-deep') };
 const paper = light('--color-bg');
 /** The dark value of a colour token: the second colour of `light-dark(<light>, <dark>)`. */
 const dark = (name) => {

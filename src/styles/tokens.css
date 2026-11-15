@@ -280,6 +280,7 @@
   --festa-warm: light-dark(#d9a441, #e0b45a);
   --festa-wash: light-dark(#e4ecf8, #22324f);
   --festa-shell: light-dark(#fffdf7, #efe8d8);
+  --festa-foam: light-dark(#f6f1e7, rgb(239 232 216 / 0.6)); /* the curls and strokes on the front waves of the book: the paper of the page in the light theme, the pale shell at 60% in the dark one */
   --festa-face-ink: light-dark(#1f4e9c, #1f4e9c); /* moustache, brows and beauty mark: dark cobalt on the face in both themes */
   /* Bolo-rei (docs/drafts/bolo-rei.js): candied fruit is the one place where colour is the point, a deliberate exception to "cobalt plus one warm";
      the glaze tones brown the crust of the cake. */
@@ -573,6 +574,7 @@
     --festa-warm: #d9a441;
     --festa-wash: #e4ecf8;
     --festa-shell: #fffdf7;
+    --festa-foam: #f6f1e7;
     --festa-face-ink: #1f4e9c;
     --festa-cherry: #c8372d;
     --festa-angelica: #4e8f45;
