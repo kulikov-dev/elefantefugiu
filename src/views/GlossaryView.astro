@@ -1,0 +1,153 @@
+---
+// The glossary: /ru/slovarik/ and /en/glossary/ (docs/spec.md "Словарик"). Every word of src/data/glossary.yaml with what it is and the stories (and the holiday) that tell about it.
+// Written in ru and en only; the words the stories mark (inline) have their tooltips in the stories, the rest are here only.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { festaPath, pagePath, storyPath, altPaths, type Lang } from '../i18n/routes';
+import { t } from '../i18n';
+import { GLOSSARY } from '../lib/glossary-data';
+import { mentioningStories, type GlossaryLang } from '../lib/glossary';
+import { FESTAS, festaText } from '../lib/festas-data';
+import { isRuStandIn } from '../lib/events';
+import { loadSite } from '../lib/site-data';
+import { pageNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
+
+interface Props {
+  lang: GlossaryLang;
+}
+
+const { lang } = Astro.props;
+const title = t(lang, 'pages.glossary.title');
+const site = await loadSite();
+// The stories the words are looked for in: the text of a story, "More", the claim of the game and the line of "Where to see it today", in the language of the page
+// (a story not yet in Russian is not looked for there: the Russian page of it shows the English text and is out of the index).
+const stories = site.events
+  .filter((e) => !e.placeholder && !isRuStandIn(e, lang))
+  .map((e) => ({ event: e, text: [e.story[lang], e.more[lang], e.myth ? `${e.myth.statement[lang]} ${e.myth.answer[lang]}` : '', e.bridge.note?.[lang] ?? ''].join('\n') }));
+// Alphabetical by name without the quotes around it («завещание кумы» stands under З).
+const sortKey = (name: string): string => name.replace(/[^\p{L}\p{N}]/gu, '');
+const items = GLOSSARY.map((term) => {
+  const ids = new Set(mentioningStories(term, lang, stories.map(({ event, text }) => ({ id: event.id, text }))));
+  const festa = term.festa ? FESTAS.find((f) => f.id === term.festa && f.enabled) : undefined;
+  const festaName = festa ? festaText(festa, lang)?.name : undefined;
+  return {
+    term,
+    name: term.name[lang],
+    stories: stories.filter(({ event }) => ids.has(event.id)).map(({ event }) => ({ title: event.title[lang], href: storyPath(lang, event.slug[lang]) })),
+    festa: festa && festaName ? { name: festaName, href: festaPath(lang, festa.slug) } : undefined,
+  };
+}).sort((a, b) => sortKey(a.name).localeCompare(sortKey(b.name), lang));
+// The page exists in ru and en: the Portuguese address of the same page is the English one (it is the x-default of the head; the Portuguese link of the switch is dimmed).
+const alternates = altPaths((l) => pagePath(l === 'pt' ? 'en' : l, 'glossary'));
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'glossary')), name: title, description: t(lang, 'pages.glossary.description'), type: 'WebPage' });
+const ACTIVE: Lang[] = ['en', 'ru'];
+---
+<BaseLayout lang={lang} pageKey="glossary" title={title} alternates={alternates} readyLangs={ACTIVE} activeLangs={ACTIVE} schema={schema}>
+  <article class="gloss">
+    <h1>{title}</h1>
+    <p class="gloss__lead">{t(lang, 'glossary.lead')}</p>
+    <ul class="gloss__list">
+      {
+        items.map(({ term, name, stories: mentions, festa }) => (
+          <li class="gloss__item" id={term.id}>
+            <h2 class="gloss__name">
+              {name}
+              {term.term.toLowerCase() !== name.toLowerCase() && <span class="gloss__pt" lang="pt">{term.term}</span>}
+            </h2>
+            <p class="gloss__text">{term.text[lang]}</p>
+            {
+              (mentions.length > 0 || festa) && (
+                <p class="gloss__links">
+                  {mentions.length > 0 && (
+                    <>
+                      <span class="gloss__label">{t(lang, 'glossary.stories')}:</span>{' '}
+                      {mentions.map((m, i) => (
+                        <>
+                          {i > 0 && ', '}
+                          <a href={m.href}>{m.title}</a>
+                        </>
+                      ))}
+                    </>
+                  )}
+                  {mentions.length > 0 && festa && <span aria-hidden="true"> · </span>}
+                  {festa && (
+                    <>
+                      <span class="gloss__label">{t(lang, 'glossary.festa')}:</span> <a href={festa.href}>{festa.name}</a>
+                    </>
+                  )}
+                </p>
+              )
+            }
+          </li>
+        ))
+      }
+    </ul>
+  </article>
+</BaseLayout>
+
+<style>
+  .gloss > * + * {
+    margin-block-start: var(--space-5);
+  }
+
+  .gloss__lead {
+    max-width: var(--measure);
+    font-size: var(--text-lg);
+    line-height: 1.4;
+  }
+
+  .gloss__list {
+    display: grid;
+    gap: var(--space-5);
+    max-width: var(--measure);
+    padding: 0;
+    list-style: none;
+  }
+
+  .gloss__item {
+    padding-block-end: var(--space-5);
+    border-block-end: 1px solid var(--color-border);
+    scroll-margin-block-start: var(--space-7);
+  }
+
+  /* A word reached from a tooltip (the address ends with #word): a tinted card. */
+  .gloss__item:target {
+    padding: var(--space-4);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-accent-tint);
+  }
+
+  .gloss__name {
+    font-size: var(--text-xl);
+  }
+
+  .gloss__pt {
+    margin-inline-start: var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-base);
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  .gloss__text {
+    margin-block-start: var(--space-2);
+  }
+
+  .gloss__links {
+    margin-block-start: var(--space-2);
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .gloss__label {
+    font-family: var(--font-label);
+    letter-spacing: var(--letter-label);
+    text-transform: uppercase;
+  }
+
+  .gloss__links a {
+    overflow-wrap: anywhere;
+  }
+</style>

@@ -511,6 +511,31 @@ export const festaListSchema = z.array(festaSchema).superRefine((list, ctx) => {
   });
 });
 
+/** A word of the glossary (src/data/glossary.yaml, src/lib/glossary.ts). ru and en only: the Portuguese text is not marked. */
+const glossaryLang = <T extends z.ZodType>(item: T) => z.strictObject({ ru: item, en: item });
+export const glossaryTermSchema = z.strictObject({
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+  /** The word in Portuguese. */
+  term: z.string().min(1),
+  /** true: the first mention in a story is underlined and has a tooltip; false: the word is on the page of the glossary only. */
+  inline: z.boolean(),
+  /** How the page writes the word in each language. */
+  name: glossaryLang(z.string().min(1)),
+  /** The forms of the word in the stories of each language (`*` = any ending); an empty list does not mark that language and finds no stories. */
+  forms: glossaryLang(z.array(z.string().min(1))),
+  text: glossaryLang(z.string().min(1)),
+  /** A holiday of src/data/festas.yaml that tells about the word. */
+  festa: z.string().optional(),
+});
+export const glossaryListSchema = z.array(glossaryTermSchema).superRefine((list, ctx) => {
+  const seen = new Set<string>();
+  list.forEach((t, i) => {
+    if (seen.has(t.id)) ctx.addIssue({ code: 'custom', path: [i], message: `id:${t.id} is used twice` });
+    seen.add(t.id);
+  });
+});
+export type GlossaryTerm = z.infer<typeof glossaryTermSchema>;
+
 export type FestaData = z.infer<typeof festaSchema>;
 export type FestaText = z.infer<typeof festaTextSchema>;
 

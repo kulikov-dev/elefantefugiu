@@ -38,6 +38,7 @@
   "transitions": 20,
   "newmarks": 150,
   "likes": 30,
+  "glossary": 20,
   "start": 20,
   "meanwhile": 40,
   "route": 25,
@@ -80,7 +81,8 @@
    "family-controls",
    "map-basic",
    "mascot-variant",
-   "newmarks"
+   "newmarks",
+   "glossary"
   ],
   [
    "map-limit-12",

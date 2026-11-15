@@ -78,11 +78,16 @@
     "search": {
       "title": "Pesquisa",
       "description": "Procure no site uma história, uma cidade ou uma época."
+    },
+    "glossary": {
+      "title": "Glossário",
+      "description": "Palavras e realidades portuguesas das histórias: azulejo, fado, a Baixa e outras. O que são e onde aparecem."
     }
   },
   "footer": {
     "about": "Sobre o projeto",
     "method": "Método e fontes",
+    "glossary": "Glossário",
     "report": "Encontrou um erro?",
     "share": "Conhece uma história?",
     "legal": "Informação legal",
@@ -553,5 +558,15 @@
     "error": "A pesquisa não está disponível agora. Escolha uma época na página inicial.",
     "nojs": "A pesquisa precisa de JavaScript. Sem ele, escolha uma época:",
     "nojs_link": "Ver as épocas"
+  },
+  "glossary": {
+    "all": "Todas as palavras →",
+    "lead": "Palavras e realidades portuguesas que aparecem nas histórias: o que são e onde se fala delas.",
+    "stories": "Onde aparece",
+    "festa": "Festa",
+    "festa_link": "A página da festa",
+    "pt_label": "em português",
+    "count": "Palavras no glossário",
+    "nav": "Palavras do glossário"
   }
 }

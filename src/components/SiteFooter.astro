@@ -17,6 +17,8 @@ const licenseParts = t(lang, 'footer.licenses').split(/(\{content\}|\{code\})/);
 const links = [
   { label: t(lang, 'footer.about'), href: pagePath(lang, 'about') },
   { label: t(lang, 'footer.method'), href: pagePath(lang, 'method') },
+  // The glossary is in ru and en only: there is no Portuguese page.
+  ...(lang === 'pt' ? [] : [{ label: t(lang, 'footer.glossary'), href: pagePath(lang, 'glossary') }]),
   { label: t(lang, 'footer.report'), href: pagePath(lang, 'report') },
   { label: t(lang, 'footer.share'), href: pagePath(lang, 'share') },
   { label: t(lang, 'footer.games'), href: pagePath(lang, 'games') },

@@ -43,6 +43,8 @@ import { storyNodes } from '../lib/schema';
 import { searchAttrs } from '../lib/search-index';
 import { schemaContext } from '../lib/schema-site';
 import { withBase } from '../i18n/routes';
+import { GLOSSARY } from '../lib/glossary-data';
+import { inlineMatchers, isGlossaryLang, markParagraph, renderMark } from '../lib/glossary';
 
 interface Props {
   lang: Lang;
@@ -159,6 +161,18 @@ const eventThreads = event.threads.map((id) => site.threads.find((th) => th.id =
 // Placeholder text is Latin filler: mark it, so screen readers do not read it as Portuguese.
 const textLang = textLangOf(event, lang);
 const standIn = isRuStandIn(event, lang);
+// The glossary (docs/spec.md "Словарик"): in the story and in "More" the first mention of a word the glossary marks gets a dotted underline and a tooltip.
+// Only ru and en are marked; a Russian page that shows the English text (stand-in) is marked as English; the Latin filler of a placeholder is not marked.
+const textL = standIn ? 'en' : lang;
+const glossaryLang = !event.placeholder && isGlossaryLang(textL) ? textL : undefined;
+const glossaryMatchers = glossaryLang ? inlineMatchers(GLOSSARY, glossaryLang) : [];
+const seenWords = new Set<string>();
+const glossaryHref = glossaryLang ? pagePath(glossaryLang, 'glossary') : '';
+const marked = (paragraph: string): string =>
+  markParagraph(paragraph, glossaryMatchers, seenWords, (term, matched) => renderMark(term, matched, glossaryLang!, glossaryHref, t(glossaryLang!, 'glossary.all')));
+// In the order of the page: the story first, then "More" (a word is marked once, where it comes first).
+const storyHtml = storyParagraphs(event.story[lang]).map(marked);
+const moreHtml = moreParagraphs(event.more[lang]).map(marked);
 // The search index (Pagefind, scripts/make-search.mjs) takes the hook, the story and "More" of a page that search engines may take too, with the metadata the results show.
 const indexed = !event.placeholder && !standIn;
 const pf = indexed ? { 'data-pagefind-body': '' } : {};
@@ -242,7 +256,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
     <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} storyId={event.id} indexed={indexed}>
       <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
-      <Fragment slot="story">{storyParagraphs(event.story[lang]).map((paragraph) => <p>{paragraph}</p>)}</Fragment>
+      <Fragment slot="story">{storyHtml.map((html) => <p set:html={html} />)}</Fragment>
       <Fragment slot="route">{event.route && <RouteMap lang={lang} route={event.route} id={event.id} textLang={textLang} />}</Fragment>
       <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
       <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
@@ -278,7 +292,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         <section aria-labelledby="context-title">
           <h2 id="context-title">{t(lang, 'card.context')}</h2>
           <div class="prose" lang={textLang} {...pf}>
-            {moreParagraphs(event.more[lang]).map((paragraph) => <p>{paragraph}</p>)}
+            {moreHtml.map((html) => <p set:html={html} />)}
           </div>
         </section>
         {event.detail_image && <Figure lang={lang} picture={event.detail_image} kind="detail" />}
@@ -328,9 +342,80 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
 <script>
   import '../scripts/gate';
+  import '../scripts/glossary';
 </script>
 
 <style>
+  /* The glossary (src/lib/glossary.ts, src/scripts/glossary.ts): the word is a plain-looking button with a dotted underline; the tooltip opens under it.
+     With JavaScript the state is data-open on .gl; without it hover and focus open the tooltip. */
+  .card :global(.gl) {
+    position: relative;
+    display: inline;
+  }
+
+  .card :global(.gl__term) {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    cursor: help;
+    font: inherit;
+    text-decoration: underline dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: var(--underline-offset);
+    white-space: nowrap;
+  }
+
+  .card :global(.gl__tip) {
+    position: absolute;
+    z-index: var(--z-glossary);
+    top: 100%;
+    left: 0;
+    display: block;
+    width: var(--glossary-tip-width);
+    padding-block-start: var(--space-1);
+    transform: translateX(var(--gl-shift, 0));
+    visibility: hidden;
+    font-size: var(--text-sm);
+    font-style: normal;
+    font-weight: normal;
+    line-height: var(--leading-body);
+    text-align: start;
+    white-space: normal;
+  }
+
+  .card :global(.gl--up .gl__tip) {
+    top: auto;
+    bottom: 100%;
+    padding-block: 0 var(--space-1);
+  }
+
+  .card :global(.gl__box) {
+    display: block;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-raised);
+    color: var(--color-text);
+  }
+
+  .card :global(.gl__text) {
+    display: block;
+  }
+
+  .card :global(.gl__all) {
+    display: inline-block;
+    margin-block-start: var(--space-2);
+    color: var(--color-accent-strong);
+  }
+
+  .card :global(.gl[data-open] .gl__tip),
+  :global(html:not([data-js])) .card :global(.gl:hover .gl__tip),
+  :global(html:not([data-js])) .card :global(.gl:focus-within .gl__tip) {
+    visibility: visible;
+  }
+
   .story-myths {
     font-size: var(--text-sm);
   }

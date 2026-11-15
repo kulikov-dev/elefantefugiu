@@ -150,6 +150,10 @@ sources:
     url: https://www.wineanorak.com/wineblog/portugal/feitoria-demarcating-the-douro
     type: press
     accessed: '2026-10-16'
+  - title: 'Museu do Douro: Marcos da Demarcação'
+    url: https://museudodouro.pt/exposicoes/passado/marcos-da-demarcacao-
+    type: institutional
+    accessed: '2026-11-15'
   - title: 'Álvaro Moreira da Fonseca, As Demarcações Pombalinas no Douro Vinhateiro (1949)'
     note:
       pt: 'segundo o texto da Univ. do Porto'

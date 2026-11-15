@@ -104,7 +104,7 @@ const siteName = t(lang, 'site.name');
 const fullTitle = pageKey === 'home' ? t(lang, 'site.home_preview_title') : `${title} · ${siteName}`;
 const pageTitle = seoTitle ?? (pageKey === 'home' ? t(lang, 'site.home_seo_title') : fullTitle);
 // The service pages have a description of their own (pages.<key>.description); every other page without one uses the site description.
-const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise', 'myths', 'order', 'games', 'search'];
+const DESCRIBED_PAGES = ['about', 'method', 'legal', 'report', 'share', 'map', 'surprise', 'myths', 'order', 'games', 'search', 'glossary'];
 const pageDescription = pageKey && DESCRIBED_PAGES.includes(pageKey) ? t(lang, `pages.${pageKey}.description`) : undefined;
 const description = descriptionProp ?? pageDescription ?? t(lang, 'site.description');
 
