@@ -1,0 +1,16 @@
+---
+// "Save the Lusiads": the canvas runner of the page of Portugal Day. The markup is only the root; the game builds the stage, the button and the hint in the
+// browser (src/scripts/lusiadas-game.mjs), so without JavaScript the block shows the line above it and nothing else. The words are `text.<lang>.lusiadas` of src/data/festas.yaml.
+import type { FestaText } from '../data/schemas';
+
+interface Props {
+  text: NonNullable<FestaText['lusiadas']>;
+}
+
+const { text } = Astro.props;
+const { title: _title, lead: _lead, ...words } = text;
+---
+<div class="lus" data-lusiadas={JSON.stringify(words)}></div>
+<script>
+  import '../scripts/lusiadas';
+</script>

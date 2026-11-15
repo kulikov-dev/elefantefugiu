@@ -1,0 +1,155 @@
+id: tricentenario-camoes-1880
+slug:
+  pt: a-festa-do-recibo-da-pensao
+  en: the-holiday-from-a-pension-record
+  ru: prazdnik-iz-vedomosti-o-pensii
+title:
+  pt: A festa que saiu de um recibo de pensão
+  en: The Holiday from a Pension Record
+  ru: Праздник из ведомости о пенсии
+epoch: monarquia-e-republica
+level: story
+year: 1880
+place:
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7223
+  lon: -9.1393
+bridge:
+  name: Mosteiro dos Jerónimos
+  title:
+    pt: Mosteiro dos Jerónimos
+    en: Jerónimos Monastery
+    ru: Монастырь Жеронимуш
+  address: Praça do Império, Lisboa
+  lat: 38.6978909
+  lon: -9.2067039
+  maps_url: https://www.google.com/maps/place/Mosteiro+dos+Jer%C3%B3nimos/@38.6978951,-9.2092788,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ecb42c3c29c4b:0x87755d348e96ebed!8m2!3d38.6978909!4d-9.2067039!16zL20vMDUwOWt2
+  url: https://www.museusemonumentos.pt/pt/museus-e-monumentos/mosteiro-dos-jeronimos
+  note:
+    pt: Túmulo de Camões, frente ao de Vasco da Gama; os ossos vieram em 1880, mas há quem duvide.
+    en: Camões’s tomb faces Vasco da Gama’s; the bones were moved here in 1880, but many doubt they are his.
+    ru: Гробница Камоэнса напротив гробницы Васко да Гамы; кости перенесли в 1880 году, но многие сомневаются, что это его прах.
+threads:
+  - mar
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O Dia de Portugal veio da pensão da mãe de Camões.
+  en: Portugal’s national day was found in a paper about Camões’s mother’s pension.
+  ru: Дату главного праздника Португалии нашли в бумаге о пенсии матери Камоэнса.
+story:
+  pt: >-
+    Camões escreveu Os Lusíadas, poema que conta toda a história de Portugal como uma grande viagem por mar. Os portugueses veem nele a sua epopeia, e ao português chamam «a língua de Camões». Por isso a festa do país ficou ligada a ele. Do nascimento do poeta não se sabe nada: nem o ano nem a cidade. Só tem uma data firme: a da morte.
+
+
+    Mas nem essa se conhecia: na lápide estava 1579. A data exata apareceu na Torre do Tombo, num papel de 1582 sobre o dinheiro pago à mãe do poeta: 10 de junho de 1580. Com base nela, em 1880, no tricentenário, o rei D. Luís I declarou o 10 de junho dia de festa, só por um ano. Dia de Portugal só passou a ser no século XX. Parte dos historiadores acha que o escrivão errou e que o poeta morreu em 1579.
+  en: >-
+    Camões wrote The Lusiads, a poem in which the whole history of Portugal is told as one great voyage by sea. The Portuguese regard it as their national epic, and Portuguese is called “the language of Camões.” That is why the country’s holiday was tied to him. His birth is uncertain, neither the year nor the city. Camões has only one firm date, the day he died.
+
+
+    But even that was long unknown: the tombstone said 1579. The exact date turned up in the Torre do Tombo archive, in a paper of 1582 about money paid to the poet’s mother: June 10, 1580. On that basis, in 1880, for the tricentenary, King Luís I declared June 10 a holiday, for one year only. It became Portugal’s day for good in the 20th century. Some historians think the scribe got the year wrong and the poet died in 1579.
+  ru: >-
+    Камоэнс написал «Лузиады», поэму, в которой вся история Португалии рассказана как одно большое плавание. Португальцы считают её своим национальным эпосом, а португальский часто называют «языком Камоэнса». Поэтому праздник страны связали с ним. День рождения поэта неизвестен: ни год, ни город точно не знают. Твёрдая дата у Камоэнса только одна, день смерти.
+
+
+    Но и её долго не знали: на надгробии стоял 1579 год. Точную дату нашли в архиве Торре-ду-Томбу, в бумаге 1582 года о деньгах, которые платили матери поэта: 10 июня 1580 года. По ней в 1880 году, к трёхсотлетию, король Луиш I объявил 10 июня праздником, тогда на один год. Постоянным днём Португалии оно стало уже в XX веке. Правда, часть историков считает, что писарь ошибся годом и поэт умер в 1579-м.
+more:
+  pt: >-
+    A pensão de Camões veio de Os Lusíadas. Em 1570 voltou a Lisboa, depois de dezassete anos no Oriente, sem dinheiro, mas com um poema quase pronto. Em 1572 o livro foi impresso e o rei D. Sebastião deu ao poeta uma pequena pensão, de não mais de 15 mil réis por ano. Camões morreu em 1580, no mesmo ano em que Portugal caiu, por 60 anos, sob o rei de Espanha.
+
+
+    Os Lusíadas são dez cantos sobre a viagem de Vasco da Gama à Índia e, dentro deles, toda a história de Portugal, que o próprio Gama conta pelo caminho. Pelos navegadores disputam os deuses do Olimpo: Vénus ajuda-os, Baco atrapalha-os. As personagens do poema conhecem-se desde a escola. Por exemplo, o «Velho do Restelo», que resmunga atrás das naus que partem: ainda hoje se chama assim a quem não acredita em nada de novo.
+
+
+    E o enigma da primeira edição só foi resolvido há pouco. Em 1572 saíram dois livros com a mesma data: num, o pelicano do rosto olha para a esquerda, no outro para a direita. Em 2024, a investigadora de Coimbra Rita Marnoto mostrou que o livro do pelicano «da direita» é uma contrafação, impressa mais tarde.
+  en: >-
+    Camões got his pension thanks to The Lusiads. He came back to Lisbon in 1570 after seventeen years in the East, with no money but with an almost finished poem. In 1572 it was printed, and King Sebastian granted the poet a small pension, no more than 15,000 reais a year. Camões died in 1580, the very year Portugal fell for 60 years under the king of Spain.
+
+
+    The Lusiads is ten cantos about Vasco da Gama’s voyage to India, and inside them the whole history of Portugal, which Gama retells along the way. The gods of Olympus quarrel over the sailors: Venus helps them, Bacchus gets in their way. The Portuguese know the poem’s characters from school. For instance, the “Old Man of Restelo,” who grumbles after the departing ships: to this day the name is used for someone who believes in nothing new.
+
+
+    And the riddle of the first edition was solved only recently. In 1572 two books came out with the same date: on one title page the pelican looks left, on the other right. In 2024 a researcher from Coimbra, Rita Marnoto, showed that the book with the “right-facing” pelican is a forgery, printed later.
+  ru: >-
+    Пенсия у Камоэнса появилась благодаря «Лузиадам». Он вернулся в Лиссабон в 1570 году после семнадцати лет на Востоке, без денег, зато с почти готовой поэмой. В 1572 году её напечатали, и король Себастьян назначил поэту небольшую пенсию, не больше 15 тысяч реалов в год. Умер Камоэнс в 1580-м, в тот самый год, когда Португалия на 60 лет попала под власть испанского короля.
+
+
+    «Лузиады» — десять песен о плавании Васко да Гамы в Индию, а внутри них вся история Португалии, которую Гама пересказывает в пути. За мореплавателей спорят боги Олимпа: Венера им помогает, Вакх мешает. Героев поэмы португальцы знают со школы. Например, «старика из Рестелу», который ворчит вслед уходящим кораблям: так до сих пор называют того, кто не верит ни во что новое.
+
+
+    А загадку первого издания разгадали только недавно. В 1572 году вышли две книги с одной и той же датой: на титуле одной пеликан смотрит влево, другой вправо. В 2024 году исследовательница из Коимбры Рита Марното показала, что книга с «правым» пеликаном — подделка, напечатанная позже.
+myth:
+  verdict: myth
+  statement:
+    ru: "Дату Дня Португалии выбрали по дню рождения Камоэнса."
+    pt: "A data do Dia de Portugal foi escolhida pelo aniversário de Camões."
+    en: "Portugal Day was set on the date of Camões’s birthday."
+  answer:
+    ru: "Миф: 10 июня — день его смерти, и дату нашли в бумаге 1582 года о деньгах для его матери."
+    pt: "Mito: o 10 de junho é o dia da sua morte, e a data apareceu num papel de 1582 sobre o dinheiro pago à mãe."
+    en: "Myth: June 10 is the day he died, and the date was found in a paper of 1582 about money paid to his mother."
+sources:
+  - title: 'DN, 2011: Os ossos de Camões e o 10 de junho'
+    url: https://www.dn.pt/arquivo/diario-de-noticias/os-ossos-de-camoes-e-o-10-de-junho.html
+    type: press
+    accessed: '2026-11-15'
+  - title: 'DN, 2017: 10 de junho: primeiras comemorações foram em 1880'
+    url: https://www.dn.pt/arquivo/diario-de-noticias/10-de-junho-primeiras-comemoracoes-foram-em-1880-8553575.html
+    type: press
+    accessed: '2026-11-15'
+  - title: 'Observador, 2015: Camões: a história e cinco dúvidas'
+    url: https://observador.pt/2015/06/10/camoes-historia-cinco-duvidas/
+    type: press
+    accessed: '2026-11-15'
+  - title: 'Barlavento / Lusa, 2024: Edição crítica de «Os Lusíadas» prova que original teve contrafação'
+    url: https://www.barlavento.pt/edicao-critica-de-os-lusiadas-prova-que-original-teve-contrafacao/
+    type: press
+    accessed: '2026-11-15'
+  - title: 'Wikipedia: Os Lusíadas'
+    url: https://en.wikipedia.org/wiki/Os_Lus%C3%ADadas
+    type: reference
+    accessed: '2026-11-15'
+  - title: 'Wikipedia: Luís de Camões'
+    url: https://en.wikipedia.org/wiki/Lu%C3%ADs_de_Cam%C3%B5es
+    type: reference
+    accessed: '2026-11-15'
+  - title: 'Wikipedia: Portugal Day'
+    url: https://en.wikipedia.org/wiki/Portugal_Day
+    type: reference
+    accessed: '2026-11-15'
+  - title: 'Wikipedia: The Old Man of Restelo'
+    url: https://en.wikipedia.org/wiki/The_Old_Man_of_Restelo
+    type: reference
+    accessed: '2026-11-15'
+  - title: 'RTP / Lusa, 2011: Túmulo nos Jerónimos poderá não conter os restos mortais do poeta'
+    url: https://www.rtp.pt/noticias/cultura/tumulo-nos-jeronimos-podera-nao-conter-os-restos-mortais-do-poeta-admite-especialista_n450292
+    type: press
+    accessed: '2026-11-15'
+image:
+  file: tricentenario-camoes-1880.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa praça de Lisboa enfeitada com bandeiras, uma multidão de casacas, cartolas e vestidos de 1880 rodeia o monumento a Camões, uma estátua de poeta com coroa de louros sobre um pedestal com festões; um homem pousa uma grande coroa de louros aos pés do monumento, uma banda toca e pombos andam pelo chão."
+    en: "Blue-and-white azulejo-style illustration: in a Lisbon square hung with banners, a crowd in 1880 frock coats, top hats and long dresses surrounds the Camões monument, a statue of a laurel-crowned poet on a pedestal with garlands; a man lays a large laurel wreath at its foot, a band plays and pigeons walk the ground."
+    ru: "Иллюстрация в духе сине-белого азулежу: на лиссабонской площади, украшенной флагами, толпа в сюртуках, цилиндрах и длинных платьях 1880 года окружает памятник Камоэнсу, статую поэта в лавровом венке на постаменте с гирляндами; мужчина кладёт у подножия большой лавровый венок, играет оркестр, по земле ходят голуби."
+  caption:
+    pt: "10 de junho de 1880: coroas de louros ao pé do monumento a Camões, em Lisboa. Ilustração em estilo azulejo, criada por IA."
+    en: "June 10, 1880: laurel wreaths at the foot of the Camões monument in Lisbon. Azulejo-style illustration, created by AI."
+    ru: "10 июня 1880 года: лавровые венки у памятника Камоэнсу в Лиссабоне. Иллюстрация в стиле азулежу, создана ИИ."
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: "50% 50%"
+status: ready
+published: '2026-11-15'
+placeholder: false
+ru_ready: true

@@ -442,6 +442,23 @@ export const boloTextSchema = z.strictObject({
   again: z.string(),
 });
 
+/** The block "Save the Lusiads" on the page of Portugal Day (src/scripts/lusiadas.ts): the heading, the line under it and the words of the game. */
+export const lusiadasTextSchema = z.strictObject({
+  title: z.string(),
+  lead: z.string(),
+  /** Under the game. */
+  hint: z.string(),
+  /** The button on the start screen. */
+  start: z.string(),
+  /** The button after a run (in the corner after a win). */
+  again: z.string(),
+  /** The line under the game after a saved manuscript / a soaked one. */
+  won: z.string(),
+  lost: z.string(),
+  /** The name of the game field for screen readers. */
+  aria: z.string(),
+});
+
 export const festaTextSchema = z.strictObject({
   /** "1 декабря": the date as people say it; the page shows it above the name. */
   date: z.string(),
@@ -462,6 +479,8 @@ export const festaTextSchema = z.strictObject({
   off_window: z.string(),
   /** The words of the game with the cake (a holiday whose art is the bolo needs them). */
   bolo: boloTextSchema.optional(),
+  /** The game "Save the Lusiads" (a holiday whose art is the book needs it). */
+  lusiadas: lusiadasTextSchema.optional(),
   traditions: z.array(festaTradition).min(1),
 });
 
@@ -472,11 +491,11 @@ export const festaSchema = z.strictObject({
   enabled: z.boolean(),
   /** A fixed day `{ fixed: '12-01' }` or a shift from Easter `{ easter: -47 }`. */
   date: z.union([z.strictObject({ fixed: z.string().regex(/^\d{2}-\d{2}$/) }), z.strictObject({ easter: z.number().int() })]),
-  art: z.enum(['crown', 'folar', 'bolo', 'queen']).optional(),
+  art: z.enum(['crown', 'folar', 'bolo', 'queen', 'book']).optional(),
   /** The story of the day: the id of a story of the site; the page shows it as a usual card. */
   story: z.string().optional(),
   /** The icon of the tab in the window of the holiday (src/lib/festa-art.mjs ICONS); null: the holiday has none and the usual icon stays. */
-  favicon: z.enum(['crown', 'bolo', 'queen', 'egg']).nullable(),
+  favicon: z.enum(['crown', 'bolo', 'queen', 'egg', 'book']).nullable(),
   /** The preview picture: a path inside src/assets/ (festas/<id>.jpg or .png, the other extension is tried too). Optional: without the file the drawing is the picture. */
   image: z.string().regex(/^[\w./-]+\.(png|jpg)$/).optional(),
   text: z.strictObject({ pt: festaTextSchema.optional(), en: festaTextSchema.optional(), ru: festaTextSchema.optional() }),

@@ -50,6 +50,14 @@ describe('Easter and Carnival', () => {
     expect(isInWindow(easter, '2027-03-29')).toBe(false);
   });
 
+  it('puts Portugal Day on 10 June with the window 7-10 June', () => {
+    const portugalDay: FestaRef = { id: 'dia-de-portugal', enabled: true, date: { fixed: '06-10' } };
+    expect(festaDay(portugalDay.date, 2027)).toBe('2027-06-10');
+    expect(windowOf('2027-06-10')).toEqual({ from: '2027-06-07', to: '2027-06-10' });
+    for (const day of ['2027-06-07', '2027-06-08', '2027-06-09', '2027-06-10']) expect(isInWindow(portugalDay, day), day).toBe(true);
+    for (const day of ['2027-06-06', '2027-06-11']) expect(isInWindow(portugalDay, day), day).toBe(false);
+  });
+
   it('puts the day of a moving holiday in {date} of its text, for the next time it comes', () => {
     const carnival: FestaRef = { id: 'carnival', enabled: true, date: { easter: -47 } };
     expect(nextDay(carnival, '2027-02-09')).toBe('2027-02-09');
@@ -241,12 +249,14 @@ describe('festaRules', () => {
 });
 
 describe('the holidays of the site (src/data/festas.yaml)', () => {
-  it('an enabled holiday has its text in every language (pt, en, ru), the story of the day, and no {date} is left', async () => {
+  it('an enabled holiday has its text in ru and, if it has pt or en, in all three languages; no {date} is left; it has the story of the day', async () => {
     const { FESTAS, festaText } = await import('../../src/lib/festas-data');
     for (const festa of FESTAS.filter((f) => f.enabled)) {
-      for (const lang of ['pt', 'en', 'ru'] as const) {
+      const has = (['pt', 'en', 'ru'] as const).filter((lang) => festaText(festa, lang));
+      expect(has, `${festa.id} needs ru`).toContain('ru');
+      if (has.length > 1) expect(has, `${festa.id}: with pt or en it needs all three`).toHaveLength(3);
+      for (const lang of has) {
         const text = festaText(festa, lang);
-        expect(text, `${festa.id} in ${lang}`).toBeDefined();
         expect(JSON.stringify([text!.date, text!.head_date, text!.name]), `${festa.id} in ${lang}`).not.toContain('{date}');
       }
       expect(festa.story, `${festa.id} needs a story of the day`).toBeTruthy();

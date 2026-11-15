@@ -59,7 +59,15 @@
 | Король Жуан IV | D. João IV | King John IV | Жуан IV |
 | Луиза де Гусман (жена Жуана IV) | Luísa de Gusmão | Luísa de Gusmão | Луиза де Гусман |
 | Король Афонсу V | D. Afonso V | King Afonso V | Афонсу V |
-| Король Луиш I (в текстах без номера) | D. Luís | King Luís | Луиш |
+| Король Луиш I (в текстах без номера; в истории про 10 июня с номером, решение владельца: там нужно отличить его от других) | D. Luís (в этой истории D. Luís I) | King Luís (там King Luís I) | Луиш (там Луиш I) |
+| Камоэнс (поэт) | Camões | Camões | Камоэнс |
+| «Лузиады» (поэма) | Os Lusíadas | The Lusiads | «Лузиады» |
+| Васко да Гама | Vasco da Gama | Vasco da Gama | Васко да Гама |
+| Монастырь Жеронимуш в Белене | Mosteiro dos Jerónimos | Jerónimos Monastery | монастырь Жеронимуш |
+| Архив Торре-ду-Томбу | Torre do Tombo | Torre do Tombo | Торре-ду-Томбу |
+| Старик из Рестелу (персонаж «Лузиад») | Velho do Restelo | Old Man of Restelo | старик из Рестелу |
+| Рита Марното (исследовательница, Коимбра) | Rita Marnoto | Rita Marnoto | Рита Марното |
+| День Португалии (10 июня) | Dia de Portugal (10 de junho) | Portugal Day (June 10) | День Португалии |
 | Королева Мария II | D. Maria II | Queen Maria II | Мария II |
 | Королева Мария Пия | D. Maria Pia | Queen Maria Pia | Мария Пия |
 | Король-консорт Фернанду II (дворец Пена) | D. Fernando II | King Ferdinand II | Фердинанд II (в ru текстах принц Фердинанд Саксен-Кобург; по правилу о королях можно «Фернанду II», решение владельца) |

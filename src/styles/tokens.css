@@ -291,6 +291,7 @@
   /* The plate of the bolo-rei: the pale blue wash in the light theme, the surface of the cards of the site in the dark one (no blue fill on the warm dark page). */
   --festa-plate: light-dark(var(--festa-wash), var(--color-surface));
   --festa-bolo-max: 40rem; /* the cake on the page of Christmas, under the heading (640 px) */
+  --festa-lus-max: 35rem; /* the game "Save the Lusiads" on the page of Portugal Day (560 px) */
   --bolo-bubble-max: 17.5rem; /* the speech bubble over a cut slice */
   --bolo-bubble-icon: 2.5rem;
   --bolo-bubble-tail: 0.875rem;

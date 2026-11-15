@@ -390,3 +390,96 @@ html[data-js] .bolo__cake:not([disabled], [aria-disabled='true']) {
     animation: none;
   }
 }
+
+/* "Save the Lusiads" on the page of Portugal Day (src/scripts/lusiadas-game.mjs, from docs/drafts/lusiadas-game.css). The game reads its colours from --ink, --warm,
+   --wash, --shell and --paper of its root: here they are the tokens of the holiday and the page. */
+.festa-lusiadas__lead {
+  max-width: var(--measure);
+  margin: 0 0 var(--space-3);
+  color: var(--color-muted);
+}
+
+.lus {
+  --ink: var(--festa-ink);
+  --warm: var(--festa-warm);
+  --wash: var(--festa-wash);
+  --shell: var(--festa-shell);
+  --paper: var(--color-bg);
+  display: grid;
+  gap: var(--space-2);
+  max-width: var(--festa-lus-max);
+}
+
+.lus-stage {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--paper);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  outline-offset: var(--border-heavy);
+}
+
+.lus-stage:focus-visible {
+  outline: var(--border-medium) solid var(--ink);
+}
+
+.lus-cv {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lus-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--paper) 55%, transparent);
+}
+
+.lus-panel[hidden] {
+  display: none;
+}
+
+/* After a win the button goes to the corner so that the shore stays in sight. */
+.lus-panel--end {
+  place-items: end end;
+  padding: 0 var(--space-3) var(--space-3) 0;
+  background: none;
+}
+
+.lus-go {
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-medium) solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-strong);
+  cursor: pointer;
+}
+
+.lus-go:focus-visible {
+  outline: var(--border-medium) solid var(--ink);
+  outline-offset: var(--border-heavy);
+}
+
+.lus-status {
+  min-height: var(--space-5);
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-style: italic;
+}
+
+.lus-hint {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}

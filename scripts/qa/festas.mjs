@@ -1,5 +1,5 @@
 // Browser checks of the holidays (src/data/festas.yaml, src/lib/festas.mjs, docs/spec.md "Праздники"), run against dist/ served by serve.mjs:
-//   node festas.mjs [window page art nojs natal bolo carnaval pascoa]
+//   node festas.mjs [window page art nojs natal bolo carnaval pascoa junho]
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
 // text in every language of the site (pt, en, ru) and a drawing; the suite names what is missing when there is none.
 import { spawn, spawnSync } from 'node:child_process';
@@ -52,7 +52,7 @@ async function dayBuild(name, day, port) {
   await new Promise((resolve) => setTimeout(resolve, 1500));
   return `http://localhost:${port}`;
 }
-const OUT = want('page') || want('natal') || want('carnaval') || want('pascoa') ? await dayBuild('out', OUT_DAY, dayPort + 2) : '';
+const OUT = want('page') || want('natal') || want('carnaval') || want('pascoa') || want('junho') ? await dayBuild('out', OUT_DAY, dayPort + 2) : '';
 const IN = want('carnaval') ? await dayBuild('in', CARN_DAY, dayPort + 3) : '';
 // The build inside the window of Easter: the picture of the home page to share and the indexing of its page are decided by the day of the build.
 const EASTER = festas.find((f) => f.enabled && f.art === 'folar' && 'easter' in f.date && f.date.easter === 0);
@@ -606,6 +606,77 @@ if (want('pascoa')) {
           return { shown: !!svg?.checkVisibility(), role: svg?.getAttribute('role'), title: svg?.querySelector('title')?.textContent, moving, links: svg ? svg.querySelectorAll('a, [onclick], [data-goatcounter-click]').length : -1, width: Math.round(svg?.getBoundingClientRect().width ?? 0) };
         }, PASCOA.id);
         ok(`${where}, ${width} px, ${scheme}: the folar is drawn (role img, title, still, no links)`, art.shown && art.role === 'img' && art.title === PASCOA.text.ru.art_title && art.moving === 0 && art.links === 0 && art.width > 0, JSON.stringify(art));
+      }
+    }
+  }
+}
+
+// Portugal Day (art: book, a fixed day), in the languages that have its text: the window, the block and the tab icon on the home page, the line about the date outside
+// the window with noindex, the card of the story, the game "Save the Lusiads" (a canvas and the start button, working outside the window too).
+const JUNHO = festas.find((f) => f.enabled && f.art === 'book');
+if (want('junho')) {
+  if (!JUNHO) throw new Error('need: an enabled holiday with art "book" in src/data/festas.yaml. None found.');
+  const J_LANGS = LANGS.filter((l) => JUNHO.text[l]);
+  if (J_LANGS.length === 0) throw new Error(`need: a text of the holiday "${JUNHO.id}" in at least one language`);
+  const J_STORY = published.find((e) => e.id === JUNHO.story);
+  if (!J_STORY) throw new Error(`need: the story "${JUNHO.story}" of the holiday "${JUNHO.id}" among the published stories`);
+  const day = festaDay(JUNHO.date, year);
+  const { from } = windowOf(day);
+  for (const lang of J_LANGS) {
+    const T = JUNHO.text[lang];
+    for (const [name, date, inside] of [['first day of the window', from, true], ['the day itself', day, true], ['the day before the window', addDays(from, -1), false], ['the day after', addDays(day, 1), false]]) {
+      const page = await open(`/${lang}/?hoje=${date}`);
+      const st = await page.evaluate((id) => {
+        const block = document.querySelector(`[data-festa-show="${id}"] .festa-head`);
+        return {
+          shown: !!block?.checkVisibility(),
+          text: block?.textContent ?? '',
+          href: block?.querySelector('a')?.getAttribute('href') ?? '',
+          icon: (document.querySelector('link[rel=icon][type="image/svg+xml"]')?.getAttribute('href') ?? '').includes('/festas/favicon-book'),
+          festa: document.documentElement.getAttribute('data-festa'),
+        };
+      }, JUNHO.id);
+      const header = st.text.includes(T.head_date) && st.text.includes(T.head_title) && st.text.includes(T.head_line) && st.href === `/${lang}/festa/${JUNHO.slug}/`;
+      ok(`/${lang}/?hoje=${date} (${name}): ${inside ? 'the block of Portugal Day and the book icon' : 'the usual home page'}`, inside ? st.shown && header && st.icon && st.festa === JUNHO.id : !st.shown && !st.icon && st.festa !== JUNHO.id, JSON.stringify(st));
+    }
+    const url = `/${lang}/festa/${JUNHO.slug}/`;
+    const off = await open(`${url}?hoje=${addDays(day, 1)}`, { site: OUT });
+    const out = await off.evaluate(() => ({
+      line: document.querySelector('[data-festa-off]')?.checkVisibility() ? document.querySelector('[data-festa-off]').textContent.trim() : '',
+      date: !!document.querySelector('[data-festa-on]')?.checkVisibility(),
+      robots: document.querySelector('meta[name=robots]')?.getAttribute('content') ?? '',
+    }));
+    ok(`${url}: outside the window the line "${T.off_window}" and noindex`, out.line === T.off_window && !out.date && /noindex/.test(out.robots), JSON.stringify(out));
+    const on = await open(`${url}?hoje=${day}`);
+    const inn = await on.evaluate(() => ({
+      h1: document.querySelector('h1')?.textContent.trim(),
+      date: document.querySelector('[data-festa-on]')?.textContent.trim(),
+      href: document.querySelector('.festa-story a')?.getAttribute('href') ?? '',
+      traditions: document.querySelectorAll('.festa-trad li').length,
+      order: [...document.querySelectorAll('.festa-page h2')].map((h) => h.textContent.trim()),
+    }));
+    ok(`${url}: in the window the date, the name, the blocks in order (game, story, traditions)`, inn.h1 === T.name && inn.date === T.date && inn.traditions === T.traditions.length && inn.href.length > 0 && inn.order[0] === T.lusiadas.title && inn.order.length === 3, JSON.stringify(inn));
+    const story = await open(inn.href || '/');
+    ok(`${url}: the card leads to the story "${J_STORY.title[lang]}"`, (await story.$eval('h1', (el) => el.textContent.trim()).catch(() => '')) === J_STORY.title[lang]);
+    // The game works outside the window as well: a canvas and the start button; the button starts a run and the field is named for screen readers.
+    const game = await open(`${url}?hoje=${addDays(day, 1)}`, { site: OUT });
+    const g = await game.evaluate(() => ({ canvas: !!document.querySelector('.lus canvas.lus-cv'), button: document.querySelector('.lus .lus-go')?.textContent.trim() ?? '', aria: document.querySelector('.lus-stage')?.getAttribute('aria-label') ?? '' }));
+    ok(`${url}: the game has a canvas and the button "${T.lusiadas.start}"`, g.canvas && g.button === T.lusiadas.start && g.aria === T.lusiadas.aria, JSON.stringify(g));
+    await game.click('.lus .lus-go');
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    ok(`${url}: the button starts a run (the panel goes away)`, await game.evaluate(() => document.querySelector('.lus-panel')?.hidden === true));
+  }
+  // The drawing: one on the home page and one on the page, a phone too; role and title; nothing moves, nothing is clickable.
+  for (const [where, path] of [['home', `/ru/?hoje=${day}`], ['page', `/ru/festa/${JUNHO.slug}/?hoje=${day}`]]) {
+    for (const scheme of ['light', 'dark']) {
+      for (const width of [1280, 360]) {
+        const page = await open(path, { width, scheme });
+        const art = await page.evaluate((id) => {
+          const svg = document.querySelector(`${document.querySelector('.festa-head') ? `[data-festa-show="${id}"] ` : ''}svg.festa-art`);
+          const moving = svg ? [...svg.querySelectorAll('*')].filter((el) => getComputedStyle(el).animationName !== 'none').length : -1;
+          return { shown: !!svg?.checkVisibility(), role: svg?.getAttribute('role'), title: svg?.querySelector('title')?.textContent, moving, links: svg ? svg.querySelectorAll('a, [onclick], [data-goatcounter-click]').length : -1, width: Math.round(svg?.getBoundingClientRect().width ?? 0) };
+        }, JUNHO.id);
+        ok(`${where}, ${width} px, ${scheme}: the book is drawn (role img, title, still, no links)`, art.shown && art.role === 'img' && art.title === JUNHO.text.ru.art_title && art.moving === 0 && art.links === 0 && art.width > 0, JSON.stringify(art));
       }
     }
   }

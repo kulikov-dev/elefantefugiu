@@ -5,6 +5,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FestaArt from '../components/FestaArt.astro';
 import BoloGame from '../components/BoloGame.astro';
+import LusiadasGame from '../components/LusiadasGame.astro';
 import StartCard from '../components/StartCard.astro';
 import { festaPath, storyPath, LANGS, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
@@ -73,6 +74,15 @@ const readyLangs = LANGS.filter((l) => festaText(festa, l));
         )
       }
     </div>
+    {
+      text.lusiadas && (
+        <section aria-labelledby="festa-lusiadas">
+          <h2 id="festa-lusiadas">{text.lusiadas.title}</h2>
+          <p class="festa-lusiadas__lead">{text.lusiadas.lead}</p>
+          <LusiadasGame text={text.lusiadas} />
+        </section>
+      )
+    }
     {
       dayStory && (
         <section aria-labelledby="festa-history">
