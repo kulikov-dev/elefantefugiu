@@ -324,7 +324,7 @@
         - title: 'Мидии вместо мяса.'
           text: 'В Страстную пятницу на пляже Магоиту под Синтрой десятки людей с вёдрами выходят на отлив собирать мидии. Старожилы объясняют это другим обычаем: в этот день нельзя есть мясо.'
 
-# Portugal Day: 10 June, the window 7-10 June. ru only for now (pt and en come with the next step, the language test then wants all three).
+# Portugal Day: 10 June, the window 7-10 June.
 - id: dia-de-portugal
   slug: dia-de-portugal
   enabled: true
@@ -336,6 +336,60 @@
   image: festas/dia-de-portugal.jpg
   story: tricentenario-camoes-1880
   text:
+    pt:
+      date: '10 de junho'
+      name: 'Dia de Portugal'
+      head_date: '10 de junho · Dia de Portugal'
+      head_title: 'A festa que saiu de um recibo de pensão'
+      head_line: 'A data do Dia de Portugal foi encontrada num papel sobre a pensão da mãe de Camões.'
+      head_link: 'A história deste dia →'
+      art_title: 'Um livro aberto, Os Lusíadas, numa coroa de louros, na crista de uma onda'
+      lead: 'O nome completo é Dia de Portugal, de Camões e das Comunidades Portuguesas. O país celebra-o no dia da morte do seu maior poeta, o autor de Os Lusíadas.'
+      og_description: 'Porque é que Portugal celebra o dia da morte do seu poeta. E um minijogo: chegue a terra a nado e salve o manuscrito de Os Lusíadas.'
+      off_window: 'Este feriado celebra-se a 10 de junho'
+      lusiadas:
+        title: 'Salve Os Lusíadas'
+        lead: 'Diz a lenda que Camões naufragou junto à foz do Mekong e chegou a terra a nado, a segurar o manuscrito de Os Lusíadas acima da água. Experimente também.'
+        hint: 'Toque na imagem ou carregue na barra de espaço para saltar a onda. Mantenha premido para saltar mais alto. É melhor deixar passar as gaivotas.'
+        start: 'Nadar até à costa'
+        again: 'Outra vez'
+        won: 'Manuscrito salvo. Diz a lenda que foi mesmo assim.'
+        lost: 'O manuscrito molhou-se. Tente outra vez.'
+        aria: 'Saltar a onda'
+      traditions:
+        - title: 'Todos os anos numa cidade diferente.'
+          text: 'Desde 1977, as comemorações oficiais do 10 de junho realizam-se todos os anos numa cidade diferente, do Porto a Faro e aos Açores. E desde 2016 o dia celebra-se também no estrangeiro, junto das comunidades portuguesas: em Paris, no Rio de Janeiro e em São Paulo, em Macau, no Luxemburgo.'
+        - title: 'A gruta de Macau.'
+          text: 'Camões escreveu Os Lusíadas longe de casa, no Oriente, e no início da década de 1560 serviu em Macau. Ainda lá existe o Jardim de Camões, com uma gruta e um busto de bronze do poeta: segundo a tradição, foi nesta gruta que ele trabalhou no poema.'
+        - title: 'O poeta de um olho só.'
+          text: 'Em jovem, Camões serviu dois anos como soldado no Norte de África e perdeu o olho direito num combate perto de Ceuta. É assim que costuma ser retratado: nos retratos e nas estátuas, tem um olho fechado.'
+    en:
+      date: 'June 10'
+      name: 'Portugal Day'
+      head_date: 'June 10 · Portugal Day'
+      head_title: 'The Holiday from a Pension Record'
+      head_line: 'The date of Portugal’s national day turned up in a record of the pension paid to Camões’s mother.'
+      head_link: 'The story of this day →'
+      art_title: 'An open book, The Lusiads, in a laurel wreath on the crest of a wave'
+      lead: 'Its full name is the Day of Portugal, Camões, and the Portuguese Communities. The country celebrates it on the day its greatest poet, the author of The Lusiads, died.'
+      og_description: 'Why Portugal celebrates the day its poet died. Plus a mini-game: swim ashore and save the manuscript of The Lusiads.'
+      off_window: 'This holiday is celebrated on June 10'
+      lusiadas:
+        title: 'Save The Lusiads'
+        lead: 'Legend has it that Camões was shipwrecked at the mouth of the Mekong and swam ashore, holding the manuscript of The Lusiads above the water. Now it’s your turn.'
+        hint: 'Tap the picture or press Space to jump over a wave. Hold longer to jump higher. Better let the gulls fly by.'
+        start: 'Swim for shore'
+        again: 'Try again'
+        won: 'Manuscript saved. Legend says that’s just how it went.'
+        lost: 'The manuscript got soaked. Try again.'
+        aria: 'Jump over the wave'
+      traditions:
+        - title: 'A new city every year.'
+          text: 'Since 1977, the main June 10 celebrations have moved to a different city every year, from Porto to Faro and the Azores. And since 2016 the day has also been celebrated abroad, together with the Portuguese communities there: in Paris, Rio de Janeiro and São Paulo, Macau, and Luxembourg.'
+        - title: 'The grotto in Macau.'
+          text: 'Camões wrote The Lusiads far from home, in the East, and in the early 1560s he served in Macau. The Camões Garden is still there, with a grotto and a bronze bust of the poet: tradition says this is where he worked on the poem.'
+        - title: 'The one-eyed poet.'
+          text: 'As a young man, Camões spent two years as a soldier in North Africa and lost his right eye in a battle near Ceuta. That’s how he’s usually shown: in portraits and statues, one of his eyes is closed.'
     ru:
       date: '10 июня'
       name: 'День Португалии'

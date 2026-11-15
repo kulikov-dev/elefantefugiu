@@ -44,13 +44,13 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: O Dia de Portugal veio da pensão da mãe de Camões.
-  en: Portugal’s national day was found in a paper about Camões’s mother’s pension.
+  pt: A data do Dia de Portugal veio de um recibo de pensão.
+  en: Portugal’s national day got its date from a pension record.
   ru: Дату главного праздника Португалии нашли в бумаге о пенсии матери Камоэнса.
 seo:
   title:
-    pt: A festa que saiu de um recibo de pensão · Lisboa, 1880
-    en: The Holiday from a Pension Record · Lisbon, 1880
+    pt: 'Dia de Portugal: a data de um recibo de pensão, 1880'
+    en: 'Portugal Day: A Date from a Pension Record, 1880'
     ru: 'День Португалии: дата из бумаги о пенсии, 1880'
 story:
   pt: >-

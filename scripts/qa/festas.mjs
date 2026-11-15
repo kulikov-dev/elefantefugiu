@@ -6,7 +6,7 @@ import { spawn, spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { launchBrowser } from './browser.mjs';
-import { festas, published, readyEpochs } from './data.mjs';
+import { events, festas, published, readyEpochs } from './data.mjs';
 import { addDays, festaDay, fillDate, windowOf } from '../../src/lib/festas.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
@@ -21,7 +21,8 @@ const STORY = published.find((e) => e.id === FESTA.story);
 if (!STORY) throw new Error(`need: the story "${FESTA.story}" of the holiday "${FESTA.id}" among the published stories`);
 // Days come from the data, never from the clock: the year after the last published story (the days of the holidays are far from it), and, for the builds that
 // need a day of their own, the days below.
-const LATEST = published.map((e) => e.published).sort().at(-1);
+// The latest day of any story that is ready, queued ones included: a build of that day has every story on the site (the story of a holiday may still be queued).
+const LATEST = events.filter((e) => e.status === 'ready').map((e) => e.published).sort().at(-1);
 const year = Number(LATEST.slice(0, 4)) + 1;
 const DAY = festaDay(FESTA.date, year);
 const { from: FIRST } = windowOf(DAY);
@@ -617,15 +618,17 @@ const JUNHO = festas.find((f) => f.enabled && f.art === 'book');
 if (want('junho')) {
   if (!JUNHO) throw new Error('need: an enabled holiday with art "book" in src/data/festas.yaml. None found.');
   const J_LANGS = LANGS.filter((l) => JUNHO.text[l]);
-  if (J_LANGS.length === 0) throw new Error(`need: a text of the holiday "${JUNHO.id}" in at least one language`);
-  const J_STORY = published.find((e) => e.id === JUNHO.story);
-  if (!J_STORY) throw new Error(`need: the story "${JUNHO.story}" of the holiday "${JUNHO.id}" among the published stories`);
+  ok('Portugal Day has a text in all three languages (pt, en, ru)', J_LANGS.join() === LANGS.join(), J_LANGS.join());
+  // The story of the day may be queued for a later day in the real build: the checks run on the build of OUT_DAY, where it is on the site.
+  const J_STORY = events.find((e) => e.id === JUNHO.story);
+  if (!J_STORY) throw new Error(`need: the story "${JUNHO.story}" of the holiday "${JUNHO.id}" among the stories`);
+  const J = { site: OUT };
   const day = festaDay(JUNHO.date, year);
   const { from } = windowOf(day);
   for (const lang of J_LANGS) {
     const T = JUNHO.text[lang];
     for (const [name, date, inside] of [['first day of the window', from, true], ['the day itself', day, true], ['the day before the window', addDays(from, -1), false], ['the day after', addDays(day, 1), false]]) {
-      const page = await open(`/${lang}/?hoje=${date}`);
+      const page = await open(`/${lang}/?hoje=${date}`, J);
       const st = await page.evaluate((id) => {
         const block = document.querySelector(`[data-festa-show="${id}"] .festa-head`);
         return {
@@ -647,7 +650,7 @@ if (want('junho')) {
       robots: document.querySelector('meta[name=robots]')?.getAttribute('content') ?? '',
     }));
     ok(`${url}: outside the window the line "${T.off_window}" and noindex`, out.line === T.off_window && !out.date && /noindex/.test(out.robots), JSON.stringify(out));
-    const on = await open(`${url}?hoje=${day}`);
+    const on = await open(`${url}?hoje=${day}`, J);
     const inn = await on.evaluate(() => ({
       h1: document.querySelector('h1')?.textContent.trim(),
       date: document.querySelector('[data-festa-on]')?.textContent.trim(),
@@ -656,7 +659,7 @@ if (want('junho')) {
       order: [...document.querySelectorAll('.festa-page h2')].map((h) => h.textContent.trim()),
     }));
     ok(`${url}: in the window the date, the name, the blocks in order (game, story, traditions)`, inn.h1 === T.name && inn.date === T.date && inn.traditions === T.traditions.length && inn.href.length > 0 && inn.order[0] === T.lusiadas.title && inn.order.length === 3, JSON.stringify(inn));
-    const story = await open(inn.href || '/');
+    const story = await open(inn.href || '/', J);
     ok(`${url}: the card leads to the story "${J_STORY.title[lang]}"`, (await story.$eval('h1', (el) => el.textContent.trim()).catch(() => '')) === J_STORY.title[lang]);
     // The game works outside the window as well: a canvas and the start button; the button starts a run and the field is named for screen readers.
     const game = await open(`${url}?hoje=${addDays(day, 1)}`, { site: OUT });
@@ -670,7 +673,7 @@ if (want('junho')) {
   for (const [where, path] of [['home', `/ru/?hoje=${day}`], ['page', `/ru/festa/${JUNHO.slug}/?hoje=${day}`]]) {
     for (const scheme of ['light', 'dark']) {
       for (const width of [1280, 360]) {
-        const page = await open(path, { width, scheme });
+        const page = await open(path, { width, scheme, site: OUT });
         const art = await page.evaluate((id) => {
           const svg = document.querySelector(`${document.querySelector('.festa-head') ? `[data-festa-show="${id}"] ` : ''}svg.festa-art`);
           const moving = svg ? [...svg.querySelectorAll('*')].filter((el) => getComputedStyle(el).animationName !== 'none').length : -1;

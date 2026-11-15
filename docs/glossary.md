@@ -66,6 +66,8 @@
 | Монастырь Жеронимуш в Белене | Mosteiro dos Jerónimos | Jerónimos Monastery | монастырь Жеронимуш |
 | Архив Торре-ду-Томбу | Torre do Tombo | Torre do Tombo | Торре-ду-Томбу |
 | Старик из Рестелу (персонаж «Лузиад») | Velho do Restelo | Old Man of Restelo | старик из Рестелу |
+| Река Меконг (устье, где по легенде спасался Камоэнс) | Mekong | Mekong | Меконг |
+| Сад Камоэнса в Макао (грот и бронзовый бюст поэта) | Jardim de Camões | Camões Garden | сад Камоэнса |
 | Рита Марното (исследовательница, Коимбра) | Rita Marnoto | Rita Marnoto | Рита Марното |
 | День Португалии (10 июня) | Dia de Portugal (10 de junho) | Portugal Day (June 10) | День Португалии |
 | Королева Мария II | D. Maria II | Queen Maria II | Мария II |
