@@ -5,6 +5,7 @@
 import FestaArt from './FestaArt.astro';
 import { festaPath, type Lang } from '../i18n/routes';
 import { builtFesta, festaText, festasIn } from '../lib/festas-data';
+import { loadSite } from '../lib/site-data';
 
 interface Props {
   lang: Lang;
@@ -12,7 +13,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const built = builtFesta();
-const festas = festasIn(lang).filter((f) => f.art);
+// A holiday whose story of the day is queued for a later day shows no block yet: its title would be a trace of a card that is not published.
+const live = new Set((await loadSite()).events.map((e) => e.id));
+const festas = festasIn(lang).filter((f) => f.art && (!f.story || live.has(f.story)));
 ---
 {
   festas.map((festa) => {

@@ -47,6 +47,11 @@ hook:
   pt: O Dia de Portugal veio da pensão da mãe de Camões.
   en: Portugal’s national day was found in a paper about Camões’s mother’s pension.
   ru: Дату главного праздника Португалии нашли в бумаге о пенсии матери Камоэнса.
+seo:
+  title:
+    pt: A festa que saiu de um recibo de pensão · Lisboa, 1880
+    en: The Holiday from a Pension Record · Lisbon, 1880
+    ru: 'День Португалии: дата из бумаги о пенсии, 1880'
 story:
   pt: >-
     Camões escreveu Os Lusíadas, poema que conta toda a história de Portugal como uma grande viagem por mar. Os portugueses veem nele a sua epopeia, e ao português chamam «a língua de Camões». Por isso a festa do país ficou ligada a ele. Do nascimento do poeta não se sabe nada: nem o ano nem a cidade. Só tem uma data firme: a da morte.
@@ -150,6 +155,6 @@ image:
   ai: true
   focus: "50% 50%"
 status: ready
-published: '2026-11-15'
+published: '2026-11-24'
 placeholder: false
 ru_ready: true

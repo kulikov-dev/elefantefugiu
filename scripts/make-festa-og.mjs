@@ -87,7 +87,7 @@ const iconFiles = new Set();
 for (const name of icons) {
   const make = ICONS[name];
   if (!make) throw new Error(`make-festa-og: no icon "${name}" in src/lib/festa-art.mjs`);
-  writeFileSync(join(iconDir, `favicon-${name}.svg`), make(iconColors));
+  writeFileSync(join(iconDir, `favicon-${name}.svg`), make(iconColors, undefined, 16));
   const light1 = Buffer.from(make(iconColors, 'light'));
   await sharp(light1, { density: 384 }).resize(32, 32).png({ compressionLevel: 9 }).toFile(join(iconDir, `favicon-${name}-32.png`));
   const crown = await sharp(light1, { density: 1152 }).resize(124, 124).png().toBuffer();

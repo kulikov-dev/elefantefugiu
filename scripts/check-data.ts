@@ -529,7 +529,12 @@ for (const t of threads) {
     if (festa.enabled && langs.length === 0) report('error', at, 'is enabled but has no text', 'text');
     if (festa.enabled && langs.length > 0 && !festa.art) report('error', at, 'has a text but no drawing (art)', 'art');
     if (festa.story && !known.has(festa.story)) report('error', at, `the story "${festa.story}" does not exist`, 'story');
-    if (festa.story && known.has(festa.story) && !events.some((e) => e.item.id === festa.story && isLive(e.item))) report('error', at, `the story "${festa.story}" is not on the site (a draft or a future day)`, 'story');
+    // A story queued for a later day (ready, published in the future) is allowed: the page of the holiday leaves its section out until the day (FestaView); a draft is not.
+    const dayStory = events.find((e) => e.item.id === festa.story);
+    if (festa.story && dayStory && !isLive(dayStory.item)) {
+      if (dayStory.item.status === 'ready') report('warn', at, `the story "${festa.story}" is queued for ${dayStory.item.published}: its section is left out of the page until then`, 'story');
+      else report('error', at, `the story "${festa.story}" is not on the site (a draft)`, 'story');
+    }
     if (festa.enabled && langs.length > 0 && !festa.story) report('error', at, 'has a text but no story of the day (story)', 'story');
     for (const lang of langs) {
       for (const [i, item] of (festa.text[lang as DataLang]?.traditions ?? []).entries()) {
