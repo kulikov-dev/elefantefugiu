@@ -1,0 +1,350 @@
+# The glossary: Portuguese words and realia a reader from outside Portugal does not know (src/data/schemas.ts glossarySchema, src/lib/glossary.ts, docs/spec.md "Словарик").
+# term: the word in Portuguese. name: how the page of the glossary writes it in each language (ru: the Russian spelling).
+# text: one or two sentences, what it is and why it matters (a tooltip and the page of the glossary).
+# forms: the forms of the word in the text of the stories of that language; they find the word to mark and the stories to link. `*` stands for any ending (Байш* = Байша, Байшу, Байши).
+#   A language with no forms (or no entry) does not mark its text: the story explains the word itself ("tiles" in English).
+# inline: true = the first mention in the story and in "More" gets a dotted underline and a tooltip; false = the word is on the page of the glossary only
+#   (the story already explains it, or it is a word of a holiday).
+# festa: the id of a holiday of src/data/festas.yaml that tells about the word (a link on the page of the glossary).
+# The marks are in ru and en only (the Portuguese text is not marked). The page sorts the words by their name in the language of the page.
+
+- id: azulejo
+  term: azulejo
+  inline: true
+  name: { ru: азулежу, en: azulejo }
+  forms:
+    ru: [азулежу]
+    en: []
+  text:
+    ru: "Глазурованная плитка, чаще синяя с белым. Ею облицовывают церкви, вокзалы и фасады домов, и стена становится картинкой."
+    en: "Glazed ceramic tile, often blue and white. Churches, stations and house fronts in Portugal are covered with it, so a wall becomes a picture."
+
+- id: bacalhau
+  term: bacalhau
+  inline: false
+  name: { ru: бакалау, en: bacalhau }
+  forms:
+    ru: [бакалау]
+    en: [bacalhau]
+  text:
+    ru: "Солёная сушёная треска, основа национальной кухни. Она хранится месяцами, поэтому кормила моряков и горожан задолго до холодильников."
+    en: "Salted, dried cod, the backbone of Portuguese cooking. It keeps for months, so it fed sailors and townspeople long before refrigerators."
+
+- id: baixa
+  term: Baixa
+  inline: true
+  name: { ru: Байша, en: Baixa }
+  forms:
+    ru: [Байш*]
+    en: [Baixa]
+  text:
+    ru: "«Нижний город» Лиссабона у реки Тежу. После землетрясения 1755 года его отстроили заново, по прямой сетке улиц."
+    en: "Lisbon’s “lower town” by the Tagus. After the 1755 earthquake it was rebuilt from scratch on a straight grid of streets."
+
+- id: berroes
+  term: berrões
+  inline: false
+  name: { ru: берройнш, en: berrões }
+  forms:
+    ru: [берройнш]
+    en: [berrões]
+  text:
+    ru: "Гранитные фигуры кабанов, свиней и быков на севере Португалии, старше римлян. Их нашли больше четырёхсот, и зачем их ставили, никто точно не знает."
+    en: "Granite figures of boars, pigs and bulls in northern Portugal, older than the Romans. More than four hundred have been found, and nobody knows for sure why they were put up."
+
+- id: bolo-rei
+  term: bolo-rei
+  inline: false
+  name: { ru: bolo-rei, en: bolo-rei }
+  forms:
+    ru: [bolo-rei, болу-рей]
+    en: [bolo-rei]
+  festa: natal
+  text:
+    ru: "Пирог-венок с цукатами и орехами, который пекут на Рождество и в День волхвов. «Король» в названии — это волхвы, а не португальский король."
+    en: "A wreath-shaped cake with candied fruit and nuts, baked for Christmas and Epiphany. The “king” in the name is the Magi, not a Portuguese king."
+
+- id: capile
+  term: capilé
+  inline: false
+  name: { ru: капилé, en: capilé }
+  forms:
+    ru: [капилé, капиле]
+    en: [capilé]
+  text:
+    ru: "Сладкий напиток на сиропе, который продавали на улицах Лиссабона. По рассказам, его стали продавать бывшие водоносы."
+    en: "A sweet syrup drink once sold on Lisbon’s streets. Former water carriers reportedly took it up."
+
+- id: careto
+  term: caretos de Podence
+  inline: false
+  name: { ru: карету из Поденсе, en: caretos of Podence }
+  forms:
+    ru: [карету]
+    en: [careto*]
+  festa: carnaval
+  text:
+    ru: "Ряженые деревни Поденсе: красное покрывало с цветной бахромой, жестяная маска и коровьи колокольчики на поясе. С 2019 года это наследие ЮНЕСКО."
+    en: "The masked revelers of Podence: a red cloak with colored wool fringe, a tin mask and cowbells at the waist. A UNESCO heritage tradition since 2019."
+
+- id: chafariz
+  term: chafariz
+  inline: false
+  name: { ru: чафариш, en: chafariz }
+  forms:
+    ru: [Чафариш*, чафариш*]
+    en: [Chafariz]
+  text:
+    ru: "Городской фонтан с несколькими носиками. До водопровода воду брали здесь, и очередь к нему была частью городской жизни."
+    en: "A public fountain with several spouts. Before running water, people filled their jugs here, and the queue was part of city life."
+
+- id: chiado
+  term: Chiado
+  inline: true
+  name: { ru: Шиаду, en: Chiado }
+  forms:
+    ru: [Шиаду]
+    en: [Chiado]
+  text:
+    ru: "Район Лиссабона на холме над Байшей. Старые кафе, театры и книжные магазины."
+    en: "The Lisbon district on the hill above the Baixa, with old cafés, theaters and bookshops."
+
+- id: compasso
+  term: compasso pascal
+  inline: false
+  name: { ru: компасу, en: compasso }
+  forms:
+    ru: [компасу]
+    en: [compasso]
+  festa: pascoa
+  text:
+    ru: "Пасхальное шествие с крестом по домам: священник или прихожанин несёт крест от двери к двери, хозяева целуют его и угощают гостей."
+    en: "The Easter procession of the cross from house to house: a priest or parishioner carries it from door to door, and the hosts kiss it and treat the visitors."
+
+- id: consoada
+  term: consoada
+  inline: false
+  name: { ru: консоада, en: consoada }
+  forms:
+    ru: [консоад*]
+    en: [consoada]
+  festa: natal
+  text:
+    ru: "Рождественский ужин в сочельник. Во внутренних районах на столе треска, на севере осьминог."
+    en: "The Christmas Eve dinner. Inland the main dish is cod, in the north octopus."
+
+- id: feitoria
+  term: feitoria
+  inline: true
+  name: { ru: фейтория, en: feitoria }
+  forms:
+    ru: [Feitoria]
+    en: [Feitoria]
+  text:
+    ru: "Слово значит «торговая контора». «Вином фейтории» называли лучшие вина, которые разрешалось вывозить, прежде всего в Англию. Камни с этим словом отмечали границы таких виноградников."
+    en: "The word means “trading post.” “Feitoria wine” was the best wine, allowed to be exported, above all to England. The stones with this word marked the borders of such vineyards."
+
+- id: fado
+  term: fado
+  inline: true
+  name: { ru: фаду, en: fado }
+  forms:
+    ru: [фаду]
+    en: [fado]
+  text:
+    ru: "Городская песня о тоске и судьбе под португальскую гитару. Родилась в лиссабонских тавернах в XIX веке, с 2011 года в списке наследия ЮНЕСКО."
+    en: "An urban song of longing and fate, sung to the Portuguese guitar. It was born in Lisbon’s taverns in the 1800s and has been on UNESCO’s heritage list since 2011."
+
+- id: folar
+  term: folar
+  inline: false
+  name: { ru: фолар, en: folar }
+  forms:
+    ru: [фолар*]
+    en: [folar]
+  festa: pascoa
+  text:
+    ru: "Сдобный хлеб с целыми яйцами в скорлупе и крестом из теста. Его пекут на Пасху, он бывает сладким и солёным."
+    en: "A bread baked with whole eggs in their shells under a cross of dough. Made for Easter, sweet or savory."
+
+- id: lusitania
+  term: Lusitânia
+  inline: true
+  name: { ru: Лузитания, en: Lusitania }
+  forms:
+    ru: [Лузитан*, лузитан*]
+    en: [Lusitan*]
+  text:
+    ru: "Римская провинция на западе Пиренейского полуострова: Португалия к югу от Дору и часть нынешней Испании. «Лузитанский» часто значит просто «португальский»."
+    en: "A Roman province in the west of the Iberian Peninsula: Portugal south of the Douro and part of today’s Spain. “Lusitanian” often just means Portuguese."
+
+- id: manuelino
+  term: manuelino
+  inline: false
+  name: { ru: мануэлину, en: Manueline }
+  forms:
+    ru: [мануэлин*]
+    en: [Manueline]
+  text:
+    ru: "Португальский стиль конца XV и начала XVI века, с резьбой из морских мотивов: канатов, ракушек, водорослей. Назван по королю Мануэлу I."
+    en: "The Portuguese style of the late 1400s and early 1500s, carved with sea motifs: ropes, shells, seaweed. Named after King Manuel I."
+
+- id: matrafonas
+  term: matrafonas
+  inline: false
+  name: { ru: матрафоны, en: matrafonas }
+  forms:
+    ru: [матрафон*]
+    en: [matrafona*]
+  festa: carnaval
+  text:
+    ru: "Мужчины в женских платьях, карнавальные ряженые. Самое известное шествие матрафон идёт в Торриш-Ведраше."
+    en: "Men dressed as women, a Carnival tradition. The best-known parade of matrafonas is in Torres Vedras."
+
+- id: missa-do-galo
+  term: Missa do Galo
+  inline: false
+  name: { ru: Missa do Galo, en: Missa do Galo }
+  forms:
+    ru: [Missa do Galo]
+    en: [Missa do Galo]
+  festa: natal
+  text:
+    ru: "Ночная рождественская месса, «месса петуха». По легенде, петух первым прокричал о рождении Христа."
+    en: "The Christmas Eve midnight Mass, “the Rooster’s Mass.” Legend has it that a rooster was the first to announce the birth of Christ."
+
+- id: madeiro
+  term: madeiro
+  inline: false
+  name: { ru: мадейру, en: madeiro }
+  forms:
+    ru: [madeiro]
+    en: [madeiro]
+  festa: natal
+  text:
+    ru: "Рождественский костёр из целых стволов, который складывают перед церковью в деревнях Бейры. Не путать с островом Мадейра."
+    en: "A Christmas bonfire of whole tree trunks, built in front of the church in villages of the Beira region. Not to be confused with the island of Madeira."
+
+- id: mouraria
+  term: Mouraria
+  inline: false
+  name: { ru: Маурария, en: Mouraria }
+  forms:
+    ru: [Маурари*]
+    en: [Mouraria]
+  text:
+    ru: "Старый квартал Лиссабона под замком. Здесь в тавернах пели первые фаду."
+    en: "An old Lisbon quarter below the castle, where the first fados were sung in the taverns."
+
+- id: padrao-dos-povos
+  term: Padrão dos Povos
+  inline: false
+  name: { ru: падрау-душ-повуш, en: Padrão dos Povos }
+  forms:
+    ru: [Падрау-душ-Повуш]
+    en: [Padrão dos Povos]
+  text:
+    ru: "«Камень народов»: римская колонна у моста в Шавише, на которой перечислены десять местных общин."
+    en: "The “stone of the peoples”: a Roman column at the bridge in Chaves that lists ten local communities."
+
+- id: pai-natal
+  term: Pai Natal
+  inline: false
+  name: { ru: Пай Натал, en: Pai Natal }
+  forms:
+    ru: [Пай Натал*]
+    en: [Pai Natal]
+  festa: natal
+  text:
+    ru: "Португальский Санта-Клаус, «Отец Рождество»."
+    en: "The Portuguese Santa Claus, “Father Christmas.”"
+
+- id: pelourinho
+  term: pelourinho
+  inline: false
+  name: { ru: пелоуриню, en: pelourinho }
+  forms:
+    ru: [пелоуриню]
+    en: [pelourinho, pillory]
+  text:
+    ru: "Каменный столб на площади города. Он был знаком городских прав, и у него же выставляли и наказывали преступников."
+    en: "A stone column on a town square. It stood for the town’s rights, and offenders were also displayed and punished at it."
+
+- id: rabelo
+  term: rabelo
+  inline: false
+  name: { ru: рабелу, en: rabelo }
+  forms:
+    ru: [рабелу, Рабелу]
+    en: [rabelo*, Rabelo*]
+  text:
+    ru: "Плоскодонная парусная лодка, на которой бочки с портвейном спускали по Дору к морю."
+    en: "A flat-bottomed sailing boat that carried casks of port wine down the Douro to the sea."
+
+- id: rajao
+  term: rajão
+  inline: false
+  name: { ru: ражан, en: rajão }
+  forms:
+    ru: [ражан*, ражао]
+    en: [rajão]
+  text:
+    ru: "Небольшой мадейрский струнный инструмент, родня гитары. Его строй перешёл к гавайскому укулеле."
+    en: "A small stringed instrument of Madeira, a cousin of the guitar. Its tuning passed to the Hawaiian ukulele."
+
+- id: roupa-velha
+  term: roupa-velha
+  inline: false
+  name: { ru: roupa-velha, en: roupa-velha }
+  forms:
+    ru: [roupa-velha]
+    en: [roupa-velha]
+  festa: natal
+  text:
+    ru: "«Старая одежда»: блюдо из остатков рождественского ужина, которое жарят 25 декабря."
+    en: "“Old clothes”: a dish made from the Christmas Eve leftovers and fried on December 25."
+
+- id: talha-dourada
+  term: talha dourada
+  inline: false
+  name: { ru: талья дорада, en: talha dourada }
+  forms:
+    ru: [талью дораду, тальу дораду, талья дорада]
+    en: [talha dourada]
+  text:
+    ru: "Позолоченная резьба по дереву. Ею покрывали алтари и стены церквей XVII–XVIII веков."
+    en: "Gilded wood carving. It covered the altars and walls of churches in the 1600s and 1700s."
+
+- id: infante
+  term: infante
+  inline: true
+  name: { ru: инфант, en: infante }
+  forms:
+    ru: [инфант, инфанта, инфанту, инфантом, инфанте, инфанты, инфантов]
+    en: []
+  text:
+    ru: "Титул королевского сына или брата. Инфант Энрике, которого зовут Мореплавателем, сын короля Жуана I, начал плавания вдоль Африки."
+    en: "The title of a king’s son or brother. Infante Henry, called the Navigator, a son of King John I, began the voyages down the African coast."
+
+- id: tripeiros
+  term: tripeiros
+  inline: false
+  name: { ru: трипейруш, en: tripeiros }
+  forms:
+    ru: [tripeiros]
+    en: [tripeiros]
+  text:
+    ru: "«Любители потрохов», прозвище жителей Порту. По легенде 1415 года город отдал мясо флоту и оставил себе потроха."
+    en: "“Tripe-eaters,” the nickname of the people of Porto. In the legend of 1415 the city gave its meat to the fleet and kept the tripe."
+
+- id: testamento
+  term: testamento da comadre
+  inline: false
+  name: { ru: «завещание кумы», en: “will of the comadre” }
+  forms:
+    ru: [завещание кумы, завещания кумы]
+    en: [will of the comadre]
+  festa: carnaval
+  text:
+    ru: "Стихотворное «завещание», которое в деревне Лазарин в карнавальный вторник читают на площади: в нём достаётся деревенским парням. Парни отвечают «завещанием кума»."
+    en: "A verse “will” read on the square of Lazarim on Shrove Tuesday, teasing the village men. The men answer with the “will of the compadre.”"

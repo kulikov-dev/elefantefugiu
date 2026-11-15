@@ -78,11 +78,16 @@
     "search": {
       "title": "Search",
       "description": "Search the site for a story, a town or an era."
+    },
+    "glossary": {
+      "title": "Glossary",
+      "description": "Portuguese words and things from the stories: azulejo, fado, the Baixa and more. What they are and where the stories mention them."
     }
   },
   "footer": {
     "about": "About the project",
     "method": "Method and sources",
+    "glossary": "Glossary",
     "report": "Found a mistake?",
     "share": "Know a story?",
     "legal": "Legal information",
@@ -553,5 +558,15 @@
     "error": "Search is not available right now. Pick an era on the home page.",
     "nojs": "Search needs JavaScript. Without it, pick an era:",
     "nojs_link": "See the eras"
+  },
+  "glossary": {
+    "all": "All words →",
+    "lead": "Portuguese words and things that turn up in the stories: what they are and where they are told about.",
+    "stories": "Where it appears",
+    "festa": "Holiday",
+    "festa_link": "The holiday page",
+    "pt_label": "in Portuguese",
+    "count": "Words in the glossary",
+    "nav": "Words of the glossary"
   }
 }

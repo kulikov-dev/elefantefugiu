@@ -12,7 +12,8 @@ import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX, storySeoDescription, storySeoTitle 
 import { buildRouteMap } from '../src/lib/route-map';
 import { routeGeo } from '../src/lib/route-geo';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
-import { epochSchema, eventSchema, featuredSchema, festaListSchema, threadSchema } from '../src/data/schemas';
+import { epochSchema, eventSchema, featuredSchema, festaListSchema, glossaryListSchema, threadSchema } from '../src/data/schemas';
+import { GLOSSARY_LANGS, mentioningStories } from '../src/lib/glossary';
 import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, wordCount } from '../src/lib/myths';
 import { isCalendarDay } from '../src/lib/start-pins';
 import { pending } from './lib/lang-review';
@@ -540,6 +541,32 @@ for (const t of threads) {
       for (const [i, item] of (festa.text[lang as DataLang]?.traditions ?? []).entries()) {
         if (item.link && !known.has(item.link.story)) report('error', at, `the story "${item.link.story}" does not exist`, `traditions[${i}].link`, lang);
       }
+    }
+  }
+}
+
+// ---------- the glossary (src/data/glossary.yaml) ----------
+// The schema stops the shape. Here: the holiday a word names exists, a word that is marked in the stories (inline) has forms and is found in a story (else the mark never shows),
+// a story queued for later may be the only one that mentions it (then it links nowhere until the day).
+{
+  const path = join(root, 'src/data/glossary.yaml');
+  const file = rel(path);
+  const data = existsSync(path) ? readYaml(path) : undefined;
+  const terms = data === undefined ? undefined : validate(glossaryListSchema, data, file);
+  const festaIds = new Set(((existsSync(join(root, 'src/data/festas.yaml')) ? readYaml(join(root, 'src/data/festas.yaml')) : []) as { id: string }[]).map((f) => f.id));
+  const texts = events.filter((e) => isLive(e.item) && !e.item.placeholder).map((e) => ({ id: e.item.id, item: e.item }));
+  for (const term of terms ?? []) {
+    const at = `${file} (${term.id})`;
+    if (term.festa && !festaIds.has(term.festa)) report('error', at, `the holiday "${term.festa}" does not exist`, 'festa');
+    if (term.inline && GLOSSARY_LANGS.every((l) => term.forms[l].length === 0)) report('error', at, 'is inline but has no forms in any language', 'forms');
+    for (const lang of GLOSSARY_LANGS) {
+      if (term.forms[lang].length === 0) continue;
+      const found = mentioningStories(
+        term,
+        lang,
+        texts.map(({ id, item }) => ({ id, text: [item.story[lang], item.more[lang], item.myth ? `${item.myth.statement[lang]} ${item.myth.answer[lang]}` : '', item.bridge.note?.[lang] ?? ''].join('\n') })),
+      );
+      if (found.length === 0 && term.inline) report('warn', at, 'is inline but no published story mentions it in this language: the mark does not show yet', 'forms', lang);
     }
   }
 }

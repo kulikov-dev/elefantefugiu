@@ -9,15 +9,18 @@ import ShareView from '../../views/ShareView.astro';
 import StaticView from '../../views/StaticView.astro';
 import SearchView from '../../views/SearchView.astro';
 import SurpriseView from '../../views/SurpriseView.astro';
+import GlossaryView from '../../views/GlossaryView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
+import { isGlossaryLang } from '../../lib/glossary';
 import { t } from '../../i18n';
 
 export const getStaticPaths = (() => {
   // The map has its own route file ([map].astro): map code and styles must not reach the other pages.
   const keys = (Object.keys(ROUTES) as PageKey[]).filter((key) => key !== 'map');
   return LANGS.flatMap((lang) =>
-    keys.map((pageKey) => ({
+    // The glossary has no Portuguese page: its words are Portuguese, and the Portuguese text is not marked.
+    keys.filter((key) => key !== 'glossary' || isGlossaryLang(lang)).map((pageKey) => ({
       // An empty slug becomes undefined so the home page lands on /pt/ and /en/.
       params: { lang, page: ROUTES[pageKey][lang] || undefined },
       props: { lang: lang as Lang, pageKey },
@@ -36,6 +39,8 @@ const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
     <HomeView lang={lang} />
   ) : pageKey === 'surprise' ? (
     <SurpriseView lang={lang} />
+  ) : pageKey === 'glossary' && isGlossaryLang(lang) ? (
+    <GlossaryView lang={lang} />
   ) : pageKey === 'search' ? (
     <SearchView lang={lang} />
   ) : pageKey === 'myths' ? (
