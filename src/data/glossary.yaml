@@ -141,8 +141,8 @@
     ru: [Feitoria]
     en: [Feitoria]
   text:
-    ru: "Слово значит «торговая контора». «Вином фейтории» называли лучшие вина, которые разрешалось вывозить, прежде всего в Англию. Камни с этим словом отмечали границы таких виноградников."
-    en: "The word means “trading post.” “Feitoria wine” was the best wine, allowed to be exported, above all to England. The stones with this word marked the borders of such vineyards."
+    ru: "Слово на пограничных камнях Дору, от «feitoria», торговая контора. «Вином фейтории» называли лучшие вина, которые разрешалось продавать на вывоз. Камни отмечали земли, где такое вино можно было делать; вино попроще («de ramo») оставалось на внутреннем рынке."
+    en: "The word on the Douro boundary stones, from feitoria, “trading post.” “Feitoria wine” was the finest wine, allowed to be sold for export. The stones marked the land where such wine could be made; plainer wine (“de ramo”) stayed on the home market."
 
 - id: fado
   term: fado
@@ -346,5 +346,5 @@
     en: [will of the comadre]
   festa: carnaval
   text:
-    ru: "Стихотворное «завещание», которое в деревне Лазарин в карнавальный вторник читают на площади: в нём достаётся деревенским парням. Парни отвечают «завещанием кума»."
-    en: "A verse “will” read on the square of Lazarim on Shrove Tuesday, teasing the village men. The men answer with the “will of the compadre.”"
+    ru: "Стихотворное «завещание», которое в деревне Лазарин в карнавальный вторник читают на площади: в нём в шутку высмеивают деревенских парней, а парни отвечают своим «завещанием кума»."
+    en: "A verse “will” read on the square of Lazarim on Shrove Tuesday: it jokingly pokes fun at the village men, and the men answer with their own “will of the compadre.”"
