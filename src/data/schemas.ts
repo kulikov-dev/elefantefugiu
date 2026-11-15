@@ -471,6 +471,8 @@ export const festaTextSchema = z.strictObject({
   head_link: z.string(),
   /** The title of the drawing (role="img"). */
   art_title: z.string(),
+  /** The caption under the azulejo picture of the holiday (`image`) on its page, without the note about the AI (the page adds it); also its alt. */
+  caption: z.string(),
   /** The line under the name on the page of the holiday. */
   lead: z.string(),
   /** The description when the page or the home page in the window is shared (og:description); the title is `name · date`. Without it the lead is used. */

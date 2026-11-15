@@ -300,7 +300,7 @@
   --bolo-bubble-tail: 0.875rem;
   --bolo-done-height: 1.5rem; /* the line under the cake keeps its place before it has a word */
   --bolo-knife-width: 1.625rem; /* the little knife of the hint */
-  --festa-art-max: 23.75rem; /* the drawing on the page of a holiday (380 px) */
+  --festa-pic-max: 30rem; /* the azulejo picture in the header of the page of a holiday (480 px) */
   --festa-head-art-max: 26rem; /* and in the header of the home page */
   --festa-glow-time: 4s;
   --festa-fan-time: 3.2s; /* the fan of the Carnival queen sways once back and forth */

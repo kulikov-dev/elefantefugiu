@@ -149,21 +149,39 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
   gap: var(--space-6);
 }
 
-/* From 900 px: the text on the left, the drawing (380 px at most) on the right. */
+/* From 900 px: the text on the left, the azulejo picture (480 px at most) on the right; on a phone the picture is under the lead. */
 @media (min-width: 56.25rem) {
   .festa-page__top {
-    grid-template-columns: minmax(0, 1fr) var(--festa-art-max);
+    grid-template-columns: minmax(0, 1fr) var(--festa-pic-max);
     align-items: center;
   }
 }
 
-/* The cake of Christmas goes under the heading, up to 640 px wide, on the left in the column of the text (the other drawings stand to the right from 900 px). */
-.festa-page__top--stack {
-  grid-template-columns: minmax(0, 1fr);
-  align-items: start;
+/* The azulejo picture of the holiday with its caption (src/components/FestaPicture.astro). */
+.festa-pic {
+  max-width: var(--festa-pic-max);
+  margin: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  overflow: hidden;
 }
 
-.festa-page__art.festa-page__art--wide {
+.festa-pic__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--festa-wash);
+}
+
+.festa-pic__caption {
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+}
+
+/* The cake of Christmas is a game, not a drawing: it stands under the header, up to 640 px wide. */
+.festa-page__bolo {
   max-width: var(--festa-bolo-max);
 }
 
@@ -185,10 +203,6 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
   color: var(--color-muted);
 }
 
-.festa-page__art {
-  max-width: var(--festa-art-max);
-}
-
 .festa-page h2 {
   margin-block-end: var(--space-3);
 }
@@ -197,18 +211,69 @@ html:not([data-js]) [data-festa-off][data-festa-built] {
   max-width: var(--measure);
 }
 
+/* The traditions are cards: one column on a phone, from 900 px three in a row (four items: two by two) across the whole container. */
 .festa-trad {
   display: grid;
   gap: var(--space-4);
-  max-width: var(--measure);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+.festa-trad li {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
 .festa-trad strong {
+  display: block;
+  margin-block-end: var(--space-1);
   color: var(--festa-ink);
   font-family: var(--font-heading);
+}
+
+/* From 900 px the blocks below the header run the whole width of the container. */
+@media (min-width: 56.25rem) {
+  .festa-trad {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .festa-trad[data-count='4'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .festa-story {
+    max-width: none;
+  }
+
+  /* "The story of this day" is the horizontal card of "Next": the picture on the left (40%), the hook, the title, the year and place and the label on the right. */
+  .festa-story article.start-card {
+    flex-direction: row;
+  }
+
+  /* A card without a picture (the story's picture is the azulejo of the holiday): the text across the whole width. */
+  .festa-story article.start-card .start-card__body {
+    flex: 1;
+  }
+
+  .festa-story article.start-card .start-card__image {
+    flex: none;
+    align-self: stretch;
+    width: 40%;
+    height: auto;
+    aspect-ratio: auto;
+  }
+
+  .festa-story article.start-card .start-card__body {
+    justify-content: center;
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .festa-story article.start-card .start-card__title {
+    margin-block-start: 0;
+  }
 }
 
 .festa-trad a {
@@ -393,13 +458,19 @@ html[data-js] .bolo__cake:not([disabled], [aria-disabled='true']) {
 
 /* "Save the Lusiads" on the page of Portugal Day (src/scripts/lusiadas-game.mjs, from docs/drafts/lusiadas-game.css). The game reads its colours from --ink, --warm,
    --wash, --shell and --paper of its root: here they are the tokens of the holiday and the page. */
+.festa-lus {
+  display: grid;
+  gap: var(--space-3);
+}
+
 .festa-lusiadas__lead {
   max-width: var(--measure);
-  margin: 0 0 var(--space-3);
+  margin: 0;
   color: var(--color-muted);
 }
 
 .lus {
+  grid-template-areas: 'stage' 'status' 'hint';
   --ink: var(--festa-ink);
   --warm: var(--festa-warm);
   --wash: var(--festa-wash);
@@ -411,6 +482,7 @@ html[data-js] .bolo__cake:not([disabled], [aria-disabled='true']) {
 }
 
 .lus-stage {
+  grid-area: stage;
   position: relative;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -470,6 +542,7 @@ html[data-js] .bolo__cake:not([disabled], [aria-disabled='true']) {
 }
 
 .lus-status {
+  grid-area: status;
   min-height: var(--space-5);
   margin: 0;
   color: var(--ink);
@@ -479,7 +552,31 @@ html[data-js] .bolo__cake:not([disabled], [aria-disabled='true']) {
 }
 
 .lus-hint {
+  grid-area: hint;
   margin: 0;
   color: var(--color-muted);
   font-size: var(--text-sm);
+}
+
+/* From 900 px the game takes the width: the canvas on the left (60%); on the right the legend (the lead, at the usual size), under it the hint and the result line.
+   The game block goes away (display: contents), its parts are cells of .festa-lus. On a phone: the legend, the game, the result line, the hint. */
+@media (min-width: 56.25rem) {
+  .festa-lus {
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      'stage lead'
+      'stage hint'
+      'stage status';
+    align-items: start;
+    gap: var(--space-3) var(--space-5);
+  }
+
+  .festa-lusiadas__lead {
+    grid-area: lead;
+  }
+
+  .festa-lus .lus {
+    display: contents;
+  }
 }

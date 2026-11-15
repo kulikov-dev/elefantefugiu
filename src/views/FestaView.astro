@@ -1,9 +1,10 @@
 ---
-// The page of a holiday: /<lang>/festa/<slug>/ (docs/spec.md "Праздники"). The date, the name, the lead, the drawing, "The story of this day" (the story of
+// The page of a holiday: /<lang>/festa/<slug>/ (docs/spec.md "Праздники"). The date, the name, the lead, the azulejo picture (`image`; the drawing `art` is only on the
+// home page), the game of the holiday if it has one, "The story of this day" (the story of
 // the site named in `story` of src/data/festas.yaml, as the usual card), "Traditions and facts". Outside the window one line
 // above the name says when the holiday is celebrated; the head script shows it. hreflang is given for the languages in which the holiday has a text.
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FestaArt from '../components/FestaArt.astro';
+import FestaPicture from '../components/FestaPicture.astro';
 import BoloGame from '../components/BoloGame.astro';
 import LusiadasGame from '../components/LusiadasGame.astro';
 import StartCard from '../components/StartCard.astro';
@@ -12,6 +13,7 @@ import { t } from '../i18n';
 import type { FestaData } from '../data/schemas';
 import { builtFesta, festaIndexable, festaText } from '../lib/festas-data';
 import { cardPicture } from '../lib/pictures';
+import { samePicture } from '../lib/same-picture';
 import { festaCardPath, festaCardSize } from '../lib/og-cards';
 import { withBase } from '../i18n/routes';
 import { loadSite } from '../lib/site-data';
@@ -39,6 +41,9 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(href), name: text.name,
 // The story of the day, as a card of "Where to start"; the section is left out when the holiday names none (or the story is not on the site).
 const dayStory = festa.story ? bySlug.get(festa.story) : undefined;
 const storyEpoch = dayStory ? site.epochs.find((ep) => ep.id === dayStory.epoch) : undefined;
+// When the picture of the story is the azulejo of the holiday itself, the card of the story goes without one (the header already shows it).
+const dayPicture = dayStory ? cardPicture(dayStory, storyEpoch ?? {}) : undefined;
+const repeats = !!(dayStory?.image && festa.image && (await samePicture(`stories/${dayStory.image.file}`, festa.image)));
 const readyLangs = LANGS.filter((l) => festaText(festa, l));
 ---
 <BaseLayout
@@ -54,7 +59,7 @@ const readyLangs = LANGS.filter((l) => festaText(festa, l));
   preview={{ title: `${text.name} · ${text.date}`, description: text.og_description ?? text.lead, imageUrl: og ? withBase(og) : undefined, imageSize: og ? festaCardSize(og) : undefined, imageAlt: text.art_title }}
 >
   <article class="festa-page">
-    <div class:list={['festa-page__top', { 'festa-page__top--stack': festa.art === 'bolo' }]}>
+    <div class="festa-page__top">
       <header>
         <!-- In the window the date; outside it the line "this holiday is celebrated on ..." in the same place, in the plain style of the lead (the head script decides). -->
         <p class:list={['festa-page__date', { 'is-off-built': offBuilt }]} data-festa-on={festa.id}>{text.date}</p>
@@ -62,24 +67,23 @@ const readyLangs = LANGS.filter((l) => festaText(festa, l));
         <h1>{text.name}</h1>
         <p class="festa-page__lead">{text.lead}</p>
       </header>
-      {
-        festa.art && (
-          <div class:list={['festa-page__art', { 'festa-page__art--wide': festa.art === 'bolo' }]}>
-            {festa.art === 'bolo' && text.bolo ? (
-              <BoloGame text={text.bolo} />
-            ) : (
-              <FestaArt art={festa.art} title={text.art_title} id={`festa-art-${festa.id}`} />
-            )}
-          </div>
-        )
-      }
+      {festa.image && <FestaPicture lang={lang} image={festa.image} caption={text.caption} />}
     </div>
+    {
+      festa.art === 'bolo' && text.bolo && (
+        <div class="festa-page__bolo">
+          <BoloGame text={text.bolo} />
+        </div>
+      )
+    }
     {
       text.lusiadas && (
         <section aria-labelledby="festa-lusiadas">
           <h2 id="festa-lusiadas">{text.lusiadas.title}</h2>
-          <p class="festa-lusiadas__lead">{text.lusiadas.lead}</p>
-          <LusiadasGame text={text.lusiadas} />
+          <div class="festa-lus">
+            <p class="festa-lusiadas__lead">{text.lusiadas.lead}</p>
+            <LusiadasGame text={text.lusiadas} />
+          </div>
         </section>
       )
     }
@@ -88,14 +92,14 @@ const readyLangs = LANGS.filter((l) => festaText(festa, l));
         <section aria-labelledby="festa-history">
           <h2 id="festa-history">{t(lang, 'festa.history')}</h2>
           <div class="festa-story" data-festa-story={dayStory.id}>
-            <StartCard lang={lang} event={dayStory} picture={cardPicture(dayStory, storyEpoch ?? {})} />
+            <StartCard lang={lang} event={dayStory} picture={repeats ? undefined : dayPicture} />
           </div>
         </section>
       )
     }
     <section aria-labelledby="festa-traditions">
       <h2 id="festa-traditions">{t(lang, 'festa.traditions')}</h2>
-      <ul class="festa-trad">
+      <ul class="festa-trad" data-count={text.traditions.length}>
         {
           text.traditions.map((item) => {
             const story = item.link ? bySlug.get(item.link.story) : undefined;

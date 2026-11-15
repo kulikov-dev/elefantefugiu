@@ -1,5 +1,5 @@
 // Browser checks of the holidays (src/data/festas.yaml, src/lib/festas.mjs, docs/spec.md "Праздники"), run against dist/ served by serve.mjs:
-//   node festas.mjs [window page art nojs natal bolo carnaval pascoa junho]
+//   node festas.mjs [window page art nojs natal bolo carnaval pascoa junho picture]
 // The day is set with ?hoje=YYYY-MM-DD and a holiday with ?festa=<id>. The holiday, its days and its address come from the data: the first enabled holiday that has a
 // text in every language of the site (pt, en, ru) and a drawing; the suite names what is missing when there is none.
 import { spawn, spawnSync } from 'node:child_process';
@@ -514,8 +514,8 @@ if (want('carnaval')) {
     const story = await open(inn.href || '/');
     ok(`${url}: the card leads to the story "${CARN_STORY.title[lang]}"`, (await story.$eval('h1', (el) => el.textContent.trim()).catch(() => '')) === CARN_STORY.title[lang]);
   }
-  // The drawing: the same on the home page and on the page, a phone too; the fan sways, with "reduce motion" it stands still; role and title.
-  for (const [where, path] of [['home', `/ru/?hoje=${day}`], ['page', `/ru/festa/${CARN.slug}/?hoje=${day}`]]) {
+  // The drawing (on the home page only: the page of the holiday has the azulejo picture instead, see the suite `picture`), a phone too; the fan sways, with "reduce motion" it stands still; role and title.
+  for (const [where, path] of [['home', `/ru/?hoje=${day}`]]) {
     for (const width of [1280, 360]) {
       const page = await open(path, { width });
       const art = await page.evaluate((id) => {
@@ -596,8 +596,8 @@ if (want('pascoa')) {
     const story = await open(inn.href || '/');
     ok(`${url}: the card leads to the story "${P_STORY.title[lang]}"`, (await story.$eval('h1', (el) => el.textContent.trim()).catch(() => '')) === P_STORY.title[lang]);
   }
-  // The drawing: one on the home page and one on the page, a phone too; role and title; nothing moves, nothing is clickable.
-  for (const [where, path] of [['home', `/ru/?hoje=${day}`], ['page', `/ru/festa/${PASCOA.slug}/?hoje=${day}`]]) {
+  // The drawing (on the home page only, see the suite `picture`), a phone too; role and title; nothing moves, nothing is clickable.
+  for (const [where, path] of [['home', `/ru/?hoje=${day}`]]) {
     for (const scheme of ['light', 'dark']) {
       for (const width of [1280, 360]) {
         const page = await open(path, { width, scheme });
@@ -669,8 +669,8 @@ if (want('junho')) {
     await new Promise((resolve) => setTimeout(resolve, 400));
     ok(`${url}: the button starts a run (the panel goes away)`, await game.evaluate(() => document.querySelector('.lus-panel')?.hidden === true));
   }
-  // The drawing: one on the home page and one on the page, a phone too; role and title; nothing moves, nothing is clickable.
-  for (const [where, path] of [['home', `/ru/?hoje=${day}`], ['page', `/ru/festa/${JUNHO.slug}/?hoje=${day}`]]) {
+  // The drawing (on the home page only, see the suite `picture`), a phone too; role and title; nothing moves, nothing is clickable.
+  for (const [where, path] of [['home', `/ru/?hoje=${day}`]]) {
     for (const scheme of ['light', 'dark']) {
       for (const width of [1280, 360]) {
         const page = await open(path, { width, scheme, site: OUT });
@@ -682,6 +682,45 @@ if (want('junho')) {
         ok(`${where}, ${width} px, ${scheme}: the book is drawn (role img, title, still, no links)`, art.shown && art.role === 'img' && art.title === JUNHO.text.ru.art_title && art.moving === 0 && art.links === 0 && art.width > 0, JSON.stringify(art));
       }
     }
+  }
+}
+
+// The azulejo picture (`image`) of every enabled holiday stands in the header of its page, in every language the holiday has a text in: a picture with a width and
+// a height, a small caption (the caption of the data and the note that an AI made it), the alt is the caption without the note; the drawing is not on the page.
+// The home page keeps the drawing in the block of the holiday.
+if (want('picture')) {
+  const withImage = festas.filter((f) => f.enabled && f.image && Object.keys(f.text ?? {}).length > 0);
+  if (withImage.length === 0) throw new Error('need: an enabled holiday with `image` and a text in src/data/festas.yaml. None found.');
+  for (const f of withImage) {
+    for (const lang of LANGS.filter((l) => f.text[l])) {
+      const url = `/${lang}/festa/${f.slug}/`;
+      for (const width of [1280, 360]) {
+        const page = await open(url, { width });
+        const r = await page.evaluate(() => {
+          const img = document.querySelector('.festa-page__top .festa-pic img');
+          const cap = document.querySelector('.festa-page__top .festa-pic figcaption');
+          return {
+            img: !!img && img.checkVisibility(),
+            w: img?.getAttribute('width'),
+            h: img?.getAttribute('height'),
+            lazy: img?.getAttribute('loading'),
+            srcset: !!img?.getAttribute('srcset'),
+            alt: img?.getAttribute('alt') ?? '',
+            cap: cap?.textContent.trim() ?? '',
+            drawings: document.querySelectorAll('.festa-page svg.festa-art:not(.bolo svg)').length,
+            overflow: document.documentElement.scrollWidth > innerWidth,
+          };
+        });
+        const want_ = f.text[lang].caption;
+        ok(`${url}, ${width} px: the picture with a caption in the header, no drawing`, r.img && Number(r.w) > 0 && Number(r.h) > 0 && r.lazy === 'lazy' && r.srcset && r.alt === want_ && r.cap.startsWith(want_) && r.cap.length > want_.length && r.drawings === 0 && !r.overflow, JSON.stringify(r));
+      }
+    }
+    const home = await open(`/ru/?hoje=${addDays(festaDay(f.date, year), -1)}`);
+    const block = await home.evaluate((id) => {
+      const box = document.querySelector(`[data-festa-show="${id}"]`);
+      return { exists: !!box, svg: !!box?.querySelector('svg.festa-art'), shown: !!box?.querySelector('.festa-head')?.checkVisibility(), pic: !!box?.querySelector('.festa-pic') };
+    }, f.id);
+    ok(`/ru/: the block of "${f.id}" on the home page still has the drawing, not the picture (a holiday whose story is queued has no block yet)`, !f.art || !block.exists || (block.svg && !block.pic), JSON.stringify(block));
   }
 }
 
