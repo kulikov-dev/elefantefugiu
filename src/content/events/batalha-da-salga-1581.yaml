@@ -88,8 +88,9 @@ more:
     dos homens. O seu nome está em ruas e escolas da Terceira.
 
 
-    E os touros continuam a ser queridos: no verão leva-se um touro preso por uma corda comprida
-    pelas ruas das aldeias, é a tourada à corda.
+    E os touros continuam a ser queridos: no verão ainda hoje se leva um touro preso por uma corda
+    comprida pelas ruas das aldeias, é a tourada à corda. Na ilha diz-se que esta tradição está
+    ligada à vitória na Salga.
   en: >-
     It’s said that one of the Spaniards managed to shout, “Vien con ganado, gañados somos!” In
     Spanish it’s a pun: “ganado” means “cattle,” and “gañados” sounds like “we’re done for.” So you
@@ -102,7 +103,8 @@ more:
 
 
     And Terceira still loves its bulls: in summer, a bull on a long rope is led through the
-    village streets, a tradition called tourada à corda.
+    village streets, a tradition called tourada à corda. Islanders say it is linked to the victory
+    at Salga.
   ru: >-
     Говорят, один из испанцев успел крикнуть: «Vien con ganado, gañados somos!» По-испански это игра
     слов: «ganado» значит «скот», а «gañados» звучит как «нам конец». Так что бежали они, можно
@@ -114,7 +116,8 @@ more:
     носят улицы и школы Терсейры.
 
 
-    Летом по улицам деревень водят быка на длинной верёвке: это «турада а корда».
+    Летом по улицам деревень до сих пор выпускают быка на длинной верёвке: это «турада а корда». На
+    острове говорят, что обычай связан с победой при Салге.
 sources:
   - title: "Avelino de Freitas de Meneses: «Insegurança e revolta nas relações entre açorianos e
       soldados estrangeiros (1580-1590)»"
@@ -141,6 +144,14 @@ sources:
     url: https://pt.wikipedia.org/wiki/Forte_da_Salga
     type: website
     accessed: '2026-11-11'
+  - title: "Wikipedia: Tourada à corda"
+    url: https://en.wikipedia.org/wiki/Tourada_%C3%A0_corda
+    type: website
+    accessed: '2026-11-18'
+  - title: "Explore Terceira: Festivities and Traditions (tourada à corda)"
+    url: https://www.exploreterceiraisland.com/en/discover/festivities-and-traditions/
+    type: website
+    accessed: '2026-11-18'
 image:
   file: batalha-da-salga-1581.webp
   alt:
