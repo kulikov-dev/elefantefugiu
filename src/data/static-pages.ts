@@ -343,7 +343,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'O que fica guardado no seu navegador',
           paragraphs: [
-            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta, a última história de «Surpreenda-me», as histórias que marcou como lidas e a data da última visita. Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim» no mapa ou em «O que mais há perto de si» numa história, o navegador pede autorização para aceder à localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
+            'Para que o site se lembre das suas escolhas, o navegador guarda: a língua, o tema, a idade escolhida («Idade»), a última época aberta, a ordem das histórias de «Surpreenda-me», as histórias que marcou como lidas e a data da última visita. Estes dados ficam no armazenamento local e não são enviados para lado nenhum. Pode apagá-los nas definições do navegador, limpando os dados deste site. Se carregar em «Perto de mim» no mapa ou em «O que mais há perto de si» numa história, o navegador pede autorização para aceder à localização. A sua posição é usada apenas nesta página e não é enviada para lado nenhum.',
           ],
         },
         {
@@ -407,7 +407,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'What’s stored in your browser',
           paragraphs: [
-            'So that the site remembers your choices, your browser saves: language, color theme, the age you chose (“Age”), the last era you opened, the last story from “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me” on the map or “What else is near you” on a story, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
+            'So that the site remembers your choices, your browser saves: language, color theme, the age you chose (“Age”), the last era you opened, the order of the stories in “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me” on the map or “What else is near you” on a story, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
         },
         {
@@ -471,7 +471,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'Что хранится у вас в браузере',
           paragraphs: [
-            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, выбранный возраст («Возраст»), последнюю открытую эпоху, последнюю историю из «Удиви меня» отметки о прочитанных историях и дату последнего визита. Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Что рядом со мной» на карте или «Что ещё рядом с вами» в истории, браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
+            'Чтобы сайт помнил ваш выбор, браузер сохраняет: язык, тему оформления, выбранный возраст («Возраст»), последнюю открытую эпоху, порядок историй в «Удиви меня», отметки о прочитанных историях и дату последнего визита. Эти данные лежат в локальном хранилище и никуда не отправляются. Удалить их можно в настройках браузера, очистив данные сайта. Если вы нажмёте «Что рядом со мной» на карте или «Что ещё рядом с вами» в истории, браузер спросит разрешение на геолокацию. Ваше местоположение используется только на этой странице и никуда не отправляется.',
           ],
         },
         {

@@ -61,7 +61,7 @@ const state = (page, index = 0) =>
   page.evaluate((i) => {
     const word = document.querySelectorAll('.gl')[i];
     const tip = word.querySelector('.gl__tip').getBoundingClientRect();
-    const shown = getComputedStyle(word.querySelector('.gl__tip')).visibility === 'visible';
+    const shown = getComputedStyle(word.querySelector('.gl__tip')).display !== 'none';
     return { open: word.hasAttribute('data-open'), shown, expanded: word.querySelector('.gl__term').getAttribute('aria-expanded'), left: tip.left, right: tip.right, wide: document.documentElement.clientWidth, overflow: document.scrollingElement.scrollWidth - innerWidth };
   }, index);
 const tap = async (page, el) => {
@@ -159,7 +159,7 @@ if (want('story')) {
   }
   {
     const page = await open(MARKED.ru, { width: 390, js: false });
-    const hidden = await page.evaluate(() => getComputedStyle(document.querySelector('.gl__tip')).visibility === 'hidden');
+    const hidden = await page.evaluate(() => getComputedStyle(document.querySelector('.gl__tip')).display === 'none');
     ok('story (no JS): the tooltip is hidden until hover or focus; the word and its text are still in the page', hidden && (await page.$$('.gl__term')).length > 0);
     await page.close();
   }

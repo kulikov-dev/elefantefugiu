@@ -193,6 +193,7 @@
     justify-content: center;
     gap: var(--space-1);
     min-height: var(--tabbar-height);
+    min-width: 0;
     padding-inline: 0;
     color: var(--color-ink-muted);
     font-size: var(--text-xs);

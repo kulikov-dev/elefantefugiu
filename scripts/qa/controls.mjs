@@ -320,8 +320,8 @@ for (const lang of ['pt', 'en']) {
   ok(`surprise (${lang}): leads to different cards`, new Set(seen).size >= Math.min(4, world.published.length), `distinct=${new Set(seen).size}`);
   ok(`surprise (${lang}): never a heavy-topic card`, seen.every((p) => !heavy.some((h) => p.includes(h.slug[lang]))));
   ok(`surprise (${lang}): only published cards`, seen.every((p) => world.published.some((c) => p.includes(c.slug[lang]))));
-  const remembered = await page.evaluate(() => localStorage.getItem('lastSurprise'));
-  ok(`surprise (${lang}): the last card is remembered`, world.published.some((c) => c.id === remembered), remembered);
+  const remembered = await page.evaluate(() => JSON.parse(localStorage.getItem('surpriseBag') || '{}').last);
+  ok(`surprise (${lang}): the last card is remembered in the deck`, world.published.some((c) => c.id === remembered), remembered);
   await page.close();
 }
 {

@@ -456,14 +456,14 @@ if (want('surprise-read')) {
   const draw = async (mode, read, { once = false } = {}) => {
     const page = await newPage({ mode });
     // The pages of a suite share one storage: the marks and the last draw of the page before are cleared first.
-    await page.evaluateOnNewDocument((marks) => { localStorage.removeItem('lastSurprise'); localStorage.removeItem('readStories'); if (marks) localStorage.setItem('readStories', JSON.stringify(marks)); }, read);
+    await page.evaluateOnNewDocument((marks) => { localStorage.removeItem('surpriseBag'); localStorage.removeItem('readStories'); if (marks) localStorage.setItem('readStories', JSON.stringify(marks)); }, read);
     await page.goto(`${base}/pt/surpreende-me/`, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => location.pathname.includes('/historia/') || !document.querySelector('[data-surprise-allread]')?.hidden, { timeout: 8000 }).catch(() => {});
     const got = await page.evaluate(() => {
       const note = document.querySelector('[data-surprise-allread]');
       return { path: location.pathname, line: note && !note.hidden ? note.textContent.trim() : null, href: note?.querySelector('a')?.getAttribute('href') ?? null };
     });
-    await page.evaluate(() => { localStorage.removeItem('lastSurprise'); localStorage.removeItem('readStories'); });
+    await page.evaluate(() => { localStorage.removeItem('surpriseBag'); localStorage.removeItem('readStories'); });
     await page.close();
     return { id: idOfHref(got.href ?? got.path), line: got.line };
   };
@@ -479,9 +479,9 @@ if (want('surprise-read')) {
       if (r.id !== lone || r.line) wrong.push(`${r.id}${r.line ? ' + line' : ''}`);
     }
     ok(`mode ${mode}: all ${pool.length} stories of the mode read but one, "Surprise me" leads to that one ten times, no line`, wrong.length === 0, wrong.join(', '));
-    // All read: the one read longest ago, with the line, and the mode still holds.
+    // All read: a read story of the mode, with the line, and the mode still holds.
     const all = await draw(mode, order);
-    ok(`mode ${mode}: all read, "Surprise me" offers a read story of the mode (the oldest mark) and says so`, all.id === order[0] && /Leu todas as histórias! Eis uma que já leu/.test(all.line ?? ''), `${all.id} ${all.line}`);
+    ok(`mode ${mode}: all read, "Surprise me" offers a read story of the mode and says so`, order.includes(all.id) && /Leu todas as histórias! Eis uma que já leu/.test(all.line ?? ''), `${all.id} ${all.line}`);
     const outside = events.filter((e) => !pool.includes(e)).map((e) => e.id);
     const mixed = await draw(mode, [...outside, ...order]);
     ok(`mode ${mode}: marks of stories outside the mode do not count`, order.includes(mixed.id), `${mixed.id}`);
@@ -513,6 +513,20 @@ if (want('surprise')) {
       await page.close();
     }
     ok(`mode ${mode}: 20 draws of "Surprise me" give no forbidden card (heavy never; ${mode === 'off' ? '12+ and 16+ allowed' : 'only what the mode shows'})`, bad.length === 0, `${seen.size} different cards${bad.length ? ', forbidden: ' + bad.join(',') : ''}`);
+    // A deck without repeats: as many presses in a row as the mode has stories (30 at most) give all different stories.
+    const count = Math.min(30, events.filter((e) => !e.sensitive && shownIn(e, mode)).length);
+    if (count >= 2) {
+      const page = await newPage({ mode });
+      await page.evaluateOnNewDocument(() => { if (!sessionStorage.getItem('deck-cleared')) { sessionStorage.setItem('deck-cleared', '1'); localStorage.removeItem('surpriseBag'); } });
+      const got = [];
+      for (let i = 0; i < count; i += 1) {
+        await page.goto(`${base}/pt/surpreende-me/`, { waitUntil: 'domcontentloaded' });
+        await page.waitForFunction(() => location.pathname.includes('/historia/'), { timeout: 8000 }).catch(() => {});
+        got.push(idOfHref(page.url()));
+      }
+      ok(`mode ${mode}: ${count} presses of "Surprise me" in a row give ${count} different stories`, new Set(got).size === count, `${new Set(got).size} different: ${got.join(' ')}`);
+      await page.close();
+    }
   }
 }
 

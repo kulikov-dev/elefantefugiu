@@ -7,6 +7,8 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* A safety net: whatever sticks out sideways is cut, never a horizontal scroll (it would stretch the fixed tab bar). clip, not hidden: sticky keeps working. */
+  overflow-x: clip;
 }
 
 body,

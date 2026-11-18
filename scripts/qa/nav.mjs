@@ -3,7 +3,7 @@
 // Run against dist/ served by serve.mjs (base path "/"):   node nav.mjs
 // Pages come from src/content (data.mjs) and from the links of the footer; nothing here counts stories or epochs.
 import { launchBrowser } from './browser.mjs';
-import { epochPath, festas, need, published, readyEpochs, threads, threadPath } from './data.mjs';
+import { epochPath, festas, inThread, need, published, readyEpochs, threads, threadPath } from './data.mjs';
 
 const base = process.env.BASE_URL || 'http://localhost:4400';
 const LANGS = ['pt', 'en', 'ru'];
@@ -208,6 +208,33 @@ for (const scheme of ['light', 'dark']) {
   await open(page, form);
   await page.focus('form input:not([type=hidden]):not([tabindex="-1"]), form textarea');
   ok('report form: the bar is hidden while a field has the focus', await page.evaluate(() => getComputedStyle(document.querySelector('.tabbar')).display === 'none'));
+  await page.close();
+}
+
+// 7. No sideways overflow at 360 px (a fixed bar is as wide as the document: anything that sticks out stretches it and the fifth tab leaves the screen).
+// Every page of the site in every language, with every "More" (<details>) open (a closed glossary tooltip must take no room either): the page is not wider than the screen,
+// and the right edge of the fifth tab is inside it.
+{
+  const page = await newPage({ width: 360 });
+  const targets = [];
+  for (const lang of LANGS) {
+    const { list } = await pagesOf(lang);
+    targets.push(...list.filter(([, href]) => href).map(([, href]) => href));
+    targets.push(...published.filter((e) => e.slug?.[lang]).map((e) => `/${lang}/${STORY[lang]}/${e.slug[lang]}/`));
+    targets.push(...readyEpochs.map((e) => epochPath(e, lang)), ...threads.filter((t) => t.slug?.[lang] && inThread(t.id).length > 0).map((t) => threadPath(t, lang)));
+  }
+  const wide = [];
+  for (const href of [...new Set(targets)]) {
+    if ((await open(page, href)) >= 400 && !href.includes('no-such-page')) { wide.push(`${href} (status)`); continue; }
+    const r = await page.evaluate(() => {
+      document.querySelectorAll('details').forEach((d) => { d.open = true; });
+      const cw = document.documentElement.clientWidth;
+      const fifth = document.querySelector('.tabbar li:last-child a')?.getBoundingClientRect().right ?? 0;
+      return { over: document.documentElement.scrollWidth - cw, fifth: fifth - cw };
+    });
+    if (r.over > 0 || r.fifth > 0.5) wide.push(`${href} (+${r.over} px, tab ${r.fifth.toFixed(1)})`);
+  }
+  ok(`no horizontal overflow at 360 px on ${new Set(targets).size} pages (details open); the fifth tab ends inside the screen`, wide.length === 0, wide.slice(0, 8).join('; '));
   await page.close();
 }
 

@@ -371,11 +371,11 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     z-index: var(--z-glossary);
     top: 100%;
     left: 0;
-    display: block;
+    /* Closed it takes no room at all: a hidden box 20 rem wide at a word near the right edge still widened the page (and the fixed tab bar with it). */
+    display: none;
     width: var(--glossary-tip-width);
     padding-block-start: var(--space-1);
     transform: translateX(var(--gl-shift, 0));
-    visibility: hidden;
     font-size: var(--text-sm);
     font-style: normal;
     font-weight: normal;
@@ -413,7 +413,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
   .card :global(.gl[data-open] .gl__tip),
   :global(html:not([data-js])) .card :global(.gl:hover .gl__tip),
   :global(html:not([data-js])) .card :global(.gl:focus-within .gl__tip) {
-    visibility: visible;
+    display: block;
   }
 
   .story-myths {
