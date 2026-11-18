@@ -1,0 +1,169 @@
+id: ananas-acores-1875
+slug:
+  pt: ananases-criados-a-fumo
+  en: pineapples-raised-on-smoke
+  ru: ananasy-kotorye-rastyat-na-dymu
+title:
+  pt: Ananases criados a fumo
+  en: Pineapples Raised on Smoke
+  ru: Ананасы, которые растят на дыму
+epoch: monarquia-e-republica
+level: story
+year: 1875
+place:
+  name:
+    pt: São Miguel, Açores
+    en: São Miguel, Azores
+    ru: Сан-Мигел, Азоры
+  short:
+    pt: São Miguel
+    en: São Miguel
+    ru: Сан-Мигел
+  lat: 37.78
+  lon: -25.5
+bridge:
+  name: Plantação de Ananases A. Arruda
+  title:
+    pt: Plantação de Ananases A. Arruda
+    en: A. Arruda Pineapple Plantation
+    ru: Ананасная плантация А. Арруды
+  address: Rua Doutor Augusto Arruda, Fajã de Baixo, Ponta Delgada
+  lat: 37.7631195
+  lon: -25.6413304
+  maps_url: https://www.google.com/maps/place/Planta%C3%A7%C3%A3o+Ananases+A+Arruda/@37.7631237,-25.6439053,17z/data=!3m1!4b1!4m6!3m5!1s0xb432acd1b021505:0x9f08e3d9b6c50fcb!8m2!3d37.7631195!4d-25.6413304!16s%2Fg%2F1tmcngxd
+  url: https://turismo.azores.gov.pt/en/pin/estufas-de-ananases-augusto-arruda/
+  note:
+    pt: Uma das plantações mais antigas da ilha, com estufas do fim do século XIX onde ainda se usa fumo.
+    en: "One of the island’s oldest pineapple plantations: late-19th-century glass greenhouses where pineapples are still raised with smoke."
+    ru: "Одно из старейших ананасных хозяйств острова: стеклянные теплицы конца XIX века, где ананасы до сих пор растят с дымом."
+threads:
+  - palavras-que-zarparam
+  - comida-e-vinho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Nos Açores, o ananás só floresce com a estufa cheia de fumo.
+  en: In the Azores, pineapples bloom only when the greenhouse fills with smoke.
+  ru: На Азорах ананас не зацветёт, пока теплицу не наполнят дымом.
+seo:
+  title:
+    pt: Ananases criados a fumo · Açores, 1875 | O Elefante Fugiu
+    en: Pineapples Raised on Smoke · Azores, 1875 | O Elefante Fugiu
+    ru: Ананасы на дыму · Азоры, 1875 | O Elefante Fugiu
+story:
+  pt: >-
+    A meio do século XIX, São Miguel perdeu o seu principal ganha-pão: uma doença destruiu os laranjais, e o comércio de laranja com Inglaterra afundou. A ilha precisava de um produto novo.
+
+
+    O ananás já crescia nos jardins como curiosidade, e decidiu-se cultivá-lo para venda em estufas de vidro. O segredo foi descoberto, segundo se conta, por acaso: fechando a estufa e enchendo-a de fumo, o calor sobe até aos 40 graus e todas as plantas florescem ao mesmo tempo. Assim a colheita amadurece de uma vez e pode seguir inteira num navio.
+
+
+    Em 1875 já cresciam dezenas de milhares de ananases nas estufas da ilha, e antes da Primeira Guerra Mundial seguiam para Inglaterra, Alemanha e Rússia.
+  en: >-
+    In the mid-1800s, the island of São Miguel lost its main source of income: a disease wiped out its orange groves, and the orange trade with England collapsed. The island needed something new to sell.
+
+
+    Pineapples were already growing in gardens there as a curiosity, so islanders began raising them for sale in glass greenhouses. The secret, as the story goes, was found by accident: if you shut the greenhouse and fill it with smoke, the heat climbs to 40 °C (104 °F) and all the plants bloom at once. Then the whole crop ripens together and can be loaded onto a ship in one go.
+
+
+    By 1875 the island’s greenhouses held tens of thousands of pineapples, and before World War I they were shipped to England, Germany and Russia.
+  ru: >-
+    В середине XIX века остров Сан-Мигел потерял главный заработок: болезнь погубила апельсиновые сады, и торговля апельсинами с Англией рухнула. Острову нужен был новый товар.
+
+
+    Ананас к тому времени уже рос здесь в садах как диковинка, и его решили растить на продажу в стеклянных теплицах. Секрет нашли, как рассказывают, случайно: если закрыть теплицу и наполнить её дымом, жара поднимается до 40 градусов и все растения зацветают разом. Тогда урожай поспевает одновременно, и его можно грузить на корабль целиком.
+
+
+    К 1875 году в теплицах острова росли десятки тысяч ананасов, а перед Первой мировой их везли в Англию, Германию и Россию.
+meanwhile:
+  - scope: ru
+    year: 1875
+    text:
+      ru: В Париже открывается Опера Гарнье.
+    source: https://en.wikipedia.org/wiki/Palais_Garnier
+  - scope: world
+    year: 1875
+    text:
+      pt: Estreia em Paris a ópera «Carmen», de Bizet.
+      en: Bizet’s opera Carmen premieres in Paris.
+      ru: В Париже впервые ставят оперу Бизе «Кармен».
+    source: https://en.wikipedia.org/wiki/Carmen
+more:
+  pt: >-
+    A palavra fez um caminho ainda mais longo. Os portugueses ouviram-na no Brasil, na língua tupi, e passaram a dizer «ananás». Do português passou ao francês, ao alemão e ao russo. Só os ingleses deram ao fruto o nome do que parecia: «pineapple», pinha.
+
+
+    O segredo do fumo ainda hoje se usa, tal como as velhas estufas. Da plantação à colheita passa cerca de ano e meio, e na exploração de Augusto Arruda, na Fajã de Baixo, pode-se percorrer as filas e ver o ananás em todas as fases, do rebento ao fruto maduro.
+
+
+    O ananás não foi a única resposta da ilha à morte dos laranjais. Nos mesmos anos plantou-se chá nas encostas de São Miguel, e as duas culturas continuam lá até hoje.
+  en: >-
+    The word itself traveled even farther. The Portuguese heard it in Brazil, in the Tupi language, and started saying “ananás.” From Portuguese it passed into French, German and Russian, so in most of Europe a pineapple is still an “ananas.” English went its own way and named the fruit after what it looked like: a pine cone.
+
+
+    The smoke trick is still used today, and so are the old greenhouses. It takes about a year and a half from planting to harvest, and at Augusto Arruda’s plantation in Fajã de Baixo you can walk along the rows and see pineapples at every stage, from shoot to ripe fruit.
+
+
+    Pineapples weren’t the island’s only answer to the dying orange groves. In the same years, tea was planted on São Miguel’s hillsides, and both crops are still grown there today.
+  ru: >-
+    Само слово проделало путь ещё длиннее. Португальцы услышали его в Бразилии, в языке индейцев тупи, и стали говорить ananás. Из португальского оно перешло во французский, немецкий и русский. Только англичане назвали незнакомый плод так, как он выглядел: pineapple, «сосновая шишка».
+
+
+    Секрет с дымом в ходу до сих пор, как и сами старые теплицы. От посадки до урожая здесь проходит около полутора лет, и в хозяйстве Аугушту Арруды в Фажан-де-Байшу можно пройти вдоль рядов и увидеть ананас на всех стадиях, от ростка до спелого плода.
+
+
+    Ананас был не единственным ответом острова на гибель апельсинов. В те же годы на склонах Сан-Мигела посадили чай, и обе культуры живут здесь до сих пор.
+myth:
+  verdict: fact
+  statement:
+    pt: O ananás dos Açores é forçado a florescer com fumo
+    en: Azorean pineapples are made to bloom with smoke
+    ru: Азорские ананасы заставляют цвести с помощью дыма
+  answer:
+    pt: A estufa é fechada e enchida de fumo. Com o fumo e o calor, as plantas florescem ao mesmo tempo e a colheita amadurece de uma vez.
+    en: The greenhouse is closed and filled with smoke. The smoke and heat make the plants bloom at the same time, so the whole crop ripens together.
+    ru: Правда. Теплицу закрывают и наполняют дымом. От дыма и жары растения зацветают одновременно, и урожай поспевает разом.
+sources:
+  - title: "Azores Getaways: ananás dos Açores"
+    url: https://azoresgetaways.com/pt-pt/destinations/azores/sao-miguel/azores-pineapple
+    type: website
+    accessed: 2026-11-16
+  - title: "Turismo dos Açores: Estufas A. Arruda"
+    url: https://turismo.azores.gov.pt/en/pin/estufas-de-ananases-augusto-arruda/
+    type: institutional
+    accessed: 2026-11-16
+image:
+  file: ananas-acores-1875.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: dentro de uma estufa de vidro com fileiras de ananaseiros, um homem de boné e colete acocora-se junto a uma pequena fogueira de folhas, de onde sobe uma coluna de fumo; ao fundo, outro homem à porta da estufa e colinas verdes pelos vidros."
+    en: "Blue-and-white azulejo-style illustration: inside a glass greenhouse with rows of pineapple plants, a man in a flat cap and vest crouches by a small fire of leaves, from which a column of smoke rises; farther back, another man stands at the greenhouse door, with hills seen through the glass."
+    ru: "Иллюстрация в духе сине-белого азулежу: в стеклянной теплице с рядами ананасов мужчина в кепке и жилете присел у небольшого костра из листьев, от которого поднимается столб дыма; вдали у двери теплицы стоит ещё один человек, а за стёклами видны холмы."
+  caption:
+    pt: Ananases criados a fumo numa estufa de São Miguel, c. 1875. Ilustração em estilo azulejo, criada por IA.
+    en: Pineapples raised on smoke in a São Miguel greenhouse, c. 1875. Azulejo-style illustration, created by AI.
+    ru: Выращивание ананасов на дыму в теплице на Сан-Мигеле, около 1875 года. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: ananas-acores-1875-detalhe.webp
+  alt:
+    pt: "Ilustração antiga a preto e branco de um ananás: um fruto alongado, coberto de escamas em losango e coroado por folhas pequenas, com folhas espinhosas a curvar-se à volta."
+    en: "Old black-and-white print of a pineapple: an elongated fruit covered in diamond-shaped scales and topped with small leaves, with spiny leaves curling around it."
+    ru: "Старинная чёрно-белая гравюра с ананасом: вытянутый плод, покрытый ромбовидными чешуйками и увенчанный маленькими листьями, вокруг изогнуты колючие листья."
+  caption:
+    pt: André Thevet, ananás. Ilustração de «Les singularitez de la France antarctique», 1557.
+    en: André Thevet, a pineapple. Illustration from Les singularitez de la France antarctique, 1557.
+    ru: Андре Теве, ананас. Иллюстрация из «Les singularitez de la France antarctique», 1557.
+  author: André Thevet
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Nana_Thevet_1557_89v.png
+related:
+  - cha-gorreana
+status: ready
+published: 2026-11-25
+placeholder: false
+ru_ready: true

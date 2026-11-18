@@ -457,6 +457,13 @@
   },
   "exceptions": [
     {
+      "lang": "ru",
+      "unit": "event/marmelada-1480",
+      "field": "detail_image.caption",
+      "match": "Жозеф",
+      "why": "the painter Josefa de Óbidos (Жозефа), not King Joseph"
+    },
+    {
       "lang": "pt",
       "unit": "static/legal",
       "match": "4.0",

@@ -1,0 +1,173 @@
+id: marmelada-1480
+slug:
+  pt: a-marmelada-que-nao-tinha-laranjas
+  en: the-marmalade-that-had-no-oranges
+  ru: marmelad-v-kotorom-ne-bylo-apelsinov
+title:
+  pt: A marmelada que não tinha laranjas
+  en: The Marmalade That Had No Oranges
+  ru: Мармелад, в котором не было апельсинов
+epoch: avis-e-descobrimentos
+level: story
+year: 1480
+place:
+  name:
+    pt: Odivelas
+    en: Odivelas
+    ru: Одивелаш
+  lat: 38.7913
+  lon: -9.1824
+bridge:
+  name: Mosteiro de Odivelas
+  title:
+    pt: Mosteiro de Odivelas
+    en: Odivelas Monastery
+    ru: Монастырь Одивелаш
+  address: Largo de D. Dinis, Odivelas
+  lat: 38.7912851
+  lon: -9.1824024
+  maps_url: https://www.google.com/maps/place/Monastery+of+Saint+Dinis+and+Saint+Bernard+of+Odivelas/@38.7912893,-9.1849773,17z/data=!4m6!3m5!1s0xd1932a9bc5ca7af:0x9426b5f184e7b279!8m2!3d38.7912851!4d-9.1824024!16s%2Fm%2F04dzwv1
+  url: https://mosteiro.cm-odivelas.pt/
+  note:
+    pt: Mosteiro fundado por D. Dinis, onde está sepultado, e onde, segundo a tradição, as freiras criaram a marmelada branca.
+    en: A monastery founded by King Dinis, where he is buried, by tradition, its nuns created Odivelas’s white marmelada.
+    ru: Монастырь, основанный королём Динишем, где он похоронен и где, по преданию, монахини придумали белую мармеладу.
+threads:
+  - palavras-que-zarparam
+  - comida-e-vinho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os ingleses ficaram com a palavra portuguesa, mas esqueceram o marmelo.
+  en: The English kept the Portuguese word but forgot the quince.
+  ru: Англичане оставили себе португальское слово, но забыли айву.
+seo:
+  title:
+    pt: A marmelada que não tinha laranjas · 1480 | O Elefante Fugiu
+    en: The Marmalade That Had No Oranges · 1480 | O Elefante Fugiu
+    ru: Мармелад из айвы · Одивелаш, 1480 | O Elefante Fugiu
+story:
+  pt: >-
+    O marmelo cozia-se muito tempo com açúcar até dar uma pasta tão firme que se cortava à faca. Era a marmelada. Portugal tinha açúcar próprio, da Madeira, e a pasta conservava-se bem, por isso começou a vender-se para além-mar.
+
+
+    Em Inglaterra, a marmelada portuguesa era um doce caro, transportado em pequenas caixas. O registo inglês mais antigo é uma carta de um mercador de Exeter de 1480.
+
+
+    Mais tarde, ingleses e escoceses passaram a fazer em casa um doce igualmente espesso, mas de laranja amarga. O nome passou para a nova receita, e a «marmalade» ficou de laranja.
+  en: >-
+    In Portuguese, a quince is a “marmelo.” Its flesh was simmered with sugar for hours until it became a paste so firm you cut it with a knife. That was “marmelada.” Portugal had its own sugar from Madeira, and the paste kept well, so it began to be sold overseas.
+
+
+    In England, Portuguese marmelada was an expensive treat, shipped in small boxes. The earliest English record of it is a letter from an Exeter merchant in 1480.
+
+
+    Later, the English and the Scots began making a similarly thick preserve at home, but from bitter oranges. The name moved over to the new recipe, and marmalade became an orange thing.
+  ru: >-
+    Айва по-португальски marmelo. Её мякоть долго варили с сахаром, пока не получалась паста, такая плотная, что её резали ножом. Это и была marmelada. Сахар у Португалии был свой, с Мадейры, а паста хорошо хранилась, поэтому её стали продавать за море.
+
+
+    В Англии португальская marmelada была дорогим лакомством, её возили в небольших коробках. Самая ранняя английская запись о ней — письмо купца из Эксетера 1480 года.
+
+
+    Позже англичане и шотландцы стали варить такое же густое варенье сами, но из горьких апельсинов. Имя переехало на новый рецепт, и marmalade стал апельсиновым.
+meanwhile:
+  - scope: ru
+    year: 1480
+    text:
+      ru: "Стояние на Угре: по традиции, конец ордынской власти над Русью."
+    source: https://en.wikipedia.org/wiki/Great_Stand_on_the_Ugra_River
+  - scope: world
+    year: 1480
+    text:
+      pt: Os otomanos tomam a cidade italiana de Otranto.
+      en: Ottoman troops capture the Italian city of Otranto.
+      ru: Османы захватывают итальянский город Отранто.
+    source: https://en.wikipedia.org/wiki/Ottoman_invasion_of_Otranto
+more:
+  pt: >-
+    Depois surgiu uma bela lenda: a marmelada teria servido para tratar Maria Stuart doente, e os cortesãos sussurravam «Marie malade», «Maria está doente». Mas Maria nasceu em 1542, sessenta anos depois da carta de Exeter, por isso a palavra é muito mais antiga do que ela.
+
+
+    Em Portugal, a marmelada continuou a ser de marmelo e come-se com queijo. Há muitas receitas, e as melhores guardavam-nas os conventos: as freiras faziam doces para vender e para oferecer. Ficou especialmente famosa a marmelada branca de Odivelas, clara e quase transparente. Segundo a tradição, foi criada pelas freiras do mosteiro onde está sepultado D. Dinis.
+
+
+    Assim, a mesma palavra vive de maneira diferente em dois países: um inglês que peça «marmalade» recebe laranja, e um português que peça marmelada recebe marmelo.
+  en: >-
+    Then came a charming legend: marmalade was supposedly used to nurse a sick Mary, Queen of Scots, while her courtiers whispered “Marie malade,” “Mary is ill.” But Mary was born in 1542, sixty years after the Exeter letter, so the word is much older than she was.
+
+
+    In Portugal, marmelada stayed a quince paste, and people eat it with cheese. There are many recipes, and the best were kept by convents: nuns made sweets to sell and to give as gifts. Especially famous is the white marmelada of Odivelas, pale and nearly translucent. According to tradition, it was created by the nuns of the monastery where King Dinis is buried.
+
+
+    So the same word lives two different lives: ask for marmalade in England and you get oranges; ask for marmelada in Portugal and you get quince.
+  ru: >-
+    Потом появилась красивая легенда: будто мармеладом лечили больную Марию Стюарт, а придворные шептали «Marie malade», «Мария больна». Но Мария родилась в 1542 году, через шестьдесят лет после письма из Эксетера, так что слово появилось задолго до неё.
+
+
+    В самой Португалии marmelada так и осталась айвовой пастой, её едят с сыром. Рецептов много, и лучшие хранили монастыри: монахини варили сладости на продажу и в подарок. Особенно знаменита белая мармелада из Одивелаша, светлая и почти прозрачная. По преданию, её придумали монахини монастыря, где похоронен король Диниш.
+
+
+    Так одно слово живёт в двух странах по-разному: англичанин, попросив marmalade, получит апельсины, а португалец, попросив marmelada, получит айву.
+myth:
+  verdict: myth
+  statement:
+    pt: A palavra inglesa “marmalade” nasceu de Maria Stuart doente
+    en: The word marmalade comes from a sick Mary, Queen of Scots
+    ru: Слово marmalade появилось из-за больной Марии Стюарт
+  answer:
+    pt: A palavra já aparece em Inglaterra em 1480, muito antes de Maria nascer. Vem do português “marmelada”, a pasta de marmelo.
+    en: The word was recorded in England by 1480, long before Mary was born. It comes from the Portuguese ‘marmelada,’ a quince paste.
+    ru: Миф. Слово записано в Англии уже в 1480 году, задолго до рождения Марии. Оно от португальского marmelada, пасты из айвы.
+sources:
+  - title: "Word Histories: marmalade"
+    url: https://wordhistories.net/2018/03/12/marmalade-portuguese-origin/
+    type: reference
+    accessed: 2026-11-16
+  - title: "etymonline: marmalade"
+    url: https://www.etymonline.com/word/marmalade
+    type: reference
+    accessed: 2026-11-16
+  - title: "Wikipedia: Marmalade"
+    url: https://en.wikipedia.org/wiki/Marmalade
+    type: reference
+    accessed: 2026-11-16
+  - title: "Lifecooler: Marmelada Branca de Odivelas"
+    url: https://lifecooler.com/artigo/comer/marmelada-branca-de-odivelas/439802
+    type: press
+    accessed: 2026-11-16
+image:
+  file: marmelada-1480.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa cozinha de convento, três freiras mexem uma grande caldeira sobre o lume; numa mesa há formas redondas e blocos de doce cortados, ao lado um cesto de marmelos; pela arcada vê-se um mercador a segurar uma caixa redonda, uma carroça e uma nau no porto."
+    en: "Blue-and-white azulejo-style illustration: in a convent kitchen three nuns stir a big pot over a fire; a table holds round molds and cut blocks of sweet paste, beside a basket of quinces; through the archway a merchant holds a round box, with a cart and a ship in the harbor."
+    ru: "Иллюстрация в духе сине-белого азулежу: на монастырской кухне три монахини мешают в большом котле над огнём; на столе круглые формы и нарезанные брусочки сладкой пасты, рядом корзина айвы; в арке видно купца с круглой коробкой, тележку и корабль в гавани."
+  caption:
+    pt: Freiras a fazer marmelada de marmelo, século XV. Ilustração em estilo azulejo, criada por IA.
+    en: Nuns making quince marmelada, 15th century. Azulejo-style illustration, created by AI.
+    ru: Монахини варят айвовую мармеладу, XV век. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: marmelada-1480-detalhe.webp
+  alt:
+    pt: "Pintura barroca sobre fundo escuro: uma taça com doces e pastéis sob um pano branco, um jarro de barro com flores, um prato de vidro com doces brancos e um cesto de vagens, com cerejas e flores sobre a mesa."
+    en: "Baroque painting on a dark background: a bowl of pastries and sweets under a white cloth, a clay jug with flowers, a glass stand with white sweets and a basket of pea pods, with cherries and flowers on the table."
+    ru: "Барочная картина на тёмном фоне: чаша со сладостями и пирожными под белой салфеткой, глиняный кувшин с цветами, стеклянная ваза с белыми сладостями и корзина со стручками, на столе вишни и цветы."
+  caption:
+    pt: Josefa de Óbidos. Natureza-morta com doces, 1676.
+    en: Josefa de Óbidos, Still Life with Sweets, 1676.
+    ru: Жозефа де Обидуш. Натюрморт со сладостями, 1676.
+  author: Josefa de Óbidos
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Josefa_de_%C3%93bidos_-_Natureza_Morta.jpg
+related:
+  - colombo-acucar-1478
+status: ready
+published: 2026-11-27
+placeholder: false
+ru_ready: true

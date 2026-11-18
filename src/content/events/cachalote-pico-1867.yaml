@@ -1,0 +1,162 @@
+id: cachalote-pico-1867
+slug:
+  pt: a-baleia-de-cabeca-grande
+  en: the-whale-named-big-head
+  ru: kit-po-imeni-bolshaya-golova
+title:
+  pt: A baleia de cabeça grande
+  en: The Whale Named “Big Head”
+  ru: Кит по имени «Большая голова»
+epoch: monarquia-e-republica
+level: story
+year: 1867
+place:
+  name:
+    pt: Lajes do Pico, Açores
+    en: Lajes do Pico, Azores
+    ru: Лажеш-ду-Пику, Азоры
+  short:
+    pt: Pico
+    en: Pico
+    ru: Пику
+  lat: 38.3963
+  lon: -28.2534
+bridge:
+  name: Museu dos Baleeiros
+  title:
+    pt: Museu dos Baleeiros
+    en: Whalers Museum
+    ru: Музей китобоев
+  address: Rua dos Baleeiros 13, Lajes do Pico
+  lat: 38.3963821
+  lon: -28.2534235
+  maps_url: https://www.google.com/maps/place/Whalers+Museum/@38.3963863,-28.2559984,17z/data=!3m1!4b1!4m6!3m5!1s0xb47a116fffbceaf:0xc08d6a03ffdbaa04!8m2!3d38.3963821!4d-28.2534235!16s%2Fg%2F120l7s08
+  url: https://visitazores.com/en/explore/museu-dos-baleeiros
+  note:
+    pt: Três casas de botes do século XIX, com verdadeiras canoas baleeiras, arpões e o equipamento de quem saía ao cachalote.
+    en: Three 19th-century boathouses holding real whaleboats, harpoons and the gear of the men who went out after sperm whales.
+    ru: Три лодочных сарая XIX века с настоящими китобойными шлюпками, гарпунами и снаряжением тех, кто выходил на кашалота.
+threads:
+  - palavras-que-zarparam
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os açorianos caçaram o último cachalote em 1987.
+  en: Azoreans hunted their last sperm whale in 1987.
+  ru: Последнего кашалота азорцы добыли в 1987 году.
+seo:
+  title:
+    pt: A baleia de cabeça grande · Pico, Açores | O Elefante Fugiu
+    en: The Whale Named “Big Head” · Pico, Azores | O Elefante Fugiu
+    ru: Кашалот — «большая голова» · Пику, 1867 | O Elefante Fugiu
+order_hint:
+  pt: "Nos Açores, o cachalote caçava-se com canoas abertas e arpões lançados à mão."
+  en: "In the Azores, sperm whales were hunted from open boats with hand-thrown harpoons."
+  ru: "На Азорах кашалотов били с открытых лодок ручным гарпуном."
+story:
+  pt: >-
+    Os açorianos aprenderam a caçar baleias com os americanos. Os baleeiros da Nova Inglaterra paravam nas ilhas para recolher água e homens, e contratavam rapazes de treze ou catorze anos.
+
+
+    Quando, na década de 1860, o comércio do vinho e da laranja afundou nas ilhas, os antigos marinheiros começaram a caçar por conta própria, a partir da costa. Não tinham navios a vapor nem canhões-arpão, por isso caçava-se à moda antiga. O vigia, no alto da falésia, avistava o esguicho e lançava um foguete. Sete homens corriam para a canoa, alcançavam a baleia a remos, e o arpoador lançava o arpão à mão.
+
+
+    A presa era o cachalote, de «cachola», cabeça: a cabeça deste animal ocupa cerca de um terço do corpo.
+  en: >-
+    Azoreans learned whaling from Americans. Whaling ships from New England stopped at the islands for water and crew, and they signed on local boys as young as 13 or 14.
+
+
+    When the islands’ wine and orange trade collapsed in the 1860s, those former sailors started hunting on their own, straight from shore. They had no steamships or harpoon cannons, so they hunted the old way. A lookout on the cliff spotted a spout and fired a rocket. Seven men ran to an open boat, chased the whale under oars, and the harpooner threw the harpoon by hand.
+
+
+    Their prey was the sperm whale, in Portuguese “cachalote,” from “cachola,” a slang word for head: this whale’s head takes up about a third of its body.
+  ru: >-
+    Азорцы научились бить китов у американцев. Китобойные суда из Новой Англии заходили на острова за водой и людьми и нанимали местных мальчишек тринадцати-четырнадцати лет.
+
+
+    Когда в 1860-х на островах рухнула торговля вином и апельсинами, бывшие матросы начали охотиться сами, прямо с берега. Пароходов и гарпунных пушек у них не было, поэтому охотились по-старому. Дозорный на скале замечал фонтан и пускал ракету. Семеро мужчин бежали к открытой лодке, догоняли кита на вёслах, и гарпунщик бросал гарпун рукой.
+
+
+    Охотились на кашалота, по-португальски cachalote, от cachola, «башка»: голова у этого кита занимает около трети тела.
+meanwhile:
+  - scope: ru
+    year: 1867
+    text:
+      ru: США покупают у России Аляску.
+    source: https://en.wikipedia.org/wiki/Alaska_Purchase
+  - scope: world
+    year: 1867
+    text:
+      pt: Karl Marx publica o primeiro volume de «O Capital».
+      en: Karl Marx publishes the first volume of Capital.
+      ru: Маркс издаёт первый том «Капитала».
+    source: https://en.wikipedia.org/wiki/Das_Kapital
+more:
+  pt: >-
+    Do português, a palavra passou ao francês, «cachalot», e daí ao inglês, ao russo e a muitas outras línguas. Por isso, em meio mundo, o cachalote ainda é chamado por uma alcunha portuguesa.
+
+
+    Enquanto outros países caçavam baleias a partir de navios a vapor, nos Açores remou-se e lançou-se o arpão à mão durante mais de cem anos. A caça só foi proibida nos anos 1980, e o último cachalote foi morto ao largo do Pico em 1987.
+
+
+    No ano seguinte, nas Lajes do Pico, abriu um museu dos baleeiros em casas de botes do século XIX. E as vigias nas falésias voltaram ao trabalho: delas avistam-se agora baleias para os barcos de turistas.
+  en: >-
+    From Portuguese the word passed into French as “cachalot,” and from there into English, Russian and many other languages. “Cachalot” is still an English name for the sperm whale, a Portuguese nickname that stuck.
+
+
+    While other countries hunted whales from steamships, the Azores kept rowing and throwing harpoons by hand for more than a century. Whaling was banned only in the 1980s, and the last sperm whale was taken off Pico in 1987.
+
+
+    A year later, a whalers’ museum opened in Lajes do Pico, in 19th-century boathouses. And the lookout huts on the cliffs are back in use: now they spot whales for boatloads of tourists.
+  ru: >-
+    Из португальского слово ушло во французский как cachalot, а оттуда в английский и русский. Так у кита в нашем языке осталось португальское прозвище.
+
+
+    Пока другие страны били китов с пароходов, на Азорах больше ста лет гребли и бросали гарпун рукой. Охоту запретили только в 1980-х, и последнего кашалота у острова Пику добыли в 1987 году.
+
+
+    Через год в Лажеш-ду-Пику, в лодочных сараях XIX века, открылся музей китобоев. А домики дозорных на скалах снова в деле: с них теперь высматривают китов для лодок с туристами.
+myth:
+  verdict: fact
+  statement:
+    pt: Nos Açores caçou-se baleia a remos até aos anos 1980
+    en: The Azores hunted whales from rowboats until the 1980s
+    ru: На Азорах охотились на китов с вёсельных лодок до 1980-х
+  answer:
+    pt: Os açorianos caçavam cachalotes com arpão de mão a partir de canoas abertas. O último foi morto ao largo do Pico em 1987.
+    en: Azoreans hunted sperm whales with hand harpoons from open boats. The last one was taken off Pico Island in 1987.
+    ru: Правда. Азорцы били кашалотов ручным гарпуном с открытых шлюпок. Последнего добыли у острова Пику в 1987 году.
+sources:
+  - title: "Wiktionary: cachalot"
+    url: https://en.wiktionary.org/wiki/cachalot
+    type: reference
+    accessed: 2026-11-16
+  - title: "Azores Getaways: from whale hunting to whale watching"
+    url: https://azoresgetaways.com/destination/azores/general-articles/whale-hunting-to-whale-watching-azores
+    type: website
+    accessed: 2026-11-16
+  - title: "Visit Azores: Museu dos Baleeiros"
+    url: https://visitazores.com/en/explore/museu-dos-baleeiros
+    type: institutional
+    accessed: 2026-11-16
+image:
+  file: cachalote-pico-1867.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: ao largo do Pico, uma canoa aberta com sete remadores persegue um cachalote que lança o esguicho; de pé na proa, o arpoador ergue o arpão; ao fundo a montanha do Pico, um farol numa falésia e um foguete no céu."
+    en: "Blue-and-white azulejo-style illustration: off Pico Island, an open boat with seven rowers chases a sperm whale blowing a spout; the harpooner stands in the bow with his harpoon raised; in the background are Pico mountain, a lighthouse on a cliff and a rocket in the sky."
+    ru: "Иллюстрация в духе сине-белого азулежу: у острова Пику открытая лодка с семью гребцами догоняет кашалота, выпускающего фонтан; гарпунщик стоит на носу с поднятым гарпуном; вдали гора Пику, маяк на скале и ракета в небе."
+  caption:
+    pt: Caça ao cachalote a partir de uma canoa aberta, ao largo do Pico, século XIX. Ilustração em estilo azulejo, criada por IA.
+    en: Hunting a sperm whale from an open boat off Pico Island, 19th century. Azulejo-style illustration, created by AI.
+    ru: Охота на кашалота с открытой лодки у острова Пику, XIX век. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-26
+placeholder: false
+ru_ready: true

@@ -1,0 +1,161 @@
+id: laranja-portugal-1550
+slug:
+  pt: a-fruta-chamada-portugal
+  en: the-fruit-called-portugal
+  ru: frukt-po-imeni-portugaliya
+title:
+  pt: A fruta chamada Portugal
+  en: The Fruit Called Portugal
+  ru: Фрукт по имени Португалия
+epoch: avis-e-descobrimentos
+level: story
+year: 1550
+year_label:
+  pt: século XVI
+  en: 16th century
+  ru: XVI век
+year_scale:
+  pt: séc. XVI
+  en: 16th c.
+  ru: XVI в.
+place:
+  name:
+    pt: Silves, Algarve
+    en: Silves, Algarve
+    ru: Силвеш, Алгарве
+  short:
+    pt: Silves
+    en: Silves
+    ru: Силвеш
+  lat: 37.1913
+  lon: -8.4379
+bridge:
+  name: Castelo de Silves
+  title:
+    pt: Castelo de Silves
+    en: Silves Castle
+    ru: Замок Силвеша
+  address: Rua do Castelo, Silves
+  lat: 37.191267
+  lon: -8.4378999
+  maps_url: https://www.google.com/maps/place/Silves+Castle/@37.1912712,-8.4404748,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ad9b6756cfac3:0xd93b5e9c6a8609ee!8m2!3d37.191267!4d-8.4378999!16s%2Fm%2F03hk1qj
+  url: https://www.cm-silves.pt/
+  note:
+    pt: Castelo vermelho da antiga capital árabe do Algarve, hoje com o vale à volta coberto de laranjais doces.
+    en: The red castle of the Algarve’s former Arab capital, with a valley around it now covered in sweet orange groves.
+    ru: Красный замок бывшей арабской столицы Алгарве, а вокруг долина, засаженная сладкими апельсинами.
+threads:
+  - palavras-que-zarparam
+  - comida-e-vinho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Gregos, turcos e romenos chamam «Portugal» à laranja.
+  en: In Greek, Turkish and Romanian, an orange is called “Portugal.”
+  ru: Грек, турок и румын называют апельсин Португалией.
+seo:
+  title:
+    pt: A fruta chamada Portugal · Silves | O Elefante Fugiu
+    en: The Fruit Called Portugal · Silves | O Elefante Fugiu
+    ru: Апельсин по имени Португалия · Силвеш | O Elefante Fugiu
+story:
+  pt: >-
+    Já havia laranjas na Europa antes dos portugueses. As amargas foram trazidas pelos árabes ainda na Idade Média. Usavam-se pelo perfume, para doces e remédios, mas não se comiam cruas: eram demasiado ácidas.
+
+
+    No século XVI, mercadores portugueses trouxeram da Ásia outra variedade, doce. Podia comer-se diretamente da árvore, como uma maçã, e para a Europa era uma novidade. Os navios portugueses levavam-na pelo Mediterrâneo, para Itália, Grécia e os portos turcos.
+
+
+    Os compradores chamavam à novidade pelo nome de quem a trazia: laranja portuguesa. Depois a palavra «laranja» caiu, e ficou só o país. Assim nasceram «portokali» em grego, «portakal» em turco, «portocala» em romeno e «burtuqal» em árabe. Em alguns dialetos italianos, a laranja ainda se chama «portogallo».
+  en: >-
+    Europe had oranges before the Portuguese. Bitter ones were brought by the Arabs back in the Middle Ages. People grew them for their scent, for preserves and for medicine, but couldn’t eat them raw: they were far too sour.
+
+
+    In the 1500s, Portuguese merchants brought a different variety from Asia, a sweet one. You could eat it straight off the tree, like an apple, and for Europe that was something new. Portuguese ships carried it around the Mediterranean, to Italy, Greece and Turkish ports.
+
+
+    Buyers named the novelty after the people who brought it: the Portuguese orange. Over time the word “orange” dropped away and only the country was left. That’s how Greek got “portokali,” Turkish “portakal,” Romanian “portocala” and Arabic “burtuqal.” In some Italian dialects, an orange is still called “portogallo.”
+  ru: >-
+    Апельсины в Европе были и до португальцев. Горькие привезли арабы ещё в Средние века. Их держали ради запаха, варенья и лекарств, но есть сырыми не могли: слишком кислые.
+
+
+    В XVI веке португальские купцы привезли из Азии другой сорт, сладкий. Его можно было есть прямо с дерева, как яблоко, и для Европы это была новинка. Португальские корабли развозили его по Средиземному морю, в Италию, Грецию и турецкие порты.
+
+
+    Покупатели называли новинку по тем, кто её привёз: португальский апельсин. Потом слово «апельсин» отпало, и осталась одна страна. Так появились portokali по-гречески, portakal по-турецки, portocala по-румынски и burtuqal по-арабски. В некоторых итальянских говорах апельсин до сих пор зовут portogallo.
+meanwhile:
+  - scope: world
+    year: 1550
+    text:
+      pt: Vasari publica as «Vidas» dos artistas italianos.
+      en: Vasari publishes Lives of the Artists.
+      ru: Вазари издаёт «Жизнеописания» художников.
+    source: https://en.wikipedia.org/wiki/Lives_of_the_Most_Excellent_Painters,_Sculptors,_and_Architects
+more:
+  pt: >-
+    Em Portugal não se diz assim. Cá, a laranja é «laranja», do árabe «naranj»: o nome veio precisamente das laranjas amargas. A variedade doce, que deu fama ao país lá fora, em casa ficou simplesmente laranja.
+
+
+    Noutras línguas a história é outra. Em neerlandês, em alemão e em russo, a laranja doce chama-se «maçã da China» («appelsien», «Apfelsine», «apelsin»). Os holandeses lembraram-se de onde vinha a fruta; os gregos e os turcos, de quem a trazia.
+
+
+    E no Algarve as duas histórias juntam-se num só lugar. As laranjas amargas já eram plantadas pelos árabes quando Silves era a sua capital. As doces chegaram mais tarde, e hoje o vale à volta de Silves é uma das principais regiões de laranja de Portugal.
+  en: >-
+    Portugal itself doesn’t say it that way. There an orange is “laranja,” from the Arabic “naranj,” a name inherited from those same bitter oranges. The sweet variety that made the country famous abroad stayed just an orange at home.
+
+
+    Other languages tell yet another story. In Dutch, German and Russian, the sweet orange is a “Chinese apple” (“appelsien,” “Apfelsine,” “apelsin”). The Dutch remembered where the fruit came from; the Greeks and Turks remembered who brought it.
+
+
+    And in the Algarve, both stories meet in one place. Bitter oranges were planted here by the Arabs when Silves was their capital. Sweet ones came later, and today the valley around Silves is one of Portugal’s main orange-growing regions.
+  ru: >-
+    В самой Португалии так не говорят. Здесь апельсин — laranja, от арабского naranj: имя досталось от тех самых горьких апельсинов. Сладкий сорт, который принёс стране славу за границей, дома остался просто апельсином.
+
+
+    У русских своя история. Наше «апельсин» пришло через голландский и значит «китайское яблоко». Голландцы запомнили, откуда фрукт родом, а греки и турки — кто его привёз.
+
+
+    А в Алгарве обе истории сошлись в одном месте. Горькие апельсины здесь сажали ещё арабы, когда Силвеш был их столицей. Сладкие пришли позже, и сегодня долина вокруг Силвеша — один из главных апельсиновых краёв Португалии.
+myth:
+  verdict: myth
+  statement:
+    pt: Foram os portugueses os primeiros a trazer laranjas para a Europa
+    en: The Portuguese were the first to bring oranges to Europe
+    ru: Апельсины в Европу первыми привезли португальцы
+  answer:
+    pt: As laranjas amargas foram trazidas pelos árabes séculos antes. Os portugueses trouxeram as doces, e por elas a fruta ganhou o nome de Portugal na Grécia e na Turquia.
+    en: The Arabs brought bitter oranges centuries earlier. The Portuguese brought sweet ones, and that’s why Greece and Turkey named the fruit after Portugal.
+    ru: Миф. Горькие апельсины привезли арабы за века до португальцев. Португальцы привезли сладкие, и по ним фрукт назвали в Греции и Турции.
+sources:
+  - title: "Wikipedia: Orange (fruit)"
+    url: https://en.wikipedia.org/wiki/Orange_(fruit
+    type: reference
+    accessed: 2026-11-16
+  - title: "RESEED, Univ. de Coimbra: Oranges from Portugal"
+    url: https://reseed.uc.pt/index.php/2023/01/02/oranges-from-portugal/
+    type: academic
+    accessed: 2026-11-16
+  - title: "ECO: As laranjas do Algarve já foram da Índia"
+    url: https://eco.sapo.pt/opiniao/as-laranjas-do-algarve-ja-foram-da-india/
+    type: press
+    accessed: 2026-11-16
+image:
+  file: laranja-portugal-1550.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no cais de um porto mediterrânico, uma nau com a cruz de Cristo na vela descarrega cestos de laranjas; um jovem come uma laranja, um homem de turbante aponta, e ao fundo vê-se uma cidade com cúpula e minarete."
+    en: "Blue-and-white azulejo-style illustration: on the quay of a Mediterranean port, a ship with the Cross of Christ on its sail unloads baskets of oranges; a young man eats an orange, a man in a turban points, and a town with a dome and a minaret rises behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: на причале средиземноморского порта корабль с крестом Ордена Христа на парусе выгружает корзины с апельсинами; юноша ест апельсин, мужчина в тюрбане показывает рукой, а вдали виден город с куполом и минаретом."
+  caption:
+    pt: Laranjas portuguesas num porto do Mediterrâneo, século XVI. Ilustração em estilo azulejo, criada por IA.
+    en: Portuguese oranges at a Mediterranean port, 16th century. Azulejo-style illustration, created by AI.
+    ru: Португальские апельсины в средиземноморском порту, XVI век. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-30
+placeholder: false
+ru_ready: true

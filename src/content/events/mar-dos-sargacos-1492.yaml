@@ -1,0 +1,170 @@
+id: mar-dos-sargacos-1492
+slug:
+  pt: o-mar-sem-costas
+  en: the-sea-with-no-shores
+  ru: more-u-kotorogo-net-beregov
+title:
+  pt: O mar sem costas
+  en: The Sea With No Shores
+  ru: Море, у которого нет берегов
+epoch: avis-e-descobrimentos
+level: story
+year: 1492
+year_label:
+  pt: século XV
+  en: 15th century
+  ru: XV век
+year_scale:
+  pt: séc. XV
+  en: 15th c.
+  ru: XV в.
+place:
+  name:
+    pt: Apúlia, Esposende
+    en: Apúlia, Esposende
+    ru: Апулия, Эшпозенде
+  short:
+    pt: Apúlia
+    en: Apúlia
+    ru: Апулия
+  lat: 41.4848
+  lon: -8.7775
+bridge:
+  name: Monumento ao Sargaceiro
+  title:
+    pt: Monumento ao Sargaceiro
+    en: Seaweed Gatherer Monument
+    ru: Памятник сборщику водорослей
+  address: Largo da Senhora da Guia, Apúlia, Esposende
+  lat: 41.4848479
+  lon: -8.777501
+  maps_url: https://www.google.com/maps/place/Est%C3%A1tua+do+Sargaceiro/@41.4848479,-8.7800759,17z/data=!4m6!3m5!1s0xd244934ab297321:0x80027d5f3fe8fe1d!8m2!3d41.4848479!4d-8.777501!16s%2Fg%2F11j237rtdt
+  url: https://en.wikipedia.org/wiki/Ap%C3%BAlia
+  note:
+    pt: Um sargaceiro em bronze, com a sua vara de rede, no largo junto à igreja de Nossa Senhora da Guia.
+    en: A bronze seaweed gatherer with his net pole, in the square by the church of Nossa Senhora da Guia.
+    ru: Бронзовый сборщик водорослей с шестом-сеткой на площади у церкви Nossa Senhora da Guia.
+threads:
+  - palavras-que-zarparam
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: As algas que adubavam o Minho deram nome ao Mar dos Sargaços.
+  en: The Sargasso Sea is named after seaweed Portuguese farmers used as fertilizer.
+  ru: Саргассово море названо по водорослям, которыми в Португалии удобряли поля.
+seo:
+  title:
+    pt: O mar sem costas · Apúlia, 1492 | O Elefante Fugiu
+    en: The Sea With No Shores · Apúlia, 1492 | O Elefante Fugiu
+    ru: Море без берегов · Апулия, 1492 | O Elefante Fugiu
+story:
+  pt: >-
+    No norte de Portugal, as algas que o mar atira para a praia chamam-se sargaço. Os lavradores apanhavam-nas, secavam-nas e adubavam com elas os campos.
+
+
+    No século XV, os portugueses aprenderam a voltar de África por um caminho invulgar. Navegar para casa junto à costa era impedido pelo vento contrário, por isso os navios afastavam-se muito para oeste, para o alto mar, e apanhavam lá o vento favorável para os Açores e Lisboa. Nesta volta, a milhares de quilómetros de terra, os marinheiros encontravam campos inteiros de algas castanhas a flutuar. Reconheceram nelas o seu sargaço, e a palavra deu nome ao mar.
+
+
+    Em 1492, Colombo atravessou esses campos. Os seus homens acharam que a terra estava perto, com tanta erva na água. Lançaram a sonda, mas não chegaram ao fundo: estas algas vivem e flutuam em pleno oceano.
+  en: >-
+    In northern Portugal, the seaweed that washes up on the beach is called “sargaço.” Farmers raked it up, dried it and used it to fertilize their fields.
+
+
+    In the 1400s, the Portuguese learned an unusual way home from Africa. Head winds blocked the route back along the coast, so ships swung far west into the open ocean and picked up a fair wind there toward the Azores and Lisbon. On that detour, far out of sight of land, sailors came across whole fields of floating brown seaweed. They recognized their own sargaço, and the word gave the sea its name.
+
+
+    In 1492, Columbus sailed through those fields. His men thought land must be near, with so much weed in the water. They dropped a sounding line but never touched bottom: this seaweed lives and floats in the open ocean.
+  ru: >-
+    На севере Португалии водоросли, которые море выбрасывает на пляж, зовут sargaço. Крестьяне сгребали их, сушили и удобряли ими поля.
+
+
+    В XV веке португальцы научились возвращаться из Африки необычным путём. Плыть домой вдоль берега мешал встречный ветер, поэтому корабли уходили далеко на запад, в открытый океан, и ловили там попутный ветер к Азорам и Лиссабону. На этом обходе, за тысячи километров от суши, моряки встречали целые поля плавучих бурых водорослей. Они узнали в них свой sargaço, и это слово дало имя морю.
+
+
+    В 1492 году через эти поля шёл Колумб. Его моряки решили, что земля близко, раз в воде столько травы. Бросили лот, но дна не достали: эти водоросли живут и плавают прямо в открытом океане.
+meanwhile:
+  - scope: world
+    year: 1492
+    text:
+      pt: Martin Behaim faz o mais antigo globo conservado; ainda sem a América.
+      en: Martin Behaim finishes the oldest surviving globe; America isn’t on it yet.
+      ru: Мартин Бехайм делает старейший из сохранившихся глобусов; Америки на нём ещё нет.
+    source: https://en.wikipedia.org/wiki/Erdapfel
+more:
+  pt: >-
+    O Mar dos Sargaços é o único mar sem costas. Os seus limites são quatro correntes, entre elas a do Golfo. Fazem a água girar devagar, como num funil, e as algas juntam-se ao centro. É também para aqui, como os cientistas descobriram no século XX, que as enguias europeias vêm desovar, incluindo as dos rios portugueses.
+
+
+    A calmaria no centro deste remoinho deu origem a uma lenda. Os marinheiros contavam que a erva prendia os navios e que eles morriam no meio dela. Na verdade, as algas não impedem a navegação, e os veleiros ficavam parados por falta de vento. Mas a lenda pegou, e até Júlio Verne a aproveitou: o seu «Nautilus» atravessa o Mar dos Sargaços.
+
+
+    E na terra da palavra, o ofício durou muito tempo. Na Apúlia, em Esposende, os sargaceiros entravam na rebentação com uma vara comprida com rede, puxavam as algas para a areia e levavam-nas para os campos. Têm um monumento junto à igreja de Nossa Senhora da Guia.
+  en: >-
+    The Sargasso Sea is the only sea with no shores. Its borders are four currents, including the Gulf Stream. They slowly spin the water like a funnel, and the seaweed gathers in the middle. As scientists found in the 20th century, this is also where European eels come to spawn, including eels from Portuguese rivers.
+
+
+    The calm at the center of that whirl gave rise to a legend. Sailors said the weed trapped ships and they perished in it. In fact, seaweed doesn’t stop a ship; sailing ships stalled because there was no wind. But the legend stuck, and even Jules Verne used it: his Nautilus crosses the Sargasso Sea.
+
+
+    Back where the word came from, the trade lasted a long time. In Apúlia, near Esposende, seaweed gatherers called “sargaceiros” waded into the surf with long poles tipped with nets, hauled the seaweed onto the sand and carted it off to the fields. They have a monument by the church of Nossa Senhora da Guia.
+  ru: >-
+    Саргассово море — единственное море, у которого нет берегов. Его границы — четыре течения, среди них Гольфстрим. Они медленно кружат воду, как в воронке, и водоросли собираются в середине. Сюда же, как выяснили учёные в XX веке, приплывают метать икру европейские угри, в том числе из португальских рек.
+
+
+    Тишина в центре этого круговорота породила легенду. Моряки рассказывали, что трава держит корабли и они гибнут среди неё. На самом деле водоросли не мешают плыть, а парусники стояли из-за безветрия. Но легенда оказалась живучей, и её подхватил даже Жюль Верн: его «Наутилус» проходит Саргассово море.
+
+
+    А на родине слова ремесло жило ещё долго. В Апулии под Эшпозенде сборщики водорослей, саргасейруш, заходили в прибой с длинным шестом с сеткой, вытаскивали водоросли на берег и везли их на поля. Им поставлен памятник у церкви Nossa Senhora da Guia.
+myth:
+  verdict: fact
+  statement:
+    pt: O Mar dos Sargaços não tem nenhuma costa
+    en: The Sargasso Sea has no coastline at all
+    ru: У Саргассова моря нет ни одного берега
+  answer:
+    pt: É o único mar sem terra à volta. Os seus limites são quatro correntes oceânicas, entre elas a do Golfo.
+    en: It’s the only sea with no land around it. Its borders are four ocean currents, including the Gulf Stream.
+    ru: Правда. Это единственное море без суши вокруг. Его границы — четыре океанских течения, среди них Гольфстрим.
+sources:
+  - title: "Wikipedia: Sargasso Sea"
+    url: https://en.wikipedia.org/wiki/Sargasso_Sea
+    type: reference
+    accessed: 2026-11-16
+  - title: "minube: Monumento ao Sargaceiro"
+    url: https://www.minube.net/place/monument-to-saegaceiro--a271811
+    type: website
+    accessed: 2026-11-16
+image:
+  file: mar-dos-sargacos-1492.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no mar, de um navio recolhem-se do convés algas flutuantes; na praia, um sargaceiro de água pelos tornozelos puxa as algas com uma vara de rede, ao lado de montes de sargaço e de um carro."
+    en: "Blue-and-white azulejo-style illustration: at sea, men on a ship’s deck haul up floating seaweed; on the beach, a seaweed gatherer standing ankle-deep in the surf pulls in seaweed with a net pole, beside heaps of seaweed and a cart."
+    ru: "Иллюстрация в духе сине-белого азулежу: в море с палубы корабля вытаскивают плавучие водоросли; на берегу сборщик по щиколотку в прибое подтягивает водоросли шестом с сеткой, рядом кучи водорослей и телега."
+  caption:
+    pt: Sargaço no mar e na praia, séculos XV–XIX. Ilustração em estilo azulejo, criada por IA.
+    en: Sargasso weed at sea and on the beach, 15th–19th century. Azulejo-style illustration, created by AI.
+    ru: Саргассовые водоросли в море и на берегу, XV–XIX века. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: mar-dos-sargacos-1492-detalhe.webp
+  alt:
+    pt: Mapa colorido do Atlântico Norte entre a América, a Europa e a África, com a zona das algas em tons de verde ao centro e setas das correntes; as legendas estão em alemão.
+    en: Colored map of the North Atlantic between America, Europe and Africa, with the seaweed zone in shades of green at the center and arrows for the currents; the labels are in German.
+    ru: "Цветная карта Северной Атлантики между Америкой, Европой и Африкой: в центре зона водорослей в оттенках зелёного, стрелки течений; подписи на немецком."
+  caption:
+    pt: O Mar dos Sargaços no Atlântico Norte, mapa de Otto Krümmel, 1891.
+    en: The Sargasso Sea in the North Atlantic, map by Otto Krümmel, 1891.
+    ru: Саргассово море в Северной Атлантике, карта Отто Крюммеля, 1891 год.
+  author: Otto Krümmel
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:1891_SargassoSee_Krummel_Petermanns_lores.jpg
+status: ready
+published: 2026-12-01
+placeholder: false
+ru_ready: true

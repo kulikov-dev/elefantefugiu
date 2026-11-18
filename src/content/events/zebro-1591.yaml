@@ -1,0 +1,147 @@
+id: zebro-1591
+slug:
+  pt: a-zebra-com-nome-de-burro
+  en: the-zebra-named-after-a-donkey
+  ru: zebra-nazvannaya-v-chest-osla
+title:
+  pt: A zebra com nome de burro
+  en: The Zebra Named After a Donkey
+  ru: Зебра, названная в честь осла
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1591
+place:
+  name:
+    pt: Zebreira, Idanha-a-Nova
+    en: Zebreira, Idanha-a-Nova
+    ru: Зебрейра, Иданья-а-Нова
+  short:
+    pt: Zebreira
+    en: Zebreira
+    ru: Зебрейра
+  lat: 39.8448
+  lon: -7.0671
+bridge:
+  name: Zebreira
+  title:
+    pt: Zebreira
+    en: Zebreira
+    ru: Зебрейра
+  address: Zebreira, Idanha-a-Nova
+  lat: 39.8448134
+  lon: -7.0670819
+  maps_url: https://www.google.com/maps/place/%D0%97%D0%B5%D0%B1%D1%80%D0%B5%D0%B9%D1%80%D0%B0/@39.8453629,-7.0712183,16z/data=!4m6!3m5!1s0xd3d818b3169f451:0x85ed548157534af3!8m2!3d39.8448134!4d-7.0670819!16s%2Fg%2F119ty0rsk
+  url: https://www.cm-idanhanova.pt/
+  note:
+    pt: Aldeia junto à fronteira com Espanha cujo nome, segundo uma das versões, vem do burro selvagem a que chamavam zebro.
+    en: A village near the Spanish border whose name, according to one theory, comes from the wild ass called the zebro.
+    ru: Деревня у испанской границы, название которой, по одной из версий, идёт от дикого осла зебро.
+threads:
+  - palavras-que-zarparam
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Em Portugal não havia zebras. Mas havia o zebro.
+  en: Portugal never had zebras. It had the zebro.
+  ru: В Португалии не было зебр. Но был зебро.
+seo:
+  title:
+    pt: A zebra com nome de burro · 1591 | O Elefante Fugiu
+    en: The Zebra Named After a Donkey · 1591 | O Elefante Fugiu
+    ru: Зебра, названная в честь осла · 1591 | O Elefante Fugiu
+story:
+  pt: >-
+    Na Península Ibérica medieval vivia um burro selvagem, o zebro. Falam dele forais antigos e registos de caça. No século XVI o animal desapareceu: em Espanha, as últimas testemunhas viram-no na década de 1570.
+
+
+    Mais ou menos na mesma altura, os portugueses que comerciavam no Congo e em Angola encontraram um cavalo selvagem às riscas. Parecido com um burro e igualmente selvagem, recebeu o nome conhecido. No livro sobre o Congo publicado em Roma em 1591, a partir dos relatos do português Duarte Lopes, a zebra já aparece descrita, e de Portugal a palavra passou a outras línguas.
+  en: >-
+    In medieval Iberia there lived a wild ass called the zebro. Old town charters and hunting records mention it. By the 1500s the animal was gone: in Spain, the last eyewitnesses saw it in the 1570s.
+
+
+    Around the same time, Portuguese traders in Kongo and Angola came across a wild striped horse. It looked like a donkey and was just as wild, so it got a familiar name. A book about Kongo, published in Rome in 1591 from the accounts of the Portuguese traveler Duarte Lopes, already describes the zebra, and from Portuguese the word spread to other languages.
+  ru: >-
+    В средневековой Иберии жил дикий осёл, зебро. Его упоминают старые грамоты и записи об охоте. К XVI веку зверь исчез: в Испании последние свидетели видели его в 1570-х.
+
+
+    Примерно тогда же португальцы, торговавшие в Конго и Анголе, встретили дикую полосатую лошадь. Похожая на осла и такая же дикая, она получила знакомое имя. В книге о Конго, изданной в Риме в 1591 году по рассказам португальца Дуарте Лопеша, зебра уже описана, и из Португалии слово ушло в другие языки.
+meanwhile:
+  - scope: world
+    year: 1591
+    text:
+      pt: Em Veneza fica concluída a ponte de Rialto, de pedra.
+      en: In Venice, the stone Rialto Bridge is completed.
+      ru: В Венеции достроен каменный мост Риальто.
+    source: https://en.wikipedia.org/wiki/Rialto_Bridge
+more:
+  pt: >-
+    Como era o próprio zebro, os cientistas ainda discutem. O italiano Pigafetta, que escreveu o livro de Duarte Lopes, achou que na Península viviam as mesmas zebras às riscas. Não é assim: o mais provável é que o zebro fosse um burro selvagem, parecido com os que ainda vivem em África e na Ásia.
+
+
+    O animal desapareceu, mas deixou rasto nos nomes de lugares. Segundo uma das versões, é dele que vem o nome da Zebreira, perto de Idanha-a-Nova, embora haja outras interpretações.
+
+
+    Assim, na palavra «zebra», que qualquer criança conhece, vive a memória de um animal português que já ninguém vai ver.
+  en: >-
+    What the zebro itself looked like is still debated. The Italian Filippo Pigafetta, who wrote up Lopes’s book, assumed Iberia had the same striped zebras. It didn’t: the zebro was most likely a wild ass, similar to the ones that still live in Africa and Asia.
+
+
+    The animal vanished but left traces in place names. According to one theory, the village of Zebreira near Idanha-a-Nova takes its name from it, though there are other explanations.
+
+
+    So the word “zebra,” which every child knows, keeps the memory of a Portuguese animal no one will ever see again.
+  ru: >-
+    Каким был сам зебро, учёные спорят до сих пор. Итальянец Пигафетта, который записал книгу Лопеша, решил, что в Иберии жили те же полосатые зебры. Это не так: скорее всего, зебро был диким ослом, вроде тех, что и сейчас живут в Африке и Азии.
+
+
+    Зверь исчез, но оставил след в названиях мест. По одной из версий, от него идёт имя деревни Зебрейра под Иданья-а-Нова, хотя есть и другие толкования.
+
+
+    Так в слове «зебра», которое знает каждый ребёнок, живёт память о португальском звере, которого никто из нас уже не увидит.
+myth:
+  verdict: myth
+  statement:
+    pt: Em Portugal já houve zebras
+    en: Zebras once lived in Portugal
+    ru: В Португалии когда-то водились зебры
+  answer:
+    pt: Aqui vivia um burro selvagem, o zebro. Quando se extinguiu, o seu nome passou para o cavalo às riscas de África.
+    en: Portugal had a wild ass called the zebro. When it died out, its name passed to Africa’s striped horse.
+    ru: Миф. Здесь водился дикий осёл зебро. Когда он вымер, его имя досталось полосатой африканской лошади.
+sources:
+  - title: "Wikipedia: Zebro"
+    url: https://en.wikipedia.org/wiki/Zebro
+    type: reference
+    accessed: 2026-11-16
+  - title: "Wikipedia: Zebreira"
+    url: https://en.wikipedia.org/wiki/Zebreira
+    type: reference
+    accessed: 2026-11-16
+  - title: "Câmara de Idanha-a-Nova: Zebreira"
+    url: https://cm-idanhanova.pt/freguesias/zebreira.aspx
+    type: institutional
+    accessed: 2026-11-16
+  - title: Pigafetta/Lopes, 1591, English translation (chapter “Of the Zebra”)
+    url: https://gutenberg.org/files/41282/41282-h/41282-h.htm
+    type: reference
+    accessed: 2026-11-16
+image:
+  file: zebro-1591.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: à esquerda, entre azinheiras, um bando de burros selvagens e ao fundo um cavaleiro junto ao mar; à direita, na savana com acácias, quatro homens de armadura e capacete apontam para três zebras às riscas a galope."
+    en: "Blue-and-white azulejo-style illustration: on the left, among holm oaks, a herd of wild asses and a rider by the sea in the distance; on the right, on a savanna with acacia trees, four men in armor and helmets point at three striped zebras at a gallop."
+    ru: "Иллюстрация в духе сине-белого азулежу: слева среди дубов стадо диких ослов, вдали всадник у моря; справа, в саванне с акациями, четверо мужчин в доспехах и шлемах показывают на трёх скачущих полосатых зебр."
+  caption:
+    pt: O zebro ibérico e a zebra africana, século XVI. Ilustração em estilo azulejo, criada por IA.
+    en: The Iberian zebro and the African zebra, 16th century. Azulejo-style illustration, created by AI.
+    ru: Иберийский зебро и африканская зебра, XVI век. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-11-29
+placeholder: false
+ru_ready: true

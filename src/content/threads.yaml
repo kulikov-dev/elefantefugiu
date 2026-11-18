@@ -111,3 +111,21 @@
   icon: cog
   mvp: true
   placeholder: false
+- id: palavras-que-zarparam
+  slug:
+    pt: palavras-que-zarparam
+    en: words-that-set-sail
+    ru: slova-kotorye-uplyli
+  name:
+    pt: "Palavras que zarparam"
+    en: "Words That Set Sail"
+    ru: "Слова, которые уплыли"
+  description:
+    pt: "Palavras portuguesas que partiram para outras línguas, do ananás à zebra."
+    en: "Portuguese words that sailed into other languages, from pineapple to zebra."
+    ru: "Португальские слова, которые ушли в другие языки, от ананаса до зебры."
+  color: "#6b4a9e"
+  color_dark: "#a98cd6"
+  icon: speech
+  mvp: true
+  placeholder: false
