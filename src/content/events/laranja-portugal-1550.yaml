@@ -155,6 +155,19 @@ image:
   license: AI-generated
   ai: true
   focus: 50% 50%
+detail_image:
+  file: laranja-portugal-1550-detalhe.webp
+  alt:
+    pt: "Gravura a preto e branco: em cima, um ramo com folhas e uma laranja redonda; ao centro, uma fita com a inscrição AVRANTIVM OLYSIPONENSE; em baixo, meia laranja cortada, com os gomos em raios, e um ramo com duas folhas."
+    en: "Black-and-white engraving: at the top, a twig with leaves and a round orange; in the middle, a ribbon inscribed AVRANTIVM OLYSIPONENSE; below, an orange cut in half, its segments radiating from the center, and a twig with two leaves."
+    ru: "Чёрно-белая гравюра: сверху ветка с листьями и круглый апельсин; посередине лента с надписью AVRANTIVM OLYSIPONENSE; снизу апельсин в разрезе с расходящимися лучами долек и ветка с двумя листьями."
+  caption:
+    pt: Laranja de Lisboa (Aurantium Olysiponense). Gravura das «Hesperides» de G. B. Ferrari, 1646.
+    en: The Lisbon orange (Aurantium Olysiponense), plate from G. B. Ferrari’s Hesperides, 1646.
+    ru: Лиссабонский апельсин (Aurantium Olysiponense). Таблица из «Гесперид» Дж. Б. Феррари, 1646.
+  author: Giovanni Battista Ferrari; Cornelis Bloemaert
+  license: Public domain
+  source_url: https://www.biodiversitylibrary.org/page/273492
 status: ready
 published: 2026-11-30
 placeholder: false
