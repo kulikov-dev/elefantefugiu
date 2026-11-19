@@ -100,6 +100,12 @@ function festas(): TextItem[] {
   );
 }
 
+/** The glossary page (src/data/glossary.yaml): one unit per word (`glossary/<id>`); `forms` (the search patterns) are not text. */
+function glossary(): TextItem[] {
+  const file = 'src/data/glossary.yaml';
+  return (readYaml(join(root, file)) as any[]).flatMap((rec) => fromYaml(`glossary/${rec.id}`, file, rec, LANG_LIST, new Set(['forms'])));
+}
+
 function staticPages(): TextItem[] {
   const out: TextItem[] = [];
   for (const [page, byLang] of Object.entries(STATIC_PAGES)) {
@@ -135,7 +141,7 @@ function interfaceStrings(): TextItem[] {
 
 /** All the texts of the site that are read. */
 export function collectTexts(): TextItem[] {
-  return [...stories(), ...collection('epochs'), ...collection('threads'), ...festas(), ...staticPages(), ...interfaceStrings()];
+  return [...stories(), ...collection('epochs'), ...collection('threads'), ...festas(), ...glossary(), ...staticPages(), ...interfaceStrings()];
 }
 
 /** The hash of the text of one language of a unit: over every field in the order of the inventory, with the field name. */
