@@ -85,7 +85,7 @@
   festa: carnaval
   text:
     ru: "Ряженые деревни Поденсе: красное покрывало с цветной бахромой, жестяная маска и коровьи колокольчики на поясе. С 2019 года это наследие ЮНЕСКО."
-    en: "The masked revelers of Podence: a red cloak with colored wool fringe, a tin mask and cowbells at the waist. A UNESCO heritage tradition since 2019."
+    en: "The masked revelers of Podence: a red cloak with colored wool fringe, a tin mask and cowbells at the waist. On UNESCO’s heritage list since 2019."
 
 - id: chafariz
   term: chafariz
@@ -96,7 +96,7 @@
     en: [Chafariz]
   text:
     ru: "Городской фонтан с несколькими носиками. До водопровода воду брали здесь, и очередь к нему была частью городской жизни."
-    en: "A public fountain with several spouts. Before running water, people filled their jugs here, and the queue was part of city life."
+    en: "A public fountain with several spouts. Before running water, people filled their jugs here, and the line was part of city life."
 
 - id: chiado
   term: Chiado
@@ -107,7 +107,7 @@
     en: [Chiado]
   text:
     ru: "Район Лиссабона на холме над Байшей. Старые кафе, театры и книжные магазины."
-    en: "The Lisbon district on the hill above the Baixa, with old cafés, theaters and bookshops."
+    en: "The Lisbon district on the hill above the Baixa, with old cafés, theaters and bookstores."
 
 - id: compasso
   term: compasso pascal
@@ -119,7 +119,7 @@
   festa: pascoa
   text:
     ru: "Пасхальное шествие с крестом по домам: священник или прихожанин несёт крест от двери к двери, хозяева целуют его и угощают гостей."
-    en: "The Easter procession of the cross from house to house: a priest or parishioner carries it from door to door, and the hosts kiss it and treat the visitors."
+    en: "The Easter custom of carrying the cross from house to house: a priest or parishioner carries it from door to door, and the hosts kiss it and offer the visitors food and drink."
 
 - id: consoada
   term: consoada
@@ -347,4 +347,4 @@
   festa: carnaval
   text:
     ru: "Стихотворное «завещание», которое в деревне Лазарин в карнавальный вторник читают на площади: в нём в шутку высмеивают деревенских парней, а парни отвечают своим «завещанием кума»."
-    en: "A verse “will” read on the square of Lazarim on Shrove Tuesday: it jokingly pokes fun at the village men, and the men answer with their own “will of the compadre.”"
+    en: "A verse “will” read in the square in Lazarim on Shrove Tuesday: it pokes fun at the village men, and the men answer with their own “will of the compadre.”"

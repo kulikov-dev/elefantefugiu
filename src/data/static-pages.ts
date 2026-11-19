@@ -94,7 +94,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'foi-aqui',
           heading: 'Foi aqui. It happened here',
-          paragraphs: ['A story sticks better when you’re standing on the very spot. That’s why every story has a point on the map and a “Where to see it today” block: a church, a square, a museum or a monument where it left a trace.'],
+          paragraphs: ['A story sticks better when you’re standing on the very spot. That’s why every story has a point on the map and a “Where to see it today” block: a church, a square, a museum, or a monument where it left a trace.'],
         },
         {
           id: 'como-ler',
@@ -111,7 +111,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         },
         {
           id: 'confianca',
-          heading: 'Can you trust it',
+          heading: 'Can you trust it?',
           paragraphs: ['I don’t pass legends off as facts. Every story carries a label (“Documented,” “Legend,” or “Debated”) and a list of sources at the bottom. How I work is explained in {{method|Method and sources}}.'],
         },
         {
@@ -125,7 +125,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           paragraphs: [
             'I live in Portugal, though I wasn’t born here, and I’m still discovering the country one story at a time. Its past is remarkably rich. I tell the best bits to my children first, and now I share them here, too.',
             'O Elefante Fugiu is a one-person project made in my spare time: free, with no ads and no cookies. I’m not a historian, so I rely on sources and list them under every story.',
-            'If you’re a historian, archivist or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.',
+            'If you’re a historian, archivist, or guide and see where something could be told more accurately, write to me. Any suggestion is welcome, even about a single story.',
           ],
         },
         {
@@ -385,7 +385,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'resumo',
           heading: 'In short',
           paragraphs: [],
-          items: ['You’re free to use the texts with a link back to this site.', 'There are no accounts, cookies or ads.', 'Your browser stores only your own settings, and I can’t see them.'],
+          items: ['You’re free to use the texts with a link back to this site.', 'There are no accounts, cookies, or ads.', 'Your browser stores only your own settings, and I can’t see them.'],
         },
         {
           id: 'cookies',
@@ -398,7 +398,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           heading: 'What you can do with the material',
           paragraphs: [],
           items: [
-            '**Texts and illustrations of the project** (stories, descriptions, interface text and the illustrations made for the site) are published under the Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0; https://creativecommons.org/licenses/by-nc/4.0/), with an additional permission. Use in teaching is allowed, including paid lessons, courses and tours, if you credit “O Elefante Fugiu” with a link to the site. Selling the texts and illustrations themselves, for example in books, apps or kits of materials, is not allowed. The full text of the license can be requested by email: {{email}}.',
+            '**Texts and illustrations of the project** (stories, descriptions, interface text and the illustrations made for the site) are published under the Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0; https://creativecommons.org/licenses/by-nc/4.0/), with an additional permission. Use in teaching is allowed, including paid lessons, courses and tours, if you credit “O Elefante Fugiu” with a link to the site. Selling the texts and illustrations themselves, for example in books, apps, or kits of materials, is not allowed. The full text of the license can be requested by email: {{email}}.',
             '**The site’s code** is open under the MIT license.',
             '**Images from other sources** (for example Wikimedia Commons) keep their own license, given with the author under each one.',
             '**The name “O Elefante Fugiu,” the logo, and the elephant mascot** are not covered by these licenses. To use them, write to me.',
@@ -408,7 +408,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'privacidade',
           heading: 'What’s stored in your browser',
           paragraphs: [
-            'So that the site remembers your choices, your browser saves: language, color theme, the age you chose (“Age”), the last era you opened, the order of the stories in “Surprise me,” the stories you marked as read and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me” on the map or “What else is near you” on a story, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
+            'So that the site remembers your choices, your browser saves: language, color theme, the age you chose (“Age”), the last era you opened, the order of the stories in “Surprise me,” the stories you marked as read, and the date of your last visit. This data stays in local storage and is never sent anywhere. You can delete it in your browser settings by clearing this site’s data. If you press “Near me” on the map or “What else is near you” on a story, your browser will ask for permission to use your location. Your position is used only on that page and is never sent anywhere.',
           ],
         },
         {

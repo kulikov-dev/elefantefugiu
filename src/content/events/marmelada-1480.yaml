@@ -30,7 +30,7 @@ bridge:
   url: https://mosteiro.cm-odivelas.pt/
   note:
     pt: Mosteiro fundado por D. Dinis, que aí está sepultado; segundo a tradição, as freiras criaram aqui a marmelada branca.
-    en: A monastery founded by King Dinis, where he is buried, by tradition, its nuns created Odivelas’s white marmelada.
+    en: A monastery founded by King Dinis, where he is buried; by tradition, its nuns created Odivelas’s white marmelada.
     ru: Монастырь, основанный королём Динишем, где он похоронен и где, по преданию, монахини придумали белую мармеладу.
 threads:
   - palavras-que-zarparam
@@ -119,7 +119,7 @@ myth:
     ru: Слово marmalade появилось из-за больной Марии Стюарт
   answer:
     pt: A palavra já aparece em Inglaterra em 1480, muito antes de Maria nascer. Vem do português «marmelada», a pasta de marmelo.
-    en: The word was recorded in England by 1480, long before Mary was born. It comes from the Portuguese ‘marmelada,’ a quince paste.
+    en: The word was recorded in England by 1480, long before Mary was born. It comes from the Portuguese “marmelada,” a quince paste.
     ru: Миф. Слово записано в Англии уже в 1480 году, задолго до рождения Марии. Оно от португальского marmelada, пасты из айвы.
 sources:
   - title: "Word Histories: marmalade"

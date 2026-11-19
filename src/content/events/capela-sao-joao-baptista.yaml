@@ -47,7 +47,7 @@ min_age: all
 sensitive: false
 hook:
   pt: João V nunca foi a Roma e aprovou a capela por maqueta.
-  en: The king ordered a chapel from Rome and shipped it in pieces.
+  en: The king never visited Rome; he approved his chapel from a model.
   ru: Король заказал часовню в Риме и привёз её по частям.
 story:
   pt: >-

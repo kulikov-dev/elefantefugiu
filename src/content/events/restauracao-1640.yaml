@@ -35,7 +35,7 @@ bridge:
   url: https://www.timeout.pt/lisboa/pt/atraccoes/palacio-da-independencia
   note:
     pt: Nesta casa os conjurados prepararam a última reunião antes da manhã de 1 de dezembro.
-    en: In this house the conspirators held their last meeting before the morning of December 1.
+    en: In this house the conspirators prepared their last meeting before the morning of December 1.
     ru: В этом доме заговорщики готовили последнюю встречу перед утром 1 декабря.
 threads:
   - poder-e-revolta
@@ -84,8 +84,7 @@ more:
 
     A guerra com Espanha só terminou com a paz de 1668.
   en: >-
-    The plotters went down in history as the “Forty Conspirators.” They held their last meeting
-    before the uprising in the house of Antão de Almada, near Rossio Square. Today it’s the Palace
+    The plotters went down in history as the “Forty Conspirators.” The last meeting before the uprising was prepared at the house of Antão de Almada, near Rossio Square. Today it’s the Palace
     of Independence.
 
 

@@ -42,7 +42,7 @@ bridge:
   url: https://www.chaves.pt/
   note:
     pt: Atravesse o rio a pé e procure a meio as duas colunas com inscrições latinas.
-    en: Walk across the river and look for the two columns with Latin inscriptions halfway over.
+    en: Cross the bridge and look for the two columns with Latin inscriptions halfway over.
     ru: Перейдите реку пешком и найдите на середине две колонны с латинскими надписями.
 threads:
   - engenho

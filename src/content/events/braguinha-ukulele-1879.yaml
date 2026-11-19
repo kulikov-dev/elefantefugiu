@@ -143,7 +143,7 @@ sources:
     accessed: '2026-11-14'
     note:
       pt: a rota do navio, por Cabo Horn, e as datas da viagem
-      en: the route of the ship round Cape Horn and the dates of the voyage
+      en: the route of the ship around Cape Horn and the dates of the voyage
       ru: маршрут корабля вокруг мыса Горн и даты рейса
 image:
   file: braguinha-ukulele-1879.webp
@@ -199,7 +199,7 @@ myth:
     ru: Укулеле придумали на Гавайях
   answer:
     pt: Foi mesmo feito no Havai, mas por marceneiros madeirenses, que juntaram o corpo da braguinha à afinação do rajão. O nome deram-no os havaianos.
-    en: It really was made in Hawaii, but by Madeiran carpenters, who took the body of the braguinha and the tuning of the rajão. Hawaiians gave it the name.
+    en: It really was made in Hawaii, but by Madeiran cabinetmakers, who took the body of the braguinha and the tuning of the rajão. Hawaiians gave it the name.
     ru: Сделали его действительно на Гавайях, но мадейрские столяры, взяв корпус от брагиньи и строй от ражана. Имя дали гавайцы.
 route:
   points:

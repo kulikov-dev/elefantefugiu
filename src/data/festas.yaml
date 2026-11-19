@@ -49,7 +49,7 @@
       date: 'December 1'
       name: 'Restoration of Independence Day'
       head_date: 'December 1 · Restoration of Independence Day'
-      head_title: 'The crown no king wore again'
+      head_title: 'The Crown No King Wore Again'
       head_line: 'In 1640, Portugal got its own king back. Six years later, he gave the crown away.'
       head_link: 'The story of this day →'
       art_title: 'A crown on a velvet cushion, with a scepter in front of it'
@@ -58,7 +58,7 @@
       og_description: 'Why no king of Portugal wore the crown after 1646, and how this holiday was once canceled to save money.'
       off_window: 'This holiday is celebrated on December 1'
       traditions:
-        - title: '“Better a queen for a day.”'
+        - title: '“Better to be queen for a day.”'
           text: 'The story goes that the hesitant duke was talked into it by his wife, Luísa de Gusmão: “Better to be queen for a day than duchess for a lifetime.” The line was probably put in her mouth later, but every Portuguese schoolchild knows it.'
         - title: 'The holiday that was canceled.'
           text: 'In 2013, during the debt crisis, December 1 became a working day to save money. Three years later, in 2016, the holiday came back.'
@@ -134,7 +134,7 @@
       date: 'December 25'
       name: 'Christmas'
       head_date: 'December 25 · Christmas'
-      head_title: 'The cake that outlived the king'
+      head_title: 'The Cake That Outlived the King'
       head_line: 'The king fell in 1910, but nobody managed to rename the bolo-rei.'
       head_link: 'The story of this day →'
       art_title: 'Bolo-rei on a plate: a ring of sweet dough with candied fruit'
@@ -145,7 +145,7 @@
       bolo:
         aria: 'Bolo-rei on a plate. Cut a slice'
         hint: 'Click or tap the cake to cut a slice'
-        fruit: { head: 'Candied fruit.', text: 'Nothing baked inside, enjoy.' }
+        fruit: { head: 'Candied fruit.', text: 'Nothing baked inside. Enjoy.' }
         brinde: { head: 'Trinket.', text: 'A tiny figurine used to be baked into the cake, and you got it.' }
         fava: { head: 'Fava bean.', text: 'By tradition, you buy next year’s cake.' }
         done: 'The cake is gone.'
@@ -309,7 +309,7 @@
         - title: 'Folar from godparents.'
           text: 'Folar is a sweet bread baked with whole eggs, still in their shells, held in place by crossed strips of dough. In the north, on Palm Sunday, godchildren bring their godmother a bunch of violets and their godfather an olive branch, and at Easter the godparents give them a folar in return. Every region has its own: in Trás-os-Montes it’s stuffed with sausage and ham, while in Olhão, down south, it’s sweet and flaky, with sugar and cinnamon.'
         - title: 'The cross goes door to door.'
-          text: 'On Easter Sunday, especially in the north, the compasso makes its rounds: a priest or a parishioner carries a cross from house to house. Doorways are decorated with greenery and carpets of flowers, families kiss the cross, and visitors are offered food and drink. By the newspaper CM’s estimate, the crosses visit about 1.5 million homes in a single day.'
+          text: 'On Easter Sunday, especially in the north, the compasso makes its rounds: a priest or a parishioner carries a cross from house to house. Doorways are decorated with greenery and carpets of flowers, families kiss the cross, and visitors are offered food and drink. According to the newspaper CM, the crosses visit about 1.5 million homes in a single day.'
         - title: 'The night of the bells.'
           text: 'On Holy Saturday, shepherds bring their lambs to the center of Castelo de Vide, a town in the Alentejo, to be blessed. That night, after the Easter Vigil, thousands of people walk the streets ringing shepherds’ bells of every size, along with the bells of the church and the clock tower. It’s said this was how shepherds thanked the church for blessing their flocks.'
         - title: 'Mussels instead of meat.'
@@ -391,7 +391,7 @@
       lusiadas:
         title: 'Save The Lusiads'
         lead: 'Legend has it that Camões was shipwrecked at the mouth of the Mekong and swam ashore, holding the manuscript of The Lusiads above the water. Now it’s your turn.'
-        hint: 'Tap the picture or press Space to jump over a wave. Hold longer to jump higher. Better let the gulls fly by.'
+        hint: 'Tap the picture or press Space to jump over a wave. Hold longer to jump higher. Better to let the gulls fly past.'
         start: 'Swim for shore'
         again: 'Try again'
         won: 'Manuscript saved. Legend says that’s just how it went.'

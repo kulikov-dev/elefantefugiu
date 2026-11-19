@@ -53,7 +53,7 @@
     },
     "legal": {
       "title": "Legal information",
-      "description": "How you may reuse the texts, illustrations and code, what your browser stores, and which services see your IP address. No cookies, no ads."
+      "description": "How you may reuse the texts, illustrations, and code, what your browser stores, and which services see your IP address. No cookies, no ads."
     },
     "map": {
       "title": "Map",
@@ -69,7 +69,7 @@
     },
     "order": {
       "title": "Which came first?",
-      "description": "A game: two events from Portugal’s past, which came first? Ten pairs and a result. Behind every date there is one of my stories."
+      "description": "A game: two events from Portugal’s past, and you guess which came first. Ten pairs and a result. Behind every date there is one of my stories."
     },
     "games": {
       "title": "Games",
@@ -81,7 +81,7 @@
     },
     "glossary": {
       "title": "Glossary",
-      "description": "Portuguese words and things from the stories: azulejo, fado, the Baixa and more. What they are and where the stories mention them."
+      "description": "Portuguese words and things from the stories: azulejo, fado, the Baixa, and more. What they are and where the stories mention them."
     }
   },
   "footer": {
@@ -414,7 +414,7 @@
   "viz": {
     "army_title": "One against five",
     "ship_title": "The size of the nau",
-    "test_numbers": "Test numbers, invented. Not historical data.",
+    "test_numbers": "Made-up test numbers. Not historical data.",
     "army_ratio_one": "There were about {n} time as many {who}.",
     "army_ratio_other": "There were about {n} times as many {who}.",
     "table_length": "Length (m)",
@@ -571,7 +571,7 @@
   },
   "glossary": {
     "all": "All words →",
-    "lead": "Portuguese words and things that turn up in the stories: what they are and where they are told about.",
+    "lead": "Portuguese words and things that turn up in the stories: what they are and where they come up.",
     "stories": "Where it appears",
     "festa": "Holiday",
     "festa_link": "The holiday page",
