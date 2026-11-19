@@ -27,6 +27,7 @@ const fieldId = `follow-email-${gated ? 'story' : 'page'}`;
     <input id={fieldId} type="email" name="email_address" required autocomplete="email" inputmode="email" placeholder={t(lang, 'follow.label')} />
     <button type="submit" class="button">{t(lang, 'follow.button')}</button>
   </form>
+  <p class="follow__done" data-follow-done role="status" hidden>{t(lang, 'follow.done')}</p>
   {
     lang === 'ru' ? (
       <p class="telegram">
@@ -72,6 +73,14 @@ const fieldId = `follow-email-${gated ? 'story' : 'page'}`;
   .follow__text {
     color: var(--color-ink-muted);
     font-size: var(--text-sm);
+  }
+
+  .follow__done {
+    font-weight: 600;
+  }
+
+  .follow__done[hidden] {
+    display: none;
   }
 
   .follow__close {

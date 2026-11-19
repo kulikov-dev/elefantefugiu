@@ -214,6 +214,7 @@
     "text": "One email a month, no ads. Unsubscribe in one click.",
     "label": "Your email",
     "button": "Subscribe",
+    "done": "Almost done: check your inbox and confirm your subscription.",
     "group": "Follow new stories",
     "close": "Close",
     "other": "Or follow the new stories here:"

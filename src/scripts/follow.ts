@@ -24,14 +24,46 @@ document.querySelectorAll<HTMLElement>('[data-follow]').forEach((block) => {
       block.hidden = true;
     }
   }
-  block.querySelector('form')?.addEventListener('submit', () => {
-    setDone();
+  const form = block.querySelector('form');
+  const done = block.querySelector<HTMLElement>('[data-follow-done]');
+  const countSubscribe = (): void => {
     try {
       const counter = (window as unknown as { goatcounter?: Counter }).goatcounter;
       counter?.count?.({ path: followEvent(lang), title: followEvent(lang), event: true });
     } catch {
       // The counter failed: the form goes on.
     }
+  };
+  // Send in the background so the reader stays on the page; on a network or CORS error fall back to the plain submit (which leaves for Kit).
+  let sending = false;
+  form?.addEventListener('submit', (event) => {
+    if (sending) {
+      event.preventDefault();
+      return;
+    }
+    if (!done || typeof fetch !== 'function') {
+      setDone();
+      countSubscribe();
+      return;
+    }
+    event.preventDefault();
+    sending = true;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (button) button.disabled = true;
+    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+      .then((response) => {
+        if (!response.ok) throw new Error(String(response.status));
+        form.hidden = true;
+        done.hidden = false;
+        setDone();
+        countSubscribe();
+      })
+      .catch(() => {
+        // Network or CORS: the ordinary submit as the fallback path.
+        setDone();
+        countSubscribe();
+        form.submit();
+      });
   });
   block.querySelector('[data-follow-close]')?.addEventListener('click', () => {
     setDone();
