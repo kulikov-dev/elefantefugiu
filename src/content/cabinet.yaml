@@ -16,6 +16,7 @@
     pt: Procure na manhã em que Portugal recuperou o seu rei.
     en: Look in the morning when Portugal got its own king back.
     ru: Ищите в утро, когда Португалия вернула себе короля.
+  image: cabinet-shelf/k07-coroa.png
 - id: biombos-nanban
   epoch: uniao-restauracao-e-ouro-do-brasil
   shelf: 2
@@ -32,6 +33,7 @@
     pt: Uma princesa levou para Inglaterra um novo hábito. Procure junto dela.
     en: A princess took a new habit to England. Look with her.
     ru: Одна принцесса увезла в Англию новую привычку. Ищите у неё.
+  image: cabinet-shelf/k08-biombo.png
 - id: ze-povinho
   epoch: monarquia-e-republica
   shelf: 1
@@ -47,3 +49,4 @@
     pt: Um dia, Portugal zangou-se com Inglaterra e compôs uma canção. Procure nela.
     en: Once Portugal got angry at England and wrote a song. Look in it.
     ru: Однажды Португалия обиделась на Англию и сочинила песню. Ищите в ней.
+  image: cabinet-shelf/k14-ze-povinho.png

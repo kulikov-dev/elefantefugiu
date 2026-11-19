@@ -9,7 +9,7 @@
 import './../styles/cabinet.css';
 import { EPOCH_SEGMENT, RANK_SEGMENT, ROUTES, withBase, type Lang } from '../i18n/routes';
 import { CABINET_KEY, SARDINES, parseStore, withItem, withSardine, type CabinetStore } from '../lib/cabinet';
-import { sardineSvg, tinSvg } from '../lib/cabinet-art';
+import { buntingSvg, sardineSvg, tinSvg } from '../lib/cabinet-art';
 import type { ItemData } from '../lib/cabinet-data';
 import { isVisibleInMode } from '../lib/family';
 import { SARDINE_PLACES } from '../lib/cabinet-places';
@@ -196,19 +196,14 @@ window.addEventListener('resize', () => {
   if (pop && !pop.hidden && popOwner) place(popOwner);
 });
 
-/** The thumbnail of a rarity in its frame (the picture of the story when there is one, else a stand-in tile). */
-function thumb(item: ItemData | undefined): HTMLElement {
-  const frame = document.createElement('span');
-  frame.className = 'cab-thumb';
-  if (item?.image) {
-    const img = document.createElement('img');
-    img.src = item.image;
-    img.alt = '';
-    frame.append(img);
-  } else {
-    frame.innerHTML = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="12" width="40" height="40"/><path d="M12 32h40M32 12v40"/><circle cx="32" cy="32" r="8"/></svg>';
-  }
-  return frame;
+/** The object of a rarity (the PNG of the shelf, no frame); a rarity without a picture has none. */
+function thumb(item: ItemData | undefined): HTMLElement | undefined {
+  if (!item?.image) return undefined;
+  const img = document.createElement('img');
+  img.className = 'cab-thumb';
+  img.src = item.image;
+  img.alt = '';
+  return img;
 }
 
 // ---- The hidden words ----
@@ -269,6 +264,17 @@ function wirePage(root: HTMLElement, data: Payload): void {
   const tinCount = root.querySelector<HTMLElement>('[data-tin-count]');
   const empty = root.querySelector<HTMLElement>('[data-empty]');
   const note = root.querySelector<HTMLElement>('[data-preview-note]');
+  const party = root.querySelector<HTMLElement>('[data-party]');
+  const bunting = party?.querySelector<SVGSVGElement>('svg[data-bunting]');
+  /** The bunting is drawn at the real width of the card, so the flags are never stretched. */
+  const hang = (): void => {
+    if (!party || !bunting || party.clientWidth === 0) return;
+    const w = party.clientWidth;
+    const h = bunting.clientHeight;
+    bunting.setAttribute('viewBox', `0 0 ${w} ${h}`);
+    bunting.innerHTML = buntingSvg(w, h);
+  };
+  if (party) new ResizeObserver(hang).observe(party);
   if (note && preview) note.hidden = false;
 
   const refresh = (): void => {
@@ -308,6 +314,7 @@ function wirePage(root: HTMLElement, data: Payload): void {
     if (tinCount) tinCount.textContent = caught === SARDINES ? (s.tin_full ?? '') : fill(s.tin_count ?? '', { n: caught });
     tin?.setAttribute('aria-label', fill(s.tin_label ?? '', { n: caught }));
     root.toggleAttribute('data-complete', caught === SARDINES);
+    hang();
   };
   refreshPage = refresh;
   refresh();

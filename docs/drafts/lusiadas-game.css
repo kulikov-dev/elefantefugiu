@@ -1,0 +1,11 @@
+.lus{display:grid;gap:8px;max-width:560px}
+.lus-stage{position:relative;border:1px solid var(--line);border-radius:10px;background:var(--paper);overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer;outline-offset:3px}
+.lus-stage:focus-visible{outline:2px solid var(--ink)}
+.lus-svg,.lus-cv{display:block;width:100%;height:auto}
+.lus-panel{position:absolute;inset:0;display:grid;place-items:center;background:color-mix(in srgb,var(--paper) 55%,transparent)}
+.lus-panel[hidden]{display:none}
+.lus-panel--end{place-items:end end;padding:0 14px 12px 0;background:none}
+.lus-go{font:700 1rem var(--body);padding:10px 18px;border-radius:999px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.lus-go:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.lus-status{margin:0;font-family:var(--display);font-style:italic;font-size:1.15rem;color:var(--ink);min-height:1.5em}
+.lus-hint{margin:0;font-size:.9rem;color:var(--muted)}

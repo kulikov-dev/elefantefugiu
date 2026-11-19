@@ -1,0 +1,64 @@
+<svg class="doodle" viewBox="0 50 400 190" role="img" aria-labelledby="ft"><title id="ft">Фолар: сдобный хлеб с тремя яйцами в скорлупе под крестами из теста, рядом оливковая веточка и сахарный миндаль</title>
+<g stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <ellipse cx="200" cy="190" rx="176" ry="40" fill="var(--wash)"/>
+  <ellipse cx="200" cy="186" rx="148" ry="29" fill="none" stroke-width="1.2" opacity=".55"/>
+  <path d="M14 222 C46 214 76 204 104 186" fill="none" stroke-width="1.8"/>
+  <g fill="var(--shell)" stroke-width="1.5">
+    <path d="M36 216 q-6 -15 7 -23 q4 13 -7 23 Z"/><path d="M50 212 q8 13 23 9 q-8 -13 -23 -9 Z"/>
+    <path d="M62 206 q-4 -17 11 -23 q2 15 -11 23 Z"/><path d="M76 200 q10 11 23 5 q-10 -11 -23 -5 Z"/>
+    <path d="M90 192 q-2 -15 13 -19 q0 13 -13 19 Z"/>
+  </g>
+  <ellipse cx="56" cy="222" rx="5" ry="6.5" fill="var(--ink)" transform="rotate(-20 56 222)"/>
+  <path d="M72 148 C70 66 330 66 328 148 C326 190 74 190 72 148 Z" fill="var(--warm)"/>
+  <path d="M74 154 C90 184 310 184 326 154 C322 182 280 190 200 190 C120 190 78 182 74 154 Z" fill="var(--ink)" stroke="none" opacity=".18"/>
+  <path d="M114 126 C126 110 146 102 166 99" fill="none" stroke="var(--shell)" stroke-width="6" opacity=".5"/>
+  <g fill="var(--ink)" stroke="none" opacity=".35">
+    <circle cx="110" cy="134" r="1.5"/><circle cx="292" cy="138" r="1.5"/><circle cx="200" cy="160" r="1.5"/><circle cx="160" cy="152" r="1.5"/><circle cx="244" cy="154" r="1.5"/><circle cx="304" cy="118" r="1.5"/><circle cx="96" cy="120" r="1.5"/>
+  </g>
+  <g fill="var(--warm)" stroke-width="1.3">
+    <ellipse cx="72.6" cy="150.8" rx="8" ry="4.6" transform="rotate(106.0 72.6 150.8)"/>
+    <ellipse cx="75.5" cy="155.0" rx="8" ry="4.6" transform="rotate(82.4 75.5 155.0)"/>
+    <ellipse cx="80.9" cy="159.0" rx="8" ry="4.6" transform="rotate(68.7 80.9 159.0)"/>
+    <ellipse cx="88.7" cy="162.8" rx="8" ry="4.6" transform="rotate(60.4 88.7 162.8)"/>
+    <ellipse cx="98.6" cy="166.3" rx="8" ry="4.6" transform="rotate(54.9 98.6 166.3)"/>
+    <ellipse cx="110.6" cy="169.5" rx="8" ry="4.6" transform="rotate(50.9 110.6 169.5)"/>
+    <ellipse cx="124.3" cy="172.2" rx="8" ry="4.6" transform="rotate(47.8 124.3 172.2)"/>
+    <ellipse cx="139.5" cy="174.4" rx="8" ry="4.6" transform="rotate(45.2 139.5 174.4)"/>
+    <ellipse cx="155.9" cy="176.2" rx="8" ry="4.6" transform="rotate(42.9 155.9 176.2)"/>
+    <ellipse cx="173.2" cy="177.3" rx="8" ry="4.6" transform="rotate(40.9 173.2 177.3)"/>
+    <ellipse cx="191.0" cy="177.9" rx="8" ry="4.6" transform="rotate(38.9 191.0 177.9)"/>
+    <ellipse cx="209.0" cy="177.9" rx="8" ry="4.6" transform="rotate(37.1 209.0 177.9)"/>
+    <ellipse cx="226.8" cy="177.3" rx="8" ry="4.6" transform="rotate(35.1 226.8 177.3)"/>
+    <ellipse cx="244.1" cy="176.2" rx="8" ry="4.6" transform="rotate(33.1 244.1 176.2)"/>
+    <ellipse cx="260.5" cy="174.4" rx="8" ry="4.6" transform="rotate(30.8 260.5 174.4)"/>
+    <ellipse cx="275.7" cy="172.2" rx="8" ry="4.6" transform="rotate(28.2 275.7 172.2)"/>
+    <ellipse cx="289.4" cy="169.5" rx="8" ry="4.6" transform="rotate(25.1 289.4 169.5)"/>
+    <ellipse cx="301.4" cy="166.3" rx="8" ry="4.6" transform="rotate(21.1 301.4 166.3)"/>
+    <ellipse cx="311.3" cy="162.8" rx="8" ry="4.6" transform="rotate(15.6 311.3 162.8)"/>
+    <ellipse cx="319.1" cy="159.0" rx="8" ry="4.6" transform="rotate(7.3 319.1 159.0)"/>
+    <ellipse cx="324.5" cy="155.0" rx="8" ry="4.6" transform="rotate(-6.4 324.5 155.0)"/>
+    <ellipse cx="327.4" cy="150.8" rx="8" ry="4.6" transform="rotate(-30.0 327.4 150.8)"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="146" cy="124" rx="20.240000000000002" ry="24.84" fill="var(--shell)" transform="rotate(-14 146 124)"/>
+    <path d="M153 104.16 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M146 94.16 Q148 124 146 153.84" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M146 94.16 Q148 124 146 153.84" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M121.75999999999999 122 Q146 127 170.24 122" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M121.75999999999999 122 Q146 127 170.24 122" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="254" cy="124" rx="20.240000000000002" ry="24.84" fill="var(--shell)" transform="rotate(14 254 124)"/>
+    <path d="M261 104.16 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M254 94.16 Q256 124 254 153.84" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M254 94.16 Q256 124 254 153.84" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M229.76 122 Q254 127 278.24 122" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M229.76 122 Q254 127 278.24 122" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="200" cy="104" rx="22.0" ry="27.0" fill="var(--shell)" transform="rotate(0 200 104)"/>
+    <path d="M207 82.0 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M200 72.0 Q202 104 200 136.0" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M200 72.0 Q202 104 200 136.0" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M174.0 102 Q200 107 226.0 102" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M174.0 102 Q200 107 226.0 102" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g stroke-width="1.5">
+    <ellipse cx="316" cy="210" rx="10" ry="6.5" fill="var(--shell)" transform="rotate(-18 316 210)"/>
+    <ellipse cx="338" cy="202" rx="10" ry="6.5" fill="var(--shell)" transform="rotate(14 338 202)"/>
+    <ellipse cx="296" cy="216" rx="10" ry="6.5" fill="var(--warm)" transform="rotate(8 296 216)"/>
+    <ellipse cx="356" cy="212" rx="10" ry="6.5" fill="var(--warm)" transform="rotate(-6 356 212)"/>
+  </g>
+</g>
+</svg>

@@ -1,0 +1,295 @@
+<title>Праздники: превью Пасхи</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;1,500&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: a stack of "screens" — each one shows a piece of the real site as it will look, with a small grey label above it. */
+:root{
+  --paper:#FBF8F1; --ink:#1F4E9C; --warm:#D9A441; --wash:#E4ECF8; --shell:#FFFDF7;
+  --fg:#1B2333; --muted:#5E6676; --line:#D8DCE4; --bg:#EEF0F4; --card:#FFFFFF;
+  --display:"Alegreya",Georgia,"Times New Roman",serif;
+  --body:"Alegreya Sans","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#18233A; --ink:#A9C2F0; --warm:#E0B45A; --wash:#22324F; --shell:#EFE8D8;
+  --fg:#E8ECF4; --muted:#A3ABBA; --line:#33405A; --bg:#0F1626; --card:#1B2740; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#18233A; --ink:#A9C2F0; --warm:#E0B45A; --wash:#22324F; --shell:#EFE8D8;
+  --fg:#E8ECF4; --muted:#A3ABBA; --line:#33405A; --bg:#0F1626; --card:#1B2740; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:40px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+.intro h1{font-size:2rem}
+.intro p{margin:.5rem 0 0;color:var(--muted);max-width:62ch}
+.label{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.screen{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.topbar{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:700;color:var(--ink)}
+.topbar .nav{margin-left:auto;font-family:var(--body);font-weight:500;font-size:.9rem;display:flex;gap:16px;color:var(--fg)}
+.mini{width:26px;height:22px}
+.festa-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:20px;align-items:center;padding:20px 24px}
+.festa-head .date{font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);font-weight:700}
+.festa-head h2{font-size:1.55rem;margin:.25rem 0 .4rem}
+.festa-head p{margin:0;color:var(--fg)}
+.festa-head a{display:inline-block;margin-top:.7rem;color:var(--ink);font-weight:700}
+.doodle{width:100%;height:auto;display:block}
+.rays{transform-origin:200px 105px;animation:glow 4s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.25}50%{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.rays{animation:none}}
+.page{padding:28px 28px 32px;display:grid;gap:26px}
+.page header{display:grid;gap:6px;max-width:62ch}
+.page header h2{font-size:2rem}
+.page header p{margin:0;color:var(--muted)}
+.page .art{max-width:520px}
+.block h3{font-size:1.3rem;margin-bottom:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 22px;display:grid;gap:10px;max-width:66ch}
+.card .epoch{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card h4{font-family:var(--display);font-size:1.35rem;margin:0}
+.card .hook{font-family:var(--display);font-style:italic;font-size:1.12rem;margin:0;color:var(--ink)}
+.card p{margin:0}
+.card .bridge{font-size:.95rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+.trad{list-style:none;margin:0;padding:0;display:grid;gap:16px;max-width:66ch}
+.trad li{display:grid;gap:2px}
+.trad b{font-family:var(--display);font-size:1.1rem;color:var(--ink)}
+.more{color:var(--ink);font-weight:700}
+.off{font-size:.92rem;color:var(--muted);border:1px dashed var(--line);border-radius:6px;padding:10px 14px;max-width:66ch}
+.notes{display:grid;gap:8px;max-width:66ch;color:var(--muted);font-size:.95rem}
+.notes p{margin:0}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;padding:20px 24px;align-items:center}
+.pair p{margin:0}
+@media (max-width:640px){.festa-head,.pair{grid-template-columns:1fr}.topbar .nav{display:none}.page{padding:20px 18px}}
+a:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+</style>
+<style>
+.meta{font-size:.9rem;color:var(--muted)}
+.trad li{display:block}.trad b{display:block;margin-bottom:2px}
+.warn{color:#B4541A;font-weight:700}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .warn{color:#F0A36B}}
+:root[data-theme="dark"] .warn{color:#F0A36B}
+</style>
+
+<div class="wrap">
+  <section class="intro">
+    <h1>Пасха: как это будет выглядеть</h1>
+    <p>Черновой макет с русскими текстами, версия 2: появилась кандидатка в историю дня, традиции перепроверены. В 2027 году Пасха 28 марта, окно 25–28 марта. Интерактива нет. Знак <span class="warn">⚠</span> стоит там, где источник один или слабый; на сайт он не идёт.</p>
+  </section>
+
+  <section>
+    <p class="label">Главная, 25–28 марта (блок после героя)</p>
+    <div class="screen">
+      <div class="topbar">O Elefante Fugiu <span class="nav"><span>Эпохи</span><span>Карта</span><span>О проекте</span></span></div>
+      <div class="festa-head">
+        <div>
+          <div class="date">28 марта · Пасха</div>
+          <h2>Пасхальная гора</h2>
+          <p>Первую гору, которую португальцы увидели в Бразилии, назвали в честь Пасхи.</p>
+          <a href="#festa">История этого дня →</a>
+        </div>
+        <svg class="doodle" viewBox="0 50 400 190" role="img" aria-labelledby="ft"><title id="ft">Фолар: сдобный хлеб с тремя яйцами в скорлупе под крестами из теста, рядом оливковая веточка и сахарный миндаль</title>
+<g stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <ellipse cx="200" cy="190" rx="176" ry="40" fill="var(--wash)"/>
+  <ellipse cx="200" cy="186" rx="148" ry="29" fill="none" stroke-width="1.2" opacity=".55"/>
+  <path d="M14 222 C46 214 76 204 104 186" fill="none" stroke-width="1.8"/>
+  <g fill="var(--shell)" stroke-width="1.5">
+    <path d="M36 216 q-6 -15 7 -23 q4 13 -7 23 Z"/><path d="M50 212 q8 13 23 9 q-8 -13 -23 -9 Z"/>
+    <path d="M62 206 q-4 -17 11 -23 q2 15 -11 23 Z"/><path d="M76 200 q10 11 23 5 q-10 -11 -23 -5 Z"/>
+    <path d="M90 192 q-2 -15 13 -19 q0 13 -13 19 Z"/>
+  </g>
+  <ellipse cx="56" cy="222" rx="5" ry="6.5" fill="var(--ink)" transform="rotate(-20 56 222)"/>
+  <path d="M72 148 C70 66 330 66 328 148 C326 190 74 190 72 148 Z" fill="var(--warm)"/>
+  <path d="M74 154 C90 184 310 184 326 154 C322 182 280 190 200 190 C120 190 78 182 74 154 Z" fill="var(--ink)" stroke="none" opacity=".18"/>
+  <path d="M114 126 C126 110 146 102 166 99" fill="none" stroke="var(--shell)" stroke-width="6" opacity=".5"/>
+  <g fill="var(--ink)" stroke="none" opacity=".35">
+    <circle cx="110" cy="134" r="1.5"/><circle cx="292" cy="138" r="1.5"/><circle cx="200" cy="160" r="1.5"/><circle cx="160" cy="152" r="1.5"/><circle cx="244" cy="154" r="1.5"/><circle cx="304" cy="118" r="1.5"/><circle cx="96" cy="120" r="1.5"/>
+  </g>
+  <g fill="var(--warm)" stroke-width="1.3">
+    <ellipse cx="72.6" cy="150.8" rx="8" ry="4.6" transform="rotate(106.0 72.6 150.8)"/>
+    <ellipse cx="75.5" cy="155.0" rx="8" ry="4.6" transform="rotate(82.4 75.5 155.0)"/>
+    <ellipse cx="80.9" cy="159.0" rx="8" ry="4.6" transform="rotate(68.7 80.9 159.0)"/>
+    <ellipse cx="88.7" cy="162.8" rx="8" ry="4.6" transform="rotate(60.4 88.7 162.8)"/>
+    <ellipse cx="98.6" cy="166.3" rx="8" ry="4.6" transform="rotate(54.9 98.6 166.3)"/>
+    <ellipse cx="110.6" cy="169.5" rx="8" ry="4.6" transform="rotate(50.9 110.6 169.5)"/>
+    <ellipse cx="124.3" cy="172.2" rx="8" ry="4.6" transform="rotate(47.8 124.3 172.2)"/>
+    <ellipse cx="139.5" cy="174.4" rx="8" ry="4.6" transform="rotate(45.2 139.5 174.4)"/>
+    <ellipse cx="155.9" cy="176.2" rx="8" ry="4.6" transform="rotate(42.9 155.9 176.2)"/>
+    <ellipse cx="173.2" cy="177.3" rx="8" ry="4.6" transform="rotate(40.9 173.2 177.3)"/>
+    <ellipse cx="191.0" cy="177.9" rx="8" ry="4.6" transform="rotate(38.9 191.0 177.9)"/>
+    <ellipse cx="209.0" cy="177.9" rx="8" ry="4.6" transform="rotate(37.1 209.0 177.9)"/>
+    <ellipse cx="226.8" cy="177.3" rx="8" ry="4.6" transform="rotate(35.1 226.8 177.3)"/>
+    <ellipse cx="244.1" cy="176.2" rx="8" ry="4.6" transform="rotate(33.1 244.1 176.2)"/>
+    <ellipse cx="260.5" cy="174.4" rx="8" ry="4.6" transform="rotate(30.8 260.5 174.4)"/>
+    <ellipse cx="275.7" cy="172.2" rx="8" ry="4.6" transform="rotate(28.2 275.7 172.2)"/>
+    <ellipse cx="289.4" cy="169.5" rx="8" ry="4.6" transform="rotate(25.1 289.4 169.5)"/>
+    <ellipse cx="301.4" cy="166.3" rx="8" ry="4.6" transform="rotate(21.1 301.4 166.3)"/>
+    <ellipse cx="311.3" cy="162.8" rx="8" ry="4.6" transform="rotate(15.6 311.3 162.8)"/>
+    <ellipse cx="319.1" cy="159.0" rx="8" ry="4.6" transform="rotate(7.3 319.1 159.0)"/>
+    <ellipse cx="324.5" cy="155.0" rx="8" ry="4.6" transform="rotate(-6.4 324.5 155.0)"/>
+    <ellipse cx="327.4" cy="150.8" rx="8" ry="4.6" transform="rotate(-30.0 327.4 150.8)"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="146" cy="124" rx="20.240000000000002" ry="24.84" fill="var(--shell)" transform="rotate(-14 146 124)"/>
+    <path d="M153 104.16 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M146 94.16 Q148 124 146 153.84" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M146 94.16 Q148 124 146 153.84" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M121.75999999999999 122 Q146 127 170.24 122" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M121.75999999999999 122 Q146 127 170.24 122" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="254" cy="124" rx="20.240000000000002" ry="24.84" fill="var(--shell)" transform="rotate(14 254 124)"/>
+    <path d="M261 104.16 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M254 94.16 Q256 124 254 153.84" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M254 94.16 Q256 124 254 153.84" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M229.76 122 Q254 127 278.24 122" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M229.76 122 Q254 127 278.24 122" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="200" cy="104" rx="22.0" ry="27.0" fill="var(--shell)" transform="rotate(0 200 104)"/>
+    <path d="M207 82.0 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M200 72.0 Q202 104 200 136.0" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M200 72.0 Q202 104 200 136.0" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M174.0 102 Q200 107 226.0 102" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M174.0 102 Q200 107 226.0 102" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g stroke-width="1.5">
+    <ellipse cx="316" cy="210" rx="10" ry="6.5" fill="var(--shell)" transform="rotate(-18 316 210)"/>
+    <ellipse cx="338" cy="202" rx="10" ry="6.5" fill="var(--shell)" transform="rotate(14 338 202)"/>
+    <ellipse cx="296" cy="216" rx="10" ry="6.5" fill="var(--warm)" transform="rotate(8 296 216)"/>
+    <ellipse cx="356" cy="212" rx="10" ry="6.5" fill="var(--warm)" transform="rotate(-6 356 212)"/>
+  </g>
+</g>
+</svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="festa">
+    <p class="label">Страница праздника /ru/festa/pascoa</p>
+    <div class="screen">
+      <div class="topbar">O Elefante Fugiu</div>
+      <div class="page">
+        <header>
+          <div class="date" style="font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);font-weight:700">28 марта</div>
+          <h2>Пасха</h2>
+          <p>Главный весенний праздник. В Страстную пятницу едят треску, а в воскресенье за столом ягнёнок и фолар.</p>
+        </header>
+        <div class="art"><svg class="doodle" viewBox="0 50 400 190" role="img" aria-labelledby="ft2"><title id="ft2">Фолар: сдобный хлеб с тремя яйцами в скорлупе под крестами из теста, рядом оливковая веточка и сахарный миндаль</title>
+<g stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <ellipse cx="200" cy="190" rx="176" ry="40" fill="var(--wash)"/>
+  <ellipse cx="200" cy="186" rx="148" ry="29" fill="none" stroke-width="1.2" opacity=".55"/>
+  <path d="M14 222 C46 214 76 204 104 186" fill="none" stroke-width="1.8"/>
+  <g fill="var(--shell)" stroke-width="1.5">
+    <path d="M36 216 q-6 -15 7 -23 q4 13 -7 23 Z"/><path d="M50 212 q8 13 23 9 q-8 -13 -23 -9 Z"/>
+    <path d="M62 206 q-4 -17 11 -23 q2 15 -11 23 Z"/><path d="M76 200 q10 11 23 5 q-10 -11 -23 -5 Z"/>
+    <path d="M90 192 q-2 -15 13 -19 q0 13 -13 19 Z"/>
+  </g>
+  <ellipse cx="56" cy="222" rx="5" ry="6.5" fill="var(--ink)" transform="rotate(-20 56 222)"/>
+  <path d="M72 148 C70 66 330 66 328 148 C326 190 74 190 72 148 Z" fill="var(--warm)"/>
+  <path d="M74 154 C90 184 310 184 326 154 C322 182 280 190 200 190 C120 190 78 182 74 154 Z" fill="var(--ink)" stroke="none" opacity=".18"/>
+  <path d="M114 126 C126 110 146 102 166 99" fill="none" stroke="var(--shell)" stroke-width="6" opacity=".5"/>
+  <g fill="var(--ink)" stroke="none" opacity=".35">
+    <circle cx="110" cy="134" r="1.5"/><circle cx="292" cy="138" r="1.5"/><circle cx="200" cy="160" r="1.5"/><circle cx="160" cy="152" r="1.5"/><circle cx="244" cy="154" r="1.5"/><circle cx="304" cy="118" r="1.5"/><circle cx="96" cy="120" r="1.5"/>
+  </g>
+  <g fill="var(--warm)" stroke-width="1.3">
+    <ellipse cx="72.6" cy="150.8" rx="8" ry="4.6" transform="rotate(106.0 72.6 150.8)"/>
+    <ellipse cx="75.5" cy="155.0" rx="8" ry="4.6" transform="rotate(82.4 75.5 155.0)"/>
+    <ellipse cx="80.9" cy="159.0" rx="8" ry="4.6" transform="rotate(68.7 80.9 159.0)"/>
+    <ellipse cx="88.7" cy="162.8" rx="8" ry="4.6" transform="rotate(60.4 88.7 162.8)"/>
+    <ellipse cx="98.6" cy="166.3" rx="8" ry="4.6" transform="rotate(54.9 98.6 166.3)"/>
+    <ellipse cx="110.6" cy="169.5" rx="8" ry="4.6" transform="rotate(50.9 110.6 169.5)"/>
+    <ellipse cx="124.3" cy="172.2" rx="8" ry="4.6" transform="rotate(47.8 124.3 172.2)"/>
+    <ellipse cx="139.5" cy="174.4" rx="8" ry="4.6" transform="rotate(45.2 139.5 174.4)"/>
+    <ellipse cx="155.9" cy="176.2" rx="8" ry="4.6" transform="rotate(42.9 155.9 176.2)"/>
+    <ellipse cx="173.2" cy="177.3" rx="8" ry="4.6" transform="rotate(40.9 173.2 177.3)"/>
+    <ellipse cx="191.0" cy="177.9" rx="8" ry="4.6" transform="rotate(38.9 191.0 177.9)"/>
+    <ellipse cx="209.0" cy="177.9" rx="8" ry="4.6" transform="rotate(37.1 209.0 177.9)"/>
+    <ellipse cx="226.8" cy="177.3" rx="8" ry="4.6" transform="rotate(35.1 226.8 177.3)"/>
+    <ellipse cx="244.1" cy="176.2" rx="8" ry="4.6" transform="rotate(33.1 244.1 176.2)"/>
+    <ellipse cx="260.5" cy="174.4" rx="8" ry="4.6" transform="rotate(30.8 260.5 174.4)"/>
+    <ellipse cx="275.7" cy="172.2" rx="8" ry="4.6" transform="rotate(28.2 275.7 172.2)"/>
+    <ellipse cx="289.4" cy="169.5" rx="8" ry="4.6" transform="rotate(25.1 289.4 169.5)"/>
+    <ellipse cx="301.4" cy="166.3" rx="8" ry="4.6" transform="rotate(21.1 301.4 166.3)"/>
+    <ellipse cx="311.3" cy="162.8" rx="8" ry="4.6" transform="rotate(15.6 311.3 162.8)"/>
+    <ellipse cx="319.1" cy="159.0" rx="8" ry="4.6" transform="rotate(7.3 319.1 159.0)"/>
+    <ellipse cx="324.5" cy="155.0" rx="8" ry="4.6" transform="rotate(-6.4 324.5 155.0)"/>
+    <ellipse cx="327.4" cy="150.8" rx="8" ry="4.6" transform="rotate(-30.0 327.4 150.8)"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="146" cy="124" rx="20.240000000000002" ry="24.84" fill="var(--shell)" transform="rotate(-14 146 124)"/>
+    <path d="M153 104.16 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M146 94.16 Q148 124 146 153.84" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M146 94.16 Q148 124 146 153.84" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M121.75999999999999 122 Q146 127 170.24 122" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M121.75999999999999 122 Q146 127 170.24 122" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="254" cy="124" rx="20.240000000000002" ry="24.84" fill="var(--shell)" transform="rotate(14 254 124)"/>
+    <path d="M261 104.16 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M254 94.16 Q256 124 254 153.84" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M254 94.16 Q256 124 254 153.84" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M229.76 122 Q254 127 278.24 122" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M229.76 122 Q254 127 278.24 122" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g class="egg">
+    <ellipse cx="200" cy="104" rx="22.0" ry="27.0" fill="var(--shell)" transform="rotate(0 200 104)"/>
+    <path d="M207 82.0 q12 9 10 30" fill="none" stroke="var(--ink)" stroke-width="5" opacity=".12"/>
+    <path d="M200 72.0 Q202 104 200 136.0" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M200 72.0 Q202 104 200 136.0" fill="none" stroke="var(--warm)" stroke-width="7"/><path d="M174.0 102 Q200 107 226.0 102" fill="none" stroke="var(--ink)" stroke-width="10.5"/><path d="M174.0 102 Q200 107 226.0 102" fill="none" stroke="var(--warm)" stroke-width="7"/>
+  </g>
+  <g stroke-width="1.5">
+    <ellipse cx="316" cy="210" rx="10" ry="6.5" fill="var(--shell)" transform="rotate(-18 316 210)"/>
+    <ellipse cx="338" cy="202" rx="10" ry="6.5" fill="var(--shell)" transform="rotate(14 338 202)"/>
+    <ellipse cx="296" cy="216" rx="10" ry="6.5" fill="var(--warm)" transform="rotate(8 296 216)"/>
+    <ellipse cx="356" cy="212" rx="10" ry="6.5" fill="var(--warm)" transform="rotate(-6 356 212)"/>
+  </g>
+</g>
+</svg></div>
+
+        <div class="block">
+          <h3>История этого дня</h3>
+          <a class="card" href="#story" style="color:inherit;text-decoration:none">
+            <span class="epoch">Ависская династия · 1500</span>
+            <h4 style="font-family:var(--display);font-size:1.25rem;margin:0">Пасхальная гора</h4>
+            <p style="margin:0;font-family:var(--display);font-style:italic">Первую гору, которую португальцы увидели в Бразилии, назвали в честь Пасхи.</p>
+          </a>
+          <p class="meta" style="margin-top:8px">Стандартная карточка истории. Картинка будет своя, промпт для Gemini пришлю после твоего «да».</p>
+        </div>
+
+        <div class="block">
+          <h3>Традиции и факты</h3>
+          <ul class="trad">
+            <li><b>Фолар от крёстных.</b> Фолар — сдобный хлеб, в который запекают целые яйца прямо в скорлупе, а сверху кладут крест из полосок теста. На севере в Вербное воскресенье крестники несут крёстной букетик фиалок, а крёстному оливковую ветку, а на Пасху крёстные дарят им в ответ фолар. В каждом краю фолар свой: в Траш-уш-Монтеш его начиняют колбасой и ветчиной, а в Ольяне, на юге, пекут сладким и слоёным, с сахаром и корицей.</li>
+            <li><b>Крест идёт по домам.</b> В пасхальное воскресенье, особенно на севере, по деревням и городам ходит компасу: священник или кто-то из прихожан несёт крест от дома к дому. Вход украшают зеленью и коврами из цветов, хозяева целуют крест, а гостей угощают. По оценке газеты CM, за один день кресты заходят примерно в полтора миллиона домов.</li>
+            <li><b>Ночь колокольчиков.</b> В Страстную субботу пастухи приносят ягнят в центр Каштелу-ди-Види, городка в Алентежу, чтобы их благословили. А ночью, после пасхальной службы, тысячи людей идут по улицам и звенят пастушьими колокольчиками всех размеров, им вторят колокола церкви и часовой башни. Как считается, так пастухи благодарили церковь за благословение стад.</li>
+            <li><b>Мидии вместо мяса.</b> В Страстную пятницу на пляже Магоиту под Синтрой десятки людей с вёдрами выходят на отлив собирать мидии. Старожилы объясняют это другим обычаем: в этот день нельзя есть мясо.</li>
+          </ul>
+        </div>
+
+        <p class="off">Вне окна: вверху одна строка «Дата Пасхи каждый год своя: это первое воскресенье после весеннего полнолуния», остальное то же. Сайт считает дату сам, тем же расчётом, что и для Карнавала.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <p class="label">Новая история (кандидат, текст для утверждения)</p>
+    <div class="screen">
+      <div class="page">
+        <div class="story" style="display:grid;gap:14px;max-width:66ch">
+          <p class="meta" style="margin:0">Уровень: история · Метка: документально · Возраст: для всех · Эпоха: Ависская династия · Год: 1500</p>
+          <h2 style="font-size:1.8rem">Пасхальная гора</h2>
+          <p style="margin:0;font-family:var(--display);font-style:italic;font-size:1.2rem">Первую гору, которую португальцы увидели в Бразилии, назвали в честь Пасхи.</p>
+          <h4 style="margin:6px 0 0;font-family:var(--display);font-size:1.1rem">История</h4>
+          <p style="margin:0">9 марта 1500 года из Лиссабона вышел в Индию флот Педру Алвареша Кабрала. Чтобы обойти штили у берегов Африки, корабли взяли далеко на запад, и в среду 22 апреля моряки увидели на горизонте высокую гору.</p>
+          <p style="margin:0">Шла пасхальная неделя: Пасха в тот год пришлась на 19 апреля. Поэтому, как записал писарь флота Перу Ваз ди Каминья, капитан назвал гору Монте-Пашкоал, Пасхальной горой. А новую землю Кабрал принял за остров и назвал Островом Истинного Креста. Так началась португальская Бразилия.</p>
+          <h4 style="margin:6px 0 0;font-family:var(--display);font-size:1.1rem">Подробнее</h4>
+          <p style="margin:0">В первое воскресенье после Пасхи, 26 апреля, на берегу отслужили первую мессу. Каминья подробно описал всё это в письме королю Мануэлу I, и это письмо считают первым текстом о Бразилии. Гора и сейчас называется Пасхальной, вокруг неё национальный парк.</p>
+          <p style="margin:0">Крест, с которым, как считается, служили ту мессу, хранится в соборе Браги. В 2025 году, к 525-летию, его возили в Бразилию, на тот самый берег.</p>
+          <h4 style="margin:6px 0 0;font-family:var(--display);font-size:1.1rem">Мост в сегодня</h4>
+          <p style="margin:0">Сокровищница собора Браги. Здесь хранится крест первой мессы в Бразилии.</p>
+          <h4 style="margin:6px 0 0;font-family:var(--display);font-size:1.1rem">Источники</h4>
+          <ul style="margin:0;padding-left:1.2em">
+            <li>Письмо Перу Ваза ди Каминьи королю Мануэлу I, 1 мая 1500 года</li>
+            <li><a href="https://en.wikipedia.org/wiki/Pedro_%C3%81lvares_Cabral">Pedro Álvares Cabral</a>, <a href="https://en.wikipedia.org/wiki/First_Mass_in_Brazil">First Mass in Brazil</a> (Wikipedia)</li>
+            <li>RTP / Lusa, 2025: <a href="https://www.rtp.pt/noticias/cultura/brasil-assinala-primeira-missa-na-terra-de-santa-cruz-com-cruz-original-de-portugal_n1648732">Brasil assinala primeira missa com cruz original de Portugal</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">Что нужно от тебя и где источники слабые</p>
+    <div class="screen">
+      <div class="page notes">
+        <p><b>История «Пасхальная гора».</b> Пасха 1500 года была 19 апреля (по юлианскому календарю, тогдашнему), гору увидели в среду пасхальной недели, имя «Монте-Пашкоал» есть в письме Каминьи. Проверь, нет ли у нас уже истории про Кабрала или открытие Бразилии, тогда эта не нужна. И помни: тема колониальная, для pt-постов мы такие не берём, но на сайте она лёгкая.</p>
+        <p><b><span class="warn">⚠</span> Крест в Браге.</b> Что крест первой мессы хранится в сокровищнице собора Браги и в 2025 году ездил в Бразилию, пишут RTP/Lusa и Википедия. Как он попал в Брагу, не пишет никто, поэтому «как считается». Для моста нужна ссылка Google Maps на Tesouro-Museu da Sé de Braga.</p>
+        <p><b>Перепроверил три места.</b> Фиалки и ветка: Jornal de Guimarães (2022, «особенно в Минью»), Pombal Jornal (2015, фиалки в Вербное воскресенье, фолар в ответ на Пасху), Euro Dicas. Полтора миллиона домов: CM, 2019, «Compasso entra em 1,5 milhões de casas na Páscoa», один источник, поэтому «по оценке». Мидии: Observador (2017) и Notícias ao Minuto (2024), оба: Страстная пятница, пляж Магоиту, объяснение — нельзя мясо.</p>
+        <p><b>Если история не подходит,</b> блок на главной вернётся к фолару: «Хлеб, который дарят крёстные».</p>
+        <p><b>Рисунок</b> перерисован: три яйца под прямыми крестами из теста, коса по краю тоньше. <b>Иконка вкладки:</b> яйцо с крестиком из теста.</p>
+      </div>
+    </div>
+  </section>
+</div>

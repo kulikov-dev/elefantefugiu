@@ -84,7 +84,7 @@
       "description": "Palavras e realidades portuguesas das histórias: azulejo, fado, a Baixa e outras. O que são e onde aparecem."
     },
     "cabinet": {
-      "title": "Gabinete de raridades",
+      "title": "Gabinete de curiosidades",
       "description": "Objetos raros escondidos nas palavras das histórias. Encontre-os e arrume-os nas prateleiras do gabinete."
     }
   },
@@ -99,7 +99,7 @@
     "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
     "privacy": "Sem publicidade nem cookies",
     "games": "Jogos",
-    "cabinet": "Gabinete de raridades"
+    "cabinet": "Gabinete de curiosidades"
   },
   "home": {
     "epochs_heading": "Épocas",
@@ -554,7 +554,7 @@
     "og_title": "Jogos: dois testes sobre a história de Portugal",
     "og_description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos, e depois de cada resposta a história completa.",
     "cabinet_line": "As raridades estão escondidas nas histórias. Encontre-as e arrume-as nas prateleiras.",
-    "cabinet_og_title": "Gabinete de raridades · O Elefante Fugiu",
+    "cabinet_og_title": "Gabinete de curiosidades · O Elefante Fugiu",
     "cabinet_og_description": "Objetos raros escondidos nas palavras das histórias de Portugal. Encontre-os todos."
   },
   "seo": {
@@ -597,7 +597,7 @@
     "soon": "Em breve, novas prateleiras.",
     "no_js": "O gabinete funciona com JavaScript. Ative-o para recolher as raridades.",
     "preview": "Pré-visualização: o gabinete ainda está fechado.",
-    "unknown": "?",
+    "unknown": "por encontrar",
     "unknown_label": "Raridade por encontrar, pista",
     "known_label": "Raridade: {name}",
     "not_found": "Ainda por encontrar",
@@ -621,6 +621,6 @@
     "party_link": "Sobre a festa",
     "party_garland": "Grinaldas dos Santos Populares",
     "ribbon": "Raridade do gabinete",
-    "back": "← Ao gabinete de raridades"
+    "back": "← Ao gabinete de curiosidades"
   }
 }

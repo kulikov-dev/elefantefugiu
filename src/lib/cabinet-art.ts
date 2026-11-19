@@ -56,14 +56,24 @@ export function tinSvg(caught: number, uid: string): string {
   );
 }
 
-/** The garlands of the finished cabinet: a string and 19 flags in four colours (they sway unless the reader asks for less motion, see cabinet.css). */
-export function garlandSvg(label: string): string {
+/** The step of the flags on the cord, px. */
+export const BUNTING_STEP = 34;
+
+/**
+ * The bunting of the finished cabinet: the cord sags a little between the two edges of a block `width` px wide, and a flag hangs at every step, its point down, turned to the tangent of the cord.
+ * Five colours (white with a thin outline). The width is the real width of the block, so nothing is stretched.
+ */
+export function buntingSvg(width: number, height: number): string {
+  const y0 = 2;
+  const sag = Math.min(16, height / 4);
+  const count = Math.max(1, Math.round(width / BUNTING_STEP));
   let flags = '';
-  for (let i = 0; i < 19; i++) {
-    const x = 20 + i * 38;
-    const t = (x % 380) / 380;
-    const y = 14 + 100 * t * (1 - t);
-    flags += `<path class="cab-flag" d="M${x - 11} ${y.toFixed(1)} L${x + 11} ${y.toFixed(1)} L${x} ${(y + 30).toFixed(1)} Z" fill="var(--cab-flag-${(i % 4) + 1})" opacity=".9"/>`;
+  for (let i = 0; i < count; i++) {
+    const t = (i + 0.5) / count;
+    const x = width * t;
+    const y = y0 + 2 * sag * t * (1 - t);
+    const angle = (Math.atan((2 * sag * (1 - 2 * t)) / width) * 180) / Math.PI;
+    flags += `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${angle.toFixed(1)})"><path d="M-9 0 H9 L0 22 Z" fill="var(--cab-flag-${(i % 5) + 1})" stroke="var(--cab-flag-line)" stroke-width=".6"/></g>`;
   }
-  return `<svg viewBox="0 0 760 110" role="img" aria-label="${label.replace(/"/g, '&quot;')}"><path d="M0 14 Q190 64 380 14 T760 14" fill="none" stroke="var(--color-muted)" stroke-width="1.5"/>${flags}</svg>`;
+  return `<path d="M0 ${y0} Q${(width / 2).toFixed(1)} ${y0 + 2 * sag} ${width.toFixed(1)} ${y0}" fill="none" stroke="var(--color-muted)" stroke-width="1.2"/>${flags}`;
 }

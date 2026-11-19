@@ -51,21 +51,36 @@
   --cab-flag-2: light-dark(#4e8f45, #6aaa5f);
   --cab-flag-3: light-dark(#e9c46a, #e0b24a);
   --cab-flag-4: light-dark(#1f4e9c, #5a88d8);
+  --cab-flag-5: light-dark(#ffffff, #efe8d8);
+  --cab-flag-line: light-dark(rgb(0 0 0 / 0.15), rgb(255 255 255 / 0.25));
 
-  /* The cabinet of rarities: sizes of the shelves (a tile and the gap between tiles, the board under them, the tin) and of a found tile's frame. */
-  --cab-tile-size: 8.25rem;
-  --cab-tile-gap: 2.25rem;
-  --cab-tile-size-phone: calc((100vw - 5.75rem) / 3);
-  --cab-tile-gap-phone: 0.75rem;
-  --cab-board-height: 0.375rem;
-  --cab-board-overhang: 3rem;
-  --cab-tin-size: min(15.6rem, 60vw);
+  /* The cabinet of rarities: sizes of the shelf (the zone of the objects is 112 px high, 160 px from 768 px; the shelf is 760 px at most), of the head and of the card of the holiday. */
+  --cab-obj-h: 7rem;
+  --cab-obj-h-wide: 10rem;
+  --cab-shelf-max: 47.5rem;
+  --cab-col-gap: 0.625rem;
+  --cab-col-gap-wide: 3rem;
+  --cab-col-pad: 0.375rem;
+  --cab-col-pad-wide: 2.5rem;
+  --cab-board-height: 0.75rem;
+  --cab-board-top: 0.1875rem;
+  --cab-board-dark: #000000;
+  --cab-board-glow: 0 0.375rem 0.5rem -0.25rem rgb(0 0 0 / 0.35);
+  --cab-label: 0.8rem;
+  --cab-label-wide: 0.88rem;
+  --cab-shelf-title: 1.15rem;
+  --cab-obj-shadow: drop-shadow(0 0.1875rem 0.125rem rgb(0 0 0 / 0.18));
+  --cab-sil: brightness(0) opacity(0.11);
+  --cab-sil-dark: brightness(0) invert(1) opacity(0.12);
+  --cab-rule: 4rem;
+  --cab-tin-size: 8.25rem;
+  --cab-tin-size-wide: 13.125rem;
   --cab-swim-far: 14rem;
-  --cab-frame-in: 5px;
-  --cab-frame-out: 6px;
-  --cab-lead: 46ch;
-  --cab-garland: 47.5rem;
-  --cab-line: 58ch;
+  --cab-lead: 34ch;
+  --cab-line: 40ch;
+  --cab-card-radius: 0.875rem;
+  --cab-party-top: 4rem;
+  --cab-party-title: 1.3rem;
   --cab-card-min: 16rem;
   --cab-underline-offset: 0.2em;
   --cab-pop-width: min(19rem, calc(100vw - 2rem));
@@ -609,6 +624,8 @@
     --cab-flag-2: #4e8f45;
     --cab-flag-3: #e9c46a;
     --cab-flag-4: #1f4e9c;
+    --cab-flag-5: #ffffff;
+    --cab-flag-line: rgb(0 0 0 / 0.15);
     --cab-pop-shadow: 0 0.375rem 1.125rem rgb(31 27 22 / 0.18);
     --color-heavy-border: #7a2e0e;
     --color-heavy-bg: #fdeee6;

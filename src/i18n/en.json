@@ -597,7 +597,7 @@
     "soon": "New shelves soon.",
     "no_js": "The cabinet works with JavaScript. Turn it on to collect the rarities.",
     "preview": "Preview: the cabinet is still closed.",
-    "unknown": "?",
+    "unknown": "not found",
     "unknown_label": "A rarity not found yet, hint",
     "known_label": "Rarity: {name}",
     "not_found": "Not found yet",

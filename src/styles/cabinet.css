@@ -120,34 +120,13 @@ button.cw:focus-visible {
   cursor: pointer;
 }
 
-/* The thumbnail in its frame: a tile with a double line, like the found tiles of the shelves. */
+/* The object itself in a pop-up (the PNG of the shelf), no frame. */
 .cab-thumb {
-  box-sizing: border-box;
-  inline-size: var(--cab-thumb-size);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border: var(--border-medium) solid var(--color-border-strong);
-  border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  box-shadow: inset 0 0 0 var(--cab-frame-in) var(--color-surface), inset 0 0 0 var(--cab-frame-in) var(--color-accent-tint);
-  overflow: hidden;
-}
-
-.cab-thumb img {
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-}
-
-.cab-thumb svg {
-  inline-size: 56%;
-  block-size: 56%;
-  fill: none;
-  stroke: var(--tile-accent, var(--epoch-accent, var(--color-accent)));
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  inline-size: auto;
+  max-inline-size: var(--cab-thumb-size);
+  block-size: var(--cab-thumb-size);
+  object-fit: contain;
+  filter: var(--cab-obj-shadow);
 }
 
 /* ---- A hidden sardine ---- */
@@ -231,32 +210,35 @@ button.cw:focus-visible {
   font-weight: 600;
 }
 
+/* The head: the title, under it the counter, the tin to the right of the counter (to the right of the title from 768 px), its caption under it. */
 .cabinet__head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4) var(--space-5);
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-1) var(--space-4);
+  align-items: end;
 }
 
 .cabinet__head h1 {
+  grid-column: 1 / -1;
   margin: 0;
 }
 
 .cabinet__head p {
-  margin: var(--space-1) 0 0;
+  margin: 0;
   color: var(--color-muted);
   max-inline-size: var(--cab-lead);
 }
 
 .cabinet__tin {
   all: unset;
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-1);
   cursor: pointer;
-  padding: var(--space-1);
   border-radius: var(--radius-md);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
 }
 
 .cabinet__tin svg {
@@ -266,8 +248,6 @@ button.cw:focus-visible {
 }
 
 .cabinet__tin-count {
-  font-size: var(--text-sm);
-  color: var(--color-muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -276,48 +256,117 @@ button.cw:focus-visible {
   outline-offset: var(--ring-offset-tight);
 }
 
+@media (min-width: 48rem) {
+  .cabinet__head h1 {
+    grid-column: 1;
+  }
+
+  .cabinet__tin {
+    grid-row: 1 / 3;
+    grid-column: 2;
+  }
+
+  .cabinet__tin svg {
+    inline-size: var(--cab-tin-size-wide);
+  }
+}
+
+/* The shelves: the objects stand on the board, their lower edges on one line. */
 .cabinet__shelves {
   display: grid;
   gap: var(--space-6);
 }
 
 .shelf {
-  --tw: var(--cab-tile-size);
-  --gap: var(--cab-tile-gap);
+  --oh: var(--cab-obj-h);
+}
+
+.shelf__in {
+  max-inline-size: var(--cab-shelf-max);
+  margin-inline: auto;
 }
 
 .shelf h2 {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: var(--space-2);
-  margin: 0 0 var(--space-3);
-  font-size: var(--text-lg);
+  gap: var(--space-3);
+  margin: 0 0 var(--space-2);
+  font-size: var(--cab-shelf-title);
 }
 
 .shelf h2 span {
   font-family: var(--font-body);
   font-size: var(--text-sm);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--color-muted);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
-.shelf__row,
+.shelf__objs,
 .shelf__labels {
   display: grid;
-  grid-template-columns: repeat(var(--n, 3), var(--tw));
-  gap: 0 var(--gap);
+  grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
+  gap: 0 var(--cab-col-gap);
+  padding-inline: var(--cab-col-pad);
+  max-inline-size: calc(var(--n, 3) / 3 * 100%);
+  margin-inline: auto;
+}
+
+.shelf__objs {
+  align-items: end;
+  block-size: var(--oh);
+}
+
+.cab-obj {
+  all: unset;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  block-size: 100%;
+  display: flex;
   justify-content: center;
+  align-items: flex-end;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.cab-obj img {
+  display: block;
+  inline-size: auto;
+  block-size: auto;
+  max-block-size: var(--oh);
+  max-inline-size: 100%;
+  object-fit: contain;
+  filter: var(--cab-obj-shadow);
+}
+
+/* Not found: the same picture as a silhouette. */
+.cab-obj:not([data-found]) img {
+  filter: var(--cab-sil);
+}
+
+:root[data-theme='dark'] .cab-obj:not([data-found]) img {
+  filter: var(--cab-sil-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .cab-obj:not([data-found]) img {
+    filter: var(--cab-sil-dark);
+  }
+}
+
+.cab-obj:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
 }
 
 .shelf__board {
   block-size: var(--cab-board-height);
+  margin-inline: calc(-1 * var(--space-1));
   border-radius: var(--radius-sm);
-  background: var(--ep);
-  margin-inline: auto;
-  inline-size: calc(var(--n, 3) * var(--tw) + (var(--n, 3) - 1) * var(--gap) + var(--cab-board-overhang));
-  max-inline-size: 100%;
+  background: linear-gradient(var(--ep) 0 var(--cab-board-top), color-mix(in srgb, var(--ep) 80%, var(--cab-board-dark)) var(--cab-board-top));
+  box-shadow: var(--cab-board-glow);
 }
 
 .shelf__labels {
@@ -325,81 +374,56 @@ button.cw:focus-visible {
 }
 
 .shelf__labels span {
-  font-size: var(--text-sm);
-  line-height: 1.3;
+  font-size: var(--cab-label);
+  line-height: 1.25;
   text-align: center;
 }
 
 .shelf__labels span[data-unknown] {
   color: var(--color-muted);
+  font-style: italic;
 }
 
-.cab-tile {
-  all: unset;
-  cursor: pointer;
-  display: block;
-  border-radius: var(--radius-sm);
+@media (min-width: 48rem) {
+  .shelf {
+    --oh: var(--cab-obj-h-wide);
+  }
+
+  .shelf__objs,
+  .shelf__labels {
+    gap: 0 var(--cab-col-gap-wide);
+    padding-inline: var(--cab-col-pad-wide);
+  }
+
+  .shelf__labels span {
+    font-size: var(--cab-label-wide);
+  }
 }
 
-.cab-tile__face {
-  box-sizing: border-box;
-  inline-size: 100%;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  border-radius: var(--radius-sm);
-  border: var(--border-medium) dashed var(--color-border-strong);
-  background: transparent;
-  overflow: hidden;
-}
-
-.cab-tile__face svg {
-  inline-size: 56%;
-  block-size: 56%;
+.cab-obj__stub {
+  inline-size: 40%;
   fill: none;
-  stroke: var(--color-border-strong);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.cab-tile[data-found] .cab-tile__face {
-  border: var(--border-medium) solid var(--color-border-strong);
-  background: var(--color-surface);
-  box-shadow: inset 0 0 0 var(--cab-frame-in) var(--color-surface), inset 0 0 0 var(--cab-frame-out) var(--color-accent-tint);
-}
-
-.cab-tile[data-found] .cab-tile__face svg {
   stroke: var(--ep);
+  stroke-width: 3;
 }
 
-.cab-tile img {
-  inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
-}
-
-.cab-tile:focus-visible .cab-tile__face {
-  outline: var(--ring-width) solid var(--color-focus);
-  outline-offset: var(--ring-offset-tight);
-}
-
-/* The found tile shows the thumbnail, the missing one the dashed silhouette: which one is on is the state of the page (data-found on the tile, set by the script). */
-.cab-tile .cab-tile__known,
-.cab-tile[data-found] .cab-tile__unknown {
-  display: none;
-}
-
-.cab-tile[data-found] .cab-tile__known {
-  display: contents;
+.cab-obj:not([data-found]) .cab-obj__stub {
+  stroke: var(--color-border-strong);
 }
 
 .cabinet__soon {
-  margin: 0;
-  padding: var(--space-3) var(--space-4);
-  border: var(--border-medium) dashed var(--color-border-strong);
-  border-radius: var(--radius-md);
+  margin: var(--space-6) 0 0;
+  text-align: center;
   color: var(--color-muted);
+}
+
+.cabinet__soon::before {
+  content: '';
+  display: block;
+  inline-size: var(--cab-rule);
+  block-size: 1px;
+  background: var(--color-border);
+  margin: 0 auto var(--space-3);
 }
 
 .cabinet__empty,
@@ -412,70 +436,46 @@ html[data-js] .cabinet__no-js {
   display: none;
 }
 
-/* The finished cabinet: garlands and a line about the holiday of Santo António. */
+/* The finished cabinet: a card under the head, the bunting hangs along its top edge on a cord (src/lib/cabinet-art.ts, buntingSvg: drawn by the script at the width of the card). */
 .cabinet__party {
   display: none;
-  gap: var(--space-2);
-  justify-items: center;
+  position: relative;
+  padding: var(--cab-party-top) var(--space-4) var(--space-4);
+  border-radius: var(--cab-card-radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   text-align: center;
+  overflow: hidden;
 }
 
 .cabinet[data-complete] .cabinet__party {
-  display: grid;
+  display: block;
 }
 
 .cabinet__party svg {
+  position: absolute;
+  inset: 0 auto auto 0;
   inline-size: 100%;
-  max-inline-size: var(--cab-garland);
-  block-size: auto;
+  block-size: var(--cab-party-top);
 }
 
 .cabinet__party p {
-  margin: 0;
+  margin: 0 auto;
   max-inline-size: var(--cab-line);
+  color: var(--color-muted);
 }
 
 .cabinet__party-title {
+  margin-block-end: var(--space-2);
   font-family: var(--font-heading);
-  font-size: var(--text-xl);
+  font-size: var(--cab-party-title);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .cab-flag {
-    transform-box: fill-box;
-    transform-origin: top center;
-    animation: cab-sway 3s ease-in-out infinite;
-  }
-
-  .cab-flag:nth-child(even) {
-    animation-delay: -1.5s;
-  }
-}
-
-@keyframes cab-sway {
-  0%,
-  100% {
-    transform: rotate(-3deg);
-  }
-
-  50% {
-    transform: rotate(3deg);
-  }
-}
-
-@media (max-width: 40rem) {
-  .shelf {
-    --tw: var(--cab-tile-size-phone);
-    --gap: var(--cab-tile-gap-phone);
-  }
-
-  .shelf__labels span {
-    font-size: var(--text-xs);
-  }
-
-  .shelf__board {
-    inline-size: 100%;
-  }
+.cabinet__party p.cabinet__party-title {
+  color: var(--color-text);
 }
 
 /* ---- The story of a rarity ---- */

@@ -115,14 +115,14 @@ if (want('page')) {
   const found = cabinetItems.slice(0, 1).map((i) => i.id);
   for (const scheme of ['light', 'dark']) {
     const page = await open(VARIANT, `/pt/${CAB.pt}/`, { scheme, storage: { [KEY]: JSON.stringify({ items: found, sardines: [], foundAt: {} }) } });
-    const tiles = await page.$$eval('.cab-tile:not([hidden])', (t) => t.map((x) => ({ id: x.dataset.item, found: x.hasAttribute('data-found') })));
+    const tiles = await page.$$eval('.cab-obj:not([hidden])', (t) => t.map((x) => ({ id: x.dataset.item, found: x.hasAttribute('data-found') })));
     ok(`page (${scheme}): a tile for every rarity of the data`, tiles.length === cabinetItems.length, `${tiles.length} of ${cabinetItems.length}`);
     ok(`page (${scheme}): only the found one is a thumbnail, the others are dashed`, tiles.filter((t) => t.found).map((t) => t.id).join() === found.join());
     const line = await page.$eval('[data-found-line]', (e) => e.textContent);
     ok(`page (${scheme}): the counter counts the found ones`, line.includes(`${found.length}`) && line.includes(`${cabinetItems.length}`), line);
     ok(`page (${scheme}): no horizontal scroll at 390`, !(await overflow(page)));
     if (scheme === 'light') {
-      await page.click(`.cab-tile[data-item="${found[0]}"]`);
+      await page.click(`.cab-obj[data-item="${found[0]}"]`);
       await wait(250);
       let text = await popText(page);
       ok('page: a found tile opens the summary and a link to the story', !!text && text.includes(item.summary.pt) && (await page.$$eval('.cab-pop a', (a) => a.length)) >= 1, String(text).slice(0, 60));
@@ -131,7 +131,7 @@ if (want('page')) {
       ok('page: Esc closes the card', (await popText(page)) === null);
       const missing = cabinetItems.find((i) => !found.includes(i.id));
       if (missing) {
-        await page.click(`.cab-tile[data-item="${missing.id}"]`);
+        await page.click(`.cab-obj[data-item="${missing.id}"]`);
         await wait(250);
         text = await popText(page);
         ok('page: a missing tile shows the hint, not the summary', !!text && text.includes(missing.hint.pt) && !text.includes(missing.summary.pt), String(text).slice(0, 60));
