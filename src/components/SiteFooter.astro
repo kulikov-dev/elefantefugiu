@@ -25,6 +25,8 @@ const links = [
   { label: t(lang, 'footer.legal'), href: pagePath(lang, 'legal') },
   // The feed of the stories in this language (src/pages/[lang]/rss.xml.ts); the word is the same in every language.
   { label: 'RSS', href: withBase(`${lang}/rss.xml`) },
+  // The monthly e-mail: the block on the About page (id="follow" in FollowBlock.astro).
+  { label: t(lang, 'footer.follow'), href: `${pagePath(lang, 'about')}#follow` },
   // The Telegram channel is in Russian only: its link is on the Russian pages and nowhere else (scripts/check-telegram.mjs).
   ...(lang === 'ru' ? [{ label: TELEGRAM_TEXT.footer, href: TELEGRAM_URL, external: true }] : []),
 ];

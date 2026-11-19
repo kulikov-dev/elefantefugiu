@@ -18,7 +18,7 @@ const { lang, story } = Astro.props;
 const gated = story !== undefined;
 const fieldId = `follow-email-${gated ? 'story' : 'page'}`;
 ---
-<section class="follow" data-follow={lang} data-gated={gated ? '' : undefined} data-story={story} hidden={gated} aria-label={t(lang, 'follow.group')}>
+<section class="follow" id={gated ? undefined : 'follow'} data-follow={lang} data-gated={gated ? '' : undefined} data-story={story} hidden={gated} aria-label={t(lang, 'follow.group')}>
   {gated && <button type="button" class="follow__close" data-follow-close aria-label={t(lang, 'follow.close')}>×</button>}
   <h2 class="follow__title">{t(lang, 'follow.title')}</h2>
   <p class="follow__text">{t(lang, 'follow.text')}</p>
