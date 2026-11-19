@@ -226,11 +226,23 @@ route:
       lat: 0
       lng: -31
       mode: sea
+    - via: true
+      lat: -8
+      lng: -32.5
+      mode: sea
+    - via: true
+      lat: -11
+      lng: -35.8
+      mode: sea
     - name: { pt: "Salvador", en: "Salvador", ru: "Салвадор" }
       lat: -12.9714
       lng: -38.5014
       year: 1808
       date: { pt: "janeiro de 1808", en: "January 1808", ru: "январь 1808" }
+      mode: sea
+    - via: true
+      lat: -13.6
+      lng: -38.0
       mode: sea
     - via: true
       lat: -18.5
@@ -239,6 +251,10 @@ route:
     - via: true
       lat: -21.5
       lng: -39.5
+      mode: sea
+    - via: true
+      lat: -23.4
+      lng: -41.9
       mode: sea
     - name: { pt: "Rio de Janeiro", en: "Rio de Janeiro", ru: "Рио-де-Жанейро" }
       lat: -22.9068

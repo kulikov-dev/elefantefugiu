@@ -467,7 +467,7 @@
     "army_scale_other": "Одна точка ≈ {n} человека."
   },
   "route": {
-    "caption": "Путь: {from} → {to}",
+    "caption": "Путь: {path}",
     "points": "Точки пути",
     "approx": "приблизительно"
   },

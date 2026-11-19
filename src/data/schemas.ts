@@ -142,7 +142,8 @@ export type EventMyth = z.infer<typeof eventMythSchema>;
  * `points` go in order of travel. A point with a `name` is a stop (a dot with a label, in the list "Route points"); a `via` point has no name, no dot and
  * no label: it only leads the line round land and asserts nothing. Every point but the first says how the traveller arrives at it (`mode`: sea and air go
  * in a curve through the points, land in a straight line, river along the course of the river named by `river`) and, with `approx`, that this leg is known only roughly
- * (a dotted line). `approx` of the route is the default of every leg.
+ * (a dotted line). `approx` of the route is the default of every leg. `years` replaces the years of the caption (by default from the earliest to the latest year of the stops).
+ * A sea leg needs `via` points so that the curve runs over water: check:data walks the drawn line over the land (src/lib/route-sea.ts).
  */
 export const ROUTE_MODES = ['sea', 'land', 'air', 'river'] as const;
 export type RouteMode = (typeof ROUTE_MODES)[number];
@@ -161,7 +162,7 @@ const routePoint = z.strictObject({
   river: z.enum(ROUTE_RIVERS).optional(),
 });
 export const routeSchema = z
-  .strictObject({ points: z.array(routePoint).min(2), approx: z.boolean().optional() })
+  .strictObject({ points: z.array(routePoint).min(2), approx: z.boolean().optional(), years: z.string().optional() })
   .superRefine((route, ctx) => {
     const last = route.points.length - 1;
     route.points.forEach((p, i) => {

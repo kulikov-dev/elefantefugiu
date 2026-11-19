@@ -11,6 +11,7 @@ import { localize } from '../src/lib/localize';
 import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX, storySeoDescription, storySeoTitle } from '../src/lib/seo';
 import { buildRouteMap } from '../src/lib/route-map';
 import { routeGeo } from '../src/lib/route-geo';
+import { seaProblems } from '../src/lib/route-sea';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
 import { epochSchema, eventSchema, featuredSchema, festaListSchema, glossaryListSchema, threadSchema } from '../src/data/schemas';
 import { GLOSSARY_LANGS, mentioningStories } from '../src/lib/glossary';
@@ -301,6 +302,10 @@ for (const { item: ev, file, stem } of events) {
       const model = buildRouteMap(route, 'en', routeGeo());
       const size = model.land.length + model.mask.length * 3 + 2000;
       if (size > ROUTE_MAP_MAX_BYTES) report('warn', file, `the route map is about ${Math.round(size / 1024)} KB of SVG (limit ${ROUTE_MAP_MAX_BYTES / 1024} KB): simplify it`, 'route');
+      // A sea leg must keep to the water: the drawn line is walked over the land of the map (src/lib/route-sea.ts); where it does not, add `via` points.
+      for (const p of seaProblems(route, routeGeo())) {
+        report('error', file, `the sea leg ${p.section} runs about ${Math.round(p.depthKm)} km over land (near ${p.at[1].toFixed(1)}, ${p.at[0].toFixed(1)}): add via points so that the line goes by water`, 'route');
+      }
     } catch (error) {
       report('error', file, `the route map cannot be drawn: ${(error as Error).message}`, 'route');
     }

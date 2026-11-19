@@ -140,6 +140,26 @@ route:
       lng: -9.1393
       year: 1500
       date: { pt: "9 de março de 1500", en: "March 9, 1500", ru: "9 марта 1500" }
+    - via: true
+      lat: 28.5
+      lng: -17.5
+      mode: sea
+    - via: true
+      lat: 16.5
+      lng: -26
+      mode: sea
+    - via: true
+      lat: 5
+      lng: -29.5
+      mode: sea
+    - via: true
+      lat: -6
+      lng: -30.5
+      mode: sea
+    - via: true
+      lat: -13
+      lng: -34
+      mode: sea
     - name: { pt: "Monte Pascoal", en: "Monte Pascoal", ru: "Монте-Пашкоал" }
       lat: -16.8975
       lng: -39.4056

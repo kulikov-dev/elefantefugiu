@@ -160,6 +160,14 @@ route:
       lng: -8
       year: 104
     - via: true
+      lat: 38.6
+      lng: -9.2
+      mode: land
+    - via: true
+      lat: 36.8
+      lng: -9.6
+      mode: sea
+    - via: true
       lat: 36.4
       lng: -6.5
       mode: sea
@@ -174,6 +182,10 @@ route:
     - via: true
       lat: 38.8
       lng: 6.5
+      mode: sea
+    - via: true
+      lat: 38.3
+      lng: 9.3
       mode: sea
     - via: true
       lat: 40

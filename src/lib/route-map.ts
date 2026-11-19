@@ -21,6 +21,8 @@ export interface MapPoint {
 export interface MapRoute {
   points: MapPoint[];
   approx?: boolean | undefined;
+  /** The years of the caption when the span of the years of the stops does not match the story ("1515–1516"). */
+  years?: string | undefined;
 }
 
 /** The frame of the map in SVG units: one unit is about one pixel on a phone (the picture scales to the width of its column). */
@@ -30,6 +32,8 @@ const CHAR_W = 0.56;
 const WRAP_AT = 16;
 /** The dotted line of an approximate leg: a dot (dash 1, round caps) every DOT_PERIOD units. */
 const DOT_PERIOD = 6;
+/** Samples per piece of a curve (a Bézier segment): the label placement and the land check of the sea legs walk them. */
+const CURVE_STEPS = 24;
 /** The land path is simplified further while it is longer than this (characters): a story page keeps its map near 10 KB of SVG. */
 const LAND_MAX = 8000;
 
@@ -55,9 +59,11 @@ export interface RouteMapModel {
   dots: { x: number; y: number; r: number }[];
   labels: RouteLabel[];
   stops: { name: string; when?: string }[];
-  from: string;
-  to: string;
+  /** The stops for the caption of the map: all of them when there are up to CAPTION_STOPS, else the first and the last with an ellipsis between. */
+  path: string;
   years: string;
+  /** The sea legs as drawn, in degrees, one entry per piece of the curve between two neighbouring points; `section` is the index of the stop-to-stop section (check:data walks it over the land). */
+  seaTrack: { section: number; pts: [number, number][] }[];
   approx: boolean;
 }
 
@@ -71,13 +77,22 @@ const dist = (a: XY, b: XY) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 /** The stops, in order: the points that are not `via`. */
 export const stopsOf = (route: MapRoute): MapPoint[] => route.points.filter((p) => !p.via);
 
-/** "1514", or "1807-1808" when the first and the last stop have different years; empty when they have none. */
+/** The caption names every stop up to this many; a longer route shows the first and the last with an ellipsis between. */
+export const CAPTION_STOPS = 4;
+
+/** "1514", or "1515–1516" from the earliest to the latest year of the stops when they differ; `route.years` replaces it; empty when no stop has a year. */
 export function routeYears(route: MapRoute): string {
-  const stops = stopsOf(route);
-  const a = stops[0]?.year;
-  const b = stops[stops.length - 1]?.year;
-  if (a === undefined) return b === undefined ? '' : String(b);
-  return b === undefined || b === a ? String(a) : `${a}–${b}`;
+  if (route.years) return route.years;
+  const years = stopsOf(route).flatMap((p) => (p.year === undefined ? [] : [p.year]));
+  if (years.length === 0) return '';
+  const a = Math.min(...years);
+  const b = Math.max(...years);
+  return a === b ? String(a) : `${a}–${b}`;
+}
+
+/** "A → B → C" for up to CAPTION_STOPS names, else "A → … → Z". */
+export function routePath(names: string[]): string {
+  return (names.length <= CAPTION_STOPS ? names : [names[0]!, '…', names[names.length - 1]!]).join(' → ');
 }
 
 /** A leg is approximate when the point it arrives at says so, else by the default of the route. */
@@ -208,8 +223,8 @@ function curve(pts: XY[]): { d: string; samples: XY[] } {
     const bow = 0.16 * Math.hypot(dx, dy);
     const c: XY = [(a[0] + b[0]) / 2 + (nx / len) * bow, (a[1] + b[1]) / 2 + (ny / len) * bow];
     d += `Q${fmt(c)} ${fmt(b)}`;
-    for (let i = 1; i <= 24; i++) {
-      const t = i / 24;
+    for (let i = 1; i <= CURVE_STEPS; i++) {
+      const t = i / CURVE_STEPS;
       samples.push([(1 - t) ** 2 * a[0] + 2 * (1 - t) * t * c[0] + t * t * b[0], (1 - t) ** 2 * a[1] + 2 * (1 - t) * t * c[1] + t * t * b[1]]);
     }
     return { d, samples };
@@ -222,8 +237,8 @@ function curve(pts: XY[]): { d: string; samples: XY[] } {
     const c1: XY = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
     const c2: XY = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
     d += `C${fmt(c1)} ${fmt(c2)} ${fmt(p2)}`;
-    for (let k = 1; k <= 24; k++) {
-      const t = k / 24;
+    for (let k = 1; k <= CURVE_STEPS; k++) {
+      const t = k / CURVE_STEPS;
       const u = 1 - t;
       samples.push([u ** 3 * p1[0] + 3 * u * u * t * c1[0] + 3 * u * t * t * c2[0] + t ** 3 * p2[0], u ** 3 * p1[1] + 3 * u * u * t * c1[1] + 3 * u * t * t * c2[1] + t ** 3 * p2[1]]);
     }
@@ -292,17 +307,25 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
   const project = (lon: number, lat: number): XY => [w / 2 + (rad(lon) - cx) * scale, h / 2 - (mercY(lat) - cy) * scale];
 
   // Runs: neighbouring legs of one kind (same mode, same approx) are drawn as one line; a river leg is a run of its own.
-  const runs: { mode: RouteMode; approx: boolean; pts: XY[] }[] = [];
-  for (const leg of legs) {
+  const runs: { mode: RouteMode; approx: boolean; pts: XY[]; legs: number[] }[] = [];
+  for (const [index, leg] of legs.entries()) {
     const line = leg.geometry.map(([lon, lat]) => project(lon, lat));
     const last = runs[runs.length - 1];
-    if (last && last.mode === leg.mode && last.approx === leg.approx && leg.mode !== 'river') last.pts.push(...line.slice(1));
-    else runs.push({ mode: leg.mode, approx: leg.approx, pts: leg.mode === 'river' ? simplify(line, 0.35) : line });
+    if (last && last.mode === leg.mode && last.approx === leg.approx && leg.mode !== 'river') {
+      last.pts.push(...line.slice(1));
+      last.legs.push(index);
+    } else runs.push({ mode: leg.mode, approx: leg.approx, pts: leg.mode === 'river' ? simplify(line, 0.35) : line, legs: [index] });
   }
 
+  // The section of a leg: how many stops lie behind its start (the first point is a stop), less one.
+  const sectionOf = legs.map((_, i) => pts.slice(0, i + 1).filter((p) => !p.via).length - 1);
+  const unproject = ([x, y]: XY): [number, number] => [deg(cx + (x - w / 2) / scale), deg(2 * Math.atan(Math.exp(cy - (y - h / 2) / scale)) - Math.PI / 2)];
+  const seaTrack: RouteMapModel['seaTrack'] = [];
   const samples: XY[] = [];
   const drawn: RouteRun[] = runs.map((run) => {
     const { d, samples: s } = run.mode === 'sea' || run.mode === 'air' ? curve(run.pts) : polyline(run.pts);
+    // A curve of n points has n - 1 pieces of CURVE_STEPS samples each (the first sample is the start of the run).
+    if (run.mode === 'sea') run.legs.forEach((leg, k) => seaTrack.push({ section: sectionOf[leg]!, pts: s.slice(k * CURVE_STEPS, (k + 1) * CURVE_STEPS + 1).map(unproject) }));
     samples.push(...s);
     if (!run.approx) return { d };
     const total = lengthOf(s);
@@ -350,9 +373,9 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
     dots,
     labels,
     stops,
-    from: stops[0]!.name,
-    to: stops[stops.length - 1]!.name,
+    path: routePath(stops.map((p) => p.name)),
     years: routeYears(route),
+    seaTrack,
     approx: legs.some((l) => l.approx),
   };
 }
