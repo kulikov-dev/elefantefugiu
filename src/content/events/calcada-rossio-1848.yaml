@@ -35,7 +35,7 @@ bridge:
   note:
     pt: As ondas do «Mar Largo» debaixo dos pés; o Monumento ao Calceteiro fica ao lado, nos Restauradores.
     en: The waves of the “Wide Sea” are under your feet; the Monument to the Calceteiro is nearby, in Restauradores.
-    ru: Волны «Широкого моря» под ногами; памятник калсетейру рядом, на Реставрадореш.
+    ru: Волны «Широкого моря» под ногами; памятник калсетейру рядом, на площади Рештаурадореш.
 threads:
   - gente-como-nos
   - engenho
@@ -88,11 +88,11 @@ more:
 
     In Restauradores Square, a short walk from Rossio, stands the Monument to the Calceteiro: two workers, one striking a stone with a hammer, the other helping.
   ru: |-
-    Узор «Широкого моря» понравился не только Лиссабону. Его скопировали в Рио-де-Жанейро, и сегодня эти волны знают по набережной Копакабаны. Деревянный шаблон Фуртаду для Россиу сохранился: город хранит около трёх тысяч старых шаблонов мостовой, с каравеллами, цветами и бабочками, и обещает открыть для них музей.
+    Узор «Широкого моря» понравился не только Лиссабону. Его скопировали в Рио-де-Жанейро, и сегодня эти волны знают по набережной Копакабаны. Деревянный шаблон Фуртаду для Россиу сохранился: город хранит около трёх тысяч старых шаблонов мостовой, с каравеллами, цветами и бабочками, и обещает открыть для них центр.
 
     С мастерами сложнее. В 1940-х в Лиссабоне было около 400 калсетейрушей, а сегодня их около двадцати. Работа тяжёлая, на коленях, с молотком, и платят за неё немного, поэтому учеников мало.
 
-    На площади Реставрадореш, в двух шагах от Россиу, стоит памятник калсетейру: двое рабочих, один бьёт молотком по камню, второй подаёт.
+    На площади Рештаурадореш, в двух шагах от Россиу, стоит памятник калсетейру: двое рабочих, один бьёт молотком по камню, второй подаёт.
 myth:
   verdict: fact
   statement:
@@ -102,7 +102,7 @@ myth:
   answer:
     pt: Em 1842, presos do Castelo de São Jorge calcetaram o pátio do castelo com desenho, e em 1848 cobriram o Rossio de ondas.
     en: In 1842, inmates at Castelo de São Jorge paved the castle courtyard in a pattern, and in 1848 they covered Rossio in waves.
-    ru: В 1842 году арестанты тюрьмы в замке Сан-Жорже выложили узорную мостовую во дворе замка, а в 1848 году волнами покрыли Россиу
+    ru: В 1842 году арестанты тюрьмы в замке Сан-Жорже выложили узорную мостовую во дворе замка, а в 1848 году волнами покрыли Россиу.
 sources:
   - title: "Observador/Lusa: Lisboa tem coleção de moldes da calçada artística"
     url: https://observador.pt/2026/08/02/lisboa-tem-colecao-de-moldes-da-calcada-artistica-e-criara-centro-interpretativo/

@@ -53,7 +53,7 @@ sensitive: false
 hook:
   pt: Um auriga da Lusitânia ganhou quase 36 milhões de sestércios.
   en: A charioteer from Lusitania earned almost 36 million sesterces racing in Rome.
-  ru: Самым богатым спортсменом Рима стал возничий из Лузитании.
+  ru: Возничий из Лузитании заработал на гонках почти 36 миллионов сестерциев.
 story:
   pt: |-
     Caio Apuleio Diocles nasceu em 104 na Lusitânia, a província romana onde hoje fica Portugal. Aos 18 anos chegou a Roma e tornou-se auriga nas corridas de carros, o maior espetáculo da cidade.
@@ -103,7 +103,7 @@ myth:
   answer:
     pt: Caio Apuleio Diocles nasceu na Lusitânia, venceu 1462 corridas e ganhou quase 36 milhões de sestércios.
     en: Gaius Appuleius Diocles was born in Lusitania, won 1,462 races, and earned almost 36 million sesterces.
-    ru: Гай Аппулей Диокл родился в Лузитании, выиграл 1462 заезда и заработал почти 36 миллионов сестерциев
+    ru: Гай Аппулей Диокл родился в Лузитании, выиграл 1462 заезда и заработал почти 36 миллионов сестерциев.
 sources:
   - title: "Wikipedia: Gaius Appuleius Diocles"
     url: https://en.wikipedia.org/wiki/Gaius_Appuleius_Diocles
