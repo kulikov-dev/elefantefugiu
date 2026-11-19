@@ -19,7 +19,7 @@ import RelatedList from '../components/RelatedList.astro';
 import ReportLink from '../components/ReportLink.astro';
 import ShareButton from '../components/ShareButton.astro';
 import LikeButton from '../components/LikeButton.astro';
-import TelegramBlock from '../components/TelegramBlock.astro';
+import FollowBlock from '../components/FollowBlock.astro';
 import SourceList from '../components/SourceList.astro';
 import TagLabel from '../components/TagLabel.astro';
 import ThreadChip from '../components/ThreadChip.astro';
@@ -334,8 +334,8 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     {/* One small line that leads to the game "Myth or fact" (the link in the footer stays). */}
     {hasMyths && <p class="story-myths"><a href={pagePath(lang, 'myths')}>{t(lang, 'ui.story_myths')}</a></p>}
 
-    {/* The channel is in Russian: the invitation is on the Russian pages only. */}
-    {lang === 'ru' && <TelegramBlock lang={lang} />}
+    {/* E-mail once a month and, in Russian, the Telegram channel: one block, shown by the script to a reader who has read another story. */}
+    <FollowBlock lang={lang} story={event.id} />
     </div>
   </article>
 </BaseLayout>

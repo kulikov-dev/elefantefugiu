@@ -1,5 +1,6 @@
 ---
 // A static text page: About, Method and sources, Legal information (docs/spec.md 5.6). Texts: src/data/static-pages.ts.
+import FollowBlock from '../components/FollowBlock.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { pagePath, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
@@ -68,6 +69,7 @@ const schema = pageNodes(schemaCtx, {
         </section>
       ))
     }
+    {pageKey === 'about' && <FollowBlock lang={lang} />}
   </article>
 </BaseLayout>
 
@@ -78,6 +80,11 @@ const schema = pageNodes(schemaCtx, {
 
   .static > p {
     max-width: var(--measure);
+  }
+
+  /* The block of the child component carries no scope class of this page, so the rule above does not reach it. */
+  .static > :global(.follow) {
+    margin-block-start: var(--space-5);
   }
 
   /* The reset button of the "read" marks needs JavaScript: shown when the head script has set html[data-js]. */

@@ -209,6 +209,15 @@
     "sent_text": "Leio todas as mensagens. Se deixou o email, respondo quando tiver novidades.",
     "report_link": "Quer contar uma história nova em vez de corrigir? Por aqui."
   },
+  "follow": {
+    "title": "Novas histórias, uma vez por mês",
+    "text": "Um email por mês, sem publicidade. Pode cancelar com um clique.",
+    "label": "O seu email",
+    "button": "Subscrever",
+    "group": "Acompanhar novas histórias",
+    "close": "Fechar",
+    "other": "Ou acompanhe as novas histórias aqui:"
+  },
   "ui": {
     "read_more": "Ler mais ▾",
     "more": "Saber mais →",

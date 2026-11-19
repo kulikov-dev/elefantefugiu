@@ -209,6 +209,15 @@
     "sent_text": "I read every message. If you left your email, I’ll write back once I’ve looked into it.",
     "report_link": "Have a new story rather than a fix? This way."
   },
+  "follow": {
+    "title": "New stories, once a month",
+    "text": "One email a month, no ads. Unsubscribe in one click.",
+    "label": "Your email",
+    "button": "Subscribe",
+    "group": "Follow new stories",
+    "close": "Close",
+    "other": "Or follow the new stories here:"
+  },
   "ui": {
     "read_more": "Read more ▾",
     "more": "More →",

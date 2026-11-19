@@ -360,6 +360,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**Os mosaicos do mapa** vêm dos servidores da CARTO, que veem o seu endereço IP e o endereço da página, como em qualquer site com mapa.',
             '**GoatCounter** (goatcounter.com) conta as visitas às páginas; recebe o seu endereço IP, mas só o mantém em memória, até 8 horas.',
             '**FormSubmit** (formsubmit.co) reencaminha-me a sua mensagem se enviar o formulário «Encontrou um erro?» ou o formulário «Conhece uma história?», juntamente com o email, se o indicar. Uso-a apenas para corrigir o erro ou verificar a história e para responder-lhe. Prefere não usar o serviço? Escreva diretamente para {{email}}.',
+            '**Kit** (kit.com) guarda o seu endereço de email se subscrever o email mensal. É usado apenas para enviar esse email com as histórias novas, e pode cancelar a subscrição na ligação que vem em qualquer email.'
           ],
           after: ['As ligações «Como chegar», as fontes e os sites dos museus levam a outros sites, com regras próprias.'],
         },
@@ -424,6 +425,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**The map tiles** are loaded from CARTO’s servers, which see your IP address and the address of the page, like any site with a map.',
             '**GoatCounter** (goatcounter.com) counts page visits; it receives your IP address but keeps it only in memory, for up to 8 hours.',
             '**FormSubmit** (formsubmit.co) forwards your message to me if you send the “Found a mistake?” form or the “Know a story?” form, together with your email if you gave it. I use it only to fix the mistake or check the story, and to reply to you. Prefer not to use the service? Write directly to {{email}}.',
+            '**Kit** (kit.com) stores your email address if you subscribe to the monthly email. It is used only to send that email with new stories, and you can unsubscribe with the link in any email.'
           ],
           after: ['Links to “Get directions,” sources, and museum websites lead to other sites with their own rules.'],
         },
@@ -488,6 +490,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
             '**Фрагменты карты** загружаются с серверов CARTO, которые видят ваш IP-адрес и адрес страницы, как любой сайт с картой.',
             '**GoatCounter** (goatcounter.com) считает посещения страниц; получает ваш IP-адрес, но хранит его только в памяти, до 8 часов.',
             '**FormSubmit** (formsubmit.co) пересылает мне сообщение, если вы отправите форму «Нашли ошибку?» или форму «Знаете историю?», вместе с адресом почты, если вы его указали. Я использую письмо только чтобы исправить ошибку или проверить историю и ответить вам. Не хотите через сервис? Пишите прямо на {{email}}.',
+            '**Kit** (kit.com) хранит ваш адрес, если вы подписываетесь на ежемесячное письмо. Он используется только для письма раз в месяц с новыми историями, а отписаться можно по ссылке в любом письме.'
           ],
           after: ['Ссылки «Как добраться», на источники и сайты музеев ведут на чужие сайты со своими правилами.'],
         },

@@ -1,0 +1,131 @@
+---
+// "Follow the new stories": one compact block with the monthly e-mail (a plain HTML form that posts to Kit, no script of Kit) and, on the Russian pages, the link to the
+// Telegram channel (a plain link to t.me: no widget, nothing loaded from Telegram until the reader follows it). On the other languages the second way is the RSS feed.
+// `gated` is the block at the end of a story: it starts hidden and src/scripts/follow.ts shows it to a reader who has read another story and has not closed it or
+// subscribed (so without JavaScript it is not shown); without it (the About page) it is always there. Rules in src/lib/follow.ts.
+import { t } from '../i18n';
+import { withBase, type Lang } from '../i18n/routes';
+import { kitAction } from '../lib/follow';
+import { TELEGRAM_TEXT, TELEGRAM_URL } from '../lib/social';
+
+interface Props {
+  lang: Lang;
+  /** The id of the story the block ends (the story itself does not count as "another story read"); with it the block is the gated one. */
+  story?: string | undefined;
+}
+
+const { lang, story } = Astro.props;
+const gated = story !== undefined;
+const fieldId = `follow-email-${gated ? 'story' : 'page'}`;
+---
+<section class="follow" data-follow={lang} data-gated={gated ? '' : undefined} data-story={story} hidden={gated} aria-label={t(lang, 'follow.group')}>
+  {gated && <button type="button" class="follow__close" data-follow-close aria-label={t(lang, 'follow.close')}>×</button>}
+  <h2 class="follow__title">{t(lang, 'follow.title')}</h2>
+  <p class="follow__text">{t(lang, 'follow.text')}</p>
+  <form class="follow__form" method="post" action={kitAction(lang)}>
+    <label class="visually-hidden" for={fieldId}>{t(lang, 'follow.label')}</label>
+    <input id={fieldId} type="email" name="email_address" required autocomplete="email" inputmode="email" placeholder={t(lang, 'follow.label')} />
+    <button type="submit" class="button">{t(lang, 'follow.button')}</button>
+  </form>
+  {
+    lang === 'ru' ? (
+      <p class="telegram">
+        <a href={TELEGRAM_URL} rel="noopener">
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false">
+            <path d="M17.2 3.3 2.7 8.9c-.7.3-.7.8-.1 1l3.7 1.2 1.4 4.3c.2.5.3.7.7.7.4 0 .6-.2.8-.4l1.8-1.8 3.7 2.7c.7.4 1.2.2 1.4-.6l2.4-11.4c.3-1-.4-1.5-1.1-1.3zM7.2 10.9l7.4-4.6c.3-.2.6-.1.4.1l-6.1 5.5-.2 2.4z" fill="currentColor" />
+          </svg>
+          <span>{TELEGRAM_TEXT.block}</span>
+        </a>
+      </p>
+    ) : (
+      <p class="telegram">
+        <a href={withBase(`${lang}/rss.xml`)}>RSS</a>
+      </p>
+    )
+  }
+</section>
+<script>
+  import '../scripts/follow';
+</script>
+
+<style>
+  .follow {
+    position: relative;
+    display: grid;
+    gap: var(--space-2);
+    max-width: var(--measure);
+    padding: var(--space-4);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .follow[hidden] {
+    display: none;
+  }
+
+  .follow__title {
+    padding-inline-end: var(--touch-target);
+    font-size: var(--text-lg);
+  }
+
+  .follow__text {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .follow__close {
+    position: absolute;
+    inset-block-start: var(--space-1);
+    inset-inline-end: var(--space-1);
+    display: grid;
+    place-items: center;
+    width: var(--touch-target);
+    height: var(--touch-target);
+    border: 0;
+    background: none;
+    color: var(--color-ink-muted);
+    font: inherit;
+    font-size: var(--text-xl);
+    cursor: pointer;
+  }
+
+  .follow__close:hover {
+    color: var(--color-ink);
+  }
+
+  /* The field takes the free width and the button its own; on a narrow phone they stack, the button as wide as the field. */
+  .follow__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .follow__form input {
+    flex: 1 1 calc(var(--touch-target) * 5);
+    min-width: 0;
+    min-height: var(--touch-target);
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    font: inherit;
+  }
+
+  .follow__form .button {
+    flex: 1 1 auto;
+  }
+
+  .telegram a {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--touch-target);
+    font-weight: 600;
+  }
+
+  .telegram svg {
+    flex: none;
+  }
+</style>
