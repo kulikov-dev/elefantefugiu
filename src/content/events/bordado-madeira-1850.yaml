@@ -144,3 +144,6 @@ lang_review:
   en:
     date: '2026-11-19'
     hash: '8740046b4dcf'
+  ru:
+    date: '2026-11-19'
+    hash: 'df3e31cace22'
