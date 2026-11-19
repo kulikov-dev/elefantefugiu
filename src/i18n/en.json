@@ -82,6 +82,10 @@
     "glossary": {
       "title": "Glossary",
       "description": "Portuguese words and things from the stories: azulejo, fado, the Baixa, and more. What they are and where the stories mention them."
+    },
+    "cabinet": {
+      "title": "Cabinet of Rarities",
+      "description": "Rare objects hidden in the words of the stories. Find them and set them on the shelves of the cabinet."
     }
   },
   "footer": {
@@ -94,7 +98,8 @@
     "legal": "Legal information",
     "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
     "privacy": "No ads, no cookies",
-    "games": "Games"
+    "games": "Games",
+    "cabinet": "Cabinet of Rarities"
   },
   "home": {
     "epochs_heading": "Eras",
@@ -547,7 +552,10 @@
     "continue_myths": "Continue (question {done} of {total})",
     "continue_order": "Continue (pair {done} of {total})",
     "og_title": "Games: two quick tests of your Portuguese history",
-    "og_description": "Myth or fact and “Which came first?”: short games, and after every answer the whole story."
+    "og_description": "Myth or fact and “Which came first?”: short games, and after every answer the whole story.",
+    "cabinet_line": "The rarities are hidden in the stories. Find them and set them on the shelves.",
+    "cabinet_og_title": "Cabinet of Rarities · O Elefante Fugiu",
+    "cabinet_og_description": "Rare objects hidden in the words of Portuguese stories. Find them all."
   },
   "seo": {
     "story_visit": "Today you can visit the place: {place}.",
@@ -580,5 +588,39 @@
     "pt_label": "in Portuguese",
     "count": "Words in the glossary",
     "nav": "Words of the glossary"
+  },
+  "cabinet": {
+    "lead": "The rarities are hidden in the text of the stories.",
+    "found": "Found {n} of {m}.",
+    "complete": "The cabinet is complete.",
+    "shelf_count": "{n} of {m}",
+    "soon": "New shelves soon.",
+    "no_js": "The cabinet works with JavaScript. Turn it on to collect the rarities.",
+    "preview": "Preview: the cabinet is still closed.",
+    "unknown": "?",
+    "unknown_label": "A rarity not found yet, hint",
+    "known_label": "Rarity: {name}",
+    "not_found": "Not found yet",
+    "hint_title": "Hint",
+    "open_story": "Open the story",
+    "to_cabinet": "To the cabinet",
+    "found_title": "You found a rarity: {name}",
+    "already": "Already in the cabinet",
+    "word_label": "Rarity: {name}",
+    "close": "Close",
+    "empty": "There are no rarities in this mode yet.",
+    "tin_count": "{n} of 7 sardines",
+    "tin_full": "All 7 sardines are in the tin",
+    "tin_tip": "The sardines have swum off across the site. Find all 7 and the tin fills up.",
+    "tin_tip_full": "All the sardines are in the tin. The Santos Populares begin.",
+    "tin_label": "Tin of sardines, {n} of 7",
+    "sardine_title": "Sardine {n} of 7 is in the tin",
+    "sardine_label": "A hidden sardine. Tap to catch it",
+    "party_title": "All the sardines are home: in Lisbon the Santos Populares begin",
+    "party_text": "In June, Lisbon grills sardines in the street and eats them on bread.",
+    "party_link": "About the festival",
+    "party_garland": "Garlands of the Santos Populares",
+    "ribbon": "A rarity from the cabinet",
+    "back": "← To the cabinet of rarities"
   }
 }

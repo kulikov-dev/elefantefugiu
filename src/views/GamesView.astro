@@ -8,6 +8,8 @@ import { pagePath, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { mythPool } from '../lib/myths-pool';
 import { pageNodes } from '../lib/schema';
+import { hubCardHtml } from '../lib/cabinet-data';
+import '../styles/cabinet.css';
 import { schemaContext } from '../lib/schema-site';
 import { loadSite } from '../lib/site-data';
 
@@ -60,6 +62,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'games')
           </li>
         ))
       }
+      {site.cabinetOpen && <Fragment set:html={hubCardHtml(lang)} />}
     </ul>
   </article>
 </BaseLayout>
@@ -68,7 +71,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'games')
   import '../scripts/games';
 </script>
 
-<style>
+<style is:global>
   .games > * + * {
     margin-block-start: var(--space-4);
   }
@@ -85,6 +88,11 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'games')
   @media (min-width: 48rem) {
     .games__list {
       grid-template-columns: 1fr 1fr;
+    }
+
+    /* With the card of the cabinet: as many columns as fit (three on a wide screen, two and a half on a narrow one). */
+    .games__list:has([data-cabinet-card]) {
+      grid-template-columns: repeat(auto-fit, minmax(var(--cab-card-min), 1fr));
     }
   }
 

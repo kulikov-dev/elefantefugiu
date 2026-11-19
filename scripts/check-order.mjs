@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import { hookGivesDate } from '../src/lib/order-hint.mjs';
-import { isLive } from '../src/lib/publication.mjs';
+import { isListed } from '../src/lib/publication.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const dist = process.env.CHECK_DIST || join(root, 'dist');
@@ -21,7 +21,7 @@ const cards = readdirSync(eventsDir)
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => parse(readFileSync(join(eventsDir, f), 'utf8'), { schema: 'core' }));
 const first = (c) => (typeof c.year === 'object' ? c.year.from : c.year);
-const expected = cards.filter((c) => isLive(c) && c.placeholder !== true && c.sensitive !== true && first(c) >= DEEPEST_YEAR);
+const expected = cards.filter((c) => isListed(c) && c.placeholder !== true && c.sensitive !== true && first(c) >= DEEPEST_YEAR);
 const wanted = new Set(expected.map((c) => c.id));
 const allIds = new Set(cards.map((c) => c.id));
 

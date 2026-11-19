@@ -13,7 +13,7 @@ export const DEFAULT_LANG: Lang = 'pt';
 /** Fallback chain of a text that is missing in a language: ru -> en -> pt (the data loader applies it, see lib/localize.ts). */
 export const FALLBACK_CHAIN: Record<Lang, readonly Lang[]> = { pt: [], en: ['pt'], ru: ['en', 'pt'] };
 
-export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths' | 'order' | 'games' | 'search' | 'glossary';
+export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths' | 'order' | 'games' | 'search' | 'glossary' | 'cabinet';
 
 // An empty slug means the language root (/pt/, /en/).
 export const ROUTES: Record<PageKey, Record<Lang, string>> = {
@@ -28,6 +28,8 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   myths: { pt: 'mito-ou-verdade', en: 'myth-or-fact', ru: 'mif-ili-pravda' },
   order: { pt: 'o-que-veio-primeiro', en: 'which-came-first', ru: 'chto-bylo-ranshe' },
   games: { pt: 'jogos', en: 'games', ru: 'igry' },
+  // The cabinet of rarities (docs/spec.md "Кабинет редкостей"): built always, linked and indexed only when it is open (src/lib/cabinet-config.mjs).
+  cabinet: { pt: 'gabinete', en: 'cabinet', ru: 'kabinet' },
   search: { pt: 'pesquisa', en: 'search', ru: 'poisk' },
   // The glossary is written in ru and en only (src/lib/glossary.ts); the pt slug is reserved, the page is not built.
   glossary: { pt: 'glossario', en: 'glossary', ru: 'slovarik' },

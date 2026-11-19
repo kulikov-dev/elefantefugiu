@@ -29,7 +29,8 @@ type PageProps =
 export const getStaticPaths = (async () => {
   const site = await loadSite();
   return LANGS.flatMap((lang) => [
-    ...site.events.map((event) => ({
+    // The stories of the cabinet of rarities have a page of their own and are in no list (src/lib/site-data.ts).
+    ...[...site.events, ...site.cabinetStories].map((event) => ({
       params: { lang, segment: STORY_SEGMENT[lang], slug: event.slug[lang] },
       props: { kind: 'story', event } as PageProps,
     })),

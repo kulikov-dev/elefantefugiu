@@ -32,7 +32,7 @@ export function publishedDay(value) {
 
 /**
  * Is the story visible on `today`? `ready`, and published today or before. A story without a day (a stand-in object of a test) is not held back by the date.
- * @param {{ status?: string, published?: unknown }} story
+ * @param {{ status?: string, published?: unknown, cabinet?: unknown }} story
  * @param {string} [today]
  */
 export function isLive(story, today = buildToday()) {
@@ -45,4 +45,23 @@ export function isLive(story, today = buildToday()) {
 export function isQueued(story, today = buildToday()) {
   const day = publishedDay(story.published);
   return story.status === 'ready' && day !== undefined && day > today;
+}
+
+/**
+ * Is the story on the site's lists (the feed, the map, the timeline, threads, search, games, feeds, counters)? Live and not a story of the cabinet of rarities:
+ * such a story (the field `cabinet`) has its own page and the cabinet, and no place anywhere else (docs/spec.md, "Кабинет редкостей").
+ * @param {{ status?: string, published?: unknown, cabinet?: unknown }} story
+ * @param {string} [today]
+ */
+export function isListed(story, today = buildToday()) {
+  return isLive(story, today) && !story.cabinet;
+}
+
+/**
+ * Is the cabinet of rarities open on `today`? `opens` is the day from src/lib/cabinet-config.mjs: null (closed) or YYYY-MM-DD (open from that day, Lisbon).
+ * @param {string | null | undefined} opens
+ * @param {string} [today]
+ */
+export function cabinetOpen(opens, today = buildToday()) {
+  return typeof opens === 'string' && DAY.test(opens) && opens <= today;
 }

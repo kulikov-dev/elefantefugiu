@@ -27,6 +27,52 @@
   /* A neutral wash for blocks inside an epoch (the same under every epoch palette). */
   --color-accent-tint: light-dark(#efe7d6, #221d17);
 
+  /* The cabinet of rarities: the pictures of the tin of sardines, a sardine and the garlands (docs/spec.md "Кабинет редкостей"); decorative, no text on them. */
+  --cab-can-a: light-dark(#eef2f5, #8b97a4);
+  --cab-can-b: light-dark(#b7c2cc, #5f6b78);
+  --cab-can-c: light-dark(#8e9ba8, #434d58);
+  --cab-can-shine: light-dark(#ffffff, #aab4be);
+  --cab-rim: light-dark(#7e8b98, #98a4b0);
+  --cab-oil-a: light-dark(#f3d98f, #c9a84f);
+  --cab-oil-b: light-dark(#d9ae52, #a07d2c);
+  --cab-coil-a: light-dark(#8e2a22, #7a2a24);
+  --cab-coil-b: light-dark(#d8473b, #b8423a);
+  --cab-gold: light-dark(#f2c14e, #d9a93e);
+  --cab-gold-dash: light-dark(#6f561a, #f0d58a);
+  --cab-fish-a: light-dark(#26445e, #2f526f);
+  --cab-fish-b: light-dark(#5f84a6, #6f94b6);
+  --cab-fish-c: light-dark(#dce5ee, #d2dde8);
+  --cab-fish-d: light-dark(#f4f6f8, #e6ecf2);
+  --cab-fish-e: light-dark(#c3cdd7, #aab6c3);
+  --cab-fish-line: light-dark(#1b3550, #0f2236);
+  --cab-fish-fin: light-dark(#3e5f80, #4a6d90);
+  --cab-fish-eye: light-dark(#ffffff, #ffffff);
+  --cab-flag-1: light-dark(#c8372d, #d9564b);
+  --cab-flag-2: light-dark(#4e8f45, #6aaa5f);
+  --cab-flag-3: light-dark(#e9c46a, #e0b24a);
+  --cab-flag-4: light-dark(#1f4e9c, #5a88d8);
+
+  /* The cabinet of rarities: sizes of the shelves (a tile and the gap between tiles, the board under them, the tin) and of a found tile's frame. */
+  --cab-tile-size: 8.25rem;
+  --cab-tile-gap: 2.25rem;
+  --cab-tile-size-phone: calc((100vw - 5.75rem) / 3);
+  --cab-tile-gap-phone: 0.75rem;
+  --cab-board-height: 0.375rem;
+  --cab-board-overhang: 3rem;
+  --cab-tin-size: min(15.6rem, 60vw);
+  --cab-swim-far: 14rem;
+  --cab-frame-in: 5px;
+  --cab-frame-out: 6px;
+  --cab-lead: 46ch;
+  --cab-garland: 47.5rem;
+  --cab-line: 58ch;
+  --cab-card-min: 16rem;
+  --cab-underline-offset: 0.2em;
+  --cab-pop-width: min(19rem, calc(100vw - 2rem));
+  --cab-pop-shadow: light-dark(0 0.375rem 1.125rem rgb(31 27 22 / 0.18), 0 0.375rem 1.125rem rgb(0 0 0 / 0.6));
+  --cab-thumb-size: 3.5rem;
+  --cab-sardine-size: 4.5rem;
+
   /* Heavy-topic marker (frame, text on tint). */
   --color-heavy-border: light-dark(#7a2e0e, #e58a68);
   --color-heavy-bg: light-dark(#fdeee6, #2e1a12);
@@ -540,6 +586,30 @@
     --color-overlay: rgb(251 248 241 / 0.96);
     --color-surface-hover: #f1eadb;
     --color-accent-tint: #efe7d6;
+    --cab-can-a: #eef2f5;
+    --cab-can-b: #b7c2cc;
+    --cab-can-c: #8e9ba8;
+    --cab-can-shine: #ffffff;
+    --cab-rim: #7e8b98;
+    --cab-oil-a: #f3d98f;
+    --cab-oil-b: #d9ae52;
+    --cab-coil-a: #8e2a22;
+    --cab-coil-b: #d8473b;
+    --cab-gold: #f2c14e;
+    --cab-gold-dash: #6f561a;
+    --cab-fish-a: #26445e;
+    --cab-fish-b: #5f84a6;
+    --cab-fish-c: #dce5ee;
+    --cab-fish-d: #f4f6f8;
+    --cab-fish-e: #c3cdd7;
+    --cab-fish-line: #1b3550;
+    --cab-fish-fin: #3e5f80;
+    --cab-fish-eye: #ffffff;
+    --cab-flag-1: #c8372d;
+    --cab-flag-2: #4e8f45;
+    --cab-flag-3: #e9c46a;
+    --cab-flag-4: #1f4e9c;
+    --cab-pop-shadow: 0 0.375rem 1.125rem rgb(31 27 22 / 0.18);
     --color-heavy-border: #7a2e0e;
     --color-heavy-bg: #fdeee6;
     --color-heavy-ink: #5e2108;

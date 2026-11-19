@@ -45,6 +45,8 @@ import { schemaContext } from '../lib/schema-site';
 import { withBase } from '../i18n/routes';
 import { GLOSSARY } from '../lib/glossary-data';
 import { inlineMatchers, isGlossaryLang, markParagraph, renderMark } from '../lib/glossary';
+import { itemsOfHost, renderWords, wrapWords } from '../lib/cabinet';
+import '../styles/cabinet.css';
 
 interface Props {
   lang: Lang;
@@ -52,6 +54,8 @@ interface Props {
 }
 
 const { lang, event } = Astro.props;
+// A story of the cabinet of rarities (src/lib/publication.mjs, isListed): its own page, in no list, noindex; no previous, next or read mark.
+const isCabinet = Boolean(event.cabinet);
 
 const site = await loadSite();
 const hasMyths = mythPool(site.events).length > 0;
@@ -171,10 +175,15 @@ const glossaryHref = glossaryLang ? pagePath(glossaryLang, 'glossary') : '';
 const marked = (paragraph: string): string =>
   markParagraph(paragraph, glossaryMatchers, seenWords, (term, matched) => renderMark(term, matched, glossaryLang!, glossaryHref, t(glossaryLang!, 'glossary.all')));
 // In the order of the page: the story first, then "More" (a word is marked once, where it comes first).
-const storyHtml = storyParagraphs(event.story[lang]).map(marked);
-const moreHtml = moreParagraphs(event.more[lang]).map(marked);
+// The words of the cabinet of rarities hidden in this story (src/lib/cabinet.ts): wrapped before the glossary, turned into spans after it. A story of the cabinet itself hides none.
+const storyParts = storyParagraphs(event.story[lang]);
+const moreParts = moreParagraphs(event.more[lang]);
+const hidden = event.placeholder || isCabinet ? [] : itemsOfHost(site.cabinet, event.id);
+const wrapped = wrapWords([...storyParts, ...moreParts], hidden.map(({ item }) => ({ id: item.id, phrase: item.phrase[textL], occurrence: item.occurrence?.[textL] })));
+const storyHtml = wrapped.slice(0, storyParts.length).map((p) => renderWords(marked(p)));
+const moreHtml = wrapped.slice(storyParts.length).map((p) => renderWords(marked(p)));
 // The search index (Pagefind, scripts/make-search.mjs) takes the hook, the story and "More" of a page that search engines may take too, with the metadata the results show.
-const indexed = !event.placeholder && !standIn;
+const indexed = !event.placeholder && !standIn && !isCabinet;
 const pf = indexed ? { 'data-pagefind-body': '' } : {};
 // The title, the year and the place weigh more than the text: a query that names a place finds its stories first.
 const pfWeight = (weight: number) => (indexed ? { 'data-pagefind-body': '', 'data-pagefind-weight': String(weight) } : {});
@@ -192,13 +201,14 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
   alternates={alternates}
   description={seoDescription}
   preview={{ title: ogTitle(event.title[lang]), description: ogDescription(event.hook[lang]), type: 'article', image: previewImage, imageUrl: previewUrl, imageSize: card ? OG_CARD : undefined, imageAlt: previewImageAlt }}
-  noindex={event.placeholder || standIn}
+  noindex={event.placeholder || standIn || isCabinet}
   schema={schema}
   readyLangs={readyLangs}
   stand_in={standIn}
   epoch={epoch.id}
 >
   <article class="card" {...(indexed ? searchAttrs(event, lang) : {})} data-flash={isFlashMoment(event) ? '' : undefined} data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
+    {isCabinet && <p class="cab-ribbon">{t(lang, 'cabinet.ribbon')}</p>}
     <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
       <ol>
         <li>{epochLink ? <a href={epochLink}>{epoch.name[lang]}</a> : <span class="crumbs__text">{epoch.name[lang]}</span>}</li>
@@ -254,16 +264,16 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
 
     <div class="gated card__rest">
 
-    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} hasRoute={Boolean(event.route)} storyId={event.id} indexed={indexed}>
+    <CardLayers lang={lang} hook={event.hook[lang]} textLang={textLang} hasAside={Boolean(event.image)} hasRoute={Boolean(event.route)} storyId={isCabinet ? undefined : event.id} indexed={indexed}>
       <Fragment slot="aside">{event.image && <Figure lang={lang} picture={event.image} kind="main" transitionName={claimStoryName(Astro.request, event.slug[lang])} />}</Fragment>
       <Fragment slot="story">{storyHtml.map((html) => <p set:html={html} />)}</Fragment>
       <Fragment slot="route">{event.route && <RouteMap lang={lang} route={event.route} id={event.id} textLang={textLang} />}</Fragment>
       <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
       <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
       <Fragment slot="after">
-        {pannoStories && <p class="story-panno" data-story-panno data-epoch-id={epoch.id} data-stories={pannoStories} hidden><a href={epochLink}>{t(lang, 'panno.story_line').replace('{name}', epoch.name[lang])}</a></p>}
+        {!isCabinet && pannoStories && <p class="story-panno" data-story-panno data-epoch-id={epoch.id} data-stories={pannoStories} hidden><a href={epochLink}>{t(lang, 'panno.story_line').replace('{name}', epoch.name[lang])}</a></p>}
         {
-          continueVariants.map(({ modes, value: { next, nextEpoch } }) => {
+          (isCabinet ? [] : continueVariants).map(({ modes, value: { next, nextEpoch } }) => {
             const target = next ?? nextEpoch?.story;
             const targetEpoch = nextEpoch?.epoch ?? epoch;
             return (
@@ -319,7 +329,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     </div>
 
     {
-      footerVariants.map(({ modes, value: { prev, wrap } }) => (
+      (isCabinet ? [] : footerVariants).map(({ modes, value: { prev, wrap } }) => (
         <div class="fv fv--block" data-modes={modes.join(' ')}>
           <StoryLinks
             lang={lang}
@@ -330,6 +340,8 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         </div>
       ))
     }
+
+    {isCabinet && <p class="cab-back" data-cab-back>{site.cabinetOpen && <a href={pagePath(lang, 'cabinet')}>{t(lang, 'cabinet.back')}</a>}</p>}
 
     {/* One small line that leads to the game "Myth or fact" (the link in the footer stays). */}
     {hasMyths && <p class="story-myths"><a href={pagePath(lang, 'myths')}>{t(lang, 'ui.story_myths')}</a></p>}

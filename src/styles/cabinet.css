@@ -1,0 +1,509 @@
+/* The cabinet of rarities (docs/spec.md "Кабинет редкостей"): the hidden word, the pop-up, the hidden sardine, the tiles of the shelves, the garlands.
+   Loaded by src/scripts/cabinet.ts. Colours, sizes and fonts come from tokens.css. */
+
+/* ---- The hidden word in the text of a story ---- */
+/* Plain text until the cabinet is open (or previewed): the head script sets html[data-cabinet]. A thin dotted underline in the colour of the epoch;
+   not a link (no accent colour, no arrow) and not a footnote. */
+html[data-cabinet] .cw {
+  text-decoration: underline dotted 1px var(--epoch-accent);
+  text-underline-offset: var(--cab-underline-offset);
+}
+
+button.cw {
+  all: unset;
+  cursor: pointer;
+  text-decoration: underline dotted 1px var(--epoch-accent);
+  text-underline-offset: var(--cab-underline-offset);
+  border-radius: var(--radius-sm);
+}
+
+button.cw:hover {
+  text-decoration-style: solid;
+}
+
+button.cw:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+/* ---- The pop-up beside a word, a tile, the tin or a sardine ---- */
+.cab-pop {
+  position: absolute;
+  z-index: 40;
+  box-sizing: border-box;
+  inline-size: var(--cab-pop-width);
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-medium) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--cab-pop-shadow);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+.cab-pop[hidden] {
+  display: none;
+}
+
+.cab-pop__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: center;
+  padding-inline-end: var(--space-5);
+}
+
+.cab-pop__kicker {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.cab-pop__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  line-height: 1.25;
+}
+
+.cab-pop p {
+  margin: 0;
+}
+
+.cab-pop__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.cab-pop__button {
+  font: inherit;
+  font-weight: 600;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: var(--border-medium) solid var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cab-pop__button--ghost {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.cab-pop__button:focus-visible,
+.cab-pop__close:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.cab-pop__close {
+  position: absolute;
+  inset-block-start: var(--space-1);
+  inset-inline-end: var(--space-2);
+  font: inherit;
+  font-size: var(--text-lg);
+  line-height: 1;
+  padding: var(--space-1);
+  border: 0;
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+/* The thumbnail in its frame: a tile with a double line, like the found tiles of the shelves. */
+.cab-thumb {
+  box-sizing: border-box;
+  inline-size: var(--cab-thumb-size);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: var(--border-medium) solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 var(--cab-frame-in) var(--color-surface), inset 0 0 0 var(--cab-frame-in) var(--color-accent-tint);
+  overflow: hidden;
+}
+
+.cab-thumb img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.cab-thumb svg {
+  inline-size: 56%;
+  block-size: 56%;
+  fill: none;
+  stroke: var(--tile-accent, var(--epoch-accent, var(--color-accent)));
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---- A hidden sardine ---- */
+.cab-sardine {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  cursor: pointer;
+  inline-size: var(--cab-sardine-size);
+  padding: var(--space-3) var(--space-2);
+  margin-block-start: var(--space-4);
+  border-radius: var(--radius-sm);
+}
+
+.cab-sardine svg {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.cab-sardine:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.cab-sardine--end {
+  margin-inline-start: auto;
+}
+
+.cab-sardine--flip svg {
+  transform: scaleX(-1);
+}
+
+.cab-sardine--gone {
+  block-size: var(--space-5);
+  cursor: default;
+}
+
+.cab-sardine--swim {
+  pointer-events: none;
+  animation: cab-swim 0.9s ease-in forwards;
+}
+
+@keyframes cab-swim {
+  to {
+    transform: translateX(var(--cab-swim, var(--cab-swim-far)));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cab-sardine--swim {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* The strip the sardine sits in: the tail of the main column, never over a control. */
+.cab-corner {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cab-corner--start {
+  justify-content: flex-start;
+}
+
+/* ---- The page of the cabinet ---- */
+.cabinet {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.cabinet__preview {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-notice-border);
+  border-radius: var(--radius-md);
+  background: var(--color-notice-bg);
+  color: var(--color-notice-ink);
+  font-weight: 600;
+}
+
+.cabinet__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-5);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cabinet__head h1 {
+  margin: 0;
+}
+
+.cabinet__head p {
+  margin: var(--space-1) 0 0;
+  color: var(--color-muted);
+  max-inline-size: var(--cab-lead);
+}
+
+.cabinet__tin {
+  all: unset;
+  display: grid;
+  justify-items: center;
+  gap: var(--space-1);
+  cursor: pointer;
+  padding: var(--space-1);
+  border-radius: var(--radius-md);
+}
+
+.cabinet__tin svg {
+  inline-size: var(--cab-tin-size);
+  block-size: auto;
+  display: block;
+}
+
+.cabinet__tin-count {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.cabinet__tin:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.cabinet__shelves {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.shelf {
+  --tw: var(--cab-tile-size);
+  --gap: var(--cab-tile-gap);
+}
+
+.shelf h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-lg);
+}
+
+.shelf h2 span {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.shelf__row,
+.shelf__labels {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 3), var(--tw));
+  gap: 0 var(--gap);
+  justify-content: center;
+}
+
+.shelf__board {
+  block-size: var(--cab-board-height);
+  border-radius: var(--radius-sm);
+  background: var(--ep);
+  margin-inline: auto;
+  inline-size: calc(var(--n, 3) * var(--tw) + (var(--n, 3) - 1) * var(--gap) + var(--cab-board-overhang));
+  max-inline-size: 100%;
+}
+
+.shelf__labels {
+  margin-block-start: var(--space-2);
+}
+
+.shelf__labels span {
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  text-align: center;
+}
+
+.shelf__labels span[data-unknown] {
+  color: var(--color-muted);
+}
+
+.cab-tile {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.cab-tile__face {
+  box-sizing: border-box;
+  inline-size: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  border: var(--border-medium) dashed var(--color-border-strong);
+  background: transparent;
+  overflow: hidden;
+}
+
+.cab-tile__face svg {
+  inline-size: 56%;
+  block-size: 56%;
+  fill: none;
+  stroke: var(--color-border-strong);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cab-tile[data-found] .cab-tile__face {
+  border: var(--border-medium) solid var(--color-border-strong);
+  background: var(--color-surface);
+  box-shadow: inset 0 0 0 var(--cab-frame-in) var(--color-surface), inset 0 0 0 var(--cab-frame-out) var(--color-accent-tint);
+}
+
+.cab-tile[data-found] .cab-tile__face svg {
+  stroke: var(--ep);
+}
+
+.cab-tile img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.cab-tile:focus-visible .cab-tile__face {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+/* The found tile shows the thumbnail, the missing one the dashed silhouette: which one is on is the state of the page (data-found on the tile, set by the script). */
+.cab-tile .cab-tile__known,
+.cab-tile[data-found] .cab-tile__unknown {
+  display: none;
+}
+
+.cab-tile[data-found] .cab-tile__known {
+  display: contents;
+}
+
+.cabinet__soon {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-medium) dashed var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-muted);
+}
+
+.cabinet__empty,
+.cabinet__no-js {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+html[data-js] .cabinet__no-js {
+  display: none;
+}
+
+/* The finished cabinet: garlands and a line about the holiday of Santo António. */
+.cabinet__party {
+  display: none;
+  gap: var(--space-2);
+  justify-items: center;
+  text-align: center;
+}
+
+.cabinet[data-complete] .cabinet__party {
+  display: grid;
+}
+
+.cabinet__party svg {
+  inline-size: 100%;
+  max-inline-size: var(--cab-garland);
+  block-size: auto;
+}
+
+.cabinet__party p {
+  margin: 0;
+  max-inline-size: var(--cab-line);
+}
+
+.cabinet__party-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cab-flag {
+    transform-box: fill-box;
+    transform-origin: top center;
+    animation: cab-sway 3s ease-in-out infinite;
+  }
+
+  .cab-flag:nth-child(even) {
+    animation-delay: -1.5s;
+  }
+}
+
+@keyframes cab-sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@media (max-width: 40rem) {
+  .shelf {
+    --tw: var(--cab-tile-size-phone);
+    --gap: var(--cab-tile-gap-phone);
+  }
+
+  .shelf__labels span {
+    font-size: var(--text-xs);
+  }
+
+  .shelf__board {
+    inline-size: 100%;
+  }
+}
+
+/* ---- The story of a rarity ---- */
+.cab-ribbon {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-inline-start: var(--epoch-accent-bar);
+  background: var(--color-accent-tint);
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
+.cab-back {
+  margin-block: var(--space-5);
+  font-weight: 600;
+}
+
+/* ---- The card of the cabinet in the hub of the games ---- */
+.cab-card-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  background: var(--color-accent-tint);
+}
+
+.cab-card-art svg {
+  inline-size: 55%;
+  block-size: auto;
+}

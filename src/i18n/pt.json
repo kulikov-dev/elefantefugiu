@@ -82,6 +82,10 @@
     "glossary": {
       "title": "Glossário",
       "description": "Palavras e realidades portuguesas das histórias: azulejo, fado, a Baixa e outras. O que são e onde aparecem."
+    },
+    "cabinet": {
+      "title": "Gabinete de raridades",
+      "description": "Objetos raros escondidos nas palavras das histórias. Encontre-os e arrume-os nas prateleiras do gabinete."
     }
   },
   "footer": {
@@ -94,7 +98,8 @@
     "legal": "Informação legal",
     "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
     "privacy": "Sem publicidade nem cookies",
-    "games": "Jogos"
+    "games": "Jogos",
+    "cabinet": "Gabinete de raridades"
   },
   "home": {
     "epochs_heading": "Épocas",
@@ -547,7 +552,10 @@
     "continue_myths": "Continuar (pergunta {done} de {total})",
     "continue_order": "Continuar (par {done} de {total})",
     "og_title": "Jogos: dois testes sobre a história de Portugal",
-    "og_description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos, e depois de cada resposta a história completa."
+    "og_description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos, e depois de cada resposta a história completa.",
+    "cabinet_line": "As raridades estão escondidas nas histórias. Encontre-as e arrume-as nas prateleiras.",
+    "cabinet_og_title": "Gabinete de raridades · O Elefante Fugiu",
+    "cabinet_og_description": "Objetos raros escondidos nas palavras das histórias de Portugal. Encontre-os todos."
   },
   "seo": {
     "story_visit": "Hoje pode visitar o local: {place}.",
@@ -580,5 +588,39 @@
     "pt_label": "em português",
     "count": "Palavras no glossário",
     "nav": "Palavras do glossário"
+  },
+  "cabinet": {
+    "lead": "As raridades estão escondidas no texto das histórias.",
+    "found": "Encontradas: {n} de {m}.",
+    "complete": "Gabinete completo.",
+    "shelf_count": "{n} de {m}",
+    "soon": "Em breve, novas prateleiras.",
+    "no_js": "O gabinete funciona com JavaScript. Ative-o para recolher as raridades.",
+    "preview": "Pré-visualização: o gabinete ainda está fechado.",
+    "unknown": "?",
+    "unknown_label": "Raridade por encontrar, pista",
+    "known_label": "Raridade: {name}",
+    "not_found": "Ainda por encontrar",
+    "hint_title": "Pista",
+    "open_story": "Abrir a história",
+    "to_cabinet": "Ao gabinete",
+    "found_title": "Encontrou uma raridade: {name}",
+    "already": "Já está no gabinete",
+    "word_label": "Raridade: {name}",
+    "close": "Fechar",
+    "empty": "Ainda não há raridades neste modo.",
+    "tin_count": "{n} de 7 sardinhas",
+    "tin_full": "As 7 sardinhas estão na lata",
+    "tin_tip": "As sardinhas espalharam-se pelo site. Encontre as 7 e a lata enche-se.",
+    "tin_tip_full": "Todas as sardinhas estão na lata. Começam os Santos Populares.",
+    "tin_label": "Lata de sardinhas, {n} de 7",
+    "sardine_title": "Sardinha {n} de 7 na lata",
+    "sardine_label": "Uma sardinha escondida. Toque para a apanhar",
+    "party_title": "Todas as sardinhas em casa: em Lisboa começam os Santos Populares",
+    "party_text": "Em junho, em Lisboa, grelha-se sardinha na rua e come-se em cima de pão.",
+    "party_link": "Sobre a festa",
+    "party_garland": "Grinaldas dos Santos Populares",
+    "ribbon": "Raridade do gabinete",
+    "back": "← Ao gabinete de raridades"
   }
 }

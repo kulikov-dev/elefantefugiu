@@ -267,6 +267,8 @@ export const eventSchema = z
   reviewed_by: z.string().optional(),
   reviewed_on: z.coerce.date().optional(),
   status: z.enum(['draft', 'ready']),
+  /** The id of the rarity (src/content/cabinet.yaml) this story is the story of: such a story is on its own page and in the cabinet only, never in a list (src/lib/publication.mjs, isListed). */
+  cabinet: z.string().optional(),
   /** The day the story was first published (YYYY-MM-DD): the schema.org datePublished of the page (src/lib/schema.ts). Required. */
   published: isoDate,
   /** Marks of the language review per language (docs/language-review/); written by scripts/lang-mark.ts, never by hand. */
@@ -547,3 +549,39 @@ export interface MythData extends EventMyth {
   id: string;
   story: string;
 }
+
+// ---- The cabinet of rarities (src/content/cabinet.yaml, docs/spec.md "Кабинет редкостей") ----
+
+export const CABINET_SHELF_SIZE = 3;
+export const CABINET_SUMMARY_WORDS = 25;
+export const CABINET_HINT_WORDS = 15;
+export const CABINET_PHRASE_WORDS = 3;
+
+const cabinetText = z.strictObject({ pt: z.string().min(1), en: z.string().min(1), ru: z.string().min(1) });
+const cabinetOccurrence = z.strictObject({ pt: z.number().int().min(1).optional(), en: z.number().int().min(1).optional(), ru: z.number().int().min(1).optional() });
+
+/**
+ * One rarity: an object of the cabinet. Its word (`phrase`) is hidden in the text of the story `host` (the same epoch as the shelf);
+ * the story `story` is the story of the object (a story of its own with the field `cabinet`, or an ordinary published one).
+ */
+export const cabinetItemSchema = z.strictObject({
+  id: z.string(),
+  /** The shelf: the epoch of the host story. */
+  epoch: z.string(),
+  /** The place on the shelf, 1 to 3. */
+  shelf: z.number().int().min(1).max(CABINET_SHELF_SIZE),
+  host: z.string(),
+  /** The exact form of the word in the text of the host, 1 to 3 words per language; `occurrence` is the number of the place when the phrase is met more than once (default 1). */
+  phrase: cabinetText,
+  occurrence: cabinetOccurrence.optional(),
+  story: z.string(),
+  /** The name under the tile and in the pop-up. */
+  name: cabinetText,
+  /** The pop-up of a found rarity, up to 25 words. */
+  summary: cabinetText,
+  /** The hint of a rarity not found yet, up to 15 words: names the host by a hint, not directly. */
+  hint: cabinetText,
+  /** The thumbnail of the tile (an azulejo of the story); without it the tile shows a stand-in. */
+  image: z.string().optional(),
+});
+export type CabinetItem = z.infer<typeof cabinetItemSchema>;

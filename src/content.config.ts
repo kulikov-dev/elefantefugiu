@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { parse } from 'yaml';
-import { epochSchema, eventSchema, featuredSchema, threadSchema } from './data/schemas';
+import { cabinetItemSchema, epochSchema, eventSchema, featuredSchema, threadSchema } from './data/schemas';
 
 const events = defineCollection({
   // One YAML file per event; the file name (without extension) is the entry id.
@@ -21,4 +21,6 @@ const featured = defineCollection({
   schema: featuredSchema,
 });
 
-export const collections = { events, epochs, threads, featured };
+const cabinet = defineCollection({ loader: file('src/content/cabinet.yaml'), schema: cabinetItemSchema });
+
+export const collections = { events, epochs, threads, featured, cabinet };

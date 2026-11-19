@@ -9,6 +9,7 @@ import ShareView from '../../views/ShareView.astro';
 import StaticView from '../../views/StaticView.astro';
 import SearchView from '../../views/SearchView.astro';
 import SurpriseView from '../../views/SurpriseView.astro';
+import CabinetView from '../../views/CabinetView.astro';
 import GlossaryView from '../../views/GlossaryView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
@@ -47,6 +48,8 @@ const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
     <MythsView lang={lang} />
   ) : pageKey === 'games' ? (
     <GamesView lang={lang} />
+  ) : pageKey === 'cabinet' ? (
+    <CabinetView lang={lang} />
   ) : pageKey === 'order' ? (
     <OrderView lang={lang} />
   ) : pageKey === 'report' ? (

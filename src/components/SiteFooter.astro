@@ -2,6 +2,7 @@
 import { pagePath, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { TELEGRAM_TEXT, TELEGRAM_URL } from '../lib/social';
+import { isCabinetOpen } from '../lib/cabinet-config.mjs';
 
 const CONTENT_LICENSE = { pt: 'https://creativecommons.org/licenses/by-nc/4.0/deed.pt', en: 'https://creativecommons.org/licenses/by-nc/4.0/', ru: 'https://creativecommons.org/licenses/by-nc/4.0/deed.ru' } as const;
 
@@ -22,6 +23,8 @@ const links = [
   { label: t(lang, 'footer.report'), href: pagePath(lang, 'report') },
   { label: t(lang, 'footer.share'), href: pagePath(lang, 'share') },
   { label: t(lang, 'footer.games'), href: pagePath(lang, 'games') },
+  // The cabinet of rarities: linked only once it is open (src/lib/cabinet-config.mjs); the preview of the owner adds the link by script.
+  ...(isCabinetOpen() ? [{ label: t(lang, 'footer.cabinet'), href: pagePath(lang, 'cabinet') }] : []),
   { label: t(lang, 'footer.legal'), href: pagePath(lang, 'legal') },
   // The feed of the stories in this language (src/pages/[lang]/rss.xml.ts); the word is the same in every language.
   { label: 'RSS', href: withBase(`${lang}/rss.xml`) },

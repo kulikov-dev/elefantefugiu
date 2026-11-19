@@ -5,7 +5,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { fsPath } from './browser.mjs';
-import { isLive } from '../../src/lib/publication.mjs';
+import { isListed, isLive } from '../../src/lib/publication.mjs';
 
 const { parse } = createRequire(import.meta.url)('../../node_modules/yaml');
 const content = fsPath(new URL('../../src/content/', import.meta.url));
@@ -14,7 +14,9 @@ const read = (name) => parse(readFileSync(`${content}${name}`, 'utf8'));
 export const events = readdirSync(`${content}events`)
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => ({ ...parse(readFileSync(`${content}events/${f}`, 'utf8')), file: f }));
-export const published = events.filter((e) => isLive(e));
+// The stories of the cabinet of rarities (the field `cabinet`) are on their own pages only: `published` is what the lists of the site hold.
+export const published = events.filter((e) => isListed(e));
+export const cabinetStories = events.filter((e) => isLive(e) && e.cabinet);
 export const fixtures = events.filter((e) => e.status === 'draft');
 /** The pool of "Myth or fact": a claim of every story that is on the site (the same `isLive` as the build), not sensitive, with a `myth` (src/content/events/*.yaml); the id is its own `myth.id` or the id of the story. */
 export const myths = published.filter((e) => e.myth && !e.sensitive).map((e) => ({ ...e.myth, id: e.myth.id ?? e.id, story: e.id }));
@@ -24,6 +26,8 @@ export const queuedMyths = events.filter((e) => e.myth && !isLive(e)).map((e) =>
 export const ROUND = Math.min(10, myths.length);
 export const epochs = read('epochs.yaml').sort((a, b) => a.order - b.order);
 export const threads = read('threads.yaml');
+/** The rarities of the cabinet (src/content/cabinet.yaml) whose host and story are on the site: the ones the pages show. */
+export const cabinetItems = read('cabinet.yaml').filter((i) => events.some((e) => e.id === i.host && isListed(e)) && events.some((e) => e.id === i.story && isLive(e)));
 
 export const TOTAL = published.length;
 export const byId = (id) => events.find((e) => e.id === id);
@@ -62,7 +66,7 @@ export const epochsOfThread = (threadId, list = published) => epochs.filter((ep)
  */
 import { variantOf } from './variant-plan.mjs';
 function makeWorld(list) {
-  const pub = list.filter((e) => isLive(e));
+  const pub = list.filter((e) => isListed(e));
   const inEp = (id) => pub.filter((e) => e.epoch === id);
   return {
     published: pub,

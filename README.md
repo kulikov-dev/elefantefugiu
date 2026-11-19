@@ -89,6 +89,7 @@ A three-way switch in the header (everything / all ages / up to 12+). The choice
 | `CARTO_KEY` | Key of the CARTO basemaps; switches the map to Voyager (light theme) and Dark Matter (dark theme); empty = see below | empty |
 | `TILE_URL` | Map tile address, `https://` and containing `{z}`, `{x}`, `{y}`; empty = public OpenStreetMap server | empty |
 | `TILE_ATTRIBUTION` | Attribution shown on the map (HTML, links allowed); required when `TILE_URL` is set | empty |
+| `CABINET_OPENS` | The day the cabinet of rarities opens (`YYYY-MM-DD`), or `null` while it is closed. The default is the one line `CABINET_OPENS` in `src/lib/cabinet-config.mjs`; the variable overrides it (test builds). Preview of the closed cabinet in your own browser: `?kabinet=preview` on any page (`?kabinet=off` ends it) | the file: `null` |
 
 All internal links are built from the base path (`src/i18n/routes.ts`), so the
 site works under a non-empty base. `npm run build` fails if an internal link
