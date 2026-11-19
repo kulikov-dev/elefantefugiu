@@ -433,7 +433,7 @@
     "army_scale_other": "One dot ≈ {n} people."
   },
   "route": {
-    "caption": "Route: {from} → {to}",
+    "caption": "Route: {path}",
     "points": "Route points",
     "approx": "approximate"
   },

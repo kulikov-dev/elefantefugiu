@@ -153,6 +153,14 @@ route:
       lng: -9.15
       year: 1537
     - via: true
+      lat: 29
+      lng: -15.5
+      mode: sea
+    - via: true
+      lat: 21
+      lng: -18.5
+      mode: sea
+    - via: true
       lat: 10
       lng: -19
       mode: sea
@@ -180,12 +188,52 @@ route:
       lat: 5
       lng: 59
       mode: sea
+    - via: true
+      lat: 14.5
+      lng: 72.0
+      mode: sea
     - name:
         pt: Goa
         en: Goa
         ru: Гоа
       lat: 15.5
       lng: 73.8
+      mode: sea
+    - via: true
+      lat: 12.5
+      lng: 73.3
+      mode: sea
+    - via: true
+      lat: 8.9
+      lng: 75.4
+      mode: sea
+    - via: true
+      lat: 7.2
+      lng: 77.4
+      mode: sea
+    - via: true
+      lat: 5.3
+      lng: 80.5
+      mode: sea
+    - via: true
+      lat: 6.3
+      lng: 94.0
+      mode: sea
+    - via: true
+      lat: 5.7
+      lng: 96.5
+      mode: sea
+    - via: true
+      lat: 4.6
+      lng: 98.6
+      mode: sea
+    - via: true
+      lat: 3.4
+      lng: 100.5
+      mode: sea
+    - via: true
+      lat: 2.1
+      lng: 101.4
       mode: sea
     - name:
         pt: Malaca
@@ -195,6 +243,14 @@ route:
       lng: 102.25
       mode: sea
     - via: true
+      lat: 1.15
+      lng: 103.7
+      mode: sea
+    - via: true
+      lat: 1.5
+      lng: 104.6
+      mode: sea
+    - via: true
       lat: 10
       lng: 108
       mode: sea
@@ -202,12 +258,52 @@ route:
       lat: 22
       lng: 119
       mode: sea
+    - via: true
+      lat: 24.5
+      lng: 119.7
+      mode: sea
+    - via: true
+      lat: 26.5
+      lng: 122
+      mode: sea
+    - via: true
+      lat: 30
+      lng: 127.5
+      mode: sea
+    - via: true
+      lat: 29.5
+      lng: 131.5
+      mode: sea
+    - via: true
+      lat: 31.5
+      lng: 132.3
+      mode: sea
     - name:
         pt: Japão
         en: Japan
         ru: Япония
       lat: 33.2
       lng: 131.8
+      mode: sea
+    - via: true
+      lat: 31.5
+      lng: 132.3
+      mode: sea
+    - via: true
+      lat: 29.5
+      lng: 131.5
+      mode: sea
+    - via: true
+      lat: 30
+      lng: 127.5
+      mode: sea
+    - via: true
+      lat: 26.5
+      lng: 122
+      mode: sea
+    - via: true
+      lat: 24.5
+      lng: 119.7
       mode: sea
     - via: true
       lat: 22
@@ -219,11 +315,47 @@ route:
       mode: sea
     - via: true
       lat: 1.5
-      lng: 104.5
+      lng: 104.6
       mode: sea
     - via: true
-      lat: 6
-      lng: 85
+      lat: 1.15
+      lng: 103.7
+      mode: sea
+    - via: true
+      lat: 2.1
+      lng: 101.4
+      mode: sea
+    - via: true
+      lat: 3.4
+      lng: 100.5
+      mode: sea
+    - via: true
+      lat: 4.6
+      lng: 98.6
+      mode: sea
+    - via: true
+      lat: 5.7
+      lng: 96.5
+      mode: sea
+    - via: true
+      lat: 6.3
+      lng: 94.0
+      mode: sea
+    - via: true
+      lat: 5.3
+      lng: 80.5
+      mode: sea
+    - via: true
+      lat: 7.2
+      lng: 77.4
+      mode: sea
+    - via: true
+      lat: 8.9
+      lng: 75.4
+      mode: sea
+    - via: true
+      lat: 12.5
+      lng: 73.3
       mode: sea
     - name:
         pt: Goa
@@ -231,6 +363,10 @@ route:
         ru: Гоа
       lat: 15.5
       lng: 73.8
+      mode: sea
+    - via: true
+      lat: 14.5
+      lng: 72.0
       mode: sea
     - via: true
       lat: 5
@@ -259,6 +395,14 @@ route:
     - via: true
       lat: 10
       lng: -19
+      mode: sea
+    - via: true
+      lat: 21
+      lng: -18.5
+      mode: sea
+    - via: true
+      lat: 29
+      lng: -15.5
       mode: sea
     - name:
         pt: Lisboa (Pragal)

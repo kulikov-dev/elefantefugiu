@@ -11,18 +11,21 @@ interface Props {
   textLang?: string;
   /** The side column holds the picture of the story (a <div>: the picture belongs to the story, it is not a complementary landmark inside <main>); a story without a picture has no column. */
   hasAside?: boolean;
+  /** The story has a route map: with a picture it goes to the side column under the picture (from 1024 px); below that it keeps its place after the text. */
+  hasRoute?: boolean;
   /** The id of the story: the empty mark after the text tells the "read" script (src/scripts/read-marks.ts) when the end of the text is on the screen. */
   storyId?: string;
   /** The hook and the story go to the search index (the page marks them with data-pagefind-body; a draft or a stand-in page is not indexed). */
   indexed?: boolean;
 }
 
-const { lang, hook, textLang, hasAside = false, storyId, indexed = false } = Astro.props;
+const { lang, hook, textLang, hasAside = false, hasRoute = false, storyId, indexed = false } = Astro.props;
+const routeAside = hasAside && hasRoute;
 const pf = indexed ? { 'data-pagefind-body': '' } : {};
 const pfHook = indexed ? { 'data-pagefind-body': '', 'data-pagefind-weight': '4' } : {};
 ---
 <div class="layers" data-card-layers>
-  <div class:list={['layers__top', { 'layers__top--aside': hasAside }]}>
+  <div class:list={['layers__top', { 'layers__top--aside': hasAside, 'layers__top--route': routeAside }]}>
     <div class="layers__main">
       <p class="hook" lang={textLang} {...pfHook}>{hook}</p>
 
@@ -34,11 +37,12 @@ const pfHook = indexed ? { 'data-pagefind-body': '', 'data-pagefind-weight': '4'
         {storyId && <span class="story-end" data-story-end={storyId} aria-hidden="true"></span>}
       </section>
 
-      <!-- After the story, for a story about a journey: the small map of the route (src/components/RouteMap.astro). -->
-      <slot name="route" />
+      <!-- After the story, for a story about a journey: the small map of the route (src/components/RouteMap.astro). With a picture the map is in the side
+           column (below), one copy of the markup: on a phone `order` puts it back here, after the text. -->
+      {!routeAside && <slot name="route" />}
 
       <!-- Then: the small block "Meanwhile" (src/components/Meanwhile.astro); empty for a story without lines. -->
-      <slot name="meanwhile" />
+      {routeAside ? <div class="layers__meanwhile"><slot name="meanwhile" /></div> : <slot name="meanwhile" />}
 
       <!-- Then, before "More": the small "I liked it" (src/components/LikeButton.astro), on the right edge of the text column (from 768 px on the left edge). -->
       <div class="story__like"><slot name="like" /></div>
@@ -46,7 +50,8 @@ const pfHook = indexed ? { 'data-pagefind-body': '', 'data-pagefind-weight': '4'
     {
       hasAside && (
         <div class="layers__aside">
-          <slot name="aside" />
+          {routeAside ? <div class="layers__figure"><slot name="aside" /></div> : <slot name="aside" />}
+          {routeAside && <div class="layers__route"><slot name="route" /></div>}
         </div>
       )
     }
@@ -101,6 +106,60 @@ const pfHook = indexed ? { 'data-pagefind-body': '', 'data-pagefind-weight': '4'
     .layers__main {
       grid-column: 1;
       grid-row: 1;
+    }
+  }
+
+  /* A story with a picture and a route map: the map stands under the picture, of its width (from 1024 px). Below that the two columns dissolve into one flow
+     and `order` brings the pieces to the usual sequence: picture, hook, story, map, "Meanwhile", "I liked it". The spacing is the old one (--space-5 between the pieces). */
+  .layers__route {
+    margin-block-start: var(--space-5);
+  }
+
+  .layers__route :global(.route),
+  .layers__route :global(.route__frame) {
+    max-width: none;
+  }
+
+  .layers__meanwhile:empty,
+  .layers__route:empty {
+    display: none;
+  }
+
+  @media (max-width: 63.9375rem) {
+    .layers__top--route {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .layers__top--route .layers__main,
+    .layers__top--route .layers__aside {
+      display: contents;
+    }
+
+    .layers__top--route .layers__figure {
+      order: 0;
+    }
+
+    .layers__top--route .hook {
+      order: 1;
+      margin-block-start: var(--space-5);
+    }
+
+    .layers__top--route .story {
+      order: 2;
+    }
+
+    .layers__top--route .layers__route {
+      order: 3;
+    }
+
+    .layers__top--route .layers__meanwhile {
+      order: 4;
+    }
+
+    .layers__top--route .story__like {
+      order: 5;
     }
   }
 

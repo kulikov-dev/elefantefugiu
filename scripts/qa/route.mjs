@@ -1,8 +1,9 @@
 // Browser checks of the map of a journey on a story page (src/components/RouteMap.astro, src/lib/route-map.ts), against dist/ served by serve.mjs:   node route.mjs [markup layout motion]
 // The stories that have a route are read from the YAML (field `route`); no story is named here.
 //   markup   every published story in every language, from the HTML as served (no JavaScript): the map exists exactly on the stories that have a route, with role="img"
-//            and a label "Route: A → B, year", one dot per stop, the list "Route points" with the stops of the data in order, and nowhere else
-//   layout   at 360 px (and 1280) in every language: the map stands after the text and before "More", outside it; no horizontal scroll; the labels and the dots are inside the frame
+//            and a label "Route: A → B → C, years" (every stop up to four, else "A → … → Z"), one dot per stop, the list "Route points" with the stops of the data in order, and nowhere else
+//   layout   at 360 px (and 1280) in every language: the map stands after the text and before "More", outside it; no horizontal scroll; the labels and the dots are inside the frame;
+//            of a story with a picture: at 360 px the map is between the text and "Meanwhile", at 1280 px it is in the side column under the picture, of the picture's width
 //   motion   the line is whole without JavaScript, drawn once when the map comes into view (the mask grows), and whole at once with "reduce motion"
 import { launchBrowser } from './browser.mjs';
 import { need, published, ui } from './data.mjs';
@@ -42,11 +43,11 @@ if (want('markup')) {
         continue;
       }
       const label = decode(block[1].match(/<svg[^>]*role="img"[^>]*aria-label="([^"]*)"/)?.[1] ?? block[1].match(/<svg[^>]*aria-label="([^"]*)"[^>]*role="img"/)?.[1] ?? '');
-      const first = stops(e)[0].name;
-      const last = stops(e).at(-1).name;
       // A Russian page of a story that is not ready in Russian shows the English names.
       const l = lang === 'ru' && !e.ru_ready ? 'en' : lang;
-      const prefix = ui('route.caption', lang).replace('{from}', first[l]).replace('{to}', last[l]);
+      const names = stops(e).map((p) => p.name[l]);
+      const path = names.length <= 4 ? names.join(' → ') : `${names[0]} → … → ${names.at(-1)}`;
+      const prefix = ui('route.caption', lang).replace('{path}', path);
       if (!label.startsWith(prefix)) bad.push(`${lang}/${e.id}: label "${label}" does not start with "${prefix}"`);
       const dots = (block[1].match(/<circle[^>]*class="[^"]*route__dot/g) ?? []).length;
       if (dots !== stops(e).length) bad.push(`${lang}/${e.id}: ${dots} dots for ${stops(e).length} stops`);
@@ -61,7 +62,7 @@ if (want('markup')) {
 if (want('layout')) {
   const browser = await launchBrowser();
   for (const lang of LANGS) {
-    const e = need('a published story with a route', (list) => list.find((x) => x.route));
+    const e = need('a published story with a route', (list) => list.find((x) => x.route && x.image) ?? list.find((x) => x.route));
     for (const width of [360, 1280]) {
       const page = await browser.newPage();
       await page.setViewport({ width, height: 900, isMobile: width < 700, hasTouch: width < 700 });
@@ -69,6 +70,7 @@ if (want('layout')) {
       page.on('pageerror', (err) => !/ViewTransition opt-in disabled/.test(err.message) && page.errors.push(err.message));
       await page.goto(`${base}${pathOf(e, lang)}`, { waitUntil: 'networkidle0' });
       const geo = await page.evaluate(() => {
+        const rect = (el) => (el ? (({ left, right, top, bottom, width }) => ({ left, right, top, bottom, width }))(el.getBoundingClientRect()) : null);
         const block = document.querySelector('[data-route]');
         const story = document.getElementById('historia');
         const more = document.getElementById('detalhes');
@@ -89,9 +91,19 @@ if (want('layout')) {
           width: frame?.width ?? 0,
           labelWeight: label ? getComputedStyle(label).fontWeight : '',
           points: block?.querySelector('details')?.open === false,
+          fig: rect(document.querySelector('.layers__aside .figure')),
+          map: rect(svg),
+          text: rect(story),
+          meanwhile: rect(document.querySelector('[data-meanwhile]')),
         };
       });
       ok(`${lang} ${width}px: the map is after the text, before "More" and outside it; the list of points is closed`, geo.has && geo.after && geo.before && geo.outsideMore && geo.points, JSON.stringify(geo));
+      if (geo.fig) {
+        const place = width >= 1024
+          ? geo.map.top >= geo.fig.bottom - 1 && Math.abs(geo.map.left - geo.fig.left) <= 2 && Math.abs(geo.map.width - geo.fig.width) <= 2
+          : geo.map.top >= geo.text.bottom - 1 && (!geo.meanwhile || geo.map.bottom <= geo.meanwhile.top + 1);
+        ok(`${lang} ${width}px: ${width >= 1024 ? 'the map is under the picture, of its width' : 'the map is between the text and "Meanwhile"'}`, place, JSON.stringify({ fig: geo.fig, map: geo.map, text: geo.text, meanwhile: geo.meanwhile }));
+      }
       ok(`${lang} ${width}px: no horizontal scroll, every label and dot inside the frame, the picture fits the column`, geo.scrollX <= 0 && geo.outside === 0 && geo.width > 200 && geo.width <= width, `scrollX ${geo.scrollX}, outside ${geo.outside}, width ${geo.width}`);
       ok(`${lang} ${width}px: labels in regular weight`, geo.labelWeight === '400', geo.labelWeight);
       ok(`${lang} ${width}px: no script error`, page.errors.length === 0, page.errors.join(' | '));

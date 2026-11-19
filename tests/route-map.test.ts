@@ -5,7 +5,8 @@ import { parse } from 'yaml';
 import { routeSchema, eventSchema } from '../src/data/schemas';
 import { localize } from '../src/lib/localize';
 import { routeGeo } from '../src/lib/route-geo';
-import { buildRouteMap, routeYears, wrapLabel, ROUTE_FRAME, type MapRoute } from '../src/lib/route-map';
+import { buildRouteMap, routePath, routeYears, wrapLabel, ROUTE_FRAME, type MapRoute } from '../src/lib/route-map';
+import { seaProblems } from '../src/lib/route-sea';
 
 const name = (s: string) => ({ pt: s, en: s, ru: s });
 const stop = (s: string, lat: number, lng: number, extra: object = {}) => ({ name: name(s), lat, lng, ...extra });
@@ -36,6 +37,21 @@ test('the years of a route: one, a span, or none', () => {
   assert.equal(routeYears(r(1500)), '1500');
   assert.equal(routeYears(r(undefined, 1501)), '1501');
   assert.equal(routeYears(r()), '');
+  // The span is from the earliest to the latest year of the stops, wherever they stand; `years` of the route replaces it.
+  const mid = (y?: number) => stop('Mid', 40, 0, { year: y, mode: 'sea' });
+  assert.equal(routeYears({ points: pts([A, mid(1515), { ...B, year: 1516 }]) }), '1500–1516');
+  assert.equal(routeYears({ points: pts([{ ...A, year: undefined }, mid(1515), { ...B, year: 1516 }]) }), '1515–1516');
+  assert.equal(routeYears({ points: pts([A, { ...B, year: 1499 }]) }), '1499–1500');
+  assert.equal(routeYears({ years: '1515–1516', points: pts([A, B]) }), '1515–1516');
+});
+
+test('the caption names every stop up to four, else the first and the last with an ellipsis', () => {
+  assert.equal(routePath(['A', 'B']), 'A → B');
+  assert.equal(routePath(['A', 'B', 'C']), 'A → B → C');
+  assert.equal(routePath(['A', 'B', 'C', 'D']), 'A → B → C → D');
+  assert.equal(routePath(['A', 'B', 'C', 'D', 'E']), 'A → … → E');
+  const via = { via: true, lat: 40, lng: 0, mode: 'sea' };
+  assert.equal(buildRouteMap({ points: pts([A, via, B, via, stop('Charlie', 44, 15, { mode: 'sea' })]) }, 'en', routeGeo()).path, 'Alpha → Bravo → Charlie');
 });
 
 test('labels wrap at spaces', () => {
@@ -61,8 +77,7 @@ test('the map: the last dot sits on the end of the line, the first on its start,
   assert.deepEqual([model.dots[0]!.x, model.dots[0]!.y], [nums[0], nums[1]]);
   assert.deepEqual([model.dots[1]!.x, model.dots[1]!.y], [nums[nums.length - 2], nums[nums.length - 1]]);
   assert.equal(model.dots[1]!.r, model.dots[0]!.r + 1);
-  assert.equal(model.from, 'Alpha');
-  assert.equal(model.to, 'Bravo');
+  assert.equal(model.path, 'Alpha → Bravo');
   assert.equal(model.approx, false);
   for (const label of model.labels) for (const line of label.lines) assert.ok(line.y > 0 && line.y < h && label.x > 0 && label.x < w);
 });
@@ -117,5 +132,30 @@ test('every route in the stories can be drawn in every language, stays in the fr
       assert.deepEqual([model.dots.at(-1)!.x, model.dots.at(-1)!.y], last, `${f}: the last dot is not on the end of the line`);
       for (const label of model.labels) assert.ok(label.lines.every((l) => l.text.length <= 16 || !l.text.includes(' ')), `${f}: a long label line`);
     }
+  }
+});
+
+test('the land check: a sea leg over land is found, a via point that turns it onto the water clears it, a port is let off', () => {
+  const geo = routeGeo();
+  // Lisbon to Rome as one arc runs over Spain and France; with landmarks along the Iberian coast, Gibraltar and the islands it keeps to the water.
+  const lisbon = stop('Lisbon', 38.72, -9.14);
+  const rome = stop('Rome', 41.9, 12.45, { mode: 'sea' });
+  const bad = seaProblems({ points: pts([lisbon, rome]) }, geo);
+  assert.equal(bad.length, 1);
+  assert.equal(bad[0]!.section, 'Lisbon → Rome');
+  assert.ok(bad[0]!.depthKm > 100);
+  const sea = (lat: number, lng: number) => ({ via: true, lat, lng, mode: 'sea' });
+  const good = seaProblems({ points: pts([lisbon, sea(36.7, -9.7), sea(35.95, -5.7), sea(36.9, -0.5), sea(38.2, 5.5), sea(39, 9.3), sea(41.4, 11.9), rome]) }, geo);
+  assert.deepEqual(good, []);
+  // Land and air legs are not walked.
+  assert.deepEqual(seaProblems({ points: pts([lisbon, { ...rome, mode: 'land' }]) }, geo), []);
+  assert.deepEqual(seaProblems({ points: pts([lisbon, { ...rome, mode: 'air' }]) }, geo), []);
+});
+
+test('every sea leg of the stories keeps to the water (the same check as check:data)', () => {
+  const geo = routeGeo();
+  for (const { f, data } of withRoute) {
+    const event = localize(eventSchema.parse(data), true);
+    assert.deepEqual(seaProblems(event.route!, geo), [], `${f}: a sea leg over land`);
   }
 });

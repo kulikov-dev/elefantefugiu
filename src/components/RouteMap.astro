@@ -17,7 +17,7 @@ interface Props {
 
 const { lang, route, id, textLang } = Astro.props;
 const map = buildRouteMap(route, lang, routeGeo());
-const caption = `${t(lang, 'route.caption').replace('{from}', map.from).replace('{to}', map.to)}${map.years ? `, ${map.years}` : ''}`;
+const caption = `${t(lang, 'route.caption').replace('{path}', map.path)}${map.years ? `, ${map.years}` : ''}`;
 const maskId = `route-mask-${id}`;
 const captionId = `route-caption-${id}`;
 ---

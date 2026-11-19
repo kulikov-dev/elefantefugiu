@@ -433,7 +433,7 @@
     "army_scale_other": "Um ponto ≈ {n} pessoas."
   },
   "route": {
-    "caption": "Percurso: {from} → {to}",
+    "caption": "Percurso: {path}",
     "points": "Pontos do percurso",
     "approx": "aproximado"
   },

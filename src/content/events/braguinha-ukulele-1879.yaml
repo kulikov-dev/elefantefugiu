@@ -246,6 +246,18 @@ route:
       lat: 12
       lng: -142
       mode: sea
+    - via: true
+      lat: 18.4
+      lng: -155.3
+      mode: sea
+    - via: true
+      lat: 19.2
+      lng: -156.4
+      mode: sea
+    - via: true
+      lat: 20.4
+      lng: -157.3
+      mode: sea
     - name: { pt: "Honolulu", en: "Honolulu", ru: "Гонолулу" }
       lat: 21.3069
       lng: -157.8583

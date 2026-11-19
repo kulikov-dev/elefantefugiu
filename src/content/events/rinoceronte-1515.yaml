@@ -263,6 +263,18 @@ route:
       lat: 22.31
       lng: 72.62
     - via: true
+      lat: 21.6
+      lng: 72.35
+      mode: sea
+    - via: true
+      lat: 20.6
+      lng: 71.9
+      mode: sea
+    - via: true
+      lat: 19.5
+      lng: 70.5
+      mode: sea
+    - via: true
       lat: 15
       lng: 66
       mode: sea
@@ -334,19 +346,27 @@ route:
       mode: sea
     - via: true
       lat: 38.2
-      lng: 5.5
+      lng: 3.2
       mode: sea
     - via: true
-      lat: 39
-      lng: 9.3
+      lat: 40.6
+      lng: 6.0
       mode: sea
     - via: true
-      lat: 41.5
-      lng: 11
+      lat: 42.9
+      lng: 5.2
+      mode: sea
+    - via: true
+      lat: 42.75
+      lng: 6.6
       mode: sea
     - via: true
       lat: 43.3
-      lng: 9.9
+      lng: 7.6
+      mode: sea
+    - via: true
+      lat: 43.75
+      lng: 9.0
       mode: sea
     - name: { pt: "La Spezia", en: "La Spezia", ru: "Специя" }
       lat: 44.1025
