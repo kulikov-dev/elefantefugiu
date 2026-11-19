@@ -170,3 +170,6 @@ lang_review:
   pt:
     date: '2026-11-19'
     hash: '73ada2acb785'
+  en:
+    date: '2026-11-19'
+    hash: 'dc576a395db6'

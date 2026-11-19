@@ -125,3 +125,6 @@ lang_review:
   pt:
     date: '2026-11-19'
     hash: '5d8e26eb3584'
+  en:
+    date: '2026-11-19'
+    hash: 'e6e8addacd2c'
