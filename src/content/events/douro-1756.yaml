@@ -200,8 +200,8 @@ meanwhile:
     source: "https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: 'dab112344dd0'
+    date: '2026-11-19'
+    hash: 'c1b76f0322ec'
   en:
     date: '2026-11-07'
     hash: 'f988e2b87b97'

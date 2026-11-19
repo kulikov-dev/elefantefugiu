@@ -161,16 +161,6 @@ meanwhile:
       en: "The Colosseum opens in Rome."
       ru: "В Риме открывают Колизей."
     source: "https://en.wikipedia.org/wiki/Colosseum"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: 'abea3f135db5'
-  en:
-    date: '2026-11-07'
-    hash: '4895df334d1b'
-  ru:
-    date: '2026-10-31'
-    hash: 'b0c422c8b82b'
 myth:
   id: vipasca
   verdict: fact
@@ -187,3 +177,13 @@ seo:
     pt: "Os banhos de Vipasca: as mulheres pagavam o dobro · Aljustrel"
     en: "The Baths of Vipasca: Women Paid Double · Aljustrel"
     ru: "Бани Випаски: женщины платили вдвое · Алжуштрел"
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '123d267ed412'
+  en:
+    date: '2026-11-07'
+    hash: '4895df334d1b'
+  ru:
+    date: '2026-10-31'
+    hash: 'b0c422c8b82b'

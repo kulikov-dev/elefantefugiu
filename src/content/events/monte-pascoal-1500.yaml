@@ -146,3 +146,7 @@ route:
       year: 1500
       date: { pt: "22 de abril de 1500", en: "April 22, 1500", ru: "22 апреля 1500" }
       mode: sea
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '1291eb3ca264'

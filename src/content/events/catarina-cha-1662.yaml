@@ -182,16 +182,6 @@ meanwhile:
       en: "Paris opens the first public transit service: carriages on a fixed route."
       ru: "В Париже запускают первый городской общественный транспорт: кареты по маршруту."
     source: "https://fr.wikipedia.org/wiki/Carrosses_%C3%A0_cinq_sols"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '6218363786c2'
-  en:
-    date: '2026-11-07'
-    hash: '2bae3c26fab3'
-  ru:
-    date: '2026-10-31'
-    hash: '7786a81daba9'
 myth:
   id: cha
   verdict: fact
@@ -208,3 +198,13 @@ seo:
     pt: "Catarina de Bragança e o chá em Inglaterra"
     en: "Catherine of Braganza and Tea in England"
     ru: "Катарина Брагансская и чай в Англии"
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: 'dc7b88dff667'
+  en:
+    date: '2026-11-07'
+    hash: '2bae3c26fab3'
+  ru:
+    date: '2026-10-31'
+    hash: '7786a81daba9'

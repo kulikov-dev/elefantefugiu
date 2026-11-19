@@ -171,8 +171,8 @@ meanwhile:
     source: "https://ru.wikipedia.org/wiki/Санкт-Петербург"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: '7a915f861849'
+    date: '2026-11-19'
+    hash: 'cbe364fe10dd'
   en:
     date: '2026-11-07'
     hash: '22cbd9f70def'

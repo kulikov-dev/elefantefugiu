@@ -180,16 +180,6 @@ meanwhile:
     text:
       pt: "Num teste, a lâmpada de Thomas Edison fica acesa mais de treze horas."
     source: "https://en.wikipedia.org/wiki/Incandescent_light_bulb"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '7583ec1ba252'
-  en:
-    date: '2026-11-07'
-    hash: '640109c86b5a'
-  ru:
-    date: '2026-10-31'
-    hash: '2b416cadd7c9'
 myth:
   id: ukulele
   verdict: part
@@ -262,3 +252,13 @@ route:
       year: 1879
       date: { pt: "agosto de 1879", en: "August 1879", ru: "август 1879" }
       mode: sea
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '8a27b8f4bd31'
+  en:
+    date: '2026-11-07'
+    hash: '640109c86b5a'
+  ru:
+    date: '2026-10-31'
+    hash: '2b416cadd7c9'

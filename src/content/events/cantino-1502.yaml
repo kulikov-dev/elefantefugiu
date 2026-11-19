@@ -248,16 +248,6 @@ meanwhile:
     text:
       pt: "Pero Vaz de Caminha escreve ao rei a carta sobre a nova terra."
     source: "https://pt.wikipedia.org/wiki/Carta_de_Pero_Vaz_de_Caminha"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '6d2f207e615e'
-  en:
-    date: '2026-11-07'
-    hash: '6d5caf0e5734'
-  ru:
-    date: '2026-10-28'
-    hash: '5ec984b435bd'
 seo:
   title:
     pt: "O mapa de Cantino: um segredo de Estado por 12 ducados, 1502"
@@ -280,3 +270,13 @@ route:
       lng: 10.9252
       mode: land
       approx: false
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '940d7fb7aa33'
+  en:
+    date: '2026-11-07'
+    hash: '6d5caf0e5734'
+  ru:
+    date: '2026-10-28'
+    hash: '5ec984b435bd'

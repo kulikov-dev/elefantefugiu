@@ -165,16 +165,6 @@ meanwhile:
     text:
       ru: "Екатерина II получает коллекцию картин, с которой начинается Эрмитаж."
     source: "https://ru.wikipedia.org/wiki/Эрмитаж"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: 'e7b9324eaf23'
-  en:
-    date: '2026-11-07'
-    hash: '76d8fc38a2ad'
-  ru:
-    date: '2026-10-31'
-    hash: 'df8b27ec76d1'
 myth:
   id: mafra
   verdict: part
@@ -186,3 +176,13 @@ myth:
     pt: Os morcegos existem mesmo e à noite caçam os insetos que roem o papel. Mas desde quando lá estão e quanto ajudam os livros, ninguém mediu.
     en: The bats are real and hunt paper-eating insects at night. But no one has measured how long they have been there or how much they help the books.
     ru: Летучие мыши там живут и ночью охотятся на насекомых, которые точат бумагу. Но с каких пор они там и сколько пользы книгам, никто не измерял.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '3f12b8d7640e'
+  en:
+    date: '2026-11-07'
+    hash: '76d8fc38a2ad'
+  ru:
+    date: '2026-10-31'
+    hash: 'df8b27ec76d1'

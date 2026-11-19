@@ -163,3 +163,7 @@ route:
       year: 1895
       date: { pt: "15 de outubro de 1895", en: "October 15, 1895", ru: "15 октября 1895" }
       mode: land
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: 'ff5c1ca905ba'

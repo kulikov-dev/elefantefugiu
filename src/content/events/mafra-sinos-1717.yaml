@@ -170,8 +170,8 @@ meanwhile:
     source: "https://en.wikipedia.org/wiki/Gulliver%27s_Travels"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: '58936a8b38d6'
+    date: '2026-11-19'
+    hash: '8439824fb6b4'
   en:
     date: '2026-11-07'
     hash: '32623f93d6ba'

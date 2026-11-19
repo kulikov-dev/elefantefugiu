@@ -145,3 +145,7 @@ status: ready
 published: 2026-11-29
 placeholder: false
 ru_ready: true
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: 'f5d639d662b5'

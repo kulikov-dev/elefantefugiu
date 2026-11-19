@@ -187,16 +187,6 @@ meanwhile:
     text:
       pt: "O papa Gregório XIII introduz o calendário que ainda hoje usamos."
     source: "https://en.wikipedia.org/wiki/Gregorian_calendar"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '61849735923f'
-  en:
-    date: '2026-11-07'
-    hash: '02360020a967'
-  ru:
-    date: '2026-10-31'
-    hash: 'ca8f4c60c577'
 myth:
   id: salga
   verdict: fact
@@ -208,3 +198,13 @@ myth:
     pt: Em 1581, na Terceira, o frade Pedro propôs lançar os touros contra o inimigo. A formação desfez-se e os espanhóis fugiram para os barcos.
     en: In 1581 on Terceira, a friar named Pedro proposed sending the bulls at the enemy. Their line broke, and the Spanish fled to their boats.
     ru: В 1581 году на Терсейре монах Педро предложил пустить быков на врага. Строй рассыпался, и испанцы бежали к лодкам.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '140c160892b2'
+  en:
+    date: '2026-11-07'
+    hash: '02360020a967'
+  ru:
+    date: '2026-10-31'
+    hash: 'ca8f4c60c577'

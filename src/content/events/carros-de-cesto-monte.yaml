@@ -173,18 +173,18 @@ meanwhile:
     text:
       pt: "Estreia em Veneza a ópera «La traviata», de Verdi."
     source: "https://en.wikipedia.org/wiki/La_traviata"
+seo:
+  title:
+    pt: "Carros de cesto do Monte: trenós sem neve, Funchal"
+    en: "Monte’s Basket Sleds, Funchal: Sleds Without Snow"
+    ru: "Плетёные сани Монте: спуск без снега, Фуншал"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: 'b9d16ad7e7aa'
+    date: '2026-11-19'
+    hash: '86321b1353e4'
   en:
     date: '2026-11-07'
     hash: '1dc9de733ad0'
   ru:
     date: '2026-10-31'
     hash: '4d679c8c109d'
-seo:
-  title:
-    pt: "Carros de cesto do Monte: trenós sem neve, Funchal"
-    en: "Monte’s Basket Sleds, Funchal: Sleds Without Snow"
-    ru: "Плетёные сани Монте: спуск без снега, Фуншал"

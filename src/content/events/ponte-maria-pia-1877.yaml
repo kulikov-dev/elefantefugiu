@@ -124,16 +124,6 @@ meanwhile:
     text:
       pt: "Edison inventa o fonógrafo."
     source: "https://en.wikipedia.org/wiki/Phonograph"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '7598e8bc8c44'
-  en:
-    date: '2026-11-07'
-    hash: '1b4deb8e4217'
-  ru:
-    date: '2026-10-31'
-    hash: '1e2a30a7c569'
 myth:
   id: maria-pia
   verdict: fact
@@ -145,3 +135,13 @@ myth:
     pt: A ponte foi encomendada à empresa parisiense de Gustave Eiffel. O seu arco de 160 metros foi o maior do mundo, doze anos antes da Torre Eiffel.
     en: The bridge was ordered from Gustave Eiffel’s Paris firm. Its 160-meter arch was the longest in the world, twelve years before the tower.
     ru: Мост заказали парижской фирме Гюстава Эйфеля. Его арка в 160 метров стала самой длинной в мире, за двенадцать лет до башни.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '7598e8bc8c44'
+  en:
+    date: '2026-11-07'
+    hash: '1b4deb8e4217'
+  ru:
+    date: '2026-10-31'
+    hash: '1e2a30a7c569'

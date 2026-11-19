@@ -151,3 +151,7 @@ route:
       lng: -8.6118
       mode: river
       river: douro
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '31c680a3e0b4'

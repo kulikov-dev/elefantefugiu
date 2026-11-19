@@ -164,18 +164,18 @@ meanwhile:
       en: "Cai Lun presents paper to the Chinese emperor."
       ru: "Цай Лунь представляет китайскому императору бумагу."
     source: "https://en.wikipedia.org/wiki/Cai_Lun"
+seo:
+  title:
+    pt: "Ponte Romana de Chaves: 1900 anos de serviço"
+    en: "The Roman Bridge of Chaves: 1,900 Years of Service"
+    ru: "Римский мост в Шавише: 1900 лет службы"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: '1d98f42491dc'
+    date: '2026-11-19'
+    hash: '2cc61dae0fcd'
   en:
     date: '2026-11-07'
     hash: '13890b3c50cf'
   ru:
     date: '2026-10-31'
     hash: '246022c1d6b0'
-seo:
-  title:
-    pt: "Ponte Romana de Chaves: 1900 anos de serviço"
-    en: "The Roman Bridge of Chaves: 1,900 Years of Service"
-    ru: "Римский мост в Шавише: 1900 лет службы"

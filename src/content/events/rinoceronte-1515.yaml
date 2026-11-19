@@ -256,16 +256,6 @@ meanwhile:
       en: "Michelangelo’s Sistine Chapel ceiling is unveiled."
       ru: "Открывают роспись потолка Сикстинской капеллы работы Микеланджело."
     source: "https://en.wikipedia.org/wiki/Sistine_Chapel_ceiling"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '795f4630bfdc'
-  en:
-    date: '2026-11-07'
-    hash: '29dd31ab54b5'
-  ru:
-    date: '2026-10-28'
-    hash: '712ae30db0b9'
 route:
   approx: true
   points:
@@ -364,3 +354,13 @@ route:
       year: 1516
       date: { pt: "janeiro de 1516", en: "January 1516", ru: "январь 1516" }
       mode: sea
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '795f4630bfdc'
+  en:
+    date: '2026-11-07'
+    hash: '29dd31ab54b5'
+  ru:
+    date: '2026-10-28'
+    hash: '712ae30db0b9'

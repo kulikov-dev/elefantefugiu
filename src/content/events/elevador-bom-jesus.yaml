@@ -133,16 +133,6 @@ meanwhile:
     text:
       pt: "Inaugura-se a ponte de Brooklyn, em Nova Iorque."
     source: "https://en.wikipedia.org/wiki/Brooklyn_Bridge"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '903cdc008659'
-  en:
-    date: '2026-11-07'
-    hash: '097aebe3d529'
-  ru:
-    date: '2026-10-31'
-    hash: 'e8321f1e5740'
 myth:
   id: bom-jesus
   verdict: fact
@@ -154,3 +144,13 @@ myth:
     pt: O depósito da cabine de cima enche-se de água, a cabine fica mais pesada, desce e puxa a de baixo. Ainda hoje não tem motor.
     en: The upper car’s tank is filled with water, so it gets heavier, rolls down, and pulls the lower car up. It still has no motor today.
     ru: Верхнюю кабину заливают водой, она тяжелеет, едет вниз и тянет нижнюю наверх. Мотора у фуникулёра нет и сегодня.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '903cdc008659'
+  en:
+    date: '2026-11-07'
+    hash: '097aebe3d529'
+  ru:
+    date: '2026-10-31'
+    hash: 'e8321f1e5740'

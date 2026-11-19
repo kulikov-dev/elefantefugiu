@@ -162,16 +162,6 @@ meanwhile:
       en: "The Brothers Grimm publish the first volume of their fairy tales."
       ru: "Братья Гримм издают первый том сказок."
     source: "https://en.wikipedia.org/wiki/Grimms%27_Fairy_Tales"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '4b2376c0f5fe'
-  en:
-    date: '2026-11-07'
-    hash: 'dd97675b142c'
-  ru:
-    date: '2026-10-28'
-    hash: 'df20d2f0f659'
 route:
   approx: true
   points:
@@ -194,3 +184,13 @@ route:
       lng: 35.8183
       year: 1812
       mode: land
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '4b2376c0f5fe'
+  en:
+    date: '2026-11-07'
+    hash: 'dd97675b142c'
+  ru:
+    date: '2026-10-28'
+    hash: 'df20d2f0f659'

@@ -138,13 +138,6 @@ status: ready
 published: '2026-11-07'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '50a22f741355'
-  en:
-    date: '2026-11-07'
-    hash: 'c1c1ba54bb1b'
 myth:
   id: espichel
   verdict: myth
@@ -156,3 +149,10 @@ myth:
     pt: Diz a lenda que a mula subiu a falésia com Nossa Senhora. Na verdade, os trilhos foram deixados por saurópodes há cerca de 150 milhões de anos.
     en: Legend says a mule carried the Virgin up the cliff. The trackways were actually left by sauropods about 150 million years ago.
     ru: По легенде, мул поднял Богородицу на скалу. На самом деле цепочки следов оставили зауроподы около 150 млн лет назад.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '50a22f741355'
+  en:
+    date: '2026-11-07'
+    hash: 'c1c1ba54bb1b'

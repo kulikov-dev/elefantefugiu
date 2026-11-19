@@ -175,16 +175,6 @@ meanwhile:
     text:
       pt: "Howard Carter descobre o túmulo de Tutankhamon."
     source: "https://en.wikipedia.org/wiki/Tomb_of_Tutankhamun"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '9bc97db31a12'
-  en:
-    date: '2026-11-07'
-    hash: '32a51b5067eb'
-  ru:
-    date: '2026-10-31'
-    hash: 'e6e5ef22d021'
 seo:
   title:
     pt: "Gago Coutinho e Sacadura Cabral: a travessia do Atlântico, 1922"
@@ -218,3 +208,13 @@ route:
       year: 1922
       date: { pt: "17 de junho de 1922", en: "June 17, 1922", ru: "17 июня 1922" }
       mode: air
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '50e1d58209ed'
+  en:
+    date: '2026-11-07'
+    hash: '32a51b5067eb'
+  ru:
+    date: '2026-10-31'
+    hash: 'e6e5ef22d021'

@@ -149,8 +149,8 @@ meanwhile:
     source: "https://en.wikipedia.org/wiki/Statue_of_Liberty"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: 'e95890fb3242'
+    date: '2026-11-19'
+    hash: '6ff9fb44c73a'
   en:
     date: '2026-11-07'
     hash: 'c64bfc5b5fac'

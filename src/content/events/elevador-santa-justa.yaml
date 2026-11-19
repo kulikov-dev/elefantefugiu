@@ -146,16 +146,6 @@ meanwhile:
       en: "The Wright brothers make the first powered airplane flight."
       ru: "Братья Райт совершают первый полёт на самолёте с двигателем."
     source: "https://en.wikipedia.org/wiki/Wright_brothers"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '446ab09b5cc8'
-  en:
-    date: '2026-11-07'
-    hash: 'a96df180015d'
-  ru:
-    date: '2026-10-31'
-    hash: 'e9770a5b366e'
 myth:
   id: santa-justa
   verdict: myth
@@ -167,3 +157,13 @@ myth:
     pt: Foi projetado por Raoul Mesnier du Ponsard, engenheiro português de origem francesa. O ferro rendilhado ao gosto de Eiffel deu origem à lenda.
     en: It was designed by Raoul Mesnier du Ponsard, a Portuguese engineer of French descent. The lacy ironwork in Eiffel’s style gave rise to the legend.
     ru: Его спроектировал Рауль Мениер дю Понсар, португальский инженер французского происхождения. Ажурное железо в духе Эйфеля и породило легенду.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: 'd5fd989f3975'
+  en:
+    date: '2026-11-07'
+    hash: 'a96df180015d'
+  ru:
+    date: '2026-10-31'
+    hash: 'e9770a5b366e'

@@ -163,18 +163,18 @@ status: ready
 published: '2026-10-21'
 placeholder: false
 ru_ready: true
+seo:
+  title:
+    pt: "A Ponte das Barcas do Porto: a tragédia de 1809"
+    en: "Porto’s Bridge of Boats: the 1809 Disaster"
+    ru: "Мост из лодок в Порту: катастрофа 1809 года"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: 'd2c2b55d6687'
+    date: '2026-11-19'
+    hash: 'd4c3d67c2c2e'
   en:
     date: '2026-11-07'
     hash: 'a1fde9575b12'
   ru:
     date: '2026-10-28'
     hash: 'efd9a4046b2f'
-seo:
-  title:
-    pt: "A Ponte das Barcas do Porto: a tragédia de 1809"
-    en: "Porto’s Bridge of Boats: the 1809 Disaster"
-    ru: "Мост из лодок в Порту: катастрофа 1809 года"

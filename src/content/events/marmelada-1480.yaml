@@ -171,3 +171,7 @@ status: ready
 published: 2026-11-27
 placeholder: false
 ru_ready: true
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '34c170631770'

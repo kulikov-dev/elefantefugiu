@@ -16,15 +16,16 @@
     }
   },
   "epoch/antes-de-portugal/pt": {
-    "date": "2026-11-07",
-    "hash": "2a9516e2f45e",
+    "date": "2026-11-19",
+    "hash": "5152ef9cee62",
     "fields": {
       "slug": "46dacf32",
       "name": "e1114a88",
-      "years_label": "17c0f285",
+      "years_label": "afdf707d",
       "scale_gap": "00f4cda6",
       "theme": "45e7fe08",
       "description": "e6a2ca96",
+      "seo.title": "1b3da025",
       "panno.share_hook": "6510f5a5",
       "fallback_image.alt": "374128fc",
       "fallback_image.caption": "69f88eb2",
@@ -51,7 +52,7 @@
     }
   },
   "epoch/atualidade-ue-e-emigracao/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "e5b2b3eb0680",
     "fields": {
       "slug": "5cedb5df",
@@ -94,7 +95,7 @@
     }
   },
   "epoch/avis-e-descobrimentos/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "e960045fdd31",
     "fields": {
       "slug": "da9c8cc1",
@@ -148,7 +149,7 @@
     }
   },
   "epoch/estado-novo-e-25-de-abril/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "477ac1d09aa7",
     "fields": {
       "slug": "8da080c5",
@@ -189,7 +190,7 @@
     }
   },
   "epoch/lusitania-e-roma/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "70eb1dcfd8df",
     "fields": {
       "slug": "3cf7791a",
@@ -257,8 +258,8 @@
     }
   },
   "epoch/monarquia-e-republica/pt": {
-    "date": "2026-11-07",
-    "hash": "a137d9ec0b5f",
+    "date": "2026-11-19",
+    "hash": "21241698b94b",
     "fields": {
       "slug": "c1ef2006",
       "name": "728bff68",
@@ -267,7 +268,7 @@
       "panno.share_hook": "852bb5b9",
       "fallback_image.alt": "247b09ac",
       "fallback_image.caption": "773a5b8a",
-      "intro": "85553e3d",
+      "intro": "7301d1d9",
       "then_now[0].then_big": "6a2340c8",
       "then_now[0].now_big": "4cb52d31",
       "then_now[0].text": "7042813b",
@@ -312,7 +313,7 @@
     }
   },
   "epoch/nascimento-do-reino-e-reconquista/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "6bfff819cccc",
     "fields": {
       "slug": "571a8e21",
@@ -355,7 +356,7 @@
     }
   },
   "epoch/pombal-e-terramoto/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "e983398009ec",
     "fields": {
       "slug": "16c3c48b",
@@ -410,7 +411,7 @@
     }
   },
   "epoch/suevos-visigodos-e-mouros/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "8e575415b2a7",
     "fields": {
       "slug": "cf9398bc",
@@ -453,7 +454,7 @@
     }
   },
   "epoch/uniao-restauracao-e-ouro-do-brasil/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "0693a844d0db",
     "fields": {
       "slug": "57104557",
@@ -497,6 +498,60 @@
       "then_now[2].text": "fe89cfa6"
     }
   },
+  "festa/carnaval/pt": {
+    "date": "2026-11-19",
+    "hash": "96137fbd2ba7",
+    "fields": {
+      "date": "20cadc1a",
+      "name": "59e116ef",
+      "head_date": "66d490fb",
+      "head_title": "0a1112e6",
+      "head_line": "0d5ecb4a",
+      "head_link": "0bdb44c1",
+      "art_title": "a055b1dc",
+      "caption": "4dee89cd",
+      "lead": "5aef078b",
+      "og_description": "40fe5489",
+      "off_window": "eed19bba",
+      "traditions.0.title": "d20d9aa1",
+      "traditions.0.text": "36cd444e",
+      "traditions.1.title": "10f22ff1",
+      "traditions.1.text": "18dc8dee",
+      "traditions.2.title": "ecdd3c17",
+      "traditions.2.text": "ac3c170e"
+    }
+  },
+  "festa/dia-de-portugal/pt": {
+    "date": "2026-11-19",
+    "hash": "b6f955ceb5cc",
+    "fields": {
+      "date": "4ce0d819",
+      "name": "1b4ff808",
+      "head_date": "81dc02f7",
+      "head_title": "e381685b",
+      "head_line": "1fa0c2b6",
+      "head_link": "0bdb44c1",
+      "art_title": "62ddc88b",
+      "caption": "d039e868",
+      "lead": "ef02f09a",
+      "og_description": "3f7f6f42",
+      "off_window": "2dd23ad8",
+      "lusiadas.title": "75384a9e",
+      "lusiadas.lead": "81e03f7a",
+      "lusiadas.hint": "fc3b66a4",
+      "lusiadas.start": "952579ad",
+      "lusiadas.again": "6adb3e3f",
+      "lusiadas.won": "a912a50c",
+      "lusiadas.lost": "eb56b347",
+      "lusiadas.aria": "c8596671",
+      "traditions.0.title": "c532d4f8",
+      "traditions.0.text": "b551d831",
+      "traditions.1.title": "4d798e41",
+      "traditions.1.text": "2990e904",
+      "traditions.2.title": "afe13f0a",
+      "traditions.2.text": "e3a3508a"
+    }
+  },
   "festa/natal/en": {
     "date": "2026-11-07",
     "hash": "d5714319acac",
@@ -532,8 +587,8 @@
     }
   },
   "festa/natal/pt": {
-    "date": "2026-11-07",
-    "hash": "01c967b9630d",
+    "date": "2026-11-19",
+    "hash": "01031029e7c6",
     "fields": {
       "date": "1c0e7051",
       "name": "ac6ce12f",
@@ -542,6 +597,7 @@
       "head_line": "236cebf2",
       "head_link": "0bdb44c1",
       "art_title": "7856ae33",
+      "caption": "c47b4940",
       "lead": "d21de333",
       "og_description": "eac558c2",
       "off_window": "d4979671",
@@ -563,6 +619,31 @@
       "traditions.2.text": "5576b2a2",
       "traditions.3.title": "ada7fafa",
       "traditions.3.text": "80ae8571"
+    }
+  },
+  "festa/pascoa/pt": {
+    "date": "2026-11-19",
+    "hash": "b75bef47b2b0",
+    "fields": {
+      "date": "20cadc1a",
+      "name": "1b58d921",
+      "head_date": "0b6f51a6",
+      "head_title": "ff39d4eb",
+      "head_line": "d5420ca4",
+      "head_link": "0bdb44c1",
+      "art_title": "a8cf2634",
+      "caption": "3ea95c9b",
+      "lead": "ec794c7d",
+      "og_description": "989dbef7",
+      "off_window": "3d9c41ba",
+      "traditions.0.title": "7ebedc2d",
+      "traditions.0.text": "ca7a780c",
+      "traditions.1.title": "65a18c0a",
+      "traditions.1.text": "d1c5f78c",
+      "traditions.2.title": "cc85f29a",
+      "traditions.2.text": "246e1116",
+      "traditions.3.title": "0c7a91a9",
+      "traditions.3.text": "779f474a"
     }
   },
   "festa/restauracao/en": {
@@ -592,8 +673,8 @@
     }
   },
   "festa/restauracao/pt": {
-    "date": "2026-11-07",
-    "hash": "6ab78f134e48",
+    "date": "2026-11-19",
+    "hash": "d4dd5474ca93",
     "fields": {
       "date": "79113ea2",
       "name": "6c5f1151",
@@ -602,10 +683,11 @@
       "head_line": "478cc91f",
       "head_link": "0bdb44c1",
       "art_title": "84649666",
-      "lead": "cdac7396",
+      "caption": "ed8075a7",
+      "lead": "fb7ab09d",
       "og_description": "103c08d0",
       "off_window": "2727a0c9",
-      "traditions.0.title": "e0ac763d",
+      "traditions.0.title": "b723c8ec",
       "traditions.0.text": "8daee9cd",
       "traditions.1.title": "07012c86",
       "traditions.1.text": "90dcc8a3",
@@ -614,7 +696,7 @@
       "traditions.3.title": "d1ce2395",
       "traditions.3.text": "ee3cbc9b",
       "traditions.3.link.story": "a042fe71",
-      "traditions.3.link.label": "9d951d9f"
+      "traditions.3.link.label": "e835e76c"
     }
   },
   "meanwhile/a-portuguesa-1890/en": {
@@ -625,10 +707,31 @@
     }
   },
   "meanwhile/a-portuguesa-1890/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "78dcc765b461",
     "fields": {
       "meanwhile[2].text": "43a6a4ee"
+    }
+  },
+  "meanwhile/aguadeiros-galegos-1748/pt": {
+    "date": "2026-11-19",
+    "hash": "6fbfac198601",
+    "fields": {
+      "meanwhile[0].text": "02b6dad3"
+    }
+  },
+  "meanwhile/ananas-acores-1875/pt": {
+    "date": "2026-11-19",
+    "hash": "c2fa559e37ce",
+    "fields": {
+      "meanwhile[1].text": "d93016d9"
+    }
+  },
+  "meanwhile/bacalhau-e-sal-1669/pt": {
+    "date": "2026-11-19",
+    "hash": "0137643ef381",
+    "fields": {
+      "meanwhile[0].text": "50ef9527"
     }
   },
   "meanwhile/batalha-da-salga-1581/en": {
@@ -639,7 +742,7 @@
     }
   },
   "meanwhile/batalha-da-salga-1581/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "8042a2e2f237",
     "fields": {
       "meanwhile[2].text": "846577c4"
@@ -652,6 +755,13 @@
       "meanwhile[1].text": "c401165e"
     }
   },
+  "meanwhile/bordado-madeira-1850/pt": {
+    "date": "2026-11-19",
+    "hash": "a64e8f0e6df0",
+    "fields": {
+      "meanwhile[0].text": "72fc0483"
+    }
+  },
   "meanwhile/braguinha-ukulele-1879/en": {
     "date": "2026-11-07",
     "hash": "b4440fbddb30",
@@ -660,10 +770,31 @@
     }
   },
   "meanwhile/braguinha-ukulele-1879/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "90f943dd5625",
     "fields": {
       "meanwhile[2].text": "01c435ad"
+    }
+  },
+  "meanwhile/cachalote-pico-1867/pt": {
+    "date": "2026-11-19",
+    "hash": "a5a08406f9ea",
+    "fields": {
+      "meanwhile[1].text": "2e850aba"
+    }
+  },
+  "meanwhile/calcada-rossio-1848/pt": {
+    "date": "2026-11-19",
+    "hash": "eea0a58e4ad3",
+    "fields": {
+      "meanwhile[0].text": "07b010c3"
+    }
+  },
+  "meanwhile/candeeiros-1780/pt": {
+    "date": "2026-11-19",
+    "hash": "e1d31f7064d0",
+    "fields": {
+      "meanwhile[0].text": "58b7abfe"
     }
   },
   "meanwhile/cantino-1502/en": {
@@ -674,7 +805,7 @@
     }
   },
   "meanwhile/cantino-1502/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "07645f75b4c9",
     "fields": {
       "meanwhile[2].text": "8f12cec6"
@@ -688,7 +819,7 @@
     }
   },
   "meanwhile/capela-sao-joao-baptista/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "b99307910cd8",
     "fields": {
       "meanwhile[0].text": "d91dc694"
@@ -702,7 +833,7 @@
     }
   },
   "meanwhile/carros-de-cesto-monte/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "65293c7d2ce2",
     "fields": {
       "meanwhile[2].text": "f7161b27"
@@ -716,7 +847,7 @@
     }
   },
   "meanwhile/catarina-cha-1662/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "d56bd93980a9",
     "fields": {
       "meanwhile[0].text": "bb547fe2"
@@ -729,6 +860,13 @@
       "meanwhile[1].text": "c8eca048"
     }
   },
+  "meanwhile/colombo-acucar-1478/pt": {
+    "date": "2026-11-19",
+    "hash": "318f6d6f635c",
+    "fields": {
+      "meanwhile[1].text": "d4a4c36d"
+    }
+  },
   "meanwhile/corte-brasil-1807/en": {
     "date": "2026-11-07",
     "hash": "b653eef5b657",
@@ -737,10 +875,24 @@
     }
   },
   "meanwhile/corte-brasil-1807/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "eab7c8f4465e",
     "fields": {
       "meanwhile[0].text": "39913146"
+    }
+  },
+  "meanwhile/cruz-de-cristo-1420/pt": {
+    "date": "2026-11-19",
+    "hash": "5aed2b53bb43",
+    "fields": {
+      "meanwhile[0].text": "7d953768"
+    }
+  },
+  "meanwhile/diocles-122/pt": {
+    "date": "2026-11-19",
+    "hash": "b2fc0165bce4",
+    "fields": {
+      "meanwhile[0].text": "f55d6fcb"
     }
   },
   "meanwhile/douro-1756/en": {
@@ -751,7 +903,7 @@
     }
   },
   "meanwhile/douro-1756/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "17c7d1dc1e0e",
     "fields": {
       "meanwhile[0].text": "472779e3"
@@ -765,7 +917,7 @@
     }
   },
   "meanwhile/elevador-bom-jesus/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "713915e07e5f",
     "fields": {
       "meanwhile[2].text": "2237a77c"
@@ -779,10 +931,17 @@
     }
   },
   "meanwhile/elevador-santa-justa/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "3c900a1b0717",
     "fields": {
       "meanwhile[0].text": "6f2f6b6c"
+    }
+  },
+  "meanwhile/fafe-brasileiros-1858/pt": {
+    "date": "2026-11-19",
+    "hash": "6a6b3d44fdec",
+    "fields": {
+      "meanwhile[0].text": "6ceef32a"
     }
   },
   "meanwhile/falsos-sebastiao/en": {
@@ -790,6 +949,27 @@
     "hash": "7448c1a61028",
     "fields": {
       "meanwhile[1].text": "83835984"
+    }
+  },
+  "meanwhile/fernao-mendes-pinto-1537/pt": {
+    "date": "2026-11-19",
+    "hash": "75cf0173110b",
+    "fields": {
+      "meanwhile[0].text": "83ead242"
+    }
+  },
+  "meanwhile/figuras-de-convite-1725/pt": {
+    "date": "2026-11-19",
+    "hash": "0757394434ae",
+    "fields": {
+      "meanwhile[0].text": "2dac3533"
+    }
+  },
+  "meanwhile/gaiola-pombalina-1758/pt": {
+    "date": "2026-11-19",
+    "hash": "2d12b2becfb9",
+    "fields": {
+      "meanwhile[0].text": "a72985fd"
     }
   },
   "meanwhile/gravuras-coa-1995/en": {
@@ -800,7 +980,7 @@
     }
   },
   "meanwhile/gravuras-coa-1995/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "41cfa47925d4",
     "fields": {
       "meanwhile[0].text": "8d21e015"
@@ -813,6 +993,20 @@
       "meanwhile[1].text": "f3563636"
     }
   },
+  "meanwhile/incendio-da-madeira-1420/pt": {
+    "date": "2026-11-19",
+    "hash": "e7ff0dd81e3b",
+    "fields": {
+      "meanwhile[0].text": "388e3e73"
+    }
+  },
+  "meanwhile/laranja-portugal-1550/pt": {
+    "date": "2026-11-19",
+    "hash": "9dd6e3294f83",
+    "fields": {
+      "meanwhile[0].text": "3f236b10"
+    }
+  },
   "meanwhile/legiao-portuguesa-1812/en": {
     "date": "2026-11-07",
     "hash": "c47a96082f5c",
@@ -821,7 +1015,7 @@
     }
   },
   "meanwhile/legiao-portuguesa-1812/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "8cbe40178945",
     "fields": {
       "meanwhile[0].text": "a934cd51"
@@ -835,7 +1029,7 @@
     }
   },
   "meanwhile/livraria-lello/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "e2ddd27546b9",
     "fields": {
       "meanwhile[2].text": "569d5bf9"
@@ -849,10 +1043,31 @@
     }
   },
   "meanwhile/mafra-sinos-1717/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "81e9c7b8ca5a",
     "fields": {
       "meanwhile[2].text": "3e70fe22"
+    }
+  },
+  "meanwhile/mar-dos-sargacos-1492/pt": {
+    "date": "2026-11-19",
+    "hash": "9c4e74be8aea",
+    "fields": {
+      "meanwhile[0].text": "255f140f"
+    }
+  },
+  "meanwhile/maria-severa-1846/pt": {
+    "date": "2026-11-19",
+    "hash": "c1f2311c3b5c",
+    "fields": {
+      "meanwhile[0].text": "135ff798"
+    }
+  },
+  "meanwhile/marmelada-1480/pt": {
+    "date": "2026-11-19",
+    "hash": "5052ee2911e0",
+    "fields": {
+      "meanwhile[1].text": "c2d6c405"
     }
   },
   "meanwhile/miragaia-2009/en": {
@@ -863,7 +1078,7 @@
     }
   },
   "meanwhile/miragaia-2009/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "5b4717e45e7f",
     "fields": {
       "meanwhile[0].text": "1508b3eb"
@@ -877,7 +1092,7 @@
     }
   },
   "meanwhile/ninho-paimogo-1993/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "f5d210c4a0cd",
     "fields": {
       "meanwhile[0].text": "9f1dd8eb"
@@ -890,6 +1105,13 @@
       "meanwhile[1].text": "9f86eb6f"
     }
   },
+  "meanwhile/palavras-portuguesas-no-japao-1543/pt": {
+    "date": "2026-11-19",
+    "hash": "81f146291774",
+    "fields": {
+      "meanwhile[0].text": "a1f36ac4"
+    }
+  },
   "meanwhile/pasteis-de-belem-1837/en": {
     "date": "2026-11-07",
     "hash": "d5de7c560db5",
@@ -898,7 +1120,7 @@
     }
   },
   "meanwhile/pasteis-de-belem-1837/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "df88c9b49765",
     "fields": {
       "meanwhile[0].text": "ef28d7ca"
@@ -912,10 +1134,10 @@
     }
   },
   "meanwhile/pedra-da-mua/pt": {
-    "date": "2026-11-07",
-    "hash": "8031774d5714",
+    "date": "2026-11-19",
+    "hash": "2f5ed17a31bc",
     "fields": {
-      "meanwhile[0].text": "2f4bf15e"
+      "meanwhile[0].text": "e84ad3ef"
     }
   },
   "meanwhile/ponte-maria-pia-1877/en": {
@@ -926,7 +1148,7 @@
     }
   },
   "meanwhile/ponte-maria-pia-1877/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "1d8242da72f9",
     "fields": {
       "meanwhile[2].text": "897e4f94"
@@ -940,7 +1162,7 @@
     }
   },
   "meanwhile/ponte-trajano-chaves/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "11f8b5984bd1",
     "fields": {
       "meanwhile[0].text": "2007a718"
@@ -954,10 +1176,17 @@
     }
   },
   "meanwhile/porca-de-murca/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "eb5f2f0fc6ed",
     "fields": {
       "meanwhile[0].text": "11404875"
+    }
+  },
+  "meanwhile/primeiro-automovel-1895/pt": {
+    "date": "2026-11-19",
+    "hash": "372d1e17aebc",
+    "fields": {
+      "meanwhile[0].text": "c678650e"
     }
   },
   "meanwhile/prisao-joanina/en": {
@@ -965,6 +1194,13 @@
     "hash": "2e82ca9ec589",
     "fields": {
       "meanwhile[1].text": "5b108530"
+    }
+  },
+  "meanwhile/rabelo-valeira-1791/pt": {
+    "date": "2026-11-19",
+    "hash": "9e718bdfc218",
+    "fields": {
+      "meanwhile[0].text": "09b29037"
     }
   },
   "meanwhile/restauracao-1640/en": {
@@ -982,10 +1218,17 @@
     }
   },
   "meanwhile/rinoceronte-1515/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "7cfc1f3426d3",
     "fields": {
       "meanwhile[0].text": "ffaf8a04"
+    }
+  },
+  "meanwhile/siglas-poveiras-1890/pt": {
+    "date": "2026-11-19",
+    "hash": "41e14b4db83a",
+    "fields": {
+      "meanwhile[0].text": "195b84c3"
     }
   },
   "meanwhile/termas-vipasca/en": {
@@ -996,7 +1239,7 @@
     }
   },
   "meanwhile/termas-vipasca/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "f02ff442b7f8",
     "fields": {
       "meanwhile[0].text": "332b968a"
@@ -1010,7 +1253,7 @@
     }
   },
   "meanwhile/travessia-atlantico-sul-1922/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "0ce3eac5560f",
     "fields": {
       "meanwhile[2].text": "2b131764"
@@ -1024,10 +1267,86 @@
     }
   },
   "meanwhile/tripeiros-1415/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "5f8b04a1e05d",
     "fields": {
       "meanwhile[0].text": "427906e2"
+    }
+  },
+  "meanwhile/vila-real-santo-antonio-1774/pt": {
+    "date": "2026-11-19",
+    "hash": "85977cdd0029",
+    "fields": {
+      "meanwhile[0].text": "1f03279a"
+    }
+  },
+  "meanwhile/vinhas-de-colares-1908/pt": {
+    "date": "2026-11-19",
+    "hash": "c5ddef12be30",
+    "fields": {
+      "meanwhile[0].text": "816956d2"
+    }
+  },
+  "meanwhile/ze-povinho-1875/pt": {
+    "date": "2026-11-19",
+    "hash": "086e29a503c3",
+    "fields": {
+      "meanwhile[0].text": "beb49ea2"
+    }
+  },
+  "meanwhile/zebro-1591/pt": {
+    "date": "2026-11-19",
+    "hash": "889412ad0c8d",
+    "fields": {
+      "meanwhile[0].text": "f2b3b622"
+    }
+  },
+  "myth/a-portuguesa-1890/pt": {
+    "date": "2026-11-19",
+    "hash": "3335f3aad64d",
+    "fields": {
+      "myth.statement": "e0213cc8",
+      "myth.answer": "5d30699e"
+    }
+  },
+  "myth/aguadeiros-galegos-1748/pt": {
+    "date": "2026-11-19",
+    "hash": "5c1313036948",
+    "fields": {
+      "myth.statement": "84ddadcb",
+      "myth.answer": "0145af71"
+    }
+  },
+  "myth/aljubarrota-1385/pt": {
+    "date": "2026-11-19",
+    "hash": "d0522fdb6c46",
+    "fields": {
+      "myth.statement": "a867d97d",
+      "myth.answer": "d320d4d1"
+    }
+  },
+  "myth/ananas-acores-1875/pt": {
+    "date": "2026-11-19",
+    "hash": "25faf25847a3",
+    "fields": {
+      "myth.statement": "35dfd204",
+      "myth.answer": "ff79310b"
+    }
+  },
+  "myth/anta-zambujeiro-3500-ac/pt": {
+    "date": "2026-11-19",
+    "hash": "434e779c2964",
+    "fields": {
+      "myth.statement": "3d33bbd8",
+      "myth.answer": "14f1934f"
+    }
+  },
+  "myth/bacalhau-e-sal-1669/pt": {
+    "date": "2026-11-19",
+    "hash": "51e0feaf987d",
+    "fields": {
+      "myth.statement": "d23c1379",
+      "myth.answer": "f59e1f87"
     }
   },
   "myth/batalha-da-salga-1581/en": {
@@ -1039,11 +1358,35 @@
     }
   },
   "myth/batalha-da-salga-1581/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "81bfa4c5d22a",
     "fields": {
       "myth.statement": "a872d1d0",
       "myth.answer": "72995d4f"
+    }
+  },
+  "myth/bojador-1434/pt": {
+    "date": "2026-11-19",
+    "hash": "6b18b3c4fad0",
+    "fields": {
+      "myth.statement": "5a84ee49",
+      "myth.answer": "293db4e7"
+    }
+  },
+  "myth/bolo-rei-1910/pt": {
+    "date": "2026-11-19",
+    "hash": "a6e1c2d6ec32",
+    "fields": {
+      "myth.statement": "0339f736",
+      "myth.answer": "e9297133"
+    }
+  },
+  "myth/bordado-madeira-1850/pt": {
+    "date": "2026-11-19",
+    "hash": "ba89de4fb22f",
+    "fields": {
+      "myth.statement": "5238a2a3",
+      "myth.answer": "da92ba7f"
     }
   },
   "myth/braguinha-ukulele-1879/en": {
@@ -1055,11 +1398,67 @@
     }
   },
   "myth/braguinha-ukulele-1879/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "382b18dd47a4",
     "fields": {
       "myth.statement": "beb57c84",
       "myth.answer": "b19a53e1"
+    }
+  },
+  "myth/cachalote-pico-1867/pt": {
+    "date": "2026-11-19",
+    "hash": "98fb9b3ddf36",
+    "fields": {
+      "myth.statement": "e27faaf6",
+      "myth.answer": "fd7187f1"
+    }
+  },
+  "myth/calcada-rossio-1848/pt": {
+    "date": "2026-11-19",
+    "hash": "9ab0162750b8",
+    "fields": {
+      "myth.statement": "fad0ebe5",
+      "myth.answer": "b39b2876"
+    }
+  },
+  "myth/candeeiros-1780/pt": {
+    "date": "2026-11-19",
+    "hash": "be867cf199f8",
+    "fields": {
+      "myth.statement": "677d1641",
+      "myth.answer": "3409f129"
+    }
+  },
+  "myth/cantino-1502/pt": {
+    "date": "2026-11-19",
+    "hash": "3622c9304f9e",
+    "fields": {
+      "myth.statement": "915c009e",
+      "myth.answer": "60d6c5cc"
+    }
+  },
+  "myth/capela-sao-joao-baptista/pt": {
+    "date": "2026-11-19",
+    "hash": "7d0c2d3aacad",
+    "fields": {
+      "myth.statement": "c64601e5",
+      "myth.answer": "e361e1ca"
+    }
+  },
+  "myth/carros-de-cesto-monte/pt": {
+    "date": "2026-11-19",
+    "hash": "00564470af61",
+    "fields": {
+      "myth.statement": "a60b8873",
+      "myth.answer": "5986f6bb"
+    }
+  },
+  "myth/casa-da-neve-1782/pt": {
+    "date": "2026-11-19",
+    "hash": "6e14a555a12d",
+    "fields": {
+      "myth.statement": "497c2f50",
+      "myth.answer": "21e146bd"
     }
   },
   "myth/catarina-cha-1662/en": {
@@ -1071,11 +1470,67 @@
     }
   },
   "myth/catarina-cha-1662/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "1272a07d2094",
     "fields": {
       "myth.statement": "87c311f5",
       "myth.answer": "14d95b0e"
+    }
+  },
+  "myth/colombo-acucar-1478/pt": {
+    "date": "2026-11-19",
+    "hash": "69b35e2f9e45",
+    "fields": {
+      "myth.statement": "a56018fd",
+      "myth.answer": "495d5dc6"
+    }
+  },
+  "myth/concheiros-muge-6000-ac/pt": {
+    "date": "2026-11-19",
+    "hash": "5e511265f879",
+    "fields": {
+      "myth.statement": "73d0a508",
+      "myth.answer": "5f366535"
+    }
+  },
+  "myth/corte-brasil-1807/pt": {
+    "date": "2026-11-19",
+    "hash": "a7ff73be42d7",
+    "fields": {
+      "myth.statement": "fbfd4eca",
+      "myth.answer": "f7bb0446"
+    }
+  },
+  "myth/cruz-de-cristo-1420/pt": {
+    "date": "2026-11-19",
+    "hash": "b4f9b67b31ce",
+    "fields": {
+      "myth.statement": "894dbc36",
+      "myth.answer": "7b270a7f"
+    }
+  },
+  "myth/diocles-122/pt": {
+    "date": "2026-11-19",
+    "hash": "246d6710771c",
+    "fields": {
+      "myth.statement": "251fe168",
+      "myth.answer": "69728ab8"
+    }
+  },
+  "myth/douro-1756/pt": {
+    "date": "2026-11-19",
+    "hash": "801b9296a900",
+    "fields": {
+      "myth.statement": "b339503b",
+      "myth.answer": "b9f6505c"
+    }
+  },
+  "myth/elefantes-malaca-1511/pt": {
+    "date": "2026-11-19",
+    "hash": "981b3169c22f",
+    "fields": {
+      "myth.statement": "6c4b747d",
+      "myth.answer": "46415366"
     }
   },
   "myth/elevador-bom-jesus/en": {
@@ -1087,7 +1542,7 @@
     }
   },
   "myth/elevador-bom-jesus/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "d8486bf29419",
     "fields": {
       "myth.statement": "e8df35df",
@@ -1103,11 +1558,67 @@
     }
   },
   "myth/elevador-santa-justa/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "b87c5bed9264",
     "fields": {
       "myth.statement": "231016c2",
       "myth.answer": "6c6ade17"
+    }
+  },
+  "myth/fafe-brasileiros-1858/pt": {
+    "date": "2026-11-19",
+    "hash": "598ff1857bd6",
+    "fields": {
+      "myth.statement": "744a06aa",
+      "myth.answer": "3e9dee75"
+    }
+  },
+  "myth/falsos-sebastiao/pt": {
+    "date": "2026-11-19",
+    "hash": "5ba82db609ed",
+    "fields": {
+      "myth.statement": "517a3e54",
+      "myth.answer": "2826348f"
+    }
+  },
+  "myth/fernao-mendes-pinto-1537/pt": {
+    "date": "2026-11-19",
+    "hash": "6a795654ece9",
+    "fields": {
+      "myth.statement": "b857b93d",
+      "myth.answer": "3877509d"
+    }
+  },
+  "myth/figuras-de-convite-1725/pt": {
+    "date": "2026-11-19",
+    "hash": "00d327ff8863",
+    "fields": {
+      "myth.statement": "f5fbe483",
+      "myth.answer": "9c3c4d0f"
+    }
+  },
+  "myth/gaiola-pombalina-1758/pt": {
+    "date": "2026-11-19",
+    "hash": "00344bdb133d",
+    "fields": {
+      "myth.statement": "8ac64b0c",
+      "myth.answer": "0157ce07"
+    }
+  },
+  "myth/galerias-romanas-rua-da-prata/pt": {
+    "date": "2026-11-19",
+    "hash": "0a9439c57095",
+    "fields": {
+      "myth.statement": "b3cf988c",
+      "myth.answer": "73a28417"
+    }
+  },
+  "myth/garum-lisboa/pt": {
+    "date": "2026-11-19",
+    "hash": "91164d740b28",
+    "fields": {
+      "myth.statement": "99e3a460",
+      "myth.answer": "755919ae"
     }
   },
   "myth/gravuras-coa-1995/en": {
@@ -1119,11 +1630,51 @@
     }
   },
   "myth/gravuras-coa-1995/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "ab699ff15739",
     "fields": {
       "myth.statement": "0657502b",
       "myth.answer": "5a3b7fa9"
+    }
+  },
+  "myth/guerra-laranjas-1801/pt": {
+    "date": "2026-11-19",
+    "hash": "6696f8a7fa04",
+    "fields": {
+      "myth.statement": "a965bede",
+      "myth.answer": "2b8f65d0"
+    }
+  },
+  "myth/hanno-1514/pt": {
+    "date": "2026-11-19",
+    "hash": "c6fd8b1a963e",
+    "fields": {
+      "myth.statement": "a207dafb",
+      "myth.answer": "ae6d9f53"
+    }
+  },
+  "myth/incendio-da-madeira-1420/pt": {
+    "date": "2026-11-19",
+    "hash": "7d55b86e5d12",
+    "fields": {
+      "myth.statement": "3584b93c",
+      "myth.answer": "f659d0b0"
+    }
+  },
+  "myth/laranja-portugal-1550/pt": {
+    "date": "2026-11-19",
+    "hash": "aa5109ece9f6",
+    "fields": {
+      "myth.statement": "dc6edc0d",
+      "myth.answer": "123d9767"
+    }
+  },
+  "myth/legiao-portuguesa-1812/pt": {
+    "date": "2026-11-19",
+    "hash": "90967e8bb258",
+    "fields": {
+      "myth.statement": "8b928d97",
+      "myth.answer": "5f063cba"
     }
   },
   "myth/livraria-lello/en": {
@@ -1135,11 +1686,59 @@
     }
   },
   "myth/livraria-lello/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "fc37d7260cfa",
     "fields": {
       "myth.statement": "3852a557",
       "myth.answer": "2564e218"
+    }
+  },
+  "myth/mafra-sinos-1717/pt": {
+    "date": "2026-11-19",
+    "hash": "e359071880c4",
+    "fields": {
+      "myth.statement": "b3ec591b",
+      "myth.answer": "93e22921"
+    }
+  },
+  "myth/mar-dos-sargacos-1492/pt": {
+    "date": "2026-11-19",
+    "hash": "eaf2d40c7218",
+    "fields": {
+      "myth.statement": "6ff29213",
+      "myth.answer": "f6655570"
+    }
+  },
+  "myth/maria-severa-1846/pt": {
+    "date": "2026-11-19",
+    "hash": "e7bb5c730dee",
+    "fields": {
+      "myth.statement": "7dc2fce2",
+      "myth.answer": "19e2c138"
+    }
+  },
+  "myth/marmelada-1480/pt": {
+    "date": "2026-11-19",
+    "hash": "fcb871f7e6b7",
+    "fields": {
+      "myth.statement": "57b382da",
+      "myth.answer": "a7d9f09b"
+    }
+  },
+  "myth/miragaia-2009/pt": {
+    "date": "2026-11-19",
+    "hash": "65ac05f7803a",
+    "fields": {
+      "myth.statement": "e0be5c19",
+      "myth.answer": "52d39940"
+    }
+  },
+  "myth/monte-pascoal-1500/pt": {
+    "date": "2026-11-19",
+    "hash": "89a0ccf0bf19",
+    "fields": {
+      "myth.statement": "57bda2f2",
+      "myth.answer": "569e5d9c"
     }
   },
   "myth/morcegos-mafra-1771/en": {
@@ -1151,11 +1750,51 @@
     }
   },
   "myth/morcegos-mafra-1771/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "10f65cb92b5f",
     "fields": {
       "myth.statement": "ba30b104",
       "myth.answer": "7776a728"
+    }
+  },
+  "myth/ninho-paimogo-1993/pt": {
+    "date": "2026-11-19",
+    "hash": "ae4187a659ef",
+    "fields": {
+      "myth.statement": "ec1a685c",
+      "myth.answer": "811cab43"
+    }
+  },
+  "myth/ouro-sao-francisco-porto/pt": {
+    "date": "2026-11-19",
+    "hash": "afa16aaeacaf",
+    "fields": {
+      "myth.statement": "d41e0cbc",
+      "myth.answer": "d2f43818"
+    }
+  },
+  "myth/palacio-da-pena/pt": {
+    "date": "2026-11-19",
+    "hash": "9d55de0c3a27",
+    "fields": {
+      "myth.statement": "ea3013f4",
+      "myth.answer": "ae9ad7be"
+    }
+  },
+  "myth/palavras-portuguesas-no-japao-1543/pt": {
+    "date": "2026-11-19",
+    "hash": "ed8d2d71eac6",
+    "fields": {
+      "myth.statement": "83b03c83",
+      "myth.answer": "a01d8383"
+    }
+  },
+  "myth/pasteis-de-belem-1837/pt": {
+    "date": "2026-11-19",
+    "hash": "e4b42d199659",
+    "fields": {
+      "myth.statement": "d55ac98a",
+      "myth.answer": "e6cfc65e"
     }
   },
   "myth/pedra-da-mua/en": {
@@ -1167,7 +1806,7 @@
     }
   },
   "myth/pedra-da-mua/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "f1878e588f38",
     "fields": {
       "myth.statement": "b66f910e",
@@ -1183,11 +1822,91 @@
     }
   },
   "myth/ponte-maria-pia-1877/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "9b05d68ccbc6",
     "fields": {
       "myth.statement": "a22b192f",
       "myth.answer": "37c5c1db"
+    }
+  },
+  "myth/ponte-trajano-chaves/pt": {
+    "date": "2026-11-19",
+    "hash": "96dfdd104964",
+    "fields": {
+      "myth.statement": "4886b85c",
+      "myth.answer": "51c1fbf4"
+    }
+  },
+  "myth/porca-de-murca/pt": {
+    "date": "2026-11-19",
+    "hash": "6d6ca97a09a6",
+    "fields": {
+      "myth.statement": "b70d5af0",
+      "myth.answer": "f542b76e"
+    }
+  },
+  "myth/primeiro-automovel-1895/pt": {
+    "date": "2026-11-19",
+    "hash": "d9661238da59",
+    "fields": {
+      "myth.statement": "e46e0e55",
+      "myth.answer": "0a9e5e12"
+    }
+  },
+  "myth/prisao-joanina/pt": {
+    "date": "2026-11-19",
+    "hash": "f1815e1b268f",
+    "fields": {
+      "myth.statement": "45f3e2c5",
+      "myth.answer": "13fe9162"
+    }
+  },
+  "myth/rabelo-valeira-1791/pt": {
+    "date": "2026-11-19",
+    "hash": "522a8d7cacee",
+    "fields": {
+      "myth.statement": "4cdcc81a",
+      "myth.answer": "82f7abf2"
+    }
+  },
+  "myth/rainha-carnaval-1923/pt": {
+    "date": "2026-11-19",
+    "hash": "d67264056056",
+    "fields": {
+      "myth.statement": "6156200e",
+      "myth.answer": "01ffccc2"
+    }
+  },
+  "myth/rei-que-deu-a-coroa-1646/pt": {
+    "date": "2026-11-19",
+    "hash": "05475adb078f",
+    "fields": {
+      "myth.statement": "8e36f11b",
+      "myth.answer": "6300cfda"
+    }
+  },
+  "myth/restauracao-1640/pt": {
+    "date": "2026-11-19",
+    "hash": "c4b28c4392ca",
+    "fields": {
+      "myth.statement": "331a916c",
+      "myth.answer": "b99eb749"
+    }
+  },
+  "myth/rinoceronte-1515/pt": {
+    "date": "2026-11-19",
+    "hash": "a57992ccae8f",
+    "fields": {
+      "myth.statement": "e6d599dc",
+      "myth.answer": "12a32de4"
+    }
+  },
+  "myth/siglas-poveiras-1890/pt": {
+    "date": "2026-11-19",
+    "hash": "440d0dfea5d6",
+    "fields": {
+      "myth.statement": "000d88d8",
+      "myth.answer": "989ac471"
     }
   },
   "myth/templo-romano-evora/en": {
@@ -1199,7 +1918,7 @@
     }
   },
   "myth/templo-romano-evora/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "7a03ff9b6c4f",
     "fields": {
       "myth.statement": "ecc9cdd8",
@@ -1215,11 +1934,204 @@
     }
   },
   "myth/termas-vipasca/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "ccb91221444f",
     "fields": {
       "myth.statement": "16413f32",
       "myth.answer": "e7cdb104"
+    }
+  },
+  "myth/travessia-atlantico-sul-1922/pt": {
+    "date": "2026-11-19",
+    "hash": "cc0ff3f41246",
+    "fields": {
+      "myth.statement": "dc3f662f",
+      "myth.answer": "3d0e7550"
+    }
+  },
+  "myth/tricentenario-camoes-1880/pt": {
+    "date": "2026-11-19",
+    "hash": "67697c48515e",
+    "fields": {
+      "myth.statement": "ecde2fb7",
+      "myth.answer": "3abc30ce"
+    }
+  },
+  "myth/tripeiros-1415/pt": {
+    "date": "2026-11-19",
+    "hash": "3889da6e573e",
+    "fields": {
+      "myth.statement": "9d19bb6a",
+      "myth.answer": "dd06567e"
+    }
+  },
+  "myth/vila-real-santo-antonio-1774/pt": {
+    "date": "2026-11-19",
+    "hash": "e34b0c70538c",
+    "fields": {
+      "myth.statement": "5d934912",
+      "myth.answer": "5890dfb2"
+    }
+  },
+  "myth/viriato-139-ac/pt": {
+    "date": "2026-11-19",
+    "hash": "2f59e0e38ddb",
+    "fields": {
+      "myth.statement": "26ff6ca9",
+      "myth.answer": "ef974184"
+    }
+  },
+  "myth/ze-povinho-1875/pt": {
+    "date": "2026-11-19",
+    "hash": "aa2905094dac",
+    "fields": {
+      "myth.statement": "569ee619",
+      "myth.answer": "5f6f8368"
+    }
+  },
+  "myth/zebro-1591/pt": {
+    "date": "2026-11-19",
+    "hash": "71873c64c4f2",
+    "fields": {
+      "myth.statement": "fe4a77c6",
+      "myth.answer": "929431aa"
+    }
+  },
+  "route/braguinha-ukulele-1879/pt": {
+    "date": "2026-11-19",
+    "hash": "5c7531243855",
+    "fields": {
+      "route.points[0].name": "d6ace992",
+      "route.points[0].date": "d6fc0e1b",
+      "route.points[13].name": "3ed5a496",
+      "route.points[13].date": "0daba40a"
+    }
+  },
+  "route/cantino-1502/pt": {
+    "date": "2026-11-19",
+    "hash": "e1fcdcf7e996",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[1].name": "3b4e60cf",
+      "route.points[2].name": "f411003d"
+    }
+  },
+  "route/capela-sao-joao-baptista/pt": {
+    "date": "2026-11-19",
+    "hash": "ae398625fa88",
+    "fields": {
+      "route.points[0].name": "7e325f21",
+      "route.points[7].name": "37b030b1"
+    }
+  },
+  "route/corte-brasil-1807/pt": {
+    "date": "2026-11-19",
+    "hash": "ae1b9f385306",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[0].date": "07e67af0",
+      "route.points[4].name": "5ad4a23b",
+      "route.points[4].date": "b45b10b5",
+      "route.points[7].name": "a188a64f",
+      "route.points[7].date": "5940d26a"
+    }
+  },
+  "route/diocles-122/pt": {
+    "date": "2026-11-19",
+    "hash": "458536064cee",
+    "fields": {
+      "route.points[0].name": "27beb16d",
+      "route.points[6].name": "7e325f21",
+      "route.points[7].name": "73ae373c"
+    }
+  },
+  "route/fafe-brasileiros-1858/pt": {
+    "date": "2026-11-19",
+    "hash": "aa2b1ca59098",
+    "fields": {
+      "route.points[0].name": "f91ae60b",
+      "route.points[5].name": "a188a64f",
+      "route.points[10].name": "f91ae60b"
+    }
+  },
+  "route/fernao-mendes-pinto-1537/pt": {
+    "date": "2026-11-19",
+    "hash": "5bda63b82b5f",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[8].name": "04f6073a",
+      "route.points[9].name": "b4d9b0cd",
+      "route.points[12].name": "07bad15b",
+      "route.points[17].name": "04f6073a",
+      "route.points[25].name": "f80309da"
+    }
+  },
+  "route/hanno-1514/pt": {
+    "date": "2026-11-19",
+    "hash": "29ef323c7360",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[7].name": "7e325f21",
+      "route.points[7].date": "90e0d2ff"
+    }
+  },
+  "route/legiao-portuguesa-1812/pt": {
+    "date": "2026-11-19",
+    "hash": "1988877c2494",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[1].name": "e0b411ea",
+      "route.points[2].name": "d1a9773d",
+      "route.points[3].name": "1363275b"
+    }
+  },
+  "route/monte-pascoal-1500/pt": {
+    "date": "2026-11-19",
+    "hash": "796315bb6dbd",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[0].date": "de86a9ef",
+      "route.points[1].name": "82631529",
+      "route.points[1].date": "3fe37bc4"
+    }
+  },
+  "route/primeiro-automovel-1895/pt": {
+    "date": "2026-11-19",
+    "hash": "8845281fae98",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[1].name": "81b46bc3",
+      "route.points[2].name": "bcb328bb",
+      "route.points[2].date": "05173a03"
+    }
+  },
+  "route/rabelo-valeira-1791/pt": {
+    "date": "2026-11-19",
+    "hash": "28c73e2083bc",
+    "fields": {
+      "route.points[0].name": "042426fd",
+      "route.points[1].name": "9d51cc5e"
+    }
+  },
+  "route/rinoceronte-1515/pt": {
+    "date": "2026-11-19",
+    "hash": "2676094b9e4f",
+    "fields": {
+      "route.points[0].name": "edbfa5cf",
+      "route.points[14].name": "37b030b1",
+      "route.points[14].date": "4201e370",
+      "route.points[22].name": "410596eb",
+      "route.points[22].date": "61ce9c8e"
+    }
+  },
+  "route/travessia-atlantico-sul-1922/pt": {
+    "date": "2026-11-19",
+    "hash": "a341a8e14784",
+    "fields": {
+      "route.points[0].name": "37b030b1",
+      "route.points[3].name": "d1d6df34",
+      "route.points[5].name": "a188a64f",
+      "route.points[5].date": "decffdbf"
     }
   },
   "static/about/en": {
@@ -1258,8 +2170,8 @@
     }
   },
   "static/about/pt": {
-    "date": "2026-11-07",
-    "hash": "9c1f1f9dcc61",
+    "date": "2026-11-19",
+    "hash": "daf5c162fe6a",
     "fields": {
       "lead": "23d5ecdf",
       "more[0]": "e3b33178",
@@ -1269,7 +2181,7 @@
       "sections[como-ler].paragraphs[0]": "bbeb3add",
       "sections[como-ler].items[0]": "22429d43",
       "sections[como-ler].items[1]": "95461235",
-      "sections[como-ler].items[2]": "1c04a686",
+      "sections[como-ler].items[2]": "6110d784",
       "sections[como-ler].after[0]": "7c307c62",
       "sections[para-quem].heading": "c95e1bbc",
       "sections[para-quem].items[0]": "14850d49",
@@ -1360,8 +2272,8 @@
     }
   },
   "static/legal/pt": {
-    "date": "2026-11-07",
-    "hash": "62fe191633dd",
+    "date": "2026-11-19",
+    "hash": "a41a0145bbb5",
     "fields": {
       "sections[resumo].heading": "814481c3",
       "sections[resumo].items[0]": "a7f06f8b",
@@ -1376,15 +2288,16 @@
       "sections[licencas].items[2]": "0ebdd9b4",
       "sections[licencas].items[3]": "a51d2b5b",
       "sections[privacidade].heading": "c9dcdbfa",
-      "sections[privacidade].paragraphs[0]": "904ce3c9",
+      "sections[privacidade].paragraphs[0]": "33d9b6da",
       "sections[contagem].heading": "d1169625",
-      "sections[contagem].paragraphs[0]": "7a03b6f9",
+      "sections[contagem].paragraphs[0]": "a48931dc",
       "sections[terceiros].heading": "f2cc09bc",
       "sections[terceiros].paragraphs[0]": "6a1df4c8",
       "sections[terceiros].items[0]": "36f96a07",
       "sections[terceiros].items[1]": "c896513f",
       "sections[terceiros].items[2]": "0079ca68",
       "sections[terceiros].items[3]": "5f81ca23",
+      "sections[terceiros].items[4]": "97b5ecaf",
       "sections[terceiros].after[0]": "729feb6c",
       "sections[aviso].heading": "3e1da477",
       "sections[aviso].paragraphs[0]": "512fed74",
@@ -1451,7 +2364,7 @@
     }
   },
   "static/method/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "c9cd29be182e",
     "fields": {
       "lead": "15f3e125",
@@ -1506,7 +2419,7 @@
     }
   },
   "thread/comida-e-vinho/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "c108a62cc602",
     "fields": {
       "slug": "352d8358",
@@ -1533,7 +2446,7 @@
     }
   },
   "thread/engenho/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "da28d7ff3c03",
     "fields": {
       "slug": "b68ad2ec",
@@ -1560,7 +2473,7 @@
     }
   },
   "thread/gente-como-nos/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "0283eeae86ef",
     "fields": {
       "slug": "d638bc21",
@@ -1587,7 +2500,7 @@
     }
   },
   "thread/mar/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "f3e6ab42cec6",
     "fields": {
       "slug": "51609286",
@@ -1614,7 +2527,7 @@
     }
   },
   "thread/natureza/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "9320c3fc002d",
     "fields": {
       "slug": "3a00b019",
@@ -1631,6 +2544,15 @@
       "description": "55d600e2"
     }
   },
+  "thread/palavras-que-zarparam/pt": {
+    "date": "2026-11-19",
+    "hash": "21cd75d0a851",
+    "fields": {
+      "slug": "f4649480",
+      "name": "17ca5628",
+      "description": "1792d008"
+    }
+  },
   "thread/poder-e-revolta/en": {
     "date": "2026-11-07",
     "hash": "92de69281148",
@@ -1641,7 +2563,7 @@
     }
   },
   "thread/poder-e-revolta/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "d2e0c30faa9b",
     "fields": {
       "slug": "2beefd5f",
@@ -1670,14 +2592,16 @@
     }
   },
   "ui/a11y/pt": {
-    "date": "2026-11-07",
-    "hash": "0271d1fc3be8",
+    "date": "2026-11-19",
+    "hash": "76a3afb40bbd",
     "fields": {
       "a11y.skip_to_content": "8d82be62",
       "a11y.home": "a70db825",
       "a11y.main_nav": "895f0739",
+      "a11y.tabbar": "82dc97ab",
       "a11y.footer_nav": "9e51a9a1",
-      "a11y.language": "7ae9d418"
+      "a11y.language": "7ae9d418",
+      "a11y.games": "48c695b5"
     }
   },
   "ui/a11y/ru": {
@@ -1737,7 +2661,7 @@
     }
   },
   "ui/card/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "b95c09bbfaa1",
     "fields": {
       "card.breadcrumb": "acd2bcae",
@@ -1845,8 +2769,8 @@
     }
   },
   "ui/epoch/pt": {
-    "date": "2026-11-07",
-    "hash": "959aa0bca18d",
+    "date": "2026-11-19",
+    "hash": "a3e828da98f9",
     "fields": {
       "epoch.chips_label": "159b2a8b",
       "epoch.timeline_label": "61e8a689",
@@ -1860,7 +2784,7 @@
       "epoch.then_now_estimate": "20c308d7",
       "epoch.then_now_calc": "5cff310f",
       "epoch.then_now_note_estimate": "c0adbf6f",
-      "epoch.then_now_note_calc": "7dd7cde4",
+      "epoch.then_now_note_calc": "ff678cb7",
       "epoch.then_now_sources": "ebddcc6f",
       "epoch.filter_all": "bd02b9a7",
       "epoch.view_label": "af738ae4",
@@ -1920,7 +2844,7 @@
     }
   },
   "ui/family/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "6578a7ff92a1",
     "fields": {
       "family.button": "e1e5e3f4",
@@ -1973,7 +2897,7 @@
     }
   },
   "ui/feed/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "f122db0eeba9",
     "fields": {
       "feed.expand_story": "c3d66e0b"
@@ -1995,11 +2919,25 @@
     }
   },
   "ui/festa/pt": {
-    "date": "2026-11-07",
-    "hash": "908dcb18f750",
+    "date": "2026-11-19",
+    "hash": "5be1adc5e24d",
     "fields": {
       "festa.history": "c5e57292",
+      "festa.image_ai": "34109f61",
       "festa.traditions": "2a56e8e3"
+    }
+  },
+  "ui/follow/pt": {
+    "date": "2026-11-19",
+    "hash": "86c00ffdc928",
+    "fields": {
+      "follow.title": "f75d7ee5",
+      "follow.text": "3d21096d",
+      "follow.label": "3c16531a",
+      "follow.button": "706afa95",
+      "follow.group": "7b4fa920",
+      "follow.close": "0f2bd88e",
+      "follow.other": "d3dece41"
     }
   },
   "ui/footer/en": {
@@ -2017,17 +2955,18 @@
     }
   },
   "ui/footer/pt": {
-    "date": "2026-11-07",
-    "hash": "e1eacbaa90ac",
+    "date": "2026-11-19",
+    "hash": "fee7e043a99e",
     "fields": {
       "footer.about": "64f99e9e",
       "footer.method": "3bfb8bc8",
+      "footer.glossary": "d91f914c",
       "footer.report": "21025963",
       "footer.share": "c8989d75",
       "footer.legal": "84edf558",
       "footer.licenses": "5fb81908",
       "footer.privacy": "89dea5c6",
-      "footer.myths": "a95a347e"
+      "footer.games": "48c695b5"
     }
   },
   "ui/footer/ru": {
@@ -2040,6 +2979,20 @@
       "footer.legal": "013e672c",
       "footer.licenses": "8b197920",
       "footer.privacy": "499ca82d"
+    }
+  },
+  "ui/games/pt": {
+    "date": "2026-11-19",
+    "hash": "101fba84debd",
+    "fields": {
+      "games.ai_caption": "fb118924",
+      "games.myths_line": "1830a007",
+      "games.order_line": "105fff1e",
+      "games.start": "ce606fe8",
+      "games.continue_myths": "d5fa7f8a",
+      "games.continue_order": "26b6c760",
+      "games.og_title": "f0888b13",
+      "games.og_description": "b3bceb02"
     }
   },
   "ui/gate/en": {
@@ -2055,7 +3008,7 @@
     }
   },
   "ui/gate/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "e406bb76b8f4",
     "fields": {
       "gate.age_12": "ed7918c9",
@@ -2076,6 +3029,20 @@
       "gate.question": "fbc9d401",
       "gate.open": "ea1f4082",
       "gate.back": "6c99e7d8"
+    }
+  },
+  "ui/glossary/pt": {
+    "date": "2026-11-19",
+    "hash": "0c1a79481150",
+    "fields": {
+      "glossary.all": "a1291b13",
+      "glossary.lead": "f417a600",
+      "glossary.stories": "af5cca3d",
+      "glossary.festa": "fbbd4424",
+      "glossary.festa_link": "c5659bd1",
+      "glossary.pt_label": "f3023099",
+      "glossary.count": "e03360be",
+      "glossary.nav": "6eec5b7a"
     }
   },
   "ui/home/en": {
@@ -2103,8 +3070,8 @@
     }
   },
   "ui/home/pt": {
-    "date": "2026-11-07",
-    "hash": "5808224e0ac7",
+    "date": "2026-11-19",
+    "hash": "b022cb2c5963",
     "fields": {
       "home.epochs_heading": "758fb779",
       "home.hook_title": "3c5bf4a0",
@@ -2120,10 +3087,12 @@
       "home.timeline_next": "0bb406d6",
       "home.threads_heading": "131755fe",
       "home.threads_intro": "a1e64c71",
-      "home.how": "9baf2807",
+      "home.how": "1a0c0c9f",
       "home.myths_title": "961b569c",
-      "home.myths_line": "2d1875a9",
-      "home.myths_play": "d823cfcb"
+      "home.myths_line": "84bb42f4",
+      "home.myths_play": "d823cfcb",
+      "home.myths_continue": "42c8f7eb",
+      "home.myths_again": "bd43a8a6"
     }
   },
   "ui/home/ru": {
@@ -2196,8 +3165,8 @@
     }
   },
   "ui/map/pt": {
-    "date": "2026-11-07",
-    "hash": "91c2e7f75f65",
+    "date": "2026-11-19",
+    "hash": "ba1c2c815b9d",
     "fields": {
       "map.home": "a162074f",
       "map.map_label": "5a315b46",
@@ -2242,8 +3211,31 @@
       "map.legend_cluster": "654cb3d0",
       "map.legend_place": "5ce64e26",
       "map.legend_here": "a09253db",
+      "map.legend_color": "664fc80e",
       "map.timeline_label": "f7a17def",
-      "map.tools_label": "2cac16c6"
+      "map.tools_label": "2cac16c6",
+      "map.tt_button": "3321a19b",
+      "map.tt_exit": "63805588",
+      "map.tt_play": "63e2bbaf",
+      "map.tt_pause": "cd25ee5b",
+      "map.tt_prev": "35a5d592",
+      "map.tt_next": "7c8a62f6",
+      "map.tt_read": "e4b5c43d",
+      "map.tt_count": "7452f2da",
+      "map.tt_scale_label": "ca3f82e2",
+      "map.tt_card_label": "3321a19b",
+      "map.tt_hint_title": "b036d8e9",
+      "map.tt_hint_text": "47ebf5ab",
+      "map.tt_places_label": "2038dcce",
+      "map.tt_final_place_one": "02c26184",
+      "map.tt_final_place_other": "b1bccaba",
+      "map.tt_final_view_one": "aa435a36",
+      "map.tt_final_view_other": "25f17f4d",
+      "map.tt_span": "c5984395",
+      "map.tt_again": "87944681",
+      "map.tt_unread_title": "3ffeaaaa",
+      "map.tt_unread": "c8d17071",
+      "map.tt_back": "2612bb24"
     }
   },
   "ui/map/ru": {
@@ -2319,7 +3311,7 @@
     }
   },
   "ui/mascot/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "29f3d4b278c5",
     "fields": {
       "mascot.walk": "a629585f",
@@ -2392,11 +3384,11 @@
     }
   },
   "ui/myths/pt": {
-    "date": "2026-11-07",
-    "hash": "db0402e27544",
+    "date": "2026-11-19",
+    "hash": "a58056cebccb",
     "fields": {
       "myths.lead": "7577aa7b",
-      "myths.og_title_page": "13eef565",
+      "myths.og_title_page": "a7da13e0",
       "myths.og_title": "2875fc96",
       "myths.og_description": "7c62df8a",
       "myths.share_text": "c69f4791",
@@ -2428,10 +3420,13 @@
       "myths.misses": "72d1944d",
       "myths.again": "bd43a8a6",
       "myths.read": "c0276313",
-      "myths.share_title": "36fed4ef",
-      "myths.share_ask": "5443db00",
       "myths.copied": "d8dd878f",
-      "myths.best": "1dfeac67"
+      "myths.best": "f6a6f0dc",
+      "myths.restart": "6ee18c96",
+      "myths.og_description_page": "94b36bc6",
+      "myths.rank_og_title": "b4f2032c",
+      "myths.result_text": "36e569aa",
+      "myths.rank_og_description": "6a7edd1a"
     }
   },
   "ui/nav/en": {
@@ -2445,12 +3440,13 @@
     }
   },
   "ui/nav/pt": {
-    "date": "2026-11-07",
-    "hash": "6a2a6f229e46",
+    "date": "2026-11-19",
+    "hash": "cac04ff9958d",
     "fields": {
       "nav.home": "325dfc37",
       "nav.epochs": "758fb779",
       "nav.map": "d2f671e0",
+      "nav.games": "48c695b5",
       "nav.surprise": "43fb6d2d"
     }
   },
@@ -2474,7 +3470,7 @@
     }
   },
   "ui/notfound/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "850995e7399f",
     "fields": {
       "notfound.title": "e4d2fc0c",
@@ -2489,6 +3485,46 @@
       "notfound.title": "54411d8a",
       "notfound.page_title": "af9d3306",
       "notfound.home": "ad94907f"
+    }
+  },
+  "ui/order/pt": {
+    "date": "2026-11-19",
+    "hash": "df44bb0c4f36",
+    "fields": {
+      "order.lead": "653eec17",
+      "order.og_title_page": "2c80bd2e",
+      "order.og_description": "3845f98e",
+      "order.question": "35b5e9c0",
+      "order.progress_label": "7a0da766",
+      "order.step": "727dbe15",
+      "order.sq_label": "f5d6edd7",
+      "order.sq_empty": "4d70d853",
+      "order.sq_hit": "660a83c2",
+      "order.sq_miss": "7bc3d1ed",
+      "order.first": "cbe0220b",
+      "order.between_one": "a1db1995",
+      "order.between_other": "fec41e21",
+      "order.between_about_one": "22b61a3f",
+      "order.between_about_other": "ed899ac2",
+      "order.next": "ae53628a",
+      "order.finish": "a71bc39f",
+      "order.band_top": "e6b46eef",
+      "order.band_high": "3bf5fe48",
+      "order.band_mid": "f6507c46",
+      "order.band_low": "d97a8d71",
+      "order.misses": "72d1944d",
+      "order.again": "02b1db65",
+      "order.read_all": "c0276313",
+      "order.copied": "d8dd878f",
+      "order.nojs": "0fa88f5d",
+      "order.nojs_link": "bd5e545d",
+      "order.empty": "3be46ec8",
+      "order.rank_og_title": "b4f2032c",
+      "order.yours": "c047336f",
+      "order.verdict_hit": "e9fdff1c",
+      "order.verdict_miss": "939d736d",
+      "order.result_text": "7dce17c5",
+      "order.rank_og_description": "ec4bc394"
     }
   },
   "ui/pages/en": {
@@ -2514,8 +3550,8 @@
     }
   },
   "ui/pages/pt": {
-    "date": "2026-11-07",
-    "hash": "8930970f0934",
+    "date": "2026-11-19",
+    "hash": "1d058f8d85e1",
     "fields": {
       "pages.about.title": "64f99e9e",
       "pages.about.description": "1de38d20",
@@ -2532,7 +3568,15 @@
       "pages.surprise.title": "43fb6d2d",
       "pages.surprise.description": "b2597a37",
       "pages.myths.title": "a95a347e",
-      "pages.myths.description": "1baf35f5"
+      "pages.myths.description": "1d79d356",
+      "pages.order.title": "35b5e9c0",
+      "pages.order.description": "cad8d8b5",
+      "pages.games.title": "48c695b5",
+      "pages.games.description": "2bda8816",
+      "pages.search.title": "589b48ed",
+      "pages.search.description": "2e02a625",
+      "pages.glossary.title": "d91f914c",
+      "pages.glossary.description": "457b7739"
     }
   },
   "ui/pages/ru": {
@@ -2574,7 +3618,7 @@
     }
   },
   "ui/panno/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "a7fbd56dad8a",
     "fields": {
       "panno.hint": "0fb99f47",
@@ -2620,7 +3664,7 @@
     }
   },
   "ui/plural/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "8e9688dbc03e",
     "fields": {
       "plural.stories_one": "7504b5ba",
@@ -2689,7 +3733,7 @@
     }
   },
   "ui/report/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "37fb982d55f5",
     "fields": {
       "report.lead": "cb4abaf5",
@@ -2738,6 +3782,45 @@
       "report.too_short": "a504f1f7"
     }
   },
+  "ui/route/pt": {
+    "date": "2026-11-19",
+    "hash": "6cbe511fc90c",
+    "fields": {
+      "route.caption": "a1b81d0f",
+      "route.points": "ddd88ba0",
+      "route.approx": "5bc4c1ba"
+    }
+  },
+  "ui/search/pt": {
+    "date": "2026-11-19",
+    "hash": "cd6f6b82a6ad",
+    "fields": {
+      "search.open": "b893109d",
+      "search.label": "be80e5ad",
+      "search.placeholder": "ecae3cdb",
+      "search.close": "c7b1eea3",
+      "search.dialog": "589b48ed",
+      "search.hint": "7acbb620",
+      "search.loading": "c894a0a2",
+      "search.results_one": "b91130d6",
+      "search.results_other": "f0251f4f",
+      "search.empty": "b4fc7d7d",
+      "search.empty_list": "00ab104a",
+      "search.map_one": "e1e6faae",
+      "search.map_other": "8cfec300",
+      "search.error": "33d11d59",
+      "search.nojs": "cc89dc6a",
+      "search.nojs_link": "e056d3bd"
+    }
+  },
+  "ui/seo/pt": {
+    "date": "2026-11-19",
+    "hash": "7fae8eea44e3",
+    "fields": {
+      "seo.story_visit": "91d6f25b",
+      "seo.epoch_title": "4caf9ebd"
+    }
+  },
   "ui/share/en": {
     "date": "2026-11-07",
     "hash": "afa4c8f4e937",
@@ -2759,7 +3842,7 @@
     }
   },
   "ui/share/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "c168e14424b0",
     "fields": {
       "share.lead": "62734d15",
@@ -2793,12 +3876,14 @@
     }
   },
   "ui/site/pt": {
-    "date": "2026-11-07",
-    "hash": "ecbb9864c841",
+    "date": "2026-11-19",
+    "hash": "0a43d9cee9e0",
     "fields": {
       "site.name": "875e6fd9",
       "site.tagline": "8a5851c2",
       "site.description": "7aa9da1c",
+      "site.home_seo_title": "31ab70e8",
+      "site.home_seo_description": "fe7ad02b",
       "site.home_preview_title": "62b0d860",
       "site.home_preview_description": "beb25b87",
       "site.preview_alt_home": "3a2d8ef2",
@@ -2826,7 +3911,7 @@
     }
   },
   "ui/stub/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "16e8d1753acc",
     "fields": {
       "stub.notice": "87949bdd"
@@ -2850,7 +3935,7 @@
     }
   },
   "ui/surprise/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "a24ee39d4a3a",
     "fields": {
       "surprise.picking": "d4e6f895",
@@ -2869,6 +3954,17 @@
       "surprise.all_read": "48838dde"
     }
   },
+  "ui/tabbar/pt": {
+    "date": "2026-11-19",
+    "hash": "cb3533ed23f8",
+    "fields": {
+      "tabbar.home": "325dfc37",
+      "tabbar.epochs": "758fb779",
+      "tabbar.map": "d2f671e0",
+      "tabbar.games": "48c695b5",
+      "tabbar.surprise": "624324b9"
+    }
+  },
   "ui/theme/en": {
     "date": "2026-11-07",
     "hash": "30cea1c36ce2",
@@ -2882,7 +3978,7 @@
     }
   },
   "ui/theme/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "c788f3e57c0a",
     "fields": {
       "theme.label": "d5df3708",
@@ -2913,7 +4009,7 @@
     }
   },
   "ui/thread/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "e5f5d06466ab",
     "fields": {
       "thread.eras_label": "491d1154"
@@ -2962,7 +4058,7 @@
     }
   },
   "ui/ui/pt": {
-    "date": "2026-11-07",
+    "date": "2026-11-19",
     "hash": "8a2420e5f632",
     "fields": {
       "ui.read_more": "d723dc4e",
@@ -3060,20 +4156,14 @@
     }
   },
   "ui/viz/pt": {
-    "date": "2026-11-07",
-    "hash": "71e99a5d6269",
+    "date": "2026-11-19",
+    "hash": "bfd8931d172e",
     "fields": {
       "viz.army_title": "b7c4b106",
       "viz.ship_title": "80169446",
       "viz.test_numbers": "0f40c8dc",
-      "viz.army_play": "c4c6dbbf",
-      "viz.army_playing": "45b11446",
-      "viz.army_ratio": "62e10ab1",
-      "viz.people_range": "35fe7797",
-      "viz.dots_title": "efee997e",
-      "viz.table_group": "399b037d",
-      "viz.table_estimate": "a2704707",
-      "viz.table_note": "ecef8a87",
+      "viz.army_ratio_one": "4b36bcfa",
+      "viz.army_ratio_other": "37c58b29",
       "viz.table_length": "ad6e0e2d",
       "viz.table_height": "f57125dd",
       "viz.table_item": "2fe3e895",
@@ -3084,12 +4174,8 @@
       "viz.ship_size": "a862df3a",
       "viz.ship_size_height": "091667f8",
       "viz.ship_ratio": "97f8e6cf",
-      "viz.legend_low": "1059b44e",
-      "viz.legend_range": "946384ef",
-      "viz.people_exact_one": "f89fe816",
-      "viz.people_exact_other": "df99fc1d",
-      "viz.army_scale_one": "783b1b58",
-      "viz.army_scale_other": "42f519c7"
+      "viz.army_scale_one": "951c3d9d",
+      "viz.army_scale_other": "73f86a14"
     }
   },
   "ui/viz/ru": {

@@ -242,18 +242,18 @@ published: '2026-10-21'
 updated: '2026-11-06'
 placeholder: false
 ru_ready: true
+seo:
+  title:
+    pt: "Batalha de Aljubarrota, 1385 · Centro de Interpretação"
+    en: "The Battle of Aljubarrota, 1385 · Interpretation Center"
+    ru: "Битва при Алжубарроте, 1385"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: 'f979584f91ca'
+    date: '2026-11-19'
+    hash: '212f7e8a00db'
   en:
     date: '2026-11-07'
     hash: 'aebf0673d71d'
   ru:
     date: '2026-10-28'
     hash: '0415b6d3608b'
-seo:
-  title:
-    pt: "Batalha de Aljubarrota, 1385 · Centro de Interpretação"
-    en: "The Battle of Aljubarrota, 1385 · Interpretation Center"
-    ru: "Битва при Алжубарроте, 1385"

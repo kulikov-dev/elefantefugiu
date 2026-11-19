@@ -163,18 +163,18 @@ meanwhile:
       en: "The Forbidden City in Beijing is completed."
       ru: "В Пекине завершено строительство Запретного города."
     source: "https://en.wikipedia.org/wiki/Forbidden_City"
+seo:
+  title:
+    pt: "Tripeiros: a lenda do apelido dos portuenses, Porto"
+    en: "Tripeiros: the legend behind Porto’s nickname"
+    ru: "Любители потрохов: легенда о прозвище жителей Порту"
 lang_review:
   pt:
-    date: '2026-11-07'
-    hash: 'a82b1555f68d'
+    date: '2026-11-19'
+    hash: '02d2706cb728'
   en:
     date: '2026-11-07'
     hash: '8ca11dee3370'
   ru:
     date: '2026-10-28'
     hash: 'e1debfae06dd'
-seo:
-  title:
-    pt: "Tripeiros: a lenda do apelido dos portuenses, Porto"
-    en: "Tripeiros: the legend behind Porto’s nickname"
-    ru: "Любители потрохов: легенда о прозвище жителей Порту"

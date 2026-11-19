@@ -155,16 +155,6 @@ status: ready
 published: '2026-10-30'
 placeholder: false
 ru_ready: true
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: '4379aa883046'
-  en:
-    date: '2026-11-07'
-    hash: '20b670173fbf'
-  ru:
-    date: '2026-10-31'
-    hash: '79dfa6f6b430'
 myth:
   id: diana
   verdict: myth
@@ -176,3 +166,13 @@ myth:
     pt: O nome foi inventado no século XVII por um padre português, e a arqueologia não o confirma. O templo foi provavelmente dedicado ao imperador Augusto.
     en: A Portuguese priest came up with the name in the 17th century, and archaeology doesn’t support it. The temple was most likely dedicated to Emperor Augustus.
     ru: Имя в XVII веке придумал португальский священник, археология его не подтверждает. Храм, скорее всего, посвящён императору Августу.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '4379aa883046'
+  en:
+    date: '2026-11-07'
+    hash: '20b670173fbf'
+  ru:
+    date: '2026-10-31'
+    hash: '79dfa6f6b430'

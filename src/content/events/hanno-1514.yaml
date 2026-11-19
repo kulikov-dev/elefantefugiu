@@ -195,16 +195,6 @@ meanwhile:
     text:
       en: "Cardinal Wolsey begins building Hampton Court Palace."
     source: "https://en.wikipedia.org/wiki/Hampton_Court_Palace"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: 'bf5cfa81a278'
-  en:
-    date: '2026-11-07'
-    hash: '20a9b29c9338'
-  ru:
-    date: '2026-10-27'
-    hash: 'bcce831a7ec2'
 seo:
   title:
     pt: "O elefante Hanno e o papa Leão X: Roma, 1514"
@@ -247,3 +237,13 @@ route:
       year: 1514
       date: { pt: "março de 1514", en: "March 1514", ru: "март 1514" }
       mode: land
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: '084638b5eb11'
+  en:
+    date: '2026-11-07'
+    hash: '20a9b29c9338'
+  ru:
+    date: '2026-10-27'
+    hash: 'bcce831a7ec2'

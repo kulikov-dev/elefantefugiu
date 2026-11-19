@@ -149,16 +149,6 @@ meanwhile:
     text:
       pt: "Santos-Dumont voa em Paris com o 14-bis, num voo oficial."
     source: "https://pt.wikipedia.org/wiki/14-bis"
-lang_review:
-  pt:
-    date: '2026-11-07'
-    hash: 'cf87aa59abca'
-  en:
-    date: '2026-11-07'
-    hash: '9e615e5fc3ea'
-  ru:
-    date: '2026-10-31'
-    hash: 'ea56294a173b'
 myth:
   id: lello
   verdict: myth
@@ -170,3 +160,13 @@ myth:
     pt: A própria Rowling escreveu em 2020 que nunca lá esteve. A lenda nasceu de ela ter vivido no Porto no início dos anos 90.
     en: Rowling herself wrote in 2020 that she had never been there. The legend grew out of her living in Porto in the early 1990s.
     ru: Сама Роулинг написала в 2020 году, что никогда там не бывала. Легенда выросла из того, что в начале 1990-х она жила в Порту.
+lang_review:
+  pt:
+    date: '2026-11-19'
+    hash: 'b53cb8947630'
+  en:
+    date: '2026-11-07'
+    hash: '9e615e5fc3ea'
+  ru:
+    date: '2026-10-31'
+    hash: 'ea56294a173b'
