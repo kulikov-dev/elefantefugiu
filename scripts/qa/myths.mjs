@@ -96,7 +96,7 @@ if (want('page')) {
     await page.close();
     const about = await browser.newPage();
     await about.goto(`${base}/${lang}/${ABOUT[lang]}/`, { waitUntil: 'networkidle0' });
-    const last = await about.evaluate(() => [...document.querySelectorAll('.static a')].map((a) => a.getAttribute('href')));
+    const last = await about.evaluate(() => [...document.querySelectorAll('.static .static__section a')].map((a) => a.getAttribute('href')));
     ok(`${lang}: About has the line with a link to the page, at its end`, last.at(-1) === `/${lang}/${SEG[lang]}/`, last.at(-1));
     await about.close();
   }

@@ -7,7 +7,7 @@
 import { readFileSync } from 'node:fs';
 import { launchBrowser } from './browser.mjs';
 import { pick, SAMPLE, SEED } from './sample.mjs';
-import { epochs, en as enPath, fixture, isOnMainland, need, pt, real, threads as threadsData } from './data.mjs';
+import { epochs, en as enPath, fixture, isOnMainland, need, pt, real, threads as allThreads } from './data.mjs';
 // The text of the skip link comes from the interface strings, so a rewording does not break the check.
 const SKIP_LABEL = JSON.parse(readFileSync(new URL('../../src/i18n/pt.json', import.meta.url), 'utf8')).map.skip_to_markers;
 
@@ -15,10 +15,12 @@ const VARIANT = process.argv[2] === 'variant';
 const base = VARIANT ? process.env.VARIANT_URL || 'http://localhost:4401' : process.env.BASE_URL || 'http://localhost:4400';
 const world = VARIANT ? fixture : real;
 const MAP = { pt: `${base}/pt/mapa/`, en: `${base}/en/map/` };
-const THREADS = threadsData.map((t) => t.id);
 const EPOCHS = world.readyEpochs.map((m) => m.id);
 // Cards the family mode (FAMILY=all|12, default off) leaves on the map: counted from the data with the rules written out here.
 const cards = world.published;
+// Threads that have a filter button: at least one published card (a thread whose stories are all queued has none).
+const threadsData = allThreads.filter((t) => cards.some((c) => (c.threads ?? []).includes(t.id)));
+const THREADS = threadsData.map((t) => t.id);
 const MODE = process.env.FAMILY || 'off';
 const shown = cards.filter((e) => MODE === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (MODE === '12' && String(e.min_age) === '12'))));
 const TOTAL = shown.length;
@@ -533,12 +535,14 @@ if (want('link')) {
       await p.click('.leaflet-control-zoom-in');
       await wait(650);
     }
-    // pick a single frame marker that is on the screen and not covered; markers that overlap are one cluster: open it (it zooms to its members) until one stands alone
-    for (let i = 0; i < 8 && !(await p.$('.mk--frame')); i += 1) {
+    // pick a single marker that is on the screen and not covered (a frame one when there is one; where the frame cards stand depends on which stories are published);
+    // markers that overlap are one cluster: open it (it zooms to its members) until one stands alone
+    const SINGLE = '.mk--frame, .mk:not(.mk--cluster)';
+    for (let i = 0; i < 8 && !(await p.$(SINGLE)); i += 1) {
       await p.click((await p.$('.mk--cluster')) ? '.mk--cluster' : '.leaflet-control-zoom-in');
       await wait(900);
     }
-    const key = await p.evaluate(() => document.querySelector('.mk--frame')?.dataset.key);
+    const key = await p.evaluate((sel) => (document.querySelector('.mk--frame') ?? document.querySelector(sel))?.dataset.key, SINGLE);
     await p.click(`.mk[data-key="${key}"]`);
     await wait(500);
     const before = await centred(p);
