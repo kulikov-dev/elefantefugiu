@@ -238,7 +238,7 @@ if (want('share')) {
       return h;
     };
     ok(`share (${lang}): the link in the footer leads to the page of the language`, (await hrefs(PAGES.report[lang], '.site-footer a')).includes(PAGES.share[lang]));
-    ok(`share (${lang}): the last words of About the project but one lead there (the last line leads to Myth or fact)`, (await hrefs(PAGES.about[lang], 'article section:last-of-type .prose p:nth-last-child(2) a')).includes(PAGES.share[lang]));
+    ok(`share (${lang}): the last words of About the project but one lead there (the last line leads to Myth or fact)`, (await hrefs(PAGES.about[lang], 'article section.static__section:has(+ [data-follow]) .prose p:nth-last-child(2) a')).includes(PAGES.share[lang]));
     ok(`share (${lang}): "Found a mistake?" has the link under the form`, (await hrefs(PAGES.report[lang], '.report__more a')).includes(PAGES.share[lang]));
   }
 }
