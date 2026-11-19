@@ -46,7 +46,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: João V nunca foi a Roma e aprovou a capela por maqueta.
+  pt: D. João V nunca foi a Roma; aprovou a capela por maqueta.
   en: The king never visited Rome; he approved his chapel from a model.
   ru: Король в Рим не ездил, часовню одобрил по макету.
 story:
