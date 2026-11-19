@@ -1,0 +1,201 @@
+id: diocles-122
+slug:
+  pt: o-desportista-mais-rico-de-roma
+  en: romes-richest-athlete
+  ru: samyj-bogatyj-sportsmen-rima
+title:
+  pt: O desportista mais rico de Roma
+  en: Rome’s Richest Athlete
+  ru: Самый богатый спортсмен Рима
+epoch: lusitania-e-roma
+level: frame
+year: 122
+year_label:
+  pt: século II
+  en: 2nd century
+  ru: II век
+year_scale:
+  pt: séc. II
+  en: 2nd c.
+  ru: II в.
+place:
+  name:
+    pt: Roma, Circo Máximo
+    en: Rome, Circus Maximus
+    ru: Рим, Большой цирк
+  short:
+    pt: Roma
+    en: Rome
+    ru: Рим
+  lat: 41.8861
+  lon: 12.4852
+bridge:
+  name: Hipódromo Romano de Miróbriga
+  title:
+    pt: Hipódromo Romano de Miróbriga
+    en: Roman Hippodrome of Miróbriga
+    ru: Римский ипподром Миробриги
+  address: Santiago do Cacém
+  lat: 38.0024405
+  lon: -8.6837028
+  maps_url: https://www.google.com/maps/place/Ruinas+do+Hip%C3%B3dromo+Romano+de+Mir%C3%B3briga/@38.0024447,-8.6862777,17z/data=!3m1!4b1!4m6!3m5!1s0xd1bc78c90f50acd:0x9bbd93823c43f329!8m2!3d38.0024405!4d-8.6837028!16s%2Fg%2F11fxzrt_0k
+  url: https://www.cm-santiagocacem.pt/
+  note:
+    pt: O único hipódromo romano conhecido em Portugal, do século II.
+    en: The only known Roman hippodrome in Portugal, from the 2nd century.
+    ru: Единственный известный в Португалии римский ипподром, II века.
+threads:
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O desportista mais rico de Roma era um auriga da Lusitânia.
+  en: Rome’s richest athlete was a chariot driver from Lusitania.
+  ru: Самым богатым спортсменом Рима стал возничий из Лузитании.
+story:
+  pt: |-
+    Caio Apuleio Diocles nasceu em 104 na Lusitânia, a província romana onde hoje fica Portugal. Aos 18 anos chegou a Roma e tornou-se auriga nas corridas de carros, o maior espetáculo da cidade.
+
+    As corridas eram organizadas por equipas, cada uma com uma cor. Diocles começou nos Brancos, passou para os Verdes e, nos últimos 15 anos, correu pelos Vermelhos. Ao todo esteve 24 anos na arena e, em 4257 corridas de quadrigas, carros puxados por quatro cavalos, venceu 1462.
+
+    Ganhou com isso quase 36 milhões de sestércios, uma fortuna mesmo para Roma. Sabemo-lo porque em Roma foi erguida uma inscrição com todas as suas vitórias. Aos 42 anos, Diocles deixou a arena e foi viver para Preneste, perto de Roma.
+  en: |-
+    Gaius Appuleius Diocles was born in 104 AD in Lusitania, the Roman province where Portugal is today. At 18 he came to Rome and became a charioteer in the chariot races, the city’s biggest show.
+
+    Races were run by teams, each named after a color. Diocles started with the Whites, moved to the Greens, and spent his last 15 years with the Reds. In all, he raced for 24 years, and out of 4,257 races in quadrigas, chariots pulled by four horses, he won 1,462.
+
+    He earned almost 36 million sesterces, a fortune even by Roman standards. We know this because an inscription listing all his victories was set up in Rome. At 42, Diocles retired and went to live in Praeneste, near Rome.
+  ru: |-
+    Гай Аппулей Диокл родился в 104 году в Лузитании, римской провинции на месте нынешней Португалии. В 18 лет он приехал в Рим и стал возничим в колесничных гонках, главном зрелище города.
+
+    Гонки устраивали команды, и каждая называлась по цвету. Диокл начинал у Белых, потом перешёл к Зелёным, а последние 15 лет выступал за Красных. Всего он выходил на арену 24 года и из 4257 заездов на квадригах, колесницах с четвёркой лошадей, выиграл 1462.
+
+    За это он получил почти 36 миллионов сестерциев, огромные даже для Рима деньги. Мы знаем это потому, что в Риме поставили надпись со всеми его победами. В 42 года Диокл ушёл с арены и уехал жить в Пренесте под Римом.
+meanwhile:
+  - scope: world
+    year: 122
+    text:
+      pt: Começa a construção da Muralha de Adriano, na Britânia.
+      en: Construction begins on Hadrian’s Wall in Britain.
+      ru: В Британии начинают строить Вал Адриана.
+    source: https://en.wikipedia.org/wiki/Hadrian%27s_Wall
+more:
+  pt: |-
+    A inscrição parece uma folha de estatísticas desportivas. Conta quantas vezes Diocles saiu à frente e segurou o primeiro lugar (815) e quantas vezes esperou atrás e ultrapassou todos na última volta. Os aurigas eram estrelas, como hoje os futebolistas, e mudavam de equipa. Nos Verdes, Diocles parece não ter tido sorte: ganhou pouco e passou para os Vermelhos, onde correu mais tempo.
+
+    Na terra natal de Diocles também se gostava de corridas. A cidade romana de Miróbriga, no sul do atual Portugal, tinha o seu hipódromo, o único hipódromo romano conhecido em Portugal. Não se sabe se o próprio Diocles lá correu, mas era assim uma arena onde podiam começar os aurigas da Lusitânia.
+  en: |-
+    The inscription reads like a sports stats sheet. It counts how many times Diocles took the lead from the start and held it (815) and how many times he waited behind and passed everyone on the final lap. Charioteers were stars, like soccer players today, and they switched teams. With the Greens, Diocles seems to have had bad luck: he won little and moved to the Reds, where he raced the longest.
+
+    People in Diocles’ home province loved racing too. The Roman town of Miróbriga, in what is now southern Portugal, had its own hippodrome, the only Roman hippodrome known in Portugal. No one knows if Diocles himself raced there, but this is what an arena where Lusitanian charioteers could start looked like.
+  ru: |-
+    Надпись похожа на спортивную статистику. В ней посчитано, сколько раз Диокл ушёл вперёд со старта и удержал первое место (815 раз), а сколько раз выжидал позади и обходил всех на последнем круге. Возничие тогда были звёздами, как сегодня футболисты, и переходили из команды в команду. У Зелёных Диоклу, похоже, не повезло: побед там было мало, и он ушёл к Красным, где выступал дольше всего.
+
+    На родине Диокла тоже любили гонки. В римском городе Миробрига, на юге нынешней Португалии, был свой ипподром, и это единственный римский ипподром, известный в Португалии. Ездил ли там сам Диокл, неизвестно, но так выглядела арена, на которой могли начинать возничие из Лузитании.
+myth:
+  verdict: fact
+  statement:
+    pt: O auriga mais rico de Roma era natural do atual Portugal
+    en: Rome’s richest charioteer came from what is now Portugal
+    ru: Самый богатый возничий Рима был родом из нынешней Португалии
+  answer:
+    pt: Caio Apuleio Diocles nasceu na Lusitânia, venceu 1462 corridas e ganhou quase 36 milhões de sestércios.
+    en: Gaius Appuleius Diocles was born in Lusitania, won 1,462 races, and earned almost 36 million sesterces.
+    ru: Гай Аппулей Диокл родился в Лузитании, выиграл 1462 заезда и заработал почти 36 миллионов сестерциев
+sources:
+  - title: "Wikipedia: Gaius Appuleius Diocles"
+    url: https://en.wikipedia.org/wiki/Gaius_Appuleius_Diocles
+    type: reference
+    note:
+      ru: надписи CIL VI 10048 и CIL XIV 2884
+    accessed: 2026-11-18
+  - title: "History Hit: Miróbriga"
+    url: https://www.historyhit.com/locations/mirobriga/
+    type: press
+    accessed: 2026-11-18
+  - title: "Infopédia: Miróbriga"
+    url: https://www.infopedia.pt/artigos/$mirobriga
+    type: reference
+    note:
+      ru: ипподром II века, единственный известный на территории Португалии
+    accessed: 2026-11-18
+image:
+  file: diocles-122.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no circo romano, um auriga conduz uma quadriga a galope entre a multidão nas bancadas; ao centro, um obelisco sobre a espinha da pista, e atrás outras quadrigas."
+    en: "Blue-and-white azulejo-style illustration: in a Roman circus, a charioteer drives a four-horse chariot at full gallop past crowded stands; an obelisk rises on the central barrier and other chariots follow behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: в римском цирке возничий мчит квадригу галопом мимо переполненных трибун; на разделительной стене стоит обелиск, позади скачут другие колесницы."
+  caption:
+    pt: Uma corrida de quadrigas no circo de Roma, século II. Ilustração em estilo azulejo, criada por IA.
+    en: A quadriga race in a Roman circus, 2nd century. Azulejo-style illustration, created by AI.
+    ru: Гонка квадриг в римском цирке, II век. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: diocles-122-detalhe.webp
+  alt:
+    pt: "Fotografia de um mosaico romano numa parede: um auriga numa quadriga com a inscrição de um nome, rodeado de molduras geométricas e círculos decorativos."
+    en: "Photograph of a Roman mosaic on a wall: a charioteer in a quadriga beside a name inscription, surrounded by geometric borders and decorative circles."
+    ru: "Фотография римской мозаики на стене: возничий на квадриге рядом с надписью с именем, вокруг геометрические рамки и декоративные круги."
+  caption:
+    pt: Mosaico romano com aurigas vitoriosos. Mérida, Museu Nacional de Arte Romana.
+    en: Roman mosaic of victorious charioteers. Mérida, National Museum of Roman Art.
+    ru: Римская мозаика с победившими возничими. Мерида, Национальный музей римского искусства.
+  author: Mark Landon (Choliamb)
+  license: CC0
+  license_url: https://creativecommons.org/publicdomain/zero/1.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Mosaic_of_victorious_charioteers_(Merida,_MNAR_CE26389).jpg
+route:
+  approx: true
+  points:
+    - name:
+        pt: Lusitânia
+        en: Lusitania
+        ru: Лузитания
+      lat: 38.5
+      lng: -8
+      year: 104
+    - via: true
+      lat: 36.4
+      lng: -6.5
+      mode: sea
+    - via: true
+      lat: 35.95
+      lng: -5.6
+      mode: sea
+    - via: true
+      lat: 36.8
+      lng: 0.5
+      mode: sea
+    - via: true
+      lat: 38.8
+      lng: 6.5
+      mode: sea
+    - via: true
+      lat: 40
+      lng: 11
+      mode: sea
+    - name:
+        pt: Roma
+        en: Rome
+        ru: Рим
+      lat: 41.89
+      lng: 12.49
+      year: 122
+      mode: sea
+    - name:
+        pt: Preneste
+        en: Praeneste
+        ru: Пренесте
+      lat: 41.84
+      lng: 12.9
+      year: 146
+      mode: land
+status: ready
+published: 2026-12-03
+placeholder: false
+ru_ready: true

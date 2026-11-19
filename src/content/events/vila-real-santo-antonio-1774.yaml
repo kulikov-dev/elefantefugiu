@@ -1,0 +1,149 @@
+id: vila-real-santo-antonio-1774
+slug:
+  pt: a-cidade-montada-como-um-jogo-de-construcao
+  en: a-town-assembled-like-a-building-kit
+  ru: gorod-sobrannyj-kak-konstruktor
+title:
+  pt: A cidade montada como um jogo de construção
+  en: A Town Assembled Like a Building Kit
+  ru: Город, собранный как конструктор
+epoch: pombal-e-terramoto
+level: frame
+year: 1774
+place:
+  name:
+    pt: Vila Real de Santo António, Algarve
+    en: Vila Real de Santo António, Algarve
+    ru: Вила-Реал-ди-Санту-Антониу, Алгарве
+  short:
+    pt: Vila Real de Santo António
+    en: Vila Real de Santo António
+    ru: Вила-Реал-ди-Санту-Антониу
+  lat: 37.1946
+  lon: -7.4155
+bridge:
+  name: Praça Marquês de Pombal
+  title:
+    pt: Praça Marquês de Pombal
+    en: Marquis of Pombal Square
+    ru: Площадь маркиза де Помбала
+  address: Praça Marquês de Pombal, Vila Real de Santo António
+  lat: 37.1945648
+  lon: -7.4155092
+  maps_url: https://www.google.com/maps/place/Pra%C3%A7a+Marqu%C3%AAs+de+Pombal/@37.2308443,-7.6455891,9z/data=!4m6!3m5!1s0xd1022f546cc3311:0x921c47131839942d!8m2!3d37.1945648!4d-7.4155092!16s%2Fg%2F121hg6dg
+  url: https://www.cm-vrsa.pt/
+  note:
+    pt: Todas as ruas do centro antigo convergem para a praça com o obelisco de 1776.
+    en: Every street in the old center leads to the square with its 1776 obelisk.
+    ru: Все улицы старого центра сходятся к площади с обелиском 1776 года.
+threads:
+  - engenho
+  - mar
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Para tirar sardinha aos espanhóis, Portugal construiu uma cidade em dois anos.
+  en: To grab Spain’s sardines, Portugal built a whole town in two years.
+  ru: Чтобы забрать сардину у соседей-испанцев, Португалия за два года построила целый город.
+story:
+  pt: |-
+    Em 1755, o tsunami arrasou uma aldeia de pescadores na foz do Guadiana, em frente à espanhola Ayamonte. Nas areias de Monte Gordo ficaram cabanas onde viviam e pescavam pescadores espanhóis e catalães. O pescado passava ao lado do erário português.
+
+    O Marquês de Pombal decidiu acabar com isso e erguer na fronteira uma cidade-fábrica para o peixe. A pedra foi talhada em Lisboa e trazida por mar, e no local só se montava.
+
+    A primeira pedra foi lançada em março de 1774, e em maio de 1776 Vila Real de Santo António já estava inaugurada. As ruas direitas, as casas brancas iguais e a praça com o obelisco repetiam o plano da nova Baixa de Lisboa.
+  en: |-
+    In 1755, a tsunami wiped out a fishing village at the mouth of the Guadiana River, right across from Spain’s Ayamonte. On the sands of Monte Gordo stood huts where Spanish and Catalan fishermen lived and fished. Their catch slipped past the Portuguese treasury.
+
+    The Marquis of Pombal decided to put an end to this and build a fish factory town on the border. Its stones were cut in Lisbon and shipped by sea, so on site they only had to be assembled.
+
+    The first stone was laid in March 1774, and by May 1776 Vila Real de Santo António was open. Its straight streets, identical white houses, and square with an obelisk copied the plan of Lisbon’s new Baixa.
+  ru: |-
+    В 1755 году цунами смыло рыбацкую деревню в устье Гвадианы, напротив испанского Аямонте. На песке у Монте-Гордо остались хижины, где жили и ловили рыбу испанские и каталонские рыбаки. Улов уходил мимо португальской казны.
+
+    Маркиз де Помбал решил это прекратить и поставить на границе город-фабрику для рыбы. Камни для него обтесали в Лиссабоне и привезли морем, а на месте их только собирали.
+
+    Первый камень заложили в марте 1774 года, а в мае 1776-го Вила-Реал-ди-Санту-Антониу уже открыли. Прямые улицы, одинаковые белые дома и площадь с обелиском повторяли план новой Байши в Лиссабоне.
+meanwhile:
+  - scope: world
+    year: 1774
+    text:
+      pt: Joseph Priestley isola o oxigénio.
+      en: Joseph Priestley isolates oxygen.
+      ru: Джозеф Пристли получает кислород.
+    source: https://en.wikipedia.org/wiki/Joseph_Priestley
+more:
+  pt: |-
+    A cidade não foi feita para ser bonita, mas para a pesca. Nela instalou-se a Companhia Geral das Reais Pescarias do Reino do Algarve. A sardinha era aqui salgada e enviada para o norte de Portugal, que até então comprava peixe salgado à Galiza espanhola. Os pescadores catalães resistiam aos novos impostos, e ao longo da costa travava-se uma verdadeira «guerra das pescarias».
+
+    A frente ribeirinha foi feita para se mostrar. Vista da margem espanhola, a fila de casas iguais ao longo do rio parecia a fachada de um único palácio enorme. E o obelisco da praça foi dedicado ao rei D. José I, «restaurador do comércio e da agricultura».
+
+    O plano não resultou logo, mas o peixe sustentou a cidade quase duzentos anos. Aqui abriu uma das primeiras fábricas de conservas de Portugal, a Ramirez. Quando no século XX a sardinha e o atum escassearam, a cidade virou-se para o turismo, e Monte Gordo tornou-se praia de férias.
+  en: |-
+    The town was built not for beauty but for fishing. It housed the Royal Fisheries Company of the Algarve. Sardines were salted here and shipped to northern Portugal, which until then had bought salted fish from Spanish Galicia. Catalan fishermen resisted the new taxes, and a real “fishing war” raged along the coast.
+
+    The riverfront was designed as a showcase. Seen from the Spanish bank, the row of identical houses along the river looked like the facade of one enormous palace. And the obelisk in the square was dedicated to King José I, “restorer of commerce and agriculture.”
+
+    The plan didn’t pay off right away, but fish fed the town for almost two hundred years. One of Portugal’s first canneries, Ramirez, opened here. When sardines and tuna grew scarce in the 20th century, the town turned to tourism, and Monte Gordo became a beach resort.
+  ru: |-
+    Город строили не для красоты, а для улова. В нём разместили Компанию королевских рыбных промыслов Алгарве. Сардину здесь солили и отправляли на север Португалии, который до тех пор покупал солёную рыбу у испанской Галисии. Каталонские рыбаки противились новым налогам, и вдоль берега шла настоящая «рыбная война».
+
+    Набережную сделали витриной. С испанского берега ряд одинаковых домов вдоль реки выглядел как фасад одного огромного дворца. А обелиск на площади посвятили королю Жозе I, «восстановителю торговли и земледелия».
+
+    Расчёт сработал не сразу, но рыба кормила город почти двести лет. Здесь открылась одна из первых консервных фабрик Португалии, «Рамиреш». Когда в XX веке сардины и тунца стало мало, город переключился на туристов, а Монте-Гордо стал курортом.
+myth:
+  verdict: fact
+  statement:
+    pt: Uma cidade inteira em Portugal foi construída em menos de três anos
+    en: An entire town in Portugal was built in less than three years
+    ru: Целый город в Португалии построили меньше чем за три года
+  answer:
+    pt: "Vila Real de Santo António foi iniciada em março de 1774 e inaugurada em maio de 1776: a pedra veio talhada de Lisboa e foi montada no local."
+    en: "Vila Real de Santo António was begun in March 1774 and opened in May 1776: its stones were cut in Lisbon and assembled on site."
+    ru: "Вила-Реал-ди-Санту-Антониу заложили в марте 1774 года и открыли в мае 1776-го: камни обтесали в Лиссабоне и собрали на месте"
+sources:
+  - title: "Horta Correia: Vila Real de Santo António"
+    url: https://run.unl.pt/bitstream/10362/6785/1/RFCSH8_103_112.pdf
+    type: academic
+    note:
+      ru: камни из Лиссабона, «рыбная война», каталонцы в хижинах у Монте-Гордо
+    accessed: 2026-11-18
+  - title: "Postal do Algarve: Paulo Larcher"
+    url: https://postal.pt/edicaopapel/o-algarve-de-costa-a-costa-a-sombra-de-um-homem-projetada-na-sua-obra-por-paulo-larcher
+    type: press
+    note:
+      ru: даты 17.03.1774 и 13.05.1776, фасад-дворец, надпись на обелиске
+    accessed: 2026-11-18
+  - title: "Wikipedia: Vila Real de Santo António"
+    url: https://en.wikipedia.org/wiki/Vila_Real_de_Santo_Ant%C3%B3nio
+    type: reference
+    accessed: 2026-11-18
+  - title: "Portugal Global: conservas"
+    url: https://www.portugalglobal.pt/noticias/2025/novembro/conservas-com-recorde-de-exportacoes-a-vista/
+    type: press
+    note:
+      ru: "Ramirez: первая консервная фабрика страны, Вила-Реал, 1853"
+    accessed: 2026-11-18
+image:
+  file: vila-real-santo-antonio-1774.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa margem de rio, canteiros e trabalhadores montam blocos de pedra numerados com uma grua e erguem um obelisco; ao longo do cais, uma fila de casas iguais; em primeiro plano, pescadores com barcos e cestos e mulheres junto a barris de peixe salgado."
+    en: "Blue-and-white azulejo-style illustration: on a riverbank, workers assemble numbered stone blocks with a crane and raise an obelisk; a row of identical houses runs along the quay; in the foreground, fishermen with boats and baskets and women beside barrels of salted fish."
+    ru: "Иллюстрация в духе сине-белого азулежу: на берегу реки рабочие собирают краном каменные блоки и ставят обелиск; вдоль набережной тянется ряд одинаковых домов; на переднем плане рыбаки с лодками и корзинами и женщины у бочек с солёной рыбой."
+  caption:
+    pt: A montagem de Vila Real de Santo António, 1774–1776. Ilustração em estilo azulejo, criada por IA.
+    en: Assembling Vila Real de Santo António, 1774–1776. Azulejo-style illustration, created by AI.
+    ru: Сборка Вила-Реал-ди-Санту-Антониу, 1774–1776. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+related:
+  - gaiola-pombalina-1758
+  - terramoto-1755
+status: ready
+published: 2026-12-06
+placeholder: false
+ru_ready: true

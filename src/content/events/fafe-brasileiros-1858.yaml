@@ -1,0 +1,209 @@
+id: fafe-brasileiros-1858
+slug:
+  pt: a-vila-que-os-brasileiros-construiram
+  en: the-town-the-brazilians-built
+  ru: gorod-kotoryj-postroili-brazilcy
+title:
+  pt: A vila que os «brasileiros» construíram
+  en: The Town the “Brazilians” Built
+  ru: Город, который построили «бразильцы»
+epoch: monarquia-e-republica
+level: frame
+year: 1858
+place:
+  name:
+    pt: Fafe
+    en: Fafe
+    ru: Фафе
+  short:
+    pt: Fafe
+    en: Fafe
+    ru: Фафе
+  lat: 41.45
+  lon: -8.17
+bridge:
+  name: Teatro-Cinema de Fafe
+  title:
+    pt: Teatro-Cinema de Fafe
+    en: Fafe Theater-Cinema
+    ru: Театр-кино Фафе
+  address: Travessa da Irlanda, Fafe
+  lat: 41.4499213
+  lon: -8.1708546
+  maps_url: https://www.google.com/maps/place/Fafe+Theater+Film/@41.4499253,-8.1734295,17z/data=!3m1!4b1!4m6!3m5!1s0xd24e85df294179d:0xf10314bd5300f1a!8m2!3d41.4499213!4d-8.1708546!16s%2Fg%2F121cb1xz
+  url: https://www.cm-fafe.pt/
+  note:
+    pt: Teatro de 1924, dos anos em que Fafe se construía com o dinheiro de quem regressava do Brasil.
+    en: A theater from 1924, from the years when Fafe was built on the money of those returning from Brazil.
+    ru: Театр 1924 года, из тех лет, когда Фафе строился на деньги вернувшихся из Бразилии.
+threads:
+  - gente-como-nos
+  - mar
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O dinheiro do Brasil pagou hospital, escolas e fábricas de uma vila.
+  en: In a northern town, Brazil’s money built a hospital, schools, and factories.
+  ru: В маленьком городе больницу, школы и фабрики построили на деньги из Бразилии.
+story:
+  pt: |-
+    No século XIX, no norte de Portugal, as famílias eram grandes e a terra dava pouco. Um só pedaço de terra não chegava para todos. Por isso, rapazes de uns doze anos eram mandados para o outro lado do oceano, para o Brasil, para casa de parentes ou conterrâneos. Começavam como caixeiros nas lojas do Rio de Janeiro.
+
+    A maioria nunca enriqueceu. Mas alguns voltavam dez ou vinte anos depois com dinheiro, e em casa chamavam-lhes simplesmente «brasileiros». Só da vila de Fafe partiram em cem anos quase nove mil pessoas.
+
+    Os que voltavam construíam palacetes para si, mas investiam também na terra natal. Nos anos 1860 abriu em Fafe um hospital, depois escolas e fábricas. A vila foi mudando: em 1907 chegou o comboio, e nos anos 1910 acendeu-se a eletricidade.
+  en: |-
+    In 19th-century northern Portugal, families were big and the land gave little. One plot couldn’t feed them all. So boys of about twelve were sent across the ocean to Brazil, to relatives or people from their hometown. They started out as shop boys in Rio de Janeiro.
+
+    Most never got rich. But some came back ten or twenty years later with money, and at home they were simply called “Brazilians.” From the small town of Fafe alone, almost nine thousand people left over a hundred years.
+
+    Those who returned built mansions for themselves, but they also invested in their hometown. In the 1860s Fafe got a hospital, then schools and factories. The town kept changing: in 1907 the railroad arrived, and in the 1910s the electric lights came on.
+  ru: |-
+    В XIX веке на севере Португалии семьи были большие, а земля кормила плохо. Прокормить всех один надел не мог. Поэтому мальчиков лет двенадцати отправляли за океан, в Бразилию, к родственникам или землякам. Они начинали подручными в лавках Рио-де-Жанейро.
+
+    Большинство так и не разбогатело. Но некоторые через десять-двадцать лет возвращались с деньгами, и дома их звали просто «бразильцами». Из одного только городка Фафе за сто лет уехало почти девять тысяч человек.
+
+    Вернувшиеся строили себе особняки, но вкладывали деньги и в родной город. В 1860-х в Фафе открылась больница, потом школы и фабрики. Город менялся и дальше: в 1907 году пришёл поезд, а в 1910-х зажглось электричество.
+meanwhile:
+  - scope: world
+    year: 1858
+    text:
+      pt: Passa a primeira mensagem pelo cabo telegráfico transatlântico.
+      en: The first message crosses the Atlantic by telegraph cable.
+      ru: По телеграфному кабелю через Атлантику передают первое сообщение.
+    source: https://en.wikipedia.org/wiki/Transatlantic_telegraph_cable
+more:
+  pt: |-
+    De Fafe partiam famílias inteiras, de todas as camadas, até a fidalguia local. Os parentes chamavam os parentes, e do outro lado do oceano cada um tinha a sua rede de conterrâneos. Por isso, ao enriquecer, muitos pensavam não só em si, mas na terra que os tinha mandado.
+
+    O dinheiro dos «brasileiros» ainda se vê em Fafe. Os palacetes eram feitos em grande: móveis de madeira brasileira, piano obrigatório, livros em francês, plantas tropicais nos jardins. E para a vila construíam o que lhe faltava: escolas para crianças pobres, um asilo, o hospital, as primeiras fábricas de tecidos, onde trabalhavam já os que nunca partiram.
+
+    Em 2001 abriu em Fafe o Museu das Migrações e das Comunidades, e é precisamente esta a história que ele conta.
+  en: |-
+    Whole families left Fafe, from every walk of life, even the local gentry. Relatives sent for relatives, and across the ocean everyone had a network of people from home. So when they grew rich, many thought not only about themselves but about the town that had sent them.
+
+    The “Brazilians’” money is still visible in Fafe. Their mansions were built on a grand scale: furniture of Brazilian wood, a piano without fail, French books, tropical plants in the gardens. And for the town they built what it lacked: schools for poor children, an orphanage, the hospital, the first textile mills, where those who never left found work.
+
+    In 2001, Fafe opened its Museum of Migrations and Communities, and it tells exactly this story.
+  ru: |-
+    Уезжали из Фафе семьями и из всех слоёв, даже местная знать. Родственники звали родственников, и за океаном у каждого была своя цепочка земляков. Поэтому, разбогатев, многие думали не только о себе, но и о том городе, который их отправил.
+
+    Деньги «бразильцев» видны в Фафе до сих пор. Особняки строили с размахом: мебель из бразильского дерева, обязательное пианино, французские книги, в садах тропические растения. А для города они строили то, чего ему не хватало: школы для бедных детей, приют, больницу, первые ткацкие фабрики, на которых работали уже те, кто никуда не уехал.
+
+    В 2001 году в Фафе открыли Музей эмиграции и общин, и рассказывает он как раз эту историю.
+myth:
+  verdict: fact
+  statement:
+    pt: Em Fafe, chamava-se «brasileiros» aos portugueses
+    en: In Fafe, “Brazilians” meant Portuguese people
+    ru: «Бразильцами» в Фафе звали португальцев
+  answer:
+    pt: Era o nome dado aos conterrâneos que regressavam do Brasil com dinheiro. Com esse dinheiro construíram-se em Fafe o hospital, escolas e fábricas.
+    en: That was the name for townspeople who came back from Brazil with money. That money built Fafe’s hospital, schools, and factories.
+    ru: Так звали земляков, вернувшихся из Бразилии с деньгами. На эти деньги в Фафе строили больницу, школы и фабрики.
+sources:
+  - title: "Museu das Migrações e das Comunidades: The Memory"
+    url: https://museu-emigrantes.org/the-memory/
+    type: official
+    note:
+      ru: "уехали детьми; больница, школы, фабрика, поезд 1907 (страницу не открывал: просрочен сертификат; даты больницы и света расходятся с другими источниками)"
+    accessed: 2026-11-18
+  - title: "Museu das Migrações: Emigration to Brazil"
+    url: https://museu-emigrantes.org/?p=58
+    type: official
+    note:
+      ru: 8722 человека из Фафе, 1834–1926
+    accessed: 2026-11-18
+  - title: "Miguel Monteiro: Fafe dos «Brasileiros» (1860–1930)"
+    url: https://www.museu-emigrantes.org/wp-content/uploads/2022/03/Fafe-dos-brasileiros.pdf
+    type: academic
+    note:
+      ru: уезжали семьями и из всех слоёв, пианино, французские книги
+    accessed: 2026-11-18
+  - title: "Jorge Fernandes Alves: A emigração nortenha para o Brasil"
+    url: https://repositorio-aberto.up.pt/bitstream/10216/50317/2/ATALHOS%20BATIDOS%20-%20A%20EMIGRACAO%20NORTENHA%20PARA%20O%20BRASIL.pdf
+    type: academic
+    note:
+      ru: многодетные семьи, кризис в сельском хозяйстве, мальчики в лавках Рио с 12–13 лет, возвращение через 10–20 лет
+    accessed: 2026-11-18
+  - title: "José Carlos Meneses Rodrigues: O património edificado dos brasileiros em Fafe"
+    url: https://ler.letras.up.pt/uploads/ficheiros/18858.pdf
+    type: academic
+    note:
+      ru: Театро-Синема построен в 1924 году; «бразильцы» и городское строительство
+    accessed: 2026-11-18
+image:
+  file: fafe-brasileiros-1858.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa praça de uma vila portuguesa, perto de um candeeiro aceso e de palmeiras, um grupo de crianças e adultos olha para o candeeiro; à esquerda passa um comboio, e à direita um casal elegante e um menino de fato de marinheiro."
+    en: "Blue-and-white azulejo-style illustration: on a square in a Portuguese town, near a lit street lamp and palm trees, a group of children and adults gazes at the lamp; a train passes on the left, and an elegant couple and a boy in a sailor suit stand on the right."
+    ru: "Иллюстрация в духе сине-белого азулежу: на площади португальского городка у зажжённого фонаря и пальм группа детей и взрослых смотрит на фонарь; слева проезжает поезд, справа стоят нарядная пара и мальчик в матроске."
+  caption:
+    pt: Uma praça de Fafe no tempo dos «brasileiros». Ilustração em estilo azulejo, criada por IA.
+    en: A square in Fafe in the days of the “Brazilians.” Azulejo-style illustration, created by AI.
+    ru: Площадь в Фафе во времена «бразильцев». Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+route:
+  approx: true
+  points:
+    - name:
+        pt: Fafe
+        en: Fafe
+        ru: Фафе
+      lat: 41.45
+      lng: -8.17
+    - via: true
+      lat: 41.18
+      lng: -8.72
+      mode: land
+    - via: true
+      lat: 35
+      lng: -15
+      mode: sea
+    - via: true
+      lat: 10
+      lng: -28
+      mode: sea
+    - via: true
+      lat: -10
+      lng: -34
+      mode: sea
+    - name:
+        pt: Rio de Janeiro
+        en: Rio de Janeiro
+        ru: Рио-де-Жанейро
+      lat: -22.9
+      lng: -43.17
+      mode: sea
+    - via: true
+      lat: -10
+      lng: -34
+      mode: sea
+    - via: true
+      lat: 10
+      lng: -28
+      mode: sea
+    - via: true
+      lat: 35
+      lng: -15
+      mode: sea
+    - via: true
+      lat: 41.18
+      lng: -8.72
+      mode: sea
+    - name:
+        pt: Fafe
+        en: Fafe
+        ru: Фафе
+      lat: 41.45
+      lng: -8.17
+      mode: land
+status: ready
+published: 2026-12-10
+placeholder: false
+ru_ready: true

@@ -1,0 +1,145 @@
+id: concheiros-muge-6000-ac
+slug:
+  pt: as-colinas-de-conchas-comidas
+  en: hills-made-of-eaten-shellfish
+  ru: kholmy-iz-s-edennykh-rakushek
+title:
+  pt: As colinas de conchas comidas
+  en: Hills Made of Eaten Shellfish
+  ru: Холмы из съеденных ракушек
+epoch: antes-de-portugal
+level: frame
+year: -6000
+year_label:
+  pt: cerca de 6000 a.C.
+  en: around 6000 BC
+  ru: около 6000 г. до н. э.
+year_scale:
+  pt: c. 6000 a.C.
+  en: c. 6000 BC
+  ru: ок. 6000 до н. э.
+place:
+  name:
+    pt: Muge, Salvaterra de Magos
+    en: Muge, Salvaterra de Magos
+    ru: Муже, Салватерра-ди-Магуш
+  short:
+    pt: Muge
+    en: Muge
+    ru: Муже
+  lat: 39.02
+  lon: -8.69
+bridge:
+  name: Museu Geológico (LNEG)
+  title:
+    pt: Museu Geológico (LNEG)
+    en: Geological Museum (LNEG)
+    ru: Геологический музей (LNEG)
+  address: Rua da Academia das Ciências 19, Lisboa
+  lat: 38.7131073
+  lon: -9.1497546
+  url: https://www.lneg.pt/
+  note:
+    pt: No museu guardam-se achados dos concheiros de Muge, que o geólogo Carlos Ribeiro descobriu.
+    en: The museum keeps finds from the Muge shell mounds, discovered by the geologist Carlos Ribeiro.
+    ru: В музее хранятся находки из ракушечных холмов Муже, которые открыл геолог Карлуш Рибейру.
+threads:
+  - gente-como-nos
+  - comida-e-vinho
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Há oito mil anos, no Tejo comeram-se tantas conchas que nasceram colinas.
+  en: Eight thousand years ago, people ate so much shellfish that hills grew.
+  ru: Восемь тысяч лет назад люди съели столько ракушек, что выросли холмы.
+story:
+  pt: |-
+    Há oito mil anos, junto a Muge, o Tejo era mais largo e a água do mar entrava com a maré. Na água morna e salgada havia muitas conchas: berbigões e amêijoas.
+
+    Aqui ainda não se semeava pão. As pessoas caçavam, pescavam e apanhavam marisco. Depois de comer, deitavam as conchas para o mesmo monte, geração após geração.
+
+    Os montes cresceram até ficarem do tamanho de um campo de futebol e mais altos do que uma pessoa. Em cima deles construíam cabanas e acendiam fogueiras. Em 1863, o geólogo Carlos Ribeiro percebeu que aquelas colinas não eram naturais. Assim se descobriu um dos maiores acampamentos de caçadores-recolectores da Europa.
+  en: |-
+    Eight thousand years ago, near Muge, the Tagus was wider and seawater flowed in with the tide. The warm, salty water was full of shellfish: cockles and clams.
+
+    People here didn’t grow grain yet. They hunted, fished, and gathered shellfish. After eating, they threw the shells onto the same heap, generation after generation.
+
+    The heaps grew until they were as wide as a soccer field and taller than a person. People built huts and lit fires on top of them. In 1863, geologist Carlos Ribeiro realized these hills weren’t natural. That’s how one of Europe’s largest hunter-gatherer sites was found.
+  ru: |-
+    Восемь тысяч лет назад у деревни Муже Тежу была шире, и в неё с приливом заходила морская вода. В тёплой солёной воде было полно ракушек: сердцевидок и венерок.
+
+    Люди здесь ещё не сеяли хлеб. Они охотились, ловили рыбу и собирали моллюсков. Раковины после еды бросали в одну кучу, и так поколение за поколением.
+
+    Кучи росли, пока не стали холмами шириной с футбольное поле и высотой в человеческий рост и больше. На них ставили хижины и жгли костры. В 1863 году геолог Карлуш Рибейру понял, что эти холмы не природные. Так нашли одну из крупнейших стоянок охотников и собирателей в Европе.
+more:
+  pt: |-
+    As colinas de conchas revelaram-se um arquivo. As conchas impedem a terra de ficar ácida, por isso guardaram bem os ossos de animais, de peixes e dos próprios habitantes. Os mortos eram sepultados nas próprias colinas, debaixo dos pés dos vivos. Ao lado encontram-se ossos de cães e de veados, e lâminas de sílex. Numa das colinas, o Cabeço da Amoreira, alguém fez uma camada de cerca de 80 mil seixos e pedras queimadas, e até hoje não se sabe porquê.
+
+    Pela composição dos ossos, os investigadores descobriram o que comiam. E afinal nem todos viviam só de conchas: alguns alimentavam-se quase apenas de carne e plantas de terra firme.
+
+    As colinas não tiveram sorte. Nos anos 1950, a camada de cima de uma delas foi arrasada para uma fábrica de descasque de arroz, e outras duas foram destruídas por completo. Desde 2011, as que restam são monumento nacional.
+  en: |-
+    The shell hills turned out to be an archive. Shells keep the soil from turning acidic, so bones of animals, fish, and the people themselves survived well. The dead were buried right in the hills, under the feet of the living. Next to them are dog and deer bones and flint blades. On one of the hills, Cabeço da Amoreira, people laid down a layer of about 80,000 pebbles and burned stones, and no one knows why.
+
+    By studying the bones, researchers learned what people ate. And it turned out not everyone lived on shellfish: some ate almost nothing but meat and plants from dry land.
+
+    The hills had bad luck. In the 1950s, the top of one was leveled for a rice-husking factory, and two others were destroyed entirely. Since 2011, the remaining ones have been a national monument.
+  ru: |-
+    Ракушечные холмы оказались архивом. Раковины не дают земле закиснуть, поэтому в них хорошо сохранились кости зверей, рыб и самих жителей. Своих умерших они хоронили прямо в холмах, у себя под ногами. Рядом находят кости собак и оленей, кремнёвые ножи. На одном из холмов, Кабесу-да-Амурейра, люди выложили слой из примерно 80 тысяч галек и обожжённых камней, и зачем, до сих пор не знают.
+
+    По составу костей учёные выяснили, что ели жители. И оказалось, что не все жили одними ракушками: некоторые питались почти только мясом и растениями с суши.
+
+    Холмам не везло. В 1950-х верхний слой одного из них срыли под фабрику для очистки риса, а два других уничтожили целиком. С 2011 года оставшиеся холмы стали национальным памятником.
+myth:
+  verdict: part
+  statement:
+    pt: Os primeiros habitantes do vale do Tejo comiam sobretudo conchas
+    en: The first people of the Tagus valley lived mainly on shellfish
+    ru: Первые жители долины Тежу ели в основном ракушки
+  answer:
+    pt: Comeram tantas que nasceram colinas, mas a análise dos ossos mostrou que alguns viviam quase só de comida de terra firme.
+    en: They ate enough to build hills, but bone analysis showed that some lived almost entirely on food from dry land.
+    ru: "Ракушек съели столько, что выросли холмы, но анализ костей показал: некоторые жители питались почти одной сухопутной едой"
+sources:
+  - title: "Wikipedia: Concheiros de Muge"
+    url: https://pt.wikipedia.org/wiki/Concheiros_de_Muge
+    type: reference
+    accessed: 2026-11-18
+  - title: "Bicho et al.: Muge"
+    url: https://maeds.amrs.pt/maeds/uploads/document/file/3135/3_muge.pdf
+    type: academic
+    note:
+      ru: датировки, размеры, насыпь из галек, рисовая фабрика
+    accessed: 2026-11-18
+  - title: Nuno Bicho, National Geographic Portugal, novembro 2011
+    url: https://www.uniarq.net/uploads/4/7/1/5/4715235/concheirosmuge_novembro_2011.pdf
+    type: press
+    note:
+      ru: сердцевидки и венерки, погребения, кости собак и оленей
+    accessed: 2026-11-18
+  - title: Arqueologia no Museu Geológico do LNEG (J. L. Cardoso)
+    url: https://core.ac.uk/download/70658673.pdf
+    type: academic
+    note:
+      ru: "находки из Муже XIX века хранятся и частично выставлены в зале археологии музея (страницу не открывал: ошибка 403)"
+    accessed: 2026-11-18
+image:
+  file: concheiros-muge-6000-ac.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um monte de conchas à beira de um estuário, com cabanas de ramos no topo; pessoas sentadas à volta de uma fogueira, uma criança, uma mulher com um cesto e um homem numa canoa entre os juncos."
+    en: "Blue-and-white azulejo-style illustration: a mound of shells at the edge of an estuary with brushwood huts on top; people sit around a fire, a child, a woman with a basket, and a man in a canoe among the reeds."
+    ru: "Иллюстрация в духе сине-белого азулежу: холм из ракушек на берегу лимана, наверху шалаши из веток; люди сидят у костра, ребёнок, женщина с корзиной и человек в лодке среди камышей."
+  caption:
+    pt: Um concheiro nas margens do Tejo, há cerca de oito mil anos. Ilustração em estilo azulejo, criada por IA.
+    en: A shell mound on the banks of the Tagus, about eight thousand years ago. Azulejo-style illustration, created by AI.
+    ru: Ракушечный холм на берегу Тежу, около восьми тысяч лет назад. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: 2026-12-11
+placeholder: false
+ru_ready: true

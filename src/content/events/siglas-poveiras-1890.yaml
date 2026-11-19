@@ -1,0 +1,158 @@
+id: siglas-poveiras-1890
+slug:
+  pt: assinar-sem-letras
+  en: a-signature-without-letters
+  ru: podpis-bez-bukv
+title:
+  pt: Assinar sem letras
+  en: A Signature Without Letters
+  ru: Подпись без букв
+epoch: monarquia-e-republica
+level: frame
+year: 1890
+year_label:
+  pt: finais do século XIX
+  en: late 19th century
+  ru: конец XIX века
+year_scale:
+  pt: séc. XIX
+  en: 19th c.
+  ru: XIX в.
+place:
+  name:
+    pt: Póvoa de Varzim
+    en: Póvoa de Varzim
+    ru: Повоа-ди-Варзин
+  short:
+    pt: Póvoa de Varzim
+    en: Póvoa de Varzim
+    ru: Повоа-ди-Варзин
+  lat: 41.3806
+  lon: -8.7581
+bridge:
+  name: Museu Municipal de Etnografia e História da Póvoa de Varzim
+  title:
+    pt: Museu de Etnografia e História da Póvoa de Varzim
+    en: Póvoa de Varzim Museum of Ethnography and History
+    ru: Музей этнографии и истории Повоа-ди-Варзин
+  address: Póvoa de Varzim
+  lat: 41.3806345
+  lon: -8.7580793
+  maps_url: https://www.google.com/maps/place/Museu+Municipal+P%C3%B3voa+de+Varzim/@41.3806385,-8.7606542,17z/data=!3m1!4b1!4m6!3m5!1s0xd244700530b7a5d:0xc4cd55c42e3e134b!8m2!3d41.3806345!4d-8.7580793!16s%2Fg%2F11zkmlf4s0
+  url: https://www.cm-pvarzim.pt/
+  note:
+    pt: Exposição permanente de siglas; em 1980 recebeu o prémio de Museu Europeu do Ano.
+    en: A permanent exhibition of siglas; in 1980 it received the European Museum of the Year award.
+    ru: Постоянная выставка сигл; в 1980 году она получила премию «Европейский музей года».
+threads:
+  - mar
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os pescadores da Póvoa não escreviam, mas cada família tinha assinatura.
+  en: The fishermen of Póvoa couldn’t write, but every family had its signature.
+  ru: Рыбаки Повоа не умели писать, но у каждой семьи была своя подпись.
+story:
+  pt: |-
+    Na vila piscatória da Póvoa de Varzim, poucos sabiam ler e escrever. Mas era preciso assinar: no barco, nas redes, no palheiro da praia, no livro de dívidas do merceeiro.
+
+    Por isso cada família tinha a sua marca, a sigla: uns quantos traços simples, parecidos com runas. Era cortada à navalha na madeira, pintada nos barcos, posta nas campas. Os investigadores contaram 84 siglas de família originais.
+
+    A marca passava de geração em geração, mas não para o filho mais velho, e sim para o mais novo: ele ficava com os pais e herdava o barco e as redes do pai. Os irmãos mais velhos usavam a mesma marca com piques: o primeiro com um, o segundo com dois.
+  en: |-
+    In the fishing town of Póvoa de Varzim, few people could read or write. But they still needed to sign things: their boats, their nets, their beach sheds, the shopkeeper’s credit book.
+
+    So each family had its own mark, a sigla: a few simple strokes that look like runes. They carved it into wood with a razor, painted it on boats, put it on gravestones. Researchers have counted 84 original family marks.
+
+    The mark was passed down, but not to the eldest son. It went to the youngest: he stayed with his parents and inherited his father’s boat and nets. The older brothers used the same mark with notches added: the first son one notch, the second two.
+  ru: |-
+    В рыбацком городке Повоа-ди-Варзин мало кто умел читать и писать. Но подписываться было нужно: на лодке, на снастях, на сарае у пляжа, в долговой книге у лавочника.
+
+    Поэтому у каждой семьи был свой знак, сигла: несколько простых черт, похожих на руны. Знак вырезали бритвой на дереве, рисовали на лодках, ставили на надгробиях. Учёные насчитали 84 исходных семейных знака.
+
+    Знак передавался по наследству, но не старшему сыну, а младшему: он оставался с родителями и получал отцовскую лодку и сети. Старшие братья ставили тот же знак с зарубками: первый одну, второй две.
+meanwhile:
+  - scope: world
+    year: 1890
+    text:
+      pt: Morre Vincent van Gogh.
+      en: Vincent van Gogh dies.
+      ru: Умирает Винсент Ван Гог.
+    source: https://en.wikipedia.org/wiki/Vincent_van_Gogh
+more:
+  pt: |-
+    Com as siglas fazia-se uma contabilidade inteira. O merceeiro apontava a dívida do pescador com a sua marca, e os círculos e traços ao lado eram moedas. O peixe apanhado era marcado com golpes de faca em forma de sigla, para se saber na partilha de quem era. Quando os noivos casavam, gravavam as suas marcas na mesa da igreja. Havia milhares delas na mesa da antiga igreja da Misericórdia, até ser demolida.
+
+    As marcas também protegiam dos ladrões. Conta-se que um dia, em Matosinhos, um ladrão tentou vender uma bússola roubada. Uma mulher da Póvoa reconheceu a marca na tampa, e o ladrão foi levado ao capitão do porto.
+
+    A semelhança com as runas foi notada há muito. Uns investigadores acham que as marcas vieram com os vikings; outros, que traços tão simples se inventam em todo o lado. No século XX, quando os pescadores aprenderam a ler, as siglas caíram em desuso. Mas no centro da Póvoa ainda se veem nas placas com os nomes das ruas.
+  en: |-
+    Siglas were a whole bookkeeping system. The shopkeeper recorded a fisherman’s debt with his mark, and the circles and strokes beside it stood for coins. Each fish caught was marked with knife cuts in the shape of a sigla, so everyone knew whose catch it was when it was divided. When couples married, they carved their marks into a table in the church. Thousands of them covered the table in the old Misericórdia church, until it was torn down.
+
+    The marks also helped catch thieves. The story goes that once, in nearby Matosinhos, a thief tried to sell a stolen compass. A woman from Póvoa recognized the mark on its lid, and the thief was taken to the harbor master.
+
+    The resemblance to runes was noticed long ago. Some researchers think the marks came with the Vikings; others say people everywhere invent such simple strokes on their own. In the 20th century, as fishermen learned to read, siglas fell out of use. But in central Póvoa you can still see them on street-name signs.
+  ru: |-
+    Сиглами вели целую бухгалтерию. Лавочник записывал долг рыбака его знаком, а кружки и чёрточки рядом означали монеты. Пойманную рыбу метили ударами ножа в форме сиглы, чтобы при дележе было видно, чей улов. Когда жених и невеста венчались, они вырезали свои знаки на столе в церкви. Тысячи таких знаков были на столе в старой церкви Мизерикордии, пока её не снесли.
+
+    Знаки берегли и от воров. Говорят, однажды в соседнем Матозиньюше вор пытался продать украденный компас. Женщина из Повоа узнала знак на крышке, и вора отвели к капитану порта.
+
+    Сходство с рунами заметили давно. Одни учёные считают, что знаки принесли викинги, другие — что такие простые черты люди придумывают везде сами. В XX веке, когда рыбаки научились грамоте, сиглы вышли из обихода. Но в центре Повоа их и сейчас можно увидеть на табличках с названиями улиц.
+myth:
+  verdict: fact
+  statement:
+    pt: Pescadores em Portugal assinavam com sinais parecidos com runas
+    en: Fishermen in Portugal signed their names with marks that look like runes
+    ru: Рыбаки в Португалии подписывались знаками, похожими на руны
+  answer:
+    pt: Na Póvoa de Varzim, cada família tinha uma sigla de traços simples. Marcava barcos, redes, o peixe e até as dívidas no livro do merceeiro.
+    en: In Póvoa de Varzim, every family had a sigla of simple strokes. It marked boats, nets, the catch, and even debts in the shopkeeper’s book.
+    ru: В Повоа-ди-Варзин у каждой семьи была сигла из простых черт. Ею метили лодки, сети, улов и даже долги в книге лавочника
+sources:
+  - title: "Wikipedia: Siglas poveiras"
+    url: https://en.wikipedia.org/wiki/Siglas_poveiras
+    type: reference
+    note:
+      ru: Антониу душ Сантуш Граса изучал сиглы с 1932 года; рассказ о компасе — по графу Вилаш-Боаш
+    accessed: 2026-11-18
+  - title: "Wikipedia: Ethnography and History Museum of Póvoa de Varzim"
+    url: https://en.wikipedia.org/wiki/Ethnography_and_History_Museum_of_P%C3%B3voa_de_Varzim
+    type: reference
+    note:
+      ru: выставка «Siglas Poveiras» получила премию в 1980 году
+    accessed: 2026-11-18
+image:
+  file: siglas-poveiras-1890.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa mercearia à beira-mar, o merceeiro anota num livro uma marca em forma de cruz enquanto um pescador de camisa aos quadrados lhe entrega uma corda; pela porta aberta veem-se barcos na praia, e as marcas repetem-se nas portas e nos barris."
+    en: "Blue-and-white azulejo-style illustration: in a seaside shop, the shopkeeper writes a cross-shaped mark in a ledger while a fisherman in a checked shirt hands him a coil of rope; boats on the beach show through the open door, and the marks repeat on the doors and barrels."
+    ru: "Иллюстрация в духе сине-белого азулежу: в лавке у моря лавочник записывает в книгу знак в виде креста, пока рыбак в клетчатой рубашке отдаёт ему моток верёвки; в открытую дверь видны лодки на пляже, а такие же знаки повторяются на дверях и бочках."
+  caption:
+    pt: Uma sigla anotada no livro do merceeiro, Póvoa de Varzim. Ilustração em estilo azulejo, criada por IA.
+    en: A sigla entered in the shopkeeper’s ledger, Póvoa de Varzim. Azulejo-style illustration, created by AI.
+    ru: Сигла, записанная в книгу лавочника, Повоа-ди-Варзин. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: siglas-poveiras-1890-detalhe.webp
+  alt:
+    pt: "Fotografia de uma tábua de madeira escura com vinte siglas em linhas claras: cruzes, triângulos, setas, quadrados e traços simples dispostos em fileiras."
+    en: "Photograph of a dark wooden board with twenty siglas in light lines: crosses, triangles, arrows, squares, and simple strokes arranged in rows."
+    ru: "Фотография тёмной деревянной доски с двадцатью siglas светлыми линиями: кресты, треугольники, стрелы, квадраты и простые чёрточки рядами."
+  caption:
+    pt: Siglas poveiras no Museu Municipal da Póvoa de Varzim.
+    en: Siglas poveiras at the Póvoa de Varzim Municipal Museum.
+    ru: Сиглы Повоа в Муниципальном музее Повоа-ди-Варзин.
+  author: Joseolgon
+  license: CC BY-SA 3.0
+  license_url: https://creativecommons.org/licenses/by-sa/3.0
+  source_url: https://commons.wikimedia.org/wiki/File:Museu_Povoa_de_Varzim-Siglas_poveiras.jpg
+status: ready
+published: 2026-12-07
+placeholder: false
+ru_ready: true

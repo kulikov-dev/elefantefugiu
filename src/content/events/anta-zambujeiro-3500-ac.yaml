@@ -1,0 +1,159 @@
+id: anta-zambujeiro-3500-ac
+slug:
+  pt: a-colina-que-afinal-era-um-tumulo
+  en: the-hill-that-turned-out-to-be-a-tomb
+  ru: kholm-kotoryj-okazalsya-grobnitsej
+title:
+  pt: A colina que afinal era um túmulo
+  en: The Hill That Turned Out to Be a Tomb
+  ru: Холм, который оказался гробницей
+epoch: antes-de-portugal
+level: frame
+year: -3500
+year_label:
+  pt: cerca de 3500 a.C.
+  en: around 3500 BC
+  ru: около 3500 г. до н. э.
+year_scale:
+  pt: c. 3500 a.C.
+  en: c. 3500 BC
+  ru: ок. 3500 до н. э.
+place:
+  name:
+    pt: Valverde, Évora
+    en: Valverde, Évora
+    ru: Валверде, Эвора
+  short:
+    pt: Évora
+    en: Évora
+    ru: Эвора
+  lat: 38.5392
+  lon: -8.0144
+bridge:
+  name: Anta Grande do Zambujeiro
+  title:
+    pt: Anta Grande do Zambujeiro
+    en: Great Dolmen of Zambujeiro
+    ru: Дольмен Замбужейру
+  address: Rua Quinta da Parreira, Valverde, Évora
+  lat: 38.539222
+  lon: -8.0143643
+  maps_url: https://www.google.com/maps/place/%D0%90%D0%BD%D1%82%D0%B0-%D0%93%D1%80%D0%B0%D0%BD%D0%B4%D0%B5-%D0%B4%D1%83-%D0%97%D0%B0%D0%BC%D0%B1%D1%83%D0%B6%D0%B5%D0%B9%D1%80%D1%83/@38.5392262,-8.0169392,17z/data=!3m1!4b1!4m6!3m5!1s0xd19f1da71bbc047:0x8ecb35bc1132364!8m2!3d38.539222!4d-8.0143643!16zL20vMDdnNTg0
+  url: https://www.cm-evora.pt/
+  note:
+    pt: "A câmara está sob uma cobertura provisória: parte da mamoa foi retirada nas escavações."
+    en: "The chamber stands under a temporary roof: part of the mound was removed during excavations."
+    ru: "Камера стоит под временным навесом: насыпь частично сняли при раскопках."
+threads:
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Durante cinco mil anos, ninguém reparou num enorme túmulo.
+  en: For five thousand years, nobody noticed an enormous tomb.
+  ru: Пять тысяч лет люди ходили мимо огромной гробницы и не замечали её.
+story:
+  pt: |-
+    Por volta de 3500 a.C., agricultores perto de Évora decidiram construir um túmulo para os seus mortos. Ainda não conheciam o metal: tinham pedra, madeira e cordas.
+
+    Ergueram em círculo lajes de granito com até seis metros de altura, fecharam a entrada com outra laje e ligaram a câmara a um longo corredor. Depois cobriram tudo com terra, e o túmulo passou a parecer uma colina qualquer.
+
+    Por isso ficou tanto tempo escondido. Só em 1964 o arqueólogo Henrique Leonor Pina percebeu que a colina era obra humana. Lá dentro estava a Anta Grande do Zambujeiro, talvez a anta mais alta do mundo.
+  en: |-
+    Around 3500 BC, farmers near Évora decided to build a tomb for their dead. They had no metal yet, only stone, wood, and rope.
+
+    They set up granite slabs up to 20 feet (six meters) tall in a circle, closed the entrance with another slab, and led a long corridor to the chamber. Then they covered everything with earth, and the tomb became an ordinary-looking hill.
+
+    That’s why it stayed hidden for so long. Only in 1964 did archaeologist Henrique Leonor Pina realize the hill was man-made. Inside was the Great Dolmen of Zambujeiro, possibly the tallest dolmen in the world.
+  ru: |-
+    Около 3500 лет до нашей эры земледельцы под Эворой решили построить гробницу для своих умерших. Металла у них ещё не было, только камень, дерево и верёвки.
+
+    Они поставили по кругу гранитные плиты высотой до шести метров, закрыли вход ещё одной плитой и подвели к камере длинный коридор. Потом всё засыпали землёй, и гробница превратилась в обычный на вид холм.
+
+    Поэтому её так долго не замечали. Только в 1964 году археолог Энрике Леонор Пина понял, что холм рукотворный. Внутри оказался дольмен Замбужейру, возможно, самый высокий дольмен в мире.
+more:
+  pt: |-
+    Quem a construiu? Uns mil e quinhentos anos antes, nos arredores de Évora, surgiram as primeiras pessoas que deixaram de andar atrás da caça e se fixaram num lugar. Criavam gado e semeavam cereais. O cajado do pastor chegou a ser gravado nos menires, as pedras erguidas. A sua maior aldeia ficava no Alto de São Bento, de onde mais tarde nasceria Évora.
+
+    Quem se fixa precisa de terra sua, e, segundo uma hipótese, os túmulos dos antepassados marcavam a quem ela pertencia. Neles não se sepultava um só chefe, mas muitas gerações da comunidade. Só nos arredores de Évora conhecem-se cerca de 800 antas.
+
+    O Zambujeiro estava entre as maiores. Para os mortos traziam-se pontas de seta de sílex vindo de longe: a pedra era transportada de propósito para o enterro.
+  en: |-
+    Who built it? About fifteen hundred years earlier, the first people around Évora stopped following game and settled in one place. They herded animals and sowed grain. They even carved the shepherd’s crook on menhirs, the standing stones. Their largest village stood on the hill of Alto de São Bento, where Évora would later grow.
+
+    Settled people need land of their own, and, according to one hypothesis, ancestral tombs marked whose land it was. These weren’t graves for a single chief but for many generations of a community. Around Évora alone, about 800 dolmens are known.
+
+    Zambujeiro was among the largest. Arrowheads made of flint brought from far away were placed with the dead: the stone was carried there specially for burials.
+  ru: |-
+    Кто его строил? Примерно за полторы тысячи лет до этого в окрестностях Эворы появились первые люди, которые не кочевали за дичью, а осели на одном месте. Они пасли скот и сеяли зерно. Посох пастуха даже вырезали на менгирах, стоячих камнях. Их самая большая деревня стояла на холме Алту-ди-Сан-Бенту, там, откуда потом выросла Эвора.
+
+    Осевшим людям нужна была своя земля, и, по одной из гипотез, гробницы предков отмечали, чья она. Хоронили в них не одного вождя, а много поколений общины. В одной только округе Эворы известно около 800 дольменов.
+
+    Замбужейру был среди самых больших. Для умерших сюда приносили наконечники стрел из кремня, привезённого издалека: значит, ради погребения камень везли специально.
+myth:
+  verdict: myth
+  statement:
+    pt: As antas foram construídas com ferramentas de ferro
+    en: Dolmens were built with iron tools
+    ru: Дольмены строили люди с железными инструментами
+  answer:
+    pt: "Aqui ainda não se conhecia o metal: as lajes de granito de várias toneladas foram erguidas com pedra, madeira e cordas."
+    en: "Metal wasn’t known here yet: the multi-ton granite slabs were raised using stone, wood, and rope."
+    ru: "Миф. Металла здесь ещё не знали: многотонные гранитные плиты ставили с помощью камня, дерева и верёвок"
+sources:
+  - title: "Câmara Municipal de Évora: Megalitismo"
+    url: https://www.cm-evora.pt/wp-content/uploads/2020/06/Megalitismo_En.pdf
+    type: official
+    note:
+      ru: Алту-ди-Сан-Бенту, около 800 дольменов, Замбужейру «вероятно, самый высокий в мире», опоры до 6 м
+    accessed: 2026-11-18
+  - title: "Wikipedia: Anta Grande do Zambujeiro"
+    url: https://en.wikipedia.org/wiki/Anta_Grande_do_Zambujeiro
+    type: reference
+    accessed: 2026-11-18
+  - title: "Universidade de Évora (CHAIA): pontas de seta do Zambujeiro"
+    url: https://www.chaia.uevora.pt/uploads/pdfs/bccc7646772dadc5c23a853f9522289216eacebf.pdf
+    type: academic
+    note:
+      ru: открытие 1964 года, местный и привозной кремень
+    accessed: 2026-11-18
+  - title: The Megalithic World (Encyclopedia.com)
+    url: https://www.encyclopedia.com/humanities/encyclopedias-almanacs-transcripts-and-maps/megalithic-world
+    type: reference
+    note:
+      ru: гипотеза о гробницах как знаках территории (Ренфрю) и её критика
+    accessed: 2026-11-18
+image:
+  file: anta-zambujeiro-3500-ac.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: agricultores arrastam uma laje de granito sobre rolos, outros erguem as pedras de uma anta numa colina; em primeiro plano, um pastor com cajado e ovelhas."
+    en: "Blue-and-white azulejo-style illustration: farmers drag a granite slab on rollers while others raise the stones of a dolmen on a hill; in the foreground, a shepherd with a crook and sheep."
+    ru: "Иллюстрация в духе сине-белого азулежу: земледельцы тянут гранитную плиту на катках, другие ставят камни дольмена на холме; на переднем плане пастух с посохом и овцы."
+  caption:
+    pt: Construção de uma anta perto de Évora, por volta de 3500 a.C. Ilustração em estilo azulejo, criada por IA.
+    en: Building a dolmen near Évora, around 3500 BC. Azulejo-style illustration, created by AI.
+    ru: Строительство дольмена под Эворой, около 3500 г. до н. э. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: anta-zambujeiro-3500-ac-detalhe.webp
+  alt:
+    pt: "Fotografia: lajes de granito inclinadas da Anta Grande do Zambujeiro sob uma cobertura provisória de metal, com árvores e céu ao fundo."
+    en: "Photograph: the tilted granite slabs of the Great Dolmen of Zambujeiro under a temporary metal roof, with trees and sky behind."
+    ru: "Фотография: наклонные гранитные плиты дольмена Замбужейру под временным металлическим навесом, на фоне деревьев и неба."
+  caption:
+    pt: A Anta Grande do Zambujeiro hoje, sob a cobertura provisória.
+    en: The Great Dolmen of Zambujeiro today, under its temporary roof.
+    ru: Дольмен Замбужейру сегодня, под временным навесом.
+  author: Ken & Nyetta
+  license: CC BY 2.0
+  license_url: https://creativecommons.org/licenses/by/2.0
+  source_url: https://commons.wikimedia.org/wiki/File:Neolithic_Dolmen_of_Zambujeiro_-_Apr_2011.jpg
+status: ready
+published: 2026-12-05
+placeholder: false
+ru_ready: true

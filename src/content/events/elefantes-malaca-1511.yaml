@@ -199,7 +199,8 @@ detail_image:
     ru: "Автор неизвестен"
   license: "Public domain"
   source_url: "https://commons.wikimedia.org/wiki/File:Retrato_de_Afonso_de_Albuquerque_(ap%C3%B3s_1545)_-_Autor_desconhecido-cortado.png"
-related: []
+related:
+  - fernao-mendes-pinto-1537
 interactive:
   type: army_dots
   data:

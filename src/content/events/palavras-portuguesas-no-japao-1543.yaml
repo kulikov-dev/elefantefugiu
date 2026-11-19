@@ -150,6 +150,8 @@ image:
   license: AI-generated
   ai: true
   focus: 50% 50%
+related:
+  - fernao-mendes-pinto-1537
 status: ready
 published: 2026-11-19
 placeholder: false

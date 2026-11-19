@@ -1,0 +1,151 @@
+id: calcada-rossio-1848
+slug:
+  pt: um-mar-no-rossio
+  en: a-sea-in-rossio-square
+  ru: more-na-ploshchadi-rossiu
+title:
+  pt: Um mar no Rossio
+  en: A Sea in Rossio Square
+  ru: Море на площади Россиу
+epoch: monarquia-e-republica
+level: frame
+year: 1848
+place:
+  name:
+    pt: Lisboa, Rossio
+    en: Lisbon, Rossio
+    ru: Лиссабон, Россиу
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7138
+  lon: -9.1394
+bridge:
+  name: Praça D. Pedro IV (Rossio)
+  title:
+    pt: Praça D. Pedro IV (Rossio)
+    en: Rossio Square
+    ru: Площадь Россиу
+  address: Praça D. Pedro IV, Lisboa
+  lat: 38.7138036
+  lon: -9.1393681
+  maps_url: https://www.google.com/maps/place/Pra%C3%A7a+Dom+Pedro+IV/@38.7138078,-9.141943,17z/data=!3m1!4b1!4m6!3m5!1s0xd1933875bacdc99:0xc4a171783faa2e98!8m2!3d38.7138036!4d-9.1393681!16s%2Fm%2F0jwry97
+  url: https://www.cm-lisboa.pt/
+  note:
+    pt: As ondas do «Mar Largo» debaixo dos pés; o Monumento ao Calceteiro fica ao lado, nos Restauradores.
+    en: The waves of the “Wide Sea” are under your feet; the Monument to the Calceteiro is nearby, in Restauradores.
+    ru: Волны «Широкого моря» под ногами; памятник калсетейру рядом, на Реставрадореш.
+threads:
+  - gente-como-nos
+  - engenho
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A famosa calçada ondulada de Lisboa começou por ser feita por presos.
+  en: Lisbon’s famous wavy pavement was started by prisoners.
+  ru: Знаменитую волнистую мостовую Лиссабона начинали выкладывать арестанты.
+story:
+  pt: |-
+    Nos anos 1840, havia uma prisão no Castelo de São Jorge, e o seu governador, Eusébio Furtado, procurava trabalho para os reclusos. Em 1842, os presos calcetaram o pátio do castelo com pedra branca e preta, em ziguezague.
+
+    Lisboa gostou, e Furtado conseguiu dinheiro para mais. Em 1848, a Praça do Rossio foi coberta de ondas pretas e brancas, mais de 8700 metros quadrados. Ao desenho chamaram «Mar Largo».
+
+    Assim nasceu a calçada portuguesa. É feita à mão, pedra a pedra, e os mestres deste ofício chamam-se calceteiros.
+  en: |-
+    In the 1840s, Castelo de São Jorge housed a prison, and its governor, Eusébio Furtado, was looking for work for the inmates. In 1842, the prisoners paved the castle courtyard in white and black stone, in a zigzag.
+
+    Lisbon liked it, and Furtado got money for something bigger. In 1848, Rossio Square was covered in black-and-white waves, over 8,700 square meters (94,000 square feet). The pattern was called “Wide Sea.”
+
+    That’s how calçada portuguesa, Portuguese pavement, was born. It’s laid by hand, stone by stone, and the craftsmen who do it are called calceteiros.
+  ru: |-
+    В 1840-х в замке Сан-Жорже была тюрьма, а её комендант Эузебиу Фуртаду искал заключённым работу. В 1842 году арестанты выложили во дворе замка мостовую из белого и чёрного камня, зигзагом.
+
+    Лиссабону понравилось, и Фуртаду добился денег на большее. В 1848 году площадь Россиу покрыли чёрно-белыми волнами, больше 8700 квадратных метров. Узор назвали «Широким морем».
+
+    Так появилась калсада португеза, португальская мостовая. Её выкладывают вручную, камень за камнем, и мастеров этого дела называют калсетейрушами.
+meanwhile:
+  - scope: world
+    year: 1848
+    text:
+      pt: Marx e Engels publicam o «Manifesto do Partido Comunista».
+      en: Marx and Engels publish The Communist Manifesto.
+      ru: Маркс и Энгельс издают «Манифест Коммунистической партии».
+    source: https://en.wikipedia.org/wiki/The_Communist_Manifesto
+more:
+  pt: |-
+    O desenho do «Mar Largo» não agradou só a Lisboa. Foi copiado no Rio de Janeiro, e hoje estas ondas são conhecidas pelo calçadão de Copacabana. O molde de madeira de Furtado para o Rossio sobreviveu: a cidade guarda cerca de três mil moldes antigos de calçada, com caravelas, flores e borboletas, e promete abrir-lhes um centro interpretativo.
+
+    Com os mestres é mais difícil. Nos anos 1940, Lisboa tinha cerca de 400 calceteiros; hoje tem uns vinte. O trabalho é duro, de joelhos, de martelo na mão, e é mal pago, por isso há poucos aprendizes.
+
+    Na Praça dos Restauradores, a dois passos do Rossio, está o Monumento ao Calceteiro: dois trabalhadores, um bate a pedra com o martelo, o outro ajuda.
+  en: |-
+    Lisbon wasn’t the only city to love the “Wide Sea.” It was copied in Rio de Janeiro, and today those waves are famous on the Copacabana promenade. Furtado’s wooden template for Rossio survives: the city keeps about three thousand old pavement templates, with caravels, flowers, and butterflies, and promises to open a center for them.
+
+    The craftsmen are harder to keep. In the 1940s, Lisbon had about 400 calceteiros; today it has around twenty. The work is hard, on your knees with a hammer, and it pays little, so there are few apprentices.
+
+    In Restauradores Square, a short walk from Rossio, stands the Monument to the Calceteiro: two workers, one striking a stone with a hammer, the other helping.
+  ru: |-
+    Узор «Широкого моря» понравился не только Лиссабону. Его скопировали в Рио-де-Жанейро, и сегодня эти волны знают по набережной Копакабаны. Деревянный шаблон Фуртаду для Россиу сохранился: город хранит около трёх тысяч старых шаблонов мостовой, с каравеллами, цветами и бабочками, и обещает открыть для них музей.
+
+    С мастерами сложнее. В 1940-х в Лиссабоне было около 400 калсетейрушей, а сегодня их около двадцати. Работа тяжёлая, на коленях, с молотком, и платят за неё немного, поэтому учеников мало.
+
+    На площади Реставрадореш, в двух шагах от Россиу, стоит памятник калсетейру: двое рабочих, один бьёт молотком по камню, второй подаёт.
+myth:
+  verdict: fact
+  statement:
+    pt: A primeira calçada artística de Lisboa foi feita por presos
+    en: Lisbon’s first patterned pavement was laid by prisoners
+    ru: Первую узорную мостовую Лиссабона выложили заключённые
+  answer:
+    pt: Em 1842, presos do Castelo de São Jorge calcetaram o pátio do castelo com desenho, e em 1848 cobriram o Rossio de ondas.
+    en: In 1842, inmates at Castelo de São Jorge paved the castle courtyard in a pattern, and in 1848 they covered Rossio in waves.
+    ru: В 1842 году арестанты тюрьмы в замке Сан-Жорже выложили узорную мостовую во дворе замка, а в 1848 году волнами покрыли Россиу
+sources:
+  - title: "Observador/Lusa: Lisboa tem coleção de moldes da calçada artística"
+    url: https://observador.pt/2026/08/02/lisboa-tem-colecao-de-moldes-da-calcada-artistica-e-criara-centro-interpretativo/
+    type: press
+    note:
+      ru: "2.08.2026: шаблон «Mar Largo» 1848, Копакабана, 400 мастеров в 1940-х и около 20 сейчас"
+    accessed: 2026-11-18
+  - title: "Lisboa Secreta: História da calçada portuguesa"
+    url: https://lisboasecreta.co/historia-calcada-portuguesa-calceteiros-lisboa/
+    type: press
+    accessed: 2026-11-18
+  - title: "Time Out Lisboa: Monumento ao Calceteiro"
+    url: https://www.timeout.pt/lisboa/pt/coisas-para-fazer/monumentos-estatuas-obrigatorias-lisboa
+    type: press
+    accessed: 2026-11-18
+image:
+  file: calcada-rossio-1848.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no Rossio, calceteiros de joelhos assentam pedras brancas e pretas em ondas, com caixas de pedra e ferramentas ao lado; um oficial de uniforme observa, e à volta passeiam lisboetas do século XIX; ao fundo, o teatro e o castelo na colina."
+    en: "Blue-and-white azulejo-style illustration: in Rossio, paving workers on their knees lay white and black stones in waves, with boxes of stones and tools beside them; an officer in uniform looks on, nineteenth-century Lisbon residents stroll around, and the theater and the castle on its hill rise behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: на Россиу мостильщики на коленях укладывают белые и чёрные камни волнами, рядом ящики с камнем и инструменты; смотрит офицер в мундире, вокруг гуляют лиссабонцы XIX века, позади театр и замок на холме."
+  caption:
+    pt: A calçada do Rossio a ser assente, 1848. Ilustração em estilo azulejo, criada por IA.
+    en: Laying the pavement of Rossio, 1848. Azulejo-style illustration, created by AI.
+    ru: Укладка мостовой на Россиу, 1848 год. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: calcada-rossio-1848-detalhe.webp
+  alt:
+    pt: "Desenho antigo a cores: um retângulo de cantos arredondados coberto de ondas pretas e brancas, com uma rosa-dos-ventos vermelha ao centro e datas nas faixas laterais."
+    en: "An old colored drawing: a rounded rectangle covered in black and white waves, with a red compass rose in the middle and dates on the side panels."
+    ru: "Старый цветной чертёж: прямоугольник со скруглёнными углами, покрытый чёрно-белыми волнами, в центре красная роза ветров, на боковых полосах даты."
+  caption:
+    pt: Projeto da calçada em mosaico para a Praça de D. Pedro, de Eusébio Furtado, por volta de 1850.
+    en: Design for the mosaic pavement of Dom Pedro Square by Eusébio Furtado, around 1850.
+    ru: Проект мозаичной мостовой для площади Дона Педру, Эузебиу Фуртаду, около 1850 года.
+  author: Eusébio Cândido Pinheiro Furtado
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Projecto_da_Cal%C3%A7ada_a_Musaico_para_a_Pra%C3%A7a_de_D._Pedro_(Eus%C3%A9bio_C%C3%A2ndido_Pinheiro_Furtado).png
+status: ready
+published: 2026-12-04
+placeholder: false
+ru_ready: true

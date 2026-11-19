@@ -1,0 +1,274 @@
+id: fernao-mendes-pinto-1537
+slug:
+  pt: fernao-mentes-minto
+  en: fernao-are-you-lying-i-am
+  ru: fernan-vresh-vru
+title:
+  pt: «Fernão, mentes? Minto!»
+  en: “Fernão, Are You Lying? I Am!”
+  ru: «Фернан, врёшь? Вру!»
+epoch: avis-e-descobrimentos
+level: frame
+year: 1537
+place:
+  name:
+    pt: Ásia e Pragal, Almada
+    en: Asia and Pragal, Almada
+    ru: Азия и Прагал, Алмада
+  short:
+    pt: Pragal
+    en: Pragal
+    ru: Прагал
+  lat: 38.6732
+  lon: -9.1712
+bridge:
+  name: Monumento a Fernão Mendes Pinto
+  title:
+    pt: Monumento a Fernão Mendes Pinto
+    en: Fernão Mendes Pinto Monument
+    ru: Памятник Фернану Мендешу Пинту
+  address: Rua da Sociedade Recreativa União Pragalense, Pragal, Almada
+  lat: 38.6731532
+  lon: -9.1711555
+  maps_url: https://www.google.com/maps/place/Monumento+a+Fern%C3%A3o+Mendes+Pinto/@38.6731574,-9.1737304,17z/data=!3m1!4b1!4m6!3m5!1s0xd1934de8d5e9d5f:0x5c42744b1dba5b04!8m2!3d38.6731532!4d-9.1711555!16s%2Fg%2F11dyxn8lqh
+  url: https://www.cm-almada.pt/
+  note:
+    pt: Estátua de bronze no Pragal, onde viveu os últimos anos e escreveu a «Peregrinação».
+    en: A bronze statue in Pragal, where he spent his last years and wrote the Peregrinação.
+    ru: Бронзовая статуя в Прагале, где он прожил последние годы и написал «Странствие».
+threads:
+  - mar
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Contou as viagens de forma tão incrível que o nome virou piada.
+  en: He told his travels so wildly that his name became a joke.
+  ru: Он так невероятно рассказывал о странствиях, что его имя стало шуткой.
+story:
+  pt: |-
+    Fernão Mendes Pinto nasceu por volta de 1509 numa família pobre de Montemor-o-Velho. Em 1537 partiu para a Índia à procura de fortuna, como milhares de portugueses sem dinheiro nem título.
+
+    Passou 21 anos na Ásia: foi soldado, mercador, pirata, embaixador. Segundo ele, foi feito prisioneiro 13 vezes e vendido como escravo 17. De regresso, instalou-se no Pragal, do outro lado do rio, em frente a Lisboa, e escreveu tudo o que viveu.
+
+    A «Peregrinação» saiu só em 1614, já depois da sua morte. Os leitores não acreditaram em metade, e o nome do autor virou trocadilho: Fernão Mendes Pinto → «Fernão, mentes? Minto!».
+  en: |-
+    Fernão Mendes Pinto was born around 1509 to a poor family in Montemor-o-Velho. In 1537 he sailed to India to seek his fortune, like thousands of Portuguese with no money and no title.
+
+    He spent 21 years in Asia: soldier, merchant, pirate, ambassador. By his own account, he was captured 13 times and sold into slavery 17 times. Back home, he settled in Pragal, across the river from Lisbon, and wrote down everything he’d lived through.
+
+    His book, the Peregrinação (“Pilgrimage”), came out only in 1614, after his death. Readers didn’t believe half of it, and his name became a pun: Fernão MENdes PINto → “Fernão, MENtes? MINto!” In Portuguese, that means “Fernão, are you lying? I am!”
+  ru: |-
+    Фернан Мендеш Пинту родился около 1509 года в бедной семье в Монтемор-у-Велью. В 1537 году он уплыл в Индию за удачей, как тысячи португальцев без денег и титула.
+
+    В Азии он провёл 21 год: был солдатом, купцом, пиратом, послом. По его словам, его 13 раз брали в плен и 17 раз продавали в рабство. Вернувшись, он поселился в Прагале, через реку от Лиссабона, и записал всё, что пережил.
+
+    Книга «Странствие» вышла в 1614 году, уже после его смерти. Читатели не поверили и половине, и его имя переделали в шутку. Фернан Мендеш Пинту → «Фернан, mentes? Minto!»: «Фернан, врёшь? Вру!». По-португальски это звучит почти как его имя.
+meanwhile:
+  - scope: world
+    year: 1543
+    text:
+      pt: Copérnico publica «Sobre as revoluções das esferas celestes».
+      en: Copernicus publishes On the Revolutions of the Celestial Spheres.
+      ru: Коперник издаёт «О вращениях небесных сфер».
+    source: https://en.wikipedia.org/wiki/De_revolutionibus_orbium_coelestium
+more:
+  pt: |-
+    Ao que parece, nem o próprio Pinto percebia tudo na sua vida. Enriquecido no comércio, em 1554 deu quase toda a fortuna aos jesuítas e fez-se noviço. Influenciado por São Francisco Xavier, foi como embaixador junto de um senhor japonês, desiludiu-se e três anos depois deixou a ordem.
+
+    Em Portugal passou anos a pedir ao rei recompensa pelos seus serviços. Foi-lhe concedida uma tença, mas, segundo ele, nunca a recebeu. Comprou então uma quinta no Pragal e sentou-se a escrever, para os filhos, como explicava. O livro esperou ainda 30 anos pela impressão: passou pela Inquisição, e cortaram-se passagens sobre os jesuítas.
+
+    Depois foi traduzido para seis línguas, e a Europa leu-o avidamente. Os historiadores ainda discutem o que é verdade e o que foi tirado de outros, mas as descrições da China e do Sião são consideradas valiosas. Nos 500 anos do seu nascimento, em 2011, foi cunhada uma moeda de 2 euros.
+  en: |-
+    Pinto himself seems not to have understood everything about his life. Having grown rich in trade, in 1554 he gave almost his entire fortune to the Jesuits and became a novice. Inspired by the missionary Francis Xavier, he went as an envoy to a Japanese lord, grew disillusioned, and left the order three years later.
+
+    Back in Portugal, he spent years asking the king for a reward for his service. He was granted a pension but, by his account, never received it. So he bought a small estate in Pragal and sat down to write, for his children, as he explained. The book waited another 30 years to be printed: it had to pass the Inquisition, and passages about the Jesuits were cut.
+
+    Then it was translated into six languages, and Europe devoured it. Historians still argue over what is true and what was borrowed from others, but his descriptions of China and Siam are considered valuable. For his 500th birthday, in 2011, Portugal issued a 2-euro coin.
+  ru: |-
+    Сам Пинту, похоже, тоже не всё понимал в своей жизни. Разбогатев на торговле, он в 1554 году отдал почти всё состояние иезуитам и сам стал послушником. Под влиянием миссионера Франциска Ксаверия он поехал послом к японскому князю, разочаровался и через три года ушёл из ордена.
+
+    Дома он годами просил у короля награду за службу. Пенсию ему назначили, но, по его словам, так и не выплатили. Тогда он купил усадьбу в Прагале и сел писать, для детей, как он объяснял. Книгу печатали ещё 30 лет: её проверяла инквизиция, а места про иезуитов вычёркивали.
+
+    Зато потом её перевели на шесть языков, и Европа зачитывалась. Историки до сих пор спорят, что в ней правда, а что взято у других, но описания Китая и Сиама считаются ценными. В честь пятисотлетия Пинту в 2011 году выпустили монету в 2 евро.
+myth:
+  verdict: fact
+  statement:
+    pt: Em Portugal, o nome Mendes Pinto virou piada sobre mentirosos
+    en: In Portugal, the name Mendes Pinto became a joke about liars
+    ru: В Португалии имя Мендеш Пинту стало шуткой про лжеца
+  answer:
+    pt: Por causa do seu livro incrível sobre a Ásia, o nome virou o trocadilho «Fernão, mentes? Minto!».
+    en: Because of his incredible book about Asia, his name became the pun ‘Fernão, mentes? Minto!’ (‘Fernão, are you lying? I am!’).
+    ru: Из-за невероятной книги о странствиях по Азии его имя переделали в каламбур «Fernão, mentes? Minto!», то есть «Фернан, врёшь? Вру!»
+sources:
+  - title: "Wikipedia: Fernão Mendes Pinto"
+    url: https://en.wikipedia.org/wiki/Fern%C3%A3o_Mendes_Pinto
+    type: reference
+    accessed: 2026-11-18
+  - title: "All About Portugal: Estátua de Fernão Mendes Pinto"
+    url: https://www.allaboutportugal.pt/en/almada/monuments/estatua-de-fernando-mendes-pinto
+    type: press
+    accessed: 2026-11-18
+image:
+  file: fernao-mendes-pinto-1537.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa sala com janela aberta sobre o rio, um homem de barba escreve à mesa e conta a uma família; em volta dele, em nuvens de fumo, surgem um junco chinês, um pagode, um elefante e uma nau."
+    en: "Blue-and-white azulejo-style illustration: in a room with a window open onto the river, a bearded man writes at a table and tells a family his story; in clouds of smoke around him appear a Chinese junk, a pagoda, an elephant, and a carrack."
+    ru: "Иллюстрация в духе сине-белого азулежу: в комнате с окном на реку бородатый человек пишет за столом и рассказывает семье; в клубах дыма вокруг него возникают китайская джонка, пагода, слон и корабль."
+  caption:
+    pt: Fernão Mendes Pinto a contar as suas viagens, no Pragal. Ilustração em estilo azulejo, criada por IA.
+    en: Fernão Mendes Pinto telling of his travels, in Pragal. Azulejo-style illustration, created by AI.
+    ru: Фернан Мендеш Пинту рассказывает о своих странствиях, Прагал. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: fernao-mendes-pinto-1537-detalhe.webp
+  alt:
+    pt: "Folha de rosto impressa em preto e branco, com moldura ornamental: o título «Peregrinaçam de Fernam Mendez Pinto», o texto do subtítulo, as armas reais de Portugal e, no fim, «Em Lisboa, 1614»."
+    en: "A printed title page in black and white with an ornamental border: the title “Peregrinaçam de Fernam Mendez Pinto,” the subtitle text, the royal arms of Portugal, and “Em Lisboa, 1614” at the bottom."
+    ru: "Печатный титульный лист в чёрно-белом цвете с орнаментальной рамкой: заглавие «Peregrinaçam de Fernam Mendez Pinto», текст подзаголовка, королевский герб Португалии и внизу «Em Lisboa, 1614»."
+  caption:
+    pt: Folha de rosto da «Peregrinação» de Fernão Mendes Pinto, Lisboa, 1614.
+    en: Title page of Fernão Mendes Pinto’s Peregrinação, Lisbon, 1614.
+    ru: Титульный лист «Странствия» Фернана Мендеша Пинту, Лиссабон, 1614.
+  author: Fernão Mendes Pinto
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Peregrina%C3%A7aum_00_rosto-5v.djvu
+related:
+  - palavras-portuguesas-no-japao-1543
+  - elefantes-malaca-1511
+route:
+  approx: true
+  points:
+    - name:
+        pt: Lisboa
+        en: Lisbon
+        ru: Лиссабон
+      lat: 38.7
+      lng: -9.15
+      year: 1537
+    - via: true
+      lat: 10
+      lng: -19
+      mode: sea
+    - via: true
+      lat: 0
+      lng: -6
+      mode: sea
+    - via: true
+      lat: -14
+      lng: 5
+      mode: sea
+    - via: true
+      lat: -35.5
+      lng: 19
+      mode: sea
+    - via: true
+      lat: -36
+      lng: 30
+      mode: sea
+    - via: true
+      lat: -20
+      lng: 54
+      mode: sea
+    - via: true
+      lat: 5
+      lng: 59
+      mode: sea
+    - name:
+        pt: Goa
+        en: Goa
+        ru: Гоа
+      lat: 15.5
+      lng: 73.8
+      mode: sea
+    - name:
+        pt: Malaca
+        en: Malacca
+        ru: Малакка
+      lat: 2.2
+      lng: 102.25
+      mode: sea
+    - via: true
+      lat: 10
+      lng: 108
+      mode: sea
+    - via: true
+      lat: 22
+      lng: 119
+      mode: sea
+    - name:
+        pt: Japão
+        en: Japan
+        ru: Япония
+      lat: 33.2
+      lng: 131.8
+      mode: sea
+    - via: true
+      lat: 22
+      lng: 119
+      mode: sea
+    - via: true
+      lat: 10
+      lng: 108
+      mode: sea
+    - via: true
+      lat: 1.5
+      lng: 104.5
+      mode: sea
+    - via: true
+      lat: 6
+      lng: 85
+      mode: sea
+    - name:
+        pt: Goa
+        en: Goa
+        ru: Гоа
+      lat: 15.5
+      lng: 73.8
+      mode: sea
+    - via: true
+      lat: 5
+      lng: 59
+      mode: sea
+    - via: true
+      lat: -20
+      lng: 54
+      mode: sea
+    - via: true
+      lat: -36
+      lng: 30
+      mode: sea
+    - via: true
+      lat: -35.5
+      lng: 19
+      mode: sea
+    - via: true
+      lat: -14
+      lng: 5
+      mode: sea
+    - via: true
+      lat: 0
+      lng: -6
+      mode: sea
+    - via: true
+      lat: 10
+      lng: -19
+      mode: sea
+    - name:
+        pt: Lisboa (Pragal)
+        en: Lisbon (Pragal)
+        ru: Лиссабон (Прагал)
+      lat: 38.7
+      lng: -9.15
+      year: 1558
+      mode: sea
+status: ready
+published: 2026-12-08
+placeholder: false
+ru_ready: true

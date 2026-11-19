@@ -1,0 +1,151 @@
+id: ze-povinho-1875
+slug:
+  pt: o-simplorio-que-se-tornou-o-rosto-de-um-pais
+  en: the-simple-man-who-became-the-face-of-a-nation
+  ru: prostak-kotoryj-stal-licom-strany
+title:
+  pt: O simplório que se tornou o rosto de um país
+  en: The Simple Man Who Became the Face of a Nation
+  ru: Простак, который стал лицом страны
+epoch: monarquia-e-republica
+level: frame
+year: 1875
+day: 06-12
+place:
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7223
+  lon: -9.1393
+bridge:
+  name: Museu Bordalo Pinheiro
+  title:
+    pt: Museu Bordalo Pinheiro
+    en: Bordalo Pinheiro Museum
+    ru: Музей Бордалу Пинейру
+  address: Campo Grande 382, Lisboa
+  lat: 38.758899
+  lon: -9.1541742
+  maps_url: https://www.google.com/maps/place/%D0%9C%D1%83%D0%B7%D0%B5%D0%B9+%D0%A0%D0%B0%D1%84%D0%B0%D1%8D%D0%BB%D0%B0+%D0%91%D0%BE%D1%80%D0%B4%D0%B0%D0%BB%D1%83+%D0%9F%D0%B8%D0%BD%D1%8C%D0%B5%D0%B9%D1%80%D1%83/@38.801997,-9.2827808,12z/data=!4m6!3m5!1s0xd1932fc649f57a1:0xe0234a018856abcb!8m2!3d38.758899!4d-9.1541742!16zL20vMGIwbTBr
+  url: https://museubordalopinheiro.pt/
+  note:
+    pt: Aqui estão reunidos desenhos e figuras de barro de Bordalo Pinheiro, incluindo o Zé Povinho.
+    en: Bordalo Pinheiro’s drawings and clay figures are gathered here, including Zé Povinho.
+    ru: Здесь собраны рисунки и глиняные фигурки Бордалу Пинейру, в том числе Зе Повинью.
+threads:
+  - gente-como-nos
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O símbolo de Portugal não é rei nem navegador, mas um simplório.
+  en: Portugal’s symbol isn’t a king or a navigator but a cartoon simpleton.
+  ru: Символом Португалии стал не король и не мореплаватель, а нарисованный простак.
+story:
+  pt: |-
+    A 12 de junho de 1875, no jornal lisboeta «A Lanterna Mágica», apareceu uma nova personagem do artista Rafael Bordalo Pinheiro. Era o Zé Povinho: um camponês de chapéu de aba larga, que todos enganam e despojam.
+
+    Bordalo desenhou-o durante trinta anos, umas trezentas vezes. Reis, ministros e partidos mudavam, mas o Zé Povinho continuava o mesmo: aguentava, resmungava e respondia ao poder com um gesto trocista.
+
+    Os leitores reconheceram-se nele. A personagem sobreviveu à monarquia, à república e à censura, e hoje é chamada o rosto não oficial de Portugal.
+  en: |-
+    On June 12, 1875, a new character by artist Rafael Bordalo Pinheiro appeared in the Lisbon paper A Lanterna Mágica (“The Magic Lantern”). It was Zé Povinho, “Joe Little-People”: a peasant in a wide-brimmed hat whom everyone cheats and fleeces.
+
+    Bordalo drew him for thirty years, some three hundred times. Kings, ministers, and parties came and went, but Zé Povinho stayed the same: he put up with it, grumbled, and answered those in power with a mocking gesture.
+
+    Readers saw themselves in him. The character outlived the monarchy, the republic, and censorship, and today he’s called the unofficial face of Portugal.
+  ru: |-
+    12 июня 1875 года в лиссабонской газете «Волшебный фонарь» появился новый персонаж художника Рафаэла Бордалу Пинейру. Это был Зе Повинью, «Зе из народа»: крестьянин в широкополой шляпе, которого все обманывают и обирают.
+
+    Бордалу рисовал его тридцать лет, около трёхсот раз. Короли, министры и партии менялись, а Зе Повинью оставался тем же: терпел, ворчал и отвечал власти насмешливым жестом.
+
+    Читатели узнали в нём себя. Персонаж пережил монархию, республику и цензуру, и сегодня его называют неофициальным лицом Португалии.
+meanwhile:
+  - scope: world
+    year: 1875
+    text:
+      pt: Estreia-se a ópera «Carmen», de Bizet.
+      en: Bizet’s opera Carmen premieres in Paris.
+      ru: В Париже впервые ставят оперу Бизе «Кармен».
+    source: https://en.wikipedia.org/wiki/Carmen
+more:
+  pt: |-
+    Logo o primeiro desenho era sobre impostos. O ministro da Fazenda recolhe do Zé uma esmola «para o Santo António», o santo parece-se com o chefe do governo, ao colo tem o rei em criança, e ao lado está o comandante da guarda de chicote na mão. O Zé Povinho paga. Os leitores perceberam logo a alusão.
+
+    Bordalo não era só caricaturista. Nas Caldas da Rainha tinha uma fábrica de faiança, e foi lá que o Zé Povinho se tornou figura de barro. Punham-no nas prateleiras por todo o país, e assim saiu dos jornais para dentro das casas.
+
+    O próprio Bordalo dizia dele: o Zé olha para um lado, depois para o outro, e fica na mesma. Por isso é amado e criticado: aguenta, mas às vezes mostra ao poder o que pensa. Os seus desenhos e figuras de barro estão reunidos no Museu Bordalo Pinheiro, em Lisboa.
+  en: |-
+    The very first drawing was about taxes. The finance minister collects alms from Zé “for Saint Anthony,” the saint looks like the head of government, the king sits on his lap as a baby, and beside them stands the chief of police with a whip. Zé Povinho pays. Readers got the hint right away.
+
+    Bordalo wasn’t just a cartoonist. He ran a ceramics factory in Caldas da Rainha, and there Zé Povinho became a clay figure. People put him on shelves all over the country, and that’s how he moved from the papers into people’s homes.
+
+    Bordalo himself put it this way: Zé looks one way, then the other, and stays just where he is. That’s why he’s both loved and scolded: he puts up with things, but now and then he shows the powerful what he thinks. His drawings and clay figures are gathered at the Bordalo Pinheiro Museum in Lisbon.
+  ru: |-
+    Уже первая картинка была про налоги. Министр финансов собирает с Зе подаяние «на святого Антония», святой похож на главу правительства, на коленях у него сидит король-младенец, а рядом стоит начальник стражи с кнутом. Зе Повинью платит. Читатели поняли намёк сразу.
+
+    Бордалу был не только карикатуристом. В городке Калдаш-да-Раинья у него была керамическая фабрика, и там Зе Повинью стал глиняной фигуркой. Его ставили на полки по всей стране, и так он вышел из газет в дома.
+
+    Сам Бордалу говорил о нём так: Зе смотрит в одну сторону, потом в другую и остаётся тем же. Поэтому его и любят, и ругают: он терпит, но иногда показывает власти, что думает. Его рисунки и глиняные фигурки собраны в музее Бордалу Пинейру в Лиссабоне.
+myth:
+  verdict: myth
+  statement:
+    pt: O Zé Povinho foi um camponês real do século XIX
+    en: Zé Povinho was a real 19th-century peasant
+    ru: Зе Повинью — реальный крестьянин, живший в XIX веке
+  answer:
+    pt: É uma personagem do caricaturista Rafael Bordalo Pinheiro. Apareceu num jornal em 1875 e tornou-se o rosto não oficial de Portugal.
+    en: He’s a character created by cartoonist Rafael Bordalo Pinheiro. He first appeared in a newspaper in 1875 and became Portugal’s unofficial face.
+    ru: Миф. Это персонаж карикатуриста Рафаэла Бордалу Пинейру. Он появился в газете в 1875 году и стал неофициальным лицом Португалии
+sources:
+  - title: "Wikipedia: Zé Povinho"
+    url: https://en.wikipedia.org/wiki/Z%C3%A9_Povinho
+    type: reference
+    accessed: 2026-11-18
+  - title: "DN/Lusa: Zé Povinho celebra 150 anos «contra as injustiças»"
+    url: https://www.dn.pt/cultura/z%C3%A9-povinho-celebra-150-anos-contra-as-injusti%C3%A7as-com-novidades
+    type: press
+    note:
+      ru: 150 лет Зе Повинью (2025)
+    accessed: 2026-11-18
+  - title: "Visit Lisboa: Museu Bordalo Pinheiro"
+    url: https://www.visitlisboa.com/pt-pt/locais/museu-bordalo-pinheiro
+    type: official
+    accessed: 2026-11-18
+image:
+  file: ze-povinho-1875.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa tipografia, operários de aventais sujos de tinta riem junto a uma prensa e mostram um desenho de um camponês de chapéu de aba larga; numa prateleira há uma figurinha do mesmo camponês, e pela janela aberta leitores na rua leem o jornal."
+    en: "Blue-and-white azulejo-style illustration: in a print shop, workers in ink-stained aprons laugh beside a press and hold up a drawing of a peasant in a wide-brimmed hat; a small figurine of the same peasant sits on a shelf, and through the open window readers in the street read the paper."
+    ru: "Иллюстрация в духе сине-белого азулежу: в типографии рабочие в фартуках, испачканных краской, смеются у печатного станка и показывают рисунок крестьянина в широкополой шляпе; на полке стоит фигурка того же крестьянина, а за открытым окном на улице читатели читают газету."
+  caption:
+    pt: Nasce o Zé Povinho, na tipografia de «A Lanterna Mágica», 1875. Ilustração em estilo azulejo, criada por IA.
+    en: Zé Povinho is born in the print shop of A Lanterna Mágica, 1875. Azulejo-style illustration, created by AI.
+    ru: Рождение Зе Повинью в типографии «Волшебного фонаря», 1875 год. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: ze-povinho-1875-detalhe.webp
+  alt:
+    pt: "Caricatura a preto e branco: um camponês de chapéu de aba larga estende a mão a um homem magro que recolhe esmolas diante de um altar com uma figura de santo; à esquerda, um guarda sentado com um chicote; por cima, a legenda «A Lanterna Mágica»."
+    en: "Black-and-white caricature: a peasant in a wide-brimmed hat holds out his hand to a thin man collecting alms before an altar with a figure of a saint; on the left a guard sits with a whip; the caption “A Lanterna Mágica” runs above."
+    ru: "Чёрно-белая карикатура: крестьянин в широкополой шляпе протягивает руку худому человеку, собирающему подаяние перед алтарём с фигурой святого; слева сидит стражник с кнутом; сверху подпись «A Lanterna Mágica»."
+  caption:
+    pt: O primeiro Zé Povinho, em «A Lanterna Mágica», 12 de junho de 1875.
+    en: The first Zé Povinho, in A Lanterna Mágica, June 12, 1875.
+    ru: Первый Зе Повинью, «A Lanterna Mágica», 12 июня 1875 года.
+  author: Rafael Bordalo Pinheiro
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Ze_povinho_lanterna_magica_1875.jpg
+status: ready
+published: 2026-12-02
+placeholder: false
+ru_ready: true

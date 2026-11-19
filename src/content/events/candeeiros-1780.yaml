@@ -1,0 +1,142 @@
+id: candeeiros-1780
+slug:
+  pt: os-candeeiros-que-se-apagaram
+  en: the-lamps-that-went-out
+  ru: fonari-kotorye-pogasli
+title:
+  pt: Os candeeiros que se apagaram
+  en: The Lamps That Went Out
+  ru: Фонари, которые погасли
+epoch: pombal-e-terramoto
+level: frame
+year: 1780
+place:
+  name:
+    pt: Lisboa, Chiado
+    en: Lisbon, Chiado
+    ru: Лиссабон, Шиаду
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7106
+  lon: -9.1427
+bridge:
+  name: Largo do Chiado
+  title:
+    pt: Largo do Chiado
+    en: Largo do Chiado
+    ru: Площадь Шиаду
+  address: Largo do Chiado, Lisboa
+  lat: 38.710559
+  lon: -9.142653
+  maps_url: https://www.google.com/maps/search/38.710559,+-9.142653
+  url: https://www.cm-lisboa.pt/
+  note:
+    pt: Aqui se acenderam em 1878 os primeiros candeeiros elétricos de Lisboa, oferta do rei D. Luís I.
+    en: Lisbon’s first electric street lamps were lit here in 1878, a gift from King Luís I.
+    ru: Здесь в 1878 году зажглись первые в Лиссабоне электрические фонари, подарок короля Луиша I.
+threads:
+  - gente-como-nos
+  - engenho
+importance: 3
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os «morcegos» que guardavam os lisboetas.
+  en: The “bats” who guarded Lisbon at night.
+  ru: «Летучие мыши», которые охраняли горожан.
+story:
+  pt: |-
+    Depois do terramoto de 1755, Lisboa foi reconstruída, mas à noite as ruas continuavam completamente às escuras. Andar nelas era perigoso, e aos guardas noturnos os lisboetas chamavam «morcegos».
+
+    Em 1780, o intendente da polícia Pina Manique decidiu iluminar a cidade. O Estado não tinha dinheiro para isso, e quem pagou foram os comerciantes: cada um punha um candeeiro à porta da sua loja e enchia-o de azeite.
+
+    O azeite era caro, e a luz ficava para todos os que passavam. Os comerciantes começaram a poupar, e os candeeiros foram-se apagando um a um. Em 1792, um viajante voltava a escrever que Lisboa estava mergulhada no escuro.
+  en: |-
+    After the 1755 earthquake, Lisbon was rebuilt, but at night its streets were still pitch-dark. Walking them was dangerous, and people called the night watchmen “bats.”
+
+    In 1780, police chief Pina Manique decided to light up the city. The treasury had no money for it, so shopkeepers were made to pay: each one hung a lamp by his shop door and filled it with olive oil.
+
+    Oil was expensive, and the light went to every passerby. The shopkeepers began to cut back, and the lamps went out one by one. By 1792, a traveler was again writing that Lisbon was plunged into darkness at night.
+  ru: |-
+    После землетрясения 1755 года Лиссабон отстроили заново, но ночью улицы оставались совсем тёмными. Ходить по ним было опасно, а ночных стражников горожане прозвали «летучими мышами».
+
+    В 1780 году глава полиции Пина Маники решил осветить город. Денег на это у казны не было, и платить велели торговцам: каждый ставил фонарь у своей лавки и заливал в него оливковое масло.
+
+    Масло стоило дорого, а свет доставался всем прохожим. Торговцы стали экономить, и фонари гасли один за другим. К 1792 году путешественник снова писал, что ночной Лиссабон погружён во тьму.
+meanwhile:
+  - scope: world
+    year: 1781
+    text:
+      pt: William Herschel descobre o planeta Úrano.
+      en: William Herschel discovers the planet Uranus.
+      ru: Уильям Гершель открывает планету Уран.
+    source: https://en.wikipedia.org/wiki/Uranus
+more:
+  pt: |-
+    A cidade ficou às escuras mais de meio século. A luz só voltou em 1848, com o gás. Agora a luz vinha de uma companhia de gás, e não dos lojistas. Mas o gás chegava primeiro só às ruas do centro, e os bairros de fora viveram muito tempo no escuro.
+
+    O passo seguinte foi dado pelo rei. Em 1878, D. Luís I ofereceu à cidade os primeiros candeeiros elétricos: iluminaram o Chiado, e o Diário de Notícias contava como as pessoas se juntavam na praça para ver a nova luz. Em 1889 a eletricidade chegou à Avenida da Liberdade, mas só até à uma da manhã. Depois voltava a acender-se o gás.
+
+    Candeeiros do século XIX, de ferro fundido e forjado, ainda estão pendurados nas paredes dos bairros antigos. E a eletricidade acendeu-se pela primeira vez em 1878 ali, no Chiado.
+  en: |-
+    The city stayed dark for more than half a century. Light returned only in 1848, with gas. Now the light came from a gas company, not from shopkeepers. Still, gas reached only the central streets at first, and the outskirts stayed dark for a long time.
+
+    The next step came from the king. In 1878, Luís I gave the city its first electric lamps: they lit up Chiado, and the Diário de Notícias described crowds gathering in the square to see the new light. In 1889 electricity reached Avenida da Liberdade, but only until 1 a.m. After that, the gas lamps were lit again.
+
+    19th-century cast-iron and wrought-iron lamps still hang on the walls of the old neighborhoods. And electric light first came on in 1878 right here, in Chiado.
+  ru: |-
+    Город остался тёмным больше чем на полвека. Свет вернулся только в 1848 году, когда в Лиссабоне провели газ. Теперь свет давала газовая компания, а не лавочники. Но газа хватало сначала только на центральные улицы, а окраины ещё долго жили в темноте.
+
+    Следующий шаг сделал король. В 1878 году Луиш I подарил городу первые электрические фонари: ими осветили Шиаду, и газета «Диариу-ди-Нотисиаш» описывала, как на площадь собирались смотреть на новый свет. А в 1889 году электричеством осветили Авениду-да-Либердаде, правда, только до часу ночи. Потом на ней снова зажигали газ.
+
+    Фонари XIX века, чугунные и кованые, до сих пор висят на стенах старых кварталов. А электричество в 1878 году впервые зажглось на Шиаду.
+myth:
+  verdict: myth
+  statement:
+    pt: Os primeiros candeeiros de Lisboa eram pagos pela cidade
+    en: Lisbon’s first street lamps were paid for by the city
+    ru: Первые фонари Лиссабона оплачивал город
+  answer:
+    pt: Em 1780, eram os comerciantes que os punham e enchiam de azeite. Cansaram-se, e em 1792 a cidade voltou ao escuro.
+    en: In 1780, shopkeepers hung the lamps and filled them with olive oil themselves. They got tired of it, and by 1792 the city was dark again.
+    ru: Миф. В 1780 году фонари ставили и заправляли оливковым маслом сами торговцы. Им это надоело, и к 1792 году город снова погрузился во тьму
+sources:
+  - title: "Jornal de Negócios: Luzes na cidade nocturna"
+    url: https://www.jornaldenegocios.pt/weekend/amp/luzes-na-cidade-nocturna
+    type: press
+    note:
+      ru: тьма 1792 (Линк), Шиаду 1878 и Diário de Notícias, Авенида 1889
+    accessed: 2026-11-18
+  - title: "Correio da Manhã: Iluminação pública começou há 200 anos"
+    url: https://www.cmjornal.pt/portugal/detalhe/iluminacao-publica-comecou-ha-200-anos
+    type: press
+    note:
+      ru: торговцы платили за свои фонари, газ с 1848 года
+    accessed: 2026-11-18
+  - title: "Visit Lisboa: Candeeiros de Lisboa"
+    url: https://www.visitlisboa.com/pt-pt/locais/candeeiros-de-lisboa
+    type: official
+    accessed: 2026-11-18
+image:
+  file: candeeiros-1780.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa rua escura de Lisboa, um comerciante sobe a uma escada para acender o candeeiro à porta da loja; à esquerda, um guarda noturno de capa larga, o «morcego», com uma lanterna; ao fundo, outro candeeiro apagado."
+    en: "Blue-and-white azulejo-style illustration: on a dark Lisbon street, a shopkeeper climbs a ladder to light the lamp by his shop door; on the left a night watchman in a wide cloak, the “bat,” carries a lantern; another unlit lamp stands in the distance."
+    ru: "Иллюстрация в духе сине-белого азулежу: на тёмной лиссабонской улице лавочник взобрался на лестницу и зажигает фонарь у двери лавки; слева ночной стражник в широком плаще, «летучая мышь», с фонарём; вдали ещё один погасший фонарь."
+  caption:
+    pt: Um comerciante acende o candeeiro à porta da loja, Lisboa, 1780. Ilustração em estilo azulejo, criada por IA.
+    en: A shopkeeper lights the lamp at his shop door, Lisbon, 1780. Azulejo-style illustration, created by AI.
+    ru: Лавочник зажигает фонарь у двери лавки, Лиссабон, 1780 год. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+related:
+  - terramoto-1755
+status: ready
+published: 2026-12-09
+placeholder: false
+ru_ready: true
