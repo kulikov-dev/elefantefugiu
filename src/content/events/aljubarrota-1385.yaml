@@ -217,7 +217,7 @@ interactive:
         max: 7000
         unit_per_dot: 1000
         note:
-          pt: Cerca de 7 000 homens.
+          pt: Cerca de 7000 homens.
           en: About 7,000 men.
           ru: Около 7 000 человек.
       - id: castelhanos

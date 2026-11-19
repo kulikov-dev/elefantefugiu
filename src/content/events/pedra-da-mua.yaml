@@ -74,7 +74,7 @@ meanwhile:
   - scope: world
     year: -150000000
     text:
-      pt: "Na Alemanha vivia o arqueópterix, uma das primeiras aves"
+      pt: "Na Alemanha vivia o arqueópterix, uma das primeiras aves."
       en: "Archaeopteryx, one of the first birds, lived in what is now Germany."
       ru: "В Германии жил археоптерикс, одна из первых птиц"
     source: "https://en.wikipedia.org/wiki/Archaeopteryx"

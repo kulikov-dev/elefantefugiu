@@ -50,7 +50,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
           id: 'como-ler',
           heading: 'Como ler',
           paragraphs: ['Cada história tem três camadas. Pare em qualquer uma.'],
-          items: ['**Gancho.** Uma frase: «O rei pôs um rinoceronte contra um elefante. O elefante fugiu.»', '**História.** Como aconteceu, em poucas linhas.', '**Saber mais.** O contexto, como se sabe e onde ir.'],
+          items: ['**Gancho.** Uma frase: «O rei pôs um rinoceronte contra um elefante. O elefante fugiu.»', '**História.** Como aconteceu, em poucas linhas.', '**Saber mais.** O contexto, o que se sabe e onde ir.'],
           after: ['Pode ler por épocas, por fios (o mar, a comida e o vinho, o poder e a revolta, gente como nós, a natureza) ou simplesmente no mapa.'],
         },
         {
@@ -349,7 +349,7 @@ export const STATIC_PAGES: Record<StaticKey, Record<Lang, StaticPage>> = {
         {
           id: 'contagem',
           heading: 'Contagem de visitas',
-          paragraphs: ['Conto apenas as visitas às páginas, sem cookies e sem dados pessoais. Para isso uso o serviço GoatCounter, que não regista o seu endereço IP (durante até 8 horas fica apenas em memória, para distinguir uma visita repetida) nem sabe quem é.'],
+          paragraphs: ['Conto apenas as visitas às páginas, sem cookies e sem dados pessoais. Para isso uso o serviço GoatCounter, que não regista o seu endereço IP (por um máximo de 8 horas fica apenas em memória, para distinguir uma visita repetida) nem sabe quem é.'],
         },
         {
           id: 'terceiros',

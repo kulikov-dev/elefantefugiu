@@ -11,7 +11,7 @@ epoch: monarquia-e-republica
 level: story
 year: 1850
 year_label:
-  pt: c. de 1850
+  pt: cerca de 1850
   en: c. 1850
   ru: около 1850 года
 year_scale:
@@ -51,7 +51,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: Na Madeira desce-se a montanha em trenós de vime, sem neve.
+  pt: Na Madeira, dois homens travam o cesto com a sola das botas.
   en: On Madeira, wicker sleds race downhill with no snow at all.
   ru: На Мадейре с горы в город съезжают в плетёных санях без снега.
 story:

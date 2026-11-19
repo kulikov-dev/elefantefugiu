@@ -32,11 +32,11 @@
       head_link: 'A história deste dia →'
       art_title: 'Uma coroa numa almofada de veludo, com um cetro à frente'
       caption: 'A manhã de 1 de dezembro de 1640: Lisboa celebra o fim do domínio espanhol.'
-      lead: 'A 1 de dezembro de 1640, Portugal voltou a ser um reino independente, depois de 60 anos sob a mesma coroa que Espanha.'
+      lead: 'A 1 de dezembro de 1640, Portugal voltou a ser um reino independente, depois de 60 anos sob a mesma coroa que a Espanha.'
       og_description: 'Porque é que, desde 1646, nenhum rei de Portugal voltou a usar a coroa, e como este feriado chegou a ser suspenso para poupar.'
       off_window: 'Este feriado celebra-se a 1 de dezembro'
       traditions:
-        - title: '«Antes rainha por um dia».'
+        - title: '«Antes ser rainha por um dia».'
           text: 'Conta-se que foi a mulher do duque, Luísa de Gusmão, quem o convenceu a aceitar: «Antes ser rainha por um dia do que duquesa toda a vida». É provável que a frase lhe tenha sido atribuída mais tarde, mas todos a aprendem na escola.'
         - title: 'O feriado que foi suspenso.'
           text: 'Em 2013, durante a crise, o 1.º de Dezembro deixou de ser feriado para poupar. Três anos depois, em 2016, o feriado voltou.'
@@ -44,7 +44,7 @@
           text: 'A Praça dos Restauradores, no centro de Lisboa, tem o nome deste dia. No obelisco de 1886 estão gravados os nomes das batalhas da guerra que, depois de 1640, durou mais 28 anos.'
         - title: 'Quarenta conjurados.'
           text: 'Na manhã de 1 de dezembro de 1640, quarenta fidalgos invadiram o paço, em Lisboa.'
-          link: { story: restauracao-1640, label: 'A nossa história →' }
+          link: { story: restauracao-1640, label: 'A minha história →' }
     en:
       date: 'December 1'
       name: 'Restoration of Independence Day'
@@ -211,7 +211,7 @@
       head_link: 'A história deste dia →'
       art_title: 'A rainha do Carnaval: coroa, pérolas, leque de renda e um bigode farfalhudo'
       caption: 'Os caretos de Podence: mascarados com trajes farfalhudos e chocalhos.'
-      lead: 'Os últimos dias antes da Quaresma. Nas cidades há desfiles, e nas aldeias do Norte ainda se vestem máscaras antigas.'
+      lead: 'Os últimos dias antes da Quaresma. Nas cidades há desfiles, e nas aldeias do Norte ainda se usam máscaras antigas.'
       og_description: 'Porque é que em Torres Vedras a rainha do Carnaval é sempre um homem e atrás de quem correm os caretos de Podence.'
       off_window: 'Esta festa celebra-se na terça-feira antes da Quaresma'
       traditions:
@@ -288,7 +288,7 @@
         - title: 'O folar dos padrinhos.'
           text: 'O folar é um pão doce em que se cozem ovos inteiros, com casca, presos por tiras de massa em cruz. No Norte, no Domingo de Ramos, os afilhados levam à madrinha um ramo de violetas e ao padrinho um ramo de oliveira, e na Páscoa os padrinhos retribuem com o folar. Cada terra tem o seu: em Trás-os-Montes leva enchidos e presunto, e em Olhão, no Sul, é doce e folhado, com açúcar e canela.'
         - title: 'A cruz vai de casa em casa.'
-          text: 'No domingo de Páscoa, sobretudo no Norte, sai o compasso: o padre ou um paroquiano leva a cruz de casa em casa. As entradas enfeitam-se com verdura e tapetes de flores, os donos da casa beijam a cruz e há sempre algo para oferecer. Pelas contas do CM, num só dia as cruzes entram em cerca de um milhão e meio de casas.'
+          text: 'No domingo de Páscoa, sobretudo no Norte, sai o compasso: o padre ou um paroquiano leva a cruz de casa em casa. As entradas enfeitam-se com verdura e tapetes de flores, os donos da casa beijam a cruz e há sempre algo para oferecer. Segundo o Correio da Manhã, num só dia as cruzes entram em cerca de um milhão e meio de casas.'
         - title: 'A noite dos chocalhos.'
           text: 'No Sábado de Aleluia, os pastores levam os borregos ao centro de Castelo de Vide para serem benzidos. À noite, depois da Vigília Pascal, milhares de pessoas percorrem as ruas a tocar chocalhos de todos os tamanhos, acompanhados pelos sinos da igreja e da torre do relógio. Diz-se que era assim que os pastores agradeciam à Igreja a bênção dos rebanhos.'
         - title: 'Mexilhão em vez de carne.'

@@ -29,7 +29,7 @@ bridge:
   maps_url: https://www.google.com/maps/place/Monastery+of+Saint+Dinis+and+Saint+Bernard+of+Odivelas/@38.7912893,-9.1849773,17z/data=!4m6!3m5!1s0xd1932a9bc5ca7af:0x9426b5f184e7b279!8m2!3d38.7912851!4d-9.1824024!16s%2Fm%2F04dzwv1
   url: https://mosteiro.cm-odivelas.pt/
   note:
-    pt: Mosteiro fundado por D. Dinis, onde está sepultado, e onde, segundo a tradição, as freiras criaram a marmelada branca.
+    pt: Mosteiro fundado por D. Dinis, que aí está sepultado; segundo a tradição, as freiras criaram aqui a marmelada branca.
     en: A monastery founded by King Dinis, where he is buried, by tradition, its nuns created Odivelas’s white marmelada.
     ru: Монастырь, основанный королём Динишем, где он похоронен и где, по преданию, монахини придумали белую мармеладу.
 threads:
@@ -114,11 +114,11 @@ more:
 myth:
   verdict: myth
   statement:
-    pt: A palavra inglesa “marmalade” nasceu de Maria Stuart doente
+    pt: A palavra inglesa «marmalade» nasceu de Maria Stuart doente
     en: The word marmalade comes from a sick Mary, Queen of Scots
     ru: Слово marmalade появилось из-за больной Марии Стюарт
   answer:
-    pt: A palavra já aparece em Inglaterra em 1480, muito antes de Maria nascer. Vem do português “marmelada”, a pasta de marmelo.
+    pt: A palavra já aparece em Inglaterra em 1480, muito antes de Maria nascer. Vem do português «marmelada», a pasta de marmelo.
     en: The word was recorded in England by 1480, long before Mary was born. It comes from the Portuguese ‘marmelada,’ a quince paste.
     ru: Миф. Слово записано в Англии уже в 1480 году, задолго до рождения Марии. Оно от португальского marmelada, пасты из айвы.
 sources:

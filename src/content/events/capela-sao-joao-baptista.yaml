@@ -46,7 +46,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: O rei encomendou uma capela em Roma e trouxe-a às peças.
+  pt: João V nunca foi a Roma e aprovou a capela por maqueta.
   en: The king ordered a chapel from Rome and shipped it in pieces.
   ru: Король заказал часовню в Риме и привёз её по частям.
 story:

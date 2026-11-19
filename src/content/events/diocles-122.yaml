@@ -51,7 +51,7 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: O desportista mais rico de Roma era um auriga da Lusitânia.
+  pt: Um auriga da Lusitânia ganhou quase 36 milhões de sestércios.
   en: Rome’s richest athlete was a chariot driver from Lusitania.
   ru: Самым богатым спортсменом Рима стал возничий из Лузитании.
 story:
