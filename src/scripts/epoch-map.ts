@@ -68,6 +68,26 @@ if (page && feed && aside && mapRoot) {
   feed.addEventListener('click', (e) => chooseRecord(e.target));
   feed.addEventListener('focusin', (e) => chooseRecord(e.target));
 
+  // Hover (mouse only, touch is unchanged): a record lights its marker, a marker lights its record.
+  const mouse = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const setHover = (id: string | null) => {
+    for (const item of feed.children) {
+      const record = item.querySelector('article.ecard');
+      if (record && id !== null && idOf(record) === id) item.setAttribute('data-hover', '');
+      else item.removeAttribute('data-hover');
+    }
+  };
+  feed.addEventListener('mouseover', (e) => {
+    if (!mouse.matches) return;
+    const record = e.target instanceof Element ? e.target.closest('article.ecard') : null;
+    document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: record ? idOf(record) : null } }));
+  });
+  feed.addEventListener('mouseleave', () => document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: null } })));
+  mapRoot.addEventListener('map:hover', (e) => {
+    if (!mouse.matches) return;
+    setHover((e as CustomEvent<{ id: string | null }>).detail?.id ?? null);
+  });
+
   // A link with #c-<id> opens that card; its marker is chosen as soon as the map is ready.
   mapRoot.addEventListener('map:ready', () => {
     const fromHash = location.hash.match(/^#c-(.+)$/);

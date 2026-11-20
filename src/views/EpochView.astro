@@ -442,7 +442,8 @@ const schema = epochNodes(schemaCtx, {
 
   /* The card whose marker was chosen on the map (and the reverse): a coloured bar on its left edge; the marker on the map is
      highlighted too, so the state is not a colour alone. All the cards are otherwise alike. */
-  .feed__item[data-active] > :global(.ecard) {
+  .feed__item[data-active] > :global(.ecard),
+  .feed__item[data-hover] > :global(.ecard) {
     box-shadow: inset var(--border-heavy) 0 0 var(--epoch-primary);
   }
 

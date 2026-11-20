@@ -201,6 +201,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   // ---- markers -----------------------------------------------------------------------------------------------
 
   const layers = new Map<string, L.Marker>();
+  const mouseOnly = window.matchMedia('(hover: hover) and (pointer: fine)');
+  /** The record of the feed under the pointer (epoch page), or null. */
+  let hoverId: string | null = null;
   /** "Through the centuries": the player (loaded at the first press of its button) and whether markers still carry its marks. */
   let tt: Timetravel | null = null;
   let ttDrawn = false;
@@ -230,6 +233,13 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     }
     el.querySelector('.visually-hidden')!.textContent = label;
     el.dataset.key = key;
+    // A mouse over a story marker lights its record in the feed (epoch page); no effect for clusters or on touch screens.
+    el.addEventListener('mouseenter', () => {
+      if (byId.has(key) && mouseOnly.matches) root.dispatchEvent(new CustomEvent('map:hover', { bubbles: true, detail: { id: key } }));
+    });
+    el.addEventListener('mouseleave', () => {
+      if (byId.has(key)) root.dispatchEvent(new CustomEvent('map:hover', { bubbles: true, detail: { id: null } }));
+    });
     // Leaflet turns Enter into a click only for popups; markers also answer Enter and Space (role="button").
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -298,11 +308,20 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       } else {
         const el = marker.getElement();
         const selected = key === state.id;
-        el?.classList.toggle('mk--selected', selected);
+        el?.classList.toggle('mk--selected', selected || key === hoverId);
         // The bridge's name is written next to the selected marker only (clusters have none).
         const caption = el?.querySelector('.mk__caption');
         if (caption) caption.textContent = selected ? (byId.get(key)?.bridgeName ?? '') : '';
       }
+    }
+    // A name that would run off the right edge of the map goes to the left of its marker.
+    const edge = canvas.getBoundingClientRect().right;
+    for (const marker of layers.values()) {
+      const el = marker.getElement();
+      const caption = el?.querySelector<HTMLElement>('.mk__caption');
+      if (!el || !caption?.textContent) continue;
+      el.classList.remove('mk--caption-left');
+      if (caption.getBoundingClientRect().right > edge) el.classList.add('mk--caption-left');
     }
     // A removed marker would drop keyboard focus to the page; keep it on the map instead.
     if (focusedKey && !layers.has(focusedKey)) canvas.focus();
@@ -730,6 +749,11 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   document.addEventListener('map:filter', (e) => {
     const detail = (e as CustomEvent<{ fio?: string | null; epoca?: string | null }>).detail ?? {};
     applyFilter({ fio: detail.fio ?? null, epoca: detail.epoca ?? state.epoca });
+  });
+  // The pointer is over a record of the feed: its marker is lit as if chosen, without moving the map or the choice.
+  document.addEventListener('map:hover', (e) => {
+    hoverId = (e as CustomEvent<{ id: string | null }>).detail?.id ?? null;
+    for (const [key, marker] of layers) marker.getElement()?.classList.toggle('mk--selected', key === state.id || key === hoverId);
   });
   document.addEventListener('map:focus', (e) => {
     const id = (e as CustomEvent<{ id: string | null }>).detail?.id ?? null;

@@ -761,8 +761,14 @@
   position: absolute;
   inset-inline-start: 100%;
   inset-block-start: 50%;
-  translate: var(--space-2) -50%;
+  /* Clear of the marker: the diamond (turned 45 degrees, enlarged when selected) reaches past its box, so the gap is counted from the shape. */
+  --mk-gap: calc(max(0px, var(--mk-size) * 0.9 - var(--mk-box) / 2) + var(--space-2));
+  translate: var(--mk-gap) -50%;
+  /* The box of the marker is the containing block and is narrow: without an own width the text breaks at every chance. */
+  width: max-content;
   max-width: var(--map-caption-width);
+  hyphens: none;
+  overflow-wrap: normal;
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-md);
   background: var(--color-overlay);
@@ -773,6 +779,13 @@
   line-height: 1.25;
   white-space: normal;
   pointer-events: none;
+}
+
+/* Too close to the right edge of the map: the name goes to the left of the marker. */
+.mk--caption-left .mk__caption {
+  inset-inline-start: auto;
+  inset-inline-end: 100%;
+  translate: calc(var(--mk-gap) * -1) -50%;
 }
 
 .mk__caption:empty {
