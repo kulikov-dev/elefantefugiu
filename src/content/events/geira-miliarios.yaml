@@ -1,0 +1,167 @@
+id: geira-miliarios
+slug:
+  pt: os-marcos-da-estrada-para-astorga
+  en: the-milestones-on-the-road-to-astorga
+  ru: stolby-na-doroge-v-astorgu
+title:
+  pt: Os marcos da estrada para Astorga
+  en: The Milestones on the Road to Astorga
+  ru: Столбы на дороге в Асторгу
+epoch: lusitania-e-roma
+level: story
+year: 80
+place:
+  name:
+    pt: Geira, Campo do Gerês
+    en: The Geira, Campo do Gerês
+    ru: Жейра, Кампу-ду-Жереш
+  short:
+    pt: Gerês
+    en: Gerês
+    ru: Жереш
+  lat: 41.7507
+  lon: -8.1976
+bridge:
+  name: Museu da Geira
+  title:
+    pt: Museu da Geira
+    en: Geira Museum
+    ru: Музей Жейры
+  address: Campo do Gerês, Terras de Bouro
+  lat: 41.7507072
+  lon: -8.1976057
+  maps_url: https://www.google.com/maps/place/Museu+da+Geira/@41.7507112,-8.2001806,17z/data=!3m1!4b1!4m6!3m5!1s0xd25190047b8815d:0x41a54b13bfb92e87!8m2!3d41.7507072!4d-8.1976057!16s%2Fg%2F11p2025nty
+  url: https://en.wikipedia.org/wiki/Via_XVIII
+  note:
+    pt: Museu da estrada romana que atravessa a serra; perto, junto à via antiga, erguem-se os marcos
+      miliários.
+    en: A museum of the Roman road through the mountains; nearby, milestones still line the old route.
+    ru: Музей римской дороги через горы; рядом у старой дороги стоят мильные столбы.
+threads:
+  - engenho
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: No Gerês há marcos romanos em grupos, cada um com outro imperador.
+  en: Roman milestones stand in clusters in the Gerês, each naming another emperor.
+  ru: В горах Жереш римские столбы стоят группами. На каждом имя своего императора.
+seo:
+  title:
+    pt: Marcos romanos da Geira, no Gerês | O Elefante Fugiu
+    en: Roman Milestones of the Geira, Gerês | O Elefante Fugiu
+    ru: Столбы на дороге в Асторгу · Жереш, 80 | O Elefante Fugiu
+story:
+  pt: >-
+    Por volta do ano 80, os romanos abriram uma estrada pela serra, de Braga até Astorga, com mais
+    de trezentos quilómetros. As gentes da terra chamam a esta estrada Geira.
+
+    A cada milha romana, cerca de um quilómetro e meio, punha-se um marco de pedra à beira da
+    estrada. Nele escrevia-se quantas milhas faltavam até à cidade e que imperador tinha construído
+    ou reparado a estrada.
+
+    Os imperadores mudavam, e cada reparação deixava um marco novo. Por isso, no bosque junto ao
+    Campo do Gerês, os marcos estão em grupos, vários lado a lado, cada um com o nome de outro
+    imperador.
+  en: >-
+    Around the year 80, the Romans built a road through the mountains from Braga to Astorga, more
+    than three hundred kilometers (190 miles) long. Locals call this road the Geira.
+
+    Every Roman mile, a little under a modern mile, a stone marker was set beside the road. It said
+    how many miles were left to the city and which emperor had built or repaired the road.
+
+    Emperors came and went, and every repair left a new milestone. That’s why, in the woods near
+    Campo do Gerês, the milestones stand in clusters, several side by side, each with a different
+    emperor’s name.
+  ru: >-
+    Около 80 года римляне провели через горы дорогу из Браги в Асторгу, это больше трёхсот
+    километров. Местные называют эту дорогу Жейра.
+
+    Каждую римскую милю, это примерно полтора километра, у дороги ставили каменный столб. На нём
+    писали, сколько миль до города и какой император построил или починил дорогу.
+
+    Императоры менялись, и после каждого ремонта у дороги появлялся новый столб. Поэтому в лесу у
+    Кампу-ду-Жереш столбы стоят группами, по нескольку рядом, и на каждом имя другого императора.
+more:
+  pt: >-
+    O marco miliário não era só uma placa de caminho. Quem passava via nele o nome do imperador e
+    percebia quem mandava ali e quem cuidava da sua viagem. Era o poder gravado em granito ao longo
+    de toda a estrada.
+
+
+    Na Geira sobreviveram tantos marcos que é considerada uma das estradas romanas mais ricas neles.
+    Ninguém os levou para outras obras, porque a estrada atravessava serras isoladas, onde não havia
+    quem quisesse a pedra.
+
+
+    Hoje a velha estrada faz-se a pé: parte dela é um trilho no Parque Nacional da Peneda-Gerês. Os
+    marcos continuam onde foram postos, e no Campo do Gerês há um museu dedicado à estrada.
+  en: >-
+    A milestone wasn’t just a road sign. Travelers saw the emperor’s name and understood who was in
+    charge here and who was looking after their journey. It was power carved in granite along the
+    whole road.
+
+
+    So many milestones survive on the Geira that it’s considered one of the Roman roads richest in
+    them. No one hauled them away for other buildings, because the road ran through remote mountains
+    where nobody wanted the stone.
+
+
+    Today people walk the old road: part of it is a trail through Peneda-Gerês National Park. The
+    milestones stand where they were placed, and Campo do Gerês has a museum about the road.
+  ru: >-
+    Мильный столб был не только указателем. Путник видел на нём имя императора и понимал, кто здесь
+    хозяин и кто заботится о его пути. Это была власть, вырезанная в граните вдоль всей дороги.
+
+
+    На Жейре таких столбов уцелело так много, что её считают одной из самых богатых ими римских
+    дорог. Их не увозили на стройки, потому что дорога шла через глухие горы, где камень некому было
+    брать.
+
+
+    Сегодня по старой дороге ходят пешком: часть её стала тропой через национальный парк
+    Пенеда-Жереш. Столбы стоят там же, где их поставили, а в Кампу-ду-Жереш открыт музей дороги.
+myth:
+  verdict: myth
+  statement:
+    pt: Os marcos das estradas romanas só indicavam a distância
+    en: Roman milestones only showed the distance
+    ru: Римские дорожные столбы показывали только расстояние
+  answer:
+    pt: Também tinham o nome do imperador que construiu ou reparou a estrada. Cada reparação trazia um
+      marco novo.
+    en: They also named the emperor who built or repaired the road. Every repair brought a new
+      milestone.
+    ru: На них писали и имя императора, который построил или починил дорогу. Новый ремонт приносил новый
+      столб.
+sources:
+  - title: "Wikipedia: Via XVIII"
+    url: https://en.wikipedia.org/wiki/Via_XVIII
+    type: reference
+    accessed: 2026-11-20
+  - title: "e-konomista: Caminho da Geira no Gerês"
+    url: https://www.e-konomista.pt/caminho-da-geira-no-geres/
+    type: website
+    accessed: 2026-11-20
+image:
+  file: geira-miliarios.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: um marco de pedra cilíndrico com uma placa de linhas
+      gravadas, numa relva."
+    en: "Blue-and-white azulejo panel: a cylindrical stone marker with a plaque of carved lines,
+      standing in grass."
+    ru: "Панно из сине-белых азулежу: каменный цилиндрический столб с табличкой из строк надписи,
+      стоящий в траве."
+  caption:
+    pt: Marco miliário romano. Ilustração em estilo azulejo, criada por IA.
+    en: A Roman milestone. Azulejo-style illustration, created by AI.
+    ru: Римский мильный столб. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: miliario-geira
+published: 2026-11-20
+placeholder: false
+ru_ready: true

@@ -1,0 +1,185 @@
+id: endovelico
+slug:
+  pt: o-deus-subterraneo-a-quem-os-romanos-rezavam
+  en: the-underground-god-the-romans-prayed-to
+  ru: podzemnyy-bog-kotoromu-molilis-rimlyane
+title:
+  pt: O deus subterrâneo a quem os romanos rezavam
+  en: The Underground God the Romans Prayed To
+  ru: Подземный бог, которому молились римляне
+epoch: lusitania-e-roma
+level: story
+year: 100
+year_label:
+  pt: séc. I–V
+  en: 1st–5th c.
+  ru: I–V века
+place:
+  name:
+    pt: São Miguel da Mota, Alandroal
+    en: São Miguel da Mota, Alandroal
+    ru: Сан-Мигел-да-Мота, Аландроал
+  short:
+    pt: Alandroal
+    en: Alandroal
+    ru: Аландроал
+  lat: 38.6434
+  lon: -7.4432
+bridge:
+  name: Santuário de Endovélico, São Miguel da Mota
+  title:
+    pt: Santuário de Endovélico, São Miguel da Mota
+    en: Sanctuary of Endovelicus, São Miguel da Mota
+    ru: Святилище Эндовелика, Сан-Мигел-да-Мота
+  address: São Miguel da Mota, Terena, Alandroal
+  lat: 38.6434375
+  lon: -7.4431875
+  maps_url: https://www.google.com/maps/place/Santu%C3%A1rio+Endov%C3%A9lico+S%C3%A3o+Miguel+da+Mota/@38.6448977,-7.4500955,16z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!8m2!3d38.6434375!4d-7.4431875
+  url: https://en.wikipedia.org/wiki/Endovelicus
+  note:
+    pt: Neste monte ficava o santuário de um deus a quem rezavam lusitanos e romanos.
+    en: This hill held the sanctuary of a god worshipped by Lusitanians and Romans alike.
+    ru: На этом холме стояло святилище бога, которому молились и лузитаны, и римляне.
+threads:
+  - gente-como-nos
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os romanos trouxeram deuses seus, mas curavam-se com um deus local.
+  en: Romans brought their own gods but sought healing from a local one.
+  ru: Римляне привезли в Лузитанию своих богов, а лечиться ходили к местному.
+seo:
+  title:
+    pt: Endovélico, o deus de Alandroal | O Elefante Fugiu
+    en: Endovelicus, the God of Alandroal | O Elefante Fugiu
+    ru: Эндовелик, бог из Аландроала | O Elefante Fugiu
+story:
+  pt: >-
+    Antes dos romanos, os habitantes do sul do atual Portugal veneravam Endovélico. Era um deus
+    subterrâneo que curava e previa o futuro. O seu santuário ficava no alto de São Miguel da Mota,
+    perto do atual Alandroal.
+
+    Os romanos costumavam levar os seus deuses para as terras conquistadas. Mas a fama de Endovélico
+    era tanta que também eles foram ter com ele. Os doentes dormiam junto ao santuário e esperavam
+    que o deus lhes respondesse em sonhos. Depois de curados, ofereciam-lhe um altar de pedra com
+    uma inscrição de agradecimento.
+
+    Do monte recolheram-se tantos altares que este é um dos principais santuários da Lusitânia
+    romana.
+  en: >-
+    Before the Romans, people in what is now southern Portugal worshipped Endovelicus. He was an
+    underground god who healed the sick and foretold the future. His sanctuary stood on the hill of
+    São Miguel da Mota, near today’s Alandroal.
+
+    The Romans usually brought their own gods to the lands they conquered. But Endovelicus was so
+    famous that they came to him too. The sick slept by the sanctuary and waited for the god to
+    answer them in a dream. Once they recovered, they set up a stone altar with an inscription of
+    thanks.
+
+    So many altars have been gathered from the hill that it counts among the main sanctuaries of
+    Roman Lusitania.
+  ru: >-
+    До римлян жители юга нынешней Португалии почитали Эндовелика. Это был подземный бог, который
+    лечил и предсказывал будущее. Его святилище стояло на холме Сан-Мигел-да-Мота, недалеко от
+    нынешнего Аландроала.
+
+    Римляне обычно приносили в завоёванные земли своих богов. Но слава Эндовелика была такой, что к
+    нему пошли и они. Больные ночевали у святилища и ждали, что бог ответит им во сне. Выздоровев,
+    человек ставил ему каменный алтарь с надписью и благодарностью.
+
+    Алтарей с холма собрали так много, что это одно из главных святилищ римской Лузитании.
+more:
+  pt: >-
+    Em alguns altares está gravado «ex imperato averno», «por ordem de baixo». É como se a pessoa
+    prestasse contas: não fui eu que decidi pôr esta pedra, mandou-me o deus de debaixo da terra. Os
+    altares tornaram-se assim registos de conversas com o deus, e por eles vê-se quem subia ao
+    monte: gente da terra, cidadãos romanos, escravos e libertos.
+
+
+    Endovélico foi venerado durante mais tempo do que muitos deuses romanos, até ao século V. Depois
+    o país tornou-se cristão, mas o lugar sagrado não foi abandonado: no monte construiu-se uma
+    capela a São Miguel, daí o nome São Miguel da Mota. As pedras do santuário terão sido levadas
+    mais tarde para outras obras, e os altares foram reunidos no fim do século XIX pelo arqueólogo
+    Leite de Vasconcelos.
+
+
+    Hoje os altares estão no Museu Nacional de Arqueologia, em Lisboa. E o monte continua lá: de
+    cima vê-se ao longe a região à volta.
+  en: >-
+    Some altars are carved with “ex imperato averno,” “by order from below.” It’s as if the person
+    were reporting: I didn’t decide to put up this stone, the god beneath the earth told me to. That
+    turned the altars into records of conversations with the god, and they show who climbed the
+    hill: locals, Roman citizens, enslaved people, and freedmen.
+
+
+    Endovelicus was worshipped longer than many Roman gods, until the 5th century. Then the country
+    became Christian, but the holy place wasn’t abandoned: a chapel to Saint Michael was built on
+    the hill, which is where the name São Miguel da Mota comes from. The sanctuary’s stones were
+    probably carried off later for other buildings, and the altars were gathered at the end of the
+    19th century by the archaeologist Leite de Vasconcelos.
+
+
+    Today the altars belong to the National Archaeology Museum in Lisbon. The hill is still there:
+    from the top you can see far across the surrounding land.
+  ru: >-
+    На некоторых алтарях высечено «ex imperato averno», «по повелению снизу». Человек как бы
+    отчитывается: я поставил этот камень не сам, мне велел бог из-под земли. Так алтари стали
+    записями разговоров с богом, и по ним видно, кто приходил на холм: местные жители, римские
+    граждане, рабы и вольноотпущенники.
+
+
+    Эндовелику молились дольше, чем многим римским богам, до V века. Потом страна стала
+    христианской, но святое место не бросили: на холме построили часовню святого Михаила, отсюда и
+    название Сан-Мигел-да-Мота. Камни святилища, как считается, позже ушли на другие стройки, а
+    алтари в конце XIX века собрал археолог Лейте де Вашконселуш.
+
+
+    Сегодня алтари хранит Национальный археологический музей в Лиссабоне. А холм стоит, как стоял: с
+    него далеко видны окрестности.
+myth:
+  verdict: myth
+  statement:
+    pt: Os romanos proibiam os deuses dos povos conquistados
+    en: The Romans banned the gods of conquered peoples
+    ru: Римляне запрещали богов покорённых народов
+  answer:
+    pt: Os próprios romanos rezavam a Endovélico, um deus local, e ofereciam-lhe altares de
+      agradecimento.
+    en: Romans themselves prayed to Endovelicus, a local god, and set up altars to thank him.
+    ru: Римляне сами молились местному богу Эндовелику и ставили ему алтари с благодарностью.
+sources:
+  - title: "Wikipedia: Endovelicus"
+    url: https://en.wikipedia.org/wiki/Endovelicus
+    type: reference
+    accessed: 2026-11-20
+  - title: Endovélico, 400 anos depois (Universidade de Coimbra)
+    url: https://baes.uc.pt/bitstream/10316/18329/1/Endov%c3%a9lico%20-%20400%20anos%20depois.pdf
+    type: academic
+    accessed: 2026-11-20
+  - title: "Leite de Vasconcellos: Religiões da Lusitania (1897–1913)"
+    url: https://archive.org/search?query=Religi%C3%B5es+da+Lusit%C3%A2nia
+    type: book
+    accessed: 2026-11-20
+image:
+  file: endovelico.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: um altar de pedra quadrado com uma coroa de louros numa
+      face e uma pequena bacia no topo."
+    en: "Blue-and-white azulejo panel: a square stone altar with a laurel wreath on its face and a small
+      bowl on top."
+    ru: "Панно из сине-белых азулежу: квадратный каменный алтарь с лавровым венком на грани и маленькой
+      чашей наверху."
+  caption:
+    pt: Altar romano. Ilustração em estilo azulejo, criada por IA.
+    en: A Roman altar. Azulejo-style illustration, created by AI.
+    ru: Римский алтарь. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: altar-endovelico
+published: 2026-11-20
+placeholder: false
+ru_ready: true

@@ -1,0 +1,171 @@
+id: inquerito-terramoto-1756
+slug:
+  pt: treze-perguntas-sobre-o-terramoto
+  en: thirteen-questions-about-the-earthquake
+  ru: trinadtsat-voprosov-o-zemletryasenii
+title:
+  pt: Treze perguntas sobre o terramoto
+  en: Thirteen Questions About the Earthquake
+  ru: Тринадцать вопросов о землетрясении
+epoch: pombal-e-terramoto
+level: story
+year: 1756
+place:
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7223
+  lon: -9.1393
+bridge:
+  name: Arquivo Nacional da Torre do Tombo
+  title:
+    pt: Arquivo Nacional da Torre do Tombo
+    en: Torre do Tombo National Archive
+    ru: Национальный архив Торре-ду-Томбу
+  address: Alameda da Universidade, Lisboa
+  lat: 38.7546787
+  lon: -9.1565156
+  maps_url: https://www.google.com/maps/place/Arquivo+Nacional+da+Torre+do+Tombo/@38.7546829,-9.1590905,17z/data=!3m1!4b1!4m6!3m5!1s0xd1932fd5cd1fd31:0xfa51757a13c5b171!8m2!3d38.7546787!4d-9.1565156
+  url: https://digitarq.arquivos.pt/
+  note:
+    pt: Aqui se guardam as respostas das freguesias ao inquérito de 1756.
+    en: The parishes’ answers to the 1756 survey are kept here.
+    ru: Здесь хранятся ответы приходов на анкету 1756 года.
+threads:
+  - natureza
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os primeiros sismólogos de Portugal foram párocos de aldeia.
+  en: Portugal’s first seismologists were village priests.
+  ru: Первыми сейсмологами Португалии стали деревенские священники.
+seo:
+  title:
+    pt: Inquérito de Pombal ao terramoto, 1756 | O Elefante Fugiu
+    en: Pombal’s Earthquake Survey, 1756 | O Elefante Fugiu
+    ru: Анкета Помбала о землетрясении, 1756 | O Elefante Fugiu
+story:
+  pt: >-
+    A 1 de novembro de 1755, Lisboa foi destruída por um terramoto, um tsunami e um incêndio. Muitos
+    viram nisso a ira de Deus e achavam que não havia nada para estudar.
+
+    Pombal pensava de outra forma. Em janeiro de 1756, os bispos receberam do governo 13 perguntas,
+    e os párocos deviam interrogar as pessoas. A que horas começou o abalo e quanto tempo durou? Que
+    coisas novas se viram no mar, nos rios e nas fontes? Quantas vezes a água subiu e desceu? Quem
+    morreu?
+
+    Milhares de respostas voltaram a Lisboa. Dois séculos depois, foi com elas que os cientistas
+    reconstruíram onde e com que força a terra tremeu, e esta é uma das primeiras descrições
+    científicas de um sismo no mundo.
+  en: >-
+    On November 1, 1755, Lisbon was destroyed by an earthquake, a tsunami, and a fire. Many saw it
+    as God’s wrath and thought there was nothing to study.
+
+    Pombal thought otherwise. In January 1756, the bishops received 13 questions from the
+    government, and parish priests were to ask the people. What time did the shaking start, and how
+    long did it last? What new things were seen in the sea, the rivers, and the springs? How many
+    times did the water rise and fall? Who died?
+
+    Thousands of answers came back to Lisbon. Two centuries later, scientists used them to
+    reconstruct where the ground shook and how hard, making this one of the first scientific
+    descriptions of an earthquake anywhere.
+  ru: >-
+    1 ноября 1755 года Лиссабон разрушили землетрясение, цунами и пожар. Многие видели в этом гнев
+    Божий и считали, что изучать тут нечего.
+
+    Помбал думал иначе. В январе 1756 года епископы получили от правительства 13 вопросов, а
+    приходские священники должны были расспросить людей. Во сколько начались толчки и сколько
+    длились? Что нового видели в море, реках и источниках? Сколько раз пришла и ушла вода? Кто
+    погиб?
+
+    Тысячи ответов вернулись в Лиссабон. По ним спустя два века учёные восстановили, где и как
+    сильно трясло, и это одно из первых в мире научных описаний землетрясения.
+more:
+  pt: >-
+    As perguntas eram simples, e era essa a força do inquérito. Um pároco numa aldeia da serra não
+    sabia física, mas podia anotar a que horas o campanário oscilou e se o poço secou. De milhares
+    de anotações assim nascia um mapa que nenhum cientista da época conseguiria desenhar.
+
+
+    As respostas foram para o arquivo real e ficaram quase dois séculos esquecidas. Quando os
+    sismólogos do século XX se debruçaram sobre o terramoto de Lisboa, foram estes papéis que os
+    ajudaram a encontrar o epicentro e a ver até onde chegaram as ondas.
+
+
+    As respostas estão na Torre do Tombo, o arquivo nacional de Portugal. Parte delas pode ler-se
+    online, e entre elas há frases como «nesta freguesia não morreu ninguém do terramoto».
+  en: >-
+    The questions were simple, and that was the survey’s strength. A priest in a mountain village
+    knew no physics, but he could write down what time the bell tower swayed and whether the well
+    ran dry. Thousands of notes like that added up to a map no scientist of the time could have
+    drawn.
+
+
+    The answers went into the royal archive and lay forgotten for almost two centuries. When
+    20th-century seismologists took on the Lisbon earthquake, these papers helped them find the
+    epicenter and see how far the waves had reached.
+
+
+    The answers are kept at the Torre do Tombo, Portugal’s national archive. Some can be read
+    online, and among them are lines like “no one in this parish died in the earthquake.”
+  ru: >-
+    Вопросы были простыми, и в этом была сила анкеты. Священник в горной деревне не знал физики, но
+    мог записать, во сколько качнулась колокольня и пересох ли колодец. Из тысяч таких записей
+    складывалась карта, которую не мог нарисовать ни один учёный того времени.
+
+
+    Ответы легли в королевский архив и почти на два века были забыты. Когда сейсмологи XX века
+    взялись за Лиссабонское землетрясение, именно эти бумаги помогли им найти, где был очаг и как
+    далеко дошли волны.
+
+
+    Ответы хранятся в Торре-ду-Томбу, национальном архиве Португалии. Часть их можно читать онлайн,
+    и среди них есть такие, как «в этом приходе от землетрясения никто не умер».
+myth:
+  verdict: part
+  statement:
+    pt: Depois de 1755, o terramoto era visto só como castigo de Deus
+    en: After 1755, the earthquake was seen only as God’s punishment
+    ru: После 1755 года землетрясение считали только гневом Божьим
+  answer:
+    pt: Muitos pensavam assim, mas o governo enviou um inquérito sobre os abalos e a água e reuniu
+      milhares de respostas.
+    en: Many thought so, but the government sent out a survey about the shaking and the water and
+      collected thousands of answers.
+    ru: Многие так считали, но правительство разослало анкету с вопросами о толчках и воде и собрало
+      тысячи ответов.
+sources:
+  - title: "Lisbon Quake: Inquérito"
+    url: https://lisbonquake.com/en-GB/blog/inquerito
+    type: website
+    accessed: 2026-11-20
+  - title: "Wikipedia: Parochial Memories of 1758"
+    url: https://en.wikipedia.org/wiki/Parochial_Memories_of_1758
+    type: reference
+    accessed: 2026-11-20
+image:
+  file: inquerito-terramoto-1756.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: folhas manuscritas com um selo de cera e uma pena num
+      tinteiro."
+    en: "Blue-and-white azulejo panel: handwritten sheets with a wax seal, and a quill in an inkwell."
+    ru: "Панно из сине-белых азулежу: исписанные от руки листы с восковой печатью и перо в чернильнице."
+  caption:
+    pt: Respostas manuscritas a um inquérito. Ilustração em estilo azulejo, criada por IA.
+    en: Handwritten answers to a survey. Azulejo-style illustration, created by AI.
+    ru: Рукописные ответы на анкету. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: inquerito-1756
+published: 2026-11-20
+placeholder: false
+ru_ready: true

@@ -1,0 +1,183 @@
+id: d-carlos-oceanografo
+slug:
+  pt: o-rei-que-se-fez-ao-mar-como-cientista
+  en: the-king-who-went-to-sea-as-a-scientist
+  ru: korol-kotoryy-ushel-v-more-uchenym
+title:
+  pt: O rei que se fez ao mar como cientista
+  en: The King Who Went to Sea as a Scientist
+  ru: Король, который ушёл в море учёным
+epoch: monarquia-e-republica
+level: story
+year: 1896
+place:
+  name:
+    pt: Costa portuguesa
+    en: The Portuguese coast
+    ru: Берег Португалии
+  short:
+    pt: Costa portuguesa
+    en: Portuguese coast
+    ru: Берег Португалии
+  lat: 38.6991
+  lon: -9.2381
+bridge:
+  name: Aquário Vasco da Gama
+  title:
+    pt: Aquário Vasco da Gama
+    en: Vasco da Gama Aquarium
+    ru: Аквариум Васку-да-Гама
+  address: Rua Direita do Dafundo, Dafundo, Oeiras
+  lat: 38.6991811
+  lon: -9.2381588
+  maps_url: https://www.google.com/maps/place/Vasco+da+Gama+Aquarium/@38.6991853,-9.2407337,17z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!8m2!3d38.6991811!4d-9.2381588
+  url: https://cultura.marinha.pt/pt/aquariovgama/
+  note:
+    pt: Aqui se guarda a coleção oceanográfica do rei D. Carlos I.
+    en: King Carlos I’s oceanographic collection is kept here.
+    ru: Здесь хранится океанографическая коллекция короля Карлуша I.
+threads:
+  - mar
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Rei de Portugal e príncipe do Mónaco, amigos por peixes abissais.
+  en: Portugal’s king and Monaco’s prince bonded over deep-sea fish.
+  ru: "Король Португалии и князь Монако дружили из-за одного: глубоководных рыб."
+seo:
+  title:
+    pt: D. Carlos I, o rei oceanógrafo | O Elefante Fugiu
+    en: King Carlos I, the Ocean Scientist | O Elefante Fugiu
+    ru: Король-океанограф Карлуш I | O Elefante Fugiu
+story:
+  pt: >-
+    O rei D. Carlos I gostava mais do mar do que da corte. Em 1896 saiu no seu iate «Amélia» para a
+    primeira campanha oceanográfica ao longo da costa portuguesa.
+
+    Houve doze campanhas assim. O próprio rei dirigia os trabalhos: media profundidades, recolhia
+    amostras de água, lançava redes a centenas de metros e trazia animais que ninguém em Portugal
+    tinha visto. Ao microscópio, a bordo, fotografava o plâncton, e foram as primeiras fotografias
+    destas no país.
+
+    Em 1908, o rei foi assassinado em Lisboa. A sua coleção de frascos, instrumentos e fotografias
+    passou para o Aquário Vasco da Gama, onde se guarda até hoje.
+  en: >-
+    King Carlos I loved the sea more than the court. In 1896 he set out on his yacht Amélia on the
+    first oceanographic expedition along the Portuguese coast.
+
+    There were twelve such voyages. The king directed the work himself: he measured depths, took
+    water samples, lowered nets hundreds of meters down, and brought up animals no one in Portugal
+    had ever seen. Using a microscope on board, he photographed plankton, the first such photographs
+    in the country.
+
+    In 1908, the king was assassinated in Lisbon. His collection of specimen jars, instruments, and
+    photographs went to the Vasco da Gama Aquarium, where it’s kept to this day.
+  ru: >-
+    Король Карлуш I любил море больше двора. В 1896 году он вышел на своей яхте «Амелия» в первую
+    океанографическую экспедицию вдоль португальского берега.
+
+    Таких походов было двенадцать. Король сам командовал работами: мерил глубины, брал пробы воды,
+    ставил сети на сотни метров вниз и доставал животных, которых в Португалии ещё никто не видел.
+    Под микроскопом на борту он снимал планктон, и это были первые такие фотографии в стране.
+
+    В 1908 году короля убили в Лиссабоне. Его коллекцию банок, приборов и снимков передали в
+    Аквариум Васку-да-Гама, где её хранят до сих пор.
+more:
+  pt: >-
+    A paixão começou com uma amizade. O jovem D. Carlos conheceu Alberto I do Mónaco quando este
+    passou por Lisboa no seu iate-laboratório. Alberto já era um oceanógrafo conhecido, e D. Carlos
+    tornou-se seu aluno, depois amigo e correspondente assíduo. Os dois soberanos trocavam
+    descobertas e conselhos como dois colegas.
+
+
+    O rei teve quatro iates «Amélia», e cada novo era transformado num verdadeiro navio científico.
+    Publicava os resultados em português e mostrava-os em exposições, e muitos animais das
+    profundezas foram vistos pelo público pela primeira vez assim. Além do mar, o rei pintava e
+    fotografava, e as suas aguarelas de cenas marítimas ainda hoje são apreciadas.
+
+
+    Depois da morte do rei, a coleção ficou no palácio, passou depois para a Liga Naval e, em 1935,
+    os herdeiros entregaram-na definitivamente ao Aquário Vasco da Gama.
+  en: >-
+    The passion began with a friendship. Young Carlos met Prince Albert I of Monaco when Albert
+    stopped in Lisbon on his laboratory yacht. Albert was already a well-known oceanographer, and
+    Carlos became his student, then his friend and faithful correspondent. The two monarchs swapped
+    finds and advice like colleagues.
+
+
+    The king owned four yachts named Amélia, and each new one was turned into a real research
+    vessel. He published his results in Portuguese and showed them at exhibitions, and that’s how
+    many deep-sea animals were first seen by the public. Beyond the sea, the king painted and took
+    photographs, and his watercolors of sea scenes are still admired.
+
+
+    After the king’s death, the collection stayed at the palace, then went to the Naval League, and
+    in 1935 his heirs gave it permanently to the Vasco da Gama Aquarium.
+  ru: >-
+    Увлечение началось с дружбы. Молодой Карлуш познакомился с князем Монако Альбером I, когда тот
+    зашёл в Лиссабон на своей яхте-лаборатории. Альбер уже был известным океанографом, и Карлуш стал
+    его учеником, а потом другом и постоянным собеседником по переписке. Два монарха обменивались
+    находками и советами, как два коллеги.
+
+
+    Яхт «Амелия» у короля было четыре, каждую следующую он перестраивал в настоящее научное судно.
+    Результаты он печатал по-португальски и показывал на выставках, и многие животные из глубин
+    впервые попадали на глаза публике именно так. Кроме моря, король рисовал и фотографировал, и его
+    акварели с морскими сценами ценят до сих пор.
+
+
+    После убийства короля коллекцию хранили во дворце, потом передали Морской лиге, а в 1935 году
+    наследники окончательно отдали её Аквариуму Васку-да-Гама.
+myth:
+  verdict: myth
+  statement:
+    pt: D. Carlos I só se dedicava à ciência para dar nas vistas
+    en: King Carlos I did science just for show
+    ru: Король Карлуш I занимался наукой только для вида
+  answer:
+    pt: Fez doze campanhas oceanográficas, dirigia ele próprio os trabalhos e tirou as primeiras
+      fotografias de plâncton em Portugal.
+    en: He led twelve oceanographic expeditions, ran the work himself, and took Portugal’s first
+      photographs of plankton.
+    ru: Он провёл двенадцать океанографических экспедиций, сам вёл работы и сделал первые в Португалии
+      фотографии планктона.
+sources:
+  - title: "Marinha: The King’s Collection"
+    url: https://cultura.marinha.pt/en/aquariovgama/museu/acolecaodorei
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Marinha: The Naturalist King"
+    url: https://cultura.marinha.pt/en/aquariovgama/museu/oreinaturalista
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Marinha: As primeiras fotografias de plâncton em Portugal"
+    url: https://cultura.marinha.pt/pt/aquariovgama_web/multimedia_web/Paginas/As-primeiras-fotografias-de-plancton-em-Portugal.aspx
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Diário de Notícias: Alberto I do Mónaco e D. Carlos"
+    url: https://www.dn.pt/cultura/alberto-i-do-monaco-e-d-carlos-dois-soberanos-a-mesma-paixao-pelo-mar-15248653.html
+    type: press
+    accessed: 2026-11-20
+image:
+  file: d-carlos-oceanografo.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: um frasco de vidro com tampa e um peixe de grandes olhos, e
+      ao lado um microscópio dourado."
+    en: "Blue-and-white azulejo panel: a lidded glass jar holding a big-eyed fish, with a golden
+      microscope beside it."
+    ru: "Панно из сине-белых азулежу: стеклянная банка с крышкой и большеглазой рыбой, рядом золотистый
+      микроскоп."
+  caption:
+    pt: Um frasco de espécime e um microscópio. Ilustração em estilo azulejo, criada por IA.
+    en: A specimen jar and a microscope. Azulejo-style illustration, created by AI.
+    ru: Банка с образцом и микроскоп. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: frasco-d-carlos
+published: 2026-11-20
+placeholder: false
+ru_ready: true

@@ -26,6 +26,7 @@ const cards = readdirSync(eventsDir)
   .map((f) => ({ file: f, ...parse(readFileSync(join(eventsDir, f), 'utf8'), { schema: 'core' }) }));
 const isPublished = (c) => isLive(c) && c.placeholder !== true;
 const published = cards.filter(isPublished);
+const listed = published.filter((c) => !c.cabinet);
 const hidden = cards.filter((c) => !isPublished(c));
 
 const errors = [];
@@ -70,11 +71,12 @@ for (const file of files) {
       }
       const ids = (config.cards ?? config.events ?? []).map((c) => c.id);
       points += ids.length;
-      const stray = ids.filter((id) => !published.some((c) => c.id === id));
-      if (stray.length > 0) errors.push(`${rel}: map points of cards that are not published: ${stray.join(', ')}`);
+      // A story of the cabinet of rarities (the field `cabinet`) is on no map: it has no point, and a point of it is an error.
+      const stray = ids.filter((id) => !listed.some((c) => c.id === id));
+      if (stray.length > 0) errors.push(`${rel}: map points of cards that are not published or not listed: ${stray.join(', ')}`);
       // The map of the whole site (the map page, the home page) holds a point per published card; an epoch map holds the cards of that epoch.
       if (/^(?:pt|en|ru)\/(?:mapa|map|karta)\/index\.html$/.test(rel) || /^(?:pt|en|ru)\/index\.html$/.test(rel)) {
-        if (ids.length !== published.length) errors.push(`${rel}: ${ids.length} map points for ${published.length} published cards`);
+        if (ids.length !== listed.length) errors.push(`${rel}: ${ids.length} map points for ${listed.length} published cards`);
       }
     }
   }

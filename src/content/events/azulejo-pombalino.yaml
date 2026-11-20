@@ -1,0 +1,174 @@
+id: azulejo-pombalino
+slug:
+  pt: o-azulejo-que-reconstruiu-lisboa
+  en: the-tiles-that-rebuilt-lisbon
+  ru: plitka-kotoroy-otstroili-lissabon
+title:
+  pt: O azulejo que reconstruiu Lisboa
+  en: The Tiles That Rebuilt Lisbon
+  ru: Плитка, которой отстроили Лиссабон
+epoch: pombal-e-terramoto
+level: story
+year: 1760
+place:
+  name:
+    pt: Lisboa, Baixa
+    en: Lisbon, the Baixa
+    ru: Лиссабон, Байша
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7107
+  lon: -9.1381
+bridge:
+  name: Museu Nacional do Azulejo
+  title:
+    pt: Museu Nacional do Azulejo
+    en: National Tile Museum
+    ru: Национальный музей азулежу
+  address: Rua da Madre de Deus 4, Lisboa
+  lat: 38.7250559
+  lon: -9.113539
+  maps_url: https://www.google.com/maps/place/Museu+Nacional+do+Azulejo/@38.7250601,-9.1161139,17z/data=!3m1!4b1!4m6!3m5!1s0xd1933e8da53a15f:0xb31d6f4a8645bc28!8m2!3d38.7250559!4d-9.113539
+  url: https://www.museusemonumentos.pt/pt/museus-e-monumentos/museu-nacional-do-azulejo
+  note:
+    pt: "Aqui vê-se o azulejo pombalino: um padrão simples que se repete em cada quadrado."
+    en: "Pombaline tiles are on display here: a simple pattern repeated on every square."
+    ru: "Здесь можно увидеть помбалинскую плитку: простой узор, который повторяется на каждом квадрате."
+threads:
+  - engenho
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Depois do terramoto, o azulejo passou a ser um padrão para todos.
+  en: After the earthquake, azulejo tiles became a pattern for everyone.
+  ru: После землетрясения азулежу стали узором для всех.
+seo:
+  title:
+    pt: O azulejo pombalino de Lisboa | O Elefante Fugiu
+    en: Lisbon’s Pombaline Tiles | O Elefante Fugiu
+    ru: Помбалинская плитка Лиссабона | O Elefante Fugiu
+story:
+  pt: >-
+    Antes de 1755, os azulejos eram quadros: o mestre pintava a parede inteira, com cenas de caça ou
+    de santos. Era demorado e caro.
+
+    Depois do terramoto, Lisboa foi reconstruída aos quarteirões, e os quadros tornaram-se um luxo.
+    Os azulejos passaram a fazer-se com padrões prontos: um desenho simples, em duas ou três cores,
+    repete-se em cada quadrado e forma sozinho um ornamento em qualquer comprimento de parede.
+
+    A estes azulejos chama-se pombalinos, por causa de Pombal. Foram assentes nas entradas e nas
+    escadas dos novos prédios da Baixa, e muitos continuam lá.
+  en: >-
+    Before 1755, azulejos were paintings: a master painted an entire wall with hunting scenes or
+    saints. It was slow and expensive.
+
+    After the earthquake, Lisbon was rebuilt block by block, and painted walls became a luxury.
+    Tiles started being made from ready-made patterns: a simple design in two or three colors
+    repeats on every square and forms an ornament along a wall of any length.
+
+    These tiles are called Pombaline, after Pombal. They went into the entrances and stairwells of
+    the new buildings in the Baixa, and many are still there.
+  ru: >-
+    До 1755 года азулежу были картинами: мастер расписывал стену целиком, сценами охоты или святых.
+    Это было долго и дорого.
+
+    После землетрясения Лиссабон отстраивали целыми кварталами, и картины стали роскошью. Плитку
+    начали делать по готовым узорам: простой рисунок в две-три краски повторяется на каждом квадрате
+    и сам складывается в орнамент на любой длине стены.
+
+    Такие плитки зовут помбалинскими, по имени Помбала. Их клали в подъезды и на лестницы новых
+    домов Байши, и многие лежат там до сих пор.
+more:
+  pt: >-
+    Um padrão de quadrados iguais perdoava muita coisa. O azulejo não tinha de encaixar numa cena:
+    se um partia, trocava-se por qualquer outro do mesmo lote, e o assentador podia revestir uma
+    parede de qualquer comprimento sem pensar onde acabaria o quadro. Para uma cidade construída à
+    pressa, isso valia mais do que a beleza.
+
+
+    Os azulejos também se faziam na Real Fábrica do Rato, fundada no tempo de Pombal, em 1767. Ao
+    lado dos padrões surgiu um azulejo ainda mais simples: num quadrado branco, um só desenho
+    pequeno, um pássaro, uma flor ou um barco. Assentava-se salteado, e a parede ficava bonita quase
+    sem custo.
+
+
+    Cem anos depois, a moda deu a volta. Segundo se pensa, os portugueses que regressavam do Brasil
+    trouxeram o hábito de revestir com azulejo não as escadas, mas fachadas inteiras, e Lisboa
+    tornou-se a cidade de casas de azulejo que conhecemos.
+  en: >-
+    A pattern of identical squares was forgiving. Tiles didn’t have to fit a scene: if one broke,
+    any other from the same batch could replace it, and a tiler could cover a wall of any length
+    without worrying where the picture would end. For a city being built in a hurry, that mattered
+    more than beauty.
+
+
+    Tiles were also made at the Royal Factory in Rato, founded under Pombal in 1767. Next to the
+    patterns came an even simpler tile: a white square with one small design, a bird, a flower, or a
+    boat. Laid out scattered, these made a wall look festive for almost nothing.
+
+
+    A hundred years later, fashion swung back. It is generally thought that Portuguese returning
+    from Brazil brought home the habit of tiling not stairwells but entire facades, and Lisbon
+    became the city of tiled houses we know today.
+  ru: >-
+    Узор из одинаковых квадратов прощал многое. Плитку не надо было подгонять под сюжет: если одна
+    разбивалась, её заменяли любой другой из той же партии, а мастер мог класть стену любой длины,
+    не думая, где закончится картина. Для города, который строили на скорость, это было важнее
+    красоты.
+
+
+    Плитку делали и на Королевской фабрике у Рату, которую основали при Помбале в 1767 году.
+
+
+    Через сто лет мода повернула обратно. Как считается, португальцы, вернувшиеся из Бразилии,
+    привезли привычку облицовывать плиткой не лестницы, а целые фасады, и Лиссабон стал городом
+    плиточных домов, каким мы его знаем.
+myth:
+  verdict: part
+  statement:
+    pt: Cada azulejo era pintado à parte, como um quadro
+    en: Every azulejo tile was painted individually, like a picture
+    ru: Каждую плитку азулежу расписывали отдельно, как картину
+  answer:
+    pt: Assim era antes de 1755. Depois, para reconstruir Lisboa, passou a fazer-se azulejo com padrões
+      prontos.
+    en: That was true before 1755. To rebuild Lisbon, tiles began to be made from ready-made patterns.
+    ru: Так было до 1755 года. Потом для отстройки Лиссабона стали делать плитку по готовому узору.
+sources:
+  - title: "Google Arts & Culture, Museu Nacional do Azulejo: Ashlars of pombalino pattern tiles"
+    url: https://artsandculture.google.com/asset/ashlars-of-pombalino-pattern-tiles/SQGXn_Q0Cxp6Lg
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Monteiro: A Real Fábrica de Louça ao Rato (Convergência Lusíada)"
+    url: https://convergencia.emnuvens.com.br/rcl/article/download/562/391
+    type: academic
+    accessed: 2026-11-20
+  - title: "LNEC: Fachadas de azulejo (A. Pais)"
+    url: https://repositorio.lnec.pt/bitstream/123456789/1004166/1/AlexPais_fachadas_DSpace.pdf
+    type: academic
+    accessed: 2026-11-20
+image:
+  file: azulejo-pombalino.webp
+  alt:
+    pt: "Painel de azulejos brancos: um conjunto de nove azulejos com um padrão azul repetido e, ao
+      lado, um azulejo branco com um pequeno pássaro."
+    en: "Panel of white tiles: a set of nine tiles with a repeating blue pattern and, beside it, a white
+      tile with a small bird."
+    ru: "Панно из белых плиток: девять плиток с повторяющимся синим узором, рядом белая плитка с
+      птичкой."
+  caption:
+    pt: Azulejos de padrão do século XVIII. Ilustração em estilo azulejo, criada por IA.
+    en: Pattern tiles of the 18th century. Azulejo-style illustration, created by AI.
+    ru: Плитка с узором XVIII века. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: azulejo-pombalino
+published: 2026-11-20
+placeholder: false
+ru_ready: true

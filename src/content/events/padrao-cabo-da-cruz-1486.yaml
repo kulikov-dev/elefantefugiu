@@ -1,0 +1,174 @@
+id: padrao-cabo-da-cruz-1486
+slug:
+  pt: a-cruz-de-pedra-que-voltou-ao-deserto
+  en: the-stone-cross-that-went-back-to-the-desert
+  ru: kamennyy-krest-kotoryy-vernulsya-v-pustynyu
+title:
+  pt: A cruz de pedra que voltou ao deserto
+  en: The Stone Cross That Went Back to the Desert
+  ru: Каменный крест, который вернулся в пустыню
+epoch: avis-e-descobrimentos
+level: story
+year: 1486
+place:
+  name:
+    pt: Cape Cross, Namíbia
+    en: Cape Cross, Namibia
+    ru: Кейп-Кросс, Намибия
+  short:
+    pt: Cape Cross
+    en: Cape Cross
+    ru: Кейп-Кросс
+  lat: -21.7728
+  lon: 13.9508
+bridge:
+  name: Cape Cross
+  title:
+    pt: Cape Cross (cabo da Cruz)
+    en: Cape Cross
+    ru: Кейп-Кросс (мыс Креста)
+  address: Cape Cross Seal Reserve, região de Erongo, Namíbia
+  lat: -21.7728
+  lon: 13.9508
+  url: https://en.wikipedia.org/wiki/Cape_Cross
+  note:
+    pt: No lugar onde Diogo Cão ergueu a cruz em 1486 está hoje uma cópia em pedra.
+    en: Where Diogo Cão set up the cross in 1486, a stone copy stands today.
+    ru: На месте, где Диогу Кан поставил крест в 1486 году, стоит его каменная копия.
+threads:
+  - mar
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Uma cruz de pedra portuguesa esteve quatrocentos anos num deserto africano.
+  en: A Portuguese stone cross stood in an African desert for 400 years.
+  ru: Португальский каменный крест простоял в африканской пустыне четыреста лет.
+seo:
+  title:
+    pt: Padrão de Diogo Cão, 1486 | O Elefante Fugiu
+    en: Diogo Cão’s Stone Cross, 1486 | O Elefante Fugiu
+    ru: Каменный крест Диогу Кана, 1486 | O Elefante Fugiu
+story:
+  pt: >-
+    Os capitães portugueses levavam no porão pesadas colunas de pedra com uma cruz no topo, os
+    padrões. Onde o navio chegasse mais longe, o padrão era erguido na costa. Assim, qualquer
+    marinheiro que viesse depois sabia: aqui já tinham estado os portugueses, e esta terra era do
+    rei.
+
+    Em 1486, Diogo Cão ergueu uma destas colunas num cabo deserto do sudoeste de África, na atual
+    Namíbia. O cabo ficou com o nome: Cape Cross, o cabo da Cruz.
+
+    A cruz ficou lá quatrocentos anos. Em 1893, quando a Namíbia era colónia alemã, marinheiros
+    alemães levaram-na para a Alemanha e deixaram no cabo uma cópia.
+  en: >-
+    Portuguese captains carried heavy stone pillars with a cross on top, called padrões, in their
+    holds. Wherever a ship got farther than anyone before, a padrão went up on the shore. That way
+    every sailor who came after knew: the Portuguese had been here, and this land belonged to the
+    king.
+
+    In 1486, Diogo Cão set up one of these pillars on a deserted cape in southwestern Africa, in
+    what is now Namibia. The cape took its name from it: Cape Cross.
+
+    The cross stood there for four hundred years. In 1893, when Namibia was a German colony, German
+    sailors took it to Germany and left a copy on the cape.
+  ru: >-
+    Португальские капитаны везли в трюме тяжёлые каменные столбы с крестом наверху, падраны. Там,
+    где корабль заходил дальше всех, падран ставили на берегу. Так любой следующий моряк видел:
+    здесь уже были португальцы, и это земля короля.
+
+    В 1486 году Диогу Кан поставил такой столб на пустынном мысе на юго-западе Африки, сегодня это
+    Намибия. Мыс так и назвали: Кейп-Кросс, мыс Креста.
+
+    Крест простоял там четыреста лет. В 1893 году, когда Намибия была немецкой колонией, немецкие
+    моряки увезли его в Германию, а на мысе поставили копию.
+more:
+  pt: >-
+    O padrão pesa mais de uma tonelada e tem três metros e meio de altura. A pedra foi talhada em
+    Portugal e levada por meia África só para ser erguida numa costa vazia. Para o rei, era um
+    documento: a coluna provava quem tinha chegado primeiro.
+
+
+    O imperador alemão dava valor a esse documento pela mesma razão. A cópia no cabo foi feita com
+    duas inscrições, a antiga portuguesa e uma nova alemã, e a cruz verdadeira passou mais de cem
+    anos em Berlim, nos últimos anos no Museu Histórico Alemão.
+
+
+    Em 2019, o museu decidiu devolver a cruz à Namíbia, e nesse mesmo ano ela atravessou o oceano.
+    Hoje, no cabo da Cruz, estão as cópias, e à volta vive uma das maiores colónias de
+    lobos-marinhos do mundo.
+  en: >-
+    The padrão weighs more than a ton and stands about 11.5 feet (3.5 m) tall. The stone was cut in
+    Portugal and carried halfway down Africa just to be set up on an empty shore. To the king, it
+    was a document: the pillar proved who got there first.
+
+
+    The German emperor valued that document for the same reason. The copy on the cape was made with
+    two inscriptions, the old Portuguese one and a new German one, while the real cross spent more
+    than a hundred years in Berlin, in its last years at the German Historical Museum.
+
+
+    In 2019, the museum decided to return the cross to Namibia, and that same year it crossed the
+    ocean. Today copies stand on Cape Cross, surrounded by one of the largest seal colonies in the
+    world.
+  ru: >-
+    Падран весит больше тонны и высотой в три с половиной метра. Камень вырубили в Португалии и
+    везли через пол-Африки только ради того, чтобы поставить на пустом берегу. Для короля это был
+    документ: столб доказывал, кто пришёл первым.
+
+
+    Немецкий кайзер ценил этот документ по той же причине. Копию на мысе сделали с двумя надписями,
+    старой португальской и новой немецкой, а сам крест больше ста лет простоял в Берлине, последние
+    годы в Немецком историческом музее.
+
+
+    В 2019 году музей решил вернуть крест Намибии, и в том же году его отправили через океан.
+    Сегодня на мысе Кросс стоят копии, а вокруг них живёт одна из самых больших колоний морских
+    котиков в мире.
+myth:
+  verdict: myth
+  statement:
+    pt: Os padrões eram talhados no próprio local, em África
+    en: Padrões were carved on the spot, in Africa
+    ru: Падраны вырубали из камня на месте, в Африке
+  answer:
+    pt: A pedra era talhada em Portugal e seguia no porão, apesar de a coluna pesar mais de uma
+      tonelada.
+    en: The stone was cut in Portugal and shipped in the hold, even though a pillar weighed more than a
+      ton.
+    ru: Камень вырубали в Португалии и везли в трюме, хотя столб весил больше тонны.
+sources:
+  - title: "Deutsches Historisches Museum: The Stone Cross from Cape Cross (2019)"
+    url: https://www.dhm.de/en/press/press-release/the-stone-cross-from-cape-cross/
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Deutscher Bundestag: hib 736/2021"
+    url: https://www.bundestag.de/presse/hib/845318-845318
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Wikipedia: Cape Cross"
+    url: https://en.wikipedia.org/wiki/Cape_Cross
+    type: reference
+    accessed: 2026-11-20
+image:
+  file: padrao-cabo-da-cruz-1486.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: uma coluna de pedra com um brasão português e uma cruz no
+      topo, sobre um monte de pedras."
+    en: "Blue-and-white azulejo panel: a stone pillar with a Portuguese coat of arms and a cross on top,
+      standing on a heap of rocks."
+    ru: "Панно из сине-белых азулежу: каменный столб с португальским гербом и крестом наверху на куче
+      камней."
+  caption:
+    pt: Um padrão português. Ilustração em estilo azulejo, criada por IA.
+    en: A Portuguese padrão. Azulejo-style illustration, created by AI.
+    ru: Португальский падран. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: padrao-cape-cross
+published: 2026-11-20
+placeholder: false
+ru_ready: true

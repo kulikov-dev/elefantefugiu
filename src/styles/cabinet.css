@@ -347,19 +347,28 @@ button.cw:focus-visible {
   filter: var(--cab-obj-shadow);
 }
 
-/* Not found: the same picture as a silhouette. */
+/* The picture and the outline of the same size: found, the picture stands on the board by itself; not found, only the dashed outline of its shape (the alpha mask of the picture, no fill) is drawn. */
+.cab-obj__pic {
+  position: relative;
+  display: block;
+  max-inline-size: 100%;
+}
+
+.cab-obj__out {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: var(--color-border-strong);
+  mask: var(--out) center / 100% 100% no-repeat;
+}
+
 .cab-obj:not([data-found]) img {
-  filter: var(--cab-sil);
+  opacity: 0;
+  filter: none;
 }
 
-:root[data-theme='dark'] .cab-obj:not([data-found]) img {
-  filter: var(--cab-sil-dark);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .cab-obj:not([data-found]) img {
-    filter: var(--cab-sil-dark);
-  }
+.cab-obj:not([data-found]) .cab-obj__out {
+  display: block;
 }
 
 .cab-obj:focus-visible {

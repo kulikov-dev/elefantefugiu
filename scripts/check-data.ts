@@ -398,8 +398,8 @@ for (const { item: ev, file, stem } of events) {
     }
   }
 
-  // coordinates: the place may be anywhere in the world (the schema checks the ranges), the bridge only in Portugal and the islands
-  if (!inPortugal(ev.bridge.lat, ev.bridge.lon)) {
+  // coordinates: the place may be anywhere in the world (the schema checks the ranges), the bridge only in Portugal and the islands (a story of the cabinet is on no map: its bridge may lie anywhere)
+  if (ev.cabinet === undefined && !inPortugal(ev.bridge.lat, ev.bridge.lon)) {
     report('error', file, `lat/lon (${ev.bridge.lat}, ${ev.bridge.lon}) is outside Portugal and nearby islands (the bridge is a place to visit)`, 'bridge');
   }
 

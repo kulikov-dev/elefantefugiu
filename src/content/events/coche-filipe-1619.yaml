@@ -1,0 +1,166 @@
+id: coche-filipe-1619
+slug:
+  pt: o-coche-em-que-chegou-o-rei-espanhol
+  en: the-coach-that-brought-the-spanish-king
+  ru: kareta-na-kotoroy-vekhal-ispanskiy-korol
+title:
+  pt: O coche em que chegou o rei espanhol
+  en: The Coach That Brought the Spanish King
+  ru: Карета, на которой въехал испанский король
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1619
+place:
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7223
+  lon: -9.1393
+bridge:
+  name: Museu Nacional dos Coches
+  title:
+    pt: Museu Nacional dos Coches
+    en: National Coach Museum
+    ru: Национальный музей карет
+  address: Av. da Índia 136, Lisboa
+  lat: 38.6965545
+  lon: -9.197485
+  maps_url: https://www.google.com/maps/place/Museu+Nacional+dos+Coches/@38.6965587,-9.2000599,17z/data=!3m1!4b1!4m6!3m5!1s0xd1ecb456222654f:0x1b76d724a27a8bd!8m2!3d38.6965545!4d-9.197485
+  url: https://www.mncoches.gov.pt/
+  note:
+    pt: O coche de viagem de 1619 é o mais antigo da coleção do museu.
+    en: The 1619 traveling coach is the oldest in the museum’s collection.
+    ru: Дорожная карета 1619 года самая старая в коллекции музея.
+threads:
+  - engenho
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O coche mais antigo do museu trouxe um rei indesejado.
+  en: The museum’s oldest coach carried a king Portugal didn’t want.
+  ru: Самая старая карета музея карет привезла короля, которого Португалия не хотела видеть.
+seo:
+  title:
+    pt: O coche do rei espanhol, 1619 | O Elefante Fugiu
+    en: The Spanish King’s Coach, 1619 | O Elefante Fugiu
+    ru: Карета испанского короля, 1619 | O Elefante Fugiu
+story:
+  pt: >-
+    Desde 1580, Portugal era governado por reis espanhóis. Viviam em Madrid, quase nunca vinham a
+    Lisboa, e os portugueses ressentiam-se: o seu país tinha-se tornado uma província.
+
+    Em 1619, Filipe II de Portugal, que era também Filipe III de Espanha, veio finalmente. Lisboa
+    recebeu-o com arcos e festas, e o rei atravessou o país num pesado coche de viagem.
+
+    Esse coche é hoje o mais antigo do Museu Nacional dos Coches. A visita não ajudou: vinte anos
+    depois, os portugueses afastaram a dinastia espanhola, e o coche ficou.
+  en: >-
+    From 1580, Portugal was ruled by Spanish kings. They lived in Madrid and hardly ever came to
+    Lisbon, and the Portuguese resented it: their country had become a province.
+
+    In 1619, Philip II of Portugal, who was also Philip III of Spain, finally came. Lisbon welcomed
+    him with arches and festivities, and the king crossed the country in a heavy traveling coach.
+
+    That coach is now the oldest in the National Coach Museum. The visit didn’t help: twenty years
+    later the Portuguese threw out the Spanish dynasty, and the coach stayed.
+  ru: >-
+    С 1580 года Португалией правили испанские короли. Они жили в Мадриде, в Лиссабоне почти не
+    бывали, и португальцы обижались: их страна стала провинцией.
+
+    В 1619 году Филипп II Португальский, он же Филипп III Испанский, наконец приехал. Лиссабон
+    встречал его арками и праздниками, а король ехал по стране в тяжёлой дорожной карете.
+
+    Эта карета сегодня самая старая в Национальном музее карет. Приезд не помог: через двадцать лет
+    португальцы прогнали испанскую династию, а карета осталась.
+more:
+  pt: >-
+    O coche de 1619 não se parece com os coches dourados de gala que deram fama ao museu. É um
+    veículo para longas viagens, e viajar nele era duro: nessa época ainda não havia as molas
+    habituais, e a caixa costumava ser suspensa por correias de couro, por isso balançava a cada
+    buraco.
+
+
+    O rei veio para que as Cortes portuguesas jurassem o seu filho, o futuro Filipe IV. O juramento
+    fez-se, mas o amor por Madrid não aumentou: vinte e um anos depois, a 1 de dezembro de 1640,
+    Lisboa aclamou um rei seu.
+
+
+    O coche sobreviveu à União e à monarquia. O museu foi aberto em 1905 pela rainha D. Amélia, e
+    este coche continua a ser o mais antigo da sua coleção.
+  en: >-
+    The 1619 coach looks nothing like the gilded state coaches the museum is famous for. It was
+    built for long journeys, and riding in it was rough: coaches didn’t have proper springs yet, and
+    the body usually hung on leather straps, so it swung at every pothole.
+
+
+    The king came so that the Portuguese Cortes would swear allegiance to his son, the future Philip
+    IV. They took the oath, but it didn’t win Madrid any affection: twenty-one years later, on
+    December 1, 1640, Lisbon proclaimed a king of its own.
+
+
+    The coach outlived both the Union and the monarchy. Queen Amélia opened the museum in 1905, and
+    this coach is still the oldest in its collection.
+  ru: >-
+    Карета 1619 года не похожа на золотые парадные кареты, которыми славится музей. Это дорожная
+    повозка для долгого пути, и ехать в ней было тяжело: тогда ещё не было привычных рессор, и кузов
+    обычно подвешивали на кожаных ремнях, так что на каждой яме он раскачивался.
+
+
+    Король приехал, чтобы португальские кортесы присягнули его сыну, будущему Филиппу IV. Присягу
+    дали, но любви к Мадриду не прибавилось: через двадцать один год, 1 декабря 1640 года, в
+    Лиссабоне провозгласили своего короля.
+
+
+    Карета пережила и унию, и монархию. Музей открыла в 1905 году королева Амелия, а эта карета и
+    сегодня самая старая в его коллекции.
+myth:
+  verdict: myth
+  statement:
+    pt: Os reis espanhóis governavam Portugal a partir de Lisboa
+    en: Spain’s kings ruled Portugal from Lisbon
+    ru: Испанские короли правили Португалией из Лиссабона
+  answer:
+    pt: Viviam em Madrid, e Filipe II de Portugal só veio a Lisboa uma vez, em 1619.
+    en: They lived in Madrid, and Philip II of Portugal came to Lisbon only once, in 1619.
+    ru: Они жили в Мадриде, а Филипп II Португальский приехал в Лиссабон лишь однажды, в 1619 году.
+sources:
+  - title: "Wikipedia: National Coach Museum"
+    url: https://en.wikipedia.org/wiki/National_Coach_Museum
+    type: reference
+    accessed: 2026-11-20
+  - title: "Visit Portugal: Museu Nacional dos Coches"
+    url: https://www.visitportugal.com/en/node/138016
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Gan Giménez: La jornada de Felipe III a Portugal (1619), Chronica Nova 19 (1991)"
+    url: https://revistaseug.ugr.es/index.php/cnova/article/view/2769
+    type: academic
+    accessed: 2026-11-20
+image:
+  file: coche-filipe-1619.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: um coche de viagem de caixa fechada com cortinas nas
+      janelas, quatro rodas de raios e varais para os cavalos."
+    en: "Blue-and-white azulejo panel: a closed traveling coach with curtained windows, four spoked
+      wheels, and a pole for the horses."
+    ru: "Панно из сине-белых азулежу: дорожная карета с закрытым кузовом, занавесками на окнах, четырьмя
+      спицевыми колёсами и дышлом для лошадей."
+  caption:
+    pt: Coche de viagem do século XVII. Ilustração em estilo azulejo, criada por IA.
+    en: A 17th-century traveling coach. Azulejo-style illustration, created by AI.
+    ru: Дорожная карета XVII века. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: coche-filipe-ii
+published: 2026-11-20
+placeholder: false
+ru_ready: true

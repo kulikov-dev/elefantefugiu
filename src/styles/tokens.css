@@ -68,8 +68,6 @@
   --cab-label-wide: 0.88rem;
   --cab-shelf-title: 1.15rem;
   --cab-obj-shadow: drop-shadow(0 0.1875rem 0.125rem rgb(0 0 0 / 0.18));
-  --cab-sil: brightness(0) opacity(0.11);
-  --cab-sil-dark: brightness(0) invert(1) opacity(0.12);
   --cab-rule: 4rem;
   --cab-tin-size: 8.25rem;
   --cab-tin-size-wide: 13.125rem;

@@ -80,7 +80,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'cabinet
               <div class="shelf__objs">
                 {items.map(({ item, age }) => (
                   <button class="cab-obj" type="button" data-item={item.id} data-min-age={String(age.minAge)} data-sensitive={String(age.sensitive)} aria-label={strings.unknown_label} aria-haspopup="dialog">
-                    {data[item.id]!.image ? <img src={data[item.id]!.image!} alt="" loading="lazy" /> : <svg class="cab-obj__stub" viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="12" width="40" height="40" /><path d="M12 32h40M32 12v40" /><circle cx="32" cy="32" r="8" /></svg>}
+                    {data[item.id]!.image ? <span class="cab-obj__pic"><img src={data[item.id]!.image!} alt="" loading="lazy" /><span class="cab-obj__out" style={`--out: url(${data[item.id]!.image!.replace(/.png$/, '-outline.png')})`}></span></span> : <svg class="cab-obj__stub" viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="12" width="40" height="40" /><path d="M12 32h40M32 12v40" /><circle cx="32" cy="32" r="8" /></svg>}
                   </button>
                 ))}
               </div>

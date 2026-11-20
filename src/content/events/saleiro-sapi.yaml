@@ -1,0 +1,189 @@
+id: saleiro-sapi
+slug:
+  pt: o-saleiro-esculpido-na-serra-leoa
+  en: the-saltcellar-carved-in-sierra-leone
+  ru: solonka-kotoruyu-vyrezali-v-serra-leone
+title:
+  pt: O saleiro esculpido na Serra Leoa
+  en: The Saltcellar Carved in Sierra Leone
+  ru: Солонка, которую вырезали в Сьерра-Леоне
+epoch: avis-e-descobrimentos
+level: story
+year: 1500
+year_label:
+  pt: c. 1490–1530
+  en: c. 1490–1530
+  ru: около 1490–1530
+place:
+  name:
+    pt: Serra Leoa
+    en: Sierra Leone
+    ru: Сьерра-Леоне
+  short:
+    pt: Serra Leoa
+    en: Sierra Leone
+    ru: Сьерра-Леоне
+  lat: 8.4657
+  lon: -13.2317
+bridge:
+  name: Museu Nacional de Arte Antiga
+  title:
+    pt: Museu Nacional de Arte Antiga
+    en: National Museum of Ancient Art
+    ru: Национальный музей древнего искусства
+  address: Rua das Janelas Verdes, Lisboa
+  lat: 38.7048412
+  lon: -9.1614643
+  maps_url: https://www.google.com/maps/place/Museu+Nacional+de+Arte+Antiga/@38.7048454,-9.1640392,17z/data=!3m1!4b1!4m6!3m5!1s0xd193499628e7b19:0xc932f1ff3fad2b24!8m2!3d38.7048412!4d-9.1614643
+  url: https://www.museudearteantiga.pt/
+  note:
+    pt: Num painel de 1530, uma colher de marfim, tida como da Serra Leoa, está num prato diante da
+      Virgem.
+    en: A 1530 panel shows an ivory spoon, thought to be from Sierra Leone, on a plate before the
+      Virgin.
+    ru: На картине около 1530 года в тарелке перед Девой Марией лежит ложка из слоновой кости, как
+      считается, вырезанная в Сьерра-Леоне.
+threads:
+  - mar
+  - gente-como-nos
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Artesãos africanos esculpiam saleiros de marfim, e os reis europeus disputavam-nos.
+  en: African carvers made ivory saltcellars, and Europe’s kings competed to own them.
+  ru: Африканские мастера резали солонки из слоновой кости, а короли охотились за ними.
+seo:
+  title:
+    pt: Saleiro de marfim da Serra Leoa | O Elefante Fugiu
+    en: Ivory Saltcellar from Sierra Leone | O Elefante Fugiu
+    ru: Солонка из слоновой кости, Сьерра-Леоне | O Elefante Fugiu
+story:
+  pt: >-
+    Os navios portugueses compravam na costa da Serra Leoa pimenta, ouro e marfim. Os escultores
+    locais, do povo sapi, perceberam que os visitantes gostavam do seu trabalho e começaram a
+    esculpir por encomenda.
+
+    A encomenda mais cara eram os saleiros. O sal na mesa de um nobre europeu era um luxo, e o
+    recipiente tinha de deslumbrar. Os mestres esculpiam uma esfera sobre pés e, à volta, figuras de
+    portugueses: barbas, chapéus, cruzes, brasões.
+
+    Assim, escultores africanos que nunca tinham visto Lisboa fizeram alguns dos primeiros retratos
+    de europeus vistos por olhos africanos. Seguiam para Portugal e, daí, para as coleções reais da
+    Europa.
+  en: >-
+    Portuguese ships bought pepper, gold, and ivory on the coast of Sierra Leone. Local carvers of
+    the Sapi people noticed that the visitors admired their work and began carving to order.
+
+    The most expensive orders were saltcellars. Salt on a European noble’s table was a luxury, and
+    its container had to dazzle. The masters carved a sphere on legs and surrounded it with figures
+    of Portuguese men: beards, hats, crosses, coats of arms.
+
+    So African carvers who had never seen Lisbon made some of the earliest portraits of Europeans
+    seen through African eyes. The pieces traveled to Portugal and from there into Europe’s royal
+    collections.
+  ru: >-
+    Португальские корабли покупали на берегах Сьерра-Леоне перец, золото и слоновую кость. Местные
+    резчики из народа сапи заметили, что гостям нравится их работа, и стали резать вещи на заказ.
+
+    Самым дорогим заказом были солонки. Соль на столе знатного европейца была роскошью, и сосуд для
+    неё должен был поражать. Мастера вырезали шар на ножках, а вокруг ставили фигурки португальцев:
+    бороды, шапки, кресты, гербы.
+
+    Так африканские резчики, никогда не видевшие Лиссабона, сделали одни из самых ранних портретов
+    европейцев глазами Африки. Их везли в Португалию, а оттуда в королевские коллекции Европы.
+more:
+  pt: >-
+    Os sapi nunca tinham visto palácios europeus, por isso misturavam o seu com o alheio. Os
+    guerreiros portugueses seguram espadas e escudos, mas os rostos e as poses são os da escultura
+    local. Ao mestre mostravam-se gravuras e moedas, e o resto ele imaginava.
+
+
+    As peças de marfim saíam mais finas e complexas do que o que se esculpia na Europa, por isso não
+    ficavam na mesa, mas nos gabinetes de curiosidades, entre conchas e raridades. Os sapi também
+    esculpiam colheres: conhecem-se, ao que se diz, apenas cerca de dez. Uma delas aparece numa
+    pintura feita em Lisboa por volta de 1530: está num prato que um anjo segura diante da Virgem e
+    do Menino. Sinal de que estas peças existiam nas casas de Lisboa.
+
+
+    Quase todos os saleiros que sobreviveram foram parar a museus da Europa e da América; os mais
+    conhecidos estão no Museu Britânico e no Metropolitan.
+  en: >-
+    The Sapi had never seen a European palace, so they blended their world with the foreign one. The
+    Portuguese warriors hold swords and shields, but their faces and poses come from local
+    sculpture. The carver was shown prints and coins and imagined the rest.
+
+
+    These ivories were finer and more intricate than anything carved in Europe at the time, so they
+    weren’t kept on the table but in cabinets of curiosities, among shells and rarities. The Sapi
+    carved spoons too: only about ten are known today. One of them appears in a painting made in
+    Lisbon around 1530, lying on a plate held by an angel before the Virgin and Child. That tells us
+    such pieces were in Lisbon homes.
+
+
+    Almost all the surviving saltcellars ended up in museums in Europe and America; the best known
+    are in the British Museum and the Met.
+  ru: >-
+    Сапи никогда не видели европейских дворцов, поэтому смешивали своё и чужое. Португальские воины
+    держат мечи и щиты, а лица и позы у них такие, как в местной скульптуре. Мастеру показывали
+    гравюры и монеты, остальное он додумывал сам.
+
+
+    Вещи из кости получались тоньше и сложнее того, что резали в Европе, поэтому их держали не на
+    столе, а в кабинетах редкостей, среди раковин и диковин. Сапи резали и ложки: их, как считается,
+    известно всего около десяти. Одна такая ложка нарисована на картине, написанной в Лиссабоне
+    около 1530 года: она лежит в тарелке, которую держит ангел перед Девой Марией и младенцем.
+    Значит, такие вещи были в лиссабонских домах.
+
+
+    Почти все дожившие солонки разошлись по музеям Европы и Америки, самые известные хранят
+    Британский музей и Метрополитен.
+myth:
+  verdict: myth
+  statement:
+    pt: Os saleiros africanos para os portugueses eram feitos em Lisboa
+    en: The African saltcellars for the Portuguese were made in Lisbon
+    ru: Африканские солонки для португальцев делали в Лиссабоне
+  answer:
+    pt: Eram esculpidos por mestres sapi na Serra Leoa, por encomenda, e chegavam a Portugal já prontos.
+    en: Sapi master carvers made them to order in Sierra Leone, and they arrived in Portugal finished.
+    ru: Их вырезали мастера сапи в Сьерра-Леоне на заказ, а в Португалию привозили готовыми.
+sources:
+  - title: "The Met: Afro-Portuguese Ivories"
+    url: https://www.metmuseum.org/essays/afro-portuguese-ivories
+    type: institutional
+    accessed: 2026-11-20
+  - title: "British Museum: Af1981,35.1.a-b"
+    url: https://www.britishmuseum.org/collection/object/E_Af1981-35-1-a-b
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Smarthistory: Spoons from West Africa in Renaissance Lisbon"
+    url: https://smarthistory.org/?p=68514
+    type: reference
+    accessed: 2026-11-20
+  - title: Marfins africanos no mundo atlântico (NOVA, Campo das Cebolas excavations)
+    url: https://run.unl.pt/bitstream/10362/161852/1/Web_Marfins_Africanos_no_Mundo_Atl_ntico_536_551.pdf
+    type: academic
+    accessed: 2026-11-20
+image:
+  file: saleiro-sapi.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: um saleiro esférico com tampa, sobre pés em forma de três
+      portugueses de barba, chapéu e espada, com uma figura sentada no topo."
+    en: "Blue-and-white azulejo panel: a spherical lidded saltcellar on three feet shaped like bearded
+      Portuguese men with hats and swords, with a seated figure on top."
+    ru: "Панно из сине-белых азулежу: шаровидная солонка с крышкой на трёх ножках-фигурках бородатых
+      португальцев в шапках и с мечами, наверху сидит человечек."
+  caption:
+    pt: Saleiro de marfim afro-português. Ilustração em estilo azulejo, criada por IA.
+    en: An Afro-Portuguese ivory saltcellar. Azulejo-style illustration, created by AI.
+    ru: Афро-португальская солонка из слоновой кости. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: saleiro-sapi
+published: 2026-11-20
+placeholder: false
+ru_ready: true
