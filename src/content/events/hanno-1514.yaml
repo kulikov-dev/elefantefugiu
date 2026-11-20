@@ -228,8 +228,8 @@ route:
       lng: 9.3
       mode: sea
     - via: true
-      lat: 42.1
-      lng: 11.7
+      lat: 42.09
+      lng: 11.8
       mode: sea
     - name: { pt: "Roma", en: "Rome", ru: "Рим" }
       lat: 41.9022

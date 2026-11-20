@@ -1,7 +1,8 @@
-// The land check of the sea legs of a route map (docs/spec.md 5.3a): the drawn line of every `mode: sea` leg is walked in steps of about STEP_KM and
-// must stay on the water of the same Natural Earth coast the map draws. Pure functions, no Astro imports; check:data and the tests call it.
+// The land checks of a route map (docs/spec.md 5.3a): the drawn line of every `mode: sea` leg is walked in steps of about STEP_KM and must stay on the water
+// of the same Natural Earth coast the map draws; the line of every `mode: land` leg is walked in steps of LAND_STEP_KM and must stay on land (a ferry leg
+// is let off, up to FERRY_MAX_KM). Pure functions, no Astro imports; check:data and the tests call it.
 import type { Ring, RouteGeo } from './route-geo';
-import { buildRouteMap, stopsOf, type MapRoute } from './route-map';
+import { buildRouteMap, landOf, stopsOf, type MapRoute } from './route-map';
 
 /** The step of the walk along the line. */
 export const STEP_KM = 10;
@@ -9,6 +10,11 @@ export const STEP_KM = 10;
 export const PORT_KM = 30;
 /** Inside the coast the line may go this far: the coast of the map is simplified. */
 export const COAST_KM = 15;
+
+/** The land legs: the step of the walk, how far inside the water the line may go (the coast of the map is simplified; a river mouth, a quay), and the longest ferry. */
+export const LAND_STEP_KM = 3;
+export const LAND_WATER_KM = 2;
+export const FERRY_MAX_KM = 30;
 
 const EARTH_KM = 6371;
 const rad = (d: number) => (d * Math.PI) / 180;
@@ -94,7 +100,7 @@ export interface SeaProblem {
 /** The places where the drawn line of a sea leg runs over land, worst one per section of the route (between two stops). Empty: the line keeps to the water. */
 export function seaProblems(route: MapRoute, geo: RouteGeo): SeaProblem[] {
   const model = buildRouteMap(route, 'en', geo);
-  const rings = indexOf(geo.land);
+  const rings = indexOf(landOf(route, geo));
   const stops = stopsOf(route).map((p): LL => [p.lng, p.lat]);
   const names = stopsOf(route).map((p) => p.name!.en);
   const worst = new Map<number, SeaProblem>();
@@ -114,4 +120,49 @@ export function seaProblems(route: MapRoute, geo: RouteGeo): SeaProblem[] {
     }
   }
   return [...worst.values()];
+}
+
+export interface LandProblem {
+  /** "Lisbon → Palmela" (the stops the section runs between), or "ferry" with the length when a ferry leg is too long. */
+  section: string;
+  /** What is wrong: the line goes over water (how far from the coast it is, km) or a ferry is longer than FERRY_MAX_KM. */
+  kind: 'water' | 'ferry';
+  /** Km: how far into the water the line goes (kind water) or the length of the ferry leg (kind ferry). */
+  km: number;
+  at: LL;
+}
+
+const mercY = (lat: number) => Math.log(Math.tan(Math.PI / 4 + rad(Math.max(-85, Math.min(85, lat))) / 2));
+const unMercY = (y: number) => (2 * Math.atan(Math.exp(y)) - Math.PI / 2) * (180 / Math.PI);
+
+/** The places where the drawn line of a land leg runs over water, worst one per section; a ferry leg is skipped, but a ferry longer than FERRY_MAX_KM is an error. A land leg is a straight line on the map (Mercator), so it is walked in the same projection. */
+export function landProblems(route: MapRoute, geo: RouteGeo): LandProblem[] {
+  const rings = indexOf(landOf(route, geo));
+  const stops = stopsOf(route);
+  const out: LandProblem[] = [];
+  const worst = new Map<number, LandProblem>();
+  route.points.forEach((p, i) => {
+    if (i === 0 || p.mode !== 'land') return;
+    const prev = route.points[i - 1]!;
+    const a: LL = [prev.lng, prev.lat];
+    const b: LL = [p.lng, p.lat];
+    const section = route.points.slice(0, i).filter((q) => !q.via).length - 1;
+    const label = `${stops[section]!.name!.en} → ${stops[section + 1]!.name!.en}`;
+    const length = distanceKm(a, b);
+    if (p.leg === 'ferry') {
+      if (length > FERRY_MAX_KM) out.push({ section: label, kind: 'ferry', km: length, at: b });
+      return;
+    }
+    const steps = Math.max(1, Math.ceil(length / LAND_STEP_KM));
+    for (let k = 0; k <= steps; k++) {
+      const t = k / steps;
+      const q: LL = [a[0] + (b[0] - a[0]) * t, unMercY(mercY(a[1]) + (mercY(b[1]) - mercY(a[1])) * t)];
+      if (route.points.some((s) => distanceKm([s.lng, s.lat], q) <= LAND_WATER_KM) || onLand(rings, q)) continue;
+      const depth = coastKm(rings, q);
+      if (depth <= LAND_WATER_KM) continue;
+      const known = worst.get(section);
+      if (!known || depth > known.km) worst.set(section, { section: label, kind: 'water', km: depth, at: q });
+    }
+  });
+  return [...out, ...worst.values()];
 }

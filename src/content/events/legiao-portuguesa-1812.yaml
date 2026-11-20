@@ -169,6 +169,22 @@ route:
       lat: 38.7223
       lng: -9.1393
       year: 1808
+    - via: true
+      lat: 39.0
+      lng: -9.2
+      mode: land
+    - via: true
+      lat: 40.72
+      lng: -6.9
+      mode: land
+    - via: true
+      lat: 42.34
+      lng: -3.7
+      mode: land
+    - via: true
+      lat: 43.45
+      lng: -1.5
+      mode: land
     - name: { pt: "Wagram", en: "Wagram", ru: "Ваграм" }
       lat: 48.2917
       lng: 16.5667

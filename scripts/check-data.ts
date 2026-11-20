@@ -11,7 +11,7 @@ import { localize } from '../src/lib/localize';
 import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX, storySeoDescription, storySeoTitle } from '../src/lib/seo';
 import { buildRouteMap } from '../src/lib/route-map';
 import { routeGeo } from '../src/lib/route-geo';
-import { seaProblems } from '../src/lib/route-sea';
+import { FERRY_MAX_KM, landProblems, seaProblems } from '../src/lib/route-sea';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
 import { epochSchema, eventSchema, placeSchema, featuredSchema, festaListSchema, glossaryListSchema, threadSchema } from '../src/data/schemas';
 import { GLOSSARY_LANGS, mentioningStories } from '../src/lib/glossary';
@@ -310,6 +310,12 @@ for (const { item: ev, file, stem } of events) {
       // A sea leg must keep to the water: the drawn line is walked over the land of the map (src/lib/route-sea.ts); where it does not, add `via` points.
       for (const p of seaProblems(route, routeGeo())) {
         report('error', file, `the sea leg ${p.section} runs about ${Math.round(p.depthKm)} km over land (near ${p.at[1].toFixed(1)}, ${p.at[0].toFixed(1)}): add via points so that the line goes by water`, 'route');
+      }
+      // A land leg must keep to the land (a road of the time); a crossing of a river or an estuary is a ferry leg (`leg: 'ferry'`, not walked, up to 30 km).
+      for (const p of landProblems(route, routeGeo())) {
+        report('error', file, p.kind === 'ferry'
+          ? `the ferry leg ${p.section} is about ${Math.round(p.km)} km long (the limit is ${FERRY_MAX_KM} km): this is not a ferry, add via points by road`
+          : `the land leg ${p.section} runs over water about ${Math.round(p.km)} km from the coast (near ${p.at[1].toFixed(2)}, ${p.at[0].toFixed(2)}): add via points by road, and mark a crossing with leg: ferry`, 'route');
       }
     } catch (error) {
       report('error', file, `the route map cannot be drawn: ${(error as Error).message}`, 'route');

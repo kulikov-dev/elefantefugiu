@@ -5,8 +5,8 @@ import { parse } from 'yaml';
 import { routeSchema, eventSchema } from '../src/data/schemas';
 import { localize } from '../src/lib/localize';
 import { routeGeo } from '../src/lib/route-geo';
-import { buildRouteMap, routePath, routeYears, wrapLabel, ROUTE_FRAME, type MapRoute } from '../src/lib/route-map';
-import { seaProblems } from '../src/lib/route-sea';
+import { buildRouteMap, landOf, routePath, routeYears, wrapLabel, ROUTE_FRAME, type MapRoute } from '../src/lib/route-map';
+import { FERRY_MAX_KM, landProblems, seaProblems } from '../src/lib/route-sea';
 
 const name = (s: string) => ({ pt: s, en: s, ru: s });
 const stop = (s: string, lat: number, lng: number, extra: object = {}) => ({ name: name(s), lat, lng, ...extra });
@@ -158,4 +158,68 @@ test('every sea leg of the stories keeps to the water (the same check as check:d
     const event = localize(eventSchema.parse(data), true);
     assert.deepEqual(seaProblems(event.route!, geo), [], `${f}: a sea leg over land`);
   }
+});
+
+test('a ferry leg is dashed in its own run, marked in the model, and only for a land leg', () => {
+  const via = (lat: number, lng: number, extra: object = {}) => ({ via: true, lat, lng, mode: 'land', ...extra });
+  const route: MapRoute = { points: pts([stop('Alpha', 38.72, -9.14), via(38.66, -9.07, { leg: 'ferry' }), stop('Bravo', 38.57, -8.9, { mode: 'land' })]) };
+  assert.ok(routeSchema.safeParse(route).success);
+  assert.ok(!routeSchema.safeParse({ points: [A, { ...B, leg: 'ferry' }] }).success, 'a ferry leg by sea');
+  const model = buildRouteMap(route, 'en', routeGeo());
+  assert.equal(model.ferry, true);
+  assert.equal(model.approx, false);
+  assert.equal(model.runs.length, 2);
+  assert.equal(model.runs[0]!.ferry, true);
+  assert.equal(model.runs[1]!.dash, undefined);
+});
+
+test('the land check: a land leg over water is found, a ferry leg is let off up to its limit, a road round the water clears it', () => {
+  const geo = routeGeo();
+  const land = (lat: number, lng: number, extra: object = {}) => ({ via: true, lat, lng, mode: 'land', ...extra });
+  const alpha = stop('Alpha', 38.72, -9.14);
+  const bravo = stop('Bravo', 40.4, -3.7, { mode: 'land' });
+  // From Lisbon straight to the north-east the line goes over the estuary of the Tagus; a landmark on its north-west shore keeps it on land.
+  const bad = landProblems({ points: pts([alpha, bravo]) }, geo);
+  assert.equal(bad.length, 1);
+  assert.equal(bad[0]!.kind, 'water');
+  assert.equal(bad[0]!.section, 'Alpha → Bravo');
+  assert.deepEqual(landProblems({ points: pts([alpha, land(39, -9.2), bravo]) }, geo), []);
+  // Lisbon to Rome by land: the Mediterranean in between.
+  const rome = stop('Rome', 41.9, 12.45, { mode: 'land' });
+  assert.equal(landProblems({ points: pts([alpha, rome]) }, geo).length, 1);
+  // A ferry across the estuary is let off; one longer than the limit is an error of its own.
+  assert.deepEqual(landProblems({ points: pts([alpha, land(38.66, -9.07, { leg: 'ferry' }), stop('Palmela', 38.57, -8.9, { mode: 'land' })]) }, geo), []);
+  const far = landProblems({ points: pts([alpha, land(36, -9, { leg: 'ferry' }), stop('Bravo', 36.5, -8.9, { mode: 'land' })]) }, geo).filter((p) => p.kind === 'ferry');
+  assert.equal(far.length, 1);
+  assert.equal(far[0]!.kind, 'ferry');
+  assert.ok(far[0]!.km > FERRY_MAX_KM);
+  // Sea and air legs are not walked here.
+  assert.deepEqual(landProblems({ points: pts([alpha, { ...rome, mode: 'sea' }]) }, geo), []);
+});
+
+test('a map of a region is drawn on the land at 1:10m, a map of an ocean on the one at 1:50m', () => {
+  const geo = routeGeo();
+  const region: MapRoute = { points: pts([stop('Alpha', 38.72, -9.14), stop('Bravo', 38.02, -8.69, { mode: 'land' })]) };
+  const ocean: MapRoute = { points: pts([stop('Alpha', 38.72, -9.14), stop('Bravo', -22.9, -43.2, { mode: 'sea' })]) };
+  assert.equal(landOf(region, geo), geo.fine);
+  assert.equal(landOf(ocean, geo), geo.land);
+  assert.ok(geo.fine!.length > geo.land.length);
+  // Without the fine land the coarse one serves.
+  assert.equal(landOf(region, { land: geo.land, rivers: geo.rivers }), geo.land);
+});
+
+test('every land leg of the stories keeps to the land, and a ferry is short (the same check as check:data)', () => {
+  const geo = routeGeo();
+  for (const { f, data } of withRoute) {
+    const event = localize(eventSchema.parse(data), true);
+    assert.deepEqual(landProblems(event.route!, geo), [], `${f}: a land leg over water`);
+  }
+});
+
+test('two stops closer than 15 units get smaller dots that do not touch; far ones keep the full size', () => {
+  const model = buildRouteMap({ points: pts([stop('Far', 38.7, -9.1), stop('Near1', 44.8, 11.6, { mode: 'land' }), stop('Near2', 44.6, 10.9, { mode: 'land' })]) }, 'en', routeGeo());
+  const [far, a, b] = model.dots;
+  assert.equal(far!.r, 4);
+  const gap = Math.hypot(a!.x - b!.x, a!.y - b!.y) - (a!.r + 1) - (b!.r + 1);
+  assert.ok(a!.r < 4 && b!.r < 5 && gap >= 1, `dots ${a!.r}, ${b!.r}, gap ${gap}`);
 });

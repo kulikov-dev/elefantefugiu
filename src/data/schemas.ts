@@ -143,7 +143,8 @@ export type EventMyth = z.infer<typeof eventMythSchema>;
  * no label: it only leads the line round land and asserts nothing. Every point but the first says how the traveller arrives at it (`mode`: sea and air go
  * in a curve through the points, land in a straight line, river along the course of the river named by `river`) and, with `approx`, that this leg is known only roughly
  * (a dotted line). `approx` of the route is the default of every leg. `years` replaces the years of the caption (by default from the earliest to the latest year of the stops).
- * A sea leg needs `via` points so that the curve runs over water: check:data walks the drawn line over the land (src/lib/route-sea.ts).
+ * A sea leg needs `via` points so that the curve runs over water, a land leg needs them so that the line runs over land (a road of the time); a crossing of a river
+ * or an estuary inside a land journey is a leg with `leg: 'ferry'` (drawn dashed, not checked, at most 30 km). check:data walks the drawn line over the land (src/lib/route-sea.ts).
  */
 export const ROUTE_MODES = ['sea', 'land', 'air', 'river'] as const;
 export type RouteMode = (typeof ROUTE_MODES)[number];
@@ -160,6 +161,8 @@ const routePoint = z.strictObject({
   mode: z.enum(ROUTE_MODES).optional(),
   approx: z.boolean().optional(),
   river: z.enum(ROUTE_RIVERS).optional(),
+  /** `ferry`: the leg that arrives at this point went over water (a crossing inside a journey by land); only with `mode: land`. */
+  leg: z.literal('ferry').optional(),
 });
 export const routeSchema = z
   .strictObject({ points: z.array(routePoint).min(2), approx: z.boolean().optional(), years: z.string().optional() })
@@ -172,6 +175,7 @@ export const routeSchema = z
       if (i === 0 && (p.mode !== undefined || p.approx !== undefined || p.river !== undefined)) ctx.addIssue({ ...at('mode'), message: 'the first point has no mode: mode says how the traveller arrives' });
       if (i > 0 && p.mode === undefined) ctx.addIssue({ ...at('mode'), message: 'mode is needed (how the traveller arrives at this point)' });
       if (p.mode === 'river' && p.river === undefined) ctx.addIssue({ ...at('river'), message: 'a river leg names the river' });
+      if (p.leg !== undefined && p.mode !== 'land') ctx.addIssue({ ...at('leg'), message: 'leg: ferry is only for a land leg (a crossing inside a journey by land)' });
       if (p.mode !== 'river' && p.river !== undefined) ctx.addIssue({ ...at('river'), message: 'river is only for a river leg' });
     });
     if (route.points.filter((p) => !p.via).length < 2) ctx.addIssue({ code: 'custom', path: ['points'], message: 'at least two stops' });
