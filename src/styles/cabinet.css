@@ -2,28 +2,39 @@
    Loaded by src/scripts/cabinet.ts. Colours, sizes and fonts come from tokens.css. */
 
 /* ---- The hidden word in the text of a story ---- */
-/* Plain text until the cabinet is open (or previewed): the head script sets html[data-cabinet]. A thin dotted underline in the colour of the epoch;
-   not a link (no accent colour, no arrow) and not a footnote. */
-html[data-cabinet] .cw {
-  text-decoration: underline dotted 1px var(--epoch-accent);
+/* Plain text until the cabinet is open (or previewed): the head script sets html[data-cabinet]. A dashed underline in the colour of the epoch (the glossary has a grey dotted one, so the two
+   differ); a light wash of the epoch colour under the word on hover. Not a link (no accent colour, no arrow). */
+html[data-cabinet] .cw,
+button.cw {
+  text-decoration: underline dashed var(--epoch-accent);
+  text-decoration-thickness: var(--cab-underline-thickness);
   text-underline-offset: var(--cab-underline-offset);
 }
 
 button.cw {
   all: unset;
   cursor: pointer;
-  text-decoration: underline dotted 1px var(--epoch-accent);
+  text-decoration: underline dashed var(--epoch-accent);
+  text-decoration-thickness: var(--cab-underline-thickness);
   text-underline-offset: var(--cab-underline-offset);
   border-radius: var(--radius-sm);
 }
 
 button.cw:hover {
-  text-decoration-style: solid;
+  background: color-mix(in srgb, var(--epoch-accent) var(--cab-word-wash), transparent);
 }
 
 button.cw:focus-visible {
   outline: var(--ring-width) solid var(--color-focus);
   outline-offset: var(--ring-offset-tight);
+}
+
+button.cw:focus:not(:focus-visible),
+.cab-obj:focus:not(:focus-visible),
+.cabinet__tin:focus:not(:focus-visible),
+.cab-sardine:focus:not(:focus-visible),
+.cabinet h1:focus {
+  outline: none;
 }
 
 /* ---- The pop-up beside a word, a tile, the tin or a sardine ---- */
@@ -54,7 +65,6 @@ button.cw:focus-visible {
   grid-template-columns: auto 1fr;
   gap: var(--space-3);
   align-items: center;
-  padding-inline-end: var(--space-5);
 }
 
 .cab-pop__kicker {
@@ -100,24 +110,23 @@ button.cw:focus-visible {
   color: var(--color-accent);
 }
 
-.cab-pop__button:focus-visible,
-.cab-pop__close:focus-visible {
-  outline: var(--ring-width) solid var(--color-focus);
-  outline-offset: var(--ring-offset-tight);
+.cab-pop__button:hover,
+.cab-pop__button:focus-visible {
+  background: var(--color-accent-strong);
+  border-color: var(--color-accent-strong);
+  color: var(--color-on-accent);
 }
 
-.cab-pop__close {
-  position: absolute;
-  inset-block-start: var(--space-1);
-  inset-inline-end: var(--space-2);
-  font: inherit;
-  font-size: var(--text-lg);
-  line-height: 1;
-  padding: var(--space-1);
-  border: 0;
-  background: none;
-  color: var(--color-muted);
-  cursor: pointer;
+.cab-pop__button--ghost:hover,
+.cab-pop__button--ghost:focus-visible {
+  background: var(--color-accent-tint);
+  border-color: var(--color-accent);
+  color: var(--color-accent-strong);
+}
+
+.cab-pop__button:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
 }
 
 /* The object itself in a pop-up (the PNG of the shelf), no frame. */
@@ -135,16 +144,47 @@ button.cw:focus-visible {
   box-sizing: border-box;
   display: block;
   cursor: pointer;
-  inline-size: var(--cab-sardine-size);
-  padding: var(--space-3) var(--space-2);
+  /* The picture is 64 px wide on a phone and 80 px on a desktop; the target to press is not under 44 x 44 around it. */
+  inline-size: calc(var(--cab-sardine-size) + 2 * var(--space-2));
+  min-block-size: var(--cab-touch);
+  padding: var(--space-2);
   margin-block-start: var(--space-4);
   border-radius: var(--radius-sm);
 }
 
-.cab-sardine svg {
+@media (min-width: 48rem) {
+  .cab-sardine {
+    inline-size: calc(var(--cab-sardine-size-wide) + 2 * var(--space-2));
+  }
+}
+
+.cab-sardine img {
   display: block;
   inline-size: 100%;
   block-size: auto;
+  /* Now and then the tail wags (2 s in about 7): the pivot is the head. */
+  transform-origin: 78% 50%;
+  animation: cab-wag 7s ease-in-out infinite;
+}
+
+@keyframes cab-wag {
+  0%,
+  30%,
+  100% {
+    transform: rotate(0);
+  }
+  6% {
+    transform: rotate(4deg);
+  }
+  12% {
+    transform: rotate(-4deg);
+  }
+  18% {
+    transform: rotate(3deg);
+  }
+  24% {
+    transform: rotate(-2deg);
+  }
 }
 
 .cab-sardine:focus-visible {
@@ -156,8 +196,8 @@ button.cw:focus-visible {
   margin-inline-start: auto;
 }
 
-.cab-sardine--flip svg {
-  transform: scaleX(-1);
+.cab-sardine--flip {
+  scale: -1 1;
 }
 
 .cab-sardine--gone {
@@ -178,6 +218,10 @@ button.cw:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cab-sardine img {
+    animation: none;
+  }
+
   .cab-sardine--swim {
     animation: none;
     opacity: 0;
@@ -247,10 +291,39 @@ button.cw:focus-visible {
   font-size: var(--text-xs);
 }
 
-.cabinet__tin svg {
+.cabinet__tin .tin {
   inline-size: var(--cab-tin-size);
-  block-size: auto;
+}
+
+/* The tin: the picture of the empty tin and seven places in its oil (src/lib/cabinet-art.ts). */
+.tin {
+  position: relative;
   display: block;
+  aspect-ratio: var(--tin-ratio);
+}
+
+.tin__body {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.tin__fish {
+  position: absolute;
+  display: block;
+  aspect-ratio: 360 / 125;
+  block-size: auto;
+}
+
+.tin__fish--flip {
+  scale: -1 1;
+}
+
+.tin__fish--empty {
+  background: var(--cab-gold-dash);
+  opacity: 0.85;
+  -webkit-mask: var(--tin-outline) center / 100% 100% no-repeat;
+  mask: var(--tin-outline) center / 100% 100% no-repeat;
 }
 
 .cabinet__tin-count {
@@ -272,7 +345,7 @@ button.cw:focus-visible {
     grid-column: 2;
   }
 
-  .cabinet__tin svg {
+  .cabinet__tin .tin {
     inline-size: var(--cab-tin-size-wide);
   }
 }
@@ -469,8 +542,10 @@ html[data-js] .cabinet__no-js {
 
 .cabinet__party p {
   margin: 0 auto;
-  max-inline-size: var(--cab-line);
+  max-inline-size: var(--cab-party-text);
   color: var(--color-muted);
+  hyphens: none;
+  text-wrap: balance;
 }
 
 .cabinet__party-title {
@@ -483,6 +558,8 @@ html[data-js] .cabinet__no-js {
 }
 
 .cabinet__party p.cabinet__party-title {
+  max-inline-size: var(--cab-party-heading);
+  text-wrap: balance;
   color: var(--color-text);
 }
 
@@ -511,17 +588,4 @@ html[data-js] .cabinet__no-js {
 .cab-back {
   margin-block: var(--space-5);
   font-weight: 600;
-}
-
-/* ---- The card of the cabinet in the hub of the games ---- */
-.cab-card-art {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 3 / 2;
-  background: var(--color-accent-tint);
-}
-
-.cab-card-art svg {
-  inline-size: 55%;
-  block-size: auto;
 }

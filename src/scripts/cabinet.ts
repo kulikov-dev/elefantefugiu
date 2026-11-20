@@ -3,13 +3,14 @@
 //   - a hidden word in a story (span.cw) becomes a button: a press saves the rarity (localStorage `cabinet.v1`) and opens its card;
 //   - the page of the cabinet shows what is found, the tin, the pop-ups of the tiles, the garlands of the finished cabinet;
 //   - seven sardines swim in the corners of seven pages;
-//   - in the preview it also adds the links the closed build does not have (the card in the hub of the games, the link in the footer, the way back from a story of a rarity).
+//   - in the preview it also adds the links the closed build does not have (the card in the hub of the games, the way back from a story of a rarity).
+// Every pop-up works one way: a press (or Enter, Space) opens it, a press outside, a second press on the same place or Esc closes it; no cross, no hover.
 // Everything is in try/catch: without localStorage the page works as before and nothing is kept. The counter (GoatCounter, already on the site) gets
 // cabinet-item-<id>, cabinet-sardine-<n> and cabinet-complete, nothing else.
 import './../styles/cabinet.css';
 import { EPOCH_SEGMENT, RANK_SEGMENT, ROUTES, withBase, type Lang } from '../i18n/routes';
 import { CABINET_KEY, SARDINES, parseStore, withItem, withSardine, type CabinetStore } from '../lib/cabinet';
-import { buntingSvg, sardineSvg, tinSvg } from '../lib/cabinet-art';
+import { buntingSvg, sardineHtml, tinHtml } from '../lib/cabinet-art';
 import type { ItemData } from '../lib/cabinet-data';
 import { isVisibleInMode } from '../lib/family';
 import { SARDINE_PLACES } from '../lib/cabinet-places';
@@ -26,8 +27,6 @@ interface Payload {
   partyHref: string | null;
   href: string;
   hubCard?: string;
-  footerLink?: string;
-  games?: string;
 }
 
 const fill = (text: string, vars: Record<string, string | number>): string => Object.entries(vars).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, String(v)), text);
@@ -79,7 +78,7 @@ function payload(): Promise<Payload | null> {
   return (payloadPromise ??= fetchPayload());
 }
 
-/** The full payload (with the card of the hub and the link of the footer): the page of the cabinet carries a short one inline. */
+/** The full payload (with the card of the hub): the page of the cabinet carries a short one inline. */
 const fetchPayload = (): Promise<Payload | null> =>
   fetch(withBase(`${lang}/cabinet.json`))
     .then((r) => (r.ok ? (r.json() as Promise<Payload>) : null))
@@ -95,7 +94,7 @@ interface Action {
 }
 interface PopSpec {
   kicker?: string;
-  title: string;
+  title?: string;
   thumb?: HTMLElement;
   text?: string;
   actions?: Action[];
@@ -103,7 +102,6 @@ interface PopSpec {
 
 let pop: HTMLElement | undefined;
 let popOwner: HTMLElement | undefined;
-let closeLabel = 'x';
 
 function closePop(restoreFocus = true): void {
   if (!pop || pop.hidden) return;
@@ -114,6 +112,8 @@ function closePop(restoreFocus = true): void {
 }
 
 function openPop(anchor: HTMLElement, spec: PopSpec): void {
+  // A second press on the same place closes the card.
+  if (pop && !pop.hidden && popOwner === anchor) return closePop(false);
   closePop(false);
   if (!pop) {
     pop = document.createElement('div');
@@ -122,30 +122,28 @@ function openPop(anchor: HTMLElement, spec: PopSpec): void {
     document.body.append(pop);
   }
   pop.replaceChildren();
-  const close = document.createElement('button');
-  close.type = 'button';
-  close.className = 'cab-pop__close';
-  close.setAttribute('aria-label', closeLabel);
-  close.textContent = '×';
-  close.addEventListener('click', () => closePop());
-  const head = document.createElement('div');
-  head.className = 'cab-pop__head';
-  if (spec.thumb) head.append(spec.thumb);
-  else head.style.gridTemplateColumns = '1fr';
-  const titles = document.createElement('div');
-  if (spec.kicker) {
-    const k = document.createElement('p');
-    k.className = 'cab-pop__kicker';
-    k.textContent = spec.kicker;
-    titles.append(k);
+  if (spec.thumb || spec.kicker || spec.title) {
+    const head = document.createElement('div');
+    head.className = 'cab-pop__head';
+    if (spec.thumb) head.append(spec.thumb);
+    else head.style.gridTemplateColumns = '1fr';
+    const titles = document.createElement('div');
+    if (spec.kicker) {
+      const k = document.createElement('p');
+      k.className = 'cab-pop__kicker';
+      k.textContent = spec.kicker;
+      titles.append(k);
+    }
+    if (spec.title) {
+      const h = document.createElement('p');
+      h.className = 'cab-pop__title';
+      h.textContent = spec.title;
+      titles.append(h);
+    }
+    head.append(titles);
+    pop.append(head);
   }
-  const h = document.createElement('p');
-  h.className = 'cab-pop__title';
-  h.textContent = spec.title;
-  titles.append(h);
-  head.append(titles);
-  pop.append(close, head);
-  pop.setAttribute('aria-label', spec.title);
+  pop.setAttribute('aria-label', spec.title ?? spec.text ?? '');
   if (spec.text) {
     const p = document.createElement('p');
     p.textContent = spec.text;
@@ -168,7 +166,8 @@ function openPop(anchor: HTMLElement, spec: PopSpec): void {
   popOwner = anchor;
   pop.hidden = false;
   place(anchor);
-  (first ?? close).focus({ preventScroll: true });
+  // A card with a link hands the focus to it (the card sits at the end of the page, a keyboard would not reach it); a card with text only leaves the focus where it is.
+  first?.focus({ preventScroll: true });
 }
 
 /** Beside the anchor: under it, or above when there is no room under it; inside the screen sideways. */
@@ -214,7 +213,6 @@ function thumb(item: ItemData | undefined): HTMLElement | undefined {
 async function wireWords(spans: HTMLElement[]): Promise<void> {
   const data = await payload();
   if (!data) return;
-  closeLabel = data.strings.close ?? closeLabel;
   for (const span of spans) {
     const id = span.dataset.cw ?? '';
     const item = data.items[id];
@@ -259,7 +257,6 @@ function maybeComplete(data: Payload): void {
 let refreshPage: (() => void) | undefined;
 function wirePage(root: HTMLElement, data: Payload): void {
   const s = data.strings;
-  closeLabel = s.close ?? closeLabel;
   const tiles = [...root.querySelectorAll<HTMLElement>('[data-item]')];
   const labels = new Map([...root.querySelectorAll<HTMLElement>('[data-label]')].map((el) => [el.dataset.label ?? '', el]));
   const found = root.querySelector<HTMLElement>('[data-found-line]');
@@ -314,7 +311,7 @@ function wirePage(root: HTMLElement, data: Payload): void {
     if (found) found.textContent = fill(s.found ?? '', { n: have, m: total });
     if (empty) empty.hidden = total > 0;
     const caught = store.sardines.length;
-    if (tinArt) tinArt.innerHTML = tinSvg(caught, 'tin');
+    if (tinArt) tinArt.innerHTML = tinHtml(caught);
     if (tinCount) tinCount.textContent = caught === SARDINES ? (s.tin_full ?? '') : fill(s.tin_count ?? '', { n: caught });
     tin?.setAttribute('aria-label', fill(s.tin_label ?? '', { n: caught }));
     root.toggleAttribute('data-complete', caught === SARDINES);
@@ -329,25 +326,17 @@ function wirePage(root: HTMLElement, data: Payload): void {
       const item = data.items[id];
       if (!item) return;
       if (store.items.includes(id)) {
-        openPop(tile, { kicker: `${item.epoch}`, title: item.name, thumb: thumb(item), text: item.summary, actions: [{ label: s.open_story ?? '', href: item.href }] });
+        openPop(tile, { title: item.name, thumb: thumb(item), text: item.summary, actions: [{ label: `${s.open_story} →`, href: item.href }] });
       } else {
-        openPop(tile, { kicker: `${item.epoch} · ${s.not_found}`, title: s.hint_title ?? '', text: item.hint });
+        openPop(tile, { text: item.hint });
       }
     });
   }
   if (tin) {
-    const tip = (): void => {
+    tin.addEventListener('click', () => {
       const full = store.sardines.length === SARDINES;
-      openPop(tin, { title: full ? (s.tin_full ?? '') : (s.tin_label ?? '').replace(/,.*$/, ''), text: full ? s.tin_tip_full : s.tin_tip });
-      // The hint beside the tin takes no focus away from it.
-      tin.focus({ preventScroll: true });
-    };
-    tin.addEventListener('mouseenter', tip);
-    tin.addEventListener('focus', () => {
-      if (!pop || pop.hidden) tip();
+      openPop(tin, { text: full ? s.tin_tip_full : s.tin_tip });
     });
-    tin.addEventListener('mouseleave', () => closePop(false));
-    tin.addEventListener('click', tip);
   }
   onFamilyChange(refresh);
 }
@@ -398,14 +387,13 @@ async function wireSardine(): Promise<void> {
 function mountSardine(n: number, start: boolean, into: HTMLElement, data: Payload): void {
   const home = { n, start, into };
   const s = data.strings;
-  closeLabel = s.close ?? closeLabel;
   const strip = document.createElement('div');
   strip.className = `cab-corner${home.start ? ' cab-corner--start' : ''}`;
   const fish = document.createElement('button');
   fish.type = 'button';
   fish.className = `cab-sardine${home.start ? ' cab-sardine--flip' : ''}`;
   fish.setAttribute('aria-label', s.sardine_label ?? '');
-  fish.innerHTML = sardineSvg(`sardine-${home.n}`);
+  fish.innerHTML = sardineHtml();
   strip.append(fish);
   home.into.append(strip);
   fish.addEventListener('click', () => {
@@ -430,16 +418,12 @@ function mountSardine(n: number, start: boolean, into: HTMLElement, data: Payloa
   });
 }
 
-// ---- The preview: the links the closed build does not have ----
+// ---- The preview: the card and the links the closed build does not have ----
 async function wirePreview(): Promise<void> {
   const data = await fetchPayload();
   if (!data) return;
   const list = document.querySelector('.games__list');
   if (list && data.hubCard && !list.querySelector('[data-cabinet-card]')) list.insertAdjacentHTML('beforeend', data.hubCard);
-  // The footer link goes right after "Games" and nowhere else; with no place found, nothing is inserted.
-  if (data.footerLink && data.games && !document.querySelector('.site-footer [data-cabinet-link]')) {
-    document.querySelector(`.site-footer__links a[href="${data.games}"]`)?.closest('li')?.insertAdjacentHTML('afterend', data.footerLink);
-  }
   const back = document.querySelector<HTMLElement>('[data-cab-back]');
   if (back && !back.querySelector('a')) {
     const a = document.createElement('a');

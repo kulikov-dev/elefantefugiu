@@ -18,7 +18,9 @@ const ogDir = join(root, 'public/og-games');
 const cacheDir = join(root, '.og-cache');
 for (const d of [picDir, ogDir, cacheDir]) mkdirSync(d, { recursive: true });
 
-export const GAMES = ['myths', 'order'];
+export const GAMES = ['myths', 'order', 'cabinet'];
+/** The picture of a game: docs/images/games/<game>.jpg, the cabinet's is the card picture in docs/images/cabinet/hub.jpg. */
+const sourceOf = (game) => (game === 'cabinet' ? join(root, 'docs/images/cabinet/hub.jpg') : join(srcDir, `${game}.jpg`));
 /** The page "Games" has a preview picture of its own, no sizes for the page. */
 const PAGE_GAMES = 'games';
 const WIDTHS = [480, 960];
@@ -43,9 +45,9 @@ const manifest = {};
 const keep = { pics: new Set(), og: new Set() };
 const sources = {};
 for (const game of GAMES) {
-  const file = join(srcDir, `${game}.jpg`);
+  const file = sourceOf(game);
   if (!existsSync(file)) {
-    console.warn(`WARNING  docs/images/games/${game}.jpg is missing: the page of the game goes without its picture.`);
+    console.warn(`WARNING  ${file.slice(root.length).replaceAll('\\', '/')} is missing: the page of the game goes without its picture.`);
     continue;
   }
   const source = readFileSync(file);

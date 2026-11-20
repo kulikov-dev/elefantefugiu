@@ -101,8 +101,7 @@
     "legal": "Legal information",
     "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
     "privacy": "No ads, no cookies",
-    "games": "Games",
-    "cabinet": "Cabinet of Rarities"
+    "games": "Games"
   },
   "home": {
     "epochs_heading": "Eras",
@@ -557,6 +556,7 @@
     "og_title": "Games: two quick tests of your Portuguese history",
     "og_description": "Myth or fact and “Which came first?”: short games, and after every answer the whole story.",
     "cabinet_line": "The rarities are hidden in the stories. Find them and set them on the shelves.",
+    "cabinet_open": "Open",
     "cabinet_og_title": "Cabinet of Rarities · O Elefante Fugiu",
     "cabinet_og_description": "Rare objects hidden in the words of Portuguese stories. Find them all."
   },

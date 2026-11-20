@@ -44,8 +44,8 @@ import { searchAttrs } from '../lib/search-index';
 import { schemaContext } from '../lib/schema-site';
 import { withBase } from '../i18n/routes';
 import { GLOSSARY } from '../lib/glossary-data';
-import { inlineMatchers, isGlossaryLang, markParagraph, renderMark } from '../lib/glossary';
-import { itemsOfHost, renderWords, wrapWords } from '../lib/cabinet';
+import { escapeHtml, inlineMatchers, isGlossaryLang, markParagraph, renderMark } from '../lib/glossary';
+import { aroundWords, itemsOfHost, renderWords, wrapWords } from '../lib/cabinet';
 import '../styles/cabinet.css';
 
 interface Props {
@@ -172,8 +172,13 @@ const glossaryLang = !event.placeholder && isGlossaryLang(textL) ? textL : undef
 const glossaryMatchers = glossaryLang ? inlineMatchers(GLOSSARY, glossaryLang) : [];
 const seenWords = new Set<string>();
 const glossaryHref = glossaryLang ? pagePath(glossaryLang, 'glossary') : '';
+// A hidden word of the cabinet is never also a glossary word: the glossary works only between the hidden words, the hidden word wins.
 const marked = (paragraph: string): string =>
-  markParagraph(paragraph, glossaryMatchers, seenWords, (term, matched) => renderMark(term, matched, glossaryLang!, glossaryHref, t(glossaryLang!, 'glossary.all')));
+  aroundWords(
+    paragraph,
+    (part) => markParagraph(part, glossaryMatchers, seenWords, (term, matched) => renderMark(term, matched, glossaryLang!, glossaryHref, t(glossaryLang!, 'glossary.all'))),
+    (word) => escapeHtml(word),
+  );
 // In the order of the page: the story first, then "More" (a word is marked once, where it comes first).
 // The words of the cabinet of rarities hidden in this story (src/lib/cabinet.ts): wrapped before the glossary, turned into spans after it. A story of the cabinet itself hides none.
 const storyParts = storyParagraphs(event.story[lang]);

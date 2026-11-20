@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { withBase } from '../i18n/routes';
 
-export type GameName = 'myths' | 'order';
+export type GameName = 'myths' | 'order' | 'cabinet';
 type Entry = { sizes: Record<string, { file: string; width: number; height: number }>; og: string };
 type Manifest = Partial<Record<GameName, Entry>> & { games?: { og: string } };
 let manifest: Manifest | undefined;

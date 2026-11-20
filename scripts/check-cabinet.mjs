@@ -3,7 +3,7 @@
 //     feed, sitemap or list (a link to them, a line of the feeds, the pages of the games, the start and surprise lists);
 //   - while the cabinet is closed (CABINET_OPENS null or a day to come): no link to the cabinet, no card in the hub, no sardine, no <button> of a hidden word, the cabinet
 //     page itself is noindex and out of the sitemap; the words are plain spans, nothing more;
-//   - once it is open: html[data-cabinet="open"], the card in the hub of the games, the link in the footer of every page, the page of the cabinet indexable and in the sitemap.
+//   - once it is open: html[data-cabinet="open"], the card in the hub of the games, no link in the footer, the page of the cabinet indexable and in the sitemap.
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -59,7 +59,8 @@ for (const file of pages) {
     // The pages with the chrome of the site (not the redirect pages of /p/ and of the root).
     if (text.includes('class="site-footer"') && !/<html[^>]*data-cabinet="open"/.test(text)) errors.push(`${name}: html[data-cabinet="open"] is missing`);
     if (/(^|\/)(pt|en|ru)\/(jogos|games|igry)\/index\.html$/.test(name) && !text.includes('data-cabinet-card')) errors.push(`${name}: no card of the cabinet in the hub of the games`);
-    if (/site-footer__links/.test(text) && !/data-cabinet-link|href="[^"]*\/(gabinete|cabinet|kabinet)\/"/.test(text)) errors.push(`${name}: no link to the cabinet in the footer`);
+    // The way in is the hub of the games only: no link in the footer.
+    if (/class="site-footer"/.test(text) && /<footer[\s\S]*<\/footer>/.exec(text)?.[0].match(/href="[^"]*\/(gabinete|cabinet|kabinet)\/"/)) errors.push(`${name}: a link to the cabinet in the footer`);
     if (isCabinetPage && /<meta name="robots" content="noindex"/.test(text)) errors.push(`${name}: the open cabinet is noindex`);
   } else {
     if (/data-cabinet="open"/.test(text)) errors.push(`${name}: html[data-cabinet="open"] while the cabinet is closed`);

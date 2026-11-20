@@ -92,6 +92,20 @@ export function wrapWords(texts: readonly string[], words: readonly { id: string
   return out;
 }
 
+/**
+ * Runs `plain` on the text between the hidden words and `word` on a hidden word with its marks: the glossary never marks inside a hidden word (the hidden word wins).
+ */
+export function aroundWords(text: string, plain: (part: string) => string, word: (part: string) => string): string {
+  const re = new RegExp(`${MARK_START}[^${MARK_END}]+${MARK_END}[\\s\\S]*?${MARK_START}${MARK_END}`, 'g');
+  let out = '';
+  let pos = 0;
+  for (const m of text.matchAll(re)) {
+    out += plain(text.slice(pos, m.index)) + word(m[0]);
+    pos = m.index + m[0].length;
+  }
+  return out + plain(text.slice(pos));
+}
+
 const OPEN_MARK = new RegExp(`${MARK_START}([^${MARK_END}]+)${MARK_END}`, 'g');
 const CLOSE_MARK = new RegExp(`${MARK_START}${MARK_END}`, 'g');
 

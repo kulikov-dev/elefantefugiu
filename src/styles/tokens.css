@@ -77,16 +77,21 @@
   --cab-lead: 60ch;
   --cab-party-top-wide: 4.75rem;
   --cab-party-gap: 0.375rem;
-  --cab-line: 40ch;
+  --cab-party-heading: 32ch;
+  --cab-party-text: 52ch;
   --cab-card-radius: 0.875rem;
   --cab-party-top: 4rem;
   --cab-party-title: 1.3rem;
   --cab-card-min: 16rem;
-  --cab-underline-offset: 0.2em;
+  --cab-underline-offset: 0.1875rem;
+  --cab-underline-thickness: 0.09375rem;
+  --cab-word-wash: 12%;
   --cab-pop-width: min(19rem, calc(100vw - 2rem));
   --cab-pop-shadow: light-dark(0 0.375rem 1.125rem rgb(31 27 22 / 0.18), 0 0.375rem 1.125rem rgb(0 0 0 / 0.6));
   --cab-thumb-size: 3.5rem;
-  --cab-sardine-size: 4.5rem;
+  --cab-sardine-size: 4rem;
+  --cab-sardine-size-wide: 5rem;
+  --cab-touch: 2.75rem;
 
   /* Heavy-topic marker (frame, text on tint). */
   --color-heavy-border: light-dark(#7a2e0e, #e58a68);

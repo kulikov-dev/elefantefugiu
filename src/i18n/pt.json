@@ -101,8 +101,7 @@
     "legal": "Informação legal",
     "licenses": "Textos e ilustrações do projeto: {content}, uso no ensino permitido. Código: {code}.",
     "privacy": "Sem publicidade nem cookies",
-    "games": "Jogos",
-    "cabinet": "Gabinete de curiosidades"
+    "games": "Jogos"
   },
   "home": {
     "epochs_heading": "Épocas",
@@ -557,6 +556,7 @@
     "og_title": "Jogos: dois testes sobre a história de Portugal",
     "og_description": "Mito ou verdade e «O que veio primeiro?»: jogos curtos, e depois de cada resposta a história completa.",
     "cabinet_line": "As raridades estão escondidas nas histórias. Encontre-as e arrume-as nas prateleiras.",
+    "cabinet_open": "Abrir",
     "cabinet_og_title": "Gabinete de curiosidades · O Elefante Fugiu",
     "cabinet_og_description": "Objetos raros escondidos nas palavras das histórias de Portugal. Encontre-os todos."
   },
