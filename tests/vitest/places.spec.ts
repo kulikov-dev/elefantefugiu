@@ -2,7 +2,7 @@
 // Pure unit tests with their own small input: nothing here depends on the content of the site.
 import { describe, expect, it } from 'vitest';
 import type { PlaceData } from '../../src/lib/places';
-import { MAX_NEIGHBOURS, centuryLabel, featuredStories, ogStories, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, topPages } from '../../src/lib/places';
+import { MAX_NEIGHBOURS, centuryLabel, featuredStories, mapPlaces, ogStories, pageOfPoint, placeAllLabel, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, topPages } from '../../src/lib/places';
 
 const names = (pt: string, en = pt, ru = pt) => ({ pt, en, ru });
 const place = (id: string, lat: number, lon: number, radius_km: number, extra: Partial<PlaceData> = {}): PlaceData => ({ id, name: names(id), center: { lat, lon }, radius_km, ...extra });
@@ -222,5 +222,33 @@ describe('the stories of the preview picture', () => {
     expect(ogStories(plain!).map((s) => s.id)).toEqual(featuredStories(plain!).map((s) => s.id));
     const [lost] = placePages([{ ...town, og_stories: ['gone'] }], data);
     expect(ogStories(lost!).map((s) => s.id)).toEqual(featuredStories(lost!).map((s) => s.id));
+  });
+});
+
+describe('the entries to the pages', () => {
+  const data = [1, 2, 3].map((i) => story(`n${i}`, 38.74, -9.15)).concat([1, 2, 3, 4].map((i) => story(`t${i}`, 41.15, -8.6)));
+  const pages = placePages(places, data);
+
+  it('the page of a point (the place where a story happened): the smallest place with a page, else its parent; none outside', () => {
+    expect(pageOfPoint({ lat: 38.74, lon: -9.15 }, places, pages)?.place.id).toBe('north');
+    // A point in the south district, which has no page: the page of the city.
+    expect(pageOfPoint({ lat: 38.7, lon: -9.15 }, places, pages)?.place.id).toBe('city');
+    expect(pageOfPoint({ lat: 10, lon: 10 }, places, pages)).toBeUndefined();
+  });
+
+  it('the index lists the place with the most stories first', () => {
+    expect(topPages(pages).map((p) => p.place.id)).toEqual(['town', 'city']);
+  });
+
+  it('"All stories of ..." uses the form "of" where the data has one', () => {
+    expect(placeAllLabel(city, 'pt')).toBe('Todas as histórias da cidade →');
+    expect(placeAllLabel(city, 'ru')).toBe('Все истории города →');
+    expect(placeAllLabel(city, 'en')).toBe('All stories from city →');
+    expect(placeAllLabel(town, 'ru')).toBe('Все истории: town →');
+  });
+
+  it('the places of a map: the smallest first, each with the ids of its stories (a group wholly inside the first that holds it offers that page)', () => {
+    const list = mapPlaces(pages, 'en', (id) => `/p/${id}/`);
+    expect(list.map((p) => [p.href, p.ids.length])).toEqual([['/p/north/', 3], ['/p/city/', 3], ['/p/town/', 4]]);
   });
 });

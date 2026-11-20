@@ -608,6 +608,11 @@ export const placeSchema = z.strictObject({
   radius_km: z.number().positive(),
   /** Ids of the places "Nearby" shows first. */
   neighbours: z.array(z.string()).optional(),
+  /**
+   * The cover of the page of the place: the picture docs/images/places/<id>.jpg (a wide one: it is shown as a ribbon above the map, on the card of the index and, with a strip with the name, as the og:image).
+   * Without `cover` the page has no ribbon, the card of the index no picture, and the og:image is made of the pictures of the stories.
+   */
+  cover: z.strictObject({ alt: placeName, focus: z.string().optional(), credit: placeName.optional() }).optional(),
   /** Ids of the stories (up to 3) whose pictures the preview picture of the page shows, in this order; without it the most important ones (src/lib/places.ts featuredStories). */
   og_stories: z.array(z.string()).min(1).max(3).optional(),
   /** The introduction, 2-3 sentences, any language may be left out (the page then builds it from the data, in that language). */

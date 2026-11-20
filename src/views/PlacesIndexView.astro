@@ -8,6 +8,7 @@ import { topPages } from '../lib/places';
 import { pageNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 import { loadSite } from '../lib/site-data';
+import { placeCover } from '../lib/place-covers';
 
 interface Props {
   lang: Lang;
@@ -15,7 +16,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const site = await loadSite();
-const pages = topPages(site.placePages);
+const pages = topPages(site.placePages, lang);
 const schemaCtx = schemaContext(lang, Astro.site);
 const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'places')), name: t(lang, 'pages.places.title'), description: t(lang, 'pages.places.description') });
 ---
@@ -25,8 +26,17 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'places'
     <p class="places__lead">{t(lang, 'places.index_lead')}</p>
     <ul class="places__list">
       {
-        pages.map((p) => (
-          <li>
+        pages.map((p) => {
+          const cover = p.place.cover ? placeCover(p.place.id) : undefined;
+          return (
+          <li class:list={{ 'places__card--cover': cover }}>
+            {
+              cover && p.place.cover && (
+                <a class="places__cover" href={placePath(lang, p.place.id)} tabindex="-1" aria-hidden="true">
+                  <img src={cover.src} srcset={cover.srcset} sizes="(min-width: 60rem) 30vw, (min-width: 40rem) 45vw, 100vw" width={cover.width} height={cover.height} alt="" loading="lazy" decoding="async" style={p.place.cover.focus ? `object-position: ${p.place.cover.focus}` : undefined} />
+                </a>
+              )
+            }
             <a class="places__link" href={placePath(lang, p.place.id)}>
               <span class="places__name">{p.place.name[lang]}</span>
               <span class="places__count">{plural(lang, 'plural.stories', p.stories.length)}</span>
@@ -44,7 +54,8 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'places'
               )
             }
           </li>
-        ))
+          );
+        })
       }
     </ul>
   </div>
@@ -76,6 +87,36 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'places'
     border: var(--epoch-frame);
     border-radius: var(--radius-md);
     background: var(--epoch-surface);
+  }
+
+  /* A card with a cover: the picture on top, edge to edge. */
+  .places__list > .places__card--cover {
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .places__card--cover > :not(.places__cover) {
+    margin-inline: var(--space-4);
+  }
+
+  .places__card--cover > .places__link {
+    margin-block-start: var(--space-3);
+  }
+
+  .places__card--cover > .places__districts {
+    margin-block-end: var(--space-4);
+  }
+
+  .places__cover {
+    display: block;
+  }
+
+  .places__cover img {
+    display: block;
+    width: 100%;
+    height: var(--place-cover-card-height);
+    object-fit: cover;
+    filter: var(--image-filter);
   }
 
   .places__link {

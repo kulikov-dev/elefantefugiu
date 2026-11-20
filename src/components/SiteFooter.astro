@@ -2,6 +2,7 @@
 import { pagePath, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { TELEGRAM_TEXT, TELEGRAM_URL } from '../lib/social';
+import { loadSite } from '../lib/site-data';
 
 const CONTENT_LICENSE = { pt: 'https://creativecommons.org/licenses/by-nc/4.0/deed.pt', en: 'https://creativecommons.org/licenses/by-nc/4.0/', ru: 'https://creativecommons.org/licenses/by-nc/4.0/deed.ru' } as const;
 
@@ -10,6 +11,8 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+// The pages of places exist while some place has three stories (src/lib/places.ts); the link is in the footer only (nowhere else in the navigation).
+const hasPlaces = (await loadSite()).placePages.length > 0;
 
 // "Texts and illustrations: {content}, ... Code: {code}." with the two names as links (the sentence is the translation's, the links are the site's).
 const licenseParts = t(lang, 'footer.licenses').split(/(\{content\}|\{code\})/);
@@ -24,6 +27,7 @@ const groups = [
       { label: t(lang, 'footer.method'), href: pagePath(lang, 'method') },
       // The glossary is in ru and en only: there is no Portuguese page.
       ...(lang === 'pt' ? [] : [{ label: t(lang, 'footer.glossary'), href: pagePath(lang, 'glossary') }]),
+      ...(hasPlaces ? [{ label: t(lang, 'footer.places'), href: pagePath(lang, 'places') }] : []),
       { label: t(lang, 'footer.legal'), href: pagePath(lang, 'legal') },
     ],
   },

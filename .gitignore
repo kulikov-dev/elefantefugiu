@@ -15,6 +15,7 @@ scripts/qa/out/
 public/og-cards/
 public/og-panno/
 public/og-places/
+public/place-covers/
 # preview pictures of the claims of "Myth or fact" (scripts/make-myth-og.mjs)
 public/og-myths/
 public/games/

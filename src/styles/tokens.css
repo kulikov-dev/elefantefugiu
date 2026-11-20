@@ -300,6 +300,10 @@
   /* The map of the bridge block on a card page: its frame (phone, wide) and the size of a tile (256 px: one tile pixel is one screen pixel). */
   --minimap-height: 13.75rem;
   --minimap-height-wide: 18.75rem;
+  /* The ribbon of the cover on the page of a place (100 px on a phone, 140 px from 48 rem) and the picture of a card of the index of places. */
+  --place-ribbon-height: 6.25rem;
+  --place-ribbon-height-wide: 8.75rem;
+  --place-cover-card-height: 9rem;
   --minimap-tile: 16rem;
   --map-marker-frame: 1.75rem;
   --map-marker-story: 1.125rem;

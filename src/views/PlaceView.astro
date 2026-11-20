@@ -20,6 +20,7 @@ import { placeNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 import { loadSite } from '../lib/site-data';
 import { tileConfig } from '../lib/tiles';
+import { placeCover } from '../lib/place-covers';
 
 interface Props {
   lang: Lang;
@@ -51,10 +52,11 @@ const mapCards = toMapCards(stories, lang, (e) => storyPath(lang, e.slug[lang]))
 const mapThreads = Object.fromEntries(site.threads.map((th) => [th.id, { name: th.name[lang], color: th.color }]));
 const view = cardsView(mapCards, 0.25, 0.03);
 
+const cover = place.cover ? placeCover(id) : undefined;
 const alternates = altPaths((l) => placePath(l, id));
 // The preview picture: three azulejo pictures of the stories the introduction names, the name of the place beneath (scripts/make-place-og.mjs).
 const card = placeCardPath(id, lang);
-const cardAlt = t(lang, 'places.og_alt').replace('{name}', name).replace('{titles}', ogStories(page).map((s) => t(lang, 'places.quote').replace('{t}', s.title[lang])).join(', '));
+const cardAlt = place.cover ? place.cover.alt[lang] : t(lang, 'places.og_alt').replace('{name}', name).replace('{titles}', ogStories(page).map((s) => t(lang, 'places.quote').replace('{t}', s.title[lang])).join(', '));
 const noindex = stories.some((s) => s.placeholder);
 const description = placeSeoDescription(intro.text);
 const h1 = t(lang, 'places.h1').replace('{name}', name);
@@ -80,6 +82,23 @@ const schema = placeNodes(schemaCtx, {
         <a href={pagePath(lang, 'places')}>{t(lang, 'pages.places.title')}</a>
         {parentPage && <><span aria-hidden="true"> / </span><a href={placePath(lang, parentPage.place.id)}>{parentPage.place.name[lang]}</a></>}
       </p>
+      {
+        cover && place.cover && (
+          <figure class="place__ribbon">
+            <img
+              src={cover.src}
+              srcset={cover.srcset}
+              sizes="100vw"
+              width={cover.width}
+              height={cover.height}
+              alt={place.cover.alt[lang]}
+              style={place.cover.focus ? `object-position: ${place.cover.focus}` : undefined}
+              decoding="async"
+            />
+            {place.cover.credit && <figcaption class="place__credit">{place.cover.credit[lang]}</figcaption>}
+          </figure>
+        )
+      }
       <h1>{h1}</h1>
       <p class="place__intro">{intro.text}</p>
       <p class="place__count">
@@ -225,6 +244,33 @@ const schema = placeNodes(schemaCtx, {
 
   .place__section h2 {
     font-size: var(--text-xl);
+  }
+
+  /* The cover as a narrow ribbon above the map: the picture is cut to the strip, `focus` of the place says which part stays. */
+  .place__ribbon {
+    overflow: hidden;
+  }
+
+  .place__ribbon img {
+    display: block;
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    width: 100%;
+    height: var(--place-ribbon-height);
+    object-fit: cover;
+    filter: var(--image-filter);
+  }
+
+  .place__credit {
+    margin-block-start: var(--space-1);
+    color: var(--color-ink-muted);
+    font-size: var(--text-xs);
+  }
+
+  @media (min-width: 48rem) {
+    .place__ribbon img {
+      height: var(--place-ribbon-height-wide);
+    }
   }
 
   /* The map is a block of its own under the introduction; the cards below are the list it points to. */

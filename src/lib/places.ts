@@ -79,6 +79,11 @@ export function pageOfStory<S extends PlaceStory>(story: PlaceStory, places: rea
   return placeChain(place, places).map((p) => pages.find((page) => page.place.id === p.id)).find((page) => page !== undefined);
 }
 
+/** The page of a point (the place where a story happened): the smallest place whose circle holds it and that has a page, else the page of its parent. The `area` of a story is about its bridge and is not used here. */
+export function pageOfPoint<S extends PlaceStory>(point: { lat: number; lon: number }, places: readonly PlaceData[], pages: readonly PlacePage<S>[]): PlacePage<S> | undefined {
+  return pageOfStory({ id: '', bridge: point }, places, pages);
+}
+
 /** "Nearby": the places that the data names, then the nearest ones (no further than NEAR_KM), never the parent or a district of the page itself. */
 export function neighbourPages<S extends PlaceStory>(page: PlacePage<S>, pages: readonly PlacePage<S>[], max = MAX_NEIGHBOURS): PlacePage<S>[] {
   const others = pages.filter((p) => p.place.id !== page.place.id && p.place.id !== page.place.parent && p.place.parent !== page.place.id);
@@ -92,8 +97,11 @@ export function neighbourPages<S extends PlaceStory>(page: PlacePage<S>, pages: 
   return [...named, ...near].slice(0, max);
 }
 
-/** The pages of the top level (the index lists them; a district is listed under its city). */
-export const topPages = <S extends PlaceStory>(pages: readonly PlacePage<S>[]): PlacePage<S>[] => pages.filter((p) => !p.place.parent || !pages.some((q) => q.place.id === p.place.parent));
+/** The pages of the top level (the index lists them; a district is listed under its city), the one with the most stories first, the names in order among equals. */
+export const topPages = <S extends PlaceStory>(pages: readonly PlacePage<S>[], lang: Lang = 'pt'): PlacePage<S>[] =>
+  pages
+    .filter((p) => !p.place.parent || !pages.some((q) => q.place.id === p.place.parent))
+    .sort((a, b) => b.stories.length - a.stories.length || a.place.name[lang].localeCompare(b.place.name[lang], lang));
 
 // ---- the introduction ----
 
@@ -186,6 +194,21 @@ export function placeMoreLabel(place: PlaceData, lang: Lang): string {
   const name = place.name[lang];
   const of = lang === 'en' ? name : place.name_of?.[lang as 'pt' | 'ru'];
   return t(lang, of ? 'places.more_of' : 'places.more_plain').replace('{name}', name).replace('{of}', of ?? '');
+}
+
+/** "All stories of Sintra →": the line of a group of markers of the map that lies wholly inside a place that has a page. */
+export function placeAllLabel(place: PlaceData, lang: Lang): string {
+  const name = place.name[lang];
+  const of = lang === 'en' ? name : place.name_of?.[lang as 'pt' | 'ru'];
+  return t(lang, of ? 'places.all_of' : 'places.all_plain').replace('{name}', name).replace('{of}', of ?? '');
+}
+
+/**
+ * The places of a map: for every place that has a page, the ids of its stories and the line that leads to the page. A group of markers whose stories are all
+ * in one of them offers that page (src/scripts/map-island.ts); the smallest such place is taken.
+ */
+export function mapPlaces<S extends PlaceStory>(pages: readonly PlacePage<S>[], lang: Lang, href: (id: string) => string): { href: string; label: string; ids: string[] }[] {
+  return [...pages].sort((a, b) => a.stories.length - b.stories.length || a.place.radius_km - b.place.radius_km).map((p) => ({ href: href(p.place.id), label: placeAllLabel(p.place, lang), ids: p.stories.map((s) => s.id) }));
 }
 
 /** The description: the introduction, cut at a word. */
