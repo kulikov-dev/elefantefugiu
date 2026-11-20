@@ -93,17 +93,25 @@ export const topPages = <S extends PlaceStory>(pages: readonly PlacePage<S>[]): 
 // ---- the introduction ----
 
 interface IntroStory extends PlaceStory {
-  hook: { [L in Lang]: string };
+  title: { [L in Lang]: string };
   year: number | { from: number; to: number };
   importance: 1 | 2 | 3;
 }
 
-/** The hooks the generated introduction quotes. */
-export const AUTO_HOOKS = 3;
+/** The titles the generated introduction names. */
+export const AUTO_TITLES = 3;
+
+const ROMAN: [number, string][] = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
+const roman = (n: number): string => ROMAN.reduce((out, [value, sign]) => { while (n >= value) { out += sign; n -= value; } return out; }, '');
+const ordinal = (n: number): string => `${n}${n % 100 >= 11 && n % 100 <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' } as Record<number, string>)[n % 10] ?? 'th'}`;
+
+/** The century of a year after the common era as the language writes it: "XV" (pt, ru: Roman numerals), "15th" (en). */
+export const centuryLabel = (year: number, lang: Lang): string => (lang === 'en' ? ordinal(Math.ceil(year / 100)) : roman(Math.ceil(year / 100)));
 
 /**
- * The introduction of a page: the hand-written one in this language, else a text built from the data ("Sintra: 4 stories, 1415–1922." and the hooks
- * of the three most important stories). An introduction in another language than the page is worse than none, so a missing language is never borrowed.
+ * The introduction of a page: the hand-written one in this language, else a text built from the data: how many stories, from which century to which, and
+ * the titles of the three most important ("6 историй с XV по XX век: «…», «…», «…»"). An introduction in another language than the page is worse than none,
+ * so a missing language is never borrowed. A page whose stories begin before the common era names the years instead of the centuries.
  */
 export function placeIntro(page: PlacePage<IntroStory>, lang: Lang): { text: string; written: boolean } {
   const own = page.place.intro?.[lang]?.trim();
@@ -111,17 +119,22 @@ export function placeIntro(page: PlacePage<IntroStory>, lang: Lang): { text: str
   const ranges = page.stories.map((s) => yearRange(s));
   const from = Math.min(...ranges.map((r) => r[0]));
   const to = Math.max(...ranges.map((r) => r[1]));
-  const years = from === to ? yearText(from, lang) : `${yearText(from, lang)}–${yearText(to, lang)}`;
-  const lead = t(lang, 'places.auto_lead')
-    .replace('{place}', page.place.name[lang])
-    .replace('{stories}', plural(lang, 'plural.stories', page.stories.length))
-    .replace('{years}', years);
   const order = new Map(page.stories.map((s, i) => [s.id, i]));
-  const hooks = [...page.stories]
+  const titles = [...page.stories]
     .sort((a, b) => b.importance - a.importance || order.get(a.id)! - order.get(b.id)!)
-    .slice(0, AUTO_HOOKS)
-    .map((s) => s.hook[lang].trim());
-  return { text: [lead, ...hooks].join(' '), written: false };
+    .slice(0, AUTO_TITLES)
+    .sort((a, b) => order.get(a.id)! - order.get(b.id)!)
+    .map((s) => t(lang, 'places.quote').replace('{t}', s.title[lang].trim()))
+    .join(', ');
+  const stories = plural(lang, 'plural.stories', page.stories.length);
+  const [first, last] = [Math.ceil(from / 100), Math.ceil(to / 100)];
+  const text =
+    from < 1
+      ? t(lang, 'places.auto_years').replace('{stories}', stories).replace('{from}', yearText(from, lang)).replace('{to}', yearText(to, lang))
+      : first === last
+        ? t(lang, 'places.auto_single').replace('{stories}', stories).replace('{c}', centuryLabel(from, lang))
+        : t(lang, 'places.auto_span').replace('{stories}', stories).replace('{from}', centuryLabel(from, lang)).replace('{to}', centuryLabel(to, lang));
+  return { text: `${text.replace('{titles}', titles)}`, written: false };
 }
 
 /** Does the page lack a hand-written introduction in some language? (the line "can add an introduction" of npm run schedule). */
@@ -166,21 +179,32 @@ export interface PlaceBridge<S> {
 
 type BridgeStory = { bridge: { name: string; title?: { [L in Lang]?: string | undefined } | undefined; address: string; lat: number; lon: number; maps_url?: string | undefined } };
 
-/** The bridges of the stories of a page, one line for a place that several stories lead to (a museum with two stories). */
+/** Bridges of different stories closer than this are one place to a visitor (a museum and its copy of a map, a square and the theatre on it). */
+export const SAME_BRIDGE_KM = 0.06;
+
+/**
+ * The bridges of the stories of a page, one card for a place that several stories lead to: the stories whose bridges lie within SAME_BRIDGE_KM of the first one
+ * share it. The card carries the shortest of the names (the plainest: "Museu de Marinha", not "Museu de Marinha (cópia do mapa de Cantino)") and its own address.
+ */
 export function placeBridges<S extends BridgeStory>(stories: readonly S[], lang: Lang): PlaceBridge<S>[] {
-  const out = new Map<string, PlaceBridge<S>>();
+  const out: PlaceBridge<S>[] = [];
   for (const s of stories) {
     const b = s.bridge;
-    const key = `${b.lat.toFixed(4)},${b.lon.toFixed(4)}|${b.name}`;
-    const known = out.get(key);
-    if (known) {
-      known.stories.push(s);
+    const title = b.title?.[lang]?.trim() || b.name;
+    const card: Omit<PlaceBridge<S>, 'stories'> = { title, ...(title !== b.name ? { local: b.name } : {}), address: b.address, lat: b.lat, lon: b.lon, ...(b.maps_url ? { mapsUrl: b.maps_url } : {}) };
+    const known = out.find((o) => distanceKm(o, b) <= SAME_BRIDGE_KM);
+    if (!known) {
+      out.push({ ...card, stories: [s] });
       continue;
     }
-    const title = b.title?.[lang]?.trim() || b.name;
-    out.set(key, { title, ...(title !== b.name ? { local: b.name } : {}), address: b.address, lat: b.lat, lon: b.lon, ...(b.maps_url ? { mapsUrl: b.maps_url } : {}), stories: [s] });
+    known.stories.push(s);
+    if (title.length < known.title.length) {
+      const { stories: keep } = known;
+      for (const key of ['local', 'mapsUrl'] as const) delete known[key];
+      Object.assign(known, card, { stories: keep });
+    }
   }
-  return [...out.values()];
+  return out;
 }
 
 // ---- when a page comes out (for npm run schedule) ----

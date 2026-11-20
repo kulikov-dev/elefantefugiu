@@ -632,7 +632,6 @@
   },
   "places": {
     "h1": "{name}: histórias e lugares",
-    "auto_lead": "{place}: {stories}, {years}.",
     "districts": "Bairros",
     "stories": "Histórias",
     "today": "O que ver hoje",
@@ -644,6 +643,10 @@
     "more_plain": "Mais histórias: {name} →",
     "index_link": "Páginas dos lugares →",
     "map_label": "Mapa das histórias de {name}",
-    "index_lead": "Cidades e bairros com três ou mais histórias. Escolha o sítio para onde vai."
+    "index_lead": "Cidades e bairros com três ou mais histórias. Escolha o sítio para onde vai.",
+    "auto_span": "{stories}, do século {from} ao {to}: {titles}.",
+    "auto_single": "{stories} no século {c}: {titles}.",
+    "auto_years": "{stories}, de {from} a {to}: {titles}.",
+    "quote": "«{t}»"
   }
 }

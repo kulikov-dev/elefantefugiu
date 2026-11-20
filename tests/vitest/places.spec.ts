@@ -2,7 +2,7 @@
 // Pure unit tests with their own small input: nothing here depends on the content of the site.
 import { describe, expect, it } from 'vitest';
 import type { PlaceData } from '../../src/lib/places';
-import { MAX_NEIGHBOURS, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, topPages } from '../../src/lib/places';
+import { MAX_NEIGHBOURS, centuryLabel, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, topPages } from '../../src/lib/places';
 
 const names = (pt: string, en = pt, ru = pt) => ({ pt, en, ru });
 const place = (id: string, lat: number, lon: number, radius_km: number, extra: Partial<PlaceData> = {}): PlaceData => ({ id, name: names(id), center: { lat, lon }, radius_km, ...extra });
@@ -17,7 +17,7 @@ const places = [city, north, south, town];
 const story = (id: string, lat: number, lon: number, extra: Record<string, unknown> = {}) => ({
   id,
   bridge: { lat, lon },
-  hook: { pt: `hook ${id}.`, en: `hook ${id}.`, ru: `hook ${id}.` },
+  title: { pt: `title ${id}`, en: `title ${id}`, ru: `title ${id}` },
   year: 1500,
   importance: 1 as const,
   ...extra,
@@ -96,18 +96,27 @@ describe('the introduction', () => {
     expect(placeIntro(page!, 'en')).toEqual({ text: 'Written in English.', written: true });
   });
 
-  it('is built from the data when it is not written, never borrowed from another language', () => {
+  it('is built from the data when it is not written: the count, the centuries and the titles of the three most important stories, never borrowed from another language', () => {
     const [page] = placePages([{ ...north, intro: { en: 'Written in English.' } }], stories);
     const auto = placeIntro(page!, 'pt');
     expect(auto.written).toBe(false);
-    expect(auto.text).toContain('north');
-    expect(auto.text).toContain('4 histórias');
-    expect(auto.text).toContain('1415');
-    expect(auto.text).toContain('1980');
-    // The hooks of the three most important stories, the most important first; the least important one is left out.
-    expect(auto.text.indexOf('hook b')).toBeLessThan(auto.text.indexOf('hook c'));
-    expect(auto.text).not.toContain('hook d');
-    expect(placeIntro(page!, 'ru').text).toContain('4 истории');
+    expect(auto.text).toBe('4 histórias, do século XV ao XX: «title a», «title b», «title c».');
+    expect(placeIntro(page!, 'ru').text).toBe('4 истории с XV по XX век: «title a», «title b», «title c».');
+    expect(placeIntro(page!, 'en').text).toBe('Written in English.');
+    const [bare] = placePages([north], stories);
+    expect(placeIntro(bare!, 'en').text).toBe('4 stories, from the 15th to the 20th century: “title a”, “title b”, “title c”.');
+  });
+
+  it('names one century once, and the years when the stories begin before the common era', () => {
+    const same = placePages([north], [1510, 1520, 1590].map((y, i) => story(`s${i}`, 38.74, -9.15, { year: y })));
+    expect(placeIntro(same[0]!, 'ru').text).toMatch(/^3 истории в XVI веке: /);
+    const old = placePages([north], [-6000, 1520, 1590].map((y, i) => story(`o${i}`, 38.74, -9.15, { year: y })));
+    expect(placeIntro(old[0]!, 'pt').text).toMatch(/^3 histórias, de 6000 a.C. a 1590: /);
+  });
+
+  it('writes the century of a year as the language does', () => {
+    expect([1, 100, 101, 1499, 1900].map((y) => centuryLabel(y, 'ru'))).toEqual(['I', 'I', 'II', 'XV', 'XIX']);
+    expect([1, 102, 1111, 1522, 2001].map((y) => centuryLabel(y, 'en'))).toEqual(['1st', '2nd', '12th', '16th', '21st']);
   });
 
   it('lists the languages that lack a written introduction', () => {
@@ -147,13 +156,25 @@ describe('the titles and links of search', () => {
 });
 
 describe('what to see today', () => {
-  const bridge = (name: string, lat: number) => ({ bridge: { name, title: { ru: `Имя ${name}` }, address: 'a', lat, lon: -9 } });
+  const bridge = (name: string, lat: number, ru?: string) => ({ bridge: { name, ...(ru ? { title: { ru } } : {}), address: `address of ${name}`, lat, lon: -9 } });
 
-  it('one line for a place that two stories lead to; the name in the language of the page, the name on the spot beneath', () => {
-    const list = placeBridges([{ id: 1, ...bridge('Museu', 38.1) }, { id: 2, ...bridge('Museu', 38.1) }, { id: 3, ...bridge('Torre', 38.2) }], 'ru');
-    expect(list.map((b) => [b.title, b.local, b.stories.length])).toEqual([['Имя Museu', 'Museu', 2], ['Имя Torre', 'Torre', 1]]);
-    expect(placeBridges([{ id: 1, ...bridge('Museu', 38.1) }], 'pt')[0]).toMatchObject({ title: 'Museu' });
-    expect(placeBridges([{ id: 1, ...bridge('Museu', 38.1) }], 'pt')[0]!.local).toBeUndefined();
+  it('one card for a place that several stories lead to, also under two names a few metres apart; the shortest name, the stories as links', () => {
+    const list = placeBridges(
+      [
+        { id: 1, ...bridge('Museu (a copy of a map)', 38.1, 'Музей (копия карты)') },
+        { id: 2, ...bridge('Museu', 38.1001, 'Музей') },
+        { id: 3, ...bridge('Torre', 38.2, 'Башня') },
+        { id: 4, ...bridge('Museu', 38.1) },
+      ],
+      'ru',
+    );
+    expect(list.map((b) => [b.title, b.local, b.stories.map((s) => s.id)])).toEqual([['Музей', 'Museu', [1, 2, 4]], ['Башня', 'Torre', [3]]]);
+  });
+
+  it('keeps places that are far apart separate; no name on the spot beneath when it is the same', () => {
+    const list = placeBridges([{ id: 1, ...bridge('Museu', 38.1) }, { id: 2, ...bridge('Museu', 38.2) }], 'pt');
+    expect(list).toHaveLength(2);
+    expect(list[0]!.local).toBeUndefined();
   });
 });
 

@@ -35,7 +35,8 @@ const name = place.name[lang];
 const intro = placeIntro(page, lang);
 const epochs = new Map(site.epochs.map((e) => [e.id, e]));
 const counts = countByMode(stories.map(ageInfoOf));
-const bridges = placeBridges(stories, lang);
+// A city with districts has no "What to see today": its districts have it, and the list of every bridge of the city would be a page of its own.
+const bridges = page.districts.length > 0 ? [] : placeBridges(stories, lang);
 // A place that no story is visible in (family mode) is hidden with its stories: nothing to show there.
 const hiddenIn = (list: typeof stories) => FAMILY_MODES.filter((mode) => list.every((s) => !isVisibleInMode(ageInfoOf(s), mode)));
 const hideAttr = (modes: readonly string[]) => (modes.length > 0 ? modes.join(' ') : undefined);
@@ -140,6 +141,7 @@ const schema = placeNodes(schemaCtx, {
       </ul>
     </section>
 
+    {bridges.length > 0 && (
     <section class="place__section" aria-labelledby="place-today">
       <h2 id="place-today">{t(lang, 'places.today')}</h2>
       <p class="place__lead">{t(lang, 'places.today_lead')}</p>
@@ -164,6 +166,7 @@ const schema = placeNodes(schemaCtx, {
         }
       </ul>
     </section>
+    )}
 
     {
       neighbours.length > 0 && (

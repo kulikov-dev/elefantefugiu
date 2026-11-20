@@ -13,30 +13,50 @@
   name_of: { pt: de Lisboa, ru: Лиссабона }
   center: { lat: 38.725, lon: -9.15 }
   radius_km: 9
+  intro:
+    pt: "Das galerias romanas sob a Baixa ao hidroavião de 1922, a história de Lisboa está em camadas. Aqui, numa só manhã de 1640, acabou o domínio dos reis espanhóis; depois do terramoto de 1755 o centro foi reconstruído a régua e esquadro; e em 1807 partiu daqui para o Brasil toda a corte. As histórias estão organizadas por bairros: comece pelo que fica mais perto."
+    en: "From the Roman galleries under the Baixa to the seaplane of 1922, the history of Lisbon lies in layers. Here, in a single morning in 1640, the rule of the Spanish kings ended; after the earthquake of 1755 the centre was rebuilt on a ruler's grid; and in 1807 the whole court sailed from here to Brazil. The stories are sorted by district: start with the one that is closest."
+    ru: "От римских галерей под Байшей до гидросамолёта 1922 года история Лиссабона лежит слоями. Здесь за одно утро 1640 года закончилась власть испанских королей, после землетрясения 1755 года центр отстроили заново по линейке, а в 1807 году отсюда уплыл в Бразилию весь двор. Истории разложены по районам: начните с того, что ближе."
 - id: belem
   parent: lisboa
   name: { pt: Belém, en: Belém, ru: Белен }
   name_of: { pt: de Belém, ru: Белена }
   center: { lat: 38.6975, lon: -9.2063 }
   radius_km: 2.2
+  intro:
+    pt: "Daqui partiam os navios da época dos Descobrimentos. No Museu de Marinha guarda-se uma cópia do mapa que em 1502 foi levado em segredo para Itália, e o rinoceronte que o rei pôs a lutar com um elefante em 1515 ficou em pedra na Torre de Belém. Daqui partiu o príncipe regente com toda a corte para o Brasil, aqui fazem-se os pastéis dos monges, e o Museu de Marinha conta também a travessia do Atlântico Sul em 1922."
+    en: "The ships of the Age of Discovery sailed from here. The Maritime Museum keeps a copy of the map that was smuggled out to Italy in 1502, and the rhinoceros that the king set against an elephant in 1515 survives in stone on the Belém Tower. From here the prince regent sailed with the whole court to Brazil, the monks’ pastries are still baked here, and the Maritime Museum also tells of the flight across the South Atlantic in 1922."
+    ru: "Отсюда уходили корабли эпохи открытий. В Морском музее хранят копию карты, которую в 1502 году тайно вывезли в Италию, а носорог, которого король в 1515 году стравил со слоном, остался каменным на Башне Белен. Отсюда принц-регент со всем двором отплыл в Бразилию, здесь пекут монастырские пирожные, а Морской музей рассказывает и о перелёте через Южную Атлантику в 1922 году."
 - id: baixa-rossio
   parent: lisboa
   name: { pt: Baixa e Rossio, en: Baixa and Rossio, ru: Байша и Россиу }
   name_of: { pt: da Baixa e do Rossio, ru: Байши и Россиу }
   center: { lat: 38.711, lon: -9.138 }
   radius_km: 0.9
+  intro:
+    pt: "O centro, reconstruído depois do terramoto, assenta em camadas romanas: sob as ruas escondem-se galerias e oficinas de molho de peixe. Aqui, na manhã de 1 de dezembro de 1640, acabou o domínio dos reis espanhóis, da varanda da Câmara Municipal proclamou-se a República em 1910, e depois de 1755 as ruas receberam ofícios por decreto."
+    en: "The centre, rebuilt after the earthquake, stands on Roman layers: galleries and fish-sauce workshops are hidden under the streets. Here, on the morning of 1 December 1640, the rule of the Spanish kings ended, from the balcony of City Hall the republic was proclaimed in 1910, and after 1755 the streets were assigned trades."
+    ru: "Центр, который отстроили после землетрясения, стоит на римских слоях: под улицами спрятаны галереи и мастерские рыбного соуса. Здесь утром 1 декабря 1640 года закончилась власть испанских королей, с балкона ратуши в 1910 году объявили республику, а после 1755 года улицам назначили ремёсла."
 - id: alfama-castelo
   parent: lisboa
   name: { pt: Alfama e Castelo, en: Alfama and Castelo, ru: Альфама и Каштелу }
   name_of: { pt: de Alfama e do Castelo, ru: Альфамы и Каштелу }
   center: { lat: 38.711, lon: -9.1275 }
   radius_km: 0.7
+  intro:
+    pt: "A cidade velha sobre o rio. No Chafariz d'El-Rei os galegos enchiam os barris de água para Lisboa, o Museu do Fado lembra a cantora Maria Severa, e o Museu Militar guarda a história dos portugueses enviados a combater por Napoleão."
+    en: "The old town above the river. At the Chafariz d'El-Rei Galicians filled their barrels with water for Lisbon, the Fado Museum remembers the singer Maria Severa, and the Military Museum holds the story of the Portuguese sent to fight for Napoleon."
+    ru: "Старый город над рекой. У Чафариш д'Эль-Рей воду для Лиссабона набирали галисийцы с бочонками на плече, в Музее фаду вспоминают певицу Марию Северу, а в Военном музее хранится история португальцев, которых отправили воевать за Наполеона."
 - id: chiado-carmo
   parent: lisboa
   name: { pt: Chiado e Carmo, en: Chiado and Carmo, ru: Шиаду и Карму }
   name_of: { pt: do Chiado e do Carmo, ru: Шиаду и Карму }
   center: { lat: 38.7117, lon: -9.1432 }
   radius_km: 0.3
+  intro:
+    pt: "Este bairro atravessou o terramoto e o incêndio de 1755: as ruínas da Igreja do Carmo continuam sem telhado. Perto, na Igreja de São Roque, está a capela encomendada em Roma e trazida às peças. Em 1780 ordenou-se aos comerciantes que iluminassem as ruas à noite: cada um punha um candeeiro à porta da loja, mas o azeite era caro e os candeeiros foram-se apagando."
+    en: "The earthquake and the fire of 1755 went through this district: the ruins of the Carmo church still stand without a roof. Nearby, in the church of São Roque, is a chapel that was ordered in Rome and shipped in pieces. In 1780 the merchants were told to light the streets at night: each put a lamp at the door of his shop, but the oil was dear and the lamps went out one by one."
+    ru: "По этому району прошли землетрясение и пожар 1755 года: руины церкви Карму так и стоят без крыши. Рядом, в церкви Сан-Роке, — часовня, которую заказали в Риме и привезли по частям. В 1780 году освещать ночные улицы велели торговцам: каждый ставил фонарь у своей лавки, но масло стоило дорого, и фонари один за другим гасли."
 
 # ---- Porto (with the Gaia bank of the river) and Madeira ----
 - id: porto
@@ -44,11 +64,19 @@
   name_of: { pt: do Porto, ru: Порту }
   center: { lat: 41.145, lon: -8.625 }
   radius_km: 4.5
+  intro:
+    pt: "A alcunha de «tripeiros» vem de 1415. A Igreja de São Francisco foi coberta de ouro por frades com voto de pobreza, em 1756 demarcou-se o vale do Douro com marcos de granito por causa do vinho do Porto, e mais tarde a Ponte de D. Maria Pia atravessou o rio e abriu a Livraria Lello. As histórias estão nas duas margens do rio."
+    en: "The nickname of the townspeople, “tripe eaters”, goes back to 1415. The church of São Francisco was covered in gold by friars who had taken a vow of poverty, in 1756 the Douro valley was marked out with granite posts for the sake of port wine, and later the Maria Pia bridge rose over the river and the Lello bookshop opened. The stories lie on both banks of the river."
+    ru: "Прозвище горожан «любители потрохов» тянется с 1415 года. Церковь Сан-Франсишку покрыли золотом монахи с обетом бедности, в 1756 году ради портвейна долину Дору размежевали гранитными столбами, а позже над рекой встал мост Марии Пии и открылся книжный Lello. Истории на обоих берегах реки."
 - id: funchal
   name: { pt: Funchal, en: Funchal, ru: Фуншал }
   name_of: { pt: do Funchal, ru: Фуншала }
   center: { lat: 32.656, lon: -16.906 }
   radius_km: 4
+  intro:
+    pt: "No século XV a ilha enriqueceu com o açúcar: até Colombo veio cá buscá-lo. Depois o bordado passou a ser exportado, nas encostas do Monte surgiram os carros de cesto e a guitarra da Madeira transformou-se, no Havai, em ukulele."
+    en: "In the 15th century the island grew rich on sugar: even Columbus sailed here for it. Later embroidery went to export, wicker toboggans appeared on the slopes of Monte, and a guitar from Madeira turned into the ukulele in Hawaii."
+    ru: "В XV веке остров разбогател на сахаре: за ним сюда плавал даже Колумб. Потом на экспорт пошла вышивка, на склонах Монте появились плетёные сани, а гитара с Мадейры превратилась на Гавайях в укулеле."
 
 # ---- Other places: the stories of each are few for now, a page comes with the third ----
 - id: sintra

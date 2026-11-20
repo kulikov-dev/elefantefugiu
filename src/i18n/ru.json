@@ -674,7 +674,6 @@
   },
   "places": {
     "h1": "{name}: истории и места",
-    "auto_lead": "{place}: {stories}, {years}.",
     "districts": "Районы",
     "stories": "Истории",
     "today": "Что посмотреть сегодня",
@@ -686,6 +685,10 @@
     "more_plain": "Ещё истории: {name} →",
     "index_link": "Страницы мест →",
     "map_label": "Карта историй: {name}",
-    "index_lead": "Города и районы, где три и больше истории. Выберите место, куда едете."
+    "index_lead": "Города и районы, где три и больше истории. Выберите место, куда едете.",
+    "auto_span": "{stories} с {from} по {to} век: {titles}.",
+    "auto_single": "{stories} в {c} веке: {titles}.",
+    "auto_years": "{stories}, {from}–{to}: {titles}.",
+    "quote": "«{t}»"
   }
 }

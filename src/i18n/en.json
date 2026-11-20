@@ -632,7 +632,6 @@
   },
   "places": {
     "h1": "{name}: stories and places",
-    "auto_lead": "{place}: {stories}, {years}.",
     "districts": "Districts",
     "stories": "Stories",
     "today": "What to see today",
@@ -644,6 +643,10 @@
     "more_plain": "More stories from {name} →",
     "index_link": "Place pages →",
     "map_label": "Map of the stories of {name}",
-    "index_lead": "Towns and districts with three or more stories. Pick the place you are going to."
+    "index_lead": "Towns and districts with three or more stories. Pick the place you are going to.",
+    "auto_span": "{stories}, from the {from} to the {to} century: {titles}.",
+    "auto_single": "{stories} in the {c} century: {titles}.",
+    "auto_years": "{stories}, {from} to {to}: {titles}.",
+    "quote": "“{t}”"
   }
 }
