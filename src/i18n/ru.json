@@ -105,7 +105,8 @@
     "legal": "Правовая информация",
     "licenses": "Тексты и иллюстрации проекта: {content}, использовать в обучении можно. Код: {code}.",
     "privacy": "Без рекламы и cookie",
-    "games": "Игры"
+    "games": "Игры",
+    "places": "Места"
   },
   "home": {
     "epochs_heading": "Эпохи",
@@ -683,13 +684,15 @@
     "title_plain": "{name}: {stories} и места",
     "more_of": "Ещё истории {of} →",
     "more_plain": "Ещё истории: {name} →",
-    "index_link": "Страницы мест →",
+    "index_link": "Все места →",
     "map_label": "Карта историй: {name}",
     "index_lead": "Города и районы, где три и больше истории. Выберите место, куда едете.",
     "auto_span": "{stories} с {from} по {to} век: {titles}.",
     "auto_single": "{stories} в {c} веке: {titles}.",
     "auto_years": "{stories}, {from}–{to}: {titles}.",
     "quote": "«{t}»",
-    "og_alt": "{name}: азулежу из историй {titles}"
+    "og_alt": "{name}: азулежу из историй {titles}",
+    "all_of": "Все истории {of} →",
+    "all_plain": "Все истории: {name} →"
   }
 }

@@ -6,7 +6,11 @@ import FamilyNote from '../components/FamilyNote.astro';
 import EpochScale from '../components/EpochScale.astro';
 import MapBlock from '../components/MapBlock.astro';
 import ThreadChip from '../components/ThreadChip.astro';
-import { pagePath, storyPath, type Lang } from '../i18n/routes';
+import { pagePath, placePath, storyPath, type Lang } from '../i18n/routes';
+import { mapPlaces, topPages } from '../lib/places';
+
+/** The places named in the line under the map; the rest is behind "All places". */
+const MAP_PLACES_SHOWN = 4;
 import { t, tAll } from '../i18n';
 import { epochHasContent, epochYearsText } from '../lib/epochs';
 import { groupByEpoch, toMapCards } from '../lib/map-cards';
@@ -91,6 +95,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')),
     <MapBlock
       lang={lang}
       tt={tt}
+      places={mapPlaces(site.placePages, lang, (id) => placePath(lang, id))}
       cards={cards}
       threads={threads}
       known={known}
@@ -100,6 +105,20 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'map')),
     >
       <EpochScale slot="under" lang={lang} epochs={site.epochs} readyIds={new Set(epochs.map((e) => e.id))} />
     </MapBlock>
+
+    {
+      site.placePages.length > 0 && (
+        <p class="map-places">
+          <span>{t(lang, 'pages.places.title')}:</span>
+          {[...topPages(site.placePages, lang).slice(0, MAP_PLACES_SHOWN).map((p) => ({ href: placePath(lang, p.place.id), label: p.place.name[lang] })), { href: pagePath(lang, 'places'), label: t(lang, 'places.index_link') }].map((item, i) => (
+            <>
+              {i === 0 ? ' ' : <span aria-hidden="true"> &middot; </span>}
+              <a href={item.href}>{item.label}</a>
+            </>
+          ))}
+        </p>
+      )
+    }
 
     <section class="map-static" data-map-static aria-labelledby="map-static-title">
       <h2 id="map-static-title">{t(lang, 'map.static_title')}</h2>

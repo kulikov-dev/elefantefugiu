@@ -31,7 +31,7 @@ import { meanwhileFor } from '../lib/meanwhile';
 import { epochFeed, epochHasContent, nextEpochEntry } from '../lib/epochs';
 import { ageInfoOf, familyAttrs, gateReason, groupVariants, hiddenModes, isVisibleInMode } from '../lib/family';
 import { loadSite } from '../lib/site-data';
-import { pageOfStory, placeMoreLabel } from '../lib/places';
+import { pageOfPoint, pageOfStory, placeMoreLabel } from '../lib/places';
 import { mythPool } from '../lib/myths-pool';
 import { previewImageUrl } from '../lib/picture-assets';
 import { OG_CARD, storyCardPath } from '../lib/og-cards';
@@ -62,6 +62,8 @@ const site = await loadSite();
 // "More stories of Sintra →": only when the place of the story has a page (three or more stories there).
 const placePage = pageOfStory(event, site.places, site.placePages);
 const placeLink = placePage ? { href: placePath(lang, placePage.place.id), label: placeMoreLabel(placePage.place, lang) } : undefined;
+// The place in the header (where it happened) is a link to the smallest page of a place that holds its point; where there is none, text.
+const headerPlace = pageOfPoint(event.place, site.places, site.placePages);
 const hasMyths = mythPool(site.events).length > 0;
 const all = site.events;
 const epoch = site.epochs.find((e) => e.id === event.epoch);
@@ -233,7 +235,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       <p class="card__meta" {...pfWeight(6)}>
         <span>{formatYear(event, lang)}</span>
         <span aria-hidden="true"> &middot; </span>
-        <span>{event.place.name[lang]}</span>
+        {headerPlace ? <a href={placePath(lang, headerPlace.place.id)}>{event.place.name[lang]}</a> : <span>{event.place.name[lang]}</span>}
       </p>
       <ul class="tags gated" aria-label={t(lang, 'card.tags')}>
         <li><TagLabel lang={lang} label={event.label} /></li>

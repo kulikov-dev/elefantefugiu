@@ -6,6 +6,7 @@
 //                                  so a card is drawn again only when the set of stories, the text or the drawing changes
 //   .og-cache/places.json          which file belongs to which place and language (src/lib/og-cards.ts placeCardPath reads it)
 //   public/og-places/<id>-<lang>-<hash>.jpg   what the site publishes; the hash in the name makes the messengers fetch a changed card anew
+// A place with `cover` in places.yaml (docs/images/places/<id>.jpg): the card is that picture with the strip, no picture of the stories.
 // Neither is in the repository. A place that has no page today has no card; when it gets one, the next build draws it.
 import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -94,10 +95,14 @@ const wanted = new Set();
 let drawn = 0;
 let cached = 0;
 for (const page of placePages(places, stories)) {
-  const shots = ogStories(page)
-    .map((s) => ({ s, pic: pictureOf(s) }))
-    .filter((x) => x.pic)
-    .map(({ pic }) => ({ file: pic.file, focus: pic.focus ?? '', bytes: asset('src/assets/stories', pic.file) }));
+  const coverFile = join(root, 'docs/images/places', `${page.place.id}.jpg`);
+  const shots =
+    page.place.cover && existsSync(coverFile)
+      ? [{ file: `${page.place.id}.jpg`, focus: page.place.cover.focus ?? '', bytes: readFileSync(coverFile) }]
+      : ogStories(page)
+          .map((s) => ({ s, pic: pictureOf(s) }))
+          .filter((x) => x.pic)
+          .map(({ pic }) => ({ file: pic.file, focus: pic.focus ?? '', bytes: asset('src/assets/stories', pic.file) }));
   if (shots.length === 0) continue;
   for (const lang of LANGS) {
     const name = page.place.name[lang];

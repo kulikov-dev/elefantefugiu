@@ -1401,8 +1401,20 @@
   }
 }
 
-/* The link to the pages of places under the heading of the map page. */
+/* The line under the map: the places that have a page. */
 .map-places {
-  margin-block-start: var(--space-2);
+  margin-block-start: var(--space-3);
   font-size: var(--text-sm);
+}
+
+/* The popup of a group of markers wholly inside a place that has a page. */
+.map__place-popup .leaflet-popup-content {
+  margin: var(--space-2) var(--space-4);
+}
+
+.map__place-link {
+  display: inline-block;
+  min-height: var(--touch-target);
+  line-height: var(--touch-target);
+  font-weight: var(--weight-strong);
 }

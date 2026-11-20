@@ -27,10 +27,12 @@ interface Props {
   /** 'page': the block owns ?fio= ?epoca= ?id= in the address. 'embedded': a parent page drives it with events. */
   mode?: 'page' | 'embedded';
   /** "Through the centuries" (map page only): what the player needs besides the cards. */
+  /** The places that have a page: a group of markers wholly inside one offers its page ("All stories of Sintra →"). */
+  places?: { href: string; label: string; ids: string[] }[];
   tt?: { info: Record<string, TtInfo>; epochs: Record<string, { name: string; order: number; years: string }>; chips: TtChip[] };
 }
 
-const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page', tt } = Astro.props;
+const { lang, cards, threads, known, maxBounds, view, home = MAINLAND_VIEW, tile, mode = 'page', tt, places = [] } = Astro.props;
 const hasOverseas = cards.some((c) => c.overseas);
 
 /** {one, few, other} of a plural key as `cluster_one`, `cluster_few`, ... */
@@ -51,6 +53,7 @@ const config = {
   mode,
   ...(ttConfig ? { tt: ttConfig } : {}),
   cards,
+  places,
   threads,
   known,
   maxBounds,

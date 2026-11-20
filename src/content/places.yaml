@@ -3,6 +3,7 @@
 # the page appears on the day its third story comes out. Nothing here is required but id, name, center and radius_km.
 #   parent        a district of a city: its stories also stand on the page of the parent
 #   name_of       the name in the sentence "History of ...": pt "de Sintra", ru "Синтры" (without it the page title is "{name}: ...")
+#   cover         the picture docs/images/places/<id>.jpg (wide): the ribbon above the map, the card of the index and the og:image; alt and credit in three languages, focus as object-position, credit optional
 #   og_stories    ids of up to 3 stories whose pictures the preview picture (og:image) shows; without it the most important ones
 #   neighbours    ids of the places the page "Nearby" shows first (the rest are the nearest places that have a page)
 #   intro         the hand-written introduction, 2-3 sentences, any language may be left out: where it is missing the page builds it from the data
@@ -14,6 +15,13 @@
   name_of: { pt: de Lisboa, ru: Лиссабона }
   center: { lat: 38.725, lon: -9.15 }
   radius_km: 9
+  cover:
+    focus: "50% 40%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Painel de azulejo com a vista de Lisboa: o castelo no alto, a Baixa e a Praça do Comércio junto ao Tejo."
+      en: "Azulejo panel with a view of Lisbon: the castle on the hill, the Baixa and Commerce Square on the Tagus."
+      ru: "Панно из азулежу с видом Лиссабона: замок на холме, Байша и площадь Коммерции на берегу Тежу."
   og_stories: [rinoceronte-1515, a-portuguesa-1890, aguadeiros-galegos-1748]
   intro:
     pt: "Das galerias romanas sob a Baixa ao hidroavião de 1922, a história de Lisboa está em camadas. Aqui, numa só manhã de 1640, acabou o domínio dos reis espanhóis; depois do terramoto de 1755 o centro foi reconstruído a régua e esquadro; e em 1807 partiu daqui para o Brasil toda a corte. As histórias estão organizadas por bairros: comece pelo que fica mais perto."
@@ -25,6 +33,13 @@
   name_of: { pt: de Belém, ru: Белена }
   center: { lat: 38.6975, lon: -9.2063 }
   radius_km: 2.2
+  cover:
+    focus: "50% 42%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Painel de azulejo de Belém: a Torre, o Mosteiro dos Jerónimos e duas caravelas no Tejo."
+      en: "Azulejo panel of Belém: the Tower, the Jerónimos Monastery and two caravels on the Tagus."
+      ru: "Панно из азулежу с видом Белена: башня, монастырь Жеронимуш и две каравеллы на Тежу."
   og_stories: [rinoceronte-1515, pasteis-de-belem-1837, travessia-atlantico-sul-1922]
   intro:
     pt: "Daqui partiam os navios da época dos Descobrimentos. No Museu de Marinha guarda-se uma cópia do mapa que em 1502 foi levado em segredo para Itália, e o rinoceronte que o rei pôs a lutar com um elefante em 1515 ficou em pedra na Torre de Belém. Daqui partiu o príncipe regente com toda a corte para o Brasil, aqui fazem-se os pastéis dos monges, e o Museu de Marinha conta também a travessia do Atlântico Sul em 1922."
@@ -36,6 +51,13 @@
   name_of: { pt: da Baixa e do Rossio, ru: Байши и Россиу }
   center: { lat: 38.711, lon: -9.138 }
   radius_km: 0.9
+  cover:
+    focus: "50% 42%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Painel de azulejo da Baixa: as arcadas e o arco da Praça do Comércio, com barcos junto ao cais."
+      en: "Azulejo panel of the Baixa: the arcades and the arch of Commerce Square, with boats at the quay."
+      ru: "Панно из азулежу с видом Байши: аркады и арка площади Коммерции, лодки у причала."
   intro:
     pt: "O centro, reconstruído depois do terramoto, assenta em camadas romanas: sob as ruas escondem-se galerias e oficinas de molho de peixe. Aqui, na manhã de 1 de dezembro de 1640, acabou o domínio dos reis espanhóis, da varanda da Câmara Municipal proclamou-se a República em 1910, e depois de 1755 as ruas receberam ofícios por decreto."
     en: "The centre, rebuilt after the earthquake, stands on Roman layers: galleries and fish-sauce workshops are hidden under the streets. Here, on the morning of 1 December 1640, the rule of the Spanish kings ended, from the balcony of City Hall the republic was proclaimed in 1910, and after 1755 the streets were assigned trades."
@@ -46,6 +68,13 @@
   name_of: { pt: de Alfama e do Castelo, ru: Альфамы и Каштелу }
   center: { lat: 38.711, lon: -9.1275 }
   radius_km: 0.7
+  cover:
+    focus: "50% 35%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Painel de azulejo de Alfama: o castelo no alto e uma viela com um chafariz."
+      en: "Azulejo panel of Alfama: the castle on the hill and a lane with a fountain."
+      ru: "Панно из азулежу с видом Альфамы: замок на холме и переулок с фонтаном."
   intro:
     pt: "A cidade velha sobre o rio. No Chafariz d'El-Rei os galegos enchiam os barris de água para Lisboa, o Museu do Fado lembra a cantora Maria Severa, e o Museu Militar guarda a história dos portugueses enviados a combater por Napoleão."
     en: "The old town above the river. At the Chafariz d'El-Rei Galicians filled their barrels with water for Lisbon, the Fado Museum remembers the singer Maria Severa, and the Military Museum holds the story of the Portuguese sent to fight for Napoleon."
@@ -56,6 +85,13 @@
   name_of: { pt: do Chiado e do Carmo, ru: Шиаду и Карму }
   center: { lat: 38.7117, lon: -9.1432 }
   radius_km: 0.3
+  cover:
+    focus: "50% 38%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Painel de azulejo do Chiado: as ruínas da Igreja do Carmo e o Elevador de Santa Justa."
+      en: "Azulejo panel of the Chiado: the ruins of the Carmo church and the Santa Justa lift."
+      ru: "Панно из азулежу с видом Шиаду: руины церкви Карму и лифт Санта-Жушта."
   intro:
     pt: "Este bairro atravessou o terramoto e o incêndio de 1755: as ruínas da Igreja do Carmo continuam sem telhado. Perto, na Igreja de São Roque, está a capela encomendada em Roma e trazida às peças. Em 1780 ordenou-se aos comerciantes que iluminassem as ruas à noite: cada um punha um candeeiro à porta da loja, mas o azeite era caro e os candeeiros foram-se apagando."
     en: "The earthquake and the fire of 1755 went through this district: the ruins of the Carmo church still stand without a roof. Nearby, in the church of São Roque, is a chapel that was ordered in Rome and shipped in pieces. In 1780 the merchants were told to light the streets at night: each put a lamp at the door of his shop, but the oil was dear and the lamps went out one by one."
@@ -67,6 +103,13 @@
   name_of: { pt: do Porto, ru: Порту }
   center: { lat: 41.145, lon: -8.625 }
   radius_km: 4.5
+  cover:
+    focus: "50% 42%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Painel de azulejo do Porto: a Ribeira, a Sé, a ponte sobre o Douro e barcos rabelo."
+      en: "Azulejo panel of Porto: the Ribeira, the cathedral, the bridge over the Douro and rabelo boats."
+      ru: "Панно из азулежу с видом Порту: Рибейра, собор, мост через Дору и лодки рабелу."
   intro:
     pt: "A alcunha de «tripeiros» vem de 1415. A Igreja de São Francisco foi coberta de ouro por frades com voto de pobreza, em 1756 demarcou-se o vale do Douro com marcos de granito por causa do vinho do Porto, e mais tarde a Ponte de D. Maria Pia atravessou o rio e abriu a Livraria Lello. As histórias estão nas duas margens do rio."
     en: "The nickname of the townspeople, “tripe eaters”, goes back to 1415. The church of São Francisco was covered in gold by friars who had taken a vow of poverty, in 1756 the Douro valley was marked out with granite posts for the sake of port wine, and later the Maria Pia bridge rose over the river and the Lello bookshop opened. The stories lie on both banks of the river."
@@ -76,6 +119,13 @@
   name_of: { pt: do Funchal, ru: Фуншала }
   center: { lat: 32.656, lon: -16.906 }
   radius_km: 4
+  cover:
+    focus: "50% 45%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Painel de azulejo do Funchal: a baía com veleiros, a cidade e as montanhas."
+      en: "Azulejo panel of Funchal: the bay with sailing ships, the town and the mountains."
+      ru: "Панно из азулежу с видом Фуншала: бухта с парусниками, город и горы."
   intro:
     pt: "No século XV a ilha enriqueceu com o açúcar: até Colombo veio cá buscá-lo. Depois o bordado passou a ser exportado, nas encostas do Monte surgiram os carros de cesto e a guitarra da Madeira transformou-se, no Havai, em ukulele."
     en: "In the 15th century the island grew rich on sugar: even Columbus sailed here for it. Later embroidery went to export, wicker toboggans appeared on the slopes of Monte, and a guitar from Madeira turned into the ukulele in Hawaii."

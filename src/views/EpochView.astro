@@ -14,7 +14,7 @@ import EpochPanno from '../components/EpochPanno.astro';
 import PagerNav from '../components/PagerNav.astro';
 import ThreadChip from '../components/ThreadChip.astro';
 import MapBlock from '../components/MapBlock.astro';
-import { LOCALES, altPaths, epochHref, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
+import { LOCALES, altPaths, epochHref, placePath, storyPath, threadHref, withBase, type Lang } from '../i18n/routes';
 import { ageInfoOf, countByMode, familyAttrs, zeroModes } from '../lib/family';
 import { feedFilterCss, gridAvailable } from '../lib/epoch-filter';
 import { plural, pluralForms, t, tAll } from '../i18n';
@@ -33,6 +33,7 @@ import { scaleYearText, yearParts, yearRange } from '../lib/events';
 import { scaleGapIndex } from '../lib/years-ago.mjs';
 import { DIRECTED, patternFor } from '../lib/azulejo';
 import { toMapCards } from '../lib/map-cards';
+import { mapPlaces } from '../lib/places';
 import { mapMaxBounds, portugalView } from '../lib/map-data';
 import { tileConfig } from '../lib/tiles';
 import { loadSite } from '../lib/site-data';
@@ -234,6 +235,7 @@ const schema = epochNodes(schemaCtx, {
         <MapBlock
           lang={lang}
           mode="embedded"
+          places={mapPlaces(site.placePages, lang, (id) => placePath(lang, id))}
           cards={mapCards}
           threads={mapThreads}
           known={{ threads: site.threads.map((th) => th.id), epochs: [] }}

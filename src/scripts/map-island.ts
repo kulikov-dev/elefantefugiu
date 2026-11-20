@@ -40,6 +40,8 @@ interface Config {
   home: Bounds;
   tile: { url: string; urlDark?: string; attribution: string };
   strings: Record<string, string>;
+  /** The places that have a page, the smallest first: a group wholly inside one offers its page. */
+  places?: { href: string; label: string; ids: string[] }[];
   /** BCP 47 tag for plural rules (Russian counts with four forms). */
   pluralLocale: string;
   /** "Through the centuries" (map page only). */
@@ -481,6 +483,24 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
 
   // ---- clusters, show more, sheet ---------------------------------------------------------------------------
 
+  // A group of markers wholly inside a place that has a page: a small popup with the link to the page ("All stories of Belém →") where the group was.
+  let placePopup: L.Popup | undefined;
+  const closePlacePopup = () => {
+    placePopup?.remove();
+    placePopup = undefined;
+  };
+  function offerPlace(ids: string[], at: L.LatLngExpression) {
+    closePlacePopup();
+    const place = (cfg.places ?? []).find((p) => ids.every((id) => p.ids.includes(id)));
+    if (!place) return;
+    const link = document.createElement('a');
+    link.href = place.href;
+    link.className = 'map__place-link';
+    link.textContent = place.label;
+    placePopup = L.popup({ className: 'map__place-popup', autoPan: false, closeButton: true, offset: [0, -4] }).setLatLng(at).setContent(link).openOn(map);
+    map.once('movestart', closePlacePopup);
+  }
+
   function openCluster(ids: string[]) {
     const members = ids.map((id) => byId.get(id)!);
     const box = L.latLngBounds(members.map((m) => [m.lat, m.lon] as L.LatLngTuple));
@@ -490,8 +510,11 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
       // Zooming cannot separate them (same spot, or already at the closest zoom): show the next portion instead.
       more += 1;
       refreshMarkers();
+      offerPlace(ids, box.getCenter());
     } else {
       map.fitBounds(box, { padding: [BEHAVIOUR.fitPadding, BEHAVIOUR.fitPadding], maxZoom: BEHAVIOUR.maxZoom });
+      // After the move (the popup is closed by the start of the next one).
+      map.once('moveend', () => offerPlace(ids, box.getCenter()));
     }
   }
 

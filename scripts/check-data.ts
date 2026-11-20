@@ -628,6 +628,7 @@ for (const t of threads) {
   for (const { item, file } of places) {
     if (item.parent !== undefined && !ids.has(item.parent)) report('error', file, `the parent "${item.parent}" is not a place`, 'parent');
     else if (placeChain(item, data).at(-1)?.parent !== undefined) report('error', file, 'the parents go round in a circle', 'parent');
+    if (item.cover && !existsSync(join(root, 'docs/images/places', `${item.id}.jpg`))) report('error', file, `the cover docs/images/places/${item.id}.jpg is missing`, 'cover');
     for (const id of item.og_stories ?? []) {
       const story = events.find((e) => e.item.id === id);
       if (!story) report('error', file, `the story "${id}" of og_stories does not exist`, 'og_stories');

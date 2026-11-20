@@ -105,7 +105,8 @@
     "legal": "Legal information",
     "licenses": "Project texts and illustrations: {content}, use in teaching is allowed. Code: {code}.",
     "privacy": "No ads, no cookies",
-    "games": "Games"
+    "games": "Games",
+    "places": "Places"
   },
   "home": {
     "epochs_heading": "Eras",
@@ -641,13 +642,15 @@
     "title_plain": "{name}: {stories} and places to see",
     "more_of": "More stories from {of} →",
     "more_plain": "More stories from {name} →",
-    "index_link": "Place pages →",
+    "index_link": "All places →",
     "map_label": "Map of the stories of {name}",
     "index_lead": "Towns and districts with three or more stories. Pick the place you are going to.",
     "auto_span": "{stories}, from the {from} to the {to} century: {titles}.",
     "auto_single": "{stories} in the {c} century: {titles}.",
     "auto_years": "{stories}, {from} to {to}: {titles}.",
     "quote": "“{t}”",
-    "og_alt": "{name}: azulejo pictures of the stories {titles}"
+    "og_alt": "{name}: azulejo pictures of the stories {titles}",
+    "all_of": "All stories from {of} →",
+    "all_plain": "All stories from {name} →"
   }
 }
