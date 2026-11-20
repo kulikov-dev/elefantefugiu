@@ -89,6 +89,9 @@
     }
   },
   "footer": {
+    "col_project": "Projeto",
+    "col_participate": "Participar",
+    "col_follow": "Acompanhar",
     "about": "Sobre o projeto",
     "method": "Método e fontes",
     "follow": "Subscrever por email",

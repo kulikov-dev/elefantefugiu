@@ -351,22 +351,65 @@
   font-size: var(--text-sm);
 }
 
+/* Three groups of links, aligned at the top; one column each on a phone (checked against "two and one" at 390 px: stacked has a straight left edge and no empty cell). */
+.site-footer__nav {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.site-footer__heading {
+  margin-block-end: var(--space-1);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
 .site-footer__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 var(--space-5);
-  margin-block-end: var(--space-3);
   list-style: none;
 }
 
 .site-footer__links a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   min-height: var(--touch-target);
+  color: var(--color-ink);
+  text-decoration: none;
 }
 
-.site-footer p + p {
+.site-footer__links a:hover,
+.site-footer__links a:focus-visible {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
+}
+
+.site-footer__bottom {
+  margin-block-start: var(--space-5);
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--color-line);
+  font-size: var(--text-xs);
+}
+
+/* The phrase "no ads and no cookies" is not broken across lines. */
+.site-footer__privacy {
+  white-space: nowrap;
+}
+
+.site-footer__bottom p + p {
   margin-block-start: var(--space-1);
+}
+
+@media (min-width: 40rem) {
+  .site-footer__nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+
+  .site-footer__links a {
+    min-height: 0;
+    padding-block: var(--space-1);
+  }
 }
 
 /* Page content */

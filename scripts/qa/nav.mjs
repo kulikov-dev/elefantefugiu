@@ -238,6 +238,33 @@ for (const scheme of ['light', 'dark']) {
   await page.close();
 }
 
+// 7. The footer: three groups, each with a heading and at least two links (Telegram on ru only), the headings are the only upper case, no horizontal overflow at 320 and 360 px.
+for (const lang of LANGS) {
+  for (const width of [320, 360, 1280]) {
+    const page = await newPage({ width });
+    await open(page, `/${lang}/`);
+    const f = await page.evaluate(() => {
+      const groups = [...document.querySelectorAll('.site-footer__nav .site-footer__group')].map((g) => ({
+        heading: g.querySelector('.site-footer__heading')?.textContent.trim() ?? '',
+        links: [...g.querySelectorAll('a')].map((a) => a.getAttribute('href')),
+      }));
+      const caps = [...document.querySelectorAll('.site-footer a, .site-footer p')].filter((el) => getComputedStyle(el).textTransform === 'uppercase').map((el) => el.className);
+      const tall = [...document.querySelectorAll('.site-footer__links a')].map((a) => a.getBoundingClientRect().height);
+      const footer = document.querySelector('.site-footer');
+      return { groups, caps, minTall: Math.min(...tall), nav: document.querySelectorAll('.site-footer nav[aria-label]').length, over: document.documentElement.scrollWidth - document.documentElement.clientWidth, inner: footer.scrollWidth - footer.clientWidth };
+    });
+    if (width === 360) {
+      ok(`footer (${lang}): one nav with a label, three groups, each with a heading and at least two links`, f.nav === 1 && f.groups.length === 3 && f.groups.every((g) => g.heading && g.links.length >= 2), JSON.stringify(f.groups));
+      const telegram = f.groups.flatMap((g) => g.links).filter((h) => h.includes('t.me/')).length;
+      ok(`footer (${lang}): the Telegram link ${lang === 'ru' ? 'is' : 'is not'} there`, telegram === (lang === 'ru' ? 1 : 0), String(telegram));
+      ok(`footer (${lang}): upper case only in the headings of the groups`, f.caps.every((c) => c === 'site-footer__heading'), f.caps.join(' '));
+      ok(`footer (${lang}, 360 px): a touch target of at least 44 px per link`, f.minTall >= 43.5, String(f.minTall));
+    }
+    ok(`footer (${lang}, ${width} px): no horizontal overflow`, f.over <= 0 && f.inner <= 0, JSON.stringify({ over: f.over, inner: f.inner }));
+    await page.close();
+  }
+}
+
 await browser.close();
 console.log(failed === 0 ? '\nAll nav checks passed' : `\n${failed} check(s) failed`);
 process.exit(failed === 0 ? 0 : 1);

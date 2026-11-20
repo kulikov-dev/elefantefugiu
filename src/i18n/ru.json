@@ -89,6 +89,9 @@
     }
   },
   "footer": {
+    "col_project": "Проект",
+    "col_participate": "Участвовать",
+    "col_follow": "Следить",
     "about": "О проекте",
     "method": "Метод и источники",
     "follow": "Подписка на почту",
