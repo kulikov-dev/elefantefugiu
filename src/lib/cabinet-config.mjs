@@ -4,7 +4,7 @@
 import { buildToday, cabinetOpen } from './publication.mjs';
 
 const fromEnv = typeof process === 'undefined' ? undefined : process.env.CABINET_OPENS?.trim();
-export const CABINET_OPENS = fromEnv ? (fromEnv === 'null' ? null : fromEnv) : null;
+export const CABINET_OPENS = fromEnv ? (fromEnv === 'null' ? null : fromEnv) : '2026-12-03';
 
 /** Is the cabinet open in this build? */
 export const isCabinetOpen = (today = buildToday()) => cabinetOpen(CABINET_OPENS, today);

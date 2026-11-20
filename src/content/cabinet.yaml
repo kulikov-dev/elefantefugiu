@@ -1,13 +1,167 @@
 # The cabinet of rarities (docs/spec.md, "Кабинет редкостей"): one entry per object. The word `phrase` is hidden in the text of the story `host`
 # (the exact form, as it stands there; `occurrence` is the number of the place when the phrase is met more than once); `story` is the story of the object.
 # The shelf is the epoch of the host. Whether the cabinet is open at all is decided by src/lib/cabinet-config.mjs.
+- id: anfora-garum
+  epoch: lusitania-e-roma
+  shelf: 1
+  host: garum-lisboa
+  phrase:
+    pt: Ânforas
+    en: Amphorae
+    ru: Амфоры
+  story: anforas-garum-troia
+  name:
+    pt: Ânfora de garum
+    en: Garum amphora
+    ru: Амфора для гарума
+  summary:
+    pt: Jarro de barro de fundo pontiagudo. Em jarros assim, o molho de peixe do Sado chegava a todo o mundo romano.
+    en: A clay jar with a pointed bottom. Jars like this carried fish sauce from the Sado across the Roman world.
+    ru: Глиняный кувшин с острым дном. В таких с берегов Садо везли рыбный соус по всему римскому миру.
+  hint:
+    pt: Os romanos adoravam um molho. Procure onde o guardavam debaixo de Lisboa.
+    en: The Romans loved one sauce. Look where they stored it beneath Lisbon.
+    ru: Римляне любили один соус. Ищите там, где его хранили под Лиссабоном.
+  image: cabinet-shelf/k01-anfora.png
+- id: miliario-geira
+  epoch: lusitania-e-roma
+  shelf: 2
+  host: ponte-trajano-chaves
+  phrase:
+    pt: estrada
+    en: road
+    ru: дорогу
+  occurrence:
+    pt: 2
+    en: 2
+    ru: 1
+  story: geira-miliarios
+  name:
+    pt: Miliário da Geira
+    en: Geira milestone
+    ru: Мильный столб Жейры
+  summary:
+    pt: Marco de granito da estrada romana que atravessa o Gerês. Tem a milha e o nome de um imperador.
+    en: A granite milestone from the Roman road through the Gerês mountains. It shows the mile and an emperor’s name.
+    ru: Гранитный столб с римской дороги через горы Жереш. На нём миля и имя императора.
+  hint:
+    pt: Os romanos construíam para durar. Procure onde ainda hoje se passa sobre a obra deles.
+    en: The Romans built to last. Look where people still travel over their work.
+    ru: Римляне строили надолго. Ищите там, где по их работе ездят до сих пор.
+  image: cabinet-shelf/k02-miliario.png
+- id: altar-endovelico
+  epoch: lusitania-e-roma
+  shelf: 3
+  host: templo-romano-evora
+  phrase:
+    pt: Augusto
+    en: Augustus
+    ru: Августа
+  story: endovelico
+  name:
+    pt: Altar de Endovélico
+    en: Altar to Endovelicus
+    ru: Алтарь Эндовелика
+  summary:
+    pt: Altar de pedra a Endovélico, deus subterrâneo que curava e respondia em sonhos. Também os romanos lhe rezavam.
+    en: A stone altar to Endovelicus, an underground god who healed and answered in dreams. Romans prayed to him too.
+    ru: Каменный алтарь Эндовелику, подземному богу, который лечил и отвечал во сне. Ему молились и римляне.
+  hint:
+    pt: Os romanos tinham o seu templo no Alentejo. Procure perto dele.
+    en: The Romans had their own temple in the Alentejo. Look near it.
+    ru: У римлян был свой храм в Алентежу. Ищите рядом с ним.
+  image: cabinet-shelf/k03-altar.png
+- id: padrao-cape-cross
+  epoch: avis-e-descobrimentos
+  shelf: 1
+  host: bojador-1434
+  phrase:
+    pt: cabo
+    en: cape
+    ru: мыс
+  occurrence:
+    pt: 2
+    en: 1
+    ru: 2
+  story: padrao-cabo-da-cruz-1486
+  name:
+    pt: Padrão do Cabo da Cruz
+    en: Cape Cross padrão
+    ru: Падран с мыса Кросс
+  summary:
+    pt: Coluna de pedra com cruz que Diogo Cão ergueu na Namíbia em 1486. Passou cem anos em Berlim.
+    en: The stone pillar with a cross that Diogo Cão set up in Namibia in 1486. It spent a hundred years in Berlin.
+    ru: Каменный столб с крестом, который Диогу Кан поставил в Намибии в 1486 году. Сто лет простоял в Берлине.
+  hint:
+    pt: Os marinheiros tinham medo de um cabo. Procure onde o passaram.
+    en: Sailors were afraid of one cape. Look where they got past it.
+    ru: Моряки боялись одного мыса. Ищите там, где его прошли.
+  image: cabinet-shelf/k04-padrao.png
+- id: saleiro-sapi
+  epoch: avis-e-descobrimentos
+  shelf: 2
+  host: cantino-1502
+  phrase:
+    pt: África
+    en: Africa
+    ru: Африку
+  occurrence:
+    pt: 1
+    en: 1
+    ru: 1
+  story: saleiro-sapi
+  name:
+    pt: Saleiro sapi-português
+    en: Sapi-Portuguese saltcellar
+    ru: Солонка сапи
+  summary:
+    pt: Saleiro de marfim com figuras de portugueses. Esculpido por mestres africanos por volta de 1500.
+    en: An ivory saltcellar with figures of Portuguese men. African masters carved it around 1500.
+    ru: Солонка из слоновой кости с фигурками португальцев. Её вырезали африканские мастера около 1500 года.
+  hint:
+    pt: Procure no mapa que saiu às escondidas de Lisboa.
+    en: Look on the map that was smuggled out of Lisbon.
+    ru: Ищите на карте, которую тайно увезли из Лиссабона.
+  image: cabinet-shelf/k05-saleiro.png
+- id: rinoceronte-belem
+  epoch: avis-e-descobrimentos
+  shelf: 3
+  host: rinoceronte-1515
+  phrase:
+    pt: rinoceronte
+    en: rhinoceros
+    ru: носорога
+  occurrence:
+    pt: 1
+    en: 1
+    ru: 1
+  story: rinoceronte-torre-de-belem
+  name:
+    pt: Rinoceronte de Belém
+    en: The Belém rhino
+    ru: Носорог на Белене
+  summary:
+    pt: Cabeça de rinoceronte na Torre de Belém. É considerada o primeiro rinoceronte de pedra da Europa.
+    en: A rhinoceros head on Belém Tower. It’s considered Europe’s first stone rhino.
+    ru: Голова носорога на башне Белен. Считается первым каменным носорогом в Европе.
+  hint:
+    pt: Um dia, em Lisboa, dois animais enormes encontraram-se num pátio. Procure aí.
+    en: One day in Lisbon, two huge animals met in a courtyard. Look there.
+    ru: Однажды в Лиссабоне два огромных зверя встретились во дворе. Ищите там.
+  image: cabinet-shelf/k06-rinoceronte.png
 - id: coroa-vila-vicosa
   epoch: uniao-restauracao-e-ouro-do-brasil
   shelf: 1
   host: restauracao-1640
-  phrase: { pt: aclamaram, en: proclaimed, ru: провозгласили }
+  phrase:
+    pt: aclamaram
+    en: proclaimed
+    ru: провозгласили
   story: rei-que-deu-a-coroa-1646
-  name: { pt: Coroa de Vila Viçosa, en: The crown of Vila Viçosa, ru: Корона из Вила-Висозы }
+  name:
+    pt: Coroa de Vila Viçosa
+    en: The crown of Vila Viçosa
+    ru: Корона из Вила-Висозы
   summary:
     pt: A coroa real que D. João IV ofereceu à Virgem em 1646. Desde então, os reis nunca mais a puseram.
     en: The royal crown King João IV gave to the Virgin Mary in 1646. No king wore it again.
@@ -21,10 +175,19 @@
   epoch: uniao-restauracao-e-ouro-do-brasil
   shelf: 2
   host: catarina-cha-1662
-  phrase: { pt: chá, en: tea, ru: чай }
-  occurrence: { pt: 1, en: 1, ru: 1 }
+  phrase:
+    pt: chá
+    en: tea
+    ru: чай
+  occurrence:
+    pt: 1
+    en: 1
+    ru: 1
   story: palavras-portuguesas-no-japao-1543
-  name: { pt: Biombos namban, en: Namban screens, ru: Ширмы намбан }
+  name:
+    pt: Biombos namban
+    en: Namban screens
+    ru: Ширмы намбан
   summary:
     pt: Biombo japonês onde portugueses de calças largas desembarcam de um navio enorme. Era assim que o Japão os via.
     en: A Japanese folding screen showing Portuguese men in baggy trousers stepping off a huge ship. This is how Japan saw them.
@@ -34,13 +197,141 @@
     en: A princess took a new habit to England. Look with her.
     ru: Одна принцесса увезла в Англию новую привычку. Ищите у неё.
   image: cabinet-shelf/k08-biombo.png
-- id: ze-povinho
+- id: coche-filipe-ii
+  epoch: uniao-restauracao-e-ouro-do-brasil
+  shelf: 3
+  host: falsos-sebastiao
+  phrase:
+    pt: espanhóis
+    en: Spanish
+    ru: испанцев
+  story: coche-filipe-1619
+  name:
+    pt: Coche de Filipe II
+    en: Philip II’s coach
+    ru: Карета Филиппа
+  summary:
+    pt: Coche de viagem de Filipe II, que chegou a Lisboa em 1619. É o mais antigo do Museu dos Coches.
+    en: The traveling coach of Philip II, who came to Lisbon in 1619. The oldest in the Coach Museum.
+    ru: Дорожная карета Филиппа II, приехавшего в Лиссабон в 1619 году. Самая старая в музее карет.
+  hint:
+    pt: Um rei nunca conseguia morrer. Procure onde o esperavam.
+    en: One king just couldn’t stay dead. Look where people waited for him.
+    ru: Один король никак не мог умереть. Ищите там, где его ждали.
+  image: cabinet-shelf/k09-coche.png
+- id: inquerito-1756
+  epoch: pombal-e-terramoto
+  shelf: 1
+  host: gaiola-pombalina-1758
+  phrase:
+    pt: terramoto
+    en: earthquake
+    ru: землетрясения
+  occurrence:
+    pt: 2
+    en: 2
+    ru: 1
+  story: inquerito-terramoto-1756
+  name:
+    pt: Inquérito de 1756
+    en: The 1756 questionnaire
+    ru: Опросник 1756 года
+  summary:
+    pt: Inquérito de 13 perguntas enviado a todo o país depois de 1755. Uma das primeiras descrições científicas de um sismo.
+    en: A 13-question survey sent across the country after 1755. One of the first scientific descriptions of an earthquake.
+    ru: Анкета из 13 вопросов, которую разослали по стране после 1755 года. Одно из первых научных описаний землетрясения.
+  hint:
+    pt: Depois de 1755, ensinaram as casas a não cair. Procure dentro das paredes delas.
+    en: After 1755, houses were taught not to fall. Look inside their walls.
+    ru: После 1755 года дома учили не падать. Ищите внутри их стен.
+  image: cabinet-shelf/k10-inquerito.png
+- id: azulejo-pombalino
+  epoch: pombal-e-terramoto
+  shelf: 2
+  host: ruas-oficios-1760
+  phrase:
+    pt: prédios
+    en: buildings
+    ru: дома
+  occurrence:
+    pt: 1
+    en: 1
+    ru: 1
+  story: azulejo-pombalino
+  name:
+    pt: Azulejo pombalino
+    en: Pombaline tile
+    ru: Плитка помбалино
+  summary:
+    pt: Azulejo simples de padrão repetido. Revestiu os novos prédios de Lisboa depois do terramoto de 1755.
+    en: A simple tile with a repeating pattern. It covered Lisbon’s new buildings after the 1755 earthquake.
+    ru: Простая плитка с повторяющимся узором. Ею отделывали новые дома Лиссабона после землетрясения 1755 года.
+  hint:
+    pt: Depois do terramoto, cada ofício ganhou a sua rua. Procure aí.
+    en: After the earthquake, every trade got its own street. Look there.
+    ru: После землетрясения каждому ремеслу дали свою улицу. Ищите там.
+  image: cabinet-shelf/k11-azulejo.png
+- id: tartaruga-ajuda
+  epoch: pombal-e-terramoto
+  shelf: 3
+  host: morcegos-mafra-1771
+  phrase:
+    pt: biblioteca
+    en: library
+    ru: библиотека
+  occurrence:
+    pt: 1
+    en: 1
+    ru: 1
+  story: tartaruga-ajuda-1808
+  name:
+    pt: Tartaruga da Ajuda
+    en: The Ajuda tortoise
+    ru: Черепаха из Ажуды
+  summary:
+    pt: Tartaruga-gigante do museu real da Ajuda. Em 1808 foi levada para Paris e descrita como espécie nova.
+    en: A giant tortoise from the royal museum at Ajuda. Taken to Paris in 1808 and described as a new species.
+    ru: Гигантская черепаха из королевского музея в Ажуде. В 1808 году её увезли в Париж и описали как новый вид.
+  hint:
+    pt: À noite, os livros são guardados por animais com asas. Procure na biblioteca deles.
+    en: At night, books are guarded by winged animals. Look in their library.
+    ru: Книги по ночам сторожат крылатые звери. Ищите в их библиотеке.
+  image: cabinet-shelf/k12-tartaruga.png
+- id: frasco-d-carlos
   epoch: monarquia-e-republica
   shelf: 1
+  host: primeiro-automovel-1895
+  phrase:
+    pt: Carlos
+    en: Carlos
+    ru: Карлуш
+  story: d-carlos-oceanografo
+  name:
+    pt: O peixe de D. Carlos
+    en: King Carlos’s fish
+    ru: Рыба короля Карлуша
+  summary:
+    pt: Frasco com um animal marinho das campanhas do rei D. Carlos. O próprio rei lançava as redes a centenas de metros.
+    en: A specimen jar from King Carlos’s sea expeditions. The king himself lowered nets hundreds of meters down.
+    ru: Банка с морским животным из экспедиций короля Карлуша. Король сам ставил сети на сотни метров вниз.
+  hint:
+    pt: O primeiro carro de Portugal encontrou na estrada um animal teimoso. Procure aí.
+    en: Portugal’s first car met a stubborn animal on the road. Look there.
+    ru: Первая машина Португалии встретила на дороге упрямого зверя. Ищите там.
+  image: cabinet-shelf/k13-frasco.png
+- id: ze-povinho
+  epoch: monarquia-e-republica
+  shelf: 2
   host: a-portuguesa-1890
-  phrase: { pt: Grã-Bretanha, en: Britain, ru: Британия }
+  phrase:
+    pt: Grã-Bretanha
+    en: Britain
+    ru: Британия
   story: ze-povinho-1875
-  name: { pt: Zé Povinho, en: Zé Povinho, ru: Зе Повинью }
+  name:
+    pt: Zé Povinho
+    en: Zé Povinho
+    ru: Зе Повинью
   summary:
     pt: Zé Povinho de barro da fábrica de Bordalo Pinheiro. A personagem de caricatura de 1875 tornou-se o rosto do povo português.
     en: A clay Zé Povinho from Bordalo Pinheiro's factory. An 1875 cartoon character who became the face of ordinary Portuguese people.
@@ -50,3 +341,29 @@
     en: Once Portugal got angry at England and wrote a song. Look in it.
     ru: Однажды Португалия обиделась на Англию и сочинила песню. Ищите в ней.
   image: cabinet-shelf/k14-ze-povinho.png
+- id: busto-republica
+  epoch: monarquia-e-republica
+  shelf: 3
+  host: travessia-atlantico-sul-1922
+  phrase:
+    pt: Brasil
+    en: Brazil
+    ru: Бразилии
+  occurrence:
+    pt: 1
+    en: 1
+    ru: 1
+  story: busto-republica-ilda-puga
+  name:
+    pt: Busto da República
+    en: Bust of the Republic
+    ru: Бюст Республики
+  summary:
+    pt: Busto da República, para o qual posou uma costureira de dezasseis anos de Arraiolos.
+    en: The bust of the Republic, modeled on a sixteen-year-old seamstress from Arraiolos.
+    ru: Бюст Республики, для которого позировала шестнадцатилетняя швея из Аррайолуша.
+  hint:
+    pt: Dois aviadores atravessaram o oceano com um instrumento de marinheiro. Procure no voo deles.
+    en: Two aviators crossed the ocean with a sailor’s instrument. Look in their flight.
+    ru: Двое лётчиков пересекли океан с морским прибором. Ищите в их полёте.
+  image: cabinet-shelf/k15-busto.png

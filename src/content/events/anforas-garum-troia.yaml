@@ -1,0 +1,182 @@
+id: anforas-garum-troia
+slug:
+  pt: o-jarro-do-molho-de-peixe
+  en: the-fish-sauce-jar
+  ru: banka-dlya-rybnogo-sousa
+title:
+  pt: O jarro do molho de peixe
+  en: The Fish Sauce Jar
+  ru: Банка для рыбного соуса
+epoch: lusitania-e-roma
+level: story
+year: 100
+year_label:
+  pt: séc. I–V
+  en: 1st–5th c.
+  ru: I–V века
+place:
+  name:
+    pt: Tróia, estuário do Sado
+    en: Tróia, Sado estuary
+    ru: Тройя, устье Садо
+  short:
+    pt: Tróia
+    en: Tróia
+    ru: Тройя
+  lat: 38.4862
+  lon: -8.885
+bridge:
+  name: Ruínas Romanas de Tróia
+  title:
+    pt: Ruínas Romanas de Tróia
+    en: Roman Ruins of Tróia
+    ru: Римские руины Тройи
+  address: Península de Tróia, Grândola
+  lat: 38.4862268
+  lon: -8.8849652
+  maps_url: https://www.google.com/maps/place/Ruinas+Romanas+de+Troia/@38.486231,-8.8875401,17z/data=!3m1!4b1!4m6!3m5!1s0xd19432b9b8a93df:0x4ff02ddc650ab5c8!8m2!3d38.4862268!4d-8.8849652!16s%2Fg%2F11dyh_rsy
+  url: https://pt.wikipedia.org/wiki/Ru%C3%ADnas_Romanas_de_Tr%C3%B3ia
+  note:
+    pt: Na margem do Sado conservam-se filas de tanques romanos onde se fazia molho de peixe para todo o
+      império.
+    en: Rows of Roman vats where fish sauce was made for the whole empire survive on the banks of the
+      Sado.
+    ru: На берегу Садо сохранились ряды римских чанов, где делали рыбный соус для всей империи.
+threads:
+  - comida-e-vinho
+  - mar
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O molho romano de peixe podre valia quase tanto como perfume.
+  en: Romans prized a sauce of rotten fish almost like perfume.
+  ru: Римский соус из тухлой рыбы ценился почти как духи.
+seo:
+  title:
+    pt: O jarro do molho de peixe, Tróia | O Elefante Fugiu
+    en: The Fish Sauce Jar · Tróia, 1st–5th c. | O Elefante Fugiu
+    ru: Банка для рыбного соуса · Тройя, I–V века | O Elefante Fugiu
+story:
+  pt: >-
+    A cozinha romana não passava sem garum. Era um molho de peixe salgado em grandes tanques e
+    deixado ao sol durante semanas, até se transformar em líquido. Temperava-se quase tudo com ele,
+    como hoje com molho de soja.
+
+    Os melhores tanques ficavam onde havia muito peixe e muito sal. A foz do Sado era perfeita: o
+    oceano ao lado, com sardinha e cavala, e salinas à volta. Na península de Tróia nasceram dezenas
+    de oficinas.
+
+    O molho ia para ânforas, jarros altos de barro com gargalo estreito e fundo pontiagudo. Eram
+    feitas ali mesmo, nas margens do Sado, e seguiam de barco para todo o Mediterrâneo.
+  en: >-
+    Roman cooking couldn’t do without garum. It was a sauce made from fish salted in big vats and
+    left in the sun for weeks until it turned into liquid. Romans put it on almost everything, the
+    way people use soy sauce today.
+
+    The best vats were wherever there was plenty of fish and salt. The mouth of the Sado River was
+    perfect: the ocean next door, full of sardines and mackerel, and salt pans all around. Dozens of
+    workshops sprang up on the Tróia peninsula.
+
+    The sauce was poured into amphorae, tall clay jars with a narrow neck and a pointed bottom. They
+    were made right there on the banks of the Sado and shipped all over the Mediterranean.
+  ru: >-
+    Римская кухня не обходилась без гарума. Это соус из рыбы, которую засаливали в больших чанах и
+    неделями оставляли на солнце, пока она не превращалась в жидкость. Им приправляли почти всё, как
+    сегодня соевым соусом.
+
+    Лучшие чаны стояли там, где много рыбы и соли. Устье реки Садо подходило идеально: рядом океан с
+    сардиной и скумбрией, а вокруг солеварни. На полуострове Тройя выросли десятки цехов.
+
+    Соус разливали в амфоры, высокие глиняные кувшины с узким горлом и острым дном. Их делали тут
+    же, на берегах Садо, и отправляли кораблями по всему Средиземному морю.
+more:
+  pt: >-
+    O fundo pontiagudo da ânfora não é um erro do oleiro. No porão, os jarros iam em filas,
+    espetados na areia ou encaixados na fila de baixo, e assim não rolavam com o balanço. Em terra,
+    encostavam-se à parede ou punham-se num suporte.
+
+
+    Pela forma da ânfora, os arqueólogos sabem de onde vem e o que levava. Os jarros do Sado,
+    estreitos e compridos, aparecem em portos muito para lá da Lusitânia. Foi assim, pelos cacos,
+    que se seguiu o caminho do molho português.
+
+
+    Quando Roma enfraqueceu, o comércio por mar parou e as oficinas de Tróia ficaram ao abandono. A
+    areia cobriu os tanques e foi ela que os conservou: hoje, junto ao rio, veem-se filas de covas
+    retangulares onde o peixe fermentava.
+  en: >-
+    The pointed bottom wasn’t a potter’s mistake. In a ship’s hold, the jars stood in rows, stuck
+    into sand or wedged into the row below, so they didn’t roll when the ship rocked. On land,
+    people leaned them against a wall or set them in a stand.
+
+
+    From an amphora’s shape, archaeologists can tell where it came from and what it carried. The
+    narrow, elongated jars from the Sado turn up in ports far beyond Lusitania. That’s how the
+    broken pieces revealed where Portuguese fish sauce traveled.
+
+
+    When Rome weakened, sea trade died down and the Tróia workshops were abandoned. Sand buried the
+    vats, and the sand is also what preserved them: today you can see rows of rectangular pits by
+    the water where fish once fermented.
+  ru: >-
+    Острое дно у амфоры не ошибка гончара. В трюме кувшины ставили рядами и втыкали в песок или в
+    соседний ряд, так они не катались в качку. На суше амфору прислоняли к стене или ставили в
+    подставку.
+
+
+    По форме амфоры археологи узнают, откуда она и что в ней везли. Кувшины с Садо, узкие и
+    вытянутые, находят в портах далеко за пределами Лузитании. Так по осколкам удалось проследить,
+    куда уходил португальский соус.
+
+
+    Когда Рим ослаб, торговля по морю затихла, и цеха на Тройе забросили. Песок занёс чаны, и он же
+    их сохранил: сегодня на берегу видны ряды прямоугольных ям, в которых когда-то бродила рыба.
+myth:
+  verdict: part
+  statement:
+    pt: Para o molho romano, deixava-se o peixe apodrecer
+    en: To make Roman fish sauce, they left the fish to rot
+    ru: Для римского соуса рыбу оставляли гнить
+  answer:
+    pt: "O peixe não era abandonado: era salgado e ficava semanas ao sol. Fermentava e dava um molho."
+    en: The fish wasn’t just left out. It was salted and kept in the sun for weeks, where it fermented
+      into sauce.
+    ru: Рыбу не просто бросали, а засаливали и неделями держали на солнце. Она бродила, и получался
+      соус.
+sources:
+  - title: "Wikipedia: Garum"
+    url: https://en.wikipedia.org/wiki/Garum
+    type: reference
+    accessed: 2026-11-20
+  - title: "Pliny the Elder: Natural History XXXI, 93 (on garum)"
+    url: https://www.perseus.tufts.edu/hopper/text?doc=Plin.+Nat.+31.93
+    type: book
+    accessed: 2026-11-20
+  - title: "Vaz Pinto et al.: Ceramic evidence in the fish-salting Workshop 23 at Troia (Portugal):
+      amphorae and pitchers"
+    url: https://archaeopresspublishing.com/ojs/index.php/RCRF/article/view/1504
+    type: academic
+    accessed: 2026-11-20
+image:
+  file: anforas-garum-troia.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: uma ânfora de duas asas, de gargalo estreito e fundo
+      pontiagudo, assente num suporte redondo, com peixes nos cantos."
+    en: "Blue-and-white azulejo panel: a two-handled amphora with a narrow neck and a pointed bottom,
+      resting in a round stand, with fish in the corners."
+    ru: "Панно из сине-белых азулежу: двуручная амфора с узким горлом и острым дном на круглой
+      подставке, в углах рыбки."
+  caption:
+    pt: Ânfora romana de molho de peixe. Ilustração em estilo azulejo, criada por IA.
+    en: A Roman fish sauce amphora. Azulejo-style illustration, created by AI.
+    ru: Римская амфора для рыбного соуса. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: anfora-garum
+published: 2026-11-20
+placeholder: false
+ru_ready: true

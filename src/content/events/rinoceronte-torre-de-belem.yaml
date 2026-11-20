@@ -1,0 +1,178 @@
+id: rinoceronte-torre-de-belem
+slug:
+  pt: o-rinoceronte-na-muralha
+  en: the-rhino-on-the-fortress-wall
+  ru: nosorog-na-krepostnoy-stene
+title:
+  pt: O rinoceronte na muralha
+  en: The Rhino on the Fortress Wall
+  ru: Носорог на крепостной стене
+epoch: avis-e-descobrimentos
+level: story
+year: 1515
+place:
+  name:
+    pt: Torre de Belém, Lisboa
+    en: Belém Tower, Lisbon
+    ru: Башня Белен, Лиссабон
+  short:
+    pt: Belém
+    en: Belém
+    ru: Белен
+  lat: 38.6916
+  lon: -9.216
+bridge:
+  name: Torre de Belém
+  title:
+    pt: Torre de Belém
+    en: Belém Tower
+    ru: Башня Белен
+  address: Avenida da Torre de Belém, Lisboa
+  lat: 38.6915837
+  lon: -9.2159773
+  maps_url: https://www.google.com/maps/place/Torre+de+Bel%C3%A9m/@38.6915879,-9.2185522,17z/data=!3m2!4b1!5s0xd1ecb6968ca6973:0x7ffc53d5b48b9149!4m6!3m5!1s0xd1ecb42c3c29c4b:0x3002dcadcf52513f!8m2!3d38.6915837!4d-9.2159773
+  url: https://www.museusemonumentos.pt/
+  note:
+    pt: A cabeça do rinoceronte vê-se por fora, na muralha da torre, para quem souber onde procurar.
+    en: You can see the rhino’s head from outside, on the tower wall, if you know where to look.
+    ru: Голову носорога видно на стене башни снаружи, если знать, где искать.
+threads:
+  - mar
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Belém esconde um rinoceronte de pedra, talvez o primeiro da Europa.
+  en: A stone rhino hides on Belém Tower, said to be Europe’s first.
+  ru: На башне Белен прячется каменный носорог. Его считают первым каменным носорогом Европы.
+seo:
+  title:
+    pt: O rinoceronte na muralha · Belém, 1515 | O Elefante Fugiu
+    en: The Stone Rhino of Belém Tower | O Elefante Fugiu
+    ru: Каменный носорог башни Белен | O Elefante Fugiu
+story:
+  pt: >-
+    Em 1515 chegou a Lisboa, vindo da Índia, um rinoceronte vivo. A Europa não via um animal assim
+    há mais de mil anos, e a cidade inteira correu para o ver.
+
+    Nos mesmos anos construía-se, na margem do Tejo, a Torre de Belém, a porta de Lisboa para quem
+    vinha do mar. Os canteiros decoraram-na com aquilo de que o porto se orgulhava: cordas, conchas,
+    brasões e cruzes. Numa das saliências da muralha apareceu uma cabeça de rinoceronte.
+
+    É considerada a primeira representação em pedra de um rinoceronte na Europa. O famoso desenho de
+    Dürer foi feito a partir de uma carta e de um esboço alheios, e os escultores da torre viviam na
+    mesma cidade onde estava o animal vivo.
+  en: >-
+    In 1515, a live rhinoceros arrived in Lisbon from India. Europe hadn’t seen such an animal in
+    more than a thousand years, and the whole city rushed to look at it.
+
+    In those same years, Belém Tower was going up on the bank of the Tagus, Lisbon’s gateway for
+    anyone arriving by sea. The stonemasons decorated it with what the port was proud of: ropes,
+    shells, coats of arms, and crosses. On one of the wall’s ledges, a rhinoceros head appeared.
+
+    It’s considered the first stone depiction of a rhinoceros in Europe. Dürer’s famous drawing was
+    made from someone else’s letter and sketch, while the tower’s carvers lived in the very city
+    where the live animal was.
+  ru: >-
+    В 1515 году в Лиссабон привезли из Индии живого носорога. Европа не видела таких зверей больше
+    тысячи лет, и посмотреть на него сбегался весь город.
+
+    В те же годы на берегу Тежу строили башню Белен, ворота в Лиссабон с моря. Каменщики украшали её
+    тем, чем гордился порт: канатами, ракушками, гербами и крестами. На одном из выступов стены
+    появилась голова носорога.
+
+    Её считают первым каменным изображением носорога в Европе. Знаменитый рисунок Дюрера сделан по
+    чужому письму и наброску, а резчики башни жили в том же городе, где стоял живой зверь.
+more:
+  pt: >-
+    A história do rinoceronte vivo já está contada em «O rinoceronte e o elefante»; aqui fala-se do
+    de pedra. A torre foi construída entre 1514 e 1519 como fortaleza à entrada de Lisboa, e toda a
+    sua decoração fala do mar e do rei D. Manuel: cordas de pedra, esferas armilares, cruzes da
+    Ordem de Cristo nas ameias. O rinoceronte parece estranho nesta companhia, e é essa a melhor
+    prova de quanto o animal vivo impressionou a cidade: acharam-no digno de um lugar ao lado dos
+    brasões.
+
+
+    Encontrar a cabeça não é fácil. É pequena e está no alto, por baixo de uma das guaritas, e a
+    maioria dos turistas passa sem a ver. Olhe do lado oeste da torre.
+
+
+    A torre erguia-se sobre rochas no rio, e não na margem como hoje: foi a margem que, com os
+    séculos, chegou até ela. Por isso, os primeiros a ver o rinoceronte de pedra não estavam no
+    cais, mas no convés dos navios que entravam em Lisboa.
+  en: >-
+    The story of the live rhino is told in “The Rhino and the Elephant”; this one is about the stone
+    rhino. The tower was built between 1514 and 1519 as a fortress guarding the entrance to Lisbon,
+    and all of its decoration speaks of the sea and of King Manuel: stone ropes, armillary spheres,
+    crosses of the Order of Christ on the battlements. The rhino looks odd in that company, and
+    that’s the best proof of how much the live animal amazed the city: it was judged worthy of a
+    place next to the coats of arms.
+
+
+    Finding the head isn’t easy. It’s small and set high up, beneath one of the corner turrets, and
+    most tourists walk right past it. Look from the tower’s west side.
+
+
+    The tower once stood on rocks in the river, not on the shore as it does today: over the
+    centuries, the shore crept up to it. So the first people to see the stone rhino weren’t standing
+    on a quay but on the decks of ships sailing into Lisbon.
+  ru: >-
+    История живого носорога уже рассказана в «Носорог и слон», здесь речь о каменном. Башню строили
+    в 1514–1519 годах как крепость у входа в Лиссабон, и всё её убранство говорит о море и о короле,
+    который её заказал: каменные канаты, армиллярные сферы, кресты Ордена Христа на зубцах. Носорог
+    в этом ряду выглядит странно, и это лучшее доказательство, как поразил город живой зверь: его
+    сочли достойным места рядом с гербами.
+
+
+    Найти голову непросто. Она маленькая и сидит высоко, под одной из угловых башенок, и большинство
+    туристов проходит мимо. Смотрите с западной стороны башни.
+
+
+    Башня стояла на камнях в реке, а не на берегу, как сейчас: берег за века подошёл к ней сам.
+    Значит, первыми каменного носорога видели не с набережной, а с палуб кораблей, входивших в
+    Лиссабон.
+myth:
+  verdict: myth
+  statement:
+    pt: O famoso rinoceronte de Dürer foi desenhado do natural
+    en: Dürer’s famous rhinoceros was drawn from life
+    ru: Знаменитый носорог Дюрера нарисован с натуры
+  answer:
+    pt: Dürer nunca viu o animal. Desenhou-o a partir de uma carta e de um esboço enviados de Lisboa.
+    en: Dürer never saw the animal. He drew it from a letter and a sketch sent from Lisbon.
+    ru: Дюрер зверя не видел. Он рисовал по письму и наброску из Лиссабона.
+sources:
+  - title: "Visit Lisboa: A rhinoceros in the Belém Tower"
+    url: https://www.visitlisboa.com/en/articles/a-rhinoceros-in-the-belem-tower
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Wikipedia: Belém Tower"
+    url: https://en.wikipedia.org/wiki/Bel%C3%A9m_Tower
+    type: reference
+    accessed: 2026-11-20
+  - title: "Google Arts & Culture: The Lisbon Rhinoceros"
+    url: https://artsandculture.google.com/story/fAWhMvHAdydLLw
+    type: institutional
+    accessed: 2026-11-20
+image:
+  file: rinoceronte-torre-de-belem.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: a cabeça de um rinoceronte a sair de uma guarita de ameias,
+      sobre uma base de corda de pedra."
+    en: "Blue-and-white azulejo panel: a rhinoceros head jutting out from a battlemented turret, above a
+      base of stone rope."
+    ru: "Панно из сине-белых азулежу: голова носорога выглядывает из зубчатой башенки над основанием в
+      виде каменного каната."
+  caption:
+    pt: O rinoceronte de pedra da Torre de Belém. Ilustração em estilo azulejo, criada por IA.
+    en: The stone rhino of Belém Tower. Azulejo-style illustration, created by AI.
+    ru: Каменный носорог башни Белен. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: rinoceronte-belem
+published: 2026-11-20
+placeholder: false
+ru_ready: true

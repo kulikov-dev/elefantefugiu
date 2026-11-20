@@ -1,0 +1,161 @@
+id: busto-republica-ilda-puga
+slug:
+  pt: a-costureira-que-se-tornou-a-republica
+  en: the-seamstress-who-became-the-republic
+  ru: shveya-kotoraya-stala-respublikoy
+title:
+  pt: A costureira que se tornou a República
+  en: The Seamstress Who Became the Republic
+  ru: Швея, которая стала Республикой
+epoch: monarquia-e-republica
+level: story
+year: 1908
+place:
+  name:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7223
+  lon: -9.1393
+bridge:
+  name: Palácio de São Bento (Assembleia da República)
+  title:
+    pt: Palácio de São Bento (Assembleia da República)
+    en: São Bento Palace (Parliament)
+    ru: Дворец Сан-Бенту (парламент)
+  address: Rua de São Bento, Lisboa
+  lat: 38.7125529
+  lon: -9.1538565
+  maps_url: https://www.google.com/maps/place/Pal%C3%A1cio+de+S%C3%A3o+Bento/@38.7125571,-9.1564314,17z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!8m2!3d38.7125529!4d-9.1538565
+  url: https://www.parlamento.pt/
+  note:
+    pt: Para este palácio, onde reúne o parlamento, o escultor fez em 1908 o busto oficial da República.
+    en: For this palace, where parliament sits, the sculptor made the official bust of the Republic in
+      1908.
+    ru: Для этого дворца, где заседает парламент, скульптор в 1908 году сделал официальный бюст
+      Республики.
+threads:
+  - gente-como-nos
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A República Portuguesa tem o rosto de uma costureira adolescente de Arraiolos.
+  en: The Portuguese Republic has the face of a sixteen-year-old seamstress from Arraiolos.
+  ru: У Португальской Республики лицо шестнадцатилетней швеи из Аррайолуша.
+seo:
+  title:
+    pt: A costureira que se tornou a República | O Elefante Fugiu
+    en: The Seamstress Who Became the Republic | O Elefante Fugiu
+    ru: Швея, которая стала Республикой | O Elefante Fugiu
+story:
+  pt: >-
+    No início do século XX, os republicanos precisavam de um símbolo: uma mulher que representasse a
+    República, como a Marianne em França. O escultor José Simões de Almeida procurava um modelo.
+
+    Encontrou-o numa camisaria da Baixa. Ilda Puga tinha cerca de dezasseis anos e tinha vindo de
+    Arraiolos para Lisboa. Posou sempre acompanhada pela mãe, e o escultor só precisava do rosto.
+
+    Depois da revolução de 1910, este busto tornou-se o rosto da nova República: foi posto nas
+    câmaras municipais, cunhado em moedas e medalhas. E Ilda passou a vida a costurar e morreu em
+    1993, com 101 anos.
+  en: >-
+    In the early 20th century, Portugal’s republicans needed a symbol: a woman to stand for the
+    Republic, like Marianne in France. The sculptor José Simões de Almeida was looking for a model.
+
+    He found her in a shirtmaker’s workshop in the Baixa. Ilda Puga was about sixteen and had come
+    to Lisbon from Arraiolos. She always posed with her mother present, and the sculptor needed only
+    her face.
+
+    After the 1910 revolution, this bust became the face of the new Republic: it was placed in town
+    halls and struck on coins and medals. Ilda went on sewing all her life and died in 1993, at 101.
+  ru: >-
+    В начале XX века республиканцам понадобился символ: женщина, которая изображает Республику, как
+    Марианна во Франции. Скульптор Жозе Симойнш де Алмейда искал модель.
+
+    Он нашёл её в рубашечной мастерской в Байше. Илде Пуге было около шестнадцати, она приехала в
+    Лиссабон из Аррайолуша. Позировала она под присмотром матери, и скульптору нужно было только
+    лицо.
+
+    После революции 1910 года этот бюст стал лицом новой Республики: его ставили в мэриях, чеканили
+    на монетах и медалях. А Илда всю жизнь шила и умерла в 1993 году, в 101 год.
+more:
+  pt: >-
+    O símbolo também foi procurado oficialmente: a Câmara de Lisboa abriu um concurso, e ganhou
+    outro escultor, Francisco dos Santos. Mas o país não escolheu a obra dele. A cabeça de Simões de
+    Almeida com barrete frígio era mais simples e mais fácil de reconhecer, foi copiada para as
+    câmaras municipais e gravada em medalhas. Assim, o símbolo não foi a obra vencedora do concurso,
+    mas a rapariga da camisaria.
+
+
+    Em 1990, quase com cem anos, Ilda deu uma entrevista à RTP e contou como, menina de camisaria,
+    ia posar para o escultor.
+
+
+    Viveu a Primeira República, a ditadura de Salazar e a revolução de 1974, e em todas elas o seu
+    rosto continuou a ser o símbolo da República.
+  en: >-
+    There was an official search for a symbol too: Lisbon’s city council held a contest, and another
+    sculptor, Francisco dos Santos, won. But the country didn’t choose his work. Simões de Almeida’s
+    head in a Phrygian cap was simpler and easier to recognize, so it was copied for town halls and
+    stamped on medals. In the end, the symbol wasn’t the contest winner but the girl from the
+    workshop.
+
+
+    In 1990, at almost a hundred, Ilda gave an interview to the broadcaster RTP and told how, as a
+    young seamstress, she went to pose for the sculptor.
+
+
+    She lived through the First Republic, Salazar’s dictatorship, and the 1974 revolution, and under
+    all of them her face remained the symbol of the Republic.
+  ru: >-
+    Символ искали и официально: мэрия Лиссабона объявила конкурс, и победил другой скульптор,
+    Франсишку душ Сантуш. Но страна выбрала не его работу. Голова Симойнша де Алмейды во фригийском
+    колпаке оказалась проще и узнаваемее, её копировали для мэрий и чеканили на медалях. Так
+    символом стала не победительница конкурса, а девушка из мастерской.
+
+
+    В 1990 году, почти в сто лет, Илда дала интервью телевидению RTP и рассказала, как девочкой из
+    мастерской ходила позировать скульптору.
+
+
+    Она пережила Первую республику, диктатуру Салазара и революцию 1974 года, и при всех них её лицо
+    оставалось символом Республики.
+myth_none: "История о модели скульптора: честного утверждения для игры из неё не получается
+  (замечание владельца 19.11)."
+sources:
+  - title: "RFM: A mulher que deu rosto à República Portuguesa existiu mesmo"
+    url: https://rfm.pt/atualidade/23908/a-mulher-que-deu-rosto-a-republica-portuguesa-existiu-mesmo-era-uma-jovem-costureira-alentejana
+    type: press
+    accessed: 2026-11-20
+  - title: "RFM: A figura da República Portuguesa foi inspirada numa mulher alentejana"
+    url: https://rfm.pt/atualidade/11378/a-figura-da-republica-portuguesa-foi-inspirada-numa-mulher-alentejana
+    type: press
+    accessed: 2026-11-20
+  - title: "Wikipedia: José Simões de Almeida"
+    url: https://en.wikipedia.org/wiki/Jos%C3%A9_Sim%C3%B5es_de_Almeida
+    type: reference
+    accessed: 2026-11-20
+image:
+  file: busto-republica-ilda-puga.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: busto de uma jovem com barrete frígio, sobre um pedestal."
+    en: "Blue-and-white azulejo panel: a bust of a young woman in a Phrygian cap, on a pedestal."
+    ru: "Панно из сине-белых азулежу: бюст молодой женщины во фригийском колпаке на постаменте."
+  caption:
+    pt: Busto da República. Ilustração em estilo azulejo, criada por IA.
+    en: A bust of the Republic. Azulejo-style illustration, created by AI.
+    ru: Бюст Республики. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: busto-republica
+published: 2026-11-20
+placeholder: false
+ru_ready: true

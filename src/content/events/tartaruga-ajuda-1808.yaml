@@ -1,0 +1,178 @@
+id: tartaruga-ajuda-1808
+slug:
+  pt: a-tartaruga-levada-para-paris
+  en: the-tortoise-taken-to-paris
+  ru: cherepakha-kotoruyu-uvezli-v-parizh
+title:
+  pt: A tartaruga levada para Paris
+  en: The Tortoise Taken to Paris
+  ru: Черепаха, которую увезли в Париж
+epoch: pombal-e-terramoto
+level: story
+year: 1808
+place:
+  name:
+    pt: Lisboa, Ajuda
+    en: Lisbon, Ajuda
+    ru: Лиссабон, Ажуда
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7062
+  lon: -9.2009
+bridge:
+  name: Jardim Botânico da Ajuda
+  title:
+    pt: Jardim Botânico da Ajuda
+    en: Ajuda Botanical Garden
+    ru: Ботанический сад Ажуда
+  address: Calçada da Ajuda, Lisboa
+  lat: 38.7062026
+  lon: -9.200909
+  maps_url: https://www.google.com/maps/place/Jardim+Bot%C3%A2nico+da+Ajuda/@38.7062068,-9.2034839,17z/data=!3m1!4b1!4m6!3m5!1s0x0:0x0!8m2!3d38.7062026!4d-9.200909
+  url: https://jardimbotanicoajuda.ulisboa.pt/
+  note:
+    pt: O jardim real ao qual pertencia o museu de história natural de onde saiu a tartaruga.
+    en: The royal garden whose natural history museum the tortoise was taken from.
+    ru: Королевский сад, при котором был музей естественной истории, откуда увезли черепаху.
+threads:
+  - natureza
+importance: 1
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A mais famosa tartaruga-gigante foi roubada de Lisboa.
+  en: The most famous giant tortoise was stolen from Lisbon.
+  ru: Самая известная гигантская черепаха была украдена из Лиссабона.
+seo:
+  title:
+    pt: A tartaruga da Ajuda, 1808 | O Elefante Fugiu
+    en: The Tortoise from Ajuda, 1808 | O Elefante Fugiu
+    ru: Черепаха из Ажуды, 1808 | O Elefante Fugiu
+story:
+  pt: >-
+    No tempo de Pombal, junto ao palácio da Ajuda, criou-se o jardim botânico real e, com ele, um
+    museu de história natural. De todo o império chegavam plantas, minerais, animais embalsamados e
+    conchas.
+
+    Em 1807, os franceses ocuparam Lisboa. Um ano depois, veio de Paris o naturalista Geoffroy
+    Saint-Hilaire e escolheu o melhor da Ajuda para o seu museu. Entre os troféus estava uma
+    tartaruga-gigante.
+
+    Em Paris descreveu-se a partir dela uma espécie nova de tartaruga-gigante, e este exemplar
+    tornou-se o seu espécime-tipo. A sua origem ficou esquecida durante quase duzentos anos, e só em
+    2012 os investigadores seguiram o seu rasto até à Ajuda.
+  en: >-
+    Under Pombal, a royal botanical garden was laid out next to the Ajuda palace, with a natural
+    history museum attached. Plants, minerals, stuffed animals, and shells arrived from all over the
+    empire.
+
+    In 1807, the French occupied Lisbon. A year later, the naturalist Geoffroy Saint-Hilaire came
+    from Paris and picked the best of Ajuda for his own museum. Among the trophies was a giant
+    tortoise.
+
+    In Paris a new species of giant tortoise was described from it, and this specimen became the
+    type specimen of that species. Where it came from was forgotten for almost two hundred years,
+    and only in 2012 did researchers trace it back to Ajuda.
+  ru: >-
+    При Помбале у дворца Ажуда устроили королевский ботанический сад и при нём музей естественной
+    истории. Туда со всей империи везли растения, минералы, чучела и раковины.
+
+    В 1807 году французы заняли Лиссабон. Через год из Парижа приехал натуралист Жоффруа Сент-Илер и
+    отобрал из Ажуды лучшее для своего музея. Среди трофеев была гигантская черепаха.
+
+    В Париже по ней описали новый вид гигантской черепахи, и этот экземпляр стал его типовым
+    образцом. Откуда она, забыли почти на двести лет, и только в 2012 году исследователи проследили
+    её путь до Ажуды.
+more:
+  pt: >-
+    A tartaruga não foi a maior perda. O principal troféu de Geoffroy foram o herbário e os
+    manuscritos de Alexandre Rodrigues Ferreira. Este naturalista percorreu a Amazónia durante nove
+    anos, reuniu milhares de plantas e animais e descreveu-os, mas não chegou a publicar. As suas
+    descobertas foram para Paris, e muitas espécies que ele encontrou primeiro foram, ao que se diz,
+    descritas por cientistas franceses com os nomes deles.
+
+
+    Os franceses diziam que só levavam duplicados e que em troca deixavam minerais e insetos. Em
+    Lisboa, achava-se que tinham levado o melhor. A tartaruga ficou em Paris.
+
+
+    O jardim da Ajuda continua aberto: é o jardim botânico mais antigo de Portugal.
+  en: >-
+    The tortoise wasn’t the biggest loss. Geoffroy’s main prize was the herbarium and manuscripts of
+    Alexandre Rodrigues Ferreira. This naturalist spent nine years traveling the Amazon, collected
+    thousands of plants and animals, and described them, but never got to publish. His finds went to
+    Paris, and many species he discovered first were, as is generally believed, described by French
+    scientists under their own names.
+
+
+    The French said they took only duplicates and left minerals and insects in exchange. In Lisbon,
+    people believed the best had been taken. The tortoise stayed in Paris.
+
+
+    The Ajuda garden is still open: it’s the oldest botanical garden in Portugal.
+  ru: >-
+    Черепаха была не самой большой потерей. Главным трофеем Жоффруа стали гербарий и рукописи
+    Алешандри Родригеша Феррейры. Этот натуралист девять лет ходил по Амазонии, собрал тысячи
+    растений и животных и описал их, но издать не успел. Его находки уехали в Париж, и многие виды,
+    которые он открыл первым, как считается, описали французские учёные под своими именами.
+
+
+    Французы говорили, что брали только дубликаты, а взамен оставили минералы и насекомых. В
+    Лиссабоне считали, что вывезли лучшее. Черепаха так и осталась в Париже.
+
+
+    Сад в Ажуде работает до сих пор, это старейший ботанический сад Португалии.
+myth:
+  verdict: myth
+  statement:
+    pt: As tropas de Napoleão só levaram ouro de Portugal
+    en: Napoleon’s troops took only gold from Portugal
+    ru: Наполеоновские войска вывозили из Португалии только золото
+  answer:
+    pt: Do museu real da Ajuda levaram para Paris coleções de naturalistas, entre elas uma
+      tartaruga-gigante.
+    en: From the royal museum at Ajuda, they took naturalists’ collections to Paris, including a giant
+      tortoise.
+    ru: Из королевского музея в Ажуде увезли в Париж коллекции натуралистов, среди них гигантскую
+      черепаху.
+sources:
+  - title: "Ceríaco, Bour: Schweigger’s (1812) chelonian types from the Royal Cabinet of Natural History
+      of Ajuda, Zootaxa 3395 (2012)"
+    url: https://mapress.com/zt/article/view/zootaxa.3395.1.2
+    type: academic
+    accessed: 2026-11-20
+  - title: "Wikipedia: Alexandre Rodrigues Ferreira"
+    url: https://en.wikipedia.org/wiki/Alexandre_Rodrigues_Ferreira
+    type: reference
+    accessed: 2026-11-20
+  - title: "Visit Lisboa: O Jardim Botânico da Ajuda, o mais antigo de todos"
+    url: https://www.visitlisboa.com/pt-pt/artigos/o-jardim-botanico-da-ajuda-o-mais-antigo-de-todos
+    type: institutional
+    accessed: 2026-11-20
+  - title: "Le Petit Journal Lisbonne: Le jardin botanique de Ajuda"
+    url: https://lepetitjournal.com/lisbonne/a-voir-a-faire/jardin-le-jardin-botanique-de-ajuda-un-des-jardins-plus-emblematiques-de-la-capitale-2eme-partie
+    type: press
+    accessed: 2026-11-20
+image:
+  file: tartaruga-ajuda-1808.webp
+  alt:
+    pt: "Painel de azulejos azuis e brancos: uma tartaruga-gigante de pescoço erguido sobre um plinto
+      com uma placa."
+    en: "Blue-and-white azulejo panel: a giant tortoise with its neck raised, standing on a plinth with
+      a nameplate."
+    ru: "Панно из сине-белых азулежу: гигантская черепаха с поднятой шеей на подставке с табличкой."
+  caption:
+    pt: Uma tartaruga-gigante de museu. Ilustração em estilo azulejo, criada por IA.
+    en: A museum giant tortoise. Azulejo-style illustration, created by AI.
+    ru: Гигантская черепаха из музея. Иллюстрация в стиле азулежу, создана ИИ.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+status: ready
+cabinet: tartaruga-ajuda
+published: 2026-11-20
+placeholder: false
+ru_ready: true
