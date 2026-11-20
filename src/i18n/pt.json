@@ -593,7 +593,7 @@
     "nav": "Palavras do glossário"
   },
   "cabinet": {
-    "lead": "As raridades estão escondidas no texto das histórias.",
+    "lead": "As raridades estão escondidas no texto das histórias: procure a palavra sublinhada com traços da cor da época. Há pistas nas prateleiras.",
     "found": "Encontradas: {n} de {m}",
     "complete": "Gabinete completo.",
     "shelf_count": "{n} de {m}",

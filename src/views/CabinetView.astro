@@ -56,7 +56,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'cabinet
     <div class="cabinet__head">
       <h1>{title}</h1>
       <p data-found-line>{fill(strings.found!, { n: 0, m: all.length })}</p>
-      <button class="cabinet__tin" type="button" data-tin aria-label={fill(strings.tin_label!, { n: 0 })} aria-describedby="cabinet-tin-tip">
+      <button class="cabinet__tin" id="banka" type="button" data-tin aria-label={fill(strings.tin_label!, { n: 0 })} aria-describedby="cabinet-tin-tip">
         <span data-tin-art set:html={tinHtml(0)} />
         <span class="cabinet__tin-count" data-tin-count>{fill(strings.tin_count!, { n: 0 })}</span>
       </button>
@@ -80,7 +80,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'cabinet
               </h2>
               <div class="shelf__objs">
                 {items.map(({ item, age }) => (
-                  <button class="cab-obj" type="button" data-item={item.id} data-min-age={String(age.minAge)} data-sensitive={String(age.sensitive)} aria-label={strings.unknown_label} aria-haspopup="dialog">
+                  <button class="cab-obj" id={item.id} type="button" data-item={item.id} data-min-age={String(age.minAge)} data-sensitive={String(age.sensitive)} aria-label={strings.unknown_label} aria-haspopup="dialog">
                     {data[item.id]!.image ? <img src={data[item.id]!.image!} alt="" loading="lazy" /> : <svg class="cab-obj__stub" viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="12" width="40" height="40" /><path d="M12 32h40M32 12v40" /><circle cx="32" cy="32" r="8" /></svg>}
                   </button>
                 ))}

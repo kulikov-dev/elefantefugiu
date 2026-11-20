@@ -2,26 +2,59 @@
    Loaded by src/scripts/cabinet.ts. Colours, sizes and fonts come from tokens.css. */
 
 /* ---- The hidden word in the text of a story ---- */
-/* Plain text until the cabinet is open (or previewed): the head script sets html[data-cabinet]. A dashed underline in the colour of the epoch (the glossary has a grey dotted one, so the two
-   differ); a light wash of the epoch colour under the word on hover. Not a link (no accent colour, no arrow). */
+/* Plain text until the cabinet is open (or previewed): the head script sets html[data-cabinet]. The underline is a 2 px line of dashes (6 px, gap 3 px) in the colour of the epoch, drawn as a
+   background (a dashed text-decoration gives small dots); the glossary has a grey dotted one, so the two differ. A light wash of the epoch colour under the word on hover.
+   Once, when the word first comes into the screen, a soft glint of the epoch colour passes over it (src/scripts/cabinet.ts adds .cw--glint). Not a link. */
 html[data-cabinet] .cw,
 button.cw {
-  text-decoration: underline dashed var(--epoch-accent);
-  text-decoration-thickness: var(--cab-underline-thickness);
-  text-underline-offset: var(--cab-underline-offset);
+  padding-block-end: var(--cab-underline-offset);
+  background-image: repeating-linear-gradient(to right, var(--epoch-accent) 0 var(--cab-dash), transparent var(--cab-dash) calc(var(--cab-dash) + var(--cab-dash-gap)));
+  background-position: 0 100%;
+  background-size: 100% var(--cab-underline-thickness);
+  background-repeat: no-repeat;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 button.cw {
   all: unset;
   cursor: pointer;
-  text-decoration: underline dashed var(--epoch-accent);
-  text-decoration-thickness: var(--cab-underline-thickness);
-  text-underline-offset: var(--cab-underline-offset);
+  padding-block-end: var(--cab-underline-offset);
+  background-image: repeating-linear-gradient(to right, var(--epoch-accent) 0 var(--cab-dash), transparent var(--cab-dash) calc(var(--cab-dash) + var(--cab-dash-gap)));
+  background-position: 0 100%;
+  background-size: 100% var(--cab-underline-thickness);
+  background-repeat: no-repeat;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
   border-radius: var(--radius-sm);
 }
 
 button.cw:hover {
-  background: color-mix(in srgb, var(--epoch-accent) var(--cab-word-wash), transparent);
+  background-color: color-mix(in srgb, var(--epoch-accent) var(--cab-word-wash), transparent);
+}
+
+button.cw.cw--glint {
+  background-image:
+    repeating-linear-gradient(to right, var(--epoch-accent) 0 var(--cab-dash), transparent var(--cab-dash) calc(var(--cab-dash) + var(--cab-dash-gap))),
+    linear-gradient(to right, transparent, color-mix(in srgb, var(--epoch-accent) var(--cab-word-glint), transparent) 50%, transparent);
+  background-position: 0 100%, -60% 0;
+  background-size: 100% var(--cab-underline-thickness), 60% 100%;
+  animation: cab-glint 1.2s ease-in-out 1 both;
+}
+
+@keyframes cab-glint {
+  from {
+    background-position: 0 100%, -60% 0;
+  }
+  to {
+    background-position: 0 100%, 160% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button.cw.cw--glint {
+    animation: none;
+  }
 }
 
 button.cw:focus-visible {
@@ -432,6 +465,29 @@ button.cw:focus:not(:focus-visible),
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .cab-obj:not([data-found]) img {
     filter: var(--cab-sil-dark);
+  }
+}
+
+/* Arrived by a link (#id): the tile is in a soft ring of the colour of its epoch and the page is scrolled to it; the card does not open by itself. */
+.cab-obj,
+.cabinet__tin {
+  scroll-margin-block: var(--cab-scroll-margin);
+}
+
+.cab-obj:target {
+  box-shadow: 0 0 0 var(--cab-ring-width) color-mix(in srgb, var(--ep) var(--cab-ring-strength), transparent);
+  animation: cab-ring 1.6s ease-out 1;
+}
+
+@keyframes cab-ring {
+  from {
+    box-shadow: 0 0 0 var(--cab-ring-width-start) color-mix(in srgb, var(--ep) var(--cab-ring-strength), transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cab-obj:target {
+    animation: none;
   }
 }
 

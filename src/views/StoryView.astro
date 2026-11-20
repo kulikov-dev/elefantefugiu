@@ -346,7 +346,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       ))
     }
 
-    {isCabinet && <p class="cab-back" data-cab-back>{site.cabinetOpen && <a href={pagePath(lang, 'cabinet')}>{t(lang, 'cabinet.back')}</a>}</p>}
+    {isCabinet && <p class="cab-back" data-cab-back data-cab-item={event.cabinet}>{site.cabinetOpen && <a href={`${pagePath(lang, 'cabinet')}#${event.cabinet}`}>{t(lang, 'cabinet.back')}</a>}</p>}
 
     {/* One small line that leads to the game "Myth or fact" (the link in the footer stays). */}
     {hasMyths && <p class="story-myths"><a href={pagePath(lang, 'myths')}>{t(lang, 'ui.story_myths')}</a></p>}

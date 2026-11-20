@@ -51,8 +51,8 @@ for (const file of pages) {
     if (text.includes('data-story-end')) errors.push(`${name}: the story of the cabinet has a read mark`);
     if (!text.includes('cab-ribbon')) errors.push(`${name}: no ribbon "a rarity from the cabinet"`);
     if (wordIds.length > 0) errors.push(`${name}: the story of the cabinet hides a word`);
-    if (open && !/data-cab-back><a href=/.test(text)) errors.push(`${name}: no way back to the cabinet`);
-    if (!open && /data-cab-back><a/.test(text)) errors.push(`${name}: a link to the closed cabinet`);
+    if (open && !/data-cab-back[^>]*><a href=/.test(text)) errors.push(`${name}: no way back to the cabinet`);
+    if (!open && /data-cab-back[^>]*><a/.test(text)) errors.push(`${name}: a link to the closed cabinet`);
   }
 
   if (open) {

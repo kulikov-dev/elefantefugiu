@@ -213,6 +213,23 @@ function thumb(item: ItemData | undefined): HTMLElement | undefined {
 async function wireWords(spans: HTMLElement[]): Promise<void> {
   const data = await payload();
   if (!data) return;
+  // The glint: once, when a word that is not found yet first comes into the screen (none with reduced motion).
+  const glint =
+    matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)
+      ? undefined
+      : new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const word = entry.target as HTMLElement;
+              glint?.unobserve(word);
+              if (store.items.includes(word.dataset.cw ?? '')) continue;
+              word.classList.add('cw--glint');
+              word.addEventListener('animationend', () => word.classList.remove('cw--glint'), { once: true });
+            }
+          },
+          { threshold: 0.6 },
+        );
   for (const span of spans) {
     const id = span.dataset.cw ?? '';
     const item = data.items[id];
@@ -225,6 +242,7 @@ async function wireWords(spans: HTMLElement[]): Promise<void> {
     button.setAttribute('aria-haspopup', 'dialog');
     button.textContent = span.textContent;
     span.replaceWith(button);
+    glint?.observe(button);
     button.addEventListener('click', (event) => {
       event.preventDefault();
       const already = store.items.includes(id);
@@ -238,7 +256,7 @@ async function wireWords(spans: HTMLElement[]): Promise<void> {
         title: already ? item.name : fill(data.strings.found_title ?? '{name}', { name: item.name }),
         thumb: thumb(item),
         text: item.summary,
-        actions: [{ label: data.strings.open_story ?? '', href: item.href }, { label: data.strings.to_cabinet ?? '', href: data.href, ghost: true }],
+        actions: [{ label: data.strings.open_story ?? '', href: item.href }, { label: data.strings.to_cabinet ?? '', href: `${data.href}#${id}`, ghost: true }],
       });
     });
   }
@@ -319,6 +337,13 @@ function wirePage(root: HTMLElement, data: Payload): void {
   };
   refreshPage = refresh;
   refresh();
+  // Arrived by a link with #id (a rarity or the tin): scrolled there once the shelves are drawn; the card does not open by itself (:target draws the ring).
+  const target = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+  if (target && !target.hidden && root.contains(target)) requestAnimationFrame(() => {
+      target.scrollIntoView({ block: 'center' });
+      // The browser focuses the target of a link and draws its blue ring; the ring of the epoch (:target) is the mark here.
+      if (document.activeElement === target) target.blur();
+    });
 
   for (const tile of tiles) {
     tile.addEventListener('click', () => {
@@ -408,7 +433,7 @@ function mountSardine(n: number, start: boolean, into: HTMLElement, data: Payloa
       const spot = document.createElement('span');
       spot.className = 'cab-sardine cab-sardine--gone';
       strip.replaceChildren(spot);
-      openPop(spot, { title: fill(s.sardine_title ?? '', { n: caught }), actions: [{ label: s.to_cabinet ?? '', href: data.href }] });
+      openPop(spot, { title: fill(s.sardine_title ?? '', { n: caught }), actions: [{ label: s.to_cabinet ?? '', href: `${data.href}#banka` }] });
     };
     // After the click has passed the document (a press outside closes a card, and this one is not outside).
     if (reduced) return void setTimeout(show, 0);
@@ -427,7 +452,7 @@ async function wirePreview(): Promise<void> {
   const back = document.querySelector<HTMLElement>('[data-cab-back]');
   if (back && !back.querySelector('a')) {
     const a = document.createElement('a');
-    a.href = data.href;
+    a.href = `${data.href}#${back.dataset.cabItem ?? 'banka'}`;
     a.textContent = data.strings.back ?? '';
     back.append(a);
   }
