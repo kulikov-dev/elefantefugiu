@@ -8,7 +8,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
-import { isLive } from '../src/lib/publication.mjs';
+import { isListed } from '../src/lib/publication.mjs';
 import { parseFeed } from './lib/xml.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -21,7 +21,7 @@ const errors = [];
 const stories = readdirSync(eventsDir)
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => parse(readFileSync(join(eventsDir, f), 'utf8'), { schema: 'core' }))
-  .filter((s) => isLive(s) && s.placeholder !== true);
+  .filter((s) => isListed(s) && s.placeholder !== true);
 
 let total = 0;
 for (const lang of ['pt', 'en', 'ru']) {

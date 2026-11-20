@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сквозь века: доводка, макет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Макет, не код сайта: значения взяты из src/styles/tokens.css. Сайт возьмёт их из токенов. */
+.light{
+  --bg:#f6f1e7; --surface:#fbf8f1; --text:#1f1b16; --muted:#5b5348; --border:#ddd3c2; --border-strong:#80766a;
+  --accent:#9a3f22; --on-accent:#fff; --overlay:rgb(251 248 241 / .96);
+  --land:#ece4d3; --sea:#cfdde0; --road:#fbf8f1; --park:#dfe5cd;
+  --e1:#7a2e1c; --e2:#0f5c73; --e3:#6e1f3a; --e4:#a9482a; --e5:#2e4d66;
+}
+.dark{
+  --bg:#14110e; --surface:#1d1914; --text:#f1e9da; --muted:#b9ad9a; --border:#3a332b; --border-strong:#8f8474;
+  --accent:#e58a68; --on-accent:#14110e; --overlay:rgb(29 25 20 / .96);
+  --land:#262019; --sea:#182126; --road:#33291f; --park:#222a1d;
+  --e1:#e8957a; --e2:#5fb3c9; --e3:#e59ab4; --e4:#e58a68; --e5:#9dbad3;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:#888;font-family:"Source Serif 4",Georgia,serif}
+.row{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;margin-bottom:32px}
+.cap{font:600 14px "Oswald",sans-serif;letter-spacing:.04em;color:#fff;margin:0 0 6px}
+.frame{position:relative;overflow:hidden;background:var(--bg);color:var(--text);font-size:16px;line-height:1.4}
+.phone{width:390px}
+.wide{width:1280px}
+h1,.year,.title{font-family:"Playfair Display",Georgia,serif}
+
+.head{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border);font:600 15px "Oswald",sans-serif;letter-spacing:.03em}
+.wide .head{padding:12px 32px}
+.bar{display:flex;gap:8px;padding:12px 16px 8px;flex-wrap:wrap}
+.wide .bar{padding:12px 32px 8px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface);color:var(--text);font:500 15px "Oswald",sans-serif;letter-spacing:.02em}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.primary,.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+/* п.1: шкала без рисок: линия из отрезков с промежутками, бегунок, одна подпись */
+.scale{position:relative;margin:0 16px;height:44px}
+.wide .scale{margin:0 32px}
+.scale .segs{position:absolute;left:0;right:0;top:28px;height:4px;display:flex;gap:3px}
+.scale .seg{border-radius:2px;background:var(--c)}
+.scale .run{position:absolute;top:22px;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px var(--bg)}
+.scale .lab{position:absolute;top:0;transform:translateX(-50%);font:600 13px "Oswald",sans-serif;letter-spacing:.03em;color:var(--c);white-space:nowrap}
+
+.map{position:relative;overflow:hidden;background:var(--land);margin-top:6px}
+.phone .map{height:600px}
+.wide .map{height:560px}
+.map svg.bg{position:absolute;inset:0;width:100%;height:100%}
+/* п.6: кнопки карты в цветах темы */
+.zoom{position:absolute;left:12px;top:12px;display:flex;flex-direction:column;border:1px solid var(--border-strong);border-radius:6px;background:var(--surface);color:var(--text);overflow:hidden}
+.zoom span{width:36px;height:36px;display:grid;place-items:center;font:600 20px sans-serif}
+.zoom span+span{border-top:1px solid var(--border)}
+.locate{position:absolute;left:12px;top:92px;width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--border-strong);border-radius:6px;background:var(--surface);color:var(--text)}
+.locate svg{width:20px;height:20px}
+.attr{position:absolute;right:0;top:0;font:11px sans-serif;background:var(--overlay);padding:2px 6px;color:var(--muted)}
+
+/* п.2: форма точки как на карте (круг с обводкой); прошлые точки эпохи меньше, цвет эпохи, прозрачность .6 */
+.dot{position:absolute;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:2px solid var(--c);background:var(--surface);box-shadow:var(--sh)}
+.dot.past{width:12px;height:12px;margin:-6px 0 0 -6px;opacity:.6;box-shadow:none}
+.dot.past.read{background:var(--c)}
+.dot.cur{width:27px;height:27px;margin:-13.5px 0 0 -13.5px;border-width:3px}
+.dot.cur::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--c);opacity:.45}
+
+.tcard{position:absolute;background:var(--overlay);border:1px solid var(--border);box-shadow:0 -2px 12px rgb(0 0 0 / .18);padding:14px 8px 4px 22px;border-left:0}
+.tcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.tcard .prog{position:absolute;left:6px;right:0;top:0;height:3px;background:var(--border)}
+.tcard .prog i{display:block;height:100%;width:var(--p);background:var(--c)}
+.phone .tcard{left:0;right:0;bottom:0;border-width:1px 0 0;border-radius:12px 12px 0 0}
+.wide .tcard{left:16px;bottom:16px;width:420px;border-radius:12px}
+.tcard .top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding-right:8px}
+.year{font-size:40px;line-height:1;font-weight:700;color:var(--c)}
+.era{font:500 12px "Oswald",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);text-align:right}
+.title{font-size:20px;line-height:1.2;font-weight:700;margin:8px 0 4px;padding-right:8px}
+.hook{margin:0;font-size:16px;line-height:1.35;padding-right:8px}
+/* п.5: одна строка; ⏮ ⏸ ⏭ × без рамок, зона 44 px; «Читать» единственная заметная кнопка */
+.acts{display:flex;align-items:center;margin-top:6px}
+.acts .read-btn{margin-right:10px}
+.count{font:500 13px "Oswald",sans-serif;color:var(--muted);margin-right:auto}
+.ib{width:44px;height:44px;display:grid;place-items:center;color:var(--text);background:none;border:0;padding:0}
+.ib svg{width:22px;height:22px}
+.mw{margin:8px 8px 0 0;font-size:13px;line-height:1.35;color:var(--muted)}
+.mw b{color:var(--text);font-weight:600}
+
+/* п.4: плашка смены эпохи на месте карточки: название шрифтом заголовка, годы ниже, полоса цвета эпохи слева */
+.plate{position:absolute;background:var(--overlay);border:1px solid var(--border);box-shadow:0 -2px 12px rgb(0 0 0 / .18);padding:24px 20px 24px 26px;border-left:0}
+.plate::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c)}
+.phone .plate{left:0;right:0;bottom:0;border-width:1px 0 0;border-radius:12px 12px 0 0}
+.wide .plate{left:16px;bottom:16px;width:420px;border-radius:12px}
+.plate .name{font:700 26px/1.2 "Playfair Display",serif;color:var(--text);margin:0}
+.plate .yrs{font:500 15px "Oswald",sans-serif;letter-spacing:.04em;color:var(--muted);margin:6px 0 0}
+
+/* п.7: полоса эпох: отступ сверху, кружки целые */
+.estrip{display:flex;overflow:hidden;padding:20px 16px 14px}
+.wide .estrip{padding:22px 32px 16px}
+.estrip .e{flex:1 0 110px;position:relative;padding-top:14px;font:500 13px "Oswald",sans-serif;color:var(--text);border-top:2px solid var(--border-strong)}
+.estrip .e::before{content:"";position:absolute;top:-8px;left:0;width:14px;height:14px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px var(--bg)}
+.estrip .e small{display:block;color:var(--muted);font:400 12px "Source Serif 4",serif}
+.note{margin:4px 0 0;font-size:12px;color:#ddd;max-width:1280px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></symbol>
+<symbol id="pause" viewBox="0 0 24 24"><path d="M7 4.5h3.5v15H7zM13.5 4.5H17v15h-3.5z" fill="currentColor"/></symbol>
+<symbol id="prev" viewBox="0 0 24 24"><path d="M6 5v14M19 5v14l-10-7z" fill="currentColor" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="next" viewBox="0 0 24 24"><path d="M18 5v14M5 5v14l10-7z" fill="currentColor" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+<symbol id="near" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2" fill="currentColor"/><circle cx="12" cy="12" r="7.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v3.5M12 18.5V22M2 12h3.5M18.5 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</defs></svg>
+<div class="row" id="out"></div>
+<p class="note">Макет, не код. Данные: 17 историй Лиссабона, карта условная. На экране эпоха «Уния, Реставрация, бразильское золото»: на карте только её точки (прошлые эпохи убраны при смене).</p>
+<script>
+const S=[[1,1,'Галереи, которые откачивают два раза в год','Затопленные римские галереи.',''],[1,1,'Рыбный соус под банком','Римляне варили рыбный соус.',''],[1502,2,'Карта за 12 дукатов','Он приехал торговать лошадьми. Увёз целый мир.','1504 Во Флоренции открывают «Давида».'],[1515,2,'Носорог и слон','Король стравил носорога со слоном. Слон убежал.',''],[1640,3,'Утро 1 декабря','Шестьдесят лет испанских королей закончились за одно утро.','1642 Рембрандт заканчивает «Ночной дозор».'],[1725,3,'Лакей из плитки','Самому вежливому лакею Лиссабона триста лет.',''],[1742,3,'Часовня, которую привезли из Рима','Король заказал часовню в Риме и привёз её по частям.',''],[1748,3,'Как испанцы поили Лиссабон','Столицу веками поили галисийцы с бочонками на плече.','1750 Умирает Иоганн Себастьян Бах.'],[1755,4,'Лиссабонское землетрясение','В день землетрясения король уже уехал в Белен.',''],[1760,4,'Улицы ремёсел','Золотых дел мастера на одной улице, шорники на другой.',''],[1782,4,'Дом снега','Стол Пессоа здесь зарезервирован до сих пор.',''],[1807,4,'Двор уплыл в Бразилию','Принц-регент увёз весь двор за океан.',''],[1837,5,'Пирожные монахов','Монахов отправили по домам.',''],[1846,5,'Певица первого звукового фильма','Документов о ней почти нет.',''],[1890,5,'Гимн против Англии','Монархия запрещала песню.',''],[1902,5,'Лифт, который построил не Эйфель','Спроектировал его другой инженер.',''],[1910,5,'Пирог, который пережил короля','Короля свергли, а bolo-rei не переименовали.','']];
+const ERA=['','Лузитания и Рим','Авис и открытия','Уния, Реставрация, бразильское золото','Помбал и землетрясение','Монархия и республика'];
+const YRS=['','до 409','1385–1580','1580–1755','1755–1820','1820–1926'];
+const N=S.length, ERAS=[1,2,3,4,5];
+const XY=[[.5,.3],[.52,.33],[.2,.42],[.17,.46],[.47,.36],[.62,.2],[.44,.31],[.58,.38],[.49,.35],[.45,.4],[.55,.34],[.14,.4],[.15,.44],[.6,.28],[.46,.33],[.48,.38],[.51,.37]];
+const READ=new Set([0,2,5,8,12]);
+const I=id=>`<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#${id}"/></svg>`;
+const head=()=>`<div class="head"><span>O Elefante Fugiu</span><span>Карта</span></div>`;
+const bar=on=>`<div class="bar"><button class="btn" aria-pressed="${on}">${I('play')} Сквозь века</button></div>`;
+function scale(cur){
+  const e=S[cur][1];
+  const segs=ERAS.map(k=>`<div class="seg" style="flex:${S.filter(s=>s[1]===k).length};--c:var(--e${k})"></div>`).join('');
+  const lx=(cur+.5)/N*100;
+  return `<div class="scale" style="--c:var(--e${e})"><span class="lab" style="left:min(max(${lx}%,8%),92%)">${S[cur][0]}</span><div class="segs">${segs}</div><div class="run" style="left:${lx}%"></div></div>`;
+}
+function bg(){return `<svg class="bg" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 330 C80 300 140 320 210 270 C280 220 330 200 400 120 L400 600 L0 600Z" fill="var(--sea)"/><path d="M30 40 L170 140 L260 90 L380 20" fill="none" stroke="var(--road)" stroke-width="7" stroke-linecap="round"/><path d="M60 230 L190 190 L330 175" fill="none" stroke="var(--road)" stroke-width="5" stroke-linecap="round"/><path d="M120 110 L160 260" fill="none" stroke="var(--road)" stroke-width="4" stroke-linecap="round"/><rect x="250" y="110" width="70" height="40" rx="12" fill="var(--park)"/></svg>`}
+function dots(cur,w,h){
+  const e=S[cur][1];
+  return S.map((s,i)=>{
+    if(s[1]!==e||i>cur) return '';
+    const c='dot'+(i===cur?' cur':' past'+(READ.has(i)?' read':''));
+    return `<i class="${c}" style="left:${XY[i][0]*w}px;top:${XY[i][1]*h}px;--c:var(--e${s[1]})"></i>`;
+  }).join('');
+}
+function card(cur){
+  const s=S[cur], p=((cur+1)/N*100).toFixed(1)+'%';
+  const mw=s[4]?`<p class="mw"><b>А в это время:</b> ${s[4]}</p>`:'';
+  return `<div class="tcard" style="--c:var(--e${s[1]});--p:${p}"><div class="prog"><i></i></div>
+  <div class="top"><span class="year">${s[0]}</span><span class="era">${ERA[s[1]]}</span></div>
+  <h2 class="title">${s[2]}</h2><p class="hook">${s[3]}</p>${mw}
+  <div class="acts"><a class="btn primary read-btn">Читать →</a><span class="count">${cur+1} / ${N}</span>
+  <button class="ib" aria-label="Назад">${I('prev')}</button><button class="ib" aria-label="Пауза">${I('pause')}</button><button class="ib" aria-label="Дальше">${I('next')}</button><button class="ib" aria-label="Выйти">${I('close')}</button></div></div>`;
+}
+const plate=e=>`<div class="plate" style="--c:var(--e${e})"><p class="name">${ERA[e]}</p><p class="yrs">${YRS[e]}</p></div>`;
+const strip=()=>`<div class="estrip">${ERAS.map(k=>`<div class="e" style="--c:var(--e${k})">${ERA[k].split(',')[0]}<small>${YRS[k]}</small></div>`).join('')}</div>`;
+const map=inner=>`<div class="map">${bg()}<div class="zoom"><span>+</span><span>−</span></div><div class="locate">${I('near')}</div><div class="attr">© OpenStreetMap © CARTO</div>${inner}</div>`;
+function add(id,theme,kind,label,cur,mode){
+  const w=kind==='phone'?390:1280, mh=kind==='phone'?600:560, h=mh*(kind==='phone'?.6:.62);
+  let html;
+  if(mode==='mid') html=bar(true)+scale(cur)+map(dots(cur,w,h)+card(cur));
+  else if(mode==='change') html=bar(true)+scale(cur)+map(plate(S[cur][1]));
+  else html=bar(false)+map('')+strip();
+  const sh=theme==='dark'?'0 1px 3px rgb(0 0 0 / .6)':'0 1px 3px rgb(0 0 0 / .3)';
+  document.getElementById('out').insertAdjacentHTML('beforeend',`<div><p class="cap">${label}</p><div id="${id}" class="frame ${kind} ${theme}" style="--sh:${sh}">${head()}${html}</div></div>`);
+}
+add('mid-p-dark','dark','phone','390, тёмная: середина эпохи',7,'mid');
+add('mid-p-light','light','phone','390, светлая: середина эпохи',7,'mid');
+add('mid-w-light','light','wide','1280, светлая: середина эпохи',7,'mid');
+add('chg-p-dark','dark','phone','390, тёмная: смена эпохи (первые 2,5 с)',8,'change');
+add('chg-p-light','light','phone','390, светлая: смена эпохи',8,'change');
+add('chg-w-light','light','wide','1280, светлая: смена эпохи',8,'change');
+add('idle-p-dark','dark','phone','390, тёмная: обычная карта (кнопки в цветах темы, полоса эпох с отступом)',0,'idle');
+</script>
+</body>
+</html>

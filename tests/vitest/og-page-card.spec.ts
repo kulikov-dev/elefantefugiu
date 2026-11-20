@@ -34,14 +34,14 @@ describe('liveEpochs: which epochs get a card', () => {
     const live = liveEpochs(epochs, events);
     expect(live.length).toBeGreaterThan(0);
     for (const epoch of live) {
-      expect(events.some((e) => e.status === 'ready' && e.epoch === epoch.id), epoch.id).toBe(true);
+      expect(events.some((e) => e.status === 'ready' && !e.cabinet && e.epoch === epoch.id), epoch.id).toBe(true);
       expect(AZULEJO[epoch.id as keyof typeof AZULEJO], epoch.id).toBeTruthy();
       const p = epochPalette(css, epoch.id);
       expect(p, epoch.id).not.toEqual(epochPalette(css, 'no-such-epoch'));
     }
   });
   it('an epoch that is not open is not made: no published story, no card', () => {
-    const closed = epochs.filter((e) => !events.some((s) => s.status === 'ready' && s.epoch === e.id));
+    const closed = epochs.filter((e) => !events.some((s) => s.status === 'ready' && !s.cabinet && s.epoch === e.id));
     expect(closed.length).toBeGreaterThan(0);
     const live = new Set(liveEpochs(epochs, events).map((e: { id: string }) => e.id));
     for (const e of closed) expect(live.has(e.id), e.id).toBe(false);

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Кабинет редкостей: макет 4</title>
+<style>
+:root{--bg:#F6F1E7;--paper:#FBF8F1;--fg:#1E1B18;--muted:#6B645B;--line:#DDD3C3;--accent:#9B3B22;
+--lus:#8A3A22;--avis:#1F4E9C;--uniao:#6E1F3A;--pombal:#8A6A1F;--monarquia:#2E4D66;
+--ink:#1F4E9C;--display:"Playfair Display",Georgia,serif;--body:Georgia,"Times New Roman",serif;--sil:rgba(30,27,24,.10);--silline:rgba(30,27,24,.28)}
+html.dark{--bg:#15130F;--paper:#1C1A16;--fg:#EEE6D8;--muted:#A79E90;--line:#3A352D;--accent:#E07A55;
+--lus:#D07A60;--avis:#86A9EA;--uniao:#D9879F;--pombal:#D4AE5A;--monarquia:#8DB0CF;--sil:rgba(238,230,216,.10);--silline:rgba(238,230,216,.30)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.5}
+.top{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:700}
+main{max-width:1120px;margin:0 auto;padding:20px 16px 48px}
+.head{display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:end}
+h1{font-family:var(--display);font-size:2.1rem;line-height:1.1;margin:0;grid-column:1/-1}
+.sum{margin:0;color:var(--muted);font-size:.98rem;max-width:34ch}
+.tin{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:0;font:inherit;color:var(--muted);font-size:.82rem}
+.tin svg{width:132px;height:auto}
+/* festa */
+.festa{position:relative;margin:22px 0 6px;padding:62px 18px 18px;border-radius:14px;background:var(--paper);border:1px solid var(--line);text-align:center;overflow:hidden}
+.festa svg{position:absolute;left:0;top:0;width:100%;height:64px}
+.festa .t{margin-top:4px;color:var(--fg);font-family:var(--display);font-size:1.3rem;line-height:1.25;margin:0 auto 6px;font-weight:700}
+.festa p{margin:0 auto;color:var(--muted);font-size:.95rem;max-width:40ch}
+/* shelves */
+.shelf{margin-top:34px}
+.shelf h2{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:var(--display);font-size:1.15rem;margin:0 0 6px}
+.shelf h2 span{font-family:var(--body);font-weight:400;font-size:.88rem;color:var(--muted);white-space:nowrap}
+.shelf{--oh:112px}.objs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:0 10px;padding:0 6px;height:var(--oh)}
+.obj{min-width:0;display:flex;justify-content:center;align-items:flex-end;height:100%;background:none;border:0;padding:0;cursor:pointer}
+.obj img{display:block;width:auto;height:auto;max-height:var(--oh);max-width:100%;object-fit:contain;filter:drop-shadow(0 3px 2px rgba(0,0,0,.18))}
+.obj.miss img{filter:brightness(0) opacity(.11)}
+html.dark .obj.miss img{filter:brightness(0) invert(1) opacity(.12)}
+.board{height:12px;margin:0 -4px;border-radius:2px;background:linear-gradient(var(--ep) 0 3px,color-mix(in srgb,var(--ep) 80%,#000) 3px);box-shadow:0 6px 8px -4px rgba(0,0,0,.35)}
+.tags{display:grid;grid-template-columns:repeat(3,1fr);gap:0 10px;margin-top:10px}
+.tags span{text-align:center;font-size:.8rem;line-height:1.25;color:var(--fg)}
+.tags span.q{color:var(--muted);font-style:italic}
+.soon{margin:40px 0 0;text-align:center;color:var(--muted);font-size:.95rem}
+.soon::before{content:"";display:block;width:64px;height:1px;background:var(--line);margin:0 auto 12px}
+/* popup */
+.pop{position:absolute;z-index:5;width:min(290px,88vw);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.18);font-size:.92rem}
+.pop b{display:block;font-family:var(--display);font-size:1.05rem;margin-bottom:4px}
+.pop a{display:inline-block;margin-top:8px;background:var(--accent);color:#fff;border-radius:999px;padding:6px 14px;text-decoration:none;font-weight:700;font-size:.9rem}
+.wrap{position:relative}
+@media (min-width:768px){
+ h1{font-size:2.8rem;grid-column:1}
+ .head{grid-template-columns:1fr auto}
+ .tin{grid-row:1/3;grid-column:2}
+ .tin svg{width:210px}
+ .shelf{--oh:160px}.objs{gap:0 48px;padding:0 40px}
+ .tags{gap:0 48px;padding:0 40px}
+ .shelf-in{max-width:760px;margin:0 auto}
+ .tags span{font-size:.88rem}
+ .festa{padding:64px 24px 22px}.festa svg{height:76px}.festa .t{font-size:1.5rem}
+}
+</style></head><body>
+<div class="top">O Elefante Fugiu</div>
+<main>
+ <div class="head">
+  <h1>Кабинет редкостей</h1>
+  <p class="sum" id="sum"></p>
+  <button class="tin" type="button"><svg viewBox="0 0 262 152" id="tinsvg" aria-hidden="true"></svg><span id="tincnt"></span></button>
+ </div>
+ <div id="festa"></div>
+ <div id="shelves"></div>
+ <p class="soon">Скоро новые полки</p>
+</main>
+<script>
+function sardine(y,flip,full){
+  const body='M15 0 C30 -7.5 68 -9.5 108 -9 C128 -8.6 142 -6.5 150 -3 Q156 -.5 156 .5 Q153 3 146 5.5 C134 8.6 118 9.2 104 9.2 C66 9.4 30 7.5 15 0 Z';
+  const tail='M17 0 L2 -8.5 Q8 0 2 8.5 Z';
+  const tr = flip ? `translate(196 ${y}) scale(-1 1)` : `translate(28 ${y})`;
+  if(!full) return `<g transform="${tr}" opacity=".5"><path d="${body}" fill="none" stroke="#A88A3E" stroke-width="1" stroke-dasharray="3 3"/><path d="${tail}" fill="none" stroke="#A88A3E" stroke-width="1" stroke-dasharray="2 2"/></g>`;
+  let spots='';for(let k=0;k<5;k++){spots+=`<circle cx="${112+k*5.2}" cy="${-3.4+k*0.15}" r="1.1" fill="#1B3550" opacity=".55"/>`;}
+  return `<g transform="${tr}">
+    <path d="${tail}" fill="#3E5F80" stroke="#1B3550" stroke-width=".8"/>
+    <path d="M74 -9.2 L82 -13 L90 -9.1 Z" fill="#3E5F80" stroke="#1B3550" stroke-width=".6"/>
+    <path d="${body}" fill="url(#sar)" stroke="#1B3550" stroke-width=".9"/>
+    <path d="M22 0 C60 -1.6 108 -1.8 132 -1" fill="none" stroke="#FFFFFF" stroke-width=".9" opacity=".8"/>
+    ${spots}
+    <path d="M136 -7.2 Q130 0 137 6.6" fill="none" stroke="#1B3550" stroke-width=".9"/>
+    <circle cx="146" cy="-1.6" r="2.3" fill="#FFFFFF" stroke="#1B3550" stroke-width=".6"/><circle cx="146.4" cy="-1.6" r="1.1" fill="#1B3550"/>
+  </g>`;
+}
+function drawTin(n){
+  let s=`<defs>
+    <linearGradient id="sar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26445E"/><stop offset=".35" stop-color="#5F84A6"/><stop offset=".52" stop-color="#DCE5EE"/><stop offset=".8" stop-color="#F4F6F8"/><stop offset="1" stop-color="#C3CDD7"/></linearGradient>
+    <linearGradient id="can" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF2F5"/><stop offset=".5" stop-color="#B7C2CC"/><stop offset="1" stop-color="#8E9BA8"/></linearGradient>
+    <linearGradient id="oil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3D98F"/><stop offset="1" stop-color="#D9AE52"/></linearGradient>
+    <linearGradient id="coil" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8E2A22"/><stop offset=".45" stop-color="#D8473B"/><stop offset="1" stop-color="#7A231C"/></linearGradient>
+    <clipPath id="inner"><rect x="22" y="44" width="180" height="84" rx="15"/></clipPath>
+  </defs>
+  <ellipse cx="118" cy="142" rx="104" ry="7" fill="#1B2333" opacity=".12"/>
+  <rect x="12" y="34" width="200" height="104" rx="24" fill="url(#can)" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="18" y="40" width="188" height="92" rx="19" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".7"/>
+  <rect x="22" y="44" width="180" height="84" rx="15" fill="url(#oil)" stroke="#7E8B98" stroke-width="1.2"/>
+  <g clip-path="url(#inner)">`;
+  for(let i=0;i<7;i++){ s+=sardine(55+i*11, i%2===1, i<n); }
+  s+=`<path d="M30 52 C70 46 130 46 190 52" stroke="#FFFFFF" stroke-width="2" opacity=".35" fill="none"/></g>
+  <rect x="204" y="38" width="22" height="96" rx="11" fill="url(#coil)" stroke="var(--ink)" stroke-width="1.4"/>
+  <path d="M206 58h18M206 72h18M206 100h18M206 114h18" stroke="#F2C14E" stroke-width="3"/>
+  <path d="M206 86h18" stroke="#FFFDF7" stroke-width="5"/><path d="M206 86h18" stroke="#1F4E9C" stroke-width="2"/>
+  <path d="M226 86 H238" stroke="#7E8B98" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="246" cy="86" rx="9" ry="13" fill="none" stroke="#7E8B98" stroke-width="4"/>
+  <ellipse cx="246" cy="86" rx="9" ry="13" fill="none" stroke="var(--ink)" stroke-width="1" />`;
+  document.getElementById('tinsvg').innerHTML=s;
+  document.getElementById('tincnt').textContent = n===7 ? 'Все 7 сардинок в банке' : `${n} из 7 сардинок`;
+}
+const P=new URLSearchParams(location.search);const DONE=P.has('done');if(P.has('dark'))document.documentElement.classList.add('dark');
+const SH=[
+ ['Лузитания и Рим','--lus',[['k01-anfora','Амфора для гарума'],['k02-miliario','Мильный столб Жейры'],['k03-altar','Алтарь Эндовелика']]],
+ ['Авис и Открытия','--avis',[['k04-padrao','Падран с мыса Кросс'],['k05-saleiro','Солонка сапи'],['k06-rinoceronte','Носорог на Белене']]],
+ ['Уния и Реставрация','--uniao',[['k07-coroa','Корона из Вила-Висозы'],['k08-biombo','Ширмы намбан'],['k09-coche','Карета Филиппа']]],
+ ['Помбал и землетрясение','--pombal',[['k10-inquerito','Опросник 1756 года'],['k11-azulejo','Плитка помбалино'],['k12-tartaruga','Черепаха из Ажуды']]],
+ ['Монархия и Республика','--monarquia',[['k13-frasco','Рыба короля Карлуша'],['k14-ze-povinho','Зе Повинью'],['k15-busto','Бюст Республики']]]];
+const FOUND=DONE?null:new Set(['k01-anfora','k03-altar','k06-rinoceronte','k07-coroa','k08-biombo','k12-tartaruga','k14-ze-povinho']);
+let n=0,h='';
+for(const [ep,c,items] of SH){let f=0,o='',t='';
+ for(const [id,nm] of items){const ok=!FOUND||FOUND.has(id);if(ok){f++;n++}
+  o+='<button class="obj'+(ok?'':' miss')+'" type="button" data-id="'+id+'"><img src="shelf/'+id+'.png" alt="'+(ok?nm:'Ещё не найдено')+'"></button>';
+  t+=ok?'<span>'+nm+'</span>':'<span class="q">не найдено</span>';}
+ h+='<section class="shelf" style="--ep:var('+c+')"><div class="shelf-in"><h2>'+ep+' <span>'+f+' из 3</span></h2><div class="objs">'+o+'</div><div class="board"></div><div class="tags">'+t+'</div></div></section>';}
+document.getElementById('shelves').innerHTML=h;
+document.getElementById('sum').textContent=DONE?'Найдено 15 из 15. Кабинет собран.':'Найдено '+n+' из 15. Редкости спрятаны в текстах историй.';
+drawTin(DONE?7:3);
+if(DONE){
+ const cols=['#C8372D','#3F8A45','#E3B53F','#1F4E9C'];
+ function bunting(W,H){const x0=18,x1=W-18,y0=10,L=x1-x0,sag=Math.min(24,L*0.04);
+  const Y=x=>{const t=(x-x0)/L;return y0+4*sag*t*(1-t);};
+  const fw=20,gap=8,fh=24,n=Math.floor((L-24+gap)/(fw+gap)),start=x0+(L-(n*fw+(n-1)*gap))/2;
+  let s='<path d="M'+x0+' '+y0+' Q'+(x0+L/2)+' '+(y0+2*sag)+' '+x1+' '+y0+'" fill="none" stroke="#7A6E60" stroke-width="1.4"/>';
+  s+='<circle cx="'+x0+'" cy="'+y0+'" r="2.6" fill="#7A6E60"/><circle cx="'+x1+'" cy="'+y0+'" r="2.6" fill="#7A6E60"/>';
+  for(let i=0;i<n;i++){const xl=start+i*(fw+gap),xr=xl+fw,xm=xl+fw/2,yl=Y(xl),yr=Y(xr);
+   s+='<path d="M'+xl.toFixed(1)+' '+yl.toFixed(1)+' L'+xr.toFixed(1)+' '+yr.toFixed(1)+' L'+xm.toFixed(1)+' '+(Math.max(yl,yr)+fh).toFixed(1)+' Z" fill="'+cols[i%cols.length]+'"/>';}
+  return s;}
+ document.getElementById('festa').innerHTML='<div class="festa"><svg></svg><p class="t">Все сардинки дома: в Лиссабоне начинаются Санту-Антониу</p><p>В июне в Лиссабоне сардину жарят прямо на улице и едят на ломте хлеба.</p></div>';
+ const fe=document.querySelector('.festa'),sv=fe.querySelector('svg');const W=fe.clientWidth,Hh=sv.clientHeight;sv.setAttribute('viewBox','0 0 '+W+' '+Hh);
+ sv.innerHTML=bunting(W,Hh);
+}
+if(P.has('pop')){const b=document.querySelector('[data-id="k06-rinoceronte"]');const r=b.getBoundingClientRect();const d=document.createElement('div');d.className='pop';d.style.top=(r.bottom+window.scrollY+40)+'px';d.style.left=Math.max(12,Math.min(r.left-150,innerWidth-302))+'px';d.innerHTML='<b>Носорог на Белене</b>Каменная голова носорога под башенкой: портрет того самого зверя, которого везли папе в 1515 году.<br><a href="#">Открыть историю →</a>';document.body.appendChild(d);}
+</script></body></html>

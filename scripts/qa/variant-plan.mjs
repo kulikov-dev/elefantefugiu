@@ -46,3 +46,7 @@ export function variantOf(event) {
   }
   return out;
 }
+
+/** The day the cabinet of rarities is open in the fixture build (a day long past), and the story of the cabinet it carries: derived from the draft `from`, with the id `id`. */
+export const CABINET_OPENS_FIXTURE = '2000-01-01';
+export const CABINET_FIXTURE = { id: 'evento-exemplo-cabinet', from: 'evento-exemplo-17' };

@@ -57,6 +57,9 @@ jobs:
       # The pictures of the games (public/games, public/og-games) are made from docs/images/games and are not in the repository either.
       - name: Game pictures
         run: node scripts/make-games-images.mjs
+      # The shelf pictures of the cabinet of rarities (public/cabinet-shelf) are cut out of docs/images/cabinet/shelf-src and are not in the repository either.
+      - name: Cabinet shelf pictures
+        run: node scripts/make-cabinet-shelf.mjs
       - name: Build
         run: npx astro build
       # The search index (Pagefind) is made after the build: npm run build does it in postbuild, here only astro build runs.

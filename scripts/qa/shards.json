@@ -47,7 +47,8 @@
   "myths": 25,
   "order": 25,
   "games": 15,
-  "search": 60
+  "search": 60,
+  "cabinet": 60
  },
  "shards": [
   [
@@ -103,7 +104,8 @@
    "myths",
    "order",
    "games",
-   "timetravel"
+   "timetravel",
+   "cabinet"
   ]
  ]
 }

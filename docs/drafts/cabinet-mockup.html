@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Макет кабинета редкостей</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;1,500&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Стиль сайта: бумага, синяя «азулежу»-линия, полки подчёркнуты цветом эпохи. Предмет = плитка в рамке. */
+:root{
+  --paper:#FBF8F1; --ink:#1F4E9C; --warm:#D9A441; --wash:#E4ECF8; --card:#FFFFFF;
+  --fg:#1B2333; --muted:#5E6676; --line:#D8DCE4; --bg:#EEF0F4;
+  --tin:#C9D2DC; --tin-dark:#8C99A8; --oil:#E9C46A; --fish:#6F86A3;
+  --display:"Alegreya",Georgia,"Times New Roman",serif;
+  --body:"Alegreya Sans","Segoe UI",system-ui,sans-serif;
+  --lus:#7A2E1C; --avis:#1F4E9C; --uniao:#6E1F3A; --pombal:#8A6A1F; --monarquia:#2E4D66;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#18233A; --ink:#A9C2F0; --warm:#E0B45A; --wash:#22324F; --card:#1B2740;
+  --fg:#E8ECF4; --muted:#A3ABBA; --line:#33405A; --bg:#0F1626;
+  --tin:#7D8A9A; --tin-dark:#55616F; --oil:#B8933F; --fish:#C9D6E6;
+  --lus:#C46A55; --avis:#7FA6E6; --uniao:#C0607F; --pombal:#C9A250; --monarquia:#7FA3C2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#18233A; --ink:#A9C2F0; --warm:#E0B45A; --wash:#22324F; --card:#1B2740;
+  --fg:#E8ECF4; --muted:#A3ABBA; --line:#33405A; --bg:#0F1626;
+  --tin:#7D8A9A; --tin-dark:#55616F; --oil:#B8933F; --fish:#C9D6E6;
+  --lus:#C46A55; --avis:#7FA6E6; --uniao:#C0607F; --pombal:#C9A250; --monarquia:#7FA3C2; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;padding:28px 16px 56px}
+.wrap{max-width:860px;margin:0 auto;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.2}
+.intro h1{font-size:2rem}
+.intro p{margin:.5rem 0 0;color:var(--muted);max-width:62ch}
+.label{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.switch{display:flex;gap:8px;flex-wrap:wrap}
+.switch button{font:inherit;font-weight:700;font-size:.95rem;color:var(--ink);background:var(--card);border:1.5px solid var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.screen{background:var(--paper);border:1px solid var(--line);border-radius:10px;overflow:visible;position:relative}
+.topbar{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--line);font-family:var(--display);font-weight:700;color:var(--ink)}
+.topbar .nav{margin-left:auto;font-family:var(--body);font-weight:500;font-size:.9rem;display:flex;gap:16px;color:var(--fg)}
+.page{padding:24px 24px 32px;display:grid;gap:22px}
+.head{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between}
+.head h2{font-size:2rem}
+.head p{margin:.3rem 0 0;color:var(--muted);max-width:46ch}
+
+/* Банка */
+.tinwrap{position:relative}
+.tinbtn{all:unset;cursor:pointer;display:grid;justify-items:center;gap:2px;border-radius:12px;padding:4px}
+.tinbtn svg{width:250px;height:auto;display:block}
+.tinbtn .cnt{font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.tinbtn:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+/* Полки */
+.shelves{display:grid;gap:26px}
+.shelf h3{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:1.2rem;color:var(--fg);margin-bottom:10px}
+.shelf h3 span{font-family:var(--body);font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums;font-weight:500}
+.row,.labels{display:grid;grid-template-columns:repeat(3,var(--tw));gap:0 var(--gap);justify-content:center}
+.shelf{--tw:132px;--gap:36px}
+.labels{margin-top:8px}
+.labels span{font-size:.9rem;line-height:1.3;text-align:center;color:var(--fg)}
+.labels span.q{color:var(--muted)}
+.board{height:6px;border-radius:3px;background:var(--ep);margin:0 auto;width:calc(3*var(--tw) + 2*var(--gap) + 48px);max-width:100%}
+.item{all:unset;cursor:pointer;display:grid;gap:6px;justify-items:center;position:relative}
+.tile{width:100%;aspect-ratio:1;border-radius:6px;display:grid;place-items:center;position:relative}
+.found .tile{background:var(--card);border:1.5px solid var(--ink);box-shadow:inset 0 0 0 5px var(--card),inset 0 0 0 6px var(--wash)}
+.found .tile svg{width:56%;height:56%;fill:none;stroke:var(--ep);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.missing .tile{border:1.5px dashed var(--line);background:transparent}
+.missing .tile svg{width:56%;height:56%;fill:none;stroke:var(--line);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.item .nm{font-size:.92rem;line-height:1.3;text-align:center;color:var(--fg)}
+.missing .nm{color:var(--muted)}
+.badge{position:absolute;top:6px;right:6px;font-size:.72rem;font-weight:700;color:var(--muted);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:0 6px}
+.item:focus-visible .tile{outline:2px solid var(--ink);outline-offset:3px}
+.empty-slot{aspect-ratio:1}
+.soon{border:1.5px dashed var(--line);border-radius:8px;padding:14px 16px;color:var(--muted);font-size:.95rem}
+.soon b{font-family:var(--display);color:var(--fg);font-size:1.05rem}
+
+/* Всплывашка у предмета */
+.pop{position:absolute;z-index:5;width:min(300px,86vw);background:var(--card);color:var(--fg);border:1.5px solid var(--ink);border-radius:12px;padding:12px 14px;box-shadow:0 6px 18px rgba(20,40,90,.18);display:grid;gap:6px}
+.pop[hidden]{display:none}
+.pop .k{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.pop b{font-family:var(--display);font-size:1.15rem;line-height:1.25}
+.pop p{margin:0;font-size:.98rem}
+.pop .go{justify-self:start;font:inherit;font-weight:700;color:var(--paper);background:var(--ink);border:0;border-radius:999px;padding:6px 14px;cursor:pointer;text-decoration:none}
+.pop .x{position:absolute;top:6px;right:8px;font:inherit;font-size:1.1rem;background:none;border:0;color:var(--muted);cursor:pointer}
+.pop::after{content:"";position:absolute;left:var(--tail,40px);top:-8px;width:14px;height:14px;background:var(--card);border-left:1.5px solid var(--ink);border-top:1.5px solid var(--ink);transform:rotate(45deg)}
+.pop.up::after{top:auto;bottom:-8px;transform:rotate(225deg)}
+
+/* Финал Santos */
+.festa{display:none;gap:10px;justify-items:center;text-align:center;padding:4px 0 6px}
+.done .festa{display:grid}
+.festa svg{width:100%;max-width:760px;height:auto}
+.festa p{margin:0;max-width:58ch}
+.festa .t{font-family:var(--display);font-size:1.35rem;color:var(--ink)}
+@media (prefers-reduced-motion:no-preference){.flag{transform-origin:top center;animation:sway 3s ease-in-out infinite}.flag:nth-child(even){animation-delay:-1.5s}}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+
+.notes{display:grid;gap:8px;max-width:66ch;color:var(--muted);font-size:.95rem}
+.notes p{margin:0}
+.notes b{color:var(--fg)}
+@media (max-width:640px){
+  .topbar .nav{display:none}.page{padding:18px 14px 24px}
+  .shelf{--tw:calc((100vw - 92px)/3);--gap:12px}
+  .labels span{font-size:.82rem}
+  .board{width:100%}
+  .tinbtn svg{width:210px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="intro">
+    <h1>Кабинет редкостей: макет 3</h1>
+    <p>Теперь в стиле сайта. Нажми на предмет: рядом откроется короткая сводка и кнопка «Открыть историю». Нажми на ненайденный: рядом подсказка. Наведи на банку сардин. Переключатель ниже показывает, как кабинет выглядит, когда собрано всё.</p>
+  </section>
+
+  <div>
+    <p class="label">Состояние кабинета</p>
+    <div class="switch" role="group" aria-label="Состояние кабинета">
+      <button type="button" id="s-progress" aria-pressed="true">В процессе</button>
+      <button type="button" id="s-done" aria-pressed="false">Всё собрано</button>
+    </div>
+  </div>
+
+  <section>
+    <p class="label">Страница «Кабинет редкостей»</p>
+    <div class="screen" id="screen">
+      <div class="topbar">O Elefante Fugiu <span class="nav"><span>Эпохи</span><span>Карта</span><span>О проекте</span></span></div>
+      <div class="page">
+        <div class="festa" aria-hidden="false">
+          <svg viewBox="0 0 760 110" role="img" aria-label="Гирлянды Santos Populares">
+            <path d="M0 14 Q190 64 380 14 T760 14" fill="none" stroke="var(--muted)" stroke-width="1.5"/>
+            <g id="flags"></g>
+          </svg>
+          <p class="t">Santos Populares начались</p>
+          <p>Все редкости на полках, все сардинки в банке. В июне в Лиссабоне сардину жарят на улице и едят на хлебе, а у дверей ставят горшочки базилика с бумажной гвоздикой и четверостишием.</p>
+        </div>
+        <div class="head">
+          <div>
+            <h2>Кабинет редкостей</h2>
+            <p id="sum">Найдено 7 из 15. Редкости спрятаны в текстах историй.</p>
+          </div>
+          <div class="tinwrap">
+            <button class="tinbtn" id="tin" type="button" aria-describedby="tin-tip">
+              <svg viewBox="0 0 262 152" aria-hidden="true" id="tinsvg"></svg>
+              <span class="cnt" id="tincnt">3 из 7 сардинок</span>
+            </button>
+          </div>
+        </div>
+        <div class="shelves" id="shelves"></div>
+        <div class="soon"><b>Скоро новые полки.</b> Когда на сайте откроются эпохи «Рождение королевства» и «Эштаду Нову», в кабинете появятся их полки.</div>
+      </div>
+      <div class="pop" id="pop" hidden role="dialog" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <div class="notes">
+    <p><b>Клик по предмету в кабинете.</b> Сводка рядом с предметом и кнопка «Открыть историю». Один клик ничего не уводит со страницы, а второй ведёт на карточку.</p>
+    <p><b>Подписи под полкой,</b> как этикетки в музее. На полке всегда три предмета по центру.</p>
+    <p><b>Закрытые эпохи.</b> Их полки не рисуем заранее, а ставим одну строку «скоро».</p>
+    <p><b>Вместо значков</b> на сайте будут настоящие фото предметов. Если фото не нашлось, нарисуем значок в этом же стиле.</p>
+  </div>
+</div>
+
+<script>
+const IC = {
+  amphora:'<path d="M26 8h12M28 8v6c-8 4-12 14-10 26 2 8 7 14 14 16 7-2 12-8 14-16 2-12-2-22-10-26V8"/><path d="M28 16c-6 0-8 6-6 10M36 16c6 0 8 6 6 10"/>',
+  milestone:'<path d="M22 56V18a10 10 0 0 1 20 0v38M16 56h32"/><path d="M27 24h10M27 30h10M27 36h7"/>',
+  q:'<circle cx="32" cy="32" r="20"/><path d="M26 26a6 6 0 1 1 8 6c-2 1-2 3-2 5M32 44v1"/>',
+  cross:'<path d="M32 6v52M24 14h16M26 58h12"/><rect x="26" y="22" width="12" height="10"/>',
+  salt:'<path d="M20 52h24M24 52l4-14h8l4 14"/><circle cx="32" cy="26" r="12"/><path d="M28 14c0-4 8-4 8 0"/>',
+  rhino:'<path d="M10 40c4-12 14-18 26-18 8 0 14 4 18 10l4 8-8 2-4-6M14 30l-6-8 4 14"/><circle cx="40" cy="30" r="2"/>',
+  crown:'<path d="M14 44l-4-24 12 10 10-16 10 16 12-10-4 24z"/><path d="M14 50h36"/>',
+  screen:'<path d="M8 14h12v38H8zM20 14h12v38H20zM32 14h12v38H32zM44 14h12v38H44z"/><path d="M12 40c4-6 10-6 14 0M36 32l6-8 6 8"/>',
+  armour:'<path d="M20 30c0-12 6-20 12-20s12 8 12 20v6H20z"/><path d="M22 36h20l-4 18H26z"/><path d="M24 26h16"/>',
+  paper:'<path d="M16 6h24l10 10v42H16z"/><path d="M40 6v10h10M22 24h20M22 32h20M22 40h14"/>',
+  tile:'<rect x="10" y="10" width="44" height="44"/><path d="M10 32h44M32 10v44"/><circle cx="32" cy="32" r="8"/>',
+  jar:'<path d="M22 12h20v6H22zM20 18h24v34a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4z"/><path d="M26 32c4-6 8-6 12 0s-8 10-12 0"/>',
+  fish:'<path d="M8 32c8-12 28-14 40-2l8-8v20l-8-8c-12 12-32 10-40-2z"/><circle cx="18" cy="30" r="2"/><path d="M26 24c2 5 2 11 0 16"/>',
+  figure:'<circle cx="32" cy="14" r="6"/><path d="M32 20v18M32 38l-8 16M32 38l8 16M32 26l-12-6M32 26l10 4 4-10"/>',
+  can:'<rect x="10" y="20" width="44" height="26" rx="10"/><path d="M16 33h32M46 20c4-8 10-8 12-2"/>',
+  bust:'<circle cx="32" cy="22" r="10"/><path d="M18 56c0-12 6-18 14-18s14 6 14 18z"/><path d="M24 14c4-6 12-6 16 0"/>',
+  coach:'<rect x="14" y="16" width="36" height="22" rx="6"/><circle cx="20" cy="48" r="7"/><circle cx="46" cy="48" r="7"/><path d="M26 22h12v10H26z"/>',
+  altar:'<path d="M18 12h28v6H18zM22 18h20v30H22zM16 48h32v6H16z"/><path d="M27 26h10M27 32h10M27 38h6"/>'
+};
+const SHELVES = [
+  {ep:'Лузитания и Рим', c:'--lus', items:[
+    {n:'Амфора для гарума', i:'amphora', f:1, y:'I–IV века', t:'В таких амфорах рыбный соус из долины Саду плыл по всему Средиземноморью.', h:'Ищи там, где пахнет рыбой'},
+    {n:'Мильный столб Жейры', i:'milestone', f:0, h:'Ищи на римской дороге в горах'},
+    {n:'Алтарь Эндовелика', i:'altar', f:0, h:'Ищи там, где римляне молятся чужому богу'} ]},
+  {ep:'Авис и Открытия', c:'--avis', items:[
+    {n:'Падран с мыса Кросс', i:'cross', f:1, y:'1486', t:'Каменный крест Диогу Кана. В 1893 году его увезли в Берлин, в 2019-м решили вернуть Намибии.', h:''},
+    {n:'Афро-португальская солонка', i:'salt', f:1, y:'около 1500', t:'Африканские мастера вырезали из слоновой кости португальцев такими, какими их видели.', h:''},
+    {n:'Голова носорога', i:'rhino', f:0, h:'Ищи в истории про подарок папе'} ]},
+  {ep:'Уния и Реставрация', c:'--uniao', items:[
+    {n:'Корона из Вила-Висозы', i:'crown', f:1, y:'1646', t:'Жуан IV отдал корону Богоматери, и с тех пор короли Португалии её не надевали.', h:''},
+    {n:'Ширмы намбан', i:'screen', f:0, h:'Ищи там, где португальцы доплыли до края света'},
+    {n:'Карета Филиппа', i:'coach', f:0, h:'Ищи в истории про испанского короля в Лиссабоне'} ]},
+  {ep:'Помбал и Землетрясение', c:'--pombal', items:[
+    {n:'Опросник 1756 года', i:'paper', f:1, y:'1756', t:'13 вопросов во все приходы: когда началось, сколько длилось, отступало ли море.', h:''},
+    {n:'Плитка помбалино', i:'tile', f:0, h:'Ищи там, где город строят заново'},
+    {n:'Черепаха из Ажуды', i:'jar', f:0, h:'Ищи в истории про королевские сады'} ]},
+  {ep:'Монархия и Республика', c:'--monarquia', items:[
+    {n:'Рыба короля Карлуша', i:'fish', f:1, y:'1896–1907', t:'Король был океанографом и сам ловил глубоководных рыб для своей коллекции.', h:''},
+    {n:'Зе Повинью', i:'figure', f:1, y:'1875', t:'Простой португалец, который показывает власти неприличный жест. Ему 150 лет.', h:''},
+    {n:'Бюст Республики', i:'bust', f:0, h:'Ищи в истории про 5 октября'} ]}
+];
+const total = SHELVES.reduce((a,s)=>a+s.items.filter(x=>!x.soon).length,0);
+let done = false;
+const shelvesEl = document.getElementById('shelves');
+const pop = document.getElementById('pop');
+const screen = document.getElementById('screen');
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+
+function sardine(y,flip,full){
+  const body='M15 0 C30 -7.5 68 -9.5 108 -9 C128 -8.6 142 -6.5 150 -3 Q156 -.5 156 .5 Q153 3 146 5.5 C134 8.6 118 9.2 104 9.2 C66 9.4 30 7.5 15 0 Z';
+  const tail='M17 0 L2 -8.5 Q8 0 2 8.5 Z';
+  const tr = flip ? `translate(196 ${y}) scale(-1 1)` : `translate(28 ${y})`;
+  if(!full) return `<g transform="${tr}" opacity=".5"><path d="${body}" fill="none" stroke="#A88A3E" stroke-width="1" stroke-dasharray="3 3"/><path d="${tail}" fill="none" stroke="#A88A3E" stroke-width="1" stroke-dasharray="2 2"/></g>`;
+  let spots='';for(let k=0;k<5;k++){spots+=`<circle cx="${112+k*5.2}" cy="${-3.4+k*0.15}" r="1.1" fill="#1B3550" opacity=".55"/>`;}
+  return `<g transform="${tr}">
+    <path d="${tail}" fill="#3E5F80" stroke="#1B3550" stroke-width=".8"/>
+    <path d="M74 -9.2 L82 -13 L90 -9.1 Z" fill="#3E5F80" stroke="#1B3550" stroke-width=".6"/>
+    <path d="${body}" fill="url(#sar)" stroke="#1B3550" stroke-width=".9"/>
+    <path d="M22 0 C60 -1.6 108 -1.8 132 -1" fill="none" stroke="#FFFFFF" stroke-width=".9" opacity=".8"/>
+    ${spots}
+    <path d="M136 -7.2 Q130 0 137 6.6" fill="none" stroke="#1B3550" stroke-width=".9"/>
+    <circle cx="146" cy="-1.6" r="2.3" fill="#FFFFFF" stroke="#1B3550" stroke-width=".6"/><circle cx="146.4" cy="-1.6" r="1.1" fill="#1B3550"/>
+  </g>`;
+}
+function drawTin(n){
+  let s=`<defs>
+    <linearGradient id="sar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26445E"/><stop offset=".35" stop-color="#5F84A6"/><stop offset=".52" stop-color="#DCE5EE"/><stop offset=".8" stop-color="#F4F6F8"/><stop offset="1" stop-color="#C3CDD7"/></linearGradient>
+    <linearGradient id="can" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF2F5"/><stop offset=".5" stop-color="#B7C2CC"/><stop offset="1" stop-color="#8E9BA8"/></linearGradient>
+    <linearGradient id="oil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3D98F"/><stop offset="1" stop-color="#D9AE52"/></linearGradient>
+    <linearGradient id="coil" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8E2A22"/><stop offset=".45" stop-color="#D8473B"/><stop offset="1" stop-color="#7A231C"/></linearGradient>
+    <clipPath id="inner"><rect x="22" y="44" width="180" height="84" rx="15"/></clipPath>
+  </defs>
+  <ellipse cx="118" cy="142" rx="104" ry="7" fill="#1B2333" opacity=".12"/>
+  <rect x="12" y="34" width="200" height="104" rx="24" fill="url(#can)" stroke="var(--ink)" stroke-width="1.6"/>
+  <rect x="18" y="40" width="188" height="92" rx="19" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity=".7"/>
+  <rect x="22" y="44" width="180" height="84" rx="15" fill="url(#oil)" stroke="#7E8B98" stroke-width="1.2"/>
+  <g clip-path="url(#inner)">`;
+  for(let i=0;i<7;i++){ s+=sardine(55+i*11, i%2===1, i<n); }
+  s+=`<path d="M30 52 C70 46 130 46 190 52" stroke="#FFFFFF" stroke-width="2" opacity=".35" fill="none"/></g>
+  <rect x="204" y="38" width="22" height="96" rx="11" fill="url(#coil)" stroke="var(--ink)" stroke-width="1.4"/>
+  <path d="M206 58h18M206 72h18M206 100h18M206 114h18" stroke="#F2C14E" stroke-width="3"/>
+  <path d="M206 86h18" stroke="#FFFDF7" stroke-width="5"/><path d="M206 86h18" stroke="#1F4E9C" stroke-width="2"/>
+  <path d="M226 86 H238" stroke="#7E8B98" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="246" cy="86" rx="9" ry="13" fill="none" stroke="#7E8B98" stroke-width="4"/>
+  <ellipse cx="246" cy="86" rx="9" ry="13" fill="none" stroke="var(--ink)" stroke-width="1" />`;
+  document.getElementById('tinsvg').innerHTML=s;
+  document.getElementById('tincnt').textContent = n===7 ? 'Все 7 сардинок в банке' : `${n} из 7 сардинок`;
+}
+function flags(){
+  const cols=['#C8372D','#4E8F45','#E9C46A','#1F4E9C'];let g='';
+  for(let i=0;i<19;i++){const x=20+i*38;const t=(x%380)/380;const y=14+100*t*(1-t);
+    g+=`<path class="flag" d="M${x-11} ${y} L${x+11} ${y} L${x} ${y+30} Z" fill="${cols[i%4]}" opacity=".9"/>`;}
+  document.getElementById('flags').innerHTML=g;
+}
+function render(){
+  shelvesEl.innerHTML='';
+  let found=0;
+  SHELVES.forEach(sh=>{
+    const real=sh.items.filter(x=>!x.soon);
+    const f=real.filter(x=>done||x.f).length; found+=f;
+    const el=document.createElement('section');
+    el.className='shelf'; el.style.setProperty('--ep',`var(${sh.c})`);
+    el.innerHTML=`<h3>${sh.ep}<span>${f} из ${real.length}</span></h3><div class="row"></div><div class="board"></div><div class="labels"></div>`;
+    const lab=el.querySelector('.labels');
+    const row=el.querySelector('.row');
+    sh.items.forEach(it=>{
+      const isF = !it.soon && (done||it.f);
+      const b=document.createElement('button');
+      b.type='button'; b.className='item '+(isF?'found':'missing');
+      b.innerHTML=`<span class="tile"><svg viewBox="0 0 64 64" aria-hidden="true">${IC[it.i]}</svg></span>`;
+      const l=document.createElement('span'); l.textContent=isF?it.n:'?'; if(!isF) l.className='q'; lab.appendChild(l);
+      b.setAttribute('aria-label', isF?it.n:'Ненайденная редкость, подсказка');
+      b.addEventListener('click',e=>{e.stopPropagation();openPop(b,sh,it,isF);});
+      row.appendChild(b);
+    });
+    shelvesEl.appendChild(el);
+  });
+  document.getElementById('sum').textContent = done ? `Найдено ${total} из ${total}. Кабинет собран.` : `Найдено ${found} из ${total}. Редкости спрятаны в текстах историй.`;
+  drawTin(done?7:3);
+  screen.parentElement.classList.toggle('done',done);
+  screen.classList.toggle('done',done);
+}
+function openPop(btn,sh,it,isF){
+  if(isF){
+    pop.innerHTML=`<button class="x" type="button" aria-label="Закрыть">×</button><span class="k">${sh.ep} · ${it.y||''}</span><b>${it.n}</b><p>${it.t||''}</p><a class="go" href="#" onclick="return false">Открыть историю →</a>`;
+  } else if(it.soon){
+    pop.innerHTML=`<button class="x" type="button" aria-label="Закрыть">×</button><span class="k">${sh.ep}</span><b>Здесь будет ещё одна редкость</b><p>Мы её пока выбираем.</p>`;
+  } else {
+    pop.innerHTML=`<button class="x" type="button" aria-label="Закрыть">×</button><span class="k">${sh.ep} · ещё не найдено</span><b>Подсказка</b><p>${it.h}. Редкость спрятана словом в тексте одной из историй этой эпохи.</p>`;
+  }
+  pop.hidden=false;
+  const r=btn.getBoundingClientRect(), s=screen.getBoundingClientRect();
+  const w=pop.offsetWidth;
+  let left=r.left-s.left+r.width/2-w/2; left=Math.max(10,Math.min(left,s.width-w-10));
+  pop.style.left=left+'px'; pop.classList.remove('up');
+  pop.style.top=(r.top-s.top+r.width+10)+'px';
+  pop.style.setProperty('--tail',(r.left-s.left+r.width/2-left-7)+'px');
+  pop.querySelector('.x').addEventListener('click',()=>pop.hidden=true);
+}
+// Подсказка у банки (наведение и фокус)
+const tin=document.getElementById('tin');
+function tinTip(){
+  pop.innerHTML = done
+    ? `<b>Все сардинки в банке</b><p>Ты нашёл всех семерых. Santos Populares начались.</p>`
+    : `<b>Сардинки расплылись по сайту</b><p>Семь сардинок спрятались в закоулках сайта, не в историях. Три уже в банке, найди остальных.</p>`;
+  pop.hidden=false;
+  const r=tin.getBoundingClientRect(), s=screen.getBoundingClientRect(); const w=pop.offsetWidth;
+  let left=Math.max(10,Math.min(r.left-s.left+r.width/2-w/2,s.width-w-10));
+  pop.style.left=left+'px'; pop.style.top=(r.bottom-s.top+8)+'px'; pop.classList.remove('up');
+  pop.style.setProperty('--tail',(r.left-s.left+r.width/2-left-7)+'px');
+}
+tin.addEventListener('mouseenter',tinTip); tin.addEventListener('focus',tinTip); tin.addEventListener('click',e=>{e.stopPropagation();tinTip();});
+tin.addEventListener('mouseleave',()=>pop.hidden=true); tin.addEventListener('blur',()=>pop.hidden=true);
+document.addEventListener('click',e=>{if(!pop.contains(e.target))pop.hidden=true;});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.hidden=true;});
+document.getElementById('s-progress').addEventListener('click',()=>{done=false;sw();});
+document.getElementById('s-done').addEventListener('click',()=>{done=true;sw();});
+function sw(){document.getElementById('s-progress').setAttribute('aria-pressed',!done);document.getElementById('s-done').setAttribute('aria-pressed',done);pop.hidden=true;render();}
+flags(); render();
+</script>
+</body>
+</html>

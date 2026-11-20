@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
-import { FIXTURE_EPOCH, MOVED, MOVED_TO, SHIP_CARD, SHIP_SCALE, SIXTEEN, VARIANT_MARKER_LIMIT, variantOf } from './variant-plan.mjs';
+import { CABINET_FIXTURE, CABINET_OPENS_FIXTURE, FIXTURE_EPOCH, MOVED, MOVED_TO, SHIP_CARD, SHIP_SCALE, SIXTEEN, VARIANT_MARKER_LIMIT, variantOf } from './variant-plan.mjs';
 
 const { stringify } = createRequire(import.meta.url)('../../node_modules/yaml');
 
@@ -38,11 +38,24 @@ ${stringify({ interactive: SHIP_SCALE })}`;
 }
 if (changed !== MOVED.length + SIXTEEN.length) throw new Error(`variant: expected ${MOVED.length + SIXTEEN.length} fixture cards, changed ${changed}`);
 console.log(`fixtures: ${MOVED.length} moved to ${MOVED_TO}, ${SIXTEEN.length} set to 16+ in ${FIXTURE_EPOCH}`);
+// The cabinet of rarities is open in the copy (src/lib/cabinet-config.mjs reads CABINET_OPENS), and the copy has one story of the cabinet (the field `cabinet`): a fixture
+// derived from a draft stand-in, ready here, that belongs to the first rarity of src/content/cabinet.yaml. The real site is closed and has no such story yet.
+const cabinetYaml = readFileSync(join(out, 'src/content/cabinet.yaml'), 'utf8');
+const firstItem = cabinetYaml.match(/^- id: (\S+)/m)?.[1];
+if (!firstItem) throw new Error('variant: no rarity in src/content/cabinet.yaml');
+{
+  const from = join(dir, `${CABINET_FIXTURE.from}.yaml`);
+  let text = readFileSync(from, 'utf8');
+  text = text.replace(/^id: .*$/m, `id: ${CABINET_FIXTURE.id}`).replace(/^status: .*$/m, 'status: ready').replace(/^epoch: .*$/m, `epoch: ${MOVED_TO}`);
+  text = text.replace(/^(slug:\n(?:  .*\n)+)/m, (block) => block.replace(/^(  \w+: )(.*)$/gm, `$1${CABINET_FIXTURE.id}`));
+  text = `${text.trimEnd()}\ncabinet: ${firstItem}\n`;
+  writeFileSync(join(dir, `${CABINET_FIXTURE.id}.yaml`), text);
+}
 // A lower marker limit, in the copy only.
 const markers = join(out, 'src/lib/markers.ts');
 const markersText = readFileSync(markers, 'utf8');
 if (!/export const DEFAULT_LIMIT = \d+;/.test(markersText)) throw new Error('variant: DEFAULT_LIMIT not found in src/lib/markers.ts');
 writeFileSync(markers, markersText.replace(/export const DEFAULT_LIMIT = \d+;/, `export const DEFAULT_LIMIT = ${VARIANT_MARKER_LIMIT};`));
-execSync('npx astro build', { cwd: out, stdio: 'inherit', env: { ...process.env, ALLOW_PLACEHOLDER: 'true' } });
+execSync('npx astro build', { cwd: out, stdio: 'inherit', env: { ...process.env, ALLOW_PLACEHOLDER: 'true', CABINET_OPENS: CABINET_OPENS_FIXTURE } });
 if (!existsSync(join(out, 'dist/index.html'))) throw new Error('variant build failed');
 console.log(`variant ready: DIST=${join(out, 'dist')} node serve.mjs 4401`);

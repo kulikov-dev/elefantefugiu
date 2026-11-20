@@ -40,6 +40,8 @@ import JsonLd from '../components/JsonLd.astro';
 import { graph, type Node } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 import { speculationRules } from '../lib/transitions';
+import { isCabinetOpen } from '../lib/cabinet-config.mjs';
+import { CABINET_PREVIEW_SCRIPT } from '../lib/cabinet-preview';
 import { ageInfoOf, isVisibleInMode } from '../lib/family';
 
 interface Props {
@@ -92,7 +94,7 @@ const { lang, title, seoTitle, pageKey, alternates: alternatesProp, canonicalTo,
 const chrome = allLangs ? LANGS : [lang];
 // The tab of the bottom bar that matches the page: the five sections; the pages of an epoch (the epoch, its stories) belong to "Epochs".
 // The page "Games" and the two games (Myth or fact, Which came first?) share the tab "Games".
-const tab = pageKey === 'myths' || pageKey === 'order' || pageKey === 'games' ? 'games' : pageKey === 'home' || pageKey === 'map' || pageKey === 'surprise' ? pageKey : epoch ? 'epochs' : undefined;
+const tab = pageKey === 'myths' || pageKey === 'order' || pageKey === 'games' || pageKey === 'cabinet' ? 'games' : pageKey === 'home' || pageKey === 'map' || pageKey === 'surprise' ? pageKey : epoch ? 'epochs' : undefined;
 // Fonts of the first screen are fetched together with the stylesheet, not after it (a browser finds a font only when the CSS is parsed and the
 // text that uses it is laid out: 250-300 ms later on a phone). The Russian pages: their Cyrillic faces arrive late and the tags and the hook
 // re-wrap (a layout jump of 0.17 on a phone); a Russian page also draws Latin letters (the name of the site, names of places), so the Latin
@@ -154,7 +156,7 @@ const festaIconNow = festas.built ? festas.icons?.[builtFesta()!.id] : undefined
 const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
 ---
 <!doctype html>
-<html lang={lang} data-epoch={epoch}>
+<html lang={lang} data-epoch={epoch} data-cabinet={isCabinetOpen() ? 'open' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -166,6 +168,8 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <FaviconLinks festa={festaIconNow} />
     <script is:inline set:html={headScript(allThreads.map((th) => th.id), undefined, festas)} />
     <style set:html={festaRules(festas.ids)} />
+    <!-- The preview of the owner while the cabinet of rarities is closed (?kabinet=preview, ?kabinet=off): sets html[data-cabinet=preview]. -->
+    {!isCabinetOpen() && <script is:inline set:html={CABINET_PREVIEW_SCRIPT} />}
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex" />}
@@ -231,6 +235,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     <script>import '../scripts/search-open';</script>
     <script type="application/json" data-epoch-firsts set:html={JSON.stringify(epochFirsts)} />
     <script>import '../scripts/new-marks';</script>
+    <script>import '../scripts/cabinet';</script>
     <slot name="end" />
     {epoch && <script>import '../scripts/last-epoch';</script>}
     <script is:inline>

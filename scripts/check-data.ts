@@ -19,6 +19,10 @@ import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, wordCount } from '../src/lib/myt
 import { isCalendarDay } from '../src/lib/start-pins';
 import { pending } from './lib/lang-review';
 import { isLive, isQueued } from '../src/lib/publication.mjs';
+import { CABINET_HINT_WORDS, CABINET_PHRASE_WORDS, CABINET_SHELF_SIZE, CABINET_SUMMARY_WORDS, cabinetItemSchema } from '../src/data/schemas';
+import { findPhrase, hiddenPlace, wordCount as cabinetWords } from '../src/lib/cabinet';
+import { inlineMatchers } from '../src/lib/glossary';
+import { moreParagraphs, storyParagraphs } from '../src/lib/paragraphs';
 
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -609,6 +613,73 @@ for (const t of threads) {
   }
   const pool = claims.filter((e) => isLive(e.item) && !e.item.sensitive);
   console.log(`myths: ${claims.length} claim(s) in stories, ${pool.length} in the pool today`);
+}
+
+// ---------- the cabinet of rarities (src/content/cabinet.yaml, docs/spec.md "Кабинет редкостей") ----------
+{
+  const items = loadList('cabinet', cabinetItemSchema);
+  const byId = new Map(events.map((e) => [e.item.id, e]));
+  const epochIds = new Set(epochs.map((e) => e.item.id));
+  const seen = new Set<string>();
+  const places = new Set<string>();
+  const glossaryPath = join(root, 'src/data/glossary.yaml');
+  const glossaryTerms = existsSync(glossaryPath) ? (validate(glossaryListSchema, readYaml(glossaryPath), rel(glossaryPath)) ?? []) : [];
+  for (const { item, file } of items) {
+    if (seen.has(item.id)) report('error', file, `the id "${item.id}" is used twice`, 'id');
+    seen.add(item.id);
+    if (!epochIds.has(item.epoch)) report('error', file, `the epoch "${item.epoch}" does not exist`, 'epoch');
+    const place = `${item.epoch}/${item.shelf}`;
+    if (places.has(place)) report('error', file, `the place ${item.shelf} of the shelf "${item.epoch}" is taken`, 'shelf');
+    places.add(place);
+    const host = byId.get(item.host);
+    const story = byId.get(item.story);
+    if (!host) report('error', file, `the host story "${item.host}" does not exist`, 'host');
+    if (!story) report('error', file, `the story "${item.story}" does not exist`, 'story');
+    if (story?.item.cabinet !== undefined && story.item.cabinet !== item.id) report('error', file, `the story "${item.story}" belongs to the rarity "${story.item.cabinet}"`, 'story');
+    if (host?.item.cabinet !== undefined) report('error', file, `the host "${item.host}" is a story of the cabinet itself: the word hides in an ordinary story`, 'host');
+    for (const lang of ['pt', 'en', 'ru'] as const) {
+      if (cabinetWords(item.summary[lang]) > CABINET_SUMMARY_WORDS) report('error', file, `${cabinetWords(item.summary[lang])} words, the summary is up to ${CABINET_SUMMARY_WORDS}`, 'summary', lang);
+      if (cabinetWords(item.hint[lang]) > CABINET_HINT_WORDS) report('error', file, `${cabinetWords(item.hint[lang])} words, the hint is up to ${CABINET_HINT_WORDS}`, 'hint', lang);
+      if (cabinetWords(item.phrase[lang]) > CABINET_PHRASE_WORDS) report('error', file, `${cabinetWords(item.phrase[lang])} words, the phrase is up to ${CABINET_PHRASE_WORDS}`, 'phrase', lang);
+    }
+    if (!host) continue;
+    if (host.item.epoch !== item.epoch) report('error', file, `the host "${item.host}" is of the epoch "${host.item.epoch}", the shelf is "${item.epoch}"`, 'epoch');
+    if (host.item.sensitive) report('error', file, `the host "${item.host}" is a sensitive story: nothing is hidden in it`, 'host');
+    // The word must stand in exactly one place of the text of the host (the story and "More", in the order of the page), per language it is read in.
+    for (const lang of langsOf(host.item)) {
+      const texts = [...storyParagraphs(host.item.story[lang] ?? ''), ...moreParagraphs(host.item.more[lang] ?? '')];
+      const phrase = item.phrase[lang];
+      const occurrence = item.occurrence?.[lang];
+      const found = findPhrase(texts, phrase);
+      if (found.length === 0) report('error', file, `"${phrase}" is not in the text of "${item.host}"`, 'phrase', lang);
+      else if (occurrence === undefined && found.length > 1) report('error', file, `"${phrase}" stands in ${found.length} places of "${item.host}": give the number of the place in \`occurrence\``, 'phrase', lang);
+      else if (occurrence !== undefined && !hiddenPlace(texts, phrase, occurrence)) report('error', file, `"${phrase}" has ${found.length} place(s) in "${item.host}", there is no number ${occurrence}`, 'occurrence', lang);
+      else {
+        // The word must not sit inside a word of the glossary (both are marks in the same text).
+        const at = hiddenPlace(texts, phrase, occurrence)!;
+        if (lang !== 'pt') {
+          for (const { re } of inlineMatchers(glossaryTerms, lang)) {
+            re.lastIndex = 0;
+            for (const m of texts[at.text]!.matchAll(new RegExp(re.source, re.flags.includes('g') ? re.flags : `${re.flags}g`))) {
+              if (m.index < at.at + phrase.length && at.at < m.index + m[0].length) report('error', file, `"${phrase}" meets the glossary word "${m[0]}" in "${item.host}"`, 'phrase', lang);
+            }
+          }
+        }
+      }
+    }
+  }
+  // A story of the cabinet needs its rarity.
+  for (const { item, file } of events) {
+    if (item.cabinet !== undefined && !seen.has(item.cabinet)) report('error', file, `the rarity "${item.cabinet}" is not in cabinet.yaml`, 'cabinet');
+  }
+  // Three rarities on the shelf of every open epoch (the prologue has no shelf in the first version).
+  const NO_SHELF = new Set(['antes-de-portugal']);
+  const openEpochs = new Set(events.filter((e) => isLive(e.item) && !e.item.cabinet && !NO_SHELF.has(e.item.epoch)).map((e) => e.item.epoch));
+  for (const epochId of openEpochs) {
+    const n = items.filter((i) => i.item.epoch === epochId).length;
+    if (n !== CABINET_SHELF_SIZE) report('warn', 'src/content/cabinet.yaml', `${n} rarities on the shelf of "${epochId}", ${CABINET_SHELF_SIZE} are expected`);
+  }
+  console.log(`cabinet: ${items.length} rarit${items.length === 1 ? 'y' : 'ies'} on ${new Set(items.map((i) => i.item.epoch)).size} shelves`);
 }
 
 // ---------- output ----------

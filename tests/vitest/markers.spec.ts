@@ -365,7 +365,7 @@ function realCards(): MapCard[] {
   return readdirSync(dir)
     .filter((f) => f.endsWith('.yaml'))
     .map((f) => parse(readFileSync(join(dir, f), 'utf8')))
-    .filter((e) => e.status === 'ready')
+    .filter((e) => e.status === 'ready' && !e.cabinet)
     .map((e) => ({
       id: e.id as string,
       lat: e.bridge.lat as number,

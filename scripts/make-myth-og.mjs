@@ -10,7 +10,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { parse } from 'yaml';
-import { isLive } from './../src/lib/publication.mjs';
+import { isListed } from '../src/lib/publication.mjs';
 import { H, MAX_BYTES, W, asset, loadFonts, textPath } from './lib/og-card.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -105,7 +105,7 @@ async function draw(lang, statement) {
 const myths = readdirSync(join(root, 'src/content/events'))
   .filter((f) => f.endsWith('.yaml'))
   .map((f) => parse(readFileSync(join(root, 'src/content/events', f), 'utf8')))
-  .filter((e) => e.myth && !e.sensitive && isLive(e))
+  .filter((e) => e.myth && !e.sensitive && isListed(e))
   .map((e) => ({ ...e.myth, id: e.myth.id ?? e.id }));
 const manifest = {};
 const keep = new Set();

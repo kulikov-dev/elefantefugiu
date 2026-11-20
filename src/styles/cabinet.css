@@ -1,0 +1,527 @@
+/* The cabinet of rarities (docs/spec.md "Кабинет редкостей"): the hidden word, the pop-up, the hidden sardine, the tiles of the shelves, the garlands.
+   Loaded by src/scripts/cabinet.ts. Colours, sizes and fonts come from tokens.css. */
+
+/* ---- The hidden word in the text of a story ---- */
+/* Plain text until the cabinet is open (or previewed): the head script sets html[data-cabinet]. A thin dotted underline in the colour of the epoch;
+   not a link (no accent colour, no arrow) and not a footnote. */
+html[data-cabinet] .cw {
+  text-decoration: underline dotted 1px var(--epoch-accent);
+  text-underline-offset: var(--cab-underline-offset);
+}
+
+button.cw {
+  all: unset;
+  cursor: pointer;
+  text-decoration: underline dotted 1px var(--epoch-accent);
+  text-underline-offset: var(--cab-underline-offset);
+  border-radius: var(--radius-sm);
+}
+
+button.cw:hover {
+  text-decoration-style: solid;
+}
+
+button.cw:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+/* ---- The pop-up beside a word, a tile, the tin or a sardine ---- */
+.cab-pop {
+  position: absolute;
+  z-index: 40;
+  box-sizing: border-box;
+  inline-size: var(--cab-pop-width);
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-medium) solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--cab-pop-shadow);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+}
+
+.cab-pop[hidden] {
+  display: none;
+}
+
+.cab-pop__head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  align-items: center;
+  padding-inline-end: var(--space-5);
+}
+
+.cab-pop__kicker {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.cab-pop__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  line-height: 1.25;
+}
+
+.cab-pop p {
+  margin: 0;
+}
+
+.cab-pop__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.cab-pop__button {
+  font: inherit;
+  font-weight: 600;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  border: var(--border-medium) solid var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cab-pop__button--ghost {
+  background: transparent;
+  color: var(--color-accent);
+}
+
+.cab-pop__button:focus-visible,
+.cab-pop__close:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.cab-pop__close {
+  position: absolute;
+  inset-block-start: var(--space-1);
+  inset-inline-end: var(--space-2);
+  font: inherit;
+  font-size: var(--text-lg);
+  line-height: 1;
+  padding: var(--space-1);
+  border: 0;
+  background: none;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+/* The object itself in a pop-up (the PNG of the shelf), no frame. */
+.cab-thumb {
+  inline-size: auto;
+  max-inline-size: var(--cab-thumb-size);
+  block-size: var(--cab-thumb-size);
+  object-fit: contain;
+  filter: var(--cab-obj-shadow);
+}
+
+/* ---- A hidden sardine ---- */
+.cab-sardine {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  cursor: pointer;
+  inline-size: var(--cab-sardine-size);
+  padding: var(--space-3) var(--space-2);
+  margin-block-start: var(--space-4);
+  border-radius: var(--radius-sm);
+}
+
+.cab-sardine svg {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
+.cab-sardine:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.cab-sardine--end {
+  margin-inline-start: auto;
+}
+
+.cab-sardine--flip svg {
+  transform: scaleX(-1);
+}
+
+.cab-sardine--gone {
+  block-size: var(--space-5);
+  cursor: default;
+}
+
+.cab-sardine--swim {
+  pointer-events: none;
+  animation: cab-swim 0.9s ease-in forwards;
+}
+
+@keyframes cab-swim {
+  to {
+    transform: translateX(var(--cab-swim, var(--cab-swim-far)));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cab-sardine--swim {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* The strip the sardine sits in: the tail of the main column, never over a control. */
+.cab-corner {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cab-corner--start {
+  justify-content: flex-start;
+}
+
+/* ---- The page of the cabinet ---- */
+.cabinet {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.cabinet__preview {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-notice-border);
+  border-radius: var(--radius-md);
+  background: var(--color-notice-bg);
+  color: var(--color-notice-ink);
+  font-weight: 600;
+}
+
+/* The head: the title, under it the counter, the tin to the right of the counter (to the right of the title from 768 px), its caption under it. */
+.cabinet__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-1) var(--space-4);
+  align-items: end;
+}
+
+.cabinet__head h1 {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.cabinet__head p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.cabinet__lead {
+  /* The page grid has a --space-5 gap: the line sits 8px under the head. */
+  margin: calc(var(--space-2) - var(--space-5)) 0 0;
+  color: var(--color-muted);
+  max-inline-size: var(--cab-lead);
+}
+
+.cabinet__tin {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  cursor: pointer;
+  border-radius: var(--radius-md);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+}
+
+.cabinet__tin svg {
+  inline-size: var(--cab-tin-size);
+  block-size: auto;
+  display: block;
+}
+
+.cabinet__tin-count {
+  font-variant-numeric: tabular-nums;
+}
+
+.cabinet__tin:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+@media (min-width: 48rem) {
+  .cabinet__head h1 {
+    grid-column: 1;
+  }
+
+  .cabinet__tin {
+    grid-row: 1 / 3;
+    grid-column: 2;
+  }
+
+  .cabinet__tin svg {
+    inline-size: var(--cab-tin-size-wide);
+  }
+}
+
+/* The shelves: the objects stand on the board, their lower edges on one line. */
+.cabinet__shelves {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.shelf {
+  --oh: var(--cab-obj-h);
+}
+
+.shelf__in {
+  max-inline-size: var(--cab-shelf-max);
+  margin-inline: auto;
+}
+
+.shelf h2 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-2);
+  font-size: var(--cab-shelf-title);
+}
+
+.shelf h2 span {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.shelf__objs,
+.shelf__labels {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr));
+  gap: 0 var(--cab-col-gap);
+  padding-inline: var(--cab-col-pad);
+  max-inline-size: calc(var(--n, 3) / 3 * 100%);
+  margin-inline: auto;
+}
+
+.shelf__objs {
+  align-items: end;
+  block-size: var(--oh);
+}
+
+.cab-obj {
+  all: unset;
+  box-sizing: border-box;
+  min-inline-size: 0;
+  block-size: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.cab-obj img {
+  display: block;
+  inline-size: auto;
+  block-size: auto;
+  max-block-size: var(--oh);
+  max-inline-size: 100%;
+  object-fit: contain;
+  filter: var(--cab-obj-shadow);
+}
+
+/* Not found: the same picture as a silhouette. */
+.cab-obj:not([data-found]) img {
+  filter: var(--cab-sil);
+}
+
+:root[data-theme='dark'] .cab-obj:not([data-found]) img {
+  filter: var(--cab-sil-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .cab-obj:not([data-found]) img {
+    filter: var(--cab-sil-dark);
+  }
+}
+
+.cab-obj:focus-visible {
+  outline: var(--ring-width) solid var(--color-focus);
+  outline-offset: var(--ring-offset-tight);
+}
+
+.shelf__board {
+  block-size: var(--cab-board-height);
+  margin-inline: calc(-1 * var(--space-1));
+  border-radius: var(--radius-sm);
+  background: linear-gradient(var(--ep) 0 var(--cab-board-top), color-mix(in srgb, var(--ep) 80%, var(--cab-board-dark)) var(--cab-board-top));
+  box-shadow: var(--cab-board-glow);
+}
+
+.shelf__labels {
+  margin-block-start: var(--space-2);
+}
+
+.shelf__labels span {
+  font-size: var(--cab-label);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.shelf__labels span[data-unknown] {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+@media (min-width: 48rem) {
+  .shelf {
+    --oh: var(--cab-obj-h-wide);
+  }
+
+  .shelf__objs,
+  .shelf__labels {
+    gap: 0 var(--cab-col-gap-wide);
+    padding-inline: var(--cab-col-pad-wide);
+  }
+
+  .shelf__labels span {
+    font-size: var(--cab-label-wide);
+  }
+}
+
+.cab-obj__stub {
+  inline-size: 40%;
+  fill: none;
+  stroke: var(--ep);
+  stroke-width: 3;
+}
+
+.cab-obj:not([data-found]) .cab-obj__stub {
+  stroke: var(--color-border-strong);
+}
+
+.cabinet__soon {
+  margin: var(--space-6) 0 0;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.cabinet__soon::before {
+  content: '';
+  display: block;
+  inline-size: var(--cab-rule);
+  block-size: 1px;
+  background: var(--color-border);
+  margin: 0 auto var(--space-3);
+}
+
+.cabinet__empty,
+.cabinet__no-js {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+html[data-js] .cabinet__no-js {
+  display: none;
+}
+
+/* The finished cabinet: a card under the head, the bunting hangs along its top edge on a cord (src/lib/cabinet-art.ts, buntingSvg: drawn by the script at the width of the card). */
+.cabinet__party {
+  display: none;
+  position: relative;
+  padding: var(--cab-party-top) var(--space-4) var(--space-4);
+  border-radius: var(--cab-card-radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* 32px (--space-6) to the first shelf, as between the shelves: the grid gap is --space-5. */
+.cabinet[data-complete] .cabinet__party {
+  display: block;
+  margin-block-end: calc(var(--space-6) - var(--space-5));
+}
+
+.cabinet__party svg {
+  position: absolute;
+  inset: 0 auto auto 0;
+  inline-size: 100%;
+  block-size: var(--cab-party-top);
+}
+
+.cabinet__party p {
+  margin: 0 auto;
+  max-inline-size: var(--cab-line);
+  color: var(--color-muted);
+}
+
+.cabinet__party-title {
+  margin-block-end: var(--cab-party-gap);
+  font-family: var(--font-heading);
+  font-size: var(--cab-party-title);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-text);
+}
+
+.cabinet__party p.cabinet__party-title {
+  color: var(--color-text);
+}
+
+@media (min-width: 48rem) {
+  .cabinet__party {
+    padding-block-start: var(--cab-party-top-wide);
+  }
+
+  .cabinet__party svg {
+    block-size: var(--cab-party-top-wide);
+  }
+}
+
+/* ---- The story of a rarity ---- */
+.cab-ribbon {
+  margin: 0 0 var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  border-inline-start: var(--epoch-accent-bar);
+  background: var(--color-accent-tint);
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  letter-spacing: var(--letter-label);
+  text-transform: uppercase;
+}
+
+.cab-back {
+  margin-block: var(--space-5);
+  font-weight: 600;
+}
+
+/* ---- The card of the cabinet in the hub of the games ---- */
+.cab-card-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  background: var(--color-accent-tint);
+}
+
+.cab-card-art svg {
+  inline-size: 55%;
+  block-size: auto;
+}
