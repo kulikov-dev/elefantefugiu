@@ -25,9 +25,9 @@ interface Payload {
   items: Record<string, ItemData>;
   partyHref: string | null;
   href: string;
-  hubCard: string;
-  footerLink: string;
-  games: string;
+  hubCard?: string;
+  footerLink?: string;
+  games?: string;
 }
 
 const fill = (text: string, vars: Record<string, string | number>): string => Object.entries(vars).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, String(v)), text);
@@ -76,10 +76,14 @@ function payload(): Promise<Payload | null> {
       return Promise.resolve(null);
     }
   }
-  return (payloadPromise ??= fetch(withBase(`${lang}/cabinet.json`))
-    .then((r) => (r.ok ? (r.json() as Promise<Payload>) : null))
-    .catch(() => null));
+  return (payloadPromise ??= fetchPayload());
 }
+
+/** The full payload (with the card of the hub and the link of the footer): the page of the cabinet carries a short one inline. */
+const fetchPayload = (): Promise<Payload | null> =>
+  fetch(withBase(`${lang}/cabinet.json`))
+    .then((r) => (r.ok ? (r.json() as Promise<Payload>) : null))
+    .catch(() => null);
 
 const visible = (item: ItemData): boolean => isVisibleInMode({ minAge: item.minAge, sensitive: item.sensitive }, currentFamilyMode());
 
@@ -428,15 +432,13 @@ function mountSardine(n: number, start: boolean, into: HTMLElement, data: Payloa
 
 // ---- The preview: the links the closed build does not have ----
 async function wirePreview(): Promise<void> {
-  const data = await payload();
+  const data = await fetchPayload();
   if (!data) return;
   const list = document.querySelector('.games__list');
-  if (list && !list.querySelector('[data-cabinet-card]')) list.insertAdjacentHTML('beforeend', data.hubCard);
-  for (const links of document.querySelectorAll('.site-footer__links')) {
-    if (links.querySelector('[data-cabinet-link]')) continue;
-    const games = links.querySelector(`a[href="${data.games}"]`)?.closest('li');
-    if (games) games.insertAdjacentHTML('afterend', data.footerLink);
-    else links.insertAdjacentHTML('beforeend', data.footerLink);
+  if (list && data.hubCard && !list.querySelector('[data-cabinet-card]')) list.insertAdjacentHTML('beforeend', data.hubCard);
+  // The footer link goes right after "Games" and nowhere else; with no place found, nothing is inserted.
+  if (data.footerLink && data.games && !document.querySelector('.site-footer [data-cabinet-link]')) {
+    document.querySelector(`.site-footer__links a[href="${data.games}"]`)?.closest('li')?.insertAdjacentHTML('afterend', data.footerLink);
   }
   const back = document.querySelector<HTMLElement>('[data-cab-back]');
   if (back && !back.querySelector('a')) {

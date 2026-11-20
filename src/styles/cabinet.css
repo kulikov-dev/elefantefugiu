@@ -229,7 +229,8 @@ button.cw:focus-visible {
 }
 
 .cabinet__lead {
-  margin: var(--space-2) 0 0;
+  /* The page grid has a --space-5 gap: the line sits 8px under the head. */
+  margin: calc(var(--space-2) - var(--space-5)) 0 0;
   color: var(--color-muted);
   max-inline-size: var(--cab-lead);
 }
@@ -453,8 +454,10 @@ html[data-js] .cabinet__no-js {
   overflow: hidden;
 }
 
+/* 32px (--space-6) to the first shelf, as between the shelves: the grid gap is --space-5. */
 .cabinet[data-complete] .cabinet__party {
   display: block;
+  margin-block-end: calc(var(--space-6) - var(--space-5));
 }
 
 .cabinet__party svg {

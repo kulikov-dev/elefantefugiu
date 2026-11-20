@@ -120,6 +120,7 @@ if (want('page')) {
     ok(`page (${scheme}): only the found one is a thumbnail, the others are dashed`, tiles.filter((t) => t.found).map((t) => t.id).join() === found.join());
     const line = await page.$eval('[data-found-line]', (e) => e.textContent);
     ok(`page (${scheme}): the counter counts the found ones`, line.includes(`${found.length}`) && line.includes(`${cabinetItems.length}`), line);
+    ok(`page (${scheme}): no text "undefined" on the page`, await page.evaluate(() => !document.body.innerText.includes('undefined')));
     ok(`page (${scheme}): no horizontal scroll at 390`, !(await overflow(page)));
     if (scheme === 'light') {
       await page.click(`.cab-obj[data-item="${found[0]}"]`);
@@ -259,6 +260,8 @@ if (want('closed')) {
   const pre = await open(REAL, `/pt/${PAGES.games.pt}/?kabinet=preview`);
   await wait(400);
   ok('preview: ?kabinet=preview leaves the address clean and sets the flag', await pre.evaluate(() => !location.search.includes('kabinet') && localStorage.getItem('cabinet.preview') === '1' && document.documentElement.dataset.cabinet === 'preview'));
+  ok('preview: the link in the footer is in the "Participate" list right after Games', await pre.evaluate((gamesSeg) => { const a = document.querySelector('.site-footer a[href*="/gabinete/"]'); const prev = a?.closest('li')?.previousElementSibling?.querySelector('a'); return !!prev && prev.getAttribute('href').includes(`/${gamesSeg}/`) && document.querySelectorAll('.site-footer a[href*="/gabinete/"]').length === 1; }, PAGES.games.pt));
+  ok('preview: no text "undefined" in the hub', await pre.evaluate(() => !document.body.innerText.includes('undefined')));
   ok('preview: the card in the hub and the link in the footer appear', await pre.evaluate(() => !!document.querySelector('[data-cabinet-card]') && !!document.querySelector('.site-footer a[href*="/gabinete/"]')));
   await pre.goto(`${REAL}${await findWordPage('pt')}`, { waitUntil: 'networkidle0' });
   await wait(400);
