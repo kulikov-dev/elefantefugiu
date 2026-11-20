@@ -184,6 +184,13 @@ const PAIRS = [
   ['selected marker outline on map land', 'ink', 'map-land', G],
   ['selected marker outline on map water', 'ink', 'map-water', G],
   ['text on marker caption (over map land)', 'text', 'overlay>map-land', T],
+  // The map of a journey in a story: the path (the colour of the epoch) on the water and on the land (the page), the rim of the stops on the land, the labels (the text colour, a halo of the colour of the land) over both.
+  ['route line on water', 'map-route-line', 'map-route-water', G],
+  ['route line on land', 'map-route-line', 'map-route-land', G],
+  ['route stop rim on land', 'map-route-point', 'map-route-land', G],
+  ['route label on land (its halo)', 'text', 'map-route-land', T],
+  ['route label on water', 'text', 'map-route-water', T],
+  ['route coast on water (decorative)', 'map-route-coast', 'map-route-water', null],
   ['divider on page (decorative)', 'border', 'epoch-tint', null],
   ['divider on surface (decorative)', 'border', 'surface', null],
 ];
@@ -201,7 +208,7 @@ function colorOf(spec, props, theme) {
   // The ground of the map: the land and water colours of the CARTO styles Voyager (light theme) and Dark Matter (dark theme),
   // taken from their style files at basemaps.cartocdn.com/gl/voyager-gl-style and dark-matter-gl-style.
   const MAP_GROUND = { light: { 'map-land': '#fbf8f3', 'map-water': '#b0d0d6' }, dark: { 'map-land': '#0e0e0e', 'map-water': '#2c353c' } };
-  const get = (name) => MAP_GROUND[theme]?.[name] ? parseColor(MAP_GROUND[theme][name]) : parseColor(resolveText(`var(--${name === 'epoch-tint' || name.startsWith('epoch-') || name.startsWith('viz-') || name.startsWith('festa-') ? name : `color-${name}`})`, props, theme));
+  const get = (name) => MAP_GROUND[theme]?.[name] ? parseColor(MAP_GROUND[theme][name]) : parseColor(resolveText(`var(--${name === 'epoch-tint' || name.startsWith('map-route-') || name.startsWith('epoch-') || name.startsWith('viz-') || name.startsWith('festa-') ? name : `color-${name}`})`, props, theme));
   const color = get(top);
   return back ? over(color, get(back)) : color;
 }

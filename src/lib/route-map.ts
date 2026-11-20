@@ -17,6 +17,8 @@ export interface MapPoint {
   mode?: RouteMode | undefined;
   approx?: boolean | undefined;
   river?: string | undefined;
+  /** `ferry`: the leg that arrives at this point went over water (a river crossed by a ferry inside a journey by land). */
+  leg?: 'ferry' | undefined;
 }
 export interface MapRoute {
   points: MapPoint[];
@@ -36,6 +38,14 @@ const DOT_PERIOD = 6;
 const CURVE_STEPS = 24;
 /** The land path is simplified further while it is longer than this (characters): a story page keeps its map near 10 KB of SVG. */
 const LAND_MAX = 8000;
+/** A map whose points span no more than this many degrees (the longer side) is a map of a region: it gets the land at 1:10m, so that an estuary can be seen. */
+export const FINE_MAX_DEG = 8;
+/** The dashes of a ferry leg (a longer stroke than the dots of an approximate leg). */
+/** The land path of a map of a region may be longer (characters): the estuaries need the vertices. */
+const LAND_MAX_FINE = 14000;
+/** Stops closer than this (units, about px) have smaller dots. */
+const CROWDED = 15;
+const FERRY_DASH = '5 5';
 
 type XY = [number, number];
 
@@ -43,6 +53,8 @@ export interface RouteRun {
   d: string;
   /** stroke-dasharray of an approximate (dotted) run, fitted so that the last dot sits on the end of the run. */
   dash?: string;
+  /** A ferry run: dashed (the same line, another stroke). */
+  ferry?: true;
 }
 export interface RouteLabel {
   x: number;
@@ -65,6 +77,8 @@ export interface RouteMapModel {
   /** The sea legs as drawn, in degrees, one entry per piece of the curve between two neighbouring points; `section` is the index of the stop-to-stop section (check:data walks it over the land). */
   seaTrack: { section: number; pts: [number, number][] }[];
   approx: boolean;
+  /** Some leg is a ferry (the note under the map explains the dashes). */
+  ferry: boolean;
 }
 
 const rad = (deg: number) => (deg * Math.PI) / 180;
@@ -97,6 +111,14 @@ export function routePath(names: string[]): string {
 
 /** A leg is approximate when the point it arrives at says so, else by the default of the route. */
 const legApprox = (route: MapRoute, p: MapPoint) => p.approx ?? route.approx ?? false;
+
+/** The land the map of this route is drawn on and checked against: 1:10m for a region (the points span up to FINE_MAX_DEG degrees), else 1:50m. */
+export function landOf(route: MapRoute, geo: RouteGeo): Ring[] {
+  const lons = route.points.map((p) => p.lng);
+  const lats = route.points.map((p) => p.lat);
+  const span = Math.max(Math.max(...lons) - Math.min(...lons), Math.max(...lats) - Math.min(...lats));
+  return span <= FINE_MAX_DEG && geo.fine ? geo.fine : geo.land;
+}
 
 /** Douglas-Peucker; a closed ring (first point = last) is measured from the first point. */
 function simplify(pts: XY[], tol: number): XY[] {
@@ -160,23 +182,52 @@ function unwrap(ring: Ring): Ring {
 }
 
 /** The land as one path: every ring that reaches the frame, cut a little outside it, simplified, tiny islands left out; a wide map is simplified more until the path is small. */
-function landPath(rings: Ring[], project: (lon: number, lat: number) => XY, w: number, h: number, lonWindow: [number, number]): string {
-  const flat = rings.map(unwrap);
+interface FlatRing {
+  ring: Ring;
+  lo: number;
+  hi: number;
+  minLat: number;
+  maxLat: number;
+}
+const flatCache = new WeakMap<Ring[], FlatRing[]>();
+/** The rings with continuous longitudes and their boxes, made once per set of rings (the fine land has about a million points). */
+function flatOf(rings: Ring[]): FlatRing[] {
+  let flat = flatCache.get(rings);
+  if (!flat) {
+    flat = rings.map((r) => {
+      const ring = unwrap(r);
+      let lo = Infinity;
+      let hi = -Infinity;
+      let minLat = Infinity;
+      let maxLat = -Infinity;
+      for (const [lon, lat] of ring) {
+        if (lon < lo) lo = lon;
+        if (lon > hi) hi = lon;
+        if (lat < minLat) minLat = lat;
+        if (lat > maxLat) maxLat = lat;
+      }
+      return { ring, lo, hi, minLat, maxLat };
+    });
+    flatCache.set(rings, flat);
+  }
+  return flat;
+}
+
+function landPath(rings: Ring[], project: (lon: number, lat: number) => XY, w: number, h: number, lonWindow: [number, number], latWindow: [number, number], fine: boolean): string {
+  const flat = flatOf(rings);
   let d = '';
-  for (const tolerance of [0.5, 0.8, 1.2, 1.8]) {
-    d = landPathAt(flat, project, w, h, lonWindow, tolerance);
-    if (d.length <= LAND_MAX) break;
+  for (const tolerance of fine ? [0.3, 0.5, 0.8, 1.2, 1.8] : [0.5, 0.8, 1.2, 1.8]) {
+    d = landPathAt(flat, project, w, h, lonWindow, latWindow, tolerance);
+    if (d.length <= (fine ? LAND_MAX_FINE : LAND_MAX)) break;
   }
   return d;
 }
 
-function landPathAt(rings: Ring[], project: (lon: number, lat: number) => XY, w: number, h: number, lonWindow: [number, number], tolerance: number): string {
+function landPathAt(rings: FlatRing[], project: (lon: number, lat: number) => XY, w: number, h: number, lonWindow: [number, number], latWindow: [number, number], tolerance: number): string {
   const margin = 20;
   let d = '';
-  for (const ring of rings) {
-    const lons = ring.map((p) => p[0]);
-    const lo = Math.min(...lons);
-    const hi = Math.max(...lons);
+  for (const { ring, lo, hi, minLat, maxLat } of rings) {
+    if (maxLat < latWindow[0] || minLat > latWindow[1]) continue;
     // The world repeats every 360 degrees: a ring (shifted by a turn) can reach the frame from either side.
     for (const turn of [-360, 0, 360]) {
       if (hi + turn < lonWindow[0] || lo + turn > lonWindow[1]) continue;
@@ -283,6 +334,7 @@ const overlap = (a: Box, b: Box) => !(a.x2 < b.x1 || a.x1 > b.x2 || a.y2 < b.y1 
 export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): RouteMapModel {
   const { w, h, padX, padY, font, minSpanDeg } = ROUTE_FRAME;
   const pts = route.points;
+  const land = landOf(route, geo);
 
   // The legs: the geometry each one needs, in degrees (a river leg follows the course of the river).
   const legs = pts.slice(1).map((p, i) => {
@@ -291,7 +343,7 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
     const to: [number, number] = [p.lng, p.lat];
     const course = p.mode === 'river' ? geo.rivers[p.river ?? ''] : undefined;
     if (p.mode === 'river' && !course) throw new Error(`route: unknown river "${p.river}"`);
-    return { mode: p.mode!, approx: legApprox(route, p), geometry: course ? riverBetween(course, from, to) : [from, to], to: p };
+    return { mode: p.mode!, approx: legApprox(route, p), ferry: p.leg === 'ferry', geometry: course ? riverBetween(course, from, to) : [from, to], to: p };
   });
 
   // The frame: the box of every point (and every river vertex) with room for the labels; Mercator.
@@ -306,15 +358,15 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
   const scale = Math.min((w - 2 * padX) / bw, (h - 2 * padY) / bh);
   const project = (lon: number, lat: number): XY => [w / 2 + (rad(lon) - cx) * scale, h / 2 - (mercY(lat) - cy) * scale];
 
-  // Runs: neighbouring legs of one kind (same mode, same approx) are drawn as one line; a river leg is a run of its own.
-  const runs: { mode: RouteMode; approx: boolean; pts: XY[]; legs: number[] }[] = [];
+  // Runs: neighbouring legs of one kind (same mode, same approx, both ferry or both not) are drawn as one line; a river leg is a run of its own.
+  const runs: { mode: RouteMode; approx: boolean; ferry: boolean; pts: XY[]; legs: number[] }[] = [];
   for (const [index, leg] of legs.entries()) {
     const line = leg.geometry.map(([lon, lat]) => project(lon, lat));
     const last = runs[runs.length - 1];
-    if (last && last.mode === leg.mode && last.approx === leg.approx && leg.mode !== 'river') {
+    if (last && last.mode === leg.mode && last.approx === leg.approx && last.ferry === leg.ferry && leg.mode !== 'river') {
       last.pts.push(...line.slice(1));
       last.legs.push(index);
-    } else runs.push({ mode: leg.mode, approx: leg.approx, pts: leg.mode === 'river' ? simplify(line, 0.35) : line, legs: [index] });
+    } else runs.push({ mode: leg.mode, approx: leg.approx, ferry: leg.ferry, pts: leg.mode === 'river' ? simplify(line, 0.35) : line, legs: [index] });
   }
 
   // The section of a leg: how many stops lie behind its start (the first point is a stop), less one.
@@ -327,6 +379,7 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
     // A curve of n points has n - 1 pieces of CURVE_STEPS samples each (the first sample is the start of the run).
     if (run.mode === 'sea') run.legs.forEach((leg, k) => seaTrack.push({ section: sectionOf[leg]!, pts: s.slice(k * CURVE_STEPS, (k + 1) * CURVE_STEPS + 1).map(unproject) }));
     samples.push(...s);
+    if (run.ferry) return { d, dash: FERRY_DASH, ferry: true };
     if (!run.approx) return { d };
     const total = lengthOf(s);
     const n = Math.max(1, Math.round((total - 1) / DOT_PERIOD));
@@ -335,7 +388,12 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
 
   // Dots and labels of the stops. A label goes to the first of eight places beside the dot where it covers no other label, no other dot, little of the line, and stays in the frame.
   const stopPoints = pts.map((p) => ({ p, xy: project(p.lng, p.lat) })).filter(({ p }) => !p.via);
-  const dots = stopPoints.map(({ xy }, i) => ({ x: r1(xy[0]), y: r1(xy[1]), r: i === stopPoints.length - 1 ? 5 : 4 }));
+  // Two stops closer than CROWDED px would run into each other (the rim of a dot is 1 unit outside its radius): their dots shrink to leave a gap of 2 units, down to 2.
+  const dots = stopPoints.map(({ xy }, i) => {
+    const near = Math.min(Infinity, ...stopPoints.filter((_, j) => j !== i).map((q) => dist(xy, q.xy)));
+    const r = i === stopPoints.length - 1 ? 5 : 4;
+    return { x: r1(xy[0]), y: r1(xy[1]), r: near < CROWDED ? r1(Math.max(2, Math.min(r, near / 2 - 2))) : r };
+  });
   const placed: Box[] = [];
   const gap = 9;
   const labels: RouteLabel[] = stopPoints.map(({ p, xy }) => {
@@ -367,7 +425,7 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
   return {
     w,
     h,
-    land: landPath(geo.land, project, w, h, [deg(cx + (-20 - w / 2) / scale), deg(cx + (w + 20 - w / 2) / scale)]),
+    land: landPath(land, project, w, h, [deg(cx + (-20 - w / 2) / scale), deg(cx + (w + 20 - w / 2) / scale)], [unproject([0, h + 20])[1], unproject([0, -20])[1]], land !== geo.land),
     mask: drawn.map((r) => r.d).join(''),
     runs: drawn,
     dots,
@@ -376,6 +434,7 @@ export function buildRouteMap(route: MapRoute, lang: Lang, geo: RouteGeo): Route
     path: routePath(stops.map((p) => p.name)),
     years: routeYears(route),
     seaTrack,
-    approx: legs.some((l) => l.approx),
+    approx: legs.some((l) => l.approx && !l.ferry),
+    ferry: legs.some((l) => l.ferry),
   };
 }

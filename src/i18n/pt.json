@@ -447,7 +447,8 @@
   "route": {
     "caption": "Percurso: {path}",
     "points": "Pontos do percurso",
-    "approx": "aproximado"
+    "approx": "aproximado",
+    "ferry": "travessia de barco"
   },
   "theme": {
     "label": "Tema",

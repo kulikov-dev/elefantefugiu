@@ -34,7 +34,7 @@ const captionId = `route-caption-${id}`;
       <path class="route__land" d={map.land} />
       <g mask={`url(#${maskId})`}>
         {map.runs.map((run) => <path class="route__halo" d={run.d} />)}
-        {map.runs.map((run) => <path class:list={['route__line', { 'route__line--approx': run.dash }]} d={run.d} stroke-dasharray={run.dash} />)}
+        {map.runs.map((run) => <path class:list={['route__line', { 'route__line--approx': run.dash && !run.ferry, 'route__line--ferry': run.ferry }]} d={run.d} stroke-dasharray={run.dash} />)}
       </g>
       {map.dots.map((dot) => <circle class="route__dot" cx={dot.x} cy={dot.y} r={dot.r} />)}
       {
@@ -51,6 +51,14 @@ const captionId = `route-caption-${id}`;
       <p class="route__note">
         <svg class="route__legend" viewBox="0 0 32 4" aria-hidden="true" focusable="false"><path class="route__line route__line--approx" d="M1 2H31" stroke-dasharray="1 5.8" /></svg>
         {t(lang, 'route.approx')}
+      </p>
+    )
+  }
+  {
+    map.ferry && (
+      <p class="route__note">
+        <svg class="route__legend" viewBox="0 0 32 4" aria-hidden="true" focusable="false"><path class="route__line route__line--ferry" d="M1 2H31" stroke-dasharray="5 5" /></svg>
+        {t(lang, 'route.ferry')}
       </p>
     )
   }
@@ -82,18 +90,18 @@ const captionId = `route-caption-${id}`;
     display: block;
     inline-size: 100%;
     block-size: auto;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
   }
 
   .route__sea {
-    fill: var(--route-sea);
+    fill: var(--map-route-water);
   }
 
   .route__land {
-    fill: var(--route-land);
-    stroke: var(--route-coast);
-    stroke-width: 0.5;
+    fill: var(--map-route-land);
+    stroke: var(--map-route-coast);
+    stroke-width: 0.7;
     stroke-linejoin: round;
   }
 
@@ -105,28 +113,34 @@ const captionId = `route-caption-${id}`;
   }
 
   .route__halo {
-    stroke: var(--route-sea);
+    stroke: var(--map-route-land);
     stroke-opacity: 0.75;
     stroke-width: 5;
   }
 
   .route__line {
-    stroke: var(--epoch-primary);
+    stroke: var(--map-route-line);
     stroke-width: 2;
   }
 
+  /* A ferry: the same line, longer dashes with square ends (an approximate leg is dots). */
+  .route__line--ferry {
+    stroke-linecap: butt;
+  }
+
+  /* A stop: the colour of the land inside, the colour of the path as the rim. */
   .route__dot {
-    fill: var(--epoch-primary);
-    stroke: var(--route-sea);
+    fill: var(--map-route-land);
+    stroke: var(--map-route-point);
     stroke-width: 2;
   }
 
-  /* The text face of the site, regular weight; the halo of the colour of the sea keeps it readable over land and over the line. */
+  /* The text face of the site, regular weight; the halo of the colour of the land keeps it readable over the water, the coast and the line. */
   .route__label {
     fill: var(--color-text);
     font-family: var(--font-body);
     paint-order: stroke;
-    stroke: var(--route-sea);
+    stroke: var(--map-route-land);
     stroke-linejoin: round;
     stroke-width: 2;
   }

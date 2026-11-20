@@ -254,17 +254,57 @@ seo:
     en: "The Cantino Map: A State Secret for 12 Ducats, 1502"
     ru: "Карта Кантино: государственная тайна за 12 дукатов, 1502"
 route:
+  approx: true
   points:
     - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
       lat: 38.7223
       lng: -9.1393
       year: 1502
+    - via: true
+      lat: 39.0
+      lng: -9.2
+      mode: land
+    - via: true
+      lat: 40.42
+      lng: -3.70
+      mode: land
+    - via: true
+      lat: 41.65
+      lng: -0.89
+      mode: land
+    - via: true
+      lat: 43.21
+      lng: 2.35
+      mode: land
+    - via: true
+      lat: 43.84
+      lng: 4.36
+      mode: land
+    - via: true
+      lat: 43.53
+      lng: 5.45
+      mode: land
+    - via: true
+      lat: 43.54
+      lng: 6.47
+      mode: land
+    - via: true
+      lat: 44.2
+      lng: 7.3
+      mode: land
+    - via: true
+      lat: 45.07
+      lng: 7.69
+      mode: land
+    - via: true
+      lat: 44.8
+      lng: 10.33
+      mode: land
     - name: { pt: "Ferrara", en: "Ferrara", ru: "Феррара" }
       lat: 44.8354
       lng: 11.6198
       year: 1502
       mode: land
-      approx: true
     - name: { pt: "Módena", en: "Modena", ru: "Модена" }
       lat: 44.6471
       lng: 10.9252

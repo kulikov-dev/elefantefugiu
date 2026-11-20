@@ -1,6 +1,8 @@
-// The geodata of the route maps (src/data/geo/): the land of the world (Natural Earth 1:50m, TopoJSON) and the courses of the rivers a leg can follow.
-// Read once per build. Pure data, no Astro imports (the route maps are drawn by src/lib/route-map.ts, which takes this as an argument).
+// The geodata of the route maps (src/data/geo/): the land of the world (Natural Earth 1:50m for maps of a sea or an ocean, 1:10m for maps of a region,
+// TopoJSON) and the courses of the rivers a leg can follow. Read once per build, the fine one only when a map of a region asks for it.
+// Pure data, no Astro imports (the route maps are drawn by src/lib/route-map.ts, which takes this as an argument).
 import landTopology from '../data/geo/land-50m.json';
+import fineTopology from '../data/geo/land-10m.json';
 import riverData from '../data/geo/rivers.json';
 
 /** A ring of [lon, lat] pairs (a coast, an island, a lake in a continent). */
@@ -8,6 +10,8 @@ export type Ring = [number, number][];
 
 export interface RouteGeo {
   land: Ring[];
+  /** The land at 1:10m (the estuaries of the Tagus and the Sado are there), for a map that covers a region; absent: `land` serves every map. */
+  fine?: Ring[];
   /** The course of a river from upstream to the mouth, by id (`river: douro` in the data of a story). */
   rivers: Record<string, [number, number][]>;
 }
@@ -47,6 +51,15 @@ export function decodeLand(topology: Topology): Ring[] {
 let cached: RouteGeo | undefined;
 
 export function routeGeo(): RouteGeo {
-  cached ??= { land: decodeLand(landTopology as unknown as Topology), rivers: riverData as unknown as Record<string, [number, number][]> };
+  if (!cached) {
+    let fine: Ring[] | undefined;
+    cached = {
+      land: decodeLand(landTopology as unknown as Topology),
+      get fine() {
+        return (fine ??= decodeLand(fineTopology as unknown as Topology));
+      },
+      rivers: riverData as unknown as Record<string, [number, number][]>,
+    };
+  }
   return cached;
 }

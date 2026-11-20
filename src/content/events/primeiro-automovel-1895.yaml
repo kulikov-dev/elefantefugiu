@@ -147,15 +147,29 @@ published: 2026-11-17
 placeholder: false
 ru_ready: true
 route:
+  approx: true
   points:
     - name: { pt: "Lisboa", en: "Lisbon", ru: "Лиссабон" }
       lat: 38.7223
       lng: -9.1393
       year: 1895
+    - via: true
+      lat: 38.66
+      lng: -9.07
+      mode: land
+      leg: ferry
     - name: { pt: "Palmela", en: "Palmela", ru: "Палмела" }
       lat: 38.5686
       lng: -8.9014
       year: 1895
+      mode: land
+    - via: true
+      lat: 38.3725
+      lng: -8.5106
+      mode: land
+    - via: true
+      lat: 38.1764
+      lng: -8.5668
       mode: land
     - name: { pt: "Santiago do Cacém", en: "Santiago do Cacém", ru: "Сантьягу-ду-Касен" }
       lat: 38.0178

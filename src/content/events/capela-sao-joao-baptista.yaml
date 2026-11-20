@@ -167,8 +167,8 @@ route:
       lng: 12.4539
       year: 1742
     - via: true
-      lat: 42.1
-      lng: 11.7
+      lat: 42.09
+      lng: 11.8
       mode: land
     - via: true
       lat: 39
