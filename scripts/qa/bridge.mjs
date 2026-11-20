@@ -148,8 +148,13 @@ if (want('block')) {
       const b = await page.evaluate(() => {
         const s = document.querySelector('[data-bridge]');
         const vis = (el) => !!el && el.getClientRects().length > 0;
-        return { visible: vis(s), name: s.querySelector('.bridge__name')?.textContent.trim(), address: s.querySelector('.bridge__address')?.textContent.trim(), note: s.querySelector('.bridge__note')?.textContent.trim(), noteLang: s.querySelector('.bridge__note')?.getAttribute('lang'), links: [...s.querySelectorAll('.bridge__go a, .bridge__links a')].map((a) => ({ text: a.textContent.trim(), href: a.getAttribute('href'), rel: a.getAttribute('rel'), h: Math.round(a.getBoundingClientRect().height), vis: vis(a) })), overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth };
+        return { visible: vis(s), name: s.querySelector('.bridge__name')?.textContent.trim(), address: s.querySelector('.bridge__address')?.textContent.trim(), note: s.querySelector('.bridge__note')?.textContent.trim(), noteLang: s.querySelector('.bridge__note')?.getAttribute('lang'), links: [...s.querySelectorAll('.bridge__go a, .bridge__links a')].map((a) => ({ text: a.textContent.trim(), href: a.getAttribute('href'), rel: a.getAttribute('rel'), h: Math.round(a.getBoundingClientRect().height), vis: vis(a), place: a.hasAttribute('data-place-link') })), overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth };
       });
+      // "More stories of ..." (data-place-link) is there only when the place of the story has a page (three or more stories): it is checked on its own, the rest is as it was.
+      const placeLinks = b.links.filter((l) => l.place);
+      b.links = b.links.filter((l) => !l.place);
+      const placeSegment = lang === 'pt' ? 'lugares' : 'places';
+      ok(`bridge block (${lang}, ${e.id}): a link to the page of the place, if there is one, leads to /${placeSegment}/<id>/ and is visible and 44 px tall`, placeLinks.length <= 1 && placeLinks.every((l) => new RegExp(`/${placeSegment}/[a-z0-9-]+/$`).test(l.href) && l.vis && l.h >= 44), JSON.stringify(placeLinks));
       // One button "Como chegar" (44 px), under it plain links: "Ver no mapa", "O que mais há perto de si →" (the map that starts Near me) and "Sítio oficial".
       const names = lang === 'pt' ? ['Como chegar', 'Ver no mapa', 'O que mais há perto de si →', 'Sítio oficial'] : ['Get directions', 'Open on map', 'What else is near you →', 'Official website'];
       ok(`bridge block (${lang}, ${e.id}): name, address and the note of this language`, b.visible && b.name === bname(e, lang) && b.address === e.bridge.address && b.note === e.bridge.note[lang], JSON.stringify([b.name, b.address, b.note]));

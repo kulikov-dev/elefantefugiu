@@ -121,11 +121,16 @@ if (want('keys')) {
   ok('keys: a query of a place gives at most 10 results and the line of the map', first.n >= 1 && first.n <= 10 && first.map, JSON.stringify(first));
   await page.keyboard.press('ArrowDown');
   const down1 = await page.evaluate(() => document.activeElement.className);
-  await page.keyboard.press('ArrowDown');
-  const down2 = await page.evaluate(() => document.activeElement.closest('.search__item') !== null);
-  ok('keys: ↓ goes to the line of the map, then to the first result', /search__map/.test(down1) && down2, `${down1}`);
-  await page.keyboard.press('ArrowUp');
-  await page.keyboard.press('ArrowUp');
+  // The lines above the results are links of the class search__map: the map, and the page of the place when the place has one (one or two lines).
+  let lines = 1;
+  let onResult = false;
+  while (!onResult && lines <= 3) {
+    await page.keyboard.press('ArrowDown');
+    onResult = await page.evaluate(() => document.activeElement.closest('.search__item') !== null);
+    if (!onResult) lines += 1;
+  }
+  ok('keys: ↓ goes to the line of the map (and the page of the place), then to the first result', /search__map/.test(down1) && onResult && lines <= 2, `${down1} ${lines}`);
+  for (let i = 0; i < lines + 1; i++) await page.keyboard.press('ArrowUp');
   ok('keys: ↑ goes back up to the field', (await page.evaluate(() => document.activeElement.className)).includes('search__input'));
   const firstHref = (await top(page, 1))[0];
   await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.keyboard.press('Enter')]);
