@@ -50,9 +50,9 @@ label: documented
 min_age: all
 sensitive: false
 hook:
-  pt: O molho romano de peixe podre era um artigo de luxo.
-  en: Roman sauce made from rotten fish was a luxury.
-  ru: Римский соус из тухлой рыбы был предметом роскоши.
+  pt: O molho romano de peixe podre valia quase tanto como perfume.
+  en: Romans prized a sauce of rotten fish almost like perfume.
+  ru: Римский соус из тухлой рыбы ценился почти как духи.
 seo:
   title:
     pt: O jarro do molho de peixe, Tróia | O Elefante Fugiu

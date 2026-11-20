@@ -33,9 +33,11 @@ bridge:
   maps_url: https://www.google.com/maps/place/Museu+Nacional+do+Azulejo/@38.7250601,-9.1161139,17z/data=!3m1!4b1!4m6!3m5!1s0xd1933e8da53a15f:0xb31d6f4a8645bc28!8m2!3d38.7250559!4d-9.113539
   url: https://www.museusemonumentos.pt/pt/museus-e-monumentos/museu-nacional-do-azulejo
   note:
-    pt: "Aqui vê-se o azulejo pombalino: um padrão simples que se repete em cada quadrado."
-    en: "Pombaline tiles are on display here: a simple pattern repeated on every square."
-    ru: "Здесь можно увидеть помбалинскую плитку: простой узор, который повторяется на каждом квадрате."
+    pt: Os azulejos pombalinos estão reunidos no Museu do Azulejo (agora fechado para obras, confirme
+      antes de ir).
+    en: Pombaline tiles are gathered in the Tile Museum (now closed for renovation, check before
+      visiting).
+    ru: Помбалинские плитки собраны в Музее азулежу (сейчас закрыт на ремонт, проверьте перед визитом).
 threads:
   - engenho
 importance: 1

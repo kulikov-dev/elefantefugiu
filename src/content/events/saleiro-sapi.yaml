@@ -37,12 +37,12 @@ bridge:
   maps_url: https://www.google.com/maps/place/Museu+Nacional+de+Arte+Antiga/@38.7048454,-9.1640392,17z/data=!3m1!4b1!4m6!3m5!1s0xd193499628e7b19:0xc932f1ff3fad2b24!8m2!3d38.7048412!4d-9.1614643
   url: https://www.museudearteantiga.pt/
   note:
-    pt: Num painel de 1530, uma colher de marfim, tida como da Serra Leoa, está num prato diante da
-      Virgem.
-    en: A 1530 panel shows an ivory spoon, thought to be from Sierra Leone, on a plate before the
-      Virgin.
-    ru: На картине около 1530 года в тарелке перед Девой Марией лежит ложка из слоновой кости, как
-      считается, вырезанная в Сьерра-Леоне.
+    pt: Numa pintura de 1530 há uma colher de marfim, tida como da Serra Leoa (veja se o museu está
+      aberto).
+    en: A 1530 painting here shows an ivory spoon, thought to be from Sierra Leone (check the museum is
+      open).
+    ru: В музее на картине 1530 года лежит ложка из слоновой кости, как считается, из Сьерра-Леоне
+      (проверьте, открыт ли музей).
 threads:
   - mar
   - gente-como-nos

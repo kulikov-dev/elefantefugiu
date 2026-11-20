@@ -2,7 +2,6 @@
 // Run by the build before astro build (npm run build), and by hand when a picture changes:   node scripts/make-cabinet-shelf.mjs
 //   in    docs/images/cabinet/shelf-src/kNN-name.jpg   the object on a pure white background (the owner's pictures)
 //   out   docs/images/cabinet/shelf/kNN-name.png       kept in the repository (to compare by eye)
-//         docs/images/cabinet/shelf/kNN-name-outline.png   the dashed inner outline of the object by its alpha mask (a mask for the page: a rarity not found yet is shown by its shape)
 //         public/cabinet-shelf/kNN-name.png            the copy the site serves (not in the repository)
 // The background is the near-white (min(r,g,b) > 232) area that touches the edge of the picture (a fill from the edges: white inside the object stays); it becomes transparent,
 // the edge is blurred by one pixel, the picture is cropped to the object and fitted into 420 x 300 (about twice the largest size it is shown at: 160 px high, a column wide).
@@ -104,44 +103,6 @@ export async function cutOut(file) {
     .toBuffer();
 }
 
-/** The outline of an object by its alpha mask: a band of OUTLINE_WIDTH pixels inside its edge, cut into dashes (diagonal stripes), as an alpha-only PNG of the same size (no fill). */
-const OUTLINE_WIDTH = 4;
-const DASH = 7;
-export async function dashedOutline(png) {
-  const { data, info } = await sharp(png).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const { width, height } = info;
-  const inside = new Uint8Array(width * height);
-  for (let i = 0; i < width * height; i++) inside[i] = data[i * 4 + 3] > 128 ? 1 : 0;
-  // erosion by OUTLINE_WIDTH (square window, two passes), so that inside & ~eroded is the band along the edge
-  const pass = (src, horizontal) => {
-    const out = new Uint8Array(width * height);
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        let all = 1;
-        for (let d = -OUTLINE_WIDTH; d <= OUTLINE_WIDTH && all; d++) {
-          const xx = horizontal ? x + d : x;
-          const yy = horizontal ? y : y + d;
-          if (xx < 0 || yy < 0 || xx >= width || yy >= height || !src[yy * width + xx]) all = 0;
-        }
-        out[y * width + x] = all;
-      }
-    }
-    return out;
-  };
-  const eroded = pass(pass(inside, true), false);
-  const rgba = Buffer.alloc(width * height * 4);
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      const i = y * width + x;
-      const band = inside[i] && !eroded[i];
-      const dash = Math.floor((x + y) / DASH) % 2 === 0;
-      rgba[i * 4] = rgba[i * 4 + 1] = rgba[i * 4 + 2] = 255;
-      rgba[i * 4 + 3] = band && dash ? 255 : 0;
-    }
-  }
-  return sharp(rgba, { raw: { width, height, channels: 4 } }).png({ compressionLevel: 9 }).toBuffer();
-}
-
 if (!existsSync(srcDir)) {
   console.log('make-cabinet-shelf: no docs/images/cabinet/shelf-src, nothing to do');
 } else {
@@ -153,9 +114,6 @@ if (!existsSync(srcDir)) {
     const png = await cutOut(join(srcDir, name));
     await sharp(png).toFile(join(outDir, target));
     copyFileSync(join(outDir, target), join(publicDir, target));
-    const outline = target.replace(/.png$/, '-outline.png');
-    await sharp(await dashedOutline(png)).toFile(join(outDir, outline));
-    copyFileSync(join(outDir, outline), join(publicDir, outline));
   }
-  console.log(`make-cabinet-shelf: ${names.length} object(s) cut out (with the dashed outline of each) into docs/images/cabinet/shelf and public/cabinet-shelf`);
+  console.log(`make-cabinet-shelf: ${names.length} object(s) cut out into docs/images/cabinet/shelf and public/cabinet-shelf`);
 }

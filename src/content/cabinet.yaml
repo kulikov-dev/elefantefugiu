@@ -11,9 +11,9 @@
     ru: Амфоры
   story: anforas-garum-troia
   name:
-    pt: Jarro do molho de peixe
-    en: Fish sauce jar
-    ru: Банка для рыбного соуса
+    pt: Ânfora de garum
+    en: Garum amphora
+    ru: Амфора для гарума
   summary:
     pt: Jarro de barro de fundo pontiagudo. Em jarros assim, o molho de peixe do Sado chegava a todo o mundo romano.
     en: A clay jar with a pointed bottom. Jars like this carried fish sauce from the Sado across the Roman world.
@@ -37,9 +37,9 @@
     ru: 1
   story: geira-miliarios
   name:
-    pt: Marco miliário da Geira
-    en: Milestone of the Geira
-    ru: Мильный столб с Жейры
+    pt: Miliário da Geira
+    en: Geira milestone
+    ru: Мильный столб Жейры
   summary:
     pt: Marco de granito da estrada romana que atravessa o Gerês. Tem a milha e o nome de um imperador.
     en: A granite milestone from the Roman road through the Gerês mountains. It shows the mile and an emperor’s name.
@@ -60,7 +60,7 @@
   story: endovelico
   name:
     pt: Altar de Endovélico
-    en: Altar of Endovelicus
+    en: Altar to Endovelicus
     ru: Алтарь Эндовелика
   summary:
     pt: Altar de pedra a Endovélico, deus subterrâneo que curava e respondia em sonhos. Também os romanos lhe rezavam.
@@ -85,9 +85,9 @@
     ru: 2
   story: padrao-cabo-da-cruz-1486
   name:
-    pt: Padrão de Diogo Cão
-    en: Diogo Cão's padrão
-    ru: Падран Диогу Кана
+    pt: Padrão do Cabo da Cruz
+    en: Cape Cross padrão
+    ru: Падран с мыса Кросс
   summary:
     pt: Coluna de pedra com cruz que Diogo Cão ergueu na Namíbia em 1486. Passou cem anos em Berlim.
     en: The stone pillar with a cross that Diogo Cão set up in Namibia in 1486. It spent a hundred years in Berlin.
@@ -111,8 +111,8 @@
     ru: 1
   story: saleiro-sapi
   name:
-    pt: Saleiro sapi
-    en: Sapi saltcellar
+    pt: Saleiro sapi-português
+    en: Sapi-Portuguese saltcellar
     ru: Солонка сапи
   summary:
     pt: Saleiro de marfim com figuras de portugueses. Esculpido por mestres africanos por volta de 1500.
@@ -137,9 +137,9 @@
     ru: 1
   story: rinoceronte-torre-de-belem
   name:
-    pt: Rinoceronte da Torre de Belém
-    en: The Belém Tower rhino
-    ru: Носорог башни Белен
+    pt: Rinoceronte de Belém
+    en: The Belém rhino
+    ru: Носорог на Белене
   summary:
     pt: Cabeça de rinoceronte na Torre de Belém. É considerada o primeiro rinoceronte de pedra da Europa.
     en: A rhinoceros head on Belém Tower. It’s considered Europe’s first stone rhino.
@@ -208,8 +208,8 @@
   story: coche-filipe-1619
   name:
     pt: Coche de Filipe II
-    en: Philip II's coach
-    ru: Карета Филиппа II
+    en: Philip II’s coach
+    ru: Карета Филиппа
   summary:
     pt: Coche de viagem de Filipe II, que chegou a Lisboa em 1619. É o mais antigo do Museu dos Coches.
     en: The traveling coach of Philip II, who came to Lisbon in 1619. The oldest in the Coach Museum.
@@ -226,16 +226,16 @@
   phrase:
     pt: terramoto
     en: earthquake
-    ru: Землетрясение
+    ru: землетрясения
   occurrence:
-    pt: 1
-    en: 1
+    pt: 2
+    en: 2
     ru: 1
   story: inquerito-terramoto-1756
   name:
     pt: Inquérito de 1756
-    en: The 1756 survey
-    ru: Анкета 1756 года
+    en: The 1756 questionnaire
+    ru: Опросник 1756 года
   summary:
     pt: Inquérito de 13 perguntas enviado a todo o país depois de 1755. Uma das primeiras descrições científicas de um sismo.
     en: A 13-question survey sent across the country after 1755. One of the first scientific descriptions of an earthquake.
@@ -260,8 +260,8 @@
   story: azulejo-pombalino
   name:
     pt: Azulejo pombalino
-    en: Pombaline tiles
-    ru: Помбалинская плитка
+    en: Pombaline tile
+    ru: Плитка помбалино
   summary:
     pt: Azulejo simples de padrão repetido. Revestiu os novos prédios de Lisboa depois do terramoto de 1755.
     en: A simple tile with a repeating pattern. It covered Lisbon’s new buildings after the 1755 earthquake.
@@ -307,9 +307,9 @@
     ru: Карлуш
   story: d-carlos-oceanografo
   name:
-    pt: Frasco do rei D. Carlos
-    en: King Carlos's specimen jar
-    ru: Банка короля Карлуша
+    pt: O peixe de D. Carlos
+    en: King Carlos’s fish
+    ru: Рыба короля Карлуша
   summary:
     pt: Frasco com um animal marinho das campanhas do rei D. Carlos. O próprio rei lançava as redes a centenas de metros.
     en: A specimen jar from King Carlos’s sea expeditions. The king himself lowered nets hundreds of meters down.
