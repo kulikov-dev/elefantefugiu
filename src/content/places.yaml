@@ -1,0 +1,190 @@
+# The places of the site (docs/spec.md, "Страницы мест"). A story belongs to the SMALLEST circle that holds the coordinates of its bridge,
+# unless the story gives `area` (the id of a place) itself. A place with 3 or more stories on the site has a page, one with fewer has none:
+# the page appears on the day its third story comes out. Nothing here is required but id, name, center and radius_km.
+#   parent        a district of a city: its stories also stand on the page of the parent
+#   name_of       the name in the sentence "History of ...": pt "de Sintra", ru "Синтры" (without it the page title is "{name}: ...")
+#   neighbours    ids of the places the page "Nearby" shows first (the rest are the nearest places that have a page)
+#   intro         the hand-written introduction, 2-3 sentences, any language may be left out: where it is missing the page builds it from the data
+# A new town: add an entry (id, names, the centre and a radius that holds its sights), nothing else. check:data warns about a story whose bridge is in no place.
+
+# ---- Lisbon: the city and its districts ----
+- id: lisboa
+  name: { pt: Lisboa, en: Lisbon, ru: Лиссабон }
+  name_of: { pt: de Lisboa, ru: Лиссабона }
+  center: { lat: 38.725, lon: -9.15 }
+  radius_km: 9
+- id: belem
+  parent: lisboa
+  name: { pt: Belém, en: Belém, ru: Белен }
+  name_of: { pt: de Belém, ru: Белена }
+  center: { lat: 38.6975, lon: -9.2063 }
+  radius_km: 2.2
+- id: baixa-rossio
+  parent: lisboa
+  name: { pt: Baixa e Rossio, en: Baixa and Rossio, ru: Байша и Россиу }
+  name_of: { pt: da Baixa e do Rossio, ru: Байши и Россиу }
+  center: { lat: 38.711, lon: -9.138 }
+  radius_km: 0.9
+- id: alfama-castelo
+  parent: lisboa
+  name: { pt: Alfama e Castelo, en: Alfama and Castelo, ru: Альфама и Каштелу }
+  name_of: { pt: de Alfama e do Castelo, ru: Альфамы и Каштелу }
+  center: { lat: 38.711, lon: -9.1275 }
+  radius_km: 0.7
+- id: chiado-carmo
+  parent: lisboa
+  name: { pt: Chiado e Carmo, en: Chiado and Carmo, ru: Шиаду и Карму }
+  name_of: { pt: do Chiado e do Carmo, ru: Шиаду и Карму }
+  center: { lat: 38.7117, lon: -9.1432 }
+  radius_km: 0.3
+
+# ---- Porto (with the Gaia bank of the river) and Madeira ----
+- id: porto
+  name: { pt: Porto, en: Porto, ru: Порту }
+  name_of: { pt: do Porto, ru: Порту }
+  center: { lat: 41.145, lon: -8.625 }
+  radius_km: 4.5
+- id: funchal
+  name: { pt: Funchal, en: Funchal, ru: Фуншал }
+  name_of: { pt: do Funchal, ru: Фуншала }
+  center: { lat: 32.656, lon: -16.906 }
+  radius_km: 4
+
+# ---- Other places: the stories of each are few for now, a page comes with the third ----
+- id: sintra
+  name: { pt: Sintra, en: Sintra, ru: Синтра }
+  name_of: { pt: de Sintra, ru: Синтры }
+  center: { lat: 38.797, lon: -9.42 }
+  radius_km: 8
+- id: mafra
+  name: { pt: Mafra, en: Mafra, ru: Мафра }
+  center: { lat: 38.937, lon: -9.325 }
+  radius_km: 5
+- id: odivelas
+  name: { pt: Odivelas, en: Odivelas, ru: Одивелаш }
+  center: { lat: 38.791, lon: -9.182 }
+  radius_km: 2.5
+- id: almada
+  name: { pt: Almada, en: Almada, ru: Алмада }
+  center: { lat: 38.673, lon: -9.171 }
+  radius_km: 2.5
+- id: sesimbra
+  name: { pt: Sesimbra, en: Sesimbra, ru: Сезимбра }
+  center: { lat: 38.421, lon: -9.216 }
+  radius_km: 10
+- id: torres-vedras
+  name: { pt: Torres Vedras, en: Torres Vedras, ru: Торриш-Ведраш }
+  center: { lat: 39.095, lon: -9.26 }
+  radius_km: 6
+- id: lourinha
+  name: { pt: Lourinhã, en: Lourinhã, ru: Лоуринья }
+  center: { lat: 39.242, lon: -9.313 }
+  radius_km: 5
+- id: porto-de-mos
+  name: { pt: Porto de Mós, en: Porto de Mós, ru: Порту-ди-Мош }
+  center: { lat: 39.589, lon: -8.929 }
+  radius_km: 6
+- id: leiria
+  name: { pt: Leiria, en: Leiria, ru: Лейрия }
+  center: { lat: 39.758, lon: -8.731 }
+  radius_km: 8
+- id: ourem
+  name: { pt: Ourém, en: Ourém, ru: Орен }
+  center: { lat: 39.573, lon: -8.589 }
+  radius_km: 8
+- id: tomar
+  name: { pt: Tomar, en: Tomar, ru: Томар }
+  center: { lat: 39.605, lon: -8.404 }
+  radius_km: 6
+- id: ilhavo
+  name: { pt: Ílhavo, en: Ílhavo, ru: Илияву }
+  center: { lat: 40.604, lon: -8.666 }
+  radius_km: 5
+- id: coimbra
+  name: { pt: Coimbra, en: Coimbra, ru: Коимбра }
+  center: { lat: 40.207, lon: -8.427 }
+  radius_km: 6
+- id: viseu
+  name: { pt: Viseu, en: Viseu, ru: Визеу }
+  center: { lat: 40.665, lon: -7.912 }
+  radius_km: 6
+- id: foz-coa
+  name: { pt: Vila Nova de Foz Côa, en: Vila Nova de Foz Côa, ru: Вила-Нова-ди-Фош-Коа }
+  center: { lat: 41.006, lon: -7.105 }
+  radius_km: 8
+- id: sao-joao-da-pesqueira
+  name: { pt: São João da Pesqueira, en: São João da Pesqueira, ru: Сан-Жуан-да-Пескейра }
+  center: { lat: 41.151, lon: -7.366 }
+  radius_km: 8
+- id: murca
+  name: { pt: Murça, en: Murça, ru: Мурса }
+  center: { lat: 41.407, lon: -7.453 }
+  radius_km: 6
+- id: chaves
+  name: { pt: Chaves, en: Chaves, ru: Шавиш }
+  center: { lat: 41.738, lon: -7.467 }
+  radius_km: 6
+- id: braga
+  name: { pt: Braga, en: Braga, ru: Брага }
+  center: { lat: 41.552, lon: -8.402 }
+  radius_km: 6
+- id: fafe
+  name: { pt: Fafe, en: Fafe, ru: Фафе }
+  center: { lat: 41.45, lon: -8.171 }
+  radius_km: 6
+- id: povoa-de-varzim
+  name: { pt: Póvoa de Varzim, en: Póvoa de Varzim, ru: Повоа-ди-Варзин }
+  center: { lat: 41.381, lon: -8.758 }
+  radius_km: 5
+- id: esposende
+  name: { pt: Esposende, en: Esposende, ru: Эшпозенди }
+  center: { lat: 41.485, lon: -8.778 }
+  radius_km: 5
+- id: evora
+  name: { pt: Évora, en: Évora, ru: Эвора }
+  center: { lat: 38.556, lon: -7.96 }
+  radius_km: 12
+- id: elvas
+  name: { pt: Elvas, en: Elvas, ru: Эльваш }
+  center: { lat: 38.883, lon: -7.163 }
+  radius_km: 6
+- id: vila-vicosa
+  name: { pt: Vila Viçosa, en: Vila Viçosa, ru: Вила-Висоза }
+  center: { lat: 38.781, lon: -7.418 }
+  radius_km: 5
+- id: idanha-a-nova
+  name: { pt: Idanha-a-Nova, en: Idanha-a-Nova, ru: Идания-а-Нова }
+  center: { lat: 39.845, lon: -7.067 }
+  radius_km: 10
+- id: santiago-do-cacem
+  name: { pt: Santiago do Cacém, en: Santiago do Cacém, ru: Сантьягу-ду-Касен }
+  center: { lat: 38.006, lon: -8.688 }
+  radius_km: 6
+- id: silves
+  name: { pt: Silves, en: Silves, ru: Силвеш }
+  center: { lat: 37.191, lon: -8.438 }
+  radius_km: 6
+- id: lagos
+  name: { pt: Lagos, en: Lagos, ru: Лагуш }
+  center: { lat: 37.101, lon: -8.671 }
+  radius_km: 5
+- id: vila-real-de-santo-antonio
+  name: { pt: Vila Real de Santo António, en: Vila Real de Santo António, ru: Вила-Реал-ди-Санту-Антониу }
+  center: { lat: 37.195, lon: -7.416 }
+  radius_km: 4
+- id: santana
+  name: { pt: Santana, en: Santana, ru: Сантана }
+  center: { lat: 32.74, lon: -16.887 }
+  radius_km: 8
+- id: sao-miguel
+  name: { pt: São Miguel, en: São Miguel, ru: Сан-Мигел }
+  center: { lat: 37.8, lon: -25.5 }
+  radius_km: 30
+- id: terceira
+  name: { pt: Terceira, en: Terceira, ru: Терсейра }
+  center: { lat: 38.65, lon: -27.1 }
+  radius_km: 20
+- id: pico
+  name: { pt: Pico, en: Pico, ru: Пику }
+  center: { lat: 38.4, lon: -28.25 }
+  radius_km: 25

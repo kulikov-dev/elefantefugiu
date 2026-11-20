@@ -190,3 +190,41 @@ export function graph(ctx: SchemaContext, page: Node[]): Node {
 
 /** JSON for a <script type="application/ld+json">: "<" is escaped so no text can close the tag. */
 export const serialize = (data: Node): string => JSON.stringify(data).replace(/</g, '\\u003c');
+
+export interface PlaceSchemaInput {
+  url: string;
+  name: string;
+  description: string;
+  /** The place the page is about, with the coordinates of its centre. */
+  place: { name: string; lat: number; lon: number };
+  /** The stories of the page in the order of the page. */
+  stories: { url: string; name: string }[];
+  /** The crumbs after the home page: the index of places, the city of a district, the page itself. */
+  crumbs: Crumb[];
+}
+
+/** The page of a place: CollectionPage about a Place with coordinates, the list of its stories and BreadcrumbList. */
+export function placeNodes(ctx: SchemaContext, input: PlaceSchemaInput): Node[] {
+  return [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${input.url}#webpage`,
+      url: input.url,
+      name: input.name,
+      description: input.description,
+      inLanguage: ctx.inLanguage,
+      isPartOf: { '@id': WEBSITE_ID(ctx) },
+      about: { '@id': `${input.url}#place` },
+      mainEntity: { '@id': `${input.url}#stories` },
+      breadcrumb: { '@id': `${input.url}#breadcrumb` },
+    },
+    { '@id': `${input.url}#place`, ...place(input.place.name, input.place.lat, input.place.lon) },
+    {
+      '@type': 'ItemList',
+      '@id': `${input.url}#stories`,
+      numberOfItems: input.stories.length,
+      itemListElement: input.stories.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: s.url, name: s.name })),
+    },
+    breadcrumbNode(ctx, input.url, input.crumbs),
+  ];
+}

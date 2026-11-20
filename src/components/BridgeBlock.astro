@@ -18,9 +18,11 @@ interface Props {
   kind: 'frame' | 'story';
   /** Language tag of the note when it differs from the page (placeholder filler is Latin). */
   textLang?: string | undefined;
+  /** The page of the place of the story ("More stories of Sintra →"), when the place has one. */
+  placeLink?: { href: string; label: string } | undefined;
 }
 
-const { lang, bridge, cardId, kind, textLang } = Astro.props;
+const { lang, bridge, cardId, kind, textLang, placeLink } = Astro.props;
 const external = /^https?:\/\/\S+$/.test(bridge.url);
 // Bold: the name in the language of the page (when the data has it); beneath it, small, the name as written on the spot.
 const title = bridge.title?.[lang]?.trim() || bridge.name;
@@ -45,6 +47,7 @@ const nearHref = mapNearLink(pagePath(lang, 'map'));
   <ul class="bridge__links">
     <li><a href={mapHref}>{t(lang, 'ui.open_on_map')}</a></li>
     <li><a href={nearHref} data-near-link>{t(lang, 'ui.near_more')}</a></li>
+    {placeLink && <li><a href={placeLink.href} data-place-link>{placeLink.label}</a></li>}
     {external && <li><a href={bridge.url} rel="noopener">{t(lang, 'card.official_site')}</a></li>}
   </ul>
 </section>

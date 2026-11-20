@@ -1,0 +1,207 @@
+// The pages of places (docs/spec.md, "Страницы мест"): which place a story belongs to, which places have a page, what the page says when
+// nobody wrote its introduction, the titles for search. Pure functions, no Astro imports (tested in plain Node, read by scripts/schedule.mjs).
+//
+// A story belongs to the place `area` names, else to the SMALLEST circle (src/content/places.yaml: centre, radius) that holds the coordinates of
+// its bridge, the place a reader goes to (the place of the event itself may be abroad). A district also stands on the page of its parent
+// (Belém on the page of Lisboa). A place has a page when it has PLACE_MIN_STORIES stories on the site: the number is counted from the stories
+// published that day, so a page appears with its third story and goes away, with its link and its line in the sitemap, if the number falls.
+import { plural, t } from '../i18n';
+import type { Lang } from '../i18n/routes';
+import type { PlaceInput } from '../data/schemas';
+import { distanceKm, yearRange, yearText } from './events';
+import { cutAtWord } from './og-text';
+import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX } from './seo';
+
+export type PlaceData = PlaceInput;
+
+/** A place has a page from this many stories. */
+export const PLACE_MIN_STORIES = 3;
+/** The page "Nearby": at most this many places; a place further than NEAR_KM is nearby only when the data names it. */
+export const MAX_NEIGHBOURS = 4;
+export const NEAR_KM = 30;
+
+/** What the place of a story is read from. */
+export interface PlaceStory {
+  id: string;
+  area?: string | undefined;
+  bridge: { lat: number; lon: number };
+}
+
+/** The place of a story: its `area` (an unknown id is ignored: check:data fails on it), else the smallest circle that holds the bridge, the nearest centre among equals. */
+export function placeOf(story: PlaceStory, places: readonly PlaceData[]): PlaceData | undefined {
+  if (story.area) {
+    const named = places.find((p) => p.id === story.area);
+    if (named) return named;
+  }
+  return places
+    .map((p) => ({ place: p, km: distanceKm(story.bridge, p.center) }))
+    .filter((c) => c.km <= c.place.radius_km)
+    .sort((a, b) => a.place.radius_km - b.place.radius_km || a.km - b.km)[0]?.place;
+}
+
+/** The place and its parents, the smallest first. */
+export function placeChain(place: PlaceData, places: readonly PlaceData[]): PlaceData[] {
+  const chain: PlaceData[] = [];
+  for (let p: PlaceData | undefined = place; p && !chain.includes(p); p = p.parent ? places.find((x) => x.id === p!.parent) : undefined) chain.push(p);
+  return chain;
+}
+
+export interface PlacePage<S extends PlaceStory = PlaceStory> {
+  place: PlaceData;
+  /** The stories of the place and of its districts, in the order they were given (the site sorts them in time). */
+  stories: S[];
+  /** The districts that have a page of their own. */
+  districts: PlacePage<S>[];
+}
+
+/** The places that have a page for these stories (the stories of one day: the caller keeps out the drafts, the queue and the cabinet). */
+export function placePages<S extends PlaceStory>(places: readonly PlaceData[], stories: readonly S[], min = PLACE_MIN_STORIES): PlacePage<S>[] {
+  const chains = stories.map((s) => {
+    const place = placeOf(s, places);
+    return { story: s, ids: new Set(place ? placeChain(place, places).map((p) => p.id) : []) };
+  });
+  const pages = places
+    .map((place) => ({ place, stories: chains.filter((c) => c.ids.has(place.id)).map((c) => c.story), districts: [] as PlacePage<S>[] }))
+    .filter((p) => p.stories.length >= min);
+  for (const page of pages) page.districts = pages.filter((d) => d.place.parent === page.place.id);
+  return pages;
+}
+
+/** The page a story links to ("More stories of ..."): the smallest place of its chain that has a page. */
+export function pageOfStory<S extends PlaceStory>(story: PlaceStory, places: readonly PlaceData[], pages: readonly PlacePage<S>[]): PlacePage<S> | undefined {
+  const place = placeOf(story, places);
+  if (!place) return undefined;
+  return placeChain(place, places).map((p) => pages.find((page) => page.place.id === p.id)).find((page) => page !== undefined);
+}
+
+/** "Nearby": the places that the data names, then the nearest ones (no further than NEAR_KM), never the parent or a district of the page itself. */
+export function neighbourPages<S extends PlaceStory>(page: PlacePage<S>, pages: readonly PlacePage<S>[], max = MAX_NEIGHBOURS): PlacePage<S>[] {
+  const others = pages.filter((p) => p.place.id !== page.place.id && p.place.id !== page.place.parent && p.place.parent !== page.place.id);
+  const named = (page.place.neighbours ?? []).map((id) => others.find((p) => p.place.id === id)).filter((p): p is PlacePage<S> => p !== undefined);
+  const near = others
+    .filter((p) => !named.includes(p))
+    .map((p) => ({ page: p, km: distanceKm(page.place.center, p.place.center) }))
+    .filter((c) => c.km <= NEAR_KM)
+    .sort((a, b) => a.km - b.km)
+    .map((c) => c.page);
+  return [...named, ...near].slice(0, max);
+}
+
+/** The pages of the top level (the index lists them; a district is listed under its city). */
+export const topPages = <S extends PlaceStory>(pages: readonly PlacePage<S>[]): PlacePage<S>[] => pages.filter((p) => !p.place.parent || !pages.some((q) => q.place.id === p.place.parent));
+
+// ---- the introduction ----
+
+interface IntroStory extends PlaceStory {
+  hook: { [L in Lang]: string };
+  year: number | { from: number; to: number };
+  importance: 1 | 2 | 3;
+}
+
+/** The hooks the generated introduction quotes. */
+export const AUTO_HOOKS = 3;
+
+/**
+ * The introduction of a page: the hand-written one in this language, else a text built from the data ("Sintra: 4 stories, 1415–1922." and the hooks
+ * of the three most important stories). An introduction in another language than the page is worse than none, so a missing language is never borrowed.
+ */
+export function placeIntro(page: PlacePage<IntroStory>, lang: Lang): { text: string; written: boolean } {
+  const own = page.place.intro?.[lang]?.trim();
+  if (own) return { text: own, written: true };
+  const ranges = page.stories.map((s) => yearRange(s));
+  const from = Math.min(...ranges.map((r) => r[0]));
+  const to = Math.max(...ranges.map((r) => r[1]));
+  const years = from === to ? yearText(from, lang) : `${yearText(from, lang)}–${yearText(to, lang)}`;
+  const lead = t(lang, 'places.auto_lead')
+    .replace('{place}', page.place.name[lang])
+    .replace('{stories}', plural(lang, 'plural.stories', page.stories.length))
+    .replace('{years}', years);
+  const order = new Map(page.stories.map((s, i) => [s.id, i]));
+  const hooks = [...page.stories]
+    .sort((a, b) => b.importance - a.importance || order.get(a.id)! - order.get(b.id)!)
+    .slice(0, AUTO_HOOKS)
+    .map((s) => s.hook[lang].trim());
+  return { text: [lead, ...hooks].join(' '), written: false };
+}
+
+/** Does the page lack a hand-written introduction in some language? (the line "can add an introduction" of npm run schedule). */
+export const introMissing = (place: PlaceData): Lang[] => (['pt', 'en', 'ru'] as const).filter((l) => !place.intro?.[l]?.trim());
+
+// ---- search titles ----
+
+/** The <title> of a page: "History of Sintra: N stories and places to see | site"; longer than SEO_TITLE_MAX (check:cards): without the site, as a story title does. */
+export function placeSeoTitle(place: PlaceData, n: number, lang: Lang): string {
+  const name = place.name[lang];
+  const of = lang === 'en' ? name : place.name_of?.[lang as 'pt' | 'ru'];
+  const stories = plural(lang, 'plural.stories', n);
+  const full = t(lang, of ? 'places.title_of' : 'places.title_plain').replace('{name}', name).replace('{of}', of ?? '').replace('{stories}', stories);
+  const withSite = `${full} | ${t(lang, 'site.name')}`;
+  return withSite.length <= SEO_TITLE_MAX ? withSite : full;
+}
+
+/** "More stories of Sintra →": the link on a story and in the search. Uses the form "of" where the data has one (pt "da Baixa e do Rossio", ru "Синтры"). */
+export function placeMoreLabel(place: PlaceData, lang: Lang): string {
+  const name = place.name[lang];
+  const of = lang === 'en' ? name : place.name_of?.[lang as 'pt' | 'ru'];
+  return t(lang, of ? 'places.more_of' : 'places.more_plain').replace('{name}', name).replace('{of}', of ?? '');
+}
+
+/** The description: the introduction, cut at a word. */
+export const placeSeoDescription = (intro: string): string => cutAtWord(intro.replace(/\s+/g, ' ').trim(), SEO_DESCRIPTION_MAX - 5);
+
+// ---- what to see today ----
+
+export interface PlaceBridge<S> {
+  /** The name of the place in the language of the page. */
+  title: string;
+  /** The name as written on the spot, when it differs. */
+  local?: string;
+  address: string;
+  lat: number;
+  lon: number;
+  mapsUrl?: string;
+  /** The stories of the place, in the order given. */
+  stories: S[];
+}
+
+type BridgeStory = { bridge: { name: string; title?: { [L in Lang]?: string | undefined } | undefined; address: string; lat: number; lon: number; maps_url?: string | undefined } };
+
+/** The bridges of the stories of a page, one line for a place that several stories lead to (a museum with two stories). */
+export function placeBridges<S extends BridgeStory>(stories: readonly S[], lang: Lang): PlaceBridge<S>[] {
+  const out = new Map<string, PlaceBridge<S>>();
+  for (const s of stories) {
+    const b = s.bridge;
+    const key = `${b.lat.toFixed(4)},${b.lon.toFixed(4)}|${b.name}`;
+    const known = out.get(key);
+    if (known) {
+      known.stories.push(s);
+      continue;
+    }
+    const title = b.title?.[lang]?.trim() || b.name;
+    out.set(key, { title, ...(title !== b.name ? { local: b.name } : {}), address: b.address, lat: b.lat, lon: b.lon, ...(b.maps_url ? { mapsUrl: b.maps_url } : {}), stories: [s] });
+  }
+  return [...out.values()];
+}
+
+// ---- when a page comes out (for npm run schedule) ----
+
+/** A story as the scripts read it from its file. */
+export interface DatedStory extends PlaceStory {
+  /** The day it comes out (YYYY-MM-DD). */
+  day: string;
+}
+
+/**
+ * The day a place gets its page: the day its PLACE_MIN_STORIES-th story comes out. The stories are the ones that will be on the lists
+ * (ready, not of the cabinet) with the day each comes out. undefined: the place does not get a page with the stories there are.
+ */
+export function pageDay(place: PlaceData, places: readonly PlaceData[], stories: readonly DatedStory[], min = PLACE_MIN_STORIES): string | undefined {
+  const days = stories
+    .filter((s) => {
+      const p = placeOf(s, places);
+      return p !== undefined && placeChain(p, places).some((c) => c.id === place.id);
+    })
+    .map((s) => s.day)
+    .sort();
+  return days[min - 1];
+}

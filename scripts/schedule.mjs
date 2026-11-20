@@ -1,7 +1,9 @@
 // The queue of stories: those that are ready but published on a later day (they come out in the first build of that day: src/lib/publication.mjs).
 //   npm run schedule                the next 8 weeks as a table: date, story (slug, epoch), the languages that are ready; a warning for a story that has no pt or en;
+//                                   under it, the places that get a page in this span (a place with three stories on the site, src/lib/places.ts), one line each:
+//                                   "Новая страница места: X — можно дописать вступление" (a hint, not a blocker; the page builds its introduction from the data)
 //                                   under it the search title and description of every queued story in pt, en and ru (src/lib/seo.ts), to see without opening the HTML
-//   npm run schedule -- --weeks=12  another span;   --strict  exit code 1 when there is a warning
+//   npm run schedule -- --weeks=12  another span;   --places  only the lines about the places (the report of the Deploy workflow);   --strict  exit code 1 when there is a warning
 //   SITE_TODAY=2026-11-01 npm run schedule   look at the queue as it will be on that day
 // A language is ready when the story has its title, hook and story text (pt, en) or `ru_ready: true` with its own Russian text (ru).
 import { readFileSync, readdirSync } from 'node:fs';
@@ -10,11 +12,13 @@ import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 import { buildToday, isLive, isQueued, publishedDay } from '../src/lib/publication.mjs';
 import { SEO_LANGS, seoLines } from './lib/seo-lines.ts';
+import { introMissing, pageDay } from '../src/lib/places.ts';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const argv = process.argv.slice(2);
 const weeks = Number(argv.find((a) => a.startsWith('--weeks='))?.split('=')[1] ?? 8);
 const strict = argv.includes('--strict');
+const onlyPlaces = argv.includes('--places');
 const today = buildToday();
 const addDays = (day, n) => new Date(Date.parse(`${day}T12:00:00Z`) + n * 86_400_000).toISOString().slice(0, 10);
 const until = addDays(today, weeks * 7);
@@ -36,6 +40,24 @@ const rows = inSpan.map((s) => {
   return { date: publishedDay(s.published), id: s.id, slug: s.slug?.pt ?? '', epoch: s.epoch, langs: ['pt', 'en', 'ru'].map((x) => (l[x] ? x : '--')).join(' '), l };
 });
 const warnings = rows.filter((r) => !r.l.pt || !r.l.en).map((r) => `${r.date} ${r.id}: no ${[!r.l.pt && 'pt', !r.l.en && 'en'].filter(Boolean).join(' and ')} text (title, hook and story): the story would come out without it`);
+
+// The places that get a page in the span: the day of the third story of a place that is on the lists (ready, not of the cabinet). One line for each:
+// a hint that the introduction can be written (the page builds one from the data until then). A page that came out today is named too.
+const places = parse(readFileSync(join(root, 'src/content/places.yaml'), 'utf8'));
+const dated = stories.filter((s) => s.status === 'ready' && !s.cabinet && publishedDay(s.published)).map((s) => ({ id: s.id, area: s.area, bridge: s.bridge, day: publishedDay(s.published) }));
+const newPages = places
+  .map((place) => ({ place, day: pageDay(place, places, dated) }))
+  .filter((p) => p.day !== undefined && p.day >= today && p.day <= until)
+  .sort((a, b) => a.day.localeCompare(b.day) || a.place.id.localeCompare(b.place.id));
+const placeLines = newPages.map(({ place, day }) => {
+  const missing = introMissing(place);
+  const when = day === today ? 'сегодня' : `с ${day}`;
+  return `Новая страница места: ${place.name.ru} (${place.id}), ${when}${missing.length ? ` — можно дописать вступление (${missing.join(', ')})` : ''}`;
+});
+if (onlyPlaces) {
+  for (const line of placeLines) console.log(line);
+  process.exit(0);
+}
 
 console.log(`Queue of stories (today in Lisbon: ${today}, the next ${weeks} weeks, up to ${until}). They come out in the first build after 05:00 UTC of their day.`);
 console.log(`On the site now: ${stories.filter((s) => isLive(s, today)).length} stories.\n`);
@@ -64,6 +86,10 @@ if (inSpan.length > 0) {
       console.log(`  ${lang}  description (${description.length}): ${description}`);
     }
   }
+}
+if (placeLines.length > 0) {
+  console.log('');
+  for (const line of placeLines) console.log(line);
 }
 if (rows.length === 0 && later > 0) console.log(`${later} more queued after ${until}.`);
 if (warnings.length) {

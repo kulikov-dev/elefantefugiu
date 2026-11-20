@@ -13,7 +13,7 @@ import { buildRouteMap } from '../src/lib/route-map';
 import { routeGeo } from '../src/lib/route-geo';
 import { seaProblems } from '../src/lib/route-sea';
 import { meanwhileProblems, storyStartYear } from '../src/lib/meanwhile';
-import { epochSchema, eventSchema, featuredSchema, festaListSchema, glossaryListSchema, threadSchema } from '../src/data/schemas';
+import { epochSchema, eventSchema, placeSchema, featuredSchema, festaListSchema, glossaryListSchema, threadSchema } from '../src/data/schemas';
 import { GLOSSARY_LANGS, mentioningStories } from '../src/lib/glossary';
 import { ANSWER_MAX_WORDS, STATEMENT_MAX_WORDS, wordCount } from '../src/lib/myths';
 import { isCalendarDay } from '../src/lib/start-pins';
@@ -23,6 +23,7 @@ import { CABINET_HINT_WORDS, CABINET_PHRASE_WORDS, CABINET_SHELF_SIZE, CABINET_S
 import { findPhrase, hiddenPlace, wordCount as cabinetWords } from '../src/lib/cabinet';
 import { inlineMatchers } from '../src/lib/glossary';
 import { moreParagraphs, storyParagraphs } from '../src/lib/paragraphs';
+import { PLACE_MIN_STORIES, introMissing, placeChain, placeOf } from '../src/lib/places';
 
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -613,6 +614,46 @@ for (const t of threads) {
   }
   const pool = claims.filter((e) => isLive(e.item) && !e.item.sensitive);
   console.log(`myths: ${claims.length} claim(s) in stories, ${pool.length} in the pool today`);
+}
+
+// ---------- the places (src/content/places.yaml, docs/spec.md "Страницы мест") ----------
+{
+  const places = loadList('places', placeSchema);
+  const ids = new Set<string>();
+  for (const { item, file } of places) {
+    if (ids.has(item.id)) report('error', file, `the id "${item.id}" is used twice`, 'id');
+    ids.add(item.id);
+  }
+  const data = places.map((p) => p.item);
+  for (const { item, file } of places) {
+    if (item.parent !== undefined && !ids.has(item.parent)) report('error', file, `the parent "${item.parent}" is not a place`, 'parent');
+    else if (placeChain(item, data).at(-1)?.parent !== undefined) report('error', file, 'the parents go round in a circle', 'parent');
+    for (const id of item.neighbours ?? []) if (!ids.has(id)) report('error', file, `the neighbour "${id}" is not a place`, 'neighbours');
+    for (const lang of ['pt', 'en', 'ru'] as const) {
+      const text = item.intro?.[lang];
+      if (text === undefined) continue;
+      const n = text.trim().split(/\s+/).filter(Boolean).length;
+      if (n > 70) report('warn', file, `${n} words, an introduction is 2-3 sentences (about 60 words at most)`, 'intro', lang);
+    }
+  }
+  // The place of every story that will be on the lists: its `area` must be a place; without it the bridge must lie in a circle (else nothing links the story to a place).
+  const listed = events.filter((e) => e.item.status === 'ready' && !e.item.cabinet);
+  for (const { item, file } of listed) {
+    if (item.area !== undefined && !ids.has(item.area)) report('error', file, `the area "${item.area}" is not a place of src/content/places.yaml`, 'area');
+    else if (placeOf(item, data) === undefined) report('warn', file, 'the bridge is in no place of src/content/places.yaml: add the town there (id, names, centre, radius) or give `area`', 'area');
+  }
+  // A place that has a page (or will, with the queue) and no introduction in some language: the page builds one from the data; a hint, not a failure.
+  const counts = new Map<string, number>();
+  for (const { item } of listed) {
+    const place = placeOf(item, data);
+    if (place) for (const p of placeChain(place, data)) counts.set(p.id, (counts.get(p.id) ?? 0) + 1);
+  }
+  const withPage = data.filter((p) => (counts.get(p.id) ?? 0) >= PLACE_MIN_STORIES);
+  for (const place of withPage) {
+    const missing = introMissing(place);
+    if (missing.length > 0) report('warn', 'src/content/places.yaml', `the place "${place.id}" has a page and no introduction in ${missing.join(', ')}: the page builds one from the data`, 'intro');
+  }
+  console.log(`places: ${data.length} place(s), ${withPage.length} with ${PLACE_MIN_STORIES}+ stories (page now or in the queue)`);
 }
 
 // ---------- the cabinet of rarities (src/content/cabinet.yaml, docs/spec.md "Кабинет редкостей") ----------

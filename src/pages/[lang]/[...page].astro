@@ -11,14 +11,17 @@ import SearchView from '../../views/SearchView.astro';
 import SurpriseView from '../../views/SurpriseView.astro';
 import CabinetView from '../../views/CabinetView.astro';
 import GlossaryView from '../../views/GlossaryView.astro';
+import PlacesIndexView from '../../views/PlacesIndexView.astro';
+import { loadSite } from '../../lib/site-data';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { LANGS, ROUTES, type Lang, type PageKey } from '../../i18n/routes';
 import { isGlossaryLang } from '../../lib/glossary';
 import { t } from '../../i18n';
 
-export const getStaticPaths = (() => {
-  // The map has its own route file ([map].astro): map code and styles must not reach the other pages.
-  const keys = (Object.keys(ROUTES) as PageKey[]).filter((key) => key !== 'map');
+export const getStaticPaths = (async () => {
+  const site = await loadSite();
+  // The map has its own route file ([map].astro): map code and styles must not reach the other pages. The index of places exists while some place has a page.
+  const keys = (Object.keys(ROUTES) as PageKey[]).filter((key) => key !== 'map' && (key !== 'places' || site.placePages.length > 0));
   return LANGS.flatMap((lang) =>
     // The glossary has no Portuguese page: its words are Portuguese, and the Portuguese text is not marked.
     keys.filter((key) => key !== 'glossary' || isGlossaryLang(lang)).map((pageKey) => ({
@@ -48,6 +51,8 @@ const title = isHome ? t(lang, 'site.name') : t(lang, `pages.${pageKey}.title`);
     <MythsView lang={lang} />
   ) : pageKey === 'games' ? (
     <GamesView lang={lang} />
+  ) : pageKey === 'places' ? (
+    <PlacesIndexView lang={lang} />
   ) : pageKey === 'cabinet' ? (
     <CabinetView lang={lang} />
   ) : pageKey === 'order' ? (

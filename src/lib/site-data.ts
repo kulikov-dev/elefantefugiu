@@ -8,6 +8,7 @@ import { localize } from './localize';
 import { visibleThreads } from './threads';
 import { activeItems, type ActiveItem } from './cabinet';
 import { isCabinetOpen } from './cabinet-config.mjs';
+import { placePages, type PlaceData, type PlacePage } from './places';
 
 export interface SiteData {
   /** Published events in chronological order. */
@@ -18,6 +19,10 @@ export interface SiteData {
   cabinet: ActiveItem[];
   /** Is the cabinet open in this build (src/lib/cabinet-config.mjs)? While not, there is no link to it, no hidden word and no sardine. */
   cabinetOpen: boolean;
+  /** Every place of src/content/places.yaml. */
+  places: PlaceData[];
+  /** The places that have a page on the day of the build (three or more stories on the site), with their stories in time and their districts. */
+  placePages: PlacePage<EventData>[];
   /** All epochs in `order`. */
   epochs: EpochData[];
   threads: ThreadData[];
@@ -46,5 +51,6 @@ export async function loadSite(): Promise<SiteData> {
   });
   const visible = visibleThreads(threads, events);
   const featuredIds = (await getCollection('featured')).sort((a, b) => (a.data.position ?? 0) - (b.data.position ?? 0)).map((e) => e.data.id);
-  return { events, cabinetStories, cabinet, cabinetOpen: isCabinetOpen(), epochs, threads, featured: pickFeatured(featuredIds, events), visibleThreads: visible, visibleThreadIds: new Set(visible.map((t) => t.id)) };
+  const places = (await getCollection('places')).map((e) => e.data as PlaceData);
+  return { events, cabinetStories, places, placePages: placePages(places, events), cabinet, cabinetOpen: isCabinetOpen(), epochs, threads, featured: pickFeatured(featuredIds, events), visibleThreads: visible, visibleThreadIds: new Set(visible.map((t) => t.id)) };
 }

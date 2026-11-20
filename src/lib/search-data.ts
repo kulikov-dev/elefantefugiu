@@ -5,12 +5,16 @@ import { epochHasContent, type EpochData } from './epochs';
 import type { EventData } from './events';
 import type { SearchPlace } from './search';
 import { searchPlaces } from './search-index';
+import { placeMoreLabel, type PlacePage } from './places';
+import { placePath } from '../i18n/routes';
 
 export interface SearchData {
   /** The strings of the interface (`search.*` of the dictionary, plural forms included). */
   strings: Record<string, string>;
   /** The places of the stories: a query that names one offers the map. */
   places: SearchPlace[];
+  /** The places that have a page: a query that names one offers it beside the map ("More stories of Sintra →"). */
+  placePages: { name: string; href: string; label: string }[];
   /** The eras the empty result points to, the most told first. */
   epochs: { id: string; name: string; href: string }[];
   /** "Surprise me", the fourth link of the empty result. */
@@ -22,7 +26,7 @@ export interface SearchData {
 /** How many eras the empty result offers. */
 export const SEARCH_EMPTY_EPOCHS = 3;
 
-export function searchData(lang: Lang, events: readonly EventData[], epochs: readonly EpochData[], surpriseName: string): SearchData {
+export function searchData(lang: Lang, events: readonly EventData[], epochs: readonly EpochData[], surpriseName: string, pages: readonly PlacePage[] = []): SearchData {
   const count = (e: EpochData) => events.filter((ev) => ev.epoch === e.id).length;
   const top = epochs
     .filter((e) => epochHasContent(e, events))
@@ -32,6 +36,7 @@ export function searchData(lang: Lang, events: readonly EventData[], epochs: rea
   return {
     strings: section(lang, 'search'),
     places: searchPlaces(events, lang),
+    placePages: pages.map((p) => ({ name: p.place.name[lang], href: placePath(lang, p.place.id), label: placeMoreLabel(p.place, lang) })),
     epochs: top.map((e) => ({ id: e.id, name: e.name[lang], href: epochHref(lang, e.slug[lang]) })),
     surprise: { name: surpriseName, href: pagePath(lang, 'surprise') },
     mapHref: pagePath(lang, 'map'),

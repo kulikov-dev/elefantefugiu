@@ -48,6 +48,14 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
+      # A hint in the report of the run: the place pages that come out today or in the next two weeks (a place gets a page with its third story); the introduction can be written. Not a gate.
+      - name: Report of new place pages
+        continue-on-error: true
+        run: |
+          {
+            echo '### Place pages'
+            npm run --silent schedule -- --places --weeks=2
+          } >> "$GITHUB_STEP_SUMMARY"
       - name: Type check (astro check)
         run: npx astro check
       # All of npm test: node:test, Vitest and the language stop-lists (check:lang).

@@ -13,7 +13,7 @@ export const DEFAULT_LANG: Lang = 'pt';
 /** Fallback chain of a text that is missing in a language: ru -> en -> pt (the data loader applies it, see lib/localize.ts). */
 export const FALLBACK_CHAIN: Record<Lang, readonly Lang[]> = { pt: [], en: ['pt'], ru: ['en', 'pt'] };
 
-export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths' | 'order' | 'games' | 'search' | 'glossary' | 'cabinet';
+export type PageKey = 'home' | 'about' | 'method' | 'report' | 'share' | 'legal' | 'map' | 'surprise' | 'myths' | 'order' | 'games' | 'search' | 'glossary' | 'cabinet' | 'places';
 
 // An empty slug means the language root (/pt/, /en/).
 export const ROUTES: Record<PageKey, Record<Lang, string>> = {
@@ -30,6 +30,8 @@ export const ROUTES: Record<PageKey, Record<Lang, string>> = {
   games: { pt: 'jogos', en: 'games', ru: 'igry' },
   // The cabinet of rarities (docs/spec.md "Кабинет редкостей"): built always, linked and indexed only when it is open (src/lib/cabinet-config.mjs).
   cabinet: { pt: 'gabinete', en: 'cabinet', ru: 'kabinet' },
+  // The pages of places (docs/spec.md "Страницы мест"): the index is /pt/lugares/, a page /pt/lugares/<id>/ (the id is the same in every language). Built only while some place has a page.
+  places: { pt: 'lugares', en: 'places', ru: 'mesta' },
   search: { pt: 'pesquisa', en: 'search', ru: 'poisk' },
   // The glossary is written in ru and en only (src/lib/glossary.ts); the pt slug is reserved, the page is not built.
   glossary: { pt: 'glossario', en: 'glossary', ru: 'slovarik' },
@@ -72,6 +74,11 @@ export const STORY_SEGMENT: Record<Lang, string> = { pt: 'historia', en: 'story'
 /** Base-aware URL of a card page; the slug comes from the event data for that language. */
 export function storyPath(lang: Lang, slug: string): string {
   return withBase(`${lang}/${STORY_SEGMENT[lang]}/${slug}/`);
+}
+
+/** Base-aware URL of the page of a place: /pt/lugares/belem/. */
+export function placePath(lang: Lang, id: string): string {
+  return withBase(`${lang}/${ROUTES.places[lang]}/${id}/`);
 }
 
 /** Address segments of epoch and thread pages (docs/spec.md section 2). */

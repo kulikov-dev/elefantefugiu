@@ -86,6 +86,10 @@
     "cabinet": {
       "title": "Gabinete de curiosidades",
       "description": "Objetos raros escondidos nas palavras das histórias. Encontre-os e arrume-os nas prateleiras do gabinete."
+    },
+    "places": {
+      "title": "Lugares",
+      "description": "Cidades e bairros de Portugal com histórias do passado: o que aconteceu em cada lugar e o que pode ver hoje."
     }
   },
   "footer": {
@@ -625,5 +629,21 @@
     "party_garland": "Grinaldas dos Santos Populares",
     "ribbon": "Raridade do gabinete",
     "back": "← Ao gabinete de curiosidades"
+  },
+  "places": {
+    "h1": "{name}: histórias e lugares",
+    "auto_lead": "{place}: {stories}, {years}.",
+    "districts": "Bairros",
+    "stories": "Histórias",
+    "today": "O que ver hoje",
+    "today_lead": "Os lugares destas histórias que pode visitar.",
+    "near": "Perto",
+    "title_of": "História {of}: {stories} e lugares para ver",
+    "title_plain": "{name}: {stories} e lugares para ver",
+    "more_of": "Mais histórias {of} →",
+    "more_plain": "Mais histórias: {name} →",
+    "index_link": "Páginas dos lugares →",
+    "map_label": "Mapa das histórias de {name}",
+    "index_lead": "Cidades e bairros com três ou mais histórias. Escolha o sítio para onde vai."
   }
 }
