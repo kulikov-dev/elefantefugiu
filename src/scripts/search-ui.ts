@@ -6,7 +6,7 @@
 import searchCss from '../styles/search.css?inline';
 import { withBase, type Lang } from '../i18n/routes';
 import { pickPlural } from '../lib/plural-pick';
-import { SEARCH_DELAY_MS, SEARCH_EVENT, SEARCH_FETCH, SEARCH_MAP_EVENT, SEARCH_MIN_CHARS, highlight, mapPlaceLink, placeFirst, placeForQuery, visibleHits, type SearchHit } from '../lib/search';
+import { SEARCH_DELAY_MS, SEARCH_EVENT, SEARCH_FETCH, SEARCH_MAP_EVENT, SEARCH_MIN_CHARS, highlight, mapPlaceLink, matchesPlace, placeFirst, placeForQuery, visibleHits, type SearchHit } from '../lib/search';
 import type { SearchData } from '../lib/search-data';
 import type { Counter } from '../lib/like';
 import { currentFamilyMode } from './family-mode';
@@ -126,10 +126,13 @@ function build(layout: Layout, onClose?: () => void): SearchHandle {
   status.setAttribute('role', 'status');
   const mapLink = el('a', 'search__map');
   mapLink.hidden = true;
+  // The page of the place the query names (when the place has one), the second line beside the map: it is a link of the same kind, so the keys reach it too.
+  const placeLink = el('a', 'search__map search__map--place');
+  placeLink.hidden = true;
   const list = el('ul', 'search__list');
   const empty = el('div', 'search__empty');
   empty.hidden = true;
-  results.append(status, mapLink, list, empty);
+  results.append(status, mapLink, placeLink, list, empty);
   root.append(form, results);
 
   let strings: Record<string, string> = {};
@@ -148,6 +151,7 @@ function build(layout: Layout, onClose?: () => void): SearchHandle {
     status.textContent = '';
     status.classList.remove('search__status--shown');
     mapLink.hidden = true;
+    placeLink.hidden = true;
     list.replaceChildren();
     empty.hidden = true;
     empty.replaceChildren();
@@ -194,6 +198,12 @@ function build(layout: Layout, onClose?: () => void): SearchHandle {
       mapLink.href = mapPlaceLink(data.mapHref, place.key);
       mapLink.textContent = pickPlural(strings, 'map', place.n[mode], LOCALES[lang]).replace('{n}', String(place.n[mode])).replace('{place}', place.name);
       mapLink.hidden = false;
+    }
+    const placePage = data.placePages.find((p) => matchesPlace(query, p.name));
+    if (placePage) {
+      placeLink.href = placePage.href;
+      placeLink.textContent = placePage.label;
+      placeLink.hidden = false;
     }
     for (const hit of hits) {
       const item = el('li', 'search__item');

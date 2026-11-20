@@ -4,7 +4,7 @@
 // (/p/...). Each entry carries the hreflang alternates the page itself declares, so the sitemap cannot disagree with the pages.
 // <lastmod> is the day of the last commit that touched the source of the page (git log), never a made-up date: a story, the day of
 // its YAML file; an epoch or a thread, the latest of its stories; the home page, the latest of all stories; the plain pages (About,
-// Method, Legal), the day of src/data/static-pages.ts. The other pages (map, surprise) have no entry for it. In a shallow clone (git
+// Method, Legal), the day of src/data/static-pages.ts; a page of a place, the latest of its stories (the cards on the page) and of src/content/places.yaml. The other pages (map, surprise) have no entry for it. In a shallow clone (git
 // knows only the last commit) every file would get the same day, so then no <lastmod> is written at all.
 // robots.txt allows everything and names the sitemap. (A project site served from /REPO/ has its robots.txt at the wrong
 // level for crawlers; it starts to count with a custom domain, see the README.)
@@ -46,12 +46,16 @@ const staticDay = dayOf('src/data/static-pages.ts');
 const STORY = /^(pt|en|ru)\/(historia|story|istoriya)\/([^/]+)\/index\.html$/;
 const EPOCH = /^(pt|en|ru)\/(epoca|era|epoha)\/([^/]+)\/index\.html$/;
 const THREAD = /^(pt|en|ru)\/(fio|thread|niti)\/([^/]+)\/index\.html$/;
+const PLACE = /^(pt\/lugares|en\/places|ru\/mesta)\/[^/]+\/index\.html$/;
+const placesDay = dayOf('src/content/places.yaml');
+const byId = new Map(events.map((e) => [e.id, e]));
 const STATIC = /^(pt\/(sobre|metodo|legal)|en\/(about|method|legal)|ru\/(o-proekte|metod|pravovaya-informaciya))\/index\.html$/;
 const MYTHS = /^(pt\/mito-ou-verdade|en\/myth-or-fact|ru\/mif-ili-pravda)\/index\.html$/;
 const ORDER = /^(pt\/o-que-veio-primeiro|en\/which-came-first|ru\/chto-bylo-ranshe)\/index\.html$/;
 const GAMES = /^(pt\/jogos|en\/games|ru\/igry)\/index\.html$/;
-const lastmodOf = (path) => {
+const lastmodOf = (path, html) => {
   let m;
+  if (PLACE.test(path)) return latest([placesDay, ...[...html.matchAll(/data-story="([^"]+)"/g)].map((x) => byId.get(x[1])?.day)]);
   if ((m = path.match(STORY))) return bySlug(m[1]).get(m[3])?.day ?? '';
   if ((m = path.match(EPOCH))) {
     const epoch = epochs.find((e) => (e.slug[m[1]] ?? e.slug.en) === m[3]);
@@ -81,7 +85,7 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html')).sort()) {
     process.exit(1);
   }
   const alternates = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((m) => ({ lang: m[1], href: m[2] }));
-  entries.push({ loc: canonical, alternates, lastmod: lastmodOf(path) });
+  entries.push({ loc: canonical, alternates, lastmod: lastmodOf(path, html) });
 }
 
 const urls = entries

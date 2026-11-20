@@ -150,6 +150,8 @@ Adding a story: copy an existing `events/<id>.yaml`, fill the texts, `place`, `b
 Article, Event, place with geo, breadcrumbs, the epoch's story list) is generated from these fields (`src/lib/schema.ts`), nothing is
 written by hand. `npm run build` stops (`check:schema`) when an indexable page lacks any part of it.
 
+The place of the story needs nothing from you: the page of a place (`/pt/lugares/<id>/`, `/en/places/<id>/`, `/ru/mesta/<id>/`) takes the story by the coordinates of its `bridge` (the smallest circle of `src/content/places.yaml` that holds them). The optional field `area` (the id of a place) overrides this, for a story on the border of two districts; `check:data` warns only when the bridge is in no place and `area` is not given (then add the town to `places.yaml`: id, names in pt, en and ru, centre, radius). A place has a page from three stories on the site, so the page appears on the day its third story comes out and the story appears on it by itself; `npm run schedule` names the new pages ("Новая страница места: …"), and the hand-written `intro` in `places.yaml` is an optional improvement (without it the page builds its introduction from the data).
+
 If the story is about a journey (a voyage, a transport, a march, a flight), fill `route` too: the points in order, each with the source it comes from (the text or a listed source; no invented stops), `mode` per leg, `approx` for a leg that is known only roughly, `via` points only to lead the line round land (every sea leg needs them: check:data walks the drawn line over the land and fails where it does not keep to the water; docs/spec.md 5.3a).
 
 A new or changed story goes through the language review (`docs/language-review/`): `npm run lang:pending` shows what was not read yet or

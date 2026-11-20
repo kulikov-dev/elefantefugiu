@@ -1,0 +1,110 @@
+---
+// The index of places: /pt/lugares/, /en/places/, /ru/mesta/. Every place that has a page, a city with its districts under it.
+// Built only while some place has a page (src/pages/[lang]/[...page].astro).
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { pagePath, placePath, type Lang } from '../i18n/routes';
+import { plural, t } from '../i18n';
+import { topPages } from '../lib/places';
+import { pageNodes } from '../lib/schema';
+import { schemaContext } from '../lib/schema-site';
+import { loadSite } from '../lib/site-data';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const site = await loadSite();
+const pages = topPages(site.placePages);
+const schemaCtx = schemaContext(lang, Astro.site);
+const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'places')), name: t(lang, 'pages.places.title'), description: t(lang, 'pages.places.description') });
+---
+<BaseLayout lang={lang} title={t(lang, 'pages.places.title')} description={t(lang, 'pages.places.description')} pageKey="places" schema={schema}>
+  <div class="places">
+    <h1>{t(lang, 'pages.places.title')}</h1>
+    <p class="places__lead">{t(lang, 'places.index_lead')}</p>
+    <ul class="places__list">
+      {
+        pages.map((p) => (
+          <li>
+            <a class="places__link" href={placePath(lang, p.place.id)}>
+              <span class="places__name">{p.place.name[lang]}</span>
+              <span class="places__count">{plural(lang, 'plural.stories', p.stories.length)}</span>
+            </a>
+            {
+              p.districts.length > 0 && (
+                <ul class="places__districts">
+                  {p.districts.map((d) => (
+                    <li>
+                      <a href={placePath(lang, d.place.id)}>{d.place.name[lang]}</a>
+                      <span class="places__count"> · {plural(lang, 'plural.stories', d.stories.length)}</span>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .places > :global(* + *) {
+    margin-block-start: var(--space-4);
+  }
+
+  .places h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .places__lead {
+    max-width: var(--measure);
+    font-size: var(--text-lg);
+  }
+
+  .places__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--grid-tile-min)), 1fr));
+    gap: var(--space-4);
+    list-style: none;
+  }
+
+  .places__list > li {
+    padding: var(--space-4);
+    border: var(--epoch-frame);
+    border-radius: var(--radius-md);
+    background: var(--epoch-surface);
+  }
+
+  .places__link {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+
+  .places__name {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-strong);
+  }
+
+  .places__count {
+    color: var(--color-ink-muted);
+    font-size: var(--text-sm);
+  }
+
+  .places__districts {
+    margin-block-start: var(--space-3);
+    padding-block-start: var(--space-2);
+    border-block-start: 1px solid var(--color-border-strong);
+    font-size: var(--text-sm);
+    list-style: none;
+  }
+
+  .places__districts > li + li {
+    margin-block-start: var(--space-1);
+  }
+</style>

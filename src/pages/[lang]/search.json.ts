@@ -11,5 +11,5 @@ export const getStaticPaths = (() => LANGS.map((lang) => ({ params: { lang }, pr
 export const GET: APIRoute = async ({ props }) => {
   const { lang } = props as { lang: Lang };
   const site = await loadSite();
-  return new Response(JSON.stringify(searchData(lang, site.events, site.epochs, t(lang, 'nav.surprise'))), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  return new Response(JSON.stringify(searchData(lang, site.events, site.epochs, t(lang, 'nav.surprise'), site.placePages)), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 };

@@ -1400,3 +1400,9 @@
     animation: none;
   }
 }
+
+/* The link to the pages of places under the heading of the map page. */
+.map-places {
+  margin-block-start: var(--space-2);
+  font-size: var(--text-sm);
+}

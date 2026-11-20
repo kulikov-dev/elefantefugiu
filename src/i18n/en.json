@@ -86,6 +86,10 @@
     "cabinet": {
       "title": "Cabinet of Rarities",
       "description": "Rare objects hidden in the words of the stories. Find them and set them on the shelves of the cabinet."
+    },
+    "places": {
+      "title": "Places",
+      "description": "Towns and districts of Portugal with stories from the past: what happened in each place and what you can see there today."
     }
   },
   "footer": {
@@ -625,5 +629,25 @@
     "party_garland": "Garlands of the Santos Populares",
     "ribbon": "A rarity from the cabinet",
     "back": "← To the cabinet of rarities"
+  },
+  "places": {
+    "h1": "{name}: stories and places",
+    "districts": "Districts",
+    "stories": "Stories",
+    "today": "What to see today",
+    "today_lead": "The places of these stories that you can visit.",
+    "near": "Nearby",
+    "title_of": "{of} history: {stories} and places to see",
+    "title_plain": "{name}: {stories} and places to see",
+    "more_of": "More stories from {of} →",
+    "more_plain": "More stories from {name} →",
+    "index_link": "Place pages →",
+    "map_label": "Map of the stories of {name}",
+    "index_lead": "Towns and districts with three or more stories. Pick the place you are going to.",
+    "auto_span": "{stories}, from the {from} to the {to} century: {titles}.",
+    "auto_single": "{stories} in the {c} century: {titles}.",
+    "auto_years": "{stories}, {from} to {to}: {titles}.",
+    "quote": "“{t}”",
+    "og_alt": "{name}: azulejo pictures of the stories {titles}"
   }
 }

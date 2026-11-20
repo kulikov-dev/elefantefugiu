@@ -5,6 +5,7 @@
 //    there is no Event anywhere on a story page (for Google an Event is a future happening with tickets, not a story of the past);
 //  - an epoch page has a CollectionPage, an ItemList of its stories and a BreadcrumbList; map, thread, About, Method and Legal have a
 //    WebPage (AboutPage) and a BreadcrumbList;
+//  - the page of a place has a CollectionPage, an ItemList of its stories, a Place with geo (the centre) and a BreadcrumbList;
 //  - every address in the markup is absolute and on the domain of the site (the citations are the sources and may be anywhere);
 //  - the picture named in `image` is in dist/;
 //  - pages with noindex have no markup.
@@ -37,6 +38,7 @@ const tooOld = new Set(
 );
 const STORY = /^(pt\/historia|en\/story|ru\/istoriya)\/[^/]+\/index\.html$/;
 const EPOCH = /^(pt\/epoca|en\/era|ru\/epoha)\/[^/]+\/index\.html$/;
+const PLACE = /^(pt\/lugares|en\/places|ru\/mesta)\/[^/]+\/index\.html$/;
 const HOME = /^(pt|en|ru)\/index\.html$/;
 const ABOUT = /^(pt\/sobre|en\/about|ru\/o-proekte)\/index\.html$/;
 const LOCALE = { pt: 'pt-PT', en: 'en-US', ru: 'ru-RU' };
@@ -183,6 +185,21 @@ for (const file of walk(dist).filter((f) => f.endsWith('.html'))) {
     });
     const crumbs = one('BreadcrumbList');
     if ((crumbs?.itemListElement ?? []).length < 2) fail('BreadcrumbList has fewer than 2 items');
+    pageNodes = [page, list, crumbs];
+  } else if (PLACE.test(path)) {
+    const page = one('CollectionPage');
+    for (const f of ['name', 'description', 'url', 'inLanguage']) need(page, 'CollectionPage', f);
+    const list = one('ItemList');
+    const items = list?.itemListElement ?? [];
+    if (items.length === 0) fail('ItemList has no stories');
+    if (list && list.numberOfItems !== items.length) fail('ItemList.numberOfItems differs from the number of items');
+    const place = one('Place');
+    need(place, 'Place', 'name');
+    const geo = place?.geo;
+    if (!geo || typeof geo.latitude !== 'number' || typeof geo.longitude !== 'number' || Math.abs(geo.latitude) > 90 || Math.abs(geo.longitude) > 180) fail('Place.geo has no valid latitude / longitude');
+    if (page && page.about?.['@id'] !== place?.['@id']) fail('CollectionPage.about is not the Place of the page');
+    const crumbs = one('BreadcrumbList');
+    if ((crumbs?.itemListElement ?? []).length < 3) fail('BreadcrumbList has fewer than 3 items (home, places, place)');
     pageNodes = [page, list, crumbs];
   } else if (!HOME.test(path)) {
     // Map, thread, About, Method, Legal.

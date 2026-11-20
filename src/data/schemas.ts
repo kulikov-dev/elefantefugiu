@@ -237,6 +237,8 @@ export const eventSchema = z
     /** One sentence, up to 20 words, both languages. */
     note: text,
   }),
+  /** Optional: the id of the place (src/content/places.yaml) the story belongs to, for the page of that place. Without it the place is the smallest one whose circle holds the bridge (src/lib/places.ts); give it only for a story at the border of two districts. */
+  area: z.string().optional(),
   threads: z.array(z.string()).min(1).max(2),
   importance: z.union([z.literal(1), z.literal(2), z.literal(3)]),
   label: z.enum(['documented', 'legend', 'debated']),
@@ -585,3 +587,30 @@ export const cabinetItemSchema = z.strictObject({
   image: z.string().optional(),
 });
 export type CabinetItem = z.infer<typeof cabinetItemSchema>;
+
+/** The name of a place in the three languages of the site (all required: the page of the place exists in each of them). */
+const placeName = z.strictObject({ pt: z.string().min(1), en: z.string().min(1), ru: z.string().min(1) });
+const introText = z.strictObject({ pt: z.string().min(1).optional(), en: z.string().min(1).optional(), ru: z.string().min(1).optional() });
+
+/**
+ * A place of the site (src/content/places.yaml, docs/spec.md "Страницы мест"): a town or a district, with the circle that decides which stories belong to it.
+ * A place with enough stories has a page; the hand-written `intro` is optional.
+ */
+export const placeSchema = z.strictObject({
+  id: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'an id is lower-case words joined with "-"'),
+  /** A district of a city: its stories also stand on the page of the parent. */
+  parent: z.string().optional(),
+  name: placeName,
+  /** The name as a part of "History of ...": pt "de Sintra" (with the article: "do Porto"), ru the genitive "Синтры". en uses `name`. Without it the page title is "{name}: ...". */
+  name_of: z.strictObject({ pt: z.string().min(1).optional(), ru: z.string().min(1).optional() }).optional(),
+  center: z.strictObject({ lat: z.number().min(-90).max(90), lon: z.number().min(-180).max(180) }),
+  /** A story belongs to the smallest circle that holds its bridge. */
+  radius_km: z.number().positive(),
+  /** Ids of the places "Nearby" shows first. */
+  neighbours: z.array(z.string()).optional(),
+  /** Ids of the stories (up to 3) whose pictures the preview picture of the page shows, in this order; without it the most important ones (src/lib/places.ts featuredStories). */
+  og_stories: z.array(z.string()).min(1).max(3).optional(),
+  /** The introduction, 2-3 sentences, any language may be left out (the page then builds it from the data, in that language). */
+  intro: introText.optional(),
+});
+export type PlaceInput = z.infer<typeof placeSchema>;
