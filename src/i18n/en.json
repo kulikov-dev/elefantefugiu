@@ -85,6 +85,9 @@
     }
   },
   "footer": {
+    "col_project": "Project",
+    "col_participate": "Get involved",
+    "col_follow": "Follow",
     "about": "About the project",
     "method": "Method and sources",
     "follow": "Email updates",

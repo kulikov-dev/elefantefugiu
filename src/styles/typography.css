@@ -17,8 +17,7 @@
 .map__sheet-toggle,
 .epoch__years,
 .tile__count,
-.section__count,
-.site-footer__links a {
+.section__count {
   font-family: var(--font-label);
   font-weight: var(--weight-strong);
   letter-spacing: var(--letter-label);

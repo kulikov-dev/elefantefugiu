@@ -14,34 +14,60 @@ const { lang } = Astro.props;
 // "Texts and illustrations: {content}, ... Code: {code}." with the two names as links (the sentence is the translation's, the links are the site's).
 const licenseParts = t(lang, 'footer.licenses').split(/(\{content\}|\{code\})/);
 
-const links = [
-  { label: t(lang, 'footer.about'), href: pagePath(lang, 'about') },
-  { label: t(lang, 'footer.method'), href: pagePath(lang, 'method') },
-  // The glossary is in ru and en only: there is no Portuguese page.
-  ...(lang === 'pt' ? [] : [{ label: t(lang, 'footer.glossary'), href: pagePath(lang, 'glossary') }]),
-  { label: t(lang, 'footer.report'), href: pagePath(lang, 'report') },
-  { label: t(lang, 'footer.share'), href: pagePath(lang, 'share') },
-  { label: t(lang, 'footer.games'), href: pagePath(lang, 'games') },
-  { label: t(lang, 'footer.legal'), href: pagePath(lang, 'legal') },
-  // The feed of the stories in this language (src/pages/[lang]/rss.xml.ts); the word is the same in every language.
-  { label: 'RSS', href: withBase(`${lang}/rss.xml`) },
-  // The monthly e-mail: the block on the About page (id="follow" in FollowBlock.astro).
-  { label: t(lang, 'footer.follow'), href: `${pagePath(lang, 'about')}#follow` },
-  // The Telegram channel is in Russian only: its link is on the Russian pages and nowhere else (scripts/check-telegram.mjs).
-  ...(lang === 'ru' ? [{ label: TELEGRAM_TEXT.footer, href: TELEGRAM_URL, external: true }] : []),
+// Three groups; a new link is one more line in its list.
+const groups = [
+  {
+    key: 'project',
+    title: t(lang, 'footer.col_project'),
+    links: [
+      { label: t(lang, 'footer.about'), href: pagePath(lang, 'about') },
+      { label: t(lang, 'footer.method'), href: pagePath(lang, 'method') },
+      // The glossary is in ru and en only: there is no Portuguese page.
+      ...(lang === 'pt' ? [] : [{ label: t(lang, 'footer.glossary'), href: pagePath(lang, 'glossary') }]),
+      { label: t(lang, 'footer.legal'), href: pagePath(lang, 'legal') },
+    ],
+  },
+  {
+    key: 'participate',
+    title: t(lang, 'footer.col_participate'),
+    links: [
+      { label: t(lang, 'footer.report'), href: pagePath(lang, 'report') },
+      { label: t(lang, 'footer.share'), href: pagePath(lang, 'share') },
+      { label: t(lang, 'footer.games'), href: pagePath(lang, 'games') },
+    ],
+  },
+  {
+    key: 'follow',
+    title: t(lang, 'footer.col_follow'),
+    links: [
+      // The monthly e-mail: the block on the About page (id="follow" in FollowBlock.astro).
+      { label: t(lang, 'footer.follow'), href: `${pagePath(lang, 'about')}#follow` },
+      // The Telegram channel is in Russian only: its link is on the Russian pages and nowhere else (scripts/check-telegram.mjs).
+      ...(lang === 'ru' ? [{ label: TELEGRAM_TEXT.footer, href: TELEGRAM_URL, external: true }] : []),
+      // The feed of the stories in this language (src/pages/[lang]/rss.xml.ts); the word is the same in every language.
+      { label: 'RSS', href: withBase(`${lang}/rss.xml`) },
+    ],
+  },
 ];
 ---
 <footer class="site-footer">
   <div class="container">
-    <nav aria-label={t(lang, 'a11y.footer_nav')}>
-      <ul class="site-footer__links">
-        {links.map((link) => <li><a href={link.href} rel={'external' in link ? 'noopener' : undefined}>{link.label}</a></li>)}
-      </ul>
+    <nav aria-label={t(lang, 'a11y.footer_nav')} class="site-footer__nav">
+      {groups.map((group) => (
+        <div class="site-footer__group">
+          <p class="site-footer__heading" id={`footer-${lang}-${group.key}`}>{group.title}</p>
+          <ul class="site-footer__links" aria-labelledby={`footer-${lang}-${group.key}`}>
+            {group.links.map((link) => <li><a href={link.href} rel={'external' in link ? 'noopener' : undefined}>{link.label}</a></li>)}
+          </ul>
+        </div>
+      ))}
     </nav>
-    <p>
-      {licenseParts.map((part) => (part === '{content}' ? <a href={CONTENT_LICENSE[lang]} rel="license noopener">CC BY-NC 4.0</a> : part === '{code}' ? 'MIT' : part))}
-    </p>
-    <p><a href={`${pagePath(lang, 'legal')}#cookies`}>{t(lang, 'footer.privacy')}</a></p>
-    <p class="no-js-only">{t(lang, 'family.footer_hint')}</p>
+    <div class="site-footer__bottom">
+      {/* One quiet line; the no-break space keeps the dot at the end of a line, never at the start of the next. */}
+      <p>
+        {licenseParts.map((part) => (part === '{content}' ? <a href={CONTENT_LICENSE[lang]} rel="license noopener">CC BY-NC 4.0</a> : part === '{code}' ? 'MIT' : part))}&nbsp;· <a class="site-footer__privacy" href={`${pagePath(lang, 'legal')}#cookies`}>{t(lang, 'footer.privacy')}</a>
+      </p>
+      <p class="no-js-only">{t(lang, 'family.footer_hint')}</p>
+    </div>
   </div>
 </footer>
