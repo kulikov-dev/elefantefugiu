@@ -51,7 +51,7 @@ export const hubCardHtml = (lang: Lang): string => {
     ? `<figure class="game-card__figure"><img class="game-card__picture" src="${picture.src}" srcset="${picture.srcset}" sizes="(min-width: 768px) 420px, 100vw" width="${picture.width}" height="${picture.height}" alt="" loading="lazy" decoding="async"></figure>`
     : '';
   return (
-    `<li data-cabinet-card><a class="game-card" href="${pagePath(lang, 'cabinet')}" data-game-card="cabinet">${figure}` +
+    `<li data-cabinet-card><a class="game-card" href="${pagePath(lang, 'cabinet')}#banka" data-game-card="cabinet">${figure}` +
   `<span class="game-card__text"><h2 class="game-card__name">${t(lang, 'pages.cabinet.title')}</h2><span class="game-card__line">${t(lang, 'games.cabinet_line')}</span><span class="game-card__state">${t(lang, 'games.cabinet_open')}</span></span></a></li>`
   );
 };

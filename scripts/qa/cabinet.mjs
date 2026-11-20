@@ -5,6 +5,7 @@
 //   pop-ups   one logic everywhere: a press opens, a press outside, a second press on the same place or Esc closes; no cross; the tin has no hover card; the pills keep a light text on hover
 //   page      the cabinet shows what is found (a thumbnail in a frame) and what is not (a dashed tile): the counter, the tiles, the card of a found tile ("Open the story") and of a missing one (the hint);
 //             Esc closes; without JavaScript the short text; no horizontal scroll at 320 in both themes
+//   anchors   #<id> on the cabinet page scrolls to the tile (ring, no card), #banka to the tin; the glint of a word comes once and not under reduced motion (word suite)
 //   direct    a story of a rarity opened by its address adds nothing; the story of the cabinet has the ribbon, the way back, no read mark, noindex, and is on no list of the site
 //   sardines  seven places, each on its own page; a press: the sardine swims away (a class, none under reduced motion), the card "Sardine N of 7 in the tin" and "To the cabinet"; found, it is gone from
 //             its page; the sardine of the result of the myths is one on the page of a range; seven give the garlands and the line of the holiday on the cabinet page
@@ -102,14 +103,15 @@ if (want('word')) {
     const sel = `button.cw[data-cw="${item.id}"]`;
     ok(`word (${lang}): the hidden word of the host is a button with the name of the rarity`, (await page.$(sel)) !== null && /:/.test((await page.$eval(sel, (b) => b.getAttribute('aria-label'))) ?? ''), page.errors.join('; '));
     await reveal(page, sel);
-    await wait(200);
+    await wait(250);
+    if (lang === 'pt') ok('word: the glint passes over a word that is not found yet when it first comes into the screen', await page.$eval(sel, (b) => b.classList.contains('cw--glint')));
     await page.click(sel);
     await wait(300);
     const text = await popText(page);
     ok(`word (${lang}): a press opens the card with the name and the summary`, !!text && text.includes(item.name[lang]) && text.includes(item.summary[lang]), String(text).slice(0, 80));
     if (lang === 'pt') ok('word: on hover the pills of the card keep a text of 4.5:1 or more (light theme)', (await pillContrast(page)).every((r) => r >= 4.5));
     ok(`word (${lang}): the rarity is saved`, (await store(page))?.items?.includes(item.id) === true);
-    ok(`word (${lang}): the card has "Open the story" and "To the cabinet" as links`, (await page.$$eval('.cab-pop a', (a) => a.map((x) => x.getAttribute('href')))).some((h) => h?.includes(`/${CAB[lang]}/`)));
+    ok(`word (${lang}): the card has "Open the story" and "To the cabinet" as links, the second one to the tile of the rarity`, (await page.$$eval('.cab-pop a', (a) => a.map((x) => x.getAttribute('href')))).some((h) => h?.includes(`/${CAB[lang]}/#${item.id}`)));
     await page.keyboard.press('Escape');
     await wait(150);
     ok(`word (${lang}): Esc closes the card and the focus is back on the word`, (await popText(page)) === null && (await page.evaluate((s) => document.activeElement?.matches(s), sel)));
@@ -118,17 +120,22 @@ if (want('word')) {
     ok(`word (${lang}): the second press says it is in the cabinet already`, /./.test((await popText(page)) ?? '') && !(await popText(page)).includes('Вы нашли') && !(await popText(page)).includes('You found'));
     await page.close();
   }
+  const calm = await open(VARIANT, await findWordPage('pt'), { reduced: true });
+  await reveal(calm, `button.cw[data-cw="${item.id}"]`);
+  await wait(400);
+  ok('word: no glint with prefers-reduced-motion', await calm.$eval(`button.cw[data-cw="${item.id}"]`, (b) => !b.classList.contains('cw--glint')));
+  await calm.close();
   const narrow = await open(VARIANT, await findWordPage('pt'), { width: 320 });
   ok('word: no horizontal scroll at 320', !(await overflow(narrow)));
   await narrow.close();
   const dark = await open(VARIANT, await findWordPage('pt'), { scheme: 'dark' });
-  const deco = await dark.$eval(`button.cw[data-cw="${item.id}"]`, (b) => { const s = getComputedStyle(b); return { line: s.textDecorationLine, style: s.textDecorationStyle, width: s.textDecorationThickness, color: s.textDecorationColor, bg: getComputedStyle(document.body).backgroundColor }; });
+  const deco = await dark.$eval(`button.cw[data-cw="${item.id}"]`, (b) => { const s = getComputedStyle(b); return { line: s.textDecorationLine, image: s.backgroundImage, size: s.backgroundSize, bg: getComputedStyle(document.body).backgroundColor }; });
   await reveal(dark, `button.cw[data-cw="${item.id}"]`);
   await dark.click(`button.cw[data-cw="${item.id}"]`);
   await wait(250);
   ok('word: on hover the pills of the card keep a text of 4.5:1 or more (dark theme)', (await pillContrast(dark)).every((r) => r >= 4.5));
   ok('word: no cross in the card', (await dark.$('.cab-pop__close')) === null);
-  ok('word: the dashed underline 1.5 px in the dark theme, in a colour that is not the background', deco.line.includes('underline') && deco.style === 'dashed' && parseFloat(deco.width) === 1.5 && deco.color !== deco.bg, JSON.stringify(deco));
+  ok('word: the underline is a 2 px line of dashes drawn as a background (no text-decoration), in a colour that is not the background, in the dark theme', deco.image.includes('repeating-linear-gradient') && deco.size.endsWith(' 2px') && deco.line === 'none' && deco.image.includes('6px'), JSON.stringify(deco));
   await dark.close();
 }
 
@@ -195,6 +202,25 @@ if (want('page')) {
   const nojs = await open(VARIANT, `/pt/${CAB.pt}/`, { js: false });
   ok('page: without JavaScript the short text is shown', await nojs.$eval('.cabinet__no-js', (e) => getComputedStyle(e).display !== 'none'));
   await nojs.close();
+}
+
+if (want('anchors')) {
+  // A link with #id: the page is scrolled to the tile, the tile is in the ring (:target), no card opens by itself; the tin is #banka.
+  for (const [hash, selector] of [[item.id, `.cab-obj[data-item="${item.id}"]`], ['banka', '[data-tin]']]) {
+    const page = await open(VARIANT, `/pt/${CAB.pt}/`);
+    await page.goto(`${VARIANT}/pt/${CAB.pt}/#${hash}`, { waitUntil: 'networkidle0' });
+    await wait(500);
+    const state = await page.$eval(selector, (el) => { const r = el.getBoundingClientRect(); return { id: el.id, inView: r.top >= 0 && r.bottom <= innerHeight, target: el.matches(':target') }; });
+    ok(`anchors (#${hash}): the element has its id, is :target and is in the screen`, state.id === hash && state.target && state.inView, JSON.stringify(state));
+    ok(`anchors (#${hash}): no card opens by itself`, (await popText(page)) === null);
+    await page.close();
+  }
+  const story = await open(VARIANT, `/pt/${SEG.pt}/${cabinetStories[0].slug.pt}/`);
+  ok('anchors: the way back from a story of a rarity leads to its tile', await story.evaluate(() => /#[\w-]+$/.test(document.querySelector('.cab-back a')?.getAttribute('href') ?? '')));
+  await story.close();
+  const noMotion = await open(VARIANT, `/pt/${CAB.pt}/#${item.id}`, { reduced: true });
+  ok('anchors: with reduced motion the ring does not animate', await noMotion.$eval(`.cab-obj[data-item="${item.id}"]`, (el) => getComputedStyle(el).animationName === 'none'));
+  await noMotion.close();
 }
 
 if (want('direct')) {

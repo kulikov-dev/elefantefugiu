@@ -593,7 +593,7 @@
     "nav": "Words of the glossary"
   },
   "cabinet": {
-    "lead": "The rarities are hidden in the text of the stories.",
+    "lead": "The rarities are hidden in the text of the stories: look for the word underlined with dashes in the color of the era. Hints are on the shelves.",
     "found": "Found: {n} of {m}",
     "complete": "The cabinet is complete.",
     "shelf_count": "{n} of {m}",
