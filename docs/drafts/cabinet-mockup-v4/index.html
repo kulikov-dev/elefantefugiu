@@ -17,9 +17,9 @@ h1{font-family:var(--display);font-size:2.1rem;line-height:1.1;margin:0;grid-col
 .tin{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:0;font:inherit;color:var(--muted);font-size:.82rem}
 .tin svg{width:132px;height:auto}
 /* festa */
-.festa{position:relative;margin:22px 0 6px;padding:54px 18px 18px;border-radius:14px;background:var(--paper);border:1px solid var(--line);text-align:center;overflow:hidden}
+.festa{position:relative;margin:22px 0 6px;padding:62px 18px 18px;border-radius:14px;background:var(--paper);border:1px solid var(--line);text-align:center;overflow:hidden}
 .festa svg{position:absolute;left:0;top:0;width:100%;height:64px}
-.festa .t{font-family:var(--display);font-size:1.3rem;line-height:1.25;margin:0 0 6px;font-weight:700}
+.festa .t{margin-top:4px;color:var(--fg);font-family:var(--display);font-size:1.3rem;line-height:1.25;margin:0 auto 6px;font-weight:700}
 .festa p{margin:0 auto;color:var(--muted);font-size:.95rem;max-width:40ch}
 /* shelves */
 .shelf{margin-top:34px}
@@ -123,14 +123,18 @@ document.getElementById('shelves').innerHTML=h;
 document.getElementById('sum').textContent=DONE?'Найдено 15 из 15. Кабинет собран.':'Найдено '+n+' из 15. Редкости спрятаны в текстах историй.';
 drawTin(DONE?7:3);
 if(DONE){
- const cols=['#C8372D','#3F8A45','#E3B53F','#1F4E9C','#FFFFFF'];
- function bunting(W,H,y0,sag,cnt,off){let s='<path d="M0 '+y0+' Q'+W/2+' '+(y0+2*sag)+' '+W+' '+y0+'" fill="none" stroke="#8A7F70" stroke-width="1.2"/>';
-  for(let i=0;i<cnt;i++){const t=(i+.5+off)/cnt;if(t>1)continue;const x=W*t;const y=y0+2*sag*t*(1-t);const dy=2*sag*(1-2*t)/W;const a=Math.atan(dy)*180/Math.PI;
-   const c=cols[(i+(off?2:0))%cols.length];s+='<g transform="translate('+x+' '+y+') rotate('+a+')"><path d="M-9 0 H9 L0 22 Z" fill="'+c+'" stroke="rgba(0,0,0,.15)" stroke-width=".6"/></g>';}
+ const cols=['#C8372D','#3F8A45','#E3B53F','#1F4E9C'];
+ function bunting(W,H){const x0=18,x1=W-18,y0=10,L=x1-x0,sag=Math.min(24,L*0.04);
+  const Y=x=>{const t=(x-x0)/L;return y0+4*sag*t*(1-t);};
+  const fw=20,gap=8,fh=24,n=Math.floor((L-24+gap)/(fw+gap)),start=x0+(L-(n*fw+(n-1)*gap))/2;
+  let s='<path d="M'+x0+' '+y0+' Q'+(x0+L/2)+' '+(y0+2*sag)+' '+x1+' '+y0+'" fill="none" stroke="#7A6E60" stroke-width="1.4"/>';
+  s+='<circle cx="'+x0+'" cy="'+y0+'" r="2.6" fill="#7A6E60"/><circle cx="'+x1+'" cy="'+y0+'" r="2.6" fill="#7A6E60"/>';
+  for(let i=0;i<n;i++){const xl=start+i*(fw+gap),xr=xl+fw,xm=xl+fw/2,yl=Y(xl),yr=Y(xr);
+   s+='<path d="M'+xl.toFixed(1)+' '+yl.toFixed(1)+' L'+xr.toFixed(1)+' '+yr.toFixed(1)+' L'+xm.toFixed(1)+' '+(Math.max(yl,yr)+fh).toFixed(1)+' Z" fill="'+cols[i%cols.length]+'"/>';}
   return s;}
  document.getElementById('festa').innerHTML='<div class="festa"><svg></svg><p class="t">Все сардинки дома: в Лиссабоне начинаются Санту-Антониу</p><p>В июне в Лиссабоне сардину жарят прямо на улице и едят на ломте хлеба.</p></div>';
  const fe=document.querySelector('.festa'),sv=fe.querySelector('svg');const W=fe.clientWidth,Hh=sv.clientHeight;sv.setAttribute('viewBox','0 0 '+W+' '+Hh);
- sv.innerHTML=bunting(W,Hh,2,Math.min(16,Hh/4),Math.round(W/34),0);
+ sv.innerHTML=bunting(W,Hh);
 }
 if(P.has('pop')){const b=document.querySelector('[data-id="k06-rinoceronte"]');const r=b.getBoundingClientRect();const d=document.createElement('div');d.className='pop';d.style.top=(r.bottom+window.scrollY+40)+'px';d.style.left=Math.max(12,Math.min(r.left-150,innerWidth-302))+'px';d.innerHTML='<b>Носорог на Белене</b>Каменная голова носорога под башенкой: портрет того самого зверя, которого везли папе в 1515 году.<br><a href="#">Открыть историю →</a>';document.body.appendChild(d);}
 </script></body></html>

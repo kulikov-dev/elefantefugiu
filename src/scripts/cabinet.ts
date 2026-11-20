@@ -272,7 +272,7 @@ function wirePage(root: HTMLElement, data: Payload): void {
     const w = party.clientWidth;
     const h = bunting.clientHeight;
     bunting.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    bunting.innerHTML = buntingSvg(w, h);
+    bunting.innerHTML = buntingSvg(w);
   };
   if (party) new ResizeObserver(hang).observe(party);
   if (note && preview) note.hidden = false;
@@ -307,7 +307,7 @@ function wirePage(root: HTMLElement, data: Payload): void {
       const counter = shelf.querySelector<HTMLElement>('[data-shelf-count]');
       if (counter) counter.textContent = fill(s.shelf_count ?? '', { n: mine.filter((tile) => tile.hasAttribute('data-found')).length, m: mine.length });
     }
-    if (found) found.textContent = fill(have === total && total > 0 ? (s.complete ?? '') : (s.found ?? ''), { n: have, m: total });
+    if (found) found.textContent = fill(s.found ?? '', { n: have, m: total });
     if (empty) empty.hidden = total > 0;
     const caught = store.sardines.length;
     if (tinArt) tinArt.innerHTML = tinSvg(caught, 'tin');

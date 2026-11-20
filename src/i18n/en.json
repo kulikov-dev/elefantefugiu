@@ -594,7 +594,7 @@
   },
   "cabinet": {
     "lead": "The rarities are hidden in the text of the stories.",
-    "found": "Found {n} of {m}.",
+    "found": "Found: {n} of {m}",
     "complete": "The cabinet is complete.",
     "shelf_count": "{n} of {m}",
     "soon": "New shelves soon.",

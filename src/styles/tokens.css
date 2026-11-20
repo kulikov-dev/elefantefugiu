@@ -48,11 +48,9 @@
   --cab-fish-fin: light-dark(#3e5f80, #4a6d90);
   --cab-fish-eye: light-dark(#ffffff, #ffffff);
   --cab-flag-1: light-dark(#c8372d, #d9564b);
-  --cab-flag-2: light-dark(#4e8f45, #6aaa5f);
-  --cab-flag-3: light-dark(#e9c46a, #e0b24a);
+  --cab-flag-2: light-dark(#3f8a45, #6aaa5f);
+  --cab-flag-3: light-dark(#e3b53f, #e0b24a);
   --cab-flag-4: light-dark(#1f4e9c, #5a88d8);
-  --cab-flag-5: light-dark(#ffffff, #efe8d8);
-  --cab-flag-line: light-dark(rgb(0 0 0 / 0.15), rgb(255 255 255 / 0.25));
 
   /* The cabinet of rarities: sizes of the shelf (the zone of the objects is 112 px high, 160 px from 768 px; the shelf is 760 px at most), of the head and of the card of the holiday. */
   --cab-obj-h: 7rem;
@@ -76,7 +74,9 @@
   --cab-tin-size: 8.25rem;
   --cab-tin-size-wide: 13.125rem;
   --cab-swim-far: 14rem;
-  --cab-lead: 34ch;
+  --cab-lead: 60ch;
+  --cab-party-top-wide: 4.75rem;
+  --cab-party-gap: 0.375rem;
   --cab-line: 40ch;
   --cab-card-radius: 0.875rem;
   --cab-party-top: 4rem;
@@ -621,11 +621,9 @@
     --cab-fish-fin: #3e5f80;
     --cab-fish-eye: #ffffff;
     --cab-flag-1: #c8372d;
-    --cab-flag-2: #4e8f45;
-    --cab-flag-3: #e9c46a;
+    --cab-flag-2: #3f8a45;
+    --cab-flag-3: #e3b53f;
     --cab-flag-4: #1f4e9c;
-    --cab-flag-5: #ffffff;
-    --cab-flag-line: rgb(0 0 0 / 0.15);
     --cab-pop-shadow: 0 0.375rem 1.125rem rgb(31 27 22 / 0.18);
     --color-heavy-border: #7a2e0e;
     --color-heavy-bg: #fdeee6;

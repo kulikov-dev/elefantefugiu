@@ -56,24 +56,41 @@ export function tinSvg(caught: number, uid: string): string {
   );
 }
 
-/** The step of the flags on the cord, px. */
-export const BUNTING_STEP = 34;
+/** The cord is fixed at two points this far from the corners of the card, px. */
+const BUNTING_INSET = 18;
+const BUNTING_TOP = 10;
+const BUNTING_SAG = 24;
+const BUNTING_FLAG = { width: 20, height: 24, gap: 8 };
+/** Four colours, no white. */
+const BUNTING_COLOURS = [1, 2, 3, 4];
 
 /**
- * The bunting of the finished cabinet: the cord sags a little between the two edges of a block `width` px wide, and a flag hangs at every step, its point down, turned to the tangent of the cord.
- * Five colours (white with a thin outline). The width is the real width of the block, so nothing is stretched.
+ * The bunting of the finished cabinet (the same drawing as docs/drafts/cabinet-mockup-v4): the cord hangs from two points 18 px inside the corners of a card `width` px wide and sags about 24 px;
+ * flags 20 x 24 with an 8 px gap, the top corners of every flag lie on the cord, the point is straight down. The width is the real width of the card, so nothing is stretched.
  */
-export function buntingSvg(width: number, height: number): string {
-  const y0 = 2;
-  const sag = Math.min(16, height / 4);
-  const count = Math.max(1, Math.round(width / BUNTING_STEP));
-  let flags = '';
+export function buntingSvg(width: number): string {
+  const x0 = BUNTING_INSET;
+  const x1 = width - BUNTING_INSET;
+  const y0 = BUNTING_TOP;
+  const length = x1 - x0;
+  const sag = Math.min(BUNTING_SAG, length * 0.04);
+  const cordY = (x: number): number => {
+    const t = (x - x0) / length;
+    return y0 + 4 * sag * t * (1 - t);
+  };
+  const { width: fw, height: fh, gap } = BUNTING_FLAG;
+  const count = Math.max(0, Math.floor((length - 24 + gap) / (fw + gap)));
+  const start = x0 + (length - (count * fw + (count - 1) * gap)) / 2;
+  const f = (n: number): string => n.toFixed(1);
+  let out = `<path d="M${x0} ${y0} Q${f(x0 + length / 2)} ${f(y0 + 2 * sag)} ${f(x1)} ${y0}" fill="none" stroke="var(--color-muted)" stroke-width="1.4"/>`;
+  out += `<circle cx="${x0}" cy="${y0}" r="2.6" fill="var(--color-muted)"/><circle cx="${f(x1)}" cy="${y0}" r="2.6" fill="var(--color-muted)"/>`;
   for (let i = 0; i < count; i++) {
-    const t = (i + 0.5) / count;
-    const x = width * t;
-    const y = y0 + 2 * sag * t * (1 - t);
-    const angle = (Math.atan((2 * sag * (1 - 2 * t)) / width) * 180) / Math.PI;
-    flags += `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${angle.toFixed(1)})"><path d="M-9 0 H9 L0 22 Z" fill="var(--cab-flag-${(i % 5) + 1})" stroke="var(--cab-flag-line)" stroke-width=".6"/></g>`;
+    const xl = start + i * (fw + gap);
+    const xr = xl + fw;
+    const yl = cordY(xl);
+    const yr = cordY(xr);
+    const colour = BUNTING_COLOURS[i % BUNTING_COLOURS.length];
+    out += `<path d="M${f(xl)} ${f(yl)} L${f(xr)} ${f(yr)} L${f(xl + fw / 2)} ${f(Math.max(yl, yr) + fh)} Z" fill="var(--cab-flag-${colour})"/>`;
   }
-  return `<path d="M0 ${y0} Q${(width / 2).toFixed(1)} ${y0 + 2 * sag} ${width.toFixed(1)} ${y0}" fill="none" stroke="var(--color-muted)" stroke-width="1.2"/>${flags}`;
+  return out;
 }

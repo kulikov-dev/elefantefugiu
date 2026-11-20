@@ -594,7 +594,7 @@
   },
   "cabinet": {
     "lead": "As raridades estão escondidas no texto das histórias.",
-    "found": "Encontradas: {n} de {m}.",
+    "found": "Encontradas: {n} de {m}",
     "complete": "Gabinete completo.",
     "shelf_count": "{n} de {m}",
     "soon": "Em breve, novas prateleiras.",

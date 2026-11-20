@@ -226,6 +226,11 @@ button.cw:focus-visible {
 .cabinet__head p {
   margin: 0;
   color: var(--color-muted);
+}
+
+.cabinet__lead {
+  margin: var(--space-2) 0 0;
+  color: var(--color-muted);
   max-inline-size: var(--cab-lead);
 }
 
@@ -466,7 +471,7 @@ html[data-js] .cabinet__no-js {
 }
 
 .cabinet__party-title {
-  margin-block-end: var(--space-2);
+  margin-block-end: var(--cab-party-gap);
   font-family: var(--font-heading);
   font-size: var(--cab-party-title);
   font-weight: 700;
@@ -476,6 +481,16 @@ html[data-js] .cabinet__no-js {
 
 .cabinet__party p.cabinet__party-title {
   color: var(--color-text);
+}
+
+@media (min-width: 48rem) {
+  .cabinet__party {
+    padding-block-start: var(--cab-party-top-wide);
+  }
+
+  .cabinet__party svg {
+    block-size: var(--cab-party-top-wide);
+  }
 }
 
 /* ---- The story of a rarity ---- */

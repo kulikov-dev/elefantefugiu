@@ -54,13 +54,14 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'cabinet
     <p class="cabinet__preview" data-preview-note hidden>{strings.preview}</p>
     <div class="cabinet__head">
       <h1>{title}</h1>
-      <p><span data-found-line>{fill(strings.found!, { n: 0, m: all.length })}</span> {strings.lead}</p>
+      <p data-found-line>{fill(strings.found!, { n: 0, m: all.length })}</p>
       <button class="cabinet__tin" type="button" data-tin aria-label={fill(strings.tin_label!, { n: 0 })} aria-describedby="cabinet-tin-tip">
         <span data-tin-art set:html={tinSvg(0, 'tin')} />
         <span class="cabinet__tin-count" data-tin-count>{fill(strings.tin_count!, { n: 0 })}</span>
       </button>
       <span id="cabinet-tin-tip" class="visually-hidden">{strings.tin_tip}</span>
     </div>
+    <p class="cabinet__lead">{strings.lead}</p>
     <div class="cabinet__party" data-party>
       <svg data-bunting role="img" aria-label={strings.party_garland}></svg>
       <p class="cabinet__party-title">{strings.party_title}</p>
