@@ -689,6 +689,7 @@
     "auto_span": "{stories} с {from} по {to} век: {titles}.",
     "auto_single": "{stories} в {c} веке: {titles}.",
     "auto_years": "{stories}, {from}–{to}: {titles}.",
-    "quote": "«{t}»"
+    "quote": "«{t}»",
+    "og_alt": "{name}: азулежу из историй {titles}"
   }
 }

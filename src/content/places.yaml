@@ -3,6 +3,7 @@
 # the page appears on the day its third story comes out. Nothing here is required but id, name, center and radius_km.
 #   parent        a district of a city: its stories also stand on the page of the parent
 #   name_of       the name in the sentence "History of ...": pt "de Sintra", ru "Синтры" (without it the page title is "{name}: ...")
+#   og_stories    ids of up to 3 stories whose pictures the preview picture (og:image) shows; without it the most important ones
 #   neighbours    ids of the places the page "Nearby" shows first (the rest are the nearest places that have a page)
 #   intro         the hand-written introduction, 2-3 sentences, any language may be left out: where it is missing the page builds it from the data
 # A new town: add an entry (id, names, the centre and a radius that holds its sights), nothing else. check:data warns about a story whose bridge is in no place.
@@ -13,6 +14,7 @@
   name_of: { pt: de Lisboa, ru: Лиссабона }
   center: { lat: 38.725, lon: -9.15 }
   radius_km: 9
+  og_stories: [rinoceronte-1515, a-portuguesa-1890, aguadeiros-galegos-1748]
   intro:
     pt: "Das galerias romanas sob a Baixa ao hidroavião de 1922, a história de Lisboa está em camadas. Aqui, numa só manhã de 1640, acabou o domínio dos reis espanhóis; depois do terramoto de 1755 o centro foi reconstruído a régua e esquadro; e em 1807 partiu daqui para o Brasil toda a corte. As histórias estão organizadas por bairros: comece pelo que fica mais perto."
     en: "From the Roman galleries under the Baixa to the seaplane of 1922, the history of Lisbon lies in layers. Here, in a single morning in 1640, the rule of the Spanish kings ended; after the earthquake of 1755 the centre was rebuilt on a ruler's grid; and in 1807 the whole court sailed from here to Brazil. The stories are sorted by district: start with the one that is closest."
@@ -23,6 +25,7 @@
   name_of: { pt: de Belém, ru: Белена }
   center: { lat: 38.6975, lon: -9.2063 }
   radius_km: 2.2
+  og_stories: [rinoceronte-1515, pasteis-de-belem-1837, travessia-atlantico-sul-1922]
   intro:
     pt: "Daqui partiam os navios da época dos Descobrimentos. No Museu de Marinha guarda-se uma cópia do mapa que em 1502 foi levado em segredo para Itália, e o rinoceronte que o rei pôs a lutar com um elefante em 1515 ficou em pedra na Torre de Belém. Daqui partiu o príncipe regente com toda a corte para o Brasil, aqui fazem-se os pastéis dos monges, e o Museu de Marinha conta também a travessia do Atlântico Sul em 1922."
     en: "The ships of the Age of Discovery sailed from here. The Maritime Museum keeps a copy of the map that was smuggled out to Italy in 1502, and the rhinoceros that the king set against an elephant in 1515 survives in stone on the Belém Tower. From here the prince regent sailed with the whole court to Brazil, the monks’ pastries are still baked here, and the Maritime Museum also tells of the flight across the South Atlantic in 1922."

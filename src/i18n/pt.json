@@ -647,6 +647,7 @@
     "auto_span": "{stories}, do século {from} ao {to}: {titles}.",
     "auto_single": "{stories} no século {c}: {titles}.",
     "auto_years": "{stories}, de {from} a {to}: {titles}.",
-    "quote": "«{t}»"
+    "quote": "«{t}»",
+    "og_alt": "{name}: azulejos das histórias {titles}"
   }
 }

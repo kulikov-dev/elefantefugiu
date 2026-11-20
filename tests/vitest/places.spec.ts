@@ -2,7 +2,7 @@
 // Pure unit tests with their own small input: nothing here depends on the content of the site.
 import { describe, expect, it } from 'vitest';
 import type { PlaceData } from '../../src/lib/places';
-import { MAX_NEIGHBOURS, centuryLabel, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, topPages } from '../../src/lib/places';
+import { MAX_NEIGHBOURS, centuryLabel, featuredStories, ogStories, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, topPages } from '../../src/lib/places';
 
 const names = (pt: string, en = pt, ru = pt) => ({ pt, en, ru });
 const place = (id: string, lat: number, lon: number, radius_km: number, extra: Partial<PlaceData> = {}): PlaceData => ({ id, name: names(id), center: { lat, lon }, radius_km, ...extra });
@@ -187,5 +187,40 @@ describe('the day a page comes out', () => {
     expect(pageDay(city, places, list)).toBe('2026-01-10');
     expect(pageDay(north, places, list.slice(0, 2))).toBeUndefined();
     expect(pageDay(town, places, list)).toBeUndefined();
+  });
+});
+
+describe('the stories a page shows first (the introduction and the preview picture)', () => {
+  const many = (id: string, lat: number, n: number, importance: 1 | 2 | 3) => Array.from({ length: n }, (_, i) => story(`${id}${i}`, lat, -9.15, { importance }));
+
+  it('a plain place: the three most important, the page order among equals, shown in the page order', () => {
+    const [page] = placePages([town], [story('a', 41.15, -8.6, { importance: 1 }), story('b', 41.15, -8.6, { importance: 3 }), story('c', 41.15, -8.6, { importance: 3 }), story('d', 41.15, -8.6, { importance: 2 }), story('e', 41.15, -8.6, { importance: 3 })]);
+    expect(featuredStories(page!).map((s) => s.id)).toEqual(['b', 'c', 'e']);
+  });
+
+  it('a city with districts: the best story of each district first, then the best of the rest', () => {
+    // north has the most important stories, south and the city itself less so: the picture must still show the three parts.
+    const data = [...many('n', 38.74, 4, 3), ...many('s', 38.7, 3, 2), ...many('c', 38.72, 3, 1)];
+    const city = placePages(places, data).find((p) => p.place.id === 'city')!;
+    expect(featuredStories(city).map((s) => s.id)).toEqual(['n0', 's0', 'c0']);
+    // Fewer parts than pictures: the rest is filled with the best of what is left.
+    const two = placePages(places, [...many('n', 38.74, 4, 3), ...many('s', 38.7, 3, 2)]).find((p) => p.place.id === 'city')!;
+    expect(featuredStories(two).map((s) => s.id)).toEqual(['n0', 'n1', 's0']);
+  });
+});
+
+describe('the stories of the preview picture', () => {
+  const data = [story('a', 41.15, -8.6, { importance: 1 }), story('b', 41.15, -8.6, { importance: 3 }), story('c', 41.15, -8.6, { importance: 2 }), story('d', 41.15, -8.6, { importance: 1 })];
+
+  it('are the ones the place names, in the order named; one that is not on the page is left out', () => {
+    const [page] = placePages([{ ...town, og_stories: ['d', 'gone', 'a'] }], data);
+    expect(ogStories(page!).map((s) => s.id)).toEqual(['d', 'a']);
+  });
+
+  it('are the featured ones when the place names none, or none of the named is on the page', () => {
+    const [plain] = placePages([town], data);
+    expect(ogStories(plain!).map((s) => s.id)).toEqual(featuredStories(plain!).map((s) => s.id));
+    const [lost] = placePages([{ ...town, og_stories: ['gone'] }], data);
+    expect(ogStories(lost!).map((s) => s.id)).toEqual(featuredStories(lost!).map((s) => s.id));
   });
 });

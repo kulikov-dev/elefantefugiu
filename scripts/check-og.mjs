@@ -3,7 +3,8 @@
 //   - og:image with an absolute address on our own domain (the one of its canonical address), og:image:width / height / type that match the file,
 //     twitter:image the same as og:image and twitter:card summary_large_image;
 //   - the file in dist/, a JPEG of 1200 x 630, at most 200 KB, with the hash in its name (a changed card is fetched anew by the messengers).
-// A page of an epoch or the home page must have a card when the manifest of make-og.mjs has one for it.
+// A page of an epoch or the home page must have a card when the manifest of make-og.mjs has one for it. The page of a place the same with the manifest of make-place-og.mjs
+// (.og-cache/places.json): og-places/<id>-<lang>-<hash>.jpg, three azulejo pictures and a strip with the name.
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,16 +24,24 @@ try {
   // No manifest (a build that skipped make-og.mjs): only the rules below apply.
 }
 
+let placeManifest = {};
+try {
+  placeManifest = JSON.parse(readFileSync(join(root, '.og-cache/places.json'), 'utf8'));
+} catch {
+  // No manifest of place cards: a place page then keeps the default picture, which check-previews checks.
+}
+
+const PLACE_PAGE = /^(pt\/lugares|en\/places|ru\/mesta)\/([^/]+)\/index\.html$/;
 const EPOCH_PAGE = /^(pt\/epoca|en\/era|ru\/epoha)\/[^/]+\/index\.html$/;
 const HOME_PAGE = /^(pt|en|ru)\/index\.html$/;
 const FESTA_PAGE = /^(pt|en|ru)\/festa\/[^/]+\/index\.html$/;
-const counts = { story: 0, epoch: 0, home: 0, festa: 0 };
+const counts = { story: 0, epoch: 0, home: 0, festa: 0, place: 0 };
 let cards = 0;
 for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
   const html = readFileSync(file, 'utf8');
   const rel = relative(dist, file).split(sep).join('/');
   const isStory = meta(html, 'property', 'og:type') === 'article';
-  const kind = isStory ? 'story' : EPOCH_PAGE.test(rel) ? 'epoch' : HOME_PAGE.test(rel) ? 'home' : FESTA_PAGE.test(rel) ? 'festa' : null;
+  const kind = isStory ? 'story' : EPOCH_PAGE.test(rel) ? 'epoch' : HOME_PAGE.test(rel) ? 'home' : FESTA_PAGE.test(rel) ? 'festa' : PLACE_PAGE.test(rel) ? 'place' : null;
   if (!kind || /<meta name="robots" content="noindex"/.test(html)) continue;
   counts[kind] += 1;
   const fail = (what) => errors.push(`${rel}: ${what}`);
@@ -74,11 +83,16 @@ for (const file of walk(dist).filter((f) => f.endsWith('index.html'))) {
   if (isFesta && info.format !== (path.endsWith('.jpg') ? 'jpeg' : 'png')) fail(`${path} is not a ${path.endsWith('.jpg') ? 'JPEG' : 'PNG'}`);
   if (kind === 'festa' && / · O Elefante Fugiu$/.test(decode(meta(html, 'property', 'og:title') ?? ''))) fail('og:title of the page of a holiday is the name and the date, with no name of the site');
   if (kind === 'festa' && !isFesta) fail(`og:image ${path} is not the picture of the holiday (og-festas/<id>-<hash>)`);
+  // The page of a place: the card of the manifest of places (og-places/<id>-<lang>-<hash>.jpg); a place without a card keeps the default picture.
+  const placeId = kind === 'place' ? PLACE_PAGE.exec(rel)?.[2] : undefined;
+  const placeCard = placeId ? placeManifest[placeId]?.[lang] : undefined;
+  const isPlaceCard = kind === 'place' && /^og-places\/[a-z0-9-]+-(pt|en|ru)-[0-9a-f]{10}\.jpg$/.test(path);
+  if (placeCard && path !== placeCard) fail(`og:image ${path} is not the card of the manifest of places (${placeCard})`);
   const mustHaveCard = kind === 'story' || (key && manifest[key]?.[lang]);
-  if (mustHaveCard && !isCard && !isFesta) fail(`og:image ${path} is not a card with a hash in its name (og-cards/<lang>/<slug>-<hash>.jpg)`);
-  if (isCard) {
+  if (mustHaveCard && !isCard && !isFesta && !isPlaceCard) fail(`og:image ${path} is not a card with a hash in its name (og-cards/<lang>/<slug>-<hash>.jpg)`);
+  if (isCard || isPlaceCard) {
     cards += 1;
-    if (key && manifest[key]?.[lang] && manifest[key][lang] !== path) fail(`og:image ${path} is not the card of the manifest (${manifest[key][lang]})`);
+    if (isCard && key && manifest[key]?.[lang] && manifest[key][lang] !== path) fail(`og:image ${path} is not the card of the manifest (${manifest[key][lang]})`);
     if (meta(html, 'property', 'og:image:width') !== String(info.width) || meta(html, 'property', 'og:image:height') !== String(info.height)) fail('og:image:width / og:image:height are missing or do not match the file');
     if (meta(html, 'property', 'og:image:type') !== 'image/jpeg' || info.format !== 'jpeg') fail('og:image:type is missing or is not image/jpeg');
   }
@@ -109,4 +123,4 @@ if (errors.length) {
   for (const e of errors.slice(0, 40)) console.error(`- ${e}`);
   process.exit(1);
 }
-console.log(`Preview card check passed: ${counts.story} story pages, ${counts.epoch} epoch pages, ${counts.home} home pages, ${cards} with a card (1200x630 JPEG, up to 200 KB, absolute address on our domain, size and type in the head).`);
+console.log(`Preview card check passed: ${counts.story} story pages, ${counts.epoch} epoch pages, ${counts.home} home pages, ${counts.place} place pages, ${cards} with a card (1200x630 JPEG, up to 200 KB, absolute address on our domain, size and type in the head).`);

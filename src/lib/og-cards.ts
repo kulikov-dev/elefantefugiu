@@ -63,3 +63,14 @@ export function mythCardPath(id: string, lang: Lang, cwd = process.cwd()): strin
     return undefined;
   }
 }
+
+/** The preview picture of the page of a place in a language (scripts/make-place-og.mjs: 1200x630 JPEG, three azulejo pictures and a strip with the name), a path inside public/; undefined when there is none. */
+export function placeCardPath(id: string, lang: Lang, cwd = process.cwd()): string | undefined {
+  try {
+    const manifest = JSON.parse(readFileSync(join(cwd, '.og-cache/places.json'), 'utf8')) as Record<string, Partial<Record<Lang, string>>>;
+    const rel = manifest[id]?.[lang];
+    return rel && existsSync(join(cwd, 'public', rel)) ? rel : undefined;
+  } catch {
+    return undefined;
+  }
+}

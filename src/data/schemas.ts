@@ -608,6 +608,8 @@ export const placeSchema = z.strictObject({
   radius_km: z.number().positive(),
   /** Ids of the places "Nearby" shows first. */
   neighbours: z.array(z.string()).optional(),
+  /** Ids of the stories (up to 3) whose pictures the preview picture of the page shows, in this order; without it the most important ones (src/lib/places.ts featuredStories). */
+  og_stories: z.array(z.string()).min(1).max(3).optional(),
   /** The introduction, 2-3 sentences, any language may be left out (the page then builds it from the data, in that language). */
   intro: introText.optional(),
 });

@@ -52,18 +52,23 @@ export interface PlacePage<S extends PlaceStory = PlaceStory> {
   stories: S[];
   /** The districts that have a page of their own. */
   districts: PlacePage<S>[];
+  /** The id of the smallest place each story belongs to (a story of Belém on the page of Lisboa: "belem"). */
+  owner: Record<string, string>;
 }
 
 /** The places that have a page for these stories (the stories of one day: the caller keeps out the drafts, the queue and the cabinet). */
 export function placePages<S extends PlaceStory>(places: readonly PlaceData[], stories: readonly S[], min = PLACE_MIN_STORIES): PlacePage<S>[] {
   const chains = stories.map((s) => {
     const place = placeOf(s, places);
-    return { story: s, ids: new Set(place ? placeChain(place, places).map((p) => p.id) : []) };
+    return { story: s, own: place?.id, ids: new Set(place ? placeChain(place, places).map((p) => p.id) : []) };
   });
   const pages = places
-    .map((place) => ({ place, stories: chains.filter((c) => c.ids.has(place.id)).map((c) => c.story), districts: [] as PlacePage<S>[] }))
+    .map((place) => ({ place, stories: chains.filter((c) => c.ids.has(place.id)).map((c) => c.story), districts: [] as PlacePage<S>[], owner: {} as Record<string, string> }))
     .filter((p) => p.stories.length >= min);
-  for (const page of pages) page.districts = pages.filter((d) => d.place.parent === page.place.id);
+  for (const page of pages) {
+    page.districts = pages.filter((d) => d.place.parent === page.place.id);
+    for (const c of chains) if (c.ids.has(page.place.id) && c.own) page.owner[c.story.id] = c.own;
+  }
   return pages;
 }
 
@@ -98,8 +103,36 @@ interface IntroStory extends PlaceStory {
   importance: 1 | 2 | 3;
 }
 
-/** The titles the generated introduction names. */
+/** The stories the generated introduction names and the preview picture shows. */
 export const AUTO_TITLES = 3;
+
+/**
+ * The most important stories of a page (importance, then the order of the page), in the order of the page. A page with districts takes the best story of
+ * each district first (a city shows its different parts, not three stories of one square); the rest is filled with the best of what is left.
+ */
+export function featuredStories<S extends PlaceStory & { importance: number }>(page: PlacePage<S>, n = AUTO_TITLES): S[] {
+  const order = new Map(page.stories.map((s, i) => [s.id, i]));
+  const ranked = [...page.stories].sort((a, b) => b.importance - a.importance || order.get(a.id)! - order.get(b.id)!);
+  const picked: S[] = [];
+  if (page.districts.length > 0) {
+    const seen = new Set<string>();
+    for (const s of ranked) {
+      const own = page.owner[s.id] ?? '';
+      if (picked.length < n && !seen.has(own)) {
+        seen.add(own);
+        picked.push(s);
+      }
+    }
+  }
+  for (const s of ranked) if (picked.length < n && !picked.includes(s)) picked.push(s);
+  return picked.sort((a, b) => order.get(a.id)! - order.get(b.id)!);
+}
+
+/** The stories of the preview picture: `og_stories` of the place when it names them (the ones that are on the page, in the order named), else the featured ones. */
+export function ogStories<S extends PlaceStory & { importance: number }>(page: PlacePage<S>, n = AUTO_TITLES): S[] {
+  const named = (page.place.og_stories ?? []).map((id) => page.stories.find((s) => s.id === id)).filter((s): s is S => s !== undefined);
+  return named.length > 0 ? named.slice(0, n) : featuredStories(page, n);
+}
 
 const ROMAN: [number, string][] = [[1000, 'M'], [900, 'CM'], [500, 'D'], [400, 'CD'], [100, 'C'], [90, 'XC'], [50, 'L'], [40, 'XL'], [10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
 const roman = (n: number): string => ROMAN.reduce((out, [value, sign]) => { while (n >= value) { out += sign; n -= value; } return out; }, '');
@@ -119,11 +152,7 @@ export function placeIntro(page: PlacePage<IntroStory>, lang: Lang): { text: str
   const ranges = page.stories.map((s) => yearRange(s));
   const from = Math.min(...ranges.map((r) => r[0]));
   const to = Math.max(...ranges.map((r) => r[1]));
-  const order = new Map(page.stories.map((s, i) => [s.id, i]));
-  const titles = [...page.stories]
-    .sort((a, b) => b.importance - a.importance || order.get(a.id)! - order.get(b.id)!)
-    .slice(0, AUTO_TITLES)
-    .sort((a, b) => order.get(a.id)! - order.get(b.id)!)
+  const titles = featuredStories(page)
     .map((s) => t(lang, 'places.quote').replace('{t}', s.title[lang].trim()))
     .join(', ');
   const stories = plural(lang, 'plural.stories', page.stories.length);

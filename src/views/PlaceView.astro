@@ -7,14 +7,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
 import FamilyNote from '../components/FamilyNote.astro';
 import MapBlock from '../components/MapBlock.astro';
-import { altPaths, pagePath, placePath, storyPath, type Lang } from '../i18n/routes';
+import { altPaths, pagePath, placePath, storyPath, withBase, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
 import { bridgeDirectionsLink } from '../lib/directions';
 import { ageInfoOf, countByMode, countVariants, familyAttrs, FAMILY_MODES, isVisibleInMode } from '../lib/family';
 import { toMapCards } from '../lib/map-cards';
 import { cardsView, mapMaxBounds } from '../lib/map-data';
-import { neighbourPages, placeBridges, placeIntro, placeSeoDescription, placeSeoTitle } from '../lib/places';
+import { neighbourPages, ogStories, placeBridges, placeIntro, placeSeoDescription, placeSeoTitle } from '../lib/places';
 import { epochPicture } from '../lib/pictures';
+import { OG_CARD, placeCardPath } from '../lib/og-cards';
 import { placeNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 import { loadSite } from '../lib/site-data';
@@ -51,6 +52,9 @@ const mapThreads = Object.fromEntries(site.threads.map((th) => [th.id, { name: t
 const view = cardsView(mapCards, 0.25, 0.03);
 
 const alternates = altPaths((l) => placePath(l, id));
+// The preview picture: three azulejo pictures of the stories the introduction names, the name of the place beneath (scripts/make-place-og.mjs).
+const card = placeCardPath(id, lang);
+const cardAlt = t(lang, 'places.og_alt').replace('{name}', name).replace('{titles}', ogStories(page).map((s) => t(lang, 'places.quote').replace('{t}', s.title[lang])).join(', '));
 const noindex = stories.some((s) => s.placeholder);
 const description = placeSeoDescription(intro.text);
 const h1 = t(lang, 'places.h1').replace('{name}', name);
@@ -69,7 +73,7 @@ const schema = placeNodes(schemaCtx, {
   ],
 });
 ---
-<BaseLayout lang={lang} title={h1} seoTitle={placeSeoTitle(place, stories.length, lang)} alternates={alternates} description={description} noindex={noindex} schema={schema}>
+<BaseLayout lang={lang} title={h1} seoTitle={placeSeoTitle(place, stories.length, lang)} alternates={alternates} description={description} noindex={noindex} schema={schema} preview={card ? { title: h1, imageUrl: withBase(card), imageSize: OG_CARD, imageAlt: cardAlt } : undefined}>
   <div class="place">
     <header class="place__head">
       <p class="place__crumb">

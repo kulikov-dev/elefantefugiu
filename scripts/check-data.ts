@@ -628,6 +628,11 @@ for (const t of threads) {
   for (const { item, file } of places) {
     if (item.parent !== undefined && !ids.has(item.parent)) report('error', file, `the parent "${item.parent}" is not a place`, 'parent');
     else if (placeChain(item, data).at(-1)?.parent !== undefined) report('error', file, 'the parents go round in a circle', 'parent');
+    for (const id of item.og_stories ?? []) {
+      const story = events.find((e) => e.item.id === id);
+      if (!story) report('error', file, `the story "${id}" of og_stories does not exist`, 'og_stories');
+      else if (placeOf(story.item, data) === undefined || !placeChain(placeOf(story.item, data)!, data).some((p) => p.id === item.id)) report('warn', file, `the story "${id}" of og_stories is not a story of this place: it is left out of the picture`, 'og_stories');
+    }
     for (const id of item.neighbours ?? []) if (!ids.has(id)) report('error', file, `the neighbour "${id}" is not a place`, 'neighbours');
     for (const lang of ['pt', 'en', 'ru'] as const) {
       const text = item.intro?.[lang];
