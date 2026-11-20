@@ -2,7 +2,6 @@
 import { pagePath, withBase, type Lang } from '../i18n/routes';
 import { t } from '../i18n';
 import { TELEGRAM_TEXT, TELEGRAM_URL } from '../lib/social';
-import { isCabinetOpen } from '../lib/cabinet-config.mjs';
 
 const CONTENT_LICENSE = { pt: 'https://creativecommons.org/licenses/by-nc/4.0/deed.pt', en: 'https://creativecommons.org/licenses/by-nc/4.0/', ru: 'https://creativecommons.org/licenses/by-nc/4.0/deed.ru' } as const;
 
@@ -15,7 +14,7 @@ const { lang } = Astro.props;
 // "Texts and illustrations: {content}, ... Code: {code}." with the two names as links (the sentence is the translation's, the links are the site's).
 const licenseParts = t(lang, 'footer.licenses').split(/(\{content\}|\{code\})/);
 
-// Three groups; a new link is one more line in its list. Class "site-footer__links" stays on every list: src/scripts/cabinet.ts adds the cabinet link after "Games" by it.
+// Three groups; a new link is one more line in its list. Class "site-footer__links" stays on every list.
 const groups = [
   {
     key: 'project',
@@ -35,8 +34,6 @@ const groups = [
       { label: t(lang, 'footer.report'), href: pagePath(lang, 'report') },
       { label: t(lang, 'footer.share'), href: pagePath(lang, 'share') },
       { label: t(lang, 'footer.games'), href: pagePath(lang, 'games') },
-      // The cabinet of rarities: linked only once it is open (src/lib/cabinet-config.mjs); the preview of the owner adds the link by script.
-      ...(isCabinetOpen() ? [{ label: t(lang, 'footer.cabinet'), href: pagePath(lang, 'cabinet') }] : []),
     ],
   },
   {

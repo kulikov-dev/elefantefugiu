@@ -5,7 +5,7 @@ import vm from 'node:vm';
 import type { CabinetItem } from '../src/data/schemas';
 import { CABINET_PREVIEW_SCRIPT } from '../src/lib/cabinet-preview';
 import { SARDINE_PLACES } from '../src/lib/cabinet-places';
-import { SARDINES, activeItems, foundCount, hiddenPlace, itemsOfHost, parseStore, previewFromQuery, renderWords, stripMarks, visibleItems, withItem, withSardine, wrapWords } from '../src/lib/cabinet';
+import { SARDINES, activeItems, foundCount, aroundWords, hiddenPlace, itemsOfHost, parseStore, previewFromQuery, renderWords, stripMarks, visibleItems, withItem, withSardine, wrapWords } from '../src/lib/cabinet';
 import { cabinetOpen, isListed, isLive } from '../src/lib/publication.mjs';
 
 const item = (over: Partial<CabinetItem> & { id: string }): CabinetItem => ({
@@ -140,3 +140,14 @@ test('the seven sardines have seven different numbers, each in one place', () =>
   assert.deepEqual([...SARDINE_PLACES.map((p) => p.n)].sort((a, b) => a - b), Array.from({ length: SARDINES }, (_, i) => i + 1));
   assert.equal(new Set(SARDINE_PLACES.map((p) => `${p.page}${'epoch' in p ? p.epoch : ''}`)).size, SARDINES);
 });
+
+test('the glossary works only between the hidden words: inside a hidden word it is not called, and the word stays whole', () => {
+  const [text] = wrapWords(['Os Lusitanos e as Amphorae do porto.'], [{ id: 'a', phrase: 'Amphorae' }]);
+  const seen: string[] = [];
+  const out = aroundWords(text!, (part) => (seen.push(part), part.toUpperCase()), (word) => `[${word}]`);
+  assert.equal(seen.length, 2);
+  assert.ok(seen.every((part) => !part.includes('Amphorae')));
+  assert.equal(stripMarks(out.replace(/[\[\]]/g, '')), 'OS LUSITANOS E AS Amphorae DO PORTO.');
+  assert.equal(aroundWords('no words', (p) => `<${p}>`, (w) => w), '<no words>');
+});
+

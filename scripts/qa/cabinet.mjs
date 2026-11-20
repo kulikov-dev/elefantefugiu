@@ -1,7 +1,8 @@
 // Browser checks of the cabinet of rarities (src/lib/cabinet.ts, src/scripts/cabinet.ts, src/views/CabinetView.astro, docs/spec.md "Кабинет редкостей"), against the fixture build
 // (VARIANT_URL, prepare-variant.mjs: the cabinet is open there and there is one story of the cabinet) and, for the closed site, against the real build (BASE_URL):
 //   word      a hidden word is a button with the name of the rarity; a press saves the rarity, shows the card ("You found a rarity", the summary, "Open the story", "To the cabinet"); a second press says
-//             "Already in the cabinet"; Esc closes the card and the focus goes back to the word; no horizontal scroll at 320; the dark theme keeps the dotted underline
+//             "Already in the cabinet"; Esc closes the card and the focus goes back to the word; no horizontal scroll at 320; the dark theme keeps the dashed underline, unlike the dotted grey one of the glossary
+//   pop-ups   one logic everywhere: a press opens, a press outside, a second press on the same place or Esc closes; no cross; the tin has no hover card; the pills keep a light text on hover
 //   page      the cabinet shows what is found (a thumbnail in a frame) and what is not (a dashed tile): the counter, the tiles, the card of a found tile ("Open the story") and of a missing one (the hint);
 //             Esc closes; without JavaScript the short text; no horizontal scroll at 320 in both themes
 //   direct    a story of a rarity opened by its address adds nothing; the story of the cabinet has the ribbon, the way back, no read mark, noindex, and is on no list of the site
@@ -21,6 +22,20 @@ let failed = 0;
 const ok = (name, cond, extra = '') => {
   if (!cond) failed += 1;
   console.log(`${cond ? 'PASS' : 'FAIL'}  ${name}${extra ? '  ' + extra : ''}`);
+};
+const rgb = (css) => (css.match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
+const lum = (c) => c.map((v) => v / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)).reduce((s, v, i) => s + v * [0.2126, 0.7152, 0.0722][i], 0);
+const ratio = (a, b) => { const [x, y] = [lum(rgb(a)), lum(rgb(b))].sort((m, n) => n - m); return (x + 0.05) / (y + 0.05); };
+/** The pills of a card on hover and on keyboard focus keep a readable text (the text was dark red on red once). */
+const pillContrast = async (page) => {
+  const out = [];
+  for (const sel of ['.cab-pop__button:not(.cab-pop__button--ghost)', '.cab-pop__button--ghost']) {
+    await page.hover(sel);
+    await wait(150);
+    const c = await page.$eval(sel, (b) => { const s = getComputedStyle(b); return { color: s.color, bg: s.backgroundColor }; });
+    out.push(ratio(c.color, c.bg));
+  }
+  return out;
 };
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const browser = await launchBrowser();
@@ -92,6 +107,7 @@ if (want('word')) {
     await wait(300);
     const text = await popText(page);
     ok(`word (${lang}): a press opens the card with the name and the summary`, !!text && text.includes(item.name[lang]) && text.includes(item.summary[lang]), String(text).slice(0, 80));
+    if (lang === 'pt') ok('word: on hover the pills of the card keep a text of 4.5:1 or more (light theme)', (await pillContrast(page)).every((r) => r >= 4.5));
     ok(`word (${lang}): the rarity is saved`, (await store(page))?.items?.includes(item.id) === true);
     ok(`word (${lang}): the card has "Open the story" and "To the cabinet" as links`, (await page.$$eval('.cab-pop a', (a) => a.map((x) => x.getAttribute('href')))).some((h) => h?.includes(`/${CAB[lang]}/`)));
     await page.keyboard.press('Escape');
@@ -106,8 +122,13 @@ if (want('word')) {
   ok('word: no horizontal scroll at 320', !(await overflow(narrow)));
   await narrow.close();
   const dark = await open(VARIANT, await findWordPage('pt'), { scheme: 'dark' });
-  const deco = await dark.$eval(`button.cw[data-cw="${item.id}"]`, (b) => { const s = getComputedStyle(b); return { line: s.textDecorationLine, style: s.textDecorationStyle, color: s.textDecorationColor, bg: getComputedStyle(document.body).backgroundColor }; });
-  ok('word: the dotted underline in the dark theme, in a colour that is not the background', deco.line.includes('underline') && deco.style === 'dotted' && deco.color !== deco.bg, JSON.stringify(deco));
+  const deco = await dark.$eval(`button.cw[data-cw="${item.id}"]`, (b) => { const s = getComputedStyle(b); return { line: s.textDecorationLine, style: s.textDecorationStyle, width: s.textDecorationThickness, color: s.textDecorationColor, bg: getComputedStyle(document.body).backgroundColor }; });
+  await reveal(dark, `button.cw[data-cw="${item.id}"]`);
+  await dark.click(`button.cw[data-cw="${item.id}"]`);
+  await wait(250);
+  ok('word: on hover the pills of the card keep a text of 4.5:1 or more (dark theme)', (await pillContrast(dark)).every((r) => r >= 4.5));
+  ok('word: no cross in the card', (await dark.$('.cab-pop__close')) === null);
+  ok('word: the dashed underline 1.5 px in the dark theme, in a colour that is not the background', deco.line.includes('underline') && deco.style === 'dashed' && parseFloat(deco.width) === 1.5 && deco.color !== deco.bg, JSON.stringify(deco));
   await dark.close();
 }
 
@@ -126,7 +147,17 @@ if (want('page')) {
       await page.click(`.cab-obj[data-item="${found[0]}"]`);
       await wait(250);
       let text = await popText(page);
-      ok('page: a found tile opens the summary and a link to the story', !!text && text.includes(item.summary.pt) && (await page.$$eval('.cab-pop a', (a) => a.length)) >= 1, String(text).slice(0, 60));
+      ok('page: a found tile opens the name, the summary and a link to the story, no kicker, no cross', !!text && text.includes(item.summary.pt) && text.includes(item.name.pt) && (await page.$$eval('.cab-pop a', (a) => a.length)) === 1 && (await page.$('.cab-pop__kicker, .cab-pop__close')) === null, String(text).slice(0, 60));
+      await page.click(`.cab-obj[data-item="${found[0]}"]`);
+      await wait(150);
+      ok('pop-ups: a second press on the same tile closes the card', (await popText(page)) === null);
+      await page.click(`.cab-obj[data-item="${found[0]}"]`);
+      await wait(150);
+      await page.mouse.click(5, 5);
+      await wait(150);
+      ok('pop-ups: a press outside closes the card', (await popText(page)) === null);
+      await page.click(`.cab-obj[data-item="${found[0]}"]`);
+      await wait(150);
       await page.keyboard.press('Escape');
       await wait(150);
       ok('page: Esc closes the card', (await popText(page)) === null);
@@ -135,15 +166,26 @@ if (want('page')) {
         await page.click(`.cab-obj[data-item="${missing.id}"]`);
         await wait(250);
         text = await popText(page);
-        ok('page: a missing tile shows the hint, not the summary', !!text && text.includes(missing.hint.pt) && !text.includes(missing.summary.pt), String(text).slice(0, 60));
+        ok('page: a missing tile shows the hint only (no kicker, no title), not the summary', !!text && text.trim() === missing.hint.pt.trim() && !text.includes(missing.summary.pt), String(text).slice(0, 60));
         await page.keyboard.press('Escape');
       }
+      await page.hover('[data-tin]');
+      await wait(250);
+      ok('pop-ups: the tin has no card on hover', (await popText(page)) === null);
       await page.click('[data-tin]');
       await wait(250);
-      ok('page: the tin shows the hint "the sardines have swum off"', /./.test((await popText(page)) ?? ''));
+      const tinText = (await popText(page)) ?? '';
+      ok('page: a press on the tin shows one phrase, no title', tinText.length > 20 && (await page.$$eval('.cab-pop p', (p) => p.length)) === 1, tinText);
+      await page.click('[data-tin]');
+      await wait(150);
+      ok('pop-ups: a second press on the tin closes the card', (await popText(page)) === null);
+      ok('page: no focus ring on the tin or on the page at load', (await open(VARIANT, `/pt/${CAB.pt}/`).then(async (p) => { const r = await p.evaluate(() => !document.querySelector(':focus-visible')); await p.close(); return r; })));
+      await page.click('[data-tin]');
+      await wait(150);
       await page.keyboard.press('Escape');
       await wait(150);
       ok('page: Esc closes the hint of the tin', (await popText(page)) === null);
+      ok('page: the tin is the picture of the tin with seven places (the found ones are pictures, the rest dashed)', await page.$$eval('.tin .tin__fish', (f) => f.length === 7));
     }
     await page.close();
   }
@@ -189,6 +231,8 @@ if (want('sardines')) {
     }
     ok(`sardines (${place.n}): one sardine on the page, none in the text of a story`, (await page.$$('.cab-sardine')).length === 1 && (await page.$$('.prose .cab-sardine')).length === 0);
     ok(`sardines (${place.n}): no horizontal scroll`, !(await overflow(page)));
+    const target = await page.$eval('.cab-sardine', (b) => { const r = b.getBoundingClientRect(); return { w: r.width, h: r.height }; });
+    ok(`sardines (${place.n}): the target is not under 44 x 44`, target.w >= 44 && target.h >= 44, JSON.stringify(target));
     await page.click('.cab-sardine');
     await wait(1400);
     const text = await popText(page);
@@ -260,9 +304,8 @@ if (want('closed')) {
   const pre = await open(REAL, `/pt/${PAGES.games.pt}/?kabinet=preview`);
   await wait(400);
   ok('preview: ?kabinet=preview leaves the address clean and sets the flag', await pre.evaluate(() => !location.search.includes('kabinet') && localStorage.getItem('cabinet.preview') === '1' && document.documentElement.dataset.cabinet === 'preview'));
-  ok('preview: the link in the footer is in the "Participate" list right after Games', await pre.evaluate((gamesSeg) => { const a = document.querySelector('.site-footer a[href*="/gabinete/"]'); const prev = a?.closest('li')?.previousElementSibling?.querySelector('a'); return !!prev && prev.getAttribute('href').includes(`/${gamesSeg}/`) && document.querySelectorAll('.site-footer a[href*="/gabinete/"]').length === 1; }, PAGES.games.pt));
+  ok('preview: the card in the hub leads to the cabinet and has its picture; the footer has no link to it', await pre.evaluate(() => { const a = document.querySelector('[data-cabinet-card] a'); return !!a && a.getAttribute('href').includes('/gabinete/') && !!a.querySelector('img.game-card__picture') && !document.querySelector('.site-footer a[href*="/gabinete/"]'); }));
   ok('preview: no text "undefined" in the hub', await pre.evaluate(() => !document.body.innerText.includes('undefined')));
-  ok('preview: the card in the hub and the link in the footer appear', await pre.evaluate(() => !!document.querySelector('[data-cabinet-card]') && !!document.querySelector('.site-footer a[href*="/gabinete/"]')));
   await pre.goto(`${REAL}${await findWordPage('pt')}`, { waitUntil: 'networkidle0' });
   await wait(400);
   ok('preview: the word of a story is a button', (await pre.$(`button.cw[data-cw="${item.id}"]`)) !== null);

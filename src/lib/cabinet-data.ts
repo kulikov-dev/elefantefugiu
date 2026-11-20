@@ -3,7 +3,7 @@
 import { festaPath, pagePath, storyPath, withBase, type Lang } from '../i18n/routes';
 import { section, t } from '../i18n';
 import { festasIn } from './festas-data';
-import { tinSvg } from './cabinet-art';
+import { gamePicture } from './games-images';
 import type { SiteData } from './site-data';
 
 export interface ItemData {
@@ -45,12 +45,16 @@ export const partyHref = (lang: Lang): string | null => {
 };
 
 /** The card of the cabinet in the hub of the games, as HTML (the same markup as the other two cards in src/views/GamesView.astro; the picture is a stand-in until the real one). */
-export const hubCardHtml = (lang: Lang): string =>
-  `<li data-cabinet-card><a class="game-card" href="${pagePath(lang, 'cabinet')}" data-game-card="cabinet"><figure class="game-card__figure"><div class="cab-card-art">${tinSvg(3, 'hub')}</div></figure>` +
-  `<span class="game-card__text"><h2 class="game-card__name">${t(lang, 'pages.cabinet.title')}</h2><span class="game-card__line">${t(lang, 'games.cabinet_line')}</span></span></a></li>`;
-
-/** The link of the footer. */
-export const footerLinkHtml = (lang: Lang): string => `<li data-cabinet-link><a href="${pagePath(lang, 'cabinet')}">${t(lang, 'footer.cabinet')}</a></li>`;
+export const hubCardHtml = (lang: Lang): string => {
+  const picture = gamePicture('cabinet');
+  const figure = picture
+    ? `<figure class="game-card__figure"><img class="game-card__picture" src="${picture.src}" srcset="${picture.srcset}" sizes="(min-width: 768px) 420px, 100vw" width="${picture.width}" height="${picture.height}" alt="" loading="lazy" decoding="async"></figure>`
+    : '';
+  return (
+    `<li data-cabinet-card><a class="game-card" href="${pagePath(lang, 'cabinet')}" data-game-card="cabinet">${figure}` +
+  `<span class="game-card__text"><h2 class="game-card__name">${t(lang, 'pages.cabinet.title')}</h2><span class="game-card__line">${t(lang, 'games.cabinet_line')}</span><span class="game-card__state">${t(lang, 'games.cabinet_open')}</span></span></a></li>`
+  );
+};
 
 export function cabinetPayload(site: SiteData, lang: Lang) {
   return {
@@ -59,7 +63,5 @@ export function cabinetPayload(site: SiteData, lang: Lang) {
     partyHref: partyHref(lang),
     href: pagePath(lang, 'cabinet'),
     hubCard: hubCardHtml(lang),
-    footerLink: footerLinkHtml(lang),
-    games: pagePath(lang, 'games'),
   };
 }
