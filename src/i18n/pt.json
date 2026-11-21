@@ -307,6 +307,8 @@
     "story_line": "Era a última história da época «{name}». O seu painel está completo →"
   },
   "plural": {
+    "index_all_one": "Todas as {n} história →",
+    "index_all_other": "Todas as {n} histórias →",
     "stories_one": "{n} história",
     "stories_other": "{n} histórias",
     "places_one": "{n} lugar onde aconteceu",
@@ -645,7 +647,7 @@
     "more_plain": "Mais histórias: {name} →",
     "index_link": "Todos os lugares →",
     "map_label": "Mapa das histórias de {name}",
-    "index_lead": "Cidades e bairros com três ou mais histórias. Escolha o sítio para onde vai.",
+    "index_lead": "Cidades e bairros com três histórias ou mais. Escolha uma cidade para ver as suas histórias.",
     "auto_span": "{stories}, do século {from} ao {to}: {titles}.",
     "auto_single": "{stories} no século {c}: {titles}.",
     "auto_years": "{stories}, de {from} a {to}: {titles}.",

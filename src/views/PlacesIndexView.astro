@@ -2,9 +2,10 @@
 // The index of places: /pt/lugares/, /en/places/, /ru/mesta/. Every place that has a page, a city with its districts under it.
 // Built only while some place has a page (src/pages/[lang]/[...page].astro).
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { pagePath, placePath, type Lang } from '../i18n/routes';
+import { pagePath, placePath, storyPath, type Lang } from '../i18n/routes';
 import { plural, t } from '../i18n';
-import { topPages } from '../lib/places';
+import { sampleStories, topPages } from '../lib/places';
+import { yearRange, yearText } from '../lib/events';
 import { pageNodes } from '../lib/schema';
 import { schemaContext } from '../lib/schema-site';
 import { loadSite } from '../lib/site-data';
@@ -42,7 +43,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'places'
               <span class="places__count">{plural(lang, 'plural.stories', p.stories.length)}</span>
             </a>
             {
-              p.districts.length > 0 && (
+              p.districts.length > 0 ? (
                 <ul class="places__districts">
                   {p.districts.map((d) => (
                     <li>
@@ -50,6 +51,20 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(pagePath(lang, 'places'
                       <span class="places__count"> · {plural(lang, 'plural.stories', d.stories.length)}</span>
                     </li>
                   ))}
+                </ul>
+              ) : (
+                <ul class="places__districts">
+                  {sampleStories(p.stories).map((s) => (
+                    <li>
+                      <a href={storyPath(lang, s.slug[lang])}>{s.title[lang]}</a>
+                      <span class="places__count"> · {yearText(yearRange(s)[0], lang)}</span>
+                    </li>
+                  ))}
+                  {p.stories.length > 3 && (
+                    <li>
+                      <a href={placePath(lang, p.place.id)}>{plural(lang, 'plural.index_all', p.stories.length)}</a>
+                    </li>
+                  )}
                 </ul>
               )
             }

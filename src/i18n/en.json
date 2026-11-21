@@ -307,6 +307,8 @@
     "story_line": "That was the last story of the era “{name}.” Your panel is complete →"
   },
   "plural": {
+    "index_all_one": "All {n} story →",
+    "index_all_other": "All {n} stories →",
     "stories_one": "{n} story",
     "stories_other": "{n} stories",
     "places_one": "{n} place where it happened",
@@ -645,7 +647,7 @@
     "more_plain": "More stories from {name} →",
     "index_link": "All places →",
     "map_label": "Map of the stories of {name}",
-    "index_lead": "Towns and districts with three or more stories. Pick the place you are going to.",
+    "index_lead": "Cities and neighborhoods with three or more stories. Pick a city to see its stories.",
     "auto_span": "{stories}, from the {from} to the {to} century: {titles}.",
     "auto_single": "{stories} in the {c} century: {titles}.",
     "auto_years": "{stories}, {from} to {to}: {titles}.",

@@ -2,7 +2,7 @@
 // Pure unit tests with their own small input: nothing here depends on the content of the site.
 import { describe, expect, it } from 'vitest';
 import type { PlaceData } from '../../src/lib/places';
-import { MAX_NEIGHBOURS, centuryLabel, featuredStories, mapPlaces, ogStories, pageOfPoint, placeAllLabel, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, topPages } from '../../src/lib/places';
+import { MAX_NEIGHBOURS, centuryLabel, featuredStories, mapPlaces, ogStories, pageOfPoint, placeAllLabel, PLACE_MIN_STORIES, introMissing, neighbourPages, pageDay, pageOfStory, placeBridges, placeChain, placeIntro, placeMoreLabel, placeOf, placePages, placeSeoDescription, placeSeoTitle, sampleStories, topPages } from '../../src/lib/places';
 
 const names = (pt: string, en = pt, ru = pt) => ({ pt, en, ru });
 const place = (id: string, lat: number, lon: number, radius_km: number, extra: Partial<PlaceData> = {}): PlaceData => ({ id, name: names(id), center: { lat, lon }, radius_km, ...extra });
@@ -250,5 +250,17 @@ describe('the entries to the pages', () => {
   it('the places of a map: the smallest first, each with the ids of its stories (a group wholly inside the first that holds it offers that page)', () => {
     const list = mapPlaces(pages, 'en', (id) => `/p/${id}/`);
     expect(list.map((p) => [p.href, p.ids.length])).toEqual([['/p/north/', 3], ['/p/city/', 3], ['/p/town/', 4]]);
+  });
+});
+
+describe('the stories on an index card', () => {
+  const y = (id: string, year: number | { from: number; to: number }) => ({ id, year });
+  it('three or fewer: all of them in time order', () => {
+    expect(sampleStories([y('c', 1700), y('a', 1300), y('b', { from: 1500, to: 1510 })]).map((s) => s.id)).toEqual(['a', 'b', 'c']);
+  });
+  it('more: the earliest, one from the middle and the latest', () => {
+    const list = ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map((id, i) => y(id, 1000 + i * 100));
+    expect(sampleStories([...list].reverse()).map((s) => s.id)).toEqual(['a', 'd', 'g']);
+    expect(sampleStories(list.slice(0, 4)).map((s) => s.id)).toEqual(['a', 'c', 'd']);
   });
 });

@@ -103,6 +103,20 @@ export const topPages = <S extends PlaceStory>(pages: readonly PlacePage<S>[], l
     .filter((p) => !p.place.parent || !pages.some((q) => q.place.id === p.place.parent))
     .sort((a, b) => b.stories.length - a.stories.length || a.place.name[lang].localeCompare(b.place.name[lang], lang));
 
+/**
+ * The stories an index card shows for a place without districts: the earliest, the latest and one from the middle (all of them when there are three or fewer),
+ * in time order, so that the card shows how long the history of the place is. Counted from the data; the caller passes only the published stories.
+ */
+export function sampleStories<S extends { id: string; year: number | { from: number; to: number } }>(stories: readonly S[], count = 3): S[] {
+  const start = (s: S) => (typeof s.year === 'number' ? s.year : s.year.from);
+  const sorted = [...stories].sort((a, b) => start(a) - start(b) || a.id.localeCompare(b.id));
+  if (sorted.length <= count) return sorted;
+  const last = sorted.length - 1;
+  // Evenly spread over the sorted list: the first, the last and, for three, the middle one.
+  const indices = new Set(Array.from({ length: count }, (_, i) => Math.round((i * last) / (count - 1))));
+  return [...indices].sort((a, b) => a - b).map((i) => sorted[i]!);
+}
+
 // ---- the introduction ----
 
 interface IntroStory extends PlaceStory {

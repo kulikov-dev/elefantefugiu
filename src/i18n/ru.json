@@ -307,6 +307,10 @@
     "story_line": "Это была последняя история эпохи «{name}». Ваше панно собрано →"
   },
   "plural": {
+    "index_all_one": "Все {n} история →",
+    "index_all_few": "Все {n} истории →",
+    "index_all_many": "Все {n} историй →",
+    "index_all_other": "Все {n} истории →",
     "stories_one": "{n} история",
     "stories_few": "{n} истории",
     "stories_many": "{n} историй",
@@ -687,7 +691,7 @@
     "more_plain": "Ещё истории: {name} →",
     "index_link": "Все места →",
     "map_label": "Карта историй: {name}",
-    "index_lead": "Города и районы, где три и больше истории. Выберите место, куда едете.",
+    "index_lead": "Города и районы, где три истории и больше. Выберите город, чтобы увидеть его истории.",
     "auto_span": "{stories} с {from} по {to} век: {titles}.",
     "auto_single": "{stories} в {c} веке: {titles}.",
     "auto_years": "{stories}, {from}–{to}: {titles}.",
