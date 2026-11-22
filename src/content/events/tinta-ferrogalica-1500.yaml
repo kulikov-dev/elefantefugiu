@@ -1,0 +1,152 @@
+id: tinta-ferrogalica-1500
+slug:
+  pt: com-que-tinta-se-escreveu-a-historia-de-portugal
+  en: what-portugals-history-was-written-with
+  ru: chem-napisana-istoriya-portugalii
+title:
+  pt: Com que tinta se escreveu a história de Portugal
+  en: What Portugal’s History Was Written With
+  ru: Чем написана история Португалии
+epoch: avis-e-descobrimentos
+level: story
+year: 1500
+day: '05-01'
+place:
+  name:
+    pt: Lisboa, Torre do Tombo
+    en: Lisbon, Torre do Tombo
+    ru: Лиссабон, Торре-ду-Томбу
+  short:
+    pt: Lisboa
+    en: Lisbon
+    ru: Лиссабон
+  lat: 38.7546787
+  lon: -9.1565156
+bridge:
+  name: Mata Nacional da Machada
+  title:
+    pt: Mata Nacional da Machada
+    en: Machada National Forest
+    ru: Национальный лес Машада
+  address: Mata Nacional da Machada, Barreiro
+  lat: 38.6158608
+  lon: -9.0392026
+  maps_url: https://www.google.com/maps/place/Mata+Nacional+da+Machada/@38.6157858,-9.045744,16z/data=!4m6!3m5!1s0xd194847d4daf4f1:0xd9c59daac74d0d93!8m2!3d38.6158608!4d-9.0392026!16s%2Fg%2F119vm40t0
+  url: https://www.timeout.pt/lisboa/pt/coisas-para-fazer/mata-nacional-da-machada
+  note:
+    pt: Nos carvalhos deste antigo pinhal, que segundo as descrições locais dava madeira aos navios dos Descobrimentos, há bugalhos.
+    en: Oak galls grow on the oaks of this former pine forest, which, per local accounts, supplied timber for Discovery ships.
+    ru: Здесь, в бывшем сосновом бору, откуда по местным описаниям брали дерево для кораблей эпохи Открытий, на дубах растут галлы.
+area: lisboa
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A história de Portugal foi escrita com tinta que cresceu num carvalho.
+  en: Portugal’s history was written in ink that grew on an oak tree.
+  ru: История Португалии написана чернилами, которые выросли на дубе.
+seo:
+  title:
+    pt: Tinta de carvalho · Lisboa, 1500
+    en: Ink From an Oak Tree · Lisbon, 1500
+    ru: Чернила с дуба · Лиссабон, 1500
+story:
+  pt: |-
+    A 1 de maio de 1500, Pêro Vaz de Caminha, escrivão da armada de Cabral, terminava uma carta ao rei D. Manuel I sobre uma terra nova, o futuro Brasil. Encheu catorze folhas com tinta ferrogálica.
+
+    O essencial desta tinta crescia no carvalho. Uma pequena vespa põe um ovo num gomo, e o carvalho responde fazendo crescer à volta da larva uma bola dura, a galha. Chamam-lhes bugalhos ou nozes-de-galha, e são ricas em taninos.
+
+    Moíam-se os bugalhos, punham-se em água ou vinho e juntava-se caparrosa, um sal de ferro. Com os taninos, o ferro dava a cor negra, e a goma-arábica engrossava a tinta. Entranhava-se no papel e não se lavava nem se raspava. Para alvarás e tratados, era isso que importava.
+
+    Por isso, do século XV ao fim do XIX, a maior parte dos documentos do país, dos alvarás régios à carta de Caminha, foi escrita com ela.
+  en: |-
+    On May 1, 1500, Pêro Vaz de Caminha, the clerk of Cabral’s fleet, was finishing a letter to King Manuel I about a new land, the future Brazil. He filled fourteen sheets with iron gall ink.
+
+    The key ingredient grew on oak trees. A wasp lays an egg in an oak bud, and the tree responds by growing a hard ball around the larva, a gall. Also called gallnuts, galls are packed with tannins.
+
+    Galls were crushed, soaked in water or wine, and mixed with vitriol, an iron salt. The tannins and the iron turned black, and gum arabic thickened the ink. It soaked into the paper, so writing couldn’t be washed off or scraped away. For royal decrees and treaties, that was what mattered.
+
+    That’s why, from the 15th century to the late 19th, most of the country’s documents, from royal decrees to Caminha’s letter, were written with it.
+  ru: |-
+    1 мая 1500 года Перу Ваз ди Каминья, писарь флота Кабрала, дописывал королю Мануэлу I письмо о новой земле, будущей Бразилии. Четырнадцать листов он исписал железо-галловыми чернилами.
+
+    Главное в этих чернилах росло на дубе. Маленькая оса-орехотворка откладывает яйцо в почку, и дуб в ответ наращивает вокруг личинки твёрдый шарик, галлу. По-русски такие шарики зовут чернильными орешками, по-португальски bugalhos. В них много дубильных веществ.
+
+    Галлы толкли, заливали водой или вином и добавляли железный купорос. Дубильные вещества вместе с железом давали чёрный цвет, а гуммиарабик делал чернила гуще. Такие чернила въедались в бумагу, и написанное нельзя было ни смыть, ни подчистить. Для указов, договоров и донесений королю это было главное.
+
+    Поэтому галловыми чернилами в Португалии писали с XV до конца XIX века, и большая часть старых документов страны, от королевских указов до письма Каминьи, написана ими.
+more:
+  pt: |-
+    Todos os escrivães conheciam a receita, e cada um tinha a sua. Um manuscrito português do século XVII manda juntar três onças de galhas pequenas e enrugadas, duas onças de caparrosa e uma onça de goma-arábica (a onça portuguesa tinha cerca de 29 gramas), e ainda cascas de romã. Para o pergaminho usavam-se as galhas de Valência, consideradas as melhores.
+
+    Mas a receita trazia o problema dentro. Com o tempo, a caparrosa dá origem a ácido sulfúrico, e o ferro acelera a oxidação do papel. A tinta fica castanha, surge uma auréola à volta das letras, o papel por baixo torna-se quebradiço e as letras caem aos bocados. O problema foi identificado já em 1899. Na Biblioteca Estatal de Berlim, pelo menos 500 mil folhas foram assim danificadas, e há sinais de degradação em 60 a 70% das obras de Leonardo da Vinci.
+
+    Ou seja, escolhia-se esta tinta por não se poder apagar, e agora é ela que apaga o texto, juntamente com o papel. No Arquivo Regional da Madeira, por exemplo, os conservadores tratam folhas do século XVII em que zonas inteiras ficaram quebradiças e as letras começaram a desaparecer. A carta de Caminha está guardada na caixa-forte da Torre do Tombo, numa caixa de cartolina alcalina, que neutraliza o ácido.
+  en: |-
+    Every clerk knew the recipe, and each had his own. A 17th-century Portuguese manuscript calls for three ounces of small wrinkled galls, two ounces of vitriol, and one ounce of gum arabic (the Portuguese ounce was about 29 grams, close to a US ounce), plus pomegranate peel. For parchment, people used galls from Valencia, which were considered the best.
+
+    But the recipe had a problem built in. Over time, the vitriol produces sulfuric acid, and the iron speeds up the oxidation of the paper. The ink turns brown, a halo appears around the letters, the paper underneath becomes brittle, and letters fall out in pieces. The problem was identified as early as 1899. At the Berlin State Library, at least 500,000 sheets have been damaged this way, and signs of decay show up in 60 to 70 percent of Leonardo da Vinci’s works.
+
+    So the ink was chosen because it couldn’t be erased, and now it’s erasing the text itself, along with the paper. At the Madeira Regional Archive, for example, conservators treat 17th-century sheets where whole areas have turned brittle and letters have started to disappear. Caminha’s letter is kept in the strongroom at Torre do Tombo, in a box made of alkaline cardstock that neutralizes the acid.
+  ru: |-
+    Рецепт знал каждый писарь, и у каждого он был свой. В португальской рукописи XVII века советуют взять три унции мелких морщинистых галл, две унции купороса (caparrosa) и унцию гуммиарабика (португальская унция, onça, около 29 граммов), а ещё добавить кожуру граната. Для пергамента брали галлы из Валенсии: они считались лучшими.
+
+    Но в этом рецепте была заложена беда. Из купороса со временем получается серная кислота, а железо помогает бумаге окисляться. Чернила буреют, вокруг букв появляется коричневый ореол, бумага под ними становится хрупкой, и буквы выпадают целыми кусками. Проблему заметили ещё в 1899 году. В Государственной библиотеке Берлина так пострадали не меньше 500 тысяч листов, а следы порчи нашли у 60–70% работ Леонардо да Винчи.
+
+    Выходит, чернила выбирали за то, что их нельзя стереть, а теперь они сами стирают текст вместе с бумагой. Реставраторы архива Мадейры, например, спасают листы XVII века, где целые участки стали ломкими и буквы уже начали пропадать. А письмо Каминьи хранят в сейфе Торре-ду-Томбу, в коробке из щелочного картона, который нейтрализует кислоту.
+myth:
+  verdict: myth
+  statement:
+    pt: A tinta dos documentos antigos era feita de nozes
+    en: Old documents were written in ink made from nuts
+    ru: Старые чернила делали из дубовых орехов
+  answer:
+    pt: Era feita de galhas, excrescências que o carvalho forma à volta da larva de uma vespa. Chamam-lhes nozes-de-galha, mas não são nozes.
+    en: It was made from galls, growths an oak forms around a wasp larva. They’re called gallnuts, but they aren’t nuts.
+    ru: "Не из орехов, а из галл: наростов, которые дуб выращивает вокруг личинки осы. Орешками их только называют."
+sources:
+  - title: 'Sábado: O fabuloso tesouro português com 500 anos que o Brasil deseja'
+    url: https://www.sabado.pt/portugal/detalhe/o-fabuloso-tesouro-portugues-com-500-anos-que-o-brasil-deseja
+    type: press
+    accessed: '2026-11-22'
+  - title: 'Orthographia (NOVA FCSH): manuscrito do século XVII, receita de tinta ferrogálica'
+    url: https://run.unl.pt/bitstream/10362/165214/1/Orthographia-21-45.pdf
+    type: academic
+    accessed: '2026-11-22'
+  - title: 'Nunes, Claro, Ferreira: O que esconde a tinta ferrogálica usada em manuscritos portugueses dos séculos XVI e XVII?'
+    url: https://run.unl.pt/bitstreams/076529b7-2146-485c-9cf9-b01ed3d7341d/download
+    type: academic
+    accessed: '2026-11-22'
+  - title: 'Arquivo Regional da Madeira: Conservação de documentos degradados pela corrosão da tinta ferrogálica'
+    url: https://abm.madeira.gov.pt/wp-content/uploads/2020/04/artigo-tinta-ferrogálica.pdf
+    type: institutional
+    accessed: '2026-11-22'
+  - title: 'CORDIS: EU project seeks to save endangered historical documents (InkCor)'
+    url: https://cordis.europa.eu/article/id/20780-eu-project-seeks-to-save-endangered-historical-documents/es
+    type: institutional
+    accessed: '2026-11-22'
+  - title: 'Time Out Lisboa: Mata Nacional da Machada'
+    url: https://www.timeout.pt/lisboa/pt/coisas-para-fazer/mata-nacional-da-machada
+    type: press
+    accessed: '2026-11-22'
+image:
+  file: tinta-ferrogalica-1500.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: no camarote de uma caravela, um escrivão de barrete escreve com uma pena numa folha; na mesa, uma pilha de folhas, um almofariz, bugalhos redondos e um ramo de carvalho, e pela janela veem-se palmeiras, a praia e um navio."
+    en: "Blue-and-white azulejo-style illustration: in a caravel’s cabin, a scribe in a flat cap writes with a quill on a sheet; on the table are a stack of sheets, a mortar, round oak galls, and a sprig of oak leaves, and through the window are palm trees, a beach, and a ship."
+    ru: "Иллюстрация в духе сине-белого азулежу: в каюте каравеллы писарь в берете пишет пером на листе; на столе стопка листов, ступка, круглые галлы и веточка дуба, а в окне видны пальмы, берег и корабль."
+  caption:
+    pt: Um escrivão a bordo de uma caravela, 1500. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: A scribe aboard a caravel, 1500. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Писарь на борту каравеллы, 1500 год. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+status: ready
+published: '2026-12-12'
+placeholder: false
+ru_ready: true
