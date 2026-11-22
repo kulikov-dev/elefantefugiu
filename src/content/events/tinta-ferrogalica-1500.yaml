@@ -146,6 +146,19 @@ image:
   license: AI-generated
   ai: true
   focus: 50% 50%
+detail_image:
+  file: tinta-ferrogalica-1500-detalhe.webp
+  alt:
+    pt: "Folha de pergaminho amarelada com cerca de trinta linhas de escrita manuscrita castanha, um floreio no topo e um carimbo redondo azul."
+    en: "A yellowed sheet with about thirty lines of brown handwriting, a flourish at the top, and a round blue archive stamp."
+    ru: "Пожелтевший лист с примерно тридцатью строками коричневого рукописного текста, росчерком вверху и круглым синим штампом архива."
+  caption:
+    pt: Primeira página da carta de Pero Vaz de Caminha, 1500. Torre do Tombo.
+    en: First page of Pêro Vaz de Caminha’s letter, 1500. Torre do Tombo.
+    ru: Первая страница письма Каминьи, 1500. Торре-ду-Томбу.
+  author: Pero Vaz de Caminha
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Carta-caminha-folio01r.png
 status: ready
 published: '2026-12-12'
 placeholder: false
