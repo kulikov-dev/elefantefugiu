@@ -504,6 +504,18 @@
       "unit": "event/palacio-da-pena",
       "match": "colecionava",
       "why": "correct after the 1990 Agreement (colecionar, coleção); the stop-list pattern colec* is too wide"
+    },
+    {
+      "lang": "pt",
+      "unit": "event/ultimo-rei-ericeira-1910",
+      "match": "colecionava",
+      "why": "correct after the 1990 Agreement (colecionar); the stop-list pattern colec* is too wide"
+    },
+    {
+      "lang": "pt",
+      "unit": "event/ultimo-rei-ericeira-1910",
+      "match": "colecioná",
+      "why": "correct after the 1990 Agreement (colecionar); the stop-list pattern colec* is too wide"
     }
   ]
 }

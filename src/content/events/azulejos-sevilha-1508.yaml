@@ -1,0 +1,151 @@
+id: azulejos-sevilha-1508
+slug:
+  pt: o-azulejo-que-julgavam-mourisco
+  en: the-tiles-everyone-thought-were-moorish
+  ru: plitka-kotoruyu-schitali-mavritanskoy
+title:
+  pt: O azulejo que julgavam mourisco
+  en: The Tiles Everyone Thought Were Moorish
+  ru: Плитка, которую считали мавританской
+epoch: avis-e-descobrimentos
+level: story
+year: 1508
+place:
+  name:
+    pt: Sintra, Palácio Nacional
+    en: Sintra, National Palace
+    ru: Синтра, Национальный дворец
+  short:
+    pt: Sintra
+    en: Sintra
+    ru: Синтра
+  lat: 38.7977
+  lon: -9.3907
+bridge:
+  name: Palácio Nacional de Sintra
+  title:
+    pt: Palácio Nacional de Sintra
+    en: National Palace of Sintra
+    ru: Национальный дворец Синтры
+  address: Largo Rainha Dona Amélia, Sintra
+  lat: 38.7976627
+  lon: -9.3906554
+  maps_url: https://www.google.com/maps/place/Pal%C3%A1cio+Nacional+de+Sintra/@38.7976669,-9.3932303,17z/data=!3m1!4b1!4m6!3m5!1s0xd1edac0235d438d:0x74c0a6e0c1a71680!8m2!3d38.7976627!4d-9.3906554!16zL20vMGdiYzZy
+  url: https://www.parquesdesintra.pt/en/parks-monuments/national-palace-of-sintra/
+  note:
+    pt: Azulejos com esfera armilar no Quarto de D. Sebastião e no Pátio da Carranca, padrões mouriscos na Sala dos Árabes.
+    en: Tiles with the armillary sphere in King Sebastian’s Bedroom and the Carranca Courtyard, Moorish patterns in the Arab Room.
+    ru: Плитка с армиллярной сферой в спальне короля Себастьяна и во дворике Карранки, мавританские узоры в Арабском зале.
+area: sintra
+threads:
+  - engenho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os azulejos mais antigos do palácio de Sintra vieram de Espanha.
+  en: The oldest tiles in Sintra’s palace came from Spain.
+  ru: Самую старую плитку дворца в Синтре привезли из Испании.
+seo:
+  title:
+    pt: Azulejos de Sevilha · Sintra, 1508
+    en: Tiles from Seville · Sintra, 1508
+    ru: Плитка из Севильи · Синтра, 1508
+story:
+  pt: |-
+    Por volta de 1508, D. Manuel I reconstruía o palácio de Sintra e queria revestir as paredes de azulejo. Ao que tudo indica, Portugal ainda não tinha oficinas capazes de o fazer, e os azulejos foram encomendados em Sevilha.
+
+    Os mestres sevilhanos eram herdeiros do ofício mourisco. Com vidrados de cor compunham estrelas de oito pontas, laçarias e grelhas, como os mouros faziam havia séculos. Mas, para D. Manuel, acrescentaram ao padrão o seu emblema pessoal, a esfera armilar. Este azulejo não existe em mais lado nenhum, só neste palácio.
+
+    Os padrões ficaram tão mouriscos que, trezentos anos depois, a sua origem se esqueceu. No século XIX, a sala com estes azulejos passou a chamar-se Sala dos Árabes, e julgava-se que eram herança dos mouros. Na verdade, quem os encomendou foi um rei cristão, a mestres espanhóis.
+  en: |-
+    Around 1508, King Manuel I was rebuilding the palace in Sintra and wanted its walls covered in tile. Portugal apparently had no workshops that could make them yet, so the tiles were ordered from Seville.
+
+    Seville’s craftsmen were heirs to a Moorish trade. They built eight-pointed stars, knots, and lattices out of colored glaze, as the Moors had done for centuries. But for Manuel they worked his personal emblem, the armillary sphere, into the pattern. These tiles exist nowhere else but in this palace.
+
+    The patterns looked so Moorish that, three hundred years later, their origin was forgotten. In the 19th century, the room with these tiles was named the Arab Room, and people believed the Moors had left them behind. In fact, a Christian king had ordered them from Spanish craftsmen.
+  ru: |-
+    Около 1508 года король Мануэл I перестраивал дворец в Синтре и хотел покрыть его стены плиткой. Своих мастерских, которые умели такое делать, в Португалии, по всей видимости, ещё не было, и плитку заказали в Севилье.
+
+    Севильские мастера были наследниками мавританского мастерства. Они складывали из цветной глазури восьмиконечные звёзды, узлы и решётки, как это веками делали мавры. Но для Мануэла в узор вписали его личный знак, армиллярную сферу. Такой плитки больше нет нигде, кроме этого дворца.
+
+    Узоры получились настолько мавританскими, что через триста лет их происхождение забыли. В XIX веке зал с этой плиткой назвали Арабским и считали, что она осталась от мавров. На самом деле её заказал христианский король у испанских мастеров.
+more:
+  pt: |-
+    Em Sintra, os azulejos foram feitos de três maneiras, e nelas vê-se como o ofício se foi simplificando. Primeiro, os mestres cortavam pequenas peças de azulejos vidrados de várias cores e montavam com elas um mosaico: bonito, mas muito demorado. Depois aprenderam a pintar o padrão num só azulejo, separando as cores com uma linha fina para não escorrerem no forno. Mais tarde, o padrão passou a ser marcado em relevo no barro cru, e o vidrado era deitado entre os rebordos. Cada técnica era mais rápida e barata do que a anterior, e o azulejo foi-se espalhando.
+
+    Mas ainda eram padrões, não imagens. A imagem chegou mais tarde: os mestres passaram a cobrir o azulejo de esmalte branco e a pintar sobre ele a pincel, como sobre papel, a partir de pinturas e gravuras italianas e flamengas. Nas paredes surgiram santos, navios, cenas inteiras. As oficinas portuguesas cresceram e, segundo os historiadores, em 1715 chegou do estrangeiro a última grande remessa de azulejo. Pouco depois, os painéis azuis e brancos tornaram-se o rosto do país.
+
+    Em Sintra ficou o próprio início desta história: paredes onde o azulejo ainda forma estrelas e laçarias. É, segundo o museu, a maior coleção da Europa de azulejo mudéjar no seu lugar original.
+  en: |-
+    The tiles in Sintra were made in three ways, and together they show how the craft got simpler. First, craftsmen cut small pieces from colored glazed tiles and fitted them into a mosaic: beautiful, but very slow. Then they learned to paint the pattern on a single tile, separating the colors with a thin line so they wouldn’t run in the kiln. Later still, the pattern was pressed into the wet clay as raised ridges, and the glaze was poured between them. Each method was faster and cheaper than the last, and tile spread further and further.
+
+    But these were still patterns, not pictures. Pictures came later: craftsmen began to coat the tile in white glaze and paint on it with a brush, as if on paper, working from Italian and Flemish paintings and engravings. Saints, ships, and whole scenes appeared on walls. Portuguese workshops grew, and according to historians, the last big shipment of tile from abroad arrived in 1715. Soon blue-and-white panels became the face of the country.
+
+    Sintra kept the very start of that story: walls where tile still forms stars and knots. According to the museum, it is Europe’s largest collection of Mudéjar tiles still in their original places.
+  ru: |-
+    Плитку в Синтре делали тремя способами, и по ним видно, как ремесло упрощалось. Сначала мастера вырезали из цветных глазурованных плиток мелкие кусочки и складывали из них мозаику: красиво, но очень долго. Потом научились рисовать узор на одной плитке, разделяя цвета тонкой линией, чтобы они не растекались в печи. Ещё позже узор стали выдавливать в сырой глине бортиками, и глазурь заливали между ними. Каждый способ был быстрее и дешевле прежнего, и плитки становилось всё больше.
+
+    Но это всё ещё были узоры, а не картины. Картина пришла позже: мастера стали покрывать плитку белой глазурью и рисовать по ней кистью, как по бумаге, по мотивам итальянских и фламандских картин и гравюр. На стенах появились святые, корабли, целые сцены. Свои мастерские росли, и в 1715 году, по данным историков, из-за границы пришла последняя крупная партия плитки. Вскоре сине-белые панно стали лицом страны.
+
+    А в Синтре сохранилось само начало этой истории: стены, где плитка ещё складывается в звёзды и узлы. Это, как пишут в музее, крупнейшее в Европе собрание мудехарской плитки, оставшейся на своих местах.
+myth:
+  verdict: myth
+  statement:
+    pt: Os azulejos da Sala dos Árabes, em Sintra, ficaram dos mouros
+    en: The tiles in Sintra’s Arab Room were left by the Moors
+    ru: Плитка Арабского зала в Синтре осталась от мавров
+  answer:
+    pt: Foram feitos em Sevilha para D. Manuel I, por volta de 1508. Só no século XIX os tomaram por mouriscos.
+    en: They were made in Seville for Manuel I around 1508. People only took them for Moorish in the 19th century.
+    ru: Её сделали в Севилье для Мануэла I около 1508 года. За мавританскую её стали принимать в XIX веке.
+sources:
+  - title: "Google Arts & Culture: Corda-seca tiles with an armillary sphere (Seville, c. 1508–1509)"
+    url: https://artsandculture.google.com/asset/corda-seca-tiles-with-an-armillary-sphere-workshop-of-pedro-de-herrera-or-fernán-martínez-guijarro/GQHCBYVZrlIM8Q
+    type: institutional
+    accessed: 2026-11-22
+  - title: "Parques de Sintra: Anteroom of the Council Chamber (Sala dos Árabes)"
+    url: https://www.parquesdesintra.pt/en/parks-monuments/national-palace-of-sintra/points-of-interest/anteroom-of-the-council-chamber/
+    type: institutional
+    accessed: 2026-11-22
+  - title: "Wikipedia: Azulejo (alicatado, cuerda seca, cuenca and arista; the last big import of 1715)"
+    url: https://en.wikipedia.org/wiki/Azulejo
+    type: reference
+    accessed: 2026-11-22
+  - title: "World History Encyclopedia: Azulejos, the Visual Art of Portugal"
+    url: https://worldhistory.org/article/1452
+    type: reference
+    accessed: 2026-11-22
+image:
+  file: azulejos-sevilha-1508.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: num pátio, diante das chaminés cónicas do palácio de Sintra, um mestre mostra a outro um azulejo com a esfera armilar, enquanto se desembala uma caixa de azulejos em palha e um carro espera."
+    en: "Blue-and-white azulejo-style illustration: in a courtyard in front of the palace’s conical chimneys in Sintra, one craftsman shows another a tile with an armillary sphere while a crate of tiles packed in straw is unpacked and a cart waits."
+    ru: "Иллюстрация в духе сине-белого азулежу: во дворе перед коническими трубами дворца в Синтре один мастер показывает другому плитку с армиллярной сферой, рядом разбирают ящик с плиткой в соломе и стоит повозка."
+  caption:
+    pt: Chegada de azulejos de Sevilha ao palácio de Sintra, por volta de 1508. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: Tiles from Seville arriving at the palace in Sintra, around 1508. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Плитка из Севильи прибывает во дворец Синтры, около 1508 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: azulejos-sevilha-1508-detalhe.webp
+  alt:
+    pt: "Fotografia de azulejos num friso de parede: fileiras de esferas armilares em verde, azul e castanho sobre fundo claro, com uma faixa de azulejos azul-escuros por cima e padrões florais no chão."
+    en: "Photograph of tiles on a wall: rows of armillary spheres in green, blue, and brown on a pale ground, with a band of dark blue tiles above and floral patterns on the floor."
+    ru: "Фотография плитки на стене: ряды армиллярных сфер зелёного, синего и коричневого цвета на светлом фоне, сверху полоса тёмно-синих плиток, а внизу цветочный узор пола."
+  caption:
+    pt: Azulejos com esferas armilares, o emblema de D. Manuel I. Palácio Nacional de Sintra.
+    en: Tiles with armillary spheres, the emblem of Manuel I. National Palace of Sintra.
+    ru: Плитка с армиллярными сферами, эмблемой Мануэла I. Национальный дворец Синтры.
+  author: Lusitana
+  license: CC BY 2.5
+  license_url: https://creativecommons.org/licenses/by/2.5/
+  source_url: https://commons.wikimedia.org/wiki/File:Palacio_Sintra_azulejo5.JPG
+status: ready
+published: 2026-12-13
+placeholder: false
+ru_ready: true

@@ -1,0 +1,146 @@
+id: fonte-do-idolo-braga
+slug:
+  pt: um-santuario-num-quintal
+  en: a-shrine-in-a-backyard
+  ru: svyatilishche-v-chastnom-sadu
+title:
+  pt: Um santuário num quintal
+  en: A Shrine in a Backyard
+  ru: Святилище в частном саду
+epoch: lusitania-e-roma
+level: story
+year: 100
+year_label:
+  pt: século I
+  en: 1st century
+  ru: I век
+year_scale:
+  pt: séc. I
+  en: 1st c.
+  ru: I в.
+place:
+  name:
+    pt: Braga, Fonte do Ídolo
+    en: Braga, Fonte do Ídolo
+    ru: Брага, Фонте-ду-Идолу
+  short:
+    pt: Braga
+    en: Braga
+    ru: Брага
+  lat: 41.5486039
+  lon: -8.4218986
+bridge:
+  name: Fonte do Ídolo
+  title:
+    pt: Fonte do Ídolo
+    en: Fonte do Ídolo
+    ru: Фонте-ду-Идолу
+  address: Fonte do Ídolo, Braga
+  lat: 41.5486039
+  lon: -8.4218986
+  maps_url: https://www.google.com/maps/place/%C3%8Ddolo+Fountain/@41.5486079,-8.4244735,17z/data=!3m1!4b1!4m6!3m5!1s0xd24fec11284a82f:0x425afb1282ed674e!8m2!3d41.5486039!4d-8.4218986!16s%2Fm%2F03c93th
+  url: https://en.wikipedia.org/wiki/Fountain_of_the_Idol
+  note:
+    pt: A rocha com a figura, o nicho e as inscrições, sob um pavilhão no centro da cidade.
+    en: The rock with the figure, niche, and inscriptions, under a pavilion in the city center.
+    ru: Скала с фигурой, нишей и надписями под павильоном в центре города.
+area: braga
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Até 1936, o santuário romano de Braga estava num quintal particular.
+  en: Until 1936, Braga’s Roman shrine stood in a private backyard.
+  ru: До 1936 года римское святилище Браги стояло в частном саду.
+story:
+  pt: |-
+    No século I, no lugar de Braga existia a cidade romana de Bracara Augusta. Havia nela uma fonte, e um habitante local, Célico Frontão, natural de Arcóbriga, esculpiu na rocha sobre ela uma figura de toga, um nicho e inscrições.
+
+    Não as dedicou aos deuses romanos, mas aos da terra, Nábia e Tongoenabiago. Já eram venerados nesta região antes dos romanos. Roma não proibia estes deuses, e os habitantes continuavam a rezar-lhes, mas agora escrevia em latim.
+
+    A cidade foi reconstruída muitas vezes, e a rocha com a fonte acabou no quintal de uma casa particular. No século XVIII, esse quintal era conhecido simplesmente como «o Ídolo». Só em 1936 a cidade comprou o terreno, e em 2006 construiu-se um pavilhão sobre a fonte.
+  en: |-
+    In the 1st century, where Braga stands today, there was a Roman city called Bracara Augusta. It had a spring, and a local man, Celicus Fronto from Arcobriga, carved a figure in a toga, a niche, and inscriptions into the rock above it.
+
+    He dedicated them not to Roman gods but to local ones, Nabia and Tongoenabiagus. People here had worshipped them since before the Romans came. Rome didn’t ban such gods, and locals kept praying to them, only now they wrote in Latin.
+
+    The city was rebuilt again and again, and the rock with the spring ended up in the yard of a private house. In the 18th century, that garden was simply called “the Idol.” Only in 1936 did the city buy the land, and in 2006 a pavilion was built over the spring.
+  ru: |-
+    В I веке на месте Браги стоял римский город Бракара Августа. В нём был источник, и местный житель Целик Фронтон из Аркобриги высек над ним в скале фигуру в тоге, нишу и надписи.
+
+    Посвятил он их не римским богам, а здешним, Набии и Тонгоэнабиагу. Им поклонялись в этих краях ещё до римлян. Римляне таких богов не запрещали, и местные молились им, но писали уже по-латыни.
+
+    Город много раз перестраивали, а скала с источником оказалась во дворе частного дома. В XVIII веке этот сад так и называли «Идол». Только в 1936 году город выкупил землю, а в 2006 году над источником построили павильон.
+more:
+  pt: |-
+    As inscrições são curtas, mas mostram como os habitantes locais mudaram sob Roma. Frontão escreve em latim e representa uma figura de toga romana, mas identifica-se pela terra natal, Arcóbriga, e dedica a obra aos seus velhos deuses. Mais abaixo deixou a assinatura: «Célico fez».
+
+    A figura de toga tem várias leituras. Uns veem nela o próprio deus, outros Esculápio, deus da medicina, outros o autor da encomenda. Por cima do nicho há uma ave esculpida, e a cabeça no nicho está quase apagada.
+
+    A fonte não foi esquecida depois dos romanos. Aparece no mapa de Braga de 1594, e em 1862 o rei D. Pedro V foi vê-la. Provavelmente sobreviveu porque passou séculos no quintal de alguém, e não no caminho de ruas novas.
+  en: |-
+    The inscriptions are short, but they show how local people changed under Rome. Fronto writes in Latin and carves a figure in a Roman toga, yet he names himself after his home town, Arcobriga, and dedicates the work to his old gods. Lower down he left a signature: “Celicus made this.”
+
+    The toga figure is read in different ways. Some see the god himself, others Asclepius, the god of healing, others the man who paid for it. A bird is carved above the niche, and the head inside the niche is almost worn away.
+
+    The spring wasn’t forgotten after the Romans. It is marked on a 1594 map of Braga, and in 1862 King Pedro V came to see it. It most likely survived because it spent centuries in someone’s garden rather than in the path of new streets.
+  ru: |-
+    Надписи короткие, но по ним видно, как менялись местные люди при Риме. Фронтон пишет по-латыни и изображает фигуру в римской тоге, но называет себя по родному месту, Аркобриге, и посвящает работу своим старым богам. Ниже он оставил подпись: «Целик сделал».
+
+    Фигуру в тоге толкуют по-разному. Одни видят в ней самого бога, другие Асклепия, бога врачевания, третьи заказчика. Над нишей вырезана птица, а голова в нише почти стёрлась.
+
+    Источник помнили и после римлян. Его отметили на карте Браги 1594 года, а в 1862 году его осматривал король Педру V. Скорее всего, он уцелел потому, что столетиями стоял в чьём-то саду, а не на пути новых улиц.
+myth:
+  verdict: myth
+  statement:
+    pt: O santuário romano de Braga foi descoberto por arqueólogos no século XX
+    en: Braga’s Roman shrine was discovered by archaeologists in the 20th century
+    ru: Римское святилище Браги нашли археологи в XX веке
+  answer:
+    pt: Já aparece no mapa da cidade de 1594. Só que, até 1936, estava num quintal particular.
+    en: It is already marked on a 1594 map of the city. It just stood in a private garden until 1936.
+    ru: Его отметили на карте города ещё в 1594 году. Просто до 1936 года оно стояло в частном саду.
+sources:
+  - title: "Wikipedia: Fountain of the Idol"
+    url: https://en.wikipedia.org/wiki/Fountain_of_the_Idol
+    type: reference
+    accessed: 2026-11-22
+  - title: "Wikipedia: Tongoenabiagus"
+    url: https://en.wikipedia.org/wiki/Tongoenabiagus
+    type: reference
+    accessed: 2026-11-22
+image:
+  file: fonte-do-idolo-braga.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: uma mulher enche um cântaro numa fonte de pedra, com um rapaz ao lado; na rocha por cima da fonte veem-se uma figura de toga num nicho e uma ave sobre uma cabeça esculpida, entre videiras, e ao fundo uma casa com quintal."
+    en: "Blue-and-white azulejo-style illustration: a woman fills a jug at a stone fountain with a boy beside her; on the rock above the fountain are a figure in a toga in a niche and a bird above a carved head, among grapevines, with a house and yard behind."
+    ru: "Иллюстрация в духе сине-белого азулежу: женщина наполняет кувшин у каменного источника, рядом мальчик; в скале над источником видны фигура в тоге в нише и птица над высеченной головой, вокруг виноградные лозы, а за ними дом с двором."
+  caption:
+    pt: A Fonte do Ídolo, em Braga, quando ainda estava num quintal. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The Fonte do Ídolo in Braga when it still stood in a backyard. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Фонте-ду-Идолу в Браге, когда он ещё стоял в частном саду. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: fonte-do-idolo-braga-detalhe.webp
+  alt:
+    pt: Fotografia de uma grande rocha sob um muro de pedra, com uma figura de toga esculpida na face da rocha.
+    en: Photograph of a large rock beneath a stone wall, with a figure in a toga carved into its face.
+    ru: Фотография большой скалы под каменной стеной, на лицевой стороне которой высечена фигура в тоге.
+  caption:
+    pt: A rocha da Fonte do Ídolo, em Braga, com a figura de toga.
+    en: The rock of the Fonte do Ídolo in Braga, with the figure in a toga.
+    ru: Скала Фонте-ду-Идолу в Браге с фигурой в тоге.
+  author: Joseolgon
+  license: CC BY 4.0
+  license_url: https://creativecommons.org/licenses/by/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Fonte_do_%C3%ADdolo_2025_3.jpg
+status: ready
+published: 2026-12-14
+placeholder: false
+ru_ready: true

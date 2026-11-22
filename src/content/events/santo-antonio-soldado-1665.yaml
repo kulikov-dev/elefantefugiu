@@ -1,0 +1,153 @@
+id: santo-antonio-soldado-1665
+slug:
+  pt: um-santo-a-soldo
+  en: a-saint-on-the-payroll
+  ru: svyatoy-na-zhalovane
+title:
+  pt: Um santo a soldo
+  en: A Saint on the Payroll
+  ru: Святой на жалованье
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1665
+place:
+  name:
+    pt: Lagos
+    en: Lagos
+    ru: Лагуш
+  short:
+    pt: Lagos
+    en: Lagos
+    ru: Лагуш
+  lat: 37.0996114
+  lon: -8.6712537
+bridge:
+  name: Igreja de Santo António
+  title:
+    pt: Igreja de Santo António
+    en: Church of Santo António
+    ru: Церковь Святого Антония
+  address: Rua General Alberto da Silveira, Lagos
+  lat: 37.0996114
+  lon: -8.6712537
+  maps_url: https://www.google.com/maps/place/Church+of+Saint+Anthony/@37.0994916,-8.6757384,15z/data=!4m6!3m5!1s0xd1b31cfd6cc665f:0x2c84c370980ce717!8m2!3d37.0996114!4d-8.6712537!16s%2Fm%2F0h7qd4w
+  url: https://en.wikipedia.org/wiki/Igreja_de_Santo_Ant%C3%B3nio_(Lagos)
+  note:
+    pt: Igreja encomendada por militares e reconstruída em 1769 por ordem do comandante do regimento de Lagos, com talha dourada setecentista.
+    en: Built for the military and rebuilt in 1769 on the orders of the Lagos regiment’s commander, with gilded 18th-century carving.
+    ru: Церковь заказали военные, в 1769 году её перестроили по приказу командира полка Лагуша; внутри позолоченная резьба XVIII века.
+area: lagos
+threads:
+  - gente-como-nos
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O exército português pagava soldo a um santo.
+  en: The Portuguese army paid a saint’s wages.
+  ru: Португальская армия платила жалованье святому.
+seo:
+  title:
+    pt: Um santo a soldo · Lagos, 1665
+    en: A Saint on the Payroll · Lagos, 1665
+    ru: Святой на жалованье · Лагуш, 1665
+story:
+  pt: |-
+    Em 1665, em guerra com Espanha pela independência, Portugal precisava de toda a ajuda antes da batalha decisiva de Montes Claros. D. Afonso VI mandou alistar Santo António no exército como patrono, com soldo.
+
+    António morrera em 1231. Quem servia não era um homem, mas o seu nome e a sua imagem: uma estátua de madeira do santo que acompanhava o regimento. O soldo era registado em nome do santo no livro do regimento.
+
+    Portugal venceu, e o santo continuou ao serviço. Em 1668, D. Pedro II passou-o para o regimento de infantaria de Lagos, em agradecimento pelas vitórias sobre os espanhóis.
+
+    O santo era também promovido: em 1733 foi feito capitão, com soldo de capitão. Em 1777, o major do regimento pediu à rainha D. Maria I que fizesse o santo major, mas ela recusou. Três anos depois recebeu uma patente ainda mais alta: general.
+  en: |-
+    In 1665, Portugal was fighting Spain for independence and needed all the help it could get before the decisive Battle of Montes Claros. King Afonso VI had Saint Anthony enlisted in the army as its patron, with pay.
+
+    Anthony had died in 1231. What served was not a man but his name and his image: a wooden statue of the saint that went with the regiment. His pay was entered under the saint’s name in the regiment’s books.
+
+    Portugal won, and the saint stayed in service. In 1668, King Pedro II transferred him to the infantry regiment of Lagos in thanks for the victories over Spain.
+
+    The saint was promoted too: in 1733 he became a captain, with a captain’s pay. When the regiment’s major asked Queen Maria I in 1777 to make the saint a major, the queen refused. Three years later he got a higher rank: general.
+  ru: |-
+    В 1665 году Португалия воевала с Испанией за независимость, и перед решающей битвой при Монтеш-Кларуш ей была нужна любая помощь. Король Афонсу VI велел зачислить святого Антония в армию как покровителя, с жалованьем.
+
+    Сам Антоний умер ещё в 1231 году. Служил не человек, а его имя и образ: деревянная статуя святого с полком. Жалованье записывали на имя святого в полковую книгу.
+
+    Португалия победила, и святой остался на службе. В 1668 году Педру II перевёл его в пехотный полк Лагуша в благодарность за победы над испанцами.
+
+    Святого не только кормили, но и повышали. В 1733 году его произвели в капитаны и стали платить капитанское жалованье. А когда в 1777 году майор полка попросил королеву Марию I сделать святого майором, королева отказала. Через три года святой получил чин сразу выше: генеральский.
+more:
+  pt: |-
+    Porquê António? Nasceu em Lisboa, e os portugueses consideravam-no o seu santo. Acreditava-se que um santo nas fileiras protegia o exército, e as vitórias na guerra da independência só reforçaram essa fé. O santo não foi dispensado depois da guerra: passava de regimento em regimento como qualquer oficial, só que por ordem do rei.
+
+    O seu serviço sobreviveu ao Marquês de Pombal e às invasões francesas. Em 1814, o príncipe regente D. João fê-lo tenente-coronel de outro regimento e deu-lhe a grã-cruz da Ordem de Cristo.
+
+    O exemplo pegou no Brasil. Lá, António constava das tropas desde o fim do século XVI, e a sua carreira militar durou mais do que em Portugal: em 1924, o presidente brasileiro passou o santo à reserva por despacho.
+  en: |-
+    Why Anthony? He was born in Lisbon, and the Portuguese saw him as their own saint. People believed a saint in the ranks protected the army, and the victories in the war of independence only strengthened that belief. The saint wasn’t discharged after the war either: he moved from regiment to regiment like any officer, only on the king’s orders.
+
+    His service outlasted Pombal and the French invasions. In 1814, Prince Regent João made the saint a lieutenant colonel in another regiment and awarded him the Grand Cross of the Order of Christ.
+
+    Brazil followed the example. There, Anthony had been on the army rolls since the late 16th century, and his military career lasted longer than in Portugal: in 1924, the Brazilian president signed an order moving the saint to the reserve.
+  ru: |-
+    Почему именно Антоний? Он родился в Лиссабоне, и португальцы считали его своим святым. Верили, что святой в строю бережёт войско, а победы в войне за независимость эту веру только укрепили. Святого не увольняли и после войны: из полка в полк он переходил как обычный офицер, только по приказу короля.
+
+    Его служба пережила и Помбала, и французские нашествия. В 1814 году принц-регент Жуан произвёл святого в подполковники другого полка и наградил большим крестом ордена Христа.
+
+    Пример подхватили в Бразилии. Там Антоний числился в войсках с конца XVI века, и его военная карьера тянулась дольше, чем в Португалии: в 1924 году бразильский президент своим распоряжением перевёл святого в запас.
+myth:
+  verdict: fact
+  statement:
+    pt: Santo António constava do exército português e recebia soldo
+    en: Saint Anthony was on the Portuguese army’s rolls and drew pay
+    ru: Святой Антоний числился в португальской армии и получал жалованье
+  answer:
+    pt: Desde 1665 serviu em regimentos, a partir de 1668 em Lagos, em 1733 foi feito capitão e, por volta de 1780, general.
+    en: From 1665 he served in regiments, from 1668 in Lagos. He became a captain in 1733 and a general around 1780.
+    ru: С 1665 года он служил в полках, с 1668-го в Лагуше, в 1733-м стал капитаном, а около 1780-го генералом.
+sources:
+  - title: "Observador: António, o santo casamenteiro que chegou a general"
+    url: https://observador.pt/especiais/antonio-o-santo-casamenteiro-que-chegou-a-general/
+    type: press
+    accessed: 2026-11-22
+  - title: "DNoticias: Carreira militar de Santo António"
+    url: https://www.dnoticias.pt/2020/6/23/46690-carreira-militar-de-santo-antonio
+    type: press
+    accessed: 2026-11-22
+  - title: "Wikipedia: Igreja de Santo António (Lagos)"
+    url: https://en.wikipedia.org/wiki/Igreja_de_Santo_Ant%C3%B3nio_(Lagos)
+    type: reference
+    accessed: 2026-11-22
+image:
+  file: santo-antonio-soldado-1665.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: numa praia, soldados de mosquete ao ombro formam fileiras; ao centro, numa andor, a estátua de Santo António com o Menino, e dois oficiais ao lado, um a ler um grande livro, outro a deixar uma bolsa de moedas numa mesa."
+    en: "Blue-and-white azulejo-style illustration: on a beach, soldiers with muskets on their shoulders stand in ranks; in the center, on a litter, the statue of Saint Anthony with the Child, and two officers beside it, one reading a large book, the other setting a purse of coins on a table."
+    ru: "Иллюстрация в духе сине-белого азулежу: на берегу строем стоят солдаты с мушкетами на плечах; в центре на носилках статуя святого Антония с Младенцем, а рядом два офицера: один читает большую книгу, другой кладёт на стол кошелёк с монетами."
+  caption:
+    pt: Santo António recebe o soldo diante do regimento. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: Saint Anthony drawing his pay in front of the regiment. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Святой Антоний получает жалованье перед строем полка. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: santo-antonio-soldado-1665-detalhe.webp
+  alt:
+    pt: "Pintura de um altar: Santo António, de joelhos, é coberto com um hábito castanho por frades franciscanos; no alto há anjos com uma coroa de flores, e à direita três clérigos de sobrepeliz."
+    en: "Painting of an altar: Saint Anthony kneels while Franciscan friars drape a brown habit over him; angels with a wreath of flowers hover above, and three clerics in surplices stand to the right."
+    ru: "Картина с алтарём: коленопреклонённого святого Антония францисканские монахи накрывают коричневой рясой; вверху ангелы с венком из цветов, справа стоят три священника в стихарях."
+  caption:
+    pt: Santo António recebe o hábito franciscano. Pascoal Parente, 1796. Convento de Santo António dos Olivais, Coimbra.
+    en: Saint Anthony receives the Franciscan habit. Pascoal Parente, 1796. Convent of Santo António dos Olivais, Coimbra.
+    ru: Святой Антоний принимает францисканскую рясу. Паскуал Паренте, 1796. Монастырь Санту-Антониу-душ-Оливайш, Коимбра.
+  author: Pascoal Parente
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Santo_Ant%C3%B3nio_veste_o_h%C3%A1bito_franciscano_(1796)_-_Pascoal_Parente_(Convento_de_Santo_Ant%C3%B3nio_dos_Olivais).png
+status: ready
+published: 2026-12-15
+placeholder: false
+ru_ready: true

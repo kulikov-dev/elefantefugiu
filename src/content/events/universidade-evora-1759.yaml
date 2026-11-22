@@ -1,0 +1,148 @@
+id: universidade-evora-1759
+slug:
+  pt: a-universidade-cercada-pela-cavalaria
+  en: the-university-surrounded-by-cavalry
+  ru: universitet-kotoryy-okruzhila-kavaleriya
+title:
+  pt: A universidade cercada pela cavalaria
+  en: The University Surrounded by Cavalry
+  ru: Университет, который окружила кавалерия
+epoch: pombal-e-terramoto
+level: story
+year: 1759
+day: 02-08
+place:
+  name:
+    pt: Évora
+    en: Évora
+    ru: Эвора
+  short:
+    pt: Évora
+    en: Évora
+    ru: Эвора
+  lat: 38.5687484
+  lon: -7.910406
+bridge:
+  name: Colégio do Espírito Santo
+  title:
+    pt: Universidade de Évora, Colégio do Espírito Santo
+    en: University of Évora, Colégio do Espírito Santo
+    ru: Университет Эворы, Колежиу-ду-Эшпириту-Санту
+  address: Largo dos Colegiais, Évora
+  lat: 38.5687484
+  lon: -7.910406
+  maps_url: https://www.google.com/maps/place/Col%C3%A9gio+Luis+Ant%C3%B3nio+Verney/@38.5687526,-7.9129809,17z/data=!3m2!4b1!5s0xd19e4d959f13b73:0xe08fd2019204596a!4m6!3m5!1s0xd19e4d9560a6181:0x2be037428d567c55!8m2!3d38.5687484!4d-7.910406!16s%2Fg%2F119v8805l
+  url: https://www.uevora.pt/en/university/history
+  note:
+    pt: O edifício principal da universidade, com azulejos de cenas de ensino no claustro e nas salas de aula.
+    en: The university’s main building, with tiles showing scenes of teaching in the cloister and classrooms.
+    ru: Главное здание университета, во дворе и в аудиториях плитка со сценами учёбы.
+area: evora
+threads:
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A segunda universidade de Portugal fechou e só reabriu 214 anos depois.
+  en: Portugal’s second university was shut down and only reopened 214 years later.
+  ru: Второй университет Португалии закрыли и открыли снова только через 214 лет.
+seo:
+  title:
+    pt: Universidade e cavalaria · Évora, 1759
+    en: The University and the Cavalry · Évora, 1759
+    ru: Университет и кавалерия · Эвора, 1759
+story:
+  pt: |-
+    Em 1559, o cardeal D. Henrique abriu em Évora a segunda universidade de Portugal, depois de Coimbra, e entregou-a aos jesuítas. Durante dois séculos, a ordem ensinou ali filosofia e teologia.
+
+    Em 1759, o Marquês de Pombal acusou os jesuítas de conspirarem contra o rei e expulsou a ordem do país. A universidade era jesuíta e, por isso, a 8 de fevereiro foi cercada pela cavalaria. Os professores foram levados para Lisboa, muitos presos no forte da Junqueira, outros desterrados para os Estados Pontifícios.
+
+    Com a ordem desapareceu também a universidade. A seguinte universidade em Évora só abriu em 1973.
+  en: |-
+    In 1559, Cardinal Henrique opened Portugal’s second university, after Coimbra, in Évora and handed it to the Jesuits. For two centuries the order taught philosophy and theology there.
+
+    In 1759, the Marquis of Pombal accused the Jesuits of plotting against the king and expelled the order from the country. The university was Jesuit, so on February 8 cavalry surrounded it. The teachers were taken to Lisbon. Many were locked up in the Junqueira fort, others were deported to the Papal States.
+
+    The university disappeared along with the order. Évora’s next university didn’t open until 1973.
+  ru: |-
+    В 1559 году кардинал Энрике открыл в Эворе второй университет Португалии после Коимбры и отдал его иезуитам. Двести лет орден учил здесь философии и богословию.
+
+    В 1759 году маркиз Помбал обвинил иезуитов в заговоре против короля и изгнал орден из страны. Университет был иезуитским, поэтому 8 февраля его окружила кавалерия. Преподавателей увезли в Лиссабон, многих посадили в форт Жункейра, других выслали в Папскую область.
+
+    Вместе с орденом исчез и университет. Следующий университет в Эворе открылся только в 1973 году.
+more:
+  pt: |-
+    Porquê os jesuítas? No século XVI, eram a ordem mais culta do mundo católico. Tinham escolas do Brasil ao Japão, e o cardeal D. Henrique entregou-lhes Évora para formar padres e homens instruídos para o reino e as colónias. A universidade de Évora era jesuíta por inteiro: os mestres, os programas e o próprio espírito.
+
+    Por isso Pombal não a reformou: fechou-a. E Portugal ficou século e meio com uma só universidade, em Coimbra. Só em 1911, já na República, abriram as universidades de Lisboa e do Porto.
+
+    E o edifício de Évora ficou à espera. Na segunda metade do século XIX instalou-se ali um liceu, e os alunos sentavam-se nas mesmas salas onde antes ensinavam os jesuítas. As paredes das salas de aula estão cobertas de azulejos com cenas de ensino: Platão a ensinar os discípulos, Aristóteles a ensinar Alexandre Magno. Em 1973 abriu no velho edifício o Instituto Universitário de Évora, em 1979 tornou-se universidade, e os estudantes voltaram a sentar-se sob os mesmos painéis.
+  en: |-
+    Why the Jesuits? In the 16th century they were the most learned order in the Catholic world. Their schools stretched from Brazil to Japan, and Cardinal Henrique gave them Évora to train priests and educated men for the kingdom and its colonies. The University of Évora was Jesuit through and through: its teachers, its courses, its whole spirit.
+
+    So Pombal didn’t reform it. He closed it. And for a century and a half Portugal had just one university, in Coimbra. Only in 1911, under the Republic, did universities open in Lisbon and Porto.
+
+    Meanwhile, the building in Évora waited. In the second half of the 19th century it became a high school, and students sat in the same halls where the Jesuits had once taught. The classroom walls are covered in tiles showing scenes of teaching: Plato with his followers, Aristotle teaching Alexander the Great. In 1973 the University Institute of Évora opened in the old building, in 1979 it became a university, and students once again sat beneath the same panels.
+  ru: |-
+    Почему иезуиты? В XVI веке это был самый учёный орден католического мира. Его школы стояли от Бразилии до Японии, и кардинал Энрике отдал им Эвору, чтобы готовить священников и учёных людей для страны и колоний. Университет Эворы был иезуитским целиком: и учителя, и программы, и сам дух.
+
+    Поэтому Помбал не стал его переделывать, а закрыл. И Португалия на полтора века осталась с одним университетом, в Коимбре. Только в 1911 году, уже при республике, открылись университеты в Лиссабоне и Порту.
+
+    А здание в Эворе ждало. Во второй половине XIX века в нём устроили лицей, и школьники сидели в тех же залах, где когда-то учили иезуиты. Стены аудиторий покрыты плиткой со сценами учёбы: Платон учит своих последователей, Аристотель учит Александра Македонского. В 1973 году в старом здании открыли Университетский институт Эворы, в 1979 году он стал университетом, и студенты снова сели под те же панно.
+myth:
+  verdict: fact
+  statement:
+    pt: Depois de 1759, Portugal teve só uma universidade durante século e meio
+    en: After 1759, Portugal had one university for a century and a half
+    ru: После 1759 года в Португалии полтора века был только один университет
+  answer:
+    pt: Évora fechou com a expulsão dos jesuítas. Até 1911, quando abriram Lisboa e Porto, restou apenas Coimbra.
+    en: Évora closed with the expulsion of the Jesuits. Until Lisbon and Porto opened in 1911, only Coimbra was left.
+    ru: Эвору закрыли вместе с изгнанием иезуитов. До 1911 года, когда открылись Лиссабон и Порту, оставалась одна Коимбра.
+sources:
+  - title: "Universidade de Évora: History"
+    url: https://www.uevora.pt/en/university/history
+    type: institutional
+    accessed: 2026-11-22
+  - title: "Wikipedia: University of Évora"
+    url: https://en.wikipedia.org/wiki/University_of_%C3%89vora
+    type: reference
+    accessed: 2026-11-22
+  - title: "Faculdade de Medicina de Lisboa: Creation of the University of Lisbon, 1911"
+    url: https://www.medicina.ulisboa.pt/en/newsfmul-artigo/13/creation-university-lisbon-1911
+    type: institutional
+    accessed: 2026-11-22
+image:
+  file: universidade-evora-1759.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: num claustro, cavaleiros de tricórnio formam duas alas, e um oficial faz sinal a um grupo de jesuítas de batina negra com livros; na galeria de cima, outros jesuítas observam, e na parede vê-se um painel de azulejos com uma aula."
+    en: "Blue-and-white azulejo-style illustration: in a cloister, horsemen in tricorn hats form two lines while an officer waves a group of Jesuits in black cassocks, holding books, out; other Jesuits watch from the gallery above, and a tile panel of a lesson hangs on the wall."
+    ru: "Иллюстрация в духе сине-белого азулежу: в монастырском дворе всадники в треуголках стоят двумя рядами, офицер жестом выводит группу иезуитов в чёрных сутанах с книгами, а с галереи наверху смотрят другие; на стене видно плиточное панно со сценой урока."
+  caption:
+    pt: A cavalaria cerca o colégio dos jesuítas em Évora, 8 de fevereiro de 1759. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: Cavalry surround the Jesuit college in Évora, February 8, 1759. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Кавалерия окружает иезуитский колледж в Эворе, 8 февраля 1759 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: universidade-evora-1759-detalhe.webp
+  alt:
+    pt: Fotografia de um claustro de dois pisos com arcadas brancas e amarelas, azulejos nos muros do piso térreo, um chafariz à direita e um pátio de pedra com relva.
+    en: Photograph of a two-story cloister with white and yellow arcades, tiles on the lower walls, a fountain on the right, and a stone courtyard with patches of grass.
+    ru: Фотография двухэтажного монастырского двора с бело-жёлтыми аркадами, плиткой на нижних стенах, фонтаном справа и каменным двором с газонами.
+  caption:
+    pt: O claustro do Colégio do Espírito Santo, hoje da Universidade de Évora.
+    en: The cloister of the Colégio do Espírito Santo, now part of the University of Évora.
+    ru: Двор Колежиу-ду-Эшпириту-Санту, сегодня часть Университета Эворы.
+  author: Joseolgon
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Cloister_of_Col%C3%A9gio_do_Esp%C3%ADrito_Santo.jpg
+status: ready
+published: 2026-12-16
+placeholder: false
+ru_ready: true

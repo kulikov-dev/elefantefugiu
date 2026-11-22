@@ -1,0 +1,202 @@
+id: ultimo-rei-ericeira-1910
+slug:
+  pt: o-rei-partiu-de-uma-praia-de-pescadores
+  en: the-king-who-sailed-from-a-fishing-beach
+  ru: korol-uplyl-s-rybatskogo-plyazha
+title:
+  pt: O rei partiu de uma praia de pescadores
+  en: The King Who Sailed from a Fishing Beach
+  ru: Король уплыл с рыбацкого пляжа
+epoch: monarquia-e-republica
+level: story
+year: 1910
+day: 10-05
+place:
+  name:
+    pt: Ericeira
+    en: Ericeira
+    ru: Эрисейра
+  short:
+    pt: Ericeira
+    en: Ericeira
+    ru: Эрисейра
+  lat: 38.964101
+  lon: -9.418555
+bridge:
+  name: Praia dos Pescadores
+  title:
+    pt: Praia dos Pescadores
+    en: Fishermen’s Beach
+    ru: Пляж рыбаков
+  address: Praia dos Pescadores, Ericeira
+  lat: 38.964101
+  lon: -9.418555
+  maps_url: https://www.google.com/maps/place/Praia+dos+Pescadores/@38.9641167,-9.4288547,15z/data=!3m1!4b1!4m6!3m5!1s0xd1f270c69be725d:0x96241adb52f1fb4d!8m2!3d38.964101!4d-9.418555!16s%2Fg%2F11b75hytyj
+  url: https://www.ericeiramag.pt/en/?p=40613
+  note:
+    pt: Desta praia, a 5 de outubro de 1910, os barcos levaram o rei até ao iate.
+    en: From this beach on October 5, 1910, boats took the king out to the yacht.
+    ru: С этого пляжа 5 октября 1910 года лодки отвезли короля к яхте.
+area: mafra
+threads:
+  - poder-e-revolta
+  - mar
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O último rei de Portugal partiu de uma praia de pescadores.
+  en: Portugal’s last king left the country from a fishing beach.
+  ru: Последний король Португалии покинул страну с рыбацкого пляжа.
+seo:
+  title:
+    pt: O último rei partiu · Ericeira, 1910
+    en: The Last King Sails Away · Ericeira, 1910
+    ru: Последний король уплыл · Эрисейра, 1910
+story:
+  pt: |-
+    A 4 de outubro de 1910 começou em Lisboa a revolução. O rei D. Manuel II tinha 20 anos. Saiu da capital para o palácio de Mafra.
+
+    No dia seguinte, os republicanos venceram. Por volta das três da tarde, a família real seguiu de Mafra para a vizinha Ericeira, até à praia onde os pescadores puxam os barcos. Os barcos levaram o rei e a mãe até ao iate real «Amélia».
+
+    Segundo uma versão, o rei queria seguir para o Porto e continuar a luta no Norte. Mas chegou a notícia de que também o Porto estava com os republicanos, e o iate rumou a Gibraltar. D. Manuel II nunca mais voltou vivo a Portugal.
+  en: |-
+    On October 4, 1910, a revolution broke out in Lisbon. King Manuel II was 20 years old. He left the capital for the palace at Mafra.
+
+    The next day the republicans won. At around three in the afternoon, the royal family drove from Mafra to nearby Ericeira, down to the beach where fishermen haul up their boats. The boats took the king and his mother out to the royal yacht Amélia.
+
+    According to one account, the king wanted to sail to Porto and keep fighting in the north. But word came that Porto had sided with the republicans too, and the yacht headed for Gibraltar. Manuel II never came back to Portugal alive.
+  ru: |-
+    4 октября 1910 года в Лиссабоне началась революция. Королю Мануэлу II было 20 лет. Он уехал из столицы во дворец в Мафре.
+
+    На следующий день республиканцы победили. Около трёх часов дня королевская семья доехала из Мафры до соседней Эрисейры, к пляжу, где рыбаки вытаскивают лодки. Лодки перевезли короля и его мать на королевскую яхту «Амелия».
+
+    По одной версии, король хотел плыть в Порту и продолжать борьбу на севере. Но пришла весть, что Порту тоже за республиканцами, и яхта ушла в Гибралтар. В Португалию Мануэл II живым больше не вернулся.
+more:
+  pt: |-
+    De Gibraltar, a família seguiu para Inglaterra. D. Manuel instalou-se em Twickenham, perto de Londres, casou em 1913 e, na Primeira Guerra Mundial, trabalhou na Cruz Vermelha britânica. Nunca recuperou o trono, mas encontrou outra causa: os livros antigos portugueses.
+
+    Começou a colecioná-los em 1920: primeiras edições impressas em Portugal, livros da época dos Descobrimentos. E não só os colecionava: descrevia ele próprio cada um num grande catálogo, «Livros Antigos Portuguezes». O rei que perdera o país pôs-se a inventariar os seus primeiros livros impressos.
+
+    Conseguiu publicar dois volumes. O terceiro foi terminado sem ele: em 1932, D. Manuel II morreu de repente em sua casa, perto de Londres, aos 42 anos, sufocado por um edema da glote. Foi sepultado em Lisboa, no Panteão dos Braganças, no Mosteiro de São Vicente de Fora. E a sua biblioteca também voltou a Portugal: está em Vila Viçosa.
+  en: |-
+    From Gibraltar the family went on to England. Manuel settled in Twickenham, near London, married in 1913, and worked for the British Red Cross during World War I. He never got his throne back, but he found another calling: old Portuguese books.
+
+    He started collecting them in 1920: the first books printed in Portugal, books from the Age of Discovery. And he didn’t just collect them. He described each one himself in a large catalog, Early Portuguese Books. The king who had lost his country set about cataloging its first printed books.
+
+    He managed to publish two volumes. The third was finished without him: in 1932, Manuel II died suddenly at his home near London, aged 42. His throat swelled up and he suffocated. He was buried in Lisbon, in the Bragança royal pantheon at the Monastery of São Vicente de Fora. His library came back to Portugal too, and it is kept in Vila Viçosa.
+  ru: |-
+    Из Гибралтара семья уехала в Англию. Мануэл поселился в Твикенеме под Лондоном, в 1913 году женился, а в Первую мировую работал в британском Красном Кресте. Трона он так и не вернул, и у него появилось другое дело: старые португальские книги.
+
+    Он начал собирать их в 1920 году: первые издания, напечатанные в Португалии, книги эпохи открытий. И не просто собирал, а сам описывал каждую в большом каталоге «Старые португальские книги». Король, потерявший страну, стал составлять опись её первых печатных книг.
+
+    Он успел выпустить два тома. Третий закончили уже без него: в 1932 году Мануэл II внезапно умер в своём доме под Лондоном, в 42 года: у него отекла гортань, и он задохнулся. Похоронили его в Лиссабоне, в пантеоне королей Браганса в монастыре Сан-Висенти-ди-Фора. А его библиотека тоже вернулась в Португалию и хранится в Вила-Висозе.
+myth:
+  verdict: fact
+  statement:
+    pt: O último rei de Portugal partiu de uma praia de pescadores
+    en: Portugal’s last king sailed into exile from a fishing beach
+    ru: Последний король Португалии уплыл в изгнание с рыбацкого пляжа
+  answer:
+    pt: A 5 de outubro de 1910, barcos levaram a família real da praia da Ericeira até ao iate «Amélia», que seguiu para Gibraltar.
+    en: On October 5, 1910, boats took the royal family from Ericeira’s beach to the yacht Amélia, which sailed to Gibraltar.
+    ru: 5 октября 1910 года лодки перевезли королевскую семью с пляжа Эрисейры на яхту «Амелия», и она ушла в Гибралтар.
+sources:
+  - title: "Ericeira Mag: The Boarding"
+    url: https://www.ericeiramag.pt/en/?p=40613
+    type: press
+    accessed: 2026-11-22
+  - title: "Wikipedia: Manuel II of Portugal"
+    url: https://en.wikipedia.org/wiki/Manuel_II_of_Portugal
+    type: reference
+    accessed: 2026-11-22
+  - title: "Observador: Os Lusíadas e a Bíblia do português: em busca de Camões na biblioteca de D. Manuel II"
+    url: https://observador.pt/especiais/os-lusiadas-e-a-biblia-do-portugues-em-busca-de-camoes-na-biblioteca-de-d-manuel-ii/
+    type: press
+    accessed: 2026-11-22
+image:
+  file: ultimo-rei-ericeira-1910.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: pescadores empurram para o mar um barco onde seguem sentados um jovem de chapéu de coco e uma mulher de chapéu com véu; ao fundo, um iate a vapor, outro barco de remo e, na arriba, as casas da vila e gente a ver."
+    en: "Blue-and-white azulejo-style illustration: fishermen push a boat out to sea with a young man in a bowler hat and a woman in a veiled hat sitting in it; in the distance are a steam yacht, another rowing boat, and, on the cliff, the houses of the town and onlookers."
+    ru: "Иллюстрация в духе сине-белого азулежу: рыбаки толкают в море лодку, в которой сидят молодой человек в котелке и женщина в шляпе с вуалью; вдали паровая яхта и вторая гребная лодка, а на обрыве дома городка и зрители."
+  caption:
+    pt: A família real a embarcar na praia da Ericeira, 5 de outubro de 1910. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The royal family boarding at Ericeira’s beach, October 5, 1910. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Королевская семья садится в лодку на пляже Эрисейры, 5 октября 1910 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: ultimo-rei-ericeira-1910-detalhe.webp
+  alt:
+    pt: Fotografia antiga de um iate a vapor de casco escuro, com duas chaminés brancas e dois mastros, no mar calmo.
+    en: Old photograph of a steam yacht with a dark hull, two white funnels, and two masts on a calm sea.
+    ru: Старая фотография паровой яхты с тёмным корпусом, двумя белыми трубами и двумя мачтами на спокойном море.
+  caption:
+    pt: O iate real «Amélia». Fotografia de Arthur William Debenham, por volta de 1900.
+    en: The royal yacht Amélia. Photograph by Arthur William Debenham, around 1900.
+    ru: Королевская яхта «Амелия». Фотография Артура Уильяма Дебенема, около 1900 года.
+  author: Arthur William Debenham
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Royal_Yacht_Amelia_(London,_1900)_01.png
+route:
+  years: "1910"
+  points:
+    - name:
+        pt: Mafra
+        en: Mafra
+        ru: Мафра
+      lat: 38.9368
+      lng: -9.326
+      year: 1910
+    - name:
+        pt: Ericeira
+        en: Ericeira
+        ru: Эрисейра
+      lat: 38.9641
+      lng: -9.4186
+      year: 1910
+      mode: land
+    - via: true
+      lat: 38.96
+      lng: -9.5
+      mode: sea
+    - via: true
+      lat: 38.78
+      lng: -9.64
+      mode: sea
+    - via: true
+      lat: 38.35
+      lng: -9.4
+      mode: sea
+    - via: true
+      lat: 37
+      lng: -9.25
+      mode: sea
+    - via: true
+      lat: 36.8
+      lng: -8
+      mode: sea
+    - via: true
+      lat: 36.1
+      lng: -6.2
+      mode: sea
+    - via: true
+      lat: 35.97
+      lng: -5.6
+      mode: sea
+    - name:
+        pt: Gibraltar
+        en: Gibraltar
+        ru: Гибралтар
+      lat: 36.13
+      lng: -5.36
+      year: 1910
+      mode: sea
+status: ready
+published: 2026-12-18
+placeholder: false
+ru_ready: true

@@ -1,0 +1,224 @@
+id: vimeiro-1808
+slug:
+  pt: a-vitoria-que-levou-os-vencedores-a-tribunal
+  en: the-victory-that-put-the-victors-on-trial
+  ru: pobeda-za-kotoruyu-sudili-pobediteley
+title:
+  pt: A vitória que levou os vencedores a tribunal
+  en: The Victory That Put the Victors on Trial
+  ru: Победа, за которую судили победителей
+epoch: pombal-e-terramoto
+level: story
+year: 1808
+day: 08-21
+place:
+  name:
+    pt: Vimeiro
+    en: Vimeiro
+    ru: Вимейру
+  short:
+    pt: Vimeiro
+    en: Vimeiro
+    ru: Вимейру
+  lat: 39.17605
+  lon: -9.3153964
+bridge:
+  name: Monumento à Batalha do Vimeiro
+  title:
+    pt: Monumento à Batalha do Vimeiro
+    en: Vimeiro Battle Monument
+    ru: Памятник битве при Вимейру
+  address: Vimeiro, Lourinhã
+  lat: 39.17605
+  lon: -9.3153964
+  maps_url: https://www.google.com/maps/place/Visitor+centre+Batalha+do+Vimeiro+(CIBV)/@39.1760541,-9.3179713,17z/data=!3m1!4b1!4m6!3m5!1s0xd1f31223732e72f:0x2d355ef0650c5b98!8m2!3d39.17605!4d-9.3153964!16s%2Fg%2F11bvt0rkjb
+  url: https://www.historyhit.com/locations/vimeiro-monument/
+  note:
+    pt: Obelisco no alto da colina do Vimeiro, com um painel de azulejos e um mapa cerâmico do campo de batalha.
+    en: An obelisk on top of Vimeiro hill, with a tile painting of the battle and a ceramic map beside it.
+    ru: Обелиск на вершине холма Вимейру, рядом плиточная картина боя и керамическая карта поля битвы.
+area: lourinha
+threads:
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os britânicos venceram no Vimeiro e depois levaram os generais a inquérito.
+  en: The British won at Vimeiro, then put their own generals on trial.
+  ru: Британцы выиграли битву при Вимейру, а потом судили своих генералов.
+seo:
+  title:
+    pt: Batalha do Vimeiro · Lourinhã, 1808
+    en: Battle of Vimeiro · Lourinhã, 1808
+    ru: Битва при Вимейру · Лоуринья, 1808
+story:
+  pt: |-
+    No verão de 1808, Portugal estava ocupado pelos franceses, e a Grã-Bretanha desembarcou aqui um exército pela primeira vez. Comandava-o Arthur Wellesley, de 39 anos, o futuro duque de Wellington. A 21 de agosto, junto à aldeia do Vimeiro, os franceses do general Junot atacaram-no nas colinas e recuaram, deixando para trás os canhões.
+
+    Wellesley queria perseguir os que fugiam. Mas precisamente nesses dias chegou ao exército o general Burrard, mais antigo do que ele, e mandou parar. No dia seguinte chegou um terceiro chefe, Dalrymple, mais antigo do que os dois. Os franceses mandaram parlamentários, e Dalrymple, em vez de perseguir, sentou-se a negociar.
+
+    Em Londres ninguém queria acreditar no acordo. A frota britânica levaria o exército de Junot para França, com armas, bagagens e tudo o que os franceses tinham saqueado em Portugal. O acordo tinha a assinatura dos três generais, e os três foram chamados a inquérito.
+  en: |-
+    In the summer of 1808, Portugal was under French occupation, and Britain landed an army here for the first time. It was led by 39-year-old Arthur Wellesley, the future Duke of Wellington. On August 21, near the village of Vimeiro, General Junot’s French attacked him in the hills and fell back, leaving their cannons behind.
+
+    Wellesley was eager to finish off the retreating enemy. But General Burrard, who outranked him, arrived and ordered the army to stay put. The next day a third commander, Dalrymple, arrived, senior to them both. The French sent envoys, and instead of giving chase, Dalrymple sat down to negotiate.
+
+    The deal was so generous that London could hardly believe it. The British fleet would ship Junot’s army to France, with its weapons, its baggage, and everything the French had looted in Portugal. All three generals had signed it and were summoned to an inquiry.
+  ru: |-
+    Летом 1808 года Португалия была под французами, и Британия впервые высадила здесь армию. Командовал ею 39-летний Артур Уэлсли, будущий герцог Веллингтон. 21 августа у деревни Вимейру французы генерала Жюно атаковали его на холмах и откатились, бросив пушки.
+
+    Уэлсли рвался добить отступающих. Но как раз в эти дни к армии прибыл генерал Барард, старше его по званию, и приказал стоять. На следующий день приехал третий начальник, Далримпл, старше их обоих. Французы прислали парламентёров, и Далримпл вместо погони сел договариваться.
+
+    Договорились так, что в Лондоне не поверили. Британский флот отвезёт армию Жюно домой, во Францию, с оружием, багажом и всем, что французы награбили в Португалии. Под договором стояли подписи всех трёх генералов, и всех троих вызвали на следствие.
+more:
+  pt: |-
+    O acordo ficou conhecido como Convenção de Sintra, embora não tenha sido assinado em Sintra: segundo as fontes, foi em Lisboa ou no palácio de Queluz. Mais tarde, o quartel-general britânico esteve em Sintra, e o nome pegou. Um ano depois, o jovem Byron passou por Sintra e meteu-a no «Childe Harold»: «A Grã-Bretanha adoece ao teu nome, Sintra».
+
+    O inquérito reuniu no hospital de Chelsea, em Londres, entre novembro e dezembro de 1808. Wellesley explicou que a sua assinatura fora uma formalidade: o acordo fora negociado pelos superiores. Não se apuraram culpados, e os três foram ilibados. Mas Dalrymple e Burrard nunca mais comandaram exércitos.
+
+    Já Wellesley voltou a Portugal na primavera de 1809, agora como comandante-chefe. Um ano depois construiu perto de Lisboa as Linhas de Torres Vedras, onde parou o exército francês seguinte. O general a quem proibiram a perseguição no Vimeiro acabou por comandar o exército que expulsou os franceses de Portugal.
+  en: |-
+    The deal became known as the Convention of Sintra, even though it wasn’t signed in Sintra: sources say it was in Lisbon or at the Queluz palace. The British later set up headquarters in Sintra, and the name stuck. A year later, a young Byron passed through Sintra and put it into Childe Harold’s Pilgrimage: “Britannia sickens, Cintra! at thy name.”
+
+    The inquiry sat at the Royal Hospital Chelsea in London from November to December 1808. Wellesley explained that his signature had been a formality: his superiors had negotiated the deal. No one was found guilty, and all three were cleared. But Dalrymple and Burrard never commanded an army again.
+
+    Wellesley, on the other hand, returned to Portugal in the spring of 1809, this time as commander in chief. A year later he built the Lines of Torres Vedras near Lisbon, where the next French army was stopped. The general who wasn’t allowed to give chase at Vimeiro later commanded the army that drove the French out of Portugal.
+  ru: |-
+    Договор назвали Синтрийской конвенцией, хотя подписали его не в Синтре: по разным источникам, в Лиссабоне или во дворце Келуш. В Синтре потом стоял британский штаб, и название прилипло. Через год Синтру проездом увидел молодой Байрон и вставил её в «Паломничество Чайльд-Гарольда»: «Британия болеет при твоём имени, Синтра».
+
+    Следствие заседало в лондонском госпитале Челси с ноября по декабрь 1808 года. Уэлсли объяснял, что его подпись была формальностью: договор вели старшие. Виновных не нашли, всех троих оправдали. Но Далримпла и Барарда больше не посылали командовать армиями.
+
+    А Уэлсли весной 1809 года вернулся в Португалию уже главнокомандующим. Через год он построил под Лиссабоном линии Торриш-Ведраш, у которых остановилась следующая французская армия. Генерал, которого не пустили в погоню при Вимейру, потом сам командовал армией, которая вытеснила французов из Португалии.
+myth:
+  verdict: fact
+  statement:
+    pt: Os britânicos levaram para casa os franceses derrotados no Vimeiro
+    en: The British shipped the French they had beaten at Vimeiro back home
+    ru: Разбитых при Вимейру французов британцы сами отвезли домой
+  answer:
+    pt: Pela Convenção de Sintra, a frota britânica levou o exército de Junot para França, com armas, bagagens e o que tinha saqueado.
+    en: Under the Convention of Sintra, the British fleet took Junot’s army to France with its weapons, baggage, and loot.
+    ru: По Синтрийской конвенции британский флот доставил армию Жюно во Францию с оружием, багажом и награбленным.
+sources:
+  - title: "Wikipedia: Battle of Vimeiro"
+    url: https://en.wikipedia.org/wiki/Battle_of_Vimeiro
+    type: reference
+    accessed: 2026-11-22
+  - title: "History of War: Battle of Vimiero"
+    url: https://www.historyofwar.org/articles/battles_vimiero.html
+    type: reference
+    accessed: 2026-11-22
+  - title: "Napoleon Guide: Convention of Cintra"
+    url: https://napoleonguide.com/cintra.htm
+    type: reference
+    accessed: 2026-11-22
+  - title: "Wikipedia: Military career of Arthur Wellesley, 1st Duke of Wellington"
+    url: https://en.wikipedia.org/wiki/Military_career_of_Arthur_Wellesley,_1st_Duke_of_Wellington
+    type: reference
+    accessed: 2026-11-22
+  - title: "History Hit: Vimeiro Monument"
+    url: https://www.historyhit.com/locations/vimeiro-monument/
+    type: website
+    accessed: 2026-11-22
+  - title: "Wikipedia: Convention of Sintra"
+    url: https://en.wikipedia.org/wiki/Convention_of_Sintra
+    type: reference
+    accessed: 2026-11-22
+image:
+  file: vimeiro-1808.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: dois cavaleiros numa estrada entre campos, um general de bicorne a levantar a mão como quem manda parar e um oficial a apontar para uma aldeia com um moinho de vento; soldados descansam nos taludes, e ao longe sobe fumo."
+    en: "Blue-and-white azulejo-style illustration: two horsemen on a road between fields, a general in a bicorne raising his hand as if to say stop and an officer pointing to a village with a windmill; soldiers rest on the banks, and smoke rises in the distance."
+    ru: "Иллюстрация в духе сине-белого азулежу: двое всадников на дороге среди полей, генерал в двууголке поднимает руку, будто приказывает остановиться, а офицер указывает на деревню с ветряной мельницей; солдаты отдыхают на склонах, вдали поднимается дым."
+  caption:
+    pt: Wellesley quer perseguir os franceses, mas um general mais antigo manda parar. Vimeiro, 21 de agosto de 1808. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: Wellesley wants to chase the French, but a senior general orders a halt. Vimeiro, August 21, 1808. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Уэлсли хочет преследовать французов, но старший генерал приказывает остановиться. Вимейру, 21 августа 1808 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: vimeiro-1808-detalhe.webp
+  alt:
+    pt: "Mapa da batalha do Vimeiro, 21 de agosto de 1808: colinas com curvas de nível e estradas, blocos vermelhos britânicos a norte e a oeste da aldeia e blocos negros franceses a sul e a leste."
+    en: "Map of the Battle of Vimeiro, August 21, 1808: hills with contour lines and roads, red British blocks north and west of the village and black French blocks south and east."
+    ru: "Карта битвы при Вимейру 21 августа 1808 года: холмы с горизонталями и дороги, красные британские части к северу и западу от деревни и чёрные французские к югу и востоку."
+  caption:
+    pt: Mapa da batalha do Vimeiro, 21 de agosto de 1808. Charles Oman, Oxford Geographical Institute.
+    en: Map of the Battle of Vimeiro, August 21, 1808. Charles Oman, Oxford Geographical Institute.
+    ru: Карта битвы при Вимейру, 21 августа 1808 года. Чарльз Оман, Oxford Geographical Institute.
+  author: Charles William Chadwick Oman
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Battle_plan_Vimeiro_1808.png
+related:
+  - torres-vedras-1810
+route:
+  approx: true
+  years: "1808"
+  points:
+    - name:
+        pt: Baía do Mondego
+        en: Mondego Bay
+        ru: Залив Мондегу
+      lat: 40.1
+      lng: -8.87
+      year: 1808
+      date:
+        pt: 1 de agosto
+        en: August 1
+        ru: 1 августа
+    - via: true
+      lat: 39.93
+      lng: -8.83
+      mode: land
+    - name:
+        pt: Leiria
+        en: Leiria
+        ru: Лейрия
+      lat: 39.7436
+      lng: -8.807
+      year: 1808
+      mode: land
+    - via: true
+      lat: 39.55
+      lng: -8.98
+      mode: land
+    - name:
+        pt: Óbidos
+        en: Óbidos
+        ru: Обидуш
+      lat: 39.3606
+      lng: -9.1572
+      year: 1808
+      mode: land
+    - name:
+        pt: Roliça
+        en: Roliça
+        ru: Ролиса
+      lat: 39.31
+      lng: -9.19
+      year: 1808
+      date:
+        pt: 17 de agosto
+        en: August 17
+        ru: 17 августа
+      mode: land
+    - name:
+        pt: Vimeiro
+        en: Vimeiro
+        ru: Вимейру
+      lat: 39.176
+      lng: -9.3154
+      year: 1808
+      date:
+        pt: 21 de agosto
+        en: August 21
+        ru: 21 августа
+      mode: land
+status: ready
+published: 2026-12-19
+placeholder: false
+ru_ready: true

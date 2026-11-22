@@ -1,0 +1,142 @@
+id: terra-nostra-furnas-1780
+slug:
+  pt: a-piscina-do-mercador-de-boston
+  en: the-boston-merchant-s-pool
+  ru: basseyn-bostonskogo-kuptsa
+title:
+  pt: A piscina do mercador de Boston
+  en: The Boston Merchant’s Pool
+  ru: Бассейн бостонского купца
+epoch: pombal-e-terramoto
+level: story
+year: 1780
+place:
+  name:
+    pt: Furnas, ilha de São Miguel
+    en: Furnas, São Miguel Island
+    ru: Фурнаш, остров Сан-Мигел
+  short:
+    pt: Furnas
+    en: Furnas
+    ru: Фурнаш
+  lat: 37.7724025
+  lon: -25.3156276
+bridge:
+  name: Parque Terra Nostra
+  title:
+    pt: Parque Terra Nostra
+    en: Terra Nostra Park
+    ru: Парк Терра-Ностра
+  address: Rua Padre José Jacinto Botelho, Furnas
+  lat: 37.7724025
+  lon: -25.3156276
+  maps_url: https://www.google.com/maps/place/Parque+Terra+Nostra/@37.7724067,-25.3182025,17z/data=!3m1!4b1!4m9!3m8!1s0xb5d20458691350d:0x5681dc2e8a2f621f!5m2!4m1!1i2!8m2!3d37.7724025!4d-25.3156276!16s%2Fg%2F1211qy68
+  url: https://en.wikipedia.org/wiki/Terra_Nostra_Park
+  note:
+    pt: O tanque quente no meio do jardim nasceu do que Hickling construiu em 1780.
+    en: The hot pool in the middle of the garden grew out of the one Hickling built in 1780.
+    ru: Горячий бассейн посреди сада вырос из того, что устроил Хиклинг в 1780 году.
+area: sao-miguel
+threads:
+  - natureza
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Em 1780, um mercador de Boston fez nos Açores uma piscina vulcânica.
+  en: In 1780, a Boston merchant built a volcanic pool in the Azores.
+  ru: В 1780 году бостонский купец устроил на Азорах бассейн с вулканической водой.
+seo:
+  title:
+    pt: Piscina do mercador de Boston · Furnas, 1780
+    en: The Boston Merchant’s Pool · Furnas, 1780 | O Elefante Fugiu
+    ru: Бассейн бостонского купца · Фурнаш, 1780 | O Elefante Fugiu
+story:
+  pt: |-
+    No século XVIII, a ilha de São Miguel vivia da laranja: levavam-na de navio para Inglaterra. Por volta de 1770 chegou à ilha um jovem mercador de Boston, Thomas Hickling, para ganhar dinheiro com esse comércio. E ganhou.
+
+    Já rico, procurou um lugar para uma casa de verão e escolheu um sítio invulgar: o vale das Furnas, onde a água quente brota da terra e, nalguns pontos, até ferve. Em 1780, junto à casa, Hickling fez um tanque de pedra e encaminhou para ele a água de uma nascente. Ficou um lago tépido no meio do jardim, onde se podia tomar banho todo o ano.
+
+    Foi com este tanque que começou o Parque Terra Nostra. Cada novo dono plantou à volta mais árvores, até o jardim chegar aos 12,5 hectares.
+  en: |-
+    In the 18th century, the island of São Miguel lived on oranges, which were shipped to England. Around 1770 a young merchant from Boston, Thomas Hickling, came to the island to make money in that trade. And he did.
+
+    Once he was rich, he looked for a spot for a summer house and picked an unusual one: the Furnas valley, where hot water springs from the ground and in places even boils. In 1780, next to the house, Hickling built a stone pool and piped water into it from a spring. The result was a warm pond in the middle of a garden, where you could swim all year round.
+
+    That pool was the start of Terra Nostra Park. Each new owner planted more trees around it, until the garden grew to 12.5 hectares (31 acres).
+  ru: |-
+    В XVIII веке остров Сан-Мигел жил апельсинами: их возили кораблями в Англию. Около 1770 года на остров приехал молодой купец из Бостона, Томас Хиклинг, чтобы заработать на этой торговле. И заработал.
+
+    Разбогатев, он стал искать место для летнего дома и выбрал необычное: долину Фурнаш, где из-под земли бьёт горячая вода, а кое-где она даже кипит. В 1780 году рядом с домом Хиклинг выложил камнем бассейн и пустил в него воду из источника. Получился тёплый пруд посреди сада, где можно было купаться круглый год.
+
+    С этого бассейна и начался парк Терра-Ностра. Каждый следующий хозяин сажал вокруг него новые деревья, пока сад не разросся до 12,5 гектара.
+more:
+  pt: |-
+    Entretanto, o próprio Hickling mudou de país sem sair da ilha. Partira de Boston súbdito britânico, mas em 1775 começou na sua terra a guerra da independência, e Boston tornou-se americana. Em 1795, o antigo britânico passou a vice-cônsul dos Estados Unidos nos Açores. A família manteve o cargo durante mais de cem anos.
+
+    Depois de Hickling, o jardim mudou de donos. Em meados do século XIX, a propriedade era dos viscondes da Praia: alargaram o jardim e, em 1872, o segundo visconde chamou jardineiros especializados. Nos anos 1930, o parque foi comprado por Vasco Bensaúde. Com ele, o tanque foi ampliado em 1935, e a casa de verão transformou-se em hotel.
+
+    A água continua a vir da nascente, a cerca de 37 graus. Tem tanto ferro que parece castanho-alaranjada e mancha os fatos de banho claros.
+  en: |-
+    Meanwhile, Hickling changed countries without leaving the island. He left Boston a British subject, but in 1775 the War of Independence broke out at home, and Boston became American. In 1795, the former Briton became the U.S. vice consul in the Azores. His family held the post for more than a hundred years.
+
+    After Hickling, the garden changed hands. In the mid-19th century the land belonged to the Viscounts of Praia: they enlarged the garden, and in 1872 the second viscount brought in professional gardeners. In the 1930s Vasco Bensaúde bought the park. Under him the pool was enlarged in 1935, and the summer house was rebuilt as a hotel.
+
+    The water still comes from the spring, at about 37 °C (99 °F). It has so much iron that it looks rusty brown and stains light-colored swimsuits.
+  ru: |-
+    Сам Хиклинг тем временем успел сменить страну, не сходя с острова. Он уехал из Бостона британским подданным, но в 1775 году на его родине началась война за независимость, и Бостон стал американским. В 1795 году бывший британец стал на Азорах вице-консулом США. Эту должность его семья держала больше ста лет.
+
+    После Хиклинга сад сменил хозяев. В середине XIX века землёй владели виконты Прайя: они расширили сад, а в 1872 году второй виконт пригласил садовников-специалистов. В 1930-х парк купил Вашку Бенсауде. При нём бассейн в 1935 году расширили, а летний дом перестроили в гостиницу.
+
+    Вода в бассейне по-прежнему идёт из источника, около 37 градусов. В ней столько железа, что она кажется буровато-рыжей и оставляет пятна на светлых купальниках.
+myth_none: "Утверждение получалось скучным: у бассейна нет расхожего мифа, который стоило бы проверять."
+sources:
+  - title: "Wikipedia: Terra Nostra Park"
+    url: https://en.wikipedia.org/wiki/Terra_Nostra_Park
+    type: reference
+    accessed: 2026-11-22
+  - title: "Kinsmen and Kinswomen: Thomas Hickling and our Portuguese relatives"
+    url: https://kinsmenandkinswomen.com/2016/08/01/thomas-hickling-and-our-portugese-relatives/
+    type: website
+    accessed: 2026-11-22
+  - title: "Hot Springs Guides: Terra Nostra Thermal Pool (iron-rich brown-orange water, stains swimsuits)"
+    url: https://www.hotspringsguides.com/hot-springs/terra-nostra-thermal-pool-portugal
+    type: website
+    accessed: 2026-11-22
+image:
+  file: terra-nostra-furnas-1780.webp
+  alt:
+    pt: "Ilustração ao estilo do azulejo azul e branco: um homem de tricórnio toca com a mão a água fumegante de um tanque de pedra, num vale de montanhas; atrás vê-se uma casa, laranjeiras carregadas e um carro com caixas de laranjas."
+    en: "Blue-and-white azulejo-style illustration: a man in a tricorn hat touches the steaming water of a stone pool in a mountain valley; behind him are a house, laden orange trees, and a cart of crates of oranges."
+    ru: "Иллюстрация в духе сине-белого азулежу: мужчина в треуголке касается рукой дымящейся воды каменного бассейна в горной долине; позади дом, апельсиновые деревья с плодами и повозка с ящиками апельсинов."
+  caption:
+    pt: Thomas Hickling junto ao tanque de água quente, Furnas, 1780. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: Thomas Hickling beside the hot pool, Furnas, 1780. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Томас Хиклинг у горячего бассейна, Фурнаш, 1780 год. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: terra-nostra-furnas-1780-detalhe.webp
+  alt:
+    pt: Fotografia de um tanque de água cor de ferrugem, com uma casa branca entre araucárias e outras árvores na margem.
+    en: Photograph of a pool of rust-colored water, with a white house among araucaria and other trees on the far bank.
+    ru: Фотография бассейна с водой цвета ржавчины; на дальнем берегу среди араукарий и других деревьев стоит белый дом.
+  caption:
+    pt: O tanque de água quente do Parque Terra Nostra, em Furnas.
+    en: The hot pool of Terra Nostra Park in Furnas.
+    ru: Горячий бассейн парка Терра-Ностра в Фурнаше.
+  author: Timur I. Davletshin
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Terra_Nostra_-_A%C3%A7ores.jpg
+related:
+  - cha-gorreana
+  - ananas-acores-1875
+status: ready
+published: 2026-12-17
+placeholder: false
+ru_ready: true
