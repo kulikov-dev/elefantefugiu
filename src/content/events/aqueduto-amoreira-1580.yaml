@@ -48,6 +48,11 @@ hook:
   pt: Ao render-se, Elvas exigiu que o rei de Espanha acabasse o aqueduto.
   en: Surrendering to Spain’s king, Elvas demanded he finish its aqueduct.
   ru: Сдаваясь испанскому королю, Эльваш потребовал достроить ему акведук.
+seo:
+  title:
+    pt: O aqueduto negociado · Elvas, 1580
+    en: The Bargained Aqueduct · Elvas, 1580
+    ru: Акведук, который выторговали · Эльваш, 1580
 story:
   pt: |-
     Elvas é uma cidade-fortaleza num monte, mesmo junto à fronteira espanhola. No século XVI os poços começaram a secar, e decidiu-se trazer água da Amoreira, a sete quilómetros. As obras começaram por volta de 1529, o arquiteto Francisco de Arruda refez o projeto, e a construção arrastou-se por décadas.
@@ -128,6 +133,6 @@ detail_image:
   license_url: https://creativecommons.org/licenses/by-sa/4.0/
   source_url: https://commons.wikimedia.org/wiki/File:Aqueduto_da_Amoreira_-_Elvas_Portugal.jpg
 status: ready
-published: 2026-12-26
+published: 2026-12-25
 placeholder: false
 ru_ready: true

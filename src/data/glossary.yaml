@@ -348,3 +348,80 @@
   text:
     ru: "Стихотворное «завещание», которое в деревне Лазарин в карнавальный вторник читают на площади: в нём в шутку высмеивают деревенских парней, а парни отвечают своим «завещанием кума»."
     en: "A verse “will” read in the square in Lazarim on Shrove Tuesday: it pokes fun at the village men, and the men answer with their own “will of the compadre.”"
+
+- id: cortes
+  term: cortes
+  inline: false
+  name: { ru: кортесы, en: Cortes }
+  forms:
+    ru: [кортес*]
+    en: [Cortes]
+  text:
+    ru: "Собрание духовенства, знати и городов, которое созывал король. В Томаре в 1581 году кортесы признали Филиппа II королём Португалии, и он обещал сохранить португальские законы и язык."
+    en: "An assembly of the clergy, nobles and towns called together by the king. At Tomar in 1581 the Cortes accepted Philip II as king of Portugal, and he promised to keep Portuguese laws and language."
+
+- id: bula
+  term: bula
+  inline: true
+  name: { ru: булла, en: papal bull }
+  forms:
+    ru: [булл*]
+    en: [papal bull*]
+  text:
+    ru: "Торжественный указ папы римского, скреплённый свинцовой печатью (по-латыни bulla). Две буллы XVII века запретили женщинам входить в лес Бусаку и грозили отлучением тем, кто вредит деревьям."
+    en: "A solemn decree of the pope, sealed with a lead seal (Latin bulla). Two 17th-century bulls banned women from the Buçaco forest and threatened with excommunication anyone who harmed its trees."
+
+- id: cruzado
+  term: cruzado
+  inline: true
+  name: { ru: крузаду, en: cruzado }
+  forms:
+    ru: [крузаду]
+    en: [cruzado*]
+  text:
+    ru: "Португальская золотая монета XV–XVI веков, названная по кресту на ней. В 1597 году университет Коимбры купил королевский дворец за 30 тысяч крузаду."
+    en: "A Portuguese gold coin of the 15th and 16th centuries, named for the cross on it. In 1597 the University of Coimbra bought the royal palace for 30,000 cruzados."
+
+- id: claustro
+  term: claustro
+  inline: false
+  name: { ru: клуатр, en: cloister }
+  forms:
+    ru: [клуатр*]
+    en: []
+  text:
+    ru: "Внутренний двор монастыря с крытой галереей по четырём сторонам: монахи ходили по ней, молились и читали. Вокруг клуатра стояли церковь и главные помещения обители."
+    en: "The inner courtyard of a monastery with a covered walkway on four sides, where the monks walked, prayed and read. The church and the main rooms of the house stood around it."
+
+- id: clarissas
+  term: clarissas
+  inline: true
+  name: { ru: кларисски, en: Poor Clares }
+  forms:
+    ru: [кларисс*]
+    en: [Poor Clares]
+  text:
+    ru: "Женский монашеский орден, который основала Клара Ассизская рядом со святым Франциском. Кларисски живут в бедности и затворе. В Коимбре их монастырём был Санта-Клара-а-Велья."
+    en: "A women’s religious order founded by Clare of Assisi alongside Saint Francis. The Poor Clares live in poverty and seclusion. In Coimbra their house was Santa Clara-a-Velha."
+
+- id: carmelitas
+  term: carmelitas
+  inline: true
+  name: { ru: кармелиты, en: Carmelites }
+  forms:
+    ru: [кармелит*]
+    en: [Carmelite*]
+  text:
+    ru: "Католический орден, который возник на горе Кармель. Босые кармелиты искали молчания и молитвы: в 1628 году они получили лес Бусаку и построили там монастырь."
+    en: "A Catholic order that began on Mount Carmel. The Discalced Carmelites sought silence and prayer: in 1628 they received the Buçaco forest and built a convent there."
+
+- id: arcabuz
+  term: arcabuz
+  inline: true
+  name: { ru: аркебуза, en: arquebus }
+  forms:
+    ru: [аркебуз*]
+    en: [arquebus*]
+  text:
+    ru: "Раннее ружьё XV–XVI веков, предшественник мушкета: порох поджигали тлеющим фитилём. Испанцы оставили в крепости Ангры почти четыреста аркебуз."
+    en: "An early gun of the 15th and 16th centuries, the forerunner of the musket: the powder was lit with a smouldering match. The Spanish left almost four hundred arquebuses in the fortress at Angra."

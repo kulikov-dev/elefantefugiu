@@ -20,8 +20,8 @@ place:
     pt: Angra
     en: Angra
     ru: Ангра
-  lat: 38.6514417
-  lon: -27.2268639
+  lat: 38.6504001
+  lon: -27.2259235
 bridge:
   name: Fortaleza de São João Baptista
   title:
@@ -29,9 +29,9 @@ bridge:
     en: Fortress of São João Baptista, Angra do Heroísmo
     ru: Крепость Сан-Жуан-Баптишта, Ангра-ду-Эроишму
   address: Monte Brasil, Angra do Heroísmo
-  lat: 38.6514417
-  lon: -27.2268639
-  maps_url: https://www.google.com/maps/search/?api=1&query=38.6514417,-27.2268639
+  lat: 38.6504001
+  lon: -27.2259235
+  maps_url: https://www.google.com/maps/place/Fortress+of+St.+John+of+Monte+Brasil/@38.6504001,-27.2259235,17z/data=!4m6!3m5!1s0xb467f3e46c478ad:0xf9eba0e2d1a991e0!8m2!3d38.6504001!4d-27.2259235!16s%2Fm%2F04zhl8w
   url: https://en.wikipedia.org/wiki/Fortress_of_S%C3%A3o_Jo%C3%A3o_Baptista_(Angra_do_Hero%C3%ADsmo)
   note:
     pt: A fortaleza continua militar; visitas guiadas por militares.
@@ -48,6 +48,11 @@ hook:
   pt: Os últimos espanhóis só saíram de Portugal em 1642.
   en: The last Spaniards didn’t leave Portugal until 1642.
   ru: Последние испанцы ушли из Португалии только в 1642 году.
+seo:
+  title:
+    pt: Os espanhóis que não se foram · Angra, 1641
+    en: The Spaniards Who Wouldn’t Leave · Angra, 1641
+    ru: Испанцы, которые не ушли · Ангра, 1641
 story:
   pt: |-
     Quando em 1580 Portugal passou para o rei de Espanha, a ilha Terceira foi a que resistiu mais tempo. Por isso os espanhóis construíram no Monte Brasil, sobre Angra, uma enorme fortaleza e deram-lhe o nome do rei, São Filipe. Devia manter em obediência a própria ilha.
@@ -71,15 +76,15 @@ more:
   pt: |-
     Na fortaleza os espanhóis deixaram 138 peças de artilharia, quase quatrocentos arcabuzes e quatrocentos mosquetes. A fortaleza passou a ser de São João Baptista, em honra do padroeiro do novo rei D. João, e nesse mesmo ano de 1642 construiu-se lá dentro a igreja de São João Baptista.
 
-    Os soldados ficaram, só que agora portugueses: a fortaleza ainda pertence ao exército. As muralhas estendem-se por vários quilómetros na encosta do Monte Brasil, e delas vê-se toda a baía de Angra. A fortaleza construída para manter a ilha em obediência hoje protege-a.
+    Os soldados ficaram, só que agora portugueses: a fortaleza ainda pertence ao exército. As muralhas estendem-se pela encosta do Monte Brasil, e delas vê-se toda a baía de Angra. A fortaleza construída para manter a ilha em obediência hoje protege-a.
   en: |-
     The Spanish left behind 138 cannons, nearly four hundred arquebuses, and four hundred muskets. The fortress was renamed for John the Baptist, patron saint of the new King John, and that same year, 1642, the church of São João Baptista was built inside.
 
-    Soldiers stayed on, only now they were Portuguese: the fortress still belongs to the army. Its walls run for several kilometers along the slope of Monte Brasil, with a view over the whole bay of Angra. The fortress built to keep the island in line now guards it.
+    Soldiers stayed on, only now they were Portuguese: the fortress still belongs to the army. Its walls run along the slope of Monte Brasil, with a view over the whole bay of Angra. The fortress built to keep the island in line now guards it.
   ru: |-
     В крепости испанцы оставили 138 пушек, почти четыреста аркебуз и четыреста мушкетов. Крепость переименовали в честь Иоанна Крестителя, небесного покровителя нового короля Жуана, и в том же 1642 году внутри построили церковь Сан-Жуан-Баптишта.
 
-    Солдаты в ней так и остались, только португальские: крепость до сих пор принадлежит армии. Её стены тянутся по склону Монте-Бразил на несколько километров, и с них видно всю бухту Ангры. Крепость, которую строили, чтобы держать остров в повиновении, теперь его охраняет.
+    Солдаты в ней так и остались, только португальские: крепость до сих пор принадлежит армии. Её стены тянутся по склону Монте-Бразил, и с них видно всю бухту Ангры. Крепость, которую строили, чтобы держать остров в повиновении, теперь его охраняет.
 myth:
   verdict: myth
   statement:
