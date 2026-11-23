@@ -45,7 +45,7 @@ const pfHook = indexed ? { 'data-pagefind-body': '', 'data-pagefind-weight': '4'
       {routeAside ? <div class="layers__meanwhile"><slot name="meanwhile" /></div> : <slot name="meanwhile" />}
 
       <!-- Then, before "More": the small "I liked it" (src/components/LikeButton.astro), on the right edge of the text column (from 768 px on the left edge). -->
-      <div class="story__like"><slot name="like" /></div>
+      <div class="story__like" data-nosnippet><slot name="like" /></div>
     </div>
     {
       hasAside && (

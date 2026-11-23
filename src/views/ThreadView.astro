@@ -44,7 +44,7 @@ const schema = pageNodes(schemaCtx, { url: schemaCtx.abs(alternates[lang]), name
       </h1>
       <p class="thread-page__description">{thread.description[lang]}</p>
       <p class="thread-page__count">
-        {countVariants(totalCounts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+        <span data-nosnippet>{countVariants(totalCounts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}</span>
       </p>
     </header>
 

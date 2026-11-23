@@ -24,7 +24,7 @@ export function seoLines() {
       const event = localize(raw, raw.ru_ready === true);
       const epochName = localize(epochs.find((e) => e.id === raw.epoch)?.name ?? { pt: '', en: '' }, raw.ru_ready === true);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const lines = Object.fromEntries(SEO_LANGS.map((lang) => [lang, { title: storySeoTitle(event as any, lang), description: storySeoDescription(event as any, lang, epochName[lang]), own: Boolean(event.seo?.title?.[lang] || event.seo?.description?.[lang]) }]));
-      return { id: raw.id as string, slug: (raw.slug?.pt ?? raw.id) as string, raw, event, lines: lines as Record<Lang, { title: string; description: string; own: boolean }> };
+      const lines = Object.fromEntries(SEO_LANGS.map((lang) => [lang, { title: storySeoTitle(event as any, lang), description: storySeoDescription(event as any, lang, epochName[lang]), before: storySeoDescription(event as any, lang, epochName[lang], { named: false }), own: Boolean(event.seo?.title?.[lang] || event.seo?.description?.[lang]) }]));
+      return { id: raw.id as string, slug: (raw.slug?.pt ?? raw.id) as string, raw, event, lines: lines as Record<Lang, { title: string; description: string; before: string; own: boolean }> };
     });
 }

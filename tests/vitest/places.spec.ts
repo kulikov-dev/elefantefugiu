@@ -142,8 +142,9 @@ describe('the titles and links of search', () => {
     expect(placeSeoTitle(city, 12, 'en')).toContain('12 stories');
   });
 
-  it('the description is the introduction, cut at a word', () => {
+  it('the description is the first sentence of the introduction, cut at a word', () => {
     expect(placeSeoDescription('Short.')).toBe('Short.');
+    expect(placeSeoDescription('First one. Second one.')).toBe('First one.');
     expect(placeSeoDescription('word '.repeat(80)).length).toBeLessThanOrEqual(160);
   });
 

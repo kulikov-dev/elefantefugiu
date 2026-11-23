@@ -37,6 +37,31 @@ const text = (html) => html.replace(/<[^>]+>/g, ' ').replace(/&[a-z]+;|&#\d+;/g,
 const MODES = ['off', 'all', '12'];
 const shownIn = (e, mode) => mode === 'off' || (!e.sensitive && (String(e.min_age) === 'all' || (mode === '12' && String(e.min_age) === '12')));
 const idOfHref = (href, lang) => events.find((e) => href.includes(`/${SEGMENT[lang]}/${e.slug[lang]}/`))?.id;
+// data-nosnippet (the search engine leaves such an element out of the snippet): works only on <div>, <span> and <section>.
+const VOID_TAGS = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);
+/** Is the first match of `re` inside an element that carries data-nosnippet? (false when there is no match; the caller checks that separately) */
+function insideNosnippet(html, re) {
+  const at = html.search(re);
+  if (at < 0) return false;
+  const stack = [];
+  for (const [, close, name, attrs, self] of html.slice(0, at).matchAll(/<(\/?)([a-zA-Z][\w:-]*)([^>]*?)(\/?)>/g)) {
+    const tag = name.toLowerCase();
+    if (VOID_TAGS.has(tag) || self) continue;
+    if (close) while (stack.length > 0 && stack.pop().tag !== tag);
+    else stack.push({ tag, ns: /\sdata-nosnippet(?=[\s=>]|$)/.test(` ${attrs}`) });
+  }
+  return stack.some((e) => e.ns);
+}
+/** The words of the title (four letters and more) found in the text by their first five letters, as src/lib/seo.ts hookHasName does; written out here independently. */
+const foldText = (x) => x.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+const mentionsName = (name, textOf) => {
+  const words = (x) => foldText(x).match(/[\p{L}\p{N}]+/gu) ?? [];
+  const have = words(textOf);
+  if (have.join(' ').includes(words(name).join(' '))) return true;
+  const main = words(name).filter((w) => w.length >= 4);
+  return main.length > 0 && main.every((w) => have.some((h) => h.startsWith(w.slice(0, Math.min(w.length, 5)))));
+};
+const unescape = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 const attrsOf = (tag) => (name) => tag.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`))?.[1];
 
 for (const ev of events) {
@@ -236,6 +261,15 @@ for (const ev of events) {
       if ((threadCount.get(ev.threads[i]) ?? 0) < 5) return;
       if (chip[1] !== 'a' || !/href="[^"]*\/(fio|thread)\/[^"]+\/"/.test(chip[0])) fail('thread chip is not a link to a thread page');
     });
+    // The service lines (crumbs, "year · place", labels and threads) are inside data-nosnippet: a search snippet shows the hook or the story, not them.
+    for (const [what, re] of [['breadcrumbs', /<nav class="crumbs"/], ['the "year · place" line', /<span aria-hidden="true"[^>]*> &middot; <\/span>/], ['the credibility label and the thread chips', /<ul class="tags"/]]) {
+      if (!insideNosnippet(html, re)) fail(`${what} must be inside an element with data-nosnippet`);
+    }
+    // The description carries the name of the story (or its main words) unless the story gives its own `seo.description`.
+    const metaDescription = unescape(full.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '').trim();
+    if (!metaDescription) fail('the meta description is empty');
+    else if (metaDescription.length > 160) fail(`the meta description is ${metaDescription.length} characters, 160 at most`);
+    else if (!ev.seo?.description?.[lang] && !mentionsName(ev.title[lang], metaDescription)) fail(`the meta description does not carry the name of the story: "${metaDescription}"`);
     // Epoch crumb leads to the epoch page, not to the home page.
     const crumb = html.match(/<nav class="crumbs"[\s\S]*?<\/nav>/)?.[0] ?? '';
     if (!/<a href="[^"]*\/(epoca|era)\/[^"]+\/"/.test(crumb)) fail('epoch crumb is not a link to an epoch page');
@@ -336,7 +370,6 @@ for (const ev of events) {
 }
 
 // ----- search titles and descriptions of every indexable page (src/lib/seo.ts): not empty, a title up to 65 characters, a description up to 160, no two pages with one title -----
-const unescape = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 const titles = new Map();
 let indexable = 0;
 const walk = (dir) => {
@@ -355,6 +388,8 @@ const walk = (dir) => {
       else if (title.length > 65) errors.push(`${where}: the <title> is ${title.length} characters, 65 at most (give the story a \`seo.title\`): "${title}"`);
       if (!description) errors.push(`${where}: the meta description is empty`);
       else if (description.length > 160) errors.push(`${where}: the meta description is ${description.length} characters, 160 at most`);
+      // data-nosnippet works on div, span and section only; on another tag it does nothing.
+      for (const m of html.matchAll(/<([a-zA-Z][\w-]*)\b[^>]*\sdata-nosnippet(?=[\s=>])/g)) if (!['div', 'span', 'section'].includes(m[1].toLowerCase())) errors.push(`${where}: data-nosnippet on <${m[1]}> does nothing (div, span, section only)`);
       if (title) titles.set(title, [...(titles.get(title) ?? []), where]);
     }
   }

@@ -79,8 +79,10 @@ const schema = placeNodes(schemaCtx, {
   <div class="place">
     <header class="place__head">
       <p class="place__crumb">
-        <a href={pagePath(lang, 'places')}>{t(lang, 'pages.places.title')}</a>
-        {parentPage && <><span aria-hidden="true"> / </span><a href={placePath(lang, parentPage.place.id)}>{parentPage.place.name[lang]}</a></>}
+        <span data-nosnippet>
+          <a href={pagePath(lang, 'places')}>{t(lang, 'pages.places.title')}</a>
+          {parentPage && <><span aria-hidden="true"> / </span><a href={placePath(lang, parentPage.place.id)}>{parentPage.place.name[lang]}</a></>}
+        </span>
       </p>
       {
         cover && place.cover && (
@@ -95,14 +97,14 @@ const schema = placeNodes(schemaCtx, {
               style={place.cover.focus ? `object-position: ${place.cover.focus}` : undefined}
               decoding="async"
             />
-            {place.cover.credit && <figcaption class="place__credit">{place.cover.credit[lang]}</figcaption>}
+            {place.cover.credit && <figcaption class="place__credit"><span data-nosnippet>{place.cover.credit[lang]}</span></figcaption>}
           </figure>
         )
       }
       <h1>{h1}</h1>
       <p class="place__intro">{intro.text}</p>
       <p class="place__count">
-        {countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}
+        <span data-nosnippet>{countVariants(counts).map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{plural(lang, 'plural.stories', v.value)}</span>)}</span>
       </p>
     </header>
 

@@ -112,7 +112,7 @@ const newData = site.events.map((e) => ({ id: e.id, epoch: e.epoch, published: e
       data-template={t(lang, 'home.continue')}
       data-targets={JSON.stringify(continueTargets)}
       hidden
-    >{t(lang, 'home.continue').replace('{name}', firstEpoch?.name[lang] ?? '')}</a>
+    ><span data-nosnippet>{t(lang, 'home.continue').replace('{name}', firstEpoch?.name[lang] ?? '')}</span></a>
 
     <!-- "Since your last visit: N new stories" with the epochs (the script fills and shows it; nothing when N is 0, on a first visit, without storage). -->
     <p

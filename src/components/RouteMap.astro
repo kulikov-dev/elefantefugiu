@@ -21,7 +21,7 @@ const caption = `${t(lang, 'route.caption').replace('{path}', map.path)}${map.ye
 const maskId = `route-mask-${id}`;
 const captionId = `route-caption-${id}`;
 ---
-<section class="route" data-route aria-labelledby={captionId} lang={textLang}>
+<section class="route" data-route data-nosnippet aria-labelledby={captionId} lang={textLang}>
   <p class="route__caption" id={captionId}>{caption}</p>
   <div class="route__frame">
     <svg class="route__svg" viewBox={`0 0 ${map.w} ${map.h}`} role="img" aria-label={caption} focusable="false">

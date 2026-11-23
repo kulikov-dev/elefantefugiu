@@ -9,8 +9,7 @@ import { plural, t } from '../i18n';
 import type { Lang } from '../i18n/routes';
 import type { PlaceInput } from '../data/schemas';
 import { distanceKm, yearRange, yearText } from './events';
-import { cutAtWord } from './og-text';
-import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX } from './seo';
+import { SEO_DESCRIPTION_MAX, SEO_TITLE_MAX, firstSentence } from './seo';
 
 export type PlaceData = PlaceInput;
 
@@ -225,8 +224,8 @@ export function mapPlaces<S extends PlaceStory>(pages: readonly PlacePage<S>[], 
   return [...pages].sort((a, b) => a.stories.length - b.stories.length || a.place.radius_km - b.place.radius_km).map((p) => ({ href: href(p.place.id), label: placeAllLabel(p.place, lang), ids: p.stories.map((s) => s.id) }));
 }
 
-/** The description: the introduction, cut at a word. */
-export const placeSeoDescription = (intro: string): string => cutAtWord(intro.replace(/\s+/g, ' ').trim(), SEO_DESCRIPTION_MAX - 5);
+/** The description: the first sentence of the introduction (it describes the place itself), cut at a word when longer than the limit. */
+export const placeSeoDescription = (intro: string): string => firstSentence(intro, SEO_DESCRIPTION_MAX - 5);
 
 // ---- what to see today ----
 

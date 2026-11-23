@@ -51,19 +51,67 @@ export function storySeoTitle(event: SeoEvent, lang: Lang): string {
   return fit([...candidates, name], TITLE_TARGET);
 }
 
+/** The words of a text, folded (no accents, lower case), as a list. */
+const wordsOf = (s: string): string[] => fold(s).match(/[\p{L}\p{N}]+/gu) ?? [];
+
 /**
- * The description of a story page: the hook and one sentence about the place to visit today (without a place, the epoch); up to about 155 characters.
- * Too long: the sentence with the short place of the event instead, then the hook alone (cut at a word only when the hook itself is too long).
+ * Does the hook already carry the name of the story (or its main words)? A search that types the name of the story ("рим не платит предателям") must find
+ * the words in the description, or the engine takes a piece of the page instead (the service line under the heading). The main words are the ones
+ * of four letters and more; one is found when a word of the hook starts with its first five letters (so "предателям" is found in "предатели").
  */
-export function storySeoDescription(event: SeoEvent, lang: Lang, epochName: string): string {
+export function hookHasName(title: string, hook: string): boolean {
+  const hookWords = wordsOf(hook);
+  if (hookWords.join(' ').includes(wordsOf(title).join(' '))) return true;
+  const main = wordsOf(title).filter((w) => w.length >= 4);
+  return main.length > 0 && main.every((w) => hookWords.some((h) => h.startsWith(w.slice(0, Math.min(w.length, 5)))));
+}
+
+/** The text with a full stop at the end (a question or exclamation mark, a quote or a bracket after the mark stays as it is). */
+const closeSentence = (s: string): string => (/[.!?…]["”')\]»]*$/u.test(s) ? s : `${s}.`);
+
+/**
+ * The description of a story page: the name of the story when the hook does not carry it, the hook, and one sentence about the place to visit today
+ * (without a place, the epoch); up to about 155 characters. Too long: the sentence with the short place of the event instead, then no place sentence at all
+ * (the name and the hook stay; only a text that is too long even without the place is cut at a word). `named: false` is the template of before the name was added.
+ */
+export function storySeoDescription(event: SeoEvent, lang: Lang, epochName: string, { named = true }: { named?: boolean } = {}): string {
   const own = event.seo?.description?.[lang]?.trim();
   if (own) return own;
   const hook = event.hook[lang].trim();
-  const closed = /[.!?…]["”')\]]*$/u.test(hook) ? hook : `${hook}.`;
+  const name = event.title[lang].trim();
+  const head = named && !hookHasName(name, hook) ? `${closeSentence(name)} ${closeSentence(hook)}` : closeSentence(hook);
   const places = seoPlaces(event, lang);
-  const sentences = places.length > 0 ? places.map((p) => t(lang, 'seo.story_visit').replace('{place}', p)) : [`${epochName}.`];
-  const whole = sentences.map((sentence) => `${closed} ${sentence}`).find((d) => d.length <= DESCRIPTION_TARGET);
-  return whole ?? cutAtWord(closed, DESCRIPTION_TARGET);
+  const sentences = places.length > 0 ? places.map(closeSentence) : [`${epochName}.`];
+  const whole = sentences.map((sentence) => `${head} ${sentence}`).find((d) => d.length <= DESCRIPTION_TARGET);
+  return whole ?? cutAtWord(head, DESCRIPTION_TARGET);
+}
+
+/**
+ * The first sentence of a text ("Alfama is the oldest quarter of Lisbon, ..."). A full stop after a short word or a known abbreviation ("a.C.", "в.", "séc.") does not end it.
+ * A sentence over `max` is cut at a word.
+ */
+export function firstSentence(text: string, max = DESCRIPTION_TARGET): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  const abbreviations = new Set(['sec', 'cap', 'ed', 'trad', 'sta', 'tel', 'vol', 'etc', 'млн', 'тыс', 'млрд', 'гг', 'рис']);
+  const boundary = /[.!?…]["”')\]»]*\s+(?=[\p{Lu}«"“(\d])/gu;
+  for (let m = boundary.exec(clean); m; m = boundary.exec(clean)) {
+    const before = clean.slice(0, m.index + 1).match(/(\p{L}+)\.$/u)?.[1];
+    if (before && (before.length <= 2 || abbreviations.has(fold(before)))) continue;
+    return cutAtWord(clean.slice(0, m.index + m[0].trimEnd().length), max);
+  }
+  return cutAtWord(clean, max);
+}
+
+/**
+ * The description of an epoch page: its own `description` when the data has one; otherwise the first sentence of the introduction (the epoch itself, not a list of
+ * its stories); otherwise the theme phrase.
+ */
+export function epochSeoDescription(epoch: Pick<EpochData, 'description' | 'intro' | 'theme' | 'name'>, lang: Lang): string {
+  const own = epoch.description?.[lang]?.trim();
+  if (own) return own;
+  const intro = epoch.intro?.[lang]?.trim();
+  if (intro) return firstSentence(intro);
+  return epoch.theme?.[lang]?.trim() || epoch.name[lang];
 }
 
 /** The <title> of an epoch page: "{name} ({years}): stories from Portugal | {site}"; too long: without the site, then without the years, then the name with the years only, then the name. */

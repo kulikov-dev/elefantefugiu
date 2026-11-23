@@ -209,7 +209,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
   <body>
     {
       chrome.map((l) => (
-        <div class="lang-block" data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
+        <div class="lang-block" data-nosnippet data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
           <a class="skip-link" href="#main">{t(l, 'a11y.skip_to_content')}</a>
           <SiteHeader lang={l} pageKey={pageKey} alternates={alternatesProp} activeLangs={activeLangs} />
         </div>
@@ -222,7 +222,7 @@ const OG_LOCALE = (l: Lang) => LOCALES[l].replace('-', '_');
     </main>
     {
       chrome.map((l) => (
-        <div class="lang-block" data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
+        <div class="lang-block" data-nosnippet data-notfound-lang={allLangs ? l : undefined} lang={allLangs ? l : undefined} hidden={allLangs && l !== lang}>
           <SiteFooter lang={l} />
           <TabBar lang={l} active={tab} />
         </div>

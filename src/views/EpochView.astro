@@ -4,7 +4,7 @@
 // Wide screen: feed on the left, the map stays on screen on the right. One switch "Timeline · Cards · Map" (the map is a position of it on a phone only).
 // The map needs JavaScript: without it the page is the plain feed (everything map-related starts hidden).
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { epochSeoTitle } from '../lib/seo';
+import { epochSeoDescription, epochSeoTitle } from '../lib/seo';
 import EventCard from '../components/EventCard.astro';
 import EpochSwitcher from '../components/EpochSwitcher.astro';
 import FamilyNote from '../components/FamilyNote.astro';
@@ -86,11 +86,13 @@ const card = epochCardPath(epoch.id, lang);
 const previewUrl = card ? withBase(card) : epochPic ? await previewImageUrl(epochPic) : undefined;
 // Pages that show test text stay out of search results until the text is real.
 const noindex = epochHasTestText(epoch) || feed.some((e) => e.placeholder);
+// The meta description: its own, else the first sentence of the introduction, else the theme phrase (src/lib/seo.ts).
+const seoDescription = epochSeoDescription(epoch, lang);
 const schemaCtx = schemaContext(lang, Astro.site);
 const schema = epochNodes(schemaCtx, {
   url: schemaCtx.abs(alternates[lang]),
   name: epoch.name[lang],
-  description: epoch.description?.[lang] ?? epoch.theme?.[lang] ?? epoch.name[lang],
+  description: seoDescription,
   stories: feed.map((e) => ({ url: schemaCtx.abs(storyPath(lang, e.slug[lang])), name: e.title[lang] })),
 });
 ---
@@ -99,7 +101,7 @@ const schema = epochNodes(schemaCtx, {
   title={epoch.name[lang]}
   seoTitle={epochSeoTitle(epoch, lang)}
   alternates={alternates}
-  description={epoch.description?.[lang] ?? epoch.theme?.[lang]}
+  description={seoDescription}
   preview={{ title: epoch.name[lang], image: typeof epoch.fallback_image === 'string' ? epoch.fallback_image : undefined, imageUrl: previewUrl, imageSize: card ? OG_CARD : undefined, imageAlt: epochPic?.alt[lang] }}
   noindex={noindex}
   schema={schema}
@@ -112,8 +114,8 @@ const schema = epochNodes(schemaCtx, {
     <header class="epoch__header">
       <h1>{epoch.name[lang]}</h1>
       <p class="epoch__years">
-        {epochYearsText(epoch, lang)}
-        {!epoch.panno && <span class="epoch__read" data-read-progress data-locale={LOCALES[lang]} {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.read_progress')).map(([k, v]) => [`data-${k}`, v]))} aria-live="polite">{plural(lang, 'plural.read_progress', 0).replace('{m}', String(feed.length))}</span>}
+        <span data-nosnippet>{epochYearsText(epoch, lang)}</span>
+        {!epoch.panno && <span class="epoch__read" data-nosnippet data-read-progress data-locale={LOCALES[lang]} {...Object.fromEntries(Object.entries(pluralForms(lang, 'plural.read_progress')).map(([k, v]) => [`data-${k}`, v]))} aria-live="polite">{plural(lang, 'plural.read_progress', 0).replace('{m}', String(feed.length))}</span>}
       </p>
       {epoch.theme && <p class="epoch__theme">{epoch.theme[lang]}</p>}
       {intro && <p class="epoch__intro">{intro}</p>}
@@ -122,9 +124,9 @@ const schema = epochNodes(schemaCtx, {
     </div>
     <div class="azulejo-rule" aria-hidden="true"></div>
 
-    <EpochSwitcher lang={lang} items={switcherItems} />
+    <div data-nosnippet><EpochSwitcher lang={lang} items={switcherItems} /></div>
 
-    <div class="tools" data-epoch-tools data-threads={site.threads.map((th) => th.id).join(',')}>
+    <div class="tools" data-nosnippet data-epoch-tools data-threads={site.threads.map((th) => th.id).join(',')}>
       {
         chips.length > 0 && (
           <noscript>
@@ -248,12 +250,14 @@ const schema = epochNodes(schemaCtx, {
 
     <ThenNow lang={lang} epoch={epoch} events={site.events} />
 
-    <PagerNav
-      label={t(lang, 'epoch.neighbours_label')}
-      prev={neighbour(prev, `\u2190 ${t(lang, 'epoch.prev')}`, 'prev')}
-      next={neighbour(next, `${t(lang, 'epoch.next')} \u2192`, 'next')}
-      mascot={walkingAllowed ? 'walk' : undefined}
-    />
+    <div data-nosnippet>
+      <PagerNav
+        label={t(lang, 'epoch.neighbours_label')}
+        prev={neighbour(prev, `\u2190 ${t(lang, 'epoch.prev')}`, 'prev')}
+        next={neighbour(next, `${t(lang, 'epoch.next')} \u2192`, 'next')}
+        mascot={walkingAllowed ? 'walk' : undefined}
+      />
+    </div>
   </div>
 </BaseLayout>
 

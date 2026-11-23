@@ -18,8 +18,10 @@ const variants = hiddenByMode(cards);
 {
   variants.map((variant) => (
     <p class="family-note fv fv--block" data-modes={variant.modes.join(' ')} data-family-note>
+      <span data-nosnippet>
       {t(lang, 'family.hidden').replace('{n}', String(variant.value))}{' '}
       <button type="button" class="linklike" data-family-set="off">{t(lang, 'family.show_hidden')}</button>
+      </span>
     </p>
   ))
 }

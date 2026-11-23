@@ -29,7 +29,7 @@ const title = data.title?.[lang] ?? t(lang, 'viz.army_title');
 // The description read by screen readers: every group with its note, then the line under the drawing.
 const desc = [...data.groups.map((g) => `${g.label[lang]}: ${g.note[lang]}`), summary].join(' ');
 ---
-<section class="viz" aria-labelledby="viz-title" data-interactive="army_dots">
+<section class="viz" aria-labelledby="viz-title" data-interactive="army_dots" data-nosnippet>
   <!-- Styles travel with the component: only pages that render it get them (a <style> block of a component would join the stylesheet of every card page). -->
   <style is:inline set:html={baseCss + ownCss}></style>
   <h2 id="viz-title">{title}</h2>

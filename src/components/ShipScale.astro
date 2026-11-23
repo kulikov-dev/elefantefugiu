@@ -34,7 +34,7 @@ const LEGEND_ROW = 18;
 const legendHeight = LEGEND_ROW * ships.length + 8;
 const text = `${title}: ${data.caption[lang]}`;
 ---
-<section class="viz" aria-labelledby="viz-title" data-interactive="ship_scale">
+<section class="viz" aria-labelledby="viz-title" data-interactive="ship_scale" data-nosnippet>
   <!-- Styles travel with the component: only pages that render it get them (a <style> block of a component would join the stylesheet of every card page). -->
   <style is:inline set:html={baseCss + ownCss}></style>
   <h2 id="viz-title">{title}</h2>

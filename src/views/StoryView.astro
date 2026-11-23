@@ -219,25 +219,31 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
   epoch={epoch.id}
 >
   <article class="card" {...(indexed ? searchAttrs(event, lang) : {})} data-flash={isFlashMoment(event) ? '' : undefined} data-gate-modes={gateModes.length > 0 ? gateModes.join(' ') : undefined}>
+    {/* data-nosnippet: the service lines (crumbs, year and place, labels, gate, buttons) stay out of the search snippet; the hook and the story are what a snippet may show. */}
     {isCabinet && <p class="cab-ribbon">{t(lang, 'cabinet.ribbon')}</p>}
-    <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
-      <ol>
-        <li>{epochLink ? <a href={epochLink}>{epoch.name[lang]}</a> : <span class="crumbs__text">{epoch.name[lang]}</span>}</li>
-        <li aria-current="page"><span class="crumbs__text">{title}</span></li>
-      </ol>
-    </nav>
+    <div data-nosnippet>
+      <nav class="crumbs" aria-label={t(lang, 'card.breadcrumb')}>
+        <ol>
+          <li>{epochLink ? <a href={epochLink}>{epoch.name[lang]}</a> : <span class="crumbs__text">{epoch.name[lang]}</span>}</li>
+          <li aria-current="page"><span class="crumbs__text">{title}</span></li>
+        </ol>
+      </nav>
+    </div>
 
-    {standIn && <p class="notice" role="note" data-not-translated>{t(lang, 'card.not_translated')}</p>}
-    {event.placeholder && <PlaceholderNotice lang={lang} />}
+    {standIn && <div data-nosnippet><p class="notice" role="note" data-not-translated>{t(lang, 'card.not_translated')}</p></div>}
+    {event.placeholder && <div data-nosnippet><PlaceholderNotice lang={lang} /></div>}
 
     <header class="card__header">
       <h1 {...pfWeight(10)}>{title}</h1>
       <p class="card__meta" {...pfWeight(6)}>
-        <span>{formatYear(event, lang)}</span>
-        <span aria-hidden="true"> &middot; </span>
-        {headerPlace ? <a href={placePath(lang, headerPlace.place.id)}>{event.place.name[lang]}</a> : <span>{event.place.name[lang]}</span>}
+        <span data-nosnippet>
+          <span>{formatYear(event, lang)}</span>
+          <span aria-hidden="true"> &middot; </span>
+          {headerPlace ? <a href={placePath(lang, headerPlace.place.id)}>{event.place.name[lang]}</a> : <span>{event.place.name[lang]}</span>}
+        </span>
       </p>
-      <ul class="tags gated" aria-label={t(lang, 'card.tags')}>
+      <div data-nosnippet class="gated">
+      <ul class="tags" aria-label={t(lang, 'card.tags')}>
         <li><TagLabel lang={lang} label={event.label} /></li>
         {
           eventThreads.map((thread) => (
@@ -254,12 +260,13 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
         }
         {event.min_age !== 'all' && <li><AgeBadge lang={lang} age={event.min_age} /></li>}
       </ul>
-      {event.sensitive && <div class="gated"><HeavyTopicBanner lang={lang} /></div>}
+      </div>
+      {event.sensitive && <div class="gated" data-nosnippet><HeavyTopicBanner lang={lang} /></div>}
     </header>
 
     {
       gateVariants.length > 0 && (
-        <section class="gate" aria-labelledby="gate-text" data-gate>
+        <section class="gate" aria-labelledby="gate-text" data-gate data-nosnippet>
           <p class="gate__text" id="gate-text">
             {gateVariants.map((v) => <span class="fv" data-modes={v.modes.join(' ')}>{v.value}</span>)}
           </p>
@@ -282,13 +289,13 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       <Fragment slot="meanwhile"><Meanwhile lang={lang} lines={meanwhileLines} textLang={textLang} /></Fragment>
       <Fragment slot="like"><LikeButton lang={lang} id={event.id} title={event.title.pt} /></Fragment>
       <Fragment slot="after">
-        {!isCabinet && pannoStories && <p class="story-panno" data-story-panno data-epoch-id={epoch.id} data-stories={pannoStories} hidden><a href={epochLink}>{t(lang, 'panno.story_line').replace('{name}', epoch.name[lang])}</a></p>}
+        {!isCabinet && pannoStories && <div data-nosnippet><p class="story-panno" data-story-panno data-epoch-id={epoch.id} data-stories={pannoStories} hidden><a href={epochLink}>{t(lang, 'panno.story_line').replace('{name}', epoch.name[lang])}</a></p></div>}
         {
           (isCabinet ? [] : continueVariants).map(({ modes, value: { next, nextEpoch } }) => {
             const target = next ?? nextEpoch?.story;
             const targetEpoch = nextEpoch?.epoch ?? epoch;
             return (
-              <div class="fv fv--block" data-modes={modes.join(' ')}>
+              <div class="fv fv--block" data-modes={modes.join(' ')} data-nosnippet>
                 {target ? (
                   <NextStory
                     lang={lang}
@@ -328,20 +335,20 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
       relatedVariants
         .filter((variant) => variant.value.length > 0)
         .map((variant, i) => (
-        <div class="fv fv--block" data-modes={variant.modes.join(' ')}>
+        <div class="fv fv--block" data-modes={variant.modes.join(' ')} data-nosnippet>
           <RelatedList lang={lang} items={variant.value} headingId={`related-title-${i + 1}`} />
         </div>
       ))
     }
 
-    <div class="actions">
+    <div class="actions" data-nosnippet>
       <ShareButton lang={lang} url={cardUrl} title={title} />
       <ReportLink lang={lang} cardUrl={cardUrl} title={title} />
     </div>
 
     {
       (isCabinet ? [] : footerVariants).map(({ modes, value: { prev, wrap } }) => (
-        <div class="fv fv--block" data-modes={modes.join(' ')}>
+        <div class="fv fv--block" data-modes={modes.join(' ')} data-nosnippet>
           <StoryLinks
             lang={lang}
             prev={prev ? { title: prev.title[lang], href: storyPath(lang, prev.slug[lang]) } : null}
@@ -355,7 +362,7 @@ const readyLangs = LANGS.filter((l) => l !== 'ru' || event.ru_ready);
     {isCabinet && <p class="cab-back" data-cab-back data-cab-item={event.cabinet}>{site.cabinetOpen && <a href={`${pagePath(lang, 'cabinet')}#${event.cabinet}`}>{t(lang, 'cabinet.back')}</a>}</p>}
 
     {/* One small line that leads to the game "Myth or fact" (the link in the footer stays). */}
-    {hasMyths && <p class="story-myths"><a href={pagePath(lang, 'myths')}>{t(lang, 'ui.story_myths')}</a></p>}
+    {hasMyths && <div data-nosnippet><p class="story-myths"><a href={pagePath(lang, 'myths')}>{t(lang, 'ui.story_myths')}</a></p></div>}
 
     {/* E-mail once a month and, in Russian, the Telegram channel: one block, shown by the script to a reader who has read another story. */}
     <FollowBlock lang={lang} story={event.id} />
