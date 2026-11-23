@@ -1,0 +1,133 @@
+id: aqueduto-amoreira-1580
+slug:
+  pt: o-aqueduto-negociado-na-rendicao
+  en: the-aqueduct-bargained-for-in-surrender
+  ru: akveduk-kotoryy-vytorgovali-pri-sdache
+title:
+  pt: O aqueduto negociado na rendição
+  en: The Aqueduct Bargained for in Surrender
+  ru: Акведук, который выторговали при сдаче
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1580
+place:
+  name:
+    pt: Elvas
+    en: Elvas
+    ru: Эльваш
+  short:
+    pt: Elvas
+    en: Elvas
+    ru: Эльваш
+  lat: 38.8779521
+  lon: -7.1723268
+bridge:
+  name: Aqueduto da Amoreira
+  title:
+    pt: Aqueduto da Amoreira
+    en: Amoreira Aqueduct
+    ru: Акведук Амурейры
+  address: Aqueduto da Amoreira, Elvas
+  lat: 38.8779521
+  lon: -7.1723268
+  maps_url: https://www.google.com/maps/place/Aqueduto+da+Amoreira/@38.8779562,-7.1749017,17z/data=!3m1!4b1!4m6!3m5!1s0xd171c7169866be3:0x64c95421a1263d0e!8m2!3d38.8779521!4d-7.1723268!16s/m/012w3xb_
+  url: https://en.wikipedia.org/wiki/Amoreira_Aqueduct
+  note:
+    pt: Arcos em vários andares à entrada da cidade; o aqueduto atravessa os campos por quase sete quilómetros.
+    en: Multi-tiered arches at the entrance to town; the aqueduct runs across the fields for almost seven kilometers (four miles).
+    ru: Многоярусные арки у въезда в город, акведук тянется через поля почти на семь километров.
+area: elvas
+threads:
+  - engenho
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Ao render-se, Elvas exigiu que o rei de Espanha acabasse o aqueduto.
+  en: Surrendering to Spain’s king, Elvas demanded he finish its aqueduct.
+  ru: Сдаваясь испанскому королю, Эльваш потребовал достроить ему акведук.
+story:
+  pt: |-
+    Elvas é uma cidade-fortaleza num monte, mesmo junto à fronteira espanhola. No século XVI os poços começaram a secar, e decidiu-se trazer água da Amoreira, a sete quilómetros. As obras começaram por volta de 1529, o arquiteto Francisco de Arruda refez o projeto, e a construção arrastou-se por décadas.
+
+    Em 1580, Filipe II de Espanha veio buscar o trono português com um exército. Elvas abriu-lhe as portas, mas pôs uma condição: o rei tinha de acabar o aqueduto. Filipe aceitou.
+
+    A água demorou a chegar. Só a 23 de junho de 1622 se inauguraram na cidade o aqueduto e a fonte, 93 anos depois do início das obras.
+  en: |-
+    Elvas is a fortress town on a hill right by the Spanish border. In the 16th century its wells began to run dry, and the town decided to bring water from Amoreira, seven kilometers (four miles) away. Work began around 1529, the architect Francisco de Arruda redid the design, and construction dragged on for decades.
+
+    In 1580, Philip II of Spain came to claim the Portuguese throne with an army. Elvas opened its gates to him, but on one condition: the king had to finish the aqueduct. Philip agreed.
+
+    The water was slow to arrive. Only on June 23, 1622, did the town open the aqueduct and its fountain, 93 years after work began.
+  ru: |-
+    Эльваш — город-крепость на холме у самой испанской границы. В XVI веке его колодцы начали пересыхать, и воду решили вести из Амурейры, за семь километров. Работы начали около 1529 года, архитектор Франсишку ди Арруда переделал проект, и стройка растянулась на десятилетия.
+
+    В 1580 году испанский король Филипп II пришёл за португальским троном с армией. Эльваш открыл ему ворота, но поставил условие: король должен достроить акведук. Филипп согласился.
+
+    Вода пришла не скоро. Только 23 июня 1622 года в городе открыли акведук и фонтан, через 93 года после начала работ.
+more:
+  pt: |-
+    O aqueduto ficou enorme: 833 arcos, e junto às muralhas os pilares sobem em vários andares. Mas mal ficou pronto, em 1640 Portugal revoltou-se contra Espanha. Elvas tornou-se a principal praça-forte da fronteira e foi cercada por uma estrela de baluartes. E parte do aqueduto que a cidade tanto negociara teve de ser demolida por causa dessas muralhas: em 1641 foi o próprio D. João IV a autorizá-lo.
+
+    A água que restou ajudou a cidade a aguentar os cercos da Guerra da Restauração e correu para os chafarizes até ao século XX. Em 2012, Elvas e as suas fortificações, com o aqueduto, foram classificadas Património Mundial da UNESCO.
+  en: |-
+    The aqueduct turned out enormous: 833 arches, and near the town walls its piers rise in several tiers. But almost as soon as it was finished, Portugal rose against Spain in 1640. Elvas became the main fortress on the border and was ringed with a star of bastions. Part of the aqueduct the town had bargained so hard for had to be torn down to make way for those walls, and in 1641 King John IV himself approved it.
+
+    The water that was left helped the town hold out through the sieges of the war of independence, and it kept flowing to the fountains until the 20th century. In 2012, fortified Elvas and its aqueduct became a UNESCO World Heritage Site.
+  ru: |-
+    Акведук получился огромным: 833 арки, а у стен города опоры уходят в несколько ярусов. Но едва его достроили, как в 1640 году Португалия восстала против Испании. Эльваш стал главной крепостью на границе, его опоясали звездой бастионов. И часть акведука, который город так долго выторговывал, пришлось разобрать ради этих стен: в 1641 году король Жуан IV сам разрешил снос.
+
+    Оставшаяся вода помогала городу держаться в осадах войны за независимость, и шла в фонтаны до XX века. В 2012 году крепостной Эльваш вместе с акведуком внесли в список Всемирного наследия ЮНЕСКО.
+myth:
+  verdict: myth
+  statement:
+    pt: O Aqueduto da Amoreira, em Elvas, foi construído pelos romanos
+    en: The Amoreira Aqueduct in Elvas was built by the Romans
+    ru: Акведук Амурейры в Эльваше построили римляне
+  answer:
+    pt: Foi construído entre 1529 e 1622. Acabá-lo foi a condição que Elvas impôs a Filipe II de Espanha ao render-se em 1580.
+    en: It was built between 1529 and 1622. Finishing it was the condition Elvas set for Philip II of Spain when it surrendered in 1580.
+    ru: Его строили с 1529 по 1622 год. Достроить акведук Эльваш потребовал от Филиппа II как условие сдачи в 1580 году.
+sources:
+  - title: "Wikipedia: Amoreira Aqueduct"
+    url: https://en.wikipedia.org/wiki/Amoreira_Aqueduct
+    type: reference
+    accessed: 2026-11-23
+  - title: "Wikipedia: Elvas"
+    url: https://en.wikipedia.org/wiki/Elvas
+    type: reference
+    accessed: 2026-11-23
+image:
+  file: aqueduto-amoreira-1580.webp
+  alt:
+    pt: "Azulejo azul e branco: um cavaleiro de armadura com soldados de lanças de um lado e os notáveis da cidade do outro, um deles a apontar para um aqueduto em obras com andaimes; no monte, a cidade amuralhada."
+    en: "Blue-and-white azulejo: a knight in armor with spearmen on one side and the town’s notables on the other, one pointing at an aqueduct under construction with scaffolding; on the hill, the walled town."
+    ru: "Сине-белое азулежу: рыцарь в доспехах с копейщиками с одной стороны и городские старейшины с другой, один указывает на строящийся акведук в лесах; на холме город за стенами."
+  caption:
+    pt: Elvas entrega as chaves, mas exige que o aqueduto seja acabado. Elvas, 1580. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: Elvas surrenders, but demands that the aqueduct be finished. Elvas, 1580. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Эльваш сдаётся, но требует достроить акведук. Эльваш, 1580 год. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: aqueduto-amoreira-1580-detalhe.webp
+  alt:
+    pt: Vista aérea do Aqueduto da Amoreira, com os arcos em vários andares a chegar à cidade de Elvas.
+    en: An aerial view of the Amoreira Aqueduct, its multi-tiered arches reaching the town of Elvas.
+    ru: "Вид сверху на акведук Амурейры: многоярусные арки подходят к городу Эльваш."
+  caption:
+    pt: O Aqueduto da Amoreira à entrada de Elvas. Jacinto Júlio Nozes César.
+    en: The Amoreira Aqueduct at the entrance to Elvas. Jacinto Júlio Nozes César.
+    ru: Акведук Амурейры у въезда в Эльваш. Жасинту Жулиу Нозеш Сезар (Jacinto Júlio Nozes César).
+  author: Jacinto Júlio Nozes César
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Aqueduto_da_Amoreira_-_Elvas_Portugal.jpg
+status: ready
+published: 2026-12-26
+placeholder: false
+ru_ready: true

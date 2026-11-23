@@ -1,0 +1,136 @@
+id: espanhois-angra-1641
+slug:
+  pt: os-espanhois-que-nao-se-foram
+  en: the-spaniards-who-wouldnt-leave
+  ru: ispantsy-kotorye-ne-ushli
+title:
+  pt: Os espanhóis que não se foram
+  en: The Spaniards Who Wouldn’t Leave
+  ru: Испанцы, которые не ушли
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1641
+day: 03-27
+place:
+  name:
+    pt: Angra do Heroísmo, Monte Brasil
+    en: Angra do Heroísmo, Monte Brasil
+    ru: Ангра-ду-Эроишму, Монте-Бразил
+  short:
+    pt: Angra
+    en: Angra
+    ru: Ангра
+  lat: 38.6514417
+  lon: -27.2268639
+bridge:
+  name: Fortaleza de São João Baptista
+  title:
+    pt: Fortaleza de São João Baptista, Angra do Heroísmo
+    en: Fortress of São João Baptista, Angra do Heroísmo
+    ru: Крепость Сан-Жуан-Баптишта, Ангра-ду-Эроишму
+  address: Monte Brasil, Angra do Heroísmo
+  lat: 38.6514417
+  lon: -27.2268639
+  maps_url: https://www.google.com/maps/search/?api=1&query=38.6514417,-27.2268639
+  url: https://en.wikipedia.org/wiki/Fortress_of_S%C3%A3o_Jo%C3%A3o_Baptista_(Angra_do_Hero%C3%ADsmo)
+  note:
+    pt: A fortaleza continua militar; visitas guiadas por militares.
+    en: Still a military base; tours are led by soldiers.
+    ru: Крепость до сих пор военная; по территории водят экскурсии военные.
+area: terceira
+threads:
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Os últimos espanhóis só saíram de Portugal em 1642.
+  en: The last Spaniards didn’t leave Portugal until 1642.
+  ru: Последние испанцы ушли из Португалии только в 1642 году.
+story:
+  pt: |-
+    Quando em 1580 Portugal passou para o rei de Espanha, a ilha Terceira foi a que resistiu mais tempo. Por isso os espanhóis construíram no Monte Brasil, sobre Angra, uma enorme fortaleza e deram-lhe o nome do rei, São Filipe. Devia manter em obediência a própria ilha.
+
+    A 1 de dezembro de 1640, em Lisboa, aclamou-se um rei português, D. João IV. A notícia chegou à Terceira e os moradores revoltaram-se. Mas a guarnição espanhola fechou-se na fortaleza, e a partir de 27 de março de 1641 foi preciso cercá-la.
+
+    A fortaleza fora feita para uma longa defesa, e o cerco durou onze meses. Só a 4 de março de 1642 os espanhóis se renderam. Deixaram-nos sair com honra, com as armas pessoais e duas peças de artilharia.
+  en: |-
+    When Portugal passed to the Spanish king in 1580, the island of Terceira held out the longest. So the Spanish built a huge fortress on Monte Brasil above Angra and named it São Filipe, after the king. It was meant to keep the island itself in line.
+
+    On December 1, 1640, Lisbon proclaimed a king of its own, John IV. When the news reached Terceira, the islanders rose up. But the Spanish garrison shut itself inside the fortress, and from March 27, 1641, it had to be besieged.
+
+    The fortress was built to hold out for a long time, and the siege dragged on for eleven months. The Spanish only surrendered on March 4, 1642. They were allowed to march out with honor, with their personal weapons and two cannons.
+  ru: |-
+    Когда в 1580 году Португалия перешла к испанскому королю, остров Терсейра сопротивлялся дольше всех. Поэтому испанцы построили на горе Монте-Бразил над Ангрой огромную крепость и назвали её в честь короля Сан-Фелипе. Она должна была держать в повиновении сам остров.
+
+    1 декабря 1640 года в Лиссабоне провозгласили своего короля, Жуана IV. Весть дошла до Терсейры, и жители восстали. Но испанский гарнизон заперся в крепости, и с 27 марта 1641 года её пришлось осаждать.
+
+    Крепость была рассчитана на долгую оборону, и осада тянулась одиннадцать месяцев. Только 4 марта 1642 года испанцы сдались. Им позволили уйти с честью, с личным оружием и двумя пушками.
+more:
+  pt: |-
+    Na fortaleza os espanhóis deixaram 138 peças de artilharia, quase quatrocentos arcabuzes e quatrocentos mosquetes. A fortaleza passou a ser de São João Baptista, em honra do padroeiro do novo rei D. João, e nesse mesmo ano de 1642 construiu-se lá dentro a igreja de São João Baptista.
+
+    Os soldados ficaram, só que agora portugueses: a fortaleza ainda pertence ao exército. As muralhas estendem-se por vários quilómetros na encosta do Monte Brasil, e delas vê-se toda a baía de Angra. A fortaleza construída para manter a ilha em obediência hoje protege-a.
+  en: |-
+    The Spanish left behind 138 cannons, nearly four hundred arquebuses, and four hundred muskets. The fortress was renamed for John the Baptist, patron saint of the new King John, and that same year, 1642, the church of São João Baptista was built inside.
+
+    Soldiers stayed on, only now they were Portuguese: the fortress still belongs to the army. Its walls run for several kilometers along the slope of Monte Brasil, with a view over the whole bay of Angra. The fortress built to keep the island in line now guards it.
+  ru: |-
+    В крепости испанцы оставили 138 пушек, почти четыреста аркебуз и четыреста мушкетов. Крепость переименовали в честь Иоанна Крестителя, небесного покровителя нового короля Жуана, и в том же 1642 году внутри построили церковь Сан-Жуан-Баптишта.
+
+    Солдаты в ней так и остались, только португальские: крепость до сих пор принадлежит армии. Её стены тянутся по склону Монте-Бразил на несколько километров, и с них видно всю бухту Ангры. Крепость, которую строили, чтобы держать остров в повиновении, теперь его охраняет.
+myth:
+  verdict: myth
+  statement:
+    pt: Os últimos soldados espanhóis saíram de Portugal em 1640
+    en: The last Spanish soldiers left Portugal in 1640
+    ru: Последние испанские солдаты покинули Португалию в 1640 году
+  answer:
+    pt: A guarnição da fortaleza da Terceira resistiu até 4 de março de 1642 e rendeu-se após onze meses de cerco.
+    en: The garrison of the fortress on Terceira held out until March 4, 1642, surrendering after an eleven-month siege.
+    ru: Гарнизон крепости на Терсейре держался до 4 марта 1642 года и сдался после одиннадцати месяцев осады.
+sources:
+  - title: "Wikipedia: Siege of São Filipe"
+    url: https://en.wikipedia.org/wiki/Siege_of_S%C3%A3o_Filipe
+    type: reference
+    accessed: 2026-11-23
+  - title: "Wikipedia: Fortress of São João Baptista (Angra do Heroísmo)"
+    url: https://en.wikipedia.org/wiki/Fortress_of_S%C3%A3o_Jo%C3%A3o_Baptista_(Angra_do_Hero%C3%ADsmo)
+    type: reference
+    accessed: 2026-11-23
+  - title: "Wikipedia: Terceira Island"
+    url: https://en.wikipedia.org/wiki/Terceira_Island
+    type: reference
+    accessed: 2026-11-23
+image:
+  file: espanhois-angra-1641.webp
+  alt:
+    pt: "Azulejo azul e branco: soldados espanhóis saem em coluna pela porta de uma fortaleza no alto de um monte, com dois canhões, entre a multidão de Angra; ao fundo, a baía e navios."
+    en: "Blue-and-white azulejo: Spanish soldiers march out in a column through the gate of a hilltop fortress with two cannons, between crowds from Angra; the bay and ships behind."
+    ru: "Сине-белое азулежу: испанские солдаты колонной выходят из ворот крепости на горе с двумя пушками между толпами жителей Ангры; позади бухта и корабли."
+  caption:
+    pt: A guarnição espanhola sai da fortaleza com honras militares. Angra, 4 de março de 1642. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The Spanish garrison marches out of the fortress with the honors of war. Angra, March 4, 1642. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Испанский гарнизон выходит из крепости с воинскими почестями. Ангра, 4 марта 1642 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: espanhois-angra-1641-detalhe.webp
+  alt:
+    pt: Muralhas e um baluarte da Fortaleza de São João Baptista, com relva no interior e as casas de Angra do Heroísmo ao fundo.
+    en: Walls and a bastion of the Fortress of São João Baptista, grass inside, and the houses of Angra do Heroísmo behind.
+    ru: Стены и бастион крепости Сан-Жуан-Баптишта, трава внутри, позади дома Ангры-ду-Эроишму.
+  caption:
+    pt: Muralhas da Fortaleza de São João Baptista, Monte Brasil, com Angra ao fundo. José Luís Ávila Silveira.
+    en: Walls of the Fortress of São João Baptista, Monte Brasil, with Angra behind. José Luís Ávila Silveira.
+    ru: Стены крепости Сан-Жуан-Баптишта на Монте-Бразил, позади Ангра. Жозе Луиш Авила Силвейра (José Luís Ávila Silveira).
+  author: José Luís Ávila Silveira
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Fortaleza_de_São_João_Baptista,_Monte_Brasil,_ilha_Terceira,_Açores,_a_cidade_de_Angra_do_Heroísmo_ao_fundo.JPG
+status: ready
+published: 2026-12-21
+placeholder: false
+ru_ready: true

@@ -1,0 +1,141 @@
+id: aqueduto-pegoes-1593
+slug:
+  pt: o-aqueduto-do-rei-espanhol
+  en: the-spanish-kings-aqueduct
+  ru: akveduk-ispanskogo-korolya
+title:
+  pt: O aqueduto do rei espanhol
+  en: The Spanish King’s Aqueduct
+  ru: Акведук испанского короля
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1593
+place:
+  name:
+    pt: Tomar, Convento de Cristo
+    en: Tomar, Convent of Christ
+    ru: Томар, Монастырь Христа
+  short:
+    pt: Tomar
+    en: Tomar
+    ru: Томар
+  lat: 39.6019
+  lon: -8.4167
+bridge:
+  name: Aqueduto dos Pegões
+  title:
+    pt: Aqueduto dos Pegões
+    en: Pegões Aqueduct
+    ru: Акведук Пегойнш
+  address: Rua dos Pegões Altos, Tomar
+  lat: 39.6079346
+  lon: -8.4381608
+  maps_url: https://www.google.com/maps/place/Aqueduto+do+Convento+de+Cristo+-+Tro%C3%A7o+Peg%C3%B5es+Altos/@39.6079387,-8.4407357,17z/data=!3m1!4b1!4m6!3m5!1s0xd187e8a14e9eaf7:0x6e931b3c7d9aa8c4!8m2!3d39.6079346!4d-8.4381608!16s/g/1233fxs0
+  url: https://www.turismo.cm-tomar.pt/poi/pegoes-altos-aqueduct
+  note:
+    pt: Arcos em dois andares sobre o vale dos Pegões, com até 30 metros de altura.
+    en: Two tiers of arches over the Pegões valley, up to 30 meters (about 100 feet) high.
+    ru: Двухъярусные арки над долиной Пегойнш, до 30 метров высотой.
+area: tomar
+threads:
+  - engenho
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Um rei espanhol levou água aos cavaleiros portugueses.
+  en: A Spanish king brought water to Portuguese knights.
+  ru: Испанский король провёл воду португальским рыцарям.
+story:
+  pt: |-
+    Em 1581, Portugal ganhou um rei estrangeiro: Filipe II de Espanha herdou o trono depois de se extinguir a dinastia portuguesa. Os portugueses não o queriam, e Filipe precisava de agradar aos novos súbditos.
+
+    Para isso escolheu Tomar. No Convento de Cristo, casa-mãe da ordem de cavalaria herdeira dos templários, reuniu nobreza, clero e povo em cortes e jurou: Portugal seria governado só por portugueses, e manteria a sua língua, a sua moeda e as suas leis. Ali mesmo foi aclamado rei, como Filipe I de Portugal.
+
+    O convento ficava num monte seco, e a água tinha de ser carregada. Em agradecimento, o rei mandou fazer um aqueduto. Começou a construir-se em 1593 e estendeu-se por quase seis quilómetros, em parte sobre dois andares de arcos com até 30 metros de altura. A água só chegou à fonte do claustro em 1619, vinte anos depois da morte de Filipe.
+  en: |-
+    In 1581, Portugal got a foreign king: Philip II of Spain inherited the throne after the Portuguese royal line died out. The Portuguese didn’t want him, and Philip needed to win over his new subjects.
+
+    He chose Tomar to do it. At the Convent of Christ, headquarters of a knightly order that had inherited the Templars’ role, Philip gathered the nobility, clergy, and towns and swore an oath: Portugal would be governed only by Portuguese, and would keep its own language, money, and laws. There, too, he was acclaimed king.
+
+    The convent stood on a dry hill, and water had to be carried up. In thanks, the king ordered an aqueduct. Work began in 1593, and it ran for almost six kilometers, in places on two tiers of arches up to 30 meters high. Water only reached the fountain in the convent’s cloister in 1619, twenty years after Philip’s death.
+  ru: |-
+    В 1581 году Португалия получила короля-иностранца: Филипп II Испанский унаследовал трон после того, как пресеклась португальская династия. Португальцы его не хотели, и Филиппу нужно было понравиться новым подданным.
+
+    Он выбрал для этого Томар. В Монастыре Христа, главном доме рыцарского ордена, наследника тамплиеров, Филипп собрал представителей знати, духовенства и городов и поклялся: Португалией будут управлять только португальцы, а язык, деньги и законы у неё останутся свои. Там же его признали королём.
+
+    Монастырь стоял на сухом холме, и воду туда носили. В благодарность король заказал акведук. Его начали в 1593 году и вели почти шесть километров, местами на двух ярусах арок высотой до 30 метров. Вода забила в фонтане монастырского двора только в 1619 году, через двадцать лет после смерти Филиппа.
+more:
+  pt: |-
+    O aqueduto foi desenhado pelo italiano Filippo Terzi, arquiteto principal do rei. Morreu em 1597, um ano antes de Filipe, e a obra foi terminada por outros mestres. Quem veio inaugurá-lo foi já o filho de Filipe, como ainda hoje lembra uma inscrição no aqueduto.
+
+    As promessas de Tomar duraram enquanto os reis espanhóis precisaram da simpatia dos portugueses. O neto de Filipe começou a pôr espanhóis em cargos portugueses e a cobrar impostos para as suas guerras, e em 1640 Portugal revoltou-se. E a água do aqueduto correu para o convento até meados do século XX.
+  en: |-
+    The aqueduct was designed by the Italian Filippo Terzi, the king’s chief architect. He died in 1597, a year before Philip, and other builders finished the work. It was Philip’s son who came to open it, as an inscription on the aqueduct still records.
+
+    The promises made at Tomar held as long as the Spanish kings needed Portuguese goodwill. Philip’s grandson began putting Spaniards into Portuguese posts and raising taxes for his wars, and in 1640 Portugal rebelled. The aqueduct kept carrying water to the convent until the mid-20th century.
+  ru: |-
+    Чертил акведук итальянец Филиппо Терци, главный архитектор короля. Он умер в 1597 году, за год до Филиппа, и заканчивали акведук другие мастера. Открывать его приехал уже сын Филиппа, и об этом до сих пор говорит надпись на нём.
+
+    Клятвы в Томаре держались, пока испанские короли нуждались в любви португальцев. Внук Филиппа начал ставить испанцев на португальские должности и брать налоги на свои войны, и в 1640 году Португалия восстала. А вода по акведуку шла в монастырь до середины XX века.
+myth:
+  verdict: myth
+  statement:
+    pt: O Aqueduto dos Pegões, em Tomar, foi construído pelos romanos
+    en: The Pegões Aqueduct in Tomar was built by the Romans
+    ru: Акведук Пегойнш в Томаре построили римляне
+  answer:
+    pt: Começou em 1593 por ordem de Filipe I, o rei espanhol que se tornou também rei de Portugal.
+    en: It was begun in 1593 on the orders of Philip II of Spain, who had also become king of Portugal.
+    ru: Его начали в 1593 году по приказу Филиппа II, испанского короля, который стал и королём Португалии.
+sources:
+  - title: "Wikipedia: Pegões Aqueduct"
+    url: https://en.wikipedia.org/wiki/Peg%C3%B5es_Aqueduct
+    type: reference
+    accessed: 2026-11-23
+  - title: "Turismo de Tomar: Aqueduto dos Pegões Altos"
+    url: https://www.turismo.cm-tomar.pt/poi/pegoes-altos-aqueduct
+    type: website
+    accessed: 2026-11-23
+  - title: "Wikipedia: Cortes de Tomar"
+    url: https://pt.wikipedia.org/wiki/Cortes_de_Tomar
+    type: reference
+    accessed: 2026-11-23
+  - title: "Wikipedia: Portuguese Restoration War"
+    url: https://en.wikipedia.org/wiki/Portuguese_Restoration_War
+    type: reference
+    accessed: 2026-11-23
+image:
+  file: aqueduto-pegoes-1593.webp
+  alt:
+    pt: "Azulejo azul e branco: um aqueduto de dois andares de arcos atravessa um vale de oliveiras, com pedreiros e guindastes de madeira em cima; à esquerda, no monte, um convento fortificado com rotunda; em primeiro plano, um carro de bois com blocos de pedra."
+    en: "Blue-and-white azulejo: a two-tier aqueduct crosses an olive valley with masons and wooden cranes on top; on the hill at left a fortified convent with a rotunda; in front, an ox cart with stone blocks."
+    ru: "Сине-белое азулежу: двухъярусный акведук пересекает долину с оливами, наверху каменщики и деревянные краны; слева на холме укреплённый монастырь с ротондой; на переднем плане телега с волами и каменными блоками."
+  caption:
+    pt: A construção do aqueduto para o Convento de Cristo. Tomar, a partir de 1593. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The building of the aqueduct for the Convent of Christ. Tomar, from 1593. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Строительство акведука для Монастыря Христа. Томар, с 1593 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: aqueduto-pegoes-1593-detalhe.webp
+  alt:
+    pt: O aqueduto dos Pegões a atravessar o vale entre oliveiras, com dois andares de arcos na parte mais funda.
+    en: The Pegões Aqueduct crossing the valley among olive trees, with two tiers of arches at the deepest part.
+    ru: Акведук Пегойнш пересекает долину среди олив, в самой глубокой части два яруса арок.
+  caption:
+    pt: O Aqueduto dos Pegões, Tomar. Juntas.
+    en: The Pegões Aqueduct, Tomar. Juntas.
+    ru: Акведук Пегойнш, Томар. Juntas.
+  author: Juntas
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Aqueduto_dos_Pegões_by_Juntas_1.jpg
+status: ready
+published: 2026-12-22
+placeholder: false
+ru_ready: true

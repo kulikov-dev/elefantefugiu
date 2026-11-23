@@ -220,6 +220,11 @@
   name: { pt: Coimbra, en: Coimbra, ru: Коимбра }
   center: { lat: 40.207, lon: -8.427 }
   radius_km: 6
+- id: bucaco
+  name: { pt: Buçaco, en: Buçaco, ru: Бусаку }
+  name_of: { pt: do Buçaco, ru: Бусаку }
+  center: { lat: 40.3771, lon: -8.3669 }
+  radius_km: 3
 - id: viseu
   name: { pt: Viseu, en: Viseu, ru: Визеу }
   center: { lat: 40.665, lon: -7.912 }

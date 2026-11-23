@@ -1,0 +1,141 @@
+id: sinagoga-tomar-1923
+slug:
+  pt: a-sinagoga-salva-por-um-particular
+  en: the-synagogue-saved-by-one-man
+  ru: sinagoga-kotoruyu-spas-chastnyy-chelovek
+title:
+  pt: A sinagoga salva por um particular
+  en: The Synagogue Saved by One Man
+  ru: Синагога, которую спас частный человек
+epoch: monarquia-e-republica
+level: story
+year: 1923
+place:
+  name:
+    pt: Tomar, Sinagoga
+    en: Tomar, Synagogue
+    ru: Томар, синагога
+  short:
+    pt: Tomar
+    en: Tomar
+    ru: Томар
+  lat: 39.6032333
+  lon: -8.4138164
+bridge:
+  name: Sinagoga de Tomar / Museu Luso-Hebraico Abraão Zacuto
+  title:
+    pt: Sinagoga de Tomar / Museu Luso-Hebraico Abraão Zacuto
+    en: Synagogue of Tomar / Abraham Zacuto Luso-Hebraic Museum
+    ru: Синагога Томара / Музей Авраама Закуто
+  address: Rua Dr. Joaquim Jacinto 73, Tomar
+  lat: 39.6032333
+  lon: -8.4138164
+  maps_url: https://www.google.com/maps/place/Sinagoga+de+Tomar,+Rua+Doutor+Joaquim+Jacinto,+Tomar/@39.6032374,-8.4163913,17z/data=!4m5!3m4!1s0xd187ea342765fbf:0xfe6f4aa6a995a10a!8m2!3d39.6032333!4d-8.4138164
+  url: https://www.cm-tomar.pt/index.php/visitar/o-que-visitar/sinagoga
+  note:
+    pt: Sala do século XV com colunas e abóbadas; no museu, lápides e inscrições encontradas por todo o país.
+    en: A 15th-century hall with columns and vaults; the museum holds gravestones and inscriptions found across the country.
+    ru: Зал XV века с колоннами и сводами, в музее надгробия и надписи, найденные по всей стране.
+area: tomar
+threads:
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A sinagoga de Tomar já foi prisão, capela, palheiro e adega.
+  en: Tomar’s synagogue has been a prison, chapel, hayloft, and wine store.
+  ru: Синагога Томара успела побыть тюрьмой, часовней, сеновалом и винным складом.
+seo:
+  title:
+    pt: A sinagoga e o engenheiro · Tomar, 1923
+    en: The Synagogue and the Engineer · Tomar, 1923
+    ru: Синагога и инженер · Томар, 1923
+story:
+  pt: |-
+    A sinagoga de Tomar foi construída em meados do século XV, por volta de 1460. Em 1496, D. Manuel I ordenou aos judeus que se convertessem ou partissem, e deixou de haver quem nela rezasse.
+
+    O edifício passou de mão em mão. Em 1516 foi comprado para cadeia da vila, depois serviu de capela de São Bartolomeu. No século XIX guardou feno, depois vinho e mercearias. A sinagoga foi esquecida.
+
+    Em 1923, o edifício foi comprado por Samuel Schwarz, engenheiro de minas polaco que vivia em Portugal e estudava a história dos seus judeus. Limpou a sala, começou escavações e, em 1939, ofereceu a sinagoga ao Estado com uma condição: que ali houvesse um museu.
+  en: |-
+    Tomar’s synagogue was built in the mid-15th century, around 1460. In 1496, King Manuel I ordered the Jews to convert or leave, and no one was left to pray there.
+
+    The building changed hands. In 1516 it was bought to serve as the town jail, and later it became the chapel of Saint Bartholomew. In the 19th century it stored hay, then wine and groceries. The synagogue was forgotten.
+
+    In 1923 the building was bought by Samuel Schwarz, a Polish mining engineer who lived in Portugal and studied the history of its Jews. He cleared the hall, began excavating, and in 1939 gave the synagogue to the state on one condition: that it become a museum.
+  ru: |-
+    Синагогу в Томаре построили в середине XV века, около 1460 года. В 1496 году король Мануэл I велел евреям креститься или уехать, и молиться в ней стало некому.
+
+    Здание пошло по рукам. В 1516 году его купили под городскую тюрьму, потом в нём устроили часовню Святого Варфоломея. В XIX веке там держали сено, потом вино и бакалею. О синагоге забыли.
+
+    В 1923 году здание купил Самуэл Шварц, польский горный инженер, который жил в Португалии и изучал историю её евреев. Он расчистил зал, начал раскопки, а в 1939 году подарил синагогу государству с одним условием: чтобы в ней был музей.
+more:
+  pt: |-
+    A sinagoga teve sorte por ter sido sempre usada. Um armazém e uma prisão não precisavam de obras, e por isso a sala ficou quase como foi construída: quadrada, com quatro colunas e abóbadas. Diz-se que nos cantos há bilhas de barro embutidas, com a boca virada para a sala, para melhorar o som da voz.
+
+    Schwarz ficou conhecido também por outra descoberta. Em 1917, na serra junto a Belmonte, encontrou uma comunidade que durante quatrocentos anos guardara em segredo os ritos judaicos, embora os antepassados fossem tidos por cristãos. E o museu de Tomar tem o nome de Abraão Zacuto, o astrónomo cujas tábuas Vasco da Gama levou consigo.
+  en: |-
+    The synagogue was lucky to have always been in use. A warehouse and a jail didn’t need any rebuilding, so the hall stayed almost as it was built: square, with four columns and vaulted ceilings. Clay jars are said to be set into the corners, mouths facing the room, to make voices carry better.
+
+    Schwarz was famous for another discovery too. In 1917, in the hills near Belmonte, he found a community that had secretly kept Jewish rites for four hundred years, even though their ancestors were considered Christians. And the museum in Tomar is named after Abraham Zacuto, the astronomer whose tables Vasco da Gama took with him.
+  ru: |-
+    Синагоге повезло, что её всё время использовали. Складу и тюрьме не нужна была перестройка, поэтому зал остался почти таким, каким его построили: квадратный, с четырьмя колоннами и сводами. Говорят, в углы встроены глиняные кувшины горлышками в зал, чтобы лучше звучал голос.
+
+    Шварц прославился и другим открытием. В 1917 году в горах у Бельмонти он нашёл общину, которая четыреста лет тайком хранила еврейские обряды, хотя её предки считались крещёными. А музей в Томаре носит имя Авраама Закуто, астронома, чьи таблицы брал с собой Васко да Гама.
+myth:
+  verdict: myth
+  statement:
+    pt: A sinagoga de Tomar foi comprada e salva pelo Estado
+    en: Tomar’s synagogue was bought and saved by the state
+    ru: Синагогу Томара выкупило и спасло государство
+  answer:
+    pt: Comprou-a em 1923 o engenheiro Samuel Schwarz, que em 1939 a ofereceu ao Estado para ali abrir um museu.
+    en: Engineer Samuel Schwarz bought it in 1923 and gave it to the state in 1939 so it could become a museum.
+    ru: Её купил в 1923 году инженер Самуэл Шварц и в 1939 году подарил государству, чтобы там открыли музей.
+sources:
+  - title: "Wikipedia: Synagogue of Tomar"
+    url: https://en.wikipedia.org/wiki/Synagogue_of_Tomar
+    type: reference
+    accessed: 2026-11-23
+  - title: "Wikipedia: Samuel Schwarz (historian)"
+    url: https://en.wikipedia.org/wiki/Samuel_Schwarz_(historian)
+    type: reference
+    accessed: 2026-11-23
+  - title: "Câmara Municipal de Tomar: Sinagoga"
+    url: https://www.cm-tomar.pt/index.php/visitar/o-que-visitar/sinagoga
+    type: website
+    accessed: 2026-11-23
+image:
+  file: sinagoga-tomar-1923.webp
+  alt:
+    pt: "Azulejo azul e branco: numa sala de abóbadas góticas cheia de pipas e palha, um homem de chapéu e óculos, em cima de um banco, limpa um capitel com um pincel; ao fundo, dois homens levam uma pipa."
+    en: "Blue-and-white azulejo: in a Gothic vaulted hall full of barrels and straw, a man in a hat and glasses stands on a stool cleaning a capital with a brush; in the background two men roll out a barrel."
+    ru: "Сине-белое азулежу: в готическом зале со сводами, заставленном бочками и соломой, мужчина в шляпе и очках стоит на табурете и кисточкой чистит капитель; на заднем плане двое выкатывают бочку."
+  caption:
+    pt: Samuel Schwarz limpa a sala da antiga sinagoga, ainda cheia de pipas. Tomar, 1923. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: Samuel Schwarz cleans the hall of the old synagogue, still full of barrels. Tomar, 1923. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Самуэл Шварц расчищает зал бывшей синагоги, ещё заставленный бочками. Томар, 1923 год. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: sinagoga-tomar-1923-detalhe.webp
+  alt:
+    pt: "Interior da sinagoga de Tomar: duas colunas de pedra, uma mesa com toalha azul e a arca da Torá ao fundo."
+    en: "The interior of the Tomar synagogue: two stone columns, a table with a blue cloth, and the Torah ark behind."
+    ru: "Интерьер синагоги Томара: две каменные колонны, стол с синей скатертью и ковчег для свитков Торы позади."
+  caption:
+    pt: O interior da sinagoga de Tomar, hoje museu. Jaimrsilva.
+    en: The interior of the Tomar synagogue, now a museum. Jaimrsilva.
+    ru: Интерьер синагоги Томара, теперь музея. Jaimrsilva.
+  author: Jaimrsilva
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Tomar_-_Synagogue.JPG
+status: ready
+published: 2026-12-25
+placeholder: false
+ru_ready: true

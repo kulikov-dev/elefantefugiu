@@ -1,0 +1,133 @@
+id: mata-bucaco-1643
+slug:
+  pt: a-mata-onde-cortar-uma-arvore-dava-excomunhao
+  en: the-forest-where-cutting-a-tree-meant-excommunication
+  ru: les-gde-za-derevo-otluchali-ot-tserkvi
+title:
+  pt: A mata onde cortar uma árvore dava excomunhão
+  en: The Forest Where Cutting a Tree Meant Excommunication
+  ru: Лес, где за дерево отлучали от церкви
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1643
+place:
+  name:
+    pt: Mata Nacional do Buçaco
+    en: Buçaco National Forest
+    ru: Национальный лес Бусаку
+  short:
+    pt: Buçaco
+    en: Buçaco
+    ru: Бусаку
+  lat: 40.3771203
+  lon: -8.3668653
+bridge:
+  name: Mata Nacional do Buçaco, Portas de Coimbra
+  title:
+    pt: Mata Nacional do Buçaco, Porta de Coimbra
+    en: Buçaco National Forest, Coimbra Gate
+    ru: Национальный лес Бусаку, Коимбрские ворота
+  address: Mata Nacional do Buçaco, Luso, Mealhada
+  lat: 40.3771203
+  lon: -8.3668653
+  maps_url: https://www.google.com/maps/place/Bu%C3%A7aco+National+Forest/@40.3771244,-8.3694402,17z/data=!3m1!4b1!4m6!3m5!1s0xd2303b6c05bb173:0x533712de3c0c0816!8m2!3d40.3771203!4d-8.3668653!16s/g/1225wcn3
+  url: https://en.wikipedia.org/wiki/Bu%C3%A7aco_Forest
+  note:
+    pt: No muro junto à porta, lápides com os textos das bulas papais de 1622 e 1643.
+    en: Stone plaques on the wall by the gate carry the texts of the papal bulls of 1622 and 1643.
+    ru: На стене у ворот каменные плиты с текстами папских булл 1622 и 1643 годов.
+area: bucaco
+threads:
+  - natureza
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Na Mata do Buçaco, cortar uma árvore podia dar excomunhão.
+  en: In the Buçaco forest, cutting down a tree could get you excommunicated.
+  ru: За срубленное дерево в лесу Бусаку грозило отлучение от церкви.
+seo:
+  title:
+    pt: Árvores e excomunhão · Buçaco, 1643
+    en: Trees and Excommunication · Buçaco, 1643
+    ru: Лес, где за дерево отлучали · Бусаку, 1643
+story:
+  pt: |-
+    No início do século XVII, na serra do Buçaco, perto de Coimbra, os carmelitas escolheram um lugar para um deserto onde queriam viver em silêncio e oração. Em 1628, o bispo de Coimbra entregou-lhes a mata.
+
+    Os frades construíram o convento e cercaram a mata com um muro de pedra. A paz era guardada também a partir de Roma. Uma bula papal de 1622 proibiu a entrada de mulheres na mata. E uma bula de 1643 ameaçava de excomunhão quem fizesse mal às árvores.
+
+    As mulheres acabaram por poder entrar, os frades foram expulsos em 1834, mas a mata continuou intacta. Hoje é uma das matas mais valiosas de Portugal, e os textos das duas bulas continuam na pedra junto à porta.
+  en: |-
+    In the early 17th century, on the Buçaco ridge near Coimbra, Carmelite friars chose a spot for a retreat where they wanted to live in silence and prayer. In 1628 the bishop of Coimbra handed the forest over to them.
+
+    The friars built a convent and enclosed the forest with a stone wall. Rome helped guard their peace too. A papal bull of 1622 banned women from entering the forest. And a bull of 1643 threatened excommunication for anyone who harmed the trees.
+
+    Women were eventually let in, and the friars were expelled in 1834, but the forest stayed untouched. Today it is one of Portugal’s most valuable forests, and the texts of both bulls still hang on stone by the gate.
+  ru: |-
+    В начале XVII века на горе Бусаку, под Коимброй, монахи-кармелиты выбрали место для пустыни, где хотели жить в тишине и молитве. В 1628 году епископ Коимбры отдал им лес.
+
+    Монахи построили монастырь и обнесли лес каменной стеной. Покой охраняли и из Рима. Папская булла 1622 года запретила женщинам входить в лес. А булла 1643 года грозила отлучением от церкви каждому, кто повредит деревья.
+
+    Женщин потом пустили, монахов в 1834 году выселили, но лес так и остался нетронутым. Теперь это один из самых ценных лесов Португалии, а тексты обеих булл до сих пор висят на камне у ворот.
+more:
+  pt: |-
+    Os carmelitas não só guardavam a mata como a plantavam. Ao lado dos carvalhos e loureiros da região, plantavam também outras árvores. Dentro do muro abriram caminhos e ergueram capelas e ermidas.
+
+    O muro de quase cinco quilómetros também foi obra dos frades, e na primeira porta, a Porta de Coimbra, colocaram as lápides com os textos das bulas. Guardaram o silêncio durante quase duzentos anos. Em 1810, mesmo junto aos muros da mata, britânicos e portugueses enfrentaram o exército de Napoleão: a mata guardada do machado tornou-se campo de batalha.
+  en: |-
+    The Carmelites didn’t just protect the forest, they planted it. Alongside the local oaks and laurels, they planted other trees too. Inside the wall they laid out paths and built chapels and hermit cells.
+
+    The friars built the wall too, nearly five kilometers (three miles) of it, and on the first gate, the Coimbra Gate, they mounted the stone plaques with the text of the bulls. They kept the silence for almost two hundred years. Then in 1810, right below the forest walls, the British and Portuguese fought Napoleon’s army: the forest guarded from the axe became a battlefield.
+  ru: |-
+    Кармелиты не только берегли лес, но и сажали его. Рядом с дубами и лаврами здешних мест они сажали и другие деревья. Внутри стены они проложили тропы, поставили часовни и кельи для отшельников.
+
+    Стену почти в пять километров монахи тоже строили сами, и на первых, Коимбрских, воротах укрепили плиты с текстами булл. Тишину они берегли почти двести лет. А в 1810 году прямо под стенами леса британцы и португальцы дали бой армии Наполеона: лес, который берегли от топора, стал полем битвы.
+myth:
+  verdict: fact
+  statement:
+    pt: Na Mata do Buçaco, cortar uma árvore podia dar excomunhão
+    en: In the Buçaco forest, cutting down a tree could get you excommunicated
+    ru: За срубленное дерево в лесу Бусаку грозило отлучение от церкви
+  answer:
+    pt: Está escrito numa bula papal de 1643. O texto ainda está na pedra junto à Porta de Coimbra da mata.
+    en: It’s written in a papal bull of 1643. The text still hangs on stone by the forest’s Coimbra Gate.
+    ru: Это записано в папской булле 1643 года. Её текст до сих пор висит на камне у Коимбрских ворот леса.
+sources:
+  - title: "Wikipedia: Buçaco Forest"
+    url: https://en.wikipedia.org/wiki/Bu%C3%A7aco_Forest
+    type: reference
+    accessed: 2026-11-23
+image:
+  file: mata-bucaco-1643.webp
+  alt:
+    pt: "Azulejo azul e branco: um frade descalço levanta a mão diante da porta de um muro de pedra com duas lápides em branco, e um lenhador com um machado ao ombro hesita; em volta, uma mata densa com ciprestes e uma ermida ao fundo."
+    en: "Blue-and-white azulejo: a barefoot friar raises his hand before a gate in a stone wall with two blank plaques, and a woodcutter with an axe on his shoulder hesitates; around them a dense forest with cypresses and a hermitage behind."
+    ru: "Сине-белое азулежу: босой монах поднимает руку перед воротами в каменной стене с двумя пустыми плитами, дровосек с топором на плече замер; вокруг густой лес с кипарисами, вдали часовня."
+  caption:
+    pt: Um frade carmelita barra o caminho a um lenhador junto à porta da mata. Buçaco, século XVII. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: A Carmelite friar bars a woodcutter at the forest gate. Buçaco, 17th century. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Монах-кармелит преграждает путь дровосеку у ворот леса. Бусаку, XVII век. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: mata-bucaco-1643-detalhe.webp
+  alt:
+    pt: "A Porta de Coimbra na Mata do Buçaco: um muro decorado com padrões geométricos a preto e branco e duas lápides com os textos das bulas."
+    en: "The Coimbra Gate of the Buçaco forest: a wall decorated with black-and-white geometric patterns and two plaques with the texts of the bulls."
+    ru: "Коимбрские ворота леса Бусаку: стена с чёрно-белым геометрическим узором и две плиты с текстами булл."
+  caption:
+    pt: A Porta de Coimbra, com as lápides das bulas papais. Mata do Buçaco. Elisa.rolle.
+    en: The Coimbra Gate with the plaques of the papal bulls. Buçaco forest. Elisa.rolle.
+    ru: Коимбрские ворота с плитами папских булл. Лес Бусаку. Elisa.rolle.
+  author: Elisa.rolle
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Portas_de_Coimbra.jpg
+status: ready
+published: 2026-12-23
+placeholder: false
+ru_ready: true

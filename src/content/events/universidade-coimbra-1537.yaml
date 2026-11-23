@@ -1,0 +1,142 @@
+id: universidade-coimbra-1537
+slug:
+  pt: a-universidade-que-mudou-de-casa-cinco-vezes
+  en: the-university-that-moved-five-times
+  ru: universitet-kotoryy-pyat-raz-pereezzhal
+title:
+  pt: A universidade que mudou de casa cinco vezes
+  en: The University That Moved Five Times
+  ru: Университет, который пять раз переезжал
+epoch: avis-e-descobrimentos
+level: story
+year: 1537
+place:
+  name:
+    pt: Coimbra, Paço das Escolas
+    en: Coimbra, Paço das Escolas
+    ru: Коимбра, Дворец школ
+  short:
+    pt: Coimbra
+    en: Coimbra
+    ru: Коимбра
+  lat: 40.2074021
+  lon: -8.4259884
+bridge:
+  name: Paço das Escolas
+  title:
+    pt: Paço das Escolas, Universidade de Coimbra
+    en: Paço das Escolas, University of Coimbra
+    ru: Дворец школ, Университет Коимбры
+  address: Paço das Escolas, 3000-515 Coimbra
+  lat: 40.2074021
+  lon: -8.4259884
+  maps_url: https://www.google.com/maps/place/Pa%C3%A7o+das+Escolas,+3000-515+Coimbra/@40.2074175,-8.4362881,15z/data=!3m1!4b1!4m6!3m5!1s0xd22f909b75c14d7:0x88f180e9d670bcf9!8m2!3d40.2074021!4d-8.4259884!16s/g/11bzv7kcrt
+  url: https://www.uc.pt/en/sobrenos/history/13th-to-16th-centuries
+  note:
+    pt: O antigo paço real no alto da colina, com o pátio voltado para o Mondego.
+    en: The former royal palace on top of the hill, with a courtyard overlooking the Mondego.
+    ru: Бывший королевский дворец на вершине холма, двор с видом на Мондегу.
+area: coimbra
+threads:
+  - gente-como-nos
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A universidade portuguesa mudou-se cinco vezes entre Lisboa e Coimbra.
+  en: Portugal’s university moved five times between Lisbon and Coimbra.
+  ru: Университет Португалии пять раз переезжал между Лиссабоном и Коимброй.
+seo:
+  title:
+    pt: A universidade que mudava de casa · Coimbra, 1537
+    en: The University on the Move · Coimbra, 1537
+    ru: Университет на колёсах · Коимбра, 1537
+story:
+  pt: |-
+    O primeiro Estudo Geral de Portugal foi fundado por D. Dinis em 1290, em Lisboa. Mas na capital barulhenta os estudantes não se entendiam com os moradores, e em 1308 a universidade passou para Coimbra.
+
+    Depois andou ao sabor das decisões dos reis: em 1338 voltou a Lisboa, em 1354 de novo a Coimbra, em 1377 outra vez a Lisboa. De cada vez mudavam-se mestres, livros e estudantes.
+
+    Só em 1537, no reinado de D. João III, a universidade se fixou de vez em Coimbra. E em 1597 comprou à Coroa o paço real, no alto da colina, e desde então ele chama-se Paço das Escolas.
+  en: |-
+    King Dinis founded Portugal’s first university in 1290, in Lisbon. But in the noisy capital, students and townspeople didn’t get along, and in 1308 the university moved to Coimbra.
+
+    After that it went wherever the kings decided: back to Lisbon in 1338, to Coimbra again in 1354, to Lisbon once more in 1377. Each time, teachers, books, and students all moved with it.
+
+    Only in 1537, under King John III, did the university settle in Coimbra for good. In 1597 the university bought the royal palace at the top of the hill from the crown, and it has been called the Palace of the Schools ever since.
+  ru: |-
+    Первый университет Португалии король Диниш основал в 1290 году в Лиссабоне. Но в шумной столице студенты не ладили с горожанами, и в 1308 году университет перевели в Коимбру.
+
+    Дальше он кочевал вслед за решениями королей: в 1338 году обратно в Лиссабон, в 1354 году снова в Коимбру, в 1377 году опять в Лиссабон. Каждый раз переезжали учителя, книги и студенты.
+
+    Окончательно университет осел в Коимбре только в 1537 году, при короле Жуане III. А в 1597 году университет купил у короны королевский дворец на вершине холма, и с тех пор дворец так и называется: Дворец школ.
+more:
+  pt: |-
+    A compra foi invulgar. O rei era então Filipe I, o rei espanhol que governava também Portugal. O paço custou 30 mil cruzados, mas metade a universidade não pagou: esses 15 mil tinha-os emprestado à Coroa em 1584. Assim, a dívida do rei transformou-se num edifício.
+
+    Depois desta compra, a universidade nunca mais se mudou. O antigo paço tornou-se o seu coração: na antiga sala do trono entregam-se hoje os graus, ao lado ergueu-se a torre com o sino que chama os estudantes às aulas, e a biblioteca barroca. Desde 2013, a universidade e a colina são Património Mundial da UNESCO.
+  en: |-
+    It was an unusual sale. The king at the time was Philip II of Spain, who also ruled Portugal. The palace cost 30,000 cruzados, but the university only paid half: it had lent the other 15,000 to the crown back in 1584. The king’s debt turned into a building.
+
+    After that purchase the university never moved again. The old palace became its heart: degrees are now awarded in the former throne room, and next to it rose the tower whose bell calls students to class, and a Baroque library. Since 2013 the university and its hill have been a UNESCO World Heritage Site.
+  ru: |-
+    Покупка вышла необычной. Королём тогда был испанец Филипп II, правивший и Португалией. Дворец стоил 30 тысяч крузаду, но половину университет не платил: эти 15 тысяч он ещё в 1584 году одолжил короне. Так долг короля превратился в здание.
+
+    После этой покупки университет больше никуда не переезжал. Бывший дворец стал его сердцем: в тронном зале теперь вручают степени, рядом поставили башню с колоколом, который звонит студентам на занятия, и барочную библиотеку. С 2013 года университет вместе с холмом внесён в список Всемирного наследия ЮНЕСКО.
+myth:
+  verdict: myth
+  statement:
+    pt: A Universidade de Coimbra esteve sempre em Coimbra
+    en: The University of Coimbra has always been in Coimbra
+    ru: Университет Коимбры всегда был в Коимбре
+  answer:
+    pt: Foi fundada em Lisboa em 1290 e mudou-se cinco vezes entre as duas cidades, até se fixar em Coimbra em 1537.
+    en: It was founded in Lisbon in 1290 and moved five times between the two cities before settling in Coimbra in 1537.
+    ru: Его основали в Лиссабоне в 1290 году, и он пять раз переезжал между городами, пока не осел в Коимбре в 1537 году.
+sources:
+  - title: "Universidade de Coimbra: 13th to 16th centuries"
+    url: https://www.uc.pt/en/sobrenos/history/13th-to-16th-centuries
+    type: website
+    accessed: 2026-11-23
+  - title: "Wikipedia: University of Coimbra"
+    url: https://en.wikipedia.org/wiki/University_of_Coimbra
+    type: reference
+    accessed: 2026-11-23
+  - title: "Wikipedia: Universidade de Coimbra"
+    url: https://pt.wikipedia.org/wiki/Universidade_de_Coimbra
+    type: reference
+    accessed: 2026-11-23
+image:
+  file: universidade-coimbra-1537.webp
+  alt:
+    pt: "Azulejo azul e branco: estudantes de capa e mestres a cavalo caminham por uma estrada sinuosa para uma cidade numa colina com muralhas; à frente, dois carros de bois carregados de arcas e livros."
+    en: "Blue-and-white azulejo: students in capes and masters on horseback walk a winding road toward a walled hilltop town; in front, two ox carts loaded with chests and books."
+    ru: "Сине-белое азулежу: студенты в плащах и учителя верхом идут по извилистой дороге к городу с крепостной стеной на холме; впереди две телеги с волами, нагруженные сундуками и книгами."
+  caption:
+    pt: A universidade muda-se com mestres, estudantes e livros. Entre Lisboa e Coimbra, séculos XIV a XVI. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The university on the move with its masters, students, and books. Between Lisbon and Coimbra, 14th to 16th century. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Университет переезжает с учителями, студентами и книгами. Между Лиссабоном и Коимброй, XIV–XVI века. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: universidade-coimbra-1537-detalhe.webp
+  alt:
+    pt: "Pátio do Paço das Escolas em Coimbra: a torre com relógio à esquerda, a Via Latina com os seus arcos ao centro e o céu azul."
+    en: "The courtyard of the Paço das Escolas in Coimbra: the clock tower on the left, the Via Latina with its arches in the middle, a blue sky."
+    ru: "Двор Дворца школ в Коимбре: башня с часами слева, галерея Виа Латина с арками в центре, синее небо."
+  caption:
+    pt: O pátio do Paço das Escolas, com a torre e a Via Latina. Universidade de Coimbra. Joananv22.
+    en: The courtyard of the Paço das Escolas, with the tower and the Via Latina. University of Coimbra. Joananv22.
+    ru: Двор Дворца школ с башней и галереей Виа Латина. Университет Коимбры. Joananv22.
+  author: Joananv22
+  license: CC BY-SA 3.0
+  license_url: https://creativecommons.org/licenses/by-sa/3.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Universidade_de_Coimbra.jpg
+status: ready
+published: 2026-12-24
+placeholder: false
+ru_ready: true

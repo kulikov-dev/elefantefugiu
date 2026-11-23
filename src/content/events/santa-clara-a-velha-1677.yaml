@@ -1,0 +1,134 @@
+id: santa-clara-a-velha-1677
+slug:
+  pt: as-freiras-que-se-renderam-ao-rio
+  en: the-nuns-who-gave-up-to-the-river
+  ru: monahini-kotorye-sdalis-reke
+title:
+  pt: As freiras que se renderam ao rio
+  en: The Nuns Who Gave Up to the River
+  ru: Монахини, которые сдались реке
+epoch: uniao-restauracao-e-ouro-do-brasil
+level: story
+year: 1677
+place:
+  name:
+    pt: Coimbra, Mosteiro de Santa Clara-a-Velha
+    en: Coimbra, Santa Clara-a-Velha Monastery
+    ru: Коимбра, монастырь Санта-Клара-а-Велья
+  short:
+    pt: Coimbra
+    en: Coimbra
+    ru: Коимбра
+  lat: 40.2027742
+  lon: -8.4334153
+bridge:
+  name: Mosteiro de Santa Clara-a-Velha
+  title:
+    pt: Mosteiro de Santa Clara-a-Velha
+    en: Monastery of Santa Clara-a-Velha
+    ru: Монастырь Санта-Клара-а-Велья
+  address: Santa Clara, Coimbra
+  lat: 40.2027742
+  lon: -8.4334153
+  maps_url: https://www.google.com/maps/place/Mosteiro+de+Santa+Clara-a-Velha/@40.2027783,-8.4359902,17z/data=!3m2!4b1!5s0xd22f9a99ffb0bdf:0x6d4b063b651e04bf!4m6!3m5!1s0xd22f9a90a9a551f:0x5719a7fa4d796c96!8m2!3d40.2027742!4d-8.4334153!16s/m/03h15_k
+  url: https://en.wikipedia.org/wiki/Monastery_of_Santa_Clara-a-Velha
+  note:
+    pt: Ruínas da igreja e do claustro, resgatadas ao lodo; no centro interpretativo, objetos das freiras.
+    en: The church and cloister ruins, recovered from the silt; the nuns’ belongings in the visitor center.
+    ru: Руины церкви и монастырского двора, поднятые из ила; в музейном центре рядом вещи монахинь.
+area: coimbra
+threads:
+  - natureza
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Durante trezentos anos, as freiras subiram o chão para fugir ao rio.
+  en: Coimbra’s nuns spent three centuries raising their floor to escape the river.
+  ru: Монахини Коимбры триста лет делали пол выше, чтобы уйти от реки.
+seo:
+  title:
+    pt: Um mosteiro no rio · Coimbra, 1677
+    en: A Convent in the River · Coimbra, 1677
+    ru: Монастырь в реке · Коимбра, 1677
+story:
+  pt: |-
+    Em 1314, a Rainha Santa Isabel refundou em Coimbra um mosteiro de clarissas, mesmo à beira do Mondego. O sítio era baixo e, logo em 1331, um ano depois da sagração da igreja, o rio inundou-a.
+
+    As cheias repetiram-se século após século. De cada vez, o rio deixava uma camada de lodo, e o terreno à volta do mosteiro ia subindo. As freiras respondiam da mesma maneira: subiam os pisos, uma e outra vez. Por volta de 1612, o novo piso da igreja já teve de ser construído a meia altura das paredes, e passou a rezar-se por cima do andar inundado.
+
+    Em 1677, as freiras renderam-se e mudaram-se para um novo mosteiro no monte em frente. E o lodo que as expulsou cobriu as paredes antigas e guardou-as durante quase trezentos anos.
+  en: |-
+    In 1314, Queen Isabel of Aragon refounded a convent of Poor Clares in Coimbra, right on the bank of the Mondego. The ground was low, and as early as 1331, a year after the church was consecrated, the river flooded it.
+
+    The floods came back century after century. Each time the river left a layer of silt, and the ground around the convent rose. The nuns answered in kind: they raised their floors again and again. Around 1612, the newest floor in the church had to be built halfway up the walls, and from then on they prayed above the flooded lower level.
+
+    In 1677 the nuns gave up and moved to a new convent on the hill across the river. And the silt that drove them out covered the old walls and preserved them for almost three hundred years.
+  ru: |-
+    В 1314 году королева Изабел Арагонская заново основала в Коимбре монастырь кларисс, прямо на берегу Мондегу. Место было низкое, и уже в 1331 году, через год после освящения церкви, река её затопила.
+
+    Наводнения повторялись век за веком. Каждый раз река оставляла слой ила, и земля вокруг монастыря росла. Монахини отвечали тем же: снова и снова поднимали полы. Около 1612 года очередной пол в церкви пришлось строить уже на середине высоты стен, и молились теперь над затопленным нижним этажом.
+
+    В 1677 году монахини сдались и переехали в новый монастырь на холме напротив. А ил, который их выгнал, укрыл старые стены и сохранил их почти триста лет.
+more:
+  pt: |-
+    A Rainha Santa Isabel gostava deste mosteiro e viveu os últimos anos ao seu lado. Em 1336 foi aqui sepultada, num túmulo de pedra que mandara fazer em vida. Ao subirem para o monte, as freiras levaram o túmulo consigo, e hoje ele está no novo mosteiro, Santa Clara-a-Nova.
+
+    O mosteiro velho ficou meio em água e lodo: de fora viam-se só o alto das paredes e as abóbadas da igreja. Foi classificado como monumento nacional em 1910, mas só depois de 1995 foi possível escavá-lo. Bombeou-se a água, tirou-se o lodo, e por baixo apareceram o piso inferior, o claustro, loiça e objetos das freiras. Desde 2009 as ruínas estão abertas, com um centro interpretativo ao lado.
+  en: |-
+    Queen Isabel loved this convent and spent her last years beside it. In 1336 she was buried here, in a stone tomb she had ordered in advance. When the nuns moved up the hill, they took the tomb with them, and today it stands in the new convent, Santa Clara-a-Nova.
+
+    The old convent sat half in water and mud: only the tops of the walls and the church vaults showed. It was declared a national monument in 1910, but it couldn’t be excavated until after 1995. The water was pumped out, the silt removed, and underneath were the lower floor, the cloister, pottery, and the nuns’ belongings. The ruins have been open since 2009, with a visitor center next door.
+  ru: |-
+    Королева Изабел любила этот монастырь и рядом с ним провела последние годы. В 1336 году её похоронили здесь, в каменной гробнице, которую она заказала заранее. Уходя на холм, монахини забрали гробницу с собой, и теперь она стоит в новом монастыре, Санта-Клара-а-Нова.
+
+    Старый монастырь стоял наполовину в воде и иле: наружу торчали только верх стен и своды церкви. Национальным памятником его объявили в 1910 году, но раскопать смогли только после 1995 года. Воду откачали, ил вынули, и под ним нашлись нижний пол, монастырский двор с галереями, посуда и вещи монахинь. С 2009 года руины открыты, рядом музейный центр с находками.
+myth:
+  verdict: myth
+  statement:
+    pt: As freiras de Santa Clara-a-Velha deixaram o mosteiro por um terramoto
+    en: The nuns of Santa Clara-a-Velha left their convent because of an earthquake
+    ru: Монахини Санта-Клара-а-Велья ушли из монастыря из-за землетрясения
+  answer:
+    pt: "Expulsou-as o rio: o Mondego inundava o mosteiro desde 1331, e em 1677 as freiras mudaram-se para o monte."
+    en: "The river drove them out: the Mondego flooded the convent from 1331, and in 1677 the nuns moved up the hill."
+    ru: "Их выгнала река: Мондегу заливала монастырь с 1331 года, и в 1677 году монахини переехали на холм."
+sources:
+  - title: "Wikipedia: Monastery of Santa Clara-a-Velha"
+    url: https://en.wikipedia.org/wiki/Monastery_of_Santa_Clara-a-Velha
+    type: reference
+    accessed: 2026-11-23
+image:
+  file: santa-clara-a-velha-1677.webp
+  alt:
+    pt: "Azulejo azul e branco: dentro da igreja gótica, as freiras sobre um novo piso de tábuas e pedra, acima da água que cobre o andar de baixo; pela janela vê-se o rio e uma colina com a cidade."
+    en: "Blue-and-white azulejo: inside a Gothic church, nuns stand on a new floor of planks and stone above the water that covers the lower level; through the window are the river and a hill with the town."
+    ru: "Сине-белое азулежу: внутри готической церкви монахини стоят на новом полу из досок и камня над водой, затопившей нижний этаж; в окне видны река и холм с городом."
+  caption:
+    pt: As freiras sobem o piso da igreja acima das cheias do Mondego. Coimbra, por volta de 1612. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The nuns raise the church floor above the floods of the Mondego. Coimbra, around 1612. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Монахини поднимают пол церкви над разливами Мондегу. Коимбра, около 1612 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: santa-clara-a-velha-1677-detalhe.webp
+  alt:
+    pt: Ruínas da igreja gótica e do claustro de Santa Clara-a-Velha, com telhado novo e casas de Coimbra ao fundo.
+    en: The ruins of the Gothic church and cloister of Santa Clara-a-Velha, with a new roof and the houses of Coimbra behind.
+    ru: Руины готической церкви и монастырского двора Санта-Клара-а-Велья, новая крыша и дома Коимбры позади.
+  caption:
+    pt: Ruínas da igreja e do claustro de Santa Clara-a-Velha, Coimbra. Gerd Eichmann, 2011.
+    en: The ruins of the church and cloister of Santa Clara-a-Velha, Coimbra. Gerd Eichmann, 2011.
+    ru: Руины церкви и монастырского двора Санта-Клара-а-Велья, Коимбра. Герд Айхман (Gerd Eichmann), 2011.
+  author: Gerd Eichmann
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Coimbra-Mosteiro_de_Santa_Clara-a-Velha-06-2011-gje.jpg
+status: ready
+published: 2026-12-20
+placeholder: false
+ru_ready: true

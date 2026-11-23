@@ -1,0 +1,137 @@
+id: palacio-bucaco-1888
+slug:
+  pt: o-palacio-acabado-para-reis-que-ja-nao-havia
+  en: the-palace-finished-for-kings-who-were-gone
+  ru: dvorets-dostroennyy-dlya-koroley-kotoryh-ne-ostalos
+title:
+  pt: O palácio acabado para reis que já não havia
+  en: The Palace Finished for Kings Who Were Gone
+  ru: Дворец, достроенный для королей, которых не осталось
+epoch: monarquia-e-republica
+level: story
+year: 1888
+place:
+  name:
+    pt: Mata do Buçaco, Palace Hotel
+    en: Buçaco Forest, Palace Hotel
+    ru: Лес Бусаку, дворец-отель
+  short:
+    pt: Buçaco
+    en: Buçaco
+    ru: Бусаку
+  lat: 40.3759896
+  lon: -8.3650551
+bridge:
+  name: Palace Hotel do Buçaco
+  title:
+    pt: Palace Hotel do Buçaco
+    en: Palace Hotel do Buçaco
+    ru: Дворец Бусаку (Palace Hotel do Buçaco)
+  address: Mata do Buçaco, Luso, Mealhada
+  lat: 40.3759896
+  lon: -8.3650551
+  maps_url: https://www.google.com/maps/place/Bu%C3%A7aco+Palace+Hotel/@40.3759937,-8.36763,17z/data=!3m1!4b1!4m9!3m8!1s0xd3d65e0d4b01d75:0x6d957a0f854da921!5m2!4m1!1i2!8m2!3d40.3759896!4d-8.3650551!16s/m/04cw_v8
+  url: https://en.wikipedia.org/wiki/Bu%C3%A7aco_Palace
+  note:
+    pt: Palácio neomanuelino na mata, ao lado da igreja e do claustro que restam do convento carmelita.
+    en: A neo-Manueline palace in the forest, next to the surviving church and cloister of the Carmelite convent.
+    ru: Неомануэлинский дворец в лесу, рядом уцелевшие церковь и двор монастыря кармелитов.
+area: bucaco
+threads:
+  - poder-e-revolta
+  - engenho
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: O palácio real do Buçaco ficou pronto quando já não havia reis.
+  en: The Buçaco royal palace was finished when no kings were left.
+  ru: Королевский дворец в лесу Бусаку достроили, когда королей уже не осталось.
+story:
+  pt: |-
+    Em 1888, começou a construir-se na Mata do Buçaco um palácio real de verão e de caça. O lugar foi aberto sem piedade: demoliu-se a maior parte do velho convento carmelita, e ficaram só a igreja, o claustro e algumas celas.
+
+    O arquiteto italiano Luigi Manini, cenógrafo de teatro, desenhou o palácio como um conto de fadas: torre, arcos rendilhados, tudo no estilo da época dos Descobrimentos. A obra levou quase vinte anos. Em 1908, o rei D. Carlos foi morto em Lisboa, e em 1910 a monarquia caiu.
+
+    A família real nunca chegou a viver no palácio. Em 1917 abriu como hotel, e ainda hoje lá dormem hóspedes.
+  en: |-
+    In 1888, work began on a royal summer and hunting palace in the Buçaco forest. The site was cleared without mercy: most of the old Carmelite convent was torn down, leaving only the church, the cloister, and a few cells.
+
+    The Italian architect Luigi Manini, a theater set designer, drew the palace like a fairy tale: a tower, lace-like arches, all in the style of the Age of Discovery. It took almost twenty years to build. In 1908 King Carlos was assassinated in Lisbon, and in 1910 the monarchy fell.
+
+    The royal family never got to live in the palace. In 1917 it opened as a hotel, and guests still stay there today.
+  ru: |-
+    В 1888 году в лесу Бусаку начали строить королевский летний и охотничий дворец. Место освобождали без жалости: снесли большую часть старого монастыря кармелитов, оставили только церковь, двор и несколько келий.
+
+    Итальянский архитектор Луиджи Манини, театральный декоратор, нарисовал дворец как сказку: башня, резные арки, всё в стиле эпохи открытий. Строили его почти двадцать лет. В 1908 году в Лиссабоне убили короля Карлуша, а в 1910 году монархию свергли.
+
+    Королевская семья пожить во дворце так и не успела. В 1917 году его открыли как гостиницу, и в ней до сих пор живут гости.
+more:
+  pt: |-
+    O palácio está decorado com azulejos com cenas da literatura e da história portuguesas, entre elas a Batalha do Buçaco: Manini e os seus sucessores não construíam uma casa, mas um monumento ao passado português. As obras terminaram em 1907, um ano antes da morte do rei.
+
+    Junto ao palácio sobreviveram celas do convento, e uma delas é especialmente lembrada. Na noite a seguir à Batalha do Buçaco, a 27 de setembro de 1810, nela dormiu Wellington, que ali derrotara o exército de Masséna. As suites reais do hotel têm os nomes de D. Carlos, D. Amélia e D. Manuel, embora eles nunca lá tenham vivido.
+  en: |-
+    Inside, the palace is decorated with tiles showing scenes from Portuguese literature and history, including the Battle of Buçaco: Manini and his successors weren’t building a house but a monument to Portugal’s past. The work was finished in 1907, a year before the king was killed.
+
+    Next to the palace, some of the convent’s cells survived, and one of them is especially remembered. On the night after the Battle of Buçaco, September 27, 1810, Wellington slept there after defeating Masséna’s army. The hotel’s royal suites are named after Carlos, Amélia, and Manuel, even though they never lived there.
+  ru: |-
+    Внутри дворец украшен плиткой со сценами из португальской литературы и истории, в том числе битвы при Бусаку: Манини и его преемники строили не дом, а памятник португальскому прошлому. Работы закончили в 1907 году, за год до гибели короля.
+
+    Рядом с дворцом уцелели кельи монастыря, и одну из них помнят особо. В ночь после битвы при Бусаку, 27 сентября 1810 года, в ней спал Веллингтон, разбивший здесь армию Массены. Королевские номера в гостинице назвали именами Карлуша, Амелии и Мануэла, хотя сами они здесь не жили.
+myth:
+  verdict: myth
+  statement:
+    pt: Os últimos reis de Portugal viveram no Palácio do Buçaco
+    en: Portugal’s last kings lived in the Buçaco Palace
+    ru: Последние короли Португалии жили в дворце Бусаку
+  answer:
+    pt: O palácio foi construído para a família real entre 1888 e 1907, mas ela nunca lá chegou a viver. Desde 1917 é um hotel.
+    en: The palace was built for the royal family between 1888 and 1907, but they never got to live there. It has been a hotel since 1917.
+    ru: Дворец строили для королевской семьи с 1888 по 1907 год, но пожить в нём она не успела. С 1917 года там гостиница.
+sources:
+  - title: "Wikipedia: Buçaco Palace"
+    url: https://en.wikipedia.org/wiki/Bu%C3%A7aco_Palace
+    type: reference
+    accessed: 2026-11-23
+  - title: "Wikipedia: Buçaco Forest"
+    url: https://en.wikipedia.org/wiki/Bu%C3%A7aco_Forest
+    type: reference
+    accessed: 2026-11-23
+  - title: "Flagra: Palácio do Bussaco"
+    url: https://debug.flagra.pt/en/mealhada/palacio-do-bussaco
+    type: website
+    accessed: 2026-11-23
+image:
+  file: palacio-bucaco-1888.webp
+  alt:
+    pt: "Azulejo azul e branco: um palácio de pedra rendilhada com torre e pináculos no meio de uma mata, uma escadaria onde dois criados levam uma arca, uma carruagem à porta com hóspedes e uma ermida entre as árvores."
+    en: "Blue-and-white azulejo: a lacy stone palace with a tower and pinnacles in the middle of a forest, a staircase where two servants carry a trunk, a carriage at the door with guests, and a hermitage among the trees."
+    ru: "Сине-белое азулежу: каменный дворец с кружевной резьбой, башней и шпилями посреди леса; на лестнице двое слуг несут сундук, у входа карета с гостями, среди деревьев часовня."
+  caption:
+    pt: Os primeiros hóspedes chegam ao palácio que nunca foi casa de reis. Buçaco, 1917. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The first guests arrive at the palace that never became a home for kings. Buçaco, 1917. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Первые гости приезжают во дворец, который так и не стал домом королей. Бусаку, 1917 год. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: palacio-bucaco-1888-detalhe.webp
+  alt:
+    pt: Arcos neomanuelinos rendilhados do Palácio do Buçaco, com cruzes da Ordem de Cristo no friso.
+    en: The lacy neo-Manueline arches of the Buçaco Palace, with crosses of the Order of Christ on the frieze.
+    ru: Кружевные неомануэлинские арки дворца Бусаку, на фризе кресты Ордена Христа.
+  caption:
+    pt: Arcos neomanuelinos do Palácio do Buçaco. Joseolgon.
+    en: Neo-Manueline arches of the Buçaco Palace. Joseolgon.
+    ru: Неомануэлинские арки дворца Бусаку. Joseolgon.
+  author: Joseolgon
+  license: CC BY-SA 4.0
+  license_url: https://creativecommons.org/licenses/by-sa/4.0/
+  source_url: https://commons.wikimedia.org/wiki/File:Palácio_do_Buçaco_(2).jpg
+status: ready
+published: 2026-12-27
+placeholder: false
+ru_ready: true
