@@ -33,9 +33,9 @@ bridge:
   maps_url: https://www.google.com/maps/place/Homenagem+ao+primeiro+autom%C3%B3vel+de+Portugal/@38.0105214,-8.6958131,17z/data=!4m6!3m5!1s0xd1bc72bd352c3dd:0xec99f188987862a9!8m2!3d38.0105214!4d-8.6932382!16s%2Fg%2F11v5594b52
   url: https://www.cm-santiagodocacem.pt/
   note:
-    pt: A réplica do primeiro carro de Portugal está na vila aonde ele chegou em 1895.
-    en: A replica of Portugal’s first car stands in the town it reached in 1895.
-    ru: Копия первой машины Португалии стоит в городе, куда она доехала в 1895 году.
+    pt: Escultura em memória do primeiro carro de Portugal, na cidade onde chegou em 1895.
+    en: A sculpture in memory of Portugal’s first car, in the town it reached in 1895.
+    ru: Скульптура в память о первой машине Португалии стоит в городе, куда она доехала в 1895 году.
 threads:
   - engenho
 importance: 2
@@ -86,7 +86,7 @@ meanwhile:
     source: https://en.wikipedia.org/wiki/Lumi%C3%A8re_brothers
 more:
   pt: >-
-    No início encheram o depósito com petróleo, porque ninguém em Portugal sabia com que combustível o carro andava. Só depois se percebeu que precisava de gasolina. Com o conde seguiam um mecânico francês e um fotógrafo.
+    No início encheram o depósito com petróleo, porque ninguém em Portugal sabia com que combustível o carro andava. Só depois se percebeu que precisava de gasolina. Com o conde seguiam um mecânico francês e um fotógrafo. O próprio Panhard sobreviveu: foi doado ao Automóvel Club de Portugal em 1954 e restaurado, e já foi mostrado em Santiago do Cacém.
 
 
     Poucos anos depois, os automóveis já eram o brinquedo da nobreza, e o maior entusiasta do país era o próprio rei D. Carlos I: tinha vários carros e conduzia-os ele mesmo. Em 1903 nasceu o Real Automóvel Club de Portugal, cujo emblema, segundo se diz, foi desenhado pelo rei. O clube lutava por leis claras para os condutores e por boas estradas, e em 1913 publicou o primeiro mapa de estradas de Portugal.
@@ -94,7 +94,7 @@ more:
 
     As estradas onde em 1895 o carro encontrou o burro continuaram muito tempo a ser estradas de carroças. Só depois da Primeira Guerra Mundial o número de carros multiplicou-se, e em 1927 nasceu um organismo para cuidar das estradas de todo o país.
   en: >-
-    At first they filled the tank with kerosene, because no one in Portugal knew what the car ran on. Only later did they figure out it needed gasoline. A French mechanic and a photographer rode along with the count.
+    At first they filled the tank with kerosene, because no one in Portugal knew what the car ran on. Only later did they figure out it needed gasoline. A French mechanic and a photographer rode along with the count. The Panhard itself survived: it was donated to the Automobile Club of Portugal in 1954, restored, and has been shown in Santiago do Cacém.
 
 
     A few years later, cars had become a toy of the nobility, and the country’s biggest car enthusiast was King Carlos I himself: he owned several and drove them himself. In 1903 the Royal Automobile Club of Portugal was founded, and the king is said to have drawn its emblem. The club pushed for clear laws for drivers and for good roads, and in 1913 it published Portugal’s first road map.
@@ -102,7 +102,7 @@ more:
 
     The roads where the car met the donkey in 1895 stayed cart roads for a long time. Only after World War I did the number of cars multiply, and in 1927 an agency was created to look after roads across the whole country.
   ru: >-
-    В машину сначала залили керосин, потому что никто в Португалии не знал, на чём она ездит. Только потом выяснили, что нужен бензин. С графом ехали французский механик и фотограф.
+    В машину сначала залили керосин, потому что никто в Португалии не знал, на чём она ездит. Только потом выяснили, что нужен бензин. С графом ехали французский механик и фотограф. Сам «Панар» уцелел: в 1954 году его передали Автомобильному клубу Португалии, отреставрировали, и в Сантьягу-ду-Касен его уже показывали.
 
 
     Через несколько лет машины уже были игрушкой знати, и главным автомобилистом страны стал сам король Карлуш I: у него было несколько автомобилей, и он водил их сам. В 1903 году появился Королевский автомобильный клуб, эмблему которому король, как считается, нарисовал своей рукой. Клуб добивался понятных законов для водителей и хороших дорог, а в 1913 году выпустил первую дорожную карту Португалии.
@@ -128,6 +128,14 @@ sources:
     url: https://pt.wikipedia.org/wiki/Autom%C3%B3vel_Club_de_Portugal
     type: reference
     accessed: 2026-11-14
+  - title: "ACP: Panhard & Levassor (Clássicos com história)"
+    url: https://www.acp.pt/classicos/os-classicos/classicos-com-historia/panhard-e-levassor
+    type: official
+    accessed: 2026-11-25
+  - title: "Câmara Municipal de Santiago do Cacém: Santiago do Cacém inaugurou monumento ao 1.º automóvel que circulou em Portugal (2019)"
+    url: https://www.cm-santiagocacem.pt/atualidade/noticias/santiago-do-cacem-inaugurou-monumento-ao-1-o-automovel-que-circulou-em-portugal/
+    type: official
+    accessed: 2026-11-25
 image:
   file: primeiro-automovel-1895.webp
   alt:
