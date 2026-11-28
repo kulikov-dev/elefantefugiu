@@ -148,7 +148,14 @@ if (want('window')) {
     ok(`${what}?hoje=${MIDDLE}: the tab icon is the holiday's`, await iconOf(await open(`${url}?hoje=${MIDDLE}`)));
     ok(`${what}?hoje=${AFTER}: the usual tab icon`, !(await iconOf(await open(`${url}?hoje=${AFTER}`))));
   }
-  const tab = await open(`/ru/?hoje=${MIDDLE}`);
+  // After ?hoje=off the real date of the clock applies, so the tab's clock is frozen on a day outside every window (OUT_DAY): the result must not depend on today.
+  const tab = await browser.newPage();
+  await tab.evaluateOnNewDocument((day) => {
+    const Real = Date;
+    const t = Real.parse(`${day}T12:00:00Z`);
+    window.Date = class extends Real { constructor(...a) { if (a.length) super(...a); else super(t); } static now() { return t; } };
+  }, OUT_DAY);
+  await tab.goto(`${base}/ru/?hoje=${MIDDLE}`, { waitUntil: 'load' });
   await tab.goto(`${base}/ru/istoriya/${story.slug.ru}/`, { waitUntil: 'load' });
   ok('?hoje= given once is kept for the next page of the tab (no parameter in its address)', await iconOf(tab));
   await tab.goto(`${base}/ru/istoriya/${story.slug.ru}/?hoje=off`, { waitUntil: 'load' });
