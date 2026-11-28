@@ -73,6 +73,10 @@ const BEHAVIOUR = {
   ttMaxZoom: 15,
   /** Degrees east of the allowed area the map may show while the card stands at its right. */
   ttEastRoom: 14,
+  /** Epoch page, a record of the feed under the pointer: how long before the map moves to its place, how long the pointer may stay away from the feed before the map goes back, how long the flight is. */
+  peekDelayMs: 350,
+  peekReturnMs: 1500,
+  peekFlySeconds: 0.6,
 };
 
 /** Icons of the map tools (a 24 px grid, stroke drawn with currentColor). */
@@ -206,6 +210,10 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const mouseOnly = window.matchMedia('(hover: hover) and (pointer: fine)');
   /** The record of the feed under the pointer (epoch page), or null. */
   let hoverId: string | null = null;
+  /** The members of the clusters drawn now (key of the cluster -> ids), to light the cluster that holds the record under the pointer. */
+  const clusterMembers = new Map<string, string[]>();
+  /** A record that the map moved to (epoch page): it stays a single marker until the map goes back. */
+  let peekPin: string | null = null;
   /** "Through the centuries": the player (loaded at the first press of its button) and whether markers still carry its marks. */
   let tt: Timetravel | null = null;
   let ttDrawn = false;
@@ -277,11 +285,11 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         activeThread: state.fio,
         activeEpoch: state.epoca,
         more,
-        pinned: state.id,
+        pinned: peekPin ?? state.id,
       });
       // Markers that would sit on top of each other join into a cluster, so none hides another or takes its clicks (target size,
       // WCAG 2.2). At the closest zoom nothing separates any more, so the markers stay as they are.
-      result = map.getZoom() >= BEHAVIOUR.maxZoom ? chosen : declutterMarkers(chosen, (p) => map.latLngToContainerPoint([p.lat, p.lon]), { keep: state.id });
+      result = map.getZoom() >= BEHAVIOUR.maxZoom ? chosen : declutterMarkers(chosen, (p) => map.latLngToContainerPoint([p.lat, p.lon]), { keep: peekPin ?? state.id });
     }
 
     const wanted = new Set<string>();
@@ -293,8 +301,10 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         addLayer(m.id, m.lat, m.lon, `mk--${m.kind}`, `${card.title}, ${kind}`, '', () => select(m.id, true), toneOf(card.epoch));
       }
     }
+    clusterMembers.clear();
     for (const cl of result.clusters) {
       wanted.add(cl.id);
+      clusterMembers.set(cl.id, cl.ids);
       if (!layers.has(cl.id)) {
         const label = fill(pickPlural(cfg.strings, 'cluster', cl.count, cfg.pluralLocale), cl.count);
         addLayer(cl.id, cl.lat, cl.lon, 'mk--cluster', label, String(cl.count), () => openCluster(cl.ids), clusterTone(cl.ids));
@@ -311,6 +321,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         const el = marker.getElement();
         const selected = key === state.id;
         el?.classList.toggle('mk--selected', selected || key === hoverId);
+        el?.classList.toggle('mk--lit', hoverId !== null && (clusterMembers.get(key)?.includes(hoverId) ?? false));
         // The bridge's name is written next to the selected marker only (clusters have none).
         const caption = el?.querySelector('.mk__caption');
         if (caption) caption.textContent = selected ? (byId.get(key)?.bridgeName ?? '') : '';
@@ -353,6 +364,7 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
 
     drawPlaces();
     updateOverseas();
+    lightOverseas();
     // The list and its announcement belong to the map page; on an epoch page the feed is the list.
     if (pageMode) {
       renderList(result.inArea);
@@ -565,6 +577,35 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
     if (n > 0) overseasButton.textContent = fill(pickPlural(cfg.strings, 'overseas', n, cfg.pluralLocale), n);
   };
 
+  /** The record under the pointer tells a story abroad: the plate "stories overseas" is lit (the same ring as a lit cluster) and a small arrow at the edge of the map points to the place. */
+  const farBadge = document.createElement('div');
+  farBadge.className = 'map__far';
+  farBadge.hidden = true;
+  farBadge.setAttribute('data-nosnippet', '');
+  farBadge.setAttribute('aria-hidden', 'true');
+  overseasButton.parentElement?.append(farBadge);
+  const ARROWS = ['→', '↘', '↓', '↙', '←', '↖', '↑', '↗'];
+  function lightOverseas() {
+    const card = hoverId !== null ? byId.get(hoverId) : undefined;
+    const far = !world && !overseasButton.hidden && card?.overseas ? card.overseas : null;
+    overseasButton.classList.toggle('map__overseas--lit', far !== null);
+    farBadge.hidden = far === null;
+    if (!far) return;
+    const size = map.getSize();
+    const zoom = map.getZoom();
+    const from = map.project(map.getCenter(), zoom);
+    const to = map.project([far.lat, far.lon], zoom);
+    const dx = to.x - from.x;
+    const dy = to.y - from.y;
+    const angle = Math.atan2(dy, dx);
+    farBadge.textContent = `${ARROWS[(Math.round(angle / (Math.PI / 4)) + 8) % 8]} ${far.name}`;
+    // On the edge of the map, on the ray from its middle to the place.
+    const room = BEHAVIOUR.fitPadding;
+    const k = Math.min((size.x / 2 - room) / Math.max(Math.abs(dx), 1), (size.y / 2 - room) / Math.max(Math.abs(dy), 1));
+    farBadge.style.setProperty('--far-x', String(Math.round(size.x / 2 + dx * k)));
+    farBadge.style.setProperty('--far-y', String(Math.round(size.y / 2 + dy * k)));
+  }
+
   const worldBounds = (): L.LatLngBounds => {
     const points = overseasCards().map((c) => [c.overseas!.lat, c.overseas!.lon] as L.LatLngTuple);
     const box = toLatLngBounds(cfg.home);
@@ -745,6 +786,9 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   const applyFilter = (next: Partial<Pick<MapState, 'fio' | 'epoca'>>) => {
     // An epoch chosen while the show runs ends it; a thread only narrows its list (the window stays).
     if (tt?.active && next.epoca) tt.exit(false);
+    peekHome = null;
+    peekPin = null;
+    userMoved = false;
     state = { ...state, ...next };
     if (state.id && !passesFilters(byId.get(state.id)!, state)) {
       state.id = null;
@@ -775,9 +819,84 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
   });
   // The pointer is over a record of the feed: its marker is lit as if chosen, without moving the map or the choice.
   document.addEventListener('map:hover', (e) => {
-    hoverId = (e as CustomEvent<{ id: string | null }>).detail?.id ?? null;
-    for (const [key, marker] of layers) marker.getElement()?.classList.toggle('mk--selected', key === state.id || key === hoverId);
+    const detail = (e as CustomEvent<{ id: string | null; from?: string }>).detail;
+    hoverId = detail?.id ?? null;
+    for (const [key, marker] of layers) {
+      const el = marker.getElement();
+      el?.classList.toggle('mk--selected', key === state.id || key === hoverId);
+      el?.classList.toggle('mk--lit', hoverId !== null && (clusterMembers.get(key)?.includes(hoverId) ?? false));
+    }
+    lightOverseas();
+    if (detail?.from === 'feed') peek(hoverId);
   });
+
+  // ---- epoch page: the map shows the place of the record under the pointer -------------------------------------------------
+
+  /** The view before the first move of a peek (null: the map is where the page put it). */
+  let peekHome: { center: L.LatLng; zoom: number } | null = null;
+  /** The reader moved or scaled the map: from now on a record is only lit, the map stays where it is (until the filter or the page is renewed). */
+  let userMoved = false;
+  let peekTimer: number | undefined;
+  let returnTimer: number | undefined;
+  for (const type of ['pointerdown', 'wheel', 'keydown'] as const) canvas.addEventListener(type, () => (userMoved = true), { passive: true });
+
+  const moveTo = (center: L.LatLngExpression, zoom: number) => {
+    if (animate) map.flyTo(center, zoom, { duration: BEHAVIOUR.peekFlySeconds });
+    else map.setView(center, zoom, { animate: false });
+  };
+
+  /** Is the record a marker of its own, well inside the map (not under the controls at the edge)? */
+  const standsAlone = (id: string): boolean => {
+    const marker = layers.get(id);
+    if (!marker) return false;
+    const p = map.latLngToContainerPoint(marker.getLatLng());
+    const size = map.getSize();
+    const pad = BEHAVIOUR.fitPadding;
+    return p.x >= pad && p.y >= pad && p.x <= size.x - pad && p.y <= size.y - pad;
+  };
+
+  /** The lowest zoom, not below the current one, at which the card stands apart from the others when the map is centred on it (the rules of markers.ts). */
+  const zoomToStandAlone = (card: CardInfo): number => {
+    const size = map.getSize();
+    const half = L.point(size.x / 2, size.y / 2);
+    for (let zoom = Math.max(map.getZoom(), map.getMinZoom()); zoom <= BEHAVIOUR.maxZoom; zoom += 1) {
+      const middle = map.project([card.lat, card.lon], zoom);
+      const box = L.latLngBounds(map.unproject(middle.add([-half.x, half.y]), zoom), map.unproject(middle.add([half.x, -half.y]), zoom));
+      const chosen = selectMarkers({ cards, bounds: fromLatLngBounds(box), center: { lat: card.lat, lon: card.lon }, activeThread: state.fio, activeEpoch: state.epoca });
+      const result = zoom >= BEHAVIOUR.maxZoom ? chosen : declutterMarkers(chosen, (p) => map.project([p.lat, p.lon], zoom).subtract(middle).add(half));
+      if (result.markers.some((m) => m.id === card.id)) return zoom;
+    }
+    return BEHAVIOUR.cardZoom;
+  };
+
+  function peek(id: string | null) {
+    window.clearTimeout(peekTimer);
+    window.clearTimeout(returnTimer);
+    if (pageMode || world || tt?.active) return;
+    if (id === null) {
+      if (peekHome && !userMoved) {
+        returnTimer = window.setTimeout(() => {
+          if (!peekHome || userMoved) return;
+          const home = peekHome;
+          peekHome = null;
+          peekPin = null;
+          moveTo(home.center, home.zoom);
+          refreshMarkers();
+        }, BEHAVIOUR.peekReturnMs);
+      }
+      return;
+    }
+    const card = byId.get(id);
+    if (!card || userMoved || card.overseas) return; // a story abroad does not fly the map across the world: the plate and the arrow show it
+    peekTimer = window.setTimeout(() => {
+      if (hoverId !== id || userMoved || world || standsAlone(id)) return;
+      const zoom = zoomToStandAlone(card);
+      peekHome ??= { center: map.getCenter(), zoom: map.getZoom() };
+      peekPin = id;
+      moveTo([card.lat, card.lon], zoom);
+      refreshMarkers();
+    }, BEHAVIOUR.peekDelayMs);
+  }
   document.addEventListener('map:focus', (e) => {
     const id = (e as CustomEvent<{ id: string | null }>).detail?.id ?? null;
     state = { ...state, id };
@@ -838,8 +957,8 @@ export async function mount(root: HTMLElement, onUnavailable: () => void): Promi
         bounds: () => fromLatLngBounds(map.getBounds()),
         fit: (box, bottom, animated, maxZoom, right = 0, tall = false) => {
           if (world) setWorld(false);
-          // The card stands at the right: the country has to stand left of the middle, so the map may look further east than its own area allows.
-          if (right > 0) map.setMaxBounds(L.latLngBounds(maxBounds.getSouthWest(), [maxBounds.getNorth(), maxBounds.getEast() + BEHAVIOUR.ttEastRoom]));
+          // The card stands at the right (or at the foot on a phone, where the view is wider than the area): the country has to stand in the free part, so the map may look further east than its own area allows.
+          map.setMaxBounds(L.latLngBounds(maxBounds.getSouthWest(), [maxBounds.getNorth(), maxBounds.getEast() + BEHAVIOUR.ttEastRoom]));
           const pad = BEHAVIOUR.fitPadding;
           if (tall) {
             // Fractional zoom while the mode runs, so the height of the country fills the map.

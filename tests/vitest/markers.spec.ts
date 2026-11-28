@@ -233,6 +233,18 @@ describe('priority', () => {
     }
   });
 
+  it('shows the pinned card (the record under the pointer on an epoch page) even when a limit of 7 would hide it', () => {
+    // 20 cards of one epoch, all in the area; the pinned one is the farthest from the centre, so the limit would put it into a cluster.
+    const cards: MapCard[] = Array.from({ length: 20 }, (_, i) => ({ id: `c${String(i).padStart(2, '0')}`, lat: 38 + i * 0.1, lon: -9 + i * 0.05, importance: 1 as const, threads: [], epoch: 'e1' }));
+    const input = { cards, bounds: { south: 37, north: 41, west: -10, east: -7 }, center: { lat: 38, lon: -9 }, activeEpoch: 'e1', limit: 7 };
+    const plain = selectMarkers(input);
+    expect(plain.markers.some((m) => m.id === 'c19')).toBe(false);
+    const pinned = selectMarkers({ ...input, pinned: 'c19' });
+    expect(pinned.markers.some((m) => m.id === 'c19')).toBe(true);
+    expect(pinned.markers.length + pinned.clusters.length).toBeLessThanOrEqual(7);
+    expect(pinned.clusters.every((c) => !c.ids.includes('c19'))).toBe(true);
+  });
+
   it('ignores a pinned card that is outside the area or hidden by the filters', () => {
     const cards: MapCard[] = [
       { id: 'in', lat: 38.7, lon: -9.1, importance: 3, threads: ['mar'] },

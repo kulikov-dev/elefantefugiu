@@ -507,6 +507,31 @@
   display: none;
 }
 
+.map__overseas--lit {
+  outline: var(--map-marker-border) solid var(--color-ink);
+  outline-offset: var(--map-marker-border);
+}
+
+/* The arrow at the edge of the map towards the place of a story abroad ("→ Goa"); the position is set by the script (--far-x, --far-y, pixels of the map). */
+.map__far {
+  position: absolute;
+  inset-inline-start: calc(var(--far-x, 0) * 1px);
+  inset-block-start: calc(var(--far-y, 0) * 1px);
+  translate: -50% -50%;
+  z-index: var(--z-map-overlay);
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-overlay);
+  box-shadow: var(--shadow-raised);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-strong);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.map__far[hidden] {
+  display: none;
+}
+
 /* A short message (no position, access denied): under the plate, never a pop-up. */
 .map__message {
   position: absolute;
@@ -753,6 +778,12 @@
 .mk--selected .mk__shape {
   scale: var(--map-marker-selected-scale);
   outline: var(--map-marker-border) solid var(--color-ink);
+  outline-offset: var(--map-marker-border);
+}
+
+/* Epoch page: the record under the pointer lies inside this cluster; the ring is the one of a lit point, in the colour of the epoch, the number stays. */
+.mk--lit .mk__shape {
+  outline: var(--map-marker-border) solid var(--mk-tone, var(--color-ink));
   outline-offset: var(--map-marker-border);
 }
 
