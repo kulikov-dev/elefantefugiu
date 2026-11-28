@@ -425,3 +425,91 @@
   text:
     ru: "Раннее ружьё XV–XVI веков, предшественник мушкета: порох поджигали тлеющим фитилём. Испанцы оставили в крепости Ангры почти четыреста аркебуз."
     en: "An early gun of the 15th and 16th centuries, the forerunner of the musket: the powder was lit with a smouldering match. The Spanish left almost four hundred arquebuses in the fortress at Angra."
+
+- id: massena
+  term: Masséna
+  inline: false
+  name: { ru: Массена, en: Masséna }
+  forms:
+    ru: [Массен*]
+    en: [Masséna, Massena]
+  text:
+    ru: "Французский маршал Андре Массена. В 1810 году вёл к Лиссабону армию в 65 тысяч человек, при Бусаку не прорвался по хребту и обошёл его, а перед линиями Торриш-Ведраш простоял всю зиму."
+    en: "André Masséna, a marshal of France. In 1810 he led an army of 65,000 toward Lisbon, failed to break through at Buçaco and went around the ridge, then spent the whole winter in front of the Lines of Torres Vedras."
+
+- id: wellington
+  term: Wellington
+  inline: true
+  name: { ru: Веллингтон, en: Wellington }
+  forms:
+    ru: [Веллингтон*]
+    en: [Wellington]
+  text:
+    ru: "Артур Уэлсли, британский генерал, с 1809 года командовавший британско-португальской армией, позже герцог Веллингтон. Выиграл при Бусаку и всё же отступил, а французов остановил линиями Торриш-Ведраш."
+    en: "Arthur Wellesley, the British general who from 1809 commanded the British-Portuguese army, later Duke of Wellington. He won at Buçaco and still fell back, then stopped the French with the Lines of Torres Vedras."
+
+- id: linhas-de-torres-vedras
+  term: Linhas de Torres Vedras
+  inline: true
+  name: { ru: линии Торриш-Ведраш, en: Lines of Torres Vedras }
+  forms:
+    ru: [лини* Торриш-Ведраш]
+    en: [Lines of Torres Vedras]
+  text:
+    ru: "Цепь фортов и земляных валов к северу от Лиссабона, от реки Тежу до океана. Веллингтон велел строить её с осени 1809 года, и в 1810 году французская армия не решилась её штурмовать."
+    en: "A chain of forts and earthworks north of Lisbon, from the Tagus to the ocean. Wellington ordered it built from the autumn of 1809, and in 1810 the French army did not dare to attack it."
+
+- id: beresford
+  term: Beresford
+  inline: false
+  name: { ru: Бересфорд, en: Beresford }
+  forms:
+    ru: [Бересфорд*]
+    en: [Beresford]
+  text:
+    ru: "Британский генерал Уильям Бересфорд, которому поручили заново собрать и обучить португальскую армию. Её полки при Бусаку держались не хуже британских."
+    en: "William Beresford, the British general put in charge of rebuilding and training the Portuguese army. Its regiments held at Buçaco as well as the British ones."
+
+- id: d-miguel
+  term: D. Miguel
+  inline: false
+  name: { ru: дон Мигел, en: Dom Miguel }
+  forms:
+    ru: [Мигел*]
+    en: [Miguel]
+  text:
+    ru: "Брат короля Педру IV, которому тот доверил регентство при дочери Марии. В 1828 году Мигел объявил королём себя, и из-за этого в Португалии шла гражданская война до 1834 года."
+    en: "The brother of King Pedro IV, to whom he left the regency for his daughter Maria. In 1828 Miguel declared himself king, and the civil war over it lasted in Portugal until 1834."
+
+- id: conde-de-lippe
+  term: conde de Lippe
+  inline: false
+  name: { ru: граф Липпе, en: Count Lippe }
+  forms:
+    ru: [Липпе]
+    en: [Lippe]
+  text:
+    ru: "Вильгельм Шаумбург-Липпе, немецкий граф и маршал. В 1763 году его позвали в Португалию перестроить армию, и по его проекту поставили форт над Эльвашем, который теперь носит его имя."
+    en: "Wilhelm of Schaumburg-Lippe, a German count and marshal. In 1763 he was invited to Portugal to rebuild the army, and the fort above Elvas, which now bears his name, was built to his plan."
+
+- id: guerra-das-laranjas
+  term: Guerra das Laranjas
+  inline: true
+  name: { ru: Апельсиновая война, en: War of the Oranges }
+  forms:
+    ru: [Апельсинов* войн*]
+    en: [War of the Oranges]
+  text:
+    ru: "Короткая война 1801 года, в которой Испания напала на Португалию. По преданию, название пошло от ветки апельсинов, которую испанский министр Годой послал королеве. Испанцы взяли Оливенсу, но Эльваш выстоял."
+    en: "A short war in 1801 in which Spain attacked Portugal. By tradition, the name comes from a branch of oranges the Spanish minister Godoy sent to the queen. The Spanish took Olivença, but Elvas held."
+
+- id: baluarte
+  term: baluarte
+  inline: true
+  name: { ru: бастион, en: bastion }
+  forms:
+    ru: [бастион*]
+    en: [bastion*]
+  text:
+    ru: "Выступ крепостной стены в форме угла или пятиугольника, с которого простреливали подступы к стене. Из таких выступов крепости Эльваша складываются в звезду."
+    en: "A projecting angle of a fortress wall, shaped like a corner or a pentagon, from which the approaches to the wall were covered by fire. In Elvas such projections make the forts into a star."

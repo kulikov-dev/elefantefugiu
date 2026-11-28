@@ -1,0 +1,154 @@
+id: serra-bucaco-1810
+slug:
+  pt: a-serra-que-se-entregou-depois-da-vitoria
+  en: the-ridge-given-up-after-victory
+  ru: hrebet-kotoryy-otdali-posle-pobedy
+title:
+  pt: A serra que se entregou depois da vitória
+  en: The Ridge Given Up After Victory
+  ru: Хребет, который отдали после победы
+epoch: pombal-e-terramoto
+level: story
+year: 1810
+day: 09-27
+place:
+  name:
+    pt: Serra do Buçaco
+    en: Buçaco Ridge
+    ru: Хребет Бусаку
+  short:
+    pt: Buçaco
+    en: Buçaco
+    ru: Бусаку
+  lat: 40.3788889
+  lon: -8.3597222
+bridge:
+  name: Museu Militar do Buçaco
+  title:
+    pt: Museu Militar do Buçaco
+    en: Buçaco Military Museum
+    ru: Военный музей Бусаку
+  address: Mata Nacional do Buçaco, Luso
+  lat: 40.3788889
+  lon: -8.3597222
+  maps_url: https://www.google.com/maps/place/Military+Museum+Bussaco/@40.378893,-8.3622971,17z/data=!3m1!4b1!4m6!3m5!1s0xd2303c2b7cb91c3:0x5f80bf8df13ad12d!8m2!3d40.3788889!4d-8.3597222!16s%2Fg%2F11cl_5lk84
+  url: https://rotadabairrada.pt/en/where-to-go/museu-militar-do-bucaco
+  note:
+    pt: O museu, na serra da batalha, mostra armas, uniformes e uma maqueta; ao lado está o obelisco de 1873.
+    en: The museum on the battle ridge shows weapons, uniforms and a scale model; the 1873 obelisk is beside it.
+    ru: "Музей на хребте, где шла битва: оружие, форма и макет с армиями; рядом обелиск 1873 года."
+area: bucaco
+threads:
+  - poder-e-revolta
+  - gente-como-nos
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: A batalha depois da qual o vencedor recuou.
+  en: The battle after which the winner retreated.
+  ru: Битва, после которой победитель отступил.
+seo:
+  title:
+    pt: A serra que se entregou depois da vitória · Buçaco, 1810
+    en: The Ridge Given Up After Victory · Buçaco, 1810
+    ru: Хребет, который отдали после победы · Бусаку, 1810
+story:
+  pt: |-
+    Em 1810, os franceses invadiram Portugal pela terceira vez. O marechal Masséna marchava sobre Lisboa com cerca de 65 mil soldados. Wellington esperava-os na serra do Buçaco, junto à mata que os frades carmelitas guardavam do machado havia dois séculos. Metade do seu exército era português: regimentos treinados de novo por oficiais britânicos, que ainda não tinham enfrentado uma grande batalha.
+
+    A 27 de setembro, os franceses subiram as encostas cinco vezes, e cinco vezes foram repelidos. Os portugueses aguentaram tão bem como os britânicos. Wellington passou a noite no convento dos carmelitas.
+
+    Mas de manhã soube-se que Masséna tinha encontrado um caminho que contornava a serra. Wellington recuou para Lisboa, para as Linhas de Torres Vedras, construídas de antemão. Entregou a serra, mas o exército português ficou a saber que era capaz de resistir.
+  en: |-
+    In 1810, the French invaded Portugal for the third time. Marshal Masséna marched on Lisbon with about 65,000 men. Wellington waited for them on the Buçaco ridge, next to the forest that Carmelite friars had guarded from the axe for two centuries. Half of his army was Portuguese: regiments retrained by British officers that had never yet faced a major battle.
+
+    On September 27, the French climbed the slopes five times, and five times they were thrown back. The Portuguese held as well as the British. Wellington spent the night in the Carmelite convent.
+
+    But in the morning it turned out that Masséna had found a road around the ridge. Wellington fell back toward Lisbon, to the Lines of Torres Vedras, built in advance. He gave up the ridge, but the Portuguese army had learned that it could stand.
+  ru: |-
+    В 1810 году французы в третий раз пошли на Португалию. Маршал Массена вёл к Лиссабону около 65 тысяч солдат. Веллингтон ждал их на хребте Бусаку, рядом с лесом, который монахи-кармелиты двести лет берегли от топора. Половина его армии была португальской: эти полки заново обучили британские офицеры, и в большой битве они ещё не стояли.
+
+    27 сентября французы пять раз шли вверх по склонам, и пять раз их сбрасывали. Португальцы держались не хуже британцев. Ночь Веллингтон провёл в монастыре кармелитов.
+
+    Но утром выяснилось, что Массена нашёл дорогу в обход хребта. Веллингтон отступил к Лиссабону, к заранее построенным линиям Торриш-Ведраш. Хребет он отдал, но португальская армия узнала, что может выстоять.
+more:
+  pt: |-
+    O recuo fazia parte do plano. Um ano antes, Wellington mandara construir a norte de Lisboa as Linhas de Torres Vedras: uma cadeia de fortes e muralhas de terra do rio ao oceano. A 10 de outubro, o exército já estava por trás delas. Masséna ficou diante das Linhas todo o inverno, não se atreveu a atacar e, na primavera de 1811, retirou-se de Portugal. O Buçaco foi a última grande batalha no seu caminho para Lisboa.
+
+    Britânicos e portugueses perderam no Buçaco exatamente o mesmo número de homens, 626 cada, como se tivessem dividido a batalha ao meio. Para o exército português, reorganizado e treinado pelo general britânico Beresford, foi a primeira grande prova, e passou nela. O convento dos carmelitas continua de pé na mata, ao lado do palácio-hotel.
+  en: |-
+    The retreat was part of the plan. A year earlier, Wellington had ordered the Lines of Torres Vedras built north of Lisbon: a chain of forts and earthworks from the river to the ocean. By October 10, the army was behind them. Masséna stood in front of the Lines all winter, never dared to attack, and in the spring of 1811 led his army out of Portugal. Buçaco was the last big battle on his road to Lisbon.
+
+    At Buçaco the British and the Portuguese lost exactly the same number of men, 626 each, as if they had split the battle in half. For the Portuguese army, rebuilt and trained under the British general Beresford, it was the first great test, and it passed. The Carmelite convent still stands in the forest, next to the palace hotel.
+  ru: |-
+    Отступление было частью плана. Ещё за год Веллингтон приказал строить к северу от Лиссабона линии Торриш-Ведраш: цепь фортов и валов от реки до океана. К 10 октября армия стояла за ними. Массена простоял перед линиями всю зиму, не решился на штурм и весной 1811 года увёл армию из Португалии. Бусаку стал последней большой битвой на его пути к Лиссабону.
+
+    Британцы и португальцы потеряли при Бусаку ровно поровну, по 626 человек, будто поделили битву пополам. Для португальской армии, которую заново собрал и обучил британский генерал Бересфорд, это была первая большая проверка, и она её выдержала. Монастырь кармелитов стоит в лесу до сих пор, рядом с дворцом-гостиницей.
+myth:
+  verdict: myth
+  statement:
+    pt: No Buçaco, os britânicos combateram quase sem portugueses
+    en: At Buçaco the British fought almost without the Portuguese
+    ru: При Бусаку британцы воевали почти без португальцев
+  answer:
+    pt: Os portugueses eram cerca de metade do exército de Wellington, quase 25 mil, e perderam tantos homens como os britânicos, 626.
+    en: The Portuguese made up about half of Wellington’s army, nearly 25,000, and lost as many men as the British, 626.
+    ru: "Португальцев было около половины армии Веллингтона, почти 25 тысяч, и потеряли они столько же, сколько британцы: 626 человек."
+sources:
+  - title: "Wikipedia: Battle of Bussaco"
+    url: https://en.wikipedia.org/wiki/Battle_of_Bussaco
+    type: reference
+    accessed: 2026-11-28
+  - title: "History Hit: Bussaco Battlefield"
+    url: https://www.historyhit.com/locations/bussaco-battlefield/
+    type: website
+    accessed: 2026-11-28
+  - title: "Wikipedia: Lines of Torres Vedras"
+    url: https://en.wikipedia.org/wiki/Lines_of_Torres_Vedras
+    type: reference
+    accessed: 2026-11-28
+  - title: "Rota da Bairrada: Museu Militar do Buçaco"
+    url: https://rotadabairrada.pt/en/where-to-go/museu-militar-do-bucaco
+    type: website
+    accessed: 2026-11-28
+  - title: "Visit Portugal: Museu Militar do Buçaco"
+    url: https://www.visitportugal.com/en/node/138014
+    type: website
+    accessed: 2026-11-28
+image:
+  file: serra-bucaco-1810.webp
+  alt:
+    pt: "Azulejo azul e branco: soldados franceses de mochila sobem uma encosta rochosa entre nuvens de fumo, e no cimo, atrás de um muro de pedra, a linha de infantaria dispara; um oficial a cavalo observa com uma luneta, e entre os ciprestes vê-se uma pequena capela."
+    en: "Blue-and-white azulejo: French soldiers with packs climb a rocky slope through clouds of smoke, and at the top, behind a stone wall, a line of infantry fires; an officer on horseback watches through a spyglass, and a small chapel stands among the cypresses."
+    ru: "Сине-белое азулежу: французские солдаты с ранцами поднимаются по скалистому склону среди клубов дыма, наверху за каменной стеной стреляет линия пехоты; офицер на коне смотрит в подзорную трубу, среди кипарисов стоит небольшая часовня."
+  caption:
+    pt: Os franceses sobem as encostas e são repelidos. Buçaco, 27 de setembro de 1810. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The French climb the slopes and are thrown back. Buçaco, September 27, 1810. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Французы идут вверх по склонам, и их сбрасывают. Бусаку, 27 сентября 1810 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: serra-bucaco-1810-detalhe.webp
+  alt:
+    pt: "Gravura colorida da batalha do Buçaco: infantaria britânica de casacas vermelhas e atiradores de verde disparam do cimo de uma encosta sobre os franceses de azul, com cavaleiros e feridos em primeiro plano."
+    en: "Hand-colored print of the Battle of Buçaco: British infantry in red coats and riflemen in green fire from a hillside at the French in blue, with horsemen and wounded in the foreground."
+    ru: "Раскрашенная гравюра битвы при Бусаку: британская пехота в красных мундирах и стрелки в зелёном стреляют с холма по французам в синем, на переднем плане всадники и раненые."
+  caption:
+    pt: A batalha do Buçaco, 27 de setembro de 1810. Gravura de Thomas Sutherland, Londres, 1815. Arquivo Histórico Militar, Lisboa.
+    en: The Battle of Buçaco, September 27, 1810. Print by Thomas Sutherland, London, 1815. Arquivo Histórico Militar, Lisbon.
+    ru: Битва при Бусаку, 27 сентября 1810 года. Гравюра Томаса Сазерленда, Лондон, 1815. Исторический военный архив, Лиссабон.
+  author: Thomas Sutherland
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Batalha_do_Buçaco.jpg
+related:
+  - vimeiro-1808
+  - torres-vedras-1810
+  - mata-bucaco-1643
+status: ready
+published: 2026-12-28
+placeholder: false
+ru_ready: true

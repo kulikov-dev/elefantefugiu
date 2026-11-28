@@ -1,0 +1,157 @@
+id: terceira-fiel-1829
+slug:
+  pt: a-ilha-que-nao-jurou-ao-tio
+  en: the-island-that-wouldnt-swear-to-the-uncle
+  ru: ostrov-kotoryy-ne-prisyag-dyade
+title:
+  pt: A ilha que não jurou ao tio
+  en: The Island That Wouldn’t Swear to the Uncle
+  ru: Остров, который не присягнул дяде
+epoch: monarquia-e-republica
+level: story
+year: 1829
+day: 08-11
+place:
+  name:
+    pt: Terceira, Açores
+    en: Terceira, Azores
+    ru: Терсейра, Азоры
+  short:
+    pt: Terceira
+    en: Terceira
+    ru: Терсейра
+  lat: 38.6587601
+  lon: -27.2184982
+bridge:
+  name: Memória a D. Pedro IV (Outeiro da Memória)
+  title:
+    pt: Memória a D. Pedro IV, Angra do Heroísmo
+    en: Memorial to Pedro IV, Angra do Heroísmo
+    ru: Памятник Педру IV, Ангра-ду-Эроишму
+  address: Alto da Memória, Angra do Heroísmo
+  lat: 38.6587601
+  lon: -27.2184982
+  maps_url: https://www.google.com/maps/place/Mem%C3%B3ria+a+D.+Pedro+IV/@38.6587643,-27.2210731,17z/data=!3m1!4b1!4m6!3m5!1s0xb467f1dda0971d7:0xee997b635b4071fb!8m2!3d38.6587601!4d-27.2184982!16s%2Fg%2F1230jyxb
+  url: https://visitazores.com/en/explore/obelisco-do-alto-da-memoria
+  note:
+    pt: O obelisco no outeiro sobre Angra lembra D. Pedro IV, que em 1832 chegou à Terceira para lutar pela filha.
+    en: The obelisk above Angra honors Pedro IV, who came to Terceira in 1832 to fight for his daughter.
+    ru: Обелиск над Ангрой в память о Педру IV, который в 1832 году приплыл на Терсейру воевать за дочь.
+area: terceira
+threads:
+  - poder-e-revolta
+importance: 2
+label: documented
+min_age: all
+sensitive: false
+hook:
+  pt: Portugal aceitou o tio; só uma ilha ficou fiel à rainha menina.
+  en: Portugal backed the uncle; one island stayed loyal to its child queen.
+  ru: Вся Португалия признала дядю, и только один остров остался верен девятилетней королеве.
+seo:
+  title:
+    pt: A ilha que não jurou ao tio · Terceira, 1829
+    en: The Island Loyal to a Girl Queen · Terceira, 1829
+    ru: Остров, который не присягнул дяде · Терсейра, 1829
+story:
+  pt: |-
+    O rei D. Pedro vivia no Brasil, onde era imperador, e deu o trono português à filha, Maria, que tinha sete anos. Confiou a regência, até ela crescer, ao irmão, D. Miguel. Miguel devia jurar fidelidade à Carta Constitucional e, quando Maria fosse adulta, casar com ela.
+
+    Em fevereiro de 1828, Miguel voltou a Lisboa como regente e, no verão, proclamou-se rei. Todo o país o reconheceu, exceto a Madeira e a Terceira. A Madeira foi tomada depressa. A Terceira ficou do lado da jovem rainha.
+
+    Para a ilha foram chegando os seus partidários. A 11 de agosto de 1829, a armada de Miguel tentou desembarcar tropas junto à vila da Praia, mas o desembarque foi repelido. A Praia ganhou um novo nome: Praia da Vitória.
+  en: |-
+    King Pedro lived in Brazil, where he was emperor, and gave the Portuguese throne to his daughter Maria, who was seven. Until she grew up, he entrusted the regency to his brother Miguel. Miguel was to swear loyalty to the constitution and, once Maria came of age, marry her.
+
+    In February 1828, Miguel returned to Lisbon as regent, and that summer he proclaimed himself king. The whole country accepted him except Madeira and Terceira. Madeira was taken quickly. Terceira stood by the young queen.
+
+    Her supporters began arriving on the island. On August 11, 1829, Miguel’s fleet tried to land troops near the town of Praia, but the landing was beaten back. Praia got a new name: Praia da Vitória, “Praia of Victory.”
+  ru: |-
+    Король Педру жил в Бразилии, где был императором, и отдал португальский трон дочери Марии, которой было семь лет. Править за неё до взрослых лет он доверил своему брату Мигелу. Мигел должен был поклясться в верности конституции, а когда Мария вырастет, жениться на ней.
+
+    В феврале 1828 года Мигел вернулся в Лиссабон регентом, а летом объявил королём себя. Его признала вся страна, кроме Мадейры и Терсейры. Мадейру быстро взяли. Терсейра осталась за юной королевой.
+
+    На остров потянулись её сторонники. 11 августа 1829 года флот Мигела попытался высадить войска у городка Прая, но высадку отбили. Прая получила новое имя: Прая-да-Витория, «Прая Победы».
+more:
+  pt: |-
+    A própria Maria navegava em 1828 para a Europa. Em Gibraltar soube que o tio se proclamara rei e seguiu para Londres, rainha sem país.
+
+    D. Pedro lutou muito tempo pela filha à distância. Em 1831 abdicou da coroa do Brasil a favor do filho de cinco anos, para se dedicar só a Portugal. Em março de 1832 chegou aos Açores, reuniu nas ilhas um exército e, a 8 de julho, desembarcou com ele perto do Porto.
+
+    A guerra entre os irmãos terminou em 1834. Miguel abdicou e deixou o país para sempre, e Maria II, com quinze anos, voltou ao trono e anulou o noivado com o tio. Angra, pela sua lealdade, juntou ao nome a palavra «Heroísmo» e chama-se desde então Angra do Heroísmo. D. Pedro sobreviveu à vitória apenas alguns meses: morreu no Palácio de Queluz, no mesmo quarto onde nascera.
+  en: |-
+    In 1828 Maria herself was sailing to Europe. In Gibraltar she learned that her uncle had made himself king, and she went on to London, a queen without a country.
+
+    For a long time Pedro fought for his daughter from afar. In 1831 he gave up the crown of Brazil to his five-year-old son so he could focus on Portugal alone. In March 1832 he arrived in the Azores, raised an army on the islands, and on July 8 landed with it near Porto.
+
+    The war between the brothers ended in 1834. Miguel abdicated and left the country for good, and fifteen-year-old Maria II returned to the throne and broke off her engagement to her uncle. For its loyalty, Angra added the word “Heroism” to its name and has been called Angra do Heroísmo ever since. Pedro outlived the victory by only a few months: he died at the Queluz Palace, in the same room where he was born.
+  ru: |-
+    Сама Мария в 1828 году плыла в Европу. В Гибралтаре она узнала, что дядя объявил королём себя, и поехала в Лондон, королевой без страны.
+
+    Педру долго воевал за дочь издалека. В 1831 году он отказался от короны Бразилии в пользу пятилетнего сына, чтобы заняться только Португалией. В марте 1832 года он приплыл на Азоры, собрал на островах армию и 8 июля высадился с ней под Порту.
+
+    Война братьев закончилась в 1834 году. Мигел отрёкся и навсегда уехал из страны, а пятнадцатилетняя Мария II вернулась на трон и расторгла помолвку с дядей. Ангра за верность получила к имени слово «Героизм» и с тех пор называется Ангра-ду-Эроишму. Педру пережил победу всего на несколько месяцев: он умер во дворце Келуш, в той же комнате, где родился.
+myth_none: "Решение владельца: утверждение для игры здесь неинтересное."
+sources:
+  - title: "Wikipedia: Miguel I of Portugal"
+    url: https://en.wikipedia.org/wiki/Miguel_I_of_Portugal
+    type: reference
+    accessed: 2026-11-28
+  - title: "Wikipedia: Maria II of Portugal"
+    url: https://en.wikipedia.org/wiki/Maria_II_of_Portugal
+    type: reference
+    accessed: 2026-11-28
+  - title: "Explore Terceira: Liberal Terceira"
+    url: https://www.exploreterceiraisland.com/en/roteiro/liberal-terceira/
+    type: website
+    accessed: 2026-11-28
+  - title: "Wikipedia: Battle of Praia da Vitória"
+    url: https://en.wikipedia.org/wiki/Battle_of_Praia_da_Vit%C3%B3ria
+    type: reference
+    accessed: 2026-11-28
+  - title: "Parques de Sintra: Maria da Glória leaves Brazil for Europe (5 July 1828)"
+    url: https://dpedroiv.parquesdesintra.pt/en/chronology/1828/july/5/maria-da-gloria-leaves-brazil-for-europe/92
+    type: website
+    accessed: 2026-11-28
+  - title: "Parques de Sintra: Pedro dies in the Don Quixote Room (24 September 1834)"
+    url: https://dpedroiv.parquesdesintra.pt/en/chronology/1834/september/24/pedro--duke-of-braganca--dies-in-the-don-quixote-r/130
+    type: website
+    accessed: 2026-11-28
+  - title: "Visit Azores: Obelisco do Alto da Memória"
+    url: https://visitazores.com/en/explore/obelisco-do-alto-da-memoria
+    type: website
+    accessed: 2026-11-28
+image:
+  file: terceira-fiel-1829.webp
+  alt:
+    pt: "Azulejo azul e branco: numa baía com vila e montes de campos quadriculados, navios de guerra disparam, barcos cheios de soldados remam para terra e, no cais, soldados e gente do povo com espingardas disparam os canhões."
+    en: "Blue-and-white azulejo: in a bay with a town and hills of patchwork fields, warships fire, boats full of soldiers row toward the shore, and on the quay soldiers and townspeople with muskets work the cannons."
+    ru: "Сине-белое азулежу: в бухте с городком и холмами, расчерченными полями, стреляют военные корабли, лодки с солдатами идут к берегу, а на причале солдаты и горожане с ружьями стоят у пушек."
+  caption:
+    pt: Os defensores da Praia repelem o desembarque. Terceira, 11 de agosto de 1829. Ilustração em estilo azulejo, criada por IA. Não é uma imagem histórica.
+    en: The defenders of Praia beat back the landing. Terceira, August 11, 1829. Azulejo-style illustration, created by AI. Not a historical image.
+    ru: Защитники Праи отбивают высадку. Терсейра, 11 августа 1829 года. Иллюстрация в стиле азулежу, создана ИИ. Не историческое изображение.
+  author: Gemini (AI)
+  license: AI-generated
+  ai: true
+  focus: 50% 50%
+detail_image:
+  file: terceira-fiel-1829-detalhe.webp
+  alt:
+    pt: "Gravura da batalha da baía da Praia: navios de guerra em linha disparam contra a costa, barcos com soldados aproximam-se de dois fortes sobre rochas, e atrás veem-se a vila e três colinas."
+    en: "Print of the battle of Praia Bay: warships in a line fire at the coast, boats with soldiers approach two forts on rocks, and the town and three hills lie behind."
+    ru: "Гравюра битвы в бухте Прая: линия военных кораблей стреляет по берегу, лодки с солдатами подходят к двум фортам на скалах, позади городок и три холма."
+  caption:
+    pt: A batalha da baía da Praia, 11 de agosto de 1829. Gravura anónima, cerca de 1830.
+    en: The battle of Praia Bay, August 11, 1829. Anonymous print, c. 1830.
+    ru: Битва в бухте Прая, 11 августа 1829 года. Гравюра неизвестного автора, около 1830 года.
+  author: Autor desconhecido / Unknown author
+  license: Public domain
+  source_url: https://commons.wikimedia.org/wiki/File:Batalha_da_Praia_da_Vitória.jpg
+related:
+  - espanhois-angra-1641
+  - batalha-da-salga-1581
+status: ready
+published: 2026-12-29
+placeholder: false
+ru_ready: true

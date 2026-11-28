@@ -249,6 +249,17 @@
   name_of: { pt: do Buçaco, ru: Бусаку }
   center: { lat: 40.3771, lon: -8.3669 }
   radius_km: 3
+  cover:
+    focus: "50% 30%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "O Buçaco em azulejo: o palácio de torre rendilhada entre ciprestes altos"
+      en: "Buçaco in azulejo: the palace with its carved tower among tall cypresses"
+      ru: "Бусаку на азулежу: дворец с резной башней среди высоких кипарисов"
+  intro:
+    pt: "O Buçaco é uma mata antiga, cercada por um muro de pedra, numa serra do centro de Portugal. Desde o século XVII foi guardada pelos frades carmelitas, e hoje crescem nela ciprestes enormes e árvores trazidas de todo o mundo. No meio da mata ergue-se um palácio de conto de fadas com torres rendilhadas, e ao pé da serra fica a vila termal do Luso."
+    en: "Buçaco is an old forest behind a stone wall on a mountain ridge in central Portugal. Carmelite friars guarded it from the 17th century, and today it is full of giant cypresses and trees brought from all over the world. In the middle of the forest stands a fairy-tale palace with carved towers, and at the foot of the ridge lies the spa town of Luso."
+    ru: "Бусаку — старый лес за каменной стеной на горном хребте в центре Португалии. С XVII века его берегли монахи-кармелиты, и сегодня в нём растут огромные кипарисы и деревья, привезённые со всего света. Посреди леса стоит сказочный дворец с резными башнями, а у подножия хребта лежит курортный городок Лузу с источниками."
 - id: viseu
   name: { pt: Viseu, en: Viseu, ru: Визеу }
   center: { lat: 40.665, lon: -7.912 }
@@ -315,8 +326,20 @@
     ru: "Эвора — главный город Алентежу, на невысоком холме среди равнины с пробковыми дубами и пшеницей. Римский храм, средневековые стены, собор и дворцы тех времён, когда здесь подолгу жил королевский двор, сохранились так цельно, что весь исторический центр внесён в список Всемирного наследия ЮНЕСКО."
 - id: elvas
   name: { pt: Elvas, en: Elvas, ru: Эльваш }
+  name_of: { pt: de Elvas, ru: Эльваша }
   center: { lat: 38.883, lon: -7.163 }
   radius_km: 6
+  cover:
+    focus: "50% 46%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "Elvas em azulejo: a cidade nas muralhas em estrela, o aqueduto e os olivais"
+      en: "Elvas in azulejo: the town inside its star-shaped walls, the aqueduct and olive groves"
+      ru: "Эльваш на азулежу: город в звёздных стенах, акведук и оливы вокруг"
+  intro:
+    pt: "Elvas é uma cidade alentejana mesmo junto à fronteira com Espanha, em frente a Badajoz. Rodeiam-na muralhas em estrela, baluartes e fortes, um dos maiores conjuntos de fortificações do género no mundo, Património Mundial da UNESCO com a cidade. A água chega-lhe por um longo aqueduto de pedra, e Elvas é ainda famosa pelas suas ameixas verdes em calda."
+    en: "Elvas is an Alentejo town right on the Spanish border, facing Badajoz. It is ringed by star-shaped walls, bastions and forts, one of the largest fortification systems of its kind in the world, a UNESCO World Heritage Site together with the town. A long stone aqueduct brings its water, and Elvas is also famous for its candied green plums."
+    ru: "Эльваш — город в Алентежу у самой границы с Испанией, напротив Бадахоса. Его окружают звёздные стены, бастионы и форты, одна из самых больших систем укреплений такого рода в мире, и вместе с городом они внесены в список Всемирного наследия ЮНЕСКО. Воду в город несёт длинный каменный акведук, а ещё Эльваш славится засахаренными зелёными сливами."
 - id: vila-vicosa
   name: { pt: Vila Viçosa, en: Vila Viçosa, ru: Вила-Висоза }
   center: { lat: 38.781, lon: -7.418 }
@@ -375,8 +398,20 @@
     ru: "Сан-Мигел — самый большой из Азорских островов, его называют Зелёным. Остров вулканический: озёра в кратерах, горячие источники и фумаролы Фурнаша, где рагу до сих пор варят прямо в земле. Португальцы заселили его в XV веке, а Понта-Делгада выросла в крупнейший город Азор."
 - id: terceira
   name: { pt: Terceira, en: Terceira, ru: Терсейра }
+  name_of: { pt: da Terceira, ru: Терсейры }
   center: { lat: 38.65, lon: -27.1 }
   radius_km: 20
+  cover:
+    focus: "50% 37%"
+    credit: { pt: "Ilustração criada por IA", en: "AI-generated illustration", ru: "Иллюстрация создана ИИ" }
+    alt:
+      pt: "A Terceira em azulejo: a baía de Angra, a cidade branca e o Monte Brasil"
+      en: "Terceira in azulejo: the bay of Angra, the white town and Monte Brasil"
+      ru: "Терсейра на азулежу: бухта Ангры, белый город и гора Монте-Бразил"
+  intro:
+    pt: "A Terceira é uma das ilhas centrais dos Açores, verde, com campos divididos por muros de pedra negra. A sua cidade principal, Angra do Heroísmo, foi durante séculos porto de escala para os navios entre a Europa e a América, e o seu centro histórico é Património Mundial da UNESCO. No verão, a ilha faz touradas à corda pelas ruas das aldeias."
+    en: "Terceira is one of the central islands of the Azores, green and crisscrossed by fields divided by black stone walls. Its main town, Angra do Heroísmo, was for centuries a port of call for ships between Europe and the Americas, and its old center is a UNESCO World Heritage Site. In summer, the island runs bulls on a rope through village streets."
+    ru: "Терсейра — один из центральных островов Азор, зелёный, с полями, разделёнными чёрными каменными оградами. Её главный город Ангра-ду-Эроишму веками был гаванью для кораблей между Европой и Америкой, а его старый центр внесён в список Всемирного наследия ЮНЕСКО. Летом на острове устраивают бег быков на верёвке прямо по деревенским улицам."
 - id: pico
   name: { pt: Pico, en: Pico, ru: Пику }
   center: { lat: 38.4, lon: -28.25 }
