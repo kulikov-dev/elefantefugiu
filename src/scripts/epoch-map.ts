@@ -80,9 +80,17 @@ if (page && feed && aside && mapRoot) {
   feed.addEventListener('mouseover', (e) => {
     if (!mouse.matches) return;
     const record = e.target instanceof Element ? e.target.closest('article.ecard') : null;
-    document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: record ? idOf(record) : null } }));
+    document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: record ? idOf(record) : null, from: 'feed' } }));
   });
-  feed.addEventListener('mouseleave', () => document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: null } })));
+  feed.addEventListener('mouseleave', () => document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: null, from: 'feed' } })));
+  // The keyboard reaching a record works as the pointer over it (a wide screen only: on a phone the feed and the map are not side by side).
+  feed.addEventListener('focusin', (e) => {
+    const record = wide.matches && e.target instanceof Element ? e.target.closest('article.ecard') : null;
+    if (record) document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: idOf(record), from: 'feed' } }));
+  });
+  feed.addEventListener('focusout', () => {
+    if (wide.matches) document.dispatchEvent(new CustomEvent('map:hover', { detail: { id: null, from: 'feed' } }));
+  });
   mapRoot.addEventListener('map:hover', (e) => {
     if (!mouse.matches) return;
     setHover((e as CustomEvent<{ id: string | null }>).detail?.id ?? null);

@@ -406,7 +406,8 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     const at = drawn.get(c.id)?.getLatLng() ?? ([c.lat, c.lon] as L.LatLngTuple);
     // The islands are not in the window: their story is flown to; the next story of the mainland brings the map back to where it was.
     if (isIsland(c.lat, c.lon)) {
-      if (flying || !map.getBounds().contains(at)) {
+      // A phone: at the zoom of the mainland an island may lie on the edge of the view (under the controls), so it is flown to all the same.
+      if (flying || !map.getBounds().contains(at) || (!wide() && map.getZoom() < BEHAVIOUR.islandZoom)) {
         home ??= { center: map.getCenter(), zoom: map.getZoom() };
         flyTo(centreFor(at, BEHAVIOUR.islandZoom), BEHAVIOUR.islandZoom);
         return;
@@ -422,6 +423,17 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     if (flying) return;
     const p = map.latLngToContainerPoint(at);
     const box = cardTop();
+    if (!wide()) {
+      // A phone: the point stands in the middle of the part above the card. A point that is already seen there does not move the map.
+      const size = map.getSize();
+      const seen = p.x >= BEHAVIOUR.clearPx && p.x <= size.x - BEHAVIOUR.clearPx && p.y >= BEHAVIOUR.clearPx && p.y <= box.top - BEHAVIOUR.clearPx;
+      if (!seen) {
+        const target = centreFor(at, map.getZoom());
+        // The area of the map may not allow the middle (an edge): no flight that cannot arrive, it would repeat for ever.
+        if (map.latLngToContainerPoint(target).distanceTo(map.latLngToContainerPoint(map.getCenter())) > 2) flyTo(target, map.getZoom());
+      }
+      return;
+    }
     if (p.x < box.left - BEHAVIOUR.clearPx || p.x > box.right + BEHAVIOUR.clearPx) return;
     const dy = panAboveCard(p.y, box.top, BEHAVIOUR.clearPx);
     if (dy > 0) map.panBy([0, dy], { animate: host.animate, duration: BEHAVIOUR.panSeconds });
@@ -534,7 +546,11 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
     playing = host.animate && at < 0;
     render(false);
     // Before the first story: the map is shown with room under the card, so the point is rarely under it (no move when nothing is covered).
-    if (!resumeId) fitUnderCard();
+    if (!resumeId) {
+      // A phone: the card is on screen now, so the country is fitted again in the part above its real height (the first fit used an estimate).
+      if (fitted && !wide()) fitWhole(false);
+      fitUnderCard();
+    }
     host.address();
     if (!resumeId) count(startEventPath(key));
     cancelAnimationFrame(frame);
@@ -546,11 +562,11 @@ export function createTimetravel(cfg: TtConfig, host: TtHost) {
   let fitted = false;
 
   /** The map as at the start: the place or the mainland, in the part the card leaves free. */
-  function fitWhole() {
+  function fitWhole(animated = host.animate) {
     if (!fitted) return;
     home = null;
     const chip = src === TT_WHOLE || src === TT_VIEW ? undefined : cfg.chips.find((c) => c.key === src);
-    host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, host.animate, undefined, insetFor().right, !chip && wide());
+    host.fit(chip?.bounds ?? WHOLE_BOUNDS, insetFor().bottom, animated && host.animate, undefined, insetFor().right, !chip && wide());
   }
 
   /** The start from a place, or from the button when some story lies under the card: the stories are shown above it. */
